@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="resources/css/common/bmiModal.css">
+<link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/standardWeightModal.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/common/bmiModal.js"></script>
+<script type="text/javascript" src="resources/js/common/standardWeightModal.js"></script>
+</head>
+<body>
+
+
+	<ul id="dropmenu">
+		<li><a class="navigation" href="#">MENU</a>
+			<ul>
+				<li><a class="navigation" href="#">ユーザ情報</a>
+					<ul>
+						<li><a class="navigation" href="/isol-web/healthInfo-input.html">入力</a></li>
+						<li><a class="navigation" href="/isol-web/healthInfo-fileInput.html">一括</a></li>
+						<li><a class="navigation" href="/isol-web/result-reference.html">照会</a></li>
+					</ul>
+				</li>
+				<li><a class="navigation" href="#">通知</a>
+					<ul>
+						<li><a class="navigation" href="/isol-web/notice-setting-input.html">メール</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a class="navigation" href="#">設定</a>
+			<ul>
+				<li><a class="navigation" href="#">アカウント</a>
+					<ul>
+						<li><a class="navigation" href="/isol-web/account-setting-input.html">設定変更</a></li>
+					</ul>
+				</li>
+				<li><a class="navigation" href="#">メール設定</a>
+					<ul>
+						<li><a class="navigation" href="/isol-web/notice-setting-input.html">設定変更</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a class="navigation" href="#">その他</a>
+			<ul>
+				<li><a class="navigation" href="#">健康情報</a>
+					<ul>
+						<li><a id="bmi-modal-open" class="bmi-button-link">BMI</a></li>
+						<li><a id="standardWeight-modal-open" class="standardWeight-button-link">標準体重</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a class="navigation" href="/isol-web/login.html">ログアウト</a></li>
+	</ul>
+
+
+<!-- BMIのモーダルを描画 -->
+<div th:include="common/bmiModal.html"></div>
+
+
+<!-- 標準体重のモーダルを描画 -->
+<div th:include="common/standardWeightModal.html"></div>
+
+
+</body>
+</html>

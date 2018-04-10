@@ -1,0 +1,88 @@
+/*************/
+/* input.css */
+/*************/
+
+/* ボタンの設定 */
+input[type="submit"], input[type="reset"], input[type="button"] {
+	width: 100px;
+	height: 40px;
+	background: #32cd32;
+	border: 0;
+	padding: 1.5%;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 100%;
+	color: #fff;
+	cursor: pointer;
+	transition: background .3s;
+	-webkit-transition: background .3s;
+	border-radius: 5px;
+	box-shadow: 1px 1px 10px 3px hsla(0, 0%, 0%, .6);
+	cursor: pointer;
+	letter-spacing: 4px;
+	text-align: center;
+	text-shadow: 0 2px 0 hsla(0, 0%, 0%, .25);
+}
+
+/* ボタンをマウスオーバーしたとき */
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover
+	{
+	background: #80ff80;
+	box-shadow: none;
+}
+
+/* 入力タグの設定 */
+input[type="text"], input[type="email"], textarea {
+	padding: 0.8em;
+	outline: none;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 16px;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+	width: 200px;
+}
+
+/* 入力タグをクリックしたとき */
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+	background: #ffffca;
+	box-shadow: 0 0 7px #80ff00;
+	border: 1px solid #80ff00;
+	width: 350px;
+}
+
+.radio {
+	margin-bottom: 25px;
+	clear: both;
+}
+
+.radio input {
+	display: none;
+}
+
+.radio label {
+	display: block;
+	float: left;
+	cursor: pointer;
+	margin: 0;
+	padding: 8px 16px;
+	background-color: #32cd32;
+	color: #FFF;
+	text-align: center;
+	transition: 0.2s;
+	width: 93px;
+}
+
+.radio label:first-of-type {
+	border-radius: 3px 0 0 3px;
+}
+
+.radio label:last-of-type {
+	border-radius: 0 3px 3px 0;
+}
+
+.radio input[type="radio"]:checked+label {
+	background-color: #80ff80;
+}

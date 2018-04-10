@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康アプリ_アカウント設定入力画面</title>
+<link rel="icon" type="image/png" href="resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/common.js"></script>
+</head>
+<body class="main">
+
+
+	<h1>
+		<img class="headericon" alt="入力" src="resources/image/icon_input.jpg">
+		アカウント設定入力画面
+	</h1>
+
+	<hr>
+	<div th:include="common/navigation.html"></div>
+
+	<br><br>
+
+	<!-- 入力画面 -->
+	<form action="/isol-web/account-setting-confirm.html" method="post">
+	<div align="center">
+
+		<div th:if="${errorMessage} != null">
+			<p th:text="${errorMessage}"></p>
+		</div>
+
+		<table border="1">
+			<tr>
+				<th class="header" width="130px">
+					<p>削除</p>
+				</th>
+				<td class="data" width="250px">
+					<div class="radio">
+						<input type="radio" name="deleteFlag" id="deleteFlagFalse" value="0" checked="checked">
+						<label for="deleteFlagFalse" class="switch-off">しない</label>
+						<input type="radio" name="deleteFlag" id="deleteFlagTrue" value="1">
+						<label for="deleteFlagTrue">する</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="header">
+					<p>ユーザID</p>
+				</th>
+				<td class="data">
+					<p th:text="${account.userId}"></p>
+					<input type="hidden" name="userId" th:field="${account.userId}" />
+				</td>
+			</tr>
+			<tr>
+				<th class="header">
+					<p>パスワード</p>
+				</th>
+				<td class="data">
+					<input type="text" name="password" th:field="${account.password}" required="required" />
+				</td>
+			</tr>
+			<tr>
+				<th class="header" width="130px">
+					<p>囲い文字を利用</p>
+				</th>
+				<td class="data" width="250px">
+					<div class="radio">
+						<input type="radio" name="fileEnclosureCharFlag" id="fileEnclosureCharFlagTrue" value="1" checked="checked">
+						<label for="fileEnclosureCharFlagTrue">する</label>
+						<input type="radio" name="fileEnclosureCharFlag" id="fileEnclosureCharFlagFalse" value="0">
+						<label for="fileEnclosureCharFlagFalse" class="switch-off">しない</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="header" width="130px">
+					<p>メールアドレス</p>
+				</th>
+				<td class="data">
+					<input type="email" name="mailAddress" th:field="${mailInfo.mailAddress}" required="required" />
+				</td>
+			</tr>
+			<tr>
+				<th class="header" width="130px">
+					<p>メールパスワード</p>
+				</th>
+				<td class="data">
+					<input type="text" name="mailPassword" th:field="${mailInfo.mailPassword}" required="required" />
+				</td>
+			</tr>
+			<tr>
+				<th class="header">
+					<p>備 考</p>
+				</th>
+				<td class="data">
+					<textarea rows="10" cols="30" name="remarks" th:field="${account.remarks}"></textarea>
+				</td>
+			</tr>
+		</table>
+		<br><br>
+		<table>
+			<tr>
+				<td>
+					<input type="submit" value="確 認" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+
+	<br><br>
+	<hr>
+	<div th:include="common/footer.html"></div>
+
+
+</body>
+</html>

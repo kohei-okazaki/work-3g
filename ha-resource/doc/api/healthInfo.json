@@ -1,0 +1,135 @@
+swagger: '2.0'
+info:
+  description: 健康情報APIのドキュメントです。<br>健康情報を登録する機能を提供します。
+  version: '1.0'
+  title: 健康情報API
+host: 'localhost:8080'
+basePath: /isol-api/healthInfo/
+tags:
+  - name: regist
+    description: 健康情報の登録を実施
+schemes:
+  - http
+paths:
+  /:
+    post:
+      tags:
+        - regist
+      summary: '健康情報登録'
+      description: '身長・体重からBMIと標準体重を計算し、健康情報の登録を実施'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: 'userId'
+          in: 'path'
+          description: 'ユーザID'
+          required: true
+          type: 'string'
+        - name: 'height'
+          in: 'path'
+          description: '身長'
+          required: true
+          type: 'number'
+        - name: 'weight'
+          in: 'path'
+          description: '体重'
+          required: true
+          type: 'number'
+
+
+      responses:
+        '200':
+            description: 'success<br>response {<br>
+              result,<br>
+              dateId,<br>
+              userId,<br>
+              height,<br>
+              weight,<br>
+              bmi,<br>
+              standardWeight,<br>
+              userStatus,<br>
+              regDate<br>
+            }'
+
+    get:
+      tags:
+        - regist
+      summary: '健康情報登録'
+      description: '身長・体重からBMIと標準体重を計算し、健康情報の登録を実施'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: 'userId'
+          in: 'path'
+          description: 'ユーザID'
+          required: true
+          type: 'string'
+        - name: 'height'
+          in: 'path'
+          description: '身長'
+          required: true
+          type: 'number'
+        - name: 'weight'
+          in: 'path'
+          description: '体重'
+          required: true
+          type: 'number'
+
+      responses:
+        '200':
+            description: 'success<br>response {<br>
+              result,<br>
+              dateId,<br>
+              userId,<br>
+              height,<br>
+              weight,<br>
+              bmi,<br>
+              standardWeight,<br>
+              userStatus,<br>
+              regDate<br>
+            }'
+
+
+securityDefinitions:
+  petstore_auth:
+    type: oauth2
+    authorizationUrl: 'localhost:8080//isol-manage/login.html'
+    flow: implicit
+
+
+definitions:
+  Response:
+    type: object
+    properties:
+      result:
+        type: number
+      dataId:
+        type: string
+      userId:
+        type: string
+      height:
+        type: number
+      weight:
+        type: number
+      bmi:
+        type: number
+      standardWeight:
+        type: number
+      userStatus:
+        type: string
+        description: UserStatus
+        enum:
+          - 10 (down)
+          - 20 (even)
+          - 30 (increase)
+      regDate:
+        type: string
+        format: yyyy/mm/dd hh:mi:ss
+
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康アプリ_エラー</title>
+<link rel="icon" type="image/png" href="resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<script type="text/javascript" src="resources/js/common/common.js"></script>
+</head>
+
+<body class="main">
+	<h1>
+		<img class="headericon" alt="入力" src="resources/image/icon_error.png">
+		エラー画面
+	</h1>
+
+	<hr>
+
+	<div th:if="${message} == null">
+		<p>入力情報に誤りがあります。もう一度入力してください</p>
+	</div>
+	<p th:text="${message}"></p>
+
+
+
+	<br><br>
+	<img class="browseBack" alt="戻る" src="resources/image/icon_browseBack.jpg" onclick="history.back()">
+</body>
+</html>

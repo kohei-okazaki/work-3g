@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康アプリ_健康情報入力画面</title>
+<link rel="icon" type="image/png" href="resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="resources/css/healthInfo.css">
+<link rel="stylesheet" type="text/css" href="resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/common.js"></script>
+<script type="text/javascript" src="resources/js/healthInfo.js"></script>
+</head>
+
+<body class="main">
+
+	<h1>
+		<img class="headericon" alt="入力" src="resources/image/icon_input.jpg">
+		健康情報入力画面
+	</h1>
+
+	<hr>
+	<div th:include="common/navigation.html"></div>
+
+	<!-- 入力画面 -->
+	<div align="center">
+	<br><br><br>
+	<form action="/isol-web/healthInfo-confirm.html" method="post">
+		<input type="text" name="height" size="6" required placeholder="身長" >　cm
+		<p class="attention">※半角数字で入力してください</p>
+		<br><br>
+		<input type="text" name="weight" size="6" required placeholder="体重" >　kg
+		<p class="attention">※半角数字で入力してください</p>
+		<br>
+		<br>
+		<table>
+			<tr>
+				<td>
+					<input type="submit" value="確認">
+				</td>
+				<td>
+					<p>　　</p>
+				</td>
+				<td>
+					<input type="reset" value="リセット">
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	<br><br>
+
+	<hr>
+	<div th:include="common/footer.html"></div>
+
+</body>
+</html>

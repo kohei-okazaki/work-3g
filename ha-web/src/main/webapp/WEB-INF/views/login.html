@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康管理アプリ_ログイン画面</title>
+<link rel="icon" type="image/png" href="resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="resources/css/loginLayout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/baseLayout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
+<script type="text/javascript" src="resources/js/common/common.js"></script>
+<script type="text/javascript" src="resources/js/common/fort.js"></script>
+<script type="text/javascript" src="resources/js/accountCreate.js"></script>
+</head>
+<body>
+
+<div th:if="${errorMessage} != null">
+	<div class="errorMessage">
+		<p th:text="${errorMessage}"></p>
+	</div>
+</div>
+
+	<fieldset>
+		<h1>健康管理アプリ</h1>
+		<form action="/isol-web/menu.html" method="post">
+			<div class="iconUser icon"></div>
+			<input type="text" name="userId" placeholder="ユーザID" required>
+			<br><br>
+			<div class="iconPassword icon"></div>
+			<input type="password" name="password" placeholder="パスワード" required>
+			<input type="submit" value="ログイン">
+			<input type="button" value="アカウント作成" onclick="accountCreate();">
+		</form>
+	</fieldset>
+	<br>
+
+</body>
+</html>

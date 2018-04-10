@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康アプリ_健康情報入力完了画面</title>
+<link rel="icon" type="image/png" href="resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="resources/css/healthInfo.css">
+<link rel="stylesheet" type="text/css" href="resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/common.js"></script>
+<script type="text/javascript" src="resources/js/healthInfo.js"></script>
+</head>
+
+<body class="main">
+
+	<h1 class="title">
+		<img class="headericon" alt="確認" src="resources/image/icon_confirm.png">
+		健康情報入力完了画面
+	</h1>
+
+	<hr>
+	<div th:include="common/navigation.html"></div>
+
+	<!-- 完了画面 -->
+	<br><br><br>
+	<div align="center">
+		<p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
+		<p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
+
+		<div th:if="${!isFirstReg}">
+			<p th:text="'前回より' + ${diffWeight} + 'kg ' + ${resultMessage}" />
+			<p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
+		</div>
+
+		<br><br><br>
+		<table class="custom" border="1">
+			<tr class="header">
+				<th align="center">
+					<p>身長</p>
+				</th>
+				<th align="center">
+					<p>体重</p>
+				</th>
+				<th align="center">
+					<p>標準体重</p>
+					</th>
+				<th align="center">
+					<p>BMI</p>
+				</th>
+			</tr>
+			<tr class="data">
+				<td align="center">
+					<p th:text="${healthInfo.height}" />
+				</td>
+				<td align="center">
+					<p th:text="${healthInfo.weight}" />
+				</td>
+				<td align="center">
+					<p th:text="${healthInfo.standardWeight}" />
+				</td>
+				<td align="center">
+					<p th:text="${healthInfo.bmi}" />
+				</td>
+			</tr>
+		</table>
+		<br><br>
+
+
+		<table>
+			<tr>
+				<td>
+				<!-- 通知  -->
+				<form action="/isol-web/notice.html" method="post">
+					<input type="hidden" name="height" value="${healthInfo.height}">
+					<input type="hidden" name="weight" value="${healthInfo.weight}">
+					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">
+					<input type="hidden" name="bmi" value="${healthInfo.bmi}">
+					<div>
+						<input class="menuicon" type="image" src="resources/image/icon_mail.png">
+					</div>
+				</form>
+				</td>
+				<td>　　</td>
+				<td>
+				<!-- Excel出力 -->
+				<form action="/isol-web/healthInfo-excelDownload.html" method="get">
+					<input type="hidden" name="height" value="${healthInfo.height}">
+					<input type="hidden" name="weight" value="${healthInfo.weight}">
+					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">
+					<input type="hidden" name="bmi" value="${healthInfo.bmi}">
+					<div>
+						<input class="menuicon" type="image" src="resources/image/icon_xlsx.png">
+					</div>
+				</form>
+				</td>
+				<td>　　</td>
+				<td>
+					<!-- CSV出力 -->
+					<div>
+						<input class="menuicon" type="image" src="resources/image/icon_csv.png" onclick="healthInfoCsvDownload()">
+					</div>
+				</td>
+				<td>　　</td>
+				<td>
+				<!-- メニュー画面へ -->
+					<div>
+						<input class="menuicon" type="image" src="resources/image/icon_menu.jpg" onclick="toMenu()">
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br><br>
+
+	<hr>
+	<div th:include="common/footer.html"></div>
+
+</body>
+</html>

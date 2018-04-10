@@ -1,0 +1,28 @@
+/****************/
+/* menuicon.css */
+/****************/
+.menuicon:hover {
+	-webkit-transform: scale(1.5);
+	-moz-transform: scale(1.5);
+	-o-transform: scale(1.5);
+	-ms-transform: scale(1.5);
+	transform: scale(1.5);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+/* メニューアイコン */
+.menuicon {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+}
+
+.menuicon img {
+	-moz-transition: -moz-transform 3.0s linear;
+	-webkit-transition: -webkit-transform 3.0s linear;
+	-o-transition: -o-transform 3.0s linear;
+	-ms-transition: -ms-transform 3.0s linear;
+	transition: transform 3.0s linear;
+}
