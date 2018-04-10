@@ -3,6 +3,7 @@ package jp.co.ha.api.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,14 +25,21 @@ public class HealthInfoController implements BaseApiRestController<HealthInfoReq
 																, HealthInfoService
 																, HealthInfoException> {
 
+	@Autowired
+	private HealthInfoRequest apiRequest;
+	@Autowired
+	private HealthInfoResponse apiResponse;
+	@Autowired
+	private HealthInfoService service;
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public HealthInfoResponse execute(HttpServletRequest request, HttpServletResponse response) throws HealthInfoException {
 
-		HealthInfoResponse resp = null;
-		return resp;
+		apiResponse = null;
+		return apiResponse;
 	}
 
 }

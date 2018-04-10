@@ -7,6 +7,10 @@ import jp.co.ha.api.request.HealthInfoRequest;
 import jp.co.ha.api.response.HealthInfoResponse;
 import jp.co.ha.api.service.HealthInfoService;
 
+/**
+ * 健康情報登録サービス実装クラス<br>
+ *
+ */
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {
 
