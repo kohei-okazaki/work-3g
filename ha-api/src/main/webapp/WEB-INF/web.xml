@@ -38,6 +38,7 @@
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
 				/WEB-INF/spring/appServlet/api-dao-context.xml
+				/WEB-INF/spring/appServlet/api-service-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

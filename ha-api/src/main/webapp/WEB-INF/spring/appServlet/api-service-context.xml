@@ -10,13 +10,6 @@
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- アカウント情報Dao -->
-	<beans:bean id="accountDao" class="jp.co.ha.common.dao.impl.AccountDaoImpl" />
-	<!-- 健康情報Dao -->
-	<beans:bean id="healthInfoDao" class="jp.co.ha.common.dao.impl.HealthInfoDaoImpl" />
-	<!-- メール情報Dao -->
-	<beans:bean id="mailInfoDao" class="jp.co.ha.common.dao.impl.MailInfoDaoImpl" />
-
 	<!-- アカウント検索サービス -->
 	<beans:bean id="accountSearchService" class="jp.co.ha.common.service.impl.AccountSearchServiceImpl" />
 
