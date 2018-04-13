@@ -17,4 +17,7 @@
 	<!-- メール情報Dao -->
 	<beans:bean id="mailInfoDao" class="jp.co.ha.common.dao.impl.MailInfoDaoImpl" />
 
+	<!-- アカウント検索サービス -->
+	<beans:bean id="accountSearchService" class="jp.co.ha.common.service.impl.AccountSearchServiceImpl" />
+
 </beans:beans>
