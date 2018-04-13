@@ -1,4 +1,4 @@
-package jp.co.ha.api.exception;
+package jp.co.ha.web.exception;
 
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;

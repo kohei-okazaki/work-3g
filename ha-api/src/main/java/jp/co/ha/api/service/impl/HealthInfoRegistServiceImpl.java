@@ -11,12 +11,14 @@ import jp.co.ha.api.exception.HealthInfoException;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
-import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.dao.HealthInfoDao;
+import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
+import jp.co.ha.common.service.AccountSearchService;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.HealthInfoUtil;
@@ -31,16 +33,20 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	/** 健康情報Dao */
 	@Autowired
 	private HealthInfoDao healthInfoDao;
-	/** アカウントDao */
+	/** アカウント検索サービス */
 	@Autowired
-	private AccountDao accountDao;
+	private AccountSearchService accountSearchService;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
-		// TODO チェック処理を追加
+
+		Account account = accountSearchService.findAccountByUserId(request.getUserId());
+		if (Objects.isNull(account.getUserId())) {
+			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
+		}
 	}
 
 	/**
