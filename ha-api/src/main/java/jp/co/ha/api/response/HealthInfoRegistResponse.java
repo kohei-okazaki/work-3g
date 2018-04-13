@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 
 import jp.co.ha.common.api.BaseResponse;
 
+/**
+ * 健康情報登録レスポンスクラス
+ *
+ */
 public class HealthInfoRegistResponse extends BaseResponse {
 
 	/** データID */
