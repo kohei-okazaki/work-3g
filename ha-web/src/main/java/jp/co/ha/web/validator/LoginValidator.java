@@ -45,7 +45,7 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	private void checkType(LoginForm form, Errors errors) {
 
 		if (!StringUtil.isHalfChar(form.getUserId()) || !StringUtil.isHalfChar(form.getPassword())) {
-			// 半角英数字であるない場合
+			// 半角英数字でない場合
 			errors.rejectValue("userId", ErrorCode.TYPE.toString());
 		}
 	}
