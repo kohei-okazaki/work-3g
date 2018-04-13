@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.BaseAppException;
  * @param <Rs> レスポンス種別
  * @param <E> 例外種別
  */
-public interface BaseApiService<Rq extends BaseRequest, Rs extends BaseResponse, E extends BaseAppException> {
+public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse, E extends BaseAppException> {
 
 	/**
 	 * 継承先でそれぞれチェックを実装<br

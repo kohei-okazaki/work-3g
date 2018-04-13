@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import jp.co.ha.common.api.BaseResponse;
 
-public class HealthInfoResponse extends BaseResponse {
+public class HealthInfoRegistResponse extends BaseResponse {
 
 	/** データID */
 	private String dataId;
