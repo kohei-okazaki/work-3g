@@ -1,8 +1,12 @@
 package jp.co.ha.web.controller;
 
+import java.util.List;
+import java.util.Objects;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,9 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.exception.HealthInfoException;
 import jp.co.ha.web.form.HealthInfoForm;
+import jp.co.ha.web.service.HealthInfoService;
 import jp.co.ha.web.validator.HealthInfoValidator;
 import jp.co.ha.web.view.ManageWebView;
 
@@ -23,6 +31,11 @@ import jp.co.ha.web.view.ManageWebView;
  */
 @Controller
 public class HealthInfoController implements BaseWizardController<HealthInfoForm, HealthInfoException> {
+
+	@Autowired
+	private HealthInfoService healthInfoService;
+	@Autowired
+	private HealthInfoSearchService healthInfoSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -65,6 +78,14 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Override
 	@PostMapping(value = "/healthInfo-complete.html")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws HealthInfoException {
+
+		String userId = (String) request.getSession().getAttribute("userId");
+		if (Objects.isNull(userId)) {
+			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "リクエスト情報が不正です");
+		}
+
+		// ユーザIDから健康情報のリストを取得
+		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findHealthInfoByUserId(userId);
 
 		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
 	}
