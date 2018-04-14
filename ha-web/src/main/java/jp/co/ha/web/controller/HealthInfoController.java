@@ -102,7 +102,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		}
 
-		req.setUserId(null);
+		req.setUserId(userId);
 		healthInfoRegistService.checkRequest(req);
 		// 健康情報登録処理を行い、レスポンスを設定
 		HealthInfoRegistResponse response = healthInfoRegistService.execute(req);
