@@ -28,15 +28,6 @@ public interface HealthInfoService {
 	BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo lastHealthInfo);
 
 	/**
-	 * 健康情報formを健康情報Entityにつめる<br>
-	 * @param form
-	 * @param userId
-	 * @param lastHealthInfo
-	 * @return
-	 */
-	HealthInfo convertHealthInfo(HealthInfoForm form, String userId, HealthInfo lastHealthInfo);
-
-	/**
 	 * 指定されたユーザIDが初回登録かどうか判定する<br>
 	 * 初回登録の場合true, それ以外の場合falseを返す<br>
 	 * @param userId

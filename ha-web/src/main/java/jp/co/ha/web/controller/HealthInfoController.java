@@ -99,14 +99,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		}
 
-
 		req.setUserId(userId);
 		healthInfoRegistService.checkRequest(req);
 		HealthInfoRegistResponse response = healthInfoRegistService.execute(req);
 
 		// 入力した健康情報を設定する
 		model.addAttribute("healthInfo", response);
-
 
 		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
 	}
