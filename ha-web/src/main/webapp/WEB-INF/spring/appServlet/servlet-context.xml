@@ -34,5 +34,6 @@
 
 	<context:component-scan base-package="jp.co.ha.web.controller" />
 	<context:component-scan base-package="jp.co.ha.web.service.impl" />
+	<context:component-scan base-package="jp.co.ha.web.service.annotation" />
 
 </beans:beans>

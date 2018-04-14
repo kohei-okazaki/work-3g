@@ -18,7 +18,6 @@ public interface BaseView {
 	 * @return
 	 */
 	static <T extends BaseView> T of(String url) {
-
 		return null;
 	}
 }

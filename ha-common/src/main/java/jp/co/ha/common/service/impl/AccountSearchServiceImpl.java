@@ -10,7 +10,6 @@ import jp.co.ha.common.service.AccountSearchService;
 @Service
 public class AccountSearchServiceImpl implements AccountSearchService {
 
-
 	/** アカウント情報Dao */
 	@Autowired
 	private AccountDao accountDao;

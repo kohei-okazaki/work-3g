@@ -54,6 +54,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
+		// アカウント取得
 		Account account = accountSearchService.findAccountByUserId(request.getUserId());
 		if (Objects.isNull(account.getUserId())) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");

@@ -1,6 +1,7 @@
 package jp.co.ha.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -12,16 +13,21 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.file.csv.service.CsvDownloadService;
+import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
+import jp.co.ha.web.service.annotation.HealthInfoCsv;
+import jp.co.ha.web.service.annotation.HealthInfoExcel;
 import jp.co.ha.web.validator.HealthInfoValidator;
 import jp.co.ha.web.view.ManageWebView;
 
@@ -32,12 +38,23 @@ import jp.co.ha.web.view.ManageWebView;
 @Controller
 public class HealthInfoController implements BaseWizardController<HealthInfoForm, HealthInfoException> {
 
+	/** 健康情報画面サービス */
 	@Autowired
 	private HealthInfoService healthInfoService;
+	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
+	/** 健康情報登録サービス */
 	@Autowired
 	private HealthInfoRegistService healthInfoRegistService;
+	/** 健康情報Excelダウンロードサービス */
+	@Autowired
+	@HealthInfoExcel
+	private ExcelDownloadService<HealthInfoForm> excelDownloadService;
+	/** 健康情報CSVダウンロードサービス */
+	@Autowired
+	@HealthInfoCsv
+	private CsvDownloadService csvDownloadService;
 
 	/**
 	 * {@inheritDoc}
@@ -101,12 +118,34 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		req.setUserId(userId);
 		healthInfoRegistService.checkRequest(req);
+		// 健康情報登録処理を行う
 		HealthInfoRegistResponse response = healthInfoRegistService.execute(req);
 
-		// 入力した健康情報を設定する
+		// レスポンスを設定
 		model.addAttribute("healthInfo", response);
 
 		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
+	}
+
+	/**
+	 * 健康情報Excelをダウンロードする<br>
+	 * @param form
+	 * @return
+	 */
+	@GetMapping(value = "/healthInfo-excelDownload.html")
+	public ModelAndView excelDownload(HealthInfoForm form) {
+		return new ModelAndView(this.excelDownloadService.execute(form));
+	}
+
+	/**
+	 * 健康情報CSVをダウンロードする<br>
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@GetMapping(value = "/healthInfo-csvDownload")
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response) {
+		csvDownloadService.execute(request, response);
 	}
 
 }
