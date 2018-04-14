@@ -43,8 +43,7 @@ public class LoginServiceImpl implements LoginService {
 	 */
 	@Override
 	public void registSession(HttpSession session, String userId) {
-		// TODO 自動生成されたメソッド・スタブ
-
+		session.setAttribute("userId", userId);
 	}
 
 	/**

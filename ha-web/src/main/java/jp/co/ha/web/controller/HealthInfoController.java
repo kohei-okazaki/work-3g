@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
@@ -36,6 +39,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	private HealthInfoService healthInfoService;
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
+	@Autowired
+	private HealthInfoRegistService healthInfoRegistService;
 
 	/**
 	 * {@inheritDoc}
@@ -78,6 +83,13 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Override
 	@PostMapping(value = "/healthInfo-complete.html")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws HealthInfoException {
+
+		HealthInfoRegistRequest req = new HealthInfoRegistRequest();
+		BeanUtils.copyProperties(form, req);
+		// セッションからユーザIDを設定
+		req.setUserId((String) request.getSession().getAttribute("userId"));
+		healthInfoRegistService.checkRequest(req);
+		healthInfoRegistService.execute(req);
 
 		String userId = (String) request.getSession().getAttribute("userId");
 		if (Objects.isNull(userId)) {
