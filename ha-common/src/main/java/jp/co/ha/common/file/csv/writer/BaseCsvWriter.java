@@ -59,9 +59,8 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	/**
 	 * メイン処理を実施<br>
 	 * @param response
-	 * @throws IOException
 	 */
-	public void execute(HttpServletResponse response) throws IOException {
+	public void execute(HttpServletResponse response) {
 
 		// ファイル名を取得
 		String fileName = getFileName();
@@ -79,6 +78,8 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 			writer.print(recordJoiner.toString());
 
 		} catch (AppIOException e) {
+			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+		} catch (IOException e) {
 			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
 		}
 
