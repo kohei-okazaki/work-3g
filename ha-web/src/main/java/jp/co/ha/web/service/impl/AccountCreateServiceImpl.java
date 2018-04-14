@@ -3,6 +3,7 @@ package jp.co.ha.web.service.impl;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.entity.Account;
@@ -14,6 +15,11 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.AccountCreateForm;
 import jp.co.ha.web.service.AccountCreateService;
 
+/**
+ * アカウント作成サービス実装クラス
+ *
+ */
+@Service
 public class AccountCreateServiceImpl implements AccountCreateService {
 
 	/** アカウントDao */
