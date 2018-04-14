@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- アカウント検索サービス -->
+	<beans:bean id="accountSearchService" class="jp.co.ha.common.service.impl.AccountSearchServiceImpl" />
+	<!-- 健康情報検索サービス -->
+	<beans:bean id="healthInfoSearchService" class="jp.co.ha.common.service.impl.HealthInfoSearchServiceImpl" />
+
+	<!-- 計算サービス -->
+	<beans:bean id="calcService" class="jp.co.ha.business.calc.impl.CalcServiceImpl" />
+	<!-- 健康情報ビジネスサービス -->
+	<beans:bean id="healthInfoService" class="jp.co.ha.business.healthInfo.impl.HealthInfoServiceImpl"  />
+
+</beans:beans>

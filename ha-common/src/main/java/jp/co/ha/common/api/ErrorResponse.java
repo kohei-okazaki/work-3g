@@ -12,17 +12,18 @@ public class ErrorResponse extends BaseResponse {
 	/** エラーコード*/
 	private ErrorCode errorCode;
 	/** エラーメッセージ */
-	private String errorMessage;
+	private String detail;
 
 	/**
 	 * コンストラクタ<br>
 	 * @param e
 	 */
 	public ErrorResponse(BaseAppException e) {
-		setResult(1);
-		this.errorCode = e.getErrorCode();
-		this.errorMessage = e.getErrorMessage();
+		super.setResult(1);
+		setErrorCode(e.getErrorCode());
+		setDetail(e.getDetail());
 	}
+
 	/**
 	 * errorCodeを返す
 	 * @return errorCode
@@ -30,6 +31,7 @@ public class ErrorResponse extends BaseResponse {
 	public ErrorCode getErrorCode() {
 		return errorCode;
 	}
+
 	/**
 	 * errorCodeを設定する
 	 * @param errorCode
@@ -37,19 +39,21 @@ public class ErrorResponse extends BaseResponse {
 	public void setErrorCode(ErrorCode errorCode) {
 		this.errorCode = errorCode;
 	}
+
 	/**
-	 * errorMessageを返す
-	 * @return errorMessage
+	 * detailを返す<br>
+	 * @return detail
 	 */
-	public String getErrorMessage() {
-		return errorMessage;
+	public String getDetail() {
+		return detail;
 	}
+
 	/**
-	 * errorMessageを設定する
-	 * @param errorMessage
+	 * detailを設定する<br>
+	 * @param detail
 	 */
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 }

@@ -12,8 +12,8 @@ public abstract class BaseAppException extends Exception {
 
 	/** エラーコード */
 	private ErrorCode errorCode;
-	/** エラーメッセージ */
-	private String errorMessage;
+	/** 詳細 */
+	private String detail;
 
 	/**
 	 * 例外コンストラクタ<br>
@@ -24,11 +24,11 @@ public abstract class BaseAppException extends Exception {
 	/**
 	 * 例外コンストラクタ<br>
 	 * @param errorCode
-	 * @param errorMessage
+	 * @param detail
 	 */
-	public BaseAppException(ErrorCode errorCode, String errorMessage) {
+	public BaseAppException(ErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;
-		this.errorMessage = errorMessage;
+		this.detail = detail;
 	}
 
 	/**
@@ -40,11 +40,27 @@ public abstract class BaseAppException extends Exception {
 	}
 
 	/**
-	 * errorMessageを返す
-	 * @return errorMessage
+	 * errorCodeを設定する<br>
+	 * @param errorCode
 	 */
-	public String getErrorMessage() {
-		return errorMessage;
+	public void setErrorCode(ErrorCode errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	/**
+	 * detailを返す<br>
+	 * @return detail
+	 */
+	public String getDetail() {
+		return detail;
+	}
+
+	/**
+	 * detailを設定する<br>
+	 * @param detail
+	 */
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 	/**
@@ -55,7 +71,7 @@ public abstract class BaseAppException extends Exception {
 		StringJoiner joiner = new StringJoiner(StringUtil.SPACE);
 		joiner.add(this.errorCode.getLogLevel());
 		joiner.add(this.errorCode.getErrorCode());
-		joiner.add(this.errorMessage);
+		joiner.add(this.detail);
 		return joiner.toString();
 	}
 

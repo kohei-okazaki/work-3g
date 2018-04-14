@@ -5,10 +5,10 @@ import java.math.BigDecimal;
 import jp.co.ha.common.api.BaseRequest;
 
 /**
- * 健康情報リクエストクラス<br>
+ * 健康情報登録リクエストクラス<br>
  *
  */
-public class HealthInfoRequest extends BaseRequest {
+public class HealthInfoRegistRequest extends BaseRequest {
 
 	/** ユーザID */
 	private String userId;

@@ -1,13 +1,11 @@
-package jp.co.ha.api.response;
+package jp.co.ha.web.form;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.common.api.BaseResponse;
+import jp.co.ha.common.web.BaseForm;
 
-public class HealthInfoResponse extends BaseResponse {
+public class HealthInfoForm implements BaseForm {
 
-	/** データID */
-	private String dataId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
@@ -18,26 +16,6 @@ public class HealthInfoResponse extends BaseResponse {
 	private BigDecimal bmi;
 	/** 標準体重 */
 	private BigDecimal standardWeight;
-	/** ユーザステータス */
-	private String userStatus;
-	/** 登録日時 */
-	private String regDate;
-
-	/**
-	 * dataIdを返す
-	 * @return dataId
-	 */
-	public String getDataId() {
-		return dataId;
-	}
-
-	/**
-	 * dataIdを設定する
-	 * @param dataId
-	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
-	}
 
 	/**
 	 * userIdを返す
@@ -117,38 +95,6 @@ public class HealthInfoResponse extends BaseResponse {
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
-	}
-
-	/**
-	 * userStatusを返す
-	 * @return userStatus
-	 */
-	public String getUserStatus() {
-		return userStatus;
-	}
-
-	/**
-	 * userStatusを設定する
-	 * @param userStatus
-	 */
-	public void setUserStatus(String userStatus) {
-		this.userStatus = userStatus;
-	}
-
-	/**
-	 * regDateを返す
-	 * @return regDate
-	 */
-	public String getRegDate() {
-		return regDate;
-	}
-
-	/**
-	 * regDateを設定する
-	 * @param regDate
-	 */
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
 	}
 
 }

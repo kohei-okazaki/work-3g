@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/healthInfo.css">
 <link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 <script type="text/javascript" src="resources/js/healthInfo.js"></script>
 </head>
@@ -74,7 +75,7 @@
 			<tr>
 				<td>
 				<!-- 通知  -->
-				<form action="/isol-web/notice.html" method="post">
+				<form action="/ha-web/notice.html" method="post">
 					<input type="hidden" name="height" value="${healthInfo.height}">
 					<input type="hidden" name="weight" value="${healthInfo.weight}">
 					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">
@@ -87,7 +88,7 @@
 				<td>　　</td>
 				<td>
 				<!-- Excel出力 -->
-				<form action="/isol-web/healthInfo-excelDownload.html" method="get">
+				<form action="/ha-web/healthInfo-excelDownload.html" method="get">
 					<input type="hidden" name="height" value="${healthInfo.height}">
 					<input type="hidden" name="weight" value="${healthInfo.weight}">
 					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">

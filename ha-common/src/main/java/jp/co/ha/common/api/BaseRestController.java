@@ -17,10 +17,7 @@ import jp.co.ha.common.exception.BaseAppException;
  * @param <S> サービスクラス
  * @param <E> 例外クラス
  */
-public interface BaseApiRestController<Rq extends BaseRequest
-									, Rs extends BaseResponse
-									, S extends BaseApiService<Rq, Rs, E>
-									, E extends BaseAppException> {
+public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs, E>, E extends BaseAppException> {
 
 	/**
 	 * getでの通信の処理を行う<br>
@@ -31,27 +28,24 @@ public interface BaseApiRestController<Rq extends BaseRequest
 	@GetMapping
 	default Rs doGet(HttpServletRequest request, HttpServletResponse response) {
 
-		Rs resp = null;
+		Rs apiResponse = null;
 
 		try {
-
-			resp = this.execute(request, response);
-			resp.setResult(0);
-
+			Rq apiRequest = toRequest(request);
+			apiResponse = this.execute(apiRequest);
+			apiResponse.setResult(0);
 		} catch (BaseAppException e) {
-
-			resp = (Rs) new ErrorResponse(e);
+			apiResponse = (Rs) new ErrorResponse(e);
 			System.out.println(e.toString());
-
 		}
 
-		return resp;
+		return apiResponse;
 	}
 
 	/**
 	 * postでの通信の処理を行う<br>
-	 * @param request
-	 * @param response
+	 * @param request HttpServletRequest
+	 * @param response HttpServletResponse
 	 * @return
 	 */
 	@PostMapping
@@ -61,11 +55,18 @@ public interface BaseApiRestController<Rq extends BaseRequest
 
 	/**
 	 * 継承先のコントローラクラスで処理する<br>
-	 * @param request
-	 * @param response
-	 * @return
+	 * @param request リクエストクラス
+	 * @return response レスポンスクラス
 	 * @throws E
 	 */
-	Rs execute(HttpServletRequest request, HttpServletResponse response) throws E;
+	Rs execute(Rq request) throws E;
+
+	/**
+	 * Requestクラスに変換する<br>
+	 * @param request HttpServletRequest
+	 * @return apiRequest Rq
+	 * @throws E
+	 */
+	Rq toRequest(HttpServletRequest request) throws E;
 
 }
