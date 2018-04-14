@@ -1,8 +1,5 @@
 package jp.co.ha.web.controller;
 
-import java.util.List;
-import java.util.Objects;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -17,9 +14,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.web.BaseWizardController;
@@ -46,7 +43,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	@InitBinder
+	@InitBinder("HealthInfoForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new HealthInfoValidator());
 	}
@@ -85,19 +82,31 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws HealthInfoException {
 
 		HealthInfoRegistRequest req = new HealthInfoRegistRequest();
+		// フォーム情報をリクエストクラスにコピー
 		BeanUtils.copyProperties(form, req);
 		// セッションからユーザIDを設定
-		req.setUserId((String) request.getSession().getAttribute("userId"));
-		healthInfoRegistService.checkRequest(req);
-		healthInfoRegistService.execute(req);
-
 		String userId = (String) request.getSession().getAttribute("userId");
-		if (Objects.isNull(userId)) {
-			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "リクエスト情報が不正です");
+
+		boolean isFirstReg = healthInfoService.isFirstReg(userId);
+		model.addAttribute("isFirstReg", isFirstReg);
+
+		if (!isFirstReg) {
+			// 初回登録出ない場合
+			HealthInfo lastHealthInfo = healthInfoSearchService.findLastHealthInfoByUserId(userId);
+			model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
+			model.addAttribute("diffWeight", healthInfoService.getDiffWeight(form, lastHealthInfo));
+			model.addAttribute("resultMessage", healthInfoService.getDiffMessage(form, lastHealthInfo));
+
 		}
 
-		// ユーザIDから健康情報のリストを取得
-		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findHealthInfoByUserId(userId);
+
+		req.setUserId(userId);
+		healthInfoRegistService.checkRequest(req);
+		HealthInfoRegistResponse response = healthInfoRegistService.execute(req);
+
+		// 入力した健康情報を設定する
+		model.addAttribute("healthInfo", response);
+
 
 		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
 	}

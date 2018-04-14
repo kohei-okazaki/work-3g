@@ -6,7 +6,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.web.form.HealthInfoForm;
 
 /**
- * 健康情報サービスインターフェース<br>
+ * 健康情報入力画面サービスインターフェース<br>
  *
  */
 public interface HealthInfoService {
@@ -36,4 +36,11 @@ public interface HealthInfoService {
 	 */
 	HealthInfo convertHealthInfo(HealthInfoForm form, String userId, HealthInfo lastHealthInfo);
 
+	/**
+	 * 指定されたユーザIDが初回登録かどうか判定する<br>
+	 * 初回登録の場合true, それ以外の場合falseを返す<br>
+	 * @param userId
+	 * @return
+	 */
+	boolean isFirstReg(String userId);
 }

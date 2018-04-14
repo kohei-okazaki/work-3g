@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.calc.CalcService;
+import jp.co.ha.business.healthInfo.HealthInfoService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
@@ -19,9 +21,9 @@ import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.service.AccountSearchService;
+import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.HealthInfoUtil;
 
 /**
  * 健康情報登録サービス実装クラス<br>
@@ -36,6 +38,15 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 計算サービス */
+	@Autowired
+	private CalcService calcService;
+	/** 健康情報検索サービス */
+	@Autowired
+	private HealthInfoSearchService healthInfoSearchService;
+	/** 健康情報ビジネスサービス */
+	@Autowired
+	private HealthInfoService healthInfoService;
 
 	/**
 	 * {@inheritDoc}
@@ -72,50 +83,36 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public HealthInfo toEntity(HealthInfoRegistRequest request) {
 
-		HealthInfo entity = new HealthInfo();
-		entity.setUserId(request.getUserId());
-		entity.setHeight(request.getHeight());
-		entity.setWeight(request.getWeight());
-		entity.setRegDate(new Date());
+
+		String userId = request.getUserId();
+		BigDecimal height = request.getHeight();
+		BigDecimal weight = request.getWeight();
 
 		// メートルに変換する
-		BigDecimal centiMeterHeight = HealthInfoUtil.convertMeterFromCentiMeter(request.getHeight());
-		BigDecimal bmi = HealthInfoUtil.calcBmi(centiMeterHeight, request.getWeight(), 2);
-		entity.setBmi(bmi);
-		BigDecimal standardWeight = HealthInfoUtil.calcStandardWeight(centiMeterHeight, 2);
-		entity.setStandardWeight(standardWeight);
+		BigDecimal centiMeterHeight = calcService.convertMeterFromCentiMeter(request.getHeight());
+
+		BigDecimal bmi = calcService.calcBmi(centiMeterHeight, request.getWeight(), 2);
+		BigDecimal standardWeight = calcService.calcStandardWeight(centiMeterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
-		HealthInfo lastHealthInfo = healthInfoDao.getLastHealthInfoByUserId(request.getUserId());
-		String userStatus = CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN);
-		if (Objects.nonNull(lastHealthInfo)) {
-			// 初回登録でない場合
-			userStatus = getUserStatus(request.getWeight(), lastHealthInfo.getWeight());
-		}
+		HealthInfo lastHealthInfo = healthInfoSearchService.findLastHealthInfoByUserId(request.getUserId());
+		String userStatus = Objects.nonNull(lastHealthInfo)
+						? healthInfoService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
+						: CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN);
+		Date regDate = new Date();
+
+
+		HealthInfo entity = new HealthInfo();
 		entity.setDataId(getNextDataId(lastHealthInfo));
+		entity.setUserId(userId);
+		entity.setHeight(height);
+		entity.setWeight(weight);
+		entity.setBmi(bmi);
+		entity.setStandardWeight(standardWeight);
 		entity.setUserStatus(userStatus);
+		entity.setRegDate(regDate);
 
 		return entity;
-	}
-
-	/**
-	 * 入力した健康情報.体重と前回入力した健康情報.体重を比較してユーザステータスを返す<br>
-	 * @param inputWeight
-	 * @param beforeWeight
-	 * @return
-	 */
-	private String getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
-
-		SubKey subkey;
-		if (beforeWeight.compareTo(inputWeight) == 0) {
-			subkey = SubKey.EVEN;
-		} else if (beforeWeight.compareTo(inputWeight) == -1) {
-			subkey = SubKey.INCREASE;
-		} else {
-			subkey = SubKey.DOWN;
-		}
-
-		return CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, subkey);
 	}
 
 	/**

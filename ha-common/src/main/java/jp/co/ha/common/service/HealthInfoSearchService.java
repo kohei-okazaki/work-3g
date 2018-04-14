@@ -23,4 +23,11 @@ public interface HealthInfoSearchService {
 	 * @return HealthInfoDto
 	 */
 	HealthInfo findHealthInfoByDataId(String dataId);
+
+	/**
+	 * 指定したユーザIDで最後に登録した健康情報を返す<br>
+	 * @param userId
+	 * @return HealthInfo
+	 */
+	HealthInfo findLastHealthInfoByUserId(String userId);
 }

@@ -36,4 +36,14 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		return this.healthInfoDao.getHealthInfoByDataId(dataId);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthInfo findLastHealthInfoByUserId(String userId) {
+		return healthInfoDao.getLastHealthInfoByUserId(userId);
+	}
+
+
+
 }
