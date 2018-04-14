@@ -55,6 +55,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Autowired
 	@HealthInfoCsv
 	private CsvDownloadService csvDownloadService;
+
 	/**
 	 * {@inheritDoc}
 	 */
