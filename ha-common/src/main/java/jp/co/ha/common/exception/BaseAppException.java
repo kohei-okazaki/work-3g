@@ -12,7 +12,7 @@ public abstract class BaseAppException extends Exception {
 
 	/** エラーコード */
 	private ErrorCode errorCode;
-	/** エラーメッセージ */
+	/** 詳細 */
 	private String detail;
 
 	/**

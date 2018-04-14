@@ -16,6 +16,9 @@ import javax.persistence.Table;
 @Table(name = "HEALTH_INFO")
 public class HealthInfo implements Serializable {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/** データID */
 	@Id
 	@Column(name = "DATA_ID", nullable = false, length = 3)

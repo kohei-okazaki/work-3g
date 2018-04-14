@@ -9,11 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.api.exception.HealthInfoException;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.api.BaseRestController;
+import jp.co.ha.common.exception.HealthInfoException;
 
 /**
  * 健康情報コントローラクラス<br>

@@ -12,5 +12,7 @@
 
 	<!-- アカウント検索サービス -->
 	<beans:bean id="accountSearchService" class="jp.co.ha.common.service.impl.AccountSearchServiceImpl" />
+	<!-- 健康情報検索サービス -->
+	<beans:bean id="healthInfoSearchService" class="jp.co.ha.common.service.impl.HealthInfoSearchServiceImpl" />
 
 </beans:beans>

@@ -7,7 +7,6 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.api.exception.HealthInfoException;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
@@ -15,6 +14,7 @@ import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;

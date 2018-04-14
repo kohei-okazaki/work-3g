@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.web.BaseWizardController;
-import jp.co.ha.web.exception.HealthInfoException;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 import jp.co.ha.web.validator.HealthInfoValidator;

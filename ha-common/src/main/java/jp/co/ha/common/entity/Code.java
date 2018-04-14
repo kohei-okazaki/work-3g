@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Code implements Serializable {
 
 	/** シリアルバージョンUID */
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	@Column(name = "MAIN_KEY", nullable = false)
 	private String mainKey;
