@@ -11,7 +11,7 @@ public class ErrorResponse extends BaseResponse {
 
 	/** エラーコード*/
 	private ErrorCode errorCode;
-	/** エラーメッセージ */
+	/** 詳細 */
 	private String detail;
 
 	/**
