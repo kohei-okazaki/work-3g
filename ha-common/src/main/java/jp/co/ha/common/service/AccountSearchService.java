@@ -15,5 +15,4 @@ public interface AccountSearchService {
 	 */
 	Account findAccountByUserId(String userId);
 
-
 }

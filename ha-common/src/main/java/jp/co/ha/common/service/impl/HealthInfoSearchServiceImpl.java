@@ -44,6 +44,4 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		return healthInfoDao.getLastHealthInfoByUserId(userId);
 	}
 
-
-
 }

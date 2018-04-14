@@ -32,10 +32,13 @@ import jp.co.ha.web.view.ManageWebView;
 @Controller
 public class HealthInfoController implements BaseWizardController<HealthInfoForm, HealthInfoException> {
 
+	/** 健康情報画面サービス */
 	@Autowired
 	private HealthInfoService healthInfoService;
+	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
+	/** 健康情報登録サービス */
 	@Autowired
 	private HealthInfoRegistService healthInfoRegistService;
 
@@ -99,8 +102,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		}
 
-		req.setUserId(userId);
+		req.setUserId(null);
 		healthInfoRegistService.checkRequest(req);
+		// 健康情報登録処理を行い、レスポンスを設定
 		HealthInfoRegistResponse response = healthInfoRegistService.execute(req);
 
 		// 入力した健康情報を設定する

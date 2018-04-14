@@ -10,6 +10,10 @@ import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
 
+/**
+ * 文字列のUtilクラス<br>
+ *
+ */
 public class StringUtil {
 
 	public static final String COMMA = ",";
@@ -29,9 +33,7 @@ public class StringUtil {
 	/** 半角英数字 */
 	public static final String HALF_CHAR = "^[0-9a-zA-Z]*$";
 
-
 	private StringUtil() {
-
 	}
 
 	/**

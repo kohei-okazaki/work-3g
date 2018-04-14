@@ -8,14 +8,15 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-
-
+/**
+ * 日付のUtilクラス<br>
+ *
+ */
 public class DateUtil {
 
 	public static final String YYYY_MM_DD_HH_MI_SS = "yyyy/MM/dd hh:mm:ss";
 
 	private DateUtil() {
-
 	}
 
 	/**
