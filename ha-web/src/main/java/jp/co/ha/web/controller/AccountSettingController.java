@@ -106,12 +106,14 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 //			accountSettingService.deleteAccount(form);
 //		}
 
-		// アカウント情報を検索
+		// アカウント情報を検索し、マージする
 		Account befAccount = accountSearchService.findAccountByUserId(form.getUserId());
-		this.accountSettingService.mergeAccount(befAccount, form);
+		accountSettingService.mergeAccount(befAccount, form);
 
-		// メール情報を検索
+		// メール情報を検索し、マージする
 		MailInfo befMailInfo = mailInfoSearchService.findMailInfoByUserId(form.getUserId());
+		accountSettingService.mergeMailInfo(befMailInfo, form);
+
 		if (Objects.isNull(befMailInfo.getUserId())) {
 
 			MailInfo mailInfo = accountSettingService.convertMailInfo(form);
@@ -122,7 +124,6 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 		} else {
 
-			accountSettingService.mergeMailInfo(befMailInfo, form);
 			// 更新処理を行う
 			accountSettingService.update(befAccount, befMailInfo);
 

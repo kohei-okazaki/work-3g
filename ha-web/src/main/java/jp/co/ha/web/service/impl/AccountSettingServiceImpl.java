@@ -91,7 +91,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	@Override
 	public void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
 
-		mailInfo.setUserId(form.getUserId());
 		mailInfo.setMailAddress(form.getMailAddress());
 		mailInfo.setMailPassword(form.getMailPassword());
 	}
