@@ -42,7 +42,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-		// 結果照会する健康情報を取得する　
+		// 結果照会する健康情報を取得する
 		String userId = (String) request.getSession().getAttribute("userId");
 		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findHealthInfoByUserId(userId);
 

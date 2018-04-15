@@ -36,6 +36,9 @@ public class HealthInfoRegistController implements BaseRestController<HealthInfo
 	@Override
 	public HealthInfoRegistResponse execute(HealthInfoRegistRequest apiRequest) throws HealthInfoException {
 
+		// リクエスト情報のチェック
+		service.checkRequest(apiRequest);
+
 		HealthInfoRegistResponse apiResponse = service.execute(apiRequest);
 		return apiResponse;
 	}

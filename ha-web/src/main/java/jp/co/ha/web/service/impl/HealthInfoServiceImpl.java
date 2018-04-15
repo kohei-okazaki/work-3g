@@ -25,6 +25,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
+	/** 計算サービス */
 	@Autowired
 	private CalcService calcService;
 

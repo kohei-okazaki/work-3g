@@ -14,6 +14,8 @@
 	<beans:bean id = "accountSearchService" class = "jp.co.ha.common.service.impl.AccountSearchServiceImpl" />
 	<!-- 健康情報検索サービス -->
 	<beans:bean id = "healthInfoSearchService" class = "jp.co.ha.common.service.impl.HealthInfoSearchServiceImpl" />
+	<!-- メール情報検索サービス -->
+	<beans:bean id = "mailInfoSearchService" class = "jp.co.ha.common.service.impl.MailInfoSearchServiceImpl" />
 
 	<!-- 健康情報登録サービス -->
 	<beans:bean id="healthInfoRegistService" class="jp.co.ha.api.service.impl.HealthInfoRegistServiceImpl" />

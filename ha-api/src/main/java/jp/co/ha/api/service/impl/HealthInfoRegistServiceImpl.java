@@ -24,6 +24,7 @@ import jp.co.ha.common.service.AccountSearchService;
 import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * 健康情報登録サービス実装クラス<br>
@@ -54,6 +55,12 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
+		if (StringUtil.isEmpty(request.getRequestId())
+				|| StringUtil.isEmpty(request.getUserId())
+				|| Objects.isNull(request.getHeight())
+				|| Objects.isNull(request.getWeight())) {
+			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
+		}
 		// アカウント取得
 		Account account = accountSearchService.findAccountByUserId(request.getUserId());
 		if (Objects.isNull(account.getUserId())) {
@@ -70,7 +77,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		// リクエストをEntityにつめる
 		HealthInfo healthInfo = toEntity(request);
 
-		// 登録処理を行う
+		// Entityの登録処理を行う
 		healthInfoDao.registHealthInfo(healthInfo);
 
 		HealthInfoRegistResponse response = toResponse(healthInfo);
