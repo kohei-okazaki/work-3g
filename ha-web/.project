@@ -5,6 +5,7 @@
 	<projects>
 		<project>ha-common</project>
 		<project>ha-api</project>
+		<project>ha-business</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -10,6 +10,9 @@
         <dependent-module archiveName="ha-api-1.0.0-BUILD-SNAPSHOT.war" deploy-path="/WEB-INF/lib" handle="module:/resource/ha-api/ha-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="ha-business-1.0.0-BUILD-SNAPSHOT.war" deploy-path="/WEB-INF/lib" handle="module:/resource/ha-business/ha-business">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
 		<property name="java-output-path" value="target/classes"/>
         <property name="context-root" value="ha-web"/>
 	</wb-module>
