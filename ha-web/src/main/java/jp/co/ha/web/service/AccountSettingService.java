@@ -39,7 +39,7 @@ public interface AccountSettingService {
 	MailInfo convertMailInfo(AccountSettingForm form);
 
 	/**
-	 * アカウント情報を更新する
+	 * アカウント情報を更新する<br>
 	 * @param account
 	 */
 	void updateAccount(Account account);

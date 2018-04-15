@@ -106,6 +106,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 //			this.accountSettingService.deleteAccount(form);
 //		}
 
+		// アカウント情報にマージ
 		Account account = this.accountSearchService.findAccountByUserId(form.getUserId());
 		account = this.accountSettingService.mergeAccount(account, form);
 

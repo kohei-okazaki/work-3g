@@ -59,14 +59,12 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 		accountDao.deleteAccount(form.getUserId());
 	}
 
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public Account mergeAccount(Account account, AccountSettingForm form) {
 
-		account.setUserId(form.getUserId());
 		account.setPassword(form.getPassword());
 		account.setFileEnclosureCharFlag(form.getFileEnclosureCharFlag());
 		account.setDeleteFlag(form.getDeleteFlag());
