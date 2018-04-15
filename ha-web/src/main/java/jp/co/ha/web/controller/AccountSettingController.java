@@ -67,11 +67,11 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		String userId = (String) request.getSession().getAttribute("userId");
 
 		// アカウント情報を検索
-		Account account = this.accountSearchService.findAccountByUserId(userId);
+		Account account = accountSearchService.findAccountByUserId(userId);
 		model.addAttribute("account", account);
 
 		// メール情報を検索
-		MailInfo mailInfo = this.mailInfoSearchService.findMailInfoByUserId(userId);
+		MailInfo mailInfo = mailInfoSearchService.findMailInfoByUserId(userId);
 		model.addAttribute("mailInfo", mailInfo);
 
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
@@ -107,24 +107,24 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 //		}
 
 		// アカウント情報にマージ
-		Account befAccount = this.accountSearchService.findAccountByUserId(form.getUserId());
+		Account befAccount = accountSearchService.findAccountByUserId(form.getUserId());
 		this.accountSettingService.mergeAccount(befAccount, form);
 
 		// メール情報を検索
-		MailInfo befMailInfo = this.mailInfoSearchService.findMailInfoByUserId(form.getUserId());
+		MailInfo befMailInfo = mailInfoSearchService.findMailInfoByUserId(form.getUserId());
 		if (Objects.isNull(befMailInfo.getUserId())) {
 
-			MailInfo mailInfo = this.accountSettingService.convertMailInfo(form);
+			MailInfo mailInfo = accountSettingService.convertMailInfo(form);
 			// メール情報を新規登録する
-			this.mailInfoCreateService.create(mailInfo);
+			mailInfoCreateService.create(mailInfo);
 			// アカウント情報を更新する
-			this.accountSettingService.updateAccount(befAccount);
+			accountSettingService.updateAccount(befAccount);
 
 		} else {
 
-			this.accountSettingService.mergeMailInfo(befMailInfo, form);
+			accountSettingService.mergeMailInfo(befMailInfo, form);
 			// 更新処理を行う
-			this.accountSettingService.update(befAccount, befMailInfo);
+			accountSettingService.update(befAccount, befMailInfo);
 
 		}
 
