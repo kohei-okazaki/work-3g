@@ -63,14 +63,12 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account mergeAccount(Account account, AccountSettingForm form) {
+	public void mergeAccount(Account account, AccountSettingForm form) {
 
 		account.setPassword(form.getPassword());
 		account.setFileEnclosureCharFlag(form.getFileEnclosureCharFlag());
 		account.setDeleteFlag(form.getDeleteFlag());
 		account.setRemarks(form.getRemarks());
-
-		return account;
 	}
 
 	/**
@@ -91,13 +89,11 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MailInfo mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
+	public void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
 
 		mailInfo.setUserId(form.getUserId());
 		mailInfo.setMailAddress(form.getMailAddress());
 		mailInfo.setMailPassword(form.getMailPassword());
-
-		return mailInfo;
 	}
 
 }

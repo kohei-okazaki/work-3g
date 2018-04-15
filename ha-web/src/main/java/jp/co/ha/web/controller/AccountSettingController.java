@@ -107,25 +107,24 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 //		}
 
 		// アカウント情報にマージ
-		Account account = this.accountSearchService.findAccountByUserId(form.getUserId());
-		account = this.accountSettingService.mergeAccount(account, form);
-
-		MailInfo mailInfo = this.accountSettingService.convertMailInfo(form);
+		Account befAccount = this.accountSearchService.findAccountByUserId(form.getUserId());
+		this.accountSettingService.mergeAccount(befAccount, form);
 
 		// メール情報を検索
 		MailInfo befMailInfo = this.mailInfoSearchService.findMailInfoByUserId(form.getUserId());
 		if (Objects.isNull(befMailInfo.getUserId())) {
 
-			// メール情報が登録されてない場合、新規登録する
+			MailInfo mailInfo = this.accountSettingService.convertMailInfo(form);
+			// メール情報を新規登録する
 			this.mailInfoCreateService.create(mailInfo);
 			// アカウント情報を更新する
-			this.accountSettingService.updateAccount(account);
+			this.accountSettingService.updateAccount(befAccount);
 
 		} else {
 
-			befMailInfo = this.accountSettingService.mergeMailInfo(befMailInfo, form);
+			this.accountSettingService.mergeMailInfo(befMailInfo, form);
 			// 更新処理を行う
-			this.accountSettingService.update(account, befMailInfo);
+			this.accountSettingService.update(befAccount, befMailInfo);
 
 		}
 

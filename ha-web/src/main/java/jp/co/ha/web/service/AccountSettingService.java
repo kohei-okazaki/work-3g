@@ -29,7 +29,7 @@ public interface AccountSettingService {
 	 * @param form
 	 * @return
 	 */
-	Account mergeAccount(Account account, AccountSettingForm form);
+	void mergeAccount(Account account, AccountSettingForm form);
 
 	/**
 	 * フォーム情報をメール情報に変換する<br>
@@ -50,6 +50,6 @@ public interface AccountSettingService {
 	 * @param form
 	 * @return
 	 */
-	MailInfo mergeMailInfo(MailInfo mailInfo, AccountSettingForm form);
+	void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form);
 
 }
