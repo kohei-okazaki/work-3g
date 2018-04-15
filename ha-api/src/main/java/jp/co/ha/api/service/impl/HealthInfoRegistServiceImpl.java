@@ -70,7 +70,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		// リクエストをEntityにつめる
 		HealthInfo healthInfo = toEntity(request);
 
-		// 登録処理を行う
+		// Entityの登録処理を行う
 		healthInfoDao.registHealthInfo(healthInfo);
 
 		HealthInfoRegistResponse response = toResponse(healthInfo);

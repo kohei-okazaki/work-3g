@@ -12,7 +12,7 @@ import jp.co.ha.common.exception.BaseAppException;
 public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse, E extends BaseAppException> {
 
 	/**
-	 * 継承先でそれぞれチェックを実装<br
+	 * 継承先でそれぞれチェックを実装<br>
 	 * @param Rq Request実装クラス
 	 * @throws E 例外実装クラス
 	 */
