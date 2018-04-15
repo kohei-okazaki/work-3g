@@ -103,7 +103,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 //		if (CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, form.getDeleteFlag())) {
 //			// アカウントを削除する場合
-//			this.accountSettingService.deleteAccount(form);
+//			accountSettingService.deleteAccount(form);
 //		}
 
 		// アカウント情報にマージ
