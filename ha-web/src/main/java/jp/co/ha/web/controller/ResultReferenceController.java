@@ -2,11 +2,13 @@ package jp.co.ha.web.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.service.HealthInfoSearchService;
+import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.service.annotation.ReferenceCsv;
 import jp.co.ha.web.service.annotation.ReferenceExcel;
@@ -51,8 +56,16 @@ public class ResultReferenceController implements BaseWebController {
 	@GetMapping(value = "/result-reference.html")
 	public String resultReference(Model model, @SessionAttribute String userId) {
 
+		List<HealthInfo> entityList = healthInfoSearchService.findHealthInfoByUserId(userId);
+		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
+		for (HealthInfo entity : entityList) {
+			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
+			BeanUtils.copyProperties(entity, response);
+			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			resultList.add(response);
+		}
 		// ログイン中のユーザの全レコードを検索する
-		model.addAttribute("resultList", healthInfoSearchService.findHealthInfoByUserId(userId));
+		model.addAttribute("resultList", resultList);
 
 		return getView(ManageWebView.RESULT_REFFERNCE);
 	}
