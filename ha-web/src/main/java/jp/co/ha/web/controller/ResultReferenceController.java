@@ -58,7 +58,7 @@ public class ResultReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * Excelファイルをダウンロードする<br>
+	 * Excelダウンロードを実行<br>
 	 * @param userId
 	 * @return
 	 */
