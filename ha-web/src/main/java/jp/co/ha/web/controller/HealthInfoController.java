@@ -98,17 +98,18 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@PostMapping(value = "/healthInfo-complete.html")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws HealthInfoException {
 
-		HealthInfoRegistRequest req = new HealthInfoRegistRequest();
+		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
 		// フォーム情報をリクエストクラスにコピー
-		BeanUtils.copyProperties(form, req);
-		// セッションからユーザIDを設定
+		BeanUtils.copyProperties(form, apiRequest);
+		// セッションからユーザIDを取得
 		String userId = (String) request.getSession().getAttribute("userId");
+		apiRequest.setUserId(userId);
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
 
 		if (!isFirstReg) {
-			// 初回登録出ない場合
+			// 初回登録でない場合
 			HealthInfo lastHealthInfo = healthInfoSearchService.findLastHealthInfoByUserId(userId);
 			model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
 			model.addAttribute("diffWeight", healthInfoService.getDiffWeight(form, lastHealthInfo));
@@ -116,13 +117,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		}
 
-		req.setUserId(userId);
-		healthInfoRegistService.checkRequest(req);
+		healthInfoRegistService.checkRequest(apiRequest);
 		// 健康情報登録処理を行う
-		HealthInfoRegistResponse response = healthInfoRegistService.execute(req);
+		HealthInfoRegistResponse apiResponse = healthInfoRegistService.execute(apiRequest);
 
 		// レスポンスを設定
-		model.addAttribute("healthInfo", response);
+		model.addAttribute("healthInfo", apiResponse);
 
 		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
 	}
