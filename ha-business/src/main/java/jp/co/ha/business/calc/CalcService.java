@@ -2,6 +2,10 @@ package jp.co.ha.business.calc;
 
 import java.math.BigDecimal;
 
+/**
+ * 計算サービス<br>
+ *
+ */
 public interface CalcService {
 
 	/**

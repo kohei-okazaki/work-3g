@@ -2,6 +2,10 @@ package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
 
+/**
+ * 健康情報サービス<br>
+ *
+ */
 public interface HealthInfoService {
 
 	/**

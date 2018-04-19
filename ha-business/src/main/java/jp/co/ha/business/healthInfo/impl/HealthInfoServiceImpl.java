@@ -9,6 +9,10 @@ import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
 
+/**
+ * 計算サービス実装クラス<br>
+ *
+ */
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {
 
