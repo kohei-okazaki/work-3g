@@ -55,7 +55,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
-		if (StringUtil.isEmpty(request.getRequestId())
+		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| Objects.isNull(request.getHeight())
 				|| Objects.isNull(request.getWeight())) {
