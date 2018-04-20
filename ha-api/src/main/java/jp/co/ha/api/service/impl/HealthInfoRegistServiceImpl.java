@@ -80,6 +80,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		// Entityの登録処理を行う
 		healthInfoDao.registHealthInfo(healthInfo);
 
+		// レスポンスに変換する
 		HealthInfoRegistResponse response = toResponse(healthInfo);
 
 		return response;
