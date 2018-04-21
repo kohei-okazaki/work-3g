@@ -80,9 +80,11 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String toString(Date targetDate, DateFormatDefine format) {
+
 		if (Objects.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
 		}
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format.getValue());
 		return dateFormat.format(targetDate);
 	}

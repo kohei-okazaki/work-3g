@@ -1,5 +1,6 @@
 package jp.co.ha.common.file.excel.builder;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,8 +36,7 @@ public abstract class BaseExcelBuilder extends AbstractXlsxView {
 											, HttpServletRequest request
 											, HttpServletResponse response) throws Exception {
 
-		String fileName = new String("sample.xlsx".getBytes(Charset.MS_932.getName()), "ISO-8859-1");
-		response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
+		init(response);
 		Sheet sheet = workbook.createSheet(getSheetName());
 
 		// ヘッダーを書き込む
@@ -44,6 +44,17 @@ public abstract class BaseExcelBuilder extends AbstractXlsxView {
 
 		// データを書き込む
 		writeData(sheet);
+	}
+
+	/**
+	 * 初期処理<br>
+	 * @param response
+	 * @throws UnsupportedEncodingException
+	 */
+	private void init(HttpServletResponse response) throws UnsupportedEncodingException {
+
+		String fileName = new String("sample.xlsx".getBytes(Charset.MS_932.getName()), "ISO-8859-1");
+		response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
 	}
 
 	/**

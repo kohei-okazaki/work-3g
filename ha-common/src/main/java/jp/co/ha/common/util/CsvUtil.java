@@ -1,6 +1,5 @@
 package jp.co.ha.common.util;
 
-import java.util.Arrays;
 import java.util.List;
 
 import jp.co.ha.common.file.csv.annotation.CsvHeader;
@@ -25,7 +24,7 @@ public class CsvUtil {
 	 * @return ヘッダー名
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
-		return Arrays.asList(getCsvHeaderClass(clazz).names());
+		return List.of(getCsvHeaderClass(clazz).names());
 	}
 
 	/**

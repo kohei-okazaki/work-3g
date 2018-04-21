@@ -1,5 +1,6 @@
-package jp.co.ha.common.service;
+package jp.co.ha.business.find;
 
+import java.util.Date;
 import java.util.List;
 
 import jp.co.ha.common.entity.HealthInfo;
@@ -15,19 +16,27 @@ public interface HealthInfoSearchService {
 	 * @param userId
 	 * @return List<HealthInfoDto>
 	 */
-	List<HealthInfo> findHealthInfoByUserId(String userId);
+	List<HealthInfo> findByUserId(String userId);
 
 	/**
 	 * 指定されたデータIDからと一致する健康情報を返却する<br>
 	 * @param dataId
 	 * @return HealthInfoDto
 	 */
-	HealthInfo findHealthInfoByDataId(String dataId);
+	HealthInfo findByDataId(String dataId);
 
 	/**
 	 * 指定したユーザIDで最後に登録した健康情報を返す<br>
 	 * @param userId
 	 * @return HealthInfo
 	 */
-	HealthInfo findLastHealthInfoByUserId(String userId);
+	HealthInfo findLastByUserId(String userId);
+
+	/**
+	 * 指定されてユーザIDと登録日時の健康情報を返す<br>
+	 * @param userId
+	 * @param regDate
+	 * @return
+	 */
+	List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate);
 }

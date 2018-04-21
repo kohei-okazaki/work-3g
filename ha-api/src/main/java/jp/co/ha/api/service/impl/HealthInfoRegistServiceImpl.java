@@ -11,6 +11,8 @@ import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.calc.CalcService;
+import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.Account;
@@ -20,8 +22,6 @@ import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
-import jp.co.ha.common.service.AccountSearchService;
-import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -55,7 +55,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
-		if (StringUtil.isEmpty(request.getRequestId())
+		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| Objects.isNull(request.getHeight())
 				|| Objects.isNull(request.getWeight())) {
@@ -104,7 +104,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		BigDecimal standardWeight = calcService.calcStandardWeight(centiMeterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
-		HealthInfo lastHealthInfo = healthInfoSearchService.findLastHealthInfoByUserId(request.getUserId());
+		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());
 		String userStatus = Objects.nonNull(lastHealthInfo)
 						? healthInfoService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
 						: CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN);

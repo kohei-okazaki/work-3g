@@ -11,9 +11,9 @@
 						http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- アカウント検索サービス -->
-	<beans:bean id="accountSearchService" class="jp.co.ha.common.service.impl.AccountSearchServiceImpl" />
+	<beans:bean id="accountSearchService" class="jp.co.ha.business.find.impl.AccountSearchServiceImpl" />
 	<!-- 健康情報検索サービス -->
-	<beans:bean id="healthInfoSearchService" class="jp.co.ha.common.service.impl.HealthInfoSearchServiceImpl" />
+	<beans:bean id="healthInfoSearchService" class="jp.co.ha.business.find.impl.HealthInfoSearchServiceImpl" />
 
 	<!-- 計算サービス -->
 	<beans:bean id="calcService" class="jp.co.ha.business.calc.impl.CalcServiceImpl" />

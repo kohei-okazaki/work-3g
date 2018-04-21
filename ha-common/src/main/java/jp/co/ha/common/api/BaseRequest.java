@@ -6,23 +6,23 @@ package jp.co.ha.common.api;
  */
 public abstract class BaseRequest {
 
-	/** リクエストID */
-	private String requestId;
+	/** リクエストタイプ */
+	private RequestType requestType;
 
 	/**
-	 * requestIdを返す<br>
-	 * @return requestId
+	 * ｒequestTypeを返す<br>
+	 * @return ｒequestType
 	 */
-	public String getRequestId() {
-		return requestId;
+	public RequestType getRequestType() {
+		return requestType;
 	}
 
 	/**
-	 * requestIdを設定する<br>
-	 * @param requestId
+	 * ｒequestTypeを設定する<br>
+	 * @param ｒequestType
 	 */
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
+	public void setRequestType(RequestType requestType) {
+		this.requestType = requestType;
 	}
 
 }

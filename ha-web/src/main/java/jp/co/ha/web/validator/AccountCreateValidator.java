@@ -40,6 +40,9 @@ public class AccountCreateValidator extends BaseValidator<AccountCreateForm> {
 	 */
 	private void checkRequire(Errors errors) {
 
+		rejectIfEmpty(errors, "userId");
+		rejectIfEmpty(errors, "password");
+		rejectIfEmpty(errors, "confirmPassword");
 	}
 
 	/**
@@ -48,8 +51,11 @@ public class AccountCreateValidator extends BaseValidator<AccountCreateForm> {
 	 * @param form
 	 */
 	private void checkMaxLength(Errors errors, AccountCreateForm form) {
-		// TODO 自動生成されたメソッド・スタブ
 
+		rejectIfLengthMax(errors, form.getUserId(), 16);
+		rejectIfLengthMax(errors, form.getPassword(), 16);
+		rejectIfLengthMax(errors, form.getConfirmPassword(), 16);
+		rejectIfLengthMax(errors, form.getRemarks(), 200);
 	}
 
 }

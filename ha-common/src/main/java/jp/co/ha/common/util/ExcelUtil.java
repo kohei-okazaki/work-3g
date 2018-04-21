@@ -1,6 +1,5 @@
 package jp.co.ha.common.util;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,7 +68,7 @@ public class ExcelUtil {
 	 * @return ヘッダー名
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
-		return Arrays.asList(getExcelHeaderClass(clazz).names());
+		return List.of(getExcelHeaderClass(clazz).names());
 	}
 
 	/**

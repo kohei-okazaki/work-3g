@@ -10,12 +10,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
-import jp.co.ha.common.service.AccountSearchService;
-import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.util.CsvUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvModel;
@@ -44,7 +44,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 
 		// 最後に登録した健康情報を検索
 		String userId = (String) request.getSession().getAttribute("userId");
-		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findHealthInfoByUserId(userId);
+		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findByUserId(userId);
 		HealthInfo healthInfo = healthInfoList.get(healthInfoList.size() - 1);
 
 		// CSV出力モデルリストに変換する

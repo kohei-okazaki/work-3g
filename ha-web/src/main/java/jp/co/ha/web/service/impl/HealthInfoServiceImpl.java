@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.calc.CalcService;
+import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
-import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 
@@ -66,7 +66,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	public boolean isFirstReg(String userId) {
 
 		// ユーザIDから健康情報のリストを取得
-		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findHealthInfoByUserId(userId);
+		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findByUserId(userId);
 		return healthInfoList.isEmpty();
 	}
 
