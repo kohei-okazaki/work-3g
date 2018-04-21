@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 <script type="text/javascript" src="resources/js/reference.js"></script>
@@ -23,54 +24,82 @@
 	<hr>
 	<div th:include="common/navigation.html" />
 
-	<br><br>
-	<div align="center">
-		<table class="custom" border="1">
-			<tr class="header">
-				<th align="center">
-					<p>身長</p>
-				</th>
-				<th align="center">
-					<p>体重</p>
-				</th>
-				<th align="center">
-					<p>標準体重</p>
-				</th>
-				<th align="center">
-					<p>BMI</p>
-				</th>
-				<th align="center">
-					<p>登録日時</p>
-				</th>
-			</tr>
-			<tr th:each="result : ${resultList}" class="data">
-				<td th:text="${result.height}" align="center">
-				<td th:text="${result.weight}" align="center">
-				<td th:text="${result.standardWeight}" align="center">
-				<td th:text="${result.bmi}" align="center">
-				<td th:text="${result.regDate}" align="center">
-			<tr>
-		</table>
-	</div>
-	<br><br>
+	<br>
+	<br>
+	<form action="/ha-web/result-reference.html" method="post">
+		<div align="center">
+			<table>
+				<tr>
+					<td><p>登録日</p></td>
+					<td><input type="text" name="regYear" placeholder="Year" />年</td>
+					<td><input type="text" name="regMonth" placeholder="Month" />月</td>
+					<td><input type="text" name="regDay" placeholder="Day" />日</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><input type="submit" value="検索" /></td>
+					<td>　　</td>
+					<td><input type="reset" value="リセット" /></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+	<br>
+	<br>
 
-	<div align="center">
-		<table>
-			<tr>
-				<td align="center">
-					<div>
-						<input class="menuicon" type="image" src="resources/image/icon_xlsx.png" onclick="referenceExcelDownload()" >
-					</div>
-				</td>
-				<td>　　</td>
-				<td align="center">
-					<div>
-						<input class="menuicon" type="image" src="resources/image/icon_csv.png" onclick="referenceCsvDownload()">
-					</div>
-				</td>
-			</tr>
-		</table>
+	<div th:if="${hasResult}">
+		<div align="center">
+			<table class="custom" border="1">
+				<tr class="header">
+					<th align="center">
+						<p>身長</p>
+					</th>
+					<th align="center">
+						<p>体重</p>
+					</th>
+					<th align="center">
+						<p>標準体重</p>
+					</th>
+					<th align="center">
+						<p>BMI</p>
+					</th>
+					<th align="center">
+						<p>登録日時</p>
+					</th>
+				</tr>
+				<tr th:each="result : ${resultList}" class="data">
+					<td th:text="${result.height}" align="center">
+					<td th:text="${result.weight}" align="center">
+					<td th:text="${result.standardWeight}" align="center">
+					<td th:text="${result.bmi}" align="center">
+					<td th:text="${result.regDate}" align="center">
+				<tr>
+			</table>
+		</div>
+
+		<br>
+		<br>
+
+		<div align="center">
+			<table>
+				<tr>
+					<td align="center">
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_xlsx.png" onclick="referenceExcelDownload()">
+						</div>
+					</td>
+					<td>　　</td>
+					<td align="center">
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_csv.png" onclick="referenceCsvDownload()">
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
+
 	<br>
 	<hr>
 	<div th:include="common/footer.html"></div>

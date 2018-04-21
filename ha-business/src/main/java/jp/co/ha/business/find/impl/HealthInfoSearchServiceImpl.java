@@ -1,13 +1,14 @@
-package jp.co.ha.common.service.impl;
+package jp.co.ha.business.find.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.service.HealthInfoSearchService;
 
 /**
  * 健康情報検索サービス実装クラス<br>
@@ -24,7 +25,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findHealthInfoByUserId(String userId) {
+	public List<HealthInfo> findByUserId(String userId) {
 		return this.healthInfoDao.getHealthInfoByUserId(userId);
 	}
 
@@ -32,7 +33,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findHealthInfoByDataId(String dataId) {
+	public HealthInfo findByDataId(String dataId) {
 		return this.healthInfoDao.getHealthInfoByDataId(dataId);
 	}
 
@@ -40,8 +41,17 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findLastHealthInfoByUserId(String userId) {
+	public HealthInfo findLastByUserId(String userId) {
 		return healthInfoDao.getLastHealthInfoByUserId(userId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }

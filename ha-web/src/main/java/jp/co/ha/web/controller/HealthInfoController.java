@@ -18,11 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.service.HealthInfoSearchService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
@@ -104,13 +105,15 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// セッションからユーザIDを取得
 		String userId = (String) request.getSession().getAttribute("userId");
 		apiRequest.setUserId(userId);
+		// リクエストタイプ設定
+		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
 
 		if (!isFirstReg) {
 			// 初回登録でない場合
-			HealthInfo lastHealthInfo = healthInfoSearchService.findLastHealthInfoByUserId(userId);
+			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
 			model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
 			model.addAttribute("diffWeight", healthInfoService.getDiffWeight(form, lastHealthInfo));
 			model.addAttribute("resultMessage", healthInfoService.getDiffMessage(form, lastHealthInfo));

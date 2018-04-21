@@ -1,4 +1,4 @@
-package jp.co.ha.common.service;
+package jp.co.ha.business.find;
 
 import jp.co.ha.common.entity.MailInfo;
 
