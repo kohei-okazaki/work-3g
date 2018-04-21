@@ -69,7 +69,8 @@ public class ResultReferenceController implements BaseWebController {
 	@PostMapping(value = "/result-reference.html")
 	public String resultReferenceDetail(Model model, @SessionAttribute String userId, ResultSearchForm form) {
 
-		List<HealthInfo> entityList = healthInfoSearchService.findByUserId(userId);
+		clean(form);
+		List<HealthInfo> entityList = healthInfoSearchService.findByUserIdAndRegDate(userId, form.getRegYear(), form.getRegMonth(), form.getRegDay());
 		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
 		for (HealthInfo entity : entityList) {
 			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
@@ -88,6 +89,15 @@ public class ResultReferenceController implements BaseWebController {
 		model.addAttribute("resultList", resultList);
 
 		return getView(ManageWebView.RESULT_REFFERNCE);
+	}
+
+	/**
+	 * フォーム情報を整理
+	 * @param form
+	 */
+	private void clean(ResultSearchForm form) {
+		form.setRegMonth(form.getRegMonth().length() == 1 ? "0" + form.getRegMonth() : form.getRegMonth());
+		form.setRegDay(form.getRegDay().length() == 1 ? "0" + form.getRegDay() : form.getRegDay());
 	}
 
 	/**

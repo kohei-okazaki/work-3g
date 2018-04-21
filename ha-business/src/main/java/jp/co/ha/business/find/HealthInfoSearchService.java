@@ -1,6 +1,5 @@
 package jp.co.ha.business.find;
 
-import java.util.Date;
 import java.util.List;
 
 import jp.co.ha.common.entity.HealthInfo;
@@ -38,5 +37,5 @@ public interface HealthInfoSearchService {
 	 * @param regDate
 	 * @return
 	 */
-	List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate);
+	List<HealthInfo> findByUserIdAndRegDate(String userId, String year, String month, String day);
 }
