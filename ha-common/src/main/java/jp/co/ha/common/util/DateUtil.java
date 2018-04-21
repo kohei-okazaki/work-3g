@@ -15,6 +15,7 @@ import java.util.Objects;
 public class DateUtil {
 
 	public static final String YYYY_MM_DD_HH_MI_SS = "yyyy/MM/dd hh:mm:ss";
+	public static final String YYYY_MM_DD = "yyyy/MM/dd";
 
 	private DateUtil() {
 	}
