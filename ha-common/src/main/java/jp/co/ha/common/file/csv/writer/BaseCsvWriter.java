@@ -90,7 +90,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 * @param response
 	 * @param fileName
 	 */
-	protected void init(HttpServletResponse response, String fileName) {
+	private void init(HttpServletResponse response, String fileName) {
 
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + Charset.UTF_8.toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
