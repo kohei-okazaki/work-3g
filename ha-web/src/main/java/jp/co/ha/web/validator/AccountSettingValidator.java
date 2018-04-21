@@ -40,11 +40,10 @@ public class AccountSettingValidator extends BaseValidator<AccountSettingForm> {
 	 */
 	private void checkMaxLength(Errors errors, AccountSettingForm form) {
 
-//		ValidationUtil.rejectIfLengthMax(errors, form.getDeleteFlag(), 1);
-//		ValidationUtil.rejectIfLengthMax(errors, form.getFileEnclosureCharFlag(), 1);
-//		ValidationUtil.rejectIfLengthMax(errors, form.getUserId(), 16);
-//		ValidationUtil.rejectIfLengthMax(errors, form.getPassword(), 16);
-
+		rejectIfLengthMax(errors, form.getDeleteFlag(), 1);
+		rejectIfLengthMax(errors, form.getFileEnclosureCharFlag(), 1);
+		rejectIfLengthMax(errors, form.getUserId(), 16);
+		rejectIfLengthMax(errors, form.getPassword(), 16);
 	}
 
 	/**
@@ -53,12 +52,12 @@ public class AccountSettingValidator extends BaseValidator<AccountSettingForm> {
 	 */
 	private void checKRequire(Errors errors) {
 
-//		ValidationUtil.rejectIfEmpty(errors, "deleteFlag");
-//		ValidationUtil.rejectIfEmpty(errors, "userId");
-//		ValidationUtil.rejectIfEmpty(errors, "password");
-//		ValidationUtil.rejectIfEmpty(errors, "fileEnclosureCharFlag");
-//		ValidationUtil.rejectIfEmpty(errors, "mailAddress");
-//		ValidationUtil.rejectIfEmpty(errors, "mailPassword");
+		rejectIfEmpty(errors, "deleteFlag");
+		rejectIfEmpty(errors, "userId");
+		rejectIfEmpty(errors, "password");
+		rejectIfEmpty(errors, "fileEnclosureCharFlag");
+		rejectIfEmpty(errors, "mailAddress");
+		rejectIfEmpty(errors, "mailPassword");
 	}
 
 }
