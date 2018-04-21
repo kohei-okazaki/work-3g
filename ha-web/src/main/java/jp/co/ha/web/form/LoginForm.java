@@ -20,7 +20,6 @@ public class LoginForm implements BaseForm {
 	public String getUserId() {
 		return userId;
 	}
-
 	/**
 	 * userIdを設定する
 	 * @param userId
@@ -28,7 +27,6 @@ public class LoginForm implements BaseForm {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
 	/**
 	 * passwordを返す
 	 * @return password
@@ -36,7 +34,6 @@ public class LoginForm implements BaseForm {
 	public String getPassword() {
 		return password;
 	}
-
 	/**
 	 * passwordを設定する
 	 * @param password

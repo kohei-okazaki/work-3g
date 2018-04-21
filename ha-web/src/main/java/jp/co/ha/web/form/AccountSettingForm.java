@@ -26,7 +26,6 @@ public class AccountSettingForm implements BaseForm {
 	public String getUserId() {
 		return userId;
 	}
-
 	/**
 	 * userIdを設定する
 	 * @param userId
@@ -34,7 +33,6 @@ public class AccountSettingForm implements BaseForm {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
 	/**
 	 * passwordを返す
 	 * @return password
@@ -42,7 +40,6 @@ public class AccountSettingForm implements BaseForm {
 	public String getPassword() {
 		return password;
 	}
-
 	/**
 	 * passwordを設定する
 	 * @param password
@@ -50,7 +47,6 @@ public class AccountSettingForm implements BaseForm {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	/**
 	 * deleteFlagを返す
 	 * @return deleteFlag
@@ -58,7 +54,6 @@ public class AccountSettingForm implements BaseForm {
 	public String getDeleteFlag() {
 		return deleteFlag;
 	}
-
 	/**
 	 * deleteFlagを設定する
 	 * @param deleteFlag
@@ -66,7 +61,6 @@ public class AccountSettingForm implements BaseForm {
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-
 	/**
 	 * fileEnclosureCharFlagを返す
 	 * @return fileEnclosureCharFlag
@@ -74,7 +68,6 @@ public class AccountSettingForm implements BaseForm {
 	public String getFileEnclosureCharFlag() {
 		return fileEnclosureCharFlag;
 	}
-
 	/**
 	 * fileEnclosureCharFlagを設定する
 	 * @param fileEnclosureCharFlag
@@ -82,7 +75,6 @@ public class AccountSettingForm implements BaseForm {
 	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
 		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
 	}
-
 	/**
 	 * remarksを返す
 	 * @return remarks
@@ -90,7 +82,6 @@ public class AccountSettingForm implements BaseForm {
 	public String getRemarks() {
 		return remarks;
 	}
-
 	/**
 	 * remarksを設定する
 	 * @param remarks
@@ -98,7 +89,6 @@ public class AccountSettingForm implements BaseForm {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
 	/**
 	 * mailAddressを返す
 	 * @return mailAddress
@@ -106,7 +96,6 @@ public class AccountSettingForm implements BaseForm {
 	public String getMailAddress() {
 		return mailAddress;
 	}
-
 	/**
 	 * mailAddressを設定する
 	 * @param mailAddress
@@ -114,7 +103,6 @@ public class AccountSettingForm implements BaseForm {
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
 	}
-
 	/**
 	 * mailPasswordを返す
 	 * @return mailPassword
@@ -122,7 +110,6 @@ public class AccountSettingForm implements BaseForm {
 	public String getMailPassword() {
 		return mailPassword;
 	}
-
 	/**
 	 * mailPasswordを設定する
 	 * @param mailPassword
