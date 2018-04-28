@@ -90,4 +90,9 @@ public class LoginController implements BaseWebController {
 		return getView(ManageWebView.MENU);
 
 	}
+
+	@GetMapping("/menu.html")
+	public String menu() {
+		return getView(ManageWebView.LOGIN);
+	}
 }
