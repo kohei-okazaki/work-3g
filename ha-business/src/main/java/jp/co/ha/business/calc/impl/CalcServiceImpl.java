@@ -6,8 +6,8 @@ import java.math.RoundingMode;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.calc.CalcService;
+import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.common.other.CalcMethod;
-import jp.co.ha.common.util.CalcUtil;
 
 /**
  * 計算サービス実装クラス<br>
@@ -21,8 +21,10 @@ public class CalcServiceImpl implements CalcService {
 	 */
 	@Override
 	public BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit) {
-		BigDecimal multiplyResult = CalcUtil.execute(height, CalcMethod.MULTIPLY, height, 2, RoundingMode.HALF_UP);
-		BigDecimal result = CalcUtil.execute(weight, CalcMethod.DIVIDE, multiplyResult, 2, RoundingMode.HALF_UP);
+
+		Calculator calculator = new Calculator();
+		BigDecimal multiplyResult = calculator.execute(height, CalcMethod.MULTIPLY, height, 2, RoundingMode.HALF_UP);
+		BigDecimal result = calculator.execute(weight, CalcMethod.DIVIDE, multiplyResult, 2, RoundingMode.HALF_UP);
 		return result;
 	}
 
@@ -31,8 +33,10 @@ public class CalcServiceImpl implements CalcService {
 	 */
 	@Override
 	public BigDecimal calcStandardWeight(BigDecimal height, int digit) {
-		BigDecimal result = CalcUtil.execute(height, CalcMethod.MULTIPLY, height, digit, RoundingMode.HALF_UP);
-		result = CalcUtil.execute(result, CalcMethod.MULTIPLY, new BigDecimal(22), digit, RoundingMode.HALF_UP);
+
+		Calculator calculator = new Calculator();
+		BigDecimal result = calculator.execute(height, CalcMethod.MULTIPLY, height, digit, RoundingMode.HALF_UP);
+		result = calculator.execute(result, CalcMethod.MULTIPLY, new BigDecimal(22), digit, RoundingMode.HALF_UP);
 		return result;
 	}
 

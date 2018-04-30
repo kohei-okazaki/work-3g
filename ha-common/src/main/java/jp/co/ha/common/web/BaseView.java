@@ -19,6 +19,7 @@ public interface BaseView {
 	 * @param value 検査したい値
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static <V extends BaseView> V of(Class<? extends BaseView> view, String url) {
 
 		for (BaseView baseView : view.getEnumConstants()) {

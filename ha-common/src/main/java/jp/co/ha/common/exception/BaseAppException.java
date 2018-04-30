@@ -10,6 +10,9 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class BaseAppException extends Exception {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/** エラーコード */
 	private ErrorCode errorCode;
 	/** 詳細 */

@@ -6,6 +6,9 @@ package jp.co.ha.common.exception;
  */
 public abstract class BaseAppRuntimeException extends RuntimeException {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/** エラーコード */
 	private ErrorCode errorCode;
 	/** エラーメッセージ */
