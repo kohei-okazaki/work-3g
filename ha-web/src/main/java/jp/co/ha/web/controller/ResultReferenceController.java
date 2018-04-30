@@ -111,7 +111,7 @@ public class ResultReferenceController implements BaseWebController {
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
 
 		ModelAndView model = new ModelAndView(fileDownloadService.execute(healthInfoList));
-		model.setViewName(getView(ManageWebView.RESULT_REFFERNCE));
+//		model.setViewName(getView(ManageWebView.RESULT_REFFERNCE));
 
 		return model;
 	}

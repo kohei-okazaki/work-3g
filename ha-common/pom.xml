@@ -14,7 +14,7 @@
 	<properties>
 		<java-version>9</java-version>
 		<org.springframework-version>5.0.5.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.9.0</org.aspectj-version>
+		<org.aspectj-version>1.9.1</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<org.jackson-version>2.9.5</org.jackson-version>
 		<poi-version>3.17</poi-version>
@@ -210,7 +210,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>3.5.2</version>
+				<version>3.5.3</version>
 				<configuration>
 					<additionalProjectnatures>
 						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>

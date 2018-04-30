@@ -17,7 +17,7 @@ import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.HealthInfoException;
 
 /**
- * 健康情報コントローラクラス<br>
+ * 健康情報登録コントローラクラス<br>
  *
  */
 @RestController

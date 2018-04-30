@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-	<wb-module deploy-name="ha-api-1.0.0-BUILD-SNAPSHOT">
+    <wb-module deploy-name="ha-api-1.0.0-BUILD-SNAPSHOT">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-		<wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="ha-common.war" deploy-path="/WEB-INF/lib" handle="module:/resource/ha-common/ha-common">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="ha-business-1.0.0-BUILD-SNAPSHOT.war" deploy-path="/WEB-INF/lib" handle="module:/resource/ha-business/ha-business">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-		<property name="java-output-path" value="target/classes"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <property name="java-output-path" value="target/classes"/>
         <property name="context-root" value="ha-api"/>
-	</wb-module>
+    </wb-module>
 </project-modules>

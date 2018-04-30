@@ -10,7 +10,8 @@ import jp.co.ha.common.exception.HealthInfoException;
  * 健康情報登録サービス<br>
  *
  */
-public interface HealthInfoRegistService extends BaseService<HealthInfoRegistRequest, HealthInfoRegistResponse, HealthInfoException> {
+public interface HealthInfoRegistService
+		extends BaseService<HealthInfoRegistRequest, HealthInfoRegistResponse, HealthInfoException> {
 
 	/**
 	 * 健康情報にリクエスト情報をつめる

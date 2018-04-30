@@ -74,7 +74,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 					healthInfo.setBmi(new BigDecimal(row.getCell(4).getStringCellValue()));					// BMI
 					healthInfo.setStandardWeight(new BigDecimal(row.getCell(5).getStringCellValue()));		// 標準体重
 					healthInfo.setUserStatus(row.getCell(6).getStringCellValue());							// ユーザステータス
-					healthInfo.setRegDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));			// 登録日時
+					healthInfo.setRegDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));		// 登録日時
 					healthInfoList.add(healthInfo);
 				}
 			}

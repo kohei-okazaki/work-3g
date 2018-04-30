@@ -5,7 +5,7 @@
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
-        <dependent-module archiveName="ha-common.war" deploy-path="/WEB-INF/lib" handle="module:/resource/ha-common/ha-common">
+        <dependent-module archiveName="ha-common-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ha-common/ha-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
 		<property name="java-output-path" value="target/classes"/>

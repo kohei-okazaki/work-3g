@@ -28,36 +28,36 @@
 	<!-- 確認画面 -->
 	<form action="/ha-web/account-create-complete.html" method="post">
 	<div align="center">
-		<table border="1">
+		<table>
 			<tr>
-				<th class="header" width="130px">
+				<th width="130px">
 					<p>ユーザID</p>
 				</th>
-				<td class="data" width="250px">
+				<td width="250px">
 					<input type="text" name="userId" maxlength="16" required="required" th:field="${form.userId}" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
-				<th class="header" width="130px">
+				<th width="130px">
 					<p>パスワード</p>
 				</th>
-				<td class="data" width="250px">
+				<td width="250px">
 					<input type="text" name="password" maxlength="16" required="required" th:field="${form.password}" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
-				<th class="header">
+				<th>
 					<p>確認用 パスワード</p>
 				</th>
-				<td class="data" width="250px">
+				<td width="250px">
 					<input type="text" name="confirmPassword" maxlength="16" required="required" th:field="${form.confirmPassword}" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
-				<th class="header">
+				<th>
 					<p>備 考</p>
 				</th>
-				<td class="data">
+				<td>
 					<textarea rows="10" cols="30" name="remarks" th:field="${form.remarks}" readonly="readonly"></textarea>
 				</td>
 			</tr>
