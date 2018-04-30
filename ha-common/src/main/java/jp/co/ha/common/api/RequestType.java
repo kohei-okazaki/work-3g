@@ -7,7 +7,9 @@ package jp.co.ha.common.api;
 public enum RequestType {
 
 	/** 健康情報登録 */
-	HEALTH_INFO_REGIST("001", "健康情報登録");
+	HEALTH_INFO_REGIST("001", "健康情報登録"),
+	/** 健康情報照会 */
+	HEALTH_INFO_REFERENCE("002", "健康情報照会");
 
 	/** リクエストID */
 	private String requestId;
