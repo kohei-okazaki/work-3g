@@ -1,5 +1,7 @@
 package jp.co.ha.api.service.impl;
 
+import java.util.Objects;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,11 +9,15 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
+import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * 健康情報照会サービス実装クラス<br>
@@ -23,14 +29,27 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
+	/** アカウント検索サービス */
+	@Autowired
+	private AccountSearchService accountSearchService;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void checkRequest(HealthInfoReferenceRequest request) throws HealthInfoException {
-		// TODO 自動生成されたメソッド・スタブ
 
+		if (Objects.isNull(request.getRequestType())
+				|| StringUtil.isEmpty(request.getUserId())
+				|| StringUtil.isEmpty(request.getUserId())) {
+			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
+		}
+
+		// アカウント取得
+		Account account = accountSearchService.findAccountByUserId(request.getUserId());
+		if (Objects.isNull(account.getUserId())) {
+			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
+		}
 	}
 
 	/**
