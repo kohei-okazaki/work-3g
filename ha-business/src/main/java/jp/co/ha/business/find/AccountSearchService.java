@@ -13,6 +13,6 @@ public interface AccountSearchService {
 	 * @param userId
 	 * @return アカウント情報
 	 */
-	Account findAccountByUserId(String userId);
+	Account findByUserId(String userId);
 
 }

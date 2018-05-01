@@ -51,7 +51,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		List<HealthInfoCsvModel> modelList = toModelList(healthInfo);
 
 		// ファイル囲い文字利用フラグを取得
-		Account account = accountSearchService.findAccountByUserId(userId);
+		Account account = accountSearchService.findByUserId(userId);
 		boolean enclosureFlag = StringUtil.isTrue(account.getFileEnclosureCharFlag());
 
 		// CSVに書き込む

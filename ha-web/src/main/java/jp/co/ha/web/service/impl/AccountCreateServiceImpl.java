@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.common.dao.AccountDao;
+import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
@@ -22,17 +22,12 @@ import jp.co.ha.web.service.AccountCreateService;
 @Service
 public class AccountCreateServiceImpl implements AccountCreateService {
 
-	/** アカウントDao */
+	/** アカウント検索サービス */
 	@Autowired
-	private AccountDao accountDao;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void create(Account account) {
-		accountDao.registAccount(account);
-	}
+	private AccountSearchService accountSearchService;
+	/** アカウント作成サービス */
+	@Autowired
+	private jp.co.ha.business.create.AccountCreateService accountCreateService;
 
 	/**
 	 * {@inheritDoc}
@@ -58,7 +53,7 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	public boolean invalidUserId(AccountCreateForm form) {
 
 		// 指定したアカウント情報を検索
-		Account account = accountDao.getAccountByUserId(form.getUserId());
+		Account account = accountSearchService.findByUserId(form.getUserId());
 
 		// ユーザIDが存在する場合true, 存在しない場合false
 		return !StringUtil.isEmpty(account.getUserId());

@@ -58,7 +58,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
 		// アカウント取得
-		Account account = accountSearchService.findAccountByUserId(request.getUserId());
+		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (Objects.isNull(account.getUserId())) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
 		}

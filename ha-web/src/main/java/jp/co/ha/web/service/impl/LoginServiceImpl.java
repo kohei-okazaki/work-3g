@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 	public boolean invalidPassword(LoginForm loginForm) {
 
 		String inputPassword = loginForm.getPassword();
-		Account account = accountSearchService.findAccountByUserId(loginForm.getUserId());
+		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		String userPassword = account.getPassword();
 		return !inputPassword.equals(userPassword);
 	}
@@ -52,7 +52,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean existAccount(LoginForm loginForm) {
 
-		Account account = accountSearchService.findAccountByUserId(loginForm.getUserId());
+		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		return Objects.nonNull(account.getUserId());
 	}
 
@@ -62,7 +62,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean invalidAccount(LoginForm loginForm) {
 
-		Account account = accountSearchService.findAccountByUserId(loginForm.getUserId());
+		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		return CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, account.getDeleteFlag());
 	}
 

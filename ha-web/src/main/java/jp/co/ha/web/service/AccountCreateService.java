@@ -10,12 +10,6 @@ import jp.co.ha.web.form.AccountCreateForm;
 public interface AccountCreateService {
 
 	/**
-	 * アカウントを作成する<br>
-	 * @param account
-	 */
-	void create(Account account);
-
-	/**
 	 * アカウントEntityに変換する<br>
 	 * @param form
 	 * @return

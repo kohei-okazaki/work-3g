@@ -46,7 +46,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		}
 
 		// アカウント取得
-		Account account = accountSearchService.findAccountByUserId(request.getUserId());
+		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (Objects.isNull(account.getUserId())) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
 		}

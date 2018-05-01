@@ -18,7 +18,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account findAccountByUserId(String userId) {
+	public Account findByUserId(String userId) {
 		return this.accountDao.getAccountByUserId(userId);
 	}
 
