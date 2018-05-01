@@ -10,10 +10,9 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
-import jp.co.ha.business.calc.CalcService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
-import jp.co.ha.business.healthInfo.HealthInfoService;
+import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
@@ -39,15 +38,12 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** 計算サービス */
-	@Autowired
-	private CalcService calcService;
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
 	/** 健康情報ビジネスサービス */
 	@Autowired
-	private HealthInfoService healthInfoService;
+	private HealthInfoCalcService healthInfoService;
 
 	/**
 	 * {@inheritDoc}
@@ -62,7 +58,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
 		// アカウント取得
-		Account account = accountSearchService.findAccountByUserId(request.getUserId());
+		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (Objects.isNull(account.getUserId())) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
 		}
@@ -98,10 +94,10 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		BigDecimal weight = request.getWeight();
 
 		// メートルに変換する
-		BigDecimal centiMeterHeight = calcService.convertMeterFromCentiMeter(request.getHeight());
+		BigDecimal centiMeterHeight = healthInfoService.convertMeterFromCentiMeter(request.getHeight());
 
-		BigDecimal bmi = calcService.calcBmi(centiMeterHeight, request.getWeight(), 2);
-		BigDecimal standardWeight = calcService.calcStandardWeight(centiMeterHeight, 2);
+		BigDecimal bmi = healthInfoService.calcBmi(centiMeterHeight, request.getWeight(), 2);
+		BigDecimal standardWeight = healthInfoService.calcStandardWeight(centiMeterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());

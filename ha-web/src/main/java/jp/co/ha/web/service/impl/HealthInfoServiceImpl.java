@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.calc.CalcService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
@@ -25,9 +25,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
-	/** 計算サービス */
+	/** 健康情報計算サービス */
 	@Autowired
-	private CalcService calcService;
+	private HealthInfoCalcService healthInfoCalcService;
 
 	/**
 	 * {@inheritDoc}
@@ -56,7 +56,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	@Override
 	public BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo lastHealthInfo) {
-		return this.calcService.calcDiffWeight(lastHealthInfo.getWeight(), form.getWeight());
+		return healthInfoCalcService.calcDiffWeight(lastHealthInfo.getWeight(), form.getWeight());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	public boolean isFirstReg(String userId) {
 
 		// ユーザIDから健康情報のリストを取得
-		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findByUserId(userId);
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
 		return healthInfoList.isEmpty();
 	}
 

@@ -1,4 +1,4 @@
-package jp.co.ha.common.other;
+package jp.co.ha.business.calc;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

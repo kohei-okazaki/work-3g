@@ -17,11 +17,12 @@
 	<!-- メール情報検索サービス -->
 	<beans:bean id = "mailInfoSearchService" class = "jp.co.ha.business.find.impl.MailInfoSearchServiceImpl" />
 
+	<!-- アカウント作成サービス -->
+	<beans:bean id="accountCreateService" class="jp.co.ha.business.create.impl.AccountCreateServiceImpl" />
+
 	<!-- 健康情報登録サービス -->
 	<beans:bean id="healthInfoRegistService" class="jp.co.ha.api.service.impl.HealthInfoRegistServiceImpl" />
-	<!-- 計算サービス -->
-	<beans:bean id="calcService" class="jp.co.ha.business.calc.impl.CalcServiceImpl" />
-	<!-- 健康情報ビジネスサービス -->
-	<beans:bean id="healthInfoService" class="jp.co.ha.business.healthInfo.impl.HealthInfoServiceImpl"  />
+	<!-- 健康情報計算サービス -->
+	<beans:bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
 
 </beans:beans>

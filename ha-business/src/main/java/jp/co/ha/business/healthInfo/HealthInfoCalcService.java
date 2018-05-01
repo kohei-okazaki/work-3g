@@ -1,12 +1,20 @@
-package jp.co.ha.business.calc;
+package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
 
 /**
- * 計算サービス<br>
+ * 健康情報サービス<br>
  *
  */
-public interface CalcService {
+public interface HealthInfoCalcService {
+
+	/**
+	 * inputWeightとbeforeWeightを比較し、ユーザステータスを返す<br>
+	 * @param inputWeight
+	 * @param beforeWeight
+	 * @return
+	 */
+	String getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
 
 	/**
 	 * 単位を以下に変換する</br>
@@ -48,5 +56,4 @@ public interface CalcService {
 	 * @return 体重の差(小数第2位を四捨五入する)
 	 */
 	BigDecimal calcDiffWeight(BigDecimal before, BigDecimal now);
-
 }

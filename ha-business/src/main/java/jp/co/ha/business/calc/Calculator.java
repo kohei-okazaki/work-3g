@@ -3,8 +3,6 @@ package jp.co.ha.business.calc;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import jp.co.ha.common.other.CalcMethod;
-
 /**
  * 計算機クラス<br>
  *

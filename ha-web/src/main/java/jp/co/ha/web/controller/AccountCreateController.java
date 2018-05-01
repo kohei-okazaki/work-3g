@@ -27,9 +27,12 @@ import jp.co.ha.web.view.ManageWebView;
 @Controller
 public class AccountCreateController implements BaseWizardController<AccountCreateForm, AccountCreateException> {
 
+	/** アカウント作成画面サービス */
+	@Autowired
+	private AccountCreateService service;
 	/** アカウント作成サービス */
 	@Autowired
-	private AccountCreateService accountCreateService;
+	private jp.co.ha.business.create.AccountCreateService accountCreateService;
 
 	/**
 	 * {@inheritDoc}
@@ -76,7 +79,7 @@ public class AccountCreateController implements BaseWizardController<AccountCrea
 			throws AccountCreateException {
 
 		// アカウントEntityに変換する
-		Account account = accountCreateService.toAccount(form);
+		Account account = service.toAccount(form);
 
 		// アカウントを作成する
 		accountCreateService.create(account);

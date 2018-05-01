@@ -67,7 +67,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		String userId = (String) request.getSession().getAttribute("userId");
 
 		// アカウント情報を検索
-		Account account = accountSearchService.findAccountByUserId(userId);
+		Account account = accountSearchService.findByUserId(userId);
 		model.addAttribute("account", account);
 
 		// メール情報を検索
@@ -107,7 +107,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 //		}
 
 		// アカウント情報を検索し、マージする
-		Account befAccount = accountSearchService.findAccountByUserId(form.getUserId());
+		Account befAccount = accountSearchService.findByUserId(form.getUserId());
 		accountSettingService.mergeAccount(befAccount, form);
 
 		// メール情報を検索し、マージする
