@@ -25,9 +25,6 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** アカウント作成サービス */
-	@Autowired
-	private jp.co.ha.business.create.AccountCreateService accountCreateService;
 
 	/**
 	 * {@inheritDoc}
