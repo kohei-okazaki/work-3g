@@ -1,12 +1,15 @@
-package jp.co.ha.business.calc.impl;
+package jp.co.ha.business.healthInfo.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.calc.CalcService;
 import jp.co.ha.business.calc.Calculator;
+import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.common.manager.CodeManager;
+import jp.co.ha.common.manager.MainKey;
+import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.other.CalcMethod;
 
 /**
@@ -14,7 +17,41 @@ import jp.co.ha.common.other.CalcMethod;
  *
  */
 @Service
-public class CalcServiceImpl implements CalcService {
+public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
+
+		SubKey subkey;
+		if (beforeWeight.compareTo(inputWeight) == 0) {
+			subkey = SubKey.EVEN;
+		} else if (beforeWeight.compareTo(inputWeight) == -1) {
+			subkey = SubKey.INCREASE;
+		} else {
+			subkey = SubKey.DOWN;
+		}
+
+		return CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, subkey);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BigDecimal convertMeterFromCentiMeter(BigDecimal target) {
+		return target.scaleByPowerOfTen(-2);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BigDecimal convertCentiMeterFromMeter(BigDecimal target) {
+		return target.scaleByPowerOfTen(2);
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -46,22 +83,6 @@ public class CalcServiceImpl implements CalcService {
 	@Override
 	public BigDecimal calcDiffWeight(BigDecimal before, BigDecimal now) {
 		return now.subtract(before).abs().setScale(1, RoundingMode.HALF_UP);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public BigDecimal convertMeterFromCentiMeter(BigDecimal target) {
-		return target.scaleByPowerOfTen(-2);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public BigDecimal convertCentiMeterFromMeter(BigDecimal target) {
-		return target.scaleByPowerOfTen(2);
 	}
 
 }
