@@ -27,7 +27,7 @@ public class HealthInfoReferenceController implements BaseRestController<HealthI
 
 	/** 健康情報照会サービス */
 	@Autowired
-	private HealthInfoReferenceService healthInfoReferenceService;
+	private HealthInfoReferenceService service;
 
 	/**
 	 * {@inheritDoc}
@@ -36,9 +36,9 @@ public class HealthInfoReferenceController implements BaseRestController<HealthI
 	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest apiRequest) throws HealthInfoException {
 
 		// リクエスト情報のチェック
-		healthInfoReferenceService.checkRequest(apiRequest);
+		service.checkRequest(apiRequest);
 
-		HealthInfoReferenceResponse apiResponse = healthInfoReferenceService.execute(apiRequest);
+		HealthInfoReferenceResponse apiResponse = service.execute(apiRequest);
 
 		return apiResponse;
 	}
