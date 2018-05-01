@@ -5,12 +5,12 @@ import java.math.RoundingMode;
 
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.common.manager.CodeManager;
 import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
-import jp.co.ha.common.other.CalcMethod;
 
 /**
  * 計算サービス実装クラス<br>
