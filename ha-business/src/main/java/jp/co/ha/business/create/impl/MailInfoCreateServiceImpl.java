@@ -1,11 +1,11 @@
-package jp.co.ha.web.service.impl;
+package jp.co.ha.business.create.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.create.MailInfoCreateService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
-import jp.co.ha.web.service.MailInfoCreateService;
 
 /**
  * メール情報作成サービスインターフェース実装クラス<br>

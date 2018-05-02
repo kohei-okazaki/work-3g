@@ -19,9 +19,16 @@
 
 	<!-- アカウント作成サービス -->
 	<beans:bean id="accountCreateService" class="jp.co.ha.business.create.impl.AccountCreateServiceImpl" />
+	<!-- 健康情報作成サービス -->
+	<beans:bean id="healthInfoCreateService" class="jp.co.ha.business.create.impl.HealthInfoCreateServiceImpl" />
+	<!-- メール情報作成サービス -->
+	<beans:bean id="mailInfoCreateService" class="jp.co.ha.business.create.impl.MailInfoCreateServiceImpl" />
 
-	<!-- 健康情報登録サービス -->
+	<!-- 健康情報登録API -->
 	<beans:bean id="healthInfoRegistService" class="jp.co.ha.api.service.impl.HealthInfoRegistServiceImpl" />
+	<!-- 健康情報照会API -->
+	<beans:bean id="healthInfoReferenceService" class="jp.co.ha.api.service.impl.HealthInfoReferenceServiceImpl" />
+
 	<!-- 健康情報計算サービス -->
 	<beans:bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
 
