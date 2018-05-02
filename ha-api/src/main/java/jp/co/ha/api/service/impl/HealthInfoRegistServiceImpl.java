@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.create.HealthInfoCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
@@ -32,18 +32,18 @@ import jp.co.ha.common.util.StringUtil;
 @Service
 public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
-	/** 健康情報Dao */
-	@Autowired
-	private HealthInfoDao healthInfoDao;
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
-	/** 健康情報ビジネスサービス */
+	/** 健康情報計算サービス */
 	@Autowired
-	private HealthInfoCalcService healthInfoService;
+	private HealthInfoCalcService healthInfoCalcService;
+	/** 健康情報作成サービス */
+	@Autowired
+	private HealthInfoCreateService healthInfoCreateService;
 
 	/**
 	 * {@inheritDoc}
@@ -74,7 +74,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		HealthInfo healthInfo = toEntity(request);
 
 		// Entityの登録処理を行う
-		healthInfoDao.registHealthInfo(healthInfo);
+		healthInfoCreateService.create(healthInfo);
 
 		// レスポンスに変換する
 		HealthInfoRegistResponse response = toResponse(healthInfo);
@@ -94,15 +94,15 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		BigDecimal weight = request.getWeight();
 
 		// メートルに変換する
-		BigDecimal centiMeterHeight = healthInfoService.convertMeterFromCentiMeter(request.getHeight());
+		BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(request.getHeight());
 
-		BigDecimal bmi = healthInfoService.calcBmi(centiMeterHeight, request.getWeight(), 2);
-		BigDecimal standardWeight = healthInfoService.calcStandardWeight(centiMeterHeight, 2);
+		BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, request.getWeight(), 2);
+		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());
 		String userStatus = Objects.nonNull(lastHealthInfo)
-						? healthInfoService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
+						? healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
 						: CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN);
 		Date regDate = new Date();
 

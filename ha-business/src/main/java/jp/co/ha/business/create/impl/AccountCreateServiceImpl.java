@@ -10,7 +10,7 @@ import jp.co.ha.common.entity.Account;
 @Service
 public class AccountCreateServiceImpl implements AccountCreateService {
 
-	/** アカウントDao */
+	/** アカウント情報Dao */
 	@Autowired
 	private AccountDao accountDao;
 
