@@ -33,7 +33,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		try {
 			Rq apiRequest = toRequest(request);
 			apiResponse = this.execute(apiRequest);
-			apiResponse.setResult(0);
+			apiResponse.setResult(ResultType.SUCCESS);
 		} catch (BaseAppException e) {
 			apiResponse = (Rs) new ErrorResponse(e);
 			System.out.println(e.toString());

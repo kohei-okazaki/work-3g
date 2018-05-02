@@ -11,6 +11,7 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
@@ -41,8 +42,13 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		if (Objects.isNull(request.getRequestType())
 				|| StringUtil.isEmpty(request.getUserId())
-				|| StringUtil.isEmpty(request.getUserId())) {
+				|| StringUtil.isEmpty(request.getDataId())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
+		}
+
+		// リクエストIDチェック
+		if (RequestType.HEALTH_INFO_REFERENCE != request.getRequestType()) {
+			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, request.getRequestType() + "が不正です");
 		}
 
 		// アカウント取得

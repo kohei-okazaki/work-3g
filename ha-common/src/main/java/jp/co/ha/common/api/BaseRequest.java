@@ -10,16 +10,16 @@ public abstract class BaseRequest {
 	private RequestType requestType;
 
 	/**
-	 * ｒequestTypeを返す<br>
-	 * @return ｒequestType
+	 * requestTypeを返す<br>
+	 * @return requestType
 	 */
 	public RequestType getRequestType() {
 		return requestType;
 	}
 
 	/**
-	 * ｒequestTypeを設定する<br>
-	 * @param ｒequestType
+	 * requestTypeを設定する<br>
+	 * @param requestType
 	 */
 	public void setRequestType(RequestType requestType) {
 		this.requestType = requestType;
