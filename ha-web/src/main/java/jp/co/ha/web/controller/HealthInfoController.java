@@ -89,7 +89,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 			// バリエーションエラーの場合
 			List<FieldError> errorList = result.getFieldErrors();
 			FieldError error = errorList.get(0);
-			model.addAttribute("errorMessage", error.getRejectedValue());
+			model.addAttribute("errorMessage", error.getRejectedValue() + "は不正な入力値です");
 			return getView(ManageWebView.HEALTH_INFO_INPUT);
 		}
 
