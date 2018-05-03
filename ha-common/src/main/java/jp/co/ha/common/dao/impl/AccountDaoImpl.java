@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -72,7 +71,7 @@ public class AccountDaoImpl implements AccountDao {
 //		dto.setUserId(userId);
 //		dto.setPassword("password");
 //		dto.setInvalidFlag("0");
-//		dto.setPasswordExpire(new Date());
+//		dto.setPasswordExpire(DateUtil.getSysDate());
 //		dto.setRemarks("ここは備考です。");
 //		dto.setFileEnclosureCharFlag("1");
 		return account;
@@ -98,8 +97,8 @@ public class AccountDaoImpl implements AccountDao {
 			newRow.createCell(3).setCellValue(DateUtil.toString(account.getPasswordExpire(), DateFormatDefine.YYYYMMDD_HHMMSS));
 			newRow.createCell(4).setCellValue(account.getRemarks());
 			newRow.createCell(5).setCellValue(account.getFileEnclosureCharFlag());
-			newRow.createCell(6).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
-			newRow.createCell(7).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(6).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 			fos.flush();
 			workbook.write(fos);
@@ -143,7 +142,7 @@ public class AccountDaoImpl implements AccountDao {
 					row.getCell(3).setCellValue(DateUtil.toString(account.getPasswordExpire(), DateFormatDefine.YYYYMMDD_HHMMSS));
 					row.getCell(4).setCellValue(account.getRemarks());
 					row.getCell(5).setCellValue(account.getFileEnclosureCharFlag());
-					row.getCell(6).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(6).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 					row.getCell(7).setCellValue(DateUtil.toString(account.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 				}

@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -191,7 +190,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 			newRow.createCell(4).setCellValue(healthInfo.getBmi().toString());											// BMI
 			newRow.createCell(5).setCellValue(healthInfo.getStandardWeight().toString());									// 標準体重
 			newRow.createCell(6).setCellValue(healthInfo.getUserStatus());												// ユーザステータス
-			newRow.createCell(7).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));			// 登録日時
+			newRow.createCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));			// 登録日時
 
 			fos.flush();
 			workbook.write(fos);

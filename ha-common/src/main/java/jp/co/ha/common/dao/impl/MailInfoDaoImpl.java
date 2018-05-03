@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -69,7 +68,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 //		mailInfo.setUserId(userId);
 //		mailInfo.setMailAddress("test-001@test.jp");
 //		mailInfo.setMailPassword("password");
-//		mailInfo.setRegDate(new Date());
+//		mailInfo.setRegDate(DateUtil.getSysDate());
 		return mailInfo;
 	}
 
@@ -96,7 +95,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 					row.getCell(0).setCellValue(mailInfo.getUserId());
 					row.getCell(1).setCellValue(mailInfo.getMailAddress());
 					row.getCell(2).setCellValue(mailInfo.getMailPassword());
-					row.getCell(3).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 					row.getCell(4).setCellValue(DateUtil.toString(mailInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 				}
@@ -135,8 +134,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 			newRow.createCell(0).setCellValue(mailInfo.getUserId());
 			newRow.createCell(1).setCellValue(mailInfo.getMailAddress());
 			newRow.createCell(2).setCellValue(mailInfo.getMailPassword());
-			newRow.createCell(3).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
-			newRow.createCell(4).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(4).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 			fos.flush();
 			workbook.write(fos);

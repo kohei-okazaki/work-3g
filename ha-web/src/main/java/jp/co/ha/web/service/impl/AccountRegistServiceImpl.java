@@ -1,7 +1,5 @@
 package jp.co.ha.web.service.impl;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +36,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		account.setDeleteFlag(CodeManager.getInstance().getValue(MainKey.FLAG, SubKey.FALSE));
 		account.setRemarks(form.getRemarks());
 		account.setFileEnclosureCharFlag(CodeManager.getInstance().getValue(MainKey.FLAG, SubKey.FALSE));
-		account.setPasswordExpire(DateUtil.addMonth(new Date(), 6));
+		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 
 		return account;
 	}

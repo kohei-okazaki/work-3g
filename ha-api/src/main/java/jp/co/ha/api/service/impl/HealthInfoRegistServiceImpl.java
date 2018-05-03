@@ -104,7 +104,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		String userStatus = Objects.nonNull(lastHealthInfo)
 						? healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
 						: CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN);
-		Date regDate = new Date();
+		Date regDate = DateUtil.getSysDate();
 
 
 		HealthInfo entity = new HealthInfo();
