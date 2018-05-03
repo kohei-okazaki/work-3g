@@ -39,12 +39,6 @@ public interface AccountSettingService {
 	MailInfo convertMailInfo(AccountSettingForm form);
 
 	/**
-	 * アカウント情報を更新する<br>
-	 * @param account
-	 */
-	void updateAccount(Account account);
-
-	/**
 	 * フォーム情報をメール情報にマージする<br>
 	 * @param mailInfo
 	 * @param form

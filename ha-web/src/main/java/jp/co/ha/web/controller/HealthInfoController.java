@@ -1,5 +1,7 @@
 package jp.co.ha.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -83,6 +86,10 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result) throws HealthInfoException {
 
 		if (result.hasErrors()) {
+			// バリエーションエラーの場合
+			List<FieldError> errorList = result.getFieldErrors();
+			FieldError error = errorList.get(0);
+			model.addAttribute("errorMessage", error.getRejectedValue());
 			return getView(ManageWebView.HEALTH_INFO_INPUT);
 		}
 

@@ -22,7 +22,7 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MailInfo findMailInfoByUserId(String userId) {
+	public MailInfo findByUserId(String userId) {
 		return this.mailInfoDao.findByUserId(userId);
 	}
 }

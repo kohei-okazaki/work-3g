@@ -18,11 +18,12 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 	@Autowired
 	private MailInfoDao mailInfoDao;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void update(MailInfo mailInfo) {
-		// TODO 自動生成されたメソッド・スタブ
-
+		mailInfoDao.updateMailInfo(mailInfo);
 	}
-
 
 }

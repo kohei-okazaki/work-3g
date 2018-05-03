@@ -3,8 +3,8 @@ package jp.co.ha.web.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.common.dao.AccountDao;
-import jp.co.ha.common.dao.MailInfoDao;
+import jp.co.ha.business.update.AccountUpdateService;
+import jp.co.ha.business.update.MailInfoUpdateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.web.form.AccountSettingForm;
@@ -17,12 +17,11 @@ import jp.co.ha.web.service.AccountSettingService;
 @Service
 public class AccountSettingServiceImpl implements AccountSettingService {
 
-	/** アカウント情報Dao */
+	/** アカウント更新サービス */
 	@Autowired
-	private AccountDao accountDao;
-	/** メール情報Dao */
-	@Autowired
-	private MailInfoDao mailInfoDao;
+	private AccountUpdateService accountUpdateService;
+	/** メール情報更新サービス */
+	private MailInfoUpdateService mailInfoUpdateService;
 
 	/**
 	 * {@inheritDoc}
@@ -31,24 +30,10 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	public void update(Account account, MailInfo mailInfo) {
 
 		// アカウント情報を更新する
-		updateAccount(account);
+		accountUpdateService.update(account);
 
 		// メール情報を更新する
-		updateMailInfo(mailInfo);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public void updateAccount(Account account) {
-		accountDao.updateAccount(account);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	private void updateMailInfo(MailInfo mailInfo) {
-		mailInfoDao.updateMailInfo(mailInfo);
+		mailInfoUpdateService.update(mailInfo);
 	}
 
 	/**
@@ -56,7 +41,8 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 */
 	@Override
 	public void deleteAccount(AccountSettingForm form) {
-		accountDao.deleteAccount(form.getUserId());
+		// FIXME AccountDeleteService#delete(String userId)で削除するように修正
+//		accountDao.deleteAccount(form.getUserId());
 	}
 
 	/**

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jp.co.ha.business.create.MailInfoCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.MailInfoSearchService;
+import jp.co.ha.business.update.AccountUpdateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.AccountSettingException;
@@ -33,12 +34,16 @@ import jp.co.ha.web.view.ManageWebView;
 @Controller
 public class AccountSettingController implements BaseWizardController<AccountSettingForm, AccountSettingException> {
 
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
 	/** アカウント設定サービス */
 	@Autowired
 	private AccountSettingService accountSettingService;
+
+	/** アカウント検索サービス */
+	@Autowired
+	private AccountSearchService accountSearchService;
+	/** アカウント更新サービス */
+	@Autowired
+	private AccountUpdateService accountUpdateService;
 	/** メール情報検索サービス */
 	@Autowired
 	private MailInfoSearchService mailInfoSearchService;
@@ -71,7 +76,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		model.addAttribute("account", account);
 
 		// メール情報を検索
-		MailInfo mailInfo = mailInfoSearchService.findMailInfoByUserId(userId);
+		MailInfo mailInfo = mailInfoSearchService.findByUserId(userId);
 		model.addAttribute("mailInfo", mailInfo);
 
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
@@ -111,7 +116,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		accountSettingService.mergeAccount(befAccount, form);
 
 		// メール情報を検索し、マージする
-		MailInfo befMailInfo = mailInfoSearchService.findMailInfoByUserId(form.getUserId());
+		MailInfo befMailInfo = mailInfoSearchService.findByUserId(form.getUserId());
 		accountSettingService.mergeMailInfo(befMailInfo, form);
 
 		if (Objects.isNull(befMailInfo.getUserId())) {
@@ -120,7 +125,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 			// メール情報を新規登録する
 			mailInfoCreateService.create(mailInfo);
 			// アカウント情報を更新する
-			accountSettingService.updateAccount(befAccount);
+			accountUpdateService.update(befAccount);
 
 		} else {
 

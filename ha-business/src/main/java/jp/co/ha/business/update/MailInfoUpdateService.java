@@ -8,5 +8,9 @@ import jp.co.ha.common.entity.MailInfo;
  */
 public interface MailInfoUpdateService {
 
+	/**
+	 * メール情報を更新する<br>
+	 * @param mailInfo
+	 */
 	void update(MailInfo mailInfo);
 }
