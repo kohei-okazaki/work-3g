@@ -29,7 +29,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public List<HealthInfo> findByUserId(String userId) {
-		return healthInfoDao.getHealthInfoByUserId(userId);
+		return healthInfoDao.findByUserId(userId);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public HealthInfo findByDataId(String dataId) {
-		return healthInfoDao.getHealthInfoByDataId(dataId);
+		return healthInfoDao.findByDataId(dataId);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	public List<HealthInfo> findByUserIdAndRegDate(String userId, String year, String month, String day) {
 
-		List<HealthInfo> healthInfoList = healthInfoDao.getHealthInfoByUserId(userId);
+		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
 
 		if (StringUtil.isEmpty(year) && StringUtil.isEmpty(month) && StringUtil.isEmpty(day)) {
 			// 検索条件がない場合

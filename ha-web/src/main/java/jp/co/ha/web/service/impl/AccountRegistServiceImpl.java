@@ -13,14 +13,14 @@ import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.AccountCreateForm;
-import jp.co.ha.web.service.AccountCreateService;
+import jp.co.ha.web.service.AccountRegistService;
 
 /**
  * アカウント作成サービス実装クラス
  *
  */
 @Service
-public class AccountCreateServiceImpl implements AccountCreateService {
+public class AccountRegistServiceImpl implements AccountRegistService {
 
 	/** アカウント検索サービス */
 	@Autowired

@@ -31,7 +31,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MailInfo getMailInfoByUserId(String userId) {
+	public MailInfo findByUserId(String userId) {
 
 		MailInfo mailInfo = new MailInfo();
 

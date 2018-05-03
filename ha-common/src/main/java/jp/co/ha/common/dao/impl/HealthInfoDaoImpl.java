@@ -37,7 +37,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	@Override
 	public HealthInfo getLastHealthInfoByUserId(String userId) {
 
-		List<HealthInfo> healthInfoList = getHealthInfoByUserId(userId);
+		List<HealthInfo> healthInfoList = findByUserId(userId);
 
 		if (Objects.isNull(healthInfoList) || healthInfoList.isEmpty()) {
 			// 登録がされてなかった場合
@@ -52,7 +52,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> getHealthInfoByUserId(String userId) {
+	public List<HealthInfo> findByUserId(String userId) {
 
 		List<HealthInfo> healthInfoList = new ArrayList<HealthInfo>();
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
@@ -126,7 +126,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo getHealthInfoByDataId(String dateId) {
+	public HealthInfo findByDataId(String dateId) {
 
 		HealthInfo healthInfo = new HealthInfo();
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {

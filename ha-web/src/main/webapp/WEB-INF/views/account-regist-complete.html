@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>健康アプリ_アカウント作成画面</title>
+<title>健康アプリ_アカウント登録完了画面</title>
 <link rel="icon" type="image/png" href="resources/image/people.png">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
@@ -18,44 +18,27 @@
 
 
 	<h1>
-		<img class="headericon" alt="入力" src="resources/image/icon_input.jpg">
-		アカウント作成画面
+		<img class="headericon" alt="確認" src="resources/image/icon_confirm.png">
+		アカウント登録完了画面
 	</h1>
 
 	<hr>
 	<br><br>
 
-	<!-- 入力画面 -->
-	<form action="/ha-web/account-create-confirm.html" method="post">
+	<!-- 完了画面 -->
 	<div align="center">
-
-		<div th:if="${errorMessage} != null">
-			<p th:text="${errorMessage}"></p>
-		</div>
-
-		<input type="text" name="userId" maxlength="16" required="required" placeholder="ユーザID" />
-		<br><br>
-		<input type="text" name="password" maxlength="16" required="required" placeholder="パスワード" />
-		<br><br>
-		<input type="text" name="confirmPassword" maxlength="16" required="required" placeholder="確認用パスワード" />
-		<br><br>
-		<textarea rows="10" cols="30" name="remarks" ></textarea>
+		<p>完了しました</p>
 		<br><br>
 		<table>
 			<tr>
-				<td>
-					<input type="submit" value="確 認" />
-				</td>
-				<td>
-					<p>　　</p>
-				</td>
-				<td>
-					<input type="reset" value="リセット" />
+				<td align="center">
+					<form action="/ha-web/login.html" method="get">
+						<input type="submit" value="ログイン画面"/>
+					</form>
 				</td>
 			</tr>
 		</table>
 	</div>
-	</form>
 
 	<br><br>
 	<hr>

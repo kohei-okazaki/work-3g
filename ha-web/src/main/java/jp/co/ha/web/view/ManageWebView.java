@@ -29,9 +29,9 @@ public enum ManageWebView implements BaseView {
 	NOTICE_SETTING_CONFIRM("notice-setting-confirm"),
 	NOTICE_SETTING_COMPLETE("notice-setting-complete"),
 	/** アカウント作成画面URL */
-	ACCOUNT_CREATE_INPUT("account-create-input"),
-	ACCOUNT_CREATE_CONFIRM("account-create-confirm"),
-	ACCOUNT_CREATE_COMPLETE("account-create-complete");
+	ACCOUNT_REGIST_INPUT("account-regist-input"),
+	ACCOUNT_REGIST_CONFIRM("account-regist-confirm"),
+	ACCOUNT_REGIST_COMPLETE("account-regist-complete");
 
 	/** view名 */
 	private String name;
