@@ -121,7 +121,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registMailInfo(MailInfo mailInfo) throws DuplicateKeyException {
+	public void create(MailInfo mailInfo) throws DuplicateKeyException {
 		// TODO 登録処理を追加すること
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);

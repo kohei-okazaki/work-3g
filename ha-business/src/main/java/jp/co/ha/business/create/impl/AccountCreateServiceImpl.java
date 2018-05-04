@@ -19,7 +19,7 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	 */
 	@Override
 	public void create(Account account) {
-		accountDao.registAccount(account);
+		accountDao.create(account);
 	}
 
 }

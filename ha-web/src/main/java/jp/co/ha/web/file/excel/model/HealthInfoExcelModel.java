@@ -1,7 +1,5 @@
 package jp.co.ha.web.file.excel.model;
 
-import java.math.BigDecimal;
-
 import jp.co.ha.common.file.excel.annotation.ExcelHeader;
 import jp.co.ha.common.file.excel.annotation.ExcelModel;
 import jp.co.ha.common.file.excel.model.BaseExcelModel;
@@ -15,19 +13,19 @@ import jp.co.ha.common.file.excel.model.BaseExcelModel;
 public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/** 身長 */
-	private BigDecimal height;
+	private String height;
 	/** 体重 */
-	private BigDecimal weight;
+	private String weight;
 	/** BMI */
-	private BigDecimal bmi;
+	private String bmi;
 	/** 標準体重 */
-	private BigDecimal standardWeight;
+	private String standardWeight;
 
 	/**
 	 * heightを返す
 	 * @return height
 	 */
-	public BigDecimal getHeight() {
+	public String getHeight() {
 		return height;
 	}
 
@@ -35,7 +33,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * heightを設定する
 	 * @param height
 	 */
-	public void setHeight(BigDecimal height) {
+	public void setHeight(String height) {
 		this.height = height;
 	}
 
@@ -43,7 +41,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * weightを返す
 	 * @return weight
 	 */
-	public BigDecimal getWeight() {
+	public String getWeight() {
 		return weight;
 	}
 
@@ -51,7 +49,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * weightを設定する
 	 * @param weight
 	 */
-	public void setWeight(BigDecimal weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 
@@ -59,7 +57,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * bmiを返す
 	 * @return bmi
 	 */
-	public BigDecimal getBmi() {
+	public String getBmi() {
 		return bmi;
 	}
 
@@ -67,7 +65,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * bmiを設定する
 	 * @param bmi
 	 */
-	public void setBmi(BigDecimal bmi) {
+	public void setBmi(String bmi) {
 		this.bmi = bmi;
 	}
 
@@ -75,7 +73,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * standardWeightを返す
 	 * @return standardWeight
 	 */
-	public BigDecimal getStandardWeight() {
+	public String getStandardWeight() {
 		return standardWeight;
 	}
 
@@ -83,7 +81,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * standardWeightを設定する
 	 * @param standardWeight
 	 */
-	public void setStandardWeight(BigDecimal standardWeight) {
+	public void setStandardWeight(String standardWeight) {
 		this.standardWeight = standardWeight;
 	}
 

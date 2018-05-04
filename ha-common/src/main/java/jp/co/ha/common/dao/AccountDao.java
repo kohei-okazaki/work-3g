@@ -18,14 +18,14 @@ public interface AccountDao extends BaseDao {
 	 * @param userId
 	 * @return Account
 	 */
-	Account getAccountByUserId(String userId);
+	Account findByUserId(String userId);
 
 	/**
-	 * アカウント情報を登録する<br>
+	 * アカウント情報を作成する<br>
 	 * @param account
 	 * @throws DuplicateKeyException
 	 */
-	void registAccount(Account account) throws DuplicateKeyException;
+	void create(Account account) throws DuplicateKeyException;
 
 	/**
 	 * 引数で指定されたアカウント情報を更新する

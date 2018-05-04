@@ -30,7 +30,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account getAccountByUserId(String userId) {
+	public Account findByUserId(String userId) {
 
 		Account account = new Account();
 
@@ -47,15 +47,15 @@ public class AccountDaoImpl implements AccountDao {
 				if (row.getRowNum() == HEADER_POSITION) continue;
 
 				if (userId.equals(row.getCell(0).getStringCellValue())) {
-					account.setUserId(row.getCell(0).getStringCellValue());
-					account.setPassword(row.getCell(1).getStringCellValue());
-					account.setDeleteFlag(row.getCell(2).getStringCellValue());
-					account.setPasswordExpire(DateUtil.formatDate(row.getCell(3).getStringCellValue()));
-					account.setRemarks(row.getCell(4).getStringCellValue());
-					account.setFileEnclosureCharFlag(row.getCell(5).getStringCellValue());
-					account.setHealthInfoMaskFlag(row.getCell(6).getStringCellValue());
-					account.setUpdateDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));
-					account.setRegDate(DateUtil.formatDate(row.getCell(8).getStringCellValue()));
+					account.setUserId(row.getCell(0).getStringCellValue());									// ユーザID
+					account.setPassword(row.getCell(1).getStringCellValue());								// パスワード
+					account.setDeleteFlag(row.getCell(2).getStringCellValue());								// 削除フラグ
+					account.setPasswordExpire(DateUtil.formatDate(row.getCell(3).getStringCellValue()));	// パスワード有効期限
+					account.setRemarks(row.getCell(4).getStringCellValue());								// 備考
+					account.setFileEnclosureCharFlag(row.getCell(5).getStringCellValue());					// ファイル囲い文字利用フラグ
+					account.setHealthInfoMaskFlag(row.getCell(6).getStringCellValue());						// 健康情報マスクフラグ
+					account.setUpdateDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));		// 更新日時
+					account.setRegDate(DateUtil.formatDate(row.getCell(8).getStringCellValue()));			// 登録日時
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -82,7 +82,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registAccount(Account account) throws DuplicateKeyException {
+	public void create(Account account) throws DuplicateKeyException {
 		// TODO 登録処理を追加すること
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);

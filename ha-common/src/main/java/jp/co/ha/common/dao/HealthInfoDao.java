@@ -34,13 +34,6 @@ public interface HealthInfoDao extends BaseDao {
 	 * @param healthInfo
 	 * @throws DuplicateKeyException
 	 */
-	void registHealthInfo(HealthInfo healthInfo) throws DuplicateKeyException;
-
-	/**
-	 * 指定したユーザIDで最後に登録した健康情報を返す<br>
-	 * @param userId
-	 * @return HealthInfo
-	 */
-	HealthInfo getLastHealthInfoByUserId(String userId);
+	void create(HealthInfo healthInfo) throws DuplicateKeyException;
 
 }

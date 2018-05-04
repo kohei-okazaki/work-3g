@@ -12,6 +12,8 @@ public class AccountSettingForm implements BaseForm {
 	private String deleteFlag;
 	/** ファイル囲い文字利用フラグ */
 	private String fileEnclosureCharFlag;
+	/** 健康情報マスク利用フラグ */
+	private String healthInfoMaskFlag;
 	/** 備考 */
 	private String remarks;
 	/** メールアドレス */
@@ -74,6 +76,20 @@ public class AccountSettingForm implements BaseForm {
 	 */
 	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
 		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
+	}
+	/**
+	 * healthInfoMaskFlagを返す<br>
+	 * @return healthInfoMaskFlag
+	 */
+	public String getHealthInfoMaskFlag() {
+		return healthInfoMaskFlag;
+	}
+	/**
+	 * healthInfoMaskFlagを設定する<br>
+	 * @param healthInfoMaskFlag
+	 */
+	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
+		this.healthInfoMaskFlag = healthInfoMaskFlag;
 	}
 	/**
 	 * remarksを返す

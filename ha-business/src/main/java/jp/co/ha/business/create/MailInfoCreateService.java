@@ -13,7 +13,4 @@ public interface MailInfoCreateService {
 	 * @param mailInfo
 	 */
 	void create(MailInfo mailInfo);
-
-
-
 }

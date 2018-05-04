@@ -2,6 +2,7 @@ package jp.co.ha.business.find.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,14 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public HealthInfo findLastByUserId(String userId) {
-		return healthInfoDao.getLastHealthInfoByUserId(userId);
+
+		List<HealthInfo> entityList = this.findByUserId(userId);
+
+		if (Objects.isNull(entityList) || entityList.isEmpty()) {
+			// 登録がされてなかった場合
+			return null;
+		}
+		return entityList.get(entityList.size() - 1);
 	}
 
 	/**

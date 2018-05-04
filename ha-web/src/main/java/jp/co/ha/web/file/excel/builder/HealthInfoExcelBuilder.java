@@ -61,13 +61,13 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder {
 
 		final int ROW_POSITION = 1;
 		Cell cell = ExcelUtil.getCell(sheet, ROW_POSITION, 0);
-		ExcelUtil.setText(cell, model.getHeight().toString());
+		ExcelUtil.setText(cell, model.getHeight());
 		cell = ExcelUtil.getCell(sheet, ROW_POSITION, 1);
-		ExcelUtil.setText(cell, model.getWeight().toString());
+		ExcelUtil.setText(cell, model.getWeight());
 		cell = ExcelUtil.getCell(sheet, ROW_POSITION, 2);
-		ExcelUtil.setText(cell, model.getBmi().toString());
+		ExcelUtil.setText(cell, model.getBmi());
 		cell = ExcelUtil.getCell(sheet, ROW_POSITION, 3);
-		ExcelUtil.setText(cell, model.getStandardWeight().toString());
+		ExcelUtil.setText(cell, model.getStandardWeight());
 
 	}
 

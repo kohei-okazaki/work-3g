@@ -19,7 +19,7 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 	 */
 	@Override
 	public void create(HealthInfo healthInfo) {
-		healthInfoDao.registHealthInfo(healthInfo);
+		healthInfoDao.create(healthInfo);
 	}
 
 }

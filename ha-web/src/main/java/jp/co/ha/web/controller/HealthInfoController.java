@@ -16,6 +16,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
@@ -54,7 +55,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/** 健康情報Excelダウンロードサービス */
 	@Autowired
 	@HealthInfoExcel
-	private ExcelDownloadService<HealthInfoForm> excelDownloadService;
+	private ExcelDownloadService<HealthInfo> excelDownloadService;
 	/** 健康情報CSVダウンロードサービス */
 	@Autowired
 	@HealthInfoCsv
@@ -143,8 +144,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @return
 	 */
 	@GetMapping(value = "/healthInfo-excelDownload.html")
-	public ModelAndView excelDownload(HealthInfoForm form) {
-		return new ModelAndView(this.excelDownloadService.execute(form));
+	public ModelAndView excelDownload(@SessionAttribute String userId) {
+
+		HealthInfo entity = healthInfoSearchService.findLastByUserId(userId);
+
+		ModelAndView model = new ModelAndView(this.excelDownloadService.execute(entity));
+		return model;
 	}
 
 	/**

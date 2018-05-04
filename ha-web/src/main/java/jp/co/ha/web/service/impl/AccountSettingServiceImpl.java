@@ -21,6 +21,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	@Autowired
 	private AccountUpdateService accountUpdateService;
 	/** メール情報更新サービス */
+	@Autowired
 	private MailInfoUpdateService mailInfoUpdateService;
 
 	/**
@@ -53,6 +54,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
 		account.setPassword(form.getPassword());
 		account.setFileEnclosureCharFlag(form.getFileEnclosureCharFlag());
+		account.setHealthInfoMaskFlag(form.getHealthInfoMaskFlag());
 		account.setDeleteFlag(form.getDeleteFlag());
 		account.setRemarks(form.getRemarks());
 	}

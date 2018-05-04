@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -29,23 +28,6 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class HealthInfoDaoImpl implements HealthInfoDao {
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public HealthInfo getLastHealthInfoByUserId(String userId) {
-
-		List<HealthInfo> healthInfoList = findByUserId(userId);
-
-		if (Objects.isNull(healthInfoList) || healthInfoList.isEmpty()) {
-			// 登録がされてなかった場合
-			return null;
-		}
-
-		return healthInfoList.get(healthInfoList.size() - 1);
-
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -174,7 +156,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registHealthInfo(HealthInfo healthInfo) throws DuplicateKeyException {
+	public void create(HealthInfo healthInfo) throws DuplicateKeyException {
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);

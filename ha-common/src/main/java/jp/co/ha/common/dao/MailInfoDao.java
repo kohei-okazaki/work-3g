@@ -30,5 +30,5 @@ public interface MailInfoDao extends BaseDao {
 	 * 引数で指定されたメール情報を登録する<br>
 	 * @param mailInfo
 	 */
-	void registMailInfo(MailInfo mailInfo) throws DuplicateKeyException;
+	void create(MailInfo mailInfo) throws DuplicateKeyException;
 }

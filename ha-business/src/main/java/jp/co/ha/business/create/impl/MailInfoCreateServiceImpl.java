@@ -23,7 +23,7 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 	 */
 	@Override
 	public void create(MailInfo mailInfo) {
-		mailInfoDao.registMailInfo(mailInfo);
+		mailInfoDao.create(mailInfo);
 	}
 
 }
