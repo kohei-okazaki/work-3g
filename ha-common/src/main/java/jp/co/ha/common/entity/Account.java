@@ -44,6 +44,10 @@ public class Account implements Serializable {
 	@Column(name = "FILE_ENCLOSURE_CHAR_FLAG", nullable = true)
 	private String fileEnclosureCharFlag;
 
+	/** 健康情報マスク利用フラグ */
+	@Column(name = "HEALTH_INFO_MASK_FLAG", nullable = true)
+	private String healthInfoMaskFlag;
+
 	/** 更新日時 */
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
@@ -149,6 +153,22 @@ public class Account implements Serializable {
 	}
 
 	/**
+	 * healthInfoMaskFlagを返す<br>
+	 * @return healthInfoMaskFlag
+	 */
+	public String getHealthInfoMaskFlag() {
+		return healthInfoMaskFlag;
+	}
+
+	/**
+	 * healthInfoMaskFlagを設定する<br>
+	 * @param healthInfoMaskFlag
+	 */
+	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
+		this.healthInfoMaskFlag = healthInfoMaskFlag;
+	}
+
+	/**
 	 * updateDateを返す
 	 * @return updateDate
 	 */
@@ -181,4 +201,3 @@ public class Account implements Serializable {
 	}
 
 }
-

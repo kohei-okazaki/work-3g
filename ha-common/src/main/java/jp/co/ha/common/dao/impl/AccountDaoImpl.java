@@ -53,8 +53,9 @@ public class AccountDaoImpl implements AccountDao {
 					account.setPasswordExpire(DateUtil.formatDate(row.getCell(3).getStringCellValue()));
 					account.setRemarks(row.getCell(4).getStringCellValue());
 					account.setFileEnclosureCharFlag(row.getCell(5).getStringCellValue());
-					account.setUpdateDate(DateUtil.formatDate(row.getCell(6).getStringCellValue()));
-					account.setRegDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));
+					account.setHealthInfoMaskFlag(row.getCell(6).getStringCellValue());
+					account.setUpdateDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));
+					account.setRegDate(DateUtil.formatDate(row.getCell(8).getStringCellValue()));
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -97,8 +98,9 @@ public class AccountDaoImpl implements AccountDao {
 			newRow.createCell(3).setCellValue(DateUtil.toString(account.getPasswordExpire(), DateFormatDefine.YYYYMMDD_HHMMSS));
 			newRow.createCell(4).setCellValue(account.getRemarks());
 			newRow.createCell(5).setCellValue(account.getFileEnclosureCharFlag());
-			newRow.createCell(6).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(6).setCellValue(account.getHealthInfoMaskFlag());
 			newRow.createCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(8).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 			fos.flush();
 			workbook.write(fos);
@@ -142,8 +144,9 @@ public class AccountDaoImpl implements AccountDao {
 					row.getCell(3).setCellValue(DateUtil.toString(account.getPasswordExpire(), DateFormatDefine.YYYYMMDD_HHMMSS));
 					row.getCell(4).setCellValue(account.getRemarks());
 					row.getCell(5).setCellValue(account.getFileEnclosureCharFlag());
-					row.getCell(6).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
-					row.getCell(7).setCellValue(DateUtil.toString(account.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(6).setCellValue(account.getHealthInfoMaskFlag());
+					row.getCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(8).setCellValue(DateUtil.toString(account.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 				}
 			}
