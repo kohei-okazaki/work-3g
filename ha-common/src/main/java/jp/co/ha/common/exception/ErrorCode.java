@@ -20,7 +20,9 @@ public enum ErrorCode {
 	/** ファイル処理エラー */
 	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "ERROR", "ファイルの処理に失敗しました"),
 	/** リクエスト情報エラー */
-	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "ERROR", "不正リクエストエラーです");
+	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "ERROR", "不正リクエストエラーです"),
+	/** リクエストID相違エラー */
+	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "ERROR", "リクエストIDが一致しません");
 
 
 	/** エラーコード */

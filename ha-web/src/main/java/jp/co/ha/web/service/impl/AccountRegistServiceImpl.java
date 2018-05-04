@@ -1,7 +1,5 @@
 package jp.co.ha.web.service.impl;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +11,14 @@ import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.AccountCreateForm;
-import jp.co.ha.web.service.AccountCreateService;
+import jp.co.ha.web.service.AccountRegistService;
 
 /**
  * アカウント作成サービス実装クラス
  *
  */
 @Service
-public class AccountCreateServiceImpl implements AccountCreateService {
+public class AccountRegistServiceImpl implements AccountRegistService {
 
 	/** アカウント検索サービス */
 	@Autowired
@@ -38,7 +36,7 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 		account.setDeleteFlag(CodeManager.getInstance().getValue(MainKey.FLAG, SubKey.FALSE));
 		account.setRemarks(form.getRemarks());
 		account.setFileEnclosureCharFlag(CodeManager.getInstance().getValue(MainKey.FLAG, SubKey.FALSE));
-		account.setPasswordExpire(DateUtil.addMonth(new Date(), 6));
+		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 
 		return account;
 	}

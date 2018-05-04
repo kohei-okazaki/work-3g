@@ -1,18 +1,18 @@
-package jp.co.ha.business.find.impl;
+package jp.co.ha.business.update.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.find.MailInfoSearchService;
+import jp.co.ha.business.update.MailInfoUpdateService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
 
 /**
- * メール情報検索サービス実装クラス<br>
+ * メール情報更新サービス実装クラス<br>
  *
  */
 @Service
-public class MailInfoSearchServiceImpl implements MailInfoSearchService {
+public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 
 	/** メール情報Dao */
 	@Autowired
@@ -22,7 +22,8 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MailInfo findByUserId(String userId) {
-		return this.mailInfoDao.findByUserId(userId);
+	public void update(MailInfo mailInfo) {
+		mailInfoDao.updateMailInfo(mailInfo);
 	}
+
 }

@@ -31,7 +31,7 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	 * @param max
 	 */
 	protected void rejectIfLengthMax(Errors errors, String field, int max) {
-		String fieldValue = errors.getFieldValue(field).toString();
+		String fieldValue = getFieldValue(errors, field);
 		if (max < fieldValue.length()) {
 			errors.rejectValue(fieldValue, ErrorCode.LENGTH.getErrorCode());
 		}
@@ -44,7 +44,7 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	 * @param min
 	 */
 	protected void rejectIfLengthMin(Errors errors, String field, int min) {
-		String fieldValue = errors.getFieldValue(field).toString();
+		String fieldValue = getFieldValue(errors, field);
 		if (fieldValue.length() < min) {
 			errors.rejectValue(fieldValue, ErrorCode.LENGTH.getErrorCode());
 		}
@@ -56,9 +56,19 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	 * @param field
 	 */
 	protected void rejectIfNotHalfNumberPeriod(Errors errors, String field) {
-		String fieldValue = errors.getFieldValue(field).toString();
+		String fieldValue = getFieldValue(errors, field);
 		if (!StringUtil.isHalfNumberPeriod(fieldValue)) {
 			errors.rejectValue(field, "errors.halfNumberPeriod");
 		}
+	}
+
+	/**
+	 * 文字列型のerrorにbindされた入力値を返す<br>
+	 * @param errors
+	 * @param field
+	 * @return
+	 */
+	private String getFieldValue(Errors errors, String field) {
+		return errors.getFieldValue(field).toString();
 	}
 }

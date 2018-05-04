@@ -15,6 +15,9 @@
 	<!-- 健康情報検索サービス -->
 	<beans:bean id="healthInfoSearchService" class="jp.co.ha.business.find.impl.HealthInfoSearchServiceImpl" />
 
+	<!-- 健康情報作成サービス -->
+	<beans:bean id="healthInfoCreateService" class="jp.co.ha.business.create.impl.HealthInfoCreateServiceImpl" />
+
 	<!-- 健康情報計算サービス -->
 	<beans:bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl"  />
 

@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.co.ha.business.create.AccountCreateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.AccountCreateException;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountCreateForm;
-import jp.co.ha.web.service.AccountCreateService;
+import jp.co.ha.web.service.AccountRegistService;
 import jp.co.ha.web.validator.AccountCreateValidator;
 import jp.co.ha.web.view.ManageWebView;
 
@@ -25,14 +26,14 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
-public class AccountCreateController implements BaseWizardController<AccountCreateForm, AccountCreateException> {
+public class AccountRegistController implements BaseWizardController<AccountCreateForm, AccountCreateException> {
 
 	/** アカウント作成画面サービス */
 	@Autowired
-	private AccountCreateService service;
+	private AccountRegistService service;
 	/** アカウント作成サービス */
 	@Autowired
-	private jp.co.ha.business.create.AccountCreateService accountCreateService;
+	private AccountCreateService accountCreateService;
 
 	/**
 	 * {@inheritDoc}
@@ -49,7 +50,7 @@ public class AccountCreateController implements BaseWizardController<AccountCrea
 	@Override
 	@GetMapping(value = "account-create-input.html")
 	public String input(Model model, HttpServletRequest request) throws AccountCreateException {
-		return getView(ManageWebView.ACCOUNT_CREATE_INPUT);
+		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 	}
 
 	/**
@@ -62,12 +63,12 @@ public class AccountCreateController implements BaseWizardController<AccountCrea
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合
-			return getView(ManageWebView.ACCOUNT_CREATE_INPUT);
+			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 		}
 
 		model.addAttribute("form", form);
 
-		return getView(ManageWebView.ACCOUNT_CREATE_CONFIRM);
+		return getView(ManageWebView.ACCOUNT_REGIST_CONFIRM);
 	}
 
 	/**
@@ -84,7 +85,7 @@ public class AccountCreateController implements BaseWizardController<AccountCrea
 		// アカウントを作成する
 		accountCreateService.create(account);
 
-		return getView(ManageWebView.ACCOUNT_CREATE_COMPLETE);
+		return getView(ManageWebView.ACCOUNT_REGIST_COMPLETE);
 	}
 
 }

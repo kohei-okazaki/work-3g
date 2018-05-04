@@ -21,6 +21,14 @@ public class DateUtil {
 	}
 
 	/**
+	 * システム日付を返す<br>
+	 * @return
+	 */
+	public static Date getSysDate() {
+		return new Date();
+	}
+
+	/**
 	 * 取得したlocaleの時間から書式を整えた時間を返却
 	 * @param locale
 	 * @return 時刻
@@ -28,7 +36,7 @@ public class DateUtil {
 	public static String getFormattedTime(Locale locale) {
 
 		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		return format.format(new Date()).replaceAll(" JST", StringUtil.EMPTY).trim();
+		return format.format(DateUtil.getSysDate()).replaceAll(" JST", StringUtil.EMPTY).trim();
 
 	}
 

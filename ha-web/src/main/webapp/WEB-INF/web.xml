@@ -62,9 +62,9 @@
 		<url-pattern>/account-setting-confirm.html</url-pattern>
 		<url-pattern>/account-setting-complete.html</url-pattern>
 		<url-pattern>/notice-setting.html</url-pattern>
-		<url-pattern>/account-create-input.html</url-pattern>
-		<url-pattern>/account-create-confirm.html</url-pattern>
-		<url-pattern>/account-create-complete.html</url-pattern>
+		<url-pattern>/account-regist-input.html</url-pattern>
+		<url-pattern>/account-regist-confirm.html</url-pattern>
+		<url-pattern>/account-regist-complete.html</url-pattern>
 		<url-pattern>/notice-setting-input.html</url-pattern>
 		<url-pattern>/notice-setting-confirm.html</url-pattern>
 		<url-pattern>/notice-setting-complete.html</url-pattern>

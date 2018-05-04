@@ -1,4 +1,4 @@
-package jp.co.ha.web.service;
+package jp.co.ha.business.create;
 
 import jp.co.ha.common.entity.MailInfo;
 
@@ -13,7 +13,4 @@ public interface MailInfoCreateService {
 	 * @param mailInfo
 	 */
 	void create(MailInfo mailInfo);
-
-
-
 }

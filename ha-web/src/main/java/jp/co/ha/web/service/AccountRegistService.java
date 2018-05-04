@@ -4,10 +4,10 @@ import jp.co.ha.common.entity.Account;
 import jp.co.ha.web.form.AccountCreateForm;
 
 /**
- * アカウント作成サービスインターフェース
+ * アカウント登録サービスインターフェース
  *
  */
-public interface AccountCreateService {
+public interface AccountRegistService {
 
 	/**
 	 * アカウントEntityに変換する<br>

@@ -1,7 +1,8 @@
 package jp.co.ha.common.api;
 
 /**
- * リクエストタイプ列挙
+ * リクエストタイプ<br>
+ * APIのリクエストの列挙<br>
  *
  */
 public enum RequestType {

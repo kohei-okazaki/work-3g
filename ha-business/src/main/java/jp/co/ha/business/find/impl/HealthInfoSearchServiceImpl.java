@@ -2,6 +2,7 @@ package jp.co.ha.business.find.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public List<HealthInfo> findByUserId(String userId) {
-		return healthInfoDao.getHealthInfoByUserId(userId);
+		return healthInfoDao.findByUserId(userId);
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public HealthInfo findByDataId(String dataId) {
-		return healthInfoDao.getHealthInfoByDataId(dataId);
+		return healthInfoDao.findByDataId(dataId);
 	}
 
 	/**
@@ -45,7 +46,14 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public HealthInfo findLastByUserId(String userId) {
-		return healthInfoDao.getLastHealthInfoByUserId(userId);
+
+		List<HealthInfo> entityList = this.findByUserId(userId);
+
+		if (Objects.isNull(entityList) || entityList.isEmpty()) {
+			// 登録がされてなかった場合
+			return null;
+		}
+		return entityList.get(entityList.size() - 1);
 	}
 
 	/**
@@ -54,7 +62,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	public List<HealthInfo> findByUserIdAndRegDate(String userId, String year, String month, String day) {
 
-		List<HealthInfo> healthInfoList = healthInfoDao.getHealthInfoByUserId(userId);
+		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
 
 		if (StringUtil.isEmpty(year) && StringUtil.isEmpty(month) && StringUtil.isEmpty(day)) {
 			// 検索条件がない場合

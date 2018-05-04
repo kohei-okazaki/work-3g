@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -31,7 +30,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account getAccountByUserId(String userId) {
+	public Account findByUserId(String userId) {
 
 		Account account = new Account();
 
@@ -48,14 +47,15 @@ public class AccountDaoImpl implements AccountDao {
 				if (row.getRowNum() == HEADER_POSITION) continue;
 
 				if (userId.equals(row.getCell(0).getStringCellValue())) {
-					account.setUserId(row.getCell(0).getStringCellValue());
-					account.setPassword(row.getCell(1).getStringCellValue());
-					account.setDeleteFlag(row.getCell(2).getStringCellValue());
-					account.setPasswordExpire(DateUtil.formatDate(row.getCell(3).getStringCellValue()));
-					account.setRemarks(row.getCell(4).getStringCellValue());
-					account.setFileEnclosureCharFlag(row.getCell(5).getStringCellValue());
-					account.setUpdateDate(DateUtil.formatDate(row.getCell(6).getStringCellValue()));
-					account.setRegDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));
+					account.setUserId(row.getCell(0).getStringCellValue());									// ユーザID
+					account.setPassword(row.getCell(1).getStringCellValue());								// パスワード
+					account.setDeleteFlag(row.getCell(2).getStringCellValue());								// 削除フラグ
+					account.setPasswordExpire(DateUtil.formatDate(row.getCell(3).getStringCellValue()));	// パスワード有効期限
+					account.setRemarks(row.getCell(4).getStringCellValue());								// 備考
+					account.setFileEnclosureCharFlag(row.getCell(5).getStringCellValue());					// ファイル囲い文字利用フラグ
+					account.setHealthInfoMaskFlag(row.getCell(6).getStringCellValue());						// 健康情報マスクフラグ
+					account.setUpdateDate(DateUtil.formatDate(row.getCell(7).getStringCellValue()));		// 更新日時
+					account.setRegDate(DateUtil.formatDate(row.getCell(8).getStringCellValue()));			// 登録日時
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -72,7 +72,7 @@ public class AccountDaoImpl implements AccountDao {
 //		dto.setUserId(userId);
 //		dto.setPassword("password");
 //		dto.setInvalidFlag("0");
-//		dto.setPasswordExpire(new Date());
+//		dto.setPasswordExpire(DateUtil.getSysDate());
 //		dto.setRemarks("ここは備考です。");
 //		dto.setFileEnclosureCharFlag("1");
 		return account;
@@ -82,7 +82,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registAccount(Account account) throws DuplicateKeyException {
+	public void create(Account account) throws DuplicateKeyException {
 		// TODO 登録処理を追加すること
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
@@ -98,8 +98,9 @@ public class AccountDaoImpl implements AccountDao {
 			newRow.createCell(3).setCellValue(DateUtil.toString(account.getPasswordExpire(), DateFormatDefine.YYYYMMDD_HHMMSS));
 			newRow.createCell(4).setCellValue(account.getRemarks());
 			newRow.createCell(5).setCellValue(account.getFileEnclosureCharFlag());
-			newRow.createCell(6).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
-			newRow.createCell(7).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(6).setCellValue(account.getHealthInfoMaskFlag());
+			newRow.createCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(8).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 			fos.flush();
 			workbook.write(fos);
@@ -143,8 +144,9 @@ public class AccountDaoImpl implements AccountDao {
 					row.getCell(3).setCellValue(DateUtil.toString(account.getPasswordExpire(), DateFormatDefine.YYYYMMDD_HHMMSS));
 					row.getCell(4).setCellValue(account.getRemarks());
 					row.getCell(5).setCellValue(account.getFileEnclosureCharFlag());
-					row.getCell(6).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
-					row.getCell(7).setCellValue(DateUtil.toString(account.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(6).setCellValue(account.getHealthInfoMaskFlag());
+					row.getCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(8).setCellValue(DateUtil.toString(account.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 				}
 			}

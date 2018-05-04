@@ -19,7 +19,7 @@ public class ErrorResponse extends BaseResponse {
 	 * @param e
 	 */
 	public ErrorResponse(BaseAppException e) {
-		super.setResult(1);
+		super.setResult(ResultType.FAILURE);
 		setErrorCode(e.getErrorCode());
 		setDetail(e.getDetail());
 	}

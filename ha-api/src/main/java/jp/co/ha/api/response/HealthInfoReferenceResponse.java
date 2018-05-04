@@ -10,6 +10,8 @@ import jp.co.ha.common.api.BaseResponse;
  */
 public class HealthInfoReferenceResponse extends BaseResponse {
 
+	/** データID */
+	private String dataId;
 	/** 身長 */
 	private BigDecimal height;
 	/** 体重 */
@@ -20,6 +22,23 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	private BigDecimal standardWeight;
 	/** 登録日時 */
 	private String regDate;
+
+
+	/**
+	 * dataIdを返す<br>
+	 * @return dataId
+	 */
+	public String getDataId() {
+		return dataId;
+	}
+
+	/**
+	 * dataIdを設定する<br>
+	 * @param dataId
+	 */
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
+	}
 
 	/**
 	 * heightを返す<br>

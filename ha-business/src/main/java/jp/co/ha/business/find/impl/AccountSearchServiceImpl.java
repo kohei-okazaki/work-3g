@@ -19,7 +19,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
 	 */
 	@Override
 	public Account findByUserId(String userId) {
-		return this.accountDao.getAccountByUserId(userId);
+		return this.accountDao.findByUserId(userId);
 	}
 
 }

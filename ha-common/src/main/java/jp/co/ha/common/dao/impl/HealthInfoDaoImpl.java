@@ -7,10 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -35,24 +33,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo getLastHealthInfoByUserId(String userId) {
-
-		List<HealthInfo> healthInfoList = getHealthInfoByUserId(userId);
-
-		if (Objects.isNull(healthInfoList) || healthInfoList.isEmpty()) {
-			// 登録がされてなかった場合
-			return null;
-		}
-
-		return healthInfoList.get(healthInfoList.size() - 1);
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<HealthInfo> getHealthInfoByUserId(String userId) {
+	public List<HealthInfo> findByUserId(String userId) {
 
 		List<HealthInfo> healthInfoList = new ArrayList<HealthInfo>();
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
@@ -126,7 +107,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo getHealthInfoByDataId(String dateId) {
+	public HealthInfo findByDataId(String dateId) {
 
 		HealthInfo healthInfo = new HealthInfo();
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
@@ -175,7 +156,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registHealthInfo(HealthInfo healthInfo) throws DuplicateKeyException {
+	public void create(HealthInfo healthInfo) throws DuplicateKeyException {
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);
@@ -191,7 +172,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 			newRow.createCell(4).setCellValue(healthInfo.getBmi().toString());											// BMI
 			newRow.createCell(5).setCellValue(healthInfo.getStandardWeight().toString());									// 標準体重
 			newRow.createCell(6).setCellValue(healthInfo.getUserStatus());												// ユーザステータス
-			newRow.createCell(7).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));			// 登録日時
+			newRow.createCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));			// 登録日時
 
 			fos.flush();
 			workbook.write(fos);

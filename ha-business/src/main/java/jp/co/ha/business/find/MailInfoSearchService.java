@@ -13,6 +13,6 @@ public interface MailInfoSearchService {
 	 * @param userId
 	 * @return メール情報
 	 */
-	MailInfo findMailInfoByUserId(String userId);
+	MailInfo findByUserId(String userId);
 
 }
