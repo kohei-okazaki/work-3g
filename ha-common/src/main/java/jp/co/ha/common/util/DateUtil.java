@@ -41,9 +41,8 @@ public class DateUtil {
 	 * 指定した文字列型の日付をyyyy/MM/dd hh:mm:ssのフォーマットで返す<br>
 	 * @param target
 	 * @return
-	 * @throws ParseException
 	 */
-	public static Date toDate(String target) throws ParseException {
+	public static Date toDate(String target) {
 		return DateUtil.toDate(target, DateFormatDefine.YYYYMMDD_HHMMSS);
 	}
 	/**
@@ -51,7 +50,6 @@ public class DateUtil {
 	 * @param target
 	 * @param dateFormatDefine
 	 * @return
-	 * @throws ParseException
 	 */
 	public static Date toDate(String target, DateFormatDefine dateFormatDefine) {
 

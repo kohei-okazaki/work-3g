@@ -24,6 +24,7 @@ public class StringUtil {
 	public static final String EQUAL = "=";
 	public static final String NEW_LINE = "\r\n";
 	public static final String SPACE = " ";
+	public static final String THRASH = "/";
 
 	/** 半角数字 */
 	public static final String HALF_NUMBER = "^[0-9]*$";

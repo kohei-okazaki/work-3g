@@ -48,17 +48,25 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	public List<HealthInfo> getHealthInfo(ResultSearchForm form, String userId) {
 
 		List<HealthInfo> resultList = null;
-		String strFromRegDate = form.getFromRegYear() + "/" + form.getFromRegMonth() + "/" + form.getFromRegDay();
-		Date regDate = DateUtil.toDate(strFromRegDate, DateFormatDefine.YYYYMMDD);
+		Date regDate = getStrDate(form.getFromRegYear(), form.getFromRegMonth(), form.getFromRegDay());
 		if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 			// 登録日直接指定フラグがONの場合
 			resultList = healthInfoSearchService.findByUserIdAndRegDate(userId, regDate);
 		} else {
-			String strToRegDate = form.getToRegYear() + "/" + form.getToRegMonth() + "/" + form.getToRegDay();
-			Date toRegDate = DateUtil.toDate(strToRegDate, DateFormatDefine.YYYYMMDD);
+			Date toRegDate = getStrDate(form.getToRegYear(), form.getToRegMonth(), form.getToRegDay());
 			resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 		}
 		return resultList;
+	}
+
+	/**
+	 * 指定した文字列型のyyyy, MM, ddをDate型(yyyy/MM/dd)で返す<br>
+	 * @param date
+	 * @return
+	 */
+	private Date getStrDate(String year, String month, String day) {
+		String strDate = year + StringUtil.THRASH + month + StringUtil.THRASH + day;
+		return DateUtil.toDate(strDate, DateFormatDefine.YYYYMMDD);
 	}
 
 }
