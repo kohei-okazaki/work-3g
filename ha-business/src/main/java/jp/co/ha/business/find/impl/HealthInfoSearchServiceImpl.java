@@ -15,7 +15,7 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * 健康情報検索サービス実装クラス<br>
+ * 健康情報検索サービスインターフェース実装クラス<br>
  *
  */
 @Service

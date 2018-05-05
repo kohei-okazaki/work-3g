@@ -8,7 +8,7 @@ import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
 
 /**
- * メール情報検索サービス実装クラス<br>
+ * メール情報検索サービスインターフェース実装クラス<br>
  *
  */
 @Service

@@ -7,6 +7,10 @@ import jp.co.ha.business.create.AccountCreateService;
 import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.entity.Account;
 
+/**
+ * アカウント情報作成サービスインターフェース実装クラス<br>
+ *
+ */
 @Service
 public class AccountCreateServiceImpl implements AccountCreateService {
 

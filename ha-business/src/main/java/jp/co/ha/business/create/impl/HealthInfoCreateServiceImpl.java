@@ -7,6 +7,10 @@ import jp.co.ha.business.create.HealthInfoCreateService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
 
+/**
+ * 健康情報作成サービスインターフェース実装クラス<br>
+ *
+ */
 @Service
 public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 
