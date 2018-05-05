@@ -1,16 +1,12 @@
 package jp.co.ha.business.create;
 
+import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.entity.Account;
 
 /**
- * アカウント作成サービス<br>
+ * アカウント作成サービスインターフェース<br>
  *
  */
-public interface AccountCreateService {
+public interface AccountCreateService extends BaseCreateService<Account, AccountDao> {
 
-	/**
-	 * アカウントを作成する<br>
-	 * @param account
-	 */
-	void create(Account account);
 }
