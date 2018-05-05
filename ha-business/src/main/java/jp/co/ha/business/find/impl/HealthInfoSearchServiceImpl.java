@@ -1,6 +1,7 @@
 package jp.co.ha.business.find.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,9 +11,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.StringUtil;
 
 /**
  * 健康情報検索サービスインターフェース実装クラス<br>
@@ -60,23 +59,46 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findByUserIdAndRegDate(String userId, String year, String month, String day) {
+	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
 
-		if (StringUtil.isEmpty(year) && StringUtil.isEmpty(month) && StringUtil.isEmpty(day)) {
+		if (Objects.isNull(regDate)) {
 			// 検索条件がない場合
 			return healthInfoList;
 		}
 		List<HealthInfo> resultList = new ArrayList<HealthInfo>();
 
 		healthInfoList.stream().forEach(healthInfo -> {
-			String strRegDate = DateUtil.toString(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD);
-			String strRegYear = strRegDate.substring(0, 4);
-			String strRegMonth = strRegDate.substring(5, 7);
-			String strRegDay = strRegDate.substring(8, 10);
+			Date entityDate = healthInfo.getRegDate();
+			entityDate = DateUtil.toStartDate(entityDate);
+			if (regDate.compareTo(entityDate) == 0) {
+				// 同じ日付の場合
+				resultList.add(healthInfo);
+			}
+		});
 
-			if (strRegYear.equals(year) && strRegMonth.equals(month) && strRegDay.equals(day)) {
+		return resultList;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) {
+
+		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
+
+		if (Objects.isNull(fromRegDate) || Objects.isNull(toRegDate)) {
+			// 検索条件がない場合
+			return healthInfoList;
+		}
+		List<HealthInfo> resultList = new ArrayList<HealthInfo>();
+
+		healthInfoList.stream().forEach(healthInfo -> {
+			Date entityRegDate = healthInfo.getRegDate();
+			if (fromRegDate.after(entityRegDate) || toRegDate.before(entityRegDate)) {
+				// fromRegDate < entityRegDate < toRegDateの範囲内である健康情報の場合、追加
 				resultList.add(healthInfo);
 			}
 		});

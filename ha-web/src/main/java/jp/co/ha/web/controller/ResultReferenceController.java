@@ -26,6 +26,7 @@ import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.ResultSearchForm;
+import jp.co.ha.web.service.ResultReferenceService;
 import jp.co.ha.web.service.annotation.ReferenceCsv;
 import jp.co.ha.web.service.annotation.ReferenceExcel;
 import jp.co.ha.web.view.ManageWebView;
@@ -36,6 +37,10 @@ import jp.co.ha.web.view.ManageWebView;
  */
 @Controller
 public class ResultReferenceController implements BaseWebController {
+
+	/** 結果照会画面サービス */
+	@Autowired
+	private ResultReferenceService service;
 
 	/** 健康情報検索サービス */
 	@Autowired
@@ -60,17 +65,18 @@ public class ResultReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * 結果照会画面
+	 * 検索結果画面を表示<br>
 	 * @param model
 	 * @param userId
 	 * @param form
 	 * @return
 	 */
 	@PostMapping(value = "/result-reference.html")
-	public String resultReferenceDetail(Model model, @SessionAttribute String userId, ResultSearchForm form) {
+	public String showSearchResult(Model model, @SessionAttribute String userId, ResultSearchForm form) {
 
-		clean(form);
-		List<HealthInfo> entityList = healthInfoSearchService.findByUserIdAndRegDate(userId, form.getFromRegYear(), form.getFromRegMonth(), form.getFromRegDay());
+		service.setUpForm(form);
+
+		List<HealthInfo> entityList = service.getHealthInfo(form, userId);
 		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
 		for (HealthInfo entity : entityList) {
 			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
@@ -89,20 +95,6 @@ public class ResultReferenceController implements BaseWebController {
 		model.addAttribute("resultList", resultList);
 
 		return getView(ManageWebView.RESULT_REFFERNCE);
-	}
-
-	/**
-	 * フォーム情報を整理
-	 * @param form
-	 */
-	private void clean(ResultSearchForm form) {
-		// 登録日from
-		form.setFromRegMonth(form.getFromRegMonth().length() == 1 ? "0" + form.getFromRegMonth() : form.getFromRegMonth());
-		form.setFromRegDay(form.getFromRegDay().length() == 1 ? "0" + form.getFromRegDay() : form.getFromRegDay());
-
-		// 登録日to
-		form.setToRegMonth(form.getToRegMonth().length() == 1 ? "0" + form.getToRegMonth() : form.getToRegMonth());
-		form.setToRegDay(form.getToRegDay().length() == 1 ? "0" + form.getToRegDay() : form.getToRegDay());
 	}
 
 	/**
