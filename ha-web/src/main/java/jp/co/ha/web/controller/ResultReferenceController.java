@@ -70,7 +70,7 @@ public class ResultReferenceController implements BaseWebController {
 	public String resultReferenceDetail(Model model, @SessionAttribute String userId, ResultSearchForm form) {
 
 		clean(form);
-		List<HealthInfo> entityList = healthInfoSearchService.findByUserIdAndRegDate(userId, form.getRegYear(), form.getRegMonth(), form.getRegDay());
+		List<HealthInfo> entityList = healthInfoSearchService.findByUserIdAndRegDate(userId, form.getFromRegYear(), form.getFromRegMonth(), form.getFromRegDay());
 		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
 		for (HealthInfo entity : entityList) {
 			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
@@ -96,8 +96,13 @@ public class ResultReferenceController implements BaseWebController {
 	 * @param form
 	 */
 	private void clean(ResultSearchForm form) {
-		form.setRegMonth(form.getRegMonth().length() == 1 ? "0" + form.getRegMonth() : form.getRegMonth());
-		form.setRegDay(form.getRegDay().length() == 1 ? "0" + form.getRegDay() : form.getRegDay());
+		// 登録日from
+		form.setFromRegMonth(form.getFromRegMonth().length() == 1 ? "0" + form.getFromRegMonth() : form.getFromRegMonth());
+		form.setFromRegDay(form.getFromRegDay().length() == 1 ? "0" + form.getFromRegDay() : form.getFromRegDay());
+
+		// 登録日to
+		form.setToRegMonth(form.getToRegMonth().length() == 1 ? "0" + form.getToRegMonth() : form.getToRegMonth());
+		form.setToRegDay(form.getToRegDay().length() == 1 ? "0" + form.getToRegDay() : form.getToRegDay());
 	}
 
 	/**
