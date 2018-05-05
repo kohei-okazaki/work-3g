@@ -8,55 +8,118 @@ import jp.co.ha.common.web.BaseForm;
  */
 public class ResultSearchForm implements BaseForm {
 
-	/** 登録年 */
-	private String regYear;
-	/** 登録月 */
-	private String regMonth;
-	/** 登録日 */
-	private String regDay;
+	/** 登録日直接指定フラグ */
+	private String regDateSelectFlag;
+	/** 登録年(from) */
+	private String fromRegYear;
+	/** 登録月(from) */
+	private String fromRegMonth;
+	/** 登録日(from) */
+	private String fromRegDay;
+	/** 登録年(to) */
+	private String toRegYear;
+	/** 登録月(to) */
+	private String toRegMonth;
+	/** 登録日(to) */
+	private String toRegDay;
 
-
 	/**
-	 * regYearを返す<br>
-	 * @return regYear
+	 * regDateSelectFlagを返す<br>
+	 * @return regDateSelectFlag
 	 */
-	public String getRegYear() {
-		return regYear;
+	public String getRegDateSelectFlag() {
+		return regDateSelectFlag;
 	}
 	/**
-	 * regYearを設定する<br>
-	 * @param regYear
+	 * regDateSelectFlagを設定する<br>
+	 * @param regDateSelectFlag
 	 */
-	public void setRegYear(String regYear) {
-		this.regYear = regYear;
+	public void setRegDateSelectFlag(String regDateSelectFlag) {
+		this.regDateSelectFlag = regDateSelectFlag;
 	}
 	/**
-	 * regMonthを返す<br>
-	 * @return regMonth
+	 * fromRegYearを返す<br>
+	 * @return fromRegYear
 	 */
-	public String getRegMonth() {
-		return regMonth;
+	public String getFromRegYear() {
+		return fromRegYear;
 	}
 	/**
-	 * regMonthを設定する<br>
-	 * @param regMonth
+	 * fromRegYearを設定する<br>
+	 * @param fromRegYear
 	 */
-	public void setRegMonth(String regMonth) {
-		this.regMonth = regMonth;
+	public void setFromRegYear(String fromRegYear) {
+		this.fromRegYear = fromRegYear;
 	}
 	/**
-	 * regDayを返す<br>
-	 * @return regDay
+	 * fromRegMonthを返す<br>
+	 * @return fromRegMonth
 	 */
-	public String getRegDay() {
-		return regDay;
+	public String getFromRegMonth() {
+		return fromRegMonth;
 	}
 	/**
-	 * regDayを設定する<br>
-	 * @param regDay
+	 * fromRegMonthを設定する<br>
+	 * @param fromRegMonth
 	 */
-	public void setRegDay(String regDay) {
-		this.regDay = regDay;
+	public void setFromRegMonth(String fromRegMonth) {
+		this.fromRegMonth = fromRegMonth;
+	}
+	/**
+	 * fromRegDayを返す<br>
+	 * @return fromRegDay
+	 */
+	public String getFromRegDay() {
+		return fromRegDay;
+	}
+	/**
+	 * fromRegDayを設定する<br>
+	 * @param fromRegDay
+	 */
+	public void setFromRegDay(String fromRegDay) {
+		this.fromRegDay = fromRegDay;
+	}
+	/**
+	 * toRegYearを返す<br>
+	 * @return toRegYear
+	 */
+	public String getToRegYear() {
+		return toRegYear;
+	}
+	/**
+	 * toRegYearを設定する<br>
+	 * @param toRegYear
+	 */
+	public void setToRegYear(String toRegYear) {
+		this.toRegYear = toRegYear;
+	}
+	/**
+	 * toRegMonthを返す<br>
+	 * @return toRegMonth
+	 */
+	public String getToRegMonth() {
+		return toRegMonth;
+	}
+	/**
+	 * toRegMonthを設定する<br>
+	 * @param toRegMonth
+	 */
+	public void setToRegMonth(String toRegMonth) {
+		this.toRegMonth = toRegMonth;
+	}
+	/**
+	 * toRegDayを返す<br>
+	 * @return toRegDay
+	 */
+	public String getToRegDay() {
+		return toRegDay;
+	}
+	/**
+	 * toRegDayを設定する<br>
+	 * @param toRegDay
+	 */
+	public void setToRegDay(String toRegDay) {
+		this.toRegDay = toRegDay;
 	}
 
 }

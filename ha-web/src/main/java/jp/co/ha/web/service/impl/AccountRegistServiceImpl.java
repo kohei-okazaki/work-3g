@@ -10,7 +10,7 @@ import jp.co.ha.common.manager.MainKey;
 import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.web.form.AccountCreateForm;
+import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
 
 /**
@@ -28,7 +28,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account toAccount(AccountCreateForm form) {
+	public Account toAccount(AccountRegistForm form) {
 
 		Account account = new Account();
 		account.setUserId(form.getUserId());
@@ -45,7 +45,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean invalidUserId(AccountCreateForm form) {
+	public boolean invalidUserId(AccountRegistForm form) {
 
 		// 指定したアカウント情報を検索
 		Account account = accountSearchService.findByUserId(form.getUserId());

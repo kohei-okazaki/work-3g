@@ -14,9 +14,6 @@ import java.util.Objects;
  */
 public class DateUtil {
 
-	public static final String YYYY_MM_DD_HH_MI_SS = "yyyy/MM/dd hh:mm:ss";
-	public static final String YYYY_MM_DD = "yyyy/MM/dd";
-
 	private DateUtil() {
 	}
 
@@ -41,20 +38,31 @@ public class DateUtil {
 	}
 
 	/**
-	 * 文字列型の日付をDate型の日付に変換する<br>
+	 * 指定した文字列型の日付をyyyy/MM/dd hh:mm:ssのフォーマットで返す<br>
 	 * @param target
 	 * @return
-	 * @throws ParseException
 	 */
-	public static Date formatDate(String target) {
-		SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MI_SS);
-		Date resultDate = null;
+	public static Date toDate(String target) {
+		return DateUtil.toDate(target, DateFormatDefine.YYYYMMDD_HHMMSS);
+	}
+	/**
+	 * 指定した文字列型の日付を指定したフォーマットのDate型で返す<br>
+	 * @param target
+	 * @param dateFormatDefine
+	 * @return
+	 */
+	public static Date toDate(String target, DateFormatDefine dateFormatDefine) {
+
+		// フォーマットを設定
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormatDefine.getValue());
+		Date result = null;
 		try {
-			resultDate = sdf.parse(target);
-		} catch(ParseException e) {
-			System.out.println("変換に失敗しました");
+			// Date型に変換
+			result = sdf.parse(target);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		return resultDate;
+		return result;
 
 	}
 
@@ -96,5 +104,17 @@ public class DateUtil {
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format.getValue());
 		return dateFormat.format(targetDate);
+	}
+
+	/**
+	 * 指定した日付の時分秒を00:00:00に設定する<br>
+	 * @param targetDate
+	 * @return
+	 */
+	public static Date toStartDate(Date targetDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(targetDate);
+		calendar.set(0, 0, 0);
+		return calendar.getTime();
 	}
 }

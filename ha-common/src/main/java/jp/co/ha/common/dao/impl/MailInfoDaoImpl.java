@@ -50,8 +50,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 					mailInfo.setUserId(row.getCell(0).getStringCellValue());
 					mailInfo.setMailAddress(row.getCell(1).getStringCellValue());
 					mailInfo.setMailPassword(row.getCell(2).getStringCellValue());
-					mailInfo.setUpdateDate(DateUtil.formatDate(row.getCell(3).getStringCellValue()));
-					mailInfo.setRegDate(DateUtil.formatDate(row.getCell(4).getStringCellValue()));
+					mailInfo.setUpdateDate(DateUtil.toDate(row.getCell(3).getStringCellValue()));
+					mailInfo.setRegDate(DateUtil.toDate(row.getCell(4).getStringCellValue()));
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -64,11 +64,6 @@ public class MailInfoDaoImpl implements MailInfoDao {
 			e.printStackTrace();
 		}
 
-//		MailInfo mailInfo = new MailInfo();
-//		mailInfo.setUserId(userId);
-//		mailInfo.setMailAddress("test-001@test.jp");
-//		mailInfo.setMailPassword("password");
-//		mailInfo.setRegDate(DateUtil.getSysDate());
 		return mailInfo;
 	}
 

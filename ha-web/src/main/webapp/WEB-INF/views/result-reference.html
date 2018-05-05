@@ -31,10 +31,33 @@
 		<div align="center">
 			<table>
 				<tr>
-					<td><p>登録日</p></td>
-					<td><input type="text" name="regYear" placeholder="Year" />年</td>
-					<td><input type="text" name="regMonth" placeholder="Month" />月</td>
-					<td><input type="text" name="regDay" placeholder="Day" />日</td>
+					<td></td>
+					<th><p>登録日</p></th>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<div class="radio" align="center">
+							<input type="radio" name="regDateSelectFlag" id="regDateSelectFlagFalse" value="0" checked="checked">
+							<label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
+							<input type="radio" name="regDateSelectFlag" id="regDateSelectFlagTrue" value="1">
+							<label for="regDateSelectFlagTrue">直接指定する</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="text" name="fromRegYear" placeholder="Year" />年</td>
+					<td><input type="text" name="fromRegMonth" placeholder="Month" />月</td>
+					<td><input type="text" name="fromRegDay" placeholder="Day" />日</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><p>~</p></td>
+				</tr>
+				<tr>
+					<td><input type="text" name="toRegYear" placeholder="Year" />年</td>
+					<td><input type="text" name="toRegMonth" placeholder="Month" />月</td>
+					<td><input type="text" name="toRegDay" placeholder="Day" />日</td>
 				</tr>
 			</table>
 			<br>

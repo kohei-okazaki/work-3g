@@ -16,9 +16,9 @@ import jp.co.ha.business.create.AccountCreateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.AccountCreateException;
 import jp.co.ha.common.web.BaseWizardController;
-import jp.co.ha.web.form.AccountCreateForm;
+import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
-import jp.co.ha.web.validator.AccountCreateValidator;
+import jp.co.ha.web.validator.AccountRegistValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -26,7 +26,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
-public class AccountRegistController implements BaseWizardController<AccountCreateForm, AccountCreateException> {
+public class AccountRegistController implements BaseWizardController<AccountRegistForm, AccountCreateException> {
 
 	/** アカウント作成画面サービス */
 	@Autowired
@@ -39,16 +39,16 @@ public class AccountRegistController implements BaseWizardController<AccountCrea
 	 * {@inheritDoc}
 	 */
 	@Override
-	@InitBinder("AccountCreateForm")
+	@InitBinder("AccountRegistForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new AccountCreateValidator());
+		binder.setValidator(new AccountRegistValidator());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "account-create-input.html")
+	@GetMapping(value = "account-regist-input.html")
 	public String input(Model model, HttpServletRequest request) throws AccountCreateException {
 		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 	}
@@ -57,8 +57,8 @@ public class AccountRegistController implements BaseWizardController<AccountCrea
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/account-create-confirm.html")
-	public String confirm(Model model, @Valid AccountCreateForm form, BindingResult result)
+	@PostMapping(value = "/account-regist-confirm.html")
+	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result)
 			throws AccountCreateException {
 
 		if (result.hasErrors()) {
@@ -75,8 +75,8 @@ public class AccountRegistController implements BaseWizardController<AccountCrea
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/account-create-complete.html")
-	public String complete(Model model, AccountCreateForm form, HttpServletRequest request)
+	@PostMapping(value = "/account-regist-complete.html")
+	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
 			throws AccountCreateException {
 
 		// アカウントEntityに変換する

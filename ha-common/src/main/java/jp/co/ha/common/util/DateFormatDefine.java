@@ -3,7 +3,7 @@ package jp.co.ha.common.util;
 public enum DateFormatDefine {
 
 	YYYYMMDD("yyyy/MM/dd"),
-	YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss");
+	YYYYMMDD_HHMMSS("yyyy/MM/dd hh:mm:ss");
 
 	private String value;
 

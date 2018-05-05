@@ -6,7 +6,7 @@ import jp.co.ha.common.web.BaseForm;
  * アカウント作成画面フォームクラス<br>
  *
  */
-public class AccountCreateForm implements BaseForm {
+public class AccountRegistForm implements BaseForm {
 
 	/** ユーザID */
 	private String userId;
