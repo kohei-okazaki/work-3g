@@ -13,7 +13,7 @@
 
 	<properties>
 		<java-version>9</java-version>
-		<org.springframework-version>5.0.5.RELEASE</org.springframework-version>
+		<org.springframework-version>5.0.6.RELEASE</org.springframework-version>
 		<org.springsecurity-version>5.0.4.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.9.1</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
