@@ -55,9 +55,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		CsvConfig conf = getCsvConfig(fileName, account);
 
 		// CSVに書き込む
-		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf);
-
-		writer.setModelList(modelList);
+		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf, modelList);
 		writer.execute(response);
 
 	}

@@ -22,13 +22,13 @@ import jp.co.ha.web.validator.AccountRegistValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_アカウント作成コントローラ<br>
+ * 健康管理_アカウント登録画面コントローラ<br>
  *
  */
 @Controller
 public class AccountRegistController implements BaseWizardController<AccountRegistForm, AccountCreateException> {
 
-	/** アカウント作成画面サービス */
+	/** アカウント登録画面サービス */
 	@Autowired
 	private AccountRegistService service;
 	/** アカウント作成サービス */

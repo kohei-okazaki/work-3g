@@ -1,5 +1,6 @@
 package jp.co.ha.web.file.csv.writer;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 import jp.co.ha.business.parameter.ParamConst;
@@ -18,17 +19,12 @@ import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 
 	/**
-	 * デフォルトコンストラクタ<br>
-	 */
-	public ReferenceCsvWriter() {
-	}
-
-	/**
 	 * コンストラクタ<br>
-	 * @param csvConfig
+	 * @param conf
+	 * @param modelList
 	 */
-	public ReferenceCsvWriter(CsvConfig csvConfig) {
-		super(csvConfig);
+	public ReferenceCsvWriter(CsvConfig conf, List<ReferenceCsvModel> modelList) {
+		super(conf, modelList);
 	}
 
 	/**

@@ -1,0 +1,44 @@
+package jp.co.ha.common.system.impl;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Service;
+
+import jp.co.ha.common.system.SessionManageService;
+
+/**
+ * session管理サービス実装クラス<br>
+ *
+ */
+@Service
+public class SessionManageServiceImpl implements SessionManageService {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object getValue(HttpServletRequest request, String key) {
+		HttpSession session = request.getSession();
+		return session.getAttribute(key);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeValue(HttpServletRequest request, String key) {
+		HttpSession session = request.getSession();
+		session.removeAttribute(key);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setValue(HttpServletRequest request, String key, Object value) {
+		HttpSession session = request.getSession();
+		session.setAttribute(key, value);
+	}
+
+}

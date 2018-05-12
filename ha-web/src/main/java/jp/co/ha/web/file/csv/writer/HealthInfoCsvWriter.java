@@ -1,5 +1,6 @@
 package jp.co.ha.web.file.csv.writer;
 
+import java.util.List;
 import java.util.StringJoiner;
 
 import jp.co.ha.business.parameter.ParamConst;
@@ -18,17 +19,12 @@ import jp.co.ha.web.file.csv.model.HealthInfoCsvModel;
 public class HealthInfoCsvWriter extends BaseCsvWriter<HealthInfoCsvModel> {
 
 	/**
-	 * デフォルトコンストラクタ<br>
-	 */
-	public HealthInfoCsvWriter() {
-	}
-
-	/**
 	 * コンストラクタ<br>
-	 * @param enclosureChar
+	 * @param conf
+	 * @param modelList
 	 */
-	public HealthInfoCsvWriter(CsvConfig csvConfig) {
-		super(csvConfig);
+	public HealthInfoCsvWriter(CsvConfig conf, List<HealthInfoCsvModel> modelList) {
+		super(conf, modelList);
 	}
 
 	/**

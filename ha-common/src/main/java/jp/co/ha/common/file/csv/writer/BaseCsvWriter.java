@@ -29,31 +29,11 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 	/**
 	 * コンストラクタ<br>
-	 */
-	public BaseCsvWriter() {
-	}
-
-	/**
-	 * コンストラクタ<br>
 	 * @param csvConfig
-	 */
-	public BaseCsvWriter(CsvConfig csvConfig) {
-		this.csvConfig = csvConfig;
-	}
-
-	/**
-	 * modelListを返す
-	 * @return modelList
-	 */
-	public List<M> getModelList() {
-		return modelList;
-	}
-
-	/**
-	 * modelListを設定する
 	 * @param modelList
 	 */
-	public void setModelList(List<M> modelList) {
+	public BaseCsvWriter(CsvConfig csvConfig, List<M> modelList) {
+		this.csvConfig = csvConfig;
 		this.modelList = modelList;
 	}
 
@@ -104,7 +84,8 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 * @param data 書き込みたいデータ
 	 */
 	protected void write(StringJoiner joiner, String data) {
-		joiner.add(csvConfig.getEnclosureChar() + data + csvConfig.getEnclosureChar());
+		String enclosureChar = csvConfig.getEnclosureChar();
+		joiner.add(enclosureChar + data + enclosureChar);
 	}
 
 	/**

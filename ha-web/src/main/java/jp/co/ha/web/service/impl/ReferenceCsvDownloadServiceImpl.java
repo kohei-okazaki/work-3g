@@ -55,8 +55,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 		CsvConfig conf = getCsvConfig(fileName, account);
 
 		// CSVに書き込む
-		BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf);
-		writer.setModelList(modelList);
+		BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf, modelList);
 		writer.execute(response);
 	}
 

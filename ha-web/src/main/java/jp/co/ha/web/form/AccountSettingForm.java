@@ -2,6 +2,10 @@ package jp.co.ha.web.form;
 
 import jp.co.ha.common.web.BaseForm;
 
+/**
+ * アカウント設定画面フォームクラス<br>
+ *
+ */
 public class AccountSettingForm implements BaseForm {
 
 	/** ユーザID */

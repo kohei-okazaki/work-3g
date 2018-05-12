@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 
 import jp.co.ha.common.web.BaseForm;
 
+/**
+ * 健康情報入力画面フォームクラス<br>
+ *
+ */
 public class HealthInfoForm implements BaseForm {
 
 	/** ユーザID */
