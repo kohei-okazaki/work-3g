@@ -14,13 +14,11 @@ import jp.co.ha.business.create.HealthInfoCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -103,7 +101,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());
 		String userStatus = Objects.nonNull(lastHealthInfo)
 						? healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
-						: CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN);
+						: ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue();
 		Date regDate = DateUtil.getSysDate();
 
 

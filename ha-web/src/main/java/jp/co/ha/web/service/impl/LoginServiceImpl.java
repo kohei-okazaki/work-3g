@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
 
@@ -63,7 +61,7 @@ public class LoginServiceImpl implements LoginService {
 	public boolean invalidAccount(LoginForm loginForm) {
 
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
-		return CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, account.getDeleteFlag());
+		return StringUtil.isTrue(account.getDeleteFlag());
 	}
 
 }

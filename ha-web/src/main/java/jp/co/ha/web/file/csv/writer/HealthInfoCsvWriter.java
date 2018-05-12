@@ -2,10 +2,9 @@ package jp.co.ha.web.file.csv.writer;
 
 import java.util.StringJoiner;
 
+import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.util.CsvUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
@@ -28,8 +27,8 @@ public class HealthInfoCsvWriter extends BaseCsvWriter<HealthInfoCsvModel> {
 	 * コンストラクタ<br>
 	 * @param enclosureChar
 	 */
-	public HealthInfoCsvWriter(String enclosureChar) {
-		super(enclosureChar);
+	public HealthInfoCsvWriter(CsvConfig csvConfig) {
+		super(csvConfig);
 	}
 
 	/**
@@ -75,6 +74,6 @@ public class HealthInfoCsvWriter extends BaseCsvWriter<HealthInfoCsvModel> {
 	 */
 	@Override
 	protected String getFileName() {
-		return CodeManager.getInstance().getValue(MainKey.CSV_FILE_NAME, SubKey.HEALTH_INFO);
+		return ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue();
 	}
 }

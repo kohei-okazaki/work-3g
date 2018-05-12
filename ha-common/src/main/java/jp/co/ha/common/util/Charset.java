@@ -1,7 +1,7 @@
-package jp.co.ha.common.other;
+package jp.co.ha.common.util;
 
 /**
- * キャラセットEnum<br>
+ * charset列挙<br>
  *
  */
 public enum Charset {

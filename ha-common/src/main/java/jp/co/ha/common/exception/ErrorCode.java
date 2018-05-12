@@ -2,7 +2,7 @@ package jp.co.ha.common.exception;
 
 /**
  * エラーコードの定義<br>
- * API, MVCでのエラーコードをそれぞれ定義する<br>
+ * API, WEBでのエラーコードをそれぞれ定義する<br>
  */
 public enum ErrorCode {
 

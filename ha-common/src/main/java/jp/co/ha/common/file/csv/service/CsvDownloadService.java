@@ -3,6 +3,11 @@ package jp.co.ha.common.file.csv.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.file.csv.CsvConfig;
+import jp.co.ha.common.util.CsvUtil;
+import jp.co.ha.common.util.StringUtil;
+
 /**
  * CSVダウンロードサービスインターフェース<br>
  *
@@ -15,5 +20,23 @@ public interface CsvDownloadService {
 	 * @param response
 	 */
 	void execute(HttpServletRequest request, HttpServletResponse response);
+
+	/**
+	 * CSV設定情報を取得する<br>
+	 * @param account
+	 * @return
+	 */
+	default CsvConfig getCsvConfig(String fileName, Account account) {
+
+		// 囲い文字利用有無
+		boolean enclosureFlag = StringUtil.isTrue(account.getFileEnclosureCharFlag());
+
+		CsvConfig csvConfig = new CsvConfig();
+		csvConfig.setFileName(fileName);
+		csvConfig.setEnclosureChar(CsvUtil.DOBBLE_QUOTE);
+		csvConfig.setHasEnclosure(enclosureFlag);
+
+		return csvConfig;
+	}
 
 }

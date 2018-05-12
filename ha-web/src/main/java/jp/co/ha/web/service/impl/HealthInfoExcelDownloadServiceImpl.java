@@ -41,7 +41,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	}
 
 	/**
-	 * 健康情報フォームをモデルに変換する<br>
+	 * 健康情報Entityをモデルに変換する<br>
 	 * @param form
 	 * @param account
 	 * @return model
@@ -50,18 +50,11 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 
 		HealthInfoExcelModel model = new HealthInfoExcelModel();
 
-		if (healthInfoFunctionService.useHealthInfoMask(account)) {
-			// 健康情報マスク表示を利用する場合
-			model.setHeight("****");
-			model.setWeight("****");
-			model.setBmi("****");
-			model.setStandardWeight("****");
-		} else {
-			model.setHeight(healthInfo.getHeight().toString());
-			model.setWeight(healthInfo.getWeight().toString());
-			model.setBmi(healthInfo.getBmi().toString());
-			model.setStandardWeight(healthInfo.getStandardWeight().toString());
-		}
+		boolean useMask = healthInfoFunctionService.useHealthInfoMask(account);
+		model.setHeight(useMask ? "****" : healthInfo.getHeight().toString());
+		model.setWeight(useMask ? "****" : healthInfo.getWeight().toString());
+		model.setBmi(useMask ? "****" : healthInfo.getBmi().toString());
+		model.setStandardWeight(useMask ? "****" : healthInfo.getStandardWeight().toString());
 
 		return model;
 

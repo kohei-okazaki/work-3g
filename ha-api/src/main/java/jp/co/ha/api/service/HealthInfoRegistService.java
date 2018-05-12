@@ -21,7 +21,7 @@ public interface HealthInfoRegistService
 	HealthInfo toEntity(HealthInfoRegistRequest request);
 
 	/**
-	 * 健康情報Entityを健康情報レスポンスクラスに変換する<br>
+	 * 健康情報Entityを健康情報登録レスポンスクラスに変換する<br>
 	 * @param healthInfo
 	 * @return
 	 */

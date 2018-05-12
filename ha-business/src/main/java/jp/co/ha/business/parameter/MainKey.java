@@ -1,4 +1,4 @@
-package jp.co.ha.common.manager;
+package jp.co.ha.business.parameter;
 
 /**
  * CodeManagerで使うメインキーenum<br>
@@ -7,6 +7,7 @@ package jp.co.ha.common.manager;
 public enum MainKey {
 
 	HEALTH_INFO_USER_STATUS,
+	HEALTH_INFO_USER_STATUS_MESSAGE,
 	PAGE_VIEW,
 	CSV_FILE_NAME,
 	FLAG;

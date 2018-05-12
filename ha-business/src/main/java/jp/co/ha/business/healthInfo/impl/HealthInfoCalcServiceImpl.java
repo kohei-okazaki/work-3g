@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
+import jp.co.ha.business.parameter.MainKey;
+import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.business.parameter.SubKey;
 
 /**
  * 計算サービス実装クラス<br>
@@ -33,8 +33,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 		} else {
 			subkey = SubKey.DOWN;
 		}
-
-		return CodeManager.getInstance().getValue(MainKey.HEALTH_INFO_USER_STATUS, subkey);
+		return ParamConst.of(MainKey.HEALTH_INFO_USER_STATUS, subkey).getValue();
 	}
 
 	/**

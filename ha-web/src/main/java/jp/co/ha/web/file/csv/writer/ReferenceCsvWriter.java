@@ -2,10 +2,9 @@ package jp.co.ha.web.file.csv.writer;
 
 import java.util.StringJoiner;
 
+import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.util.CsvUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
@@ -26,10 +25,10 @@ public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 
 	/**
 	 * コンストラクタ<br>
-	 * @param enclosureChar
+	 * @param csvConfig
 	 */
-	public ReferenceCsvWriter(String enclosureChar) {
-		super(enclosureChar);
+	public ReferenceCsvWriter(CsvConfig csvConfig) {
+		super(csvConfig);
 	}
 
 	/**
@@ -75,7 +74,7 @@ public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 	 */
 	@Override
 	protected String getFileName() {
-		return CodeManager.getInstance().getValue(MainKey.CSV_FILE_NAME, SubKey.REFERNCE_RESULT);
+		return ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue();
 	}
 
 }

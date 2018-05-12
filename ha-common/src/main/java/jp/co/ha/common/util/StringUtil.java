@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.StringTokenizer;
-import java.util.regex.Pattern;
-
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
 
 /**
  * 文字列のUtilクラス<br>
@@ -25,6 +20,8 @@ public class StringUtil {
 	public static final String NEW_LINE = "\r\n";
 	public static final String SPACE = " ";
 	public static final String THRASH = "/";
+	public static final String TRUE_FLAG = "1";
+	public static final String FALSE_FLAG = "0";
 
 	/** 半角数字 */
 	public static final String HALF_NUMBER = "^[0-9]*$";
@@ -35,35 +32,6 @@ public class StringUtil {
 	public static final String HALF_CHAR = "^[0-9a-zA-Z]*$";
 
 	private StringUtil() {
-	}
-
-	/**
-	 * 半角数字かピリオドかどうか判定する<br>
-	 * @param target
-	 * @return
-	 */
-	public static boolean isHalfNumberPeriod(String target) {
-		return Pattern.compile(HALF_NUMBER_PERIOD).matcher(target).find();
-	}
-
-	/**
-	 * 指定された文字列が半角数字かどうか判定する<br>
-	 * 半角数字の場合true, それ以外の場合falseを返す
-	 * @param target
-	 * @return
-	 */
-	public static boolean isHalfNumber(String target) {
-		return Pattern.compile(HALF_NUMBER).matcher(target).find();
-	}
-
-	/**
-	 * 指定された文字列が半角英数字かどうか判定する<br>
-	 * 半角英数時の場合true, そうでない場合falseを返す<br>
-	 * @param target
-	 * @return
-	 */
-	public static boolean isHalfChar(String target) {
-		return Pattern.compile(HALF_CHAR).matcher(target).find();
 	}
 
 	/**
@@ -103,7 +71,8 @@ public class StringUtil {
 	 * @return
 	 */
 	public static boolean isTrue(String flag) {
-		return CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, flag);
+		return TRUE_FLAG.equals(flag);
+//		return CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, flag);
 	}
 
 	/**

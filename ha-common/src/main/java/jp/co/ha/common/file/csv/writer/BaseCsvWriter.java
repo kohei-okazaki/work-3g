@@ -11,8 +11,9 @@ import org.springframework.util.MimeTypeUtils;
 
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
-import jp.co.ha.common.other.Charset;
+import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -21,8 +22,8 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
-	/** 囲い文字(デフォルトでは空文字(未指定)) */
-	protected String enclosureChar = StringUtil.EMPTY;
+	/** CSV設定情報 */
+	protected CsvConfig csvConfig;
 	/** モデルリスト */
 	protected List<M> modelList;
 
@@ -34,10 +35,10 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 	/**
 	 * コンストラクタ<br>
-	 * @param enclosureChar
+	 * @param csvConfig
 	 */
-	public BaseCsvWriter(String enclosureChar) {
-		this.enclosureChar = enclosureChar;
+	public BaseCsvWriter(CsvConfig csvConfig) {
+		this.csvConfig = csvConfig;
 	}
 
 	/**
@@ -103,7 +104,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 * @param data 書き込みたいデータ
 	 */
 	protected void write(StringJoiner joiner, String data) {
-		joiner.add(enclosureChar + data + enclosureChar);
+		joiner.add(csvConfig.getEnclosureChar() + data + csvConfig.getEnclosureChar());
 	}
 
 	/**

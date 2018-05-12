@@ -1,17 +1,17 @@
-package jp.co.ha.common.other;
+package jp.co.ha.common.util;
 
 /**
- * OS定義enum
+ * OS定義列挙<br>
  *
  */
-public enum OsDefine {
+public enum SystemInfo {
 
 	MAC("/"),
 	WIN("\\");
 
 	private String value;
 
-	private OsDefine(String value) {
+	private SystemInfo(String value) {
 		this.value = value;
 	}
 
