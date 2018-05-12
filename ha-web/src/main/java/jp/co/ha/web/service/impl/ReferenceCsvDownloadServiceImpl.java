@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
-import jp.co.ha.common.util.CsvUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 
@@ -49,12 +49,13 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 		// CSV出力モデルリストに変換する
 		List<ReferenceCsvModel> modelList = toModelList(healthInfoList);
 
-		// ファイル囲い文字利用フラグを取得
+		// CSV設定情報取得
 		Account account = accountSearchService.findByUserId(userId);
-		boolean enclosureFlag = StringUtil.isTrue(account.getFileEnclosureCharFlag());
+		String fileName = ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue();
+		CsvConfig conf = getCsvConfig(fileName, account);
 
 		// CSVに書き込む
-		BaseCsvWriter<ReferenceCsvModel> writer = enclosureFlag ? new ReferenceCsvWriter(CsvUtil.DOBBLE_QUOTE) : new ReferenceCsvWriter();
+		BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf);
 		writer.setModelList(modelList);
 		writer.execute(response);
 	}

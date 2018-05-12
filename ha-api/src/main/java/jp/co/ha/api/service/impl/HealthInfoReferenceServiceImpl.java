@@ -67,11 +67,21 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		// 指定されたデータIDから健康情報を取得
 		HealthInfo entity = healthInfoSearchService.findByDataId(request.getDataId());
 
-		// 健康情報レスポンスクラス
-		HealthInfoReferenceResponse apiResponse = new HealthInfoReferenceResponse();
-		BeanUtils.copyProperties(entity, apiResponse);
-		apiResponse.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+		// レスポンスに変換する
+		HealthInfoReferenceResponse apiResponse = toResponse(entity);
 
+		return apiResponse;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthInfoReferenceResponse toResponse(HealthInfo healthInfo) {
+		// 健康情報照会レスポンスクラス
+		HealthInfoReferenceResponse apiResponse = new HealthInfoReferenceResponse();
+		BeanUtils.copyProperties(healthInfo, apiResponse);
+		apiResponse.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 		return apiResponse;
 	}
 

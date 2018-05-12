@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
-import jp.co.ha.common.util.CsvUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvModel;
 import jp.co.ha.web.file.csv.writer.HealthInfoCsvWriter;
 
@@ -44,18 +44,18 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 
 		// 最後に登録した健康情報を検索
 		String userId = (String) request.getSession().getAttribute("userId");
-		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findByUserId(userId);
-		HealthInfo healthInfo = healthInfoList.get(healthInfoList.size() - 1);
+		HealthInfo healthInfo = this.healthInfoSearchService.findLastByUserId(userId);
 
 		// CSV出力モデルリストに変換する
 		List<HealthInfoCsvModel> modelList = toModelList(healthInfo);
 
-		// ファイル囲い文字利用フラグを取得
+		// CSV設定情報取得
 		Account account = accountSearchService.findByUserId(userId);
-		boolean enclosureFlag = StringUtil.isTrue(account.getFileEnclosureCharFlag());
+		String fileName = ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue();
+		CsvConfig conf = getCsvConfig(fileName, account);
 
 		// CSVに書き込む
-		BaseCsvWriter<HealthInfoCsvModel> writer = enclosureFlag ? new HealthInfoCsvWriter(CsvUtil.DOBBLE_QUOTE) : new HealthInfoCsvWriter();
+		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf);
 
 		writer.setModelList(modelList);
 		writer.execute(response);

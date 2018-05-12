@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.common.util.RegixPattern;
 import jp.co.ha.common.web.BaseValidator;
 import jp.co.ha.web.form.LoginForm;
 
@@ -44,9 +44,11 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	 */
 	private void checkType(LoginForm form, Errors errors) {
 
-		if (!StringUtil.isHalfChar(form.getUserId()) || !StringUtil.isHalfChar(form.getPassword())) {
+		if (!RegixPattern.isPattern(form.getUserId(), RegixPattern.HALF_CHAR)
+				|| !RegixPattern.isPattern(form.getPassword(), RegixPattern.HALF_CHAR)) {
 			// 半角英数字でない場合
 			errors.rejectValue("userId", ErrorCode.TYPE.toString());
+			errors.rejectValue("password", ErrorCode.TYPE.toString());
 		}
 	}
 

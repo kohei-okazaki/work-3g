@@ -1,7 +1,7 @@
 package jp.co.ha.business.parameter;
 
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 定数定義列挙<br>
@@ -15,9 +15,9 @@ public enum ParamConst {
 	HEALTH_INFO_USER_STATUS_INCREASE(MainKey.HEALTH_INFO_USER_STATUS, SubKey.INCREASE, "30"),
 
 	/** 健康情報ステータスメッセージ */
-	HEALTH_INFO_USER_STATUS_DOWN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS, SubKey.DOWN_MESSAGE, "減りました"),
-	HEALTH_INFO_USER_STATUS_EVEN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN_MESSAGE, "変化ありません"),
-	HEALTH_INFO_USER_STATUS_INCREASE_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS, SubKey.INCREASE_MESSAGE, "増えました"),
+	HEALTH_INFO_USER_STATUS_DOWN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.DOWN, "減りました"),
+	HEALTH_INFO_USER_STATUS_EVEN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.EVEN, "変化ありません"),
+	HEALTH_INFO_USER_STATUS_INCREASE_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.INCREASE, "増えました"),
 
 	/** ページタイプ */
 	PAGE_VIEW_INPUT(MainKey.PAGE_VIEW, SubKey.INPUT, "0"),
@@ -67,6 +67,21 @@ public enum ParamConst {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * メインキーと一致するParamConstのリストを返す<br>
+	 * @param mainKey
+	 * @return
+	 */
+	public static List<ParamConst> ofList(MainKey mainKey) {
+		List<ParamConst> resultList = new ArrayList<>();
+		for (ParamConst paramConst : ParamConst.class.getEnumConstants()) {
+			if (paramConst.mainKey.equals(mainKey)) {
+				resultList.add(paramConst);
+			}
+		}
+		return resultList;
 	}
 
 	/**

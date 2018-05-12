@@ -59,19 +59,11 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 
 			// 結果照会Excel出力モデル
 			ReferenceExcelModel model = new ReferenceExcelModel();
-			if (useHealthInfoMask) {
-				// 健康情報マスク表示を利用する場合
-				model.setHeight("****");
-				model.setWeight("****");
-				model.setBmi("****");
-				model.setStandardWeight("****");
-			} else {
-				HealthInfo healthInfo = historyList.get(i);
-				model.setHeight(healthInfo.getHeight().toString());
-				model.setWeight(healthInfo.getWeight().toString());
-				model.setBmi(healthInfo.getBmi().toString());
-				model.setStandardWeight(healthInfo.getStandardWeight().toString());
-			}
+			HealthInfo healthInfo = historyList.get(i);
+			model.setHeight(useHealthInfoMask ? "****" : healthInfo.getHeight().toString());
+			model.setWeight(useHealthInfoMask ? "****" : healthInfo.getWeight().toString());
+			model.setBmi(useHealthInfoMask ? "****" : healthInfo.getBmi().toString());
+			model.setStandardWeight(useHealthInfoMask ? "****" : healthInfo.getStandardWeight().toString());
 
 			modelList.add(model);
 		});

@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.AccountRegistForm;
@@ -33,9 +31,9 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		Account account = new Account();
 		account.setUserId(form.getUserId());
 		account.setPassword(form.getPassword());
-		account.setDeleteFlag(CodeManager.getInstance().getValue(MainKey.FLAG, SubKey.FALSE));
+		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setRemarks(form.getRemarks());
-		account.setFileEnclosureCharFlag(CodeManager.getInstance().getValue(MainKey.FLAG, SubKey.FALSE));
+		account.setFileEnclosureCharFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 
 		return account;

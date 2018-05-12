@@ -1,4 +1,4 @@
-package jp.co.ha.common.manager;
+package jp.co.ha.business.parameter;
 
 /**
  * CodeManagerで使うサブキーenum<br>
@@ -10,10 +10,6 @@ public enum SubKey {
 	DOWN,
 	EVEN,
 	INCREASE,
-
-	DOWN_MESSAGE,
-	EVEN_MESSAGE,
-	INCREASE_MESSAGE,
 
 	INPUT,
 	CONFIRM,

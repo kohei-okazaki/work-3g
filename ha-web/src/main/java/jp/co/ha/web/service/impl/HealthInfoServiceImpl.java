@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.parameter.MainKey;
+import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.business.parameter.SubKey;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.manager.CodeManager;
-import jp.co.ha.common.manager.MainKey;
-import jp.co.ha.common.manager.SubKey;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 
@@ -35,19 +35,18 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	@Override
 	public String getDiffMessage(HealthInfoForm form, HealthInfo lastHealthInfo) {
 
-		CodeManager manager = CodeManager.getInstance();
 		SubKey subkey;
 		if (form.getWeight().compareTo(lastHealthInfo.getWeight()) == 0) {
 			// 変化なしの場合
-			subkey = SubKey.EVEN_MESSAGE;
+			subkey = SubKey.EVEN;
 		} else if (form.getWeight().compareTo(lastHealthInfo.getWeight()) == 1) {
 			// 増加した場合
-			subkey = SubKey.INCREASE_MESSAGE;
+			subkey = SubKey.INCREASE;
 		} else {
 			// 減少した場合
-			subkey = SubKey.DOWN_MESSAGE;
+			subkey = SubKey.DOWN;
 		}
-		return manager.getValue(MainKey.HEALTH_INFO_USER_STATUS, subkey);
+		return ParamConst.of(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, subkey).getValue();
 
 	}
 

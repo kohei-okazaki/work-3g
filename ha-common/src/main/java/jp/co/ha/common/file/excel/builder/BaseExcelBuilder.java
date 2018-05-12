@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import jp.co.ha.common.file.excel.annotation.ExcelSheet;
-import jp.co.ha.common.other.Charset;
+import jp.co.ha.common.util.Charset;
 
 /**
  * Excel出力の基底クラス<br>

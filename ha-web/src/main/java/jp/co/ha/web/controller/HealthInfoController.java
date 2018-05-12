@@ -148,7 +148,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		HealthInfo entity = healthInfoSearchService.findLastByUserId(userId);
 
-		ModelAndView model = new ModelAndView(this.excelDownloadService.execute(entity));
+		ModelAndView model = new ModelAndView(excelDownloadService.execute(entity));
 		return model;
 	}
 
