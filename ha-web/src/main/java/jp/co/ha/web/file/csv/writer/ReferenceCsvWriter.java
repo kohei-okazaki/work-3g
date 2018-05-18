@@ -20,8 +20,8 @@ public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 
 	/**
 	 * コンストラクタ<br>
-	 * @param conf
-	 * @param modelList
+	 * @param conf CSV設定情報
+	 * @param modelList CSVモデルリスト
 	 */
 	public ReferenceCsvWriter(CsvConfig conf, List<ReferenceCsvModel> modelList) {
 		super(conf, modelList);
