@@ -2,9 +2,9 @@ swagger: '2.0'
 info:
   description: 健康情報APIのドキュメントです。<br>健康情報を登録する機能を提供します。
   version: '1.0'
-  title: 健康情報API
+  title: 健康情報登録API
 host: 'localhost:8080'
-basePath: /isol-api/healthInfo/
+basePath: /ha-api/healthInfoRegist
 tags:
   - name: regist
     description: 健康情報の登録を実施
@@ -37,7 +37,11 @@ paths:
           description: '体重'
           required: true
           type: 'number'
-
+        - name: 'requestId'
+          in: 'path'
+          description: 'リクエストID'
+          required: true
+          type: 'string'
 
       responses:
         '200':
@@ -78,6 +82,11 @@ paths:
           description: '体重'
           required: true
           type: 'number'
+        - name: 'requestId'
+          in: 'path'
+          description: 'リクエストID'
+          required: true
+          type: 'string'
 
       responses:
         '200':
@@ -97,7 +106,7 @@ paths:
 securityDefinitions:
   petstore_auth:
     type: oauth2
-    authorizationUrl: 'localhost:8080//isol-manage/login.html'
+    authorizationUrl: 'localhost:8080//ha-web/login.html'
     flow: implicit
 
 
@@ -106,7 +115,7 @@ definitions:
     type: object
     properties:
       result:
-        type: number
+        type: string
       dataId:
         type: string
       userId:
