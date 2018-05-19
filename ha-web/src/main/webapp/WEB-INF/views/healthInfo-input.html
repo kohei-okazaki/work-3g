@@ -37,11 +37,13 @@
 	<!-- 入力画面 -->
 	<div align="center">
 	<br><br><br>
-	<form action="/ha-web/healthInfo-confirm.html" method="post">
-		<input type="text" name="height" size="6" required placeholder="身長" >　cm
+	<form action="./healthInfo-confirm.html" method="post" th:object="${healthInfoForm}">
+		<div th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+		<div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+		<input type="text" size="6" th:field="*{height}" required placeholder="身長" >　cm
 		<p class="attention">※半角数字で入力してください</p>
 		<br><br>
-		<input type="text" name="weight" size="6" required placeholder="体重" >　kg
+		<input type="text" size="6" th:field="*{weight}" required placeholder="体重" >　kg
 		<p class="attention">※半角数字で入力してください</p>
 		<br>
 		<br>

@@ -29,10 +29,10 @@
 			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
 			</div>
 			<div class="iconUser icon"></div>
-			<input type="text" name="userId" th:field="*{userId}" placeholder="ユーザID" required />
+			<input type="text" th:field="*{userId}" maxlength="16" placeholder="ユーザID" required />
 			<br><br>
 			<div class="iconPassword icon"></div>
-			<input type="password" name="password" th:field="*{password}" placeholder="パスワード" required>
+			<input type="password" th:field="*{password}" maxlength="16" placeholder="パスワード" required />
 			<input type="submit" value="ログイン">
 			<input type="button" value="アカウント作成" onclick="accountCreate();">
 		</form>

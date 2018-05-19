@@ -1,5 +1,6 @@
 package jp.co.ha.web.form;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -35,6 +36,7 @@ public class AccountSettingForm implements BaseForm {
 	@Size(max = 256)
 	private String remarks;
 	/** メールアドレス */
+	@Email(message = "メールアドレス形式ではありません")
 	private String mailAddress;
 	/** メールパスワード */
 	private String mailPassword;
