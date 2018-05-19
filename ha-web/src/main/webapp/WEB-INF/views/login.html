@@ -23,12 +23,16 @@
 
 	<fieldset>
 		<h1>健康管理アプリ</h1>
-		<form action="/ha-web/menu.html" method="post">
+		<form action="./menu.html" method="post" th:object="${loginForm}">
+			<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">
+			</div>
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+			</div>
 			<div class="iconUser icon"></div>
-			<input type="text" name="userId" placeholder="ユーザID" required>
+			<input type="text" name="userId" th:field="*{userId}" placeholder="ユーザID" required />
 			<br><br>
 			<div class="iconPassword icon"></div>
-			<input type="password" name="password" placeholder="パスワード" required>
+			<input type="password" name="password" th:field="*{password}" placeholder="パスワード" required>
 			<input type="submit" value="ログイン">
 			<input type="button" value="アカウント作成" onclick="accountCreate();">
 		</form>
