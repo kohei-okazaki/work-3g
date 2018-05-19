@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,6 +54,15 @@ public class ResultReferenceController implements BaseWebController {
 	@Autowired
 	@ReferenceCsv
 	private CsvDownloadService csvDownloadService;
+
+	/**
+	 * Formを返す<br>
+	 * @return
+	 */
+	@ModelAttribute
+	public ResultSearchForm setUpForm() {
+		return new ResultSearchForm();
+	}
 
 	/**
 	 * 検索照会画面<br>

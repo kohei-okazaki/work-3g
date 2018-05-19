@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.create.MailInfoCreateService;
@@ -59,6 +60,15 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@InitBinder(value = "AccountSettingForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new AccountSettingValidator());
+	}
+
+	/**
+	 * Formを返す<br>
+	 * @return
+	 */
+	@ModelAttribute
+	public AccountSettingForm setUpForm() {
+		return new AccountSettingForm();
 	}
 
 	/**

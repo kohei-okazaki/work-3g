@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.create.AccountCreateService;
@@ -42,6 +43,15 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@InitBinder("AccountRegistForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new AccountRegistValidator());
+	}
+
+	/**
+	 * Formを返す<br>
+	 * @return
+	 */
+	@ModelAttribute
+	public AccountRegistForm setUpForm() {
+		return new AccountRegistForm();
 	}
 
 	/**

@@ -15,6 +15,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
@@ -68,6 +69,15 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@InitBinder("HealthInfoForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new HealthInfoValidator());
+	}
+
+	/**
+	 * Formを返す<br>
+	 * @return
+	 */
+	@ModelAttribute
+	public HealthInfoForm setUpForm() {
+		return new HealthInfoForm();
 	}
 
 	/**
