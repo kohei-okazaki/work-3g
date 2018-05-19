@@ -2,6 +2,9 @@ package jp.co.ha.web.form;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -13,8 +16,12 @@ public class HealthInfoForm implements BaseForm {
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
+	@Min(1)
+	@Max(999)
 	private BigDecimal height;
 	/** 体重 */
+	@Min(1)
+	@Max(999)
 	private BigDecimal weight;
 	/** BMI */
 	private BigDecimal bmi;

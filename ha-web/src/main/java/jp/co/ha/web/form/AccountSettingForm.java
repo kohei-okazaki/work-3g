@@ -1,5 +1,8 @@
 package jp.co.ha.web.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -9,16 +12,27 @@ import jp.co.ha.common.web.BaseForm;
 public class AccountSettingForm implements BaseForm {
 
 	/** ユーザID */
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	private String userId;
 	/** パスワード */
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	private String password;
 	/** 削除フラグ */
+	@NotEmpty
+	@Size(min = 1, max = 1)
 	private String deleteFlag;
 	/** ファイル囲い文字利用フラグ */
+	@NotEmpty
+	@Size(min = 1, max = 1)
 	private String fileEnclosureCharFlag;
 	/** 健康情報マスク利用フラグ */
+	@NotEmpty
+	@Size(min = 1, max = 1)
 	private String healthInfoMaskFlag;
 	/** 備考 */
+	@Size(max = 256)
 	private String remarks;
 	/** メールアドレス */
 	private String mailAddress;

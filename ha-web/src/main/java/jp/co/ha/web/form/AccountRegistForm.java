@@ -1,5 +1,8 @@
 package jp.co.ha.web.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -9,12 +12,19 @@ import jp.co.ha.common.web.BaseForm;
 public class AccountRegistForm implements BaseForm {
 
 	/** ユーザID */
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	private String userId;
 	/** パスワード */
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	private String password;
 	/** 確認用パスワード */
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	private String confirmPassword;
 	/** 備考 */
+	@Size(max = 256)
 	private String remarks;
 
 	/**

@@ -1,5 +1,8 @@
 package jp.co.ha.web.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -9,18 +12,32 @@ import jp.co.ha.common.web.BaseForm;
 public class ResultSearchForm implements BaseForm {
 
 	/** 登録日直接指定フラグ */
+	@NotEmpty
+	@Size(min = 1, max = 1)
 	private String regDateSelectFlag;
 	/** 登録年(from) */
+	@NotEmpty
+	@Size(min = 4, max = 4)
 	private String fromRegYear;
 	/** 登録月(from) */
+	@NotEmpty
+	@Size(min = 2, max = 2)
 	private String fromRegMonth;
 	/** 登録日(from) */
+	@NotEmpty
+	@Size(min = 2, max = 2)
 	private String fromRegDay;
 	/** 登録年(to) */
+	@NotEmpty
+	@Size(min = 4, max = 4)
 	private String toRegYear;
 	/** 登録月(to) */
+	@NotEmpty
+	@Size(min = 2, max = 2)
 	private String toRegMonth;
 	/** 登録日(to) */
+	@NotEmpty
+	@Size(min = 2, max = 2)
 	private String toRegDay;
 
 	/**
