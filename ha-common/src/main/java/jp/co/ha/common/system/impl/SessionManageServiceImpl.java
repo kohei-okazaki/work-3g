@@ -1,5 +1,7 @@
 package jp.co.ha.common.system.impl;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,6 +41,17 @@ public class SessionManageServiceImpl implements SessionManageService {
 	public void setValue(HttpServletRequest request, String key, Object value) {
 		HttpSession session = request.getSession();
 		session.setAttribute(key, value);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void removeValues(HttpServletRequest request) {
+		Enumeration<String> enm= request.getSession().getAttributeNames();
+		while(enm.hasMoreElements()) {
+			this.removeValue(request, enm.nextElement());
+		}
 	}
 
 }

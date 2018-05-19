@@ -32,4 +32,10 @@ public interface SessionManageService {
 	 */
 	void setValue(HttpServletRequest request, String key, Object value);
 
+	/**
+	 * セッションに格納されてる情報すべてを削除<br>
+	 * @param request
+	 */
+	void removeValues(HttpServletRequest request);
+
 }

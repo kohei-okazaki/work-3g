@@ -1,5 +1,7 @@
 package jp.co.ha.web.controller;
 
+import java.util.Objects;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
@@ -28,6 +31,9 @@ public class LoginController implements BaseWebController {
 	/** ログインサービス */
 	@Autowired
 	private LoginService loginService;
+	/** sessionサービス */
+	@Autowired
+	private SessionManageService sessionService;
 
 	/**
 	 * Validateを設定<br>
@@ -46,6 +52,8 @@ public class LoginController implements BaseWebController {
 	 */
 	@GetMapping("/login.html")
 	public String login(Model model, HttpServletRequest request) {
+		// sessionに格納している情報をすべて削除する
+		sessionService.removeValues(request);
 		return getView(ManageWebView.LOGIN);
 	}
 
@@ -91,8 +99,15 @@ public class LoginController implements BaseWebController {
 
 	}
 
+	/**
+	 * メニュー画面に遷移<br>
+	 * @param request
+	 * @return
+	 */
 	@GetMapping("/menu.html")
-	public String menu() {
-		return getView(ManageWebView.LOGIN);
+	public String menu(HttpServletRequest request) {
+
+		String userId = (String) sessionService.getValue(request, "userId");
+		return getView(Objects.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
 	}
 }
