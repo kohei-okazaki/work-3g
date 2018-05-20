@@ -23,12 +23,7 @@ public abstract class BaseExcelBuilder extends AbstractXlsxView {
 	protected final int HEADER_POSITION = 0;
 
 	/**
-	 * エクセルに情報を書き込む<br>
-	 * @param model
-	 * @param workbook
-	 * @param request
-	 * @param response
-	 * @throws Exception
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model

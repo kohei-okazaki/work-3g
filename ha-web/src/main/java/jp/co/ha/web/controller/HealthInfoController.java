@@ -31,7 +31,6 @@ import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 import jp.co.ha.web.service.annotation.HealthInfoCsv;
 import jp.co.ha.web.service.annotation.HealthInfoExcel;
-import jp.co.ha.web.validator.HealthInfoValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -65,7 +64,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Override
 	@InitBinder("HealthInfoForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new HealthInfoValidator());
+//		binder.setValidator(new HealthInfoValidator());
 	}
 
 	/**

@@ -18,7 +18,7 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * CSV書き込み基底クラス<br>
- * @param <M>CSV出力モデルリスト
+ * @param <M> CSV出力モデルリスト
  */
 public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 

@@ -7,18 +7,21 @@ package jp.co.ha.common.api;
  */
 public enum ResultType {
 
-	SUCCESS("success"),
-	FAILURE("failure");
+	SUCCESS("success", "成功"),
+	FAILURE("failure", "失敗");
 
 	/** コード値 */
 	private String code;
+	/** メッセージ*/
+	private String message;
 
 	/**
 	 * コンストラクタ<br>
 	 * @param code
 	 */
-	private ResultType(String code) {
-		setCode(code);
+	private ResultType(String code, String message) {
+		this.code = code;
+		this.message = message;
 	}
 
 	/**
@@ -30,11 +33,11 @@ public enum ResultType {
 	}
 
 	/**
-	 * codeを設定する<br>
-	 * @param code
+	 * messageを返す<br>
+	 * @return message
 	 */
-	public void setCode(String code) {
-		this.code = code;
+	public String getMessage() {
+		return message;
 	}
 
 }
