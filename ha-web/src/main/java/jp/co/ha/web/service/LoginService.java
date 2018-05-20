@@ -1,7 +1,5 @@
 package jp.co.ha.web.service;
 
-import javax.servlet.http.HttpSession;
-
 import jp.co.ha.web.form.LoginForm;
 
 /**
@@ -16,15 +14,6 @@ public interface LoginService {
 	 * @return 判定結果
 	 */
 	boolean invalidPassword(LoginForm loginForm);
-
-
-	/**
-	 * セッションにユーザIDを登録する
-	 * @param session
-	 * @param loginForm
-	 */
-	void registSession(HttpSession session, String userId);
-
 
 	/**
 	 * アカウント情報が存在するかチェック<br>

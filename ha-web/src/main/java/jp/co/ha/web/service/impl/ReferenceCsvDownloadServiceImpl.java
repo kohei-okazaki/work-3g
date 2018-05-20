@@ -19,6 +19,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 
@@ -35,6 +36,9 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** セッション管理サービス */
+	@Autowired
+	private SessionManageService sessionService;
 
 	/**
 	 * {@inheritDoc}
@@ -43,7 +47,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		// 結果照会する健康情報を取得する
-		String userId = (String) request.getSession().getAttribute("userId");
+		String userId = sessionService.getValue(request, "userId", String.class);
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
 
 		// CSV出力モデルリストに変換する

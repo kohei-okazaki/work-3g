@@ -102,7 +102,7 @@ public class LoginController implements BaseWebController {
 		}
 
 		// セッションにユーザIDを登録する。
-		this.loginService.registSession(request.getSession(), loginForm.getUserId());
+		sessionService.setValue(request, "userId", loginForm.getUserId());
 
 		return getView(ManageWebView.MENU);
 
@@ -116,7 +116,7 @@ public class LoginController implements BaseWebController {
 	@GetMapping("/menu.html")
 	public String menu(HttpServletRequest request) {
 
-		String userId = (String) sessionService.getValue(request, "userId");
+		String userId = sessionService.getValue(request, "userId", String.class);
 		return getView(Objects.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
 	}
 }

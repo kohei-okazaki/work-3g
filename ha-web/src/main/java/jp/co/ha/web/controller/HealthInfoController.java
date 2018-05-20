@@ -26,6 +26,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
@@ -57,6 +58,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Autowired
 	@HealthInfoCsv
 	private CsvDownloadService csvDownloadService;
+	/** セッション管理サービス */
+	@Autowired
+	private SessionManageService sessionService;
 
 	/**
 	 * {@inheritDoc}
@@ -114,7 +118,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// フォーム情報をリクエストクラスにコピー
 		BeanUtils.copyProperties(form, apiRequest);
 		// セッションからユーザIDを取得
-		String userId = (String) request.getSession().getAttribute("userId");
+		String userId = sessionService.getValue(request, "userId", String.class);
 		apiRequest.setUserId(userId);
 		// リクエストタイプ設定
 		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
