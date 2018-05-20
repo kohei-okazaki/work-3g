@@ -18,6 +18,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvModel;
 import jp.co.ha.web.file.csv.writer.HealthInfoCsvWriter;
 
@@ -34,6 +35,9 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** sessionサービス */
+	@Autowired
+	private SessionManageService sessionService;
 
 	/**
 	 * {@inheritDoc}
@@ -43,7 +47,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		// 最後に登録した健康情報を検索
-		String userId = (String) request.getSession().getAttribute("userId");
+		String userId = (String) sessionService.getValue(request, "userId");
 		HealthInfo healthInfo = this.healthInfoSearchService.findLastByUserId(userId);
 
 		// CSV出力モデルリストに変換する
@@ -55,9 +59,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		CsvConfig conf = getCsvConfig(fileName, account);
 
 		// CSVに書き込む
-		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf);
-
-		writer.setModelList(modelList);
+		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf, modelList);
 		writer.execute(response);
 
 	}

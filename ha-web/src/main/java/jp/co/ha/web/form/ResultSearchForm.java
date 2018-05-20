@@ -1,5 +1,9 @@
 package jp.co.ha.web.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -9,18 +13,39 @@ import jp.co.ha.common.web.BaseForm;
 public class ResultSearchForm implements BaseForm {
 
 	/** 登録日直接指定フラグ */
+	@NotEmpty(message = "登録日直接指定フラグが未入力です")
+	@Pattern(regexp = "^[0-9]*$", message = "登録日直接指定フラグが半角数字でありません")
+	@Size(min = 1, max = 1, message = "登録日直接指定フラグが範囲外の値です")
 	private String regDateSelectFlag;
 	/** 登録年(from) */
+	@NotEmpty(message = "登録年(from)が未入力です")
+	@Pattern(regexp = "^[0-9]*$", message = "登録年(from)が半角数字でありません")
+	@Size(min = 4, max = 4, message = "登録年(from)が範囲外の値です")
 	private String fromRegYear;
 	/** 登録月(from) */
+	@NotEmpty(message = "登録月(from)が未入力です")
+	@Pattern(regexp = "^[0-9]*$", message = "登録月(from)が半角数字でありません")
+	@Size(min = 2, max = 2, message = "登録月(from)が範囲外の値です")
 	private String fromRegMonth;
 	/** 登録日(from) */
+	@NotEmpty(message = "登録日(from)が未入力です")
+	@Pattern(regexp = "^[0-9]*$", message = "登録日(from)が半角数字でありません")
+	@Size(min = 2, max = 2, message = "登録日(from)が範囲外の値です")
 	private String fromRegDay;
 	/** 登録年(to) */
+	@NotEmpty(message = "登録年(to)が未入力です")
+	@Pattern(regexp = "^[0-9]*$", message = "登録年(to)が半角数字でありません")
+	@Size(min = 4, max = 4, message = "登録年(to)が範囲外の値です")
 	private String toRegYear;
 	/** 登録月(to) */
+	@NotEmpty(message = "登録月(to)が未入力です")
+	@Pattern(regexp = "^[0-9]*$", message = "登録月(to)が半角数字でありません")
+	@Size(min = 2, max = 2, message = "登録月(to)が範囲外の値です")
 	private String toRegMonth;
 	/** 登録日(to) */
+	@NotEmpty(message = "登録日(to)が未入力です")
+	@Pattern(regexp = "^[0-9]*$", message = "登録日(to)が半角数字でありません")
+	@Size(min = 2, max = 2, message = "登録日(to)が範囲外の値です")
 	private String toRegDay;
 
 	/**

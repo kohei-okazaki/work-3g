@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.create.AccountCreateService;
@@ -22,13 +23,13 @@ import jp.co.ha.web.validator.AccountRegistValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_アカウント作成コントローラ<br>
+ * 健康管理_アカウント登録画面コントローラ<br>
  *
  */
 @Controller
 public class AccountRegistController implements BaseWizardController<AccountRegistForm, AccountCreateException> {
 
-	/** アカウント作成画面サービス */
+	/** アカウント登録画面サービス */
 	@Autowired
 	private AccountRegistService service;
 	/** アカウント作成サービス */
@@ -42,6 +43,15 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@InitBinder("AccountRegistForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.setValidator(new AccountRegistValidator());
+	}
+
+	/**
+	 * Formを返す<br>
+	 * @return
+	 */
+	@ModelAttribute
+	public AccountRegistForm setUpForm() {
+		return new AccountRegistForm();
 	}
 
 	/**

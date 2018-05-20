@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_健康情報入力確認画面</title>
@@ -29,7 +29,7 @@
 	<!-- 確認画面 -->
 	<div align="center">
 	<br><br><br>
-	<form action="/ha-web/healthInfo-complete.html" method="post">
+	<form action="./healthInfo-complete.html" method="post">
 		<p>身長：
 		<input type="text" name="height" th:field="${form.height}" size="6" readonly>
 		cm</p>

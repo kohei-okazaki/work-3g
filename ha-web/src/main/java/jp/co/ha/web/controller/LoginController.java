@@ -1,5 +1,7 @@
 package jp.co.ha.web.controller;
 
+import java.util.Objects;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -10,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
@@ -28,6 +32,9 @@ public class LoginController implements BaseWebController {
 	/** ログインサービス */
 	@Autowired
 	private LoginService loginService;
+	/** sessionサービス */
+	@Autowired
+	private SessionManageService sessionService;
 
 	/**
 	 * Validateを設定<br>
@@ -39,6 +46,15 @@ public class LoginController implements BaseWebController {
 	}
 
 	/**
+	 * Formを返す<br>
+	 * @return
+	 */
+	@ModelAttribute
+	public LoginForm setUpForm() {
+		return new LoginForm();
+	}
+
+	/**
 	 * ログイン画面
 	 * @param model
 	 * @param request
@@ -46,6 +62,8 @@ public class LoginController implements BaseWebController {
 	 */
 	@GetMapping("/login.html")
 	public String login(Model model, HttpServletRequest request) {
+		// sessionに格納している情報をすべて削除する
+		sessionService.removeValues(request);
 		return getView(ManageWebView.LOGIN);
 	}
 
@@ -66,21 +84,21 @@ public class LoginController implements BaseWebController {
 			return getView(ManageWebView.LOGIN);
 		}
 
-		if (!this.loginService.existAccount(loginForm)) {
+		if (!loginService.existAccount(loginForm)) {
 			// アカウント情報を取得出来なかった場合
 			model.addAttribute("errorMessage", "アカウントが存在しません。");
 			getView(ManageWebView.LOGIN);
 		}
 
-		if (this.loginService.invalidPassword(loginForm)) {
+		if (loginService.invalidPassword(loginForm)) {
 			// 入力されたユーザIDと紐付くアカウント情報.パスワードと入力情報.パスワードが異なる場合
 			model.addAttribute("errorMessage", "IDとパスワードが一致しません。");
 			getView(ManageWebView.LOGIN);
 		}
 
-		if (this.loginService.invalidAccount(loginForm)) {
+		if (loginService.invalidAccount(loginForm)) {
 			// アカウント情報が有効期限切の場合
-			model.addAttribute("errorMessage", "ユーザID : " + loginForm.getUserId() + "は有効期限切れです。");
+			model.addAttribute("errorMessage", "アカウントは有効期限切れです。");
 			getView(ManageWebView.LOGIN);
 		}
 
@@ -91,8 +109,15 @@ public class LoginController implements BaseWebController {
 
 	}
 
+	/**
+	 * メニュー画面に遷移<br>
+	 * @param request
+	 * @return
+	 */
 	@GetMapping("/menu.html")
-	public String menu() {
-		return getView(ManageWebView.LOGIN);
+	public String menu(HttpServletRequest request) {
+
+		String userId = (String) sessionService.getValue(request, "userId");
+		return getView(Objects.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
 	}
 }

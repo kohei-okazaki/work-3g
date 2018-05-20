@@ -1,11 +1,9 @@
 package jp.co.ha.common.util;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -26,18 +24,6 @@ public class DateUtil {
 	}
 
 	/**
-	 * 取得したlocaleの時間から書式を整えた時間を返却
-	 * @param locale
-	 * @return 時刻
-	 */
-	public static String getFormattedTime(Locale locale) {
-
-		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		return format.format(DateUtil.getSysDate()).replaceAll(" JST", StringUtil.EMPTY).trim();
-
-	}
-
-	/**
 	 * 指定した文字列型の日付をyyyy/MM/dd hh:mm:ssのフォーマットで返す<br>
 	 * @param target
 	 * @return
@@ -45,6 +31,7 @@ public class DateUtil {
 	public static Date toDate(String target) {
 		return DateUtil.toDate(target, DateFormatDefine.YYYYMMDD_HHMMSS);
 	}
+
 	/**
 	 * 指定した文字列型の日付を指定したフォーマットのDate型で返す<br>
 	 * @param target
@@ -93,7 +80,22 @@ public class DateUtil {
 	}
 
 	/**
+	 * 指定した年の加算を行う<br>
+	 * @param targetDate
+	 * @param addMonth
+	 * @return
+	 */
+	public static Date addYear(Date targetDate, int addMonth) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(targetDate);
+		calendar.add(Calendar.YEAR, addMonth);
+		return calendar.getTime();
+	}
+
+	/**
 	 * Date型を指定されたフォーマットに変える<br>
+	 * @param targetDate
+	 * @param format
 	 * @return
 	 */
 	public static String toString(Date targetDate, DateFormatDefine format) {

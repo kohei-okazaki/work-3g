@@ -1,7 +1,5 @@
 package jp.co.ha.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -11,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
@@ -71,6 +69,15 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	}
 
 	/**
+	 * Formを返す<br>
+	 * @return
+	 */
+	@ModelAttribute
+	public HealthInfoForm setUpForm() {
+		return new HealthInfoForm();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -88,9 +95,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		if (result.hasErrors()) {
 			// バリエーションエラーの場合
-			List<FieldError> errorList = result.getFieldErrors();
-			FieldError error = errorList.get(0);
-			model.addAttribute("errorMessage", error.getRejectedValue() + "は不正な入力値です");
 			return getView(ManageWebView.HEALTH_INFO_INPUT);
 		}
 

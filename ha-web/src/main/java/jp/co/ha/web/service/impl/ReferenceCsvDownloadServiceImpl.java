@@ -44,7 +44,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 
 		// 結果照会する健康情報を取得する
 		String userId = (String) request.getSession().getAttribute("userId");
-		List<HealthInfo> healthInfoList = this.healthInfoSearchService.findByUserId(userId);
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
 
 		// CSV出力モデルリストに変換する
 		List<ReferenceCsvModel> modelList = toModelList(healthInfoList);
@@ -55,8 +55,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 		CsvConfig conf = getCsvConfig(fileName, account);
 
 		// CSVに書き込む
-		BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf);
-		writer.setModelList(modelList);
+		BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf, modelList);
 		writer.execute(response);
 	}
 

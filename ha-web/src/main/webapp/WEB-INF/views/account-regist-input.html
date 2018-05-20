@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント登録画面</title>
@@ -26,18 +26,21 @@
 	<br><br>
 
 	<!-- 入力画面 -->
-	<form action="/ha-web/account-regist-confirm.html" method="post">
+	<form action="./account-regist-confirm.html" method="post" th:object="${accountRegistForm}">
 	<div align="center">
 
 		<div th:if="${errorMessage} != null">
 			<p th:text="${errorMessage}"></p>
 		</div>
+		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		<div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
 
-		<input type="text" name="userId" maxlength="16" required="required" placeholder="ユーザID" />
+		<input type="text" th:field="*{userId}" maxlength="16" required="required" placeholder="ユーザID" />
 		<br><br>
-		<input type="text" name="password" maxlength="16" required="required" placeholder="パスワード" />
+		<input type="text" th:field="*{password}" maxlength="16" required="required" placeholder="パスワード" />
 		<br><br>
-		<input type="text" name="confirmPassword" maxlength="16" required="required" placeholder="確認用パスワード" />
+		<input type="text" th:field="*{confirmPassword}" maxlength="16" required="required" placeholder="確認用パスワード" />
 		<br><br>
 		<textarea rows="10" cols="30" name="remarks" ></textarea>
 		<br><br>
