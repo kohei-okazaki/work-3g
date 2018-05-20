@@ -20,15 +20,6 @@ public class SessionManageServiceImpl implements SessionManageService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Object getValue(HttpServletRequest request, String key) {
-		HttpSession session = request.getSession();
-		return session.getAttribute(key);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void removeValue(HttpServletRequest request, String key) {
 		HttpSession session = request.getSession();
 		session.removeAttribute(key);
@@ -52,6 +43,14 @@ public class SessionManageServiceImpl implements SessionManageService {
 		while(enm.hasMoreElements()) {
 			this.removeValue(request, enm.nextElement());
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public <T> T getValue(HttpServletRequest request, String key, Class<T> clazz) {
+		return (T) request.getSession().getAttribute(key);
 	}
 
 }
