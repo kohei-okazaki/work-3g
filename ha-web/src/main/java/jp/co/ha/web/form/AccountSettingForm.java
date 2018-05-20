@@ -47,7 +47,6 @@ public class AccountSettingForm implements BaseForm {
 	/** メールパスワード */
 	@NotEmpty(message = "メールパスワードが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "メールパスワードが半角英数でありません")
-	@Size(min = 2, max = 16, message = "メールパスワードが範囲外の値です")
 	private String mailPassword;
 
 	/**

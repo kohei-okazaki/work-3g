@@ -22,6 +22,7 @@ import jp.co.ha.business.update.AccountUpdateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.AccountSettingException;
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
@@ -51,6 +52,9 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	/** メール情報作成サービス */
 	@Autowired
 	private MailInfoCreateService mailInfoCreateService;
+	/** session管理サービス */
+	@Autowired
+	private SessionManageService sessionService;
 
 	/**
 	 * Validateを設定<br>
@@ -67,8 +71,26 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * @return
 	 */
 	@ModelAttribute
-	public AccountSettingForm setUpForm() {
-		return new AccountSettingForm();
+	public AccountSettingForm setUpForm(HttpServletRequest request) {
+
+		// セッションからユーザIDを取得
+		String userId = (String) sessionService.getValue(request, "userId");
+
+		// アカウント情報を検索
+		Account account = accountSearchService.findByUserId(userId);
+		// メール情報を検索
+		MailInfo mailInfo = mailInfoSearchService.findByUserId(userId);
+
+		AccountSettingForm accountSettingForm = new AccountSettingForm();
+		accountSettingForm.setDeleteFlag(account.getDeleteFlag());
+		accountSettingForm.setUserId(userId);
+		accountSettingForm.setPassword(account.getPassword());
+		accountSettingForm.setFileEnclosureCharFlag(account.getFileEnclosureCharFlag());
+		accountSettingForm.setHealthInfoMaskFlag(account.getHealthInfoMaskFlag());
+		accountSettingForm.setMailAddress(mailInfo.getMailAddress());
+		accountSettingForm.setMailPassword(mailInfo.getMailPassword());
+		accountSettingForm.setRemarks(account.getRemarks());
+		return accountSettingForm;
 	}
 
 	/**
@@ -77,18 +99,6 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@Override
 	@GetMapping(value = "/account-setting-input.html")
 	public String input(Model model, HttpServletRequest request) throws AccountSettingException {
-
-		// セッションからユーザIDを取得
-		String userId = (String) request.getSession().getAttribute("userId");
-
-		// アカウント情報を検索
-		Account account = accountSearchService.findByUserId(userId);
-		model.addAttribute("account", account);
-
-		// メール情報を検索
-		MailInfo mailInfo = mailInfoSearchService.findByUserId(userId);
-		model.addAttribute("mailInfo", mailInfo);
-
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
 	}
 
