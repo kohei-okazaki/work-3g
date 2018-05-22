@@ -15,20 +15,26 @@ public interface MailInfoDao extends BaseDao {
 
 	/**
 	 * 引数で指定されたユーザIDのメール情報を取得する
+	 *
 	 * @param userId
-	 * @return MailInfo
+	 *            ユーザID
+	 * @return MailInfo メール情報
 	 */
 	MailInfo findByUserId(String userId);
 
 	/**
 	 * 引数で指定されたメール情報を更新する
+	 *
 	 * @param mailInfo
+	 *            メール情報
 	 */
 	void updateMailInfo(MailInfo mailInfo);
 
 	/**
 	 * 引数で指定されたメール情報を登録する<br>
+	 *
 	 * @param mailInfo
+	 *            メール情報
 	 */
 	void create(MailInfo mailInfo) throws DuplicateKeyException;
 }

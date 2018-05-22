@@ -19,17 +19,22 @@ public enum RequestType {
 
 	/**
 	 * コンストラクタ<br>
+	 *
 	 * @param requestId
+	 *            リクエストID
 	 * @param name
+	 *            名前
 	 */
 	private RequestType(String requestId, String name) {
-		setRequestId(requestId);
-		setName(name);
+		this.requestId = requestId;
+		this.name = name;
 	}
 
 	/**
 	 * 指定されたリクエストIDに対応するリクエストタイプを返す<br>
+	 *
 	 * @param requestId
+	 *            リクエストID
 	 * @return
 	 */
 	public static RequestType of(String requestId) {
@@ -43,34 +48,20 @@ public enum RequestType {
 
 	/**
 	 * requestIdを返す<br>
-	 * @return requestId
+	 *
+	 * @return requestId リクエストID
 	 */
 	public String getRequestId() {
 		return requestId;
 	}
 
 	/**
-	 * requestIdを設定する<br>
-	 * @param requestId
-	 */
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
-	}
-
-	/**
 	 * nameを返す<br>
-	 * @return name
+	 *
+	 * @return name 名前
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * nameを設定する<br>
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 }

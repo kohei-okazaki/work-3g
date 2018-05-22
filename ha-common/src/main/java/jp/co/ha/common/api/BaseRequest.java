@@ -11,7 +11,7 @@ public abstract class BaseRequest {
 
 	/**
 	 * requestTypeを返す<br>
-	 * @return requestType
+	 * @return requestType リクエストタイプ
 	 */
 	public RequestType getRequestType() {
 		return requestType;
@@ -19,7 +19,7 @@ public abstract class BaseRequest {
 
 	/**
 	 * requestTypeを設定する<br>
-	 * @param requestType
+	 * @param requestType リクエストタイプ
 	 */
 	public void setRequestType(RequestType requestType) {
 		this.requestType = requestType;

@@ -17,21 +17,27 @@ public interface HealthInfoDao extends BaseDao {
 
 	/**
 	 * 指定したユーザIDの健康情報を返す<br>
+	 *
 	 * @param userId
-	 * @return List<HealthInfo>
+	 *            ユーザID
+	 * @return List<HealthInfo> 健康情報リスト
 	 */
 	List<HealthInfo> findByUserId(String userId);
 
 	/**
 	 * 指定されたデータIDに対応する健康情報を返す<br>
+	 *
 	 * @param dataId
-	 * @return HealthInfo
+	 *            データID
+	 * @return HealthInfo 健康情報
 	 */
 	HealthInfo findByDataId(String dataId);
 
 	/**
 	 * 健康情報を登録する<br>
+	 *
 	 * @param healthInfo
+	 *            健康情報
 	 * @throws DuplicateKeyException
 	 */
 	void create(HealthInfo healthInfo) throws DuplicateKeyException;
