@@ -41,5 +41,9 @@
 
 	<!-- セッション管理サービス -->
 	<beans:bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />
+	<!-- BCryptパスワードサービス -->
+	<beans:bean id="bcryptPasswordEncoder" class="jp.co.ha.common.system.impl.BcryptPasswordEncoder" />
+	<!-- sha256パスワードサービス -->
+	<beans:bean id="sha256PasswordEncoder" class="jp.co.ha.common.system.impl.Sha256PasswordEncoder" />
 
 </beans:beans>
