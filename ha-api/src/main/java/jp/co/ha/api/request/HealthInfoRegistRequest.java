@@ -19,42 +19,56 @@ public class HealthInfoRegistRequest extends BaseRequest {
 
 	/**
 	 * userIdを返す<br>
-	 * @return userId
+	 *
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
 	}
+
 	/**
 	 * userIdを設定する<br>
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	/**
 	 * heightを返す<br>
-	 * @return height
+	 *
+	 * @return height 身長
 	 */
 	public BigDecimal getHeight() {
 		return height;
 	}
+
 	/**
 	 * heightを設定する<br>
+	 *
 	 * @param height
+	 *            身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
 	}
+
 	/**
 	 * weightを返す<br>
-	 * @return weight
+	 *
+	 * @return weight 体重
 	 */
 	public BigDecimal getWeight() {
 		return weight;
 	}
+
 	/**
 	 * weightを設定する<br>
+	 *
 	 * @param weight
+	 *            体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;

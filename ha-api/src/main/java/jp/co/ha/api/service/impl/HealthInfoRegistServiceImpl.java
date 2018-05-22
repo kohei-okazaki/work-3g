@@ -86,7 +86,6 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public HealthInfo toEntity(HealthInfoRegistRequest request) {
 
-
 		String userId = request.getUserId();
 		BigDecimal height = request.getHeight();
 		BigDecimal weight = request.getWeight();
@@ -100,10 +99,9 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		// 最後に登録した健康情報を取得する
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());
 		String userStatus = Objects.nonNull(lastHealthInfo)
-						? healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
-						: ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue();
+				? healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
+				: ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue();
 		Date regDate = DateUtil.getSysDate();
-
 
 		HealthInfo entity = new HealthInfo();
 		entity.setDataId(getNextDataId(lastHealthInfo));
@@ -139,7 +137,9 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
 	/**
 	 * 次のデータIDを取得する
-	 * @param dto
+	 *
+	 * @param healthInfo
+	 *            健康情報
 	 * @return
 	 */
 	private String getNextDataId(HealthInfo healthInfo) {

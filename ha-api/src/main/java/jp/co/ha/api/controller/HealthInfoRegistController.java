@@ -22,10 +22,8 @@ import jp.co.ha.common.exception.HealthInfoException;
  */
 @RestController
 @RequestMapping(value = "/healthInfoRegist", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
-public class HealthInfoRegistController implements BaseRestController<HealthInfoRegistRequest
-																	, HealthInfoRegistResponse
-																	, HealthInfoRegistService
-																	, HealthInfoException> {
+public class HealthInfoRegistController implements
+		BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse, HealthInfoRegistService, HealthInfoException> {
 
 	/** 健康情報登録サービス */
 	@Autowired
@@ -53,8 +51,10 @@ public class HealthInfoRegistController implements BaseRestController<HealthInfo
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
 		apiRequest.setRequestType(RequestType.of(request.getParameter("requestId")));
 		apiRequest.setUserId(request.getParameter("userId"));
-		apiRequest.setHeight(request.getParameter("height") == null ? null : new BigDecimal(request.getParameter("height")));
-		apiRequest.setWeight(request.getParameter("weight") == null ? null : new BigDecimal(request.getParameter("weight")));
+		apiRequest.setHeight(
+				request.getParameter("height") == null ? null : new BigDecimal(request.getParameter("height")));
+		apiRequest.setWeight(
+				request.getParameter("weight") == null ? null : new BigDecimal(request.getParameter("weight")));
 
 		return apiRequest;
 	}

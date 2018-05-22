@@ -26,7 +26,7 @@
 	<br><br>
 
 	<!-- 確認画面 -->
-	<form action="./account-regist-complete.html" method="post">
+	<form action="./account-regist-complete.html" method="post" th:object="${accountRegistForm}">
 	<div align="center">
 		<table>
 			<tr>
@@ -34,7 +34,7 @@
 					<p>ユーザID</p>
 				</th>
 				<td width="250px">
-					<input type="text" name="userId" maxlength="16" required="required" th:field="${form.userId}" readonly="readonly" />
+					<input type="text" maxlength="16" required th:field="*{userId}" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
@@ -42,7 +42,7 @@
 					<p>パスワード</p>
 				</th>
 				<td width="250px">
-					<input type="text" name="password" maxlength="16" required="required" th:field="${form.password}" readonly="readonly" />
+					<input type="text" maxlength="16" required th:field="*{password}" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
@@ -50,7 +50,7 @@
 					<p>確認用 パスワード</p>
 				</th>
 				<td width="250px">
-					<input type="text" name="confirmPassword" maxlength="16" required="required" th:field="${form.confirmPassword}" readonly="readonly" />
+					<input type="text" maxlength="16" required th:field="*{confirmPassword}" readonly="readonly" />
 				</td>
 			</tr>
 			<tr>
@@ -58,7 +58,7 @@
 					<p>備 考</p>
 				</th>
 				<td>
-					<textarea rows="10" cols="30" name="remarks" th:field="${form.remarks}" readonly="readonly"></textarea>
+					<textarea rows="10" cols="30" th:field="*{remarks}" readonly="readonly"></textarea>
 				</td>
 			</tr>
 		</table>
