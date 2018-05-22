@@ -15,12 +15,17 @@ public class CsvUtil {
 	/** ダブルクォート */
 	public static final String DOBBLE_QUOTE = "\"";
 
+	/**
+	 * プライベートコンストラクタ<br>
+	 */
 	private CsvUtil() {
 	}
 
 	/**
-	 * ヘッダ名を取得する
+	 * ヘッダ名を取得する<br>
+	 *
 	 * @param clazz
+	 *            CSVヘッダーのついたクラス型
 	 * @return ヘッダー名
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
@@ -29,7 +34,9 @@ public class CsvUtil {
 
 	/**
 	 * 指定されたクラス型付けてるCsvHeaderアノテーションを返す<br>
+	 *
 	 * @param clazz
+	 *            CSVヘッダーのついたクラス型
 	 * @return
 	 */
 	public static CsvHeader getCsvHeaderClass(Class<?> clazz) {

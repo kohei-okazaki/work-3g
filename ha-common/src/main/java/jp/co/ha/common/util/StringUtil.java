@@ -23,22 +23,20 @@ public class StringUtil {
 	public static final String TRUE_FLAG = "1";
 	public static final String FALSE_FLAG = "0";
 
-	/** 半角数字 */
-	public static final String HALF_NUMBER = "^[0-9]*$";
-	/** 半角数字とピリオド */
-	public static final String HALF_NUMBER_PERIOD = "^[0-9.]*$";
-
-	/** 半角英数字 */
-	public static final String HALF_CHAR = "^[0-9a-zA-Z]*$";
-
+	/**
+	 * プライベートコンストラクタ<br>
+	 */
 	private StringUtil() {
 	}
 
 	/**
 	 * 区切りたい文字列を区切り文字で、区切ったリストを返す
+	 *
 	 * @param target
+	 *            対象文字列
 	 * @param delim
-	 * @return result
+	 *            区切り文字
+	 * @return List<String>
 	 */
 	public static List<String> toStrList(String target, String delim) {
 
@@ -46,7 +44,7 @@ public class StringUtil {
 			return null;
 		}
 		List<String> result = new ArrayList<String>();
-		StringTokenizer tokenizer = new StringTokenizer(target, COMMA);
+		StringTokenizer tokenizer = new StringTokenizer(target, delim);
 
 		while (tokenizer.hasMoreTokens()) {
 			result.add(tokenizer.nextToken().trim());
@@ -58,7 +56,9 @@ public class StringUtil {
 	/**
 	 * 空文字かどうか判定する<br>
 	 * 空文字の場合true, それ以外の場合false<br>
+	 *
 	 * @param target
+	 *            対象文字列
 	 * @return 判定結果
 	 */
 	public static boolean isEmpty(String target) {
@@ -67,18 +67,22 @@ public class StringUtil {
 
 	/**
 	 * 指定されたflagがtrueかどうか判定する<br>
+	 *
 	 * @param flag
+	 *            フラグ
 	 * @return
 	 */
 	public static boolean isTrue(String flag) {
 		return TRUE_FLAG.equals(flag);
-//		return CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, flag);
+		//		return CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, flag);
 	}
 
 	/**
 	 * 指定されたflagがfalseかどうか判定する<br>
+	 *
 	 * @see StringUtil#isTrue(String)
 	 * @param flag
+	 *            フラグ
 	 * @return
 	 */
 	public static boolean isFalse(String flag) {

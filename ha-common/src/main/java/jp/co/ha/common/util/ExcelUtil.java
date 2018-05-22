@@ -22,9 +22,13 @@ public class ExcelUtil {
 
 	/**
 	 * 指定されたシートのrow行目のcol番目のセルを返す<br>
+	 *
 	 * @param sheet
+	 *            Sheet
 	 * @param row
+	 *            行数
 	 * @param col
+	 *            カラム位置
 	 * @return cell
 	 */
 	public static Cell getCell(Sheet sheet, int row, int col) {
@@ -45,8 +49,11 @@ public class ExcelUtil {
 
 	/**
 	 * 指定されたセルにtextを設定する<br>
+	 *
 	 * @param cell
+	 *            Cell
 	 * @param text
+	 *            テキスト
 	 */
 	public static void setText(Cell cell, String text) {
 		cell.setCellType(CellType.STRING);
@@ -55,7 +62,9 @@ public class ExcelUtil {
 
 	/**
 	 * シート名を返す。<br>
+	 *
 	 * @param clazz
+	 *            シートアノテーションのついたクラス型
 	 * @return シート名
 	 */
 	public static String getSheetName(Class<?> clazz) {
@@ -64,7 +73,9 @@ public class ExcelUtil {
 
 	/**
 	 * ヘッダ名のリストを返す<br>
+	 *
 	 * @param clazz
+	 *            シートアノテーションのついたクラス型
 	 * @return ヘッダー名
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
@@ -73,7 +84,9 @@ public class ExcelUtil {
 
 	/**
 	 * 指定されたクラス型についてるExcelSheetアノテーションを返す<br>
+	 *
 	 * @param clazz
+	 *            ExcelHeaderアノテーションのついたクラス型
 	 * @return Excelheader
 	 */
 	public static ExcelSheet getExcelSheetClass(Class<?> clazz) {
@@ -82,7 +95,9 @@ public class ExcelUtil {
 
 	/**
 	 * 指定されたクラス型についてるExcelHeaderアノテーションを返す<br>
+	 *
 	 * @param clazz
+	 *            ExcelHeaderアノテーションのついたクラス型
 	 * @return
 	 */
 	public static ExcelHeader getExcelHeaderClass(Class<?> clazz) {

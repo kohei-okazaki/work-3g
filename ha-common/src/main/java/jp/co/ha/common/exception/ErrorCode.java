@@ -8,7 +8,7 @@ public enum ErrorCode {
 
 	/** 必須エラー */
 	REQUIRE("REQUIRE", "", "必須エラーです"),
-	/** 属性エラー*/
+	/** 属性エラー */
 	TYPE("TYPE", "", "属性エラーです"),
 	/** 桁数エラー */
 	LENGTH("LENGTH", "", "桁数エラーです"),
@@ -24,7 +24,6 @@ public enum ErrorCode {
 	/** リクエストID相違エラー */
 	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "ERROR", "リクエストIDが一致しません");
 
-
 	/** エラーコード */
 	private String errorCode;
 	/** ログレベル */
@@ -34,9 +33,13 @@ public enum ErrorCode {
 
 	/**
 	 * コンストラクタ<br>
+	 *
 	 * @param errorCode
+	 *            エラーコード
 	 * @param logLevel
+	 *            ログレベル
 	 * @param errorMessage
+	 *            エラーメッセージ
 	 */
 	private ErrorCode(String errorCode, String logLevel, String errorMessage) {
 		this.errorCode = errorCode;
@@ -46,6 +49,7 @@ public enum ErrorCode {
 
 	/**
 	 * errorCodeを返す
+	 *
 	 * @return errorCode
 	 */
 	public String getErrorCode() {
@@ -54,6 +58,7 @@ public enum ErrorCode {
 
 	/**
 	 * logLevelを返す
+	 *
 	 * @return logLevel
 	 */
 	public String getLogLevel() {
@@ -62,6 +67,7 @@ public enum ErrorCode {
 
 	/**
 	 * errorMessageを返す
+	 *
 	 * @return errorMessage
 	 */
 	public String getErrorMessage() {
@@ -70,7 +76,9 @@ public enum ErrorCode {
 
 	/**
 	 * 指定されたエラーコードと一致するErrorCodeを返す<br>
+	 *
 	 * @param errorCode
+	 *            エラーコード
 	 * @return
 	 */
 	public static ErrorCode of(String errorCode) {

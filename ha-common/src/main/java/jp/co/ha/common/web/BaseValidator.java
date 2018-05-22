@@ -11,14 +11,18 @@ import jp.co.ha.common.util.RegixPattern;
  * 基底Validator<br>
  * すべてのvalidatorはこの抽象クラスを継承すること<br>
  *
- * @param <F> validate対象form
+ * @param <F>
+ *            validate対象form
  */
 public abstract class BaseValidator<F extends BaseForm> implements Validator {
 
 	/**
 	 * fieldのformの値が空文字の場合、errorsオブジェクトにエラーを追加する<br>
+	 *
 	 * @param errors
+	 *            Errors
 	 * @param field
+	 *            Formフィールド名
 	 */
 	protected void rejectIfEmpty(Errors errors, String field) {
 		ValidationUtils.rejectIfEmpty(errors, field, ErrorCode.REQUIRE.getErrorCode());
@@ -26,9 +30,13 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 
 	/**
 	 * fieldのformの値がmaxを超過してる場合、errorsオブジェクトにエラーを追加する<br>
+	 *
 	 * @param errors
+	 *            Errors
 	 * @param field
+	 *            Formフィールド名
 	 * @param max
+	 *            最大値
 	 */
 	protected void rejectIfLengthMax(Errors errors, String field, int max) {
 		String fieldValue = getFieldValue(errors, field);
@@ -39,9 +47,13 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 
 	/**
 	 * fieldのformの値がmin未満の場合、errorsオブジェクトにエラーを追加する<br>
+	 *
 	 * @param errors
+	 *            Errors
 	 * @param field
+	 *            Formフィールド名
 	 * @param min
+	 *            最小値
 	 */
 	protected void rejectIfLengthMin(Errors errors, String field, int min) {
 		String fieldValue = getFieldValue(errors, field);
@@ -52,8 +64,11 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 
 	/**
 	 * fieldValueが半角数字-ピリオドでない場合、errorsオブジェクトにエラーを追加する<br>
+	 *
 	 * @param errors
+	 *            Errors
 	 * @param field
+	 *            Formフィールド名
 	 */
 	protected void rejectIfNotHalfNumberPeriod(Errors errors, String field) {
 		String fieldValue = getFieldValue(errors, field);
@@ -64,8 +79,11 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 
 	/**
 	 * 文字列型のerrorにbindされた入力値を返す<br>
+	 *
 	 * @param errors
+	 *            Errors
 	 * @param field
+	 *            Formフィールド名
 	 * @return
 	 */
 	private String getFieldValue(Errors errors, String field) {

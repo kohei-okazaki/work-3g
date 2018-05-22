@@ -18,8 +18,8 @@ import java.lang.annotation.Target;
 public @interface ExcelHeader {
 
 	/**
-	 * ヘッダ名
-	 * セットした順にファイルにつめられる<br>
+	 * ヘッダ名 セットした順にファイルにつめられる<br>
+	 *
 	 * @return ヘッダ名
 	 */
 	String[] names() default "";

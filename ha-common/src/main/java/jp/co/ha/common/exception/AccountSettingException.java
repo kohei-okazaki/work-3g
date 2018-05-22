@@ -11,8 +11,11 @@ public class AccountSettingException extends BaseAppException {
 
 	/**
 	 * コンストラクタ<br>
+	 *
 	 * @param errorCode
+	 *            エラーコード
 	 * @param detail
+	 *            詳細
 	 */
 	public AccountSettingException(ErrorCode errorCode, String detail) {
 		super(errorCode, detail);

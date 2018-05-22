@@ -19,25 +19,33 @@ public enum ParamConst {
 	HEALTH_INFO_USER_STATUS_EVEN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.EVEN, "変化ありません"),
 	HEALTH_INFO_USER_STATUS_INCREASE_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.INCREASE, "増えました"),
 
-	/** ページタイプ */
+	/** ページタイプ：入力 */
 	PAGE_VIEW_INPUT(MainKey.PAGE_VIEW, SubKey.INPUT, "0"),
+	/** ページタイプ：確認 */
 	PAGE_VIEW_CONFIRM(MainKey.PAGE_VIEW, SubKey.CONFIRM, "1"),
+	/** ページタイプ：完了 */
 	PAGE_VIEW_COMPLETE(MainKey.PAGE_VIEW, SubKey.COMPLETE, "2"),
 
-	/** 共通真偽値 */
+	/** 真偽値：真*/
 	FLAG_TRUE(MainKey.FLAG, SubKey.TRUE, "1"),
+	/** 真偽値：偽*/
 	FLAG_FALSE(MainKey.FLAG, SubKey.FALSE, "0"),
 
 	/** CSVファイル名 */
-	CSV_FILE_NAME_HEALTH_INFO(MainKey.CSV_FILE_NAME, SubKey.HEALTH_INFO, "HealthInfo.csv"),
-	CSV_FILE_NAME_REFERNCE_RESULT(MainKey.CSV_FILE_NAME, SubKey.REFERNCE_RESULT, "ReferenceResult.csv"),
-	;
+	CSV_FILE_NAME_HEALTH_INFO(MainKey.CSV_FILE_NAME, SubKey.HEALTH_INFO,
+			"HealthInfo.csv"), CSV_FILE_NAME_REFERNCE_RESULT(MainKey.CSV_FILE_NAME, SubKey.REFERNCE_RESULT,
+					"ReferenceResult.csv"),
+					;
 
 	/**
 	 * コンストラクタ<br>
+	 *
 	 * @param mainKey
+	 *            メインキー
 	 * @param subKey
+	 *            サブキー
 	 * @param value
+	 *            値
 	 */
 	private ParamConst(MainKey mainKey, SubKey subKey, String value) {
 		this.mainKey = mainKey;
@@ -54,8 +62,11 @@ public enum ParamConst {
 
 	/**
 	 * 指定されたMainKeyとSubKeyと一致する定数定義列挙を返す<br>
+	 *
 	 * @param mainKey
+	 *            メインキー
 	 * @param subKey
+	 *            サブキー
 	 * @return
 	 */
 	public static ParamConst of(MainKey mainKey, SubKey subKey) {
@@ -71,7 +82,9 @@ public enum ParamConst {
 
 	/**
 	 * メインキーと一致するParamConstのリストを返す<br>
+	 *
 	 * @param mainKey
+	 *            メインキー
 	 * @return
 	 */
 	public static List<ParamConst> ofList(MainKey mainKey) {
@@ -86,7 +99,8 @@ public enum ParamConst {
 
 	/**
 	 * mainKeyを返す<br>
-	 * @return mainKey
+	 *
+	 * @return mainKey メインキー
 	 */
 	public MainKey getMainKey() {
 		return mainKey;
@@ -94,7 +108,8 @@ public enum ParamConst {
 
 	/**
 	 * subKeyを返す<br>
-	 * @return subKey
+	 *
+	 * @return subKey サブキー
 	 */
 	public SubKey getSubKey() {
 		return subKey;
@@ -102,7 +117,8 @@ public enum ParamConst {
 
 	/**
 	 * valueを返す<br>
-	 * @return value
+	 *
+	 * @return value 値
 	 */
 	public String getValue() {
 		return value;

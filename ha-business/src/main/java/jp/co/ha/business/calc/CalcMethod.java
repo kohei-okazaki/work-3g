@@ -29,12 +29,19 @@ public enum CalcMethod {
 	/** 四則演算オペレータインターフェース */
 	private CalcOperator operator;
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param operator
+	 *            四則演算オペレータインターフェース
+	 */
 	private CalcMethod(CalcOperator operator) {
 		this.operator = operator;
 	}
 
 	/**
 	 * 四則演算オペレータを返す<br>
+	 *
 	 * @return operator
 	 */
 	public CalcOperator getOperator() {

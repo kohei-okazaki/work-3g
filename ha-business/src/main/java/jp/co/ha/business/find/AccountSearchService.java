@@ -10,7 +10,7 @@ public interface AccountSearchService {
 
 	/**
 	 * ユーザIDからアカウント情報を取得する
-	 * @param userId
+	 * @param userId ユーザID
 	 * @return アカウント情報
 	 */
 	Account findByUserId(String userId);
