@@ -51,112 +51,151 @@ public class AccountSettingForm implements BaseForm {
 
 	/**
 	 * userIdを返す
-	 * @return userId
+	 *
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
 	}
+
 	/**
 	 * userIdを設定する
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	/**
 	 * passwordを返す
-	 * @return password
+	 *
+	 * @return password パスワード
 	 */
 	public String getPassword() {
 		return password;
 	}
+
 	/**
 	 * passwordを設定する
+	 *
 	 * @param password
+	 *            パスワード
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	/**
 	 * deleteFlagを返す
-	 * @return deleteFlag
+	 *
+	 * @return deleteFlag 削除フラグ
 	 */
 	public String getDeleteFlag() {
 		return deleteFlag;
 	}
+
 	/**
 	 * deleteFlagを設定する
+	 *
 	 * @param deleteFlag
+	 *            削除フラグ
 	 */
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
+
 	/**
 	 * fileEnclosureCharFlagを返す
-	 * @return fileEnclosureCharFlag
+	 *
+	 * @return fileEnclosureCharFlag ファイル囲い文字利用フラグ
 	 */
 	public String getFileEnclosureCharFlag() {
 		return fileEnclosureCharFlag;
 	}
+
 	/**
 	 * fileEnclosureCharFlagを設定する
+	 *
 	 * @param fileEnclosureCharFlag
+	 *            ファイル囲い文字利用フラグ
 	 */
 	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
 		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
 	}
+
 	/**
 	 * healthInfoMaskFlagを返す<br>
-	 * @return healthInfoMaskFlag
+	 *
+	 * @return healthInfoMaskFlag 健康情報マスク利用フラグ
 	 */
 	public String getHealthInfoMaskFlag() {
 		return healthInfoMaskFlag;
 	}
+
 	/**
 	 * healthInfoMaskFlagを設定する<br>
+	 *
 	 * @param healthInfoMaskFlag
+	 *            健康情報マスク利用フラグ
 	 */
 	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
 		this.healthInfoMaskFlag = healthInfoMaskFlag;
 	}
+
 	/**
 	 * remarksを返す
-	 * @return remarks
+	 *
+	 * @return remarks 備考
 	 */
 	public String getRemarks() {
 		return remarks;
 	}
+
 	/**
 	 * remarksを設定する
+	 *
 	 * @param remarks
+	 *            備考
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
 	/**
 	 * mailAddressを返す
-	 * @return mailAddress
+	 *
+	 * @return mailAddress メールアドレス
 	 */
 	public String getMailAddress() {
 		return mailAddress;
 	}
+
 	/**
 	 * mailAddressを設定する
+	 *
 	 * @param mailAddress
+	 *            メールアドレス
 	 */
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
 	}
+
 	/**
 	 * mailPasswordを返す
-	 * @return mailPassword
+	 *
+	 * @return mailPassword メールパスワード
 	 */
 	public String getMailPassword() {
 		return mailPassword;
 	}
+
 	/**
 	 * mailPasswordを設定する
+	 *
 	 * @param mailPassword
+	 *            メールパスワード
 	 */
 	public void setMailPassword(String mailPassword) {
 		this.mailPassword = mailPassword;

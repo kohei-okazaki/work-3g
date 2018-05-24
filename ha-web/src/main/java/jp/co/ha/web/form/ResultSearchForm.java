@@ -50,98 +50,132 @@ public class ResultSearchForm implements BaseForm {
 
 	/**
 	 * regDateSelectFlagを返す<br>
-	 * @return regDateSelectFlag
+	 *
+	 * @return regDateSelectFlag 登録日直接指定フラグ
 	 */
 	public String getRegDateSelectFlag() {
 		return regDateSelectFlag;
 	}
+
 	/**
 	 * regDateSelectFlagを設定する<br>
+	 *
 	 * @param regDateSelectFlag
+	 *            登録日直接指定フラグ
 	 */
 	public void setRegDateSelectFlag(String regDateSelectFlag) {
 		this.regDateSelectFlag = regDateSelectFlag;
 	}
+
 	/**
 	 * fromRegYearを返す<br>
-	 * @return fromRegYear
+	 *
+	 * @return fromRegYear 登録年(from)
 	 */
 	public String getFromRegYear() {
 		return fromRegYear;
 	}
+
 	/**
 	 * fromRegYearを設定する<br>
+	 *
 	 * @param fromRegYear
+	 *            登録年(from)
 	 */
 	public void setFromRegYear(String fromRegYear) {
 		this.fromRegYear = fromRegYear;
 	}
+
 	/**
 	 * fromRegMonthを返す<br>
-	 * @return fromRegMonth
+	 *
+	 * @return fromRegMonth 登録月(from)
 	 */
 	public String getFromRegMonth() {
 		return fromRegMonth;
 	}
+
 	/**
 	 * fromRegMonthを設定する<br>
+	 *
 	 * @param fromRegMonth
+	 *            登録月(from)
 	 */
 	public void setFromRegMonth(String fromRegMonth) {
 		this.fromRegMonth = fromRegMonth;
 	}
+
 	/**
 	 * fromRegDayを返す<br>
-	 * @return fromRegDay
+	 *
+	 * @return fromRegDay 登録日(from)
 	 */
 	public String getFromRegDay() {
 		return fromRegDay;
 	}
+
 	/**
 	 * fromRegDayを設定する<br>
+	 *
 	 * @param fromRegDay
+	 *            登録日(from)
 	 */
 	public void setFromRegDay(String fromRegDay) {
 		this.fromRegDay = fromRegDay;
 	}
+
 	/**
 	 * toRegYearを返す<br>
-	 * @return toRegYear
+	 *
+	 * @return toRegYear 登録年(to)
 	 */
 	public String getToRegYear() {
 		return toRegYear;
 	}
+
 	/**
 	 * toRegYearを設定する<br>
+	 *
 	 * @param toRegYear
+	 *            登録年(to)
 	 */
 	public void setToRegYear(String toRegYear) {
 		this.toRegYear = toRegYear;
 	}
+
 	/**
 	 * toRegMonthを返す<br>
-	 * @return toRegMonth
+	 *
+	 * @return toRegMonth 登録月(to)
 	 */
 	public String getToRegMonth() {
 		return toRegMonth;
 	}
+
 	/**
 	 * toRegMonthを設定する<br>
+	 *
 	 * @param toRegMonth
+	 *            登録月(to)
 	 */
 	public void setToRegMonth(String toRegMonth) {
 		this.toRegMonth = toRegMonth;
 	}
+
 	/**
 	 * toRegDayを返す<br>
-	 * @return toRegDay
+	 *
+	 * @return toRegDay 登録日(to)
 	 */
 	public String getToRegDay() {
 		return toRegDay;
 	}
+
 	/**
 	 * toRegDayを設定する<br>
+	 *
 	 * @param toRegDay
+	 *            登録日(to)
 	 */
 	public void setToRegDay(String toRegDay) {
 		this.toRegDay = toRegDay;

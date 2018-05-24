@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 健康情報Excelダウンロードサービス実装クラスのマーカーアノテーション
+ * 健康情報Excelダウンロードサービス実装クラスのマーカーアノテーション<br>
  *
  */
 @Inherited

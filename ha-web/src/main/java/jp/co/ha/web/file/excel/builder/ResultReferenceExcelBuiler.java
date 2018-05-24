@@ -23,7 +23,9 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder {
 
 	/**
 	 * コンストラクタ<br>
+	 *
 	 * @param modelList
+	 *            List<ReferenceExcelModel>
 	 */
 	public ResultReferenceExcelBuiler(List<ReferenceExcelModel> modelList) {
 		this.modelList = modelList;

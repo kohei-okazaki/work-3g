@@ -9,7 +9,7 @@ import jp.co.ha.common.file.excel.model.BaseExcelModel;
  *
  */
 @ExcelModel
-@ExcelHeader(names = {"身長", "体重", "BMI", "標準体重"})
+@ExcelHeader(names = { "身長", "体重", "BMI", "標準体重" })
 public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/** 身長 */
@@ -23,7 +23,8 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * heightを返す
-	 * @return height
+	 *
+	 * @return height 身長
 	 */
 	public String getHeight() {
 		return height;
@@ -31,7 +32,9 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * heightを設定する
+	 *
 	 * @param height
+	 *            身長
 	 */
 	public void setHeight(String height) {
 		this.height = height;
@@ -39,7 +42,8 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * weightを返す
-	 * @return weight
+	 *
+	 * @return weight 体重
 	 */
 	public String getWeight() {
 		return weight;
@@ -47,7 +51,9 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * weightを設定する
+	 *
 	 * @param weight
+	 *            体重
 	 */
 	public void setWeight(String weight) {
 		this.weight = weight;
@@ -55,7 +61,8 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * bmiを返す
-	 * @return bmi
+	 *
+	 * @return bmi BMI
 	 */
 	public String getBmi() {
 		return bmi;
@@ -63,7 +70,9 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * bmiを設定する
+	 *
 	 * @param bmi
+	 *            BMI
 	 */
 	public void setBmi(String bmi) {
 		this.bmi = bmi;
@@ -71,7 +80,8 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * standardWeightを返す
-	 * @return standardWeight
+	 *
+	 * @return standardWeight 標準体重
 	 */
 	public String getStandardWeight() {
 		return standardWeight;
@@ -79,7 +89,9 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/**
 	 * standardWeightを設定する
+	 *
 	 * @param standardWeight
+	 *            標準体重
 	 */
 	public void setStandardWeight(String standardWeight) {
 		this.standardWeight = standardWeight;

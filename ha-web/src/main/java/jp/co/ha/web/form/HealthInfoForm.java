@@ -30,70 +30,94 @@ public class HealthInfoForm implements BaseForm {
 
 	/**
 	 * userIdを返す
-	 * @return userId
+	 *
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
 	}
+
 	/**
 	 * userIdを設定する
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	/**
 	 * heightを返す
-	 * @return height
+	 *
+	 * @return height 身長
 	 */
 	public BigDecimal getHeight() {
 		return height;
 	}
+
 	/**
 	 * heightを設定する
+	 *
 	 * @param height
+	 *            身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
 	}
+
 	/**
 	 * weightを返す
-	 * @return weight
+	 *
+	 * @return weight 体重
 	 */
 	public BigDecimal getWeight() {
 		return weight;
 	}
+
 	/**
 	 * weightを設定する
+	 *
 	 * @param weight
+	 *            体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
 	}
+
 	/**
 	 * bmiを返す
-	 * @return bmi
+	 *
+	 * @return bmi BMI
 	 */
 	public BigDecimal getBmi() {
 		return bmi;
 	}
+
 	/**
 	 * bmiを設定する
+	 *
 	 * @param bmi
+	 *            BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
 	}
+
 	/**
 	 * standardWeightを返す
-	 * @return standardWeight
+	 *
+	 * @return standardWeight 標準体重
 	 */
 	public BigDecimal getStandardWeight() {
 		return standardWeight;
 	}
+
 	/**
 	 * standardWeightを設定する
+	 *
 	 * @param standardWeight
+	 *            標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;

@@ -3,14 +3,17 @@ package jp.co.ha.web.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.parameter.MainKey;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.business.parameter.SubKey;
+import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
@@ -67,6 +70,20 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		// ユーザIDから健康情報のリストを取得
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
 		return healthInfoList.isEmpty();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) {
+		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
+		// フォーム情報をリクエストクラスにコピー
+		BeanUtils.copyProperties(form, apiRequest);
+		apiRequest.setUserId(userId);
+		// リクエストタイプ設定
+		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
+		return apiRequest;
 	}
 
 }

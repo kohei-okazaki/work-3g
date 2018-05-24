@@ -31,7 +31,8 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * userIdを返す
-	 * @return userId
+	 *
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
@@ -39,7 +40,9 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * userIdを設定する
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -47,7 +50,8 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * heightを返す
-	 * @return height
+	 *
+	 * @return height 身長
 	 */
 	public BigDecimal getHeight() {
 		return height;
@@ -55,7 +59,9 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * heightを設定する
+	 *
 	 * @param height
+	 *            身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -63,7 +69,8 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * weightを返す
-	 * @return weight
+	 *
+	 * @return weight 体重
 	 */
 	public BigDecimal getWeight() {
 		return weight;
@@ -71,7 +78,9 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * weightを設定する
+	 *
 	 * @param weight
+	 *            体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -79,7 +88,8 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * bmiを返す
-	 * @return bmi
+	 *
+	 * @return bmi BMI
 	 */
 	public BigDecimal getBmi() {
 		return bmi;
@@ -87,7 +97,9 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * bmiを設定する
+	 *
 	 * @param bmi
+	 *            BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -95,7 +107,8 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * standardWeightを返す
-	 * @return standardWeight
+	 *
+	 * @return standardWeight 標準体重
 	 */
 	public BigDecimal getStandardWeight() {
 		return standardWeight;
@@ -103,7 +116,9 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * standardWeightを設定する
+	 *
 	 * @param standardWeight
+	 *            標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -111,7 +126,8 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * regDateを返す
-	 * @return regDate
+	 *
+	 * @return regDate 登録日時
 	 */
 	public Date getRegDate() {
 		return regDate;
@@ -119,7 +135,9 @@ public class ReferenceCsvModel implements BaseCsvModel {
 
 	/**
 	 * regDateを設定する
+	 *
 	 * @param regDate
+	 *            登録日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

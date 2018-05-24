@@ -42,9 +42,12 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 
 	/**
 	 * 健康情報Entityをモデルに変換する<br>
-	 * @param form
+	 *
+	 * @param healthInfo
+	 *            HealthInfo
 	 * @param account
-	 * @return model
+	 *            Account
+	 * @return model HealthInfoExcelModel
 	 */
 	private HealthInfoExcelModel toModel(HealthInfo healthInfo, Account account) {
 
