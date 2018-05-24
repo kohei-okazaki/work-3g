@@ -18,56 +18,75 @@ public class CsvConfig {
 
 	/**
 	 * fileNameを返す<br>
-	 * @return fileName
+	 *
+	 * @return fileName ファイル名
 	 */
 	public String getFileName() {
 		return fileName;
 	}
+
 	/**
 	 * fileNameを設定する<br>
+	 *
 	 * @param fileName
+	 *            ファイル名
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
 	/**
 	 * hasHeaderを返す<br>
-	 * @return hasHeader
+	 *
+	 * @return hasHeader ヘッダー有無
 	 */
 	public boolean isHasHeader() {
 		return hasHeader;
 	}
+
 	/**
 	 * hasHeaderを設定する<br>
+	 *
 	 * @param hasHeader
+	 *            ヘッダー有無
 	 */
 	public void setHasHeader(boolean hasHeader) {
 		this.hasHeader = hasHeader;
 	}
+
 	/**
 	 * hasEnclosureを返す<br>
-	 * @return hasEnclosure
+	 *
+	 * @return hasEnclosure 囲い文字有無
 	 */
 	public boolean isHasEnclosure() {
 		return hasEnclosure;
 	}
+
 	/**
 	 * hasEnclosureを設定する<br>
+	 *
 	 * @param hasEnclosure
+	 *            囲い文字有無
 	 */
 	public void setHasEnclosure(boolean hasEnclosure) {
 		this.hasEnclosure = hasEnclosure;
 	}
+
 	/**
 	 * enclosureCharを返す<br>
-	 * @return enclosureChar
+	 *
+	 * @return enclosureChar 囲い文字
 	 */
 	public String getEnclosureChar() {
 		return enclosureChar;
 	}
+
 	/**
 	 * enclosureCharを設定する<br>
+	 *
 	 * @param enclosureChar
+	 *            囲い文字
 	 */
 	public void setEnclosureChar(String enclosureChar) {
 		this.enclosureChar = enclosureChar;

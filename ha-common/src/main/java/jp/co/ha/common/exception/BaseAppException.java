@@ -19,15 +19,18 @@ public abstract class BaseAppException extends Exception {
 	private String detail;
 
 	/**
-	 * 例外コンストラクタ<br>
+	 * コンストラクタ<br>
 	 */
 	public BaseAppException() {
 	}
 
 	/**
-	 * 例外コンストラクタ<br>
+	 * コンストラクタ<br>
+	 *
 	 * @param errorCode
+	 *            エラーコード
 	 * @param detail
+	 *            詳細
 	 */
 	public BaseAppException(ErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;
@@ -36,38 +39,26 @@ public abstract class BaseAppException extends Exception {
 
 	/**
 	 * errorCodeを返す
-	 * @return errorCode
+	 *
+	 * @return errorCode エラーコード
 	 */
 	public ErrorCode getErrorCode() {
 		return errorCode;
 	}
 
 	/**
-	 * errorCodeを設定する<br>
-	 * @param errorCode
-	 */
-	public void setErrorCode(ErrorCode errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	/**
 	 * detailを返す<br>
-	 * @return detail
+	 *
+	 * @return detail 詳細
 	 */
 	public String getDetail() {
 		return detail;
 	}
 
 	/**
-	 * detailを設定する<br>
-	 * @param detail
-	 */
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-
-	/**
 	 * エラーメッセージを組み立てて返す<br>
+	 *
+	 * @return 組み立てたエラーメッセージ
 	 */
 	@Override
 	public String toString() {

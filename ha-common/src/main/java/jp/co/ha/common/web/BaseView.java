@@ -8,6 +8,7 @@ public interface BaseView {
 
 	/**
 	 * 名前を返す<br>
+	 *
 	 * @return
 	 */
 	String getName();
@@ -15,8 +16,11 @@ public interface BaseView {
 	/**
 	 * 指定したEnumクラスの指定した値と一致するEnumを返す<br>
 	 * 一致するenumがない場合nullを返す<br>
-	 * @param viewClass BaseViewを継承したViewのEnum
-	 * @param value 検査したい値
+	 *
+	 * @param viewClass
+	 *            BaseViewを継承したViewのEnum
+	 * @param value
+	 *            検査したい値
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")

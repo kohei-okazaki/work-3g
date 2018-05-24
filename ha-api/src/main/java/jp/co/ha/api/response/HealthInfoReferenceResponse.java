@@ -23,10 +23,10 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	/** 登録日時 */
 	private String regDate;
 
-
 	/**
 	 * dataIdを返す<br>
-	 * @return dataId
+	 *
+	 * @return dataId データID
 	 */
 	public String getDataId() {
 		return dataId;
@@ -34,7 +34,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * dataIdを設定する<br>
+	 *
 	 * @param dataId
+	 *            データID
 	 */
 	public void setDataId(String dataId) {
 		this.dataId = dataId;
@@ -42,7 +44,8 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * heightを返す<br>
-	 * @return height
+	 *
+	 * @return height 身長
 	 */
 	public BigDecimal getHeight() {
 		return height;
@@ -50,7 +53,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * heightを設定する<br>
+	 *
 	 * @param height
+	 *            身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -58,7 +63,8 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * weightを返す<br>
-	 * @return weight
+	 *
+	 * @return weight 体重
 	 */
 	public BigDecimal getWeight() {
 		return weight;
@@ -66,7 +72,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * weightを設定する<br>
+	 *
 	 * @param weight
+	 *            体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -74,7 +82,8 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * bmiを返す<br>
-	 * @return bmi
+	 *
+	 * @return bmi BMI
 	 */
 	public BigDecimal getBmi() {
 		return bmi;
@@ -82,7 +91,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * bmiを設定する<br>
+	 *
 	 * @param bmi
+	 *            BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -90,7 +101,8 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * standardWeightを返す<br>
-	 * @return standardWeight
+	 *
+	 * @return standardWeight 標準体重
 	 */
 	public BigDecimal getStandardWeight() {
 		return standardWeight;
@@ -98,7 +110,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * standardWeightを設定する<br>
+	 *
 	 * @param standardWeight
+	 *            標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -106,7 +120,8 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * regDateを返す<br>
-	 * @return regDate
+	 *
+	 * @return regDate 登録日時
 	 */
 	public String getRegDate() {
 		return regDate;
@@ -114,7 +129,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/**
 	 * regDateを設定する<br>
+	 *
 	 * @param regDate
+	 *            登録日時
 	 */
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;

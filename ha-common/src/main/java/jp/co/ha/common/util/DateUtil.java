@@ -12,12 +12,16 @@ import java.util.Objects;
  */
 public class DateUtil {
 
+	/**
+	 * プライベートコンストラクタ<br>
+	 */
 	private DateUtil() {
 	}
 
 	/**
 	 * システム日付を返す<br>
-	 * @return
+	 *
+	 * @return システム日付
 	 */
 	public static Date getSysDate() {
 		return new Date();
@@ -25,7 +29,9 @@ public class DateUtil {
 
 	/**
 	 * 指定した文字列型の日付をyyyy/MM/dd hh:mm:ssのフォーマットで返す<br>
+	 *
 	 * @param target
+	 *            対象日付
 	 * @return
 	 */
 	public static Date toDate(String target) {
@@ -34,8 +40,11 @@ public class DateUtil {
 
 	/**
 	 * 指定した文字列型の日付を指定したフォーマットのDate型で返す<br>
+	 *
 	 * @param target
+	 *            対象日付
 	 * @param dateFormatDefine
+	 *            Dateフォーマット
 	 * @return
 	 */
 	public static Date toDate(String target, DateFormatDefine dateFormatDefine) {
@@ -55,8 +64,11 @@ public class DateUtil {
 
 	/**
 	 * 指定した日付の加算を行う<br>
-	 * @param targetDate 元の日付
-	 * @param add 加算する日数
+	 *
+	 * @param targetDate
+	 *            元の日付
+	 * @param add
+	 *            加算する日数
 	 * @return
 	 */
 	public static Date addDate(Date targetDate, int addDay) {
@@ -68,8 +80,11 @@ public class DateUtil {
 
 	/**
 	 * 指定した月の加算を行う<br>
-	 * @param targetDate 元の日付
-	 * @param addMonth 加算する月数
+	 *
+	 * @param targetDate
+	 *            元の日付
+	 * @param addMonth
+	 *            加算する月数
 	 * @return
 	 */
 	public static Date addMonth(Date targetDate, int addMonth) {
@@ -81,21 +96,27 @@ public class DateUtil {
 
 	/**
 	 * 指定した年の加算を行う<br>
+	 *
 	 * @param targetDate
-	 * @param addMonth
+	 *            元の日付
+	 * @param addYear
+	 *            加算する年数
 	 * @return
 	 */
-	public static Date addYear(Date targetDate, int addMonth) {
+	public static Date addYear(Date targetDate, int addYear) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(targetDate);
-		calendar.add(Calendar.YEAR, addMonth);
+		calendar.add(Calendar.YEAR, addYear);
 		return calendar.getTime();
 	}
 
 	/**
 	 * Date型を指定されたフォーマットに変える<br>
+	 *
 	 * @param targetDate
+	 *            対象日付
 	 * @param format
+	 *            Dateフォーマット
 	 * @return
 	 */
 	public static String toString(Date targetDate, DateFormatDefine format) {
@@ -110,7 +131,9 @@ public class DateUtil {
 
 	/**
 	 * 指定した日付の時分秒を00:00:00に設定する<br>
+	 *
 	 * @param targetDate
+	 *            対象日付
 	 * @return
 	 */
 	public static Date toStartDate(Date targetDate) {

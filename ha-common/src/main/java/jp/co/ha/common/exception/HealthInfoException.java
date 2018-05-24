@@ -11,8 +11,11 @@ public class HealthInfoException extends BaseAppException {
 
 	/**
 	 * コンストラクタ<br>
+	 *
 	 * @param errorCode
+	 *            エラーコード
 	 * @param detail
+	 *            詳細
 	 */
 	public HealthInfoException(ErrorCode errorCode, String detail) {
 		super(errorCode, detail);

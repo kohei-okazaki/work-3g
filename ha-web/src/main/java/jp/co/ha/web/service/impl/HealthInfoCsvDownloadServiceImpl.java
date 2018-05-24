@@ -47,7 +47,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		// 最後に登録した健康情報を検索
-		String userId = (String) sessionService.getValue(request, "userId");
+		String userId = sessionService.getValue(request, "userId", String.class);
 		HealthInfo healthInfo = this.healthInfoSearchService.findLastByUserId(userId);
 
 		// CSV出力モデルリストに変換する

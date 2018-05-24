@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import jp.co.ha.common.web.BaseForm;
 
 /**
- * アカウント作成画面フォームクラス<br>
+ * アカウント登録画面フォームクラス<br>
  *
  */
 public class AccountRegistForm implements BaseForm {

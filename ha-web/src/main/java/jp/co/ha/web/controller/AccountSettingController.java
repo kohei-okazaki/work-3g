@@ -26,7 +26,6 @@ import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
-import jp.co.ha.web.validator.AccountSettingValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -63,7 +62,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@Override
 	@InitBinder(value = "AccountSettingForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new AccountSettingValidator());
+//		binder.setValidator(new AccountSettingValidator());
 	}
 
 	/**
@@ -74,7 +73,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	public AccountSettingForm setUpForm(HttpServletRequest request) {
 
 		// セッションからユーザIDを取得
-		String userId = (String) sessionService.getValue(request, "userId");
+		String userId = sessionService.getValue(request, "userId", String.class);
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(userId);

@@ -6,12 +6,13 @@ package jp.co.ha.common.api;
  */
 public abstract class BaseResponse {
 
-	/** 結果 */
+	/** 結果区分 */
 	private ResultType result;
 
 	/**
 	 * resultを返す<br>
-	 * @return result
+	 *
+	 * @return result 結果区分
 	 */
 	public ResultType getResult() {
 		return result;
@@ -19,7 +20,9 @@ public abstract class BaseResponse {
 
 	/**
 	 * resultを設定する<br>
+	 *
 	 * @param result
+	 *            結果区分
 	 */
 	public void setResult(ResultType result) {
 		this.result = result;

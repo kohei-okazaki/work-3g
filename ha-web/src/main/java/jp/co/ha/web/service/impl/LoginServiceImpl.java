@@ -2,8 +2,6 @@ package jp.co.ha.web.service.impl;
 
 import java.util.Objects;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,14 +32,6 @@ public class LoginServiceImpl implements LoginService {
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		String userPassword = account.getPassword();
 		return !inputPassword.equals(userPassword);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void registSession(HttpSession session, String userId) {
-		session.setAttribute("userId", userId);
 	}
 
 	/**

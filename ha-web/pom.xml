@@ -20,6 +20,7 @@
 		<poi-version>3.17</poi-version>
 		<jackson-version>2.9.5</jackson-version>
 		<org.thymeleaf-version>3.0.9.RELEASE</org.thymeleaf-version>
+		<org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -70,12 +71,23 @@
 			<artifactId>spring-core</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
 
 		<!-- thymeleaf -->
 		<dependency>
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring5</artifactId>
 			<version>${org.thymeleaf-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>${org.thymeleaf-layout-version}</version>
 		</dependency>
 
 		<!-- json lib -->

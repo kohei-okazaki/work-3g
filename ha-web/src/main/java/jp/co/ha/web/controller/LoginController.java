@@ -19,7 +19,6 @@ import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
-import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -42,7 +41,7 @@ public class LoginController implements BaseWebController {
 	 */
 	@InitBinder(value = "LoginForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new LoginValidator());
+//		binder.setValidator(new LoginValidator());
 	}
 
 	/**
@@ -103,7 +102,7 @@ public class LoginController implements BaseWebController {
 		}
 
 		// セッションにユーザIDを登録する。
-		this.loginService.registSession(request.getSession(), loginForm.getUserId());
+		sessionService.setValue(request, "userId", loginForm.getUserId());
 
 		return getView(ManageWebView.MENU);
 
@@ -117,7 +116,7 @@ public class LoginController implements BaseWebController {
 	@GetMapping("/menu.html")
 	public String menu(HttpServletRequest request) {
 
-		String userId = (String) sessionService.getValue(request, "userId");
+		String userId = sessionService.getValue(request, "userId", String.class);
 		return getView(Objects.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
 	}
 }

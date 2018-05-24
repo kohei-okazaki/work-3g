@@ -16,16 +16,22 @@ public interface CsvDownloadService {
 
 	/**
 	 * メイン処理
+	 *
 	 * @param request
+	 *            HttpServletRequest
 	 * @param response
+	 *            HttpServletResponse
 	 */
 	void execute(HttpServletRequest request, HttpServletResponse response);
 
 	/**
 	 * CSV設定情報を取得する<br>
+	 *
 	 * @param fileName
+	 *            ファイル名
 	 * @param account
-	 * @return
+	 *            アカウント情報
+	 * @return CsvConfig
 	 */
 	default CsvConfig getCsvConfig(String fileName, Account account) {
 

@@ -19,7 +19,6 @@ import jp.co.ha.common.exception.AccountCreateException;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
-import jp.co.ha.web.validator.AccountRegistValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -42,7 +41,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@InitBinder("AccountRegistForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new AccountRegistValidator());
+//		binder.setValidator(new AccountRegistValidator());
 	}
 
 	/**

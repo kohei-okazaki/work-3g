@@ -12,17 +12,24 @@ import jp.co.ha.common.exception.BaseAppException;
  * RestAPI基底コントローラ<br>
  * すべてのRestAPIコントローラはこのクラスを継承すること<br>
  *
- * @param <Rq> リクエストクラス
- * @param <Rs> レスポンスクラス
- * @param <S> サービスクラス
- * @param <E> 例外クラス
+ * @param <Rq>
+ *            リクエストクラス
+ * @param <Rs>
+ *            レスポンスクラス
+ * @param <S>
+ *            サービスクラス
+ * @param <E>
+ *            例外クラス
  */
 public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs, E>, E extends BaseAppException> {
 
 	/**
 	 * getでの通信の処理を行う<br>
+	 *
 	 * @param request
+	 *            HttpServletRequest
 	 * @param response
+	 *            HttpServletResponse
 	 * @return
 	 */
 	@GetMapping
@@ -44,8 +51,11 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 	/**
 	 * postでの通信の処理を行う<br>
-	 * @param request HttpServletRequest
-	 * @param response HttpServletResponse
+	 *
+	 * @param request
+	 *            HttpServletRequest
+	 * @param response
+	 *            HttpServletResponse
 	 * @return
 	 */
 	@PostMapping
@@ -55,17 +65,23 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 	/**
 	 * 継承先のコントローラクラスで処理する<br>
-	 * @param request リクエストクラス
+	 *
+	 * @param request
+	 *            リクエストクラス
 	 * @return response レスポンスクラス
 	 * @throws E
+	 *             例外クラス
 	 */
 	Rs execute(Rq request) throws E;
 
 	/**
 	 * Requestクラスに変換する<br>
-	 * @param request HttpServletRequest
+	 *
+	 * @param request
+	 *            HttpServletRequest
 	 * @return apiRequest Rq
 	 * @throws E
+	 *             例外クラス
 	 */
 	Rq toRequest(HttpServletRequest request) throws E;
 

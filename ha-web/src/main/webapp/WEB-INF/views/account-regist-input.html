@@ -35,12 +35,13 @@
 		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
 		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 		<div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+		<div th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
-		<input type="text" th:field="*{userId}" maxlength="16" required="required" placeholder="ユーザID" />
+		<input type="text" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" />
 		<br><br>
-		<input type="text" th:field="*{password}" maxlength="16" required="required" placeholder="パスワード" />
+		<input type="text" th:field="*{password}" maxlength="16" required placeholder="パスワード" />
 		<br><br>
-		<input type="text" th:field="*{confirmPassword}" maxlength="16" required="required" placeholder="確認用パスワード" />
+		<input type="text" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" />
 		<br><br>
 		<textarea rows="10" cols="30" name="remarks" ></textarea>
 		<br><br>

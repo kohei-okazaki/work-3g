@@ -18,10 +18,21 @@ public enum RegixPattern {
 	/** 正規表現 */
 	private String pattern;
 
+	/**
+	 * コンストラクタ<br>
+	 *
+	 * @param pattern
+	 *            正規表現
+	 */
 	private RegixPattern(String pattern) {
 		this.pattern = pattern;
 	}
 
+	/**
+	 * 正規表現を返す<br>
+	 *
+	 * @return
+	 */
 	public String getPattern() {
 		return pattern;
 	}
@@ -29,8 +40,11 @@ public enum RegixPattern {
 	/**
 	 * 指定した文字列(target)が指定した正規表現(patter)かどうか判定する<br>
 	 * 正しい場合true, 異なる場合falseを返す<br>
+	 *
 	 * @param target
+	 *            対象文字列
 	 * @param pattern
+	 *            正規表現
 	 * @return
 	 */
 	public static boolean isPattern(String target, RegixPattern pattern) {

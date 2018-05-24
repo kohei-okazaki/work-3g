@@ -15,7 +15,9 @@ public interface HealthInfoReferenceService
 
 	/**
 	 * 健康情報Entityを健康情報照会レスポンスクラスに変換する<br>
+	 *
 	 * @param healthInfo
+	 *            健康情報
 	 * @return
 	 */
 	HealthInfoReferenceResponse toResponse(HealthInfo healthInfo);
