@@ -51,6 +51,11 @@
 						<li><a id="standardWeight-modal-open" class="standardWeight-button-link">標準体重</a></li>
 					</ul>
 				</li>
+				<li><a class="navigation" href="#">規約</a>
+					<ul>
+						<li><a id="service-modal-open" class="service-button-link">利用規約</a></li>
+					</ul>
+				</li>
 			</ul>
 		</li>
 		<li><a class="navigation" href="/ha-web/login.html">ログアウト</a></li>
@@ -63,6 +68,10 @@
 
 <!-- 標準体重のモーダルを描画 -->
 <div th:include="common/standardWeightModal.html"></div>
+
+
+<!-- 利用規約のモーダルを描画 -->
+<div th:include="common/serviceModal.html"></div>
 
 
 </body>
