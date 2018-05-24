@@ -41,11 +41,12 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@InitBinder("AccountRegistForm")
 	public void initBinder(WebDataBinder binder) {
-//		binder.setValidator(new AccountRegistValidator());
+		//		binder.setValidator(new AccountRegistValidator());
 	}
 
 	/**
 	 * Formを返す<br>
+	 *
 	 * @return
 	 */
 	@ModelAttribute

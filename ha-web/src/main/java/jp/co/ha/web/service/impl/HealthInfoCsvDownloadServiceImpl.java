@@ -66,8 +66,10 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 
 	/**
 	 * CSVモデルリストに変換する<br>
+	 *
 	 * @param healthInfo
-	 * @return modelList
+	 *            HealthInfo
+	 * @return modelList List<HealthInfoCsvModel>
 	 */
 	private List<HealthInfoCsvModel> toModelList(HealthInfo healthInfo) {
 

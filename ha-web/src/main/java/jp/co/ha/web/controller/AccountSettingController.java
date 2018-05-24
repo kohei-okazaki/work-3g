@@ -125,11 +125,6 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@PostMapping(value = "/account-setting-complete.html")
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws AccountSettingException {
 
-//		if (CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, form.getDeleteFlag())) {
-//			// アカウントを削除する場合
-//			accountSettingService.deleteAccount(form);
-//		}
-
 		// アカウント情報を検索し、マージする
 		Account befAccount = accountSearchService.findByUserId(form.getUserId());
 		accountSettingService.mergeAccount(befAccount, form);

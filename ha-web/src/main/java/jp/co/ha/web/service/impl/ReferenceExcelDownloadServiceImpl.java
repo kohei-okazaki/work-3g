@@ -46,8 +46,11 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 
 	/**
 	 * 健康情報履歴リストをモデルリストに変換する<br>
-	 * @param historyList 健康情報リスト履歴リスト
+	 *
+	 * @param historyList
+	 *            List<HealthInfo> 健康情報リスト履歴リスト
 	 * @param account
+	 *            アカウント情報
 	 * @return modelList
 	 */
 	private List<ReferenceExcelModel> toModelList(List<HealthInfo> historyList, Account account) {
@@ -70,6 +73,5 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 
 		return modelList;
 	}
-
 
 }

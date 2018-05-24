@@ -1,7 +1,5 @@
 package jp.co.ha.web.controller;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +57,7 @@ public class ResultReferenceController implements BaseWebController {
 
 	/**
 	 * Formを返す<br>
+	 *
 	 * @return
 	 */
 	@ModelAttribute
@@ -68,7 +67,9 @@ public class ResultReferenceController implements BaseWebController {
 
 	/**
 	 * 検索照会画面<br>
+	 *
 	 * @param model
+	 *            Model
 	 * @return
 	 */
 	@GetMapping(value = "/result-reference.html")
@@ -78,13 +79,18 @@ public class ResultReferenceController implements BaseWebController {
 
 	/**
 	 * 検索結果画面を表示<br>
+	 *
 	 * @param model
+	 *            Model
 	 * @param userId
+	 *            ユーザID
 	 * @param form
+	 *            検索情報フォーム
 	 * @return
 	 */
 	@PostMapping(value = "/result-reference.html")
-	public String showSearchResult(Model model, @SessionAttribute String userId, @Valid ResultSearchForm form, BindingResult result) {
+	public String showSearchResult(Model model, @SessionAttribute String userId, @Valid ResultSearchForm form,
+			BindingResult result) {
 
 		if (result.hasErrors()) {
 			return getView(ManageWebView.RESULT_REFFERNCE);
@@ -102,10 +108,8 @@ public class ResultReferenceController implements BaseWebController {
 
 		// 検索情報を設定
 		model.addAttribute("form", form);
-
 		// 検索結果有無を設定
 		model.addAttribute("hasResult", true);
-
 		// ログイン中のユーザの全レコードを検索する
 		model.addAttribute("resultList", resultList);
 
@@ -114,29 +118,30 @@ public class ResultReferenceController implements BaseWebController {
 
 	/**
 	 * Excelダウンロードを実行<br>
+	 *
 	 * @param userId
+	 *            ユーザID
 	 * @return
 	 */
 	@GetMapping(value = "/result-reference-excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute String userId) {
 
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
-
 		ModelAndView model = new ModelAndView(fileDownloadService.execute(healthInfoList));
-//		model.setViewName(getView(ManageWebView.RESULT_REFFERNCE));
 
 		return model;
 	}
 
 	/**
 	 * CSVダウンロードを実行<br>
+	 *
 	 * @param request
+	 *            HttpServletRequest
 	 * @param response
-	 * @throws ParseException
-	 * @throws IOException
+	 *            HttpServletResponse
 	 */
 	@GetMapping(value = "/result-reference-csvDownload")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response) {
 		csvDownloadService.execute(request, response);
 	}
 }

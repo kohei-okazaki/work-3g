@@ -33,56 +33,75 @@ public class AccountRegistForm implements BaseForm {
 
 	/**
 	 * userIdを返す
-	 * @return userId
+	 *
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
 	}
+
 	/**
 	 * userIdを設定する
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	/**
 	 * passwordを返す
-	 * @return password
+	 *
+	 * @return password パスワード
 	 */
 	public String getPassword() {
 		return password;
 	}
+
 	/**
 	 * passwordを設定する
+	 *
 	 * @param password
+	 *            パスワード
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	/**
 	 * confirmPasswordを返す
-	 * @return confirmPassword
+	 *
+	 * @return confirmPassword 確認用パスワード
 	 */
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
+
 	/**
 	 * confirmPasswordを設定する
+	 *
 	 * @param confirmPassword
+	 *            確認用パスワード
 	 */
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+
 	/**
 	 * remarksを返す
-	 * @return remarks
+	 *
+	 * @return remarks 備考
 	 */
 	public String getRemarks() {
 		return remarks;
 	}
+
 	/**
 	 * remarksを設定する
+	 *
 	 * @param remarks
+	 *            備考
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;

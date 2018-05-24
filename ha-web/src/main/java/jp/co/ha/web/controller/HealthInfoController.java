@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,6 @@ import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.find.HealthInfoSearchService;
-import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
@@ -114,14 +112,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@PostMapping(value = "/healthInfo-complete.html")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws HealthInfoException {
 
-		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
-		// フォーム情報をリクエストクラスにコピー
-		BeanUtils.copyProperties(form, apiRequest);
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request, "userId", String.class);
-		apiRequest.setUserId(userId);
-		// リクエストタイプ設定
-		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
+		HealthInfoRegistRequest apiRequest = healthInfoService.setUpApiRequest(form, userId);
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);

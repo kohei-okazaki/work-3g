@@ -65,7 +65,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 
 	/**
 	 * 結果照会CSVモデルリストに変換する
-	 * @param healthInfoList
+	 * @param healthInfoList List<HealthInfo>
 	 * @return modelList
 	 */
 	private List<ReferenceCsvModel> toModelList(List<HealthInfo> healthInfoList) {

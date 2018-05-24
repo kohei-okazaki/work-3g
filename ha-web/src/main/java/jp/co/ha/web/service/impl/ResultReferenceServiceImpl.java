@@ -61,7 +61,13 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 
 	/**
 	 * 指定した文字列型のyyyy, MM, ddをDate型(yyyy/MM/dd)で返す<br>
-	 * @param date
+	 *
+	 * @param year
+	 *            年
+	 * @param month
+	 *            年
+	 * @param day
+	 *            日
 	 * @return
 	 */
 	private Date getStrDate(String year, String month, String day) {

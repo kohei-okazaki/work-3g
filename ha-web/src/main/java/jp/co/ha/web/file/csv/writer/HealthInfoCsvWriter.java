@@ -20,8 +20,11 @@ public class HealthInfoCsvWriter extends BaseCsvWriter<HealthInfoCsvModel> {
 
 	/**
 	 * コンストラクタ<br>
+	 *
 	 * @param conf
+	 *            CSV設定情報
 	 * @param modelList
+	 *            モデルリスト
 	 */
 	public HealthInfoCsvWriter(CsvConfig conf, List<HealthInfoCsvModel> modelList) {
 		super(conf, modelList);
