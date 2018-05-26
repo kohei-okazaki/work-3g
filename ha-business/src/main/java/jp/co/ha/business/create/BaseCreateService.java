@@ -1,5 +1,7 @@
 package jp.co.ha.business.create;
 
+import java.util.List;
+
 import jp.co.ha.common.dao.BaseDao;
 
 /**
@@ -19,4 +21,12 @@ public interface BaseCreateService<T, D extends BaseDao> {
 	 *            Entity
 	 */
 	void create(T entity);
+
+	/**
+	 * Entityリストを一括作成する<br>
+	 *
+	 * @param entityList
+	 *            エンティティリスト
+	 */
+	void create(List<T> entityList);
 }

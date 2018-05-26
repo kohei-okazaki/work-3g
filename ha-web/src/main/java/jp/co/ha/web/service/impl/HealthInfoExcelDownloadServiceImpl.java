@@ -60,7 +60,6 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		model.setStandardWeight(useMask ? "****" : healthInfo.getStandardWeight().toString());
 
 		return model;
-
 	}
 
 }

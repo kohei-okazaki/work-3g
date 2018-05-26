@@ -1,5 +1,7 @@
 package jp.co.ha.business.create.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,11 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 	@Override
 	public void create(MailInfo mailInfo) {
 		mailInfoDao.create(mailInfo);
+	}
+
+	@Override
+	public void create(List<MailInfo> entityList) {
+		entityList.forEach(mailInfo -> mailInfoDao.create(mailInfo));
 	}
 
 }

@@ -1,5 +1,7 @@
 package jp.co.ha.business.create.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,14 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 	@Override
 	public void create(HealthInfo healthInfo) {
 		healthInfoDao.create(healthInfo);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void create(List<HealthInfo> entityList) {
+		entityList.forEach(healthInfo -> healthInfoDao.create(healthInfo));
 	}
 
 }
