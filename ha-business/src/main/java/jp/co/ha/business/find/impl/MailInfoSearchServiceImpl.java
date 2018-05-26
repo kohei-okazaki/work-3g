@@ -23,6 +23,6 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 	 */
 	@Override
 	public MailInfo findByUserId(String userId) {
-		return this.mailInfoDao.findByUserId(userId);
+		return mailInfoDao.findByUserId(userId);
 	}
 }

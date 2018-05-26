@@ -69,14 +69,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		}
 		List<HealthInfo> resultList = new ArrayList<HealthInfo>();
 
-		healthInfoList.stream().forEach(healthInfo -> {
-			Date entityDate = healthInfo.getRegDate();
-			entityDate = DateUtil.toStartDate(entityDate);
-			if (regDate.compareTo(entityDate) == 0) {
-				// 同じ日付の場合
-				resultList.add(healthInfo);
-			}
-		});
+		healthInfoList.stream()
+			.filter(healthInfo -> regDate.compareTo(DateUtil.toStartDate(healthInfo.getRegDate())) == 0)
+			.forEach(healthInfo -> resultList.add(healthInfo));
 
 		return resultList;
 	}
@@ -95,13 +90,10 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		}
 		List<HealthInfo> resultList = new ArrayList<HealthInfo>();
 
-		healthInfoList.stream().forEach(healthInfo -> {
-			Date entityRegDate = healthInfo.getRegDate();
-			if (fromRegDate.after(entityRegDate) || toRegDate.before(entityRegDate)) {
-				// fromRegDate < entityRegDate < toRegDateの範囲内である健康情報の場合、追加
-				resultList.add(healthInfo);
-			}
-		});
+		// fromRegDate < entityRegDate < toRegDateの範囲内である健康情報の場合、追加
+		healthInfoList.stream()
+			.filter(healthInfo -> fromRegDate.after(healthInfo.getRegDate()) && toRegDate.before(healthInfo.getRegDate()))
+			.forEach(healthInfo -> resultList.add(healthInfo));
 
 		return resultList;
 	}
