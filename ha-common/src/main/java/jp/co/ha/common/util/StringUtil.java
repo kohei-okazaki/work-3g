@@ -74,7 +74,6 @@ public class StringUtil {
 	 */
 	public static boolean isTrue(String flag) {
 		return TRUE_FLAG.equals(flag);
-		//		return CodeManager.getInstance().isEquals(MainKey.FLAG, SubKey.TRUE, flag);
 	}
 
 	/**
