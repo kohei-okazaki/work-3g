@@ -86,10 +86,9 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 			while (iteRow.hasNext()) {
 				// 1行読み込む
 				Row row = iteRow.next();
-				if (row.getRowNum() == 0) {
-					// ヘッダーの場合は次のレコードに進む
-					continue;
-				}
+				// ヘッダーの場合は次のレコードに進む
+				if (row.getRowNum() == 0) continue;
+
 				if (dateId.equals(row.getCell(0).getStringCellValue())) {
 					healthInfo.setDataId(row.getCell(0).getStringCellValue());								// データID
 					healthInfo.setUserId(row.getCell(1).getStringCellValue());								// ユーザID

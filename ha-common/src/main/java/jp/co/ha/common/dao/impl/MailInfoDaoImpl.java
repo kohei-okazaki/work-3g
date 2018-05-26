@@ -17,6 +17,8 @@ import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.common.exception.DBException;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 
@@ -55,13 +57,13 @@ public class MailInfoDaoImpl implements MailInfoDao {
 				}
 			}
 		} catch (EncryptedDocumentException e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "メール情報の暗号化/複合化に失敗しました");
 		} catch (InvalidFormatException e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "メール情報の暗号化/複合化に失敗しました");
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "メール情報の暗号化/複合化に失敗しました");
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "DBアクセスに失敗しました");
 		}
 
 		return mailInfo;

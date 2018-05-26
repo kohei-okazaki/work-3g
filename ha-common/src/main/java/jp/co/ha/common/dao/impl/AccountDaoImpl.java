@@ -68,13 +68,6 @@ public class AccountDaoImpl implements AccountDao {
 			e.printStackTrace();
 		}
 
-//		AccountDto dto = new AccountDto();
-//		dto.setUserId(userId);
-//		dto.setPassword("password");
-//		dto.setInvalidFlag("0");
-//		dto.setPasswordExpire(DateUtil.getSysDate());
-//		dto.setRemarks("ここは備考です。");
-//		dto.setFileEnclosureCharFlag("1");
 		return account;
 	}
 
