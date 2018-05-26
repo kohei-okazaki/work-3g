@@ -1,6 +1,7 @@
 package jp.co.ha.api.controller;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,9 +53,9 @@ public class HealthInfoRegistController implements
 		apiRequest.setRequestType(RequestType.of(request.getParameter("requestId")));
 		apiRequest.setUserId(request.getParameter("userId"));
 		apiRequest.setHeight(
-				request.getParameter("height") == null ? null : new BigDecimal(request.getParameter("height")));
+				Objects.isNull(request.getParameter("height")) ? null : new BigDecimal(request.getParameter("height")));
 		apiRequest.setWeight(
-				request.getParameter("weight") == null ? null : new BigDecimal(request.getParameter("weight")));
+				Objects.isNull(request.getParameter("weight")) ? null : new BigDecimal(request.getParameter("weight")));
 
 		return apiRequest;
 	}
