@@ -40,7 +40,7 @@ public class SessionManageServiceImpl implements SessionManageService {
 	@Override
 	public void removeValues(HttpServletRequest request) {
 		Enumeration<String> enm= request.getSession().getAttributeNames();
-		while(enm.hasMoreElements()) {
+		while (enm.hasMoreElements()) {
 			this.removeValue(request, enm.nextElement());
 		}
 	}

@@ -43,6 +43,16 @@
 				</li>
 			</ul>
 		</li>
+		<li><a class="navigation" href="#">API</a>
+			<ul>
+				<li><a class="navigation" href="#">健康情報</a>
+					<ul>
+						<li><a id="api-regist-modal-open" class="api-regist-button-link">登録</a></li>
+						<li><a id="api-reference-modal-open" class="api-reference-button-link">照会</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
 		<li><a class="navigation" href="#">その他</a>
 			<ul>
 				<li><a class="navigation" href="#">健康情報</a>
@@ -68,6 +78,14 @@
 
 <!-- 標準体重のモーダルを描画 -->
 <div th:include="common/standardWeightModal.html"></div>
+
+
+<!-- APIリファレンス-健康情報登録のモーダルを描画 -->
+<div th:include="common/apiRegistModal.html"></div>
+
+
+<!-- APIリファレンス-健康情報照会のモーダルを描画 -->
+<div th:include="common/apiReferenceModal.html"></div>
 
 
 <!-- 利用規約のモーダルを描画 -->

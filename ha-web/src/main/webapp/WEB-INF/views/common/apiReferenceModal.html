@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="resources/css/common/apiReferenceModal.css">
+<link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/common/apiReferenceModal.js"></script>
+</head>
+<body>
+
+
+<div id="api-reference-modal-content">
+	<b>API 健康情報照会</b>
+	<br>
+	<br>
+	<p>登録された健康情報の照会を行う</p>
+	<p>以下の項目を必須として、リクエストを実施</p>
+	<p>リクエストURL:/ha-api/healthInfoReference</p>
+	<table>
+		<tr>
+			<th class="header">リクエストパラメータ</th>
+			<th class="header">詳細</th>
+		</tr>
+		<tr>
+			<td>リクエスト種別</td>
+			<td>健康情報照会のリクエスト種別<br>"002"を固定とする</td>
+		</tr>
+		<tr>
+			<td>データID</td>
+			<td>健康情報を登録したときに採番される健康情報を一意に識別するID</td>
+		</tr>
+		<tr>
+			<td>ユーザID</td>
+			<td>健康情報アプリでユーザを一意に識別するID</td>
+		</tr>
+	</table>
+
+
+
+</div>
+
+
+</body>
+</html>
