@@ -10,9 +10,11 @@ public enum ManageWebView implements BaseView {
 
 	/** ログイン画面URL */
 	LOGIN("login"),
-	/** 健康情報画面URL */
+	/** 健康情報入力画面URL */
 	HEALTH_INFO_INPUT("healthInfo-input"),
+	/** 健康情報入力確認画面URL */
 	HEALTH_INFO_CONFIRM("healthInfo-confirm"),
+	/** 健康情報入力完了画面URL */
 	HEALTH_INFO_COMPLETE("healthInfo-complete"),
 	/** メニュー画面URL */
 	MENU("menu"),
@@ -20,17 +22,23 @@ public enum ManageWebView implements BaseView {
 	ERROR("error"),
 	/** 結果照会画面URL */
 	RESULT_REFFERNCE("result-reference"),
-	/** アカウント設定画面URL */
+	/** アカウント設定入力画面URL */
 	ACCOUNT_SETTING_INPUT("account-setting-input"),
+	/** アカウント設定入力確認画面URL */
 	ACCOUNT_SETTING_CONFIRM("account-setting-confirm"),
+	/** アカウント設定入力完了画面URL */
 	ACCOUNT_SETTING_COMPLETE("account-setting-complete"),
-	/** 通知設定画面URL */
+	/** 通知設定入力画面URL */
 	NOTICE_SETTING_INPUT("notice-setting-input"),
+	/** 通知設定入力画面URL */
 	NOTICE_SETTING_CONFIRM("notice-setting-confirm"),
+	/** 通知設定入力完了画面URL */
 	NOTICE_SETTING_COMPLETE("notice-setting-complete"),
-	/** アカウント作成画面URL */
+	/** アカウント作成入力画面URL */
 	ACCOUNT_REGIST_INPUT("account-regist-input"),
+	/** アカウント作成入力確認画面URL */
 	ACCOUNT_REGIST_CONFIRM("account-regist-confirm"),
+	/** アカウント作成入力完了画面URL */
 	ACCOUNT_REGIST_COMPLETE("account-regist-complete");
 
 	/** view名 */

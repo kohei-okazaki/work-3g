@@ -10,21 +10,17 @@ import java.math.RoundingMode;
 public enum CalcMethod {
 
 	/** 和 */
-	ADD((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode) -> {
-		return target1.add(target2).setScale(degit, roudingMode);
-	}),
+	ADD((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
+			-> target1.add(target2).setScale(degit, roudingMode)),
 	/** 差 */
-	SUBTRACT((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode) -> {
-		return target1.subtract(target2).setScale(degit, roudingMode);
-	}),
+	SUBTRACT((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
+			-> target1.subtract(target2).setScale(degit, roudingMode)),
 	/** 積 */
-	MULTIPLY((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode) -> {
-		return target1.multiply(target2).setScale(degit, roudingMode);
-	}),
+	MULTIPLY((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
+			-> target1.multiply(target2).setScale(degit, roudingMode)),
 	/** 商 */
-	DIVIDE((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode) -> {
-		return target1.divide(target2, degit, roudingMode);
-	});
+	DIVIDE((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
+			-> target1.divide(target2, degit, roudingMode));
 
 	/** 四則演算オペレータインターフェース */
 	private CalcOperator operator;
@@ -45,7 +41,7 @@ public enum CalcMethod {
 	 * @return operator
 	 */
 	public CalcOperator getOperator() {
-		return operator;
+		return this.operator;
 	}
 
 }

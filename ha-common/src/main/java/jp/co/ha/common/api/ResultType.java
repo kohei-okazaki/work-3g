@@ -34,7 +34,7 @@ public enum ResultType {
 	 * @return code
 	 */
 	public String getCode() {
-		return code;
+		return this.code;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public enum ResultType {
 	 * @return message
 	 */
 	public String getMessage() {
-		return message;
+		return this.message;
 	}
 
 }

@@ -1,5 +1,7 @@
 package jp.co.ha.common.api;
 
+import java.util.stream.Stream;
+
 /**
  * リクエストタイプ<br>
  * APIのリクエストの列挙<br>
@@ -38,12 +40,10 @@ public enum RequestType {
 	 * @return
 	 */
 	public static RequestType of(String requestId) {
-		for (RequestType type : RequestType.class.getEnumConstants()) {
-			if (type.getRequestId().equals(requestId)) {
-				return type;
-			}
-		}
-		return null;
+		return Stream.of(RequestType.class.getEnumConstants())
+				.filter(type -> type.getRequestId().equals(requestId))
+				.findFirst()
+				.orElse(null);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public enum RequestType {
 	 * @return requestId リクエストID
 	 */
 	public String getRequestId() {
-		return requestId;
+		return this.requestId;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public enum RequestType {
 	 * @return name 名前
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 }

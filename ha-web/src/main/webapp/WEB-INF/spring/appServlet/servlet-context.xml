@@ -14,6 +14,7 @@
 						http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<annotation-driven />
+	<aop:aspectj-autoproxy />
 
 	<resources mapping="/resources/**" location="/resources/" />
 
@@ -36,5 +37,13 @@
 	<context:component-scan base-package="jp.co.ha.web.controller" />
 	<context:component-scan base-package="jp.co.ha.web.service.impl" />
 	<context:component-scan base-package="jp.co.ha.web.service.annotation" />
+
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+			<beans:list>
+				<beans:value>messages</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
 
 </beans:beans>

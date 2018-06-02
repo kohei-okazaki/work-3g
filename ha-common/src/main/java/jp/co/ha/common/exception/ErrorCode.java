@@ -1,5 +1,7 @@
 package jp.co.ha.common.exception;
 
+import java.util.stream.Stream;
+
 /**
  * エラーコードの定義<br>
  * API, WEBでのエラーコードをそれぞれ定義する<br>
@@ -22,7 +24,10 @@ public enum ErrorCode {
 	/** リクエスト情報エラー */
 	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "ERROR", "不正リクエストエラーです"),
 	/** リクエストID相違エラー */
-	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "ERROR", "リクエストIDが一致しません");
+	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "ERROR", "リクエストIDが一致しません"),
+
+	/** DB暗号化・複合化エラー */
+	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー");
 
 	/** エラーコード */
 	private String errorCode;
@@ -53,7 +58,7 @@ public enum ErrorCode {
 	 * @return errorCode
 	 */
 	public String getErrorCode() {
-		return errorCode;
+		return this.errorCode;
 	}
 
 	/**
@@ -62,7 +67,7 @@ public enum ErrorCode {
 	 * @return logLevel
 	 */
 	public String getLogLevel() {
-		return logLevel;
+		return this.logLevel;
 	}
 
 	/**
@@ -71,7 +76,7 @@ public enum ErrorCode {
 	 * @return errorMessage
 	 */
 	public String getErrorMessage() {
-		return errorMessage;
+		return this.errorMessage;
 	}
 
 	/**
@@ -82,13 +87,9 @@ public enum ErrorCode {
 	 * @return
 	 */
 	public static ErrorCode of(String errorCode) {
-
-		for (ErrorCode code : ErrorCode.class.getEnumConstants()) {
-			if (code.errorCode.equals(errorCode)) {
-				return code;
-			}
-		}
-		return null;
+		return Stream.of(ErrorCode.class.getEnumConstants())
+					.filter(code -> code.errorCode.equals(errorCode))
+					.findFirst()
+					.orElse(null);
 	}
-
 }

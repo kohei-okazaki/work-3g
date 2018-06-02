@@ -1,14 +1,12 @@
 package jp.co.ha.web.file.excel.model;
 
 import jp.co.ha.common.file.excel.annotation.ExcelHeader;
-import jp.co.ha.common.file.excel.annotation.ExcelModel;
 import jp.co.ha.common.file.excel.model.BaseExcelModel;
 
 /**
  * 結果照会Excel出力モデルクラス<br>
  *
  */
-@ExcelModel
 @ExcelHeader(names = { "身長", "体重", "BMI", "標準体重" })
 public class ReferenceExcelModel implements BaseExcelModel {
 

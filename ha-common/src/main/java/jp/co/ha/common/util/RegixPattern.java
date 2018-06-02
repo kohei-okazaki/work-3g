@@ -34,7 +34,7 @@ public enum RegixPattern {
 	 * @return
 	 */
 	public String getPattern() {
-		return pattern;
+		return this.pattern;
 	}
 
 	/**

@@ -1,7 +1,8 @@
 package jp.co.ha.business.parameter;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 定数定義列挙<br>
@@ -9,14 +10,18 @@ import java.util.List;
  */
 public enum ParamConst {
 
-	/** 健康情報ステータス */
+	/** 健康情報ステータス：減少 */
 	HEALTH_INFO_USER_STATUS_DOWN(MainKey.HEALTH_INFO_USER_STATUS, SubKey.DOWN, "10"),
+	/** 健康情報ステータス：変化なし */
 	HEALTH_INFO_USER_STATUS_EVEN(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN, "20"),
+	/** 健康情報ステータス：増加 */
 	HEALTH_INFO_USER_STATUS_INCREASE(MainKey.HEALTH_INFO_USER_STATUS, SubKey.INCREASE, "30"),
 
-	/** 健康情報ステータスメッセージ */
+	/** 健康情報ステータスメッセージ：減少 */
 	HEALTH_INFO_USER_STATUS_DOWN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.DOWN, "減りました"),
+	/** 健康情報ステータスメッセージ：変化なし */
 	HEALTH_INFO_USER_STATUS_EVEN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.EVEN, "変化ありません"),
+	/** 健康情報ステータスメッセージ：増加 */
 	HEALTH_INFO_USER_STATUS_INCREASE_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.INCREASE, "増えました"),
 
 	/** ページタイプ：入力 */
@@ -26,16 +31,16 @@ public enum ParamConst {
 	/** ページタイプ：完了 */
 	PAGE_VIEW_COMPLETE(MainKey.PAGE_VIEW, SubKey.COMPLETE, "2"),
 
-	/** 真偽値：真*/
+	/** 真偽値：真 */
 	FLAG_TRUE(MainKey.FLAG, SubKey.TRUE, "1"),
-	/** 真偽値：偽*/
+	/** 真偽値：偽 */
 	FLAG_FALSE(MainKey.FLAG, SubKey.FALSE, "0"),
 
-	/** CSVファイル名 */
-	CSV_FILE_NAME_HEALTH_INFO(MainKey.CSV_FILE_NAME, SubKey.HEALTH_INFO,
-			"HealthInfo.csv"), CSV_FILE_NAME_REFERNCE_RESULT(MainKey.CSV_FILE_NAME, SubKey.REFERNCE_RESULT,
-					"ReferenceResult.csv"),
-					;
+	/** 健康情報CSVファイル名 */
+	CSV_FILE_NAME_HEALTH_INFO(MainKey.CSV_FILE_NAME, SubKey.HEALTH_INFO, "HealthInfo.csv"),
+	/** 結果照会CSVファイル名 */
+	CSV_FILE_NAME_REFERNCE_RESULT(MainKey.CSV_FILE_NAME, SubKey.REFERNCE_RESULT, "ReferenceResult.csv"),
+	;
 
 	/**
 	 * コンストラクタ<br>
@@ -70,14 +75,10 @@ public enum ParamConst {
 	 * @return
 	 */
 	public static ParamConst of(MainKey mainKey, SubKey subKey) {
-
-		for (ParamConst paramConst : ParamConst.class.getEnumConstants()) {
-			if (paramConst.mainKey.equals(mainKey)
-					&& paramConst.subKey.equals(subKey)) {
-				return paramConst;
-			}
-		}
-		return null;
+		return Stream.of(ParamConst.class.getEnumConstants())
+				.filter(paramConst -> paramConst.mainKey.equals(mainKey) && paramConst.subKey.equals(subKey))
+				.findFirst()
+				.orElse(null);
 	}
 
 	/**
@@ -88,13 +89,9 @@ public enum ParamConst {
 	 * @return
 	 */
 	public static List<ParamConst> ofList(MainKey mainKey) {
-		List<ParamConst> resultList = new ArrayList<>();
-		for (ParamConst paramConst : ParamConst.class.getEnumConstants()) {
-			if (paramConst.mainKey.equals(mainKey)) {
-				resultList.add(paramConst);
-			}
-		}
-		return resultList;
+		return Stream.of(ParamConst.class.getEnumConstants())
+				.filter(param -> param.mainKey.equals(mainKey))
+				.collect(Collectors.toList());
 	}
 
 	/**
@@ -103,7 +100,7 @@ public enum ParamConst {
 	 * @return mainKey メインキー
 	 */
 	public MainKey getMainKey() {
-		return mainKey;
+		return this.mainKey;
 	}
 
 	/**
@@ -112,7 +109,7 @@ public enum ParamConst {
 	 * @return subKey サブキー
 	 */
 	public SubKey getSubKey() {
-		return subKey;
+		return this.subKey;
 	}
 
 	/**
@@ -121,7 +118,7 @@ public enum ParamConst {
 	 * @return value 値
 	 */
 	public String getValue() {
-		return value;
+		return this.value;
 	}
 
 }
