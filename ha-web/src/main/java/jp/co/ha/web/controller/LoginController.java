@@ -1,11 +1,13 @@
 package jp.co.ha.web.controller;
 
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,8 @@ public class LoginController implements BaseWebController {
 	/** sessionサービス */
 	@Autowired
 	private SessionManageService sessionService;
+	@Autowired
+	private MessageSource messageSource;
 
 	/**
 	 * Validateを設定<br>
@@ -69,6 +73,7 @@ public class LoginController implements BaseWebController {
 	public String login(Model model, HttpServletRequest request) {
 		// sessionに格納している情報をすべて削除する
 		sessionService.removeValues(request);
+		System.out.println(messageSource.getMessage("message", null, Locale.JAPANESE));
 		return getView(ManageWebView.LOGIN);
 	}
 

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import jp.co.ha.common.file.csv.annotation.CsvHeader;
-import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 
 /**
@@ -12,7 +11,6 @@ import jp.co.ha.common.file.csv.model.BaseCsvModel;
  * CSV出力したい項目のみを持つ
  *
  */
-@CsvModel
 @CsvHeader(names = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
 public class ReferenceCsvModel implements BaseCsvModel {
 
