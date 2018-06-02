@@ -87,6 +87,9 @@ public enum ErrorCode {
 	 * @return
 	 */
 	public static ErrorCode of(String errorCode) {
-		return Stream.of(ErrorCode.class.getEnumConstants()).filter(code -> code.errorCode.equals(errorCode)).findFirst().orElse(null);
+		return Stream.of(ErrorCode.class.getEnumConstants())
+					.filter(code -> code.errorCode.equals(errorCode))
+					.findFirst()
+					.orElse(null);
 	}
 }
