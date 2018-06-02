@@ -1,5 +1,7 @@
 package jp.co.ha.common.web;
 
+import java.util.stream.Stream;
+
 /**
  * すべてのViewEnumはこのインターフェースを継承すること<br>
  *
@@ -25,13 +27,10 @@ public interface BaseView {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <V extends BaseView> V of(Class<? extends BaseView> view, String url) {
-
-		for (BaseView baseView : view.getEnumConstants()) {
-			if (baseView.getName().equals(url)) {
-				return (V) baseView;
-			}
-		}
 		// 一致しない場合
-		return null;
+		return (V) Stream.of(view.getEnumConstants())
+						.filter(baseView -> baseView.getName().equals(url))
+						.findFirst()
+						.orElse(null);
 	}
 }

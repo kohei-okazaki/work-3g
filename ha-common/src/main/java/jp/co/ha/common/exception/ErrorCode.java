@@ -1,5 +1,7 @@
 package jp.co.ha.common.exception;
 
+import java.util.stream.Stream;
+
 /**
  * エラーコードの定義<br>
  * API, WEBでのエラーコードをそれぞれ定義する<br>
@@ -56,7 +58,7 @@ public enum ErrorCode {
 	 * @return errorCode
 	 */
 	public String getErrorCode() {
-		return errorCode;
+		return this.errorCode;
 	}
 
 	/**
@@ -65,7 +67,7 @@ public enum ErrorCode {
 	 * @return logLevel
 	 */
 	public String getLogLevel() {
-		return logLevel;
+		return this.logLevel;
 	}
 
 	/**
@@ -74,7 +76,7 @@ public enum ErrorCode {
 	 * @return errorMessage
 	 */
 	public String getErrorMessage() {
-		return errorMessage;
+		return this.errorMessage;
 	}
 
 	/**
@@ -85,13 +87,6 @@ public enum ErrorCode {
 	 * @return
 	 */
 	public static ErrorCode of(String errorCode) {
-
-		for (ErrorCode code : ErrorCode.class.getEnumConstants()) {
-			if (code.errorCode.equals(errorCode)) {
-				return code;
-			}
-		}
-		return null;
+		return Stream.of(ErrorCode.class.getEnumConstants()).filter(code -> code.errorCode.equals(errorCode)).findFirst().orElse(null);
 	}
-
 }
