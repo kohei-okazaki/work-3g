@@ -1,11 +1,14 @@
 package jp.co.ha.web.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.util.DateFormatDefine;
@@ -42,10 +45,15 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * 健康情報を取得する<br>
+	 *
+	 * @param form
+	 *            ResultSearchForm
+	 * @param userId
+	 *            ユーザID
+	 * @return
 	 */
-	@Override
-	public List<HealthInfo> getHealthInfo(ResultSearchForm form, String userId) {
+	private List<HealthInfo> getHealthInfo(ResultSearchForm form, String userId) {
 
 		List<HealthInfo> resultList = null;
 		Date regDate = getStrDate(form.getFromRegYear(), form.getFromRegMonth(), form.getFromRegDay());
@@ -73,6 +81,24 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	private Date getStrDate(String year, String month, String day) {
 		String strDate = year + StringUtil.THRASH + month + StringUtil.THRASH + day;
 		return DateUtil.toDate(strDate, DateFormatDefine.YYYYMMDD);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<HealthInfoRegistResponse> getHealthInfoResponseList(ResultSearchForm form, String userId) {
+
+		// ユーザIDと検索条件フォームから健康情報Entityを取得
+		List<HealthInfo> entityList = getHealthInfo(form, userId);
+		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
+		entityList.stream().forEach(entity -> {
+			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
+			BeanUtils.copyProperties(entity, response);
+			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			resultList.add(response);
+		});
+		return resultList;
 	}
 
 }

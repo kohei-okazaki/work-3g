@@ -1,13 +1,11 @@
 package jp.co.ha.web.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +21,6 @@ import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.util.DateFormatDefine;
-import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.ResultSearchForm;
 import jp.co.ha.web.service.ResultReferenceService;
@@ -97,14 +93,7 @@ public class ResultReferenceController implements BaseWebController {
 		}
 		service.setUpForm(form);
 
-		List<HealthInfo> entityList = service.getHealthInfo(form, userId);
-		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
-		for (HealthInfo entity : entityList) {
-			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
-			BeanUtils.copyProperties(entity, response);
-			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
-			resultList.add(response);
-		}
+		List<HealthInfoRegistResponse> resultList = service.getHealthInfoResponseList(form, userId);
 
 		// 検索情報を設定
 		model.addAttribute("form", form);
