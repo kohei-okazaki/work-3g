@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 /**
  * Bean系のUtilクラス<br>
@@ -66,6 +67,31 @@ public class BeanUtil {
 		String targetFieldName = targetField.getName();
 		Class<?> targetFieldType = targetField.getType();
 		return targetFieldName.equals(sourceFieldName) && targetFieldType.equals(sourcefieldType);
+	}
+
+	/**
+	 * targetがnullかどうか判定する<br>
+	 * 判定結果:nullの場合true, それ以外の場合false<br>
+	 *
+	 * @param target
+	 *            検査対象インスタンス
+	 * @return 判定結果
+	 */
+	public static boolean isNull(Object target) {
+		return Objects.isNull(target);
+	}
+
+	/**
+	 * targetがnullでないかどうか判定する<br>
+	 * 判定結果:nullの場合false, それ以外の場合true<br>
+	 *
+	 * @see BeanUtil#isNull
+	 * @param target
+	 *            検査対象インスタンス
+	 * @return 判定結果
+	 */
+	public static boolean notNull(Object target) {
+		return !isNull(target);
 	}
 
 }

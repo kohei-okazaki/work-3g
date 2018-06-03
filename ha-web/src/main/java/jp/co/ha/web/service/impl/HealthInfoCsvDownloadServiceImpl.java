@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,7 @@ import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvModel;
 import jp.co.ha.web.file.csv.writer.HealthInfoCsvWriter;
 
@@ -75,7 +75,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 
 		List<HealthInfoCsvModel> modelList = new ArrayList<HealthInfoCsvModel>();
 		HealthInfoCsvModel model = new HealthInfoCsvModel();
-		BeanUtils.copyProperties(healthInfo, model);
+		BeanUtil.copy(healthInfo, model);
 		modelList.add(model);
 
 		return modelList;

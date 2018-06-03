@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -94,7 +94,7 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
 		entityList.stream().forEach(entity -> {
 			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
-			BeanUtils.copyProperties(entity, response);
+			BeanUtil.copy(entity, response);
 			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 			resultList.add(response);
 		});

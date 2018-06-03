@@ -2,7 +2,6 @@ package jp.co.ha.api.service.impl;
 
 import java.util.Objects;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +15,7 @@ import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -80,7 +80,8 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	public HealthInfoReferenceResponse toResponse(HealthInfo healthInfo) {
 		// 健康情報照会レスポンスクラス
 		HealthInfoReferenceResponse apiResponse = new HealthInfoReferenceResponse();
-		BeanUtils.copyProperties(healthInfo, apiResponse);
+//		BeanUtils.copyProperties(healthInfo, apiResponse);
+		BeanUtil.copy(healthInfo, apiResponse);
 		apiResponse.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 		return apiResponse;
 	}

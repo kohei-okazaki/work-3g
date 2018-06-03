@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +19,7 @@ import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 
@@ -74,7 +74,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 		Stream.iterate(0, i -> ++i).limit(healthInfoList.size()).forEach(i -> {
 			ReferenceCsvModel model = new ReferenceCsvModel();
 			HealthInfo healthInfo = healthInfoList.get(i);
-			BeanUtils.copyProperties(healthInfo, model);
+			BeanUtil.copy(healthInfo, model);
 			modelList.add(model);
 		});
 
