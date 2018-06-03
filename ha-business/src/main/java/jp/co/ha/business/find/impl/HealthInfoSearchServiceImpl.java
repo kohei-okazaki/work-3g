@@ -3,7 +3,6 @@ package jp.co.ha.business.find.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -48,7 +48,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
 		List<HealthInfo> entityList = this.findByUserId(userId);
 
-		if (Objects.isNull(entityList) || entityList.isEmpty()) {
+		if (BeanUtil.isNull(entityList) || entityList.isEmpty()) {
 			// 登録がされてなかった場合
 			return null;
 		}
@@ -63,7 +63,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
 
-		if (Objects.isNull(regDate)) {
+		if (BeanUtil.isNull(regDate)) {
 			// 検索条件がない場合
 			return healthInfoList;
 		}
@@ -84,7 +84,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
 
-		if (Objects.isNull(fromRegDate) || Objects.isNull(toRegDate)) {
+		if (BeanUtil.isNull(fromRegDate) || BeanUtil.isNull(toRegDate)) {
 			// 検索条件がない場合
 			return healthInfoList;
 		}

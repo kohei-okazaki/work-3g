@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * 日付のUtilクラス<br>
@@ -121,7 +120,7 @@ public class DateUtil {
 	 */
 	public static String toString(Date targetDate, DateFormatDefine format) {
 
-		if (Objects.isNull(format) || StringUtil.isEmpty(format.getValue())) {
+		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
 		}
 

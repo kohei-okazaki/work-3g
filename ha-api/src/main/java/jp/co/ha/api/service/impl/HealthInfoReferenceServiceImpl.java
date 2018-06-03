@@ -1,8 +1,5 @@
 package jp.co.ha.api.service.impl;
 
-import java.util.Objects;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +13,7 @@ import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -40,7 +38,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	@Override
 	public void checkRequest(HealthInfoReferenceRequest request) throws HealthInfoException {
 
-		if (Objects.isNull(request.getRequestType())
+		if (BeanUtil.isNull(request.getRequestType())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| StringUtil.isEmpty(request.getDataId())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
@@ -53,7 +51,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
-		if (Objects.isNull(account.getUserId())) {
+		if (BeanUtil.isNull(account.getUserId())) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
 		}
 	}
@@ -80,7 +78,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	public HealthInfoReferenceResponse toResponse(HealthInfo healthInfo) {
 		// 健康情報照会レスポンスクラス
 		HealthInfoReferenceResponse apiResponse = new HealthInfoReferenceResponse();
-		BeanUtils.copyProperties(healthInfo, apiResponse);
+		BeanUtil.copy(healthInfo, apiResponse);
 		apiResponse.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 		return apiResponse;
 	}

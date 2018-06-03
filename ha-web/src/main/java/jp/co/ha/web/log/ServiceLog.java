@@ -26,7 +26,8 @@ public class ServiceLog {
 	 */
 	@Before("execution(* *..*ServiceImpl.*(..))*")
 	public void startLog(JoinPoint jp) {
-		LOG.info("■■■■■■■■■■■■■■■開始■■■■■■■■■■■■■■■" + jp.toString());
+		LOG.info("■■■■■■■■■■■■■■■開始■■■■■■■■■■■■■■■" + jp.getThis().toString());
+		LOG.info("=====>" + jp.getSignature().getName());
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class ServiceLog {
 	 */
 	@After("execution(* *..*ServiceImpl.*(..))*")
 	public void endLog(JoinPoint jp) {
-		LOG.info("■■■■■■■■■■■■■■■終了■■■■■■■■■■■■■■■" + jp.toString());
+		LOG.info("■■■■■■■■■■■■■■■終了■■■■■■■■■■■■■■■" + jp.getThis().toString());
 	}
 
 }

@@ -3,7 +3,6 @@ package jp.co.ha.web.service.impl;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +14,7 @@ import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.business.parameter.SubKey;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 
@@ -79,7 +79,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	public HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) {
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
 		// フォーム情報をリクエストクラスにコピー
-		BeanUtils.copyProperties(form, apiRequest);
+		BeanUtil.copy(form, apiRequest);
 		apiRequest.setUserId(userId);
 		// リクエストタイプ設定
 		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
