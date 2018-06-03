@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="resources/css/common/apiRegistModal.css">
+<link rel="stylesheet" type="text/css" href="resources/css/table.css">
 <script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/apiRegistModal.js"></script>
 </head>
@@ -11,6 +12,81 @@
 
 <div id="api-regist-modal-content">
 	<b>API 健康情報登録</b>
+	<br>
+	<br>
+	<p>指定されたリクエストパラメータからユーザの健康情報を登録する</p>
+	<p>リクエストURL:/ha-api/healthInfoRegist</p>
+	<table>
+		<tr>
+			<th class="header">リクエストパラメータ</th>
+			<th class="header">詳細</th>
+		</tr>
+		<tr>
+			<td>リクエストタイプ<br>/requestId</td>
+			<td>健康情報登録のリクエスト種別<br>"001"を固定とする</td>
+		</tr>
+		<tr>
+			<td>ユーザID<br>/userId</td>
+			<td>健康情報アプリでユーザを一意に識別するID</td>
+		</tr>
+		<tr>
+			<td>身長<br>/height</td>
+			<td>ユーザの登録したい身長</td>
+		</tr>
+		<tr>
+			<td>体重<br>/weight</td>
+			<td>ユーザの登録したい体重</td>
+		</tr>
+	</table>
+	<br>
+	<table>
+		<tr>
+			<th class="header">レスポンスパラメータ</th>
+			<th class="header">詳細</th>
+		</tr>
+		<tr>
+			<td>結果区分<br>/result</td>
+			<td>API実施時の結果区分</td>
+		</tr>
+		<tr>
+			<td>データID<br>/dataId</td>
+			<td>健康情報を登録したときに採番される健康情報を一意に識別するID</td>
+		</tr>
+		<tr>
+			<td>ユーザID<br>/userId</td>
+			<td>健康情報アプリでユーザを一意に識別するID</td>
+		</tr>
+		<tr>
+			<td>身長<br>/height</td>
+			<td>データIDに紐づく健康情報に登録された身長(入力値)</td>
+		</tr>
+		<tr>
+			<td>体重<br>/weight</td>
+			<td>データIDに紐づく健康情報に登録された体重(入力値)</td>
+		</tr>
+		<tr>
+			<td>BMI<br>/bmi</td>
+			<td>データIDに紐づく健康情報に登録されたBMI</td>
+		</tr>
+		<tr>
+			<td>標準体重<br>/standardWeight</td>
+			<td>データIDに紐づく健康情報に登録された標準体重</td>
+		</tr>
+		<tr>
+			<td>ユーザステータス/userStatus</td>
+			<td>前回登録された健康情報と比較し<br>
+				減少した場合:10<br>
+				変化なしの場合:20<br>
+				増加した場合:30<br>
+			</td>
+		</tr>
+		<tr>
+			<td>登録日時<br>/regDate</td>
+			<td>データIDに紐づく健康情報に登録された登録日時</td>
+		</tr>
+	</table>
+
+
 </div>
 
 
