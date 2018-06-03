@@ -1,7 +1,6 @@
 package jp.co.ha.common.util;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -35,13 +34,13 @@ public class ExcelUtil {
 
 		// row取得
 		Row sheetRow = sheet.getRow(row);
-		if (Objects.isNull(sheetRow)) {
+		if (BeanUtil.isNull(sheetRow)) {
 			sheetRow = sheet.createRow(row);
 		}
 
 		// cell取得
 		Cell cell = sheetRow.getCell(col);
-		if (Objects.isNull(cell)) {
+		if (BeanUtil.isNull(cell)) {
 			cell = sheetRow.createCell(col);
 		}
 		return cell;

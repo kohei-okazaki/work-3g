@@ -1,7 +1,5 @@
 package jp.co.ha.web.controller;
 
-import java.util.Objects;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -87,14 +85,6 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		MailInfo mailInfo = mailInfoSearchService.findByUserId(userId);
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
-//		accountSettingForm.setDeleteFlag(account.getDeleteFlag());
-//		accountSettingForm.setUserId(userId);
-//		accountSettingForm.setPassword(account.getPassword());
-//		accountSettingForm.setFileEnclosureCharFlag(account.getFileEnclosureCharFlag());
-//		accountSettingForm.setHealthInfoMaskFlag(account.getHealthInfoMaskFlag());
-//		accountSettingForm.setMailAddress(mailInfo.getMailAddress());
-//		accountSettingForm.setMailPassword(mailInfo.getMailPassword());
-//		accountSettingForm.setRemarks(account.getRemarks());
 		BeanUtil.copy(account, accountSettingForm);
 		BeanUtil.copy(mailInfo, accountSettingForm);
 		return accountSettingForm;
@@ -140,7 +130,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		MailInfo befMailInfo = mailInfoSearchService.findByUserId(form.getUserId());
 		accountSettingService.mergeMailInfo(befMailInfo, form);
 
-		if (Objects.isNull(befMailInfo.getUserId())) {
+		if (BeanUtil.isNull(befMailInfo.getUserId())) {
 			// メール情報が登録されてない場合
 			MailInfo mailInfo = accountSettingService.convertMailInfo(form);
 			// メール情報を新規登録する

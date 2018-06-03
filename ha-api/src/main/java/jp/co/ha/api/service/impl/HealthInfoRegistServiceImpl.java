@@ -2,7 +2,6 @@ package jp.co.ha.api.service.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -49,15 +49,15 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
-		if (Objects.isNull(request.getRequestType())
+		if (BeanUtil.isNull(request.getRequestType())
 				|| StringUtil.isEmpty(request.getUserId())
-				|| Objects.isNull(request.getHeight())
-				|| Objects.isNull(request.getWeight())) {
+				|| BeanUtil.isNull(request.getHeight())
+				|| BeanUtil.isNull(request.getWeight())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
-		if (Objects.isNull(account.getUserId())) {
+		if (BeanUtil.isNull(account.getUserId())) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
 		}
 	}
@@ -98,7 +98,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
 		// 最後に登録した健康情報を取得する
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());
-		String userStatus = Objects.nonNull(lastHealthInfo)
+		String userStatus = BeanUtil.notNull(lastHealthInfo)
 				? healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
 				: ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue();
 		Date regDate = DateUtil.getSysDate();
@@ -143,7 +143,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * @return
 	 */
 	private String getNextDataId(HealthInfo healthInfo) {
-		return Objects.isNull(healthInfo) ? "1" : String.valueOf(Integer.valueOf(healthInfo.getDataId()) + 1);
+		return BeanUtil.isNull(healthInfo) ? "1" : String.valueOf(Integer.valueOf(healthInfo.getDataId()) + 1);
 	}
 
 }

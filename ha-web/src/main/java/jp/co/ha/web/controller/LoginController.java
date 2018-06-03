@@ -1,7 +1,6 @@
 package jp.co.ha.web.controller;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
@@ -135,6 +135,6 @@ public class LoginController implements BaseWebController {
 	public String menu(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request, "userId", String.class);
-		return getView(Objects.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
+		return getView(BeanUtil.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
 	}
 }
