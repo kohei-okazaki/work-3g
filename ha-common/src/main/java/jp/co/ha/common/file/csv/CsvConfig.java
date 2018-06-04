@@ -1,5 +1,7 @@
 package jp.co.ha.common.file.csv;
 
+import jp.co.ha.common.util.Charset;
+
 /**
  * CSV設定情報保持クラス<br>
  * 今後、追加するCSV設定情報は本クラスで定義する<br>
@@ -15,6 +17,8 @@ public class CsvConfig {
 	private boolean hasEnclosure;
 	/** 囲い文字 */
 	private String enclosureChar;
+	/** 文字コード */
+	private Charset charset;
 
 	/**
 	 * fileNameを返す<br>
@@ -91,4 +95,24 @@ public class CsvConfig {
 	public void setEnclosureChar(String enclosureChar) {
 		this.enclosureChar = enclosureChar;
 	}
+
+	/**
+	 * charsetを返す<br>
+	 *
+	 * @return charset 文字コード
+	 */
+	public Charset getCharset() {
+		return charset;
+	}
+
+	/**
+	 * charsetを設定する<br>
+	 *
+	 * @param charset
+	 *            文字コード
+	 */
+	public void setCharset(Charset charset) {
+		this.charset = charset;
+	}
+
 }

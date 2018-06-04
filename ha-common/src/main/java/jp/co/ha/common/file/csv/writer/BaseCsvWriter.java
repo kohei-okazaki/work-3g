@@ -13,7 +13,6 @@ import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
-import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -50,11 +49,8 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 */
 	public void execute(HttpServletResponse response) {
 
-		// ファイル名を取得
-		String fileName = getFileName();
-
 		// 初期化処理
-		this.init(response, fileName);
+		this.init(response);
 
 		try (PrintWriter writer = response.getWriter()) {
 			StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
@@ -78,15 +74,10 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *
 	 * @param response
 	 *            HttpServletResponse
-	 * @param fileName
-	 *            ファイル名
 	 */
-	private void init(HttpServletResponse response, String fileName) {
-
-		response.setContentType(
-				MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + Charset.UTF_8.toString().toLowerCase());
-		response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-
+	private void init(HttpServletResponse response) {
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + csvConfig.getCharset().toString().toLowerCase());
+		response.setHeader("Content-Disposition", "attachment; filename=" + csvConfig.getFileName());
 	}
 
 	/**
@@ -98,16 +89,9 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *            書き込みたいデータ
 	 */
 	protected void write(StringJoiner joiner, String data) {
-		String enclosureChar = csvConfig.getEnclosureChar();
+		String enclosureChar = csvConfig.isHasEnclosure() ? csvConfig.getEnclosureChar() : StringUtil.EMPTY;
 		joiner.add(enclosureChar + data + enclosureChar);
 	}
-
-	/**
-	 * ファイル名を取得<br>
-	 *
-	 * @return fileName ファイル名
-	 */
-	protected abstract String getFileName();
 
 	/**
 	 * ヘッダーレコードをつめる<br>

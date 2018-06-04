@@ -3,7 +3,6 @@ package jp.co.ha.web.file.csv.writer;
 import java.util.List;
 import java.util.StringJoiner;
 
-import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
 import jp.co.ha.common.util.CsvUtil;
@@ -35,11 +34,9 @@ public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 	 */
 	@Override
 	protected void writeHeader(StringJoiner recordJoiner) {
-
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
 		CsvUtil.getHeaderList(ReferenceCsvModel.class).stream().forEach(headerName -> write(joiner, headerName));
 		recordJoiner.add(joiner.toString());
-
 	}
 
 	/**
@@ -66,14 +63,6 @@ public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 
 		// 1行書き込む
 		recordJoiner.add(joiner.toString());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected String getFileName() {
-		return ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue();
 	}
 
 }
