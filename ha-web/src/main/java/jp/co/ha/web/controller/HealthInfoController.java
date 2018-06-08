@@ -140,7 +140,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 	/**
 	 * 健康情報Excelをダウンロードする<br>
-	 * @param form
+	 *
+	 * @param userId
+	 *            ユーザID
 	 * @return
 	 */
 	@GetMapping(value = "/healthInfo-excelDownload.html")
@@ -154,8 +156,11 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 	/**
 	 * 健康情報CSVをダウンロードする<br>
+	 *
 	 * @param request
+	 *            HttpServletRequest
 	 * @param response
+	 *            HttpServletResponse
 	 * @return
 	 */
 	@GetMapping(value = "/healthInfo-csvDownload")

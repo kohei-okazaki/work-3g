@@ -2,8 +2,8 @@ package jp.co.ha.web.form;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 
 import jp.co.ha.common.web.BaseForm;
 
@@ -16,12 +16,12 @@ public class HealthInfoForm implements BaseForm {
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
-	@Min(value = 1, message = "身長が桁数不足です")
-	@Max(value = 999, message = "身長が桁数超過です")
+	@DecimalMin(value = "1", message = "身長が桁数不足です")
+	@DecimalMax(value = "999", message = "身長が桁数超過です")
 	private BigDecimal height;
 	/** 体重 */
-	@Min(value = 1, message = "体重が桁数不足です")
-	@Max(value = 999, message = "体重が桁数超過です")
+	@DecimalMin(value = "1", message = "体重が桁数不足です")
+	@DecimalMax(value = "999", message = "体重が桁数超過です")
 	private BigDecimal weight;
 	/** BMI */
 	private BigDecimal bmi;
