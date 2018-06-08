@@ -1,57 +1,73 @@
 package jp.co.ha.common.util;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
 
-
-
+/**
+ * 日付のUtilクラス<br>
+ *
+ */
 public class DateUtil {
 
-	public static final String YYYY_MM_DD_HH_MI_SS = "yyyy/MM/dd hh:mm:ss";
-
+	/**
+	 * プライベートコンストラクタ<br>
+	 */
 	private DateUtil() {
-
 	}
 
 	/**
-	 * 取得したlocaleの時間から書式を整えた時間を返却
-	 * @param locale
-	 * @return 時刻
+	 * システム日付を返す<br>
+	 *
+	 * @return システム日付
 	 */
-	public static String getFormattedTime(Locale locale) {
-
-		DateFormat format = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		return format.format(new Date()).replaceAll(" JST", StringUtil.EMPTY).trim();
-
+	public static Date getSysDate() {
+		return new Date();
 	}
 
 	/**
-	 * 文字列型の日付をDate型の日付に変換する<br>
+	 * 指定した文字列型の日付をyyyy/MM/dd hh:mm:ssのフォーマットで返す<br>
+	 *
 	 * @param target
+	 *            対象日付
 	 * @return
-	 * @throws ParseException
 	 */
-	public static Date formatDate(String target) {
-		SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MI_SS);
-		Date resultDate = null;
+	public static Date toDate(String target) {
+		return DateUtil.toDate(target, DateFormatDefine.YYYYMMDD_HHMMSS);
+	}
+
+	/**
+	 * 指定した文字列型の日付を指定したフォーマットのDate型で返す<br>
+	 *
+	 * @param target
+	 *            対象日付
+	 * @param dateFormatDefine
+	 *            Dateフォーマット
+	 * @return
+	 */
+	public static Date toDate(String target, DateFormatDefine dateFormatDefine) {
+
+		// フォーマットを設定
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormatDefine.getValue());
+		Date result = null;
 		try {
-			resultDate = sdf.parse(target);
-		} catch(ParseException e) {
-			System.out.println("変換に失敗しました");
+			// Date型に変換
+			result = sdf.parse(target);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		return resultDate;
+		return result;
 
 	}
 
 	/**
 	 * 指定した日付の加算を行う<br>
-	 * @param targetDate 元の日付
-	 * @param add 加算する日数
+	 *
+	 * @param targetDate
+	 *            元の日付
+	 * @param add
+	 *            加算する日数
 	 * @return
 	 */
 	public static Date addDate(Date targetDate, int addDay) {
@@ -63,8 +79,11 @@ public class DateUtil {
 
 	/**
 	 * 指定した月の加算を行う<br>
-	 * @param targetDate 元の日付
-	 * @param addMonth 加算する月数
+	 *
+	 * @param targetDate
+	 *            元の日付
+	 * @param addMonth
+	 *            加算する月数
 	 * @return
 	 */
 	public static Date addMonth(Date targetDate, int addMonth) {
@@ -75,14 +94,51 @@ public class DateUtil {
 	}
 
 	/**
+	 * 指定した年の加算を行う<br>
+	 *
+	 * @param targetDate
+	 *            元の日付
+	 * @param addYear
+	 *            加算する年数
+	 * @return
+	 */
+	public static Date addYear(Date targetDate, int addYear) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(targetDate);
+		calendar.add(Calendar.YEAR, addYear);
+		return calendar.getTime();
+	}
+
+	/**
 	 * Date型を指定されたフォーマットに変える<br>
+	 *
+	 * @param targetDate
+	 *            対象日付
+	 * @param format
+	 *            Dateフォーマット
 	 * @return
 	 */
 	public static String toString(Date targetDate, DateFormatDefine format) {
-		if (Objects.isNull(format) || StringUtil.isEmpty(format.getValue())) {
+
+		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
 		}
+
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format.getValue());
 		return dateFormat.format(targetDate);
+	}
+
+	/**
+	 * 指定した日付の時分秒を00:00:00に設定する<br>
+	 *
+	 * @param targetDate
+	 *            対象日付
+	 * @return
+	 */
+	public static Date toStartDate(Date targetDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(targetDate);
+		calendar.set(0, 0, 0);
+		return calendar.getTime();
 	}
 }

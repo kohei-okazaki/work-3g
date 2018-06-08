@@ -38,6 +38,8 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
+				/WEB-INF/spring/appServlet/web-dao-context.xml
+				/WEB-INF/spring/appServlet/web-service-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -45,30 +47,7 @@
 
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/login.html</url-pattern>
-		<url-pattern>/healthInfo-input.html</url-pattern>
-		<url-pattern>/healthInfo-confirm.html</url-pattern>
-		<url-pattern>/healthInfo-complete.html</url-pattern>
-		<url-pattern>/menu.html</url-pattern>
-		<url-pattern>/notice.html</url-pattern>
-		<url-pattern>/healthInfo-excelDownload.html</url-pattern>
-		<url-pattern>/healthInfo-csvDownload</url-pattern>
-		<url-pattern>/result-reference.html</url-pattern>
-		<url-pattern>/result-reference-excelDownload.html</url-pattern>
-		<url-pattern>/result-reference-csvDownload</url-pattern>
-		<url-pattern>/account-setting-input.html</url-pattern>
-		<url-pattern>/account-setting-confirm.html</url-pattern>
-		<url-pattern>/account-setting-complete.html</url-pattern>
-		<url-pattern>/notice-setting.html</url-pattern>
-		<url-pattern>/account-create-input.html</url-pattern>
-		<url-pattern>/account-create-confirm.html</url-pattern>
-		<url-pattern>/account-create-complete.html</url-pattern>
-		<url-pattern>/notice-setting-input.html</url-pattern>
-		<url-pattern>/notice-setting-confirm.html</url-pattern>
-		<url-pattern>/notice-setting-complete.html</url-pattern>
-		<url-pattern>/healthInfo-fileInput.html</url-pattern>
-		<url-pattern>/healthInfo-fileConfirm.html</url-pattern>
-		<url-pattern>/healthInfo-fileComplete.html</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 </web-app>

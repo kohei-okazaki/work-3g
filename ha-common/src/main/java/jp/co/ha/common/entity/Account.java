@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Account implements Serializable {
 
 	/** シリアルバージョンUID */
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
 	@Id
@@ -44,6 +44,10 @@ public class Account implements Serializable {
 	@Column(name = "FILE_ENCLOSURE_CHAR_FLAG", nullable = true)
 	private String fileEnclosureCharFlag;
 
+	/** 健康情報マスク利用フラグ */
+	@Column(name = "HEALTH_INFO_MASK_FLAG", nullable = true)
+	private String healthInfoMaskFlag;
+
 	/** 更新日時 */
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
@@ -54,7 +58,8 @@ public class Account implements Serializable {
 
 	/**
 	 * userIdを返す
-	 * @return userId
+	 *
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
@@ -62,7 +67,9 @@ public class Account implements Serializable {
 
 	/**
 	 * userIdを設定する
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -70,7 +77,8 @@ public class Account implements Serializable {
 
 	/**
 	 * passwordを返す
-	 * @return password
+	 *
+	 * @return password パスわード
 	 */
 	public String getPassword() {
 		return password;
@@ -78,7 +86,9 @@ public class Account implements Serializable {
 
 	/**
 	 * passwordを設定する
+	 *
 	 * @param password
+	 *            パスワード
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -86,7 +96,8 @@ public class Account implements Serializable {
 
 	/**
 	 * deleteFlagを返す
-	 * @return deleteFlag
+	 *
+	 * @return deleteFlag 削除フラグ
 	 */
 	public String getDeleteFlag() {
 		return deleteFlag;
@@ -94,7 +105,9 @@ public class Account implements Serializable {
 
 	/**
 	 * deleteFlagを設定する
+	 *
 	 * @param deleteFlag
+	 *            削除フラグ
 	 */
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
@@ -102,7 +115,8 @@ public class Account implements Serializable {
 
 	/**
 	 * passwordExpireを返す
-	 * @return passwordExpire
+	 *
+	 * @return passwordExpire パスワード有効期限
 	 */
 	public Date getPasswordExpire() {
 		return passwordExpire;
@@ -110,7 +124,9 @@ public class Account implements Serializable {
 
 	/**
 	 * passwordExpireを設定する
+	 *
 	 * @param passwordExpire
+	 *            パスワード有効期限
 	 */
 	public void setPasswordExpire(Date passwordExpire) {
 		this.passwordExpire = passwordExpire;
@@ -118,7 +134,8 @@ public class Account implements Serializable {
 
 	/**
 	 * remarksを返す
-	 * @return remarks
+	 *
+	 * @return remarks 備考
 	 */
 	public String getRemarks() {
 		return remarks;
@@ -126,7 +143,9 @@ public class Account implements Serializable {
 
 	/**
 	 * remarksを設定する
+	 *
 	 * @param remarks
+	 *            備考
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
@@ -134,7 +153,8 @@ public class Account implements Serializable {
 
 	/**
 	 * fileEnclosureCharFlagを返す
-	 * @return fileEnclosureCharFlag
+	 *
+	 * @return fileEnclosureCharFlag ファイル囲い文字利用フラグ
 	 */
 	public String getFileEnclosureCharFlag() {
 		return fileEnclosureCharFlag;
@@ -142,15 +162,37 @@ public class Account implements Serializable {
 
 	/**
 	 * fileEnclosureCharFlagを設定する
+	 *
 	 * @param fileEnclosureCharFlag
+	 *            ファイル囲い文字利用フラグ
 	 */
 	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
 		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
 	}
 
 	/**
+	 * healthInfoMaskFlagを返す<br>
+	 *
+	 * @return healthInfoMaskFlag 健康情報マスク利用フラグ
+	 */
+	public String getHealthInfoMaskFlag() {
+		return healthInfoMaskFlag;
+	}
+
+	/**
+	 * healthInfoMaskFlagを設定する<br>
+	 *
+	 * @param healthInfoMaskFlag
+	 *            健康情報マスク利用フラグ
+	 */
+	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
+		this.healthInfoMaskFlag = healthInfoMaskFlag;
+	}
+
+	/**
 	 * updateDateを返す
-	 * @return updateDate
+	 *
+	 * @return updateDate 更新日時
 	 */
 	public Date getUpdateDate() {
 		return updateDate;
@@ -158,7 +200,9 @@ public class Account implements Serializable {
 
 	/**
 	 * updateDateを設定する
+	 *
 	 * @param updateDate
+	 *            更新日時
 	 */
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
@@ -166,7 +210,8 @@ public class Account implements Serializable {
 
 	/**
 	 * regDateを返す
-	 * @return regDate
+	 *
+	 * @return regDate 登録日時
 	 */
 	public Date getRegDate() {
 		return regDate;
@@ -174,11 +219,12 @@ public class Account implements Serializable {
 
 	/**
 	 * regDateを設定する
+	 *
 	 * @param regDate
+	 *            登録日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
 
 }
-

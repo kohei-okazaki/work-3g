@@ -4,7 +4,6 @@ import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.entity.Account;
 
-
 /**
  * アカウント情報のDaoインターフェイス
  *
@@ -16,27 +15,35 @@ public interface AccountDao extends BaseDao {
 
 	/**
 	 * 引数で指定されたユーザIDのアカウント情報を取得する
+	 *
 	 * @param userId
-	 * @return AccountDto
+	 *            ユーザID
+	 * @return Account アカウント情報
 	 */
-	Account getAccountByUserId(String userId);
+	Account findByUserId(String userId);
 
 	/**
-	 * アカウント情報を登録する<br>
-	 * @param accountDto
+	 * アカウント情報を作成する<br>
+	 *
+	 * @param account
+	 *            アカウント情報
 	 * @throws DuplicateKeyException
 	 */
-	void registAccount(Account account) throws DuplicateKeyException;
+	void create(Account account) throws DuplicateKeyException;
 
 	/**
 	 * 引数で指定されたアカウント情報を更新する
-	 * @param accountDto
+	 *
+	 * @param account
+	 *            アカウント情報
 	 */
 	void updateAccount(Account account);
 
 	/**
 	 * 指定されたアカウント情報の削除を行う<br>
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	void deleteAccount(String userId);
 

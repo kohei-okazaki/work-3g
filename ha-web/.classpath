@@ -22,7 +22,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/ha-common"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -34,5 +33,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/ha-common"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ha-business"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ha-api"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

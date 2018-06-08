@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定入力画面</title>
@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 </head>
 <body class="main">
@@ -23,16 +24,23 @@
 	<hr>
 	<div th:include="common/navigation.html"></div>
 
-	<br><br>
+	<br><br><br>
 
 	<!-- 入力画面 -->
-	<form action="/isol-web/account-setting-confirm.html" method="post">
+	<form action="./account-setting-confirm.html" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 
 		<div th:if="${errorMessage} != null">
 			<p th:text="${errorMessage}"></p>
 		</div>
-
+		<div th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
+		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		<div th:if="${#fields.hasErrors('fileEnclosureCharFlag')}" th:errors="*{fileEnclosureCharFlag}"></div>
+		<div th:if="${#fields.hasErrors('healthInfoMaskFlag')}" th:errors="*{healthInfoMaskFlag}"></div>
+		<div th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
+		<div th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
+		<div th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 		<table border="1">
 			<tr>
 				<th class="header" width="130px">
@@ -40,9 +48,9 @@
 				</th>
 				<td class="data" width="250px">
 					<div class="radio">
-						<input type="radio" name="deleteFlag" id="deleteFlagFalse" value="0" checked="checked">
+						<input type="radio" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
 						<label for="deleteFlagFalse" class="switch-off">しない</label>
-						<input type="radio" name="deleteFlag" id="deleteFlagTrue" value="1">
+						<input type="radio" th:field="*{deleteFlag}" id="deleteFlagTrue" value="1">
 						<label for="deleteFlagTrue">する</label>
 					</div>
 				</td>
@@ -52,8 +60,8 @@
 					<p>ユーザID</p>
 				</th>
 				<td class="data">
-					<p th:text="${account.userId}"></p>
-					<input type="hidden" name="userId" th:field="${account.userId}" />
+					<p th:text="*{userId}"></p>
+					<input type="hidden" th:field="*{userId}" value="${userId}" />
 				</td>
 			</tr>
 			<tr>
@@ -61,7 +69,7 @@
 					<p>パスワード</p>
 				</th>
 				<td class="data">
-					<input type="text" name="password" th:field="${account.password}" required="required" />
+					<input type="text" th:field="*{password}" value="${password}" required placeholder="パスワード" />
 				</td>
 			</tr>
 			<tr>
@@ -70,10 +78,23 @@
 				</th>
 				<td class="data" width="250px">
 					<div class="radio">
-						<input type="radio" name="fileEnclosureCharFlag" id="fileEnclosureCharFlagTrue" value="1" checked="checked">
+						<input type="radio" th:field="*{fileEnclosureCharFlag}" id="fileEnclosureCharFlagTrue" value="1" checked="checked">
 						<label for="fileEnclosureCharFlagTrue">する</label>
-						<input type="radio" name="fileEnclosureCharFlag" id="fileEnclosureCharFlagFalse" value="0">
+						<input type="radio" th:field="*{fileEnclosureCharFlag}" id="fileEnclosureCharFlagFalse" value="0">
 						<label for="fileEnclosureCharFlagFalse" class="switch-off">しない</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th class="header" width="130px">
+					<p>健康情報マスクを利用</p>
+				</th>
+				<td class="data" width="250px">
+					<div class="radio">
+						<input type="radio" th:field="*{healthInfoMaskFlag}" id="healthInfoMaskFlagTrue" value="1" checked="checked">
+						<label for="healthInfoMaskFlagTrue">する</label>
+						<input type="radio" th:field="*{healthInfoMaskFlag}" id="healthInfoMaskFlagFalse" value="0">
+						<label for="healthInfoMaskFlagFalse" class="switch-off">しない</label>
 					</div>
 				</td>
 			</tr>
@@ -82,7 +103,7 @@
 					<p>メールアドレス</p>
 				</th>
 				<td class="data">
-					<input type="email" name="mailAddress" th:field="${mailInfo.mailAddress}" required="required" />
+					<input type="email" th:field="*{mailAddress}" value="${mailAddress}" required placeholder="メールアドレス" />
 				</td>
 			</tr>
 			<tr>
@@ -90,7 +111,7 @@
 					<p>メールパスワード</p>
 				</th>
 				<td class="data">
-					<input type="text" name="mailPassword" th:field="${mailInfo.mailPassword}" required="required" />
+					<input type="text" th:field="*{mailPassword}" value="${mailPassword}" required placeholder="メールパスワード" />
 				</td>
 			</tr>
 			<tr>
@@ -98,7 +119,7 @@
 					<p>備 考</p>
 				</th>
 				<td class="data">
-					<textarea rows="10" cols="30" name="remarks" th:field="${account.remarks}"></textarea>
+					<textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
 				</td>
 			</tr>
 		</table>

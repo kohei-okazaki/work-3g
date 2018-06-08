@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_健康情報入力画面</title>
 <link rel="icon" type="image/png" href="resources/image/people.png">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/baseLayout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
 <link rel="stylesheet" type="text/css" href="resources/css/healthInfo.css">
 <link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 <script type="text/javascript" src="resources/js/healthInfo.js"></script>
 </head>
@@ -25,14 +27,23 @@
 	<hr>
 	<div th:include="common/navigation.html"></div>
 
+	<div th:if="${errorMessage} != null">
+		<br><br>
+		<div class="errorMessage">
+			<p th:text="${errorMessage}"></p>
+		</div>
+	</div>
+
 	<!-- 入力画面 -->
 	<div align="center">
 	<br><br><br>
-	<form action="/isol-web/healthInfo-confirm.html" method="post">
-		<input type="text" name="height" size="6" required placeholder="身長" >　cm
+	<form action="./healthInfo-confirm.html" method="post" th:object="${healthInfoForm}">
+		<div th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+		<div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+		<input type="text" size="6" th:field="*{height}" required placeholder="身長" >　cm
 		<p class="attention">※半角数字で入力してください</p>
 		<br><br>
-		<input type="text" name="weight" size="6" required placeholder="体重" >　kg
+		<input type="text" size="6" th:field="*{weight}" required placeholder="体重" >　kg
 		<p class="attention">※半角数字で入力してください</p>
 		<br>
 		<br>

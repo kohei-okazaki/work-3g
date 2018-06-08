@@ -4,7 +4,7 @@
 
 /* ボタンの設定 */
 input[type="submit"], input[type="reset"], input[type="button"] {
-	width: 100px;
+	width: 110px;
 	height: 40px;
 	background: #32cd32;
 	border: 0;
@@ -39,10 +39,10 @@ input[type="text"], input[type="email"], textarea {
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	font-size: 16px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	transition: all 0.5s;
-	width: 200px;
+	-webkit-transition: all 1.0s;
+	-moz-transition: all 1.0s;
+	transition: all 1.0s;
+	width: 180px;
 }
 
 /* 入力タグをクリックしたとき */

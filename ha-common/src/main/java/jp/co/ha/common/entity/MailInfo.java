@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class MailInfo implements Serializable {
 
 	/** シリアルバージョンUID */
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
 	@Id
@@ -36,13 +36,14 @@ public class MailInfo implements Serializable {
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
 
-	/** 登録日時 */
+	/** 更新日時 */
 	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
 
 	/**
 	 * userIdを返す
-	 * @return userId
+	 *
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
@@ -50,7 +51,9 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * userIdを設定する
+	 *
 	 * @param userId
+	 *            ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -58,7 +61,8 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * mailAddressを返す
-	 * @return mailAddress
+	 *
+	 * @return mailAddress メールアドレス
 	 */
 	public String getMailAddress() {
 		return mailAddress;
@@ -66,7 +70,9 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * mailAddressを設定する
+	 *
 	 * @param mailAddress
+	 *            メールアドレス
 	 */
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
@@ -74,7 +80,8 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * mailPasswordを返す
-	 * @return mailPassword
+	 *
+	 * @return mailPassword メールパスワード
 	 */
 	public String getMailPassword() {
 		return mailPassword;
@@ -82,7 +89,9 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * mailPasswordを設定する
+	 *
 	 * @param mailPassword
+	 *            メールパスワード
 	 */
 	public void setMailPassword(String mailPassword) {
 		this.mailPassword = mailPassword;
@@ -90,7 +99,8 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * updateDateを返す
-	 * @return updateDate
+	 *
+	 * @return updateDate 更新日時
 	 */
 	public Date getUpdateDate() {
 		return updateDate;
@@ -98,7 +108,9 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * updateDateを設定する
+	 *
 	 * @param updateDate
+	 *            更新日時
 	 */
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
@@ -106,7 +118,8 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * regDateを返す
-	 * @return regDate
+	 *
+	 * @return regDate 更新日時
 	 */
 	public Date getRegDate() {
 		return regDate;
@@ -114,7 +127,9 @@ public class MailInfo implements Serializable {
 
 	/**
 	 * regDateを設定する
+	 *
 	 * @param regDate
+	 *            更新日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

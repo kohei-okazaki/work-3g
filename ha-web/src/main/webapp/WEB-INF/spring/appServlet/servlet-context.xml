@@ -3,26 +3,48 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
+	<aop:aspectj-autoproxy />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="suffix" value=".html" />
+		<beans:property name="templateMode" value="HTML" />
+		<beans:property name="characterEncoding" value="UTF-8" />
 	</beans:bean>
-	
-	<context:component-scan base-package="jp.co.ha" />
-	
-	
-	
+	<beans:bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+		<beans:property name="templateResolver" ref="templateResolver" />
+	</beans:bean>
+	<beans:bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<beans:property name="templateEngine" ref="templateEngine" />
+		<!-- ここで設定していないとhtmlを描画時に日本語が文字化けする -->
+		<beans:property name="characterEncoding" value="UTF-8" />
+	</beans:bean>
+	<beans:bean id="webExceptionHandler" class="jp.co.ha.web.exception.WebExceptionHandler" />
+
+	<context:component-scan base-package="jp.co.ha.web.controller" />
+	<context:component-scan base-package="jp.co.ha.web.service.impl" />
+	<context:component-scan base-package="jp.co.ha.web.service.annotation" />
+	<context:component-scan base-package="jp.co.ha.web.log" />
+
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basenames">
+			<beans:list>
+				<beans:value>messages</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
 </beans:beans>

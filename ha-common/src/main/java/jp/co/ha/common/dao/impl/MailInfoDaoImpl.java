@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -18,6 +17,8 @@ import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.common.exception.DBException;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 
@@ -31,7 +32,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MailInfo getMailInfoByUserId(String userId) {
+	public MailInfo findByUserId(String userId) {
 
 		MailInfo mailInfo = new MailInfo();
 
@@ -51,25 +52,20 @@ public class MailInfoDaoImpl implements MailInfoDao {
 					mailInfo.setUserId(row.getCell(0).getStringCellValue());
 					mailInfo.setMailAddress(row.getCell(1).getStringCellValue());
 					mailInfo.setMailPassword(row.getCell(2).getStringCellValue());
-					mailInfo.setUpdateDate(DateUtil.formatDate(row.getCell(3).getStringCellValue()));
-					mailInfo.setRegDate(DateUtil.formatDate(row.getCell(4).getStringCellValue()));
+					mailInfo.setUpdateDate(DateUtil.toDate(row.getCell(3).getStringCellValue()));
+					mailInfo.setRegDate(DateUtil.toDate(row.getCell(4).getStringCellValue()));
 				}
 			}
 		} catch (EncryptedDocumentException e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "メール情報の暗号化/複合化に失敗しました");
 		} catch (InvalidFormatException e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "メール情報の暗号化/複合化に失敗しました");
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "メール情報の暗号化/複合化に失敗しました");
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "DBアクセスに失敗しました");
 		}
 
-//		MailInfo mailInfo = new MailInfo();
-//		mailInfo.setUserId(userId);
-//		mailInfo.setMailAddress("test-001@test.jp");
-//		mailInfo.setMailPassword("password");
-//		mailInfo.setRegDate(new Date());
 		return mailInfo;
 	}
 
@@ -96,7 +92,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 					row.getCell(0).setCellValue(mailInfo.getUserId());
 					row.getCell(1).setCellValue(mailInfo.getMailAddress());
 					row.getCell(2).setCellValue(mailInfo.getMailPassword());
-					row.getCell(3).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 					row.getCell(4).setCellValue(DateUtil.toString(mailInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 				}
@@ -122,7 +118,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void registMailInfo(MailInfo mailInfo) throws DuplicateKeyException {
+	public void create(MailInfo mailInfo) throws DuplicateKeyException {
 		// TODO 登録処理を追加すること
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
@@ -135,8 +131,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 			newRow.createCell(0).setCellValue(mailInfo.getUserId());
 			newRow.createCell(1).setCellValue(mailInfo.getMailAddress());
 			newRow.createCell(2).setCellValue(mailInfo.getMailPassword());
-			newRow.createCell(3).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
-			newRow.createCell(4).setCellValue(DateUtil.toString(new Date(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(4).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 			fos.flush();
 			workbook.write(fos);

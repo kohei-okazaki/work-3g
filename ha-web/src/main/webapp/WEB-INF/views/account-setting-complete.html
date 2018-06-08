@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定完了画面</title>
@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 </head>
 
@@ -34,7 +35,7 @@
 			<tr>
 				<td align="center">
 					<!-- メニュー画面へ -->
-					<form action="/isol-web/menu.html" method="get">
+					<form action="./menu.html" method="get">
 						<div>
 							<input class="menuicon" type="image" src="resources/image/icon_menu.jpg">
 						</div>

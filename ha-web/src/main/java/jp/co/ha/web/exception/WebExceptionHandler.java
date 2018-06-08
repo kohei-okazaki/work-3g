@@ -23,7 +23,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName(ManageWebView.ERROR.getName());
-
+		ex.printStackTrace();
 		return modelView;
 	}
 

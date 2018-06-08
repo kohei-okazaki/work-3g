@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定確認画面</title>
@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 </head>
 
@@ -28,7 +29,7 @@
 
 	<!-- 確認画面 -->
 
-	<form action="/isol-web/account-setting-complete.html" method="post">
+	<form action="./account-setting-complete.html" method="post">
 	<div align="center">
 		<table border="1">
 			<tr>
@@ -70,6 +71,16 @@
 					<div th:if="${form.fileEnclosureCharFlag} == 1">する</div>
 					<div th:if="${form.fileEnclosureCharFlag} == 0">しない</div>
 					<input type="hidden" name="fileEnclosureCharFlag" th:field="${form.fileEnclosureCharFlag}" />
+				</td>
+			</tr>
+			<tr>
+				<th class="header" width="130px">
+					<p>健康情報マスクを利用</p>
+				</th>
+				<td class="data" width="250px">
+					<div th:if="${form.healthInfoMaskFlag} == 1">する</div>
+					<div th:if="${form.healthInfoMaskFlag} == 0">しない</div>
+					<input type="hidden" name="healthInfoMaskFlag" th:field="${form.healthInfoMaskFlag}" />
 				</td>
 			</tr>
 			<tr>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_健康情報入力完了画面</title>
@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/healthInfo.css">
 <link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 <script type="text/javascript" src="resources/js/healthInfo.js"></script>
 </head>
@@ -74,7 +75,7 @@
 			<tr>
 				<td>
 				<!-- 通知  -->
-				<form action="/isol-web/notice.html" method="post">
+				<form action="./notice.html" method="post">
 					<input type="hidden" name="height" value="${healthInfo.height}">
 					<input type="hidden" name="weight" value="${healthInfo.weight}">
 					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">
@@ -87,7 +88,7 @@
 				<td>　　</td>
 				<td>
 				<!-- Excel出力 -->
-				<form action="/isol-web/healthInfo-excelDownload.html" method="get">
+				<form action="./healthInfo-excelDownload.html" method="get">
 					<input type="hidden" name="height" value="${healthInfo.height}">
 					<input type="hidden" name="weight" value="${healthInfo.weight}">
 					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">

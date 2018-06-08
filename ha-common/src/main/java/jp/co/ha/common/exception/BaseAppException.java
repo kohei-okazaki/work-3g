@@ -10,52 +10,62 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class BaseAppException extends Exception {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/** エラーコード */
 	private ErrorCode errorCode;
-	/** エラーメッセージ */
-	private String errorMessage;
+	/** 詳細 */
+	private String detail;
 
 	/**
-	 * 例外コンストラクタ<br>
+	 * コンストラクタ<br>
 	 */
 	public BaseAppException() {
 	}
 
 	/**
-	 * 例外コンストラクタ<br>
+	 * コンストラクタ<br>
+	 *
 	 * @param errorCode
-	 * @param errorMessage
+	 *            エラーコード
+	 * @param detail
+	 *            詳細
 	 */
-	public BaseAppException(ErrorCode errorCode, String errorMessage) {
+	public BaseAppException(ErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;
-		this.errorMessage = errorMessage;
+		this.detail = detail;
 	}
 
 	/**
 	 * errorCodeを返す
-	 * @return errorCode
+	 *
+	 * @return errorCode エラーコード
 	 */
 	public ErrorCode getErrorCode() {
 		return errorCode;
 	}
 
 	/**
-	 * errorMessageを返す
-	 * @return errorMessage
+	 * detailを返す<br>
+	 *
+	 * @return detail 詳細
 	 */
-	public String getErrorMessage() {
-		return errorMessage;
+	public String getDetail() {
+		return detail;
 	}
 
 	/**
 	 * エラーメッセージを組み立てて返す<br>
+	 *
+	 * @return 組み立てたエラーメッセージ
 	 */
 	@Override
 	public String toString() {
 		StringJoiner joiner = new StringJoiner(StringUtil.SPACE);
 		joiner.add(this.errorCode.getLogLevel());
 		joiner.add(this.errorCode.getErrorCode());
-		joiner.add(this.errorMessage);
+		joiner.add(this.detail);
 		return joiner.toString();
 	}
 
