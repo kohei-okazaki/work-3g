@@ -1,5 +1,7 @@
 package jp.co.ha.web.file.excel.model;
 
+import java.util.Date;
+
 import jp.co.ha.common.file.excel.annotation.ExcelHeader;
 import jp.co.ha.common.file.excel.model.BaseExcelModel;
 
@@ -7,7 +9,7 @@ import jp.co.ha.common.file.excel.model.BaseExcelModel;
  * 結果照会Excel出力モデルクラス<br>
  *
  */
-@ExcelHeader(names = { "身長", "体重", "BMI", "標準体重" })
+@ExcelHeader(names = { "身長", "体重", "BMI", "標準体重", "登録日時" })
 public class ReferenceExcelModel implements BaseExcelModel {
 
 	/** 身長 */
@@ -18,6 +20,8 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	private String bmi;
 	/** 標準体重 */
 	private String standardWeight;
+	/** 登録日時 */
+	private Date regDate;
 
 	/**
 	 * heightを返す
@@ -93,6 +97,25 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	 */
 	public void setStandardWeight(String standardWeight) {
 		this.standardWeight = standardWeight;
+	}
+
+	/**
+	 * regDateを返す<br>
+	 *
+	 * @return regDate regDate
+	 */
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	/**
+	 * regDateを設定する<br>
+	 *
+	 * @param regDate
+	 *            regDate
+	 */
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 
 }

@@ -1,8 +1,8 @@
 package jp.co.ha.business.find.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,11 +67,10 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			// 検索条件がない場合
 			return healthInfoList;
 		}
-		List<HealthInfo> resultList = new ArrayList<HealthInfo>();
 
-		healthInfoList.stream()
-			.filter(healthInfo -> regDate.compareTo(DateUtil.toStartDate(healthInfo.getRegDate())) == 0)
-			.forEach(healthInfo -> resultList.add(healthInfo));
+		List<HealthInfo> resultList = healthInfoList.stream()
+						.filter(entity -> regDate.compareTo(DateUtil.toStartDate(entity.getRegDate())) == 0)
+						.collect(Collectors.toList());
 
 		return resultList;
 	}
@@ -88,12 +87,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			// 検索条件がない場合
 			return healthInfoList;
 		}
-		List<HealthInfo> resultList = new ArrayList<HealthInfo>();
 
 		// fromRegDate < entityRegDate < toRegDateの範囲内である健康情報の場合、追加
-		healthInfoList.stream()
-			.filter(healthInfo -> fromRegDate.after(healthInfo.getRegDate()) && toRegDate.before(healthInfo.getRegDate()))
-			.forEach(healthInfo -> resultList.add(healthInfo));
+		List<HealthInfo> resultList = healthInfoList.stream()
+									.filter(entity -> DateUtil.isBetWeenDate(fromRegDate, entity.getRegDate(), toRegDate))
+									.collect(Collectors.toList());
 
 		return resultList;
 	}
