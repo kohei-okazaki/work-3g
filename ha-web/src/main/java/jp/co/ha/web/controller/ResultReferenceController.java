@@ -21,6 +21,7 @@ import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.ResultSearchForm;
 import jp.co.ha.web.service.ResultReferenceService;
@@ -58,7 +59,9 @@ public class ResultReferenceController implements BaseWebController {
 	 */
 	@ModelAttribute
 	public ResultSearchForm setUpForm() {
-		return new ResultSearchForm();
+		ResultSearchForm resultSearchForm = new ResultSearchForm();
+		resultSearchForm.setRegDateSelectFlag(StringUtil.FALSE_FLAG);
+		return resultSearchForm;
 	}
 
 	/**

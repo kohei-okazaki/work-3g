@@ -27,37 +27,26 @@
 	<br>
 	<br>
 	<br>
-	<form action="/ha-web/result-reference.html" method="post">
+	<form action="./result-reference.html" method="post" th:object="${resultSearchForm}">
+		<div th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
+		<div th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
+		<div th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
 		<div align="center">
 			<table>
 				<tr>
-					<td></td>
 					<th><p>登録日</p></th>
-				</tr>
-				<tr>
-					<td></td>
 					<td>
 						<div class="radio" align="center">
-							<input type="radio" name="regDateSelectFlag" id="regDateSelectFlagFalse" value="0" checked="checked">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" checked="checked">
 							<label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-							<input type="radio" name="regDateSelectFlag" id="regDateSelectFlagTrue" value="1">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1">
 							<label for="regDateSelectFlagTrue">直接指定する</label>
 						</div>
 					</td>
 				</tr>
 				<tr>
-					<td><input type="text" name="fromRegYear" placeholder="Year" />年</td>
-					<td><input type="text" name="fromRegMonth" placeholder="Month" />月</td>
-					<td><input type="text" name="fromRegDay" placeholder="Day" />日</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><p>~</p></td>
-				</tr>
-				<tr>
-					<td><input type="text" name="toRegYear" placeholder="Year" />年</td>
-					<td><input type="text" name="toRegMonth" placeholder="Month" />月</td>
-					<td><input type="text" name="toRegDay" placeholder="Day" />日</td>
+					<td><input type="date" th:field="*{fromRegDate}" /></td>
+					<td><input type="date" th:field="*{toRegDate}" /></td>
 				</tr>
 			</table>
 			<br>
