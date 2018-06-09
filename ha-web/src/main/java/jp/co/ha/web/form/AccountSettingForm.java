@@ -13,6 +13,9 @@ import jp.co.ha.common.web.BaseForm;
  */
 public class AccountSettingForm implements BaseForm {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/** ユーザID */
 	@NotEmpty(message = "ユーザIDが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "ユーザIDが半角英数でありません")
