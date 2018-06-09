@@ -141,4 +141,19 @@ public class DateUtil {
 		calendar.set(0, 0, 0);
 		return calendar.getTime();
 	}
+
+	/**
+	 * 比較対象日が開始日 < 比較対象日 < endDateかどうかを返す<br>
+	 *
+	 * @param startDate
+	 *            開始日
+	 * @param target
+	 *            比較対象日
+	 * @param endDate
+	 *            終了日
+	 * @return
+	 */
+	public static boolean isBetWeenDate(Date startDate, Date target, Date endDate) {
+		return startDate.before(target) && endDate.after(target);
+	}
 }

@@ -33,15 +33,8 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	 */
 	@Override
 	public void setUpForm(ResultSearchForm form) {
-
 		// 登録日from
-		form.setFromRegMonth(
-				form.getFromRegMonth().length() == 1 ? "0" + form.getFromRegMonth() : form.getFromRegMonth());
-		form.setFromRegDay(form.getFromRegDay().length() == 1 ? "0" + form.getFromRegDay() : form.getFromRegDay());
-
 		// 登録日to
-		form.setToRegMonth(form.getToRegMonth().length() == 1 ? "0" + form.getToRegMonth() : form.getToRegMonth());
-		form.setToRegDay(form.getToRegDay().length() == 1 ? "0" + form.getToRegDay() : form.getToRegDay());
 	}
 
 	/**
@@ -56,30 +49,26 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	private List<HealthInfo> getHealthInfo(ResultSearchForm form, String userId) {
 
 		List<HealthInfo> resultList = null;
-		Date regDate = getStrDate(form.getFromRegYear(), form.getFromRegMonth(), form.getFromRegDay());
+		Date regDate = editStrDate(form.getFromRegDate());
 		if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 			// 登録日直接指定フラグがONの場合
 			resultList = healthInfoSearchService.findByUserIdAndRegDate(userId, regDate);
 		} else {
-			Date toRegDate = getStrDate(form.getToRegYear(), form.getToRegMonth(), form.getToRegDay());
+			Date toRegDate = editStrDate(form.getToRegDate());
 			resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 		}
 		return resultList;
 	}
 
 	/**
-	 * 指定した文字列型のyyyy, MM, ddをDate型(yyyy/MM/dd)で返す<br>
+	 * 指定した文字列型のyyyy-MM-ddをDate型(yyyy/MM/dd)で返す<br>
 	 *
-	 * @param year
-	 *            年
-	 * @param month
-	 *            年
-	 * @param day
-	 *            日
+	 * @param date
+	 *            日付
 	 * @return
 	 */
-	private Date getStrDate(String year, String month, String day) {
-		String strDate = year + StringUtil.THRASH + month + StringUtil.THRASH + day;
+	private Date editStrDate(String date) {
+		String strDate = date.replace(StringUtil.HYPHEN, StringUtil.THRASH);
 		return DateUtil.toDate(strDate, DateFormatDefine.YYYYMMDD);
 	}
 
