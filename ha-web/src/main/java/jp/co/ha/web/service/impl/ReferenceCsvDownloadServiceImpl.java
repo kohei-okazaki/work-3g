@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.find.AccountSearchService;
-import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 
@@ -30,9 +31,6 @@ import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 @Service(value = "referenceCsv")
 public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 
-	/** 健康情報検索サービス */
-	@Autowired
-	private HealthInfoSearchService healthInfoSearchService;
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
@@ -46,15 +44,14 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-		// 結果照会する健康情報を取得する
-		String userId = sessionService.getValue(request, "userId", String.class);
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
+		// sessionから検索結果リストを取得
+		List<HealthInfoRegistResponse> resultList = sessionService.getValue(request, "resultList", List.class);
 
 		// CSV出力モデルリストに変換する
-		List<ReferenceCsvModel> modelList = toModelList(healthInfoList);
+		List<ReferenceCsvModel> modelList = toModelList(resultList);
 
 		// CSV設定情報取得
-		Account account = accountSearchService.findByUserId(userId);
+		Account account = accountSearchService.findByUserId(sessionService.getValue(request, "userId", String.class));
 		String fileName = ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue();
 		CsvConfig conf = getCsvConfig(fileName, account);
 
@@ -65,16 +62,19 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 
 	/**
 	 * 結果照会CSVモデルリストに変換する
-	 * @param healthInfoList List<HealthInfo>
+	 *
+	 * @param resultList
+	 *            List<HealthInfoRegistResponse>
 	 * @return modelList
 	 */
-	private List<ReferenceCsvModel> toModelList(List<HealthInfo> healthInfoList) {
+	private List<ReferenceCsvModel> toModelList(List<HealthInfoRegistResponse> resultList) {
 
 		List<ReferenceCsvModel> modelList = new ArrayList<ReferenceCsvModel>();
-		Stream.iterate(0, i -> ++i).limit(healthInfoList.size()).forEach(i -> {
+		Stream.iterate(0, i -> ++i).limit(resultList.size()).forEach(i -> {
 			ReferenceCsvModel model = new ReferenceCsvModel();
-			HealthInfo healthInfo = healthInfoList.get(i);
+			HealthInfoRegistResponse healthInfo = resultList.get(i);
 			BeanUtil.copy(healthInfo, model);
+			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 			modelList.add(model);
 		});
 

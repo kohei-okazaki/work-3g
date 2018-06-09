@@ -8,6 +8,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import jp.co.ha.common.file.excel.annotation.ExcelSheet;
 import jp.co.ha.common.file.excel.builder.BaseExcelBuilder;
+import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.ExcelUtil;
 import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
 
@@ -71,6 +73,8 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder {
 			ExcelUtil.setText(cell, model.getBmi().toString());
 			cell = ExcelUtil.getCell(sheet, ROW_POSITION, 3);
 			ExcelUtil.setText(cell, model.getStandardWeight().toString());
+			cell = ExcelUtil.getCell(sheet, ROW_POSITION, 4);
+			ExcelUtil.setText(cell, DateUtil.toString(model.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 		});
 	}
 }

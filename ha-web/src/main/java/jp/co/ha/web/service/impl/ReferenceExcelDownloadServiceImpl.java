@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
+import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
+import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.web.file.excel.builder.ResultReferenceExcelBuiler;
 import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
 
@@ -21,7 +23,7 @@ import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
  *
  */
 @Service(value = "referenceExcel")
-public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfo>> {
+public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoRegistResponse>> {
 
 	/** アカウント検索サービス */
 	@Autowired
@@ -34,7 +36,7 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 	 * {@inheritDoc}
 	 */
 	@Override
-	public View execute(List<HealthInfo> historyList) {
+	public View execute(List<HealthInfoRegistResponse> historyList) {
 
 		// 健康情報Entityからアカウントを検索
 		Account account = accountSearchService.findByUserId(historyList.get(0).getUserId());
@@ -48,12 +50,12 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 	 * 健康情報履歴リストをモデルリストに変換する<br>
 	 *
 	 * @param historyList
-	 *            List<HealthInfo> 健康情報リスト履歴リスト
+	 *            List<HealthInfoRegistResponse> 健康情報リスト履歴リスト
 	 * @param account
 	 *            アカウント情報
 	 * @return modelList
 	 */
-	private List<ReferenceExcelModel> toModelList(List<HealthInfo> historyList, Account account) {
+	private List<ReferenceExcelModel> toModelList(List<HealthInfoRegistResponse> historyList, Account account) {
 
 		// 健康情報マスク利用有無
 		boolean useHealthInfoMask = healthInfoFunctionService.useHealthInfoMask(account);
@@ -62,11 +64,12 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 
 			// 結果照会Excel出力モデル
 			ReferenceExcelModel model = new ReferenceExcelModel();
-			HealthInfo healthInfo = historyList.get(i);
+			HealthInfoRegistResponse healthInfo = historyList.get(i);
 			model.setHeight(useHealthInfoMask ? "****" : healthInfo.getHeight().toString());
 			model.setWeight(useHealthInfoMask ? "****" : healthInfo.getWeight().toString());
 			model.setBmi(useHealthInfoMask ? "****" : healthInfo.getBmi().toString());
 			model.setStandardWeight(useHealthInfoMask ? "****" : healthInfo.getStandardWeight().toString());
+			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 			modelList.add(model);
 		});

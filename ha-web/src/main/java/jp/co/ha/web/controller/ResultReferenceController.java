@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.find.HealthInfoSearchService;
-import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.ResultSearchForm;
@@ -40,17 +39,17 @@ public class ResultReferenceController implements BaseWebController {
 	@Autowired
 	private ResultReferenceService service;
 
-	/** 健康情報検索サービス */
-	@Autowired
-	private HealthInfoSearchService healthInfoSearchService;
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
 	@ReferenceExcel
-	private ExcelDownloadService<List<HealthInfo>> fileDownloadService;
+	private ExcelDownloadService<List<HealthInfoRegistResponse>> fileDownloadService;
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
 	@ReferenceCsv
 	private CsvDownloadService csvDownloadService;
+	/** セッション管理サービス */
+	@Autowired
+	private SessionManageService sessionService;
 
 	/**
 	 * Formを返す<br>
@@ -79,6 +78,8 @@ public class ResultReferenceController implements BaseWebController {
 	/**
 	 * 検索結果画面を表示<br>
 	 *
+	 * @param request
+	 *            HttpServletRequest
 	 * @param model
 	 *            Model
 	 * @param userId
@@ -88,7 +89,7 @@ public class ResultReferenceController implements BaseWebController {
 	 * @return
 	 */
 	@PostMapping(value = "/result-reference.html")
-	public String showSearchResult(Model model, @SessionAttribute String userId, @Valid ResultSearchForm form,
+	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid ResultSearchForm form,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -105,21 +106,24 @@ public class ResultReferenceController implements BaseWebController {
 		// ログイン中のユーザの全レコードを検索する
 		model.addAttribute("resultList", resultList);
 
+		// sessionに検索結果リストを設定
+		sessionService.setValue(request, "resultList", resultList);
+
 		return getView(ManageWebView.RESULT_REFFERNCE);
 	}
 
 	/**
 	 * Excelダウンロードを実行<br>
 	 *
-	 * @param userId
-	 *            ユーザID
+	 * @param request
+	 *            HttpServletRequest
 	 * @return
 	 */
 	@GetMapping(value = "/result-reference-excelDownload.html")
-	public ModelAndView excelDownload(@SessionAttribute String userId) {
-
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
-		ModelAndView model = new ModelAndView(fileDownloadService.execute(healthInfoList));
+	public ModelAndView excelDownload(HttpServletRequest request) {
+		// sessionから検索結果リストを取得
+		List<HealthInfoRegistResponse> resultList = sessionService.getValue(request, "resultList", List.class);
+		ModelAndView model = new ModelAndView(fileDownloadService.execute(resultList));
 
 		return model;
 	}
