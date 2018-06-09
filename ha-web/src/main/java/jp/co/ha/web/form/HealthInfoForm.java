@@ -13,6 +13,9 @@ import jp.co.ha.common.web.BaseForm;
  */
 public class HealthInfoForm implements BaseForm {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/** ユーザID */
 	private String userId;
 	/** 身長 */

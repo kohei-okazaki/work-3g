@@ -12,6 +12,9 @@ import jp.co.ha.common.web.BaseForm;
  */
 public class ResultSearchForm implements BaseForm {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/** 登録日直接指定フラグ */
 	@NotEmpty(message = "登録日直接指定フラグが未入力です")
 	@Pattern(regexp = "^[0-9]*$", message = "登録日直接指定フラグが半角数字でありません")
