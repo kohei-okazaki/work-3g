@@ -34,9 +34,9 @@ public class BeanUtil {
 				for (Field sourceField : dataClass.getDeclaredFields()) {
 					if (isCopyTarget(sourceField, targetField)) {
 						PropertyDescriptor sourcePd = new PropertyDescriptor(sourceField.getName(), dataClass);
-						// 値を取得
+						// 値を取得(getter呼び出し)
 						Object value = sourcePd.getReadMethod().invoke(data);
-						// targetに値を設定
+						// targetに値を設定(setter呼び出し)
 						targetPd.getWriteMethod().invoke(target, value);
 					}
 				}

@@ -86,6 +86,8 @@ public class ResultReferenceController implements BaseWebController {
 	 *            ユーザID
 	 * @param form
 	 *            検索情報フォーム
+	 * @param result
+	 *            BindingResult
 	 * @return
 	 */
 	@PostMapping(value = "/result-reference.html")
@@ -117,12 +119,14 @@ public class ResultReferenceController implements BaseWebController {
 	 *
 	 * @param request
 	 *            HttpServletRequest
+	 * @param resultList
+	 *            List<HealthInfoRegistResponse>
 	 * @return
 	 */
 	@GetMapping(value = "/result-reference-excelDownload.html")
-	public ModelAndView excelDownload(HttpServletRequest request) {
-		// sessionから検索結果リストを取得
-		List<HealthInfoRegistResponse> resultList = sessionService.getValue(request, "resultList", List.class);
+	public ModelAndView excelDownload(HttpServletRequest request, @SessionAttribute List<HealthInfoRegistResponse> resultList) {
+
+//		List<HealthInfoRegistResponse> resultList = sessionService.getValue(request, "resultList", List.class);
 		ModelAndView model = new ModelAndView(fileDownloadService.execute(resultList));
 
 		return model;
