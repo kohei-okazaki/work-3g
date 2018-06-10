@@ -31,19 +31,8 @@ public class CsvUtil {
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
 		List<String> headerList = new ArrayList<String>();
-		headerList.addAll(List.of(getCsvHeaderClass(clazz).names()));
+		headerList.addAll(List.of(clazz.getAnnotation(CsvHeader.class).names()));
 		return headerList;
-	}
-
-	/**
-	 * 指定されたクラス型付けてるCsvHeaderアノテーションを返す<br>
-	 *
-	 * @param clazz
-	 *            CSVヘッダーのついたクラス型
-	 * @return
-	 */
-	public static CsvHeader getCsvHeaderClass(Class<?> clazz) {
-		return clazz.getAnnotation(CsvHeader.class);
 	}
 
 }
