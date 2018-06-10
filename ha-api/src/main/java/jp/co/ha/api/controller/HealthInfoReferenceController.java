@@ -11,7 +11,6 @@ import jp.co.ha.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.common.api.BaseRestController;
-import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.HealthInfoException;
 
 /**
@@ -48,7 +47,7 @@ public class HealthInfoReferenceController implements
 	public HealthInfoReferenceRequest toRequest(HttpServletRequest request) throws HealthInfoException {
 
 		HealthInfoReferenceRequest apiRequest = new HealthInfoReferenceRequest();
-		apiRequest.setRequestType(RequestType.of(request.getParameter("requestId")));
+		apiRequest.setRequestId(request.getParameter("requestId"));
 		apiRequest.setUserId(request.getParameter("userId"));
 		apiRequest.setDataId(request.getParameter("dataId"));
 

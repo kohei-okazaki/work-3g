@@ -13,7 +13,6 @@ import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.api.BaseRestController;
-import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
 
@@ -50,12 +49,10 @@ public class HealthInfoRegistController implements
 	public HealthInfoRegistRequest toRequest(HttpServletRequest request) throws HealthInfoException {
 
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
-		apiRequest.setRequestType(RequestType.of(request.getParameter("requestId")));
+		apiRequest.setRequestId(request.getParameter("requestId"));
 		apiRequest.setUserId(request.getParameter("userId"));
-		apiRequest.setHeight(
-				BeanUtil.isNull(request.getParameter("height")) ? null : new BigDecimal(request.getParameter("height")));
-		apiRequest.setWeight(
-				BeanUtil.isNull(request.getParameter("weight")) ? null : new BigDecimal(request.getParameter("weight")));
+		apiRequest.setHeight(BeanUtil.isNull(request.getParameter("height")) ? null : new BigDecimal(request.getParameter("height")));
+		apiRequest.setWeight(BeanUtil.isNull(request.getParameter("weight")) ? null : new BigDecimal(request.getParameter("weight")));
 
 		return apiRequest;
 	}

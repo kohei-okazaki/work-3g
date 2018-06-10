@@ -97,7 +97,6 @@ public class ResultReferenceController implements BaseWebController {
 		if (result.hasErrors()) {
 			return getView(ManageWebView.RESULT_REFFERNCE);
 		}
-		service.setUpForm(form);
 
 		List<HealthInfoRegistResponse> resultList = service.getHealthInfoResponseList(form, userId);
 
@@ -126,7 +125,6 @@ public class ResultReferenceController implements BaseWebController {
 	@GetMapping(value = "/result-reference-excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request, @SessionAttribute List<HealthInfoRegistResponse> resultList) {
 
-//		List<HealthInfoRegistResponse> resultList = sessionService.getValue(request, "resultList", List.class);
 		ModelAndView model = new ModelAndView(fileDownloadService.execute(resultList));
 
 		return model;

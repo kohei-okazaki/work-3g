@@ -12,14 +12,6 @@ import jp.co.ha.web.form.ResultSearchForm;
 public interface ResultReferenceService {
 
 	/**
-	 * 結果照会画面のフォームクラスの設定を行う<br>
-	 *
-	 * @param form
-	 *            ResultSearchForm
-	 */
-	void setUpForm(ResultSearchForm form);
-
-	/**
 	 * 健康情報を取得する<br>
 	 *
 	 * @param form
