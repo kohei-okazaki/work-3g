@@ -31,7 +31,9 @@
 	<div align="center">
 
 		<div th:if="${errorMessage} != null">
-			<p th:text="${errorMessage}"></p>
+			<div class="errorMessage">
+				<p th:text="${errorMessage}"></p>
+			</div>
 		</div>
 		<div th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
 		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>

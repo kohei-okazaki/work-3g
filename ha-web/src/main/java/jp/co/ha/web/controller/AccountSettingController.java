@@ -1,5 +1,7 @@
 package jp.co.ha.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -86,7 +88,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
 		BeanUtil.copy(account, accountSettingForm);
-		BeanUtil.copy(mailInfo, accountSettingForm);
+		BeanUtil.copy(mailInfo, accountSettingForm, List.of("userId"));
 		return accountSettingForm;
 	}
 

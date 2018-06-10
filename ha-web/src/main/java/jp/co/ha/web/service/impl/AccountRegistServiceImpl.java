@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.AccountRegistForm;
@@ -34,6 +35,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setRemarks(form.getRemarks());
 		account.setFileEnclosureCharFlag(ParamConst.FLAG_FALSE.getValue());
+		account.setHealthInfoMaskFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 
 		return account;
@@ -47,6 +49,11 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 
 		// 指定したアカウント情報を検索
 		Account account = accountSearchService.findByUserId(form.getUserId());
+
+		if (BeanUtil.isNull(account)) {
+			// 初回登録時のアカウントの場合、後続のチェックを行わない
+			return false;
+		}
 
 		// ユーザIDが存在する場合true, 存在しない場合false
 		return !StringUtil.isEmpty(account.getUserId());
