@@ -76,6 +76,10 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 		}
 
+		if (service.invalidUserId(form)) {
+			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
+		}
+
 		model.addAttribute("form", form);
 
 		return getView(ManageWebView.ACCOUNT_REGIST_CONFIRM);

@@ -19,12 +19,13 @@ public interface LoginService {
 
 	/**
 	 * アカウント情報が存在するかチェック<br>
+	 * 存在しないtrue, 存在する場合falseを返す<br>
 	 *
 	 * @param loginForm
 	 *            ログインフォーム
 	 * @return
 	 */
-	boolean existAccount(LoginForm loginForm);
+	boolean noExistAccount(LoginForm loginForm);
 
 	/**
 	 * アカウント情報が有効かどうかチェック<br>

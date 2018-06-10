@@ -29,6 +29,9 @@ public class BeanUtil {
 		Class<?> targetClass = target.getClass();
 		try {
 			for (Field targetField : targetClass.getDeclaredFields()) {
+				if ("serialVersionUID".equals(targetField.getName())) {
+					continue;
+				}
 				PropertyDescriptor targetPd = new PropertyDescriptor(targetField.getName(), targetClass);
 
 				for (Field sourceField : dataClass.getDeclaredFields()) {
