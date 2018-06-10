@@ -62,17 +62,13 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
-
 		if (BeanUtil.isNull(regDate)) {
 			// 検索条件がない場合
 			return healthInfoList;
 		}
-
-		List<HealthInfo> resultList = healthInfoList.stream()
-						.filter(entity -> regDate.compareTo(DateUtil.toStartDate(entity.getRegDate())) == 0)
-						.collect(Collectors.toList());
-
-		return resultList;
+		return healthInfoList.stream()
+					.filter(entity -> DateUtil.isSamaDate(regDate, DateUtil.toStartDate(entity.getRegDate())))
+					.collect(Collectors.toList());
 	}
 
 	/**
@@ -82,17 +78,14 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
-
 		if (BeanUtil.isNull(fromRegDate) || BeanUtil.isNull(toRegDate)) {
 			// 検索条件がない場合
 			return healthInfoList;
 		}
-
 		// fromRegDate < entityRegDate < toRegDateの範囲内である健康情報の場合、追加
 		List<HealthInfo> resultList = healthInfoList.stream()
 									.filter(entity -> DateUtil.isBetWeenDate(fromRegDate, entity.getRegDate(), toRegDate))
 									.collect(Collectors.toList());
-
 		return resultList;
 	}
 

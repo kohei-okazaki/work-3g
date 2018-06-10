@@ -41,13 +41,14 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 
 			Iterator<Row> iteRow = sheet.rowIterator();
 			while (iteRow.hasNext()) {
-				HealthInfo healthInfo = new HealthInfo();
+
 				Row row = iteRow.next();
 
 				// ヘッダーの場合、次のレコードに進む
 				if (row.getRowNum() == HEADER_POSITION) continue;
 
 				if (userId.equals(row.getCell(1).getStringCellValue())) {
+					HealthInfo healthInfo = new HealthInfo();
 					healthInfo.setDataId(row.getCell(0).getStringCellValue());								// データID
 					healthInfo.setUserId(row.getCell(1).getStringCellValue());								// ユーザID
 					healthInfo.setHeight(new BigDecimal(row.getCell(2).getStringCellValue()));				// 身長
@@ -78,7 +79,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	@Override
 	public HealthInfo findByDataId(String dateId) {
 
-		HealthInfo healthInfo = new HealthInfo();
+		HealthInfo healthInfo = null;
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
 			Sheet sheet = workbook.getSheet(SHEET);
 
@@ -90,6 +91,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 				if (row.getRowNum() == 0) continue;
 
 				if (dateId.equals(row.getCell(0).getStringCellValue())) {
+					healthInfo = new HealthInfo();
 					healthInfo.setDataId(row.getCell(0).getStringCellValue());								// データID
 					healthInfo.setUserId(row.getCell(1).getStringCellValue());								// ユーザID
 					healthInfo.setHeight(new BigDecimal(row.getCell(2).getStringCellValue()));				// 身長

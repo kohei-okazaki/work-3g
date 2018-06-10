@@ -5,6 +5,7 @@
 <title>健康アプリ_アカウント登録画面</title>
 <link rel="icon" type="image/png" href="resources/image/people.png">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/baseLayout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
@@ -30,7 +31,9 @@
 	<div align="center">
 
 		<div th:if="${errorMessage} != null">
-			<p th:text="${errorMessage}"></p>
+			<div class="errorMessage">
+				<p th:text="${errorMessage}"></p>
+			</div>
 		</div>
 		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
 		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>

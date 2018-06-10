@@ -64,6 +64,9 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		// 指定されたデータIDから健康情報を取得
 		HealthInfo entity = healthInfoSearchService.findByDataId(request.getDataId());
+		if (BeanUtil.isNull(entity)) {
+			throw new HealthInfoException(ErrorCode.DB_NO_DATA, ErrorCode.DB_NO_DATA.getErrorMessage());
+		}
 
 		// レスポンスに変換する
 		HealthInfoReferenceResponse apiResponse = toResponse(entity);

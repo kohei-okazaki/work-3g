@@ -4,6 +4,8 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,6 +24,22 @@ public class BeanUtil {
 	 *            コピー先
 	 */
 	public static void copy(Object data, Object target) {
+		copy(data, target, new ArrayList<String>());
+	}
+
+	/**
+	 * dataのフィールドをtargetのフィールドにコピーする<br>
+	 * コピー先のクラスと同じフィールド名の場合コピー元のフィールドに値を設定する<br>
+	 * コピー時に無視リストの名前のフィールドの場合コピーを行わない。<br>
+	 *
+	 * @param data
+	 *            コピー元
+	 * @param target
+	 *            コピー先
+	 * @param ignoreList
+	 *            無視リスト
+	 */
+	public static void copy(Object data, Object target, List<String> ignoreList) {
 
 		// コピー元のクラス型
 		Class<?> dataClass = data.getClass();
@@ -29,6 +47,9 @@ public class BeanUtil {
 		Class<?> targetClass = target.getClass();
 		try {
 			for (Field targetField : targetClass.getDeclaredFields()) {
+				if (ignore(ignoreList, targetField.getName())) {
+					continue;
+				}
 				PropertyDescriptor targetPd = new PropertyDescriptor(targetField.getName(), targetClass);
 
 				for (Field sourceField : dataClass.getDeclaredFields()) {
@@ -50,6 +71,22 @@ public class BeanUtil {
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * コピー時にコピーを行わないfieldかどうかを判定する<br>
+	 * 以下の場合、そのfieldではコピーを行わない<br>
+	 * <ul>
+	 * <li>fieldNameが"serialVersionUID"の場合</li>
+	 * <li>fieldNameがignoreListに含まれてる場合</li>
+	 * </ul>
+	 *
+	 * @param ignoreList
+	 * @param fieldName
+	 * @return
+	 */
+	private static boolean ignore(List<String> ignoreList, String fieldName) {
+		return "serialVersionUID".equals(fieldName) || (!ignoreList.isEmpty() && ignoreList.contains(fieldName));
 	}
 
 	/**

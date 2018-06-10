@@ -1,12 +1,11 @@
 package jp.co.ha.web.service.impl;
 
-import java.util.Objects;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
@@ -27,21 +26,17 @@ public class LoginServiceImpl implements LoginService {
 	 */
 	@Override
 	public boolean invalidPassword(LoginForm loginForm) {
-
-		String inputPassword = loginForm.getPassword();
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
-		String userPassword = account.getPassword();
-		return !inputPassword.equals(userPassword);
+		return !loginForm.getPassword().equals(account.getPassword());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean existAccount(LoginForm loginForm) {
-
+	public boolean noExistAccount(LoginForm loginForm) {
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
-		return Objects.nonNull(account.getUserId());
+		return BeanUtil.isNull(account);
 	}
 
 	/**
@@ -49,7 +44,6 @@ public class LoginServiceImpl implements LoginService {
 	 */
 	@Override
 	public boolean invalidAccount(LoginForm loginForm) {
-
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		return StringUtil.isTrue(account.getDeleteFlag());
 	}

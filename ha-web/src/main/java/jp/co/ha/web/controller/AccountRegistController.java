@@ -76,6 +76,11 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 		}
 
+		if (service.invalidUserId(form)) {
+			model.addAttribute("errorMessage", "アカウントは既に登録されています");
+			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
+		}
+
 		model.addAttribute("form", form);
 
 		return getView(ManageWebView.ACCOUNT_REGIST_CONFIRM);

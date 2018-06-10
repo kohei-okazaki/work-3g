@@ -27,7 +27,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した文字列型の日付をyyyy/MM/dd hh:mm:ssのフォーマットで返す<br>
+	 * 指定した文字列型の日付をyyyy/MM/dd HH:mm:ssのフォーマットで返す<br>
 	 *
 	 * @param target
 	 *            対象日付
@@ -136,10 +136,22 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Date toStartDate(Date targetDate) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(targetDate);
-		calendar.set(0, 0, 0);
-		return calendar.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatDefine.YYYYMMDD.getValue() + " 00:00:00");
+		String result = sdf.format(targetDate);
+		return toDate(result);
+	}
+
+	/**
+	 * 同じ日付かどうか判定する<br>
+	 *
+	 * @param target1
+	 *            対象日
+	 * @param target2
+	 *            対象日
+	 * @return
+	 */
+	public static boolean isSamaDate(Date target1, Date target2) {
+		return target1.compareTo(target2) == 0;
 	}
 
 	/**
