@@ -30,7 +30,9 @@ public class CsvUtil {
 	 * @return ヘッダー名
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
-		return new ArrayList<String>(List.of(getCsvHeaderClass(clazz).names()));
+		List<String> headerList = new ArrayList<String>();
+		headerList.addAll(List.of(getCsvHeaderClass(clazz).names()));
+		return headerList;
 	}
 
 	/**
