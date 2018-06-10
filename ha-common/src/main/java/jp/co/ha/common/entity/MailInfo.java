@@ -36,7 +36,7 @@ public class MailInfo implements Serializable {
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
 
-	/** 更新日時 */
+	/** 登録日時 */
 	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
 
