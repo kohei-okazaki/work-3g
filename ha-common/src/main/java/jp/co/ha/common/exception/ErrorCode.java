@@ -27,7 +27,9 @@ public enum ErrorCode {
 	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "ERROR", "リクエストIDが一致しません"),
 
 	/** DB暗号化・複合化エラー */
-	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー");
+	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
+	/** 該当データ存在しないエラー */
+	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません");
 
 	/** エラーコード */
 	private String errorCode;

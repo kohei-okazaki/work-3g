@@ -32,7 +32,7 @@ public class AccountDaoImpl implements AccountDao {
 	@Override
 	public Account findByUserId(String userId) {
 
-		Account account = new Account();
+		Account account = null;
 
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
 
@@ -47,15 +47,16 @@ public class AccountDaoImpl implements AccountDao {
 				if (row.getRowNum() == HEADER_POSITION) continue;
 
 				if (userId.equals(row.getCell(0).getStringCellValue())) {
+					account = new Account();
 					account.setUserId(row.getCell(0).getStringCellValue());									// ユーザID
 					account.setPassword(row.getCell(1).getStringCellValue());								// パスワード
 					account.setDeleteFlag(row.getCell(2).getStringCellValue());								// 削除フラグ
-					account.setPasswordExpire(DateUtil.toDate(row.getCell(3).getStringCellValue()));	// パスワード有効期限
+					account.setPasswordExpire(DateUtil.toDate(row.getCell(3).getStringCellValue()));		// パスワード有効期限
 					account.setRemarks(row.getCell(4).getStringCellValue());								// 備考
 					account.setFileEnclosureCharFlag(row.getCell(5).getStringCellValue());					// ファイル囲い文字利用フラグ
 					account.setHealthInfoMaskFlag(row.getCell(6).getStringCellValue());						// 健康情報マスクフラグ
-					account.setUpdateDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));		// 更新日時
-					account.setRegDate(DateUtil.toDate(row.getCell(8).getStringCellValue()));			// 登録日時
+					account.setUpdateDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));			// 更新日時
+					account.setRegDate(DateUtil.toDate(row.getCell(8).getStringCellValue()));				// 登録日時
 				}
 			}
 		} catch (EncryptedDocumentException e) {
