@@ -67,7 +67,7 @@ public class ExcelUtil {
 	 * @return シート名
 	 */
 	public static String getSheetName(Class<?> clazz) {
-		return getExcelSheetClass(clazz).value();
+		return clazz.getAnnotation(ExcelSheet.class).value();
 	}
 
 	/**
@@ -78,29 +78,7 @@ public class ExcelUtil {
 	 * @return ヘッダー名
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
-		return List.of(getExcelHeaderClass(clazz).names());
-	}
-
-	/**
-	 * 指定されたクラス型についてるExcelSheetアノテーションを返す<br>
-	 *
-	 * @param clazz
-	 *            ExcelHeaderアノテーションのついたクラス型
-	 * @return Excelheader
-	 */
-	public static ExcelSheet getExcelSheetClass(Class<?> clazz) {
-		return clazz.getAnnotation(ExcelSheet.class);
-	}
-
-	/**
-	 * 指定されたクラス型についてるExcelHeaderアノテーションを返す<br>
-	 *
-	 * @param clazz
-	 *            ExcelHeaderアノテーションのついたクラス型
-	 * @return
-	 */
-	public static ExcelHeader getExcelHeaderClass(Class<?> clazz) {
-		return clazz.getAnnotation(ExcelHeader.class);
+		return List.of(clazz.getAnnotation(ExcelHeader.class).names());
 	}
 
 }

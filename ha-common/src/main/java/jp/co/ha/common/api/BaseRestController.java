@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import jp.co.ha.common.exception.BaseAppException;
 
@@ -52,15 +53,21 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	/**
 	 * postでの通信の処理を行う<br>
 	 *
-	 * @param request
-	 *            HttpServletRequest
-	 * @param response
-	 *            HttpServletResponse
+	 * @param apiRequest
+	 *            Rq
 	 * @return
 	 */
 	@PostMapping
-	default Rs doPost(HttpServletRequest request, HttpServletResponse response) {
-		return doGet(request, response);
+	default Rs doPost(@RequestBody Rq apiRequest) {
+		Rs apiResponse = null;
+		try {
+			apiResponse = this.execute(apiRequest);
+			apiResponse.setResult(ResultType.SUCCESS);
+		} catch (BaseAppException e) {
+			apiResponse = (Rs) new ErrorResponse(e);
+			System.out.println(e.toString());
+		}
+		return apiResponse;
 	}
 
 	/**

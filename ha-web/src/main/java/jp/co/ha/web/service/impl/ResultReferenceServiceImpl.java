@@ -29,15 +29,6 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	private HealthInfoSearchService healthInfoSearchService;
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setUpForm(ResultSearchForm form) {
-		// 登録日from
-		// 登録日to
-	}
-
-	/**
 	 * 健康情報を取得する<br>
 	 *
 	 * @param form

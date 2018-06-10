@@ -14,6 +14,7 @@ import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
@@ -49,12 +50,18 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
-		if (BeanUtil.isNull(request.getRequestType())
+		if (StringUtil.isEmpty(request.getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
+
+		// リクエスト種別チェック
+		if (RequestType.HEALTH_INFO_REGIST != RequestType.of(request.getRequestId())) {
+			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません requestId:" + request.getRequestId());
+		}
+
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account.getUserId())) {
