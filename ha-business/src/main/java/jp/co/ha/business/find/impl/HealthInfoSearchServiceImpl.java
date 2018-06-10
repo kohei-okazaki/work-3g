@@ -66,10 +66,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			// 検索条件がない場合
 			return healthInfoList;
 		}
-		List<HealthInfo> resultList = healthInfoList.stream()
-						.filter(entity -> regDate.compareTo(DateUtil.toStartDate(entity.getRegDate())) == 0)
-						.collect(Collectors.toList());
-		return resultList;
+		return healthInfoList.stream()
+					.filter(entity -> DateUtil.isSamaDate(regDate, DateUtil.toStartDate(entity.getRegDate())))
+					.collect(Collectors.toList());
 	}
 
 	/**

@@ -23,7 +23,7 @@ public class ResultSearchForm implements BaseForm {
 	@NotEmpty(message = "登録日(開始)が未入力です")
 	/** 登録日(開始) */
 	private String fromRegDate;
-	@NotEmpty(message = "登録日(終了)が未入力です")
+	/*@NotEmpty(message = "登録日(終了)が未入力です")*/
 	/** 登録日(終了) */
 	private String toRegDate;
 
