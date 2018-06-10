@@ -9,6 +9,8 @@ public interface BaseWebController {
 	/**
 	 * viewを返す<br>
 	 *
+	 * @param view
+	 *            BaseView
 	 * @return
 	 */
 	default String getView(BaseView view) {
