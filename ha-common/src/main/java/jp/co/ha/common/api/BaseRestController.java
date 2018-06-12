@@ -37,7 +37,6 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	default Rs doGet(HttpServletRequest request, HttpServletResponse response) {
 
 		Rs apiResponse = null;
-
 		try {
 			Rq apiRequest = toRequest(request);
 			apiResponse = this.execute(apiRequest);
@@ -59,6 +58,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 */
 	@PostMapping
 	default Rs doPost(@RequestBody Rq apiRequest) {
+
 		Rs apiResponse = null;
 		try {
 			apiResponse = this.execute(apiRequest);

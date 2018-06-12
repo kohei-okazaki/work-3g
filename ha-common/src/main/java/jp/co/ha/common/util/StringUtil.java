@@ -1,8 +1,8 @@
 package jp.co.ha.common.util;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 文字列のUtilクラス<br>
@@ -38,7 +38,7 @@ public class StringUtil {
 	 * @return List<String>
 	 */
 	public static List<String> toStrList(String target, String delim) {
-		return isEmpty(target) ? null : Arrays.stream(target.split(delim)).collect(Collectors.toList());
+		return isEmpty(target) ? null : Stream.of(target.split(delim)).collect(Collectors.toList());
 	}
 
 	/**
