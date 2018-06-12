@@ -20,12 +20,6 @@ public abstract class BaseAppException extends Exception {
 
 	/**
 	 * コンストラクタ<br>
-	 */
-	public BaseAppException() {
-	}
-
-	/**
-	 * コンストラクタ<br>
 	 *
 	 * @param errorCode
 	 *            エラーコード

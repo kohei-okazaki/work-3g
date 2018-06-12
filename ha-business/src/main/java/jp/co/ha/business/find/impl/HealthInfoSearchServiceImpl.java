@@ -83,10 +83,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			return healthInfoList;
 		}
 		// fromRegDate < entityRegDate < toRegDateの範囲内である健康情報の場合、追加
-		List<HealthInfo> resultList = healthInfoList.stream()
-									.filter(entity -> DateUtil.isBetWeenDate(fromRegDate, entity.getRegDate(), toRegDate))
-									.collect(Collectors.toList());
-		return resultList;
+		return healthInfoList.stream()
+					.filter(entity -> DateUtil.isBetWeenDate(fromRegDate, entity.getRegDate(), toRegDate))
+					.collect(Collectors.toList());
 	}
 
 }

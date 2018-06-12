@@ -6,7 +6,7 @@ package jp.co.ha.common.api;
  */
 public abstract class BaseRequest {
 
-	/** リクエストタイプ */
+	/** リクエストID */
 	private String requestId;
 
 	/**

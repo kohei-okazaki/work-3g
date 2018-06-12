@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import jp.co.ha.common.exception.AppIOException;
+import jp.co.ha.common.exception.ErrorCode;
+
 /**
  * 日付のUtilクラス<br>
  *
@@ -56,6 +59,7 @@ public class DateUtil {
 			result = sdf.parse(target);
 		} catch (ParseException e) {
 			e.printStackTrace();
+			throw new AppIOException(ErrorCode.RUNTIME_ERROR, "フォーマット不正エラーです");
 		}
 		return result;
 

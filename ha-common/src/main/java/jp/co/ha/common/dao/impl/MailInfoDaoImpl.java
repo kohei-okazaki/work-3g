@@ -34,7 +34,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 	@Override
 	public MailInfo findByUserId(String userId) {
 
-		MailInfo mailInfo = new MailInfo();
+		MailInfo mailInfo = null;
 
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
 
@@ -49,6 +49,7 @@ public class MailInfoDaoImpl implements MailInfoDao {
 				if (row.getRowNum() == HEADER_POSITION) continue;
 
 				if (userId.equals(row.getCell(0).getStringCellValue())) {
+					mailInfo = new MailInfo();
 					mailInfo.setUserId(row.getCell(0).getStringCellValue());
 					mailInfo.setMailAddress(row.getCell(1).getStringCellValue());
 					mailInfo.setMailPassword(row.getCell(2).getStringCellValue());
