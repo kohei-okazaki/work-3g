@@ -11,7 +11,9 @@ public interface BaseUpdateService<T, D extends BaseDao> {
 
 	/**
 	 * Entityを更新する<br>
+	 *
 	 * @param entity
+	 *            Entity
 	 */
 	void update(T entity);
 }
