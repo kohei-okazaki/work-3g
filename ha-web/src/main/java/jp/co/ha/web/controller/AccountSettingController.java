@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import jp.co.ha.business.create.MailInfoCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.MailInfoSearchService;
-import jp.co.ha.business.update.AccountUpdateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.AccountSettingException;
@@ -43,15 +41,9 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** アカウント更新サービス */
-	@Autowired
-	private AccountUpdateService accountUpdateService;
 	/** メール情報検索サービス */
 	@Autowired
 	private MailInfoSearchService mailInfoSearchService;
-	/** メール情報作成サービス */
-	@Autowired
-	private MailInfoCreateService mailInfoCreateService;
 	/** session管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
@@ -124,25 +116,8 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@PostMapping(value = "/account-setting-complete.html")
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws AccountSettingException {
 
-		// アカウント情報を検索し、マージする
-		Account befAccount = accountSearchService.findByUserId(form.getUserId());
-		accountSettingService.mergeAccount(befAccount, form);
-
-		// メール情報を検索し、マージする
-		MailInfo befMailInfo = mailInfoSearchService.findByUserId(form.getUserId());
-		accountSettingService.mergeMailInfo(befMailInfo, form);
-
-		if (BeanUtil.isNull(befMailInfo.getUserId())) {
-			// メール情報が登録されてない場合
-			MailInfo mailInfo = accountSettingService.convertMailInfo(form);
-			// メール情報を新規登録する
-			mailInfoCreateService.create(mailInfo);
-			// アカウント情報を更新する
-			accountUpdateService.update(befAccount);
-		} else {
-			// 更新処理を行う
-			accountSettingService.update(befAccount, befMailInfo);
-		}
+		// form情報から更新処理を行う
+		accountSettingService.execute(form);
 
 		return getView(ManageWebView.ACCOUNT_SETTING_COMPLETE);
 	}

@@ -1,6 +1,5 @@
 package jp.co.ha.web.service;
 
-import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.web.form.AccountSettingForm;
 
@@ -11,14 +10,12 @@ import jp.co.ha.web.form.AccountSettingForm;
 public interface AccountSettingService {
 
 	/**
-	 * 更新処理を行う<br>
+	 * アカウント設定のメイン処理を行う<br>
 	 *
-	 * @param account
-	 *            Account
-	 * @param mainlInfo
-	 *            MailInfo
+	 * @param form
+	 *            AccountSettingForm
 	 */
-	void update(Account account, MailInfo mainlInfo);
+	void execute(AccountSettingForm form);
 
 	/**
 	 * 指定されたアカウント情報の削除をする<br>
@@ -27,17 +24,6 @@ public interface AccountSettingService {
 	 *            AccountSettingForm
 	 */
 	void deleteAccount(AccountSettingForm form);
-
-	/**
-	 * フォーム情報をアカウント情報にマージする<br>
-	 *
-	 * @param account
-	 *            Account
-	 * @param form
-	 *            AccountSettingForm
-	 * @return
-	 */
-	void mergeAccount(Account account, AccountSettingForm form);
 
 	/**
 	 * フォーム情報をメール情報に変換する<br>
