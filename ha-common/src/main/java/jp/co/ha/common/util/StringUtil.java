@@ -1,8 +1,8 @@
 package jp.co.ha.common.util;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 /**
  * 文字列のUtilクラス<br>
@@ -38,18 +38,7 @@ public class StringUtil {
 	 * @return List<String>
 	 */
 	public static List<String> toStrList(String target, String delim) {
-
-		if (BeanUtil.isNull(target) || EMPTY.equals(target)) {
-			return null;
-		}
-		List<String> result = new ArrayList<String>();
-		StringTokenizer tokenizer = new StringTokenizer(target, delim);
-
-		while (tokenizer.hasMoreTokens()) {
-			result.add(tokenizer.nextToken().trim());
-		}
-		return result;
-
+		return isEmpty(target) ? null : Arrays.stream(target.split(delim)).collect(Collectors.toList());
 	}
 
 	/**

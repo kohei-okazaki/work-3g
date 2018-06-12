@@ -29,7 +29,10 @@ public enum ErrorCode {
 	/** DB暗号化・複合化エラー */
 	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
 	/** 該当データ存在しないエラー */
-	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません");
+	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません"),
+
+	/** 実行環境エラー */
+	RUNTIME_ERROR("RUNTIME_ERROR", "ERROR", "実行環境エラー");
 
 	/** エラーコード */
 	private String errorCode;
