@@ -84,15 +84,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void deleteAccount(AccountSettingForm form) {
-		// FIXME AccountDeleteService#delete(String userId)で削除するように修正
-		//  accountDao.deleteAccount(form.getUserId());
-	}
-
-	/**
 	 * フォーム情報をアカウント情報にマージする<br>
 	 *
 	 * @param account
@@ -111,10 +102,13 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * フォーム情報をメール情報に変換する<br>
+	 *
+	 * @param form
+	 *            AccountSettingForm
+	 * @return
 	 */
-	@Override
-	public MailInfo convertMailInfo(AccountSettingForm form) {
+	private MailInfo convertMailInfo(AccountSettingForm form) {
 
 		MailInfo mailInfo = new MailInfo();
 //		mailInfo.setUserId(form.getUserId());
@@ -126,10 +120,15 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * フォーム情報をメール情報にマージする<br>
+	 *
+	 * @param mailInfo
+	 *            MailInfo
+	 * @param form
+	 *            AccountSettingForm
+	 * @return
 	 */
-	@Override
-	public void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
+	private void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
 		BeanUtil.copy(form, mailInfo, List.of("userId"));
 //		mailInfo.setMailAddress(form.getMailAddress());
 //		mailInfo.setMailPassword(form.getMailPassword());
