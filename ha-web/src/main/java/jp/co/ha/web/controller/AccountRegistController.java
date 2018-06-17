@@ -39,7 +39,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
-	@InitBinder("AccountRegistForm")
+	@InitBinder("accountRegistForm")
 	public void initBinder(WebDataBinder binder) {
 		//		binder.setValidator(new AccountRegistValidator());
 	}

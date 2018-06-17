@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -26,6 +28,7 @@ import jp.co.ha.web.form.ResultSearchForm;
 import jp.co.ha.web.service.ResultReferenceService;
 import jp.co.ha.web.service.annotation.ReferenceCsv;
 import jp.co.ha.web.service.annotation.ReferenceExcel;
+import jp.co.ha.web.validator.ResultSearchValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -50,6 +53,17 @@ public class ResultReferenceController implements BaseWebController {
 	/** セッション管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
+
+	/**
+	 * Validateを設定<br>
+	 *
+	 * @param binder
+	 *            WebDataBinder
+	 */
+	@InitBinder(value = "resultSearchForm")
+	public void initBinder(WebDataBinder binder) {
+		binder.setValidator(new ResultSearchValidator());
+	}
 
 	/**
 	 * Formを返す<br>
