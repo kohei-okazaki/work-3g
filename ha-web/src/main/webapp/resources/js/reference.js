@@ -12,3 +12,19 @@ function referenceCsvDownload() {
 	document.body.appendChild(form);
 	form.submit();
 }
+
+// カレンダーを隠すかどうかの判定
+function hide() {
+
+	var classList = document.getElementsByClassName('hide');
+	for (var i = 0; i < classList.length; i++) {
+		classList[i].style.display = "none";
+	}
+}
+
+function show() {
+	var classList = document.getElementsByClassName('hide');
+	for (var i = 0; i < classList.length; i++) {
+		classList[i].style.display = "block";
+	}
+}

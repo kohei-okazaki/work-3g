@@ -37,18 +37,18 @@
 					<th><p>登録日</p></th>
 					<td>
 						<div class="radio" align="center">
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="show()">
 							<label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hide()">
 							<label for="regDateSelectFlagTrue">直接指定する</label>
 						</div>
 					</td>
 					<td>
 						<label class="date"><input type="date" th:field="*{fromRegDate}" /></label>
 					</td>
-					<td>～</td>
-					<td>
-						<label class="date"><input type="date" th:field="*{toRegDate}" /></label>
+					<td class="hide">～</td>
+					<td class="hide">
+						<label class="date"><input type="date" th:field="*{toRegDate}" class="hide" /></label>
 					</td>
 				</tr>
 			</table>
