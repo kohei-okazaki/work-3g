@@ -15,6 +15,8 @@ public class ResultSearchForm implements BaseForm {
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
 
+	/** データID */
+	private String dataId;
 	/** 登録日直接指定フラグ */
 	@NotEmpty(message = "登録日直接指定フラグが未入力です")
 	@Pattern(regexp = "^[0-9]*$", message = "登録日直接指定フラグが半角数字でありません")
@@ -23,9 +25,27 @@ public class ResultSearchForm implements BaseForm {
 	@NotEmpty(message = "登録日(開始)が未入力です")
 	/** 登録日(開始) */
 	private String fromRegDate;
-	/*@NotEmpty(message = "登録日(終了)が未入力です")*/
 	/** 登録日(終了) */
 	private String toRegDate;
+
+	/**
+	 * dataIdを返す<br>
+	 *
+	 * @return dataId dataId
+	 */
+	public String getDataId() {
+		return dataId;
+	}
+
+	/**
+	 * dataIdを設定する<br>
+	 *
+	 * @param dataId
+	 *            dataId
+	 */
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
+	}
 
 	/**
 	 * fromRegDateを返す<br>

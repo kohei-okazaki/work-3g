@@ -1,3 +1,4 @@
+// Excelをダウンロードする関数
 function referenceExcelDownload() {
 	var form = document.createElement('form');
 	form.action = '/ha-web/result-reference-excelDownload.html';
@@ -5,6 +6,8 @@ function referenceExcelDownload() {
 	document.body.appendChild(form);
 	form.submit();
 }
+
+// CSVをダウンロードする関数
 function referenceCsvDownload() {
 	var form = document.createElement('form');
 	form.action = '/ha-web/result-reference-csvDownload';
@@ -13,18 +16,18 @@ function referenceCsvDownload() {
 	form.submit();
 }
 
-// カレンダーを隠すかどうかの判定
-function hide() {
-
-	var classList = document.getElementsByClassName('hide');
+// カレンダーを隠す関数
+function hideCalendar() {
+	var classList = document.getElementsByClassName('hideCalendar');
 	for (var i = 0; i < classList.length; i++) {
 		classList[i].style.display = "none";
 	}
 }
 
-function show() {
-	var classList = document.getElementsByClassName('hide');
+// カレンダーを表示させる関数
+function showCalendar() {
+	var classList = document.getElementsByClassName('hideCalendar');
 	for (var i = 0; i < classList.length; i++) {
-		classList[i].style.display = "block";
+		classList[i].style.display = "";
 	}
 }
