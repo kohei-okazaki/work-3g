@@ -25,7 +25,7 @@ import jp.co.ha.common.exception.BaseAppException;
 public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs, E>, E extends BaseAppException> {
 
 	/**
-	 * getでの通信の処理を行う<br>
+	 * GET通信の処理を行う<br>
 	 *
 	 * @param request
 	 *            HttpServletRequest
@@ -50,7 +50,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	}
 
 	/**
-	 * postでの通信の処理を行う<br>
+	 * POST通信の処理を行う<br>
 	 *
 	 * @param apiRequest
 	 *            Rq
