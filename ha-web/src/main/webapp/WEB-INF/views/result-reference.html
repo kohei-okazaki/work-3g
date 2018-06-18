@@ -28,27 +28,35 @@
 	<br>
 	<br>
 	<form action="./result-reference.html" method="post" th:object="${resultSearchForm}">
+
+		<div align="center">
+		<div th:if="${#fields.hasErrors('dataId')}" th:errors="*{dataId}"></div>
 		<div th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
 		<div th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
 		<div th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
-		<div align="center">
 			<table>
+				<tr>
+					<th><p>データID</p></th>
+					<td>
+						<input type="text" size="6" th:field="*{dataId}" placeholder="データID" >
+					</td>
+				</tr>
 				<tr>
 					<th><p>登録日</p></th>
 					<td>
 						<div class="radio" align="center">
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="show()">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()">
 							<label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hide()">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hideCalendar()">
 							<label for="regDateSelectFlagTrue">直接指定する</label>
 						</div>
 					</td>
 					<td>
 						<label class="date"><input type="date" th:field="*{fromRegDate}" /></label>
 					</td>
-					<td class="hide">～</td>
-					<td class="hide">
-						<label class="date"><input type="date" th:field="*{toRegDate}" class="hide" /></label>
+					<td class="hideCalendar">～</td>
+					<td class="hideCalendar">
+						<label class="date"><input type="date" th:field="*{toRegDate}" class="hideCalendar" /></label>
 					</td>
 				</tr>
 			</table>

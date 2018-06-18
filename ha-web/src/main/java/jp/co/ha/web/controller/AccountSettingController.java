@@ -55,7 +55,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 *            WebDataBinder
 	 */
 	@Override
-	@InitBinder(value = "AccountSettingForm")
+	@InitBinder(value = "accountSettingForm")
 	public void initBinder(WebDataBinder binder) {
 //		binder.setValidator(new AccountSettingValidator());
 	}

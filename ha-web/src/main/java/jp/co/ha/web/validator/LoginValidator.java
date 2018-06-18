@@ -29,12 +29,12 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	public void validate(Object target, Errors errors) {
 
 		LoginForm form = (LoginForm) target;
-		// 必須チェック
-		checkRequire(errors);
-		// 桁数チェック
-		checkLength(form, errors);
-		// 属性チェック
-		checkType(form, errors);
+//		// 必須チェック
+//		checkRequire(errors);
+//		// 桁数チェック
+//		checkLength(form, errors);
+//		// 属性チェック
+//		checkType(form, errors);
 	}
 
 	/**

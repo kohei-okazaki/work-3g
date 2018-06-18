@@ -21,6 +21,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
+import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -45,9 +46,9 @@ public class LoginController implements BaseWebController {
 	 * @param binder
 	 *            WebDataBinder
 	 */
-	@InitBinder(value = "LoginForm")
+	@InitBinder(value = "loginForm")
 	public void initBinder(WebDataBinder binder) {
-		//		binder.setValidator(new LoginValidator());
+		binder.setValidator(new LoginValidator());
 	}
 
 	/**
