@@ -44,16 +44,17 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelMode
 	@Override
 	protected void writeData(Sheet sheet) {
 
-		HealthInfoExcelModel model = modelList.get(0);
 		final int ROW_POSITION = 1;
-		Cell cell = ExcelUtil.getCell(sheet, ROW_POSITION, 0);
-		ExcelUtil.setText(cell, model.getHeight());
-		cell = ExcelUtil.getCell(sheet, ROW_POSITION, 1);
-		ExcelUtil.setText(cell, model.getWeight());
-		cell = ExcelUtil.getCell(sheet, ROW_POSITION, 2);
-		ExcelUtil.setText(cell, model.getBmi());
-		cell = ExcelUtil.getCell(sheet, ROW_POSITION, 3);
-		ExcelUtil.setText(cell, model.getStandardWeight());
+		modelList.stream().forEach(model -> {
+			Cell cell = ExcelUtil.getCell(sheet, ROW_POSITION, 0);
+			ExcelUtil.setText(cell, model.getHeight());
+			cell = ExcelUtil.getCell(sheet, ROW_POSITION, 1);
+			ExcelUtil.setText(cell, model.getWeight());
+			cell = ExcelUtil.getCell(sheet, ROW_POSITION, 2);
+			ExcelUtil.setText(cell, model.getBmi());
+			cell = ExcelUtil.getCell(sheet, ROW_POSITION, 3);
+			ExcelUtil.setText(cell, model.getStandardWeight());
+		});
 
 	}
 
