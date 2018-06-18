@@ -22,7 +22,6 @@ public class ResultSearchForm implements BaseForm {
 	@Pattern(regexp = "^[0-9]*$", message = "登録日直接指定フラグが半角数字でありません")
 	@Size(min = 1, max = 1, message = "登録日直接指定フラグが範囲外の値です")
 	private String regDateSelectFlag;
-//	@NotEmpty(message = "登録日(開始)が未入力です")
 	/** 登録日(開始) */
 	private String fromRegDate;
 	/** 登録日(終了) */

@@ -1,5 +1,7 @@
 package jp.co.ha.web.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
@@ -8,7 +10,9 @@ import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
+import jp.co.ha.common.util.Charset;
 import jp.co.ha.web.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
 
@@ -37,7 +41,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 
 		HealthInfoExcelModel model = toModel(healthInfo, account);
 
-		return new HealthInfoExcelBuilder(model);
+		return new HealthInfoExcelBuilder(getExcelConfig(), List.of(model));
 	}
 
 	/**
@@ -60,6 +64,16 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		model.setStandardWeight(useMask ? "****" : healthInfo.getStandardWeight().toString());
 
 		return model;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ExcelConfig getExcelConfig() {
+		ExcelConfig conf = new ExcelConfig();
+		conf.setCharset(Charset.MS_932);
+		return conf;
 	}
 
 }

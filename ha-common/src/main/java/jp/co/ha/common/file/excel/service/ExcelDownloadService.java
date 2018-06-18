@@ -2,6 +2,8 @@ package jp.co.ha.common.file.excel.service;
 
 import org.springframework.web.servlet.View;
 
+import jp.co.ha.common.file.excel.ExcelConfig;
+
 /**
  * Excelダウンロードサービスインターフェース<br>
  * 継承先で@Service(value = "サービス実装用のAnnotation") をつけてInjectionすること<br>
@@ -21,5 +23,11 @@ public interface ExcelDownloadService<F> {
 	 * @return View
 	 */
 	View execute(F f);
+
+	/**
+	 * Excel設定情報を取得<br>
+	 * @return
+	 */
+	ExcelConfig getExcelConfig();
 
 }

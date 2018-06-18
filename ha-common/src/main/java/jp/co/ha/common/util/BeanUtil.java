@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -129,6 +130,19 @@ public class BeanUtil {
 	 */
 	public static boolean notNull(Object target) {
 		return !isNull(target);
+	}
+
+	/**
+	 * パラメータ引数にしているクラス型を取得する<br>
+	 *
+	 * @param clazz
+	 *            対象クラス
+	 * @return
+	 */
+	public static Class<?> getParameterType(Class<?> clazz) {
+		ParameterizedType paramType = (ParameterizedType) clazz.getGenericSuperclass();
+		return (Class<?>) paramType.getActualTypeArguments()[0];
+
 	}
 
 }

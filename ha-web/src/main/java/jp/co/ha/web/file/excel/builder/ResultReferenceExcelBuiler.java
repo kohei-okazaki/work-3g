@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.annotation.ExcelSheet;
 import jp.co.ha.common.file.excel.builder.BaseExcelBuilder;
 import jp.co.ha.common.util.DateFormatDefine;
@@ -18,19 +19,18 @@ import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
  *
  */
 @ExcelSheet("健康情報")
-public class ResultReferenceExcelBuiler extends BaseExcelBuilder {
-
-	/** 結果照会Excelモデルクラスリスト */
-	private List<ReferenceExcelModel> modelList;
+public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelModel> {
 
 	/**
 	 * コンストラクタ<br>
 	 *
+	 * @param conf
+	 *            Excel設定情報
 	 * @param modelList
-	 *            List<ReferenceExcelModel>
+	 *            Excel出力モデル
 	 */
-	public ResultReferenceExcelBuiler(List<ReferenceExcelModel> modelList) {
-		this.modelList = modelList;
+	public ResultReferenceExcelBuiler(ExcelConfig conf, List<ReferenceExcelModel> modelList) {
+		super(conf, modelList);
 	}
 
 	/**
@@ -39,21 +39,6 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder {
 	@Override
 	protected String getSheetName() {
 		return ExcelUtil.getSheetName(this.getClass());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void writeHeader(Sheet sheet) {
-
-		List<String> headerNameList = ExcelUtil.getHeaderList(ReferenceExcelModel.class);
-
-		Stream.iterate(0, i -> ++i).limit(headerNameList.size()).forEach(i -> {
-			String headerName = headerNameList.get(i);
-			Cell cell = ExcelUtil.getCell(sheet, HEADER_POSITION, i);
-			ExcelUtil.setText(cell, headerName);
-		});
 	}
 
 	/**

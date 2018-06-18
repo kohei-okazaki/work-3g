@@ -28,11 +28,12 @@
 	<br>
 	<br>
 	<form action="./result-reference.html" method="post" th:object="${resultSearchForm}">
+
+		<div align="center">
 		<div th:if="${#fields.hasErrors('dataId')}" th:errors="*{dataId}"></div>
 		<div th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
 		<div th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
 		<div th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
-		<div align="center">
 			<table>
 				<tr>
 					<th><p>データID</p></th>

@@ -45,6 +45,7 @@ public class AccountSettingForm implements BaseForm {
 	@Size(max = 256)
 	private String remarks;
 	/** メールアドレス */
+	@NotEmpty(message = "メールアドレスが未入力です")
 	@Email(message = "メールアドレス形式ではありません")
 	private String mailAddress;
 	/** メールパスワード */
