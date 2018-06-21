@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
@@ -45,7 +46,7 @@ public class ResultReferenceController implements BaseWebController {
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
 	@ReferenceExcel
-	private ExcelDownloadService<List<HealthInfoRegistResponse>> fileDownloadService;
+	private ExcelDownloadService<List<HealthInfoRegistResponse>> excelDownloadService;
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
 	@ReferenceCsv
@@ -112,7 +113,7 @@ public class ResultReferenceController implements BaseWebController {
 			return getView(ManageWebView.RESULT_REFFERNCE);
 		}
 
-		List<HealthInfoRegistResponse> resultList = service.getHealthInfoResponseList(form, userId);
+		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
 
 		// 検索情報を設定
 		model.addAttribute("form", form);
@@ -139,7 +140,7 @@ public class ResultReferenceController implements BaseWebController {
 	@GetMapping(value = "/result-reference-excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request, @SessionAttribute List<HealthInfoRegistResponse> resultList) {
 
-		ModelAndView model = new ModelAndView(fileDownloadService.execute(resultList));
+		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
 
 		return model;
 	}

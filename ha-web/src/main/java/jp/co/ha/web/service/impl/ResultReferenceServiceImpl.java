@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.util.BeanUtil;
@@ -67,13 +67,13 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoRegistResponse> getHealthInfoResponseList(ResultSearchForm form, String userId) {
+	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(ResultSearchForm form, String userId) {
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
 		List<HealthInfo> entityList = getHealthInfo(form, userId);
-		List<HealthInfoRegistResponse> resultList = new ArrayList<HealthInfoRegistResponse>();
+		List<HealthInfoReferenceResponse> resultList = new ArrayList<HealthInfoReferenceResponse>();
 		entityList.stream().forEach(entity -> {
-			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
+			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(entity, response);
 			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 			resultList.add(response);

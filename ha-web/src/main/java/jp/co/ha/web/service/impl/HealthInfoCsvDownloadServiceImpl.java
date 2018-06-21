@@ -61,14 +61,13 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		// CSVに書き込む
 		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf, modelList);
 		writer.execute(response);
-
 	}
 
 	/**
 	 * CSVモデルリストに変換する<br>
 	 *
 	 * @param healthInfo
-	 *            HealthInfo
+	 *            健康情報
 	 * @return modelList List<HealthInfoCsvModel>
 	 */
 	private List<HealthInfoCsvModel> toModelList(HealthInfo healthInfo) {

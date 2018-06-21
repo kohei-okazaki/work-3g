@@ -13,6 +13,8 @@ import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CsvUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -55,7 +57,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 		try (PrintWriter writer = response.getWriter()) {
 			StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
 			// ヘッダーを書込
-			writeHeader(recordJoiner);
+			writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
 
 			// データを書込
 			modelList.stream().forEach(model -> writeData(recordJoiner, model));
@@ -98,8 +100,14 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *
 	 * @param recordJoiner
 	 *            StringJoiner
+	 * @param clazz
+	 *            CSVモデルクラス型
 	 */
-	protected abstract void writeHeader(StringJoiner recordJoiner);
+	protected void writeHeader(StringJoiner recordJoiner, Class<M> clazz) {
+		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
+		CsvUtil.getHeaderList(clazz).stream().forEach(headerName -> write(joiner, headerName));
+		recordJoiner.add(joiner.toString());
+	}
 
 	/**
 	 * データレコードをつめる<br>
