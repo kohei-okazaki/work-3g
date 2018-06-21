@@ -36,13 +36,10 @@ public interface CsvDownloadService {
 	 */
 	default CsvConfig getCsvConfig(String fileName, Account account) {
 
-		// 囲い文字利用有無
-		boolean enclosureFlag = StringUtil.isTrue(account.getFileEnclosureCharFlag());
-
 		CsvConfig csvConfig = new CsvConfig();
 		csvConfig.setFileName(fileName);
 		csvConfig.setEnclosureChar(CsvUtil.DOBBLE_QUOTE);
-		csvConfig.setHasEnclosure(enclosureFlag);
+		csvConfig.setHasEnclosure(StringUtil.isTrue(account.getFileEnclosureCharFlag()));
 		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;
 	}

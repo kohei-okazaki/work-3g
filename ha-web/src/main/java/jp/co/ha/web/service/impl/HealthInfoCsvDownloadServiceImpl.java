@@ -57,6 +57,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		Account account = accountSearchService.findByUserId(userId);
 		String fileName = ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue();
 		CsvConfig conf = getCsvConfig(fileName, account);
+		conf.setHasHeader(true);
 
 		// CSVに書き込む
 		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf, modelList);

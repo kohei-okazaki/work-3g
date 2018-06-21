@@ -9,19 +9,26 @@ import java.lang.annotation.Target;
 
 /**
  * CSVアノテーション<br>
- * headerNamesでヘッダー名を設定<br>
+ * headerNamesでヘッダ名を設定<br>
+ * footerNamesでフッタ名を設定<br>
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface CsvHeader {
+public @interface CsvModel {
 
 	/**
 	 * ヘッダ名 セットした順にファイルにつめられる<br>
 	 *
 	 * @return ヘッダ名
 	 */
-	String[] names() default "";
+	String[] headerNames() default "";
 
+	/**
+	 * フッタ名 セットした順にファイルにつめられる<br>
+	 *
+	 * @return フッタ名
+	 */
+	String[] footerNames() default "";
 }

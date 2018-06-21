@@ -3,7 +3,7 @@ package jp.co.ha.common.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.co.ha.common.file.csv.annotation.CsvHeader;
+import jp.co.ha.common.file.csv.annotation.CsvModel;
 
 /**
  * CsvのUtilクラス<br>
@@ -26,13 +26,26 @@ public class CsvUtil {
 	 * ヘッダ名を取得する<br>
 	 *
 	 * @param clazz
-	 *            CSVヘッダーのついたクラス型
+	 *            CSVヘッダのついたクラス型
 	 * @return ヘッダー名
 	 */
 	public static List<String> getHeaderList(Class<?> clazz) {
 		List<String> headerList = new ArrayList<String>();
-		headerList.addAll(List.of(clazz.getAnnotation(CsvHeader.class).names()));
+		headerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).headerNames()));
 		return headerList;
+	}
+
+	/**
+	 * フッタ名を取得する<br>
+	 *
+	 * @param clazz
+	 *            CSVフッタのついたクラス型
+	 * @return
+	 */
+	public static List<String> getFooterList(Class<?> clazz) {
+		List<String> footerList = new ArrayList<String>();
+		footerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).footerNames()));
+		return footerList;
 	}
 
 }

@@ -26,20 +26,20 @@ import jp.co.ha.common.util.StringUtil;
 public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 	/** CSV設定情報 */
-	protected CsvConfig csvConfig;
+	protected CsvConfig conf;
 	/** モデルリスト */
 	protected List<M> modelList;
 
 	/**
 	 * コンストラクタ<br>
 	 *
-	 * @param csvConfig
+	 * @param conf
 	 *            CSV設定情報
 	 * @param modelList
 	 *            モデルリスト
 	 */
-	public BaseCsvWriter(CsvConfig csvConfig, List<M> modelList) {
-		this.csvConfig = csvConfig;
+	public BaseCsvWriter(CsvConfig conf, List<M> modelList) {
+		this.conf = conf;
 		this.modelList = modelList;
 	}
 
@@ -56,11 +56,20 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 		try (PrintWriter writer = response.getWriter()) {
 			StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
-			// ヘッダーを書込
-			writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+
+			if (this.conf.hasHeader()) {
+				// ヘッダを書込
+				writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			}
 
 			// データを書込
 			modelList.stream().forEach(model -> writeData(recordJoiner, model));
+
+			if (this.conf.hasFooter()) {
+				// フッタを書込
+				writeFooter(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			}
+
 			writer.print(recordJoiner.toString());
 
 		} catch (AppIOException e) {
@@ -78,8 +87,8 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *            HttpServletResponse
 	 */
 	private void init(HttpServletResponse response) {
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + csvConfig.getCharset().toString().toLowerCase());
-		response.setHeader("Content-Disposition", "attachment; filename=" + csvConfig.getFileName());
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
+		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 	}
 
 	/**
@@ -91,12 +100,12 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *            書き込みたいデータ
 	 */
 	protected void write(StringJoiner joiner, String data) {
-		String enclosureChar = csvConfig.isHasEnclosure() ? csvConfig.getEnclosureChar() : StringUtil.EMPTY;
+		String enclosureChar = conf.hasEnclosure() ? conf.getEnclosureChar() : StringUtil.EMPTY;
 		joiner.add(enclosureChar + data + enclosureChar);
 	}
 
 	/**
-	 * ヘッダーレコードをつめる<br>
+	 * ヘッダを書込
 	 *
 	 * @param recordJoiner
 	 *            StringJoiner
@@ -106,6 +115,20 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	protected void writeHeader(StringJoiner recordJoiner, Class<M> clazz) {
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
 		CsvUtil.getHeaderList(clazz).stream().forEach(headerName -> write(joiner, headerName));
+		recordJoiner.add(joiner.toString());
+	}
+
+	/**
+	 * フッタを書込
+	 *
+	 * @param recordJoiner
+	 *            StringJoiner
+	 * @param clazz
+	 *            CSVモデルクラス型
+	 */
+	protected void writeFooter(StringJoiner recordJoiner, Class<M> clazz) {
+		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
+		CsvUtil.getFooterList(clazz).stream().forEach(footerName -> write(joiner, footerName));
 		recordJoiner.add(joiner.toString());
 	}
 
