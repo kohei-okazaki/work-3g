@@ -64,7 +64,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	@InitBinder("HealthInfoForm")
+	@InitBinder("healthInfoForm")
 	public void initBinder(WebDataBinder binder) {
 //		binder.setValidator(new HealthInfoValidator());
 	}
