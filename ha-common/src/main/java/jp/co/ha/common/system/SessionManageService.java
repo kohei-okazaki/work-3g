@@ -1,6 +1,6 @@
 package jp.co.ha.common.system;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * session管理サービス<br>
@@ -11,44 +11,44 @@ public interface SessionManageService {
 	/**
 	 * セッション内の指定された文字列を削除する<br>
 	 *
-	 * @param request
-	 *            HttpServletRequest
+	 * @param session
+	 *            HttpSession
 	 * @param key
 	 *            セッションキー
 	 */
-	void removeValue(HttpServletRequest request, String key);
+	void removeValue(HttpSession session, String key);
 
 	/**
 	 * <target, value>の形でセッションに設定する<br>
 	 *
-	 * @param request
-	 *            HttpServletRequest
+	 * @param session
+	 *            HttpSession
 	 * @param key
 	 *            セッションキー
 	 * @param value
 	 *            セッション値
 	 */
-	void setValue(HttpServletRequest request, String key, Object value);
+	void setValue(HttpSession session, String key, Object value);
 
 	/**
 	 * セッションに格納されてる情報すべてを削除<br>
 	 *
-	 * @param request
-	 *            HttpServletRequest
+	 * @param session
+	 *            HttpSession
 	 */
-	void removeValues(HttpServletRequest request);
+	void removeValues(HttpSession session);
 
 	/**
 	 * 指定されたキー名/型のセッション情報を取得する<br>
 	 *
-	 * @param request
-	 *            HttpServletRequest
+	 * @param session
+	 *            HttpSession
 	 * @param key
 	 *            セッションキー
 	 * @param clazz
 	 *            型
 	 * @return
 	 */
-	<T> T getValue(HttpServletRequest request, String key, Class<T> clazz);
+	<T> T getValue(HttpSession session, String key, Class<T> clazz);
 
 }

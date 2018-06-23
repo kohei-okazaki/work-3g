@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,14 +46,15 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		// sessionから検索結果リストを取得
-		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request, "resultList", List.class);
-		String userId = sessionService.getValue(request, "userId", String.class);
+		HttpSession session = request.getSession();
+		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
+		String userId = sessionService.getValue(session, "userId", String.class);
 
 		// CSV出力モデルリストに変換する
 		List<ReferenceCsvModel> modelList = toModelList(userId, resultList);
 
 		// CSV設定情報取得
-		Account account = accountSearchService.findByUserId(sessionService.getValue(request, "userId", String.class));
+		Account account = accountSearchService.findByUserId(sessionService.getValue(session, "userId", String.class));
 		String fileName = ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue();
 		CsvConfig conf = getCsvConfig(fileName, account);
 

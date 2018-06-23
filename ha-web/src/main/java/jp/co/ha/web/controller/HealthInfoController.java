@@ -113,7 +113,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws HealthInfoException {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request, "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		HealthInfoRegistRequest apiRequest = healthInfoService.setUpApiRequest(form, userId);
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);

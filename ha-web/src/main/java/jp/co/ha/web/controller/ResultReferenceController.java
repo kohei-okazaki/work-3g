@@ -123,7 +123,7 @@ public class ResultReferenceController implements BaseWebController {
 		model.addAttribute("resultList", resultList);
 
 		// sessionに検索結果リストを設定
-		sessionService.setValue(request, "resultList", resultList);
+		sessionService.setValue(request.getSession(), "resultList", resultList);
 
 		return getView(ManageWebView.RESULT_REFFERNCE);
 	}

@@ -2,7 +2,6 @@ package jp.co.ha.common.system.impl;
 
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
@@ -20,8 +19,7 @@ public class SessionManageServiceImpl implements SessionManageService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeValue(HttpServletRequest request, String key) {
-		HttpSession session = request.getSession();
+	public void removeValue(HttpSession session, String key) {
 		session.removeAttribute(key);
 	}
 
@@ -29,8 +27,7 @@ public class SessionManageServiceImpl implements SessionManageService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setValue(HttpServletRequest request, String key, Object value) {
-		HttpSession session = request.getSession();
+	public void setValue(HttpSession session, String key, Object value) {
 		session.setAttribute(key, value);
 	}
 
@@ -38,10 +35,10 @@ public class SessionManageServiceImpl implements SessionManageService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void removeValues(HttpServletRequest request) {
-		Enumeration<String> enm = request.getSession().getAttributeNames();
+	public void removeValues(HttpSession session) {
+		Enumeration<String> enm = session.getAttributeNames();
 		while (enm.hasMoreElements()) {
-			this.removeValue(request, enm.nextElement());
+			this.removeValue(session, enm.nextElement());
 		}
 	}
 
@@ -49,8 +46,8 @@ public class SessionManageServiceImpl implements SessionManageService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public <T> T getValue(HttpServletRequest request, String key, Class<T> clazz) {
-		return (T) request.getSession().getAttribute(key);
+	public <T> T getValue(HttpSession session, String key, Class<T> clazz) {
+		return (T) session.getAttribute(key);
 	}
 
 }
