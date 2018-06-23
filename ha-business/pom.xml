@@ -25,7 +25,6 @@
 <!-- 		<dependency>
 			<groupId>jp.co</groupId>
 			<artifactId>ha-common</artifactId>
-			<type>jar</type>
 			<version>${ha-version}</version>
 		</dependency> -->
 		<!-- Spring -->

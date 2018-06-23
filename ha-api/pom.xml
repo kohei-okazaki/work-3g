@@ -26,14 +26,12 @@
 <!-- 		<dependency>
 			<groupId>jp.co</groupId>
 			<artifactId>ha-common</artifactId>
-			<type>jar</type>
 			<version>${ha-version}</version>
 		</dependency> -->
 		<!-- ha-business -->
 <!-- 		<dependency>
 			<groupId>jp.co</groupId>
 			<artifactId>ha-business</artifactId>
-			<type>jar</type>
 			<version>${ha-version}</version>
 		</dependency> -->
 		<!-- Spring -->
