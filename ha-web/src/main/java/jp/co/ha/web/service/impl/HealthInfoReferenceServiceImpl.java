@@ -14,15 +14,15 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.web.form.ResultSearchForm;
-import jp.co.ha.web.service.ResultReferenceService;
+import jp.co.ha.web.form.HealthInfoReferenceForm;
+import jp.co.ha.web.service.HealthInfoReferenceService;
 
 /**
- * 結果照会画面サービスインターフェース実装クラス<br>
+ *  健康情報照会画面サービスインターフェース実装クラス<br>
  *
  */
 @Service
-public class ResultReferenceServiceImpl implements ResultReferenceService {
+public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceService {
 
 	/** 健康情報検索サービス */
 	@Autowired
@@ -32,22 +32,27 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	 * 健康情報を取得する<br>
 	 *
 	 * @param form
-	 *            ResultSearchForm
+	 *            健康情報照会画面フォーム
 	 * @param userId
 	 *            ユーザID
 	 * @return
 	 */
-	private List<HealthInfo> getHealthInfo(ResultSearchForm form, String userId) {
+	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) {
 
 		List<HealthInfo> resultList = null;
-		Date regDate = editStrDate(form.getFromRegDate());
-		if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
-			// 登録日直接指定フラグがONの場合
-			resultList = healthInfoSearchService.findByUserIdAndRegDate(userId, regDate);
+		if (StringUtil.isEmpty(form.getDataId())) {
+			Date regDate = editStrDate(form.getFromRegDate());
+			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
+				// 登録日直接指定フラグがONの場合
+				resultList = healthInfoSearchService.findByUserIdAndRegDate(userId, regDate);
+			} else {
+				Date toRegDate = editStrDate(form.getToRegDate());
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
+			}
 		} else {
-			Date toRegDate = editStrDate(form.getToRegDate());
-			resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
+			resultList = List.of(healthInfoSearchService.findByDataId(form.getDataId()));
 		}
+
 		return resultList;
 	}
 
@@ -67,7 +72,7 @@ public class ResultReferenceServiceImpl implements ResultReferenceService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(ResultSearchForm form, String userId) {
+	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId) {
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
 		List<HealthInfo> entityList = getHealthInfo(form, userId);

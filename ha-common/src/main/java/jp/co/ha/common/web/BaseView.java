@@ -3,6 +3,7 @@ package jp.co.ha.common.web;
 import java.util.stream.Stream;
 
 /**
+ * viewEnumの基底インターフェース<br>
  * すべてのViewEnumはこのインターフェースを継承すること<br>
  *
  */

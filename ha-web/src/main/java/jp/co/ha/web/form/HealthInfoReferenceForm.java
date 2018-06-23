@@ -7,10 +7,10 @@ import javax.validation.constraints.Size;
 import jp.co.ha.common.web.BaseForm;
 
 /**
- * 結果検索フォームクラス<br>
+ *  健康情報照会画面フォームクラス<br>
  *
  */
-public class ResultSearchForm implements BaseForm {
+public class HealthInfoReferenceForm implements BaseForm {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;

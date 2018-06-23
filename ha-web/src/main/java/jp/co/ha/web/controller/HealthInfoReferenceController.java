@@ -25,23 +25,23 @@ import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
-import jp.co.ha.web.form.ResultSearchForm;
-import jp.co.ha.web.service.ResultReferenceService;
+import jp.co.ha.web.form.HealthInfoReferenceForm;
+import jp.co.ha.web.service.HealthInfoReferenceService;
 import jp.co.ha.web.service.annotation.ReferenceCsv;
 import jp.co.ha.web.service.annotation.ReferenceExcel;
-import jp.co.ha.web.validator.ResultSearchValidator;
+import jp.co.ha.web.validator.HealthInfoReferenceValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_健康情報結果照会画面コントローラクラス<br>
+ * 健康管理_健康情報照会画面コントローラクラス<br>
  *
  */
 @Controller
-public class ResultReferenceController implements BaseWebController {
+public class HealthInfoReferenceController implements BaseWebController {
 
 	/** 結果照会画面サービス */
 	@Autowired
-	private ResultReferenceService service;
+	private HealthInfoReferenceService service;
 
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
@@ -61,9 +61,9 @@ public class ResultReferenceController implements BaseWebController {
 	 * @param binder
 	 *            WebDataBinder
 	 */
-	@InitBinder(value = "resultSearchForm")
+	@InitBinder(value = "healthInfoReferenceForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new ResultSearchValidator());
+		binder.setValidator(new HealthInfoReferenceValidator());
 	}
 
 	/**
@@ -72,8 +72,8 @@ public class ResultReferenceController implements BaseWebController {
 	 * @return
 	 */
 	@ModelAttribute
-	public ResultSearchForm setUpForm() {
-		ResultSearchForm resultSearchForm = new ResultSearchForm();
+	public HealthInfoReferenceForm setUpForm() {
+		HealthInfoReferenceForm resultSearchForm = new HealthInfoReferenceForm();
 		resultSearchForm.setRegDateSelectFlag(StringUtil.FALSE_FLAG);
 		return resultSearchForm;
 	}
@@ -106,7 +106,7 @@ public class ResultReferenceController implements BaseWebController {
 	 * @return
 	 */
 	@PostMapping(value = "/result-reference.html")
-	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid ResultSearchForm form,
+	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid HealthInfoReferenceForm form,
 			BindingResult result) {
 
 		if (result.hasErrors()) {

@@ -30,7 +30,7 @@ import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
  *
  */
 @Service(value = "referenceCsv")
-public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
+public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService {
 
 	/** アカウント検索サービス */
 	@Autowired
@@ -57,6 +57,7 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 		Account account = accountSearchService.findByUserId(sessionService.getValue(session, "userId", String.class));
 		String fileName = ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue();
 		CsvConfig conf = getCsvConfig(fileName, account);
+		conf.setHasEnclosure(true);
 
 		// CSVに書き込む
 		BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf, modelList);
