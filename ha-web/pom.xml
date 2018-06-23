@@ -9,7 +9,7 @@
 	<artifactId>ha-web</artifactId>
 	<name>ha-web</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<properties>
 		<java-version>9</java-version>
@@ -23,6 +23,27 @@
 		<org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
 	</properties>
 	<dependencies>
+		<!-- ha-common -->
+<!-- 		<dependency>
+			<groupId>jp.co</groupId>
+			<artifactId>ha-common</artifactId>
+			<type>jar</type>
+			<version>1.0</version>
+		</dependency> -->
+		<!-- ha-business -->
+<!-- 		<dependency>
+			<groupId>jp.co</groupId>
+			<artifactId>ha-business</artifactId>
+			<type>jar</type>
+			<version>1.0</version>
+		</dependency> -->
+		<!-- ha-api -->
+<!-- 		<dependency>
+			<groupId>jp.co</groupId>
+			<artifactId>ha-api</artifactId>
+			<type>jar</type>
+			<version>1.0</version>
+		</dependency> -->
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -20,6 +20,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- ha-business -->
+<!-- 		<dependency>
+			<groupId>jp.co</groupId>
+			<artifactId>ha-common</artifactId>
+			<type>jar</type>
+			<version>1.0</version>
+		</dependency> -->
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
