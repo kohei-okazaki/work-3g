@@ -85,9 +85,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *            Model
 	 * @return
 	 */
-	@GetMapping(value = "/result-reference.html")
+	@GetMapping(value = "/healthInfo-reference.html")
 	public String resultReference(Model model) {
-		return getView(ManageWebView.RESULT_REFFERNCE);
+		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
@@ -105,12 +105,12 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *            BindingResult
 	 * @return
 	 */
-	@PostMapping(value = "/result-reference.html")
+	@PostMapping(value = "/healthInfo-reference.html")
 	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid HealthInfoReferenceForm form,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return getView(ManageWebView.RESULT_REFFERNCE);
+			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 		}
 
 		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
@@ -125,7 +125,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		// sessionに検索結果リストを設定
 		sessionService.setValue(request.getSession(), "resultList", resultList);
 
-		return getView(ManageWebView.RESULT_REFFERNCE);
+		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *            List<HealthInfoRegistResponse>
 	 * @return
 	 */
-	@GetMapping(value = "/result-reference-excelDownload.html")
+	@GetMapping(value = "/healthInfo-reference-excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request, @SessionAttribute List<HealthInfoRegistResponse> resultList) {
 
 		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
@@ -153,7 +153,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @param response
 	 *            HttpServletResponse
 	 */
-	@GetMapping(value = "/result-reference-csvDownload")
+	@GetMapping(value = "/healthInfo-reference-csvDownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) {
 		csvDownloadService.execute(request, response);
 	}

@@ -1,7 +1,7 @@
 // Excelをダウンロードする関数
 function referenceExcelDownload() {
 	var form = document.createElement('form');
-	form.action = '/ha-web/result-reference-excelDownload.html';
+	form.action = './healthInfo-reference-excelDownload.html';
 	form.method = 'get';
 	document.body.appendChild(form);
 	form.submit();
@@ -10,7 +10,7 @@ function referenceExcelDownload() {
 // CSVをダウンロードする関数
 function referenceCsvDownload() {
 	var form = document.createElement('form');
-	form.action = '/ha-web/result-reference-csvDownload';
+	form.action = './healthInfo-reference-csvDownload';
 	form.method = 'get';
 	document.body.appendChild(form);
 	form.submit();
