@@ -5,6 +5,7 @@
 <title>健康アプリ_健康情報入力完了画面</title>
 <link rel="icon" type="image/png" href="resources/image/people.png">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/baseLayout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
@@ -76,10 +77,6 @@
 				<td>
 				<!-- 通知  -->
 				<form action="./notice.html" method="post">
-					<input type="hidden" name="height" value="${healthInfo.height}">
-					<input type="hidden" name="weight" value="${healthInfo.weight}">
-					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">
-					<input type="hidden" name="bmi" value="${healthInfo.bmi}">
 					<div>
 						<input class="menuicon" type="image" src="resources/image/icon_mail.png">
 					</div>
@@ -88,11 +85,8 @@
 				<td>　　</td>
 				<td>
 				<!-- Excel出力 -->
-				<form action="./healthInfo-excelDownload.html" method="get">
-					<input type="hidden" name="height" value="${healthInfo.height}">
-					<input type="hidden" name="weight" value="${healthInfo.weight}">
-					<input type="hidden" name="standardWeight" value="${healthInfo.standardWeight}">
-					<input type="hidden" name="bmi" value="${healthInfo.bmi}">
+				<form action="./healthInfo-excelDownload.html" method="get" th:object="${healthInfoForm}">
+					<input type="hidden" name="dataId" th:field="${healthInfo.dataId}" />
 					<div>
 						<input class="menuicon" type="image" src="resources/image/icon_xlsx.png">
 					</div>

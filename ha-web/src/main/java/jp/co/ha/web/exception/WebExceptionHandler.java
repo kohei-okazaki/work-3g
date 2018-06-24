@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.web.view.ManageWebView;
 
@@ -19,12 +20,20 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 	 */
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Exception ex) {
+			Exception e) {
 
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName(ManageWebView.ERROR.getName());
-		ex.printStackTrace();
+		e.printStackTrace();
+		request.setAttribute("errorMessage", buildErrorMessage((BaseAppException) e));
 		return modelView;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String buildErrorMessage(BaseAppException e) {
+		return e.getDetail() + "(" + e.getErrorCode() + ")";
+	}
 }
