@@ -73,7 +73,7 @@ public class LoginController implements BaseWebController {
 	@GetMapping("/login.html")
 	public String login(Model model, HttpServletRequest request) {
 		// sessionに格納している情報をすべて削除する
-		sessionService.removeValues(request);
+		sessionService.removeValues(request.getSession());
 		System.out.println(messageSource.getMessage("message", null, Locale.JAPANESE));
 		return getView(ManageWebView.LOGIN);
 	}
@@ -119,7 +119,7 @@ public class LoginController implements BaseWebController {
 		}
 
 		// セッションにユーザIDを登録する。
-		sessionService.setValue(request, "userId", loginForm.getUserId());
+		sessionService.setValue(request.getSession(), "userId", loginForm.getUserId());
 
 		return getView(ManageWebView.MENU);
 
@@ -135,7 +135,7 @@ public class LoginController implements BaseWebController {
 	@GetMapping("/menu.html")
 	public String menu(HttpServletRequest request) {
 
-		String userId = sessionService.getValue(request, "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		return getView(BeanUtil.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
 	}
 }

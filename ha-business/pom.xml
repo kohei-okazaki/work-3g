@@ -17,9 +17,16 @@
 		<org.aspectj-version>1.9.1</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<poi-version>3.17</poi-version>
+		<ha-version>1.0</ha-version>
 	</properties>
 
 	<dependencies>
+		<!-- ha-business -->
+<!-- 		<dependency>
+			<groupId>jp.co</groupId>
+			<artifactId>ha-common</artifactId>
+			<version>${ha-version}</version>
+		</dependency> -->
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

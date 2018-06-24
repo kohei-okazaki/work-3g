@@ -71,7 +71,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	public AccountSettingForm setUpForm(HttpServletRequest request) {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request, "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(userId);

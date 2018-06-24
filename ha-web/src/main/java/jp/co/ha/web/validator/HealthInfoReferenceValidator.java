@@ -4,20 +4,20 @@ import org.springframework.validation.Errors;
 
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseValidator;
-import jp.co.ha.web.form.ResultSearchForm;
+import jp.co.ha.web.form.HealthInfoReferenceForm;
 
 /**
  * 結果照会画面のValidatorクラス<br>
  *
  */
-public class ResultSearchValidator extends BaseValidator<ResultSearchForm> {
+public class HealthInfoReferenceValidator extends BaseValidator<HealthInfoReferenceForm> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return ResultSearchForm.class.isAssignableFrom(clazz);
+		return HealthInfoReferenceForm.class.isAssignableFrom(clazz);
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class ResultSearchValidator extends BaseValidator<ResultSearchForm> {
 	 */
 	@Override
 	public void validate(Object target, Errors errors) {
-		ResultSearchForm form = (ResultSearchForm) target;
+		HealthInfoReferenceForm form = (HealthInfoReferenceForm) target;
 
 		// 相関チェック
 		correlationCheck(form, errors);
@@ -40,13 +40,20 @@ public class ResultSearchValidator extends BaseValidator<ResultSearchForm> {
 	 * @param errors
 	 *            Errors
 	 */
-	private void correlationCheck(ResultSearchForm form, Errors errors) {
+	private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
 		if (StringUtil.isEmpty(form.getDataId())) {
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
 					errors.rejectValue("fromRegDate", "validate.message.NotEmpty", new String[] {"登録日時"}, "validate.message.NotEmpty");
+				}
+			} else {
+				if (StringUtil.isEmpty(form.getFromRegDate())) {
+					errors.rejectValue("fromRegDate", "validate.message.NotEmpty", new String[] {"登録日時(開始)"}, "validate.message.NotEmpty");
+				}
+				if (StringUtil.isEmpty(form.getFromRegDate())) {
+					errors.rejectValue("toRegDate", "validate.message.NotEmpty", new String[] {"登録日時(終了)"}, "validate.message.NotEmpty");
 				}
 			}
 		}

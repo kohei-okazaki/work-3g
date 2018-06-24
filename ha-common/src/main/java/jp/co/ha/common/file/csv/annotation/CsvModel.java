@@ -1,4 +1,4 @@
-package jp.co.ha.common.file.excel.annotation;
+package jp.co.ha.common.file.csv.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,20 +8,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Excelヘッダのアノテーション<br>
- *
+ * CSVモデルアノテーション<br>
+ * headerNamesでヘッダ名を設定<br>
+ * footerNamesでフッタ名を設定<br>
  */
 @Inherited
 @Documented
-@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExcelHeader {
+@Target({ ElementType.TYPE })
+public @interface CsvModel {
 
 	/**
 	 * ヘッダ名 セットした順にファイルにつめられる<br>
 	 *
 	 * @return ヘッダ名
 	 */
-	String[] names() default "";
+	String[] headerNames() default "";
 
+	/**
+	 * フッタ名 セットした順にファイルにつめられる<br>
+	 *
+	 * @return フッタ名
+	 */
+	String[] footerNames() default "";
 }

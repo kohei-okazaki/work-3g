@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
-import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.Account;
@@ -25,7 +25,7 @@ import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
  *
  */
 @Service(value = "referenceExcel")
-public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoRegistResponse>> {
+public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoReferenceResponse>> {
 
 	/** アカウント検索サービス */
 	@Autowired
@@ -38,7 +38,7 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 	 * {@inheritDoc}
 	 */
 	@Override
-	public View execute(List<HealthInfoRegistResponse> historyList) {
+	public View execute(List<HealthInfoReferenceResponse> historyList) {
 
 		// 健康情報Entityからアカウントを検索
 		Account account = accountSearchService.findByUserId(historyList.get(0).getUserId());
@@ -52,12 +52,12 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 	 * 健康情報履歴リストをモデルリストに変換する<br>
 	 *
 	 * @param historyList
-	 *            List<HealthInfoRegistResponse> 健康情報リスト履歴リスト
+	 *            List<HealthInfoReferenceResponse> 健康情報リスト履歴リスト
 	 * @param account
 	 *            アカウント情報
 	 * @return modelList
 	 */
-	private List<ReferenceExcelModel> toModelList(List<HealthInfoRegistResponse> historyList, Account account) {
+	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResponse> historyList, Account account) {
 
 		// 健康情報マスク利用有無
 		boolean useHealthInfoMask = healthInfoFunctionService.useHealthInfoMask(account);
@@ -66,7 +66,7 @@ public class ReferenceExcelDownloadServiceImpl implements ExcelDownloadService<L
 
 			// 結果照会Excel出力モデル
 			ReferenceExcelModel model = new ReferenceExcelModel();
-			HealthInfoRegistResponse healthInfo = historyList.get(i);
+			HealthInfoReferenceResponse healthInfo = historyList.get(i);
 			model.setHeight(useHealthInfoMask ? "****" : healthInfo.getHeight().toString());
 			model.setWeight(useHealthInfoMask ? "****" : healthInfo.getWeight().toString());
 			model.setBmi(useHealthInfoMask ? "****" : healthInfo.getBmi().toString());

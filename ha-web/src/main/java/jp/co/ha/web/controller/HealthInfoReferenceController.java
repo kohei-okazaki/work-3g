@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,34 +19,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
-import jp.co.ha.web.form.ResultSearchForm;
-import jp.co.ha.web.service.ResultReferenceService;
+import jp.co.ha.web.form.HealthInfoReferenceForm;
+import jp.co.ha.web.service.HealthInfoReferenceService;
 import jp.co.ha.web.service.annotation.ReferenceCsv;
 import jp.co.ha.web.service.annotation.ReferenceExcel;
-import jp.co.ha.web.validator.ResultSearchValidator;
+import jp.co.ha.web.validator.HealthInfoReferenceValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_健康情報結果照会画面コントローラクラス<br>
+ * 健康管理_健康情報照会画面コントローラクラス<br>
  *
  */
 @Controller
-public class ResultReferenceController implements BaseWebController {
+public class HealthInfoReferenceController implements BaseWebController {
 
 	/** 結果照会画面サービス */
 	@Autowired
-	private ResultReferenceService service;
+	private HealthInfoReferenceService service;
 
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
 	@ReferenceExcel
-	private ExcelDownloadService<List<HealthInfoRegistResponse>> fileDownloadService;
+	private ExcelDownloadService<List<HealthInfoReferenceResponse>> excelDownloadService;
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
 	@ReferenceCsv
@@ -60,9 +61,9 @@ public class ResultReferenceController implements BaseWebController {
 	 * @param binder
 	 *            WebDataBinder
 	 */
-	@InitBinder(value = "resultSearchForm")
+	@InitBinder(value = "healthInfoReferenceForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new ResultSearchValidator());
+		binder.setValidator(new HealthInfoReferenceValidator());
 	}
 
 	/**
@@ -71,8 +72,8 @@ public class ResultReferenceController implements BaseWebController {
 	 * @return
 	 */
 	@ModelAttribute
-	public ResultSearchForm setUpForm() {
-		ResultSearchForm resultSearchForm = new ResultSearchForm();
+	public HealthInfoReferenceForm setUpForm() {
+		HealthInfoReferenceForm resultSearchForm = new HealthInfoReferenceForm();
 		resultSearchForm.setRegDateSelectFlag(StringUtil.FALSE_FLAG);
 		return resultSearchForm;
 	}
@@ -84,9 +85,9 @@ public class ResultReferenceController implements BaseWebController {
 	 *            Model
 	 * @return
 	 */
-	@GetMapping(value = "/result-reference.html")
+	@GetMapping(value = "/healthInfo-reference.html")
 	public String resultReference(Model model) {
-		return getView(ManageWebView.RESULT_REFFERNCE);
+		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
@@ -104,15 +105,15 @@ public class ResultReferenceController implements BaseWebController {
 	 *            BindingResult
 	 * @return
 	 */
-	@PostMapping(value = "/result-reference.html")
-	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid ResultSearchForm form,
+	@PostMapping(value = "/healthInfo-reference.html")
+	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid HealthInfoReferenceForm form,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return getView(ManageWebView.RESULT_REFFERNCE);
+			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 		}
 
-		List<HealthInfoRegistResponse> resultList = service.getHealthInfoResponseList(form, userId);
+		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
 
 		// 検索情報を設定
 		model.addAttribute("form", form);
@@ -122,9 +123,9 @@ public class ResultReferenceController implements BaseWebController {
 		model.addAttribute("resultList", resultList);
 
 		// sessionに検索結果リストを設定
-		sessionService.setValue(request, "resultList", resultList);
+		sessionService.setValue(request.getSession(), "resultList", resultList);
 
-		return getView(ManageWebView.RESULT_REFFERNCE);
+		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
@@ -133,13 +134,14 @@ public class ResultReferenceController implements BaseWebController {
 	 * @param request
 	 *            HttpServletRequest
 	 * @param resultList
-	 *            List<HealthInfoRegistResponse>
+	 *            List<HealthInfoReferenceResponse>
 	 * @return
 	 */
-	@GetMapping(value = "/result-reference-excelDownload.html")
-	public ModelAndView excelDownload(HttpServletRequest request, @SessionAttribute List<HealthInfoRegistResponse> resultList) {
+	@GetMapping(value = "/healthInfo-reference-excelDownload.html")
+	public ModelAndView excelDownload(HttpServletRequest request
+			, @SessionAttribute @Nullable List<HealthInfoReferenceResponse> resultList) {
 
-		ModelAndView model = new ModelAndView(fileDownloadService.execute(resultList));
+		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
 
 		return model;
 	}
@@ -152,7 +154,7 @@ public class ResultReferenceController implements BaseWebController {
 	 * @param response
 	 *            HttpServletResponse
 	 */
-	@GetMapping(value = "/result-reference-csvDownload")
+	@GetMapping(value = "/healthInfo-reference-csvDownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) {
 		csvDownloadService.execute(request, response);
 	}

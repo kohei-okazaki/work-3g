@@ -9,7 +9,7 @@
 	<artifactId>ha-api</artifactId>
 	<name>ha-api</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<properties>
 		<java-version>9</java-version>
@@ -18,9 +18,22 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<jackson-version>2.9.6</jackson-version>
 		<poi-version>3.17</poi-version>
+		<ha-version>1.0</ha-version>
 	</properties>
 
 	<dependencies>
+		<!-- ha-common -->
+<!-- 		<dependency>
+			<groupId>jp.co</groupId>
+			<artifactId>ha-common</artifactId>
+			<version>${ha-version}</version>
+		</dependency> -->
+		<!-- ha-business -->
+<!-- 		<dependency>
+			<groupId>jp.co</groupId>
+			<artifactId>ha-business</artifactId>
+			<version>${ha-version}</version>
+		</dependency> -->
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>健康アプリ_結果照会画面</title>
+<title>健康アプリ_健康情報照会画面</title>
 <link rel="icon" type="image/png" href="resources/image/people.png">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
@@ -17,8 +17,8 @@
 
 <body class="main">
 	<h1>
-		<img class="headericon" alt="結果照会" src="resources/image/icon_reference.png">
-		結果照会画面
+		<img class="headericon" alt="健康情報照会" src="resources/image/icon_reference.png">
+		健康情報照会画面
 	</h1>
 
 	<hr>
@@ -27,7 +27,7 @@
 	<br>
 	<br>
 	<br>
-	<form action="./result-reference.html" method="post" th:object="${resultSearchForm}">
+	<form action="./healthInfo-reference.html" method="post" th:object="${healthInfoReferenceForm}">
 
 		<div align="center">
 		<div th:if="${#fields.hasErrors('dataId')}" th:errors="*{dataId}"></div>

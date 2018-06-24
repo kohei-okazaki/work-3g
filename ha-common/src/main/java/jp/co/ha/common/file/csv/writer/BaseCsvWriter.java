@@ -2,6 +2,7 @@ package jp.co.ha.common.file.csv.writer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -12,32 +13,39 @@ import org.springframework.util.MimeTypeUtils;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
+import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
  * CSV書き込み基底クラス<br>
  *
  * @param <M>
- *            CSV出力モデルリスト
+ *            CSV出力モデル
  */
 public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
+	/** シングルクォート */
+	public static final String SINGLE_QUOTE = "\'";
+	/** ダブルクォート */
+	public static final String DOBBLE_QUOTE = "\"";
+
 	/** CSV設定情報 */
-	protected CsvConfig csvConfig;
+	protected CsvConfig conf;
 	/** モデルリスト */
 	protected List<M> modelList;
 
 	/**
 	 * コンストラクタ<br>
 	 *
-	 * @param csvConfig
+	 * @param conf
 	 *            CSV設定情報
 	 * @param modelList
 	 *            モデルリスト
 	 */
-	public BaseCsvWriter(CsvConfig csvConfig, List<M> modelList) {
-		this.csvConfig = csvConfig;
+	public BaseCsvWriter(CsvConfig conf, List<M> modelList) {
+		this.conf = conf;
 		this.modelList = modelList;
 	}
 
@@ -54,11 +62,20 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 		try (PrintWriter writer = response.getWriter()) {
 			StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
-			// ヘッダーを書込
-			writeHeader(recordJoiner);
+
+			if (this.conf.hasHeader()) {
+				// ヘッダを書込
+				writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			}
 
 			// データを書込
 			modelList.stream().forEach(model -> writeData(recordJoiner, model));
+
+			if (this.conf.hasFooter()) {
+				// フッタを書込
+				writeFooter(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			}
+
 			writer.print(recordJoiner.toString());
 
 		} catch (AppIOException e) {
@@ -76,8 +93,8 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *            HttpServletResponse
 	 */
 	private void init(HttpServletResponse response) {
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + csvConfig.getCharset().toString().toLowerCase());
-		response.setHeader("Content-Disposition", "attachment; filename=" + csvConfig.getFileName());
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
+		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 	}
 
 	/**
@@ -89,17 +106,37 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *            書き込みたいデータ
 	 */
 	protected void write(StringJoiner joiner, String data) {
-		String enclosureChar = csvConfig.isHasEnclosure() ? csvConfig.getEnclosureChar() : StringUtil.EMPTY;
+		String enclosureChar = conf.hasEnclosure() ? conf.getEnclosureChar() : StringUtil.EMPTY;
 		joiner.add(enclosureChar + data + enclosureChar);
 	}
 
 	/**
-	 * ヘッダーレコードをつめる<br>
+	 * ヘッダを書込
 	 *
 	 * @param recordJoiner
 	 *            StringJoiner
+	 * @param clazz
+	 *            CSVモデルクラス型
 	 */
-	protected abstract void writeHeader(StringJoiner recordJoiner);
+	protected void writeHeader(StringJoiner recordJoiner, Class<M> clazz) {
+		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
+		getHeaderList(clazz).stream().forEach(headerName -> write(joiner, headerName));
+		recordJoiner.add(joiner.toString());
+	}
+
+	/**
+	 * フッタを書込
+	 *
+	 * @param recordJoiner
+	 *            StringJoiner
+	 * @param clazz
+	 *            CSVモデルクラス型
+	 */
+	protected void writeFooter(StringJoiner recordJoiner, Class<M> clazz) {
+		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
+		getFooterList(clazz).stream().forEach(footerName -> write(joiner, footerName));
+		recordJoiner.add(joiner.toString());
+	}
 
 	/**
 	 * データレコードをつめる<br>
@@ -110,5 +147,31 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *            M CSV出力モデル
 	 */
 	protected abstract void writeData(StringJoiner recordJoiner, M model);
+
+	/**
+	 * ヘッダ名を取得する<br>
+	 *
+	 * @param clazz
+	 *            CsvModelアノテーションのついたクラス型
+	 * @return ヘッダ名
+	 */
+	protected List<String> getHeaderList(Class<?> clazz) {
+		List<String> headerList = new ArrayList<String>();
+		headerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).headerNames()));
+		return headerList;
+	}
+
+	/**
+	 * フッタ名を取得する<br>
+	 *
+	 * @param clazz
+	 *            CsvModelアノテーションのついたクラス型
+	 * @return
+	 */
+	protected List<String> getFooterList(Class<?> clazz) {
+		List<String> footerList = new ArrayList<String>();
+		footerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).footerNames()));
+		return footerList;
+	}
 
 }

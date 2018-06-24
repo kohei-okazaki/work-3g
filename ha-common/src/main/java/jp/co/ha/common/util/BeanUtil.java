@@ -142,7 +142,6 @@ public class BeanUtil {
 	public static Class<?> getParameterType(Class<?> clazz) {
 		ParameterizedType paramType = (ParameterizedType) clazz.getGenericSuperclass();
 		return (Class<?>) paramType.getActualTypeArguments()[0];
-
 	}
 
 }

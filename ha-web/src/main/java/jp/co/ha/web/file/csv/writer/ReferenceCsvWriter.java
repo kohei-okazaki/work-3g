@@ -5,7 +5,6 @@ import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
-import jp.co.ha.common.util.CsvUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -27,16 +26,6 @@ public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 	 */
 	public ReferenceCsvWriter(CsvConfig conf, List<ReferenceCsvModel> modelList) {
 		super(conf, modelList);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void writeHeader(StringJoiner recordJoiner) {
-		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
-		CsvUtil.getHeaderList(ReferenceCsvModel.class).stream().forEach(headerName -> write(joiner, headerName));
-		recordJoiner.add(joiner.toString());
 	}
 
 	/**

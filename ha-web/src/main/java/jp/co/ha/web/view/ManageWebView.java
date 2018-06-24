@@ -20,8 +20,8 @@ public enum ManageWebView implements BaseView {
 	MENU("menu"),
 	/** エラー画面URL */
 	ERROR("error"),
-	/** 結果照会画面URL */
-	RESULT_REFFERNCE("result-reference"),
+	/** 健康情報照会画面URL */
+	HEALTH_INFO_REFFERNCE("healthInfo-reference"),
 	/** アカウント設定入力画面URL */
 	ACCOUNT_SETTING_INPUT("account-setting-input"),
 	/** アカウント設定入力確認画面URL */

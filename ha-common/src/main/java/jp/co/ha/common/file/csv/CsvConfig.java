@@ -11,7 +11,7 @@ public class CsvConfig {
 
 	/** ファイル名 */
 	private String fileName;
-	/** ヘッダー有無 */
+	/** ヘッダ有無 */
 	private boolean hasHeader;
 	/** 囲い文字有無 */
 	private boolean hasEnclosure;
@@ -19,6 +19,8 @@ public class CsvConfig {
 	private String enclosureChar;
 	/** 文字コード */
 	private Charset charset;
+	/** フッタ有無 */
+	private boolean hasFooter;
 
 	/**
 	 * fileNameを返す<br>
@@ -44,7 +46,7 @@ public class CsvConfig {
 	 *
 	 * @return hasHeader ヘッダー有無
 	 */
-	public boolean isHasHeader() {
+	public boolean hasHeader() {
 		return hasHeader;
 	}
 
@@ -63,7 +65,7 @@ public class CsvConfig {
 	 *
 	 * @return hasEnclosure 囲い文字有無
 	 */
-	public boolean isHasEnclosure() {
+	public boolean hasEnclosure() {
 		return hasEnclosure;
 	}
 
@@ -113,6 +115,25 @@ public class CsvConfig {
 	 */
 	public void setCharset(Charset charset) {
 		this.charset = charset;
+	}
+
+	/**
+	 * hasFooterを返す<br>
+	 *
+	 * @return hasFooter フッタ有無
+	 */
+	public boolean hasFooter() {
+		return hasFooter;
+	}
+
+	/**
+	 * hasFooterを設定する<br>
+	 *
+	 * @param hasFooter
+	 *            フッタ有無
+	 */
+	public void setHasFooter(boolean hasFooter) {
+		this.hasFooter = hasFooter;
 	}
 
 }

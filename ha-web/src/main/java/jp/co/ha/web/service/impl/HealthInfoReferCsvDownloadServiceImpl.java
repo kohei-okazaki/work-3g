@@ -6,11 +6,12 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
@@ -29,7 +30,7 @@ import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
  *
  */
 @Service(value = "referenceCsv")
-public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
+public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService {
 
 	/** アカウント検索サービス */
 	@Autowired
@@ -45,15 +46,18 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		// sessionから検索結果リストを取得
-		List<HealthInfoRegistResponse> resultList = sessionService.getValue(request, "resultList", List.class);
+		HttpSession session = request.getSession();
+		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
+		String userId = sessionService.getValue(session, "userId", String.class);
 
 		// CSV出力モデルリストに変換する
-		List<ReferenceCsvModel> modelList = toModelList(resultList);
+		List<ReferenceCsvModel> modelList = toModelList(userId, resultList);
 
 		// CSV設定情報取得
-		Account account = accountSearchService.findByUserId(sessionService.getValue(request, "userId", String.class));
+		Account account = accountSearchService.findByUserId(sessionService.getValue(session, "userId", String.class));
 		String fileName = ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue();
 		CsvConfig conf = getCsvConfig(fileName, account);
+		conf.setHasEnclosure(true);
 
 		// CSVに書き込む
 		BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf, modelList);
@@ -63,17 +67,20 @@ public class ReferenceCsvDownloadServiceImpl implements CsvDownloadService {
 	/**
 	 * 結果照会CSVモデルリストに変換する
 	 *
+	 * @param userId
+	 *            ユーザID
 	 * @param resultList
-	 *            List<HealthInfoRegistResponse>
+	 *            List<HealthInfoReferenceResponse>
 	 * @return modelList
 	 */
-	private List<ReferenceCsvModel> toModelList(List<HealthInfoRegistResponse> resultList) {
+	private List<ReferenceCsvModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
 
 		List<ReferenceCsvModel> modelList = new ArrayList<ReferenceCsvModel>();
 		Stream.iterate(0, i -> ++i).limit(resultList.size()).forEach(i -> {
 			ReferenceCsvModel model = new ReferenceCsvModel();
-			HealthInfoRegistResponse healthInfo = resultList.get(i);
+			HealthInfoReferenceResponse healthInfo = resultList.get(i);
 			BeanUtil.copy(healthInfo, model);
+			model.setUserId(userId);
 			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 			modelList.add(model);
 		});

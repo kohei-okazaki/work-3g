@@ -47,7 +47,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		// 最後に登録した健康情報を検索
-		String userId = sessionService.getValue(request, "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		HealthInfo healthInfo = healthInfoSearchService.findLastByUserId(userId);
 
 		// CSV出力モデルリストに変換する
@@ -57,18 +57,18 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		Account account = accountSearchService.findByUserId(userId);
 		String fileName = ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue();
 		CsvConfig conf = getCsvConfig(fileName, account);
+		conf.setHasHeader(true);
 
 		// CSVに書き込む
 		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf, modelList);
 		writer.execute(response);
-
 	}
 
 	/**
 	 * CSVモデルリストに変換する<br>
 	 *
 	 * @param healthInfo
-	 *            HealthInfo
+	 *            健康情報
 	 * @return modelList List<HealthInfoCsvModel>
 	 */
 	private List<HealthInfoCsvModel> toModelList(HealthInfo healthInfo) {

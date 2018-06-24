@@ -1,10 +1,13 @@
 package jp.co.ha.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +24,7 @@ import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
@@ -64,7 +68,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	@InitBinder("HealthInfoForm")
+	@InitBinder("healthInfoForm")
 	public void initBinder(WebDataBinder binder) {
 //		binder.setValidator(new HealthInfoValidator());
 	}
@@ -113,7 +117,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws HealthInfoException {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request, "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		HealthInfoRegistRequest apiRequest = healthInfoService.setUpApiRequest(form, userId);
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
@@ -143,14 +147,27 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *
 	 * @param userId
 	 *            ユーザID
+	 * @param form
+	 *            HealthInfoForm
 	 * @return
+	 * @throws HealthInfoException
+	 *             健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-excelDownload.html")
-	public ModelAndView excelDownload(@SessionAttribute String userId) {
+	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws HealthInfoException {
 
-		HealthInfo entity = healthInfoSearchService.findLastByUserId(userId);
+		List<HealthInfo> resultList = healthInfoSearchService.findByUserId(userId);
+		String requestDataId = form.getDataId();
+		boolean hasRecord = resultList.stream().map(entity -> entity.getDataId()).anyMatch(dataId -> dataId.equals(requestDataId));
 
+		if (!hasRecord) {
+			// レコードが見つからなかった場合
+			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+		}
+
+		HealthInfo entity = healthInfoSearchService.findByDataId(requestDataId);
 		ModelAndView model = new ModelAndView(excelDownloadService.execute(entity));
+
 		return model;
 	}
 
