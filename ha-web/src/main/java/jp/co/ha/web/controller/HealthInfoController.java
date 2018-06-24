@@ -160,13 +160,13 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		String requestDataId = form.getDataId();
 		boolean hasRecord = resultList.stream().map(entity -> entity.getDataId()).anyMatch(dataId -> dataId.equals(requestDataId));
 
-		ModelAndView model = null;
-		if (hasRecord) {
-			HealthInfo entity = healthInfoSearchService.findByDataId(requestDataId);
-			model = new ModelAndView(excelDownloadService.execute(entity));
-		} else {
+		if (!hasRecord) {
+			// レコードが見つからなかった場合
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
+
+		HealthInfo entity = healthInfoSearchService.findByDataId(requestDataId);
+		ModelAndView model = new ModelAndView(excelDownloadService.execute(entity));
 
 		return model;
 	}

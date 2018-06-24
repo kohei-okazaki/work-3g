@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
@@ -46,7 +46,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
 	@ReferenceExcel
-	private ExcelDownloadService<List<HealthInfoRegistResponse>> excelDownloadService;
+	private ExcelDownloadService<List<HealthInfoReferenceResponse>> excelDownloadService;
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
 	@ReferenceCsv
@@ -134,11 +134,12 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @param request
 	 *            HttpServletRequest
 	 * @param resultList
-	 *            List<HealthInfoRegistResponse>
+	 *            List<HealthInfoReferenceResponse>
 	 * @return
 	 */
 	@GetMapping(value = "/healthInfo-reference-excelDownload.html")
-	public ModelAndView excelDownload(HttpServletRequest request, @SessionAttribute List<HealthInfoRegistResponse> resultList) {
+	public ModelAndView excelDownload(HttpServletRequest request
+			, @SessionAttribute @Nullable List<HealthInfoReferenceResponse> resultList) {
 
 		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
 

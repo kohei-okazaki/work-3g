@@ -12,6 +12,8 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/** データID */
 	private String dataId;
+	/** ユーザID */
+	private String userId;
 	/** 身長 */
 	private BigDecimal height;
 	/** 体重 */
@@ -40,6 +42,25 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 */
 	public void setDataId(String dataId) {
 		this.dataId = dataId;
+	}
+
+	/**
+	 * userIdを返す<br>
+	 *
+	 * @return userId userId
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * userIdを設定する<br>
+	 *
+	 * @param userId
+	 *            userId
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	/**

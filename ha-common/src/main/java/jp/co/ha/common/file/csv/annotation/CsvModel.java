@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * CSVアノテーション<br>
+ * CSVモデルアノテーション<br>
  * headerNamesでヘッダ名を設定<br>
  * footerNamesでフッタ名を設定<br>
  */

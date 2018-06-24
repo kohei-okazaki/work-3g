@@ -1,6 +1,7 @@
 package jp.co.ha.common.file.excel.builder;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -9,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import jp.co.ha.common.file.excel.ExcelConfig;
-import jp.co.ha.common.file.excel.annotation.ExcelSheet;
+import jp.co.ha.common.file.excel.annotation.ExcelModel;
 import jp.co.ha.common.file.excel.model.BaseExcelModel;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.ExcelUtil;
 
 /**
  * Excel出力の基底クラス<br>
  *
  * @param <M>
- *            Excelモデル
+ *            Excel出力モデル
  */
 public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends AbstractXlsxView {
 
@@ -55,12 +57,13 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 			HttpServletResponse response) throws Exception {
 
 		init(response);
-		Sheet sheet = workbook.createSheet(getSheetName());
+		String sheetName = getSheetName((Class<M>) BeanUtil.getParameterType(this.getClass()));
+		Sheet sheet = workbook.createSheet(sheetName);
 
-		// ヘッダーを書き込む
+		// ヘッダを書込
 		writeHeader(sheet, (Class<M>) BeanUtil.getParameterType(this.getClass()));
 
-		// データを書き込む
+		// データを書込
 		writeData(sheet);
 	}
 
@@ -79,14 +82,6 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * 継承先の@ExcelSheetからシート名を取得<br>
-	 * {@link ExcelSheet}
-	 *
-	 * @return シート名
-	 */
-	protected abstract String getSheetName();
-
-	/**
 	 * ヘッダーを設定する<br>
 	 *
 	 * @param sheet
@@ -96,12 +91,12 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 */
 	protected void writeHeader(Sheet sheet, Class<M> clazz) {
 		// ヘッダー名取得
-		List<String> headerNameList = ExcelUtil.getHeaderList(clazz);
+		List<String> headerNameList = getHeaderList(clazz);
 
 		Stream.iterate(0, i -> ++i).limit(headerNameList.size()).forEach(i -> {
 			String headerName = headerNameList.get(i);
-			Cell cell = ExcelUtil.getCell(sheet, HEADER_POSITION, i);
-			ExcelUtil.setText(cell, headerName);
+			Cell cell = getCell(sheet, HEADER_POSITION, i);
+			setText(cell, headerName);
 		});
 	}
 
@@ -112,4 +107,68 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 *            Sheet
 	 */
 	protected abstract void writeData(Sheet sheet);
+
+	/**
+	 * 指定されたシートのrow行目のcol番目のセルを返す<br>
+	 *
+	 * @param sheet
+	 *            Sheet
+	 * @param row
+	 *            行数
+	 * @param col
+	 *            カラム位置
+	 * @return cell
+	 */
+	protected Cell getCell(Sheet sheet, int row, int col) {
+
+		// row取得
+		Row sheetRow = sheet.getRow(row);
+		if (BeanUtil.isNull(sheetRow)) {
+			sheetRow = sheet.createRow(row);
+		}
+
+		// cell取得
+		Cell cell = sheetRow.getCell(col);
+		if (BeanUtil.isNull(cell)) {
+			cell = sheetRow.createCell(col);
+		}
+		return cell;
+	}
+
+	/**
+	 * 指定されたセルにtextを設定する<br>
+	 *
+	 * @param cell
+	 *            Cell
+	 * @param text
+	 *            テキスト
+	 */
+	protected void setText(Cell cell, String text) {
+		cell.setCellType(CellType.STRING);
+		cell.setCellValue(text);
+	}
+
+	/**
+	 * シート名を取得する<br>
+	 *
+	 * @param clazz
+	 *            ExcelModelアノテーションのついたクラス型
+	 * @return シート名
+	 */
+	protected String getSheetName(Class<M> clazz) {
+		return clazz.getAnnotation(ExcelModel.class).sheetName();
+	}
+
+	/**
+	 * ヘッダ名を取得する<br>
+	 *
+	 * @param clazz
+	 *            ExcelModelアノテーションのついたクラス型
+	 * @return ヘッダ名
+	 */
+	protected List<String> getHeaderList(Class<?> clazz) {
+		List<String> headerList = new ArrayList<String>();
+		headerList.addAll(List.of(clazz.getAnnotation(ExcelModel.class).headerNames()));
+		return headerList;
+	}
 }

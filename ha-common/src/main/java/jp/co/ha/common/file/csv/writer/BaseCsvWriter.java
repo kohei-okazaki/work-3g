@@ -2,6 +2,7 @@ package jp.co.ha.common.file.csv.writer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -12,18 +13,23 @@ import org.springframework.util.MimeTypeUtils;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
+import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.CsvUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
  * CSV書き込み基底クラス<br>
  *
  * @param <M>
- *            CSV出力モデルリスト
+ *            CSV出力モデル
  */
 public abstract class BaseCsvWriter<M extends BaseCsvModel> {
+
+	/** シングルクォート */
+	public static final String SINGLE_QUOTE = "\'";
+	/** ダブルクォート */
+	public static final String DOBBLE_QUOTE = "\"";
 
 	/** CSV設定情報 */
 	protected CsvConfig conf;
@@ -114,7 +120,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 */
 	protected void writeHeader(StringJoiner recordJoiner, Class<M> clazz) {
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
-		CsvUtil.getHeaderList(clazz).stream().forEach(headerName -> write(joiner, headerName));
+		getHeaderList(clazz).stream().forEach(headerName -> write(joiner, headerName));
 		recordJoiner.add(joiner.toString());
 	}
 
@@ -128,7 +134,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 */
 	protected void writeFooter(StringJoiner recordJoiner, Class<M> clazz) {
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
-		CsvUtil.getFooterList(clazz).stream().forEach(footerName -> write(joiner, footerName));
+		getFooterList(clazz).stream().forEach(footerName -> write(joiner, footerName));
 		recordJoiner.add(joiner.toString());
 	}
 
@@ -141,5 +147,31 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 	 *            M CSV出力モデル
 	 */
 	protected abstract void writeData(StringJoiner recordJoiner, M model);
+
+	/**
+	 * ヘッダ名を取得する<br>
+	 *
+	 * @param clazz
+	 *            CsvModelアノテーションのついたクラス型
+	 * @return ヘッダ名
+	 */
+	protected List<String> getHeaderList(Class<?> clazz) {
+		List<String> headerList = new ArrayList<String>();
+		headerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).headerNames()));
+		return headerList;
+	}
+
+	/**
+	 * フッタ名を取得する<br>
+	 *
+	 * @param clazz
+	 *            CsvModelアノテーションのついたクラス型
+	 * @return
+	 */
+	protected List<String> getFooterList(Class<?> clazz) {
+		List<String> footerList = new ArrayList<String>();
+		footerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).footerNames()));
+		return footerList;
+	}
 
 }

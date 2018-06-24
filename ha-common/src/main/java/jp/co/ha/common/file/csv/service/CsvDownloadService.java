@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.file.csv.CsvConfig;
+import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
 import jp.co.ha.common.util.Charset;
-import jp.co.ha.common.util.CsvUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -38,7 +38,7 @@ public interface CsvDownloadService {
 
 		CsvConfig csvConfig = new CsvConfig();
 		csvConfig.setFileName(fileName);
-		csvConfig.setEnclosureChar(CsvUtil.DOBBLE_QUOTE);
+		csvConfig.setEnclosureChar(BaseCsvWriter.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(account.getFileEnclosureCharFlag()));
 		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;

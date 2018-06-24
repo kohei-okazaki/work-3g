@@ -8,20 +8,27 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Excelヘッダのアノテーション<br>
+ * Excelモデルアノテーション
  *
  */
 @Inherited
 @Documented
-@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExcelHeader {
+@Target({ ElementType.TYPE })
+public @interface ExcelModel {
+
+	/**
+	 * シート名<br>
+	 * セットした順にファイルにつめられる<br>
+	 *
+	 * @return シート名
+	 */
+	String sheetName() default "Sheet1";
 
 	/**
 	 * ヘッダ名 セットした順にファイルにつめられる<br>
 	 *
 	 * @return ヘッダ名
 	 */
-	String[] names() default "";
-
+	String[] headerNames() default "";
 }
