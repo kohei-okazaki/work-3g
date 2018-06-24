@@ -86,4 +86,14 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		return apiRequest;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean hasRecord(List<HealthInfo> entityList, String dataId) {
+		return entityList.stream()
+						.map(entity -> entity.getDataId())
+						.anyMatch(entityDataId -> entityDataId.equals(dataId));
+	}
+
 }

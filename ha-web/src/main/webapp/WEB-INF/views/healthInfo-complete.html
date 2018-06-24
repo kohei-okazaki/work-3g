@@ -84,20 +84,23 @@
 				</td>
 				<td>　　</td>
 				<td>
-				<!-- Excel出力 -->
-				<form action="./healthInfo-excelDownload.html" method="get" th:object="${healthInfoForm}">
-					<input type="hidden" name="dataId" th:field="${healthInfo.dataId}" />
-					<div>
-						<input class="menuicon" type="image" src="resources/image/icon_xlsx.png">
-					</div>
-				</form>
+					<!-- Excel出力 -->
+					<form action="./healthInfo-excelDownload.html" method="get" th:object="${healthInfoForm}">
+						<input type="hidden" name="dataId" th:field="${healthInfo.dataId}" />
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_xlsx.png">
+						</div>
+					</form>
 				</td>
 				<td>　　</td>
 				<td>
 					<!-- CSV出力 -->
-					<div>
-						<input class="menuicon" type="image" src="resources/image/icon_csv.png" onclick="healthInfoCsvDownload()">
-					</div>
+					<form action="./healthInfo-csvDownload" method="get" th:object="${healthInfoForm}">
+						<input type="hidden" name="dataId" th:field="${healthInfo.dataId}" />
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_csv.png">
+						</div>
+					</form>
 				</td>
 				<td>　　</td>
 				<td>

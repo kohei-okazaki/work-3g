@@ -1,6 +1,7 @@
 package jp.co.ha.web.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.common.entity.HealthInfo;
@@ -53,4 +54,16 @@ public interface HealthInfoService {
 	 *            ユーザID
 	 */
 	HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId);
+
+	/**
+	 * 指定した健康情報リストの中に指定したデータIDが含まれるかどうか返す<br>
+	 *
+	 * @param entityList
+	 *            健康情報リスト
+	 * @param dataId
+	 *            データID
+	 * @return
+	 */
+	boolean hasRecord(List<HealthInfo> entityList, String dataId);
+
 }

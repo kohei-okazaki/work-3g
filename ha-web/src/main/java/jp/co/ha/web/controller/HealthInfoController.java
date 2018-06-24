@@ -1,7 +1,5 @@
 package jp.co.ha.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -156,9 +154,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@GetMapping(value = "/healthInfo-excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws HealthInfoException {
 
-		List<HealthInfo> resultList = healthInfoSearchService.findByUserId(userId);
 		String requestDataId = form.getDataId();
-		boolean hasRecord = resultList.stream().map(entity -> entity.getDataId()).anyMatch(dataId -> dataId.equals(requestDataId));
+		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestDataId);
 
 		if (!hasRecord) {
 			// レコードが見つからなかった場合
@@ -179,9 +176,19 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @param response
 	 *            HttpServletResponse
 	 * @return
+	 * @throws HealthInfoException
 	 */
 	@GetMapping(value = "/healthInfo-csvDownload")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response) {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
+
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getDataId());
+
+		if (!hasRecord) {
+			// レコードが見つからなかった場合
+			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+		}
+
 		csvDownloadService.execute(request, response);
 	}
 
