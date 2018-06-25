@@ -92,7 +92,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	@Override
 	public boolean hasRecord(List<HealthInfo> entityList, String dataId) {
 		return entityList.stream()
-						.map(entity -> entity.getDataId())
+						.map(entity -> entity.getHealthInfoId())
 						.anyMatch(entityDataId -> entityDataId.equals(dataId));
 	}
 

@@ -25,13 +25,13 @@ public interface HealthInfoDao extends BaseDao {
 	List<HealthInfo> findByUserId(String userId);
 
 	/**
-	 * 指定されたデータIDに対応する健康情報を返す<br>
+	 * 指定された健康情報IDに対応する健康情報を返す<br>
 	 *
-	 * @param dataId
-	 *            データID
+	 * @param healthInfoId
+	 *            健康情報ID
 	 * @return HealthInfo 健康情報
 	 */
-	HealthInfo findByDataId(String dataId);
+	HealthInfo findByHealthInfoId(String healthInfoId);
 
 	/**
 	 * 健康情報を登録する<br>

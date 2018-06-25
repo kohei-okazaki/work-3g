@@ -111,7 +111,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();
-		entity.setDataId(getNextDataId(lastHealthInfo));
+		entity.setHealthInfoId(getNextHealthInfoId(lastHealthInfo));
 		entity.setUserId(userId);
 		entity.setHeight(height);
 		entity.setWeight(weight);
@@ -130,27 +130,21 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	public HealthInfoRegistResponse toResponse(HealthInfo healthInfo) {
 
 		HealthInfoRegistResponse response = new HealthInfoRegistResponse();
-		response.setDataId(healthInfo.getDataId());
-		response.setUserId(healthInfo.getUserId());
-		response.setHeight(healthInfo.getHeight());
-		response.setWeight(healthInfo.getWeight());
-		response.setBmi(healthInfo.getBmi());
-		response.setStandardWeight(healthInfo.getStandardWeight());
-		response.setUserStatus(healthInfo.getUserStatus());
+		BeanUtil.copy(healthInfo, response);
 		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
 
 		return response;
 	}
 
 	/**
-	 * 次のデータIDを取得する
+	 * 次の健康情報IDを取得する
 	 *
 	 * @param healthInfo
 	 *            健康情報
 	 * @return
 	 */
-	private String getNextDataId(HealthInfo healthInfo) {
-		return BeanUtil.isNull(healthInfo) ? "1" : String.valueOf(Integer.valueOf(healthInfo.getDataId()) + 1);
+	private String getNextHealthInfoId(HealthInfo healthInfo) {
+		return BeanUtil.isNull(healthInfo) ? "1" : String.valueOf(Integer.valueOf(healthInfo.getHealthInfoId()) + 1);
 	}
 
 }

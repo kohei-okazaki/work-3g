@@ -10,8 +10,8 @@ import jp.co.ha.common.api.BaseResponse;
  */
 public class HealthInfoReferenceResponse extends BaseResponse {
 
-	/** データID */
-	private String dataId;
+	/** 健康情報ID */
+	private String healthInfoId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
@@ -26,22 +26,22 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	private String regDate;
 
 	/**
-	 * dataIdを返す<br>
+	 * healthInfoIdを返す<br>
 	 *
-	 * @return dataId データID
+	 * @return healthInfoId healthInfoId
 	 */
-	public String getDataId() {
-		return dataId;
+	public String getHealthInfoId() {
+		return healthInfoId;
 	}
 
 	/**
-	 * dataIdを設定する<br>
+	 * healthInfoIdを設定する<br>
 	 *
-	 * @param dataId
-	 *            データID
+	 * @param healthInfoId
+	 *            healthInfoId
 	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setHealthInfoId(String healthInfoId) {
+		this.healthInfoId = healthInfoId;
 	}
 
 	/**

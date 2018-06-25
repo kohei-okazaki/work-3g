@@ -49,7 +49,7 @@ public class HealthInfoReferenceController implements
 		HealthInfoReferenceRequest apiRequest = new HealthInfoReferenceRequest();
 		apiRequest.setRequestId(request.getParameter("requestId"));
 		apiRequest.setUserId(request.getParameter("userId"));
-		apiRequest.setDataId(request.getParameter("dataId"));
+		apiRequest.setHealthInfoId(request.getParameter("healthInfoId"));
 
 		return apiRequest;
 	}

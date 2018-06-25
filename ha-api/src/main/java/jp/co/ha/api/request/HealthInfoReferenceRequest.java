@@ -10,8 +10,8 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 
 	/** ユーザID */
 	private String userId;
-	/** データID */
-	private String dataId;
+	/** 健康情報ID */
+	private String healthInfoId;
 
 	/**
 	 * userIdを返す<br>
@@ -33,22 +33,22 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 	}
 
 	/**
-	 * dataIdを返す<br>
+	 * healthInfoIdを返す<br>
 	 *
-	 * @return dataId データID
+	 * @return healthInfoId healthInfoId
 	 */
-	public String getDataId() {
-		return dataId;
+	public String getHealthInfoId() {
+		return healthInfoId;
 	}
 
 	/**
-	 * dataIdを設定する<br>
+	 * healthInfoIdを設定する<br>
 	 *
-	 * @param dataId
-	 *            データID
+	 * @param healthInfoId
+	 *            healthInfoId
 	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setHealthInfoId(String healthInfoId) {
+		this.healthInfoId = healthInfoId;
 	}
 
 }

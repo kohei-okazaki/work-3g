@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 import jp.co.ha.common.web.BaseForm;
 
 /**
- *  健康情報照会画面フォームクラス<br>
+ * 健康情報照会画面フォームクラス<br>
  *
  */
 public class HealthInfoReferenceForm implements BaseForm {
@@ -15,8 +15,8 @@ public class HealthInfoReferenceForm implements BaseForm {
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
 
-	/** データID */
-	private String dataId;
+	/** 健康情報ID */
+	private String healthInfoId;
 	/** 登録日直接指定フラグ */
 	@NotEmpty(message = "登録日直接指定フラグが未入力です")
 	@Pattern(regexp = "^[0-9]*$", message = "登録日直接指定フラグが半角数字でありません")
@@ -28,22 +28,22 @@ public class HealthInfoReferenceForm implements BaseForm {
 	private String toRegDate;
 
 	/**
-	 * dataIdを返す<br>
+	 * healthInfoIdを返す<br>
 	 *
-	 * @return dataId dataId
+	 * @return healthInfoId healthInfoId
 	 */
-	public String getDataId() {
-		return dataId;
+	public String getHealthInfoId() {
+		return healthInfoId;
 	}
 
 	/**
-	 * dataIdを設定する<br>
+	 * healthInfoIdを設定する<br>
 	 *
-	 * @param dataId
-	 *            dataId
+	 * @param healthInfoId
+	 *            healthInfoId
 	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setHealthInfoId(String healthInfoId) {
+		this.healthInfoId = healthInfoId;
 	}
 
 	/**

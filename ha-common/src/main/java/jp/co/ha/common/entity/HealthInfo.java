@@ -21,8 +21,8 @@ public class HealthInfo implements Serializable {
 
 	/** データID */
 	@Id
-	@Column(name = "DATA_ID", nullable = false, length = 3)
-	private String dataId;
+	@Column(name = "HEALTH_INFO_ID", nullable = false, length = 3)
+	private String healthInfoId;
 
 	/** ユーザID */
 	@Column(name = "USER_ID", nullable = false, length = 3)
@@ -53,22 +53,21 @@ public class HealthInfo implements Serializable {
 	private Date regDate;
 
 	/**
-	 * dataIdを返す
+	 * healthInfoIdを返す<br>
 	 *
-	 * @return dataId データID
+	 * @return healthInfoId
 	 */
-	public String getDataId() {
-		return dataId;
+	public String getHealthInfoId() {
+		return healthInfoId;
 	}
 
 	/**
-	 * dataIdを設定する
+	 * healthInfoIdを設定する<br>
 	 *
-	 * @param dataId
-	 *            データID
+	 * @param healthInfoId
 	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setHealthInfoId(String healthInfoId) {
+		this.healthInfoId = healthInfoId;
 	}
 
 	/**

@@ -42,7 +42,7 @@ public class HealthInfoReferenceValidator extends BaseValidator<HealthInfoRefere
 	 */
 	private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
-		if (StringUtil.isEmpty(form.getDataId())) {
+		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
