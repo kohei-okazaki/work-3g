@@ -7,7 +7,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.co</groupId>
 	<artifactId>ha-web</artifactId>
-	<name>ha-web</name>
 	<packaging>war</packaging>
 	<version>1.0</version>
 
@@ -23,6 +22,7 @@
 		<org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
 		<ha-version>1.0</ha-version>
 	</properties>
+
 	<dependencies>
 		<!-- ha-common -->
 <!-- 		<dependency>
@@ -259,7 +259,7 @@
 
     <build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>3.5.3</version>
 				<configuration>
@@ -272,7 +272,7 @@
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -285,14 +285,14 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-			<plugin>
+<!-- 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 
