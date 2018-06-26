@@ -5,7 +5,7 @@
 							http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>jp.co</groupId>
+	<groupId>jp.co.ha.api</groupId>
 	<artifactId>ha-api</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
