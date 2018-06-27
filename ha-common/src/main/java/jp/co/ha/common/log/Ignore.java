@@ -8,13 +8,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ログ出力時マスク処理対象項目につけるマーカーアノテーション<br>
+ * ログ出力非対象項目につけるマーカーアノテーション<br>
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
-public @interface Mask {
+public @interface Ignore {
 
 }
