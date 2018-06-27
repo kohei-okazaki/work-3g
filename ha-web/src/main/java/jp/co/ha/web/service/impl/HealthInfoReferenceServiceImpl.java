@@ -40,7 +40,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) {
 
 		List<HealthInfo> resultList = null;
-		if (StringUtil.isEmpty(form.getDataId())) {
+		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			Date regDate = editStrDate(form.getFromRegDate());
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 登録日直接指定フラグがONの場合
@@ -50,7 +50,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 			}
 		} else {
-			resultList = List.of(healthInfoSearchService.findByDataId(form.getDataId()));
+			resultList = List.of(healthInfoSearchService.findByHealthInfoId(form.getHealthInfoId()));
 		}
 
 		return resultList;

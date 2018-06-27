@@ -1,6 +1,6 @@
 CREATE TABLE HEALTH_INFO (
 -- データID
-DATA_ID varchar2(3),
+HEALTH_INFO_ID varchar2(3),
 -- ユーザID
 USER_ID varchar2(16),
 -- 身長

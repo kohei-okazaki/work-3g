@@ -16,8 +16,8 @@ public class HealthInfoForm implements BaseForm {
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
 
-	/** データID */
-	private String dataId;
+	/** 健康情報ID */
+	private String healthInfoId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
@@ -33,24 +33,23 @@ public class HealthInfoForm implements BaseForm {
 	/** 標準体重 */
 	private BigDecimal standardWeight;
 
-
 	/**
-	 * dataIdを返す<br>
+	 * healthInfoIdを返す<br>
 	 *
-	 * @return dataId dataId
+	 * @return healthInfoId healthInfoId
 	 */
-	public String getDataId() {
-		return dataId;
+	public String getHealthInfoId() {
+		return healthInfoId;
 	}
 
 	/**
-	 * dataIdを設定する<br>
+	 * healthInfoIdを設定する<br>
 	 *
-	 * @param dataId
-	 *            dataId
+	 * @param healthInfoId
+	 *            healthInfoId
 	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setHealthInfoId(String healthInfoId) {
+		this.healthInfoId = healthInfoId;
 	}
 
 	/**

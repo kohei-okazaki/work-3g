@@ -40,7 +40,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		if (StringUtil.isEmpty(request.getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
-				|| StringUtil.isEmpty(request.getDataId())) {
+				|| StringUtil.isEmpty(request.getHealthInfoId())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
 
@@ -63,7 +63,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws HealthInfoException {
 
 		// 指定されたデータIDから健康情報を取得
-		HealthInfo entity = healthInfoSearchService.findByDataId(request.getDataId());
+		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
 		if (BeanUtil.isNull(entity)) {
 			throw new HealthInfoException(ErrorCode.DB_NO_DATA, ErrorCode.DB_NO_DATA.getErrorMessage());
 		}

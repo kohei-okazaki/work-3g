@@ -86,7 +86,7 @@
 				<td>
 					<!-- Excel出力 -->
 					<form action="./healthInfo-excelDownload.html" method="get" th:object="${healthInfoForm}">
-						<input type="hidden" name="dataId" th:field="${healthInfo.dataId}" />
+						<input type="hidden" name="healthInfoId" th:field="${healthInfo.healthInfoId}" />
 						<div>
 							<input class="menuicon" type="image" src="resources/image/icon_xlsx.png">
 						</div>
@@ -96,7 +96,7 @@
 				<td>
 					<!-- CSV出力 -->
 					<form action="./healthInfo-csvDownload" method="get" th:object="${healthInfoForm}">
-						<input type="hidden" name="dataId" th:field="${healthInfo.dataId}" />
+						<input type="hidden" name="healthInfoId" th:field="${healthInfo.healthInfoId}" />
 						<div>
 							<input class="menuicon" type="image" src="resources/image/icon_csv.png">
 						</div>

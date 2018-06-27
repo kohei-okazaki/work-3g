@@ -154,15 +154,15 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@GetMapping(value = "/healthInfo-excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws HealthInfoException {
 
-		String requestDataId = form.getDataId();
-		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestDataId);
+		String requestHealthInfoId = form.getHealthInfoId();
+		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
 
 		if (!hasRecord) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
-		HealthInfo entity = healthInfoSearchService.findByDataId(requestDataId);
+		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(requestHealthInfoId);
 		ModelAndView model = new ModelAndView(excelDownloadService.execute(entity));
 
 		return model;
@@ -182,7 +182,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getDataId());
+		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getHealthInfoId());
 
 		if (!hasRecord) {
 			// レコードが見つからなかった場合

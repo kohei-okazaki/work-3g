@@ -3,6 +3,7 @@ package jp.co.ha.api.response;
 import java.math.BigDecimal;
 
 import jp.co.ha.common.api.BaseResponse;
+import jp.co.ha.common.log.Mask;
 
 /**
  * 健康情報照会レスポンスクラス<br>
@@ -10,38 +11,42 @@ import jp.co.ha.common.api.BaseResponse;
  */
 public class HealthInfoReferenceResponse extends BaseResponse {
 
-	/** データID */
-	private String dataId;
+	/** 健康情報ID */
+	private String healthInfoId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
+	@Mask
 	private BigDecimal height;
 	/** 体重 */
+	@Mask
 	private BigDecimal weight;
 	/** BMI */
+	@Mask
 	private BigDecimal bmi;
 	/** 標準体重 */
+	@Mask
 	private BigDecimal standardWeight;
 	/** 登録日時 */
 	private String regDate;
 
 	/**
-	 * dataIdを返す<br>
+	 * healthInfoIdを返す<br>
 	 *
-	 * @return dataId データID
+	 * @return healthInfoId healthInfoId
 	 */
-	public String getDataId() {
-		return dataId;
+	public String getHealthInfoId() {
+		return healthInfoId;
 	}
 
 	/**
-	 * dataIdを設定する<br>
+	 * healthInfoIdを設定する<br>
 	 *
-	 * @param dataId
-	 *            データID
+	 * @param healthInfoId
+	 *            healthInfoId
 	 */
-	public void setDataId(String dataId) {
-		this.dataId = dataId;
+	public void setHealthInfoId(String healthInfoId) {
+		this.healthInfoId = healthInfoId;
 	}
 
 	/**

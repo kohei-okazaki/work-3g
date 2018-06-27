@@ -49,7 +49,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 
 				if (userId.equals(row.getCell(1).getStringCellValue())) {
 					HealthInfo healthInfo = new HealthInfo();
-					healthInfo.setDataId(row.getCell(0).getStringCellValue());								// データID
+					healthInfo.setHealthInfoId(row.getCell(0).getStringCellValue());								// データID
 					healthInfo.setUserId(row.getCell(1).getStringCellValue());								// ユーザID
 					healthInfo.setHeight(new BigDecimal(row.getCell(2).getStringCellValue()));				// 身長
 					healthInfo.setWeight(new BigDecimal(row.getCell(3).getStringCellValue()));				// 体重
@@ -77,7 +77,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findByDataId(String dateId) {
+	public HealthInfo findByHealthInfoId(String healthInfoId) {
 
 		HealthInfo healthInfo = null;
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
@@ -90,9 +90,9 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 				// ヘッダーの場合は次のレコードに進む
 				if (row.getRowNum() == 0) continue;
 
-				if (dateId.equals(row.getCell(0).getStringCellValue())) {
+				if (healthInfoId.equals(row.getCell(0).getStringCellValue())) {
 					healthInfo = new HealthInfo();
-					healthInfo.setDataId(row.getCell(0).getStringCellValue());								// データID
+					healthInfo.setHealthInfoId(row.getCell(0).getStringCellValue());								// データID
 					healthInfo.setUserId(row.getCell(1).getStringCellValue());								// ユーザID
 					healthInfo.setHeight(new BigDecimal(row.getCell(2).getStringCellValue()));				// 身長
 					healthInfo.setWeight(new BigDecimal(row.getCell(3).getStringCellValue()));				// 体重

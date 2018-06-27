@@ -36,8 +36,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findByDataId(String dataId) {
-		return healthInfoDao.findByDataId(dataId);
+	public HealthInfo findByHealthInfoId(String healthInfoId) {
+		return healthInfoDao.findByHealthInfoId(healthInfoId);
 	}
 
 	/**

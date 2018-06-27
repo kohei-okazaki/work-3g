@@ -14,6 +14,7 @@ import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.api.BaseRestController;
 import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
@@ -39,6 +40,9 @@ public class HealthInfoRegistController implements
 		service.checkRequest(apiRequest);
 
 		HealthInfoRegistResponse apiResponse = service.execute(apiRequest);
+
+		AppLogger logger = new AppLogger(this.getClass());
+		logger.info(apiResponse);
 		return apiResponse;
 	}
 
