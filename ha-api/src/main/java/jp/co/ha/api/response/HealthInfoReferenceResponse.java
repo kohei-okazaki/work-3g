@@ -3,6 +3,7 @@ package jp.co.ha.api.response;
 import java.math.BigDecimal;
 
 import jp.co.ha.common.api.BaseResponse;
+import jp.co.ha.common.log.Mask;
 
 /**
  * 健康情報照会レスポンスクラス<br>
@@ -15,12 +16,16 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
+	@Mask
 	private BigDecimal height;
 	/** 体重 */
+	@Mask
 	private BigDecimal weight;
 	/** BMI */
+	@Mask
 	private BigDecimal bmi;
 	/** 標準体重 */
+	@Mask
 	private BigDecimal standardWeight;
 	/** 登録日時 */
 	private String regDate;

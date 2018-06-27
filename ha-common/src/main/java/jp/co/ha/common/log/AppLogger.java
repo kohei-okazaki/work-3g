@@ -22,7 +22,11 @@ import jp.co.ha.common.util.DateUtil;
 public class AppLogger {
 
 	/** ロガー */
-	private final Logger LOG = LoggerFactory.getLogger(getClass());
+	private Logger logger;
+
+	public AppLogger(Class<?> clazz) {
+		this.logger = LoggerFactory.getLogger(clazz);
+	}
 
 	/**
 	 * infoログ出力を行う<br>
@@ -53,15 +57,15 @@ public class AppLogger {
 				}
 			}
 		} catch (IllegalAccessException e) {
-			LOG.error("不正アクセスです", e);
+			logger.error("不正アクセスです", e);
 		} catch (IntrospectionException e) {
-			LOG.error("項目が不正です", e);
+			logger.error("項目が不正です", e);
 		} catch (IllegalArgumentException e) {
-			LOG.error("不正な引数です", e);
+			logger.error("不正な引数です", e);
 		} catch (InvocationTargetException e) {
-			LOG.error("項目が不正です", e);
+			logger.error("項目が不正です", e);
 		}
-		LOG.info(sj.toString());
+		logger.info(sj.toString());
 	}
 
 }
