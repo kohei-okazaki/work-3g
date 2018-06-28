@@ -40,6 +40,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		Rs apiResponse = null;
 		try {
 			Rq apiRequest = toRequest(request);
+			AppLoggerFactory.getLogger(apiRequest.getClass()).info(apiRequest);
 			apiResponse = this.execute(apiRequest);
 			apiResponse.setResult(ResultType.SUCCESS);
 			AppLoggerFactory.getLogger(apiResponse.getClass()).info(apiResponse);
