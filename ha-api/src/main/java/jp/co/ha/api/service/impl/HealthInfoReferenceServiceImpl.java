@@ -51,7 +51,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
-		if (BeanUtil.isNull(account.getUserId())) {
+		if (BeanUtil.isNull(account)) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
 		}
 	}

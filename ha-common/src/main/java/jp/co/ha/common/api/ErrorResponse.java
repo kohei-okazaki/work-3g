@@ -36,12 +36,28 @@ public class ErrorResponse extends BaseResponse {
 	}
 
 	/**
+	 * errorCodeを設定する<br>
+	 * @param errorCode ErrorCode
+	 */
+	public void setErrorCode(ErrorCode errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	/**
 	 * detailを返す<br>
 	 *
 	 * @return detail
 	 */
 	public String getDetail() {
 		return detail;
+	}
+
+	/**
+	 * detailを設定する<br>
+	 * @param detail
+	 */
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 }

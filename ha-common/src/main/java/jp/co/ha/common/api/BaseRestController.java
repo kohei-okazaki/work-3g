@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.log.AppLoggerFactory;
 
 /**
  * RestAPI基底コントローラ<br>
@@ -41,10 +42,12 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 			Rq apiRequest = toRequest(request);
 			apiResponse = this.execute(apiRequest);
 			apiResponse.setResult(ResultType.SUCCESS);
+			AppLoggerFactory.getLogger(apiResponse.getClass()).info(apiResponse);
 		} catch (BaseAppException e) {
 			apiResponse = (Rs) new ErrorResponse(e);
-			System.out.println(e.toString());
+			AppLoggerFactory.getLogger(apiResponse.getClass()).error(apiResponse);
 		}
+
 
 		return apiResponse;
 	}
