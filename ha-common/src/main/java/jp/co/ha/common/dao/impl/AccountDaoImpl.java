@@ -17,6 +17,8 @@ import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.AppLoggerFactory;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 
@@ -25,6 +27,8 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class AccountDaoImpl implements AccountDao {
+
+	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -69,6 +73,8 @@ public class AccountDaoImpl implements AccountDao {
 			e.printStackTrace();
 		}
 
+		logger.info(account);
+
 		return account;
 	}
 
@@ -77,7 +83,8 @@ public class AccountDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void create(Account account) throws DuplicateKeyException {
-		// TODO 登録処理を追加すること
+
+		logger.info(account);
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);
@@ -117,7 +124,8 @@ public class AccountDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void updateAccount(Account account) {
-		// TODO 更新処理を追加すること
+
+		logger.info(account);
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);

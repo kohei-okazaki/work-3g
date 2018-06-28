@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import jp.co.ha.common.log.Ignore;
+import jp.co.ha.common.log.Mask;
+
 /**
  * アカウント情報Entity<br>
  *
@@ -17,6 +20,7 @@ import javax.persistence.Table;
 public class Account implements Serializable {
 
 	/** シリアルバージョンUID */
+	@Ignore
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
@@ -25,6 +29,7 @@ public class Account implements Serializable {
 	private String userId;
 
 	/** パスワード */
+	@Mask
 	@Column(name = "PASSWORD", nullable = false, length = 16)
 	private String password;
 

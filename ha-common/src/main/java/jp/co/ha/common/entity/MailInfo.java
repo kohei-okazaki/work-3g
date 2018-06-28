@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import jp.co.ha.common.log.Ignore;
+import jp.co.ha.common.log.Mask;
+
 /**
  * メール情報Entity<br>
  *
@@ -17,6 +20,7 @@ import javax.persistence.Table;
 public class MailInfo implements Serializable {
 
 	/** シリアルバージョンUID */
+	@Ignore
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
@@ -25,10 +29,12 @@ public class MailInfo implements Serializable {
 	private String userId;
 
 	/** メールアドレス */
+	@Mask
 	@Column(name = "MAIL_ADDRESS", nullable = false)
 	private String mailAddress;
 
 	/** メールパスワード */
+	@Mask
 	@Column(name = "MAIL_PASSWORD", nullable = false)
 	private String mailPassword;
 

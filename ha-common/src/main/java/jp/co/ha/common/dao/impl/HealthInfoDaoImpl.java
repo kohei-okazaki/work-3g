@@ -20,6 +20,8 @@ import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.AppLoggerFactory;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 
@@ -28,6 +30,8 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class HealthInfoDaoImpl implements HealthInfoDao {
+
+	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -58,6 +62,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 					healthInfo.setUserStatus(row.getCell(6).getStringCellValue());							// ユーザステータス
 					healthInfo.setRegDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));			// 登録日時
 					healthInfoList.add(healthInfo);
+					logger.info(healthInfo);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -113,6 +118,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 			e.printStackTrace();
 		}
 
+		logger.info(healthInfo);
 		return healthInfo;
 	}
 
@@ -152,6 +158,8 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		logger.info(healthInfo);
 	}
 
 }
