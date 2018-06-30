@@ -21,18 +21,6 @@
 	</properties>
 
 	<dependencies>
-		<!-- ha-common -->
-<!-- 		<dependency>
-			<groupId>jp.co</groupId>
-			<artifactId>ha-common</artifactId>
-			<version>${ha-version}</version>
-		</dependency> -->
-		<!-- ha-business -->
-<!-- 		<dependency>
-			<groupId>jp.co</groupId>
-			<artifactId>ha-business</artifactId>
-			<version>${ha-version}</version>
-		</dependency> -->
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -200,6 +188,18 @@
 			<version>2.18.3</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- ha-lib -->
+<!-- 		<dependency>
+			<groupId>jp.co.ha.common</groupId>
+			<artifactId>ha-common</artifactId>
+			<version>${ha-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jp.co.ha.business</groupId>
+			<artifactId>ha-business</artifactId>
+			<version>${ha-version}</version>
+		</dependency> -->
 
 	</dependencies>
 
