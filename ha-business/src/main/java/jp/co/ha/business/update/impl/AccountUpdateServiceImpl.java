@@ -23,7 +23,7 @@ public class AccountUpdateServiceImpl implements AccountUpdateService {
 	 */
 	@Override
 	public void update(Account account) {
-		accountDao.updateAccount(account);
+		accountDao.update(account);
 	}
 
 }

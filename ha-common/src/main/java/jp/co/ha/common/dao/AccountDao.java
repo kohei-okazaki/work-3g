@@ -20,7 +20,7 @@ public interface AccountDao extends BaseDao {
 	 *            ユーザID
 	 * @return Account アカウント情報
 	 */
-	Account findByUserId(String userId);
+	Account selectByAccount(String userId);
 
 	/**
 	 * アカウント情報を作成する<br>
@@ -37,7 +37,7 @@ public interface AccountDao extends BaseDao {
 	 * @param account
 	 *            アカウント情報
 	 */
-	void updateAccount(Account account);
+	void update(Account account);
 
 	/**
 	 * 指定されたアカウント情報の削除を行う<br>
@@ -45,6 +45,6 @@ public interface AccountDao extends BaseDao {
 	 * @param userId
 	 *            ユーザID
 	 */
-	void deleteAccount(String userId);
+	void delete(String userId);
 
 }

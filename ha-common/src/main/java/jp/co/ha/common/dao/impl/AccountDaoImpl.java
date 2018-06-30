@@ -34,7 +34,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account findByUserId(String userId) {
+	public Account selectByAccount(String userId) {
 
 		Account account = null;
 
@@ -123,7 +123,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateAccount(Account account) {
+	public void update(Account account) {
 
 		logger.info(account);
 
@@ -173,7 +173,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteAccount(String userId) {
+	public void delete(String userId) {
 		// TODO 削除処理を追加すること
 	}
 

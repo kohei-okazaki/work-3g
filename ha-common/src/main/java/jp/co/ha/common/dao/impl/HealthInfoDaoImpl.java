@@ -37,7 +37,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findByUserId(String userId) {
+	public List<HealthInfo> selectByUserId(String userId) {
 
 		List<HealthInfo> healthInfoList = new ArrayList<HealthInfo>();
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
@@ -62,7 +62,6 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 					healthInfo.setUserStatus(row.getCell(6).getStringCellValue());							// ユーザステータス
 					healthInfo.setRegDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));			// 登録日時
 					healthInfoList.add(healthInfo);
-					logger.info(healthInfo);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -82,7 +81,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findByHealthInfoId(String healthInfoId) {
+	public HealthInfo selectByHealthInfoId(String healthInfoId) {
 
 		HealthInfo healthInfo = null;
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {

@@ -29,7 +29,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public List<HealthInfo> findByUserId(String userId) {
-		return healthInfoDao.findByUserId(userId);
+		return healthInfoDao.selectByUserId(userId);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 */
 	@Override
 	public HealthInfo findByHealthInfoId(String healthInfoId) {
-		return healthInfoDao.findByHealthInfoId(healthInfoId);
+		return healthInfoDao.selectByHealthInfoId(healthInfoId);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) {
 
-		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
+		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
 		if (BeanUtil.isNull(regDate)) {
 			// 検索条件がない場合
 			return healthInfoList;
@@ -77,7 +77,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) {
 
-		List<HealthInfo> healthInfoList = healthInfoDao.findByUserId(userId);
+		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
 		if (BeanUtil.isNull(fromRegDate) || BeanUtil.isNull(toRegDate)) {
 			// 検索条件がない場合
 			return healthInfoList;
