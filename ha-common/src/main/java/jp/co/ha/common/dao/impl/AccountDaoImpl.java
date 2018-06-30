@@ -61,6 +61,8 @@ public class AccountDaoImpl implements AccountDao {
 					account.setHealthInfoMaskFlag(row.getCell(6).getStringCellValue());						// 健康情報マスクフラグ
 					account.setUpdateDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));			// 更新日時
 					account.setRegDate(DateUtil.toDate(row.getCell(8).getStringCellValue()));				// 登録日時
+
+					logger.info(account);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -72,8 +74,6 @@ public class AccountDaoImpl implements AccountDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		logger.info(account);
 
 		return account;
 	}

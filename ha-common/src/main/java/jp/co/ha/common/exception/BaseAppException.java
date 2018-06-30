@@ -1,9 +1,5 @@
 package jp.co.ha.common.exception;
 
-import java.util.StringJoiner;
-
-import jp.co.ha.common.util.StringUtil;
-
 /**
  * アプリ内で扱う基底例外クラス<br>
  *
@@ -47,20 +43,6 @@ public abstract class BaseAppException extends Exception {
 	 */
 	public String getDetail() {
 		return detail;
-	}
-
-	/**
-	 * エラーメッセージを組み立てて返す<br>
-	 *
-	 * @return 組み立てたエラーメッセージ
-	 */
-	@Override
-	public String toString() {
-		StringJoiner joiner = new StringJoiner(StringUtil.SPACE);
-		joiner.add(this.errorCode.getLogLevel());
-		joiner.add(this.errorCode.getErrorCode());
-		joiner.add(this.detail);
-		return joiner.toString();
 	}
 
 }

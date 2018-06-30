@@ -1,5 +1,7 @@
 package jp.co.ha.common.log;
 
+import org.slf4j.LoggerFactory;
+
 /**
  * ロガーファクトリークラス<br>
  *
@@ -18,6 +20,6 @@ public class AppLoggerFactory {
 	 * @return
 	 */
 	public static AppLogger getLogger(Class<?> clazz) {
-		return new AppLogger(clazz);
+		return new AppLogger(LoggerFactory.getLogger(clazz));
 	}
 }

@@ -59,6 +59,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 					mailInfo.setMailPassword(row.getCell(2).getStringCellValue());
 					mailInfo.setUpdateDate(DateUtil.toDate(row.getCell(3).getStringCellValue()));
 					mailInfo.setRegDate(DateUtil.toDate(row.getCell(4).getStringCellValue()));
+
+					logger.info(mailInfo);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -71,7 +73,6 @@ public class MailInfoDaoImpl implements MailInfoDao {
 			throw new DBException(ErrorCode.DB_ENCRYPT_ERROR, "DBアクセスに失敗しました");
 		}
 
-		logger.info(mailInfo);
 		return mailInfo;
 	}
 

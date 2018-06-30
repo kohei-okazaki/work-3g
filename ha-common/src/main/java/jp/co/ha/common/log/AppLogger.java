@@ -5,17 +5,15 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.StringJoiner;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * アプリ内のロガークラス<br>
@@ -26,77 +24,87 @@ public class AppLogger {
 	/** ロガー */
 	private Logger logger;
 
-	public AppLogger(Class<?> clazz) {
-		this.logger = LoggerFactory.getLogger(clazz);
+	AppLogger(Logger logger) {
+		this.logger = logger;
 	}
 
 	/**
 	 * debugログ出力を行う<br>
-	 * @param bean 対象Bean
+	 *
+	 * @param bean
+	 *            対象Bean
 	 */
 	public void debug(Object bean) {
-		logger.debug(getLogMessge(bean));
+		logger.debug(getLogMessage(bean));
 	}
 
 	/**
 	 * infoログ出力を行う<br>
-	 * @param bean 対象Bean
+	 *
+	 * @param bean
+	 *            対象Bean
 	 */
 	public void info(Object bean) {
-		logger.info(getLogMessge(bean));
+		logger.info(getLogMessage(bean));
 	}
 
 	/**
 	 * warnログ出力を行う<br>
-	 * @param bean 対象Bean
+	 *
+	 * @param bean
+	 *            対象Bean
 	 */
 	public void warn(Object bean) {
-		logger.warn(getLogMessge(bean));
+		logger.warn(getLogMessage(bean));
 	}
 
 	/**
 	 * errorログ出力を行う<br>
-	 * @param bean 対象Bean
+	 *
+	 * @param bean
+	 *            対象Bean
 	 */
 	public void error(Object bean) {
-		logger.error(getLogMessge(bean));
+		logger.error(getLogMessage(bean));
 	}
 
 	/**
 	 * ログメッセージを返す<br>
-	 * @param object
+	 *
+	 * @param bean
+	 *            対象Bean
 	 * @return
 	 */
-	private String getLogMessge(Object bean) {
+	private String getLogMessage(Object bean) {
 
 		StringJoiner sj = new StringJoiner(", ");
 		Class<?> clazz = bean.getClass();
 
-		for (Field f : getFieldList(clazz)) {
-			String fieldName = f.getName();
+		for (Field f : BeanUtil.getFieldList(clazz)) {
+			String name = f.getName();
 			if (isIgnore(f)) {
 				// 出力非対象項目
 				continue;
 			}
 			if (isMask(f)) {
 				// マスク対象項目
-				sj.add(fieldName + "=****");
+				sj.add(name + "=****");
 			} else {
 				// マスク非対象項目
-				Object value = getValue(bean, fieldName);
-				if (value instanceof Date) {
-					value = DateUtil.toString((Date) value, DateFormatDefine.YYYYMMDD_HHMMSS);
-				}
-				sj.add(fieldName + "=" + value.toString());
+				String strValue = editValue(getValue(bean, name));
+				sj.add(name + "=" + strValue);
 			}
 		}
-		return sj.toString();
+		return bean.getClass().getName() + " " + sj.toString();
 	}
 
 	/**
 	 * 値を取得<br>
-	 * @param bean Beanクラス
-	 * @param fieldName フィールド名
+	 *
+	 * @param bean
+	 *            Bean
+	 * @param fieldName
+	 *            フィールド名
 	 * @return
 	 */
 	private Object getValue(Object bean, String fieldName) {
@@ -120,9 +128,30 @@ public class AppLogger {
 	}
 
 	/**
+	 * 値を出力用に編集する<br>
+	 *
+	 * @param value
+	 *            値
+	 * @return
+	 */
+	private String editValue(Object value) {
+		String strValue;
+		if (BeanUtil.isNull(value)) {
+			strValue = StringUtil.EMPTY;
+		} else if (value instanceof Date) {
+			strValue = DateUtil.toString((Date) value, DateFormatDefine.YYYYMMDD_HHMMSS);
+		} else {
+			strValue = value.toString();
+		}
+		return strValue;
+	}
+
+	/**
 	 * マスク対象かどうか判定する<br>
 	 * マスク対象の場合true, それ以外の場合false<br>
-	 * @param field フィールド名
+	 *
+	 * @param field
+	 *            フィールド名
 	 * @return
 	 */
 	private boolean isMask(Field field) {
@@ -132,26 +161,13 @@ public class AppLogger {
 	/**
 	 * 出力対象かどうか判定する<br>
 	 * 出力対象の場合true, それ以外の場合false<br>
-	 * @param field フィールド名
+	 *
+	 * @param field
+	 *            フィールド名
 	 * @return
 	 */
 	private boolean isIgnore(Field field) {
 		return BeanUtil.notNull(field.getAnnotation(Ignore.class));
-	}
-
-	/**
-	 * 指定したクラスのフィールドをリストで返す<br>
-	 * @param clazz
-	 * @return
-	 */
-	private List<Field> getFieldList(Class<?> clazz) {
-		List<Field> fieldList = new ArrayList<Field>();
-		while (BeanUtil.notNull(clazz)) {
-			fieldList.addAll(List.of(clazz.getDeclaredFields()));
-			clazz = clazz.getSuperclass();
-		}
-		return fieldList;
-
 	}
 
 }

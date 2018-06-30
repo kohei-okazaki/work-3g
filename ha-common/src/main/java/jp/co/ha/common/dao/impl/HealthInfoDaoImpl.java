@@ -105,7 +105,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 					healthInfo.setStandardWeight(new BigDecimal(row.getCell(5).getStringCellValue()));		// 標準体重
 					healthInfo.setUserStatus(row.getCell(6).getStringCellValue());							// ユーザステータス
 					healthInfo.setRegDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));			// 登録日時
-
+					logger.info(healthInfo);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -118,7 +118,6 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 			e.printStackTrace();
 		}
 
-		logger.info(healthInfo);
 		return healthInfo;
 	}
 
