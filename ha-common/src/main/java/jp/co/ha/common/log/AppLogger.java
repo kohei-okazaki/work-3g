@@ -95,7 +95,7 @@ public class AppLogger {
 				sj.add(name + "=" + strValue);
 			}
 		}
-		return bean.getClass().getName() + " " + sj.toString();
+		return clazz.getName() + " " + sj.toString();
 	}
 
 	/**
