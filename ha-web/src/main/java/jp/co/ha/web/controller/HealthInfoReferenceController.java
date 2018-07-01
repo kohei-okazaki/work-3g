@@ -20,9 +20,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
@@ -136,11 +139,16 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @param resultList
 	 *            List<HealthInfoReferenceResponse>
 	 * @return
+	 * @throws HealthInfoException
 	 */
 	@GetMapping(value = "/healthInfo-reference-excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request
-			, @SessionAttribute @Nullable List<HealthInfoReferenceResponse> resultList) {
+			, @SessionAttribute @Nullable List<HealthInfoReferenceResponse> resultList) throws HealthInfoException {
 
+		if (BeanUtil.isNull(resultList) || resultList.isEmpty()) {
+			// レコードが見つからなかった場合
+			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+		}
 		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
 
 		return model;

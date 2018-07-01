@@ -50,7 +50,12 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 			}
 		} else {
-			resultList = List.of(healthInfoSearchService.findByHealthInfoId(form.getHealthInfoId()));
+			HealthInfo entity = healthInfoSearchService.findByHealthInfoId(form.getHealthInfoId());
+			if (BeanUtil.isNull(entity)) {
+				resultList = new ArrayList<>();
+			} else {
+				resultList = List.of(entity);
+			}
 		}
 
 		return resultList;
