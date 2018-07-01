@@ -8,6 +8,8 @@ import java.util.StringJoiner;
 
 import org.slf4j.Logger;
 
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;

@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import jp.co.ha.common.log.Ignore;
-import jp.co.ha.common.log.Mask;
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報Entity<br>

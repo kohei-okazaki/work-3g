@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
-import jp.co.ha.common.log.Ignore;
-import jp.co.ha.common.log.Mask;
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.web.BaseForm;
 
 /**

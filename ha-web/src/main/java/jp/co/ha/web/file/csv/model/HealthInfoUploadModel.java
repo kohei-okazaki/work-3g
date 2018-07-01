@@ -2,7 +2,7 @@ package jp.co.ha.web.file.csv.model;
 
 import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
-import jp.co.ha.common.log.Mask;
+import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報CSVアップロードモデル<br>

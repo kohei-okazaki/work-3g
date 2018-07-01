@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import jp.co.ha.common.log.Ignore;
+import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.web.BaseForm;
 
 /**

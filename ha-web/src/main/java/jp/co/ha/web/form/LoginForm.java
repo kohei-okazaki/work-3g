@@ -4,8 +4,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import jp.co.ha.common.log.Ignore;
-import jp.co.ha.common.log.Mask;
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.web.BaseForm;
 
 /**
