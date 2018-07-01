@@ -22,7 +22,7 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	 */
 	@Override
 	public boolean supports(Class<?> clazz) {
-		Class<?> clz = BeanUtil.getParameterSuperType(this.getClass());
+		Class<?> clz = BeanUtil.getParameterType(this.getClass());
 		return clz.isAssignableFrom(clazz);
 	}
 

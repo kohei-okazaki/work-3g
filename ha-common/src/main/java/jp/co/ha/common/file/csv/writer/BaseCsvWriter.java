@@ -65,7 +65,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 			if (this.conf.hasHeader()) {
 				// ヘッダを書込
-				writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterSuperType(this.getClass()));
+				writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
 			}
 
 			// データを書込
@@ -73,7 +73,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 			if (this.conf.hasFooter()) {
 				// フッタを書込
-				writeFooter(recordJoiner, (Class<M>) BeanUtil.getParameterSuperType(this.getClass()));
+				writeFooter(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
 			}
 
 			writer.print(recordJoiner.toString());

@@ -57,11 +57,11 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 			HttpServletResponse response) throws Exception {
 
 		init(response);
-		String sheetName = getSheetName((Class<M>) BeanUtil.getParameterSuperType(this.getClass()));
+		String sheetName = getSheetName((Class<M>) BeanUtil.getParameterType(this.getClass()));
 		Sheet sheet = workbook.createSheet(sheetName);
 
 		// ヘッダを書込
-		writeHeader(sheet, (Class<M>) BeanUtil.getParameterSuperType(this.getClass()));
+		writeHeader(sheet, (Class<M>) BeanUtil.getParameterType(this.getClass()));
 
 		// データを書込
 		writeData(sheet);

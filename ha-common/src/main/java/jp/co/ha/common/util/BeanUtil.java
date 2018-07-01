@@ -56,7 +56,6 @@ public class BeanUtil {
 				for (Field sourceField : BeanUtil.getFieldList(dataClass)) {
 					if (isCopyTarget(sourceField, targetField)) {
 						// getter呼び出し
-
 						Method getter = getGetter(sourceField.getName(), dataClass);
 						// setter呼び出し
 						Method setter = getSetter(targetField.getName(), targetClass);
@@ -142,8 +141,8 @@ public class BeanUtil {
 	 *            対象クラス
 	 * @return
 	 */
-	public static Class<?> getParameterSuperType(Class<?> clazz) {
-		return getParameterSuperType(clazz, 0);
+	public static Class<?> getParameterType(Class<?> clazz) {
+		return getParameterType(clazz, 0);
 	}
 
 	/**
@@ -155,7 +154,7 @@ public class BeanUtil {
 	 *            パラメータ引数の位置
 	 * @return
 	 */
-	public static Class<?> getParameterSuperType(Class<?> clazz, int position) {
+	public static Class<?> getParameterType(Class<?> clazz, int position) {
 		ParameterizedType paramType = (ParameterizedType) clazz.getGenericSuperclass();
 		return (Class<?>) paramType.getActualTypeArguments()[position];
 	}
@@ -198,7 +197,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * 指定したclazzのfieldNameのsettetを返す<br>
+	 * 指定したclazzのfieldNameのsetterを返す<br>
 	 *
 	 * @param fieldName
 	 *            フィールド名
