@@ -22,6 +22,12 @@ public class AppLogger {
 	/** ロガー */
 	private Logger logger;
 
+	/**
+	 * コンストラクタ<br>
+	 *
+	 * @param logger
+	 *            ロガー
+	 */
 	AppLogger(Logger logger) {
 		this.logger = logger;
 	}
