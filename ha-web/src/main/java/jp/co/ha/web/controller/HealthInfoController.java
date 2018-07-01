@@ -128,7 +128,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 			model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
 			model.addAttribute("diffWeight", healthInfoService.getDiffWeight(form, lastHealthInfo));
 			model.addAttribute("resultMessage", healthInfoService.getDiffMessage(form, lastHealthInfo));
-
 		}
 
 		healthInfoRegistService.checkRequest(apiRequest);

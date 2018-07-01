@@ -1,5 +1,7 @@
 package jp.co.ha.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -14,11 +16,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
 import jp.co.ha.web.form.HealthInfoFileForm;
+import jp.co.ha.web.service.HealthInfoFileInputService;
 import jp.co.ha.web.service.annotation.HealthInfoUploadCsv;
 import jp.co.ha.web.validator.HealthInfoFileInputValidator;
 import jp.co.ha.web.view.ManageWebView;
@@ -34,6 +39,12 @@ public class HealthInfoFileInputController implements BaseWizardController<Healt
 	@Autowired
 	@HealthInfoUploadCsv
 	private CsvUploadService<HealthInfoUploadModel> csvUploadService;
+	/** 健康情報ファイル画面サービス */
+	@Autowired
+	private HealthInfoFileInputService fileService;
+	/** 健康情報登録サービス */
+	@Autowired
+	private HealthInfoRegistService healthInfoRegistService;
 
 	/**
 	 * フォームを返す<br>
@@ -76,7 +87,14 @@ public class HealthInfoFileInputController implements BaseWizardController<Healt
 			return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 		}
 		MultipartFile file = form.getMultipartFile();
-		csvUploadService.execute(file);
+		List<HealthInfoUploadModel> modelList = csvUploadService.execute(file);
+		fileService.formatCheck(modelList);
+		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);
+		for (HealthInfoRegistRequest request : reqList) {
+			healthInfoRegistService.checkRequest(request);
+			healthInfoRegistService.execute(request);
+		}
+
 		return ManageWebView.HEALTH_INFO_FILE_CONFIRM.getName();
 	}
 
