@@ -15,14 +15,6 @@ public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean supports(Class<?> clazz) {
-		return AccountRegistForm.class.isAssignableFrom(clazz);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void validate(Object object, Errors errors) {
 
 		AccountRegistForm form = (AccountRegistForm) object;

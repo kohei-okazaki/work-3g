@@ -52,23 +52,20 @@ public class BeanUtil {
 				if (ignore(ignoreList, targetField.getName())) {
 					continue;
 				}
-				PropertyDescriptor targetPd = new PropertyDescriptor(targetField.getName(), targetClass);
 
 				for (Field sourceField : BeanUtil.getFieldList(dataClass)) {
 					if (isCopyTarget(sourceField, targetField)) {
-						PropertyDescriptor sourcePd = new PropertyDescriptor(sourceField.getName(), dataClass);
 						// getter呼び出し
-						Method getter = sourcePd.getReadMethod();
+
+						Method getter = getGetter(sourceField.getName(), dataClass);
 						// setter呼び出し
-						Method setter = targetPd.getWriteMethod();
+						Method setter = getSetter(targetField.getName(), targetClass);
 
 						// 値を設定
 						setter.invoke(target, getter.invoke(data));
 					}
 				}
 			}
-		} catch (IntrospectionException e) {
-			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
@@ -145,8 +142,8 @@ public class BeanUtil {
 	 *            対象クラス
 	 * @return
 	 */
-	public static Class<?> getParameterType(Class<?> clazz) {
-		return getParameterType(clazz, 0);
+	public static Class<?> getParameterSuperType(Class<?> clazz) {
+		return getParameterSuperType(clazz, 0);
 	}
 
 	/**
@@ -158,7 +155,7 @@ public class BeanUtil {
 	 *            パラメータ引数の位置
 	 * @return
 	 */
-	public static Class<?> getParameterType(Class<?> clazz, int position) {
+	public static Class<?> getParameterSuperType(Class<?> clazz, int position) {
 		ParameterizedType paramType = (ParameterizedType) clazz.getGenericSuperclass();
 		return (Class<?>) paramType.getActualTypeArguments()[position];
 	}
@@ -178,6 +175,46 @@ public class BeanUtil {
 			tmpClass = tmpClass.getSuperclass();
 		}
 		return fieldList;
+	}
+
+	/**
+	 * 指定したclazzのfieldNameのgetterを返す<br>
+	 *
+	 * @param fieldName
+	 *            フィールド名
+	 * @param clazz
+	 *            クラス
+	 * @return
+	 */
+	public static Method getGetter(String fieldName, Class<?> clazz) {
+		Method getter = null;
+		try {
+			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
+			getter = pd.getReadMethod();
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		}
+		return getter;
+	}
+
+	/**
+	 * 指定したclazzのfieldNameのsettetを返す<br>
+	 *
+	 * @param fieldName
+	 *            フィールド名
+	 * @param clazz
+	 *            クラス
+	 * @return
+	 */
+	public static Method getSetter(String fieldName, Class<?> clazz) {
+		Method setter = null;
+		try {
+			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
+			setter = pd.getWriteMethod();
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		}
+		return setter;
 	}
 
 }

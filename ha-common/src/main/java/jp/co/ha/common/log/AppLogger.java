@@ -1,7 +1,5 @@
 package jp.co.ha.common.log;
 
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -111,13 +109,10 @@ public class AppLogger {
 		Class<?> clazz = bean.getClass();
 		Object value = null;
 		try {
-			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
-			Method getter = pd.getReadMethod();
+			Method getter = BeanUtil.getGetter(fieldName, clazz);
 			value = getter.invoke(bean);
 		} catch (IllegalAccessException e) {
 			logger.error("不正アクセスです", e);
-		} catch (IntrospectionException e) {
-			logger.error("項目が不正です", e);
 		} catch (IllegalArgumentException e) {
 			logger.error("不正な引数です", e);
 		} catch (InvocationTargetException e) {

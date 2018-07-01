@@ -29,7 +29,7 @@ import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
  * 結果照会画面CSVダウンロードサービスクラス実装クラス<br>
  *
  */
-@Service(value = "referenceCsv")
+@Service(value = "referenceDownloadCsv")
 public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService {
 
 	/** アカウント検索サービス */
@@ -47,7 +47,7 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 
 		// sessionから検索結果リストを取得
 		HttpSession session = request.getSession();
-		List<HealthInfoReferenceResponse> resultList = (List<HealthInfoReferenceResponse>) sessionService.getValue(session, "resultList", List.class);
+		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
 		String userId = sessionService.getValue(session, "userId", String.class);
 
 		// CSV出力モデルリストに変換する

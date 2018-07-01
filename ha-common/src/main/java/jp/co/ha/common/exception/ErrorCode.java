@@ -31,6 +31,9 @@ public enum ErrorCode {
 	/** 該当データ存在しないエラー */
 	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません"),
 
+	/** ファイルアップロード例外 */
+	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "WARN", "ファイルアップロード例外"),
+
 	/** 実行環境エラー */
 	RUNTIME_ERROR("RUNTIME_ERROR", "ERROR", "実行環境エラー");
 

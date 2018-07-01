@@ -5,6 +5,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.RegixPattern;
 
 /**
@@ -15,6 +16,15 @@ import jp.co.ha.common.util.RegixPattern;
  *            validate対象form
  */
 public abstract class BaseValidator<F extends BaseForm> implements Validator {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean supports(Class<?> clazz) {
+		Class<?> clz = BeanUtil.getParameterSuperType(this.getClass());
+		return clz.isAssignableFrom(clazz);
+	}
 
 	/**
 	 * fieldのformの値が空文字の場合、errorsオブジェクトにエラーを追加する<br>

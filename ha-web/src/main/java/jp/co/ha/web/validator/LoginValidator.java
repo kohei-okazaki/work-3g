@@ -18,14 +18,6 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean supports(Class<?> clazz) {
-		return LoginForm.class.isAssignableFrom(clazz);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void validate(Object target, Errors errors) {
 
 		LoginForm form = (LoginForm) target;

@@ -3,6 +3,7 @@ package jp.co.ha.web.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseAppException;
@@ -25,6 +26,9 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName(ManageWebView.ERROR.getName());
 		e.printStackTrace();
+		if (e instanceof MultipartException) {
+			return modelView;
+		}
 		request.setAttribute("errorMessage", buildErrorMessage((BaseAppException) e));
 		return modelView;
 	}

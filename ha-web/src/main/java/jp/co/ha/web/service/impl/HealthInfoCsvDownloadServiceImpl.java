@@ -19,14 +19,14 @@ import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.web.file.csv.model.HealthInfoCsvModel;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.file.csv.writer.HealthInfoCsvWriter;
 
 /**
  * 健康情報CSVダウンロードサービス実装クラス<br>
  *
  */
-@Service("healthInfoCsv")
+@Service("healthInfoDownloadCsv")
 public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 
 	/** 健康情報検索サービス */
@@ -51,7 +51,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		HealthInfo healthInfo = healthInfoSearchService.findLastByUserId(userId);
 
 		// CSV出力モデルリストに変換する
-		List<HealthInfoCsvModel> modelList = toModelList(healthInfo);
+		List<HealthInfoCsvDownloadModel> modelList = toModelList(healthInfo);
 
 		// CSV設定情報取得
 		Account account = accountSearchService.findByUserId(userId);
@@ -60,7 +60,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 		conf.setHasHeader(true);
 
 		// CSVに書き込む
-		BaseCsvWriter<HealthInfoCsvModel> writer = new HealthInfoCsvWriter(conf, modelList);
+		BaseCsvWriter<HealthInfoCsvDownloadModel> writer = new HealthInfoCsvWriter(conf, modelList);
 		writer.execute(response);
 	}
 
@@ -71,10 +71,10 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService {
 	 *            健康情報
 	 * @return modelList List<HealthInfoCsvModel>
 	 */
-	private List<HealthInfoCsvModel> toModelList(HealthInfo healthInfo) {
+	private List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo) {
 
-		List<HealthInfoCsvModel> modelList = new ArrayList<HealthInfoCsvModel>();
-		HealthInfoCsvModel model = new HealthInfoCsvModel();
+		List<HealthInfoCsvDownloadModel> modelList = new ArrayList<HealthInfoCsvDownloadModel>();
+		HealthInfoCsvDownloadModel model = new HealthInfoCsvDownloadModel();
 		BeanUtil.copy(healthInfo, model);
 		modelList.add(model);
 

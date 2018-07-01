@@ -18,7 +18,7 @@ import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 
 /**
- *  健康情報照会画面サービスインターフェース実装クラス<br>
+ * 健康情報照会画面サービスインターフェース実装クラス<br>
  *
  */
 @Service

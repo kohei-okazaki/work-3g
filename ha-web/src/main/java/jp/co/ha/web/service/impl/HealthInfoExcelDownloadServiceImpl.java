@@ -20,7 +20,7 @@ import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
  * 健康情報Excelダウンロードサービス実装クラス
  *
  */
-@Service(value = "healthInfoExcel")
+@Service(value = "healthInfoDownloadExcel")
 public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfo> {
 
 	/** アカウント検索サービス */

@@ -27,8 +27,8 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
-import jp.co.ha.web.service.annotation.ReferenceCsv;
-import jp.co.ha.web.service.annotation.ReferenceExcel;
+import jp.co.ha.web.service.annotation.ReferenceDownloadCsv;
+import jp.co.ha.web.service.annotation.ReferenceDownloadExcel;
 import jp.co.ha.web.validator.HealthInfoReferenceValidator;
 import jp.co.ha.web.view.ManageWebView;
 
@@ -45,11 +45,11 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
-	@ReferenceExcel
+	@ReferenceDownloadExcel
 	private ExcelDownloadService<List<HealthInfoReferenceResponse>> excelDownloadService;
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
-	@ReferenceCsv
+	@ReferenceDownloadCsv
 	private CsvDownloadService csvDownloadService;
 	/** セッション管理サービス */
 	@Autowired

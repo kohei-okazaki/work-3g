@@ -24,7 +24,7 @@ import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
  * 結果照会画面Excelダウンロードサービス実装クラス
  *
  */
-@Service(value = "referenceExcel")
+@Service(value = "referenceDownloadExcel")
 public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoReferenceResponse>> {
 
 	/** アカウント検索サービス */

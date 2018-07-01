@@ -39,7 +39,14 @@ public enum ManageWebView implements BaseView {
 	/** アカウント作成入力確認画面URL */
 	ACCOUNT_REGIST_CONFIRM("account-regist-confirm"),
 	/** アカウント作成入力完了画面URL */
-	ACCOUNT_REGIST_COMPLETE("account-regist-complete");
+	ACCOUNT_REGIST_COMPLETE("account-regist-complete"),
+	/** 健康情報ファイル入力画面URL */
+	HEALTH_INFO_FILE_INPUT("healthInfo-fileInput"),
+	/** 健康情報ファイル確認画面URL */
+	HEALTH_INFO_FILE_CONFIRM("healthInfo-fileConfirm"),
+	/** 健康情報ファイル入力完了画面URL */
+	HEALTH_INFO_FILE_COMPLETE("healthInfo-fileComplete"),
+	;
 
 	/** view名 */
 	private String name;

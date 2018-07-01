@@ -18,7 +18,7 @@ import jp.co.ha.common.exception.BaseAppException;
  * @param <E>
  *            例外クラス
  */
-public interface BaseWizardController<F extends BaseForm, E extends BaseAppException> extends BaseWebController {
+public interface BaseWizardController<F extends BaseForm> extends BaseWebController {
 
 	/**
 	 * Validateを設定<br>
@@ -36,10 +36,10 @@ public interface BaseWizardController<F extends BaseForm, E extends BaseAppExcep
 	 * @param request
 	 *            HttpServletRequest
 	 * @return
-	 * @throws E
+	 * @throws BaseAppException
 	 *             例外クラス
 	 */
-	String input(Model model, HttpServletRequest request) throws E;
+	String input(Model model, HttpServletRequest request) throws BaseAppException;
 
 	/**
 	 * 確認画面
@@ -51,10 +51,10 @@ public interface BaseWizardController<F extends BaseForm, E extends BaseAppExcep
 	 * @param result
 	 *            BindingResult
 	 * @return
-	 * @throws E
+	 * @throws BaseAppException
 	 *             例外クラス
 	 */
-	String confirm(Model model, @Valid F form, BindingResult result) throws E;
+	String confirm(Model model, @Valid F form, BindingResult result) throws BaseAppException;
 
 	/**
 	 * 完了画面
@@ -66,9 +66,9 @@ public interface BaseWizardController<F extends BaseForm, E extends BaseAppExcep
 	 * @param request
 	 *            HttpServletRequest
 	 * @return
-	 * @throws E
+	 * @throws BaseAppException
 	 *             例外クラス
 	 */
-	String complete(Model model, F form, HttpServletRequest request) throws E;
+	String complete(Model model, F form, HttpServletRequest request) throws BaseAppException;
 
 }

@@ -19,7 +19,7 @@ import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.MailInfoSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
-import jp.co.ha.common.exception.AccountSettingException;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWizardController;
@@ -32,7 +32,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
-public class AccountSettingController implements BaseWizardController<AccountSettingForm, AccountSettingException> {
+public class AccountSettingController implements BaseWizardController<AccountSettingForm> {
 
 	/** アカウント設定サービス */
 	@Autowired
@@ -89,7 +89,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@GetMapping(value = "/account-setting-input.html")
-	public String input(Model model, HttpServletRequest request) throws AccountSettingException {
+	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
 	}
 
@@ -98,7 +98,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@PostMapping(value = "/account-setting-confirm.html")
-	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result) throws AccountSettingException {
+	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result) throws BaseAppException {
 
 		if (result.hasErrors()) {
 			return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
@@ -114,7 +114,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@PostMapping(value = "/account-setting-complete.html")
-	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws AccountSettingException {
+	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseAppException {
 
 		// form情報から更新処理を行う
 		accountSettingService.execute(form);

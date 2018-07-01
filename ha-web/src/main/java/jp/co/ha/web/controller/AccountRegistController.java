@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.create.AccountCreateService;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.exception.AccountCreateException;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
@@ -26,7 +26,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
-public class AccountRegistController implements BaseWizardController<AccountRegistForm, AccountCreateException> {
+public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
 	/** アカウント登録画面サービス */
 	@Autowired
@@ -59,7 +59,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 */
 	@Override
 	@GetMapping(value = "account-regist-input.html")
-	public String input(Model model, HttpServletRequest request) throws AccountCreateException {
+	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 	}
 
@@ -69,7 +69,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@PostMapping(value = "/account-regist-confirm.html")
 	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result)
-			throws AccountCreateException {
+			throws BaseAppException {
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合
@@ -92,7 +92,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@PostMapping(value = "/account-regist-complete.html")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
-			throws AccountCreateException {
+			throws BaseAppException {
 
 		// アカウントEntityに変換する
 		Account account = service.toAccount(form);

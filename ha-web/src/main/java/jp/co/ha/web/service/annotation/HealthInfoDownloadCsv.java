@@ -10,13 +10,13 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 結果照会Excelダウンロードサービス実装クラスのマーカーアノテーション
+ * 健康情報CSVダウンロードサービス実装クラスのマーカーアノテーション
  *
  */
 @Inherited
 @Documented
-@Qualifier("referenceExcel")
+@Qualifier("healthInfoDownloadCsv")
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.TYPE })
-public @interface ReferenceExcel {
+public @interface HealthInfoDownloadCsv {
 }

@@ -15,14 +15,6 @@ public class HealthInfoValidator extends BaseValidator<HealthInfoForm> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean supports(Class<?> clazz) {
-		return HealthInfoForm.class.isAssignableFrom(clazz);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public void validate(Object target, Errors errors) {
 
 		HealthInfoForm form = (HealthInfoForm) target;
