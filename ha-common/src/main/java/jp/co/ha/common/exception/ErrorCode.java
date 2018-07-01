@@ -35,7 +35,10 @@ public enum ErrorCode {
 	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "WARN", "ファイルアップロード例外"),
 
 	/** 実行環境エラー */
-	RUNTIME_ERROR("RUNTIME_ERROR", "ERROR", "実行環境エラー");
+	RUNTIME_ERROR("RUNTIME_ERROR", "ERROR", "実行環境エラー"),
+
+	/** 予期せぬ例外 */
+	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "ERROR", "予期せぬ例外");
 
 	/** エラーコード */
 	private String errorCode;

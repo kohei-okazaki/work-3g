@@ -8,9 +8,6 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
  */
 public interface BaseExceptionHandler extends HandlerExceptionResolver {
 
-	/** 例外時に表示するファイル名 */
-	public static final String ERROR_PAGE = "error";
-
 	/**
 	 * エラーメッセージを返す<br>
 	 *
@@ -18,6 +15,6 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 	 *            例外クラス
 	 * @return
 	 */
-	String buildErrorMessage(BaseAppException e);
+	String buildErrorMessage(Exception e);
 
 }
