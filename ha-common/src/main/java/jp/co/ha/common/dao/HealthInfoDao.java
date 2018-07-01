@@ -22,7 +22,7 @@ public interface HealthInfoDao extends BaseDao {
 	 *            ユーザID
 	 * @return List<HealthInfo> 健康情報リスト
 	 */
-	List<HealthInfo> findByUserId(String userId);
+	List<HealthInfo> selectByUserId(String userId);
 
 	/**
 	 * 指定された健康情報IDに対応する健康情報を返す<br>
@@ -31,7 +31,7 @@ public interface HealthInfoDao extends BaseDao {
 	 *            健康情報ID
 	 * @return HealthInfo 健康情報
 	 */
-	HealthInfo findByHealthInfoId(String healthInfoId);
+	HealthInfo selectByHealthInfoId(String healthInfoId);
 
 	/**
 	 * 健康情報を登録する<br>

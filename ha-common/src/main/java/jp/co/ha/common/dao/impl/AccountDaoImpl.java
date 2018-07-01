@@ -17,6 +17,8 @@ import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.AppLoggerFactory;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 
@@ -26,11 +28,13 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class AccountDaoImpl implements AccountDao {
 
+	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account findByUserId(String userId) {
+	public Account selectByAccount(String userId) {
 
 		Account account = null;
 
@@ -57,6 +61,8 @@ public class AccountDaoImpl implements AccountDao {
 					account.setHealthInfoMaskFlag(row.getCell(6).getStringCellValue());						// 健康情報マスクフラグ
 					account.setUpdateDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));			// 更新日時
 					account.setRegDate(DateUtil.toDate(row.getCell(8).getStringCellValue()));				// 登録日時
+
+					logger.info(account);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -77,7 +83,8 @@ public class AccountDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void create(Account account) throws DuplicateKeyException {
-		// TODO 登録処理を追加すること
+
+		logger.info(account);
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);
@@ -116,8 +123,9 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void updateAccount(Account account) {
-		// TODO 更新処理を追加すること
+	public void update(Account account) {
+
+		logger.info(account);
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);
@@ -165,7 +173,7 @@ public class AccountDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void deleteAccount(String userId) {
+	public void delete(String userId) {
 		// TODO 削除処理を追加すること
 	}
 

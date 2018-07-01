@@ -4,6 +4,7 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,19 +48,22 @@ public class BeanUtil {
 		// コピー先のクラス型
 		Class<?> targetClass = target.getClass();
 		try {
-			for (Field targetField : targetClass.getDeclaredFields()) {
+			for (Field targetField : BeanUtil.getFieldList(targetClass)) {
 				if (ignore(ignoreList, targetField.getName())) {
 					continue;
 				}
 				PropertyDescriptor targetPd = new PropertyDescriptor(targetField.getName(), targetClass);
 
-				for (Field sourceField : dataClass.getDeclaredFields()) {
+				for (Field sourceField : BeanUtil.getFieldList(dataClass)) {
 					if (isCopyTarget(sourceField, targetField)) {
 						PropertyDescriptor sourcePd = new PropertyDescriptor(sourceField.getName(), dataClass);
-						// 値を取得(getter呼び出し)
-						Object value = sourcePd.getReadMethod().invoke(data);
-						// targetに値を設定(setter呼び出し)
-						targetPd.getWriteMethod().invoke(target, value);
+						// getter呼び出し
+						Method getter = sourcePd.getReadMethod();
+						// setter呼び出し
+						Method setter = targetPd.getWriteMethod();
+
+						// 値を設定
+						setter.invoke(target, getter.invoke(data));
 					}
 				}
 			}
@@ -83,7 +87,9 @@ public class BeanUtil {
 	 * </ul>
 	 *
 	 * @param ignoreList
+	 *            無視リスト
 	 * @param fieldName
+	 *            フィールド名
 	 * @return
 	 */
 	private static boolean ignore(List<String> ignoreList, String fieldName) {
@@ -140,8 +146,38 @@ public class BeanUtil {
 	 * @return
 	 */
 	public static Class<?> getParameterType(Class<?> clazz) {
+		return getParameterType(clazz, 0);
+	}
+
+	/**
+	 * パラメータ引数にしているクラス型を取得する<br>
+	 *
+	 * @param clazz
+	 *            対象クラス
+	 * @param position
+	 *            パラメータ引数の位置
+	 * @return
+	 */
+	public static Class<?> getParameterType(Class<?> clazz, int position) {
 		ParameterizedType paramType = (ParameterizedType) clazz.getGenericSuperclass();
-		return (Class<?>) paramType.getActualTypeArguments()[0];
+		return (Class<?>) paramType.getActualTypeArguments()[position];
+	}
+
+	/**
+	 * 指定したクラス型のフィールドをリストで返す<br>
+	 *
+	 * @param clazz
+	 *            クラス型
+	 * @return
+	 */
+	public static List<Field> getFieldList(Class<?> clazz) {
+		List<Field> fieldList = new ArrayList<Field>();
+		Class<?> tmpClass = clazz;
+		while (BeanUtil.notNull(tmpClass)) {
+			fieldList.addAll(List.of(tmpClass.getDeclaredFields()));
+			tmpClass = tmpClass.getSuperclass();
+		}
+		return fieldList;
 	}
 
 }

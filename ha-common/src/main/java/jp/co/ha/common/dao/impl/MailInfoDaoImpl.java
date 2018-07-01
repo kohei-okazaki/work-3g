@@ -19,6 +19,8 @@ import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.DBException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.AppLoggerFactory;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 
@@ -27,6 +29,8 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class MailInfoDaoImpl implements MailInfoDao {
+
+	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -55,6 +59,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 					mailInfo.setMailPassword(row.getCell(2).getStringCellValue());
 					mailInfo.setUpdateDate(DateUtil.toDate(row.getCell(3).getStringCellValue()));
 					mailInfo.setRegDate(DateUtil.toDate(row.getCell(4).getStringCellValue()));
+
+					logger.info(mailInfo);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -75,7 +81,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 	 */
 	@Override
 	public void updateMailInfo(MailInfo mailInfo) {
-		// TODO 更新処理を追加すること
+
+		logger.info(mailInfo);
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);
@@ -120,7 +127,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 	 */
 	@Override
 	public void create(MailInfo mailInfo) throws DuplicateKeyException {
-		// TODO 登録処理を追加すること
+
+		logger.info(mailInfo);
 
 		try (FileInputStream in = new FileInputStream(RESOURCES);
 				Workbook workbook = WorkbookFactory.create(in);

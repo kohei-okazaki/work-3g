@@ -64,7 +64,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
-		if (BeanUtil.isNull(account.getUserId())) {
+		if (BeanUtil.isNull(account)) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
 		}
 	}
@@ -105,9 +105,10 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
 		// 最後に登録した健康情報を取得する
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());
-		String userStatus = BeanUtil.notNull(lastHealthInfo)
-				? healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight())
-				: ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue();
+
+		String userStatus = BeanUtil.isNull(lastHealthInfo)
+				? ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue()
+				: healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight());
 		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();

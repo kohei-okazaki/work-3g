@@ -23,7 +23,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
 	 */
 	@Override
 	public Account findByUserId(String userId) {
-		return accountDao.findByUserId(userId);
+		return accountDao.selectByAccount(userId);
 	}
 
 }

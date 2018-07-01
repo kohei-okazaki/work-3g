@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import jp.co.ha.common.log.Ignore;
+import jp.co.ha.common.log.Mask;
+
 /**
  * 健康情報Entity<br>
  */
@@ -17,6 +20,7 @@ import javax.persistence.Table;
 public class HealthInfo implements Serializable {
 
 	/** シリアルバージョンUID */
+	@Ignore
 	private static final long serialVersionUID = 1L;
 
 	/** データID */
@@ -29,18 +33,22 @@ public class HealthInfo implements Serializable {
 	private String userId;
 
 	/** 身長 */
+	@Mask
 	@Column(name = "HEIGHT", nullable = false)
 	private BigDecimal height;
 
 	/** 体重 */
+	@Mask
 	@Column(name = "WEIGHT", nullable = false)
 	private BigDecimal weight;
 
 	/** BMI */
+	@Mask
 	@Column(name = "BMI", nullable = false)
 	private BigDecimal bmi;
 
 	/** 標準体重 */
+	@Mask
 	@Column(name = "STANDARD_WEIGHT", nullable = false)
 	private BigDecimal standardWeight;
 

@@ -12,7 +12,6 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.common.api.BaseRestController;
 import jp.co.ha.common.exception.HealthInfoException;
-import jp.co.ha.common.log.AppLogger;
 
 /**
  * 健康情報照会コントローラクラス<br>
@@ -38,8 +37,6 @@ public class HealthInfoReferenceController implements
 
 		HealthInfoReferenceResponse apiResponse = service.execute(apiRequest);
 
-		AppLogger logger = new AppLogger(this.getClass());
-		logger.info(apiResponse);
 		return apiResponse;
 	}
 

@@ -3,6 +3,7 @@ package jp.co.ha.api.request;
 import java.math.BigDecimal;
 
 import jp.co.ha.common.api.BaseRequest;
+import jp.co.ha.common.log.Mask;
 
 /**
  * 健康情報登録リクエストクラス<br>
@@ -13,8 +14,10 @@ public class HealthInfoRegistRequest extends BaseRequest {
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
+	@Mask
 	private BigDecimal height;
 	/** 体重 */
+	@Mask
 	private BigDecimal weight;
 
 	/**

@@ -20,6 +20,8 @@ import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.AppLoggerFactory;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 
@@ -29,11 +31,13 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoDaoImpl implements HealthInfoDao {
 
+	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findByUserId(String userId) {
+	public List<HealthInfo> selectByUserId(String userId) {
 
 		List<HealthInfo> healthInfoList = new ArrayList<HealthInfo>();
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
@@ -77,7 +81,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findByHealthInfoId(String healthInfoId) {
+	public HealthInfo selectByHealthInfoId(String healthInfoId) {
 
 		HealthInfo healthInfo = null;
 		try (Workbook workbook = WorkbookFactory.create(new File(RESOURCES))) {
@@ -100,7 +104,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 					healthInfo.setStandardWeight(new BigDecimal(row.getCell(5).getStringCellValue()));		// 標準体重
 					healthInfo.setUserStatus(row.getCell(6).getStringCellValue());							// ユーザステータス
 					healthInfo.setRegDate(DateUtil.toDate(row.getCell(7).getStringCellValue()));			// 登録日時
-
+					logger.info(healthInfo);
 				}
 			}
 		} catch (EncryptedDocumentException e) {
@@ -152,6 +156,8 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		logger.info(healthInfo);
 	}
 
 }
