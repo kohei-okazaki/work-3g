@@ -21,10 +21,8 @@ import jp.co.ha.common.log.AppLoggerFactory;
  *            レスポンスクラス
  * @param <S>
  *            サービスクラス
- * @param <E>
- *            例外クラス
  */
-public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs, E>, E extends BaseAppException> {
+public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
 
 	/**
 	 * GET通信の処理を行う<br>
@@ -50,7 +48,6 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 			apiResponse = (Rs) new ErrorResponse(e);
 			log.error(apiResponse);
 		}
-
 
 		return apiResponse;
 	}
@@ -86,10 +83,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param request
 	 *            リクエストクラス
 	 * @return response レスポンスクラス
-	 * @throws E
+	 * @throws BaseAppException
 	 *             例外クラス
 	 */
-	Rs execute(Rq request) throws E;
+	Rs execute(Rq request) throws BaseAppException;
 
 	/**
 	 * Requestクラスに変換する<br>
@@ -97,9 +94,9 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param request
 	 *            HttpServletRequest
 	 * @return apiRequest Rq
-	 * @throws E
+	 * @throws BaseAppException
 	 *             例外クラス
 	 */
-	Rq toRequest(HttpServletRequest request) throws E;
+	Rq toRequest(HttpServletRequest request) throws BaseAppException;
 
 }

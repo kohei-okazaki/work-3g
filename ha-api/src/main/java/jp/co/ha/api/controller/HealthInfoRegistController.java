@@ -13,6 +13,7 @@ import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.api.BaseRestController;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
 
@@ -23,7 +24,7 @@ import jp.co.ha.common.util.BeanUtil;
 @RestController
 @RequestMapping(value = "/healthInfoRegist", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 public class HealthInfoRegistController implements
-		BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse, HealthInfoRegistService, HealthInfoException> {
+		BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse, HealthInfoRegistService> {
 
 	/** 健康情報登録サービス */
 	@Autowired
@@ -33,7 +34,7 @@ public class HealthInfoRegistController implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse execute(HealthInfoRegistRequest apiRequest) throws HealthInfoException {
+	public HealthInfoRegistResponse execute(HealthInfoRegistRequest apiRequest) throws BaseAppException {
 
 		// リクエスト情報のチェック
 		service.checkRequest(apiRequest);
