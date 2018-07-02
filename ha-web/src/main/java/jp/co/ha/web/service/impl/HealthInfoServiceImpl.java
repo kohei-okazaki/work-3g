@@ -1,6 +1,7 @@
 package jp.co.ha.web.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import jp.co.ha.business.parameter.SubKey;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 
@@ -94,6 +96,18 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		return entityList.stream()
 						.map(entity -> entity.getHealthInfoId())
 						.anyMatch(entityDataId -> entityDataId.equals(dataId));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo) {
+		List<HealthInfoCsvDownloadModel> modelList = new ArrayList<HealthInfoCsvDownloadModel>();
+		HealthInfoCsvDownloadModel model = new HealthInfoCsvDownloadModel();
+		BeanUtil.copy(healthInfo, model);
+		modelList.add(model);
+		return modelList;
 	}
 
 }

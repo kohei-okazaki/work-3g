@@ -3,6 +3,7 @@ package jp.co.ha.web.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 
@@ -89,6 +91,32 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 			resultList.add(response);
 		});
 		return resultList;
+	}
+
+
+	/**
+	 * 結果照会CSVモデルリストに変換する
+	 *
+	 * @param userId
+	 *            ユーザID
+	 * @param resultList
+	 *            List<HealthInfoReferenceResponse>
+	 * @return modelList
+	 */
+	@Override
+	public List<ReferenceCsvModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
+
+		List<ReferenceCsvModel> modelList = new ArrayList<ReferenceCsvModel>();
+		Stream.iterate(0, i -> ++i).limit(resultList.size()).forEach(i -> {
+			ReferenceCsvModel model = new ReferenceCsvModel();
+			HealthInfoReferenceResponse healthInfo = resultList.get(i);
+			BeanUtil.copy(healthInfo, model);
+			model.setUserId(userId);
+			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			modelList.add(model);
+		});
+
+		return modelList;
 	}
 
 }

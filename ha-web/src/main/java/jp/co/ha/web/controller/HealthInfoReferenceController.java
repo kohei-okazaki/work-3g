@@ -1,15 +1,18 @@
 package jp.co.ha.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +23,20 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
+import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 import jp.co.ha.web.service.annotation.ReferenceDownloadCsv;
@@ -45,7 +54,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** 結果照会画面サービス */
 	@Autowired
 	private HealthInfoReferenceService service;
-
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
 	@ReferenceDownloadExcel
@@ -53,10 +61,13 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
 	@ReferenceDownloadCsv
-	private CsvDownloadService csvDownloadService;
+	private CsvDownloadService<ReferenceCsvModel> csvDownloadService;
 	/** セッション管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
+	/** アカウント検索サービス */
+	@Autowired
+	private AccountSearchService accountSearchService;
 
 	/**
 	 * Validateを設定<br>
@@ -161,9 +172,33 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *            HttpServletRequest
 	 * @param response
 	 *            HttpServletResponse
+	 * @throws HealthInfoException
+	 *             健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-reference-csvDownload")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response) {
-		csvDownloadService.execute(request, response);
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws HealthInfoException {
+
+		// sessionから検索結果リストとユーザIDを取得
+		HttpSession session = request.getSession();
+		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
+		String userId = sessionService.getValue(session, "userId", String.class);
+
+		// CSV出力モデルリストに変換する
+		List<ReferenceCsvModel> modelList = service.toModelList(userId, resultList);
+
+		// CSV設定情報取得
+		Account account = accountSearchService.findByUserId(userId);
+		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue(), account);
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
+		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
+		conf.setHasEnclosure(true);
+
+		try {
+			csvDownloadService.execute(response.getWriter(), conf, modelList);
+		} catch (AppIOException e) {
+			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+		} catch (IOException e) {
+			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+		}
 	}
 }

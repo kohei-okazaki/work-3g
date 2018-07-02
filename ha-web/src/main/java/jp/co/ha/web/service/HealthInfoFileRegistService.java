@@ -10,7 +10,7 @@ import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
  * 健康情報ファイル入力画面サービス
  *
  */
-public interface HealthInfoFileInputService {
+public interface HealthInfoFileRegistService {
 
 	/**
 	 * 健康情報CSVアップロードモデルリストから健康情報APIリクエストのリストに変換する<br>

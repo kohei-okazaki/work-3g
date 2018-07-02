@@ -1,5 +1,8 @@
 package jp.co.ha.web.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +24,21 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWizardController;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 import jp.co.ha.web.service.annotation.HealthInfoDownloadCsv;
@@ -58,10 +68,13 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/** 健康情報CSVダウンロードサービス */
 	@Autowired
 	@HealthInfoDownloadCsv
-	private CsvDownloadService csvDownloadService;
+	private CsvDownloadService<HealthInfoCsvDownloadModel> csvDownloadService;
 	/** セッション管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
+	/** アカウント検索サービス */
+	@Autowired
+	private AccountSearchService accountSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -175,8 +188,10 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *            HttpServletRequest
 	 * @param response
 	 *            HttpServletResponse
-	 * @return
+	 * @param form
+	 *            健康情報フォーム
 	 * @throws HealthInfoException
+	 *             健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-csvDownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
@@ -189,7 +204,20 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
-		csvDownloadService.execute(request, response);
+		Account account = accountSearchService.findByUserId(userId);
+		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), account);
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
+		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
+
+		List<HealthInfoCsvDownloadModel> modelList = healthInfoService.toModelList(healthInfoSearchService.findLastByUserId(userId));
+
+		try {
+			csvDownloadService.execute(response.getWriter(), conf, modelList);
+		} catch (AppIOException e) {
+			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+		} catch (IOException e) {
+			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+		}
 	}
 
 }

@@ -1,6 +1,6 @@
 package jp.co.ha.web.file.csv.writer;
 
-import java.util.List;
+import java.io.PrintWriter;
 import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
@@ -16,16 +16,28 @@ import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
  */
 public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 
+//	/**
+//	 * コンストラクタ<br>
+//	 *
+//	 * @param conf
+//	 *            CSV設定情報
+//	 * @param modelList
+//	 *            CSVモデルリスト
+//	 */
+//	public ReferenceCsvWriter(CsvConfig conf, List<ReferenceCsvModel> modelList) {
+//		super(conf, modelList);
+//	}
+
 	/**
 	 * コンストラクタ<br>
 	 *
 	 * @param conf
 	 *            CSV設定情報
-	 * @param modelList
-	 *            CSVモデルリスト
+	 * @param printWriter
+	 *            出力用PrintWriter
 	 */
-	public ReferenceCsvWriter(CsvConfig conf, List<ReferenceCsvModel> modelList) {
-		super(conf, modelList);
+	public ReferenceCsvWriter(CsvConfig conf, PrintWriter printWriter) {
+		super(conf, printWriter);
 	}
 
 	/**

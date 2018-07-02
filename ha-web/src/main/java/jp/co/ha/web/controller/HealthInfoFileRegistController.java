@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.service.HealthInfoRegistService;
@@ -23,25 +22,25 @@ import jp.co.ha.common.file.csv.service.CsvUploadService;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
 import jp.co.ha.web.form.HealthInfoFileForm;
-import jp.co.ha.web.service.HealthInfoFileInputService;
+import jp.co.ha.web.service.HealthInfoFileRegistService;
 import jp.co.ha.web.service.annotation.HealthInfoUploadCsv;
 import jp.co.ha.web.validator.HealthInfoFileInputValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康情報ファイル画面コントローラ<br>
+ * 健康情報ファイル登録画面コントローラ<br>
  *
  */
 @Controller
-public class HealthInfoFileInputController implements BaseWizardController<HealthInfoFileForm> {
+public class HealthInfoFileRegistController implements BaseWizardController<HealthInfoFileForm> {
 
 	/** 健康情報CSVアップロードサービス */
 	@Autowired
 	@HealthInfoUploadCsv
 	private CsvUploadService<HealthInfoUploadModel> csvUploadService;
-	/** 健康情報ファイル画面サービス */
+	/** 健康情報ファイル登録画面サービス */
 	@Autowired
-	private HealthInfoFileInputService fileService;
+	private HealthInfoFileRegistService fileService;
 	/** 健康情報登録サービス */
 	@Autowired
 	private HealthInfoRegistService healthInfoRegistService;
@@ -86,8 +85,8 @@ public class HealthInfoFileInputController implements BaseWizardController<Healt
 			// validationエラーの場合
 			return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 		}
-		MultipartFile file = form.getMultipartFile();
-		List<HealthInfoUploadModel> modelList = csvUploadService.execute(file);
+
+		List<HealthInfoUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
 		fileService.formatCheck(modelList);
 		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);
 		for (HealthInfoRegistRequest request : reqList) {

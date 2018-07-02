@@ -1,10 +1,12 @@
 package jp.co.ha.common.file.csv.service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.util.List;
 
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.file.csv.CsvConfig;
+import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
 import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
@@ -12,18 +14,24 @@ import jp.co.ha.common.util.StringUtil;
 /**
  * CSVダウンロードサービスインターフェース<br>
  *
+ * @param <T>
+ *            CSVモデル
  */
-public interface CsvDownloadService {
+public interface CsvDownloadService<T extends BaseCsvModel> {
 
 	/**
-	 * メイン処理
+	 * メイン処理<br>
 	 *
-	 * @param request
-	 *            HttpServletRequest
-	 * @param response
-	 *            HttpServletResponse
+	 * @param printWriter
+	 *            出力用Writer
+	 * @param conf
+	 *            CSV設定情報
+	 * @param modelList
+	 *            モデルリスト
+	 * @throws AppIOException
+	 *             例外
 	 */
-	void execute(HttpServletRequest request, HttpServletResponse response);
+	void execute(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws AppIOException;
 
 	/**
 	 * CSV設定情報を取得する<br>

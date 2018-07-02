@@ -1,6 +1,6 @@
 package jp.co.ha.web.file.csv.writer;
 
-import java.util.List;
+import java.io.PrintWriter;
 import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
@@ -16,16 +16,28 @@ import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
  */
 public class HealthInfoCsvWriter extends BaseCsvWriter<HealthInfoCsvDownloadModel> {
 
+//	/**
+//	 * コンストラクタ<br>
+//	 *
+//	 * @param conf
+//	 *            CSV設定情報
+//	 * @param modelList
+//	 *            モデルリスト
+//	 */
+//	public HealthInfoCsvWriter(CsvConfig conf, List<HealthInfoCsvDownloadModel> modelList) {
+//		super(conf, modelList);
+//	}
+
 	/**
 	 * コンストラクタ<br>
 	 *
 	 * @param conf
 	 *            CSV設定情報
-	 * @param modelList
-	 *            モデルリスト
+	 * @param printWriter
+	 *            出力用PrintWriter
 	 */
-	public HealthInfoCsvWriter(CsvConfig conf, List<HealthInfoCsvDownloadModel> modelList) {
-		super(conf, modelList);
+	public HealthInfoCsvWriter(CsvConfig conf, PrintWriter printWriter) {
+		super(conf, printWriter);
 	}
 
 	/**

@@ -1,17 +1,11 @@
 package jp.co.ha.common.file.csv.writer;
 
-import java.io.IOException;
+import java.io.Closeable;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.util.MimeTypeUtils;
-
-import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
@@ -24,7 +18,7 @@ import jp.co.ha.common.util.StringUtil;
  * @param <M>
  *            CSV出力モデル
  */
-public abstract class BaseCsvWriter<M extends BaseCsvModel> {
+public abstract class BaseCsvWriter<M extends BaseCsvModel> implements Closeable {
 
 	/** シングルクォート */
 	public static final String SINGLE_QUOTE = "\'";
@@ -33,68 +27,54 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> {
 
 	/** CSV設定情報 */
 	protected CsvConfig conf;
-	/** モデルリスト */
-	protected List<M> modelList;
+	/** 出力用PrintWriter */
+	protected PrintWriter printWriter;
 
 	/**
 	 * コンストラクタ<br>
 	 *
 	 * @param conf
 	 *            CSV設定情報
-	 * @param modelList
-	 *            モデルリスト
+	 * @param printWriter
+	 *            writer
 	 */
-	public BaseCsvWriter(CsvConfig conf, List<M> modelList) {
+	public BaseCsvWriter(CsvConfig conf, PrintWriter printWriter) {
 		this.conf = conf;
-		this.modelList = modelList;
+		this.printWriter = printWriter;
 	}
 
 	/**
 	 * メイン処理を実施<br>
 	 *
-	 * @param response
-	 *            HttpServletResponse
+	 * @param modelList
+	 *            モデルリスト
 	 */
-	public void execute(HttpServletResponse response) {
-
-		// 初期化処理
-		this.init(response);
-
-		try (PrintWriter writer = response.getWriter()) {
-			StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
-
-			if (this.conf.hasHeader()) {
-				// ヘッダを書込
-				writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
-			}
-
-			// データを書込
-			modelList.stream().forEach(model -> writeData(recordJoiner, model));
-
-			if (this.conf.hasFooter()) {
-				// フッタを書込
-				writeFooter(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
-			}
-
-			writer.print(recordJoiner.toString());
-
-		} catch (AppIOException e) {
-			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
-		} catch (IOException e) {
-			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+	public void execute(List<M> modelList) {
+		StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
+		if (this.conf.hasHeader()) {
+			// ヘッダを書込
+			writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
 		}
-
+		// データを書込
+		modelList.stream().forEach(model -> writeData(recordJoiner, model));
+		if (this.conf.hasFooter()) {
+			// フッタを書込
+			writeFooter(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+		}
+		printWriter.print(recordJoiner.toString());
 	}
 
-	/**
-	 * 初期処理<br>
-	 *
-	 * @param response
-	 *            HttpServletResponse
-	 */
-	private void init(HttpServletResponse response) {
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
-		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
+	@Override
+	public void close() {
+		if (BeanUtil.notNull(printWriter)) {
+			printWriter.close();
+		}
+	}
+
+	public void flush() {
+		if (BeanUtil.notNull(printWriter)) {
+			printWriter.flush();
+		}
 	}
 
 	/**

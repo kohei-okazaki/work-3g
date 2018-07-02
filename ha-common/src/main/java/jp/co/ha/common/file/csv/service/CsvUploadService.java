@@ -11,7 +11,7 @@ import jp.co.ha.common.file.csv.model.BaseCsvModel;
  * CSVアップロードサービスインターフェース<br>
  *
  * @param <T>
- *            CSVモデル継承クラス
+ *            CSVモデル
  */
 public interface CsvUploadService<T extends BaseCsvModel> {
 
@@ -20,7 +20,7 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 *
 	 * @param uploadFile
 	 *            アップロードファイル
-	 * @return T CSVアップロードモデル
+	 * @return T CSVアップロードモデルリスト
 	 * @throws BaseAppException
 	 *             アプリ例外
 	 */
