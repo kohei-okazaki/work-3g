@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
@@ -153,9 +152,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws HealthInfoException
 	 */
 	@GetMapping(value = "/healthInfo-reference-excelDownload.html")
-	public ModelAndView excelDownload(HttpServletRequest request
-			, @SessionAttribute @Nullable List<HealthInfoReferenceResponse> resultList) throws HealthInfoException {
+	public ModelAndView excelDownload(HttpServletRequest request) throws HealthInfoException {
 
+		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class);
 		if (BeanUtil.isNull(resultList) || resultList.isEmpty()) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
