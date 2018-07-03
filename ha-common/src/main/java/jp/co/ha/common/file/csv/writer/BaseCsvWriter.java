@@ -15,10 +15,10 @@ import jp.co.ha.common.util.StringUtil;
 /**
  * CSV書き込み基底クラス<br>
  *
- * @param <M>
- *            CSV出力モデル
+ * @param <T>
+ *            CSVモデル
  */
-public abstract class BaseCsvWriter<M extends BaseCsvModel> implements Closeable {
+public abstract class BaseCsvWriter<T extends BaseCsvModel> implements Closeable {
 
 	/** シングルクォート */
 	public static final String SINGLE_QUOTE = "\'";
@@ -49,17 +49,17 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> implements Closeable
 	 * @param modelList
 	 *            モデルリスト
 	 */
-	public void execute(List<M> modelList) {
+	public void execute(List<T> modelList) {
 		StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
 		if (this.conf.hasHeader()) {
 			// ヘッダを書込
-			writeHeader(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			writeHeader(recordJoiner, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
 		// データを書込
 		modelList.stream().forEach(model -> writeData(recordJoiner, model));
 		if (this.conf.hasFooter()) {
 			// フッタを書込
-			writeFooter(recordJoiner, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			writeFooter(recordJoiner, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
 		printWriter.print(recordJoiner.toString());
 	}
@@ -98,7 +98,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> implements Closeable
 	 * @param clazz
 	 *            CSVモデルクラス型
 	 */
-	protected void writeHeader(StringJoiner recordJoiner, Class<M> clazz) {
+	protected void writeHeader(StringJoiner recordJoiner, Class<T> clazz) {
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
 		getHeaderList(clazz).stream().forEach(headerName -> write(joiner, headerName));
 		recordJoiner.add(joiner.toString());
@@ -112,7 +112,7 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> implements Closeable
 	 * @param clazz
 	 *            CSVモデルクラス型
 	 */
-	protected void writeFooter(StringJoiner recordJoiner, Class<M> clazz) {
+	protected void writeFooter(StringJoiner recordJoiner, Class<T> clazz) {
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
 		getFooterList(clazz).stream().forEach(footerName -> write(joiner, footerName));
 		recordJoiner.add(joiner.toString());
@@ -124,9 +124,9 @@ public abstract class BaseCsvWriter<M extends BaseCsvModel> implements Closeable
 	 * @param recordJoiner
 	 *            StringJoiner
 	 * @param model
-	 *            M CSV出力モデル
+	 *            T CSV出力モデル
 	 */
-	protected abstract void writeData(StringJoiner recordJoiner, M model);
+	protected abstract void writeData(StringJoiner recordJoiner, T model);
 
 	/**
 	 * ヘッダ名を取得する<br>
