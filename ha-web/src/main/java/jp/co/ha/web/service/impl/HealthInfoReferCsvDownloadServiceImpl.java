@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
-import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
+import jp.co.ha.common.file.csv.writer.CsvWriter;
 import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 
@@ -25,7 +25,7 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 	 */
 	@Override
 	public void execute(PrintWriter printWriter, CsvConfig conf, List<ReferenceCsvModel> modelList) throws AppIOException {
-		try (BaseCsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf, printWriter)) {
+		try (CsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf, printWriter)) {
 			// CSVに書込
 			writer.execute(modelList);
 			writer.flush();

@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
-import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
+import jp.co.ha.common.file.csv.writer.CsvWriter;
 import jp.co.ha.common.util.DateFormatDefine;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -14,7 +14,7 @@ import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
  * 結果照会CSVWriterクラス<br>
  *
  */
-public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
+public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvModel> {
 
 //	/**
 //	 * コンストラクタ<br>

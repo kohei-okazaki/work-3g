@@ -13,12 +13,12 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * CSV書き込み基底クラス<br>
+ * CSV書込クラス<br>
  *
  * @param <T>
  *            CSVモデル
  */
-public abstract class BaseCsvWriter<T extends BaseCsvModel> implements Closeable {
+public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 
 	/** シングルクォート */
 	public static final String SINGLE_QUOTE = "\'";
@@ -38,7 +38,7 @@ public abstract class BaseCsvWriter<T extends BaseCsvModel> implements Closeable
 	 * @param printWriter
 	 *            writer
 	 */
-	public BaseCsvWriter(CsvConfig conf, PrintWriter printWriter) {
+	public CsvWriter(CsvConfig conf, PrintWriter printWriter) {
 		this.conf = conf;
 		this.printWriter = printWriter;
 	}

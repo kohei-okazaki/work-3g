@@ -7,7 +7,7 @@ import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
-import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
+import jp.co.ha.common.file.csv.writer.CsvWriter;
 import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
 
@@ -46,7 +46,7 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 
 		CsvConfig csvConfig = new CsvConfig();
 		csvConfig.setFileName(fileName);
-		csvConfig.setEnclosureChar(BaseCsvWriter.DOBBLE_QUOTE);
+		csvConfig.setEnclosureChar(CsvWriter.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(account.getFileEnclosureCharFlag()));
 		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;
