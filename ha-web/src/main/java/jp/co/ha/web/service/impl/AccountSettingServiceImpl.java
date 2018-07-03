@@ -51,7 +51,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
 		// メール情報を検索し、マージする
 		MailInfo befMailInfo = mailInfoSearchService.findByUserId(form.getUserId());
-		mergeMailInfo(befMailInfo, form);
+		if (BeanUtil.notNull(befMailInfo)) {
+			mergeMailInfo(befMailInfo, form);
+		}
 
 		if (BeanUtil.isNull(befMailInfo.getUserId())) {
 			// メール情報が登録されてない場合

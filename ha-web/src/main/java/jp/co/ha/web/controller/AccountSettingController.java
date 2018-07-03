@@ -80,7 +80,10 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
 		BeanUtil.copy(account, accountSettingForm);
-		BeanUtil.copy(mailInfo, accountSettingForm, List.of("userId"));
+		if (BeanUtil.notNull(mailInfo)) {
+			BeanUtil.copy(mailInfo, accountSettingForm, List.of("userId"));
+		}
+
 		return accountSettingForm;
 	}
 
