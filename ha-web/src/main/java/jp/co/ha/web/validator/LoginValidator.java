@@ -1,7 +1,5 @@
 package jp.co.ha.web.validator;
 
-import java.util.Date;
-
 import org.springframework.validation.Errors;
 
 import jp.co.ha.business.find.AccountSearchService;
@@ -88,7 +86,6 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	 * @param account
 	 */
 	private void checkAccountExpired(Errors errors, Account account) {
-		Date d = account.getPasswordExpire();
 		if (DateUtil.isBefore(account.getPasswordExpire())) {
 			errors.rejectValue("userId", "validate.message.invalidPassword");
 		}

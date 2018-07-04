@@ -45,17 +45,17 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	@Override
 	public void execute(AccountSettingForm form) {
 
-		// アカウント情報を検索し、マージする
+		// アカウント情報を検索し、アカウント情報にフォームをマージする
 		Account befAccount = accountSearchService.findByUserId(form.getUserId());
 		mergeAccount(befAccount, form);
 
-		// メール情報を検索し、マージする
+		// メール情報を検索し、メール情報にフォームをマージする
 		MailInfo befMailInfo = mailInfoSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(befMailInfo)) {
 			mergeMailInfo(befMailInfo, form);
 		}
 
-		if (BeanUtil.isNull(befMailInfo.getUserId())) {
+		if (BeanUtil.isNull(befMailInfo)) {
 			// メール情報が登録されてない場合
 			MailInfo mailInfo = convertMailInfo(form);
 			// メール情報を新規登録する
@@ -72,9 +72,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * 更新処理を行う<br>
 	 *
 	 * @param account
-	 *            Account
+	 *            アカウント情報
 	 * @param mainlInfo
-	 *            MailInfo
+	 *            メール情報
 	 */
 	private void update(Account account, MailInfo mailInfo) {
 
@@ -89,9 +89,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * フォーム情報をアカウント情報にマージする<br>
 	 *
 	 * @param account
-	 *            Account
+	 *            アカウント情報
 	 * @param form
-	 *            AccountSettingForm
+	 *            アカウント設定情報フォーム
 	 * @return
 	 */
 	private void mergeAccount(Account account, AccountSettingForm form) {
@@ -102,7 +102,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * フォーム情報をメール情報に変換する<br>
 	 *
 	 * @param form
-	 *            AccountSettingForm
+	 *            アカウント設定情報フォーム
 	 * @return
 	 */
 	private MailInfo convertMailInfo(AccountSettingForm form) {
@@ -117,9 +117,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * フォーム情報をメール情報にマージする<br>
 	 *
 	 * @param mailInfo
-	 *            MailInfo
+	 *            メール情報
 	 * @param form
-	 *            AccountSettingForm
+	 *            アカウント設定情報フォーム
 	 * @return
 	 */
 	private void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
