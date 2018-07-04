@@ -1,7 +1,5 @@
 package jp.co.ha.common.log;
 
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,8 +8,11 @@ import java.util.StringJoiner;
 
 import org.slf4j.Logger;
 
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.util.AccessorType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -24,6 +25,12 @@ public class AppLogger {
 	/** ロガー */
 	private Logger logger;
 
+	/**
+	 * コンストラクタ<br>
+	 *
+	 * @param logger
+	 *            ロガー
+	 */
 	AppLogger(Logger logger) {
 		this.logger = logger;
 	}
@@ -111,17 +118,14 @@ public class AppLogger {
 		Class<?> clazz = bean.getClass();
 		Object value = null;
 		try {
-			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
-			Method getter = pd.getReadMethod();
+			Method getter = BeanUtil.getAccessor(fieldName, clazz, AccessorType.GETTER);
 			value = getter.invoke(bean);
 		} catch (IllegalAccessException e) {
-			logger.error("不正アクセスです", e);
-		} catch (IntrospectionException e) {
-			logger.error("項目が不正です", e);
+			logger.error("不正アクセスです" + fieldName, e);
 		} catch (IllegalArgumentException e) {
-			logger.error("不正な引数です", e);
+			logger.error("不正な引数です" + fieldName, e);
 		} catch (InvocationTargetException e) {
-			logger.error("項目が不正です", e);
+			logger.error("項目が不正です" + fieldName, e);
 		}
 
 		return value;
@@ -139,7 +143,7 @@ public class AppLogger {
 		if (BeanUtil.isNull(value)) {
 			strValue = StringUtil.EMPTY;
 		} else if (value instanceof Date) {
-			strValue = DateUtil.toString((Date) value, DateFormatDefine.YYYYMMDD_HHMMSS);
+			strValue = DateUtil.toString((Date) value, DateFormatPattern.YYYYMMDD_HHMMSS);
 		} else {
 			strValue = value.toString();
 		}

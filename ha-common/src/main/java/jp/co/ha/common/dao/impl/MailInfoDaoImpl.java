@@ -21,7 +21,7 @@ import jp.co.ha.common.exception.DBException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.AppLoggerFactory;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -100,8 +100,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 					row.getCell(0).setCellValue(mailInfo.getUserId());
 					row.getCell(1).setCellValue(mailInfo.getMailAddress());
 					row.getCell(2).setCellValue(mailInfo.getMailPassword());
-					row.getCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
-					row.getCell(4).setCellValue(DateUtil.toString(mailInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+					row.getCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+					row.getCell(4).setCellValue(DateUtil.toString(mailInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
 				}
 			}
@@ -140,8 +140,8 @@ public class MailInfoDaoImpl implements MailInfoDao {
 			newRow.createCell(0).setCellValue(mailInfo.getUserId());
 			newRow.createCell(1).setCellValue(mailInfo.getMailAddress());
 			newRow.createCell(2).setCellValue(mailInfo.getMailPassword());
-			newRow.createCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
-			newRow.createCell(4).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			newRow.createCell(3).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+			newRow.createCell(4).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
 			fos.flush();
 			workbook.write(fos);

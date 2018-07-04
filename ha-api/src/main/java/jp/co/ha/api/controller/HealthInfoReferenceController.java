@@ -11,7 +11,7 @@ import jp.co.ha.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.common.api.BaseRestController;
-import jp.co.ha.common.exception.HealthInfoException;
+import jp.co.ha.common.exception.BaseAppException;
 
 /**
  * 健康情報照会コントローラクラス<br>
@@ -20,7 +20,7 @@ import jp.co.ha.common.exception.HealthInfoException;
 @RestController
 @RequestMapping(value = "/healthInfoReference", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 public class HealthInfoReferenceController implements
-		BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse, HealthInfoReferenceService, HealthInfoException> {
+		BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse, HealthInfoReferenceService> {
 
 	/** 健康情報照会サービス */
 	@Autowired
@@ -30,7 +30,7 @@ public class HealthInfoReferenceController implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest apiRequest) throws HealthInfoException {
+	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest apiRequest) throws BaseAppException {
 
 		// リクエスト情報のチェック
 		service.checkRequest(apiRequest);
@@ -44,7 +44,7 @@ public class HealthInfoReferenceController implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceRequest toRequest(HttpServletRequest request) throws HealthInfoException {
+	public HealthInfoReferenceRequest toRequest(HttpServletRequest request) throws BaseAppException {
 
 		HealthInfoReferenceRequest apiRequest = new HealthInfoReferenceRequest();
 		apiRequest.setRequestId(request.getParameter("requestId"));

@@ -20,7 +20,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -132,7 +132,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
 		HealthInfoRegistResponse response = new HealthInfoRegistResponse();
 		BeanUtil.copy(healthInfo, response);
-		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
 		return response;
 	}

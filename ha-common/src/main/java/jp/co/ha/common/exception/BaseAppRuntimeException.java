@@ -11,8 +11,8 @@ public abstract class BaseAppRuntimeException extends RuntimeException {
 
 	/** エラーコード */
 	private ErrorCode errorCode;
-	/** エラーメッセージ */
-	protected String errorMessage;
+	/** 詳細 */
+	private String detail;
 
 	/**
 	 * コンストラクタ<br>
@@ -22,9 +22,9 @@ public abstract class BaseAppRuntimeException extends RuntimeException {
 	 * @param detail
 	 *            詳細
 	 */
-	public BaseAppRuntimeException(ErrorCode errorCode, String errorMessage) {
+	public BaseAppRuntimeException(ErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;
-		this.errorMessage = errorMessage;
+		this.detail = detail;
 	}
 
 	/**
@@ -37,12 +37,12 @@ public abstract class BaseAppRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * errorMessageを返す
+	 * detailを返す<br>
 	 *
-	 * @return errorMessage エラーメッセージ
+	 * @return detail 詳細
 	 */
-	public String getErrorMessage() {
-		return errorMessage;
+	public String getDetail() {
+		return detail;
 	}
 
 }

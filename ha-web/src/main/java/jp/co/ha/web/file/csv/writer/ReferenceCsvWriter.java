@@ -1,11 +1,11 @@
 package jp.co.ha.web.file.csv.writer;
 
-import java.util.List;
+import java.io.PrintWriter;
 import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
-import jp.co.ha.common.file.csv.writer.BaseCsvWriter;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.file.csv.writer.CsvWriter;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
@@ -14,18 +14,30 @@ import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
  * 結果照会CSVWriterクラス<br>
  *
  */
-public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
+public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvModel> {
+
+//	/**
+//	 * コンストラクタ<br>
+//	 *
+//	 * @param conf
+//	 *            CSV設定情報
+//	 * @param modelList
+//	 *            CSVモデルリスト
+//	 */
+//	public ReferenceCsvWriter(CsvConfig conf, List<ReferenceCsvModel> modelList) {
+//		super(conf, modelList);
+//	}
 
 	/**
 	 * コンストラクタ<br>
 	 *
 	 * @param conf
 	 *            CSV設定情報
-	 * @param modelList
-	 *            CSVモデルリスト
+	 * @param printWriter
+	 *            出力用PrintWriter
 	 */
-	public ReferenceCsvWriter(CsvConfig conf, List<ReferenceCsvModel> modelList) {
-		super(conf, modelList);
+	public ReferenceCsvWriter(CsvConfig conf, PrintWriter printWriter) {
+		super(conf, printWriter);
 	}
 
 	/**
@@ -48,7 +60,7 @@ public class ReferenceCsvWriter extends BaseCsvWriter<ReferenceCsvModel> {
 		// 標準体重
 		write(joiner, model.getStandardWeight().toString());
 		// 登録日時
-		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
 		// 1行書き込む
 		recordJoiner.add(joiner.toString());

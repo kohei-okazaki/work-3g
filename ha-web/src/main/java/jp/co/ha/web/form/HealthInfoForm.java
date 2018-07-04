@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -14,6 +16,7 @@ import jp.co.ha.common.web.BaseForm;
 public class HealthInfoForm implements BaseForm {
 
 	/** シリアルバージョンUID */
+	@Ignore
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
@@ -21,16 +24,20 @@ public class HealthInfoForm implements BaseForm {
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
+	@Mask
 	@DecimalMin(value = "1", message = "身長が桁数不足です")
 	@DecimalMax(value = "999", message = "身長が桁数超過です")
 	private BigDecimal height;
 	/** 体重 */
+	@Mask
 	@DecimalMin(value = "1", message = "体重が桁数不足です")
 	@DecimalMax(value = "999", message = "体重が桁数超過です")
 	private BigDecimal weight;
 	/** BMI */
+	@Mask
 	private BigDecimal bmi;
 	/** 標準体重 */
+	@Mask
 	private BigDecimal standardWeight;
 
 	/**

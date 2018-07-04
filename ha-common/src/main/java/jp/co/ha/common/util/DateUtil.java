@@ -37,7 +37,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Date toDate(String target) {
-		return DateUtil.toDate(target, DateFormatDefine.YYYYMMDD_HHMMSS);
+		return DateUtil.toDate(target, DateFormatPattern.YYYYMMDD_HHMMSS);
 	}
 
 	/**
@@ -45,14 +45,14 @@ public class DateUtil {
 	 *
 	 * @param target
 	 *            対象日付
-	 * @param dateFormatDefine
-	 *            Dateフォーマット
+	 * @param format
+	 *            フォーマット
 	 * @return
 	 */
-	public static Date toDate(String target, DateFormatDefine dateFormatDefine) {
+	public static Date toDate(String target, DateFormatPattern format) {
 
 		// フォーマットを設定
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFormatDefine.getValue());
+		SimpleDateFormat sdf = new SimpleDateFormat(format.getValue());
 		Date result = null;
 		try {
 			// Date型に変換
@@ -122,7 +122,7 @@ public class DateUtil {
 	 *            Dateフォーマット
 	 * @return
 	 */
-	public static String toString(Date targetDate, DateFormatDefine format) {
+	public static String toString(Date targetDate, DateFormatPattern format) {
 
 		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
@@ -140,7 +140,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Date toStartDate(Date targetDate) {
-		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatDefine.YYYYMMDD.getValue() + " 00:00:00");
+		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatPattern.YYYYMMDD.getValue() + " 00:00:00");
 		String result = sdf.format(targetDate);
 		return toDate(result);
 	}
@@ -154,12 +154,12 @@ public class DateUtil {
 	 *            対象日
 	 * @return
 	 */
-	public static boolean isSamaDate(Date target1, Date target2) {
+	public static boolean isSameDate(Date target1, Date target2) {
 		return target1.compareTo(target2) == 0;
 	}
 
 	/**
-	 * 比較対象日が開始日 < 比較対象日 < endDateかどうかを返す<br>
+	 * 比較対象日がstartDate < target < endDateかどうかを返す<br>
 	 *
 	 * @param startDate
 	 *            開始日
@@ -171,5 +171,24 @@ public class DateUtil {
 	 */
 	public static boolean isBetWeenDate(Date startDate, Date target, Date endDate) {
 		return startDate.before(target) && endDate.after(target);
+	}
+
+	/**
+	 * targetDateがシステム日付を超過しているかどうか判定する<br>
+	 * @param target
+	 * @return
+	 */
+	public static boolean isAfter(Date target) {
+		// システム日付
+		Date sysDate = getSysDate();
+		boolean b = sysDate.before(target);
+		return sysDate.after(target);
+	}
+
+	public static boolean isBefore(Date target) {
+		// システム日付
+		Date sysDate = getSysDate();
+		boolean b = sysDate.after(target);
+		return sysDate.after(target);
 	}
 }

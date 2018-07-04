@@ -3,6 +3,7 @@ package jp.co.ha.web.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,14 +12,15 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 
 /**
- *  健康情報照会画面サービスインターフェース実装クラス<br>
+ * 健康情報照会画面サービスインターフェース実装クラス<br>
  *
  */
 @Service
@@ -50,7 +52,12 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 			}
 		} else {
-			resultList = List.of(healthInfoSearchService.findByHealthInfoId(form.getHealthInfoId()));
+			HealthInfo entity = healthInfoSearchService.findByHealthInfoId(form.getHealthInfoId());
+			if (BeanUtil.isNull(entity)) {
+				resultList = new ArrayList<>();
+			} else {
+				resultList = List.of(entity);
+			}
 		}
 
 		return resultList;
@@ -65,7 +72,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 */
 	private Date editStrDate(String date) {
 		String strDate = date.replace(StringUtil.HYPHEN, StringUtil.THRASH);
-		return DateUtil.toDate(strDate, DateFormatDefine.YYYYMMDD);
+		return DateUtil.toDate(strDate, DateFormatPattern.YYYYMMDD);
 	}
 
 	/**
@@ -80,10 +87,36 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		entityList.stream().forEach(entity -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(entity, response);
-			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 			resultList.add(response);
 		});
 		return resultList;
+	}
+
+
+	/**
+	 * 結果照会CSVモデルリストに変換する
+	 *
+	 * @param userId
+	 *            ユーザID
+	 * @param resultList
+	 *            List<HealthInfoReferenceResponse>
+	 * @return modelList
+	 */
+	@Override
+	public List<ReferenceCsvModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
+
+		List<ReferenceCsvModel> modelList = new ArrayList<ReferenceCsvModel>();
+		Stream.iterate(0, i -> ++i).limit(resultList.size()).forEach(i -> {
+			ReferenceCsvModel model = new ReferenceCsvModel();
+			HealthInfoReferenceResponse healthInfo = resultList.get(i);
+			BeanUtil.copy(healthInfo, model);
+			model.setUserId(userId);
+			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+			modelList.add(model);
+		});
+
+		return modelList;
 	}
 
 }

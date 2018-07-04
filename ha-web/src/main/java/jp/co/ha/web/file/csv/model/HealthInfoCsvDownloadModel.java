@@ -7,12 +7,11 @@ import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 
 /**
- * 健康情報CSV出力モデル<br>
- * CSV出力したい項目のみ持つ
+ * 健康情報CSVダウンロードモデル<br>
  *
  */
 @CsvModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
-public class HealthInfoCsvModel implements BaseCsvModel {
+public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 
 	/** ユーザID */
 	private String userId;

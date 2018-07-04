@@ -48,27 +48,23 @@ public class BeanUtil {
 		// コピー先のクラス型
 		Class<?> targetClass = target.getClass();
 		try {
-			for (Field targetField : BeanUtil.getFieldList(targetClass)) {
+			for (Field targetField : targetClass.getDeclaredFields()) {
 				if (ignore(ignoreList, targetField.getName())) {
 					continue;
 				}
-				PropertyDescriptor targetPd = new PropertyDescriptor(targetField.getName(), targetClass);
 
 				for (Field sourceField : BeanUtil.getFieldList(dataClass)) {
 					if (isCopyTarget(sourceField, targetField)) {
-						PropertyDescriptor sourcePd = new PropertyDescriptor(sourceField.getName(), dataClass);
 						// getter呼び出し
-						Method getter = sourcePd.getReadMethod();
+						Method getter = getAccessor(sourceField.getName(), dataClass, AccessorType.GETTER);
 						// setter呼び出し
-						Method setter = targetPd.getWriteMethod();
+						Method setter = getAccessor(sourceField.getName(), targetClass, AccessorType.SETTER);
 
 						// 値を設定
 						setter.invoke(target, getter.invoke(data));
 					}
 				}
 			}
-		} catch (IntrospectionException e) {
-			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
@@ -178,6 +174,30 @@ public class BeanUtil {
 			tmpClass = tmpClass.getSuperclass();
 		}
 		return fieldList;
+	}
+
+	/**
+	 * 指定したclazzのfieldNameのアクセサを返す<br>
+	 * typeにSETTERを指定した場合、setter<br>
+	 * それ以外の場合getterを取得<br>
+	 *
+	 * @param fieldName
+	 *            フィールド名
+	 * @param clazz
+	 *            クラス
+	 * @param type
+	 *            SETTER/GETTER
+	 * @return
+	 */
+	public static Method getAccessor(String fieldName, Class<?> clazz, AccessorType type) {
+		Method accessor = null;
+		try {
+			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
+			accessor = type == AccessorType.SETTER ? pd.getWriteMethod() : pd.getReadMethod();
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		}
+		return accessor;
 	}
 
 }

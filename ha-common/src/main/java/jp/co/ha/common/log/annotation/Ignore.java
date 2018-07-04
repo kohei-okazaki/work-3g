@@ -1,4 +1,4 @@
-package jp.co.ha.common.log;
+package jp.co.ha.common.log.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

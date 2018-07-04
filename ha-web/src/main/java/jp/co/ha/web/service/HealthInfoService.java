@@ -5,6 +5,7 @@ import java.util.List;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
 
 /**
@@ -65,5 +66,12 @@ public interface HealthInfoService {
 	 * @return
 	 */
 	boolean hasRecord(List<HealthInfo> entityList, String dataId);
+
+	/**
+	 * CSVモデルリストに変換する<br>
+	 * @param healthInfo 健康情報
+	 * @return
+	 */
+	List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo);
 
 }

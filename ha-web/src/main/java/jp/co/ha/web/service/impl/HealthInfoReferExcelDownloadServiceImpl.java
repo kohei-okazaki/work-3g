@@ -15,7 +15,7 @@ import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.util.Charset;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.web.file.excel.builder.ResultReferenceExcelBuiler;
 import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
@@ -24,7 +24,7 @@ import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
  * 結果照会画面Excelダウンロードサービス実装クラス
  *
  */
-@Service(value = "referenceExcel")
+@Service(value = "referenceDownloadExcel")
 public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoReferenceResponse>> {
 
 	/** アカウント検索サービス */
@@ -71,7 +71,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 			model.setWeight(useHealthInfoMask ? "****" : healthInfo.getWeight().toString());
 			model.setBmi(useHealthInfoMask ? "****" : healthInfo.getBmi().toString());
 			model.setStandardWeight(useHealthInfoMask ? "****" : healthInfo.getStandardWeight().toString());
-			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
 			modelList.add(model);
 		});

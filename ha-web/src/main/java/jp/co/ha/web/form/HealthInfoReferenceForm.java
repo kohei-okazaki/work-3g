@@ -4,6 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -13,6 +14,7 @@ import jp.co.ha.common.web.BaseForm;
 public class HealthInfoReferenceForm implements BaseForm {
 
 	/** シリアルバージョンUID */
+	@Ignore
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */

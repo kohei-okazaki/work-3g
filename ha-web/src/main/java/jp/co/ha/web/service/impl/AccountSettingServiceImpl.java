@@ -51,7 +51,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
 		// メール情報を検索し、マージする
 		MailInfo befMailInfo = mailInfoSearchService.findByUserId(form.getUserId());
-		mergeMailInfo(befMailInfo, form);
+		if (BeanUtil.notNull(befMailInfo)) {
+			mergeMailInfo(befMailInfo, form);
+		}
 
 		if (BeanUtil.isNull(befMailInfo.getUserId())) {
 			// メール情報が登録されてない場合
@@ -93,11 +95,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * @return
 	 */
 	private void mergeAccount(Account account, AccountSettingForm form) {
-//		account.setPassword(form.getPassword());
-//		account.setFileEnclosureCharFlag(form.getFileEnclosureCharFlag());
-//		account.setHealthInfoMaskFlag(form.getHealthInfoMaskFlag());
-//		account.setDeleteFlag(form.getDeleteFlag());
-//		account.setRemarks(form.getRemarks());
 		BeanUtil.copy(form, account, List.of("userId"));
 	}
 
@@ -111,9 +108,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	private MailInfo convertMailInfo(AccountSettingForm form) {
 
 		MailInfo mailInfo = new MailInfo();
-//		mailInfo.setUserId(form.getUserId());
-//		mailInfo.setMailAddress(form.getMailAddress());
-//		mailInfo.setMailPassword(form.getMailPassword());
 		BeanUtil.copy(form, mailInfo);
 
 		return mailInfo;
@@ -130,8 +124,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 */
 	private void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
 		BeanUtil.copy(form, mailInfo, List.of("userId"));
-//		mailInfo.setMailAddress(form.getMailAddress());
-//		mailInfo.setMailPassword(form.getMailPassword());
 	}
 
 }

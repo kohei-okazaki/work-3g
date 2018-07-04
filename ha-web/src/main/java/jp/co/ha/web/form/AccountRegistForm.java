@@ -4,6 +4,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -13,6 +15,7 @@ import jp.co.ha.common.web.BaseForm;
 public class AccountRegistForm implements BaseForm {
 
 	/** シリアルバージョンUID */
+	@Ignore
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
@@ -21,11 +24,13 @@ public class AccountRegistForm implements BaseForm {
 	@Size(min = 2, max = 16, message = "ユーザIDが範囲外の値です")
 	private String userId;
 	/** パスワード */
+	@Mask
 	@NotEmpty(message = "パスワードが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "パスワードが半角英数でありません")
 	@Size(min = 2, max = 16, message = "パスワードが範囲外の値です")
 	private String password;
 	/** 確認用パスワード */
+	@Mask
 	@NotEmpty(message = "確認用パスワードが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "確認用パスワードが半角英数でありません")
 	@Size(min = 2, max = 16, message = "確認用パスワードが範囲外の値です")

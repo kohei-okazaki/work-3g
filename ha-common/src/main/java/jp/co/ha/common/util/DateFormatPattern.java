@@ -4,7 +4,7 @@ package jp.co.ha.common.util;
  * Dateフォーマット
  *
  */
-public enum DateFormatDefine {
+public enum DateFormatPattern {
 
 	YYYYMMDD("yyyy/MM/dd"),
 	YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss");
@@ -18,7 +18,7 @@ public enum DateFormatDefine {
 	 * @param value
 	 *            フォーマット名
 	 */
-	private DateFormatDefine(String value) {
+	private DateFormatPattern(String value) {
 		this.value = value;
 	}
 

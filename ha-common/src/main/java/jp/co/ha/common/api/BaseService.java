@@ -10,20 +10,18 @@ import jp.co.ha.common.exception.BaseAppException;
  *            リクエスト種別
  * @param <Rs>
  *            レスポンス種別
- * @param <E>
- *            例外種別
  */
-public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse, E extends BaseAppException> {
+public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 
 	/**
 	 * 継承先でそれぞれチェックを実装<br>
 	 *
 	 * @param Rq
 	 *            Request実装クラス
-	 * @throws E
-	 *             例外実装クラス
+	 * @throws BaseAppException
+	 *             例外クラス
 	 */
-	void checkRequest(Rq request) throws E;
+	void checkRequest(Rq request) throws BaseAppException;
 
 	/**
 	 * メイン処理<br>
@@ -32,9 +30,9 @@ public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse, E 
 	 * @param Rq
 	 *            Request実装クラス
 	 * @return Rs Response実装クラス
-	 * @throws E
-	 *             例外実装クラス
+	 * @throws BaseAppException
+	 *             例外クラス
 	 */
-	Rs execute(Rq request) throws E;
+	Rs execute(Rq request) throws BaseAppException;
 
 }
