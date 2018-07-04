@@ -48,7 +48,7 @@ public class BeanUtil {
 		// コピー先のクラス型
 		Class<?> targetClass = target.getClass();
 		try {
-			for (Field targetField : BeanUtil.getFieldList(targetClass)) {
+			for (Field targetField : targetClass.getDeclaredFields()) {
 				if (ignore(ignoreList, targetField.getName())) {
 					continue;
 				}
@@ -58,7 +58,7 @@ public class BeanUtil {
 						// getter呼び出し
 						Method getter = getAccessor(sourceField.getName(), dataClass, AccessorType.GETTER);
 						// setter呼び出し
-						Method setter = getAccessor(sourceField.getName(), dataClass, AccessorType.SETTER);
+						Method setter = getAccessor(sourceField.getName(), targetClass, AccessorType.SETTER);
 
 						// 値を設定
 						setter.invoke(target, getter.invoke(data));
