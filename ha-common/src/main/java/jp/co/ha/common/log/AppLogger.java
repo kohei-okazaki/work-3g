@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.util.AccessorType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
@@ -117,7 +118,7 @@ public class AppLogger {
 		Class<?> clazz = bean.getClass();
 		Object value = null;
 		try {
-			Method getter = BeanUtil.getGetter(fieldName, clazz);
+			Method getter = BeanUtil.getAccessor(fieldName, clazz, AccessorType.GETTER);
 			value = getter.invoke(bean);
 		} catch (IllegalAccessException e) {
 			logger.error("不正アクセスです", e);

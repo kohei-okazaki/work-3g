@@ -16,6 +16,7 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.util.AccessorType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -57,7 +58,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 				for (Field f : BeanUtil.getFieldList(clazz)) {
 					if (column.equals(f.getName())) {
 						// setter呼び出し
-						Method setter = BeanUtil.getSetter(f.getName(), clazz);
+						Method setter = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.SETTER);
 						setter.invoke(model, data);
 					}
 				}

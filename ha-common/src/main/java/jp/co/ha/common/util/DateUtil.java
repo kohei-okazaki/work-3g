@@ -159,7 +159,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 比較対象日が開始日 < 比較対象日 < endDateかどうかを返す<br>
+	 * 比較対象日がstartDate < target < endDateかどうかを返す<br>
 	 *
 	 * @param startDate
 	 *            開始日
@@ -171,5 +171,24 @@ public class DateUtil {
 	 */
 	public static boolean isBetWeenDate(Date startDate, Date target, Date endDate) {
 		return startDate.before(target) && endDate.after(target);
+	}
+
+	/**
+	 * targetDateがシステム日付を超過しているかどうか判定する<br>
+	 * @param target
+	 * @return
+	 */
+	public static boolean isAfter(Date target) {
+		// システム日付
+		Date sysDate = getSysDate();
+		boolean b = sysDate.before(target);
+		return sysDate.after(target);
+	}
+
+	public static boolean isBefore(Date target) {
+		// システム日付
+		Date sysDate = getSysDate();
+		boolean b = sysDate.after(target);
+		return sysDate.after(target);
 	}
 }

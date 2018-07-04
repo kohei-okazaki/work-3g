@@ -1,10 +1,13 @@
 package jp.co.ha.web.validator;
 
+import java.util.Date;
+
 import org.springframework.validation.Errors;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseValidator;
 import jp.co.ha.web.form.LoginForm;
@@ -40,6 +43,7 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 		checkExistAccount(errors, account);
 		checkInvalidPassword(errors, form.getPassword(), account.getPassword());
 		checkDeleteAccount(errors, account);
+		checkAccountExpired(errors, account);
 	}
 
 	/**
@@ -69,10 +73,23 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	 * アカウント情報が有効かどうかチェック<br>
 	 * 有効でない場合true, そうでない場合false<br>
 	 * @param errors
-	 * @param account2
+	 * @param account
 	 */
 	private void checkDeleteAccount(Errors errors, Account account) {
 		if (StringUtil.isTrue(account.getDeleteFlag())) {
+			errors.rejectValue("userId", "validate.message.invalidPassword");
+		}
+	}
+
+	/**
+	 * アカウント情報が有効期限切れかどうか判定する<br>
+	 * アカウント情報.パスワード有効期限 < システム日付の場合、true<br>
+	 * @param errors
+	 * @param account
+	 */
+	private void checkAccountExpired(Errors errors, Account account) {
+		Date d = account.getPasswordExpire();
+		if (DateUtil.isBefore(account.getPasswordExpire())) {
 			errors.rejectValue("userId", "validate.message.invalidPassword");
 		}
 	}

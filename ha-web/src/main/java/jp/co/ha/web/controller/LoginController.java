@@ -105,18 +105,6 @@ public class LoginController implements BaseWebController {
 			return getView(ManageWebView.LOGIN);
 		}
 
-//		if (loginService.invalidPassword(loginForm)) {
-//			// 入力されたユーザIDと紐付くアカウント情報.パスワードと入力情報.パスワードが異なる場合
-//			model.addAttribute("errorMessage", "IDとパスワードが一致しません。");
-//			return getView(ManageWebView.LOGIN);
-//		}
-
-		if (loginService.invalidAccount(loginForm)) {
-			// アカウント情報が有効期限切の場合
-			model.addAttribute("errorMessage", "アカウントは有効期限切れです。");
-			return getView(ManageWebView.LOGIN);
-		}
-
 		// セッションにユーザIDを登録する。
 		sessionService.setValue(request.getSession(), "userId", loginForm.getUserId());
 
