@@ -121,11 +121,11 @@ public class AppLogger {
 			Method getter = BeanUtil.getAccessor(fieldName, clazz, AccessorType.GETTER);
 			value = getter.invoke(bean);
 		} catch (IllegalAccessException e) {
-			logger.error("不正アクセスです", e);
+			logger.error("不正アクセスです" + fieldName, e);
 		} catch (IllegalArgumentException e) {
-			logger.error("不正な引数です", e);
+			logger.error("不正な引数です" + fieldName, e);
 		} catch (InvocationTargetException e) {
-			logger.error("項目が不正です", e);
+			logger.error("項目が不正です" + fieldName, e);
 		}
 
 		return value;
