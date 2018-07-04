@@ -14,7 +14,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -82,7 +82,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		// 健康情報照会レスポンスクラス
 		HealthInfoReferenceResponse apiResponse = new HealthInfoReferenceResponse();
 		BeanUtil.copy(healthInfo, apiResponse);
-		apiResponse.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+		apiResponse.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 		return apiResponse;
 	}
 

@@ -22,7 +22,7 @@ import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.AppLoggerFactory;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -140,7 +140,7 @@ public class HealthInfoDaoImpl implements HealthInfoDao {
 			newRow.createCell(4).setCellValue(healthInfo.getBmi().toString());												// BMI
 			newRow.createCell(5).setCellValue(healthInfo.getStandardWeight().toString());									// 標準体重
 			newRow.createCell(6).setCellValue(healthInfo.getUserStatus());													// ユーザステータス
-			newRow.createCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatDefine.YYYYMMDD_HHMMSS));	// 登録日時
+			newRow.createCell(7).setCellValue(DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS));	// 登録日時
 
 			fos.flush();
 			workbook.write(fos);

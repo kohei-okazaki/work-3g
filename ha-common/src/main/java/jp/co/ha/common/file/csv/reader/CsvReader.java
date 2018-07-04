@@ -9,10 +9,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.AppLoggerFactory;
@@ -39,7 +39,10 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	public T read(String record) {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
-		List<String> colList = List.of(clazz.getAnnotation(CsvModel.class).headerNames());
+		List<String> colList = BeanUtil.getFieldList(clazz)
+										.stream()
+										.map(f -> f.getName())
+										.collect(Collectors.toList());
 		List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
 		if (hasFileLengthError(colList, dataList)) {
 			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "CSVの件数が一致しません。");

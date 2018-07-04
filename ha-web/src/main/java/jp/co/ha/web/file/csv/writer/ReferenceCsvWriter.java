@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.writer.CsvWriter;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
@@ -60,7 +60,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvModel> {
 		// 標準体重
 		write(joiner, model.getStandardWeight().toString());
 		// 登録日時
-		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatDefine.YYYYMMDD_HHMMSS));
+		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
 		// 1行書き込む
 		recordJoiner.add(joiner.toString());

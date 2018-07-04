@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateFormatDefine;
+import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -142,7 +142,7 @@ public class AppLogger {
 		if (BeanUtil.isNull(value)) {
 			strValue = StringUtil.EMPTY;
 		} else if (value instanceof Date) {
-			strValue = DateUtil.toString((Date) value, DateFormatDefine.YYYYMMDD_HHMMSS);
+			strValue = DateUtil.toString((Date) value, DateFormatPattern.YYYYMMDD_HHMMSS);
 		} else {
 			strValue = value.toString();
 		}

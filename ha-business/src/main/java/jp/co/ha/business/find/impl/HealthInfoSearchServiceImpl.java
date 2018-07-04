@@ -67,7 +67,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			return healthInfoList;
 		}
 		return healthInfoList.stream()
-					.filter(entity -> DateUtil.isSamaDate(regDate, DateUtil.toStartDate(entity.getRegDate())))
+					.filter(entity -> DateUtil.isSameDate(regDate, DateUtil.toStartDate(entity.getRegDate())))
 					.collect(Collectors.toList());
 	}
 
