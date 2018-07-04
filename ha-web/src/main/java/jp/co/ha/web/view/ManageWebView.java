@@ -16,8 +16,8 @@ public enum ManageWebView implements BaseView {
 	HEALTH_INFO_CONFIRM("healthInfo-confirm"),
 	/** 健康情報入力完了画面URL */
 	HEALTH_INFO_COMPLETE("healthInfo-complete"),
-	/** メニュー画面URL */
-	MENU("menu"),
+	/** トップ画面URL */
+	TOP("top"),
 	/** エラー画面URL */
 	ERROR("error"),
 	/** 健康情報照会画面URL */

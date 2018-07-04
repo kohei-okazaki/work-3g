@@ -1,7 +1,5 @@
 package jp.co.ha.web.form;
 
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.log.annotation.Ignore;
@@ -19,7 +17,6 @@ public class HealthInfoFileForm implements BaseForm {
 
 	/** アップロードファイル */
 	@Ignore
-	@NotBlank
 	private MultipartFile multipartFile;
 
 	/**

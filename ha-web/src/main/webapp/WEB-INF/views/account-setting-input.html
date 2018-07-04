@@ -27,7 +27,7 @@
 	<br><br><br>
 
 	<!-- 入力画面 -->
-	<form action="./account-setting-confirm.html" method="post" th:object="${accountSettingForm}">
+	<form action="./account-setting-confirm.html" th:action="@{./account-setting-confirm.html}" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 
 		<!-- <div th:if="${errorMessage} != null">

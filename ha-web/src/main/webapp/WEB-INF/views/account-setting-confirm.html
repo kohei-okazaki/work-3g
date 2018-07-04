@@ -29,7 +29,7 @@
 
 	<!-- 確認画面 -->
 
-	<form action="./account-setting-complete.html" method="post">
+	<form action="./account-setting-complete.html" th:action="@{./account-setting-complete.html}" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 		<table border="1">
 			<tr>

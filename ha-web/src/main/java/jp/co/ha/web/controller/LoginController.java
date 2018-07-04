@@ -97,8 +97,8 @@ public class LoginController implements BaseWebController {
 	 *            BindingResult
 	 * @return
 	 */
-	@PostMapping("/menu.html")
-	public String menu(Model model, HttpServletRequest request, @Valid LoginForm loginForm, BindingResult result) {
+	@PostMapping("/top.html")
+	public String top(Model model, HttpServletRequest request, @Valid LoginForm loginForm, BindingResult result) {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -108,7 +108,7 @@ public class LoginController implements BaseWebController {
 		// セッションにユーザIDを登録する。
 		sessionService.setValue(request.getSession(), "userId", loginForm.getUserId());
 
-		return getView(ManageWebView.MENU);
+		return getView(ManageWebView.TOP);
 
 	}
 
@@ -123,6 +123,6 @@ public class LoginController implements BaseWebController {
 	public String menu(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		return getView(BeanUtil.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
+		return getView(BeanUtil.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);
 	}
 }

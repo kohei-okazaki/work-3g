@@ -23,7 +23,7 @@
 
 	<fieldset>
 		<h1>健康管理アプリ</h1>
-		<form action="./menu.html" method="post" th:object="${loginForm}">
+		<form action="./top.html" th:action="@{./top.html}" method="post" th:object="${loginForm}">
 			<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">
 			</div>
 			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
