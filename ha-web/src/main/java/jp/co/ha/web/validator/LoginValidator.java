@@ -1,10 +1,11 @@
 package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 
-import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.util.RegixPattern;
+import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseValidator;
 import jp.co.ha.web.form.LoginForm;
 
@@ -14,6 +15,17 @@ import jp.co.ha.web.form.LoginForm;
  */
 public class LoginValidator extends BaseValidator<LoginForm> {
 
+	/** アカウント検索サービス */
+	private AccountSearchService accountSearchService;
+
+	/**
+	 * アカウント検索サービスを設定する<br>
+	 * @param accountSearchService アカウント検索サービス
+	 */
+	public void setAccountSearchService(AccountSearchService accountSearchService) {
+		this.accountSearchService = accountSearchService;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -21,49 +33,48 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	public void validate(Object target, Errors errors) {
 
 		LoginForm form = (LoginForm) target;
-//		// 必須チェック
-//		checkRequire(errors);
-//		// 桁数チェック
-//		checkLength(form, errors);
-//		// 属性チェック
-//		checkType(form, errors);
+		if (StringUtil.isEmpty(form.getUserId())) {
+			return;
+		}
+		Account account = accountSearchService.findByUserId(form.getUserId());
+		checkExistAccount(errors, account);
+		checkInvalidPassword(errors, form.getPassword(), account.getPassword());
+		checkDeleteAccount(errors, account);
 	}
 
 	/**
-	 * 属性チェックを行う<br>
-	 * @param form
+	 * アカウントが存在しない場合validateエラーにする<br>
 	 * @param errors
+	 * @param form
 	 */
-	private void checkType(LoginForm form, Errors errors) {
-
-		if (!RegixPattern.isPattern(form.getUserId(), RegixPattern.HALF_CHAR)
-				|| !RegixPattern.isPattern(form.getPassword(), RegixPattern.HALF_CHAR)) {
-			// 半角英数字でない場合
-			errors.rejectValue("userId", ErrorCode.TYPE.toString());
-			errors.rejectValue("password", ErrorCode.TYPE.toString());
+	private void checkExistAccount(Errors errors, Account account) {
+		if (BeanUtil.isNull(account)) {
+			errors.rejectValue("userId", "validate.message.notExistAccount");
 		}
 	}
 
 	/**
-	 * 桁数チェックを行う<br>
-	 * @param form
+	 * ログイン情報と入力情報を照合する<br>
 	 * @param errors
+	 * @param formPassword
+	 * @param dbPassword
 	 */
-	private void checkLength(LoginForm form, Errors errors) {
-
-		if (!(2 < form.getUserId().length() && form.getUserId().length() <= 10)) {
-			ValidationUtils.rejectIfEmpty(errors, "userId", ErrorCode.LENGTH.toString());
+	private void checkInvalidPassword(Errors errors, String formPassword, String dbPassword) {
+		if (!formPassword.equals(dbPassword)) {
+			errors.rejectValue("userId", "validate.message.invalidPassword");
 		}
 	}
 
 	/**
-	 * 必須チェックを行う<br>
+	 * アカウント情報が有効かどうかチェック<br>
+	 * 有効でない場合true, そうでない場合false<br>
 	 * @param errors
+	 * @param account2
 	 */
-	private void checkRequire(Errors errors) {
-
-		ValidationUtils.rejectIfEmpty(errors, "userId", ErrorCode.REQUIRE.toString());
-		ValidationUtils.rejectIfEmpty(errors, "password", ErrorCode.REQUIRE.toString());
+	private void checkDeleteAccount(Errors errors, Account account) {
+		if (StringUtil.isTrue(account.getDeleteFlag())) {
+			errors.rejectValue("userId", "validate.message.invalidPassword");
+		}
 	}
 
 }

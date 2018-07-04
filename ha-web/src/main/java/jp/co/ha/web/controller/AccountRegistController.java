@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.create.AccountCreateService;
+import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
+import jp.co.ha.web.validator.AccountRegistValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -34,6 +36,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	/** アカウント作成サービス */
 	@Autowired
 	private AccountCreateService accountCreateService;
+	/** アカウント検索サービス */
+	@Autowired
+	private AccountSearchService accountSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -41,7 +46,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@InitBinder("accountRegistForm")
 	public void initBinder(WebDataBinder binder) {
-		//		binder.setValidator(new AccountRegistValidator());
+		AccountRegistValidator validator = new AccountRegistValidator();
+		validator.setAccountSearchService(accountSearchService);
+		binder.addValidators(validator);
 	}
 
 	/**
@@ -73,11 +80,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合
-			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
-		}
-
-		if (service.invalidUserId(form)) {
-			model.addAttribute("errorMessage", "アカウントは既に登録されています");
 			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 		}
 

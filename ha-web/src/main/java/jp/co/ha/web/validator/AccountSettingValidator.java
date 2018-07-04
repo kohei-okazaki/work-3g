@@ -19,10 +19,10 @@ public class AccountSettingValidator extends BaseValidator<AccountSettingForm> {
 
 		AccountSettingForm form = (AccountSettingForm) target;
 
-		// 必須チェック
-		checKRequire(errors);
-		// 最大桁数チェック
-		checkMaxLength(errors, form);
+//		// 必須チェック
+//		checKRequire(errors);
+//		// 最大桁数チェック
+//		checkMaxLength(errors, form);
 	}
 
 	/**

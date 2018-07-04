@@ -76,7 +76,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 */
 	@InitBinder(value = "healthInfoReferenceForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new HealthInfoReferenceValidator());
+		binder.addValidators(new HealthInfoReferenceValidator());
 	}
 
 	/**

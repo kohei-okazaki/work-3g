@@ -18,10 +18,10 @@ public class HealthInfoValidator extends BaseValidator<HealthInfoForm> {
 	public void validate(Object target, Errors errors) {
 
 		HealthInfoForm form = (HealthInfoForm) target;
-		// 必須チェック
-		checKRequire(errors);
-		// 属性チェック
-		checkType(errors);
+//		// 必須チェック
+//		checKRequire(errors);
+//		// 属性チェック
+//		checkType(errors);
 	}
 
 	/**

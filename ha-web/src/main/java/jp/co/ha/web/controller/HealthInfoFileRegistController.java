@@ -62,7 +62,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	@Override
 	@InitBinder("healthInfoFileForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.setValidator(new HealthInfoFileInputValidator());
+		binder.addValidators(new HealthInfoFileInputValidator());
 	}
 
 	/**
