@@ -18,6 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.dao.DuplicateKeyException;
 
+import jp.co.ha.common.dao.BaseDaoImpl;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.log.AppLogger;
@@ -29,7 +30,7 @@ import jp.co.ha.common.util.DateUtil;
  * 健康情報のDaoクラス
  *
  */
-public class HealthInfoDaoImpl implements HealthInfoDao {
+public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 
 	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
 

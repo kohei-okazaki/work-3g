@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.dao.DuplicateKeyException;
 
+import jp.co.ha.common.dao.BaseDaoImpl;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.DBException;
@@ -28,7 +29,7 @@ import jp.co.ha.common.util.DateUtil;
  * メール情報のDaoクラス
  *
  */
-public class MailInfoDaoImpl implements MailInfoDao {
+public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 
 	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
 
