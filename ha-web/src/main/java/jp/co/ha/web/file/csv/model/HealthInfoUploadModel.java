@@ -11,11 +11,9 @@ public class HealthInfoUploadModel implements BaseCsvModel {
 
 	/** ユーザID */
 	private String userId;
-
 	/** 身長 */
 	@Mask
 	private String height;
-
 	/** 体重 */
 	@Mask
 	private String weight;

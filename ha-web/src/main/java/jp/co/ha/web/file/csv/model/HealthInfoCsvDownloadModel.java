@@ -5,6 +5,7 @@ import java.util.Date;
 
 import jp.co.ha.common.file.csv.annotation.CsvModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報CSVダウンロードモデル<br>
@@ -16,12 +17,16 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
+	@Mask
 	private BigDecimal height;
 	/** 体重 */
+	@Mask
 	private BigDecimal weight;
 	/** BMI */
+	@Mask
 	private BigDecimal bmi;
 	/** 標準体重 */
+	@Mask
 	private BigDecimal standardWeight;
 	/** 登録日時 */
 	private Date regDate;
