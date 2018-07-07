@@ -16,25 +16,13 @@ import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
  */
 public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 
-//	/**
-//	 * コンストラクタ<br>
-//	 *
-//	 * @param conf
-//	 *            CSV設定情報
-//	 * @param modelList
-//	 *            モデルリスト
-//	 */
-//	public HealthInfoCsvWriter(CsvConfig conf, List<HealthInfoCsvDownloadModel> modelList) {
-//		super(conf, modelList);
-//	}
-
 	/**
 	 * コンストラクタ<br>
 	 *
 	 * @param conf
-	 *            CSV設定情報
+	 *     CSV設定情報
 	 * @param printWriter
-	 *            出力用PrintWriter
+	 *     出力用PrintWriter
 	 */
 	public HealthInfoCsvWriter(CsvConfig conf, PrintWriter printWriter) {
 		super(conf, printWriter);

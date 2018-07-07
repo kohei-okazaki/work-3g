@@ -22,7 +22,7 @@ public interface MailInfoDao {
 	 * 引数で指定されたユーザIDのメール情報を取得する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return MailInfo メール情報
 	 */
 	MailInfo selectByUserId(String userId);
@@ -31,7 +31,7 @@ public interface MailInfoDao {
 	 * 引数で指定されたメール情報を更新する
 	 *
 	 * @param mailInfo
-	 *            メール情報
+	 *     メール情報
 	 */
 	void update(MailInfo mailInfo);
 
@@ -39,7 +39,7 @@ public interface MailInfoDao {
 	 * 引数で指定されたメール情報を登録する<br>
 	 *
 	 * @param mailInfo
-	 *            メール情報
+	 *     メール情報
 	 */
 	void create(MailInfo mailInfo) throws DuplicateKeyException;
 }

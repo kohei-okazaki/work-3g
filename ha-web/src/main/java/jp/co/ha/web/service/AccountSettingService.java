@@ -12,7 +12,7 @@ public interface AccountSettingService {
 	 * アカウント設定のメイン処理を行う<br>
 	 *
 	 * @param form
-	 *            AccountSettingForm
+	 *            アカウント設定画面フォーム
 	 */
 	void execute(AccountSettingForm form);
 

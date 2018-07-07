@@ -12,7 +12,7 @@ public interface LoginService {
 	 * ログイン情報と入力情報を照合する
 	 *
 	 * @param loginForm
-	 *            ログインフォーム
+	 *     ログインフォーム
 	 * @return 判定結果
 	 */
 	boolean invalidPassword(LoginForm loginForm);
@@ -22,7 +22,7 @@ public interface LoginService {
 	 * 存在しないtrue, 存在する場合falseを返す<br>
 	 *
 	 * @param loginForm
-	 *            ログインフォーム
+	 *     ログインフォーム
 	 * @return
 	 */
 	boolean noExistAccount(LoginForm loginForm);
@@ -32,7 +32,7 @@ public interface LoginService {
 	 * 有効でない場合true, そうでない場合false<br>
 	 *
 	 * @param loginForm
-	 *            ログインフォーム
+	 *     ログインフォーム
 	 * @return
 	 */
 	boolean invalidAccount(LoginForm loginForm);

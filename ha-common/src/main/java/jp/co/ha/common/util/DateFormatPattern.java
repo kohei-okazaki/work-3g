@@ -16,7 +16,7 @@ public enum DateFormatPattern {
 	 * コンストラクタ<br>
 	 *
 	 * @param value
-	 *            フォーマット名
+	 *     フォーマット名
 	 */
 	private DateFormatPattern(String value) {
 		this.value = value;

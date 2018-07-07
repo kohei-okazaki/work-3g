@@ -32,9 +32,9 @@ public class StringUtil {
 	 * 区切りたい文字列を区切り文字で、区切ったリストを返す
 	 *
 	 * @param target
-	 *            対象文字列
+	 *     対象文字列
 	 * @param delim
-	 *            区切り文字
+	 *     区切り文字
 	 * @return List<String>
 	 */
 	public static List<String> toStrList(String target, String delim) {
@@ -46,7 +46,7 @@ public class StringUtil {
 	 * 空文字の場合true, それ以外の場合false<br>
 	 *
 	 * @param target
-	 *            対象文字列
+	 *     対象文字列
 	 * @return 判定結果
 	 */
 	public static boolean isEmpty(String target) {
@@ -57,7 +57,7 @@ public class StringUtil {
 	 * 指定されたflagがtrueかどうか判定する<br>
 	 *
 	 * @param flag
-	 *            フラグ
+	 *     フラグ
 	 * @return
 	 */
 	public static boolean isTrue(String flag) {
@@ -69,7 +69,7 @@ public class StringUtil {
 	 *
 	 * @see StringUtil#isTrue(String)
 	 * @param flag
-	 *            フラグ
+	 *     フラグ
 	 * @return
 	 */
 	public static boolean isFalse(String flag) {

@@ -27,16 +27,16 @@ public interface AccountDao {
 	 * 引数で指定されたユーザIDのアカウント情報を取得する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return Account アカウント情報
 	 */
-	Account selectByUserId(String userId) throws DataBaseException ;
+	Account selectByUserId(String userId) throws DataBaseException;
 
 	/**
 	 * アカウント情報を作成する<br>
 	 *
 	 * @param account
-	 *            アカウント情報
+	 *     アカウント情報
 	 * @throws DuplicateKeyException
 	 */
 	void create(Account account) throws DuplicateKeyException, DataBaseException;
@@ -45,16 +45,16 @@ public interface AccountDao {
 	 * 引数で指定されたアカウント情報を更新する
 	 *
 	 * @param account
-	 *            アカウント情報
+	 *     アカウント情報
 	 */
-	void update(Account account) throws DataBaseException ;
+	void update(Account account) throws DataBaseException;
 
 	/**
 	 * 指定されたアカウント情報の削除を行う<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
-	void delete(String userId) throws DataBaseException ;
+	void delete(String userId) throws DataBaseException;
 
 }

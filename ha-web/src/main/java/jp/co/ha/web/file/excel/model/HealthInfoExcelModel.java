@@ -32,7 +32,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * heightを設定する
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(String height) {
 		this.height = height;
@@ -51,7 +51,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * weightを設定する
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(String weight) {
 		this.weight = weight;
@@ -70,7 +70,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * bmiを設定する
 	 *
 	 * @param bmi
-	 *            BMI
+	 *     BMI
 	 */
 	public void setBmi(String bmi) {
 		this.bmi = bmi;
@@ -89,7 +89,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
-	 *            標準体重
+	 *     標準体重
 	 */
 	public void setStandardWeight(String standardWeight) {
 		this.standardWeight = standardWeight;

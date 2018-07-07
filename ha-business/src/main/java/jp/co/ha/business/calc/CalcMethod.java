@@ -29,7 +29,7 @@ public enum CalcMethod {
 	 * コンストラクタ
 	 *
 	 * @param operator
-	 *            四則演算オペレータインターフェース
+	 *     四則演算オペレータインターフェース
 	 */
 	private CalcMethod(CalcOperator operator) {
 		this.operator = operator;

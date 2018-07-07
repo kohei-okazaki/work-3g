@@ -52,7 +52,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
-			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
+			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
 		}
 	}
 
@@ -65,7 +65,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		// 指定されたデータIDから健康情報を取得
 		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
 		if (BeanUtil.isNull(entity)) {
-			throw new HealthInfoException(ErrorCode.DB_NO_DATA, ErrorCode.DB_NO_DATA.getErrorMessage());
+			throw new HealthInfoException(ErrorCode.DB_NO_DATA, "該当のレコードがみつかりません healthInfoId:" + request.getHealthInfoId());
 		}
 
 		// レスポンスに変換する

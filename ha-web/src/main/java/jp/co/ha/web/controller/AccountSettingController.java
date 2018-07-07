@@ -53,7 +53,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * Validateを設定<br>
 	 *
 	 * @param binder
-	 *            WebDataBinder
+	 *     WebDataBinder
 	 */
 	@Override
 	@InitBinder(value = "accountSettingForm")
@@ -65,7 +65,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * Formを返す<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return
 	 */
 	@ModelAttribute

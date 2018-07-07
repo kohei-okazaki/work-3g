@@ -19,9 +19,9 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelMode
 	 * コンストラクタ<br>
 	 *
 	 * @param conf
-	 *            Excel設定情報
+	 *     Excel設定情報
 	 * @param modelList
-	 *            Excel出力モデルリスト
+	 *     Excel出力モデルリスト
 	 */
 	public HealthInfoExcelBuilder(ExcelConfig conf, List<HealthInfoExcelModel> modelList) {
 		super(conf, modelList);

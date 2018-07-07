@@ -9,7 +9,7 @@ import jp.co.ha.common.file.excel.ExcelConfig;
  * 継承先で@Service(value = "サービス実装用のAnnotation") をつけてInjectionすること<br>
  *
  * @param <F>
- *            出力対象データ
+ *     出力対象データ
  */
 public interface ExcelDownloadService<F> {
 
@@ -19,13 +19,14 @@ public interface ExcelDownloadService<F> {
 	 * 渡したいデータを引数に指定する<br>
 	 *
 	 * @param f
-	 *            出力対象データ
+	 *     出力対象データ
 	 * @return View
 	 */
 	View execute(F f);
 
 	/**
 	 * Excel設定情報を取得<br>
+	 *
 	 * @return
 	 */
 	ExcelConfig getExcelConfig();

@@ -16,7 +16,7 @@ public interface HealthInfoFileRegistService {
 	 * 健康情報CSVアップロードモデルリストから健康情報APIリクエストのリストに変換する<br>
 	 *
 	 * @param modelList
-	 *            健康情報CSVアップロードモデルリスト
+	 *     健康情報CSVアップロードモデルリスト
 	 * @return
 	 */
 	List<HealthInfoRegistRequest> toRequestList(List<HealthInfoUploadModel> modelList);
@@ -25,7 +25,11 @@ public interface HealthInfoFileRegistService {
 	 * 健康情報CSVアップロードモデルリストに不正なデータが含まれていないかチェックを行う
 	 *
 	 * @param modelList
-	 *            健康情報CSVアップロードモデルリスト
+	 *     健康情報CSVアップロードモデルリスト
+	 *
+	 * @param modelList
+	 * @throws HealthInfoException
+	 *     健康情報例外
 	 */
 	void formatCheck(List<HealthInfoUploadModel> modelList) throws HealthInfoException;
 

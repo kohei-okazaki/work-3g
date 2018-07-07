@@ -59,7 +59,7 @@ public class MailInfo implements Serializable {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -78,7 +78,7 @@ public class MailInfo implements Serializable {
 	 * mailAddressを設定する
 	 *
 	 * @param mailAddress
-	 *            メールアドレス
+	 *     メールアドレス
 	 */
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
@@ -97,7 +97,7 @@ public class MailInfo implements Serializable {
 	 * mailPasswordを設定する
 	 *
 	 * @param mailPassword
-	 *            メールパスワード
+	 *     メールパスワード
 	 */
 	public void setMailPassword(String mailPassword) {
 		this.mailPassword = mailPassword;
@@ -116,7 +116,7 @@ public class MailInfo implements Serializable {
 	 * updateDateを設定する
 	 *
 	 * @param updateDate
-	 *            更新日時
+	 *     更新日時
 	 */
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
@@ -135,7 +135,7 @@ public class MailInfo implements Serializable {
 	 * regDateを設定する
 	 *
 	 * @param regDate
-	 *            更新日時
+	 *     更新日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

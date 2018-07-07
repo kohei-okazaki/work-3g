@@ -23,11 +23,12 @@ public interface HealthInfoDao {
 	public static final String STANDARD_WEIGHT = "STANDARD_WEIGHT";
 	public static final String USER_STATUS = "USER_STATUS";
 	public static final String REG_DATE = "REG_DATE";
+
 	/**
 	 * 指定したユーザIDの健康情報を返す<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return List<HealthInfo> 健康情報リスト
 	 */
 	List<HealthInfo> selectByUserId(String userId) throws DataBaseException;
@@ -36,14 +37,16 @@ public interface HealthInfoDao {
 	 * 指定された健康情報IDに対応する健康情報を返す<br>
 	 *
 	 * @param healthInfoId
-	 *            健康情報ID
+	 *     健康情報ID
 	 * @return HealthInfo 健康情報
 	 */
 	HealthInfo selectByHealthInfoId(BigDecimal healthInfoId) throws DataBaseException;
 
 	/**
 	 * 健康情報を登録する<br>
-	 * @param healthInfo 健康情報
+	 *
+	 * @param healthInfo
+	 *     健康情報
 	 * @throws DuplicateKeyException
 	 * @throws DataBaseException
 	 */

@@ -15,7 +15,7 @@ import jp.co.ha.common.util.StringUtil;
  * CSVダウンロードサービスインターフェース<br>
  *
  * @param <T>
- *            CSVモデル
+ *     CSVモデル
  */
 public interface CsvDownloadService<T extends BaseCsvModel> {
 
@@ -23,13 +23,13 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 * メイン処理<br>
 	 *
 	 * @param printWriter
-	 *            出力用Writer
+	 *     出力用Writer
 	 * @param conf
-	 *            CSV設定情報
+	 *     CSV設定情報
 	 * @param modelList
-	 *            モデルリスト
+	 *     モデルリスト
 	 * @throws AppIOException
-	 *             例外
+	 *     例外
 	 */
 	void execute(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws AppIOException;
 
@@ -37,9 +37,9 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 * CSV設定情報を取得する<br>
 	 *
 	 * @param fileName
-	 *            ファイル名
+	 *     ファイル名
 	 * @param account
-	 *            アカウント情報
+	 *     アカウント情報
 	 * @return CsvConfig
 	 */
 	default CsvConfig getCsvConfig(String fileName, Account account) {

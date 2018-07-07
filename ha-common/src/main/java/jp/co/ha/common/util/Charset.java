@@ -16,7 +16,7 @@ public enum Charset {
 	 * コンストラクタ<br>
 	 *
 	 * @param name
-	 *            名前
+	 *     名前
 	 */
 	private Charset(String name) {
 		this.name = name;

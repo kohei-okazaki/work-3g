@@ -65,7 +65,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
-			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません");
+			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
 		}
 	}
 

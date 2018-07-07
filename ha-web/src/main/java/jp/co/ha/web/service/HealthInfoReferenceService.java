@@ -7,7 +7,7 @@ import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 
 /**
- *  健康情報照会画面サービスインターフェース<br>
+ * 健康情報照会画面サービスインターフェース<br>
  *
  */
 public interface HealthInfoReferenceService {
@@ -16,9 +16,9 @@ public interface HealthInfoReferenceService {
 	 * 健康情報を取得する<br>
 	 *
 	 * @param form
-	 *            結果照会画面フォーム
+	 *     結果照会画面フォーム
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return
 	 */
 	List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId);
@@ -27,9 +27,9 @@ public interface HealthInfoReferenceService {
 	 * 結果照会CSVモデルリストに変換する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @param resultList
-	 *            List<HealthInfoReferenceResponse>
+	 *     List<HealthInfoReferenceResponse>
 	 * @return modelList
 	 */
 	List<ReferenceCsvModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList);

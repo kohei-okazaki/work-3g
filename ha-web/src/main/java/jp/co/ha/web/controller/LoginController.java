@@ -21,7 +21,6 @@ import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
-import jp.co.ha.web.service.LoginService;
 import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
 
@@ -32,9 +31,6 @@ import jp.co.ha.web.view.ManageWebView;
 @Controller
 public class LoginController implements BaseWebController {
 
-	/** ログインサービス */
-	@Autowired
-	private LoginService loginService;
 	/** sessionサービス */
 	@Autowired
 	private SessionManageService sessionService;
@@ -48,7 +44,7 @@ public class LoginController implements BaseWebController {
 	 * Validateを設定<br>
 	 *
 	 * @param binder
-	 *            WebDataBinder
+	 *     WebDataBinder
 	 */
 	@InitBinder("loginForm")
 	public void initBinder(WebDataBinder binder) {
@@ -71,9 +67,9 @@ public class LoginController implements BaseWebController {
 	 * ログイン画面
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return ログイン画面
 	 */
 	@GetMapping("/login.html")
@@ -88,13 +84,13 @@ public class LoginController implements BaseWebController {
 	 * メニュー画面
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param loginForm
-	 *            LoginForm
+	 *     LoginForm
 	 * @param result
-	 *            BindingResult
+	 *     BindingResult
 	 * @return
 	 */
 	@PostMapping("/top.html")
@@ -116,7 +112,7 @@ public class LoginController implements BaseWebController {
 	 * メニュー画面に遷移<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return
 	 */
 	@GetMapping("/menu.html")

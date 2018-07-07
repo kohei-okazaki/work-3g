@@ -74,7 +74,7 @@ public class Account implements Serializable {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -93,7 +93,7 @@ public class Account implements Serializable {
 	 * passwordを設定する
 	 *
 	 * @param password
-	 *            パスワード
+	 *     パスワード
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -112,7 +112,7 @@ public class Account implements Serializable {
 	 * deleteFlagを設定する
 	 *
 	 * @param deleteFlag
-	 *            削除フラグ
+	 *     削除フラグ
 	 */
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
@@ -131,7 +131,7 @@ public class Account implements Serializable {
 	 * passwordExpireを設定する
 	 *
 	 * @param passwordExpire
-	 *            パスワード有効期限
+	 *     パスワード有効期限
 	 */
 	public void setPasswordExpire(Date passwordExpire) {
 		this.passwordExpire = passwordExpire;
@@ -150,7 +150,7 @@ public class Account implements Serializable {
 	 * remarksを設定する
 	 *
 	 * @param remarks
-	 *            備考
+	 *     備考
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
@@ -169,7 +169,7 @@ public class Account implements Serializable {
 	 * fileEnclosureCharFlagを設定する
 	 *
 	 * @param fileEnclosureCharFlag
-	 *            ファイル囲い文字利用フラグ
+	 *     ファイル囲い文字利用フラグ
 	 */
 	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
 		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
@@ -188,7 +188,7 @@ public class Account implements Serializable {
 	 * healthInfoMaskFlagを設定する<br>
 	 *
 	 * @param healthInfoMaskFlag
-	 *            健康情報マスク利用フラグ
+	 *     健康情報マスク利用フラグ
 	 */
 	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
 		this.healthInfoMaskFlag = healthInfoMaskFlag;
@@ -207,7 +207,7 @@ public class Account implements Serializable {
 	 * updateDateを設定する
 	 *
 	 * @param updateDate
-	 *            更新日時
+	 *     更新日時
 	 */
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
@@ -226,7 +226,7 @@ public class Account implements Serializable {
 	 * regDateを設定する
 	 *
 	 * @param regDate
-	 *            登録日時
+	 *     登録日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

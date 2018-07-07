@@ -12,9 +12,9 @@ public interface HealthInfoCalcService {
 	 * inputWeightとbeforeWeightを比較し、ユーザステータスを返す<br>
 	 *
 	 * @param inputWeight
-	 *            入力体重
+	 *     入力体重
 	 * @param beforeWeight
-	 *            前の体重
+	 *     前の体重
 	 * @return
 	 */
 	String getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
@@ -24,7 +24,7 @@ public interface HealthInfoCalcService {
 	 * cm → m</br>
 	 *
 	 * @param target
-	 *            対象の値
+	 *     対象の値
 	 * @return メートル
 	 */
 	BigDecimal convertMeterFromCentiMeter(BigDecimal target);
@@ -34,7 +34,7 @@ public interface HealthInfoCalcService {
 	 * m → cm
 	 *
 	 * @param target
-	 *            対象の値
+	 *     対象の値
 	 * @return センチメートル
 	 */
 	BigDecimal convertCentiMeterFromMeter(BigDecimal target);
@@ -43,11 +43,11 @@ public interface HealthInfoCalcService {
 	 * BMIを計算</br>
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 * @param weight
-	 *            体重
+	 *     体重
 	 * @param digit
-	 *            四捨五入桁数
+	 *     四捨五入桁数
 	 * @return BMIを計算
 	 */
 	BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit);
@@ -56,9 +56,9 @@ public interface HealthInfoCalcService {
 	 * 標準体重を計算</br>
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 * @param digit
-	 *            四捨五入桁数
+	 *     四捨五入桁数
 	 * @return 標準体重を計算
 	 */
 	BigDecimal calcStandardWeight(BigDecimal height, int digit);
@@ -67,9 +67,9 @@ public interface HealthInfoCalcService {
 	 * 最後に入力した体重と今の体重の差を計算
 	 *
 	 * @param before
-	 *            前の体重
+	 *     前の体重
 	 * @param now
-	 *            今の体重
+	 *     今の体重
 	 * @return 体重の差(小数第2位を四捨五入する)
 	 */
 	BigDecimal calcDiffWeight(BigDecimal before, BigDecimal now);

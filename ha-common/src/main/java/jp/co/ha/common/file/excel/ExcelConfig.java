@@ -24,7 +24,7 @@ public class ExcelConfig {
 	 * charsetを設定する<br>
 	 *
 	 * @param charset
-	 *            Charset
+	 *     Charset
 	 */
 	public void setCharset(Charset charset) {
 		this.charset = charset;

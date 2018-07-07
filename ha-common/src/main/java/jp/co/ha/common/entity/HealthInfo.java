@@ -91,7 +91,7 @@ public class HealthInfo implements Serializable {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -110,7 +110,7 @@ public class HealthInfo implements Serializable {
 	 * heightを設定する
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -129,7 +129,7 @@ public class HealthInfo implements Serializable {
 	 * weightを設定する
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -148,7 +148,7 @@ public class HealthInfo implements Serializable {
 	 * bmiを設定する
 	 *
 	 * @param bmi
-	 *            BMI
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -167,7 +167,7 @@ public class HealthInfo implements Serializable {
 	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
-	 *            標準体重
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -186,7 +186,7 @@ public class HealthInfo implements Serializable {
 	 * userStatusを設定する
 	 *
 	 * @param userStatus
-	 *            ユーザステータス
+	 *     ユーザステータス
 	 */
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
@@ -205,7 +205,7 @@ public class HealthInfo implements Serializable {
 	 * regDateを設定する
 	 *
 	 * @param regDate
-	 *            登録日時
+	 *     登録日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

@@ -22,7 +22,7 @@ public enum RegixPattern {
 	 * コンストラクタ<br>
 	 *
 	 * @param pattern
-	 *            正規表現
+	 *     正規表現
 	 */
 	private RegixPattern(String pattern) {
 		this.pattern = pattern;
@@ -42,9 +42,9 @@ public enum RegixPattern {
 	 * 正しい場合true, 異なる場合falseを返す<br>
 	 *
 	 * @param target
-	 *            対象文字列
+	 *     対象文字列
 	 * @param pattern
-	 *            正規表現
+	 *     正規表現
 	 * @return
 	 */
 	public static boolean isPattern(String target, RegixPattern pattern) {

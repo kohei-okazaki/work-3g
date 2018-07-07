@@ -34,9 +34,9 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * 健康情報を取得する<br>
 	 *
 	 * @param form
-	 *            健康情報照会画面フォーム
+	 *     健康情報照会画面フォーム
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return
 	 */
 	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) {
@@ -67,7 +67,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * 指定した文字列型のyyyy-MM-ddをDate型(yyyy/MM/dd)で返す<br>
 	 *
 	 * @param date
-	 *            日付
+	 *     日付
 	 * @return
 	 */
 	private Date editStrDate(String date) {
@@ -93,14 +93,13 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		return resultList;
 	}
 
-
 	/**
 	 * 結果照会CSVモデルリストに変換する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @param resultList
-	 *            List<HealthInfoReferenceResponse>
+	 *     List<HealthInfoReferenceResponse>
 	 * @return modelList
 	 */
 	@Override

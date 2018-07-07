@@ -25,7 +25,8 @@ import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
  *
  */
 @Service(value = "referenceDownloadExcel")
-public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoReferenceResponse>> {
+public class HealthInfoReferExcelDownloadServiceImpl
+		implements ExcelDownloadService<List<HealthInfoReferenceResponse>> {
 
 	/** アカウント検索サービス */
 	@Autowired
@@ -52,9 +53,9 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 * 健康情報履歴リストをモデルリストに変換する<br>
 	 *
 	 * @param historyList
-	 *            List<HealthInfoReferenceResponse> 健康情報リスト履歴リスト
+	 *     List<HealthInfoReferenceResponse> 健康情報リスト履歴リスト
 	 * @param account
-	 *            アカウント情報
+	 *     アカウント情報
 	 * @return modelList
 	 */
 	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResponse> historyList, Account account) {

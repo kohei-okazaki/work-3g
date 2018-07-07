@@ -16,11 +16,11 @@ import jp.co.ha.common.log.AppLoggerFactory;
  * すべてのRestAPIコントローラはこのクラスを継承すること<br>
  *
  * @param <Rq>
- *            リクエストクラス
+ *     リクエストクラス
  * @param <Rs>
- *            レスポンスクラス
+ *     レスポンスクラス
  * @param <S>
- *            サービスクラス
+ *     サービスクラス
  */
 public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
 
@@ -28,9 +28,9 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * GET通信の処理を行う<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param response
-	 *            HttpServletResponse
+	 *     HttpServletResponse
 	 * @return
 	 */
 	@GetMapping
@@ -56,7 +56,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * POST通信の処理を行う<br>
 	 *
 	 * @param apiRequest
-	 *            Rq
+	 *     Rq
 	 * @return
 	 */
 	@PostMapping
@@ -81,10 +81,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * 継承先のコントローラクラスで処理する<br>
 	 *
 	 * @param request
-	 *            リクエストクラス
+	 *     リクエストクラス
 	 * @return response レスポンスクラス
 	 * @throws BaseAppException
-	 *             例外クラス
+	 *     例外クラス
 	 */
 	Rs execute(Rq request) throws BaseAppException;
 
@@ -92,10 +92,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * Requestクラスに変換する<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return apiRequest Rq
 	 * @throws BaseAppException
-	 *             例外クラス
+	 *     例外クラス
 	 */
 	Rq toRequest(HttpServletRequest request) throws BaseAppException;
 

@@ -11,7 +11,9 @@ public interface AccountRegistService {
 
 	/**
 	 * アカウントEntityに変換する<br>
-	 * @param form AccountRegistForm
+	 *
+	 * @param form
+	 *     アカウント登録画面フォーム
 	 * @return
 	 */
 	Account toAccount(AccountRegistForm form);
@@ -19,7 +21,10 @@ public interface AccountRegistService {
 	/**
 	 * 指定したアカウント情報が有効かどうか判定する<br>
 	 * 作成できないアカウント情報の場合true, それ以外の場合false<br>
-	 * @return AccountRegistForm
+	 *
+	 * @param form
+	 *     アカウント登録画面フォーム
+	 * @return
 	 */
 	boolean invalidUserId(AccountRegistForm form);
 

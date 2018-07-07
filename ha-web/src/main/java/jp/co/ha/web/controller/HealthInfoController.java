@@ -90,6 +90,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 	/**
 	 * Formを返す<br>
+	 *
 	 * @return
 	 */
 	@ModelAttribute("healthInfoForm")
@@ -162,12 +163,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * 健康情報Excelをダウンロードする<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @param form
-	 *            HealthInfoForm
+	 *     HealthInfoForm
 	 * @return
 	 * @throws HealthInfoException
-	 *             健康情報例外
+	 *     健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseAppException {
@@ -190,13 +191,13 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * 健康情報CSVをダウンロードする<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param response
-	 *            HttpServletResponse
+	 *     HttpServletResponse
 	 * @param form
-	 *            健康情報フォーム
+	 *     健康情報フォーム
 	 * @throws HealthInfoException
-	 *             健康情報例外
+	 *     健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {

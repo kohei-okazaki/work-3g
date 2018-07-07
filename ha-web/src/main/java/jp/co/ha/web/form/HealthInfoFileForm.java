@@ -38,7 +38,7 @@ public class HealthInfoFileForm implements BaseForm {
 	 * multipartFileを設定する<br>
 	 *
 	 * @param multipartFile
-	 *            アップロードファイル
+	 *     アップロードファイル
 	 */
 	public void setMultipartFile(MultipartFile multipartFile) {
 		this.multipartFile = multipartFile;
@@ -46,6 +46,7 @@ public class HealthInfoFileForm implements BaseForm {
 
 	/**
 	 * modelListを返す
+	 *
 	 * @return modelList
 	 */
 	public List<HealthInfoUploadModel> getModelList() {
@@ -54,7 +55,9 @@ public class HealthInfoFileForm implements BaseForm {
 
 	/**
 	 * modelListを設定する
-	 * @param modelList 健康情報モデルリスト
+	 *
+	 * @param modelList
+	 *     健康情報モデルリスト
 	 */
 	public void setModelList(List<HealthInfoUploadModel> modelList) {
 		this.modelList = modelList;

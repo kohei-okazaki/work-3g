@@ -72,9 +72,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * 更新処理を行う<br>
 	 *
 	 * @param account
-	 *            アカウント情報
+	 *     アカウント情報
 	 * @param mainlInfo
-	 *            メール情報
+	 *     メール情報
 	 */
 	private void update(Account account, MailInfo mailInfo) {
 
@@ -89,9 +89,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * フォーム情報をアカウント情報にマージする<br>
 	 *
 	 * @param account
-	 *            アカウント情報
+	 *     アカウント情報
 	 * @param form
-	 *            アカウント設定情報フォーム
+	 *     アカウント設定情報フォーム
 	 * @return
 	 */
 	private void mergeAccount(Account account, AccountSettingForm form) {
@@ -102,7 +102,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * フォーム情報をメール情報に変換する<br>
 	 *
 	 * @param form
-	 *            アカウント設定情報フォーム
+	 *     アカウント設定情報フォーム
 	 * @return
 	 */
 	private MailInfo convertMailInfo(AccountSettingForm form) {
@@ -117,9 +117,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * フォーム情報をメール情報にマージする<br>
 	 *
 	 * @param mailInfo
-	 *            メール情報
+	 *     メール情報
 	 * @param form
-	 *            アカウント設定情報フォーム
+	 *     アカウント設定情報フォーム
 	 * @return
 	 */
 	private void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {

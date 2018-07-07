@@ -13,9 +13,9 @@ public class AppIOException extends BaseAppRuntimeException {
 	 * コンストラクタ<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @param detail
-	 *            詳細
+	 *     詳細
 	 */
 	public AppIOException(ErrorCode errorCode, String errorMessage) {
 		super(errorCode, errorMessage);

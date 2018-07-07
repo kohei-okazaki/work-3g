@@ -12,7 +12,7 @@ public interface MailInfoSearchService {
 	 * ユーザIDからメール情報を取得する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return メール情報
 	 */
 	MailInfo findByUserId(String userId);

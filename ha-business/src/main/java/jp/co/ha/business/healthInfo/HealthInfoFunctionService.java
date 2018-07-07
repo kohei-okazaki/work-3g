@@ -14,7 +14,7 @@ public interface HealthInfoFunctionService {
 	 * マスク表示する場合true, それ以外の場合falseを返す<br>
 	 *
 	 * @param account
-	 *            アカウント
+	 *     アカウント
 	 * @return
 	 */
 	boolean useHealthInfoMask(Account account);
@@ -24,7 +24,7 @@ public interface HealthInfoFunctionService {
 	 * 囲い文字を利用する場合true, それ以外の場合falseを返す<br>
 	 *
 	 * @param account
-	 *            アカウント
+	 *     アカウント
 	 * @return
 	 */
 	boolean useFileEnclosureCharFlag(Account account);

@@ -13,9 +13,9 @@ public class DataBaseException extends BaseAppRuntimeException {
 	 * コンストラクタ<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @param detail
-	 *            詳細
+	 *     詳細
 	 */
 	public DataBaseException(ErrorCode errorCode, String errorMessage) {
 		super(errorCode, errorMessage);

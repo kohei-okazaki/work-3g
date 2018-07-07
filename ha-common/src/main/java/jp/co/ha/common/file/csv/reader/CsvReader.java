@@ -24,7 +24,7 @@ import jp.co.ha.common.util.StringUtil;
  * CSV読込クラス<br>
  *
  * @param <T>
- *            CSVモデル
+ *     CSVモデル
  */
 public abstract class CsvReader<T extends BaseCsvModel> {
 
@@ -34,7 +34,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 * 1行読込を行う<br>
 	 *
 	 * @param record
-	 *            レコード
+	 *     レコード
 	 * @return
 	 */
 	public T read(String record) {
@@ -84,9 +84,9 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 * ファイル内の長さチェックを行う<br>
 	 *
 	 * @param colList
-	 *            カラムリスト
+	 *     カラムリスト
 	 * @param dataList
-	 *            データリスト
+	 *     データリスト
 	 */
 	private boolean hasFileLengthError(List<String> colList, List<String> dataList) {
 		return dataList.size() != colList.size();
@@ -96,11 +96,11 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 * 入力されたファイルをリストで返す<br>
 	 *
 	 * @param is
-	 *            InputStream
+	 *     InputStream
 	 * @return
-	 * @throws IOException
+	 * @throws AppIOException
 	 */
-	public List<String> toList(InputStream is) throws IOException {
+	public List<String> toList(InputStream is) throws AppIOException {
 
 		List<String> list = new ArrayList<String>();
 		try (InputStreamReader isr = new InputStreamReader(is);

@@ -44,7 +44,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            健康情報ID
+	 *     健康情報ID
 	 */
 	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
@@ -63,7 +63,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 * fromRegDateを設定する<br>
 	 *
 	 * @param fromRegDate
-	 *            fromRegDate
+	 *     fromRegDate
 	 */
 	public void setFromRegDate(String fromRegDate) {
 		this.fromRegDate = fromRegDate;
@@ -82,7 +82,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 * toRegDateを設定する<br>
 	 *
 	 * @param toRegDate
-	 *            toRegDate
+	 *     toRegDate
 	 */
 	public void setToRegDate(String toRegDate) {
 		this.toRegDate = toRegDate;
@@ -101,7 +101,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 * regDateSelectFlagを設定する<br>
 	 *
 	 * @param regDateSelectFlag
-	 *            登録日直接指定フラグ
+	 *     登録日直接指定フラグ
 	 */
 	public void setRegDateSelectFlag(String regDateSelectFlag) {
 		this.regDateSelectFlag = regDateSelectFlag;

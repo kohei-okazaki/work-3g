@@ -107,20 +107,22 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * 検索結果画面を表示<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @param form
-	 *            検索情報フォーム
+	 *     検索情報フォーム
 	 * @param result
-	 *            BindingResult
+	 *     BindingResult
 	 * @return
+	 * @throws HealthInfoException
+	 *     健康情報例外
 	 */
 	@PostMapping(value = "/healthInfo-reference.html")
 	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid HealthInfoReferenceForm form,
-			BindingResult result) {
+			BindingResult result) throws HealthInfoException {
 
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
@@ -145,11 +147,12 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * Excelダウンロードを実行<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param resultList
-	 *            List<HealthInfoReferenceResponse>
+	 *     List<HealthInfoReferenceResponse>
 	 * @return
 	 * @throws HealthInfoException
+	 *     健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-reference-excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request) throws HealthInfoException {
@@ -168,11 +171,11 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * CSVダウンロードを実行<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param response
-	 *            HttpServletResponse
+	 *     HttpServletResponse
 	 * @throws HealthInfoException
-	 *             健康情報例外
+	 *     健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-reference-csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws HealthInfoException {

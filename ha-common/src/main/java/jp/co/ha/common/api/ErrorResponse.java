@@ -18,7 +18,7 @@ public class ErrorResponse extends BaseResponse {
 	 * コンストラクタ<br>
 	 *
 	 * @param e
-	 *            BaseAppException 例外
+	 *     BaseAppException 例外
 	 */
 	public ErrorResponse(BaseAppException e) {
 		super.setResult(ResultType.FAILURE);
@@ -37,7 +37,9 @@ public class ErrorResponse extends BaseResponse {
 
 	/**
 	 * errorCodeを設定する<br>
-	 * @param errorCode ErrorCode
+	 *
+	 * @param errorCode
+	 *     ErrorCode
 	 */
 	public void setErrorCode(ErrorCode errorCode) {
 		this.errorCode = errorCode;
@@ -54,6 +56,7 @@ public class ErrorResponse extends BaseResponse {
 
 	/**
 	 * detailを設定する<br>
+	 *
 	 * @param detail
 	 */
 	public void setDetail(String detail) {

@@ -53,11 +53,11 @@ public enum ErrorCode {
 	 * コンストラクタ<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @param logLevel
-	 *            ログレベル
+	 *     ログレベル
 	 * @param errorMessage
-	 *            エラーメッセージ
+	 *     エラーメッセージ
 	 */
 	private ErrorCode(String errorCode, String logLevel, String errorMessage) {
 		this.errorCode = errorCode;
@@ -96,13 +96,13 @@ public enum ErrorCode {
 	 * 指定されたエラーコードと一致するErrorCodeを返す<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @return
 	 */
 	public static ErrorCode of(String errorCode) {
 		return Stream.of(ErrorCode.class.getEnumConstants())
-					.filter(code -> code.errorCode.equals(errorCode))
-					.findFirst()
-					.orElse(null);
+				.filter(code -> code.errorCode.equals(errorCode))
+				.findFirst()
+				.orElse(null);
 	}
 }

@@ -12,7 +12,7 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 	 * エラーメッセージを返す<br>
 	 *
 	 * @param e
-	 *            例外クラス
+	 *     例外クラス
 	 * @return
 	 */
 	String buildErrorMessage(Exception e);
