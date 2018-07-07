@@ -109,6 +109,8 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 			while (BeanUtil.notNull(line = br.readLine())) {
 				list.add(line);
 			}
+		} catch (IOException e) {
+			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "ファイルの読込に失敗しました。");
 		}
 		return list;
 	}

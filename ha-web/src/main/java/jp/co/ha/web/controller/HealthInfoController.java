@@ -38,6 +38,7 @@ import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
@@ -149,8 +150,10 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// 健康情報登録処理を行う
 		HealthInfoRegistResponse apiResponse = healthInfoRegistService.execute(apiRequest);
 
+		// レスポンス情報をformに設定
+		BeanUtil.copy(apiResponse, form);
 		// レスポンスを設定
-		model.addAttribute("healthInfo", apiResponse);
+		model.addAttribute("healthInfo", form);
 
 		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
 	}
