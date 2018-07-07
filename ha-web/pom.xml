@@ -21,6 +21,7 @@
 		<org.thymeleaf-version>3.0.9.RELEASE</org.thymeleaf-version>
 		<org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
 		<ha-version>1.0</ha-version>
+		<mysql-version>8.0.11</mysql-version>
 	</properties>
 
 	<dependencies>
@@ -140,6 +141,11 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.197</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-version}</version>
 		</dependency>
 
 		<!-- AspectJ -->
