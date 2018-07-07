@@ -40,7 +40,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				HealthInfo healthInfo = new HealthInfo();
-				healthInfo.setHealthInfoId(rs.getString(HEALTH_INFO_ID));
+				healthInfo.setHealthInfoId(rs.getBigDecimal(HEALTH_INFO_ID));
 				healthInfo.setUserId(rs.getString(USER_ID));
 				healthInfo.setHeight(rs.getBigDecimal(HEIGHT));
 				healthInfo.setWeight(rs.getBigDecimal(WEIGHT));
@@ -74,7 +74,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				healthInfo = new HealthInfo();
-				healthInfo.setHealthInfoId(rs.getString(HEALTH_INFO_ID));
+				healthInfo.setHealthInfoId(rs.getBigDecimal(HEALTH_INFO_ID));
 				healthInfo.setUserId(rs.getString(USER_ID));
 				healthInfo.setHeight(rs.getBigDecimal(HEIGHT));
 				healthInfo.setWeight(rs.getBigDecimal(WEIGHT));
@@ -101,8 +101,15 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 		try {
 			connect();
 			Statement stm = this.con.createStatement();
-			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
-												+ "'" + healthInfo.getHealthInfoId() + "', "
+			String sql = "INSERT INTO " + TABLE_NAME + "("
+												+ USER_ID + ", "
+												+ HEIGHT + ", "
+												+ WEIGHT + ", "
+												+ BMI + ", "
+												+ STANDARD_WEIGHT + ", "
+												+ USER_STATUS + ", "
+												+ REG_DATE
+												+ ") VALUES ("
 												+ "'" + healthInfo.getUserId() + "', "
 												+ "'" + healthInfo.getHeight() + "', "
 												+ "'" + healthInfo.getWeight() + "', "

@@ -26,7 +26,7 @@ public class HealthInfo implements Serializable {
 	/** データID */
 	@Id
 	@Column(name = "HEALTH_INFO_ID", nullable = false, length = 3)
-	private String healthInfoId;
+	private BigDecimal healthInfoId;
 
 	/** ユーザID */
 	@Column(name = "USER_ID", nullable = false, length = 3)
@@ -65,7 +65,7 @@ public class HealthInfo implements Serializable {
 	 *
 	 * @return healthInfoId
 	 */
-	public String getHealthInfoId() {
+	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -74,7 +74,7 @@ public class HealthInfo implements Serializable {
 	 *
 	 * @param healthInfoId
 	 */
-	public void setHealthInfoId(String healthInfoId) {
+	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 

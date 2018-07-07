@@ -39,6 +39,9 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 		}
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		checkExistAccount(errors, account);
+		if (errors.hasErrors()) {
+			return;
+		}
 		checkInvalidPassword(errors, form.getPassword(), account.getPassword());
 		checkDeleteAccount(errors, account);
 		checkAccountExpired(errors, account);

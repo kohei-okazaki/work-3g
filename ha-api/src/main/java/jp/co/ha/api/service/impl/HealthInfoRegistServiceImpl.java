@@ -98,21 +98,20 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		BigDecimal weight = request.getWeight();
 
 		// メートルに変換する
-		BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(request.getHeight());
+		BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
 
-		BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, request.getWeight(), 2);
+		BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, weight, 2);
 		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
-		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(request.getUserId());
+		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
 
 		String userStatus = BeanUtil.isNull(lastHealthInfo)
 				? ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue()
-				: healthInfoCalcService.getUserStatus(request.getWeight(), lastHealthInfo.getWeight());
+				: healthInfoCalcService.getUserStatus(weight, lastHealthInfo.getWeight());
 		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();
-		entity.setHealthInfoId(getNextHealthInfoId(lastHealthInfo));
 		entity.setUserId(userId);
 		entity.setHeight(height);
 		entity.setWeight(weight);
@@ -135,17 +134,6 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
 		return response;
-	}
-
-	/**
-	 * 次の健康情報IDを取得する
-	 *
-	 * @param healthInfo
-	 *            健康情報
-	 * @return
-	 */
-	private String getNextHealthInfoId(HealthInfo healthInfo) {
-		return BeanUtil.isNull(healthInfo) ? "1" : String.valueOf(Integer.valueOf(healthInfo.getHealthInfoId()) + 1);
 	}
 
 }
