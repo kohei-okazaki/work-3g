@@ -2,17 +2,13 @@ package jp.co.ha.business.create;
 
 import java.util.List;
 
-import jp.co.ha.common.dao.BaseDao;
-
 /**
  * 基底Entity作成サービスインターフェース<br>
  *
  * @param <T>
  *            Entity
- * @param <D>
- *            Daoクラス
  */
-public interface BaseCreateService<T, D extends BaseDao> {
+public interface BaseCreateService<T> {
 
 	/**
 	 * Entityを作成する<br>

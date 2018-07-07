@@ -8,7 +8,7 @@ import jp.co.ha.common.entity.MailInfo;
  * メール情報のDaoインターフェース
  *
  */
-public interface MailInfoDao extends BaseDao {
+public interface MailInfoDao {
 
 	public static final String TABLE_NAME = "MAIL_INFO";
 

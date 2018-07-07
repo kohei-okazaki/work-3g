@@ -80,7 +80,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 													+ "'" + account.getHealthInfoMaskFlag() + "', "
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
-													+")";
+													+ ")";
 			int rs = stm.executeUpdate(sql);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {

@@ -9,9 +9,8 @@ import jp.co.ha.common.exception.DataBaseException;
  * アカウント情報のDaoインターフェイス
  *
  */
-public interface AccountDao extends BaseDao {
+public interface AccountDao {
 
-	/** 保存先シート名 */
 	public static final String TABLE_NAME = "ACCOUNT";
 
 	public static final String USER_ID = "USER_ID";
