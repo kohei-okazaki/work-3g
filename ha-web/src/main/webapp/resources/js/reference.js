@@ -10,7 +10,7 @@ function referenceExcelDownload() {
 // CSVをダウンロードする関数
 function referenceCsvDownload() {
 	var form = document.createElement('form');
-	form.action = './healthInfo-reference-csvDownload';
+	form.action = './healthInfo-reference-csvDownload.html';
 	form.method = 'get';
 	document.body.appendChild(form);
 	form.submit();

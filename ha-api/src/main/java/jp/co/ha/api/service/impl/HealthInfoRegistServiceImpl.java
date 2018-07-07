@@ -133,6 +133,8 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		BeanUtil.copy(healthInfo, response);
 		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
+		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(healthInfo.getUserId());
+		response.setHealthInfoId(lastEntity.getHealthInfoId());
 		return response;
 	}
 

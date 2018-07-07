@@ -23,7 +23,7 @@ public class HealthInfo implements Serializable {
 	@Ignore
 	private static final long serialVersionUID = 1L;
 
-	/** データID */
+	/** 健康情報ID */
 	@Id
 	@Column(name = "HEALTH_INFO_ID", nullable = false, length = 3)
 	private BigDecimal healthInfoId;

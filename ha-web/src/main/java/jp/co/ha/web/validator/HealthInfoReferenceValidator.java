@@ -2,6 +2,7 @@ package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
 
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseValidator;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
@@ -34,7 +35,7 @@ public class HealthInfoReferenceValidator extends BaseValidator<HealthInfoRefere
 	 */
 	private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
-		if (StringUtil.isEmpty(form.getHealthInfoId())) {
+		if (BeanUtil.isNull(form.getHealthInfoId()) || StringUtil.isEmpty(form.getHealthInfoId().toString())) {
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromRegDate())) {

@@ -174,7 +174,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws HealthInfoException
 	 *             健康情報例外
 	 */
-	@GetMapping(value = "/healthInfo-reference-csvDownload")
+	@GetMapping(value = "/healthInfo-reference-csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws HealthInfoException {
 
 		// sessionから検索結果リストとユーザIDを取得

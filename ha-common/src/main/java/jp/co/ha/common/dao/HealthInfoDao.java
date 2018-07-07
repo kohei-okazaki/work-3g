@@ -1,5 +1,6 @@
 package jp.co.ha.common.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.dao.DuplicateKeyException;
@@ -38,7 +39,7 @@ public interface HealthInfoDao {
 	 *            健康情報ID
 	 * @return HealthInfo 健康情報
 	 */
-	HealthInfo selectByHealthInfoId(String healthInfoId) throws DataBaseException;
+	HealthInfo selectByHealthInfoId(BigDecimal healthInfoId) throws DataBaseException;
 
 	/**
 	 * 健康情報を登録する<br>

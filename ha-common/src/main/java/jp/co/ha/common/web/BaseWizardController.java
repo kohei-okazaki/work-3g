@@ -15,8 +15,6 @@ import jp.co.ha.common.exception.BaseAppException;
  *
  * @param <F>
  *            対象formクラス
- * @param <E>
- *            例外クラス
  */
 public interface BaseWizardController<F extends BaseForm> extends BaseWebController {
 

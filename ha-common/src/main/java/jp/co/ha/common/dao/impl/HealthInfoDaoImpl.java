@@ -1,5 +1,6 @@
 package jp.co.ha.common.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -64,13 +65,13 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo selectByHealthInfoId(String healthInfoId) throws DataBaseException {
+	public HealthInfo selectByHealthInfoId(BigDecimal healthInfoId) throws DataBaseException {
 
 		HealthInfo healthInfo = null;
 		try {
 			connect();
 			Statement stm = this.con.createStatement();
-			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE HEALTH_INFO_ID = '" + healthInfoId + "'";
+			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE HEALTH_INFO_ID = '" + healthInfoId.toString() + "'";
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				healthInfo = new HealthInfo();

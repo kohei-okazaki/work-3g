@@ -1,6 +1,7 @@
 package jp.co.ha.web.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,7 +91,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * Formを返す<br>
 	 * @return
 	 */
-	@ModelAttribute
+	@ModelAttribute("healthInfoForm")
 	public HealthInfoForm setUpForm() {
 		return new HealthInfoForm();
 	}
@@ -168,7 +169,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@GetMapping(value = "/healthInfo-excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseAppException {
 
-		String requestHealthInfoId = form.getHealthInfoId();
+		BigDecimal requestHealthInfoId = form.getHealthInfoId();
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
 
 		if (!hasRecord) {
@@ -194,7 +195,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @throws HealthInfoException
 	 *             健康情報例外
 	 */
-	@GetMapping(value = "/healthInfo-csvDownload")
+	@GetMapping(value = "/healthInfo-csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);

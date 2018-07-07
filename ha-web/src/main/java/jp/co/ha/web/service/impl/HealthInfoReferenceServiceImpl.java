@@ -42,7 +42,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) {
 
 		List<HealthInfo> resultList = null;
-		if (StringUtil.isEmpty(form.getHealthInfoId())) {
+		if (BeanUtil.isNull(form.getHealthInfoId()) || StringUtil.isEmpty(form.getHealthInfoId().toString())) {
 			Date regDate = editStrDate(form.getFromRegDate());
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 登録日直接指定フラグがONの場合

@@ -12,7 +12,7 @@ import jp.co.ha.common.log.annotation.Mask;
 public class HealthInfoReferenceResponse extends BaseResponse {
 
 	/** 健康情報ID */
-	private String healthInfoId;
+	private BigDecimal healthInfoId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
@@ -33,9 +33,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	/**
 	 * healthInfoIdを返す<br>
 	 *
-	 * @return healthInfoId healthInfoId
+	 * @return healthInfoId 健康情報ID
 	 */
-	public String getHealthInfoId() {
+	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -43,9 +43,9 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            healthInfoId
+	 *            健康情報ID
 	 */
-	public void setHealthInfoId(String healthInfoId) {
+	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 

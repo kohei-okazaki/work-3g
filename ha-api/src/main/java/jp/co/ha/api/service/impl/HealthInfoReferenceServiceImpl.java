@@ -40,7 +40,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		if (StringUtil.isEmpty(request.getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
-				|| StringUtil.isEmpty(request.getHealthInfoId())) {
+				|| BeanUtil.isNull(request.getHealthInfoId())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
 

@@ -57,15 +57,15 @@ public interface HealthInfoService {
 	HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId);
 
 	/**
-	 * 指定した健康情報リストの中に指定したデータIDが含まれるかどうか返す<br>
+	 * 指定した健康情報リストの中に指定した健康情報IDが含まれるかどうか返す<br>
 	 *
 	 * @param entityList
 	 *            健康情報リスト
-	 * @param dataId
-	 *            データID
+	 * @param healthInfoId
+	 *            健康情報ID
 	 * @return
 	 */
-	boolean hasRecord(List<HealthInfo> entityList, String dataId);
+	boolean hasRecord(List<HealthInfo> entityList, BigDecimal healthInfoId);
 
 	/**
 	 * CSVモデルリストに変換する<br>

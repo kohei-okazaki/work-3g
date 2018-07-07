@@ -20,7 +20,7 @@ public class HealthInfoForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
-	private String healthInfoId;
+	private BigDecimal healthInfoId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
@@ -43,9 +43,9 @@ public class HealthInfoForm implements BaseForm {
 	/**
 	 * healthInfoIdを返す<br>
 	 *
-	 * @return healthInfoId healthInfoId
+	 * @return healthInfoId 健康情報ID
 	 */
-	public String getHealthInfoId() {
+	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -53,9 +53,9 @@ public class HealthInfoForm implements BaseForm {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            healthInfoId
+	 *            健康情報ID
 	 */
-	public void setHealthInfoId(String healthInfoId) {
+	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 

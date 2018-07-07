@@ -1,5 +1,7 @@
 package jp.co.ha.api.controller;
 
+import java.math.BigDecimal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class HealthInfoReferenceController implements
 		HealthInfoReferenceRequest apiRequest = new HealthInfoReferenceRequest();
 		apiRequest.setRequestId(request.getParameter("requestId"));
 		apiRequest.setUserId(request.getParameter("userId"));
-		apiRequest.setHealthInfoId(request.getParameter("healthInfoId"));
+		apiRequest.setHealthInfoId(new BigDecimal(request.getParameter("healthInfoId")));
 
 		return apiRequest;
 	}

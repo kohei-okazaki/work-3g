@@ -1,5 +1,6 @@
 package jp.co.ha.business.find;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface HealthInfoSearchService {
 	 *            データID
 	 * @return 健康情報Entity
 	 */
-	HealthInfo findByHealthInfoId(String healthInfoId);
+	HealthInfo findByHealthInfoId(BigDecimal healthInfoId);
 
 	/**
 	 * 指定したユーザIDで最後に登録した健康情報を返す<br>

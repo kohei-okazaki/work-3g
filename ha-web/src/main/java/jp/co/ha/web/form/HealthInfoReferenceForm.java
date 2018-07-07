@@ -1,5 +1,7 @@
 package jp.co.ha.web.form;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -18,7 +20,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
-	private String healthInfoId;
+	private BigDecimal healthInfoId;
 	/** 登録日直接指定フラグ */
 	@NotEmpty(message = "登録日直接指定フラグが未入力です")
 	@Pattern(regexp = "^[0-9]*$", message = "登録日直接指定フラグが半角数字でありません")
@@ -32,9 +34,9 @@ public class HealthInfoReferenceForm implements BaseForm {
 	/**
 	 * healthInfoIdを返す<br>
 	 *
-	 * @return healthInfoId healthInfoId
+	 * @return healthInfoId 健康情報ID
 	 */
-	public String getHealthInfoId() {
+	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -42,9 +44,9 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            healthInfoId
+	 *            健康情報ID
 	 */
-	public void setHealthInfoId(String healthInfoId) {
+	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 
