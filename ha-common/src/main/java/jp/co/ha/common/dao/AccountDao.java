@@ -3,6 +3,7 @@ package jp.co.ha.common.dao;
 import org.springframework.dao.DuplicateKeyException;
 
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.exception.DataBaseException;
 
 /**
  * アカウント情報のDaoインターフェイス
@@ -11,7 +12,7 @@ import jp.co.ha.common.entity.Account;
 public interface AccountDao extends BaseDao {
 
 	/** 保存先シート名 */
-	public static final String SHEET = "ACCOUNT";
+	public static final String TABLE_NAME = "ACCOUNT";
 
 	public static final String USER_ID = "USER_ID";
 	public static final String PASSWORD = "PASSWORD";
@@ -30,7 +31,7 @@ public interface AccountDao extends BaseDao {
 	 *            ユーザID
 	 * @return Account アカウント情報
 	 */
-	Account selectByUserId(String userId);
+	Account selectByUserId(String userId) throws DataBaseException ;
 
 	/**
 	 * アカウント情報を作成する<br>
@@ -39,7 +40,7 @@ public interface AccountDao extends BaseDao {
 	 *            アカウント情報
 	 * @throws DuplicateKeyException
 	 */
-	void create(Account account) throws DuplicateKeyException;
+	void create(Account account) throws DuplicateKeyException, DataBaseException;
 
 	/**
 	 * 引数で指定されたアカウント情報を更新する
@@ -47,7 +48,7 @@ public interface AccountDao extends BaseDao {
 	 * @param account
 	 *            アカウント情報
 	 */
-	void update(Account account);
+	void update(Account account) throws DataBaseException ;
 
 	/**
 	 * 指定されたアカウント情報の削除を行う<br>
@@ -55,6 +56,6 @@ public interface AccountDao extends BaseDao {
 	 * @param userId
 	 *            ユーザID
 	 */
-	void delete(String userId);
+	void delete(String userId) throws DataBaseException ;
 
 }

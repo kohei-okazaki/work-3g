@@ -30,6 +30,8 @@ public enum ErrorCode {
 	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
 	/** 該当データ存在しないエラー */
 	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません"),
+	/** DBアクセスエラー */
+	DB_ACCESS_ERROR("DB_ACCESS_ERROR", "ERROR", "DBアクセスに失敗しました"),
 
 	/** ファイルアップロード例外 */
 	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "WARN", "ファイルアップロード例外"),
