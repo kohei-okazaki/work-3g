@@ -11,7 +11,7 @@
 	<version>1.0</version>
 
 	<properties>
-		<java-version>9</java-version>
+		<java-version>10</java-version>
 		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.1</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
