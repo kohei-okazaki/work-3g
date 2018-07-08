@@ -20,5 +20,4 @@ public class DataBaseException extends BaseAppRuntimeException {
 	public DataBaseException(ErrorCode errorCode, String errorMessage) {
 		super(errorCode, errorMessage);
 	}
-
 }

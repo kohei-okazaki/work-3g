@@ -20,5 +20,4 @@ public class AppIOException extends BaseAppRuntimeException {
 	public AppIOException(ErrorCode errorCode, String errorMessage) {
 		super(errorCode, errorMessage);
 	}
-
 }

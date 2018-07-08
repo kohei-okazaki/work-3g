@@ -27,28 +27,22 @@ public class Account implements Serializable {
 	@Id
 	@Column(name = "USER_ID", nullable = false, length = 16)
 	private String userId;
-
 	/** パスワード */
 	@Mask
 	@Column(name = "PASSWORD", nullable = false, length = 16)
 	private String password;
-
 	/** 削除フラグ */
 	@Column(name = "DELETE_FLAG", nullable = false, length = 1)
 	private String deleteFlag;
-
 	/** パスワード有効期限 */
 	@Column(name = "PASSWORD_EXPIRE", nullable = false)
 	private Date passwordExpire;
-
 	/** 備考 */
 	@Column(name = "REMARKS", nullable = false)
 	private String remarks;
-
 	/** 更新日時 */
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
-
 	/** 登録日時 */
 	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;

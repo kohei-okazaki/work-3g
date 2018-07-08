@@ -27,21 +27,17 @@ public class MailInfo implements Serializable {
 	@Id
 	@Column(name = "USER_ID", nullable = false, length = 3)
 	private String userId;
-
 	/** メールアドレス */
 	@Mask
 	@Column(name = "MAIL_ADDRESS", nullable = false)
 	private String mailAddress;
-
 	/** メールパスワード */
 	@Mask
 	@Column(name = "MAIL_PASSWORD", nullable = false)
 	private String mailPassword;
-
 	/** 更新日時 */
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
-
 	/** 登録日時 */
 	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
