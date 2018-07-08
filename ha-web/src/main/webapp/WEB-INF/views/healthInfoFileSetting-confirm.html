@@ -24,23 +24,53 @@
 	<div th:include="common/navigation.html"></div>
 	<br><br>
 
-	<!-- 完了画面 -->
+	<!-- 確認画面 -->
+	<form action="./healthInfoFileSetting-complete.html" th:action="@{./healthInfoFileSetting-complete.html}" method="post" th:object="${healthInfoFileSettingForm}">
 	<div align="center">
-		<p>完了しました</p>
-		<br><br>
 		<table>
 			<tr>
-				<td align="center">
-					<!-- メニュー画面へ -->
-					<form action="./menu.html" th:action="@{./menu.html}" method="get">
-						<div>
-							<input class="menuicon" type="image" src="resources/image/icon_menu.jpg">
-						</div>
-					</form>
+				<th width="130px">
+					<p>ユーザID</p>
+				</th>
+				<td width="250px">
+					<input type="text" maxlength="16" required th:field="*{userId}" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th width="130px">
+					<p>ヘッダ利用</p>
+				</th>
+				<td width="250px">
+					<input type="text" required th:field="*{headerFlag}" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<p>フッタ利用</p>
+				</th>
+				<td width="250px">
+					<input type="text" required th:field="*{footerFlag}" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<p>マスク利用</p>
+				</th>
+				<td width="250px">
+					<input type="text" required th:field="*{maskFlag}" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<p>囲み文字利用</p>
+				</th>
+				<td width="250px">
+					<input type="text" required th:field="*{enclosureCharFlag}" readonly="readonly" />
 				</td>
 			</tr>
 		</table>
 	</div>
+	</form>
 
 	<br><br>
 	<hr>

@@ -24,7 +24,23 @@
 	<div th:include="common/navigation.html"></div>
 	<br><br>
 
-	<p></p>
+	<!-- 完了画面 -->
+	<div align="center">
+		<p>完了しました</p>
+		<br><br>
+		<table>
+			<tr>
+				<td align="center">
+					<!-- メニュー画面へ -->
+					<form action="./menu.html" th:action="@{./menu.html}" method="get">
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_menu.jpg">
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
 
 	<br><br>
 	<hr>

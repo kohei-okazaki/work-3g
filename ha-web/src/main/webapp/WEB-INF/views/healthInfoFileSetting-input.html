@@ -22,8 +22,81 @@
 
 	<hr>
 	<div th:include="common/navigation.html"></div>
-	<br><br>
+	<br><br><br>
 
+	<!-- 入力画面 -->
+	<form action="./healthInfoFileSetting-confirm.html" th:action="@{./healthInfoFileSetting-confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
+	<div align="center">
+	<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+	<div th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
+	<div th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
+	<div th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
+	<div th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
+	<table border="1">
+		<tr>
+			<th class="header">
+				<p>ユーザID</p>
+			</th>
+			<td class="data">
+				<p th:text="*{userId}"></p>
+				<input type="hidden" th:field="*{userId}" value="${userId}" />
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>ヘッダ利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked="checked">
+					<label for="headerFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{headerFlag}" id="dheaderFlagTrue" value="1">
+					<label for="headerFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>フッタ利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked="checked">
+					<label for="footerFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{footerFlag}" id="footerFlagTrue" value="1">
+					<label for="footerFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>マスク利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked="checked">
+					<label for="maskFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{maskFlag}" id="maskFlagTrue" value="1">
+					<label for="maskFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>囲み文字利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked="checked">
+					<label for="enclosureCharFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1">
+					<label for="enclosureCharFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+	</table>
+	</div>
+	</form>
 
 	<br><br>
 	<hr>

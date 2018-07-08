@@ -1,7 +1,5 @@
 package jp.co.ha.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -65,7 +63,9 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 		// 健康情報ファイル設定を取得
 		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId);
 		HealthInfoFileSettingForm form = new HealthInfoFileSettingForm();
-		BeanUtil.copy(entity, form, List.of("userId"));
+		if (BeanUtil.notNull(entity)) {
+			BeanUtil.copy(entity, form);
+		}
 		return form;
 	}
 
