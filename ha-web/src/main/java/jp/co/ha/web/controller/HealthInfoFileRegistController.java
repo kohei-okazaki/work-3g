@@ -71,7 +71,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
-	@GetMapping(value = "/healthInfo-fileInput.html")
+	@GetMapping(value = "/healthInfoFile-input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 	}
@@ -79,7 +79,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
-	@PostMapping(value = "/healthInfo-fileConfirm.html")
+	@PostMapping(value = "/healthInfoFile-confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseAppException {
 
 		if (result.hasErrors()) {
@@ -98,7 +98,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
-	@PostMapping(value = "/healthInfo-fileComplete.html")
+	@PostMapping(value = "/healthInfoFile-complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseAppException {
 		List<HealthInfoUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
 		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);

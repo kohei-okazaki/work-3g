@@ -27,14 +27,9 @@
 	<br><br><br>
 
 	<!-- 入力画面 -->
-	<form action="./account-setting-confirm.html" th:action="@{./account-setting-confirm.html}" method="post" th:object="${accountSettingForm}">
+	<form action="./accountSetting-confirm.html" th:action="@{./accountSetting-confirm.html}" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 
-		<!-- <div th:if="${errorMessage} != null">
-			<div class="errorMessage">
-				<p th:text="${errorMessage}"></p>
-			</div>
-		</div> -->
 		<div th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
 		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
 		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>

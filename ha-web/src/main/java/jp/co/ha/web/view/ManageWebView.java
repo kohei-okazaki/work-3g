@@ -10,42 +10,49 @@ public enum ManageWebView implements BaseView {
 
 	/** ログイン画面URL */
 	LOGIN("login"),
+
 	/** 健康情報入力画面URL */
 	HEALTH_INFO_INPUT("healthInfo-input"),
 	/** 健康情報入力確認画面URL */
 	HEALTH_INFO_CONFIRM("healthInfo-confirm"),
 	/** 健康情報入力完了画面URL */
 	HEALTH_INFO_COMPLETE("healthInfo-complete"),
+
 	/** トップ画面URL */
 	TOP("top"),
 	/** エラー画面URL */
 	ERROR("error"),
+
 	/** 健康情報照会画面URL */
 	HEALTH_INFO_REFFERNCE("healthInfo-reference"),
+
 	/** アカウント設定入力画面URL */
-	ACCOUNT_SETTING_INPUT("account-setting-input"),
+	ACCOUNT_SETTING_INPUT("accountSetting-input"),
 	/** アカウント設定入力確認画面URL */
-	ACCOUNT_SETTING_CONFIRM("account-setting-confirm"),
+	ACCOUNT_SETTING_CONFIRM("accountSetting-confirm"),
 	/** アカウント設定入力完了画面URL */
-	ACCOUNT_SETTING_COMPLETE("account-setting-complete"),
-	/** 通知設定入力画面URL */
-	NOTICE_SETTING_INPUT("notice-setting-input"),
-	/** 通知設定入力画面URL */
-	NOTICE_SETTING_CONFIRM("notice-setting-confirm"),
-	/** 通知設定入力完了画面URL */
-	NOTICE_SETTING_COMPLETE("notice-setting-complete"),
+	ACCOUNT_SETTING_COMPLETE("accountSetting-complete"),
+
 	/** アカウント作成入力画面URL */
-	ACCOUNT_REGIST_INPUT("account-regist-input"),
+	ACCOUNT_REGIST_INPUT("accountRegist-input"),
 	/** アカウント作成入力確認画面URL */
-	ACCOUNT_REGIST_CONFIRM("account-regist-confirm"),
+	ACCOUNT_REGIST_CONFIRM("accountRegist-confirm"),
 	/** アカウント作成入力完了画面URL */
-	ACCOUNT_REGIST_COMPLETE("account-regist-complete"),
+	ACCOUNT_REGIST_COMPLETE("accountRegist-complete"),
+
 	/** 健康情報ファイル入力画面URL */
-	HEALTH_INFO_FILE_INPUT("healthInfo-fileInput"),
+	HEALTH_INFO_FILE_INPUT("healthInfoFile-input"),
 	/** 健康情報ファイル確認画面URL */
-	HEALTH_INFO_FILE_CONFIRM("healthInfo-fileConfirm"),
+	HEALTH_INFO_FILE_CONFIRM("healthInfoFile-confirm"),
 	/** 健康情報ファイル入力完了画面URL */
-	HEALTH_INFO_FILE_COMPLETE("healthInfo-fileComplete"),
+	HEALTH_INFO_FILE_COMPLETE("healthInfoFile-complete"),
+
+	/** 健康情報ファイル設定入力画面URL */
+	HEALTH_INFO_FILE_SETTING_INPUT("healthInfoFileSetting-input"),
+	/** 健康情報ファイル設定確認画面URL */
+	HEALTH_INFO_FILE_SETTING_CONFIRM("healthInfoFileSetting-confirm"),
+	/** 健康情報ファイル設定入力完了画面URL */
+	HEALTH_INFO_FILE_SETTING_COMPLETE("healthInfoFileSetting-complete"),
 	;
 
 	/** view名 */

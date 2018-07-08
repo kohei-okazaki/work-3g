@@ -50,10 +50,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	private SessionManageService sessionService;
 
 	/**
-	 * Validateを設定<br>
-	 *
-	 * @param binder
-	 *     WebDataBinder
+	 * {@inheritDoc}
 	 */
 	@Override
 	@InitBinder(value = "accountSettingForm")
@@ -92,7 +89,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/account-setting-input.html")
+	@GetMapping(value = "/accountSetting-input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
 	}
@@ -101,7 +98,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/account-setting-confirm.html")
+	@PostMapping(value = "/accountSetting-confirm.html")
 	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result) throws BaseAppException {
 
 		if (result.hasErrors()) {
@@ -117,7 +114,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/account-setting-complete.html")
+	@PostMapping(value = "/accountSetting-complete.html")
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseAppException {
 
 		// form情報から更新処理を行う
