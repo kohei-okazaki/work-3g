@@ -46,11 +46,11 @@ public class Account implements Serializable {
 	private String remarks;
 
 	/** ファイル囲い文字利用フラグ */
-	@Column(name = "FILE_ENCLOSURE_CHAR_FLAG", nullable = true)
+	@Column(name = "FILE_ENCLOSURE_CHAR_FLAG", nullable = true, length = 1)
 	private String fileEnclosureCharFlag;
 
 	/** 健康情報マスク利用フラグ */
-	@Column(name = "HEALTH_INFO_MASK_FLAG", nullable = true)
+	@Column(name = "HEALTH_INFO_MASK_FLAG", nullable = true, length = 1)
 	private String healthInfoMaskFlag;
 
 	/** 更新日時 */

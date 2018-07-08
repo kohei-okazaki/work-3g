@@ -29,6 +29,8 @@ public interface AccountDao {
 	 * @param userId
 	 *     ユーザID
 	 * @return Account アカウント情報
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
 	Account selectByUserId(String userId) throws DataBaseException;
 
@@ -38,6 +40,8 @@ public interface AccountDao {
 	 * @param account
 	 *     アカウント情報
 	 * @throws DuplicateKeyException
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
 	void create(Account account) throws DuplicateKeyException, DataBaseException;
 
@@ -46,6 +50,8 @@ public interface AccountDao {
 	 *
 	 * @param account
 	 *     アカウント情報
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
 	void update(Account account) throws DataBaseException;
 
@@ -54,6 +60,9 @@ public interface AccountDao {
 	 *
 	 * @param userId
 	 *     ユーザID
+	 *
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
 	void delete(String userId) throws DataBaseException;
 

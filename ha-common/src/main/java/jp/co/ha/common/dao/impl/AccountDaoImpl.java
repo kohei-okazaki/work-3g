@@ -22,22 +22,20 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 
-	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
+	private final AppLogger LOGGER = AppLoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public Account selectByUserId(String userId) throws DataBaseException {
-
 		Account account = null;
-
 		try {
 			connect();
 			Statement stm = this.con.createStatement();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID = '" + userId + "'";
+			System.out.println(sql);
 			ResultSet rs = stm.executeQuery(sql);
-
 			while (rs.next()) {
 				account = new Account();
 				account.setUserId(rs.getString(USER_ID));
@@ -64,9 +62,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void create(Account account) throws DuplicateKeyException, DataBaseException  {
-
-		logger.info(account);
-
+		LOGGER.info(account);
 		try {
 			connect();
 			Statement stm = this.con.createStatement();
@@ -81,6 +77,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 													+ ")";
+			System.out.println(sql);
 			int rs = stm.executeUpdate(sql);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
@@ -96,9 +93,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void update(Account account) throws DataBaseException {
-
-		logger.info(account);
-
+		LOGGER.info(account);
 		try {
 			connect();
 			Statement stm = this.con.createStatement();
