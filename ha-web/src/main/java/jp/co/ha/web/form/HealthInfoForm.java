@@ -20,7 +20,7 @@ public class HealthInfoForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
-	private String healthInfoId;
+	private BigDecimal healthInfoId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
@@ -43,9 +43,9 @@ public class HealthInfoForm implements BaseForm {
 	/**
 	 * healthInfoIdを返す<br>
 	 *
-	 * @return healthInfoId healthInfoId
+	 * @return healthInfoId 健康情報ID
 	 */
-	public String getHealthInfoId() {
+	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -53,9 +53,9 @@ public class HealthInfoForm implements BaseForm {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            healthInfoId
+	 *     健康情報ID
 	 */
-	public void setHealthInfoId(String healthInfoId) {
+	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 
@@ -72,7 +72,7 @@ public class HealthInfoForm implements BaseForm {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -91,7 +91,7 @@ public class HealthInfoForm implements BaseForm {
 	 * heightを設定する
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -110,7 +110,7 @@ public class HealthInfoForm implements BaseForm {
 	 * weightを設定する
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -129,7 +129,7 @@ public class HealthInfoForm implements BaseForm {
 	 * bmiを設定する
 	 *
 	 * @param bmi
-	 *            BMI
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -148,7 +148,7 @@ public class HealthInfoForm implements BaseForm {
 	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
-	 *            標準体重
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;

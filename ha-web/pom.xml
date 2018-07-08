@@ -11,7 +11,7 @@
 	<version>1.0</version>
 
 	<properties>
-		<java-version>9</java-version>
+		<java-version>10</java-version>
 		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
 		<org.springsecurity-version>5.0.5.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.9.1</org.aspectj-version>
@@ -21,6 +21,7 @@
 		<org.thymeleaf-version>3.0.9.RELEASE</org.thymeleaf-version>
 		<org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
 		<ha-version>1.0</ha-version>
+		<mysql-version>8.0.11</mysql-version>
 	</properties>
 
 	<dependencies>
@@ -140,6 +141,11 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>1.4.197</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-version}</version>
 		</dependency>
 
 		<!-- AspectJ -->

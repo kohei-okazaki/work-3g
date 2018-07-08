@@ -27,7 +27,7 @@
 	<br>
 	<br>
 	<br>
-	<form action="./healthInfo-reference.html" method="post" th:object="${healthInfoReferenceForm}">
+	<form action="./healthInfo-reference.html" th:action="@{./healthInfo-reference.html}" method="post" th:object="${healthInfoReferenceForm}">
 
 		<div align="center">
 		<div th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>

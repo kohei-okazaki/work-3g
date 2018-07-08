@@ -8,33 +8,38 @@ import jp.co.ha.common.entity.MailInfo;
  * メール情報のDaoインターフェース
  *
  */
-public interface MailInfoDao extends BaseDao {
+public interface MailInfoDao {
 
-	/** 保存先シート名 */
-	public static final String SHEET = "MAIL_INFO";
+	public static final String TABLE_NAME = "MAIL_INFO";
+
+	public static final String USER_ID = "USER_ID";
+	public static final String MAIL_ADDRESS = "MAIL_ADDRESS";
+	public static final String MAIL_PASSWORD = "MAIL_PASSWORD";
+	public static final String UPDATE_DATE = "UPDATE_DATE";
+	public static final String REG_DATE = "REG_DATE";
 
 	/**
 	 * 引数で指定されたユーザIDのメール情報を取得する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return MailInfo メール情報
 	 */
-	MailInfo findByUserId(String userId);
+	MailInfo selectByUserId(String userId);
 
 	/**
 	 * 引数で指定されたメール情報を更新する
 	 *
 	 * @param mailInfo
-	 *            メール情報
+	 *     メール情報
 	 */
-	void updateMailInfo(MailInfo mailInfo);
+	void update(MailInfo mailInfo);
 
 	/**
 	 * 引数で指定されたメール情報を登録する<br>
 	 *
 	 * @param mailInfo
-	 *            メール情報
+	 *     メール情報
 	 */
 	void create(MailInfo mailInfo) throws DuplicateKeyException;
 }

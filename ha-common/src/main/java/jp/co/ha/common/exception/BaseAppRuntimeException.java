@@ -18,9 +18,9 @@ public abstract class BaseAppRuntimeException extends RuntimeException {
 	 * コンストラクタ<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @param detail
-	 *            詳細
+	 *     詳細
 	 */
 	public BaseAppRuntimeException(ErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;

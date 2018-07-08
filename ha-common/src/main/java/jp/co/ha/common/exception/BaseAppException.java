@@ -18,9 +18,9 @@ public abstract class BaseAppException extends Exception {
 	 * コンストラクタ<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @param detail
-	 *            詳細
+	 *     詳細
 	 */
 	public BaseAppException(ErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;

@@ -43,7 +43,7 @@ public class LoginForm implements BaseForm {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -62,7 +62,7 @@ public class LoginForm implements BaseForm {
 	 * passwordを設定する
 	 *
 	 * @param password
-	 *            パスワード
+	 *     パスワード
 	 */
 	public void setPassword(String password) {
 		this.password = password;

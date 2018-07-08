@@ -30,6 +30,8 @@ public enum ErrorCode {
 	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
 	/** 該当データ存在しないエラー */
 	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません"),
+	/** DBアクセスエラー */
+	DB_ACCESS_ERROR("DB_ACCESS_ERROR", "ERROR", "DBアクセスに失敗しました"),
 
 	/** ファイルアップロード例外 */
 	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "WARN", "ファイルアップロード例外"),
@@ -51,11 +53,11 @@ public enum ErrorCode {
 	 * コンストラクタ<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @param logLevel
-	 *            ログレベル
+	 *     ログレベル
 	 * @param errorMessage
-	 *            エラーメッセージ
+	 *     エラーメッセージ
 	 */
 	private ErrorCode(String errorCode, String logLevel, String errorMessage) {
 		this.errorCode = errorCode;
@@ -94,13 +96,13 @@ public enum ErrorCode {
 	 * 指定されたエラーコードと一致するErrorCodeを返す<br>
 	 *
 	 * @param errorCode
-	 *            エラーコード
+	 *     エラーコード
 	 * @return
 	 */
 	public static ErrorCode of(String errorCode) {
 		return Stream.of(ErrorCode.class.getEnumConstants())
-					.filter(code -> code.errorCode.equals(errorCode))
-					.findFirst()
-					.orElse(null);
+				.filter(code -> code.errorCode.equals(errorCode))
+				.findFirst()
+				.orElse(null);
 	}
 }

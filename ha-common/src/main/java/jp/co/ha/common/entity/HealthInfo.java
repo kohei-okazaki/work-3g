@@ -23,39 +23,32 @@ public class HealthInfo implements Serializable {
 	@Ignore
 	private static final long serialVersionUID = 1L;
 
-	/** データID */
+	/** 健康情報ID */
 	@Id
 	@Column(name = "HEALTH_INFO_ID", nullable = false, length = 3)
-	private String healthInfoId;
-
+	private BigDecimal healthInfoId;
 	/** ユーザID */
 	@Column(name = "USER_ID", nullable = false, length = 3)
 	private String userId;
-
 	/** 身長 */
 	@Mask
 	@Column(name = "HEIGHT", nullable = false)
 	private BigDecimal height;
-
 	/** 体重 */
 	@Mask
 	@Column(name = "WEIGHT", nullable = false)
 	private BigDecimal weight;
-
 	/** BMI */
 	@Mask
 	@Column(name = "BMI", nullable = false)
 	private BigDecimal bmi;
-
 	/** 標準体重 */
 	@Mask
 	@Column(name = "STANDARD_WEIGHT", nullable = false)
 	private BigDecimal standardWeight;
-
 	/** ユーザステータス */
 	@Column(name = "USER_STATUS", nullable = false)
 	private String userStatus;
-
 	/** 登録日時 */
 	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
@@ -65,7 +58,7 @@ public class HealthInfo implements Serializable {
 	 *
 	 * @return healthInfoId
 	 */
-	public String getHealthInfoId() {
+	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -74,7 +67,7 @@ public class HealthInfo implements Serializable {
 	 *
 	 * @param healthInfoId
 	 */
-	public void setHealthInfoId(String healthInfoId) {
+	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 
@@ -91,7 +84,7 @@ public class HealthInfo implements Serializable {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -110,7 +103,7 @@ public class HealthInfo implements Serializable {
 	 * heightを設定する
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -129,7 +122,7 @@ public class HealthInfo implements Serializable {
 	 * weightを設定する
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -148,7 +141,7 @@ public class HealthInfo implements Serializable {
 	 * bmiを設定する
 	 *
 	 * @param bmi
-	 *            BMI
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -167,7 +160,7 @@ public class HealthInfo implements Serializable {
 	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
-	 *            標準体重
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -186,7 +179,7 @@ public class HealthInfo implements Serializable {
 	 * userStatusを設定する
 	 *
 	 * @param userStatus
-	 *            ユーザステータス
+	 *     ユーザステータス
 	 */
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
@@ -205,7 +198,7 @@ public class HealthInfo implements Serializable {
 	 * regDateを設定する
 	 *
 	 * @param regDate
-	 *            登録日時
+	 *     登録日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

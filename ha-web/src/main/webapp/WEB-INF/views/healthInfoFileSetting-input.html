@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康アプリ_ファイル設定入力画面</title>
+<link rel="icon" type="image/png" href="resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
+<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="resources/css/table.css">
+<script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/common/common.js"></script>
+</head>
+
+<body class="main">
+	<h1>
+		<img class="headericon" alt="入力" src="resources/image/icon_reference.png">
+		ファイル設定入力画面
+	</h1>
+
+	<hr>
+	<div th:include="common/navigation.html"></div>
+	<br><br><br>
+
+	<!-- 入力画面 -->
+	<form action="./healthInfoFileSetting-confirm.html" th:action="@{./healthInfoFileSetting-confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
+	<div align="center">
+	<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+	<div th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
+	<div th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
+	<div th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
+	<div th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
+	<table border="1">
+		<tr>
+			<th class="header">
+				<p>ユーザID</p>
+			</th>
+			<td class="data">
+				<p th:text="*{userId}"></p>
+				<input type="hidden" th:field="*{userId}" value="${userId}" />
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>ヘッダ利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked="checked">
+					<label for="headerFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{headerFlag}" id="dheaderFlagTrue" value="1">
+					<label for="headerFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>フッタ利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked="checked">
+					<label for="footerFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{footerFlag}" id="footerFlagTrue" value="1">
+					<label for="footerFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>マスク利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked="checked">
+					<label for="maskFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{maskFlag}" id="maskFlagTrue" value="1">
+					<label for="maskFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th class="header" width="130px">
+				<p>囲み文字利用</p>
+			</th>
+			<td class="data" width="250px">
+				<div class="radio">
+					<input type="radio" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked="checked">
+					<label for="enclosureCharFlagFalse" class="switch-off">しない</label>
+					<input type="radio" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1">
+					<label for="enclosureCharFlagTrue">する</label>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<br><br>
+	<table>
+		<tr>
+			<td>
+				<input type="submit" value="確 認" />
+			</td>
+		</tr>
+	</table>
+	</div>
+	</form>
+
+	<br><br>
+	<hr>
+	<div th:include="common/footer.html"></div>
+
+</body>
+</html>

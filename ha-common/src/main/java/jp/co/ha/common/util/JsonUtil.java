@@ -16,9 +16,9 @@ public class JsonUtil {
 	 * Json文字列からjavaオブジェクトに変換する<br>
 	 *
 	 * @param target
-	 *            対象文字列
+	 *     対象文字列
 	 * @param clazz
-	 *            Beanクラス型
+	 *     Beanクラス型
 	 * @return
 	 */
 	public static <T> T toJavaObject(String target, Class<T> clazz) {
@@ -41,7 +41,7 @@ public class JsonUtil {
 	 * javaオブジェクトからJson文字列に変換する<br>
 	 *
 	 * @param target
-	 *            対象文字列
+	 *     対象文字列
 	 * @return
 	 */
 	public static String toJsonString(Object target) {

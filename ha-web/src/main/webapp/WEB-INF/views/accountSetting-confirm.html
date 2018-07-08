@@ -28,8 +28,7 @@
 	<br><br>
 
 	<!-- 確認画面 -->
-
-	<form action="./account-setting-complete.html" method="post">
+	<form action="./accountSetting-complete.html" th:action="@{./accountSetting-complete.html}" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 		<table border="1">
 			<tr>
@@ -61,26 +60,6 @@
 				</th>
 				<td class="data">
 					<input type="text" name="password" required="required" th:field="${form.password}" readonly="readonly" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header" width="130px">
-					<p>囲い文字利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div th:if="${form.fileEnclosureCharFlag} == 1">する</div>
-					<div th:if="${form.fileEnclosureCharFlag} == 0">しない</div>
-					<input type="hidden" name="fileEnclosureCharFlag" th:field="${form.fileEnclosureCharFlag}" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header" width="130px">
-					<p>健康情報マスクを利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div th:if="${form.healthInfoMaskFlag} == 1">する</div>
-					<div th:if="${form.healthInfoMaskFlag} == 0">しない</div>
-					<input type="hidden" name="healthInfoMaskFlag" th:field="${form.healthInfoMaskFlag}" />
 				</td>
 			</tr>
 			<tr>

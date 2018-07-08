@@ -1,6 +1,7 @@
 package jp.co.ha.web.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
-import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.parameter.ParamConst;
-import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -37,6 +38,7 @@ import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
@@ -73,9 +75,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/** セッション管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
-	/** アカウント検索サービス */
+	/** 健康情報ファイル設定検索サービス */
 	@Autowired
-	private AccountSearchService accountSearchService;
+	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -88,9 +90,10 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 	/**
 	 * Formを返す<br>
+	 *
 	 * @return
 	 */
-	@ModelAttribute
+	@ModelAttribute("healthInfoForm")
 	public HealthInfoForm setUpForm() {
 		return new HealthInfoForm();
 	}
@@ -148,8 +151,10 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// 健康情報登録処理を行う
 		HealthInfoRegistResponse apiResponse = healthInfoRegistService.execute(apiRequest);
 
+		// レスポンス情報をformに設定
+		BeanUtil.copy(apiResponse, form);
 		// レスポンスを設定
-		model.addAttribute("healthInfo", apiResponse);
+		model.addAttribute("healthInfo", form);
 
 		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
 	}
@@ -158,17 +163,17 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * 健康情報Excelをダウンロードする<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @param form
-	 *            HealthInfoForm
+	 *     HealthInfoForm
 	 * @return
 	 * @throws HealthInfoException
-	 *             健康情報例外
+	 *     健康情報例外
 	 */
 	@GetMapping(value = "/healthInfo-excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseAppException {
 
-		String requestHealthInfoId = form.getHealthInfoId();
+		BigDecimal requestHealthInfoId = form.getHealthInfoId();
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
 
 		if (!hasRecord) {
@@ -186,15 +191,15 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * 健康情報CSVをダウンロードする<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param response
-	 *            HttpServletResponse
+	 *     HttpServletResponse
 	 * @param form
-	 *            健康情報フォーム
+	 *     健康情報フォーム
 	 * @throws HealthInfoException
-	 *             健康情報例外
+	 *     健康情報例外
 	 */
-	@GetMapping(value = "/healthInfo-csvDownload")
+	@GetMapping(value = "/healthInfo-csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
@@ -205,8 +210,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
-		Account account = accountSearchService.findByUserId(userId);
-		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), account);
+		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
+		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 

@@ -35,7 +35,7 @@ public class CsvConfig {
 	 * fileNameを設定する<br>
 	 *
 	 * @param fileName
-	 *            ファイル名
+	 *     ファイル名
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
@@ -54,7 +54,7 @@ public class CsvConfig {
 	 * hasHeaderを設定する<br>
 	 *
 	 * @param hasHeader
-	 *            ヘッダー有無
+	 *     ヘッダー有無
 	 */
 	public void setHasHeader(boolean hasHeader) {
 		this.hasHeader = hasHeader;
@@ -73,7 +73,7 @@ public class CsvConfig {
 	 * hasEnclosureを設定する<br>
 	 *
 	 * @param hasEnclosure
-	 *            囲い文字有無
+	 *     囲い文字有無
 	 */
 	public void setHasEnclosure(boolean hasEnclosure) {
 		this.hasEnclosure = hasEnclosure;
@@ -92,7 +92,7 @@ public class CsvConfig {
 	 * enclosureCharを設定する<br>
 	 *
 	 * @param enclosureChar
-	 *            囲い文字
+	 *     囲い文字
 	 */
 	public void setEnclosureChar(String enclosureChar) {
 		this.enclosureChar = enclosureChar;
@@ -111,7 +111,7 @@ public class CsvConfig {
 	 * charsetを設定する<br>
 	 *
 	 * @param charset
-	 *            文字コード
+	 *     文字コード
 	 */
 	public void setCharset(Charset charset) {
 		this.charset = charset;
@@ -130,7 +130,7 @@ public class CsvConfig {
 	 * hasFooterを設定する<br>
 	 *
 	 * @param hasFooter
-	 *            フッタ有無
+	 *     フッタ有無
 	 */
 	public void setHasFooter(boolean hasFooter) {
 		this.hasFooter = hasFooter;

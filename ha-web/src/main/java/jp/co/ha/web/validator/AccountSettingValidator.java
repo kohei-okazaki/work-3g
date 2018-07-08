@@ -33,7 +33,6 @@ public class AccountSettingValidator extends BaseValidator<AccountSettingForm> {
 	private void checkMaxLength(Errors errors, AccountSettingForm form) {
 
 		rejectIfLengthMax(errors, form.getDeleteFlag(), 1);
-		rejectIfLengthMax(errors, form.getFileEnclosureCharFlag(), 1);
 		rejectIfLengthMax(errors, form.getUserId(), 16);
 		rejectIfLengthMax(errors, form.getPassword(), 16);
 	}

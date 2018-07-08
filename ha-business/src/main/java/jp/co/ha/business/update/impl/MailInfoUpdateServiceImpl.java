@@ -23,7 +23,7 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 	 */
 	@Override
 	public void update(MailInfo mailInfo) {
-		mailInfoDao.updateMailInfo(mailInfo);
+		mailInfoDao.update(mailInfo);
 	}
 
 }

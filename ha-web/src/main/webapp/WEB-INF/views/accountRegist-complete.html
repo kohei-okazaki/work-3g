@@ -2,29 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>健康アプリ_アカウント設定完了画面</title>
+<title>健康アプリ_アカウント登録完了画面</title>
 <link rel="icon" type="image/png" href="resources/image/people.png">
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
-<link rel="stylesheet" type="text/css" href="resources/css/input.css">
-<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
-<link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
 <script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/common/fort.js"></script>
+<script type="text/javascript" src="resources/js/accountCreate.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 </head>
+<body>
 
-<body class="main">
 
-	<h1 class="title">
+	<h1>
 		<img class="headericon" alt="確認" src="resources/image/icon_confirm.png">
-		アカウント設定完了画面
+		アカウント登録完了画面
 	</h1>
 
-
 	<hr>
-	<div th:include="common/navigation.html"></div>
-
 	<br><br>
 
 	<!-- 完了画面 -->
@@ -34,11 +32,8 @@
 		<table>
 			<tr>
 				<td align="center">
-					<!-- メニュー画面へ -->
-					<form action="./menu.html" method="get">
-						<div>
-							<input class="menuicon" type="image" src="resources/image/icon_menu.jpg">
-						</div>
+					<form action="./login.html" th:action="@{./login.html}" method="get">
+						<input type="submit" value="ログイン画面"/>
 					</form>
 				</td>
 			</tr>
@@ -48,7 +43,6 @@
 	<br><br>
 	<hr>
 	<div th:include="common/footer.html"></div>
-
 
 </body>
 </html>

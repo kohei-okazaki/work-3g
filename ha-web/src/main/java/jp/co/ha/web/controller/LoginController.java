@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
-import jp.co.ha.web.service.LoginService;
 import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
 
@@ -32,9 +31,6 @@ import jp.co.ha.web.view.ManageWebView;
 @Controller
 public class LoginController implements BaseWebController {
 
-	/** ログインサービス */
-	@Autowired
-	private LoginService loginService;
 	/** sessionサービス */
 	@Autowired
 	private SessionManageService sessionService;
@@ -48,7 +44,7 @@ public class LoginController implements BaseWebController {
 	 * Validateを設定<br>
 	 *
 	 * @param binder
-	 *            WebDataBinder
+	 *     WebDataBinder
 	 */
 	@InitBinder("loginForm")
 	public void initBinder(WebDataBinder binder) {
@@ -71,9 +67,9 @@ public class LoginController implements BaseWebController {
 	 * ログイン画面
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return ログイン画面
 	 */
 	@GetMapping("/login.html")
@@ -88,17 +84,17 @@ public class LoginController implements BaseWebController {
 	 * メニュー画面
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @param loginForm
-	 *            LoginForm
+	 *     LoginForm
 	 * @param result
-	 *            BindingResult
+	 *     BindingResult
 	 * @return
 	 */
-	@PostMapping("/menu.html")
-	public String menu(Model model, HttpServletRequest request, @Valid LoginForm loginForm, BindingResult result) {
+	@PostMapping("/top.html")
+	public String top(Model model, HttpServletRequest request, @Valid LoginForm loginForm, BindingResult result) {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -108,7 +104,7 @@ public class LoginController implements BaseWebController {
 		// セッションにユーザIDを登録する。
 		sessionService.setValue(request.getSession(), "userId", loginForm.getUserId());
 
-		return getView(ManageWebView.MENU);
+		return getView(ManageWebView.TOP);
 
 	}
 
@@ -116,13 +112,13 @@ public class LoginController implements BaseWebController {
 	 * メニュー画面に遷移<br>
 	 *
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return
 	 */
 	@GetMapping("/menu.html")
 	public String menu(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		return getView(BeanUtil.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.MENU);
+		return getView(StringUtil.isEmpty(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);
 	}
 }

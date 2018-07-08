@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
-import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.file.excel.ExcelConfig;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.web.file.excel.builder.ResultReferenceExcelBuiler;
@@ -27,12 +25,12 @@ import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
 @Service(value = "referenceDownloadExcel")
 public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoReferenceResponse>> {
 
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
 	/** 健康情報利用機能サービス */
 	@Autowired
 	private HealthInfoFunctionService healthInfoFunctionService;
+	/** 健康情報ファイル設定検索サービス */
+	@Autowired
+	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -40,27 +38,27 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	@Override
 	public View execute(List<HealthInfoReferenceResponse> historyList) {
 
-		// 健康情報Entityからアカウントを検索
-		Account account = accountSearchService.findByUserId(historyList.get(0).getUserId());
+		// 健康情報Entityから健康情報ファイル設定を検索
+		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(historyList.get(0).getUserId());
 
-		List<ReferenceExcelModel> modelList = toModelList(historyList, account);
+		List<ReferenceExcelModel> modelList = toModelList(historyList, healthInfoFileSetting);
 
-		return new ResultReferenceExcelBuiler(getExcelConfig(), modelList);
+		return new ResultReferenceExcelBuiler(getExcelConfig(healthInfoFileSetting), modelList);
 	}
 
 	/**
 	 * 健康情報履歴リストをモデルリストに変換する<br>
 	 *
 	 * @param historyList
-	 *            List<HealthInfoReferenceResponse> 健康情報リスト履歴リスト
-	 * @param account
-	 *            アカウント情報
+	 *     List<HealthInfoReferenceResponse> 健康情報リスト履歴リスト
+	 * @param entity
+	 *     健康情報ファイル設定
 	 * @return modelList
 	 */
-	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResponse> historyList, Account account) {
+	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResponse> historyList, HealthInfoFileSetting entity) {
 
 		// 健康情報マスク利用有無
-		boolean useHealthInfoMask = healthInfoFunctionService.useHealthInfoMask(account);
+		boolean useHealthInfoMask = healthInfoFunctionService.useHealthInfoMask(entity);
 		List<ReferenceExcelModel> modelList = new ArrayList<ReferenceExcelModel>();
 		Stream.iterate(0, i -> ++i).limit(historyList.size()).forEach(i -> {
 
@@ -77,16 +75,6 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 		});
 
 		return modelList;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ExcelConfig getExcelConfig() {
-		ExcelConfig conf = new ExcelConfig();
-		conf.setCharset(Charset.MS_932);
-		return conf;
 	}
 
 }

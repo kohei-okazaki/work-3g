@@ -14,9 +14,7 @@ import jp.co.ha.common.exception.BaseAppException;
  * 全てのウィザード形式コントローラクラスはこのクラスを継承すること。<br>
  *
  * @param <F>
- *            対象formクラス
- * @param <E>
- *            例外クラス
+ *     対象formクラス
  */
 public interface BaseWizardController<F extends BaseForm> extends BaseWebController {
 
@@ -24,7 +22,7 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 * Validateを設定<br>
 	 *
 	 * @param binder
-	 *            WebDataBinder
+	 *     WebDataBinder
 	 */
 	void initBinder(WebDataBinder binder);
 
@@ -32,12 +30,12 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 * 入力画面
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return
 	 * @throws BaseAppException
-	 *             例外クラス
+	 *     例外クラス
 	 */
 	String input(Model model, HttpServletRequest request) throws BaseAppException;
 
@@ -45,14 +43,14 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 * 確認画面
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param form
-	 *            F extends BaseForm
+	 *     F extends BaseForm
 	 * @param result
-	 *            BindingResult
+	 *     BindingResult
 	 * @return
 	 * @throws BaseAppException
-	 *             例外クラス
+	 *     例外クラス
 	 */
 	String confirm(Model model, @Valid F form, BindingResult result) throws BaseAppException;
 
@@ -60,14 +58,14 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 * 完了画面
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @param form
-	 *            F extends BaseForm
+	 *     F extends BaseForm
 	 * @param request
-	 *            HttpServletRequest
+	 *     HttpServletRequest
 	 * @return
 	 * @throws BaseAppException
-	 *             例外クラス
+	 *     例外クラス
 	 */
 	String complete(Model model, F form, HttpServletRequest request) throws BaseAppException;
 

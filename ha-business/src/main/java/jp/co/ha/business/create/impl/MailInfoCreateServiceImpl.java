@@ -24,13 +24,13 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(MailInfo mailInfo) {
-		mailInfoDao.create(mailInfo);
+	public void create(MailInfo entity) {
+		mailInfoDao.create(entity);
 	}
 
 	@Override
 	public void create(List<MailInfo> entityList) {
-		entityList.forEach(mailInfo -> mailInfoDao.create(mailInfo));
+		entityList.forEach(entity -> mailInfoDao.create(entity));
 	}
 
 }

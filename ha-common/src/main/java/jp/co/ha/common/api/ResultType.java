@@ -19,9 +19,9 @@ public enum ResultType {
 	 * コンストラクタ<br>
 	 *
 	 * @param code
-	 *            コード
+	 *     コード
 	 * @param message
-	 *            メッセージ
+	 *     メッセージ
 	 */
 	private ResultType(String code, String message) {
 		this.code = code;

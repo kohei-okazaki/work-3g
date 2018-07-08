@@ -22,7 +22,7 @@ public abstract class BaseRequest {
 	 * requestIdを設定する<br>
 	 *
 	 * @param requestId
-	 *            リクエストID
+	 *     リクエストID
 	 */
 	public void setRequestId(String requestId) {
 		this.requestId = requestId;

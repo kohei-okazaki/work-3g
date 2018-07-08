@@ -21,9 +21,9 @@ public class BeanUtil {
 	 * コピー先のクラスと同じフィールド名の場合コピー元のフィールドに値を設定する<br>
 	 *
 	 * @param data
-	 *            コピー元
+	 *     コピー元
 	 * @param target
-	 *            コピー先
+	 *     コピー先
 	 */
 	public static void copy(Object data, Object target) {
 		copy(data, target, new ArrayList<String>());
@@ -35,11 +35,11 @@ public class BeanUtil {
 	 * コピー時に無視リストの名前のフィールドの場合コピーを行わない。<br>
 	 *
 	 * @param data
-	 *            コピー元
+	 *     コピー元
 	 * @param target
-	 *            コピー先
+	 *     コピー先
 	 * @param ignoreList
-	 *            無視リスト
+	 *     無視リスト
 	 */
 	public static void copy(Object data, Object target, List<String> ignoreList) {
 
@@ -83,9 +83,9 @@ public class BeanUtil {
 	 * </ul>
 	 *
 	 * @param ignoreList
-	 *            無視リスト
+	 *     無視リスト
 	 * @param fieldName
-	 *            フィールド名
+	 *     フィールド名
 	 * @return
 	 */
 	private static boolean ignore(List<String> ignoreList, String fieldName) {
@@ -96,9 +96,9 @@ public class BeanUtil {
 	 * コピー対象かどうか判定する<br>
 	 *
 	 * @param dataField
-	 *            Field コピー元のフィールドクラス
+	 *     Field コピー元のフィールドクラス
 	 * @param targetField
-	 *            Field コピー先のフィールドクラス
+	 *     Field コピー先のフィールドクラス
 	 * @return
 	 */
 	private static boolean isCopyTarget(Field dataField, Field targetField) {
@@ -114,7 +114,7 @@ public class BeanUtil {
 	 * 判定結果:nullの場合true, それ以外の場合false<br>
 	 *
 	 * @param target
-	 *            検査対象インスタンス
+	 *     検査対象インスタンス
 	 * @return 判定結果
 	 */
 	public static boolean isNull(Object target) {
@@ -127,7 +127,7 @@ public class BeanUtil {
 	 *
 	 * @see BeanUtil#isNull
 	 * @param target
-	 *            検査対象インスタンス
+	 *     検査対象インスタンス
 	 * @return 判定結果
 	 */
 	public static boolean notNull(Object target) {
@@ -138,7 +138,7 @@ public class BeanUtil {
 	 * パラメータ引数にしているクラス型を取得する<br>
 	 *
 	 * @param clazz
-	 *            対象クラス
+	 *     対象クラス
 	 * @return
 	 */
 	public static Class<?> getParameterType(Class<?> clazz) {
@@ -149,9 +149,9 @@ public class BeanUtil {
 	 * パラメータ引数にしているクラス型を取得する<br>
 	 *
 	 * @param clazz
-	 *            対象クラス
+	 *     対象クラス
 	 * @param position
-	 *            パラメータ引数の位置
+	 *     パラメータ引数の位置
 	 * @return
 	 */
 	public static Class<?> getParameterType(Class<?> clazz, int position) {
@@ -163,7 +163,7 @@ public class BeanUtil {
 	 * 指定したクラス型のフィールドをリストで返す<br>
 	 *
 	 * @param clazz
-	 *            クラス型
+	 *     クラス型
 	 * @return
 	 */
 	public static List<Field> getFieldList(Class<?> clazz) {
@@ -182,11 +182,11 @@ public class BeanUtil {
 	 * それ以外の場合getterを取得<br>
 	 *
 	 * @param fieldName
-	 *            フィールド名
+	 *     フィールド名
 	 * @param clazz
-	 *            クラス
+	 *     クラス
 	 * @param type
-	 *            SETTER/GETTER
+	 *     SETTER/GETTER
 	 * @return
 	 */
 	public static Method getAccessor(String fieldName, Class<?> clazz, AccessorType type) {

@@ -37,7 +37,7 @@
 	<!-- 入力画面 -->
 	<div align="center">
 	<br><br><br>
-	<form action="./healthInfo-confirm.html" method="post" th:object="${healthInfoForm}">
+	<form action="./healthInfo-confirm.html" th:action="@{./healthInfo-confirm.html}" method="post" th:object="${healthInfoForm}">
 		<div th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
 		<div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
 		<input type="text" size="6" th:field="*{height}" required placeholder="身長" >　cm

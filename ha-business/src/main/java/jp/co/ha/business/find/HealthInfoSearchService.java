@@ -1,5 +1,6 @@
 package jp.co.ha.business.find;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface HealthInfoSearchService {
 	 * 指定されたユーザIDと一致する健康情報のリストを返却する<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return List<HealthInfoDto>
 	 */
 	List<HealthInfo> findByUserId(String userId);
@@ -24,16 +25,16 @@ public interface HealthInfoSearchService {
 	 * 指定されたデータIDからと一致する健康情報を返却する<br>
 	 *
 	 * @param dataId
-	 *            データID
+	 *     データID
 	 * @return 健康情報Entity
 	 */
-	HealthInfo findByHealthInfoId(String healthInfoId);
+	HealthInfo findByHealthInfoId(BigDecimal healthInfoId);
 
 	/**
 	 * 指定したユーザIDで最後に登録した健康情報を返す<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return HealthInfo
 	 */
 	HealthInfo findLastByUserId(String userId);
@@ -42,9 +43,9 @@ public interface HealthInfoSearchService {
 	 * 指定されたユーザIDと登録日時の健康情報を返す<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @param regDate
-	 *            YYYYMMDD
+	 *     YYYYMMDD
 	 * @return
 	 */
 	List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate);
@@ -53,11 +54,11 @@ public interface HealthInfoSearchService {
 	 * 指定されたユーザIDと指定された登録日時の期間内の健康情報を返す<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @param fromRegDate
-	 *            登録日時(from)
+	 *     登録日時(from)
 	 * @param toRegDate
-	 *            登録日時(to)
+	 *     登録日時(to)
 	 * @return
 	 */
 	List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate);

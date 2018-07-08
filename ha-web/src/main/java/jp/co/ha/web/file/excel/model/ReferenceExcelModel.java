@@ -36,7 +36,7 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	 * heightを設定する
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(String height) {
 		this.height = height;
@@ -55,7 +55,7 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	 * weightを設定する
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(String weight) {
 		this.weight = weight;
@@ -74,7 +74,7 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	 * bmiを設定する
 	 *
 	 * @param bmi
-	 *            BMI
+	 *     BMI
 	 */
 	public void setBmi(String bmi) {
 		this.bmi = bmi;
@@ -93,7 +93,7 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
-	 *            標準体重
+	 *     標準体重
 	 */
 	public void setStandardWeight(String standardWeight) {
 		this.standardWeight = standardWeight;
@@ -112,7 +112,7 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	 * regDateを設定する<br>
 	 *
 	 * @param regDate
-	 *            regDate
+	 *     regDate
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

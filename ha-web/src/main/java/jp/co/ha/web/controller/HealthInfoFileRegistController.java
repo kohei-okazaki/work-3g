@@ -19,7 +19,8 @@ import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
-import jp.co.ha.common.web.BaseWizardController;
+import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
 import jp.co.ha.web.form.HealthInfoFileForm;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
@@ -32,7 +33,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
-public class HealthInfoFileRegistController implements BaseWizardController<HealthInfoFileForm> {
+public class HealthInfoFileRegistController implements BaseWebController {
 
 	/** 健康情報CSVアップロードサービス */
 	@Autowired
@@ -44,6 +45,9 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	/** 健康情報登録サービス */
 	@Autowired
 	private HealthInfoRegistService healthInfoRegistService;
+	/** session管理サービス */
+	@Autowired
+	private SessionManageService sessionManageService;
 
 	/**
 	 * フォームを返す<br>
@@ -59,7 +63,6 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
 	@InitBinder("healthInfoFileForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new HealthInfoFileInputValidator());
@@ -68,8 +71,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	@GetMapping(value = "/healthInfo-fileInput.html")
+	@GetMapping(value = "/healthInfoFile-input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 	}
@@ -77,9 +79,8 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	@PostMapping(value = "/healthInfo-fileConfirm.html")
-	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result) throws BaseAppException {
+	@PostMapping(value = "/healthInfoFile-confirm.html")
+	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseAppException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -88,11 +89,8 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 
 		List<HealthInfoUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
 		fileService.formatCheck(modelList);
-		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);
-		for (HealthInfoRegistRequest request : reqList) {
-			healthInfoRegistService.checkRequest(request);
-			healthInfoRegistService.execute(request);
-		}
+		sessionManageService.setValue(request.getSession(), "modelList", modelList);
+		model.addAttribute("count", modelList.size());
 
 		return ManageWebView.HEALTH_INFO_FILE_CONFIRM.getName();
 	}
@@ -100,9 +98,14 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	@PostMapping(value = "/healthInfo-fileComplete.html")
+	@PostMapping(value = "/healthInfoFile-complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseAppException {
+		List<HealthInfoUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
+		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);
+		for (HealthInfoRegistRequest apiRequest : reqList) {
+			healthInfoRegistService.checkRequest(apiRequest);
+			healthInfoRegistService.execute(apiRequest);
+		}
 		return ManageWebView.HEALTH_INFO_FILE_COMPLETE.getName();
 	}
 

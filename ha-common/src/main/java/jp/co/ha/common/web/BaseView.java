@@ -21,9 +21,9 @@ public interface BaseView {
 	 * 一致するenumがない場合nullを返す<br>
 	 *
 	 * @param viewClass
-	 *            BaseViewを継承したViewのEnum
+	 *     BaseViewを継承したViewのEnum
 	 * @param value
-	 *            検査したい値
+	 *     検査したい値
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")

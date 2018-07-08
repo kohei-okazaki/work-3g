@@ -65,7 +65,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "account-regist-input.html")
+	@GetMapping(value = "accountRegist-input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 	}
@@ -74,7 +74,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/account-regist-confirm.html")
+	@PostMapping(value = "/accountRegist-confirm.html")
 	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result)
 			throws BaseAppException {
 
@@ -92,7 +92,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/account-regist-complete.html")
+	@PostMapping(value = "/accountRegist-complete.html")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
 			throws BaseAppException {
 

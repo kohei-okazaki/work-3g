@@ -1,7 +1,5 @@
 package jp.co.ha.web.validator;
 
-import java.util.Date;
-
 import org.springframework.validation.Errors;
 
 import jp.co.ha.business.find.AccountSearchService;
@@ -23,7 +21,9 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 
 	/**
 	 * アカウント検索サービスを設定する<br>
-	 * @param accountSearchService アカウント検索サービス
+	 *
+	 * @param accountSearchService
+	 *     アカウント検索サービス
 	 */
 	public void setAccountSearchService(AccountSearchService accountSearchService) {
 		this.accountSearchService = accountSearchService;
@@ -41,6 +41,9 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 		}
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		checkExistAccount(errors, account);
+		if (errors.hasErrors()) {
+			return;
+		}
 		checkInvalidPassword(errors, form.getPassword(), account.getPassword());
 		checkDeleteAccount(errors, account);
 		checkAccountExpired(errors, account);
@@ -48,8 +51,11 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 
 	/**
 	 * アカウントが存在しない場合validateエラーにする<br>
+	 *
 	 * @param errors
-	 * @param form
+	 *     エラー
+	 * @param account
+	 *     アカウント情報
 	 */
 	private void checkExistAccount(Errors errors, Account account) {
 		if (BeanUtil.isNull(account)) {
@@ -59,9 +65,13 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 
 	/**
 	 * ログイン情報と入力情報を照合する<br>
+	 *
 	 * @param errors
+	 *     エラー
 	 * @param formPassword
+	 *     フォーム情報.パスワード
 	 * @param dbPassword
+	 *     DB情報.パスワード
 	 */
 	private void checkInvalidPassword(Errors errors, String formPassword, String dbPassword) {
 		if (!formPassword.equals(dbPassword)) {
@@ -72,8 +82,11 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	/**
 	 * アカウント情報が有効かどうかチェック<br>
 	 * 有効でない場合true, そうでない場合false<br>
+	 *
 	 * @param errors
+	 *     エラー
 	 * @param account
+	 *     アカウント情報
 	 */
 	private void checkDeleteAccount(Errors errors, Account account) {
 		if (StringUtil.isTrue(account.getDeleteFlag())) {
@@ -84,11 +97,13 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 	/**
 	 * アカウント情報が有効期限切れかどうか判定する<br>
 	 * アカウント情報.パスワード有効期限 < システム日付の場合、true<br>
+	 *
 	 * @param errors
+	 *     エラー
 	 * @param account
+	 *     アカウント情報
 	 */
 	private void checkAccountExpired(Errors errors, Account account) {
-		Date d = account.getPasswordExpire();
 		if (DateUtil.isBefore(account.getPasswordExpire())) {
 			errors.rejectValue("userId", "validate.message.invalidPassword");
 		}

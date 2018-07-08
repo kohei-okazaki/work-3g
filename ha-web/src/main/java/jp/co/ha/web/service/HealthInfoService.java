@@ -18,9 +18,9 @@ public interface HealthInfoService {
 	 * 入力した体重と最後に入力した体重との差からメッセージを返す<br>
 	 *
 	 * @param form
-	 *            健康情報入力フォーム
+	 *     健康情報入力フォーム
 	 * @param lastHealthInfo
-	 *            HealthInfo
+	 *     HealthInfo
 	 * @return 体重差のメッセージ
 	 */
 	String getDiffMessage(HealthInfoForm form, HealthInfo lastHealthInfo);
@@ -29,9 +29,9 @@ public interface HealthInfoService {
 	 * 最後に入力した体重とフォームから体重差を返却
 	 *
 	 * @param form
-	 *            健康情報入力フォーム
+	 *     健康情報入力フォーム
 	 * @param lastHealthInfo
-	 *            HealthInfo
+	 *     HealthInfo
 	 * @return 体重差
 	 */
 	BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo lastHealthInfo);
@@ -41,7 +41,7 @@ public interface HealthInfoService {
 	 * 初回登録の場合true, それ以外の場合falseを返す<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 * @return
 	 */
 	boolean isFirstReg(String userId);
@@ -50,26 +50,28 @@ public interface HealthInfoService {
 	 * 健康情報登録APIリクエストの設定を行う<br>
 	 *
 	 * @param form
-	 *            健康情報入力フォーム
+	 *     健康情報入力フォーム
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId);
 
 	/**
-	 * 指定した健康情報リストの中に指定したデータIDが含まれるかどうか返す<br>
+	 * 指定した健康情報リストの中に指定した健康情報IDが含まれるかどうか返す<br>
 	 *
 	 * @param entityList
-	 *            健康情報リスト
-	 * @param dataId
-	 *            データID
+	 *     健康情報リスト
+	 * @param healthInfoId
+	 *     健康情報ID
 	 * @return
 	 */
-	boolean hasRecord(List<HealthInfo> entityList, String dataId);
+	boolean hasRecord(List<HealthInfo> entityList, BigDecimal healthInfoId);
 
 	/**
 	 * CSVモデルリストに変換する<br>
-	 * @param healthInfo 健康情報
+	 *
+	 * @param healthInfo
+	 *     健康情報
 	 * @return
 	 */
 	List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo);

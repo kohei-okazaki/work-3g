@@ -22,7 +22,7 @@ public class ServiceLog {
 	 * 開始ログを出力する<br>
 	 *
 	 * @param jp
-	 *            JoinPoint
+	 *     JoinPoint
 	 */
 	@Before("execution(* *..*ServiceImpl.*(..))*")
 	public void startLog(JoinPoint jp) {
@@ -34,7 +34,7 @@ public class ServiceLog {
 	 * 終了ログを出力する<br>
 	 *
 	 * @param jp
-	 *            JoinPoint
+	 *     JoinPoint
 	 */
 	@After("execution(* *..*ServiceImpl.*(..))*")
 	public void endLog(JoinPoint jp) {

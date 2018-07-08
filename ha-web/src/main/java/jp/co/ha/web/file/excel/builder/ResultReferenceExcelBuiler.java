@@ -22,9 +22,9 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelM
 	 * コンストラクタ<br>
 	 *
 	 * @param conf
-	 *            Excel設定情報
+	 *     Excel設定情報
 	 * @param modelList
-	 *            Excel出力モデルリスト
+	 *     Excel出力モデルリスト
 	 */
 	public ResultReferenceExcelBuiler(ExcelConfig conf, List<ReferenceExcelModel> modelList) {
 		super(conf, modelList);

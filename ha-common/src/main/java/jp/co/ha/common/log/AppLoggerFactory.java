@@ -16,7 +16,9 @@ public class AppLoggerFactory {
 
 	/**
 	 * ロガーインスタンスを返す<br>
+	 *
 	 * @param clazz
+	 *     クラス
 	 * @return
 	 */
 	public static AppLogger getLogger(Class<?> clazz) {

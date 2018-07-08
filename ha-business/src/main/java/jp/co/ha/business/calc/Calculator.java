@@ -13,15 +13,15 @@ public class Calculator {
 	 * 計算処理を行う<br>
 	 *
 	 * @param target1
-	 *            対象1
+	 *     対象1
 	 * @param method
-	 *            四則演算メソッド
+	 *     四則演算メソッド
 	 * @param target2
-	 *            対象1
+	 *     対象1
 	 * @param degit
-	 *            区切り
+	 *     区切り
 	 * @param roudingMode
-	 *            丸め方法
+	 *     丸め方法
 	 * @return
 	 */
 	public BigDecimal execute(BigDecimal target1, CalcMethod method, BigDecimal target2, int degit,

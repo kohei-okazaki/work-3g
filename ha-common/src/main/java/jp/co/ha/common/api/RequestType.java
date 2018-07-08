@@ -23,9 +23,9 @@ public enum RequestType {
 	 * コンストラクタ<br>
 	 *
 	 * @param requestId
-	 *            リクエストID
+	 *     リクエストID
 	 * @param name
-	 *            名前
+	 *     名前
 	 */
 	private RequestType(String requestId, String name) {
 		this.requestId = requestId;
@@ -36,7 +36,7 @@ public enum RequestType {
 	 * 指定されたリクエストIDに対応するリクエストタイプを返す<br>
 	 *
 	 * @param requestId
-	 *            リクエストID
+	 *     リクエストID
 	 * @return
 	 */
 	public static RequestType of(String requestId) {

@@ -12,9 +12,9 @@ public interface SessionManageService {
 	 * セッション内の指定された文字列を削除する<br>
 	 *
 	 * @param session
-	 *            HttpSession
+	 *     HttpSession
 	 * @param key
-	 *            セッションキー
+	 *     セッションキー
 	 */
 	void removeValue(HttpSession session, String key);
 
@@ -22,11 +22,11 @@ public interface SessionManageService {
 	 * <target, value>の形でセッションに設定する<br>
 	 *
 	 * @param session
-	 *            HttpSession
+	 *     HttpSession
 	 * @param key
-	 *            セッションキー
+	 *     セッションキー
 	 * @param value
-	 *            セッション値
+	 *     セッション値
 	 */
 	void setValue(HttpSession session, String key, Object value);
 
@@ -34,7 +34,7 @@ public interface SessionManageService {
 	 * セッションに格納されてる情報すべてを削除<br>
 	 *
 	 * @param session
-	 *            HttpSession
+	 *     HttpSession
 	 */
 	void removeValues(HttpSession session);
 
@@ -42,11 +42,11 @@ public interface SessionManageService {
 	 * 指定されたキー名/型のセッション情報を取得する<br>
 	 *
 	 * @param session
-	 *            HttpSession
+	 *     HttpSession
 	 * @param key
-	 *            セッションキー
+	 *     セッションキー
 	 * @param clazz
-	 *            型
+	 *     型
 	 * @return
 	 */
 	<T> T getValue(HttpSession session, String key, Class<T> clazz);

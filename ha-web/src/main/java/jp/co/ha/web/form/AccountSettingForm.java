@@ -35,16 +35,6 @@ public class AccountSettingForm implements BaseForm {
 	@Pattern(regexp = "^[0-9]*$", message = "削除フラグが半角数字でありません")
 	@Size(min = 1, max = 1)
 	private String deleteFlag;
-	/** ファイル囲い文字利用フラグ */
-	@NotEmpty
-	@Pattern(regexp = "^[0-9]*$", message = "ファイル囲い文字利用フラグが半角数字でありません")
-	@Size(min = 1, max = 1)
-	private String fileEnclosureCharFlag;
-	/** 健康情報マスク利用フラグ */
-	@NotEmpty
-	@Pattern(regexp = "^[0-9]*$", message = "健康情報マスク利用フラグが半角数字でありません")
-	@Size(min = 1, max = 1)
-	private String healthInfoMaskFlag;
 	/** 備考 */
 	@Size(max = 256)
 	private String remarks;
@@ -72,7 +62,7 @@ public class AccountSettingForm implements BaseForm {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -91,7 +81,7 @@ public class AccountSettingForm implements BaseForm {
 	 * passwordを設定する
 	 *
 	 * @param password
-	 *            パスワード
+	 *     パスワード
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -110,48 +100,10 @@ public class AccountSettingForm implements BaseForm {
 	 * deleteFlagを設定する
 	 *
 	 * @param deleteFlag
-	 *            削除フラグ
+	 *     削除フラグ
 	 */
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
-	}
-
-	/**
-	 * fileEnclosureCharFlagを返す
-	 *
-	 * @return fileEnclosureCharFlag ファイル囲い文字利用フラグ
-	 */
-	public String getFileEnclosureCharFlag() {
-		return fileEnclosureCharFlag;
-	}
-
-	/**
-	 * fileEnclosureCharFlagを設定する
-	 *
-	 * @param fileEnclosureCharFlag
-	 *            ファイル囲い文字利用フラグ
-	 */
-	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
-		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
-	}
-
-	/**
-	 * healthInfoMaskFlagを返す<br>
-	 *
-	 * @return healthInfoMaskFlag 健康情報マスク利用フラグ
-	 */
-	public String getHealthInfoMaskFlag() {
-		return healthInfoMaskFlag;
-	}
-
-	/**
-	 * healthInfoMaskFlagを設定する<br>
-	 *
-	 * @param healthInfoMaskFlag
-	 *            健康情報マスク利用フラグ
-	 */
-	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
-		this.healthInfoMaskFlag = healthInfoMaskFlag;
 	}
 
 	/**
@@ -167,7 +119,7 @@ public class AccountSettingForm implements BaseForm {
 	 * remarksを設定する
 	 *
 	 * @param remarks
-	 *            備考
+	 *     備考
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
@@ -186,7 +138,7 @@ public class AccountSettingForm implements BaseForm {
 	 * mailAddressを設定する
 	 *
 	 * @param mailAddress
-	 *            メールアドレス
+	 *     メールアドレス
 	 */
 	public void setMailAddress(String mailAddress) {
 		this.mailAddress = mailAddress;
@@ -205,7 +157,7 @@ public class AccountSettingForm implements BaseForm {
 	 * mailPasswordを設定する
 	 *
 	 * @param mailPassword
-	 *            メールパスワード
+	 *     メールパスワード
 	 */
 	public void setMailPassword(String mailPassword) {
 		this.mailPassword = mailPassword;

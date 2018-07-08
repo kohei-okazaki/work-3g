@@ -11,11 +11,9 @@ public class HealthInfoUploadModel implements BaseCsvModel {
 
 	/** ユーザID */
 	private String userId;
-
 	/** 身長 */
 	@Mask
 	private String height;
-
 	/** 体重 */
 	@Mask
 	private String weight;
@@ -33,7 +31,7 @@ public class HealthInfoUploadModel implements BaseCsvModel {
 	 * userIdを設定する<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -52,7 +50,7 @@ public class HealthInfoUploadModel implements BaseCsvModel {
 	 * heightを設定する<br>
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(String height) {
 		this.height = height;
@@ -71,7 +69,7 @@ public class HealthInfoUploadModel implements BaseCsvModel {
 	 * weightを設定する<br>
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(String weight) {
 		this.weight = weight;

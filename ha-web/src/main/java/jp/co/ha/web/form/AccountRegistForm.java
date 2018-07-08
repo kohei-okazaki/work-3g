@@ -52,7 +52,7 @@ public class AccountRegistForm implements BaseForm {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -71,7 +71,7 @@ public class AccountRegistForm implements BaseForm {
 	 * passwordを設定する
 	 *
 	 * @param password
-	 *            パスワード
+	 *     パスワード
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -90,7 +90,7 @@ public class AccountRegistForm implements BaseForm {
 	 * confirmPasswordを設定する
 	 *
 	 * @param confirmPassword
-	 *            確認用パスワード
+	 *     確認用パスワード
 	 */
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
@@ -109,7 +109,7 @@ public class AccountRegistForm implements BaseForm {
 	 * remarksを設定する
 	 *
 	 * @param remarks
-	 *            備考
+	 *     備考
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
