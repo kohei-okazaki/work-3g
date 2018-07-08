@@ -10,9 +10,7 @@ import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.util.Charset;
 import jp.co.ha.web.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
 
@@ -40,7 +38,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(healthInfo.getUserId());
 		HealthInfoExcelModel model = toModel(healthInfo, healthInfoFileSetting);
 
-		return new HealthInfoExcelBuilder(getExcelConfig(), List.of(model));
+		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), List.of(model));
 	}
 
 	/**
@@ -63,16 +61,6 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		model.setStandardWeight(useMask ? "****" : healthInfo.getStandardWeight().toString());
 
 		return model;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ExcelConfig getExcelConfig() {
-		ExcelConfig conf = new ExcelConfig();
-		conf.setCharset(Charset.MS_932);
-		return conf;
 	}
 
 }

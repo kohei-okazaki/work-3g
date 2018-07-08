@@ -12,9 +12,7 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.web.file.excel.builder.ResultReferenceExcelBuiler;
@@ -45,7 +43,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 
 		List<ReferenceExcelModel> modelList = toModelList(historyList, healthInfoFileSetting);
 
-		return new ResultReferenceExcelBuiler(getExcelConfig(), modelList);
+		return new ResultReferenceExcelBuiler(getExcelConfig(healthInfoFileSetting), modelList);
 	}
 
 	/**
@@ -77,16 +75,6 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 		});
 
 		return modelList;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ExcelConfig getExcelConfig() {
-		ExcelConfig conf = new ExcelConfig();
-		conf.setCharset(Charset.MS_932);
-		return conf;
 	}
 
 }

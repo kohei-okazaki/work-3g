@@ -106,6 +106,9 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@PostMapping(value = "/healthInfoFileSetting-complete.html")
 	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request)
 			throws BaseAppException {
+
+		healthInfoFileSettingService.execute(form);
+
 		return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_COMPLETE);
 	}
 

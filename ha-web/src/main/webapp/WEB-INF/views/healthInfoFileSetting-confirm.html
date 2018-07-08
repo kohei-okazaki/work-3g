@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/input.css">
-<link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
+<link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
 <link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
 <script type="text/javascript" src="resources/js/common/jquery.min.js"></script>
@@ -27,9 +27,9 @@
 	<!-- 確認画面 -->
 	<form action="./healthInfoFileSetting-complete.html" th:action="@{./healthInfoFileSetting-complete.html}" method="post" th:object="${healthInfoFileSettingForm}">
 	<div align="center">
-		<table>
+		<table border="1">
 			<tr>
-				<th width="130px">
+				<th class="header" width="130px">
 					<p>ユーザID</p>
 				</th>
 				<td width="250px">
@@ -37,7 +37,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th width="130px">
+				<th class="header">
 					<p>ヘッダ利用</p>
 				</th>
 				<td class="data" width="250px">
@@ -51,7 +51,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th class="header">
 					<p>フッタ利用</p>
 				</th>
 				<td class="data" width="250px">
@@ -65,7 +65,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th class="header">
 					<p>マスク利用</p>
 				</th>
 				<td class="data" width="250px">
@@ -79,7 +79,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>
+				<th class="header">
 					<p>囲み文字利用</p>
 				</th>
 				<td class="data" width="250px">

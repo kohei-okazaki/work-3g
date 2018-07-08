@@ -46,6 +46,8 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 
 		CsvConfig csvConfig = new CsvConfig();
 		csvConfig.setFileName(fileName);
+		csvConfig.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
+		csvConfig.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
 		csvConfig.setEnclosureChar(CsvWriter.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(healthInfoFileSetting.getEnclosureCharFlag()));
 		csvConfig.setCharset(Charset.UTF_8);

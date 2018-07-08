@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.validator.LoginValidator;
@@ -119,6 +119,6 @@ public class LoginController implements BaseWebController {
 	public String menu(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		return getView(BeanUtil.isNull(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);
+		return getView(StringUtil.isEmpty(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);
 	}
 }
