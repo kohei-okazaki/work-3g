@@ -35,16 +35,6 @@ public class AccountSettingForm implements BaseForm {
 	@Pattern(regexp = "^[0-9]*$", message = "削除フラグが半角数字でありません")
 	@Size(min = 1, max = 1)
 	private String deleteFlag;
-	/** ファイル囲い文字利用フラグ */
-	@NotEmpty
-	@Pattern(regexp = "^[0-9]*$", message = "ファイル囲い文字利用フラグが半角数字でありません")
-	@Size(min = 1, max = 1)
-	private String fileEnclosureCharFlag;
-	/** 健康情報マスク利用フラグ */
-	@NotEmpty
-	@Pattern(regexp = "^[0-9]*$", message = "健康情報マスク利用フラグが半角数字でありません")
-	@Size(min = 1, max = 1)
-	private String healthInfoMaskFlag;
 	/** 備考 */
 	@Size(max = 256)
 	private String remarks;
@@ -114,44 +104,6 @@ public class AccountSettingForm implements BaseForm {
 	 */
 	public void setDeleteFlag(String deleteFlag) {
 		this.deleteFlag = deleteFlag;
-	}
-
-	/**
-	 * fileEnclosureCharFlagを返す
-	 *
-	 * @return fileEnclosureCharFlag ファイル囲い文字利用フラグ
-	 */
-	public String getFileEnclosureCharFlag() {
-		return fileEnclosureCharFlag;
-	}
-
-	/**
-	 * fileEnclosureCharFlagを設定する
-	 *
-	 * @param fileEnclosureCharFlag
-	 *     ファイル囲い文字利用フラグ
-	 */
-	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
-		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
-	}
-
-	/**
-	 * healthInfoMaskFlagを返す<br>
-	 *
-	 * @return healthInfoMaskFlag 健康情報マスク利用フラグ
-	 */
-	public String getHealthInfoMaskFlag() {
-		return healthInfoMaskFlag;
-	}
-
-	/**
-	 * healthInfoMaskFlagを設定する<br>
-	 *
-	 * @param healthInfoMaskFlag
-	 *     健康情報マスク利用フラグ
-	 */
-	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
-		this.healthInfoMaskFlag = healthInfoMaskFlag;
 	}
 
 	/**

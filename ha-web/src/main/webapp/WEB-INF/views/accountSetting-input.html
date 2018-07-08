@@ -33,8 +33,6 @@
 		<div th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
 		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
 		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-		<div th:if="${#fields.hasErrors('fileEnclosureCharFlag')}" th:errors="*{fileEnclosureCharFlag}"></div>
-		<div th:if="${#fields.hasErrors('healthInfoMaskFlag')}" th:errors="*{healthInfoMaskFlag}"></div>
 		<div th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
 		<div th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
 		<div th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
@@ -67,32 +65,6 @@
 				</th>
 				<td class="data">
 					<input type="text" th:field="*{password}" value="${password}" required placeholder="パスワード" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header" width="130px">
-					<p>囲い文字を利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div class="radio">
-						<input type="radio" th:field="*{fileEnclosureCharFlag}" id="fileEnclosureCharFlagTrue" value="1" checked="checked">
-						<label for="fileEnclosureCharFlagTrue">する</label>
-						<input type="radio" th:field="*{fileEnclosureCharFlag}" id="fileEnclosureCharFlagFalse" value="0">
-						<label for="fileEnclosureCharFlagFalse" class="switch-off">しない</label>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th class="header" width="130px">
-					<p>健康情報マスクを利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div class="radio">
-						<input type="radio" th:field="*{healthInfoMaskFlag}" id="healthInfoMaskFlagTrue" value="1" checked="checked">
-						<label for="healthInfoMaskFlagTrue">する</label>
-						<input type="radio" th:field="*{healthInfoMaskFlag}" id="healthInfoMaskFlagFalse" value="0">
-						<label for="healthInfoMaskFlagFalse" class="switch-off">しない</label>
-					</div>
 				</td>
 			</tr>
 			<tr>

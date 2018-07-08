@@ -63,7 +63,13 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 		// 健康情報ファイル設定を取得
 		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId);
 		HealthInfoFileSettingForm form = new HealthInfoFileSettingForm();
-		if (BeanUtil.notNull(entity)) {
+		if (BeanUtil.isNull(entity)) {
+			form.setUserId(userId);
+			form.setHeaderFlag(null);
+			form.setFooterFlag(null);
+			form.setMaskFlag(null);
+			form.setEnclosureCharFlag(null);
+		} else {
 			BeanUtil.copy(entity, form);
 		}
 		return form;
@@ -85,6 +91,11 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@PostMapping(value = "/healthInfoFileSetting-confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result)
 			throws BaseAppException {
+		if (result.hasErrors()) {
+			return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
+		}
+
+		model.addAttribute("form", form);
 		return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_CONFIRM);
 	}
 

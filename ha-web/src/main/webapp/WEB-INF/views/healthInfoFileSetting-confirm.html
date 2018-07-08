@@ -40,32 +40,68 @@
 				<th width="130px">
 					<p>ヘッダ利用</p>
 				</th>
-				<td width="250px">
-					<input type="text" required th:field="*{headerFlag}" readonly="readonly" />
+				<td class="data" width="250px">
+					<div th:if="${form.headerFlag} == 1">
+						<p>する</p>
+					</div>
+					<div th:if="${form.headerFlag} == 0">
+						<p>しない</p>
+					</div>
+					<input type="hidden" th:field="${form.headerFlag}" />
 				</td>
 			</tr>
 			<tr>
 				<th>
 					<p>フッタ利用</p>
 				</th>
-				<td width="250px">
-					<input type="text" required th:field="*{footerFlag}" readonly="readonly" />
+				<td class="data" width="250px">
+					<div th:if="${form.footerFlag} == 1">
+						<p>する</p>
+					</div>
+					<div th:if="${form.footerFlag} == 0">
+						<p>しない</p>
+					</div>
+					<input type="hidden" th:field="${form.footerFlag}" />
 				</td>
 			</tr>
 			<tr>
 				<th>
 					<p>マスク利用</p>
 				</th>
-				<td width="250px">
-					<input type="text" required th:field="*{maskFlag}" readonly="readonly" />
+				<td class="data" width="250px">
+					<div th:if="${form.maskFlag} == 1">
+						<p>する</p>
+					</div>
+					<div th:if="${form.maskFlag} == 0">
+						<p>しない</p>
+					</div>
+					<input type="hidden" th:field="${form.maskFlag}" />
 				</td>
 			</tr>
 			<tr>
 				<th>
 					<p>囲み文字利用</p>
 				</th>
-				<td width="250px">
-					<input type="text" required th:field="*{enclosureCharFlag}" readonly="readonly" />
+				<td class="data" width="250px">
+					<div th:if="${form.enclosureCharFlag} == 1">
+						<p>する</p>
+					</div>
+					<div th:if="${form.enclosureCharFlag} == 0">
+						<p>しない</p>
+					</div>
+					<input type="hidden" th:field="${form.enclosureCharFlag}" />
+				</td>
+			</tr>
+		</table>
+		<br><br>
+		<table>
+			<tr>
+				<td>
+					<input type="submit" value="確 定" />
+				</td>
+				<td><p>　　</p></td>
+				<td>
+					<input type="button" value="戻 る" onclick="history.back()">
 				</td>
 			</tr>
 		</table>
