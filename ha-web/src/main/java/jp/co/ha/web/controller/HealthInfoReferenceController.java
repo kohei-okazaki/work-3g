@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.parameter.ParamConst;
-import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
@@ -64,9 +64,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** セッション管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
-	/** アカウント検索サービス */
+	/** 健康情報ファイル設定検索サービス */
 	@Autowired
-	private AccountSearchService accountSearchService;
+	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
 	 * Validateを設定<br>
@@ -189,8 +189,8 @@ public class HealthInfoReferenceController implements BaseWebController {
 		List<ReferenceCsvModel> modelList = service.toModelList(userId, resultList);
 
 		// CSV設定情報取得
-		Account account = accountSearchService.findByUserId(userId);
-		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue(), account);
+		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
+		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue(), fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 		conf.setHasEnclosure(true);

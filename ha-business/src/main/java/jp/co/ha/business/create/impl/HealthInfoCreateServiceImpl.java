@@ -24,8 +24,8 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(HealthInfo healthInfo) {
-		healthInfoDao.create(healthInfo);
+	public void create(HealthInfo entity) {
+		healthInfoDao.create(entity);
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 	 */
 	@Override
 	public void create(List<HealthInfo> entityList) {
-		entityList.forEach(healthInfo -> healthInfoDao.create(healthInfo));
+		entityList.forEach(entity -> healthInfoDao.create(entity));
 	}
 
 }

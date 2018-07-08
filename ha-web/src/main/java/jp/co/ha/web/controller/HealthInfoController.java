@@ -25,11 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
-import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.parameter.ParamConst;
-import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -75,9 +75,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/** セッション管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
-	/** アカウント検索サービス */
+	/** 健康情報ファイル設定検索サービス */
 	@Autowired
-	private AccountSearchService accountSearchService;
+	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -210,8 +210,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
-		Account account = accountSearchService.findByUserId(userId);
-		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), account);
+		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
+		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 

@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
-import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
-import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.util.Charset;
@@ -23,12 +23,12 @@ import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
 @Service(value = "healthInfoDownloadExcel")
 public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfo> {
 
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
 	/** 健康情報利用機能サービス */
 	@Autowired
 	private HealthInfoFunctionService healthInfoFunctionService;
+	/** 健康情報ファイル設定検索サービス */
+	@Autowired
+	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -36,10 +36,9 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	@Override
 	public View execute(HealthInfo healthInfo) {
 
-		// 健康情報Entityからアカウントを検索
-		Account account = accountSearchService.findByUserId(healthInfo.getUserId());
-
-		HealthInfoExcelModel model = toModel(healthInfo, account);
+		// 健康情報Entityから健康情報ファイル設定を検索
+		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(healthInfo.getUserId());
+		HealthInfoExcelModel model = toModel(healthInfo, healthInfoFileSetting);
 
 		return new HealthInfoExcelBuilder(getExcelConfig(), List.of(model));
 	}
@@ -49,15 +48,15 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 *
 	 * @param healthInfo
 	 *     HealthInfo
-	 * @param account
-	 *     Account
+	 * @param entity
+	 *     健康情報ファイル設定
 	 * @return model HealthInfoExcelModel
 	 */
-	private HealthInfoExcelModel toModel(HealthInfo healthInfo, Account account) {
+	private HealthInfoExcelModel toModel(HealthInfo healthInfo, HealthInfoFileSetting entity) {
 
 		HealthInfoExcelModel model = new HealthInfoExcelModel();
 
-		boolean useMask = healthInfoFunctionService.useHealthInfoMask(account);
+		boolean useMask = healthInfoFunctionService.useHealthInfoMask(entity);
 		model.setHeight(useMask ? "****" : healthInfo.getHeight().toString());
 		model.setWeight(useMask ? "****" : healthInfo.getWeight().toString());
 		model.setBmi(useMask ? "****" : healthInfo.getBmi().toString());

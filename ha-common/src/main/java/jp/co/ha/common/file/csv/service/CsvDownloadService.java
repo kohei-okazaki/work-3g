@@ -3,7 +3,7 @@ package jp.co.ha.common.file.csv.service;
 import java.io.PrintWriter;
 import java.util.List;
 
-import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
@@ -38,16 +38,16 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 *
 	 * @param fileName
 	 *     ファイル名
-	 * @param account
-	 *     アカウント情報
+	 * @param healthInfoFileSetting
+	 *     健康情報ファイル設定
 	 * @return CsvConfig
 	 */
-	default CsvConfig getCsvConfig(String fileName, Account account) {
+	default CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting healthInfoFileSetting) {
 
 		CsvConfig csvConfig = new CsvConfig();
 		csvConfig.setFileName(fileName);
 		csvConfig.setEnclosureChar(CsvWriter.DOBBLE_QUOTE);
-		csvConfig.setHasEnclosure(StringUtil.isTrue(account.getFileEnclosureCharFlag()));
+		csvConfig.setHasEnclosure(StringUtil.isTrue(healthInfoFileSetting.getEnclosureCharFlag()));
 		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;
 	}

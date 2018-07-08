@@ -32,8 +32,6 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		Account account = new Account();
 		BeanUtil.copy(form, account);
 		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
-		account.setFileEnclosureCharFlag(ParamConst.FLAG_FALSE.getValue());
-		account.setHealthInfoMaskFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 
 		return account;

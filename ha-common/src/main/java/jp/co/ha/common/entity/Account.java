@@ -45,14 +45,6 @@ public class Account implements Serializable {
 	@Column(name = "REMARKS", nullable = false)
 	private String remarks;
 
-	/** ファイル囲い文字利用フラグ */
-	@Column(name = "FILE_ENCLOSURE_CHAR_FLAG", nullable = true, length = 1)
-	private String fileEnclosureCharFlag;
-
-	/** 健康情報マスク利用フラグ */
-	@Column(name = "HEALTH_INFO_MASK_FLAG", nullable = true, length = 1)
-	private String healthInfoMaskFlag;
-
 	/** 更新日時 */
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
@@ -154,44 +146,6 @@ public class Account implements Serializable {
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
-	}
-
-	/**
-	 * fileEnclosureCharFlagを返す
-	 *
-	 * @return fileEnclosureCharFlag ファイル囲い文字利用フラグ
-	 */
-	public String getFileEnclosureCharFlag() {
-		return fileEnclosureCharFlag;
-	}
-
-	/**
-	 * fileEnclosureCharFlagを設定する
-	 *
-	 * @param fileEnclosureCharFlag
-	 *     ファイル囲い文字利用フラグ
-	 */
-	public void setFileEnclosureCharFlag(String fileEnclosureCharFlag) {
-		this.fileEnclosureCharFlag = fileEnclosureCharFlag;
-	}
-
-	/**
-	 * healthInfoMaskFlagを返す<br>
-	 *
-	 * @return healthInfoMaskFlag 健康情報マスク利用フラグ
-	 */
-	public String getHealthInfoMaskFlag() {
-		return healthInfoMaskFlag;
-	}
-
-	/**
-	 * healthInfoMaskFlagを設定する<br>
-	 *
-	 * @param healthInfoMaskFlag
-	 *     健康情報マスク利用フラグ
-	 */
-	public void setHealthInfoMaskFlag(String healthInfoMaskFlag) {
-		this.healthInfoMaskFlag = healthInfoMaskFlag;
 	}
 
 	/**

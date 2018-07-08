@@ -24,8 +24,8 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(Account account) {
-		accountDao.create(account);
+	public void create(Account entity) {
+		accountDao.create(entity);
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	 */
 	@Override
 	public void create(List<Account> entityList) {
-		entityList.forEach(account -> accountDao.create(account));
+		entityList.forEach(entity -> accountDao.create(entity));
 	}
 
 }

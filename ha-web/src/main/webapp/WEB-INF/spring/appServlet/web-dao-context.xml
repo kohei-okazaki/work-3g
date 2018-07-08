@@ -16,5 +16,7 @@
 	<beans:bean id="healthInfoDao" class="jp.co.ha.common.dao.impl.HealthInfoDaoImpl" />
 	<!-- メール情報Dao -->
 	<beans:bean id="mailInfoDao" class="jp.co.ha.common.dao.impl.MailInfoDaoImpl" />
+	<!-- 健康情報ファイル設定Dao -->
+	<beans:bean id="healthInfoFileSettingDao" class="jp.co.ha.common.dao.impl.HealthInfoFileSettingDaoImpl" />
 
 </beans:beans>
