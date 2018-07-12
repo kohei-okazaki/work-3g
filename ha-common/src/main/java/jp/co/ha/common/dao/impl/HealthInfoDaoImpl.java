@@ -1,9 +1,7 @@
 package jp.co.ha.common.dao.impl;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +34,11 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 		List<HealthInfo> healthInfoList = new ArrayList<HealthInfo>();
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
+//			Statement stm = this.con.createStatement();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID = '" + userId + "'";
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
+//			ResultSet rs = stm.executeQuery(sql);
+			executeQuery(sql);
+			while (hasNext()) {
 				HealthInfo healthInfo = new HealthInfo();
 				healthInfo.setHealthInfoId(rs.getBigDecimal(HEALTH_INFO_ID));
 				healthInfo.setUserId(rs.getString(USER_ID));
@@ -70,10 +69,11 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 		HealthInfo healthInfo = null;
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
+//			Statement stm = this.con.createStatement();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE HEALTH_INFO_ID = '" + healthInfoId.toString() + "'";
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
+//			ResultSet rs = stm.executeQuery(sql);
+			executeQuery(sql);
+			while (hasNext()) {
 				healthInfo = new HealthInfo();
 				healthInfo.setHealthInfoId(rs.getBigDecimal(HEALTH_INFO_ID));
 				healthInfo.setUserId(rs.getString(USER_ID));
@@ -101,7 +101,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 		logger.info(healthInfo);
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
+//			Statement stm = this.con.createStatement();
 			String sql = "INSERT INTO " + TABLE_NAME + "("
 												+ USER_ID + ", "
 												+ HEIGHT + ", "
@@ -119,7 +119,8 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 												+ "'" + healthInfo.getUserStatus() + "', "
 												+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 												+ ")";
-			int rs = stm.executeUpdate(sql);
+//			int rs = stm.executeUpdate(sql);
+			int rs = executeUpdate(sql);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
 			e.printStackTrace();

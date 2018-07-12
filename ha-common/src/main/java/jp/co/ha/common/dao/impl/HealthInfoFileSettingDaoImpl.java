@@ -1,6 +1,5 @@
 package jp.co.ha.common.dao.impl;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,9 +29,9 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 		HealthInfoFileSetting entity = null;
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
+//			Statement stm = this.con.createStatement();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID = '" + userId + "'";
-			ResultSet rs = stm.executeQuery(sql);
+//			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				entity = new HealthInfoFileSetting();
 				entity.setUserId(rs.getString(USER_ID));

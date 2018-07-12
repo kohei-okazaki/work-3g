@@ -1,8 +1,6 @@
 package jp.co.ha.common.dao.impl;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.springframework.dao.DuplicateKeyException;
 
@@ -32,11 +30,11 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		Account account = null;
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
+//			Statement stm = this.con.createStatement();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID = '" + userId + "'";
 			System.out.println(sql);
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
+			executeQuery(sql);
+			while (hasNext()) {
 				account = new Account();
 				account.setUserId(rs.getString(USER_ID));
 				account.setPassword(rs.getString(PASSWORD));
@@ -63,7 +61,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		LOGGER.info(account);
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
+//			Statement stm = this.con.createStatement();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
 													+ "'" + account.getUserId() + "', "
 													+ "'" + account.getPassword() + "', "
@@ -74,7 +72,8 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 													+ ")";
 			System.out.println(sql);
-			int rs = stm.executeUpdate(sql);
+//			int rs = stm.executeUpdate(sql);
+			int rs = executeUpdate(sql);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,7 +91,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 		LOGGER.info(account);
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
+//			Statement stm = this.con.createStatement();
 			String sql = "UPDATE " + TABLE_NAME + " SET "
 										+ PASSWORD + "= '" + account.getPassword() + "', "
 										+ DELETE_FLAG + "= '" + account.getDeleteFlag() + "', "
@@ -101,7 +100,8 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 										+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 										+ " WHERE "+ USER_ID + "= '" + account.getUserId() + "'";
 			System.out.println(sql);
-			int rs = stm.executeUpdate(sql);
+//			int rs = stm.executeUpdate(sql);
+			int rs = executeUpdate(sql);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
