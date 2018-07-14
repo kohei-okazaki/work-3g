@@ -15,4 +15,12 @@
 	<context:component-scan base-package="jp.co.ha.api.controller" />
 	<context:component-scan base-package="jp.co.ha.api.service.impl" />
 
+	<context:property-placeholder location="/WEB-INF/database.properties" />
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<beans:property name="driverClassName" value="${driverClassName}" />
+		<beans:property name="url" value="${url}" />
+		<beans:property name="username" value="${username}" />
+		<beans:property name="password" value="${password}" />
+	</beans:bean>
+
 </beans:beans>
