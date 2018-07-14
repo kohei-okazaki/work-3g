@@ -22,6 +22,13 @@
 		<img class="headericon" alt="入力" src="resources/image/icon_input.jpg">
 		アカウント登録入力画面
 	</h1>
+	<hr>
+	<br><br>
+	<div class="progress-example" align="center">
+		<div>
+			<progress id="bar" max="3" value="0"></progress>
+		</div>
+	</div>
 
 	<hr>
 	<br><br>
@@ -40,11 +47,11 @@
 		<div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
 		<div th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
-		<input type="text" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" />
+		<input type="text" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
 		<br><br>
-		<input type="text" th:field="*{password}" maxlength="16" required placeholder="パスワード" />
+		<input type="text" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" />
 		<br><br>
-		<input type="text" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" />
+		<input type="text" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
 		<br><br>
 		<textarea rows="10" cols="30" name="remarks" ></textarea>
 		<br><br>
