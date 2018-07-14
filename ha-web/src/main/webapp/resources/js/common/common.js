@@ -3,3 +3,10 @@ function finish() {
 	alert(finishMessage);
 }
 
+function toTop() {
+	var form = document.createElement('form');
+	form.action = './top.html';
+	form.method = 'get';
+	document.body.appendChild(form);
+	form.submit();
+}
