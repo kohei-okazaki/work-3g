@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -53,6 +54,20 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 
 		// ユーザIDが存在する場合true, 存在しない場合false
 		return !StringUtil.isEmpty(account.getUserId());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form) {
+		HealthInfoFileSetting entity = new HealthInfoFileSetting();
+		entity.setUserId(form.getUserId());
+		entity.setEnclosureCharFlag(StringUtil.FALSE_FLAG);
+		entity.setHeaderFlag(StringUtil.FALSE_FLAG);
+		entity.setFooterFlag(StringUtil.FALSE_FLAG);
+		entity.setMaskFlag(StringUtil.FALSE_FLAG);
+		return entity;
 	}
 
 }

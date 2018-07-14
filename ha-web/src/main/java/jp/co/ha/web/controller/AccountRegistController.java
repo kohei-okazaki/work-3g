@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.ha.business.create.AccountCreateService;
+import jp.co.ha.business.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;
@@ -39,6 +41,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報ファイル設定作成サービス */
+	@Autowired
+	private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
 
 	/**
 	 * {@inheritDoc}
@@ -98,9 +103,13 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 		// アカウントEntityに変換する
 		Account account = service.toAccount(form);
-
 		// アカウントを作成する
 		accountCreateService.create(account);
+
+		// 健康情報ファイル設定情報をEntityに変換する
+		HealthInfoFileSetting healthInfoFileSetting = service.toHealthInfoFileSetting(form);
+		// 健康情報ファイル設定情報を作成
+		healthInfoFileSettingCreateService.create(healthInfoFileSetting);
 
 		return getView(ManageWebView.ACCOUNT_REGIST_COMPLETE);
 	}

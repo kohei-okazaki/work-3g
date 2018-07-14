@@ -1,6 +1,7 @@
 package jp.co.ha.web.service;
 
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.AccountRegistForm;
 
 /**
@@ -27,5 +28,14 @@ public interface AccountRegistService {
 	 * @return
 	 */
 	boolean invalidUserId(AccountRegistForm form);
+
+	/**
+	 * 健康情報ファイル設定Entityに変換する<br>
+	 *
+	 * @param form
+	 *     アカウント登録画面フォーム
+	 * @return
+	 */
+	HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form);
 
 }

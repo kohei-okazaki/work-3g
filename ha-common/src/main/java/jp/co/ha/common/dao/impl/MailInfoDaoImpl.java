@@ -1,8 +1,6 @@
 package jp.co.ha.common.dao.impl;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.springframework.dao.DuplicateKeyException;
 
@@ -33,10 +31,9 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 		MailInfo mailInfo = null;
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID = '" + userId + "'";
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
+			execute(sql, SqlType.SELECT);
+			while (hasNext()) {
 				mailInfo = new MailInfo();
 				mailInfo.setUserId(rs.getString(USER_ID));
 				mailInfo.setMailAddress(rs.getString(MAIL_ADDRESS));
@@ -63,13 +60,12 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
 			String sql = "UPDATE " + TABLE_NAME + " SET "
 						+ MAIL_ADDRESS + "= '" + mailInfo.getMailAddress() + "', "
 						+ MAIL_PASSWORD + "= '" + mailInfo.getMailPassword() + "', "
 						+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 						+ " WHERE " + USER_ID + "= '" + mailInfo.getUserId() + "'";
-			int rs = stm.executeUpdate(sql);
+			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,7 +85,6 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
 			String sql = "INSERT INTO " + TABLE_NAME +" VALUES ("
 					+ "'" + mailInfo.getUserId() + "', "
 					+ "'" + mailInfo.getMailAddress() + "', "
@@ -97,7 +92,7 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
 					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 					+ ");";
-			int rs = stm.executeUpdate(sql);
+			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
 			e.printStackTrace();

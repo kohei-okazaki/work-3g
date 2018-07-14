@@ -1,8 +1,6 @@
 package jp.co.ha.common.dao.impl;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import jp.co.ha.common.dao.BaseDaoImpl;
 import jp.co.ha.common.dao.HealthInfoFileSettingDao;
@@ -30,10 +28,9 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 		HealthInfoFileSetting entity = null;
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID = '" + userId + "'";
-			ResultSet rs = stm.executeQuery(sql);
-			while (rs.next()) {
+			execute(sql, SqlType.SELECT);
+			while (hasNext()) {
 				entity = new HealthInfoFileSetting();
 				entity.setUserId(rs.getString(USER_ID));
 				entity.setHeaderFlag(rs.getString(HEADER_FLAG));
@@ -60,7 +57,6 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 		LOGGER.info(healthInfoFileSetting);
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
 					+ "'" + healthInfoFileSetting.getUserId() + "', "
 					+ "'" + healthInfoFileSetting.getHeaderFlag() + "', "
@@ -70,7 +66,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
 					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 					+ ")";
-			int rs = stm.executeUpdate(sql);
+			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,7 +84,6 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 		LOGGER.info(healthInfoFileSetting);
 		try {
 			connect();
-			Statement stm = this.con.createStatement();
 			String sql = "UPDATE " + TABLE_NAME + " SET "
 					+ HEADER_FLAG + "= '" + healthInfoFileSetting.getHeaderFlag() + "', "
 					+ FOOTER_FLAG + "= '" + healthInfoFileSetting.getFooterFlag() + "', "
@@ -97,7 +92,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 					+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 					+ " WHERE "+ USER_ID + "= '" + healthInfoFileSetting.getUserId() + "'";
 			System.out.println(sql);
-			int rs = stm.executeUpdate(sql);
+			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
 		} catch (SQLException e) {
 			e.printStackTrace();

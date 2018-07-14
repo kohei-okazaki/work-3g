@@ -49,4 +49,12 @@
 
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
+	<context:property-placeholder location="/WEB-INF/jdbc.properties" />
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<beans:property name="driverClassName" value="${driverClassName}" />
+		<beans:property name="url" value="${url}" />
+		<beans:property name="username" value="${username}" />
+		<beans:property name="password" value="${password}" />
+	</beans:bean>
+
 </beans:beans>
