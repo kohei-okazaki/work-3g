@@ -7,7 +7,7 @@ import jp.co.ha.common.log.annotation.Mask;
  * 健康情報CSVアップロードモデル<br>
  *
  */
-public class HealthInfoUploadModel implements BaseCsvModel {
+public class HealthInfoCsvUploadModel implements BaseCsvModel {
 
 	/** ユーザID */
 	private String userId;

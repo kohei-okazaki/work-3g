@@ -21,7 +21,7 @@ import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.web.BaseWebController;
-import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.form.HealthInfoFileForm;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
 import jp.co.ha.web.service.annotation.HealthInfoUploadCsv;
@@ -38,7 +38,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/** 健康情報CSVアップロードサービス */
 	@Autowired
 	@HealthInfoUploadCsv
-	private CsvUploadService<HealthInfoUploadModel> csvUploadService;
+	private CsvUploadService<HealthInfoCsvUploadModel> csvUploadService;
 	/** 健康情報ファイル登録画面サービス */
 	@Autowired
 	private HealthInfoFileRegistService fileService;
@@ -87,7 +87,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 			return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 		}
 
-		List<HealthInfoUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
+		List<HealthInfoCsvUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
 		fileService.formatCheck(modelList);
 		sessionManageService.setValue(request.getSession(), "modelList", modelList);
 		model.addAttribute("count", modelList.size());
@@ -100,7 +100,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	 */
 	@PostMapping(value = "/healthInfoFile-complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseAppException {
-		List<HealthInfoUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
+		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
 		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);
 		for (HealthInfoRegistRequest apiRequest : reqList) {
 			healthInfoRegistService.checkRequest(apiRequest);
