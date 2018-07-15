@@ -35,13 +35,12 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	public T read(String record) {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
-		List<String> colList = BeanUtil.getFieldList(clazz)
-										.stream()
-										.map(f -> f.getName())
-										.collect(Collectors.toList());
+		List<String> colList = BeanUtil.getFieldList(clazz).stream()
+															.map(f -> f.getName())
+															.collect(Collectors.toList());
 		List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
 		if (hasFileLengthError(colList, dataList)) {
-			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "CSVの件数が一致しません。");
+			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
 		}
 
 		T model = null;

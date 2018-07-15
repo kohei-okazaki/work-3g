@@ -3,7 +3,7 @@ package jp.co.ha.web.file.csv.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import jp.co.ha.common.file.csv.annotation.CsvModel;
+import jp.co.ha.common.file.csv.annotation.CsvDownloadModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 
 /**
@@ -11,7 +11,7 @@ import jp.co.ha.common.file.csv.model.BaseCsvModel;
  * CSV出力したい項目のみを持つ
  *
  */
-@CsvModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
+@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
 public class ReferenceCsvDownloadModel implements BaseCsvModel {
 
 	/** ユーザID */
