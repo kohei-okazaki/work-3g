@@ -7,12 +7,14 @@
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/baseLayout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
 <link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
 <link rel="stylesheet" type="text/css" href="resources/css/healthInfo.css">
 <link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
 <script type="text/javascript" src="resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/common/fort.js"></script>
 <script type="text/javascript" src="resources/js/common/common.js"></script>
 <script type="text/javascript" src="resources/js/healthInfo.js"></script>
 </head>
@@ -26,7 +28,7 @@
 
 	<hr>
 	<div th:include="common/navigation.html"></div>
-
+	<br><br>
 	<div th:if="${errorMessage} != null">
 		<br><br>
 		<div class="errorMessage">
@@ -34,29 +36,35 @@
 		</div>
 	</div>
 
-	<!-- 入力画面 -->
+	<div align="center">
+		<div>
+			<progress id="bar" max="2" value="0"></progress>
+		</div>
+	</div>
+
+	<!--/* 入力画面 */-->
 	<div align="center">
 	<br><br><br>
 	<form action="./healthInfo-confirm.html" th:action="@{./healthInfo-confirm.html}" method="post" th:object="${healthInfoForm}">
 		<div th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
 		<div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-		<input type="text" size="6" th:field="*{height}" required placeholder="身長" >　cm
+		<input type="text" size="6" th:field="*{height}" required placeholder="身長" onblur="changeValue()" />　cm
 		<p class="attention">※半角数字で入力してください</p>
 		<br><br>
-		<input type="text" size="6" th:field="*{weight}" required placeholder="体重" >　kg
+		<input type="text" size="6" th:field="*{weight}" required placeholder="体重" onblur="changeValue()" />　kg
 		<p class="attention">※半角数字で入力してください</p>
 		<br>
 		<br>
 		<table>
 			<tr>
 				<td>
-					<input type="submit" value="確認">
+					<input type="submit" value="確認" />
 				</td>
 				<td>
 					<p>　　</p>
 				</td>
 				<td>
-					<input type="reset" value="リセット">
+					<input type="reset" value="リセット" onclick="resetBar()" />
 				</td>
 			</tr>
 		</table>

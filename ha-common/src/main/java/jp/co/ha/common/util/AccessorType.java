@@ -2,7 +2,7 @@ package jp.co.ha.common.util;
 
 /**
  * メソッドのアクセス列挙<br>
- * @see BeanUtil#getSetter(String, Class)
+ * @see BeanUtil#getAccessor(String, Class, AccessorType)
  *
  */
 public enum AccessorType {

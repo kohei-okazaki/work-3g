@@ -193,7 +193,11 @@ public class BeanUtil {
 		Method accessor = null;
 		try {
 			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
-			accessor = type == AccessorType.SETTER ? pd.getWriteMethod() : pd.getReadMethod();
+			if (type == AccessorType.SETTER) {
+				accessor = pd.getWriteMethod();
+			} else if (type == AccessorType.GETTER) {
+				accessor = pd.getReadMethod();
+			}
 		} catch (IntrospectionException e) {
 			e.printStackTrace();
 		}

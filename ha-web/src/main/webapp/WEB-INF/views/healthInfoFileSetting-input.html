@@ -24,7 +24,7 @@
 	<div th:include="common/navigation.html"></div>
 	<br><br><br>
 
-	<!-- 入力画面 -->
+	 <!--/* 入力画面 */-->
 	<form action="./healthInfoFileSetting-confirm.html" th:action="@{./healthInfoFileSetting-confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
 	<div align="center">
 	<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>

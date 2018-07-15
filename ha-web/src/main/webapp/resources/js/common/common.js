@@ -3,9 +3,9 @@ function finish() {
 	alert(finishMessage);
 }
 
-function toMenu() {
+function toTop() {
 	var form = document.createElement('form');
-	form.action = '/ha-web/menu.html';
+	form.action = './top.html';
 	form.method = 'get';
 	document.body.appendChild(form);
 	form.submit();

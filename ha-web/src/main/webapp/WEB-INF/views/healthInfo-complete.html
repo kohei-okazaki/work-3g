@@ -27,7 +27,7 @@
 	<hr>
 	<div th:include="common/navigation.html"></div>
 
-	<!-- 完了画面 -->
+	<!--/* 完了画面 */-->
 	<br><br><br>
 	<div align="center">
 		<p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
@@ -75,7 +75,7 @@
 		<table>
 			<tr>
 				<td>
-				<!-- 通知  -->
+				<!--/* 通知  */-->
 				<form action="./notice.html" method="post">
 					<div>
 						<input class="menuicon" type="image" src="resources/image/icon_mail.png">
@@ -84,7 +84,7 @@
 				</td>
 				<td>　　</td>
 				<td>
-					<!-- Excel出力 -->
+					<!--/* Excel出力 */-->
 					<form action="./healthInfo-excelDownload.html" th:action="@{./healthInfo-excelDownload.html}" method="get" th:object="${healthInfoForm}">
 						<input type="hidden" th:field="*{healthInfoId}" />
 						<div>
@@ -94,7 +94,7 @@
 				</td>
 				<td>　　</td>
 				<td>
-					<!-- CSV出力 -->
+					<!--/* CSV出力 */-->
 					<form action="./healthInfo-csvDownload.html" th:action="@{./healthInfo-csvDownload.html}" method="get" th:object="${healthInfoForm}">
 						<input type="hidden" th:field="*{healthInfoId}" />
 						<div>
@@ -104,10 +104,12 @@
 				</td>
 				<td>　　</td>
 				<td>
-				<!-- メニュー画面へ -->
-					<div>
-						<input class="menuicon" type="image" src="resources/image/icon_menu.jpg" onclick="toMenu()">
-					</div>
+					<!--/* TOP画面へ */-->
+					<form action="./top.html" th:action="@{./top.html}" method="get">
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_menu.jpg">
+						</div>
+					</form>
 				</td>
 			</tr>
 		</table>

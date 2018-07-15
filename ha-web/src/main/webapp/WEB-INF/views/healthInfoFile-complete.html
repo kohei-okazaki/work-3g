@@ -26,13 +26,25 @@
 	<hr>
 	<div th:include="common/navigation.html"></div>
 
-	<!-- 完了画面 -->
+	<!--/* 完了画面 */-->
 	<div align="center">
-	<br><br><br>
-		<P>登録完了しました</P>
+		<p>完了しました</p>
+		<br><br>
+		<table>
+			<tr>
+				<td align="center">
+					<!--/* TOP画面へ */-->
+					<form action="./top.html" th:action="@{./top.html}" method="get">
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_menu.jpg">
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
 	</div>
-	<br><br>
 
+	<br><br>
 	<hr>
 	<div th:include="common/footer.html"></div>
 
