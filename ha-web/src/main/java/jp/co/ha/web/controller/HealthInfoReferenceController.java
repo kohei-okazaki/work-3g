@@ -35,7 +35,7 @@ import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
-import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
+import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 import jp.co.ha.web.service.annotation.ReferenceDownloadCsv;
@@ -60,7 +60,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
 	@ReferenceDownloadCsv
-	private CsvDownloadService<ReferenceCsvModel> csvDownloadService;
+	private CsvDownloadService<ReferenceCsvDownloadModel> csvDownloadService;
 	/** セッション管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
@@ -186,7 +186,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		String userId = sessionService.getValue(session, "userId", String.class);
 
 		// CSV出力モデルリストに変換する
-		List<ReferenceCsvModel> modelList = service.toModelList(userId, resultList);
+		List<ReferenceCsvDownloadModel> modelList = service.toModelList(userId, resultList);
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
