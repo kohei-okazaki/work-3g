@@ -27,20 +27,14 @@ public class HealthInfoFileUploadServiceImpl implements CsvUploadService<HealthI
 	 */
 	@Override
 	public List<HealthInfoUploadModel> execute(MultipartFile uploadFile) throws BaseAppException {
-
 		CsvReader<HealthInfoUploadModel> reader = new HealthInfoCsvReader();
 		List<String> list = null;
 		try {
-			list = reader.toList(uploadFile.getInputStream());
+			list = toList(uploadFile.getInputStream());
 		} catch (IOException e) {
 			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "ファイルを読み込めませんでした。ファイル名" + uploadFile.getOriginalFilename());
 		}
-
-		List<HealthInfoUploadModel> modelList = list.stream()
-													.map(data -> reader.read(data))
-													.collect(Collectors.toList());
-
-		return modelList;
+		return list.stream().map(data -> reader.read(data)).collect(Collectors.toList());
 	}
 
 }

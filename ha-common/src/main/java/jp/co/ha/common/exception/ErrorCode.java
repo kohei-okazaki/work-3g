@@ -35,6 +35,8 @@ public enum ErrorCode {
 
 	/** ファイルアップロード例外 */
 	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "WARN", "ファイルアップロード例外"),
+	/** ファイル読込例外 */
+	FILE_READING_ERROR("FILE_READING_ERROR", "WARN", "ファイル読み込み例外"),
 
 	/** 実行環境エラー */
 	RUNTIME_ERROR("RUNTIME_ERROR", "ERROR", "実行環境エラー"),
