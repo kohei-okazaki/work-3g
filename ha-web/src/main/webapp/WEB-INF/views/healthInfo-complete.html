@@ -104,10 +104,12 @@
 				</td>
 				<td>　　</td>
 				<td>
-				<!-- TOP画面へ -->
-					<div>
-						<input class="menuicon" type="image" src="resources/image/icon_menu.jpg" onclick="toTop()">
-					</div>
+					<!-- TOP画面へ -->
+					<form action="./top.html" th:action="@{./top.html}" method="get">
+						<div>
+							<input class="menuicon" type="image" src="resources/image/icon_menu.jpg">
+						</div>
+					</form>
 				</td>
 			</tr>
 		</table>
