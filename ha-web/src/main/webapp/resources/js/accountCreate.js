@@ -9,12 +9,9 @@ function accountCreate() {
 function changeValue() {
 
 	// 入力値を取得
-	var userIdTag = document.getElementById("userId");
-	var userIdValue = userIdTag.value;
-	var passwordTag = document.getElementById("password");
-	var passwordValue = passwordTag.value;
-	var confirmPasswordTag = document.getElementById("confirmPassword");
-	var confirmPasswordValue = confirmPasswordTag.value;
+	var userIdValue = document.getElementById("userId").value;
+	var passwordValue = document.getElementById("password").value;
+	var confirmPasswordValue = document.getElementById("confirmPassword").value;
 
 	// 進捗バーを取得
 	var bar = document.getElementById("bar");

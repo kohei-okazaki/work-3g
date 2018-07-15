@@ -7,8 +7,8 @@
 <link rel="stylesheet" type="text/css" href="resources/css/layout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/baseLayout.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
-<link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
+<link rel="stylesheet" type="text/css" href="resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="resources/css/table.css">
 <script type="text/javascript" src="resources/js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/common/fort.js"></script>
@@ -30,6 +30,7 @@
 			<progress id="bar" max="3" value="0"></progress>
 		</div>
 	</div>
+
 	<!-- 入力画面 -->
 	<form action="./accountRegist-confirm.html" th:action="@{./accountRegist-confirm.html}" method="post" th:object="${accountRegistForm}">
 	<div align="center">
@@ -44,13 +45,13 @@
 		<div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
 		<div th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
-		<input type="text" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
+		<input type="text" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" onblur="changeValue()" />
 		<br><br>
-		<input type="text" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" />
+		<input type="text" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" onblur="changeValue()" />
 		<br><br>
-		<input type="text" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
+		<input type="text" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" onblur="changeValue()" />
 		<br><br>
-		<textarea rows="10" cols="30" name="remarks" ></textarea>
+		<textarea rows="10" cols="30" name="remarks"></textarea>
 		<br><br>
 		<table>
 			<tr>
@@ -61,7 +62,7 @@
 					<p>　　</p>
 				</td>
 				<td>
-					<input type="reset" value="リセット" />
+					<input type="reset" value="リセット" onclick="resetBar()" />
 				</td>
 			</tr>
 		</table>
