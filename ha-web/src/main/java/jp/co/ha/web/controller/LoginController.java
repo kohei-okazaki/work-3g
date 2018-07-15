@@ -81,7 +81,7 @@ public class LoginController implements BaseWebController {
 	}
 
 	/**
-	 * メニュー画面
+	 * TOP画面
 	 *
 	 * @param model
 	 *     Model
