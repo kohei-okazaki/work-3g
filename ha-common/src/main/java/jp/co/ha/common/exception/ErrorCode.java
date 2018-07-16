@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public enum ErrorCode {
 
 	/** 必須エラー */
-	REQUIRE("REQUIRE", "", "必須エラーです"),
+	REQUIRE("REQUIRE", "", "validate.message.NotEmpty"),
 	/** 属性エラー */
 	TYPE("TYPE", "", "属性エラーです"),
 	/** 桁数エラー */

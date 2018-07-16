@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import jp.co.ha.common.log.annotation.Ignore;
 
 /**
- * 健康情報ファイル設定
+ * 健康情報ファイル設定Entity<br>
  *
  */
 @Entity
@@ -48,7 +48,7 @@ public class HealthInfoFileSetting implements Serializable {
 	/**
 	 * userIdを返す<br>
 	 *
-	 * @return userId
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
@@ -58,6 +58,7 @@ public class HealthInfoFileSetting implements Serializable {
 	 * userIdを設定する<br>
 	 *
 	 * @param userId
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -66,7 +67,7 @@ public class HealthInfoFileSetting implements Serializable {
 	/**
 	 * headerFlagを返す<br>
 	 *
-	 * @return headerFlag
+	 * @return headerFlag ヘッダ利用フラグ
 	 */
 	public String getHeaderFlag() {
 		return headerFlag;
@@ -76,6 +77,7 @@ public class HealthInfoFileSetting implements Serializable {
 	 * headerFlagを設定する<br>
 	 *
 	 * @param headerFlag
+	 *     ヘッダ利用フラグ
 	 */
 	public void setHeaderFlag(String headerFlag) {
 		this.headerFlag = headerFlag;
@@ -84,7 +86,7 @@ public class HealthInfoFileSetting implements Serializable {
 	/**
 	 * footerFlagを返す<br>
 	 *
-	 * @return footerFlag
+	 * @return footerFlag フッタ利用フラグ
 	 */
 	public String getFooterFlag() {
 		return footerFlag;
@@ -94,6 +96,7 @@ public class HealthInfoFileSetting implements Serializable {
 	 * footerFlagを設定する<br>
 	 *
 	 * @param footerFlag
+	 *     フッタ利用フラグ
 	 */
 	public void setFooterFlag(String footerFlag) {
 		this.footerFlag = footerFlag;
@@ -102,7 +105,7 @@ public class HealthInfoFileSetting implements Serializable {
 	/**
 	 * maskFlagを返す<br>
 	 *
-	 * @return maskFlag
+	 * @return maskFlag マスクフラグ
 	 */
 	public String getMaskFlag() {
 		return maskFlag;
@@ -112,6 +115,7 @@ public class HealthInfoFileSetting implements Serializable {
 	 * maskFlagを設定する<br>
 	 *
 	 * @param maskFlag
+	 *     マスクフラグ
 	 */
 	public void setMaskFlag(String maskFlag) {
 		this.maskFlag = maskFlag;
@@ -120,7 +124,7 @@ public class HealthInfoFileSetting implements Serializable {
 	/**
 	 * enclosureCharFlagを返す<br>
 	 *
-	 * @return enclosureCharFlag
+	 * @return enclosureCharFlag 囲み文字利用有無フラグ
 	 */
 	public String getEnclosureCharFlag() {
 		return enclosureCharFlag;
@@ -130,6 +134,7 @@ public class HealthInfoFileSetting implements Serializable {
 	 * enclosureCharFlagを設定する<br>
 	 *
 	 * @param enclosureCharFlag
+	 *     囲み文字利用有無フラグ
 	 */
 	public void setEnclosureCharFlag(String enclosureCharFlag) {
 		this.enclosureCharFlag = enclosureCharFlag;
@@ -138,7 +143,7 @@ public class HealthInfoFileSetting implements Serializable {
 	/**
 	 * updateDateを返す<br>
 	 *
-	 * @return updateDate
+	 * @return updateDate 更新日時
 	 */
 	public Date getUpdateDate() {
 		return updateDate;
@@ -148,6 +153,7 @@ public class HealthInfoFileSetting implements Serializable {
 	 * updateDateを設定する<br>
 	 *
 	 * @param updateDate
+	 *     更新日時
 	 */
 	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
@@ -156,7 +162,7 @@ public class HealthInfoFileSetting implements Serializable {
 	/**
 	 * regDateを返す<br>
 	 *
-	 * @return regDate
+	 * @return regDate 登録日時
 	 */
 	public Date getRegDate() {
 		return regDate;
@@ -166,6 +172,7 @@ public class HealthInfoFileSetting implements Serializable {
 	 * regDateを設定する<br>
 	 *
 	 * @param regDate
+	 *     登録日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
