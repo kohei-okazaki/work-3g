@@ -38,6 +38,11 @@ public enum ErrorCode {
 	/** ファイル読込例外 */
 	FILE_READING_ERROR("FILE_READING_ERROR", "WARN", "ファイル読み込み例外"),
 
+	/** JSON変換エラー例外 */
+	JSON_FORMAT_ERROR("JSON_FORMAT_ERROR", "WARN", "jsonからbeanへの変換例外"),
+	/** JSON変換エラー例外 */
+	JSON_MAPPING_ERROR("JSON_MAPPING_ERROR", "WARN", "jsonからbeanへの変換例外"),
+
 	/** 実行環境エラー */
 	RUNTIME_ERROR("RUNTIME_ERROR", "ERROR", "実行環境エラー"),
 

@@ -7,8 +7,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jp.co.ha.common.exception.AppIOException;
+import jp.co.ha.common.exception.ErrorCode;
+
+/**
+ * Json操作のUtilクラス<br>
+ *
+ */
 public class JsonUtil {
 
+	/**
+	 * プライベートコンストラクタ<br>
+	 */
 	private JsonUtil() {
 	}
 
@@ -28,11 +38,11 @@ public class JsonUtil {
 		try {
 			t = mapper.readValue(target, clazz);
 		} catch (JsonParseException e) {
-			e.printStackTrace();
+			throw new AppIOException(ErrorCode.JSON_FORMAT_ERROR, target + "をjavaクラスへの変換に失敗しました");
 		} catch (JsonMappingException e) {
-			e.printStackTrace();
+			throw new AppIOException(ErrorCode.JSON_MAPPING_ERROR, target + "をjavaクラスへの変換に失敗しました");
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AppIOException(ErrorCode.RUNTIME_ERROR, target + "をjavaクラスへの変換に失敗しました");
 		}
 		return t;
 	}
