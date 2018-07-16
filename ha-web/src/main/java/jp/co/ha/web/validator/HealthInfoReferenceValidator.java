@@ -29,9 +29,9 @@ public class HealthInfoReferenceValidator extends BaseValidator<HealthInfoRefere
 	 * 相関チェックを行う<br>
 	 *
 	 * @param form
-	 *            結果検索フォーム
+	 *     結果検索フォーム
 	 * @param errors
-	 *            Errors
+	 *     Errors
 	 */
 	private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
