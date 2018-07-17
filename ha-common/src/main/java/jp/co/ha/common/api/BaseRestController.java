@@ -3,11 +3,16 @@ package jp.co.ha.common.api;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+
 import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.RestApiException;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.AppLoggerFactory;
 
@@ -58,21 +63,18 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param apiRequest
 	 *     Rq
 	 * @return
+	 * @throws BaseAppException
+	 *     アプリ例外
 	 */
 	@PostMapping
-	default Rs doPost(@RequestBody Rq apiRequest) {
+	default Rs doPost(@RequestBody Rq apiRequest) throws BaseAppException {
 
 		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
 		Rs apiResponse = null;
-		try {
-			log.info(apiRequest);
-			apiResponse = this.execute(apiRequest);
-			apiResponse.setResult(ResultType.SUCCESS);
-			log.info(apiResponse);
-		} catch (BaseAppException e) {
-			apiResponse = (Rs) new ErrorResponse(e);
-			log.error(apiResponse);
-		}
+		log.info(apiRequest);
+		apiResponse = this.execute(apiRequest);
+		apiResponse.setResult(ResultType.SUCCESS);
+		log.info(apiResponse);
 
 		return apiResponse;
 	}
@@ -98,5 +100,39 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 *     例外クラス
 	 */
 	Rq toRequest(HttpServletRequest request) throws BaseAppException;
+
+	/**
+	 * フォーマットエラーのエラーハンドリング<br>
+	 *
+	 * @param e
+	 *     フォーマットエラー
+	 * @return
+	 */
+	@ExceptionHandler(InvalidFormatException.class)
+	public default Rs jsonFormatExceptionHandle(InvalidFormatException e) {
+
+		Rs apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_FORMAT_ERROR, e.getValue() + "はjsonフォーマットエラーです"));
+
+		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
+		log.error(apiResponse);
+		return apiResponse;
+	}
+
+	/**
+	 * アプリケーション例外のエラーハンドリング<br>
+	 *
+	 * @param e
+	 *     アプリエラー
+	 * @return
+	 */
+	@ExceptionHandler(BaseAppException.class)
+	public default Rs appExceptionHandle(BaseAppException e) {
+
+		Rs apiResponse = (Rs) new ErrorResponse(e);
+
+		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
+		log.error(apiResponse);
+		return apiResponse;
+	}
 
 }
