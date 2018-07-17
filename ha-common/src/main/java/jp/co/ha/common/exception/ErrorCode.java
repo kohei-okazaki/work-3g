@@ -42,6 +42,8 @@ public enum ErrorCode {
 	JSON_FORMAT_ERROR("JSON_FORMAT_ERROR", "WARN", "jsonからbeanへの変換例外"),
 	/** JSON変換エラー例外 */
 	JSON_MAPPING_ERROR("JSON_MAPPING_ERROR", "WARN", "jsonからbeanへの変換例外"),
+	/** JSON変換エラー例外 */
+	JSON_PARSE_ERROR("JSON_PARSE_ERROR", "WARN", "json形式でありません"),
 
 	/** 実行環境エラー */
 	RUNTIME_ERROR("RUNTIME_ERROR", "ERROR", "実行環境エラー"),

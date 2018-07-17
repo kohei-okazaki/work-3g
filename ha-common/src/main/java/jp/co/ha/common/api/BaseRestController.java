@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import jp.co.ha.common.exception.BaseAppException;
@@ -102,17 +104,21 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	Rq toRequest(HttpServletRequest request) throws BaseAppException;
 
 	/**
-	 * フォーマットエラーのエラーハンドリング<br>
-	 *
-	 * @param e
-	 *     フォーマットエラー
+	 * JSONで例外が起きた場合のエラーハンドリング<br>
+	 * @param e JSON系のエラー
 	 * @return
 	 */
-	@ExceptionHandler(InvalidFormatException.class)
-	public default Rs jsonFormatExceptionHandle(InvalidFormatException e) {
+	@ExceptionHandler(JsonProcessingException.class)
+	public default Rs jsonProcessingExceptionHandle(JsonProcessingException e) {
 
-		Rs apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_FORMAT_ERROR, e.getValue() + "はjsonフォーマットエラーです"));
-
+		Rs apiResponse = null;
+		if (e instanceof InvalidFormatException) {
+			InvalidFormatException jfe = (InvalidFormatException) e;
+			apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです"));
+		} else if (e instanceof JsonParseException) {
+			e = (JsonParseException) e;
+			apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
+		}
 		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
 		log.error(apiResponse);
 		return apiResponse;
