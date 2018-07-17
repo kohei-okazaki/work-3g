@@ -4,7 +4,7 @@ import java.util.List;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.common.exception.HealthInfoException;
-import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 
 /**
  * 健康情報ファイル入力画面サービス
@@ -19,7 +19,7 @@ public interface HealthInfoFileRegistService {
 	 *     健康情報CSVアップロードモデルリスト
 	 * @return
 	 */
-	List<HealthInfoRegistRequest> toRequestList(List<HealthInfoUploadModel> modelList);
+	List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList);
 
 	/**
 	 * 健康情報CSVアップロードモデルリストに不正なデータが含まれていないかチェックを行う
@@ -31,6 +31,6 @@ public interface HealthInfoFileRegistService {
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	void formatCheck(List<HealthInfoUploadModel> modelList) throws HealthInfoException;
+	void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException;
 
 }

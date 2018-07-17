@@ -12,7 +12,7 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.RegixPattern;
-import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
 
 /**
@@ -26,9 +26,9 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoRegistRequest> toRequestList(List<HealthInfoUploadModel> modelList) {
+	public List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList) {
 		List<HealthInfoRegistRequest> requestList = new ArrayList<HealthInfoRegistRequest>();
-		for (HealthInfoUploadModel csvModel : modelList) {
+		for (HealthInfoCsvUploadModel csvModel : modelList) {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
 			BeanUtil.copy(csvModel, request);
 			request.setRequestId(RequestType.HEALTH_INFO_REGIST.getRequestId());
@@ -43,9 +43,9 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void formatCheck(List<HealthInfoUploadModel> modelList) throws HealthInfoException {
+	public void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException {
 		for (int i = 0; i < modelList.size(); i++) {
-			HealthInfoUploadModel model = modelList.get(i);
+			HealthInfoCsvUploadModel model = modelList.get(i);
 			RegixPattern.isPattern(model.getHeight(), RegixPattern.HALF_NUMBER_PERIOD);
 			if (!RegixPattern.isPattern(model.getHeight(), RegixPattern.HALF_NUMBER_PERIOD)) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());

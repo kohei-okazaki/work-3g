@@ -1,12 +1,12 @@
 package jp.co.ha.common.web;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.RegixPattern;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * 基底Validator<br>
@@ -30,12 +30,20 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	 * fieldのformの値が空文字の場合、errorsオブジェクトにエラーを追加する<br>
 	 *
 	 * @param errors
-	 *     Errors
+	 *     エラー情報
 	 * @param field
-	 *     Formフィールド名
+	 *     検査対象field
+	 * @param fieldsName
+	 *     画面表示項目名
+	 * @param nameArg
+	 *     メッセージ引数
 	 */
-	protected void rejectIfEmpty(Errors errors, String field) {
-		ValidationUtils.rejectIfEmpty(errors, field, ErrorCode.REQUIRE.getErrorCode());
+	protected void rejectIfEmpty(Errors errors, String fieldsName, String nameArgs) {
+		// 値を取得
+		Object field = getFieldValue(errors, fieldsName);
+		if (BeanUtil.isNull(field) || StringUtil.isEmpty(field.toString())) {
+			errors.rejectValue(fieldsName, "validate.message.NotEmpty", new String[] { nameArgs }, "validate.message.NotEmpty");
+		}
 	}
 
 	/**
@@ -80,15 +88,16 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	 * @param field
 	 *     Formフィールド名
 	 */
-	protected void rejectIfNotHalfNumberPeriod(Errors errors, String field) {
-		String fieldValue = getFieldValue(errors, field);
+	protected void rejectIfNotHalfNumberPeriod(Errors errors, String fieldsName, String nameArgs) {
+		// 値を取得
+		String fieldValue = getFieldValue(errors, fieldsName);
 		if (!RegixPattern.isPattern(fieldValue, RegixPattern.HALF_NUMBER_PERIOD)) {
-			errors.rejectValue(field, "errors.halfNumberPeriod");
+			errors.rejectValue(fieldsName, "validate.message.TypeError", new String[] { nameArgs }, "validate.message.TypeError");
 		}
 	}
 
 	/**
-	 * 文字列型のerrorにbindされた入力値を返す<br>
+	 * 入力値を返す<br>
 	 *
 	 * @param errors
 	 *     Errors
@@ -96,7 +105,8 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	 *     Formフィールド名
 	 * @return
 	 */
-	private String getFieldValue(Errors errors, String field) {
-		return errors.getFieldValue(field).toString();
+	protected String getFieldValue(Errors errors, String field) {
+		Object value = errors.getFieldValue(field);
+		return BeanUtil.isNull(value) ? StringUtil.EMPTY : value.toString();
 	}
 }

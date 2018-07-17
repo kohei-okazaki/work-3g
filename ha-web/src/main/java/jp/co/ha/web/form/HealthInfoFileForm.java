@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.web.BaseForm;
-import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 
 /**
  * 健康情報ファイル入力画面フォームクラス<br>
@@ -23,7 +23,7 @@ public class HealthInfoFileForm implements BaseForm {
 	private MultipartFile multipartFile;
 
 	/** 健康情報ファイルモデルリスト */
-	private List<HealthInfoUploadModel> modelList;
+	private List<HealthInfoCsvUploadModel> modelList;
 
 	/**
 	 * multipartFileを返す<br>
@@ -49,7 +49,7 @@ public class HealthInfoFileForm implements BaseForm {
 	 *
 	 * @return modelList
 	 */
-	public List<HealthInfoUploadModel> getModelList() {
+	public List<HealthInfoCsvUploadModel> getModelList() {
 		return modelList;
 	}
 
@@ -59,7 +59,7 @@ public class HealthInfoFileForm implements BaseForm {
 	 * @param modelList
 	 *     健康情報モデルリスト
 	 */
-	public void setModelList(List<HealthInfoUploadModel> modelList) {
+	public void setModelList(List<HealthInfoCsvUploadModel> modelList) {
 		this.modelList = modelList;
 	}
 

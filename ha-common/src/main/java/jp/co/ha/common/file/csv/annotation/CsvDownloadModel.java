@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * CSVモデルアノテーション<br>
+ * CSVダウンロードモデルアノテーション<br>
  * headerNamesでヘッダ名を設定<br>
  * footerNamesでフッタ名を設定<br>
  */
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface CsvModel {
+public @interface CsvDownloadModel {
 
 	/**
 	 * ヘッダ名 セットした順にファイルにつめられる<br>

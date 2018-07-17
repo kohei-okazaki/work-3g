@@ -10,7 +10,7 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.csv.writer.CsvWriter;
-import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
+import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 
 /**
@@ -18,14 +18,14 @@ import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
  *
  */
 @Service(value = "referenceDownloadCsv")
-public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService<ReferenceCsvModel> {
+public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService<ReferenceCsvDownloadModel> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(PrintWriter printWriter, CsvConfig conf, List<ReferenceCsvModel> modelList) throws AppIOException {
-		try (CsvWriter<ReferenceCsvModel> writer = new ReferenceCsvWriter(conf, printWriter)) {
+	public void execute(PrintWriter printWriter, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList) throws AppIOException {
+		try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf, printWriter)) {
 			// CSVに書込
 			writer.execute(modelList);
 			writer.flush();

@@ -19,7 +19,9 @@ public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
 
 	/**
 	 * アカウント検索サービスを設定する<br>
-	 * @param accountSearchService アカウント検索サービス
+	 *
+	 * @param accountSearchService
+	 *     アカウント検索サービス
 	 */
 	public void setAccountSearchService(AccountSearchService accountSearchService) {
 		this.accountSearchService = accountSearchService;
@@ -36,8 +38,11 @@ public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
 
 	/**
 	 * アカウントがすでに存在する場合validateエラーにする<br>
+	 *
 	 * @param errors
+	 *     エラー
 	 * @param form
+	 *     アカウント情報登録form
 	 */
 	private void checkExistAccount(Errors errors, AccountRegistForm form) {
 		Account account = accountSearchService.findByUserId(form.getUserId());

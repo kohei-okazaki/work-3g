@@ -1,7 +1,9 @@
 package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseValidator;
 import jp.co.ha.web.form.HealthInfoForm;
 
@@ -18,35 +20,41 @@ public class HealthInfoValidator extends BaseValidator<HealthInfoForm> {
 	public void validate(Object target, Errors errors) {
 
 		HealthInfoForm form = (HealthInfoForm) target;
-//		// 必須チェック
-//		checKRequire(errors);
-//		// 属性チェック
-//		checkType(errors);
+		System.out.println(form.toString());
+		// 必須チェック
+		checKRequire(errors);
+		// 属性チェック
+		checkType(errors);
 	}
 
 	/**
-	 * fieldValueが半角数字-ピリオドでない場合、errorsオブジェクトにエラーを追加する<br>
+	 * 属性チェックを行う<br>
+	 *
 	 * @param errors
+	 *     エラー
 	 */
 	private void checkType(Errors errors) {
-
-		rejectIfNotHalfNumberPeriod(errors, "height");
-		rejectIfNotHalfNumberPeriod(errors, "weight");
-		rejectIfNotHalfNumberPeriod(errors, "bmi");
-		rejectIfNotHalfNumberPeriod(errors, "standardWeight");
+		FieldError e = errors.getFieldError("height");
+		if (BeanUtil.isNull(e)) {
+			return;
+		}
+		boolean b = e.isBindingFailure();
+		if (b) {
+			rejectIfNotHalfNumberPeriod(errors, "height", "身長");
+		}
+//		rejectIfNotHalfNumberPeriod(errors, "height", "身長");
+		rejectIfNotHalfNumberPeriod(errors, "weight", "体重");
 	}
 
 	/**
 	 * 必須チェックを行う<br>
+	 *
 	 * @param errors
+	 *     エラー
 	 */
 	private void checKRequire(Errors errors) {
-
-		rejectIfEmpty(errors, "userId");
-		rejectIfEmpty(errors, "height");
-		rejectIfEmpty(errors, "weight");
-		rejectIfEmpty(errors, "bmi");
-		rejectIfEmpty(errors, "standardWeight");
+		rejectIfEmpty(errors, "height", "身長");
+		rejectIfEmpty(errors, "weight", "体重");
 	}
 
 }

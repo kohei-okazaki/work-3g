@@ -15,7 +15,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
+import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 
@@ -103,11 +103,11 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @return modelList
 	 */
 	@Override
-	public List<ReferenceCsvModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
+	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
 
-		List<ReferenceCsvModel> modelList = new ArrayList<ReferenceCsvModel>();
+		List<ReferenceCsvDownloadModel> modelList = new ArrayList<ReferenceCsvDownloadModel>();
 		Stream.iterate(0, i -> ++i).limit(resultList.size()).forEach(i -> {
-			ReferenceCsvModel model = new ReferenceCsvModel();
+			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
 			HealthInfoReferenceResponse healthInfo = resultList.get(i);
 			BeanUtil.copy(healthInfo, model);
 			model.setUserId(userId);

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
-import jp.co.ha.common.file.csv.annotation.CsvModel;
+import jp.co.ha.common.file.csv.annotation.CsvDownloadModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -137,7 +137,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 */
 	protected List<String> getHeaderList(Class<?> clazz) {
 		List<String> headerList = new ArrayList<String>();
-		headerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).headerNames()));
+		headerList.addAll(List.of(clazz.getAnnotation(CsvDownloadModel.class).headerNames()));
 		return headerList;
 	}
 
@@ -150,7 +150,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 */
 	protected List<String> getFooterList(Class<?> clazz) {
 		List<String> footerList = new ArrayList<String>();
-		footerList.addAll(List.of(clazz.getAnnotation(CsvModel.class).footerNames()));
+		footerList.addAll(List.of(clazz.getAnnotation(CsvDownloadModel.class).footerNames()));
 		return footerList;
 	}
 

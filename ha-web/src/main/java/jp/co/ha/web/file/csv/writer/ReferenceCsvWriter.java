@@ -8,13 +8,13 @@ import jp.co.ha.common.file.csv.writer.CsvWriter;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
+import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 
 /**
  * 結果照会CSVWriterクラス<br>
  *
  */
-public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvModel> {
+public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 
 	/**
 	 * コンストラクタ<br>
@@ -32,7 +32,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvModel> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void writeData(StringJoiner recordJoiner, ReferenceCsvModel model) {
+	protected void writeData(StringJoiner recordJoiner, ReferenceCsvDownloadModel model) {
 
 		// 1項目ごと区切る
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);

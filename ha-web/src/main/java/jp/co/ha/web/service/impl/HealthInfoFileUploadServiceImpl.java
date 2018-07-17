@@ -12,7 +12,7 @@ import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.reader.CsvReader;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
-import jp.co.ha.web.file.csv.model.HealthInfoUploadModel;
+import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.file.csv.reader.HealthInfoCsvReader;
 
 /**
@@ -20,27 +20,21 @@ import jp.co.ha.web.file.csv.reader.HealthInfoCsvReader;
  *
  */
 @Service("healthInfoUploadCsv")
-public class HealthInfoFileUploadServiceImpl implements CsvUploadService<HealthInfoUploadModel> {
+public class HealthInfoFileUploadServiceImpl implements CsvUploadService<HealthInfoCsvUploadModel> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoUploadModel> execute(MultipartFile uploadFile) throws BaseAppException {
-
-		CsvReader<HealthInfoUploadModel> reader = new HealthInfoCsvReader();
+	public List<HealthInfoCsvUploadModel> execute(MultipartFile uploadFile) throws BaseAppException {
+		CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
 		List<String> list = null;
 		try {
-			list = reader.toList(uploadFile.getInputStream());
+			list = toList(uploadFile.getInputStream());
 		} catch (IOException e) {
 			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "ファイルを読み込めませんでした。ファイル名" + uploadFile.getOriginalFilename());
 		}
-
-		List<HealthInfoUploadModel> modelList = list.stream()
-													.map(data -> reader.read(data))
-													.collect(Collectors.toList());
-
-		return modelList;
+		return list.stream().map(data -> reader.read(data)).collect(Collectors.toList());
 	}
 
 }

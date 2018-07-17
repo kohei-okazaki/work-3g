@@ -3,7 +3,7 @@ package jp.co.ha.web.service;
 import java.util.List;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.web.file.csv.model.ReferenceCsvModel;
+import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 
 /**
@@ -32,6 +32,6 @@ public interface HealthInfoReferenceService {
 	 *     List<HealthInfoReferenceResponse>
 	 * @return modelList
 	 */
-	List<ReferenceCsvModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList);
+	List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList);
 
 }
