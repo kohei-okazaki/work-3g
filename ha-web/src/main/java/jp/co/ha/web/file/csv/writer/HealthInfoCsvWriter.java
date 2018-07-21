@@ -40,13 +40,13 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 		// ユーザID
 		write(joiner, model.getUserId());
 		// 身長
-		write(joiner, model.getHeight().toString());
+		write(joiner, conf.useMask() ? MASK : model.getHeight().toString());
 		// 体重
-		write(joiner, model.getWeight().toString());
+		write(joiner, conf.useMask() ? MASK : model.getWeight().toString());
 		// BMI
-		write(joiner, model.getBmi().toString());
+		write(joiner, conf.useMask() ? MASK : model.getBmi().toString());
 		// 標準体重
-		write(joiner, model.getStandardWeight().toString());
+		write(joiner, conf.useMask() ? MASK : model.getStandardWeight().toString());
 		// 登録日時
 		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 

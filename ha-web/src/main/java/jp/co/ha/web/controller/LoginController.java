@@ -115,8 +115,8 @@ public class LoginController implements BaseWebController {
 	 *     HttpServletRequest
 	 * @return
 	 */
-	@GetMapping("/menu.html")
-	public String menu(HttpServletRequest request) {
+	@GetMapping("/top.html")
+	public String top(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		return getView(StringUtil.isEmpty(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);

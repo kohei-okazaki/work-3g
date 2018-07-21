@@ -50,6 +50,7 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 		csvConfig.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
 		csvConfig.setEnclosureChar(CsvWriter.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(healthInfoFileSetting.getEnclosureCharFlag()));
+		csvConfig.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
 		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;
 	}
