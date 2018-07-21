@@ -1,5 +1,5 @@
 {
-	"requestId": "002",
+	"requestType": "002",
 	"userId": "master",
-	"healthInfoId": "1"
+	"healthInfoId": 35
 }

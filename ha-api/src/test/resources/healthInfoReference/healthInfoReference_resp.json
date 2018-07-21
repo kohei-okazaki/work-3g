@@ -1,8 +1,10 @@
 {
-    "result": "success",
-	"height": 170.1,
-	"weight": 50.55,
-	"bmi": 17.49,
-	"standardWeight": 63.58,
-	"regDate": "2018/03/24 01:25:24"
+	"result": "SUCCESS",
+	"healthInfoId": 35,
+	"userId": "master",
+	"height": 176.11,
+	"weight": 63.86,
+	"bmi": 20.6,
+	"standardWeight": 68.2,
+	"regDate": "2018/07/16 15:44:55"
 }
