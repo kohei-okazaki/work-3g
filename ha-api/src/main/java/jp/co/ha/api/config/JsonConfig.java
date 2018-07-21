@@ -18,7 +18,7 @@ import jp.co.ha.common.api.RequestType;
 public class JsonConfig {
 
 	@Bean
-	public ObjectMapper jsonObjectmapper() {
+	public ObjectMapper jsonObjectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(getDeserializeModule());
 		return mapper;
