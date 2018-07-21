@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.parameter.MainKey;
-import jp.co.ha.business.parameter.ParamConst;
-import jp.co.ha.business.parameter.SubKey;
+import jp.co.ha.business.type.HealthStatus;
 
 /**
  * 計算サービス実装クラス<br>
@@ -23,17 +21,17 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
+	public HealthStatus getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
 
-		SubKey subkey;
+		HealthStatus status;
 		if (beforeWeight.compareTo(inputWeight) == 0) {
-			subkey = SubKey.EVEN;
+			status = HealthStatus.EVEN;
 		} else if (beforeWeight.compareTo(inputWeight) == -1) {
-			subkey = SubKey.INCREASE;
+			status = HealthStatus.INCREASE;
 		} else {
-			subkey = SubKey.DOWN;
+			status = HealthStatus.DOWN;
 		}
-		return ParamConst.of(MainKey.HEALTH_INFO_USER_STATUS, subkey).getValue();
+		return status;
 	}
 
 	/**

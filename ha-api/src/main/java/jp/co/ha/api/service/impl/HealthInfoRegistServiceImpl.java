@@ -13,7 +13,7 @@ import jp.co.ha.business.create.HealthInfoCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.business.type.HealthStatus;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
@@ -107,8 +107,8 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
 
 		String userStatus = BeanUtil.isNull(lastHealthInfo)
-				? ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue()
-				: healthInfoCalcService.getUserStatus(weight, lastHealthInfo.getWeight());
+				? HealthStatus.EVEN.getCode()
+				: healthInfoCalcService.getUserStatus(weight, lastHealthInfo.getWeight()).getCode();
 		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();

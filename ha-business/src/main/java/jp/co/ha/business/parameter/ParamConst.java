@@ -10,20 +10,6 @@ import java.util.stream.Stream;
  */
 public enum ParamConst {
 
-	/** 健康情報ステータス：減少 */
-	HEALTH_INFO_USER_STATUS_DOWN(MainKey.HEALTH_INFO_USER_STATUS, SubKey.DOWN, "10"),
-	/** 健康情報ステータス：変化なし */
-	HEALTH_INFO_USER_STATUS_EVEN(MainKey.HEALTH_INFO_USER_STATUS, SubKey.EVEN, "20"),
-	/** 健康情報ステータス：増加 */
-	HEALTH_INFO_USER_STATUS_INCREASE(MainKey.HEALTH_INFO_USER_STATUS, SubKey.INCREASE, "30"),
-
-	/** 健康情報ステータスメッセージ：減少 */
-	HEALTH_INFO_USER_STATUS_DOWN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.DOWN, "減りました"),
-	/** 健康情報ステータスメッセージ：変化なし */
-	HEALTH_INFO_USER_STATUS_EVEN_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.EVEN, "変化ありません"),
-	/** 健康情報ステータスメッセージ：増加 */
-	HEALTH_INFO_USER_STATUS_INCREASE_MESSAGE(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, SubKey.INCREASE, "増えました"),
-
 	/** ページタイプ：入力 */
 	PAGE_VIEW_INPUT(MainKey.PAGE_VIEW, SubKey.INPUT, "0"),
 	/** ページタイプ：確認 */
