@@ -4,9 +4,13 @@ import jp.co.ha.common.system.PasswordEncoder;
 
 public class BcryptPasswordEncoder implements PasswordEncoder {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void echo() {
-		System.out.println(this.getClass().getSimpleName() + ">>>");
+	public String execute(String password, String salt) {
+		return null;
 	}
+
 
 }

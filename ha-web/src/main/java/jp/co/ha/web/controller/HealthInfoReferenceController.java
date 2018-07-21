@@ -184,6 +184,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 		HttpSession session = request.getSession();
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
 		String userId = sessionService.getValue(session, "userId", String.class);
+		if (BeanUtil.isNull(resultList) || BeanUtil.isNull(userId)) {
+			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+		}
 
 		// CSV出力モデルリストに変換する
 		List<ReferenceCsvDownloadModel> modelList = service.toModelList(userId, resultList);

@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.form.HealthInfoFileForm;
@@ -101,6 +104,9 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	@PostMapping(value = "/healthInfoFile-complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseAppException {
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
+		if (BeanUtil.isNull(modelList)) {
+			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+		}
 		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);
 		for (HealthInfoRegistRequest apiRequest : reqList) {
 			healthInfoRegistService.checkRequest(apiRequest);

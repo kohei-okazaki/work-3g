@@ -19,7 +19,9 @@ import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.MailInfoSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.common.exception.AccountSettingException;
 import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWizardController;
@@ -64,12 +66,16 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * @param request
 	 *     HttpServletRequest
 	 * @return
+	 * @throws AccountSettingException
 	 */
 	@ModelAttribute
-	public AccountSettingForm setUpForm(HttpServletRequest request) {
+	public AccountSettingForm setUpForm(HttpServletRequest request) throws AccountSettingException {
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(userId)) {
+			throw new AccountSettingException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+		}
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(userId);
