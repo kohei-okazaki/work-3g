@@ -40,6 +40,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 				account.setDeleteFlag(rs.getString(DELETE_FLAG));
 				account.setPasswordExpire(rs.getDate(PASSWORD_EXPIRE));
 				account.setRemarks(rs.getString(REMARKS));
+				account.setApiKey(rs.getString(API_KEY));
 				account.setUpdateDate(rs.getTimestamp(UPDATE_DATE));
 				account.setRegDate(rs.getTimestamp(REG_DATE));
 			}
@@ -66,6 +67,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 													+ "'" + account.getDeleteFlag() + "', "
 													+ "'" + DateUtil.toString(account.getPasswordExpire(), DateFormatPattern.YYYYMMDD) + "', "
 													+ "'" + account.getRemarks() + "', "
+													+ "'" + account.getApiKey() + "', "
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 													+ ")";
@@ -93,6 +95,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 										+ DELETE_FLAG + "= '" + account.getDeleteFlag() + "', "
 										+ PASSWORD_EXPIRE + "= '" + DateUtil.toString(account.getPasswordExpire(), DateFormatPattern.YYYYMMDD) + "', "
 										+ REMARKS + "= '" + account.getRemarks() + "', "
+										+ API_KEY + "= '" + account.getApiKey() + "', "
 										+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
 										+ " WHERE "+ USER_ID + "= '" + account.getUserId() + "'";
 			System.out.println(sql);

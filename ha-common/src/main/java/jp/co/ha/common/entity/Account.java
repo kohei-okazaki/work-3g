@@ -40,6 +40,10 @@ public class Account implements Serializable {
 	/** 備考 */
 	@Column(name = "REMARKS", nullable = false)
 	private String remarks;
+	/** APIキー */
+	@Mask
+	@Column(name = "API_KEY", nullable = false)
+	private String apiKey;
 	/** 更新日時 */
 	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
@@ -140,6 +144,24 @@ public class Account implements Serializable {
 	 */
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	/**
+	 * apiKeyを返す<br>
+	 *
+	 * @return apiKey
+	 */
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	/**
+	 * apiKeyを設定する<br>
+	 *
+	 * @param apiKey
+	 */
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
 
 	/**
