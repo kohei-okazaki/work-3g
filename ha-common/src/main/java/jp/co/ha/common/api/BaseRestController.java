@@ -105,7 +105,9 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 	/**
 	 * JSONで例外が起きた場合のエラーハンドリング<br>
-	 * @param e JSON系のエラー
+	 *
+	 * @param e
+	 *     JSON系のエラー
 	 * @return
 	 */
 	@ExceptionHandler(JsonProcessingException.class)

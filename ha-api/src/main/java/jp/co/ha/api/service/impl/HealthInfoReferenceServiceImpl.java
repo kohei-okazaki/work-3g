@@ -38,15 +38,15 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	@Override
 	public void checkRequest(HealthInfoReferenceRequest request) throws HealthInfoException {
 
-		if (StringUtil.isEmpty(request.getRequestId())
+		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHealthInfoId())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
 
 		// リクエスト種別チェック
-		if (RequestType.HEALTH_INFO_REFERENCE != RequestType.of(request.getRequestId())) {
-			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません requestId:" + request.getRequestId());
+		if (RequestType.HEALTH_INFO_REFERENCE != request.getRequestType()) {
+			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得

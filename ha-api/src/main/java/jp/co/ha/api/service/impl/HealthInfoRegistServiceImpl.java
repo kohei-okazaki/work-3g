@@ -50,7 +50,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
-		if (StringUtil.isEmpty(request.getRequestId())
+		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
@@ -58,8 +58,8 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		}
 
 		// リクエスト種別チェック
-		if (RequestType.HEALTH_INFO_REGIST != RequestType.of(request.getRequestId())) {
-			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません requestId:" + request.getRequestId());
+		if (RequestType.HEALTH_INFO_REGIST != request.getRequestType()) {
+			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得

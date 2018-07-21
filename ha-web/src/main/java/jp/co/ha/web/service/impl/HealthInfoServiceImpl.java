@@ -84,7 +84,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		BeanUtil.copy(form, apiRequest);
 		apiRequest.setUserId(userId);
 		// リクエストタイプ設定
-		apiRequest.setRequestId(RequestType.HEALTH_INFO_REGIST.getRequestId());
+		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
 		return apiRequest;
 	}
 
