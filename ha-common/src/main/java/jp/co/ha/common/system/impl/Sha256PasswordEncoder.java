@@ -8,22 +8,26 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+import jp.co.ha.common.exception.AlgorithmException;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.system.PasswordEncoder;
 
+/**
+ * SHA-256パスワード作成クラス<br>
+ *
+ */
 public class Sha256PasswordEncoder implements PasswordEncoder {
 
 	/** パスワードを安全にするためのアルゴリズム */
-	private static final String ALGORITHM = "PBKDF2WithHmacSHA256";
-	/** ストレッチング回数 */
-	private static final int ITERATION_COUNT = 10000;
-	/** 生成される鍵の長さ */
-	private static final int KEY_LENGTH = 256;
+	private static final String PASSWORD_ALGORITHM = "PBKDF2WithHmacSHA256";
+	/** ハッシュアルゴリズム */
+	private static final String HASH_ALGORITHM = "SHA-256";
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String execute(String password, String salt) {
+	public String execute(String password, String salt) throws AlgorithmException {
 
 		char[] passCharAry = password.toCharArray();
 		byte[] hashedSalt = getHashedSalt(salt);
@@ -32,7 +36,7 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 
 		SecretKeyFactory skf;
 		try {
-			skf = SecretKeyFactory.getInstance(ALGORITHM);
+			skf = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
@@ -41,7 +45,7 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 		try {
 			secretKey = skf.generateSecret(keySpec);
 		} catch (InvalidKeySpecException e) {
-			throw new RuntimeException(e);
+			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
 		}
 		byte[] passByteAry = secretKey.getEncoded();
 
@@ -60,13 +64,15 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 	 * @param salt
 	 *     ソルト
 	 * @return ハッシュ化されたバイト配列のソルト
+	 * @throws AlgorithmException
+	 *     アルゴリズム例外
 	 */
-	private static byte[] getHashedSalt(String salt) {
+	private static byte[] getHashedSalt(String salt) throws AlgorithmException {
 		MessageDigest messageDigest;
 		try {
-			messageDigest = MessageDigest.getInstance("SHA-256");
+			messageDigest = MessageDigest.getInstance(HASH_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
+			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ハッシュアルゴリズム：" + HASH_ALGORITHM);
 		}
 		messageDigest.update(salt.getBytes());
 		return messageDigest.digest();

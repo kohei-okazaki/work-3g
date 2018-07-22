@@ -7,6 +7,7 @@ import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -34,7 +35,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account toAccount(AccountRegistForm form) {
+	public Account toAccount(AccountRegistForm form) throws AlgorithmException {
 
 		Account account = new Account();
 		BeanUtil.copy(form, account);

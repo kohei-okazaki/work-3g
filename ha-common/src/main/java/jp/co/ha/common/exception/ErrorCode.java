@@ -30,6 +30,9 @@ public enum ErrorCode {
 	/** API実行不可エラー */
 	API_EXEC_ERROR("API_EXEC_ERROR", "WARN", "APIの実行に失敗しました"),
 
+	/** アルゴリズムエラー */
+	ALGORITH_ERROR("ALGORITH_ERROR", "ERROR", "アルゴリズムの処理でエラーです"),
+
 	/** DB暗号化・複合化エラー */
 	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
 	/** 該当データ存在しないエラー */
