@@ -32,6 +32,7 @@
 
 		<div th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
 		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+		<div th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}"></div>
 		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 		<div th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
 		<div th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
@@ -56,7 +57,7 @@
 				</th>
 				<td class="data">
 					<p th:text="*{userId}"></p>
-					<input type="hidden" th:field="*{userId}" value="${userId}" />
+					<input type="hidden" th:field="*{userId}" th:value="${userId}" />
 				</td>
 			</tr>
 			<tr>
@@ -64,7 +65,16 @@
 					<p>パスワード</p>
 				</th>
 				<td class="data">
-					<input type="text" th:field="*{password}" value="${password}" required placeholder="パスワード" />
+					<input type="text" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
+				</td>
+			</tr>
+			<tr>
+				<th class="header">
+					<p>APIキー</p>
+				</th>
+				<td class="data">
+					<p th:text="*{apiKey}"></p>
+					<input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
 				</td>
 			</tr>
 			<tr>
@@ -72,7 +82,7 @@
 					<p>メールアドレス</p>
 				</th>
 				<td class="data">
-					<input type="email" th:field="*{mailAddress}" value="${mailAddress}" required placeholder="メールアドレス" />
+					<input type="email" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
 				</td>
 			</tr>
 			<tr>
@@ -80,7 +90,7 @@
 					<p>メールパスワード</p>
 				</th>
 				<td class="data">
-					<input type="text" th:field="*{mailPassword}" value="${mailPassword}" required placeholder="メールパスワード" />
+					<input type="text" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
 				</td>
 			</tr>
 			<tr>

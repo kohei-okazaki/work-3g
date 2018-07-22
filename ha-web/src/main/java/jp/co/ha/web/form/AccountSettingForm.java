@@ -48,6 +48,10 @@ public class AccountSettingForm implements BaseForm {
 	@NotEmpty(message = "メールパスワードが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "メールパスワードが半角英数でありません")
 	private String mailPassword;
+	/** APIキー */
+	@Mask
+	@NotEmpty(message = "APIキーが未入力です")
+	private String apiKey;
 
 	/**
 	 * userIdを返す
@@ -161,6 +165,25 @@ public class AccountSettingForm implements BaseForm {
 	 */
 	public void setMailPassword(String mailPassword) {
 		this.mailPassword = mailPassword;
+	}
+
+	/**
+	 * apiKeyを返す
+	 *
+	 * @return apiKey APIキー
+	 */
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	/**
+	 * apiKeyを設定する
+	 *
+	 * @param apiKey
+	 *     APIキー
+	 */
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
 
 }

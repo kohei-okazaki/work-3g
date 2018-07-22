@@ -20,7 +20,7 @@ import jp.co.ha.web.file.csv.reader.HealthInfoCsvReader;
  *
  */
 @Service("healthInfoUploadCsv")
-public class HealthInfoFileUploadServiceImpl implements CsvUploadService<HealthInfoCsvUploadModel> {
+public class HealthInfoCsvUploadServiceImpl implements CsvUploadService<HealthInfoCsvUploadModel> {
 
 	/**
 	 * {@inheritDoc}

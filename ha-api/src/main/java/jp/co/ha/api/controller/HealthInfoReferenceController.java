@@ -13,6 +13,7 @@ import jp.co.ha.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.common.api.BaseRestController;
+import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.BaseAppException;
 
 /**
@@ -49,7 +50,7 @@ public class HealthInfoReferenceController implements
 	public HealthInfoReferenceRequest toRequest(HttpServletRequest request) throws BaseAppException {
 
 		HealthInfoReferenceRequest apiRequest = new HealthInfoReferenceRequest();
-		apiRequest.setRequestId(request.getParameter("requestId"));
+		apiRequest.setRequestType(RequestType.of(request.getParameter("requestType")));
 		apiRequest.setUserId(request.getParameter("userId"));
 		apiRequest.setHealthInfoId(new BigDecimal(request.getParameter("healthInfoId")));
 

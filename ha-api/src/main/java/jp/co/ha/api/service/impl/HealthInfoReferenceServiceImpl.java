@@ -8,6 +8,7 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
@@ -31,6 +32,9 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報機能サービス */
+	@Autowired
+	private HealthInfoFunctionService functionService;
 
 	/**
 	 * {@inheritDoc}
@@ -38,21 +42,26 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	@Override
 	public void checkRequest(HealthInfoReferenceRequest request) throws HealthInfoException {
 
-		if (StringUtil.isEmpty(request.getRequestId())
+		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHealthInfoId())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
 		}
 
 		// リクエスト種別チェック
-		if (RequestType.HEALTH_INFO_REFERENCE != RequestType.of(request.getRequestId())) {
-			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません requestId:" + request.getRequestId());
+		if (RequestType.HEALTH_INFO_REFERENCE != request.getRequestType()) {
+			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+		}
+
+		// ユーザIDとAPIキーのチェックを行う
+		if (!functionService.useApi(account, request.getApiKey())) {
+			throw new HealthInfoException(ErrorCode.API_EXEC_ERROR, "APIの実行に失敗しました ユーザID:" + request.getUserId());
 		}
 	}
 

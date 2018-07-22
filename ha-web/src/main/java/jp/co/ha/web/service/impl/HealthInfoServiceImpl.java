@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.parameter.MainKey;
-import jp.co.ha.business.parameter.ParamConst;
-import jp.co.ha.business.parameter.SubKey;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.util.BeanUtil;
@@ -39,20 +36,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	@Override
 	public String getDiffMessage(HealthInfoForm form, HealthInfo lastHealthInfo) {
-
-		SubKey subkey;
-		if (form.getWeight().compareTo(lastHealthInfo.getWeight()) == 0) {
-			// 変化なしの場合
-			subkey = SubKey.EVEN;
-		} else if (form.getWeight().compareTo(lastHealthInfo.getWeight()) == 1) {
-			// 増加した場合
-			subkey = SubKey.INCREASE;
-		} else {
-			// 減少した場合
-			subkey = SubKey.DOWN;
-		}
-		return ParamConst.of(MainKey.HEALTH_INFO_USER_STATUS_MESSAGE, subkey).getValue();
-
+		return healthInfoCalcService.getUserStatus(form.getWeight(), lastHealthInfo.getWeight()).getMessage();
 	}
 
 	/**
@@ -84,7 +68,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		BeanUtil.copy(form, apiRequest);
 		apiRequest.setUserId(userId);
 		// リクエストタイプ設定
-		apiRequest.setRequestId(RequestType.HEALTH_INFO_REGIST.getRequestId());
+		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
 		return apiRequest;
 	}
 

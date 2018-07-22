@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWizardController;
@@ -54,12 +56,16 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * @param request
 	 *     HttpServletRequest
 	 * @return
+	 * @throws BaseAppException
 	 */
 	@ModelAttribute
-	public HealthInfoFileSettingForm setUpForm(HttpServletRequest request) {
+	public HealthInfoFileSettingForm setUpForm(HttpServletRequest request) throws BaseAppException {
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(userId)) {
+			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+		}
 		// 健康情報ファイル設定を取得
 		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId);
 		HealthInfoFileSettingForm form = new HealthInfoFileSettingForm();

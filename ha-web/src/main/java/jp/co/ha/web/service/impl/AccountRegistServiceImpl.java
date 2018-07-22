@@ -7,11 +7,13 @@ import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
+import jp.co.ha.web.service.annotation.Sha256;
 
 /**
  * アカウント作成サービス実装クラス
@@ -23,6 +25,10 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** パスワード作成サービス */
+	@Autowired
+	@Sha256
+	private PasswordEncoder encoder;
 
 	/**
 	 * {@inheritDoc}
@@ -34,6 +40,9 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		BeanUtil.copy(form, account);
 		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
+
+		String apiKey = encoder.execute(form.getPassword(), form.getUserId());
+		account.setApiKey(apiKey);
 
 		return account;
 	}

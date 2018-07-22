@@ -13,7 +13,8 @@ import jp.co.ha.business.create.HealthInfoCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.parameter.ParamConst;
+import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
+import jp.co.ha.business.type.HealthStatus;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
@@ -43,6 +44,9 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	/** 健康情報作成サービス */
 	@Autowired
 	private HealthInfoCreateService healthInfoCreateService;
+	/** 健康情報機能サービス */
+	@Autowired
+	private HealthInfoFunctionService functionService;
 
 	/**
 	 * {@inheritDoc}
@@ -50,7 +54,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
 
-		if (StringUtil.isEmpty(request.getRequestId())
+		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
@@ -58,14 +62,19 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		}
 
 		// リクエスト種別チェック
-		if (RequestType.HEALTH_INFO_REGIST != RequestType.of(request.getRequestId())) {
-			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません requestId:" + request.getRequestId());
+		if (RequestType.HEALTH_INFO_REGIST != request.getRequestType()) {
+			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+		}
+
+		// ユーザIDとAPIキーのチェックを行う
+		if (!functionService.useApi(account, request.getApiKey())) {
+			throw new HealthInfoException(ErrorCode.API_EXEC_ERROR, "APIの実行に失敗しました ユーザID:" + request.getUserId());
 		}
 	}
 
@@ -107,8 +116,8 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
 
 		String userStatus = BeanUtil.isNull(lastHealthInfo)
-				? ParamConst.HEALTH_INFO_USER_STATUS_EVEN.getValue()
-				: healthInfoCalcService.getUserStatus(weight, lastHealthInfo.getWeight());
+				? HealthStatus.EVEN.getCode()
+				: healthInfoCalcService.getUserStatus(weight, lastHealthInfo.getWeight()).getCode();
 		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();

@@ -21,6 +21,8 @@ public class CsvConfig {
 	private Charset charset;
 	/** フッタ有無 */
 	private boolean hasFooter;
+	/** マスク利用有無 */
+	private boolean useMask;
 
 	/**
 	 * fileNameを返す<br>
@@ -134,6 +136,25 @@ public class CsvConfig {
 	 */
 	public void setHasFooter(boolean hasFooter) {
 		this.hasFooter = hasFooter;
+	}
+
+	/**
+	 * useMaskを返す<br>
+	 *
+	 * @return useMask
+	 */
+	public boolean useMask() {
+		return useMask;
+	}
+
+	/**
+	 * useMaskを設定する<br>
+	 *
+	 * @param useMask
+	 *     マスク利用有無
+	 */
+	public void setUseMask(boolean useMask) {
+		this.useMask = useMask;
 	}
 
 }

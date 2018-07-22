@@ -18,6 +18,7 @@ public interface AccountDao {
 	public static final String DELETE_FLAG = "DELETE_FLAG";
 	public static final String PASSWORD_EXPIRE = "PASSWORD_EXPIRE";
 	public static final String REMARKS = "REMARKS";
+	public static final String API_KEY = "API_KEY";
 	public static final String UPDATE_DATE = "UPDATE_DATE";
 	public static final String REG_DATE = "REG_DATE";
 

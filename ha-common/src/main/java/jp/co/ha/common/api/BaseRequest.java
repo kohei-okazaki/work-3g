@@ -1,31 +1,55 @@
 package jp.co.ha.common.api;
 
+import jp.co.ha.common.log.annotation.Mask;
+
 /**
  * 基底リクエストクラス<br>
  *
  */
 public abstract class BaseRequest {
 
-	/** リクエストID */
-	private String requestId;
+	/** リクエスト種別 */
+	private RequestType requestType;
+	/** APIキー */
+	@Mask
+	private String apiKey;
 
 	/**
-	 * requestIdを返す<br>
+	 * requestTypeを返す<br>
 	 *
-	 * @return requestId
+	 * @return requestType リクエスト種別
 	 */
-	public String getRequestId() {
-		return requestId;
+	public RequestType getRequestType() {
+		return requestType;
 	}
 
 	/**
-	 * requestIdを設定する<br>
+	 * requestTypeを設定する<br>
 	 *
-	 * @param requestId
-	 *     リクエストID
+	 * @param requestType
+	 *     リクエスト種別
 	 */
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
+	public void setRequestType(RequestType requestType) {
+		this.requestType = requestType;
+	}
+
+	/**
+	 * apiKeyを返す<br>
+	 *
+	 * @return apiKey APIキー
+	 */
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	/**
+	 * apiKeyを設定する<br>
+	 *
+	 * @param apiKey
+	 *     APIキー
+	 */
+	public void setApiKey(String apiKey) {
+		this.apiKey = apiKey;
 	}
 
 }

@@ -39,22 +39,18 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param response
 	 *     HttpServletResponse
 	 * @return
+	 * @throws BaseAppException
+	 *     アプリ例外
 	 */
 	@GetMapping
-	default Rs doGet(HttpServletRequest request, HttpServletResponse response) {
+	default Rs doGet(HttpServletRequest request, HttpServletResponse response) throws BaseAppException {
 
 		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
-		Rs apiResponse = null;
-		try {
-			Rq apiRequest = toRequest(request);
-			log.info(apiRequest);
-			apiResponse = this.execute(apiRequest);
-			apiResponse.setResult(ResultType.SUCCESS);
-			log.info(apiResponse);
-		} catch (BaseAppException e) {
-			apiResponse = (Rs) new ErrorResponse(e);
-			log.error(apiResponse);
-		}
+		Rq apiRequest = toRequest(request);
+		log.info(apiRequest);
+		Rs apiResponse = this.execute(apiRequest);
+		apiResponse.setResult(ResultType.SUCCESS);
+		log.info(apiResponse);
 
 		return apiResponse;
 	}
@@ -105,7 +101,9 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 	/**
 	 * JSONで例外が起きた場合のエラーハンドリング<br>
-	 * @param e JSON系のエラー
+	 *
+	 * @param e
+	 *     JSON系のエラー
 	 * @return
 	 */
 	@ExceptionHandler(JsonProcessingException.class)

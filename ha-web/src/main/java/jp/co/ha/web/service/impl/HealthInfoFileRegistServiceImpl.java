@@ -31,7 +31,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 		for (HealthInfoCsvUploadModel csvModel : modelList) {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
 			BeanUtil.copy(csvModel, request);
-			request.setRequestId(RequestType.HEALTH_INFO_REGIST.getRequestId());
+			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
 			request.setHeight(new BigDecimal(csvModel.getHeight()));
 			request.setWeight(new BigDecimal(csvModel.getWeight()));
 			requestList.add(request);

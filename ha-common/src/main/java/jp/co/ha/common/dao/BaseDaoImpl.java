@@ -53,8 +53,10 @@ public abstract class BaseDaoImpl {
 
 	/**
 	 * 次の要素が存在するか返す<br>
+	 *
 	 * @return
 	 * @throws SQLException
+	 *     SQL実行時に出る例外
 	 */
 	protected boolean hasNext() throws SQLException {
 		return this.rs.next();
@@ -77,7 +79,6 @@ public abstract class BaseDaoImpl {
 		} else if (SqlType.INSERT == type || SqlType.UPDATE == type) {
 			return this.stm.executeUpdate(sql);
 		} else {
-			// TODO エラーコード 要修正
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "実行するSQlが存在しません");
 		}
 	}

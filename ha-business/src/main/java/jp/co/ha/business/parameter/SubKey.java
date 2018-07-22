@@ -7,13 +7,6 @@ package jp.co.ha.business.parameter;
  */
 public enum SubKey {
 
-	/** 減少 */
-	DOWN,
-	/** 変化なし */
-	EVEN,
-	/** 増加 */
-	INCREASE,
-
 	/** 入力 */
 	INPUT,
 	/** 確認 */

@@ -6,6 +6,9 @@ package jp.co.ha.common.exception;
  */
 public class RestApiException extends BaseAppException {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * コンストラクタ<br>
 	 *

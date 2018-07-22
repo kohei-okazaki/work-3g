@@ -134,6 +134,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(userId)) {
+			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+		}
 		HealthInfoRegistRequest apiRequest = healthInfoService.setUpApiRequest(form, userId);
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
@@ -203,6 +206,9 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(userId)) {
+			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+		}
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getHealthInfoId());
 
 		if (!hasRecord) {

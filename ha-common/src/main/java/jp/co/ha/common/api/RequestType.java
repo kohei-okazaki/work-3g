@@ -2,11 +2,15 @@ package jp.co.ha.common.api;
 
 import java.util.stream.Stream;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * リクエストタイプ<br>
  * APIのリクエストの列挙<br>
  *
  */
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum RequestType {
 
 	/** 健康情報登録 */
@@ -39,6 +43,7 @@ public enum RequestType {
 	 *     リクエストID
 	 * @return
 	 */
+	@JsonCreator
 	public static RequestType of(String requestId) {
 		return Stream.of(RequestType.class.getEnumConstants())
 				.filter(type -> type.getRequestId().equals(requestId))

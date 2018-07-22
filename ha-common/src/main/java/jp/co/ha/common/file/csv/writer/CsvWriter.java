@@ -24,6 +24,8 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	public static final String SINGLE_QUOTE = "\'";
 	/** ダブルクォート */
 	public static final String DOBBLE_QUOTE = "\"";
+	/** マスク */
+	protected static final String MASK = "****";
 
 	/** CSV設定情報 */
 	protected CsvConfig conf;
@@ -61,19 +63,25 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 			// フッタを書込
 			writeFooter(recordJoiner, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
-		printWriter.print(recordJoiner.toString());
+		this.printWriter.print(recordJoiner.toString());
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void close() {
-		if (BeanUtil.notNull(printWriter)) {
-			printWriter.close();
+		if (BeanUtil.notNull(this.printWriter)) {
+			this.printWriter.close();
 		}
 	}
 
+	/**
+	 * flush処理を行う<br>
+	 */
 	public void flush() {
-		if (BeanUtil.notNull(printWriter)) {
-			printWriter.flush();
+		if (BeanUtil.notNull(this.printWriter)) {
+			this.printWriter.flush();
 		}
 	}
 
