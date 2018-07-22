@@ -5,7 +5,7 @@ function finish() {
 
 function toTop() {
 	var form = document.createElement('form');
-	form.action = './top.html';
+	form.action = '../login/top.html';
 	form.method = 'get';
 	document.body.appendChild(form);
 	form.submit();

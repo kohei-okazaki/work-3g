@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
@@ -30,6 +31,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
+@RequestMapping("healthInfoFileSetting")
 public class HealthInfoFileSettingController implements BaseWizardController<HealthInfoFileSettingForm> {
 
 	/** 健康情報ファイル設定サービス */
@@ -85,7 +87,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/healthInfoFileSetting-input.html")
+	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
 	}
@@ -94,7 +96,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/healthInfoFileSetting-confirm.html")
+	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result)
 			throws BaseAppException {
 		if (result.hasErrors()) {
@@ -109,7 +111,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/healthInfoFileSetting-complete.html")
+	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request)
 			throws BaseAppException {
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康アプリ_ファイル設定入力完了画面</title>
+<link rel="icon" type="image/png" href="../resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css">
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/common/common.js"></script>
+</head>
+
+<body class="main">
+	<h1>
+		<img class="headericon" alt="入力" src="../resources/image/icon_reference.png">
+		ファイル設定入力完了画面
+	</h1>
+
+	<hr>
+	<div th:include="./common/navigation.html"></div>
+	<br><br>
+
+	<!--/* 完了画面 */-->
+	<div align="center">
+		<p>完了しました</p>
+		<br><br>
+		<table>
+			<tr>
+				<td align="center">
+					<!--/* TOP画面へ */-->
+					<form action="../login/top.html" th:action="@{../login/top.html}" method="get">
+						<div>
+							<input class="menuicon" type="image" src="../resources/image/icon_menu.jpg">
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<br><br>
+	<hr>
+	<div th:include="./common/footer.html"></div>
+
+</body>
+</html>

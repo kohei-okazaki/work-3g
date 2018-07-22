@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.system.SessionManageService;
@@ -29,6 +30,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
+@RequestMapping("login")
 public class LoginController implements BaseWebController {
 
 	/** sessionサービス */
@@ -72,8 +74,8 @@ public class LoginController implements BaseWebController {
 	 *     HttpServletRequest
 	 * @return ログイン画面
 	 */
-	@GetMapping("/login.html")
-	public String login(Model model, HttpServletRequest request) {
+	@GetMapping("/index.html")
+	public String index(Model model, HttpServletRequest request) {
 		// sessionに格納している情報をすべて削除する
 		sessionService.removeValues(request.getSession());
 		System.out.println(messageSource.getMessage("message", null, Locale.JAPANESE));
@@ -109,7 +111,7 @@ public class LoginController implements BaseWebController {
 	}
 
 	/**
-	 * メニュー画面に遷移<br>
+	 * TOP画面
 	 *
 	 * @param request
 	 *     HttpServletRequest

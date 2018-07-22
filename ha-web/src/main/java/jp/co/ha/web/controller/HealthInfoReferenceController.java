@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,6 +49,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
+@RequestMapping("healthInfoReference")
 public class HealthInfoReferenceController implements BaseWebController {
 
 	/** 結果照会画面サービス */
@@ -98,7 +100,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *            Model
 	 * @return
 	 */
-	@GetMapping(value = "/healthInfo-reference.html")
+	@GetMapping(value = "/reference.html")
 	public String resultReference(Model model) {
 		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
@@ -120,7 +122,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	@PostMapping(value = "/healthInfo-reference.html")
+	@PostMapping(value = "/reference.html")
 	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid HealthInfoReferenceForm form,
 			BindingResult result) throws HealthInfoException {
 
@@ -154,7 +156,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	@GetMapping(value = "/healthInfo-reference-excelDownload.html")
+	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request) throws HealthInfoException {
 
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class);
@@ -177,7 +179,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	@GetMapping(value = "/healthInfo-reference-csvDownload.html")
+	@GetMapping(value = "/csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws HealthInfoException {
 
 		// sessionから検索結果リストとユーザIDを取得
@@ -196,7 +198,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue(), fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
-		conf.setHasEnclosure(true);
 
 		try {
 			csvDownloadService.execute(response.getWriter(), conf, modelList);

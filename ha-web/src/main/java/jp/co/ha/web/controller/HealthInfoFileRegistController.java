@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.service.HealthInfoRegistService;
@@ -36,6 +37,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
+@RequestMapping("healthInfoFile")
 public class HealthInfoFileRegistController implements BaseWebController {
 
 	/** 健康情報CSVアップロードサービス */
@@ -74,7 +76,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
-	@GetMapping(value = "/healthInfoFile-input.html")
+	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 	}
@@ -82,7 +84,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
-	@PostMapping(value = "/healthInfoFile-confirm.html")
+	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseAppException {
 
 		if (result.hasErrors()) {
@@ -101,7 +103,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
-	@PostMapping(value = "/healthInfoFile-complete.html")
+	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseAppException {
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
 		if (BeanUtil.isNull(modelList)) {

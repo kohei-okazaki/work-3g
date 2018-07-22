@@ -3,32 +3,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定確認画面</title>
-<link rel="icon" type="image/png" href="resources/image/people.png">
-<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
-<link rel="stylesheet" type="text/css" href="resources/css/input.css">
-<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
-<link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
-<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
-<link rel="stylesheet" type="text/css" href="resources/css/table.css">
-<script type="text/javascript" src="resources/js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/common/common.js"></script>
+<link rel="icon" type="image/png" href="../resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/common/common.js"></script>
 </head>
 
 <body class="main">
 
 
 	<h1 class="title">
-		<img class="headericon" alt="確認" src="resources/image/icon_confirm.png">
+		<img class="headericon" alt="確認" src="../resources/image/icon_confirm.png">
 		アカウント設定確認画面
 	</h1>
 
 	<hr>
-	<div th:include="common/navigation.html"></div>
+	<div th:include="./common/navigation.html"></div>
 
 	<br><br>
 
 	<!--/* 確認画面 */-->
-	<form action="./accountSetting-complete.html" th:action="@{./accountSetting-complete.html}" method="post" th:object="${accountSettingForm}">
+	<form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 		<table border="1">
 			<tr>
@@ -105,7 +105,7 @@
 
 	<br><br>
 	<hr>
-	<div th:include="common/footer.html"></div>
+	<div th:include="./common/footer.html"></div>
 
 
 </body>

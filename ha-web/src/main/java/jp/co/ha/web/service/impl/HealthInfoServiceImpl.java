@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.common.api.RequestType;
+import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
@@ -30,6 +32,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/** 健康情報計算サービス */
 	@Autowired
 	private HealthInfoCalcService healthInfoCalcService;
+	/** アカウント検索サービス */
+	@Autowired
+	private AccountSearchService accountSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -69,6 +74,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		apiRequest.setUserId(userId);
 		// リクエストタイプ設定
 		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
+		// アカウント情報.APIキーを設定
+		Account account = accountSearchService.findByUserId(userId);
+		apiRequest.setApiKey(account.getApiKey());
 		return apiRequest;
 	}
 
