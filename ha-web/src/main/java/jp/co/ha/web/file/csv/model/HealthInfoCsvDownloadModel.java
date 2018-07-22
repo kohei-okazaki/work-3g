@@ -11,7 +11,8 @@ import jp.co.ha.common.log.annotation.Mask;
  * 健康情報CSVダウンロードモデル<br>
  *
  */
-@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" }, footerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
+@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" }
+				, footerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
 public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 
 	/** ユーザID */

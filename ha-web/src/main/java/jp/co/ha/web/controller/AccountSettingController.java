@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.MailInfoSearchService;
@@ -35,6 +36,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
+@RequestMapping("accountSetting")
 public class AccountSettingController implements BaseWizardController<AccountSettingForm> {
 
 	/** アカウント設定サービス */
@@ -95,7 +97,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/accountSetting-input.html")
+	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
 	}
@@ -104,7 +106,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/accountSetting-confirm.html")
+	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result) throws BaseAppException {
 
 		if (result.hasErrors()) {
@@ -120,7 +122,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/accountSetting-complete.html")
+	@PostMapping(value = "/complete.html")
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseAppException {
 
 		// form情報から更新処理を行う

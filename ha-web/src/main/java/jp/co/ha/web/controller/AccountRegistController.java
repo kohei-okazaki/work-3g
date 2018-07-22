@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.create.AccountCreateService;
 import jp.co.ha.business.create.HealthInfoFileSettingCreateService;
@@ -30,6 +31,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
+@RequestMapping(value = "accountRegist")
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
 	/** アカウント登録画面サービス */
@@ -70,7 +72,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "accountRegist-input.html")
+	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 	}
@@ -79,7 +81,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/accountRegist-confirm.html")
+	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result)
 			throws BaseAppException {
 
@@ -97,7 +99,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/accountRegist-complete.html")
+	@PostMapping(value = "/complete.html")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
 			throws BaseAppException {
 

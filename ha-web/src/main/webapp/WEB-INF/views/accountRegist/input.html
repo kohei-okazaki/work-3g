@@ -3,23 +3,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント登録画面</title>
-<link rel="icon" type="image/png" href="resources/image/people.png">
-<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
-<link rel="stylesheet" type="text/css" href="resources/css/common/baseLayout.css">
-<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
-<link rel="stylesheet" type="text/css" href="resources/css/common/fort.css">
-<link rel="stylesheet" type="text/css" href="resources/css/input.css">
-<link rel="stylesheet" type="text/css" href="resources/css/table.css">
-<script type="text/javascript" src="resources/js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/common/fort.js"></script>
-<script type="text/javascript" src="resources/js/accountCreate.js"></script>
-<script type="text/javascript" src="resources/js/common/common.js"></script>
+<link rel="icon" type="image/png" href="../resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/common/fort.js"></script>
+<script type="text/javascript" src="../resources/js/accountCreate.js"></script>
+<script type="text/javascript" src="../resources/js/common/common.js"></script>
 </head>
 <body>
 
 
 	<h1>
-		<img class="headericon" alt="入力" src="resources/image/icon_input.jpg">
+		<img class="headericon" alt="入力" src="../resources/image/icon_input.jpg">
 		アカウント登録入力画面
 	</h1>
 	<hr>
@@ -32,7 +32,7 @@
 	</div>
 
 	<!--/* 入力画面 */-->
-	<form action="./accountRegist-confirm.html" th:action="@{./accountRegist-confirm.html}" method="post" th:object="${accountRegistForm}">
+	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
 	<div align="center">
 
 		<div th:if="${errorMessage} != null">
@@ -71,7 +71,7 @@
 
 	<br><br>
 	<hr>
-	<div th:include="common/footer.html"></div>
+	<div th:include="./common/footer.html"></div>
 
 </body>
 </html>

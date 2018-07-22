@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>健康アプリ_健康情報ファイル入力画面</title>
+<link rel="icon" type="image/png" href="../resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/common/common.js"></script>
+</head>
+
+<body class="main">
+
+	<h1>
+		<img class="headericon" alt="入力" src="../resources/image/icon_input.jpg">
+		健康情報ファイル入力画面
+	</h1>
+
+	<hr>
+	<div th:include="./common/navigation.html"></div>
+
+	<div th:if="${errorMessage} != null">
+		<br><br>
+		<div class="errorMessage">
+			<p th:text="${errorMessage}"></p>
+		</div>
+	</div>
+
+	<!--/* 入力画面 */-->
+	<div align="center">
+	<br><br><br>
+	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+		<div th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
+		<input type="file" th:field="*{multipartFile}" />
+		<br><br>
+		<table>
+			<tr>
+				<td>
+					<input type="submit" value="確認">
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	<br><br>
+
+	<hr>
+	<div th:include="./common/footer.html"></div>
+
+</body>
+</html>

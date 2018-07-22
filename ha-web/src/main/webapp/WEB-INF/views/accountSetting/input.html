@@ -3,21 +3,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定入力画面</title>
-<link rel="icon" type="image/png" href="resources/image/people.png">
-<link rel="stylesheet" type="text/css" href="resources/css/layout.css">
-<link rel="stylesheet" type="text/css" href="resources/css/input.css">
-<link rel="stylesheet" type="text/css" href="resources/css/navigation.css">
-<link rel="stylesheet" type="text/css" href="resources/css/menuicon.css">
-<link rel="stylesheet" type="text/css" href="resources/css/common/headericon.css">
-<link rel="stylesheet" type="text/css" href="resources/css/table.css">
-<script type="text/javascript" src="resources/js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/common/common.js"></script>
+<link rel="icon" type="image/png" href="../resources/image/people.png">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/input.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/common/common.js"></script>
 </head>
 <body class="main">
 
 
 	<h1>
-		<img class="headericon" alt="入力" src="resources/image/icon_input.jpg">
+		<img class="headericon" alt="入力" src="../resources/image/icon_input.jpg">
 		アカウント設定入力画面
 	</h1>
 
@@ -27,7 +27,7 @@
 	<br><br><br>
 
 	<!--/* 入力画面 */-->
-	<form action="./accountSetting-confirm.html" th:action="@{./accountSetting-confirm.html}" method="post" th:object="${accountSettingForm}">
+	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 
 		<div th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>

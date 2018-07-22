@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,6 +54,7 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 @Controller
+@RequestMapping("healthInfo")
 public class HealthInfoController implements BaseWizardController<HealthInfoForm> {
 
 	/** 健康情報画面サービス */
@@ -102,7 +104,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/healthInfo-input.html")
+	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseAppException {
 		return getView(ManageWebView.HEALTH_INFO_INPUT);
 	}
@@ -111,7 +113,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/healthInfo-confirm.html")
+	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result) throws BaseAppException {
 
 		if (result.hasErrors()) {
@@ -129,7 +131,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	@PostMapping(value = "/healthInfo-complete.html")
+	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseAppException {
 
 		// セッションからユーザIDを取得
@@ -173,7 +175,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	@GetMapping(value = "/healthInfo-excelDownload.html")
+	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseAppException {
 
 		BigDecimal requestHealthInfoId = form.getHealthInfoId();
@@ -202,26 +204,28 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	@GetMapping(value = "/healthInfo-csvDownload.html")
+	@GetMapping(value = "/csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		if (BeanUtil.isNull(userId)) {
 			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
-		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getHealthInfoId());
 
+		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getHealthInfoId());
 		if (!hasRecord) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
+		// CSV出力モデルリストに変換する
+		List<HealthInfoCsvDownloadModel> modelList = healthInfoService.toModelList(healthInfoSearchService.findLastByUserId(userId));
+
+		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
-
-		List<HealthInfoCsvDownloadModel> modelList = healthInfoService.toModelList(healthInfoSearchService.findLastByUserId(userId));
 
 		try {
 			csvDownloadService.execute(response.getWriter(), conf, modelList);
