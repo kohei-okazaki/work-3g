@@ -97,8 +97,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 */
 	@Override
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result)
-			throws BaseAppException {
+	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result) throws BaseAppException {
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
 		}
@@ -112,8 +111,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 */
 	@Override
 	@PostMapping(value = "/complete.html")
-	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request)
-			throws BaseAppException {
+	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request) throws BaseAppException {
 
 		healthInfoFileSettingService.execute(form);
 

@@ -1,5 +1,7 @@
 package jp.co.ha.business.update;
 
+import jp.co.ha.common.exception.BaseAppException;
+
 /**
  * 基底Entity更新サービスインターフェース<br>
  *
@@ -13,6 +15,7 @@ public interface BaseUpdateService<T> {
 	 *
 	 * @param entity
 	 *     Entity
+	 * @throws BaseAppException
 	 */
-	void update(T entity);
+	void update(T entity) throws BaseAppException;
 }

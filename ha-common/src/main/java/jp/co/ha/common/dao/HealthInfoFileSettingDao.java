@@ -9,6 +9,7 @@ import jp.co.ha.common.exception.DataBaseException;
  */
 public interface HealthInfoFileSettingDao {
 
+	/** テーブル名 */
 	public static final String TABLE_NAME = "HEALTH_INFO_FILE_SETTING";
 
 	public static final String USER_ID = "USER_ID";
@@ -21,9 +22,12 @@ public interface HealthInfoFileSettingDao {
 
 	/**
 	 * 指定されたユーザIDの健康情報ファイル設定を取得<br>
-	 * @param userId ユーザID
+	 *
+	 * @param userId
+	 *     ユーザID
 	 * @return
 	 * @throws DataBaseException
+	 *     DBエラー
 	 */
 	HealthInfoFileSetting selectByUserId(String userId) throws DataBaseException;
 

@@ -4,6 +4,7 @@ import org.springframework.validation.Errors;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -39,7 +40,12 @@ public class LoginValidator extends BaseValidator<LoginForm> {
 		if (StringUtil.isEmpty(form.getUserId())) {
 			return;
 		}
-		Account account = accountSearchService.findByUserId(form.getUserId());
+		Account account = null;
+		try {
+			account = accountSearchService.findByUserId(form.getUserId());
+		} catch (BaseAppException e) {
+			e.printStackTrace();
+		}
 		checkExistAccount(errors, account);
 		if (errors.hasErrors()) {
 			return;

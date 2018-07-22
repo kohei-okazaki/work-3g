@@ -3,6 +3,7 @@ package jp.co.ha.web.service;
 import java.util.List;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 
@@ -17,9 +18,12 @@ public interface HealthInfoFileRegistService {
 	 *
 	 * @param modelList
 	 *     健康情報CSVアップロードモデルリスト
+	 * @param userId
+	 *     ユーザID
 	 * @return
+	 * @throws BaseAppException
 	 */
-	List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList);
+	List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException;
 
 	/**
 	 * 健康情報CSVアップロードモデルリストに不正なデータが含まれていないかチェックを行う

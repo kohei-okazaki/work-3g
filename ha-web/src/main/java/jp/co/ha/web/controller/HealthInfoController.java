@@ -205,7 +205,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *     健康情報例外
 	 */
 	@GetMapping(value = "/csvDownload.html")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws HealthInfoException {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseAppException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		if (BeanUtil.isNull(userId)) {

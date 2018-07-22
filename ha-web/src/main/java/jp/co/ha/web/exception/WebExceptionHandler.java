@@ -7,7 +7,6 @@ import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseAppException;
-import jp.co.ha.common.exception.BaseAppRuntimeException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.web.view.ManageWebView;
@@ -44,9 +43,6 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 		if (e instanceof BaseAppException) {
 			detail = ((BaseAppException) e).getDetail();
 			errorCode = ((BaseAppException) e).getErrorCode();
-		} else if (e instanceof BaseAppRuntimeException) {
-			detail = ((BaseAppRuntimeException) e).getDetail();
-			errorCode = ((BaseAppRuntimeException) e).getErrorCode();
 		} else {
 			// 予期せぬ例外にする
 			errorCode = ErrorCode.UNEXPECTED_ERROR;

@@ -18,6 +18,7 @@ import jp.co.ha.business.type.HealthStatus;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
@@ -52,7 +53,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void checkRequest(HealthInfoRegistRequest request) throws HealthInfoException {
+	public void checkRequest(HealthInfoRegistRequest request) throws BaseAppException {
 
 		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
@@ -82,7 +83,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws HealthInfoException {
+	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseAppException {
 
 		// リクエストをEntityにつめる
 		HealthInfo healthInfo = toEntity(request);
@@ -100,7 +101,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo toEntity(HealthInfoRegistRequest request) {
+	public HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseAppException {
 
 		String userId = request.getUserId();
 		BigDecimal height = request.getHeight();
@@ -136,7 +137,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse toResponse(HealthInfo healthInfo) {
+	public HealthInfoRegistResponse toResponse(HealthInfo healthInfo) throws BaseAppException {
 
 		HealthInfoRegistResponse response = new HealthInfoRegistResponse();
 		BeanUtil.copy(healthInfo, response);

@@ -14,6 +14,7 @@ import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
@@ -56,7 +57,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isFirstReg(String userId) {
+	public boolean isFirstReg(String userId) throws BaseAppException {
 
 		// ユーザIDから健康情報のリストを取得
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
@@ -67,7 +68,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) {
+	public HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseAppException {
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
 		// フォーム情報をリクエストクラスにコピー
 		BeanUtil.copy(form, apiRequest);

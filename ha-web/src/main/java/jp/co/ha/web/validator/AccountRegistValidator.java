@@ -4,6 +4,7 @@ import org.springframework.validation.Errors;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseValidator;
 import jp.co.ha.web.form.AccountRegistForm;
@@ -33,7 +34,11 @@ public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
 	@Override
 	public void validate(Object object, Errors errors) {
 		AccountRegistForm form = (AccountRegistForm) object;
-		checkExistAccount(errors, form);
+		try {
+			checkExistAccount(errors, form);
+		} catch (BaseAppException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -43,8 +48,9 @@ public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
 	 *     エラー
 	 * @param form
 	 *     アカウント情報登録form
+	 * @throws BaseAppException
 	 */
-	private void checkExistAccount(Errors errors, AccountRegistForm form) {
+	private void checkExistAccount(Errors errors, AccountRegistForm form) throws BaseAppException {
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
 			errors.rejectValue("userId", "validate.message.existAccount");

@@ -1,13 +1,12 @@
 package jp.co.ha.business.create.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.create.MailInfoCreateService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.common.exception.BaseAppException;
 
 /**
  * メール情報作成サービスインターフェース実装クラス<br>
@@ -24,13 +23,8 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(MailInfo entity) {
+	public void create(MailInfo entity) throws BaseAppException {
 		mailInfoDao.create(entity);
-	}
-
-	@Override
-	public void create(List<MailInfo> entityList) {
-		entityList.forEach(entity -> mailInfoDao.create(entity));
 	}
 
 }

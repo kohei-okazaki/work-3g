@@ -71,7 +71,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * @throws AccountSettingException
 	 */
 	@ModelAttribute
-	public AccountSettingForm setUpForm(HttpServletRequest request) throws AccountSettingException {
+	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseAppException {
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);

@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.dao.DuplicateKeyException;
-
 import jp.co.ha.common.dao.BaseDaoImpl;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
@@ -93,7 +91,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(HealthInfo healthInfo) throws DuplicateKeyException, DataBaseException {
+	public void create(HealthInfo healthInfo) throws DataBaseException {
 		logger.info(healthInfo);
 		try {
 			connect();
@@ -116,9 +114,6 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 												+ ")";
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}

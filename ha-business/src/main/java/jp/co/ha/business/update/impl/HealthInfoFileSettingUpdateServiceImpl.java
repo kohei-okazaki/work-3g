@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jp.co.ha.business.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.common.dao.HealthInfoFileSettingDao;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.common.exception.DataBaseException;
 
 /**
  * 健康情報ファイル設定更新サービス実装クラス
@@ -20,7 +21,7 @@ public class HealthInfoFileSettingUpdateServiceImpl implements HealthInfoFileSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(HealthInfoFileSetting entity) {
+	public void update(HealthInfoFileSetting entity) throws DataBaseException {
 		healthInfoFileSettingDao.update(entity);
 	}
 

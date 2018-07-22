@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 
@@ -29,7 +31,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findByUserId(String userId) {
+	public List<HealthInfo> findByUserId(String userId) throws BaseAppException {
 		return healthInfoDao.selectByUserId(userId);
 	}
 
@@ -37,7 +39,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findByHealthInfoId(BigDecimal healthInfoId) {
+	public HealthInfo findByHealthInfoId(BigDecimal healthInfoId) throws BaseAppException {
 		return healthInfoDao.selectByHealthInfoId(healthInfoId);
 	}
 
@@ -45,7 +47,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findLastByUserId(String userId) {
+	public HealthInfo findLastByUserId(String userId) throws BaseAppException {
 
 		List<HealthInfo> entityList = this.findByUserId(userId);
 
@@ -58,9 +60,10 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
 	/**
 	 * {@inheritDoc}
+
 	 */
 	@Override
-	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) {
+	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseAppException {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
 		if (BeanUtil.isNull(regDate)) {
@@ -76,7 +79,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) {
+	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws DataBaseException {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
 		if (BeanUtil.isNull(fromRegDate) || BeanUtil.isNull(toRegDate)) {

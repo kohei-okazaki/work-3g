@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import jp.co.ha.common.exception.AppIOException;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.AppLogger;
@@ -31,8 +32,10 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 * @param record
 	 *     レコード
 	 * @return
+	 * @throws BaseAppException
+	 *     アプリ例外
 	 */
-	public T read(String record) {
+	public T read(String record) throws AppIOException {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
 		List<String> colList = BeanUtil.getFieldList(clazz).stream()

@@ -2,8 +2,6 @@ package jp.co.ha.common.dao.impl;
 
 import java.sql.SQLException;
 
-import org.springframework.dao.DuplicateKeyException;
-
 import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.dao.BaseDaoImpl;
 import jp.co.ha.common.entity.Account;
@@ -57,7 +55,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(Account account) throws DuplicateKeyException, DataBaseException  {
+	public void create(Account account) throws DataBaseException  {
 		LOGGER.info(account);
 		try {
 			connect();
@@ -74,9 +72,6 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 			System.out.println(sql);
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}
@@ -101,9 +96,6 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 			System.out.println(sql);
 			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}

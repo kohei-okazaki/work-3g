@@ -4,10 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.api.RequestType;
+import jp.co.ha.common.entity.Account;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
@@ -22,11 +26,15 @@ import jp.co.ha.web.service.HealthInfoFileRegistService;
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {
 
+	@Autowired
+	private AccountSearchService accountSearchService;
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList) {
+	public List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException {
+		Account account = accountSearchService.findByUserId(userId);
 		List<HealthInfoRegistRequest> requestList = new ArrayList<HealthInfoRegistRequest>();
 		for (HealthInfoCsvUploadModel csvModel : modelList) {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
@@ -34,6 +42,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
 			request.setHeight(new BigDecimal(csvModel.getHeight()));
 			request.setWeight(new BigDecimal(csvModel.getWeight()));
+			request.setApiKey(account.getApiKey());
 			requestList.add(request);
 		}
 		return requestList;

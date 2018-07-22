@@ -68,9 +68,6 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 					+ ")";
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}
@@ -94,9 +91,6 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 			System.out.println(sql);
 			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}

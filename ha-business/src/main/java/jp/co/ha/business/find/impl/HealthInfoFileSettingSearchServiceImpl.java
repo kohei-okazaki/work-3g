@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.common.dao.HealthInfoFileSettingDao;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.common.exception.BaseAppException;
 
 /**
  * 健康情報ファイル設定検索サービスインターフェース実装クラス<br>
@@ -22,7 +23,7 @@ public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoFileSetting findByUserId(String userId) {
+	public HealthInfoFileSetting findByUserId(String userId) throws BaseAppException {
 		return healthInfoFileSettingDao.selectByUserId(userId);
 	}
 

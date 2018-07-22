@@ -1,7 +1,5 @@
 package jp.co.ha.common.dao;
 
-import org.springframework.dao.DuplicateKeyException;
-
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.DataBaseException;
 
@@ -11,6 +9,7 @@ import jp.co.ha.common.exception.DataBaseException;
  */
 public interface AccountDao {
 
+	/** テーブル名 */
 	public static final String TABLE_NAME = "ACCOUNT";
 
 	public static final String USER_ID = "USER_ID";
@@ -38,11 +37,10 @@ public interface AccountDao {
 	 *
 	 * @param account
 	 *     アカウント情報
-	 * @throws DuplicateKeyException
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */
-	void create(Account account) throws DuplicateKeyException, DataBaseException;
+	void create(Account account) throws DataBaseException;
 
 	/**
 	 * 引数で指定されたアカウント情報を更新する
