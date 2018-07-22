@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
@@ -101,7 +100,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @return
 	 */
 	@GetMapping(value = "/reference.html")
-	public String resultReference(Model model) {
+	public String reference(Model model) {
 		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
 
@@ -112,8 +111,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     HttpServletRequest
 	 * @param model
 	 *     Model
-	 * @param userId
-	 *     ユーザID
 	 * @param form
 	 *     検索情報フォーム
 	 * @param result
@@ -123,11 +120,16 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     健康情報例外
 	 */
 	@PostMapping(value = "/reference.html")
-	public String showSearchResult(HttpServletRequest request, Model model, @SessionAttribute String userId, @Valid HealthInfoReferenceForm form,
+	public String reference(HttpServletRequest request, Model model, @Valid HealthInfoReferenceForm form,
 			BindingResult result) throws HealthInfoException {
 
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
+		}
+
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(userId)) {
+			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
 
 		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
