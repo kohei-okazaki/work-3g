@@ -35,18 +35,16 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 		PBEKeySpec keySpec = new PBEKeySpec(passCharAry, hashedSalt, ITERATION_COUNT, KEY_LENGTH);
 
 		SecretKeyFactory skf;
-		try {
-			skf = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM);
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-
 		SecretKey secretKey;
 		try {
+			skf = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM);
 			secretKey = skf.generateSecret(keySpec);
+		} catch (NoSuchAlgorithmException e) {
+			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "アルゴリズムが存在しません、ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
 		} catch (InvalidKeySpecException e) {
 			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
 		}
+
 		byte[] passByteAry = secretKey.getEncoded();
 
 		// 生成されたバイト配列を16進数の文字列に変換
@@ -72,7 +70,7 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 		try {
 			messageDigest = MessageDigest.getInstance(HASH_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
-			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ハッシュアルゴリズム：" + HASH_ALGORITHM);
+			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ソルトのハッシュ化に失敗しました、ハッシュアルゴリズム：" + HASH_ALGORITHM);
 		}
 		messageDigest.update(salt.getBytes());
 		return messageDigest.digest();
