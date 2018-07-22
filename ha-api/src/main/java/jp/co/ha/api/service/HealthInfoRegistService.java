@@ -16,7 +16,7 @@ public interface HealthInfoRegistService
 	 * 健康情報にリクエスト情報をつめる<br>
 	 *
 	 * @param request
-	 *            リクエスト
+	 *     リクエスト
 	 * @return
 	 */
 	HealthInfo toEntity(HealthInfoRegistRequest request);
@@ -25,7 +25,7 @@ public interface HealthInfoRegistService
 	 * 健康情報Entityを健康情報登録レスポンスクラスに変換する<br>
 	 *
 	 * @param healthInfo
-	 *            健康情報
+	 *     健康情報
 	 * @return
 	 */
 	HealthInfoRegistResponse toResponse(HealthInfo healthInfo);

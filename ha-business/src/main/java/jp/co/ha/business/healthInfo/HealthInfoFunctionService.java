@@ -1,5 +1,6 @@
 package jp.co.ha.business.healthInfo;
 
+import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 
 /**
@@ -28,4 +29,15 @@ public interface HealthInfoFunctionService {
 	 * @return
 	 */
 	boolean useFileEnclosureCharFlag(HealthInfoFileSetting entity);
+
+	/**
+	 * アカウント情報とAPIキーからAPIを実行できるか判定する<br>
+	 *
+	 * @param account
+	 *     アカウント情報
+	 * @param apiKey
+	 *     APIキー
+	 * @return
+	 */
+	boolean useApi(Account account, String apiKey);
 }

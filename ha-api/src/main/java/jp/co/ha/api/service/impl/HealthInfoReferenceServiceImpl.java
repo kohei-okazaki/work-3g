@@ -8,6 +8,7 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
@@ -31,6 +32,9 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報機能サービス */
+	@Autowired
+	private HealthInfoFunctionService functionService;
 
 	/**
 	 * {@inheritDoc}
@@ -53,6 +57,11 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+		}
+
+		// ユーザIDとAPIキーのチェックを行う
+		if (!functionService.useApi(account, request.getApiKey())) {
+			throw new HealthInfoException(ErrorCode.API_EXEC_ERROR, "APIの実行に失敗しました ユーザID:" + request.getUserId());
 		}
 	}
 

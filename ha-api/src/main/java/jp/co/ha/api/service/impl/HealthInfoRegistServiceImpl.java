@@ -13,6 +13,7 @@ import jp.co.ha.business.create.HealthInfoCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.business.type.HealthStatus;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
@@ -43,6 +44,9 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	/** 健康情報作成サービス */
 	@Autowired
 	private HealthInfoCreateService healthInfoCreateService;
+	/** 健康情報機能サービス */
+	@Autowired
+	private HealthInfoFunctionService functionService;
 
 	/**
 	 * {@inheritDoc}
@@ -66,6 +70,11 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+		}
+
+		// ユーザIDとAPIキーのチェックを行う
+		if (!functionService.useApi(account, request.getApiKey())) {
+			throw new HealthInfoException(ErrorCode.API_EXEC_ERROR, "APIの実行に失敗しました ユーザID:" + request.getUserId());
 		}
 	}
 

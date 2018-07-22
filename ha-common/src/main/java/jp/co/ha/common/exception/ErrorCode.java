@@ -27,6 +27,8 @@ public enum ErrorCode {
 	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "ERROR", "リクエストIDが一致しません"),
 	/** 不正リクエストエラー */
 	ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "WARN", "不正リクエストエラーです"),
+	/** API実行不可エラー */
+	API_EXEC_ERROR("API_EXEC_ERROR", "WARN", "APIの実行に失敗しました"),
 
 	/** DB暗号化・複合化エラー */
 	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
