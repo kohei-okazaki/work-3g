@@ -5,24 +5,30 @@ import java.util.Date;
 
 import jp.co.ha.common.file.csv.annotation.CsvDownloadModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 結果照会CSVダウンロードモデル<br>
  * CSV出力したい項目のみを持つ
  *
  */
-@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
+@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" }
+				, footerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
 public class ReferenceCsvDownloadModel implements BaseCsvModel {
 
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
+	@Mask
 	private BigDecimal height;
 	/** 体重 */
+	@Mask
 	private BigDecimal weight;
 	/** BMI */
+	@Mask
 	private BigDecimal bmi;
 	/** 標準体重 */
+	@Mask
 	private BigDecimal standardWeight;
 	/** 登録日時 */
 	private Date regDate;
