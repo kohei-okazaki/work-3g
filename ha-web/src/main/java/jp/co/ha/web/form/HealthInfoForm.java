@@ -7,7 +7,7 @@ import javax.validation.constraints.DecimalMin;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.validate.annotion.Required;
+import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
 /**

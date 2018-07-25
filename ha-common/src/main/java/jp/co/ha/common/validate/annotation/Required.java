@@ -1,4 +1,4 @@
-package jp.co.ha.common.validate.annotion;
+package jp.co.ha.common.validate.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -13,8 +13,8 @@ import javax.validation.Payload;
 import jp.co.ha.common.validate.RequiredValidator;
 
 /**
- * 入力チェックアノテーション<br>
- * 必須チェック<br>
+ * 必須チェックアノテーション<br>
+ * @see jp.co.ha.common.validate.RequiredValidator
  *
  */
 @Inherited
@@ -24,7 +24,11 @@ import jp.co.ha.common.validate.RequiredValidator;
 @Constraint(validatedBy = RequiredValidator.class)
 public @interface Required {
 
-    String message() default "validate.message.NotEmpty";
+    /**
+     * エラーメッセージ
+     * @return
+     */
+    String message() default "";
 
     Class<?>[] groups() default {};
 

@@ -1,7 +1,7 @@
 package jp.co.ha.web.form;
 
 import jp.co.ha.common.log.annotation.Ignore;
-import jp.co.ha.common.validate.annotion.Required;
+import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
 /**
