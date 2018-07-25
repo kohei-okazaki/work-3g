@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ha.common.exception.AppIOException;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 
 /**
@@ -30,8 +31,10 @@ public class JsonUtil {
 	 * @param clazz
 	 *     Beanクラス型
 	 * @return
+	 * @throws BaseAppException
+	 *     アプリ例外
 	 */
-	public static <T> T toJavaObject(String target, Class<T> clazz) {
+	public static <T> T toJavaObject(String target, Class<T> clazz) throws BaseAppException {
 
 		ObjectMapper mapper = new ObjectMapper();
 		T t = null;

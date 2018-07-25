@@ -1,10 +1,10 @@
 package jp.co.ha.common.exception;
 
 /**
- * DBアクセスの例外クラス<br>
+ * アルゴリズム作成例外クラス<br>
  *
  */
-public class DataBaseException extends BaseAppException {
+public class AlgorithmException extends BaseAppException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
@@ -17,7 +17,8 @@ public class DataBaseException extends BaseAppException {
 	 * @param detail
 	 *     詳細
 	 */
-	public DataBaseException(ErrorCode errorCode, String errorMessage) {
-		super(errorCode, errorMessage);
+	public AlgorithmException(ErrorCode errorCode, String detail) {
+		super(errorCode, detail);
 	}
+
 }

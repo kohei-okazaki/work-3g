@@ -5,8 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.BaseAppException;
 
 /**
  * 日付のUtilクラス<br>
@@ -35,6 +34,8 @@ public class DateUtil {
 	 * @param target
 	 *     対象日付
 	 * @return
+	 * @throws BaseAppException
+	 *     アプリ例外
 	 */
 	public static Date toDate(String target) {
 		return DateUtil.toDate(target, DateFormatPattern.YYYYMMDD_HHMMSS);
@@ -48,6 +49,8 @@ public class DateUtil {
 	 * @param format
 	 *     フォーマット
 	 * @return
+	 * @throws BaseAppException
+	 *     アプリ例外
 	 */
 	public static Date toDate(String target, DateFormatPattern format) {
 
@@ -59,7 +62,6 @@ public class DateUtil {
 			result = sdf.parse(target);
 		} catch (ParseException e) {
 			e.printStackTrace();
-			throw new AppIOException(ErrorCode.RUNTIME_ERROR, "フォーマット不正エラーです");
 		}
 		return result;
 
@@ -138,6 +140,8 @@ public class DateUtil {
 	 * @param targetDate
 	 *     対象日付
 	 * @return
+	 * @throws BaseAppException
+	 *     アプリ例外
 	 */
 	public static Date toStartDate(Date targetDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatPattern.YYYYMMDD.getValue() + " 00:00:00");

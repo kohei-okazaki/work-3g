@@ -10,6 +10,7 @@ import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.web.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
@@ -32,7 +33,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public View execute(HealthInfo healthInfo) {
+	public View execute(HealthInfo healthInfo) throws BaseAppException {
 
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(healthInfo.getUserId());

@@ -1,13 +1,12 @@
 package jp.co.ha.business.create.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.create.HealthInfoCreateService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.BaseAppException;
 
 /**
  * 健康情報作成サービスインターフェース実装クラス<br>
@@ -24,16 +23,8 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(HealthInfo entity) {
+	public void create(HealthInfo entity) throws BaseAppException {
 		healthInfoDao.create(entity);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void create(List<HealthInfo> entityList) {
-		entityList.forEach(entity -> healthInfoDao.create(entity));
 	}
 
 }

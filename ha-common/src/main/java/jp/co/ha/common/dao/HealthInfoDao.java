@@ -3,8 +3,6 @@ package jp.co.ha.common.dao;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.dao.DuplicateKeyException;
-
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.DataBaseException;
 
@@ -14,7 +12,9 @@ import jp.co.ha.common.exception.DataBaseException;
  */
 public interface HealthInfoDao {
 
+	/** テーブル名 */
 	public static final String TABLE_NAME = "HEALTH_INFO";
+
 	public static final String HEALTH_INFO_ID = "HEALTH_INFO_ID";
 	public static final String USER_ID = "USER_ID";
 	public static final String HEIGHT = "HEIGHT";
@@ -30,6 +30,8 @@ public interface HealthInfoDao {
 	 * @param userId
 	 *     ユーザID
 	 * @return List<HealthInfo> 健康情報リスト
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
 	List<HealthInfo> selectByUserId(String userId) throws DataBaseException;
 
@@ -39,6 +41,8 @@ public interface HealthInfoDao {
 	 * @param healthInfoId
 	 *     健康情報ID
 	 * @return HealthInfo 健康情報
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
 	HealthInfo selectByHealthInfoId(BigDecimal healthInfoId) throws DataBaseException;
 
@@ -47,9 +51,9 @@ public interface HealthInfoDao {
 	 *
 	 * @param healthInfo
 	 *     健康情報
-	 * @throws DuplicateKeyException
 	 * @throws DataBaseException
+	 *     DBエラー
 	 */
-	void create(HealthInfo healthInfo) throws DuplicateKeyException, DataBaseException;
+	void create(HealthInfo healthInfo) throws DataBaseException;
 
 }

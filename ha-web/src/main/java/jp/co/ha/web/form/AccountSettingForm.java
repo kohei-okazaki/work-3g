@@ -1,12 +1,12 @@
 package jp.co.ha.web.form;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -20,18 +20,18 @@ public class AccountSettingForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
-	@NotEmpty(message = "ユーザIDが未入力です")
+	@Required(message = "ユーザIDが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "ユーザIDが半角英数でありません")
 	@Size(min = 2, max = 16, message = "ユーザIDが範囲外の値です")
 	private String userId;
 	/** パスワード */
 	@Mask
-	@NotEmpty(message = "パスワードが未入力です")
+	@Required(message = "パスワードが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "パスワードが半角英数でありません")
 	@Size(min = 2, max = 16, message = "パスワードが範囲外の値です")
 	private String password;
 	/** 削除フラグ */
-	@NotEmpty
+	@Required
 	@Pattern(regexp = "^[0-9]*$", message = "削除フラグが半角数字でありません")
 	@Size(min = 1, max = 1)
 	private String deleteFlag;
@@ -40,17 +40,17 @@ public class AccountSettingForm implements BaseForm {
 	private String remarks;
 	/** メールアドレス */
 	@Mask
-	@NotEmpty(message = "メールアドレスが未入力です")
+	@Required(message = "メールアドレスが未入力です")
 	@Email(message = "メールアドレス形式ではありません")
 	private String mailAddress;
 	/** メールパスワード */
 	@Mask
-	@NotEmpty(message = "メールパスワードが未入力です")
+	@Required(message = "メールパスワードが未入力です")
 	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "メールパスワードが半角英数でありません")
 	private String mailPassword;
 	/** APIキー */
 	@Mask
-	@NotEmpty(message = "APIキーが未入力です")
+	@Required(message = "APIキーが未入力です")
 	private String apiKey;
 
 	/**

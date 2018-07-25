@@ -2,8 +2,6 @@ package jp.co.ha.common.dao.impl;
 
 import java.sql.SQLException;
 
-import org.springframework.dao.DuplicateKeyException;
-
 import jp.co.ha.common.dao.BaseDaoImpl;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
@@ -42,7 +40,8 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 				mailInfo.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
+		} catch (DataBaseException e) {
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
@@ -67,9 +66,6 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 						+ " WHERE " + USER_ID + "= '" + mailInfo.getUserId() + "'";
 			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}
@@ -79,7 +75,7 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(MailInfo mailInfo) throws DuplicateKeyException, DataBaseException {
+	public void create(MailInfo mailInfo) throws DataBaseException {
 
 		logger.info(mailInfo);
 
@@ -94,9 +90,6 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 					+ ");";
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}

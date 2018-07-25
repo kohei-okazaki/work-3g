@@ -103,12 +103,12 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
 			throws BaseAppException {
 
-		// アカウントEntityに変換する
+		// アカウントEntityに変換
 		Account account = service.toAccount(form);
-		// アカウントを作成する
+		// アカウントを作成
 		accountCreateService.create(account);
 
-		// 健康情報ファイル設定情報をEntityに変換する
+		// 健康情報ファイル設定情報Entityに変換
 		HealthInfoFileSetting healthInfoFileSetting = service.toHealthInfoFileSetting(form);
 		// 健康情報ファイル設定情報を作成
 		healthInfoFileSettingCreateService.create(healthInfoFileSetting);

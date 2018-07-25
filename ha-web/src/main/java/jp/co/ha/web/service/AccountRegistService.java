@@ -2,6 +2,8 @@ package jp.co.ha.web.service;
 
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.common.exception.AlgorithmException;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.web.form.AccountRegistForm;
 
 /**
@@ -16,8 +18,9 @@ public interface AccountRegistService {
 	 * @param form
 	 *     アカウント登録画面フォーム
 	 * @return
+	 * @throws AlgorithmException
 	 */
-	Account toAccount(AccountRegistForm form);
+	Account toAccount(AccountRegistForm form) throws AlgorithmException;
 
 	/**
 	 * 指定したアカウント情報が有効かどうか判定する<br>
@@ -26,8 +29,9 @@ public interface AccountRegistService {
 	 * @param form
 	 *     アカウント登録画面フォーム
 	 * @return
+	 * @throws BaseAppException
 	 */
-	boolean invalidUserId(AccountRegistForm form);
+	boolean invalidUserId(AccountRegistForm form) throws BaseAppException;
 
 	/**
 	 * 健康情報ファイル設定Entityに変換する<br>

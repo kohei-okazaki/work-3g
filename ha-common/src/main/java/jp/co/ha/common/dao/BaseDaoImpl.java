@@ -55,11 +55,15 @@ public abstract class BaseDaoImpl {
 	 * 次の要素が存在するか返す<br>
 	 *
 	 * @return
-	 * @throws SQLException
+	 * @throws DataBaseException
 	 *     SQL実行時に出る例外
 	 */
-	protected boolean hasNext() throws SQLException {
-		return this.rs.next();
+	protected boolean hasNext() throws DataBaseException {
+		try {
+			return this.rs.next();
+		} catch (SQLException e) {
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
+		}
 	}
 
 	/**
@@ -71,22 +75,32 @@ public abstract class BaseDaoImpl {
 	 *     SQL文のタイプ
 	 * @throws SQLException
 	 *     SQL実行時に出る例外
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
-	protected int execute(String sql, SqlType type) throws SQLException {
-		if (SqlType.SELECT == type) {
-			this.rs = this.stm.executeQuery(sql);
-			return 0;
-		} else if (SqlType.INSERT == type || SqlType.UPDATE == type) {
-			return this.stm.executeUpdate(sql);
-		} else {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "実行するSQlが存在しません");
+	protected int execute(String sql, SqlType type) throws DataBaseException {
+		try {
+			if (SqlType.SELECT == type) {
+				this.rs = this.stm.executeQuery(sql);
+				return 0;
+			} else if (SqlType.INSERT == type || SqlType.UPDATE == type) {
+				return this.stm.executeUpdate(sql);
+			} else {
+				throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "実行するSQlが存在しません");
+			}
+		} catch (SQLException e) {
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
 		}
+
 	}
 
 	/**
 	 * close処理を行う<br>
+	 *
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
-	protected void close() {
+	protected void close() throws DataBaseException {
 		try {
 			if (BeanUtil.notNull(stm)) {
 				stm.close();
@@ -102,7 +116,7 @@ public abstract class BaseDaoImpl {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("MySQLのクローズに失敗しました。");
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "クローズに失敗しました");
 		}
 	}
 

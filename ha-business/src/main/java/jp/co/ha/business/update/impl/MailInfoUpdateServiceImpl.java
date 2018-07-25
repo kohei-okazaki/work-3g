@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.update.MailInfoUpdateService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.common.exception.DataBaseException;
 
 /**
  * メール情報更新サービス実装クラス<br>
@@ -22,7 +23,7 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(MailInfo mailInfo) {
+	public void update(MailInfo mailInfo) throws DataBaseException {
 		mailInfoDao.update(mailInfo);
 	}
 

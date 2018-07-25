@@ -106,10 +106,11 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseAppException {
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
-		if (BeanUtil.isNull(modelList)) {
+		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(modelList) || BeanUtil.isNull(userId)) {
 			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
-		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList);
+		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList, userId);
 		for (HealthInfoRegistRequest apiRequest : reqList) {
 			healthInfoRegistService.checkRequest(apiRequest);
 			healthInfoRegistService.execute(apiRequest);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
 
@@ -43,8 +44,9 @@ public interface HealthInfoService {
 	 * @param userId
 	 *     ユーザID
 	 * @return
+	 * @throws BaseAppException
 	 */
-	boolean isFirstReg(String userId);
+	boolean isFirstReg(String userId) throws BaseAppException;
 
 	/**
 	 * 健康情報登録APIリクエストの設定を行う<br>
@@ -53,8 +55,9 @@ public interface HealthInfoService {
 	 *     健康情報入力フォーム
 	 * @param userId
 	 *     ユーザID
+	 * @throws BaseAppException
 	 */
-	HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId);
+	HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseAppException;
 
 	/**
 	 * 指定した健康情報リストの中に指定した健康情報IDが含まれるかどうか返す<br>

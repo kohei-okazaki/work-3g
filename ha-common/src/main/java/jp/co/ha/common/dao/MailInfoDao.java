@@ -1,8 +1,7 @@
 package jp.co.ha.common.dao;
 
-import org.springframework.dao.DuplicateKeyException;
-
 import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.common.exception.DataBaseException;
 
 /**
  * メール情報のDaoインターフェース
@@ -10,6 +9,7 @@ import jp.co.ha.common.entity.MailInfo;
  */
 public interface MailInfoDao {
 
+	/** テーブル名 */
 	public static final String TABLE_NAME = "MAIL_INFO";
 
 	public static final String USER_ID = "USER_ID";
@@ -24,22 +24,28 @@ public interface MailInfoDao {
 	 * @param userId
 	 *     ユーザID
 	 * @return MailInfo メール情報
+	 * @throws DataBaseException
+	 *     DBアクセスエラー
 	 */
-	MailInfo selectByUserId(String userId);
+	MailInfo selectByUserId(String userId) throws DataBaseException;
 
 	/**
 	 * 引数で指定されたメール情報を更新する
 	 *
 	 * @param mailInfo
 	 *     メール情報
+	 * @throws DataBaseException
+	 *     DBアクセスエラー
 	 */
-	void update(MailInfo mailInfo);
+	void update(MailInfo mailInfo) throws DataBaseException;
 
 	/**
 	 * 引数で指定されたメール情報を登録する<br>
 	 *
 	 * @param mailInfo
 	 *     メール情報
+	 * @throws DataBaseException
+	 *     DBアクセスエラー
 	 */
-	void create(MailInfo mailInfo) throws DuplicateKeyException;
+	void create(MailInfo mailInfo) throws DataBaseException;
 }

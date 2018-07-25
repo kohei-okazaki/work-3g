@@ -1,6 +1,7 @@
 package jp.co.ha.web.form;
 
 import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -14,14 +15,19 @@ public class HealthInfoFileSettingForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
+	@Required(message = "ユーザIDが未入力です")
 	private String userId;
 	/** ヘッダ利用有無フラグ */
+	@Required(message = "ヘッダ利用有無フラグが未入力です")
 	private String headerFlag;
 	/** フッタ利用有無フラグ */
+	@Required(message = "フッタ利用有無フラグが未入力です")
 	private String footerFlag;
 	/** マスク利用有無フラグ */
+	@Required(message = "マスク利用有無フラグが未入力です")
 	private String maskFlag;
 	/** 囲み文字利用有無フラグ */
+	@Required(message = "囲み文字利用有無フラグが未入力です")
 	private String enclosureCharFlag;
 
 	/**

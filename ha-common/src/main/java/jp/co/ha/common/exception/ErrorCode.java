@@ -12,8 +12,10 @@ public enum ErrorCode {
 	REQUIRE("REQUIRE", "", "validate.message.NotEmpty"),
 	/** 属性エラー */
 	TYPE("TYPE", "", "属性エラーです"),
-	/** 桁数エラー */
-	LENGTH("LENGTH", "", "桁数エラーです"),
+	/** 桁数超過 */
+	LENGTH_OVER("LENGTH_OVER", "", "validate.message.LengthOver"),
+	/** 桁数不足 */
+	LENGTH_LACK("LENGTH_LACK", "", "validate.message.LengthLack"),
 
 	/** アカウント存在チェックエラー */
 	ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "WARN", "アカウントが存在しません"),
@@ -29,6 +31,9 @@ public enum ErrorCode {
 	ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "WARN", "不正リクエストエラーです"),
 	/** API実行不可エラー */
 	API_EXEC_ERROR("API_EXEC_ERROR", "WARN", "APIの実行に失敗しました"),
+
+	/** アルゴリズムエラー */
+	ALGORITH_ERROR("ALGORITH_ERROR", "ERROR", "アルゴリズムの処理でエラーです"),
 
 	/** DB暗号化・複合化エラー */
 	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
