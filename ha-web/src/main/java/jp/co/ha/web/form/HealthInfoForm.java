@@ -7,6 +7,7 @@ import javax.validation.constraints.DecimalMin;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.validate.annotion.Required;
 import jp.co.ha.common.web.BaseForm;
 
 /**
@@ -25,11 +26,13 @@ public class HealthInfoForm implements BaseForm {
 	private String userId;
 	/** 身長 */
 	@Mask
+	@Required(message = "身長が未入力です")
 	@DecimalMin(value = "1", message = "身長が桁数不足です")
 	@DecimalMax(value = "999", message = "身長が桁数超過です")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
+	@Required(message = "体重が未入力です")
 	@DecimalMin(value = "1", message = "体重が桁数不足です")
 	@DecimalMax(value = "999", message = "体重が桁数超過です")
 	private BigDecimal weight;

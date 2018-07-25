@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.validate.annotion.Required;
 import jp.co.ha.common.web.BaseForm;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 
@@ -19,6 +20,7 @@ public class HealthInfoFileForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 	/** アップロードファイル */
 	@Ignore
+	@Required(message = "アップロードファイルが未入力です")
 	private MultipartFile multipartFile;
 	/** 健康情報ファイルモデルリスト */
 	private List<HealthInfoCsvUploadModel> modelList;
