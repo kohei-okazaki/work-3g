@@ -12,8 +12,10 @@ public enum ErrorCode {
 	REQUIRE("REQUIRE", "", "validate.message.NotEmpty"),
 	/** 属性エラー */
 	TYPE("TYPE", "", "属性エラーです"),
-	/** 桁数エラー */
-	LENGTH("LENGTH", "", "桁数エラーです"),
+	/** 桁数超過 */
+	LENGTH_OVER("LENGTH_OVER", "", "validate.message.LengthOver"),
+	/** 桁数不足 */
+	LENGTH_LACK("LENGTH_LACK", "", "validate.message.LengthLack"),
 
 	/** アカウント存在チェックエラー */
 	ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "WARN", "アカウントが存在しません"),

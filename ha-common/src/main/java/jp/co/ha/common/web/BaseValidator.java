@@ -59,7 +59,7 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	protected void rejectIfLengthMax(Errors errors, String field, int max) {
 		String fieldValue = getFieldValue(errors, field);
 		if (max < fieldValue.length()) {
-			errors.rejectValue(fieldValue, ErrorCode.LENGTH.getErrorCode());
+			errors.rejectValue(fieldValue, ErrorCode.LENGTH_OVER.getErrorCode());
 		}
 	}
 
@@ -76,7 +76,7 @@ public abstract class BaseValidator<F extends BaseForm> implements Validator {
 	protected void rejectIfLengthMin(Errors errors, String field, int min) {
 		String fieldValue = getFieldValue(errors, field);
 		if (fieldValue.length() < min) {
-			errors.rejectValue(fieldValue, ErrorCode.LENGTH.getErrorCode());
+			errors.rejectValue(fieldValue, ErrorCode.LENGTH_LACK.getErrorCode());
 		}
 	}
 
