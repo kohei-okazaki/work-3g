@@ -19,6 +19,21 @@ public class LengthValidator implements ConstraintValidator<Length, String> {
 		Length length;
 		int min;
 		int max;
+
+		// MaxValidator
+		// if (StringUtil.isEmpty(value)) {
+		// 	// 未指定の場合
+		// 	return true;
+		// }
+		// return value.length() < this.size;
+		
+		// MaxValidator
+		// if (StringUtil.isEmpty(value)) {
+		// 	// 未指定の場合
+		// 	return true;
+		// }
+		// return this.size < value.length();
+
 		return false;
 	}
 
