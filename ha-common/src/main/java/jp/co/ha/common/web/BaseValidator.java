@@ -10,7 +10,7 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * 基底Validator<br>
- * すべてのvalidatorはこの抽象クラスを継承すること<br>
+ * webのvalidatorはこの抽象クラスを継承すること<br>
  *
  * @param <F>
  *     validate対象form
