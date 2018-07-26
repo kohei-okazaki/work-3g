@@ -1,11 +1,11 @@
 package jp.co.ha.web.form;
 
-import javax.validation.constraints.Pattern;
-
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.util.RegixPattern;
 import jp.co.ha.common.validate.annotation.Max;
 import jp.co.ha.common.validate.annotation.Min;
+import jp.co.ha.common.validate.annotation.Pattern;
 import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
@@ -21,21 +21,21 @@ public class AccountRegistForm implements BaseForm {
 
 	/** ユーザID */
 	@Required(message = "ユーザIDが未入力です")
-	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "ユーザIDが半角英数でありません")
+	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "ユーザIDが半角英数でありません")
 	@Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
 	@Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
 	private String userId;
 	/** パスワード */
 	@Mask
 	@Required(message = "パスワードが未入力です")
-	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "パスワードが半角英数でありません")
+	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "パスワードが半角英数でありません")
 	@Min(size = 2, message = "パスワードは2桁以上で入力してください")
 	@Max(size = 16, message = "パスワードは16桁以下で入力してください")
 	private String password;
 	/** 確認用パスワード */
 	@Mask
 	@Required(message = "確認用パスワードが未入力です")
-	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "確認用パスワードが半角英数でありません")
+	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "確認用パスワードが半角英数でありません")
 	@Min(size = 2, message = "確認用パスワードは2桁以上で入力してください")
 	@Max(size = 16, message = "確認用パスワードは16桁以下で入力してください")
 	private String confirmPassword;
