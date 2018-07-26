@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/table.css">
 <script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="../resources/js/common/common.js"></script>
@@ -30,13 +31,13 @@
 	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${accountSettingForm}">
 	<div align="center">
 
-		<div th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
-		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-		<div th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}"></div>
-		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-		<div th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
-		<div th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
-		<div th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 		<table border="1">
 			<tr>
 				<th class="header" width="130px">

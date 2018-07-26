@@ -46,8 +46,8 @@
 	<div align="center">
 	<br><br><br>
 	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoForm}">
-		<div th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
-		<div th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
 		<input type="text" size="6" th:field="*{height}" required placeholder="身長" oninput="changeValue()" />　cm
 		<p class="attention">※半角数字で入力してください</p>
 		<br><br>

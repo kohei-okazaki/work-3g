@@ -37,7 +37,7 @@
 	<div align="center">
 	<br><br><br>
 	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
-		<div th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
 		<input type="file" th:field="*{multipartFile}" />
 		<br><br>
 		<table>

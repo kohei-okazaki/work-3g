@@ -40,10 +40,10 @@
 				<p th:text="${errorMessage}"></p>
 			</div>
 		</div>
-		<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-		<div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-		<div th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+		<div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
 		<input type="text" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
 		<br><br>
