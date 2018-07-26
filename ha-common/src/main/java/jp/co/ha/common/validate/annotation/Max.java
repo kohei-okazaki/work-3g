@@ -10,19 +10,21 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.RequiredValidator;
+import jp.co.ha.common.validate.MaxValidator;
 
 /**
- * 必須チェックアノテーション<br>
- * @see jp.co.ha.common.validate.RequiredValidator
+ * 最大桁数チェックアノテーション<br>
+ * @see jp.co.ha.common.validate.MaxValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD })
-@Constraint(validatedBy = RequiredValidator.class)
-public @interface Required {
+@Constraint(validatedBy = MaxValidator.class)
+public @interface Max {
+
+	int size();
 
     String message() default "";
 
