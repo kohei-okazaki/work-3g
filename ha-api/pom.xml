@@ -212,11 +212,15 @@
 			<groupId>jp.co.ha.common</groupId>
 			<artifactId>ha-common</artifactId>
 			<version>${ha-version}</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/../ha-common/target/ha-common-1.0.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>jp.co.ha.business</groupId>
 			<artifactId>ha-business</artifactId>
 			<version>${ha-version}</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/../ha-business/target/ha-business-1.0.jar</systemPath>
 		</dependency> -->
 
 	</dependencies>
