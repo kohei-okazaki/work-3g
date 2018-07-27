@@ -20,7 +20,7 @@ import jp.co.ha.common.validate.RequiredValidator;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD })
+@Target(ElementType.FIELD)
 @Constraint(validatedBy = RequiredValidator.class)
 public @interface Required {
 

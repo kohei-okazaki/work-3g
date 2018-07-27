@@ -20,7 +20,7 @@ import jp.co.ha.common.validate.FlagValidator;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD })
+@Target(ElementType.FIELD)
 @Constraint(validatedBy = FlagValidator.class)
 public @interface Flag {
 

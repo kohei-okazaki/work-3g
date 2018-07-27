@@ -21,7 +21,7 @@ import jp.co.ha.common.validate.PatternValidator;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD })
+@Target(ElementType.FIELD)
 @Constraint(validatedBy = PatternValidator.class)
 public @interface Pattern {
 

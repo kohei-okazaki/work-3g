@@ -20,7 +20,7 @@ import jp.co.ha.common.validate.MaxValidator;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD })
+@Target(ElementType.FIELD)
 @Constraint(validatedBy = MaxValidator.class)
 public @interface Max {
 

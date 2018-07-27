@@ -20,7 +20,7 @@ import jp.co.ha.common.validate.MinValidator;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD })
+@Target(ElementType.FIELD)
 @Constraint(validatedBy = MinValidator.class)
 public @interface Min {
 
