@@ -27,14 +27,12 @@ public class HealthInfoForm implements BaseForm {
 	/** 身長 */
 	@Mask
 	@Required(message = "身長が未入力です")
-//	@Num(message = "身長は半角数字とピリオドで入力してください", decimal = true)
 	@DecimalMin(value = "1", message = "身長が桁数不足です")
 	@DecimalMax(value = "999", message = "身長が桁数超過です")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
 	@Required(message = "体重が未入力です")
-//	@Num(message = "体重は半角数字とピリオドで入力してください", decimal = true)
 	@DecimalMin(value = "1", message = "体重が桁数不足です")
 	@DecimalMax(value = "999", message = "体重が桁数超過です")
 	private BigDecimal weight;
