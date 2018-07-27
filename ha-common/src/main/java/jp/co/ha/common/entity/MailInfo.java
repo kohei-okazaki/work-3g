@@ -3,11 +3,6 @@ package jp.co.ha.common.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 
@@ -15,8 +10,6 @@ import jp.co.ha.common.log.annotation.Mask;
  * メール情報Entity<br>
  *
  */
-@Entity
-@Table(name = "MAIL_INFO")
 public class MailInfo implements Serializable {
 
 	/** シリアルバージョンUID */
@@ -24,22 +17,16 @@ public class MailInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
-	@Id
-	@Column(name = "USER_ID", nullable = false, length = 3)
 	private String userId;
 	/** メールアドレス */
 	@Mask
-	@Column(name = "MAIL_ADDRESS", nullable = false)
 	private String mailAddress;
 	/** メールパスワード */
 	@Mask
-	@Column(name = "MAIL_PASSWORD", nullable = false)
 	private String mailPassword;
 	/** 更新日時 */
-	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
 	/** 登録日時 */
-	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
 
 	/**

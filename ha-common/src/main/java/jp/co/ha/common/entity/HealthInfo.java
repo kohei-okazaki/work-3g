@@ -4,19 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報Entity<br>
  */
-@Entity
-@Table(name = "HEALTH_INFO")
 public class HealthInfo implements Serializable {
 
 	/** シリアルバージョンUID */
@@ -24,33 +17,24 @@ public class HealthInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
-	@Id
-	@Column(name = "HEALTH_INFO_ID", nullable = false, length = 3)
 	private BigDecimal healthInfoId;
 	/** ユーザID */
-	@Column(name = "USER_ID", nullable = false, length = 3)
 	private String userId;
 	/** 身長 */
 	@Mask
-	@Column(name = "HEIGHT", nullable = false)
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
-	@Column(name = "WEIGHT", nullable = false)
 	private BigDecimal weight;
 	/** BMI */
 	@Mask
-	@Column(name = "BMI", nullable = false)
 	private BigDecimal bmi;
 	/** 標準体重 */
 	@Mask
-	@Column(name = "STANDARD_WEIGHT", nullable = false)
 	private BigDecimal standardWeight;
 	/** ユーザステータス */
-	@Column(name = "USER_STATUS", nullable = false)
 	private String userStatus;
 	/** 登録日時 */
-	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
 
 	/**

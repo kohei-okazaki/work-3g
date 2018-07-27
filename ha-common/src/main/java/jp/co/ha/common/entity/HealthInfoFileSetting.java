@@ -3,19 +3,12 @@ package jp.co.ha.common.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import jp.co.ha.common.log.annotation.Ignore;
 
 /**
  * 健康情報ファイル設定Entity<br>
  *
  */
-@Entity
-@Table(name = "HEALTH_INFO_FILE_SETTING")
 public class HealthInfoFileSetting implements Serializable {
 
 	/** シリアルバージョンUID */
@@ -23,26 +16,18 @@ public class HealthInfoFileSetting implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
-	@Id
-	@Column(name = "USER_ID", nullable = false, length = 16)
 	private String userId;
 	/** ヘッダ利用有無フラグ */
-	@Column(name = "HEADER_FLAG", nullable = true)
 	private String headerFlag;
 	/** フッタ利用有無フラグ */
-	@Column(name = "FOOTER_FLAG", nullable = true)
 	private String footerFlag;
 	/** マスク利用有無フラグ */
-	@Column(name = "MASK_FLAG", nullable = true)
 	private String maskFlag;
 	/** 囲み文字利用有無フラグ */
-	@Column(name = "ENCLOSURE_CHAR_FLAG", nullable = true)
 	private String enclosureCharFlag;
 	/** 更新日時 */
-	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
 	/** 登録日時 */
-	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
 
 	/**

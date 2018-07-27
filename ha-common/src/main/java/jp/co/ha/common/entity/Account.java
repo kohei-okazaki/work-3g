@@ -3,11 +3,6 @@ package jp.co.ha.common.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 
@@ -15,8 +10,6 @@ import jp.co.ha.common.log.annotation.Mask;
  * アカウント情報Entity<br>
  *
  */
-@Entity
-@Table(name = "ACCOUNT")
 public class Account implements Serializable {
 
 	/** シリアルバージョンUID */
@@ -24,31 +17,22 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** ユーザID */
-	@Id
-	@Column(name = "USER_ID", nullable = false, length = 16)
 	private String userId;
 	/** パスワード */
 	@Mask
-	@Column(name = "PASSWORD", nullable = false, length = 16)
 	private String password;
 	/** 削除フラグ */
-	@Column(name = "DELETE_FLAG", nullable = false, length = 1)
 	private String deleteFlag;
 	/** パスワード有効期限 */
-	@Column(name = "PASSWORD_EXPIRE", nullable = false)
 	private Date passwordExpire;
 	/** 備考 */
-	@Column(name = "REMARKS", nullable = false)
 	private String remarks;
 	/** APIキー */
 	@Mask
-	@Column(name = "API_KEY", nullable = false)
 	private String apiKey;
 	/** 更新日時 */
-	@Column(name = "UPDATE_DATE", nullable = true)
 	private Date updateDate;
 	/** 登録日時 */
-	@Column(name = "REG_DATE", nullable = false)
 	private Date regDate;
 
 	/**
