@@ -2,6 +2,7 @@ package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
 
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseValidator;
@@ -39,14 +40,14 @@ public class HealthInfoReferenceValidator extends BaseValidator<HealthInfoRefere
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", "validate.message.NotEmpty", new String[] {"登録日時"}, "validate.message.NotEmpty");
+					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時" }, ErrorCode.REQUIRE.getErrorMessage());
 				}
 			} else {
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", "validate.message.NotEmpty", new String[] {"登録日時(開始)"}, "validate.message.NotEmpty");
+					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(開始) "}, ErrorCode.REQUIRE.getErrorMessage());
 				}
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("toRegDate", "validate.message.NotEmpty", new String[] {"登録日時(終了)"}, "validate.message.NotEmpty");
+					errors.rejectValue("toRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(終了)" }, ErrorCode.REQUIRE.getErrorMessage());
 				}
 			}
 		}

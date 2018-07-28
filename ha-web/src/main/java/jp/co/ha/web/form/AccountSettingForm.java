@@ -1,11 +1,14 @@
 package jp.co.ha.web.form;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.util.RegixPattern;
+import jp.co.ha.common.validate.annotation.Flag;
+import jp.co.ha.common.validate.annotation.Max;
+import jp.co.ha.common.validate.annotation.Min;
+import jp.co.ha.common.validate.annotation.Pattern;
 import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
@@ -21,22 +24,24 @@ public class AccountSettingForm implements BaseForm {
 
 	/** ユーザID */
 	@Required(message = "ユーザIDが未入力です")
-	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "ユーザIDが半角英数でありません")
-	@Size(min = 2, max = 16, message = "ユーザIDが範囲外の値です")
+	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "ユーザIDが半角英数でありません")
+	@Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
+	@Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
 	private String userId;
 	/** パスワード */
 	@Mask
 	@Required(message = "パスワードが未入力です")
-	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "パスワードが半角英数でありません")
-	@Size(min = 2, max = 16, message = "パスワードが範囲外の値です")
+	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "パスワードが半角英数でありません")
+	@Min(size = 2, message = "パスワードは2桁以上で入力してください")
+	@Max(size = 16, message = "パスワードは16桁以下で入力してください")
 	private String password;
 	/** 削除フラグ */
 	@Required
-	@Pattern(regexp = "^[0-9]*$", message = "削除フラグが半角数字でありません")
-	@Size(min = 1, max = 1)
+	@Pattern(regixPattern = RegixPattern.HALF_NUMBER, message = "削除フラグが半角数字でありません")
+	@Flag(message = "削除フラグの値が不正です")
 	private String deleteFlag;
 	/** 備考 */
-	@Size(max = 256)
+	@Max(size = 256, message = "備考は256桁以下で入力してください")
 	private String remarks;
 	/** メールアドレス */
 	@Mask
@@ -46,7 +51,7 @@ public class AccountSettingForm implements BaseForm {
 	/** メールパスワード */
 	@Mask
 	@Required(message = "メールパスワードが未入力です")
-	@Pattern(regexp = "^[0-9a-zA-Z]*$", message = "メールパスワードが半角英数でありません")
+	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "メールパスワードが半角英数でありません")
 	private String mailPassword;
 	/** APIキー */
 	@Mask

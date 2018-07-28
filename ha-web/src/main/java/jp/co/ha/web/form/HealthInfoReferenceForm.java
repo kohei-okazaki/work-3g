@@ -2,10 +2,8 @@ package jp.co.ha.web.form;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.validate.annotation.Flag;
 import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
@@ -23,8 +21,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	private BigDecimal healthInfoId;
 	/** 登録日直接指定フラグ */
 	@Required(message = "登録日直接指定フラグが未入力です")
-	@Pattern(regexp = "^[0-9]*$", message = "登録日直接指定フラグが半角数字でありません")
-	@Size(min = 1, max = 1, message = "登録日直接指定フラグが範囲外の値です")
+	@Flag(message = "登録日直接指定フラグの値が不正です")
 	private String regDateSelectFlag;
 	/** 登録日(開始) */
 	private String fromRegDate;

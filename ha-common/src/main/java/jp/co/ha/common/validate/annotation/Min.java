@@ -10,19 +10,21 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.RequiredValidator;
+import jp.co.ha.common.validate.MinValidator;
 
 /**
- * 必須チェックアノテーション<br>
- * @see jp.co.ha.common.validate.RequiredValidator
+ * 最小桁数チェックアノテーション<br>
+ * @see jp.co.ha.common.validate.MinValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = RequiredValidator.class)
-public @interface Required {
+@Constraint(validatedBy = MinValidator.class)
+public @interface Min {
+
+	int size();
 
     String message() default "";
 

@@ -5,6 +5,8 @@ import java.util.StringJoiner;
 
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.writer.CsvWriter;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.AppLoggerFactory;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -15,6 +17,8 @@ import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
  *
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
+
+	private final AppLogger LOG = AppLoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * コンストラクタ<br>

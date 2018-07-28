@@ -43,6 +43,7 @@
 		<beans:property name="basenames">
 			<beans:list>
 				<beans:value>messages</beans:value>
+				<beans:value>validationMessages</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

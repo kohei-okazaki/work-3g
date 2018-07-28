@@ -9,8 +9,6 @@ import java.util.StringJoiner;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.annotation.CsvDownloadModel;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
-import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -21,8 +19,6 @@ import jp.co.ha.common.util.StringUtil;
  *     CSVモデル
  */
 public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
-
-	protected final AppLogger LOG = AppLoggerFactory.getLogger(this.getClass());
 
 	/** シングルクォート */
 	public static final String SINGLE_QUOTE = "\'";

@@ -10,36 +10,20 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.LengthValidator;
+import jp.co.ha.common.validate.FlagValidator;
 
 /**
- * 桁数チェックアノテーション<br>
- * @see jp.co.ha.common.validate.LengthValidator
+ * フラグチェックアノテーション<br>
+ * @see jp.co.ha.common.validate.FlagValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD })
-@Constraint(validatedBy = LengthValidator.class)
-public @interface Length {
+@Target(ElementType.FIELD)
+@Constraint(validatedBy = FlagValidator.class)
+public @interface Flag {
 
-	/**
-	 * 最小桁数
-	 * @return
-	 */
-	int min() default 0;
-
-	/**
-	 * 最大桁数
-	 * @return
-	 */
-	int max() default 999;
-
-    /**
-     * エラーメッセージ
-     * @return
-     */
     String message() default "";
 
     Class<?>[] groups() default {};

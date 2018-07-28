@@ -6,6 +6,7 @@
 <link rel="icon" type="image/png" href="../resources/image/people.png">
 <link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css">
@@ -27,11 +28,11 @@
 	 <!--/* 入力画面 */-->
 	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
 	<div align="center">
-	<div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-	<div th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
-	<div th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
-	<div th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
-	<div th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
+	<div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+	<div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
+	<div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
+	<div class="errorMessage" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
+	<div class="errorMessage" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
 	<table border="1">
 		<tr>
 			<th class="header">

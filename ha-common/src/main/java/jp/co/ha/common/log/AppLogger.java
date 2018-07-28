@@ -9,7 +9,6 @@ import java.util.StringJoiner;
 import org.slf4j.Logger;
 
 import jp.co.ha.common.log.annotation.Ignore;
-import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.util.AccessorType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatPattern;
@@ -29,7 +28,7 @@ public class AppLogger {
 	 * コンストラクタ<br>
 	 *
 	 * @param logger
-	 *            ロガー
+	 *     ロガー
 	 */
 	AppLogger(Logger logger) {
 		this.logger = logger;
@@ -39,7 +38,7 @@ public class AppLogger {
 	 * debugログ出力を行う<br>
 	 *
 	 * @param bean
-	 *            対象Bean
+	 *     対象Bean
 	 */
 	public void debug(Object bean) {
 		logger.debug(getLogMessage(bean));
@@ -49,7 +48,7 @@ public class AppLogger {
 	 * infoログ出力を行う<br>
 	 *
 	 * @param bean
-	 *            対象Bean
+	 *     対象Bean
 	 */
 	public void info(Object bean) {
 		logger.info(getLogMessage(bean));
@@ -59,7 +58,7 @@ public class AppLogger {
 	 * warnログ出力を行う<br>
 	 *
 	 * @param bean
-	 *            対象Bean
+	 *     対象Bean
 	 */
 	public void warn(Object bean) {
 		logger.warn(getLogMessage(bean));
@@ -69,7 +68,7 @@ public class AppLogger {
 	 * errorログ出力を行う<br>
 	 *
 	 * @param bean
-	 *            対象Bean
+	 *     対象Bean
 	 */
 	public void error(Object bean) {
 		logger.error(getLogMessage(bean));
@@ -79,7 +78,7 @@ public class AppLogger {
 	 * ログメッセージを返す<br>
 	 *
 	 * @param bean
-	 *            対象Bean
+	 *     対象Bean
 	 * @return
 	 */
 	private String getLogMessage(Object bean) {
@@ -93,9 +92,9 @@ public class AppLogger {
 				// 出力非対象項目
 				continue;
 			}
-			if (isMask(f)) {
+			if (MaskExecutor.isMask(f)) {
 				// マスク対象項目
-				sj.add(name + "=****");
+				sj.add(name + "=" + MaskExecutor.MASK);
 			} else {
 				// マスク非対象項目
 				String strValue = editValue(getValue(bean, name));
@@ -109,9 +108,9 @@ public class AppLogger {
 	 * 値を取得<br>
 	 *
 	 * @param bean
-	 *            Bean
+	 *     Bean
 	 * @param fieldName
-	 *            フィールド名
+	 *     フィールド名
 	 * @return
 	 */
 	private Object getValue(Object bean, String fieldName) {
@@ -135,7 +134,7 @@ public class AppLogger {
 	 * 値を出力用に編集する<br>
 	 *
 	 * @param value
-	 *            値
+	 *     値
 	 * @return
 	 */
 	private String editValue(Object value) {
@@ -151,23 +150,11 @@ public class AppLogger {
 	}
 
 	/**
-	 * マスク対象かどうか判定する<br>
-	 * マスク対象の場合true, それ以外の場合false<br>
-	 *
-	 * @param field
-	 *            フィールド名
-	 * @return
-	 */
-	private boolean isMask(Field field) {
-		return BeanUtil.notNull(field.getAnnotation(Mask.class));
-	}
-
-	/**
 	 * 出力対象かどうか判定する<br>
 	 * 出力対象の場合true, それ以外の場合false<br>
 	 *
 	 * @param field
-	 *            フィールド名
+	 *     フィールド名
 	 * @return
 	 */
 	private boolean isIgnore(Field field) {

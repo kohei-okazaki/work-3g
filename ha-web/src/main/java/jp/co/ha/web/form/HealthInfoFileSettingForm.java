@@ -1,6 +1,7 @@
 package jp.co.ha.web.form;
 
 import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.validate.annotation.Flag;
 import jp.co.ha.common.validate.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
@@ -19,15 +20,19 @@ public class HealthInfoFileSettingForm implements BaseForm {
 	private String userId;
 	/** ヘッダ利用有無フラグ */
 	@Required(message = "ヘッダ利用有無フラグが未入力です")
+	@Flag(message = "ヘッダ利用有無フラグの値が不正です")
 	private String headerFlag;
 	/** フッタ利用有無フラグ */
 	@Required(message = "フッタ利用有無フラグが未入力です")
+	@Flag(message = "フッタ利用有無フラグの値が不正です")
 	private String footerFlag;
 	/** マスク利用有無フラグ */
 	@Required(message = "マスク利用有無フラグが未入力です")
+	@Flag(message = "マスク利用有無フラグの値が不正です")
 	private String maskFlag;
 	/** 囲み文字利用有無フラグ */
 	@Required(message = "囲み文字利用有無フラグが未入力です")
+	@Flag(message = "囲み文字利用有無フラグの値が不正です")
 	private String enclosureCharFlag;
 
 	/**

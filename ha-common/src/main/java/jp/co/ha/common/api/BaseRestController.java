@@ -49,7 +49,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		Rq apiRequest = toRequest(request);
 		log.info(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
-		apiResponse.setResult(ResultType.SUCCESS);
+		apiResponse.setResultType(ResultType.SUCCESS);
 		log.info(apiResponse);
 
 		return apiResponse;
@@ -71,7 +71,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		Rs apiResponse = null;
 		log.info(apiRequest);
 		apiResponse = this.execute(apiRequest);
-		apiResponse.setResult(ResultType.SUCCESS);
+		apiResponse.setResultType(ResultType.SUCCESS);
 		log.info(apiResponse);
 
 		return apiResponse;

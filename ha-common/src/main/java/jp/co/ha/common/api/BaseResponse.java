@@ -14,7 +14,7 @@ public abstract class BaseResponse {
 	 *
 	 * @return result 結果区分
 	 */
-	public ResultType getResult() {
+	public ResultType getResultType() {
 		return result;
 	}
 
@@ -24,7 +24,7 @@ public abstract class BaseResponse {
 	 * @param result
 	 *     結果区分
 	 */
-	public void setResult(ResultType result) {
+	public void setResultType(ResultType result) {
 		this.result = result;
 	}
 

@@ -7,22 +7,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.RequiredValidator;
-
 /**
- * 必須チェックアノテーション<br>
- * @see jp.co.ha.common.validate.RequiredValidator
+ * メールアドレス形式チェックアノテーション<br>
+ * @see jp.co.ha.common.validate.MailAddressValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = RequiredValidator.class)
-public @interface Required {
+public @interface MailAddress {
 
     String message() default "";
 

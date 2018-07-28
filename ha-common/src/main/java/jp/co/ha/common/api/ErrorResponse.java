@@ -21,7 +21,7 @@ public class ErrorResponse extends BaseResponse {
 	 *     BaseAppException 例外
 	 */
 	public ErrorResponse(BaseAppException e) {
-		super.setResult(ResultType.FAILURE);
+		super.setResultType(ResultType.FAILURE);
 		this.errorCode = e.getErrorCode();
 		this.detail = e.getDetail();
 	}
