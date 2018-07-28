@@ -20,10 +20,9 @@ public class RequiredValidator implements ConstraintValidator<Required, Object> 
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
 
 		if (BeanUtil.isNull(value)) {
-			// フィールドがBigDecimalなどの数値の型の場合、ここでfalseを返す
 			return false;
 		} else {
-			boolean b = StringUtil.isEmpty(value.toString());
+			// String文字列の場合、空文字が入ってくる為チェック
 			return !StringUtil.isEmpty(value.toString());
 		}
 
