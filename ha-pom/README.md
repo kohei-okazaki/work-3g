@@ -1,3 +1,7 @@
-# 共通(common)  
+# pom(pom)  
 
-util, dao, entity, base系
+・common  
+・business  
+・api  
+・web  
+で使用する外部ライブラリはha-pomを参照する  
