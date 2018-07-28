@@ -6,6 +6,9 @@ package jp.co.ha.common.exception;
  */
 public class UnExpectedException extends BaseAppException {
 
+	/** シリアルバージョンUID */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * コンストラクタ
 	 *
