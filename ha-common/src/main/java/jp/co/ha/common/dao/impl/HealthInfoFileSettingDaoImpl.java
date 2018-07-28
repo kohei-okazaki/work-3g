@@ -8,7 +8,7 @@ import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
@@ -18,7 +18,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthInfoFileSettingDao {
 
-	private final AppLogger LOGGER = AppLoggerFactory.getLogger(this.getClass());
+	private final AppLogger LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}

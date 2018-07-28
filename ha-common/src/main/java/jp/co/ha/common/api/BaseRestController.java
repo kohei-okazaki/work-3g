@@ -16,7 +16,7 @@ import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.RestApiException;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 
 /**
  * RestAPI基底コントローラ<br>
@@ -45,7 +45,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@GetMapping
 	default Rs doGet(HttpServletRequest request, HttpServletResponse response) throws BaseAppException {
 
-		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
+		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		Rq apiRequest = toRequest(request);
 		log.info(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
@@ -67,7 +67,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@PostMapping
 	default Rs doPost(@RequestBody Rq apiRequest) throws BaseAppException {
 
-		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
+		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		Rs apiResponse = null;
 		log.info(apiRequest);
 		apiResponse = this.execute(apiRequest);
@@ -114,10 +114,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 			InvalidFormatException jfe = (InvalidFormatException) e;
 			apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです"));
 		} else if (e instanceof JsonParseException) {
-			e = (JsonParseException) e;
+			e = e;
 			apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
 		}
-		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
+		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		log.error(apiResponse);
 		return apiResponse;
 	}
@@ -134,7 +134,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 		Rs apiResponse = (Rs) new ErrorResponse(e);
 
-		AppLogger log = AppLoggerFactory.getLogger(this.getClass());
+		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		log.error(apiResponse);
 		return apiResponse;
 	}

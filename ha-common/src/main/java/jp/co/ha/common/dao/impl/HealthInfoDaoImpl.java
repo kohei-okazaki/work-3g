@@ -11,7 +11,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
@@ -21,7 +21,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 
-	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
+	private AppLogger logger = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}

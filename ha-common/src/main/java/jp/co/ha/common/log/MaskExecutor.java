@@ -11,7 +11,7 @@ import jp.co.ha.common.util.BeanUtil;
  */
 public class MaskExecutor {
 
-	// マスク文字列
+	/** マスク文字列 */
 	public static final String MASK = "****";
 
 	/**
