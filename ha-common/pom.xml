@@ -8,7 +8,6 @@
 	<groupId>jp.co.ha.common</groupId>
 	<artifactId>ha-common</artifactId>
 	<packaging>jar</packaging>
-	<!-- <version>1.0</version> -->
 
 	<properties>
 	</properties>

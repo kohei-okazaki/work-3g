@@ -8,7 +8,6 @@
 	<groupId>jp.co.ha.api</groupId>
 	<artifactId>ha-api</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
 
 	<properties>
 	</properties>
