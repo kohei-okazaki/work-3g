@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Documented
 @Qualifier("bcryptPasswordEncoder")
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.TYPE })
+@Target(ElementType.FIELD)
 public @interface Bcript {
 
 }
