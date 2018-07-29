@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * アカウント情報検索サービスインターフェース実装クラス<br>
@@ -23,7 +23,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Account findByUserId(String userId) throws BaseAppException {
+	public Account findByUserId(String userId) throws BaseException {
 		return accountDao.selectByUserId(userId);
 	}
 

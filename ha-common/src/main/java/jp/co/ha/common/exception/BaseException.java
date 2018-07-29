@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * アプリ内で扱う基底例外クラス<br>
  *
  */
-public abstract class BaseAppException extends Exception {
+public abstract class BaseException extends Exception {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
@@ -22,7 +22,7 @@ public abstract class BaseAppException extends Exception {
 	 * @param detail
 	 *     詳細
 	 */
-	public BaseAppException(ErrorCode errorCode, String detail) {
+	public BaseException(ErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;
 		this.detail = detail;
 	}

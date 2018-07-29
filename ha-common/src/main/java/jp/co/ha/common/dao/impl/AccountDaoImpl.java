@@ -8,7 +8,7 @@ import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
@@ -18,7 +18,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 
-	private final AppLogger LOGGER = AppLoggerFactory.getLogger(this.getClass());
+	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -43,7 +43,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 				account.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
@@ -56,7 +56,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void create(Account account) throws DataBaseException  {
-		LOGGER.info(account);
+		APP_LOGGER.info(account);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
@@ -82,7 +82,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void update(Account account) throws DataBaseException {
-		LOGGER.info(account);
+		APP_LOGGER.info(account);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "

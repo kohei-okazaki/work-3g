@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.AccessorType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -24,7 +24,7 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class CsvReader<T extends BaseCsvModel> {
 
-	private final AppLogger LOG = AppLoggerFactory.getLogger(this.getClass());
+	private final AppLogger LOG = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * 1行読込を行う<br>
@@ -32,7 +32,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 * @param record
 	 *     レコード
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	public T read(String record) throws AppIOException {

@@ -19,7 +19,7 @@ import jp.co.ha.business.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
@@ -73,7 +73,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 */
 	@Override
 	@GetMapping(value = "/input.html")
-	public String input(Model model, HttpServletRequest request) throws BaseAppException {
+	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 	}
 
@@ -83,7 +83,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result)
-			throws BaseAppException {
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合
@@ -101,7 +101,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
-			throws BaseAppException {
+			throws BaseException {
 
 		// アカウントEntityに変換
 		Account account = service.toAccount(form);

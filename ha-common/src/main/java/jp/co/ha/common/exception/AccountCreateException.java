@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * アカウント作成例外クラス<br>
  *
  */
-public class AccountCreateException extends BaseAppException {
+public class AccountCreateException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;

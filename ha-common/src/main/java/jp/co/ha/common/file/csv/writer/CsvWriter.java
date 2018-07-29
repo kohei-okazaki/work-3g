@@ -24,8 +24,6 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	public static final String SINGLE_QUOTE = "\'";
 	/** ダブルクォート */
 	public static final String DOBBLE_QUOTE = "\"";
-	/** マスク */
-	protected static final String MASK = "****";
 
 	/** CSV設定情報 */
 	protected CsvConfig conf;

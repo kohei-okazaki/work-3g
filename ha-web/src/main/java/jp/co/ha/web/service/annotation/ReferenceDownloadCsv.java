@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.TYPE })
+@Target(ElementType.FIELD)
 @Qualifier("referenceDownloadCsv")
 public @interface ReferenceDownloadCsv {
 

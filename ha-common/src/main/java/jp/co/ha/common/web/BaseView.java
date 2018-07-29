@@ -28,7 +28,6 @@ public interface BaseView {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <V extends BaseView> V of(Class<? extends BaseView> view, String url) {
-		// 一致しない場合
 		return (V) Stream.of(view.getEnumConstants())
 						.filter(baseView -> baseView.getName().equals(url))
 						.findFirst()

@@ -21,7 +21,7 @@ import jp.co.ha.business.find.MailInfoSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.AccountSettingException;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
@@ -71,7 +71,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * @throws AccountSettingException
 	 */
 	@ModelAttribute
-	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseAppException {
+	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
@@ -98,7 +98,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@GetMapping(value = "/input.html")
-	public String input(Model model, HttpServletRequest request) throws BaseAppException {
+	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
 	}
 
@@ -107,7 +107,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result) throws BaseAppException {
+	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
 			return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
@@ -123,7 +123,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@PostMapping(value = "/complete.html")
-	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseAppException {
+	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseException {
 
 		// form情報から更新処理を行う
 		accountSettingService.execute(form);

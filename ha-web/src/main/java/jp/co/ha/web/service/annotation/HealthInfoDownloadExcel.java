@@ -17,6 +17,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Documented
 @Qualifier("healthInfoDownloadExcel")
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.TYPE })
+@Target(ElementType.FIELD)
 public @interface HealthInfoDownloadExcel {
 }

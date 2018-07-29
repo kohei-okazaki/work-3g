@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.update.AccountUpdateService;
 import jp.co.ha.common.dao.AccountDao;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * アカウント情報更新サービス実装クラス<br>
@@ -23,7 +23,7 @@ public class AccountUpdateServiceImpl implements AccountUpdateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(Account account) throws BaseAppException {
+	public void update(Account account) throws BaseException {
 		accountDao.update(account);
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.common.dao.HealthInfoFileSettingDao;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * 健康情報ファイル設定作成サービスインターフェース実装クラス<br>
@@ -23,7 +23,7 @@ public class HealthInfoFileSettingCreateServiceImpl implements HealthInfoFileSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(HealthInfoFileSetting entity) throws BaseAppException {
+	public void create(HealthInfoFileSetting entity) throws BaseException {
 		healthInfoFileSettingDao.create(entity);
 	}
 

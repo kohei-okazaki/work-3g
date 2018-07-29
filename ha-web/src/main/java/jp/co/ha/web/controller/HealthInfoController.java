@@ -32,7 +32,7 @@ import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.CsvConfig;
@@ -105,7 +105,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 */
 	@Override
 	@GetMapping(value = "/input.html")
-	public String input(Model model, HttpServletRequest request) throws BaseAppException {
+	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.HEALTH_INFO_INPUT);
 	}
 
@@ -114,7 +114,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 */
 	@Override
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result) throws BaseAppException {
+	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
 			// バリエーションエラーの場合
@@ -132,7 +132,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 */
 	@Override
 	@PostMapping(value = "/complete.html")
-	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseAppException {
+	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
@@ -172,11 +172,11 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @param form
 	 *     HealthInfoForm
 	 * @return
-	 * @throws HealthInfoException
-	 *     健康情報例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	@GetMapping(value = "/excelDownload.html")
-	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseAppException {
+	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseException {
 
 		BigDecimal requestHealthInfoId = form.getHealthInfoId();
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
@@ -201,11 +201,11 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *     HttpServletResponse
 	 * @param form
 	 *     健康情報フォーム
-	 * @throws HealthInfoException
-	 *     健康情報例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	@GetMapping(value = "/csvDownload.html")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseAppException {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		if (BeanUtil.isNull(userId)) {

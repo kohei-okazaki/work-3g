@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * アルゴリズム作成例外クラス<br>
  *
  */
-public class AlgorithmException extends BaseAppException {
+public class AlgorithmException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;

@@ -11,7 +11,7 @@ import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
@@ -21,7 +21,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 
-	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
+	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -47,7 +47,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 				healthInfoList.add(healthInfo);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
@@ -79,7 +79,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 				healthInfo.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
@@ -92,7 +92,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 	 */
 	@Override
 	public void create(HealthInfo healthInfo) throws DataBaseException {
-		logger.info(healthInfo);
+		APP_LOGGER.info(healthInfo);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + "("
@@ -117,7 +117,6 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 		} finally {
 			close();
 		}
-		logger.info(healthInfo);
 	}
 
 }

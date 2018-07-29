@@ -15,7 +15,7 @@ import jp.co.ha.common.util.StringUtil;
  * @param <F>
  *     validate対象form
  */
-public abstract class BaseValidator<F extends BaseForm> implements Validator {
+public abstract class BaseWebValidator<F extends BaseForm> implements Validator {
 
 	/**
 	 * {@inheritDoc}

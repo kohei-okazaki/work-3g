@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.api.request.HealthInfoRegistRequest;
-import jp.co.ha.api.service.HealthInfoRegistService;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
@@ -47,9 +45,6 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/** 健康情報ファイル登録画面サービス */
 	@Autowired
 	private HealthInfoFileRegistService fileService;
-	/** 健康情報登録サービス */
-	@Autowired
-	private HealthInfoRegistService healthInfoRegistService;
 	/** session管理サービス */
 	@Autowired
 	private SessionManageService sessionManageService;
@@ -77,7 +72,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	 * {@inheritDoc}
 	 */
 	@GetMapping(value = "/input.html")
-	public String input(Model model, HttpServletRequest request) throws BaseAppException {
+	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 	}
 
@@ -85,7 +80,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	 * {@inheritDoc}
 	 */
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseAppException {
+	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -104,18 +99,14 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	 * {@inheritDoc}
 	 */
 	@PostMapping(value = "/complete.html")
-	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseAppException {
+	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
 		sessionManageService.removeValue(request.getSession(), "modelList");
 		if (BeanUtil.isNull(modelList) || BeanUtil.isNull(userId)) {
 			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
-		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList, userId);
-		for (HealthInfoRegistRequest apiRequest : reqList) {
-			healthInfoRegistService.checkRequest(apiRequest);
-			healthInfoRegistService.execute(apiRequest);
-		}
+		fileService.regist(modelList, userId);
 		return ManageWebView.HEALTH_INFO_FILE_COMPLETE.getName();
 	}
 

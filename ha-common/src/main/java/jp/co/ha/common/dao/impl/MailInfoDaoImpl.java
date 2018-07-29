@@ -8,7 +8,7 @@ import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
@@ -18,7 +18,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 
-	private AppLogger logger = AppLoggerFactory.getLogger(this.getClass());
+	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -40,8 +40,10 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 				mailInfo.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} catch (DataBaseException e) {
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
@@ -55,8 +57,7 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 	@Override
 	public void update(MailInfo mailInfo) throws DataBaseException {
 
-		logger.info(mailInfo);
-
+		APP_LOGGER.info(mailInfo);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "
@@ -77,8 +78,7 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 	@Override
 	public void create(MailInfo mailInfo) throws DataBaseException {
 
-		logger.info(mailInfo);
-
+		APP_LOGGER.info(mailInfo);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME +" VALUES ("

@@ -14,7 +14,7 @@ import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.api.BaseRestController;
 import jp.co.ha.common.api.RequestType;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
 
@@ -35,7 +35,7 @@ public class HealthInfoRegistController implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse execute(HealthInfoRegistRequest apiRequest) throws BaseAppException {
+	public HealthInfoRegistResponse execute(HealthInfoRegistRequest apiRequest) throws BaseException {
 
 		// リクエスト情報のチェック
 		service.checkRequest(apiRequest);

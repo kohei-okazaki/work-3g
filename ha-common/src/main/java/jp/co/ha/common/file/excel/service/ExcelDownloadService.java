@@ -3,7 +3,7 @@ package jp.co.ha.common.file.excel.service;
 import org.springframework.web.servlet.View;
 
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
@@ -25,9 +25,9 @@ public interface ExcelDownloadService<F> {
 	 * @param f
 	 *     出力対象データ
 	 * @return View
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	View execute(F f) throws BaseAppException;
+	View execute(F f) throws BaseException;
 
 	/**
 	 * Excel設定情報を取得<br>

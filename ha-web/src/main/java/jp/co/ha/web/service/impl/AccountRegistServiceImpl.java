@@ -8,7 +8,7 @@ import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AlgorithmException;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -53,7 +53,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean invalidUserId(AccountRegistForm form) throws BaseAppException {
+	public boolean invalidUserId(AccountRegistForm form) throws BaseException {
 
 		// 指定したアカウント情報を検索
 		Account account = accountSearchService.findByUserId(form.getUserId());

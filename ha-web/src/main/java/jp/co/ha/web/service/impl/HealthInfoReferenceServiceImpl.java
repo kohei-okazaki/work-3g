@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
@@ -39,9 +39,9 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @param userId
 	 *     ユーザID
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) throws BaseAppException {
+	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) throws BaseException {
 
 		List<HealthInfo> resultList = null;
 		if (BeanUtil.isNull(form.getHealthInfoId()) || StringUtil.isEmpty(form.getHealthInfoId().toString())) {
@@ -81,7 +81,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId) throws BaseAppException {
+	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId) throws BaseException {
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
 		List<HealthInfo> entityList = getHealthInfo(form, userId);

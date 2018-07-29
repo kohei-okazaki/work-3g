@@ -4,7 +4,7 @@ import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.common.api.BaseService;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * 健康情報登録サービス<br>
@@ -19,9 +19,9 @@ public interface HealthInfoRegistService
 	 * @param request
 	 *     リクエスト
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseAppException;
+	HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException;
 
 	/**
 	 * 健康情報Entityを健康情報登録レスポンスクラスに変換する<br>
@@ -29,8 +29,8 @@ public interface HealthInfoRegistService
 	 * @param healthInfo
 	 *     健康情報
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	HealthInfoRegistResponse toResponse(HealthInfo healthInfo) throws BaseAppException;
+	HealthInfoRegistResponse toResponse(HealthInfo healthInfo) throws BaseException;
 
 }

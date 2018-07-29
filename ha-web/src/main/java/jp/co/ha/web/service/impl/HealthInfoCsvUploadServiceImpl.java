@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.reader.CsvReader;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
@@ -26,7 +26,7 @@ public class HealthInfoCsvUploadServiceImpl implements CsvUploadService<HealthIn
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoCsvUploadModel> execute(MultipartFile uploadFile) throws BaseAppException {
+	public List<HealthInfoCsvUploadModel> execute(MultipartFile uploadFile) throws BaseException {
 
 		List<String> list = null;
 		try {

@@ -8,7 +8,7 @@ import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.AppLoggerFactory;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 
@@ -18,13 +18,14 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthInfoFileSettingDao {
 
-	private final AppLogger LOGGER = AppLoggerFactory.getLogger(this.getClass());
+	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public HealthInfoFileSetting selectByUserId(String userId) throws DataBaseException {
+
 		HealthInfoFileSetting entity = null;
 		try {
 			connect();
@@ -41,7 +42,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 				entity.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
@@ -54,7 +55,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 	 */
 	@Override
 	public void create(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException {
-		LOGGER.info(healthInfoFileSetting);
+		APP_LOGGER.info(healthInfoFileSetting);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
@@ -78,7 +79,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 	 */
 	@Override
 	public void update(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException {
-		LOGGER.info(healthInfoFileSetting);
+		APP_LOGGER.info(healthInfoFileSetting);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "

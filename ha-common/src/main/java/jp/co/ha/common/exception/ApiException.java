@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * API例外クラス<br>
  *
  */
-public class RestApiException extends BaseAppException {
+public class ApiException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
@@ -17,7 +17,7 @@ public class RestApiException extends BaseAppException {
 	 * @param detail
 	 *     詳細
 	 */
-	public RestApiException(ErrorCode errorCode, String detail) {
+	public ApiException(ErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 

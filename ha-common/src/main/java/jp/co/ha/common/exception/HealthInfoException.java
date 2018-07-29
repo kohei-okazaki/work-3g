@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * 健康情報例外クラス<br>
  *
  */
-public class HealthInfoException extends BaseAppException {
+public class HealthInfoException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;

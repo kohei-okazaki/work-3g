@@ -7,8 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
@@ -16,6 +19,8 @@ import jp.co.ha.common.util.BeanUtil;
  *
  */
 public abstract class BaseDaoImpl {
+
+	protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 	private Connection con;
 
@@ -30,18 +35,16 @@ public abstract class BaseDaoImpl {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance();
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/work3g?serverTimezone=JST", "root", "admin");
-			System.out.println("MySQLに接続できました。");
+			LOGGER.info("DBに接続");
 			if (BeanUtil.notNull(con)) {
 				stm = con.createStatement();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("JDBCドライバのロードに失敗しました。");
+			LOGGER.error("JDBCドライバのロードに失敗", e);
 		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("MySQLに接続できませんでした。");
+			LOGGER.error("DBに接続に失敗", e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			LOGGER.error("不正な引数が指定", e);
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
@@ -62,6 +65,7 @@ public abstract class BaseDaoImpl {
 		try {
 			return this.rs.next();
 		} catch (SQLException e) {
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
 		}
 	}
@@ -79,6 +83,7 @@ public abstract class BaseDaoImpl {
 	 *     DBエラー
 	 */
 	protected int execute(String sql, SqlType type) throws DataBaseException {
+		LOGGER.debug("--->" + sql);
 		try {
 			if (SqlType.SELECT == type) {
 				this.rs = this.stm.executeQuery(sql);
@@ -86,10 +91,12 @@ public abstract class BaseDaoImpl {
 			} else if (SqlType.INSERT == type || SqlType.UPDATE == type) {
 				return this.stm.executeUpdate(sql);
 			} else {
-				throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "実行するSQlが存在しません");
+				LOGGER.error(ErrorCode.DB_SQL_SELECT_ERROR.getErrorMessage());
+				throw new DataBaseException(ErrorCode.DB_SQL_SELECT_ERROR, "実行するSQlが存在しません");
 			}
 		} catch (SQLException e) {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
+			LOGGER.error(ErrorCode.DB_SQL_EXE_ERROR.getErrorMessage(), e);
+			throw new DataBaseException(ErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました");
 		}
 
 	}
@@ -104,22 +111,25 @@ public abstract class BaseDaoImpl {
 		try {
 			if (BeanUtil.notNull(stm)) {
 				stm.close();
-				System.out.println("Statementをクローズします");
+				LOGGER.debug("Statementをクローズします");
 			}
 			if (BeanUtil.notNull(rs)) {
 				rs.close();
-				System.out.println("resultsetをクローズします");
+				LOGGER.debug("resultsetをクローズします");
 			}
 			if (BeanUtil.notNull(con)) {
 				con.close();
-				System.out.println("接続をクローズします");
+				LOGGER.debug("DB切断します");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "クローズに失敗しました");
+			LOGGER.error(ErrorCode.DB_CLOSE_ERROR.getErrorMessage(), e);
+			throw new DataBaseException(ErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました");
 		}
 	}
 
+	/**
+	 * SQL種別<br>
+	 */
 	protected enum SqlType {
 		INSERT, UPDATE, SELECT, DELETE;
 	}

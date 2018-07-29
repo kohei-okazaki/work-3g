@@ -14,7 +14,7 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
 import jp.co.ha.common.api.BaseRestController;
 import jp.co.ha.common.api.RequestType;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * 健康情報照会コントローラクラス<br>
@@ -33,7 +33,7 @@ public class HealthInfoReferenceController implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest apiRequest) throws BaseAppException {
+	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest apiRequest) throws BaseException {
 
 		// リクエスト情報のチェック
 		service.checkRequest(apiRequest);
@@ -47,7 +47,7 @@ public class HealthInfoReferenceController implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceRequest toRequest(HttpServletRequest request) throws BaseAppException {
+	public HealthInfoReferenceRequest toRequest(HttpServletRequest request) throws BaseException {
 
 		HealthInfoReferenceRequest apiRequest = new HealthInfoReferenceRequest();
 		apiRequest.setRequestType(RequestType.of(request.getParameter("requestType")));

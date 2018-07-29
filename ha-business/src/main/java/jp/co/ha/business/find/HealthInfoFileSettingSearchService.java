@@ -1,7 +1,7 @@
 package jp.co.ha.business.find;
 
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * 健康情報ファイル設定検索サービスインターフェース<br>
@@ -15,7 +15,7 @@ public interface HealthInfoFileSettingSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	HealthInfoFileSetting findByUserId(String userId) throws BaseAppException;
+	HealthInfoFileSetting findByUserId(String userId) throws BaseException;
 }

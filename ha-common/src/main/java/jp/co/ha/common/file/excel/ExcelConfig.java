@@ -8,12 +8,33 @@ import jp.co.ha.common.util.Charset;
  */
 public class ExcelConfig {
 
+	/** ファイル名 */
+	private String fileName;
 	/** キャラセット */
 	private Charset charset;
 	/** ヘッダ有無 */
 	private boolean hasHeader;
 	/** フッタ有無 */
 	private boolean hasFooter;
+
+	/**
+	 * fileNameを返す<br>
+	 *
+	 * @return fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+
+	/**
+	 * fileNameを設定する<br>
+	 *
+	 * @param fileName
+	 *     ファイル名
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 	/**
 	 * charsetを返す<br>
@@ -39,7 +60,7 @@ public class ExcelConfig {
 	 *
 	 * @return hasHeader
 	 */
-	public boolean isHasHeader() {
+	public boolean hasHeader() {
 		return hasHeader;
 	}
 
@@ -57,7 +78,7 @@ public class ExcelConfig {
 	 *
 	 * @return hasFooter
 	 */
-	public boolean isHasFooter() {
+	public boolean hasFooter() {
 		return hasFooter;
 	}
 

@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * IO系例外クラス<br>
  *
  */
-public class AppIOException extends BaseAppException {
+public class AppIOException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;

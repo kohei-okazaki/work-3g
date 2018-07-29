@@ -4,16 +4,16 @@ import org.springframework.validation.Errors;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.BaseValidator;
+import jp.co.ha.common.web.BaseWebValidator;
 import jp.co.ha.web.form.AccountRegistForm;
 
 /**
  * アカウント登録画面Validateクラス
  *
  */
-public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
+public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> {
 
 	/** アカウント検索サービス */
 	private AccountSearchService accountSearchService;
@@ -36,7 +36,7 @@ public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
 		AccountRegistForm form = (AccountRegistForm) object;
 		try {
 			checkExistAccount(errors, form);
-		} catch (BaseAppException e) {
+		} catch (BaseException e) {
 			e.printStackTrace();
 		}
 	}
@@ -48,9 +48,9 @@ public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
 	 *     エラー
 	 * @param form
 	 *     アカウント情報登録form
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	private void checkExistAccount(Errors errors, AccountRegistForm form) throws BaseAppException {
+	private void checkExistAccount(Errors errors, AccountRegistForm form) throws BaseException {
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
 			errors.rejectValue("userId", "validate.message.existAccount");

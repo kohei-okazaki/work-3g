@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.find.AccountSearchService;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
@@ -74,7 +74,7 @@ public class LoginController implements BaseWebController {
 	 * @return ログイン画面
 	 */
 	@GetMapping("/index.html")
-	public String index(Model model, HttpServletRequest request) throws BaseAppException {
+	public String index(Model model, HttpServletRequest request) throws BaseException {
 		// sessionに格納している情報をすべて削除する
 		sessionService.removeValues(request.getSession());
 //		System.out.println(messageSource.getMessage("message", null, Locale.JAPANESE));
@@ -93,11 +93,11 @@ public class LoginController implements BaseWebController {
 	 * @param result
 	 *     BindingResult
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外クラス
 	 */
 	@PostMapping("/top.html")
-	public String top(Model model, HttpServletRequest request, @Valid LoginForm loginForm, BindingResult result) throws BaseAppException {
+	public String top(Model model, HttpServletRequest request, @Valid LoginForm loginForm, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -117,11 +117,11 @@ public class LoginController implements BaseWebController {
 	 * @param request
 	 *     HttpServletRequest
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外クラス
 	 */
 	@GetMapping("/top.html")
-	public String top(HttpServletRequest request) throws BaseAppException {
+	public String top(HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		return getView(StringUtil.isEmpty(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.HealthInfoSearchService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -31,7 +31,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findByUserId(String userId) throws BaseAppException {
+	public List<HealthInfo> findByUserId(String userId) throws BaseException {
 		return healthInfoDao.selectByUserId(userId);
 	}
 
@@ -39,7 +39,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findByHealthInfoId(BigDecimal healthInfoId) throws BaseAppException {
+	public HealthInfo findByHealthInfoId(BigDecimal healthInfoId) throws BaseException {
 		return healthInfoDao.selectByHealthInfoId(healthInfoId);
 	}
 
@@ -47,7 +47,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findLastByUserId(String userId) throws BaseAppException {
+	public HealthInfo findLastByUserId(String userId) throws BaseException {
 
 		List<HealthInfo> entityList = this.findByUserId(userId);
 
@@ -63,7 +63,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
 	 */
 	@Override
-	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseAppException {
+	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseException {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
 		if (BeanUtil.isNull(regDate)) {

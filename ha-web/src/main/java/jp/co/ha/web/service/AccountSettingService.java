@@ -1,6 +1,6 @@
 package jp.co.ha.web.service;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.form.AccountSettingForm;
 
 /**
@@ -14,8 +14,8 @@ public interface AccountSettingService {
 	 *
 	 * @param form
 	 *            アカウント設定画面フォーム
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	void execute(AccountSettingForm form) throws BaseAppException;
+	void execute(AccountSettingForm form) throws BaseException;
 
 }
