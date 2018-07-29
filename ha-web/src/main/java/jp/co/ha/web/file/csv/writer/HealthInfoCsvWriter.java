@@ -7,6 +7,7 @@ import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.writer.CsvWriter;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.log.MaskExecutor;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -45,13 +46,13 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 		// ユーザID
 		write(joiner, model.getUserId());
 		// 身長
-		write(joiner, conf.useMask() ? MASK : model.getHeight().toString());
+		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getHeight().toString());
 		// 体重
-		write(joiner, conf.useMask() ? MASK : model.getWeight().toString());
+		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getWeight().toString());
 		// BMI
-		write(joiner, conf.useMask() ? MASK : model.getBmi().toString());
+		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getBmi().toString());
 		// 標準体重
-		write(joiner, conf.useMask() ? MASK : model.getStandardWeight().toString());
+		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight().toString());
 		// 登録日時
 		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
 
