@@ -5,14 +5,14 @@ import org.springframework.validation.Errors;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.BaseValidator;
+import jp.co.ha.common.web.BaseWebValidator;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 
 /**
  * 結果照会画面のValidatorクラス<br>
  *
  */
-public class HealthInfoReferenceValidator extends BaseValidator<HealthInfoReferenceForm> {
+public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoReferenceForm> {
 
 	/**
 	 * {@inheritDoc}

@@ -25,6 +25,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 	 */
 	@Override
 	public HealthInfoFileSetting selectByUserId(String userId) throws DataBaseException {
+
 		HealthInfoFileSetting entity = null;
 		try {
 			connect();
@@ -41,7 +42,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 				entity.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();

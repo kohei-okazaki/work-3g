@@ -4,14 +4,14 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.BaseValidator;
+import jp.co.ha.common.web.BaseWebValidator;
 import jp.co.ha.web.form.HealthInfoForm;
 
 /**
  * 健康情報登録フォームvalidator
  *
  */
-public class HealthInfoValidator extends BaseValidator<HealthInfoForm> {
+public class HealthInfoValidator extends BaseWebValidator<HealthInfoForm> {
 
 	/**
 	 * {@inheritDoc}

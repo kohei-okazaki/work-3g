@@ -20,7 +20,7 @@ import jp.co.ha.common.util.BeanUtil;
  */
 public abstract class BaseDaoImpl {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 	private Connection con;
 
@@ -83,6 +83,7 @@ public abstract class BaseDaoImpl {
 	 *     DBエラー
 	 */
 	protected int execute(String sql, SqlType type) throws DataBaseException {
+		LOGGER.debug("--->" + sql);
 		try {
 			if (SqlType.SELECT == type) {
 				this.rs = this.stm.executeQuery(sql);

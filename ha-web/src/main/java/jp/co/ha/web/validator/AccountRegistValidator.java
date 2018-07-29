@@ -6,14 +6,14 @@ import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.BaseValidator;
+import jp.co.ha.common.web.BaseWebValidator;
 import jp.co.ha.web.form.AccountRegistForm;
 
 /**
  * アカウント登録画面Validateクラス
  *
  */
-public class AccountRegistValidator extends BaseValidator<AccountRegistForm> {
+public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> {
 
 	/** アカウント検索サービス */
 	private AccountSearchService accountSearchService;

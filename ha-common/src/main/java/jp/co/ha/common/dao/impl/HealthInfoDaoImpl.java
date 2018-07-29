@@ -21,7 +21,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 
-	private AppLogger APP_LOGGER= LoggerFactory.getAppLogger(this.getClass());
+	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -47,7 +47,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 				healthInfoList.add(healthInfo);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
@@ -79,7 +79,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 				healthInfo.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
