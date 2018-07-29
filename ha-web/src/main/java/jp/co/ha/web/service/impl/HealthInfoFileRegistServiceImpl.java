@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
@@ -26,14 +27,24 @@ import jp.co.ha.web.service.HealthInfoFileRegistService;
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {
 
+	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報登録APIサービス */
+	@Autowired
+	private HealthInfoRegistService healthInfoRegistService;
 
 	/**
-	 * {@inheritDoc}
+	 * 健康情報CSVアップロードモデルリストから健康情報APIリクエストのリストに変換する<br>
+	 *
+	 * @param modelList
+	 *     健康情報CSVアップロードモデルリスト
+	 * @param userId
+	 *     ユーザID
+	 * @return
+	 * @throws BaseAppException
 	 */
-	@Override
-	public List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException {
+	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException {
 		Account account = accountSearchService.findByUserId(userId);
 		List<HealthInfoRegistRequest> requestList = new ArrayList<HealthInfoRegistRequest>();
 		for (HealthInfoCsvUploadModel csvModel : modelList) {
@@ -62,6 +73,18 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			if (!RegixPattern.isPattern(model.getWeight(), RegixPattern.HALF_NUMBER_PERIOD)) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n体重の項目が不正です。体重：" + model.getWeight());
 			}
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException {
+		List<HealthInfoRegistRequest> reqList = toRequestList(modelList, userId);
+		for (HealthInfoRegistRequest apiRequest : reqList) {
+			healthInfoRegistService.checkRequest(apiRequest);
+			healthInfoRegistService.execute(apiRequest);
 		}
 	}
 

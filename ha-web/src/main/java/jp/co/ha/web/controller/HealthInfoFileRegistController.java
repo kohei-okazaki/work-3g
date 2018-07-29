@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.api.request.HealthInfoRegistRequest;
-import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
@@ -47,9 +45,6 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/** 健康情報ファイル登録画面サービス */
 	@Autowired
 	private HealthInfoFileRegistService fileService;
-	/** 健康情報登録サービス */
-	@Autowired
-	private HealthInfoRegistService healthInfoRegistService;
 	/** session管理サービス */
 	@Autowired
 	private SessionManageService sessionManageService;
@@ -111,11 +106,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 		if (BeanUtil.isNull(modelList) || BeanUtil.isNull(userId)) {
 			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
-		List<HealthInfoRegistRequest> reqList = fileService.toRequestList(modelList, userId);
-		for (HealthInfoRegistRequest apiRequest : reqList) {
-			healthInfoRegistService.checkRequest(apiRequest);
-			healthInfoRegistService.execute(apiRequest);
-		}
+		fileService.regist(modelList, userId);
 		return ManageWebView.HEALTH_INFO_FILE_COMPLETE.getName();
 	}
 

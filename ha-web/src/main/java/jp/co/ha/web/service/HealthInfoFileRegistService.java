@@ -2,7 +2,6 @@ package jp.co.ha.web.service;
 
 import java.util.List;
 
-import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.common.exception.BaseAppException;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
@@ -12,18 +11,6 @@ import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
  *
  */
 public interface HealthInfoFileRegistService {
-
-	/**
-	 * 健康情報CSVアップロードモデルリストから健康情報APIリクエストのリストに変換する<br>
-	 *
-	 * @param modelList
-	 *     健康情報CSVアップロードモデルリスト
-	 * @param userId
-	 *     ユーザID
-	 * @return
-	 * @throws BaseAppException
-	 */
-	List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException;
 
 	/**
 	 * 健康情報CSVアップロードモデルリストに不正なデータが含まれていないかチェックを行う
@@ -36,5 +23,16 @@ public interface HealthInfoFileRegistService {
 	 *     健康情報例外
 	 */
 	void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException;
+
+	/**
+	 * 指定されたモデルリストの登録処理を行う<br>
+	 *
+	 * @param modelList
+	 *     健康情報CSVアップロードモデルリスト
+	 * @param userId
+	 *     ユーザID
+	 * @throws BaseAppException
+	 */
+	void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException;
 
 }
