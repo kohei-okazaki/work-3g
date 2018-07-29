@@ -17,7 +17,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import jp.co.ha.common.file.excel.ExcelConfig;
-import jp.co.ha.common.file.excel.annotation.ExcelModel;
+import jp.co.ha.common.file.excel.annotation.ExcelDownloadModel;
 import jp.co.ha.common.file.excel.model.BaseExcelModel;
 import jp.co.ha.common.util.BeanUtil;
 
@@ -33,7 +33,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	protected final int HEADER_POSITION = 0;
 	/** Excelモデルインターフェースリストリスト */
 	protected List<M> modelList;
-	/** Excel設定情報保持クラス */
+	/** Excel設定情報 */
 	protected ExcelConfig conf;
 
 	/**
@@ -60,11 +60,19 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 		String sheetName = getSheetName((Class<M>) BeanUtil.getParameterType(this.getClass()));
 		Sheet sheet = workbook.createSheet(sheetName);
 
-		// ヘッダを書込
-		writeHeader(sheet, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+		if (this.conf.hasHeader()) {
+			// ヘッダを書込
+			writeHeader(sheet, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+		}
 
 		// データを書込
 		writeData(sheet);
+
+		if (this.conf.hasFooter()) {
+			// フッタを書込
+			writeFooter(sheet, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+		}
+
 	}
 
 	/**
@@ -82,7 +90,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * ヘッダーを設定する<br>
+	 * ヘッダを書込<br>
 	 *
 	 * @param sheet
 	 *     Sheet
@@ -90,23 +98,40 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 *     Excelモデルインターフェースクラス型
 	 */
 	protected void writeHeader(Sheet sheet, Class<M> clazz) {
-		// ヘッダー名取得
-		List<String> headerNameList = getHeaderList(clazz);
-
-		Stream.iterate(0, i -> ++i).limit(headerNameList.size()).forEach(i -> {
-			String headerName = headerNameList.get(i);
+		// ヘッダ名取得
+		List<String> header = getHeaderList(clazz);
+		Stream.iterate(0, i -> ++i).limit(header.size()).forEach(i -> {
+			String headerName = header.get(i);
 			Cell cell = getCell(sheet, HEADER_POSITION, i);
 			setText(cell, headerName);
 		});
 	}
 
 	/**
-	 * データを設定する<br>
+	 * データを書込<br>
 	 *
 	 * @param sheet
 	 *     Sheet
 	 */
 	protected abstract void writeData(Sheet sheet);
+
+	/**
+	 * フッタを書込
+	 *
+	 * @param sheet
+	 *     Sheet
+	 * @param clazz
+	 *     Excelモデルインターフェースクラス型
+	 */
+	private void writeFooter(Sheet sheet, Class<M> clazz) {
+		// フッタ名取得
+		List<String> footer = getHeaderList(clazz);
+		Stream.iterate(0, i -> ++i).limit(footer.size()).forEach(i -> {
+			String footerName = footer.get(i);
+			Cell cell = getCell(sheet, HEADER_POSITION, i);
+			setText(cell, footerName);
+		});
+	}
 
 	/**
 	 * 指定されたシートのrow行目のcol番目のセルを返す<br>
@@ -152,23 +177,36 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 * シート名を取得する<br>
 	 *
 	 * @param clazz
-	 *     ExcelModelアノテーションのついたクラス型
-	 * @return シート名
+	 *     ExcelDownloadModelアノテーションのついたクラス型
+	 * @return
 	 */
 	protected String getSheetName(Class<M> clazz) {
-		return clazz.getAnnotation(ExcelModel.class).sheetName();
+		return clazz.getAnnotation(ExcelDownloadModel.class).sheetName();
 	}
 
 	/**
 	 * ヘッダ名を取得する<br>
 	 *
 	 * @param clazz
-	 *     ExcelModelアノテーションのついたクラス型
-	 * @return ヘッダ名
+	 *     ExcelDownloadModelアノテーションのついたクラス型
+	 * @return
 	 */
 	protected List<String> getHeaderList(Class<?> clazz) {
 		List<String> headerList = new ArrayList<String>();
-		headerList.addAll(List.of(clazz.getAnnotation(ExcelModel.class).headerNames()));
+		headerList.addAll(List.of(clazz.getAnnotation(ExcelDownloadModel.class).headerNames()));
 		return headerList;
+	}
+
+	/**
+	 * フッタ名を取得する<br>
+	 *
+	 * @param clazz
+	 *     ExcelDownloadModelアノテーションのついたクラス型
+	 * @return
+	 */
+	protected List<String> getFooterList(Class<?> clazz) {
+		List<String> footerList = new ArrayList<String>();
+		footerList.addAll(List.of(clazz.getAnnotation(ExcelDownloadModel.class).footerNames()));
+		return footerList;
 	}
 }

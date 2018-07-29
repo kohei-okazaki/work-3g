@@ -2,14 +2,16 @@ package jp.co.ha.web.file.excel.model;
 
 import java.util.Date;
 
-import jp.co.ha.common.file.excel.annotation.ExcelModel;
+import jp.co.ha.common.file.excel.annotation.ExcelDownloadModel;
 import jp.co.ha.common.file.excel.model.BaseExcelModel;
 
 /**
  * 結果照会Excel出力モデルクラス<br>
  *
  */
-@ExcelModel(sheetName = "健康情報", headerNames = { "身長", "体重", "BMI", "標準体重", "登録日時" })
+@ExcelDownloadModel(sheetName = "健康情報照会"
+					, headerNames = { "身長", "体重", "BMI", "標準体重", "登録日時" }
+					, footerNames = { "身長", "体重", "BMI", "標準体重", "登録日時" })
 public class ReferenceExcelModel implements BaseExcelModel {
 
 	/** 身長 */

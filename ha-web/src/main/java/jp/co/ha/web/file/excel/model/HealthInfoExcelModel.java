@@ -1,13 +1,15 @@
 package jp.co.ha.web.file.excel.model;
 
-import jp.co.ha.common.file.excel.annotation.ExcelModel;
+import jp.co.ha.common.file.excel.annotation.ExcelDownloadModel;
 import jp.co.ha.common.file.excel.model.BaseExcelModel;
 
 /**
  * 健康情報Excel出力モデルクラス<br>
  *
  */
-@ExcelModel(sheetName = "健康情報", headerNames = { "身長", "体重", "BMI", "標準体重" })
+@ExcelDownloadModel(sheetName = "健康情報"
+					, headerNames = { "身長", "体重", "BMI", "標準体重" }
+					, footerNames = { "身長", "体重", "BMI", "標準体重" } )
 public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/** 身長 */
