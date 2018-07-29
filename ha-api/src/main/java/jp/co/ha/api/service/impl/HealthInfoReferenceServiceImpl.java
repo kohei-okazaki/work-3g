@@ -12,7 +12,7 @@ import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
@@ -41,7 +41,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void checkRequest(HealthInfoReferenceRequest request) throws BaseAppException {
+	public void checkRequest(HealthInfoReferenceRequest request) throws BaseException {
 
 		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
@@ -70,7 +70,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseAppException {
+	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
 
 		// 指定されたデータIDから健康情報を取得
 		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());

@@ -1,6 +1,6 @@
 package jp.co.ha.business.create;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * 基底Entity作成サービスインターフェース<br>
@@ -15,8 +15,8 @@ public interface BaseCreateService<T> {
 	 *
 	 * @param entity
 	 *     Entity
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	void create(T entity) throws BaseAppException;
+	void create(T entity) throws BaseException;
 
 }

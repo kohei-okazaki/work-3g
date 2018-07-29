@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.find.MailInfoSearchService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * メール情報検索サービスインターフェース実装クラス<br>
@@ -23,7 +23,7 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public MailInfo findByUserId(String userId) throws BaseAppException {
+	public MailInfo findByUserId(String userId) throws BaseException {
 		return mailInfoDao.selectByUserId(userId);
 	}
 }

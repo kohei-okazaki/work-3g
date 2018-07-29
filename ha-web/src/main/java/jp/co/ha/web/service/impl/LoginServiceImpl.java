@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.LoginForm;
@@ -26,7 +26,7 @@ public class LoginServiceImpl implements LoginService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean invalidPassword(LoginForm loginForm) throws BaseAppException {
+	public boolean invalidPassword(LoginForm loginForm) throws BaseException {
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		return !loginForm.getPassword().equals(account.getPassword());
 	}
@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean noExistAccount(LoginForm loginForm) throws BaseAppException {
+	public boolean noExistAccount(LoginForm loginForm) throws BaseException {
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		return BeanUtil.isNull(account);
 	}
@@ -44,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean invalidAccount(LoginForm loginForm) throws BaseAppException {
+	public boolean invalidAccount(LoginForm loginForm) throws BaseException {
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		return StringUtil.isTrue(account.getDeleteFlag());
 	}

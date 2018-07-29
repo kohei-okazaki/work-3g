@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.util.BeanUtil;
@@ -29,10 +29,10 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 * @param uploadFile
 	 *     アップロードファイル
 	 * @return T CSVアップロードモデルリスト
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
-	List<T> execute(MultipartFile uploadFile) throws BaseAppException;
+	List<T> execute(MultipartFile uploadFile) throws BaseException;
 
 
 	/**

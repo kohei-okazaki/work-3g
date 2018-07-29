@@ -12,7 +12,7 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
@@ -37,7 +37,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 * {@inheritDoc}
 	 */
 	@Override
-	public View execute(List<HealthInfoReferenceResponse> historyList) throws BaseAppException {
+	public View execute(List<HealthInfoReferenceResponse> historyList) throws BaseException {
 
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(historyList.get(0).getUserId());

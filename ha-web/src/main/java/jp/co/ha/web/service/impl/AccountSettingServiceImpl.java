@@ -12,7 +12,7 @@ import jp.co.ha.business.update.AccountUpdateService;
 import jp.co.ha.business.update.MailInfoUpdateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
@@ -44,7 +44,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(AccountSettingForm form) throws BaseAppException {
+	public void execute(AccountSettingForm form) throws BaseException {
 
 		// アカウント情報を検索し、アカウント情報にフォームをマージする
 		Account befAccount = accountSearchService.findByUserId(form.getUserId());
@@ -76,9 +76,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 *     アカウント情報
 	 * @param mainlInfo
 	 *     メール情報
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	private void update(Account account, MailInfo mailInfo) throws BaseAppException {
+	private void update(Account account, MailInfo mailInfo) throws BaseException {
 
 		// アカウント情報を更新する
 		accountUpdateService.update(account);

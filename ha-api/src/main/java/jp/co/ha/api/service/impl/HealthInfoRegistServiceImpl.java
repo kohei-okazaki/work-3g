@@ -18,7 +18,7 @@ import jp.co.ha.business.type.HealthStatus;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
@@ -53,7 +53,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void checkRequest(HealthInfoRegistRequest request) throws BaseAppException {
+	public void checkRequest(HealthInfoRegistRequest request) throws BaseException {
 
 		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
 				|| StringUtil.isEmpty(request.getUserId())
@@ -83,7 +83,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseAppException {
+	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
 
 		// リクエストをEntityにつめる
 		HealthInfo healthInfo = toEntity(request);
@@ -101,7 +101,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseAppException {
+	public HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException {
 
 		String userId = request.getUserId();
 		BigDecimal height = request.getHeight();
@@ -137,7 +137,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse toResponse(HealthInfo healthInfo) throws BaseAppException {
+	public HealthInfoRegistResponse toResponse(HealthInfo healthInfo) throws BaseException {
 
 		HealthInfoRegistResponse response = new HealthInfoRegistResponse();
 		BeanUtil.copy(healthInfo, response);

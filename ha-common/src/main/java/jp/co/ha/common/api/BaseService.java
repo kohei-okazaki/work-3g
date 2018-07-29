@@ -1,6 +1,6 @@
 package jp.co.ha.common.api;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * API基底サービス<br>
@@ -18,10 +18,10 @@ public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 	 *
 	 * @param Rq
 	 *     Request実装クラス
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     例外クラス
 	 */
-	void checkRequest(Rq request) throws BaseAppException;
+	void checkRequest(Rq request) throws BaseException;
 
 	/**
 	 * メイン処理<br>
@@ -30,9 +30,9 @@ public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 	 * @param Rq
 	 *     Request実装クラス
 	 * @return Rs Response実装クラス
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     例外クラス
 	 */
-	Rs execute(Rq request) throws BaseAppException;
+	Rs execute(Rq request) throws BaseException;
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.create.MailInfoCreateService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * メール情報作成サービスインターフェース実装クラス<br>
@@ -23,7 +23,7 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(MailInfo entity) throws BaseAppException {
+	public void create(MailInfo entity) throws BaseException {
 		mailInfoDao.create(entity);
 	}
 

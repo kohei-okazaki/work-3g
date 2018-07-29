@@ -1,6 +1,6 @@
 package jp.co.ha.common.api;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 
 /**
@@ -20,7 +20,7 @@ public class ErrorResponse extends BaseResponse {
 	 * @param e
 	 *     BaseAppException 例外
 	 */
-	public ErrorResponse(BaseAppException e) {
+	public ErrorResponse(BaseException e) {
 		super.setResultType(ResultType.FAILURE);
 		this.errorCode = e.getErrorCode();
 		this.detail = e.getDetail();

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * ウィザード型式の基底コントローラ<br>
@@ -34,10 +34,10 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 * @param request
 	 *     HttpServletRequest
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     例外クラス
 	 */
-	String input(Model model, HttpServletRequest request) throws BaseAppException;
+	String input(Model model, HttpServletRequest request) throws BaseException;
 
 	/**
 	 * 確認画面
@@ -49,10 +49,10 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 * @param result
 	 *     BindingResult
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     例外クラス
 	 */
-	String confirm(Model model, @Valid F form, BindingResult result) throws BaseAppException;
+	String confirm(Model model, @Valid F form, BindingResult result) throws BaseException;
 
 	/**
 	 * 完了画面
@@ -64,9 +64,9 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 * @param request
 	 *     HttpServletRequest
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     例外クラス
 	 */
-	String complete(Model model, F form, HttpServletRequest request) throws BaseAppException;
+	String complete(Model model, F form, HttpServletRequest request) throws BaseException;
 
 }

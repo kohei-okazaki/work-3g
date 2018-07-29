@@ -12,9 +12,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.exception.RestApiException;
+import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
 
@@ -39,11 +39,11 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param response
 	 *     HttpServletResponse
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	@GetMapping
-	default Rs doGet(HttpServletRequest request, HttpServletResponse response) throws BaseAppException {
+	default Rs doGet(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		Rq apiRequest = toRequest(request);
@@ -61,11 +61,11 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param apiRequest
 	 *     Rq
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	@PostMapping
-	default Rs doPost(@RequestBody Rq apiRequest) throws BaseAppException {
+	default Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		Rs apiResponse = null;
@@ -83,10 +83,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param request
 	 *     リクエストクラス
 	 * @return response レスポンスクラス
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     例外クラス
 	 */
-	Rs execute(Rq request) throws BaseAppException;
+	Rs execute(Rq request) throws BaseException;
 
 	/**
 	 * Requestクラスに変換する<br>
@@ -94,10 +94,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @param request
 	 *     HttpServletRequest
 	 * @return apiRequest Rq
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     例外クラス
 	 */
-	Rq toRequest(HttpServletRequest request) throws BaseAppException;
+	Rq toRequest(HttpServletRequest request) throws BaseException;
 
 	/**
 	 * JSONで例外が起きた場合のエラーハンドリング<br>
@@ -112,10 +112,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		Rs apiResponse = null;
 		if (e instanceof InvalidFormatException) {
 			InvalidFormatException jfe = (InvalidFormatException) e;
-			apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです"));
+			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです"));
 		} else if (e instanceof JsonParseException) {
 			e = e;
-			apiResponse = (Rs) new ErrorResponse(new RestApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
+			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
 		}
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		log.error(apiResponse);
@@ -129,8 +129,8 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 *     アプリエラー
 	 * @return
 	 */
-	@ExceptionHandler(BaseAppException.class)
-	public default Rs appExceptionHandle(BaseAppException e) {
+	@ExceptionHandler(BaseException.class)
+	public default Rs appExceptionHandle(BaseException e) {
 
 		Rs apiResponse = (Rs) new ErrorResponse(e);
 

@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * 日付のUtilクラス<br>
@@ -34,7 +34,7 @@ public class DateUtil {
 	 * @param target
 	 *     対象日付
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	public static Date toDate(String target) {
@@ -49,7 +49,7 @@ public class DateUtil {
 	 * @param format
 	 *     フォーマット
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	public static Date toDate(String target, DateFormatPattern format) {
@@ -140,7 +140,7 @@ public class DateUtil {
 	 * @param targetDate
 	 *     対象日付
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	public static Date toStartDate(Date targetDate) {

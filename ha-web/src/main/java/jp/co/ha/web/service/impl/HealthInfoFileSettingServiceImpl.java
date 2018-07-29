@@ -7,7 +7,7 @@ import jp.co.ha.business.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.form.HealthInfoFileSettingForm;
 import jp.co.ha.web.service.HealthInfoFileSettingService;
@@ -33,7 +33,7 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(HealthInfoFileSettingForm form) throws BaseAppException {
+	public void execute(HealthInfoFileSettingForm form) throws BaseException {
 		HealthInfoFileSetting befEntity = searchService.findByUserId(form.getUserId());
 		HealthInfoFileSetting entity = toEntity(form);
 		if (BeanUtil.isNull(befEntity)) {

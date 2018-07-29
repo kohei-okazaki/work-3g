@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * 予期せぬ例外
  *
  */
-public class UnExpectedException extends BaseAppException {
+public class UnExpectedException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;

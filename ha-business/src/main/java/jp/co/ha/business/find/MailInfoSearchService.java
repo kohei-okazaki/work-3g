@@ -1,7 +1,7 @@
 package jp.co.ha.business.find;
 
 import jp.co.ha.common.entity.MailInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 
 /**
  * メール情報検索サービスインターフェース<br>
@@ -15,8 +15,8 @@ public interface MailInfoSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return メール情報
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	MailInfo findByUserId(String userId) throws BaseAppException;
+	MailInfo findByUserId(String userId) throws BaseException;
 
 }

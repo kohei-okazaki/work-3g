@@ -26,7 +26,7 @@ import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.CsvConfig;
@@ -117,12 +117,12 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @param result
 	 *     BindingResult
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	@PostMapping(value = "/reference.html")
 	public String reference(HttpServletRequest request, Model model
-			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseAppException {
+			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
@@ -154,11 +154,11 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @param request
 	 *     HttpServletRequest
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	@GetMapping(value = "/excelDownload.html")
-	public ModelAndView excelDownload(HttpServletRequest request) throws BaseAppException {
+	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class);
 		if (BeanUtil.isNull(resultList) || resultList.isEmpty()) {
@@ -177,11 +177,11 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     HttpServletRequest
 	 * @param response
 	 *     HttpServletResponse
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 *     アプリ例外
 	 */
 	@GetMapping(value = "/csvDownload.html")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseAppException {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
 		// sessionから検索結果リストとユーザIDを取得
 		HttpSession session = request.getSession();

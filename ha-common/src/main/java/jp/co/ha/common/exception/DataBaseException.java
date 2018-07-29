@@ -4,7 +4,7 @@ package jp.co.ha.common.exception;
  * DBアクセスの例外クラス<br>
  *
  */
-public class DataBaseException extends BaseAppException {
+public class DataBaseException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.DataBaseException;
 
 /**
@@ -20,9 +20,9 @@ public interface HealthInfoSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return List<HealthInfoDto>
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	List<HealthInfo> findByUserId(String userId) throws BaseAppException;
+	List<HealthInfo> findByUserId(String userId) throws BaseException;
 
 	/**
 	 * 指定されたデータIDからと一致する健康情報を返却する<br>
@@ -30,9 +30,9 @@ public interface HealthInfoSearchService {
 	 * @param dataId
 	 *     データID
 	 * @return 健康情報Entity
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	HealthInfo findByHealthInfoId(BigDecimal healthInfoId) throws BaseAppException;
+	HealthInfo findByHealthInfoId(BigDecimal healthInfoId) throws BaseException;
 
 	/**
 	 * 指定したユーザIDで最後に登録した健康情報を返す<br>
@@ -40,9 +40,9 @@ public interface HealthInfoSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return HealthInfo
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	HealthInfo findLastByUserId(String userId) throws BaseAppException;
+	HealthInfo findLastByUserId(String userId) throws BaseException;
 
 	/**
 	 * 指定されたユーザIDと登録日時の健康情報を返す<br>
@@ -52,9 +52,9 @@ public interface HealthInfoSearchService {
 	 * @param regDate
 	 *     YYYYMMDD
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseAppException;
+	List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseException;
 
 	/**
 	 * 指定されたユーザIDと指定された登録日時の期間内の健康情報を返す<br>

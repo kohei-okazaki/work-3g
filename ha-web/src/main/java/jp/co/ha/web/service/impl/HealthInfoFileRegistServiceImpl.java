@@ -12,7 +12,7 @@ import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
@@ -42,9 +42,9 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * @param userId
 	 *     ユーザID
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException {
+	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		Account account = accountSearchService.findByUserId(userId);
 		List<HealthInfoRegistRequest> requestList = new ArrayList<HealthInfoRegistRequest>();
 		for (HealthInfoCsvUploadModel csvModel : modelList) {
@@ -80,7 +80,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseAppException {
+	public void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		List<HealthInfoRegistRequest> reqList = toRequestList(modelList, userId);
 		for (HealthInfoRegistRequest apiRequest : reqList) {
 			healthInfoRegistService.checkRequest(apiRequest);

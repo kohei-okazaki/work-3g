@@ -1,6 +1,6 @@
 package jp.co.ha.web.service;
 
-import jp.co.ha.common.exception.BaseAppException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.form.LoginForm;
 
 /**
@@ -15,9 +15,9 @@ public interface LoginService {
 	 * @param loginForm
 	 *     ログインフォーム
 	 * @return 判定結果
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	boolean invalidPassword(LoginForm loginForm) throws BaseAppException;
+	boolean invalidPassword(LoginForm loginForm) throws BaseException;
 
 	/**
 	 * アカウント情報が存在するかチェック<br>
@@ -26,9 +26,9 @@ public interface LoginService {
 	 * @param loginForm
 	 *     ログインフォーム
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	boolean noExistAccount(LoginForm loginForm) throws BaseAppException;
+	boolean noExistAccount(LoginForm loginForm) throws BaseException;
 
 	/**
 	 * アカウント情報が有効かどうかチェック<br>
@@ -37,8 +37,8 @@ public interface LoginService {
 	 * @param loginForm
 	 *     ログインフォーム
 	 * @return
-	 * @throws BaseAppException
+	 * @throws BaseException
 	 */
-	boolean invalidAccount(LoginForm loginForm) throws BaseAppException;
+	boolean invalidAccount(LoginForm loginForm) throws BaseException;
 
 }
