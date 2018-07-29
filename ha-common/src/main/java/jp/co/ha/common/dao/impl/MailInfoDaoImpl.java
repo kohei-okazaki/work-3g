@@ -18,7 +18,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 
-	private AppLogger logger = LoggerFactory.getAppLogger(this.getClass());
+	private AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -55,8 +55,7 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 	@Override
 	public void update(MailInfo mailInfo) throws DataBaseException {
 
-		logger.info(mailInfo);
-
+		APP_LOGGER.info(mailInfo);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "
@@ -77,8 +76,7 @@ public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
 	@Override
 	public void create(MailInfo mailInfo) throws DataBaseException {
 
-		logger.info(mailInfo);
-
+		APP_LOGGER.info(mailInfo);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME +" VALUES ("

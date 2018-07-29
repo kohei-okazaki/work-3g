@@ -21,7 +21,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 
-	private AppLogger logger = LoggerFactory.getAppLogger(this.getClass());
+	private AppLogger APP_LOGGER= LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -92,7 +92,7 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 	 */
 	@Override
 	public void create(HealthInfo healthInfo) throws DataBaseException {
-		logger.info(healthInfo);
+		APP_LOGGER.info(healthInfo);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + "("
@@ -117,7 +117,6 @@ public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
 		} finally {
 			close();
 		}
-		logger.info(healthInfo);
 	}
 
 }

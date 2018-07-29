@@ -18,7 +18,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 
-	private final AppLogger LOGGER = LoggerFactory.getAppLogger(this.getClass());
+	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -56,7 +56,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void create(Account account) throws DataBaseException  {
-		LOGGER.info(account);
+		APP_LOGGER.info(account);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
@@ -82,7 +82,7 @@ public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
 	 */
 	@Override
 	public void update(Account account) throws DataBaseException {
-		LOGGER.info(account);
+		APP_LOGGER.info(account);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "

@@ -18,7 +18,7 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthInfoFileSettingDao {
 
-	private final AppLogger LOGGER = LoggerFactory.getAppLogger(this.getClass());
+	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -54,7 +54,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 	 */
 	@Override
 	public void create(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException {
-		LOGGER.info(healthInfoFileSetting);
+		APP_LOGGER.info(healthInfoFileSetting);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
@@ -78,7 +78,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDaoImpl implements HealthI
 	 */
 	@Override
 	public void update(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException {
-		LOGGER.info(healthInfoFileSetting);
+		APP_LOGGER.info(healthInfoFileSetting);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "

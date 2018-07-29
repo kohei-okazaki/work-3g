@@ -13,7 +13,9 @@ public enum RegixPattern {
 	/** 半角数字とピリオド */
 	HALF_NUMBER_PERIOD("^[0-9.]*$"),
 	/** 半角英数字 */
-	HALF_CHAR("^[0-9a-zA-Z]*$");
+	HALF_CHAR("^[0-9a-zA-Z]*$"),
+	/** URL */
+	URL("http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?");
 
 	/** 正規表現 */
 	private String pattern;

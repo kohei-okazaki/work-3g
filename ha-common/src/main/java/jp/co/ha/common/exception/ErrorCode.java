@@ -41,6 +41,12 @@ public enum ErrorCode {
 	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません"),
 	/** DBアクセスエラー */
 	DB_ACCESS_ERROR("DB_ACCESS_ERROR", "ERROR", "DBアクセスに失敗しました"),
+	/** SQLの実行に失敗エラー */
+	DB_SQL_EXE_ERROR("DB_SQL_EXE_ERROR", "ERROR", "SQLの実行に失敗しました"),
+	/** SQL指定なしエラー */
+	DB_SQL_SELECT_ERROR("DB_SQL_SELECT_ERROR", "ERROR", "SQLが指定されていません"),
+	/** DB切断エラー */
+	DB_CLOSE_ERROR("DB_CLOSE_ERROR", "ERROR", "DB切時にエラー"),
 
 	/** ファイルアップロード例外 */
 	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "WARN", "ファイルアップロード例外"),
