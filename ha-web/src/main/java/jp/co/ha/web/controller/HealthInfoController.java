@@ -172,8 +172,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @param form
 	 *     HealthInfoForm
 	 * @return
-	 * @throws HealthInfoException
-	 *     健康情報例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseException {
@@ -201,8 +201,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *     HttpServletResponse
 	 * @param form
 	 *     健康情報フォーム
-	 * @throws HealthInfoException
-	 *     健康情報例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	@GetMapping(value = "/csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {

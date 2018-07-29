@@ -22,11 +22,11 @@ public enum ErrorCode {
 	/** アカウント不整合エラー */
 	ACCOUNT_DELETE("ACCOUNT_DELETE", "WARN", "アカウントが削除済です"),
 	/** ファイル処理エラー */
-	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "ERROR", "ファイルの処理に失敗しました"),
+	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "WARN", "ファイルの処理に失敗しました"),
 	/** リクエスト情報エラー */
-	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "ERROR", "不正リクエストエラーです"),
+	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "WARN", "不正リクエストエラーです"),
 	/** リクエストID相違エラー */
-	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "ERROR", "リクエストIDが一致しません"),
+	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "WARN", "リクエストIDが一致しません"),
 	/** 不正リクエストエラー */
 	ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "WARN", "不正リクエストエラーです"),
 	/** API実行不可エラー */
@@ -38,7 +38,7 @@ public enum ErrorCode {
 	/** DB暗号化・複合化エラー */
 	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "ERROR", "暗号化・複合化エラー"),
 	/** 該当データ存在しないエラー */
-	DB_NO_DATA("DB_NO_DATA", "ERROR", "該当のレコードが存在しません"),
+	DB_NO_DATA("DB_NO_DATA", "WARN", "該当のレコードが存在しません"),
 	/** DBアクセスエラー */
 	DB_ACCESS_ERROR("DB_ACCESS_ERROR", "ERROR", "DBアクセスに失敗しました"),
 	/** SQLの実行に失敗エラー */
@@ -66,8 +66,9 @@ public enum ErrorCode {
 	/** 予期せぬ例外 */
 	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "ERROR", "予期せぬ例外");
 
-	/** エラーコード */
+	/** 外部用エラーコード */
 	private String errorCode;
+	/** 内部用エラーコード */
 	/** ログレベル */
 	private String logLevel;
 	/** エラーメッセージ */
