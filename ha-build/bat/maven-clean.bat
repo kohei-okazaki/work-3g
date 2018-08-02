@@ -1,9 +1,10 @@
 @echo off
 
-cd %commonDir%
+rem targetディレクトリをクリーン
+cd %baseDir%\ha-common\target
 call mvn clean
 
-cd %businessDir%
+cd %baseDir%\ha-business\target
 call mvn clean
 
 cd %~dp0
