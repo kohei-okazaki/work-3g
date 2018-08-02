@@ -17,18 +17,24 @@ set befBusinessDir=%baseDir%\ha-business\src\main\webapp\WEB-INF
 set befApiDir=%baseDir%\ha-api\src\main\webapp\WEB-INF
 set befWebDir=%baseDir%\ha-web\src\main\webapp\WEB-INF
 
+
 rem libディレクトリ 存在確認
 cd %befBusinessDir%
+echo %businessLibDir% check
 if not exist "lib\" (
 	mkdir lib
 	echo mkdir %businessLibDir%
 )
+
 cd %befApiDir%
+echo %apiLibDir% check
 if not exist "lib\" (
 	mkdir lib
 	echo mkdir %apiLibDir%
 )
+
 cd %befWebDir%
+echo %webLibDir% check
 if not exist "lib\" (
 	mkdir lib
 	echo mkdir %webLibDir%
