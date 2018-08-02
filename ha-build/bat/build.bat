@@ -1,5 +1,8 @@
 @echo off
+
+rem iniファイルを読み込む
 call initialize.bat
+
 
 rem jarが置かれてるフォルダ
 set commonTargetDir=%baseDir%\ha-common\target
