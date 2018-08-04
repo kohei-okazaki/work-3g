@@ -14,7 +14,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理画面例外ハンドラークラス<br>
+ * 画面例外ハンドラー<br>
  *
  */
 public class WebExceptionHandler implements BaseExceptionHandler {
@@ -29,7 +29,6 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName(ManageWebView.ERROR.getName());
-		e.printStackTrace();
 		if (e instanceof MultipartException) {
 			return modelView;
 		}
@@ -44,14 +43,14 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 	@Override
 	public String buildErrorMessage(Exception e) {
 		String detail;
-		ErrorCode errorCode;
+		String errorCode;
 		if (e instanceof BaseException) {
 			detail = ((BaseException) e).getDetail();
-			errorCode = ((BaseException) e).getErrorCode();
+			errorCode = ((BaseException) e).getErrorCode().getOuterErrorCode();
 		} else {
 			// 予期せぬ例外にする
-			errorCode = ErrorCode.UNEXPECTED_ERROR;
 			detail = ErrorCode.UNEXPECTED_ERROR.getErrorMessage();
+			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		return detail + "(" + errorCode + ")";
 	}

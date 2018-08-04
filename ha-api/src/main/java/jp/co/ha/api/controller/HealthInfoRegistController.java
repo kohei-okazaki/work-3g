@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.common.api.BaseRestController;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
 
 /**

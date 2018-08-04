@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.find.AccountSearchService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.RegixPattern;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
