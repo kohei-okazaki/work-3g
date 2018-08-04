@@ -1,7 +1,6 @@
 package jp.co.ha.common.api;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
 
 /**
  * エラーレスポンスクラス<br>
@@ -9,8 +8,8 @@ import jp.co.ha.common.exception.ErrorCode;
  */
 public class ErrorResponse extends BaseResponse {
 
-	/** エラーコード */
-	private ErrorCode errorCode;
+	/** 外部エラーコード */
+	private String outerErrorCode;
 	/** 詳細 */
 	private String detail;
 
@@ -22,27 +21,27 @@ public class ErrorResponse extends BaseResponse {
 	 */
 	public ErrorResponse(BaseException e) {
 		super.setResultType(ResultType.FAILURE);
-		this.errorCode = e.getErrorCode();
+		this.outerErrorCode = e.getErrorCode().getOuterErrorCode();
 		this.detail = e.getDetail();
 	}
 
 	/**
-	 * errorCodeを返す
+	 * outerErrorCodeを返す<br>
 	 *
-	 * @return errorCode
+	 * @return outerErrorCode
 	 */
-	public ErrorCode getErrorCode() {
-		return errorCode;
+	public String getOuterErrorCode() {
+		return outerErrorCode;
 	}
 
 	/**
-	 * errorCodeを設定する<br>
+	 * outerErrorCodeを設定する<br>
 	 *
-	 * @param errorCode
-	 *     ErrorCode
+	 * @param outerErrorCode
+	 *     外部エラーコード
 	 */
-	public void setErrorCode(ErrorCode errorCode) {
-		this.errorCode = errorCode;
+	public void setOuterErrorCode(String outerErrorCode) {
+		this.outerErrorCode = outerErrorCode;
 	}
 
 	/**
@@ -58,6 +57,7 @@ public class ErrorResponse extends BaseResponse {
 	 * detailを設定する<br>
 	 *
 	 * @param detail
+	 *     詳細
 	 */
 	public void setDetail(String detail) {
 		this.detail = detail;
