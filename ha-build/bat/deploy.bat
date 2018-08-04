@@ -1,7 +1,9 @@
 @echo off
 
 rem iniファイルを読み込む
+echo start initialize
 call initialize.bat
+echo end initialize
 
 rem jarが置かれてるフォルダ
 set commonTargetDir=%baseDir%\ha-common\target
@@ -17,7 +19,7 @@ set befBusinessDir=%baseDir%\ha-business\src\main\webapp\WEB-INF
 set befApiDir=%baseDir%\ha-api\src\main\webapp\WEB-INF
 set befWebDir=%baseDir%\ha-web\src\main\webapp\WEB-INF
 
-
+echo start echck lib dir
 rem libディレクトリ 存在確認
 cd %befBusinessDir%
 echo %businessLibDir% check
@@ -39,7 +41,10 @@ if not exist "lib\" (
 	mkdir lib
 	echo mkdir %webLibDir%
 )
+echo end echck lib dir
 
+
+echo start deploy
 rem common.jarを配置
 cd %commonTargetDir%
 copy *.jar %businessLibDir%
@@ -51,5 +56,6 @@ cd %businessTargetDir%
 copy *.jar %apiLibDir%
 copy *.jar %webLibDir%
 
+echo end deploy
 
 cd %~dp0
