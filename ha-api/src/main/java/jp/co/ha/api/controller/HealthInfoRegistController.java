@@ -19,7 +19,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
- * 健康情報登録コントローラクラス<br>
+ * 健康情報登録コントローラ<br>
  *
  */
 @RestController

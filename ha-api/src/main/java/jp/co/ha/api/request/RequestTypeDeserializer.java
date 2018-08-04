@@ -21,7 +21,7 @@ public class RequestTypeDeserializer extends JsonDeserializer<RequestType> {
 	@Override
 	public RequestType deserialize(JsonParser parser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
-		final String reqType = parser.getValueAsString("requestType");
+		String reqType = parser.getValueAsString("requestType");
 		return RequestType.of(reqType);
 	}
 
