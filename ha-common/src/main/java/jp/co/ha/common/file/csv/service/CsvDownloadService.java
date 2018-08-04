@@ -6,8 +6,8 @@ import java.util.List;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.file.csv.CsvConfig;
+import jp.co.ha.common.file.csv.CsvFileChar;
 import jp.co.ha.common.file.csv.model.BaseCsvModel;
-import jp.co.ha.common.file.csv.writer.CsvWriter;
 import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
 
@@ -48,7 +48,7 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 		csvConfig.setFileName(fileName);
 		csvConfig.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
 		csvConfig.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
-		csvConfig.setEnclosureChar(CsvWriter.DOBBLE_QUOTE);
+		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(healthInfoFileSetting.getEnclosureCharFlag()));
 		csvConfig.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
 		csvConfig.setCharset(Charset.UTF_8);

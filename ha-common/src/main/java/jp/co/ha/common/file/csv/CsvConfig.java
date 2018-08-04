@@ -16,7 +16,7 @@ public class CsvConfig {
 	/** 囲い文字有無 */
 	private boolean hasEnclosure;
 	/** 囲い文字 */
-	private String enclosureChar;
+	private CsvFileChar csvFileChar;
 	/** 文字コード */
 	private Charset charset;
 	/** フッタ有無 */
@@ -82,22 +82,22 @@ public class CsvConfig {
 	}
 
 	/**
-	 * enclosureCharを返す<br>
+	 * csvFileCharを返す<br>
 	 *
-	 * @return enclosureChar 囲い文字
+	 * @return csvFileChar CSVファイル囲い文字列挙
 	 */
-	public String getEnclosureChar() {
-		return enclosureChar;
+	public CsvFileChar getCsvFileChar() {
+		return csvFileChar;
 	}
 
 	/**
-	 * enclosureCharを設定する<br>
+	 * csvFileCharを設定する<br>
 	 *
-	 * @param enclosureChar
-	 *     囲い文字
+	 * @param csvFileChar
+	 *     CSVファイル囲い文字列挙
 	 */
-	public void setEnclosureChar(String enclosureChar) {
-		this.enclosureChar = enclosureChar;
+	public void setCsvFileChar(CsvFileChar csvFileChar) {
+		this.csvFileChar = csvFileChar;
 	}
 
 	/**

@@ -186,14 +186,12 @@ public class DateUtil {
 	public static boolean isAfter(Date target) {
 		// システム日付
 		Date sysDate = getSysDate();
-		boolean b = sysDate.before(target);
 		return sysDate.after(target);
 	}
 
 	public static boolean isBefore(Date target) {
 		// システム日付
 		Date sysDate = getSysDate();
-		boolean b = sysDate.after(target);
 		return sysDate.after(target);
 	}
 }

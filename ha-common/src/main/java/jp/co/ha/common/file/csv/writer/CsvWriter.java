@@ -20,11 +20,6 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 
-	/** シングルクォート */
-	public static final String SINGLE_QUOTE = "\'";
-	/** ダブルクォート */
-	public static final String DOBBLE_QUOTE = "\"";
-
 	/** CSV設定情報 */
 	protected CsvConfig conf;
 	/** 出力用PrintWriter */
@@ -92,7 +87,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 *     書き込みたいデータ
 	 */
 	protected void write(StringJoiner joiner, String data) {
-		String enclosureChar = conf.hasEnclosure() ? conf.getEnclosureChar() : StringUtil.EMPTY;
+		String enclosureChar = conf.hasEnclosure() ? conf.getCsvFileChar().getValue() : StringUtil.EMPTY;
 		joiner.add(enclosureChar + data + enclosureChar);
 	}
 
