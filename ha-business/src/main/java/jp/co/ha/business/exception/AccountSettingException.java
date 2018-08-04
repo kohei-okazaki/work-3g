@@ -1,4 +1,7 @@
-package jp.co.ha.common.exception;
+package jp.co.ha.business.exception;
+
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.ErrorCode;
 
 /**
  * アカウント設定例外クラス<br>

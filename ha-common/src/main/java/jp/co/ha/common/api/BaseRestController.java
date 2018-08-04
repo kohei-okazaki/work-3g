@@ -12,9 +12,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
 
@@ -114,7 +114,6 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 			InvalidFormatException jfe = (InvalidFormatException) e;
 			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです"));
 		} else if (e instanceof JsonParseException) {
-			e = e;
 			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
 		}
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());

@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.exception.HealthInfoException;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
