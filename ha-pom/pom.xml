@@ -220,9 +220,10 @@
 
 	<build>
 		<plugins>
-<!-- 			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>3.5.3</version>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.10</version>
 				<configuration>
 					<additionalProjectnatures>
 						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
@@ -233,7 +234,7 @@
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
-			</plugin> -->
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -246,14 +247,14 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-<!-- 			<plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
-			</plugin> -->
+			</plugin>
 		</plugins>
 	</build>
 </project>
