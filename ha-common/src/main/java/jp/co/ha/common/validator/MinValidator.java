@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.validate.annotation.Min;
+import jp.co.ha.common.validator.annotation.Min;
 
 /**
  * 最小桁数チェックvalidator<br>

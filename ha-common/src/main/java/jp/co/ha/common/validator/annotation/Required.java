@@ -1,4 +1,4 @@
-package jp.co.ha.common.validate.annotation;
+package jp.co.ha.common.validator.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,19 +10,19 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validator.FlagValidator;
+import jp.co.ha.common.validator.RequiredValidator;
 
 /**
- * フラグチェックアノテーション<br>
- * @see jp.co.ha.common.validator.FlagValidator
+ * 必須チェックアノテーション<br>
+ * @see jp.co.ha.common.validator.RequiredValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = FlagValidator.class)
-public @interface Flag {
+@Constraint(validatedBy = RequiredValidator.class)
+public @interface Required {
 
     String message() default "";
 

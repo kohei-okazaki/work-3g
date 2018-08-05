@@ -1,4 +1,4 @@
-package jp.co.ha.common.validate.annotation;
+package jp.co.ha.common.validator.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,22 +10,19 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.util.RegixPattern;
-import jp.co.ha.common.validator.PatternValidator;
+import jp.co.ha.common.validator.UrlValidator;
 
 /**
- * 型チェックvalidator<br>
- * @see jp.co.ha.common.validator.PatternValidator
+ * URLチェックアノテーション<br>
+ * @see jp.co.ha.common.validator.UrlValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = PatternValidator.class)
-public @interface Pattern {
-
-	RegixPattern regixPattern();
+@Constraint(validatedBy = UrlValidator.class)
+public @interface Url {
 
     String message() default "";
 

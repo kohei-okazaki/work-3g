@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.validate.annotation.MailAddress;
+import jp.co.ha.common.validator.annotation.MailAddress;
 
 /**
  * メールアドレス形式チェックvalidator<br>

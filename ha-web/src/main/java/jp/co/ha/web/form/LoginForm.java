@@ -3,10 +3,10 @@ package jp.co.ha.web.form;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.util.RegixPattern;
-import jp.co.ha.common.validate.annotation.Max;
-import jp.co.ha.common.validate.annotation.Min;
-import jp.co.ha.common.validate.annotation.Pattern;
-import jp.co.ha.common.validate.annotation.Required;
+import jp.co.ha.common.validator.annotation.Max;
+import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.Pattern;
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
 /**

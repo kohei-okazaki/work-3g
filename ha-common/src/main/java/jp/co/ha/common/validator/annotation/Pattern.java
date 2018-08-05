@@ -1,4 +1,4 @@
-package jp.co.ha.common.validate.annotation;
+package jp.co.ha.common.validator.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,21 +10,22 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validator.MinValidator;
+import jp.co.ha.common.util.RegixPattern;
+import jp.co.ha.common.validator.PatternValidator;
 
 /**
- * 最小桁数チェックアノテーション<br>
- * @see jp.co.ha.common.validator.MinValidator
+ * 型チェックvalidator<br>
+ * @see jp.co.ha.common.validator.PatternValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = MinValidator.class)
-public @interface Min {
+@Constraint(validatedBy = PatternValidator.class)
+public @interface Pattern {
 
-	int size();
+	RegixPattern regixPattern();
 
     String message() default "";
 

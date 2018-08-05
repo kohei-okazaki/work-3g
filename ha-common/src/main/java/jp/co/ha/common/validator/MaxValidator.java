@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.validate.annotation.Max;
+import jp.co.ha.common.validator.annotation.Max;
 
 /**
  * 最大桁数チェックvalidator<br>

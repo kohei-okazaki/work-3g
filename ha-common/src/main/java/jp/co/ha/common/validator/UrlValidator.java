@@ -5,7 +5,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.RegixPattern;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.validate.annotation.Url;
+import jp.co.ha.common.validator.annotation.Url;
 
 /**
  * URLチェックvalidator<br>
