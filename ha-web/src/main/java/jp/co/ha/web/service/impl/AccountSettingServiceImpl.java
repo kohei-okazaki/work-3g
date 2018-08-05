@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.create.MailInfoCreateService;
-import jp.co.ha.business.find.AccountSearchService;
-import jp.co.ha.business.find.MailInfoSearchService;
-import jp.co.ha.business.update.AccountUpdateService;
-import jp.co.ha.business.update.MailInfoUpdateService;
+import jp.co.ha.business.db.create.MailInfoCreateService;
+import jp.co.ha.business.db.find.AccountSearchService;
+import jp.co.ha.business.db.find.MailInfoSearchService;
+import jp.co.ha.business.db.update.AccountUpdateService;
+import jp.co.ha.business.db.update.MailInfoUpdateService;
 import jp.co.ha.common.entity.Account;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.BaseException;

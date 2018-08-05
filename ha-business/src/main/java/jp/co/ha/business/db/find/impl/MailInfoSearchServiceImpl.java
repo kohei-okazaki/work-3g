@@ -1,9 +1,9 @@
-package jp.co.ha.business.find.impl;
+package jp.co.ha.business.db.find.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.find.MailInfoSearchService;
+import jp.co.ha.business.db.find.MailInfoSearchService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.BaseException;

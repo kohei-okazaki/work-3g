@@ -1,9 +1,9 @@
-package jp.co.ha.business.update.impl;
+package jp.co.ha.business.db.update.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.update.MailInfoUpdateService;
+import jp.co.ha.business.db.update.MailInfoUpdateService;
 import jp.co.ha.common.dao.MailInfoDao;
 import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.DataBaseException;

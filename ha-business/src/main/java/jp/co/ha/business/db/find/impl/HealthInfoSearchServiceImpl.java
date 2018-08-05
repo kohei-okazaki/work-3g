@@ -1,4 +1,4 @@
-package jp.co.ha.business.find.impl;
+package jp.co.ha.business.db.find.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.common.dao.HealthInfoDao;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.BaseException;

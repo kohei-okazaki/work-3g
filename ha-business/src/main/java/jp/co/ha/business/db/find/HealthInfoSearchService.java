@@ -1,4 +1,4 @@
-package jp.co.ha.business.find;
+package jp.co.ha.business.db.find;
 
 import java.math.BigDecimal;
 import java.util.Date;

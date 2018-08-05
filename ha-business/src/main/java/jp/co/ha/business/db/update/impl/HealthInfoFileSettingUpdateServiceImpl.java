@@ -1,8 +1,8 @@
-package jp.co.ha.business.update.impl;
+package jp.co.ha.business.db.update.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jp.co.ha.business.update.HealthInfoFileSettingUpdateService;
+import jp.co.ha.business.db.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.common.dao.HealthInfoFileSettingDao;
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.DataBaseException;

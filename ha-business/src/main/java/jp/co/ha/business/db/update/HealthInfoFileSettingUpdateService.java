@@ -1,4 +1,4 @@
-package jp.co.ha.business.update;
+package jp.co.ha.business.db.update;
 
 import jp.co.ha.common.entity.HealthInfoFileSetting;
 
