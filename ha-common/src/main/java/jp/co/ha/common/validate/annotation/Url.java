@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.UrlValidator;
+import jp.co.ha.common.validator.UrlValidator;
 
 /**
  * URLチェックアノテーション<br>
- * @see jp.co.ha.common.validate.UrlValidator
+ * @see jp.co.ha.common.validator.UrlValidator
  *
  */
 @Inherited

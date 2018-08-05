@@ -11,7 +11,7 @@ import javax.validation.Payload;
 
 /**
  * メールアドレス形式チェックアノテーション<br>
- * @see jp.co.ha.common.validate.MailAddressValidator
+ * @see jp.co.ha.common.validator.MailAddressValidator
  *
  */
 @Inherited

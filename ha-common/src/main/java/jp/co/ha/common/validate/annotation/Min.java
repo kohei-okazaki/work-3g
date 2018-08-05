@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.MinValidator;
+import jp.co.ha.common.validator.MinValidator;
 
 /**
  * 最小桁数チェックアノテーション<br>
- * @see jp.co.ha.common.validate.MinValidator
+ * @see jp.co.ha.common.validator.MinValidator
  *
  */
 @Inherited

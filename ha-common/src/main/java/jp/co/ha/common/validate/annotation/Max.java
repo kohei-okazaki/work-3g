@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.MaxValidator;
+import jp.co.ha.common.validator.MaxValidator;
 
 /**
  * 最大桁数チェックアノテーション<br>
- * @see jp.co.ha.common.validate.MaxValidator
+ * @see jp.co.ha.common.validator.MaxValidator
  *
  */
 @Inherited

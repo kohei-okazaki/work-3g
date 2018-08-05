@@ -11,11 +11,11 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 import jp.co.ha.common.util.RegixPattern;
-import jp.co.ha.common.validate.PatternValidator;
+import jp.co.ha.common.validator.PatternValidator;
 
 /**
  * 型チェックvalidator<br>
- * @see jp.co.ha.common.validate.PatternValidator
+ * @see jp.co.ha.common.validator.PatternValidator
  *
  */
 @Inherited

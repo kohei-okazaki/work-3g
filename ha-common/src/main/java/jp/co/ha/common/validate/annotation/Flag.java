@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.FlagValidator;
+import jp.co.ha.common.validator.FlagValidator;
 
 /**
  * フラグチェックアノテーション<br>
- * @see jp.co.ha.common.validate.FlagValidator
+ * @see jp.co.ha.common.validator.FlagValidator
  *
  */
 @Inherited

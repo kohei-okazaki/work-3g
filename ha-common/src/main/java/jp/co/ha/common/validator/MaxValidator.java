@@ -1,16 +1,16 @@
-package jp.co.ha.common.validate;
+package jp.co.ha.common.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.validate.annotation.Min;
+import jp.co.ha.common.validate.annotation.Max;
 
 /**
- * 最小桁数チェックvalidator<br>
+ * 最大桁数チェックvalidator<br>
  *
  */
-public class MinValidator implements ConstraintValidator<Min, String> {
+public class MaxValidator implements ConstraintValidator<Max, String> {
 
 	private int size;
 
@@ -18,7 +18,7 @@ public class MinValidator implements ConstraintValidator<Min, String> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initialize(Min annotation) {
+	public void initialize(Max annotation) {
 		this.size = annotation.size();
 	}
 
@@ -27,10 +27,10 @@ public class MinValidator implements ConstraintValidator<Min, String> {
 	 */
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isEmpty(value)) {
-			return true;
-		}
-		return this.size < value.length();
+		 if (StringUtil.isEmpty(value)) {
+		 	return true;
+		 }
+		 return value.length() < this.size;
 	}
 
 }

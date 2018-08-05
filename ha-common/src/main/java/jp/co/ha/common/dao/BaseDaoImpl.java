@@ -109,16 +109,16 @@ public abstract class BaseDaoImpl {
 	 */
 	protected void close() throws DataBaseException {
 		try {
-			if (BeanUtil.notNull(stm)) {
-				stm.close();
+			if (BeanUtil.notNull(this.stm)) {
+				this.stm.close();
 				LOGGER.debug("Statementをクローズします");
 			}
-			if (BeanUtil.notNull(rs)) {
-				rs.close();
+			if (BeanUtil.notNull(this.rs)) {
+				this.rs.close();
 				LOGGER.debug("resultsetをクローズします");
 			}
-			if (BeanUtil.notNull(con)) {
-				con.close();
+			if (BeanUtil.notNull(this.con)) {
+				this.con.close();
 				LOGGER.debug("DB切断します");
 			}
 		} catch (SQLException e) {

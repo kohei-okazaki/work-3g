@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.RequiredValidator;
+import jp.co.ha.common.validator.RequiredValidator;
 
 /**
  * 必須チェックアノテーション<br>
- * @see jp.co.ha.common.validate.RequiredValidator
+ * @see jp.co.ha.common.validator.RequiredValidator
  *
  */
 @Inherited
