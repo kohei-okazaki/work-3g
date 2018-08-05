@@ -11,6 +11,7 @@
 	<version>1.0</version>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>10</java-version>
 		<org.springframework-version>5.0.8.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.1</org.aspectj-version>
