@@ -16,7 +16,7 @@
 	<context:component-scan base-package="jp.co.ha.api.service.impl" />
 	<context:component-scan base-package="jp.co.ha.api.config" />
 
-	<context:property-placeholder location="/WEB-INF/jdbc.properties" />
+	<context:property-placeholder location="classpath:META-INF/jdbc.properties" />
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<beans:property name="driverClassName" value="${driverClassName}" />
 		<beans:property name="url" value="${url}" />

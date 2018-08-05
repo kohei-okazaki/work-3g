@@ -42,15 +42,15 @@
 	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<beans:property name="basenames">
 			<beans:list>
-				<beans:value>messages</beans:value>
-				<beans:value>validationMessages</beans:value>
+				<beans:value>META-INF/messages</beans:value>
+				<beans:value>META-INF/validationMessages</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>
 
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
-	<context:property-placeholder location="/META-INF/jdbc.properties" />
+	<context:property-placeholder location="classpath:META-INF/jdbc.properties" />
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<beans:property name="driverClassName" value="${driverClassName}" />
 		<beans:property name="url" value="${url}" />
