@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
-import jp.co.ha.business.find.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.db.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.entity.HealthInfoFileSetting;

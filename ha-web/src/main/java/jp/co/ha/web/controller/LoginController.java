@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.find.AccountSearchService;
+import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
@@ -35,8 +34,6 @@ public class LoginController implements BaseWebController {
 	/** sessionサービス */
 	@Autowired
 	private SessionManageService sessionService;
-	@Autowired
-	private MessageSource messageSource;
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;

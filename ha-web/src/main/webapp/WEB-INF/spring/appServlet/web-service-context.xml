@@ -11,29 +11,29 @@
 						http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- アカウント検索サービス -->
-	<beans:bean id="accountSearchService" class="jp.co.ha.business.find.impl.AccountSearchServiceImpl" />
+	<beans:bean id="accountSearchService" class="jp.co.ha.business.db.find.impl.AccountSearchServiceImpl" />
 	<!-- 健康情報検索サービス -->
-	<beans:bean id="healthInfoSearchService" class="jp.co.ha.business.find.impl.HealthInfoSearchServiceImpl" />
+	<beans:bean id="healthInfoSearchService" class="jp.co.ha.business.db.find.impl.HealthInfoSearchServiceImpl" />
 	<!-- メール情報検索サービス -->
-	<beans:bean id ="mailInfoSearchService" class ="jp.co.ha.business.find.impl.MailInfoSearchServiceImpl" />
+	<beans:bean id ="mailInfoSearchService" class ="jp.co.ha.business.db.find.impl.MailInfoSearchServiceImpl" />
 	<!-- 健康情報ファイル設定検索サービス -->
-	<beans:bean id ="healthInfoFileSettingSearchService" class ="jp.co.ha.business.find.impl.HealthInfoFileSettingSearchServiceImpl" />
+	<beans:bean id ="healthInfoFileSettingSearchService" class ="jp.co.ha.business.db.find.impl.HealthInfoFileSettingSearchServiceImpl" />
 
 	<!-- アカウント作成サービス -->
-	<beans:bean id="accountCreateService" class="jp.co.ha.business.create.impl.AccountCreateServiceImpl" />
+	<beans:bean id="accountCreateService" class="jp.co.ha.business.db.create.impl.AccountCreateServiceImpl" />
 	<!-- 健康情報作成サービス -->
-	<beans:bean id="healthInfoCreateService" class="jp.co.ha.business.create.impl.HealthInfoCreateServiceImpl" />
+	<beans:bean id="healthInfoCreateService" class="jp.co.ha.business.db.create.impl.HealthInfoCreateServiceImpl" />
 	<!-- メール情報作成サービス -->
-	<beans:bean id="mailInfoCreateService" class="jp.co.ha.business.create.impl.MailInfoCreateServiceImpl" />
+	<beans:bean id="mailInfoCreateService" class="jp.co.ha.business.db.create.impl.MailInfoCreateServiceImpl" />
 	<!-- 健康情報ファイル設定作成サービス -->
-	<beans:bean id ="healthInfoFileSettingCreateService" class ="jp.co.ha.business.create.impl.HealthInfoFileSettingCreateServiceImpl" />
+	<beans:bean id ="healthInfoFileSettingCreateService" class ="jp.co.ha.business.db.create.impl.HealthInfoFileSettingCreateServiceImpl" />
 
 	<!-- アカウント更新サービス -->
-	<beans:bean id="accountUpdateService" class="jp.co.ha.business.update.impl.AccountUpdateServiceImpl" />
+	<beans:bean id="accountUpdateService" class="jp.co.ha.business.db.update.impl.AccountUpdateServiceImpl" />
 	<!-- メール情報更新サービス -->
-	<beans:bean id="mailInfoUpdateService" class="jp.co.ha.business.update.impl.MailInfoUpdateServiceImpl" />
+	<beans:bean id="mailInfoUpdateService" class="jp.co.ha.business.db.update.impl.MailInfoUpdateServiceImpl" />
 	<!-- 健康情報ファイル設定更新サービス -->
-	<beans:bean id ="healthInfoFileSettingUpdateService" class ="jp.co.ha.business.update.impl.HealthInfoFileSettingUpdateServiceImpl" />
+	<beans:bean id ="healthInfoFileSettingUpdateService" class ="jp.co.ha.business.db.update.impl.HealthInfoFileSettingUpdateServiceImpl" />
 
 
 	<!-- 健康情報登録API -->

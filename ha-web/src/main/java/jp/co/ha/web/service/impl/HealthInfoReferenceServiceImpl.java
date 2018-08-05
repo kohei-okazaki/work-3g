@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.business.find.HealthInfoSearchService;
+import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.common.entity.HealthInfo;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;

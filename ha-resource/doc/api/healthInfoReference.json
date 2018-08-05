@@ -27,22 +27,22 @@ paths:
           description: 'ユーザID'
           required: true
           type: 'string'
-        - name: 'requestId'
+        - name: 'requestType'
           in: 'path'
           description: 'リクエストID'
           required: true
           type: 'string'
-        - name: 'dataId'
+        - name: 'healthInfoId'
           in: 'path'
-          description: 'データID'
+          description: '健康情報ID'
           required: true
-          type: 'string'
+          type: 'number'
 
       responses:
         '200':
             description: 'success<br>response {<br>
-              result,<br>
-              dateId,<br>
+              resultType,<br>
+              healthInfoId,<br>
               height,<br>
               weight,<br>
               bmi,<br>
@@ -65,22 +65,22 @@ paths:
           description: 'ユーザID'
           required: true
           type: 'string'
-        - name: 'requestId'
+        - name: 'requestType'
           in: 'path'
           description: 'リクエストID'
           required: true
           type: 'string'
-        - name: 'dataId'
+        - name: 'healthInfoId'
           in: 'path'
-          description: 'データID'
+          description: '健康情報ID'
           required: true
-          type: 'string'
+          type: 'number'
 
       responses:
         '200':
             description: 'success<br>response {<br>
-              result,<br>
-              dateId,<br>
+              resultType,<br>
+              healthInfoId,<br>
               height,<br>
               weight,<br>
               bmi,<br>
@@ -92,7 +92,7 @@ paths:
 securityDefinitions:
   petstore_auth:
     type: oauth2
-    authorizationUrl: 'localhost:8080//ha-web/login.html'
+    authorizationUrl: 'localhost:8080//ha-web/login/index.html'
     flow: implicit
 
 
@@ -100,10 +100,13 @@ definitions:
   Response:
     type: object
     properties:
-      result:
+      resultType:
         type: string
-      dataId:
-        type: string
+        enum:
+          - SUCCESS (成功)
+          - FAILURE (失敗)
+      healthInfoId:
+        type: number
       height:
         type: number
       weight:

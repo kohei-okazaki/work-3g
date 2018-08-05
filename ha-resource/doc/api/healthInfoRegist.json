@@ -37,17 +37,22 @@ paths:
           description: '体重'
           required: true
           type: 'number'
-        - name: 'requestId'
+        - name: 'requestType'
           in: 'path'
-          description: 'リクエストID'
+          description: 'リクエスト種別'
+          required: true
+          type: 'string'
+        - name: 'apiKey'
+          in: 'path'
+          description: 'APIキー'
           required: true
           type: 'string'
 
       responses:
         '200':
             description: 'success<br>response {<br>
-              result,<br>
-              dateId,<br>
+              resultType,<br>
+              healthInfoId,<br>
               userId,<br>
               height,<br>
               weight,<br>
@@ -82,17 +87,22 @@ paths:
           description: '体重'
           required: true
           type: 'number'
-        - name: 'requestId'
+        - name: 'requestType'
           in: 'path'
           description: 'リクエストID'
+          required: true
+          type: 'string'
+        - name: 'apiKey'
+          in: 'path'
+          description: 'APIキー'
           required: true
           type: 'string'
 
       responses:
         '200':
             description: 'success<br>response {<br>
-              result,<br>
-              dateId,<br>
+              resultType,<br>
+              healthInfoId,<br>
               userId,<br>
               height,<br>
               weight,<br>
@@ -106,7 +116,7 @@ paths:
 securityDefinitions:
   petstore_auth:
     type: oauth2
-    authorizationUrl: 'localhost:8080//ha-web/login.html'
+    authorizationUrl: 'localhost:8080//ha-web/login/index.html'
     flow: implicit
 
 
@@ -114,10 +124,13 @@ definitions:
   Response:
     type: object
     properties:
-      result:
+      resultType:
         type: string
-      dataId:
-        type: string
+        enum:
+          - SUCCESS (成功)
+          - FAILURE (失敗)
+      healthInfoId:
+        type: number
       userId:
         type: string
       height:
@@ -130,7 +143,6 @@ definitions:
         type: number
       userStatus:
         type: string
-        description: UserStatus
         enum:
           - 10 (down)
           - 20 (even)
