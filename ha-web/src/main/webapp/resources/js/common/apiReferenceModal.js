@@ -36,7 +36,7 @@ $(function() {
 
 	});
 
-// リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
+	// リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
 	$(window).resize(centeringModalSyncer);
 
 	// センタリングを実行する関数
