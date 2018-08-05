@@ -1,11 +1,11 @@
-package jp.co.ha.common.validate;
+package jp.co.ha.common.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.validate.annotation.Required;
+import jp.co.ha.common.validator.annotation.Required;
 
 /**
  * 必須チェックvalidator<br>

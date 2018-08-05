@@ -1,26 +1,30 @@
-package jp.co.ha.common.validate;
+package jp.co.ha.common.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import jp.co.ha.common.util.RegixPattern;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.validate.annotation.MailAddress;
+import jp.co.ha.common.validator.annotation.Url;
 
 /**
- * メールアドレス形式チェックvalidator<br>
+ * URLチェックvalidator<br>
  *
  */
-public class MailAddressValidator implements ConstraintValidator<MailAddress, String> {
+public class UrlValidator implements ConstraintValidator<Url, String> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
+
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return false;
+
+		String urlRegix = RegixPattern.URL.getPattern();
+		return value.matches(urlRegix);
 	}
 
 }

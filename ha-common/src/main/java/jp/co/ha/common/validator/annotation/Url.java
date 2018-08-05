@@ -1,4 +1,4 @@
-package jp.co.ha.common.validate.annotation;
+package jp.co.ha.common.validator.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,21 +10,19 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validate.MaxValidator;
+import jp.co.ha.common.validator.UrlValidator;
 
 /**
- * 最大桁数チェックアノテーション<br>
- * @see jp.co.ha.common.validate.MaxValidator
+ * URLチェックアノテーション<br>
+ * @see jp.co.ha.common.validator.UrlValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = MaxValidator.class)
-public @interface Max {
-
-	int size();
+@Constraint(validatedBy = UrlValidator.class)
+public @interface Url {
 
     String message() default "";
 

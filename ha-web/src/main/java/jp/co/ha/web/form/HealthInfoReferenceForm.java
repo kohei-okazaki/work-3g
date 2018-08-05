@@ -3,8 +3,8 @@ package jp.co.ha.web.form;
 import java.math.BigDecimal;
 
 import jp.co.ha.common.log.annotation.Ignore;
-import jp.co.ha.common.validate.annotation.Flag;
-import jp.co.ha.common.validate.annotation.Required;
+import jp.co.ha.common.validator.annotation.Flag;
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
 /**
