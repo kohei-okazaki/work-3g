@@ -36,7 +36,7 @@ $(function() {
 
 	});
 
-// リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
+	// リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
 	$(window).resize(centeringModalSyncer);
 
 	// センタリングを実行する関数
@@ -52,7 +52,7 @@ $(function() {
 		var ch = $("#api-reference-modal-content").outerHeight();
 
 		// センタリングを実行する
-		$("#api-reference-modal-content").css({"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"});
+		$("#api-reference-modal-content").css({"left": ((w - cw) / 2) + "px","top": ((h - ch) / 2) + "px"});
 
 	}
 

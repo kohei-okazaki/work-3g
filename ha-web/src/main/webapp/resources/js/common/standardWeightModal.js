@@ -1,6 +1,6 @@
 $(function() {
 
-// モーダルウィンドウを出現させるクリックイベント
+	// モーダルウィンドウを出現させるクリックイベント
 	$("#standardWeight-modal-open").click(function() {
 
 		// キーボード操作などにより、オーバーレイが多重起動するのを防止する
@@ -36,7 +36,7 @@ $(function() {
 
 	});
 
-// リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
+	// リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
 	$(window).resize(centeringModalSyncer);
 
 	// センタリングを実行する関数
@@ -52,7 +52,7 @@ $(function() {
 		var ch = $("#standardWeight-modal-content").outerHeight();
 
 		// センタリングを実行する
-		$("#standardWeight-modal-content").css({"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"});
+		$("#standardWeight-modal-content").css({"left": ((w - cw) / 2) + "px","top": ((h - ch) / 2) + "px"});
 
 	}
 
