@@ -51,7 +51,7 @@ $(function() {
 		var ch = $("#bmi-modal-content").outerHeight();
 
 		// センタリングを実行する
-		$("#bmi-modal-content").css({"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"});
+		$("#bmi-modal-content").css({"left": ((w - cw) / 2) + "px","top": ((h - ch) / 2) + "px"});
 
 	}
 

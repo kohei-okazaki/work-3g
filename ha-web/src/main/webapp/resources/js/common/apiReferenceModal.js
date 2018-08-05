@@ -52,7 +52,7 @@ $(function() {
 		var ch = $("#api-reference-modal-content").outerHeight();
 
 		// センタリングを実行する
-		$("#api-reference-modal-content").css({"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"});
+		$("#api-reference-modal-content").css({"left": ((w - cw) / 2) + "px","top": ((h - ch) / 2) + "px"});
 
 	}
 
