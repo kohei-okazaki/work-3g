@@ -1,50 +1,52 @@
 package jp.co.ha.tool.build;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SqlBuilder {
+import jp.co.ha.tool.read.ExcelReader;
+import jp.co.ha.tool.read.PropertyReader;
+
+public class DdlBuilder {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/** Tableリスト */
-	private List<String> tableList = Arrays.asList("HEALTH_INFO");
-	/** excelファイル */
-	private File excelFile;
+	private List<String> tableList;
 	/** DDLリスト */
 	private List<String> ddlList;
 
-	public SqlBuilder() {
+	public DdlBuilder() {
 		init();
 	}
 
 	private void init() {
-		String sysPath = this.getClass().getClassLoader().getResource("").getPath();
-		File propFile = new File(sysPath, "META-INF/target.properties");
-		LOG.info("sysPath --> " + sysPath);
 
-		this.excelFile = new File(sysPath, "META-INF/DB.xlsx");
+		Properties prop = new PropertyReader().getProperty("target.properties");
+
+		String target = prop.getProperty("target");
+		if (Objects.nonNull(target)) {
+			this.tableList = Stream.of(target.split(",")).collect(Collectors.toList());
+		}
+
 		this.ddlList = new ArrayList<>();
 	}
 
 	public void execute() {
-
 		StringJoiner sb = new StringJoiner("\r\n");
-		try (Workbook workbook = WorkbookFactory.create(this.excelFile)) {
+		try (Workbook workbook = new ExcelReader().getWorkBook()) {
 
 			Sheet sheet = workbook.getSheet("TABLE_LIST");
 			for (String table : this.tableList) {
@@ -71,13 +73,12 @@ public class SqlBuilder {
 				this.ddlList.add(sb.toString());
 			}
 
-		} catch (EncryptedDocumentException | InvalidFormatException | IOException e) {
+		} catch (IOException e) {
 			LOG.error("excelファイル読込エラー", e);
 		}
 
-		ddlList.stream().forEach(System.out::println);
+		this.ddlList.stream().forEach(System.out::println);
 	}
-
 
 	private String getColumnName(Row row) {
 		return row.getCell(5).getStringCellValue();
