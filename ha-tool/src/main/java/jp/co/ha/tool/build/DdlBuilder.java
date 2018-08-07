@@ -45,11 +45,12 @@ public class DdlBuilder {
 	}
 
 	public void execute() {
-		StringJoiner sb = new StringJoiner("\r\n");
-		try (Workbook workbook = new ExcelReader().getWorkBook()) {
 
+		try (Workbook workbook = new ExcelReader().getWorkBook()) {
+			StringJoiner sb = null;
 			Sheet sheet = workbook.getSheet("TABLE_LIST");
 			for (String table : this.tableList) {
+				sb = new StringJoiner("\r\n");
 				String ddlBegin = "CREATE TABLE " + table + " (";
 				String ddlEnd = ");";
 
@@ -60,7 +61,7 @@ public class DdlBuilder {
 				StringJoiner rowValue = new StringJoiner(",\r\n");
 				while (iterator.hasNext()) {
 					Row row = iterator.next();
-					if (isTargetTable(row)) {
+					if (isTargetTable(row, table)) {
 						// カラム名を取得
 						String columnName = getColumnName(row);
 						// カラム定義を取得
@@ -107,9 +108,9 @@ public class DdlBuilder {
 		return "1".equals(row.getCell(2).getStringCellValue());
 	}
 
-	private boolean isTargetTable(Row row) {
-		String tableName = row.getCell(1).getStringCellValue();
-		return this.tableList.contains(tableName);
+	private boolean isTargetTable(Row row, String table) {
+		String excelTableName = row.getCell(1).getStringCellValue();
+		return table.equals(excelTableName);
 	}
 
 }
