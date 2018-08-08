@@ -1,14 +1,39 @@
 package jp.co.ha.tool.config;
 
-import java.util.List;
-
-import jp.co.ha.tool.type.ExecuteType;
-
 public class ExcelConfig {
 
-	/** excel名リスト */
-	private List<String> excelNameList;
-	/** 実行区分 */
-	private ExecuteType executeType;
+	/** ファイルパス */
+	private String filePath;
+	/** シート名 */
+	private String sheetName;
+
+	/**
+	 * filePathを返す
+	 * @return filePath
+	 */
+	public String getFilePath() {
+		return filePath;
+	}
+	/**
+	 * filePathを設定する
+	 * @param filePath
+	 */
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	/**
+	 * sheetNameを返す
+	 * @return sheetName
+	 */
+	public String getSheetName() {
+		return sheetName;
+	}
+	/**
+	 * sheetNameを設定する
+	 * @param sheetName
+	 */
+	public void setSheetName(String sheetName) {
+		this.sheetName = sheetName;
+	}
 
 }

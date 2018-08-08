@@ -6,13 +6,15 @@ import jp.co.ha.tool.build.EntityBuilder;
 public class SqlExecutor {
 
 	public static void main(String[] args) {
-		DdlBuilder ddlBuilder = new DdlBuilder();
 		// excelファイルからDDLを作成
+		DdlBuilder ddlBuilder = new DdlBuilder();
 		ddlBuilder.execute();
-		// DDLをファイルに書き出す
-//		ddlBuilder.comit();
 
+		// Entityを作成
 		EntityBuilder entityBuilder = new EntityBuilder();
+		entityBuilder.execute();
+
+
 
 
 	}

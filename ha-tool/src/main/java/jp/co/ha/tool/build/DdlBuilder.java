@@ -1,8 +1,6 @@
 package jp.co.ha.tool.build;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
@@ -11,11 +9,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.read.ExcelReader;
 import jp.co.ha.tool.read.PropertyReader;
 
@@ -45,37 +42,33 @@ public class DdlBuilder {
 	}
 
 	public void execute() {
+		ExcelConfig excelConf = new ExcelConfig();
+		excelConf.setFilePath("META-INF/DB.xlsx");
+		excelConf.setSheetName("TABLE_LIST");
+		ExcelReader reader = new ExcelReader(excelConf);
+		reader.init();
 
-		try (Workbook workbook = new ExcelReader().getWorkBook()) {
-			StringJoiner sb = null;
-			Sheet sheet = workbook.getSheet("TABLE_LIST");
-			for (String table : this.tableList) {
-				sb = new StringJoiner("\r\n");
-				String ddlBegin = "CREATE TABLE " + table + " (";
-				String ddlEnd = ");";
+		for (String table : this.tableList) {
+			StringJoiner sb = new StringJoiner("\r\n");
+			String ddlBegin = "CREATE TABLE " + table + " (";
+			String ddlEnd = ");";
 
-				sb.add(ddlBegin);
-
-				Iterator<Row> iterator = sheet.rowIterator();
-
-				StringJoiner rowValue = new StringJoiner(",\r\n");
-				while (iterator.hasNext()) {
-					Row row = iterator.next();
-					if (isTargetTable(row, table)) {
-						// カラム名を取得
-						String columnName = getColumnName(row);
-						// カラム定義を取得
-						String columnType = getColumnType(row);
-						rowValue.add(columnName + " " + columnType);
-					}
+			sb.add(ddlBegin);
+			reader.read();
+			StringJoiner rowValue = new StringJoiner(",\r\n");
+			while (reader.hasRow()) {
+				Row row = reader.readRow();
+				if (isTargetTable(row, table)) {
+					// カラム名を取得
+					String columnName = getColumnName(row);
+					// カラム定義を取得
+					String columnType = getColumnType(row);
+					rowValue.add(columnName + " " + columnType);
 				}
-				sb.add(rowValue.toString());
-				sb.add(ddlEnd);
-				this.ddlList.add(sb.toString());
 			}
-
-		} catch (IOException e) {
-			LOG.error("excelファイル読込エラー", e);
+			sb.add(rowValue.toString());
+			sb.add(ddlEnd);
+			this.ddlList.add(sb.toString());
 		}
 
 		this.ddlList.stream().forEach(System.out::println);
