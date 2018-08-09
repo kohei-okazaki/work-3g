@@ -3,12 +3,14 @@ package jp.co.ha.tool.build;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-import org.apache.poi.ss.usermodel.Row;
-
 import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.excel.Cell;
+import jp.co.ha.tool.excel.Excel;
+import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.read.ExcelReader;
+import jp.co.ha.tool.type.CellPositionType;
 
 public class DdlBuilder extends BaseBuilder {
 
@@ -26,10 +28,10 @@ public class DdlBuilder extends BaseBuilder {
 			String ddlEnd = ");";
 
 			sb.add(ddlBegin);
-			reader.read();
+			Excel excel = reader.read();
+			excel.activeSheet("TABLE_LIST");
 			StringJoiner rowValue = new StringJoiner(",\r\n\r\n");
-			while (reader.hasRow()) {
-				Row row = reader.readRow();
+			for (Row row : excel.getRowList()) {
 				if (isTargetTable(row, table)) {
 					// カラム名を取得
 					String columnName = getColumnName(row);
@@ -52,13 +54,13 @@ public class DdlBuilder extends BaseBuilder {
 	}
 
 	private String getColumnName(Row row) {
-		return row.getCell(5).getStringCellValue();
+		return row.getCell(CellPositionType.COLUMN_NAME).getValue();
 	}
 
 	private String getColumnType(Row row) {
 		StringJoiner sj = new StringJoiner(" ");
 		// カラム定義とサイズを取得
-		String columnType = row.getCell(6).getStringCellValue();
+		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
 		String size = getSize(row);
 		sj.add(columnType + size);
 		if (isSequence(row)) {
@@ -72,19 +74,19 @@ public class DdlBuilder extends BaseBuilder {
 	}
 
 	private String getSize(Row row) {
-		String size = row.getCell(7).getStringCellValue();
+		String size = row.getCell(CellPositionType.COLUMN_SIZE).getValue();
 		return Objects.isNull(size) || "".equals(size) ? "" : "(" + size + ")";
 	}
 
 	private boolean isSequence(Row row) {
-		return "1".equals(row.getCell(3).getStringCellValue());
+		return "1".equals(row.getCell(CellPositionType.SEQUENCE).getValue());
 	}
 
 	private boolean isPrimaryKey(Row row) {
-		return "1".equals(row.getCell(2).getStringCellValue());
+		return "1".equals(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
 	}
 
 	private boolean isTargetTable(Row row, String table) {
-		String excelTableName = row.getCell(1).getStringCellValue();
-		return table.equals(excelTableName);
+		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
+		return table.equals(cell.getValue());
 	}}
