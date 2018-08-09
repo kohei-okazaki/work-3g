@@ -1,63 +1,35 @@
 package jp.co.ha.tool.build;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.Properties;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.apache.poi.ss.usermodel.Row;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import jp.co.ha.tool.config.ExcelConfig;
-import jp.co.ha.tool.read.ExcelReader;
-import jp.co.ha.tool.read.PropertyReader;
+import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.excel.Cell;
+import jp.co.ha.tool.excel.Excel;
+import jp.co.ha.tool.excel.Row;
+import jp.co.ha.tool.factory.FileFactory;
+import jp.co.ha.tool.reader.ExcelReader;
+import jp.co.ha.tool.type.CellPositionType;
 
-public class DdlBuilder {
-
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-
-	/** Tableリスト */
-	private List<String> tableList;
-	/** DDLリスト */
-	private List<String> ddlList;
-
-	public DdlBuilder() {
-		init();
-	}
-
-	private void init() {
-
-		Properties prop = new PropertyReader().getProperty("target.properties");
-
-		String target = prop.getProperty("target");
-		if (Objects.nonNull(target)) {
-			this.tableList = Stream.of(target.split(",")).collect(Collectors.toList());
-		}
-
-		this.ddlList = new ArrayList<>();
-	}
+public class DdlBuilder extends BaseBuilder {
 
 	public void execute() {
+
 		ExcelConfig excelConf = new ExcelConfig();
-		excelConf.setFilePath("META-INF/DB.xlsx");
+		excelConf.setFilePath("META-INF\\DB.xlsx");
 		excelConf.setSheetName("TABLE_LIST");
 		ExcelReader reader = new ExcelReader(excelConf);
-		reader.init();
 
 		for (String table : this.tableList) {
 			StringJoiner sb = new StringJoiner("\r\n");
 			String ddlBegin = "CREATE TABLE " + table + " (";
 			String ddlEnd = ");";
-
 			sb.add(ddlBegin);
-			reader.read();
-			StringJoiner rowValue = new StringJoiner(",\r\n");
-			while (reader.hasRow()) {
-				Row row = reader.readRow();
+			Excel excel = reader.read();
+			excel.activeSheet("TABLE_LIST");
+			StringJoiner rowValue = new StringJoiner(",\r\n\r\n");
+			for (Row row : excel.getRowList()) {
 				if (isTargetTable(row, table)) {
 					// カラム名を取得
 					String columnName = getColumnName(row);
@@ -68,21 +40,26 @@ public class DdlBuilder {
 			}
 			sb.add(rowValue.toString());
 			sb.add(ddlEnd);
-			this.ddlList.add(sb.toString());
+
+			FileConfig fileConf = new FileConfig();
+			fileConf.setOutputPath(super.baseDir + "\\ha-resource\\db\\ddl");
+			fileConf.setFileName(table.toUpperCase() + ".sql");
+			fileConf.setData(sb.toString());
+			new FileFactory().create(fileConf);
 		}
 
-		this.ddlList.stream().forEach(System.out::println);
 	}
 
 	private String getColumnName(Row row) {
-		return row.getCell(5).getStringCellValue();
+		return row.getCell(CellPositionType.COLUMN_NAME).getValue();
 	}
 
 	private String getColumnType(Row row) {
 		StringJoiner sj = new StringJoiner(" ");
 		// カラム定義とサイズを取得
-		String columnTypeAndSize = row.getCell(6).getStringCellValue();
-		sj.add(columnTypeAndSize);
+		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
+		String size = getSize(row);
+		sj.add(columnType + size);
 		if (isSequence(row)) {
 			sj.add("AUTO_INCREMENT");
 		}
@@ -93,17 +70,20 @@ public class DdlBuilder {
 		return sj.toString();
 	}
 
+	private String getSize(Row row) {
+		String size = row.getCell(CellPositionType.COLUMN_SIZE).getValue();
+		return Objects.isNull(size) || "".equals(size) ? "" : "(" + size + ")";
+	}
+
 	private boolean isSequence(Row row) {
-		return "1".equals(row.getCell(3).getStringCellValue());
+		return "1".equals(row.getCell(CellPositionType.SEQUENCE).getValue());
 	}
 
 	private boolean isPrimaryKey(Row row) {
-		return "1".equals(row.getCell(2).getStringCellValue());
+		return "1".equals(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
 	}
 
 	private boolean isTargetTable(Row row, String table) {
-		String excelTableName = row.getCell(1).getStringCellValue();
-		return table.equals(excelTableName);
-	}
-
-}
+		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
+		return table.equals(cell.getValue());
+	}}
