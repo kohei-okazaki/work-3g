@@ -1,54 +1,26 @@
 package jp.co.ha.tool.build;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import java.io.File;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.poi.ss.usermodel.Row;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import jp.co.ha.tool.config.ExcelConfig;
+import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.read.ExcelReader;
-import jp.co.ha.tool.read.PropertyReader;
 
-public class DdlBuilder {
-
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-
-	/** Tableリスト */
-	private List<String> tableList;
-	/** DDLリスト */
-	private List<String> ddlList;
-
-	public DdlBuilder() {
-		init();
-	}
-
-	private void init() {
-
-		Properties prop = new PropertyReader().getProperty("target.properties");
-
-		String target = prop.getProperty("target");
-		if (Objects.nonNull(target)) {
-			this.tableList = Stream.of(target.split(",")).collect(Collectors.toList());
-		}
-
-		this.ddlList = new ArrayList<>();
-	}
+public class DdlBuilder extends BaseBuilder {
 
 	public void execute() {
+
 		ExcelConfig excelConf = new ExcelConfig();
 		excelConf.setFilePath("META-INF/DB.xlsx");
 		excelConf.setSheetName("TABLE_LIST");
 		ExcelReader reader = new ExcelReader(excelConf);
-		reader.init();
 
 		for (String table : this.tableList) {
+
 			StringJoiner sb = new StringJoiner("\r\n");
 			String ddlBegin = "CREATE TABLE " + table + " (";
 			String ddlEnd = ");";
@@ -68,10 +40,17 @@ public class DdlBuilder {
 			}
 			sb.add(rowValue.toString());
 			sb.add(ddlEnd);
-			this.ddlList.add(sb.toString());
+
+			FileConfig fileConf = new FileConfig();
+			String classPath = this.getClass().getClassLoader().getResource("").getPath();
+			File f = new File(classPath).getParentFile();
+			fileConf.setOutputPath(f.getPath() + "\\src\\main\\resources");
+			fileConf.setFileName(table.toUpperCase() + ".sql");
+			fileConf.setData(sb.toString());
+			FileFactory factory = new FileFactory(fileConf);
+			factory.create();
 		}
 
-		this.ddlList.stream().forEach(System.out::println);
 	}
 
 	private String getColumnName(Row row) {
@@ -104,6 +83,4 @@ public class DdlBuilder {
 	private boolean isTargetTable(Row row, String table) {
 		String excelTableName = row.getCell(1).getStringCellValue();
 		return table.equals(excelTableName);
-	}
-
-}
+	}}

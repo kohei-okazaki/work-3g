@@ -25,9 +25,10 @@ public class ExcelReader extends BaseFileReader {
 
 	public ExcelReader(ExcelConfig conf) {
 		this.conf = conf;
+		this.init();
 	}
 
-	public void init() {
+	private void init() {
 		try {
 			this.workbook = WorkbookFactory.create(getFilePath(conf.getFilePath()));
 		} catch (EncryptedDocumentException | InvalidFormatException | IOException e) {

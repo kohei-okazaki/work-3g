@@ -6,33 +6,18 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import jp.co.ha.tool.read.PropertyReader;
 
-public class EntityBuilder {
+public abstract class BaseBuilder {
 
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	protected List<String> tableList;
 
-	/** Tableリスト */
-	private List<String> tableList;
-
-	public EntityBuilder() {
-		this.init();
-	}
-
-	private void init() {
-
+	public BaseBuilder() {
 		Properties prop = new PropertyReader().getProperty("target.properties");
+
 		String target = prop.getProperty("target");
 		if (Objects.nonNull(target)) {
 			this.tableList = Stream.of(target.split(",")).collect(Collectors.toList());
 		}
-
-	}
-
-	public void execute() {
-
 	}
 }
