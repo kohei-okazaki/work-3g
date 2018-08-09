@@ -26,7 +26,6 @@ public abstract class BaseBuilder {
 		if (Objects.nonNull(target)) {
 			this.tableList = Stream.of(target.split(",")).collect(Collectors.toList());
 		}
-
 		this.baseDir = get(PropertyType.BASE_DIR);
 	}
 

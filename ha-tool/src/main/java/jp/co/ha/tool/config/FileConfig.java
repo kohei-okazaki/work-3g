@@ -1,9 +1,11 @@
 package jp.co.ha.tool.config;
 
 public class FileConfig {
+
 	private String outputPath;
 	private String fileName;
 	private String data;
+
 	/**
 	 * outputPathを返す
 	 * @return outputPath
