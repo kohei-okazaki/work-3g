@@ -15,14 +15,7 @@ public class FileFactory {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-	/** 出力データ */
-	private FileConfig conf;
-
-	public FileFactory(FileConfig conf) {
-		this.conf = conf;
-	}
-
-	public void create() {
+	public void create(FileConfig conf) {
 		File file = new File(conf.getOutputPath() + "\\" + conf.getFileName());
 
 		// ファイル作成
@@ -35,7 +28,7 @@ public class FileFactory {
 		// ファイル書込
 		try (FileWriter fw = new FileWriter(file.getAbsolutePath());
 				PrintWriter pw = new PrintWriter(new BufferedWriter(fw));) {
-			write(pw, this.conf.getData());
+			write(pw, conf.getData());
 		} catch (IOException e) {
 			LOG.error("", e);
 		}

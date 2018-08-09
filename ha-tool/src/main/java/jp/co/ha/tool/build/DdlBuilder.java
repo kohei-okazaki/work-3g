@@ -1,6 +1,5 @@
 package jp.co.ha.tool.build;
 
-import java.io.File;
 import java.util.StringJoiner;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -27,7 +26,7 @@ public class DdlBuilder extends BaseBuilder {
 
 			sb.add(ddlBegin);
 			reader.read();
-			StringJoiner rowValue = new StringJoiner(",\r\n");
+			StringJoiner rowValue = new StringJoiner(",\r\n\r\n");
 			while (reader.hasRow()) {
 				Row row = reader.readRow();
 				if (isTargetTable(row, table)) {
@@ -42,13 +41,11 @@ public class DdlBuilder extends BaseBuilder {
 			sb.add(ddlEnd);
 
 			FileConfig fileConf = new FileConfig();
-			String classPath = this.getClass().getClassLoader().getResource("").getPath();
-			File f = new File(classPath).getParentFile();
-			fileConf.setOutputPath(f.getPath() + "\\src\\main\\resources");
+			fileConf.setOutputPath(super.baseDir + "\\ha-resource\\db\\ddl");
 			fileConf.setFileName(table.toUpperCase() + ".sql");
 			fileConf.setData(sb.toString());
-			FileFactory factory = new FileFactory(fileConf);
-			factory.create();
+
+			new FileFactory().create(fileConf);
 		}
 
 	}
