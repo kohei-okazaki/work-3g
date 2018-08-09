@@ -22,11 +22,9 @@ public class DdlBuilder extends BaseBuilder {
 		ExcelReader reader = new ExcelReader(excelConf);
 
 		for (String table : this.tableList) {
-
 			StringJoiner sb = new StringJoiner("\r\n");
 			String ddlBegin = "CREATE TABLE " + table + " (";
 			String ddlEnd = ");";
-
 			sb.add(ddlBegin);
 			Excel excel = reader.read();
 			excel.activeSheet("TABLE_LIST");
@@ -47,7 +45,6 @@ public class DdlBuilder extends BaseBuilder {
 			fileConf.setOutputPath(super.baseDir + "\\ha-resource\\db\\ddl");
 			fileConf.setFileName(table.toUpperCase() + ".sql");
 			fileConf.setData(sb.toString());
-
 			new FileFactory().create(fileConf);
 		}
 
