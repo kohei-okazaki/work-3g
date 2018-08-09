@@ -1,5 +1,6 @@
 package jp.co.ha.tool.build;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -57,8 +58,9 @@ public class DdlBuilder extends BaseBuilder {
 	private String getColumnType(Row row) {
 		StringJoiner sj = new StringJoiner(" ");
 		// カラム定義とサイズを取得
-		String columnTypeAndSize = row.getCell(6).getStringCellValue();
-		sj.add(columnTypeAndSize);
+		String columnType = row.getCell(6).getStringCellValue();
+		String size = getSize(row);
+		sj.add(columnType + size);
 		if (isSequence(row)) {
 			sj.add("AUTO_INCREMENT");
 		}
@@ -67,6 +69,11 @@ public class DdlBuilder extends BaseBuilder {
 		}
 
 		return sj.toString();
+	}
+
+	private String getSize(Row row) {
+		String size = row.getCell(7).getStringCellValue();
+		return Objects.isNull(size) || "".equals(size) ? "" : "(" + size + ")";
 	}
 
 	private boolean isSequence(Row row) {
