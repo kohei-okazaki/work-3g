@@ -14,7 +14,7 @@ public class DdlBuilder extends BaseBuilder {
 	public void execute() {
 
 		ExcelConfig excelConf = new ExcelConfig();
-		excelConf.setFilePath("META-INF/DB.xlsx");
+		excelConf.setFilePath("META-INF\\DB.xlsx");
 		excelConf.setSheetName("TABLE_LIST");
 		ExcelReader reader = new ExcelReader(excelConf);
 
