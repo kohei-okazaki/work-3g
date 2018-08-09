@@ -6,7 +6,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import jp.co.ha.tool.read.PropertyReader;
+import jp.co.ha.tool.reader.PropertyReader;
 import jp.co.ha.tool.type.PropertyType;
 
 public abstract class BaseBuilder {

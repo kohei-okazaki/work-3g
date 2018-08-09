@@ -9,7 +9,7 @@ import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
-import jp.co.ha.tool.read.ExcelReader;
+import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.type.CellPositionType;
 
 public class DdlBuilder extends BaseBuilder {

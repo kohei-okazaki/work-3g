@@ -1,4 +1,4 @@
-package jp.co.ha.tool.read;
+package jp.co.ha.tool.reader;
 
 import java.io.File;
 
