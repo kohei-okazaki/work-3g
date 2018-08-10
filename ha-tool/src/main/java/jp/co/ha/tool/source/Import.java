@@ -6,6 +6,10 @@ public class Import {
 
 	private Class<?> clazz;
 
+	public Import(Class<?> clazz) {
+		this.clazz = clazz;
+	}
+
 	public Import(Field field) {
 		this.clazz = field.getClassType();
 	}
