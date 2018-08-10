@@ -25,7 +25,7 @@ public class DdlBuilder extends BaseBuilder {
 			sb.add(ddlBegin);
 			Excel excel = reader.read();
 			excel.activeSheet("TABLE_LIST");
-			StringJoiner rowValue = new StringJoiner(",\r\n\r\n");
+			StringJoiner rowValue = new StringJoiner(",\r\n");
 			for (Row row : excel.getRowList()) {
 				if (isTargetTable(row, table)) {
 					// カラム名を取得
