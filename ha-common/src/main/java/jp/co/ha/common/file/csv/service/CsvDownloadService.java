@@ -29,26 +29,4 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 */
 	void execute(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws AppIOException;
 
-	/**
-	 * CSV設定情報を取得する<br>
-	 *
-	 * @param fileName
-	 *     ファイル名
-	 * @param healthInfoFileSetting
-	 *     健康情報ファイル設定
-	 * @return CsvConfig
-	 */
-//	default CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting healthInfoFileSetting) {
-//
-//		CsvConfig csvConfig = new CsvConfig();
-//		csvConfig.setFileName(fileName);
-//		csvConfig.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
-//		csvConfig.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
-//		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
-//		csvConfig.setHasEnclosure(StringUtil.isTrue(healthInfoFileSetting.getEnclosureCharFlag()));
-//		csvConfig.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
-//		csvConfig.setCharset(Charset.UTF_8);
-//		return csvConfig;
-//	}
-
 }
