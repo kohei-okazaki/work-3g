@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 import jp.co.ha.tool.config.FileConfig;
-import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
@@ -12,8 +11,9 @@ import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
-public class DdlBuilder extends BaseBuilder {
+public class DdlBuilder extends CommonBuilder {
 
+	@Override
 	public void execute() {
 
 		ExcelReader reader = new ExcelReader(getExcelConfig());
@@ -76,11 +76,6 @@ public class DdlBuilder extends BaseBuilder {
 
 	private boolean isPrimaryKey(Row row) {
 		return "1".equals(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
-	}
-
-	private boolean isTargetTable(Row row, String table) {
-		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
-		return table.equals(cell.getValue());
 	}
 
 }

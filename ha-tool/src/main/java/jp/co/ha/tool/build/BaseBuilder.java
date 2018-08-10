@@ -52,4 +52,6 @@ public abstract class BaseBuilder {
 		}
 		return conf;
 	}
+
+	protected abstract void execute();
 }

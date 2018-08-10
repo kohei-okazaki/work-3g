@@ -2,7 +2,6 @@ package jp.co.ha.tool.source;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import jp.co.ha.tool.type.AccessType;
@@ -35,8 +34,8 @@ public class JavaSource {
 		this.pack = pack;
 	}
 
-	public void addImportMessage(Import importMessage) {
-		this.importList.add(importMessage);
+	public void addImport(Import im) {
+		this.importList.add(im);
 	}
 
 	public List<Import> getImportList() {
@@ -97,31 +96,6 @@ public class JavaSource {
 
 	public void addImplInterface(Class<?> implInterface) {
 		this.implInterfaceList.add(implInterface);
-	}
-
-	@Override
-	public String toString() {
-		StringJoiner result = new StringJoiner("\r\n");
-
-		result.add(this.pack);
-		result.add("\r\n");
-
-		for (Import im : this.importList) {
-			result.add(im.toString());
-		}
-		result.add(this.accessType.getValue() + " " + this.getClassType().getValue() + " " + this.getClassName() + " {");
-		result.add("\r\n");
-		for (Field f : this.fieldList) {
-			result.add("	" + f.toString());
-		}
-		result.add("\r\n");
-		for (Method m : this.methodList) {
-			result.add("	" + m.toString());
-		}
-		result.add("\r\n");
-		result.add("}");
-
-		return result.toString();
 	}
 
 	private List<String> distinctImport() {

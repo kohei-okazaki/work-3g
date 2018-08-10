@@ -1,5 +1,9 @@
 package jp.co.ha.tool.build;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.StringJoiner;
+
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
@@ -10,6 +14,7 @@ import jp.co.ha.tool.source.Field;
 import jp.co.ha.tool.source.Getter;
 import jp.co.ha.tool.source.Import;
 import jp.co.ha.tool.source.JavaSource;
+import jp.co.ha.tool.source.Method;
 import jp.co.ha.tool.source.Setter;
 import jp.co.ha.tool.type.AccessType;
 import jp.co.ha.tool.type.CellPositionType;
@@ -17,8 +22,9 @@ import jp.co.ha.tool.type.ClassType;
 import jp.co.ha.tool.type.ColumnType;
 import jp.co.ha.tool.type.ExecuteType;
 
-public class EntityBuilder extends BaseBuilder {
+public class EntityBuilder extends CommonBuilder {
 
+	@Override
 	public void execute() {
 
 		ExcelReader reader = new ExcelReader(getExcelConfig());
@@ -29,15 +35,17 @@ public class EntityBuilder extends BaseBuilder {
 			JavaSource source = new JavaSource();
 			setCommonInfo(source);
 			for (Row row : excel.getRowList()) {
+
 				if (isTargetTable(row, table)) {
 					source.setClassName(toJavaFileName(getClassName(row)));
+
 					// fieldの設定
 					Field field = new Field(toCamelCase(getFieldName(row)), getClassType(row));
 					source.addField(field);
 
-					// import文を設定
+					// fieldのimport文を設定
 					Import im = new Import(field);
-					source.addImportMessage(im);
+					source.addImport(im);
 
 					// setterの設定
 					Setter setter = new Setter(field);
@@ -51,7 +59,7 @@ public class EntityBuilder extends BaseBuilder {
 
 			FileConfig fileConf = getFileConfig(ExecuteType.ENTITY);
 			fileConf.setFileName(toJavaFileName(table) + ".java");
-			fileConf.setData(source.toString());
+			fileConf.setData(build(source));
 			new FileFactory().create(fileConf);
 		}
 	}
@@ -60,6 +68,8 @@ public class EntityBuilder extends BaseBuilder {
 		source.setPack("package jp.co.ha.business.db.entity;");
 		source.setClassType(ClassType.CLASS);
 		source.setAccessType(AccessType.PUBLIC);
+		source.addImplInterface(Serializable.class);
+		source.addImport(new Import(Serializable.class));
 	}
 
 	private String getFieldName(Row row) {
@@ -96,11 +106,6 @@ public class EntityBuilder extends BaseBuilder {
 		return result;
 	}
 
-	private boolean isTargetTable(Row row, String table) {
-		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
-		return table.equals(cell.getValue());
-	}
-
 	private String getClassName(Row row) {
 		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
 		return cell.getValue();
@@ -110,6 +115,54 @@ public class EntityBuilder extends BaseBuilder {
 		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
 		ColumnType colType = ColumnType.of(columnType);
 		return colType.getClassType();
+	}
+
+	private String build(JavaSource source) {
+		StringJoiner result = new StringJoiner("\r\n");
+
+		result.add(source.getPack());
+		result.add("\r\n");
+
+		for (Import im : source.getImportList()) {
+			result.add(im.toString());
+		}
+		// ex) public class Hoge implements Foo {
+		result.add(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {");
+		result.add("\r\n");
+		result.add(buildFields(source.getFieldList()));
+		result.add("\r\n");
+		result.add(buildMethods(source.getMethodList()));
+		result.add("\r\n");
+		result.add("}");
+
+		return result.toString();
+	}
+
+	private String buildClass(JavaSource source) {
+		String accessType = source.getAccessType().getValue();
+		String classType = source.getClassType().getValue();
+		String className = source.getClassName();
+		StringJoiner body = new StringJoiner(" ");
+		return body.add(accessType).add(classType).add(className).toString();
+	}
+
+	private String buildInterfaces(List<Class<?>> interfaceList) {
+		String prefix = "implements ";
+		StringJoiner body = new StringJoiner(",");
+		interfaceList.stream().forEach(e -> body.add(e.getSimpleName()));
+		return prefix + body.toString();
+	}
+
+	private String buildFields(List<Field> fieldList) {
+		StringJoiner body = new StringJoiner("\r\n");
+		fieldList.stream().forEach(e -> body.add(e.toString()));
+		return body.toString();
+	}
+
+	private String buildMethods(List<Method> methodList) {
+		StringJoiner body = new StringJoiner("\r\n");
+		methodList.stream().forEach(e -> body.add(e.toString()));
+		return body.toString();
 	}
 
 }
