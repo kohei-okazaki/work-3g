@@ -18,7 +18,4 @@ public class Import {
 		return result.toString();
 	}
 
-	public boolean isEquals(Import im) {
-		return im.getClass().equals(clazz);
-	}
 }

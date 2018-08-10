@@ -3,6 +3,7 @@ package jp.co.ha.tool.source;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 import jp.co.ha.tool.type.AccessType;
 import jp.co.ha.tool.type.ClassType;
@@ -105,7 +106,6 @@ public class JavaSource {
 		result.add(this.pack);
 		result.add("\r\n");
 
-		distinctImport(this.importList);
 		for (Import im : this.importList) {
 			result.add(im.toString());
 		}
@@ -124,8 +124,23 @@ public class JavaSource {
 		return result.toString();
 	}
 
-	private void distinctImport(List<Import> importList) {
-		List<Import> rsList = new ArrayList<>();
+	private List<String> distinctImport() {
+		List<String> importMessageList = this.importList.stream()
+														.map(e -> e.getClass().getName())
+//														.distinct()
+														.collect(Collectors.toList());
+		return importMessageList;
+	}
+
+	private List<String> fotmatImport(List<String> importList) {
+		List<String> list = new ArrayList<>();
+		for (String im : importList) {
+			if (!im.contains("java.lang.")) {
+				// import不要の文を排除
+				list.add("import " + im + ";");
+			}
+		}
+		return list;
 	}
 
 }
