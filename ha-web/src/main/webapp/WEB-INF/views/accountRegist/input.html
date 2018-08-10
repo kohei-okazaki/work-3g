@@ -10,10 +10,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css">
 <link rel="stylesheet" type="text/css" href="../resources/css/table.css">
-<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/common/fort.js"></script>
-<script type="text/javascript" src="../resources/js/accountCreate.js"></script>
-<script type="text/javascript" src="../resources/js/common/common.js"></script>
 </head>
 <body>
 
@@ -32,7 +28,7 @@
 	</div>
 
 	<!--/* 入力画面 */-->
-	<form action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
+	<form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
 	<div align="center">
 
 		<div th:if="${errorMessage} != null">
@@ -40,6 +36,7 @@
 				<p th:text="${errorMessage}"></p>
 			</div>
 		</div>
+
 		<div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
 		<div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 		<div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
@@ -73,5 +70,10 @@
 	<hr>
 	<div th:include="./common/footer.html"></div>
 
+	<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="../resources/js/common/fort.js"></script>
+	<script type="text/javascript" src="../resources/js/accountCreate.js"></script>
+	<script type="text/javascript" src="../resources/js/common/common.js"></script>
 </body>
 </html>
