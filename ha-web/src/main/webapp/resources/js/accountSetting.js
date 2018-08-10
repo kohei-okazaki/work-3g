@@ -58,7 +58,7 @@
 			errorPlacement: function(error, element) {
 				if (element.is(':radio')) {
 					error.appendTo(element.parent());
-				}else {
+				} else {
 					error.insertAfter(element);
 				}
 			}
