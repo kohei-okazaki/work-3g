@@ -16,10 +16,12 @@ public class Import {
 
 	@Override
 	public String toString() {
-		StringJoiner result = new StringJoiner(" ");
-		result.add("import");
-		result.add(clazz.getName() + ";");
-		return result.toString();
+		String prefix = "import";
+		String suffix = ";";
+		StringJoiner body = new StringJoiner(" ");
+		body.add(prefix);
+		body.add(clazz.getName() + suffix);
+		return body.toString();
 	}
 
 }

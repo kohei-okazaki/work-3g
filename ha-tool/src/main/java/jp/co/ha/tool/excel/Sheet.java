@@ -24,10 +24,6 @@ public class Sheet {
 		return rowList;
 	}
 
-	public void setRowList(List<Row> rowList) {
-		this.rowList = rowList;
-	}
-
 	public void addRow(Row row) {
 		this.rowList.add(row);
 	}

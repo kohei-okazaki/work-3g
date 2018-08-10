@@ -30,8 +30,7 @@ public class ExcelReader extends BaseFileReader {
 
 	private Cell getCell(Row row, CellPositionType type) {
 		String cellValue = row.getCell(type.getPosition()).getStringCellValue();
-		Cell cell = new Cell(cellValue);
-		return cell;
+		return new Cell(cellValue);
 	}
 
 	public Excel read() {
