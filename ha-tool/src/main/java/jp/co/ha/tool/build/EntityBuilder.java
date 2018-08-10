@@ -22,13 +22,12 @@ public class EntityBuilder extends BaseBuilder {
 	public void execute() {
 
 		ExcelReader reader = new ExcelReader(getExcelConfig());
+		Excel excel = reader.read();
+		excel.activeSheet("TABLE_LIST");
 
-		// Javaファイルを作成
 		for (String table : this.tableList) {
 			JavaSource source = new JavaSource();
 			setCommonInfo(source);
-			Excel excel = reader.read();
-			excel.activeSheet("TABLE_LIST");
 			for (Row row : excel.getRowList()) {
 				if (isTargetTable(row, table)) {
 					source.setClassName(toJavaFileName(getClassName(row)));
