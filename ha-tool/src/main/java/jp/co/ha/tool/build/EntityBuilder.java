@@ -1,12 +1,5 @@
 package jp.co.ha.tool.build;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
@@ -17,25 +10,18 @@ import jp.co.ha.tool.source.Field;
 import jp.co.ha.tool.source.Getter;
 import jp.co.ha.tool.source.Import;
 import jp.co.ha.tool.source.JavaSource;
-import jp.co.ha.tool.source.Method;
 import jp.co.ha.tool.source.Setter;
 import jp.co.ha.tool.type.AccessType;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ClassType;
 import jp.co.ha.tool.type.ColumnType;
+import jp.co.ha.tool.type.ExecuteType;
 
 public class EntityBuilder extends BaseBuilder {
 
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-
 	public void execute() {
 
-		ExcelConfig excelConf = new ExcelConfig();
-		excelConf.setFilePath("META-INF\\DB.xlsx");
-		excelConf.setSheetName("TABLE_LIST");
-		ExcelReader reader = new ExcelReader(excelConf);
-
-		List<JavaSource> sourceList = new ArrayList<>();
+		ExcelReader reader = new ExcelReader(getExcelConfig());
 
 		// Javaファイルを作成
 		for (String table : this.tableList) {
@@ -63,23 +49,16 @@ public class EntityBuilder extends BaseBuilder {
 					source.addMethod(getter);
 				}
 			}
-			for (Field f : source.getFieldList()) {
-				System.out.println(f.toString());
-			}
-			for (Method m : source.getMethodList()) {
-				System.out.println(m.toString());
-			}
 
-			FileConfig fileConf = new FileConfig();
+			FileConfig fileConf = getFileConfig(ExecuteType.ENTITY);
 			fileConf.setFileName(toJavaFileName(table) + ".java");
-			fileConf.setOutputPath(super.baseDir + "\\ha-tool\\src\\main\\java\\jp\\co\\ha\\common\\entity");
 			fileConf.setData(source.toString());
 			new FileFactory().create(fileConf);
 		}
 	}
 
 	private void setCommonInfo(JavaSource source) {
-		source.setPack("package jp.co.ha.common.entity;");
+		source.setPack("package jp.co.ha.business.db.entity;");
 		source.setClassType(ClassType.CLASS);
 		source.setAccessType(AccessType.PUBLIC);
 	}

@@ -3,7 +3,6 @@ package jp.co.ha.tool.build;
 import java.util.Objects;
 import java.util.StringJoiner;
 
-import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
@@ -11,15 +10,13 @@ import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.type.CellPositionType;
+import jp.co.ha.tool.type.ExecuteType;
 
 public class DdlBuilder extends BaseBuilder {
 
 	public void execute() {
 
-		ExcelConfig excelConf = new ExcelConfig();
-		excelConf.setFilePath("META-INF\\DB.xlsx");
-		excelConf.setSheetName("TABLE_LIST");
-		ExcelReader reader = new ExcelReader(excelConf);
+		ExcelReader reader = new ExcelReader(getExcelConfig());
 
 		for (String table : this.tableList) {
 			StringJoiner sb = new StringJoiner("\r\n");
@@ -41,13 +38,11 @@ public class DdlBuilder extends BaseBuilder {
 			sb.add(rowValue.toString());
 			sb.add(ddlEnd);
 
-			FileConfig fileConf = new FileConfig();
-			fileConf.setOutputPath(super.baseDir + "\\ha-resource\\db\\ddl");
+			FileConfig fileConf = getFileConfig(ExecuteType.DDL);
 			fileConf.setFileName(table.toUpperCase() + ".sql");
 			fileConf.setData(sb.toString());
 			new FileFactory().create(fileConf);
 		}
-
 	}
 
 	private String getColumnName(Row row) {
