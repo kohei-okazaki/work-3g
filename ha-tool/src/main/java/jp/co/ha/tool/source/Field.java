@@ -22,11 +22,12 @@ public class Field {
 
 	@Override
 	public String toString() {
-		StringJoiner result = new StringJoiner(" ");
-		result.add(this.accessType.getValue());
-		result.add(this.classType.getSimpleName());
-		result.add(this.name);
-		return result.toString() + ";";
+		String suffix = ";";
+		StringJoiner body = new StringJoiner(" ");
+		body.add(this.accessType.getValue());
+		body.add(this.classType.getSimpleName());
+		body.add(this.name);
+		return body.toString() + suffix;
 	}
 
 	public String getName() {

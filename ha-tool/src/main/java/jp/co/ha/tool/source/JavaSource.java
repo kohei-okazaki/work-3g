@@ -2,7 +2,6 @@ package jp.co.ha.tool.source;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import jp.co.ha.tool.type.AccessType;
 import jp.co.ha.tool.type.ClassType;
@@ -96,25 +95,6 @@ public class JavaSource {
 
 	public void addImplInterface(Class<?> implInterface) {
 		this.implInterfaceList.add(implInterface);
-	}
-
-	private List<String> distinctImport() {
-		List<String> importMessageList = this.importList.stream()
-														.map(e -> e.getClass().getName())
-//														.distinct()
-														.collect(Collectors.toList());
-		return importMessageList;
-	}
-
-	private List<String> fotmatImport(List<String> importList) {
-		List<String> list = new ArrayList<>();
-		for (String im : importList) {
-			if (!im.contains("java.lang.")) {
-				// import不要の文を排除
-				list.add("import " + im + ";");
-			}
-		}
-		return list;
 	}
 
 }

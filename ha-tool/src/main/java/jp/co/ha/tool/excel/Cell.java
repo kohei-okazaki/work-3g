@@ -11,7 +11,7 @@ public class Cell {
 	}
 
 	public String getValue() {
-		return this.value;
+		return value;
 	}
 
 	public ColumnType getColumnType() {

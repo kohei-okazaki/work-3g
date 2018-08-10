@@ -18,7 +18,7 @@ public class Row {
 	}
 
 	public List<Cell> getCellList() {
-		return this.cellList;
+		return cellList;
 	}
 
 	public Cell getCell(CellPositionType type) {

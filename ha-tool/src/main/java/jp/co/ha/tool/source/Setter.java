@@ -25,8 +25,8 @@ public class Setter extends Method {
 
 	@Override
 	protected String getMethodName() {
-		Character c = field.getName().charAt(0);
-		String methodName = field.getName().replaceFirst(c.toString(), c.toString().toUpperCase());
+		String firstChar = new Character(field.getName().charAt(0)).toString();
+		String methodName = field.getName().replaceFirst(firstChar, firstChar.toUpperCase());
 		return PREFIX + methodName;
 	}
 }

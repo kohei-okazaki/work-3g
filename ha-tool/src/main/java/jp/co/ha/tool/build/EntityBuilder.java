@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.StringJoiner;
 
 import jp.co.ha.tool.config.FileConfig;
-import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
@@ -89,32 +88,19 @@ public class EntityBuilder extends CommonBuilder {
 
 	private String toJavaFileName(String fileName) {
 
-		String result = fileName.toLowerCase();
-
-		// 1文字目を大文字にする
+		String result = toCamelCase(fileName);
 		Character startChar = result.charAt(0);
 		Character large = Character.toUpperCase(result.charAt(0));
-		result = result.replaceFirst(startChar.toString(), large.toString());
-
-		// _c を Cに変換
-		while (result.indexOf("_") != -1) {
-			int pos = result.indexOf("_");
-			String target = result.substring(pos, pos + 2);
-			String after = target.replace("_", "").toUpperCase();
-			result = result.replaceFirst(target, after);
-		}
-		return result;
+		return result.replaceFirst(startChar.toString(), large.toString());
 	}
 
 	private String getClassName(Row row) {
-		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
-		return cell.getValue();
+		return row.getCell(CellPositionType.TABLE_NAME).getValue();
 	}
 
 	private Class<?> getClassType(Row row) {
 		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
-		ColumnType colType = ColumnType.of(columnType);
-		return colType.getClassType();
+		return ColumnType.of(columnType).getClassType();
 	}
 
 	private String build(JavaSource source) {
@@ -126,7 +112,7 @@ public class EntityBuilder extends CommonBuilder {
 		for (Import im : source.getImportList()) {
 			result.add(im.toString());
 		}
-		// ex) public class Hoge implements Foo {
+
 		result.add(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {");
 		result.add("\r\n");
 		result.add(buildFields(source.getFieldList()));
