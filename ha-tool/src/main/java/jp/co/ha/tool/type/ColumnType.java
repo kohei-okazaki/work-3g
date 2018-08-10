@@ -1,24 +1,35 @@
 package jp.co.ha.tool.type;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public enum ColumnType {
 	/** VARCHAR */
-	VARCHAR("VARCHAR"),
+	VARCHAR("VARCHAR", String.class),
 	/** DATE */
-	DATE("VARCHAR"),
+	DATE("DATE", java.util.Date.class),
 	/** TIMESTAMP */
-	TIMESTAMP("VARCHAR"),
+	TIMESTAMP("TIMESTAMP", java.util.Date.class),
 	/** DOUBLE */
-	DOUBLE("VARCHAR"),
+	DOUBLE("DOUBLE", BigDecimal.class),
 	/** INT */
-	INT("VARCHAR");
+	INT("INT", BigDecimal.class);
 
-	private ColumnType(String value) {
+	private ColumnType(String value, Class<?> classType) {
 		this.value = value;
+		this.classType = classType;
 	}
 
 	private String value;
+	private Class<?> classType;
+
+	public String getValue() {
+		return this.value;
+	}
+
+	public Class<?> getClassType() {
+		return this.classType;
+	}
 
 	public static ColumnType of(String value) {
 		return Arrays.asList(ColumnType.class.getEnumConstants())
