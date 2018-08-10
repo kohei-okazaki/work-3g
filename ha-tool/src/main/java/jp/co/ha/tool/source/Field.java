@@ -7,14 +7,14 @@ import jp.co.ha.tool.type.AccessType;
 public class Field {
 
 	private String name;
-	private Class classType;
+	private Class<?> classType;
 	private AccessType accessType;
 
-	public Field(String name, Class classType) {
+	public Field(String name, Class<?> classType) {
 		this(name, classType, AccessType.PRIVATE);
 	}
 
-	public Field(String name, Class classType, AccessType accessType) {
+	public Field(String name, Class<?> classType, AccessType accessType) {
 		this.name = name;
 		this.classType = classType;
 		this.accessType = accessType;
@@ -37,11 +37,11 @@ public class Field {
 		this.name = name;
 	}
 
-	public Class getClassType() {
+	public Class<?> getClassType() {
 		return classType;
 	}
 
-	public void setClassType(Class classType) {
+	public void setClassType(Class<?> classType) {
 		this.classType = classType;
 	}
 
