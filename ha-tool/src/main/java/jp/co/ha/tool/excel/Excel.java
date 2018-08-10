@@ -13,11 +13,7 @@ public class Excel {
 		this.sheetList = new ArrayList<>();
 	}
 
-	public List<Sheet> getSheetList() {
-		return this.sheetList;
-	}
-
-	public Sheet getSheet(String sheetName) {
+	private Sheet getSheet(String sheetName) {
 		return this.sheetList.stream()
 					.filter(e -> e.getName().equals(sheetName))
 					.findFirst()

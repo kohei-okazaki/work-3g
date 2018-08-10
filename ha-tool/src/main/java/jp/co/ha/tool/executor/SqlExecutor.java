@@ -13,6 +13,5 @@ public class SqlExecutor {
 		// Entityを作成
 		EntityBuilder entityBuilder = new EntityBuilder();
 		entityBuilder.execute();
-
 	}
 }
