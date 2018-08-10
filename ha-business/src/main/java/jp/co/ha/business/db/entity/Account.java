@@ -1,4 +1,4 @@
-package jp.co.ha.common.entity;
+package jp.co.ha.business.db.entity;
 
 import java.io.Serializable;
 import java.util.Date;

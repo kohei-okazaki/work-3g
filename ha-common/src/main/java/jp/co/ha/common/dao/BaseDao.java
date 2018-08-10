@@ -18,7 +18,7 @@ import jp.co.ha.common.util.BeanUtil;
  * Dao実装の基底クラス<br>
  *
  */
-public abstract class BaseDaoImpl {
+public abstract class BaseDao {
 
 	protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 

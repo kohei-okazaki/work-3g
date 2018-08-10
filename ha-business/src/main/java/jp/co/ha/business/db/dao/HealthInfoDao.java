@@ -1,9 +1,9 @@
-package jp.co.ha.common.dao;
+package jp.co.ha.business.db.dao;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.common.exception.DataBaseException;
 
 /**

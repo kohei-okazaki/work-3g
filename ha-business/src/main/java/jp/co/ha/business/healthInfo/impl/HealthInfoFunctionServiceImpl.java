@@ -2,9 +2,9 @@ package jp.co.ha.business.healthInfo.impl;
 
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.db.entity.Account;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
-import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.util.StringUtil;
 
 /**

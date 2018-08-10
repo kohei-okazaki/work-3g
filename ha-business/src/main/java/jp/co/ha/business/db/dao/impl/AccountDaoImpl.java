@@ -1,10 +1,10 @@
-package jp.co.ha.common.dao.impl;
+package jp.co.ha.business.db.dao.impl;
 
 import java.sql.SQLException;
 
-import jp.co.ha.common.dao.AccountDao;
-import jp.co.ha.common.dao.BaseDaoImpl;
-import jp.co.ha.common.entity.Account;
+import jp.co.ha.business.db.dao.AccountDao;
+import jp.co.ha.business.db.entity.Account;
+import jp.co.ha.common.dao.BaseDao;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
@@ -16,7 +16,7 @@ import jp.co.ha.common.util.DateUtil;
  * アカウント情報のDaoクラス
  *
  */
-public class AccountDaoImpl extends BaseDaoImpl implements AccountDao {
+public class AccountDaoImpl extends BaseDao implements AccountDao {
 
 	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 

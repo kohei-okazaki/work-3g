@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.create.HealthInfoFileSettingCreateService;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.update.HealthInfoFileSettingUpdateService;
-import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.form.HealthInfoFileSettingForm;

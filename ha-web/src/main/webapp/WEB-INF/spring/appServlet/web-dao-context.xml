@@ -11,12 +11,12 @@
 						http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- アカウント情報Dao -->
-	<beans:bean id="accountDao" class="jp.co.ha.common.dao.impl.AccountDaoImpl" />
+	<beans:bean id="accountDao" class="jp.co.ha.business.db.dao.impl.AccountDaoImpl" />
 	<!-- 健康情報Dao -->
-	<beans:bean id="healthInfoDao" class="jp.co.ha.common.dao.impl.HealthInfoDaoImpl" />
+	<beans:bean id="healthInfoDao" class="jp.co.ha.business.db.dao.impl.HealthInfoDaoImpl" />
 	<!-- メール情報Dao -->
-	<beans:bean id="mailInfoDao" class="jp.co.ha.common.dao.impl.MailInfoDaoImpl" />
+	<beans:bean id="mailInfoDao" class="jp.co.ha.business.db.dao.impl.MailInfoDaoImpl" />
 	<!-- 健康情報ファイル設定Dao -->
-	<beans:bean id="healthInfoFileSettingDao" class="jp.co.ha.common.dao.impl.HealthInfoFileSettingDaoImpl" />
+	<beans:bean id="healthInfoFileSettingDao" class="jp.co.ha.business.db.dao.impl.HealthInfoFileSettingDaoImpl" />
 
 </beans:beans>

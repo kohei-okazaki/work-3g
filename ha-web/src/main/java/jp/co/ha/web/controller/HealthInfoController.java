@@ -26,20 +26,23 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.db.entity.HealthInfo;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.parameter.ParamConst;
-import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.file.csv.CsvConfig;
+import jp.co.ha.common.file.csv.CsvFileChar;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.Charset;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
@@ -223,7 +226,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
-		CsvConfig conf = csvDownloadService.getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), fileSetting);
+		CsvConfig conf = getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
@@ -234,6 +237,27 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		} catch (IOException e) {
 			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
 		}
+	}
+
+	/**
+	 * CSV設定情報を取得する<br>
+	 *
+	 * @param fileName
+	 *     ファイル名
+	 * @param entity
+	 *     健康情報ファイル設定
+	 * @return CsvConfig
+	 */
+	private CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting entity) {
+		CsvConfig csvConfig = new CsvConfig();
+		csvConfig.setFileName(fileName);
+		csvConfig.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
+		csvConfig.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
+		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
+		csvConfig.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
+		csvConfig.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
+		csvConfig.setCharset(Charset.UTF_8);
+		return csvConfig;
 	}
 
 }

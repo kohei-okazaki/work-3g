@@ -3,10 +3,10 @@ package jp.co.ha.web.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.db.entity.Account;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.business.parameter.ParamConst;
-import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.PasswordEncoder;
