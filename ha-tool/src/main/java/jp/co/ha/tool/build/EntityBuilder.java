@@ -126,7 +126,7 @@ public class EntityBuilder extends CommonBuilder {
 		for (Import im : source.getImportList()) {
 			result.add(im.toString());
 		}
-		// ex) public class Hoge implements Foo {
+
 		result.add(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {");
 		result.add("\r\n");
 		result.add(buildFields(source.getFieldList()));
