@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
-import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;

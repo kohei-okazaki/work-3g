@@ -1,6 +1,6 @@
 package jp.co.ha.business.db.create;
 
-import jp.co.ha.common.entity.Account;
+import jp.co.ha.business.db.entity.Account;
 
 /**
  * アカウント作成サービスインターフェース<br>

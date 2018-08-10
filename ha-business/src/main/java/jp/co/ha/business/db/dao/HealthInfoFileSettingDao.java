@@ -1,6 +1,6 @@
-package jp.co.ha.common.dao;
+package jp.co.ha.business.db.dao;
 
-import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.DataBaseException;
 
 /**

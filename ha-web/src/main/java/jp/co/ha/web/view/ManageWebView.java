@@ -57,12 +57,6 @@ public enum ManageWebView implements BaseView {
 	/** view名 */
 	private String name;
 
-	/**
-	 * コンストラクタ<br>
-	 *
-	 * @param name
-	 *            名前
-	 */
 	private ManageWebView(String name) {
 		this.name = name;
 	}

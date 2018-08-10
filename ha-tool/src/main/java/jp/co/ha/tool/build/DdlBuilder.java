@@ -86,4 +86,6 @@ public class DdlBuilder extends BaseBuilder {
 	private boolean isTargetTable(Row row, String table) {
 		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
 		return table.equals(cell.getValue());
-	}}
+	}
+
+}

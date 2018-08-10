@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.DataBaseException;
 

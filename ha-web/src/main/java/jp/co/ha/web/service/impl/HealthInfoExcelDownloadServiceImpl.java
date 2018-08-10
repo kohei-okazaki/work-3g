@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
+import jp.co.ha.business.db.entity.HealthInfo;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
-import jp.co.ha.common.entity.HealthInfo;
-import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
+import jp.co.ha.common.util.Charset;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
 
@@ -62,6 +65,19 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		model.setStandardWeight(useMask ? "****" : healthInfo.getStandardWeight().toString());
 
 		return model;
+	}
+
+	/**
+	 * Excel設定情報を取得<br>
+	 * @param healthInfoFileSetting 健康情報設定情報
+	 * @return
+	 */
+	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
+		ExcelConfig conf = new ExcelConfig();
+		conf.setCharset(Charset.UTF_8);
+		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
+		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
+		return conf;
 	}
 
 }

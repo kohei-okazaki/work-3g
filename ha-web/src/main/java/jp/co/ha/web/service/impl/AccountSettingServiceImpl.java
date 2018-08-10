@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.create.MailInfoCreateService;
+import jp.co.ha.business.db.entity.Account;
+import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.business.db.find.MailInfoSearchService;
 import jp.co.ha.business.db.update.AccountUpdateService;
 import jp.co.ha.business.db.update.MailInfoUpdateService;
-import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.entity.MailInfo;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.form.AccountSettingForm;

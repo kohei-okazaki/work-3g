@@ -1,6 +1,6 @@
 package jp.co.ha.business.db.find;
 
-import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
 
 /**

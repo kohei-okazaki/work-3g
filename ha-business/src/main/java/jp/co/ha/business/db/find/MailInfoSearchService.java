@@ -1,6 +1,6 @@
 package jp.co.ha.business.db.find;
 
-import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.common.exception.BaseException;
 
 /**

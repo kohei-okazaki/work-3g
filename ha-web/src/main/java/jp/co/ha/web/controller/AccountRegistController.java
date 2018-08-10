@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.create.AccountCreateService;
 import jp.co.ha.business.db.create.HealthInfoFileSettingCreateService;
+import jp.co.ha.business.db.entity.Account;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.AccountSearchService;
-import jp.co.ha.common.entity.Account;
-import jp.co.ha.common.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;

@@ -1,6 +1,6 @@
 package jp.co.ha.business.db.update;
 
-import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.business.db.entity.MailInfo;
 
 /**
  * メール情報更新サービスインターフェース<br>

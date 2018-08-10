@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.create.HealthInfoFileSettingCreateService;
-import jp.co.ha.common.dao.HealthInfoFileSettingDao;
-import jp.co.ha.common.entity.HealthInfoFileSetting;
+import jp.co.ha.business.db.dao.HealthInfoFileSettingDao;
+import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
 
 /**

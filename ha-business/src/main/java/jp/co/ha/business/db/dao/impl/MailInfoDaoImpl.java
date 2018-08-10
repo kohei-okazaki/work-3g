@@ -1,10 +1,10 @@
-package jp.co.ha.common.dao.impl;
+package jp.co.ha.business.db.dao.impl;
 
 import java.sql.SQLException;
 
-import jp.co.ha.common.dao.BaseDaoImpl;
-import jp.co.ha.common.dao.MailInfoDao;
-import jp.co.ha.common.entity.MailInfo;
+import jp.co.ha.business.db.dao.MailInfoDao;
+import jp.co.ha.business.db.entity.MailInfo;
+import jp.co.ha.common.dao.BaseDao;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
@@ -16,7 +16,7 @@ import jp.co.ha.common.util.DateUtil;
  * メール情報のDaoクラス
  *
  */
-public class MailInfoDaoImpl extends BaseDaoImpl implements MailInfoDao {
+public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 
 	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 

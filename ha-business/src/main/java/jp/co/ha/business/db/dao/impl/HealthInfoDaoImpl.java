@@ -1,13 +1,13 @@
-package jp.co.ha.common.dao.impl;
+package jp.co.ha.business.db.dao.impl;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.co.ha.common.dao.BaseDaoImpl;
-import jp.co.ha.common.dao.HealthInfoDao;
-import jp.co.ha.common.entity.HealthInfo;
+import jp.co.ha.business.db.dao.HealthInfoDao;
+import jp.co.ha.business.db.entity.HealthInfo;
+import jp.co.ha.common.dao.BaseDao;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
@@ -19,7 +19,7 @@ import jp.co.ha.common.util.DateUtil;
  * 健康情報のDaoクラス
  *
  */
-public class HealthInfoDaoImpl extends BaseDaoImpl implements HealthInfoDao {
+public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
 
 	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
