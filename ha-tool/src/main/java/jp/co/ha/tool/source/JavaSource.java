@@ -8,7 +8,7 @@ import jp.co.ha.tool.type.ClassType;
 
 public class JavaSource {
 
-	private String pack;
+	private Package pack;
 	private List<Import> importList;
 	private AccessType accessType;
 	private ClassType classType;
@@ -25,11 +25,11 @@ public class JavaSource {
 		this.methodList = new ArrayList<>();
 	}
 
-	public String getPack() {
+	public Package getPackage() {
 		return pack;
 	}
 
-	public void setPack(String pack) {
+	public void setPackage(Package pack) {
 		this.pack = pack;
 	}
 

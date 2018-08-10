@@ -64,7 +64,7 @@ public class EntityBuilder extends CommonBuilder {
 	}
 
 	private void setCommonInfo(JavaSource source) {
-		source.setPack("package jp.co.ha.business.db.entity;");
+		source.setPackage(new jp.co.ha.tool.source.Package("jp.co.ha.business.db.entity"));
 		source.setClassType(ClassType.CLASS);
 		source.setAccessType(AccessType.PUBLIC);
 		source.addImplInterface(Serializable.class);
@@ -106,12 +106,10 @@ public class EntityBuilder extends CommonBuilder {
 	private String build(JavaSource source) {
 		StringJoiner result = new StringJoiner("\r\n");
 
-		result.add(source.getPack());
+		result.add(buildPackage(source));
 		result.add("\r\n");
 
-		for (Import im : source.getImportList()) {
-			result.add(im.toString());
-		}
+		result.add(buildImport(source.getImportList()));
 
 		result.add(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {");
 		result.add("\r\n");
@@ -122,6 +120,16 @@ public class EntityBuilder extends CommonBuilder {
 		result.add("}");
 
 		return result.toString();
+	}
+
+	private String buildPackage(JavaSource source) {
+		return source.getPackage().toString();
+	}
+
+	private String buildImport(List<Import> importList) {
+		StringJoiner body = new StringJoiner("\r\n");
+		importList.stream().forEach(e -> body.add(e.toString()));
+		return body.toString();
 	}
 
 	private String buildClass(JavaSource source) {
