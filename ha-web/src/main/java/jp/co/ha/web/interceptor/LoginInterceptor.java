@@ -41,10 +41,8 @@ public class LoginInterceptor extends BaseInterceptor {
 			 return true;
 		 } else {
 			 LOG.info("ログイン情報チェック対象です");
-			 String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-			 boolean res = StringUtil.isEmpty(userId);
+			 boolean res = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class));
 			 if (res) {
-				 LOG.warn("ユーザIDがありません");
 				 throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "ユーザIDがありません");
 			 }
 			 return true;
