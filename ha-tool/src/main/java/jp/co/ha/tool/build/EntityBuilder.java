@@ -37,7 +37,7 @@ public class EntityBuilder extends CommonBuilder {
 					source.setClassName(toJavaFileName(getClassName(row)));
 
 					// fieldの設定
-					Field field = new Field(toCamelCase(getFieldName(row)), getClassType(row));
+					Field field = new Field(toCamelCase(getFieldName(row)), getColumnComment(row), getClassType(row));
 					source.addField(field);
 
 					// fieldのimport文を設定
@@ -59,6 +59,10 @@ public class EntityBuilder extends CommonBuilder {
 			fileConf.setData(build(source));
 			new FileFactory().create(fileConf);
 		}
+	}
+
+	private String getColumnComment(Row row) {
+		return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
 
 	private void setCommonInfo(JavaSource source) {
@@ -147,8 +151,17 @@ public class EntityBuilder extends CommonBuilder {
 
 	private String buildFields(List<Field> fieldList) {
 		StringJoiner body = new StringJoiner("\r\n");
-		fieldList.stream().forEach(e -> body.add(e.toString()));
+		fieldList.stream().forEach(e -> {
+			body.add(buildjavaDoc(e));
+			body.add(e.toString());
+		});
 		return body.toString();
+	}
+
+	private String buildjavaDoc(Field field) {
+		String javadocPrefix = "/** ";
+		String javadocSuffix = " */";
+		return javadocPrefix + field.getComment() + javadocSuffix;
 	}
 
 	private String buildMethods(List<Method> methodList) {
