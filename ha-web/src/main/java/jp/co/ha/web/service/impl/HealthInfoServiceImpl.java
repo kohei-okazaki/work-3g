@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
+import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.db.find.AccountSearchService;
@@ -36,6 +38,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報登録サービス */
+	@Autowired
+	private HealthInfoRegistService healthInfoRegistService;
 
 	/**
 	 * {@inheritDoc}
@@ -65,10 +70,15 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * 健康情報登録APIリクエストの設定を行う<br>
+	 *
+	 * @param form
+	 *     健康情報入力フォーム
+	 * @param userId
+	 *     ユーザID
+	 * @throws BaseException
 	 */
-	@Override
-	public HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseException {
+	private HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseException {
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
 		// フォーム情報をリクエストクラスにコピー
 		BeanUtil.copy(form, apiRequest);
@@ -101,6 +111,16 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		BeanUtil.copy(healthInfo, model);
 		modelList.add(model);
 		return modelList;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException {
+		HealthInfoRegistRequest apiRequest = setUpApiRequest(form, userId);
+		healthInfoRegistService.checkRequest(apiRequest);
+		return healthInfoRegistService.execute(apiRequest);
 	}
 
 }
