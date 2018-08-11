@@ -3,6 +3,8 @@ package jp.co.ha.web.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.db.create.AccountCreateService;
+import jp.co.ha.business.db.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.AccountSearchService;
@@ -27,27 +29,16 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** パスワード作成サービス */
+	/** アカウント作成サービス */
 	@Autowired
+	private AccountCreateService accountCreateService;
+	/** 健康情報ファイル設定作成サービス */
+	@Autowired
+	private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
+	/** パスワード作成サービス */
 	@Sha256
+	@Autowired
 	private PasswordEncoder encoder;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Account toAccount(AccountRegistForm form) throws AlgorithmException {
-
-		Account account = new Account();
-		BeanUtil.copy(form, account);
-		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
-		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
-
-		String apiKey = encoder.execute(form.getPassword(), form.getUserId());
-		account.setApiKey(apiKey);
-
-		return account;
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -57,7 +48,6 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 
 		// 指定したアカウント情報を検索
 		Account account = accountSearchService.findByUserId(form.getUserId());
-
 		if (BeanUtil.isNull(account)) {
 			// 初回登録時のアカウントの場合、後続のチェックを行わない
 			return false;
@@ -71,6 +61,47 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public void regist(AccountRegistForm form) throws BaseException {
+
+		// アカウントEntityに変換
+		Account account = toAccount(form);
+		// アカウントを作成
+		accountCreateService.create(account);
+
+		// 健康情報ファイル設定情報Entityに変換
+		HealthInfoFileSetting healthInfoFileSetting = toHealthInfoFileSetting(form);
+		// 健康情報ファイル設定情報を作成
+		healthInfoFileSettingCreateService.create(healthInfoFileSetting);
+	}
+
+	/**
+	 * アカウントEntityに変換する<br>
+	 *
+	 * @param form
+	 *     アカウント登録画面フォーム
+	 * @return
+	 * @throws AlgorithmException
+	 */
+	private Account toAccount(AccountRegistForm form) throws AlgorithmException {
+
+		Account account = new Account();
+		BeanUtil.copy(form, account);
+		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
+		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
+
+		String apiKey = encoder.execute(form.getPassword(), form.getUserId());
+		account.setApiKey(apiKey);
+
+		return account;
+	}
+
+	/**
+	 * 健康情報ファイル設定Entityに変換する<br>
+	 *
+	 * @param form
+	 *     アカウント登録画面フォーム
+	 * @return
+	 */
 	public HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
 		entity.setUserId(form.getUserId());
