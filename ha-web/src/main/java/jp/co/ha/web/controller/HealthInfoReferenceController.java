@@ -102,7 +102,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *            Model
 	 * @return
 	 */
-	@GetMapping(value = "/reference.html")
+	@GetMapping(value = "/index.html")
 	public String reference(Model model) {
 		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
@@ -122,7 +122,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws BaseException
 	 *     アプリ例外
 	 */
-	@PostMapping(value = "/reference.html")
+	@PostMapping(value = "/index.html")
 	public String reference(HttpServletRequest request, Model model
 			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseException {
 

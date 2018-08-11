@@ -23,7 +23,7 @@ public enum ManageWebView implements BaseView {
 	HEALTH_INFO_COMPLETE("healthInfo/complete"),
 
 	/** 健康情報照会画面URL */
-	HEALTH_INFO_REFFERNCE("healthInfoReference/reference"),
+	HEALTH_INFO_REFFERNCE("healthInfoReference/index"),
 
 	/** アカウント設定入力画面URL */
 	ACCOUNT_SETTING_INPUT("accountSetting/input"),
