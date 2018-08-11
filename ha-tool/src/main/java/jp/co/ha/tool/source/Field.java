@@ -7,15 +7,17 @@ import jp.co.ha.tool.type.AccessType;
 public class Field {
 
 	private String name;
+	private String comment;
 	private Class<?> classType;
 	private AccessType accessType;
 
-	public Field(String name, Class<?> classType) {
-		this(name, classType, AccessType.PRIVATE);
+	public Field(String name, String comment, Class<?> classType) {
+		this(name, comment, classType, AccessType.PRIVATE);
 	}
 
-	public Field(String name, Class<?> classType, AccessType accessType) {
+	public Field(String name, String comment, Class<?> classType, AccessType accessType) {
 		this.name = name;
+		this.comment = comment;
 		this.classType = classType;
 		this.accessType = accessType;
 	}
@@ -36,6 +38,14 @@ public class Field {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public Class<?> getClassType() {

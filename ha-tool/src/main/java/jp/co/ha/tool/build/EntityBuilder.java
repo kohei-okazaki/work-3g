@@ -8,7 +8,6 @@ import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
-import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.source.Field;
 import jp.co.ha.tool.source.Getter;
 import jp.co.ha.tool.source.Import;
@@ -26,11 +25,10 @@ public class EntityBuilder extends CommonBuilder {
 	@Override
 	public void execute() {
 
-		ExcelReader reader = new ExcelReader(getExcelConfig());
-		Excel excel = reader.read();
+		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
 
-		for (String table : this.tableList) {
+		for (String table : this.targetTableList) {
 			JavaSource source = new JavaSource();
 			setCommonInfo(source);
 			for (Row row : excel.getRowList()) {
@@ -39,7 +37,7 @@ public class EntityBuilder extends CommonBuilder {
 					source.setClassName(toJavaFileName(getClassName(row)));
 
 					// fieldの設定
-					Field field = new Field(toCamelCase(getFieldName(row)), getClassType(row));
+					Field field = new Field(toCamelCase(getFieldName(row)), getColumnComment(row), getClassType(row));
 					source.addField(field);
 
 					// fieldのimport文を設定
@@ -61,6 +59,10 @@ public class EntityBuilder extends CommonBuilder {
 			fileConf.setData(build(source));
 			new FileFactory().create(fileConf);
 		}
+	}
+
+	private String getColumnComment(Row row) {
+		return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
 
 	private void setCommonInfo(JavaSource source) {
@@ -95,7 +97,7 @@ public class EntityBuilder extends CommonBuilder {
 	}
 
 	private String getClassName(Row row) {
-		return row.getCell(CellPositionType.TABLE_NAME).getValue();
+		return row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 	}
 
 	private Class<?> getClassType(Row row) {
@@ -149,8 +151,17 @@ public class EntityBuilder extends CommonBuilder {
 
 	private String buildFields(List<Field> fieldList) {
 		StringJoiner body = new StringJoiner("\r\n");
-		fieldList.stream().forEach(e -> body.add(e.toString()));
+		fieldList.stream().forEach(e -> {
+			body.add(buildjavaDoc(e));
+			body.add(e.toString());
+		});
 		return body.toString();
+	}
+
+	private String buildjavaDoc(Field field) {
+		String javadocPrefix = "/** ";
+		String javadocSuffix = " */";
+		return javadocPrefix + field.getComment() + javadocSuffix;
 	}
 
 	private String buildMethods(List<Method> methodList) {

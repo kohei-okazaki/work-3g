@@ -2,8 +2,8 @@ package jp.co.ha.tool.type;
 
 public enum CellPositionType {
 
-	TABLE_NAME_COMMENT(0, "tableNameComment"),
-	TABLE_NAME(1, "tableName"),
+	LOGICAL_NAME(0, "logicalName"),
+	PHYSICAL_NAME(1, "physicalName"),
 	PRIMARY_KEY(2, "primaryKey"),
 	SEQUENCE(3, "sequence"),
 	COLUMN_NAME_COMMENT(4, "columnNameComment"),

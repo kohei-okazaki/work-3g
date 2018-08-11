@@ -7,7 +7,6 @@ import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
-import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
@@ -16,33 +15,39 @@ public class DdlBuilder extends CommonBuilder {
 	@Override
 	public void execute() {
 
-		ExcelReader reader = new ExcelReader(getExcelConfig());
+		Excel excel = super.reader.read();
+		excel.activeSheet("TABLE_LIST");
 
-		for (String table : this.tableList) {
-			StringJoiner sb = new StringJoiner("\r\n");
-			String ddlBegin = "CREATE TABLE " + table + " (";
-			String ddlEnd = ");";
-			sb.add(ddlBegin);
-			Excel excel = reader.read();
-			excel.activeSheet("TABLE_LIST");
+		for (String table : this.targetTableList) {
+			StringJoiner body = new StringJoiner("\r\n");
+			String ddlPrefix = "CREATE TABLE " + table + " (";
+			String ddlSuffix = ");";
+			body.add(ddlPrefix);
 			StringJoiner rowValue = new StringJoiner(",\r\n");
 			for (Row row : excel.getRowList()) {
 				if (isTargetTable(row, table)) {
+					// コメントを取得
+					String columnComment = getColumnComment(row);
 					// カラム名を取得
 					String columnName = getColumnName(row);
 					// カラム定義を取得
 					String columnType = getColumnType(row);
-					rowValue.add(columnName + " " + columnType);
+					rowValue.add(columnComment + "\r\n" + columnName + " " + columnType);
 				}
 			}
-			sb.add(rowValue.toString());
-			sb.add(ddlEnd);
+			body.add(rowValue.toString());
+			body.add(ddlSuffix);
 
 			FileConfig fileConf = getFileConfig(ExecuteType.DDL);
 			fileConf.setFileName(table.toUpperCase() + ".sql");
-			fileConf.setData(sb.toString());
+			fileConf.setData(body.toString());
 			new FileFactory().create(fileConf);
 		}
+	}
+
+	private String getColumnComment(Row row) {
+		String comment = row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
+		return "-- " + comment;
 	}
 
 	private String getColumnName(Row row) {

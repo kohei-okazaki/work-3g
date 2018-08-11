@@ -16,7 +16,7 @@ public abstract class BaseBuilder {
 
 	private Properties property;
 
-	protected List<String> tableList;
+	protected List<String> targetTableList;
 	protected String baseDir;
 
 	public BaseBuilder() {
@@ -27,7 +27,7 @@ public abstract class BaseBuilder {
 	private void init() {
 		String target = get(PropertyType.TARGET_TABLE);
 		if (Objects.nonNull(target)) {
-			this.tableList = Stream.of(target.split(",")).collect(Collectors.toList());
+			this.targetTableList = Stream.of(target.split(",")).collect(Collectors.toList());
 		}
 		this.baseDir = get(PropertyType.BASE_DIR);
 	}
@@ -49,6 +49,8 @@ public abstract class BaseBuilder {
 			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\ddl");
 		} else if (execType == ExecuteType.ENTITY) {
 			conf.setOutputPath(this.baseDir + "\\ha-tool\\src\\main\\java\\jp\\co\\ha\\business\\db\\entity");
+		} else if (execType == ExecuteType.DROP) {
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\drop");
 		}
 		return conf;
 	}
