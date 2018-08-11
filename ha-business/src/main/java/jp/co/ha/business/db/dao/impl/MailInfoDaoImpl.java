@@ -40,10 +40,10 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 				mailInfo.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
+			LOG.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} catch (DataBaseException e) {
-			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
+			LOG.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();

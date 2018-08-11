@@ -17,7 +17,7 @@ public class ErrorResponse extends BaseResponse {
 	 * コンストラクタ<br>
 	 *
 	 * @param e
-	 *     BaseAppException 例外
+	 *     例外
 	 */
 	public ErrorResponse(BaseException e) {
 		super.setResultType(ResultType.FAILURE);

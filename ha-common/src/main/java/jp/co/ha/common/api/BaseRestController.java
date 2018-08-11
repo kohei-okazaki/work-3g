@@ -23,9 +23,9 @@ import jp.co.ha.common.log.LoggerFactory;
  * すべてのRestAPIコントローラはこのクラスを継承すること<br>
  *
  * @param <Rq>
- *     リクエストクラス
+ *     リクエスト
  * @param <Rs>
- *     レスポンスクラス
+ *     レスポンス
  * @param <S>
  *     サービスクラス
  */
