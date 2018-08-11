@@ -1,4 +1,4 @@
-function accountCreate() {
+function accountRegist() {
 	// formを作成
 	var form = document.createElement('form');
 	form.action = '../accountRegist/input.html';
@@ -60,6 +60,9 @@ function changeValue() {
 			confirmPassword: {
 				required: true,
 				equalTo: "#password"
+			},
+			remarks: {
+				required: false
 			}
 	};
 
