@@ -14,15 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.db.create.AccountCreateService;
-import jp.co.ha.business.db.create.HealthInfoFileSettingCreateService;
-import jp.co.ha.business.db.entity.Account;
-import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.annotation.NonAuth;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;
+import jp.co.ha.web.interceptor.annotation.NonAuth;
 import jp.co.ha.web.service.AccountRegistService;
 import jp.co.ha.web.validator.AccountRegistValidator;
 import jp.co.ha.web.view.ManageWebView;
@@ -38,15 +34,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	/** アカウント登録画面サービス */
 	@Autowired
 	private AccountRegistService service;
-	/** アカウント作成サービス */
-	@Autowired
-	private AccountCreateService accountCreateService;
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** 健康情報ファイル設定作成サービス */
-	@Autowired
-	private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
 
 	/**
 	 * {@inheritDoc}
@@ -107,15 +97,8 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
 			throws BaseException {
 
-		// アカウントEntityに変換
-		Account account = service.toAccount(form);
-		// アカウントを作成
-		accountCreateService.create(account);
-
-		// 健康情報ファイル設定情報Entityに変換
-		HealthInfoFileSetting healthInfoFileSetting = service.toHealthInfoFileSetting(form);
-		// 健康情報ファイル設定情報を作成
-		healthInfoFileSettingCreateService.create(healthInfoFileSetting);
+		// 登録処理を行う
+		service.regist(form);
 
 		return getView(ManageWebView.ACCOUNT_REGIST_COMPLETE);
 	}

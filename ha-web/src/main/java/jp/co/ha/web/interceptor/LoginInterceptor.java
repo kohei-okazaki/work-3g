@@ -12,10 +12,10 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.system.annotation.NonAuth;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseInterceptor;
+import jp.co.ha.web.interceptor.annotation.NonAuth;
 
 public class LoginInterceptor extends BaseInterceptor {
 
@@ -41,10 +41,8 @@ public class LoginInterceptor extends BaseInterceptor {
 			 return true;
 		 } else {
 			 LOG.info("ログイン情報チェック対象です");
-			 String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-			 boolean res = StringUtil.isEmpty(userId);
+			 boolean res = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class));
 			 if (res) {
-				 LOG.warn("ユーザIDがありません");
 				 throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "ユーザIDがありません");
 			 }
 			 return true;

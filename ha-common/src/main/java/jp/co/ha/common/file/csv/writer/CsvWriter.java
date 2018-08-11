@@ -44,6 +44,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 * @param modelList
 	 *     モデルリスト
 	 */
+	@SuppressWarnings("unchecked")
 	public void execute(List<T> modelList) {
 		StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
 		if (this.conf.hasHeader()) {

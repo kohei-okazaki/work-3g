@@ -11,7 +11,7 @@ import jp.co.ha.business.type.HealthStatus;
 public interface HealthInfoCalcService {
 
 	/**
-	 * 入力体重と前の体重を比較し、ユーザステータスを返す<br>
+	 * 入力体重と前の体重を比較し、健康ステータスを返す<br>
 	 *
 	 * @param inputWeight
 	 *     入力体重
@@ -19,7 +19,7 @@ public interface HealthInfoCalcService {
 	 *     前の体重
 	 * @return
 	 */
-	HealthStatus getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
+	HealthStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
 
 	/**
 	 * 単位を以下に変換する</br>

@@ -52,6 +52,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	/**
 	 * {@inheritDoc}
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {

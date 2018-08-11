@@ -42,7 +42,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoF
 				entity.setRegDate(rs.getTimestamp(REG_DATE));
 			}
 		} catch (SQLException e) {
-			LOGGER.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
+			LOG.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();

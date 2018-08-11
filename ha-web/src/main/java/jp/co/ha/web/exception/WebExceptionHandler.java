@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
-import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseException;
@@ -29,11 +28,11 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName(ManageWebView.ERROR.getName());
-		if (e instanceof MultipartException) {
-			return modelView;
-		}
 		request.setAttribute("errorMessage", buildErrorMessage(e));
 		LOGGER.error(buildErrorMessage(e), e);
+//		if (e instanceof MultipartException) {
+//			return modelView;
+//		}
 		return modelView;
 	}
 

@@ -45,6 +45,7 @@ public class SessionManageServiceImpl implements SessionManageService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T getValue(HttpSession session, String key, Class<T> clazz) {
 		return (T) session.getAttribute(key);

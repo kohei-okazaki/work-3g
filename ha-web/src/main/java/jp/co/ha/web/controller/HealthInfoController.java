@@ -23,9 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
-import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.HealthInfoFileSettingSearchService;
@@ -67,9 +65,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
-	/** 健康情報登録サービス */
-	@Autowired
-	private HealthInfoRegistService healthInfoRegistService;
 	/** 健康情報Excelダウンロードサービス */
 	@Autowired
 	@HealthInfoDownloadExcel
@@ -143,7 +138,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		if (BeanUtil.isNull(userId)) {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
-		HealthInfoRegistRequest apiRequest = healthInfoService.setUpApiRequest(form, userId);
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
@@ -151,14 +145,11 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		if (!isFirstReg) {
 			// 初回登録でない場合
 			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
-			model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
-			model.addAttribute("diffWeight", healthInfoService.getDiffWeight(form, lastHealthInfo));
-			model.addAttribute("resultMessage", healthInfoService.getDiffMessage(form, lastHealthInfo));
+			healthInfoService.addModel(model, form, lastHealthInfo);
 		}
 
-		healthInfoRegistService.checkRequest(apiRequest);
 		// 健康情報登録処理を行う
-		HealthInfoRegistResponse apiResponse = healthInfoRegistService.execute(apiRequest);
+		HealthInfoRegistResponse apiResponse = healthInfoService.regist(form, userId);
 
 		// レスポンス情報をformに設定
 		BeanUtil.copy(apiResponse, form);

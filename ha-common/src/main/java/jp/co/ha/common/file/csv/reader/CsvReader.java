@@ -35,6 +35,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 * @throws BaseException
 	 *     アプリ例外
 	 */
+	@SuppressWarnings("unchecked")
 	public T read(String record) throws AppIOException {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());

@@ -51,10 +51,8 @@ public enum ManageWebView implements BaseView {
 	/** 健康情報ファイル設定確認画面URL */
 	HEALTH_INFO_FILE_SETTING_CONFIRM("healthInfoFileSetting/confirm"),
 	/** 健康情報ファイル設定入力完了画面URL */
-	HEALTH_INFO_FILE_SETTING_COMPLETE("healthInfoFileSetting/complete"),
-	;
+	HEALTH_INFO_FILE_SETTING_COMPLETE("healthInfoFileSetting/complete");
 
-	/** view名 */
 	private String name;
 
 	private ManageWebView(String name) {

@@ -193,9 +193,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
 
-		// CSV出力モデルリストに変換する
-		List<ReferenceCsvDownloadModel> modelList = service.toModelList(userId, resultList);
-
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = getCsvConfig(ParamConst.CSV_FILE_NAME_REFERNCE_RESULT.getValue(), fileSetting);
@@ -203,7 +200,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {
-			csvDownloadService.execute(response.getWriter(), conf, modelList);
+			csvDownloadService.execute(response.getWriter(), conf, service.toModelList(userId, resultList));
 		} catch (AppIOException e) {
 			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
 		} catch (IOException e) {

@@ -23,9 +23,9 @@ import jp.co.ha.common.log.LoggerFactory;
  * すべてのRestAPIコントローラはこのクラスを継承すること<br>
  *
  * @param <Rq>
- *     リクエストクラス
+ *     リクエスト
  * @param <Rs>
- *     レスポンスクラス
+ *     レスポンス
  * @param <S>
  *     サービスクラス
  */
@@ -106,6 +106,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 *     JSON系のエラー
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@ExceptionHandler(JsonProcessingException.class)
 	public default Rs jsonProcessingExceptionHandle(JsonProcessingException e) {
 
@@ -128,6 +129,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 *     アプリエラー
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@ExceptionHandler(BaseException.class)
 	public default Rs appExceptionHandle(BaseException e) {
 

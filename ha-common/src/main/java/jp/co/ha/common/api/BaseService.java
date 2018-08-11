@@ -7,9 +7,9 @@ import jp.co.ha.common.exception.BaseException;
  * 各機能のサービスの親クラスとする<br>
  *
  * @param <Rq>
- *     リクエスト種別
+ *     リクエスト
  * @param <Rs>
- *     レスポンス種別
+ *     レスポンス
  */
 public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 
