@@ -8,7 +8,7 @@ import jp.co.ha.common.file.csv.writer.CsvWriter;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MaskExecutor;
-import jp.co.ha.common.util.DateFormatPattern;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
@@ -54,7 +54,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 		// 標準体重
 		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight().toString());
 		// 登録日時
-		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 
 		// 1行書き込む
 		recordJoiner.add(joiner.toString());

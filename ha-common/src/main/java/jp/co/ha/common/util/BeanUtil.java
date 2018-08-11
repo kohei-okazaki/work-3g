@@ -13,6 +13,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.AccessorType;
 
 /**
  * Bean系のUtilクラス<br>

@@ -20,6 +20,7 @@ import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.system.annotation.NonAuth;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
@@ -72,6 +73,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
+	@NonAuth
 	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
@@ -81,6 +83,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
+	@NonAuth
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result)
 			throws BaseException {
@@ -99,6 +102,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 * {@inheritDoc}
 	 */
 	@Override
+	@NonAuth
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
 			throws BaseException {

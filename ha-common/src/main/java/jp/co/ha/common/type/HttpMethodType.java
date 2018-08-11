@@ -1,9 +1,9 @@
-package jp.co.ha.common.util;
+package jp.co.ha.common.type;
 
 /**
  * HTTPメソッドの列挙クラス<br>
  *
  */
-public enum HttpMethod {
+public enum HttpMethodType {
 	GET, POST;
 }

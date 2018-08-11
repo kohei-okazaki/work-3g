@@ -1,6 +1,6 @@
 package jp.co.ha.common.file.csv;
 
-import jp.co.ha.common.util.Charset;
+import jp.co.ha.common.type.CharsetType;
 
 /**
  * CSV設定情報保持クラス<br>
@@ -18,7 +18,7 @@ public class CsvConfig {
 	/** 囲い文字 */
 	private CsvFileChar csvFileChar;
 	/** 文字コード */
-	private Charset charset;
+	private CharsetType charset;
 	/** フッタ有無 */
 	private boolean hasFooter;
 	/** マスク利用有無 */
@@ -105,7 +105,7 @@ public class CsvConfig {
 	 *
 	 * @return charset 文字コード
 	 */
-	public Charset getCharset() {
+	public CharsetType getCharset() {
 		return charset;
 	}
 
@@ -115,7 +115,7 @@ public class CsvConfig {
 	 * @param charset
 	 *     文字コード
 	 */
-	public void setCharset(Charset charset) {
+	public void setCharset(CharsetType charset) {
 		this.charset = charset;
 	}
 

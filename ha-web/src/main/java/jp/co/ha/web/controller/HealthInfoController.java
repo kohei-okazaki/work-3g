@@ -35,13 +35,14 @@ import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.CsvFileChar;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.type.CharsetType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWizardController;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
@@ -140,7 +141,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		if (BeanUtil.isNull(userId)) {
-			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
 		HealthInfoRegistRequest apiRequest = healthInfoService.setUpApiRequest(form, userId);
 
@@ -256,7 +257,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
 		csvConfig.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
-		csvConfig.setCharset(Charset.UTF_8);
+		csvConfig.setCharset(CharsetType.UTF_8);
 		return csvConfig;
 	}
 

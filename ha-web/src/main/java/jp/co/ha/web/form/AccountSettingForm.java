@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.util.RegixPattern;
+import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
@@ -24,20 +24,20 @@ public class AccountSettingForm implements BaseForm {
 
 	/** ユーザID */
 	@Required(message = "ユーザIDが未入力です")
-	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "ユーザIDが半角英数でありません")
+	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "ユーザIDが半角英数でありません")
 	@Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
 	@Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
 	private String userId;
 	/** パスワード */
 	@Mask
 	@Required(message = "パスワードが未入力です")
-	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "パスワードが半角英数でありません")
+	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "パスワードが半角英数でありません")
 	@Min(size = 2, message = "パスワードは2桁以上で入力してください")
 	@Max(size = 16, message = "パスワードは16桁以下で入力してください")
 	private String password;
 	/** 削除フラグ */
 	@Required
-	@Pattern(regixPattern = RegixPattern.HALF_NUMBER, message = "削除フラグが半角数字でありません")
+	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "削除フラグが半角数字でありません")
 	@Flag(message = "削除フラグの値が不正です")
 	private String deleteFlag;
 	/** 備考 */
@@ -51,7 +51,7 @@ public class AccountSettingForm implements BaseForm {
 	/** メールパスワード */
 	@Mask
 	@Required(message = "メールパスワードが未入力です")
-	@Pattern(regixPattern = RegixPattern.HALF_CHAR, message = "メールパスワードが半角英数でありません")
+	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "メールパスワードが半角英数でありません")
 	private String mailPassword;
 	/** APIキー */
 	@Mask

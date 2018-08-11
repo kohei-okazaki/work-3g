@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.util.DateFormatPattern;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -64,8 +64,8 @@ public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoF
 					+ "'" + healthInfoFileSetting.getFooterFlag() + "', "
 					+ "'" + healthInfoFileSetting.getMaskFlag() + "', "
 					+ "'" + healthInfoFileSetting.getEnclosureCharFlag() + "', "
-					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
-					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
+					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "', "
+					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 					+ ")";
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
@@ -87,7 +87,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoF
 					+ FOOTER_FLAG + "= '" + healthInfoFileSetting.getFooterFlag() + "', "
 					+ MASK_FLAG + "= '" + healthInfoFileSetting.getMaskFlag() + "', "
 					+ ENCLOSURE_CHAR_FLAG + "= '" + healthInfoFileSetting.getEnclosureCharFlag() + "', "
-					+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
+					+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 					+ " WHERE "+ USER_ID + "= '" + healthInfoFileSetting.getUserId() + "'";
 			System.out.println(sql);
 			int rs = execute(sql, SqlType.UPDATE);

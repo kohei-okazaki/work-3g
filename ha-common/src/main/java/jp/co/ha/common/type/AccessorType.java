@@ -1,4 +1,6 @@
-package jp.co.ha.common.util;
+package jp.co.ha.common.type;
+
+import jp.co.ha.common.util.BeanUtil;
 
 /**
  * メソッドのアクセス列挙<br>

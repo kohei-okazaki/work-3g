@@ -12,7 +12,7 @@ import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.util.DateFormatPattern;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -110,7 +110,7 @@ public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
 												+ "'" + healthInfo.getBmi() + "', "
 												+ "'" + healthInfo.getStandardWeight() + "', "
 												+ "'" + healthInfo.getUserStatus() + "', "
-												+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
+												+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 												+ ")";
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);

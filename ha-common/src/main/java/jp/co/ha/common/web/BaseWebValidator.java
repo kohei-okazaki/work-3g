@@ -4,8 +4,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.RegixPattern;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -91,7 +91,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	protected void rejectIfNotHalfNumberPeriod(Errors errors, String fieldsName, String nameArgs) {
 		// 値を取得
 		String fieldValue = getFieldValue(errors, fieldsName);
-		if (!RegixPattern.isPattern(fieldValue, RegixPattern.HALF_NUMBER_PERIOD)) {
+		if (!RegixType.isPattern(fieldValue, RegixType.HALF_NUMBER_PERIOD)) {
 			errors.rejectValue(fieldsName, "validate.message.TypeError", new String[] { nameArgs }, "validate.message.TypeError");
 		}
 	}

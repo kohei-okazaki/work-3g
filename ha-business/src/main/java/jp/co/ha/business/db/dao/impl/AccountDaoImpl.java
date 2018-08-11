@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.util.DateFormatPattern;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -63,11 +63,11 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 													+ "'" + account.getUserId() + "', "
 													+ "'" + account.getPassword() + "', "
 													+ "'" + account.getDeleteFlag() + "', "
-													+ "'" + DateUtil.toString(account.getPasswordExpire(), DateFormatPattern.YYYYMMDD) + "', "
+													+ "'" + DateUtil.toString(account.getPasswordExpire(), DateFormatType.YYYYMMDD) + "', "
 													+ "'" + account.getRemarks() + "', "
 													+ "'" + account.getApiKey() + "', "
-													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
-													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
+													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "', "
+													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 													+ ")";
 			System.out.println(sql);
 			int rs = execute(sql, SqlType.INSERT);
@@ -88,10 +88,10 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 			String sql = "UPDATE " + TABLE_NAME + " SET "
 										+ PASSWORD + "= '" + account.getPassword() + "', "
 										+ DELETE_FLAG + "= '" + account.getDeleteFlag() + "', "
-										+ PASSWORD_EXPIRE + "= '" + DateUtil.toString(account.getPasswordExpire(), DateFormatPattern.YYYYMMDD) + "', "
+										+ PASSWORD_EXPIRE + "= '" + DateUtil.toString(account.getPasswordExpire(), DateFormatType.YYYYMMDD) + "', "
 										+ REMARKS + "= '" + account.getRemarks() + "', "
 										+ API_KEY + "= '" + account.getApiKey() + "', "
-										+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
+										+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 										+ " WHERE "+ USER_ID + "= '" + account.getUserId() + "'";
 			System.out.println(sql);
 			int rs = execute(sql, SqlType.UPDATE);

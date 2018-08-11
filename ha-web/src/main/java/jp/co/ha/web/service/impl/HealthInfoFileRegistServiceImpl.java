@@ -15,8 +15,8 @@ import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.RegixPattern;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
 
@@ -66,11 +66,11 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	public void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException {
 		for (int i = 0; i < modelList.size(); i++) {
 			HealthInfoCsvUploadModel model = modelList.get(i);
-			RegixPattern.isPattern(model.getHeight(), RegixPattern.HALF_NUMBER_PERIOD);
-			if (!RegixPattern.isPattern(model.getHeight(), RegixPattern.HALF_NUMBER_PERIOD)) {
+			RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD);
+			if (!RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD)) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());
 			}
-			if (!RegixPattern.isPattern(model.getWeight(), RegixPattern.HALF_NUMBER_PERIOD)) {
+			if (!RegixType.isPattern(model.getWeight(), RegixType.HALF_NUMBER_PERIOD)) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n体重の項目が不正です。体重：" + model.getWeight());
 			}
 		}

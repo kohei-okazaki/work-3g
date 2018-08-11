@@ -21,8 +21,8 @@ import jp.co.ha.business.type.HealthStatus;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -141,7 +141,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
 		HealthInfoRegistResponse response = new HealthInfoRegistResponse();
 		BeanUtil.copy(healthInfo, response);
-		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 
 		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(healthInfo.getUserId());
 		response.setHealthInfoId(lastEntity.getHealthInfoId());

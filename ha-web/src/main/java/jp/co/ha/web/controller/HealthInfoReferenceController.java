@@ -24,18 +24,18 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.find.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.file.csv.CsvConfig;
 import jp.co.ha.common.file.csv.CsvFileChar;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.type.CharsetType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.Charset;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWebController;
 import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
@@ -132,7 +132,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		if (BeanUtil.isNull(userId)) {
-			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
 
 		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
@@ -165,7 +165,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class);
 		if (BeanUtil.isNull(resultList) || resultList.isEmpty()) {
 			// レコードが見つからなかった場合
-			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+			throw new SessionIllegalException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
 
@@ -190,7 +190,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
 		String userId = sessionService.getValue(session, "userId", String.class);
 		if (BeanUtil.isNull(resultList) || BeanUtil.isNull(userId)) {
-			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
 
 		// CSV出力モデルリストに変換する
@@ -228,7 +228,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
 		csvConfig.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
-		csvConfig.setCharset(Charset.UTF_8);
+		csvConfig.setCharset(CharsetType.UTF_8);
 		return csvConfig;
 	}
 }
