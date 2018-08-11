@@ -28,7 +28,7 @@ public class EntityBuilder extends CommonBuilder {
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
 
-		for (String table : this.tableList) {
+		for (String table : this.targetTableList) {
 			JavaSource source = new JavaSource();
 			setCommonInfo(source);
 			for (Row row : excel.getRowList()) {
@@ -93,7 +93,7 @@ public class EntityBuilder extends CommonBuilder {
 	}
 
 	private String getClassName(Row row) {
-		return row.getCell(CellPositionType.TABLE_NAME).getValue();
+		return row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 	}
 
 	private Class<?> getClassType(Row row) {

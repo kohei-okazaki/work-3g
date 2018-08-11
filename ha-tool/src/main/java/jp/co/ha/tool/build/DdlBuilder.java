@@ -18,7 +18,7 @@ public class DdlBuilder extends CommonBuilder {
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
 
-		for (String table : this.tableList) {
+		for (String table : this.targetTableList) {
 			StringJoiner sb = new StringJoiner("\r\n");
 			String ddlBegin = "CREATE TABLE " + table + " (";
 			String ddlEnd = ");";

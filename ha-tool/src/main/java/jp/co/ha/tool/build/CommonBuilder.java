@@ -14,7 +14,7 @@ public abstract class CommonBuilder extends BaseBuilder {
 	}
 
 	protected boolean isTargetTable(Row row, String table) {
-		Cell cell = row.getCell(CellPositionType.TABLE_NAME);
+		Cell cell = row.getCell(CellPositionType.PHYSICAL_NAME);
 		return table.equals(cell.getValue());
 	}
 
