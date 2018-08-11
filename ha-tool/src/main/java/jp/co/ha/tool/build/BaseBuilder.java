@@ -49,6 +49,8 @@ public abstract class BaseBuilder {
 			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\ddl");
 		} else if (execType == ExecuteType.ENTITY) {
 			conf.setOutputPath(this.baseDir + "\\ha-tool\\src\\main\\java\\jp\\co\\ha\\business\\db\\entity");
+		} else if (execType == ExecuteType.DROP) {
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\drop");
 		}
 		return conf;
 	}

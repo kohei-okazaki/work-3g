@@ -7,7 +7,6 @@ import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
-import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
@@ -16,15 +15,14 @@ public class DdlBuilder extends CommonBuilder {
 	@Override
 	public void execute() {
 
-		ExcelReader reader = new ExcelReader(getExcelConfig());
+		Excel excel = super.reader.read();
+		excel.activeSheet("TABLE_LIST");
 
 		for (String table : this.tableList) {
 			StringJoiner sb = new StringJoiner("\r\n");
 			String ddlBegin = "CREATE TABLE " + table + " (";
 			String ddlEnd = ");";
 			sb.add(ddlBegin);
-			Excel excel = reader.read();
-			excel.activeSheet("TABLE_LIST");
 			StringJoiner rowValue = new StringJoiner(",\r\n");
 			for (Row row : excel.getRowList()) {
 				if (isTargetTable(row, table)) {

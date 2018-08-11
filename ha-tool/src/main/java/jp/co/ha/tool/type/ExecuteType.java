@@ -7,6 +7,8 @@ public enum ExecuteType {
 	/** DDL作成 */
 	DDL,
 	/** DML作成 */
-	DML;
+	DML,
+	/** DROP作成 */
+	DROP;
 
 }

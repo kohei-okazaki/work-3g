@@ -8,7 +8,6 @@ import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
-import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.source.Field;
 import jp.co.ha.tool.source.Getter;
 import jp.co.ha.tool.source.Import;
@@ -26,8 +25,7 @@ public class EntityBuilder extends CommonBuilder {
 	@Override
 	public void execute() {
 
-		ExcelReader reader = new ExcelReader(getExcelConfig());
-		Excel excel = reader.read();
+		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
 
 		for (String table : this.tableList) {
