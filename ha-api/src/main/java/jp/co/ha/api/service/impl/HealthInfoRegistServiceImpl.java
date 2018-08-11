@@ -118,7 +118,7 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 
 		String userStatus = BeanUtil.isNull(lastHealthInfo)
 				? HealthStatus.EVEN.getCode()
-				: healthInfoCalcService.getUserStatus(weight, lastHealthInfo.getWeight()).getCode();
+				: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getCode();
 		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();

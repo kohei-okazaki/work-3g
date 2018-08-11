@@ -21,7 +21,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthStatus getUserStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
+	public HealthStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
 
 		HealthStatus status;
 		if (beforeWeight.compareTo(inputWeight) == 0) {
