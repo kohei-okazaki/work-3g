@@ -63,15 +63,10 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	@Override
 	public void regist(AccountRegistForm form) throws BaseException {
 
-		// アカウントEntityに変換
-		Account account = toAccount(form);
 		// アカウントを作成
-		accountCreateService.create(account);
-
-		// 健康情報ファイル設定情報Entityに変換
-		HealthInfoFileSetting healthInfoFileSetting = toHealthInfoFileSetting(form);
+		accountCreateService.create(toAccount(form));
 		// 健康情報ファイル設定情報を作成
-		healthInfoFileSettingCreateService.create(healthInfoFileSetting);
+		healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(form));
 	}
 
 	/**
