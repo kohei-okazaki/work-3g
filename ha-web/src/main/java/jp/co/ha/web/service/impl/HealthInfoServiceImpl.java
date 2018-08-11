@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
@@ -46,16 +47,10 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getDiffMessage(HealthInfoForm form, HealthInfo lastHealthInfo) {
-		return healthInfoCalcService.getUserStatus(form.getWeight(), lastHealthInfo.getWeight()).getMessage();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo lastHealthInfo) {
-		return healthInfoCalcService.calcDiffWeight(lastHealthInfo.getWeight(), form.getWeight());
+	public void addModel(Model model, HealthInfoForm form, HealthInfo lastHealthInfo) {
+		model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
+		model.addAttribute("diffWeight", getDiffWeight(form, lastHealthInfo));
+		model.addAttribute("resultMessage", getDiffMessage(form, lastHealthInfo));
 	}
 
 	/**
@@ -63,7 +58,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	@Override
 	public boolean isFirstReg(String userId) throws BaseException {
-
 		// ユーザIDから健康情報のリストを取得
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
 		return healthInfoList.isEmpty();
@@ -97,8 +91,8 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	@Override
 	public boolean hasRecord(List<HealthInfo> entityList, BigDecimal dataId) {
 		return entityList.stream()
-						.map(entity -> entity.getHealthInfoId())
-						.anyMatch(entityDataId -> entityDataId.equals(dataId));
+				.map(entity -> entity.getHealthInfoId())
+				.anyMatch(entityDataId -> entityDataId.equals(dataId));
 	}
 
 	/**
@@ -121,6 +115,29 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		HealthInfoRegistRequest apiRequest = setUpApiRequest(form, userId);
 		healthInfoRegistService.checkRequest(apiRequest);
 		return healthInfoRegistService.execute(apiRequest);
+	}
+
+	/**
+	 * 体重差メッセージを返す<br>
+	 *
+	 * @param form
+	 *     健康情報入力フォーム
+	 * @param healthInfo
+	 *     健康情報
+	 * @return
+	 */
+	private String getDiffMessage(HealthInfoForm form, HealthInfo healthInfo) {
+		return healthInfoCalcService.getHealthStatus(form.getWeight(), healthInfo.getWeight()).getMessage();
+	}
+
+	/**
+	 * 体重差を返す<br>
+	 * @param form 健康情報入力フォーム
+	 * @param healthInfo 健康情報
+	 * @return
+	 */
+	private BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo healthInfo) {
+		return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(), form.getWeight());
 	}
 
 }

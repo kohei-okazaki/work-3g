@@ -145,9 +145,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		if (!isFirstReg) {
 			// 初回登録でない場合
 			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
-			model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
-			model.addAttribute("diffWeight", healthInfoService.getDiffWeight(form, lastHealthInfo));
-			model.addAttribute("resultMessage", healthInfoService.getDiffMessage(form, lastHealthInfo));
+			healthInfoService.addModel(model, form, lastHealthInfo);
 		}
 
 		// 健康情報登録処理を行う
