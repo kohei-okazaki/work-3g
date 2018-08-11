@@ -50,19 +50,18 @@ public class DdlBuilder extends CommonBuilder {
 	}
 
 	private String getColumnType(Row row) {
-		StringJoiner sj = new StringJoiner(" ");
+		StringJoiner body = new StringJoiner(" ");
 		// カラム定義とサイズを取得
 		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
 		String size = getSize(row);
-		sj.add(columnType + size);
+		body.add(columnType + size);
 		if (isSequence(row)) {
-			sj.add("AUTO_INCREMENT");
+			body.add("AUTO_INCREMENT");
 		}
 		if (isPrimaryKey(row)) {
-			sj.add("NOT NULL PRIMARY KEY");
+			body.add("NOT NULL PRIMARY KEY");
 		}
-
-		return sj.toString();
+		return body.toString();
 	}
 
 	private String getSize(Row row) {
