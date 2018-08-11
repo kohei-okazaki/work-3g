@@ -13,7 +13,7 @@ import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.util.Charset;
+import jp.co.ha.common.type.CharsetType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
@@ -74,7 +74,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 */
 	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
 		ExcelConfig conf = new ExcelConfig();
-		conf.setCharset(Charset.UTF_8);
+		conf.setCharset(CharsetType.UTF_8);
 		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
 		return conf;

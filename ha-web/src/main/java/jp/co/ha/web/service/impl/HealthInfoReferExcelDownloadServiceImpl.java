@@ -15,8 +15,8 @@ import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.util.Charset;
-import jp.co.ha.common.util.DateFormatPattern;
+import jp.co.ha.common.type.CharsetType;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.excel.builder.ResultReferenceExcelBuiler;
@@ -73,7 +73,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 			model.setWeight(useHealthInfoMask ? "****" : healthInfo.getWeight().toString());
 			model.setBmi(useHealthInfoMask ? "****" : healthInfo.getBmi().toString());
 			model.setStandardWeight(useHealthInfoMask ? "****" : healthInfo.getStandardWeight().toString());
-			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 
 			modelList.add(model);
 		});
@@ -88,7 +88,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 */
 	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
 		ExcelConfig conf = new ExcelConfig();
-		conf.setCharset(Charset.UTF_8);
+		conf.setCharset(CharsetType.UTF_8);
 		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
 		return conf;

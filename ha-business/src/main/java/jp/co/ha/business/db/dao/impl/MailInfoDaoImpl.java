@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.util.DateFormatPattern;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -63,7 +63,7 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 			String sql = "UPDATE " + TABLE_NAME + " SET "
 						+ MAIL_ADDRESS + "= '" + mailInfo.getMailAddress() + "', "
 						+ MAIL_PASSWORD + "= '" + mailInfo.getMailPassword() + "', "
-						+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
+						+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 						+ " WHERE " + USER_ID + "= '" + mailInfo.getUserId() + "'";
 			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
@@ -85,8 +85,8 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 					+ "'" + mailInfo.getUserId() + "', "
 					+ "'" + mailInfo.getMailAddress() + "', "
 					+ "'" + mailInfo.getMailPassword() + "', "
-					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "', "
-					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatPattern.YYYYMMDD_HHMMSS) + "'"
+					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "', "
+					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 					+ ");";
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);

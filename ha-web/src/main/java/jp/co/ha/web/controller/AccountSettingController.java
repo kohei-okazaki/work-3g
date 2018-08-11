@@ -23,6 +23,7 @@ import jp.co.ha.business.db.find.MailInfoSearchService;
 import jp.co.ha.business.exception.AccountSettingException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWizardController;
@@ -76,7 +77,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		if (BeanUtil.isNull(userId)) {
-			throw new AccountSettingException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
 		}
 
 		// アカウント情報を検索

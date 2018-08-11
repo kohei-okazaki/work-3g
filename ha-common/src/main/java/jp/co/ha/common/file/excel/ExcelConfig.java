@@ -1,6 +1,6 @@
 package jp.co.ha.common.file.excel;
 
-import jp.co.ha.common.util.Charset;
+import jp.co.ha.common.type.CharsetType;
 
 /**
  * Excel設定情報保持クラス<br>
@@ -11,7 +11,7 @@ public class ExcelConfig {
 	/** ファイル名 */
 	private String fileName;
 	/** キャラセット */
-	private Charset charset;
+	private CharsetType charset;
 	/** ヘッダ有無 */
 	private boolean hasHeader;
 	/** フッタ有無 */
@@ -41,7 +41,7 @@ public class ExcelConfig {
 	 *
 	 * @return charset Charset
 	 */
-	public Charset getCharset() {
+	public CharsetType getCharset() {
 		return charset;
 	}
 
@@ -51,7 +51,7 @@ public class ExcelConfig {
 	 * @param charset
 	 *     Charset
 	 */
-	public void setCharset(Charset charset) {
+	public void setCharset(CharsetType charset) {
 		this.charset = charset;
 	}
 

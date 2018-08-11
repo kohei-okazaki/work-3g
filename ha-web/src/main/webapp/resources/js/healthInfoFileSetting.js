@@ -1,47 +1,45 @@
-function changeValue() {
-
-	// form情報を取得
-	var heightValue = document.getElementById("height").value;
-	var weightValue = document.getElementById("weight").value;
-
-	// 進捗バーを取得
-	var bar = document.getElementById("bar");
-	var heightVal = 0;
-	var weightVal = 0;
-	var confirmPasswordVal = 0;
-	if (heightValue !== "") {
-		heightVal = 1;
-	}
-	if (weightValue !== "") {
-		weightVal = 1;
-	}
-
-	bar.value = heightVal + weightVal;
-}
-
 (function() {
 	// 標準エラーメッセージの変更
 	$.extend($.validator.messages, {
 		required: '*入力必須です'
 	});
 
+
 	// 入力項目の検証ルール定義
 	var rules = {
-			height: {
+			userId: {
 				required: true
 			},
-			weight: {
+			headerFlag: {
+				required: true
+			},
+			footerFlag: {
+				required: true
+			},
+			maskFlag: {
+				required: true
+			},
+			enclosureCharFlag: {
 				required: true
 			}
 	};
 
 	// 入力項目ごとのエラーメッセージ定義
 	var messages = {
-			height: {
-				required: "身長が未入力です"
+			userId: {
+				required: "ユーザIDが未入力です"
 			},
-			weight: {
-				required: "体重が未入力です"
+			headerFlag: {
+				required: "ヘッダ利用フラグが未入力です"
+			},
+			footerFlag: {
+				required: "フッタ利用フラグが未入力です"
+			},
+			maskFlag: {
+				required: "マスク利用フラグが未入力です"
+			},
+			enclosureCharFlag: {
+				required: "ファイル囲み文字利用フラグが未入力です"
 			}
 	};
 

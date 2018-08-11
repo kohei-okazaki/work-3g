@@ -1,4 +1,4 @@
-package jp.co.ha.common.util;
+package jp.co.ha.common.type;
 
 import java.util.regex.Pattern;
 
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  * 正規表現列挙<br>
  *
  */
-public enum RegixPattern {
+public enum RegixType {
 
 	/** 半角数字 */
 	HALF_NUMBER("^[0-9]*$"),
@@ -26,7 +26,7 @@ public enum RegixPattern {
 	 * @param pattern
 	 *     正規表現
 	 */
-	private RegixPattern(String pattern) {
+	private RegixType(String pattern) {
 		this.pattern = pattern;
 	}
 
@@ -49,7 +49,7 @@ public enum RegixPattern {
 	 *     正規表現
 	 * @return
 	 */
-	public static boolean isPattern(String target, RegixPattern pattern) {
+	public static boolean isPattern(String target, RegixType pattern) {
 		return Pattern.compile(pattern.getPattern()).matcher(target).find();
 	}
 

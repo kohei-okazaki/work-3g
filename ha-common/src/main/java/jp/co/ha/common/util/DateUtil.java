@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.type.DateFormatType;
 
 /**
  * 日付のUtilクラス<br>
@@ -38,7 +39,7 @@ public class DateUtil {
 	 *     アプリ例外
 	 */
 	public static Date toDate(String target) {
-		return DateUtil.toDate(target, DateFormatPattern.YYYYMMDD_HHMMSS);
+		return DateUtil.toDate(target, DateFormatType.YYYYMMDD_HHMMSS);
 	}
 
 	/**
@@ -52,7 +53,7 @@ public class DateUtil {
 	 * @throws BaseException
 	 *     アプリ例外
 	 */
-	public static Date toDate(String target, DateFormatPattern format) {
+	public static Date toDate(String target, DateFormatType format) {
 
 		// フォーマットを設定
 		SimpleDateFormat sdf = new SimpleDateFormat(format.getValue());
@@ -124,7 +125,7 @@ public class DateUtil {
 	 *     Dateフォーマット
 	 * @return
 	 */
-	public static String toString(Date targetDate, DateFormatPattern format) {
+	public static String toString(Date targetDate, DateFormatType format) {
 
 		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
@@ -144,7 +145,7 @@ public class DateUtil {
 	 *     アプリ例外
 	 */
 	public static Date toStartDate(Date targetDate) {
-		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatPattern.YYYYMMDD.getValue() + " 00:00:00");
+		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatType.YYYYMMDD.getValue() + " 00:00:00");
 		String result = sdf.format(targetDate);
 		return toDate(result);
 	}

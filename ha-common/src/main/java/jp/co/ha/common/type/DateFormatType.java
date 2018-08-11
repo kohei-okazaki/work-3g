@@ -1,17 +1,17 @@
-package jp.co.ha.common.util;
+package jp.co.ha.common.type;
 
 /**
  * Dateフォーマット
  *
  */
-public enum DateFormatPattern {
+public enum DateFormatType {
 
 	YYYYMMDD("yyyy/MM/dd"),
 	YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss");
 
 	private String value;
 
-	private DateFormatPattern(String value) {
+	private DateFormatType(String value) {
 		this.value = value;
 	}
 

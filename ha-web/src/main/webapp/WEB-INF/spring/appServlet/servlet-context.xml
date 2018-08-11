@@ -60,7 +60,7 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/*" />
+			<mapping path="/**" />
 			<beans:bean class="jp.co.ha.web.interceptor.LoginInterceptor" />
 		</interceptor>
 	</interceptors>

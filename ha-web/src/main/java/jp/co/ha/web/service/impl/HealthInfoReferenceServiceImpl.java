@@ -12,8 +12,8 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateFormatPattern;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
@@ -74,7 +74,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 */
 	private Date editStrDate(String date) {
 		String strDate = date.replace(StringUtil.HYPHEN, StringUtil.THRASH);
-		return DateUtil.toDate(strDate, DateFormatPattern.YYYYMMDD);
+		return DateUtil.toDate(strDate, DateFormatType.YYYYMMDD);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		entityList.stream().forEach(entity -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(entity, response);
-			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			resultList.add(response);
 		});
 		return resultList;
@@ -113,7 +113,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 			HealthInfoReferenceResponse healthInfo = resultList.get(i);
 			BeanUtil.copy(healthInfo, model);
 			model.setUserId(userId);
-			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			modelList.add(model);
 		});
 

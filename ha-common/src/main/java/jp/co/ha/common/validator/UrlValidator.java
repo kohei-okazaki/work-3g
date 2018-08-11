@@ -3,7 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import jp.co.ha.common.util.RegixPattern;
+import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Url;
 
@@ -23,7 +23,7 @@ public class UrlValidator implements ConstraintValidator<Url, String> {
 			return true;
 		}
 
-		String urlRegix = RegixPattern.URL.getPattern();
+		String urlRegix = RegixType.URL.getPattern();
 		return value.matches(urlRegix);
 	}
 

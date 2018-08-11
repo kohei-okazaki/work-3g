@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import jp.co.ha.common.file.excel.ExcelConfig;
 import jp.co.ha.common.file.excel.builder.BaseExcelBuilder;
-import jp.co.ha.common.util.DateFormatPattern;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
 
@@ -48,7 +48,7 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelM
 			cell = getCell(sheet, ROW_POSITION, 3);
 			setText(cell, model.getStandardWeight().toString());
 			cell = getCell(sheet, ROW_POSITION, 4);
-			setText(cell, DateUtil.toString(model.getRegDate(), DateFormatPattern.YYYYMMDD_HHMMSS));
+			setText(cell, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 		});
 	}
 }
