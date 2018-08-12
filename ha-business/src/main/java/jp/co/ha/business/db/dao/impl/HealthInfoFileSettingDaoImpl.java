@@ -85,7 +85,6 @@ public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoF
 					+ ENCLOSURE_CHAR_FLAG + "= '" + healthInfoFileSetting.getEnclosureCharFlag() + "', "
 					+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 					+ " WHERE "+ USER_ID + "= '" + healthInfoFileSetting.getUserId() + "'";
-			System.out.println(sql);
 			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
 		} finally {

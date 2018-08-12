@@ -25,7 +25,6 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 		try {
 			connect();
 			String sql = "SELECT * FROM " + TABLE_NAME + " WHERE USER_ID = '" + userId + "'";
-			System.out.println(sql);
 			execute(sql, SqlType.SELECT);
 			while (hasNext()) {
 				account = new Account();
@@ -65,7 +64,6 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "', "
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 													+ ")";
-			System.out.println(sql);
 			int rs = execute(sql, SqlType.INSERT);
 			System.out.println("結果" + rs);
 		} finally {
@@ -89,7 +87,6 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 										+ API_KEY + "= '" + account.getApiKey() + "', "
 										+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 										+ " WHERE "+ USER_ID + "= '" + account.getUserId() + "'";
-			System.out.println(sql);
 			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
 		} finally {

@@ -79,7 +79,7 @@ public abstract class BaseDao {
 	 *     DBエラー
 	 */
 	protected int execute(String sql, SqlType type) throws DataBaseException {
-		LOG.debug("--->" + sql);
+		LOG.info("--->" + sql);
 		try {
 			if (SqlType.SELECT == type) {
 				this.rs = this.stm.executeQuery(sql);
