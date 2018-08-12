@@ -10,8 +10,6 @@ import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.common.dao.BaseDao;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
@@ -20,8 +18,6 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
-
-	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -92,7 +88,7 @@ public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
 	 */
 	@Override
 	public void create(HealthInfo healthInfo) throws DataBaseException {
-		APP_LOGGER.info(healthInfo);
+		LOG.infoRes(healthInfo);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + "("

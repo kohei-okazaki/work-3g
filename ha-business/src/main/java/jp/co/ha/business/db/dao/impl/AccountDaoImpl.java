@@ -7,8 +7,6 @@ import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.common.dao.BaseDao;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
@@ -17,8 +15,6 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class AccountDaoImpl extends BaseDao implements AccountDao {
-
-	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -56,7 +52,7 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 	 */
 	@Override
 	public void create(Account account) throws DataBaseException  {
-		APP_LOGGER.info(account);
+		LOG.infoRes(account);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
@@ -82,7 +78,7 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 	 */
 	@Override
 	public void update(Account account) throws DataBaseException {
-		APP_LOGGER.info(account);
+		LOG.infoRes(account);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "

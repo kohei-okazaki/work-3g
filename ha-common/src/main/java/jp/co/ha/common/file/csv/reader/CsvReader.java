@@ -74,7 +74,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		LOG.info(model);
+		LOG.infoRes(model);
 		return model;
 	}
 

@@ -39,7 +39,7 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 	@Override
 	protected void writeData(StringJoiner recordJoiner, HealthInfoCsvDownloadModel model) {
 
-		LOG.info(model);
+		LOG.infoRes(model);
 		// 1項目ごと区切る
 		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
 

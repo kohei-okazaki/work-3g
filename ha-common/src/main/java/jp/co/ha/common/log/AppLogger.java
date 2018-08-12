@@ -24,63 +24,50 @@ public class AppLogger {
 	/** ロガー */
 	private Logger logger;
 
-	/**
-	 * コンストラクタ<br>
-	 *
-	 * @param logger
-	 *     ロガー
-	 */
 	AppLogger(Logger logger) {
 		this.logger = logger;
 	}
 
-	/**
-	 * debugログ出力を行う<br>
-	 *
-	 * @param bean
-	 *     対象Bean
-	 */
-	public void debug(Object bean) {
+	public void debugRes(Object bean) {
 		logger.debug(getLogMessage(bean));
 	}
 
-	/**
-	 * infoログ出力を行う<br>
-	 *
-	 * @param bean
-	 *     対象Bean
-	 */
-	public void info(Object bean) {
+	public void debug(String msg) {
+		logger.debug(msg);
+	}
+
+	public void infoRes(Object bean) {
 		logger.info(getLogMessage(bean));
 	}
 
-	/**
-	 * warnログ出力を行う<br>
-	 *
-	 * @param bean
-	 *     対象Bean
-	 */
-	public void warn(Object bean) {
+	public void info(String msg) {
+		logger.info(msg);
+	}
+
+	public void warnRes(Object bean) {
 		logger.warn(getLogMessage(bean));
 	}
 
-	/**
-	 * errorログ出力を行う<br>
-	 *
-	 * @param bean
-	 *     対象Bean
-	 */
-	public void error(Object bean) {
+	public void warn(String msg) {
+		logger.warn(msg);
+	}
+
+	public void warn(String msg, Throwable t) {
+		logger.warn(msg, t);
+	}
+
+	public void errorRes(Object bean) {
 		logger.error(getLogMessage(bean));
 	}
 
-	/**
-	 * ログメッセージを返す<br>
-	 *
-	 * @param bean
-	 *     対象Bean
-	 * @return
-	 */
+	public void error(String msg) {
+		logger.error(msg);
+	}
+
+	public void error(String msg, Throwable t) {
+		logger.error(msg, t);
+	}
+
 	private String getLogMessage(Object bean) {
 
 		StringJoiner body = new StringJoiner(", ");
