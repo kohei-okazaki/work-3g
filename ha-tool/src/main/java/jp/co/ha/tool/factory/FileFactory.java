@@ -16,7 +16,7 @@ public class FileFactory {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	public void create(FileConfig conf) {
-		LOG.info("ファイル作成 開始");
+		LOG.info("作成 開始 --->" + conf.getFileName());
 		File file = new File(conf.getOutputPath() + "\\" + conf.getFileName());
 
 		// ファイル作成
@@ -34,7 +34,7 @@ public class FileFactory {
 		} catch (IOException e) {
 			LOG.error("", e);
 		}
-		LOG.info("ファイル作成 終了");
+		LOG.info("作成 終了 --->" + conf.getFileName());
 	}
 
 }
