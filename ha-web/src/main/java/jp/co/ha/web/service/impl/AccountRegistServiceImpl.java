@@ -63,7 +63,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	@Override
 	public void regist(AccountRegistForm form) throws BaseException {
 
-		// アカウントを作成
+		// アカウント情報を作成
 		accountCreateService.create(toAccount(form));
 		// 健康情報ファイル設定情報を作成
 		healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(form));
@@ -83,9 +83,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		BeanUtil.copy(form, account);
 		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
-
-		String apiKey = encoder.execute(form.getPassword(), form.getUserId());
-		account.setApiKey(apiKey);
+		account.setApiKey(encoder.execute(form.getPassword(), form.getUserId()));
 
 		return account;
 	}

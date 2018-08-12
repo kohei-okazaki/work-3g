@@ -17,7 +17,7 @@ public class DataBaseException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public DataBaseException(ErrorCode errorCode, String errorMessage) {
-		super(errorCode, errorMessage);
+	public DataBaseException(ErrorCode errorCode, String detail) {
+		super(errorCode, detail);
 	}
 }
