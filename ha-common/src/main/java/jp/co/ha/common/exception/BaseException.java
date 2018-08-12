@@ -36,13 +36,13 @@ public abstract class BaseException extends Exception {
 
 	private void outLog(ErrorCode errorCode) {
 		if (LogLevel.DEBUG == errorCode.getLogLevel()) {
-			LOG.debug(detail);
+			LOG.debug(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		} else if (LogLevel.INFO == errorCode.getLogLevel()) {
-			LOG.info(detail);
+			LOG.info(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		} else if (LogLevel.WARN == errorCode.getLogLevel()) {
-			LOG.warn(detail);
+			LOG.warn(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		} else if (LogLevel.ERROR == errorCode.getLogLevel()) {
-			LOG.error(detail);
+			LOG.error(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		}
 	}
 
