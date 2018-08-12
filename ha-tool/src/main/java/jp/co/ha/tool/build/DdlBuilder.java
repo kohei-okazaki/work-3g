@@ -35,8 +35,7 @@ public class DdlBuilder extends CommonBuilder {
 					rowValue.add(columnComment + "\r\n" + columnName + " " + columnType);
 				}
 			}
-			body.add(rowValue.toString());
-			body.add(ddlSuffix);
+			body.add(rowValue.toString()).add(ddlSuffix);
 
 			FileConfig fileConf = getFileConfig(ExecuteType.DDL);
 			fileConf.setFileName(table.toUpperCase() + ".sql");
