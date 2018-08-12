@@ -23,6 +23,7 @@ hs_err_pid*
 
 #ビルド成果物
 /target/
+/bin/
 
 #その他
 /work/
