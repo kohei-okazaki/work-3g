@@ -83,7 +83,7 @@ public class AppLogger {
 	 */
 	private String getLogMessage(Object bean) {
 
-		StringJoiner sj = new StringJoiner(", ");
+		StringJoiner body = new StringJoiner(", ");
 		Class<?> clazz = bean.getClass();
 
 		for (Field f : BeanUtil.getFieldList(clazz)) {
@@ -93,15 +93,13 @@ public class AppLogger {
 				continue;
 			}
 			if (MaskExecutor.isMask(f)) {
-				// マスク対象項目
-				sj.add(name + "=" + MaskExecutor.MASK);
+				body.add(name + "=" + MaskExecutor.MASK);
 			} else {
-				// マスク非対象項目
 				String strValue = editValue(getValue(bean, name));
-				sj.add(name + "=" + strValue);
+				body.add(name + "=" + strValue);
 			}
 		}
-		return clazz.getName() + " " + sj.toString();
+		return clazz.getName() + " " + body.toString();
 	}
 
 	/**
