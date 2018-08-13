@@ -47,10 +47,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		Rq apiRequest = toRequest(request);
-		log.info(apiRequest);
+		log.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
 		apiResponse.setResultType(ResultType.SUCCESS);
-		log.info(apiResponse);
+		log.infoRes(apiResponse);
 
 		return apiResponse;
 	}
@@ -69,10 +69,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		Rs apiResponse = null;
-		log.info(apiRequest);
+		log.infoRes(apiRequest);
 		apiResponse = this.execute(apiRequest);
 		apiResponse.setResultType(ResultType.SUCCESS);
-		log.info(apiResponse);
+		log.infoRes(apiResponse);
 
 		return apiResponse;
 	}
@@ -118,7 +118,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
 		}
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
-		log.error(apiResponse);
+		log.errorRes(apiResponse);
 		return apiResponse;
 	}
 
@@ -136,7 +136,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		Rs apiResponse = (Rs) new ErrorResponse(e);
 
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
-		log.error(apiResponse);
+		log.errorRes(apiResponse);
 		return apiResponse;
 	}
 

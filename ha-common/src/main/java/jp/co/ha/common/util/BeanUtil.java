@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.slf4j.Logger;
-
+import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.AccessorType;
 
@@ -21,7 +20,7 @@ import jp.co.ha.common.type.AccessorType;
  */
 public class BeanUtil {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(BeanUtil.class);
+	private static AppLogger LOG = LoggerFactory.getAppLogger(BeanUtil.class);
 
 	/**
 	 * dataのフィールドをtargetのフィールドにコピーする<br>
@@ -73,11 +72,11 @@ public class BeanUtil {
 				}
 			}
 		} catch (IllegalAccessException e) {
-			LOGGER.warn("アクセスに失敗", e);
+			LOG.warn("アクセスに失敗", e);
 		} catch (IllegalArgumentException e) {
-			LOGGER.warn("不正な引数", e);
+			LOG.warn("不正な引数", e);
 		} catch (InvocationTargetException e) {
-			LOGGER.warn("フィールドのアクセスに失敗", e);
+			LOG.warn("フィールドのアクセスに失敗", e);
 		}
 	}
 
@@ -206,7 +205,7 @@ public class BeanUtil {
 				accessor = pd.getReadMethod();
 			}
 		} catch (IntrospectionException e) {
-			LOGGER.warn("メソッドがみつかりません", e);
+			LOG.warn("メソッドがみつかりません", e);
 		}
 		return accessor;
 	}

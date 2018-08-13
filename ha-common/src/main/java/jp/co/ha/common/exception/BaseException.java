@@ -1,7 +1,6 @@
 package jp.co.ha.common.exception;
 
-import org.slf4j.Logger;
-
+import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
@@ -13,7 +12,7 @@ public abstract class BaseException extends Exception {
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
 	/** ロガー */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private final AppLogger LOG = LoggerFactory.getAppLogger(this.getClass());
 
 	/** エラーコード */
 	private ErrorCode errorCode;
@@ -36,13 +35,13 @@ public abstract class BaseException extends Exception {
 
 	private void outLog(ErrorCode errorCode) {
 		if (LogLevel.DEBUG == errorCode.getLogLevel()) {
-			LOG.debug(detail);
+			LOG.debug(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		} else if (LogLevel.INFO == errorCode.getLogLevel()) {
-			LOG.info(detail);
+			LOG.info(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		} else if (LogLevel.WARN == errorCode.getLogLevel()) {
-			LOG.warn(detail);
+			LOG.warn(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		} else if (LogLevel.ERROR == errorCode.getLogLevel()) {
-			LOG.error(detail);
+			LOG.error(detail + "(" + errorCode.getOuterErrorCode() + ")");
 		}
 	}
 

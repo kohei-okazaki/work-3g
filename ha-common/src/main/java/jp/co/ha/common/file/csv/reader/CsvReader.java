@@ -43,10 +43,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 															.map(f -> f.getName())
 															.collect(Collectors.toList());
 		List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
-		if (hasFileLengthError(colList, dataList)) {
-			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
-		}
-
+		checkFileLength(colList, dataList);
 		T model = null;
 		try {
 			model = clazz.getDeclaredConstructor().newInstance();
@@ -74,7 +71,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		LOG.info(model);
+		LOG.infoRes(model);
 		return model;
 	}
 
@@ -85,9 +82,12 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 *     カラムリスト
 	 * @param dataList
 	 *     データリスト
+	 * @throws AppIOException
 	 */
-	private boolean hasFileLengthError(List<String> colList, List<String> dataList) {
-		return dataList.size() != colList.size();
+	private void checkFileLength(List<String> colList, List<String> dataList) throws AppIOException {
+		if (dataList.size() != colList.size()) {
+			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
+		}
 	}
 
 }

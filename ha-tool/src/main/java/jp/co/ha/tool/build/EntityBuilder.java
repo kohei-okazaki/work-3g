@@ -106,20 +106,19 @@ public class EntityBuilder extends CommonBuilder {
 	}
 
 	private String build(JavaSource source) {
-		StringJoiner result = new StringJoiner("\r\n");
+		StringBuilder result = new StringBuilder();
 
-		result.add(buildPackage(source));
-		result.add("\r\n");
+		result.append(buildPackage(source)).append("\r\n\r\n");
 
-		result.add(buildImport(source.getImportList()));
+		result.append(buildImport(source.getImportList())).append("\r\n\r\n");
 
-		result.add(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {");
-		result.add("\r\n");
-		result.add(buildFields(source.getFieldList()));
-		result.add("\r\n");
-		result.add(buildMethods(source.getMethodList()));
-		result.add("\r\n");
-		result.add("}");
+		result.append(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {").append("\r\n\r\n");
+
+		result.append(buildFields(source.getFieldList())).append("\r\n\r\n");
+
+		result.append(buildMethods(source.getMethodList())).append("\r\n\r\n");
+
+		result.append("}");
 
 		return result.toString();
 	}

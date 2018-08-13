@@ -7,8 +7,6 @@ import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.common.dao.BaseDao;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
@@ -17,8 +15,6 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoFileSettingDao {
-
-	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -55,7 +51,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoF
 	 */
 	@Override
 	public void create(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException {
-		APP_LOGGER.info(healthInfoFileSetting);
+		LOG.infoRes(healthInfoFileSetting);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME + " VALUES ("
@@ -79,7 +75,7 @@ public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoF
 	 */
 	@Override
 	public void update(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException {
-		APP_LOGGER.info(healthInfoFileSetting);
+		LOG.infoRes(healthInfoFileSetting);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "
@@ -89,7 +85,6 @@ public class HealthInfoFileSettingDaoImpl extends BaseDao implements HealthInfoF
 					+ ENCLOSURE_CHAR_FLAG + "= '" + healthInfoFileSetting.getEnclosureCharFlag() + "', "
 					+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 					+ " WHERE "+ USER_ID + "= '" + healthInfoFileSetting.getUserId() + "'";
-			System.out.println(sql);
 			int rs = execute(sql, SqlType.UPDATE);
 			System.out.println("結果" + rs);
 		} finally {

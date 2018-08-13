@@ -47,7 +47,7 @@ import jp.co.ha.web.validator.HealthInfoReferenceValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_健康情報照会画面コントローラクラス<br>
+ * 健康管理_健康情報照会画面コントローラ<br>
  *
  */
 @Controller
@@ -76,7 +76,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * Validateを設定<br>
 	 *
 	 * @param binder
-	 *            WebDataBinder
+	 *     WebDataBinder
 	 */
 	@InitBinder(value = "healthInfoReferenceForm")
 	public void initBinder(WebDataBinder binder) {
@@ -99,7 +99,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * 検索照会画面<br>
 	 *
 	 * @param model
-	 *            Model
+	 *     Model
 	 * @return
 	 */
 	@GetMapping(value = "/index.html")
@@ -140,7 +140,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		// 検索情報を設定
 		model.addAttribute("form", form);
 		// 検索結果有無を設定
-		model.addAttribute("hasResult", true);
+		model.addAttribute("hasResult", resultList.isEmpty());
 		// ログイン中のユーザの全レコードを検索する
 		model.addAttribute("resultList", resultList);
 

@@ -7,8 +7,6 @@ import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.common.dao.BaseDao;
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.AppLogger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
@@ -17,8 +15,6 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
-
-	private final AppLogger APP_LOGGER = LoggerFactory.getAppLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -57,7 +53,7 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 	@Override
 	public void update(MailInfo mailInfo) throws DataBaseException {
 
-		APP_LOGGER.info(mailInfo);
+		LOG.infoRes(mailInfo);
 		try {
 			connect();
 			String sql = "UPDATE " + TABLE_NAME + " SET "
@@ -78,7 +74,7 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 	@Override
 	public void create(MailInfo mailInfo) throws DataBaseException {
 
-		APP_LOGGER.info(mailInfo);
+		LOG.infoRes(mailInfo);
 		try {
 			connect();
 			String sql = "INSERT INTO " + TABLE_NAME +" VALUES ("

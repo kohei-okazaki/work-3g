@@ -33,7 +33,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 	/** アカウント登録画面サービス */
 	@Autowired
-	private AccountRegistService service;
+	private AccountRegistService accountRegistService;
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
@@ -98,7 +98,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 			throws BaseException {
 
 		// 登録処理を行う
-		service.regist(form);
+		accountRegistService.regist(form);
 
 		return getView(ManageWebView.ACCOUNT_REGIST_COMPLETE);
 	}

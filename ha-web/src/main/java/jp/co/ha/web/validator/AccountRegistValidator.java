@@ -5,6 +5,8 @@ import org.springframework.validation.Errors;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWebValidator;
 import jp.co.ha.web.form.AccountRegistForm;
@@ -14,6 +16,8 @@ import jp.co.ha.web.form.AccountRegistForm;
  *
  */
 public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> {
+
+	private final AppLogger LOG = LoggerFactory.getAppLogger(this.getClass());
 
 	/** アカウント検索サービス */
 	private AccountSearchService accountSearchService;
@@ -37,7 +41,7 @@ public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> 
 		try {
 			checkExistAccount(errors, form);
 		} catch (BaseException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		}
 	}
 
@@ -54,6 +58,7 @@ public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> 
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
 			errors.rejectValue("userId", "validate.message.existAccount");
+			LOG.warn("アカウント情報が既に登録されています");
 		}
 	}
 

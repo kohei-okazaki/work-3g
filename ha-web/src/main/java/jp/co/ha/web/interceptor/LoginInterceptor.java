@@ -17,6 +17,10 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseInterceptor;
 import jp.co.ha.web.interceptor.annotation.NonAuth;
 
+/**
+ * ログイン情報のチェックを行うinterceptor
+ *
+ */
 public class LoginInterceptor extends BaseInterceptor {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LoginInterceptor.class);

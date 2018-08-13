@@ -7,6 +7,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * ログイン情報のチェックを行わないことを示すマーカーアノテーション<br>
+ *
+ */
 @Inherited
 @Documented
 @Target(ElementType.METHOD)
