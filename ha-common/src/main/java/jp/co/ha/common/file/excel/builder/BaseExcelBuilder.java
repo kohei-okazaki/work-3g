@@ -31,7 +31,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 
 	/** ヘッダー位置 */
 	protected final int HEADER_POSITION = 0;
-	/** Excelモデルインターフェースリストリスト */
+	/** Excelモデルリスト */
 	protected List<M> modelList;
 	/** Excel設定情報 */
 	protected ExcelConfig conf;
