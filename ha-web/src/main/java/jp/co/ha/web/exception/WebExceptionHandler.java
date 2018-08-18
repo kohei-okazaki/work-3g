@@ -3,13 +3,11 @@ package jp.co.ha.web.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -17,8 +15,6 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 public class WebExceptionHandler implements BaseExceptionHandler {
-
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -28,11 +24,8 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 
 		ModelAndView modelView = new ModelAndView();
 		modelView.setViewName(ManageWebView.ERROR.getName());
-		request.setAttribute("errorMessage", buildErrorMessage(e));
-		LOGGER.error(buildErrorMessage(e), e);
-//		if (e instanceof MultipartException) {
-//			return modelView;
-//		}
+		String errorMessage = buildErrorMessage(e);
+		request.setAttribute("errorMessage", errorMessage);
 		return modelView;
 	}
 
@@ -43,6 +36,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 	public String buildErrorMessage(Exception e) {
 		String detail;
 		String errorCode;
+		StringBuilder body = new StringBuilder();
 		if (e instanceof BaseException) {
 			detail = ((BaseException) e).getDetail();
 			errorCode = ((BaseException) e).getErrorCode().getOuterErrorCode();
@@ -51,6 +45,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			detail = ErrorCode.UNEXPECTED_ERROR.getErrorMessage();
 			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
-		return detail + "(" + errorCode + ")";
+		body.append(detail).append("(").append(errorCode).append(")");
+		return body.toString();
 	}
 }
