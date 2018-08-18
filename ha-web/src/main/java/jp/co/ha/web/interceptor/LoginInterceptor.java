@@ -3,8 +3,6 @@ package jp.co.ha.web.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
@@ -23,8 +21,7 @@ import jp.co.ha.web.interceptor.annotation.NonAuth;
  */
 public class LoginInterceptor extends BaseInterceptor {
 
-	private static final Logger LOG = LoggerFactory.getLogger(LoginInterceptor.class);
-
+	/** session管理サービス */
 	@Autowired
 	private SessionManageService sessionService;
 
@@ -32,35 +29,30 @@ public class LoginInterceptor extends BaseInterceptor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
 		// 静的リソースの場合は認証不要
         if (handler instanceof ResourceHttpRequestHandler) {
               return true;
         }
-
-		 if (BeanUtil.notNull(getAuthCheckAnnotation(handler))) {
-			 LOG.info("ログイン情報チェック対象ではありません");
-			 return true;
-		 } else {
-			 LOG.info("ログイン情報チェック対象です");
+        if (isLoginAuthCheck(handler)) {
+        	// ログイン情報のチェック対象の場合
 			 boolean res = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class));
 			 if (res) {
 				 throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "ユーザIDがありません");
 			 }
-			 return true;
-		 }
+        }
+        return true;
 	}
 
 	/**
-	 * ログインチェック対象アノテーションを取得
+	 * ログイン情報をチェックするかどうかを返す<br>
 	 * @param handler
 	 * @return
 	 */
-	private NonAuth getAuthCheckAnnotation(Object handler) {
-		 HandlerMethod handleMethod = (HandlerMethod) handler;
-		 return handleMethod.getMethod().getAnnotation(NonAuth.class);
+	private boolean isLoginAuthCheck(Object handler) {
+		NonAuth annotation = ((HandlerMethod) handler).getMethod().getAnnotation(NonAuth.class);
+		return BeanUtil.isNull(annotation);
 	}
 
 }
