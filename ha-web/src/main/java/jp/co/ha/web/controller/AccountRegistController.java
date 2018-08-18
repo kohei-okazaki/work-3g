@@ -75,8 +75,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@NonAuth
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result)
-			throws BaseException {
+	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合
@@ -94,8 +93,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@NonAuth
 	@PostMapping(value = "/complete.html")
-	public String complete(Model model, AccountRegistForm form, HttpServletRequest request)
-			throws BaseException {
+	public String complete(Model model, AccountRegistForm form, HttpServletRequest request) throws BaseException {
 
 		// 登録処理を行う
 		accountRegistService.regist(form);
