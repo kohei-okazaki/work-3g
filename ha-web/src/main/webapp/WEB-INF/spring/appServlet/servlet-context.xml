@@ -29,7 +29,6 @@
 	</beans:bean>
 	<beans:bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
 		<beans:property name="templateEngine" ref="templateEngine" />
-		<!-- ここで設定していないとhtmlを描画時に日本語が文字化けする -->
 		<beans:property name="characterEncoding" value="UTF-8" />
 	</beans:bean>
 	<beans:bean id="webExceptionHandler" class="jp.co.ha.web.exception.WebExceptionHandler" />
