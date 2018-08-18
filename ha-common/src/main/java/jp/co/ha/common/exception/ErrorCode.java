@@ -100,7 +100,7 @@ public enum ErrorCode {
 	 * @return outerErrorCode
 	 */
 	public String getOuterErrorCode() {
-		return outerErrorCode;
+		return this.outerErrorCode;
 	}
 
 	/**
@@ -109,7 +109,7 @@ public enum ErrorCode {
 	 * @return internalErrorCode
 	 */
 	public String getInternalErrorCode() {
-		return internalErrorCode;
+		return this.internalErrorCode;
 	}
 
 	/**

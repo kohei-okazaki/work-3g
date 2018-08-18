@@ -86,7 +86,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 */
 	private void init(HttpServletResponse response) throws UnsupportedEncodingException {
 
-		String fileName = new String("sample.xlsx".getBytes(conf.getCharset().getName()), "ISO-8859-1");
+		String fileName = new String("sample.xlsx".getBytes(conf.getCharsetType().getName()), "ISO-8859-1");
 		response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
 	}
 

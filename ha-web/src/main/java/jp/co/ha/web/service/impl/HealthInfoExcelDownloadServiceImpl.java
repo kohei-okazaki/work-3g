@@ -74,7 +74,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 */
 	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
 		ExcelConfig conf = new ExcelConfig();
-		conf.setCharset(CharsetType.UTF_8);
+		conf.setCharsetType(CharsetType.UTF_8);
 		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
 		return conf;

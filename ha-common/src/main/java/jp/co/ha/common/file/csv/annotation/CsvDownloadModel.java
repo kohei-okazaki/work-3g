@@ -18,17 +18,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE })
 public @interface CsvDownloadModel {
 
-	/**
-	 * ヘッダ名 セットした順にファイルにつめられる<br>
-	 *
-	 * @return ヘッダ名
-	 */
 	String[] headerNames() default "";
 
-	/**
-	 * フッタ名 セットした順にファイルにつめられる<br>
-	 *
-	 * @return フッタ名
-	 */
 	String[] footerNames() default "";
 }
