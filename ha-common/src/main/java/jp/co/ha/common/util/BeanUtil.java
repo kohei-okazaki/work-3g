@@ -23,6 +23,12 @@ public class BeanUtil {
 	private static AppLogger LOG = LoggerFactory.getAppLogger(BeanUtil.class);
 
 	/**
+	 * プライベートコンストラクタ<br>
+	 */
+	private BeanUtil() {
+	}
+
+	/**
 	 * dataのフィールドをtargetのフィールドにコピーする<br>
 	 * コピー先のクラスと同じフィールド名の場合コピー元のフィールドに値を設定する<br>
 	 *

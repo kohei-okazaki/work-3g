@@ -80,13 +80,13 @@ public class AppLogger {
 				continue;
 			}
 			if (MaskExecutor.isMask(f)) {
-				body.add(name + "=" + MaskExecutor.MASK);
+				body.add(name + StringUtil.EQUAL + MaskExecutor.MASK);
 			} else {
 				String strValue = editValue(getValue(bean, name));
-				body.add(name + "=" + strValue);
+				body.add(name + StringUtil.EQUAL + strValue);
 			}
 		}
-		return clazz.getName() + " " + body.toString();
+		return clazz.getName() + StringUtil.SPACE + body.toString();
 	}
 
 	/**

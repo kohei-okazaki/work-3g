@@ -34,14 +34,10 @@ public abstract class BaseException extends Exception {
 	}
 
 	private void outLog(ErrorCode errorCode) {
-		if (LogLevel.DEBUG == errorCode.getLogLevel()) {
-			LOG.debug(detail + "(" + errorCode.getOuterErrorCode() + ")");
-		} else if (LogLevel.INFO == errorCode.getLogLevel()) {
-			LOG.info(detail + "(" + errorCode.getOuterErrorCode() + ")");
-		} else if (LogLevel.WARN == errorCode.getLogLevel()) {
-			LOG.warn(detail + "(" + errorCode.getOuterErrorCode() + ")");
+		if (LogLevel.WARN == errorCode.getLogLevel()) {
+			LOG.warn(detail + "(" + errorCode.getOuterErrorCode() + ")", this);
 		} else if (LogLevel.ERROR == errorCode.getLogLevel()) {
-			LOG.error(detail + "(" + errorCode.getOuterErrorCode() + ")");
+			LOG.error(detail + "(" + errorCode.getOuterErrorCode() + ")", this);
 		}
 	}
 

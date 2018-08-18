@@ -79,9 +79,9 @@ public enum ErrorCode {
 	 * コンストラクタ<br>
 	 *
 	 * @param internalErrorCode
-	 *     外部用エラーコード
-	 * @param outerErrorCode
 	 *     内部用エラーコード
+	 * @param outerErrorCode
+	 *     外部用エラーコード
 	 * @param logLevel
 	 *     ログレベル
 	 * @param errorMessage
