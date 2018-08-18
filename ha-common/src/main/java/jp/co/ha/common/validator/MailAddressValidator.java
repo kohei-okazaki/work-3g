@@ -3,6 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.MailAddress;
 
@@ -12,6 +13,8 @@ import jp.co.ha.common.validator.annotation.MailAddress;
  */
 public class MailAddressValidator implements ConstraintValidator<MailAddress, String> {
 
+	private final String REGIX = RegixType.MAIL_ADDRESS.getPattern();
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -20,7 +23,7 @@ public class MailAddressValidator implements ConstraintValidator<MailAddress, St
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return false;
+		return value.matches(REGIX);
 	}
 
 }

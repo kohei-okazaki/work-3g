@@ -7,7 +7,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javax.validation.Constraint;
 import javax.validation.Payload;
+
+import jp.co.ha.common.validator.MailAddressValidator;
 
 /**
  * メールアドレス形式チェックアノテーション<br>
@@ -18,6 +21,7 @@ import javax.validation.Payload;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
+@Constraint(validatedBy = MailAddressValidator.class)
 public @interface MailAddress {
 
     String message() default "";
