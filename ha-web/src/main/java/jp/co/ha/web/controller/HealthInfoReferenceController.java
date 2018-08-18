@@ -140,7 +140,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		// 検索情報を設定
 		model.addAttribute("form", form);
 		// 検索結果有無を設定
-		model.addAttribute("hasResult", resultList.isEmpty());
+		model.addAttribute("hasResult", !resultList.isEmpty());
 		// ログイン中のユーザの全レコードを検索する
 		model.addAttribute("resultList", resultList);
 
