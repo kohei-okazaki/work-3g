@@ -11,6 +11,7 @@ import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.source.Table;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
+import jp.co.ha.tool.type.FileType;
 
 public class DropBuilder extends CommonBuilder {
 
@@ -38,7 +39,7 @@ public class DropBuilder extends CommonBuilder {
 			body.add(buildDropSql(e.getPhysicalName()));
 		});
 		FileConfig fileConf = getFileConfig(ExecuteType.DROP);
-		fileConf.setFileName("DROP.sql");
+		fileConf.setFileName("DROP"  + FileType.SQL.getSuffix());
 		fileConf.setData(body.toString());
 		new FileFactory().create(fileConf);
 	}
