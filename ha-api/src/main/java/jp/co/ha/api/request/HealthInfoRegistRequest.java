@@ -33,7 +33,7 @@ public class HealthInfoRegistRequest extends BaseRequest {
 	 * userIdを設定する<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -52,7 +52,7 @@ public class HealthInfoRegistRequest extends BaseRequest {
 	 * heightを設定する<br>
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -71,7 +71,7 @@ public class HealthInfoRegistRequest extends BaseRequest {
 	 * weightを設定する<br>
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;

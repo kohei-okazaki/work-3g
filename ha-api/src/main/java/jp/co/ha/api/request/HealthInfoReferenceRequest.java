@@ -28,7 +28,7 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 	 * userIdを設定する<br>
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -37,7 +37,7 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 	/**
 	 * healthInfoIdを返す<br>
 	 *
-	 * @return healthInfoId healthInfoId
+	 * @return healthInfoId 健康情報ID
 	 */
 	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
@@ -47,7 +47,7 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            healthInfoId
+	 *     健康情報ID
 	 */
 	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
