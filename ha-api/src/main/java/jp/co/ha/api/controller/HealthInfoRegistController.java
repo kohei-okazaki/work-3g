@@ -52,7 +52,7 @@ public class HealthInfoRegistController implements
 	public HealthInfoRegistRequest toRequest(HttpServletRequest request) throws HealthInfoException {
 
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
-		apiRequest.setRequestType(RequestType.of(request.getParameter("requestId")));
+		apiRequest.setRequestType(RequestType.of(request.getParameter("requestType")));
 		apiRequest.setUserId(request.getParameter("userId"));
 		apiRequest.setHeight(BeanUtil.isNull(request.getParameter("height")) ? null : new BigDecimal(request.getParameter("height")));
 		apiRequest.setWeight(BeanUtil.isNull(request.getParameter("weight")) ? null : new BigDecimal(request.getParameter("weight")));

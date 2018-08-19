@@ -6,7 +6,7 @@ import jp.co.ha.common.api.BaseResponse;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報登録レスポンスクラス
+ * 健康情報登録レスポンスクラス<br>
  *
  */
 public class HealthInfoRegistResponse extends BaseResponse {

@@ -7,7 +7,7 @@ import jp.co.ha.common.api.BaseService;
 import jp.co.ha.common.exception.BaseException;
 
 /**
- * 健康情報登録サービス<br>
+ * 健康情報登録サービスインターフェース<br>
  *
  */
 public interface HealthInfoRegistService

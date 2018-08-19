@@ -1,6 +1,7 @@
 package jp.co.ha.common.exception;
 
 import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.LogLevel;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**

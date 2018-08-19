@@ -7,7 +7,9 @@ package jp.co.ha.common.api;
  */
 public enum ResultType {
 
+	/** SUCCESS */
 	SUCCESS("success", "成功"),
+	/** FAILURE */
 	FAILURE("failure", "失敗");
 
 	/** コード値 */

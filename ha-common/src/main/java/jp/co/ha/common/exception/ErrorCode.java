@@ -2,6 +2,8 @@ package jp.co.ha.common.exception;
 
 import java.util.stream.Stream;
 
+import jp.co.ha.common.log.LogLevel;
+
 /**
  * エラーコードの定義<br>
  * API, WEBでのエラーコードをそれぞれ定義する<br>
