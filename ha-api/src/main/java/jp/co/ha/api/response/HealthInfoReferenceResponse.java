@@ -43,7 +43,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            健康情報ID
+	 *     健康情報ID
 	 */
 	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
@@ -52,7 +52,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	/**
 	 * userIdを返す<br>
 	 *
-	 * @return userId userId
+	 * @return userId ユーザID
 	 */
 	public String getUserId() {
 		return userId;
@@ -62,7 +62,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * userIdを設定する<br>
 	 *
 	 * @param userId
-	 *            userId
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -81,7 +81,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * heightを設定する<br>
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -100,7 +100,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * weightを設定する<br>
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -119,7 +119,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * bmiを設定する<br>
 	 *
 	 * @param bmi
-	 *            BMI
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -138,7 +138,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * standardWeightを設定する<br>
 	 *
 	 * @param standardWeight
-	 *            標準体重
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -157,7 +157,7 @@ public class HealthInfoReferenceResponse extends BaseResponse {
 	 * regDateを設定する<br>
 	 *
 	 * @param regDate
-	 *            登録日時
+	 *     登録日時
 	 */
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
