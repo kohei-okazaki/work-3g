@@ -15,7 +15,9 @@ public enum RegixType {
 	/** 半角英数字 */
 	HALF_CHAR("^[0-9a-zA-Z]*$"),
 	/** URL */
-	URL("http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?");
+	URL("http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?"),
+	/** メールアドレス */
+	MAIL_ADDRESS("[A-Za-z0-9._+]+@[A-Za-z]+.[A-Za-z]");
 
 	/** 正規表現 */
 	private String pattern;

@@ -40,7 +40,7 @@ public class HealthInfo implements Serializable {
 	/**
 	 * healthInfoIdを返す<br>
 	 *
-	 * @return healthInfoId
+	 * @return healthInfoId 健康情報ID
 	 */
 	public BigDecimal getHealthInfoId() {
 		return healthInfoId;
@@ -50,6 +50,7 @@ public class HealthInfo implements Serializable {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
+	 *     健康情報ID
 	 */
 	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;

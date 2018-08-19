@@ -31,7 +31,7 @@ public abstract class BaseDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance();
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/work3g?serverTimezone=JST", "root", "admin");
-			LOG.info("DBに接続");
+			LOG.debug("DBに接続");
 			if (BeanUtil.notNull(con)) {
 				stm = con.createStatement();
 			}

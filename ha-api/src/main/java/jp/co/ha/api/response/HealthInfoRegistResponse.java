@@ -6,7 +6,7 @@ import jp.co.ha.common.api.BaseResponse;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報登録レスポンスクラス
+ * 健康情報登録レスポンスクラス<br>
  *
  */
 public class HealthInfoRegistResponse extends BaseResponse {
@@ -45,7 +45,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * healthInfoIdを設定する<br>
 	 *
 	 * @param healthInfoId
-	 *            健康情報ID
+	 *     健康情報ID
 	 */
 	public void setHealthInfoId(BigDecimal healthInfoId) {
 		this.healthInfoId = healthInfoId;
@@ -64,7 +64,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * userIdを設定する
 	 *
 	 * @param userId
-	 *            ユーザID
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -83,7 +83,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * heightを設定する
 	 *
 	 * @param height
-	 *            身長
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -102,7 +102,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * weightを設定する
 	 *
 	 * @param weight
-	 *            体重
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -121,7 +121,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * bmiを設定する
 	 *
 	 * @param bmi
-	 *            BMI
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -140,7 +140,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
-	 *            標準体重
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -159,7 +159,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * userStatusを設定する
 	 *
 	 * @param userStatus
-	 *            ユーザステータス
+	 *     ユーザステータス
 	 */
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
@@ -178,7 +178,7 @@ public class HealthInfoRegistResponse extends BaseResponse {
 	 * regDateを設定する
 	 *
 	 * @param regDate
-	 *            登録日時
+	 *     登録日時
 	 */
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;

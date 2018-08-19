@@ -16,7 +16,7 @@ import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
  * 結果照会画面CSVダウンロードサービスクラス実装クラス<br>
  *
  */
-@Service(value = "referenceDownloadCsv")
+@Service("referenceDownloadCsv")
 public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService<ReferenceCsvDownloadModel> {
 
 	/**

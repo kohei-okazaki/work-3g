@@ -2,14 +2,16 @@ package jp.co.ha.tool.type;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
 
 public enum ColumnType {
+
 	/** VARCHAR */
 	VARCHAR("VARCHAR", String.class),
 	/** DATE */
-	DATE("DATE", java.util.Date.class),
+	DATE("DATE", Date.class),
 	/** TIMESTAMP */
-	TIMESTAMP("TIMESTAMP", java.util.Date.class),
+	TIMESTAMP("TIMESTAMP", Date.class),
 	/** DOUBLE */
 	DOUBLE("DOUBLE", BigDecimal.class),
 	/** INT */

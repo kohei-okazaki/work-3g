@@ -68,6 +68,13 @@ public class AppLogger {
 		logger.error(msg, t);
 	}
 
+	/**
+	 * ログメッセージを返す<br>
+	 *
+	 * @param bean
+	 *     Bean
+	 * @return
+	 */
 	private String getLogMessage(Object bean) {
 
 		StringJoiner body = new StringJoiner(", ");

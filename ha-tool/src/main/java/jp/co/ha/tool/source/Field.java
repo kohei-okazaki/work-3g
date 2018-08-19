@@ -24,12 +24,24 @@ public class Field {
 
 	@Override
 	public String toString() {
+
+		final String TAB = "	";
+
+		String javadocPrefix = "/**";
+		String javadocSuffix = "*/";
+		StringJoiner javadocBody = new StringJoiner(" ");
+		javadocBody.add(javadocPrefix);
+		javadocBody.add(this.comment);
+		javadocBody.add(javadocSuffix);
+		String javadoc = TAB + javadocBody.toString();
+
 		String suffix = ";";
-		StringJoiner body = new StringJoiner(" ");
-		body.add(this.accessType.getValue());
-		body.add(this.classType.getSimpleName());
-		body.add(this.name);
-		return body.toString() + suffix;
+		StringJoiner fieldBody = new StringJoiner(" ");
+		fieldBody.add(this.accessType.getValue());
+		fieldBody.add(this.classType.getSimpleName());
+		fieldBody.add(this.name);
+		String field = TAB + fieldBody.toString() + suffix;
+		return javadoc + "\r\n" + field;
 	}
 
 	public String getName() {

@@ -32,21 +32,22 @@ public class LoginInterceptor extends BaseInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
 		// 静的リソースの場合は認証不要
-        if (handler instanceof ResourceHttpRequestHandler) {
-              return true;
-        }
-        if (isLoginAuthCheck(handler)) {
-        	// ログイン情報のチェック対象の場合
-			 boolean res = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class));
-			 if (res) {
-				 throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "ユーザIDがありません");
-			 }
-        }
-        return true;
+		if (handler instanceof ResourceHttpRequestHandler) {
+			return true;
+		}
+		if (isLoginAuthCheck(handler)) {
+			// ログイン情報のチェック対象の場合
+			boolean res = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class));
+			if (res) {
+				throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "ユーザIDがありません");
+			}
+		}
+		return true;
 	}
 
 	/**
 	 * ログイン情報をチェックするかどうかを返す<br>
+	 *
 	 * @param handler
 	 * @return
 	 */

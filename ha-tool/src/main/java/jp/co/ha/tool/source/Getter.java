@@ -14,10 +14,14 @@ public class Getter extends Method {
 
 	@Override
 	public String toString() {
+
+		final String TAB = "	";
+
 		StringJoiner body = new StringJoiner("\r\n");
-		body.add(accessType.getValue() + " " + field.getClassType().getSimpleName() + " " + getMethodName() + "() {");
-		body.add("	return " + field.getName() + ";");
-		body.add("}");
+		body.add(TAB + accessType.getValue() + " " + field.getClassType().getSimpleName() + " " + getMethodName() + "() {");
+		body.add(TAB + TAB + "return " + field.getName() + ";");
+		body.add(TAB + "}");
+
 		return body.toString();
 	}
 

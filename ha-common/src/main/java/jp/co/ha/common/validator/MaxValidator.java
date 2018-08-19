@@ -30,7 +30,7 @@ public class MaxValidator implements ConstraintValidator<Max, String> {
 		 if (StringUtil.isEmpty(value)) {
 		 	return true;
 		 }
-		 return value.length() < this.size;
+		 return value.length() <= this.size;
 	}
 
 }

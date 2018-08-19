@@ -14,11 +14,14 @@ public class Setter extends Method {
 
 	@Override
 	public String toString() {
+
+		final String TAB = "	";
+
 		StringJoiner body = new StringJoiner("\r\n");
-		body.add(accessType.getValue() + " void " + getMethodName()
+		body.add(TAB + accessType.getValue() + " void " + getMethodName()
 			+ "(" + field.getClassType().getSimpleName() + " " + field.getName() + ") {");
-		body.add("	this." + field.getName() + " = " + field.getName() + ";");
-		body.add("}");
+		body.add(TAB + TAB + "this." + field.getName() + " = " + field.getName() + ";");
+		body.add(TAB + "}");
 
 		return body.toString();
 	}

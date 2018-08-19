@@ -41,7 +41,7 @@ public class ExcelConfig {
 	 *
 	 * @return charset Charset
 	 */
-	public CharsetType getCharset() {
+	public CharsetType getCharsetType() {
 		return charset;
 	}
 
@@ -51,7 +51,7 @@ public class ExcelConfig {
 	 * @param charset
 	 *     Charset
 	 */
-	public void setCharset(CharsetType charset) {
+	public void setCharsetType(CharsetType charset) {
 		this.charset = charset;
 	}
 

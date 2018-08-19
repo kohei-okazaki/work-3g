@@ -57,7 +57,7 @@ public class Account implements Serializable {
 	/**
 	 * passwordを返す
 	 *
-	 * @return password パスわード
+	 * @return password パスワード
 	 */
 	public String getPassword() {
 		return password;

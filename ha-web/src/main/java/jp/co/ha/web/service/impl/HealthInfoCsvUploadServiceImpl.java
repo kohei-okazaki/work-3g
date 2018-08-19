@@ -1,6 +1,7 @@
 package jp.co.ha.web.service.impl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class HealthInfoCsvUploadServiceImpl implements CsvUploadService<HealthIn
 	public List<HealthInfoCsvUploadModel> execute(MultipartFile uploadFile) throws BaseException {
 
 		List<String> list = null;
-		try {
-			list = toList(uploadFile.getInputStream());
+		try (InputStream is = uploadFile.getInputStream()) {
+			list = toList(is);
 		} catch (IOException e) {
 			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "ファイルを読み込めませんでした。ファイル名" + uploadFile.getOriginalFilename());
 		}

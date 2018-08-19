@@ -30,7 +30,7 @@ public class MinValidator implements ConstraintValidator<Min, String> {
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return this.size < value.length();
+		return this.size <= value.length();
 	}
 
 }

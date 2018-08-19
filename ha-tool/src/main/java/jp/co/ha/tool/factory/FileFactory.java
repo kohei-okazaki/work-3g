@@ -17,7 +17,7 @@ public class FileFactory {
 
 	public void create(FileConfig conf) {
 		LOG.info("作成 開始 ---> " + conf.getFileName());
-		File file = new File(conf.getOutputPath() + "\\" + conf.getFileName());
+		File file = new File(conf.getOutputPath() + File.separator + conf.getFileName());
 
 		// ファイル作成
 		try {

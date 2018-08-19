@@ -9,6 +9,7 @@ import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
+import jp.co.ha.tool.type.FileType;
 
 public class DdlBuilder extends CommonBuilder {
 
@@ -38,7 +39,7 @@ public class DdlBuilder extends CommonBuilder {
 			body.add(rowValue.toString()).add(ddlSuffix);
 
 			FileConfig fileConf = getFileConfig(ExecuteType.DDL);
-			fileConf.setFileName(table.toUpperCase() + ".sql");
+			fileConf.setFileName(table.toUpperCase() + FileType.SQL.getSuffix());
 			fileConf.setData(body.toString());
 			new FileFactory().create(fileConf);
 		}

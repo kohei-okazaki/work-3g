@@ -2,6 +2,8 @@ package jp.co.ha.common.exception;
 
 import java.util.stream.Stream;
 
+import jp.co.ha.common.log.LogLevel;
+
 /**
  * エラーコードの定義<br>
  * API, WEBでのエラーコードをそれぞれ定義する<br>
@@ -100,7 +102,7 @@ public enum ErrorCode {
 	 * @return outerErrorCode
 	 */
 	public String getOuterErrorCode() {
-		return outerErrorCode;
+		return this.outerErrorCode;
 	}
 
 	/**
@@ -109,7 +111,7 @@ public enum ErrorCode {
 	 * @return internalErrorCode
 	 */
 	public String getInternalErrorCode() {
-		return internalErrorCode;
+		return this.internalErrorCode;
 	}
 
 	/**

@@ -6,7 +6,6 @@ import java.util.List;
 public class Excel {
 
 	private List<Sheet> sheetList;
-
 	private Sheet currentSheet;
 
 	public Excel() {

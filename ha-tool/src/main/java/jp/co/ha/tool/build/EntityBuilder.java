@@ -19,6 +19,7 @@ import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ClassType;
 import jp.co.ha.tool.type.ColumnType;
 import jp.co.ha.tool.type.ExecuteType;
+import jp.co.ha.tool.type.FileType;
 
 public class EntityBuilder extends CommonBuilder {
 
@@ -55,7 +56,7 @@ public class EntityBuilder extends CommonBuilder {
 			}
 
 			FileConfig fileConf = getFileConfig(ExecuteType.ENTITY);
-			fileConf.setFileName(toJavaFileName(table) + ".java");
+			fileConf.setFileName(toJavaFileName(table) + FileType.JAVA.getSuffix());
 			fileConf.setData(build(source));
 			new FileFactory().create(fileConf);
 		}
@@ -151,16 +152,9 @@ public class EntityBuilder extends CommonBuilder {
 	private String buildFields(List<Field> fieldList) {
 		StringJoiner body = new StringJoiner("\r\n");
 		fieldList.stream().forEach(e -> {
-			body.add(buildjavaDoc(e));
 			body.add(e.toString());
 		});
 		return body.toString();
-	}
-
-	private String buildjavaDoc(Field field) {
-		String javadocPrefix = "/** ";
-		String javadocSuffix = " */";
-		return javadocPrefix + field.getComment() + javadocSuffix;
 	}
 
 	private String buildMethods(List<Method> methodList) {

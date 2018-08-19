@@ -32,7 +32,7 @@
 	<div align="center">
 
 		<div th:if="${errorMessage} != null">
-			<div class="errorMessage">
+			<div id="errorMessage" class="errorMessage">
 				<p th:text="${errorMessage}"></p>
 			</div>
 		</div>
@@ -74,6 +74,8 @@
 	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="../resources/js/common/fort.js"></script>
 	<script type="text/javascript" src="../resources/js/accountRegist.js"></script>
+	<script type="text/javascript" src="../resources/js/accountRegistValid.js"></script>
 	<script type="text/javascript" src="../resources/js/common/common.js"></script>
+
 </body>
 </html>
