@@ -20,7 +20,7 @@ public class ErrorResponse extends BaseResponse {
 	 *     例外
 	 */
 	public ErrorResponse(BaseException e) {
-		super.setResultType(ResultType.FAILURE);
+		super.setResult(ResultType.FAILURE);
 		this.outerErrorCode = e.getErrorCode().getOuterErrorCode();
 		this.detail = e.getDetail();
 	}

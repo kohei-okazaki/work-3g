@@ -133,15 +133,15 @@ public enum ErrorCode {
 	}
 
 	/**
-	 * 指定されたエラーコードと一致するErrorCodeを返す<br>
+	 * 指定された内部エラーコードと一致するErrorCodeを返す<br>
 	 *
-	 * @param errorCode
-	 *     エラーコード
+	 * @param innerErrorCode
+	 *    内部エラーコード
 	 * @return
 	 */
-	public static ErrorCode of(String errorCode) {
+	public static ErrorCode of(String innerErrorCode) {
 		return Stream.of(ErrorCode.class.getEnumConstants())
-				.filter(code -> code.internalErrorCode.equals(errorCode))
+				.filter(code -> code.internalErrorCode.equals(innerErrorCode))
 				.findFirst()
 				.orElse(null);
 	}
