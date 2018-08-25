@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
+import jp.co.ha.business.api.CommonService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
-import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -25,7 +25,7 @@ import jp.co.ha.common.util.StringUtil;
  *
  */
 @Service
-public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceService {
+public class HealthInfoReferenceServiceImpl extends CommonService implements HealthInfoReferenceService {
 
 	/** 健康情報検索サービス */
 	@Autowired
@@ -33,9 +33,6 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** 健康情報機能サービス */
-	@Autowired
-	private HealthInfoFunctionService functionService;
 
 	/**
 	 * {@inheritDoc}
@@ -60,10 +57,8 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
 		}
 
-		// ユーザIDとAPIキーのチェックを行う
-		if (!functionService.useApi(account, request.getApiKey())) {
-			throw new HealthInfoException(ErrorCode.API_EXEC_ERROR, "APIの実行に失敗しました ユーザID:" + request.getUserId());
-		}
+		// API利用判定
+		useApi(account, request);
 	}
 
 	/**

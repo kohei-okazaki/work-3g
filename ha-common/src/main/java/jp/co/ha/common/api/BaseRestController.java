@@ -115,6 +115,8 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです"));
 		} else if (e instanceof JsonParseException) {
 			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
+		} else if (e instanceof JsonProcessingException) {
+			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません"));
 		}
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
 		log.errorRes(apiResponse);
