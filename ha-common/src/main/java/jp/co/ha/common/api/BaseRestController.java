@@ -17,7 +17,6 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.AppLogger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.util.BeanUtil;
 
 /**
  * RestAPI基底コントローラ<br>
@@ -72,9 +71,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		Rs apiResponse = null;
 		log.infoRes(apiRequest);
 		apiResponse = this.execute(apiRequest);
-		if (BeanUtil.notNull(apiResponse)) {
-			apiResponse.setResult(ResultType.SUCCESS);
-		}
+		apiResponse.setResult(ResultType.SUCCESS);
 		log.infoRes(apiResponse);
 
 		return apiResponse;
