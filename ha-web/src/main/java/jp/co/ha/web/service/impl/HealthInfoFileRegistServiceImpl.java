@@ -66,7 +66,6 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	public void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException {
 		for (int i = 0; i < modelList.size(); i++) {
 			HealthInfoCsvUploadModel model = modelList.get(i);
-			RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD);
 			if (!RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD)) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());
 			}
