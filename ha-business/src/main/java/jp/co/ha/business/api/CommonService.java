@@ -3,6 +3,7 @@ package jp.co.ha.business.api;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.common.api.BaseRequest;
 import jp.co.ha.common.exception.ApiException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 
 /**
@@ -19,10 +20,10 @@ public abstract class CommonService {
 	 *     アカウント情報
 	 * @param request
 	 *     リクエスト
-	 * @throws ApiException
+	 * @throws BaseException
 	 *     API例外
 	 */
-	protected void useApi(Account account, BaseRequest request) throws ApiException {
+	protected void useApi(Account account, BaseRequest request) throws BaseException {
 		String userApiKey = account.getApiKey();
 		if (!userApiKey.equals(request.getApiKey())) {
 			throw new ApiException(ErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");
