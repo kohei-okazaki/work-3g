@@ -1,7 +1,8 @@
 package jp.co.ha.common.web;
 
 /**
- * 基底Webコントローラ
+ * 基底Webコントローラ<br>
+ * すべてのwebコントローラはこのインターフェースを継承すること<br>
  *
  */
 public interface BaseWebController {
