@@ -136,7 +136,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した日付の時分秒を00:00:00に設定する<br>
+	 * 指定した日付の時分秒を00:00:00を返す<br>
 	 *
 	 * @param targetDate
 	 *     対象日付
@@ -179,20 +179,66 @@ public class DateUtil {
 	}
 
 	/**
-	 * targetDateがシステム日付を超過しているかどうか判定する<br>
+	 * 指定した日付がシステム日付を超過しているかどうか判定する<br>
 	 *
 	 * @param target
+	 *     指定日
+	 * @param isEqual
+	 *     true:指定日を含む
 	 * @return
 	 */
-	public static boolean isAfter(Date target) {
-		// システム日付
-		Date sysDate = getSysDate();
-		return sysDate.after(target);
+	public static boolean isAfter(Date target, boolean isEqual) {
+		return isAfter(target, getSysDate(), isEqual);
 	}
 
-	public static boolean isBefore(Date target) {
-		// システム日付
-		Date sysDate = getSysDate();
-		return sysDate.after(target);
+	/**
+	 * 指定した日付<code>target</code>が比較対象日付<code>compareDate</code>を超過しているかどうか判定する<br>
+	 * 超過している場合true, それ以外の場合falseを返す<br>
+	 *
+	 * @param target
+	 *     指定日
+	 * @param compareDate
+	 *     比較対象日付
+	 * @param isEqual
+	 *     true:指定日を含む
+	 * @return
+	 */
+	public static boolean isAfter(Date target, Date compareDate, boolean isEqual) {
+		if (isEqual) {
+			return isSameDate(target, compareDate);
+		}
+		return compareDate.after(target);
+	}
+
+	/**
+	 * 指定した日付がシステム日付より過去かどうか判定する<br>
+	 *
+	 * @param target
+	 *     指定日
+	 * @param isEqual
+	 *     true:指定日を含む
+	 * @return
+	 */
+	public static boolean isBefore(Date target, boolean isEqual) {
+		return isBefore(target, getSysDate(), isEqual);
+	}
+
+	/**
+	 * 指定した日付<code>target</code>が比較対象日付<code>compareDate</code>より過去かどうか判定する<br>
+	 * 過去の場合true, それ以外の場合falseを返す<br>
+	 *
+	 * @param target
+	 *     指定日
+	 * @param compareDate
+	 *     比較対象日付
+	 * @param isEqual
+	 *     true:指定日を含む
+	 * @return
+	 */
+	public static boolean isBefore(Date target, Date compareDate, boolean isEqual) {
+		if (isEqual) {
+			return isSameDate(target, compareDate);
+		}
+		return compareDate.before(target);
 	}
 }
