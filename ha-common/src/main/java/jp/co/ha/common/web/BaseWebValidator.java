@@ -42,7 +42,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 		// 値を取得
 		Object field = getFieldValue(errors, fieldsName);
 		if (BeanUtil.isNull(field) || StringUtil.isEmpty(field.toString())) {
-			errors.rejectValue(fieldsName, "validate.message.NotEmpty", new String[] { nameArgs }, "validate.message.NotEmpty");
+			errors.rejectValue(fieldsName, ErrorCode.REQUIRE.getErrorMessage(), new String[] { nameArgs }, ErrorCode.REQUIRE.getErrorMessage());
 		}
 	}
 

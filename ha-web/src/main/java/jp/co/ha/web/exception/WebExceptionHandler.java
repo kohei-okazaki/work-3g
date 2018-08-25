@@ -1,8 +1,12 @@
 package jp.co.ha.web.exception;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseException;
@@ -20,6 +24,8 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 
 	/** ロガー */
 	private final AppLogger LOG = LoggerFactory.getAppLogger(getClass());
+	@Autowired
+	private MessageSource messageSource;
 
 	/**
 	 * {@inheritDoc}
@@ -47,7 +53,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			errorCode = ((BaseException) e).getErrorCode().getOuterErrorCode();
 		} else {
 			// 予期せぬ例外にする
-			detail = ErrorCode.UNEXPECTED_ERROR.getErrorMessage();
+			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getErrorMessage(), null, Locale.JAPANESE);
 			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 			LOG.error(errorCode, e);
 		}

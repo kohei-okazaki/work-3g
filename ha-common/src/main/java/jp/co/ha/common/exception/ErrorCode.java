@@ -12,8 +12,6 @@ public enum ErrorCode {
 
 	/** 必須エラー */
 	REQUIRE("REQUIRE", "", null, "validate.message.NotEmpty"),
-	/** 属性エラー */
-	TYPE("TYPE", "", null, "属性エラーです"),
 	/** 桁数超過 */
 	LENGTH_OVER("LENGTH_OVER", "", null, "validate.message.LengthOver"),
 	/** 桁数不足 */
@@ -66,7 +64,7 @@ public enum ErrorCode {
 	RUNTIME_ERROR("RUNTIME_ERROR", "E_007", LogLevel.ERROR, "実行環境エラー"),
 
 	/** 予期せぬ例外 */
-	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "E_008", LogLevel.ERROR, "予期せぬ例外");
+	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "E_008", LogLevel.ERROR, "error.unexpected");
 
 	/** 外部用エラーコード */
 	private String outerErrorCode;

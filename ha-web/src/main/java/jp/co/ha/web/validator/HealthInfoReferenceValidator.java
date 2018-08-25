@@ -23,7 +23,6 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 
 		// 相関チェック
 		correlationCheck(form, errors);
-
 	}
 
 	/**
@@ -54,7 +53,5 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 				}
 			}
 		}
-
 	}
-
 }
