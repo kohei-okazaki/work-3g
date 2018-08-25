@@ -34,6 +34,12 @@ public abstract class BaseException extends Exception {
 		this.outLog(errorCode);
 	}
 
+	/**
+	 * ログ出力を行う<br>
+	 *
+	 * @param errorCode
+	 *     エラーコード
+	 */
 	private void outLog(ErrorCode errorCode) {
 		if (LogLevel.WARN == errorCode.getLogLevel()) {
 			LOG.warn(detail + "(" + errorCode.getOuterErrorCode() + ")", this);

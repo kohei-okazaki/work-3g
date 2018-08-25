@@ -2,6 +2,7 @@ package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
 
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWebValidator;
 import jp.co.ha.web.form.HealthInfoFileForm;
@@ -31,7 +32,8 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 	 */
 	private void checkRequire(HealthInfoFileForm form, Errors errors) {
 		if (BeanUtil.isNull(form.getMultipartFile())) {
-			errors.rejectValue("multipartFile", "validate.message.NotEmpty", new String[] {"健康情報CSVファイル"}, "validate.message.NotEmpty");
+			errors.rejectValue("multipartFile", "validate.message.NotEmpty", new String[] { "健康情報CSVファイル" },
+					ErrorCode.REQUIRE.getErrorMessage());
 		}
 	}
 

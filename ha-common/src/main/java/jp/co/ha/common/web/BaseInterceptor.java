@@ -1,6 +1,7 @@
 package jp.co.ha.common.web;
 
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 /**
  * Interceptorの基底クラス<br>
@@ -8,4 +9,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
  */
 public abstract class BaseInterceptor implements HandlerInterceptor {
 
+	/**
+	 * インターセプターで検査対象のリソースかどうか判定する<br>
+	 * @param handler
+	 * @return
+	 */
+	protected boolean isSkipResource(Object handler) {
+		return handler instanceof ResourceHttpRequestHandler;
+	}
 }

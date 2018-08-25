@@ -8,6 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -15,6 +17,9 @@ import jp.co.ha.web.view.ManageWebView;
  *
  */
 public class WebExceptionHandler implements BaseExceptionHandler {
+
+	/** ロガー */
+	private final AppLogger LOG = LoggerFactory.getAppLogger(getClass());
 
 	/**
 	 * {@inheritDoc}
@@ -44,6 +49,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			// 予期せぬ例外にする
 			detail = ErrorCode.UNEXPECTED_ERROR.getErrorMessage();
 			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+			LOG.error(errorCode, e);
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
 		return body.toString();

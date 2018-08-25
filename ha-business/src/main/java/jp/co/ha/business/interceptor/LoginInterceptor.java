@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.ErrorCode;
@@ -31,8 +30,8 @@ public class LoginInterceptor extends BaseInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-		// 静的リソースの場合は認証不要
-		if (handler instanceof ResourceHttpRequestHandler) {
+		if (isSkipResource(handler)) {
+			// 静的リソースの場合は認証不要
 			return true;
 		}
 		if (isLoginAuthCheck(handler)) {
