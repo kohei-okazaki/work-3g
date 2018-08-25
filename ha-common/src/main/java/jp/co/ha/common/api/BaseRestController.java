@@ -68,9 +68,8 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	default Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
 		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
-		Rs apiResponse = null;
 		log.infoRes(apiRequest);
-		apiResponse = this.execute(apiRequest);
+		Rs apiResponse = this.execute(apiRequest);
 		apiResponse.setResult(ResultType.SUCCESS);
 		log.infoRes(apiResponse);
 
