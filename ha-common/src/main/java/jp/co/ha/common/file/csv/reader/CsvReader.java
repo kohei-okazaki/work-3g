@@ -36,7 +36,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 *     アプリ例外
 	 */
 	@SuppressWarnings("unchecked")
-	public T read(String record) throws AppIOException {
+	public T read(String record) throws BaseException {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
 		List<String> colList = BeanUtil.getFieldList(clazz).stream()
@@ -82,9 +82,9 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 *     カラムリスト
 	 * @param dataList
 	 *     データリスト
-	 * @throws AppIOException
+	 * @throws BaseException
 	 */
-	private void checkFileLength(List<String> colList, List<String> dataList) throws AppIOException {
+	private void checkFileLength(List<String> colList, List<String> dataList) throws BaseException {
 		if (dataList.size() != colList.size()) {
 			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
 		}
