@@ -6,7 +6,6 @@ import java.util.List;
 
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.DataBaseException;
 
 /**
  * 健康情報検索サービス<br>
@@ -62,12 +61,12 @@ public interface HealthInfoSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @param fromRegDate
-	 *     登録日時(from)
+	 *     YYYYMMDD
 	 * @param toRegDate
-	 *     登録日時(to)
+	 *     YYYYMMDD
 	 * @return
-	 * @throws DataBaseException
+	 * @throws BaseException
 	 */
-	List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws DataBaseException;
+	List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws BaseException;
 
 }

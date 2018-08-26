@@ -38,9 +38,6 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 		} catch (SQLException e) {
 			LOG.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
-		} catch (DataBaseException e) {
-			LOG.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, TABLE_NAME + "テーブルへのアクセスに失敗しました");
 		} finally {
 			close();
 		}
@@ -61,8 +58,7 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 						+ MAIL_PASSWORD + "= '" + mailInfo.getMailPassword() + "', "
 						+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 						+ " WHERE " + USER_ID + "= '" + mailInfo.getUserId() + "'";
-			int rs = execute(sql, SqlType.UPDATE);
-			System.out.println("結果" + rs);
+			execute(sql, SqlType.UPDATE);
 		} finally {
 			close();
 		}
@@ -84,8 +80,7 @@ public class MailInfoDaoImpl extends BaseDao implements MailInfoDao {
 					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "', "
 					+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 					+ ");";
-			int rs = execute(sql, SqlType.INSERT);
-			System.out.println("結果" + rs);
+			execute(sql, SqlType.INSERT);
 		} finally {
 			close();
 		}
