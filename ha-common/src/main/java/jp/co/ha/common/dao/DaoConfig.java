@@ -9,29 +9,37 @@ import java.util.Properties;
 
 import jp.co.ha.common.util.BeanUtil;
 
-public class DaoProperties {
+/**
+ * Dao設定ファイル情報保持クラス<br>
+ * jdbc.propertiesの読み込みを行う<br>
+ *
+ */
+public class DaoConfig {
 
-	private static final DaoProperties instance = new DaoProperties();
+	private static final DaoConfig instance = new DaoConfig();
 
 	private String driverClassName;
 	private String url;
 	private String username;
 	private String password;
 
-	private DaoProperties() {
+	private DaoConfig() {
 		if (BeanUtil.isNull(instance)) {
 			init();
 		}
 	}
 
-	public static DaoProperties getInstance() {
+	public static DaoConfig getInstance() {
 		return instance;
 	}
 
 	private void init() {
 		String classPath = this.getClass().getClassLoader().getResource("").getPath();
 		String propertiesPath = "META-INF" + File.separator + "jdbc.properties";
-		File propFile = new File(classPath, propertiesPath);
+		readProperty(new File(classPath, propertiesPath));
+	}
+
+	private void readProperty(File propFile) {
 		Properties prop = new Properties();
 		try (InputStream is = new FileInputStream(propFile.getAbsolutePath())) {
 			prop.load(is);
@@ -44,7 +52,6 @@ public class DaoProperties {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("<><><><>classPath : " + classPath);
 	}
 
 	public String getDriverClassName() {
