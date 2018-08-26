@@ -22,7 +22,7 @@ set befWebDir=%baseDir%\ha-web\src\main\webapp\WEB-INF
 echo ------------------------------------------------------------------------
 echo START check lib dir
 echo ------------------------------------------------------------------------
-rem libディレクトリ 存在確認
+rem businessのlibディレクトリ 存在確認
 cd %befBusinessDir%
 echo %businessLibDir% check
 if not exist "lib\" (
@@ -30,6 +30,8 @@ if not exist "lib\" (
 	echo mkdir %businessLibDir%
 )
 
+
+rem apiのlibディレクトリ 存在確認
 cd %befApiDir%
 echo %apiLibDir% check
 if not exist "lib\" (
@@ -37,6 +39,8 @@ if not exist "lib\" (
 	echo mkdir %apiLibDir%
 )
 
+
+rem webのlibディレクトリ 存在確認
 cd %befWebDir%
 echo %webLibDir% check
 if not exist "lib\" (
