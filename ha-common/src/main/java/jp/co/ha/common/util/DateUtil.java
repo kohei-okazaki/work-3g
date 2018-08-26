@@ -180,6 +180,7 @@ public class DateUtil {
 
 	/**
 	 * 指定した日付がシステム日付を超過しているかどうか判定する<br>
+	 * 超過してる場合true, それ以外の場合false
 	 *
 	 * @param target
 	 *     指定日
@@ -212,6 +213,7 @@ public class DateUtil {
 
 	/**
 	 * 指定した日付がシステム日付より過去かどうか判定する<br>
+	 * 過去の場合true, それ以外の場合falseを返す<br>
 	 *
 	 * @param target
 	 *     指定日

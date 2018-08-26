@@ -26,27 +26,31 @@ public abstract class BaseDao {
 
 	/**
 	 * DBへ接続を行う<br>
+	 *
+	 * @throws DataBaseException
+	 *     DBエラー
 	 */
-	protected void connect() {
+	protected void connect() throws DataBaseException {
+		DaoProperties prop = DaoProperties.getInstance();
 		try {
-			Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance();
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/work3g?serverTimezone=JST", "root", "admin");
+			Class.forName(prop.getDriverClassName()).getDeclaredConstructor().newInstance();
+			this.con = DriverManager.getConnection(prop.getUrl(), prop.getUsername(), prop.getPassword());
 			LOG.debug("DBに接続");
-			if (BeanUtil.notNull(con)) {
-				stm = con.createStatement();
+			if (BeanUtil.notNull(this.con)) {
+				this.stm = this.con.createStatement();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			LOG.error("JDBCドライバのロードに失敗", e);
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "JDBCドライバのロードに失敗");
 		} catch (SQLException e) {
-			LOG.error("DBに接続に失敗", e);
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "DBに接続に失敗");
 		} catch (IllegalArgumentException e) {
-			LOG.error("不正な引数が指定", e);
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます");
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません");
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタの生成に失敗しました");
 		}
 	}
 
@@ -61,7 +65,6 @@ public abstract class BaseDao {
 		try {
 			return this.rs.next();
 		} catch (SQLException e) {
-			LOG.error(ErrorCode.DB_ACCESS_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
 		}
 	}
@@ -79,7 +82,7 @@ public abstract class BaseDao {
 	 *     DBエラー
 	 */
 	protected int execute(String sql, SqlType type) throws DataBaseException {
-		LOG.info("--->" + sql);
+		LOG.info("[SQL]--->" + sql);
 		try {
 			if (SqlType.SELECT == type) {
 				this.rs = this.stm.executeQuery(sql);
@@ -87,11 +90,9 @@ public abstract class BaseDao {
 			} else if (SqlType.INSERT == type || SqlType.UPDATE == type) {
 				return this.stm.executeUpdate(sql);
 			} else {
-				LOG.error(ErrorCode.DB_SQL_SELECT_ERROR.getErrorMessage());
 				throw new DataBaseException(ErrorCode.DB_SQL_SELECT_ERROR, "実行するSQlが存在しません");
 			}
 		} catch (SQLException e) {
-			LOG.error(ErrorCode.DB_SQL_EXE_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました");
 		}
 
@@ -118,7 +119,6 @@ public abstract class BaseDao {
 				LOG.debug("DB切断します");
 			}
 		} catch (SQLException e) {
-			LOG.error(ErrorCode.DB_CLOSE_ERROR.getErrorMessage(), e);
 			throw new DataBaseException(ErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました");
 		}
 	}
