@@ -41,9 +41,9 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 * @param is
 	 *     InputStream
 	 * @return
-	 * @throws AppIOException
+	 * @throws BaseException
 	 */
-	default public List<String> toList(InputStream is) throws AppIOException {
+	default public List<String> toList(InputStream is) throws BaseException {
 
 		List<String> list = new ArrayList<String>();
 		try (InputStreamReader isr = new InputStreamReader(is);

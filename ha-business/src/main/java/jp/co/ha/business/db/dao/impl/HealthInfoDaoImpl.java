@@ -108,8 +108,7 @@ public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
 												+ "'" + healthInfo.getUserStatus() + "', "
 												+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 												+ ")";
-			int rs = execute(sql, SqlType.INSERT);
-			System.out.println("結果" + rs);
+			execute(sql, SqlType.INSERT);
 		} finally {
 			close();
 		}

@@ -64,8 +64,7 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "', "
 													+ "'" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 													+ ")";
-			int rs = execute(sql, SqlType.INSERT);
-			System.out.println("結果" + rs);
+			execute(sql, SqlType.INSERT);
 		} finally {
 			close();
 		}
@@ -87,8 +86,7 @@ public class AccountDaoImpl extends BaseDao implements AccountDao {
 										+ API_KEY + "= '" + account.getApiKey() + "', "
 										+ UPDATE_DATE + "= '" + DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS) + "'"
 										+ " WHERE "+ USER_ID + "= '" + account.getUserId() + "'";
-			int rs = execute(sql, SqlType.UPDATE);
-			System.out.println("結果" + rs);
+			execute(sql, SqlType.UPDATE);
 		} finally {
 			close();
 		}

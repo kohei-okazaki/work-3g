@@ -12,7 +12,6 @@ import jp.co.ha.business.db.dao.HealthInfoDao;
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 
@@ -79,7 +78,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws DataBaseException {
+	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws BaseException {
 
 		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
 		if (BeanUtil.isNull(fromRegDate) || BeanUtil.isNull(toRegDate)) {
