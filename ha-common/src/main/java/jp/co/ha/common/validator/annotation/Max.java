@@ -26,6 +26,8 @@ public @interface Max {
 
 	int size();
 
+	boolean isEqual() default true;
+
     String message() default "";
 
     Class<?>[] groups() default {};

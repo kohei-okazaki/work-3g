@@ -14,12 +14,15 @@ public class MinValidator implements ConstraintValidator<Min, String> {
 
 	private int size;
 
+	private boolean isEqual;
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void initialize(Min annotation) {
 		this.size = annotation.size();
+		this.isEqual = annotation.isEqual();
 	}
 
 	/**
@@ -30,7 +33,11 @@ public class MinValidator implements ConstraintValidator<Min, String> {
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return this.size <= value.length();
+		if (isEqual) {
+			return this.size <= value.length();
+		} else {
+			return this.size < value.length();
+		}
 	}
 
 }

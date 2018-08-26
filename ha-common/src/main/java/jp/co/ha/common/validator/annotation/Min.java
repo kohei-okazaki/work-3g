@@ -26,6 +26,8 @@ public @interface Min {
 
 	int size();
 
+	boolean isEqual() default true;
+
     String message() default "";
 
     Class<?>[] groups() default {};
