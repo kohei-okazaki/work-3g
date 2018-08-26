@@ -110,7 +110,7 @@ public class LoginValidator extends BaseWebValidator<LoginForm> {
 	 *     アカウント情報
 	 */
 	private void checkAccountExpired(Errors errors, Account account) {
-		if (DateUtil.isBefore(account.getPasswordExpire())) {
+		if (DateUtil.isBefore(account.getPasswordExpire(), false)) {
 			errors.rejectValue("userId", "validate.message.invalidPassword");
 		}
 	}

@@ -8,8 +8,11 @@ import java.util.Arrays;
  */
 public enum FileType {
 
+	/** HTML */
 	HTML("html", ".html"),
+	/** JavaScript */
 	JAVA_SCRIPT("js", ".js"),
+	/** CSS */
 	CSS("css", ".css");
 
 	private FileType(String value, String suffix) {

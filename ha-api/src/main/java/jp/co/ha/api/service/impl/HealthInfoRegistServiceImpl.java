@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.api.CommonService;
 import jp.co.ha.business.db.create.HealthInfoCreateService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.HealthInfo;
@@ -16,7 +17,6 @@ import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.business.type.HealthStatus;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.BaseException;
@@ -31,7 +31,7 @@ import jp.co.ha.common.util.StringUtil;
  *
  */
 @Service
-public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
+public class HealthInfoRegistServiceImpl extends CommonService implements HealthInfoRegistService {
 
 	/** アカウント検索サービス */
 	@Autowired
@@ -45,9 +45,6 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 	/** 健康情報作成サービス */
 	@Autowired
 	private HealthInfoCreateService healthInfoCreateService;
-	/** 健康情報機能サービス */
-	@Autowired
-	private HealthInfoFunctionService functionService;
 
 	/**
 	 * {@inheritDoc}
@@ -73,10 +70,8 @@ public class HealthInfoRegistServiceImpl implements HealthInfoRegistService {
 			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
 		}
 
-		// ユーザIDとAPIキーのチェックを行う
-		if (!functionService.useApi(account, request.getApiKey())) {
-			throw new HealthInfoException(ErrorCode.API_EXEC_ERROR, "APIの実行に失敗しました ユーザID:" + request.getUserId());
-		}
+		// API利用判定
+		useApi(account, request);
 	}
 
 	/**

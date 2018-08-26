@@ -23,7 +23,6 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 
 		// 相関チェック
 		correlationCheck(form, errors);
-
 	}
 
 	/**
@@ -40,18 +39,19 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時" }, ErrorCode.REQUIRE.getErrorMessage());
+					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時" },
+							ErrorCode.REQUIRE.getErrorMessage());
 				}
 			} else {
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(開始) "}, ErrorCode.REQUIRE.getErrorMessage());
+					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(開始) " },
+							ErrorCode.REQUIRE.getErrorMessage());
 				}
 				if (StringUtil.isEmpty(form.getToRegDate())) {
-					errors.rejectValue("toRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(終了)" }, ErrorCode.REQUIRE.getErrorMessage());
+					errors.rejectValue("toRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(終了)" },
+							ErrorCode.REQUIRE.getErrorMessage());
 				}
 			}
 		}
-
 	}
-
 }

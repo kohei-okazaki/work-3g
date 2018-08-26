@@ -7,25 +7,24 @@ package jp.co.ha.common.api;
 public abstract class BaseResponse {
 
 	/** 結果区分 */
-	private ResultType resultType;
+	private ResultType result;
 
 	/**
 	 * resultを返す<br>
 	 *
-	 * @return resultType 結果区分
+	 * @return result
 	 */
-	public ResultType getResultType() {
-		return resultType;
+	public ResultType getResult() {
+		return result;
 	}
 
 	/**
 	 * resultを設定する<br>
 	 *
-	 * @param resultType
-	 *     結果区分
+	 * @param result
 	 */
-	public void setResultType(ResultType resultType) {
-		this.resultType = resultType;
+	public void setResult(ResultType result) {
+		this.result = result;
 	}
 
 }
