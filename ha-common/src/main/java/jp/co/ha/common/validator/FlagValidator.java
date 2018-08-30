@@ -14,8 +14,6 @@ import jp.co.ha.common.validator.annotation.Flag;
  */
 public class FlagValidator implements ConstraintValidator<Flag, String> {
 
-	private static final List<String> FLAG_LIST = List.of(StringUtil.FALSE_FLAG, StringUtil.TRUE_FLAG);
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -24,7 +22,7 @@ public class FlagValidator implements ConstraintValidator<Flag, String> {
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return FLAG_LIST.contains(value);
+		return List.of(StringUtil.FALSE_FLAG, StringUtil.TRUE_FLAG).contains(value);
 	}
 
 }

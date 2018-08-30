@@ -13,9 +13,12 @@ import jp.co.ha.tool.config.FileConfig;
 
 public class FileFactory {
 
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(FileFactory.class);
 
-	public void create(FileConfig conf) {
+	private FileFactory() {
+	}
+
+	public static void create(FileConfig conf) {
 		LOG.info("作成 開始 ---> " + conf.getFileName());
 		File file = new File(conf.getOutputPath() + File.separator + conf.getFileName());
 

@@ -41,7 +41,7 @@ public class DdlBuilder extends CommonBuilder {
 			FileConfig fileConf = getFileConfig(ExecuteType.DDL);
 			fileConf.setFileName(table.toUpperCase() + FileType.SQL.getSuffix());
 			fileConf.setData(body.toString());
-			new FileFactory().create(fileConf);
+			FileFactory.create(fileConf);
 		}
 	}
 

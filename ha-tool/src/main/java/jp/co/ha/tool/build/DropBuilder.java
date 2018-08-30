@@ -41,7 +41,7 @@ public class DropBuilder extends CommonBuilder {
 		FileConfig fileConf = getFileConfig(ExecuteType.DROP);
 		fileConf.setFileName("DROP"  + FileType.SQL.getSuffix());
 		fileConf.setData(body.toString());
-		new FileFactory().create(fileConf);
+		FileFactory.create(fileConf);
 	}
 
 	private boolean containsTable(List<String> tableList, String tblName) {

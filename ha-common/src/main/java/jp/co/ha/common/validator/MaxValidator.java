@@ -14,12 +14,15 @@ public class MaxValidator implements ConstraintValidator<Max, String> {
 
 	private int size;
 
+	private boolean isEqual;
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void initialize(Max annotation) {
 		this.size = annotation.size();
+		this.isEqual = annotation.isEqual();
 	}
 
 	/**
@@ -27,10 +30,15 @@ public class MaxValidator implements ConstraintValidator<Max, String> {
 	 */
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		 if (StringUtil.isEmpty(value)) {
-		 	return true;
-		 }
-		 return value.length() <= this.size;
+		if (StringUtil.isEmpty(value)) {
+			return true;
+		}
+		if (isEqual) {
+			return value.length() <= this.size;
+		} else {
+			return value.length() < this.size;
+		}
+
 	}
 
 }

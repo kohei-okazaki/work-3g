@@ -24,15 +24,15 @@ import jp.co.ha.common.util.BeanUtil;
 /**
  * Excel出力の基底クラス<br>
  *
- * @param <M>
+ * @param <T>
  *     Excel出力モデル
  */
-public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends AbstractXlsxView {
+public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends AbstractXlsxView {
 
 	/** ヘッダー位置 */
 	protected final int HEADER_POSITION = 0;
 	/** Excelモデルリスト */
-	protected List<M> modelList;
+	protected List<T> modelList;
 	/** Excel設定情報 */
 	protected ExcelConfig conf;
 
@@ -44,7 +44,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 * @param modelList
 	 *     Excel出力モデルリスト
 	 */
-	public BaseExcelBuilder(ExcelConfig conf, List<M> modelList) {
+	public BaseExcelBuilder(ExcelConfig conf, List<T> modelList) {
 		this.conf = conf;
 		this.modelList = modelList;
 	}
@@ -58,12 +58,12 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 			HttpServletResponse response) throws Exception {
 
 		init(response);
-		String sheetName = getSheetName((Class<M>) BeanUtil.getParameterType(this.getClass()));
+		String sheetName = getSheetName((Class<T>) BeanUtil.getParameterType(this.getClass()));
 		Sheet sheet = workbook.createSheet(sheetName);
 
 		if (this.conf.hasHeader()) {
 			// ヘッダを書込
-			writeHeader(sheet, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			writeHeader(sheet, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
 
 		// データを書込
@@ -71,7 +71,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 
 		if (this.conf.hasFooter()) {
 			// フッタを書込
-			writeFooter(sheet, (Class<M>) BeanUtil.getParameterType(this.getClass()));
+			writeFooter(sheet, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
 
 	}
@@ -98,7 +98,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 * @param clazz
 	 *     Excelモデルインターフェースクラス型
 	 */
-	protected void writeHeader(Sheet sheet, Class<M> clazz) {
+	protected void writeHeader(Sheet sheet, Class<T> clazz) {
 		// ヘッダ名取得
 		List<String> header = getHeaderList(clazz);
 		Stream.iterate(0, i -> ++i).limit(header.size()).forEach(i -> {
@@ -124,7 +124,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 * @param clazz
 	 *     Excelモデルインターフェースクラス型
 	 */
-	private void writeFooter(Sheet sheet, Class<M> clazz) {
+	private void writeFooter(Sheet sheet, Class<T> clazz) {
 		// フッタ名取得
 		List<String> footer = getHeaderList(clazz);
 		Stream.iterate(0, i -> ++i).limit(footer.size()).forEach(i -> {
@@ -181,7 +181,7 @@ public abstract class BaseExcelBuilder<M extends BaseExcelModel> extends Abstrac
 	 *     ExcelDownloadModelアノテーションのついたクラス型
 	 * @return
 	 */
-	protected String getSheetName(Class<M> clazz) {
+	protected String getSheetName(Class<T> clazz) {
 		return clazz.getAnnotation(ExcelDownloadModel.class).sheetName();
 	}
 

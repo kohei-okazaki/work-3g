@@ -1,6 +1,7 @@
 package jp.co.ha.tool.build;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -58,7 +59,7 @@ public class EntityBuilder extends CommonBuilder {
 			FileConfig fileConf = getFileConfig(ExecuteType.ENTITY);
 			fileConf.setFileName(toJavaFileName(table) + FileType.JAVA.getSuffix());
 			fileConf.setData(build(source));
-			new FileFactory().create(fileConf);
+			FileFactory.create(fileConf);
 		}
 	}
 
@@ -129,8 +130,15 @@ public class EntityBuilder extends CommonBuilder {
 	}
 
 	private String buildImport(List<Import> importList) {
+
+		List<String> strImportList = new ArrayList<>();
+		importList.stream()
+					.filter(e -> (!strImportList.contains(e.toString())))
+					.map(e -> e.toString())
+					.forEach(e -> strImportList.add(e));
+
 		StringJoiner body = new StringJoiner("\r\n");
-		importList.stream().forEach(e -> body.add(e.toString()));
+		strImportList.stream().forEach(e -> body.add(e));
 		return body.toString();
 	}
 

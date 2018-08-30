@@ -76,8 +76,6 @@ public abstract class BaseDao {
 	 *     実行するSQL
 	 * @param type
 	 *     SQL文のタイプ
-	 * @throws SQLException
-	 *     SQL実行時に出る例外
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */
