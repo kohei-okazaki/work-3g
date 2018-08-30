@@ -21,7 +21,7 @@ public abstract class BaseResponse {
 	/**
 	 * resultを設定する<br>
 	 *
-	 * @param result
+	 * @param result 結果区分
 	 */
 	public void setResult(ResultType result) {
 		this.result = result;
