@@ -9,19 +9,12 @@
 	<artifactId>ha-api</artifactId>
 	<packaging>war</packaging>
 
-	<properties>
-	</properties>
-
 	<parent>
 		<groupId>jp.co.ha.pom</groupId>
 		<artifactId>ha-pom</artifactId>
 		<version>1.0</version>
 		<relativePath>../ha-pom</relativePath>
 	</parent>
-
-	<dependencies>
-
-	</dependencies>
 
 	<build>
 		<plugins>
