@@ -26,6 +26,7 @@ public class HttpClientConfig {
 	 * requestUrlを設定する<br>
 	 *
 	 * @param requestUrl
+	 *     リクエストURL
 	 */
 	public void setRequestUrl(String requestUrl) {
 		this.requestUrl = requestUrl;
@@ -44,6 +45,7 @@ public class HttpClientConfig {
 	 * timeoutを設定する<br>
 	 *
 	 * @param timeout
+	 *     タイムアウト
 	 */
 	public void setTimeout(int timeout) {
 		this.timeout = timeout;
@@ -62,6 +64,7 @@ public class HttpClientConfig {
 	 * httpMethodを設定する<br>
 	 *
 	 * @param httpMethod
+	 *     HTTPステータス
 	 */
 	public void setHttpMethod(HttpMethod httpMethod) {
 		this.httpMethod = httpMethod;
