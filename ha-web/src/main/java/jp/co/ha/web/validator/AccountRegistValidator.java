@@ -5,7 +5,7 @@ import org.springframework.validation.Errors;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.BaseWebValidator;
@@ -17,7 +17,7 @@ import jp.co.ha.web.form.AccountRegistForm;
  */
 public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> {
 
-	private final AppLogger LOG = LoggerFactory.getAppLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
 
 	/** アカウント検索サービス */
 	private AccountSearchService accountSearchService;

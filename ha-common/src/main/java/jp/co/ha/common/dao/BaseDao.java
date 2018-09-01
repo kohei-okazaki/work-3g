@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import jp.co.ha.common.exception.DataBaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 
@@ -19,7 +19,7 @@ import jp.co.ha.common.util.BeanUtil;
  */
 public abstract class BaseDao {
 
-	protected final AppLogger LOG = LoggerFactory.getAppLogger(this.getClass());
+	protected final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
 	private Connection con;
 	private Statement stm;
 	protected ResultSet rs;
