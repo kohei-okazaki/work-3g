@@ -1,5 +1,7 @@
 package jp.co.ha.common.api.http;
 
+import java.util.stream.Stream;
+
 /**
  * HTTPステータス列挙
  *
@@ -19,5 +21,12 @@ public enum HttpStatus {
 
 	public int getValue() {
 		return this.value;
+	}
+
+	public static HttpStatus of(int value) {
+		return Stream.of(HttpStatus.class.getEnumConstants())
+					.filter(e -> e.getValue() == value)
+					.findFirst()
+					.orElse(null);
 	}
 }
