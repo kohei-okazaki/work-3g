@@ -25,7 +25,7 @@
 	<br>
 	<br>
 	<br>
-	<form action="./reference.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
+	<form action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
 
 		<div align="center">
 		<div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
@@ -99,10 +99,11 @@
 					<td th:text="${result.standardWeight}" align="center">
 					<td th:text="${result.bmi}" align="center">
 					<td th:text="${result.regDate}" align="center">
-				<tr>
+				</tr>
 			</table>
 
 			<br><br>
+
 
 			<table>
 				<tr>

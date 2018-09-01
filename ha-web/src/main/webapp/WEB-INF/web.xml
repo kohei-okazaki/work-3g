@@ -37,6 +37,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
+				/WEB-INF/spring/appServlet/view-context.xml
 				/WEB-INF/spring/appServlet/web-dao-context.xml
 				/WEB-INF/spring/appServlet/web-service-context.xml
 			</param-value>

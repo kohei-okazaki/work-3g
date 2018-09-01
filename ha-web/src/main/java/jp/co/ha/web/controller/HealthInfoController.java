@@ -39,7 +39,7 @@ import jp.co.ha.common.file.csv.CsvFileChar;
 import jp.co.ha.common.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.type.CharsetType;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.BaseWizardController;
@@ -248,7 +248,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
 		csvConfig.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
 		csvConfig.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
-		csvConfig.setCharset(CharsetType.UTF_8);
+		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;
 	}
 

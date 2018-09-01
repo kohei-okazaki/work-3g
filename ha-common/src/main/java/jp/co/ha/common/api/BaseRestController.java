@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
@@ -45,7 +45,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@GetMapping
 	default Rs doGet(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
-		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
+		Logger log = LoggerFactory.getAppLogger(this.getClass());
 		Rq apiRequest = toRequest(request);
 		log.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
@@ -67,7 +67,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@PostMapping
 	default Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
-		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
+		Logger log = LoggerFactory.getAppLogger(this.getClass());
 		log.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
 		apiResponse.setResult(ResultType.SUCCESS);
@@ -118,7 +118,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		} else if (e instanceof JsonProcessingException) {
 			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません"));
 		}
-		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
+		Logger log = LoggerFactory.getAppLogger(this.getClass());
 		log.errorRes(apiResponse);
 		return apiResponse;
 	}
@@ -136,7 +136,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 		Rs apiResponse = (Rs) new ErrorResponse(e);
 
-		AppLogger log = LoggerFactory.getAppLogger(this.getClass());
+		Logger log = LoggerFactory.getAppLogger(this.getClass());
 		log.errorRes(apiResponse);
 		return apiResponse;
 	}

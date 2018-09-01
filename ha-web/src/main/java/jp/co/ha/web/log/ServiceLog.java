@@ -6,7 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
@@ -18,7 +18,7 @@ import jp.co.ha.common.log.LoggerFactory;
 public class ServiceLog {
 
 	/** ロガー */
-	private final AppLogger LOG = LoggerFactory.getAppLogger(getClass());
+	private final Logger LOG = LoggerFactory.getAppLogger(getClass());
 
 	/**
 	 * 開始ログを出力する<br>

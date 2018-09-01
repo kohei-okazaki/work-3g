@@ -6,8 +6,6 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.StringJoiner;
 
-import org.slf4j.Logger;
-
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.type.AccessorType;
 import jp.co.ha.common.type.DateFormatType;
@@ -19,12 +17,12 @@ import jp.co.ha.common.util.StringUtil;
  * アプリ内のロガークラス<br>
  *
  */
-public class AppLogger {
+public class Logger {
 
 	/** ロガー */
-	private Logger logger;
+	private org.slf4j.Logger logger;
 
-	AppLogger(Logger logger) {
+	Logger(org.slf4j.Logger logger) {
 		this.logger = logger;
 	}
 

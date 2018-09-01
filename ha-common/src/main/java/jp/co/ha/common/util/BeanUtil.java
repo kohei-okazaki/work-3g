@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.AccessorType;
 
@@ -20,7 +20,7 @@ import jp.co.ha.common.type.AccessorType;
  */
 public class BeanUtil {
 
-	private static AppLogger LOG = LoggerFactory.getAppLogger(BeanUtil.class);
+	private static Logger LOG = LoggerFactory.getAppLogger(BeanUtil.class);
 
 	/**
 	 * プライベートコンストラクタ<br>

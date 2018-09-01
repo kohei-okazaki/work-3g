@@ -1,6 +1,6 @@
 package jp.co.ha.common.exception;
 
-import jp.co.ha.common.log.AppLogger;
+import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LogLevel;
 import jp.co.ha.common.log.LoggerFactory;
 
@@ -13,7 +13,7 @@ public abstract class BaseException extends Exception {
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
 	/** ロガー */
-	private final AppLogger LOG = LoggerFactory.getAppLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
 
 	/** エラーコード */
 	private ErrorCode errorCode;

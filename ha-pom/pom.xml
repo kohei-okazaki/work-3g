@@ -16,6 +16,7 @@
 		<org.springframework-version>5.0.8.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.1</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
+		<logback-version>1.2.3</logback-version>
 		<org.jackson-version>2.9.6</org.jackson-version>
 		<poi-version>3.17</poi-version>
 		<mysql-version>8.0.12</mysql-version>
@@ -123,11 +124,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-dbcp2</artifactId>
-			<version>2.5.0</version>
-		</dependency>
 
 		<!-- AspectJ -->
 		<dependency>
@@ -160,28 +156,15 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>runtime</scope>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- @Inject -->
@@ -211,9 +194,9 @@
 
 		<!-- Test -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.2.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
