@@ -16,22 +16,9 @@
 	<annotation-driven />
 	<aop:aspectj-autoproxy />
 
-	<resources mapping="/resources/**" location="/resources/" />
-
-	<beans:bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".html" />
-		<beans:property name="templateMode" value="HTML" />
-		<beans:property name="characterEncoding" value="UTF-8" />
-	</beans:bean>
-	<beans:bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
-		<beans:property name="templateResolver" ref="templateResolver" />
-	</beans:bean>
-	<beans:bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
-		<beans:property name="templateEngine" ref="templateEngine" />
-		<beans:property name="characterEncoding" value="UTF-8" />
-	</beans:bean>
 	<beans:bean id="webExceptionHandler" class="jp.co.ha.web.exception.WebExceptionHandler" />
+
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
 	<context:component-scan base-package="jp.co.ha.web.controller" />
 	<context:component-scan base-package="jp.co.ha.web.service.impl" />
@@ -45,16 +32,6 @@
 				<beans:value>META-INF/validationMessages</beans:value>
 			</beans:list>
 		</beans:property>
-	</beans:bean>
-
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
-
-	<context:property-placeholder location="classpath:META-INF/jdbc.properties" />
-	<beans:bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-		<beans:property name="driverClassName" value="${driverClassName}" />
-		<beans:property name="url" value="${url}" />
-		<beans:property name="username" value="${username}" />
-		<beans:property name="password" value="${password}" />
 	</beans:bean>
 
 	<interceptors>
