@@ -87,7 +87,7 @@ public class HttpClient {
 				}
 				this.responseBody = result.toString();
 			} else {
-				LOG.warn("HTTP ステータス = " + this.httpStatus);
+				LOG.warn("HTTP ステータス = " + this.httpStatus + "(" + this.httpStatus.getValue() + ")");
 			}
 		} catch (MalformedURLException e) {
 			LOG.error("", e);
