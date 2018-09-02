@@ -2,7 +2,7 @@
 健康管理アプリ  
 
 ビルド手順(windows)  
-1.コマンドプロンプトでha-tool/batまで移動
+1.コマンドプロンプトでha-tool/batまで移動  
 2.maven-build.batを実行 
 (build.iniのbaseDirの値を適宜合わせて下さい。  
 work3gの直下にha-common等がみれるように)  
