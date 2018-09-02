@@ -59,17 +59,17 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 				}
 			}
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		}
 		LOG.infoRes(model);
 		return model;
