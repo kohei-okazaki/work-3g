@@ -54,6 +54,7 @@ public class JsonUtil {
 	 *     対象文字列
 	 * @return
 	 * @throws BaseException
+	 *     アプリ例外
 	 */
 	public static String toJsonString(Object target) throws BaseException {
 

@@ -10,16 +10,27 @@ import java.util.stream.Stream;
  */
 public class StringUtil {
 
+	/** カンマ */
 	public static final String COMMA = ",";
+	/** ハイフン */
 	public static final String HYPHEN = "-";
+	/** コロン */
 	public static final String COLON = ":";
+	/** ピリオド */
 	public static final String PERIOD = ".";
+	/** 空文字 */
 	public static final String EMPTY = "";
+	/** イコール */
 	public static final String EQUAL = "=";
+	/** 改行 */
 	public static final String NEW_LINE = "\r\n";
+	/** 半角スペース */
 	public static final String SPACE = " ";
+	/** 半角スラッシュ */
 	public static final String THRASH = "/";
+	/** 真偽値:true */
 	public static final String TRUE_FLAG = "1";
+	/** 真偽値:false */
 	public static final String FALSE_FLAG = "0";
 
 	/**
