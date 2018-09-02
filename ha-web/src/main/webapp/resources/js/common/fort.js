@@ -4,4 +4,3 @@ function resetBar() {
 	var bar = document.getElementById("bar");
 	bar.value = 0;
 }
-
