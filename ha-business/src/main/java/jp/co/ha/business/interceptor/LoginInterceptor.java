@@ -30,7 +30,7 @@ public class LoginInterceptor extends BaseInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-		if (isSkipResource(handler)) {
+		if (isStaticResource(handler)) {
 			// 静的リソースの場合は認証不要
 			return true;
 		}
