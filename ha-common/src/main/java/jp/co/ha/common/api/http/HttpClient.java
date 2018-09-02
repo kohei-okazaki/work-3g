@@ -68,7 +68,7 @@ public class HttpClient {
 			URL url = new URL(this.conf.getRequestUrl());
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setConnectTimeout(this.conf.getTimeout());
-			connection.setRequestMethod(this.conf.getHttpMethod().name());
+			connection.setRequestMethod(this.conf.getHttpMethod().getValue());
 
 			connection.connect();
 			this.httpStatus = HttpStatus.of(connection.getResponseCode());
