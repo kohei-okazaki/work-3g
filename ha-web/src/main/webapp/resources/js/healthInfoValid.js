@@ -6,39 +6,21 @@
 
 	// 入力項目の検証ルール定義
 	var rules = {
-		userId : {
+		height : {
 			required : true
 		},
-		headerFlag : {
-			required : true
-		},
-		footerFlag : {
-			required : true
-		},
-		maskFlag : {
-			required : true
-		},
-		enclosureCharFlag : {
+		weight : {
 			required : true
 		}
 	};
 
 	// 入力項目ごとのエラーメッセージ定義
 	var messages = {
-		userId : {
-			required : "ユーザIDが未入力です"
+		height : {
+			required : "身長が未入力です"
 		},
-		headerFlag : {
-			required : "ヘッダ利用フラグが未入力です"
-		},
-		footerFlag : {
-			required : "フッタ利用フラグが未入力です"
-		},
-		maskFlag : {
-			required : "マスク利用フラグが未入力です"
-		},
-		enclosureCharFlag : {
-			required : "ファイル囲み文字利用フラグが未入力です"
+		weight : {
+			required : "体重が未入力です"
 		}
 	};
 

@@ -6,39 +6,21 @@
 
 	// 入力項目の検証ルール定義
 	var rules = {
-		userId : {
+		regDateSelectFlag : {
 			required : true
 		},
-		headerFlag : {
-			required : true
-		},
-		footerFlag : {
-			required : true
-		},
-		maskFlag : {
-			required : true
-		},
-		enclosureCharFlag : {
+		fromRegDate : {
 			required : true
 		}
 	};
 
 	// 入力項目ごとのエラーメッセージ定義
 	var messages = {
-		userId : {
-			required : "ユーザIDが未入力です"
+		regDateSelectFlag : {
+			required : "登録日直接利用フラグが未入力です"
 		},
-		headerFlag : {
-			required : "ヘッダ利用フラグが未入力です"
-		},
-		footerFlag : {
-			required : "フッタ利用フラグが未入力です"
-		},
-		maskFlag : {
-			required : "マスク利用フラグが未入力です"
-		},
-		enclosureCharFlag : {
-			required : "ファイル囲み文字利用フラグが未入力です"
+		fromRegDate : {
+			required : "登録日が未入力です"
 		}
 	};
 
