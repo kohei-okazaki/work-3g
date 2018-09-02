@@ -26,8 +26,8 @@ public interface HealthInfoSearchService {
 	/**
 	 * 指定されたデータIDからと一致する健康情報を返却する<br>
 	 *
-	 * @param dataId
-	 *     データID
+	 * @param healthInfoId
+	 *     	健康情報ID
 	 * @return 健康情報Entity
 	 * @throws BaseException
 	 */

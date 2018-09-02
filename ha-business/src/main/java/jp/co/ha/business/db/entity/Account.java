@@ -143,6 +143,7 @@ public class Account implements Serializable {
 	 * apiKeyを設定する<br>
 	 *
 	 * @param apiKey
+	 *     APIキー
 	 */
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;

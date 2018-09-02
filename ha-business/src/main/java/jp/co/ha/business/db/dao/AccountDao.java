@@ -57,7 +57,6 @@ public interface AccountDao {
 	 *
 	 * @param userId
 	 *     ユーザID
-	 *
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */

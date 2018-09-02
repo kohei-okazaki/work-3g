@@ -10,6 +10,12 @@ import java.math.RoundingMode;
 public class Calculator {
 
 	/**
+	 * プライベートコンストラクタ
+	 */
+	private Calculator() {
+	}
+
+	/**
 	 * 計算処理を行う<br>
 	 *
 	 * @param target1
@@ -24,7 +30,7 @@ public class Calculator {
 	 *     丸め方法
 	 * @return
 	 */
-	public BigDecimal execute(BigDecimal target1, CalcMethod method, BigDecimal target2, int degit,
+	public static BigDecimal calc(BigDecimal target1, CalcMethod method, BigDecimal target2, int degit,
 			RoundingMode roudingMode) {
 		return method.getOperator().apply(target1, target2, degit, roudingMode);
 	}

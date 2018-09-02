@@ -16,7 +16,7 @@ public interface CalcOperator {
 	 * @param target1
 	 *     対象1
 	 * @param target2
-	 *     対象1
+	 *     対象2
 	 * @param degit
 	 *     区切り
 	 * @param roudingMode

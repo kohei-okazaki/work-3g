@@ -108,7 +108,7 @@ public class MailInfo implements Serializable {
 	/**
 	 * regDateを返す
 	 *
-	 * @return regDate 更新日時
+	 * @return regDate 登録日時
 	 */
 	public Date getRegDate() {
 		return regDate;
@@ -118,7 +118,7 @@ public class MailInfo implements Serializable {
 	 * regDateを設定する
 	 *
 	 * @param regDate
-	 *     更新日時
+	 *     登録日時
 	 */
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;

@@ -31,8 +31,24 @@ public interface HealthInfoFileSettingDao {
 	 */
 	HealthInfoFileSetting selectByUserId(String userId) throws DataBaseException;
 
+	/**
+	 * 健康情報ファイル設定を作成<br>
+	 *
+	 * @param healthInfoFileSetting
+	 *     健康情報ファイル設定
+	 * @throws DataBaseException
+	 *     DBエラー
+	 */
 	void create(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException;
 
+	/**
+	 * 健康情報ファイル設定を更新する<br>
+	 *
+	 * @param healthInfoFileSetting
+	 *     健康情報ファイル設定
+	 * @throws DataBaseException
+	 *     DBエラー
+	 */
 	void update(HealthInfoFileSetting healthInfoFileSetting) throws DataBaseException;
 
 }
