@@ -49,7 +49,7 @@ public class ExcelConfig {
 	 * charsetを設定する<br>
 	 *
 	 * @param charset
-	 *     Charset
+	 *     Charset キャラセット
 	 */
 	public void setCharsetType(Charset charset) {
 		this.charset = charset;
@@ -68,6 +68,7 @@ public class ExcelConfig {
 	 * hasHeaderを設定する<br>
 	 *
 	 * @param hasHeader
+	 *     ヘッダ利用有無
 	 */
 	public void setHasHeader(boolean hasHeader) {
 		this.hasHeader = hasHeader;
@@ -86,6 +87,7 @@ public class ExcelConfig {
 	 * hasFooterを設定する<br>
 	 *
 	 * @param hasFooter
+	 *     フッター利用有無
 	 */
 	public void setHasFooter(boolean hasFooter) {
 		this.hasFooter = hasFooter;

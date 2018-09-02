@@ -25,7 +25,7 @@ public interface MailInfoDao {
 	 *     ユーザID
 	 * @return MailInfo メール情報
 	 * @throws DataBaseException
-	 *     DBアクセスエラー
+	 *     DBエラー
 	 */
 	MailInfo selectByUserId(String userId) throws DataBaseException;
 
@@ -35,7 +35,7 @@ public interface MailInfoDao {
 	 * @param mailInfo
 	 *     メール情報
 	 * @throws DataBaseException
-	 *     DBアクセスエラー
+	 *     DBエラー
 	 */
 	void update(MailInfo mailInfo) throws DataBaseException;
 
@@ -45,7 +45,7 @@ public interface MailInfoDao {
 	 * @param mailInfo
 	 *     メール情報
 	 * @throws DataBaseException
-	 *     DBアクセスエラー
+	 *     DBエラー
 	 */
 	void create(MailInfo mailInfo) throws DataBaseException;
 }

@@ -5,5 +5,19 @@ package jp.co.ha.common.api.http;
  *
  */
 public enum HttpMethod {
-	GET, POST;
+
+	/** GET */
+	GET("GET"),
+	/** POST */
+	POST("POST");
+
+	private HttpMethod(String value) {
+		this.value = value;
+	}
+
+	private String value;
+
+	public String getValue() {
+		return this.value;
+	}
 }

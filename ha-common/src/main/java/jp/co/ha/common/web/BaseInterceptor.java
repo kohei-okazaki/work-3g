@@ -14,7 +14,7 @@ public abstract class BaseInterceptor implements HandlerInterceptor {
 	 * @param handler
 	 * @return
 	 */
-	protected boolean isSkipResource(Object handler) {
+	protected boolean isStaticResource(Object handler) {
 		return handler instanceof ResourceHttpRequestHandler;
 	}
 }

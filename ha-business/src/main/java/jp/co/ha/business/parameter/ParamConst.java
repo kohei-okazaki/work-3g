@@ -32,11 +32,11 @@ public enum ParamConst {
 	 * コンストラクタ<br>
 	 *
 	 * @param mainKey
-	 *            メインキー
+	 *     メインキー
 	 * @param subKey
-	 *            サブキー
+	 *     サブキー
 	 * @param value
-	 *            値
+	 *     値
 	 */
 	private ParamConst(MainKey mainKey, SubKey subKey, String value) {
 		this.mainKey = mainKey;
@@ -55,9 +55,9 @@ public enum ParamConst {
 	 * 指定されたMainKeyとSubKeyと一致する定数定義列挙を返す<br>
 	 *
 	 * @param mainKey
-	 *            メインキー
+	 *     メインキー
 	 * @param subKey
-	 *            サブキー
+	 *     サブキー
 	 * @return
 	 */
 	public static ParamConst of(MainKey mainKey, SubKey subKey) {
@@ -71,7 +71,7 @@ public enum ParamConst {
 	 * メインキーと一致するParamConstのリストを返す<br>
 	 *
 	 * @param mainKey
-	 *            メインキー
+	 *     メインキー
 	 * @return
 	 */
 	public static List<ParamConst> ofList(MainKey mainKey) {

@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE })
+@Target(ElementType.TYPE)
 public @interface ExcelDownloadModel {
 
 	String sheetName() default "Sheet1";

@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
-import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LogLevel;
+import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
@@ -49,7 +49,7 @@ public abstract class BaseException extends Exception {
 	}
 
 	/**
-	 * errorCodeを返す
+	 * errorCodeを返す<br>
 	 *
 	 * @return errorCode エラーコード
 	 */
