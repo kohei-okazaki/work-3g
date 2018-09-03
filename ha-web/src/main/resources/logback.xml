@@ -14,14 +14,17 @@
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<encoder>
-			<pattern>%date [%thread] %-5level %logger{35} - %message%n</pattern>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender>
 
-	<logger name="org.springframework.web" level="debug" additivity="false">
+	<logger name="org.springframework.web" level="info" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="jp.co.ha" level="debug" additivity="false">
+	<logger name="org.springframework.context" level="info" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="jp.co.ha" level="info" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 	<root level="DEBUG">
