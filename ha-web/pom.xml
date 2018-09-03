@@ -8,6 +8,7 @@
 	<groupId>jp.co.ha.web</groupId>
 	<artifactId>ha-web</artifactId>
 	<packaging>war</packaging>
+	<url>http://maven.apache.org</url>
 
 	<properties>
 		<org.thymeleaf-version>3.0.9.RELEASE</org.thymeleaf-version>

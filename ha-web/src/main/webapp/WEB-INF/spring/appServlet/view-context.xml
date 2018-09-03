@@ -20,6 +20,7 @@
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML" />
 		<beans:property name="characterEncoding" value="UTF-8" />
+		<beans:property name="cacheable" value="false" />
 	</beans:bean>
 	<beans:bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
 		<beans:property name="templateResolver" ref="templateResolver" />

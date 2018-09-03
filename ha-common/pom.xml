@@ -8,6 +8,7 @@
 	<groupId>jp.co.ha.common</groupId>
 	<artifactId>ha-common</artifactId>
 	<packaging>jar</packaging>
+	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>jp.co.ha.pom</groupId>
