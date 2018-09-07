@@ -1,4 +1,4 @@
-package jp.co.ha.common.api.http;
+package jp.co.ha.common.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;

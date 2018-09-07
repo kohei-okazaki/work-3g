@@ -1,4 +1,4 @@
-package jp.co.ha.common.api.http;
+package jp.co.ha.common.http;
 
 /**
  * HTTPクライアントの設定情報保持クラス

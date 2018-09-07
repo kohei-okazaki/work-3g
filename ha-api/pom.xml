@@ -8,6 +8,7 @@
 	<groupId>jp.co.ha.api</groupId>
 	<artifactId>ha-api</artifactId>
 	<packaging>war</packaging>
+	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>jp.co.ha.pom</groupId>

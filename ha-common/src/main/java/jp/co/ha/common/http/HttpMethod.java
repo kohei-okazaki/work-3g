@@ -1,4 +1,4 @@
-package jp.co.ha.common.api.http;
+package jp.co.ha.common.http;
 
 /**
  * HTTPメソッドの列挙クラス<br>

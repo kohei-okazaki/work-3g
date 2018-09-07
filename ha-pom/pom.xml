@@ -9,6 +9,7 @@
 	<artifactId>ha-pom</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0</version>
+	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,7 +19,7 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<logback-version>1.2.3</logback-version>
 		<org.jackson-version>2.9.6</org.jackson-version>
-		<poi-version>3.17</poi-version>
+		<poi-version>4.0.0</poi-version>
 		<mysql-version>8.0.12</mysql-version>
 	</properties>
 
@@ -146,12 +147,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
 			<version>${org.slf4j-version}</version>
 			<scope>runtime</scope>
 		</dependency>
