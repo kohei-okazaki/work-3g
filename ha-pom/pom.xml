@@ -19,7 +19,7 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<logback-version>1.2.3</logback-version>
 		<org.jackson-version>2.9.6</org.jackson-version>
-		<poi-version>3.17</poi-version>
+		<poi-version>4.0.0</poi-version>
 		<mysql-version>8.0.12</mysql-version>
 	</properties>
 
