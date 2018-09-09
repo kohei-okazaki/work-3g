@@ -1,7 +1,5 @@
 package jp.co.ha.web.form;
 
-import java.math.BigDecimal;
-
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Required;
@@ -18,7 +16,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
-	private BigDecimal healthInfoId;
+	private Integer healthInfoId;
 	/** 登録日直接指定フラグ */
 	@Required(message = "登録日直接指定フラグが未入力です")
 	@Flag(message = "登録日直接指定フラグの値が不正です")
@@ -33,7 +31,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 *
 	 * @return healthInfoId 健康情報ID
 	 */
-	public BigDecimal getHealthInfoId() {
+	public Integer getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -43,7 +41,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 * @param healthInfoId
 	 *     健康情報ID
 	 */
-	public void setHealthInfoId(BigDecimal healthInfoId) {
+	public void setHealthInfoId(Integer healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 

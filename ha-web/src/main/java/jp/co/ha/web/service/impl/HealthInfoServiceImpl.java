@@ -11,10 +11,10 @@ import org.springframework.ui.Model;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.HealthInfo;
-import jp.co.ha.business.db.find.AccountSearchService;
-import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.common.api.RequestType;
 import jp.co.ha.common.exception.BaseException;
@@ -89,7 +89,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean hasRecord(List<HealthInfo> entityList, BigDecimal dataId) {
+	public boolean hasRecord(List<HealthInfo> entityList, Integer dataId) {
 		return entityList.stream()
 				.map(entity -> entity.getHealthInfoId())
 				.anyMatch(entityDataId -> entityDataId.equals(dataId));

@@ -1,6 +1,5 @@
 package jp.co.ha.business.db.dao.impl;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
 			execute(sql, SqlType.SELECT);
 			while (hasNext()) {
 				HealthInfo healthInfo = new HealthInfo();
-				healthInfo.setHealthInfoId(rs.getBigDecimal(HEALTH_INFO_ID));
+				healthInfo.setHealthInfoId(rs.getInt(HEALTH_INFO_ID));
 				healthInfo.setUserId(rs.getString(USER_ID));
 				healthInfo.setHeight(rs.getBigDecimal(HEIGHT));
 				healthInfo.setWeight(rs.getBigDecimal(WEIGHT));
@@ -56,7 +55,7 @@ public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo selectByHealthInfoId(BigDecimal healthInfoId) throws DataBaseException {
+	public HealthInfo selectByHealthInfoId(Integer healthInfoId) throws DataBaseException {
 
 		HealthInfo healthInfo = null;
 		try {
@@ -65,7 +64,7 @@ public class HealthInfoDaoImpl extends BaseDao implements HealthInfoDao {
 			execute(sql, SqlType.SELECT);
 			while (hasNext()) {
 				healthInfo = new HealthInfo();
-				healthInfo.setHealthInfoId(rs.getBigDecimal(HEALTH_INFO_ID));
+				healthInfo.setHealthInfoId(rs.getInt(HEALTH_INFO_ID));
 				healthInfo.setUserId(rs.getString(USER_ID));
 				healthInfo.setHeight(rs.getBigDecimal(HEIGHT));
 				healthInfo.setWeight(rs.getBigDecimal(WEIGHT));

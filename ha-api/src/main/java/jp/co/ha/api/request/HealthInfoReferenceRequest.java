@@ -1,7 +1,5 @@
 package jp.co.ha.api.request;
 
-import java.math.BigDecimal;
-
 import jp.co.ha.common.api.BaseRequest;
 
 /**
@@ -13,7 +11,7 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 	/** ユーザID */
 	private String userId;
 	/** 健康情報ID */
-	private BigDecimal healthInfoId;
+	private Integer healthInfoId;
 
 	/**
 	 * userIdを返す<br>
@@ -39,7 +37,7 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 	 *
 	 * @return healthInfoId 健康情報ID
 	 */
-	public BigDecimal getHealthInfoId() {
+	public Integer getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -49,7 +47,7 @@ public class HealthInfoReferenceRequest extends BaseRequest {
 	 * @param healthInfoId
 	 *     健康情報ID
 	 */
-	public void setHealthInfoId(BigDecimal healthInfoId) {
+	public void setHealthInfoId(Integer healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 

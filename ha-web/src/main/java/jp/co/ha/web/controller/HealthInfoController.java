@@ -1,7 +1,6 @@
 package jp.co.ha.web.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +23,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.db.entity.HealthInfoFileSetting;
-import jp.co.ha.business.db.find.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.db.find.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.exception.AppIOException;
@@ -173,7 +172,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseException {
 
-		BigDecimal requestHealthInfoId = form.getHealthInfoId();
+		Integer requestHealthInfoId = form.getHealthInfoId();
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
 
 		if (!hasRecord) {

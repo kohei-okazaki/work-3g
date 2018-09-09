@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.db.find.AccountSearchService;
+import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
@@ -70,6 +70,8 @@ public class LoginController implements BaseWebController {
 	 * @param request
 	 *     HttpServletRequest
 	 * @return ログイン画面
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	@NonAuth
 	@GetMapping("/index.html")
@@ -93,7 +95,7 @@ public class LoginController implements BaseWebController {
 	 *     BindingResult
 	 * @return
 	 * @throws BaseException
-	 *     アプリ例外クラス
+	 *     基底例外
 	 */
 	@NonAuth
 	@PostMapping("/top.html")
@@ -118,7 +120,7 @@ public class LoginController implements BaseWebController {
 	 *     HttpServletRequest
 	 * @return
 	 * @throws BaseException
-	 *     アプリ例外クラス
+	 *     基底例外
 	 */
 	@GetMapping("/top.html")
 	public String top(HttpServletRequest request) throws BaseException {
