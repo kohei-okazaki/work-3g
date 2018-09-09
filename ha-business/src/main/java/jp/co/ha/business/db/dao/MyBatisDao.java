@@ -10,13 +10,17 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import jp.co.ha.common.exception.AppIOException;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.ErrorCode;
+
 /**
  * MyBatisでつかう基底インターフェース<br>
  *
  */
 public interface MyBatisDao {
 
-	public default SqlSession getSqlSession() {
+	public default SqlSession getSqlSession() throws BaseException {
 		String sysPath = this.getClass().getClassLoader().getResource("").getPath();
 		String mybatisConf = "mybatis-config.xml";
 		File xmlFile = new File(sysPath, mybatisConf);
@@ -24,10 +28,9 @@ public interface MyBatisDao {
 			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
 			return factory.openSession();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw new AppIOException(ErrorCode.FILE_READING_ERROR, "mybatis-config.xmlが見つかりません");
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new AppIOException(ErrorCode.FILE_READING_ERROR, "ファイルの読み込みに失敗しました");
 		}
-		return null;
 	}
 }

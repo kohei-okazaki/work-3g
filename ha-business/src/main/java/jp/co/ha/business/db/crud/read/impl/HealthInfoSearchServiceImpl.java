@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.dao.MyBatisDao;
@@ -18,7 +17,6 @@ import jp.co.ha.common.util.BeanUtil;
  * 健康情報検索サービスインターフェース実装クラス<br>
  *
  */
-@Service
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyBatisDao {
 
 //	/** 健康情報Dao */

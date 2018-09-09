@@ -1,7 +1,6 @@
 package jp.co.ha.business.db.crud.create.impl;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.dao.MyBatisDao;
@@ -13,7 +12,6 @@ import jp.co.ha.common.exception.BaseException;
  * 健康情報作成サービスインターフェース実装クラス<br>
  *
  */
-@Service
 public class HealthInfoCreateServiceImpl implements HealthInfoCreateService, MyBatisDao {
 
 //	/** 健康情報Dao */
