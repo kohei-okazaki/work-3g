@@ -2,6 +2,8 @@ package jp.co.ha.business.db.entity;
 
 import java.util.Date;
 
+import jp.co.ha.common.log.annotation.Mask;
+
 public class MailInfo {
     /**
      *
@@ -19,6 +21,7 @@ public class MailInfo {
      *
      * @mbg.generated Sun Sep 09 15:50:12 JST 2018
      */
+    @Mask
     private String mailAddress;
 
     /**
@@ -28,6 +31,7 @@ public class MailInfo {
      *
      * @mbg.generated Sun Sep 09 15:50:12 JST 2018
      */
+    @Mask
     private String mailPassword;
 
     /**

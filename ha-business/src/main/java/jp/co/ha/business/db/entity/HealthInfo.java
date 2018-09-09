@@ -3,6 +3,8 @@ package jp.co.ha.business.db.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import jp.co.ha.common.log.annotation.Mask;
+
 public class HealthInfo {
     /**
      *
@@ -29,6 +31,7 @@ public class HealthInfo {
      *
      * @mbg.generated Sun Sep 09 15:50:12 JST 2018
      */
+    @Mask
     private BigDecimal height;
 
     /**
@@ -38,6 +41,7 @@ public class HealthInfo {
      *
      * @mbg.generated Sun Sep 09 15:50:12 JST 2018
      */
+    @Mask
     private BigDecimal weight;
 
     /**
@@ -47,6 +51,7 @@ public class HealthInfo {
      *
      * @mbg.generated Sun Sep 09 15:50:12 JST 2018
      */
+    @Mask
     private BigDecimal bmi;
 
     /**
@@ -56,6 +61,7 @@ public class HealthInfo {
      *
      * @mbg.generated Sun Sep 09 15:50:12 JST 2018
      */
+    @Mask
     private BigDecimal standardWeight;
 
     /**

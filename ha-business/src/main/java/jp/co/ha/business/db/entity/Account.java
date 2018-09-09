@@ -2,6 +2,8 @@ package jp.co.ha.business.db.entity;
 
 import java.util.Date;
 
+import jp.co.ha.common.log.annotation.Mask;
+
 public class Account {
     /**
      *
@@ -19,6 +21,7 @@ public class Account {
      *
      * @mbg.generated Sun Sep 09 15:50:12 JST 2018
      */
+    @Mask
     private String password;
 
     /**
