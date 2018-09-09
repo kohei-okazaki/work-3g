@@ -14,22 +14,22 @@ import jp.co.ha.common.util.BeanUtil;
  * jdbc.propertiesの読み込みを行う<br>
  *
  */
-public class DaoConfig {
+public class JdbcConfig {
 
-	private static final DaoConfig instance = new DaoConfig();
+	private static final JdbcConfig instance = new JdbcConfig();
 
 	private String driverClassName;
 	private String url;
 	private String username;
 	private String password;
 
-	private DaoConfig() {
+	private JdbcConfig() {
 		if (BeanUtil.isNull(instance)) {
 			init();
 		}
 	}
 
-	public static DaoConfig getInstance() {
+	public static JdbcConfig getInstance() {
 		return instance;
 	}
 
