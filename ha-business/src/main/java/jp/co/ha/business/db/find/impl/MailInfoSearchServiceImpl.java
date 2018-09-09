@@ -1,11 +1,12 @@
 package jp.co.ha.business.db.find.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.db.dao.MailInfoDao;
+import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.business.db.find.MailInfoSearchService;
+import jp.co.ha.business.db.mapper.MailInfoMapper;
 import jp.co.ha.common.exception.BaseException;
 
 /**
@@ -13,17 +14,28 @@ import jp.co.ha.common.exception.BaseException;
  *
  */
 @Service
-public class MailInfoSearchServiceImpl implements MailInfoSearchService {
+public class MailInfoSearchServiceImpl implements MailInfoSearchService, MyBatisDao {
 
-	/** メール情報Dao */
-	@Autowired
-	private MailInfoDao mailInfoDao;
+//	/** メール情報Dao */
+//	@Autowired
+//	private MailInfoDao mailInfoDao;
+//
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public MailInfo findByUserId(String userId) throws BaseException {
+//		return mailInfoDao.selectByUserId(userId);
+//	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public MailInfo findByUserId(String userId) throws BaseException {
-		return mailInfoDao.selectByUserId(userId);
+		try (SqlSession session = getSqlSession()) {
+			MailInfoMapper mapper = session.getMapper(MailInfoMapper.class);
+			return mapper.selectByPrimaryKey(userId);
+		}
 	}
 }

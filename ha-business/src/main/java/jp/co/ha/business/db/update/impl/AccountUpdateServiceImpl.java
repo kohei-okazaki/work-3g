@@ -1,10 +1,11 @@
 package jp.co.ha.business.db.update.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.db.dao.AccountDao;
+import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.Account;
+import jp.co.ha.business.db.mapper.AccountMapper;
 import jp.co.ha.business.db.update.AccountUpdateService;
 import jp.co.ha.common.exception.BaseException;
 
@@ -13,18 +14,30 @@ import jp.co.ha.common.exception.BaseException;
  *
  */
 @Service
-public class AccountUpdateServiceImpl implements AccountUpdateService {
+public class AccountUpdateServiceImpl implements AccountUpdateService, MyBatisDao {
 
-	/** アカウントDao */
-	@Autowired
-	private AccountDao accountDao;
+//	/** アカウントDao */
+//	@Autowired
+//	private AccountDao accountDao;
+//
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public void update(Account account) throws BaseException {
+//		accountDao.update(account);
+//	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void update(Account account) throws BaseException {
-		accountDao.update(account);
+		try (SqlSession session = getSqlSession()) {
+			AccountMapper mapper = session.getMapper(AccountMapper.class);
+			mapper.updateByPrimaryKey(account);
+			session.commit();
+		}
 	}
 
 }

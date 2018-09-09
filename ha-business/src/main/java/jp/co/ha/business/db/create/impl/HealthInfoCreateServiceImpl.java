@@ -1,11 +1,12 @@
 package jp.co.ha.business.db.create.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.create.HealthInfoCreateService;
-import jp.co.ha.business.db.dao.HealthInfoDao;
+import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.HealthInfo;
+import jp.co.ha.business.db.mapper.HealthInfoMapper;
 import jp.co.ha.common.exception.BaseException;
 
 /**
@@ -13,18 +14,29 @@ import jp.co.ha.common.exception.BaseException;
  *
  */
 @Service
-public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
+public class HealthInfoCreateServiceImpl implements HealthInfoCreateService, MyBatisDao {
 
-	/** 健康情報Dao */
-	@Autowired
-	private HealthInfoDao healthInfoDao;
+//	/** 健康情報Dao */
+//	@Autowired
+//	private HealthInfoDao healthInfoDao;
+//
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public void create(HealthInfo entity) throws BaseException {
+//		healthInfoDao.create(entity);
+//	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void create(HealthInfo entity) throws BaseException {
-		healthInfoDao.create(entity);
+		try (SqlSession session = getSqlSession()) {
+			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
+			mapper.insert(entity);
+			session.commit();
+		}
 	}
-
 }

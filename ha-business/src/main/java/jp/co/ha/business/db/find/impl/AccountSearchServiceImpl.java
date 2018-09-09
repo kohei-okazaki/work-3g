@@ -1,11 +1,12 @@
 package jp.co.ha.business.db.find.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.db.dao.AccountDao;
+import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.find.AccountSearchService;
+import jp.co.ha.business.db.mapper.AccountMapper;
 import jp.co.ha.common.exception.BaseException;
 
 /**
@@ -13,18 +14,29 @@ import jp.co.ha.common.exception.BaseException;
  *
  */
 @Service
-public class AccountSearchServiceImpl implements AccountSearchService {
+public class AccountSearchServiceImpl implements AccountSearchService, MyBatisDao {
 
-	/** アカウント情報Dao */
-	@Autowired
-	private AccountDao accountDao;
+//	/** アカウント情報Dao */
+//	@Autowired
+//	private AccountDao accountDao;
+
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	@Override
+//	public Account findByUserId(String userId) throws BaseException {
+//		return accountDao.selectByUserId(userId);
+//	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public Account findByUserId(String userId) throws BaseException {
-		return accountDao.selectByUserId(userId);
-	}
 
+		try (SqlSession session = getSqlSession()) {
+			AccountMapper mapper = session.getMapper(AccountMapper.class);
+			return mapper.selectByPrimaryKey(userId);
+		}
+	}
 }
