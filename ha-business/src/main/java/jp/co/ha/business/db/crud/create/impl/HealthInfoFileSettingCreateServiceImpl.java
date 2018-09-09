@@ -1,9 +1,9 @@
-package jp.co.ha.business.db.create.impl;
+package jp.co.ha.business.db.crud.create.impl;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.db.create.HealthInfoFileSettingCreateService;
+import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.mapper.HealthInfoFileSettingMapper;

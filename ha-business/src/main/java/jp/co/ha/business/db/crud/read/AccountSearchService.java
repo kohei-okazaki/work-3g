@@ -1,4 +1,4 @@
-package jp.co.ha.business.db.find;
+package jp.co.ha.business.db.crud.read;
 
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.common.exception.BaseException;

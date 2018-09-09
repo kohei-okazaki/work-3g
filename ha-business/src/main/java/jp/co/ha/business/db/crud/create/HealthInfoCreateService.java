@@ -1,4 +1,4 @@
-package jp.co.ha.business.db.create;
+package jp.co.ha.business.db.crud.create;
 
 import jp.co.ha.business.db.entity.HealthInfo;
 

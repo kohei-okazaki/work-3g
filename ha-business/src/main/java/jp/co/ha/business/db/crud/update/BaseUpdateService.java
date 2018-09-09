@@ -1,4 +1,4 @@
-package jp.co.ha.business.db.update;
+package jp.co.ha.business.db.crud.update;
 
 import jp.co.ha.common.exception.BaseException;
 

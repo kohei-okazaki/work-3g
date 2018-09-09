@@ -1,11 +1,11 @@
-package jp.co.ha.business.db.update.impl;
+package jp.co.ha.business.db.crud.update.impl;
 
 import org.apache.ibatis.session.SqlSession;
 
+import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.business.db.mapper.HealthInfoFileSettingMapper;
-import jp.co.ha.business.db.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.common.exception.DataBaseException;
 
 /**

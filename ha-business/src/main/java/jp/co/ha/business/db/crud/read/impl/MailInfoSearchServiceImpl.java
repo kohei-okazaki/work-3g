@@ -1,11 +1,11 @@
-package jp.co.ha.business.db.find.impl;
+package jp.co.ha.business.db.crud.read.impl;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.MailInfo;
-import jp.co.ha.business.db.find.MailInfoSearchService;
 import jp.co.ha.business.db.mapper.MailInfoMapper;
 import jp.co.ha.common.exception.BaseException;
 

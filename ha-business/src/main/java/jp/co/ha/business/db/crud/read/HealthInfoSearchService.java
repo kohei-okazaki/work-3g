@@ -1,4 +1,4 @@
-package jp.co.ha.business.db.find;
+package jp.co.ha.business.db.crud.read;
 
 import java.util.Date;
 import java.util.List;

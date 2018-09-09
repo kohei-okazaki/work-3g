@@ -1,20 +1,20 @@
-package jp.co.ha.business.db.create.impl;
+package jp.co.ha.business.db.crud.update.impl;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.db.create.MailInfoCreateService;
+import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
 import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.business.db.mapper.MailInfoMapper;
-import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.DataBaseException;
 
 /**
- * メール情報作成サービスインターフェース実装クラス<br>
+ * メール情報更新サービス実装クラス<br>
  *
  */
 @Service
-public class MailInfoCreateServiceImpl implements MailInfoCreateService, MyBatisDao {
+public class MailInfoUpdateServiceImpl implements MailInfoUpdateService, MyBatisDao {
 
 //	/** メール情報Dao */
 //	@Autowired
@@ -24,18 +24,18 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService, MyBatis
 //	 * {@inheritDoc}
 //	 */
 //	@Override
-//	public void create(MailInfo entity) throws BaseException {
-//		mailInfoDao.create(entity);
+//	public void update(MailInfo mailInfo) throws DataBaseException {
+//		mailInfoDao.update(mailInfo);
 //	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void create(MailInfo entity) throws BaseException {
+	public void update(MailInfo mailInfo) throws DataBaseException {
 		try (SqlSession session = getSqlSession()) {
 			MailInfoMapper mapper = session.getMapper(MailInfoMapper.class);
-			mapper.insert(entity);
+			mapper.updateByPrimaryKey(mailInfo);
 			session.commit();
 		}
 	}
