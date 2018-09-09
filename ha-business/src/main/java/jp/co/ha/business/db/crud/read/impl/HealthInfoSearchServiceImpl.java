@@ -19,18 +19,6 @@ import jp.co.ha.common.util.BeanUtil;
  */
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyBatisDao {
 
-//	/** 健康情報Dao */
-//	@Autowired
-//	private HealthInfoDao healthInfoDao;
-
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public List<HealthInfo> findByUserId(String userId) throws BaseException {
-//		return healthInfoDao.selectByUserId(userId);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -44,14 +32,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 		}
 	}
 
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException {
-//		return healthInfoDao.selectByHealthInfoId(healthInfoId);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -62,19 +42,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 			return mapper.selectByPrimaryKey(healthInfoId);
 		}
 	}
-
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public HealthInfo findLastByUserId(String userId) throws BaseException {
-//		List<HealthInfo> entityList = this.findByUserId(userId);
-//		if (BeanUtil.isNull(entityList) || entityList.isEmpty()) {
-//			// 登録がされてなかった場合
-//			return null;
-//		}
-//		return entityList.get(entityList.size() - 1);
-//	}
 
 	/**
 	 * {@inheritDoc}
@@ -94,23 +61,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 		}
 	}
 
-//	/**
-//	 * {@inheritDoc}
-//
-//	 */
-//	@Override
-//	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseException {
-//
-//		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
-//		if (BeanUtil.isNull(regDate)) {
-//			// 検索条件がない場合
-//			return healthInfoList;
-//		}
-//		return healthInfoList.stream()
-//					.filter(entity -> DateUtil.isSameDate(regDate, DateUtil.toStartDate(entity.getRegDate())))
-//					.collect(Collectors.toList());
-//	}
-
 	/**
 	 * {@inheritDoc}
 
@@ -124,23 +74,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 			return mapper.selectByExample(example);
 		}
 	}
-
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws BaseException {
-//
-//		List<HealthInfo> healthInfoList = healthInfoDao.selectByUserId(userId);
-//		if (BeanUtil.isNull(fromRegDate) || BeanUtil.isNull(toRegDate)) {
-//			// 検索条件がない場合
-//			return healthInfoList;
-//		}
-//		// fromRegDate < entityRegDate < toRegDateの範囲内である健康情報の場合、追加
-//		return healthInfoList.stream()
-//					.filter(entity -> DateUtil.isBetWeenDate(fromRegDate, entity.getRegDate(), toRegDate))
-//					.collect(Collectors.toList());
-//	}
 
 	/**
 	 * {@inheritDoc}

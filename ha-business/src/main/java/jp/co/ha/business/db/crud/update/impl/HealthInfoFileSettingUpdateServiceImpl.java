@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class HealthInfoFileSettingUpdateServiceImpl implements HealthInfoFileSettingUpdateService, MyBatisDao {
 
-//	/** 健康情報ファイル設定Dao */
-//	@Autowired
-//	private HealthInfoFileSettingDao healthInfoFileSettingDao;
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public void update(HealthInfoFileSetting entity) throws DataBaseException {
-//		healthInfoFileSettingDao.update(entity);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

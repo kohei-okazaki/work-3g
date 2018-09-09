@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class AccountUpdateServiceImpl implements AccountUpdateService, MyBatisDao {
 
-//	/** アカウントDao */
-//	@Autowired
-//	private AccountDao accountDao;
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public void update(Account account) throws BaseException {
-//		accountDao.update(account);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class MailInfoSearchServiceImpl implements MailInfoSearchService, MyBatisDao {
 
-//	/** メール情報Dao */
-//	@Autowired
-//	private MailInfoDao mailInfoDao;
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public MailInfo findByUserId(String userId) throws BaseException {
-//		return mailInfoDao.selectByUserId(userId);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

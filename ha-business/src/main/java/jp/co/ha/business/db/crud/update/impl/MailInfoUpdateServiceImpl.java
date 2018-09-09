@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class MailInfoUpdateServiceImpl implements MailInfoUpdateService, MyBatisDao {
 
-//	/** メール情報Dao */
-//	@Autowired
-//	private MailInfoDao mailInfoDao;
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public void update(MailInfo mailInfo) throws DataBaseException {
-//		mailInfoDao.update(mailInfo);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class HealthInfoCreateServiceImpl implements HealthInfoCreateService, MyBatisDao {
 
-//	/** 健康情報Dao */
-//	@Autowired
-//	private HealthInfoDao healthInfoDao;
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public void create(HealthInfo entity) throws BaseException {
-//		healthInfoDao.create(entity);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

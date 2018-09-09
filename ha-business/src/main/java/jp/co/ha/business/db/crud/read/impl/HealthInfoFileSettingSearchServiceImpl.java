@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSettingSearchService, MyBatisDao {
 
-//	/** 健康情報ファイル設定Dao */
-//	@Autowired
-//	private HealthInfoFileSettingDao healthInfoFileSettingDao;
-
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public HealthInfoFileSetting findByUserId(String userId) throws BaseException {
-//		return healthInfoFileSettingDao.selectByUserId(userId);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

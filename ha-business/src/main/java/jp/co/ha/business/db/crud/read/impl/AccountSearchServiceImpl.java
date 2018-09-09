@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class AccountSearchServiceImpl implements AccountSearchService, MyBatisDao {
 
-//	/** アカウント情報Dao */
-//	@Autowired
-//	private AccountDao accountDao;
-
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public Account findByUserId(String userId) throws BaseException {
-//		return accountDao.selectByUserId(userId);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

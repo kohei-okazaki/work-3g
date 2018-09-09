@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class AccountCreateServiceImpl implements AccountCreateService, MyBatisDao {
 
-//	/** アカウント情報Dao */
-//	@Autowired
-//	private AccountDao accountDao;
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public void create(Account entity) throws DataBaseException {
-//		accountDao.create(entity);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */

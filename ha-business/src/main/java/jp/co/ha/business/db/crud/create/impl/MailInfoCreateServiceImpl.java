@@ -14,18 +14,6 @@ import jp.co.ha.common.exception.BaseException;
  */
 public class MailInfoCreateServiceImpl implements MailInfoCreateService, MyBatisDao {
 
-//	/** メール情報Dao */
-//	@Autowired
-//	private MailInfoDao mailInfoDao;
-//
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override
-//	public void create(MailInfo entity) throws BaseException {
-//		mailInfoDao.create(entity);
-//	}
-
 	/**
 	 * {@inheritDoc}
 	 */
