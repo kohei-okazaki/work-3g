@@ -18,7 +18,7 @@ import jp.co.ha.common.web.BaseInterceptor;
  * ログイン情報のチェックを行うinterceptor
  *
  */
-public class LoginInterceptor extends BaseInterceptor {
+public class AuthInterceptor extends BaseInterceptor {
 
 	/** session管理サービス */
 	@Autowired
