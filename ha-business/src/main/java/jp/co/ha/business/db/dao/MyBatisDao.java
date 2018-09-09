@@ -20,10 +20,11 @@ import jp.co.ha.common.exception.ErrorCode;
  */
 public interface MyBatisDao {
 
+	static final String CONF_NAME = "mybatis-config.xml";
+
 	public default SqlSession getSqlSession() throws BaseException {
 		String sysPath = this.getClass().getClassLoader().getResource("").getPath();
-		String mybatisConf = "mybatis-config.xml";
-		File xmlFile = new File(sysPath, mybatisConf);
+		File xmlFile = new File(sysPath, CONF_NAME);
 		try (InputStream is = new FileInputStream(xmlFile.getAbsolutePath())) {
 			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
 			return factory.openSession();
