@@ -55,7 +55,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 			}
 		} else {
 			HealthInfo entity = healthInfoSearchService.findByHealthInfoId(form.getHealthInfoId());
-			if (BeanUtil.isNull(entity) || entity.getUserId().equals(userId)) {
+			if (BeanUtil.isNull(entity) || !entity.getUserId().equals(userId)) {
 				// selectした健康情報がログイン中のユーザIDと一致しない場合
 				resultList = new ArrayList<>();
 			} else {
