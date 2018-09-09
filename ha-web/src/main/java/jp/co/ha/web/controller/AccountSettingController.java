@@ -20,7 +20,6 @@ import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.business.db.find.AccountSearchService;
 import jp.co.ha.business.db.find.MailInfoSearchService;
-import jp.co.ha.business.exception.AccountSettingException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
@@ -69,7 +68,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * @param request
 	 *     HttpServletRequest
 	 * @return
-	 * @throws AccountSettingException
+	 * @throws BaseException
 	 */
 	@ModelAttribute
 	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseException {
