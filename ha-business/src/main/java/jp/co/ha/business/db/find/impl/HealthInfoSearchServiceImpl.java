@@ -1,6 +1,5 @@
 package jp.co.ha.business.db.find.impl;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,7 +37,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo findByHealthInfoId(BigDecimal healthInfoId) throws BaseException {
+	public HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException {
 		return healthInfoDao.selectByHealthInfoId(healthInfoId);
 	}
 

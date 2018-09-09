@@ -1,6 +1,5 @@
 package jp.co.ha.business.db.dao;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import jp.co.ha.business.db.entity.HealthInfo;
@@ -44,7 +43,7 @@ public interface HealthInfoDao {
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */
-	HealthInfo selectByHealthInfoId(BigDecimal healthInfoId) throws DataBaseException;
+	HealthInfo selectByHealthInfoId(Integer healthInfoId) throws DataBaseException;
 
 	/**
 	 * 健康情報を登録する<br>

@@ -1,6 +1,5 @@
 package jp.co.ha.web.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.ui.Model;
@@ -49,7 +48,7 @@ public interface HealthInfoService {
 	 *     健康情報ID
 	 * @return
 	 */
-	boolean hasRecord(List<HealthInfo> entityList, BigDecimal healthInfoId);
+	boolean hasRecord(List<HealthInfo> entityList, Integer healthInfoId);
 
 	/**
 	 * CSVモデルリストに変換する<br>

@@ -1,7 +1,6 @@
 package jp.co.ha.web.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -173,7 +172,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseException {
 
-		BigDecimal requestHealthInfoId = form.getHealthInfoId();
+		Integer requestHealthInfoId = form.getHealthInfoId();
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
 
 		if (!hasRecord) {

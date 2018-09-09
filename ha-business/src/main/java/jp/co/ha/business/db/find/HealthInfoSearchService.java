@@ -1,6 +1,5 @@
 package jp.co.ha.business.db.find;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public interface HealthInfoSearchService {
 	 * @return 健康情報Entity
 	 * @throws BaseException
 	 */
-	HealthInfo findByHealthInfoId(BigDecimal healthInfoId) throws BaseException;
+	HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException;
 
 	/**
 	 * 指定したユーザIDで最後に登録した健康情報を返す<br>
