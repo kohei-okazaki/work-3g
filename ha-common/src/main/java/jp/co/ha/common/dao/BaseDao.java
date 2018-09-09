@@ -31,7 +31,7 @@ public abstract class BaseDao {
 	 *     DBエラー
 	 */
 	protected void connect() throws DataBaseException {
-		DaoConfig prop = DaoConfig.getInstance();
+		JdbcConfig prop = JdbcConfig.getInstance();
 		try {
 			Class.forName(prop.getDriverClassName()).getDeclaredConstructor().newInstance();
 			this.con = DriverManager.getConnection(prop.getUrl(), prop.getUsername(), prop.getPassword());
