@@ -79,16 +79,15 @@ public class Logger {
 		Class<?> clazz = bean.getClass();
 
 		for (Field f : BeanUtil.getFieldList(clazz)) {
-			String name = f.getName();
 			if (isIgnore(f)) {
 				// 出力非対象項目
 				continue;
 			}
+			String name = f.getName();
 			if (MaskExecutor.isMask(f)) {
 				body.add(name + StringUtil.EQUAL + MaskExecutor.MASK);
 			} else {
-				String strValue = editValue(getValue(bean, name));
-				body.add(name + StringUtil.EQUAL + strValue);
+				body.add(name + StringUtil.EQUAL + editValue(getValue(bean, name)));
 			}
 		}
 		return clazz.getName() + StringUtil.SPACE + body.toString();
@@ -104,10 +103,9 @@ public class Logger {
 	 * @return
 	 */
 	private Object getValue(Object bean, String fieldName) {
-		Class<?> clazz = bean.getClass();
 		Object value = null;
 		try {
-			Method getter = BeanUtil.getAccessor(fieldName, clazz, AccessorType.GETTER);
+			Method getter = BeanUtil.getAccessor(fieldName, bean.getClass(), AccessorType.GETTER);
 			value = getter.invoke(bean);
 		} catch (IllegalAccessException e) {
 			logger.error("不正アクセスです" + fieldName, e);
