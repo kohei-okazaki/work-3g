@@ -27,7 +27,7 @@ public class Getter extends Method {
 
 	@Override
 	protected String getMethodName() {
-		String firstChar = new Character(field.getName().charAt(0)).toString();
+		String firstChar = Character.valueOf(field.getName().charAt(0)).toString();
 		String methodName = field.getName().replaceFirst(firstChar, firstChar.toUpperCase());
 		return PREFIX + methodName;
 	}

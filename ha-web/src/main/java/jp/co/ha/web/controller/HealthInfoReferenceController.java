@@ -132,7 +132,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		if (BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 
 		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
@@ -165,7 +165,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class);
 		if (BeanUtil.isNull(resultList) || resultList.isEmpty()) {
 			// レコードが見つからなかった場合
-			throw new SessionIllegalException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
 
@@ -190,7 +190,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
 		String userId = sessionService.getValue(session, "userId", String.class);
 		if (BeanUtil.isNull(resultList) || BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 
 		// CSV設定情報取得

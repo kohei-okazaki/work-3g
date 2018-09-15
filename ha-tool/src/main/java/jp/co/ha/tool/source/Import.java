@@ -20,7 +20,7 @@ public class Import {
 		String suffix = ";";
 		StringJoiner body = new StringJoiner(" ");
 		body.add(prefix);
-		body.add(clazz.getName() + suffix);
+		body.add(this.clazz.getName() + suffix);
 		return body.toString();
 	}
 

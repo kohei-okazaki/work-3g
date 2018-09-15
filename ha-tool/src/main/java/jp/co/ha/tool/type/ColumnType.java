@@ -13,7 +13,7 @@ public enum ColumnType {
 	/** TIMESTAMP */
 	TIMESTAMP("TIMESTAMP", Date.class),
 	/** DOUBLE */
-	DOUBLE("DOUBLE", BigDecimal.class),
+	DECIMAL("DECIMAL", BigDecimal.class),
 	/** INT */
 	INT("INT", BigDecimal.class);
 

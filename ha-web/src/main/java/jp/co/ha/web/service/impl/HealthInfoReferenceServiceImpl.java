@@ -44,7 +44,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) throws BaseException {
 
 		List<HealthInfo> resultList = null;
-		if (BeanUtil.isNull(form.getHealthInfoId()) || StringUtil.isEmpty(form.getHealthInfoId().toString())) {
+		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			Date regDate = editStrDate(form.getFromRegDate());
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 登録日直接指定フラグがONの場合
@@ -54,7 +54,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 			}
 		} else {
-			HealthInfo entity = healthInfoSearchService.findByHealthInfoId(form.getHealthInfoId());
+			HealthInfo entity = healthInfoSearchService.findByHealthInfoId(Integer.valueOf(form.getHealthInfoId()));
 			if (BeanUtil.isNull(entity) || !entity.getUserId().equals(userId)) {
 				// selectした健康情報がログイン中のユーザIDと一致しない場合
 				resultList = new ArrayList<>();
