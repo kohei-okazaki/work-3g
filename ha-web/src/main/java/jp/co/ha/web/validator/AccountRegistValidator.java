@@ -17,7 +17,7 @@ import jp.co.ha.web.form.AccountRegistForm;
  */
 public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> {
 
-	private final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/** アカウント検索サービス */
 	private AccountSearchService accountSearchService;

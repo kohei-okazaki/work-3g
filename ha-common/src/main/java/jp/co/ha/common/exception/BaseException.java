@@ -13,7 +13,7 @@ public abstract class BaseException extends Exception {
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
 	/** ロガー */
-	private final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/** エラーコード */
 	private ErrorCode errorCode;

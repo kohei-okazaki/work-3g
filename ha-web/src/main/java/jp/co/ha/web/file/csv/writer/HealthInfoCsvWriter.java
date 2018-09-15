@@ -19,7 +19,7 @@ import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
  */
 public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 
-	private final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * コンストラクタ<br>

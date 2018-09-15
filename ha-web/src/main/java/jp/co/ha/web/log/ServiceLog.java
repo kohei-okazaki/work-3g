@@ -18,7 +18,7 @@ import jp.co.ha.common.log.LoggerFactory;
 public class ServiceLog {
 
 	/** ロガー */
-	private final Logger LOG = LoggerFactory.getAppLogger(getClass());
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * 開始ログを出力する<br>
