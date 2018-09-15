@@ -19,7 +19,7 @@ import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 
-	private final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * コンストラクタ<br>

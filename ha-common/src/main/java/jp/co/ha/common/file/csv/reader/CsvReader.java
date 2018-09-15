@@ -24,7 +24,7 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class CsvReader<T extends BaseCsvModel> {
 
-	private final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 1行読込を行う<br>

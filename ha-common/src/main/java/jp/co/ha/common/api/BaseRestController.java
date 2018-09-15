@@ -39,7 +39,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@PostMapping
 	default Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
-		Logger log = LoggerFactory.getAppLogger(this.getClass());
+		Logger log = LoggerFactory.getLogger(this.getClass());
 		log.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
 		apiResponse.setResult(ResultType.SUCCESS);
@@ -79,7 +79,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 		} else if (e instanceof JsonProcessingException) {
 			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません"));
 		}
-		Logger log = LoggerFactory.getAppLogger(this.getClass());
+		Logger log = LoggerFactory.getLogger(this.getClass());
 		log.errorRes(apiResponse);
 		return apiResponse;
 	}
@@ -97,7 +97,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 
 		Rs apiResponse = (Rs) new ErrorResponse(e);
 
-		Logger log = LoggerFactory.getAppLogger(this.getClass());
+		Logger log = LoggerFactory.getLogger(this.getClass());
 		log.errorRes(apiResponse);
 		return apiResponse;
 	}

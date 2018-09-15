@@ -19,7 +19,7 @@ import jp.co.ha.common.util.BeanUtil;
 public class HttpClient {
 
 	/** ロガー */
-	private static final Logger LOG = LoggerFactory.getAppLogger(HttpClient.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HttpClient.class);
 
 	/** HTTPクライアント 設定情報 */
 	private HttpClientConfig conf;

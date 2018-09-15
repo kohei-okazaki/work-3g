@@ -20,7 +20,7 @@ import jp.co.ha.common.type.AccessorType;
  */
 public class BeanUtil {
 
-	private static Logger LOG = LoggerFactory.getAppLogger(BeanUtil.class);
+	private static Logger LOG = LoggerFactory.getLogger(BeanUtil.class);
 
 	/**
 	 * プライベートコンストラクタ<br>

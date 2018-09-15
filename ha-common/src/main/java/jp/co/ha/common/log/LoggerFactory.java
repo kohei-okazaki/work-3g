@@ -19,7 +19,7 @@ public class LoggerFactory {
 	 *     クラス型
 	 * @return
 	 */
-	public static Logger getAppLogger(Class<?> clazz) {
+	public static Logger getLogger(Class<?> clazz) {
 		return new Logger(org.slf4j.LoggerFactory.getLogger(clazz));
 	}
 

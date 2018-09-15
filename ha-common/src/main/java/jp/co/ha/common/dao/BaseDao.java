@@ -19,7 +19,7 @@ import jp.co.ha.common.util.BeanUtil;
  */
 public abstract class BaseDao {
 
-	protected final Logger LOG = LoggerFactory.getAppLogger(this.getClass());
+	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	private Connection con;
 	private Statement stm;
 	protected ResultSet rs;

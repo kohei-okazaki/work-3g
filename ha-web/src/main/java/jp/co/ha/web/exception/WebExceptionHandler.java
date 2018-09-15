@@ -23,7 +23,7 @@ import jp.co.ha.web.view.ManageWebView;
 public class WebExceptionHandler implements BaseExceptionHandler {
 
 	/** ロガー */
-	private final Logger LOG = LoggerFactory.getAppLogger(getClass());
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private MessageSource messageSource;
 
