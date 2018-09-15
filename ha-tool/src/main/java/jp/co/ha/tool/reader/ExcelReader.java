@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -37,7 +36,7 @@ public class ExcelReader extends BaseFileReader {
 		Workbook workbook;
 		try {
 			workbook = WorkbookFactory.create(getFilePath(conf.getFilePath()));
-		} catch (EncryptedDocumentException | InvalidFormatException | IOException e) {
+		} catch (EncryptedDocumentException | IOException e) {
 			LOG.error("excelファイル読込エラー", e);
 			return null;
 		}
