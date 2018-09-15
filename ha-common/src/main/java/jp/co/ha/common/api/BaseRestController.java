@@ -1,10 +1,6 @@
 package jp.co.ha.common.api;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,30 +26,6 @@ import jp.co.ha.common.log.LoggerFactory;
  *     サービスクラス
  */
 public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
-
-	/**
-	 * GET通信の処理を行う<br>
-	 *
-	 * @param request
-	 *     HttpServletRequest
-	 * @param response
-	 *     HttpServletResponse
-	 * @return
-	 * @throws BaseException
-	 *     アプリ例外
-	 */
-	@GetMapping
-	default Rs doGet(HttpServletRequest request, HttpServletResponse response) throws BaseException {
-
-		Logger log = LoggerFactory.getAppLogger(this.getClass());
-		Rq apiRequest = toRequest(request);
-		log.infoRes(apiRequest);
-		Rs apiResponse = this.execute(apiRequest);
-		apiResponse.setResult(ResultType.SUCCESS);
-		log.infoRes(apiResponse);
-
-		return apiResponse;
-	}
 
 	/**
 	 * POST通信の処理を行う<br>
@@ -86,17 +58,6 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 *     例外クラス
 	 */
 	Rs execute(Rq request) throws BaseException;
-
-	/**
-	 * Requestクラスに変換する<br>
-	 *
-	 * @param request
-	 *     HttpServletRequest
-	 * @return apiRequest Rq
-	 * @throws BaseException
-	 *     例外クラス
-	 */
-	Rq toRequest(HttpServletRequest request) throws BaseException;
 
 	/**
 	 * JSONで例外が起きた場合のエラーハンドリング<br>
