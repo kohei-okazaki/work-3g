@@ -1,7 +1,11 @@
 package jp.co.ha.web.form;
 
 import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.validator.annotation.Flag;
+import jp.co.ha.common.validator.annotation.Max;
+import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.BaseForm;
 
@@ -16,7 +20,10 @@ public class HealthInfoReferenceForm implements BaseForm {
 	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
-	private Integer healthInfoId;
+	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "健康情報IDは半角数字で入力してください")
+	@Min(size = 1, message = "健康情報IDは1桁以上で入力してください")
+	@Max(size = 8, message = "健康情報IDは8桁以下で入力してください")
+	private String healthInfoId;
 	/** 登録日直接指定フラグ */
 	@Required(message = "登録日直接指定フラグが未入力です")
 	@Flag(message = "登録日直接指定フラグの値が不正です")
@@ -31,7 +38,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 *
 	 * @return healthInfoId 健康情報ID
 	 */
-	public Integer getHealthInfoId() {
+	public String getHealthInfoId() {
 		return healthInfoId;
 	}
 
@@ -41,7 +48,7 @@ public class HealthInfoReferenceForm implements BaseForm {
 	 * @param healthInfoId
 	 *     健康情報ID
 	 */
-	public void setHealthInfoId(Integer healthInfoId) {
+	public void setHealthInfoId(String healthInfoId) {
 		this.healthInfoId = healthInfoId;
 	}
 

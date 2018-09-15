@@ -89,10 +89,10 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean hasRecord(List<HealthInfo> entityList, Integer dataId) {
+	public boolean hasRecord(List<HealthInfo> entityList, Integer healthInfoId) {
 		return entityList.stream()
 				.map(entity -> entity.getHealthInfoId())
-				.anyMatch(entityDataId -> entityDataId.equals(dataId));
+				.anyMatch(entityHealthInfoId -> entityHealthInfoId.equals(healthInfoId));
 	}
 
 	/**
