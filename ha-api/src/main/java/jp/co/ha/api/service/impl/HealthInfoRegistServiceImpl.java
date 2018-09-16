@@ -52,7 +52,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws BaseException {
 
-		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
+		if (BeanUtil.isNull(request.getRequestType())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
