@@ -94,11 +94,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(BaseException.class)
 	public default Rs appExceptionHandle(BaseException e) {
-
 		Rs apiResponse = (Rs) new ErrorResponse(e);
-
-		Logger log = LoggerFactory.getLogger(this.getClass());
-		log.errorRes(apiResponse);
 		return apiResponse;
 	}
 
