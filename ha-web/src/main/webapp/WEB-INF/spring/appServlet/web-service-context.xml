@@ -1,56 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc
-						http://www.springframework.org/schema/mvc/spring-mvc.xsd
-						http://www.springframework.org/schema/beans
-						http://www.springframework.org/schema/beans/spring-beans.xsd
-						http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- アカウント検索サービス -->
-	<beans:bean id="accountSearchService" class="jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl" />
+	<bean id="accountSearchService" class="jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl" />
 	<!-- 健康情報検索サービス -->
-	<beans:bean id="healthInfoSearchService" class="jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl" />
+	<bean id="healthInfoSearchService" class="jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl" />
 	<!-- メール情報検索サービス -->
-	<beans:bean id ="mailInfoSearchService" class ="jp.co.ha.business.db.crud.read.impl.MailInfoSearchServiceImpl" />
+	<bean id ="mailInfoSearchService" class ="jp.co.ha.business.db.crud.read.impl.MailInfoSearchServiceImpl" />
 	<!-- 健康情報ファイル設定検索サービス -->
-	<beans:bean id ="healthInfoFileSettingSearchService" class ="jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl" />
+	<bean id ="healthInfoFileSettingSearchService" class ="jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl" />
 
 	<!-- アカウント作成サービス -->
-	<beans:bean id="accountCreateService" class="jp.co.ha.business.db.crud.create.impl.AccountCreateServiceImpl" />
+	<bean id="accountCreateService" class="jp.co.ha.business.db.crud.create.impl.AccountCreateServiceImpl" />
 	<!-- 健康情報作成サービス -->
-	<beans:bean id="healthInfoCreateService" class="jp.co.ha.business.db.crud.create.impl.HealthInfoCreateServiceImpl" />
+	<bean id="healthInfoCreateService" class="jp.co.ha.business.db.crud.create.impl.HealthInfoCreateServiceImpl" />
 	<!-- メール情報作成サービス -->
-	<beans:bean id="mailInfoCreateService" class="jp.co.ha.business.db.crud.create.impl.MailInfoCreateServiceImpl" />
+	<bean id="mailInfoCreateService" class="jp.co.ha.business.db.crud.create.impl.MailInfoCreateServiceImpl" />
 	<!-- 健康情報ファイル設定作成サービス -->
-	<beans:bean id ="healthInfoFileSettingCreateService" class ="jp.co.ha.business.db.crud.create.impl.HealthInfoFileSettingCreateServiceImpl" />
+	<bean id ="healthInfoFileSettingCreateService" class ="jp.co.ha.business.db.crud.create.impl.HealthInfoFileSettingCreateServiceImpl" />
 
 	<!-- アカウント更新サービス -->
-	<beans:bean id="accountUpdateService" class="jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl" />
+	<bean id="accountUpdateService" class="jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl" />
 	<!-- メール情報更新サービス -->
-	<beans:bean id="mailInfoUpdateService" class="jp.co.ha.business.db.crud.update.impl.MailInfoUpdateServiceImpl" />
+	<bean id="mailInfoUpdateService" class="jp.co.ha.business.db.crud.update.impl.MailInfoUpdateServiceImpl" />
 	<!-- 健康情報ファイル設定更新サービス -->
-	<beans:bean id ="healthInfoFileSettingUpdateService" class ="jp.co.ha.business.db.crud.update.impl.HealthInfoFileSettingUpdateServiceImpl" />
+	<bean id ="healthInfoFileSettingUpdateService" class ="jp.co.ha.business.db.crud.update.impl.HealthInfoFileSettingUpdateServiceImpl" />
 
 
 	<!-- 健康情報登録API -->
-	<beans:bean id="healthInfoRegistService" class="jp.co.ha.api.service.impl.HealthInfoRegistServiceImpl" />
+	<bean id="healthInfoRegistService" class="jp.co.ha.api.service.impl.HealthInfoRegistServiceImpl" />
 	<!-- 健康情報照会API -->
-	<beans:bean id="healthInfoReferenceService" class="jp.co.ha.api.service.impl.HealthInfoReferenceServiceImpl" />
+	<bean id="healthInfoReferenceService" class="jp.co.ha.api.service.impl.HealthInfoReferenceServiceImpl" />
 
 	<!-- 健康情報計算サービス -->
-	<beans:bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
+	<bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
 	<!-- 健康情報利用機能サービス -->
-	<beans:bean id="healthInfoFunctionService" class="jp.co.ha.business.healthInfo.impl.HealthInfoFunctionServiceImpl" />
+	<bean id="healthInfoFunctionService" class="jp.co.ha.business.healthInfo.impl.HealthInfoFunctionServiceImpl" />
 
 	<!-- セッション管理サービス -->
-	<beans:bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />
+	<bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />
 	<!-- BCryptパスワードサービス -->
-	<beans:bean id="bcryptPasswordEncoder" class="jp.co.ha.common.system.impl.BcryptPasswordEncoder" />
+	<bean id="bcryptPasswordEncoder" class="jp.co.ha.common.system.impl.BcryptPasswordEncoder" />
 	<!-- sha256パスワードサービス -->
-	<beans:bean id="sha256PasswordEncoder" class="jp.co.ha.common.system.impl.Sha256PasswordEncoder" />
+	<bean id="sha256PasswordEncoder" class="jp.co.ha.common.system.impl.Sha256PasswordEncoder" />
 
-</beans:beans>
+</beans>

@@ -40,7 +40,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	@Override
 	public void checkRequest(HealthInfoReferenceRequest request) throws BaseException {
 
-		if (StringUtil.isEmpty(request.getRequestType().getRequestId())
+		if (BeanUtil.isNull(request.getRequestType())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHealthInfoId())) {
 			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
