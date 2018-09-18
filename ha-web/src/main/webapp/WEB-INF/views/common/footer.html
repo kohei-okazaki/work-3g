@@ -3,12 +3,12 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.css}">
 </head>
 <body>
 
 <br>
-<img class="browseBack" alt="戻る" src="../resources/image/icon_browseBack.jpg" onclick="history.back()">
+<img class="browseBack" alt="戻る" src="../resources/image/icon_browseBack.jpg" th:src="@{/resources/image/icon_browseBack.jpg}" onclick="history.back()">
 <br>
 
 <div align="center">
@@ -17,7 +17,7 @@
 
 <br>
 
-<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
 
 </body>
 </html>
