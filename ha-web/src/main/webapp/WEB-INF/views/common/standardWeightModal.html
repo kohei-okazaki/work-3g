@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/standardWeightModal.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/standardWeightModal.css" th:href="@{/resources/css/common/standardWeightModal.css}">
 </head>
 <body>
 
@@ -17,8 +18,8 @@
 </div>
 
 
-<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/common/standardWeightModal.js"></script>
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+<script type="text/javascript" src="../resources/js/common/standardWeightModal.js" th:src="@{/resources/js/common/standardWeightModal.js}"></script>
 
 </body>
 </html>

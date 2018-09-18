@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../resources/css/common/bmiModal.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/standardWeightModal.css">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/bmiModal.css" th:href="@{/resources/css/common/bmiModal.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/standardWeightModal.css" th:href="@{/resources/css/common/standardWeightModal.css}">
 </head>
 <body>
 
@@ -14,9 +15,9 @@
 			<ul>
 				<li><a class="navigation" href="#">健康情報</a>
 					<ul>
-						<li><a class="navigation" href="../healthInfo/input.html">入力</a></li>
-						<li><a class="navigation" href="../healthInfoFile/input.html">一括</a></li>
-						<li><a class="navigation" href="../healthInfoReference/index.html">照会</a></li>
+						<li><a class="navigation" href="../healthInfo/input.html" th:href="@{/healthInfo/input.html}">入力</a></li>
+						<li><a class="navigation" href="../healthInfoFile/input.html" th:href="@{/healthInfoFile/input.html}">一括</a></li>
+						<li><a class="navigation" href="../healthInfoReference/index.html" th:href="@{/healthInfoReference/index.html}">照会</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -25,12 +26,12 @@
 			<ul>
 				<li><a class="navigation" href="#">アカウント</a>
 					<ul>
-						<li><a class="navigation" href="../accountSetting/input.html">設定変更</a></li>
+						<li><a class="navigation" href="../accountSetting/input.html" th:href="@{/accountSetting/input.html}">設定変更</a></li>
 					</ul>
 				</li>
 				<li><a class="navigation" href="#">健康情報</a>
 					<ul>
-						<li><a class="navigation" href="../healthInfoFileSetting/input.html">設定変更</a></li>
+						<li><a class="navigation" href="../healthInfoFileSetting/input.html" th:href="@{/healthInfoFileSetting/input.html}">設定変更</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -60,35 +61,35 @@
 				</li>
 			</ul>
 		</li>
-		<li><a class="navigation" href="../login/index.html">ログアウト</a></li>
+		<li><a class="navigation" href="../login/index.html" th:href="@{/login/index.html}">ログアウト</a></li>
 	</ul>
 
 
 <!-- BMIのモーダルを描画 -->
-<div th:include="./common/bmiModal.html"></div>
+<div th:replace="./common/bmiModal.html"></div>
 
 
 <!-- 標準体重のモーダルを描画 -->
-<div th:include="./common/standardWeightModal.html"></div>
+<div th:replace="./common/standardWeightModal.html"></div>
 
 
 <!-- APIリファレンス-健康情報登録のモーダルを描画 -->
-<div th:include="./common/apiRegistModal.html"></div>
+<div th:replace="./common/apiRegistModal.html"></div>
 
 
 <!-- APIリファレンス-健康情報照会のモーダルを描画 -->
-<div th:include="./common/apiReferenceModal.html"></div>
+<div th:replace="./common/apiReferenceModal.html"></div>
 
 
 <!-- 利用規約のモーダルを描画 -->
-<div th:include="./common/serviceModal.html"></div>
+<div th:replace="./common/serviceModal.html"></div>
 
-<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/common/bmiModal.js"></script>
-<script type="text/javascript" src="../resources/js/common/standardWeightModal.js"></script>
-<script type="text/javascript" src="../resources/js/common/apiReferenceModal.js"></script>
-<script type="text/javascript" src="../resources/js/common/apiRegistModal.js"></script>
-<script type="text/javascript" src="../resources/js/common/serviceModal.js"></script>
+<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+<script type="text/javascript" src="../resources/js/common/bmiModal.js" th:src="@{/resources/js/common/bmiModal.js}"></script>
+<script type="text/javascript" src="../resources/js/common/standardWeightModal.js" th:src="@{/resources/js/common/standardWeightModal.js}"></script>
+<script type="text/javascript" src="../resources/js/common/apiReferenceModal.js" th:src="@{/resources/js/common/apiReferenceModal.js}"></script>
+<script type="text/javascript" src="../resources/js/common/apiRegistModal.js" th:src="@{/resources/js/common/apiRegistModal.js}"></script>
+<script type="text/javascript" src="../resources/js/common/serviceModal.js" th:src="@{/resources/js/common/serviceModal.js}"></script>
 
 </body>
 </html>

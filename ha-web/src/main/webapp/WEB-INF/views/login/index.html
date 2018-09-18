@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康管理アプリ_ログイン画面</title>
-<link rel="icon" type="image/png" href="../resources/image/people.png">
-<link rel="stylesheet" type="text/css" href="../resources/css/loginLayout.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css">
+<link rel="icon" type="image/png" href="../resources/image/people.png" th:href="@{/resources/image/people.png}">
+<link rel="stylesheet" type="text/css" href="../resources/css/loginLayout.css" th:href="@{/resources/css/loginLayout.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css" th:href="@{/resources/css/common/fort.css}">
 </head>
 <body>
 
@@ -35,11 +36,11 @@
 	</fieldset>
 	<br>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js"></script>
-	<script type="text/javascript" src="../resources/js/common/fort.js"></script>
-	<script type="text/javascript" src="../resources/js/accountRegist.js"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js" th:src="@{/resources/js/lib/jquery.validate.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+	<script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
+	<script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
 
 </body>
 </html>
