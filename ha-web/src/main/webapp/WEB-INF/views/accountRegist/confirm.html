@@ -15,7 +15,7 @@
 
 
 	<h1>
-		<img class="headericon" alt="確認" src="../resources/image/icon_confirm.png">
+		<img class="headericon" alt="確認" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
 		アカウント登録確認画面
 	</h1>
 
@@ -78,7 +78,7 @@
 
 	<br><br>
 	<hr>
-	<div th:include="common/footer.html"></div>
+	<div th:replace="common/layout :: footer"></div>
 
 	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>

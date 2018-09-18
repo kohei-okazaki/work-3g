@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定完了画面</title>
-<link rel="icon" type="image/png" href="../resources/image/people.png">
-<link rel="stylesheet" type="text/css" href="../resources/css/layout.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/input.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css">
+<link rel="icon" type="image/png" href="../resources/image/people.png" th:href="@{/resources/image/people.png}">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 </head>
 
 <body class="main">
 
 	<h1 class="title">
-		<img class="headericon" alt="確認" src="../resources/image/icon_confirm.png">
+		<img class="headericon" alt="確認" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
 		アカウント設定完了画面
 	</h1>
 
 
 	<hr>
-	<div th:include="./common/navigation.html"></div>
+	<div th:replace="./common/navigation.html"></div>
 
 	<br><br>
 
@@ -33,9 +34,9 @@
 			<tr>
 				<td align="center">
 					<!--/* TOP画面へ */-->
-					<form action="../login/top.html" th:action="@{../login/top.html}" method="get">
+					<form action="../login/top.html" th:action="@{/login/top.html}" method="get">
 						<div>
-							<input class="menuicon" type="image" src="../resources/image/icon_menu.jpg">
+							<input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:href="@{/resources/image/icon_menu.jpg}" />
 						</div>
 					</form>
 				</td>
@@ -45,10 +46,10 @@
 
 	<br><br>
 	<hr>
-	<div th:include="./common/footer.html"></div>
+	<div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 
 </body>
 </html>
