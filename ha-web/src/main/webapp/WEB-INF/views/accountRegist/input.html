@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css" th:href="@{/resources/css/common/fort.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 <body>
 
@@ -43,11 +44,11 @@
 		<div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
 		<div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
-		<input type="text" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
+		<input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
 		<br><br>
-		<input type="text" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" />
+		<input type="text" class="validate[required]" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" />
 		<br><br>
-		<input type="text" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
+		<input type="text" class="validate[required,equals[password]]" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
 		<br><br>
 		<textarea rows="10" cols="30" name="remarks"></textarea>
 		<br><br>
@@ -73,10 +74,18 @@
 
 	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js" th:src="@{/resources/js/lib/jquery.validate.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.js}"></script>
 	<script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
 	<script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
 	<script type="text/javascript" src="../resources/js/accountRegistValid.js" th:src="@{/resources/js/accountRegistValid.js}"></script>
 	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-
+	<script>
+		$(function() {
+			jQuery("#accountRegistForm").validationEngine({
+				promptPosition: "topLeft:80"
+			});
+		});
+	</script>
 </body>
 </html>
