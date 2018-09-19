@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 
 <body class="main">
@@ -26,7 +27,7 @@
 	<br>
 	<br>
 	<br>
-	<form action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
+	<form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
 
 		<div align="center">
 		<div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
@@ -129,11 +130,17 @@
 	<div th:replace="common/layout :: footer"></div>
 
 	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js" th:src="@{/resources/js/lib/jquery.validate.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 	<script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
-	<script type="text/javascript" src="../resources/js/referenceValid.js" th:src="@{/resources/js/referenceValid.js}"></script>
-
+	<script>
+		$(function() {
+			jQuery("#healthInfoReferenceForm").validationEngine({
+				promptPosition: "topLeft:80"
+			});
+		});
+	</script>
 
 </body>
 </html>
