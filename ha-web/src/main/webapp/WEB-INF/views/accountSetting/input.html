@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 <body class="main">
 
@@ -65,7 +66,7 @@
 					<p>パスワード</p>
 				</th>
 				<td class="data">
-					<input type="text" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
+					<input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
 				</td>
 			</tr>
 			<tr>
@@ -82,7 +83,7 @@
 					<p>メールアドレス</p>
 				</th>
 				<td class="data">
-					<input type="email" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
+					<input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
 				</td>
 			</tr>
 			<tr>
@@ -90,7 +91,7 @@
 					<p>メールパスワード</p>
 				</th>
 				<td class="data">
-					<input type="text" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
+					<input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
 				</td>
 			</tr>
 			<tr>
@@ -125,9 +126,16 @@
 
 
 	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js" th:src="@{/resources/js/lib/jquery.validate.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/accountSetting.js" th:src="@{/resources/js/accountSetting.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+	<script>
+		$(function() {
+			jQuery("#accountSettingForm").validationEngine({
+				promptPosition: "topLeft:80"
+			});
+		});
+	</script>
 
 </body>
 </html>
