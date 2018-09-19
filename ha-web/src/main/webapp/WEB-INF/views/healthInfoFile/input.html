@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 
 <body class="main">
@@ -30,7 +31,7 @@
 	<br><br><br>
 	<form action="./confirm.html" id="healthInfoFileForm" th:action="@{./confirm.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
 		<div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
-		<input type="file" th:field="*{multipartFile}" />
+		<input type="file" class="validate[required]" th:field="*{multipartFile}" required />
 		<br><br>
 		<table>
 			<tr>
@@ -47,9 +48,15 @@
 	<div th:replace="common/layout :: footer"></div>
 
 	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validate.min.js" th:src="@{/resources/js/lib/jquery.validate.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-	<script type="text/javascript" src="../resources/js/healthInfoFile.js" th:src="@{/resources/js/healthInfoFile.js}"></script>
-
+	<script>
+		$(function() {
+			jQuery("#healthInfoFileForm").validationEngine({
+				promptPosition: "topLeft:80"
+			});
+		});
+	</script>
 </body>
 </html>
