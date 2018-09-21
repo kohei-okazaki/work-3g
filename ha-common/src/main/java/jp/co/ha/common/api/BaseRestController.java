@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.log.LogLevel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
@@ -27,6 +28,8 @@ import jp.co.ha.common.log.LoggerFactory;
  */
 public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
 
+	static final Logger LOG = LoggerFactory.getLogger(BaseRestController.class);
+
 	/**
 	 * POST通信の処理を行う<br>
 	 *
@@ -39,11 +42,10 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@PostMapping
 	default Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
-		Logger log = LoggerFactory.getLogger(this.getClass());
-		log.infoRes(apiRequest);
+		LOG.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
 		apiResponse.setResult(ResultType.SUCCESS);
-		log.infoRes(apiResponse);
+		LOG.infoRes(apiResponse);
 
 		return apiResponse;
 	}
@@ -70,17 +72,17 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@ExceptionHandler(JsonProcessingException.class)
 	public default Rs jsonProcessingExceptionHandle(JsonProcessingException e) {
 
-		Rs apiResponse = null;
+		BaseException baseException = null;
 		if (e instanceof InvalidFormatException) {
 			InvalidFormatException jfe = (InvalidFormatException) e;
-			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです"));
+			baseException = new ApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです");
 		} else if (e instanceof JsonParseException) {
-			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません"));
+			baseException = new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません");
 		} else if (e instanceof JsonProcessingException) {
-			apiResponse = (Rs) new ErrorResponse(new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません"));
+			baseException = new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません");
 		}
-		Logger log = LoggerFactory.getLogger(this.getClass());
-		log.errorRes(apiResponse);
+		Rs apiResponse = (Rs) new ErrorResponse(baseException);
+		LOG.warnRes(apiResponse, baseException);
 		return apiResponse;
 	}
 
@@ -95,6 +97,11 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	@ExceptionHandler(BaseException.class)
 	public default Rs appExceptionHandle(BaseException e) {
 		Rs apiResponse = (Rs) new ErrorResponse(e);
+		if (LogLevel.WARN == e.getErrorCode().getLogLevel()) {
+			LOG.warnRes(apiResponse, e);
+		} else if (LogLevel.ERROR == e.getErrorCode().getLogLevel()) {
+			LOG.errorRes(apiResponse, e);
+		}
 		return apiResponse;
 	}
 
