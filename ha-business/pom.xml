@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.co.ha.business</groupId>
 	<artifactId>ha-business</artifactId>
-	<packaging>jar</packaging>
+	<!-- <packaging>jar</packaging> -->
 	<url>http://maven.apache.org</url>
 
 	<parent>
@@ -16,6 +16,14 @@
 		<version>1.0</version>
 		<relativePath>../ha-pom</relativePath>
 	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>jp.co.ha.common</groupId>
+			<artifactId>ha-common</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
