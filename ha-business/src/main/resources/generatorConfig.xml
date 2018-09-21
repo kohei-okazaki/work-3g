@@ -5,6 +5,7 @@
 		location="C:\3g\git\work-3g\ha-common\lib\mysql-connector-java-8.0.12.jar" />
 
 	<context id="context1">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<jdbcConnection
 			driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/work3g?serverTimezone=JST"
