@@ -46,6 +46,10 @@ public class Logger {
 		logger.warn(getLogMessage(bean));
 	}
 
+	public void warnRes(Object bean, Throwable t) {
+		logger.warn(getLogMessage(bean), t);
+	}
+
 	public void warn(String msg) {
 		logger.warn(msg);
 	}
@@ -56,6 +60,10 @@ public class Logger {
 
 	public void errorRes(Object bean) {
 		logger.error(getLogMessage(bean));
+	}
+
+	public void errorRes(Object bean, Throwable t) {
+		logger.error(getLogMessage(bean), t);
 	}
 
 	public void error(String msg) {
