@@ -20,6 +20,8 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
@@ -37,6 +39,8 @@ import jp.co.ha.web.view.ManageWebView;
 @Controller
 @RequestMapping("healthInfoFile")
 public class HealthInfoFileRegistController implements BaseWebController {
+
+	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoFileRegistController.class);
 
 	/** 健康情報CSVアップロードサービス */
 	@Autowired
@@ -73,6 +77,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	 */
 	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
+		LOG.info(this.getClass().getName() + "# input");
 		return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 	}
 
@@ -81,14 +86,19 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	 */
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseException {
-
+		LOG.info(this.getClass().getName() + "# confirm");
 		if (result.hasErrors()) {
 			// validationエラーの場合
 			return ManageWebView.HEALTH_INFO_FILE_INPUT.getName();
 		}
 
+		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(userId)) {
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+		}
+
 		List<HealthInfoCsvUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
-		fileService.formatCheck(modelList);
+		fileService.formatCheck(modelList, userId);
 		sessionManageService.setValue(request.getSession(), "modelList", modelList);
 		model.addAttribute("count", modelList.size());
 
@@ -100,6 +110,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	 */
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
+		LOG.info(this.getClass().getName() + "# complete");
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
 		sessionManageService.removeValue(request.getSession(), "modelList");

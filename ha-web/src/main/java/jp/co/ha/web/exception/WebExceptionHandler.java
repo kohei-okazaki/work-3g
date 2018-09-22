@@ -12,8 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -22,8 +20,6 @@ import jp.co.ha.web.view.ManageWebView;
  */
 public class WebExceptionHandler implements BaseExceptionHandler {
 
-	/** ロガー */
-	private final Logger LOG = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private MessageSource messageSource;
 
@@ -34,8 +30,11 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
 
 		ModelAndView modelView = new ModelAndView();
+		// error画面を設定
 		modelView.setViewName(ManageWebView.ERROR.getName());
 		String errorMessage = buildErrorMessage(e);
+		// log出力
+		outLog(errorMessage, e);
 		request.setAttribute("errorMessage", errorMessage);
 		return modelView;
 	}
@@ -49,13 +48,13 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 		String errorCode;
 		StringBuilder body = new StringBuilder();
 		if (e instanceof BaseException) {
-			detail = ((BaseException) e).getDetail();
-			errorCode = ((BaseException) e).getErrorCode().getOuterErrorCode();
+			BaseException be = (BaseException) e;
+			detail = be.getDetail();
+			errorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
 			// 予期せぬ例外にする
 			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getErrorMessage(), null, Locale.JAPANESE);
 			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
-			LOG.error(errorCode, e);
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
 		return body.toString();

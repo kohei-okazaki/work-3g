@@ -63,9 +63,12 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException {
+	public void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws HealthInfoException {
 		for (int i = 0; i < modelList.size(); i++) {
 			HealthInfoCsvUploadModel model = modelList.get(i);
+			if (!userId.equals(model.getUserId())) {
+				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\nユーザIDの項目が不正です。ユーザID：" + model.getUserId());
+			}
 			if (!RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD)) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());
 			}
