@@ -1,5 +1,7 @@
-package jp.co.ha.common.api;
+package jp.co.ha.common.api.service;
 
+import jp.co.ha.common.api.request.BaseRequest;
+import jp.co.ha.common.api.response.BaseResponse;
 import jp.co.ha.common.exception.BaseException;
 
 /**

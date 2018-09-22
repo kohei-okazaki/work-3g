@@ -3,7 +3,7 @@ package jp.co.ha.api.service;
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.entity.HealthInfo;
-import jp.co.ha.common.api.BaseService;
+import jp.co.ha.common.api.service.BaseService;
 import jp.co.ha.common.exception.BaseException;
 
 /**

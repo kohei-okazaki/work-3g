@@ -1,4 +1,4 @@
-package jp.co.ha.common.api;
+package jp.co.ha.common.api.type;
 
 /**
  * 結果区分<br>

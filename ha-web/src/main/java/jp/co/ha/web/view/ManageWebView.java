@@ -1,6 +1,6 @@
 package jp.co.ha.web.view;
 
-import jp.co.ha.common.web.BaseView;
+import jp.co.ha.common.web.view.BaseView;
 
 /**
  * 健康管理View列挙

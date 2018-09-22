@@ -1,4 +1,4 @@
-package jp.co.ha.common.web;
+package jp.co.ha.common.web.view;
 
 import java.util.stream.Stream;
 

@@ -16,7 +16,7 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.common.api.RequestType;
+import jp.co.ha.common.api.type.RequestType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;

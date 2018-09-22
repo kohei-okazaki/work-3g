@@ -1,4 +1,4 @@
-package jp.co.ha.common.api;
+package jp.co.ha.common.api.controller;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +8,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import jp.co.ha.common.api.request.BaseRequest;
+import jp.co.ha.common.api.response.BaseResponse;
+import jp.co.ha.common.api.response.ErrorResponse;
+import jp.co.ha.common.api.service.BaseService;
+import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;

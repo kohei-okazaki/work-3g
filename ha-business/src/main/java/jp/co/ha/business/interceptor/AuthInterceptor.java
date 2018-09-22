@@ -12,7 +12,7 @@ import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.BaseInterceptor;
+import jp.co.ha.common.web.interceptor.BaseInterceptor;
 
 /**
  * ログイン情報のチェックを行うinterceptor

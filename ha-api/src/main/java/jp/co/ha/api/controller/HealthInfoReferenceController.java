@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.api.service.HealthInfoReferenceService;
-import jp.co.ha.common.api.BaseRestController;
+import jp.co.ha.common.api.controller.BaseRestController;
 import jp.co.ha.common.exception.BaseException;
 
 /**

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-import jp.co.ha.common.api.RequestType;
+import jp.co.ha.common.api.type.RequestType;
 
 /**
  * Jsonのリクエスト種別のデシリアライズクラス<br>

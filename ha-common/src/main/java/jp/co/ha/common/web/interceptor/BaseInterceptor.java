@@ -1,4 +1,4 @@
-package jp.co.ha.common.web;
+package jp.co.ha.common.web.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;

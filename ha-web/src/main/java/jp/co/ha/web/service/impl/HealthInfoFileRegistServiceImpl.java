@@ -12,7 +12,7 @@ import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.exception.HealthInfoException;
-import jp.co.ha.common.api.RequestType;
+import jp.co.ha.common.api.type.RequestType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.RegixType;
@@ -63,9 +63,12 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException {
+	public void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws HealthInfoException {
 		for (int i = 0; i < modelList.size(); i++) {
 			HealthInfoCsvUploadModel model = modelList.get(i);
+			if (!userId.equals(model.getUserId())) {
+				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\nユーザIDの項目が不正です。ユーザID：" + model.getUserId());
+			}
 			if (!RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD)) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());
 			}

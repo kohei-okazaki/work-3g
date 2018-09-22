@@ -1,4 +1,4 @@
-package jp.co.ha.common.web;
+package jp.co.ha.common.web.form;
 
 import java.io.Serializable;
 

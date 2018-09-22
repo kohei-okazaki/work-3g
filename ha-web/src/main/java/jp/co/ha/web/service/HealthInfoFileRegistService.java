@@ -18,11 +18,12 @@ public interface HealthInfoFileRegistService {
 	 * @param modelList
 	 *     健康情報CSVアップロードモデルリスト
 	 *
-	 * @param modelList
+	 * @param userId
+	 *     ユーザID
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	void formatCheck(List<HealthInfoCsvUploadModel> modelList) throws HealthInfoException;
+	void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws HealthInfoException;
 
 	/**
 	 * 指定されたモデルリストの登録処理を行う<br>

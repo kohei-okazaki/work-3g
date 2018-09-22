@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.BaseWebValidator;
+import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 
 /**

@@ -1,4 +1,4 @@
-package jp.co.ha.common.web;
+package jp.co.ha.common.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * ウィザード型式の基底コントローラ<br>
