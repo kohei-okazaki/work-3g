@@ -1,6 +1,6 @@
 package jp.co.ha.api.request;
 
-import jp.co.ha.common.api.BaseRequest;
+import jp.co.ha.common.api.request.BaseRequest;
 
 /**
  * 健康情報照会リクエストクラス<br>

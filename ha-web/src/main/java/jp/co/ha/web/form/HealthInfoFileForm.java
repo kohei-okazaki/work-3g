@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.validator.annotation.Required;
-import jp.co.ha.common.web.BaseForm;
+import jp.co.ha.common.web.form.BaseForm;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 
 /**

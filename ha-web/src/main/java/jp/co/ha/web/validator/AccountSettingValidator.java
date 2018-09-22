@@ -2,7 +2,7 @@ package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
 
-import jp.co.ha.common.web.BaseWebValidator;
+import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.web.form.AccountSettingForm;
 
 /**

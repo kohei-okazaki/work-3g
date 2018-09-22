@@ -1,5 +1,6 @@
-package jp.co.ha.common.api;
+package jp.co.ha.common.api.request;
 
+import jp.co.ha.common.api.type.RequestType;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**

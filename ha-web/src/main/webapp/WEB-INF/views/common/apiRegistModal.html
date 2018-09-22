@@ -21,7 +21,7 @@
 			<th class="header">詳細</th>
 		</tr>
 		<tr>
-			<td>リクエストタイプ<br>/requestId</td>
+			<td>リクエストタイプ<br>/requestType</td>
 			<td>健康情報登録のリクエスト種別<br>"001"を固定とする</td>
 		</tr>
 		<tr>
@@ -48,7 +48,7 @@
 			<td>API実施時の結果区分</td>
 		</tr>
 		<tr>
-			<td>データID<br>/dataId</td>
+			<td>健康情報ID<br>/healthInfoId</td>
 			<td>健康情報を登録したときに採番される健康情報を一意に識別するID</td>
 		</tr>
 		<tr>
@@ -57,19 +57,19 @@
 		</tr>
 		<tr>
 			<td>身長<br>/height</td>
-			<td>データIDに紐づく健康情報に登録された身長(入力値)</td>
+			<td>健康情報IDに紐づく健康情報に登録された身長(入力値)</td>
 		</tr>
 		<tr>
 			<td>体重<br>/weight</td>
-			<td>データIDに紐づく健康情報に登録された体重(入力値)</td>
+			<td>健康情報IDに紐づく健康情報に登録された体重(入力値)</td>
 		</tr>
 		<tr>
 			<td>BMI<br>/bmi</td>
-			<td>データIDに紐づく健康情報に登録されたBMI</td>
+			<td>健康情報IDに紐づく健康情報に登録されたBMI</td>
 		</tr>
 		<tr>
 			<td>標準体重<br>/standardWeight</td>
-			<td>データIDに紐づく健康情報に登録された標準体重</td>
+			<td>健康情報IDに紐づく健康情報に登録された標準体重</td>
 		</tr>
 		<tr>
 			<td>ユーザステータス/userStatus</td>
@@ -81,15 +81,15 @@
 		</tr>
 		<tr>
 			<td>登録日時<br>/regDate</td>
-			<td>データIDに紐づく健康情報に登録された登録日時</td>
+			<td>健康情報IDに紐づく健康情報に登録された登録日時</td>
 		</tr>
 	</table>
 
 
 </div>
-
+<!--
 <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
 <script type="text/javascript" src="../resources/js/common/apiRegistModal.min.js" th:src="@{/resources/js/common/apiRegistModal.min.js}"></script>
-
+ -->
 </body>
 </html>

@@ -25,7 +25,7 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.BaseWizardController;
+import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
 import jp.co.ha.web.validator.AccountSettingValidator;

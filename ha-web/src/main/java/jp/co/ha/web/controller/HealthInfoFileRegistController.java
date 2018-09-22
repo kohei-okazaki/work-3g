@@ -22,7 +22,7 @@ import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.BaseWebController;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.form.HealthInfoFileForm;
 import jp.co.ha.web.service.HealthInfoFileRegistService;

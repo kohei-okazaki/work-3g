@@ -3,7 +3,7 @@ package jp.co.ha.web.form;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Required;
-import jp.co.ha.common.web.BaseForm;
+import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * 健康情報ファイル設定フォームクラス<br>

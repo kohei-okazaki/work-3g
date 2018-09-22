@@ -37,7 +37,7 @@ import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.BaseWebController;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;

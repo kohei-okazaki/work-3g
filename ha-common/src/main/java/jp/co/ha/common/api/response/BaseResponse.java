@@ -1,4 +1,6 @@
-package jp.co.ha.common.api;
+package jp.co.ha.common.api.response;
+
+import jp.co.ha.common.api.type.ResultType;
 
 /**
  * 基底レスポンスクラス<br>

@@ -2,7 +2,7 @@ package jp.co.ha.api.request;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.common.api.BaseRequest;
+import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**

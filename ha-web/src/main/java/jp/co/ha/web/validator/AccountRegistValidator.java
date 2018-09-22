@@ -8,7 +8,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.BaseWebValidator;
+import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.web.form.AccountRegistForm;
 
 /**

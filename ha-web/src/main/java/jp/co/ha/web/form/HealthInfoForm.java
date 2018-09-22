@@ -8,7 +8,7 @@ import javax.validation.constraints.DecimalMin;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.validator.annotation.Required;
-import jp.co.ha.common.web.BaseForm;
+import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * 健康情報入力画面フォームクラス<br>

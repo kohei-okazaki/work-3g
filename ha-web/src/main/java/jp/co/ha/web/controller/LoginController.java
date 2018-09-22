@@ -19,7 +19,7 @@ import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.BaseWebController;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
