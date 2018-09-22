@@ -53,19 +53,11 @@
 						</div>
 					</td>
 					<td>
-						<label class="date"><input type="date" th:field="*{fromRegDate}" /></label>
+						<input type="text" th:field="*{fromRegDate}" />
 					</td>
 					<td class="hideCalendar">～</td>
 					<td class="hideCalendar">
-						<label class="date">
-							<input type="date" th:field="*{toRegDate}" class="hideCalendar" />
-						</label>
-					</td>
-				</tr>
-				<tr>
-					<th>登録日(test)</th>
-					<td>
-						<input type="text" name="date" id="testDate">
+						<input type="text" th:field="*{toRegDate}" class="hideCalendar" />
 					</td>
 				</tr>
 			</table>
@@ -139,15 +131,15 @@
 	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/jquery-ui.min.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
+	<script type="text/javascript" src="../resources/js/lib/datepicker-ja.min.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
 	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 	<script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
 	<script>
 		$(function() {
 			jQuery("#healthInfoReferenceForm").validationEngine();
-		});
-		$(function() {
-			$("#testDate").datepicker();
+			$("#fromRegDate").datepicker();
+			$("#toRegDate").datepicker();
 		});
 	</script>
 
