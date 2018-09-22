@@ -84,6 +84,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 		account.setApiKey(encoder.execute(form.getPassword(), form.getUserId()));
+		account.setRegDate(DateUtil.getSysDate());
 
 		return account;
 	}
@@ -102,6 +103,8 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		entity.setHeaderFlag(StringUtil.FALSE_FLAG);
 		entity.setFooterFlag(StringUtil.FALSE_FLAG);
 		entity.setMaskFlag(StringUtil.FALSE_FLAG);
+		entity.setRegDate(DateUtil.getSysDate());
+		entity.setUpdateDate(DateUtil.getSysDate());
 		return entity;
 	}
 
