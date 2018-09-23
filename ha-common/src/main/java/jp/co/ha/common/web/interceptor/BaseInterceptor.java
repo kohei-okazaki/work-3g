@@ -1,20 +1,11 @@
 package jp.co.ha.common.web.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 /**
- * Interceptorの基底クラス<br>
+ * インターセプターの基底インターフェース<br>
  *
  */
-public abstract class BaseInterceptor implements HandlerInterceptor {
+public interface BaseInterceptor extends HandlerInterceptor {
 
-	/**
-	 * インターセプターで検査対象のリソースかどうか判定する<br>
-	 * @param handler
-	 * @return
-	 */
-	protected boolean isStaticResource(Object handler) {
-		return handler instanceof ResourceHttpRequestHandler;
-	}
 }

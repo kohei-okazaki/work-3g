@@ -12,13 +12,13 @@ import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.interceptor.BaseInterceptor;
+import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
 
 /**
- * ログイン情報のチェックを行うinterceptor
+ * ログイン情報のチェックを行うインターセプター<br>
  *
  */
-public class AuthInterceptor extends BaseInterceptor {
+public class AuthInterceptor extends BaseWebInterceptor {
 
 	/** session管理サービス */
 	@Autowired
