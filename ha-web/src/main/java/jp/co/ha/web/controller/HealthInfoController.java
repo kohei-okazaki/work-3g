@@ -51,7 +51,7 @@ import jp.co.ha.web.validator.HealthInfoValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_健康情報入力画面コントローラ<br>
+ * 健康管理_健康情報登録画面コントローラ<br>
  *
  */
 @Controller

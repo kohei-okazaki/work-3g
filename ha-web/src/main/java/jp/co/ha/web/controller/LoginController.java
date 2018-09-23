@@ -25,7 +25,7 @@ import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * ログインコントローラ<br>
+ * 健康管理_ログイン画面コントローラ<br>
  *
  */
 @Controller
