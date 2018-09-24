@@ -11,11 +11,11 @@ repositories {
 
 dependencies {
 
-	compile 'org.springframework:spring-webmvc:5.0.9.RELEASE'
-	compile 'org.springframework:spring-context-support:5.0.9.RELEASE'
-	compile 'org.springframework:spring-aop:5.0.9.RELEASE'
-	compile 'org.springframework:spring-beans:5.0.9.RELEASE'
-	compile 'org.springframework:spring-core:5.0.9.RELEASE'
+	compile 'org.springframework:spring-webmvc:5.1.0.RELEASE'
+	compile 'org.springframework:spring-context-support:5.1.0.RELEASE'
+	compile 'org.springframework:spring-aop:5.1.0.RELEASE'
+	compile 'org.springframework:spring-beans:5.1.0.RELEASE'
+	compile 'org.springframework:spring-core:5.1.0.RELEASE'
 
 	compile 'org.apache.poi:poi:4.0.0'
 	compile 'org.apache.poi:poi-ooxml:4.0.0'
