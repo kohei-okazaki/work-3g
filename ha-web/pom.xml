@@ -35,7 +35,8 @@
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 			<version>${org.thymeleaf-layout-version}</version>
 		</dependency>
-		<!-- <dependency>
+<!--
+		<dependency>
 			<groupId>jp.co.ha.common</groupId>
 			<artifactId>ha-common</artifactId>
 			<version>1.0</version>
@@ -49,7 +50,8 @@
 			<groupId>jp.co.ha.api</groupId>
 			<artifactId>ha-api</artifactId>
 			<version>1.0</version>
-		</dependency> -->
+		</dependency>
+ -->
 	</dependencies>
 
 	<build>
