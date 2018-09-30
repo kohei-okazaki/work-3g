@@ -5,7 +5,6 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx ="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc
 						http://www.springframework.org/schema/mvc/spring-mvc.xsd
 						http://www.springframework.org/schema/beans
@@ -13,9 +12,7 @@
 						http://www.springframework.org/schema/context
 						http://www.springframework.org/schema/context/spring-context.xsd
 						http://www.springframework.org/schema/aop
-						http://www.springframework.org/schema/aop/spring-aop.xsd
-						http://www.springframework.org/schema/tx
-						http://www.springframework.org/schema/tx/spring-tx.xsd">
+						http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<mvc:annotation-driven />
 	<aop:aspectj-autoproxy />
@@ -44,21 +41,5 @@
 			<bean class="jp.co.ha.business.interceptor.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-	<!-- <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/work3g?serverTimezone=JST" />
-		<property name="username" value="root" />
-		<property name="password" value="admin" />
-	</bean>
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:/mybatis-config.xml" />
-		<property name="mapperLocations" value="classpath:jp.co.ha.business.db.mapper.*" />
-	</bean>
-	<tx:annotation-driven /> -->
 
 </beans>

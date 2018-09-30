@@ -23,30 +23,19 @@ echo ------------------------------------------------------------------------
 echo START check lib dir
 echo ------------------------------------------------------------------------
 rem businessのlibディレクトリ 存在確認
-cd %befBusinessDir%
 echo %businessLibDir% check
-if not exist "lib\" (
-	mkdir lib
-	echo mkdir %businessLibDir%
-)
+call makeDir.bat %befBusinessDir% "lib"
 
 
 rem apiのlibディレクトリ 存在確認
-cd %befApiDir%
 echo %apiLibDir% check
-if not exist "lib\" (
-	mkdir lib
-	echo mkdir %apiLibDir%
-)
+call makeDir.bat %befApiDir% "lib"
 
 
 rem webのlibディレクトリ 存在確認
-cd %befWebDir%
 echo %webLibDir% check
-if not exist "lib\" (
-	mkdir lib
-	echo mkdir %webLibDir%
-)
+call makeDir.bat %befWebDir% "lib"
+
 echo ------------------------------------------------------------------------
 echo END check lib dir
 echo ------------------------------------------------------------------------
