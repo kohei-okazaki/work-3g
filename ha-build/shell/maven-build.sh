@@ -61,15 +61,30 @@ fi
 ####################
 cd ${commonTargetDir}
 cp *.jar ${businessLibDir}
+if [$? != "0"] ; then
+  echo "コピーに失敗しました. to : "${businessLibDir}
+fi
 cp *.jar ${apiLibDir}
+if [$? != "0"] ; then
+  echo "コピーに失敗しました. to : "${apiLibDir}
+fi
 cp *.jar ${webLibDir}
+if [$? != "0"] ; then
+  echo "コピーに失敗しました. to : "${webLibDir}
+fi
 
 ####################
 # deploy business
 ####################
 cd ${businessTargetDir}
 cp *.jar ${apiLibDir}
+if [$? != "0"] ; then
+  echo "コピーに失敗しました. to : "${apiLibDir}
+fi
 cp *.jar ${webLibDir}
+if [$? != "0"] ; then
+  echo "コピーに失敗しました. to : "${webLibDir}
+fi
 
 
 echo "-------------------"

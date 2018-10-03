@@ -14,15 +14,15 @@
 
 		<javaModelGenerator
 			targetPackage="jp.co.ha.business.db.entity"
-			targetProject="C:\3g\git\work-3g\ha-business\src\main\java" />
+			targetProject="ha-business/src/main/java" />
 
 		<sqlMapGenerator
 			targetPackage="jp.co.ha.business.db.mapper"
-			targetProject="C:\3g\git\work-3g\ha-business\src\main\resources" />
+			targetProject="ha-business/src/main/resources" />
 
 		<javaClientGenerator
 			targetPackage="jp.co.ha.business.db.mapper"
-			targetProject="C:\3g\git\work-3g\ha-business\src\main\java"
+			targetProject="ha-business/src/main/java"
 			type="XMLMAPPER" />
 
 		<table schema="work3g" tableName="ACCOUNT" />
