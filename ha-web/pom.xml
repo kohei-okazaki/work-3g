@@ -46,12 +46,13 @@
 			<artifactId>ha-business</artifactId>
 			<version>1.0</version>
 		</dependency>
+<!--
 		<dependency>
 			<groupId>jp.co.ha.api</groupId>
 			<artifactId>ha-api</artifactId>
 			<version>1.0</version>
 		</dependency>
-
+ -->
 	</dependencies>
 
 	<build>
