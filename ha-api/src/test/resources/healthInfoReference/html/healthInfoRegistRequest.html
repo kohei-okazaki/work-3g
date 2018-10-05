@@ -6,16 +6,28 @@
 <form action="http://localhost:8080/ha-api/healthInfoReference">
 	<table>
 		<tr>
-			<th><p>リクエストID</p></th>
-			<th></th>
+			<th>
+				<p>リクエスト種別</p>
+			</th>
+			<th>
+				<input type="text" name="requestType" />
+			</th>
 		</tr>
 		<tr>
-			<th><p>ユーザID</p></th>
-			<th><input type="text" name="userId" /></th>
+			<th>
+				<p>ユーザID</p>
+			</th>
+			<th>
+				<input type="text" name="userId" />
+			</th>
 		</tr>
 		<tr>
-			<th><p>健康情報ID</p></th>
-			<th><input type="text" name="healthInfoId" /></th>
+			<th>
+				<p>健康情報ID</p>
+			</th>
+			<th>
+				<input type="text" name="healthInfoId" />
+			</th>
 		</tr>
 	</table>
 	<input type="submit" value="送信" />
