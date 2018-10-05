@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.service.impl.HealthInfoRegistServiceImpl;
-import jp.co.ha.common.api.type.RequestType;
+import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 

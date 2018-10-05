@@ -61,9 +61,8 @@ public class HttpClient {
 	 * リクエスト情報を送信する
 	 */
 	public void send() {
-		HttpURLConnection connection = null;
-		BufferedReader br = null;
 
+		HttpURLConnection connection = null;
 		try {
 			URL url = new URL(this.conf.getRequestUrl());
 			connection = (HttpURLConnection) url.openConnection();
@@ -72,14 +71,16 @@ public class HttpClient {
 
 			connection.connect();
 			this.httpStatus = HttpStatus.of(connection.getResponseCode());
+		} catch (MalformedURLException e) {
+			LOG.error("", e);
+		} catch (IOException e) {
+			LOG.error("", e);
+		}
 
+		String encoding = getEncoding(connection.getContentEncoding());
+
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), encoding))) {
 			if (HttpStatus.OK == this.httpStatus) {
-				String encoding = connection.getContentEncoding();
-				if (BeanUtil.isNull(encoding)) {
-					encoding = Charset.UTF_8.getName();
-				}
-				br = new BufferedReader(new InputStreamReader(connection.getInputStream(), encoding));
-
 				String line = null;
 				StringBuffer result = new StringBuffer();
 				while (BeanUtil.notNull(line = br.readLine())) {
@@ -89,21 +90,26 @@ public class HttpClient {
 			} else {
 				LOG.warn("HTTP ステータス = " + this.httpStatus + "(" + this.httpStatus.getValue() + ")");
 			}
-		} catch (MalformedURLException e) {
-			LOG.error("", e);
 		} catch (IOException e) {
 			LOG.error("", e);
 		} finally {
-			try {
-				if (BeanUtil.notNull(br)) {
-					br.close();
-				}
-			} catch (IOException e) {
-				LOG.error("", e);
-			}
 			if (BeanUtil.notNull(connection)) {
 				connection.disconnect();
 			}
 		}
+	}
+
+	/**
+	 * 文字Encodeを返す<br>
+	 *
+	 * @param encoding
+	 *     Encode
+	 * @return
+	 */
+	private String getEncoding(String encoding) {
+		if (BeanUtil.isNull(encoding)) {
+			encoding = Charset.UTF_8.getName();
+		}
+		return encoding;
 	}
 }

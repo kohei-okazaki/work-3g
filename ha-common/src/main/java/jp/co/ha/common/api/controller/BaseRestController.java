@@ -31,7 +31,7 @@ import jp.co.ha.common.log.LoggerFactory;
  * @param <S>
  *     サービスクラス
  */
-public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
+public abstract class BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
 
 	static final Logger LOG = LoggerFactory.getLogger(BaseRestController.class);
 
@@ -45,7 +45,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 *     アプリ例外
 	 */
 	@PostMapping
-	default Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
+	public Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
 		LOG.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
@@ -64,7 +64,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 * @throws BaseException
 	 *     例外クラス
 	 */
-	Rs execute(Rq request) throws BaseException;
+	protected abstract Rs execute(Rq request) throws BaseException;
 
 	/**
 	 * JSONで例外が起きた場合のエラーハンドリング<br>
@@ -75,7 +75,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 */
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(JsonProcessingException.class)
-	public default Rs jsonProcessingExceptionHandle(JsonProcessingException e) {
+	public Rs jsonProcessingExceptionHandle(JsonProcessingException e) {
 
 		BaseException baseException = null;
 		if (e instanceof InvalidFormatException) {
@@ -100,7 +100,7 @@ public interface BaseRestController<Rq extends BaseRequest, Rs extends BaseRespo
 	 */
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(BaseException.class)
-	public default Rs appExceptionHandle(BaseException e) {
+	public Rs appExceptionHandle(BaseException e) {
 		Rs apiResponse = (Rs) new ErrorResponse(e);
 		if (LogLevel.WARN == e.getErrorCode().getLogLevel()) {
 			LOG.warnRes(apiResponse, e);

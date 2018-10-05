@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import jp.co.ha.api.request.RequestTypeDeserializer;
-import jp.co.ha.common.api.type.RequestType;
+import jp.co.ha.business.api.type.RequestType;
 
 /**
  * Jsonの設定クラス<br>
