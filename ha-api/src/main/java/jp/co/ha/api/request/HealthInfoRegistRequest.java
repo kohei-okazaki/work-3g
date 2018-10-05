@@ -2,14 +2,14 @@ package jp.co.ha.api.request;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.common.api.request.BaseRequest;
+import jp.co.ha.business.api.request.CommonRequest;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報登録リクエストクラス<br>
  *
  */
-public class HealthInfoRegistRequest extends BaseRequest {
+public class HealthInfoRegistRequest extends CommonRequest {
 
 	/** ユーザID */
 	private String userId;

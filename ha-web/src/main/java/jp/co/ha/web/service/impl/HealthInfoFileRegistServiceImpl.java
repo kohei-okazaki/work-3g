@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.api.request.HealthInfoRegistRequest;
 import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.business.exception.HealthInfoException;
-import jp.co.ha.common.api.type.RequestType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.RegixType;

@@ -1,4 +1,4 @@
-package jp.co.ha.common.api.type;
+package jp.co.ha.business.api.type;
 
 import java.util.stream.Stream;
 

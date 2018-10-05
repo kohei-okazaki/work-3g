@@ -1,12 +1,12 @@
 package jp.co.ha.api.request;
 
-import jp.co.ha.common.api.request.BaseRequest;
+import jp.co.ha.business.api.request.CommonRequest;
 
 /**
  * 健康情報照会リクエストクラス<br>
  *
  */
-public class HealthInfoReferenceRequest extends BaseRequest {
+public class HealthInfoReferenceRequest extends CommonRequest {
 
 	/** ユーザID */
 	private String userId;

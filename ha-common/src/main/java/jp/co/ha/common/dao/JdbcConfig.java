@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
@@ -15,6 +17,8 @@ import jp.co.ha.common.util.BeanUtil;
  *
  */
 public class JdbcConfig {
+
+	private static final Logger LOG = LoggerFactory.getLogger(JdbcConfig.class);
 
 	private static final JdbcConfig instance = new JdbcConfig();
 
@@ -33,12 +37,21 @@ public class JdbcConfig {
 		return instance;
 	}
 
+	/**
+	 * 初期化処理<br>
+	 */
 	private void init() {
 		String classPath = this.getClass().getClassLoader().getResource("").getPath();
 		String propertiesPath = "META-INF" + File.separator + "jdbc.properties";
 		readProperty(new File(classPath, propertiesPath));
 	}
 
+	/**
+	 * プロパティファイルを読込<br>
+	 *
+	 * @param propFile
+	 *     プロパティファイル
+	 */
 	private void readProperty(File propFile) {
 		Properties prop = new Properties();
 		try (InputStream is = new FileInputStream(propFile.getAbsolutePath())) {

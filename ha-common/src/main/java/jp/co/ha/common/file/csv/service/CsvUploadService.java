@@ -42,6 +42,7 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 *     InputStream
 	 * @return
 	 * @throws BaseException
+	 *     アプリ例外
 	 */
 	default public List<String> toList(InputStream is) throws BaseException {
 
