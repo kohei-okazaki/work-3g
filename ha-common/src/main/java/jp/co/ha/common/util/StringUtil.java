@@ -28,7 +28,7 @@ public class StringUtil {
 	public static final String SPACE = " ";
 	/** 半角スラッシュ */
 	public static final String THRASH = "/";
-	/**  アンダースコア */
+	/** アンダースコア */
 	public static final String UNDER_SCORE = "_";
 	/** 真偽値:true */
 	public static final String TRUE_FLAG = "1";

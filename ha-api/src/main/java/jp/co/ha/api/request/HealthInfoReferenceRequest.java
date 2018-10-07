@@ -1,36 +1,15 @@
 package jp.co.ha.api.request;
 
-import jp.co.ha.business.api.request.CommonRequest;
+import jp.co.ha.business.api.request.BaseApiRequest;
 
 /**
  * 健康情報照会リクエストクラス<br>
  *
  */
-public class HealthInfoReferenceRequest extends CommonRequest {
+public class HealthInfoReferenceRequest extends BaseApiRequest {
 
-	/** ユーザID */
-	private String userId;
 	/** 健康情報ID */
 	private Integer healthInfoId;
-
-	/**
-	 * userIdを返す<br>
-	 *
-	 * @return userId ユーザID
-	 */
-	public String getUserId() {
-		return userId;
-	}
-
-	/**
-	 * userIdを設定する<br>
-	 *
-	 * @param userId
-	 *     ユーザID
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	/**
 	 * healthInfoIdを返す<br>
