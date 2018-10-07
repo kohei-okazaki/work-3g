@@ -8,6 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.co.ha.tool</groupId>
 	<artifactId>ha-tool</artifactId>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 
@@ -17,5 +18,15 @@
 		<version>1.0</version>
 		<relativePath>../ha-pom</relativePath>
 	</parent>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>jp.co.ha.common</groupId>
+			<artifactId>ha-common</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+	</dependencies>
 
 </project>

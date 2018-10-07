@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.reader.PropertyReader;
@@ -32,7 +33,7 @@ public abstract class BaseBuilder {
 	private void init() {
 		String target = get(PropertyType.TARGET_TABLE);
 		if (Objects.nonNull(target)) {
-			this.targetTableList = Stream.of(target.split(",")).collect(Collectors.toList());
+			this.targetTableList = Stream.of(target.split(StringUtil.COMMA)).collect(Collectors.toList());
 		}
 		this.baseDir = get(PropertyType.BASE_DIR);
 	}

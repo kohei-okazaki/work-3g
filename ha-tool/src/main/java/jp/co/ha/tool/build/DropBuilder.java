@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
@@ -22,7 +23,7 @@ public class DropBuilder extends CommonBuilder {
 		excel.activeSheet("TABLE_LIST");
 
 		List<Table> tableList = getTableList(excel.getRowList());
-		StringJoiner body = new StringJoiner("\r\n");
+		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		tableList.stream().forEach(e -> {
 			body.add(buildComment(e.getLogicalName()));
 			body.add(buildDropSql(e.getPhysicalName()));
@@ -41,7 +42,7 @@ public class DropBuilder extends CommonBuilder {
 		for (Row row : rowList) {
 			String logicalName = row.getCell(CellPositionType.LOGICAL_NAME).getValue();
 			String physicalName = row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
-			if (!containsTable(existTableList, physicalName) && !"".equals(physicalName)) {
+			if (!containsTable(existTableList, physicalName) && !StringUtil.isEmpty(physicalName)) {
 				existTableList.add(physicalName);
 				Table table = new Table();
 				table.setLogicalName(logicalName);

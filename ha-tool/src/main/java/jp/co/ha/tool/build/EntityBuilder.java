@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
@@ -81,10 +82,10 @@ public class EntityBuilder extends CommonBuilder {
 
 	private String toCamelCase(String name) {
 		String result = name.toLowerCase();
-		while (result.indexOf("_") != -1) {
-			int pos = result.indexOf("_");
+		while (result.indexOf(StringUtil.UNDER_SCORE) != -1) {
+			int pos = result.indexOf(StringUtil.UNDER_SCORE);
 			String target = result.substring(pos, pos + 2);
-			String after = target.replace("_", "").toUpperCase();
+			String after = target.replace(StringUtil.UNDER_SCORE, StringUtil.EMPTY).toUpperCase();
 			result = result.replaceFirst(target, after);
 		}
 		return result;
@@ -137,7 +138,7 @@ public class EntityBuilder extends CommonBuilder {
 					.map(e -> e.toString())
 					.forEach(e -> strImportList.add(e));
 
-		StringJoiner body = new StringJoiner("\r\n");
+		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		strImportList.stream().forEach(e -> body.add(e));
 		return body.toString();
 	}
@@ -152,13 +153,13 @@ public class EntityBuilder extends CommonBuilder {
 
 	private String buildInterfaces(List<Class<?>> interfaceList) {
 		String prefix = "implements ";
-		StringJoiner body = new StringJoiner(",");
+		StringJoiner body = new StringJoiner(StringUtil.COMMA);
 		interfaceList.stream().forEach(e -> body.add(e.getSimpleName()));
 		return prefix + body.toString();
 	}
 
 	private String buildFields(List<Field> fieldList) {
-		StringJoiner body = new StringJoiner("\r\n");
+		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		fieldList.stream().forEach(e -> {
 			body.add(e.toString());
 		});
@@ -166,7 +167,7 @@ public class EntityBuilder extends CommonBuilder {
 	}
 
 	private String buildMethods(List<Method> methodList) {
-		StringJoiner body = new StringJoiner("\r\n");
+		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		methodList.stream().forEach(e -> body.add(e.toString()));
 		return body.toString();
 	}
