@@ -30,6 +30,7 @@
 		<module>../ha-common</module>
 		<module>../ha-business</module>
 		<module>../ha-web</module>
+		<module>../ha-tool</module>
 	</modules>
 
 	<dependencies>
