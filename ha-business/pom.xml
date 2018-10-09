@@ -8,9 +8,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.co.ha.business</groupId>
 	<artifactId>ha-business</artifactId>
-	<version>1.1</version>
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<parent>
 		<groupId>jp.co.ha.pom</groupId>
@@ -23,12 +26,17 @@
 		<dependency>
 			<groupId>jp.co.ha.common</groupId>
 			<artifactId>ha-common</artifactId>
-			<version>1.1</version>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+		   		 <version>3.2.2</version>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>

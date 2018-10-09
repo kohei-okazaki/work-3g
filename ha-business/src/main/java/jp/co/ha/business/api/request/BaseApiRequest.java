@@ -8,10 +8,12 @@ import jp.co.ha.common.log.annotation.Mask;
  * API共通リクエスト情報保持クラス<br>
  *
  */
-public abstract class CommonRequest extends BaseRequest {
+public abstract class BaseApiRequest extends BaseRequest {
 
 	/** リクエスト種別 */
 	private RequestType requestType;
+	/** ユーザID */
+	private String userId;
 	/** APIキー */
 	@Mask
 	private String apiKey;
@@ -33,6 +35,25 @@ public abstract class CommonRequest extends BaseRequest {
 	 */
 	public void setRequestType(RequestType requestType) {
 		this.requestType = requestType;
+	}
+
+	/**
+	 * userIdを返す<br>
+	 *
+	 * @return userId ユーザID
+	 */
+	public String getUserId() {
+		return userId;
+	}
+
+	/**
+	 * userIdを設定する<br>
+	 *
+	 * @param userId
+	 *     ユーザID
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	/**

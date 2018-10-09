@@ -2,9 +2,9 @@ package jp.co.ha.tool.build;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Column;
 import jp.co.ha.tool.db.Table;
@@ -24,14 +24,14 @@ public class DdlBuilder extends CommonBuilder {
 		excel.activeSheet("TABLE_LIST");
 
 		for (String tableName : this.targetTableList) {
-			StringJoiner body = new StringJoiner("\r\n");
+			StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 			String ddlPrefix = "CREATE TABLE " + tableName + " (";
 			String ddlSuffix = ");";
 			body.add(ddlPrefix);
 			Table table = getTable(excel.getRowList(), tableName);
 			StringJoiner columnData = new StringJoiner(",\r\n");
 			for (Column column : table.getColumnList()) {
-				columnData.add(column.getComment() + "\r\n" + column.getName() + " " + column.getType());
+				columnData.add(column.getComment() + StringUtil.NEW_LINE + column.getName() + StringUtil.SPACE + column.getType());
 			}
 			body.add(columnData.toString()).add(ddlSuffix);
 
@@ -69,7 +69,7 @@ public class DdlBuilder extends CommonBuilder {
 	}
 
 	private String getColumnType(Row row) {
-		StringJoiner body = new StringJoiner(" ");
+		StringJoiner body = new StringJoiner(StringUtil.SPACE);
 		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
 		String size = getSize(row);
 		body.add(columnType + size);
@@ -84,15 +84,15 @@ public class DdlBuilder extends CommonBuilder {
 
 	private String getSize(Row row) {
 		String size = row.getCell(CellPositionType.COLUMN_SIZE).getValue();
-		return Objects.isNull(size) || "".equals(size) ? "" : "(" + size + ")";
+		return StringUtil.isBrank(size) ? StringUtil.EMPTY : "(" + size + ")";
 	}
 
 	private boolean isSequence(Row row) {
-		return "1".equals(row.getCell(CellPositionType.SEQUENCE).getValue());
+		return StringUtil.isTrue(row.getCell(CellPositionType.SEQUENCE).getValue());
 	}
 
 	private boolean isPrimaryKey(Row row) {
-		return "1".equals(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
+		return StringUtil.isTrue(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
 	}
 
 }

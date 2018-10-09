@@ -3,6 +3,8 @@
 	<name>ha-api</name>
 	<comment></comment>
 	<projects>
+		<project>ha-business</project>
+		<project>ha-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

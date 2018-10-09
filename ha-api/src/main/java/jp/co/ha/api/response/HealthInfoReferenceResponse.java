@@ -2,14 +2,14 @@ package jp.co.ha.api.response;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.business.api.response.CommonResponse;
+import jp.co.ha.business.api.response.BaseApiResponse;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報照会レスポンスクラス<br>
  *
  */
-public class HealthInfoReferenceResponse extends CommonResponse {
+public class HealthInfoReferenceResponse extends BaseApiResponse {
 
 	/** 健康情報ID */
 	private Integer healthInfoId;
