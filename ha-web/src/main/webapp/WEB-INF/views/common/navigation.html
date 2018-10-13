@@ -38,12 +38,6 @@
 		</li>
 		<li><a class="navigation" href="#">API</a>
 			<ul>
-				<li><a class="navigation" href="#">健康情報</a>
-					<ul>
-						<li><a id="api-regist-modal-open" class="api-regist-button-link">登録</a></li>
-						<li><a id="api-reference-modal-open" class="api-reference-button-link">照会</a></li>
-					</ul>
-				</li>
 				<li><a class="navigation" href="#">健康情報登録</a>
 					<ul>
 						<li><a id="api-regist-general-modal-open" class="api-regist-general-button-link">概要</a></li>
@@ -86,10 +80,6 @@
 <!-- 標準体重のモーダルを描画 -->
 <div th:replace="./common/standardWeightModal.html"></div>
 
-
-<!-- APIリファレンス-健康情報登録のモーダルを描画 -->
-<div th:replace="./common/apiRegistModal.html"></div>
-
 <!-- APIリファレンス-健康情報登録の概要モーダルを描画 -->
 <div th:replace="./common/apiRegistGeneralModal.html"></div>
 
@@ -99,10 +89,6 @@
 <!-- APIリファレンス-健康情報登録のリクエスト情報モーダルを描画 -->
 <div th:replace="./common/apiRegistResponseModal.html"></div>
 
-
-
-<!-- APIリファレンス-健康情報照会のモーダルを描画 -->
-<div th:replace="./common/apiReferenceModal.html"></div>
 
 <!-- APIリファレンス-健康情報照会のモーダルを描画 -->
 <div th:replace="./common/apiReferenceGeneralModal.html"></div>
@@ -121,12 +107,10 @@
 <script type="text/javascript" src="../resources/js/common/bmiModal.min.js" th:src="@{/resources/js/common/bmiModal.min.js}"></script>
 <script type="text/javascript" src="../resources/js/common/standardWeightModal.min.js" th:src="@{/resources/js/common/standardWeightModal.min.js}"></script>
 
-<script type="text/javascript" src="../resources/js/common/apiRegistModal.min.js" th:src="@{/resources/js/common/apiRegistModal.min.js}"></script>
 <script type="text/javascript" src="../resources/js/common/apiRegistGeneralModal.js" th:src="@{/resources/js/common/apiRegistGeneralModal.js}"></script>
 <script type="text/javascript" src="../resources/js/common/apiRegistRequestModal.js" th:src="@{/resources/js/common/apiRegistRequestModal.js}"></script>
 <script type="text/javascript" src="../resources/js/common/apiRegistResponseModal.js" th:src="@{/resources/js/common/apiRegistResponseModal.js}"></script>
 
-<script type="text/javascript" src="../resources/js/common/apiReferenceModal.min.js" th:src="@{/resources/js/common/apiReferenceModal.min.js}"></script>
 <script type="text/javascript" src="../resources/js/common/apiReferenceGeneralModal.js" th:src="@{/resources/js/common/apiReferenceGeneralModal.js}"></script>
 <script type="text/javascript" src="../resources/js/common/apiReferenceRequesetModal.js" th:src="@{/resources/js/common/apiReferenceRequestModal.js}"></script>
 <script type="text/javascript" src="../resources/js/common/apiReferenceResponseModal.js" th:src="@{/resources/js/common/apiReferenceResponseModal.js}"></script>
