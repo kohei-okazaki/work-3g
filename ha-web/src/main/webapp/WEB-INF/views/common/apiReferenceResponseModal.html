@@ -3,13 +3,13 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../resources/css/common/apiRegistResponseModal.css" th:href="@{/resources/css/common/apiRegistResponseModal.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/apiReferenceResponseModal.css" th:href="@{/resources/css/common/apiReferenceResponseModal.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 </head>
 <body>
 
 
-<div id="api-regist-response-modal-content">
+<div id="api-reference-response-modal-content">
 	<table>
 		<tr>
 			<th class="header">レスポンスパラメータ</th>
@@ -24,40 +24,26 @@
 			<td>健康情報を登録したときに採番される健康情報を一意に識別するID</td>
 		</tr>
 		<tr>
-			<td>ユーザID<br>/userId</td>
-			<td>健康情報アプリでユーザを一意に識別するID</td>
-		</tr>
-		<tr>
 			<td>身長<br>/height</td>
-			<td>健康情報IDに紐づく健康情報に登録された身長(入力値)</td>
+			<td>健康情報IDに紐づく健康情報に登録された身長</td>
 		</tr>
 		<tr>
 			<td>体重<br>/weight</td>
-			<td>健康情報IDに紐づく健康情報に登録された体重(入力値)</td>
+			<td>健康情報IDに紐づく健康情報に登録された体重</td>
 		</tr>
 		<tr>
 			<td>BMI<br>/bmi</td>
 			<td>健康情報IDに紐づく健康情報に登録されたBMI</td>
 		</tr>
 		<tr>
-			<td>標準体重<br>/standardWeight</td>
+			<td>標準体重/standardWeight</td>
 			<td>健康情報IDに紐づく健康情報に登録された標準体重</td>
 		</tr>
 		<tr>
-			<td>ユーザステータス/userStatus</td>
-			<td>前回登録された健康情報と比較し<br>
-				減少した場合:10<br>
-				変化なしの場合:20<br>
-				増加した場合:30<br>
-			</td>
-		</tr>
-		<tr>
-			<td>登録日時<br>/regDate</td>
+			<td>登録日時/regDate</td>
 			<td>健康情報IDに紐づく健康情報に登録された登録日時</td>
 		</tr>
 	</table>
-
-
 </div>
 
 
