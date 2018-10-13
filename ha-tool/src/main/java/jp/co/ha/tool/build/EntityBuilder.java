@@ -147,7 +147,7 @@ public class EntityBuilder extends CommonBuilder {
 		String accessType = source.getAccessType().getValue();
 		String classType = source.getClassType().getValue();
 		String className = source.getClassName();
-		StringJoiner body = new StringJoiner(" ");
+		StringJoiner body = new StringJoiner(StringUtil.SPACE);
 		return body.add(accessType).add(classType).add(className).toString();
 	}
 
