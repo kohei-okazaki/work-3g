@@ -47,7 +47,7 @@ public abstract class BaseDao {
 		} catch (IllegalArgumentException e) {
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます");
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		} catch (NoSuchMethodException e) {
 			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません");
 		} catch (SecurityException e) {

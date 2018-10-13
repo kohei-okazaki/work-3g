@@ -6,9 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.tool.config.FileConfig;
 
 public class FileFactory {

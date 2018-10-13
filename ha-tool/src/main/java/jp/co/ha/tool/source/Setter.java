@@ -2,6 +2,7 @@ package jp.co.ha.tool.source;
 
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.type.AccessType;
 
 public class Setter extends Method {
@@ -17,7 +18,7 @@ public class Setter extends Method {
 
 		final String TAB = "	";
 
-		StringJoiner body = new StringJoiner("\r\n");
+		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		body.add(TAB + accessType.getValue() + " void " + getMethodName()
 			+ "(" + field.getClassType().getSimpleName() + " " + field.getName() + ") {");
 		body.add(TAB + TAB + "this." + field.getName() + " = " + field.getName() + ";");
@@ -28,7 +29,7 @@ public class Setter extends Method {
 
 	@Override
 	protected String getMethodName() {
-		String firstChar = new Character(field.getName().charAt(0)).toString();
+		String firstChar = Character.valueOf(field.getName().charAt(0)).toString();
 		String methodName = field.getName().replaceFirst(firstChar, firstChar.toUpperCase());
 		return PREFIX + methodName;
 	}

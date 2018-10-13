@@ -40,6 +40,4 @@ public class Table {
 		this.physicalName = physicalName;
 	}
 
-
-
 }

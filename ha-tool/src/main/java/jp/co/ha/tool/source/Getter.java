@@ -2,6 +2,7 @@ package jp.co.ha.tool.source;
 
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.type.AccessType;
 
 public class Getter extends Method {
@@ -17,7 +18,7 @@ public class Getter extends Method {
 
 		final String TAB = "	";
 
-		StringJoiner body = new StringJoiner("\r\n");
+		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		body.add(TAB + accessType.getValue() + " " + field.getClassType().getSimpleName() + " " + getMethodName() + "() {");
 		body.add(TAB + TAB + "return " + field.getName() + ";");
 		body.add(TAB + "}");

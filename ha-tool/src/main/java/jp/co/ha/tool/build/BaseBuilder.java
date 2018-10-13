@@ -1,14 +1,13 @@
 package jp.co.ha.tool.build;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.config.FileConfig;
@@ -32,7 +31,8 @@ public abstract class BaseBuilder {
 
 	private void init() {
 		String target = get(PropertyType.TARGET_TABLE);
-		if (Objects.nonNull(target)) {
+
+		if (BeanUtil.notNull(target)) {
 			this.targetTableList = Stream.of(target.split(StringUtil.COMMA)).collect(Collectors.toList());
 		}
 		this.baseDir = get(PropertyType.BASE_DIR);

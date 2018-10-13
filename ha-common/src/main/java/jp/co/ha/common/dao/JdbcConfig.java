@@ -61,9 +61,9 @@ public class JdbcConfig {
 			this.username = prop.getProperty("username");
 			this.password = prop.getProperty("password");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			LOG.error("ファイルが見つかりません ファイル名：" + propFile.getName(), e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error("", e);
 		}
 	}
 

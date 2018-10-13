@@ -9,9 +9,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
