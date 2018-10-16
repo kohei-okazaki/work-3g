@@ -11,7 +11,7 @@
         <dependent-module archiveName="ha-business-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ha-business/ha-business">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-		<property name="java-output-path" value="target/classes"/>
+		<property name="java-output-path" value="/ha-web/target/classes"/>
 		<property name="context-root" value="ha-web"/>
 	</wb-module>
 </project-modules>
