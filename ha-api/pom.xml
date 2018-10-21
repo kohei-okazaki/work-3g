@@ -9,7 +9,6 @@
 	<groupId>jp.co.ha.api</groupId>
 	<artifactId>ha-api</artifactId>
 	<packaging>war</packaging>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,7 +33,7 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
-
+ <!-- -->
 	<build>
 		<plugins>
 			<plugin>
@@ -64,7 +63,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
+				<version>3.8.0</version>
 				<configuration>
 					<source>${java-version}</source>
 					<target>${java-version}</target>
