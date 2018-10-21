@@ -14,8 +14,6 @@
 						http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<mvc:annotation-driven />
-
 	<context:property-placeholder location="classpath:META-INF/jdbc.properties" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -24,15 +22,15 @@
 		<property name="username" value="${username}" />
 		<property name="password" value="${password}" />
 	</bean>
+
+	<bean class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<tx:annotation-driven />
+
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-<!--
-		<property name="configLocation" value="classpath:/mybatis-config.xml" />
--->
-	</bean>
-	<tx:annotation-driven />
 
 </beans>
