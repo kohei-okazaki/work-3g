@@ -23,7 +23,7 @@ public class StringUtil {
 	/** イコール */
 	public static final String EQUAL = "=";
 	/** 改行 */
-	public static final String NEW_LINE = "\r\n";
+	public static final String NEW_LINE = System.getProperty("line.separator");
 	/** 半角スペース */
 	public static final String SPACE = " ";
 	/** 半角スラッシュ */

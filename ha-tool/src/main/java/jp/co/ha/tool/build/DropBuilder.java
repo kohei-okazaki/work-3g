@@ -29,7 +29,7 @@ public class DropBuilder extends CommonBuilder {
 			body.add(buildDropSql(e.getPhysicalName()));
 		});
 		FileConfig fileConf = getFileConfig(ExecuteType.DROP);
-		fileConf.setFileName("DROP"  + FileType.SQL.getSuffix());
+		fileConf.setFileName("DROP" + FileType.SQL.getSuffix());
 		fileConf.setData(body.toString());
 		FileFactory.create(fileConf);
 	}
