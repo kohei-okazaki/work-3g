@@ -10,7 +10,6 @@
 	<artifactId>ha-pom</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0</version>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,6 +27,7 @@
 	<modules>
 		<module>../ha-api</module>
 		<module>../ha-common</module>
+		<module>../ha-db</module>
 		<module>../ha-business</module>
 		<module>../ha-web</module>
 		<module>../ha-tool</module>

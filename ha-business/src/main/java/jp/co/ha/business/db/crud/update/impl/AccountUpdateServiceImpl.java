@@ -4,9 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.dao.MyBatisDao;
-import jp.co.ha.business.db.entity.Account;
-import jp.co.ha.business.db.mapper.AccountMapper;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.mapper.AccountMapper;
 
 /**
  * アカウント情報更新サービス実装クラス<br>
@@ -18,10 +18,10 @@ public class AccountUpdateServiceImpl implements AccountUpdateService, MyBatisDa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(Account account) throws BaseException {
+	public void update(Account entity) throws BaseException {
 		try (SqlSession session = getSqlSession()) {
 			AccountMapper mapper = session.getMapper(AccountMapper.class);
-			mapper.updateByPrimaryKey(account);
+			mapper.updateByPrimaryKey(entity);
 			session.commit();
 		}
 	}

@@ -1,5 +1,12 @@
 package jp.co.ha.tool.type;
 
 public enum SqlType {
-	SELECT, UPDATE, INSERT, DELETE;
+	/** select */
+	SELECT,
+	/** update */
+	UPDATE,
+	/** insert */
+	INSERT,
+	/** delete */
+	DELETE;
 }

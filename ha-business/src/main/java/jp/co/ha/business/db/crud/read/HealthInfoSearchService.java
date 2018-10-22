@@ -3,8 +3,8 @@ package jp.co.ha.business.db.crud.read;
 import java.util.Date;
 import java.util.List;
 
-import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報検索サービス<br>

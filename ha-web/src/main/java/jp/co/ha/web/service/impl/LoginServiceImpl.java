@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.db.entity.Account;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.service.LoginService;
 

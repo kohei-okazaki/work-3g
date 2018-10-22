@@ -2,8 +2,6 @@ package jp.co.ha.tool.build;
 
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -19,9 +17,12 @@ public abstract class BaseBuilder {
 
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
+	/** プロパティファイル */
 	private Properties property;
 
+	/** 対象テーブルリスト */
 	protected List<String> targetTableList;
+	/** 基底ディレクトリ */
 	protected String baseDir;
 
 	public BaseBuilder() {
@@ -29,19 +30,34 @@ public abstract class BaseBuilder {
 		this.init();
 	}
 
+	/**
+	 * 初期処理<br>
+	 */
 	private void init() {
-		String target = get(PropertyType.TARGET_TABLE);
+		String targetTable = getProperty(PropertyType.TARGET_TABLE);
 
-		if (BeanUtil.notNull(target)) {
-			this.targetTableList = Stream.of(target.split(StringUtil.COMMA)).collect(Collectors.toList());
+		if (BeanUtil.notNull(targetTable)) {
+			this.targetTableList = StringUtil.toStrList(targetTable, StringUtil.COMMA);
 		}
-		this.baseDir = get(PropertyType.BASE_DIR);
+		this.baseDir = getProperty(PropertyType.BASE_DIR);
 	}
 
-	private String get(PropertyType propType) {
+	/**
+	 * プロパティファイルから値を取得<br>
+	 *
+	 * @param propType
+	 *     プロパティファイル列挙
+	 * @return
+	 */
+	private String getProperty(PropertyType propType) {
 		return this.property.getProperty(propType.getValue());
 	}
 
+	/**
+	 * excel設定情報を返す<br>
+	 *
+	 * @return
+	 */
 	protected ExcelConfig getExcelConfig() {
 		ExcelConfig conf = new ExcelConfig();
 		conf.setFilePath("META-INF\\DB.xlsx");
@@ -49,6 +65,13 @@ public abstract class BaseBuilder {
 		return conf;
 	}
 
+	/**
+	 * ファイル設定情報を返す<br>
+	 *
+	 * @param execType
+	 *     実行タイプ
+	 * @return
+	 */
 	protected FileConfig getFileConfig(ExecuteType execType) {
 		FileConfig conf = new FileConfig();
 		if (execType == ExecuteType.DDL) {
@@ -61,5 +84,8 @@ public abstract class BaseBuilder {
 		return conf;
 	}
 
+	/**
+	 * メイン処理
+	 */
 	protected abstract void execute();
 }

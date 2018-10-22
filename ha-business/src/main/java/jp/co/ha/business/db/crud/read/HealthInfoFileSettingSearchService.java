@@ -1,7 +1,7 @@
 package jp.co.ha.business.db.crud.read;
 
-import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報ファイル設定検索サービスインターフェース<br>

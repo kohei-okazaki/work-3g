@@ -8,16 +8,28 @@ import jp.co.ha.tool.type.ClassType;
 
 public class JavaSource {
 
+	/** パッケージ情報 */
 	private Package pack;
+	/** import文のリスト */
 	private List<Import> importList;
+	/** アクセス型 */
 	private AccessType accessType;
+	/** クラス型 */
 	private ClassType classType;
+	/** クラス名 */
 	private String className;
+	/** 継承クラス */
 	private Class<?> extendsClass;
+	/** 実装インターフェース */
 	private List<Class<?>> implInterfaceList;
+	/** フィールド情報のリスト */
 	private List<Field> fieldList;
+	/** メソッドのリスト */
 	private List<Method> methodList;
 
+	/**
+	 * コンストラクタ<br>
+	 */
 	public JavaSource() {
 		this.importList = new ArrayList<>();
 		this.implInterfaceList = new ArrayList<>();

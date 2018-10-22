@@ -15,6 +15,7 @@
 						http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<mvc:annotation-driven />
+
 	<aop:aspectj-autoproxy />
 
 	<bean id="webExceptionHandler" class="jp.co.ha.web.exception.WebExceptionHandler" />

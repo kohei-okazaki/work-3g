@@ -4,9 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.dao.MyBatisDao;
-import jp.co.ha.business.db.entity.HealthInfo;
-import jp.co.ha.business.db.mapper.HealthInfoMapper;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
  * 健康情報作成サービスインターフェース実装クラス<br>

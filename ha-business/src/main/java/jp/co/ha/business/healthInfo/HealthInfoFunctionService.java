@@ -1,6 +1,6 @@
 package jp.co.ha.business.healthInfo;
 
-import jp.co.ha.business.db.entity.HealthInfoFileSetting;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報利用機能サービスインターフェース<br>

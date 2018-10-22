@@ -4,9 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.db.dao.MyBatisDao;
-import jp.co.ha.business.db.entity.MailInfo;
-import jp.co.ha.business.db.mapper.MailInfoMapper;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.db.entity.MailInfo;
+import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
  * メール情報検索サービスインターフェース実装クラス<br>

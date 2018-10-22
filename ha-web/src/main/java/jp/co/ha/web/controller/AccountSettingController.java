@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
-import jp.co.ha.business.db.entity.Account;
-import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
+import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
 import jp.co.ha.web.validator.AccountSettingValidator;
