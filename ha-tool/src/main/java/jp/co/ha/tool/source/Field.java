@@ -2,6 +2,7 @@ package jp.co.ha.tool.source;
 
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.type.AccessType;
 
 public class Field {
@@ -29,19 +30,19 @@ public class Field {
 
 		String javadocPrefix = "/**";
 		String javadocSuffix = "*/";
-		StringJoiner javadocBody = new StringJoiner(" ");
+		StringJoiner javadocBody = new StringJoiner(StringUtil.SPACE);
 		javadocBody.add(javadocPrefix);
 		javadocBody.add(this.comment);
 		javadocBody.add(javadocSuffix);
 		String javadoc = TAB + javadocBody.toString();
 
 		String suffix = ";";
-		StringJoiner fieldBody = new StringJoiner(" ");
+		StringJoiner fieldBody = new StringJoiner(StringUtil.SPACE);
 		fieldBody.add(this.accessType.getValue());
 		fieldBody.add(this.classType.getSimpleName());
 		fieldBody.add(this.name);
 		String field = TAB + fieldBody.toString() + suffix;
-		return javadoc + "\r\n" + field;
+		return javadoc + StringUtil.NEW_LINE + field;
 	}
 
 	public String getName() {
