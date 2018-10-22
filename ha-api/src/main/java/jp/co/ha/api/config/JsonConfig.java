@@ -8,7 +8,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import jp.co.ha.api.request.RequestTypeDeserializer;
+import jp.co.ha.api.request.TestModeTypeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.business.api.type.TestModeType;
 
 /**
  * Jsonの設定クラス<br>
@@ -32,6 +34,7 @@ public class JsonConfig {
 	private Module getDeserializeModule() {
 		SimpleModule module = new SimpleModule();
 		module.addDeserializer(RequestType.class, new RequestTypeDeserializer());
+		module.addDeserializer(TestModeType.class, new TestModeTypeDeserializer());
 		return module;
 	}
 

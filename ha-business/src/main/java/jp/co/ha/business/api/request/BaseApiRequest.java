@@ -1,6 +1,7 @@
 package jp.co.ha.business.api.request;
 
 import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.business.api.type.TestModeType;
 import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.log.annotation.Mask;
 
@@ -17,6 +18,8 @@ public abstract class BaseApiRequest extends BaseRequest {
 	/** APIキー */
 	@Mask
 	private String apiKey;
+	/** testモード区分 */
+	private TestModeType testModeType;
 
 	/**
 	 * requestTypeを返す<br>
@@ -73,6 +76,25 @@ public abstract class BaseApiRequest extends BaseRequest {
 	 */
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
+	}
+
+	/**
+	 * testModeTypeを返す
+	 *
+	 * @return testModeType testモード区分
+	 */
+	public TestModeType getTestModeType() {
+		return testModeType;
+	}
+
+	/**
+	 * testModeTypeを設定する
+	 *
+	 * @param testModeType
+	 *     testモード区分
+	 */
+	public void setTestModeType(TestModeType testModeType) {
+		this.testModeType = testModeType;
 	}
 
 }
