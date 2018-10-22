@@ -6,16 +6,32 @@ import jp.co.ha.common.util.StringUtil;
 
 public class Import {
 
+	/** クラス型 */
 	private Class<?> clazz;
 
+	/**
+	 * コンストラクタ<br>
+	 *
+	 * @param clazz
+	 *     クラス型
+	 */
 	public Import(Class<?> clazz) {
 		this.clazz = clazz;
 	}
 
+	/**
+	 * コンストラクタ<br>
+	 *
+	 * @param field
+	 *     フィールド情報
+	 */
 	public Import(Field field) {
 		this.clazz = field.getClassType();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		String prefix = "import";

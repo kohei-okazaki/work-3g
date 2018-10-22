@@ -2,7 +2,9 @@ package jp.co.ha.tool.type;
 
 public enum FileType {
 
+	/** java */
 	JAVA(".java"),
+	/** sql */
 	SQL(".sql");
 
 	private String suffix;

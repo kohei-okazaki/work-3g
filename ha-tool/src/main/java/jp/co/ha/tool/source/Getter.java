@@ -9,10 +9,19 @@ public class Getter extends Method {
 
 	private static final String PREFIX = "get";
 
+	/**
+	 * コンストラクタ<br>
+	 *
+	 * @param field
+	 *     Field情報
+	 */
 	public Getter(Field field) {
 		super(field, AccessType.PUBLIC);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 
@@ -26,6 +35,9 @@ public class Getter extends Method {
 		return body.toString();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected String getMethodName() {
 		String firstChar = Character.valueOf(field.getName().charAt(0)).toString();

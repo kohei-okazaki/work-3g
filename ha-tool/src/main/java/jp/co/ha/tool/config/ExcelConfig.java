@@ -2,7 +2,9 @@ package jp.co.ha.tool.config;
 
 public class ExcelConfig {
 
+	/** ファイルパス */
 	private String filePath;
+	/** シート名 */
 	private String sheetName;
 
 	public String getFilePath() {

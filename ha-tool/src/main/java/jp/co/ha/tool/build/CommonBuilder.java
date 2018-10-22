@@ -13,9 +13,18 @@ public abstract class CommonBuilder extends BaseBuilder {
 		this.reader = new ExcelReader(getExcelConfig());
 	}
 
-	protected boolean isTargetTable(Row row, String table) {
+	/**
+	 * 対象のテーブルかどうか判定<br>
+	 *
+	 * @param row
+	 *     excelの行情報
+	 * @param tableName
+	 *     テーブル名
+	 * @return
+	 */
+	protected boolean isTargetTable(Row row, String tableName) {
 		Cell cell = row.getCell(CellPositionType.PHYSICAL_NAME);
-		return table.equals(cell.getValue());
+		return tableName.equals(cell.getValue());
 	}
 
 }

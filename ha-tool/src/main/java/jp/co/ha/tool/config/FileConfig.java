@@ -2,8 +2,11 @@ package jp.co.ha.tool.config;
 
 public class FileConfig {
 
+	/** 出力先ファイルパス */
 	private String outputPath;
+	/** ファイル名 */
 	private String fileName;
+	/** ファイル内容 */
 	private String data;
 
 	public String getOutputPath() {

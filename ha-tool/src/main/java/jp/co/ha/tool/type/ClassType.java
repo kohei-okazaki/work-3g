@@ -2,9 +2,13 @@ package jp.co.ha.tool.type;
 
 public enum ClassType {
 
+	/** クラス */
 	CLASS("class"),
+	/** インターフェース */
 	INTERFACE("interface"),
+	/** アノテーション */
 	ANNOTATION("@interface"),
+	/** 列挙 */
 	ENUM("enum");
 
 	private ClassType(String value) {
