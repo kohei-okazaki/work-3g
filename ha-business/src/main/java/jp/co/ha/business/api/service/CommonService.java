@@ -1,10 +1,10 @@
 package jp.co.ha.business.api.service;
 
 import jp.co.ha.business.api.request.BaseApiRequest;
-import jp.co.ha.business.db.entity.Account;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.db.entity.Account;
 
 /**
  * API共通サービス

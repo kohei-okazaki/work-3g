@@ -10,10 +10,10 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
-import jp.co.ha.business.db.entity.Account;
-import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
 

@@ -7,11 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.dao.MyBatisDao;
-import jp.co.ha.business.db.entity.HealthInfo;
-import jp.co.ha.business.db.entity.HealthInfoExample;
-import jp.co.ha.business.db.mapper.HealthInfoMapper;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.HealthInfoExample;
+import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
  * 健康情報検索サービスインターフェース実装クラス<br>

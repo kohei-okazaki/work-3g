@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoFileSettingForm;
 import jp.co.ha.web.service.HealthInfoFileSettingService;
 import jp.co.ha.web.view.ManageWebView;

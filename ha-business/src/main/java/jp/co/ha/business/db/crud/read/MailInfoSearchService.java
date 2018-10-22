@@ -1,7 +1,7 @@
 package jp.co.ha.business.db.crud.read;
 
-import jp.co.ha.business.db.entity.MailInfo;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.db.entity.MailInfo;
 
 /**
  * メール情報検索サービスインターフェース<br>

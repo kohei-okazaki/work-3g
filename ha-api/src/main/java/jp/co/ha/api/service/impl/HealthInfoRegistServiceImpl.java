@@ -14,8 +14,6 @@ import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.entity.Account;
-import jp.co.ha.business.db.entity.HealthInfo;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.type.HealthStatus;
@@ -25,6 +23,8 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報登録サービス実装クラス<br>

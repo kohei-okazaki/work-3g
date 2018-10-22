@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
-import jp.co.ha.business.db.entity.HealthInfoFileSetting;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoFileSettingForm;
 import jp.co.ha.web.service.HealthInfoFileSettingService;
 
