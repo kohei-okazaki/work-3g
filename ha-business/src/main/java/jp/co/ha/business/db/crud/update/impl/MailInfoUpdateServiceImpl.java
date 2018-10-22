@@ -18,10 +18,10 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService, MyBatis
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(MailInfo mailInfo) throws BaseException {
+	public void update(MailInfo entity) throws BaseException {
 		try (SqlSession session = getSqlSession()) {
 			MailInfoMapper mapper = session.getMapper(MailInfoMapper.class);
-			mapper.updateByPrimaryKey(mailInfo);
+			mapper.updateByPrimaryKey(entity);
 			session.commit();
 		}
 	}

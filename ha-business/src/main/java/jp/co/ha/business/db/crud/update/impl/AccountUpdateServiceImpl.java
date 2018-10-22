@@ -18,10 +18,10 @@ public class AccountUpdateServiceImpl implements AccountUpdateService, MyBatisDa
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update(Account account) throws BaseException {
+	public void update(Account entity) throws BaseException {
 		try (SqlSession session = getSqlSession()) {
 			AccountMapper mapper = session.getMapper(AccountMapper.class);
-			mapper.updateByPrimaryKey(account);
+			mapper.updateByPrimaryKey(entity);
 			session.commit();
 		}
 	}
