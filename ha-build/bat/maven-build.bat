@@ -15,6 +15,12 @@ call mvn package
 call mvn install:install-file -Dfile=target\ha-common-%ver%.jar -DgroupId=jp.co.ha.common -DartifactId=ha-common -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true
 
 
+rem dbのjarを作成
+cd %baseDir%\ha-db
+call mvn package
+call mvn install:install-file -Dfile=target\ha-db-%ver%.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true
+
+
 rem businessのjarを作成
 cd %baseDir%\ha-business
 call mvn package
