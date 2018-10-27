@@ -57,6 +57,10 @@
 		</multipart-config>
 	</servlet>
 
+	<error-page>
+		<location>/WEB-INF/error/systemError.html</location>
+	</error-page>
+
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
