@@ -10,10 +10,6 @@
 	<artifactId>ha-common</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<parent>
 		<groupId>jp.co.ha.pom</groupId>
 		<artifactId>ha-pom</artifactId>

@@ -42,8 +42,8 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				/WEB-INF/spring/appServlet/db-context.xml
 				/WEB-INF/spring/appServlet/servlet-context.xml
+				/WEB-INF/spring/appServlet/db-context.xml
 				/WEB-INF/spring/appServlet/view-context.xml
 				/WEB-INF/spring/appServlet/web-service-context.xml
 			</param-value>
@@ -58,7 +58,7 @@
 	</servlet>
 
 	<error-page>
-		<location>/WEB-INF/error/systemError.html</location>
+		<location>/WEB-INF/views/error/systemError.html</location>
 	</error-page>
 
 	<servlet-mapping>

@@ -10,10 +10,6 @@
 	<artifactId>ha-api</artifactId>
 	<packaging>war</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<parent>
 		<groupId>jp.co.ha.pom</groupId>
 		<artifactId>ha-pom</artifactId>
