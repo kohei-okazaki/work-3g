@@ -16,7 +16,7 @@
 		<version>1.0</version>
 		<relativePath>../ha-pom</relativePath>
 	</parent>
-
+<!--
  	<dependencies>
 		<dependency>
 			<groupId>jp.co.ha.common</groupId>
@@ -24,7 +24,7 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
-
+ -->
 	<build>
 		<plugins>
 			<plugin>
