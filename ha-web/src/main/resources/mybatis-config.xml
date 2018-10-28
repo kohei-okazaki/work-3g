@@ -17,7 +17,7 @@
 	</environments>
 
 	<mappers>
-		<package name="jp.co.ha.business.db.mapper" />
+		<package name="jp.co.ha.db.mapper" />
 	</mappers>
 
 </configuration>
