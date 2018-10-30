@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import jp.co.ha.api.request.RequestTypeDeserializer;
-import jp.co.ha.api.request.TestModeTypeDeserializer;
+import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
+import jp.co.ha.business.api.request.deserialize.TestModeTypeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.api.type.TestModeType;
 

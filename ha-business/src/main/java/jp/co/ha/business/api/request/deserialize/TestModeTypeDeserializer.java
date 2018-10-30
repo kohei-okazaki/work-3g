@@ -1,4 +1,4 @@
-package jp.co.ha.api.request;
+package jp.co.ha.business.api.request.deserialize;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import jp.co.ha.business.api.type.TestModeType;
 
-public class TestModeTypeDeserializer extends JsonDeserializer<TestModeType>{
+public class TestModeTypeDeserializer extends JsonDeserializer<TestModeType> {
 
 	/**
 	 * {@inheritDoc}
