@@ -11,6 +11,7 @@ import javax.crypto.spec.PBEKeySpec;
 import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.system.PasswordEncoder;
+import jp.co.ha.common.system.type.Algorithm;
 
 /**
  * SHA-256パスワード作成クラス<br>
@@ -21,7 +22,7 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 	/** パスワードを安全にするためのアルゴリズム */
 	private static final String PASSWORD_ALGORITHM = "PBKDF2WithHmacSHA256";
 	/** ハッシュアルゴリズム */
-	private static final String HASH_ALGORITHM = "SHA-256";
+	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_256;
 
 	/**
 	 * {@inheritDoc}
@@ -34,10 +35,9 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 
 		PBEKeySpec keySpec = new PBEKeySpec(passCharAry, hashedSalt, ITERATION_COUNT, KEY_LENGTH);
 
-		SecretKeyFactory skf;
 		SecretKey secretKey;
 		try {
-			skf = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM);
+			SecretKeyFactory skf = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM);
 			secretKey = skf.generateSecret(keySpec);
 		} catch (NoSuchAlgorithmException e) {
 			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "アルゴリズムが存在しません、ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
@@ -68,7 +68,7 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 	private static byte[] getHashedSalt(String salt) throws AlgorithmException {
 		MessageDigest messageDigest;
 		try {
-			messageDigest = MessageDigest.getInstance(HASH_ALGORITHM);
+			messageDigest = MessageDigest.getInstance(HASH_ALGORITHM.getValue());
 		} catch (NoSuchAlgorithmException e) {
 			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ソルトのハッシュ化に失敗しました、ハッシュアルゴリズム：" + HASH_ALGORITHM);
 		}

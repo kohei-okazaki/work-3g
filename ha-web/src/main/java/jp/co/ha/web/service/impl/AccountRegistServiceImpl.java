@@ -80,7 +80,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 
 		Account account = new Account();
 		BeanUtil.copy(form, account);
-		account.setDeleteFlag("0");
+		account.setDeleteFlag(StringUtil.FALSE_FLAG);
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 		account.setApiKey(encoder.execute(form.getPassword(), form.getUserId()));
 		account.setRegDate(DateUtil.getSysDate());

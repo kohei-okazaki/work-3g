@@ -21,6 +21,8 @@ public interface PasswordEncoder {
 	 * @param salt
 	 *     ソルト
 	 * @return
+	 * @throws AlgorithmException
+	 *     アルゴリズム例外
 	 */
 	String execute(String password, String salt) throws AlgorithmException;
 
