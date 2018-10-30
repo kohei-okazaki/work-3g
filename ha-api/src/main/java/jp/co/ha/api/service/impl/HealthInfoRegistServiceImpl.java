@@ -16,7 +16,7 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.type.HealthStatus;
+import jp.co.ha.business.healthInfo.type.HealthStatus;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.DateFormatType;

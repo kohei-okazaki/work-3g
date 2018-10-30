@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.PasswordEncoder;
@@ -81,7 +80,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 
 		Account account = new Account();
 		BeanUtil.copy(form, account);
-		account.setDeleteFlag(ParamConst.FLAG_FALSE.getValue());
+		account.setDeleteFlag(StringUtil.FALSE_FLAG);
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 		account.setApiKey(encoder.execute(form.getPassword(), form.getUserId()));
 		account.setRegDate(DateUtil.getSysDate());

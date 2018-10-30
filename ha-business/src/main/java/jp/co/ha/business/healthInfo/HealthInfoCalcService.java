@@ -2,7 +2,7 @@ package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.business.type.HealthStatus;
+import jp.co.ha.business.healthInfo.type.HealthStatus;
 
 /**
  * 健康情報サービス<br>

@@ -8,6 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.co.ha.web</groupId>
 	<artifactId>ha-web</artifactId>
+	<version>1.0</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -34,7 +35,7 @@
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 			<version>${org.thymeleaf-layout-version}</version>
 		</dependency>
-<!--
+
 		<dependency>
 			<groupId>jp.co.ha.common</groupId>
 			<artifactId>ha-common</artifactId>
@@ -56,7 +57,7 @@
 			<artifactId>ha-api</artifactId>
 			<version>1.0</version>
 		</dependency>
- -->
+
 	</dependencies>
 
 	<build>

@@ -1,4 +1,4 @@
-package jp.co.ha.business.type;
+package jp.co.ha.business.healthInfo.type;
 
 import java.util.stream.Stream;
 

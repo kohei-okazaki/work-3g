@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.type.HealthStatus;
+import jp.co.ha.business.healthInfo.type.HealthStatus;
 
 /**
  * 計算サービス実装クラス<br>

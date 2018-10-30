@@ -8,6 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.co.ha.db</groupId>
 	<artifactId>ha-db</artifactId>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<parent>
@@ -16,7 +17,7 @@
 		<version>1.0</version>
 		<relativePath>../ha-pom</relativePath>
 	</parent>
-<!--
+
  	<dependencies>
 		<dependency>
 			<groupId>jp.co.ha.common</groupId>
@@ -24,7 +25,7 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
- -->
+
 	<build>
 		<plugins>
 			<plugin>
