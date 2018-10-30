@@ -26,7 +26,6 @@ import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
-import jp.co.ha.business.parameter.ParamConst;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -217,7 +216,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
-		CsvConfig conf = getCsvConfig(ParamConst.CSV_FILE_NAME_HEALTH_INFO.getValue(), fileSetting);
+		CsvConfig conf = getCsvConfig("健康情報.csv", fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
