@@ -8,6 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jp.co.ha.api</groupId>
 	<artifactId>ha-api</artifactId>
+	<version>1.0</version>
 	<packaging>war</packaging>
 
 	<parent>
@@ -16,7 +17,7 @@
 		<version>1.0</version>
 		<relativePath>../ha-pom</relativePath>
 	</parent>
-<!--
+
 	<dependencies>
 		<dependency>
 			<groupId>jp.co.ha.common</groupId>
@@ -34,7 +35,7 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
- -->
+
 	<build>
 		<plugins>
 			<plugin>
