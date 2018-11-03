@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.dao.MyBatisDao;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.HealthInfo;
@@ -17,14 +17,14 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
  * 健康情報検索サービスインターフェース実装クラス<br>
  *
  */
-public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyBatisDao {
+public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public List<HealthInfo> findByUserId(String userId) throws BaseException {
-		try (SqlSession session = getSqlSession()) {
+		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
 			example.createCriteria().andUserIdEqualTo(userId);
@@ -37,7 +37,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 	 */
 	@Override
 	public HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException {
-		try (SqlSession session = getSqlSession()) {
+		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			return mapper.selectByPrimaryKey(healthInfoId);
 		}
@@ -48,7 +48,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 	 */
 	@Override
 	public HealthInfo findLastByUserId(String userId) throws BaseException {
-		try (SqlSession session = getSqlSession()) {
+		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
 			// ユーザIDの設定
@@ -67,7 +67,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 	 */
 	@Override
 	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseException {
-		try (SqlSession session = getSqlSession()) {
+		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
 			example.createCriteria().andUserIdEqualTo(userId).andRegDateEqualTo(regDate);
@@ -80,7 +80,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService, MyB
 	 */
 	@Override
 	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws BaseException {
-		try (SqlSession session = getSqlSession()) {
+		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
 			example.createCriteria().andUserIdEqualTo(userId).andRegDateBetween(fromRegDate, toRegDate);
