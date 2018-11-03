@@ -12,9 +12,10 @@
 	<version>1.0</version>
 
 	<properties>
+		<default.resources.directory>${basedir}/src/main/resources</default.resources.directory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>10</java-version>
-		<org.springframework-version>5.1.1.RELEASE</org.springframework-version>
+		<org.springframework-version>5.1.2.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.2</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<logback-version>1.2.3</logback-version>
@@ -23,6 +24,18 @@
 		<mysql-version>8.0.13</mysql-version>
 		<mybatis-version>3.4.6</mybatis-version>
 	</properties>
+
+	<profiles>
+		<profile>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<id>local</id>
+			<properties>
+				<resources.directory>${default.resources.directory}</resources.directory>
+			</properties>
+		</profile>
+	</profiles>
 
 	<modules>
 		<module>../ha-common</module>
