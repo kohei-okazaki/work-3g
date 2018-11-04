@@ -22,7 +22,7 @@
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
-	<bean id="updateExecutor" class="jp.co.ha.business.db.aop.UpdateExecutor" />
+	<bean id="dataBaseCommonExecutor" class="jp.co.ha.business.db.common.DataBaseCommonExecutor" />
 
 	<context:component-scan base-package="jp.co.ha.web.controller" />
 	<context:component-scan base-package="jp.co.ha.web.service.impl" />

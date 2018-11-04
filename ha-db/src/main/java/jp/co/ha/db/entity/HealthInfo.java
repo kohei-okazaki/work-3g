@@ -6,7 +6,9 @@ import java.util.Date;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.db.annotation.Entity;
 
+@Entity
 public class HealthInfo implements Serializable {
 
 	/**

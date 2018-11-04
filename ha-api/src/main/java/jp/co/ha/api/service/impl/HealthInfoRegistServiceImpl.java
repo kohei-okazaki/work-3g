@@ -1,7 +1,6 @@
 package jp.co.ha.api.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -114,7 +113,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		String userStatus = BeanUtil.isNull(lastHealthInfo)
 				? HealthStatus.EVEN.getCode()
 				: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getCode();
-		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();
 		entity.setUserId(userId);
@@ -123,7 +121,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		entity.setBmi(bmi);
 		entity.setStandardWeight(standardWeight);
 		entity.setUserStatus(userStatus);
-		entity.setRegDate(regDate);
 
 		return entity;
 	}
