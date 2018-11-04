@@ -60,7 +60,7 @@ public enum HealthStatus {
 	 */
 	public static HealthStatus of(String code) {
 		return Stream.of(HealthStatus.class.getEnumConstants())
-				.filter(type -> type.getCode().equals(code))
+				.filter(e -> e.getCode().equals(code))
 				.findFirst()
 				.orElse(null);
 	}

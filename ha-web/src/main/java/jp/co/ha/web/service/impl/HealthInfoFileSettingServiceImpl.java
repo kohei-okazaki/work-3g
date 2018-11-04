@@ -8,7 +8,6 @@ import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoFileSettingForm;
 import jp.co.ha.web.service.HealthInfoFileSettingService;
@@ -58,10 +57,6 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	private HealthInfoFileSetting toEntity(boolean isFirstReg, HealthInfoFileSettingForm form) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
 		BeanUtil.copy(form, entity);
-		entity.setUpdateDate(DateUtil.getSysDate());
-		if (isFirstReg) {
-			entity.setRegDate(DateUtil.getSysDate());
-		}
 		return entity;
 	}
 

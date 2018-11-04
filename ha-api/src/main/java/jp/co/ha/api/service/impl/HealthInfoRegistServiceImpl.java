@@ -1,7 +1,6 @@
 package jp.co.ha.api.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +16,7 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthStatus;
+import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.DateFormatType;
@@ -56,7 +56,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
-			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
+			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "必須エラー");
 		}
 
 		// リクエスト種別チェック
@@ -114,7 +114,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		String userStatus = BeanUtil.isNull(lastHealthInfo)
 				? HealthStatus.EVEN.getCode()
 				: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getCode();
-		Date regDate = DateUtil.getSysDate();
 
 		HealthInfo entity = new HealthInfo();
 		entity.setUserId(userId);
@@ -123,7 +122,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		entity.setBmi(bmi);
 		entity.setStandardWeight(standardWeight);
 		entity.setUserStatus(userStatus);
-		entity.setRegDate(regDate);
 
 		return entity;
 	}
@@ -140,6 +138,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 
 		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(healthInfo.getUserId());
 		response.setHealthInfoId(lastEntity.getHealthInfoId());
+		response.setResult(ResultType.SUCCESS);
 		return response;
 	}
 

@@ -1,6 +1,6 @@
 package jp.co.ha.web.file.csv.model;
 
-import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**

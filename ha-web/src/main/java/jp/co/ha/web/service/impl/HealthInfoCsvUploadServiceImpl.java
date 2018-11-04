@@ -11,8 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.file.csv.reader.CsvReader;
-import jp.co.ha.common.file.csv.service.CsvUploadService;
+import jp.co.ha.common.io.file.csv.reader.CsvReader;
+import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.file.csv.reader.HealthInfoCsvReader;
 

@@ -9,5 +9,5 @@ import jp.co.ha.db.entity.HealthInfo;
  */
 public interface HealthInfoCreateService {
 
-	public void create(HealthInfo entity) throws BaseException;
+	void create(HealthInfo entity) throws BaseException;
 }

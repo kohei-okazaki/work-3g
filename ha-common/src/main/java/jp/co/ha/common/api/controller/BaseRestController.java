@@ -12,13 +12,12 @@ import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.api.response.BaseResponse;
 import jp.co.ha.common.api.response.ErrorResponse;
 import jp.co.ha.common.api.service.BaseService;
-import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.LogLevel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * RestAPI基底コントローラ<br>
@@ -33,7 +32,8 @@ import jp.co.ha.common.log.LoggerFactory;
  */
 public abstract class BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
 
-	protected static final Logger LOG = LoggerFactory.getLogger(BaseRestController.class);
+	/** LOG */
+	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * POST通信の処理を行う<br>
@@ -47,10 +47,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	@PostMapping
 	public Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
-		LOG.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
-		apiResponse.setResult(ResultType.SUCCESS);
-		LOG.infoRes(apiResponse);
 
 		return apiResponse;
 	}
