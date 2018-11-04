@@ -12,7 +12,6 @@ import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.api.response.BaseResponse;
 import jp.co.ha.common.api.response.ErrorResponse;
 import jp.co.ha.common.api.service.BaseService;
-import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -48,10 +47,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	@PostMapping
 	public Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
 
-		LOG.infoRes(apiRequest);
 		Rs apiResponse = this.execute(apiRequest);
-		apiResponse.setResult(ResultType.SUCCESS);
-		LOG.infoRes(apiResponse);
 
 		return apiResponse;
 	}

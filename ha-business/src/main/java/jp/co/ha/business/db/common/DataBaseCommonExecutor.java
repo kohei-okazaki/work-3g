@@ -37,15 +37,15 @@ public class DataBaseCommonExecutor {
 	@Before("execution(* *..*UpdateServiceImpl.update(..))*")
 	public void update(JoinPoint jp) {
 		try {
-			for (Object arg : jp.getArgs()) {
-				if (BeanUtil.notNull(arg.getClass().getAnnotation(Entity.class))) {
+			for (Object entity : jp.getArgs()) {
+				if (BeanUtil.notNull(entity.getClass().getAnnotation(Entity.class))) {
 					LOG.info("■■■SQL■■■");
-					for (Method m : arg.getClass().getDeclaredMethods()) {
+					for (Method m : entity.getClass().getDeclaredMethods()) {
 						if ("setUpdateDate".equals(m.getName())) {
-							m.invoke(arg, DateUtil.getSysDate());
+							m.invoke(entity, DateUtil.getSysDate());
 						}
 					}
-					LOG.infoRes(arg);
+					LOG.infoRes(entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -66,15 +66,15 @@ public class DataBaseCommonExecutor {
 	@Before("execution(* *..*CreateServiceImpl.create(..))*")
 	public void regist(JoinPoint jp) {
 		try {
-			for (Object arg : jp.getArgs()) {
-				if (BeanUtil.notNull(arg.getClass().getAnnotation(Entity.class))) {
+			for (Object entity : jp.getArgs()) {
+				if (BeanUtil.notNull(entity.getClass().getAnnotation(Entity.class))) {
 					LOG.info("■■■SQL■■■");
-					for (Method m : arg.getClass().getDeclaredMethods()) {
+					for (Method m : entity.getClass().getDeclaredMethods()) {
 						if ("setRegDate".equals(m.getName()) || "setUpdateDate".equals(m.getName())) {
-							m.invoke(arg, DateUtil.getSysDate());
+							m.invoke(entity, DateUtil.getSysDate());
 						}
 					}
-					LOG.infoRes(arg);
+					LOG.infoRes(entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

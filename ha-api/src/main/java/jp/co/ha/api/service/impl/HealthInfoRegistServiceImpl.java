@@ -16,6 +16,7 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthStatus;
+import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.DateFormatType;
@@ -55,7 +56,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
-			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
+			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "必須エラー");
 		}
 
 		// リクエスト種別チェック
@@ -137,6 +138,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 
 		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(healthInfo.getUserId());
 		response.setHealthInfoId(lastEntity.getHealthInfoId());
+		response.setResult(ResultType.SUCCESS);
 		return response;
 	}
 
