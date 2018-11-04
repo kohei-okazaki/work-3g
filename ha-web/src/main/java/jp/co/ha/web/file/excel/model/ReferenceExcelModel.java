@@ -2,8 +2,8 @@ package jp.co.ha.web.file.excel.model;
 
 import java.util.Date;
 
-import jp.co.ha.common.file.excel.annotation.ExcelDownloadModel;
-import jp.co.ha.common.file.excel.model.BaseExcelModel;
+import jp.co.ha.common.io.file.excel.annotation.ExcelDownloadModel;
+import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
 
 /**
  * 結果照会Excel出力モデルクラス<br>

@@ -1,4 +1,4 @@
-package jp.co.ha.common.file.csv.service;
+package jp.co.ha.common.io.file.csv.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.util.BeanUtil;
 
 /**

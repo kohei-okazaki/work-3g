@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
-import jp.co.ha.common.file.csv.service.CsvUploadService;
+import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionManageService;

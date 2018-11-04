@@ -1,4 +1,4 @@
-package jp.co.ha.common.file.csv;
+package jp.co.ha.common.io.file.csv;
 
 /**
  * CSVファイル囲い文字列挙

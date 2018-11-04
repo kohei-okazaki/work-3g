@@ -1,11 +1,11 @@
-package jp.co.ha.common.file.csv.service;
+package jp.co.ha.common.io.file.csv.service;
 
 import java.io.PrintWriter;
 import java.util.List;
 
 import jp.co.ha.common.exception.AppIOException;
-import jp.co.ha.common.file.csv.CsvConfig;
-import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.io.file.csv.CsvConfig;
+import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 
 /**
  * CSVダウンロードサービスインターフェース<br>

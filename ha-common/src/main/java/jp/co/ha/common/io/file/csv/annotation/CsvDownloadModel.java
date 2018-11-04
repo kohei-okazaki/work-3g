@@ -1,4 +1,4 @@
-package jp.co.ha.common.file.excel.annotation;
+package jp.co.ha.common.io.file.csv.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,16 +8,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Excelダウンロードモデルアノテーション<br>
- *
+ * CSVダウンロードモデルアノテーション<br>
+ * headerNamesでヘッダ名を設定<br>
+ * footerNamesでフッタ名を設定<br>
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ExcelDownloadModel {
-
-	String sheetName() default "Sheet1";
+public @interface CsvDownloadModel {
 
 	String[] headerNames() default "";
 

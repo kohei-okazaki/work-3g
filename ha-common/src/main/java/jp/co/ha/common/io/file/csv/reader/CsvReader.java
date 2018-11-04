@@ -1,4 +1,4 @@
-package jp.co.ha.common.file.csv.reader;
+package jp.co.ha.common.io.file.csv.reader;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.AccessorType;

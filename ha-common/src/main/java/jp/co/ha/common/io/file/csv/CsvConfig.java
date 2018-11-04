@@ -1,4 +1,4 @@
-package jp.co.ha.common.file.csv;
+package jp.co.ha.common.io.file.csv;
 
 import jp.co.ha.common.type.Charset;
 

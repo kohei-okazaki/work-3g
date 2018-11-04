@@ -1,4 +1,4 @@
-package jp.co.ha.common.file.excel;
+package jp.co.ha.common.io.file.excel;
 
 import jp.co.ha.common.type.Charset;
 

@@ -3,8 +3,8 @@ package jp.co.ha.web.file.csv.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import jp.co.ha.common.file.csv.annotation.CsvDownloadModel;
-import jp.co.ha.common.file.csv.model.BaseCsvModel;
+import jp.co.ha.common.io.file.csv.annotation.CsvDownloadModel;
+import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
