@@ -33,7 +33,8 @@ import jp.co.ha.common.log.type.LogLevel;
  */
 public abstract class BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
 
-	protected static final Logger LOG = LoggerFactory.getLogger(BaseRestController.class);
+	/** LOG */
+	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * POST通信の処理を行う<br>
