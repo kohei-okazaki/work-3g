@@ -2,9 +2,9 @@ package jp.co.ha.common.exception;
 
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
-import jp.co.ha.common.log.LogLevel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * Exceptionハンドラー基底インターフェース<br>

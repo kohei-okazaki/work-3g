@@ -16,9 +16,9 @@ import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.log.LogLevel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * RestAPI基底コントローラ<br>

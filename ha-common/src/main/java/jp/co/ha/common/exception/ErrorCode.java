@@ -2,7 +2,7 @@ package jp.co.ha.common.exception;
 
 import java.util.stream.Stream;
 
-import jp.co.ha.common.log.LogLevel;
+import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * エラーコードの定義<br>

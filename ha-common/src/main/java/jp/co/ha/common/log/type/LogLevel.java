@@ -1,4 +1,4 @@
-package jp.co.ha.common.log;
+package jp.co.ha.common.log.type;
 
 /**
  * ログレベルの列挙<br>
