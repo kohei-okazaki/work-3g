@@ -17,6 +17,10 @@ public class Logger {
 		logger.debug(LogMessageFactory.getLogMessage(bean));
 	}
 
+	public void debugRes(String prefix, Object bean) {
+		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
+	}
+
 	public void debug(String msg) {
 		logger.debug(msg);
 	}
@@ -25,12 +29,20 @@ public class Logger {
 		logger.info(LogMessageFactory.getLogMessage(bean));
 	}
 
+	public void infoRes(String prefix, Object bean) {
+		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
+	}
+
 	public void info(String msg) {
 		logger.info(msg);
 	}
 
 	public void warnRes(Object bean) {
 		logger.warn(LogMessageFactory.getLogMessage(bean));
+	}
+
+	public void warnRes(String prefix, Object bean) {
+		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
 	public void warnRes(Object bean, Throwable t) {
@@ -47,6 +59,10 @@ public class Logger {
 
 	public void errorRes(Object bean) {
 		logger.error(LogMessageFactory.getLogMessage(bean));
+	}
+
+	public void errorRes(String prefix, Object bean) {
+		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
 	public void errorRes(Object bean, Throwable t) {

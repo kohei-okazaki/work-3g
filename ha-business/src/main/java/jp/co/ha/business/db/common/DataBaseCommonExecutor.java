@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -19,7 +18,6 @@ import jp.co.ha.db.annotation.Entity;
  *
  */
 @Aspect
-@Component
 public class DataBaseCommonExecutor {
 
 	/** ロガー */
@@ -39,13 +37,12 @@ public class DataBaseCommonExecutor {
 		try {
 			for (Object entity : jp.getArgs()) {
 				if (BeanUtil.notNull(entity.getClass().getAnnotation(Entity.class))) {
-					LOG.info("■■■SQL■■■");
 					for (Method m : entity.getClass().getDeclaredMethods()) {
 						if ("setUpdateDate".equals(m.getName())) {
 							m.invoke(entity, DateUtil.getSysDate());
 						}
 					}
-					LOG.infoRes(entity);
+					LOG.infoRes("■■■SQL■■■", entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -68,13 +65,12 @@ public class DataBaseCommonExecutor {
 		try {
 			for (Object entity : jp.getArgs()) {
 				if (BeanUtil.notNull(entity.getClass().getAnnotation(Entity.class))) {
-					LOG.info("■■■SQL■■■");
 					for (Method m : entity.getClass().getDeclaredMethods()) {
 						if ("setRegDate".equals(m.getName()) || "setUpdateDate".equals(m.getName())) {
 							m.invoke(entity, DateUtil.getSysDate());
 						}
 					}
-					LOG.infoRes(entity);
+					LOG.infoRes("■■■SQL■■■", entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

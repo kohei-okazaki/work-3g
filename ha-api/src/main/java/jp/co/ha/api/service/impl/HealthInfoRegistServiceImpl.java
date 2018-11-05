@@ -56,7 +56,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
-			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "必須エラー");
+			throw new HealthInfoException(ErrorCode.HEALTH_INFO_REG_EMPTY, "必須エラー");
 		}
 
 		// リクエスト種別チェック

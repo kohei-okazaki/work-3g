@@ -24,8 +24,7 @@ public abstract class CommonService {
 	 *     API例外
 	 */
 	protected void useApi(Account account, BaseApiRequest request) throws BaseException {
-		String userApiKey = account.getApiKey();
-		if (!userApiKey.equals(request.getApiKey())) {
+		if (!account.getApiKey().equals(request.getApiKey())) {
 			throw new ApiException(ErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");
 		}
 	}
