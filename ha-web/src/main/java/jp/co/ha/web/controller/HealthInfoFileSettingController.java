@@ -20,6 +20,7 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoFileSettingForm;
@@ -72,11 +73,12 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId);
 		HealthInfoFileSettingForm form = new HealthInfoFileSettingForm();
 		if (BeanUtil.isNull(entity)) {
+			// 健康情報ファイル設定が未登録の場合
 			form.setUserId(userId);
-			form.setHeaderFlag(null);
-			form.setFooterFlag(null);
-			form.setMaskFlag(null);
-			form.setEnclosureCharFlag(null);
+			form.setHeaderFlag(StringUtil.TRUE_FLAG);
+			form.setFooterFlag(StringUtil.TRUE_FLAG);
+			form.setMaskFlag(StringUtil.TRUE_FLAG);
+			form.setEnclosureCharFlag(StringUtil.TRUE_FLAG);
 		} else {
 			BeanUtil.copy(entity, form);
 		}
