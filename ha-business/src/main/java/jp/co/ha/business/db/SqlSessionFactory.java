@@ -33,7 +33,7 @@ public class SqlSessionFactory {
 			org.apache.ibatis.session.SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
 			return factory.openSession();
 		} catch (FileNotFoundException e) {
-			throw new AppIOException(ErrorCode.FILE_READING_ERROR, "mybatis-config.xmlが見つかりません");
+			throw new AppIOException(ErrorCode.FILE_READING_ERROR, CONF_FILE + "が見つかりません");
 		} catch (IOException e) {
 			throw new AppIOException(ErrorCode.FILE_READING_ERROR, "ファイルの読み込みに失敗しました");
 		}

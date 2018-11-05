@@ -16,6 +16,8 @@ public enum ErrorCode {
 	LENGTH_OVER("LENGTH_OVER", "", null, "validate.message.LengthOver"),
 	/** 桁数不足 */
 	LENGTH_LACK("LENGTH_LACK", "", null, "validate.message.LengthLack"),
+	/** 型不正 */
+	TYPE_VALID("TYPE_VALID", "", null, "validate.message.TypeError"),
 
 	/** アカウント存在チェックエラー */
 	ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "W_001", LogLevel.WARN, "アカウントが存在しません"),
@@ -24,7 +26,7 @@ public enum ErrorCode {
 	/** ファイル処理エラー */
 	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "W_003", LogLevel.WARN, "ファイルの処理に失敗しました"),
 	/** リクエスト情報エラー */
-	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "W_004", LogLevel.WARN, "不正リクエストエラーです"),
+	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "W_004", LogLevel.WARN, "リクエスト情報エラーです"),
 	/** リクエストID相違エラー */
 	REQUEST_ID_INVALID_ERROR("REQUEST_ID_INVALID_ERROR", "W_005", LogLevel.WARN, "リクエストIDが一致しません"),
 	/** 不正リクエストエラー */
@@ -64,12 +66,15 @@ public enum ErrorCode {
 	RUNTIME_ERROR("RUNTIME_ERROR", "E_007", LogLevel.ERROR, "実行環境エラー"),
 
 	/** 予期せぬ例外 */
-	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "E_008", LogLevel.ERROR, "error.unexpected");
+	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "E_008", LogLevel.ERROR, "error.unexpected"),
 
-	/** 外部用エラーコード */
-	private String outerErrorCode;
+	/** 健康情報登録APIエラー */
+	HEALTH_INFO_REG_EMPTY("HEALTH_INFO_REG_EMPTY", "W_014", LogLevel.WARN, "健康情報登録API必須エラー");
+
 	/** 内部用エラーコード */
 	private String internalErrorCode;
+	/** 外部用エラーコード */
+	private String outerErrorCode;
 	/** ログレベル */
 	private LogLevel logLevel;
 	/** エラーメッセージ */
