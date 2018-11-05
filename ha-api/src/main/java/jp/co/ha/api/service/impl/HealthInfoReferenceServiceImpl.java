@@ -43,7 +43,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 		if (BeanUtil.isNull(request.getRequestType())
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHealthInfoId())) {
-			throw new HealthInfoException(ErrorCode.REQUIRE, "必須エラー");
+			throw new HealthInfoException(ErrorCode.HEALTH_INFO_REG_EMPTY, "必須エラー");
 		}
 
 		// リクエスト種別チェック

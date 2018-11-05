@@ -68,7 +68,7 @@ public enum ErrorCode {
 	/** 予期せぬ例外 */
 	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "E_008", LogLevel.ERROR, "error.unexpected"),
 
-	/** 健康情報登録APIエラー */
+	/** 健康情報登録API必須エラー */
 	HEALTH_INFO_REG_EMPTY("HEALTH_INFO_REG_EMPTY", "W_014", LogLevel.WARN, "健康情報登録API必須エラー");
 
 	/** 内部用エラーコード */

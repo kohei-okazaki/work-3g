@@ -4,7 +4,12 @@
 	<classPathEntry location="C:\3g\git\work-3g\ha-db\lib\mysql-connector-java-8.0.13.jar" />
 
 	<context id="context1">
+
+		<!-- プラグイン -->
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+
 		<jdbcConnection
 			driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/work3g?serverTimezone=JST"
