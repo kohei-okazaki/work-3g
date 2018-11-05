@@ -81,13 +81,13 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
 
 		// リクエストをEntityにつめる
-		HealthInfo healthInfo = toEntity(request);
+		HealthInfo entity = toEntity(request);
 
 		// Entityの登録処理を行う
-		healthInfoCreateService.create(healthInfo);
+		healthInfoCreateService.create(entity);
 
 		// レスポンスに変換する
-		HealthInfoRegistResponse response = toResponse(healthInfo);
+		HealthInfoRegistResponse response = toResponse(entity);
 
 		return response;
 	}

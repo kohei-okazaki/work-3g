@@ -3,7 +3,8 @@ package jp.co.ha.api.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jp.co.ha.business.db.common.DataBaseCommonExecutor;
+import jp.co.ha.business.aop.ApiCommonExecutor;
+import jp.co.ha.business.aop.DataBaseCommonExecutor;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.create.impl.HealthInfoCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -80,6 +81,16 @@ public class BusinessConfig {
 	@Bean
 	public DataBaseCommonExecutor dataBaseCommonExecutor() {
 		return new DataBaseCommonExecutor();
+	}
+
+	/**
+	 * API共通処理
+	 *
+	 * @return
+	 */
+	@Bean
+	public ApiCommonExecutor apiCommonExecutor() {
+		return new ApiCommonExecutor();
 	}
 
 }

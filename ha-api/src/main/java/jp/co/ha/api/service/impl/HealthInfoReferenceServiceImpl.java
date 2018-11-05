@@ -11,6 +11,7 @@ import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.DateFormatType;
@@ -74,9 +75,9 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 		}
 
 		// レスポンスに変換する
-		HealthInfoReferenceResponse apiResponse = toResponse(entity);
+		HealthInfoReferenceResponse response = toResponse(entity);
 
-		return apiResponse;
+		return response;
 	}
 
 	/**
@@ -84,11 +85,12 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	 */
 	@Override
 	public HealthInfoReferenceResponse toResponse(HealthInfo healthInfo) {
-		// 健康情報照会レスポンスクラス
-		HealthInfoReferenceResponse apiResponse = new HealthInfoReferenceResponse();
-		BeanUtil.copy(healthInfo, apiResponse);
-		apiResponse.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-		return apiResponse;
+
+		HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
+		BeanUtil.copy(healthInfo, response);
+		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+		response.setResult(ResultType.SUCCESS);
+		return response;
 	}
 
 }
