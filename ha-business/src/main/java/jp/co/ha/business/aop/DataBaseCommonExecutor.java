@@ -1,4 +1,4 @@
-package jp.co.ha.business.db.common;
+package jp.co.ha.business.aop;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -14,14 +14,14 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.annotation.Entity;
 
 /**
- * DBの共通処理クラス<br>
+ * DB接続の共通処理クラス<br>
  *
  */
 @Aspect
 public class DataBaseCommonExecutor {
 
 	/** ロガー */
-	private final Logger LOG = LoggerFactory.getLogger(getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 更新処理の共通処理を行う<br>

@@ -54,4 +54,9 @@
 	<!-- sha256パスワードサービス -->
 	<bean id="sha256PasswordEncoder" class="jp.co.ha.common.system.impl.Sha256PasswordEncoder" />
 
+	<!-- DB接続の共通処理 -->
+	<bean id="dataBaseCommonExecutor" class="jp.co.ha.business.aop.DataBaseCommonExecutor" />
+	<!-- API通信共通処理 -->
+	<bean id="ApiCommonExecutor" class="jp.co.ha.business.aop.ApiCommonExecutor" />
+
 </beans>

@@ -1,9 +1,8 @@
-package jp.co.ha.api.config;
+package jp.co.ha.business.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.api.controller.BaseRestController;
 import jp.co.ha.common.api.request.BaseRequest;
@@ -12,12 +11,11 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
- * API AOPクラス<br>
+ * API通信共通クラス<br>
  *
  */
 @Aspect
-@Component
-public class ApiLoggingAop {
+public class ApiCommonExecutor {
 
 	/** ロガー */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
@@ -65,9 +63,11 @@ public class ApiLoggingAop {
 
 	/**
 	 * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
-	 * レスポンスログ(異常系)は
-	 * @see BaseRestController#jsonProcessingExceptionHandle(com.fasterxml.jackson.core.JsonProcessingException)
-	 * @see BaseRestController#appExceptionHandle(jp.co.ha.common.exception.BaseException)
+	 * レスポンスログ(異常系)は以下のクラスのメソッドで行う<br>
+	 * <ul>
+	 * <li>{@link BaseRestController#jsonProcessingExceptionHandle}</li>
+	 * <li>{@link BaseRestController#appExceptionHandle}</li>
+	 * </ul>
 	 *
 	 * @param pjp
 	 *     リクエスト情報
@@ -87,7 +87,6 @@ public class ApiLoggingAop {
 		// レスポンスログを出力
 		LOG.infoRes(response);
 		return response;
-
 	}
 
 }
