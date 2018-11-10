@@ -74,7 +74,7 @@ public class ApiCommonExecutor {
 	 * @throws Throwable
 	 */
 	@Around("execution(* *jp.co.ha.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
-	public BaseResponse startApiRequestLog(ProceedingJoinPoint pjp) throws Throwable {
+	public BaseResponse outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 		for (Object arg : pjp.getArgs()) {
 			if (arg instanceof BaseRequest) {
 				// リクエストログを出力
