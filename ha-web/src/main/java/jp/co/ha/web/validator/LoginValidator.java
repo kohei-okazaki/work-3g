@@ -2,8 +2,6 @@ package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -17,19 +15,6 @@ import jp.co.ha.web.form.LoginForm;
  */
 public class LoginValidator extends BaseWebValidator<LoginForm> {
 
-	/** アカウント検索サービス */
-	private AccountSearchService accountSearchService;
-
-	/**
-	 * アカウント検索サービスを設定する<br>
-	 *
-	 * @param accountSearchService
-	 *     アカウント検索サービス
-	 */
-	public void setAccountSearchService(AccountSearchService accountSearchService) {
-		this.accountSearchService = accountSearchService;
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -37,22 +22,6 @@ public class LoginValidator extends BaseWebValidator<LoginForm> {
 	public void validate(Object target, Errors errors) {
 
 		LoginForm form = (LoginForm) target;
-		if (StringUtil.isEmpty(form.getUserId())) {
-			return;
-		}
-		Account account = null;
-		try {
-			account = accountSearchService.findByUserId(form.getUserId());
-		} catch (BaseException e) {
-			e.printStackTrace();
-		}
-		checkExistAccount(errors, account);
-		if (errors.hasErrors()) {
-			return;
-		}
-		checkInvalidPassword(errors, form.getPassword(), account.getPassword());
-		checkDeleteAccount(errors, account);
-		checkAccountExpired(errors, account);
 	}
 
 	/**

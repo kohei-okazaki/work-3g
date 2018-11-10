@@ -1,9 +1,12 @@
 package jp.co.ha.web.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
+import jp.co.ha.business.login.LoginCheck;
+import jp.co.ha.business.login.LoginCheckResult;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
+import jp.co.ha.db.entity.Account;
 import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
@@ -38,6 +44,9 @@ public class LoginController implements BaseWebController {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** MessageSource */
+	@Autowired
+	private MessageSource messageSource;
 
 	/**
 	 * Validateを設定<br>
@@ -48,7 +57,6 @@ public class LoginController implements BaseWebController {
 	@InitBinder("loginForm")
 	public void initBinder(WebDataBinder binder) {
 		LoginValidator validator = new LoginValidator();
-		validator.setAccountSearchService(accountSearchService);
 		binder.addValidators(validator);
 	}
 
@@ -78,7 +86,6 @@ public class LoginController implements BaseWebController {
 	public String index(Model model, HttpServletRequest request) throws BaseException {
 		// sessionに格納している情報をすべて削除する
 		sessionService.removeValues(request.getSession());
-//		System.out.println(messageSource.getMessage("message", null, Locale.JAPANESE));
 		return getView(ManageWebView.LOGIN);
 	}
 
@@ -104,6 +111,14 @@ public class LoginController implements BaseWebController {
 		if (result.hasErrors()) {
 			// validationエラーの場合
 			return getView(ManageWebView.LOGIN);
+		}
+
+		// アカウント情報を検索
+		Account account = accountSearchService.findByUserId(loginForm.getUserId());
+		LoginCheckResult checkResult = new LoginCheck().check(account, loginForm.getUserId(), loginForm.getPassword());
+		if (checkResult.hasError()) {
+			String errorMessage = messageSource.getMessage(checkResult.getErrorDetail(), null, Locale.JAPANESE);
+			model.addAttribute(checkResult.getName(), errorMessage);
 		}
 
 		// セッションにユーザIDを登録する。
