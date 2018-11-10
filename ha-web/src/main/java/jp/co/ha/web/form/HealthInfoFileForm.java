@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
-import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 
 /**
  * 健康情報ファイル入力画面フォームクラス<br>

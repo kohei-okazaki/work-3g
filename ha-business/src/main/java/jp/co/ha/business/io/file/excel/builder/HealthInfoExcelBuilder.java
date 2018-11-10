@@ -1,13 +1,13 @@
-package jp.co.ha.web.file.excel.builder;
+package jp.co.ha.business.io.file.excel.builder;
 
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.builder.BaseExcelBuilder;
-import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
 
 /**
  * 健康情報入力画面Excel生成クラス<br>

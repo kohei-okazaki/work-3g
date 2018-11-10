@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.web.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoForm;
 
 /**

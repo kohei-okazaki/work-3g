@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -37,7 +38,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
-import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 import jp.co.ha.web.service.annotation.ReferenceDownloadCsv;

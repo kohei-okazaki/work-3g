@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
@@ -25,7 +26,6 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
-import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.form.HealthInfoFileForm;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
 import jp.co.ha.web.service.annotation.HealthInfoUploadCsv;

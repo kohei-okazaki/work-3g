@@ -1,8 +1,9 @@
-package jp.co.ha.web.file.csv.writer;
+package jp.co.ha.business.io.file.csv.writer;
 
 import java.io.PrintWriter;
 import java.util.StringJoiner;
 
+import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 import jp.co.ha.common.log.Logger;
@@ -11,13 +12,12 @@ import jp.co.ha.common.log.MaskExecutor;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
 
 /**
- * 結果照会CSVWriterクラス<br>
+ * 健康情報CSVWriterクラス<br>
  *
  */
-public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
+public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
@@ -29,7 +29,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 	 * @param printWriter
 	 *     出力用PrintWriter
 	 */
-	public ReferenceCsvWriter(CsvConfig conf, PrintWriter printWriter) {
+	public HealthInfoCsvWriter(CsvConfig conf, PrintWriter printWriter) {
 		super(conf, printWriter);
 	}
 
@@ -37,7 +37,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void writeData(StringJoiner recordJoiner, ReferenceCsvDownloadModel model) {
+	protected void writeData(StringJoiner recordJoiner, HealthInfoCsvDownloadModel model) {
 
 		LOG.infoRes(model);
 		// 1項目ごと区切る

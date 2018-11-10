@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
+import jp.co.ha.business.io.file.csv.writer.ReferenceCsvWriter;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
-import jp.co.ha.web.file.csv.model.ReferenceCsvDownloadModel;
-import jp.co.ha.web.file.csv.writer.ReferenceCsvWriter;
 
 /**
  * 結果照会画面CSVダウンロードサービスクラス実装クラス<br>

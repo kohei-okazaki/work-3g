@@ -1,4 +1,4 @@
-package jp.co.ha.web.file.excel.builder;
+package jp.co.ha.business.io.file.excel.builder;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -6,11 +6,11 @@ import java.util.stream.Stream;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import jp.co.ha.business.io.file.excel.model.ReferenceExcelModel;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.builder.BaseExcelBuilder;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
 
 /**
  * 結果照会画面Excel生成クラス<br>

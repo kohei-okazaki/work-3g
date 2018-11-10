@@ -11,6 +11,8 @@ import org.springframework.web.servlet.View;
 import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
+import jp.co.ha.business.io.file.excel.builder.ResultReferenceExcelBuiler;
+import jp.co.ha.business.io.file.excel.model.ReferenceExcelModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
@@ -19,8 +21,6 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
-import jp.co.ha.web.file.excel.builder.ResultReferenceExcelBuiler;
-import jp.co.ha.web.file.excel.model.ReferenceExcelModel;
 
 /**
  * 結果照会画面Excelダウンロードサービス実装クラス
