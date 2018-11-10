@@ -12,12 +12,12 @@ import jp.co.ha.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
 
 /**

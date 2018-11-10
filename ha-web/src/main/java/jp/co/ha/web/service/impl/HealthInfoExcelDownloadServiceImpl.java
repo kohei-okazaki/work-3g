@@ -8,6 +8,8 @@ import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
+import jp.co.ha.business.io.file.excel.builder.HealthInfoExcelBuilder;
+import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
@@ -15,8 +17,6 @@ import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
-import jp.co.ha.web.file.excel.builder.HealthInfoExcelBuilder;
-import jp.co.ha.web.file.excel.model.HealthInfoExcelModel;
 
 /**
  * 健康情報Excelダウンロードサービス実装クラス

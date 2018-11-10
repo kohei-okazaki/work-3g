@@ -3,8 +3,8 @@ package jp.co.ha.web.service;
 import java.util.List;
 
 import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.file.csv.model.HealthInfoCsvUploadModel;
 
 /**
  * 健康情報ファイル入力画面サービス

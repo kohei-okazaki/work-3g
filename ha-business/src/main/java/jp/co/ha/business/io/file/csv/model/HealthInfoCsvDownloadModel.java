@@ -1,4 +1,4 @@
-package jp.co.ha.web.file.csv.model;
+package jp.co.ha.business.io.file.csv.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,13 +8,12 @@ import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 結果照会CSVダウンロードモデル<br>
- * CSV出力したい項目のみを持つ
+ * 健康情報CSVダウンロードモデル<br>
  *
  */
 @CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" }
 				, footerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
-public class ReferenceCsvDownloadModel implements BaseCsvModel {
+public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 
 	/** ユーザID */
 	private String userId;

@@ -1,4 +1,4 @@
-package jp.co.ha.web.file.csv.model;
+package jp.co.ha.business.io.file.csv.model;
 
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.annotation.Mask;
