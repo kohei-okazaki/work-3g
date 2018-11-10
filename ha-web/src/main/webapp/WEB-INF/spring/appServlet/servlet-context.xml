@@ -25,7 +25,6 @@
 	<context:component-scan base-package="jp.co.ha.web.controller" />
 	<context:component-scan base-package="jp.co.ha.web.service.impl" />
 	<context:component-scan base-package="jp.co.ha.web.service.annotation" />
-	<context:component-scan base-package="jp.co.ha.web.log" />
 
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
