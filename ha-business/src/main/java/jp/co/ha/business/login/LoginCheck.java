@@ -5,14 +5,28 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 
+/**
+ * ログイン情報チェッククラス<br>
+ *
+ */
 public class LoginCheck {
 
 	/**
-	 * アカウント情報
+	 * アカウント情報のチェックを行う<br>
+	 * <ul>
+	 * <li>検索したアカウント情報が存在しない場合</li>
+	 * <li>検索したアカウント情報入力したパスワードが一致しない場合</li>
+	 * <li>検索したアカウント情報が論理削除された場合</li>
+	 * <li>検索したアカウント情報が有効期限切れの場合</li>
+	 * </ul>
+	 *
 	 * @param account
+	 *     アカウント情報
 	 * @param inputUserId
-	 * @param inputPassword
-	 * @return
+	 *     入力されたユーザID
+	 * @param inputPasswor
+	 *     入力されたパスワード
+	 * @return ログイン情報チェック結果
 	 */
 	public LoginCheckResult check(Account account, String inputUserId, String inputPassword) {
 
