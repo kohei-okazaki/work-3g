@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.DateFormatType;
 
 /**
@@ -13,6 +15,8 @@ import jp.co.ha.common.type.DateFormatType;
  *
  */
 public class DateUtil {
+
+	private static final Logger LOG = LoggerFactory.getLogger(DateUtil.class);
 
 	/**
 	 * プライベートコンストラクタ<br>
@@ -62,7 +66,7 @@ public class DateUtil {
 			// Date型に変換
 			result = sdf.parse(target);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			LOG.error("指定された日付のフォーマットが不正です format -> " + format.getValue(), e);
 		}
 		return result;
 
