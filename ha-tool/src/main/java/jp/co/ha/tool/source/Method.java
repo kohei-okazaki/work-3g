@@ -15,7 +15,7 @@ public abstract class Method {
 	 * @param field
 	 *     当メソッドのフィールド情報
 	 * @param accessType
-	 *     メソッドのアクセスタイプa
+	 *     メソッドのアクセスタイプ
 	 */
 	public Method(Field field, AccessType accessType) {
 		this.field = field;
