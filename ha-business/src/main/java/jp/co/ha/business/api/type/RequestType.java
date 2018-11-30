@@ -46,7 +46,7 @@ public enum RequestType {
 	@JsonCreator
 	public static RequestType of(String requestId) {
 		return Stream.of(RequestType.class.getEnumConstants())
-				.filter(type -> type.getRequestId().equals(requestId))
+				.filter(e -> e.getRequestId().equals(requestId))
 				.findFirst()
 				.orElse(null);
 	}

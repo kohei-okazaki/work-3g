@@ -49,7 +49,7 @@ public class LogMessageFactory {
 
 	/**
 	 * 出力対象かどうか判定する<br>
-	 * 出力対象の場合true, それ以外の場合false<br>
+	 * 出力対象で無い場合true, それ以外の場合false<br>
 	 *
 	 * @param field
 	 *     フィールド名
