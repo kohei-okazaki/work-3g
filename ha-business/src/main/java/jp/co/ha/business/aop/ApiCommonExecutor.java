@@ -34,13 +34,13 @@ public class ApiCommonExecutor {
 	 *     リクエスト情報
 	 * @throws Throwable
 	 */
-	@Around("execution(* *jp.co.ha.api.controller.*Controller.execute(..)) throws BaseException")
+	@Around("execution(* *jp.co.ha.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
 	public BaseResponse outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
 		// リクエストログを出力
 		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseRequest).forEach(e -> LOG.infoRes(e));
 
-		// jp.co.ha.api.controller.*Controller.execute実行
+		// jp.co.ha.api.service.impl.*ServiceImpl.execute実行
 		BaseResponse response = (BaseResponse) pjp.proceed();
 		// レスポンスログを出力
 		LOG.infoRes(response);
