@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import jp.co.ha.business.healthInfo.type.HealthStatus;
 
 /**
- * 健康情報サービス<br>
+ * 健康情報計算サービス<br>
  *
  */
 public interface HealthInfoCalcService {
