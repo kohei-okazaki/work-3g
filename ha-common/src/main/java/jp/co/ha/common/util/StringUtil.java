@@ -35,6 +35,13 @@ public class StringUtil {
 	/** 真偽値:false */
 	public static final String FALSE_FLAG = "0";
 
+	/** CR */
+	public static final String CR = "\r";
+	/** LF */
+	public static final String LF = "\n";
+	/** CRLF */
+	public static final String CRLF = CR + LF;
+
 	/**
 	 * プライベートコンストラクタ<br>
 	 */
