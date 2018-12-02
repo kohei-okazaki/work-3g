@@ -33,9 +33,9 @@ public class HealthInfoRegistController extends
 		// リクエスト情報のチェック
 		service.checkRequest(request);
 
-		HealthInfoRegistResponse apiResponse = service.execute(request);
+		HealthInfoRegistResponse response = service.execute(request);
 
-		return apiResponse;
+		return response;
 	}
 
 }
