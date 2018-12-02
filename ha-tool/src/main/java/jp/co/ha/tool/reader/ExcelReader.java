@@ -51,8 +51,8 @@ public class ExcelReader extends BaseFileReader {
 			while (rowIte.hasNext()) {
 				jp.co.ha.tool.excel.Row excelRow = new jp.co.ha.tool.excel.Row();
 				Row row = rowIte.next();
-				Arrays.asList(CellPositionType.class.getEnumConstants()).stream().forEach(celltype -> {
-					Cell cell = getCell(row, celltype);
+				Arrays.asList(CellPositionType.class.getEnumConstants()).stream().forEach(e -> {
+					Cell cell = getCell(row, e);
 					excelRow.addCell(cell);
 				});
 				excelSheet.addRow(excelRow);

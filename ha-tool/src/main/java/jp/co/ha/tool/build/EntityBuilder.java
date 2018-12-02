@@ -111,15 +111,15 @@ public class EntityBuilder extends CommonBuilder {
 	private String build(JavaSource source) {
 		StringBuilder result = new StringBuilder();
 
-		result.append(buildPackage(source)).append("\r\n\r\n");
+		result.append(buildPackage(source)).append(StringUtil.CRLF + StringUtil.CRLF);
 
-		result.append(buildImport(source.getImportList())).append("\r\n\r\n");
+		result.append(buildImport(source.getImportList())).append(StringUtil.CRLF + StringUtil.CRLF);
 
-		result.append(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {").append("\r\n\r\n");
+		result.append(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {").append(StringUtil.CRLF + StringUtil.CRLF);
 
-		result.append(buildFields(source.getFieldList())).append("\r\n\r\n");
+		result.append(buildFields(source.getFieldList())).append(StringUtil.CRLF + StringUtil.CRLF);
 
-		result.append(buildMethods(source.getMethodList())).append("\r\n\r\n");
+		result.append(buildMethods(source.getMethodList())).append(StringUtil.CRLF + StringUtil.CRLF);
 
 		result.append("}");
 
@@ -160,9 +160,7 @@ public class EntityBuilder extends CommonBuilder {
 
 	private String buildFields(List<Field> fieldList) {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-		fieldList.stream().forEach(e -> {
-			body.add(e.toString());
-		});
+		fieldList.stream().forEach(e -> body.add(e.toString()));
 		return body.toString();
 	}
 

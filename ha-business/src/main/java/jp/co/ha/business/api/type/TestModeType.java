@@ -42,7 +42,7 @@ public enum TestModeType {
 	@JsonCreator
 	public static TestModeType of(String value) {
 		return Stream.of(TestModeType.class.getEnumConstants())
-				.filter(type -> type.getValue().equals(value))
+				.filter(e -> e.getValue().equals(value))
 				.findFirst()
 				.orElse(null);
 	}

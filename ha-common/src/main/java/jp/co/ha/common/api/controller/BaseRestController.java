@@ -45,11 +45,11 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	 *     アプリ例外
 	 */
 	@PostMapping
-	public Rs doPost(@RequestBody Rq apiRequest) throws BaseException {
+	public Rs doPost(@RequestBody Rq request) throws BaseException {
 
-		Rs apiResponse = this.execute(apiRequest);
+		Rs response = this.execute(request);
 
-		return apiResponse;
+		return response;
 	}
 
 	/**
@@ -83,9 +83,9 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 		} else if (e instanceof JsonProcessingException) {
 			baseException = new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません");
 		}
-		Rs apiResponse = (Rs) new ErrorResponse(baseException);
-		LOG.warnRes(apiResponse, baseException);
-		return apiResponse;
+		Rs response = (Rs) new ErrorResponse(baseException);
+		LOG.warnRes(response, baseException);
+		return response;
 	}
 
 	/**
@@ -98,13 +98,13 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(BaseException.class)
 	public Rs appExceptionHandle(BaseException e) {
-		Rs apiResponse = (Rs) new ErrorResponse(e);
+		Rs response = (Rs) new ErrorResponse(e);
 		if (LogLevel.WARN == e.getErrorCode().getLogLevel()) {
-			LOG.warnRes(apiResponse, e);
+			LOG.warnRes(response, e);
 		} else if (LogLevel.ERROR == e.getErrorCode().getLogLevel()) {
-			LOG.errorRes(apiResponse, e);
+			LOG.errorRes(response, e);
 		}
-		return apiResponse;
+		return response;
 	}
 
 }

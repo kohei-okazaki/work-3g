@@ -29,7 +29,7 @@ public class DdlBuilder extends CommonBuilder {
 			String ddlSuffix = ");";
 			body.add(ddlPrefix);
 			Table table = getTable(excel.getRowList(), tableName);
-			StringJoiner columnData = new StringJoiner(",\r\n");
+			StringJoiner columnData = new StringJoiner("," + StringUtil.CRLF);
 			for (Column column : table.getColumnList()) {
 				columnData.add(column.getComment() + StringUtil.NEW_LINE + column.getName() + StringUtil.SPACE + column.getType());
 			}
@@ -46,16 +46,14 @@ public class DdlBuilder extends CommonBuilder {
 		Table table = new Table();
 		table.setPhysicalName(tableName);
 		List<Column> columnList = new ArrayList<>();
-		for (Row row : rowList) {
-			if (isTargetTable(row, tableName)) {
-				Column column = new Column();
-				column.setName(getColumnName(row));
-				column.setComment(getColumnComment(row));
-				column.setType(getColumnType(row));
-				columnList.add(column);
-				table.setColumnList(columnList);
-			}
-		}
+		rowList.stream().filter(e -> isTargetTable(e, tableName)).forEach(e -> {
+			Column column = new Column();
+			column.setName(getColumnName(e));
+			column.setComment(getColumnComment(e));
+			column.setType(getColumnType(e));
+			columnList.add(column);
+			table.setColumnList(columnList);
+		});
 		return table;
 	}
 

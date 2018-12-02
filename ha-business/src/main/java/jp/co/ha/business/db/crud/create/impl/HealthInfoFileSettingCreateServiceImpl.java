@@ -3,6 +3,7 @@ package jp.co.ha.business.db.crud.create.impl;
 import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.SqlSessionFactory;
+import jp.co.ha.business.db.annotation.Insert;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -17,6 +18,7 @@ public class HealthInfoFileSettingCreateServiceImpl implements HealthInfoFileSet
 	/**
 	 * {@inheritDoc}
 	 */
+	@Insert
 	@Override
 	public void create(HealthInfoFileSetting entity) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {

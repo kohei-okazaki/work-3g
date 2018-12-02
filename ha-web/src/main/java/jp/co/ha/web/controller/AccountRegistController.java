@@ -1,9 +1,12 @@
 package jp.co.ha.web.controller;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
+import jp.co.ha.db.entity.Account;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
 import jp.co.ha.web.validator.AccountRegistValidator;
@@ -31,6 +38,11 @@ import jp.co.ha.web.view.ManageWebView;
 @RequestMapping(value = "accountRegist")
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
+	/** ロガー */
+	private Logger LOG = LoggerFactory.getLogger(this.getClass());
+	/** MessageSource */
+	@Autowired
+	private MessageSource messageSource;
 	/** アカウント登録画面サービス */
 	@Autowired
 	private AccountRegistService accountRegistService;
@@ -45,7 +57,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@InitBinder("accountRegistForm")
 	public void initBinder(WebDataBinder binder) {
 		AccountRegistValidator validator = new AccountRegistValidator();
-		validator.setAccountSearchService(accountSearchService);
 		binder.addValidators(validator);
 	}
 
@@ -80,6 +91,13 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 		if (result.hasErrors()) {
 			// validatationエラーの場合
 			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
+		}
+
+		Account account = accountSearchService.findByUserId(form.getUserId());
+		if (BeanUtil.notNull(account)) {
+			String errorMessage = messageSource.getMessage("validate.message.existAccount", null, Locale.JAPANESE);
+			model.addAttribute("userId", errorMessage);
+			LOG.warn("アカウント情報が既に登録されています");
 		}
 
 		model.addAttribute("form", form);

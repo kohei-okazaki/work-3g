@@ -29,7 +29,7 @@ public interface BaseView {
 	@SuppressWarnings("unchecked")
 	public static <V extends BaseView> V of(Class<? extends BaseView> view, String url) {
 		return (V) Stream.of(view.getEnumConstants())
-						.filter(baseView -> baseView.getName().equals(url))
+						.filter(e -> e.getName().equals(url))
 						.findFirst()
 						.orElse(null);
 	}

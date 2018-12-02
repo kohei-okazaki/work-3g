@@ -3,6 +3,7 @@ package jp.co.ha.business.db.crud.update.impl;
 import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.SqlSessionFactory;
+import jp.co.ha.business.db.annotation.Update;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.MailInfo;
@@ -17,6 +18,7 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Update
 	@Override
 	public void update(MailInfo entity) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {

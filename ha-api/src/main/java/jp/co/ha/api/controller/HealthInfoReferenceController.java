@@ -28,14 +28,14 @@ public class HealthInfoReferenceController extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest apiRequest) throws BaseException {
+	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
 
 		// リクエスト情報のチェック
-		service.checkRequest(apiRequest);
+		service.checkRequest(request);
 
-		HealthInfoReferenceResponse apiResponse = service.execute(apiRequest);
+		HealthInfoReferenceResponse response = service.execute(request);
 
-		return apiResponse;
+		return response;
 	}
 
 }

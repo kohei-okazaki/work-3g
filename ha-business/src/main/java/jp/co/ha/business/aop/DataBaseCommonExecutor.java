@@ -32,7 +32,7 @@ public class DataBaseCommonExecutor {
 	 * @param jp
 	 *     JoinPoint
 	 */
-	@Before("execution(* *..*UpdateServiceImpl.update(..))*")
+	@Before("@annotation(jp.co.ha.business.db.annotation.Update)")
 	public void update(JoinPoint jp) {
 		try {
 			for (Object entity : jp.getArgs()) {
@@ -60,8 +60,8 @@ public class DataBaseCommonExecutor {
 	 * @param jp
 	 *     JoinPoint
 	 */
-	@Before("execution(* *..*CreateServiceImpl.create(..))*")
-	public void regist(JoinPoint jp) {
+	@Before("@annotation(jp.co.ha.business.db.annotation.Insert)")
+	public void insert(JoinPoint jp) {
 		try {
 			for (Object entity : jp.getArgs()) {
 				if (BeanUtil.notNull(entity.getClass().getAnnotation(Entity.class))) {

@@ -13,8 +13,13 @@ import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 
+/**
+ * SQLセッション取得のFactoryクラス<br>
+ *
+ */
 public class SqlSessionFactory {
 
+	/** 設定ファイル */
 	private static final String CONF_FILE = "mybatis-config.xml";
 
 	private static SqlSessionFactory instance = new SqlSessionFactory();
@@ -26,6 +31,13 @@ public class SqlSessionFactory {
 		return instance;
 	}
 
+	/**
+	 * SQLセッションを取得する<br>
+	 *
+	 * @return
+	 * @throws BaseException
+	 *     例外
+	 */
 	public SqlSession getSqlSession() throws BaseException {
 		String sysPath = this.getClass().getClassLoader().getResource("").getPath();
 		File xmlFile = new File(sysPath, CONF_FILE);

@@ -52,7 +52,7 @@ public class LoginCheck {
 		}
 
 		// errorにならなければnullを返す
-		return null;
+		return result;
 	}
 
 	/**

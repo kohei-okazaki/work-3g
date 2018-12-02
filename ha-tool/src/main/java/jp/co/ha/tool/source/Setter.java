@@ -2,6 +2,8 @@ package jp.co.ha.tool.source;
 
 import java.util.StringJoiner;
 
+import org.apache.commons.lang3.StringUtils;
+
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.type.AccessType;
 
@@ -41,8 +43,6 @@ public class Setter extends Method {
 	 */
 	@Override
 	protected String getMethodName() {
-		String firstChar = Character.valueOf(field.getName().charAt(0)).toString();
-		String methodName = field.getName().replaceFirst(firstChar, firstChar.toUpperCase());
-		return PREFIX + methodName;
+		return PREFIX + StringUtils.capitalize(field.getName());
 	}
 }

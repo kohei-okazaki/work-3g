@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.StringJoiner;
 
 import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.LogParam;
 import jp.co.ha.common.type.AccessorType;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
@@ -37,7 +38,7 @@ public class LogMessageFactory {
 				// 出力非対象項目
 				continue;
 			}
-			String name = f.getName();
+			String name = getLogParamName(f);
 			if (MaskExecutor.isMask(f)) {
 				body.add(name + StringUtil.EQUAL + MaskExecutor.MASK);
 			} else {
@@ -48,8 +49,22 @@ public class LogMessageFactory {
 	}
 
 	/**
+	 * Log出力時のパラメータを返す<br>
+	 * <code>@LogParam</code>が指定されてない場合Beanのフィールド名を返す<br>
+	 * 指定されてる場合、<code>@LogParam</code>のパラメータ名を返す<br>
+	 *
+	 * @param field
+	 *     フィールド名
+	 * @return
+	 */
+	private static String getLogParamName(Field field) {
+		LogParam annotation = field.getAnnotation(LogParam.class);
+		return BeanUtil.notNull(annotation) ? annotation.name() : field.getName();
+	}
+
+	/**
 	 * 出力対象かどうか判定する<br>
-	 * 出力対象の場合true, それ以外の場合false<br>
+	 * 出力対象で無い場合true, それ以外の場合false<br>
 	 *
 	 * @param field
 	 *     フィールド名
