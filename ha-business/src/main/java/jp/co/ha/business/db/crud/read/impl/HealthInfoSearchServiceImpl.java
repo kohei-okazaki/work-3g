@@ -11,6 +11,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
+import jp.co.ha.db.entity.HealthInfoExample.Criteria;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
@@ -27,7 +28,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
-			example.createCriteria().andUserIdEqualTo(userId);
+			Criteria criteria = example.createCriteria();
+			// ユーザID
+			criteria.andUserIdEqualTo(userId);
 			return mapper.selectByExample(example);
 		}
 	}
@@ -51,8 +54,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
-			// ユーザIDの設定
-			example.createCriteria().andUserIdEqualTo(userId);
+			Criteria criteria = example.createCriteria();
+			// ユーザID
+			criteria.andUserIdEqualTo(userId);
 			List<HealthInfo> list = mapper.selectByExample(example);
 			if (BeanUtil.isNull(list) || list.isEmpty()) {
 				return null;
@@ -70,7 +74,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
-			example.createCriteria().andUserIdEqualTo(userId).andRegDateEqualTo(regDate);
+			Criteria criteria = example.createCriteria();
+			// ユーザID
+			criteria.andUserIdEqualTo(userId);
+			// 登録日時
+			criteria.andRegDateEqualTo(regDate);
 			return mapper.selectByExample(example);
 		}
 	}
@@ -83,7 +91,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
-			example.createCriteria().andUserIdEqualTo(userId).andRegDateBetween(fromRegDate, toRegDate);
+			Criteria criteria = example.createCriteria();
+			// ユーザID
+			criteria.andUserIdEqualTo(userId);
+			// 登録日時
+			criteria.andRegDateBetween(fromRegDate, toRegDate);
 			return mapper.selectByExample(example);
 		}
 	}

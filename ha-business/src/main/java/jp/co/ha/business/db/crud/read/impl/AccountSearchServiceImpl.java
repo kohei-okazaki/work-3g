@@ -19,7 +19,6 @@ public class AccountSearchServiceImpl implements AccountSearchService {
 	 */
 	@Override
 	public Account findByUserId(String userId) throws BaseException {
-
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			AccountMapper mapper = session.getMapper(AccountMapper.class);
 			return mapper.selectByPrimaryKey(userId);
