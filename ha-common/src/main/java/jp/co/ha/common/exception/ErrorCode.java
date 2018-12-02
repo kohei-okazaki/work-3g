@@ -158,7 +158,7 @@ public enum ErrorCode {
 	 */
 	public static ErrorCode of(String innerErrorCode) {
 		return Stream.of(ErrorCode.class.getEnumConstants())
-				.filter(code -> code.internalErrorCode.equals(innerErrorCode))
+				.filter(e -> e.internalErrorCode.equals(innerErrorCode))
 				.findFirst()
 				.orElse(null);
 	}
