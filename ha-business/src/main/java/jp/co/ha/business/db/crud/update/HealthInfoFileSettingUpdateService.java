@@ -9,5 +9,12 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
  */
 public interface HealthInfoFileSettingUpdateService {
 
+	/**
+	 * 健康情報ファイル設定を更新する
+	 *
+	 * @param entity
+	 *     健康情報ファイル設定
+	 * @throws BaseException
+	 */
 	void update(HealthInfoFileSetting entity) throws BaseException;
 }
