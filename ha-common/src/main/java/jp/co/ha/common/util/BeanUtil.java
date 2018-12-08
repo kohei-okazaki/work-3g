@@ -7,8 +7,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import org.springframework.util.CollectionUtils;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -32,13 +35,13 @@ public class BeanUtil {
 	 * dataのフィールドをtargetのフィールドにコピーする<br>
 	 * コピー先のクラスと同じフィールド名の場合コピー元のフィールドに値を設定する<br>
 	 *
-	 * @param data
+	 * @param src
 	 *     コピー元
-	 * @param target
+	 * @param dest
 	 *     コピー先
 	 */
-	public static void copy(Object data, Object target) {
-		copy(data, target, new ArrayList<String>());
+	public static void copy(Object src, Object dest) {
+		copy(src, dest, Collections.emptyList());
 	}
 
 	/**
@@ -46,34 +49,34 @@ public class BeanUtil {
 	 * コピー先のクラスと同じフィールド名の場合コピー元のフィールドに値を設定する<br>
 	 * コピー時に無視リストの名前のフィールドの場合コピーを行わない。<br>
 	 *
-	 * @param data
+	 * @param src
 	 *     コピー元
-	 * @param target
+	 * @param dest
 	 *     コピー先
 	 * @param ignoreList
 	 *     無視リスト
 	 */
-	public static void copy(Object data, Object target, List<String> ignoreList) {
+	public static void copy(Object src, Object dest, List<String> ignoreList) {
 
 		// コピー元のクラス型
-		Class<?> dataClass = data.getClass();
+		Class<?> srcClass = src.getClass();
 		// コピー先のクラス型
-		Class<?> targetClass = target.getClass();
+		Class<?> destClass = dest.getClass();
 		try {
-			for (Field targetField : targetClass.getDeclaredFields()) {
+			for (Field targetField : BeanUtil.getFieldList(destClass)) {
 				if (ignore(ignoreList, targetField.getName())) {
 					continue;
 				}
 
-				for (Field sourceField : BeanUtil.getFieldList(dataClass)) {
+				for (Field sourceField : BeanUtil.getFieldList(srcClass)) {
 					if (isCopyTarget(sourceField, targetField)) {
 						// getter呼び出し
-						Method getter = getAccessor(sourceField.getName(), dataClass, AccessorType.GETTER);
+						Method getter = getAccessor(sourceField.getName(), srcClass, AccessorType.GETTER);
 						// setter呼び出し
-						Method setter = getAccessor(sourceField.getName(), targetClass, AccessorType.SETTER);
+						Method setter = getAccessor(sourceField.getName(), destClass, AccessorType.SETTER);
 
 						// 値を設定
-						setter.invoke(target, getter.invoke(data));
+						setter.invoke(dest, getter.invoke(src));
 					}
 				}
 			}
@@ -101,7 +104,7 @@ public class BeanUtil {
 	 * @return
 	 */
 	private static boolean ignore(List<String> ignoreList, String fieldName) {
-		return "serialVersionUID".equals(fieldName) || (!ignoreList.isEmpty() && ignoreList.contains(fieldName));
+		return "serialVersionUID".equals(fieldName) || CollectionUtils.isEmpty(ignoreList);
 	}
 
 	/**

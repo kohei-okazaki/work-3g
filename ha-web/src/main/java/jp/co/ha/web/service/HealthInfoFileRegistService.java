@@ -23,7 +23,7 @@ public interface HealthInfoFileRegistService {
 	 * @throws HealthInfoException
 	 *     健康情報例外
 	 */
-	void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws HealthInfoException;
+	void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException;
 
 	/**
 	 * 指定されたモデルリストの登録処理を行う<br>

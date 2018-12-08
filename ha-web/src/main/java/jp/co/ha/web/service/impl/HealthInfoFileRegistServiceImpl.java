@@ -46,7 +46,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 */
 	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		Account account = accountSearchService.findByUserId(userId);
-		List<HealthInfoRegistRequest> requestList = new ArrayList<HealthInfoRegistRequest>();
+		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
 		for (HealthInfoCsvUploadModel csvModel : modelList) {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
 			BeanUtil.copy(csvModel, request);
@@ -63,7 +63,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws HealthInfoException {
+	public void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		for (int i = 0; i < modelList.size(); i++) {
 			HealthInfoCsvUploadModel model = modelList.get(i);
 			if (!userId.equals(model.getUserId())) {
@@ -83,8 +83,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 */
 	@Override
 	public void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
-		List<HealthInfoRegistRequest> reqList = toRequestList(modelList, userId);
-		for (HealthInfoRegistRequest apiRequest : reqList) {
+		for (HealthInfoRegistRequest apiRequest : toRequestList(modelList, userId)) {
 			healthInfoRegistService.checkRequest(apiRequest);
 			healthInfoRegistService.execute(apiRequest);
 		}

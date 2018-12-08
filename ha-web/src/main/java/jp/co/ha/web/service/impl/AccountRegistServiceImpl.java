@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.util.BeanUtil;
@@ -74,9 +73,9 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * @param form
 	 *     アカウント登録画面フォーム
 	 * @return
-	 * @throws AlgorithmException
+	 * @throws BaseException
 	 */
-	private Account toAccount(AccountRegistForm form) throws AlgorithmException {
+	private Account toAccount(AccountRegistForm form) throws BaseException {
 
 		Account account = new Account();
 		BeanUtil.copy(form, account);

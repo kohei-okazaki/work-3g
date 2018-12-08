@@ -9,5 +9,12 @@ import jp.co.ha.db.entity.Account;
  */
 public interface AccountUpdateService {
 
+	/**
+	 * 指定したアカウント情報を更新する
+	 *
+	 * @param account
+	 *     アカウント情報
+	 * @throws BaseException
+	 */
 	void update(Account account) throws BaseException;
 }

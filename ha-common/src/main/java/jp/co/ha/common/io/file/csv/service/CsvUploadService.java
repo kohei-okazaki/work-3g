@@ -28,7 +28,7 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 *
 	 * @param uploadFile
 	 *     アップロードファイル
-	 * @return T CSVアップロードモデルリスト
+	 * @return List<T> CSVアップロードモデルリスト
 	 * @throws BaseException
 	 *     アプリ例外
 	 */
@@ -46,7 +46,7 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 */
 	default public List<String> toList(InputStream is) throws BaseException {
 
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		try (InputStreamReader isr = new InputStreamReader(is);
 				BufferedReader br = new BufferedReader(isr)) {
 			String line;
