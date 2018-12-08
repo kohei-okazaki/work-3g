@@ -39,5 +39,4 @@ public class MinValidator implements ConstraintValidator<Min, String> {
 			return this.size < value.length();
 		}
 	}
-
 }

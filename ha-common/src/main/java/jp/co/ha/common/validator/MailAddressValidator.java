@@ -23,5 +23,4 @@ public class MailAddressValidator implements ConstraintValidator<MailAddress, St
 		}
 		return value.matches(RegixType.MAIL_ADDRESS.getPattern());
 	}
-
 }

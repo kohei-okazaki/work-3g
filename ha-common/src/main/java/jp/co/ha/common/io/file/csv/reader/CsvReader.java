@@ -40,7 +40,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
 		List<String> colList = BeanUtil.getFieldList(clazz).stream()
-															.map(f -> f.getName())
+															.map(e -> e.getName())
 															.collect(Collectors.toList());
 		List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
 		checkFileLength(colList, dataList);

@@ -9,5 +9,13 @@ import jp.co.ha.db.entity.HealthInfo;
  */
 public interface HealthInfoCreateService {
 
+	/**
+	 * 指定した健康情報を登録する<br>
+	 *
+	 * @param entity
+	 *     健康情報
+	 * @throws BaseException
+	 *     基底例外
+	 */
 	void create(HealthInfo entity) throws BaseException;
 }

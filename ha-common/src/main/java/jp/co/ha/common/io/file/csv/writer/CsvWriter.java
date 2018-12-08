@@ -46,18 +46,18 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 */
 	@SuppressWarnings("unchecked")
 	public void execute(List<T> modelList) {
-		StringJoiner recordJoiner = new StringJoiner(StringUtil.NEW_LINE);
+		StringJoiner record = new StringJoiner(StringUtil.NEW_LINE);
 		if (this.conf.hasHeader()) {
 			// ヘッダを書込
-			writeHeader(recordJoiner, (Class<T>) BeanUtil.getParameterType(this.getClass()));
+			writeHeader(record, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
 		// データを書込
-		modelList.stream().forEach(e -> writeData(recordJoiner, e));
+		modelList.stream().forEach(e -> writeData(record, e));
 		if (this.conf.hasFooter()) {
 			// フッタを書込
-			writeFooter(recordJoiner, (Class<T>) BeanUtil.getParameterType(this.getClass()));
+			writeFooter(record, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
-		this.printWriter.print(recordJoiner.toString());
+		this.printWriter.print(record.toString());
 	}
 
 	/**
@@ -88,6 +88,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 *     書き込みたいデータ
 	 */
 	protected void write(StringJoiner joiner, String data) {
+		// 囲い文字
 		String enclosureChar = conf.hasEnclosure() ? conf.getCsvFileChar().getValue() : StringUtil.EMPTY;
 		joiner.add(enclosureChar + data + enclosureChar);
 	}
@@ -101,9 +102,9 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 *     CSVモデルクラス型
 	 */
 	protected void writeHeader(StringJoiner recordJoiner, Class<T> clazz) {
-		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
-		getHeaderList(clazz).stream().forEach(e -> write(joiner, e));
-		recordJoiner.add(joiner.toString());
+		StringJoiner sj = new StringJoiner(StringUtil.COMMA);
+		getHeaderList(clazz).stream().forEach(e -> write(sj, e));
+		recordJoiner.add(sj.toString());
 	}
 
 	/**
@@ -115,9 +116,9 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 *     CSVモデルクラス型
 	 */
 	protected void writeFooter(StringJoiner recordJoiner, Class<T> clazz) {
-		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
-		getFooterList(clazz).stream().forEach(e -> write(joiner, e));
-		recordJoiner.add(joiner.toString());
+		StringJoiner sj = new StringJoiner(StringUtil.COMMA);
+		getFooterList(clazz).stream().forEach(e -> write(sj, e));
+		recordJoiner.add(sj.toString());
 	}
 
 	/**
@@ -138,7 +139,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 * @return ヘッダ名
 	 */
 	protected List<String> getHeaderList(Class<?> clazz) {
-		List<String> headerList = new ArrayList<String>();
+		List<String> headerList = new ArrayList<>();
 		headerList.addAll(List.of(clazz.getAnnotation(CsvDownloadModel.class).headerNames()));
 		return headerList;
 	}
@@ -151,7 +152,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 * @return
 	 */
 	protected List<String> getFooterList(Class<?> clazz) {
-		List<String> footerList = new ArrayList<String>();
+		List<String> footerList = new ArrayList<>();
 		footerList.addAll(List.of(clazz.getAnnotation(CsvDownloadModel.class).footerNames()));
 		return footerList;
 	}

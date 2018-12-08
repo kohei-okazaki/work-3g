@@ -20,11 +20,9 @@ public class UrlValidator implements ConstraintValidator<Url, String> {
 	 */
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
 		return value.matches(REGIX);
 	}
-
 }

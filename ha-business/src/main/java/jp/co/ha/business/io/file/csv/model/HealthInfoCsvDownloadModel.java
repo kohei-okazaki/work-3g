@@ -9,6 +9,7 @@ import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報CSVダウンロードモデル<br>
+ * CSV出力したい項目のみを持つ<br>
  *
  */
 @CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" }

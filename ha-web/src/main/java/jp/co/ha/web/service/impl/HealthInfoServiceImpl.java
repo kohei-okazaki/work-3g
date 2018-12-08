@@ -18,6 +18,7 @@ import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.web.form.HealthInfoForm;
@@ -60,7 +61,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	public boolean isFirstReg(String userId) throws BaseException {
 		// ユーザIDから健康情報のリストを取得
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
-		return healthInfoList.isEmpty();
+		return CollectionUtil.isEmpty(healthInfoList);
 	}
 
 	/**
@@ -91,8 +92,8 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	@Override
 	public boolean hasRecord(List<HealthInfo> entityList, Integer healthInfoId) {
 		return entityList.stream()
-				.map(entity -> entity.getHealthInfoId())
-				.anyMatch(entityHealthInfoId -> entityHealthInfoId.equals(healthInfoId));
+				.map(e -> e.getHealthInfoId())
+				.anyMatch(e -> e.equals(healthInfoId));
 	}
 
 	/**
@@ -100,7 +101,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	@Override
 	public List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo) {
-		List<HealthInfoCsvDownloadModel> modelList = new ArrayList<HealthInfoCsvDownloadModel>();
+		List<HealthInfoCsvDownloadModel> modelList = new ArrayList<>();
 		HealthInfoCsvDownloadModel model = new HealthInfoCsvDownloadModel();
 		BeanUtil.copy(healthInfo, model);
 		modelList.add(model);
@@ -114,7 +115,8 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	public HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException {
 		HealthInfoRegistRequest apiRequest = setUpApiRequest(form, userId);
 		healthInfoRegistService.checkRequest(apiRequest);
-		return healthInfoRegistService.execute(apiRequest);
+		HealthInfoRegistResponse apiResponse = healthInfoRegistService.execute(apiRequest);
+		return apiResponse;
 	}
 
 	/**

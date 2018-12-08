@@ -24,5 +24,4 @@ public class FlagValidator implements ConstraintValidator<Flag, String> {
 		}
 		return List.of(StringUtil.FALSE_FLAG, StringUtil.TRUE_FLAG).contains(value);
 	}
-
 }

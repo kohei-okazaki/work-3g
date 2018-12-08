@@ -19,6 +19,7 @@ import jp.co.ha.common.util.StringUtil;
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 
+	/** LOG */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
@@ -26,38 +27,38 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 	 *
 	 * @param conf
 	 *     CSV設定情報
-	 * @param printWriter
+	 * @param pw
 	 *     出力用PrintWriter
 	 */
-	public ReferenceCsvWriter(CsvConfig conf, PrintWriter printWriter) {
-		super(conf, printWriter);
+	public ReferenceCsvWriter(CsvConfig conf, PrintWriter pw) {
+		super(conf, pw);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected void writeData(StringJoiner recordJoiner, ReferenceCsvDownloadModel model) {
+	protected void writeData(StringJoiner record, ReferenceCsvDownloadModel model) {
 
 		LOG.infoRes(model);
 		// 1項目ごと区切る
-		StringJoiner joiner = new StringJoiner(StringUtil.COMMA);
+		StringJoiner body = new StringJoiner(StringUtil.COMMA);
 
 		// ユーザID
-		write(joiner, model.getUserId());
+		write(body, model.getUserId());
 		// 身長
-		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getHeight().toString());
+		write(body, conf.useMask() ? MaskExecutor.MASK : model.getHeight().toString());
 		// 体重
-		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getWeight().toString());
+		write(body, conf.useMask() ? MaskExecutor.MASK : model.getWeight().toString());
 		// BMI
-		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getBmi().toString());
+		write(body, conf.useMask() ? MaskExecutor.MASK : model.getBmi().toString());
 		// 標準体重
-		write(joiner, conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight().toString());
+		write(body, conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight().toString());
 		// 登録日時
-		write(joiner, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+		write(body, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 
 		// 1行書き込む
-		recordJoiner.add(joiner.toString());
+		record.add(body.toString());
 	}
 
 }

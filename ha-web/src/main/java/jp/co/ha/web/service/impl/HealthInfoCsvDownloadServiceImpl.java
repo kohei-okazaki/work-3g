@@ -30,5 +30,4 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService<Heal
 			writer.flush();
 		}
 	}
-
 }

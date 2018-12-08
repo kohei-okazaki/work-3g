@@ -14,6 +14,7 @@ import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
@@ -57,7 +58,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 			HealthInfo entity = healthInfoSearchService.findByHealthInfoId(Integer.valueOf(form.getHealthInfoId()));
 			if (BeanUtil.isNull(entity) || !entity.getUserId().equals(userId)) {
 				// selectした健康情報がログイン中のユーザIDと一致しない場合
-				resultList = new ArrayList<>();
+				resultList = CollectionUtil.getEmptyList(HealthInfo.class);
 			} else {
 				resultList = List.of(entity);
 			}

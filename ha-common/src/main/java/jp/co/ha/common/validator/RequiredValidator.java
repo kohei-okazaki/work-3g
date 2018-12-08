@@ -18,14 +18,11 @@ public class RequiredValidator implements ConstraintValidator<Required, Object> 
 	 */
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
-
 		if (BeanUtil.isNull(value)) {
 			return false;
 		} else {
 			// String文字列の場合、空文字が入ってくる為チェック
 			return !StringUtil.isEmpty(value.toString());
 		}
-
 	}
-
 }

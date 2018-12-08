@@ -33,5 +33,4 @@ public class PatternValidator implements ConstraintValidator<Pattern, String> {
 		}
 		return value.matches(this.regix.getPattern());
 	}
-
 }

@@ -35,6 +35,7 @@ import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -139,7 +140,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		// 検索情報を設定
 		model.addAttribute("form", form);
 		// 検索結果有無を設定
-		model.addAttribute("hasResult", !resultList.isEmpty());
+		model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
 		// ログイン中のユーザの全レコードを検索する
 		model.addAttribute("resultList", resultList);
 

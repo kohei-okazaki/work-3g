@@ -23,6 +23,7 @@ import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.web.form.HealthInfoFileForm;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
@@ -109,7 +110,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
 		sessionManageService.removeValue(request.getSession(), "modelList");
-		if (BeanUtil.isNull(modelList) || BeanUtil.isNull(userId)) {
+		if (CollectionUtil.isEmpty(modelList) || BeanUtil.isNull(userId)) {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		fileService.regist(modelList, userId);
