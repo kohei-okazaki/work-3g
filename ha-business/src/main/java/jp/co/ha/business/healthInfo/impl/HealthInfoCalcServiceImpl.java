@@ -55,8 +55,8 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 */
 	@Override
 	public BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit) {
-		BigDecimal multiplyResult = Calculator.calc(height, CalcMethod.MULTIPLY, height, 2, RoundingMode.HALF_UP);
-		BigDecimal result = Calculator.calc(weight, CalcMethod.DIVIDE, multiplyResult, 2, RoundingMode.HALF_UP);
+		BigDecimal multiplyResult = Calculator.calc(height, CalcMethod.MULTIPLY, height, digit, RoundingMode.HALF_UP);
+		BigDecimal result = Calculator.calc(weight, CalcMethod.DIVIDE, multiplyResult, digit, RoundingMode.HALF_UP);
 		return result;
 	}
 

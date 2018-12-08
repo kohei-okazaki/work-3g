@@ -99,9 +99,9 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	@ExceptionHandler(BaseException.class)
 	public Rs appExceptionHandle(BaseException e) {
 		Rs response = (Rs) new ErrorResponse(e);
-		if (LogLevel.WARN == e.getErrorCode().getLogLevel()) {
+		if (LogLevel.WARN.is(e.getErrorCode().getLogLevel())) {
 			LOG.warnRes(response, e);
-		} else if (LogLevel.ERROR == e.getErrorCode().getLogLevel()) {
+		} else if (LogLevel.ERROR.is(e.getErrorCode().getLogLevel())) {
 			LOG.errorRes(response, e);
 		}
 		return response;
