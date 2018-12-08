@@ -27,4 +27,8 @@ public enum LogLevel {
 		return this.value;
 	}
 
+	public boolean is(LogLevel logLevel) {
+		return this == logLevel;
+	}
+
 }
