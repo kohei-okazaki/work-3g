@@ -2,6 +2,8 @@ package jp.co.ha.common.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * CollectionのUtilクラス<br>
@@ -65,4 +67,16 @@ public class CollectionUtil {
 	public static <T> List<T> getEmptyList(Class<T> clazz) {
 		return new ArrayList<>();
 	}
+
+	/**
+	 * 指定した配列をリストに変換する<br>
+	 *
+	 * @param array
+	 *     配列
+	 * @return
+	 */
+	public static <T> List<T> toList(T[] array) {
+		return Stream.of(array).collect(Collectors.toList());
+	}
+
 }
