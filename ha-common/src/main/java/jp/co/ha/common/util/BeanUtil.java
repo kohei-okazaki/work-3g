@@ -11,8 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.util.CollectionUtils;
-
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.AccessorType;
@@ -23,6 +21,7 @@ import jp.co.ha.common.type.AccessorType;
  */
 public class BeanUtil {
 
+	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(BeanUtil.class);
 
 	/**
@@ -32,7 +31,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * dataのフィールドをtargetのフィールドにコピーする<br>
+	 * <code>src</code>のフィールドを<code>dest</code>のフィールドにコピーする<br>
 	 * コピー先のクラスと同じフィールド名の場合コピー元のフィールドに値を設定する<br>
 	 *
 	 * @param src
@@ -45,9 +44,9 @@ public class BeanUtil {
 	}
 
 	/**
-	 * dataのフィールドをtargetのフィールドにコピーする<br>
-	 * コピー先のクラスと同じフィールド名の場合コピー元のフィールドに値を設定する<br>
-	 * コピー時に無視リストの名前のフィールドの場合コピーを行わない。<br>
+	 * <code>src</code>のフィールドを<code>dest</code>のフィールドにコピーする<br>
+	 * コピー先のクラスと同じフィールド名の場合、コピー元のフィールドに値を設定する<br>
+	 * コピー時に無視リストの名前のフィールドの場合、コピーを行わない。<br>
 	 *
 	 * @param src
 	 *     コピー元
@@ -104,7 +103,7 @@ public class BeanUtil {
 	 * @return
 	 */
 	private static boolean ignore(List<String> ignoreList, String fieldName) {
-		return "serialVersionUID".equals(fieldName) || CollectionUtils.isEmpty(ignoreList);
+		return "serialVersionUID".equals(fieldName) || CollectionUtil.isEmpty(ignoreList);
 	}
 
 	/**
@@ -208,10 +207,12 @@ public class BeanUtil {
 		Method accessor = null;
 		try {
 			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
-			if (type == AccessorType.SETTER) {
+			if (AccessorType.SETTER == type) {
 				accessor = pd.getWriteMethod();
-			} else if (type == AccessorType.GETTER) {
+			} else if (AccessorType.GETTER == type) {
 				accessor = pd.getReadMethod();
+			} else {
+				LOG.error("AccessTypeの指定が不正です。accessType = " + type);
 			}
 		} catch (IntrospectionException e) {
 			LOG.warn("メソッドがみつかりません", e);

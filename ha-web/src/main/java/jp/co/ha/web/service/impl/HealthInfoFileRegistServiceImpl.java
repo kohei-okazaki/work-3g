@@ -69,10 +69,10 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			if (!userId.equals(model.getUserId())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\nユーザIDの項目が不正です。ユーザID：" + model.getUserId());
 			}
-			if (!RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD)) {
+			if (!RegixType.HALF_NUMBER_PERIOD.is(model.getHeight())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());
 			}
-			if (!RegixType.isPattern(model.getWeight(), RegixType.HALF_NUMBER_PERIOD)) {
+			if (!RegixType.HALF_NUMBER_PERIOD.is(model.getWeight())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n体重の項目が不正です。体重：" + model.getWeight());
 			}
 		}
