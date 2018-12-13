@@ -13,8 +13,9 @@ public interface AccountSettingService {
 	 * アカウント設定のメイン処理を行う<br>
 	 *
 	 * @param form
-	 *            アカウント設定画面フォーム
+	 *     アカウント設定画面フォーム
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	void execute(AccountSettingForm form) throws BaseException;
 

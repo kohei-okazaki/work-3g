@@ -68,6 +68,10 @@ public class EntityBuilder extends CommonBuilder {
 		return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
 
+	/**
+	 * 共通情報を設定する
+	 * @param source
+	 */
 	private void setCommonInfo(JavaSource source) {
 		source.setPackage(new jp.co.ha.tool.source.Package("jp.co.ha.business.db.entity"));
 		source.setClassType(ClassType.CLASS);
@@ -80,6 +84,15 @@ public class EntityBuilder extends CommonBuilder {
 		return row.getCell(CellPositionType.COLUMN_NAME).getValue();
 	}
 
+	/**
+	 * ＜<code>name</code>をキャメルケースに変換する<br>
+	 * (例)<br>
+	 * TEST_NAME -> testName<br>
+	 *
+	 * @param name
+	 *     テーブル名
+	 * @return
+	 */
 	private String toCamelCase(String name) {
 		String result = name.toLowerCase();
 		while (result.indexOf(StringUtil.UNDER_SCORE) != -1) {
@@ -91,9 +104,19 @@ public class EntityBuilder extends CommonBuilder {
 		return result;
 	}
 
+	/**
+	 * Javaファイル名に変換する<br>
+	 * (例)<br>
+	 * TEST_NAME -> TestName<br>
+	 *
+	 * @param fileName
+	 *     ファイル名
+	 * @return
+	 */
 	private String toJavaFileName(String fileName) {
 
 		String result = toCamelCase(fileName);
+		// 先頭の文字列を大文字に変換
 		Character startChar = result.charAt(0);
 		Character large = Character.toUpperCase(result.charAt(0));
 		return result.replaceFirst(startChar.toString(), large.toString());
@@ -115,7 +138,7 @@ public class EntityBuilder extends CommonBuilder {
 
 		result.append(buildImport(source.getImportList())).append(StringUtil.CRLF + StringUtil.CRLF);
 
-		result.append(buildClass(source) + " " + buildInterfaces(source.getImplInterfaceList()) + " {").append(StringUtil.CRLF + StringUtil.CRLF);
+		result.append(buildClass(source) + StringUtil.SPACE + buildInterfaces(source.getImplInterfaceList()) + " {").append(StringUtil.CRLF + StringUtil.CRLF);
 
 		result.append(buildFields(source.getFieldList())).append(StringUtil.CRLF + StringUtil.CRLF);
 
@@ -130,19 +153,33 @@ public class EntityBuilder extends CommonBuilder {
 		return source.getPackage().toString();
 	}
 
+	/**
+	 * import部分を組み立てる
+	 *
+	 * @param importList
+	 *     インポート文のリスト
+	 * @return
+	 */
 	private String buildImport(List<Import> importList) {
 
 		List<String> strImportList = new ArrayList<>();
 		importList.stream()
-					.filter(e -> (!strImportList.contains(e.toString())))
-					.map(e -> e.toString())
-					.forEach(e -> strImportList.add(e));
+				.filter(e -> (!strImportList.contains(e.toString())))
+				.map(e -> e.toString())
+				.forEach(e -> strImportList.add(e));
 
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		strImportList.stream().forEach(e -> body.add(e));
 		return body.toString();
 	}
 
+	/**
+	 * クラス名部分を組み立てる
+	 *
+	 * @param source
+	 *     生成するJavaファイルのリソース
+	 * @return
+	 */
 	private String buildClass(JavaSource source) {
 		String accessType = source.getAccessType().getValue();
 		String classType = source.getClassType().getValue();
@@ -151,19 +188,40 @@ public class EntityBuilder extends CommonBuilder {
 		return body.add(accessType).add(classType).add(className).toString();
 	}
 
+	/**
+	 * 指定したinterfaceのリストをクラスに継承させる
+	 *
+	 * @param interfaceList
+	 *     インターフェースリスト
+	 * @return
+	 */
 	private String buildInterfaces(List<Class<?>> interfaceList) {
 		String prefix = "implements ";
-		StringJoiner body = new StringJoiner(StringUtil.COMMA);
+		StringJoiner body = new StringJoiner(StringUtil.COMMA + StringUtil.SPACE);
 		interfaceList.stream().forEach(e -> body.add(e.getSimpleName()));
 		return prefix + body.toString();
 	}
 
+	/**
+	 * フィールドを組み立てる
+	 *
+	 * @param fieldList
+	 *     フィールドリスト
+	 * @return
+	 */
 	private String buildFields(List<Field> fieldList) {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		fieldList.stream().forEach(e -> body.add(e.toString()));
 		return body.toString();
 	}
 
+	/**
+	 * メソッドを組み立てる
+	 *
+	 * @param methodList
+	 *     メソッドリスト
+	 * @return
+	 */
 	private String buildMethods(List<Method> methodList) {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		methodList.stream().forEach(e -> body.add(e.toString()));

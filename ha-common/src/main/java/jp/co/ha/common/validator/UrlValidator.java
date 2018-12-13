@@ -13,18 +13,14 @@ import jp.co.ha.common.validator.annotation.Url;
  */
 public class UrlValidator implements ConstraintValidator<Url, String> {
 
-	private final String REGIX = RegixType.URL.getPattern();
-
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return value.matches(REGIX);
+		return RegixType.URL.is(value);
 	}
-
 }

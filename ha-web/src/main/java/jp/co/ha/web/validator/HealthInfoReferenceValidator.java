@@ -30,7 +30,7 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 	 * @param form
 	 *     結果検索フォーム
 	 * @param errors
-	 *     Errors
+	 *     エラークラス
 	 */
 	private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 

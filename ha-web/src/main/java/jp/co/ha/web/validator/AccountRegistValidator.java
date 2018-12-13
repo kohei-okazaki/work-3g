@@ -17,7 +17,6 @@ public class AccountRegistValidator extends BaseWebValidator<AccountRegistForm> 
 	@Override
 	public void validate(Object object, Errors errors) {
 
-
 	}
 
 }

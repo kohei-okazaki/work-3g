@@ -29,7 +29,7 @@ public class DdlBuilder extends CommonBuilder {
 			String ddlSuffix = ");";
 			body.add(ddlPrefix);
 			Table table = getTable(excel.getRowList(), tableName);
-			StringJoiner columnData = new StringJoiner("," + StringUtil.CRLF);
+			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + StringUtil.CRLF);
 			for (Column column : table.getColumnList()) {
 				columnData.add(column.getComment() + StringUtil.NEW_LINE + column.getName() + StringUtil.SPACE + column.getType());
 			}

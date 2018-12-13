@@ -83,7 +83,9 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 
 	/**
 	 * Excel設定情報を取得<br>
-	 * @param healthInfoFileSetting 健康情報設定情報
+	 *
+	 * @param healthInfoFileSetting
+	 *     健康情報設定情報
 	 * @return
 	 */
 	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {

@@ -67,7 +67,7 @@ public class LoginCheck {
 		if (BeanUtil.isNull(account)) {
 			result.addError();
 			result.setName("userId");
-			result.setName("validate.message.notExistAccount");
+			result.setErrorDetail("validate.message.notExistAccount");
 		}
 	}
 
@@ -85,7 +85,7 @@ public class LoginCheck {
 		if (!inputPassword.equals(dbPassword)) {
 			result.addError();
 			result.setName("userId");
-			result.setName("validate.message.invalidPassword");
+			result.setErrorDetail("validate.message.invalidPassword");
 		}
 	}
 
@@ -102,7 +102,7 @@ public class LoginCheck {
 		if (StringUtil.isTrue(account.getDeleteFlag())) {
 			result.addError();
 			result.setName("userId");
-			result.setName("validate.message.invalidPassword");
+			result.setErrorDetail("validate.message.invalidPassword");
 		}
 	}
 
@@ -119,7 +119,7 @@ public class LoginCheck {
 		if (DateUtil.isAfter(account.getPasswordExpire(), false)) {
 			result.addError();
 			result.setName("userId");
-			result.setName("validate.message.invalidPassword");
+			result.setErrorDetail("validate.message.invalidPassword");
 		}
 	}
 

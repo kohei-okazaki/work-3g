@@ -25,8 +25,8 @@ public class Package {
 	@Override
 	public String toString() {
 		String prefix = "package ";
-		String siffix = ";";
-		return prefix + this.value + siffix;
+		String suffix = ";";
+		return prefix + this.value + suffix;
 	}
 
 }

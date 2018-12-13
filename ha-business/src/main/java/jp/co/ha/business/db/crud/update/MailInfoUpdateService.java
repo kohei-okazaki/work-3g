@@ -9,5 +9,12 @@ import jp.co.ha.db.entity.MailInfo;
  */
 public interface MailInfoUpdateService {
 
+	/**
+	 * メール情報を更新する
+	 *
+	 * @param mailInfo
+	 *     メール情報
+	 * @throws BaseException
+	 */
 	void update(MailInfo mailInfo) throws BaseException;
 }

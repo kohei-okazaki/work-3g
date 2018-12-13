@@ -18,7 +18,7 @@ public class Logger {
 	}
 
 	public void debugRes(String prefix, Object bean) {
-		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
+		logger.debug(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
 	public void debug(String msg) {
@@ -42,7 +42,7 @@ public class Logger {
 	}
 
 	public void warnRes(String prefix, Object bean) {
-		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
+		logger.warn(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
 	public void warnRes(Object bean, Throwable t) {
@@ -62,7 +62,7 @@ public class Logger {
 	}
 
 	public void errorRes(String prefix, Object bean) {
-		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
+		logger.error(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
 	public void errorRes(Object bean, Throwable t) {

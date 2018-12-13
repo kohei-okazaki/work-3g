@@ -6,7 +6,9 @@ package jp.co.ha.common.type;
  */
 public enum DateFormatType {
 
+	/** YYYY/MM/DD */
 	YYYYMMDD("yyyy/MM/dd"),
+	/** YYYY/MM/DD HH:mm:ss */
 	YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss");
 
 	private String value;

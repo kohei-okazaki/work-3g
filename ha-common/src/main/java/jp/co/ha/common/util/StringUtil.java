@@ -1,8 +1,9 @@
 package jp.co.ha.common.util;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.UnExpectedException;
 
 /**
  * 文字列のUtilクラス<br>
@@ -58,7 +59,7 @@ public class StringUtil {
 	 * @return List<String>
 	 */
 	public static List<String> toStrList(String target, String delim) {
-		return isEmpty(target) ? null : Stream.of(target.split(delim)).collect(Collectors.toList());
+		return isEmpty(target) ? null : CollectionUtil.toList(target.split(delim));
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 指定されたflagがtrueかどうか判定する<br>
+	 * 指定された<code>flag</code>がtrueかどうか判定する<br>
 	 *
 	 * @param flag
 	 *     フラグ
@@ -98,7 +99,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 指定されたflagがfalseかどうか判定する<br>
+	 * 指定された<code>flag</code>がfalseかどうか判定する<br>
 	 *
 	 * @see StringUtil#isTrue(String)
 	 * @param flag
@@ -107,6 +108,50 @@ public class StringUtil {
 	 */
 	public static boolean isFalse(String flag) {
 		return !isTrue(flag);
+	}
+
+	/**
+	 * 指定した文字列を半角スペースでpaddingする<br>
+	 * <code>target</code>の長さが<code>count</code>以上の文字列の場合、そのまま返す<br>
+	 *
+	 * @param target
+	 *     対象文字列
+	 * @param count
+	 *     全文字列
+	 * @param paddingType
+	 *     Paddingタイプ(右詰/左詰)
+	 * @return
+	 * @throws UnExpectedException
+	 */
+	public static String padding(String target, int count, PaddingType paddingType) throws UnExpectedException {
+		if (count <= target.length()) {
+			// 指定した文字長がcount以上の場合
+			return target;
+		}
+		String body = target;
+		while (body.length() < count) {
+			if (PaddingType.LEFT == paddingType) {
+				// 左詰
+				body = body + StringUtil.SPACE;
+			} else if (PaddingType.RIGHT == paddingType) {
+				// 右詰
+				body = StringUtil.SPACE + body;
+			} else {
+				throw new UnExpectedException(ErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
+			}
+		}
+		return body;
+	}
+
+	/**
+	 * Padding指定の列挙
+	 *
+	 */
+	public static enum PaddingType {
+		/** 右詰 */
+		RIGHT,
+		/** 左詰 */
+		LEFT;
 	}
 
 }

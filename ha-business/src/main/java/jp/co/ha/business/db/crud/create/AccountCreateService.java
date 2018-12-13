@@ -9,5 +9,13 @@ import jp.co.ha.db.entity.Account;
  */
 public interface AccountCreateService {
 
+	/**
+	 * 指定したアカウント情報を登録する<br>
+	 *
+	 * @param entity
+	 *     アカウント情報
+	 * @throws BaseException
+	 *     基底例外
+	 */
 	void create(Account entity) throws BaseException;
 }

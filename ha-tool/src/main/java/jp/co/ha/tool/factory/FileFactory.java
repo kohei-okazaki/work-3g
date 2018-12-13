@@ -12,6 +12,7 @@ import jp.co.ha.tool.config.FileConfig;
 
 public class FileFactory {
 
+	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(FileFactory.class);
 
 	private FileFactory() {

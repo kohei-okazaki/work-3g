@@ -20,4 +20,5 @@ public class AppIOException extends BaseException {
 	public AppIOException(ErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
+
 }

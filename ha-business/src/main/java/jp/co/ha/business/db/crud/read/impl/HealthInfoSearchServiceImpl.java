@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.HealthInfoExample.Criteria;
@@ -58,10 +58,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			// ユーザID
 			criteria.andUserIdEqualTo(userId);
 			List<HealthInfo> list = mapper.selectByExample(example);
-			if (BeanUtil.isNull(list) || list.isEmpty()) {
-				return null;
-			}
-			return list.get(list.size() - 1);
+			return CollectionUtil.getLast(list);
 		}
 	}
 

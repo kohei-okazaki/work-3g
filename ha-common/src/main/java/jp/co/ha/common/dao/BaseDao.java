@@ -33,9 +33,9 @@ public abstract class BaseDao {
 	protected void connect() throws DataBaseException {
 
 		try {
-			JdbcConfig prop = JdbcConfig.getInstance();
-			Class.forName(prop.getDriverClassName()).getDeclaredConstructor().newInstance();
-			this.con = DriverManager.getConnection(prop.getUrl(), prop.getUsername(), prop.getPassword());
+			JdbcConfig conf = JdbcConfig.getInstance();
+			Class.forName(conf.getDriverClassName()).getDeclaredConstructor().newInstance();
+			this.con = DriverManager.getConnection(conf.getUrl(), conf.getUsername(), conf.getPassword());
 			LOG.debug("DBに接続");
 			if (BeanUtil.notNull(this.con)) {
 				this.stm = this.con.createStatement();

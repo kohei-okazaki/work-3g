@@ -12,5 +12,4 @@ public class BcryptPasswordEncoder implements PasswordEncoder {
 		return null;
 	}
 
-
 }

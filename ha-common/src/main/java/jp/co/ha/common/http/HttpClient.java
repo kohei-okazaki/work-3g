@@ -82,11 +82,11 @@ public class HttpClient {
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), encoding))) {
 			if (HttpStatus.OK == this.httpStatus) {
 				String line = null;
-				StringBuffer result = new StringBuffer();
+				StringBuilder sb = new StringBuilder();
 				while (BeanUtil.notNull(line = br.readLine())) {
-					result.append(line);
+					sb.append(line);
 				}
-				this.responseBody = result.toString();
+				this.responseBody = sb.toString();
 			} else {
 				LOG.warn("HTTP ステータス = " + this.httpStatus + "(" + this.httpStatus.getValue() + ")");
 			}

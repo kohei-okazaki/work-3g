@@ -1,7 +1,5 @@
 package jp.co.ha.common.type;
 
-import java.util.regex.Pattern;
-
 /**
  * 正規表現列挙<br>
  *
@@ -42,17 +40,15 @@ public enum RegixType {
 	}
 
 	/**
-	 * 指定した文字列(target)が指定した正規表現(patter)かどうか判定する<br>
+	 * 指定した文字列<code>target</code>が自身の正規表現と一致するかどうか判定する<br>
 	 * 正しい場合true, 異なる場合falseを返す<br>
 	 *
 	 * @param target
 	 *     対象文字列
-	 * @param pattern
-	 *     正規表現
 	 * @return
 	 */
-	public static boolean isPattern(String target, RegixType pattern) {
-		return Pattern.compile(pattern.getPattern()).matcher(target).find();
+	public boolean is(String target) {
+		return target.matches(this.getPattern());
 	}
 
 }

@@ -193,7 +193,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	 * @return
 	 */
 	protected List<String> getHeaderList(Class<?> clazz) {
-		List<String> headerList = new ArrayList<String>();
+		List<String> headerList = new ArrayList<>();
 		headerList.addAll(List.of(clazz.getAnnotation(ExcelDownloadModel.class).headerNames()));
 		return headerList;
 	}

@@ -16,6 +16,7 @@ public interface LoginService {
 	 *     ログインフォーム
 	 * @return 判定結果
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	boolean invalidPassword(LoginForm loginForm) throws BaseException;
 
@@ -27,6 +28,7 @@ public interface LoginService {
 	 *     ログインフォーム
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	boolean noExistAccount(LoginForm loginForm) throws BaseException;
 
@@ -38,6 +40,7 @@ public interface LoginService {
 	 *     ログインフォーム
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	boolean invalidAccount(LoginForm loginForm) throws BaseException;
 

@@ -13,7 +13,7 @@ public class LoggerFactory {
 	}
 
 	/**
-	 * AppLoggerを返す<br>
+	 * <code>Logger</code>を返す<br>
 	 *
 	 * @param clazz
 	 *     クラス型

@@ -38,7 +38,5 @@ public class MaxValidator implements ConstraintValidator<Max, String> {
 		} else {
 			return value.length() < this.size;
 		}
-
 	}
-
 }

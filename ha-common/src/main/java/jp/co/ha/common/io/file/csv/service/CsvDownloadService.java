@@ -3,7 +3,7 @@ package jp.co.ha.common.io.file.csv.service;
 import java.io.PrintWriter;
 import java.util.List;
 
-import jp.co.ha.common.exception.AppIOException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 
@@ -24,9 +24,9 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 *     CSV設定情報
 	 * @param modelList
 	 *     モデルリスト
-	 * @throws AppIOException
+	 * @throws BaseException
 	 *     例外
 	 */
-	void execute(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws AppIOException;
+	void execute(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws BaseException;
 
 }

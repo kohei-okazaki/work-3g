@@ -1,4 +1,4 @@
-package jp.co.ha.business.aop;
+package jp.co.ha.business.db;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

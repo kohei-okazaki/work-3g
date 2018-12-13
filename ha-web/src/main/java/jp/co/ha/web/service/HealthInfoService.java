@@ -24,7 +24,7 @@ public interface HealthInfoService {
 	 * @param form
 	 *     健康情報入力フォーム
 	 * @param lastHealthInfo
-	 *     健康情報
+	 *     最後に登録した健康情報
 	 */
 	void addModel(Model model, HealthInfoForm form, HealthInfo lastHealthInfo);
 
@@ -36,6 +36,7 @@ public interface HealthInfoService {
 	 *     ユーザID
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	boolean isFirstReg(String userId) throws BaseException;
 
@@ -61,12 +62,14 @@ public interface HealthInfoService {
 
 	/**
 	 * 健康情報を登録する<br>
+	 *
 	 * @param form
 	 *     健康情報入力フォーム
 	 * @param userId
 	 *     ユーザID
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException;
 

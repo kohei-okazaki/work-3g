@@ -25,6 +25,8 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 	String buildErrorMessage(Exception e);
 
 	/**
+	 * 指定したエラーメッセージのログを出力する<br>
+	 *
 	 * @param errorMessage
 	 *     エラーメッセージ
 	 * @param e
@@ -34,9 +36,11 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 
 		if (e instanceof BaseException) {
 			BaseException be = (BaseException) e;
-			if (be.getErrorCode().getLogLevel() == LogLevel.ERROR) {
+			if (LogLevel.ERROR.is(be.getErrorCode().getLogLevel())) {
+				// ERRORの場合
 				LOG.error(errorMessage, be);
-			} else if (be.getErrorCode().getLogLevel() == LogLevel.WARN) {
+			} else if (LogLevel.WARN.is(be.getErrorCode().getLogLevel())) {
+				// WARNの場合
 				LOG.warn(errorMessage, be);
 			}
 		} else {

@@ -22,8 +22,10 @@ public interface HealthInfoReferenceService {
 	 *     ユーザID
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
-	List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId) throws BaseException;
+	List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
+			throws BaseException;
 
 	/**
 	 * 結果照会CSVモデルリストに変換する

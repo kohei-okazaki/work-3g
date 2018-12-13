@@ -43,10 +43,11 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 *     ユーザID
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		Account account = accountSearchService.findByUserId(userId);
-		List<HealthInfoRegistRequest> requestList = new ArrayList<HealthInfoRegistRequest>();
+		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
 		for (HealthInfoCsvUploadModel csvModel : modelList) {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
 			BeanUtil.copy(csvModel, request);
@@ -63,16 +64,16 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws HealthInfoException {
+	public void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		for (int i = 0; i < modelList.size(); i++) {
 			HealthInfoCsvUploadModel model = modelList.get(i);
 			if (!userId.equals(model.getUserId())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\nユーザIDの項目が不正です。ユーザID：" + model.getUserId());
 			}
-			if (!RegixType.isPattern(model.getHeight(), RegixType.HALF_NUMBER_PERIOD)) {
+			if (!RegixType.HALF_NUMBER_PERIOD.is(model.getHeight())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());
 			}
-			if (!RegixType.isPattern(model.getWeight(), RegixType.HALF_NUMBER_PERIOD)) {
+			if (!RegixType.HALF_NUMBER_PERIOD.is(model.getWeight())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n体重の項目が不正です。体重：" + model.getWeight());
 			}
 		}
@@ -83,8 +84,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 */
 	@Override
 	public void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
-		List<HealthInfoRegistRequest> reqList = toRequestList(modelList, userId);
-		for (HealthInfoRegistRequest apiRequest : reqList) {
+		for (HealthInfoRegistRequest apiRequest : toRequestList(modelList, userId)) {
 			healthInfoRegistService.checkRequest(apiRequest);
 			healthInfoRegistService.execute(apiRequest);
 		}
