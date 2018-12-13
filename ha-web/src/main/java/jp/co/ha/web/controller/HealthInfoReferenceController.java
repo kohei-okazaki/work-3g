@@ -180,7 +180,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @param response
 	 *     HttpServletResponse
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	@GetMapping(value = "/csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
@@ -189,7 +189,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		HttpSession session = request.getSession();
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
 		String userId = sessionService.getValue(session, "userId", String.class);
-		if (BeanUtil.isNull(resultList) || BeanUtil.isNull(userId)) {
+		if (CollectionUtil.isEmpty(resultList) || BeanUtil.isNull(userId)) {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 

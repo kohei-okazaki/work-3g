@@ -42,7 +42,6 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	/** アカウント設定サービス */
 	@Autowired
 	private AccountSettingService accountSettingService;
-
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
@@ -69,6 +68,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 *     HttpServletRequest
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	@ModelAttribute
 	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseException {

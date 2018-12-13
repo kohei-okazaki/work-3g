@@ -17,13 +17,17 @@ public interface AccountRegistService {
 	 *     アカウント登録画面フォーム
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	boolean invalidUserId(AccountRegistForm form) throws BaseException;
 
 	/**
 	 * 登録処理を行う<br>
-	 * @param form アカウント登録画面フォーム
+	 *
+	 * @param form
+	 *     アカウント登録画面フォーム
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	void regist(AccountRegistForm form) throws BaseException;
 

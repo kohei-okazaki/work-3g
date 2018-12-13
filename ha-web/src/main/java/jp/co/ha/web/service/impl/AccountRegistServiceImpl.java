@@ -74,6 +74,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 *     アカウント登録画面フォーム
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	private Account toAccount(AccountRegistForm form) throws BaseException {
 

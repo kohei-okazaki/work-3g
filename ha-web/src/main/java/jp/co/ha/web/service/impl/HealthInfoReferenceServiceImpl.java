@@ -41,6 +41,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 *     ユーザID
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) throws BaseException {
 
@@ -68,7 +69,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	}
 
 	/**
-	 * 指定した文字列型のyyyy-MM-ddをDate型(yyyy/MM/dd)で返す<br>
+	 * 指定した文字列型のyyyy-MM-ddをDate型で返す<br>
 	 *
 	 * @param date
 	 *     日付

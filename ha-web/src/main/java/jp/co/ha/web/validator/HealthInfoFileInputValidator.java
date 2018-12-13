@@ -29,6 +29,7 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 	 * @param form
 	 *     健康情報ファイル入力画面フォーム
 	 * @param errors
+	 *     エラークラス
 	 */
 	private void checkRequire(HealthInfoFileForm form, Errors errors) {
 		if (BeanUtil.isNull(form.getMultipartFile())) {

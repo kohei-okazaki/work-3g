@@ -17,13 +17,13 @@ public interface BaseView {
 	String getName();
 
 	/**
-	 * 指定したEnumクラスの指定した値と一致するEnumを返す<br>
+	 * 指定したEnumと指定した値が一致する列挙を返す<br>
 	 * 一致するenumがない場合nullを返す<br>
 	 *
 	 * @param viewClass
-	 *     BaseViewを継承したViewのEnum
-	 * @param value
-	 *     検査したい値
+	 *     BaseViewを継承したViewの列挙
+	 * @param url
+	 *     検査したいURL
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")

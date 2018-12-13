@@ -60,6 +60,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 *     HttpServletRequest
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	@ModelAttribute
 	public HealthInfoFileSettingForm setUpForm(HttpServletRequest request) throws BaseException {

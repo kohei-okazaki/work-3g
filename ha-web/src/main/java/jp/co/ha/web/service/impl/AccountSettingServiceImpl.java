@@ -77,6 +77,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * @param mainlInfo
 	 *     メール情報
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	private void update(Account account, MailInfo mailInfo) throws BaseException {
 

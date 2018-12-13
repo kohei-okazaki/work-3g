@@ -72,6 +72,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * @param userId
 	 *     ユーザID
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	private HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseException {
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
@@ -134,8 +135,11 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 
 	/**
 	 * 体重差を返す<br>
-	 * @param form 健康情報入力フォーム
-	 * @param healthInfo 健康情報
+	 *
+	 * @param form
+	 *     健康情報入力フォーム
+	 * @param healthInfo
+	 *     健康情報
 	 * @return
 	 */
 	private BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo healthInfo) {

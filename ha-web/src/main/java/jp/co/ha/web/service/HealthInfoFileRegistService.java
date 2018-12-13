@@ -2,7 +2,6 @@ package jp.co.ha.web.service;
 
 import java.util.List;
 
-import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
 
@@ -20,8 +19,8 @@ public interface HealthInfoFileRegistService {
 	 *
 	 * @param userId
 	 *     ユーザID
-	 * @throws HealthInfoException
-	 *     健康情報例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException;
 
@@ -33,6 +32,7 @@ public interface HealthInfoFileRegistService {
 	 * @param userId
 	 *     ユーザID
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException;
 

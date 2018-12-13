@@ -49,7 +49,6 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	 *
 	 * @param isFirstReg
 	 *     初回登録かどうか
-	 *
 	 * @param form
 	 *     健康情報ファイル設定フォーム
 	 * @return

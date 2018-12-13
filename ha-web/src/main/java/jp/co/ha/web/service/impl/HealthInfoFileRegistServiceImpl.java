@@ -43,6 +43,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 *     ユーザID
 	 * @return
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		Account account = accountSearchService.findByUserId(userId);
