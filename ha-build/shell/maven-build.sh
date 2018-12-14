@@ -57,22 +57,22 @@ mvn package
 mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=jp.co.ha.business -DartifactId=ha-business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 cd ${checkDbDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
 cd ${checkBusinessDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
 cd ${checkApiDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
 cd ${checkWebDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
