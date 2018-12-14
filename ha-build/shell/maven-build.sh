@@ -1,4 +1,9 @@
 #!/bin/sh
+
+########################################
+# mavenビルドを行うshell
+########################################
+
 # 基底ディレクトリ
 baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
 commonDir=${baseDir}"/ha-common"
@@ -30,50 +35,50 @@ echo "-------------------"
 
 JAR_VERSION="1.0"
 
-####################
+########################################
 # common jarを作成
-####################
+########################################
 cd ${commonDir}
 mvn package
 mvn install:install-file -Dfile=target/ha-common-${JAR_VERSION}.jar -DgroupId=jp.co.ha.common -DartifactId=ha-common -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
-####################
+########################################
 # db jarを作成
-####################
+########################################
 cd ${dbDir}
 mvn package
 mvn install:install-file -Dfile=target/ha-db-${JAR_VERSION}.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
-####################
+########################################
 # business jarを作成
-####################
+########################################
 cd ${businessDir}
 mvn package
 mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=jp.co.ha.business -DartifactId=ha-business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 cd ${checkDbDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
 cd ${checkBusinessDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
 cd ${checkApiDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
 cd ${checkWebDir}
-if [ ! -e "lib" ]; then
+if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
-####################
+########################################
 # deploy common
-####################
+########################################
 cd ${commonTargetDir}
 cp *.jar ${dbLibDir}
 if [ $? != "0" ] ; then
@@ -92,9 +97,9 @@ if [ $? != "0" ] ; then
   echo "コピーに失敗しました. to : "${webLibDir}
 fi
 
-####################
+########################################
 # deploy db
-####################
+########################################
 cd ${dbTargetDir}
 cp *.jar ${businessLibDir}
 if [ $? != "0" ] ; then
@@ -109,9 +114,9 @@ if [ $? != "0" ] ; then
   echo "コピーに失敗しました. to : "${webLibDir}
 fi
 
-####################
+########################################
 # deploy business
-####################
+########################################
 cd ${businessTargetDir}
 cp *.jar ${apiLibDir}
 if [ $? != "0" ] ; then
