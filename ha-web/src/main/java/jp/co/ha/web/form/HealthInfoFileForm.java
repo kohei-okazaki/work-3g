@@ -18,6 +18,7 @@ public class HealthInfoFileForm implements BaseForm {
 	/** シリアルバージョンUID */
 	@Ignore
 	private static final long serialVersionUID = 1L;
+
 	/** アップロードファイル */
 	@Ignore
 	@Required(message = "アップロードファイルが未入力です")
