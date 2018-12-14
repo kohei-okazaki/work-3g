@@ -16,7 +16,6 @@ public interface HealthInfoFileRegistService {
 	 *
 	 * @param modelList
 	 *     健康情報CSVアップロードモデルリスト
-	 *
 	 * @param userId
 	 *     ユーザID
 	 * @throws BaseException

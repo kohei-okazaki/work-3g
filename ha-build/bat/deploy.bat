@@ -1,4 +1,5 @@
 @echo off
+
 rem ------------------------------------------------------------------------
 rem jarを配置するバッチファイル
 rem ------------------------------------------------------------------------
@@ -30,22 +31,22 @@ echo START check lib dir
 echo ------------------------------------------------------------------------
 rem dbのlibディレクトリ 存在確認
 echo %dbsLibDir% check
-call makeDir.bat %befDbDir% "lib"
+call makeDir.bat %befDbDir% lib
 
 
 rem businessのlibディレクトリ 存在確認
 echo %businessLibDir% check
-call makeDir.bat %befBusinessDir% "lib"
+call makeDir.bat %befBusinessDir% lib
 
 
 rem apiのlibディレクトリ 存在確認
 echo %apiLibDir% check
-call makeDir.bat %befApiDir% "lib"
+call makeDir.bat %befApiDir% lib
 
 
 rem webのlibディレクトリ 存在確認
 echo %webLibDir% check
-call makeDir.bat %befWebDir% "lib"
+call makeDir.bat %befWebDir% lib
 
 echo ------------------------------------------------------------------------
 echo END check lib dir
