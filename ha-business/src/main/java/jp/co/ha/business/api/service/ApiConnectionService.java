@@ -1,4 +1,4 @@
-package jp.co.ha.business.aop;
+package jp.co.ha.business.api.service;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ import jp.co.ha.common.log.LoggerFactory;
  *
  */
 @Aspect
-public class ApiCommonExecutor {
+public class ApiConnectionService {
 
 	/** ロガー */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
