@@ -30,7 +30,7 @@ echo ------------------------------------------------------------------------
 echo START check lib dir
 echo ------------------------------------------------------------------------
 rem dbのlibディレクトリ 存在確認
-echo %dbsLibDir% check
+echo %dbLibDir% check
 call makeDir.bat %befDbDir% lib
 
 
