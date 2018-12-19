@@ -20,7 +20,7 @@ public interface PasswordEncoder {
 	 *     パスワード
 	 * @param salt
 	 *     ソルト
-	 * @return
+	 * @return パスワード
 	 * @throws AlgorithmException
 	 *     アルゴリズム例外
 	 */

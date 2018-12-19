@@ -55,7 +55,7 @@ public class LogMessageFactory {
 	 *
 	 * @param field
 	 *     フィールド名
-	 * @return
+	 * @return パラメータ名
 	 */
 	private static String getLogParamName(Field field) {
 		LogParam annotation = field.getAnnotation(LogParam.class);
@@ -68,7 +68,7 @@ public class LogMessageFactory {
 	 *
 	 * @param field
 	 *     フィールド名
-	 * @return
+	 * @return 判定結果
 	 */
 	private static boolean isIgnore(Field field) {
 		return BeanUtil.notNull(field.getAnnotation(Ignore.class));
@@ -81,7 +81,7 @@ public class LogMessageFactory {
 	 *     Bean
 	 * @param fieldName
 	 *     フィールド名
-	 * @return
+	 * @return value
 	 */
 	private static Object getValue(Object bean, String fieldName) {
 		Object value = null;
@@ -104,7 +104,7 @@ public class LogMessageFactory {
 	 *
 	 * @param value
 	 *     値
-	 * @return
+	 * @return 編集後の値
 	 */
 	private static String editValue(Object value) {
 		String strValue;

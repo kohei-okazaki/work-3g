@@ -23,7 +23,7 @@ public class CollectionUtil {
 	 *
 	 * @param list
 	 *     対象のリスト
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isEmpty(List<?> list) {
 		return BeanUtil.isNull(list) || list.isEmpty();
@@ -34,7 +34,7 @@ public class CollectionUtil {
 	 *
 	 * @param list
 	 *     対象のリスト
-	 * @return
+	 * @return リストの最初の要素
 	 */
 	public static <T> T getFirst(List<T> list) {
 		if (isEmpty(list)) {
@@ -48,7 +48,7 @@ public class CollectionUtil {
 	 *
 	 * @param list
 	 *     対象のリスト
-	 * @return
+	 * @return リストの最後の要素
 	 */
 	public static <T> T getLast(List<T> list) {
 		if (isEmpty(list)) {
@@ -62,7 +62,7 @@ public class CollectionUtil {
 	 *
 	 * @param clazz
 	 *     リストの型
-	 * @return
+	 * @return 空のリスト
 	 */
 	public static <T> List<T> getEmptyList(Class<T> clazz) {
 		return new ArrayList<>();
@@ -73,7 +73,7 @@ public class CollectionUtil {
 	 *
 	 * @param array
 	 *     配列
-	 * @return
+	 * @return リスト
 	 */
 	public static <T> List<T> toList(T[] array) {
 		return Stream.of(array).collect(Collectors.toList());

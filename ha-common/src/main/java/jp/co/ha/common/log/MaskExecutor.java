@@ -20,7 +20,7 @@ public class MaskExecutor {
 	 *
 	 * @param field
 	 *     フィールド名
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isMask(Field field) {
 		return BeanUtil.notNull(field.getAnnotation(Mask.class));

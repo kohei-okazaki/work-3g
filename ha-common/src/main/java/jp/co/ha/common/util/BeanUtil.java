@@ -100,7 +100,7 @@ public class BeanUtil {
 	 *     無視リスト
 	 * @param fieldName
 	 *     フィールド名
-	 * @return
+	 * @return 判定結果
 	 */
 	private static boolean ignore(List<String> ignoreList, String fieldName) {
 		return "serialVersionUID".equals(fieldName) || CollectionUtil.isEmpty(ignoreList);
@@ -113,7 +113,7 @@ public class BeanUtil {
 	 *     Field コピー元のフィールドクラス
 	 * @param targetField
 	 *     Field コピー先のフィールドクラス
-	 * @return
+	 * @return 判定結果
 	 */
 	private static boolean isCopyTarget(Field dataField, Field targetField) {
 		String sourceFieldName = dataField.getName();
@@ -153,7 +153,7 @@ public class BeanUtil {
 	 *
 	 * @param clazz
 	 *     対象クラス
-	 * @return
+	 * @return クラス型
 	 */
 	public static Class<?> getParameterType(Class<?> clazz) {
 		return getParameterType(clazz, 0);
@@ -166,7 +166,7 @@ public class BeanUtil {
 	 *     対象クラス
 	 * @param position
 	 *     パラメータ引数の位置
-	 * @return
+	 * @return クラス型
 	 */
 	public static Class<?> getParameterType(Class<?> clazz, int position) {
 		ParameterizedType paramType = (ParameterizedType) clazz.getGenericSuperclass();
@@ -178,10 +178,10 @@ public class BeanUtil {
 	 *
 	 * @param clazz
 	 *     クラス型
-	 * @return
+	 * @return フィールドのリスト
 	 */
 	public static List<Field> getFieldList(Class<?> clazz) {
-		List<Field> fieldList = new ArrayList<Field>();
+		List<Field> fieldList = new ArrayList<>();
 		Class<?> tmpClass = clazz;
 		while (BeanUtil.notNull(tmpClass)) {
 			fieldList.addAll(List.of(tmpClass.getDeclaredFields()));
@@ -201,7 +201,7 @@ public class BeanUtil {
 	 *     クラス
 	 * @param type
 	 *     SETTER/GETTER
-	 * @return
+	 * @return アクセサメソッド
 	 */
 	public static Method getAccessor(String fieldName, Class<?> clazz, AccessorType type) {
 		Method accessor = null;

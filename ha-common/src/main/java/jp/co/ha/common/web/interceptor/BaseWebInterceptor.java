@@ -13,7 +13,7 @@ public abstract class BaseWebInterceptor implements BaseInterceptor {
 	 * javascriptなどの静的リソースはtrueを返す<br>
 	 *
 	 * @param handler
-	 * @return
+	 * @return 判定結果
 	 */
 	protected boolean isStaticResource(Object handler) {
 		return handler instanceof ResourceHttpRequestHandler;

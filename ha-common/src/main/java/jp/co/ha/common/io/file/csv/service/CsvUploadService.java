@@ -40,9 +40,9 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 *
 	 * @param is
 	 *     InputStream
-	 * @return
+	 * @return 文字列リスト
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	default public List<String> toList(InputStream is) throws BaseException {
 

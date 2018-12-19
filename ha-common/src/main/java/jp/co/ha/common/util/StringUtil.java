@@ -92,7 +92,7 @@ public class StringUtil {
 	 *
 	 * @param flag
 	 *     フラグ
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isTrue(String flag) {
 		return TRUE_FLAG.equals(flag);
@@ -104,7 +104,7 @@ public class StringUtil {
 	 * @see StringUtil#isTrue(String)
 	 * @param flag
 	 *     フラグ
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isFalse(String flag) {
 		return !isTrue(flag);
@@ -120,8 +120,8 @@ public class StringUtil {
 	 *     全文字列
 	 * @param paddingType
 	 *     Paddingタイプ(右詰/左詰)
-	 * @return
-	 * @throws UnExpectedException
+	 * @return Padding後の文字列
+	 * @throws UnExpectedException PaddingTypeの指定が不正の場合
 	 */
 	public static String padding(String target, int count, PaddingType paddingType) throws UnExpectedException {
 		if (count <= target.length()) {

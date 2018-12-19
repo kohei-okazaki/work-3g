@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.DateFormatType;
@@ -38,9 +37,7 @@ public class DateUtil {
 	 *
 	 * @param target
 	 *     対象日付
-	 * @return
-	 * @throws BaseException
-	 *     アプリ例外
+	 * @return 日付
 	 */
 	public static Date toDate(String target) {
 		return DateUtil.toDate(target, DateFormatType.YYYYMMDD_HHMMSS);
@@ -53,9 +50,7 @@ public class DateUtil {
 	 *     対象日付
 	 * @param format
 	 *     フォーマット
-	 * @return
-	 * @throws BaseException
-	 *     アプリ例外
+	 * @return 日付
 	 */
 	public static Date toDate(String target, DateFormatType format) {
 
@@ -77,9 +72,9 @@ public class DateUtil {
 	 *
 	 * @param targetDate
 	 *     元の日付
-	 * @param add
+	 * @param addDay
 	 *     加算する日数
-	 * @return
+	 * @return 加算した日付
 	 */
 	public static Date addDate(Date targetDate, int addDay) {
 		Calendar calendar = Calendar.getInstance();
@@ -95,7 +90,7 @@ public class DateUtil {
 	 *     元の日付
 	 * @param addMonth
 	 *     加算する月数
-	 * @return
+	 * @return 加算した日付
 	 */
 	public static Date addMonth(Date targetDate, int addMonth) {
 		Calendar calendar = Calendar.getInstance();
@@ -111,7 +106,7 @@ public class DateUtil {
 	 *     元の日付
 	 * @param addYear
 	 *     加算する年数
-	 * @return
+	 * @return 加算した日付
 	 */
 	public static Date addYear(Date targetDate, int addYear) {
 		Calendar calendar = Calendar.getInstance();
@@ -127,7 +122,7 @@ public class DateUtil {
 	 *     対象日付
 	 * @param format
 	 *     Dateフォーマット
-	 * @return
+	 * @return 文字列型の日付
 	 */
 	public static String toString(Date targetDate, DateFormatType format) {
 
@@ -144,9 +139,7 @@ public class DateUtil {
 	 *
 	 * @param targetDate
 	 *     対象日付
-	 * @return
-	 * @throws BaseException
-	 *     アプリ例外
+	 * @return 日付
 	 */
 	public static Date toStartDate(Date targetDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatType.YYYYMMDD.getValue() + " 00:00:00");
@@ -156,12 +149,13 @@ public class DateUtil {
 
 	/**
 	 * 同じ日付かどうか判定する<br>
+	 * 同じ日付の場合true, それ以外の場合false<br>
 	 *
 	 * @param target1
 	 *     対象日
 	 * @param target2
 	 *     対象日
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isSameDate(Date target1, Date target2) {
 		return target1.compareTo(target2) == 0;
@@ -176,7 +170,7 @@ public class DateUtil {
 	 *     比較対象日
 	 * @param endDate
 	 *     終了日
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isBetWeenDate(Date startDate, Date target, Date endDate) {
 		return startDate.before(target) && endDate.after(target);
@@ -190,7 +184,7 @@ public class DateUtil {
 	 *     指定日
 	 * @param isEqual
 	 *     true:指定日を含む
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isAfter(Date target, boolean isEqual) {
 		return isAfter(target, getSysDate(), isEqual);
@@ -206,7 +200,7 @@ public class DateUtil {
 	 *     比較対象日付
 	 * @param isEqual
 	 *     true:指定日を含む
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isAfter(Date target, Date compareDate, boolean isEqual) {
 		if (isEqual) {
@@ -223,7 +217,7 @@ public class DateUtil {
 	 *     指定日
 	 * @param isEqual
 	 *     true:指定日を含む
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isBefore(Date target, boolean isEqual) {
 		return isBefore(target, getSysDate(), isEqual);
@@ -239,7 +233,7 @@ public class DateUtil {
 	 *     比較対象日付
 	 * @param isEqual
 	 *     true:指定日を含む
-	 * @return
+	 * @return 判定結果
 	 */
 	public static boolean isBefore(Date target, Date compareDate, boolean isEqual) {
 		if (isEqual) {

@@ -18,10 +18,10 @@ public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 	/**
 	 * 継承先でそれぞれチェックを実装<br>
 	 *
-	 * @param Rq
+	 * @param request
 	 *     Request実装クラス
 	 * @throws BaseException
-	 *     例外クラス
+	 *     基底例外
 	 */
 	void checkRequest(Rq request) throws BaseException;
 
@@ -29,11 +29,11 @@ public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 	 * メイン処理<br>
 	 * リクエスト型を処理し、レスポンス型で返す<br>
 	 *
-	 * @param Rq
+	 * @param request
 	 *     Request実装クラス
 	 * @return Rs Response実装クラス
 	 * @throws BaseException
-	 *     例外クラス
+	 *     基底例外
 	 */
 	Rs execute(Rq request) throws BaseException;
 

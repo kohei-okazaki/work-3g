@@ -38,11 +38,11 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	/**
 	 * POST通信の処理を行う<br>
 	 *
-	 * @param apiRequest
+	 * @param request
 	 *     Rq
-	 * @return
+	 * @return response
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	@PostMapping
 	public Rs doPost(@RequestBody Rq request) throws BaseException {
@@ -59,7 +59,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	 *     リクエストクラス
 	 * @return response レスポンスクラス
 	 * @throws BaseException
-	 *     例外クラス
+	 *     基底例外
 	 */
 	protected abstract Rs execute(Rq request) throws BaseException;
 
@@ -68,7 +68,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	 *
 	 * @param e
 	 *     JSON系のエラー
-	 * @return
+	 * @return エラーレスポンス
 	 */
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(JsonProcessingException.class)
@@ -93,7 +93,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	 *
 	 * @param e
 	 *     アプリエラー
-	 * @return
+	 * @return エラーレスポンス
 	 */
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(BaseException.class)

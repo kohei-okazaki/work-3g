@@ -58,7 +58,7 @@ public abstract class BaseDao {
 	/**
 	 * 次の要素が存在するか返す<br>
 	 *
-	 * @return
+	 * @return　判定結果
 	 * @throws DataBaseException
 	 *     SQL実行時に出る例外
 	 */
@@ -77,6 +77,7 @@ public abstract class BaseDao {
 	 *     実行するSQL
 	 * @param type
 	 *     SQL文のタイプ
+	 * @return 実行結果
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */
