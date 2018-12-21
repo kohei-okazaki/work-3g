@@ -1,5 +1,6 @@
 package jp.co.ha.tool.build;
 
+import java.io.File;
 import java.util.List;
 import java.util.Properties;
 
@@ -60,7 +61,7 @@ public abstract class BaseBuilder {
 	 */
 	protected ExcelConfig getExcelConfig() {
 		ExcelConfig conf = new ExcelConfig();
-		conf.setFilePath("META-INF\\DB.xlsx");
+		conf.setFilePath("META-INF" + File.separator + "DB.xlsx");
 		conf.setSheetName("TABLE_LIST");
 		return conf;
 	}

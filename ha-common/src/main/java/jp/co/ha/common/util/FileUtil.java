@@ -23,7 +23,9 @@ public class FileUtil {
 
 	/**
 	 * 指定したファイルパス配下の全ファイルのリストを返す
-	 * @param path ファイルパス
+	 *
+	 * @param path
+	 *     ファイルパス
 	 * @return ファイルパス配下に存在する全ファイル
 	 */
 	public static List<File> getAllFile(String path) {
@@ -40,8 +42,11 @@ public class FileUtil {
 
 	/**
 	 * 指定した<code>srcFileList</code>を<code>zipFile</code>に圧縮する<br>
-	 * @param srcFileList zipファイルに含めたいファイルのリスト
-	 * @param zipFile zipファイル
+	 *
+	 * @param srcFileList
+	 *     zipファイルに含めたいファイルのリスト
+	 * @param zipFile
+	 *     zipファイル
 	 */
 	public static void toZip(List<File> srcFileList, File zipFile) {
 
@@ -59,7 +64,9 @@ public class FileUtil {
 
 	/**
 	 * 指定したファイル配下の全ファイルのリストを返す
-	 * @param file ファイル
+	 *
+	 * @param file
+	 *     ファイル
 	 * @return ファイル配下に存在する全ファイル
 	 */
 	public static List<File> getFileList(File file) {
@@ -77,26 +84,33 @@ public class FileUtil {
 	/**
 	 * ファイル拡張子の列挙
 	 */
-	public static enum FileSufix {
+	public static enum FileSuffix {
 
 		/** csv */
 		CSV(".csv"),
 		/** zip */
-		ZIP(".zip");
+		ZIP(".zip"),
+		/** java */
+		JAVA(".java"),
+		/** sql */
+		SQL(".sql");
 
 		/** 値 */
 		private String value;
 
 		/**
 		 * コンストラクタ
-		 * @param value 値
+		 *
+		 * @param value
+		 *     値
 		 */
-		private FileSufix(String value) {
+		private FileSuffix(String value) {
 			this.value = value;
 		}
 
 		/**
 		 * 値を返す
+		 *
 		 * @return value
 		 */
 		public String getValue() {
@@ -106,10 +120,12 @@ public class FileUtil {
 		/**
 		 * 指定したファイル拡張子列挙が自身と一致するか判定する<br>
 		 * 一致する場合true, それ以外の場合false<br>
-		 * @param suffix ファイル拡張子列挙
+		 *
+		 * @param suffix
+		 *     ファイル拡張子列挙
 		 * @return 判定結果
 		 */
-		public boolean is(FileSufix suffix) {
+		public boolean is(FileSuffix suffix) {
 			return this == suffix;
 		}
 	}
