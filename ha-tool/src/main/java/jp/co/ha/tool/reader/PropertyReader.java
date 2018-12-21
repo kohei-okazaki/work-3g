@@ -15,7 +15,7 @@ public class PropertyReader extends BaseFileReader {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	public Properties getProperty(String propFileName) {
-		File propFile = getFilePath("META-INF/" + propFileName);
+		File propFile = getFilePath("META-INF" + File.separator + propFileName);
 		Properties prop = new Properties();
 		try (InputStream is = new FileInputStream(propFile.getAbsolutePath())) {
 			prop.load(is);

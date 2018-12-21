@@ -1,6 +1,9 @@
 package jp.co.ha.common.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,28 +44,6 @@ public class FileUtil {
 	}
 
 	/**
-	 * 指定した<code>srcFileList</code>を<code>zipFile</code>に圧縮する<br>
-	 *
-	 * @param srcFileList
-	 *     zipファイルに含めたいファイルのリスト
-	 * @param zipFile
-	 *     zipファイル
-	 */
-	public static void toZip(List<File> srcFileList, File zipFile) {
-
-		try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile.getName()))) {
-			byte[] buffer = new byte[1024];
-			for (File srcFile : srcFileList) {
-				ZipEntry entry = new ZipEntry(srcFile.getName());
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * 指定したファイル配下の全ファイルのリストを返す
 	 *
 	 * @param file
@@ -79,6 +60,53 @@ public class FileUtil {
 			}
 		}
 		return fileList;
+	}
+
+	/**
+	 * 指定した<code>srcFileList</code>を<code>zipFile</code>に圧縮する<br>
+	 *
+	 * @param srcFileList
+	 *     zipファイルに含めたいファイルのリスト
+	 * @param destFilePath 出力先ファイルパス
+	 * @return zipファイル
+	 */
+	public static File toZip(List<File> srcFileList, String destFilePath) {
+		File zipFile = new File(destFilePath);
+		try (FileOutputStream fos = new FileOutputStream(zipFile.getName());
+				ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile.getName()));
+				BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+
+			for (File srcFile : srcFileList) {
+				ZipEntry entry = new ZipEntry(srcFile.getName());
+				zos.putNextEntry(entry);
+				if (srcFile.getName().endsWith(File.separator)) {
+					zos.closeEntry();
+					continue;
+				}
+
+				try (FileInputStream fis = new FileInputStream(destFilePath + File.separator + srcFile);
+						BufferedInputStream bis = new BufferedInputStream(fis)) {
+					int size = 0;
+					byte[] buffer = new byte[1024];
+					while ((size = bis.read(buffer)) > 0) {
+						zos.write(buffer, 0, size);
+					}
+				}
+
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return zipFile;
+	}
+
+	public static List<File> unZip(File srcZipFile) {
+		List<File> destFileList = new ArrayList<>();
+
+		return destFileList;
 	}
 
 	/**
