@@ -14,6 +14,7 @@ import jp.co.ha.common.validator.FlagValidator;
 
 /**
  * フラグチェックアノテーション<br>
+ *
  * @see jp.co.ha.common.validator.FlagValidator
  *
  */
@@ -24,9 +25,12 @@ import jp.co.ha.common.validator.FlagValidator;
 @Constraint(validatedBy = FlagValidator.class)
 public @interface Flag {
 
-    String message() default "";
+	/** message */
+	String message() default "";
 
-    Class<?>[] groups() default {};
+	/** groups */
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	/** payload */
+	Class<? extends Payload>[] payload() default {};
 }

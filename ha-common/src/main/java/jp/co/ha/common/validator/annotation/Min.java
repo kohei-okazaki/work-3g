@@ -14,6 +14,7 @@ import jp.co.ha.common.validator.MinValidator;
 
 /**
  * 最小桁数チェックアノテーション<br>
+ *
  * @see jp.co.ha.common.validator.MinValidator
  *
  */
@@ -24,13 +25,18 @@ import jp.co.ha.common.validator.MinValidator;
 @Constraint(validatedBy = MinValidator.class)
 public @interface Min {
 
+	/** size */
 	int size();
 
+	/** 同じ値を含むか */
 	boolean isEqual() default true;
 
-    String message() default "";
+	/** message */
+	String message() default "";
 
-    Class<?>[] groups() default {};
+	/** groups */
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	/** payload */
+	Class<? extends Payload>[] payload() default {};
 }

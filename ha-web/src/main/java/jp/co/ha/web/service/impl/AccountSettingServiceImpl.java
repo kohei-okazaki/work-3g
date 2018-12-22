@@ -74,7 +74,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 *
 	 * @param account
 	 *     アカウント情報
-	 * @param mainlInfo
+	 * @param mailInfo
 	 *     メール情報
 	 * @throws BaseException
 	 *     基底例外
@@ -95,7 +95,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 *     アカウント情報
 	 * @param form
 	 *     アカウント設定情報フォーム
-	 * @return
 	 */
 	private void mergeAccount(Account account, AccountSettingForm form) {
 		BeanUtil.copy(form, account, List.of("userId"));
@@ -106,7 +105,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 *
 	 * @param form
 	 *     アカウント設定情報フォーム
-	 * @return
+	 * @return メール情報
 	 */
 	private MailInfo convertMailInfo(AccountSettingForm form) {
 
@@ -123,7 +122,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 *     メール情報
 	 * @param form
 	 *     アカウント設定情報フォーム
-	 * @return
 	 */
 	private void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
 		BeanUtil.copy(form, mailInfo, List.of("userId"));

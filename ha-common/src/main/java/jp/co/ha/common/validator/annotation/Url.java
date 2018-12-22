@@ -14,6 +14,7 @@ import jp.co.ha.common.validator.UrlValidator;
 
 /**
  * URLチェックアノテーション<br>
+ *
  * @see jp.co.ha.common.validator.UrlValidator
  *
  */
@@ -24,9 +25,12 @@ import jp.co.ha.common.validator.UrlValidator;
 @Constraint(validatedBy = UrlValidator.class)
 public @interface Url {
 
-    String message() default "";
+	/** message */
+	String message() default "";
 
-    Class<?>[] groups() default {};
+	/** groups */
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	/** payload */
+	Class<? extends Payload>[] payload() default {};
 }

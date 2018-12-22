@@ -34,13 +34,13 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	 *     エラー情報
 	 * @param fieldsName
 	 *     画面表示項目名
-	 * @param nameArg
+	 * @param msgArgs
 	 *     メッセージ引数
 	 */
-	protected void rejectIfEmpty(Errors errors, String fieldsName, String nameArgs) {
+	protected void rejectIfEmpty(Errors errors, String fieldsName, String msgArgs) {
 		Object field = getFieldValue(errors, fieldsName);
 		if (BeanUtil.isNull(field) || StringUtil.isEmpty(field.toString())) {
-			errors.rejectValue(fieldsName, ErrorCode.REQUIRE.getErrorMessage(), new String[] { nameArgs },
+			errors.rejectValue(fieldsName, ErrorCode.REQUIRE.getErrorMessage(), new String[] { msgArgs },
 					ErrorCode.REQUIRE.getErrorMessage());
 		}
 	}
@@ -89,10 +89,10 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	 * @param nameArgs
 	 *     名前
 	 */
-	protected void rejectIfNotHalfNumberPeriod(Errors errors, String fieldsName, String nameArgs) {
-		String fieldValue = getFieldValue(errors, fieldsName);
+	protected void rejectIfNotHalfNumberPeriod(Errors errors, String field, String nameArgs) {
+		String fieldValue = getFieldValue(errors, field);
 		if (!RegixType.HALF_NUMBER_PERIOD.is(fieldValue)) {
-			errors.rejectValue(fieldsName, ErrorCode.TYPE_VALID.getErrorMessage(), new String[] { nameArgs },
+			errors.rejectValue(field, ErrorCode.TYPE_VALID.getErrorMessage(), new String[] { nameArgs },
 					ErrorCode.TYPE_VALID.getErrorMessage());
 		}
 	}
@@ -104,7 +104,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	 *     Errors
 	 * @param field
 	 *     Formフィールド名
-	 * @return
+	 * @return 入力値
 	 */
 	protected String getFieldValue(Errors errors, String field) {
 		Object value = errors.getFieldValue(field);

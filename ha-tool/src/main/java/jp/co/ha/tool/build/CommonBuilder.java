@@ -5,10 +5,18 @@ import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.reader.ExcelReader;
 import jp.co.ha.tool.type.CellPositionType;
 
+/**
+ * 共通的処理を定義したビルダー
+ *
+ */
 public abstract class CommonBuilder extends BaseBuilder {
 
+	/** ExcelReader */
 	protected ExcelReader reader;
 
+	/**
+	 * コンストラクタ
+	 */
 	public CommonBuilder() {
 		this.reader = new ExcelReader(getExcelConfig());
 	}
@@ -20,7 +28,7 @@ public abstract class CommonBuilder extends BaseBuilder {
 	 *     excelの行情報
 	 * @param tableName
 	 *     テーブル名
-	 * @return
+	 * @return 判定結果
 	 */
 	protected boolean isTargetTable(Row row, String tableName) {
 		Cell cell = row.getCell(CellPositionType.PHYSICAL_NAME);

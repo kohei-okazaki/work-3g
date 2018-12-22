@@ -23,6 +23,13 @@ import jp.co.ha.tool.type.ClassType;
 import jp.co.ha.tool.type.ColumnType;
 import jp.co.ha.tool.type.ExecuteType;
 
+/**
+ * Entityのビルダー<br>
+ *
+ * @deprecated MybatisのgeneratorでEntityを生成している為、使わないこと
+ *
+ */
+@Deprecated
 public class EntityBuilder extends CommonBuilder {
 
 	@Override
@@ -70,7 +77,9 @@ public class EntityBuilder extends CommonBuilder {
 
 	/**
 	 * 共通情報を設定する
+	 *
 	 * @param source
+	 *     JavaSource
 	 */
 	private void setCommonInfo(JavaSource source) {
 		source.setPackage(new jp.co.ha.tool.source.Package("jp.co.ha.business.db.entity"));
@@ -91,7 +100,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *
 	 * @param name
 	 *     テーブル名
-	 * @return
+	 * @return キャメルケースに変換した文字列
 	 */
 	private String toCamelCase(String name) {
 		String result = name.toLowerCase();
@@ -111,7 +120,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *
 	 * @param fileName
 	 *     ファイル名
-	 * @return
+	 * @return Javaファイル名
 	 */
 	private String toJavaFileName(String fileName) {
 
@@ -138,7 +147,8 @@ public class EntityBuilder extends CommonBuilder {
 
 		result.append(buildImport(source.getImportList())).append(StringUtil.CRLF + StringUtil.CRLF);
 
-		result.append(buildClass(source) + StringUtil.SPACE + buildInterfaces(source.getImplInterfaceList()) + " {").append(StringUtil.CRLF + StringUtil.CRLF);
+		result.append(buildClass(source) + StringUtil.SPACE + buildInterfaces(source.getImplInterfaceList()) + " {")
+				.append(StringUtil.CRLF + StringUtil.CRLF);
 
 		result.append(buildFields(source.getFieldList())).append(StringUtil.CRLF + StringUtil.CRLF);
 
@@ -158,7 +168,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *
 	 * @param importList
 	 *     インポート文のリスト
-	 * @return
+	 * @return インポート
 	 */
 	private String buildImport(List<Import> importList) {
 
@@ -178,7 +188,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *
 	 * @param source
 	 *     生成するJavaファイルのリソース
-	 * @return
+	 * @return クラス名
 	 */
 	private String buildClass(JavaSource source) {
 		String accessType = source.getAccessType().getValue();
@@ -193,7 +203,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *
 	 * @param interfaceList
 	 *     インターフェースリスト
-	 * @return
+	 * @return インターフェース
 	 */
 	private String buildInterfaces(List<Class<?>> interfaceList) {
 		String prefix = "implements ";
@@ -207,7 +217,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *
 	 * @param fieldList
 	 *     フィールドリスト
-	 * @return
+	 * @return フィールド
 	 */
 	private String buildFields(List<Field> fieldList) {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
@@ -220,7 +230,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *
 	 * @param methodList
 	 *     メソッドリスト
-	 * @return
+	 * @return メソッド
 	 */
 	private String buildMethods(List<Method> methodList) {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);

@@ -15,6 +15,10 @@ import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
+/**
+ * DDLビルダー
+ *
+ */
 public class DdlBuilder extends CommonBuilder {
 
 	@Override

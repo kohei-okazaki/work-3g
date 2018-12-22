@@ -4,7 +4,7 @@ package jp.co.ha.common.type;
  * 正規表現列挙<br>
  *
  */
-public enum RegixType {
+public enum RegixType implements BaseEnum {
 
 	/** 半角数字 */
 	HALF_NUMBER("^[0-9]*$"),
@@ -18,25 +18,24 @@ public enum RegixType {
 	MAIL_ADDRESS("[A-Za-z0-9._+]+@[A-Za-z]+.[A-Za-z]");
 
 	/** 正規表現 */
-	private String pattern;
+	private String value;
 
 	/**
 	 * コンストラクタ<br>
 	 *
-	 * @param pattern
+	 * @param value
 	 *     正規表現
 	 */
-	private RegixType(String pattern) {
-		this.pattern = pattern;
+	private RegixType(String value) {
+		this.value = value;
 	}
 
 	/**
-	 * 正規表現を返す<br>
-	 *
-	 * @return 正規表現
+	 * {@inheritDoc}
 	 */
-	public String getPattern() {
-		return this.pattern;
+	@Override
+	public String getValue() {
+		return this.value;
 	}
 
 	/**
@@ -48,7 +47,16 @@ public enum RegixType {
 	 * @return 判定結果
 	 */
 	public boolean is(String target) {
-		return target.matches(this.getPattern());
+		return target.matches(this.getValue());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public RegixType of(String value) {
+		return BaseEnum.of(this.getClass(), value);
 	}
 
 }

@@ -41,7 +41,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 *     健康情報CSVアップロードモデルリスト
 	 * @param userId
 	 *     ユーザID
-	 * @return
+	 * @return 健康情報CSVアップロードモデルリスト
 	 * @throws BaseException
 	 *     基底例外
 	 */

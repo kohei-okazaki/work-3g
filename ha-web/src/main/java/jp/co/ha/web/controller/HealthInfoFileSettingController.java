@@ -58,7 +58,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 *
 	 * @param request
 	 *     HttpServletRequest
-	 * @return
+	 * @return HealthInfoFileSettingForm
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -100,7 +100,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 */
 	@Override
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
 		}

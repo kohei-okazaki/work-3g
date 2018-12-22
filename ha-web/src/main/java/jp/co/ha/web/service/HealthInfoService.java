@@ -34,7 +34,7 @@ public interface HealthInfoService {
 	 *
 	 * @param userId
 	 *     ユーザID
-	 * @return
+	 * @return 判定結果
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -47,7 +47,7 @@ public interface HealthInfoService {
 	 *     健康情報リスト
 	 * @param healthInfoId
 	 *     健康情報ID
-	 * @return
+	 * @return 判定結果
 	 */
 	boolean hasRecord(List<HealthInfo> entityList, Integer healthInfoId);
 
@@ -56,7 +56,7 @@ public interface HealthInfoService {
 	 *
 	 * @param healthInfo
 	 *     健康情報
-	 * @return
+	 * @return CSVモデルリスト
 	 */
 	List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo);
 
@@ -67,7 +67,7 @@ public interface HealthInfoService {
 	 *     健康情報入力フォーム
 	 * @param userId
 	 *     ユーザID
-	 * @return
+	 * @return HealthInfoRegistResponse
 	 * @throws BaseException
 	 *     基底例外
 	 */

@@ -27,7 +27,6 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.web.form.LoginForm;
-import jp.co.ha.web.validator.LoginValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -56,14 +55,13 @@ public class LoginController implements BaseWebController {
 	 */
 	@InitBinder("loginForm")
 	public void initBinder(WebDataBinder binder) {
-		LoginValidator validator = new LoginValidator();
-		binder.addValidators(validator);
+
 	}
 
 	/**
 	 * Formを返す<br>
 	 *
-	 * @return
+	 * @return LoginForm
 	 */
 	@ModelAttribute
 	public LoginForm setUpForm() {
@@ -78,12 +76,10 @@ public class LoginController implements BaseWebController {
 	 * @param request
 	 *     HttpServletRequest
 	 * @return ログイン画面
-	 * @throws BaseException
-	 *     基底例外
 	 */
 	@NonAuth
 	@GetMapping("/index.html")
-	public String index(Model model, HttpServletRequest request) throws BaseException {
+	public String index(Model model, HttpServletRequest request) {
 		// sessionに格納している情報をすべて削除する
 		sessionService.removeValues(request.getSession());
 		return getView(ManageWebView.LOGIN);
@@ -100,7 +96,7 @@ public class LoginController implements BaseWebController {
 	 *     LoginForm
 	 * @param result
 	 *     BindingResult
-	 * @return
+	 * @return TOP画面
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -133,12 +129,10 @@ public class LoginController implements BaseWebController {
 	 *
 	 * @param request
 	 *     HttpServletRequest
-	 * @return
-	 * @throws BaseException
-	 *     基底例外
+	 * @return TOP画面
 	 */
 	@GetMapping("/top.html")
-	public String top(HttpServletRequest request) throws BaseException {
+	public String top(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
 		return getView(StringUtil.isEmpty(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);

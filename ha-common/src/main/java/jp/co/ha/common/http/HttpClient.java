@@ -108,7 +108,7 @@ public class HttpClient {
 	 */
 	private String getEncoding(String encoding) {
 		if (BeanUtil.isNull(encoding)) {
-			encoding = Charset.UTF_8.getName();
+			encoding = Charset.UTF_8.getValue();
 		}
 		return encoding;
 	}

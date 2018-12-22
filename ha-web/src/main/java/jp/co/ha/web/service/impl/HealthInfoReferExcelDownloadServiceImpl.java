@@ -63,7 +63,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 
 		// 健康情報マスク利用有無
 		boolean useHealthInfoMask = healthInfoFunctionService.useHealthInfoMask(entity);
-		List<ReferenceExcelModel> modelList = new ArrayList<ReferenceExcelModel>();
+		List<ReferenceExcelModel> modelList = new ArrayList<>();
 		Stream.iterate(0, i -> ++i).limit(historyList.size()).forEach(i -> {
 
 			// 結果照会Excel出力モデル
@@ -86,7 +86,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 *
 	 * @param healthInfoFileSetting
 	 *     健康情報設定情報
-	 * @return
+	 * @return Excel設定情報
 	 */
 	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
 		ExcelConfig conf = new ExcelConfig();

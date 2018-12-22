@@ -14,13 +14,13 @@ import jp.co.ha.web.form.HealthInfoReferenceForm;
 public interface HealthInfoReferenceService {
 
 	/**
-	 * 健康情報を取得する<br>
+	 * 健康情報レスポンスリストを取得する<br>
 	 *
 	 * @param form
 	 *     結果照会画面フォーム
 	 * @param userId
 	 *     ユーザID
-	 * @return
+	 * @return 健康情報レスポンスリスト
 	 * @throws BaseException
 	 *     基底例外
 	 */

@@ -28,7 +28,6 @@ import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
-import jp.co.ha.web.validator.AccountSettingValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -58,7 +57,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@Override
 	@InitBinder(value = "accountSettingForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(new AccountSettingValidator());
+
 	}
 
 	/**
@@ -66,7 +65,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 *
 	 * @param request
 	 *     HttpServletRequest
-	 * @return
+	 * @return AccountSettingForm
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -107,7 +106,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result) throws BaseException {
+	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
 		if (result.hasErrors()) {
 			return getView(ManageWebView.ACCOUNT_SETTING_INPUT);

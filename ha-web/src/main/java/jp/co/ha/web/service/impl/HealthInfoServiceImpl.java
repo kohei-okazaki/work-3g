@@ -127,7 +127,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 *     健康情報入力フォーム
 	 * @param healthInfo
 	 *     健康情報
-	 * @return
+	 * @return 体重差メッセージ
 	 */
 	private String getDiffMessage(HealthInfoForm form, HealthInfo healthInfo) {
 		return healthInfoCalcService.getHealthStatus(form.getWeight(), healthInfo.getWeight()).getMessage();
@@ -140,7 +140,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 *     健康情報入力フォーム
 	 * @param healthInfo
 	 *     健康情報
-	 * @return
+	 * @return 体重差
 	 */
 	private BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo healthInfo) {
 		return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(), form.getWeight());

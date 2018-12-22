@@ -48,6 +48,7 @@ public class HealthInfoFileSettingForm implements BaseForm {
 	 * userIdを設定する
 	 *
 	 * @param userId
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -66,6 +67,7 @@ public class HealthInfoFileSettingForm implements BaseForm {
 	 * headerFlagを設定する
 	 *
 	 * @param headerFlag
+	 *     ヘッダー利用フラグ
 	 */
 	public void setHeaderFlag(String headerFlag) {
 		this.headerFlag = headerFlag;
@@ -84,6 +86,7 @@ public class HealthInfoFileSettingForm implements BaseForm {
 	 * footerFlagを設定する
 	 *
 	 * @param footerFlag
+	 *     フッター利用フラグ
 	 */
 	public void setFooterFlag(String footerFlag) {
 		this.footerFlag = footerFlag;
@@ -102,6 +105,7 @@ public class HealthInfoFileSettingForm implements BaseForm {
 	 * maskFlagを設定する
 	 *
 	 * @param maskFlag
+	 *     マスク利用フラグ
 	 */
 	public void setMaskFlag(String maskFlag) {
 		this.maskFlag = maskFlag;
@@ -120,6 +124,7 @@ public class HealthInfoFileSettingForm implements BaseForm {
 	 * enclosureCharFlagを設定する
 	 *
 	 * @param enclosureCharFlag
+	 *     囲い文字利用フラグ
 	 */
 	public void setEnclosureCharFlag(String enclosureCharFlag) {
 		this.enclosureCharFlag = enclosureCharFlag;

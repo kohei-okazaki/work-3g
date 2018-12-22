@@ -72,7 +72,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 *
 	 * @param healthInfoFileSetting
 	 *     健康情報設定情報
-	 * @return
+	 * @return Excel設定情報
 	 */
 	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
 		ExcelConfig conf = new ExcelConfig();

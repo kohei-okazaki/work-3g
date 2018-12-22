@@ -49,11 +49,13 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 *     F extends BaseForm
 	 * @param result
 	 *     BindingResult
+	 * @param request
+	 *     HttpServletRequest
 	 * @return view名
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	String confirm(Model model, @Valid F form, BindingResult result) throws BaseException;
+	String confirm(Model model, @Valid F form, BindingResult result, HttpServletRequest request) throws BaseException;
 
 	/**
 	 * 完了画面
