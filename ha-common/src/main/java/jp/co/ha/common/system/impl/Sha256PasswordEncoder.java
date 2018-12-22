@@ -14,7 +14,7 @@ import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.system.type.Algorithm;
 
 /**
- * SHA-256パスワード作成クラス<br>
+ * SHA-256パスワードエンコードクラス<br>
  *
  */
 public class Sha256PasswordEncoder implements PasswordEncoder {
@@ -70,7 +70,7 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 		try {
 			messageDigest = MessageDigest.getInstance(HASH_ALGORITHM.getValue());
 		} catch (NoSuchAlgorithmException e) {
-			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ソルトのハッシュ化に失敗しました、ハッシュアルゴリズム：" + HASH_ALGORITHM);
+			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "指定したアルゴリズムが存在しません。アルゴリズム：" + HASH_ALGORITHM);
 		}
 		messageDigest.update(salt.getBytes());
 		return messageDigest.digest();

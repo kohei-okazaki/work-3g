@@ -30,7 +30,7 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 *     アップロードファイル
 	 * @return List<T> CSVアップロードモデルリスト
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	List<T> execute(MultipartFile uploadFile) throws BaseException;
 
