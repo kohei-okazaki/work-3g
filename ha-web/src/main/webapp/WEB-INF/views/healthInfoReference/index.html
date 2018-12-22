@@ -39,16 +39,16 @@
 				<tr>
 					<th><p>健康情報ID</p></th>
 					<td>
-						<input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" >
+						<input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
 					</td>
 				</tr>
 				<tr>
 					<th><p>登録日</p></th>
 					<td>
 						<div class="radio" align="center">
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
 							<label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hideCalendar()">
+							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
 							<label for="regDateSelectFlagTrue">直接指定する</label>
 						</div>
 					</td>
@@ -64,9 +64,13 @@
 			<br>
 			<table>
 				<tr>
-					<td><input type="submit" value="検索" /></td>
+					<td>
+						<input type="submit" value="検索" />
+					</td>
 					<td>　　</td>
-					<td><input type="reset" value="リセット" /></td>
+					<td>
+						<input type="reset" value="リセット" />
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -110,13 +114,13 @@
 				<tr>
 					<td align="center">
 						<div>
-							<input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()">
+							<input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
 						</div>
 					</td>
 					<td>　　</td>
 					<td align="center">
 						<div>
-							<input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()">
+							<input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
 						</div>
 					</td>
 				</tr>

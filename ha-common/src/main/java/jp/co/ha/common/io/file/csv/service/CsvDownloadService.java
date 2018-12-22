@@ -25,7 +25,7 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 * @param modelList
 	 *     モデルリスト
 	 * @throws BaseException
-	 *     例外
+	 *     基底例外
 	 */
 	void execute(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws BaseException;
 
