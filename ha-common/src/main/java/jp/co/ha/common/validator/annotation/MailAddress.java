@@ -14,6 +14,7 @@ import jp.co.ha.common.validator.MailAddressValidator;
 
 /**
  * メールアドレス形式チェックアノテーション<br>
+ *
  * @see jp.co.ha.common.validator.MailAddressValidator
  *
  */
@@ -24,9 +25,12 @@ import jp.co.ha.common.validator.MailAddressValidator;
 @Constraint(validatedBy = MailAddressValidator.class)
 public @interface MailAddress {
 
-    String message() default "";
+	/** message */
+	String message() default "";
 
-    Class<?>[] groups() default {};
+	/** groups */
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	/** payload */
+	Class<? extends Payload>[] payload() default {};
 }

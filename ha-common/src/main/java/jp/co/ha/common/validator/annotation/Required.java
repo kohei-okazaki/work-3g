@@ -14,6 +14,7 @@ import jp.co.ha.common.validator.RequiredValidator;
 
 /**
  * 必須チェックアノテーション<br>
+ *
  * @see jp.co.ha.common.validator.RequiredValidator
  *
  */
@@ -24,9 +25,12 @@ import jp.co.ha.common.validator.RequiredValidator;
 @Constraint(validatedBy = RequiredValidator.class)
 public @interface Required {
 
-    String message() default "";
+	/** message */
+	String message() default "";
 
-    Class<?>[] groups() default {};
+	/** groups */
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	/** payload */
+	Class<? extends Payload>[] payload() default {};
 }

@@ -15,6 +15,7 @@ import jp.co.ha.common.validator.PatternValidator;
 
 /**
  * 型チェックvalidator<br>
+ *
  * @see jp.co.ha.common.validator.PatternValidator
  *
  */
@@ -25,11 +26,15 @@ import jp.co.ha.common.validator.PatternValidator;
 @Constraint(validatedBy = PatternValidator.class)
 public @interface Pattern {
 
+	/** 正規表現 */
 	RegixType regixPattern();
 
-    String message() default "";
+	/** message */
+	String message() default "";
 
-    Class<?>[] groups() default {};
+	/** groups */
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	/** payload */
+	Class<? extends Payload>[] payload() default {};
 }

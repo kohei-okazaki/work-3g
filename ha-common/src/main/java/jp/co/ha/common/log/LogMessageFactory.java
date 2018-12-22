@@ -29,6 +29,13 @@ public class LogMessageFactory {
 	private LogMessageFactory() {
 	}
 
+	/**
+	 * ログメッセージを返す
+	 *
+	 * @param bean
+	 *     Bean
+	 * @return ログメッセージ
+	 */
 	public static String getLogMessage(Object bean) {
 		StringJoiner body = new StringJoiner(", ");
 		Class<?> clazz = bean.getClass();

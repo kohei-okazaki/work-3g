@@ -14,6 +14,10 @@ import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
+/**
+ * DropSQLビルダー
+ *
+ */
 public class DropBuilder extends CommonBuilder {
 
 	@Override

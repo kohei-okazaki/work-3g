@@ -4,21 +4,41 @@ package jp.co.ha.common.type;
  * Dateフォーマット
  *
  */
-public enum DateFormatType {
+public enum DateFormatType implements BaseEnum {
 
 	/** YYYY/MM/DD */
 	YYYYMMDD("yyyy/MM/dd"),
 	/** YYYY/MM/DD HH:mm:ss */
 	YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss");
 
+	/** 名前 */
 	private String value;
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param value
+	 *     value
+	 */
 	private DateFormatType(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public DateFormatType of(String value) {
+		return BaseEnum.of(this.getClass(), value);
 	}
 
 }

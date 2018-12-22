@@ -14,8 +14,13 @@ import jp.co.ha.tool.reader.PropertyReader;
 import jp.co.ha.tool.type.ExecuteType;
 import jp.co.ha.tool.type.PropertyType;
 
+/**
+ * 基底ビルダー
+ *
+ */
 public abstract class BaseBuilder {
 
+	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/** プロパティファイル */
@@ -26,6 +31,9 @@ public abstract class BaseBuilder {
 	/** 基底ディレクトリ */
 	protected String baseDir;
 
+	/**
+	 * コンストラクタ
+	 */
 	public BaseBuilder() {
 		this.property = new PropertyReader().getProperty("target.properties");
 		this.init();
@@ -48,7 +56,7 @@ public abstract class BaseBuilder {
 	 *
 	 * @param propType
 	 *     プロパティファイル列挙
-	 * @return
+	 * @return プロパティファイルの値
 	 */
 	private String getProperty(PropertyType propType) {
 		return this.property.getProperty(propType.getValue());
@@ -57,7 +65,7 @@ public abstract class BaseBuilder {
 	/**
 	 * excel設定情報を返す<br>
 	 *
-	 * @return
+	 * @return ExcelConfig
 	 */
 	protected ExcelConfig getExcelConfig() {
 		ExcelConfig conf = new ExcelConfig();
@@ -71,7 +79,7 @@ public abstract class BaseBuilder {
 	 *
 	 * @param execType
 	 *     実行タイプ
-	 * @return
+	 * @return FileConfig
 	 */
 	protected FileConfig getFileConfig(ExecuteType execType) {
 		FileConfig conf = new FileConfig();
