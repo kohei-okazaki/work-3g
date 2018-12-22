@@ -95,7 +95,6 @@ public class FileUtil {
 						zos.write(buffer, 0, size);
 					}
 				}
-
 			}
 		} catch (FileNotFoundException e) {
 			srcFileList.stream().forEach(srcFile -> {
@@ -187,7 +186,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * 指定したパスのファイルオブジェクトを返す
+	 * 指定した<code>path</code>のファイルオブジェクトを返す
 	 *
 	 * @param path
 	 *     パス
@@ -195,6 +194,28 @@ public class FileUtil {
 	 */
 	public static File getFile(String path) {
 		return new File(path);
+	}
+
+	/**
+	 * 指定した<code>path</code>がファイルかどうかを返す<br>
+	 *
+	 * @param path
+	 *     パス
+	 * @return ファイルの場合true, それ以外の場合false
+	 */
+	public static boolean isFile(String path) {
+		return getFile(path).isFile();
+	}
+
+	/**
+	 * 指定した<code>path</code>がディレクトリかどうかを返す<br>
+	 *
+	 * @param path
+	 *     パス
+	 * @return ディレクトリの場合true, それ以外の場合false
+	 */
+	public static boolean isDir(String path) {
+		return getFile(path).isDirectory();
 	}
 
 	/**
