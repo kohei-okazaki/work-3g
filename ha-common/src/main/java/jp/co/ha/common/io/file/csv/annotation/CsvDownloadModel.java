@@ -18,7 +18,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface CsvDownloadModel {
 
+	/** ヘッダ名 */
 	String[] headerNames() default "";
 
+	/** フッタ名 */
 	String[] footerNames() default "";
 }

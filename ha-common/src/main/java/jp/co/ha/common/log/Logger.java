@@ -4,27 +4,51 @@ package jp.co.ha.common.log;
  * アプリ内のロガークラス<br>
  *
  */
+/**
+ * @author kou1210hei
+ *
+ */
 public class Logger {
 
 	/** ロガー */
 	private org.slf4j.Logger logger;
 
+	/**
+	 * コンストラクタ
+	 * @param logger org.slf4j.Logger
+	 */
 	Logger(org.slf4j.Logger logger) {
 		this.logger = logger;
 	}
 
+	/**
+	 * 指定したBeanのDebugログを出力する
+	 * @param bean Bean
+	 */
 	public void debugRes(Object bean) {
 		logger.debug(LogMessageFactory.getLogMessage(bean));
 	}
 
+	/**
+	 * 指定したBeanのDebugログを出力する
+	 * @param prefix 接頭語
+	 * @param bean Bean
+	 */
 	public void debugRes(String prefix, Object bean) {
 		logger.debug(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
+	/**
+	 * @param msg
+	 */
 	public void debug(String msg) {
 		logger.debug(msg);
 	}
 
+	/**
+	 * 指定したBeanのInfoログを出力する
+	 * @param bean Bean
+	 */
 	public void infoRes(Object bean) {
 		logger.info(LogMessageFactory.getLogMessage(bean));
 	}

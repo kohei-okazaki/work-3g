@@ -22,6 +22,7 @@ public interface ExcelDownloadService<T> {
 	 *     出力対象データ
 	 * @return View
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	View execute(T t) throws BaseException;
 

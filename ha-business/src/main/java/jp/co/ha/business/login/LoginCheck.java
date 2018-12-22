@@ -24,7 +24,7 @@ public class LoginCheck {
 	 *     アカウント情報
 	 * @param inputUserId
 	 *     入力されたユーザID
-	 * @param inputPasswor
+	 * @param inputPassword
 	 *     入力されたパスワード
 	 * @return ログイン情報チェック結果
 	 */
@@ -76,7 +76,7 @@ public class LoginCheck {
 	 *
 	 * @param result
 	 *     ログイン情報チェック結果
-	 * @param formPassword
+	 * @param inputPassword
 	 *     フォーム情報.パスワード
 	 * @param dbPassword
 	 *     DB情報.パスワード

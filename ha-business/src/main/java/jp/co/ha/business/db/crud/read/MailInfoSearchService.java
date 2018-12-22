@@ -16,6 +16,7 @@ public interface MailInfoSearchService {
 	 *     ユーザID
 	 * @return メール情報
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	MailInfo findByUserId(String userId) throws BaseException;
 

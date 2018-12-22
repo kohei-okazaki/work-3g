@@ -14,8 +14,9 @@ public interface HealthInfoFileSettingSearchService {
 	 *
 	 * @param userId
 	 *     ユーザID
-	 * @return
+	 * @return 健康情報ファイル設定
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	HealthInfoFileSetting findByUserId(String userId) throws BaseException;
 }

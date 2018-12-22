@@ -19,9 +19,9 @@ public interface CalcOperator {
 	 *     対象2
 	 * @param degit
 	 *     区切り
-	 * @param roudingMode
+	 * @param roundingMode
 	 *     丸め方法
-	 * @return
+	 * @return 計算結果
 	 */
-	BigDecimal apply(BigDecimal target1, BigDecimal target2, int degit, RoundingMode rougingMode);
+	BigDecimal apply(BigDecimal target1, BigDecimal target2, int degit, RoundingMode roundingMode);
 }

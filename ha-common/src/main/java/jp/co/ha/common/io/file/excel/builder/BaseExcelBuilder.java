@@ -1,7 +1,6 @@
 package jp.co.ha.common.io.file.excel.builder;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -179,7 +178,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	 *
 	 * @param clazz
 	 *     ExcelDownloadModelアノテーションのついたクラス型
-	 * @return
+	 * @return <code>@ExcelDownloadModel</code>
 	 */
 	protected String getSheetName(Class<T> clazz) {
 		return clazz.getAnnotation(ExcelDownloadModel.class).sheetName();
@@ -190,12 +189,10 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	 *
 	 * @param clazz
 	 *     ExcelDownloadModelアノテーションのついたクラス型
-	 * @return
+	 * @return headerList
 	 */
 	protected List<String> getHeaderList(Class<?> clazz) {
-		List<String> headerList = new ArrayList<>();
-		headerList.addAll(List.of(clazz.getAnnotation(ExcelDownloadModel.class).headerNames()));
-		return headerList;
+		return List.of(clazz.getAnnotation(ExcelDownloadModel.class).headerNames());
 	}
 
 	/**
@@ -203,11 +200,9 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	 *
 	 * @param clazz
 	 *     ExcelDownloadModelアノテーションのついたクラス型
-	 * @return
+	 * @return footerList
 	 */
 	protected List<String> getFooterList(Class<?> clazz) {
-		List<String> footerList = new ArrayList<String>();
-		footerList.addAll(List.of(clazz.getAnnotation(ExcelDownloadModel.class).footerNames()));
-		return footerList;
+		return List.of(clazz.getAnnotation(ExcelDownloadModel.class).footerNames());
 	}
 }

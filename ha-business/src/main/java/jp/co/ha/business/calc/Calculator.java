@@ -26,13 +26,13 @@ public class Calculator {
 	 *     対象1
 	 * @param degit
 	 *     区切り
-	 * @param roudingMode
+	 * @param roundingMode
 	 *     丸め方法
-	 * @return
+	 * @return 計算結果
 	 */
 	public static BigDecimal calc(BigDecimal target1, CalcMethod method, BigDecimal target2, int degit,
-			RoundingMode roudingMode) {
-		return method.getOperator().apply(target1, target2, degit, roudingMode);
+			RoundingMode roundingMode) {
+		return method.getOperator().apply(target1, target2, degit, roundingMode);
 	}
 
 }

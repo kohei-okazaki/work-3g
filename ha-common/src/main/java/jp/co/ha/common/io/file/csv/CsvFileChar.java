@@ -11,12 +11,24 @@ public enum CsvFileChar {
 	/** ダブルクォート */
 	DOBBLE_QUOTE("\"");
 
+	/** 値 */
 	private String value;
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param value
+	 *     値
+	 */
 	private CsvFileChar(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * 値を返す
+	 *
+	 * @return value
+	 */
 	public String getValue() {
 		return this.value;
 	}

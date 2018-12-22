@@ -19,9 +19,13 @@ import jp.co.ha.common.util.BeanUtil;
  */
 public abstract class BaseDao {
 
+	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	/** Connection */
 	private Connection con;
+	/** Statement */
 	private Statement stm;
+	/** ResultSet */
 	protected ResultSet rs;
 
 	/**
@@ -126,7 +130,14 @@ public abstract class BaseDao {
 	/**
 	 * SQL種別<br>
 	 */
-	protected enum SqlType {
-		INSERT, UPDATE, SELECT, DELETE;
+	public static enum SqlType {
+		/** insert */
+		INSERT,
+		/** update */
+		UPDATE,
+		/** select */
+		SELECT,
+		/** delete */
+		DELETE;
 	}
 }
