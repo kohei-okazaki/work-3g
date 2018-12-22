@@ -32,7 +32,7 @@ api, business, common, tool, webで共通的に使う外部ライブラリを定
 ddlなどを定義したプロジェクト  
 
 ### ha-tool  
-指定フォーマットのExcelからDDLなどを自動生成するプロジェクト  
+指定のフォーマットのExcelからDDLなどを自動生成するプロジェクト  
 
 ### ha-web  
 管理画面のプロジェクト  
