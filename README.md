@@ -1,14 +1,14 @@
 # work-3g
 健康管理アプリ  
 
-## ビルド手順(windows)  
+## 01_ビルド手順(windows)  
 1.コマンドプロンプトでha-build/batまで移動  
 2.maven-build.batを実行 
 (build.iniのbaseDirの値を適宜合わせて下さい、work3gの直下にha-common等がみれるように)  
 3.ha-apiをjarでエクスポートし以下のプロジェクトのWEB-INF/libに配置  
 ・ha-web  
 
-## Project構成  
+## 02_Project構成  
 ### ha-api  
 BodyにJsonを設定したPost形式のHttpリクエストを処理するプロジェクト  
 
