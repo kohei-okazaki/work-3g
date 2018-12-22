@@ -21,7 +21,7 @@ public @interface LogParam {
 	/**
 	 * 名前
 	 *
-	 * @return
+	 * @return 名前
 	 */
 	String name();
 }

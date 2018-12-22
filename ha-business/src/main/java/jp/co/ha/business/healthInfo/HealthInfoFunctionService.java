@@ -15,7 +15,7 @@ public interface HealthInfoFunctionService {
 	 *
 	 * @param entity
 	 *     健康情報ファイル設定
-	 * @return
+	 * @return 判定結果
 	 */
 	boolean useHealthInfoMask(HealthInfoFileSetting entity);
 
@@ -25,7 +25,7 @@ public interface HealthInfoFunctionService {
 	 *
 	 * @param entity
 	 *     健康情報ファイル設定
-	 * @return
+	 * @return 判定結果
 	 */
 	boolean useFileEnclosureCharFlag(HealthInfoFileSetting entity);
 

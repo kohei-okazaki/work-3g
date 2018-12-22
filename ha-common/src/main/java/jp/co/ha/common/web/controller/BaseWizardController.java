@@ -34,9 +34,9 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 *     Model
 	 * @param request
 	 *     HttpServletRequest
-	 * @return
+	 * @return view名
 	 * @throws BaseException
-	 *     例外クラス
+	 *     基底例外
 	 */
 	String input(Model model, HttpServletRequest request) throws BaseException;
 
@@ -49,9 +49,9 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 *     F extends BaseForm
 	 * @param result
 	 *     BindingResult
-	 * @return
+	 * @return view名
 	 * @throws BaseException
-	 *     例外クラス
+	 *     基底例外
 	 */
 	String confirm(Model model, @Valid F form, BindingResult result) throws BaseException;
 
@@ -64,9 +64,9 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
 	 *     F extends BaseForm
 	 * @param request
 	 *     HttpServletRequest
-	 * @return
+	 * @return view名
 	 * @throws BaseException
-	 *     例外クラス
+	 *     基底例外
 	 */
 	String complete(Model model, F form, HttpServletRequest request) throws BaseException;
 

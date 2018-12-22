@@ -17,9 +17,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface ExcelDownloadModel {
 
+	/** シート名 */
 	String sheetName() default "Sheet1";
 
+	/** ヘッダ名 */
 	String[] headerNames() default "";
 
+	/** フッタ名 */
 	String[] footerNames() default "";
 }

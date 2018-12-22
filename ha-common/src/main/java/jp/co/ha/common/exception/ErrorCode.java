@@ -154,7 +154,7 @@ public enum ErrorCode {
 	 *
 	 * @param innerErrorCode
 	 *    内部エラーコード
-	 * @return
+	 * @return エラーコード列挙
 	 */
 	public static ErrorCode of(String innerErrorCode) {
 		return Stream.of(ErrorCode.class.getEnumConstants())

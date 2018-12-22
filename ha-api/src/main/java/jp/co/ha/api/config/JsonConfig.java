@@ -17,6 +17,11 @@ import jp.co.ha.business.api.type.RequestType;
 @Configuration
 public class JsonConfig {
 
+	/**
+	 * ObjectMapperをBeanに登録
+	 *
+	 * @return ObjectMapper
+	 */
 	@Bean
 	public ObjectMapper jsonObjectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
@@ -27,7 +32,7 @@ public class JsonConfig {
 	/**
 	 * JSONデシリアライズするモジュールを取得<br>
 	 *
-	 * @return
+	 * @return Module
 	 */
 	private Module getDeserializeModule() {
 		SimpleModule module = new SimpleModule();

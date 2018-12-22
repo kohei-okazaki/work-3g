@@ -17,7 +17,7 @@ public interface HealthInfoCalcService {
 	 *     入力体重
 	 * @param beforeWeight
 	 *     前の体重
-	 * @return
+	 * @return 健康情報ステータス
 	 */
 	HealthStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
 

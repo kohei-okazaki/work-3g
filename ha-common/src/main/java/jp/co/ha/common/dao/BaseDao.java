@@ -19,9 +19,13 @@ import jp.co.ha.common.util.BeanUtil;
  */
 public abstract class BaseDao {
 
+	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	/** Connection */
 	private Connection con;
+	/** Statement */
 	private Statement stm;
+	/** ResultSet */
 	protected ResultSet rs;
 
 	/**
@@ -58,7 +62,7 @@ public abstract class BaseDao {
 	/**
 	 * 次の要素が存在するか返す<br>
 	 *
-	 * @return
+	 * @return　判定結果
 	 * @throws DataBaseException
 	 *     SQL実行時に出る例外
 	 */
@@ -77,6 +81,7 @@ public abstract class BaseDao {
 	 *     実行するSQL
 	 * @param type
 	 *     SQL文のタイプ
+	 * @return 実行結果
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */
@@ -125,7 +130,14 @@ public abstract class BaseDao {
 	/**
 	 * SQL種別<br>
 	 */
-	protected enum SqlType {
-		INSERT, UPDATE, SELECT, DELETE;
+	public static enum SqlType {
+		/** insert */
+		INSERT,
+		/** update */
+		UPDATE,
+		/** select */
+		SELECT,
+		/** delete */
+		DELETE;
 	}
 }

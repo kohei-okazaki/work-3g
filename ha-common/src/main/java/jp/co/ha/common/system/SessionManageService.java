@@ -47,7 +47,7 @@ public interface SessionManageService {
 	 *     セッションキー
 	 * @param clazz
 	 *     型
-	 * @return
+	 * @return セッション情報
 	 */
 	<T> T getValue(HttpSession session, String key, Class<T> clazz);
 

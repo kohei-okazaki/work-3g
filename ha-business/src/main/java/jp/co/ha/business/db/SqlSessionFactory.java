@@ -27,6 +27,11 @@ public class SqlSessionFactory {
 	private SqlSessionFactory() {
 	}
 
+	/**
+	 * インスタンスを返す
+	 *
+	 * @return instance
+	 */
 	public static SqlSessionFactory getInstance() {
 		return instance;
 	}
@@ -34,9 +39,9 @@ public class SqlSessionFactory {
 	/**
 	 * SQLセッションを取得する<br>
 	 *
-	 * @return
+	 * @return SqlSession
 	 * @throws BaseException
-	 *     例外
+	 *     基底例外
 	 */
 	public SqlSession getSqlSession() throws BaseException {
 		String sysPath = this.getClass().getClassLoader().getResource("").getPath();

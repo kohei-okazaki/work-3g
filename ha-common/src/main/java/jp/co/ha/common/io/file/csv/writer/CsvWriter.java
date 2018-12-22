@@ -136,7 +136,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 *
 	 * @param clazz
 	 *     CsvModelアノテーションのついたクラス型
-	 * @return ヘッダ名
+	 * @return ヘッダーリスト
 	 */
 	protected List<String> getHeaderList(Class<?> clazz) {
 		List<String> headerList = new ArrayList<>();
@@ -148,8 +148,8 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 * フッタ名を取得する<br>
 	 *
 	 * @param clazz
-	 *     CsvModelアノテーションのついたクラス型
-	 * @return
+	 *     CSVModelアノテーションのついたクラス型
+	 * @return フッターリスト
 	 */
 	protected List<String> getFooterList(Class<?> clazz) {
 		List<String> footerList = new ArrayList<>();

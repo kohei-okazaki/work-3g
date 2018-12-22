@@ -16,6 +16,7 @@ public interface AccountSearchService {
 	 *     ユーザID
 	 * @return アカウント情報
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	Account findByUserId(String userId) throws BaseException;
 

@@ -15,6 +15,7 @@ public interface HealthInfoFileSettingUpdateService {
 	 * @param entity
 	 *     健康情報ファイル設定
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	void update(HealthInfoFileSetting entity) throws BaseException;
 }

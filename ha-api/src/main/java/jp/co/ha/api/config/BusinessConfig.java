@@ -26,7 +26,7 @@ public class BusinessConfig {
 	/**
 	 * アカウント情報検索サービス
 	 *
-	 * @return
+	 * @return AccountSearchService
 	 */
 	@Bean
 	public AccountSearchService accountSearchService() {
@@ -36,7 +36,7 @@ public class BusinessConfig {
 	/**
 	 * 健康情報検索サービス
 	 *
-	 * @return
+	 * @return HealthInfoSearchService
 	 */
 	@Bean
 	public HealthInfoSearchService healthInfoSearchService() {
@@ -46,7 +46,7 @@ public class BusinessConfig {
 	/**
 	 * 健康情報作成サービス
 	 *
-	 * @return
+	 * @return HealthInfoCreateService
 	 */
 	@Bean
 	public HealthInfoCreateService healthInfoCreateService() {
@@ -56,7 +56,7 @@ public class BusinessConfig {
 	/**
 	 * 健康情報計算サービス
 	 *
-	 * @return
+	 * @return HealthInfoCalcService
 	 */
 	@Bean
 	public HealthInfoCalcService healthInfoCalcService() {
@@ -66,7 +66,7 @@ public class BusinessConfig {
 	/**
 	 * 健康情報利用機能サービス
 	 *
-	 * @return
+	 * @return HealthInfoFunctionService
 	 */
 	@Bean
 	public HealthInfoFunctionService healthInfoFunctionService() {
@@ -76,7 +76,7 @@ public class BusinessConfig {
 	/**
 	 * DB共通処理
 	 *
-	 * @return
+	 * @return DataBaseCommonExecutor
 	 */
 	@Bean
 	public DataBaseCommonExecutor dataBaseCommonExecutor() {
@@ -86,7 +86,7 @@ public class BusinessConfig {
 	/**
 	 * API共通処理
 	 *
-	 * @return
+	 * @return ApiConnectionService
 	 */
 	@Bean
 	public ApiConnectionService apiConnectionService() {

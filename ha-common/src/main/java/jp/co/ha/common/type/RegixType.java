@@ -33,7 +33,7 @@ public enum RegixType {
 	/**
 	 * 正規表現を返す<br>
 	 *
-	 * @return
+	 * @return 正規表現
 	 */
 	public String getPattern() {
 		return this.pattern;
@@ -45,7 +45,7 @@ public enum RegixType {
 	 *
 	 * @param target
 	 *     対象文字列
-	 * @return
+	 * @return 判定結果
 	 */
 	public boolean is(String target) {
 		return target.matches(this.getPattern());

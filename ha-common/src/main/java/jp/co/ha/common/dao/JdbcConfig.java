@@ -33,6 +33,11 @@ public class JdbcConfig {
 		}
 	}
 
+	/**
+	 * JdbcConfigを返す
+	 *
+	 * @return instance
+	 */
 	public static JdbcConfig getInstance() {
 		return instance;
 	}
@@ -67,18 +72,38 @@ public class JdbcConfig {
 		}
 	}
 
+	/**
+	 * driverClassNameを返す
+	 *
+	 * @return driverClassName
+	 */
 	public String getDriverClassName() {
 		return driverClassName;
 	}
 
+	/**
+	 * urlを返す
+	 *
+	 * @return url
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/**
+	 * usernameを返す
+	 *
+	 * @return username
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * passwordを返す
+	 *
+	 * @return password
+	 */
 	public String getPassword() {
 		return password;
 	}

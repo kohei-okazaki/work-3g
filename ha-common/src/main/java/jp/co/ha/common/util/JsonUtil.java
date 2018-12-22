@@ -30,7 +30,7 @@ public class JsonUtil {
 	 *     対象文字列
 	 * @param clazz
 	 *     Beanクラス型
-	 * @return
+	 * @return Javaインスタンス
 	 * @throws BaseException
 	 *     アプリ例外
 	 */
@@ -52,7 +52,7 @@ public class JsonUtil {
 	 *
 	 * @param target
 	 *     対象文字列
-	 * @return
+	 * @return Json文字列
 	 * @throws BaseException
 	 *     アプリ例外
 	 */

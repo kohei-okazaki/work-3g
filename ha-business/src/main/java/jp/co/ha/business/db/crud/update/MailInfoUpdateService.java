@@ -15,6 +15,7 @@ public interface MailInfoUpdateService {
 	 * @param mailInfo
 	 *     メール情報
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	void update(MailInfo mailInfo) throws BaseException;
 }

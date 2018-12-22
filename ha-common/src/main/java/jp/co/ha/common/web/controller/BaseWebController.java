@@ -14,7 +14,7 @@ public interface BaseWebController {
 	 *
 	 * @param view
 	 *     BaseView
-	 * @return
+	 * @return View名
 	 */
 	default String getView(BaseView view) {
 		return view.getName();

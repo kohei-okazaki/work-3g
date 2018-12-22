@@ -18,8 +18,9 @@ public interface HealthInfoRegistService
 	 *
 	 * @param request
 	 *     リクエスト
-	 * @return
+	 * @return HealthInfo
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException;
 
@@ -28,8 +29,9 @@ public interface HealthInfoRegistService
 	 *
 	 * @param healthInfo
 	 *     健康情報
-	 * @return
+	 * @return HealthInfoRegistResponse
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	HealthInfoRegistResponse toResponse(HealthInfo healthInfo) throws BaseException;
 

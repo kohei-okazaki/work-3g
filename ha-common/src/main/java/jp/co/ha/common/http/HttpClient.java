@@ -104,7 +104,7 @@ public class HttpClient {
 	 *
 	 * @param encoding
 	 *     Encode
-	 * @return
+	 * @return エンコード文字列
 	 */
 	private String getEncoding(String encoding) {
 		if (BeanUtil.isNull(encoding)) {

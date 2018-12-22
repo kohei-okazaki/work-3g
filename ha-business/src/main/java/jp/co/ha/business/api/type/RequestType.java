@@ -41,7 +41,7 @@ public enum RequestType {
 	 *
 	 * @param requestId
 	 *     リクエストID
-	 * @return
+	 * @return RequestType
 	 */
 	@JsonCreator
 	public static RequestType of(String requestId) {

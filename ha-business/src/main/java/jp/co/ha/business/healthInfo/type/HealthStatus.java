@@ -56,7 +56,7 @@ public enum HealthStatus {
 	 *
 	 * @param code
 	 *     コード値
-	 * @return
+	 * @return HealthStatus
 	 */
 	public static HealthStatus of(String code) {
 		return Stream.of(HealthStatus.class.getEnumConstants())

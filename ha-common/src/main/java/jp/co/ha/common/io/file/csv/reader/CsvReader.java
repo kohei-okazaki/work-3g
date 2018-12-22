@@ -12,8 +12,8 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.type.AccessorType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -31,9 +31,9 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 *
 	 * @param record
 	 *     レコード
-	 * @return
+	 * @return CSVモデル
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	@SuppressWarnings("unchecked")
 	public T read(String record) throws BaseException {
@@ -82,7 +82,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 *     カラムリスト
 	 * @param dataList
 	 *     データリスト
-	 * @throws BaseException
+	 * @throws BaseException 基底例外
 	 */
 	private void checkFileLength(List<String> colList, List<String> dataList) throws BaseException {
 		if (dataList.size() != colList.size()) {

@@ -15,6 +15,7 @@ public interface AccountUpdateService {
 	 * @param account
 	 *     アカウント情報
 	 * @throws BaseException
+	 *     基底例外
 	 */
 	void update(Account account) throws BaseException;
 }
