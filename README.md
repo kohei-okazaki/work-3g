@@ -23,3 +23,19 @@ api, webで共通的に使うbusinessロジックをまとめたプロジェク�
 Util, 基底クラスをまとめたプロジェクト  
 
 ### ha-db  
+Tableに対応したEntityとMapperのみを定義したプロジェクト  
+
+### ha-pom  
+api, business, common, tool, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+
+### ha-resource  
+ddlなどを定義したプロジェクト  
+
+### ha-tool  
+指定フォーマットのExcelからDDLなどを自動生成するプロジェクト  
+
+### ha-web  
+管理画面のプロジェクト  
+
+
+
