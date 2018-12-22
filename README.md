@@ -7,3 +7,19 @@
 (build.iniのbaseDirの値を適宜合わせて下さい、work3gの直下にha-common等がみれるように)  
 3.ha-apiをjarでエクスポートし以下のプロジェクトのWEB-INF/libに配置  
 ・ha-web  
+
+## Project構成  
+### ha-api  
+BodyにJsonを設定したPost形式のHttpリクエストを処理するプロジェクト  
+
+### ha-build  
+ローカル環境でjarを作成するプロジェクト  
+windows, linuxで用意  
+
+### ha-business  
+api, webで共通的に使うbusinessロジックをまとめたプロジェクト  
+
+### ha-common  
+Util, 基底クラスをまとめたプロジェクト  
+
+### ha-db  
