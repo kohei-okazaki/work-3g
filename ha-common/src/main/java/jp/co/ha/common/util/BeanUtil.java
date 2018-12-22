@@ -13,7 +13,6 @@ import java.util.Objects;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.type.AccessorType;
 
 /**
  * Bean系のUtilクラス<br>
@@ -218,6 +217,18 @@ public class BeanUtil {
 			LOG.warn("メソッドがみつかりません", e);
 		}
 		return accessor;
+	}
+
+	/**
+	 * メソッドのアクセス列挙<br>
+	 * @see BeanUtil#getAccessor(String, Class, AccessorType)
+	 *
+	 */
+	public static enum AccessorType {
+		/** setter */
+		SETTER,
+		/** getter */
+		GETTER;
 	}
 
 }

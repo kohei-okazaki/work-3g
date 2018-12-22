@@ -12,8 +12,8 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.type.AccessorType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.StringUtil;
 
 /**

@@ -7,16 +7,26 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 
 /**
  * ファイル操作のUtilクラス
  *
  */
 public class FileUtil {
+
+	/** LOG */
+	private static final Logger LOG = LoggerFactory.getLogger(FileUtil.class);
 
 	/**
 	 * プライベートコンストラクタ
@@ -31,16 +41,8 @@ public class FileUtil {
 	 *     ファイルパス
 	 * @return ファイルパス配下に存在する全ファイル
 	 */
-	public static List<File> getAllFile(String path) {
-		List<File> fileList = new ArrayList<>();
-		for (File file : new File(path).listFiles()) {
-			if (file.isFile()) {
-				fileList.add(file);
-			} else {
-				fileList.addAll(getFileList(file));
-			}
-		}
-		return fileList;
+	public static List<File> getFileList(String path) {
+		return getFileList(getFile(path));
 	}
 
 	/**
@@ -67,11 +69,12 @@ public class FileUtil {
 	 *
 	 * @param srcFileList
 	 *     zipファイルに含めたいファイルのリスト
-	 * @param destFilePath 出力先ファイルパス
+	 * @param destFilePath
+	 *     出力先ファイルパス
 	 * @return zipファイル
 	 */
 	public static File toZip(List<File> srcFileList, String destFilePath) {
-		File zipFile = new File(destFilePath);
+		File zipFile = getFile(destFilePath);
 		try (FileOutputStream fos = new FileOutputStream(zipFile.getName());
 				ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile.getName()));
 				BufferedOutputStream bos = new BufferedOutputStream(fos)) {
@@ -79,12 +82,12 @@ public class FileUtil {
 			for (File srcFile : srcFileList) {
 				ZipEntry entry = new ZipEntry(srcFile.getName());
 				zos.putNextEntry(entry);
-				if (srcFile.getName().endsWith(File.separator)) {
+				if (srcFile.getName().endsWith(FileSeparator.SYSTEM.getSeparator())) {
 					zos.closeEntry();
 					continue;
 				}
 
-				try (FileInputStream fis = new FileInputStream(destFilePath + File.separator + srcFile);
+				try (FileInputStream fis = new FileInputStream(destFilePath + FileSeparator.SYSTEM.getSeparator() + srcFile);
 						BufferedInputStream bis = new BufferedInputStream(fis)) {
 					int size = 0;
 					byte[] buffer = new byte[1024];
@@ -95,18 +98,103 @@ public class FileUtil {
 
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			srcFileList.stream().forEach(srcFile -> {
+				LOG.warn(srcFile.getPath(), e);
+			});
+			LOG.warn("ファイルが見つかりません destFile:" + destFilePath, e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.warn("Zipへの圧縮に失敗しました", e);
 		}
-
 		return zipFile;
 	}
 
 	public static List<File> unZip(File srcZipFile) {
+		// TODO
 		List<File> destFileList = new ArrayList<>();
 
 		return destFileList;
+	}
+
+	/**
+	 * ファイルのコピーを行う
+	 *
+	 * @param srcFile
+	 *     コピー元ファイル
+	 * @param destFile
+	 *     コピー先ファイル
+	 */
+	public static void copyFile(File srcFile, File destFile) {
+		try (FileInputStream fis = new FileInputStream(srcFile);
+				FileOutputStream fos = new FileOutputStream(destFile)) {
+
+			byte[] buf = new byte[1024];
+			int length = 0;
+
+			// Fileの終わりまで読込
+			while ((length = fis.read(buf)) != -1) {
+				fos.write(buf);
+				fos.flush();
+			}
+		} catch (FileNotFoundException e) {
+			LOG.warn("ファイルが見つかりません srcFile:" + srcFile.getPath() + " destFile:" + destFile.getPath(), e);
+		} catch (IOException e) {
+			LOG.warn("ファイルの書き込みや読み込みに失敗しました", e);
+		}
+	}
+
+	/**
+	 * ファイルのコピーを行う
+	 *
+	 * @param srcPath
+	 *     コピー元ファイル
+	 * @param destPath
+	 *     コピー先ファイル
+	 */
+	public static void copyFile(String srcPath, String destPath) {
+		Path src = Paths.get(srcPath);
+		Path dest = Paths.get(destPath);
+		try {
+			Files.deleteIfExists(dest);
+			Files.copy(src, dest);
+		} catch (IOException e) {
+			LOG.warn("ファイルのコピーに失敗しました srcFilePath:" + srcPath + " destFilePath:" + destPath, e);
+		}
+	}
+
+	/**
+	 * 指定された<code>srcPath</code>を指定された<code>sep</code>のパスに変換する
+	 *
+	 * @param srcPath
+	 *     パス
+	 * @param sep
+	 *     ファイルセパレータ
+	 * @return ファイル
+	 */
+	public static File convertPathFile(String srcPath, FileSeparator sep) {
+		if (FileSeparator.WINDOWS.is(sep)) {
+			if (srcPath.contains(FileSeparator.WINDOWS.getSeparator())) {
+				return getFile(srcPath);
+			} else {
+				return getFile(srcPath.replaceAll(FileSeparator.LINUX.getSeparator(), FileSeparator.WINDOWS.getSeparator()));
+			}
+		} else {
+			if (srcPath.contains(FileSeparator.LINUX.getSeparator())) {
+				return getFile(srcPath);
+			} else {
+				return getFile(srcPath.replaceAll(FileSeparator.WINDOWS.getSeparator(), FileSeparator.LINUX.getSeparator()));
+			}
+		}
+	}
+
+	/**
+	 * 指定したパスのファイルオブジェクトを返す
+	 *
+	 * @param path
+	 *     パス
+	 * @return ファイル
+	 */
+	public static File getFile(String path) {
+		return new File(path);
 	}
 
 	/**
@@ -156,5 +244,52 @@ public class FileUtil {
 		public boolean is(FileSuffix suffix) {
 			return this == suffix;
 		}
+	}
+
+	/**
+	 * ファイルセパレータの列挙
+	 */
+	public static enum FileSeparator {
+
+		/** Windows */
+		WINDOWS("\\"),
+		/** linux */
+		LINUX("/"),
+		/** system */
+		SYSTEM(FileSystems.getDefault().getSeparator());
+
+		/**
+		 * コンストラクタ
+		 *
+		 * @param separator
+		 *     セパレータ
+		 */
+		private FileSeparator(String separator) {
+			this.separator = separator;
+		}
+
+		/** セパレータ */
+		private String separator;
+
+		/**
+		 * セパレータを返す
+		 *
+		 * @return separator
+		 */
+		public String getSeparator() {
+			return this.separator;
+		}
+
+		/**
+		 * 指定したファイルセパレータが自身と一致するかどうか返す<br>
+		 *
+		 * @param separator
+		 *     セパレータ
+		 * @return 判定結果
+		 */
+		public boolean is(FileSeparator separator) {
+			return this == separator;
+		}
+
 	}
 }
