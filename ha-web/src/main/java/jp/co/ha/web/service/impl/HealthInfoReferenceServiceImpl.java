@@ -33,13 +33,13 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private HealthInfoSearchService healthInfoSearchService;
 
 	/**
-	 * 健康情報を取得する<br>
+	 * 健康情報リストを取得する<br>
 	 *
 	 * @param form
 	 *     健康情報照会画面フォーム
 	 * @param userId
 	 *     ユーザID
-	 * @return
+	 * @return 健康情報リスト
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -73,7 +73,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 *
 	 * @param date
 	 *     日付
-	 * @return
+	 * @return 日付
 	 */
 	private Date editStrDate(String date) {
 		String strDate = date.replace(StringUtil.HYPHEN, StringUtil.THRASH);
@@ -88,7 +88,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
 		List<HealthInfo> entityList = getHealthInfo(form, userId);
-		List<HealthInfoReferenceResponse> resultList = new ArrayList<HealthInfoReferenceResponse>();
+		List<HealthInfoReferenceResponse> resultList = new ArrayList<>();
 		entityList.stream().forEach(entity -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(entity, response);
@@ -110,7 +110,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	@Override
 	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
 
-		List<ReferenceCsvDownloadModel> modelList = new ArrayList<ReferenceCsvDownloadModel>();
+		List<ReferenceCsvDownloadModel> modelList = new ArrayList<>();
 		Stream.iterate(0, i -> ++i).limit(resultList.size()).forEach(i -> {
 			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
 			HealthInfoReferenceResponse healthInfo = resultList.get(i);

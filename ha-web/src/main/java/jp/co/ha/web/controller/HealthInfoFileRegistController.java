@@ -24,7 +24,7 @@ import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.common.web.controller.BaseWebController;
+import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.web.form.HealthInfoFileForm;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
 import jp.co.ha.web.service.annotation.HealthInfoUploadCsv;
@@ -37,7 +37,7 @@ import jp.co.ha.web.view.ManageWebView;
  */
 @Controller
 @RequestMapping("healthInfoFile")
-public class HealthInfoFileRegistController implements BaseWebController {
+public class HealthInfoFileRegistController implements BaseWizardController<HealthInfoFileForm> {
 
 	/** 健康情報CSVアップロードサービス */
 	@Autowired
@@ -64,6 +64,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@InitBinder("healthInfoFileForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new HealthInfoFileInputValidator());
@@ -72,6 +73,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@GetMapping(value = "/input.html")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.HEALTH_INFO_FILE_INPUT);
@@ -80,6 +82,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
@@ -89,9 +92,6 @@ public class HealthInfoFileRegistController implements BaseWebController {
 		}
 
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
-		if (BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-		}
 
 		List<HealthInfoCsvUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
 		fileService.formatCheck(modelList, userId);
@@ -104,6 +104,7 @@ public class HealthInfoFileRegistController implements BaseWebController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
 

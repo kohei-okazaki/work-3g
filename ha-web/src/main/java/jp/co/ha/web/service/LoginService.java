@@ -26,7 +26,7 @@ public interface LoginService {
 	 *
 	 * @param loginForm
 	 *     ログインフォーム
-	 * @return
+	 * @return 判定結果
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -38,7 +38,7 @@ public interface LoginService {
 	 *
 	 * @param loginForm
 	 *     ログインフォーム
-	 * @return
+	 * @return 判定結果
 	 * @throws BaseException
 	 *     基底例外
 	 */

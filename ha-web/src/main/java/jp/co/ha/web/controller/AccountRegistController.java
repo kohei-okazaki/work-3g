@@ -27,7 +27,6 @@ import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.web.form.AccountRegistForm;
 import jp.co.ha.web.service.AccountRegistService;
-import jp.co.ha.web.validator.AccountRegistValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -56,14 +55,13 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@InitBinder("accountRegistForm")
 	public void initBinder(WebDataBinder binder) {
-		AccountRegistValidator validator = new AccountRegistValidator();
-		binder.addValidators(validator);
+
 	}
 
 	/**
 	 * Formを返す<br>
 	 *
-	 * @return
+	 * @return AccountRegistForm
 	 */
 	@ModelAttribute
 	public AccountRegistForm setUpForm() {
@@ -86,7 +84,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@NonAuth
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result) throws BaseException {
+	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合

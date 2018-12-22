@@ -15,7 +15,7 @@ public interface AccountRegistService {
 	 *
 	 * @param form
 	 *     アカウント登録画面フォーム
-	 * @return
+	 * @return 判定結果
 	 * @throws BaseException
 	 *     基底例外
 	 */

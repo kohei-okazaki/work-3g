@@ -86,7 +86,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/**
 	 * Formを返す<br>
 	 *
-	 * @return
+	 * @return HealthInfoReferenceForm
 	 */
 	@ModelAttribute
 	public HealthInfoReferenceForm setUpForm() {
@@ -100,7 +100,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *
 	 * @param model
 	 *     Model
-	 * @return
+	 * @return 検索照会画面
 	 */
 	@GetMapping(value = "/index.html")
 	public String reference(Model model) {
@@ -118,7 +118,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     検索情報フォーム
 	 * @param result
 	 *     BindingResult
-	 * @return
+	 * @return 検索結果画面
 	 * @throws BaseException
 	 *     アプリ例外
 	 */
@@ -131,9 +131,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 		}
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		if (BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-		}
 
 		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
 
@@ -155,7 +152,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *
 	 * @param request
 	 *     HttpServletRequest
-	 * @return
+	 * @return ModelAndView
 	 * @throws BaseException
 	 *     アプリ例外
 	 */

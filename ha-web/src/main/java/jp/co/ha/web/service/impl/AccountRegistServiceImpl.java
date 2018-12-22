@@ -68,11 +68,11 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	}
 
 	/**
-	 * アカウントEntityに変換する<br>
+	 * アカウント情報Entityに変換する<br>
 	 *
 	 * @param form
 	 *     アカウント登録画面フォーム
-	 * @return
+	 * @return アカウント情報Entity
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -91,9 +91,9 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 *
 	 * @param form
 	 *     アカウント登録画面フォーム
-	 * @return
+	 * @return HealthInfoFileSetting
 	 */
-	public HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form) {
+	private HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
 		entity.setUserId(form.getUserId());
 		entity.setEnclosureCharFlag(StringUtil.FALSE_FLAG);

@@ -45,13 +45,13 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	}
 
 	/**
-	 * フォーム情報をEntityクラスに変換する<br>
+	 * フォーム情報を健康情報ファイル設定情報Entityに変換する<br>
 	 *
 	 * @param isFirstReg
 	 *     初回登録かどうか
 	 * @param form
 	 *     健康情報ファイル設定フォーム
-	 * @return
+	 * @return HealthInfoFileSetting
 	 */
 	private HealthInfoFileSetting toEntity(boolean isFirstReg, HealthInfoFileSettingForm form) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();

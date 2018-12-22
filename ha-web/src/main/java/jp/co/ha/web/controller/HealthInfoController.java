@@ -46,7 +46,6 @@ import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 import jp.co.ha.web.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.web.service.annotation.HealthInfoDownloadExcel;
-import jp.co.ha.web.validator.HealthInfoValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -84,13 +83,13 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Override
 	@InitBinder("healthInfoForm")
 	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(new HealthInfoValidator());
+
 	}
 
 	/**
 	 * Formを返す<br>
 	 *
-	 * @return
+	 * @return HealthInfoForm
 	 */
 	@ModelAttribute("healthInfoForm")
 	public HealthInfoForm setUpForm() {
@@ -111,7 +110,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 */
 	@Override
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
 		if (result.hasErrors()) {
 			// バリエーションエラーの場合
@@ -164,7 +163,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *     ユーザID
 	 * @param form
 	 *     HealthInfoForm
-	 * @return
+	 * @return ModelAndView
 	 * @throws BaseException
 	 *     基底例外
 	 */
