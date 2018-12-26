@@ -10,11 +10,11 @@
 
 ## 02_Project構成  
 ### ha-api  
-BodyにJsonを設定したPost形式のHttpリクエストを処理するプロジェクト  
+BodyにJsonを設定したPOST形式のHTTPリクエストを処理するプロジェクト  
 
 ### ha-build  
 ローカル環境でjarを作成するプロジェクト  
-windows, linuxで用意  
+windows, linuxでそれぞれbatとshを用意  
 
 ### ha-business  
 api, webで共通的に使うbusinessロジックをまとめたプロジェクト  
