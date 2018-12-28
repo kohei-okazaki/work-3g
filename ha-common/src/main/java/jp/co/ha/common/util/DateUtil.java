@@ -143,8 +143,19 @@ public class DateUtil {
 	 */
 	public static Date toStartDate(Date targetDate) {
 		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatType.YYYYMMDD.getValue() + " 00:00:00");
-		String result = sdf.format(targetDate);
-		return toDate(result);
+		return toDate(sdf.format(targetDate));
+	}
+
+	/**
+	 * 指定した日付の時分秒を23:59:59を返す<br>
+	 *
+	 * @param targetDate
+	 *     対象日付
+	 * @return 日付
+	 */
+	public static Date toEndDate(Date targetDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat(DateFormatType.YYYYMMDD.getValue() + " 23:59:59");
+		return toDate(sdf.format(targetDate));
 	}
 
 	/**

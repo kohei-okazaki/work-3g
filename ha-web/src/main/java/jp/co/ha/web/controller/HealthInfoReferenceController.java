@@ -29,11 +29,9 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
-import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -96,19 +94,17 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * 検索照会画面<br>
+	 * 検索照会画面
 	 *
-	 * @param model
-	 *     Model
 	 * @return 検索照会画面
 	 */
 	@GetMapping(value = "/index.html")
-	public String reference(Model model) {
+	public String reference() {
 		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
-	 * 検索結果画面を表示<br>
+	 * 検索結果画面を表示
 	 *
 	 * @param request
 	 *     HttpServletRequest
@@ -120,7 +116,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     BindingResult
 	 * @return 検索結果画面
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	@PostMapping(value = "/index.html")
 	public String reference(HttpServletRequest request, Model model
@@ -148,19 +144,19 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * Excelダウンロードを実行<br>
+	 * Excelダウンロードを実行
 	 *
 	 * @param request
 	 *     HttpServletRequest
 	 * @return ModelAndView
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class);
-		if (BeanUtil.isNull(resultList) || resultList.isEmpty()) {
+		if (CollectionUtil.isEmpty(resultList)) {
 			// レコードが見つからなかった場合
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
@@ -170,7 +166,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * CSVダウンロードを実行<br>
+	 * CSVダウンロードを実行
 	 *
 	 * @param request
 	 *     HttpServletRequest
@@ -192,7 +188,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
-		CsvConfig conf = getCsvConfig("結果照会.csv", fileSetting);
+		CsvConfig conf = service.getCsvConfig(fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
@@ -205,24 +201,4 @@ public class HealthInfoReferenceController implements BaseWebController {
 		}
 	}
 
-	/**
-	 * CSV設定情報を取得する<br>
-	 *
-	 * @param fileName
-	 *     ファイル名
-	 * @param entity
-	 *     健康情報ファイル設定
-	 * @return CsvConfig
-	 */
-	private CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting entity) {
-		CsvConfig csvConfig = new CsvConfig();
-		csvConfig.setFileName(fileName);
-		csvConfig.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
-		csvConfig.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
-		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
-		csvConfig.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
-		csvConfig.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
-		csvConfig.setCharset(Charset.UTF_8);
-		return csvConfig;
-	}
 }

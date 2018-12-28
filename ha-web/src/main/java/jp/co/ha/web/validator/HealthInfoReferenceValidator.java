@@ -8,7 +8,7 @@ import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 
 /**
- * 結果照会画面のValidatorクラス<br>
+ * 結果照会画面のValidator
  *
  */
 public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoReferenceForm> {
@@ -38,17 +38,17 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時" },
-							ErrorCode.REQUIRE.getErrorMessage());
+					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getValidateMessage(), new String[] { "登録日時" },
+							ErrorCode.REQUIRE.getValidateMessage());
 				}
 			} else {
 				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(開始) " },
-							ErrorCode.REQUIRE.getErrorMessage());
+					errors.rejectValue("fromRegDate", ErrorCode.REQUIRE.getValidateMessage(), new String[] { "登録日時(開始) " },
+							ErrorCode.REQUIRE.getValidateMessage());
 				}
 				if (StringUtil.isEmpty(form.getToRegDate())) {
-					errors.rejectValue("toRegDate", ErrorCode.REQUIRE.getErrorMessage(), new String[] { "登録日時(終了)" },
-							ErrorCode.REQUIRE.getErrorMessage());
+					errors.rejectValue("toRegDate", ErrorCode.REQUIRE.getValidateMessage(), new String[] { "登録日時(終了)" },
+							ErrorCode.REQUIRE.getValidateMessage());
 				}
 			}
 		}

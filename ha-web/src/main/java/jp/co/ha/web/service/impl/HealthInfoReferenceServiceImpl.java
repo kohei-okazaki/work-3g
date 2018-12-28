@@ -12,12 +12,17 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.csv.CsvConfig;
+import jp.co.ha.common.io.file.csv.CsvFileChar;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.FileUtil.FileSuffix;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 
@@ -43,14 +48,14 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) throws BaseException {
+	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceForm form, String userId) throws BaseException {
 
 		List<HealthInfo> resultList = null;
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			Date regDate = editStrDate(form.getFromRegDate());
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 登録日直接指定フラグがONの場合
-				resultList = healthInfoSearchService.findByUserIdAndRegDate(userId, regDate);
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, DateUtil.toEndDate(regDate));
 			} else {
 				Date toRegDate = editStrDate(form.getToRegDate());
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
@@ -87,7 +92,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId) throws BaseException {
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
-		List<HealthInfo> entityList = getHealthInfo(form, userId);
+		List<HealthInfo> entityList = getHealthInfoList(form, userId);
 		List<HealthInfoReferenceResponse> resultList = new ArrayList<>();
 		entityList.stream().forEach(entity -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
@@ -104,8 +109,8 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @param userId
 	 *     ユーザID
 	 * @param resultList
-	 *     List<HealthInfoReferenceResponse>
-	 * @return modelList
+	 *     健康情報照会レスポンスリスト
+	 * @return 結果照会CSVモデルリスト
 	 */
 	@Override
 	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
@@ -121,6 +126,25 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		});
 
 		return modelList;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
+
+		CsvConfig conf = new CsvConfig();
+		String fileName = "healthInfoReference_" +
+				DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + FileSuffix.CSV.getValue();
+		conf.setFileName(fileName);
+		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
+		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
+		conf.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
+		conf.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
+		conf.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
+		conf.setCharset(Charset.UTF_8);
+		return conf;
 	}
 
 }

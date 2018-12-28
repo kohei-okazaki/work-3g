@@ -68,7 +68,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	}
 
 	/**
-	 * アカウント情報Entityに変換する<br>
+	 * アカウント情報に変換する
 	 *
 	 * @param form
 	 *     アカウント登録画面フォーム
@@ -87,11 +87,11 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	}
 
 	/**
-	 * 健康情報ファイル設定Entityに変換する<br>
+	 * 健康情報ファイル設定に変換する
 	 *
 	 * @param form
 	 *     アカウント登録画面フォーム
-	 * @return HealthInfoFileSetting
+	 * @return 健康情報ファイル設定
 	 */
 	private HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();

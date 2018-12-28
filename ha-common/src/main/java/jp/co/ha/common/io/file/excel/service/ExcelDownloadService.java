@@ -6,7 +6,7 @@ import jp.co.ha.common.exception.BaseException;
 
 /**
  * Excelダウンロードサービスインターフェース<br>
- * 継承先で@Service(value = "サービス実装用のAnnotation") をつけてInjectionすること<br>
+ * 継承先で@Service(value = "サービス実装用のAnnotation") をつけてInjectionすること
  *
  * @param <T>
  *     出力対象データ

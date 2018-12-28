@@ -46,13 +46,13 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	}
 
 	/**
-	 * 健康情報Entityをモデルに変換する<br>
+	 * 健康情報をモデルに変換する
 	 *
 	 * @param healthInfo
-	 *     HealthInfo
+	 *     健康情報
 	 * @param entity
 	 *     健康情報ファイル設定
-	 * @return model HealthInfoExcelModel
+	 * @return model
 	 */
 	private HealthInfoExcelModel toModel(HealthInfo healthInfo, HealthInfoFileSetting entity) {
 
@@ -68,7 +68,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	}
 
 	/**
-	 * Excel設定情報を取得<br>
+	 * Excel設定情報を取得
 	 *
 	 * @param healthInfoFileSetting
 	 *     健康情報設定情報

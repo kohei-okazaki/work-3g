@@ -6,8 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * リクエストタイプ<br>
- * APIのリクエストの列挙<br>
+ * APIのリクエスト種別の列挙<br>
  *
  */
 @JsonFormat(shape = JsonFormat.Shape.STRING)

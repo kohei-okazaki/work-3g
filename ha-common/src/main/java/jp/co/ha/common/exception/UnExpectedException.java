@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * 予期せぬ例外
+ * 予期せぬ例外クラス
  *
  */
 public class UnExpectedException extends BaseException {

@@ -89,7 +89,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * フォーム情報をアカウント情報にマージする<br>
+	 * フォーム情報をアカウント情報にマージする
 	 *
 	 * @param account
 	 *     アカウント情報
@@ -101,7 +101,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * フォーム情報をメール情報に変換する<br>
+	 * フォーム情報をメール情報に変換する
 	 *
 	 * @param form
 	 *     アカウント設定情報フォーム
@@ -116,7 +116,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * フォーム情報をメール情報にマージする<br>
+	 * フォーム情報をメール情報にマージする
 	 *
 	 * @param mailInfo
 	 *     メール情報
