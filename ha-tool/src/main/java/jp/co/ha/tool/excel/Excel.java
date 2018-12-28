@@ -3,11 +3,20 @@ package jp.co.ha.tool.excel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * エクセル情報保持クラス
+ *
+ */
 public class Excel {
 
+	/** シートリスト */
 	private List<Sheet> sheetList;
+	/** アクティブなシート */
 	private Sheet currentSheet;
 
+	/**
+	 * コンストラクタ
+	 */
 	public Excel() {
 		this.sheetList = new ArrayList<>();
 	}
@@ -19,14 +28,31 @@ public class Excel {
 					.orElse(null);
 	}
 
+	/**
+	 * シートを追加する
+	 *
+	 * @param sheet
+	 *     シート
+	 */
 	public void addSheet(Sheet sheet) {
 		this.sheetList.add(sheet);
 	}
 
+	/**
+	 * シートをアクティブにする
+	 *
+	 * @param sheetName
+	 *     シート名
+	 */
 	public void activeSheet(String sheetName) {
 		this.currentSheet = getSheet(sheetName);
 	}
 
+	/**
+	 * 現在のリストを全行返す
+	 *
+	 * @return 全行リスト
+	 */
 	public List<Row> getRowList() {
 		return this.currentSheet.getRowList();
 	}

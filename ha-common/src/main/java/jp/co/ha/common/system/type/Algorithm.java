@@ -38,6 +38,6 @@ public enum Algorithm implements BaseEnum {
 	@Override
 	@SuppressWarnings("unchecked")
 	public Algorithm of(String value) {
-		return BaseEnum.of(this.getClass(), value);
+		return BaseEnum.of(Algorithm.class, value);
 	}
 }

@@ -10,6 +10,10 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.tool.config.FileConfig;
 
+/**
+ * ファイル作成クラス
+ *
+ */
 public class FileFactory {
 
 	/** LOG */
@@ -18,6 +22,12 @@ public class FileFactory {
 	private FileFactory() {
 	}
 
+	/**
+	 * 指定されたファイル設定情報からファイルを作成する
+	 *
+	 * @param conf
+	 *     ファイル設定情報
+	 */
 	public static void create(FileConfig conf) {
 		LOG.info("作成 開始 ---> " + conf.getFileName());
 		File file = new File(conf.getOutputPath() + File.separator + conf.getFileName());

@@ -111,7 +111,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		// 最後に登録した健康情報を取得する
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
 
-		String userStatus = BeanUtil.isNull(lastHealthInfo)
+		String status = BeanUtil.isNull(lastHealthInfo)
 				? HealthStatus.EVEN.getCode()
 				: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getCode();
 
@@ -121,7 +121,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		entity.setWeight(weight);
 		entity.setBmi(bmi);
 		entity.setStandardWeight(standardWeight);
-		entity.setUserStatus(userStatus);
+		entity.setHealthInfoStatus(status);
 
 		return entity;
 	}

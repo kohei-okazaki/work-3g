@@ -1,4 +1,4 @@
-package jp.co.ha.common.dao;
+package jp.co.ha.common.db;
 
 import java.io.File;
 import java.io.FileInputStream;

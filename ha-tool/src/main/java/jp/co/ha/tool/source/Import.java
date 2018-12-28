@@ -4,6 +4,10 @@ import java.util.StringJoiner;
 
 import jp.co.ha.common.util.StringUtil;
 
+/**
+ * Import
+ *
+ */
 public class Import {
 
 	/** クラス型 */

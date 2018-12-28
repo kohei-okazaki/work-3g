@@ -17,12 +17,21 @@ import jp.co.ha.tool.excel.Cell;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.type.CellPositionType;
 
+/**
+ * エクセル読込クラス
+ *
+ */
 public class ExcelReader extends BaseFileReader {
 
+	/** LOG */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	private ExcelConfig conf;
 
+	/**
+	 * コンストラクタ
+	 * @param conf Excel設定情報
+	 */
 	public ExcelReader(ExcelConfig conf) {
 		this.conf = conf;
 	}
@@ -32,10 +41,14 @@ public class ExcelReader extends BaseFileReader {
 		return new Cell(cellValue);
 	}
 
+	/**
+	 * 読み込みを行う
+	 * @return Excel
+	 */
 	public Excel read() {
 		Workbook workbook;
 		try {
-			workbook = WorkbookFactory.create(getFilePath(conf.getFilePath()));
+			workbook = WorkbookFactory.create(getFile(conf.getFilePath()));
 		} catch (EncryptedDocumentException | IOException e) {
 			LOG.error("excelファイル読込エラー", e);
 			return null;

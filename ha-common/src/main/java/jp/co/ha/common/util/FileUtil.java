@@ -18,6 +18,7 @@ import java.util.zip.ZipOutputStream;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ファイル操作のUtilクラス
@@ -74,6 +75,7 @@ public class FileUtil {
 	 * @return zipファイル
 	 */
 	public static File toZip(List<File> srcFileList, String destFilePath) {
+		// TODO
 		File zipFile = getFile(destFilePath);
 		try (FileOutputStream fos = new FileOutputStream(zipFile.getName());
 				ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile.getName()));
@@ -82,12 +84,12 @@ public class FileUtil {
 			for (File srcFile : srcFileList) {
 				ZipEntry entry = new ZipEntry(srcFile.getName());
 				zos.putNextEntry(entry);
-				if (srcFile.getName().endsWith(FileSeparator.SYSTEM.getSeparator())) {
+				if (srcFile.getName().endsWith(FileSeparator.SYSTEM.getValue())) {
 					zos.closeEntry();
 					continue;
 				}
 
-				try (FileInputStream fis = new FileInputStream(destFilePath + FileSeparator.SYSTEM.getSeparator() + srcFile);
+				try (FileInputStream fis = new FileInputStream(destFilePath + FileSeparator.SYSTEM.getValue() + srcFile);
 						BufferedInputStream bis = new BufferedInputStream(fis)) {
 					int size = 0;
 					byte[] buffer = new byte[1024];
@@ -171,16 +173,16 @@ public class FileUtil {
 	 */
 	public static File convertPathFile(String srcPath, FileSeparator sep) {
 		if (FileSeparator.WINDOWS.is(sep)) {
-			if (srcPath.contains(FileSeparator.WINDOWS.getSeparator())) {
+			if (srcPath.contains(FileSeparator.WINDOWS.getValue())) {
 				return getFile(srcPath);
 			} else {
-				return getFile(srcPath.replaceAll(FileSeparator.LINUX.getSeparator(), FileSeparator.WINDOWS.getSeparator()));
+				return getFile(srcPath.replaceAll(FileSeparator.LINUX.getValue(), FileSeparator.WINDOWS.getValue()));
 			}
 		} else {
-			if (srcPath.contains(FileSeparator.LINUX.getSeparator())) {
+			if (srcPath.contains(FileSeparator.LINUX.getValue())) {
 				return getFile(srcPath);
 			} else {
-				return getFile(srcPath.replaceAll(FileSeparator.WINDOWS.getSeparator(), FileSeparator.LINUX.getSeparator()));
+				return getFile(srcPath.replaceAll(FileSeparator.WINDOWS.getValue(), FileSeparator.LINUX.getValue()));
 			}
 		}
 	}
@@ -270,7 +272,7 @@ public class FileUtil {
 	/**
 	 * ファイルセパレータの列挙
 	 */
-	public static enum FileSeparator {
+	public static enum FileSeparator implements BaseEnum {
 
 		/** Windows */
 		WINDOWS("\\"),
@@ -282,24 +284,15 @@ public class FileUtil {
 		/**
 		 * コンストラクタ
 		 *
-		 * @param separator
+		 * @param value
 		 *     セパレータ
 		 */
-		private FileSeparator(String separator) {
-			this.separator = separator;
+		private FileSeparator(String value) {
+			this.value = value;
 		}
 
 		/** セパレータ */
-		private String separator;
-
-		/**
-		 * セパレータを返す
-		 *
-		 * @return separator
-		 */
-		public String getSeparator() {
-			return this.separator;
-		}
+		private String value;
 
 		/**
 		 * 指定したファイルセパレータが自身と一致するかどうか返す<br>
@@ -310,6 +303,23 @@ public class FileUtil {
 		 */
 		public boolean is(FileSeparator separator) {
 			return this == separator;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public String getValue() {
+			return this.value;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		@SuppressWarnings("unchecked")
+		public FileSeparator of(String value) {
+			return BaseEnum.of(FileSeparator.class, value);
 		}
 
 	}

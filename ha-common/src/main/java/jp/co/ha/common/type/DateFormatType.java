@@ -38,7 +38,7 @@ public enum DateFormatType implements BaseEnum {
 	@Override
 	@SuppressWarnings("unchecked")
 	public DateFormatType of(String value) {
-		return BaseEnum.of(this.getClass(), value);
+		return BaseEnum.of(DateFormatType.class, value);
 	}
 
 }
