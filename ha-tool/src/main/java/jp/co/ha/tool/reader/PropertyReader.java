@@ -9,13 +9,21 @@ import java.util.Properties;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 public class PropertyReader extends BaseFileReader {
 
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
+	/**
+	 * 指定したプロパティファイル名のPropertiesを返す
+	 *
+	 * @param propFileName
+	 *     プロパティファイル名
+	 * @return Properties
+	 */
 	public Properties getProperty(String propFileName) {
-		File propFile = getFilePath("META-INF" + File.separator + propFileName);
+		File propFile = getFile("META-INF" + FileSeparator.SYSTEM.getValue() + propFileName);
 		Properties prop = new Properties();
 		try (InputStream is = new FileInputStream(propFile.getAbsolutePath())) {
 			prop.load(is);

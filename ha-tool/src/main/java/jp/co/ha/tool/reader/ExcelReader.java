@@ -35,7 +35,7 @@ public class ExcelReader extends BaseFileReader {
 	public Excel read() {
 		Workbook workbook;
 		try {
-			workbook = WorkbookFactory.create(getFilePath(conf.getFilePath()));
+			workbook = WorkbookFactory.create(getFile(conf.getFilePath()));
 		} catch (EncryptedDocumentException | IOException e) {
 			LOG.error("excelファイル読込エラー", e);
 			return null;

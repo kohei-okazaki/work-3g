@@ -1,7 +1,6 @@
 package jp.co.ha.tool.executor;
 
 import jp.co.ha.tool.build.DdlBuilder;
-import jp.co.ha.tool.build.DropBuilder;
 
 public class SqlExecutor {
 
@@ -11,8 +10,8 @@ public class SqlExecutor {
 		ddlBuilder.execute();
 
 		// DropSqlを作成
-		DropBuilder dropBuilder = new DropBuilder();
-		dropBuilder.execute();
+//		DropBuilder dropBuilder = new DropBuilder();
+//		dropBuilder.execute();
 
 		// Entityを作成
 //		EntityBuilder entityBuilder = new EntityBuilder();
