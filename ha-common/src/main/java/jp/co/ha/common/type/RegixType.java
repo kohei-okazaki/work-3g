@@ -56,7 +56,7 @@ public enum RegixType implements BaseEnum {
 	@Override
 	@SuppressWarnings("unchecked")
 	public RegixType of(String value) {
-		return BaseEnum.of(this.getClass(), value);
+		return BaseEnum.of(RegixType.class, value);
 	}
 
 }

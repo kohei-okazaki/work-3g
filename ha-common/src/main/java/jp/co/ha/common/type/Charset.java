@@ -38,6 +38,6 @@ public enum Charset implements BaseEnum {
 	@Override
 	@SuppressWarnings("unchecked")
 	public Charset of(String value) {
-		return BaseEnum.of(this.getClass(), value);
+		return BaseEnum.of(Charset.class, value);
 	}
 }
