@@ -43,7 +43,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	private List<HealthInfo> getHealthInfo(HealthInfoReferenceForm form, String userId) throws BaseException {
+	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceForm form, String userId) throws BaseException {
 
 		List<HealthInfo> resultList = null;
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
@@ -87,7 +87,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId) throws BaseException {
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
-		List<HealthInfo> entityList = getHealthInfo(form, userId);
+		List<HealthInfo> entityList = getHealthInfoList(form, userId);
 		List<HealthInfoReferenceResponse> resultList = new ArrayList<>();
 		entityList.stream().forEach(entity -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
@@ -104,7 +104,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @param userId
 	 *     ユーザID
 	 * @param resultList
-	 *     List<HealthInfoReferenceResponse>
+	 *     健康情報照会レスポンスリスト
 	 * @return modelList
 	 */
 	@Override

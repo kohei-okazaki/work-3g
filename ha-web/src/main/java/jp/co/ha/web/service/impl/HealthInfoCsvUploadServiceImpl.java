@@ -17,7 +17,7 @@ import jp.co.ha.common.io.file.csv.reader.CsvReader;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 
 /**
- * 健康情報ファイルアップロードサービス実装クラス<br>
+ * 健康情報ファイルアップロードサービス実装クラス
  *
  */
 @Service("healthInfoUploadCsv")

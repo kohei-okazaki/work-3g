@@ -3,7 +3,7 @@ package jp.co.ha.common.type;
 import java.util.stream.Stream;
 
 /**
- * 列挙型の規定インターフェース<br>
+ * 列挙型の基底インターフェース<br>
  * 単一の値を持つ列挙の親インターフェースとする<br>
  *
  */
@@ -24,7 +24,7 @@ public interface BaseEnum {
 	 *     BaseEnumを継承した列挙型
 	 * @param value
 	 *     値
-	 * @return T extends BaseEnum
+	 * @return BaseEnumを継承した列挙型
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends BaseEnum> T of(Class<? extends BaseEnum> enumClass, String value) {

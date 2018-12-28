@@ -8,7 +8,7 @@ import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 
 /**
- * CSVダウンロードサービスインターフェース<br>
+ * CSVダウンロードサービスインターフェース
  *
  * @param <T>
  *     CSVモデル
@@ -18,7 +18,7 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	/**
 	 * メイン処理<br>
 	 *
-	 * @param printWriter
+	 * @param pw
 	 *     出力用Writer
 	 * @param conf
 	 *     CSV設定情報
@@ -27,6 +27,6 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	void execute(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws BaseException;
+	void execute(PrintWriter pw, CsvConfig conf, List<T> modelList) throws BaseException;
 
 }

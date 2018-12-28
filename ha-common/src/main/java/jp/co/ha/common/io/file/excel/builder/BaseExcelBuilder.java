@@ -21,7 +21,7 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
- * Excel出力の基底クラス<br>
+ * Excel出力の基底クラス
  *
  * @param <T>
  *     Excel出力モデル
@@ -36,7 +36,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	protected ExcelConfig conf;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param conf
 	 *     Excel設定情報
@@ -76,7 +76,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * 初期処理<br>
+	 * 初期処理
 	 *
 	 * @param response
 	 *     HttpServletResponse
@@ -90,7 +90,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * ヘッダを書込<br>
+	 * ヘッダを書込
 	 *
 	 * @param sheet
 	 *     Sheet
@@ -161,7 +161,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * 指定されたセルにtextを設定する<br>
+	 * 指定されたセルにtextを設定する
 	 *
 	 * @param cell
 	 *     Cell
@@ -174,7 +174,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * シート名を取得する<br>
+	 * シート名を取得する
 	 *
 	 * @param clazz
 	 *     ExcelDownloadModelアノテーションのついたクラス型
@@ -185,7 +185,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * ヘッダ名を取得する<br>
+	 * ヘッダ名を取得する
 	 *
 	 * @param clazz
 	 *     ExcelDownloadModelアノテーションのついたクラス型
@@ -196,7 +196,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * フッタ名を取得する<br>
+	 * フッタ名を取得する
 	 *
 	 * @param clazz
 	 *     ExcelDownloadModelアノテーションのついたクラス型

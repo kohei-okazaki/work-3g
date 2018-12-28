@@ -24,6 +24,7 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class CsvReader<T extends BaseCsvModel> {
 
+	/** LOG */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
@@ -82,7 +83,8 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 *     カラムリスト
 	 * @param dataList
 	 *     データリスト
-	 * @throws BaseException 基底例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	private void checkFileLength(List<String> colList, List<String> dataList) throws BaseException {
 		if (dataList.size() != colList.size()) {

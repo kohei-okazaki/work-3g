@@ -1,10 +1,12 @@
 package jp.co.ha.common.log.type;
 
+import jp.co.ha.common.type.BaseEnum;
+
 /**
  * ログレベルの列挙<br>
  *
  */
-public enum LogLevel {
+public enum LogLevel implements BaseEnum {
 
 	/** DEBUG */
 	DEBUG("DEBUG"),
@@ -31,12 +33,20 @@ public enum LogLevel {
 	}
 
 	/**
-	 * 値を返す
-	 *
-	 * @return value
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value 値
+	 * @return LogLevel
+	 */
+	public static LogLevel of(String value) {
+		return BaseEnum.of(LogLevel.class, value);
 	}
 
 	/**

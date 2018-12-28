@@ -13,7 +13,7 @@ import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 
 /**
- * 健康情報CSVダウンロードサービス実装クラス<br>
+ * 健康情報CSVダウンロードサービス実装クラス
  *
  */
 @Service("healthInfoDownloadCsv")
@@ -23,8 +23,8 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService<Heal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(PrintWriter printWriter, CsvConfig conf, List<HealthInfoCsvDownloadModel> modelList) throws BaseException {
-		try (CsvWriter<HealthInfoCsvDownloadModel> writer = new HealthInfoCsvWriter(conf, printWriter)) {
+	public void execute(PrintWriter pw, CsvConfig conf, List<HealthInfoCsvDownloadModel> modelList) throws BaseException {
+		try (CsvWriter<HealthInfoCsvDownloadModel> writer = new HealthInfoCsvWriter(conf, pw)) {
 			// CSVに書込
 			writer.execute(modelList);
 			writer.flush();
