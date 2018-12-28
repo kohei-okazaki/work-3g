@@ -50,7 +50,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 			Date regDate = editStrDate(form.getFromRegDate());
 			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
 				// 登録日直接指定フラグがONの場合
-				resultList = healthInfoSearchService.findByUserIdAndRegDate(userId, regDate);
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, DateUtil.toEndDate(regDate));
 			} else {
 				Date toRegDate = editStrDate(form.getToRegDate());
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
@@ -105,7 +105,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 *     ユーザID
 	 * @param resultList
 	 *     健康情報照会レスポンスリスト
-	 * @return modelList
+	 * @return 結果照会CSVモデルリスト
 	 */
 	@Override
 	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {

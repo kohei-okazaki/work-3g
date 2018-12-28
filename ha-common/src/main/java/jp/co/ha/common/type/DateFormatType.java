@@ -9,7 +9,9 @@ public enum DateFormatType implements BaseEnum {
 	/** YYYY/MM/DD */
 	YYYYMMDD("yyyy/MM/dd"),
 	/** YYYY/MM/DD HH:mm:ss */
-	YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss");
+	YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss"),
+	/** YYYYMMDD_HHmmss */
+	YYYYMMDD_HHMMSS_NOSEP("yyyyMMdd_HHmmss");
 
 	/** 名前 */
 	private String value;

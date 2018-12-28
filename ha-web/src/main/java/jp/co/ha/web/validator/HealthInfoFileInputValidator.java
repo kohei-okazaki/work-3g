@@ -8,7 +8,7 @@ import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.web.form.HealthInfoFileForm;
 
 /**
- * 健康情報CSVアップロードvalidatorクラス<br>
+ * 健康情報CSVアップロードvalidator
  *
  */
 public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFileForm> {
@@ -24,7 +24,7 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 	}
 
 	/**
-	 * 必須チェックを行う<br>
+	 * 必須チェックを行う
 	 *
 	 * @param form
 	 *     健康情報ファイル入力画面フォーム
@@ -33,8 +33,8 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 	 */
 	private void checkRequire(HealthInfoFileForm form, Errors errors) {
 		if (BeanUtil.isNull(form.getMultipartFile())) {
-			errors.rejectValue("multipartFile", "validate.message.NotEmpty", new String[] { "健康情報CSVファイル" },
-					ErrorCode.REQUIRE.getErrorMessage());
+			errors.rejectValue("multipartFile", ErrorCode.REQUIRE.getValidateMessage(), new String[] { "健康情報CSVファイル" },
+					ErrorCode.REQUIRE.getValidateMessage());
 		}
 	}
 

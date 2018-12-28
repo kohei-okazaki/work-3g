@@ -34,8 +34,11 @@ import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.FileUtil.FileSuffix;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -190,7 +193,8 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
-		CsvConfig conf = getCsvConfig("結果照会.csv", fileSetting);
+		CsvConfig conf = getCsvConfig("healthInfoReference_" +
+				DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + FileSuffix.CSV.getValue(), fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
