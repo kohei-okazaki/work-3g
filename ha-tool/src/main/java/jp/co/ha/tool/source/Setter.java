@@ -7,8 +7,13 @@ import org.apache.commons.lang3.StringUtils;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.type.AccessType;
 
+/**
+ * Setter
+ *
+ */
 public class Setter extends Method {
 
+	/** 接頭語 */
 	private static final String PREFIX = "set";
 
 	/**

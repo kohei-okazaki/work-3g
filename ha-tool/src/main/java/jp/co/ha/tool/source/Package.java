@@ -1,5 +1,9 @@
 package jp.co.ha.tool.source;
 
+/**
+ * Package
+ *
+ */
 public class Package {
 
 	/** 値 */
@@ -15,6 +19,11 @@ public class Package {
 		this.value = value;
 	}
 
+	/**
+	 * valueを返す
+	 *
+	 * @return value
+	 */
 	public String getValue() {
 		return value;
 	}

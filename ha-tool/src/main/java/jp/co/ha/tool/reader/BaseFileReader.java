@@ -2,6 +2,10 @@ package jp.co.ha.tool.reader;
 
 import java.io.File;
 
+/**
+ * 基底ファイル読込クラス
+ *
+ */
 public abstract class BaseFileReader {
 
 	/**

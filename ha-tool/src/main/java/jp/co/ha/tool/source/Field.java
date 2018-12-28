@@ -78,34 +78,78 @@ public class Field {
 		return javadoc + StringUtil.NEW_LINE + field;
 	}
 
+	/**
+	 * nameを返す
+	 *
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * nameを設定する
+	 *
+	 * @param name
+	 *     名前
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * commentを返す
+	 *
+	 * @return comment
+	 */
 	public String getComment() {
 		return comment;
 	}
 
+	/**
+	 * commentを設定する
+	 *
+	 * @param comment
+	 *     コメント
+	 */
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
+	/**
+	 * classTypeを返す
+	 *
+	 * @return classType
+	 */
 	public Class<?> getClassType() {
 		return classType;
 	}
 
+	/**
+	 * classTypeを設定する
+	 *
+	 * @param classType
+	 *     クラス型
+	 */
 	public void setClassType(Class<?> classType) {
 		this.classType = classType;
 	}
 
+	/**
+	 * accessTypeを返す
+	 *
+	 * @return accessType
+	 */
 	public AccessType getAccessType() {
 		return accessType;
 	}
 
+	/**
+	 * accessTypeを設定する
+	 *
+	 * @param accessType
+	 *     アクセスタイプ
+	 */
 	public void setAccessType(AccessType accessType) {
 		this.accessType = accessType;
 	}

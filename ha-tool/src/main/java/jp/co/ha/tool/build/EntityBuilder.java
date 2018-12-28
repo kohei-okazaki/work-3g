@@ -26,7 +26,7 @@ import jp.co.ha.tool.type.ExecuteType;
 /**
  * Entityのビルダー<br>
  *
- * @deprecated MybatisのgeneratorでEntityを生成している為、使わないこと
+ * @deprecated MybatisのgeneratorでEntityを生成している為
  *
  */
 @Deprecated

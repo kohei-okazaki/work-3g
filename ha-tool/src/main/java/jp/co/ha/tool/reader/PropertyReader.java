@@ -11,8 +11,13 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
+/**
+ * プロパティファイル読込クラス
+ *
+ */
 public class PropertyReader extends BaseFileReader {
 
+	/** LOG */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
