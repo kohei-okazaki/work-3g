@@ -28,7 +28,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	@Mask
 	private BigDecimal standardWeight;
 	/** ユーザステータス */
-	private String userStatus;
+	private String healthInfoStatus;
 	/** 登録日時 */
 	private String regDate;
 
@@ -147,22 +147,22 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * userStatusを返す
+	 * healthInfoStatusを返す
 	 *
-	 * @return userStatus ユーザステータス
+	 * @return healthInfoStatus 健康情報ステータス
 	 */
-	public String getUserStatus() {
-		return userStatus;
+	public String getHealthInfoStatus() {
+		return healthInfoStatus;
 	}
 
 	/**
-	 * userStatusを設定する
+	 * healthInfoStatusを設定する
 	 *
-	 * @param userStatus
-	 *     ユーザステータス
+	 * @param healthInfoStatus
+	 *     健康情報ステータス
 	 */
-	public void setUserStatus(String userStatus) {
-		this.userStatus = userStatus;
+	public void setHealthInfoStatus(String healthInfoStatus) {
+		this.healthInfoStatus = healthInfoStatus;
 	}
 
 	/**
