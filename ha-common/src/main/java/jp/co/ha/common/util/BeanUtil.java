@@ -102,23 +102,23 @@ public class BeanUtil {
 	 * @return 判定結果
 	 */
 	private static boolean ignore(List<String> ignoreList, String fieldName) {
-		return "serialVersionUID".equals(fieldName) || CollectionUtil.isEmpty(ignoreList);
+		return "serialVersionUID".equals(fieldName) || ignoreList.contains(fieldName);
 	}
 
 	/**
 	 * コピー対象かどうか判定する<br>
 	 *
-	 * @param dataField
-	 *     Field コピー元のフィールドクラス
-	 * @param targetField
-	 *     Field コピー先のフィールドクラス
+	 * @param src
+	 *     Field コピー元のフィールド
+	 * @param dest
+	 *     Field コピー先のフィールド
 	 * @return 判定結果
 	 */
-	private static boolean isCopyTarget(Field dataField, Field targetField) {
-		String sourceFieldName = dataField.getName();
-		Class<?> sourcefieldType = dataField.getType();
-		String targetFieldName = targetField.getName();
-		Class<?> targetFieldType = targetField.getType();
+	private static boolean isCopyTarget(Field src, Field dest) {
+		String sourceFieldName = src.getName();
+		Class<?> sourcefieldType = src.getType();
+		String targetFieldName = dest.getName();
+		Class<?> targetFieldType = dest.getType();
 		return targetFieldName.equals(sourceFieldName) && targetFieldType.equals(sourcefieldType);
 	}
 
@@ -138,7 +138,7 @@ public class BeanUtil {
 	 * targetがnullでないかどうか判定する<br>
 	 * 判定結果:nullの場合false, それ以外の場合true<br>
 	 *
-	 * @see BeanUtil#isNull
+	 * @see jp.co.ha.common.util.BeanUtil#isNull
 	 * @param target
 	 *     検査対象インスタンス
 	 * @return 判定結果
