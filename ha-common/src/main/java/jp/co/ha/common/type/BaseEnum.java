@@ -17,15 +17,6 @@ public interface BaseEnum {
 	String getValue();
 
 	/**
-	 * BaseEnumを継承した列挙を返す
-	 *
-	 * @param value
-	 *     値
-	 * @return T extends BaseEnum
-	 */
-	<T extends BaseEnum> T of(String value);
-
-	/**
 	 * 指定した値と列挙と指定した値が一致する列挙型を返す<br>
 	 * 一致するenumがない場合nullを返す<br>
 	 *

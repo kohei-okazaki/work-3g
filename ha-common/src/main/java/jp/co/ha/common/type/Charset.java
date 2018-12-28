@@ -33,11 +33,11 @@ public enum Charset implements BaseEnum {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value 値
+	 * @return Charset
 	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Charset of(String value) {
+	public static Charset of(String value) {
 		return BaseEnum.of(Charset.class, value);
 	}
 }

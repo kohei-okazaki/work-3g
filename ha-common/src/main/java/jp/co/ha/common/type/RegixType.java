@@ -51,11 +51,11 @@ public enum RegixType implements BaseEnum {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value 値
+	 * @return Charset
 	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public RegixType of(String value) {
+	public static RegixType of(String value) {
 		return BaseEnum.of(RegixType.class, value);
 	}
 
