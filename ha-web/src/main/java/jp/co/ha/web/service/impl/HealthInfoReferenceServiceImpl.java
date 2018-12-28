@@ -12,12 +12,17 @@ import jp.co.ha.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.csv.CsvConfig;
+import jp.co.ha.common.io.file.csv.CsvFileChar;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.FileUtil.FileSuffix;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 import jp.co.ha.web.service.HealthInfoReferenceService;
 
@@ -121,6 +126,25 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		});
 
 		return modelList;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
+
+		CsvConfig conf = new CsvConfig();
+		String fileName = "healthInfoReference_" +
+				DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + FileSuffix.CSV.getValue();
+		conf.setFileName(fileName);
+		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
+		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
+		conf.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
+		conf.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
+		conf.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
+		conf.setCharset(Charset.UTF_8);
+		return conf;
 	}
 
 }
