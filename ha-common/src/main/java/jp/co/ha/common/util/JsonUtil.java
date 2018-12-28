@@ -32,7 +32,7 @@ public class JsonUtil {
 	 *     Beanクラス型
 	 * @return Javaインスタンス
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	public static <T> T toJavaObject(String target, Class<T> clazz) throws BaseException {
 
@@ -54,7 +54,7 @@ public class JsonUtil {
 	 *     対象文字列
 	 * @return Json文字列
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	public static String toJsonString(Object target) throws BaseException {
 
