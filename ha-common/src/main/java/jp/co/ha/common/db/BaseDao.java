@@ -1,4 +1,4 @@
-package jp.co.ha.common.dao;
+package jp.co.ha.common.db;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
