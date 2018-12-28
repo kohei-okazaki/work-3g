@@ -6,11 +6,6 @@
 
 # 基底ディレクトリ
 baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
-commonDir=${baseDir}"/ha-common"
-dbDir=${baseDir}"/ha-db"
-businessDir=${baseDir}"/ha-business"
-apiDir=${baseDir}"/ha-api"
-webDir=${baseDir}"/ha-web"
 
 # 成果物ディレクトリ
 commonTargetDir=${baseDir}"/ha-common/target"

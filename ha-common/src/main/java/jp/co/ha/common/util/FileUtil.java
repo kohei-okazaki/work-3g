@@ -314,11 +314,11 @@ public class FileUtil {
 		}
 
 		/**
-		 * {@inheritDoc}
+		 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+		 * @param value 値
+		 * @return Charset
 		 */
-		@Override
-		@SuppressWarnings("unchecked")
-		public FileSeparator of(String value) {
+		public static FileSeparator of(String value) {
 			return BaseEnum.of(FileSeparator.class, value);
 		}
 

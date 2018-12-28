@@ -70,7 +70,7 @@ public class HttpClient {
 			connection.setRequestMethod(this.conf.getHttpMethod().getValue());
 
 			connection.connect();
-			this.httpStatus = HttpStatus.of(connection.getResponseCode());
+			this.httpStatus = HttpStatus.of(String.valueOf(connection.getResponseCode()));
 		} catch (MalformedURLException e) {
 			LOG.error("", e);
 		} catch (IOException e) {

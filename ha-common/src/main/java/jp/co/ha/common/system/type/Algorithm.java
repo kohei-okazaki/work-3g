@@ -33,11 +33,11 @@ public enum Algorithm implements BaseEnum {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value 値
+	 * @return Algorithm
 	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Algorithm of(String value) {
+	public static Algorithm of(String value) {
 		return BaseEnum.of(Algorithm.class, value);
 	}
 }
