@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.tool.config.FileConfig;
 
 /**
@@ -30,7 +31,7 @@ public class FileFactory {
 	 */
 	public static void create(FileConfig conf) {
 		LOG.info("作成 開始 ---> " + conf.getFileName());
-		File file = new File(conf.getOutputPath() + File.separator + conf.getFileName());
+		File file = new File(conf.getOutputPath() + FileSeparator.SYSTEM.getValue() + conf.getFileName());
 
 		// ファイル作成
 		try {

@@ -96,19 +96,17 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * 検索照会画面<br>
+	 * 検索照会画面
 	 *
-	 * @param model
-	 *     Model
 	 * @return 検索照会画面
 	 */
 	@GetMapping(value = "/index.html")
-	public String reference(Model model) {
+	public String reference() {
 		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
-	 * 検索結果画面を表示<br>
+	 * 検索結果画面を表示
 	 *
 	 * @param request
 	 *     HttpServletRequest
@@ -120,7 +118,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     BindingResult
 	 * @return 検索結果画面
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	@PostMapping(value = "/index.html")
 	public String reference(HttpServletRequest request, Model model
@@ -148,13 +146,13 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * Excelダウンロードを実行<br>
+	 * Excelダウンロードを実行
 	 *
 	 * @param request
 	 *     HttpServletRequest
 	 * @return ModelAndView
 	 * @throws BaseException
-	 *     アプリ例外
+	 *     基底例外
 	 */
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
@@ -170,7 +168,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * CSVダウンロードを実行<br>
+	 * CSVダウンロードを実行
 	 *
 	 * @param request
 	 *     HttpServletRequest
@@ -206,7 +204,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * CSV設定情報を取得する<br>
+	 * CSV設定情報を取得する
 	 *
 	 * @param fileName
 	 *     ファイル名
