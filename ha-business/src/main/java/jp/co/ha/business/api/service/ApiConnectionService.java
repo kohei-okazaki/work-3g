@@ -33,7 +33,8 @@ public class ApiConnectionService {
 	 * @param pjp
 	 *     リクエスト情報
 	 * @return response
-	 * @throws Throwable 実行時のエラー
+	 * @throws Throwable
+	 *     実行時のエラー
 	 */
 	@Around("execution(* *jp.co.ha.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
 	public BaseResponse outApiLog(ProceedingJoinPoint pjp) throws Throwable {
