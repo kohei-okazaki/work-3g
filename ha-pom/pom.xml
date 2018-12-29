@@ -249,7 +249,9 @@
 			</resource>
 			<resource>
 				<directory>${basedir}/../ha-common/src/main/resources/</directory>
-				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${basedir}/../ha-db/src/main/resources/</directory>
 			</resource>
 		</resources>
 		<plugins>
