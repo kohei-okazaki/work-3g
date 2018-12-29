@@ -18,6 +18,7 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.type.DateFormatType;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -40,35 +41,37 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 * {@inheritDoc}
 	 */
 	@Override
-	public View execute(List<HealthInfoReferenceResponse> historyList) throws BaseException {
+	public View execute(List<HealthInfoReferenceResponse> apiResponseList) throws BaseException {
 
 		// 健康情報Entityから健康情報ファイル設定を検索
-		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(historyList.get(0).getUserId());
+		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
+				.findByUserId(CollectionUtil.getFirst(apiResponseList).getUserId());
 
-		List<ReferenceExcelModel> modelList = toModelList(historyList, healthInfoFileSetting);
+		List<ReferenceExcelModel> modelList = toModelList(apiResponseList, healthInfoFileSetting);
 
 		return new ResultReferenceExcelBuiler(getExcelConfig(healthInfoFileSetting), modelList);
 	}
 
 	/**
-	 * 健康情報履歴リストをモデルリストに変換する<br>
+	 * 健康情報照会リストをモデルリストに変換する<br>
 	 *
-	 * @param historyList
-	 *     List<HealthInfoReferenceResponse> 健康情報リスト履歴リスト
+	 * @param apiResponseList
+	 *     健康情報照会リスト
 	 * @param entity
 	 *     健康情報ファイル設定
 	 * @return modelList
 	 */
-	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResponse> historyList, HealthInfoFileSetting entity) {
+	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResponse> apiResponseList,
+			HealthInfoFileSetting entity) {
 
 		// 健康情報マスク利用有無
 		boolean useHealthInfoMask = healthInfoFunctionService.useHealthInfoMask(entity);
 		List<ReferenceExcelModel> modelList = new ArrayList<>();
-		Stream.iterate(0, i -> ++i).limit(historyList.size()).forEach(i -> {
+		Stream.iterate(0, i -> ++i).limit(apiResponseList.size()).forEach(i -> {
 
 			// 結果照会Excel出力モデル
 			ReferenceExcelModel model = new ReferenceExcelModel();
-			HealthInfoReferenceResponse healthInfo = historyList.get(i);
+			HealthInfoReferenceResponse healthInfo = apiResponseList.get(i);
 			model.setHeight(useHealthInfoMask ? "****" : healthInfo.getHeight().toString());
 			model.setWeight(useHealthInfoMask ? "****" : healthInfo.getWeight().toString());
 			model.setBmi(useHealthInfoMask ? "****" : healthInfo.getBmi().toString());

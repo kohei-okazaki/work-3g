@@ -10,6 +10,7 @@ import java.util.Properties;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
  * Dao設定ファイル情報保持クラス<br>
@@ -47,7 +48,7 @@ public class JdbcConfig {
 	 */
 	private void init() {
 		String classPath = this.getClass().getClassLoader().getResource("").getPath();
-		String propertiesPath = "META-INF" + File.separator + "jdbc.properties";
+		String propertiesPath = "META-INF" + FileSeparator.SYSTEM.getValue() + "jdbc.properties";
 		readProperty(new File(classPath, propertiesPath));
 	}
 
@@ -61,10 +62,10 @@ public class JdbcConfig {
 		Properties prop = new Properties();
 		try (InputStream is = new FileInputStream(propFile.getAbsolutePath())) {
 			prop.load(is);
-			this.driverClassName = prop.getProperty("driverClassName");
-			this.url = prop.getProperty("url");
-			this.username = prop.getProperty("username");
-			this.password = prop.getProperty("password");
+			this.driverClassName = prop.getProperty("jdbc.driverClassName");
+			this.url = prop.getProperty("jdbc.url");
+			this.username = prop.getProperty("jdbc.username");
+			this.password = prop.getProperty("jdbc.password");
 		} catch (FileNotFoundException e) {
 			LOG.error("ファイルが見つかりません ファイル名：" + propFile.getName(), e);
 		} catch (IOException e) {

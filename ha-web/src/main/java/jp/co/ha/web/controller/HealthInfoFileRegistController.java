@@ -51,9 +51,9 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	private SessionManageService sessionManageService;
 
 	/**
-	 * フォームを返す<br>
+	 * フォームを返す
 	 *
-	 * @return healthInfoFileForm 健康情報ファイル入力画面フォーム
+	 * @return 健康情報ファイル入力画面フォーム
 	 */
 	@ModelAttribute
 	public HealthInfoFileForm setUpForm() {

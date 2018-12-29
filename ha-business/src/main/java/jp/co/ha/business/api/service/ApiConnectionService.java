@@ -19,7 +19,7 @@ import jp.co.ha.common.log.LoggerFactory;
 @Aspect
 public class ApiConnectionService {
 
-	/** ロガー */
+	/** LOG */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
