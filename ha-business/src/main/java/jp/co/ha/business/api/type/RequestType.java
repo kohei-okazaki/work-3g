@@ -53,7 +53,7 @@ public enum RequestType {
 	/**
 	 * requestIdを返す<br>
 	 *
-	 * @return requestId リクエストID
+	 * @return requestId
 	 */
 	public String getRequestId() {
 		return this.requestId;
@@ -62,7 +62,7 @@ public enum RequestType {
 	/**
 	 * nameを返す<br>
 	 *
-	 * @return name 名前
+	 * @return name
 	 */
 	public String getName() {
 		return this.name;

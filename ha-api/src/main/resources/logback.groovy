@@ -5,6 +5,8 @@ import ch.qos.logback.core.rolling.TimeBasedRollingPolicy
 
 import static ch.qos.logback.classic.Level.*
 
+scan("30 seconds")
+
 appender("STDOUT", ConsoleAppender) {
 
   encoder(PatternLayoutEncoder) {
@@ -27,4 +29,5 @@ appender("FILE", RollingFileAppender) {
   }
 
 }
+
 root(INFO, ["STDOUT", "FILE"])
