@@ -1,10 +1,17 @@
 package jp.co.ha.common.io.file.csv.reader;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
@@ -26,6 +33,32 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 
 	/** LOG */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+
+	/**
+	 * 指定されたアップロードファイルを読み込み、CSVモデルリストを返す
+	 *
+	 * @param uploadFile
+	 *     アップロードファイル
+	 * @return CSVモデルリスト
+	 * @throws BaseException
+	 *     基底例外
+	 */
+	public List<T> readMultipartFile(MultipartFile uploadFile) throws BaseException {
+
+		List<T> modelList = new ArrayList<>();
+		try (InputStream is = uploadFile.getInputStream();
+				InputStreamReader isr = new InputStreamReader(is);
+				BufferedReader br = new BufferedReader(isr)) {
+			String record;
+			if (BeanUtil.notNull(record = br.readLine())) {
+				modelList.add(this.read(record));
+			}
+		} catch (IOException e) {
+			throw new AppIOException(ErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。");
+		}
+
+		return modelList;
+	}
 
 	/**
 	 * 1行読込を行う<br>

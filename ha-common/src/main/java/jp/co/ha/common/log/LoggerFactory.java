@@ -17,7 +17,7 @@ public class LoggerFactory {
 	 *
 	 * @param clazz
 	 *     クラス型
-	 * @return ロガー
+	 * @return <code>Logger</code>
 	 */
 	public static Logger getLogger(Class<?> clazz) {
 		return new Logger(org.slf4j.LoggerFactory.getLogger(clazz));

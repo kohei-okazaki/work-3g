@@ -68,7 +68,6 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	@Override
 	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
 
-		// 指定されたデータIDから健康情報を取得
 		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
 		if (BeanUtil.isNull(entity)) {
 			throw new HealthInfoException(ErrorCode.DB_NO_DATA, "該当のレコードがみつかりません healthInfoId:" + request.getHealthInfoId());
