@@ -30,4 +30,6 @@ appender("FILE", RollingFileAppender) {
 
 }
 
+logger("jp.co.ha.db.mapper", DEBUG, ["STDOUT", "FILE"], false)
+
 root(INFO, ["STDOUT", "FILE"])
