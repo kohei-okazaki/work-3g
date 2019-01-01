@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- * APIのリクエスト種別の列挙<br>
+ * APIのリクエスト種別の列挙
  *
  */
 @JsonFormat(shape = JsonFormat.Shape.STRING)
@@ -23,7 +23,7 @@ public enum RequestType {
 	private String name;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param requestId
 	 *     リクエストID
@@ -36,7 +36,7 @@ public enum RequestType {
 	}
 
 	/**
-	 * 指定されたリクエストIDに対応するリクエストタイプを返す<br>
+	 * 指定されたリクエストIDに対応するリクエストタイプを返す
 	 *
 	 * @param requestId
 	 *     リクエストID
@@ -51,7 +51,7 @@ public enum RequestType {
 	}
 
 	/**
-	 * requestIdを返す<br>
+	 * requestIdを返す
 	 *
 	 * @return requestId
 	 */
@@ -60,7 +60,7 @@ public enum RequestType {
 	}
 
 	/**
-	 * nameを返す<br>
+	 * nameを返す
 	 *
 	 * @return name
 	 */

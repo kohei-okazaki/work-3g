@@ -4,7 +4,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 
 /**
- * 健康情報例外クラス<br>
+ * 健康情報例外クラス
  *
  */
 public class HealthInfoException extends BaseException {

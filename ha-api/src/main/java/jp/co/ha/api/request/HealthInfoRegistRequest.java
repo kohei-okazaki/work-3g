@@ -6,7 +6,7 @@ import jp.co.ha.business.api.request.BaseApiRequest;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報登録リクエストクラス<br>
+ * 健康情報登録リクエストクラス
  *
  */
 public class HealthInfoRegistRequest extends BaseApiRequest {
@@ -19,16 +19,16 @@ public class HealthInfoRegistRequest extends BaseApiRequest {
 	private BigDecimal weight;
 
 	/**
-	 * heightを返す<br>
+	 * heightを返す
 	 *
-	 * @return height 身長
+	 * @return height
 	 */
 	public BigDecimal getHeight() {
 		return height;
 	}
 
 	/**
-	 * heightを設定する<br>
+	 * heightを設定する
 	 *
 	 * @param height
 	 *     身長
@@ -38,7 +38,7 @@ public class HealthInfoRegistRequest extends BaseApiRequest {
 	}
 
 	/**
-	 * weightを返す<br>
+	 * weightを返す
 	 *
 	 * @return weight 体重
 	 */
@@ -47,7 +47,7 @@ public class HealthInfoRegistRequest extends BaseApiRequest {
 	}
 
 	/**
-	 * weightを設定する<br>
+	 * weightを設定する
 	 *
 	 * @param weight
 	 *     体重

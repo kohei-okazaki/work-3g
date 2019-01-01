@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import jp.co.ha.business.healthInfo.type.HealthStatus;
 
 /**
- * 健康情報計算サービス<br>
+ * 健康情報計算サービスインターフェース
  *
  */
 public interface HealthInfoCalcService {
 
 	/**
-	 * 入力体重と前の体重を比較し、健康ステータスを返す<br>
+	 * 入力体重と前の体重を比較し、健康ステータスを返す
 	 *
 	 * @param inputWeight
 	 *     入力体重
@@ -22,8 +22,8 @@ public interface HealthInfoCalcService {
 	HealthStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
 
 	/**
-	 * 単位を以下に変換する</br>
-	 * cm → m</br>
+	 * 単位を以下に変換する<br>
+	 * cm → m
 	 *
 	 * @param target
 	 *     対象の値
@@ -32,7 +32,7 @@ public interface HealthInfoCalcService {
 	BigDecimal convertMeterFromCentiMeter(BigDecimal target);
 
 	/**
-	 * 単位を以下に変換する</br>
+	 * 単位を以下に変換する<br>
 	 * m → cm
 	 *
 	 * @param target
@@ -42,7 +42,7 @@ public interface HealthInfoCalcService {
 	BigDecimal convertCentiMeterFromMeter(BigDecimal target);
 
 	/**
-	 * BMIを計算</br>
+	 * BMIを計算
 	 *
 	 * @param height
 	 *     身長
@@ -55,7 +55,7 @@ public interface HealthInfoCalcService {
 	BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit);
 
 	/**
-	 * 標準体重を計算</br>
+	 * 標準体重を計算
 	 *
 	 * @param height
 	 *     身長

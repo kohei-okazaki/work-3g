@@ -4,13 +4,13 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報作成サービスインターフェース<br>
+ * 健康情報作成サービスインターフェース
  *
  */
 public interface HealthInfoCreateService {
 
 	/**
-	 * 指定した健康情報を登録する<br>
+	 * 指定した健康情報を登録する
 	 *
 	 * @param entity
 	 *     健康情報

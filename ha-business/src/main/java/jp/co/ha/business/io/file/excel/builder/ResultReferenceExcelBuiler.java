@@ -13,13 +13,13 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 
 /**
- * 結果照会画面Excel生成クラス<br>
+ * 結果照会画面Excel生成クラス
  *
  */
 public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelModel> {
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param conf
 	 *     Excel設定情報

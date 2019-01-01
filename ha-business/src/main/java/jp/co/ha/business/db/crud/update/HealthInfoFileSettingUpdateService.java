@@ -4,7 +4,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
- * 健康情報ファイル設定更新サービスインターフェース<br>
+ * 健康情報ファイル設定更新サービスインターフェース
  *
  */
 public interface HealthInfoFileSettingUpdateService {

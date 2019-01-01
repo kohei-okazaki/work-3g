@@ -11,7 +11,7 @@ import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
 
 /**
- * Jsonの設定クラス<br>
+ * Jsonの設定クラス
  *
  */
 @Configuration
@@ -30,7 +30,7 @@ public class JsonConfig {
 	}
 
 	/**
-	 * JSONデシリアライズするモジュールを取得<br>
+	 * JSONデシリアライズするモジュールを取得
 	 *
 	 * @return Module
 	 */

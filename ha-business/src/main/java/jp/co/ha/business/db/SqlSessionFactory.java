@@ -12,18 +12,23 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.util.FileUtil;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
- * SQLセッション取得のFactoryクラス<br>
+ * SQLセッション取得のFactoryクラス
  *
  */
 public class SqlSessionFactory {
 
 	/** 設定ファイル */
 	private static final String CONF_FILE = "mybatis-config.xml";
-
+	/** instance */
 	private static SqlSessionFactory instance = new SqlSessionFactory();
 
+	/**
+	 * プライベートコンストラクタ
+	 */
 	private SqlSessionFactory() {
 	}
 
@@ -37,7 +42,7 @@ public class SqlSessionFactory {
 	}
 
 	/**
-	 * SQLセッションを取得する<br>
+	 * SQLセッションを取得する
 	 *
 	 * @return SqlSession
 	 * @throws BaseException
@@ -45,14 +50,14 @@ public class SqlSessionFactory {
 	 */
 	public SqlSession getSqlSession() throws BaseException {
 		String sysPath = this.getClass().getClassLoader().getResource("").getPath();
-		File xmlFile = new File(sysPath, CONF_FILE);
+		File xmlFile = FileUtil.getFile(sysPath + FileSeparator.SYSTEM.getValue() + CONF_FILE);
 		try (InputStream is = new FileInputStream(xmlFile.getAbsolutePath())) {
 			org.apache.ibatis.session.SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
 			return factory.openSession();
 		} catch (FileNotFoundException e) {
 			throw new AppIOException(ErrorCode.FILE_READING_ERROR, CONF_FILE + "が見つかりません");
 		} catch (IOException e) {
-			throw new AppIOException(ErrorCode.FILE_READING_ERROR, "ファイルの読み込みに失敗しました");
+			throw new AppIOException(ErrorCode.FILE_READING_ERROR, CONF_FILE + "の読込に失敗しました");
 		}
 	}
 

@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * 四則演算オペレータインターフェース<br>
+ * 四則演算オペレータインターフェース
  *
  */
 @FunctionalInterface
 public interface CalcOperator {
 
 	/**
-	 * 四則演算を定義<br>
+	 * 四則演算を定義
 	 *
 	 * @param target1
 	 *     対象1

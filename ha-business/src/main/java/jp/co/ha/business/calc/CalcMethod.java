@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * 四則演算メソッド定義<br>
+ * 四則演算メソッド定義
  *
  */
 public enum CalcMethod {
@@ -36,7 +36,7 @@ public enum CalcMethod {
 	}
 
 	/**
-	 * 四則演算オペレータを返す<br>
+	 * 四則演算オペレータを返す
 	 *
 	 * @return operator
 	 */

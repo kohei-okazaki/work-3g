@@ -3,7 +3,7 @@ package jp.co.ha.api.request;
 import jp.co.ha.business.api.request.BaseApiRequest;
 
 /**
- * 健康情報照会リクエストクラス<br>
+ * 健康情報照会リクエストクラス
  *
  */
 public class HealthInfoReferenceRequest extends BaseApiRequest {
@@ -12,7 +12,7 @@ public class HealthInfoReferenceRequest extends BaseApiRequest {
 	private Integer healthInfoId;
 
 	/**
-	 * healthInfoIdを返す<br>
+	 * healthInfoIdを返す
 	 *
 	 * @return healthInfoId 健康情報ID
 	 */
@@ -21,7 +21,7 @@ public class HealthInfoReferenceRequest extends BaseApiRequest {
 	}
 
 	/**
-	 * healthInfoIdを設定する<br>
+	 * healthInfoIdを設定する
 	 *
 	 * @param healthInfoId
 	 *     健康情報ID

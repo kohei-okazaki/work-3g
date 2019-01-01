@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
- * 健康情報作成サービスインターフェース実装クラス<br>
+ * 健康情報作成サービスインターフェース実装クラス
  *
  */
 public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {

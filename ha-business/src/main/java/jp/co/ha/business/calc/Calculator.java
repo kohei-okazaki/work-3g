@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * 計算機クラス<br>
+ * 計算機クラス
  *
  */
 public class Calculator {
@@ -16,7 +16,7 @@ public class Calculator {
 	}
 
 	/**
-	 * 計算処理を行う<br>
+	 * 計算処理を行う
 	 *
 	 * @param target1
 	 *     対象1

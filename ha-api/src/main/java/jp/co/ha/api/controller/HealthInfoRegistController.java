@@ -12,7 +12,7 @@ import jp.co.ha.common.api.controller.BaseRestController;
 import jp.co.ha.common.exception.BaseException;
 
 /**
- * 健康情報登録コントローラ<br>
+ * 健康情報登録コントローラ
  *
  */
 @RestController

@@ -17,7 +17,7 @@ import jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.healthInfo.impl.HealthInfoFunctionServiceImpl;
 
 /**
- * Businessの設定クラス<br>
+ * Businessの設定クラス
  *
  */
 @Configuration

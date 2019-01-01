@@ -6,7 +6,7 @@ import jp.co.ha.business.api.response.BaseApiResponse;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報照会レスポンスクラス<br>
+ * 健康情報照会レスポンスクラス
  *
  */
 public class HealthInfoReferenceResponse extends BaseApiResponse {
@@ -31,7 +31,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	private String regDate;
 
 	/**
-	 * healthInfoIdを返す<br>
+	 * healthInfoIdを返す
 	 *
 	 * @return healthInfoId 健康情報ID
 	 */
@@ -40,7 +40,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * healthInfoIdを設定する<br>
+	 * healthInfoIdを設定する
 	 *
 	 * @param healthInfoId
 	 *     健康情報ID
@@ -50,7 +50,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * userIdを返す<br>
+	 * userIdを返す
 	 *
 	 * @return userId ユーザID
 	 */
@@ -59,7 +59,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * userIdを設定する<br>
+	 * userIdを設定する
 	 *
 	 * @param userId
 	 *     ユーザID
@@ -69,7 +69,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * heightを返す<br>
+	 * heightを返す
 	 *
 	 * @return height 身長
 	 */
@@ -78,7 +78,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * heightを設定する<br>
+	 * heightを設定する
 	 *
 	 * @param height
 	 *     身長
@@ -88,7 +88,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * weightを返す<br>
+	 * weightを返す
 	 *
 	 * @return weight 体重
 	 */
@@ -97,7 +97,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * weightを設定する<br>
+	 * weightを設定する
 	 *
 	 * @param weight
 	 *     体重
@@ -107,7 +107,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * bmiを返す<br>
+	 * bmiを返す
 	 *
 	 * @return bmi BMI
 	 */
@@ -116,7 +116,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * bmiを設定する<br>
+	 * bmiを設定する
 	 *
 	 * @param bmi
 	 *     BMI
@@ -126,7 +126,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * standardWeightを返す<br>
+	 * standardWeightを返す
 	 *
 	 * @return standardWeight 標準体重
 	 */
@@ -135,7 +135,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * standardWeightを設定する<br>
+	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
 	 *     標準体重
@@ -145,7 +145,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * regDateを返す<br>
+	 * regDateを返す
 	 *
 	 * @return regDate 登録日時
 	 */
@@ -154,7 +154,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * regDateを設定する<br>
+	 * regDateを設定する
 	 *
 	 * @param regDate
 	 *     登録日時

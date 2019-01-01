@@ -14,7 +14,7 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * 結果照会CSVWriterクラス<br>
+ * 結果照会CSVWriterクラス
  *
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
@@ -23,7 +23,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param conf
 	 *     CSV設定情報

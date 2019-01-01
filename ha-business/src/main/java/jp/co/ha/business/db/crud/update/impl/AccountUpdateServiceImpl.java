@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.mapper.AccountMapper;
 
 /**
- * アカウント情報更新サービス実装クラス<br>
+ * アカウント情報更新サービス実装クラス
  *
  */
 public class AccountUpdateServiceImpl implements AccountUpdateService {

@@ -14,17 +14,17 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.annotation.Entity;
 
 /**
- * DB接続の共通処理クラス<br>
+ * DB接続の共通処理クラス
  *
  */
 @Aspect
 public class DataBaseCommonExecutor {
 
-	/** ロガー */
+	/** LOG */
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
-	 * 更新処理の共通処理を行う<br>
+	 * 更新処理の共通処理を行う
 	 * <ul>
 	 * <li>更新日時の更新</li>
 	 * </ul>
@@ -51,7 +51,7 @@ public class DataBaseCommonExecutor {
 	}
 
 	/**
-	 * 登録処理の共通処理を行う<br>
+	 * 登録処理の共通処理を行う
 	 * <ul>
 	 * <li>更新日時の設定</li>
 	 * <li>登録日時の設定</li>

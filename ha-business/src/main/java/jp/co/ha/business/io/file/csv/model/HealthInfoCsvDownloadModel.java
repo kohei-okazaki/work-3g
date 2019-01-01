@@ -9,7 +9,7 @@ import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報CSVダウンロードモデル<br>
- * CSV出力したい項目のみを持つ<br>
+ * CSV出力したい項目のみを持つ
  *
  */
 @CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" }
@@ -36,7 +36,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/**
 	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
@@ -55,7 +55,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/**
 	 * heightを返す
 	 *
-	 * @return height 身長
+	 * @return height
 	 */
 	public BigDecimal getHeight() {
 		return height;
@@ -74,7 +74,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/**
 	 * weightを返す
 	 *
-	 * @return weight 体重
+	 * @return weight
 	 */
 	public BigDecimal getWeight() {
 		return weight;
@@ -93,7 +93,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/**
 	 * bmiを返す
 	 *
-	 * @return bmi BMI
+	 * @return bmi
 	 */
 	public BigDecimal getBmi() {
 		return bmi;
@@ -112,7 +112,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/**
 	 * standardWeightを返す
 	 *
-	 * @return standardWeight 標準体重
+	 * @return standardWeight
 	 */
 	public BigDecimal getStandardWeight() {
 		return standardWeight;
@@ -131,7 +131,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/**
 	 * regDateを返す
 	 *
-	 * @return regDate 登録日時
+	 * @return regDate
 	 */
 	public Date getRegDate() {
 		return regDate;
