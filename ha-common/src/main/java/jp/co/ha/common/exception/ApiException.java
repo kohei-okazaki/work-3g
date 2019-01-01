@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * API例外クラス<br>
+ * API例外クラス
  *
  */
 public class ApiException extends BaseException {
@@ -10,7 +10,7 @@ public class ApiException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param errorCode
 	 *     エラーコード

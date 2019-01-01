@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Entityを示すマーカーアノテーション<br>
+ * Entityを示すマーカーアノテーション
  *
  */
 @Inherited

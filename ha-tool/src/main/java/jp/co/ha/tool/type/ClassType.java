@@ -1,6 +1,12 @@
 package jp.co.ha.tool.type;
 
-public enum ClassType {
+import jp.co.ha.common.type.BaseEnum;
+
+/**
+ * クラス型の列挙
+ *
+ */
+public enum ClassType implements BaseEnum {
 
 	/** クラス */
 	CLASS("class"),
@@ -17,7 +23,20 @@ public enum ClassType {
 
 	private String value;
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value 値
+	 * @return ClassType
+	 */
+	public static ClassType of(String value) {
+		return BaseEnum.of(ClassType.class, value);
 	}
 }

@@ -3,7 +3,7 @@ package jp.co.ha.common.api.response;
 import jp.co.ha.common.api.type.ResultType;
 
 /**
- * 基底レスポンスクラス<br>
+ * 基底レスポンスクラス
  *
  */
 public abstract class BaseResponse {
@@ -12,7 +12,7 @@ public abstract class BaseResponse {
 	private ResultType result;
 
 	/**
-	 * resultを返す<br>
+	 * resultを返す
 	 *
 	 * @return result
 	 */
@@ -21,7 +21,7 @@ public abstract class BaseResponse {
 	}
 
 	/**
-	 * resultを設定する<br>
+	 * resultを設定する
 	 *
 	 * @param result
 	 *     結果区分

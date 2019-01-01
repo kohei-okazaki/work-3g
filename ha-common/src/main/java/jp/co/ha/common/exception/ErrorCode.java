@@ -6,7 +6,7 @@ import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * エラーコードの定義<br>
- * API, WEBでのエラーコードをそれぞれ定義する<br>
+ * API, WEBでのエラーコードをそれぞれ定義する
  */
 public enum ErrorCode {
 
@@ -83,7 +83,7 @@ public enum ErrorCode {
 	private String validateMessage;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param internalErrorCode
 	 *     内部用エラーコード
@@ -105,7 +105,7 @@ public enum ErrorCode {
 	}
 
 	/**
-	 * outerErrorCodeを返す<br>
+	 * outerErrorCodeを返す
 	 *
 	 * @return outerErrorCode
 	 */
@@ -114,7 +114,7 @@ public enum ErrorCode {
 	}
 
 	/**
-	 * internalErrorCodeを返す<br>
+	 * internalErrorCodeを返す
 	 *
 	 * @return internalErrorCode
 	 */
@@ -123,7 +123,7 @@ public enum ErrorCode {
 	}
 
 	/**
-	 * logLevelを返す<br>
+	 * logLevelを返す
 	 *
 	 * @return logLevel
 	 */
@@ -132,7 +132,7 @@ public enum ErrorCode {
 	}
 
 	/**
-	 * errorMessageを返す<br>
+	 * errorMessageを返す
 	 *
 	 * @return errorMessage
 	 */
@@ -141,7 +141,7 @@ public enum ErrorCode {
 	}
 
 	/**
-	 * validateMessageを返す<br>
+	 * validateMessageを返す
 	 *
 	 * @return validateMessage
 	 */
@@ -150,7 +150,7 @@ public enum ErrorCode {
 	}
 
 	/**
-	 * 指定された内部エラーコードと一致するErrorCodeを返す<br>
+	 * 指定された内部エラーコードと一致するErrorCodeを返す
 	 *
 	 * @param innerErrorCode
 	 *    内部エラーコード

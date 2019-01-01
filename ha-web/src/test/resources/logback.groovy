@@ -1,4 +1,5 @@
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.classic.filter.ThresholdFilter
 import ch.qos.logback.core.ConsoleAppender
 import ch.qos.logback.core.rolling.RollingFileAppender
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy
@@ -9,15 +10,20 @@ scan("30 seconds")
 
 appender("STDOUT", ConsoleAppender) {
 
+  target = "System.out"
+
   encoder(PatternLayoutEncoder) {
     pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
   }
 
+  filter(ThresholdFilter) {
+    level = DEBUG
+  }
 }
 
 appender("FILE", RollingFileAppender) {
 
-  file = "logs/main.log"
+  file = "C:/logs/test/main.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
     fileNamePattern = "main_%d{yyyy-MM-dd}.log"
@@ -26,6 +32,10 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     pattern = "%d [%thread] %-5level %logger{10} - %message%n"
+  }
+
+  filter(ThresholdFilter) {
+    level = DEBUG
   }
 
 }

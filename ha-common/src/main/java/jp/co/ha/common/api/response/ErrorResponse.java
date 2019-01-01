@@ -4,7 +4,7 @@ import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 
 /**
- * エラーレスポンスクラス<br>
+ * エラーレスポンスクラス
  *
  */
 public class ErrorResponse extends BaseResponse {
@@ -15,7 +15,7 @@ public class ErrorResponse extends BaseResponse {
 	private String detail;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param e
 	 *     例外
@@ -27,7 +27,7 @@ public class ErrorResponse extends BaseResponse {
 	}
 
 	/**
-	 * outerErrorCodeを返す<br>
+	 * outerErrorCodeを返す
 	 *
 	 * @return outerErrorCode
 	 */
@@ -36,7 +36,7 @@ public class ErrorResponse extends BaseResponse {
 	}
 
 	/**
-	 * outerErrorCodeを設定する<br>
+	 * outerErrorCodeを設定する
 	 *
 	 * @param outerErrorCode
 	 *     外部エラーコード
@@ -46,7 +46,7 @@ public class ErrorResponse extends BaseResponse {
 	}
 
 	/**
-	 * detailを返す<br>
+	 * detailを返す
 	 *
 	 * @return detail
 	 */
@@ -55,7 +55,7 @@ public class ErrorResponse extends BaseResponse {
 	}
 
 	/**
-	 * detailを設定する<br>
+	 * detailを設定する
 	 *
 	 * @param detail
 	 *     詳細

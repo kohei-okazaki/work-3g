@@ -25,7 +25,7 @@ public class CsvConfig {
 	private boolean useMask;
 
 	/**
-	 * fileNameを返す<br>
+	 * fileNameを返す
 	 *
 	 * @return fileName ファイル名
 	 */
@@ -34,7 +34,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * fileNameを設定する<br>
+	 * fileNameを設定する
 	 *
 	 * @param fileName
 	 *     ファイル名
@@ -44,7 +44,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * hasHeaderを返す<br>
+	 * hasHeaderを返す
 	 *
 	 * @return hasHeader ヘッダー有無
 	 */
@@ -53,7 +53,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * hasHeaderを設定する<br>
+	 * hasHeaderを設定する
 	 *
 	 * @param hasHeader
 	 *     ヘッダー有無
@@ -63,7 +63,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * hasEnclosureを返す<br>
+	 * hasEnclosureを返す
 	 *
 	 * @return hasEnclosure 囲い文字有無
 	 */
@@ -72,7 +72,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * hasEnclosureを設定する<br>
+	 * hasEnclosureを設定する
 	 *
 	 * @param hasEnclosure
 	 *     囲い文字有無
@@ -82,7 +82,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * csvFileCharを返す<br>
+	 * csvFileCharを返す
 	 *
 	 * @return csvFileChar CSVファイル囲い文字列挙
 	 */
@@ -91,7 +91,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * csvFileCharを設定する<br>
+	 * csvFileCharを設定する
 	 *
 	 * @param csvFileChar
 	 *     CSVファイル囲い文字列挙
@@ -101,7 +101,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * charsetを返す<br>
+	 * charsetを返す
 	 *
 	 * @return charset 文字コード
 	 */
@@ -110,7 +110,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * charsetを設定する<br>
+	 * charsetを設定する
 	 *
 	 * @param charset
 	 *     文字コード
@@ -120,7 +120,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * hasFooterを返す<br>
+	 * hasFooterを返す
 	 *
 	 * @return hasFooter フッタ有無
 	 */
@@ -129,7 +129,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * hasFooterを設定する<br>
+	 * hasFooterを設定する
 	 *
 	 * @param hasFooter
 	 *     フッタ有無
@@ -139,7 +139,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * useMaskを返す<br>
+	 * useMaskを返す
 	 *
 	 * @return useMask
 	 */
@@ -148,7 +148,7 @@ public class CsvConfig {
 	}
 
 	/**
-	 * useMaskを設定する<br>
+	 * useMaskを設定する
 	 *
 	 * @param useMask
 	 *     マスク利用有無

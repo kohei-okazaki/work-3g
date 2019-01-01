@@ -1,6 +1,12 @@
 package jp.co.ha.tool.type;
 
-public enum PropertyType {
+import jp.co.ha.common.type.BaseEnum;
+
+/**
+ * Propertyの列挙
+ *
+ */
+public enum PropertyType implements BaseEnum {
 
 	/** 対象テーブル */
 	TARGET_TABLE("targetTable"),
@@ -13,6 +19,10 @@ public enum PropertyType {
 
 	private String value;
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getValue() {
 		return this.value;
 	}

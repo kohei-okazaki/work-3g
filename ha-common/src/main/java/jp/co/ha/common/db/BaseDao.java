@@ -14,7 +14,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
- * Dao実装の基底クラス<br>
+ * Dao実装の基底クラス
  *
  */
 public abstract class BaseDao {
@@ -29,7 +29,7 @@ public abstract class BaseDao {
 	protected ResultSet rs;
 
 	/**
-	 * DBへ接続を行う<br>
+	 * DBへ接続を行う
 	 *
 	 * @throws DataBaseException
 	 *     DBエラー
@@ -60,7 +60,7 @@ public abstract class BaseDao {
 	}
 
 	/**
-	 * 次の要素が存在するか返す<br>
+	 * 次の要素が存在するか返す
 	 *
 	 * @return　判定結果
 	 * @throws DataBaseException
@@ -75,7 +75,7 @@ public abstract class BaseDao {
 	}
 
 	/**
-	 * SQLを実行する<br>
+	 * SQLを実行する
 	 *
 	 * @param sql
 	 *     実行するSQL
@@ -103,7 +103,7 @@ public abstract class BaseDao {
 	}
 
 	/**
-	 * close処理を行う<br>
+	 * close処理を行う
 	 *
 	 * @throws DataBaseException
 	 *     DBエラー
@@ -128,7 +128,7 @@ public abstract class BaseDao {
 	}
 
 	/**
-	 * SQL種別<br>
+	 * SQL種別
 	 */
 	public static enum SqlType {
 		/** insert */

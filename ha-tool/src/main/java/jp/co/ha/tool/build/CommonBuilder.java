@@ -22,7 +22,7 @@ public abstract class CommonBuilder extends BaseBuilder {
 	}
 
 	/**
-	 * 対象のテーブルかどうか判定<br>
+	 * 対象のテーブルかどうか判定
 	 *
 	 * @param row
 	 *     excelの行情報

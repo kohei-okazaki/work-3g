@@ -1,10 +1,12 @@
 package jp.co.ha.common.io.file.csv;
 
+import jp.co.ha.common.type.BaseEnum;
+
 /**
  * CSVファイル囲い文字列挙
  *
  */
-public enum CsvFileChar {
+public enum CsvFileChar implements BaseEnum {
 
 	/** シングルクォート */
 	SINGLE_QUOTE("\'"),
@@ -25,11 +27,19 @@ public enum CsvFileChar {
 	}
 
 	/**
-	 * 値を返す
-	 *
-	 * @return value
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value 値
+	 * @return CsvFileChar
+	 */
+	public static CsvFileChar of(String value) {
+		return BaseEnum.of(CsvFileChar.class, value);
 	}
 }

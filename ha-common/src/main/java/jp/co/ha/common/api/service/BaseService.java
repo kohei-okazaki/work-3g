@@ -6,7 +6,7 @@ import jp.co.ha.common.exception.BaseException;
 
 /**
  * API基底サービス<br>
- * 各機能のサービスの親クラスとする<br>
+ * 各機能のサービスの親クラスとする
  *
  * @param <Rq>
  *     リクエスト
@@ -16,7 +16,7 @@ import jp.co.ha.common.exception.BaseException;
 public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 
 	/**
-	 * 継承先でそれぞれチェックを実装<br>
+	 * 継承先でそれぞれチェックを実装
 	 *
 	 * @param request
 	 *     Request実装クラス
@@ -26,8 +26,8 @@ public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 	void checkRequest(Rq request) throws BaseException;
 
 	/**
-	 * メイン処理<br>
-	 * リクエスト型を処理し、レスポンス型で返す<br>
+	 * メイン処理
+	 * リクエスト型を処理し、レスポンス型で返す
 	 *
 	 * @param request
 	 *     Request実装クラス
