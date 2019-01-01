@@ -16,74 +16,74 @@
 <body>
 
 
-	<h1>
-		<img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
-		アカウント登録入力画面
-	</h1>
-	<hr>
-	<br><br>
+  <h1>
+    <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
+    アカウント登録入力画面
+  </h1>
+  <hr>
+  <br><br>
 
-	<div align="center">
-		<div>
-			<progress id="bar" max="3" value="0"></progress>
-		</div>
-	</div>
+  <div align="center">
+    <div>
+      <progress id="bar" max="3" value="0"></progress>
+    </div>
+  </div>
 
-	<!--/* 入力画面 */-->
-	<form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
-	<div align="center">
+  <!--/* 入力画面 */-->
+  <form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
+    <div align="center">
 
-		<div th:if="${errorMessage} != null">
-			<div id="errorMessage" class="errorMessage">
-				<p th:text="${errorMessage}"></p>
-			</div>
-		</div>
+      <div th:if="${errorMessage} != null">
+        <div id="errorMessage" class="errorMessage">
+          <p th:text="${errorMessage}"></p>
+        </div>
+      </div>
 
-		<div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-		<div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-		<div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-		<div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
-		<input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
-		<br><br>
-		<input type="text" class="validate[required]" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" />
-		<br><br>
-		<input type="text" class="validate[required,equals[password]]" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
-		<br><br>
-		<textarea rows="10" cols="30" name="remarks"></textarea>
-		<br><br>
-		<table>
-			<tr>
-				<td>
-					<input type="submit" value="確 認" />
-				</td>
-				<td>
-					<p>　　</p>
-				</td>
-				<td>
-					<input type="reset" value="リセット" onclick="resetBar()" />
-				</td>
-			</tr>
-		</table>
-	</div>
-	</form>
+      <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
+      <br><br>
+      <input type="text" class="validate[required]" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" />
+      <br><br>
+      <input type="text" class="validate[required,equals[password]]" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
+      <br><br>
+      <textarea rows="10" cols="30" name="remarks"></textarea>
+      <br><br>
+      <table>
+        <tr>
+          <td>
+            <input type="submit" value="確 認" />
+          </td>
+          <td>
+            <p>　　</p>
+          </td>
+          <td>
+            <input type="reset" value="リセット" onclick="resetBar()" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
 
-	<br><br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+  <br><br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
-	<script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-	<script>
-		$(function() {
-			jQuery("#accountRegistForm").validationEngine({
-				promptPosition: "topLeft:80"
-			});
-		});
-	</script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
+  <script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script>
+    $(function() {
+      jQuery("#accountRegistForm").validationEngine({
+        promptPosition: "topLeft:80"
+      });
+    });
+  </script>
 </body>
 </html>

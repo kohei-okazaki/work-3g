@@ -12,26 +12,26 @@
 </head>
 
 <body class="main">
-	<h1>
-		<img class="headericon" alt="エラー画面" src="../resources/image/icon_error.png" th:src="@{/resources/image/icon_error.png}">
-		エラー画面
-	</h1>
+  <h1>
+    <img class="headericon" alt="エラー画面" src="../resources/image/icon_error.png" th:src="@{/resources/image/icon_error.png}">
+    エラー画面
+  </h1>
 
-	<hr>
+  <hr>
 
-	<div th:if="${errorMessage} == null">
-		<p>入力情報に誤りがあります。もう一度入力してください</p>
-	</div>
-	<p class="errorMessage" th:text="${errorMessage}"></p>
+  <div th:if="${errorMessage} == null">
+    <p>入力情報に誤りがあります。もう一度入力してください</p>
+  </div>
+  <p class="errorMessage" th:text="${errorMessage}"></p>
 
 
 
-	<br><br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+  <br><br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 
 </body>
 </html>

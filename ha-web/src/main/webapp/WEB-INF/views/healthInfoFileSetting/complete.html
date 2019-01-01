@@ -14,41 +14,41 @@
 </head>
 
 <body class="main">
-	<h1>
-		<img class="headericon" alt="入力" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
-		ファイル設定入力完了画面
-	</h1>
+  <h1>
+    <img class="headericon" alt="入力" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
+    ファイル設定入力完了画面
+  </h1>
 
-	<hr>
-	<div th:replace="./common/navigation.html"></div>
-	<br><br>
+  <hr>
+  <div th:replace="./common/navigation.html"></div>
+  <br><br>
 
-	<!--/* 完了画面 */-->
-	<div align="center">
-		<p>完了しました</p>
-		<br><br>
-		<table>
-			<tr>
-				<td align="center">
-					<!--/* TOP画面へ */-->
-					<form action="../login/top.html" th:action="@{/login/top.html}" method="get">
-						<div>
-							<input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:src="@{/resources/image/icon_menu.jpg}" />
-						</div>
-					</form>
-				</td>
-			</tr>
-		</table>
-	</div>
+  <!--/* 完了画面 */-->
+  <div align="center">
+    <p>完了しました</p>
+    <br><br>
+    <table>
+      <tr>
+        <td align="center">
+          <!--/* TOP画面へ */-->
+          <form action="../login/top.html" th:action="@{/login/top.html}" method="get">
+            <div>
+              <input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:src="@{/resources/image/icon_menu.jpg}" />
+            </div>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-	<br><br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+  <br><br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 
 </body>
 </html>

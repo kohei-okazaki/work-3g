@@ -16,98 +16,98 @@
 <body class="main">
 
 
-	<h1 class="title">
-		<img class="headericon" alt="アカウント設定確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
-		アカウント設定確認画面
-	</h1>
+  <h1 class="title">
+    <img class="headericon" alt="アカウント設定確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
+    アカウント設定確認画面
+  </h1>
 
-	<hr>
-	<div th:replace="./common/navigation.html"></div>
+  <hr>
+  <div th:replace="./common/navigation.html"></div>
 
-	<br><br>
+  <br><br>
 
-	<!--/* 確認画面 */-->
-	<form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${accountSettingForm}">
-	<div align="center">
-		<table border="1">
-			<tr>
-				<th class="header" width="130px">
-					<p>削除</p>
-				</th>
-				<td class="data" width="250px">
-					<div th:if="${form.deleteFlag} == 1">
-						<p>する</p>
-					</div>
-					<div th:if="${form.deleteFlag} == 0">
-						<p>しない</p>
-					</div>
-					<input type="hidden" name="deleteFlag" th:field="${form.deleteFlag}" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header">
-					<p>ユーザID</p>
-				</th>
-				<td class="data">
-					<p th:text="${form.userId}"></p>
-					<input type="hidden" name="userId" th:field="${form.userId}" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header">
-					<p>パスワード</p>
-				</th>
-				<td class="data">
-					<input type="text" name="password" required="required" th:field="${form.password}" readonly="readonly" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header" width="130px">
-					<p>メールアドレス</p>
-				</th>
-				<td class="data">
-					<input type="text" name="mailAddress" required="required" th:field="${form.mailAddress}" readonly="readonly" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header" width="130px">
-					<p>メールパスワード</p>
-				</th>
-				<td class="data">
-					<input type="text" name="mailPassword" required="required" th:field="${form.mailPassword}" readonly="readonly" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header">
-					<p>備 考</p>
-				</th>
-				<td class="data">
-					<textarea rows="10" cols="30" name="remarks" th:field="${form.remarks}" readonly="readonly"></textarea>
-				</td>
-			</tr>
-		</table>
-		<br><br>
-		<table>
-			<tr>
-				<td>
-					<input type="submit" value="確 定" />
-				</td>
-				<td><p>　　</p></td>
-				<td>
-					<input type="button" value="戻 る" onclick="history.back()" />
-				</td>
-			</tr>
-		</table>
-	</div>
-	</form>
+  <!--/* 確認画面 */-->
+  <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${accountSettingForm}">
+    <div align="center">
+      <table border="1">
+        <tr>
+          <th class="header" width="130px">
+            <p>削除</p>
+          </th>
+          <td class="data" width="250px">
+            <div th:if="${form.deleteFlag} == 1">
+              <p>する</p>
+            </div>
+            <div th:if="${form.deleteFlag} == 0">
+              <p>しない</p>
+            </div>
+            <input type="hidden" name="deleteFlag" th:field="${form.deleteFlag}" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header">
+            <p>ユーザID</p>
+          </th>
+          <td class="data">
+            <p th:text="${form.userId}"></p>
+            <input type="hidden" name="userId" th:field="${form.userId}" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header">
+            <p>パスワード</p>
+          </th>
+          <td class="data">
+            <input type="text" name="password" required="required" th:field="${form.password}" readonly="readonly" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header" width="130px">
+            <p>メールアドレス</p>
+          </th>
+          <td class="data">
+            <input type="text" name="mailAddress" required="required" th:field="${form.mailAddress}" readonly="readonly" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header" width="130px">
+            <p>メールパスワード</p>
+          </th>
+          <td class="data">
+            <input type="text" name="mailPassword" required="required" th:field="${form.mailPassword}" readonly="readonly" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header">
+            <p>備 考</p>
+          </th>
+          <td class="data">
+            <textarea rows="10" cols="30" name="remarks" th:field="${form.remarks}" readonly="readonly"></textarea>
+          </td>
+        </tr>
+      </table>
+      <br><br>
+      <table>
+        <tr>
+          <td>
+            <input type="submit" value="確 定" />
+          </td>
+          <td><p>　　</p></td>
+          <td>
+            <input type="button" value="戻 る" onclick="history.back()" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
 
 
-	<br><br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+  <br><br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 
 </body>
 </html>

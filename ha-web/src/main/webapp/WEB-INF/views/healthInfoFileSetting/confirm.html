@@ -14,107 +14,111 @@
 </head>
 
 <body class="main">
-	<h1>
-		<img class="headericon" alt="ファイル設定入力確認画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
-		ファイル設定入力確認画面
-	</h1>
+  <h1>
+    <img class="headericon" alt="ファイル設定入力確認画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
+    ファイル設定入力確認画面
+  </h1>
 
-	<hr>
-	<div th:replace="./common/navigation.html"></div>
-	<br><br>
+  <hr>
+  <div th:replace="./common/navigation.html"></div>
+  <br><br>
 
-	 <!--/* 確認画面 */-->
-	<form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoFileSettingForm}">
-	<div align="center">
-		<table border="1">
-			<tr>
-				<th class="header" width="130px">
-					<p>ユーザID</p>
-				</th>
-				<td width="250px">
-					<input type="text" maxlength="16" required th:field="*{userId}" readonly="readonly" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header">
-					<p>ヘッダ利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div th:if="${form.headerFlag} == 1">
-						<p>する</p>
-					</div>
-					<div th:if="${form.headerFlag} == 0">
-						<p>しない</p>
-					</div>
-					<input type="hidden" th:field="${form.headerFlag}" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header">
-					<p>フッタ利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div th:if="${form.footerFlag} == 1">
-						<p>する</p>
-					</div>
-					<div th:if="${form.footerFlag} == 0">
-						<p>しない</p>
-					</div>
-					<input type="hidden" th:field="${form.footerFlag}" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header">
-					<p>マスク利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div th:if="${form.maskFlag} == 1">
-						<p>する</p>
-					</div>
-					<div th:if="${form.maskFlag} == 0">
-						<p>しない</p>
-					</div>
-					<input type="hidden" th:field="${form.maskFlag}" />
-				</td>
-			</tr>
-			<tr>
-				<th class="header">
-					<p>囲み文字利用</p>
-				</th>
-				<td class="data" width="250px">
-					<div th:if="${form.enclosureCharFlag} == 1">
-						<p>する</p>
-					</div>
-					<div th:if="${form.enclosureCharFlag} == 0">
-						<p>しない</p>
-					</div>
-					<input type="hidden" th:field="${form.enclosureCharFlag}" />
-				</td>
-			</tr>
-		</table>
-		<br><br>
-		<table>
-			<tr>
-				<td>
-					<input type="submit" value="確 定" />
-				</td>
-				<td><p>　　</p></td>
-				<td>
-					<input type="button" value="戻 る" onclick="history.back()" />
-				</td>
-			</tr>
-		</table>
-	</div>
-	</form>
+   <!--/* 確認画面 */-->
+  <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoFileSettingForm}">
+    <div align="center">
+      <table border="1">
+        <tr>
+          <th class="header" width="130px">
+            <p>ユーザID</p>
+          </th>
+          <td width="250px">
+            <input type="text" maxlength="16" required th:field="*{userId}" readonly="readonly" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header">
+            <p>ヘッダ利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div th:if="${form.headerFlag} == 1">
+              <p>する</p>
+            </div>
+            <div th:if="${form.headerFlag} == 0">
+              <p>しない</p>
+            </div>
+            <input type="hidden" th:field="${form.headerFlag}" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header">
+            <p>フッタ利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div th:if="${form.footerFlag} == 1">
+              <p>する</p>
+            </div>
+            <div th:if="${form.footerFlag} == 0">
+              <p>しない</p>
+            </div>
+            <input type="hidden" th:field="${form.footerFlag}" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header">
+            <p>マスク利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div th:if="${form.maskFlag} == 1">
+              <p>する</p>
+            </div>
+            <div th:if="${form.maskFlag} == 0">
+              <p>しない</p>
+            </div>
+            <input type="hidden" th:field="${form.maskFlag}" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header">
+            <p>囲み文字利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div th:if="${form.enclosureCharFlag} == 1">
+              <p>する</p>
+            </div>
+            <div th:if="${form.enclosureCharFlag} == 0">
+              <p>しない</p>
+            </div>
+            <input type="hidden" th:field="${form.enclosureCharFlag}" />
+          </td>
+        </tr>
+      </table>
 
-	<br><br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+      <br><br>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+      <table>
+        <tr>
+          <td>
+            <input type="submit" value="確 定" />
+          </td>
+          <td>
+            <p>　　</p>
+          </td>
+          <td>
+            <input type="button" value="戻 る" onclick="history.back()" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+
+  <br><br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
+
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 
 </body>
 </html>

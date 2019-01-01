@@ -17,49 +17,53 @@
 
 <body class="main">
 
-	<h1>
-		<img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:src="@{/resources/image/icon_input.jpg}">
-		健康情報ファイル確認画面
-	</h1>
+  <h1>
+    <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:src="@{/resources/image/icon_input.jpg}">
+    健康情報ファイル確認画面
+  </h1>
 
-	<hr>
-	<div th:replace="./common/navigation.html"></div>
+  <hr>
+  <div th:replace="./common/navigation.html"></div>
 
-	<div th:if="${errorMessage} != null">
-		<br><br>
-		<div class="errorMessage">
-			<p th:text="${errorMessage}"></p>
-		</div>
-	</div>
+  <div th:if="${errorMessage} != null">
+    <br><br>
+    <div class="errorMessage">
+      <p th:text="${errorMessage}"></p>
+    </div>
+  </div>
 
-	<!--/* 確認画面 */-->
-	<div align="center">
-	<br><br><br>
-	<form action="./complete.html" th:action="@{./complete.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
-		<br><br>
-		<table>
-			<tr>
-				<td>登録件数</td>
-				<td><p th:text="${count}"></p></td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="確 定" />
-				</td>
-				<td>
-					<input type="button" value="戻 る" onclick="history.back()" />
-				</td>
-			</tr>
-		</table>
-	</form>
-	</div>
-	<br><br>
+  <!--/* 確認画面 */-->
+  <div align="center">
+    <br><br><br>
+    <form action="./complete.html" th:action="@{./complete.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+      <br><br>
+      <table>
+        <tr>
+          <td>
+            <p>登録件数</p>
+          </td>
+          <td>
+            <p th:text="${count}"></p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="確 定" />
+          </td>
+          <td>
+            <input type="button" value="戻 る" onclick="history.back()" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <br><br>
 
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 
 </body>
 </html>

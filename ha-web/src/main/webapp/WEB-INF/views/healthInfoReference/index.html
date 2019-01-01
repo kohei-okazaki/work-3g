@@ -17,135 +17,139 @@
 </head>
 
 <body class="main">
-	<h1>
-		<img class="headericon" alt="健康情報照会画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
-		健康情報照会画面
-	</h1>
+  <h1>
+    <img class="headericon" alt="健康情報照会画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
+    健康情報照会画面
+  </h1>
 
-	<hr>
-	<div th:replace="./common/navigation.html"></div>
+  <hr>
+  <div th:replace="./common/navigation.html"></div>
 
-	<br>
-	<br>
-	<br>
-	<form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
+  <br>
+  <br>
+  <br>
+  <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
 
-		<div align="center">
-		<div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
-		<div class="errorMessage" th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
-		<div class="errorMessage" th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
-		<div class="errorMessage" th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
-			<table>
-				<tr>
-					<th><p>健康情報ID</p></th>
-					<td>
-						<input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
-					</td>
-				</tr>
-				<tr>
-					<th><p>登録日</p></th>
-					<td>
-						<div class="radio" align="center">
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
-							<label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-							<input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
-							<label for="regDateSelectFlagTrue">直接指定する</label>
-						</div>
-					</td>
-					<td>
-						<input type="text" th:field="*{fromRegDate}" />
-					</td>
-					<td class="hideCalendar">～</td>
-					<td class="hideCalendar">
-						<input type="text" th:field="*{toRegDate}" class="hideCalendar" />
-					</td>
-				</tr>
-			</table>
-			<br>
-			<table>
-				<tr>
-					<td>
-						<input type="submit" value="検索" />
-					</td>
-					<td>　　</td>
-					<td>
-						<input type="reset" value="リセット" />
-					</td>
-				</tr>
-			</table>
-		</div>
-	</form>
-	<br>
-	<br>
+    <div align="center">
+      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
+      <table>
+        <tr>
+          <th>
+            <p>健康情報ID</p>
+          </th>
+          <td>
+            <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
+          </td>
+        </tr>
+        <tr>
+          <th>
+            <p>登録日</p>
+          </th>
+          <td>
+            <div class="radio" align="center">
+              <input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
+              <label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
+              <input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
+              <label for="regDateSelectFlagTrue">直接指定する</label>
+            </div>
+          </td>
+          <td>
+            <input type="text" th:field="*{fromRegDate}" />
+          </td>
+          <td class="hideCalendar">～</td>
+          <td class="hideCalendar">
+            <input type="text" th:field="*{toRegDate}" class="hideCalendar" />
+          </td>
+        </tr>
+      </table>
+      <br>
+      <table>
+        <tr>
+          <td>
+            <input type="submit" value="検索" />
+          </td>
+          <td>　　</td>
+          <td>
+            <input type="reset" value="リセット" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
 
-	<div th:if="${hasResult}">
-		<div align="center">
-			<table class="custom" border="1">
-				<tr class="header">
-					<th align="center">
-						<p>身長</p>
-					</th>
-					<th align="center">
-						<p>体重</p>
-					</th>
-					<th align="center">
-						<p>標準体重</p>
-					</th>
-					<th align="center">
-						<p>BMI</p>
-					</th>
-					<th align="center">
-						<p>登録日時</p>
-					</th>
-				</tr>
-				<tr th:each="result : ${resultList}" class="data">
-					<td th:text="${result.height}" align="center">
-					<td th:text="${result.weight}" align="center">
-					<td th:text="${result.standardWeight}" align="center">
-					<td th:text="${result.bmi}" align="center">
-					<td th:text="${result.regDate}" align="center">
-				</tr>
-			</table>
+  <br><br>
 
-			<br><br>
+  <div th:if="${hasResult}">
+    <div align="center">
+      <table class="custom" border="1">
+        <tr class="header">
+          <th align="center">
+            <p>身長</p>
+          </th>
+          <th align="center">
+            <p>体重</p>
+          </th>
+          <th align="center">
+            <p>標準体重</p>
+          </th>
+          <th align="center">
+            <p>BMI</p>
+          </th>
+          <th align="center">
+            <p>登録日時</p>
+          </th>
+        </tr>
+        <tr th:each="result : ${resultList}" class="data">
+          <td th:text="${result.height}" align="center">
+          <td th:text="${result.weight}" align="center">
+          <td th:text="${result.standardWeight}" align="center">
+          <td th:text="${result.bmi}" align="center">
+          <td th:text="${result.regDate}" align="center">
+        </tr>
+      </table>
+
+      <br><br>
 
 
-			<table>
-				<tr>
-					<td align="center">
-						<div>
-							<input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
-						</div>
-					</td>
-					<td>　　</td>
-					<td align="center">
-						<div>
-							<input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
+      <table>
+        <tr>
+          <td align="center">
+            <div>
+              <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
+            </div>
+          </td>
+          <td>　　</td>
+          <td align="center">
+            <div>
+              <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
-	<br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+  <br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery-ui.min.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/datepicker-ja.min.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-	<script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
-	<script>
-		$(function() {
-			jQuery("#healthInfoReferenceForm").validationEngine();
-			$("#fromRegDate").datepicker();
-			$("#toRegDate").datepicker();
-		});
-	</script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery-ui.min.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/datepicker-ja.min.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
+  <script>
+    $(function() {
+      jQuery("#healthInfoReferenceForm").validationEngine();
+      $("#fromRegDate").datepicker();
+      $("#toRegDate").datepicker();
+    });
+  </script>
 
 </body>
 </html>
