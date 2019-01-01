@@ -10,13 +10,13 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
 
 /**
- * 健康情報照会画面サービスインターフェース<br>
+ * 健康情報照会画面サービスインターフェース
  *
  */
 public interface HealthInfoReferenceService {
 
 	/**
-	 * 健康情報レスポンスリストを取得する<br>
+	 * 健康情報レスポンスリストを取得する
 	 *
 	 * @param form
 	 *     結果照会画面フォーム
@@ -35,7 +35,7 @@ public interface HealthInfoReferenceService {
 	 * @param userId
 	 *     ユーザID
 	 * @param resultList
-	 *     List<HealthInfoReferenceResponse>
+	 *     健康情報照会レスポンスリスト
 	 * @return modelList
 	 */
 	List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList);
