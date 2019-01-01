@@ -5,7 +5,7 @@ import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * API共通リクエスト情報保持クラス<br>
+ * API共通リクエスト情報保持クラス
  *
  */
 public abstract class BaseApiRequest extends BaseRequest {
@@ -19,7 +19,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	private String apiKey;
 
 	/**
-	 * requestTypeを返す<br>
+	 * requestTypeを返す
 	 *
 	 * @return requestType リクエスト種別
 	 */
@@ -28,7 +28,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	}
 
 	/**
-	 * requestTypeを設定する<br>
+	 * requestTypeを設定する
 	 *
 	 * @param requestType
 	 *     リクエスト種別
@@ -38,7 +38,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	}
 
 	/**
-	 * userIdを返す<br>
+	 * userIdを返す
 	 *
 	 * @return userId ユーザID
 	 */
@@ -47,7 +47,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	}
 
 	/**
-	 * userIdを設定する<br>
+	 * userIdを設定する
 	 *
 	 * @param userId
 	 *     ユーザID
@@ -57,7 +57,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	}
 
 	/**
-	 * apiKeyを返す<br>
+	 * apiKeyを返す
 	 *
 	 * @return apiKey APIキー
 	 */
@@ -66,7 +66,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	}
 
 	/**
-	 * apiKeyを設定する<br>
+	 * apiKeyを設定する
 	 *
 	 * @param apiKey
 	 *     APIキー

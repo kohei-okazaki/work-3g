@@ -22,7 +22,7 @@ import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報照会サービス実装クラス<br>
+ * 健康情報照会サービス実装クラス
  *
  */
 @Service

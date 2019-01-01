@@ -15,7 +15,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
 
 /**
- * ログイン情報のチェックを行うインターセプター<br>
+ * ログイン情報のチェックを行うインターセプター
  *
  */
 public class AuthInterceptor extends BaseWebInterceptor {
@@ -45,7 +45,7 @@ public class AuthInterceptor extends BaseWebInterceptor {
 	}
 
 	/**
-	 * ログイン情報をチェックするかどうかを返す<br>
+	 * ログイン情報をチェックするかどうかを返す
 	 *
 	 * @param handler
 	 *     ハンドラー

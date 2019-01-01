@@ -250,10 +250,10 @@
 				<directory>${basedir}/src/test/resources</directory>
 			</resource>
 			<resource>
-				<directory>${basedir}/../ha-common/src/main/resources/</directory>
+				<directory>${basedir}/../ha-common/src/main/resources</directory>
 			</resource>
 			<resource>
-				<directory>${basedir}/../ha-db/src/main/resources/</directory>
+				<directory>${basedir}/../ha-db/src/main/resources</directory>
 			</resource>
 		</resources>
 		<plugins>

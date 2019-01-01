@@ -4,7 +4,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.MailInfo;
 
 /**
- * メール情報検索サービスインターフェース<br>
+ * メール情報検索サービスインターフェース
  *
  */
 public interface MailInfoSearchService {

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import jp.co.ha.business.api.type.RequestType;
 
 /**
- * Jsonのリクエスト種別のデシリアライズクラス<br>
+ * Jsonのリクエスト種別のデシリアライズクラス
  *
  */
 public class RequestTypeDeserializer extends JsonDeserializer<RequestType> {

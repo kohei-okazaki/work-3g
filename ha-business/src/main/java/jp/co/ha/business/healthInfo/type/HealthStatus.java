@@ -3,7 +3,7 @@ package jp.co.ha.business.healthInfo.type;
 import java.util.stream.Stream;
 
 /**
- * 健康ステータス<br>
+ * 健康ステータス
  *
  */
 public enum HealthStatus {
@@ -21,7 +21,7 @@ public enum HealthStatus {
 	private String message;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param code
 	 *     コード値
@@ -52,7 +52,7 @@ public enum HealthStatus {
 	}
 
 	/**
-	 * コード値から健康ステータスを返す<br>
+	 * コード値から健康ステータスを返す
 	 *
 	 * @param code
 	 *     コード値

@@ -4,7 +4,7 @@ import jp.co.ha.common.io.file.excel.annotation.ExcelDownloadModel;
 import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
 
 /**
- * 健康情報Excel出力モデルクラス<br>
+ * 健康情報Excel出力モデルクラス
  *
  */
 @ExcelDownloadModel(sheetName = "健康情報"
@@ -24,7 +24,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	/**
 	 * heightを返す
 	 *
-	 * @return height 身長
+	 * @return height
 	 */
 	public String getHeight() {
 		return height;
@@ -43,7 +43,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	/**
 	 * weightを返す
 	 *
-	 * @return weight 体重
+	 * @return weight
 	 */
 	public String getWeight() {
 		return weight;
@@ -62,7 +62,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	/**
 	 * bmiを返す
 	 *
-	 * @return bmi BMI
+	 * @return bmi
 	 */
 	public String getBmi() {
 		return bmi;
@@ -81,7 +81,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	/**
 	 * standardWeightを返す
 	 *
-	 * @return standardWeight 標準体重
+	 * @return standardWeight
 	 */
 	public String getStandardWeight() {
 		return standardWeight;

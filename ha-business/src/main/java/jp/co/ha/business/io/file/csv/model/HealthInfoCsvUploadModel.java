@@ -4,7 +4,7 @@ import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報CSVアップロードモデル<br>
+ * 健康情報CSVアップロードモデル
  *
  */
 public class HealthInfoCsvUploadModel implements BaseCsvModel {
@@ -19,16 +19,16 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
 	private String weight;
 
 	/**
-	 * userIdを返す<br>
+	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
 	}
 
 	/**
-	 * userIdを設定する<br>
+	 * userIdを設定する
 	 *
 	 * @param userId
 	 *     ユーザID
@@ -38,16 +38,16 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
 	}
 
 	/**
-	 * heightを返す<br>
+	 * heightを返す
 	 *
-	 * @return height 身長
+	 * @return height
 	 */
 	public String getHeight() {
 		return height;
 	}
 
 	/**
-	 * heightを設定する<br>
+	 * heightを設定する
 	 *
 	 * @param height
 	 *     身長
@@ -57,16 +57,16 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
 	}
 
 	/**
-	 * weightを返す<br>
+	 * weightを返す
 	 *
-	 * @return weight 体重
+	 * @return weight
 	 */
 	public String getWeight() {
 		return weight;
 	}
 
 	/**
-	 * weightを設定する<br>
+	 * weightを設定する
 	 *
 	 * @param weight
 	 *     体重

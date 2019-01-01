@@ -10,13 +10,13 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.builder.BaseExcelBuilder;
 
 /**
- * 健康情報入力画面Excel生成クラス<br>
+ * 健康情報入力画面Excel生成クラス
  *
  */
 public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelModel> {
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param conf
 	 *     Excel設定情報

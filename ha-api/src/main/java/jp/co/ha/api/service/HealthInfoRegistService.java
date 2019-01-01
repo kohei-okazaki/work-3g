@@ -7,14 +7,14 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報登録サービスインターフェース<br>
+ * 健康情報登録サービスインターフェース
  *
  */
 public interface HealthInfoRegistService
 		extends BaseService<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
 	/**
-	 * 健康情報にリクエスト情報をつめる<br>
+	 * リクエスト情報を健康情報に変換する
 	 *
 	 * @param request
 	 *     リクエスト
@@ -25,7 +25,7 @@ public interface HealthInfoRegistService
 	HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException;
 
 	/**
-	 * 健康情報Entityを健康情報登録レスポンスクラスに変換する<br>
+	 * 健康情報Entityを健康情報登録レスポンスクラスに変換する
 	 *
 	 * @param healthInfo
 	 *     健康情報

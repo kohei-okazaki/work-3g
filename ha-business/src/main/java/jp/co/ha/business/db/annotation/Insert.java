@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * DBへのInsert処理を行うメソッドにつけるマーカーアノテーション<br>
+ * DBへのInsert処理を行うメソッドにつけるマーカーアノテーション
  *
  */
 @Inherited

@@ -6,14 +6,14 @@ import jp.co.ha.common.api.service.BaseService;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報照会サービスインターフェース<br>
+ * 健康情報照会サービスインターフェース
  *
  */
 public interface HealthInfoReferenceService
 		extends BaseService<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
 	/**
-	 * 健康情報Entityを健康情報照会レスポンスクラスに変換する<br>
+	 * 健康情報Entityを健康情報照会レスポンスクラスに変換する
 	 *
 	 * @param healthInfo
 	 *     健康情報

@@ -11,7 +11,7 @@ import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthStatus;
 
 /**
- * 計算サービス実装クラス<br>
+ * 計算サービス実装クラス
  *
  */
 @Service

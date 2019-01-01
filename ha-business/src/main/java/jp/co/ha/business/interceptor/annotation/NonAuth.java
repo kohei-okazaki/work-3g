@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ログイン情報のチェックを行わないことを示すマーカーアノテーション<br>
+ * ログイン情報のチェックを行わないことを示すマーカーアノテーション
  *
  */
 @Inherited

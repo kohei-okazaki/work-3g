@@ -4,7 +4,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 
 /**
- * アカウント検索サービスインターフェース<br>
+ * アカウント検索サービスインターフェース
  *
  */
 public interface AccountSearchService {

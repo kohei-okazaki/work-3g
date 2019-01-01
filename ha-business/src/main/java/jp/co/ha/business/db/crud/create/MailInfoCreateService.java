@@ -4,13 +4,13 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.MailInfo;
 
 /**
- * メール情報作成サービスインターフェース<br>
+ * メール情報作成サービスインターフェース
  *
  */
 public interface MailInfoCreateService {
 
 	/**
-	 * 指定したメール情報を登録する<br>
+	 * 指定したメール情報を登録する
 	 *
 	 * @param entity
 	 *     メール情報

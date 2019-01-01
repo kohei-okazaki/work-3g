@@ -4,7 +4,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 
 /**
- * アカウント設定例外クラス<br>
+ * アカウント設定例外クラス
  *
  */
 public class AccountSettingException extends BaseException {

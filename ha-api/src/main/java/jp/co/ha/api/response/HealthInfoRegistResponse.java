@@ -6,7 +6,7 @@ import jp.co.ha.business.api.response.BaseApiResponse;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報登録レスポンスクラス<br>
+ * 健康情報登録レスポンスクラス
  *
  */
 public class HealthInfoRegistResponse extends BaseApiResponse {
@@ -33,7 +33,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	private String regDate;
 
 	/**
-	 * healthInfoIdを返す<br>
+	 * healthInfoIdを返す
 	 *
 	 * @return healthInfoId 健康情報ID
 	 */
@@ -42,7 +42,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * healthInfoIdを設定する<br>
+	 * healthInfoIdを設定する
 	 *
 	 * @param healthInfoId
 	 *     健康情報ID

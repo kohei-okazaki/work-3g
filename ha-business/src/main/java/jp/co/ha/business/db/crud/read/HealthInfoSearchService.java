@@ -7,24 +7,24 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報検索サービス<br>
+ * 健康情報検索サービス
  *
  */
 public interface HealthInfoSearchService {
 
 	/**
-	 * 指定されたユーザIDと一致する健康情報のリストを返却する<br>
+	 * 指定されたユーザIDと一致する健康情報のリストを返却する
 	 *
 	 * @param userId
 	 *     ユーザID
-	 * @return List<HealthInfoDto>
+	 * @return 健康情報のリスト
 	 * @throws BaseException
 	 *     基底例外
 	 */
 	List<HealthInfo> findByUserId(String userId) throws BaseException;
 
 	/**
-	 * 指定されたデータIDからと一致する健康情報を返却する<br>
+	 * 指定されたデータIDからと一致する健康情報を返却する
 	 *
 	 * @param healthInfoId
 	 *     健康情報ID
@@ -35,7 +35,7 @@ public interface HealthInfoSearchService {
 	HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException;
 
 	/**
-	 * 指定したユーザIDで最後に登録した健康情報を返す<br>
+	 * 指定したユーザIDで最後に登録した健康情報を返す
 	 *
 	 * @param userId
 	 *     ユーザID
@@ -46,7 +46,7 @@ public interface HealthInfoSearchService {
 	HealthInfo findLastByUserId(String userId) throws BaseException;
 
 	/**
-	 * 指定されたユーザIDと登録日時の健康情報のリストを返す<br>
+	 * 指定されたユーザIDと登録日時の健康情報のリストを返す
 	 *
 	 * @param userId
 	 *     ユーザID
@@ -59,7 +59,7 @@ public interface HealthInfoSearchService {
 	List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseException;
 
 	/**
-	 * 指定されたユーザIDと指定された登録日時の期間内の健康情報のリストを返す<br>
+	 * 指定されたユーザIDと指定された登録日時の期間内の健康情報のリストを返す
 	 *
 	 * @param userId
 	 *     ユーザID

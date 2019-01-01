@@ -4,13 +4,13 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 
 /**
- * アカウント作成サービスインターフェース<br>
+ * アカウント作成サービスインターフェース
  *
  */
 public interface AccountCreateService {
 
 	/**
-	 * 指定したアカウント情報を登録する<br>
+	 * 指定したアカウント情報を登録する
 	 *
 	 * @param entity
 	 *     アカウント情報
