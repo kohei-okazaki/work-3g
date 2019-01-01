@@ -22,6 +22,7 @@
 		<poi-version>4.0.1</poi-version>
 		<mysql-version>8.0.13</mysql-version>
 		<mybatis-version>3.4.6</mybatis-version>
+		<hibernate-version>6.0.13.Final</hibernate-version>
 	</properties>
 
 	<modules>
@@ -216,7 +217,7 @@
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>6.0.13.Final</version>
+			<version>${hibernate-version}</version>
 		</dependency>
 		<!-- Servlet -->
 		<dependency>
