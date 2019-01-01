@@ -1,6 +1,12 @@
 package jp.co.ha.tool.type;
 
-public enum AccessType {
+import jp.co.ha.common.type.BaseEnum;
+
+/**
+ * アクセス列挙
+ *
+ */
+public enum AccessType implements BaseEnum {
 
 	/** public */
 	PUBLIC("public"),
@@ -17,6 +23,10 @@ public enum AccessType {
 
 	private String value;
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String getValue() {
 		return this.value;
 	}

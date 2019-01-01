@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * アルゴリズム作成例外クラス<br>
+ * アルゴリズム作成例外クラス
  *
  */
 public class AlgorithmException extends BaseException {
@@ -10,7 +10,7 @@ public class AlgorithmException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param errorCode
 	 *     エラーコード

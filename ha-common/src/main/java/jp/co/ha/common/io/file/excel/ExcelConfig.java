@@ -3,7 +3,7 @@ package jp.co.ha.common.io.file.excel;
 import jp.co.ha.common.type.Charset;
 
 /**
- * Excel設定情報保持クラス<br>
+ * Excel設定情報保持クラス
  *
  */
 public class ExcelConfig {
@@ -18,7 +18,7 @@ public class ExcelConfig {
 	private boolean hasFooter;
 
 	/**
-	 * fileNameを返す<br>
+	 * fileNameを返す
 	 *
 	 * @return fileName
 	 */
@@ -27,7 +27,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * fileNameを設定する<br>
+	 * fileNameを設定する
 	 *
 	 * @param fileName
 	 *     ファイル名
@@ -37,7 +37,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * charsetを返す<br>
+	 * charsetを返す
 	 *
 	 * @return charset Charset
 	 */
@@ -46,7 +46,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * charsetを設定する<br>
+	 * charsetを設定する
 	 *
 	 * @param charset
 	 *     Charset キャラセット
@@ -56,7 +56,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * hasHeaderを返す<br>
+	 * hasHeaderを返す
 	 *
 	 * @return hasHeader
 	 */
@@ -65,7 +65,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * hasHeaderを設定する<br>
+	 * hasHeaderを設定する
 	 *
 	 * @param hasHeader
 	 *     ヘッダ利用有無
@@ -75,7 +75,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * hasFooterを返す<br>
+	 * hasFooterを返す
 	 *
 	 * @return hasFooter
 	 */
@@ -84,7 +84,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * hasFooterを設定する<br>
+	 * hasFooterを設定する
 	 *
 	 * @param hasFooter
 	 *     フッター利用有無

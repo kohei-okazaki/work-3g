@@ -24,7 +24,7 @@ import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * CSV読込クラス<br>
+ * CSV読込クラス
  *
  * @param <T>
  *     CSVモデル
@@ -61,7 +61,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	}
 
 	/**
-	 * 1行読込を行う<br>
+	 * 1行読込を行う
 	 *
 	 * @param record
 	 *     レコード
@@ -110,7 +110,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	}
 
 	/**
-	 * ファイル内の長さチェックを行う<br>
+	 * ファイル内の長さチェックを行う
 	 *
 	 * @param colList
 	 *     カラムリスト

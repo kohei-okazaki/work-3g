@@ -21,7 +21,7 @@ import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * RestAPI基底コントローラ<br>
- * すべてのRestAPIコントローラはこのクラスを継承すること<br>
+ * すべてのRestAPIコントローラはこのクラスを継承すること
  *
  * @param <Rq>
  *     リクエスト
@@ -36,7 +36,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
 	/**
-	 * POST通信の処理を行う<br>
+	 * POST通信の処理を行う
 	 *
 	 * @param request
 	 *     Rq
@@ -53,7 +53,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	}
 
 	/**
-	 * 継承先のコントローラクラスで処理する<br>
+	 * 継承先のコントローラクラスで処理する
 	 *
 	 * @param request
 	 *     リクエストクラス
@@ -64,7 +64,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	protected abstract Rs execute(Rq request) throws BaseException;
 
 	/**
-	 * JSONで例外が起きた場合のエラーハンドリング<br>
+	 * JSONで例外が起きた場合のエラーハンドリング
 	 *
 	 * @param e
 	 *     JSON系のエラー
@@ -89,7 +89,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	}
 
 	/**
-	 * アプリケーション例外のエラーハンドリング<br>
+	 * アプリケーション例外のエラーハンドリング
 	 *
 	 * @param e
 	 *     アプリエラー

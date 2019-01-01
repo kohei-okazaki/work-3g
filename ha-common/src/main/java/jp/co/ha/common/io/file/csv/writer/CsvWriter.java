@@ -13,7 +13,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * CSV書込クラス<br>
+ * CSV書込クラス
  *
  * @param <T>
  *     CSVモデル
@@ -23,23 +23,23 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	/** CSV設定情報 */
 	protected CsvConfig conf;
 	/** 出力用PrintWriter */
-	protected PrintWriter printWriter;
+	protected PrintWriter pw;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param conf
 	 *     CSV設定情報
-	 * @param printWriter
+	 * @param pw
 	 *     writer
 	 */
-	public CsvWriter(CsvConfig conf, PrintWriter printWriter) {
+	public CsvWriter(CsvConfig conf, PrintWriter pw) {
 		this.conf = conf;
-		this.printWriter = printWriter;
+		this.pw = pw;
 	}
 
 	/**
-	 * メイン処理を実施<br>
+	 * メイン処理を実施
 	 *
 	 * @param modelList
 	 *     モデルリスト
@@ -57,7 +57,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 			// フッタを書込
 			writeFooter(record, (Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
-		this.printWriter.print(record.toString());
+		this.pw.print(record.toString());
 	}
 
 	/**
@@ -65,22 +65,22 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 */
 	@Override
 	public void close() {
-		if (BeanUtil.notNull(this.printWriter)) {
-			this.printWriter.close();
+		if (BeanUtil.notNull(this.pw)) {
+			this.pw.close();
 		}
 	}
 
 	/**
-	 * flush処理を行う<br>
+	 * flush処理を行う
 	 */
 	public void flush() {
-		if (BeanUtil.notNull(this.printWriter)) {
-			this.printWriter.flush();
+		if (BeanUtil.notNull(this.pw)) {
+			this.pw.flush();
 		}
 	}
 
 	/**
-	 * 指定されたデータの書き込み処理を行う<br>
+	 * 指定されたデータの書き込み処理を行う
 	 *
 	 * @param joiner
 	 *     StringJoiner
@@ -122,7 +122,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	}
 
 	/**
-	 * データレコードをつめる<br>
+	 * データレコードをつめる
 	 *
 	 * @param recordJoiner
 	 *     StringJoiner
@@ -132,7 +132,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	protected abstract void writeData(StringJoiner recordJoiner, T model);
 
 	/**
-	 * ヘッダ名を取得する<br>
+	 * ヘッダ名を取得する
 	 *
 	 * @param clazz
 	 *     CsvModelアノテーションのついたクラス型
@@ -145,7 +145,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	}
 
 	/**
-	 * フッタ名を取得する<br>
+	 * フッタ名を取得する
 	 *
 	 * @param clazz
 	 *     CSVModelアノテーションのついたクラス型

@@ -8,7 +8,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 
 /**
- * CSVアップロードサービスインターフェース<br>
+ * CSVアップロードサービスインターフェース
  *
  * @param <T>
  *     CSVモデル
@@ -16,7 +16,7 @@ import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 public interface CsvUploadService<T extends BaseCsvModel> {
 
 	/**
-	 * アップロードファイルを解析し、CSVモデルリストを返す<br>
+	 * アップロードファイルを解析し、CSVモデルリストを返す
 	 *
 	 * @param uploadFile
 	 *     アップロードファイル

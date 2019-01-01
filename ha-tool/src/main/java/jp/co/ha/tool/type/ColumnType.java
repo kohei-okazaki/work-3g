@@ -1,14 +1,15 @@
 package jp.co.ha.tool.type;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Date;
+
+import jp.co.ha.common.type.BaseEnum;
 
 /**
  * カラム定義列挙
  *
  */
-public enum ColumnType {
+public enum ColumnType implements BaseEnum {
 
 	/** VARCHAR */
 	VARCHAR("VARCHAR", String.class),
@@ -40,10 +41,9 @@ public enum ColumnType {
 	private Class<?> classType;
 
 	/**
-	 * valueを返す
-	 *
-	 * @return value
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -58,17 +58,11 @@ public enum ColumnType {
 	}
 
 	/**
-	 * 指定した値と一致するColumnTypeを返す
-	 *
-	 * @param value
-	 *     値
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value 値
 	 * @return ColumnType
 	 */
 	public static ColumnType of(String value) {
-		return Arrays.asList(ColumnType.class.getEnumConstants())
-				.stream()
-				.filter(e -> e.value.equals(value))
-				.findFirst()
-				.orElse(null);
+		return BaseEnum.of(ColumnType.class, value);
 	}
 }

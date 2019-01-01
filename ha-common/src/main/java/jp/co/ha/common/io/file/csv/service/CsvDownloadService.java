@@ -16,7 +16,7 @@ import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 public interface CsvDownloadService<T extends BaseCsvModel> {
 
 	/**
-	 * メイン処理<br>
+	 * メイン処理
 	 *
 	 * @param pw
 	 *     出力用Writer

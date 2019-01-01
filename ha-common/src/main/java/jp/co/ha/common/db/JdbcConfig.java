@@ -14,7 +14,7 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
  * Dao設定ファイル情報保持クラス<br>
- * jdbc.propertiesの読み込みを行う<br>
+ * jdbc.propertiesの読み込みを行う
  *
  */
 public class JdbcConfig {
@@ -44,7 +44,7 @@ public class JdbcConfig {
 	}
 
 	/**
-	 * 初期化処理<br>
+	 * 初期化処理
 	 */
 	private void init() {
 		String classPath = this.getClass().getClassLoader().getResource("").getPath();
@@ -53,7 +53,7 @@ public class JdbcConfig {
 	}
 
 	/**
-	 * プロパティファイルを読込<br>
+	 * プロパティファイルを読込
 	 *
 	 * @param propFile
 	 *     プロパティファイル

@@ -1,5 +1,9 @@
 package jp.co.ha.tool.type;
 
+/**
+ * SqlExecutorの処理タイプ
+ *
+ */
 public enum ExecuteType {
 
 	/** entity作成 */

@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * IO系例外クラス<br>
+ * IO系例外クラス
  *
  */
 public class AppIOException extends BaseException {
@@ -10,7 +10,7 @@ public class AppIOException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param errorCode
 	 *     エラーコード

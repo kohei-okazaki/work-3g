@@ -1,8 +1,7 @@
 package jp.co.ha.common.api.type;
 
 /**
- * 結果区分<br>
- * APIの結果コードの列挙<br>
+ * APIの結果コードの列挙
  *
  */
 public enum ResultType {
@@ -18,7 +17,7 @@ public enum ResultType {
 	private String message;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param code
 	 *     コード
@@ -31,7 +30,7 @@ public enum ResultType {
 	}
 
 	/**
-	 * codeを返す<br>
+	 * codeを返す
 	 *
 	 * @return code
 	 */
@@ -40,7 +39,7 @@ public enum ResultType {
 	}
 
 	/**
-	 * messageを返す<br>
+	 * messageを返す
 	 *
 	 * @return message
 	 */

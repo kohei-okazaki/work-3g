@@ -40,7 +40,7 @@ public abstract class BaseBuilder {
 	}
 
 	/**
-	 * 初期処理<br>
+	 * 初期処理
 	 */
 	private void init() {
 		String targetTable = getProperty(PropertyType.TARGET_TABLE);
@@ -52,7 +52,7 @@ public abstract class BaseBuilder {
 	}
 
 	/**
-	 * プロパティファイルから値を取得<br>
+	 * プロパティファイルから値を取得
 	 *
 	 * @param propType
 	 *     プロパティファイル列挙
@@ -63,7 +63,7 @@ public abstract class BaseBuilder {
 	}
 
 	/**
-	 * excel設定情報を返す<br>
+	 * excel設定情報を返す
 	 *
 	 * @return ExcelConfig
 	 */
@@ -75,7 +75,7 @@ public abstract class BaseBuilder {
 	}
 
 	/**
-	 * ファイル設定情報を返す<br>
+	 * ファイル設定情報を返す
 	 *
 	 * @param execType
 	 *     実行タイプ

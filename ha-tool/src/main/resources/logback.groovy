@@ -9,15 +9,21 @@ scan("30 seconds")
 
 appender("STDOUT", ConsoleAppender) {
 
+  target = "System.out"
+
   encoder(PatternLayoutEncoder) {
     pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
+  }
+
+  filter(ThresholdFilter) {
+    level = DEBUG
   }
 
 }
 
 appender("FILE", RollingFileAppender) {
 
-  file = "logs/main.log"
+  file = "C:/logs/tool/main.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
     fileNamePattern = "main_%d{yyyy-MM-dd}.log"
@@ -26,6 +32,10 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     pattern = "%d [%thread] %-5level %logger{10} - %message%n"
+  }
+
+  filter(ThresholdFilter) {
+    level = DEBUG
   }
 
 }

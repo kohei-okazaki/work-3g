@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * DBアクセスの例外クラス<br>
+ * DBアクセスの例外クラス
  *
  */
 public class DataBaseException extends BaseException {
@@ -10,7 +10,7 @@ public class DataBaseException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param errorCode
 	 *     エラーコード

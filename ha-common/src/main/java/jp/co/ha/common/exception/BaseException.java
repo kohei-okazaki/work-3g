@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * アプリ内で扱う基底例外クラス<br>
+ * アプリ内で扱う基底例外クラス
  *
  */
 public abstract class BaseException extends Exception {
@@ -15,7 +15,7 @@ public abstract class BaseException extends Exception {
 	private String detail;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param errorCode
 	 *     エラーコード
@@ -28,7 +28,7 @@ public abstract class BaseException extends Exception {
 	}
 
 	/**
-	 * errorCodeを返す<br>
+	 * errorCodeを返す
 	 *
 	 * @return errorCode エラーコード
 	 */
@@ -37,7 +37,7 @@ public abstract class BaseException extends Exception {
 	}
 
 	/**
-	 * detailを返す<br>
+	 * detailを返す
 	 *
 	 * @return detail 詳細
 	 */

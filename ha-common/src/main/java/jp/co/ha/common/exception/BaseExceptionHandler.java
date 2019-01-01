@@ -7,7 +7,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
 
 /**
- * Exceptionハンドラー基底インターフェース<br>
+ * Exceptionハンドラー基底インターフェース
  *
  */
 public interface BaseExceptionHandler extends HandlerExceptionResolver {
@@ -16,7 +16,7 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 	static final Logger LOG = LoggerFactory.getLogger(BaseExceptionHandler.class);
 
 	/**
-	 * エラーメッセージを返す<br>
+	 * エラーメッセージを返す
 	 *
 	 * @param e
 	 *     例外クラス
@@ -25,7 +25,7 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 	String buildErrorMessage(Exception e);
 
 	/**
-	 * 指定したエラーメッセージのログを出力する<br>
+	 * 指定したエラーメッセージのログを出力する
 	 *
 	 * @param errorMessage
 	 *     エラーメッセージ
