@@ -14,37 +14,37 @@
 <body>
 
 
-	<h1>
-		<img class="headericon" alt="アカウント登録完了画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
-		アカウント登録完了画面
-	</h1>
+  <h1>
+    <img class="headericon" alt="アカウント登録完了画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
+    アカウント登録完了画面
+  </h1>
 
-	<hr>
-	<br><br>
+  <hr>
+  <br><br>
 
-	<!--/* 完了画面 */-->
-	<div align="center">
-		<p>完了しました</p>
-		<br><br>
-		<table>
-			<tr>
-				<td align="center">
-					<form action="../login/index.html" th:action="@{/login/index.html}" method="get">
-						<input type="submit" value="ログイン画面" />
-					</form>
-				</td>
-			</tr>
-		</table>
-	</div>
+  <!--/* 完了画面 */-->
+  <div align="center">
+    <p>完了しました</p>
+    <br><br>
+    <table>
+      <tr>
+        <td align="center">
+          <form action="../login/index.html" th:action="@{/login/index.html}" method="get">
+            <input type="submit" value="ログイン画面" />
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
 
-	<br><br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+  <br><br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
-	<script type="text/javascript" src="../resources/js/accountCreate.js" th:src="@{/resources/js/accountRegist.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
+  <script type="text/javascript" src="../resources/js/accountCreate.js" th:src="@{/resources/js/accountRegist.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
 
 </body>
 </html>

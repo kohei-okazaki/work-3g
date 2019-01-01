@@ -1,47 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-						http://maven.apache.org/maven-v4_0_0.xsd">
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>jp.co.ha.db</groupId>
-	<artifactId>ha-db</artifactId>
-	<version>1.0</version>
-	<packaging>jar</packaging>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>jp.co.ha.db</groupId>
+  <artifactId>ha-db</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
 
-	<parent>
-		<groupId>jp.co.ha.pom</groupId>
-		<artifactId>ha-pom</artifactId>
-		<version>1.0</version>
-		<relativePath>../ha-pom</relativePath>
-	</parent>
+  <parent>
+    <groupId>jp.co.ha.pom</groupId>
+    <artifactId>ha-pom</artifactId>
+    <version>1.0</version>
+    <relativePath>../ha-pom</relativePath>
+  </parent>
 
-<!-- -->
-	<dependencies>
-		<dependency>
-			<groupId>jp.co.ha.common</groupId>
-			<artifactId>ha-common</artifactId>
-			<version>1.0</version>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>jp.co.ha.common</groupId>
+      <artifactId>ha-common</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis.generator</groupId>
+      <artifactId>mybatis-generator-core</artifactId>
+      <version>1.3.7</version>
+    </dependency>
+  </dependencies>
 
-		<dependency>
-			<groupId>org.mybatis.generator</groupId>
-			<artifactId>mybatis-generator-core</artifactId>
-			<version>1.3.7</version>
-		</dependency>
-
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.7</version>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.mybatis.generator</groupId>
+        <artifactId>mybatis-generator-maven-plugin</artifactId>
+        <version>1.3.7</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

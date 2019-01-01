@@ -16,112 +16,114 @@
 </head>
 
 <body class="main">
-	<h1>
-		<img class="headericon" alt="ファイル設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
-		ファイル設定入力画面
-	</h1>
+  <h1>
+    <img class="headericon" alt="ファイル設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
+    ファイル設定入力画面
+  </h1>
 
-	<hr>
-	<div th:replace="./common/navigation.html"></div>
-	<br><br><br>
+  <hr>
+  <div th:replace="./common/navigation.html"></div>
+  <br><br><br>
 
-	 <!--/* 入力画面 */-->
-	<form id="healthInfoFileSettingForm" action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
-	<div align="center">
-	<div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-	<div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
-	<div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
-	<div class="errorMessage" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
-	<div class="errorMessage" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
-	<table border="1">
-		<tr>
-			<th class="header">
-				<p>ユーザID</p>
-			</th>
-			<td class="data">
-				<p th:text="*{userId}"></p>
-				<input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
-			</td>
-		</tr>
-		<tr>
-			<th class="header" width="130px">
-				<p>ヘッダ利用</p>
-			</th>
-			<td class="data" width="250px">
-				<div class="radio">
-					<input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked="checked" />
-					<label for="headerFlagFalse" class="switch-off">しない</label>
-					<input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagTrue" value="1" />
-					<label for="headerFlagTrue">する</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<th class="header" width="130px">
-				<p>フッタ利用</p>
-			</th>
-			<td class="data" width="250px">
-				<div class="radio">
-					<input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked="checked" />
-					<label for="footerFlagFalse" class="switch-off">しない</label>
-					<input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagTrue" value="1" />
-					<label for="footerFlagTrue">する</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<th class="header" width="130px">
-				<p>マスク利用</p>
-			</th>
-			<td class="data" width="250px">
-				<div class="radio">
-					<input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked="checked" />
-					<label for="maskFlagFalse" class="switch-off">しない</label>
-					<input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagTrue" value="1" />
-					<label for="maskFlagTrue">する</label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<th class="header" width="130px">
-				<p>囲み文字利用</p>
-			</th>
-			<td class="data" width="250px">
-				<div class="radio">
-					<input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked="checked" />
-					<label for="enclosureCharFlagFalse" class="switch-off">しない</label>
-					<input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1" />
-					<label for="enclosureCharFlagTrue">する</label>
-				</div>
-			</td>
-		</tr>
-	</table>
-	<br><br>
-	<table>
-		<tr>
-			<td>
-				<input type="submit" value="確 認" />
-			</td>
-		</tr>
-	</table>
-	</div>
-	</form>
+   <!--/* 入力画面 */-->
+  <form id="healthInfoFileSettingForm" action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
+    <div align="center">
+      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
+      <table border="1">
+        <tr>
+          <th class="header">
+            <p>ユーザID</p>
+          </th>
+          <td class="data">
+            <p th:text="*{userId}"></p>
+            <input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
+          </td>
+        </tr>
+        <tr>
+          <th class="header" width="130px">
+            <p>ヘッダ利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked="checked" />
+              <label for="headerFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagTrue" value="1" />
+              <label for="headerFlagTrue">する</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="header" width="130px">
+            <p>フッタ利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked="checked" />
+              <label for="footerFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagTrue" value="1" />
+              <label for="footerFlagTrue">する</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="header" width="130px">
+            <p>マスク利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked="checked" />
+              <label for="maskFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagTrue" value="1" />
+              <label for="maskFlagTrue">する</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="header" width="130px">
+            <p>囲み文字利用</p>
+          </th>
+          <td class="data" width="250px">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked="checked" />
+              <label for="enclosureCharFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1" />
+              <label for="enclosureCharFlagTrue">する</label>
+            </div>
+          </td>
+        </tr>
+      </table>
 
-	<br><br>
-	<hr>
-	<div th:replace="common/layout :: footer"></div>
+      <br><br>
 
-	<script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-	<script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-	<script>
-		$(function() {
-			jQuery("#healthInfoFileSettingForm").validationEngine({
-				promptPosition: "topLeft:80"
-			});
-		});
-	</script>
+      <table>
+        <tr>
+          <td>
+            <input type="submit" value="確 認" />
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+
+  <br><br>
+  <hr>
+  <div th:replace="common/layout :: footer"></div>
+
+  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script>
+    $(function() {
+      jQuery("#healthInfoFileSettingForm").validationEngine({
+        promptPosition: "topLeft:80"
+      });
+    });
+  </script>
 
 </body>
 </html>
