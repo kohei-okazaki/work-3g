@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-						http://maven.apache.org/maven-v4_0_0.xsd">
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>jp.co.ha.web</groupId>
-	<artifactId>ha-web</artifactId>
-	<version>1.0</version>
-	<packaging>war</packaging>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>jp.co.ha.web</groupId>
+  <artifactId>ha-web</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
 
-	<properties>
-		<org.thymeleaf-version>3.0.9.RELEASE</org.thymeleaf-version>
-		<org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
-	</properties>
+  <properties>
+    <org.thymeleaf-version>3.0.9.RELEASE</org.thymeleaf-version>
+    <org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
+  </properties>
 
-	<parent>
-		<groupId>jp.co.ha.pom</groupId>
-		<artifactId>ha-pom</artifactId>
-		<version>1.0</version>
-		<relativePath>../ha-pom</relativePath>
-	</parent>
+  <parent>
+    <groupId>jp.co.ha.pom</groupId>
+    <artifactId>ha-pom</artifactId>
+    <version>1.0</version>
+    <relativePath>../ha-pom</relativePath>
+  </parent>
 
-	<dependencies>
-		<!-- thymeleaf -->
-		<dependency>
-			<groupId>org.thymeleaf</groupId>
-			<artifactId>thymeleaf-spring5</artifactId>
-			<version>${org.thymeleaf-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>nz.net.ultraq.thymeleaf</groupId>
-			<artifactId>thymeleaf-layout-dialect</artifactId>
-			<version>${org.thymeleaf-layout-version}</version>
-		</dependency>
+  <dependencies>
+    <!-- thymeleaf -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>${org.thymeleaf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>nz.net.ultraq.thymeleaf</groupId>
+      <artifactId>thymeleaf-layout-dialect</artifactId>
+      <version>${org.thymeleaf-layout-version}</version>
+    </dependency>
 
-		<dependency>
-			<groupId>jp.co.ha.common</groupId>
-			<artifactId>ha-common</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>jp.co.ha.business</groupId>
-			<artifactId>ha-business</artifactId>
-			<version>1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>jp.co.ha.db</groupId>
-			<artifactId>ha-db</artifactId>
-			<version>1.0</version>
-		</dependency>
+    <dependency>
+      <groupId>jp.co.ha.common</groupId>
+      <artifactId>ha-common</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jp.co.ha.business</groupId>
+      <artifactId>ha-business</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>jp.co.ha.db</groupId>
+      <artifactId>ha-db</artifactId>
+      <version>1.0</version>
+    </dependency>
 
-		<dependency>
-			<groupId>jp.co.ha.api</groupId>
-			<artifactId>ha-api</artifactId>
-			<version>1.0</version>
-		</dependency>
+    <dependency>
+      <groupId>jp.co.ha.api</groupId>
+      <artifactId>ha-api</artifactId>
+      <version>1.0</version>
+    </dependency>
 
-	</dependencies>
+  </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-				</configuration>
-				<version>3.2.2</version>
-			</plugin>
-		</plugins>
-	</build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+        </configuration>
+        <version>3.2.2</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
