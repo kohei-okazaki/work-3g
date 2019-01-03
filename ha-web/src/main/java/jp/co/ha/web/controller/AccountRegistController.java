@@ -94,8 +94,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
 			String errorMessage = messageSource.getMessage("validate.message.existAccount", null, Locale.JAPANESE);
-			model.addAttribute("userId", errorMessage);
+			model.addAttribute("errorMessage", errorMessage);
 			LOG.warn("アカウント情報が既に登録されています");
+			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 		}
 
 		model.addAttribute("form", form);
