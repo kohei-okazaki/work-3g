@@ -10,6 +10,7 @@ import java.util.Properties;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
@@ -49,7 +50,7 @@ public class JdbcConfig {
 	private void init() {
 		String classPath = this.getClass().getClassLoader().getResource("").getPath();
 		String propertiesPath = "META-INF" + FileSeparator.SYSTEM.getValue() + "jdbc.properties";
-		readProperty(new File(classPath, propertiesPath));
+		readProperty(FileUtil.getFile(classPath + FileSeparator.SYSTEM.getValue() + propertiesPath));
 	}
 
 	/**

@@ -30,7 +30,9 @@ public class ExcelReader extends BaseFileReader {
 
 	/**
 	 * コンストラクタ
-	 * @param conf Excel設定情報
+	 *
+	 * @param conf
+	 *     Excel設定情報
 	 */
 	public ExcelReader(ExcelConfig conf) {
 		this.conf = conf;
@@ -46,16 +48,16 @@ public class ExcelReader extends BaseFileReader {
 	 * @return Excel
 	 */
 	public Excel read() {
-		Workbook workbook;
-		try {
-			workbook = WorkbookFactory.create(getFile(conf.getFilePath()));
+
+		Iterator<Sheet> sheetIte;
+		try (Workbook wb = WorkbookFactory.create(getFile(conf.getFilePath()))) {
+			sheetIte = wb.sheetIterator();
 		} catch (EncryptedDocumentException | IOException e) {
 			LOG.error("excelファイル読込エラー", e);
 			return null;
 		}
 
 		Excel excel = new Excel();
-		Iterator<Sheet> sheetIte = workbook.sheetIterator();
 		while (sheetIte.hasNext()) {
 			jp.co.ha.tool.excel.Sheet excelSheet = new jp.co.ha.tool.excel.Sheet();
 			Sheet sheet = sheetIte.next();

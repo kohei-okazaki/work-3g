@@ -2,6 +2,9 @@ package jp.co.ha.tool.reader;
 
 import java.io.File;
 
+import jp.co.ha.common.util.FileUtil;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
+
 /**
  * 基底ファイル読込クラス
  *
@@ -17,6 +20,6 @@ public abstract class BaseFileReader {
 	 */
 	protected File getFile(String resourcePath) {
 		String sysPath = this.getClass().getClassLoader().getResource("").getPath();
-		return new File(sysPath, resourcePath);
+		return FileUtil.getFile(sysPath + FileSeparator.SYSTEM.getValue() + resourcePath);
 	}
 }
