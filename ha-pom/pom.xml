@@ -245,10 +245,10 @@
   <build>
     <resources>
       <resource>
-        <directory>${basedir}/src/main/resources</directory>
+        <directory>${resources.directory}</directory>
       </resource>
       <resource>
-        <directory>${basedir}/src/test/resources</directory>
+        <directory>${basedir}/src/main/resources</directory>
       </resource>
       <resource>
         <directory>${basedir}/../ha-common/src/main/resources</directory>
@@ -257,6 +257,20 @@
         <directory>${basedir}/../ha-db/src/main/resources</directory>
       </resource>
     </resources>
+    <testResources>
+      <testResource>
+        <directory>${resources.testdirectory}</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-common/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-db/src/test/resources</directory>
+      </testResource>
+    </testResources>
     <plugins>
 
       <plugin>

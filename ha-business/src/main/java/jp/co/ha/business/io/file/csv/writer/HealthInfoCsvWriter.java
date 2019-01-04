@@ -27,11 +27,11 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 	 *
 	 * @param conf
 	 *     CSV設定情報
-	 * @param printWriter
+	 * @param pw
 	 *     出力用PrintWriter
 	 */
-	public HealthInfoCsvWriter(CsvConfig conf, PrintWriter printWriter) {
-		super(conf, printWriter);
+	public HealthInfoCsvWriter(CsvConfig conf, PrintWriter pw) {
+		super(conf, pw);
 	}
 
 	/**
