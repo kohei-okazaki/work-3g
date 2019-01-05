@@ -30,7 +30,7 @@ import jp.co.ha.web.form.LoginForm;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_ログイン画面コントローラ<br>
+ * 健康管理_ログイン画面コントローラ
  *
  */
 @Controller
@@ -48,7 +48,7 @@ public class LoginController implements BaseWebController {
 	private MessageSource messageSource;
 
 	/**
-	 * Validateを設定<br>
+	 * Validateを設定
 	 *
 	 * @param binder
 	 *     WebDataBinder
@@ -59,7 +59,7 @@ public class LoginController implements BaseWebController {
 	}
 
 	/**
-	 * Formを返す<br>
+	 * Formを返す
 	 *
 	 * @return LoginForm
 	 */
@@ -113,8 +113,9 @@ public class LoginController implements BaseWebController {
 		Account account = accountSearchService.findByUserId(loginForm.getUserId());
 		LoginCheckResult checkResult = new LoginCheck().check(account, loginForm.getUserId(), loginForm.getPassword());
 		if (checkResult.hasError()) {
-			String errorMessage = messageSource.getMessage(checkResult.getErrorDetail(), null, Locale.JAPANESE);
-			model.addAttribute(checkResult.getName(), errorMessage);
+			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getValidateMessage(), null, Locale.getDefault());
+			model.addAttribute("errorMessage", errorMessage);
+			return getView(ManageWebView.LOGIN);
 		}
 
 		// セッションにユーザIDを登録する。

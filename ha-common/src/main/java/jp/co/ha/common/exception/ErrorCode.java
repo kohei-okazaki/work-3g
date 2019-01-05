@@ -23,6 +23,15 @@ public enum ErrorCode {
 	ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "W_001", LogLevel.WARN, "アカウントが存在しません", "error.account.illegal"),
 	/** アカウント不整合エラー */
 	ACCOUNT_DELETE("ACCOUNT_DELETE", "W_002", LogLevel.WARN, "アカウントが削除済です", "error.account.delete"),
+	/** アカウント存在エラー */
+	ACCOUNT_EXIST("ACCOUNT_EXIST", "W_001", LogLevel.WARN, "アカウントが既に存在しています", "error.account.exist"),
+	/** アカウント不一致エラー */
+	ACCOUNT_INVALID_PASSWORD("ACCOUNT_INVALID_PASSWORD", "W_002", LogLevel.WARN, "IDとパスワードが一致しません", "error.account.invalidPassword"),
+	/** アカウント存在エラー */
+	ACCOUNT_INVALID("ACCOUNT_INVALID", "W_001", LogLevel.WARN, "アカウントが無効です", "error.account.invalid"),
+	/** アカウント不一致エラー */
+	ACCOUNT_EXPIRED("ACCOUNT_EXPIRED", "W_002", LogLevel.WARN, "アカウントが有効期限切れです", "error.account.expired"),
+
 	/** ファイル処理エラー */
 	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "W_003", LogLevel.WARN, "ファイルの処理に失敗しました", "error.file.write"),
 	/** リクエスト情報エラー */
