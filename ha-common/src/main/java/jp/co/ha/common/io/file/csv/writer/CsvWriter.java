@@ -2,7 +2,6 @@ package jp.co.ha.common.io.file.csv.writer;
 
 import java.io.Closeable;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -10,6 +9,7 @@ import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.annotation.CsvDownloadModel;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -139,9 +139,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 * @return ヘッダーリスト
 	 */
 	protected List<String> getHeaderList(Class<?> clazz) {
-		List<String> headerList = new ArrayList<>();
-		headerList.addAll(List.of(clazz.getAnnotation(CsvDownloadModel.class).headerNames()));
-		return headerList;
+		return CollectionUtil.toList(clazz.getAnnotation(CsvDownloadModel.class).headerNames());
 	}
 
 	/**
@@ -152,9 +150,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 * @return フッターリスト
 	 */
 	protected List<String> getFooterList(Class<?> clazz) {
-		List<String> footerList = new ArrayList<>();
-		footerList.addAll(List.of(clazz.getAnnotation(CsvDownloadModel.class).footerNames()));
-		return footerList;
+		return CollectionUtil.toList(clazz.getAnnotation(CsvDownloadModel.class).footerNames());
 	}
 
 }
