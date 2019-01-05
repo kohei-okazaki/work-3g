@@ -1,44 +1,55 @@
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>健康情報登録API JSON生成ツール</title>
 </head>
 <body>
-<form action="http://localhost:8080/ha-api/healthInfoRegist">
-	<table>
-		<tr>
-			<th>
-				<p>リクエスト種別</p>
-			</th>
-			<th>
-				<input type="text" name="requestType" />
-			</th>
-		</tr>
-		<tr>
-			<th>
-				<p>ユーザID</p>
-			</th>
-			<th>
-				<input type="text" name="userId" />
-			</th>
-		</tr>
-		<tr>
-			<th>
-				<p>身長</p>
-			</th>
-			<th>
-				<input type="text" name="height" />
-			</th>
-		</tr>
-		<tr>
-			<th>
-				<p>体重</p>
-			</th>
-			<th>
-				<input type="text" name="weight" />
-			</th>
-		</tr>
-	</table>
-	<input type="submit" value="送信" />
-</form>
+  <h1>健康情報登録API JSON生成ツール</h1>
+  <table border="1">
+    <tr>
+      <th>requestType</th>
+      <td><input type="text" id="requestType" size="10" value="001"></td>
+    </tr>
+    <tr>
+      <th>userId</th>
+      <td><input type="text" id="userId" size="10" placeholder="ユーザID" value="master"></td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td><input type="text" id="height" size="10" placeholder="身長"></td>
+    </tr>
+    <tr>
+      <th>weight</th>
+      <td><input type="text" id="weight" size="10" placeholder="体重"></td>
+    </tr>
+    <tr>
+      <th>apiKey</th>
+      <td><input type="text" id="apiKey" size="80" placeholder="APIキー" value="ac960b7b9545673cb8e55c32263dffb4dcffdd39d7caa178912b31aeba7da3f1"></td>
+    </tr>
+  </table>
+  <p><button id="submit" type="button">作成</button></p>
+  <textarea id="response" cols=120 rows=10></textarea>
+
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    $("button#submit").click(function() {
+      var json = {
+        requestType : $("#requestType").val(),
+        userId : $("#userId").val(),
+        height : parseFloat($("#height").val()),
+        weight : parseFloat($("#weight").val()),
+        apiKey : $("#apiKey").val()
+      };
+
+      // Json形式に変換
+      var result = JSON.stringify(json);
+      //console.log(result);
+      //alert(result);
+      $("#response").val(result);
+    })
+
+  </script>
 </body>
 </html>
