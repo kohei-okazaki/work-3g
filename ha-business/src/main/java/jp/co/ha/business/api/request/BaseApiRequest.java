@@ -21,7 +21,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	/**
 	 * requestTypeを返す
 	 *
-	 * @return requestType リクエスト種別
+	 * @return requestType
 	 */
 	public RequestType getRequestType() {
 		return requestType;
@@ -40,7 +40,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	/**
 	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
@@ -59,7 +59,7 @@ public abstract class BaseApiRequest extends BaseRequest {
 	/**
 	 * apiKeyを返す
 	 *
-	 * @return apiKey APIキー
+	 * @return apiKey
 	 */
 	public String getApiKey() {
 		return apiKey;

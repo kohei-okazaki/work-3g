@@ -18,7 +18,7 @@ public interface HealthInfoRegistService
 	 *
 	 * @param request
 	 *     リクエスト
-	 * @return HealthInfo
+	 * @return 健康情報
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -29,7 +29,7 @@ public interface HealthInfoRegistService
 	 *
 	 * @param healthInfo
 	 *     健康情報
-	 * @return HealthInfoRegistResponse
+	 * @return 健康情報登録レスポンス
 	 * @throws BaseException
 	 *     基底例外
 	 */

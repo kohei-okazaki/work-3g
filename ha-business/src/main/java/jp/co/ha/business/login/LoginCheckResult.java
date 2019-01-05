@@ -1,5 +1,7 @@
 package jp.co.ha.business.login;
 
+import jp.co.ha.common.exception.ErrorCode;
+
 /**
  * ログイン情報チェック結果保持クラス
  *
@@ -8,10 +10,8 @@ public class LoginCheckResult {
 
 	/** エラーカウント */
 	private int errorCount = 0;
-	/** エラー項目名 */
-	private String name;
-	/** 詳細 */
-	private String errorDetail;
+	/** エラーコード */
+	private ErrorCode errorCode;
 
 	/**
 	 * エラーが存在するかどうかを返す
@@ -30,41 +30,22 @@ public class LoginCheckResult {
 	}
 
 	/**
-	 * 名前を返す
+	 * errorCodeを返す
 	 *
-	 * @return name
+	 * @return errorCode
 	 */
-	public String getName() {
-		return name;
+	public ErrorCode getErrorCode() {
+		return errorCode;
 	}
 
 	/**
-	 * 名前を設定する
+	 * errorCodeを設定する
 	 *
-	 * @param name
-	 *     名前
+	 * @param errorCode
+	 *     エラーコード
 	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * エラー詳細を返す
-	 *
-	 * @return errorDetail
-	 */
-	public String getErrorDetail() {
-		return errorDetail;
-	}
-
-	/**
-	 * エラー詳細を設定する
-	 *
-	 * @param errorDetail
-	 *     エラー詳細
-	 */
-	public void setErrorDetail(String errorDetail) {
-		this.errorDetail = errorDetail;
+	public void setErrorCode(ErrorCode errorCode) {
+		this.errorCode = errorCode;
 	}
 
 }

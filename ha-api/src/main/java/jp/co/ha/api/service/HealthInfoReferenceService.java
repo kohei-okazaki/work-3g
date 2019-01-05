@@ -17,7 +17,7 @@ public interface HealthInfoReferenceService
 	 *
 	 * @param healthInfo
 	 *     健康情報
-	 * @return HealthInfoReferenceResponse
+	 * @return 健康情報照会レスポンス
 	 */
 	HealthInfoReferenceResponse toResponse(HealthInfo healthInfo);
 }

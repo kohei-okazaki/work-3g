@@ -60,7 +60,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		}
 
 		// リクエスト種別チェック
-		if (RequestType.HEALTH_INFO_REGIST != request.getRequestType()) {
+		if (!RequestType.HEALTH_INFO_REGIST.is(request.getRequestType())) {
 			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 

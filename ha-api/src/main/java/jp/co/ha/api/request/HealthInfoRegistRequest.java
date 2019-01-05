@@ -40,7 +40,7 @@ public class HealthInfoRegistRequest extends BaseApiRequest {
 	/**
 	 * weightを返す
 	 *
-	 * @return weight 体重
+	 * @return weight
 	 */
 	public BigDecimal getWeight() {
 		return weight;

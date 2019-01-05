@@ -48,7 +48,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 		}
 
 		// リクエスト種別チェック
-		if (RequestType.HEALTH_INFO_REFERENCE != request.getRequestType()) {
+		if (!RequestType.HEALTH_INFO_REFERENCE.is(request.getRequestType())) {
 			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
