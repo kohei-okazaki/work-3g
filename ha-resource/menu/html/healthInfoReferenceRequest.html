@@ -8,26 +8,42 @@
   <h1>健康情報照会API JSON生成ツール</h1>
   <table border="1">
     <tr>
-      <th>requestType</th>
-      <td><input type="text" id="requestType" size="10" value="002"></td>
+      <th>
+        <label>リクエストタイプ</label>
+      </th>
+      <td>
+        <input type="text" id="requestType" size="10" value="002" />
+      </td>
     </tr>
     <tr>
-      <th>userId</th>
-      <td><input type="text" id="userId" size="10" placeholder="ユーザID" value=""></td>
+      <th>
+        <label>ユーザID</label>
+      </th>
+      <td>
+        <input type="text" id="userId" size="10" placeholder="ユーザID" />
+      </td>
     </tr>
     <tr>
-      <th>healthInfoId</th>
-      <td><input type="text" id="healthInfoId" size="10" placeholder="健康情報ID" value=""></td>
+      <th>
+        <label>健康情報ID</label>
+      </th>
+      <td>
+        <input type="text" id="healthInfoId" size="10" placeholder="健康情報ID" />
+      </td>
     </tr>
     <tr>
-      <th>apiKey</th>
-      <td><input type="text" id="apiKey" size="80" placeholder="APIキー" value=""></td>
+      <th>
+        <label>APIキー</label>
+      </th>
+      <td>
+        <input type="text" id="apiKey" size="80" placeholder="APIキー" />
+      </td>
     </tr>
   </table>
-  <p><button id="submit" type="button">作成</button></p>
+  <button id="submit" type="button">作成</button>
   <textarea id="response" cols=120 rows=10></textarea>
 
-  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
   <script type="text/javascript">
 
   $("button#submit").click(function() {
