@@ -1,64 +1,64 @@
 .accordion1 {
-	text-align: center;
+  text-align: center;
 }
 
 .accordion1 .inner {
-	display: none;
+  display: none;
 }
 
 .accordion1 p {
-	cursor: pointer;
-	padding: 10px;
+  cursor: pointer;
+  padding: 10px;
 }
 
 .accordion1 p.ac1 {
-	background: #F50057;
+  background: #F50057;
 }
 
 .accordion1 p.ac2 {
-	background: #FFEA00;
+  background: #FFEA00;
 }
 
 .accordion1 p.ac3 {
-	background: #64DD17;
+  background: #64DD17;
 }
 
 .accordion1 .inner li {
-	padding: 10px 0;
+  padding: 10px 0;
 }
 
 .accordion1 .inner li.content1-1 {
-	background: #F48FB1;
+  background: #F48FB1;
 }
 
 .accordion1 .inner li.content1-2 {
-	background: #F8BBD0;
+  background: #F8BBD0;
 }
 
 .accordion1 .inner li.content1-3 {
-	background: #FCE4EC;
+  background: #FCE4EC;
 }
 
 .accordion1 .inner li.content2-1 {
-	background: #FFF59D;
+  background: #FFF59D;
 }
 
 .accordion1 .inner li.content2-2 {
-	background: #FFF9C4;
+  background: #FFF9C4;
 }
 
 .accordion1 .inner li.content2-3 {
-	background: #FFFDE7;
+  background: #FFFDE7;
 }
 
 .accordion1 .inner li.content3-1 {
-	background: #C5E1A5;
+  background: #C5E1A5;
 }
 
 .accordion1 .inner li.content3-2 {
-	background: #DCEDC8;
+  background: #DCEDC8;
 }
 
 .accordion1 .inner li.content3-3 {
-	background: #F1F8E9;
+  background: #F1F8E9;
 }
