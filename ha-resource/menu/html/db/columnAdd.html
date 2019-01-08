@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DB -カラム追加-</title>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+</head>
+<body>
+  <h1>DB -カラム追加-</h1>
+  <table>
+    <tr>
+      <th>
+        <label>テーブル名</label>
+      </th>
+      <td>
+        <input type="text" id="tableName" size="16" placeholder="対象テーブル名" />
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label>カラム名</label>
+      </th>
+      <td>
+        <input type="text" id="columnName" size="16" placeholder="追加するカラム名" />
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label>カラム定義</label>
+      </th>
+      <td>
+        <input type="text" id="columnDefine" size="16" placeholder="カラム定義" />
+      </td>
+    </tr>
+  </table>
+
+  <div class="button">
+    <button id="submit" type="button">作成</button>
+    <button id="clear" type="button">クリア</button>
+  </div>
+
+  <textarea id="response" cols=80 rows=7></textarea>
+
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    $("button#submit").click(function() {
+      // DDLに変換
+      var sql = "ALTER TABLE " + $("#tableName").val() + " ADD " + $("#columnName").val() + " " + $("#columnDefine").val() + ";";
+      $("#response").val(sql);
+    });
+
+    $("button#clear").click(function() {
+      // 結果部分を取得
+      $("#response").val("");
+    });
+
+  </script>
+</body>
+</html>

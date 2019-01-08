@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>健康情報照会API JSON生成ツール</title>
-<link rel="stylesheet" type="text/css" href="../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
 </head>
 <body>
   <h1>健康情報照会API JSON生成ツール</h1>
@@ -41,10 +41,14 @@
       </td>
     </tr>
   </table>
-  <button id="submit" type="button">作成</button><br>
+
+  <div class="button">
+    <button id="submit" type="button">作成</button>
+  </div>
+
   <textarea id="response" cols=120 rows=10></textarea>
 
-  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
   <script type="text/javascript">
 
   $("button#submit").click(function() {
@@ -61,7 +65,7 @@
     //console.log(result);
     //alert(result);
     $("#response").val(result);
-  })
+  });
 
 </script>
 </body>
