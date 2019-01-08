@@ -10,7 +10,7 @@
 
 ## 02_Project構成  
 ### ha-api  
-BodyにJsonを設定したPOST形式のHTTPリクエストを処理するプロジェクト  
+リクエストBodyにJSONを設定したPOST形式のHTTPリクエストを処理するプロジェクト  
 
 ### ha-build  
 ローカル環境でjarを作成するプロジェクト  
