@@ -1,4 +1,4 @@
-package jp.co.ha.db.annotation;
+package jp.co.ha.common.db.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,13 +8,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Entityを示すマーカーアノテーション
+ * DBへのInsert処理を行うメソッドにつけるマーカーアノテーション
  *
  */
 @Inherited
 @Documented
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Entity {
+public @interface Insert {
 
 }

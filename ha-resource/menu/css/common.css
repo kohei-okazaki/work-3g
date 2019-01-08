@@ -1,2 +1,34 @@
+/** 画面のタイトルの設定 */
+h1 {
+  /*文字色*/
+  color: #000000;
+  /*線色*/
+  border: solid 3px #000000;
+  /*文字周りの余白*/
+  padding: 0.5em;
+  /*角丸*/
+  border-radius: 0.5em;
+}
 
+/** 入力タグの設定 */
+input[type=text] {
+  border: 0;
+  padding: 10px;
+  font-size: 1.3em;
+  font-family: Meiryo;
+  color: #000000;
+  border: solid 1px #ccc;
+  margin: 10px 0 10px;
+  width: 300px;
+}
 
+/** テキストエリアの設定 */
+textarea {
+  border: 1;
+  font-size: 1.1em;
+  font-family: Meiryo;
+}
+
+.button {
+  margin: 7px;
+}

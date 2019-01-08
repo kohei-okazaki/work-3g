@@ -7,11 +7,11 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
+import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.db.annotation.Entity;
 
 /**
  * DB接続の共通処理クラス
