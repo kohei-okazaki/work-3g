@@ -3,8 +3,8 @@ package jp.co.ha.business.db.crud.create.impl;
 import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.SqlSessionFactory;
-import jp.co.ha.business.db.annotation.Insert;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
+import jp.co.ha.common.db.annotation.Insert;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.mapper.AccountMapper;

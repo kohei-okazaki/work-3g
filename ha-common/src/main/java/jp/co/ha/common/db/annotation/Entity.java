@@ -1,4 +1,4 @@
-package jp.co.ha.business.db.annotation;
+package jp.co.ha.common.db.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,13 +8,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * DBへのUpdate処理を行うメソッドにつけるマーカーアノテーション
+ * Entityを示すマーカーアノテーション
  *
  */
 @Inherited
 @Documented
-@Target(ElementType.METHOD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Update {
+public @interface Entity {
 
 }

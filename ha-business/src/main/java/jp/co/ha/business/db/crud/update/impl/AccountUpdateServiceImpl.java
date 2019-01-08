@@ -3,8 +3,8 @@ package jp.co.ha.business.db.crud.update.impl;
 import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.SqlSessionFactory;
-import jp.co.ha.business.db.annotation.Update;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
+import jp.co.ha.common.db.annotation.Update;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.mapper.AccountMapper;

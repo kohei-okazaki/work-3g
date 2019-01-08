@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.db.annotation.Entity;
 
 @Entity
 public class HealthInfo implements Serializable {
