@@ -32,7 +32,7 @@ public class DataBaseCommonExecutor {
 	 * @param jp
 	 *     JoinPoint
 	 */
-	@Before("@annotation(jp.co.ha.business.db.annotation.Update)")
+	@Before("@annotation(jp.co.ha.common.db.annotation.Update)")
 	public void update(JoinPoint jp) {
 		try {
 			for (Object entity : jp.getArgs()) {
@@ -60,7 +60,7 @@ public class DataBaseCommonExecutor {
 	 * @param jp
 	 *     JoinPoint
 	 */
-	@Before("@annotation(jp.co.ha.business.db.annotation.Insert)")
+	@Before("@annotation(jp.co.ha.common.db.annotation.Insert)")
 	public void insert(JoinPoint jp) {
 		try {
 			for (Object entity : jp.getArgs()) {
