@@ -135,8 +135,9 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
 
 		CsvConfig conf = new CsvConfig();
-		String fileName = "healthInfoReference_" +
-				DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + FileSuffix.CSV.getValue();
+		var fileName = "healthInfoReference_"
+				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+				+ FileSuffix.CSV.getValue();
 		conf.setFileName(fileName);
 		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
