@@ -21,7 +21,7 @@ import jp.co.ha.db.entity.Account;
 import jp.co.ha.web.service.HealthInfoFileRegistService;
 
 /**
- * 健康情報ファイル入力画面サービス<br>
+ * 健康情報ファイル入力画面サービス実装クラス
  *
  */
 @Service
@@ -35,13 +35,13 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	private HealthInfoRegistService healthInfoRegistService;
 
 	/**
-	 * 健康情報CSVアップロードモデルリストから健康情報APIリクエストのリストに変換する<br>
+	 * 健康情報CSVアップロードモデルリストから健康情報登録APIリクエストのリストに変換する
 	 *
 	 * @param modelList
 	 *     健康情報CSVアップロードモデルリスト
 	 * @param userId
 	 *     ユーザID
-	 * @return 健康情報CSVアップロードモデルリスト
+	 * @return 健康情報登録APIリクエストリスト
 	 * @throws BaseException
 	 *     基底例外
 	 */

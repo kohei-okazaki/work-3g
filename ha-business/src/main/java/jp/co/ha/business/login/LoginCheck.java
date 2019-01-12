@@ -7,7 +7,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 
 /**
- * ログイン情報チェッククラス<br>
+ * ログイン情報チェッククラス
  *
  */
 public class LoginCheck {
@@ -52,7 +52,6 @@ public class LoginCheck {
 			return result;
 		}
 
-		// errorにならなければnullを返す
 		return result;
 	}
 

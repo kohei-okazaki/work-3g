@@ -1,19 +1,19 @@
 package jp.co.ha.common.log;
 
 /**
- * ロガーファクトリークラス<br>
+ * ロガーファクトリークラス
  *
  */
 public class LoggerFactory {
 
 	/**
-	 * プライベートコンストラクタ<br>
+	 * プライベートコンストラクタ
 	 */
 	private LoggerFactory() {
 	}
 
 	/**
-	 * <code>Logger</code>を返す<br>
+	 * <code>Logger</code>を返す
 	 *
 	 * @param clazz
 	 *     クラス型

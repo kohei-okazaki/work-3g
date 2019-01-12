@@ -24,7 +24,7 @@ public class LogMessageFactory {
 	private final static Logger LOG = LoggerFactory.getLogger(LogMessageFactory.class);
 
 	/**
-	 * プライベートコンストラクタ<br>
+	 * プライベートコンストラクタ
 	 */
 	private LogMessageFactory() {
 	}

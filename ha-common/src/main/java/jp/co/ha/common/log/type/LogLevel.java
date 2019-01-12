@@ -3,7 +3,7 @@ package jp.co.ha.common.log.type;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * ログレベルの列挙<br>
+ * ログレベルの列挙
  *
  */
 public enum LogLevel implements BaseEnum {

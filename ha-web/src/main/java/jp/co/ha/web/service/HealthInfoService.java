@@ -80,7 +80,7 @@ public interface HealthInfoService {
 	 *
 	 * @param fileName
 	 *     ファイル名
-	 * @param entity
+	 * @param healthInfoFileSetting
 	 *     健康情報ファイル設定
 	 * @return CsvConfig
 	 */

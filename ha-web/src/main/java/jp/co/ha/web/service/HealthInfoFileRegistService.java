@@ -6,7 +6,7 @@ import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
 
 /**
- * 健康情報ファイル入力画面サービス
+ * 健康情報ファイル入力画面サービスインターフェース
  *
  */
 public interface HealthInfoFileRegistService {
@@ -24,7 +24,7 @@ public interface HealthInfoFileRegistService {
 	void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException;
 
 	/**
-	 * 指定されたモデルリストの登録処理を行う<br>
+	 * 指定されたモデルリストの登録処理を行う
 	 *
 	 * @param modelList
 	 *     健康情報CSVアップロードモデルリスト
