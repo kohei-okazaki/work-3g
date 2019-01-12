@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.api.response.HealthInfoRegistResponse;
@@ -165,7 +163,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *     基底例外
 	 */
 	@GetMapping(value = "/excelDownload.html")
-	public ModelAndView excelDownload(@SessionAttribute @Nullable String userId, HealthInfoForm form) throws BaseException {
+	public ModelAndView excelDownload(HttpServletRequest request, HealthInfoForm form) throws BaseException {
+
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		if (BeanUtil.isNull(userId)) {
+			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+		}
 
 		Integer requestHealthInfoId = form.getHealthInfoId();
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
@@ -212,7 +215,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
-		CsvConfig conf = healthInfoService.getCsvConfig("健康情報.csv", fileSetting);
+		CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 

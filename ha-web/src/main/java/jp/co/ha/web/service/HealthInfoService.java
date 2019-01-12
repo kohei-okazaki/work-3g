@@ -78,12 +78,10 @@ public interface HealthInfoService {
 	/**
 	 * CSV設定情報を取得する
 	 *
-	 * @param fileName
-	 *     ファイル名
-	 * @param entity
+	 * @param healthInfoFileSetting
 	 *     健康情報ファイル設定
 	 * @return CsvConfig
 	 */
-	CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting healthInfoFileSetting);
+	CsvConfig getCsvConfig(HealthInfoFileSetting entity);
 
 }

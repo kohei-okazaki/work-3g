@@ -4,13 +4,13 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.form.AccountSettingForm;
 
 /**
- * アカウント設定サービスインターフェース<br>
+ * アカウント設定サービスインターフェース
  *
  */
 public interface AccountSettingService {
 
 	/**
-	 * アカウント設定のメイン処理を行う<br>
+	 * アカウント設定のメイン処理を行う
 	 *
 	 * @param form
 	 *     アカウント設定画面フォーム

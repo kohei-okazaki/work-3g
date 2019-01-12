@@ -20,8 +20,11 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.FileUtil.FileSuffix;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
@@ -129,14 +132,17 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting healthInfoFileSetting) {
+	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
 		CsvConfig csvConfig = new CsvConfig();
+		var fileName = "healthInfoRegist_"
+				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+				+ FileSuffix.CSV.getValue();
 		csvConfig.setFileName(fileName);
-		csvConfig.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
-		csvConfig.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
+		csvConfig.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
+		csvConfig.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
 		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
-		csvConfig.setHasEnclosure(StringUtil.isTrue(healthInfoFileSetting.getEnclosureCharFlag()));
-		csvConfig.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
+		csvConfig.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
+		csvConfig.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
 		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;
 	}

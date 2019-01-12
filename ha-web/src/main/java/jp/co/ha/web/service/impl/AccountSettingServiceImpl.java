@@ -18,7 +18,7 @@ import jp.co.ha.web.form.AccountSettingForm;
 import jp.co.ha.web.service.AccountSettingService;
 
 /**
- * アカウント設定サービス実装クラス<br>
+ * アカウント設定サービス実装クラス
  *
  */
 @Service
@@ -70,7 +70,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * 更新処理を行う<br>
+	 * 更新処理を行う
 	 *
 	 * @param account
 	 *     アカウント情報

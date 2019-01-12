@@ -42,7 +42,7 @@ public class DataBaseCommonExecutor {
 							m.invoke(entity, DateUtil.getSysDate());
 						}
 					}
-					LOG.infoRes("■■■SQL■■■", entity);
+					LOG.infoRes(entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -70,7 +70,7 @@ public class DataBaseCommonExecutor {
 							m.invoke(entity, DateUtil.getSysDate());
 						}
 					}
-					LOG.infoRes("■■■SQL■■■", entity);
+					LOG.infoRes(entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

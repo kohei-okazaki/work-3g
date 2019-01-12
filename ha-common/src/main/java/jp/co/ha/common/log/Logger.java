@@ -1,7 +1,7 @@
 package jp.co.ha.common.log;
 
 /**
- * アプリ内のロガークラス<br>
+ * ロガークラス
  *
  */
 public class Logger {

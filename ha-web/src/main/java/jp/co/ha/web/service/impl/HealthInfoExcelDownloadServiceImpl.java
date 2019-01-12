@@ -50,15 +50,15 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 *
 	 * @param healthInfo
 	 *     健康情報
-	 * @param entity
+	 * @param healthInfoFileSetting
 	 *     健康情報ファイル設定
 	 * @return model
 	 */
-	private HealthInfoExcelModel toModel(HealthInfo healthInfo, HealthInfoFileSetting entity) {
+	private HealthInfoExcelModel toModel(HealthInfo healthInfo, HealthInfoFileSetting healthInfoFileSetting) {
 
 		HealthInfoExcelModel model = new HealthInfoExcelModel();
 
-		boolean useMask = healthInfoFunctionService.useHealthInfoMask(entity);
+		boolean useMask = healthInfoFunctionService.useHealthInfoMask(healthInfoFileSetting);
 		model.setHeight(useMask ? "****" : healthInfo.getHeight().toString());
 		model.setWeight(useMask ? "****" : healthInfo.getWeight().toString());
 		model.setBmi(useMask ? "****" : healthInfo.getBmi().toString());

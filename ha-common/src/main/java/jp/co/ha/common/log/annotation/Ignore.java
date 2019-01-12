@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ログ出力非対象項目につけるマーカーアノテーション<br>
+ * ログ出力非対象項目につけるマーカーアノテーション
  *
  */
 @Inherited

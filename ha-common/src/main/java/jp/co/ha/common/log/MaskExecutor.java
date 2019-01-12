@@ -6,7 +6,7 @@ import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
- * マスク判定クラス<br>
+ * マスク判定クラス
  *
  */
 public class MaskExecutor {

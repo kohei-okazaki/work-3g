@@ -1,5 +1,9 @@
 package jp.co.ha.tool.type;
 
+/**
+ * セル位置列挙
+ *
+ */
 public enum CellPositionType {
 
 	/** 論理名 */
@@ -26,15 +30,33 @@ public enum CellPositionType {
 	/** ヘッダ名 */
 	private String headerName;
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param position
+	 *     位置
+	 * @param headerName
+	 *     ヘッダ名
+	 */
 	private CellPositionType(int position, String headerName) {
 		this.position = position;
 		this.headerName = headerName;
 	}
 
+	/**
+	 * positionを返す
+	 *
+	 * @return 位置
+	 */
 	public int getPosition() {
 		return this.position;
 	}
 
+	/**
+	 * headerNameを返す
+	 *
+	 * @return ヘッダ名
+	 */
 	public String getHeaderName() {
 		return this.headerName;
 	}

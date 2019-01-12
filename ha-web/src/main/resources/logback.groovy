@@ -8,6 +8,8 @@ import static ch.qos.logback.classic.Level.*
 
 scan("30 seconds")
 
+def FILE_PATH = "C:/logs/app";
+
 appender("STDOUT", ConsoleAppender) {
 
   target = "System.out"
@@ -23,10 +25,10 @@ appender("STDOUT", ConsoleAppender) {
 
 appender("FILE", RollingFileAppender) {
 
-  file = "C:/logs/app/main.log"
+  file = "${FILE_PATH}/web.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "main_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "web_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 
