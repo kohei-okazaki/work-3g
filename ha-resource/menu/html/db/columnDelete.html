@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DB -カラム削除-</title>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+</head>
+<body>
+  <h1>DB -カラム削除-</h1>
+  <table>
+    <tr>
+      <th>
+        <label>テーブル名</label>
+      </th>
+      <td>
+        <input type="text" id="tableName" size="16" placeholder="対象テーブル名" />
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label>カラム名</label>
+      </th>
+      <td>
+        <input type="text" id="columnName" size="16" placeholder="削除するカラム名" />
+      </td>
+    </tr>
+  </table>
+
+  <div class="button">
+    <input id="create" type="button" value="作成" />
+    <input id="inputClear" type="button" value="入力値クリア" />
+    <input id="responseClear" type="button" value="結果クリア" />
+  </div>
+
+  <textarea id="response" cols=80 rows=7></textarea>
+
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    function validate() {
+      if ($("#tableName").val() === "") {
+        alert("テーブル名は必須です");
+        return true;
+      } else if ($("#columnName").val() === "") {
+        alert("旧カラム名は必須です");
+        return true;
+      }
+      return false;
+    }
+
+    $("input#create").click(function() {
+
+      var hasError = validate();
+        if (hasError) {
+          return;
+      }
+
+      // DDLを組み立てる
+      var sql = "ALTER TABLE " + $("#tableName").val() + " DROP " + $("#columnName").val() + ";";
+      $("#response").val(sql);
+    });
+
+    $("input#inputClear").click(function() {
+      $("#tableName").val("");
+      $("#columnName").val("");
+    });
+
+    $("input#responseClear").click(function() {
+      $("#response").val("");
+    });
+
+  </script>
+</body>
+</html>
