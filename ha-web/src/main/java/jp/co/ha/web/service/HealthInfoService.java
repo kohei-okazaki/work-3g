@@ -7,17 +7,19 @@ import org.springframework.ui.Model;
 import jp.co.ha.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoForm;
 
 /**
- * 健康情報入力画面サービスインターフェース<br>
+ * 健康情報入力画面サービスインターフェース
  *
  */
 public interface HealthInfoService {
 
 	/**
-	 * Modelに表示用のメッセージを追加する<br>
+	 * Modelに表示用のメッセージを追加する
 	 *
 	 * @param model
 	 *     Model
@@ -41,7 +43,7 @@ public interface HealthInfoService {
 	boolean isFirstReg(String userId) throws BaseException;
 
 	/**
-	 * 指定した健康情報リストの中に指定した健康情報IDが含まれるかどうか返す<br>
+	 * 指定した健康情報リストの中に指定した健康情報IDが含まれるかどうか返す
 	 *
 	 * @param entityList
 	 *     健康情報リスト
@@ -52,7 +54,7 @@ public interface HealthInfoService {
 	boolean hasRecord(List<HealthInfo> entityList, Integer healthInfoId);
 
 	/**
-	 * CSVモデルリストに変換する<br>
+	 * CSVモデルリストに変換する
 	 *
 	 * @param healthInfo
 	 *     健康情報
@@ -61,7 +63,7 @@ public interface HealthInfoService {
 	List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo);
 
 	/**
-	 * 健康情報を登録する<br>
+	 * 健康情報を登録する
 	 *
 	 * @param form
 	 *     健康情報入力フォーム
@@ -72,5 +74,16 @@ public interface HealthInfoService {
 	 *     基底例外
 	 */
 	HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException;
+
+	/**
+	 * CSV設定情報を取得する
+	 *
+	 * @param fileName
+	 *     ファイル名
+	 * @param entity
+	 *     健康情報ファイル設定
+	 * @return CsvConfig
+	 */
+	CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting healthInfoFileSetting);
 
 }

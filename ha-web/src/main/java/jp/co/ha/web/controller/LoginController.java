@@ -10,9 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,17 +46,6 @@ public class LoginController implements BaseWebController {
 	private MessageSource messageSource;
 
 	/**
-	 * Validateを設定
-	 *
-	 * @param binder
-	 *     WebDataBinder
-	 */
-	@InitBinder("loginForm")
-	public void initBinder(WebDataBinder binder) {
-
-	}
-
-	/**
 	 * Formを返す
 	 *
 	 * @return LoginForm
@@ -71,15 +58,13 @@ public class LoginController implements BaseWebController {
 	/**
 	 * ログイン画面
 	 *
-	 * @param model
-	 *     Model
 	 * @param request
 	 *     HttpServletRequest
 	 * @return ログイン画面
 	 */
 	@NonAuth
 	@GetMapping("/index.html")
-	public String index(Model model, HttpServletRequest request) {
+	public String index(HttpServletRequest request) {
 		// sessionに格納している情報をすべて削除する
 		sessionService.removeValues(request.getSession());
 		return getView(ManageWebView.LOGIN);
@@ -92,7 +77,7 @@ public class LoginController implements BaseWebController {
 	 *     Model
 	 * @param request
 	 *     HttpServletRequest
-	 * @param loginForm
+	 * @param form
 	 *     LoginForm
 	 * @param result
 	 *     BindingResult
@@ -102,7 +87,7 @@ public class LoginController implements BaseWebController {
 	 */
 	@NonAuth
 	@PostMapping("/top.html")
-	public String top(Model model, HttpServletRequest request, @Valid LoginForm loginForm, BindingResult result) throws BaseException {
+	public String top(Model model, HttpServletRequest request, @Valid LoginForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -110,8 +95,8 @@ public class LoginController implements BaseWebController {
 		}
 
 		// アカウント情報を検索
-		Account account = accountSearchService.findByUserId(loginForm.getUserId());
-		LoginCheckResult checkResult = new LoginCheck().check(account, loginForm.getUserId(), loginForm.getPassword());
+		Account account = accountSearchService.findByUserId(form.getUserId());
+		LoginCheckResult checkResult = new LoginCheck().check(account, form.getUserId(), form.getPassword());
 		if (checkResult.hasError()) {
 			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getValidateMessage(), null, Locale.getDefault());
 			model.addAttribute("errorMessage", errorMessage);
@@ -119,7 +104,7 @@ public class LoginController implements BaseWebController {
 		}
 
 		// セッションにユーザIDを登録する。
-		sessionService.setValue(request.getSession(), "userId", loginForm.getUserId());
+		sessionService.setValue(request.getSession(), "userId", form.getUserId());
 
 		return getView(ManageWebView.TOP);
 

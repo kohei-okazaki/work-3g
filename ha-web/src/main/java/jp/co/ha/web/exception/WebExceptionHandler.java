@@ -15,7 +15,7 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 画面例外ハンドラー<br>
+ * 画面例外ハンドラー
  *
  */
 public class WebExceptionHandler implements BaseExceptionHandler {

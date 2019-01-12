@@ -13,7 +13,7 @@ import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
 
 /**
- * アカウント設定画面フォームクラス<br>
+ * アカウント設定画面フォームクラス
  *
  */
 public class AccountSettingForm implements BaseForm {
@@ -61,7 +61,7 @@ public class AccountSettingForm implements BaseForm {
 	/**
 	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
@@ -80,7 +80,7 @@ public class AccountSettingForm implements BaseForm {
 	/**
 	 * passwordを返す
 	 *
-	 * @return password パスワード
+	 * @return password
 	 */
 	public String getPassword() {
 		return password;
@@ -99,7 +99,7 @@ public class AccountSettingForm implements BaseForm {
 	/**
 	 * deleteFlagを返す
 	 *
-	 * @return deleteFlag 削除フラグ
+	 * @return deleteFlag
 	 */
 	public String getDeleteFlag() {
 		return deleteFlag;
@@ -118,7 +118,7 @@ public class AccountSettingForm implements BaseForm {
 	/**
 	 * remarksを返す
 	 *
-	 * @return remarks 備考
+	 * @return remarks
 	 */
 	public String getRemarks() {
 		return remarks;
@@ -137,7 +137,7 @@ public class AccountSettingForm implements BaseForm {
 	/**
 	 * mailAddressを返す
 	 *
-	 * @return mailAddress メールアドレス
+	 * @return mailAddress
 	 */
 	public String getMailAddress() {
 		return mailAddress;
@@ -156,7 +156,7 @@ public class AccountSettingForm implements BaseForm {
 	/**
 	 * mailPasswordを返す
 	 *
-	 * @return mailPassword メールパスワード
+	 * @return mailPassword
 	 */
 	public String getMailPassword() {
 		return mailPassword;
@@ -175,7 +175,7 @@ public class AccountSettingForm implements BaseForm {
 	/**
 	 * apiKeyを返す
 	 *
-	 * @return apiKey APIキー
+	 * @return apiKey
 	 */
 	public String getApiKey() {
 		return apiKey;

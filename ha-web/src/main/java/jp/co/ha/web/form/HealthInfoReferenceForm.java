@@ -10,7 +10,7 @@ import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
 
 /**
- * 健康情報照会画面フォームクラス<br>
+ * 健康情報照会画面フォームクラス
  *
  */
 public class HealthInfoReferenceForm implements BaseForm {
@@ -34,16 +34,16 @@ public class HealthInfoReferenceForm implements BaseForm {
 	private String toRegDate;
 
 	/**
-	 * healthInfoIdを返す<br>
+	 * healthInfoIdを返す
 	 *
-	 * @return healthInfoId 健康情報ID
+	 * @return healthInfoId
 	 */
 	public String getHealthInfoId() {
 		return healthInfoId;
 	}
 
 	/**
-	 * healthInfoIdを設定する<br>
+	 * healthInfoIdを設定する
 	 *
 	 * @param healthInfoId
 	 *     健康情報ID
@@ -53,16 +53,16 @@ public class HealthInfoReferenceForm implements BaseForm {
 	}
 
 	/**
-	 * fromRegDateを返す<br>
+	 * fromRegDateを返す
 	 *
-	 * @return fromRegDate fromRegDate
+	 * @return fromRegDate
 	 */
 	public String getFromRegDate() {
 		return fromRegDate;
 	}
 
 	/**
-	 * fromRegDateを設定する<br>
+	 * fromRegDateを設定する
 	 *
 	 * @param fromRegDate
 	 *     fromRegDate
@@ -72,16 +72,16 @@ public class HealthInfoReferenceForm implements BaseForm {
 	}
 
 	/**
-	 * toRegDateを返す<br>
+	 * toRegDateを返す
 	 *
-	 * @return toRegDate toRegDate
+	 * @return toRegDate
 	 */
 	public String getToRegDate() {
 		return toRegDate;
 	}
 
 	/**
-	 * toRegDateを設定する<br>
+	 * toRegDateを設定する
 	 *
 	 * @param toRegDate
 	 *     toRegDate
@@ -91,16 +91,16 @@ public class HealthInfoReferenceForm implements BaseForm {
 	}
 
 	/**
-	 * regDateSelectFlagを返す<br>
+	 * regDateSelectFlagを返す
 	 *
-	 * @return regDateSelectFlag 登録日直接指定フラグ
+	 * @return regDateSelectFlag
 	 */
 	public String getRegDateSelectFlag() {
 		return regDateSelectFlag;
 	}
 
 	/**
-	 * regDateSelectFlagを設定する<br>
+	 * regDateSelectFlagを設定する
 	 *
 	 * @param regDateSelectFlag
 	 *     登録日直接指定フラグ

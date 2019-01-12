@@ -36,7 +36,7 @@ public class LoginForm implements BaseForm {
 	/**
 	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
@@ -55,7 +55,7 @@ public class LoginForm implements BaseForm {
 	/**
 	 * passwordを返す
 	 *
-	 * @return password パスワード
+	 * @return password
 	 */
 	public String getPassword() {
 		return password;
