@@ -1,0 +1,71 @@
+package jp.co.ha.tool.build;
+
+import java.util.List;
+import java.util.StringJoiner;
+import java.util.stream.Collectors;
+
+import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.excel.Excel;
+import jp.co.ha.tool.excel.Row;
+import jp.co.ha.tool.factory.FileFactory;
+import jp.co.ha.tool.type.CellPositionType;
+import jp.co.ha.tool.type.ExecuteType;
+
+/**
+ * カラムを追加するビルダー
+ *
+ */
+public class AddColumnBuilder extends CommonBuilder {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute() {
+
+		Excel excel = super.reader.read();
+		excel.activeSheet("TABLE_LIST");
+
+		List<Row> targetRowList = getTargetRowList(excel.getRowList());
+
+		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
+
+		for (Row row : targetRowList) {
+			String ddePrefix = "ALTER TABLE ";
+			String ddlSuffix = ";";
+			String tableName = row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
+			String columnName = row.getCell(CellPositionType.COLUMN_NAME).getValue();
+			String columnType = getColumnType(row);
+			String ddl = ddePrefix + tableName + " ADD " + columnName + " " + columnType + ddlSuffix;
+
+			body.add(ddl);
+		}
+
+		FileConfig fileConf = getFileConfig(ExecuteType.DDL);
+		fileConf.setFileName("test" + FileSuffix.SQL.getValue());
+		fileConf.setData(body.toString());
+		FileFactory.create(fileConf);
+	}
+
+	private List<Row> getTargetRowList(List<Row> rowList) {
+		return rowList.stream().filter(e -> isTarget(e)).collect(Collectors.toList());
+	}
+
+	private boolean isTarget(Row row) {
+		return StringUtil.isTrue(row.getCell(CellPositionType.ADD_FLG).getValue());
+	}
+
+	private String getColumnType(Row row) {
+		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
+		String size = getSize(row);
+		return columnType + size;
+	}
+
+	private String getSize(Row row) {
+		String size = row.getCell(CellPositionType.COLUMN_SIZE).getValue();
+		return StringUtil.isBrank(size) ? StringUtil.EMPTY : "(" + size + ")";
+	}
+
+}
