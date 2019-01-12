@@ -43,8 +43,9 @@
   </table>
 
   <div class="button">
-    <button id="submit" type="button">作成</button>
-    <button id="clear" type="button">クリア</button>
+    <input id="create" type="button" value="作成" />
+    <input id="inputClear" type="button" value="入力値クリア" />
+    <input id="responseClear" type="button" value="結果クリア" />
   </div>
 
   <textarea id="response" cols=80 rows=7></textarea>
@@ -52,14 +53,43 @@
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
   <script type="text/javascript">
 
-    $("button#submit").click(function() {
-      // DDLに変換
+    function validate() {
+      if ($("#tableName").val() === "") {
+        alert("テーブル名は必須です");
+        return true;
+      } else if ($("#oldColumn").val() === "") {
+        alert("旧カラム名は必須です");
+        return true;
+      } else if ($("#newColumn").val() === "") {
+        alert("新カラム名は必須です");
+        return true;
+      } else if ($("#columnDefine").val() === "") {
+        alert("カラム定義は必須です");
+        return true;
+      }
+      return false;
+    }
+
+    $("input#create").click(function() {
+
+      var hasError = validate();
+        if (hasError) {
+          return;
+      }
+
+      // DDLを組み立てる
       var sql = "ALTER TABLE " + $("#tableName").val() + " CHANGE " + $("#oldColumn").val() + " " + $("#newColumn").val() + " " + $("#columnDefine").val() + ";";
       $("#response").val(sql);
     });
 
-    $("button#clear").click(function() {
-      // 結果部分を取得
+    $("input#inputClear").click(function() {
+      $("#tableName").val("");
+      $("#oldColumn").val("");
+      $("#newColumn").val("");
+      $("#columnDefine").val("");
+    });
+
+    $("input#responseClear").click(function() {
       $("#response").val("");
     });
 
