@@ -15,10 +15,6 @@ appender("STDOUT", ConsoleAppender) {
     pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
   }
 
-  filter(ThresholdFilter) {
-    level = DEBUG
-  }
-
 }
 
 appender("FILE", RollingFileAppender) {
@@ -32,10 +28,6 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     pattern = "%d [%thread] %-5level %logger{10} - %message%n"
-  }
-
-  filter(ThresholdFilter) {
-    level = DEBUG
   }
 
 }

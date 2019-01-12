@@ -1,6 +1,6 @@
 package jp.co.ha.tool.executor;
 
-import jp.co.ha.tool.build.DdlBuilder;
+import jp.co.ha.tool.build.AddColumnBuilder;
 
 /**
  * 処理クラス
@@ -16,8 +16,11 @@ public class SqlExecutor {
 	 */
 	public static void main(String[] args) {
 		// DDLを作成
-		DdlBuilder ddlBuilder = new DdlBuilder();
-		ddlBuilder.execute();
+//		CreateTableBuilder createTableBuilder = new CreateTableBuilder();
+//		createTableBuilder.execute();
+
+		AddColumnBuilder addColumnBuilder = new AddColumnBuilder();
+		addColumnBuilder.execute();
 
 		// DropSqlを作成
 //		DropBuilder dropBuilder = new DropBuilder();
