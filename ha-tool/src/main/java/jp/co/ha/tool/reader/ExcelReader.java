@@ -45,6 +45,7 @@ public class ExcelReader extends BaseFileReader {
 
 	/**
 	 * 読み込みを行う
+	 *
 	 * @return Excel
 	 */
 	public Excel read() {

@@ -21,6 +21,9 @@ import jp.co.ha.tool.type.ExecuteType;
  */
 public class DdlBuilder extends CommonBuilder {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute() {
 
