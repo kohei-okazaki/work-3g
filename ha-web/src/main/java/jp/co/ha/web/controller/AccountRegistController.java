@@ -30,7 +30,7 @@ import jp.co.ha.web.service.AccountRegistService;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_アカウント登録画面コントローラ<br>
+ * 健康管理_アカウント登録画面コントローラ
  *
  */
 @Controller
@@ -59,7 +59,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	}
 
 	/**
-	 * Formを返す<br>
+	 * Formを返す
 	 *
 	 * @return AccountRegistForm
 	 */

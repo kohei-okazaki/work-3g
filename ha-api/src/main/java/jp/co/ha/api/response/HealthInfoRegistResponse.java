@@ -27,7 +27,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/** 標準体重 */
 	@Mask
 	private BigDecimal standardWeight;
-	/** ユーザステータス */
+	/** 健康情報ステータス */
 	private String healthInfoStatus;
 	/** 登録日時 */
 	private String regDate;
@@ -35,7 +35,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * healthInfoIdを返す
 	 *
-	 * @return healthInfoId 健康情報ID
+	 * @return healthInfoId
 	 */
 	public Integer getHealthInfoId() {
 		return healthInfoId;
@@ -54,7 +54,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
@@ -73,7 +73,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * heightを返す
 	 *
-	 * @return height 身長
+	 * @return height
 	 */
 	public BigDecimal getHeight() {
 		return height;
@@ -92,7 +92,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * weightを返す
 	 *
-	 * @return weight 体重
+	 * @return weight
 	 */
 	public BigDecimal getWeight() {
 		return weight;
@@ -111,7 +111,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * bmiを返す
 	 *
-	 * @return bmi BMI
+	 * @return bmi
 	 */
 	public BigDecimal getBmi() {
 		return bmi;
@@ -130,7 +130,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * standardWeightを返す
 	 *
-	 * @return standardWeight 標準体重
+	 * @return standardWeight
 	 */
 	public BigDecimal getStandardWeight() {
 		return standardWeight;
@@ -149,7 +149,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * healthInfoStatusを返す
 	 *
-	 * @return healthInfoStatus 健康情報ステータス
+	 * @return healthInfoStatus
 	 */
 	public String getHealthInfoStatus() {
 		return healthInfoStatus;
@@ -168,7 +168,7 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/**
 	 * regDateを返す
 	 *
-	 * @return regDate 登録日時
+	 * @return regDate
 	 */
 	public String getRegDate() {
 		return regDate;

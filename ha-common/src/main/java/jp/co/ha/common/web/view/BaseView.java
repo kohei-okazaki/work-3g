@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public interface BaseView {
 
 	/**
-	 * 名前を返す<br>
+	 * 名前を返す
 	 *
 	 * @return name
 	 */

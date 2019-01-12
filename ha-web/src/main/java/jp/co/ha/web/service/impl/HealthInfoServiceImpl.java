@@ -17,10 +17,15 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.csv.CsvConfig;
+import jp.co.ha.common.io.file.csv.CsvFileChar;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoForm;
 import jp.co.ha.web.service.HealthInfoService;
 
@@ -121,7 +126,23 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	}
 
 	/**
-	 * 体重差メッセージを返す<br>
+	 * {@inheritDoc}
+	 */
+	@Override
+	public CsvConfig getCsvConfig(String fileName, HealthInfoFileSetting healthInfoFileSetting) {
+		CsvConfig csvConfig = new CsvConfig();
+		csvConfig.setFileName(fileName);
+		csvConfig.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
+		csvConfig.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
+		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
+		csvConfig.setHasEnclosure(StringUtil.isTrue(healthInfoFileSetting.getEnclosureCharFlag()));
+		csvConfig.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
+		csvConfig.setCharset(Charset.UTF_8);
+		return csvConfig;
+	}
+
+	/**
+	 * 体重差メッセージを返す
 	 *
 	 * @param form
 	 *     健康情報入力フォーム
@@ -134,7 +155,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	}
 
 	/**
-	 * 体重差を返す<br>
+	 * 体重差を返す
 	 *
 	 * @param form
 	 *     健康情報入力フォーム

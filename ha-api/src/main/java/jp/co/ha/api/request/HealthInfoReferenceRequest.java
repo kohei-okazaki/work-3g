@@ -14,7 +14,7 @@ public class HealthInfoReferenceRequest extends BaseApiRequest {
 	/**
 	 * healthInfoIdを返す
 	 *
-	 * @return healthInfoId 健康情報ID
+	 * @return healthInfoId
 	 */
 	public Integer getHealthInfoId() {
 		return healthInfoId;

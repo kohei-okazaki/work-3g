@@ -71,7 +71,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
-	 * Validateを設定<br>
+	 * Validateを設定
 	 *
 	 * @param binder
 	 *     WebDataBinder
@@ -82,7 +82,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * Formを返す<br>
+	 * Formを返す
 	 *
 	 * @return HealthInfoReferenceForm
 	 */

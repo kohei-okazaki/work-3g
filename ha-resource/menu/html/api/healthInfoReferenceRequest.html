@@ -43,7 +43,9 @@
   </table>
 
   <div class="button">
-    <button id="submit" type="button">作成</button>
+    <input id="create" type="button" value="作成" />
+    <input id="inputClear" type="button" value="入力値クリア" />
+    <input id="responseClear" type="button" value="結果クリア" />
   </div>
 
   <textarea id="response" cols=120 rows=10></textarea>
@@ -51,21 +53,31 @@
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
   <script type="text/javascript">
 
-  $("button#submit").click(function() {
+    $("input#create").click(function() {
 
-    var json = {
-      requestType : $("#requestType").val(),
-      userId : $("#userId").val(),
-      healthInfoId : parseInt($("#healthInfoId").val()),
-      apiKey : $("#apiKey").val()
-    };
+      var json = {
+        requestType : $("#requestType").val(),
+        userId : $("#userId").val(),
+        healthInfoId : parseInt($("#healthInfoId").val()),
+        apiKey : $("#apiKey").val()
+      };
 
-    // Json形式に変換
-    var result = JSON.stringify(json);
-    //console.log(result);
-    //alert(result);
-    $("#response").val(result);
-  });
+      // Json形式に変換
+      var result = JSON.stringify(json);
+      //console.log(result);
+      //alert(result);
+      $("#response").val(result);
+    });
+
+    $("input#inputClear").click(function() {
+      $("#userId").val("");
+      $("#healthInfoId").val("");
+      $("#apiKey").val("");
+    });
+
+    $("input#responseClear").click(function() {
+      $("#response").val("");
+    });
 
 </script>
 </body>

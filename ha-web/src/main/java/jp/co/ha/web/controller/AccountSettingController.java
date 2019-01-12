@@ -31,7 +31,7 @@ import jp.co.ha.web.service.AccountSettingService;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_アカウント設定コントローラ<br>
+ * 健康管理_アカウント設定コントローラ
  *
  */
 @Controller
@@ -61,7 +61,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	}
 
 	/**
-	 * Formを返す<br>
+	 * Formを返す
 	 *
 	 * @param request
 	 *     HttpServletRequest

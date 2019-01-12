@@ -3,7 +3,7 @@ package jp.co.ha.common.web.interceptor;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 /**
- * Webの基底インターセプター<br>
+ * Webの基底インターセプタ－
  *
  */
 public abstract class BaseWebInterceptor implements BaseInterceptor {

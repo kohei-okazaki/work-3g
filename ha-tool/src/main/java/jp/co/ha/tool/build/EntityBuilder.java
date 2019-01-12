@@ -32,6 +32,9 @@ import jp.co.ha.tool.type.ExecuteType;
 @Deprecated
 public class EntityBuilder extends CommonBuilder {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void execute() {
 

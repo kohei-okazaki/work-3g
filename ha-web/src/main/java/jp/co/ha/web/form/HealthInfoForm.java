@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
 
 /**
- * 健康情報入力画面フォームクラス<br>
+ * 健康情報入力画面フォームクラス
  *
  */
 public class HealthInfoForm implements BaseForm {
@@ -44,16 +44,16 @@ public class HealthInfoForm implements BaseForm {
 	private BigDecimal standardWeight;
 
 	/**
-	 * healthInfoIdを返す<br>
+	 * healthInfoIdを返す
 	 *
-	 * @return healthInfoId 健康情報ID
+	 * @return healthInfoId
 	 */
 	public Integer getHealthInfoId() {
 		return healthInfoId;
 	}
 
 	/**
-	 * healthInfoIdを設定する<br>
+	 * healthInfoIdを設定する
 	 *
 	 * @param healthInfoId
 	 *     健康情報ID
@@ -65,7 +65,7 @@ public class HealthInfoForm implements BaseForm {
 	/**
 	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
@@ -84,7 +84,7 @@ public class HealthInfoForm implements BaseForm {
 	/**
 	 * heightを返す
 	 *
-	 * @return height 身長
+	 * @return height
 	 */
 	public BigDecimal getHeight() {
 		return height;
@@ -103,7 +103,7 @@ public class HealthInfoForm implements BaseForm {
 	/**
 	 * weightを返す
 	 *
-	 * @return weight 体重
+	 * @return weight
 	 */
 	public BigDecimal getWeight() {
 		return weight;
@@ -122,7 +122,7 @@ public class HealthInfoForm implements BaseForm {
 	/**
 	 * bmiを返す
 	 *
-	 * @return bmi BMI
+	 * @return bmi
 	 */
 	public BigDecimal getBmi() {
 		return bmi;
@@ -141,7 +141,7 @@ public class HealthInfoForm implements BaseForm {
 	/**
 	 * standardWeightを返す
 	 *
-	 * @return standardWeight 標準体重
+	 * @return standardWeight
 	 */
 	public BigDecimal getStandardWeight() {
 		return standardWeight;

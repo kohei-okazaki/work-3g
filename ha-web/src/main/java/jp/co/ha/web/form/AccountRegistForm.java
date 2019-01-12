@@ -10,7 +10,7 @@ import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
 
 /**
- * アカウント登録画面フォームクラス<br>
+ * アカウント登録画面フォームクラス
  *
  */
 public class AccountRegistForm implements BaseForm {
@@ -46,7 +46,7 @@ public class AccountRegistForm implements BaseForm {
 	/**
 	 * userIdを返す
 	 *
-	 * @return userId ユーザID
+	 * @return userId
 	 */
 	public String getUserId() {
 		return userId;
@@ -65,7 +65,7 @@ public class AccountRegistForm implements BaseForm {
 	/**
 	 * passwordを返す
 	 *
-	 * @return password パスワード
+	 * @return password
 	 */
 	public String getPassword() {
 		return password;
@@ -84,7 +84,7 @@ public class AccountRegistForm implements BaseForm {
 	/**
 	 * confirmPasswordを返す
 	 *
-	 * @return confirmPassword 確認用パスワード
+	 * @return confirmPassword
 	 */
 	public String getConfirmPassword() {
 		return confirmPassword;
@@ -103,7 +103,7 @@ public class AccountRegistForm implements BaseForm {
 	/**
 	 * remarksを返す
 	 *
-	 * @return remarks 備考
+	 * @return remarks
 	 */
 	public String getRemarks() {
 		return remarks;

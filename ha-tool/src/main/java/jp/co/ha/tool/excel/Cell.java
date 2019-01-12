@@ -30,6 +30,7 @@ public class Cell {
 
 	/**
 	 * ColumnTypeを返す
+	 *
 	 * @return value
 	 */
 	public ColumnType getColumnType() {
