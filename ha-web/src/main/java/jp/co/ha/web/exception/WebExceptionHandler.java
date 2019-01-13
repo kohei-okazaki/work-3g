@@ -53,7 +53,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			errorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
 			// 予期せぬ例外にする
-			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getErrorMessage(), null, Locale.JAPANESE);
+			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getValidateMessage(), null, Locale.JAPANESE);
 			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
