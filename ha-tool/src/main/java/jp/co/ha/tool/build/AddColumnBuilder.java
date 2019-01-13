@@ -14,7 +14,15 @@ import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
- * カラムを追加するビルダー
+ * カラムを追加するビルダー<br>
+ * <ul>
+ * <li>テーブル名:HOGE</li>
+ * <li>カラム名:PIYO</li>
+ * <li>カラム定義:FUGA</li>
+ * </ul>
+ * の場合、<br>
+ * <code>ALTER TABLE HOGE ADD PIYO FUGA;</code><br>
+ * のDDLを作成
  *
  */
 public class AddColumnBuilder extends CommonBuilder {
