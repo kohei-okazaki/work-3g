@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.delete.HealthInfoDeleteService;
+import jp.co.ha.common.db.annotation.Delete;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
@@ -16,6 +17,7 @@ public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Delete
 	@Override
 	public void deleteByUserId(Integer healthInfoId) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
