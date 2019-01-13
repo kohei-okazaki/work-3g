@@ -101,7 +101,7 @@
       <version>${poi-version}</version>
     </dependency>
 
-    <!-- json -->
+    <!-- jackson -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
@@ -133,11 +133,6 @@
         <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
       <version>${mybatis-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis-migrations</artifactId>
-      <version>3.3.5</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -190,12 +185,6 @@
       <version>${logback-version}</version>
     </dependency>
     <!-- logback用のGroovy -->
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>2.5.5</version>
-      <type>pom</type>
-    </dependency>
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy</artifactId>
