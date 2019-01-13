@@ -13,7 +13,9 @@ public class Cell {
 
 	/**
 	 * コンストラクタ
-	 * @param value 値
+	 *
+	 * @param value
+	 *     値
 	 */
 	public Cell(String value) {
 		this.value = value;

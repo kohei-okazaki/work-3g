@@ -23,7 +23,9 @@ public enum CellPositionType {
 	/** カラムサイズ */
 	COLUMN_SIZE(7, "columnSize"),
 	/** 備考 */
-	REMARKS(8, "remarks");
+	REMARKS(8, "remarks"),
+	/** 追加フラグ */
+	ADD_FLG(9, "addFlg");
 
 	/** 位置 */
 	private int position;

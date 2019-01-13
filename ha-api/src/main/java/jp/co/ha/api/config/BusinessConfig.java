@@ -84,7 +84,7 @@ public class BusinessConfig {
 	}
 
 	/**
-	 * API共通処理
+	 * API通信共通処理
 	 *
 	 * @return ApiConnectionService
 	 */

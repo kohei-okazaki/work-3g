@@ -36,7 +36,8 @@ public enum HttpStatus implements BaseEnum {
 
 	/**
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value 値
+	 * @param value
+	 *     値
 	 * @return HttpStatus
 	 */
 	public static HttpStatus of(String value) {

@@ -14,7 +14,7 @@ public class Import {
 	private Class<?> clazz;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param clazz
 	 *     クラス型
@@ -24,7 +24,7 @@ public class Import {
 	}
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param field
 	 *     フィールド情報

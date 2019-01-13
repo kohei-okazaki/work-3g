@@ -16,10 +16,10 @@ import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
- * DDLビルダー
+ * テーブルを作成するビルダー
  *
  */
-public class DdlBuilder extends CommonBuilder {
+public class CreateTableBuilder extends CommonBuilder {
 
 	/**
 	 * {@inheritDoc}

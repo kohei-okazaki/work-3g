@@ -33,7 +33,8 @@ public enum ClassType implements BaseEnum {
 
 	/**
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value 値
+	 * @param value
+	 *     値
 	 * @return ClassType
 	 */
 	public static ClassType of(String value) {

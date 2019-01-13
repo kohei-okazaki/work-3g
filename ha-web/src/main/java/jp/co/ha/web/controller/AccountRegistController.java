@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -84,7 +85,8 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@NonAuth
 	@PostMapping(value = "/confirm.html")
-	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result, HttpServletRequest request)
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合
@@ -93,7 +95,8 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
-			String errorMessage = messageSource.getMessage("validate.message.existAccount", null, Locale.JAPANESE);
+			String errorMessage = messageSource.getMessage(ErrorCode.ACCOUNT_EXIST.getValidateMessage(), null,
+					Locale.getDefault());
 			model.addAttribute("errorMessage", errorMessage);
 			LOG.warn("アカウント情報が既に登録されています");
 			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);

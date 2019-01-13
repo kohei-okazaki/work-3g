@@ -32,7 +32,7 @@ public class JavaSource {
 	private List<Method> methodList;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 */
 	public JavaSource() {
 		this.importList = new ArrayList<>();

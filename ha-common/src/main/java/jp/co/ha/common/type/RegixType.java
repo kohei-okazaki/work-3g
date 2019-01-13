@@ -52,8 +52,9 @@ public enum RegixType implements BaseEnum {
 
 	/**
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value 値
-	 * @return Charset
+	 * @param value
+	 *     値
+	 * @return RegixType
 	 */
 	public static RegixType of(String value) {
 		return BaseEnum.of(RegixType.class, value);
