@@ -25,10 +25,10 @@ appender("STDOUT", ConsoleAppender) {
 
 appender("FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/web_test.log"
+  file = "${FILE_PATH}/web.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "web_test_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "web_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 

@@ -19,7 +19,7 @@ appender("STDOUT", ConsoleAppender) {
 
 appender("FILE", RollingFileAppender) {
 
-  file = "C:/logs/tool/main.log"
+  file = "C:/logs/tool/tool.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
     fileNamePattern = "main_%d{yyyy-MM-dd}.log"
