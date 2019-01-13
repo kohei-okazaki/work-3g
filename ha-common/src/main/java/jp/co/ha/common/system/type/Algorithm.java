@@ -15,7 +15,7 @@ public enum Algorithm implements BaseEnum {
 	 * コンストラクタ
 	 *
 	 * @param value
-	 *     value
+	 *     値
 	 */
 	private Algorithm(String value) {
 		this.value = value;
@@ -34,7 +34,8 @@ public enum Algorithm implements BaseEnum {
 
 	/**
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value 値
+	 * @param value
+	 *     値
 	 * @return Algorithm
 	 */
 	public static Algorithm of(String value) {

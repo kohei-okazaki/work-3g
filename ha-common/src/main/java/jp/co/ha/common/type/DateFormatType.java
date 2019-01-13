@@ -36,7 +36,8 @@ public enum DateFormatType implements BaseEnum {
 
 	/**
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value 値
+	 * @param value
+	 *     値
 	 * @return DateFormatType
 	 */
 	public static DateFormatType of(String value) {

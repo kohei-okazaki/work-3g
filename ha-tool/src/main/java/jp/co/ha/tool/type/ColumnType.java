@@ -59,7 +59,8 @@ public enum ColumnType implements BaseEnum {
 
 	/**
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value 値
+	 * @param value
+	 *     値
 	 * @return ColumnType
 	 */
 	public static ColumnType of(String value) {

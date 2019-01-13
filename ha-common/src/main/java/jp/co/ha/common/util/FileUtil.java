@@ -315,8 +315,9 @@ public class FileUtil {
 
 		/**
 		 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-		 * @param value 値
-		 * @return Charset
+		 * @param value
+		 *     値
+		 * @return FileSeparator
 		 */
 		public static FileSeparator of(String value) {
 			return BaseEnum.of(FileSeparator.class, value);
