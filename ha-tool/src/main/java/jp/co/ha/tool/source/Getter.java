@@ -17,7 +17,7 @@ public class Getter extends Method {
 	private static final String PREFIX = "get";
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param field
 	 *     Field情報

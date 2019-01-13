@@ -21,7 +21,7 @@ public class Field {
 	private AccessType accessType;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param name
 	 *     フィールド名
@@ -35,7 +35,7 @@ public class Field {
 	}
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param name
 	 *     フィールド名

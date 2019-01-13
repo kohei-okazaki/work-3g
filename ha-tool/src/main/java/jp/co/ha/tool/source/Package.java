@@ -10,7 +10,7 @@ public class Package {
 	private String value;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param value
 	 *     値

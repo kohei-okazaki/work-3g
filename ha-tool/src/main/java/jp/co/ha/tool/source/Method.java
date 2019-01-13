@@ -14,7 +14,7 @@ public abstract class Method {
 	protected AccessType accessType;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param field
 	 *     当メソッドのフィールド情報
@@ -27,7 +27,7 @@ public abstract class Method {
 	}
 
 	/**
-	 * メソッド名を返す<br>
+	 * メソッド名を返す
 	 *
 	 * @return メソッド名
 	 */

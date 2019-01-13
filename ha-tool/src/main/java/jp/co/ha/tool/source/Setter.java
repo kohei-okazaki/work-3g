@@ -17,7 +17,7 @@ public class Setter extends Method {
 	private static final String PREFIX = "set";
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param field
 	 *     Field情報
