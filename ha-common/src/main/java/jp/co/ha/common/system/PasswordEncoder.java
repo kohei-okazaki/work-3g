@@ -3,7 +3,7 @@ package jp.co.ha.common.system;
 import jp.co.ha.common.exception.AlgorithmException;
 
 /**
- * パスワード作成サービスインターフェース<br>
+ * パスワード作成サービスインターフェース
  *
  */
 public interface PasswordEncoder {

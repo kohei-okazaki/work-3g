@@ -10,7 +10,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.DateFormatType;
 
 /**
- * 日付のUtilクラス<br>
+ * 日付のUtilクラス
  *
  */
 public class DateUtil {
@@ -18,13 +18,13 @@ public class DateUtil {
 	private static final Logger LOG = LoggerFactory.getLogger(DateUtil.class);
 
 	/**
-	 * プライベートコンストラクタ<br>
+	 * プライベートコンストラクタ
 	 */
 	private DateUtil() {
 	}
 
 	/**
-	 * システム日付を返す<br>
+	 * システム日付を返す
 	 *
 	 * @return システム日付
 	 */
@@ -33,7 +33,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した文字列型の日付をyyyy/MM/dd HH:mm:ssのフォーマットで返す<br>
+	 * 指定した文字列型の日付をyyyy/MM/dd HH:mm:ssのフォーマットで返す
 	 *
 	 * @param target
 	 *     対象日付
@@ -44,7 +44,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した文字列型の日付を指定したフォーマットのDate型で返す<br>
+	 * 指定した文字列型の日付を指定したフォーマットのDate型で返す
 	 *
 	 * @param target
 	 *     対象日付
@@ -68,7 +68,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した日付の加算を行う<br>
+	 * 指定した日付の加算を行う
 	 *
 	 * @param targetDate
 	 *     元の日付
@@ -84,7 +84,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した月の加算を行う<br>
+	 * 指定した月の加算を行う
 	 *
 	 * @param targetDate
 	 *     元の日付
@@ -100,7 +100,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した年の加算を行う<br>
+	 * 指定した年の加算を行う
 	 *
 	 * @param targetDate
 	 *     元の日付
@@ -116,7 +116,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * Date型を指定されたフォーマットに変える<br>
+	 * Date型を指定されたフォーマットに変える
 	 *
 	 * @param targetDate
 	 *     対象日付
@@ -135,7 +135,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した日付の時分秒を00:00:00を返す<br>
+	 * 指定した日付の時分秒を00:00:00を返す
 	 *
 	 * @param targetDate
 	 *     対象日付
@@ -147,7 +147,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 指定した日付の時分秒を23:59:59を返す<br>
+	 * 指定した日付の時分秒を23:59:59を返す
 	 *
 	 * @param targetDate
 	 *     対象日付
@@ -160,7 +160,7 @@ public class DateUtil {
 
 	/**
 	 * 同じ日付かどうか判定する<br>
-	 * 同じ日付の場合true, それ以外の場合false<br>
+	 * 同じ日付の場合true, それ以外の場合false
 	 *
 	 * @param target1
 	 *     対象日
@@ -173,7 +173,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 比較対象日がstartDate < target < endDateかどうかを返す<br>
+	 * 比較対象日がstartDate < target < endDateかどうかを返す
 	 *
 	 * @param startDate
 	 *     開始日
@@ -203,7 +203,7 @@ public class DateUtil {
 
 	/**
 	 * 指定した日付<code>target</code>が比較対象日付<code>compareDate</code>を超過しているかどうか判定する<br>
-	 * 超過している場合true, それ以外の場合falseを返す<br>
+	 * 超過している場合true, それ以外の場合falseを返す
 	 *
 	 * @param target
 	 *     指定日
@@ -222,7 +222,7 @@ public class DateUtil {
 
 	/**
 	 * 指定した日付がシステム日付より過去かどうか判定する<br>
-	 * 過去の場合true, それ以外の場合falseを返す<br>
+	 * 過去の場合true, それ以外の場合falseを返す
 	 *
 	 * @param target
 	 *     指定日
@@ -236,7 +236,7 @@ public class DateUtil {
 
 	/**
 	 * 指定した日付<code>target</code>が比較対象日付<code>compareDate</code>より過去かどうか判定する<br>
-	 * 過去の場合true, それ以外の場合falseを返す<br>
+	 * 過去の場合true, それ以外の場合falseを返す
 	 *
 	 * @param target
 	 *     指定日

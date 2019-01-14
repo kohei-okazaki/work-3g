@@ -1,7 +1,7 @@
 package jp.co.ha.common.type;
 
 /**
- * 正規表現列挙<br>
+ * 正規表現列挙
  *
  */
 public enum RegixType implements BaseEnum {
@@ -21,7 +21,7 @@ public enum RegixType implements BaseEnum {
 	private String value;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param value
 	 *     正規表現

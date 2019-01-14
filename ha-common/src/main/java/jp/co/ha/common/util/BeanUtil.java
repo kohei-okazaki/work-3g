@@ -15,7 +15,7 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
- * Bean系のUtilクラス<br>
+ * Bean系のUtilクラス
  *
  */
 public class BeanUtil {
@@ -24,7 +24,7 @@ public class BeanUtil {
 	private static final Logger LOG = LoggerFactory.getLogger(BeanUtil.class);
 
 	/**
-	 * プライベートコンストラクタ<br>
+	 * プライベートコンストラクタ
 	 */
 	private BeanUtil() {
 	}

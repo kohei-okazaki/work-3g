@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * CollectionのUtilクラス<br>
+ * CollectionのUtilクラス
  *
  */
 public class CollectionUtil {
@@ -30,7 +30,7 @@ public class CollectionUtil {
 	}
 
 	/**
-	 * 指定したリストの最初の要素を返す<br>
+	 * 指定したリストの最初の要素を返す
 	 *
 	 * @param list
 	 *     対象のリスト
@@ -44,7 +44,7 @@ public class CollectionUtil {
 	}
 
 	/**
-	 * 指定したリストの最後の要素を返す<br>
+	 * 指定したリストの最後の要素を返す
 	 *
 	 * @param list
 	 *     対象のリスト
@@ -58,7 +58,7 @@ public class CollectionUtil {
 	}
 
 	/**
-	 * 指定したクラス型の空のリストを返す<br>
+	 * 指定したクラス型の空のリストを返す
 	 *
 	 * @param clazz
 	 *     リストの型
@@ -69,7 +69,7 @@ public class CollectionUtil {
 	}
 
 	/**
-	 * 指定した配列をリストに変換する<br>
+	 * 指定した配列をリストに変換する
 	 *
 	 * @param array
 	 *     配列
