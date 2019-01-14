@@ -9,13 +9,12 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.css}">
 </head>
 
-<body class="main">
+<body>
   <h1>
     <img class="headericon" alt="健康情報照会画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
     健康情報照会画面
@@ -32,18 +31,18 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
       <table>
         <tr>
-          <th>
+          <th width="130px">
             <p>健康情報ID</p>
           </th>
-          <td>
+          <td width="250px">
             <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
           </td>
         </tr>
         <tr>
-          <th>
+          <th width="130px">
             <p>登録日</p>
           </th>
-          <td>
+          <td width="250px">
             <div class="radio" align="center">
               <input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
               <label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>

@@ -10,10 +10,9 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
-<body class="main">
+<body>
 
 
   <h1>
@@ -37,10 +36,10 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
       <table>
         <tr>
-          <th class="header" width="130px">
+          <th width="130px">
             <label>削除</label>
           </th>
-          <td class="data" width="250px">
+          <td width="250px">
             <div class="radio">
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
               <label for="deleteFlagFalse" class="switch-off">しない</label>
@@ -50,52 +49,52 @@
           </td>
         </tr>
         <tr>
-          <th class="header">
+          <th>
             <label>ユーザID</label>
           </th>
-          <td class="data">
+          <td>
             <p th:text="*{userId}"></p>
             <input type="hidden" th:field="*{userId}" th:value="${userId}" />
           </td>
         </tr>
         <tr>
-          <th class="header">
+          <th>
             <label>パスワード</label>
           </th>
-          <td class="data">
+          <td>
             <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
           </td>
         </tr>
         <tr>
-          <th class="header">
+          <th>
             <label>APIキー</label>
           </th>
-          <td class="data">
+          <td>
             <p th:text="*{apiKey}"></p>
             <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th width="130px">
             <label>メールアドレス</label>
           </th>
-          <td class="data">
+          <td>
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th width="130px">
             <label>メールパスワード</label>
           </th>
-          <td class="data">
+          <td>
             <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
           </td>
         </tr>
         <tr>
-          <th class="header">
+          <th>
             <label>備 考</label>
           </th>
-          <td class="data">
+          <td>
             <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
           </td>
         </tr>
