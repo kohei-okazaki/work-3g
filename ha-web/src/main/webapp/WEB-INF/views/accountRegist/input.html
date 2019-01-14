@@ -24,10 +24,10 @@
 
   <!--/* 入力画面 */-->
   <form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
-    <div align="center" class="formLayout">
-      <br>
-      <progress id="bar" max="3" value="0"></progress>
-      <br><br>
+    <div align="center" class="contentLayout">
+      <div class="progress">
+        <progress id="bar" max="3" value="0"></progress>
+      </div>
       <div th:if="${errorMessage} != null">
         <div id="errorMessage" class="errorMessage">
           <p th:text="${errorMessage}"></p>

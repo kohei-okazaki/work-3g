@@ -24,12 +24,8 @@
   <hr>
   <div th:replace="./common/navigation.html"></div>
 
-  <br>
-  <br>
-  <br>
   <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
-
-    <div align="center">
+    <div align="center" class="contentLayout">
       <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
@@ -79,10 +75,8 @@
     </div>
   </form>
 
-  <br><br>
-
   <div th:if="${hasResult}">
-    <div align="center">
+    <div align="center" class="contentLayout">
       <table class="custom" border="1">
         <tr class="header">
           <th align="center">
@@ -112,7 +106,6 @@
 
       <br><br>
 
-
       <table>
         <tr>
           <td align="center">
@@ -130,8 +123,6 @@
       </table>
     </div>
   </div>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 

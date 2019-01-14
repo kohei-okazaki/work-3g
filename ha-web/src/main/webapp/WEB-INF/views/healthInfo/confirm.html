@@ -25,7 +25,7 @@
   <div th:replace="./common/navigation.html"></div>
 
   <!--/* 確認画面 */-->
-  <div align="center" class="formLayout">
+  <div align="center" class="contentLayout">
     <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoForm}">
       <p>身長：
       <input type="text" name="height" th:field="${form.height}" size="6" readonly />
@@ -50,8 +50,6 @@
       </table>
     </form>
   </div>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 

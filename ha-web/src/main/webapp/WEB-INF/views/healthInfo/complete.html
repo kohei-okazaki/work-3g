@@ -25,7 +25,7 @@
   <div th:replace="./common/navigation.html"></div>
 
   <!--/* 完了画面 */-->
-  <div align="center" class="formLayout">
+  <div align="center" class="contentLayout">
     <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
     <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
 
@@ -71,15 +71,6 @@
     <table>
       <tr>
         <td>
-        <!--/* 通知  */-->
-        <form action="./notice.html" th:action="@{./notice.html}" method="post">
-          <div>
-            <input class="menuicon" type="image" src="../resources/image/icon_mail.png" th:src="@{/resources/image/icon_mail.png}" />
-          </div>
-        </form>
-        </td>
-        <td>　　</td>
-        <td>
           <!--/* Excel出力 */-->
           <form action="./excelDownload.html" th:action="@{./excelDownload.html}" method="get" th:object="${healthInfoForm}">
             <input type="hidden" th:field="*{healthInfoId}" />
@@ -110,8 +101,6 @@
       </tr>
     </table>
   </div>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 
