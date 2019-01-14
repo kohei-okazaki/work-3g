@@ -6,7 +6,7 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.UnExpectedException;
 
 /**
- * 文字列のUtilクラス<br>
+ * 文字列のUtilクラス
  *
  */
 public class StringUtil {
