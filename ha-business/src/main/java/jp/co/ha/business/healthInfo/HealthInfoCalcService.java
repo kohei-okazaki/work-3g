@@ -2,7 +2,7 @@ package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.business.healthInfo.type.HealthStatus;
+import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
  * 健康情報計算サービスインターフェース
@@ -19,7 +19,7 @@ public interface HealthInfoCalcService {
 	 *     前の体重
 	 * @return 健康情報ステータス
 	 */
-	HealthStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
+	HealthInfoStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
 
 	/**
 	 * 単位を以下に変換する<br>

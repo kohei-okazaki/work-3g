@@ -15,7 +15,7 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.type.HealthStatus;
+import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -112,8 +112,8 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
 
 		String status = BeanUtil.isNull(lastHealthInfo)
-				? HealthStatus.EVEN.getCode()
-				: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getCode();
+				? HealthInfoStatus.EVEN.getValue()
+				: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getValue();
 
 		HealthInfo entity = new HealthInfo();
 		entity.setUserId(userId);
