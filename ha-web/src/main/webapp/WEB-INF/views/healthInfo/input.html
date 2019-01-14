@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/mprogress.min.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 
 <body class="main">
@@ -34,16 +35,13 @@
 
   <!--/* 入力画面 */-->
   <div align="center" class="contentLayout">
-    <div class="progress">
-      <progress id="bar" max="2" value="0"></progress>
-    </div>
     <form action="./confirm.html" id="healthInfoForm" th:action="@{./confirm.html}" method="post" th:object="${healthInfoForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-      <input type="text" class="validate[required]" size="6" th:field="*{height}" required placeholder="身長" oninput="changeValue()" />　cm
+      <input type="text" class="validate[required]" size="6" th:field="*{height}" required placeholder="身長" />　cm
       <p class="attention">※半角数字で入力してください</p>
       <br><br>
-      <input type="text" class="validate[required]" size="6" th:field="*{weight}" required placeholder="体重" oninput="changeValue()" />　kg
+      <input type="text" class="validate[required]" size="6" th:field="*{weight}" required placeholder="体重" />　kg
       <p class="attention">※半角数字で入力してください</p>
       <br>
       <br>
@@ -56,7 +54,7 @@
             <p>　　</p>
           </td>
           <td>
-            <input type="reset" value="リセット" onclick="resetBar()" />
+            <input type="reset" value="リセット" />
           </td>
         </tr>
       </table>
@@ -69,12 +67,35 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-  <script type="text/javascript" src="../resources/js/healthInfo.js" th:src="@{/resources/js/healthInfo.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script>
     $(function() {
       jQuery("#healthInfoForm").validationEngine({
         promptPosition: "topLeft:80"
       });
+    });
+    var mprogress = new Mprogress();
+    $("#height").change(function() {
+      var value = 0;
+      if ($('#height').val() !== '') {
+        value += 1;
+      }
+      if ($('#weight').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 2;
+      mprogress.set(progressValue);
+    });
+    $("#weight").change(function() {
+      var value = 0;
+      if ($('#height').val() !== '') {
+        value += 1;
+      }
+      if ($('#weight').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 2;
+      mprogress.set(progressValue);
     });
   </script>
 
