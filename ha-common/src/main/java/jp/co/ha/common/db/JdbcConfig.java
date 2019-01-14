@@ -1,16 +1,9 @@
 package jp.co.ha.common.db;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.io.file.property.reader.PropertyReader;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
@@ -20,8 +13,7 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
  */
 public class JdbcConfig {
 
-	private static final Logger LOG = LoggerFactory.getLogger(JdbcConfig.class);
-
+	/** JdbcConfig:instance */
 	private static final JdbcConfig instance = new JdbcConfig();
 
 	private String driverClassName;
@@ -48,30 +40,12 @@ public class JdbcConfig {
 	 * 初期化処理
 	 */
 	private void init() {
-		String classPath = this.getClass().getClassLoader().getResource("").getPath();
-		String propertiesPath = "META-INF" + FileSeparator.SYSTEM.getValue() + "jdbc.properties";
-		readProperty(FileUtil.getFile(classPath + FileSeparator.SYSTEM.getValue() + propertiesPath));
-	}
-
-	/**
-	 * プロパティファイルを読込
-	 *
-	 * @param propFile
-	 *     プロパティファイル
-	 */
-	private void readProperty(File propFile) {
-		Properties prop = new Properties();
-		try (InputStream is = new FileInputStream(propFile.getAbsolutePath())) {
-			prop.load(is);
-			this.driverClassName = prop.getProperty("jdbc.driverClassName");
-			this.url = prop.getProperty("jdbc.url");
-			this.username = prop.getProperty("jdbc.username");
-			this.password = prop.getProperty("jdbc.password");
-		} catch (FileNotFoundException e) {
-			LOG.error("ファイルが見つかりません ファイル名：" + propFile.getName(), e);
-		} catch (IOException e) {
-			LOG.error("", e);
-		}
+		String resourcePath = this.getClass().getClassLoader().getResource("").getPath() + FileSeparator.SYSTEM.getValue() + "META-INF";
+		Properties prop = new PropertyReader().read(resourcePath, "jdbc.properties");
+		this.driverClassName = prop.getProperty("jdbc.driverClassName");
+		this.url = prop.getProperty("jdbc.url");
+		this.username = prop.getProperty("jdbc.username");
+		this.password = prop.getProperty("jdbc.password");
 	}
 
 	/**

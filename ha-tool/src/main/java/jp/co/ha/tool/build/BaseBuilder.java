@@ -1,18 +1,17 @@
 package jp.co.ha.tool.build;
 
-import java.io.File;
 import java.util.List;
 import java.util.Properties;
 
+import jp.co.ha.common.io.file.property.reader.PropertyReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.config.FileConfig;
-import jp.co.ha.tool.reader.PropertyReader;
 import jp.co.ha.tool.type.ExecuteType;
-import jp.co.ha.tool.type.PropertyType;
 
 /**
  * 基底ビルダー
@@ -23,9 +22,6 @@ public abstract class BaseBuilder {
 	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-	/** プロパティファイル */
-	private Properties property;
-
 	/** 対象テーブルリスト */
 	protected List<String> targetTableList;
 	/** 基底ディレクトリ */
@@ -35,7 +31,6 @@ public abstract class BaseBuilder {
 	 * コンストラクタ
 	 */
 	public BaseBuilder() {
-		this.property = new PropertyReader().getProperty("target.properties");
 		this.init();
 	}
 
@@ -43,23 +38,15 @@ public abstract class BaseBuilder {
 	 * 初期処理
 	 */
 	private void init() {
-		String targetTable = getProperty(PropertyType.TARGET_TABLE);
+		String resourcePath = this.getClass().getClassLoader().getResource("").getPath() + FileSeparator.SYSTEM.getValue() + "META-INF";
+		Properties prop = new PropertyReader().read(resourcePath, "target.properties");
 
+		String targetTable = prop.getProperty("targetTable");
 		if (BeanUtil.notNull(targetTable)) {
 			this.targetTableList = StringUtil.toStrList(targetTable, StringUtil.COMMA);
 		}
-		this.baseDir = getProperty(PropertyType.BASE_DIR);
-	}
 
-	/**
-	 * プロパティファイルから値を取得
-	 *
-	 * @param propType
-	 *     プロパティファイル列挙
-	 * @return プロパティファイルの値
-	 */
-	private String getProperty(PropertyType propType) {
-		return this.property.getProperty(propType.getValue());
+		this.baseDir = prop.getProperty("baseDir");
 	}
 
 	/**
@@ -69,7 +56,7 @@ public abstract class BaseBuilder {
 	 */
 	protected ExcelConfig getExcelConfig() {
 		ExcelConfig conf = new ExcelConfig();
-		conf.setFilePath("META-INF" + File.separator + "DB.xlsx");
+		conf.setFilePath("META-INF" + FileSeparator.SYSTEM.getValue() + "DB.xlsx");
 		conf.setSheetName("TABLE_LIST");
 		return conf;
 	}
