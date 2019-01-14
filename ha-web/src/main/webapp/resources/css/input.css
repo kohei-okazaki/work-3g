@@ -116,4 +116,11 @@ input[type="date"]::-webkit-inner-spin-button {
 input[type="date"]::-webkit-clear-button {
   -webkit-appearance: none;
 }
-.
+
+.formLayout {
+  width: 70%;
+  padding: 10px;
+  margin: auto;
+  background: #d2e8d561;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+}

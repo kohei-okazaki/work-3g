@@ -24,7 +24,7 @@
 
   <!--/* 確認画面 */-->
   <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${accountRegistForm}">
-    <div align="center">
+    <div align="center" class="formLayout">
       <table>
         <tr>
           <th width="130px">
@@ -84,6 +84,13 @@
   <script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
   <script type="text/javascript" src="../resources/js/accountCreate.js" th:src="@{/resources/js/accountRegist.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript">
+    $(function() {
+      jQuery("#accountRegistForm").validationEngine({
+        promptPosition : "topLeft:80"
+      });
+    });
+  </script>
 
 </body>
 </html>

@@ -31,7 +31,7 @@
 
   <!--/* 入力画面 */-->
   <form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
-    <div align="center" class="hoge">
+    <div align="center" class="formLayout">
 
       <div th:if="${errorMessage} != null">
         <div id="errorMessage" class="errorMessage">
@@ -61,14 +61,12 @@
             <p>　　</p>
           </td>
           <td>
-            <input type="reset" value="リセット" onclick="resetBar()" />
+            <input type="reset" class="reset" value="リセット" onclick="resetBar()" />
           </td>
         </tr>
       </table>
     </div>
   </form>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 
@@ -78,11 +76,18 @@
   <script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
   <script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-  <script>
+  <script type="text/javascript">
     $(function() {
       jQuery("#accountRegistForm").validationEngine({
         promptPosition: "topLeft:80"
       });
+    });
+
+    $("input.reset").click(function() {
+      alert("テスト");
+      $("#userId").val("");
+      $("#password").val("");
+      $("#confirmPassword").val("");
     });
   </script>
 </body>
