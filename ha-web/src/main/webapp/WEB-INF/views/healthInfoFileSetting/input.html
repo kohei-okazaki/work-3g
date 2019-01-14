@@ -22,17 +22,16 @@
 
   <hr>
   <div th:replace="./common/navigation.html"></div>
-  <br><br><br>
 
    <!--/* 入力画面 */-->
   <form id="healthInfoFileSettingForm" action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
-    <div align="center" class="formLayout">
+    <div align="center" class="contentLayout">
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
-      <table border="1">
+      <table>
         <tr>
           <th class="header">
             <p>ユーザID</p>
@@ -96,7 +95,7 @@
         </tr>
       </table>
 
-      <br><br>
+      <br>
 
       <table>
         <tr>
@@ -107,8 +106,6 @@
       </table>
     </div>
   </form>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 

@@ -24,11 +24,9 @@
   <hr>
   <div th:replace="./common/navigation.html"></div>
 
-  <br><br><br>
-
   <!--/* 入力画面 */-->
   <form action="./confirm.html" id="accountSettingForm" th:action="@{./confirm.html}" method="post" th:object="${accountSettingForm}">
-    <div align="center" class="formLayout">
+    <div align="center" class="contentLayout">
 
       <div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
@@ -40,7 +38,7 @@
       <table>
         <tr>
           <th class="header" width="130px">
-            <p>削除</p>
+            <label>削除</label>
           </th>
           <td class="data" width="250px">
             <div class="radio">
@@ -53,7 +51,7 @@
         </tr>
         <tr>
           <th class="header">
-            <p>ユーザID</p>
+            <label>ユーザID</label>
           </th>
           <td class="data">
             <p th:text="*{userId}"></p>
@@ -62,7 +60,7 @@
         </tr>
         <tr>
           <th class="header">
-            <p>パスワード</p>
+            <label>パスワード</label>
           </th>
           <td class="data">
             <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
@@ -70,7 +68,7 @@
         </tr>
         <tr>
           <th class="header">
-            <p>APIキー</p>
+            <label>APIキー</label>
           </th>
           <td class="data">
             <p th:text="*{apiKey}"></p>
@@ -79,7 +77,7 @@
         </tr>
         <tr>
           <th class="header" width="130px">
-            <p>メールアドレス</p>
+            <label>メールアドレス</label>
           </th>
           <td class="data">
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
@@ -87,7 +85,7 @@
         </tr>
         <tr>
           <th class="header" width="130px">
-            <p>メールパスワード</p>
+            <label>メールパスワード</label>
           </th>
           <td class="data">
             <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
@@ -95,7 +93,7 @@
         </tr>
         <tr>
           <th class="header">
-            <p>備 考</p>
+            <label>備 考</label>
           </th>
           <td class="data">
             <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
@@ -119,10 +117,7 @@
     </div>
   </form>
 
-  <br><br>
-
   <div th:replace="layout/layout :: footer"></div>
-
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>

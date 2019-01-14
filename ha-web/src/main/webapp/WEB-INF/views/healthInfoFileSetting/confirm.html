@@ -20,12 +20,11 @@
 
   <hr>
   <div th:replace="./common/navigation.html"></div>
-  <br><br>
 
    <!--/* 確認画面 */-->
   <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoFileSettingForm}">
-    <div align="center">
-      <table border="1">
+    <div align="center" class="contentLayout">
+      <table>
         <tr>
           <th class="header" width="130px">
             <p>ユーザID</p>
@@ -92,7 +91,7 @@
         </tr>
       </table>
 
-      <br><br>
+      <br>
 
       <table>
         <tr>
@@ -109,8 +108,6 @@
       </table>
     </div>
   </form>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 
