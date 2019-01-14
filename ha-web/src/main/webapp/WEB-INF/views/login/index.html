@@ -6,10 +6,9 @@
 <title>健康管理アプリ_ログイン画面</title>
 <link rel="icon" type="image/png" href="../resources/image/people.png" th:href="@{/resources/image/people.png}">
 <link rel="stylesheet" type="text/css" href="../resources/css/loginLayout.css" th:href="@{/resources/css/loginLayout.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css" th:href="@{/resources/css/common/fort.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/mprogress.min.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
 
@@ -38,14 +37,37 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-  <script type="text/javascript" src="../resources/js/common/fort.js" th:src="@{/resources/js/common/fort.js}"></script>
   <script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
   <script>
     $(function() {
       jQuery("#loginForm").validationEngine({
         promptPosition: "topLeft:0"
       });
+    });
+    var mprogress = new Mprogress();
+    $("#userId").change(function() {
+      var value = 0;
+      if ($('#userId').val() !== '') {
+        value += 1;
+      }
+      if ($('#password').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 2;
+      mprogress.set(progressValue);
+    });
+    $("#password").change(function() {
+      var value = 0;
+      if ($('#userId').val() !== '') {
+        value += 1;
+      }
+      if ($('#password').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 2;
+      mprogress.set(progressValue);
     });
   </script>
 
