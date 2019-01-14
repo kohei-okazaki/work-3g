@@ -3,7 +3,7 @@ package jp.co.ha.common.system.type;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * ハッシュ生成のアルゴリズム列挙<br>
+ * ハッシュ生成のアルゴリズム列挙
  *
  */
 public enum Algorithm implements BaseEnum {

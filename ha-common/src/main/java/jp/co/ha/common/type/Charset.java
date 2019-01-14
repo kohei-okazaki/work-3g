@@ -1,7 +1,7 @@
 package jp.co.ha.common.type;
 
 /**
- * charset列挙<br>
+ * charset列挙
  *
  */
 public enum Charset implements BaseEnum {
@@ -11,14 +11,14 @@ public enum Charset implements BaseEnum {
 	/** UTF-8 */
 	UTF_8("UTF-8");
 
-	/** 名前 */
+	/** 値 */
 	private String value;
 
 	/**
 	 * コンストラクタ
 	 *
 	 * @param value
-	 *     value
+	 *     値
 	 */
 	private Charset(String value) {
 		this.value = value;

@@ -12,19 +12,19 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 
 /**
- * Json操作のUtilクラス<br>
+ * Json操作のUtilクラス
  *
  */
 public class JsonUtil {
 
 	/**
-	 * プライベートコンストラクタ<br>
+	 * プライベートコンストラクタ
 	 */
 	private JsonUtil() {
 	}
 
 	/**
-	 * Json文字列からjavaオブジェクトに変換する<br>
+	 * Json文字列からjavaオブジェクトに変換する
 	 *
 	 * @param target
 	 *     対象文字列
@@ -48,7 +48,7 @@ public class JsonUtil {
 	}
 
 	/**
-	 * javaオブジェクトからJson文字列に変換する<br>
+	 * javaオブジェクトからJson文字列に変換する
 	 *
 	 * @param target
 	 *     対象文字列

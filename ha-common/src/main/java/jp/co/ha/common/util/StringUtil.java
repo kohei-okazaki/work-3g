@@ -44,7 +44,7 @@ public class StringUtil {
 	public static final String CRLF = CR + LF;
 
 	/**
-	 * プライベートコンストラクタ<br>
+	 * プライベートコンストラクタ
 	 */
 	private StringUtil() {
 	}
@@ -88,7 +88,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 指定された<code>flag</code>がtrueかどうか判定する<br>
+	 * 指定された<code>flag</code>がtrueかどうか判定する
 	 *
 	 * @param flag
 	 *     フラグ
@@ -99,7 +99,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 指定された<code>flag</code>がfalseかどうか判定する<br>
+	 * 指定された<code>flag</code>がfalseかどうか判定する
 	 *
 	 * @see StringUtil#isTrue(String)
 	 * @param flag
