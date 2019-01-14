@@ -1,3 +1,8 @@
+/**
+ * 進捗バーの値を変更する関数
+ *
+ * @returns
+ */
 function changeValue() {
 
   // form情報を取得

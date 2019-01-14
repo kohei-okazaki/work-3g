@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css" th:href="@{/resources/css/common/fort.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 <body>
@@ -23,16 +22,12 @@
   <hr>
   <br><br>
 
-  <div align="center">
-    <div>
-      <progress id="bar" max="3" value="0"></progress>
-    </div>
-  </div>
-
   <!--/* 入力画面 */-->
   <form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
-    <div align="center" class="formLayout">
-
+    <div align="center" class="contentLayout">
+      <div class="progress">
+        <progress id="bar" max="3" value="0"></progress>
+      </div>
       <div th:if="${errorMessage} != null">
         <div id="errorMessage" class="errorMessage">
           <p th:text="${errorMessage}"></p>

@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/fort.css" th:href="@{/resources/css/common/fort.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 
@@ -35,15 +34,11 @@
     </div>
   </div>
 
-  <div align="center">
-    <div>
+  <!--/* 入力画面 */-->
+  <div align="center" class="contentLayout">
+    <div class="progress">
       <progress id="bar" max="2" value="0"></progress>
     </div>
-  </div>
-
-  <!--/* 入力画面 */-->
-  <div align="center">
-    <br><br><br>
     <form action="./confirm.html" id="healthInfoForm" th:action="@{./confirm.html}" method="post" th:object="${healthInfoForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>

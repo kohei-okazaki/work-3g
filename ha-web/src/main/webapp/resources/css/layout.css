@@ -27,7 +27,7 @@ ul>li {
   display: inline-block;
 }
 
-ul>li>a {
+ul > li > a {
   padding: 15px 30px;
   display: block;
   font-size: 0.8em;
@@ -35,11 +35,22 @@ ul>li>a {
   letter-spacing: .2em;
 }
 
-ul>li>span {
+ul > li > span {
   margin-left: 1.2em;
 }
 
-ul>li:hover>a {
+ul > li:hover > a {
   background-color: #efefef;
   color: #444;
+}
+
+.contentLayout {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+  width: 70%;
+  padding: 10px;
+  background: #d2e8d561;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
 }

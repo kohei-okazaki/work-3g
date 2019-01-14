@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 
@@ -26,9 +25,9 @@
   <hr>
   <div th:replace="./common/navigation.html"></div>
 
+
   <!--/* 入力画面 */-->
-  <div align="center">
-    <br><br><br>
+  <div align="center" class="contentLayout">
     <form action="./confirm.html" id="healthInfoFileForm" th:action="@{./confirm.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
       <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
@@ -42,8 +41,6 @@
       </table>
     </form>
   </div>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 

@@ -11,23 +11,21 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 </head>
 
-<body class="main">
+<body>
   <h1>
     <img class="headericon" alt="エラー画面" src="../resources/image/icon_error.png" th:src="@{/resources/image/icon_error.png}">
     エラー画面
   </h1>
 
   <hr>
-
-  <div th:if="${errorMessage} == null">
-    <p>入力情報に誤りがあります。もう一度入力してください</p>
+  <div class="contentLayout">
+    <div th:if="${errorMessage} == null">
+      <p>入力情報に誤りがあります。もう一度入力してください</p>
+    </div>
+    <p class="errorMessage" th:text="${errorMessage}"></p>
+    <br><br><br><br><br><br><br>
   </div>
-  <p class="errorMessage" th:text="${errorMessage}"></p>
 
-
-
-  <br><br>
-  <hr>
   <div th:replace="layout/layout :: footer"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>

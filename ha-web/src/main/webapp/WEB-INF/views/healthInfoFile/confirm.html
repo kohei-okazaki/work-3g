@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 </head>
 
 <body class="main">
@@ -33,10 +32,8 @@
   </div>
 
   <!--/* 確認画面 */-->
-  <div align="center">
-    <br><br><br>
+  <div align="center" class="contentLayout">
     <form action="./complete.html" th:action="@{./complete.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
-      <br><br>
       <table>
         <tr>
           <td>
@@ -50,6 +47,7 @@
           <td>
             <input type="submit" value="確 定" />
           </td>
+          <td>  </td>
           <td>
             <input type="button" value="戻 る" onclick="history.back()" />
           </td>
@@ -57,8 +55,6 @@
       </table>
     </form>
   </div>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 

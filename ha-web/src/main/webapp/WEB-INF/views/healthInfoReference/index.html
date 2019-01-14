@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.css}">
 </head>
@@ -25,12 +24,8 @@
   <hr>
   <div th:replace="./common/navigation.html"></div>
 
-  <br>
-  <br>
-  <br>
   <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
-
-    <div align="center">
+    <div align="center" class="contentLayout">
       <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
@@ -77,62 +72,57 @@
           </td>
         </tr>
       </table>
+
+      <br>
+
+      <div th:if="${hasResult}">
+        <table class="custom" border="1">
+          <tr class="header">
+            <th align="center">
+              <p>身長</p>
+            </th>
+            <th align="center">
+              <p>体重</p>
+            </th>
+            <th align="center">
+              <p>標準体重</p>
+            </th>
+            <th align="center">
+              <p>BMI</p>
+            </th>
+            <th align="center">
+              <p>登録日時</p>
+            </th>
+          </tr>
+          <tr th:each="result : ${resultList}" class="data">
+            <td th:text="${result.height}" align="center">
+            <td th:text="${result.weight}" align="center">
+            <td th:text="${result.standardWeight}" align="center">
+            <td th:text="${result.bmi}" align="center">
+            <td th:text="${result.regDate}" align="center">
+          </tr>
+        </table>
+
+        <br>
+
+        <table>
+          <tr>
+            <td align="center">
+              <div>
+                <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
+              </div>
+            </td>
+            <td></td>
+            <td align="center">
+              <div>
+                <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </form>
-
-  <br><br>
-
-  <div th:if="${hasResult}">
-    <div align="center">
-      <table class="custom" border="1">
-        <tr class="header">
-          <th align="center">
-            <p>身長</p>
-          </th>
-          <th align="center">
-            <p>体重</p>
-          </th>
-          <th align="center">
-            <p>標準体重</p>
-          </th>
-          <th align="center">
-            <p>BMI</p>
-          </th>
-          <th align="center">
-            <p>登録日時</p>
-          </th>
-        </tr>
-        <tr th:each="result : ${resultList}" class="data">
-          <td th:text="${result.height}" align="center">
-          <td th:text="${result.weight}" align="center">
-          <td th:text="${result.standardWeight}" align="center">
-          <td th:text="${result.bmi}" align="center">
-          <td th:text="${result.regDate}" align="center">
-        </tr>
-      </table>
-
-      <br><br>
-
-
-      <table>
-        <tr>
-          <td align="center">
-            <div>
-              <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
-            </div>
-          </td>
-          <td>　　</td>
-          <td align="center">
-            <div>
-              <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <br><br>
 
   <div th:replace="layout/layout :: footer"></div>
 

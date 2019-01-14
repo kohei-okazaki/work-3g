@@ -1,3 +1,8 @@
+/**
+ * アカウントを登録する関数
+ *
+ * @returns
+ */
 function accountRegist() {
   // formを作成
   var form = document.createElement('form');
@@ -7,6 +12,11 @@ function accountRegist() {
   form.submit();
 }
 
+/**
+ * 進捗バーの値を変更する関数
+ *
+ * @returns
+ */
 function changeValue() {
 
   // 入力値を取得
