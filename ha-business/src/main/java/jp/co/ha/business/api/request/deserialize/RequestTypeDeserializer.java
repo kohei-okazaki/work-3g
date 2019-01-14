@@ -10,7 +10,8 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import jp.co.ha.business.api.type.RequestType;
 
 /**
- * Jsonのリクエスト種別のデシリアライズクラス
+ * JSONのリクエスト種別のデシリアライズクラス<br>
+ * 文字列型のJSONをJavaのクラスに変換する<br>
  *
  */
 public class RequestTypeDeserializer extends JsonDeserializer<RequestType> {
