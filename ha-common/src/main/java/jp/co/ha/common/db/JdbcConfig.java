@@ -7,7 +7,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
- * Dao設定ファイル情報保持クラス<br>
+ * JDBC設定ファイル情報保持クラス<br>
  * jdbc.propertiesの読み込みを行う
  *
  */

@@ -38,8 +38,8 @@ import jp.co.ha.web.view.ManageWebView;
 @RequestMapping(value = "accountRegist")
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
-	/** ロガー */
-	private Logger LOG = LoggerFactory.getLogger(this.getClass());
+	/** LOG */
+	private static Logger LOG = LoggerFactory.getLogger(AccountRegistController.class);
 	/** MessageSource */
 	@Autowired
 	private MessageSource messageSource;
