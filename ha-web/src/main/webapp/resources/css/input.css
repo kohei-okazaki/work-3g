@@ -1,117 +1,126 @@
 /*************/
 /* input.css */
 /*************/
+@charset "UTF-8";
 
 /* ボタンの設定 */
 input[type="submit"], input[type="reset"], input[type="button"] {
-	width: 110px;
-	height: 40px;
-	background: #32cd32;
-	border: 0;
-	padding: 1.5%;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 100%;
-	color: #fff;
-	cursor: pointer;
-	transition: background .3s;
-	-webkit-transition: background .3s;
-	border-radius: 5px;
-	box-shadow: 1px 1px 10px 3px hsla(0, 0%, 0%, .6);
-	cursor: pointer;
-	letter-spacing: 4px;
-	text-align: center;
-	text-shadow: 0 2px 0 hsla(0, 0%, 0%, .25);
+  width: 110px;
+  height: 40px;
+  background: #32cd32;
+  border: 0;
+  padding: 1.5%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 100%;
+  color: #fff;
+  cursor: pointer;
+  transition: background .3s;
+  -webkit-transition: background .3s;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 3px hsla(0, 0%, 0%, .6);
+  cursor: pointer;
+  letter-spacing: 4px;
+  text-align: center;
+  text-shadow: 0 2px 0 hsla(0, 0%, 0%, .25);
 }
 
 /* ボタンをマウスオーバーしたとき */
 input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover
-	{
-	background: #80ff80;
-	box-shadow: none;
+  {
+  background: #80ff80;
+  box-shadow: none;
 }
 
 /* 入力タグの設定 */
 input[type="text"], input[type="email"], textarea {
-	padding: 0.8em;
-	outline: none;
-	border: 1px solid #DDD;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	font-size: 16px;
-	-webkit-transition: all 1.0s;
-	-moz-transition: all 1.0s;
-	transition: all 1.0s;
-	width: 180px;
+  padding: 0.8em;
+  outline: none;
+  border: 1px solid #DDD;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 16px;
+  -webkit-transition: all 1.0s;
+  -moz-transition: all 1.0s;
+  transition: all 1.0s;
+  width: 180px;
 }
 
 /* 入力タグをクリックしたとき */
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-	background: #ffffca;
-	box-shadow: 0 0 7px #80ff00;
-	border: 1px solid #80ff00;
-	width: 350px;
+  background: #ffffca;
+  box-shadow: 0 0 7px #80ff00;
+  border: 1px solid #80ff00;
+  width: 350px;
 }
 
 .radio {
-	margin-bottom: 25px;
-	clear: both;
+  margin-bottom: 25px;
+  clear: both;
 }
 
 .radio input {
-	display: none;
+  display: none;
 }
 
 .radio label {
-	display: block;
-	float: left;
-	cursor: pointer;
-	margin: 0;
-	padding: 8px 16px;
-	background-color: #32cd32;
-	color: #FFF;
-	text-align: center;
-	transition: 0.2s;
-	width: 93px;
+  display: block;
+  float: left;
+  cursor: pointer;
+  margin: 0;
+  padding: 8px 16px;
+  background-color: #32cd32;
+  color: #FFF;
+  text-align: center;
+  transition: 0.2s;
+  width: 93px;
 }
 
 .radio label:first-of-type {
-	border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
 }
 
 .radio label:last-of-type {
-	border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
 }
 
 .radio input[type="radio"]:checked+label {
-	background-color: #80ff80;
+  background-color: #80ff80;
 }
 
 .date {
-	position: relative;
-	display: inline-block;
-	width: 200px;
-	height: 36px;
-	border: 2px solid #ccc;
-	border-radius: 15px;
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 36px;
+  border: 2px solid #ccc;
+  border-radius: 15px;
 }
 
 input[type="date"] {
-	position: relative;
-	padding: 0 10px;
-	width: 200px;
-	height: 36px;
-	border: 0;
-	background: transparent;
-	box-sizing: border-box;
-	font-size: 14px;
-	color: #999;
+  position: relative;
+  padding: 0 10px;
+  width: 200px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #999;
 }
 
 input[type="date"]::-webkit-inner-spin-button {
-	-webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 input[type="date"]::-webkit-clear-button {
-	-webkit-appearance: none;
+  -webkit-appearance: none;
+}
+
+.formLayout {
+  width: 70%;
+  padding: 10px;
+  margin: auto;
+  background: #d2e8d561;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
 }

@@ -1,9 +1,10 @@
 /******************/
 /* healthInfo.css */
 /******************/
+@charset "UTF-8";
 
 /* 注意文言の設定 */
 .attention {
-	color: #ff8080;
-	font-size: 60%;
+  color: #ff8080;
+  font-size: 60%;
 }
