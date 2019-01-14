@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/mprogress.min.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
 
@@ -23,9 +24,6 @@
   <!--/* 入力画面 */-->
   <form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
     <div align="center" class="contentLayout">
-      <div class="progress">
-        <progress id="bar" max="3" value="0"></progress>
-      </div>
       <div th:if="${errorMessage} != null">
         <div id="errorMessage" class="errorMessage">
           <p th:text="${errorMessage}"></p>
@@ -68,6 +66,7 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script type="text/javascript">
     $(function() {
       jQuery("#accountRegistForm").validationEngine({
@@ -79,6 +78,50 @@
       $("#userId").val("");
       $("#password").val("");
       $("#confirmPassword").val("");
+    });
+
+    var mprogress = new Mprogress();
+    $("#userId").change(function() {
+      var value = 0;
+      if ($('#userId').val() !== '') {
+        value += 1;
+      }
+      if ($('#password').val() !== '') {
+        value += 1;
+      }
+      if ($('#confirmPassword').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 3;
+      mprogress.set(progressValue);
+    });
+    $("#password").change(function() {
+      var value = 0;
+      if ($('#userId').val() !== '') {
+        value += 1;
+      }
+      if ($('#password').val() !== '') {
+        value += 1;
+      }
+      if ($('#confirmPassword').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 3;
+      mprogress.set(progressValue);
+    });
+    $("#confirmPassword").change(function() {
+      var value = 0;
+      if ($('#userId').val() !== '') {
+        value += 1;
+      }
+      if ($('#password').val() !== '') {
+        value += 1;
+      }
+      if ($('#confirmPassword').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 3;
+      mprogress.set(progressValue);
     });
   </script>
 </body>

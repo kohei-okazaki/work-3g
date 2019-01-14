@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/mprogress.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/mprogress.min.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
 
@@ -49,26 +49,26 @@
     });
     var mprogress = new Mprogress();
     $("#userId").change(function() {
-        var value = 0;
-        if ($('#userId').val() !== '') {
-          value += 1;
-        }
-        if ($('#password').val() !== '') {
-          value += 1;
-        }
-        var progressValue = value / 2;
-        mprogress.set(progressValue);
+      var value = 0;
+      if ($('#userId').val() !== '') {
+        value += 1;
+      }
+      if ($('#password').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 2;
+      mprogress.set(progressValue);
     });
     $("#password").change(function() {
-        var value = 0;
-        if ($('#userId').val() !== '') {
-          value += 1;
-        }
-        if ($('#password').val() !== '') {
-          value += 1;
-        }
-        var progressValue = value / 2;
-        mprogress.set(progressValue);
+      var value = 0;
+      if ($('#userId').val() !== '') {
+        value += 1;
+      }
+      if ($('#password').val() !== '') {
+        value += 1;
+      }
+      var progressValue = value / 2;
+      mprogress.set(progressValue);
     });
   </script>
 
