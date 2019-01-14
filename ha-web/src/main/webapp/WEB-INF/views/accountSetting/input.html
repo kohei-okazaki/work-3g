@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/baseLayout.css" th:href="@{/resources/css/common/baseLayout.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
 <body class="main">
@@ -29,7 +28,7 @@
 
   <!--/* 入力画面 */-->
   <form action="./confirm.html" id="accountSettingForm" th:action="@{./confirm.html}" method="post" th:object="${accountSettingForm}">
-    <div align="center">
+    <div align="center" class="formLayout">
 
       <div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
@@ -38,7 +37,7 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-      <table border="1">
+      <table>
         <tr>
           <th class="header" width="130px">
             <p>削除</p>

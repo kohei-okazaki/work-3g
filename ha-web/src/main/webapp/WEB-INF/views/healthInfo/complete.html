@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/table.css" th:href="@{/resources/css/table.css}">
 </head>
 
 <body class="main">
@@ -26,8 +25,7 @@
   <div th:replace="./common/navigation.html"></div>
 
   <!--/* 完了画面 */-->
-  <br><br><br>
-  <div align="center">
+  <div align="center" class="formLayout">
     <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
     <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
 

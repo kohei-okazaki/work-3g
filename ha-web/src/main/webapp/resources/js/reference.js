@@ -1,4 +1,8 @@
-// Excelをダウンロードする関数
+/**
+ * Excelをダウンロードする関数
+ *
+ * @returns
+ */
 function referenceExcelDownload() {
   var form = document.createElement('form');
   form.action = '../healthInfoReference/excelDownload.html';
@@ -7,7 +11,11 @@ function referenceExcelDownload() {
   form.submit();
 }
 
-// CSVをダウンロードする関数
+/**
+ * CSVをダウンロードする関数
+ *
+ * @returns
+ */
 function referenceCsvDownload() {
   var form = document.createElement('form');
   form.action = '../healthInfoReference/csvDownload.html';
@@ -16,7 +24,11 @@ function referenceCsvDownload() {
   form.submit();
 }
 
-// カレンダーを隠す関数
+/**
+ * カレンダーを隠す関数
+ *
+ * @returns
+ */
 function hideCalendar() {
   var classList = document.getElementsByClassName('hideCalendar');
   for (var i = 0; i < classList.length; i++) {
@@ -24,7 +36,11 @@ function hideCalendar() {
   }
 }
 
-// カレンダーを表示させる関数
+/**
+ * カレンダーを表示させる関数
+ *
+ * @returns
+ */
 function showCalendar() {
   var classList = document.getElementsByClassName('hideCalendar');
   for (var i = 0; i < classList.length; i++) {
