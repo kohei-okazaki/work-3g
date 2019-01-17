@@ -53,9 +53,8 @@
           <td>
             <input type="text" th:field="*{fromRegDate}" />
           </td>
-          <td class="hideCalendar">～</td>
           <td class="hideCalendar">
-            <input type="text" th:field="*{toRegDate}" class="hideCalendar" />
+            <label>～</label><input type="text" th:field="*{toRegDate}" class="hideCalendar" />
           </td>
         </tr>
       </table>
@@ -132,7 +131,7 @@
   <script type="text/javascript" src="../resources/js/lib/datepicker-ja.min.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
   <script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
-  <script>
+  <script type="text/javascript">
     $(function() {
       jQuery("#healthInfoReferenceForm").validationEngine();
       $("#fromRegDate").datepicker();

@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-</head>
-<body>
-  <div th:fragment="footer" th:remove="tag" class="footer">
-    <hr>
-    <img class="browseBack" alt="戻る" src="../resources/image/icon_browseBack.jpg" th:src="@{/resources/image/icon_browseBack.jpg}" onclick="history.back()">
-    <div align="center">
-      <p>--- 健康管理アプリ ---</p>
-    </div>
+<footer class="footer">
+  <hr>
+  <img class="browseBack" alt="戻る" src="../resources/image/icon_browseBack.jpg" th:src="@{/resources/image/icon_browseBack.jpg}" onclick="history.back()">
+  <div align="center">
+    <p>--- 健康管理アプリ ---</p>
   </div>
-</body>
-</html>
+</footer>

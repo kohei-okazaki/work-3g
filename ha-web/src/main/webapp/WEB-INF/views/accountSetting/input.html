@@ -14,7 +14,7 @@
 </head>
 <body>
 
-
+  <div th:replace="layout/layout :: header"></div>
   <h1>
     <img class="headericon" alt="アカウント設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
     アカウント設定入力画面
@@ -36,10 +36,10 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
       <table>
         <tr>
-          <th width="130px">
+          <th>
             <label>削除</label>
           </th>
-          <td width="250px">
+          <td>
             <div class="radio">
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
               <label for="deleteFlagFalse" class="switch-off">しない</label>
@@ -75,7 +75,7 @@
           </td>
         </tr>
         <tr>
-          <th width="130px">
+          <th>
             <label>メールアドレス</label>
           </th>
           <td>
@@ -83,11 +83,11 @@
           </td>
         </tr>
         <tr>
-          <th width="130px">
+          <th>
             <label>メールパスワード</label>
           </th>
           <td>
-            <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
+            <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" placeholder="メールパスワード" />
           </td>
         </tr>
         <tr>
@@ -95,7 +95,7 @@
             <label>備 考</label>
           </th>
           <td>
-            <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
+            <textarea rows="10" cols="100" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
           </td>
         </tr>
       </table>
@@ -122,7 +122,7 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
-  <script>
+  <script type="text/javascript">
     $(function() {
       jQuery("#accountSettingForm").validationEngine({
         promptPosition: "topLeft:80"
