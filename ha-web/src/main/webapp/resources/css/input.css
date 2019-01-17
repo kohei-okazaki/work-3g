@@ -50,7 +50,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
   background: #ffffca;
   box-shadow: 0 0 7px #80ff00;
   border: 1px solid #80ff00;
-  width: 350px;
+/*   width: 350px; */
 }
 
 .radio {

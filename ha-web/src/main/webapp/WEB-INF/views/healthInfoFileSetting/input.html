@@ -31,19 +31,19 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
       <table>
         <tr>
-          <th class="header">
+          <th>
             <p>ユーザID</p>
           </th>
-          <td class="data">
+          <td>
             <p th:text="*{userId}"></p>
             <input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th>
             <p>ヘッダ利用</p>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked="checked" />
               <label for="headerFlagFalse" class="switch-off">しない</label>
@@ -53,10 +53,10 @@
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th>
             <p>フッタ利用</p>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked="checked" />
               <label for="footerFlagFalse" class="switch-off">しない</label>
@@ -66,10 +66,10 @@
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th>
             <p>マスク利用</p>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked="checked" />
               <label for="maskFlagFalse" class="switch-off">しない</label>
@@ -79,10 +79,10 @@
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th>
             <p>囲み文字利用</p>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked="checked" />
               <label for="enclosureCharFlagFalse" class="switch-off">しない</label>
