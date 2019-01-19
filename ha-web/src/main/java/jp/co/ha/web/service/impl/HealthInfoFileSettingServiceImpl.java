@@ -13,7 +13,7 @@ import jp.co.ha.web.form.HealthInfoFileSettingForm;
 import jp.co.ha.web.service.HealthInfoFileSettingService;
 
 /**
- * 健康情報ファイル設定サービス実装クラス<br>
+ * 健康情報ファイル設定サービス実装クラス
  *
  */
 @Service

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 健康情報CSVアップロードサービス実装クラスのマーカーアノテーション<br>
+ * 健康情報CSVアップロードサービス実装クラスのマーカーアノテーション
  *
  */
 @Inherited

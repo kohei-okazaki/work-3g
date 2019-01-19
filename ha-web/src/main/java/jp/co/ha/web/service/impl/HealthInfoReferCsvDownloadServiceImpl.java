@@ -13,7 +13,7 @@ import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 
 /**
- * 結果照会画面CSVダウンロードサービスクラス実装クラス<br>
+ * 結果照会画面CSVダウンロードサービスクラス実装クラス
  *
  */
 @Service("referenceDownloadCsv")
