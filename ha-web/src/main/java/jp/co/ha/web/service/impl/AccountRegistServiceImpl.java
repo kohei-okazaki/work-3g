@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
-import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.util.BeanUtil;
@@ -24,9 +23,6 @@ import jp.co.ha.web.service.annotation.Sha256;
 @Service
 public class AccountRegistServiceImpl implements AccountRegistService {
 
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
 	/** アカウント作成サービス */
 	@Autowired
 	private AccountCreateService accountCreateService;
@@ -37,23 +33,6 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	@Sha256
 	@Autowired
 	private PasswordEncoder encoder;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean invalidUserId(AccountRegistForm form) throws BaseException {
-
-		// 指定したアカウント情報を検索
-		Account account = accountSearchService.findByUserId(form.getUserId());
-		if (BeanUtil.isNull(account)) {
-			// 初回登録時のアカウントの場合、後続のチェックを行わない
-			return false;
-		}
-
-		// ユーザIDが存在する場合true, 存在しない場合false
-		return !StringUtil.isEmpty(account.getUserId());
-	}
 
 	/**
 	 * {@inheritDoc}
