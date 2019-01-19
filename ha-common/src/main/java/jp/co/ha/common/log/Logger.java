@@ -32,18 +32,6 @@ public class Logger {
 	/**
 	 * Debugログを出力する
 	 *
-	 * @param prefix
-	 *     接頭語
-	 * @param bean
-	 *     Bean
-	 */
-	public void debugRes(String prefix, Object bean) {
-		logger.debug(prefix + LogMessageFactory.getLogMessage(bean));
-	}
-
-	/**
-	 * Debugログを出力する
-	 *
 	 * @param msg
 	 *     ログメッセージ
 	 */
@@ -64,18 +52,6 @@ public class Logger {
 	/**
 	 * Infoログを出力する
 	 *
-	 * @param prefix
-	 *     接頭語
-	 * @param bean
-	 *     Bean
-	 */
-	public void infoRes(String prefix, Object bean) {
-		logger.info(prefix + LogMessageFactory.getLogMessage(bean));
-	}
-
-	/**
-	 * Infoログを出力する
-	 *
 	 * @param msg
 	 *     ログメッセージ
 	 */
@@ -91,18 +67,6 @@ public class Logger {
 	 */
 	public void warnRes(Object bean) {
 		logger.warn(LogMessageFactory.getLogMessage(bean));
-	}
-
-	/**
-	 * Warnログを出力する
-	 *
-	 * @param prefix
-	 *     接頭語
-	 * @param bean
-	 *     Bean
-	 */
-	public void warnRes(String prefix, Object bean) {
-		logger.warn(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
 	/**
@@ -147,18 +111,6 @@ public class Logger {
 	 */
 	public void errorRes(Object bean) {
 		logger.error(LogMessageFactory.getLogMessage(bean));
-	}
-
-	/**
-	 * Errorログを出力する
-	 *
-	 * @param prefix
-	 *     接頭語
-	 * @param bean
-	 *     Bean
-	 */
-	public void errorRes(String prefix, Object bean) {
-		logger.error(prefix + LogMessageFactory.getLogMessage(bean));
 	}
 
 	/**

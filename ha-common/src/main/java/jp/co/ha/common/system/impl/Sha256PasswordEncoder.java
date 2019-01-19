@@ -14,15 +14,19 @@ import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.system.type.Algorithm;
 
 /**
- * SHA-256パスワードエンコードクラス<br>
+ * SHA-256パスワードエンコードクラス
  *
  */
 public class Sha256PasswordEncoder implements PasswordEncoder {
 
+	/** アルゴリズム */
+	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_256;
 	/** パスワードを安全にするためのアルゴリズム */
 	private static final String PASSWORD_ALGORITHM = "PBKDF2WithHmacSHA256";
-	/** ハッシュアルゴリズム */
-	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_256;
+	/** ストレッチング回数 */
+	private static final int ITERATION_COUNT = 10000;
+	/** 生成される鍵の長さ */
+	private static final int KEY_LENGTH = 256;
 
 	/**
 	 * {@inheritDoc}
