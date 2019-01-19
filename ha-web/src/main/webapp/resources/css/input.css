@@ -87,31 +87,3 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
   background-color: #80ff80;
 }
 
-.date {
-  position: relative;
-  display: inline-block;
-  width: 200px;
-  height: 36px;
-  border: 2px solid #ccc;
-  border-radius: 15px;
-}
-
-input[type="date"] {
-  position: relative;
-  padding: 0 10px;
-  width: 200px;
-  height: 36px;
-  border: 0;
-  background: transparent;
-  box-sizing: border-box;
-  font-size: 14px;
-  color: #999;
-}
-
-input[type="date"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-
-input[type="date"]::-webkit-clear-button {
-  -webkit-appearance: none;
-}
