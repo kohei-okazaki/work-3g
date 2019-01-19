@@ -1,7 +1,7 @@
 @echo off
 
 rem ------------------------------------------------------------------------
-rem mavenビルドを行うbat
+rem maven-buildを行うbat
 rem ------------------------------------------------------------------------
 
 cls
@@ -17,20 +17,23 @@ echo jar.version = %ver%
 
 rem commonのjarを作成
 cd %baseDir%\ha-common
-call mvn package
-call mvn install:install-file -Dfile=target\ha-common-%ver%.jar -DgroupId=jp.co.ha.common -DartifactId=ha-common -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true
+call mvn clean package -DskipTests
+call mvn install
+call mvn install:install-file -Dfile=target\ha-common-%ver%.jar -DgroupId=jp.co.ha.common -DartifactId=ha-common -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
 rem dbのjarを作成
 cd %baseDir%\ha-db
-call mvn package
-call mvn install:install-file -Dfile=target\ha-db-%ver%.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true
+call mvn clean package -DskipTests
+call mvn install
+call mvn install:install-file -Dfile=target\ha-db-%ver%.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
 rem businessのjarを作成
 cd %baseDir%\ha-business
-call mvn package
-call mvn install:install-file -Dfile=target\ha-business-%ver%.jar -DgroupId=jp.co.ha.business -DartifactId=ha-business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true
+call mvn clean package -DskipTests
+call mvn install
+call mvn install:install-file -Dfile=target\ha-business-%ver%.jar -DgroupId=jp.co.ha.business -DartifactId=ha-business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
 cd %~dp0
