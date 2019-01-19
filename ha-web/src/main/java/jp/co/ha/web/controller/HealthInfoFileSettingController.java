@@ -54,7 +54,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	}
 
 	/**
-	 * Formを返す<br>
+	 * Formを返す
 	 *
 	 * @param request
 	 *     HttpServletRequest
