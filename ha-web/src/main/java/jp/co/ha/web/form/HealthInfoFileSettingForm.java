@@ -6,7 +6,7 @@ import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
 
 /**
- * 健康情報ファイル設定フォームクラス<br>
+ * 健康情報ファイル設定フォームクラス
  *
  */
 public class HealthInfoFileSettingForm implements BaseForm {

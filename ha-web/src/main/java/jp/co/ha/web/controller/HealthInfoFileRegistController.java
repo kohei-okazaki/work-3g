@@ -32,7 +32,7 @@ import jp.co.ha.web.validator.HealthInfoFileInputValidator;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康情報ファイル登録画面コントローラ<br>
+ * 健康情報ファイル登録画面コントローラ
  *
  */
 @Controller

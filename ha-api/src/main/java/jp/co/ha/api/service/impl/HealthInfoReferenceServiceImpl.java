@@ -70,7 +70,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 
 		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
 		if (BeanUtil.isNull(entity)) {
-			throw new HealthInfoException(ErrorCode.DB_NO_DATA, "該当のレコードがみつかりません healthInfoId:" + request.getHealthInfoId());
+			throw new HealthInfoException(ErrorCode.DB_NO_DATA, "該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId());
 		}
 
 		// レスポンスに変換する

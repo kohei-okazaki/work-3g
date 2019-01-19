@@ -1,6 +1,6 @@
 {
-	"requestType": "002",
-	"userId": "test",
-	"healthInfoId": 55,
-	"apiKey": "726d81458bc7acd092005b43a9dded1c281f52a35da265d9402063c1523b33eb"
+  "requestType": "002",
+  "userId": "test",
+  "healthInfoId": 55,
+  "apiKey": "726d81458bc7acd092005b43a9dded1c281f52a35da265d9402063c1523b33eb"
 }

@@ -1,11 +1,11 @@
 {
-	"resultType": "SUCCESS",
-	"healthInfoId": 55,
-	"userId": "test",
-	"height": 160,
-	"weight": 50,
-	"bmi": 19.53,
-	"standardWeight": 56.32,
-	"userStatus": "10",
-	"regDate": "2018/07/22 15:17:31"
+  "result": "SUCCESS",
+  "healthInfoId": 55,
+  "userId": "test",
+  "height": 160,
+  "weight": 50,
+  "bmi": 19.53,
+  "standardWeight": 56.32,
+  "healthInfoStatus": "10",
+  "regDate": "2018/07/22 15:17:31"
 }

@@ -1,7 +1,5 @@
 package jp.co.ha.business.api.type;
 
-import java.util.stream.Stream;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -38,18 +36,14 @@ public enum RequestType implements BaseEnum {
 	}
 
 	/**
-	 * 指定されたリクエストIDに対応するリクエストタイプを返す
-	 *
-	 * @param requestId
-	 *     リクエストID
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
 	 * @return RequestType
 	 */
 	@JsonCreator
-	public static RequestType of(String requestId) {
-		return Stream.of(RequestType.class.getEnumConstants())
-				.filter(e -> e.getValue().equals(requestId))
-				.findFirst()
-				.orElse(null);
+	public static RequestType of(String value) {
+		return BaseEnum.of(RequestType.class, value);
 	}
 
 	/**

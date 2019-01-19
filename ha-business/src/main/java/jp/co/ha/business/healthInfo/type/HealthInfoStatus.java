@@ -53,7 +53,7 @@ public enum HealthInfoStatus implements BaseEnum {
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
 	 * @param value
 	 *     値
-	 * @return HealthStatus
+	 * @return HealthInfoStatus
 	 */
 	public static HealthInfoStatus of(String value) {
 		return BaseEnum.of(HealthInfoStatus.class, value);

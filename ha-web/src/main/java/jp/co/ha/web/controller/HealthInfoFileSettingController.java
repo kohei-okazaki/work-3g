@@ -28,7 +28,7 @@ import jp.co.ha.web.service.HealthInfoFileSettingService;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
- * 健康管理_健康情報ファイル設定コントローラ<br>
+ * 健康管理_健康情報ファイル設定コントローラ
  *
  */
 @Controller
@@ -54,7 +54,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	}
 
 	/**
-	 * Formを返す<br>
+	 * Formを返す
 	 *
 	 * @param request
 	 *     HttpServletRequest

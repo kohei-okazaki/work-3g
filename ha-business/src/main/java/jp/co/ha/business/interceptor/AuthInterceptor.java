@@ -36,8 +36,8 @@ public class AuthInterceptor extends BaseWebInterceptor {
 		}
 		if (isLoginAuthCheck(handler)) {
 			// ログイン情報のチェック対象の場合
-			boolean res = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class));
-			if (res) {
+			var result = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class));
+			if (result) {
 				throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "ユーザIDがありません");
 			}
 		}
