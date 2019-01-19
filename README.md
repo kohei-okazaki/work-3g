@@ -4,9 +4,11 @@
 ## 01_ビルド手順(windows)  
 1.コマンドプロンプトでha-build/batまで移動  
 2.maven-build.batを実行 
-(build.iniのbaseDirの値を適宜合わせて下さい、work3gの直下にha-common等がみれるように)  
+(build.iniのbaseDirの値を適宜合わせて下さい、work3gの直下のha-common等がみれるように)  
 3.ha-apiをjarでエクスポートし以下のプロジェクトのWEB-INF/libに配置  
 ・ha-web  
+4.ha-api/pom.xmlのha-XXXのライブラリの依存関係をコメントアウト  
+5.ha-web/pom.xmlのha-XXXのライブラリの依存関係をコメントアウト  
 
 ## 02_Project構成  
 ### ha-api  
