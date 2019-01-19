@@ -31,18 +31,18 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
       <table>
         <tr>
-          <th width="130px">
+          <th>
             <p>健康情報ID</p>
           </th>
-          <td width="250px">
+          <td>
             <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
           </td>
         </tr>
         <tr>
-          <th width="130px">
+          <th>
             <p>登録日</p>
           </th>
-          <td width="250px">
+          <td>
             <div class="radio" align="center">
               <input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
               <label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
@@ -73,23 +73,23 @@
 
       <br>
 
-      <div th:if="${hasResult}">
+      <div th:if="${hasResult}" align="center" class="contentLayout">
         <table class="custom" border="1">
           <tr class="header">
             <th align="center">
-              <p>身長</p>
+              <label>身長</label>
             </th>
             <th align="center">
-              <p>体重</p>
+              <label>体重</label>
             </th>
             <th align="center">
-              <p>標準体重</p>
+              <label>標準体重</label>
             </th>
             <th align="center">
-              <p>BMI</p>
+              <label>BMI</label>
             </th>
             <th align="center">
-              <p>登録日時</p>
+              <label>登録日時</label>
             </th>
           </tr>
           <tr th:each="result : ${resultList}" class="data">

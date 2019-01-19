@@ -33,72 +33,73 @@
       <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
     </div>
 
-    <br><br><br>
-    <table class="custom" border="1">
-      <tr class="header">
-        <th align="center">
-          <p>身長</p>
-        </th>
-        <th align="center">
-          <p>体重</p>
-        </th>
-        <th align="center">
-          <p>標準体重</p>
+    <div class="contentLayout">
+      <table border="1">
+        <tr>
+          <th>
+            <label>身長</label>
           </th>
-        <th align="center">
-          <p>BMI</p>
-        </th>
-      </tr>
-      <tr class="data">
-        <td align="center">
-          <p th:text="${healthInfo.height}" />
-        </td>
-        <td align="center">
-          <p th:text="${healthInfo.weight}" />
-        </td>
-        <td align="center">
-          <p th:text="${healthInfo.standardWeight}" />
-        </td>
-        <td align="center">
-          <p th:text="${healthInfo.bmi}" />
-        </td>
-      </tr>
-    </table>
-    <br><br>
+          <th>
+            <label>体重</label>
+          </th>
+          <th>
+            <label>標準体重</label>
+          </th>
+          <th>
+            <label>BMI</label>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <label th:text="${healthInfo.height}"></label>
+          </td>
+          <td>
+            <label th:text="${healthInfo.weight}"></label>
+          </td>
+          <td>
+            <label th:text="${healthInfo.standardWeight}"></label>
+          </td>
+          <td>
+            <label th:text="${healthInfo.bmi}"></label>
+          </td>
+        </tr>
+      </table>
 
+      <br>
 
-    <table>
-      <tr>
-        <td>
-          <!--/* Excel出力 */-->
-          <form action="./excelDownload.html" th:action="@{./excelDownload.html}" method="get" th:object="${healthInfoForm}">
-            <input type="hidden" th:field="*{healthInfoId}" />
-            <div>
-              <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
-            </div>
-          </form>
-        </td>
-        <td>　　</td>
-        <td>
-          <!--/* CSV出力 */-->
-          <form action="./csvDownload.html" th:action="@{./csvDownload.html}" method="get" th:object="${healthInfoForm}">
-            <input type="hidden" th:field="*{healthInfoId}" />
-            <div>
-              <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
-            </div>
-          </form>
-        </td>
-        <td>　　</td>
-        <td>
-          <!--/* TOP画面へ */-->
-          <form action="../login/top.html" th:action="@{/login/top.html}" method="get">
-            <div>
-              <input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:src="@{/resources/image/icon_menu.jpg}" />
-            </div>
-          </form>
-        </td>
-      </tr>
-    </table>
+      <table>
+        <tr>
+          <td>
+            <!--/* Excel出力 */-->
+            <form action="./excelDownload.html" th:action="@{./excelDownload.html}" method="get" th:object="${healthInfoForm}">
+              <input type="hidden" th:field="*{healthInfoId}" />
+              <div>
+                <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
+              </div>
+            </form>
+          </td>
+          <td>　　</td>
+          <td>
+            <!--/* CSV出力 */-->
+            <form action="./csvDownload.html" th:action="@{./csvDownload.html}" method="get" th:object="${healthInfoForm}">
+              <input type="hidden" th:field="*{healthInfoId}" />
+              <div>
+                <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
+              </div>
+            </form>
+          </td>
+          <td>　　</td>
+          <td>
+            <!--/* TOP画面へ */-->
+            <form action="../login/top.html" th:action="@{/login/top.html}" method="get">
+              <div>
+                <input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:src="@{/resources/image/icon_menu.jpg}" />
+              </div>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <div th:replace="layout/layout :: footer"></div>

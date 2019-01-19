@@ -1,16 +1,16 @@
 #!/bin/sh
 
 ########################################
-# mavenクリーンを行うshell
+# mvn-cleanを行うshell
 ########################################
 
 # 基底ディレクトリ
 baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
 
-# 成果物ディレクトリ
-commonTargetDir=${baseDir}"/ha-common/target"
-dbTargetDir=${baseDir}"/ha-db/target"
-businessTargetDir=${baseDir}"/ha-business/target"
+# プロジェクトディレクトリ
+commonDir=${baseDir}"/ha-common"
+dbDir=${baseDir}"/ha-db"
+businessDir=${baseDir}"/ha-business"
 
 echo "-------------------"
 echo "START maven-clean.sh"
@@ -19,7 +19,7 @@ echo "-------------------"
 echo "------------------------------------------------------------------------"
 echo "START common project clean"
 echo "------------------------------------------------------------------------"
-cd ${commonTargetDir}
+cd ${commonDir}
 mvn clean
 echo "------------------------------------------------------------------------"
 echo "END common project clean"
@@ -29,7 +29,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START db project clean"
 echo "------------------------------------------------------------------------"
-cd ${dbTargetDir}
+cd ${dbDir}
 mvn clean
 echo "------------------------------------------------------------------------"
 echo "END db project clean"
@@ -39,7 +39,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START business project clean"
 echo "------------------------------------------------------------------------"
-cd ${businessTargetDir}
+cd ${businessDir}
 mvn clean
 echo "------------------------------------------------------------------------"
 echo "END business project clean"

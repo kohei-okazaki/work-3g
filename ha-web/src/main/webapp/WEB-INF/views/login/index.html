@@ -12,11 +12,11 @@
 </head>
 <body>
 
-<div th:if="${errorMessage} != null">
-  <div class="errorMessage">
-    <p th:text="${errorMessage}"></p>
+  <div th:if="${errorMessage} != null">
+    <div class="errorMessage">
+      <p th:text="${errorMessage}"></p>
+    </div>
   </div>
-</div>
 
   <fieldset>
     <h1>健康管理アプリ</h1>
@@ -32,6 +32,7 @@
       <input type="button" value="アカウント作成" onclick="accountRegist();" />
     </form>
   </fieldset>
+
   <br>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
@@ -49,10 +50,10 @@
     var mprogress = new Mprogress();
     $("#userId").change(function() {
       var value = 0;
-      if ($('#userId').val() !== '') {
+      if ($("#userId").val() !== "") {
         value += 1;
       }
-      if ($('#password').val() !== '') {
+      if ($("#password").val() !== "") {
         value += 1;
       }
       var progressValue = value / 2;
@@ -60,10 +61,10 @@
     });
     $("#password").change(function() {
       var value = 0;
-      if ($('#userId').val() !== '') {
+      if ($("#userId").val() !== "") {
         value += 1;
       }
-      if ($('#password').val() !== '') {
+      if ($("#password").val() !== "") {
         value += 1;
       }
       var progressValue = value / 2;

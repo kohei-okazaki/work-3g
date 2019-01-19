@@ -56,11 +56,11 @@ ul > li:hover > a {
 }
 
 .contentLayout {
-  margin-top: 100px;
+  margin-top: 3%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 90px;
-  width: 70%;
+  margin-bottom: 3%;
+  width: 95%;
   padding: 10px;
   background: #d2e8d561;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
