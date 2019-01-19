@@ -35,18 +35,32 @@ textarea {
 }
 
 input[type=button] {
+  position: relative;
   display: inline-block;
-  padding: 0.5em 1em;
+  font-weight: bold;
   text-decoration: none;
-  background: #668ad8;/*ボタン色*/
   color: #FFF;
-  border-bottom: solid 4px #627295;
-  border-radius: 3px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.73);
+  padding: 0.3em 0.5em;
+  background: #00bcd4;
+  border-top: solid 3px #00a3d4;
+  border-bottom: solid 3px #00a3d4;
+  transition: .4s;
+  cursor: pointer;
 }
 
 input[type=button]:hover {
-  -ms-transform: translateY(4px);
-  -webkit-transform: translateY(4px);
-  transform: translateY(4px);/*下に動く*/
-  border-bottom: none;/*線を消す*/
+  cursor: pointer;
+  text-shadow: -6px 0px 15px rgba(255, 255, 240, 0.83), 6px 0px 15px rgba(255, 255, 240, 0.83);
+}
+
+.contentLayout {
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3%;
+  width: 95%;
+  padding: 10px;
+  background: #A9F5F2;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
 }
