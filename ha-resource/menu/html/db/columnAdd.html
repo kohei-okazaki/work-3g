@@ -17,22 +17,117 @@
           <input type="text" id="tableName" size="16" placeholder="対象テーブル名" />
         </td>
       </tr>
+      <!-- 1 -->
+      <tr>
+        <td colspan="2"><hr></td>
+      </tr>
       <tr>
         <th>
           <label>カラム名</label>
         </th>
         <td>
-          <input type="text" id="columnName" size="16" placeholder="追加するカラム名" />
+          <input type="text" id="columnName1" size="16" placeholder="追加するカラム名" />
         </td>
       </tr>
       <tr>
         <th>
-          <label>カラム定義</label>
+          <label>カラム型</label>
         </th>
         <td>
-          <input type="text" id="columnDefine" size="16" placeholder="カラム定義" />
+          <div class="select cp_sl04">
+            <select id="columnType1">
+              <option value="VARCHAR">VARCHAR</option>
+              <option value="DECIMAL">DECIMAL</option>
+              <option value="INT">INT</option>
+              <option value="DATE">DATE</option>
+              <option value="TIMESTAMP">TIMESTAMP</option>
+            </select>
+          </div>
         </td>
       </tr>
+      <tr class="hideColumnSize1">
+        <th>
+          <label>カラムサイズ</label>
+        </th>
+        <td>
+          <input type="text" id="columnSize1" size="16" placeholder="追加するカラムサイズ" />
+        </td>
+      </tr>
+      <!-- 1 -->
+      <!-- 2 -->
+      <tr class="columnCount2">
+        <td colspan="2"><hr></td>
+      </tr>
+      <tr class="columnCount2">
+        <th>
+          <label>カラム名</label>
+        </th>
+        <td>
+          <input type="text" id="columnName2" size="16" placeholder="追加するカラム名" />
+        </td>
+      </tr>
+      <tr class="columnCount2">
+        <th>
+          <label>カラム型</label>
+        </th>
+        <td>
+          <div class="select cp_sl04">
+            <select id="columnType2">
+              <option value="VARCHAR">VARCHAR</option>
+              <option value="DECIMAL">DECIMAL</option>
+              <option value="INT">INT</option>
+              <option value="DATE">DATE</option>
+              <option value="TIMESTAMP">TIMESTAMP</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr class="columnCount2 hideColumnSize2">
+        <th>
+          <label>カラムサイズ</label>
+        </th>
+        <td>
+          <input type="text" id="columnSize2" size="16" placeholder="追加するカラムサイズ" />
+        </td>
+      </tr>
+      <!-- 2 -->
+      <!-- 3 -->
+      <tr class="columnCount3">
+        <td colspan="2"><hr></td>
+      </tr>
+      <tr class="columnCount3">
+        <th>
+          <label>カラム名</label>
+        </th>
+        <td>
+          <input type="text" id="columnName3" size="16" placeholder="追加するカラム名" />
+        </td>
+      </tr>
+      <tr class="columnCount3">
+        <th>
+          <label>カラム型</label>
+        </th>
+        <td>
+          <div class="select cp_sl04">
+            <select id="columnType3">
+              <option value="VARCHAR" selected>VARCHAR</option>
+              <option value="DECIMAL">DECIMAL</option>
+              <option value="INT">INT</option>
+              <option value="DATE">DATE</option>
+              <option value="TIMESTAMP">TIMESTAMP</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr class="columnCount3 hideColumnSize3">
+        <th>
+          <label>カラムサイズ</label>
+        </th>
+        <td>
+          <input type="text" id="columnSize3" size="16" placeholder="追加するカラムサイズ" />
+        </td>
+      </tr>
+      <!-- 3 -->
     </table>
 
     <div class="button">
@@ -44,46 +139,121 @@
       <input id="inputClear" type="button" value="入力値 クリア" />
       <input id="responseClear" type="button" value="結果 クリア" />
     </div>
-
     <textarea id="response" cols=80 rows=10></textarea>
   </div>
 
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
   <script type="text/javascript">
 
+    // カラム数
+    var columnCount = 1;
+
     function validate() {
       if ($("#tableName").val() === "") {
         alert("テーブル名は必須です");
         return true;
-      } else if ($("#columnName").val() === "") {
+      } else if ($("#columnName1").val() === "") {
         alert("カラム名は必須です");
         return true;
-      } else if ($("#columnDefine").val() === "") {
-        alert("カラム定義は必須です");
+      } else if ($("#columnType1 option:selected").val() === "") {
+        alert("カラム型は必須です");
         return true;
       }
       return false;
     }
 
-    $("input#create").click(function() {
+    function load() {
+      columnCount = 1;
+      $(".columnCount2").css("display", "none");
+      $(".columnCount3").css("display", "none");
+    }
 
-      if (validate()) {
-        return;
+    // DDLを作成する
+    function createDdl() {
+
+      var ddl = "ALTER TABLE " + $("#tableName").val() + " ADD (";
+
+      for (var i = 1; i < columnCount + 1; i++) {
+        var type = $("#columnType" + i + " option:selected").val();
+        if (type === "VARCHAR" || type === "DECIMAL") {
+          type += "(" + $("#columnSize" + i).val() + ")";
+        }
+        ddl += "\r\n  " + $("#columnName" + i).val() + " " + type;
+        if (i !== columnCount) {
+          // カラムが最後でない場合
+          ddl += ",";
+        }
       }
+      return ddl + "\r\n);";
+    }
 
-      // DDLを組み立てる
-      var sql = "ALTER TABLE " + $("#tableName").val() + " ADD " + $("#columnName").val() + " " + $("#columnDefine").val() + ";";
-      $("#response").val(sql);
-    });
+    // 画面描画時の処理
+    $(document).ready(function() {
 
-    $("input#inputClear").click(function() {
-      $("#tableName").val("");
-      $("#columnName").val("");
-      $("#columnDefine").val("");
-    });
+      // 初期化処理を行う
+      load();
 
-    $("input#responseClear").click(function() {
-      $("#response").val("");
+      // セレクトボックス変更時の処理
+      $("select#columnType1").change(function() {
+        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
+          $(".hideColumnSize1").css("display", "none");
+        } else {
+          $(".hideColumnSize1").css("display", "table-row");
+        }
+      });
+      $("select#columnType2").change(function() {
+        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
+          $(".hideColumnSize2").css("display", "none");
+        } else {
+          $(".hideColumnSize2").css("display", "table-row");
+        }
+      });
+      $("select#columnType3").change(function() {
+        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
+          $(".hideColumnSize3").css("display", "none");
+        } else {
+          $(".hideColumnSize3").css("display", "table-row");
+        }
+      });
+
+      // 追加ボタン押下時の処理
+      $("input#add").click(function() {
+        if (0 < columnCount && columnCount < 3) {
+          columnCount += 1;
+          $(".columnCount" + columnCount).css("display", "table-row");
+        }
+      });
+
+      // 削除ボタン押下時の処理
+      $("input#remove").click(function() {
+        if (1 < columnCount && columnCount < 4) {
+          $(".columnCount" + columnCount).css("display", "none");
+          columnCount -= 1;
+        }
+      });
+
+      // 作成ボタン押下時の処理
+      $("input#create").click(function() {
+        if (validate()) {
+          return;
+        }
+        var ddl = createDdl();
+        $("#response").val(ddl);
+      });
+
+      // 入力値クリアボタン押下時の処理
+      $("input#inputClear").click(function() {
+        $("#tableName").val("");
+        for (var i = 1; i < columnCount + 1; i++) {
+          $("#columnName" + i).val("");
+          $("#columnSize" + i).val("");
+        }
+      });
+
+      // 結果クリアボタン押下時の処理
+      $("input#responseClear").click(function() {
+        $("#response").val("");
+      });
     });
 
   </script>
