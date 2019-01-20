@@ -7,48 +7,53 @@
 </head>
 <body>
   <h1>DB -カラム変更-</h1>
-  <table>
-    <tr>
-      <th>
-        <label>テーブル名</label>
-      </th>
-      <td>
-        <input type="text" id="tableName" size="16" placeholder="対象テーブル名" />
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <label>旧カラム名</label>
-      </th>
-      <td>
-        <input type="text" id="oldColumn" size="16" placeholder="旧カラム名" />
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <label>新カラム名</label>
-      </th>
-      <td>
-        <input type="text" id="newColumn" size="16" placeholder="新カラム名" />
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <label>カラム定義</label>
-      </th>
-      <td>
-        <input type="text" id="columnDefine" size="16" placeholder="カラム定義" />
-      </td>
-    </tr>
-  </table>
+  <div class="contentLayout">
+    <table>
+      <tr>
+        <th>
+          <label>テーブル名</label>
+        </th>
+        <td>
+          <input type="text" id="tableName" size="16" placeholder="対象テーブル名" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label>旧カラム名</label>
+        </th>
+        <td>
+          <input type="text" id="oldColumn" size="16" placeholder="旧カラム名" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label>新カラム名</label>
+        </th>
+        <td>
+          <input type="text" id="newColumn" size="16" placeholder="新カラム名" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label>カラム定義</label>
+        </th>
+        <td>
+          <input type="text" id="columnDefine" size="16" placeholder="カラム定義" />
+        </td>
+      </tr>
+    </table>
 
-  <div class="button">
-    <input id="create" type="button" value="作成" />
-    <input id="inputClear" type="button" value="入力値クリア" />
-    <input id="responseClear" type="button" value="結果クリア" />
+    <div class="button">
+      <input id="add" type="button" value="追 加" />
+      <input id="remove" type="button" value="削 除" />
+    </div>
+    <div class="button">
+      <input id="create" type="button" value="作 成" />
+      <input id="inputClear" type="button" value="入力値 クリア" />
+      <input id="responseClear" type="button" value="結果 クリア" />
+    </div>
+    <textarea id="response" cols=80 rows=10></textarea>
   </div>
-
-  <textarea id="response" cols=80 rows=5></textarea>
 
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
   <script type="text/javascript">
