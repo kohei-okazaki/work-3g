@@ -7,48 +7,51 @@
 </head>
 <body>
   <h1>健康情報照会API JSON生成ツール</h1>
-  <table>
-    <tr>
-      <th>
-        <label>リクエストタイプ</label>
-      </th>
-      <td>
-        <input type="text" id="requestType" size="10" value="002" />
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <label>ユーザID</label>
-      </th>
-      <td>
-        <input type="text" id="userId" size="10" placeholder="ユーザID" />
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <label>健康情報ID</label>
-      </th>
-      <td>
-        <input type="text" id="healthInfoId" size="10" placeholder="健康情報ID" />
-      </td>
-    </tr>
-    <tr>
-      <th>
-        <label>APIキー</label>
-      </th>
-      <td>
-        <input type="text" id="apiKey" size="80" placeholder="APIキー" />
-      </td>
-    </tr>
-  </table>
+  <div class="contentLayout">
+    <table>
+      <tr>
+        <th>
+          <label>リクエストタイプ</label>
+        </th>
+        <td>
+          <input type="text" id="requestType" size="10" value="002" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label>ユーザID</label>
+        </th>
+        <td>
+          <input type="text" id="userId" size="10" placeholder="ユーザID" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label>健康情報ID</label>
+        </th>
+        <td>
+          <input type="text" id="healthInfoId" size="10" placeholder="健康情報ID" />
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label>APIキー</label>
+        </th>
+        <td>
+          <input type="text" id="apiKey" size="80" placeholder="APIキー" />
+        </td>
+      </tr>
+    </table>
 
-  <div class="button">
-    <input id="create" type="button" value="作成" />
-    <input id="inputClear" type="button" value="入力値クリア" />
-    <input id="responseClear" type="button" value="結果クリア" />
+    <div class="button">
+      <input id="create" type="button" value="作成" />
+      <input id="inputClear" type="button" value="入力値クリア" />
+      <input id="responseClear" type="button" value="結果クリア" />
+    </div>
+
+    <textarea id="response" cols=80 rows=5></textarea>
+
   </div>
-
-  <textarea id="response" cols=80 rows=5></textarea>
 
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
   <script type="text/javascript">
