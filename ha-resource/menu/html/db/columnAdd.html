@@ -152,12 +152,18 @@
       if ($("#tableName").val() === "") {
         alert("テーブル名は必須です");
         return true;
-      } else if ($("#columnName1").val() === "") {
-        alert("カラム名は必須です");
-        return true;
-      } else if ($("#columnType1 option:selected").val() === "") {
-        alert("カラム型は必須です");
-        return true;
+      }
+      for (var i = 1; i < columnCount + 1; i++) {
+        if ($("#columnName" + i).val() === "") {
+          alert("カラム名は必須です");
+          return true;
+        } else if ($("#columnType" + i + " option:selected").val() === "VARCHAR" && $("#columnSize" + i).val() === "") {
+          alert("VARCHAR指定時、カラムサイズは必須です");
+          return true;
+        } else if ($("#columnType" + i + " option:selected").val() === "DECIMAL" && $("#columnSize" + i).val() === "") {
+          alert("DECIMAL指定時、カラムサイズは必須です");
+          return true;
+        }
       }
       return false;
     }
