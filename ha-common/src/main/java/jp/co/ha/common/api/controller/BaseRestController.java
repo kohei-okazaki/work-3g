@@ -19,8 +19,8 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
 
 /**
- * RestAPI基底コントローラ<br>
- * すべてのRestAPIコントローラはこのクラスを継承すること
+ * Rest形式の基底コントローラ<br>
+ * すべてのRestコントローラはこのクラスを継承すること
  *
  * @param <Rq>
  *     リクエスト
