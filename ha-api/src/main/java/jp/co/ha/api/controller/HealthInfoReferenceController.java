@@ -18,7 +18,7 @@ import jp.co.ha.common.exception.BaseException;
 @RestController
 @RequestMapping(value = "/healthInfoReference", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 public class HealthInfoReferenceController extends
-		BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse, HealthInfoReferenceService> {
+		BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
 	/** 健康情報照会サービス */
 	@Autowired
