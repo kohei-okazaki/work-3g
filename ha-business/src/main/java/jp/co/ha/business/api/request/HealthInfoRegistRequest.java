@@ -2,7 +2,6 @@ package jp.co.ha.business.api.request;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.business.api.request.BaseApiRequest;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**

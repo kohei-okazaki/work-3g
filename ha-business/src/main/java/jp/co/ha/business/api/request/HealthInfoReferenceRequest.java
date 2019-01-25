@@ -1,7 +1,5 @@
 package jp.co.ha.business.api.request;
 
-import jp.co.ha.business.api.request.BaseApiRequest;
-
 /**
  * 健康情報照会リクエストクラス
  *
