@@ -1,4 +1,4 @@
-package jp.co.ha.api.response;
+package jp.co.ha.business.api.response;
 
 import java.math.BigDecimal;
 
@@ -6,10 +6,10 @@ import jp.co.ha.business.api.response.BaseApiResponse;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報登録レスポンスクラス
+ * 健康情報照会レスポンスクラス
  *
  */
-public class HealthInfoRegistResponse extends BaseApiResponse {
+public class HealthInfoReferenceResponse extends BaseApiResponse {
 
 	/** 健康情報ID */
 	private Integer healthInfoId;
@@ -27,8 +27,6 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	/** 標準体重 */
 	@Mask
 	private BigDecimal standardWeight;
-	/** 健康情報ステータス */
-	private String healthInfoStatus;
 	/** 登録日時 */
 	private String regDate;
 
@@ -144,25 +142,6 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
-	}
-
-	/**
-	 * healthInfoStatusを返す
-	 *
-	 * @return healthInfoStatus
-	 */
-	public String getHealthInfoStatus() {
-		return healthInfoStatus;
-	}
-
-	/**
-	 * healthInfoStatusを設定する
-	 *
-	 * @param healthInfoStatus
-	 *     健康情報ステータス
-	 */
-	public void setHealthInfoStatus(String healthInfoStatus) {
-		this.healthInfoStatus = healthInfoStatus;
 	}
 
 	/**

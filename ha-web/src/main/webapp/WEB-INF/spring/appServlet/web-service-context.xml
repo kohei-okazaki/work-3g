@@ -38,9 +38,9 @@
 
 
   <!-- 健康情報登録API -->
-  <bean id="healthInfoRegistService" class="jp.co.ha.api.service.impl.HealthInfoRegistServiceImpl" />
+  <bean id="healthInfoRegistService" class="jp.co.ha.business.api.service.impl.HealthInfoRegistServiceImpl" />
   <!-- 健康情報照会API -->
-  <bean id="healthInfoReferenceService" class="jp.co.ha.api.service.impl.HealthInfoReferenceServiceImpl" />
+  <bean id="healthInfoReferenceService" class="jp.co.ha.business.api.service.impl.HealthInfoReferenceServiceImpl" />
 
   <!-- 健康情報計算サービス -->
   <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />

@@ -1,7 +1,7 @@
-package jp.co.ha.api.service;
+package jp.co.ha.business.api.service;
 
-import jp.co.ha.api.request.HealthInfoReferenceRequest;
-import jp.co.ha.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
+import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.common.api.service.BaseService;
 import jp.co.ha.db.entity.HealthInfo;
 

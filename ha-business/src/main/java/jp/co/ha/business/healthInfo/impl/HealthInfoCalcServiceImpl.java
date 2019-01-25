@@ -3,8 +3,6 @@ package jp.co.ha.business.healthInfo.impl;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import org.springframework.stereotype.Service;
-
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
@@ -14,7 +12,6 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
  * 計算サービス実装クラス
  *
  */
-@Service
 public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 
 	/**

@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.api.response.BaseResponse;
 import jp.co.ha.common.api.response.ErrorResponse;
-import jp.co.ha.common.api.service.BaseService;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
@@ -20,17 +19,15 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
 
 /**
- * RestAPI基底コントローラ<br>
- * すべてのRestAPIコントローラはこのクラスを継承すること
+ * Rest形式の基底コントローラ<br>
+ * すべてのRestコントローラはこのクラスを継承すること
  *
  * @param <Rq>
  *     リクエスト
  * @param <Rs>
  *     レスポンス
- * @param <S>
- *     サービスクラス
  */
-public abstract class BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse, S extends BaseService<Rq, Rs>> {
+public abstract class BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse> {
 
 	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());

@@ -1,14 +1,14 @@
-package jp.co.ha.api.service.impl;
+package jp.co.ha.business.api.service.impl;
 
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.api.request.HealthInfoRegistRequest;
-import jp.co.ha.api.response.HealthInfoRegistResponse;
-import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.service.CommonService;
+import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;

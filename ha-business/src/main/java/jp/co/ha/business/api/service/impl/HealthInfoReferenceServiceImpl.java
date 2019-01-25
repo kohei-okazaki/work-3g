@@ -1,12 +1,12 @@
-package jp.co.ha.api.service.impl;
+package jp.co.ha.business.api.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.api.request.HealthInfoReferenceRequest;
-import jp.co.ha.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.api.service.HealthInfoReferenceService;
+import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
+import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.api.service.CommonService;
+import jp.co.ha.business.api.service.HealthInfoReferenceService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;

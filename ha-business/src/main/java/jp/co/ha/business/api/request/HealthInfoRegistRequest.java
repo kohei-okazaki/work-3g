@@ -1,4 +1,4 @@
-package jp.co.ha.api.request;
+package jp.co.ha.business.api.request;
 
 import java.math.BigDecimal;
 

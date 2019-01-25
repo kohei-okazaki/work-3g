@@ -2,7 +2,7 @@ package jp.co.ha.web.service;
 
 import java.util.List;
 
-import jp.co.ha.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;

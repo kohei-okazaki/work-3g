@@ -4,6 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import jp.co.ha.business.api.service.ApiConnectionService;
+import jp.co.ha.business.api.service.HealthInfoReferenceService;
+import jp.co.ha.business.api.service.HealthInfoRegistService;
+import jp.co.ha.business.api.service.impl.HealthInfoReferenceServiceImpl;
+import jp.co.ha.business.api.service.impl.HealthInfoRegistServiceImpl;
 import jp.co.ha.business.db.DataBaseCommonExecutor;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.create.impl.HealthInfoCreateServiceImpl;
@@ -91,6 +95,26 @@ public class BusinessConfig {
 	@Bean
 	public ApiConnectionService apiConnectionService() {
 		return new ApiConnectionService();
+	}
+
+	/**
+	 * 健康情報登録APIサービス
+	 *
+	 * @return HealthInfoRegistService
+	 */
+	@Bean
+	public HealthInfoRegistService healthInfoRegistService() {
+		return new HealthInfoRegistServiceImpl();
+	}
+
+	/**
+	 * 健康情報照会APIサービス
+	 *
+	 * @return HealthInfoReferenceService
+	 */
+	@Bean
+	public HealthInfoReferenceService healthInfoReferenceService() {
+		return new HealthInfoReferenceServiceImpl();
 	}
 
 }

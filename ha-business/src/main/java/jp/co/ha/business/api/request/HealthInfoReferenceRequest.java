@@ -1,4 +1,4 @@
-package jp.co.ha.api.request;
+package jp.co.ha.business.api.request;
 
 import jp.co.ha.business.api.request.BaseApiRequest;
 
