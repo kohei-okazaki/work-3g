@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.api.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;

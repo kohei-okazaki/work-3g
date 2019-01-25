@@ -5,9 +5,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.api.request.HealthInfoRegistRequest;
-import jp.co.ha.api.response.HealthInfoRegistResponse;
-import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.common.api.controller.BaseRestController;
 import jp.co.ha.common.exception.BaseException;
 

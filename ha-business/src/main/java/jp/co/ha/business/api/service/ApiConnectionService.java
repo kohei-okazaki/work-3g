@@ -36,7 +36,7 @@ public class ApiConnectionService {
 	 * @throws Throwable
 	 *     実行時のエラー
 	 */
-	@Around("execution(* *jp.co.ha.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
+	@Around("execution(* *jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
 	public BaseResponse outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
 		// リクエストログを出力

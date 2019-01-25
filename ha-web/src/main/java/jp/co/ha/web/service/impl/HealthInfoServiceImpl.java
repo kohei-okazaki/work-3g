@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import jp.co.ha.api.request.HealthInfoRegistRequest;
-import jp.co.ha.api.response.HealthInfoRegistResponse;
-import jp.co.ha.api.service.HealthInfoRegistService;
+import jp.co.ha.business.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;

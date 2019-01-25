@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
