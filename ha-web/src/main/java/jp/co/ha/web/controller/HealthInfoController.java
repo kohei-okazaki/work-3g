@@ -12,9 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +26,6 @@ import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
@@ -71,15 +68,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@InitBinder("healthInfoForm")
-	public void initBinder(WebDataBinder binder) {
-
-	}
 
 	/**
 	 * Formを返す
@@ -127,9 +115,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		if (BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
-		}
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
@@ -166,9 +151,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public ModelAndView excelDownload(HttpServletRequest request, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		if (BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-		}
 
 		Integer requestHealthInfoId = form.getHealthInfoId();
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
@@ -200,9 +182,6 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		if (BeanUtil.isNull(userId)) {
-			throw new HealthInfoException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
-		}
 
 		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getHealthInfoId());
 		if (!hasRecord) {

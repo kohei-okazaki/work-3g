@@ -16,7 +16,8 @@
     エラー画面
   </h1>
 
-  <hr>
+  <div th:replace="layout/layout :: header"></div>
+
   <div class="contentLayout">
     <div th:if="${errorMessage} == null">
       <p>入力情報に誤りがあります。もう一度入力してください</p>

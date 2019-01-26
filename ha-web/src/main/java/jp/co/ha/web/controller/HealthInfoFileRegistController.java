@@ -22,7 +22,6 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.web.form.HealthInfoFileForm;
@@ -62,9 +61,11 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * validatorを設定
+	 *
+	 * @param binder
+	 *     WebDataBinder
 	 */
-	@Override
 	@InitBinder("healthInfoFileForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(new HealthInfoFileInputValidator());
@@ -111,7 +112,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
 		sessionManageService.removeValue(request.getSession(), "modelList");
-		if (CollectionUtil.isEmpty(modelList) || BeanUtil.isNull(userId)) {
+		if (CollectionUtil.isEmpty(modelList)) {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		fileService.regist(modelList, userId);

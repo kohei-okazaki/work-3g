@@ -22,7 +22,8 @@
     健康情報入力画面
   </h1>
 
-  <hr>
+  <div th:replace="layout/layout :: header"></div>
+
   <div th:replace="./common/navigation.html"></div>
 
   <div th:if="${errorMessage} != null">

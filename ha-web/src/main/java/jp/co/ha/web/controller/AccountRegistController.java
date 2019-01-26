@@ -10,9 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,15 +47,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@InitBinder("accountRegistForm")
-	public void initBinder(WebDataBinder binder) {
-
-	}
 
 	/**
 	 * Formを返す

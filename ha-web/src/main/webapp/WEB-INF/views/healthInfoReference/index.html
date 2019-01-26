@@ -20,7 +20,8 @@
     健康情報照会画面
   </h1>
 
-  <hr>
+  <div th:replace="layout/layout :: header"></div>
+
   <div th:replace="./common/navigation.html"></div>
 
   <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">

@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
@@ -52,15 +48,6 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	private SessionManageService sessionService;
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@InitBinder(value = "accountSettingForm")
-	public void initBinder(WebDataBinder binder) {
-
-	}
-
-	/**
 	 * Formを返す
 	 *
 	 * @param request
@@ -74,9 +61,6 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		if (BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
-		}
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(userId);

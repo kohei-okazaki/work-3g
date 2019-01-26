@@ -42,7 +42,7 @@ public class ApiConnectionService {
 		// リクエストログを出力
 		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseRequest).forEach(e -> LOG.infoRes(e));
 
-		// jp.co.ha.api.service.impl.*ServiceImpl.execute実行
+		// jp.co.ha.business.api.service.impl.*ServiceImpl#execute実行
 		BaseResponse response = (BaseResponse) pjp.proceed();
 		// レスポンスログを出力
 		LOG.infoRes(response);
