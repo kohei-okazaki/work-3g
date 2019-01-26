@@ -5,7 +5,6 @@ import javax.validation.Valid;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.form.BaseForm;
@@ -18,14 +17,6 @@ import jp.co.ha.common.web.form.BaseForm;
  *     対象formクラス
  */
 public interface BaseWizardController<F extends BaseForm> extends BaseWebController {
-
-	/**
-	 * Validateを設定<br>
-	 *
-	 * @param binder
-	 *     WebDataBinder
-	 */
-	void initBinder(WebDataBinder binder);
 
 	/**
 	 * 入力画面

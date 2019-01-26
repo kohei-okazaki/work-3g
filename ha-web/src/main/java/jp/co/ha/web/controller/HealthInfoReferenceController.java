@@ -32,7 +32,6 @@ import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
@@ -182,7 +181,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		HttpSession session = request.getSession();
 		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
 		String userId = sessionService.getValue(session, "userId", String.class);
-		if (CollectionUtil.isEmpty(resultList) || BeanUtil.isNull(userId)) {
+		if (CollectionUtil.isEmpty(resultList)) {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 

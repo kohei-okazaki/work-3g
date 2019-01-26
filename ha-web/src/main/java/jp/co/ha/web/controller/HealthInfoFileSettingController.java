@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
-import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -46,14 +44,6 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@InitBinder(value = "healthInfoFileSettingForm")
-	public void initBinder(WebDataBinder binder) {
-	}
-
-	/**
 	 * Formを返す
 	 *
 	 * @param request
@@ -67,9 +57,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-		if (BeanUtil.isNull(userId)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session内のユーザIDが不正です");
-		}
+
 		// 健康情報ファイル設定を取得
 		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId);
 		HealthInfoFileSettingForm form = new HealthInfoFileSettingForm();
