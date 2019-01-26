@@ -41,12 +41,12 @@ public class AddColumnBuilder extends CommonBuilder {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 
 		for (Row row : targetRowList) {
-			String ddePrefix = "ALTER TABLE ";
+			String ddlPrefix = "ALTER TABLE ";
 			String ddlSuffix = ";";
 			String tableName = row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 			String columnName = row.getCell(CellPositionType.COLUMN_NAME).getValue();
 			String columnType = getColumnType(row);
-			String ddl = ddePrefix + tableName + " ADD " + columnName + " " + columnType + ddlSuffix;
+			String ddl = ddlPrefix + tableName + " ADD " + columnName + " " + columnType + ddlSuffix;
 
 			body.add(ddl);
 		}
