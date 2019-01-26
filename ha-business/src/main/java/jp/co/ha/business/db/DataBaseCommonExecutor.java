@@ -21,7 +21,7 @@ import jp.co.ha.common.util.DateUtil;
 public class DataBaseCommonExecutor {
 
 	/** LOG */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(DataBaseCommonExecutor.class);
 
 	/**
 	 * 更新処理の共通処理を行う

@@ -20,7 +20,7 @@ import jp.co.ha.common.util.StringUtil;
 public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 
 	/** LOG */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoCsvWriter.class);
 
 	/**
 	 * コンストラクタ

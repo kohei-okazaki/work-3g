@@ -24,7 +24,7 @@ import jp.co.ha.tool.type.CellPositionType;
 public class ExcelReader extends BaseFileReader {
 
 	/** LOG */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(ExcelReader.class);
 
 	private ExcelConfig conf;
 

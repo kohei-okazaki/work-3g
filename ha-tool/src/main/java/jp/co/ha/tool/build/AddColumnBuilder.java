@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
@@ -52,7 +52,7 @@ public class AddColumnBuilder extends CommonBuilder {
 		}
 
 		FileConfig fileConf = getFileConfig(ExecuteType.DDL);
-		fileConf.setFileName("test" + FileSuffix.SQL.getValue());
+		fileConf.setFileName("test" + FileExtension.SQL.getValue());
 		fileConf.setData(body.toString());
 		FileFactory.create(fileConf);
 	}

@@ -19,7 +19,7 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -137,7 +137,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		CsvConfig conf = new CsvConfig();
 		var fileName = "healthInfoReference_"
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
-				+ FileSuffix.CSV.getValue();
+				+ FileExtension.CSV.getValue();
 		conf.setFileName(fileName);
 		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));

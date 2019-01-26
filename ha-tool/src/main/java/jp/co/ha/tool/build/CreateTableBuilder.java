@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Column;
@@ -43,7 +43,7 @@ public class CreateTableBuilder extends CommonBuilder {
 			body.add(columnData.toString()).add(ddlSuffix);
 
 			FileConfig fileConf = getFileConfig(ExecuteType.DDL);
-			fileConf.setFileName(tableName.toUpperCase() + FileSuffix.SQL.getValue());
+			fileConf.setFileName(tableName.toUpperCase() + FileExtension.SQL.getValue());
 			fileConf.setData(body.toString());
 			FileFactory.create(fileConf);
 		}

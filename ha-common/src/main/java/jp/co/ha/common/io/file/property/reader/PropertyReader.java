@@ -13,7 +13,7 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
 public class PropertyReader {
 
 	/** LOG */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(PropertyReader.class);
 
 	/**
 	 * 指定したパスのプロパティファイルの読み込みを行う

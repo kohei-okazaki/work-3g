@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Table;
@@ -36,7 +36,7 @@ public class DropBuilder extends CommonBuilder {
 			body.add(buildDropSql(e.getPhysicalName()));
 		});
 		FileConfig fileConf = getFileConfig(ExecuteType.DROP);
-		fileConf.setFileName("DROP" + FileSuffix.SQL.getValue());
+		fileConf.setFileName("DROP" + FileExtension.SQL.getValue());
 		fileConf.setData(body.toString());
 		FileFactory.create(fileConf);
 	}
