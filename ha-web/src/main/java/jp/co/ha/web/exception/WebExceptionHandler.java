@@ -20,6 +20,7 @@ import jp.co.ha.web.view.ManageWebView;
  */
 public class WebExceptionHandler implements BaseExceptionHandler {
 
+	/** MessageSource */
 	@Autowired
 	private MessageSource messageSource;
 

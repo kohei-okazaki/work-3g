@@ -25,7 +25,7 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 	}
 
 	/**
-	 * 相関チェックを行う<br>
+	 * 相関チェックを行う
 	 *
 	 * @param form
 	 *     結果検索フォーム
