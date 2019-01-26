@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.method.HandlerMethod;
 
+import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
 
 /**
  * Webのリクエストインターセプター

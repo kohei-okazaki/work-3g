@@ -9,10 +9,10 @@ import org.springframework.web.method.HandlerMethod;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
+import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
 
 /**
  * ログイン情報のチェックを行うインターセプター

@@ -18,7 +18,7 @@
     <relativePath>../ha-pom</relativePath>
   </parent>
 
-   <dependencies>
+  <dependencies>
     <dependency>
       <groupId>jp.co.ha.common</groupId>
       <artifactId>ha-common</artifactId>
