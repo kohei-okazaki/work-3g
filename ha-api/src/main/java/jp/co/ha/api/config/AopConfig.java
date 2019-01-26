@@ -3,7 +3,7 @@ package jp.co.ha.api.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jp.co.ha.business.api.service.ApiCommonExecutor;
+import jp.co.ha.business.api.service.ApiConnectionExecutor;
 import jp.co.ha.business.db.DataBaseCommonExecutor;
 
 /**
@@ -26,10 +26,10 @@ public class AopConfig {
 	/**
 	 * API通信共通処理
 	 *
-	 * @return ApiConnectionService
+	 * @return ApiConnectionExecutor
 	 */
 	@Bean
-	public ApiCommonExecutor apiConnectionService() {
-		return new ApiCommonExecutor();
+	public ApiConnectionExecutor apiConnectionExecutor() {
+		return new ApiConnectionExecutor();
 	}
 }

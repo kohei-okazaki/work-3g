@@ -23,27 +23,27 @@
     <div align="center" class="contentLayout">
       <table>
         <tr>
-          <th width="130px">
+          <th>
             <label>ユーザID</label>
           </th>
-          <td width="250px">
-            <input type="text" maxlength="16" required th:field="*{userId}" readonly="readonly" />
+          <td>
+            <input type="text" maxlength="16" th:field="*{userId}" readonly required />
           </td>
         </tr>
         <tr>
-          <th width="130px">
+          <th>
             <label>パスワード</label>
           </th>
-          <td width="250px">
-            <input type="text" maxlength="16" required th:field="*{password}" readonly="readonly" />
+          <td>
+            <input type="text" maxlength="16" th:field="*{password}" readonly required />
           </td>
         </tr>
         <tr>
           <th>
             <label>確認用 パスワード</label>
           </th>
-          <td width="250px">
-            <input type="text" maxlength="16" required th:field="*{confirmPassword}" readonly="readonly" />
+          <td>
+            <input type="text" maxlength="16" th:field="*{confirmPassword}" readonly required />
           </td>
         </tr>
         <tr>
@@ -51,7 +51,7 @@
             <label>備 考</label>
           </th>
           <td>
-            <textarea rows="10" cols="30" th:field="*{remarks}" readonly="readonly"></textarea>
+            <textarea rows="10" cols="30" th:field="*{remarks}" readonly></textarea>
           </td>
         </tr>
       </table>
