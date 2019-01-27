@@ -1,6 +1,7 @@
 package jp.co.ha.common.util;
 
 import java.util.List;
+import java.util.function.Function;
 
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.UnExpectedException;
@@ -72,7 +73,10 @@ public class StringUtil {
 	 * @return 判定結果
 	 */
 	public static boolean isEmpty(String target) {
-		return BeanUtil.isNull(target) || EMPTY.equals(target.trim());
+		Function<String, Boolean> isEmptyFunction = s -> {
+			return BeanUtil.isNull(s) || EMPTY.equals(s.trim());
+		};
+		return isEmptyFunction.apply(target);
 	}
 
 	/**

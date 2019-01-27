@@ -38,7 +38,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private HealthInfoSearchService healthInfoSearchService;
 
 	/**
-	 * 健康情報リストを取得する<br>
+	 * 健康情報リストを取得する
 	 *
 	 * @param form
 	 *     健康情報照会画面フォーム
@@ -74,7 +74,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	}
 
 	/**
-	 * 指定した文字列型のyyyy-MM-ddをDate型で返す<br>
+	 * 指定した文字列型のyyyy-MM-ddをDate型で返す
 	 *
 	 * @param date
 	 *     日付

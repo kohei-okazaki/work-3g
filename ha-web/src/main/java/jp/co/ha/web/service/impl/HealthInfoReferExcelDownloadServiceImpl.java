@@ -53,7 +53,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	}
 
 	/**
-	 * 健康情報照会リストをモデルリストに変換する<br>
+	 * 健康情報照会リストをモデルリストに変換する
 	 *
 	 * @param apiResponseList
 	 *     健康情報照会リスト
@@ -85,7 +85,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	}
 
 	/**
-	 * Excel設定情報を取得<br>
+	 * Excel設定情報を取得
 	 *
 	 * @param healthInfoFileSetting
 	 *     健康情報設定情報

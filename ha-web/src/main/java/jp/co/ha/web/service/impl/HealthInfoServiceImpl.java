@@ -73,7 +73,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	}
 
 	/**
-	 * 健康情報登録APIリクエストの設定を行う<br>
+	 * 健康情報登録APIリクエストの設定を行う
 	 *
 	 * @param form
 	 *     健康情報入力フォーム
