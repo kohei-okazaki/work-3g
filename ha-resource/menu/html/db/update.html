@@ -16,48 +16,48 @@
         <td>
           <div class="select cp_sl04">
             <select id="tableName">
-              <option>
+              <option value="">選択して下さい</option>
             </select>
           </div>
         </td>
       </tr>
-      <!-- 1 -->
       <tr>
-        <td colspan="2"><hr></td>
+        <td colspan="4"><hr></td>
       </tr>
       <tr>
         <th>
           <label>カラム名</label>
         </th>
         <td>
-          <input type="text" id="columnName1" size="16" placeholder="追加するカラム名" />
+          <div class="select cp_sl04">
+            <select id="columnName">
+            </select>
+          </div>
+        </td>
+        <th>
+          <label>値</label>
+        </th>
+        <td>
+          <input type="text" id="columnValue" name="columnValue">
         </td>
       </tr>
       <tr>
         <th>
-          <label>カラム型</label>
+          <label>条件:カラム名</label>
         </th>
         <td>
           <div class="select cp_sl04">
-            <select id="columnType1">
-              <option value="VARCHAR">VARCHAR</option>
-              <option value="DECIMAL">DECIMAL</option>
-              <option value="INT">INT</option>
-              <option value="DATE">DATE</option>
-              <option value="TIMESTAMP">TIMESTAMP</option>
+            <select id="whereColumnName">
             </select>
           </div>
         </td>
-      </tr>
-      <tr class="hideColumnSize1">
         <th>
-          <label>カラムサイズ</label>
+          <label>条件:値</label>
         </th>
         <td>
-          <input type="text" id="columnSize1" size="16" placeholder="追加するカラムサイズ" />
+          <input type="text" id="whereColumnValue" name="whereColumnValue">
         </td>
       </tr>
-      <!-- 1 -->
     </table>
 
     <div class="button">
@@ -76,121 +76,60 @@
   <script type="text/javascript" src="../../js/table.js"></script>
   <script type="text/javascript">
 
-    // カラム数
-    var columnCount = 1;
-
-    function validate() {
-      if ($("#tableName").val() === "") {
-        alert("テーブル名は必須です");
-        return true;
+    // テーブル名のセレクトボックスを初期化する
+    function initTableSelectBox() {
+      for (var i = 0; i < table.length; i++) {
+        var tableData = table[i];
+        $("select#tableName").append($("<option>").val(tableData.physicalName).text(tableData.logicalName));
       }
-      for (var i = 1; i < columnCount + 1; i++) {
-        if ($("#columnName" + i).val() === "") {
-          alert("カラム名は必須です");
-          return true;
-        } else if ($("#columnType" + i + " option:selected").val() === "VARCHAR" && $("#columnSize" + i).val() === "") {
-          alert("VARCHAR指定時、カラムサイズは必須です");
-          return true;
-        } else if ($("#columnType" + i + " option:selected").val() === "DECIMAL" && $("#columnSize" + i).val() === "") {
-          alert("DECIMAL指定時、カラムサイズは必須です");
-          return true;
-        }
-      }
-      return false;
-    }
-
-    function load() {
-      columnCount = 1;
-      $(".columnCount2").css("display", "none");
-      $(".columnCount3").css("display", "none");
-    }
-
-    // DDLを作成する
-    function createDdl() {
-
-      var ddl = "ALTER TABLE " + $("#tableName").val() + " ADD (";
-
-      for (var i = 1; i < columnCount + 1; i++) {
-        var type = $("#columnType" + i + " option:selected").val();
-        if (type === "VARCHAR" || type === "DECIMAL") {
-          type += "(" + $("#columnSize" + i).val() + ")";
-        }
-        ddl += "\r\n  " + $("#columnName" + i).val() + " " + type;
-        if (i !== columnCount) {
-          // カラムが最後でない場合
-          ddl += ",";
-        }
-      }
-      return ddl + "\r\n);";
+    };
+    
+    // update文を作成する
+    function createSql() {
+      var columnName = $("#columnName option:selected").val();
+      var columnValue = $("#columnValue").val();
+      var whereColumnName = $("#whereColumnName option:selected").val();
+      var whereColumnValue = $("#whereColumnValue").val();
+      var sql = "UPDATE " + $("#tableName" + " option:selected").val() + " SET (\r\n" 
+                          + "  " + columnName + " = '" + columnValue + "'\r\n)"
+                          + "\r\nWHERE "
+                          + whereColumnName + " = '" + whereColumnValue + "';";
+      return sql;
     }
 
     // 画面描画時の処理
     $(document).ready(function() {
+      // テーブル名をセレクトボックスに設定
+      initTableSelectBox();
 
-      // 初期化処理を行う
-      load();
-
-      // セレクトボックス変更時の処理
-      $("select#columnType1").change(function() {
-        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
-          $(".hideColumnSize1").css("display", "none");
-        } else {
-          $(".hideColumnSize1").css("display", "table-row");
+      // セレクトボックス変更時の処理を設定
+      $("select#tableName").change(function() {
+        var tableName = $(this).val();
+        $("select#columnName").children().remove();
+        $("select#whereColumnName").children().remove();
+        if (tableName === "") {
+          return;
         }
-      });
-      $("select#columnType2").change(function() {
-        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
-          $(".hideColumnSize2").css("display", "none");
-        } else {
-          $(".hideColumnSize2").css("display", "table-row");
-        }
-      });
-      $("select#columnType3").change(function() {
-        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
-          $(".hideColumnSize3").css("display", "none");
-        } else {
-          $(".hideColumnSize3").css("display", "table-row");
-        }
-      });
-
-      // 追加ボタン押下時の処理
-      $("input#add").click(function() {
-        if (0 < columnCount && columnCount < 3) {
-          columnCount += 1;
-          $(".columnCount" + columnCount).css("display", "table-row");
-        }
-      });
-
-      // 削除ボタン押下時の処理
-      $("input#remove").click(function() {
-        if (1 < columnCount && columnCount < 4) {
-          $(".columnCount" + columnCount).css("display", "none");
-          columnCount -= 1;
+        var columnList = getColumnList(tableName);
+        for (var i = 0; i < columnList.length; i++) {
+          var column = columnList[i];
+          $("select#columnName").append($("<option>").val(column.physicalName).text(column.logicalName));
+          $("select#whereColumnName").append($("<option>").val(column.physicalName).text(column.logicalName));
         }
       });
 
       // 作成ボタン押下時の処理
       $("input#create").click(function() {
-        if (validate()) {
-          return;
-        }
-        var ddl = createDdl();
-        $("#response").val(ddl);
+        var sql = createSql();
+        $("#response").val(sql);
       });
-
+      
       // 入力値クリアボタン押下時の処理
       $("input#inputClear").click(function() {
-        $("#tableName").val("");
-        for (var i = 1; i < columnCount + 1; i++) {
-          $("#columnName" + i).val("");
-          $("#columnSize" + i).val("");
-        }
+         $("#columnValue").val("");
+         $("#whereColumnValue").val("");
       });
-
-      // 結果クリアボタン押下時の処理
-      $("input#responseClear").click(function() {
-        $("#response").val("");
-      });
+      
     });
 
   </script>

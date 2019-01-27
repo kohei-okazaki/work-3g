@@ -4,56 +4,56 @@ var table = [
     logicalName: "健康情報",
     column : [
       {
-        physicalName: "健康情報ID",
-        logicalName: "HEALTH_INFO_ID",
+        logicalName: "健康情報ID",
+        physicalName: "HEALTH_INFO_ID",
         type: "INTEGER",
         size: ""
       },
       {
-        physicalName: "ユーザID",
-        logicalName: "USER_ID",
+        logicalName: "ユーザID",
+        physicalName: "USER_ID",
         type: "VARCHAR",
         size: "16"
       },
       {
-        physicalName: "身長",
-        logicalName: "HEIGHT",
+        logicalName: "身長",
+        physicalName: "HEIGHT",
         type: "DECIMAL",
         size: "6, 3"
       },
       {
-        physicalName: "体重",
-        logicalName: "WEIGHT",
+        logicalName: "体重",
+        physicalName: "WEIGHT",
         type: "DECIMAL",
         size: "6, 3"
       },
       {
-        physicalName: "BMI",
         logicalName: "BMI",
+        physicalName: "BMI",
         type: "DECIMAL",
         size: "6, 3"
       },
       {
-        physicalName: "標準体重",
-        logicalName: "STANDARD_WEIGHT",
+        logicalName: "標準体重",
+        physicalName: "STANDARD_WEIGHT",
         type: "DECIMAL",
         size: "6, 3"
       },
       {
-        physicalName: "健康情報ステータス",
-        logicalName: "HEALTH_INFO_STATUS",
+        logicalName: "健康情報ステータス",
+        physicalName: "HEALTH_INFO_STATUS",
         type: "VARCHAR",
         size: 2
       },
       {
-        physicalName: "更新日時",
-        logicalName: "UPDATE_DATE",
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
         type: "TIMESTAMP",
         size: ""
       },
       {
-        physicalName: "登録日時",
-        logicalName: "REG_DATE",
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
         type: "TIMESTAMP",
         size: ""
       }
@@ -64,50 +64,50 @@ var table = [
     logicalName: "アカウント情報",
     column : [
       {
-        physicalName: "ユーザID",
-        logicalName: "USER_ID",
+        logicalName: "ユーザID",
+        physicalName: "USER_ID",
         type: "VARCHAR",
         size: "16"
       },
       {
-        physicalName: "パスワード",
-        logicalName: "PASSWORD",
+        logicalName: "パスワード",
+        physicalName: "PASSWORD",
         type: "VARCHAR",
         size: "16"
       },
       {
-        physicalName: "削除フラグ",
-        logicalName: "DELETE_FLAG",
+        logicalName: "削除フラグ",
+        physicalName: "DELETE_FLAG",
         type: "VARCHAR",
         size: "1"
       },
       {
-        physicalName: "パスワード有効期限",
-        logicalName: "PASSWORD_EXPIRE",
+        logicalName: "パスワード有効期限",
+        physicalName: "PASSWORD_EXPIRE",
         type: "DATE",
         size: ""
       },
       {
-        physicalName: "備考",
-        logicalName: "REMARKS",
+        logicalName: "備考",
+        physicalName: "REMARKS",
         type: "VARCHAR",
         size: "256"
       },
       {
-        physicalName: "APIキー",
-        logicalName: "API_KEY",
+        logicalName: "APIキー",
+        physicalName: "API_KEY",
         type: "VARCHAR",
         size: "64"
       },
       {
-        physicalName: "更新日時",
-        logicalName: "UPDATE_DATE",
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
         type: "TIMESTAMP",
         size: ""
       },
       {
-        physicalName: "登録日時",
-        logicalName: "REG_DATE",
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
         type: "TIMESTAMP",
         size: ""
       }
@@ -118,44 +118,44 @@ var table = [
     logicalName: "健康情報ファイル設定",
     column : [
       {
-        physicalName: "ユーザID",
-        logicalName: "USER_ID",
+        logicalName: "ユーザID",
+        physicalName: "USER_ID",
         type: "VARCHAR",
         size: "16"
       },
       {
-        physicalName: "ヘッダーフラグ",
-        logicalName: "HEADER_FLAG",
+        logicalName: "ヘッダーフラグ",
+        physicalName: "HEADER_FLAG",
         type: "VARCHAR",
         size: "1"
       },
       {
-        physicalName: "フッターフラグ",
-        logicalName: "FOOTER_FLAG",
+        logicalName: "フッターフラグ",
+        physicalName: "FOOTER_FLAG",
         type: "VARCHAR",
         size: "1"
       },
       {
-        physicalName: "マスクフラグ",
-        logicalName: "MASK_FLAG",
+        logicalName: "マスクフラグ",
+        physicalName: "MASK_FLAG",
         type: "VARCHAR",
         size: "1"
       },
       {
-        physicalName: "囲い文字利用フラグ",
-        logicalName: "ENCLOSURE_CHAR_FLAG",
+        logicalName: "囲い文字利用フラグ",
+        physicalName: "ENCLOSURE_CHAR_FLAG",
         type: "VARCHAR",
         size: "1"
       },
       {
-        physicalName: "更新日時",
-        logicalName: "UPDATE_DATE",
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
         type: "TIMESTAMP",
         size: ""
       },
       {
-        physicalName: "登録日時",
-        logicalName: "REG_DATE",
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
         type: "TIMESTAMP",
         size: ""
       }
@@ -166,35 +166,45 @@ var table = [
     logicalName: "メール情報",
     column : [
       {
-        physicalName: "ユーザID",
-        logicalName: "USER_ID",
+        logicalName: "ユーザID",
+        physicalName: "USER_ID",
         type: "VARCHAR",
         size: "16"
       },
       {
-        physicalName: "メールアドレス",
-        logicalName: "MAIL_ADDRESS",
+        logicalName: "メールアドレス",
+        physicalName: "MAIL_ADDRESS",
         type: "VARCHAR",
         size: "64"
       },
       {
-        physicalName: "メールパスワード",
-        logicalName: "MAIL_PASSWORD",
+        logicalName: "メールパスワード",
+        physicalName: "MAIL_PASSWORD",
         type: "VARCHAR",
         size: "64"
       },
       {
-        physicalName: "更新日時",
-        logicalName: "UPDATE_DATE",
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
         type: "TIMESTAMP",
         size: ""
       },
       {
-        physicalName: "登録日時",
-        logicalName: "REG_DATE",
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
         type: "TIMESTAMP",
         size: ""
       }
     ]
   }
 ];
+
+// 指定したテーブル名のカラム情報をすべて取得する
+function getColumnList(tableName) {
+  for (var i = 0; i < table.length; i++) {
+    var tableData = table[i];
+    if (tableData.physicalName === tableName) {
+      return tableData.column;
+    }
+  }
+}
