@@ -123,6 +123,9 @@ public class DateUtil {
 	 * @return 文字列型の日付
 	 */
 	public static String toString(Date date, DateFormatType format) {
+		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
+			return StringUtil.EMPTY;
+		}
 		Function<Date, String> toStringFuction = d -> {
 			return new SimpleDateFormat(format.getValue()).format(d);
 		};
