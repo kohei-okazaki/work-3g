@@ -9,7 +9,7 @@ import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.mapper.AccountMapper;
 
 /**
- * アカウント情報検索サービスインターフェース実装クラス<br>
+ * アカウント情報検索サービスインターフェース実装クラス
  *
  */
 public class AccountSearchServiceImpl implements AccountSearchService {

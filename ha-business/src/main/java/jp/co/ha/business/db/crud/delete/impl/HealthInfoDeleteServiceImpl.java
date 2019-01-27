@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
- * 健康情報削除サービス実装クラス
+ * 健康情報削除サービスインターフェース実装クラス
  *
  */
 public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {

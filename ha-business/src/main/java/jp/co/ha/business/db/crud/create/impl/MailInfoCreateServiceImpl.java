@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
- * メール情報作成サービスインターフェース実装クラス<br>
+ * メール情報作成サービスインターフェース実装クラス
  *
  */
 public class MailInfoCreateServiceImpl implements MailInfoCreateService {
