@@ -11,16 +11,14 @@
 </head>
 <body>
 
-
-  <h1>
-    <img class="headericon" alt="アカウント登録完了画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
-    アカウント登録完了画面
-  </h1>
   <div th:replace="layout/layout :: header"></div>
 
   <!--/* 完了画面 */-->
   <div align="center" class="contentLayout">
-    <p>完了しました</p>
+    <h2 class="menuTitle">
+      <img class="headericon" alt="アカウント登録完了画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">アカウント登録完了画面
+    </h2>
+    <label>完了しました</label>
     <br><br>
     <table>
       <tr>
@@ -36,7 +34,6 @@
   <div th:replace="layout/layout :: footer"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/accountCreate.js" th:src="@{/resources/js/accountRegist.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
   <script type="text/javascript">
 

@@ -11,16 +11,14 @@
 </head>
 <body>
 
-
-  <h1>
-    <img class="headericon" alt="アカウント登録確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
-    アカウント登録確認画面
-  </h1>
   <div th:replace="layout/layout :: header"></div>
 
   <!--/* 確認画面 */-->
-  <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${accountRegistForm}">
-    <div align="center" class="contentLayout">
+  <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="アカウント登録確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">アカウント登録確認画面
+    </h2>
+    <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${accountRegistForm}">
       <table>
         <tr>
           <th>
@@ -69,13 +67,12 @@
           </td>
         </tr>
       </table>
-    </div>
-  </form>
+    </form>
+  </div>
 
   <div th:replace="layout/layout :: footer"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/accountCreate.js" th:src="@{/resources/js/accountRegist.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
   <script type="text/javascript">
     $(function() {

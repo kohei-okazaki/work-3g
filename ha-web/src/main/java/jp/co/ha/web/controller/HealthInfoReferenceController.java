@@ -87,9 +87,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 */
 	@ModelAttribute
 	public HealthInfoReferenceForm setUpForm() {
-		HealthInfoReferenceForm resultSearchForm = new HealthInfoReferenceForm();
-		resultSearchForm.setRegDateSelectFlag(StringUtil.FALSE_FLAG);
-		return resultSearchForm;
+		HealthInfoReferenceForm form = new HealthInfoReferenceForm();
+		form.setRegDateSelectFlag(StringUtil.FALSE_FLAG);
+		return form;
 	}
 
 	/**
@@ -193,8 +193,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		try {
 			csvDownloadService.execute(response.getWriter(), conf, service.toModelList(userId, resultList));
-		} catch (AppIOException e) {
-			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
 		} catch (IOException e) {
 			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
 		}

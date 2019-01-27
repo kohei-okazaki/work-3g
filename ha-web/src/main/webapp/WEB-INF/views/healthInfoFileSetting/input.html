@@ -11,20 +11,18 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 </head>
-
 <body>
-  <h1>
-    <img class="headericon" alt="ファイル設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
-    ファイル設定入力画面
-  </h1>
 
   <div th:replace="layout/layout :: header"></div>
 
   <div th:replace="./common/navigation.html"></div>
 
-   <!--/* 入力画面 */-->
-  <form id="healthInfoFileSettingForm" action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
-    <div align="center" class="contentLayout">
+  <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="ファイル設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">ファイル設定入力画面
+    </h2>
+    <!--/* 入力画面 */-->
+    <form id="healthInfoFileSettingForm" action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
@@ -33,7 +31,7 @@
       <table>
         <tr>
           <th>
-            <p>ユーザID</p>
+            <label>ユーザID</label>
           </th>
           <td>
             <p th:text="*{userId}"></p>
@@ -42,7 +40,7 @@
         </tr>
         <tr>
           <th>
-            <p>ヘッダ利用</p>
+            <label>ヘッダ利用</label>
           </th>
           <td>
             <div class="radio">
@@ -55,7 +53,7 @@
         </tr>
         <tr>
           <th>
-            <p>フッタ利用</p>
+            <label>フッタ利用</label>
           </th>
           <td>
             <div class="radio">
@@ -68,7 +66,7 @@
         </tr>
         <tr>
           <th>
-            <p>マスク利用</p>
+            <label>マスク利用</label>
           </th>
           <td>
             <div class="radio">
@@ -81,7 +79,7 @@
         </tr>
         <tr>
           <th>
-            <p>囲み文字利用</p>
+            <label>囲み文字利用</label>
           </th>
           <td>
             <div class="radio">
@@ -103,8 +101,8 @@
           </td>
         </tr>
       </table>
-    </div>
-  </form>
+    </form>
+  </div>
 
   <div th:replace="layout/layout :: footer"></div>
 

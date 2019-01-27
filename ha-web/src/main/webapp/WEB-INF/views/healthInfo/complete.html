@@ -12,13 +12,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 </head>
-
 <body>
-
-  <h1 class="title">
-    <img class="headericon" alt="確認" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
-    健康情報入力完了画面
-  </h1>
 
   <div th:replace="layout/layout :: header"></div>
 
@@ -26,6 +20,9 @@
 
   <!--/* 完了画面 */-->
   <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="確認" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">健康情報入力完了画面
+    </h2>
     <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
     <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
 

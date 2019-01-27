@@ -111,6 +111,23 @@
   border-right-color: #32cd32;
 }
 
+ul>li {
+  display: inline-block;
+}
+
+ul>li>a {
+  padding: 15px 30px;
+  display: block;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+}
+
+ul>li:hover>a {
+  background-color: #efefef;
+  color: #444;
+}
+
 .navigation {
   text-shadow: 0 2px 0 hsla(0, 0%, 0%, .25);
 }

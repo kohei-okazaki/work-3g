@@ -12,13 +12,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 </head>
-
 <body>
-
-  <h1>
-    <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:src="@{/resources/image/icon_input.jpg}">
-    健康情報ファイル確認画面
-  </h1>
 
   <div th:replace="layout/layout :: header"></div>
 
@@ -33,6 +27,9 @@
 
   <!--/* 確認画面 */-->
   <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:src="@{/resources/image/icon_input.jpg}"> 健康情報ファイル確認画面
+    </h2>
     <form action="./complete.html" th:action="@{./complete.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <table>
         <tr>

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.csv.writer.ReferenceCsvWriter;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
@@ -23,7 +22,7 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(PrintWriter pw, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList) throws BaseException {
+	public void execute(PrintWriter pw, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList) {
 		try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf, pw)) {
 			// CSVに書込
 			writer.execute(modelList);

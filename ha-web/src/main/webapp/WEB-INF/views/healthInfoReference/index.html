@@ -13,19 +13,17 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.css}">
 </head>
-
 <body>
-  <h1>
-    <img class="headericon" alt="健康情報照会画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
-    健康情報照会画面
-  </h1>
 
   <div th:replace="layout/layout :: header"></div>
 
   <div th:replace="./common/navigation.html"></div>
 
-  <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
-    <div align="center" class="contentLayout">
+  <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="健康情報照会画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">健康情報照会画面
+    </h2>
+    <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
@@ -120,8 +118,8 @@
           </tr>
         </table>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 
   <div th:replace="layout/layout :: footer"></div>
 

@@ -9,19 +9,19 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
 </head>
-
 <body>
-  <h1>
-    <img class="headericon" alt="エラー画面" src="../resources/image/icon_error.png" th:src="@{/resources/image/icon_error.png}">
-    エラー画面
-  </h1>
 
   <div th:replace="layout/layout :: header"></div>
+
   <div class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="エラー画面" src="../resources/image/icon_error.png" th:src="@{/resources/image/icon_error.png}">エラー画面
+    </h2>
     <div>システムエラーが発生しました。</div>
     <br>
     <div>再度ログインし操作を行ってください。</div>
   </div>
+
   <div th:replace="layout/layout :: footer"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>

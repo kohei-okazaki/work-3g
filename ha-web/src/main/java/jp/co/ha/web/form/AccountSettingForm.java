@@ -57,8 +57,8 @@ public class AccountSettingForm implements BaseForm {
 	@Mask
 	@Required(message = "APIキーが未入力です")
 	private String apiKey;
-	/** パスワード有効期限日 */
-	@Required(message = "パスワード有効期限日が未入力です")
+	/** パスワード有効期限 */
+	@Required(message = "パスワード有効期限が未入力です")
 	private String passwordExpire;
 
 	/**

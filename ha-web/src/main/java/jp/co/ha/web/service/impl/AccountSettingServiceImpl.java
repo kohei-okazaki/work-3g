@@ -11,7 +11,9 @@ import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.web.form.AccountSettingForm;
@@ -98,6 +100,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 */
 	private void mergeAccount(Account account, AccountSettingForm form) {
 		BeanUtil.copy(form, account, List.of("userId"));
+		account.setPasswordExpire(DateUtil.toDate(form.getPasswordExpire(), DateFormatType.YYYYMMDD));
 	}
 
 	/**
@@ -108,10 +111,8 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * @return メール情報
 	 */
 	private MailInfo convertMailInfo(AccountSettingForm form) {
-
 		MailInfo mailInfo = new MailInfo();
 		BeanUtil.copy(form, mailInfo);
-
 		return mailInfo;
 	}
 
