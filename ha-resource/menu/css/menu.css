@@ -28,37 +28,29 @@
 }
 
 .accordion1 .inner li.content1-1 {
-  background: #F48FB1;
+  background: #F8BBD0;
 }
 
 .accordion1 .inner li.content1-2 {
   background: #F8BBD0;
 }
 
-.accordion1 .inner li.content1-3 {
-  background: #FCE4EC;
-}
-
 .accordion1 .inner li.content2-1 {
-  background: #FFF59D;
-}
-
-.accordion1 .inner li.content2-2 {
   background: #FFF9C4;
 }
 
-.accordion1 .inner li.content2-3 {
-  background: #FFFDE7;
-}
-
 .accordion1 .inner li.content3-1 {
-  background: #C5E1A5;
+  background: #F1F8E9;
 }
 
 .accordion1 .inner li.content3-2 {
-  background: #DCEDC8;
+  background: #F1F8E9;
 }
 
 .accordion1 .inner li.content3-3 {
+  background: #F1F8E9;
+}
+
+.accordion1 .inner li.content3-4 {
   background: #F1F8E9;
 }

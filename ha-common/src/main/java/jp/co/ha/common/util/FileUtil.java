@@ -66,7 +66,7 @@ public class FileUtil {
 	}
 
 	/**
-	 * 指定した<code>srcFileList</code>を<code>zipFile</code>に圧縮する<br>
+	 * 指定した<code>srcFileList</code>を<code>zipFile</code>に圧縮する
 	 *
 	 * @param srcFileList
 	 *     zipファイルに含めたいファイルのリスト
@@ -223,7 +223,7 @@ public class FileUtil {
 	/**
 	 * ファイル拡張子の列挙
 	 */
-	public static enum FileSuffix {
+	public static enum FileExtension implements BaseEnum {
 
 		/** csv */
 		CSV(".csv"),
@@ -243,15 +243,14 @@ public class FileUtil {
 		 * @param value
 		 *     値
 		 */
-		private FileSuffix(String value) {
+		private FileExtension(String value) {
 			this.value = value;
 		}
 
 		/**
-		 * 値を返す
-		 *
-		 * @return value
+		 * {@inheritDoc}
 		 */
+		@Override
 		public String getValue() {
 			return this.value;
 		}
@@ -260,12 +259,12 @@ public class FileUtil {
 		 * 指定したファイル拡張子列挙が自身と一致するか判定する<br>
 		 * 一致する場合true, それ以外の場合false<br>
 		 *
-		 * @param suffix
+		 * @param fileExtension
 		 *     ファイル拡張子列挙
 		 * @return 判定結果
 		 */
-		public boolean is(FileSuffix suffix) {
-			return this == suffix;
+		public boolean is(FileExtension fileExtension) {
+			return this == fileExtension;
 		}
 	}
 

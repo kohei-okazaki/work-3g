@@ -1,6 +1,4 @@
-package jp.co.ha.common.api.interceptor;
-
-import jp.co.ha.common.web.interceptor.BaseInterceptor;
+package jp.co.ha.common.interceptor;
 
 /**
  * APIの基底インターセプター

@@ -24,7 +24,7 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
@@ -73,7 +73,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	}
 
 	/**
-	 * 健康情報登録APIリクエストの設定を行う<br>
+	 * 健康情報登録APIリクエストの設定を行う
 	 *
 	 * @param form
 	 *     健康情報入力フォーム
@@ -136,7 +136,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		CsvConfig csvConfig = new CsvConfig();
 		var fileName = "healthInfoRegist_"
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
-				+ FileSuffix.CSV.getValue();
+				+ FileExtension.CSV.getValue();
 		csvConfig.setFileName(fileName);
 		csvConfig.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
 		csvConfig.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));

@@ -1,6 +1,7 @@
 package jp.co.ha.common.util;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.UnExpectedException;
@@ -72,7 +73,8 @@ public class StringUtil {
 	 * @return 判定結果
 	 */
 	public static boolean isEmpty(String target) {
-		return BeanUtil.isNull(target) || EMPTY.equals(target.trim());
+		Predicate<String> isEmpty = s -> s == null || "".equals(s);
+		return isEmpty.test(target);
 	}
 
 	/**

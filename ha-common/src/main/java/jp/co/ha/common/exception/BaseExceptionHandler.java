@@ -36,10 +36,11 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 
 		if (e instanceof BaseException) {
 			BaseException be = (BaseException) e;
-			if (LogLevel.ERROR.is(be.getErrorCode().getLogLevel())) {
+			LogLevel level = be.getErrorCode().getLogLevel();
+			if (LogLevel.ERROR.is(level)) {
 				// ERRORの場合
 				LOG.error(errorMessage, be);
-			} else if (LogLevel.WARN.is(be.getErrorCode().getLogLevel())) {
+			} else if (LogLevel.WARN.is(level)) {
 				// WARNの場合
 				LOG.warn(errorMessage, be);
 			}

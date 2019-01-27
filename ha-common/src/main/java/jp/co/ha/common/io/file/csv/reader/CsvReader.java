@@ -32,7 +32,7 @@ import jp.co.ha.common.util.StringUtil;
 public abstract class CsvReader<T extends BaseCsvModel> {
 
 	/** LOG */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(CsvReader.class);
 
 	/**
 	 * 指定されたアップロードファイルを読み込み、CSVモデルリストを返す

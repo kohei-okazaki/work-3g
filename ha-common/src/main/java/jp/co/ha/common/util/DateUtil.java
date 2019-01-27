@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.function.Function;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -46,25 +47,22 @@ public class DateUtil {
 	/**
 	 * 指定した文字列型の日付を指定したフォーマットのDate型で返す
 	 *
-	 * @param target
+	 * @param strDate
 	 *     対象日付
 	 * @param format
-	 *     フォーマット
+	 *     Dateフォーマット
 	 * @return 日付
 	 */
-	public static Date toDate(String target, DateFormatType format) {
-
-		// フォーマットを設定
-		SimpleDateFormat sdf = new SimpleDateFormat(format.getValue());
-		Date result = null;
-		try {
-			// Date型に変換
-			result = sdf.parse(target);
-		} catch (ParseException e) {
-			LOG.error("指定された日付のフォーマットが不正です format -> " + format.getValue(), e);
-		}
-		return result;
-
+	public static Date toDate(String strDate, DateFormatType format) {
+		Function<String, Date> toDateFunction = s -> {
+			try {
+				return new SimpleDateFormat(format.getValue()).parse(s);
+			} catch (ParseException e) {
+				LOG.error("指定された日付のフォーマットが不正です format -> " + format.getValue(), e);
+				return null;
+			}
+		};
+		return toDateFunction.apply(strDate);
 	}
 
 	/**
@@ -118,20 +116,20 @@ public class DateUtil {
 	/**
 	 * Date型を指定されたフォーマットに変える
 	 *
-	 * @param targetDate
+	 * @param date
 	 *     対象日付
 	 * @param format
 	 *     Dateフォーマット
 	 * @return 文字列型の日付
 	 */
-	public static String toString(Date targetDate, DateFormatType format) {
-
+	public static String toString(Date date, DateFormatType format) {
 		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
 		}
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat(format.getValue());
-		return dateFormat.format(targetDate);
+		Function<Date, String> toStringFuction = d -> {
+			return new SimpleDateFormat(format.getValue()).format(d);
+		};
+		return toStringFuction.apply(date);
 	}
 
 	/**

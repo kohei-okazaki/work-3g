@@ -3,12 +3,10 @@ package jp.co.ha.api.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jp.co.ha.business.api.service.ApiConnectionService;
 import jp.co.ha.business.api.service.HealthInfoReferenceService;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.service.impl.HealthInfoReferenceServiceImpl;
 import jp.co.ha.business.api.service.impl.HealthInfoRegistServiceImpl;
-import jp.co.ha.business.db.DataBaseCommonExecutor;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.create.impl.HealthInfoCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -21,7 +19,7 @@ import jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.healthInfo.impl.HealthInfoFunctionServiceImpl;
 
 /**
- * Businessの設定クラス
+ * BusinessのBean登録クラス
  *
  */
 @Configuration
@@ -75,26 +73,6 @@ public class BusinessConfig {
 	@Bean
 	public HealthInfoFunctionService healthInfoFunctionService() {
 		return new HealthInfoFunctionServiceImpl();
-	}
-
-	/**
-	 * DB共通処理
-	 *
-	 * @return DataBaseCommonExecutor
-	 */
-	@Bean
-	public DataBaseCommonExecutor dataBaseCommonExecutor() {
-		return new DataBaseCommonExecutor();
-	}
-
-	/**
-	 * API通信共通処理
-	 *
-	 * @return ApiConnectionService
-	 */
-	@Bean
-	public ApiConnectionService apiConnectionService() {
-		return new ApiConnectionService();
 	}
 
 	/**

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
@@ -41,18 +41,18 @@ public class AddColumnBuilder extends CommonBuilder {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 
 		for (Row row : targetRowList) {
-			String ddePrefix = "ALTER TABLE ";
+			String ddlPrefix = "ALTER TABLE ";
 			String ddlSuffix = ";";
 			String tableName = row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 			String columnName = row.getCell(CellPositionType.COLUMN_NAME).getValue();
 			String columnType = getColumnType(row);
-			String ddl = ddePrefix + tableName + " ADD " + columnName + " " + columnType + ddlSuffix;
+			String ddl = ddlPrefix + tableName + " ADD " + columnName + " " + columnType + ddlSuffix;
 
 			body.add(ddl);
 		}
 
 		FileConfig fileConf = getFileConfig(ExecuteType.DDL);
-		fileConf.setFileName("test" + FileSuffix.SQL.getValue());
+		fileConf.setFileName("test" + FileExtension.SQL.getValue());
 		fileConf.setData(body.toString());
 		FileFactory.create(fileConf);
 	}

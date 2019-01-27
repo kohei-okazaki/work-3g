@@ -45,7 +45,7 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	}
 
 	/**
-	 * フォーム情報を健康情報ファイル設定情報Entityに変換する<br>
+	 * フォーム情報を健康情報ファイル設定情報Entityに変換する
 	 *
 	 * @param isFirstReg
 	 *     初回登録かどうか

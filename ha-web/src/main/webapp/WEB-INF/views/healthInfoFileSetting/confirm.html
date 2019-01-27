@@ -27,65 +27,65 @@
     <div align="center" class="contentLayout">
       <table>
         <tr>
-          <th class="header" width="130px">
-            <p>ユーザID</p>
+          <th>
+            <label>ユーザID</label>
           </th>
-          <td width="250px">
-            <input type="text" maxlength="16" required th:field="*{userId}" readonly="readonly" />
+          <td>
+            <input type="text" maxlength="16" required th:field="*{userId}" readonly />
           </td>
         </tr>
         <tr>
-          <th class="header">
-            <p>ヘッダ利用</p>
+          <th>
+            <label>ヘッダ利用</label>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div th:if="${form.headerFlag} == 1">
-              <p>する</p>
+              <label>する</label>
             </div>
             <div th:if="${form.headerFlag} == 0">
-              <p>しない</p>
+              <label>しない</label>
             </div>
             <input type="hidden" th:field="${form.headerFlag}" />
           </td>
         </tr>
         <tr>
-          <th class="header">
-            <p>フッタ利用</p>
+          <th>
+            <label>フッタ利用</label>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div th:if="${form.footerFlag} == 1">
-              <p>する</p>
+              <label>する</label>
             </div>
             <div th:if="${form.footerFlag} == 0">
-              <p>しない</p>
+              <label>しない</label>
             </div>
             <input type="hidden" th:field="${form.footerFlag}" />
           </td>
         </tr>
         <tr>
-          <th class="header">
-            <p>マスク利用</p>
+          <th>
+            <label>マスク利用</label>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div th:if="${form.maskFlag} == 1">
-              <p>する</p>
+              <label>する</label>
             </div>
             <div th:if="${form.maskFlag} == 0">
-              <p>しない</p>
+              <label>しない</label>
             </div>
             <input type="hidden" th:field="${form.maskFlag}" />
           </td>
         </tr>
         <tr>
-          <th class="header">
-            <p>囲み文字利用</p>
+          <th>
+            <label>囲み文字利用</label>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div th:if="${form.enclosureCharFlag} == 1">
-              <p>する</p>
+              <label>する</label>
             </div>
             <div th:if="${form.enclosureCharFlag} == 0">
-              <p>しない</p>
+              <label>しない</label>
             </div>
             <input type="hidden" th:field="${form.enclosureCharFlag}" />
           </td>

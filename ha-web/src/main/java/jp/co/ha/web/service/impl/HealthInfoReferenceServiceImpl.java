@@ -19,7 +19,7 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -38,7 +38,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private HealthInfoSearchService healthInfoSearchService;
 
 	/**
-	 * 健康情報リストを取得する<br>
+	 * 健康情報リストを取得する
 	 *
 	 * @param form
 	 *     健康情報照会画面フォーム
@@ -74,7 +74,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	}
 
 	/**
-	 * 指定した文字列型のyyyy-MM-ddをDate型で返す<br>
+	 * 指定した文字列型のyyyy-MM-ddをDate型で返す
 	 *
 	 * @param date
 	 *     日付
@@ -137,7 +137,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		CsvConfig conf = new CsvConfig();
 		var fileName = "healthInfoReference_"
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
-				+ FileSuffix.CSV.getValue();
+				+ FileExtension.CSV.getValue();
 		conf.setFileName(fileName);
 		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));

@@ -57,6 +57,9 @@ public class AccountSettingForm implements BaseForm {
 	@Mask
 	@Required(message = "APIキーが未入力です")
 	private String apiKey;
+	/** パスワード有効期限日 */
+	@Required(message = "パスワード有効期限日が未入力です")
+	private String passwordExpire;
 
 	/**
 	 * userIdを返す
@@ -189,6 +192,25 @@ public class AccountSettingForm implements BaseForm {
 	 */
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
+	}
+
+	/**
+	 * passwordExpireを返す
+	 *
+	 * @return passwordExpire
+	 */
+	public String getPasswordExpire() {
+		return passwordExpire;
+	}
+
+	/**
+	 * passwordExpireを設定する
+	 *
+	 * @param passwordExpire
+	 *     パスワード有効期限日
+	 */
+	public void setPasswordExpire(String passwordExpire) {
+		this.passwordExpire = passwordExpire;
 	}
 
 }

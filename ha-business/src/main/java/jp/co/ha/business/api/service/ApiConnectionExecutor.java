@@ -17,10 +17,10 @@ import jp.co.ha.common.log.LoggerFactory;
  *
  */
 @Aspect
-public class ApiConnectionService {
+public class ApiConnectionExecutor {
 
 	/** LOG */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOG = LoggerFactory.getLogger(ApiConnectionExecutor.class);
 
 	/**
 	 * APIのリクエスト/レスポンスログ(正常系)を出力する<br>

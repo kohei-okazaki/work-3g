@@ -40,6 +40,10 @@
       <mvc:mapping path="/**" />
       <bean class="jp.co.ha.business.interceptor.AuthInterceptor" />
     </mvc:interceptor>
+    <mvc:interceptor>
+      <mvc:mapping path="/**" />
+      <bean class="jp.co.ha.business.interceptor.RequestInterceptor" />
+    </mvc:interceptor>
   </mvc:interceptors>
 
 </beans>

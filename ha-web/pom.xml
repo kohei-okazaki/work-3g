@@ -12,7 +12,7 @@
   <packaging>war</packaging>
 
   <properties>
-    <org.thymeleaf-version>3.0.9.RELEASE</org.thymeleaf-version>
+    <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
     <org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
   </properties>
 
@@ -28,6 +28,11 @@
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring5</artifactId>
+      <version>${org.thymeleaf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf</artifactId>
       <version>${org.thymeleaf-version}</version>
     </dependency>
     <dependency>
@@ -54,6 +59,7 @@
   </dependencies>
 
   <build>
+    <finalName>ha-web</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

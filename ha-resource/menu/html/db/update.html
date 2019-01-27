@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DB -更新-</title>
+<link rel="stylesheet" type="text/css" href="../../css/common.css">
+</head>
+<body>
+  <h1>DB -更新-</h1>
+  <div class="contentLayout">
+    <table>
+      <tr>
+        <th>
+          <label>テーブル名</label>
+        </th>
+        <td>
+          <div class="select cp_sl04">
+            <select id="tableName">
+              <option value="">選択して下さい</option>
+            </select>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4"><hr></td>
+      </tr>
+      <tr>
+        <th>
+          <label>カラム名</label>
+        </th>
+        <td>
+          <div class="select cp_sl04">
+            <select id="columnName">
+            </select>
+          </div>
+        </td>
+        <th>
+          <label>値</label>
+        </th>
+        <td>
+          <input type="text" id="columnValue" name="columnValue">
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label>条件:カラム名</label>
+        </th>
+        <td>
+          <div class="select cp_sl04">
+            <select id="whereColumnName">
+            </select>
+          </div>
+        </td>
+        <th>
+          <label>条件:値</label>
+        </th>
+        <td>
+          <input type="text" id="whereColumnValue" name="whereColumnValue">
+        </td>
+      </tr>
+    </table>
+
+    <div class="button">
+      <input id="add" type="button" value="追 加" />
+      <input id="remove" type="button" value="削 除" />
+    </div>
+    <div class="button">
+      <input id="create" type="button" value="作 成" />
+      <input id="inputClear" type="button" value="入力値 クリア" />
+      <input id="responseClear" type="button" value="結果 クリア" />
+    </div>
+    <textarea id="response" cols=80 rows=10></textarea>
+  </div>
+
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../../js/table.js"></script>
+  <script type="text/javascript">
+
+    // テーブル名のセレクトボックスを初期化する
+    function initTableSelectBox() {
+      for (var i = 0; i < table.length; i++) {
+        var tableData = table[i];
+        $("select#tableName").append($("<option>").val(tableData.physicalName).text(tableData.logicalName));
+      }
+    };
+    
+    // update文を作成する
+    function createSql() {
+      var columnName = $("#columnName option:selected").val();
+      var columnValue = $("#columnValue").val();
+      var whereColumnName = $("#whereColumnName option:selected").val();
+      var whereColumnValue = $("#whereColumnValue").val();
+      var sql = "UPDATE " + $("#tableName" + " option:selected").val() + " SET (\r\n" 
+                          + "  " + columnName + " = '" + columnValue + "'\r\n)"
+                          + "\r\nWHERE "
+                          + whereColumnName + " = '" + whereColumnValue + "';";
+      return sql;
+    }
+
+    // 画面描画時の処理
+    $(document).ready(function() {
+      // テーブル名をセレクトボックスに設定
+      initTableSelectBox();
+
+      // セレクトボックス変更時の処理を設定
+      $("select#tableName").change(function() {
+        var tableName = $(this).val();
+        $("select#columnName").children().remove();
+        $("select#whereColumnName").children().remove();
+        if (tableName === "") {
+          return;
+        }
+        var columnList = getColumnList(tableName);
+        for (var i = 0; i < columnList.length; i++) {
+          var column = columnList[i];
+          $("select#columnName").append($("<option>").val(column.physicalName).text(column.logicalName));
+          $("select#whereColumnName").append($("<option>").val(column.physicalName).text(column.logicalName));
+        }
+      });
+
+      // 作成ボタン押下時の処理
+      $("input#create").click(function() {
+        var sql = createSql();
+        $("#response").val(sql);
+      });
+      
+      // 入力値クリアボタン押下時の処理
+      $("input#inputClear").click(function() {
+         $("#columnValue").val("");
+         $("#whereColumnValue").val("");
+      });
+      
+    });
+
+  </script>
+</body>
+</html>

@@ -37,7 +37,7 @@ import jp.co.ha.web.view.ManageWebView;
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
 	/** LOG */
-	private static Logger LOG = LoggerFactory.getLogger(AccountRegistController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AccountRegistController.class);
 	/** MessageSource */
 	@Autowired
 	private MessageSource messageSource;

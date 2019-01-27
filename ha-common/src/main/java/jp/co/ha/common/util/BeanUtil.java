@@ -91,8 +91,8 @@ public class BeanUtil {
 	 * コピー時にコピーを行わないfieldかどうかを判定する<br>
 	 * 以下の場合、そのfieldではコピーを行わない<br>
 	 * <ul>
-	 * <li>fieldNameが"serialVersionUID"の場合</li>
-	 * <li>fieldNameがignoreListに含まれてる場合</li>
+	 * <li><code>fieldName</code>が"serialVersionUID"の場合</li>
+	 * <li><code>fieldName</code>がignoreListに含まれてる場合</li>
 	 * </ul>
 	 *
 	 * @param ignoreList
@@ -106,7 +106,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * コピー対象かどうか判定する<br>
+	 * コピー対象かどうか判定する
 	 *
 	 * @param src
 	 *     Field コピー元のフィールド
@@ -148,7 +148,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * パラメータ引数にしているクラス型を取得する<br>
+	 * パラメータ引数にしているクラス型を取得する
 	 *
 	 * @param clazz
 	 *     対象クラス
@@ -159,7 +159,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * パラメータ引数にしているクラス型を取得する<br>
+	 * パラメータ引数にしているクラス型を取得する
 	 *
 	 * @param clazz
 	 *     対象クラス
@@ -173,7 +173,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * 指定したクラス型のフィールドをリストで返す<br>
+	 * 指定したクラス型のフィールドをリストで返す
 	 *
 	 * @param clazz
 	 *     クラス型

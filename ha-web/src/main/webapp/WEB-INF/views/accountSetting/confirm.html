@@ -29,58 +29,66 @@
     <div align="center" class="contentLayout">
       <table>
         <tr>
-          <th class="header" width="130px">
+          <th>
             <p>削除</p>
           </th>
-          <td class="data" width="250px">
+          <td>
             <div th:if="${form.deleteFlag} == 1">
               <p>する</p>
             </div>
             <div th:if="${form.deleteFlag} == 0">
               <p>しない</p>
             </div>
-            <input type="hidden" name="deleteFlag" th:field="${form.deleteFlag}" />
+            <input type="hidden" th:field="${form.deleteFlag}" />
           </td>
         </tr>
         <tr>
-          <th class="header">
+          <th>
             <p>ユーザID</p>
           </th>
-          <td class="data">
+          <td>
             <p th:text="${form.userId}"></p>
-            <input type="hidden" name="userId" th:field="${form.userId}" />
+            <input type="hidden" th:field="${form.userId}" />
           </td>
         </tr>
         <tr>
-          <th class="header">
+          <th>
             <p>パスワード</p>
           </th>
-          <td class="data">
-            <input type="text" name="password" required="required" th:field="${form.password}" readonly="readonly" />
+          <td>
+            <input type="text" th:field="${form.password}" readonly />
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th>
+            <label>パスワード有効期限日</label>
+          </th>
+          <td>
+            <input type="text" th:field="*{passwordExpire}" readonly />
+          </td>
+        </tr>
+        <tr>
+          <th>
             <p>メールアドレス</p>
           </th>
-          <td class="data">
-            <input type="text" name="mailAddress" required="required" th:field="${form.mailAddress}" readonly="readonly" />
+          <td>
+            <input type="text" th:field="${form.mailAddress}" readonly />
           </td>
         </tr>
         <tr>
-          <th class="header" width="130px">
+          <th>
             <p>メールパスワード</p>
           </th>
-          <td class="data">
-            <input type="text" name="mailPassword" required="required" th:field="${form.mailPassword}" readonly="readonly" />
+          <td>
+            <input type="text" th:field="${form.mailPassword}" readonly />
           </td>
         </tr>
         <tr>
-          <th class="header">
+          <th>
             <p>備 考</p>
           </th>
-          <td class="data">
-            <textarea rows="10" cols="30" name="remarks" th:field="${form.remarks}" readonly="readonly"></textarea>
+          <td>
+            <textarea rows="10" cols="30" th:field="${form.remarks}" readonly></textarea>
           </td>
         </tr>
       </table>

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-import jp.co.ha.common.util.FileUtil.FileSuffix;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
@@ -68,7 +68,7 @@ public class EntityBuilder extends CommonBuilder {
 			}
 
 			FileConfig fileConf = getFileConfig(ExecuteType.ENTITY);
-			fileConf.setFileName(toJavaFileName(table) + FileSuffix.JAVA.getValue());
+			fileConf.setFileName(toJavaFileName(table) + FileExtension.JAVA.getValue());
 			fileConf.setData(build(source));
 			FileFactory.create(fileConf);
 		}
