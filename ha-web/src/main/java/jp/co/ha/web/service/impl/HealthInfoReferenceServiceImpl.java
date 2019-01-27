@@ -94,10 +94,10 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
 		List<HealthInfo> entityList = getHealthInfoList(form, userId);
 		List<HealthInfoReferenceResponse> resultList = new ArrayList<>();
-		entityList.stream().forEach(entity -> {
+		entityList.stream().forEach(e -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
-			BeanUtil.copy(entity, response);
-			response.setRegDate(DateUtil.toString(entity.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			BeanUtil.copy(e, response);
+			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			resultList.add(response);
 		});
 		return resultList;

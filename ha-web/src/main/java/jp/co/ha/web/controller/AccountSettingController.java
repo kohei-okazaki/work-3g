@@ -18,7 +18,9 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.MailInfo;
@@ -69,6 +71,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
 		BeanUtil.copy(account, accountSettingForm);
+		accountSettingForm.setPasswordExpire(DateUtil.toString(account.getPasswordExpire(), DateFormatType.YYYYMMDD));
 		if (BeanUtil.notNull(mailInfo)) {
 			BeanUtil.copy(mailInfo, accountSettingForm, List.of("userId"));
 		}

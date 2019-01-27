@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 
 /**
- * 健康情報ファイル設定削除サービス実装クラス
+ * 健康情報ファイル設定削除サービスインターフェース実装クラス
  *
  */
 public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSettingDeleteService {

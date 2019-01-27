@@ -12,19 +12,17 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 </head>
-
 <body>
 
-  <h1 class="title">
-    <img class="headericon" alt="健康情報入力確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">
-    健康情報入力確認画面
-  </h1>
-
   <div th:replace="layout/layout :: header"></div>
+
   <div th:replace="./common/navigation.html"></div>
 
   <!--/* 確認画面 */-->
   <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="健康情報入力確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">健康情報入力確認画面
+    </h2>
     <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoForm}">
       <p>身長：
       <input type="text" th:field="${form.height}" size="6" readonly />

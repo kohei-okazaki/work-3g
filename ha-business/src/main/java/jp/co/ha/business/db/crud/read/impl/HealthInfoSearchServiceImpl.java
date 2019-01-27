@@ -15,7 +15,7 @@ import jp.co.ha.db.entity.HealthInfoExample.Criteria;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
- * 健康情報検索サービスインターフェース実装クラス<br>
+ * 健康情報検索サービスインターフェース実装クラス
  *
  */
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {

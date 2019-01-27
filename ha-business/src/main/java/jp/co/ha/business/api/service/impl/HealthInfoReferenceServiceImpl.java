@@ -1,7 +1,6 @@
 package jp.co.ha.business.api.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
@@ -25,7 +24,6 @@ import jp.co.ha.db.entity.HealthInfo;
  * 健康情報照会サービス実装クラス
  *
  */
-@Service
 public class HealthInfoReferenceServiceImpl extends CommonService implements HealthInfoReferenceService {
 
 	/** 健康情報検索サービス */

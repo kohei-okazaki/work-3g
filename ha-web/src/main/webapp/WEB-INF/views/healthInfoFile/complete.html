@@ -12,21 +12,18 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 </head>
-
 <body>
 
-  <h1>
-    <img class="headericon" alt="健康情報ファイル入力完了画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
-    健康情報ファイル入力完了画面
-  </h1>
-
- <div th:replace="layout/layout :: header"></div>
+  <div th:replace="layout/layout :: header"></div>
 
   <div th:replace="./common/navigation.html"></div>
 
   <!--/* 完了画面 */-->
   <div align="center" class="contentLayout">
-    <p>完了しました</p>
+    <h2 class="menuTitle">
+      <img class="headericon" alt="健康情報ファイル入力完了画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">健康情報ファイル入力完了画面
+    </h2>
+    <label>完了しました</label>
     <br><br>
     <table>
       <tr>

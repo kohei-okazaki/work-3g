@@ -9,7 +9,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 
 /**
- * 健康情報ファイル設定検索サービスインターフェース実装クラス<br>
+ * 健康情報ファイル設定検索サービスインターフェース実装クラス
  *
  */
 public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSettingSearchService {

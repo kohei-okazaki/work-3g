@@ -16,18 +16,15 @@
 <body>
 
   <div th:replace="layout/layout :: header"></div>
-  <h1>
-    <img class="headericon" alt="アカウント設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">
-    アカウント設定入力画面
-  </h1>
-
-  <div th:replace="layout/layout :: header"></div>
 
   <div th:replace="./common/navigation.html"></div>
 
-  <!--/* 入力画面 */-->
-  <form action="./confirm.html" id="accountSettingForm" th:action="@{./confirm.html}" method="post" th:object="${accountSettingForm}">
-    <div align="center" class="contentLayout">
+  <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="アカウント設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">アカウント設定入力画面
+    </h2>
+    <!--/* 入力画面 */-->
+    <form action="./confirm.html" id="accountSettingForm" th:action="@{./confirm.html}" method="post" th:object="${accountSettingForm}">
 
       <div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
@@ -70,7 +67,7 @@
         </tr>
         <tr>
           <th>
-            <label>パスワード有効期限日</label>
+            <label>パスワード有効期限</label>
           </th>
           <td>
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
@@ -124,9 +121,8 @@
           </td>
         </tr>
       </table>
-    </div>
-  </form>
-
+    </form>
+  </div>
   <div th:replace="layout/layout :: footer"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>

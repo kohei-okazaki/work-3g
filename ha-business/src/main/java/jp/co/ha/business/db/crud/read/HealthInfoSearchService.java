@@ -7,7 +7,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報検索サービス
+ * 健康情報検索サービスインターフェース
  *
  */
 public interface HealthInfoSearchService {

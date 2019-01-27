@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 public interface HealthInfoFileSettingSearchService {
 
 	/**
-	 * 健康情報ファイル設定を検索する<br>
+	 * 健康情報ファイル設定を検索する
 	 *
 	 * @param userId
 	 *     ユーザID

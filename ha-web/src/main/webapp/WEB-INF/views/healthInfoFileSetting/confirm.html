@@ -11,20 +11,18 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 </head>
-
 <body>
-  <h1>
-    <img class="headericon" alt="ファイル設定入力確認画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">
-    ファイル設定入力確認画面
-  </h1>
 
   <div th:replace="layout/layout :: header"></div>
 
   <div th:replace="./common/navigation.html"></div>
 
-   <!--/* 確認画面 */-->
-  <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoFileSettingForm}">
-    <div align="center" class="contentLayout">
+  <div align="center" class="contentLayout">
+    <h2 class="menuTitle">
+      <img class="headericon" alt="ファイル設定入力確認画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">ファイル設定入力確認画面
+    </h2>
+    <!--/* 確認画面 */-->
+    <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoFileSettingForm}">
       <table>
         <tr>
           <th>
@@ -107,8 +105,8 @@
           </td>
         </tr>
       </table>
-    </div>
-  </form>
+    </form>
+  </div>
 
   <div th:replace="layout/layout :: footer"></div>
 

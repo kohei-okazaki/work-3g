@@ -9,7 +9,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.mapper.AccountMapper;
 
 /**
- *  アカウント情報削除サービス実装クラス
+ *  アカウント情報削除サービスインターフェース実装クラス
  *
  */
 public class AccountDeleteServiceImpl implements AccountDeleteService {
