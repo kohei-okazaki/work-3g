@@ -57,8 +57,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			Criteria criteria = example.createCriteria();
 			// ユーザID
 			criteria.andUserIdEqualTo(userId);
-			List<HealthInfo> list = mapper.selectByExample(example);
-			return CollectionUtil.getLast(list);
+			return CollectionUtil.getLast(mapper.selectByExample(example));
 		}
 	}
 
@@ -93,6 +92,23 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			criteria.andUserIdEqualTo(userId);
 			// 登録日時
 			criteria.andRegDateBetween(fromRegDate, toRegDate);
+			return mapper.selectByExample(example);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) throws BaseException {
+		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
+			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
+			HealthInfoExample example = new HealthInfoExample();
+			Criteria criteria = example.createCriteria();
+			// 健康情報ID
+			criteria.andHealthInfoIdEqualTo(healthInfoId);
+			// ユーザID
+			criteria.andUserIdEqualTo(userId);
 			return mapper.selectByExample(example);
 		}
 	}

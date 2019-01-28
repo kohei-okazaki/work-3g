@@ -31,7 +31,7 @@
       <table>
         <tr>
           <th>
-            <p>健康情報ID</p>
+            <label>健康情報ID</label>
           </th>
           <td>
             <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
@@ -39,7 +39,7 @@
         </tr>
         <tr>
           <th>
-            <p>登録日</p>
+            <label>登録日</label>
           </th>
           <td>
             <div class="radio" align="center">
@@ -73,30 +73,30 @@
       <br>
 
       <div th:if="${hasResult}" align="center" class="contentLayout">
-        <table class="custom" border="1">
-          <tr class="header">
-            <th align="center">
+        <table class="data">
+          <tr class="data">
+            <th class="data" align="center">
               <label>身長</label>
             </th>
-            <th align="center">
+            <th class="data" align="center">
               <label>体重</label>
             </th>
-            <th align="center">
+            <th class="data" align="center">
               <label>標準体重</label>
             </th>
-            <th align="center">
+            <th class="data" align="center">
               <label>BMI</label>
             </th>
-            <th align="center">
+            <th class="data" align="center">
               <label>登録日時</label>
             </th>
           </tr>
           <tr th:each="result : ${resultList}" class="data">
-            <td th:text="${result.height}" align="center">
-            <td th:text="${result.weight}" align="center">
-            <td th:text="${result.standardWeight}" align="center">
-            <td th:text="${result.bmi}" align="center">
-            <td th:text="${result.regDate}" align="center">
+            <td th:text="${result.height}" align="center" class="data">
+            <td th:text="${result.weight}" align="center" class="data">
+            <td th:text="${result.standardWeight}" align="center" class="data">
+            <td th:text="${result.bmi}" align="center" class="data">
+            <td th:text="${result.regDate}" align="center" class="data">
           </tr>
         </table>
 
