@@ -32,32 +32,32 @@
     </div>
 
     <div class="contentLayout">
-      <table border="1">
-        <tr>
-          <th>
+      <table class="data">
+        <tr class="data">
+          <th class="data">
             <label>身長</label>
           </th>
-          <th>
+          <th class="data">
             <label>体重</label>
           </th>
-          <th>
+          <th class="data">
             <label>標準体重</label>
           </th>
-          <th>
+          <th class="data">
             <label>BMI</label>
           </th>
         </tr>
-        <tr>
-          <td>
+        <tr class="data">
+          <td class="data">
             <label th:text="${healthInfo.height}"></label>
           </td>
-          <td>
+          <td class="data">
             <label th:text="${healthInfo.weight}"></label>
           </td>
-          <td>
+          <td class="data">
             <label th:text="${healthInfo.standardWeight}"></label>
           </td>
-          <td>
+          <td class="data">
             <label th:text="${healthInfo.bmi}"></label>
           </td>
         </tr>

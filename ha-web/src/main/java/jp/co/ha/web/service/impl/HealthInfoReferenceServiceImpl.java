@@ -3,6 +3,7 @@ package jp.co.ha.web.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
@@ -61,13 +61,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 			}
 		} else {
-			HealthInfo entity = healthInfoSearchService.findByHealthInfoId(Integer.valueOf(form.getHealthInfoId()));
-			if (BeanUtil.isNull(entity) || !entity.getUserId().equals(userId)) {
-				// selectした健康情報がログイン中のユーザIDと一致しない場合
-				resultList = CollectionUtil.getEmptyList(HealthInfo.class);
-			} else {
-				resultList = List.of(entity);
-			}
+			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(Integer.valueOf(form.getHealthInfoId()), userId);
 		}
 
 		return resultList;
@@ -89,18 +83,17 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId) throws BaseException {
+	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
+			throws BaseException {
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
 		List<HealthInfo> entityList = getHealthInfoList(form, userId);
-		List<HealthInfoReferenceResponse> resultList = new ArrayList<>();
-		entityList.stream().forEach(e -> {
+		return entityList.stream().map(e -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(e, response);
 			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			resultList.add(response);
-		});
-		return resultList;
+			return response;
+		}).collect(Collectors.toList());
 	}
 
 	/**

@@ -26,21 +26,21 @@
       <table>
         <tr>
           <th>
-            <p>削除</p>
+            <label>削除</label>
           </th>
           <td>
             <div th:if="${form.deleteFlag} == 1">
-              <p>する</p>
+              <label>する</label>
             </div>
             <div th:if="${form.deleteFlag} == 0">
-              <p>しない</p>
+              <label>しない</label>
             </div>
             <input type="hidden" th:field="${form.deleteFlag}" />
           </td>
         </tr>
         <tr>
           <th>
-            <p>ユーザID</p>
+            <label>ユーザID</label>
           </th>
           <td>
             <p th:text="${form.userId}"></p>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <th>
-            <p>パスワード</p>
+            <label>パスワード</label>
           </th>
           <td>
             <input type="text" th:field="${form.password}" readonly />
@@ -65,7 +65,7 @@
         </tr>
         <tr>
           <th>
-            <p>メールアドレス</p>
+            <label>メールアドレス</label>
           </th>
           <td>
             <input type="text" th:field="${form.mailAddress}" readonly />
@@ -73,7 +73,7 @@
         </tr>
         <tr>
           <th>
-            <p>メールパスワード</p>
+            <label>メールパスワード</label>
           </th>
           <td>
             <input type="text" th:field="${form.mailPassword}" readonly />
@@ -81,7 +81,7 @@
         </tr>
         <tr>
           <th>
-            <p>備 考</p>
+            <label>備 考</label>
           </th>
           <td>
             <textarea rows="10" cols="30" th:field="${form.remarks}" readonly></textarea>
@@ -94,7 +94,9 @@
           <td>
             <input type="submit" value="確 定" />
           </td>
-          <td><p>　　</p></td>
+          <td>
+            <label>　　</label>
+          </td>
           <td>
             <input type="button" value="戻 る" onclick="history.back()" />
           </td>

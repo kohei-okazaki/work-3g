@@ -73,4 +73,17 @@ public interface HealthInfoSearchService {
 	 */
 	List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws BaseException;
 
+	/**
+	 * 指定された健康情報IDとユーザIDと一致する健康情報を返す
+	 *
+	 * @param healthInfoId
+	 *     健康情報ID
+	 * @param userId
+	 *     ユーザID
+	 * @return
+	 * @throws BaseException
+	 *     基底例外
+	 */
+	List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) throws BaseException;
+
 }

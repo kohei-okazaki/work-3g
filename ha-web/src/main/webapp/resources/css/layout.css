@@ -26,10 +26,10 @@
 }
 
 .contentLayout {
-  margin-top: 5px;
+  margin-top: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 3%;
+  margin-bottom: auto;
   width: 95%;
   padding: 5px;
   background: #d2e8d561;
@@ -44,4 +44,19 @@
 .footer {
   margin: 10px;
   padding: 10px;
+}
+
+table.data {
+  /* セルの線を重ねる */
+  border-collapse: collapse;
+}
+
+tr.data:nth-child(odd) {
+  /* 背景色指定 */
+  background-color: #ddd;
+}
+
+th.data, td.data {
+  /* 余白指定 */
+  padding: 5px 10px;
 }

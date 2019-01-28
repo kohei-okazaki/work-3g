@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
   <ul id="dropmenu">
     <li><a class="navigation" href="#">MENU</a>
       <ul>
@@ -71,13 +70,12 @@
     <li><a class="navigation" href="../login/index.html" th:href="@{/login/index.html}">ログアウト</a></li>
   </ul>
 
-
 <!-- BMIのモーダルを描画 -->
 <div th:replace="./common/bmiModal.html"></div>
 
-
 <!-- 標準体重のモーダルを描画 -->
 <div th:replace="./common/standardWeightModal.html"></div>
+
 
 <!-- APIリファレンス-健康情報登録の概要モーダルを描画 -->
 <div th:replace="./common/apiRegistGeneralModal.html"></div>
