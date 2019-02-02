@@ -108,7 +108,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	}
 
 	/**
-	 * データを書込<br>
+	 * データを書込
 	 *
 	 * @param sheet
 	 *     Sheet
@@ -144,7 +144,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	 *     カラム位置
 	 * @return cell
 	 */
-	protected Cell getCell(Sheet sheet, int row, int col) {
+	protected Cell getCell(Sheet sheet, final int row, int col) {
 
 		// row取得
 		Row sheetRow = sheet.getRow(row);
