@@ -40,7 +40,6 @@ public interface HealthInfoReferenceService {
 	 */
 	List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList);
 
-
 	/**
 	 * 指定した健康情報ファイル設定からCSV設定情報を返す
 	 *

@@ -19,5 +19,4 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface HealthInfoDownloadCsv {
-
 }

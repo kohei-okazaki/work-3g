@@ -3,6 +3,7 @@ package jp.co.ha.tool.build;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Predicate;
 
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
@@ -65,8 +66,7 @@ public class CreateTableBuilder extends CommonBuilder {
 	}
 
 	private String getColumnComment(Row row) {
-		String comment = row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
-		return "-- " + comment;
+		return "-- " + row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
 
 	private String getColumnName(Row row) {
@@ -93,11 +93,13 @@ public class CreateTableBuilder extends CommonBuilder {
 	}
 
 	private boolean isSequence(Row row) {
-		return StringUtil.isTrue(row.getCell(CellPositionType.SEQUENCE).getValue());
+		Predicate<Row> function = e -> StringUtil.isTrue(e.getCell(CellPositionType.SEQUENCE).getValue());
+		return function.test(row);
 	}
 
 	private boolean isPrimaryKey(Row row) {
-		return StringUtil.isTrue(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
+		Predicate<Row> function = e -> StringUtil.isTrue(e.getCell(CellPositionType.PRIMARY_KEY).getValue());
+		return function.test(row);
 	}
 
 }

@@ -19,5 +19,4 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Target(ElementType.FIELD)
 @Qualifier("referenceDownloadCsv")
 public @interface ReferenceDownloadCsv {
-
 }
