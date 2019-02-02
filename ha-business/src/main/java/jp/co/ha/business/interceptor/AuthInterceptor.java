@@ -51,7 +51,7 @@ public class AuthInterceptor extends BaseWebInterceptor {
 	 * @return 判定結果
 	 */
 	private boolean isLoginAuthCheck(Object handler) {
-		return ((HandlerMethod) handler).getMethod().isAnnotationPresent(NonAuth.class);
+		return !((HandlerMethod) handler).getMethod().isAnnotationPresent(NonAuth.class);
 	}
 
 }
