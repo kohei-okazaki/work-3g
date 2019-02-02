@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import jp.co.ha.common.function.ListOperator;
+import jp.co.ha.common.function.ListOperatorFunction;
 
 /**
  * CollectionのUtilクラス
@@ -42,7 +42,7 @@ public class CollectionUtil {
 		if (isEmpty(list)) {
 			return null;
 		}
-		ListOperator<T> lastOperator = l -> l.get(0);
+		ListOperatorFunction<T> lastOperator = l -> l.get(0);
 		return lastOperator.get(list);
 	}
 
@@ -57,7 +57,7 @@ public class CollectionUtil {
 		if (isEmpty(list)) {
 			return null;
 		}
-		ListOperator<T> lastOperator = l -> l.get(l.size() - 1);
+		ListOperatorFunction<T> lastOperator = l -> l.get(l.size() - 1);
 		return lastOperator.get(list);
 	}
 

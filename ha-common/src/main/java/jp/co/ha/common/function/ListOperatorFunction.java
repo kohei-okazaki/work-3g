@@ -6,9 +6,10 @@ import java.util.List;
  * 指定したリストに対して要素を一つ返す関数インターフェース
  *
  * @param <T>
+ *     返す要素の型
  */
 @FunctionalInterface
-public interface ListOperator<T> {
+public interface ListOperatorFunction<T> {
 
 	/**
 	 * 指定したリストに対して要素を一つ返す関数
