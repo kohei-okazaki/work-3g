@@ -2,6 +2,7 @@ package jp.co.ha.business.healthInfo.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.function.BiFunction;
 
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
@@ -18,17 +19,18 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
-
-		HealthInfoStatus status;
-		if (beforeWeight.compareTo(inputWeight) == 0) {
-			status = HealthInfoStatus.EVEN;
-		} else if (beforeWeight.compareTo(inputWeight) == -1) {
-			status = HealthInfoStatus.INCREASE;
-		} else {
-			status = HealthInfoStatus.DOWN;
-		}
-		return status;
+	public BiFunction<BigDecimal, BigDecimal, HealthInfoStatus> getHealthInfoStatus() {
+		return (inputWeight, beforeWeight) -> {
+			HealthInfoStatus status;
+			if (beforeWeight.compareTo(inputWeight) == 0) {
+				status = HealthInfoStatus.EVEN;
+			} else if (beforeWeight.compareTo(inputWeight) == -1) {
+				status = HealthInfoStatus.INCREASE;
+			} else {
+				status = HealthInfoStatus.DOWN;
+			}
+			return status;
+		};
 	}
 
 	/**

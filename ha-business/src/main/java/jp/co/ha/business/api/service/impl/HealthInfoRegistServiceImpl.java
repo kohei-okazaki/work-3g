@@ -107,9 +107,10 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 
 			// 最後に登録した健康情報を取得する
 			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
+
 			String status = BeanUtil.isNull(lastHealthInfo)
 					? HealthInfoStatus.EVEN.getValue()
-					: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getValue();
+					: healthInfoCalcService.getHealthInfoStatus().apply(weight, lastHealthInfo.getWeight()).getValue();
 
 			HealthInfo entity = new HealthInfo();
 			BeanUtil.copy(request, entity);

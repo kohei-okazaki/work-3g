@@ -58,7 +58,7 @@ public class LogMessageFactory {
 	/**
 	 * Log出力時のパラメータを返す<br>
 	 * <code>@LogParam</code>が指定されてない場合Beanのフィールド名を返す<br>
-	 * 指定されてる場合、<code>@LogParam</code>のパラメータ名を返す<br>
+	 * 指定されてる場合、<code>@LogParam</code>のパラメータ名を返す
 	 *
 	 * @param field
 	 *     フィールド名
@@ -71,7 +71,7 @@ public class LogMessageFactory {
 
 	/**
 	 * 出力対象かどうか判定する<br>
-	 * 出力対象で無い場合true, それ以外の場合false<br>
+	 * 出力対象で無い場合true, それ以外の場合false
 	 *
 	 * @param field
 	 *     フィールド名
@@ -82,7 +82,7 @@ public class LogMessageFactory {
 	}
 
 	/**
-	 * 値を取得<br>
+	 * 値を取得
 	 *
 	 * @param bean
 	 *     Bean
@@ -107,7 +107,7 @@ public class LogMessageFactory {
 	}
 
 	/**
-	 * 値を出力用に編集する<br>
+	 * 値を出力用に編集する
 	 *
 	 * @param value
 	 *     値

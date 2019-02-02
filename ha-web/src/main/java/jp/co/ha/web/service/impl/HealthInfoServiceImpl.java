@@ -157,7 +157,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * @return 体重差メッセージ
 	 */
 	private String getDiffMessage(HealthInfoForm form, HealthInfo healthInfo) {
-		return healthInfoCalcService.getHealthStatus(form.getWeight(), healthInfo.getWeight()).getMessage();
+		return healthInfoCalcService.getHealthInfoStatus()
+				.apply(form.getWeight(), healthInfo.getWeight())
+				.getMessage();
 	}
 
 	/**
