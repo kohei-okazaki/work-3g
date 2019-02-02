@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import jp.co.ha.common.function.ListOperator;
+
 /**
  * CollectionのUtilクラス
  *
@@ -90,22 +92,6 @@ public class CollectionUtil {
 	 */
 	public static <T> List<T> copyList(List<T> src) {
 		return src.stream().collect(Collectors.toList());
-	}
-
-	/**
-	 * 指定したリストに対して要素を一つ返す関数インターフェース
-	 *
-	 * @param <T>
-	 */
-	@FunctionalInterface
-	public static interface ListOperator<T> {
-
-		/**
-		 * 指定したリストに対して要素を一つ返す関数
-		 * @param list 対象のリスト
-		 * @return 要素
-		 */
-		T get(List<T> list);
 	}
 
 }
