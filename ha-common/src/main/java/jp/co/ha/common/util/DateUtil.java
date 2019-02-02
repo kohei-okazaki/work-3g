@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import jp.co.ha.common.log.Logger;
@@ -126,10 +127,8 @@ public class DateUtil {
 		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
 		}
-		Function<Date, String> toStringFuction = d -> {
-			return new SimpleDateFormat(format.getValue()).format(d);
-		};
-		return toStringFuction.apply(date);
+		BiFunction<Date, DateFormatType, String> toStringFunction = (Date d, DateFormatType f) -> new SimpleDateFormat(f.getValue()).format(d);
+		return toStringFunction.apply(date, format);
 	}
 
 	/**

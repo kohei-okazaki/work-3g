@@ -90,8 +90,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	 *     名前
 	 */
 	protected void rejectIfNotHalfNumberPeriod(Errors errors, String field, String nameArgs) {
-		String fieldValue = getFieldValue(errors, field);
-		if (!RegixType.HALF_NUMBER_PERIOD.is(fieldValue)) {
+		if (!RegixType.HALF_NUMBER_PERIOD.is().test(getFieldValue(errors, field))) {
 			errors.rejectValue(field, ErrorCode.TYPE_VALID.getErrorMessage(), new String[] { nameArgs },
 					ErrorCode.TYPE_VALID.getErrorMessage());
 		}

@@ -21,6 +21,6 @@ public class UrlValidator implements ConstraintValidator<Url, String> {
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return RegixType.URL.is(value);
+		return RegixType.URL.is().test(value);
 	}
 }

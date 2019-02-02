@@ -40,7 +40,8 @@ public class CollectionUtil {
 		if (isEmpty(list)) {
 			return null;
 		}
-		return list.get(0);
+		ListOperator<T> lastOperator = l -> l.get(0);
+		return lastOperator.get(list);
 	}
 
 	/**
@@ -54,7 +55,8 @@ public class CollectionUtil {
 		if (isEmpty(list)) {
 			return null;
 		}
-		return list.get(list.size() - 1);
+		ListOperator<T> lastOperator = l -> l.get(l.size() - 1);
+		return lastOperator.get(list);
 	}
 
 	/**
@@ -77,6 +79,22 @@ public class CollectionUtil {
 	 */
 	public static <T> List<T> toList(T[] array) {
 		return Stream.of(array).collect(Collectors.toList());
+	}
+
+	/**
+	 * 指定したリストに対して要素を一つ返す関数インターフェース
+	 *
+	 * @param <T>
+	 */
+	@FunctionalInterface
+	public static interface ListOperator<T> {
+
+		/**
+		 * 指定したリストに対して要素を一つ返す関数
+		 * @param list 対象のリスト
+		 * @return 要素
+		 */
+		T get(List<T> list);
 	}
 
 }

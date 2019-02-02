@@ -26,7 +26,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-		if (isStaticResource(handler)) {
+		if (isStaticResource().test(handler)) {
 			// 静的リソースの場合は認証不要
 			return true;
 		}
@@ -43,7 +43,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 
-		if (isStaticResource(handler)) {
+		if (isStaticResource().test(handler)) {
 			// 静的リソースの場合は認証不要
 			return;
 		}

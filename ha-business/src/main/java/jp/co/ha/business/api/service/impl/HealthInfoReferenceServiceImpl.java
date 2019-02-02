@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.service.impl;
 
+import java.util.function.Function;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
@@ -66,13 +68,13 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	@Override
 	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
 
-		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
-		if (BeanUtil.isNull(entity)) {
+		HealthInfo healthInfo = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
+		if (BeanUtil.isNull(healthInfo)) {
 			throw new HealthInfoException(ErrorCode.DB_NO_DATA, "該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId());
 		}
 
 		// レスポンスに変換する
-		HealthInfoReferenceResponse response = toResponse(entity);
+		HealthInfoReferenceResponse response = toResponse(healthInfo);
 
 		return response;
 	}
@@ -82,12 +84,14 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	 */
 	@Override
 	public HealthInfoReferenceResponse toResponse(HealthInfo healthInfo) {
-
-		HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
-		BeanUtil.copy(healthInfo, response);
-		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-		response.setResult(ResultType.SUCCESS);
-		return response;
+		Function<HealthInfo, HealthInfoReferenceResponse> function = e -> {
+			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
+			BeanUtil.copy(e, response);
+			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			response.setResult(ResultType.SUCCESS);
+			return response;
+		};
+		return function.apply(healthInfo);
 	}
 
 }
