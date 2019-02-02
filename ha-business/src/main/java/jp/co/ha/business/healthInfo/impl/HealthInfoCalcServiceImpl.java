@@ -3,9 +3,12 @@ package jp.co.ha.business.healthInfo.impl;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
+import jp.co.ha.business.calc.BmiCalcFunction;
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
+import jp.co.ha.business.calc.StandardWeightCalcFunction;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
@@ -37,16 +40,8 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BigDecimal convertMeterFromCentiMeter(BigDecimal target) {
-		return target.scaleByPowerOfTen(-2);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public BigDecimal convertCentiMeterFromMeter(BigDecimal target) {
-		return target.scaleByPowerOfTen(2);
+	public Function<BigDecimal, BigDecimal> convertMeterFromCentiMeter() {
+		return e -> e.scaleByPowerOfTen(-2);
 	}
 
 	/**
@@ -54,9 +49,14 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 */
 	@Override
 	public BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit) {
-		BigDecimal multiplyResult = Calculator.calc(height, CalcMethod.MULTIPLY, height, digit, RoundingMode.HALF_UP);
-		BigDecimal result = Calculator.calc(weight, CalcMethod.DIVIDE, multiplyResult, digit, RoundingMode.HALF_UP);
-		return result;
+		BmiCalcFunction function = (h, w, d) -> {
+			// height * height
+			BigDecimal multiplyResult = Calculator.calc(h, CalcMethod.MULTIPLY, h, d, RoundingMode.HALF_UP);
+			// weight / multiplyResult
+			BigDecimal result = Calculator.calc(w, CalcMethod.DIVIDE, multiplyResult, d, RoundingMode.HALF_UP);
+			return result;
+		};
+		return function.apply(height, weight, digit);
 	}
 
 	/**
@@ -64,11 +64,13 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 */
 	@Override
 	public BigDecimal calcStandardWeight(BigDecimal height, int digit) {
-		// height * height
-		BigDecimal result = Calculator.calc(height, CalcMethod.MULTIPLY, height, digit, RoundingMode.HALF_UP);
-		// result * 22
-		result = Calculator.calc(result, CalcMethod.MULTIPLY, new BigDecimal(22), digit, RoundingMode.HALF_UP);
-		return result;
+		StandardWeightCalcFunction function = (h, d) -> {
+			// height * height
+			BigDecimal result = Calculator.calc(h, CalcMethod.MULTIPLY, h, d, RoundingMode.HALF_UP);
+			// result * 22
+			return Calculator.calc(result, CalcMethod.MULTIPLY, new BigDecimal(22), d, RoundingMode.HALF_UP);
+		};
+		return function.apply(height, digit);
 	}
 
 	/**
