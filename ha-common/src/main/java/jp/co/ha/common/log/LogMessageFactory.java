@@ -47,7 +47,7 @@ public class LogMessageFactory {
 			}
 			String name = getLogParamName(f);
 			if (MaskExecutor.isMask(f)) {
-				body.add(name + StringUtil.EQUAL + MaskExecutor.MASK);
+				body.add(name + StringUtil.EQUAL + MaskExecutor.getMask(f));
 			} else {
 				body.add(name + StringUtil.EQUAL + editValue(getValue(bean, name)));
 			}
@@ -78,7 +78,7 @@ public class LogMessageFactory {
 	 * @return 判定結果
 	 */
 	private static boolean isIgnore(Field field) {
-		return BeanUtil.notNull(field.getAnnotation(Ignore.class));
+		return field.isAnnotationPresent(Ignore.class);
 	}
 
 	/**
