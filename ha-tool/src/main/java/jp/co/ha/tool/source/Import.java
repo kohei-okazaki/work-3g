@@ -29,7 +29,7 @@ public class Import {
 	 * @param field
 	 *     フィールド情報
 	 */
-	public Import(Field field) {
+	public Import(Field<?> field) {
 		this.clazz = field.getClassType();
 	}
 

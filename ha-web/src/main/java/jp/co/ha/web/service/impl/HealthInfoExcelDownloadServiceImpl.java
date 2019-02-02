@@ -36,6 +36,8 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(healthInfo.getUserId());
+
+		// 健康情報Excelモデルに変換
 		HealthInfoExcelModel model = toModel(healthInfo, healthInfoFileSetting);
 
 		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), List.of(model));

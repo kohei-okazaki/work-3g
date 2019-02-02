@@ -59,7 +59,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 		}
 
 		// API利用判定
-		useApi(account, request);
+		checkApiUse(account, request);
 	}
 
 	/**

@@ -11,7 +11,7 @@ import jp.co.ha.tool.type.AccessType;
  * Getter
  *
  */
-public class Getter extends Method {
+public class Getter<T> extends Method<T> {
 
 	/** 接頭語 */
 	private static final String PREFIX = "get";
@@ -22,7 +22,7 @@ public class Getter extends Method {
 	 * @param field
 	 *     Field情報
 	 */
-	public Getter(Field field) {
+	public Getter(Field<T> field) {
 		super(field, AccessType.PUBLIC);
 	}
 

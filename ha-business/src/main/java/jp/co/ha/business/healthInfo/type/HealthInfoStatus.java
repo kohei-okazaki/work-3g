@@ -43,6 +43,7 @@ public enum HealthInfoStatus implements BaseEnum {
 
 	/**
 	 * messageを返す
+	 *
 	 * @return message
 	 */
 	public String getMessage() {

@@ -39,7 +39,6 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 */
 	@Override
 	public void regist(AccountRegistForm form) throws BaseException {
-
 		// アカウント情報を作成
 		accountCreateService.create(toAccount(form));
 		// 健康情報ファイル設定情報を作成
@@ -56,7 +55,6 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 *     基底例外
 	 */
 	private Account toAccount(AccountRegistForm form) throws BaseException {
-
 		Account account = new Account();
 		BeanUtil.copy(form, account);
 		account.setDeleteFlag(StringUtil.FALSE_FLAG);

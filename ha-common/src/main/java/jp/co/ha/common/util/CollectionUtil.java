@@ -82,6 +82,17 @@ public class CollectionUtil {
 	}
 
 	/**
+	 * 指定したリストをコピーする
+	 *
+	 * @param srcList
+	 *     コピー元リスト
+	 * @return リスト
+	 */
+	public static <T> List<T> copyList(List<T> src) {
+		return src.stream().collect(Collectors.toList());
+	}
+
+	/**
 	 * 指定したリストに対して要素を一つ返す関数インターフェース
 	 *
 	 * @param <T>

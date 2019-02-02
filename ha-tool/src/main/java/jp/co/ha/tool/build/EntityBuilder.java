@@ -50,7 +50,7 @@ public class EntityBuilder extends CommonBuilder {
 					source.setClassName(toJavaFileName(getClassName(row)));
 
 					// fieldの設定
-					Field field = new Field(toCamelCase(getFieldName(row)), getColumnComment(row), getClassType(row));
+					Field<?> field = new Field(toCamelCase(getFieldName(row)), getColumnComment(row), getClassType(row));
 					source.addField(field);
 
 					// fieldのimport文を設定
@@ -58,11 +58,11 @@ public class EntityBuilder extends CommonBuilder {
 					source.addImport(im);
 
 					// setterの設定
-					Setter setter = new Setter(field);
+					Setter<?> setter = new Setter(field);
 					source.addMethod(setter);
 
 					// getterの設定
-					Getter getter = new Getter(field);
+					Getter<?> getter = new Getter(field);
 					source.addMethod(getter);
 				}
 			}
@@ -222,7 +222,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *     フィールドリスト
 	 * @return フィールド
 	 */
-	private String buildFields(List<Field> fieldList) {
+	private String buildFields(List<Field<?>> fieldList) {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		fieldList.stream().forEach(e -> body.add(e.toString()));
 		return body.toString();
@@ -235,7 +235,7 @@ public class EntityBuilder extends CommonBuilder {
 	 *     メソッドリスト
 	 * @return メソッド
 	 */
-	private String buildMethods(List<Method> methodList) {
+	private String buildMethods(List<Method<?>> methodList) {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		methodList.stream().forEach(e -> body.add(e.toString()));
 		return body.toString();

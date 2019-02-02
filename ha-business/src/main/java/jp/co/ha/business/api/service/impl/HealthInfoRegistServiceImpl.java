@@ -69,7 +69,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		}
 
 		// API利用判定
-		useApi(account, request);
+		checkApiUse(account, request);
 	}
 
 	/**

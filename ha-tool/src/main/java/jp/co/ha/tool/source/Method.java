@@ -5,11 +5,12 @@ import jp.co.ha.tool.type.AccessType;
 /**
  * Method
  *
+ * @param <T>
  */
-public abstract class Method {
+public abstract class Method<T> {
 
 	/** 当メソッドのフィールド情報 */
-	protected Field field;
+	protected Field<T> field;
 	/** メソッドのアクセスタイプ */
 	protected AccessType accessType;
 
@@ -21,7 +22,7 @@ public abstract class Method {
 	 * @param accessType
 	 *     メソッドのアクセスタイプ
 	 */
-	public Method(Field field, AccessType accessType) {
+	public Method(Field<T> field, AccessType accessType) {
 		this.field = field;
 		this.accessType = accessType;
 	}
