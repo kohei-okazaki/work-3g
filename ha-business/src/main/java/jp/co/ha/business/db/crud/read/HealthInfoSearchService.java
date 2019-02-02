@@ -13,7 +13,7 @@ import jp.co.ha.db.entity.HealthInfo;
 public interface HealthInfoSearchService {
 
 	/**
-	 * 指定されたユーザIDと一致する健康情報のリストを返却する
+	 * 指定されたユーザIDと一致する健康情報のリストを返す
 	 *
 	 * @param userId
 	 *     ユーザID
@@ -24,7 +24,7 @@ public interface HealthInfoSearchService {
 	List<HealthInfo> findByUserId(String userId) throws BaseException;
 
 	/**
-	 * 指定されたデータIDからと一致する健康情報を返却する
+	 * 指定された健康情報IDと一致する健康情報を返す
 	 *
 	 * @param healthInfoId
 	 *     健康情報ID

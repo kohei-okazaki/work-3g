@@ -5,7 +5,7 @@
 
 /* ボタンの設定 */
 input[type="submit"], input[type="reset"], input[type="button"] {
-  width: 110px;
+  width: 150px;
   height: 40px;
   background: #32cd32;
   border: 0;

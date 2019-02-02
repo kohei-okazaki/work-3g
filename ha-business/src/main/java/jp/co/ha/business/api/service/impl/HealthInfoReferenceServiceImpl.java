@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.service.impl;
 
+import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
@@ -27,7 +30,7 @@ import jp.co.ha.db.entity.HealthInfo;
  *
  */
 public class HealthInfoReferenceServiceImpl extends CommonService implements HealthInfoReferenceService {
-
+	BiFunction s;
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
@@ -68,30 +71,25 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	@Override
 	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
 
-		HealthInfo healthInfo = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
-		if (BeanUtil.isNull(healthInfo)) {
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(), request.getUserId());
+		if (CollectionUtil.isEmpty(healthInfoList)) {
 			throw new HealthInfoException(ErrorCode.DB_NO_DATA, "該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId());
 		}
-
-		// レスポンスに変換する
-		HealthInfoReferenceResponse response = toResponse(healthInfo);
-
-		return response;
+		return toResponse().apply(healthInfoList.get(0));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceResponse toResponse(HealthInfo healthInfo) {
-		Function<HealthInfo, HealthInfoReferenceResponse> function = e -> {
+	public Function<HealthInfo, HealthInfoReferenceResponse> toResponse() {
+		return e -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(e, response);
 			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			response.setResult(ResultType.SUCCESS);
 			return response;
 		};
-		return function.apply(healthInfo);
 	}
 
 }

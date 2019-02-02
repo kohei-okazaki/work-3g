@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.service;
 
+import java.util.function.Function;
+
 import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.common.api.service.BaseService;
@@ -13,11 +15,9 @@ public interface HealthInfoReferenceService
 		extends BaseService<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
 	/**
-	 * 健康情報Entityを健康情報照会レスポンスクラスに変換する
+	 * 健康情報Entityを健康情報照会レスポンスクラスに変換する関数を返す
 	 *
-	 * @param healthInfo
-	 *     健康情報
-	 * @return 健康情報照会レスポンス
+	 * @return 健康情報照会レスポンス変換関数
 	 */
-	HealthInfoReferenceResponse toResponse(HealthInfo healthInfo);
+	Function<HealthInfo, HealthInfoReferenceResponse> toResponse();
 }

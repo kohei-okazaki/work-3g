@@ -18,6 +18,7 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.function.ThrowableFunction;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -79,65 +80,64 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
 
 		// リクエストをEntityにつめる
-		HealthInfo entity = toEntity(request);
+		HealthInfo entity = toEntity().apply(request);
 
 		// Entityの登録処理を行う
 		healthInfoCreateService.create(entity);
 
-		// レスポンスに変換する
-		HealthInfoRegistResponse response = toResponse(entity);
-
-		return response;
+		return toResponse().apply(entity);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException {
+	public ThrowableFunction<HealthInfoRegistRequest, HealthInfo> toEntity() throws BaseException {
 
-		String userId = request.getUserId();
-		BigDecimal height = request.getHeight();
-		BigDecimal weight = request.getWeight();
+		ThrowableFunction<HealthInfoRegistRequest, HealthInfo> function = request -> {
+			String userId = request.getUserId();
+			BigDecimal height = request.getHeight();
+			BigDecimal weight = request.getWeight();
 
-		// メートルに変換する
-		BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
+			// メートルに変換する
+			BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
 
-		BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, weight, 2);
-		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
+			BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, weight, 2);
+			BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
 
-		// 最後に登録した健康情報を取得する
-		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
+			// 最後に登録した健康情報を取得する
+			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
+			String status = BeanUtil.isNull(lastHealthInfo)
+					? HealthInfoStatus.EVEN.getValue()
+					: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getValue();
 
-		String status = BeanUtil.isNull(lastHealthInfo)
-				? HealthInfoStatus.EVEN.getValue()
-				: healthInfoCalcService.getHealthStatus(weight, lastHealthInfo.getWeight()).getValue();
+			HealthInfo entity = new HealthInfo();
+			BeanUtil.copy(request, entity);
+			entity.setBmi(bmi);
+			entity.setStandardWeight(standardWeight);
+			entity.setHealthInfoStatus(status);
 
-		HealthInfo entity = new HealthInfo();
-		entity.setUserId(userId);
-		entity.setHeight(height);
-		entity.setWeight(weight);
-		entity.setBmi(bmi);
-		entity.setStandardWeight(standardWeight);
-		entity.setHealthInfoStatus(status);
+			return entity;
+		};
 
-		return entity;
+		return function;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse toResponse(HealthInfo healthInfo) throws BaseException {
+	public ThrowableFunction<HealthInfo, HealthInfoRegistResponse> toResponse() throws BaseException {
 
-		HealthInfoRegistResponse response = new HealthInfoRegistResponse();
-		BeanUtil.copy(healthInfo, response);
-		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-
-		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(healthInfo.getUserId());
-		response.setHealthInfoId(lastEntity.getHealthInfoId());
-		response.setResult(ResultType.SUCCESS);
-		return response;
+		return e -> {
+			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
+			BeanUtil.copy(e, response);
+			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(e.getUserId());
+			response.setHealthInfoId(lastEntity.getHealthInfoId());
+			response.setResult(ResultType.SUCCESS);
+			return response;
+		};
 	}
 
 }

@@ -50,7 +50,7 @@ public class LoginController implements BaseWebController {
 	 *
 	 * @return LoginForm
 	 */
-	@ModelAttribute
+	@ModelAttribute("loginForm")
 	public LoginForm setUpForm() {
 		return new LoginForm();
 	}
