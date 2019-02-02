@@ -11,7 +11,6 @@ import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -52,8 +51,7 @@ public class AuthInterceptor extends BaseWebInterceptor {
 	 * @return 判定結果
 	 */
 	private boolean isLoginAuthCheck(Object handler) {
-		NonAuth annotation = ((HandlerMethod) handler).getMethod().getAnnotation(NonAuth.class);
-		return BeanUtil.isNull(annotation);
+		return ((HandlerMethod) handler).getMethod().isAnnotationPresent(NonAuth.class);
 	}
 
 }
