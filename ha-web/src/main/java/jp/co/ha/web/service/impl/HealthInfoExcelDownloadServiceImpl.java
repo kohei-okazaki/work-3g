@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.business.io.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.common.exception.BaseException;
@@ -25,9 +24,6 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service(value = "healthInfoDownloadExcel")
 public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfo> {
 
-	/** 健康情報利用機能サービス */
-	@Autowired
-	private HealthInfoFunctionService healthInfoFunctionService;
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
