@@ -50,7 +50,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@ModelAttribute
+	@ModelAttribute("healthInfoFileSettingForm")
 	public HealthInfoFileSettingForm setUpForm(HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得

@@ -1,8 +1,9 @@
 package jp.co.ha.tool.build;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
@@ -35,38 +36,35 @@ public class CreateTableBuilder extends CommonBuilder {
 			String ddlPrefix = "CREATE TABLE " + tableName + " (";
 			String ddlSuffix = ");";
 			body.add(ddlPrefix);
-			Table table = getTable(excel.getRowList(), tableName);
+			Table table = toTable(excel.getRowList(), tableName);
 			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + StringUtil.CRLF);
 			for (Column column : table.getColumnList()) {
 				columnData.add(column.getComment() + StringUtil.NEW_LINE + column.getName() + StringUtil.SPACE + column.getType());
 			}
 			body.add(columnData.toString()).add(ddlSuffix);
 
-			FileConfig fileConf = getFileConfig(ExecuteType.DDL);
-			fileConf.setFileName(tableName.toUpperCase() + FileExtension.SQL.getValue());
-			fileConf.setData(body.toString());
-			FileFactory.create(fileConf);
+			FileConfig conf = getFileConfig(ExecuteType.DDL);
+			conf.setFileName(tableName.toUpperCase() + FileExtension.SQL.getValue());
+			conf.setData(body.toString());
+			FileFactory.create(conf);
 		}
 	}
 
-	private Table getTable(List<Row> rowList, String tableName) {
+	private Table toTable(List<Row> rowList, String tableName) {
 		Table table = new Table();
 		table.setPhysicalName(tableName);
-		List<Column> columnList = new ArrayList<>();
-		rowList.stream().filter(e -> isTargetTable(e, tableName)).forEach(e -> {
+		table.setColumnList(rowList.stream().filter(e -> isTargetTable(e, tableName)).map(e -> {
 			Column column = new Column();
 			column.setName(getColumnName(e));
 			column.setComment(getColumnComment(e));
 			column.setType(getColumnType(e));
-			columnList.add(column);
-			table.setColumnList(columnList);
-		});
+			return column;
+		}).collect(Collectors.toList()));
 		return table;
 	}
 
 	private String getColumnComment(Row row) {
-		String comment = row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
-		return "-- " + comment;
+		return "-- " + row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
 
 	private String getColumnName(Row row) {
@@ -93,11 +91,13 @@ public class CreateTableBuilder extends CommonBuilder {
 	}
 
 	private boolean isSequence(Row row) {
-		return StringUtil.isTrue(row.getCell(CellPositionType.SEQUENCE).getValue());
+		Predicate<Row> function = e -> StringUtil.isTrue(e.getCell(CellPositionType.SEQUENCE).getValue());
+		return function.test(row);
 	}
 
 	private boolean isPrimaryKey(Row row) {
-		return StringUtil.isTrue(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
+		Predicate<Row> function = e -> StringUtil.isTrue(e.getCell(CellPositionType.PRIMARY_KEY).getValue());
+		return function.test(row);
 	}
 
 }

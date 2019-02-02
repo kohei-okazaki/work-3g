@@ -44,8 +44,6 @@
 
   <!-- 健康情報計算サービス -->
   <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
-  <!-- 健康情報利用機能サービス -->
-  <bean id="healthInfoFunctionService" class="jp.co.ha.business.healthInfo.impl.HealthInfoFunctionServiceImpl" />
 
   <!-- セッション管理サービス -->
   <bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />

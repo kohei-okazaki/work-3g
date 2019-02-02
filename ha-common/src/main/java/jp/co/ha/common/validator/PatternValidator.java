@@ -31,6 +31,6 @@ public class PatternValidator implements ConstraintValidator<Pattern, String> {
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return this.regix.is(value);
+		return this.regix.is().test(value);
 	}
 }

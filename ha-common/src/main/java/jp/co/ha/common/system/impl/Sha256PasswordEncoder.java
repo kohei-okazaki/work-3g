@@ -34,26 +34,21 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 	@Override
 	public String execute(String password, String salt) throws AlgorithmException {
 
-		char[] passCharAry = password.toCharArray();
-		byte[] hashedSalt = getHashedSalt(salt);
-
-		PBEKeySpec keySpec = new PBEKeySpec(passCharAry, hashedSalt, ITERATION_COUNT, KEY_LENGTH);
-
 		SecretKey secretKey;
 		try {
-			SecretKeyFactory skf = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM);
-			secretKey = skf.generateSecret(keySpec);
+			char[] passCharAry = password.toCharArray();
+			byte[] hashedSalt = getHashedSalt(salt);
+			PBEKeySpec keySpec = new PBEKeySpec(passCharAry, hashedSalt, ITERATION_COUNT, KEY_LENGTH);
+			secretKey = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM).generateSecret(keySpec);
 		} catch (NoSuchAlgorithmException e) {
 			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "アルゴリズムが存在しません、ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
 		} catch (InvalidKeySpecException e) {
 			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
 		}
 
-		byte[] passByteAry = secretKey.getEncoded();
-
 		// 生成されたバイト配列を16進数の文字列に変換
 		StringBuilder sb = new StringBuilder(64);
-		for (byte b : passByteAry) {
+		for (byte b : secretKey.getEncoded()) {
 			sb.append(String.format("%02x", b & 0xff));
 		}
 		return sb.toString();

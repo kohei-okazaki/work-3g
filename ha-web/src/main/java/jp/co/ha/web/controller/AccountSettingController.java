@@ -58,7 +58,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@ModelAttribute
+	@ModelAttribute("accountSettingForm")
 	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得

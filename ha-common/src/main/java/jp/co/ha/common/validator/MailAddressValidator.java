@@ -21,6 +21,6 @@ public class MailAddressValidator implements ConstraintValidator<MailAddress, St
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return RegixType.MAIL_ADDRESS.is(value);
+		return RegixType.MAIL_ADDRESS.is().test(value);
 	}
 }

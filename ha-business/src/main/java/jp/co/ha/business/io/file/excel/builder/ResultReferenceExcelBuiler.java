@@ -35,19 +35,18 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelM
 	 */
 	@Override
 	protected void writeData(Sheet sheet) {
-
 		Stream.iterate(0, i -> ++i).limit(this.modelList.size()).forEach(i -> {
 			ReferenceExcelModel model = modelList.get(i);
-			final int ROW_POSITION = i + 1;
-			Cell cell = getCell(sheet, ROW_POSITION, 0);
+			var rowPosition = i++;
+			Cell cell = getCell(sheet, rowPosition, 0);
 			setText(cell, model.getHeight().toString());
-			cell = getCell(sheet, ROW_POSITION, 1);
+			cell = getCell(sheet, rowPosition, 1);
 			setText(cell, model.getWeight().toString());
-			cell = getCell(sheet, ROW_POSITION, 2);
+			cell = getCell(sheet, rowPosition, 2);
 			setText(cell, model.getBmi().toString());
-			cell = getCell(sheet, ROW_POSITION, 3);
+			cell = getCell(sheet, rowPosition, 3);
 			setText(cell, model.getStandardWeight().toString());
-			cell = getCell(sheet, ROW_POSITION, 4);
+			cell = getCell(sheet, rowPosition, 4);
 			setText(cell, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 		});
 	}

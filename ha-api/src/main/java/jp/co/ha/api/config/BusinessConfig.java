@@ -14,9 +14,7 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl;
-import jp.co.ha.business.healthInfo.impl.HealthInfoFunctionServiceImpl;
 
 /**
  * BusinessのBean登録クラス
@@ -63,16 +61,6 @@ public class BusinessConfig {
 	@Bean
 	public HealthInfoCalcService healthInfoCalcService() {
 		return new HealthInfoCalcServiceImpl();
-	}
-
-	/**
-	 * 健康情報利用機能サービス
-	 *
-	 * @return HealthInfoFunctionService
-	 */
-	@Bean
-	public HealthInfoFunctionService healthInfoFunctionService() {
-		return new HealthInfoFunctionServiceImpl();
 	}
 
 	/**

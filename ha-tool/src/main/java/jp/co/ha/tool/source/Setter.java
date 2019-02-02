@@ -10,8 +10,9 @@ import jp.co.ha.tool.type.AccessType;
 /**
  * Setter
  *
+ * @param <T>
  */
-public class Setter extends Method {
+public class Setter<T> extends Method<T> {
 
 	/** 接頭語 */
 	private static final String PREFIX = "set";
@@ -22,7 +23,7 @@ public class Setter extends Method {
 	 * @param field
 	 *     Field情報
 	 */
-	public Setter(Field field) {
+	public Setter(Field<T> field) {
 		super(field, AccessType.PUBLIC);
 	}
 

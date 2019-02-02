@@ -9,14 +9,14 @@ import jp.co.ha.tool.type.AccessType;
  * フィールド情報
  *
  */
-public class Field {
+public class Field<T> {
 
 	/** フィールド名 */
 	private String name;
 	/** コメント */
 	private String comment;
 	/** 型 */
-	private Class<?> classType;
+	private Class<T> classType;
 	/** アクセスタイプ */
 	private AccessType accessType;
 
@@ -30,7 +30,7 @@ public class Field {
 	 * @param classType
 	 *     型
 	 */
-	public Field(String name, String comment, Class<?> classType) {
+	public Field(String name, String comment, Class<T> classType) {
 		this(name, comment, classType, AccessType.PRIVATE);
 	}
 
@@ -46,7 +46,7 @@ public class Field {
 	 * @param accessType
 	 *     アクセスタイプ
 	 */
-	public Field(String name, String comment, Class<?> classType, AccessType accessType) {
+	public Field(String name, String comment, Class<T> classType, AccessType accessType) {
 		this.name = name;
 		this.comment = comment;
 		this.classType = classType;
@@ -131,7 +131,7 @@ public class Field {
 	 * @param classType
 	 *     クラス型
 	 */
-	public void setClassType(Class<?> classType) {
+	public void setClassType(Class<T> classType) {
 		this.classType = classType;
 	}
 

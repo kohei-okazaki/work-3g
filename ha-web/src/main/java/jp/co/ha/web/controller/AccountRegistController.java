@@ -53,7 +53,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 *
 	 * @return AccountRegistForm
 	 */
-	@ModelAttribute
+	@ModelAttribute("accountRegistForm")
 	public AccountRegistForm setUpForm() {
 		return new AccountRegistForm();
 	}

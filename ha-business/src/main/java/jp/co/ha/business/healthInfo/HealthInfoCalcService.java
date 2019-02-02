@@ -1,6 +1,7 @@
 package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
+import java.util.function.BiFunction;
 
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
@@ -11,15 +12,11 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 public interface HealthInfoCalcService {
 
 	/**
-	 * 入力体重と前の体重を比較し、健康ステータスを返す
+	 * 健康ステータスを返す
 	 *
-	 * @param inputWeight
-	 *     入力体重
-	 * @param beforeWeight
-	 *     前の体重
 	 * @return 健康情報ステータス
 	 */
-	HealthInfoStatus getHealthStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
+	BiFunction<BigDecimal, BigDecimal, HealthInfoStatus> getHealthInfoStatus();
 
 	/**
 	 * 単位を以下に変換する<br>

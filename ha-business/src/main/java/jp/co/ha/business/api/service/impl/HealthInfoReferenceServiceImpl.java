@@ -1,5 +1,8 @@
 package jp.co.ha.business.api.service.impl;
 
+import java.util.List;
+import java.util.function.Function;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
@@ -15,6 +18,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
@@ -57,7 +61,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 		}
 
 		// API利用判定
-		useApi(account, request);
+		checkApiUse(account, request);
 	}
 
 	/**
@@ -66,28 +70,25 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	@Override
 	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
 
-		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(request.getHealthInfoId());
-		if (BeanUtil.isNull(entity)) {
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(), request.getUserId());
+		if (CollectionUtil.isEmpty(healthInfoList)) {
 			throw new HealthInfoException(ErrorCode.DB_NO_DATA, "該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId());
 		}
-
-		// レスポンスに変換する
-		HealthInfoReferenceResponse response = toResponse(entity);
-
-		return response;
+		return toResponse().apply(healthInfoList.get(0));
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceResponse toResponse(HealthInfo healthInfo) {
-
-		HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
-		BeanUtil.copy(healthInfo, response);
-		response.setRegDate(DateUtil.toString(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-		response.setResult(ResultType.SUCCESS);
-		return response;
+	public Function<HealthInfo, HealthInfoReferenceResponse> toResponse() {
+		return e -> {
+			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
+			BeanUtil.copy(e, response);
+			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			response.setResult(ResultType.SUCCESS);
+			return response;
+		};
 	}
 
 }

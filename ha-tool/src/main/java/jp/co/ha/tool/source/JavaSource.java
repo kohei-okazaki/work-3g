@@ -27,9 +27,9 @@ public class JavaSource {
 	/** 実装インターフェース */
 	private List<Class<?>> implInterfaceList;
 	/** フィールド情報のリスト */
-	private List<Field> fieldList;
+	private List<Field<?>> fieldList;
 	/** メソッドのリスト */
-	private List<Method> methodList;
+	private List<Method<?>> methodList;
 
 	/**
 	 * コンストラクタ
@@ -160,7 +160,7 @@ public class JavaSource {
 	 *
 	 * @return fieldList
 	 */
-	public List<Field> getFieldList() {
+	public List<Field<?>> getFieldList() {
 		return fieldList;
 	}
 
@@ -170,7 +170,7 @@ public class JavaSource {
 	 * @param field
 	 *     フィールド
 	 */
-	public void addField(Field field) {
+	public void addField(Field<?> field) {
 		this.fieldList.add(field);
 	}
 
@@ -179,7 +179,7 @@ public class JavaSource {
 	 *
 	 * @return methodList
 	 */
-	public List<Method> getMethodList() {
+	public List<Method<?>> getMethodList() {
 		return methodList;
 	}
 
@@ -189,7 +189,7 @@ public class JavaSource {
 	 * @param method
 	 *     メソッド
 	 */
-	public void addMethod(Method method) {
+	public void addMethod(Method<?> method) {
 		this.methodList.add(method);
 	}
 

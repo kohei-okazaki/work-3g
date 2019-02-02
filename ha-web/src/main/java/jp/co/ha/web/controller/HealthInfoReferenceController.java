@@ -85,7 +85,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *
 	 * @return HealthInfoReferenceForm
 	 */
-	@ModelAttribute
+	@ModelAttribute("healthInfoReferenceForm")
 	public HealthInfoReferenceForm setUpForm() {
 		HealthInfoReferenceForm form = new HealthInfoReferenceForm();
 		form.setRegDateSelectFlag(StringUtil.FALSE_FLAG);

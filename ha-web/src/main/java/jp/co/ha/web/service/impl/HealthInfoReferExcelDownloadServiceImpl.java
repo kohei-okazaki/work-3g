@@ -1,7 +1,7 @@
 package jp.co.ha.web.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.business.io.file.excel.builder.ResultReferenceExcelBuiler;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelModel;
 import jp.co.ha.common.exception.BaseException;
@@ -30,9 +29,6 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service(value = "referenceDownloadExcel")
 public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadService<List<HealthInfoReferenceResponse>> {
 
-	/** 健康情報利用機能サービス */
-	@Autowired
-	private HealthInfoFunctionService healthInfoFunctionService;
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
@@ -63,25 +59,17 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 */
 	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResponse> apiResponseList,
 			HealthInfoFileSetting entity) {
-
-		// 健康情報マスク利用有無
-		boolean useHealthInfoMask = healthInfoFunctionService.useHealthInfoMask(entity);
-		List<ReferenceExcelModel> modelList = new ArrayList<>();
-		Stream.iterate(0, i -> ++i).limit(apiResponseList.size()).forEach(i -> {
-
-			// 結果照会Excel出力モデル
+		return Stream.iterate(0, i -> ++i).limit(apiResponseList.size()).map(i -> {
+			// Excel出力モデル
 			ReferenceExcelModel model = new ReferenceExcelModel();
 			HealthInfoReferenceResponse healthInfo = apiResponseList.get(i);
-			model.setHeight(useHealthInfoMask ? "****" : healthInfo.getHeight().toString());
-			model.setWeight(useHealthInfoMask ? "****" : healthInfo.getWeight().toString());
-			model.setBmi(useHealthInfoMask ? "****" : healthInfo.getBmi().toString());
-			model.setStandardWeight(useHealthInfoMask ? "****" : healthInfo.getStandardWeight().toString());
+			model.setHeight(healthInfo.getHeight().toString());
+			model.setWeight(healthInfo.getWeight().toString());
+			model.setBmi(healthInfo.getBmi().toString());
+			model.setStandardWeight(healthInfo.getStandardWeight().toString());
 			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-
-			modelList.add(model);
-		});
-
-		return modelList;
+			return model;
+		}).collect(Collectors.toList());
 	}
 
 	/**
@@ -96,6 +84,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 		conf.setCharsetType(Charset.UTF_8);
 		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
+		conf.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
 		return conf;
 	}
 

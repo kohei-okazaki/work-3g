@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.FileConfig;
@@ -35,16 +36,17 @@ public class DropBuilder extends CommonBuilder {
 			body.add(buildComment(e.getLogicalName()));
 			body.add(buildDropSql(e.getPhysicalName()));
 		});
-		FileConfig fileConf = getFileConfig(ExecuteType.DROP);
-		fileConf.setFileName("DROP" + FileExtension.SQL.getValue());
-		fileConf.setData(body.toString());
-		FileFactory.create(fileConf);
+		FileConfig conf = getFileConfig(ExecuteType.DROP);
+		conf.setFileName("DROP" + FileExtension.SQL.getValue());
+		conf.setData(body.toString());
+		FileFactory.create(conf);
 	}
 
 	private List<Table> getTableList(List<Row> rowList) {
-		List<Table> tableList = new ArrayList<>();
 		// header行を除外
-		rowList.remove(0);
+		List<Row> list = CollectionUtil.copyList(rowList);
+		list.remove(0);
+		List<Table> tableList = new ArrayList<>();
 		List<String> existTableList = new ArrayList<>();
 		for (Row row : rowList) {
 			String logicalName = row.getCell(CellPositionType.LOGICAL_NAME).getValue();

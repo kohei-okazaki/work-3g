@@ -20,7 +20,7 @@ public enum DateFormatType implements BaseEnum {
 	 * コンストラクタ
 	 *
 	 * @param value
-	 *     value
+	 *     値
 	 */
 	private DateFormatType(String value) {
 		this.value = value;

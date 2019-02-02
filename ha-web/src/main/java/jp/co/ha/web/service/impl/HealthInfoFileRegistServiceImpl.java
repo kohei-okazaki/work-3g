@@ -1,8 +1,8 @@
 package jp.co.ha.web.service.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,17 +47,15 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 */
 	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		Account account = accountSearchService.findByUserId(userId);
-		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
-		for (HealthInfoCsvUploadModel csvModel : modelList) {
+		return modelList.stream().map(e -> {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
-			BeanUtil.copy(csvModel, request);
+			BeanUtil.copy(e, request);
 			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-			request.setHeight(new BigDecimal(csvModel.getHeight()));
-			request.setWeight(new BigDecimal(csvModel.getWeight()));
+			request.setHeight(new BigDecimal(e.getHeight()));
+			request.setWeight(new BigDecimal(e.getWeight()));
 			request.setApiKey(account.getApiKey());
-			requestList.add(request);
-		}
-		return requestList;
+			return request;
+		}).collect(Collectors.toList());
 	}
 
 	/**
@@ -70,10 +68,10 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			if (!userId.equals(model.getUserId())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\nユーザIDの項目が不正です。ユーザID：" + model.getUserId());
 			}
-			if (!RegixType.HALF_NUMBER_PERIOD.is(model.getHeight())) {
+			if (!RegixType.HALF_NUMBER_PERIOD.is().test(model.getHeight())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n身長の項目が不正です。身長：" + model.getHeight());
 			}
-			if (!RegixType.HALF_NUMBER_PERIOD.is(model.getWeight())) {
+			if (!RegixType.HALF_NUMBER_PERIOD.is().test(model.getWeight())) {
 				throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "レコード：" + ++i + "行目\r\n体重の項目が不正です。体重：" + model.getWeight());
 			}
 		}

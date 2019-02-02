@@ -54,10 +54,9 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	 *
 	 * @return 健康情報ファイル入力画面フォーム
 	 */
-	@ModelAttribute
+	@ModelAttribute("healthInfoFileForm")
 	public HealthInfoFileForm setUpForm() {
-		HealthInfoFileForm healthInfoFileForm = new HealthInfoFileForm();
-		return healthInfoFileForm;
+		return new HealthInfoFileForm();
 	}
 
 	/**

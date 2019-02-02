@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.healthInfo.HealthInfoFunctionService;
 import jp.co.ha.business.io.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.common.exception.BaseException;
@@ -25,9 +24,6 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service(value = "healthInfoDownloadExcel")
 public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfo> {
 
-	/** 健康情報利用機能サービス */
-	@Autowired
-	private HealthInfoFunctionService healthInfoFunctionService;
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
@@ -40,6 +36,8 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(healthInfo.getUserId());
+
+		// 健康情報Excelモデルに変換
 		HealthInfoExcelModel model = toModel(healthInfo, healthInfoFileSetting);
 
 		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), List.of(model));
@@ -55,15 +53,11 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 * @return model
 	 */
 	private HealthInfoExcelModel toModel(HealthInfo healthInfo, HealthInfoFileSetting healthInfoFileSetting) {
-
 		HealthInfoExcelModel model = new HealthInfoExcelModel();
-
-		boolean useMask = healthInfoFunctionService.useHealthInfoMask(healthInfoFileSetting);
-		model.setHeight(useMask ? "****" : healthInfo.getHeight().toString());
-		model.setWeight(useMask ? "****" : healthInfo.getWeight().toString());
-		model.setBmi(useMask ? "****" : healthInfo.getBmi().toString());
-		model.setStandardWeight(useMask ? "****" : healthInfo.getStandardWeight().toString());
-
+		model.setHeight(healthInfo.getHeight().toString());
+		model.setWeight(healthInfo.getWeight().toString());
+		model.setBmi(healthInfo.getBmi().toString());
+		model.setStandardWeight(healthInfo.getStandardWeight().toString());
 		return model;
 	}
 
@@ -79,6 +73,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		conf.setCharsetType(Charset.UTF_8);
 		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
+		conf.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
 		return conf;
 	}
 

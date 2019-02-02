@@ -1,5 +1,7 @@
 package jp.co.ha.common.type;
 
+import java.util.function.Predicate;
+
 /**
  * 正規表現列挙
  *
@@ -42,12 +44,10 @@ public enum RegixType implements BaseEnum {
 	 * 指定した文字列<code>target</code>が自身の正規表現と一致するかどうか判定する<br>
 	 * 正しい場合true, 異なる場合falseを返す<br>
 	 *
-	 * @param target
-	 *     対象文字列
 	 * @return 判定結果
 	 */
-	public boolean is(String target) {
-		return target.matches(this.getValue());
+	public Predicate<String> is() {
+		return s -> s.matches(this.getValue());
 	}
 
 	/**
