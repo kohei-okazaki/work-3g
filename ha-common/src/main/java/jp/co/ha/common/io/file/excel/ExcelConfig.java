@@ -3,7 +3,8 @@ package jp.co.ha.common.io.file.excel;
 import jp.co.ha.common.type.Charset;
 
 /**
- * Excel設定情報保持クラス
+ * Excel設定情報保持クラス<br>
+ * 今後、追加するExcel設定情報は本クラスで定義する<br>
  *
  */
 public class ExcelConfig {
@@ -16,6 +17,8 @@ public class ExcelConfig {
 	private boolean hasHeader;
 	/** フッタ有無 */
 	private boolean hasFooter;
+	/** マスク利用有無 */
+	private boolean useMask;
 
 	/**
 	 * fileNameを返す
@@ -91,6 +94,25 @@ public class ExcelConfig {
 	 */
 	public void setHasFooter(boolean hasFooter) {
 		this.hasFooter = hasFooter;
+	}
+
+	/**
+	 * useMaskを返す
+	 *
+	 * @return useMask
+	 */
+	public boolean useMask() {
+		return useMask;
+	}
+
+	/**
+	 * useMaskを設定する
+	 *
+	 * @param useMask
+	 *     マスク利用有無
+	 */
+	public void setUseMask(boolean useMask) {
+		this.useMask = useMask;
 	}
 
 }

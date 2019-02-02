@@ -55,15 +55,11 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 * @return model
 	 */
 	private HealthInfoExcelModel toModel(HealthInfo healthInfo, HealthInfoFileSetting healthInfoFileSetting) {
-
 		HealthInfoExcelModel model = new HealthInfoExcelModel();
-
-		boolean useMask = healthInfoFunctionService.useHealthInfoMask(healthInfoFileSetting);
-		model.setHeight(useMask ? "****" : healthInfo.getHeight().toString());
-		model.setWeight(useMask ? "****" : healthInfo.getWeight().toString());
-		model.setBmi(useMask ? "****" : healthInfo.getBmi().toString());
-		model.setStandardWeight(useMask ? "****" : healthInfo.getStandardWeight().toString());
-
+		model.setHeight(healthInfo.getHeight().toString());
+		model.setWeight(healthInfo.getWeight().toString());
+		model.setBmi(healthInfo.getBmi().toString());
+		model.setStandardWeight(healthInfo.getStandardWeight().toString());
 		return model;
 	}
 
@@ -79,6 +75,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		conf.setCharsetType(Charset.UTF_8);
 		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
 		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
+		conf.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
 		return conf;
 	}
 

@@ -1,8 +1,8 @@
 package jp.co.ha.web.service.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,17 +47,15 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 */
 	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		Account account = accountSearchService.findByUserId(userId);
-		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
-		for (HealthInfoCsvUploadModel csvModel : modelList) {
+		return modelList.stream().map(e -> {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
-			BeanUtil.copy(csvModel, request);
+			BeanUtil.copy(e, request);
 			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-			request.setHeight(new BigDecimal(csvModel.getHeight()));
-			request.setWeight(new BigDecimal(csvModel.getWeight()));
+			request.setHeight(new BigDecimal(e.getHeight()));
+			request.setWeight(new BigDecimal(e.getWeight()));
 			request.setApiKey(account.getApiKey());
-			requestList.add(request);
-		}
-		return requestList;
+			return request;
+		}).collect(Collectors.toList());
 	}
 
 	/**
