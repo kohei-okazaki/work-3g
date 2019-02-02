@@ -2,6 +2,7 @@ package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
@@ -12,7 +13,7 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 public interface HealthInfoCalcService {
 
 	/**
-	 * 健康ステータスを返す
+	 * 健康情報ステータスを返す
 	 *
 	 * @return 健康情報ステータス
 	 */
@@ -26,17 +27,7 @@ public interface HealthInfoCalcService {
 	 *     対象の値
 	 * @return メートル
 	 */
-	BigDecimal convertMeterFromCentiMeter(BigDecimal target);
-
-	/**
-	 * 単位を以下に変換する<br>
-	 * m → cm
-	 *
-	 * @param target
-	 *     対象の値
-	 * @return センチメートル
-	 */
-	BigDecimal convertCentiMeterFromMeter(BigDecimal target);
+	Function<BigDecimal, BigDecimal> convertMeterFromCentiMeter();
 
 	/**
 	 * BMIを計算

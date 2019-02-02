@@ -3,7 +3,7 @@ package jp.co.ha.common.function;
 import jp.co.ha.common.exception.BaseException;
 
 /**
- * java.util.function.BiFunctionで例外処理ができないのでthrowできるようにしたクラス<br>
+ * {@link java.util.function.BiFunction} で例外処理ができないのでthrowできるようにしたクラス<br>
  * throwできる例外はBaseExceptionを継承したクラスのみとする
  *
  * @param <T>

@@ -3,25 +3,24 @@ package jp.co.ha.common.function;
 import jp.co.ha.common.exception.BaseException;
 
 /**
- * {@link java.util.function.Function} で例外処理ができないのでthrowできるようにしたクラス<br>
+ * {@link java.util.function.BiConsumer} で例外処理ができないのでthrowできるようにしたクラス<br>
  * throwできる例外はBaseExceptionを継承したクラスのみとする
  *
  * @param <T>
  *     t型
- * @param <R>
- *     r型
  */
 @FunctionalInterface
-public interface ThrowableFunction<T, R> {
+public interface ThrowableBiConsumer<T, U> {
 
 	/**
 	 * 関数を実行する
 	 *
 	 * @param t
 	 *     T
-	 * @return
+	 * @param u
+	 *     U
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	R apply(T t) throws BaseException;
+	void accept(T t, U u) throws BaseException;
 }

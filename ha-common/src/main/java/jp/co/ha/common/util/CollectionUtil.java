@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import jp.co.ha.common.function.ListOperatorFunction;
+
 /**
  * CollectionのUtilクラス
  *
@@ -40,7 +42,7 @@ public class CollectionUtil {
 		if (isEmpty(list)) {
 			return null;
 		}
-		ListOperator<T> lastOperator = l -> l.get(0);
+		ListOperatorFunction<T> lastOperator = l -> l.get(0);
 		return lastOperator.get(list);
 	}
 
@@ -55,7 +57,7 @@ public class CollectionUtil {
 		if (isEmpty(list)) {
 			return null;
 		}
-		ListOperator<T> lastOperator = l -> l.get(l.size() - 1);
+		ListOperatorFunction<T> lastOperator = l -> l.get(l.size() - 1);
 		return lastOperator.get(list);
 	}
 
@@ -90,22 +92,6 @@ public class CollectionUtil {
 	 */
 	public static <T> List<T> copyList(List<T> src) {
 		return src.stream().collect(Collectors.toList());
-	}
-
-	/**
-	 * 指定したリストに対して要素を一つ返す関数インターフェース
-	 *
-	 * @param <T>
-	 */
-	@FunctionalInterface
-	public static interface ListOperator<T> {
-
-		/**
-		 * 指定したリストに対して要素を一つ返す関数
-		 * @param list 対象のリスト
-		 * @return 要素
-		 */
-		T get(List<T> list);
 	}
 
 }
