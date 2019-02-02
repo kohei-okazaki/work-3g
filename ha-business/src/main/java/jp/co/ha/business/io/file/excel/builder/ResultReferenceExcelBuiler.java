@@ -35,10 +35,9 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelM
 	 */
 	@Override
 	protected void writeData(Sheet sheet) {
-
 		Stream.iterate(0, i -> ++i).limit(this.modelList.size()).forEach(i -> {
 			ReferenceExcelModel model = modelList.get(i);
-			final int ROW_POSITION = i + 1;
+			final int ROW_POSITION = i++;
 			Cell cell = getCell(sheet, ROW_POSITION, 0);
 			setText(cell, model.getHeight().toString());
 			cell = getCell(sheet, ROW_POSITION, 1);
