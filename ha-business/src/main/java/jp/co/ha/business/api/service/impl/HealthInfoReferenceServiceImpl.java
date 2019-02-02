@@ -1,7 +1,6 @@
 package jp.co.ha.business.api.service.impl;
 
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ import jp.co.ha.db.entity.HealthInfo;
  *
  */
 public class HealthInfoReferenceServiceImpl extends CommonService implements HealthInfoReferenceService {
-	BiFunction s;
+
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
