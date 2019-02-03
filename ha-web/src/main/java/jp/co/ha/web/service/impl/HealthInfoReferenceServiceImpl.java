@@ -1,6 +1,5 @@
 package jp.co.ha.web.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -107,18 +106,14 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 */
 	@Override
 	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
-
-		List<ReferenceCsvDownloadModel> modelList = new ArrayList<>();
-		Stream.iterate(0, i -> ++i).limit(resultList.size()).forEach(i -> {
+		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
 			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
 			HealthInfoReferenceResponse healthInfo = resultList.get(i);
 			BeanUtil.copy(healthInfo, model);
 			model.setUserId(userId);
 			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			modelList.add(model);
-		});
-
-		return modelList;
+			return model;
+		}).collect(Collectors.toList());
 	}
 
 	/**

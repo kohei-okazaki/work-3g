@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 public interface CalcOperator {
 
 	/**
-	 * 四則演算を定義
+	 * 四則演算行う
 	 *
 	 * @param target1
 	 *     対象1

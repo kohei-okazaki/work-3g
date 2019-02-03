@@ -159,9 +159,8 @@ public class HealthInfoReferenceController implements BaseWebController {
 			// レコードが見つからなかった場合
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
-		ModelAndView model = new ModelAndView(excelDownloadService.execute(resultList));
 
-		return model;
+		return new ModelAndView(excelDownloadService.execute(resultList));
 	}
 
 	/**

@@ -1,7 +1,6 @@
 package jp.co.ha.business.io.file.excel.builder;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -35,9 +34,9 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelM
 	 */
 	@Override
 	protected void writeData(Sheet sheet) {
-		Stream.iterate(0, i -> ++i).limit(this.modelList.size()).forEach(i -> {
+		var rowPosition = this.conf.hasHeader() ? 1 : 0;
+		for (int i = 0; i < this.modelList.size(); i++) {
 			ReferenceExcelModel model = modelList.get(i);
-			var rowPosition = i++;
 			Cell cell = getCell(sheet, rowPosition, 0);
 			setText(cell, model.getHeight().toString());
 			cell = getCell(sheet, rowPosition, 1);
@@ -48,6 +47,6 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelM
 			setText(cell, model.getStandardWeight().toString());
 			cell = getCell(sheet, rowPosition, 4);
 			setText(cell, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-		});
+		}
 	}
 }

@@ -17,7 +17,7 @@ public interface HealthInfoReferenceService
 	/**
 	 * 健康情報Entityを健康情報照会レスポンスクラスに変換する関数を返す
 	 *
-	 * @return 健康情報照会レスポンス変換関数
+	 * @return Function<HealthInfo, HealthInfoReferenceResponse>
 	 */
 	Function<HealthInfo, HealthInfoReferenceResponse> toResponse();
 }

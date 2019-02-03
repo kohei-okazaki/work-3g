@@ -31,6 +31,7 @@ import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -151,19 +152,15 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public ModelAndView excelDownload(HttpServletRequest request, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-
 		Integer requestHealthInfoId = form.getHealthInfoId();
-		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), requestHealthInfoId);
-
-		if (!hasRecord) {
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId, userId);
+		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
+		HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
 
-		HealthInfo entity = healthInfoSearchService.findByHealthInfoId(requestHealthInfoId);
-		ModelAndView model = new ModelAndView(excelDownloadService.execute(entity));
-
-		return model;
+		return new ModelAndView(excelDownloadService.execute(entity));
 	}
 
 	/**
@@ -182,15 +179,14 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
-
-		boolean hasRecord = healthInfoService.hasRecord(healthInfoSearchService.findByUserId(userId), form.getHealthInfoId());
-		if (!hasRecord) {
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(), userId);
+		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
 		// CSV出力モデルリストに変換する
-		List<HealthInfoCsvDownloadModel> modelList = healthInfoService.toModelList(healthInfoSearchService.findLastByUserId(userId));
+		List<HealthInfoCsvDownloadModel> modelList = healthInfoService.toModelList(healthInfoList);
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);

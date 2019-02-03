@@ -17,7 +17,7 @@ public interface HealthInfoRegistService
 	/**
 	 * リクエスト情報を健康情報に変換する
 	 *
-	 * @return 健康情報
+	 * @return ThrowableFunction<HealthInfoRegistRequest, HealthInfo>
 	 * @throws BaseException
 	 *     基底例外
 	 */
@@ -26,7 +26,7 @@ public interface HealthInfoRegistService
 	/**
 	 * 健康情報Entityを健康情報登録レスポンスクラスに変換する
 	 *
-	 * @return 健康情報登録レスポンス
+	 * @return ThrowableFunction<HealthInfo, HealthInfoRegistResponse>
 	 * @throws BaseException
 	 *     基底例外
 	 */

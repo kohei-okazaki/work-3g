@@ -1,8 +1,8 @@
 package jp.co.ha.web.service.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,22 +99,12 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean hasRecord(List<HealthInfo> entityList, Integer healthInfoId) {
-		return entityList.stream()
-				.map(e -> e.getHealthInfoId())
-				.anyMatch(e -> e.equals(healthInfoId));
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo) {
-		List<HealthInfoCsvDownloadModel> modelList = new ArrayList<>();
-		HealthInfoCsvDownloadModel model = new HealthInfoCsvDownloadModel();
-		BeanUtil.copy(healthInfo, model);
-		modelList.add(model);
-		return modelList;
+	public List<HealthInfoCsvDownloadModel> toModelList(List<HealthInfo> healthInfo) {
+		return healthInfo.stream().map(e -> {
+			HealthInfoCsvDownloadModel model = new HealthInfoCsvDownloadModel();
+			BeanUtil.copy(e, model);
+			return model;
+		}).collect(Collectors.toList());
 	}
 
 	/**
