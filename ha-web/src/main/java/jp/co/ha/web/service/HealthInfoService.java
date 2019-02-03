@@ -43,24 +43,13 @@ public interface HealthInfoService {
 	boolean isFirstReg(String userId) throws BaseException;
 
 	/**
-	 * 指定した健康情報リストの中に指定した健康情報IDが含まれるかどうか返す
-	 *
-	 * @param entityList
-	 *     健康情報リスト
-	 * @param healthInfoId
-	 *     健康情報ID
-	 * @return 判定結果
-	 */
-	boolean hasRecord(List<HealthInfo> entityList, Integer healthInfoId);
-
-	/**
 	 * CSVモデルリストに変換する
 	 *
-	 * @param healthInfo
-	 *     健康情報
+	 * @param healthInfoList
+	 *     健康情報リスト
 	 * @return CSVモデルリスト
 	 */
-	List<HealthInfoCsvDownloadModel> toModelList(HealthInfo healthInfo);
+	List<HealthInfoCsvDownloadModel> toModelList(List<HealthInfo> healthInfoList);
 
 	/**
 	 * 健康情報を登録する
