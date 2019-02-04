@@ -66,20 +66,20 @@ public class StringUtil {
 	/**
 	 * 空文字かどうか判定する<br>
 	 * トリム処理を行う<br>
-	 * 空文字の場合true, それ以外の場合false<br>
+	 * 空文字の場合true, それ以外の場合false
 	 *
 	 * @param target
 	 *     対象文字列
 	 * @return 判定結果
 	 */
 	public static boolean isEmpty(String target) {
-		Predicate<String> isEmpty = s -> s == null || "".equals(s);
+		Predicate<String> isEmpty = s -> s == null || "".equals(s.trim());
 		return isEmpty.test(target);
 	}
 
 	/**
 	 * 空文字かどうか判定する<br>
-	 * 空文字の場合、true, それ以外の場合false
+	 * 空文字の場合true, それ以外の場合false
 	 *
 	 * @param target
 	 *     対象文字列
@@ -123,7 +123,8 @@ public class StringUtil {
 	 * @param paddingType
 	 *     Paddingタイプ(右詰/左詰)
 	 * @return Padding後の文字列
-	 * @throws UnExpectedException PaddingTypeの指定が不正の場合
+	 * @throws UnExpectedException
+	 *     PaddingTypeの指定が不正の場合
 	 */
 	public static String padding(String target, int count, PaddingType paddingType) throws UnExpectedException {
 		if (count <= target.length()) {

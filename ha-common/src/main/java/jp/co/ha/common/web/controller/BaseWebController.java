@@ -10,7 +10,7 @@ import jp.co.ha.common.web.view.BaseView;
 public interface BaseWebController {
 
 	/**
-	 * viewを返す<br>
+	 * viewを返す
 	 *
 	 * @param view
 	 *     BaseView

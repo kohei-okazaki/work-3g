@@ -1,5 +1,7 @@
 package jp.co.ha.common.system;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -39,7 +41,12 @@ public interface SessionManageService {
 	void removeValues(HttpSession session);
 
 	/**
-	 * 指定されたキー名/型のセッション情報を取得する
+	 * 指定されたキー名/型のセッション情報を取得する<br>
+	 * 呼び出し元で以下の方法でT型に変換して下さい<br>
+	 * <ul>
+	 * <li>getValue(session, "key", T.class).get()</li>
+	 * <li>getValue(session, "key", T.class).orElseThrow(() -> new SessionIllegalException())</li>
+	 * </ul>
 	 *
 	 * @param session
 	 *     HttpSession
@@ -49,6 +56,6 @@ public interface SessionManageService {
 	 *     型
 	 * @return セッション情報
 	 */
-	<T> T getValue(HttpSession session, String key, Class<T> clazz);
+	<T> Optional<T> getValue(HttpSession session, String key, Class<T> clazz);
 
 }

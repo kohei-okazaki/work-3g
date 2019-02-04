@@ -15,7 +15,7 @@ public class MaskExecutor {
 
 	/**
 	 * マスク対象かどうか判定する<br>
-	 * マスク対象の場合true, それ以外の場合false<br>
+	 * マスク対象の場合true, それ以外の場合false
 	 *
 	 * @param field
 	 *     フィールド

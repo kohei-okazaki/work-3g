@@ -1,6 +1,7 @@
 package jp.co.ha.common.system.impl;
 
 import java.util.Enumeration;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,8 +45,8 @@ public class SessionManageServiceImpl implements SessionManageService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> T getValue(HttpSession session, String key, Class<T> clazz) {
-		return (T) session.getAttribute(key);
+	public <T> Optional<T> getValue(HttpSession session, String key, Class<T> clazz) {
+		return (Optional<T>) session.getAttribute(key);
 	}
 
 }

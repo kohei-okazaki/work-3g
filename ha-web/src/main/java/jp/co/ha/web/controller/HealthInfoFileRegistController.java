@@ -91,7 +91,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 			return getView(ManageWebView.HEALTH_INFO_FILE_INPUT);
 		}
 
-		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
 
 		List<HealthInfoCsvUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
 		fileService.formatCheck(modelList, userId);
@@ -105,16 +105,19 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	 * {@inheritDoc}
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
 
-		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class);
-		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class);
-		sessionManageService.removeValue(request.getSession(), "modelList");
+		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class)
+				.orElseThrow(() -> new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
+
 		if (CollectionUtil.isEmpty(modelList)) {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		fileService.regist(modelList, userId);
+		sessionManageService.removeValue(request.getSession(), "modelList");
 		return getView(ManageWebView.HEALTH_INFO_FILE_COMPLETE);
 	}
 

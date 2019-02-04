@@ -115,7 +115,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
@@ -151,7 +151,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request, HealthInfoForm form) throws BaseException {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		Integer requestHealthInfoId = form.getHealthInfoId();
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId, userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
@@ -178,7 +178,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@GetMapping(value = "/csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(), userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合

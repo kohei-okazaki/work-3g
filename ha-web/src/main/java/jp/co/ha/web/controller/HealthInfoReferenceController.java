@@ -125,7 +125,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 		}
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
 
@@ -151,10 +151,12 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws BaseException
 	 *     基底例外
 	 */
+	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
-		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class);
+		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class)
+				.orElseThrow(() -> new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		if (CollectionUtil.isEmpty(resultList)) {
 			// レコードが見つからなかった場合
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
@@ -173,13 +175,15 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws BaseException
 	 *     基底例外
 	 */
+	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
 		// sessionから検索結果リストとユーザIDを取得
 		HttpSession session = request.getSession();
-		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class);
-		String userId = sessionService.getValue(session, "userId", String.class);
+		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class)
+				.orElseThrow(() -> new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+		String userId = sessionService.getValue(session, "userId", String.class).get();
 		if (CollectionUtil.isEmpty(resultList)) {
 			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}

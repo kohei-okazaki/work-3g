@@ -120,7 +120,7 @@ public class LoginController implements BaseWebController {
 	@GetMapping("/top.html")
 	public String top(HttpServletRequest request) {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		return getView(StringUtil.isEmpty(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);
 	}
 }

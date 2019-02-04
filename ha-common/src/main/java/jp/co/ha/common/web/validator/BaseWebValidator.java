@@ -11,7 +11,7 @@ import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * 基底Validator<br>
- * webのvalidatorはこの抽象クラスを継承すること<br>
+ * webのvalidatorはこの抽象クラスを継承すること
  *
  * @param <F>
  *     validate対象form
@@ -28,7 +28,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	}
 
 	/**
-	 * fieldのformの値が空文字の場合、errorsオブジェクトにエラーを追加する<br>
+	 * fieldのformの値が空文字の場合、errorsオブジェクトにエラーを追加する
 	 *
 	 * @param errors
 	 *     エラー情報
@@ -38,15 +38,15 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	 *     メッセージ引数
 	 */
 	protected void rejectIfEmpty(Errors errors, String fieldsName, String msgArgs) {
-		Object field = getFieldValue(errors, fieldsName);
-		if (BeanUtil.isNull(field) || StringUtil.isEmpty(field.toString())) {
+		String field = getFieldValue(errors, fieldsName);
+		if (StringUtil.isEmpty(field.toString())) {
 			errors.rejectValue(fieldsName, ErrorCode.REQUIRE.getErrorMessage(), new String[] { msgArgs },
 					ErrorCode.REQUIRE.getErrorMessage());
 		}
 	}
 
 	/**
-	 * fieldのformの値がmaxを超過してる場合、errorsオブジェクトにエラーを追加する<br>
+	 * fieldのformの値がmaxを超過してる場合、errorsオブジェクトにエラーを追加する
 	 *
 	 * @param errors
 	 *     Errors
@@ -63,7 +63,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	}
 
 	/**
-	 * fieldのformの値がmin未満の場合、errorsオブジェクトにエラーを追加する<br>
+	 * fieldのformの値がmin未満の場合、errorsオブジェクトにエラーを追加する
 	 *
 	 * @param errors
 	 *     Errors
@@ -80,7 +80,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	}
 
 	/**
-	 * fieldValueが半角数字-ピリオドでない場合、errorsオブジェクトにエラーを追加する<br>
+	 * fieldValueが半角数字-ピリオドでない場合、errorsオブジェクトにエラーを追加する
 	 *
 	 * @param errors
 	 *     Errors
@@ -97,7 +97,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	}
 
 	/**
-	 * 入力値を返す<br>
+	 * 入力値を返す
 	 *
 	 * @param errors
 	 *     Errors
