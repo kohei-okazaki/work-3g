@@ -1,8 +1,5 @@
 package jp.co.ha.business.calc;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * 四則演算メソッド定義
  *
@@ -10,38 +7,38 @@ import java.math.RoundingMode;
 public enum CalcMethod {
 
 	/** 和 */
-	ADD((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
-			-> target1.add(target2).setScale(degit, roudingMode)),
+	ADD((target1, target2, digit, roudingMode)
+			-> target1.add(target2).setScale(digit, roudingMode)),
 	/** 差 */
-	SUBTRACT((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
-			-> target1.subtract(target2).setScale(degit, roudingMode)),
+	SUBTRACT((target1, target2, digit, roudingMode)
+			-> target1.subtract(target2).setScale(digit, roudingMode)),
 	/** 積 */
-	MULTIPLY((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
-			-> target1.multiply(target2).setScale(degit, roudingMode)),
+	MULTIPLY((target1, target2, digit, roudingMode)
+			-> target1.multiply(target2).setScale(digit, roudingMode)),
 	/** 商 */
-	DIVIDE((BigDecimal target1, BigDecimal target2, int degit, RoundingMode roudingMode)
-			-> target1.divide(target2, degit, roudingMode));
+	DIVIDE((target1, target2, digit, roudingMode)
+			-> target1.divide(target2, digit, roudingMode));
 
-	/** 四則演算オペレータインターフェース */
-	private CalcOperator operator;
+	/** 四則演算関数 */
+	private CalcOperatorFunction function;
 
 	/**
 	 * コンストラクタ
 	 *
-	 * @param operator
-	 *     四則演算オペレータインターフェース
+	 * @param function
+	 *     四則演算関数
 	 */
-	private CalcMethod(CalcOperator operator) {
-		this.operator = operator;
+	private CalcMethod(CalcOperatorFunction function) {
+		this.function = function;
 	}
 
 	/**
-	 * 四則演算オペレータを返す
+	 * 四則演算関数を返す
 	 *
-	 * @return operator
+	 * @return function
 	 */
-	public CalcOperator getOperator() {
-		return this.operator;
+	public CalcOperatorFunction getCalcOperatorFunction() {
+		return this.function;
 	}
 
 }

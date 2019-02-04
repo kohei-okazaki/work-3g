@@ -8,7 +8,7 @@ import java.math.RoundingMode;
  *
  */
 @FunctionalInterface
-public interface CalcOperator {
+public interface CalcOperatorFunction {
 
 	/**
 	 * 四則演算行う
@@ -17,11 +17,11 @@ public interface CalcOperator {
 	 *     対象1
 	 * @param target2
 	 *     対象2
-	 * @param degit
+	 * @param digit
 	 *     区切り
 	 * @param roundingMode
 	 *     丸め方法
 	 * @return 計算結果
 	 */
-	BigDecimal apply(BigDecimal target1, BigDecimal target2, int degit, RoundingMode roundingMode);
+	BigDecimal apply(BigDecimal target1, BigDecimal target2, int digit, RoundingMode roundingMode);
 }

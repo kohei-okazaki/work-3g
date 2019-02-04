@@ -13,7 +13,7 @@ public class HealthInfoException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param errorCode
 	 *     エラーコード
