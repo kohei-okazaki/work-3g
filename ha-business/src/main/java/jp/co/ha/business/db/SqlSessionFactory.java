@@ -52,8 +52,7 @@ public class SqlSessionFactory {
 		String sysPath = this.getClass().getClassLoader().getResource("").getPath();
 		File xmlFile = FileUtil.getFile(sysPath + FileSeparator.SYSTEM.getValue() + CONF_FILE);
 		try (InputStream is = new FileInputStream(xmlFile.getAbsolutePath())) {
-			org.apache.ibatis.session.SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(is);
-			return factory.openSession();
+			return new SqlSessionFactoryBuilder().build(is).openSession();
 		} catch (FileNotFoundException e) {
 			throw new AppIOException(ErrorCode.FILE_READING_ERROR, CONF_FILE + "が見つかりません");
 		} catch (IOException e) {

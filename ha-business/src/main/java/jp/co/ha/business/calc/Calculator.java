@@ -24,15 +24,15 @@ public class Calculator {
 	 *     四則演算メソッド
 	 * @param target2
 	 *     対象1
-	 * @param degit
+	 * @param digit
 	 *     区切り
 	 * @param roundingMode
 	 *     丸め方法
 	 * @return 計算結果
 	 */
-	public static BigDecimal calc(BigDecimal target1, CalcMethod method, BigDecimal target2, int degit,
+	public static BigDecimal calc(BigDecimal target1, CalcMethod method, BigDecimal target2, int digit,
 			RoundingMode roundingMode) {
-		return method.getOperator().apply(target1, target2, degit, roundingMode);
+		return method.getCalcOperatorFunction().apply(target1, target2, digit, roundingMode);
 	}
 
 }

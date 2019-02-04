@@ -13,7 +13,7 @@ public class AccountSettingException extends BaseException {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param errorCode
 	 *     エラーコード

@@ -40,7 +40,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e)
 			throws Exception {
 
 		if (isStaticResource().test(handler)) {
