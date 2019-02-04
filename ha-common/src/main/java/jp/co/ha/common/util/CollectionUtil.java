@@ -30,7 +30,7 @@ public class CollectionUtil {
 	 * @return 判定結果
 	 */
 	public static boolean isEmpty(List<?> list) {
-		Predicate<List<?>> predicate = l -> BeanUtil.isNull(list) || list.isEmpty();
+		Predicate<List<?>> predicate = l -> BeanUtil.isNull(l) || l.isEmpty();
 		return predicate.test(list);
 	}
 
@@ -72,7 +72,7 @@ public class CollectionUtil {
 	 * @return リストに要素が1以上の場合true, それ以外の場合false
 	 */
 	public static boolean exists(List<?> list) {
-		Predicate<List<?>> predicate = l -> !isEmpty(list);
+		Predicate<List<?>> predicate = l -> !isEmpty(l);
 		return predicate.test(list);
 	}
 

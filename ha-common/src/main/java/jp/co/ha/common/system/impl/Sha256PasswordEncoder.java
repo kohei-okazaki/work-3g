@@ -65,13 +65,12 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 	 *     アルゴリズム例外
 	 */
 	private static byte[] getHashedSalt(String salt) throws AlgorithmException {
-		MessageDigest messageDigest;
 		try {
-			messageDigest = MessageDigest.getInstance(HASH_ALGORITHM.getValue());
+			MessageDigest messageDigest = MessageDigest.getInstance(HASH_ALGORITHM.getValue());
+			messageDigest.update(salt.getBytes());
+			return messageDigest.digest();
 		} catch (NoSuchAlgorithmException e) {
 			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "指定したアルゴリズムが存在しません。アルゴリズム：" + HASH_ALGORITHM);
 		}
-		messageDigest.update(salt.getBytes());
-		return messageDigest.digest();
 	}
 }
