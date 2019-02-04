@@ -62,7 +62,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(userId);

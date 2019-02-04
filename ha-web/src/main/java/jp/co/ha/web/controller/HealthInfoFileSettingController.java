@@ -54,7 +54,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	public HealthInfoFileSettingForm setUpForm(HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class);
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		// 健康情報ファイル設定を取得
 		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId);
