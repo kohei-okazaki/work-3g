@@ -3,8 +3,7 @@
 
 ## 01_ビルド手順(windows)  
 1.コマンドプロンプトでha-build/batまで移動  
-2.maven-build.batを実行 
-(build.iniのbaseDirの値を適宜合わせて下さい、work3gの直下のha-common等がみれるように)  
+2.maven-build.batを実行(build.iniのbaseDirの値を適宜合わせて下さい、work3gの直下のha-common等がみれるように)  
 3.ha-api/pom.xmlのha-XXXのライブラリの依存関係をコメントアウト  
 4.ha-web/pom.xmlのha-XXXのライブラリの依存関係をコメントアウト  
 
