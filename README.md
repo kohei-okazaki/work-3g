@@ -8,32 +8,32 @@
 4.ha-web/pom.xmlのha-XXXのライブラリの依存関係をコメントアウト  
 
 ## 02_Project構成  
-### ha-api  
+* ### ha-api  
 リクエストBodyにJSONを設定したPOST形式のHTTPリクエストを処理するプロジェクト  
 
-### ha-build  
+* ### ha-build  
 ローカル環境でjarを作成するプロジェクト  
 windows, linuxでそれぞれbatとshを用意  
 
-### ha-business  
+* ### ha-business  
 api, webで共通的に使うbusinessロジックをまとめたプロジェクト  
 
-### ha-common  
+* ### ha-common  
 Util, 基底クラスをまとめたプロジェクト  
 
-### ha-db  
+* ### ha-db  
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
 
-### ha-pom  
+* ### ha-pom  
 api, business, common, tool, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
-### ha-resource  
+* ### ha-resource  
 ddlなどを定義したプロジェクト  
 
-### ha-tool  
+* ### ha-tool  
 指定のフォーマットのExcelからDDLなどを自動生成するプロジェクト  
 
-### ha-web  
+* ### ha-web  
 管理画面のプロジェクト  
 
 
