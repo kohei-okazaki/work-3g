@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.MailAddress;
 
 /**
- * メールアドレス形式チェックvalidator<br>
+ * メールアドレス形式チェックvalidator
  *
  */
 public class MailAddressValidator implements ConstraintValidator<MailAddress, String> {

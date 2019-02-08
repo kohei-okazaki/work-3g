@@ -14,7 +14,7 @@ import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.validator.PatternValidator;
 
 /**
- * 型チェックvalidator<br>
+ * 型チェックアノテーション
  *
  * @see jp.co.ha.common.validator.PatternValidator
  *

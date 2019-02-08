@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Pattern;
 
 /**
- * 型チェックvalidator<br>
+ * 型チェックvalidator
  *
  */
 public class PatternValidator implements ConstraintValidator<Pattern, String> {
