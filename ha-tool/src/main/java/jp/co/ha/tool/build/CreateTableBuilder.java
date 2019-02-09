@@ -38,10 +38,11 @@ public class CreateTableBuilder extends CommonBuilder {
 			body.add(ddlPrefix);
 			Table table = toTable(excel.getRowList(), tableName);
 			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + StringUtil.CRLF);
-			for (Column column : table.getColumnList()) {
-				columnData.add(column.getComment() + StringUtil.NEW_LINE + column.getName() + StringUtil.SPACE + column.getType());
-			}
-			body.add(columnData.toString()).add(ddlSuffix);
+			table.getColumnList().stream().forEach(e -> {
+				columnData.add(e.getComment() + StringUtil.NEW_LINE + e.getName() + StringUtil.SPACE + e.getType());
+			});
+			body.add(columnData.toString());
+			body.add(ddlSuffix);
 
 			FileConfig conf = getFileConfig(ExecuteType.DDL);
 			conf.setFileName(tableName.toUpperCase() + FileExtension.SQL.getValue());
