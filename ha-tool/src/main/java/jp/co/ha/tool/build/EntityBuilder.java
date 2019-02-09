@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
@@ -30,12 +31,9 @@ import jp.co.ha.tool.type.ExecuteType;
  *
  */
 @Deprecated
-public class EntityBuilder extends CommonBuilder {
+public class EntityBuilder extends BaseBuilder {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
+	@Build
 	public void execute() {
 
 		Excel excel = super.reader.read();

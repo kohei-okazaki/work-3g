@@ -11,6 +11,10 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.config.ExcelConfig;
 import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.excel.Cell;
+import jp.co.ha.tool.excel.Row;
+import jp.co.ha.tool.reader.ExcelReader;
+import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
@@ -26,6 +30,9 @@ public abstract class BaseBuilder {
 	protected List<String> targetTableList;
 	/** 基底ディレクトリ */
 	protected String baseDir;
+
+	/** ExcelReader */
+	protected ExcelReader reader;
 
 	/**
 	 * コンストラクタ
@@ -47,6 +54,8 @@ public abstract class BaseBuilder {
 		}
 
 		this.baseDir = prop.getProperty("baseDir");
+
+		this.reader = new ExcelReader(getExcelConfig());
 	}
 
 	/**
@@ -70,18 +79,36 @@ public abstract class BaseBuilder {
 	 */
 	protected FileConfig getFileConfig(ExecuteType execType) {
 		FileConfig conf = new FileConfig();
-		if (execType == ExecuteType.DDL) {
+		switch (execType) {
+		case DDL:
 			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\ddl");
-		} else if (execType == ExecuteType.ENTITY) {
+			break;
+		case ENTITY:
 			conf.setOutputPath(this.baseDir + "\\ha-tool\\src\\main\\java\\jp\\co\\ha\\tool\\source");
-		} else if (execType == ExecuteType.DROP) {
+			break;
+		case DROP:
 			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\drop");
+			break;
+		case DML:
+			break;
+		default:
+			break;
 		}
 		return conf;
 	}
 
 	/**
-	 * メイン処理
+	 * 対象のテーブルかどうか判定
+	 *
+	 * @param row
+	 *     excelの行情報
+	 * @param tableName
+	 *     テーブル名
+	 * @return 判定結果
 	 */
-	protected abstract void execute();
+	protected boolean isTargetTable(Row row, String tableName) {
+		Cell cell = row.getCell(CellPositionType.PHYSICAL_NAME);
+		return tableName.equals(cell.getValue());
+	}
+
 }

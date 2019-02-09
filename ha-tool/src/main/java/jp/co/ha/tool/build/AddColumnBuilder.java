@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+import jp.co.ha.common.type.DateFormatType;
+import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
@@ -25,12 +28,12 @@ import jp.co.ha.tool.type.ExecuteType;
  * のDDLを作成
  *
  */
-public class AddColumnBuilder extends CommonBuilder {
+public class AddColumnBuilder extends BaseBuilder {
 
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
+	@Build
 	public void execute() {
 
 		Excel excel = super.reader.read();
@@ -52,7 +55,7 @@ public class AddColumnBuilder extends CommonBuilder {
 		}
 
 		FileConfig fileConf = getFileConfig(ExecuteType.DDL);
-		fileConf.setFileName("test" + FileExtension.SQL.getValue());
+		fileConf.setFileName(DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + FileExtension.SQL.getValue());
 		fileConf.setData(body.toString());
 		FileFactory.create(fileConf);
 	}

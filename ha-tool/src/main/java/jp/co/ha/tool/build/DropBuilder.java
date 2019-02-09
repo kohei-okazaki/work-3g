@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
@@ -19,12 +20,9 @@ import jp.co.ha.tool.type.ExecuteType;
  * DropSQLビルダー
  *
  */
-public class DropBuilder extends CommonBuilder {
+public class DropBuilder extends BaseBuilder {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
+	@Build
 	public void execute() {
 
 		Excel excel = super.reader.read();
