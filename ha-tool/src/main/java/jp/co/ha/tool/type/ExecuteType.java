@@ -5,7 +5,6 @@ package jp.co.ha.tool.type;
  *
  */
 public enum ExecuteType {
-
 	/** entity作成 */
 	ENTITY,
 	/** DDL作成 */
@@ -14,5 +13,4 @@ public enum ExecuteType {
 	DML,
 	/** DROP作成 */
 	DROP;
-
 }

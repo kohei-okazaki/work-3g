@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Column;
 import jp.co.ha.tool.db.Table;
@@ -20,12 +21,9 @@ import jp.co.ha.tool.type.ExecuteType;
  * テーブルを作成するビルダー
  *
  */
-public class CreateTableBuilder extends CommonBuilder {
+public class CreateTableBuilder extends BaseBuilder {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
+	@Build
 	public void execute() {
 
 		Excel excel = super.reader.read();
