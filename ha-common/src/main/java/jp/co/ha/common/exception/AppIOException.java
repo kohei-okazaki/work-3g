@@ -17,7 +17,7 @@ public class AppIOException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public AppIOException(ErrorCode errorCode, String detail) {
+	public AppIOException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 

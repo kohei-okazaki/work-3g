@@ -3,7 +3,7 @@ package jp.co.ha.common.util;
 import java.util.List;
 import java.util.function.Predicate;
 
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.UnExpectedException;
 
 /**
@@ -140,7 +140,7 @@ public class StringUtil {
 				// 右詰
 				body = StringUtil.SPACE + body;
 			} else {
-				throw new UnExpectedException(ErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
+				throw new UnExpectedException(CommonErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
 			}
 		}
 		return body;

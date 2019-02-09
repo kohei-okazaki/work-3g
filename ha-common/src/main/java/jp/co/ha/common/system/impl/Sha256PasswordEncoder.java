@@ -9,7 +9,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
 import jp.co.ha.common.exception.AlgorithmException;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.system.PasswordEncoder;
 import jp.co.ha.common.system.type.Algorithm;
 
@@ -41,9 +41,9 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 			PBEKeySpec keySpec = new PBEKeySpec(passCharAry, hashedSalt, ITERATION_COUNT, KEY_LENGTH);
 			secretKey = SecretKeyFactory.getInstance(PASSWORD_ALGORITHM).generateSecret(keySpec);
 		} catch (NoSuchAlgorithmException e) {
-			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "アルゴリズムが存在しません、ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
+			throw new AlgorithmException(CommonErrorCode.ALGORITH_ERROR, "アルゴリズムが存在しません、ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
 		} catch (InvalidKeySpecException e) {
-			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
+			throw new AlgorithmException(CommonErrorCode.ALGORITH_ERROR, "ハッシュアルゴリズム：" + PASSWORD_ALGORITHM);
 		}
 
 		// 生成されたバイト配列を16進数の文字列に変換
@@ -70,7 +70,7 @@ public class Sha256PasswordEncoder implements PasswordEncoder {
 			messageDigest.update(salt.getBytes());
 			return messageDigest.digest();
 		} catch (NoSuchAlgorithmException e) {
-			throw new AlgorithmException(ErrorCode.ALGORITH_ERROR, "指定したアルゴリズムが存在しません。アルゴリズム：" + HASH_ALGORITHM);
+			throw new AlgorithmException(CommonErrorCode.ALGORITH_ERROR, "指定したアルゴリズムが存在しません。アルゴリズム：" + HASH_ALGORITHM);
 		}
 	}
 }

@@ -12,12 +12,13 @@ import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.function.ThrowableFunction;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
@@ -55,18 +56,18 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 				|| StringUtil.isEmpty(request.getUserId())
 				|| BeanUtil.isNull(request.getHeight())
 				|| BeanUtil.isNull(request.getWeight())) {
-			throw new HealthInfoException(ErrorCode.HEALTH_INFO_REG_EMPTY, "必須エラー");
+			throw new HealthInfoException(ApiErrorCode.HEALTH_INFO_REG_EMPTY, "必須エラー");
 		}
 
 		// リクエスト種別チェック
 		if (!RequestType.HEALTH_INFO_REGIST.is(request.getRequestType())) {
-			throw new HealthInfoException(ErrorCode.REQUEST_ID_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
+			throw new HealthInfoException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
-			throw new HealthInfoException(ErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+			throw new HealthInfoException(WebErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
 		}
 
 		// API利用判定

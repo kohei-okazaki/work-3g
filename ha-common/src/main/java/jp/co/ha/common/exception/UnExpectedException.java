@@ -17,7 +17,7 @@ public class UnExpectedException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public UnExpectedException(ErrorCode errorCode, String detail) {
+	public UnExpectedException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 

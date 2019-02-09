@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 
 /**
  * Json操作のUtilクラス
@@ -39,11 +39,11 @@ public class JsonUtil {
 		try {
 			return new ObjectMapper().readValue(target, clazz);
 		} catch (JsonParseException e) {
-			throw new AppIOException(ErrorCode.JSON_FORMAT_ERROR, target + "をjavaクラスへの変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.JSON_FORMAT_ERROR, target + "をjavaクラスへの変換に失敗しました");
 		} catch (JsonMappingException e) {
-			throw new AppIOException(ErrorCode.JSON_MAPPING_ERROR, target + "をjavaクラスへの変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.JSON_MAPPING_ERROR, target + "をjavaクラスへの変換に失敗しました");
 		} catch (IOException e) {
-			throw new AppIOException(ErrorCode.RUNTIME_ERROR, target + "をjavaクラスへの変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.RUNTIME_ERROR, target + "をjavaクラスへの変換に失敗しました");
 		}
 	}
 
@@ -61,7 +61,7 @@ public class JsonUtil {
 		try {
 			return new ObjectMapper().writeValueAsString(target);
 		} catch (JsonProcessingException e) {
-			throw new AppIOException(ErrorCode.JSON_MAPPING_ERROR, target + "をJSON文字列への変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.JSON_MAPPING_ERROR, target + "をJSON文字列への変換に失敗しました");
 		}
 
 	}

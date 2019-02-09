@@ -98,7 +98,7 @@ public class LoginController implements BaseWebController {
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		LoginCheckResult checkResult = new LoginCheck().check(account, form.getUserId(), form.getPassword());
 		if (checkResult.hasError()) {
-			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getValidateMessage(), null, Locale.getDefault());
+			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getOuterErrorCode(), null, Locale.getDefault());
 			model.addAttribute("errorMessage", errorMessage);
 			return getView(ManageWebView.LOGIN);
 		}

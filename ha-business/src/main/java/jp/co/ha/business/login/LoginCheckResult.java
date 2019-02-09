@@ -1,6 +1,6 @@
 package jp.co.ha.business.login;
 
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.business.exception.WebErrorCode;
 
 /**
  * ログイン情報チェック結果保持クラス
@@ -11,7 +11,7 @@ public class LoginCheckResult {
 	/** エラーカウント */
 	private int errorCount = 0;
 	/** エラーコード */
-	private ErrorCode errorCode;
+	private WebErrorCode errorCode;
 
 	/**
 	 * エラーが存在するかどうかを返す
@@ -34,7 +34,7 @@ public class LoginCheckResult {
 	 *
 	 * @return errorCode
 	 */
-	public ErrorCode getErrorCode() {
+	public WebErrorCode getErrorCode() {
 		return errorCode;
 	}
 
@@ -44,7 +44,7 @@ public class LoginCheckResult {
 	 * @param errorCode
 	 *     エラーコード
 	 */
-	public void setErrorCode(ErrorCode errorCode) {
+	public void setErrorCode(WebErrorCode errorCode) {
 		this.errorCode = errorCode;
 	}
 

@@ -3,7 +3,7 @@ package jp.co.ha.common.web.validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -40,8 +40,8 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	protected void rejectIfEmpty(Errors errors, String fieldsName, String msgArgs) {
 		String field = getFieldValue(errors, fieldsName);
 		if (StringUtil.isEmpty(field.toString())) {
-			errors.rejectValue(fieldsName, ErrorCode.REQUIRE.getErrorMessage(), new String[] { msgArgs },
-					ErrorCode.REQUIRE.getErrorMessage());
+			errors.rejectValue(fieldsName, ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { msgArgs },
+					ValidateErrorCode.REQUIRE.getOuterErrorCode());
 		}
 	}
 
@@ -58,7 +58,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	protected void rejectIfLengthMax(Errors errors, String field, int max) {
 		String fieldValue = getFieldValue(errors, field);
 		if (max < fieldValue.length()) {
-			errors.rejectValue(fieldValue, ErrorCode.LENGTH_OVER.getErrorMessage());
+			errors.rejectValue(fieldValue, ValidateErrorCode.LENGTH_OVER.getOuterErrorCode());
 		}
 	}
 
@@ -75,7 +75,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	protected void rejectIfLengthMin(Errors errors, String field, int min) {
 		String fieldValue = getFieldValue(errors, field);
 		if (fieldValue.length() < min) {
-			errors.rejectValue(fieldValue, ErrorCode.LENGTH_LACK.getErrorMessage());
+			errors.rejectValue(fieldValue, ValidateErrorCode.LENGTH_LACK.getOuterErrorCode());
 		}
 	}
 
@@ -91,8 +91,8 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	 */
 	protected void rejectIfNotHalfNumberPeriod(Errors errors, String field, String nameArgs) {
 		if (!RegixType.HALF_NUMBER_PERIOD.is().test(getFieldValue(errors, field))) {
-			errors.rejectValue(field, ErrorCode.TYPE_VALID.getErrorMessage(), new String[] { nameArgs },
-					ErrorCode.TYPE_VALID.getErrorMessage());
+			errors.rejectValue(field, ValidateErrorCode.TYPE_ERROR.getOuterErrorCode(), new String[] { nameArgs },
+					ValidateErrorCode.TYPE_ERROR.getOuterErrorCode());
 		}
 	}
 

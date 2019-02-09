@@ -1,9 +1,9 @@
 package jp.co.ha.business.api.service;
 
 import jp.co.ha.business.api.request.BaseApiRequest;
+import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.db.entity.Account;
 
 /**
@@ -25,7 +25,7 @@ public abstract class CommonService {
 	 */
 	protected void checkApiUse(Account account, BaseApiRequest request) throws BaseException {
 		if (!account.getApiKey().equals(request.getApiKey())) {
-			throw new ApiException(ErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");
+			throw new ApiException(ApiErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");
 		}
 	}
 }

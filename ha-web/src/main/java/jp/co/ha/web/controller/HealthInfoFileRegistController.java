@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
@@ -110,11 +110,11 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
 
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class)
-				.orElseThrow(() -> new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
 
 		if (CollectionUtil.isEmpty(modelList)) {
-			throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		fileService.regist(modelList, userId);
 		sessionManageService.removeValue(request.getSession(), "modelList");

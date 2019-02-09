@@ -10,7 +10,7 @@ public abstract class BaseException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	/** エラーコード */
-	private ErrorCode errorCode;
+	private BaseErrorCode errorCode;
 	/** 詳細 */
 	private String detail;
 
@@ -22,7 +22,7 @@ public abstract class BaseException extends Exception {
 	 * @param detail
 	 *     詳細
 	 */
-	public BaseException(ErrorCode errorCode, String detail) {
+	public BaseException(BaseErrorCode errorCode, String detail) {
 		this.errorCode = errorCode;
 		this.detail = detail;
 	}
@@ -32,7 +32,7 @@ public abstract class BaseException extends Exception {
 	 *
 	 * @return errorCode エラーコード
 	 */
-	public ErrorCode getErrorCode() {
+	public BaseErrorCode getErrorCode() {
 		return errorCode;
 	}
 

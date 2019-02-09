@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -57,8 +57,8 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			errorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
 			// 予期せぬ例外にする
-			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getValidateMessage(), null, Locale.JAPANESE);
-			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null, Locale.JAPANESE);
+			errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
 		return body.toString();
@@ -66,20 +66,17 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 
 	private String getLogErrorMessage(Exception e) {
 		String detail;
-		String innerErrorCode;
 		String outerErrorCode;
 		StringBuilder body = new StringBuilder();
 		if (e instanceof BaseException) {
 			BaseException be = (BaseException) e;
 			detail = be.getDetail();
 			outerErrorCode = be.getErrorCode().getOuterErrorCode();
-			innerErrorCode = be.getErrorCode().getInternalErrorCode();
 		} else {
-			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getValidateMessage(), null, Locale.JAPANESE);
-			outerErrorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
-			innerErrorCode = ErrorCode.UNEXPECTED_ERROR.getInternalErrorCode();
+			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getValue(), null, Locale.JAPANESE);
+			outerErrorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
-		body.append(detail).append("(").append(outerErrorCode + " " + innerErrorCode).append(")");
+		body.append(detail).append("(").append(outerErrorCode).append(")");
 		return body.toString();
 	}
 }
