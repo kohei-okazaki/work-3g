@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Url;
 
 /**
- * URLチェックvalidator<br>
+ * URLチェックvalidator
  *
  */
 public class UrlValidator implements ConstraintValidator<Url, String> {

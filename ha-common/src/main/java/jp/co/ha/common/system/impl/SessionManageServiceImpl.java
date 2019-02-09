@@ -43,10 +43,10 @@ public class SessionManageServiceImpl implements SessionManageService {
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T> Optional<T> getValue(HttpSession session, String key, Class<T> clazz) {
-		return (Optional<T>) session.getAttribute(key);
+		return Optional.ofNullable((T) session.getAttribute(key));
 	}
 
 }

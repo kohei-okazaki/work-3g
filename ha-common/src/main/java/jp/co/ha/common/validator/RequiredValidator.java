@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Required;
 
 /**
- * 必須チェックvalidator<br>
+ * 必須チェックvalidator
  *
  */
 public class RequiredValidator implements ConstraintValidator<Required, Object> {

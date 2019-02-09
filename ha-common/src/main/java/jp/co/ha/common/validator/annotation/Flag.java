@@ -13,7 +13,7 @@ import javax.validation.Payload;
 import jp.co.ha.common.validator.FlagValidator;
 
 /**
- * フラグチェックアノテーション<br>
+ * フラグチェックアノテーション
  *
  * @see jp.co.ha.common.validator.FlagValidator
  *

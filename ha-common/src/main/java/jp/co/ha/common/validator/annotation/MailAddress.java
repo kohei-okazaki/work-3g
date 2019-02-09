@@ -13,7 +13,7 @@ import javax.validation.Payload;
 import jp.co.ha.common.validator.MailAddressValidator;
 
 /**
- * メールアドレス形式チェックアノテーション<br>
+ * メールアドレス形式チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MailAddressValidator
  *

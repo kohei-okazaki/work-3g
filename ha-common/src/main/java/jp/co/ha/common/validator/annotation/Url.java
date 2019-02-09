@@ -13,7 +13,7 @@ import javax.validation.Payload;
 import jp.co.ha.common.validator.UrlValidator;
 
 /**
- * URLチェックアノテーション<br>
+ * URLチェックアノテーション
  *
  * @see jp.co.ha.common.validator.UrlValidator
  *

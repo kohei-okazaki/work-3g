@@ -13,7 +13,7 @@ import javax.validation.Payload;
 import jp.co.ha.common.validator.MinValidator;
 
 /**
- * 最小桁数チェックアノテーション<br>
+ * 最小桁数チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MinValidator
  *

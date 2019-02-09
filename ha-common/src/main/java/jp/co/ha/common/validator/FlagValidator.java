@@ -9,7 +9,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Flag;
 
 /**
- * フラグチェックvalidator<br>
+ * フラグチェックvalidator
  *
  */
 public class FlagValidator implements ConstraintValidator<Flag, String> {
