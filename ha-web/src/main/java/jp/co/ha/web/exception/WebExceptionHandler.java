@@ -33,18 +33,21 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 		ModelAndView modelView = new ModelAndView();
 		// error画面を設定
 		modelView.setViewName(ManageWebView.ERROR.getName());
-		String errorMessage = buildErrorMessage(e);
 		// log出力
-		outLog(errorMessage, e);
-		request.setAttribute("errorMessage", errorMessage);
+		outLog(getLogErrorMessage(e), e);
+		request.setAttribute("errorMessage", getDispErrorMessage(e));
 		return modelView;
 	}
 
+
 	/**
-	 * {@inheritDoc}
+	 * 指定した例外の画面エラーメッセージを作成する
+	 *
+	 * @param e
+	 *     例外
+	 * @return エラーメッセージ
 	 */
-	@Override
-	public String buildErrorMessage(Exception e) {
+	private String getDispErrorMessage(Exception e) {
 		String detail;
 		String errorCode;
 		StringBuilder body = new StringBuilder();
@@ -58,6 +61,25 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
+		return body.toString();
+	}
+
+	private String getLogErrorMessage(Exception e) {
+		String detail;
+		String innerErrorCode;
+		String outerErrorCode;
+		StringBuilder body = new StringBuilder();
+		if (e instanceof BaseException) {
+			BaseException be = (BaseException) e;
+			detail = be.getDetail();
+			outerErrorCode = be.getErrorCode().getOuterErrorCode();
+			innerErrorCode = be.getErrorCode().getInternalErrorCode();
+		} else {
+			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getValidateMessage(), null, Locale.JAPANESE);
+			outerErrorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+			innerErrorCode = ErrorCode.UNEXPECTED_ERROR.getInternalErrorCode();
+		}
+		body.append(detail).append("(").append(outerErrorCode + " " + innerErrorCode).append(")");
 		return body.toString();
 	}
 }

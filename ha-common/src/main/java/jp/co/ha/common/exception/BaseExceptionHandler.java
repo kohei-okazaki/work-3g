@@ -16,15 +16,6 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 	static final Logger LOG = LoggerFactory.getLogger(BaseExceptionHandler.class);
 
 	/**
-	 * エラーメッセージを返す
-	 *
-	 * @param e
-	 *     例外クラス
-	 * @return エラーメッセージ
-	 */
-	String buildErrorMessage(Exception e);
-
-	/**
 	 * 指定したエラーメッセージのログを出力する
 	 *
 	 * @param errorMessage
