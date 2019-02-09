@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.web.view.ManageWebView;
 
 /**
@@ -33,18 +33,21 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 		ModelAndView modelView = new ModelAndView();
 		// error画面を設定
 		modelView.setViewName(ManageWebView.ERROR.getName());
-		String errorMessage = buildErrorMessage(e);
 		// log出力
-		outLog(errorMessage, e);
-		request.setAttribute("errorMessage", errorMessage);
+		outLog(getLogErrorMessage(e), e);
+		request.setAttribute("errorMessage", getDispErrorMessage(e));
 		return modelView;
 	}
 
+
 	/**
-	 * {@inheritDoc}
+	 * 指定した例外の画面エラーメッセージを作成する
+	 *
+	 * @param e
+	 *     例外
+	 * @return エラーメッセージ
 	 */
-	@Override
-	public String buildErrorMessage(Exception e) {
+	private String getDispErrorMessage(Exception e) {
 		String detail;
 		String errorCode;
 		StringBuilder body = new StringBuilder();
@@ -54,10 +57,26 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			errorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
 			// 予期せぬ例外にする
-			detail = messageSource.getMessage(ErrorCode.UNEXPECTED_ERROR.getValidateMessage(), null, Locale.JAPANESE);
-			errorCode = ErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null, Locale.JAPANESE);
+			errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
+		return body.toString();
+	}
+
+	private String getLogErrorMessage(Exception e) {
+		String detail;
+		String outerErrorCode;
+		StringBuilder body = new StringBuilder();
+		if (e instanceof BaseException) {
+			BaseException be = (BaseException) e;
+			detail = be.getDetail();
+			outerErrorCode = be.getErrorCode().getOuterErrorCode();
+		} else {
+			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getValue(), null, Locale.JAPANESE);
+			outerErrorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+		}
+		body.append(detail).append("(").append(outerErrorCode).append(")");
 		return body.toString();
 	}
 }

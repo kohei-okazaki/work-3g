@@ -6,12 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 
+import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.util.StringUtil;
 
 /**
  * ログイン情報のチェックを行うインターセプター
@@ -35,11 +34,8 @@ public class AuthInterceptor extends BaseWebInterceptor {
 		}
 		if (isLoginAuthCheck(handler)) {
 			// ログイン情報のチェック対象の場合
-			var result = StringUtil.isEmpty(sessionService.getValue(request.getSession(), "userId", String.class)
-					.orElseThrow(() -> new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "ユーザIDがありません")));
-			if (result) {
-				throw new SessionIllegalException(ErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-			}
+			sessionService.getValue(request.getSession(), "userId", String.class)
+					.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		}
 		return true;
 	}

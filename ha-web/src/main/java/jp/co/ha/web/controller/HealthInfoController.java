@@ -22,10 +22,11 @@ import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
@@ -156,7 +157,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId, userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
-			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 		HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
 
@@ -182,7 +183,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(), userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
-			throw new HealthInfoException(ErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
 		// CSV出力モデルリストに変換する
@@ -197,7 +198,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		try {
 			csvDownloadService.execute(response.getWriter(), conf, modelList);
 		} catch (IOException e) {
-			throw new AppIOException(ErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
 		}
 	}
 

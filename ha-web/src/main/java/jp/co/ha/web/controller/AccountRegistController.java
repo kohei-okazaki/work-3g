@@ -1,12 +1,9 @@
 package jp.co.ha.web.controller;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -38,9 +34,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(AccountRegistController.class);
-	/** MessageSource */
-	@Autowired
-	private MessageSource messageSource;
 	/** アカウント登録画面サービス */
 	@Autowired
 	private AccountRegistService accountRegistService;
@@ -84,9 +77,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
-			String errorMessage = messageSource.getMessage(ErrorCode.ACCOUNT_EXIST.getValidateMessage(), null,
-					Locale.getDefault());
-			model.addAttribute("errorMessage", errorMessage);
+			model.addAttribute("errorMessage", "アカウント情報が既に登録されています");
 			LOG.warn("アカウント情報が既に登録されています");
 			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 		}

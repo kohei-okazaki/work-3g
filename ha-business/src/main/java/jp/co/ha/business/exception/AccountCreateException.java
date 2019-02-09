@@ -1,7 +1,7 @@
 package jp.co.ha.business.exception;
 
+import jp.co.ha.common.exception.BaseErrorCode;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
 
 /**
  * アカウント作成例外クラス
@@ -20,7 +20,7 @@ public class AccountCreateException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public AccountCreateException(ErrorCode errorCode, String detail) {
+	public AccountCreateException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 }

@@ -1,7 +1,7 @@
 package jp.co.ha.business.exception;
 
+import jp.co.ha.common.exception.BaseErrorCode;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
 
 /**
  * 健康情報例外クラス
@@ -20,7 +20,7 @@ public class HealthInfoException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public HealthInfoException(ErrorCode errorCode, String detail) {
+	public HealthInfoException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 }

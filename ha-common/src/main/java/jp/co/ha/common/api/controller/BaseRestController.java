@@ -13,7 +13,7 @@ import jp.co.ha.common.api.response.BaseResponse;
 import jp.co.ha.common.api.response.ErrorResponse;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
@@ -74,11 +74,11 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 		BaseException baseException = null;
 		if (e instanceof InvalidFormatException) {
 			InvalidFormatException jfe = (InvalidFormatException) e;
-			baseException = new ApiException(ErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです");
+			baseException = new ApiException(CommonErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです");
 		} else if (e instanceof JsonParseException) {
-			baseException = new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません");
+			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません");
 		} else if (e instanceof JsonProcessingException) {
-			baseException = new ApiException(ErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません");
+			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません");
 		}
 		Rs response = (Rs) new ErrorResponse(baseException);
 		LOG.warnRes(response, baseException);

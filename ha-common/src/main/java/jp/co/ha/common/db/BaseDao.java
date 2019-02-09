@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.DataBaseException;
-import jp.co.ha.common.exception.ErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -45,17 +45,17 @@ public abstract class BaseDao {
 				this.stm = this.con.createStatement();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "JDBCドライバのロードに失敗");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "JDBCドライバのロードに失敗");
 		} catch (SQLException e) {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "DBに接続に失敗");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DBに接続に失敗");
 		} catch (IllegalArgumentException e) {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます");
 		} catch (InvocationTargetException e) {
 			LOG.error("", e);
 		} catch (NoSuchMethodException e) {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません");
 		} catch (SecurityException e) {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタの生成に失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタの生成に失敗しました");
 		}
 	}
 
@@ -70,7 +70,7 @@ public abstract class BaseDao {
 		try {
 			return this.rs.next();
 		} catch (SQLException e) {
-			throw new DataBaseException(ErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
 		}
 	}
 
@@ -94,10 +94,10 @@ public abstract class BaseDao {
 			} else if (SqlType.INSERT == type || SqlType.UPDATE == type) {
 				return this.stm.executeUpdate(sql);
 			} else {
-				throw new DataBaseException(ErrorCode.DB_SQL_SELECT_ERROR, "実行するSQlが存在しません");
+				throw new DataBaseException(CommonErrorCode.DB_SQL_SELECT_ERROR, "実行するSQlが存在しません");
 			}
 		} catch (SQLException e) {
-			throw new DataBaseException(ErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました");
 		}
 
 	}
@@ -123,7 +123,7 @@ public abstract class BaseDao {
 				LOG.debug("DB切断します");
 			}
 		} catch (SQLException e) {
-			throw new DataBaseException(ErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました");
 		}
 	}
 

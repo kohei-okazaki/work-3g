@@ -17,7 +17,7 @@ public class SessionIllegalException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public SessionIllegalException(ErrorCode errorCode, String detail) {
+	public SessionIllegalException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 

@@ -17,7 +17,7 @@ public class AlgorithmException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public AlgorithmException(ErrorCode errorCode, String detail) {
+	public AlgorithmException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 

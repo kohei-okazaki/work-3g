@@ -17,7 +17,7 @@ public class ApiException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public ApiException(ErrorCode errorCode, String detail) {
+	public ApiException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 

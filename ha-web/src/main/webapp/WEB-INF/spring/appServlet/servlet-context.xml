@@ -30,7 +30,10 @@
     <property name="basenames">
       <list>
         <value>META-INF/messages</value>
-        <value>META-INF/validationMessages</value>
+        <value>META-INF/apiErrorCode</value>
+        <value>META-INF/webErrorCode</value>
+        <value>META-INF/commonErrorCode</value>
+        <value>META-INF/validateErrorCode</value>
       </list>
     </property>
   </bean>

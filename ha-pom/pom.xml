@@ -235,6 +235,9 @@
       <resource>
         <directory>${basedir}/../ha-db/src/main/resources</directory>
       </resource>
+      <resource>
+        <directory>${basedir}/../ha-business/src/main/resources</directory>
+      </resource>
     </resources>
     <testResources>
       <testResource>
@@ -248,6 +251,9 @@
       </testResource>
       <testResource>
         <directory>${basedir}/../ha-db/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-business/src/test/resources</directory>
       </testResource>
     </testResources>
     <plugins>

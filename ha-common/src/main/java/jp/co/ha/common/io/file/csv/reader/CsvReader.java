@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.ErrorCode;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -54,7 +54,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 				modelList.add(this.read(record));
 			}
 		} catch (IOException e) {
-			throw new AppIOException(ErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。");
+			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。");
 		}
 
 		return modelList;
@@ -121,7 +121,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 */
 	private void checkFileLength(List<String> colList, List<String> dataList) throws BaseException {
 		if (dataList.size() != colList.size()) {
-			throw new AppIOException(ErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
+			throw new AppIOException(CommonErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
 		}
 	}
 

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -101,6 +103,11 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@Override
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request) throws BaseException {
+
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+		if (!userId.equals(form.getUserId())) {
+			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+		}
 
 		healthInfoFileSettingService.execute(form);
 
