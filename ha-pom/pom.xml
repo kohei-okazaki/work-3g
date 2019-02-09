@@ -20,7 +20,7 @@
     <logback-version>1.2.3</logback-version>
     <org.jackson-version>2.9.8</org.jackson-version>
     <poi-version>4.0.1</poi-version>
-    <mysql-version>8.0.15</mysql-version>
+    <mysql-version>8.0.14</mysql-version>
     <mybatis-version>3.5.0</mybatis-version>
     <hibernate-version>6.0.14.Final</hibernate-version>
   </properties>
@@ -274,6 +274,14 @@
           <source>${java-version}</source>
           <target>${java-version}</target>
           <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <configuration>
+          <mainClass>org.test.int1.Main</mainClass>
         </configuration>
       </plugin>
     </plugins>
