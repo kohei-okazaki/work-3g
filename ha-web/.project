@@ -3,8 +3,8 @@
 	<name>ha-web</name>
 	<comment></comment>
 	<projects>
-		<project>ha-business</project>
 		<project>ha-common</project>
+		<project>ha-business</project>
 		<project>ha-db</project>
 	</projects>
 	<buildSpec>
