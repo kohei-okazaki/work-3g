@@ -266,6 +266,16 @@ public class FileUtil {
 		public boolean is(FileExtension fileExtension) {
 			return this == fileExtension;
 		}
+
+		/**
+		 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+		 * @param value
+		 *     値
+		 * @return FileExtension
+		 */
+		public static FileExtension of(String value) {
+			return BaseEnum.of(FileExtension.class, value);
+		}
 	}
 
 	/**
