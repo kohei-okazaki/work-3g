@@ -73,8 +73,8 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 
 		BaseException baseException = null;
 		if (e instanceof InvalidFormatException) {
-			InvalidFormatException jfe = (InvalidFormatException) e;
-			baseException = new ApiException(CommonErrorCode.JSON_FORMAT_ERROR, jfe.getValue() + "はリクエスト形式エラーです");
+			InvalidFormatException ife = (InvalidFormatException) e;
+			baseException = new ApiException(CommonErrorCode.JSON_FORMAT_ERROR, ife.getValue() + "はリクエスト形式エラーです");
 		} else if (e instanceof JsonParseException) {
 			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません");
 		} else if (e instanceof JsonProcessingException) {

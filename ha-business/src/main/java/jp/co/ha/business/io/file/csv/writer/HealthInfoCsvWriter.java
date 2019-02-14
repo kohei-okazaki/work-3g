@@ -54,8 +54,8 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 		write(body, conf.useMask() ? MaskExecutor.MASK : model.getBmi().toString());
 		// 標準体重
 		write(body, conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight().toString());
-		// 登録日時
-		write(body, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+		// 健康情報作成日時
+		write(body, DateUtil.toString(model.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 
 		// 1行書き込む
 		record.add(body.toString());

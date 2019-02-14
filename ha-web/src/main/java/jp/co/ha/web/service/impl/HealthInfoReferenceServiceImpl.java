@@ -51,12 +51,12 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		List<HealthInfo> resultList = null;
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
-			Date regDate = editStrDate(form.getFromRegDate());
-			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
+			Date regDate = editStrDate(form.getFromHealthInfoRegDate());
+			if (StringUtil.isTrue(form.getHealthInfoRegDateSelectFlag())) {
 				// 登録日直接指定フラグがONの場合
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, DateUtil.toEndDate(regDate));
 			} else {
-				Date toRegDate = editStrDate(form.getToRegDate());
+				Date toRegDate = editStrDate(form.getToHealthInfoRegDate());
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 			}
 		} else {
@@ -90,7 +90,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		return entityList.stream().map(e -> {
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(e, response);
-			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			response.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			return response;
 		}).collect(Collectors.toList());
 	}
@@ -111,7 +111,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 			HealthInfoReferenceResponse healthInfo = resultList.get(i);
 			BeanUtil.copy(healthInfo, model);
 			model.setUserId(userId);
-			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			model.setHealthInfoRegDate(DateUtil.toDate(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			return model;
 		}).collect(Collectors.toList());
 	}

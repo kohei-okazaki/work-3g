@@ -118,6 +118,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 			entity.setBmi(bmi);
 			entity.setStandardWeight(standardWeight);
 			entity.setHealthInfoStatus(status);
+			entity.setHealthInfoRegDate(DateUtil.getSysDate());
 
 			return entity;
 		};
@@ -134,7 +135,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		return e -> {
 			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
 			BeanUtil.copy(e, response);
-			response.setRegDate(DateUtil.toString(e.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			response.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(e.getUserId());
 			response.setHealthInfoId(lastEntity.getHealthInfoId());
 			response.setResult(ResultType.SUCCESS);

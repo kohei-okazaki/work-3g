@@ -83,7 +83,7 @@
         $("select#tableName").append($("<option>").val(tableData.physicalName).text(tableData.logicalName));
       }
     };
-    
+
     // update文を作成する
     function createSql() {
       var columnName = $("#columnName option:selected").val();
@@ -123,13 +123,18 @@
         var sql = createSql();
         $("#response").val(sql);
       });
-      
+
       // 入力値クリアボタン押下時の処理
       $("input#inputClear").click(function() {
          $("#columnValue").val("");
          $("#whereColumnValue").val("");
       });
-      
+
+      // 結果クリアボタン押下時の処理
+      $("input#responseClear").click(function() {
+        $("#response").val("");
+      });
+
     });
 
   </script>

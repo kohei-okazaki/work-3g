@@ -26,8 +26,8 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	/** 標準体重 */
 	@Mask
 	private BigDecimal standardWeight;
-	/** 登録日時 */
-	private String regDate;
+	/** 健康情報作成日時 */
+	private String healthInfoRegDate;
 
 	/**
 	 * healthInfoIdを返す
@@ -144,22 +144,22 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	}
 
 	/**
-	 * regDateを返す
+	 * healthInfoRegDateを返す
 	 *
-	 * @return regDate
+	 * @return healthInfoRegDate
 	 */
-	public String getRegDate() {
-		return regDate;
+	public String getHealthInfoRegDate() {
+		return healthInfoRegDate;
 	}
 
 	/**
-	 * regDateを設定する
+	 * healthInfoRegDateを設定する
 	 *
-	 * @param regDate
-	 *     登録日時
+	 * @param healthInfoRegDate
+	 *     健康情報作成日時
 	 */
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setHealthInfoRegDate(String healthInfoRegDate) {
+		this.healthInfoRegDate = healthInfoRegDate;
 	}
 
 }

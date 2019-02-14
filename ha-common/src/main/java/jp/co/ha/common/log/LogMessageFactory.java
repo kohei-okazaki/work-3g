@@ -57,7 +57,7 @@ public class LogMessageFactory {
 
 	/**
 	 * Log出力時のパラメータを返す<br>
-	 * <code>@LogParam</code>が指定されてない場合Beanのフィールド名を返す<br>
+	 * <code>@LogParam</code>が指定されてない場合Beanのフィールド名をそのまま返す<br>
 	 * 指定されてる場合、<code>@LogParam</code>のパラメータ名を返す
 	 *
 	 * @param field
@@ -66,7 +66,7 @@ public class LogMessageFactory {
 	 */
 	private static String getLogParamName(Field field) {
 		LogParam annotation = field.getAnnotation(LogParam.class);
-		return BeanUtil.notNull(annotation) ? annotation.name() : field.getName();
+		return BeanUtil.isNull(annotation) ? field.getName() : annotation.name();
 	}
 
 	/**
