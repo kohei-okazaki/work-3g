@@ -67,7 +67,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 			model.setWeight(healthInfo.getWeight().toString());
 			model.setBmi(healthInfo.getBmi().toString());
 			model.setStandardWeight(healthInfo.getStandardWeight().toString());
-			model.setRegDate(DateUtil.toDate(healthInfo.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			model.setRegDate(DateUtil.toDate(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			return model;
 		}).collect(Collectors.toList());
 	}

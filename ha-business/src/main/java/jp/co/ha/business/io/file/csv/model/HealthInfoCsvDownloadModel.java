@@ -12,8 +12,8 @@ import jp.co.ha.common.log.annotation.Mask;
  * CSV出力したい項目のみを持つ
  *
  */
-@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" }
-				, footerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "登録日時" })
+@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "健康情報作成日時" }
+				, footerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "健康情報作成日時" })
 public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 
 	/** ユーザID */
@@ -30,8 +30,8 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/** 標準体重 */
 	@Mask
 	private BigDecimal standardWeight;
-	/** 登録日時 */
-	private Date regDate;
+	/** 健康情報作成日時 */
+	private Date healthInfoRegDate;
 
 	/**
 	 * userIdを返す
@@ -129,22 +129,22 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	}
 
 	/**
-	 * regDateを返す
+	 * healthInfoRegDateを返す
 	 *
-	 * @return regDate
+	 * @return healthInfoRegDate
 	 */
-	public Date getRegDate() {
-		return regDate;
+	public Date getHealthInfoRegDate() {
+		return healthInfoRegDate;
 	}
 
 	/**
-	 * regDateを設定する
+	 * healthInfoRegDateを設定する
 	 *
-	 * @param regDate
-	 *     登録日時
+	 * @param healthInfoRegDate
+	 *     健康情報作成日時
 	 */
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setHealthInfoRegDate(Date healthInfoRegDate) {
+		this.healthInfoRegDate = healthInfoRegDate;
 	}
 
 }
