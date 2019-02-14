@@ -9,11 +9,11 @@ import jp.co.ha.common.type.BaseEnum;
 public enum HealthInfoStatus implements BaseEnum {
 
 	/** 減少 */
-	DOWN("10", "減りました"),
+	DOWN("10", "healthInfoStatus.down"),
 	/** 変化なし */
-	EVEN("20", "変化ありません"),
+	EVEN("20", "healthInfoStatus.even"),
 	/** 増加 */
-	INCREASE("30", "増加しました");
+	INCREASE("30", "healthInfoStatus.increase");
 
 	/** 値 */
 	private String value;
