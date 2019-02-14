@@ -24,14 +24,14 @@ public class HealthInfoReferenceForm implements BaseForm {
 	@Min(size = 1, message = "健康情報IDは1桁以上で入力してください")
 	@Max(size = 8, message = "健康情報IDは8桁以下で入力してください")
 	private String healthInfoId;
-	/** 登録日直接指定フラグ */
-	@Required(message = "登録日直接指定フラグが未入力です")
-	@Flag(message = "登録日直接指定フラグの値が不正です")
-	private String regDateSelectFlag;
-	/** 登録日(開始) */
-	private String fromRegDate;
-	/** 登録日(終了) */
-	private String toRegDate;
+	/** 健康情報作成日直接指定フラグ */
+	@Required(message = "健康情報作成日直接指定フラグが未入力です")
+	@Flag(message = "健康情報作成日直接指定フラグの値が不正です")
+	private String healthInfoRegDateSelectFlag;
+	/** 健康情報作成日(開始) */
+	private String fromHealthInfoRegDate;
+	/** 健康情報作成日(終了) */
+	private String toHealthInfoRegDate;
 
 	/**
 	 * healthInfoIdを返す
@@ -53,60 +53,60 @@ public class HealthInfoReferenceForm implements BaseForm {
 	}
 
 	/**
-	 * fromRegDateを返す
+	 * healthInfoRegDateSelectFlagを返す
 	 *
-	 * @return fromRegDate
+	 * @return healthInfoRegDateSelectFlag
 	 */
-	public String getFromRegDate() {
-		return fromRegDate;
+	public String getHealthInfoRegDateSelectFlag() {
+		return healthInfoRegDateSelectFlag;
 	}
 
 	/**
-	 * fromRegDateを設定する
+	 * healthInfoRegDateSelectFlagを設定する
 	 *
-	 * @param fromRegDate
-	 *     fromRegDate
+	 * @param healthInfoRegDateSelectFlag
+	 *     健康情報作成日直接指定フラグ
 	 */
-	public void setFromRegDate(String fromRegDate) {
-		this.fromRegDate = fromRegDate;
+	public void setHealthInfoRegDateSelectFlag(String healthInfoRegDateSelectFlag) {
+		this.healthInfoRegDateSelectFlag = healthInfoRegDateSelectFlag;
 	}
 
 	/**
-	 * toRegDateを返す
+	 * fromHealthInfoRegDateを返す
 	 *
-	 * @return toRegDate
+	 * @return fromHealthInfoRegDate
 	 */
-	public String getToRegDate() {
-		return toRegDate;
+	public String getFromHealthInfoRegDate() {
+		return fromHealthInfoRegDate;
 	}
 
 	/**
-	 * toRegDateを設定する
+	 * fromHealthInfoRegDateを設定する
 	 *
-	 * @param toRegDate
-	 *     toRegDate
+	 * @param fromHealthInfoRegDate
+	 *     健康情報作成日(開始)
 	 */
-	public void setToRegDate(String toRegDate) {
-		this.toRegDate = toRegDate;
+	public void setFromHealthInfoRegDate(String fromHealthInfoRegDate) {
+		this.fromHealthInfoRegDate = fromHealthInfoRegDate;
 	}
 
 	/**
-	 * regDateSelectFlagを返す
+	 * toHealthInfoRegDateを返す
 	 *
-	 * @return regDateSelectFlag
+	 * @return toHealthInfoRegDate
 	 */
-	public String getRegDateSelectFlag() {
-		return regDateSelectFlag;
+	public String getToHealthInfoRegDate() {
+		return toHealthInfoRegDate;
 	}
 
 	/**
-	 * regDateSelectFlagを設定する
+	 * toHealthInfoRegDateを設定する
 	 *
-	 * @param regDateSelectFlag
-	 *     登録日直接指定フラグ
+	 * @param toHealthInfoRegDate
+	 *     健康情報作成日(終了)
 	 */
-	public void setRegDateSelectFlag(String regDateSelectFlag) {
-		this.regDateSelectFlag = regDateSelectFlag;
+	public void setToHealthInfoRegDate(String toHealthInfoRegDate) {
+		this.toHealthInfoRegDate = toHealthInfoRegDate;
 	}
 
 }

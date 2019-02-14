@@ -25,9 +25,9 @@
     </h2>
     <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('regDateSelectFlag')}" th:errors="*{regDateSelectFlag}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('fromRegDate')}" th:errors="*{fromRegDate}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('toRegDate')}" th:errors="*{toRegDate}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}"></div>
       <table>
         <tr>
           <th>
@@ -39,21 +39,21 @@
         </tr>
         <tr>
           <th>
-            <label>登録日</label>
+            <label>健康情報作成日</label>
           </th>
           <td>
             <div class="radio" align="center">
-              <input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
-              <label for="regDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-              <input type="radio" th:field="*{regDateSelectFlag}" id="regDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
-              <label for="regDateSelectFlagTrue">直接指定する</label>
+              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
+              <label for="healthInfoRegDateSelectFlagFalse" class="switch-off">直接指定しない</label>
+              <input type="radio" th:field="*{regDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
+              <label for="healthInfoRegDateSelectFlagTrue">直接指定する</label>
             </div>
           </td>
           <td>
-            <input type="text" th:field="*{fromRegDate}" />
+            <input type="text" th:field="*{fromHealthInfoRegDate}" />
           </td>
           <td class="hideCalendar">
-            <label>～</label><input type="text" th:field="*{toRegDate}" class="hideCalendar" />
+            <label>～</label><input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar" />
           </td>
         </tr>
       </table>
@@ -88,7 +88,7 @@
               <label>BMI</label>
             </th>
             <th class="data" align="center">
-              <label>登録日時</label>
+              <label>健康情報作成日時</label>
             </th>
           </tr>
           <tr th:each="result : ${resultList}" class="data">
@@ -96,7 +96,7 @@
             <td th:text="${result.weight}" align="center" class="data">
             <td th:text="${result.standardWeight}" align="center" class="data">
             <td th:text="${result.bmi}" align="center" class="data">
-            <td th:text="${result.regDate}" align="center" class="data">
+            <td th:text="${result.healthInfoRegDate}" align="center" class="data">
           </tr>
         </table>
 
@@ -133,8 +133,8 @@
   <script type="text/javascript">
     $(function() {
       jQuery("#healthInfoReferenceForm").validationEngine();
-      $("#fromRegDate").datepicker();
-      $("#toRegDate").datepicker();
+      $("#fromHealthInfoRegDate").datepicker();
+      $("#toHealthInfoRegDate").datepicker();
     });
   </script>
 

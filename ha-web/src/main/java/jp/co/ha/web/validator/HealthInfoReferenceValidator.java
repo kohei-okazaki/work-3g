@@ -35,19 +35,19 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 	private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
-			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
+			if (StringUtil.isTrue(form.getHealthInfoRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
-				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "登録日時" },
+				if (StringUtil.isEmpty(form.getFromHealthInfoRegDate())) {
+					errors.rejectValue("fromRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "健康情報作成日" },
 							ValidateErrorCode.REQUIRE.getOuterErrorCode());
 				}
 			} else {
-				if (StringUtil.isEmpty(form.getFromRegDate())) {
-					errors.rejectValue("fromRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "登録日時(開始) " },
+				if (StringUtil.isEmpty(form.getFromHealthInfoRegDate())) {
+					errors.rejectValue("fromRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "健康情報作成日(開始)" },
 							ValidateErrorCode.REQUIRE.getOuterErrorCode());
 				}
-				if (StringUtil.isEmpty(form.getToRegDate())) {
-					errors.rejectValue("toRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "登録日時(終了)" },
+				if (StringUtil.isEmpty(form.getToHealthInfoRegDate())) {
+					errors.rejectValue("toRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "健康情報作成日(終了)" },
 							ValidateErrorCode.REQUIRE.getOuterErrorCode());
 				}
 			}

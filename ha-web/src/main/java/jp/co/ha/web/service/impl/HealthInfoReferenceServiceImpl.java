@@ -51,12 +51,12 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		List<HealthInfo> resultList = null;
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
-			Date regDate = editStrDate(form.getFromRegDate());
-			if (StringUtil.isTrue(form.getRegDateSelectFlag())) {
+			Date regDate = editStrDate(form.getFromHealthInfoRegDate());
+			if (StringUtil.isTrue(form.getHealthInfoRegDateSelectFlag())) {
 				// 登録日直接指定フラグがONの場合
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, DateUtil.toEndDate(regDate));
 			} else {
-				Date toRegDate = editStrDate(form.getToRegDate());
+				Date toRegDate = editStrDate(form.getToHealthInfoRegDate());
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
 			}
 		} else {
