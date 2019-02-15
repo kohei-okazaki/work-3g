@@ -17,7 +17,7 @@ import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
- * カラムを追加するビルダー<br>
+ * カラム追加のDDLを作成するビルダー<br>
  * <ul>
  * <li>テーブル名:HOGE</li>
  * <li>カラム名:PIYO</li>
@@ -30,9 +30,6 @@ import jp.co.ha.tool.type.ExecuteType;
  */
 public class AddColumnBuilder extends BaseBuilder {
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Build
 	public void execute() {
 

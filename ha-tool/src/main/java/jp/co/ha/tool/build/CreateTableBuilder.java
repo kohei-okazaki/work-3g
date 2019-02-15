@@ -18,7 +18,7 @@ import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
- * テーブルを作成するビルダー
+ * テーブル作成のDDLを作成するビルダー
  *
  */
 public class CreateTableBuilder extends BaseBuilder {

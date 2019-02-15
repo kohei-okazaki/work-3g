@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,6 +20,7 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.StringUtil;
@@ -39,20 +41,24 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 *
 	 * @param uploadFile
 	 *     アップロードファイル
+	 * @param charset
+	 *     Charset
 	 * @return CSVモデルリスト
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	public List<T> readMultipartFile(MultipartFile uploadFile) throws BaseException {
+	public List<T> readMultipartFile(MultipartFile uploadFile, Charset charset) throws BaseException {
 
 		List<T> modelList = new ArrayList<>();
 		try (InputStream is = uploadFile.getInputStream();
-				InputStreamReader isr = new InputStreamReader(is);
+				InputStreamReader isr = new InputStreamReader(is, charset.getValue());
 				BufferedReader br = new BufferedReader(isr)) {
 			String record;
-			if (BeanUtil.notNull(record = br.readLine())) {
+			while (BeanUtil.notNull(record = br.readLine())) {
 				modelList.add(this.read(record));
 			}
+		} catch (UnsupportedEncodingException e) {
+			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "指定した文字コードが無効です:" + charset.getValue());
 		} catch (IOException e) {
 			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。");
 		}

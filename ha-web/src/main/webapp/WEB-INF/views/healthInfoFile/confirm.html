@@ -28,23 +28,41 @@
   <!--/* 確認画面 */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
-      <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:src="@{/resources/image/icon_input.jpg}"> 健康情報ファイル確認画面
+      <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:src="@{/resources/image/icon_input.jpg}">健康情報ファイル確認画面
     </h2>
     <form action="./complete.html" th:action="@{./complete.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <table>
         <tr>
-          <td>
-            <p>登録件数</p>
+          <td align="center">
+            <label>登録件数</label>
           </td>
-          <td>
+          <td align="center">
             <p th:text="${count}"></p>
           </td>
         </tr>
         <tr>
+          <th>
+            <label>行数</label>
+          </th>
+          <th>
+            <label>身長</label>
+          </th>
+          <th>
+            <label>体重</label>
+          </th>
+        </tr>
+        <tr th:each="model, status : ${modelList}" class="data">
+          <td th:text="${status.count}" align="center" class="data">
+          <td th:text="${model.height}" align="center" class="data">
+          <td th:text="${model.weight}" align="center" class="data">
+        </tr>
+      </table>
+      <br>
+      <table>
+        <tr>
           <td>
             <input type="submit" value="確 定" />
           </td>
-          <td>  </td>
           <td>
             <input type="button" value="戻 る" onclick="history.back()" />
           </td>
