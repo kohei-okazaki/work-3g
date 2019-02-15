@@ -29,7 +29,8 @@
             <label>ユーザID</label>
           </th>
           <td>
-            <input type="text" maxlength="16" required th:field="*{userId}" readonly />
+            <p th:text="*{userId}"></p>
+            <input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
           </td>
         </tr>
         <tr>
