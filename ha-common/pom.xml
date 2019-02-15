@@ -18,7 +18,4 @@
     <relativePath>../ha-pom</relativePath>
   </parent>
 
-  <build>
-    <finalName>ha-common</finalName>
-  </build>
 </project>
