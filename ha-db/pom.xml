@@ -27,6 +27,7 @@
   </dependencies>
 
   <build>
+    <finalName>ha-db</finalName>
     <plugins>
       <plugin>
         <groupId>org.mybatis.generator</groupId>
