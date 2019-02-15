@@ -96,6 +96,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 		List<HealthInfoCsvUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
 		fileService.formatCheck(modelList, userId);
 		sessionManageService.setValue(request.getSession(), "modelList", modelList);
+		model.addAttribute("modelList", modelList);
 		model.addAttribute("count", modelList.size());
 
 		return getView(ManageWebView.HEALTH_INFO_FILE_CONFIRM);

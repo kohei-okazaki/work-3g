@@ -10,6 +10,7 @@ import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.reader.CsvReader;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
+import jp.co.ha.common.type.Charset;
 
 /**
  * 健康情報ファイルアップロードサービス実装クラス
@@ -24,7 +25,7 @@ public class HealthInfoCsvUploadServiceImpl implements CsvUploadService<HealthIn
 	@Override
 	public List<HealthInfoCsvUploadModel> execute(MultipartFile uploadFile) throws BaseException {
 		CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
-		List<HealthInfoCsvUploadModel> modelList = reader.readMultipartFile(uploadFile);
+		List<HealthInfoCsvUploadModel> modelList = reader.readMultipartFile(uploadFile, Charset.UTF_8);
 		return modelList;
 	}
 
