@@ -133,8 +133,18 @@
   <script type="text/javascript">
     $(function() {
       jQuery("#healthInfoReferenceForm").validationEngine();
-      $("#fromHealthInfoRegDate").datepicker();
-      $("#toHealthInfoRegDate").datepicker();
+      $("#fromHealthInfoRegDate").datepicker({
+          firstDay : 0,
+          showButtonPanel : true,
+          changeYear : true,
+          changeMonth : true
+      });
+      $("#toHealthInfoRegDate").datepicker({
+          firstDay : 0,
+          showButtonPanel : true,
+          changeYear : true,
+          changeMonth : true
+      });
     });
   </script>
 

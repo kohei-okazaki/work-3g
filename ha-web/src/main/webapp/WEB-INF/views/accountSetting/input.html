@@ -136,7 +136,12 @@
       jQuery("#accountSettingForm").validationEngine({
         promptPosition: "topLeft:80"
       });
-      $("#passwordExpire").datepicker();
+      $("#passwordExpire").datepicker({
+          firstDay : 0,
+          showButtonPanel : true,
+          changeYear : true,
+          changeMonth : true
+      });
     });
   </script>
 
