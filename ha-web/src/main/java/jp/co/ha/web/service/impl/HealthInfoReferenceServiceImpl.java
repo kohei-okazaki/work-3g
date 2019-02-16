@@ -37,6 +37,58 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private HealthInfoSearchService healthInfoSearchService;
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<HealthInfoReferenceResult> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
+			throws BaseException {
+
+		// ユーザIDと検索条件フォームから健康情報Entityを取得
+		List<HealthInfo> entityList = getHealthInfoList(form, userId);
+		return entityList.stream().map(e -> {
+			HealthInfoReferenceResult result = new HealthInfoReferenceResult();
+			BeanUtil.copy(e, result);
+			result.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			return result;
+		}).collect(Collectors.toList());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResult> resultList) {
+		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
+			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
+			HealthInfoReferenceResult result = resultList.get(i);
+			BeanUtil.copy(result, model);
+			model.setUserId(userId);
+			model.setHealthInfoRegDate(DateUtil.toDate(result.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			return model;
+		}).collect(Collectors.toList());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
+
+		CsvConfig conf = new CsvConfig();
+		var fileName = "healthInfoReference_"
+				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+				+ FileExtension.CSV.getValue();
+		conf.setFileName(fileName);
+		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
+		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
+		conf.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
+		conf.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
+		conf.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
+		conf.setCharset(Charset.UTF_8);
+		return conf;
+	}
+
+	/**
 	 * 健康情報リストを取得する
 	 *
 	 * @param form
@@ -75,64 +127,6 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	private Date editStrDate(String date) {
 		String strDate = date.replace(StringUtil.HYPHEN, StringUtil.THRASH);
 		return DateUtil.toDate(strDate, DateFormatType.YYYYMMDD);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<HealthInfoReferenceResult> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
-			throws BaseException {
-
-		// ユーザIDと検索条件フォームから健康情報Entityを取得
-		List<HealthInfo> entityList = getHealthInfoList(form, userId);
-		return entityList.stream().map(e -> {
-			HealthInfoReferenceResult resultForm = new HealthInfoReferenceResult();
-			BeanUtil.copy(e, resultForm);
-			resultForm.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			return resultForm;
-		}).collect(Collectors.toList());
-	}
-
-	/**
-	 * 結果照会CSVモデルリストに変換する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @param resultList
-	 *     健康情報照会レスポンスリスト
-	 * @return 結果照会CSVモデルリスト
-	 */
-	@Override
-	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResult> resultList) {
-		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
-			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
-			HealthInfoReferenceResult resultForm = resultList.get(i);
-			BeanUtil.copy(resultForm, model);
-			model.setUserId(userId);
-			model.setHealthInfoRegDate(DateUtil.toDate(resultForm.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			return model;
-		}).collect(Collectors.toList());
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
-
-		CsvConfig conf = new CsvConfig();
-		var fileName = "healthInfoReference_"
-				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
-				+ FileExtension.CSV.getValue();
-		conf.setFileName(fileName);
-		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
-		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
-		conf.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
-		conf.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
-		conf.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
-		conf.setCharset(Charset.UTF_8);
-		return conf;
 	}
 
 }
