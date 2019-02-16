@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
@@ -51,13 +51,12 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 
 		List<HealthInfo> resultList = null;
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
-			Date regDate = editStrDate(form.getFromHealthInfoRegDate());
+			Date healthInfoRegDate = editStrDate(form.getFromHealthInfoRegDate());
 			if (StringUtil.isTrue(form.getHealthInfoRegDateSelectFlag())) {
-				// 登録日直接指定フラグがONの場合
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, DateUtil.toEndDate(regDate));
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate, DateUtil.toEndDate(healthInfoRegDate));
 			} else {
-				Date toRegDate = editStrDate(form.getToHealthInfoRegDate());
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, regDate, toRegDate);
+				Date toHealthInfoRegDate = editStrDate(form.getToHealthInfoRegDate());
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate, toHealthInfoRegDate);
 			}
 		} else {
 			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(Integer.valueOf(form.getHealthInfoId()), userId);
@@ -82,16 +81,16 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
+	public List<HealthInfoReferenceResult> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
 			throws BaseException {
 
 		// ユーザIDと検索条件フォームから健康情報Entityを取得
 		List<HealthInfo> entityList = getHealthInfoList(form, userId);
 		return entityList.stream().map(e -> {
-			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
-			BeanUtil.copy(e, response);
-			response.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			return response;
+			HealthInfoReferenceResult resultForm = new HealthInfoReferenceResult();
+			BeanUtil.copy(e, resultForm);
+			resultForm.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			return resultForm;
 		}).collect(Collectors.toList());
 	}
 
@@ -105,13 +104,13 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @return 結果照会CSVモデルリスト
 	 */
 	@Override
-	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList) {
+	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResult> resultList) {
 		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
 			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
-			HealthInfoReferenceResponse healthInfo = resultList.get(i);
-			BeanUtil.copy(healthInfo, model);
+			HealthInfoReferenceResult resultForm = resultList.get(i);
+			BeanUtil.copy(resultForm, model);
 			model.setUserId(userId);
-			model.setHealthInfoRegDate(DateUtil.toDate(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			model.setHealthInfoRegDate(DateUtil.toDate(resultForm.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			return model;
 		}).collect(Collectors.toList());
 	}

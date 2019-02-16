@@ -31,7 +31,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
 			return true;
 		}
 		Method method = ((HandlerMethod) handler).getMethod();
-		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName());
+		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName() + "[" + request.getRequestURI() + "]");
 
 		return true;
 	}

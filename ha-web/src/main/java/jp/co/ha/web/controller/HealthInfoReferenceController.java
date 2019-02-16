@@ -21,10 +21,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
+import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -58,7 +59,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
 	@ReferenceDownloadExcel
-	private ExcelDownloadService<List<HealthInfoReferenceResponse>> excelDownloadService;
+	private ExcelDownloadService<ReferenceExcelComponent> excelDownloadService;
 	/** 結果照会CSVダウンロードサービス */
 	@Autowired
 	@ReferenceDownloadCsv
@@ -122,13 +123,14 @@ public class HealthInfoReferenceController implements BaseWebController {
 	public String reference(HttpServletRequest request, Model model
 			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseException {
 
+		System.out.println("req-->" + request.getRequestURI());
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 		}
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
-		List<HealthInfoReferenceResponse> resultList = service.getHealthInfoResponseList(form, userId);
+		List<HealthInfoReferenceResult> resultList = service.getHealthInfoResponseList(form, userId);
 
 		// 検索情報を設定
 		model.addAttribute("form", form);
@@ -155,15 +157,17 @@ public class HealthInfoReferenceController implements BaseWebController {
 	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
-
-		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(request.getSession(), "resultList", List.class)
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+		List<HealthInfoReferenceResult> resultList = sessionService.getValue(request.getSession(), "resultList", List.class)
 				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		if (CollectionUtil.isEmpty(resultList)) {
 			// レコードが見つからなかった場合
 			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
-
-		return new ModelAndView(excelDownloadService.execute(resultList));
+		ReferenceExcelComponent component = new ReferenceExcelComponent();
+		component.setUserId(userId);
+		component.setResultList(resultList);
+		return new ModelAndView(excelDownloadService.execute(component));
 	}
 
 	/**
@@ -182,7 +186,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		// sessionから検索結果リストとユーザIDを取得
 		HttpSession session = request.getSession();
-		List<HealthInfoReferenceResponse> resultList = sessionService.getValue(session, "resultList", List.class)
+		List<HealthInfoReferenceResult> resultList = sessionService.getValue(session, "resultList", List.class)
 				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionService.getValue(session, "userId", String.class).get();
 		if (CollectionUtil.isEmpty(resultList)) {
@@ -192,7 +196,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = service.getCsvConfig(fileSetting);
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {

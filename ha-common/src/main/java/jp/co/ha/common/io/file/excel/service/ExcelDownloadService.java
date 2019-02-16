@@ -3,23 +3,22 @@ package jp.co.ha.common.io.file.excel.service;
 import org.springframework.web.servlet.View;
 
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 
 /**
  * Excelダウンロードサービスインターフェース<br>
  * 継承先で@Service(value = "サービス実装用のAnnotation") をつけてInjectionすること
  *
  * @param <T>
- *     出力対象データ
+ *    Excel出力情報設定情報継承クラス
  */
-public interface ExcelDownloadService<T> {
+public interface ExcelDownloadService<T extends BaseExcelComponent> {
 
 	/**
 	 * メイン処理<br>
-	 * 継承先で詳細を書く<br>
-	 * 渡したいデータを引数に指定する<br>
 	 *
 	 * @param t
-	 *     出力対象データ
+	 *     Excel出力情報設定情報
 	 * @return View
 	 * @throws BaseException
 	 *     基底例外

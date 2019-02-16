@@ -69,56 +69,59 @@
           </td>
         </tr>
       </table>
+    </form>
+
+    <br>
+
+    <div th:if="${hasResult}" align="center" class="contentLayout">
+      <table class="data">
+        <tr class="data">
+          <th class="data" align="center">
+            <label>身長</label>
+          </th>
+          <th class="data" align="center">
+            <label>体重</label>
+          </th>
+          <th class="data" align="center">
+            <label>標準体重</label>
+          </th>
+          <th class="data" align="center">
+            <label>BMI</label>
+          </th>
+          <th class="data" align="center">
+            <label>健康情報作成日時</label>
+          </th>
+        </tr>
+        <tr th:each="result : ${resultList}" class="data">
+          <td th:text="${result.height}" align="center" class="data">
+          <td th:text="${result.weight}" align="center" class="data">
+          <td th:text="${result.standardWeight}" align="center" class="data">
+          <td th:text="${result.bmi}" align="center" class="data">
+          <td th:text="${result.healthInfoRegDate}" align="center" class="data">
+        </tr>
+      </table>
 
       <br>
 
-      <div th:if="${hasResult}" align="center" class="contentLayout">
-        <table class="data">
-          <tr class="data">
-            <th class="data" align="center">
-              <label>身長</label>
-            </th>
-            <th class="data" align="center">
-              <label>体重</label>
-            </th>
-            <th class="data" align="center">
-              <label>標準体重</label>
-            </th>
-            <th class="data" align="center">
-              <label>BMI</label>
-            </th>
-            <th class="data" align="center">
-              <label>健康情報作成日時</label>
-            </th>
-          </tr>
-          <tr th:each="result : ${resultList}" class="data">
-            <td th:text="${result.height}" align="center" class="data">
-            <td th:text="${result.weight}" align="center" class="data">
-            <td th:text="${result.standardWeight}" align="center" class="data">
-            <td th:text="${result.bmi}" align="center" class="data">
-            <td th:text="${result.healthInfoRegDate}" align="center" class="data">
-          </tr>
-        </table>
+      <table>
+        <tr>
+          <td align="center">
+            <!--/* Excel出力 */-->
+            <div>
+              <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
+            </div>
+          </td>
+          <td>　　</td>
+          <td align="center">
+            <!--/* CSV出力 */-->
+            <div>
+              <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
-        <br>
-
-        <table>
-          <tr>
-            <td align="center">
-              <div>
-                <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
-              </div>
-            </td>
-            <td>　　</td>
-            <td align="center">
-              <div>
-                <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </form>
   </div>
 
   <div th:replace="layout/layout :: footer"></div>

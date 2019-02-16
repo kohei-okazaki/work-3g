@@ -8,6 +8,7 @@ import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.io.file.excel.builder.HealthInfoExcelBuilder;
+import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
@@ -22,7 +23,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
  *
  */
 @Service(value = "healthInfoDownloadExcel")
-public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfo> {
+public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfoExcelComponent> {
 
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
@@ -32,8 +33,8 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public View execute(HealthInfo healthInfo) throws BaseException {
-
+	public View execute(HealthInfoExcelComponent component) throws BaseException {
+		HealthInfo healthInfo = component.getHealthInfo();
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(healthInfo.getUserId());
 

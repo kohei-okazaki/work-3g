@@ -9,9 +9,9 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
  * 結果照会Excel出力モデルクラス
  *
  */
-@ExcelDownloadModel(sheetName = "健康情報照会"
-					, headerNames = { "身長", "体重", "BMI", "標準体重", "登録日時" }
-					, footerNames = { "身長", "体重", "BMI", "標準体重", "登録日時" })
+@ExcelDownloadModel(sheetName = "健康情報照会",
+				headerNames = { "身長", "体重", "BMI", "標準体重", "健康情報作成日時" },
+				footerNames = { "身長", "体重", "BMI", "標準体重", "健康情報作成日時" })
 public class ReferenceExcelModel implements BaseExcelModel {
 
 	/** 身長 */
@@ -22,8 +22,8 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	private String bmi;
 	/** 標準体重 */
 	private String standardWeight;
-	/** 登録日時 */
-	private Date regDate;
+	/** 健康情報作成日時 */
+	private Date healthInfoRegDate;
 
 	/**
 	 * heightを返す
@@ -102,22 +102,22 @@ public class ReferenceExcelModel implements BaseExcelModel {
 	}
 
 	/**
-	 * regDateを返す
+	 * healthInfoRegDateを返す
 	 *
-	 * @return regDate
+	 * @return healthInfoRegDate
 	 */
-	public Date getRegDate() {
-		return regDate;
+	public Date getHealthInfoRegDate() {
+		return healthInfoRegDate;
 	}
 
 	/**
-	 * regDateを設定する
+	 * healthInfoRegDateを設定する
 	 *
-	 * @param regDate
-	 *     regDate
+	 * @param healthInfoRegDate
+	 *     健康情報作成日時
 	 */
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setHealthInfoRegDate(Date healthInfoRegDate) {
+		this.healthInfoRegDate = healthInfoRegDate;
 	}
 
 }

@@ -2,9 +2,11 @@ package jp.co.ha.web.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -15,6 +17,7 @@ import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
@@ -22,7 +25,6 @@ import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
@@ -51,6 +53,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/** 健康情報登録サービス */
 	@Autowired
 	private HealthInfoRegistService healthInfoRegistService;
+	/** messageSource */
+	@Autowired
+	private MessageSource messageSource;
 
 	/**
 	 * {@inheritDoc}
@@ -67,9 +72,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	@Override
 	public boolean isFirstReg(String userId) throws BaseException {
-		// ユーザIDから健康情報のリストを取得
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByUserId(userId);
-		return CollectionUtil.isEmpty(healthInfoList);
+		return healthInfoSearchService.getSelectCountByUserId(userId) == 0;
 	}
 
 	/**
@@ -114,8 +117,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	public HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException {
 		HealthInfoRegistRequest apiRequest = setUpApiRequest(form, userId);
 		healthInfoRegistService.checkRequest(apiRequest);
-		HealthInfoRegistResponse apiResponse = healthInfoRegistService.execute(apiRequest);
-		return apiResponse;
+		return healthInfoRegistService.execute(apiRequest);
 	}
 
 	/**
@@ -147,9 +149,8 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * @return 体重差メッセージ
 	 */
 	private String getDiffMessage(HealthInfoForm form, HealthInfo healthInfo) {
-		return healthInfoCalcService.getHealthInfoStatus()
-				.apply(form.getWeight(), healthInfo.getWeight())
-				.getMessage();
+		HealthInfoStatus status = healthInfoCalcService.getHealthInfoStatus().apply(form.getWeight(), healthInfo.getWeight());
+		return messageSource.getMessage(status.getMessage(), null, Locale.getDefault());
 	}
 
 	/**

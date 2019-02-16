@@ -113,4 +113,19 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getSelectCountByUserId(String userId) throws BaseException {
+		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
+			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
+			HealthInfoExample example = new HealthInfoExample();
+			Criteria criteria = example.createCriteria();
+			// ユーザID
+			criteria.andUserIdEqualTo(userId);
+			return (int) mapper.countByExample(example);
+		}
+	}
+
 }

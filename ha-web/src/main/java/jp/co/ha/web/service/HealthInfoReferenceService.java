@@ -2,7 +2,7 @@ package jp.co.ha.web.service;
 
 import java.util.List;
 
-import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
@@ -26,7 +26,7 @@ public interface HealthInfoReferenceService {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	List<HealthInfoReferenceResponse> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
+	List<HealthInfoReferenceResult> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
 			throws BaseException;
 
 	/**
@@ -38,7 +38,7 @@ public interface HealthInfoReferenceService {
 	 *     健康情報照会レスポンスリスト
 	 * @return modelList
 	 */
-	List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResponse> resultList);
+	List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResult> resultList);
 
 	/**
 	 * 指定した健康情報ファイル設定からCSV設定情報を返す
