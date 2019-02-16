@@ -73,7 +73,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			detail = be.getDetail();
 			outerErrorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
-			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getValue(), null, Locale.JAPANESE);
+			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null, Locale.JAPANESE);
 			outerErrorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(outerErrorCode).append(")");

@@ -6,21 +6,6 @@
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                       http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
 
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/spring/root-context.xml</param-value>
-  </context-param>
-  <context-param>
-    <param-name>contextClass</param-name>
-    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-    </param-value>
-  </context-param>
-
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener
-    </listener-class>
-  </listener>
-
   <filter>
     <filter-name>characterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter
@@ -38,6 +23,20 @@
     <filter-name>characterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/spring/root-context.xml</param-value>
+  </context-param>
+  <context-param>
+    <param-name>contextClass</param-name>
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+    </param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
   <servlet>
     <servlet-name>appServlet</servlet-name>
@@ -61,6 +60,7 @@
   </servlet>
 
   <error-page>
+    <!-- システムエラー -->
     <location>/WEB-INF/views/error/systemError.html</location>
   </error-page>
 

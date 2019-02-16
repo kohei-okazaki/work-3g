@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_健康情報照会画面</title>
-<link rel="icon" type="image/png" href="../resources/image/people.png" th:href="@{/resources/image/people.png}">
+<link rel="icon" type="image/png" href="../resources/image/favicon.png" th:href="@{/resources/image/favicon.png}">
 <link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.css}">
@@ -45,7 +45,7 @@
             <div class="radio" align="center">
               <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
               <label for="healthInfoRegDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-              <input type="radio" th:field="*{regDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
+              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
               <label for="healthInfoRegDateSelectFlagTrue">直接指定する</label>
             </div>
           </td>
@@ -61,7 +61,7 @@
       <table>
         <tr>
           <td>
-            <input type="submit" value="検索" />
+            <input type="submit" value="検 索" />
           </td>
           <td>　　</td>
           <td>
@@ -69,56 +69,59 @@
           </td>
         </tr>
       </table>
+    </form>
+
+    <br>
+
+    <div th:if="${hasResult}" align="center" class="contentLayout">
+      <table class="data">
+        <tr class="data">
+          <th class="data" align="center">
+            <label>身長</label>
+          </th>
+          <th class="data" align="center">
+            <label>体重</label>
+          </th>
+          <th class="data" align="center">
+            <label>標準体重</label>
+          </th>
+          <th class="data" align="center">
+            <label>BMI</label>
+          </th>
+          <th class="data" align="center">
+            <label>健康情報作成日時</label>
+          </th>
+        </tr>
+        <tr th:each="result : ${resultList}" class="data">
+          <td th:text="${result.height}" align="center" class="data">
+          <td th:text="${result.weight}" align="center" class="data">
+          <td th:text="${result.standardWeight}" align="center" class="data">
+          <td th:text="${result.bmi}" align="center" class="data">
+          <td th:text="${result.healthInfoRegDate}" align="center" class="data">
+        </tr>
+      </table>
 
       <br>
 
-      <div th:if="${hasResult}" align="center" class="contentLayout">
-        <table class="data">
-          <tr class="data">
-            <th class="data" align="center">
-              <label>身長</label>
-            </th>
-            <th class="data" align="center">
-              <label>体重</label>
-            </th>
-            <th class="data" align="center">
-              <label>標準体重</label>
-            </th>
-            <th class="data" align="center">
-              <label>BMI</label>
-            </th>
-            <th class="data" align="center">
-              <label>健康情報作成日時</label>
-            </th>
-          </tr>
-          <tr th:each="result : ${resultList}" class="data">
-            <td th:text="${result.height}" align="center" class="data">
-            <td th:text="${result.weight}" align="center" class="data">
-            <td th:text="${result.standardWeight}" align="center" class="data">
-            <td th:text="${result.bmi}" align="center" class="data">
-            <td th:text="${result.healthInfoRegDate}" align="center" class="data">
-          </tr>
-        </table>
+      <table>
+        <tr>
+          <td align="center">
+            <!--/* Excel出力 */-->
+            <div>
+              <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
+            </div>
+          </td>
+          <td>　　</td>
+          <td align="center">
+            <!--/* CSV出力 */-->
+            <div>
+              <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
-        <br>
-
-        <table>
-          <tr>
-            <td align="center">
-              <div>
-                <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
-              </div>
-            </td>
-            <td></td>
-            <td align="center">
-              <div>
-                <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </form>
   </div>
 
   <div th:replace="layout/layout :: footer"></div>
@@ -133,8 +136,18 @@
   <script type="text/javascript">
     $(function() {
       jQuery("#healthInfoReferenceForm").validationEngine();
-      $("#fromHealthInfoRegDate").datepicker();
-      $("#toHealthInfoRegDate").datepicker();
+      $("#fromHealthInfoRegDate").datepicker({
+          firstDay : 0,
+          showButtonPanel : true,
+          changeYear : true,
+          changeMonth : true
+      });
+      $("#toHealthInfoRegDate").datepicker({
+          firstDay : 0,
+          showButtonPanel : true,
+          changeYear : true,
+          changeMonth : true
+      });
     });
   </script>
 

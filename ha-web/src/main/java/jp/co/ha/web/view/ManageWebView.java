@@ -14,6 +14,8 @@ public enum ManageWebView implements BaseView {
 	TOP("login/top"),
 	/** エラー画面URL */
 	ERROR("error/index"),
+	/** システムエラー画面URL */
+	SYSTEM_ERROR("error/systemError"),
 
 	/** 健康情報入力画面URL */
 	HEALTH_INFO_INPUT("healthInfo/input"),

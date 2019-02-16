@@ -37,16 +37,16 @@ public class ResultReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelM
 		var rowPosition = this.conf.hasHeader() ? 1 : 0;
 		for (int i = 0; i < this.modelList.size(); i++) {
 			ReferenceExcelModel model = modelList.get(i);
-			Cell cell = getCell(sheet, rowPosition, 0);
+			Cell cell = getCell(sheet, rowPosition + i, 0);
 			setText(cell, model.getHeight().toString());
-			cell = getCell(sheet, rowPosition, 1);
+			cell = getCell(sheet, rowPosition + i, 1);
 			setText(cell, model.getWeight().toString());
-			cell = getCell(sheet, rowPosition, 2);
+			cell = getCell(sheet, rowPosition + i, 2);
 			setText(cell, model.getBmi().toString());
-			cell = getCell(sheet, rowPosition, 3);
+			cell = getCell(sheet, rowPosition + i, 3);
 			setText(cell, model.getStandardWeight().toString());
-			cell = getCell(sheet, rowPosition, 4);
-			setText(cell, DateUtil.toString(model.getRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			cell = getCell(sheet, rowPosition + i, 4);
+			setText(cell, DateUtil.toString(model.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 		}
 	}
 }

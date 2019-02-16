@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定入力画面</title>
-<link rel="icon" type="image/png" href="../resources/image/people.png" th:href="@{/resources/image/people.png}">
+<link rel="icon" type="image/png" href="../resources/image/favicon.png" th:href="@{/resources/image/favicon.png}">
 <link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
@@ -136,7 +136,12 @@
       jQuery("#accountSettingForm").validationEngine({
         promptPosition: "topLeft:80"
       });
-      $("#passwordExpire").datepicker();
+      $("#passwordExpire").datepicker({
+          firstDay : 0,
+          showButtonPanel : true,
+          changeYear : true,
+          changeMonth : true
+      });
     });
   </script>
 

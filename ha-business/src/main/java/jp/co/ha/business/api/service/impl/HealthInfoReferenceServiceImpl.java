@@ -74,9 +74,11 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(), request.getUserId());
 		if (CollectionUtil.isEmpty(healthInfoList)) {
-			throw new HealthInfoException(CommonErrorCode.DB_NO_DATA, "該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId());
+			throw new HealthInfoException(CommonErrorCode.DB_NO_DATA, "該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
+		} else if (CollectionUtil.isMultiple(healthInfoList)) {
+			throw new HealthInfoException(CommonErrorCode.MULTIPLE_DATA, "データが複数存在します 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
 		}
-		return toResponse().apply(healthInfoList.get(0));
+		return toResponse().apply(CollectionUtil.getFirst(healthInfoList));
 	}
 
 	/**

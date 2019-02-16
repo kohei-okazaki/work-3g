@@ -35,30 +35,6 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	private HealthInfoRegistService healthInfoRegistService;
 
 	/**
-	 * 健康情報CSVアップロードモデルリストから健康情報登録APIリクエストのリストに変換する
-	 *
-	 * @param modelList
-	 *     健康情報CSVアップロードモデルリスト
-	 * @param userId
-	 *     ユーザID
-	 * @return 健康情報登録APIリクエストリスト
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
-		Account account = accountSearchService.findByUserId(userId);
-		return modelList.stream().map(e -> {
-			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
-			BeanUtil.copy(e, request);
-			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-			request.setHeight(new BigDecimal(e.getHeight()));
-			request.setWeight(new BigDecimal(e.getWeight()));
-			request.setApiKey(account.getApiKey());
-			return request;
-		}).collect(Collectors.toList());
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -86,6 +62,30 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			healthInfoRegistService.checkRequest(apiRequest);
 			healthInfoRegistService.execute(apiRequest);
 		}
+	}
+
+	/**
+	 * 健康情報CSVアップロードモデルリストから健康情報登録APIリクエストのリストに変換する
+	 *
+	 * @param modelList
+	 *     健康情報CSVアップロードモデルリスト
+	 * @param userId
+	 *     ユーザID
+	 * @return 健康情報登録APIリクエストリスト
+	 * @throws BaseException
+	 *     基底例外
+	 */
+	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
+		Account account = accountSearchService.findByUserId(userId);
+		return modelList.stream().map(e -> {
+			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+			BeanUtil.copy(e, request);
+			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
+			request.setHeight(new BigDecimal(e.getHeight()));
+			request.setWeight(new BigDecimal(e.getWeight()));
+			request.setApiKey(account.getApiKey());
+			return request;
+		}).collect(Collectors.toList());
 	}
 
 }

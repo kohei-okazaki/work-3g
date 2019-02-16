@@ -86,4 +86,13 @@ public interface HealthInfoSearchService {
 	 */
 	List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) throws BaseException;
 
+	/**
+	 * 指定されたユーザIDの件数を返す
+	 * @param userId ユーザID
+	 * @return 件数
+	 * @throws BaseException
+	 *     基底例外
+	 */
+	int getSelectCountByUserId(String userId) throws BaseException;
+
 }

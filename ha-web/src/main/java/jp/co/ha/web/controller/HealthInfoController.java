@@ -24,6 +24,7 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
+import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -59,7 +60,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/** 健康情報Excelダウンロードサービス */
 	@Autowired
 	@HealthInfoDownloadExcel
-	private ExcelDownloadService<HealthInfo> excelDownloadService;
+	private ExcelDownloadService<HealthInfoExcelComponent> excelDownloadService;
 	/** 健康情報CSVダウンロードサービス */
 	@Autowired
 	@HealthInfoDownloadCsv
@@ -141,8 +142,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	/**
 	 * 健康情報Excelをダウンロードする
 	 *
-	 * @param userId
-	 *     ユーザID
+	 * @param request
+	 *     HttpServletRequest
 	 * @param form
 	 *     健康情報画面Form
 	 * @return ModelAndView
@@ -157,11 +158,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId, userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
-			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "session情報が不正です");
 		}
 		HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
-
-		return new ModelAndView(excelDownloadService.execute(entity));
+		HealthInfoExcelComponent component = new HealthInfoExcelComponent();
+		component.setHealthInfo(entity);
+		return new ModelAndView(excelDownloadService.execute(component));
 	}
 
 	/**
@@ -192,7 +194,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().toString().toLowerCase());
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {

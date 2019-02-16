@@ -35,6 +35,18 @@ public class CollectionUtil {
 	}
 
 	/**
+	 * 指定したリストの要素数が複数存在する場合true, それ以外の場合falseを返す
+	 *
+	 * @param list
+	 *     対象のリスト
+	 * @return 判定結果
+	 */
+	public static boolean isMultiple(List<?> list) {
+		Predicate<List<?>> predicate = l -> BeanUtil.notNull(l) && l.size() > 1;
+		return predicate.test(list);
+	}
+
+	/**
 	 * 指定したリストの最初の要素を返す
 	 *
 	 * @param list
