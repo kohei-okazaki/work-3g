@@ -37,6 +37,7 @@ public class HealthInfoReferenceResult implements BaseForm {
 	 * heightを設定する
 	 *
 	 * @param height
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -55,6 +56,7 @@ public class HealthInfoReferenceResult implements BaseForm {
 	 * weightを設定する
 	 *
 	 * @param weight
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -73,6 +75,7 @@ public class HealthInfoReferenceResult implements BaseForm {
 	 * bmiを設定する
 	 *
 	 * @param bmi
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -91,6 +94,7 @@ public class HealthInfoReferenceResult implements BaseForm {
 	 * standardWeightを設定する
 	 *
 	 * @param standardWeight
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -109,6 +113,7 @@ public class HealthInfoReferenceResult implements BaseForm {
 	 * healthInfoRegDateを設定する
 	 *
 	 * @param healthInfoRegDate
+	 *     健康情報作成日時
 	 */
 	public void setHealthInfoRegDate(String healthInfoRegDate) {
 		this.healthInfoRegDate = healthInfoRegDate;

@@ -25,7 +25,6 @@ public class AccountDeleteServiceImpl implements AccountDeleteService {
 			mapper.deleteByPrimaryKey(userId);
 			session.commit();
 		}
-
 	}
 
 }

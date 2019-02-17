@@ -36,7 +36,7 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	public void execute(HealthInfoFileSettingForm form) throws BaseException {
 		HealthInfoFileSetting befEntity = searchService.findByUserId(form.getUserId());
 		boolean isFirstReg = BeanUtil.isNull(befEntity);
-		HealthInfoFileSetting entity = toEntity(isFirstReg, form);
+		HealthInfoFileSetting entity = toEntity(form);
 		if (isFirstReg) {
 			createService.create(entity);
 		} else {
@@ -47,13 +47,11 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	/**
 	 * フォーム情報を健康情報ファイル設定情報Entityに変換する
 	 *
-	 * @param isFirstReg
-	 *     初回登録かどうか
 	 * @param form
 	 *     健康情報ファイル設定フォーム
 	 * @return HealthInfoFileSetting
 	 */
-	private HealthInfoFileSetting toEntity(boolean isFirstReg, HealthInfoFileSettingForm form) {
+	private HealthInfoFileSetting toEntity(HealthInfoFileSettingForm form) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
 		BeanUtil.copy(form, entity);
 		return entity;

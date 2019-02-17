@@ -39,39 +39,26 @@ public interface HealthInfoSearchService {
 	 *
 	 * @param userId
 	 *     ユーザID
-	 * @return HealthInfo
+	 * @return 健康情報Entity
 	 * @throws BaseException
 	 *     基底例外
 	 */
 	HealthInfo findLastByUserId(String userId) throws BaseException;
 
 	/**
-	 * 指定されたユーザIDと登録日時の健康情報のリストを返す
+	 * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
 	 *
 	 * @param userId
 	 *     ユーザID
-	 * @param regDate
+	 * @param fromHealthInfoRegDate
+	 *     YYYYMMDD
+	 * @param toHealthInfoRegDate
 	 *     YYYYMMDD
 	 * @return 健康情報のリスト
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseException;
-
-	/**
-	 * 指定されたユーザIDと指定された登録日時の期間内の健康情報のリストを返す
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @param fromRegDate
-	 *     YYYYMMDD
-	 * @param toRegDate
-	 *     YYYYMMDD
-	 * @return 健康情報のリスト
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws BaseException;
+	List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromHealthInfoRegDate, Date toHealthInfoRegDate) throws BaseException;
 
 	/**
 	 * 指定された健康情報IDとユーザIDと一致する健康情報を返す
