@@ -63,10 +63,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
 	/**
 	 * {@inheritDoc}
-
 	 */
 	@Override
-	public List<HealthInfo> findByUserIdAndRegDate(String userId, Date regDate) throws BaseException {
+	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromHealthInfoRegDate, Date toHealthInfoRegDate) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
 			HealthInfoExample example = new HealthInfoExample();
@@ -74,24 +73,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 			// ユーザID
 			criteria.andUserIdEqualTo(userId);
 			// 登録日時
-			criteria.andRegDateEqualTo(regDate);
-			return mapper.selectByExample(example);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromRegDate, Date toRegDate) throws BaseException {
-		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
-			HealthInfoMapper mapper = session.getMapper(HealthInfoMapper.class);
-			HealthInfoExample example = new HealthInfoExample();
-			Criteria criteria = example.createCriteria();
-			// ユーザID
-			criteria.andUserIdEqualTo(userId);
-			// 登録日時
-			criteria.andRegDateBetween(fromRegDate, toRegDate);
+			criteria.andRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
 			return mapper.selectByExample(example);
 		}
 	}

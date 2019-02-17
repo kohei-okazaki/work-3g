@@ -40,16 +40,15 @@ public class AddColumnBuilder extends BaseBuilder {
 
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 
-		for (Row row : targetRowList) {
+		targetRowList.stream().forEach(e -> {
 			String ddlPrefix = "ALTER TABLE ";
 			String ddlSuffix = ";";
-			String tableName = row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
-			String columnName = row.getCell(CellPositionType.COLUMN_NAME).getValue();
-			String columnType = getColumnType(row);
+			String tableName = e.getCell(CellPositionType.PHYSICAL_NAME).getValue();
+			String columnName = e.getCell(CellPositionType.COLUMN_NAME).getValue();
+			String columnType = getColumnType(e);
 			String ddl = ddlPrefix + tableName + " ADD " + columnName + " " + columnType + ddlSuffix;
-
 			body.add(ddl);
-		}
+		});
 
 		FileConfig fileConf = getFileConfig(ExecuteType.DDL);
 		fileConf.setFileName(DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + FileExtension.SQL.getValue());
@@ -58,11 +57,9 @@ public class AddColumnBuilder extends BaseBuilder {
 	}
 
 	private List<Row> getTargetRowList(List<Row> rowList) {
-		return rowList.stream().filter(e -> isTarget(e)).collect(Collectors.toList());
-	}
-
-	private boolean isTarget(Row row) {
-		return StringUtil.isTrue(row.getCell(CellPositionType.ADD_FLG).getValue());
+		return rowList.stream().filter(e -> {
+			return StringUtil.isTrue(e.getCell(CellPositionType.ADD_FLG).getValue());
+		}).collect(Collectors.toList());
 	}
 
 	private String getColumnType(Row row) {

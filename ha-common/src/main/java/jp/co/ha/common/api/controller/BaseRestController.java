@@ -54,7 +54,7 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	 *
 	 * @param request
 	 *     リクエストクラス
-	 * @return response レスポンスクラス
+	 * @return response
 	 * @throws BaseException
 	 *     基底例外
 	 */

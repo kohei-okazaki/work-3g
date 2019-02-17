@@ -31,16 +31,17 @@ public class CreateTableBuilder extends BaseBuilder {
 
 		for (String tableName : this.targetTableList) {
 			StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-			String ddlPrefix = "CREATE TABLE " + tableName + " (";
-			String ddlSuffix = ");";
-			body.add(ddlPrefix);
+			body.add("CREATE TABLE " + tableName + " (");
 			Table table = toTable(excel.getRowList(), tableName);
 			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + StringUtil.CRLF);
 			table.getColumnList().stream().forEach(e -> {
-				columnData.add(e.getComment() + StringUtil.NEW_LINE + e.getName() + StringUtil.SPACE + e.getType());
+				String comment = e.getComment();
+				String name = e.getName();
+				String type = e.getType();
+				columnData.add(comment + StringUtil.NEW_LINE + name + StringUtil.SPACE + type);
 			});
 			body.add(columnData.toString());
-			body.add(ddlSuffix);
+			body.add(");");
 
 			FileConfig conf = getFileConfig(ExecuteType.DDL);
 			conf.setFileName(tableName.toUpperCase() + FileExtension.SQL.getValue());
