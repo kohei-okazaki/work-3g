@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.system.PasswordEncoder;
+import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
@@ -13,7 +13,7 @@ import jp.co.ha.common.type.Charset;
  * SHA512パスワード作成クラス
  *
  */
-public class Sha512PasswordEncoder implements PasswordEncoder {
+public class Sha512PasswordEncoder implements HashEncoder {
 
 	/** HASH化アルゴリズム */
 	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_512;
@@ -22,7 +22,7 @@ public class Sha512PasswordEncoder implements PasswordEncoder {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String execute(String password, String salt) throws AlgorithmException {
+	public String encode(String password, String salt) throws AlgorithmException {
 		try {
 			return getPasswordDefault(password, salt, HASH_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.PasswordEncoder;
+import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -32,7 +32,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	/** パスワード作成サービス */
 	@Sha256
 	@Autowired
-	private PasswordEncoder encoder;
+	private HashEncoder encoder;
 
 	/**
 	 * {@inheritDoc}
@@ -59,7 +59,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 		BeanUtil.copy(form, account);
 		account.setDeleteFlag(StringUtil.FALSE_FLAG);
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
-		account.setApiKey(encoder.execute(form.getPassword(), form.getUserId()));
+		account.setApiKey(encoder.encode(form.getPassword(), form.getUserId()));
 		return account;
 	}
 

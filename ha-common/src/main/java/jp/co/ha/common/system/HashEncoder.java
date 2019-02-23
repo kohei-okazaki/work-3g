@@ -9,10 +9,10 @@ import jp.co.ha.common.system.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
 /**
- * パスワード作成処理インターフェース
+ * ハッシュ化処理インターフェース
  *
  */
-public interface PasswordEncoder {
+public interface HashEncoder {
 
 	/**
 	 * パスワードを作成する
@@ -25,7 +25,7 @@ public interface PasswordEncoder {
 	 * @throws AlgorithmException
 	 *     アルゴリズム例外
 	 */
-	String execute(String password, String salt) throws AlgorithmException;
+	String encode(String password, String salt) throws AlgorithmException;
 
 	/**
 	 * デフォルトで指定した値からハッシュ化した値を返す
