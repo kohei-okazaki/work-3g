@@ -56,7 +56,7 @@ public class LoginCheck {
 	}
 
 	/**
-	 * アカウントが存在しない場合validateエラーにする<br>
+	 * アカウントが存在しない場合validateエラーにする
 	 *
 	 * @param result
 	 *     ログイン情報チェック結果
@@ -71,7 +71,7 @@ public class LoginCheck {
 	}
 
 	/**
-	 * ログイン情報と入力情報を照合する<br>
+	 * ログイン情報と入力情報を照合する
 	 *
 	 * @param result
 	 *     ログイン情報チェック結果
@@ -89,7 +89,7 @@ public class LoginCheck {
 
 	/**
 	 * アカウント情報が有効かどうかチェック<br>
-	 * 有効でない場合true, そうでない場合false<br>
+	 * 有効でない場合true, そうでない場合false
 	 *
 	 * @param result
 	 *     ログイン情報チェック結果
@@ -105,7 +105,7 @@ public class LoginCheck {
 
 	/**
 	 * アカウント情報が有効期限切れかどうか判定する<br>
-	 * アカウント情報.パスワード有効期限 < システム日付の場合、true<br>
+	 * アカウント情報.パスワード有効期限 < システム日付の場合、true
 	 *
 	 * @param result
 	 *    ログイン情報チェック結果

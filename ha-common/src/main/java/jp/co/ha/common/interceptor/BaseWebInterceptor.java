@@ -14,8 +14,6 @@ public abstract class BaseWebInterceptor implements BaseInterceptor {
 	 * インターセプターで検査対象のリソースかどうか判定する<br>
 	 * javascriptなどの静的リソースはtrueを返す<br>
 	 *
-	 * @param handler
-	 *     ハンドラー
 	 * @return 判定結果
 	 */
 	protected Predicate<Object> isStaticResource() {

@@ -57,7 +57,7 @@ public class LogMessageFactory {
 
 	/**
 	 * Log出力時のパラメータを返す<br>
-	 * <code>@LogParam</code>が指定されてない場合Beanのフィールド名をそのまま返す<br>
+	 * <code>@LogParam</code>が指定されてない場合、フィールド名をそのまま返す<br>
 	 * 指定されてる場合、<code>@LogParam</code>のパラメータ名を返す
 	 *
 	 * @param field
@@ -102,7 +102,6 @@ public class LogMessageFactory {
 		} catch (InvocationTargetException e) {
 			LOG.error("項目が不正です" + fieldName, e);
 		}
-
 		return value;
 	}
 
