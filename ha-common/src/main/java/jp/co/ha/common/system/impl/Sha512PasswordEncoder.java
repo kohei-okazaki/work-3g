@@ -10,13 +10,13 @@ import jp.co.ha.common.system.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
 /**
- * SHA256パスワード作成クラス
+ * SHA512パスワード作成クラス
  *
  */
-public class Sha256PasswordEncoder implements PasswordEncoder {
+public class Sha512PasswordEncoder implements PasswordEncoder {
 
 	/** HASH化アルゴリズム */
-	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_256;
+	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_512;
 
 	/**
 	 * {@inheritDoc}
