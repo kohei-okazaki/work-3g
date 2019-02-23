@@ -9,7 +9,6 @@ import jp.co.ha.tool.build.BuildInvoker;
 public class SqlExecutor {
 
 	/**
-	 * 使用するビルダークラスのコメントアウトを消して実行してください<br>
 	 * 実行したいビルダークラスをjp.co.ha.tool.build.BuildInvoker#buildの引き数に設定して下さい
 	 *
 	 * @param args

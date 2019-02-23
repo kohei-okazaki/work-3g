@@ -14,7 +14,7 @@ public class HttpClientConfig {
 	private HttpMethod httpMethod;
 
 	/**
-	 * requestUrlを返す<br>
+	 * requestUrlを返す
 	 *
 	 * @return requestUrl
 	 */
@@ -23,7 +23,7 @@ public class HttpClientConfig {
 	}
 
 	/**
-	 * requestUrlを設定する<br>
+	 * requestUrlを設定する
 	 *
 	 * @param requestUrl
 	 *     リクエストURL
@@ -33,7 +33,7 @@ public class HttpClientConfig {
 	}
 
 	/**
-	 * timeoutを返す<br>
+	 * timeoutを返す
 	 *
 	 * @return timeout
 	 */
@@ -42,7 +42,7 @@ public class HttpClientConfig {
 	}
 
 	/**
-	 * timeoutを設定する<br>
+	 * timeoutを設定する
 	 *
 	 * @param timeout
 	 *     タイムアウト
@@ -52,7 +52,7 @@ public class HttpClientConfig {
 	}
 
 	/**
-	 * httpMethodを返す<br>
+	 * httpMethodを返す
 	 *
 	 * @return httpMethod
 	 */
@@ -61,7 +61,7 @@ public class HttpClientConfig {
 	}
 
 	/**
-	 * httpMethodを設定する<br>
+	 * httpMethodを設定する
 	 *
 	 * @param httpMethod
 	 *     HTTPステータス

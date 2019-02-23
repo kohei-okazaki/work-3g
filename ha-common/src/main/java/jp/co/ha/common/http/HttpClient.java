@@ -100,7 +100,7 @@ public class HttpClient {
 	}
 
 	/**
-	 * 文字Encodeを返す<br>
+	 * 文字Encodeを返す
 	 *
 	 * @param encoding
 	 *     Encode

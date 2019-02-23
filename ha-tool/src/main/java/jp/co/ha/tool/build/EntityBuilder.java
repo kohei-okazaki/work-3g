@@ -95,7 +95,7 @@ public class EntityBuilder extends BaseBuilder {
 	}
 
 	/**
-	 * ＜<code>name</code>をキャメルケースに変換する<br>
+	 * <code>name</code>をキャメルケースに変換する<br>
 	 * (例)<br>
 	 * TEST_NAME -> testName<br>
 	 *
