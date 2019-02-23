@@ -1,8 +1,7 @@
-function finish() {
-  var finishMessage = document.write('完了しました');
-  alert(finishMessage);
-}
-
+/**
+ * TOP画面に戻る
+ * @returns
+ */
 function toTop() {
   var form = document.createElement('form');
   form.action = '../login/top.html';
@@ -18,3 +17,4 @@ $("form").submit(function() {
     $(":submit", self).prop("disabled", false);
   }, 10000);
 });
+
