@@ -3,7 +3,6 @@
 	<name>ha-tool</name>
 	<comment></comment>
 	<projects>
-		<project>ha-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
