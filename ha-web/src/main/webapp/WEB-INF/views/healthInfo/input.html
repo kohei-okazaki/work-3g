@@ -36,10 +36,10 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
       <input type="text" class="validate[required]" size="6" th:field="*{height}" required placeholder="身長" />　cm
-      <p class="attention">※半角数字で入力してください</p>
+      <p class="attention">※半角数字とピリオドで入力してください</p>
       <br><br>
       <input type="text" class="validate[required]" size="6" th:field="*{weight}" required placeholder="体重" />　kg
-      <p class="attention">※半角数字で入力してください</p>
+      <p class="attention">※半角数字とピリオドで入力してください</p>
       <br>
       <br>
       <table>
