@@ -16,7 +16,7 @@ public interface StandardWeightCalcFunction {
 	 *     身長
 	 * @param digit
 	 *     四捨五入桁数
-	 * @return
+	 * @return 計算結果
 	 */
 	BigDecimal apply(BigDecimal height, int digit);
 }

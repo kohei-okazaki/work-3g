@@ -132,7 +132,7 @@ public class CollectionUtil {
 	/**
 	 * 指定したリストをコピーする
 	 *
-	 * @param srcList
+	 * @param src
 	 *     コピー元リスト
 	 * @return リスト
 	 */

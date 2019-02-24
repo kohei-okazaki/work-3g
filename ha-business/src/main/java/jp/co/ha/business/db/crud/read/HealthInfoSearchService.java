@@ -67,7 +67,7 @@ public interface HealthInfoSearchService {
 	 *     健康情報ID
 	 * @param userId
 	 *     ユーザID
-	 * @return
+	 * @return 健康情報リスト
 	 * @throws BaseException
 	 *     基底例外
 	 */
