@@ -7,7 +7,7 @@ import jp.co.ha.common.exception.BaseException;
  * throwできる例外はBaseExceptionを継承したクラスのみとする
  *
  * @param <T>
- *     t型
+ *     T型
  */
 @FunctionalInterface
 public interface ThrowablePredicate<T> {

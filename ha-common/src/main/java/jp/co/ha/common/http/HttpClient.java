@@ -30,7 +30,7 @@ public class HttpClient {
 	private String responseBody;
 
 	/**
-	 * コンストラクタ<br>
+	 * コンストラクタ
 	 *
 	 * @param conf
 	 *     HTTPクライアントの設定情報保持クラス
@@ -40,7 +40,7 @@ public class HttpClient {
 	}
 
 	/**
-	 * Httpステータスを返す<br>
+	 * Httpステータスを返す
 	 *
 	 * @return httpStatus
 	 */
@@ -49,7 +49,7 @@ public class HttpClient {
 	}
 
 	/**
-	 * responseBodyを返す<br>
+	 * responseBodyを返す
 	 *
 	 * @return responseBody
 	 */
@@ -100,7 +100,7 @@ public class HttpClient {
 	}
 
 	/**
-	 * 文字Encodeを返す<br>
+	 * 文字Encodeを返す
 	 *
 	 * @param encoding
 	 *     Encode

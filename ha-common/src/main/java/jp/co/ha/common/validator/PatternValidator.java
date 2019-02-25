@@ -13,6 +13,7 @@ import jp.co.ha.common.validator.annotation.Pattern;
  */
 public class PatternValidator implements ConstraintValidator<Pattern, String> {
 
+	/** 正規表現の列挙 */
 	private RegixType regix;
 
 	/**
