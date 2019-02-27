@@ -23,8 +23,6 @@ public interface HealthInfoCalcService {
 	 * 単位を以下に変換する<br>
 	 * cm → m
 	 *
-	 * @param target
-	 *     対象の値
 	 * @return メートル
 	 */
 	Function<BigDecimal, BigDecimal> convertMeterFromCentiMeter();

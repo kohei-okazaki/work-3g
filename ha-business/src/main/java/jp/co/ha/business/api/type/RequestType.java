@@ -17,7 +17,7 @@ public enum RequestType implements BaseEnum {
 	/** 健康情報照会 */
 	HEALTH_INFO_REFERENCE("002", "健康情報照会");
 
-	/** 値*/
+	/** 値 */
 	private String value;
 	/** 名前 */
 	private String name;

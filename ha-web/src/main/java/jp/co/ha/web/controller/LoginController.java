@@ -96,7 +96,7 @@ public class LoginController implements BaseWebController {
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(form.getUserId());
-		LoginCheckResult checkResult = new LoginCheck().check(account, form.getUserId(), form.getPassword());
+		LoginCheckResult checkResult = new LoginCheck().check(account, form.getPassword());
 		if (checkResult.hasError()) {
 			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getOuterErrorCode(), null, Locale.getDefault());
 			model.addAttribute("errorMessage", errorMessage);

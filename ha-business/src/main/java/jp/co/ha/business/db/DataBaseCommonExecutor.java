@@ -10,7 +10,6 @@ import org.aspectj.lang.annotation.Before;
 import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -36,7 +35,7 @@ public class DataBaseCommonExecutor {
 	public void update(JoinPoint jp) {
 		try {
 			for (Object entity : jp.getArgs()) {
-				if (BeanUtil.notNull(entity.getClass().getAnnotation(Entity.class))) {
+				if (entity.getClass().isAnnotationPresent(Entity.class)) {
 					for (Method m : entity.getClass().getDeclaredMethods()) {
 						if ("setUpdateDate".equals(m.getName())) {
 							m.invoke(entity, DateUtil.getSysDate());
@@ -64,7 +63,7 @@ public class DataBaseCommonExecutor {
 	public void insert(JoinPoint jp) {
 		try {
 			for (Object entity : jp.getArgs()) {
-				if (BeanUtil.notNull(entity.getClass().getAnnotation(Entity.class))) {
+				if (entity.getClass().isAnnotationPresent(Entity.class)) {
 					for (Method m : entity.getClass().getDeclaredMethods()) {
 						if ("setRegDate".equals(m.getName()) || "setUpdateDate".equals(m.getName())) {
 							m.invoke(entity, DateUtil.getSysDate());
