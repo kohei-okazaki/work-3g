@@ -29,9 +29,9 @@ checkBusinessDir=${baseDir}"/ha-business/src/main/webapp/WEB-INF"
 checkApiDir=${baseDir}"/ha-api/src/main/webapp/WEB-INF"
 checkWebDir=${baseDir}"/ha-web/src/main/webapp/WEB-INF"
 
-echo "-------------------"
+echo "--------------------"
 echo "START maven-build.sh"
-echo "-------------------"
+echo "--------------------"
 
 JAR_VERSION="1.0"
 
@@ -128,8 +128,8 @@ if [ $? != "0" ] ; then
 fi
 
 
-echo "-------------------"
+echo "------------------"
 echo "END maven-build.sh"
-echo "-------------------"
+echo "------------------"
 
 cd ${baseDir}"/ha-build/shell"
