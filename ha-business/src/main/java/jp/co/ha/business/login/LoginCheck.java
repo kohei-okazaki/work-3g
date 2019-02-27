@@ -23,13 +23,11 @@ public class LoginCheck {
 	 *
 	 * @param account
 	 *     アカウント情報
-	 * @param inputUserId
-	 *     入力されたユーザID
 	 * @param inputPassword
 	 *     入力されたパスワード
 	 * @return ログイン情報チェック結果
 	 */
-	public LoginCheckResult check(Account account, String inputUserId, String inputPassword) {
+	public LoginCheckResult check(Account account, String inputPassword) {
 
 		LoginCheckResult result = new LoginCheckResult();
 		checkExistAccount(result, account);
@@ -99,7 +97,7 @@ public class LoginCheck {
 	private void checkDeleteAccount(LoginCheckResult result, Account account) {
 		if (StringUtil.isTrue(account.getDeleteFlag())) {
 			result.addError();
-			result.setErrorCode(WebErrorCode.ACCOUNT_EXPIRED);
+			result.setErrorCode(WebErrorCode.ACCOUNT_DELETE);
 		}
 	}
 
