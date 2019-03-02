@@ -1,4 +1,4 @@
-package jp.co.ha.common.interceptor.annotation;
+package jp.co.ha.business.interceptor.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
