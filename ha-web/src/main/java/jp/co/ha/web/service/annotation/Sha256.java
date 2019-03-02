@@ -10,18 +10,18 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * パスワード暗号化アノテーション<br>
+ * SHA-256エンコードアノテーション<br>
  * ex)<br>
  * <code>
  * @Sha256
  * @Autowired
- * private PasswordEncoder passwordEncoder
+ * private PasswordEncoder passwordEncoder;
  * </code>
  *
  */
 @Inherited
 @Documented
-@Qualifier("sha256PasswordEncoder")
+@Qualifier("sha256HashEncoder")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Sha256 {

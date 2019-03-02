@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,7 +16,6 @@ import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.system.impl.Sha256PasswordEncoder;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -33,9 +33,9 @@ public class AuthInterceptor extends BaseWebInterceptor {
 	@Autowired
 	private SessionManageService sessionService;
 	/** SHA-256 ハッシュ値生成 */
-//	@Sha256
-//	@Autowired
-//	private HashEncoder encoder;
+	@Autowired
+	@Qualifier(value = "sha256HashEncoder")
+	private HashEncoder encoder;
 
 	/**
 	 * {@inheritDoc}
@@ -55,7 +55,7 @@ public class AuthInterceptor extends BaseWebInterceptor {
 		}
 
 		if (isCsrfTokenCheck(handler)) {
-			// CSRFチェックを行う
+			// CSRFトークンチェックを行う
 			String sessionCsrfToken = sessionService.getValue(request.getSession(), "csrfToken", String.class)
 					.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 			if (StringUtil.isEmpty(sessionCsrfToken)) {
@@ -73,6 +73,7 @@ public class AuthInterceptor extends BaseWebInterceptor {
 			ModelAndView modelAndView) throws Exception {
 
 		if (isStaticResource().test(handler)) {
+			// 静的リソースの場合は認証不要
 			return;
 		}
 
@@ -84,7 +85,6 @@ public class AuthInterceptor extends BaseWebInterceptor {
 		if (isCsrfTokenFactory(handler)) {
 			// CSRFトークンを作成する
 			String random = RandomStringUtils.randomAlphabetic(10);
-			HashEncoder encoder = new Sha256PasswordEncoder();
 			String csrfToken = encoder.encode(random, "");
 			sessionService.setValue(request.getSession(), "csrfToken", csrfToken);
 		}

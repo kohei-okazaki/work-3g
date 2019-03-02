@@ -135,7 +135,9 @@
   <script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
   <script type="text/javascript">
     $(function() {
-      jQuery("#healthInfoReferenceForm").validationEngine();
+      jQuery("#healthInfoReferenceForm").validationEngine({
+          promptPosition : "bottomLeft:80"
+      });
       $("#fromHealthInfoRegDate").datepicker({
           firstDay : 0,
           showButtonPanel : true,

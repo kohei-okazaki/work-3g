@@ -48,9 +48,9 @@
   <!-- セッション管理サービス -->
   <bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />
   <!-- BCryptパスワードサービス -->
-  <bean id="bcryptPasswordEncoder" class="jp.co.ha.common.system.impl.BcryptPasswordEncoder" />
+  <bean id="bcryptHashEncoder" class="jp.co.ha.common.system.impl.BcryptHashEncoder" />
   <!-- sha256パスワードサービス -->
-  <bean id="sha256PasswordEncoder" class="jp.co.ha.common.system.impl.Sha256PasswordEncoder" />
+  <bean id="sha256HashEncoder" class="jp.co.ha.common.system.impl.Sha256HashEncoder" />
 
   <!-- DB接続の共通処理 -->
   <bean id="dataBaseCommonExecutor" class="jp.co.ha.business.db.DataBaseCommonExecutor" />

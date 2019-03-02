@@ -35,10 +35,10 @@
     <form action="./confirm.html" id="healthInfoForm" th:action="@{./confirm.html}" method="post" th:object="${healthInfoForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-      <input type="text" class="validate[required]" size="6" th:field="*{height}" required placeholder="身長" />　cm
+      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{height}" required placeholder="身長" />　cm
       <p class="attention">※半角数字とピリオドで入力してください</p>
       <br><br>
-      <input type="text" class="validate[required]" size="6" th:field="*{weight}" required placeholder="体重" />　kg
+      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{weight}" required placeholder="体重" />　kg
       <p class="attention">※半角数字とピリオドで入力してください</p>
       <br>
       <br>

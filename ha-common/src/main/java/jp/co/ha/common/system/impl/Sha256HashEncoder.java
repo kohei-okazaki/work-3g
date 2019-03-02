@@ -4,25 +4,26 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 import jp.co.ha.common.exception.AlgorithmException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
 /**
- * SHA512パスワード作成クラス
+ * SHA-256ハッシュ値作成クラス
  *
  */
-public class Sha512PasswordEncoder implements HashEncoder {
+public class Sha256HashEncoder implements HashEncoder {
 
 	/** HASH化アルゴリズム */
-	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_512;
+	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_256;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String encode(String password, String salt) throws AlgorithmException {
+	public String encode(String password, String salt) throws BaseException {
 		try {
 			return getPasswordDefault(password, salt, HASH_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
