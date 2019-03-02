@@ -23,11 +23,11 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -130,11 +130,11 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
 				+ FileExtension.CSV.getValue();
 		csvConfig.setFileName(fileName);
-		csvConfig.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
-		csvConfig.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
+		csvConfig.setHasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()));
+		csvConfig.setHasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()));
 		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
-		csvConfig.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
-		csvConfig.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
+		csvConfig.setHasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()));
+		csvConfig.setUseMask(CommonFlag.TRUE.is(entity.getMaskFlag()));
 		csvConfig.setCharset(Charset.UTF_8);
 		return csvConfig;
 	}

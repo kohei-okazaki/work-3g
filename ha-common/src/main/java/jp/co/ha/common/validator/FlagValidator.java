@@ -1,7 +1,5 @@
 package jp.co.ha.common.validator;
 
-import java.util.List;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -22,6 +20,6 @@ public class FlagValidator implements ConstraintValidator<Flag, String> {
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return List.of(StringUtil.FALSE_FLAG, StringUtil.TRUE_FLAG).contains(value);
+		return value.matches("[01]");
 	}
 }

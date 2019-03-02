@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
@@ -57,9 +58,9 @@ public class AddColumnBuilder extends BaseBuilder {
 	}
 
 	private List<Row> getTargetRowList(List<Row> rowList) {
-		return rowList.stream().filter(e -> {
-			return StringUtil.isTrue(e.getCell(CellPositionType.ADD_FLG).getValue());
-		}).collect(Collectors.toList());
+		return rowList.stream()
+				.filter(e -> CommonFlag.TRUE.is(e.getCell(CellPositionType.ADD_FLG).getValue()))
+				.collect(Collectors.toList());
 	}
 
 	private String getColumnType(Row row) {

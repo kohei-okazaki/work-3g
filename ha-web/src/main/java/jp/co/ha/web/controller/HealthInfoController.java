@@ -28,6 +28,7 @@ import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
@@ -95,6 +96,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
@@ -113,6 +115,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(check = true)
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseException {
 

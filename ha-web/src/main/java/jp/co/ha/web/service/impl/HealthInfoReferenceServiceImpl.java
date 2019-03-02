@@ -15,6 +15,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -79,11 +80,11 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
 				+ FileExtension.CSV.getValue();
 		conf.setFileName(fileName);
-		conf.setHasHeader(StringUtil.isTrue(entity.getHeaderFlag()));
-		conf.setHasFooter(StringUtil.isTrue(entity.getFooterFlag()));
+		conf.setHasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()));
+		conf.setHasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()));
 		conf.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
-		conf.setHasEnclosure(StringUtil.isTrue(entity.getEnclosureCharFlag()));
-		conf.setUseMask(StringUtil.isTrue(entity.getMaskFlag()));
+		conf.setHasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()));
+		conf.setUseMask(CommonFlag.TRUE.is(entity.getMaskFlag()));
 		conf.setCharset(Charset.UTF_8);
 		return conf;
 	}
@@ -104,7 +105,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		List<HealthInfo> resultList = null;
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			Date healthInfoRegDate = editStrDate(form.getFromHealthInfoRegDate());
-			if (StringUtil.isTrue(form.getHealthInfoRegDateSelectFlag())) {
+			if (CommonFlag.TRUE.is(form.getHealthInfoRegDateSelectFlag())) {
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate, DateUtil.toEndDate(healthInfoRegDate));
 			} else {
 				Date toHealthInfoRegDate = editStrDate(form.getToHealthInfoRegDate());

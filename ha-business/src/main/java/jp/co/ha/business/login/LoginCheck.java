@@ -1,9 +1,9 @@
 package jp.co.ha.business.login;
 
 import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 
 /**
@@ -95,7 +95,7 @@ public class LoginCheck {
 	 *     アカウント情報
 	 */
 	private void checkDeleteAccount(LoginCheckResult result, Account account) {
-		if (StringUtil.isTrue(account.getDeleteFlag())) {
+		if (CommonFlag.TRUE.is(account.getDeleteFlag())) {
 			result.addError();
 			result.setErrorCode(WebErrorCode.ACCOUNT_DELETE);
 		}

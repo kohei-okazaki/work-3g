@@ -17,9 +17,9 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
@@ -80,9 +80,9 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
 		ExcelConfig conf = new ExcelConfig();
 		conf.setCharsetType(Charset.UTF_8);
-		conf.setHasHeader(StringUtil.isTrue(healthInfoFileSetting.getHeaderFlag()));
-		conf.setHasFooter(StringUtil.isTrue(healthInfoFileSetting.getFooterFlag()));
-		conf.setUseMask(StringUtil.isTrue(healthInfoFileSetting.getMaskFlag()));
+		conf.setHasHeader(CommonFlag.TRUE.is(healthInfoFileSetting.getHeaderFlag()));
+		conf.setHasFooter(CommonFlag.TRUE.is(healthInfoFileSetting.getFooterFlag()));
+		conf.setUseMask(CommonFlag.TRUE.is(healthInfoFileSetting.getMaskFlag()));
 		return conf;
 	}
 

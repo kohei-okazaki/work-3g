@@ -16,9 +16,10 @@ import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SessionIllegalException;
+import jp.co.ha.common.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoFileSettingForm;
@@ -64,10 +65,10 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 		if (BeanUtil.isNull(entity)) {
 			// 健康情報ファイル設定が未登録の場合
 			form.setUserId(userId);
-			form.setHeaderFlag(StringUtil.TRUE_FLAG);
-			form.setFooterFlag(StringUtil.TRUE_FLAG);
-			form.setMaskFlag(StringUtil.TRUE_FLAG);
-			form.setEnclosureCharFlag(StringUtil.TRUE_FLAG);
+			form.setHeaderFlag(CommonFlag.TRUE.getValue());
+			form.setFooterFlag(CommonFlag.TRUE.getValue());
+			form.setMaskFlag(CommonFlag.TRUE.getValue());
+			form.setEnclosureCharFlag(CommonFlag.TRUE.getValue());
 		} else {
 			BeanUtil.copy(entity, form);
 		}
@@ -87,6 +88,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 		if (result.hasErrors()) {
@@ -101,6 +103,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(check = true)
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request) throws BaseException {
 
