@@ -10,7 +10,7 @@ import jp.co.ha.tool.type.AccessType;
 /**
  * Setter
  *
- * @param <T>
+ * @param <T> 任意の型
  */
 public class Setter<T> extends Method<T> {
 

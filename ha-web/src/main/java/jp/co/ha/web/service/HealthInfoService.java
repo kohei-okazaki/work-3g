@@ -67,7 +67,7 @@ public interface HealthInfoService {
 	/**
 	 * CSV設定情報を取得する
 	 *
-	 * @param healthInfoFileSetting
+	 * @param entity
 	 *     健康情報ファイル設定
 	 * @return CsvConfig
 	 */
