@@ -19,6 +19,7 @@ import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SessionIllegalException;
+import jp.co.ha.common.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
@@ -94,6 +95,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
@@ -110,6 +112,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(check = true)
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseException {
 

@@ -5,6 +5,7 @@ import java.util.StringJoiner;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
@@ -91,12 +92,12 @@ public class CreateTableBuilder extends BaseBuilder {
 	}
 
 	private boolean isSequence(Row row) {
-		Predicate<Row> function = e -> StringUtil.isTrue(e.getCell(CellPositionType.SEQUENCE).getValue());
+		Predicate<Row> function = e -> CommonFlag.TRUE.is(e.getCell(CellPositionType.SEQUENCE).getValue());
 		return function.test(row);
 	}
 
 	private boolean isPrimaryKey(Row row) {
-		Predicate<Row> function = e -> StringUtil.isTrue(e.getCell(CellPositionType.PRIMARY_KEY).getValue());
+		Predicate<Row> function = e -> CommonFlag.TRUE.is(e.getCell(CellPositionType.PRIMARY_KEY).getValue());
 		return function.test(row);
 	}
 

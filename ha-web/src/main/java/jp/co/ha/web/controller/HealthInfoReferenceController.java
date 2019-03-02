@@ -34,8 +34,8 @@ import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
@@ -90,7 +90,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	@ModelAttribute("healthInfoReferenceForm")
 	public HealthInfoReferenceForm setUpForm() {
 		HealthInfoReferenceForm form = new HealthInfoReferenceForm();
-		form.setHealthInfoRegDateSelectFlag(StringUtil.FALSE_FLAG);
+		form.setHealthInfoRegDateSelectFlag(CommonFlag.FALSE.getValue());
 		return form;
 	}
 

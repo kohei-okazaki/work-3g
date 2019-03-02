@@ -3,6 +3,7 @@ package jp.co.ha.common.util;
 import java.util.List;
 import java.util.function.Predicate;
 
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.UnExpectedException;
 
@@ -32,10 +33,6 @@ public class StringUtil {
 	public static final String THRASH = "/";
 	/** アンダースコア */
 	public static final String UNDER_SCORE = "_";
-	/** 真偽値:true */
-	public static final String TRUE_FLAG = "1";
-	/** 真偽値:false */
-	public static final String FALSE_FLAG = "0";
 
 	/** CR */
 	public static final String CR = "\r";
@@ -90,29 +87,6 @@ public class StringUtil {
 	}
 
 	/**
-	 * 指定された<code>flag</code>がtrueかどうか判定する
-	 *
-	 * @param flag
-	 *     フラグ
-	 * @return 判定結果
-	 */
-	public static boolean isTrue(String flag) {
-		return TRUE_FLAG.equals(flag);
-	}
-
-	/**
-	 * 指定された<code>flag</code>がfalseかどうか判定する
-	 *
-	 * @see StringUtil#isTrue(String)
-	 * @param flag
-	 *     フラグ
-	 * @return 判定結果
-	 */
-	public static boolean isFalse(String flag) {
-		return !isTrue(flag);
-	}
-
-	/**
 	 * 指定した文字列を半角スペースでpaddingする<br>
 	 * <code>target</code>の長さが<code>count</code>以上の文字列の場合、そのまま返す<br>
 	 *
@@ -123,10 +97,10 @@ public class StringUtil {
 	 * @param paddingType
 	 *     Paddingタイプ(右詰/左詰)
 	 * @return Padding後の文字列
-	 * @throws UnExpectedException
+	 * @throws BaseException
 	 *     PaddingTypeの指定が不正の場合
 	 */
-	public static String padding(String target, int count, PaddingType paddingType) throws UnExpectedException {
+	public static String padding(String target, int count, PaddingType paddingType) throws BaseException {
 		if (count <= target.length()) {
 			// 指定した文字長がcount以上の場合
 			return target;

@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import jp.co.ha.common.exception.AlgorithmException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
@@ -22,10 +22,10 @@ public interface HashEncoder {
 	 * @param salt
 	 *     ソルト
 	 * @return パスワード
-	 * @throws AlgorithmException
-	 *     アルゴリズム例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
-	String encode(String password, String salt) throws AlgorithmException;
+	String encode(String password, String salt) throws BaseException;
 
 	/**
 	 * デフォルトで指定した値からハッシュ化した値を返す

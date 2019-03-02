@@ -3,6 +3,7 @@ package jp.co.ha.web.validator;
 import org.springframework.validation.Errors;
 
 import jp.co.ha.common.exception.ValidateErrorCode;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
@@ -35,7 +36,7 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 	private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
-			if (StringUtil.isTrue(form.getHealthInfoRegDateSelectFlag())) {
+			if (CommonFlag.TRUE.is(form.getHealthInfoRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromHealthInfoRegDate())) {
 					errors.rejectValue("fromRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "健康情報作成日" },

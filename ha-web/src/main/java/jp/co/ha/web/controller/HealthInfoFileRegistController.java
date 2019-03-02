@@ -20,6 +20,7 @@ import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SessionIllegalException;
+import jp.co.ha.common.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.CollectionUtil;
@@ -83,6 +84,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm.html")
 	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
@@ -106,6 +108,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	 * {@inheritDoc}
 	 */
 	@Override
+	@CsrfToken(check = true)
 	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/complete.html")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {

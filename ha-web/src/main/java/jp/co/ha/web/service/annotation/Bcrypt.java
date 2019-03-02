@@ -15,13 +15,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * <code>
  * @Bcript
  * @Autowired
- * private PasswordEncoder passwordEncoder
+ * private PasswordEncoder passwordEncoder;
  * </code>
  *
  */
 @Inherited
 @Documented
-@Qualifier("bcryptPasswordEncoder")
+@Qualifier("bcryptHashEncoder")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Bcrypt {

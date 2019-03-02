@@ -7,9 +7,9 @@ import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.HashEncoder;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.AccountRegistForm;
@@ -57,7 +57,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	private Account toAccount(AccountRegistForm form) throws BaseException {
 		Account account = new Account();
 		BeanUtil.copy(form, account);
-		account.setDeleteFlag(StringUtil.FALSE_FLAG);
+		account.setDeleteFlag(CommonFlag.FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
 		account.setApiKey(encoder.encode(form.getPassword(), form.getUserId()));
 		return account;
@@ -73,10 +73,10 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	private HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
 		entity.setUserId(form.getUserId());
-		entity.setEnclosureCharFlag(StringUtil.FALSE_FLAG);
-		entity.setHeaderFlag(StringUtil.FALSE_FLAG);
-		entity.setFooterFlag(StringUtil.FALSE_FLAG);
-		entity.setMaskFlag(StringUtil.FALSE_FLAG);
+		entity.setEnclosureCharFlag(CommonFlag.FALSE.getValue());
+		entity.setHeaderFlag(CommonFlag.FALSE.getValue());
+		entity.setFooterFlag(CommonFlag.FALSE.getValue());
+		entity.setMaskFlag(CommonFlag.FALSE.getValue());
 		return entity;
 	}
 
