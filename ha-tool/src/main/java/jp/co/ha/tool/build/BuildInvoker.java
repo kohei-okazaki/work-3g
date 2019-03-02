@@ -14,7 +14,7 @@ public class BuildInvoker {
 	/**
 	 * 指定したビルドクラスのメイン処理を実行する
 	 *
-	 * @param name
+	 * @param names
 	 *     ビルド名
 	 */
 	@SuppressWarnings("unchecked")

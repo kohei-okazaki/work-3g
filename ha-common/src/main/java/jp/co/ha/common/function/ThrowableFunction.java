@@ -19,7 +19,7 @@ public interface ThrowableFunction<T, R> {
 	 *
 	 * @param t
 	 *     T
-	 * @return
+	 * @return 関数実行結果
 	 * @throws BaseException
 	 *     基底例外
 	 */

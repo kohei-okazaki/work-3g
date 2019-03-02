@@ -21,7 +21,7 @@ public interface ThrowableBiPredicate<T, U> {
 	 *     T
 	 * @param u
 	 *     U
-	 * @return
+	 * @return 関数実行結果
 	 * @throws BaseException
 	 *     基底例外
 	 */

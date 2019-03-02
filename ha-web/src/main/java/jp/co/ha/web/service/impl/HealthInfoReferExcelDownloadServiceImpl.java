@@ -42,7 +42,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(component.getUserId());
 
-		List<ReferenceExcelModel> modelList = toModelList(component.getResultList(), healthInfoFileSetting);
+		List<ReferenceExcelModel> modelList = toModelList(component.getResultList());
 
 		return new ResultReferenceExcelBuiler(getExcelConfig(healthInfoFileSetting), modelList);
 	}
@@ -52,11 +52,9 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 *
 	 * @param resultList
 	 *     健康情報照会リスト
-	 * @param entity
-	 *     健康情報ファイル設定
 	 * @return modelList
 	 */
-	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResult> resultList, HealthInfoFileSetting entity) {
+	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResult> resultList) {
 		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
 			// Excel出力モデル
 			ReferenceExcelModel model = new ReferenceExcelModel();
