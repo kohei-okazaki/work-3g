@@ -9,6 +9,7 @@ import jp.co.ha.tool.type.AccessType;
 
 /**
  * Getter
+ * @param <T> 任意の型
  *
  */
 public class Getter<T> extends Method<T> {

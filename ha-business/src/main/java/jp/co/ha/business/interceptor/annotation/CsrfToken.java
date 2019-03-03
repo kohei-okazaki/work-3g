@@ -23,14 +23,14 @@ public @interface CsrfToken {
 	/**
 	 * トークンを生成する
 	 *
-	 * @return
+	 * @return 生成する場合true、それ以外の場合false
 	 */
 	boolean factocy() default false;
 
 	/**
 	 * トークンをチェックする
 	 *
-	 * @return
+	 * @return チェックする場合true、それ以外の場合false
 	 */
 	boolean check() default false;
 }

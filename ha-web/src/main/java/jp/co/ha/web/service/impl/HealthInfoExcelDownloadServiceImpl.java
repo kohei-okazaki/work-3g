@@ -39,7 +39,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(healthInfo.getUserId());
 
 		// 健康情報Excelモデルに変換
-		HealthInfoExcelModel model = toModel(healthInfo, healthInfoFileSetting);
+		HealthInfoExcelModel model = toModel(healthInfo);
 
 		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), List.of(model));
 	}
@@ -49,11 +49,9 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 *
 	 * @param healthInfo
 	 *     健康情報
-	 * @param healthInfoFileSetting
-	 *     健康情報ファイル設定
 	 * @return model
 	 */
-	private HealthInfoExcelModel toModel(HealthInfo healthInfo, HealthInfoFileSetting healthInfoFileSetting) {
+	private HealthInfoExcelModel toModel(HealthInfo healthInfo) {
 		HealthInfoExcelModel model = new HealthInfoExcelModel();
 		model.setHeight(healthInfo.getHeight().toString());
 		model.setWeight(healthInfo.getWeight().toString());

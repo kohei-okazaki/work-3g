@@ -37,7 +37,7 @@ public enum CommonFlag implements BaseEnum {
 	 *
 	 * @param value
 	 *     値
-	 * @return
+	 * @return 一致する場合true、それ以外の場合false
 	 */
 	public boolean is(String value) {
 		return this.value.equals(value);
