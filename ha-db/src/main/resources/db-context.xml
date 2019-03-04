@@ -32,7 +32,7 @@
     <constructor-arg ref="dataSource" />
   </bean>
 
-  <tx:annotation-driven transaction-manager="transactionManager"/>
+  <tx:annotation-driven transaction-manager="transactionManager" />
 
   <import resource="classpath:jp.co.ha.db.mapper.*" />
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
