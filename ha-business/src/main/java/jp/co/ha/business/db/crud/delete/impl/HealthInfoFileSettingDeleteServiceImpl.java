@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.delete.impl;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.delete.HealthInfoFileSettingDeleteService;
@@ -19,6 +20,7 @@ public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSet
 	 */
 	@Delete
 	@Override
+	@Transactional
 	public void deleteByUserId(String userId) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoFileSettingMapper mapper = session.getMapper(HealthInfoFileSettingMapper.class);

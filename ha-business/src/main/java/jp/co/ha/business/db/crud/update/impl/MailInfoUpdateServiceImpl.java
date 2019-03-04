@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.update.impl;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
@@ -20,6 +21,7 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 	 */
 	@Update
 	@Override
+	@Transactional
 	public void update(MailInfo entity) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			MailInfoMapper mapper = session.getMapper(MailInfoMapper.class);

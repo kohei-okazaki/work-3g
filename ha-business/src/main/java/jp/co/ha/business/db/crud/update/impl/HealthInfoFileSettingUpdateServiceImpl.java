@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.update.impl;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
@@ -20,6 +21,7 @@ public class HealthInfoFileSettingUpdateServiceImpl implements HealthInfoFileSet
 	 */
 	@Update
 	@Override
+	@Transactional
 	public void update(HealthInfoFileSetting entity) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			HealthInfoFileSettingMapper mapper = session.getMapper(HealthInfoFileSettingMapper.class);
