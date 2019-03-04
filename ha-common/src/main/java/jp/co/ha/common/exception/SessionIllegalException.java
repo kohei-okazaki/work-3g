@@ -12,6 +12,16 @@ public class SessionIllegalException extends BaseException {
 	/**
 	 * コンストラクタ
 	 *
+	 * @param e
+	 *     例外クラス
+	 */
+	public SessionIllegalException(Exception e) {
+		super(e);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
 	 * @param errorCode
 	 *     エラーコード
 	 * @param detail
@@ -21,4 +31,17 @@ public class SessionIllegalException extends BaseException {
 		super(errorCode, detail);
 	}
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param errorCode
+	 *     エラーコード
+	 * @param detail
+	 *     詳細
+	 * @param e
+	 *     例外クラス
+	 */
+	public SessionIllegalException(BaseErrorCode errorCode, String detail, Exception e) {
+		super(errorCode, detail, e);
+	}
 }

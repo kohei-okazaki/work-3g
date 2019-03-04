@@ -17,7 +17,9 @@ public enum RegixType implements BaseEnum {
 	/** URL */
 	URL("http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?"),
 	/** メールアドレス */
-	MAIL_ADDRESS("[A-Za-z0-9._+]+@[A-Za-z]+.[A-Za-z]");
+	MAIL_ADDRESS("[A-Za-z0-9._+]+@[A-Za-z]+.[A-Za-z]"),
+	/** フラグ */
+	FLAG("[01]");
 
 	/** 正規表現 */
 	private String value;

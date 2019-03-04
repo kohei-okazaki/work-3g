@@ -15,6 +15,16 @@ public class HealthInfoException extends BaseException {
 	/**
 	 * コンストラクタ
 	 *
+	 * @param e
+	 *     例外クラス
+	 */
+	public HealthInfoException(Exception e) {
+		super(e);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
 	 * @param errorCode
 	 *     エラーコード
 	 * @param detail
@@ -22,5 +32,19 @@ public class HealthInfoException extends BaseException {
 	 */
 	public HealthInfoException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param errorCode
+	 *     エラーコード
+	 * @param detail
+	 *     詳細
+	 * @param e
+	 *     例外クラス
+	 */
+	public HealthInfoException(BaseErrorCode errorCode, String detail, Exception e) {
+		super(errorCode, detail, e);
 	}
 }

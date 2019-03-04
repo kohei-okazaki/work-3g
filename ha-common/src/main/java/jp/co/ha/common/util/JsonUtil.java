@@ -35,15 +35,14 @@ public class JsonUtil {
 	 *     基底例外
 	 */
 	public static <T> T toJavaObject(String target, Class<T> clazz) throws BaseException {
-
 		try {
 			return new ObjectMapper().readValue(target, clazz);
 		} catch (JsonParseException e) {
-			throw new AppIOException(CommonErrorCode.JSON_FORMAT_ERROR, target + "をjavaクラスへの変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.JSON_FORMAT_ERROR, target + "をjavaクラスへの変換に失敗しました", e);
 		} catch (JsonMappingException e) {
-			throw new AppIOException(CommonErrorCode.JSON_MAPPING_ERROR, target + "をjavaクラスへの変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.JSON_MAPPING_ERROR, target + "をjavaクラスへの変換に失敗しました", e);
 		} catch (IOException e) {
-			throw new AppIOException(CommonErrorCode.RUNTIME_ERROR, target + "をjavaクラスへの変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.RUNTIME_ERROR, target + "をjavaクラスへの変換に失敗しました", e);
 		}
 	}
 
@@ -57,13 +56,11 @@ public class JsonUtil {
 	 *     基底例外
 	 */
 	public static String toJsonString(Object target) throws BaseException {
-
 		try {
 			return new ObjectMapper().writeValueAsString(target);
 		} catch (JsonProcessingException e) {
-			throw new AppIOException(CommonErrorCode.JSON_MAPPING_ERROR, target + "をJSON文字列への変換に失敗しました");
+			throw new AppIOException(CommonErrorCode.JSON_MAPPING_ERROR, target + "をJSON文字列への変換に失敗しました", e);
 		}
-
 	}
 
 }

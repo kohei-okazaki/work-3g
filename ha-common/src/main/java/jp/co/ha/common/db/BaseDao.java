@@ -45,17 +45,17 @@ public abstract class BaseDao {
 				this.stm = this.con.createStatement();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "JDBCドライバのロードに失敗");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "JDBCドライバのロードに失敗", e);
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DBに接続に失敗");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DBに接続に失敗", e);
 		} catch (IllegalArgumentException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます", e);
 		} catch (InvocationTargetException e) {
 			LOG.error("", e);
 		} catch (NoSuchMethodException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません", e);
 		} catch (SecurityException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタの生成に失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタの生成に失敗しました", e);
 		}
 	}
 
@@ -70,7 +70,7 @@ public abstract class BaseDao {
 		try {
 			return this.rs.next();
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました", e);
 		}
 	}
 
@@ -97,7 +97,7 @@ public abstract class BaseDao {
 				throw new DataBaseException(CommonErrorCode.DB_SQL_SELECT_ERROR, "実行するSQlが存在しません");
 			}
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました", e);
 		}
 
 	}
@@ -123,7 +123,7 @@ public abstract class BaseDao {
 				LOG.debug("DB切断します");
 			}
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました");
+			throw new DataBaseException(CommonErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました", e);
 		}
 	}
 

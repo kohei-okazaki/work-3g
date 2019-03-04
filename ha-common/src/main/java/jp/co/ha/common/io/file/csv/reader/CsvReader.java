@@ -58,9 +58,9 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 				modelList.add(this.read(record));
 			}
 		} catch (UnsupportedEncodingException e) {
-			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "指定した文字コードが無効です:" + charset.getValue());
+			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "指定した文字コードが無効です:" + charset.getValue(), e);
 		} catch (IOException e) {
-			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。");
+			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。", e);
 		}
 
 		return modelList;

@@ -202,7 +202,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		try {
 			csvDownloadService.execute(response.getWriter(), conf, service.toModelList(userId, resultList));
 		} catch (IOException e) {
-			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました");
+			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
 		}
 	}
 

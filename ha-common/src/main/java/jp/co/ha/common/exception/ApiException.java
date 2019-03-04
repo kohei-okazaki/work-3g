@@ -12,6 +12,16 @@ public class ApiException extends BaseException {
 	/**
 	 * コンストラクタ
 	 *
+	 * @param e
+	 *     例外クラス
+	 */
+	public ApiException(Exception e) {
+		super(e);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
 	 * @param errorCode
 	 *     エラーコード
 	 * @param detail
@@ -19,6 +29,20 @@ public class ApiException extends BaseException {
 	 */
 	public ApiException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param errorCode
+	 *     エラーコード
+	 * @param detail
+	 *     詳細
+	 * @param e
+	 *     例外クラス
+	 */
+	public ApiException(BaseErrorCode errorCode, String detail, Exception e) {
+		super(errorCode, detail, e);
 	}
 
 }
