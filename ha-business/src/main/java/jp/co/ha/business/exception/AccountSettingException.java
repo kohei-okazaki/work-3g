@@ -15,6 +15,16 @@ public class AccountSettingException extends BaseException {
 	/**
 	 * コンストラクタ
 	 *
+	 * @param e
+	 *     例外クラス
+	 */
+	public AccountSettingException(Exception e) {
+		super(e);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
 	 * @param errorCode
 	 *     エラーコード
 	 * @param detail
@@ -22,5 +32,19 @@ public class AccountSettingException extends BaseException {
 	 */
 	public AccountSettingException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param errorCode
+	 *     エラーコード
+	 * @param detail
+	 *     詳細
+	 * @param e
+	 *     例外クラス
+	 */
+	public AccountSettingException(BaseErrorCode errorCode, String detail, Exception e) {
+		super(errorCode, detail, e);
 	}
 }

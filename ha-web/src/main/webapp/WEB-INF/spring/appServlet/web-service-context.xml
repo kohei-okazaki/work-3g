@@ -44,11 +44,8 @@
 
   <!-- 健康情報計算サービス -->
   <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
-
-  <!-- セッション管理サービス -->
+  <!-- セッション管理サービス-->
   <bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />
-  <!-- BCryptパスワードサービス -->
-  <bean id="bcryptHashEncoder" class="jp.co.ha.common.system.impl.BcryptHashEncoder" />
   <!-- sha256パスワードサービス -->
   <bean id="sha256HashEncoder" class="jp.co.ha.common.system.impl.Sha256HashEncoder" />
 

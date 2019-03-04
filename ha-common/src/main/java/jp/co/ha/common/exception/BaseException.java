@@ -17,12 +17,38 @@ public abstract class BaseException extends Exception {
 	/**
 	 * コンストラクタ
 	 *
+	 * @param e
+	 *     例外クラス
+	 */
+	public BaseException(Exception e) {
+		super(e);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
 	 * @param errorCode
 	 *     エラーコード
 	 * @param detail
 	 *     詳細
 	 */
 	public BaseException(BaseErrorCode errorCode, String detail) {
+		this.errorCode = errorCode;
+		this.detail = detail;
+	}
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param errorCode
+	 *     エラーコード
+	 * @param detail
+	 *     詳細
+	 * @param e
+	 *     例外クラス
+	 */
+	public BaseException(BaseErrorCode errorCode, String detail, Exception e) {
+		super(e);
 		this.errorCode = errorCode;
 		this.detail = detail;
 	}

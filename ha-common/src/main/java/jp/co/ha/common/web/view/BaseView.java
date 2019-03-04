@@ -2,7 +2,7 @@ package jp.co.ha.common.web.view;
 
 /**
  * viewEnumの基底インターフェース<br>
- * すべてのViewEnumはこのインターフェースを継承すること<br>
+ * すべてのViewEnumはこのインターフェースを継承すること
  *
  */
 public interface BaseView {

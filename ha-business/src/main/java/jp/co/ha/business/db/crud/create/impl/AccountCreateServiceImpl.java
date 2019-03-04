@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.create.impl;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
@@ -20,6 +21,7 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	 */
 	@Insert
 	@Override
+	@Transactional
 	public void create(Account entity) throws BaseException {
 		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
 			AccountMapper mapper = session.getMapper(AccountMapper.class);

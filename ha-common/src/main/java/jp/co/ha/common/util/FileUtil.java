@@ -99,9 +99,7 @@ public class FileUtil {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			srcFileList.stream().forEach(srcFile -> {
-				LOG.warn(srcFile.getPath(), e);
-			});
+			srcFileList.stream().forEach(srcFile -> LOG.warn(srcFile.getPath(), e));
 			LOG.warn("ファイルが見つかりません destFile:" + destFilePath, e);
 		} catch (IOException e) {
 			LOG.warn("Zipへの圧縮に失敗しました", e);
