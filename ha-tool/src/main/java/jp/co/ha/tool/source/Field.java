@@ -6,7 +6,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.type.AccessType;
 
 /**
- * フィールド情報
+ * Field
  *
  * @param <T>
  *     任意の型

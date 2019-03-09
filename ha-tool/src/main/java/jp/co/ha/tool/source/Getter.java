@@ -12,7 +12,6 @@ import jp.co.ha.tool.type.AccessType;
  *
  * @param <T>
  *     任意の型
- *
  */
 public class Getter<T> extends Method<T> {
 
@@ -23,10 +22,22 @@ public class Getter<T> extends Method<T> {
 	 * コンストラクタ
 	 *
 	 * @param field
-	 *     Field情報
+	 *     Field
 	 */
 	public Getter(Field<T> field) {
-		super(field, AccessType.PUBLIC);
+		this(field, AccessType.PUBLIC);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param field
+	 *     Field
+	 * @param accessType
+	 *     アクセスタイプ
+	 */
+	public Getter(Field<T> field, AccessType accessType) {
+		super(field, accessType);
 	}
 
 	/**

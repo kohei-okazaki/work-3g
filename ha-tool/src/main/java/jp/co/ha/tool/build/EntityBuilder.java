@@ -34,6 +34,7 @@ import jp.co.ha.tool.type.ExecuteType;
 public class EntityBuilder extends BaseBuilder {
 
 	@Build
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void execute() {
 
 		Excel excel = super.reader.read();
@@ -175,7 +176,7 @@ public class EntityBuilder extends BaseBuilder {
 
 		List<String> strImportList = new ArrayList<>();
 		importList.stream()
-				.filter(e -> (!strImportList.contains(e.toString())))
+				.filter(e -> !strImportList.contains(e.toString()))
 				.map(e -> e.toString())
 				.forEach(e -> strImportList.add(e));
 

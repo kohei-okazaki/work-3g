@@ -1,10 +1,12 @@
 package jp.co.ha.tool.type;
 
+import jp.co.ha.common.type.BaseEnum;
+
 /**
  * セル位置列挙
  *
  */
-public enum CellPositionType {
+public enum CellPositionType implements BaseEnum {
 
 	/** 論理名 */
 	LOGICAL_NAME(0, "logicalName"),
@@ -30,19 +32,19 @@ public enum CellPositionType {
 	/** 位置 */
 	private int position;
 	/** ヘッダ名 */
-	private String headerName;
+	private String value;
 
 	/**
 	 * コンストラクタ
 	 *
 	 * @param position
 	 *     位置
-	 * @param headerName
+	 * @param value
 	 *     ヘッダ名
 	 */
-	private CellPositionType(int position, String headerName) {
+	private CellPositionType(int position, String value) {
 		this.position = position;
-		this.headerName = headerName;
+		this.value = value;
 	}
 
 	/**
@@ -55,11 +57,10 @@ public enum CellPositionType {
 	}
 
 	/**
-	 * headerNameを返す
-	 *
-	 * @return ヘッダ名
+	 * {@inheritDoc}
 	 */
-	public String getHeaderName() {
-		return this.headerName;
+	@Override
+	public String getValue() {
+		return this.value;
 	}
 }

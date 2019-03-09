@@ -28,5 +28,4 @@ public class MailInfoDeleteServiceImpl implements MailInfoDeleteService {
 			session.commit();
 		}
 	}
-
 }

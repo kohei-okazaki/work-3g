@@ -28,5 +28,4 @@ public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
 			session.commit();
 		}
 	}
-
 }

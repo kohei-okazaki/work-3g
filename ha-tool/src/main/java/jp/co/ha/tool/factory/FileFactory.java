@@ -21,6 +21,9 @@ public class FileFactory {
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(FileFactory.class);
 
+	/**
+	 * プライベートコンストラクタ
+	 */
 	private FileFactory() {
 	}
 

@@ -38,11 +38,6 @@ public class ExcelReader extends BaseFileReader {
 		this.conf = conf;
 	}
 
-	private Cell getCell(Row row, CellPositionType type) {
-		String cellValue = row.getCell(type.getPosition()).getStringCellValue();
-		return new Cell(cellValue);
-	}
-
 	/**
 	 * 読み込みを行う
 	 *
@@ -76,6 +71,11 @@ public class ExcelReader extends BaseFileReader {
 			excel.addSheet(excelSheet);
 		}
 		return excel;
+	}
+
+	private Cell getCell(Row row, CellPositionType type) {
+		String cellValue = row.getCell(type.getPosition()).getStringCellValue();
+		return new Cell(cellValue);
 	}
 
 }

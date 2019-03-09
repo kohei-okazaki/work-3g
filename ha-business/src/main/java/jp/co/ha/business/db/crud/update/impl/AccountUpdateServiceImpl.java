@@ -29,5 +29,4 @@ public class AccountUpdateServiceImpl implements AccountUpdateService {
 			session.commit();
 		}
 	}
-
 }

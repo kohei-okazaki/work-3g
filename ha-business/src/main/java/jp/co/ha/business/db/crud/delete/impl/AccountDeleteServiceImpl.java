@@ -28,5 +28,4 @@ public class AccountDeleteServiceImpl implements AccountDeleteService {
 			session.commit();
 		}
 	}
-
 }

@@ -22,10 +22,22 @@ public class Setter<T> extends Method<T> {
 	 * コンストラクタ
 	 *
 	 * @param field
-	 *     Field情報
+	 *     Field
 	 */
 	public Setter(Field<T> field) {
-		super(field, AccessType.PUBLIC);
+		this(field, AccessType.PUBLIC);
+	}
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param field
+	 *     Field
+	 * @param accessType
+	 *     アクセスタイプ
+	 */
+	public Setter(Field<T> field, AccessType accessType) {
+		super(field, accessType);
 	}
 
 	/**
