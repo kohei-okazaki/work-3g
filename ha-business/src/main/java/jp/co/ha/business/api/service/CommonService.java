@@ -21,7 +21,7 @@ public abstract class CommonService {
 	 * @param request
 	 *     リクエスト
 	 * @throws BaseException
-	 *     API例外
+	 *     基底例外
 	 */
 	protected void checkApiUse(Account account, BaseApiRequest request) throws BaseException {
 		if (!account.getApiKey().equals(request.getApiKey())) {
