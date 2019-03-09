@@ -5,7 +5,8 @@ import jp.co.ha.tool.type.AccessType;
 /**
  * Method
  *
- * @param <T> 任意の型
+ * @param <T>
+ *     任意の型
  */
 public abstract class Method<T> {
 
