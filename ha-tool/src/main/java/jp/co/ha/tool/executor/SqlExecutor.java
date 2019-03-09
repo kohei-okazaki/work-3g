@@ -15,6 +15,6 @@ public class SqlExecutor {
 	 *     使わない
 	 */
 	public static void main(String[] args) {
-		BuildInvoker.build("AddColumnBuilder");
+		BuildInvoker.build("AddColumnBuilder", "CreateTableBuilder");
 	}
 }
