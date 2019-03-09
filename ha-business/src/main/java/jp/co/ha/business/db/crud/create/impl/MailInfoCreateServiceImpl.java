@@ -29,5 +29,4 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 			session.commit();
 		}
 	}
-
 }

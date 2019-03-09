@@ -64,13 +64,14 @@ public class HttpClient {
 
 		HttpURLConnection connection = null;
 		try {
-			URL url = new URL(this.conf.getRequestUrl());
+			URL url = new URL(conf.getRequestUrl());
 			connection = (HttpURLConnection) url.openConnection();
-			connection.setConnectTimeout(this.conf.getTimeout());
-			connection.setRequestMethod(this.conf.getHttpMethod().getValue());
+			connection.setConnectTimeout(conf.getTimeout());
+			connection.setReadTimeout(conf.getTimeout());
+			connection.setRequestMethod(conf.getHttpMethod().getValue());
 
 			connection.connect();
-			this.httpStatus = HttpStatus.of(String.valueOf(connection.getResponseCode()));
+			httpStatus = HttpStatus.of(String.valueOf(connection.getResponseCode()));
 		} catch (MalformedURLException e) {
 			LOG.error("", e);
 		} catch (IOException e) {
@@ -80,7 +81,7 @@ public class HttpClient {
 		String encoding = getEncoding(connection.getContentEncoding());
 
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), encoding))) {
-			if (HttpStatus.OK == this.httpStatus) {
+			if (HttpStatus.OK == httpStatus) {
 				String line = null;
 				StringBuilder sb = new StringBuilder();
 				while (BeanUtil.notNull(line = br.readLine())) {
@@ -88,7 +89,7 @@ public class HttpClient {
 				}
 				this.responseBody = sb.toString();
 			} else {
-				LOG.warn("HTTP ステータス = " + this.httpStatus + "(" + this.httpStatus.getValue() + ")");
+				LOG.warn("HTTP ステータス = " + httpStatus + "(" + httpStatus.getValue() + ")");
 			}
 		} catch (IOException e) {
 			LOG.error("", e);

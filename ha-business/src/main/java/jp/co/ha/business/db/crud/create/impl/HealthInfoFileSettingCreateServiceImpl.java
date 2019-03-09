@@ -29,5 +29,4 @@ public class HealthInfoFileSettingCreateServiceImpl implements HealthInfoFileSet
 			session.commit();
 		}
 	}
-
 }
