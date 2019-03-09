@@ -1,7 +1,5 @@
 package jp.co.ha.business.api.request;
 
-import jp.co.ha.common.validator.annotation.Required;
-
 /**
  * 健康情報照会リクエストクラス
  *
@@ -9,7 +7,6 @@ import jp.co.ha.common.validator.annotation.Required;
 public class HealthInfoReferenceRequest extends BaseApiRequest {
 
 	/** 健康情報ID */
-	@Required
 	private Integer healthInfoId;
 
 	/**
