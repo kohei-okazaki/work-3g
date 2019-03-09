@@ -34,13 +34,6 @@ public class StringUtil {
 	/** アンダースコア */
 	public static final String UNDER_SCORE = "_";
 
-	/** CR */
-	public static final String CR = "\r";
-	/** LF */
-	public static final String LF = "\n";
-	/** CRLF */
-	public static final String CRLF = CR + LF;
-
 	/**
 	 * プライベートコンストラクタ
 	 */

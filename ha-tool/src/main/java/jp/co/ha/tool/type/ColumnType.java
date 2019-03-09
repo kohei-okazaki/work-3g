@@ -6,7 +6,7 @@ import java.util.Date;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * カラム定義列挙
+ * カラム定義の列挙
  *
  */
 public enum ColumnType implements BaseEnum {
@@ -46,6 +46,14 @@ public enum ColumnType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
 	}
 
 	/**

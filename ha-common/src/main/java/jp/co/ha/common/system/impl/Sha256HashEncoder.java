@@ -25,7 +25,7 @@ public class Sha256HashEncoder implements HashEncoder {
 	@Override
 	public String encode(String password, String salt) throws BaseException {
 		try {
-			return getPasswordDefault(password, salt, HASH_ALGORITHM);
+			return encodeDefault(password, salt, HASH_ALGORITHM);
 		} catch (NoSuchAlgorithmException e) {
 			throw new AlgorithmException(CommonErrorCode.ALGORITH_ERROR, HASH_ALGORITHM.getValue() + "でのハッシュ化に失敗しました", e);
 		} catch (UnsupportedEncodingException e) {

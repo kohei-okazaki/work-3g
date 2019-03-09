@@ -76,4 +76,22 @@ public enum WebErrorCode implements BaseErrorCode, BaseEnum {
 	public LogLevel getLogLevel() {
 		return this.logLevel;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return WebErrorCode
+	 */
+	public static WebErrorCode of(String value) {
+		return BaseEnum.of(WebErrorCode.class, value);
+	}
 }

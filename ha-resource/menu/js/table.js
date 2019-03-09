@@ -46,6 +46,12 @@ var table = [
         size: 2
       },
       {
+        logicalName: "健康情報作成日時",
+        physicalName: "HEALTH_INFO_REG_DATE",
+        type: "TIMESTAMP",
+        size: ""
+      },
+      {
         logicalName: "更新日時",
         physicalName: "UPDATE_DATE",
         type: "TIMESTAMP",

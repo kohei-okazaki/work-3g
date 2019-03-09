@@ -1,16 +1,52 @@
 package jp.co.ha.tool.type;
 
+import jp.co.ha.common.type.BaseEnum;
+
 /**
  * SQLの列挙
  *
  */
-public enum SqlType {
+public enum SqlType implements BaseEnum {
+
 	/** select */
-	SELECT,
+	SELECT("select"),
 	/** update */
-	UPDATE,
+	UPDATE("update"),
 	/** insert */
-	INSERT,
+	INSERT("insert"),
 	/** delete */
-	DELETE;
+	DELETE("delete");
+
+	/** 値 */
+	private String value;
+
+	private SqlType(String value) {
+		this.value = value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getValue() {
+		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return SqlType
+	 */
+	public static SqlType of(String value) {
+		return BaseEnum.of(SqlType.class, value);
+	}
 }

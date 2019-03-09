@@ -33,12 +33,9 @@ public enum CommonFlag implements BaseEnum {
 	}
 
 	/**
-	 * 指定した列挙と一致するかどうか返す
-	 *
-	 * @param value
-	 *     値
-	 * @return 一致する場合true、それ以外の場合false
+	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean is(String value) {
 		return this.value.equals(value);
 	}

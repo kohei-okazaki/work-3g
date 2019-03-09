@@ -12,7 +12,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 
 /**
- * Json操作のUtilクラス
+ * JSON操作のUtilクラス
  *
  */
 public class JsonUtil {

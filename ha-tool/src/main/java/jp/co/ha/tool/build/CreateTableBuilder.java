@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import jp.co.ha.common.type.CommonFlag;
+import jp.co.ha.common.type.LineFeedType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
@@ -34,7 +35,7 @@ public class CreateTableBuilder extends BaseBuilder {
 			StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 			body.add("CREATE TABLE " + tableName + " (");
 			Table table = toTable(excel.getRowList(), tableName);
-			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + StringUtil.CRLF);
+			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + LineFeedType.CRLF.getValue());
 			table.getColumnList().stream().forEach(e -> {
 				String comment = e.getComment();
 				String name = e.getName();

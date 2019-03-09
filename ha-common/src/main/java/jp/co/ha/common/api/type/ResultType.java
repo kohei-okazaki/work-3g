@@ -1,10 +1,12 @@
 package jp.co.ha.common.api.type;
 
+import jp.co.ha.common.type.BaseEnum;
+
 /**
  * APIの結果コードの列挙
  *
  */
-public enum ResultType {
+public enum ResultType implements BaseEnum {
 
 	/** SUCCESS */
 	SUCCESS("success", "成功"),
@@ -12,30 +14,37 @@ public enum ResultType {
 	FAILURE("failure", "失敗");
 
 	/** コード値 */
-	private String code;
+	private String value;
 	/** メッセージ */
 	private String message;
 
 	/**
 	 * コンストラクタ
 	 *
-	 * @param code
-	 *     コード
+	 * @param value
+	 *     コード値
 	 * @param message
 	 *     メッセージ
 	 */
-	private ResultType(String code, String message) {
-		this.code = code;
+	private ResultType(String value, String message) {
+		this.value = value;
 		this.message = message;
 	}
 
 	/**
-	 * codeを返す
-	 *
-	 * @return code
+	 * {@inheritDoc}
 	 */
-	public String getCode() {
-		return this.code;
+	@Override
+	public String getValue() {
+		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
 	}
 
 	/**
@@ -45,6 +54,16 @@ public enum ResultType {
 	 */
 	public String getMessage() {
 		return this.message;
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return ResultType
+	 */
+	public static ResultType of(String value) {
+		return BaseEnum.of(ResultType.class, value);
 	}
 
 }

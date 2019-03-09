@@ -69,4 +69,22 @@ public enum ApiErrorCode implements BaseErrorCode, BaseEnum {
 	public LogLevel getLogLevel() {
 		return this.logLevel;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return ApiErrorCode
+	 */
+	public static ApiErrorCode of(String value) {
+		return BaseEnum.of(ApiErrorCode.class, value);
+	}
 }

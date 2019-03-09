@@ -1,7 +1,7 @@
 package jp.co.ha.common.type;
 
 /**
- * charset列挙
+ * 文字コードの列挙
  *
  */
 public enum Charset implements BaseEnum {
@@ -30,6 +30,14 @@ public enum Charset implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
 	}
 
 	/**

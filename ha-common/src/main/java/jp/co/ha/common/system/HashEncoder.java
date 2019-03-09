@@ -15,7 +15,7 @@ import jp.co.ha.common.type.Charset;
 public interface HashEncoder {
 
 	/**
-	 * パスワードを作成する
+	 * ハッシュ化を行う
 	 *
 	 * @param password
 	 *     パスワード
@@ -42,7 +42,7 @@ public interface HashEncoder {
 	 * @throws UnsupportedEncodingException
 	 *     指定した文字コードが存在しない場合
 	 */
-	public default String getPasswordDefault(String password, String salt, Algorithm algorithm)
+	public default String encodeDefault(String password, String salt, Algorithm algorithm)
 			throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		MessageDigest messsageDigest = MessageDigest.getInstance(algorithm.getValue());
 		String str = password + salt;

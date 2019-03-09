@@ -3,7 +3,7 @@ package jp.co.ha.tool.type;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * セル位置列挙
+ * セル位置の列挙
  *
  */
 public enum CellPositionType implements BaseEnum {
@@ -62,5 +62,23 @@ public enum CellPositionType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return CellPositionType
+	 */
+	public static CellPositionType of(String value) {
+		return BaseEnum.of(CellPositionType.class, value);
 	}
 }

@@ -42,6 +42,14 @@ public enum HealthInfoStatus implements BaseEnum {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
 	 * messageを返す
 	 *
 	 * @return message

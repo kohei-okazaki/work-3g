@@ -61,7 +61,8 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 
 		// リクエスト種別チェック
 		if (!RequestType.HEALTH_INFO_REGIST.is(request.getRequestType())) {
-			throw new HealthInfoException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR, "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
+			throw new HealthInfoException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
+					"リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得
