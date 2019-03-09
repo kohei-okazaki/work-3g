@@ -66,6 +66,14 @@ public enum RequestType implements BaseEnum {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
 	 * nameを返す
 	 *
 	 * @return name

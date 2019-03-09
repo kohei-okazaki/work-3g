@@ -94,4 +94,22 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 		return this.logLevel;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return CommonErrorCode
+	 */
+	public static CommonErrorCode of(String value) {
+		return BaseEnum.of(CommonErrorCode.class, value);
+	}
+
 }

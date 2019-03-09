@@ -1,7 +1,7 @@
 package jp.co.ha.common.type;
 
 /**
- * Dateフォーマット
+ * 日付の列挙
  *
  */
 public enum DateFormatType implements BaseEnum {
@@ -32,6 +32,14 @@ public enum DateFormatType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
 	}
 
 	/**

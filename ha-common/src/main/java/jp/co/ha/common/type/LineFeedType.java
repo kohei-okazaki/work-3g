@@ -1,17 +1,17 @@
-package jp.co.ha.common.system.type;
-
-import jp.co.ha.common.type.BaseEnum;
+package jp.co.ha.common.type;
 
 /**
- * アルゴリズム列挙
+ * 改行コードの列挙
  *
  */
-public enum Algorithm implements BaseEnum {
+public enum LineFeedType implements BaseEnum {
 
-	/** SHA-256 */
-	SHA_256("SHA-256"),
-	/** SHA-512 */
-	SHA_512("SHA-512");
+	/** CR */
+	CR("\r"),
+	/** LF */
+	LF("\n"),
+	/** CRLF */
+	CRLF("\r\n");
 
 	/**
 	 * コンストラクタ
@@ -19,7 +19,7 @@ public enum Algorithm implements BaseEnum {
 	 * @param value
 	 *     値
 	 */
-	private Algorithm(String value) {
+	private LineFeedType(String value) {
 		this.value = value;
 	}
 
@@ -46,9 +46,10 @@ public enum Algorithm implements BaseEnum {
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
 	 * @param value
 	 *     値
-	 * @return Algorithm
+	 * @return LineFeedType
 	 */
-	public static Algorithm of(String value) {
-		return BaseEnum.of(Algorithm.class, value);
+	public static LineFeedType of(String value) {
+		return BaseEnum.of(LineFeedType.class, value);
 	}
+
 }

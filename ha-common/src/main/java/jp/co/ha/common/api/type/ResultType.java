@@ -40,12 +40,30 @@ public enum ResultType implements BaseEnum {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
 	 * messageを返す
 	 *
 	 * @return message
 	 */
 	public String getMessage() {
 		return this.message;
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return ResultType
+	 */
+	public static ResultType of(String value) {
+		return BaseEnum.of(ResultType.class, value);
 	}
 
 }

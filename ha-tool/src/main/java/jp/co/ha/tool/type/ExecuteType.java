@@ -3,7 +3,7 @@ package jp.co.ha.tool.type;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * SqlExecutorの処理タイプ
+ * SqlExecutorの列挙
  *
  */
 public enum ExecuteType implements BaseEnum {
@@ -36,6 +36,14 @@ public enum ExecuteType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
 	}
 
 	/**

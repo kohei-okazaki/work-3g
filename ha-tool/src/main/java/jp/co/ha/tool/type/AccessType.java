@@ -3,7 +3,7 @@ package jp.co.ha.tool.type;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * アクセス列挙
+ * アクセス修飾子の列挙
  *
  */
 public enum AccessType implements BaseEnum {
@@ -29,5 +29,23 @@ public enum AccessType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean is(String value) {
+		return this.value.equals(value);
+	}
+
+	/**
+	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+	 * @param value
+	 *     値
+	 * @return AccessType
+	 */
+	public static AccessType of(String value) {
+		return BaseEnum.of(AccessType.class, value);
 	}
 }

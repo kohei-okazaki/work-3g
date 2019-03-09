@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
+import jp.co.ha.common.type.LineFeedType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
@@ -145,16 +146,20 @@ public class EntityBuilder extends BaseBuilder {
 	private String build(JavaSource source) {
 		StringBuilder result = new StringBuilder();
 
-		result.append(buildPackage(source)).append(StringUtil.CRLF + StringUtil.CRLF);
+		result.append(buildPackage(source))
+				.append(LineFeedType.CRLF.getValue() + LineFeedType.CRLF.getValue());
 
-		result.append(buildImport(source.getImportList())).append(StringUtil.CRLF + StringUtil.CRLF);
+		result.append(buildImport(source.getImportList()))
+				.append(LineFeedType.CRLF.getValue() + LineFeedType.CRLF.getValue());
 
 		result.append(buildClass(source) + StringUtil.SPACE + buildInterfaces(source.getImplInterfaceList()) + " {")
-				.append(StringUtil.CRLF + StringUtil.CRLF);
+				.append(LineFeedType.CRLF.getValue() + LineFeedType.CRLF.getValue());
 
-		result.append(buildFields(source.getFieldList())).append(StringUtil.CRLF + StringUtil.CRLF);
+		result.append(buildFields(source.getFieldList()))
+				.append(LineFeedType.CRLF.getValue() + LineFeedType.CRLF.getValue());
 
-		result.append(buildMethods(source.getMethodList())).append(StringUtil.CRLF + StringUtil.CRLF);
+		result.append(buildMethods(source.getMethodList()))
+				.append(LineFeedType.CRLF.getValue() + LineFeedType.CRLF.getValue());
 
 		result.append("}");
 
