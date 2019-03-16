@@ -12,7 +12,7 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
- * Webのリクエストインターセプター
+ * Requestインターセプター
  *
  */
 public class RequestInterceptor extends BaseWebInterceptor {

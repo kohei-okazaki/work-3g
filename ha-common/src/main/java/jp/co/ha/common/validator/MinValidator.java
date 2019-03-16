@@ -7,7 +7,9 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Min;
 
 /**
- * 最小桁数チェックvalidator
+ * 最小桁数の妥当性チェックvalidator
+ *
+ * @see jp.co.ha.common.validator.annotation.Min
  *
  */
 public class MinValidator implements ConstraintValidator<Min, String> {

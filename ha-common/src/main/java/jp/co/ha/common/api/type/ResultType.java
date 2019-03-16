@@ -1,17 +1,20 @@
 package jp.co.ha.common.api.type;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jp.co.ha.common.type.BaseEnum;
 
 /**
  * APIの結果コードの列挙
  *
  */
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum ResultType implements BaseEnum {
 
 	/** SUCCESS */
-	SUCCESS("success", "成功"),
+	SUCCESS("1", "成功"),
 	/** FAILURE */
-	FAILURE("failure", "失敗");
+	FAILURE("0", "失敗");
 
 	/** コード値 */
 	private String value;
@@ -22,7 +25,7 @@ public enum ResultType implements BaseEnum {
 	 * コンストラクタ
 	 *
 	 * @param value
-	 *     コード値
+	 *     値
 	 * @param message
 	 *     メッセージ
 	 */

@@ -9,6 +9,8 @@ import jp.co.ha.common.validator.annotation.Max;
 /**
  * 最大桁数チェックvalidator
  *
+ * @see jp.co.ha.common.validator.annotation.Max
+ *
  */
 public class MaxValidator implements ConstraintValidator<Max, String> {
 

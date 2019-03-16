@@ -19,7 +19,9 @@ public enum RegixType implements BaseEnum {
 	/** メールアドレス */
 	MAIL_ADDRESS("[A-Za-z0-9._+]+@[A-Za-z]+.[A-Za-z]"),
 	/** フラグ */
-	FLAG("[01]");
+	FLAG("[01]"),
+	/** 浮動小数 */
+	DECIMAL("^?(0|[1-9]\\d*)(\\.\\d+|)$");
 
 	/** 正規表現 */
 	private String value;

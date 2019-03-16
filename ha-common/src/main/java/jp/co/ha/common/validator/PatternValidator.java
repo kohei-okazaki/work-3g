@@ -10,6 +10,8 @@ import jp.co.ha.common.validator.annotation.Pattern;
 /**
  * 型チェックvalidator
  *
+ * @see jp.co.ha.common.validator.annotation.Max
+ *
  */
 public class PatternValidator implements ConstraintValidator<Pattern, String> {
 

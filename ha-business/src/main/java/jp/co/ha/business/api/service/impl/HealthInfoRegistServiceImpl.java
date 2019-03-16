@@ -23,7 +23,6 @@ import jp.co.ha.common.function.ThrowableFunction;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
 
@@ -52,18 +51,18 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	@Override
 	public void checkRequest(HealthInfoRegistRequest request) throws BaseException {
 
-		if (BeanUtil.isNull(request.getRequestType())
-				|| StringUtil.isEmpty(request.getUserId())
-				|| BeanUtil.isNull(request.getHeight())
-				|| BeanUtil.isNull(request.getWeight())) {
-			throw new HealthInfoException(ApiErrorCode.HEALTH_INFO_REG_EMPTY, "必須エラー");
-		}
-
 		// リクエスト種別チェック
 		if (!RequestType.HEALTH_INFO_REGIST.is(request.getRequestType())) {
 			throw new HealthInfoException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
 					"リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
@@ -73,13 +72,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 
 		// API利用判定
 		checkApiUse(account, request);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
 
 		// リクエストをEntityにつめる
 		HealthInfo entity = toEntity().apply(request);

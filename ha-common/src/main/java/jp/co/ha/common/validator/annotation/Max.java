@@ -13,7 +13,7 @@ import javax.validation.Payload;
 import jp.co.ha.common.validator.MaxValidator;
 
 /**
- * 最大桁数チェックアノテーション
+ * 最大桁数の妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MaxValidator
  *

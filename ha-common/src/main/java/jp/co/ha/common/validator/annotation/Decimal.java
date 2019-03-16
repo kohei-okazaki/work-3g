@@ -10,20 +10,28 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validator.FlagValidator;
+import jp.co.ha.common.validator.DecimalValidator;
 
 /**
- * フラグの妥当性チェックアノテーション
+ * 浮動小数妥当性チェックアノテーション
  *
- * @see jp.co.ha.common.validator.FlagValidator
+ * @see jp.co.ha.common.validator.DecimalValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = FlagValidator.class)
-public @interface Flag {
+@Constraint(validatedBy = DecimalValidator.class)
+public @interface Decimal {
+
+	int min() default 1;
+
+	int max() default 99999;
+
+	boolean minEqual() default true;
+
+	boolean maxEqual() default true;
 
 	/** message */
 	String message() default "";

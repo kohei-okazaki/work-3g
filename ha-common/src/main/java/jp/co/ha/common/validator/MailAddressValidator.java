@@ -10,6 +10,8 @@ import jp.co.ha.common.validator.annotation.MailAddress;
 /**
  * メールアドレス形式チェックvalidator
  *
+ * @see jp.co.ha.common.validator.annotation.MailAddress
+ *
  */
 public class MailAddressValidator implements ConstraintValidator<MailAddress, String> {
 
