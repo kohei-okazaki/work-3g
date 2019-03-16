@@ -45,6 +45,8 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "CW_007", LogLevel.WARN),
 	/** データ重複エラー */
 	MULTIPLE_DATA("MULTIPLE_DATA", "CW_008", LogLevel.WARN),
+	/** 妥当性チェックエラー */
+	VALIDATE_ERROR("VALIDATE_ERROR", "CW_009", LogLevel.WARN)
 	;
 
 	/**

@@ -22,7 +22,6 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
 
@@ -44,12 +43,6 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	 */
 	@Override
 	public void checkRequest(HealthInfoReferenceRequest request) throws BaseException {
-
-		if (BeanUtil.isNull(request.getRequestType())
-				|| StringUtil.isEmpty(request.getUserId())
-				|| BeanUtil.isNull(request.getHealthInfoId())) {
-			throw new HealthInfoException(ApiErrorCode.HEALTH_INFO_REG_EMPTY, "必須エラー");
-		}
 
 		// リクエスト種別チェック
 		if (!RequestType.HEALTH_INFO_REFERENCE.is(request.getRequestType())) {

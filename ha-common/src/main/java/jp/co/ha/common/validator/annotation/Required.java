@@ -13,7 +13,7 @@ import javax.validation.Payload;
 import jp.co.ha.common.validator.RequiredValidator;
 
 /**
- * 必須チェックアノテーション
+ * 必須妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.RequiredValidator
  *

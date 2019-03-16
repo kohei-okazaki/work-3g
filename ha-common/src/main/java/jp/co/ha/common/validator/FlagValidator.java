@@ -8,13 +8,12 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Flag;
 
 /**
- * フラグチェックvalidator
+ * フラグの妥当性チェッククラス
+ *
+ * @see jp.co.ha.common.validator.annotation.Flag
  *
  */
 public class FlagValidator implements ConstraintValidator<Flag, String> {
-
-	/** フラグ値の正規表現 */
-	private RegixType flagType;
 
 	/**
 	 * {@inheritDoc}
@@ -24,6 +23,6 @@ public class FlagValidator implements ConstraintValidator<Flag, String> {
 		if (StringUtil.isEmpty(value)) {
 			return true;
 		}
-		return value.matches(flagType.getValue());
+		return RegixType.FLAG.is().test(value);
 	}
 }

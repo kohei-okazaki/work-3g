@@ -26,7 +26,7 @@ public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
 	void checkRequest(Rq request) throws BaseException;
 
 	/**
-	 * メイン処理
+	 * メイン処理<br>
 	 * リクエスト型を処理し、レスポンス型で返す
 	 *
 	 * @param request

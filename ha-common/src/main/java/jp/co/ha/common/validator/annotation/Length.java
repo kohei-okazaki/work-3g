@@ -10,20 +10,23 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validator.FlagValidator;
+import jp.co.ha.common.validator.MinValidator;
 
 /**
- * フラグの妥当性チェックアノテーション
+ * 桁数妥当性チェックアノテーション
  *
- * @see jp.co.ha.common.validator.FlagValidator
+ * @see jp.co.ha.common.validator.LengthValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = FlagValidator.class)
-public @interface Flag {
+@Constraint(validatedBy = MinValidator.class)
+public @interface Length {
+
+	/** length */
+	int length();
 
 	/** message */
 	String message() default "";

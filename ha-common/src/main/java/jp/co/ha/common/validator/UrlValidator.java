@@ -10,6 +10,8 @@ import jp.co.ha.common.validator.annotation.Url;
 /**
  * URLチェックvalidator
  *
+ * @see jp.co.ha.common.validator.annotation.Url
+ *
  */
 public class UrlValidator implements ConstraintValidator<Url, String> {
 
