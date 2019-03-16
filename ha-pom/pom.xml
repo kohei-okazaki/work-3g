@@ -218,14 +218,14 @@
       <version>5.4.0</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- Tomcat -->
+<!--
+    Tomcat
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-catalina</artifactId>
       <version>9.0.16</version>
     </dependency>
-
+ -->
   </dependencies>
 
   <build>

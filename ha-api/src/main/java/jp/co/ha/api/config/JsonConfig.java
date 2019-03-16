@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.common.api.response.serialize.ResultTypeSerializer;
+import jp.co.ha.common.api.type.ResultType;
 
 /**
  * Jsonの設定クラス
@@ -26,17 +28,29 @@ public class JsonConfig {
 	public ObjectMapper jsonObjectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(getDeserializeModule());
+		mapper.registerModule(getSerializeModule());
 		return mapper;
 	}
 
 	/**
-	 * JSONデシリアライズするモジュールを取得
+	 * JSONデシリアライズするModuleを返す
 	 *
 	 * @return Module
 	 */
 	private Module getDeserializeModule() {
 		SimpleModule module = new SimpleModule();
 		module.addDeserializer(RequestType.class, new RequestTypeDeserializer());
+		return module;
+	}
+
+	/**
+	 * JSONシリアライズするModuleを返す
+	 *
+	 * @return Module
+	 */
+	private Module getSerializeModule() {
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(ResultType.class, new ResultTypeSerializer());
 		return module;
 	}
 

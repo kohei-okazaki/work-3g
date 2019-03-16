@@ -16,7 +16,9 @@ import jp.co.ha.common.exception.BaseException;
  *
  */
 @RestController
-@RequestMapping(value = "/healthInfoRegist", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+@RequestMapping(value = "/healthInfoRegist",
+	headers = { "Content-type=application/json;charset=UTF-8" },
+	produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 public class HealthInfoRegistController extends
 		BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
