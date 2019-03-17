@@ -15,6 +15,7 @@ import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl;
+import jp.co.ha.common.validator.BeanValidator;
 
 /**
  * BusinessのBean登録クラス
@@ -81,6 +82,16 @@ public class BusinessConfig {
 	@Bean
 	public HealthInfoReferenceService healthInfoReferenceService() {
 		return new HealthInfoReferenceServiceImpl();
+	}
+
+	/**
+	 * Bean妥当性チェッククラス
+	 *
+	 * @return BeanValidator
+	 */
+	@Bean
+	public BeanValidator<?> beanValidator() {
+		return new BeanValidator<>();
 	}
 
 }

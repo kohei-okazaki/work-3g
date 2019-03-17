@@ -17,6 +17,7 @@ appender("STDOUT", ConsoleAppender) {
   target = "System.out"
 
   encoder(PatternLayoutEncoder) {
+    charset = Charset.forName("${ENCODE}")
     pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
   }
 
@@ -45,6 +46,7 @@ appender("FILE", RollingFileAppender) {
 
 }
 
+// Mybatisで発行されるSQLのログ設定
 logger("jp.co.ha.db.mapper", DEBUG, ["STDOUT", "FILE"], false)
 
 root(INFO, ["STDOUT", "FILE"])

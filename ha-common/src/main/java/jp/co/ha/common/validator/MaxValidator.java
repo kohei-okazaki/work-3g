@@ -7,7 +7,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Max;
 
 /**
- * 最大桁数チェックvalidator
+ * 最大桁数の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Max
  *

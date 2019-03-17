@@ -10,20 +10,20 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validator.RequiredValidator;
+import jp.co.ha.common.validator.NumberRequiredValidator;
 
 /**
- * 文字列型の必須妥当性チェックアノテーション
+ * 数値型の必須妥当性チェックアノテーション
  *
- * @see jp.co.ha.common.validator.RequiredValidator
+ * @see jp.co.ha.common.validator.NumberRequiredValidator
  *
  */
 @Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = RequiredValidator.class)
-public @interface Required {
+@Constraint(validatedBy = NumberRequiredValidator.class)
+public @interface NumberRequired {
 
 	/** message */
 	String message() default "";

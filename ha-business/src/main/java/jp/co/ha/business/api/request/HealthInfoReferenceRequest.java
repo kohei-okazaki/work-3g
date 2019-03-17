@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.request;
 
+import jp.co.ha.common.validator.annotation.Required;
+
 /**
  * 健康情報照会リクエストクラス
  *
@@ -7,6 +9,7 @@ package jp.co.ha.business.api.request;
 public class HealthInfoReferenceRequest extends BaseApiRequest {
 
 	/** 健康情報ID */
+	@Required(message = "healthInfoIdが未設定です")
 	private Integer healthInfoId;
 
 	/**

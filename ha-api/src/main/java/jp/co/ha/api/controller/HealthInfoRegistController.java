@@ -14,7 +14,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateError;
-import jp.co.ha.common.validator.ValidateErrorHolder;
+import jp.co.ha.common.validator.ValidateErrorResult;
 
 /**
  * 健康情報登録コントローラ
@@ -30,6 +30,9 @@ public class HealthInfoRegistController extends
 	/** 健康情報登録サービス */
 	@Autowired
 	private HealthInfoRegistService service;
+	/** 妥当性チェック */
+	@Autowired
+	private BeanValidator<HealthInfoRegistRequest> validator;
 
 	/**
 	 * {@inheritDoc}
@@ -37,15 +40,15 @@ public class HealthInfoRegistController extends
 	@Override
 	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
 
-		BeanValidator<HealthInfoRegistRequest> validator = new BeanValidator<>();
-		ValidateErrorHolder holder = validator.validate(request);
+		ValidateErrorResult result = validator.validate(request);
 
-		if (holder.hasError()) {
-			ValidateError error = holder.getFirst();
+		if (result.hasError()) {
+			ValidateError error = result.getFirst();
 			// 妥当性チェックエラー
 			throw new HealthInfoException(CommonErrorCode.VALIDATE_ERROR,
 					error.getMessage() + " " + error.getName() + "=" + error.getValue());
 		}
+
 		// リクエスト情報のチェック
 		service.checkRequest(request);
 

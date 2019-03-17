@@ -7,7 +7,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Length;
 
 /**
- * 桁数妥当性チェッククラス
+ * 桁数の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Length
  *

@@ -3,7 +3,7 @@ package jp.co.ha.business.api.request;
 import java.math.BigDecimal;
 
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.common.validator.annotation.NumberRequired;
 
 /**
  * 健康情報登録リクエストクラス
@@ -13,11 +13,11 @@ public class HealthInfoRegistRequest extends BaseApiRequest {
 
 	/** 身長 */
 	@Mask
-	@Required(message = "heightが未設定です")
+	@NumberRequired(message = "heightが未設定です")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
-	@Required(message = "weightが未設定です")
+	@NumberRequired(message = "weightが未設定です")
 	private BigDecimal weight;
 
 	/**

@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Decimal;
 
 /**
- * 浮動小数妥当性チェッククラス
+ * 浮動小数の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.DecimalValidator
  *

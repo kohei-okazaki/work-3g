@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Pattern;
 
 /**
- * 型チェックvalidator
+ * 型妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Max
  *
