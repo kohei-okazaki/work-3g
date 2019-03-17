@@ -42,7 +42,7 @@ public class BeanValidator<T> {
 	 *
 	 * @param t
 	 *     validate対象クラス
-	 * @return
+	 * @return 妥当性チェック結果
 	 */
 	@SuppressWarnings("unchecked")
 	public ValidateErrorResult validate(T t) {

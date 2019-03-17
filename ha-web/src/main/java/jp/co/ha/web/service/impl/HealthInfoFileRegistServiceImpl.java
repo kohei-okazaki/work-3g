@@ -36,6 +36,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	@Autowired
 	private HealthInfoRegistService healthInfoRegistService;
 	/** 妥当性チェック */
+	@Autowired
 	private BeanValidator<HealthInfoCsvUploadModel> validator;
 
 	/**
