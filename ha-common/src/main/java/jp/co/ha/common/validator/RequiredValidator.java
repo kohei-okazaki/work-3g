@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Required;
 
 /**
- * 必須チェックvalidator
+ * 必須妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Required
  *

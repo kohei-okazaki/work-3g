@@ -9,7 +9,7 @@ import jp.co.ha.common.util.CollectionUtil;
  * 妥当性チェック結果保持クラス
  *
  */
-public class ValidateErrorHolder {
+public class ValidateErrorResult {
 
 	/** 妥当性チェックのリスト */
 	private List<ValidateError> errorList;
@@ -17,7 +17,7 @@ public class ValidateErrorHolder {
 	/**
 	 * コンストラクタ
 	 */
-	public ValidateErrorHolder() {
+	public ValidateErrorResult() {
 		this.errorList = new ArrayList<>();
 	}
 

@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Flag;
 
 /**
- * フラグの妥当性チェッククラス
+ * フラグの妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Flag
  *

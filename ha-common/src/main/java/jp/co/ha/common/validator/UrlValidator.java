@@ -8,7 +8,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Url;
 
 /**
- * URLチェックvalidator
+ * URL妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Url
  *

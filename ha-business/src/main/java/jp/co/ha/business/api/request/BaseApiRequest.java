@@ -18,8 +18,6 @@ public abstract class BaseApiRequest extends BaseRequest {
 
 	/** リクエスト種別 */
 	@Required(message = "requestTypeが未設定です")
-	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "requestTypeが半角数字でありません")
-	@Length(length = 64, message = "requestTypeが2byteではありません")
 	private RequestType requestType;
 	/** ユーザID */
 	@Required(message = "userIdが未設定です")
