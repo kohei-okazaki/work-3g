@@ -1,7 +1,6 @@
 package jp.co.ha.common.validator;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -11,6 +10,7 @@ import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.NumberRequired;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 
@@ -47,25 +47,28 @@ public class BeanValidator<T> {
 		Class<T> clazz = (Class<T>) t.getClass();
 		try {
 			for (Field f : BeanUtil.getFieldList(clazz)) {
-				Method getter = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.GETTER);
-				String value = (String) getter.invoke(t);
+				Object value = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.GETTER).invoke(t);
+				String property  = value == null ? "" : value.toString();
 				if (f.isAnnotationPresent(Required.class)) {
-					validateRequired(value, f, result);
+					validateRequired(property, f, result);
+				}
+				if (f.isAnnotationPresent(NumberRequired.class)) {
+					validateNumberRequired(property, f, result);
 				}
 				if (f.isAnnotationPresent(Min.class)) {
-					validateMin(value, f, result);
+					validateMin(property, f, result);
 				}
 				if (f.isAnnotationPresent(Max.class)) {
-					validateMax(value, f, result);
+					validateMax(property, f, result);
 				}
 				if (f.isAnnotationPresent(Length.class)) {
-					validateLength(value, f, result);
+					validateLength(property, f, result);
 				}
 				if (f.isAnnotationPresent(Pattern.class)) {
-					validatePattern(value, f, result);
+					validatePattern(property, f, result);
 				}
 				if (f.isAnnotationPresent(Flag.class)) {
-					validateFlag(value, f, result);
+					validateFlag(property, f, result);
 				}
 			}
 		} catch (Exception e) {
@@ -76,7 +79,7 @@ public class BeanValidator<T> {
 	}
 
 	/**
-	 * 必須チェック
+	 * 文字列型の必須チェック
 	 *
 	 * @param value
 	 *     値
@@ -93,6 +96,29 @@ public class BeanValidator<T> {
 			ValidateError error = new ValidateError();
 			error.setName(f.getName());
 			error.setMessage(f.getAnnotation(Required.class).message());
+			error.setValue(value);
+			result.add(error);
+		}
+	}
+
+	/**
+	 * 数値型の必須チェック
+	 *
+	 * @param value
+	 *     値
+	 * @param f
+	 *     フィールド
+	 * @param result
+	 *     妥当性チェック結果
+	 */
+	private void validateNumberRequired(String value, Field f, ValidateErrorResult result) {
+		NumberRequiredValidator validator = new NumberRequiredValidator();
+		validator.initialize(f.getAnnotation(NumberRequired.class));
+		boolean notError = validator.isValid(value, null);
+		if (!notError) {
+			ValidateError error = new ValidateError();
+			error.setName(f.getName());
+			error.setMessage(f.getAnnotation(NumberRequired.class).message());
 			error.setValue(value);
 			result.add(error);
 		}

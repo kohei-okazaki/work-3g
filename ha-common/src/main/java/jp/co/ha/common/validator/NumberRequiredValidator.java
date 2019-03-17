@@ -4,6 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.NumberRequired;
 
 /**
@@ -19,6 +20,9 @@ public class NumberRequiredValidator implements ConstraintValidator<NumberRequir
 	 */
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
-		return !BeanUtil.isNull(value);
+		if (BeanUtil.isNull(value)) {
+			return false;
+		}
+		return !StringUtil.isEmpty(value.toString());
 	}
 }
