@@ -1,4 +1,5 @@
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.classic.filter.ThresholdFilter
 import ch.qos.logback.core.ConsoleAppender
 import ch.qos.logback.core.rolling.RollingFileAppender
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy
@@ -13,7 +14,10 @@ def ENCODE = "UTF-8";
 
 appender("STDOUT", ConsoleAppender) {
 
+  target = "System.out"
+
   encoder(PatternLayoutEncoder) {
+    charset = Charset.forName("${ENCODE}")
     pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
   }
 
@@ -31,6 +35,10 @@ appender("FILE", RollingFileAppender) {
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
     pattern = "%d [%thread] %-5level %logger{10} - %message%n"
+  }
+
+  filter(ThresholdFilter) {
+    level = DEBUG
   }
 
 }

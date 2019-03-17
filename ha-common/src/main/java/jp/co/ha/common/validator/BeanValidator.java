@@ -2,6 +2,8 @@ package jp.co.ha.common.validator;
 
 import java.lang.reflect.Field;
 
+import org.springframework.stereotype.Component;
+
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -29,6 +31,7 @@ import jp.co.ha.common.validator.annotation.Required;
  * @param <T>
  *     検査対象クラス
  */
+@Component
 public class BeanValidator<T> {
 
 	/** LOG */

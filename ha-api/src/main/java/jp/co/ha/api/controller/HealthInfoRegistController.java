@@ -48,6 +48,7 @@ public class HealthInfoRegistController extends
 			throw new HealthInfoException(CommonErrorCode.VALIDATE_ERROR,
 					error.getMessage() + " " + error.getName() + "=" + error.getValue());
 		}
+
 		// リクエスト情報のチェック
 		service.checkRequest(request);
 

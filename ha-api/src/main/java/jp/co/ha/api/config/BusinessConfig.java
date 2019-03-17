@@ -90,7 +90,7 @@ public class BusinessConfig {
 	 * @return BeanValidator
 	 */
 	@Bean
-	public BeanValidator beanValidator() {
+	public BeanValidator<?> beanValidator() {
 		return new BeanValidator<>();
 	}
 
