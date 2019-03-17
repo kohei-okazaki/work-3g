@@ -3,7 +3,6 @@ package jp.co.ha.web.service.impl;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,12 +58,11 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 */
 	@Override
 	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResult> resultList) {
-		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
+		return resultList.stream().map(e -> {
 			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
-			HealthInfoReferenceResult result = resultList.get(i);
-			BeanUtil.copy(result, model);
+			BeanUtil.copy(e, model);
 			model.setUserId(userId);
-			model.setHealthInfoRegDate(DateUtil.toDate(result.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			model.setHealthInfoRegDate(DateUtil.toDate(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			return model;
 		}).collect(Collectors.toList());
 	}
@@ -102,7 +100,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 */
 	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceForm form, String userId) throws BaseException {
 
-		List<HealthInfo> resultList = null;
+		List<HealthInfo> resultList;
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			Date healthInfoRegDate = editStrDate(form.getFromHealthInfoRegDate());
 			if (CommonFlag.TRUE.is(form.getHealthInfoRegDateSelectFlag())) {
@@ -126,8 +124,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	 * @return 日付
 	 */
 	private Date editStrDate(String date) {
-		String strDate = date.replace(StringUtil.HYPHEN, StringUtil.THRASH);
-		return DateUtil.toDate(strDate, DateFormatType.YYYYMMDD);
+		return DateUtil.toDate(date.replace(StringUtil.HYPHEN, StringUtil.THRASH), DateFormatType.YYYYMMDD);
 	}
 
 }
