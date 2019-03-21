@@ -12,7 +12,6 @@ import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
-import jp.co.ha.common.validator.annotation.NumberRequired;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 
@@ -55,9 +54,6 @@ public class BeanValidator<T> {
 				if (f.isAnnotationPresent(Required.class)) {
 					validateRequired(property, f, result);
 				}
-				if (f.isAnnotationPresent(NumberRequired.class)) {
-					validateNumberRequired(property, f, result);
-				}
 				if (f.isAnnotationPresent(Min.class)) {
 					validateMin(property, f, result);
 				}
@@ -99,29 +95,6 @@ public class BeanValidator<T> {
 			ValidateError error = new ValidateError();
 			error.setName(f.getName());
 			error.setMessage(f.getAnnotation(Required.class).message());
-			error.setValue(value);
-			result.add(error);
-		}
-	}
-
-	/**
-	 * 数値型の必須チェック
-	 *
-	 * @param value
-	 *     値
-	 * @param f
-	 *     フィールド
-	 * @param result
-	 *     妥当性チェック結果
-	 */
-	private void validateNumberRequired(String value, Field f, ValidateErrorResult result) {
-		NumberRequiredValidator validator = new NumberRequiredValidator();
-		validator.initialize(f.getAnnotation(NumberRequired.class));
-		boolean notError = validator.isValid(value, null);
-		if (!notError) {
-			ValidateError error = new ValidateError();
-			error.setName(f.getName());
-			error.setMessage(f.getAnnotation(NumberRequired.class).message());
 			error.setValue(value);
 			result.add(error);
 		}

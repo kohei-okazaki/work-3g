@@ -3,6 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Min;
 
@@ -12,7 +13,7 @@ import jp.co.ha.common.validator.annotation.Min;
  * @see jp.co.ha.common.validator.annotation.Min
  *
  */
-public class MinValidator implements ConstraintValidator<Min, String> {
+public class MinValidator implements ConstraintValidator<Min, Object> {
 
 	private int size;
 
@@ -31,14 +32,14 @@ public class MinValidator implements ConstraintValidator<Min, String> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isEmpty(value)) {
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
 		if (isEqual) {
-			return this.size <= value.length();
+			return this.size <= value.toString().length();
 		} else {
-			return this.size < value.length();
+			return this.size < value.toString().length();
 		}
 	}
 }

@@ -4,6 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.MailAddress;
 
@@ -13,16 +14,16 @@ import jp.co.ha.common.validator.annotation.MailAddress;
  * @see jp.co.ha.common.validator.annotation.MailAddress
  *
  */
-public class MailAddressValidator implements ConstraintValidator<MailAddress, String> {
+public class MailAddressValidator implements ConstraintValidator<MailAddress, Object> {
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isEmpty(value)) {
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
-		return RegixType.MAIL_ADDRESS.is().test(value);
+		return RegixType.MAIL_ADDRESS.is().test(value.toString());
 	}
 }
