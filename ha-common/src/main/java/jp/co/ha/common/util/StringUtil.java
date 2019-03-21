@@ -80,32 +80,53 @@ public class StringUtil {
 	}
 
 	/**
-	 * 指定した文字列を半角スペースでpaddingする<br>
-	 * <code>target</code>の長さが<code>count</code>以上の文字列の場合、そのまま返す<br>
+	 * 半角スペースでPaddingする
+	 *
+	 * @see StringUtil#padding(String target, int length, String str, PaddingType paddingType)
 	 *
 	 * @param target
 	 *     対象文字列
-	 * @param count
-	 *     全文字列
+	 * @param length
+	 *     padding後の文字長
 	 * @param paddingType
 	 *     Paddingタイプ(右詰/左詰)
 	 * @return Padding後の文字列
 	 * @throws BaseException
 	 *     PaddingTypeの指定が不正の場合
 	 */
-	public static String padding(String target, int count, PaddingType paddingType) throws BaseException {
-		if (count <= target.length()) {
-			// 指定した文字長がcount以上の場合
+	public static String paddingSpace(String target, int length, PaddingType paddingType) throws BaseException {
+		return padding(target, length, SPACE, paddingType);
+	}
+
+	/**
+	 * 指定した文字列を<code>str</code>でpaddingする<br>
+	 * <code>target</code>の長さが<code>length</code>以上の文字列の場合、そのまま返す
+	 *
+	 * @param target
+	 *     対象文字列
+	 * @param length
+	 *     padding後の文字長
+	 * @param str
+	 *     paddingしたい文字列
+	 * @param paddingType
+	 *     Paddingタイプ(右詰/左詰)
+	 * @return Padding後の文字列
+	 * @throws BaseException
+	 *     PaddingTypeの指定が不正の場合
+	 */
+	public static String padding(String target, int length, String str, PaddingType paddingType) throws BaseException {
+		if (length <= target.length()) {
+			// 指定した文字長がlength以上の場合
 			return target;
 		}
 		String body = target;
-		while (body.length() < count) {
+		while (body.length() < length) {
 			if (PaddingType.LEFT == paddingType) {
 				// 左詰
-				body = body + StringUtil.SPACE;
+				body = body + str;
 			} else if (PaddingType.RIGHT == paddingType) {
 				// 右詰
-				body = StringUtil.SPACE + body;
+				body = str + body;
 			} else {
 				throw new UnExpectedException(CommonErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
 			}
