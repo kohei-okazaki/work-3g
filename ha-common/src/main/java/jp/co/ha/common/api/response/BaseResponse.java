@@ -8,7 +8,7 @@ import jp.co.ha.common.api.type.ResultType;
  */
 public abstract class BaseResponse {
 
-	/** 結果区分 */
+	/** API結果コード */
 	private ResultType result;
 
 	/**
@@ -24,7 +24,7 @@ public abstract class BaseResponse {
 	 * resultを設定する
 	 *
 	 * @param result
-	 *     結果区分
+	 *     API結果コード
 	 */
 	public void setResult(ResultType result) {
 		this.result = result;
