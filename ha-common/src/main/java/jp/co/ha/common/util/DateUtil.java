@@ -17,6 +17,7 @@ import jp.co.ha.common.type.DateFormatType;
  */
 public class DateUtil {
 
+	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(DateUtil.class);
 
 	/**
@@ -127,7 +128,7 @@ public class DateUtil {
 		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
 		}
-		BiFunction<Date, DateFormatType, String> toStringFunction = (Date d, DateFormatType f) -> new SimpleDateFormat(f.getValue()).format(d);
+		BiFunction<Date, DateFormatType, String> toStringFunction = (d, f) -> new SimpleDateFormat(f.getValue()).format(d);
 		return toStringFunction.apply(date, format);
 	}
 
