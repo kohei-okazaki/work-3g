@@ -65,7 +65,7 @@ public class LoginController implements BaseWebController {
 	@NonAuth
 	@GetMapping("/index.html")
 	public String index(HttpServletRequest request) {
-		// sessionに格納している情報をすべて削除する
+
 		sessionService.removeValues(request.getSession());
 		return getView(ManageWebView.LOGIN);
 	}
