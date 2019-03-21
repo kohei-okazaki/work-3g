@@ -49,6 +49,9 @@ public class BeanValidator<T> {
 		Class<T> clazz = (Class<T>) t.getClass();
 		try {
 			for (Field f : BeanUtil.getFieldList(clazz)) {
+				if (IgnoreName.SERIAL_VERSION.value.equals(f.getName())) {
+					continue;
+				}
 				Object value = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.GETTER).invoke(t);
 				String property  = value == null ? "" : value.toString();
 				if (f.isAnnotationPresent(Required.class)) {
@@ -213,6 +216,17 @@ public class BeanValidator<T> {
 			error.setValue(value);
 			result.add(error);
 		}
+	}
+
+	private static enum IgnoreName {
+
+		SERIAL_VERSION("serialVersionUID");
+
+		private IgnoreName(String value) {
+			this.value = value;
+		}
+
+		private String value;
 	}
 
 }
