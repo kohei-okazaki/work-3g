@@ -4,6 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Decimal;
 
@@ -13,7 +14,7 @@ import jp.co.ha.common.validator.annotation.Decimal;
  * @see jp.co.ha.common.validator.DecimalValidator
  *
  */
-public class DecimalValidator implements ConstraintValidator<Decimal, String> {
+public class DecimalValidator implements ConstraintValidator<Decimal, Object> {
 
 	/** 最小桁数 */
 	private int min;
@@ -39,12 +40,12 @@ public class DecimalValidator implements ConstraintValidator<Decimal, String> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isEmpty(value)) {
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
-		if (RegixType.DECIMAL.is().test(value)) {
-			int length = value.replaceAll(".", "").length();
+		if (RegixType.DECIMAL.is().test(value.toString())) {
+			int length = value.toString().replaceAll(".", "").length();
 			if (minEqual && maxEqual) {
 				return (min <= length) && (length <= max);
 			} else if (minEqual) {

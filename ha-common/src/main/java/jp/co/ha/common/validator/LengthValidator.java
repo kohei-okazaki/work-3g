@@ -3,6 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Length;
 
@@ -12,7 +13,7 @@ import jp.co.ha.common.validator.annotation.Length;
  * @see jp.co.ha.common.validator.annotation.Length
  *
  */
-public class LengthValidator implements ConstraintValidator<Length, String> {
+public class LengthValidator implements ConstraintValidator<Length, Object> {
 
 	/** length */
 	private int length;
@@ -29,11 +30,11 @@ public class LengthValidator implements ConstraintValidator<Length, String> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isEmpty(value)) {
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			 return true;
 		}
-		return value.length() == length;
+		return value.toString().length() == length;
 	}
 
 }

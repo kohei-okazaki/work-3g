@@ -52,6 +52,8 @@
   <!-- DB接続の共通処理 -->
   <bean id="dataBaseCommonExecutor" class="jp.co.ha.business.db.DataBaseCommonExecutor" />
   <!-- API通信共通処理 -->
-  <bean id="ApiConnectionService" class="jp.co.ha.business.api.service.ApiConnectionExecutor" />
+  <bean id="apiConnectionService" class="jp.co.ha.business.api.service.ApiConnectionExecutor" />
+  <!-- 妥当性チェック -->
+  <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />
 
 </beans>

@@ -16,7 +16,7 @@
     <java-version>10</java-version>
     <org.springframework-version>5.1.5.RELEASE</org.springframework-version>
     <org.aspectj-version>1.9.2</org.aspectj-version>
-    <org.slf4j-version>1.7.25</org.slf4j-version>
+    <org.slf4j-version>1.7.26</org.slf4j-version>
     <logback-version>1.2.3</logback-version>
     <org.jackson-version>2.9.8</org.jackson-version>
     <poi-version>4.0.1</poi-version>
@@ -215,7 +215,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.4.0</version>
+      <version>5.4.1</version>
       <scope>test</scope>
     </dependency>
 <!--

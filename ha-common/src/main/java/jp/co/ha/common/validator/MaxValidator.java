@@ -3,6 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Max;
 
@@ -12,7 +13,7 @@ import jp.co.ha.common.validator.annotation.Max;
  * @see jp.co.ha.common.validator.annotation.Max
  *
  */
-public class MaxValidator implements ConstraintValidator<Max, String> {
+public class MaxValidator implements ConstraintValidator<Max, Object> {
 
 	private int size;
 
@@ -31,14 +32,14 @@ public class MaxValidator implements ConstraintValidator<Max, String> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isEmpty(value)) {
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
 		if (isEqual) {
-			return value.length() <= this.size;
+			return value.toString().length() <= this.size;
 		} else {
-			return value.length() < this.size;
+			return value.toString().length() < this.size;
 		}
 	}
 }

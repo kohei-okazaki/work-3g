@@ -4,6 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Pattern;
 
@@ -13,7 +14,7 @@ import jp.co.ha.common.validator.annotation.Pattern;
  * @see jp.co.ha.common.validator.annotation.Max
  *
  */
-public class PatternValidator implements ConstraintValidator<Pattern, String> {
+public class PatternValidator implements ConstraintValidator<Pattern, Object> {
 
 	/** 正規表現の列挙 */
 	private RegixType regix;
@@ -30,10 +31,10 @@ public class PatternValidator implements ConstraintValidator<Pattern, String> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isValid(String value, ConstraintValidatorContext context) {
-		if (StringUtil.isEmpty(value)) {
+	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
-		return this.regix.is().test(value);
+		return this.regix.is().test(value.toString());
 	}
 }
