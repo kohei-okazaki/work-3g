@@ -1,9 +1,8 @@
 package jp.co.ha.business.db.crud.create.impl;
 
-import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.common.db.annotation.Insert;
 import jp.co.ha.common.exception.BaseException;
@@ -16,6 +15,9 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
  */
 public class HealthInfoFileSettingCreateServiceImpl implements HealthInfoFileSettingCreateService {
 
+	@Autowired
+	private HealthInfoFileSettingMapper mapper;
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -23,10 +25,6 @@ public class HealthInfoFileSettingCreateServiceImpl implements HealthInfoFileSet
 	@Override
 	@Transactional
 	public void create(HealthInfoFileSetting entity) throws BaseException {
-		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
-			HealthInfoFileSettingMapper mapper = session.getMapper(HealthInfoFileSettingMapper.class);
-			mapper.insert(entity);
-			session.commit();
-		}
+		mapper.insert(entity);
 	}
 }

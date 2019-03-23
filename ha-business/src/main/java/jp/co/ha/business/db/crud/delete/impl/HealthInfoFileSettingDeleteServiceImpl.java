@@ -1,9 +1,8 @@
 package jp.co.ha.business.db.crud.delete.impl;
 
-import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.delete.HealthInfoFileSettingDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
 import jp.co.ha.common.exception.BaseException;
@@ -15,6 +14,9 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
  */
 public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSettingDeleteService {
 
+	@Autowired
+	private HealthInfoFileSettingMapper mapper;
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -22,10 +24,6 @@ public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSet
 	@Override
 	@Transactional
 	public void deleteByUserId(String userId) throws BaseException {
-		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
-			HealthInfoFileSettingMapper mapper = session.getMapper(HealthInfoFileSettingMapper.class);
-			mapper.deleteByPrimaryKey(userId);
-			session.commit();
-		}
+		mapper.deleteByPrimaryKey(userId);
 	}
 }

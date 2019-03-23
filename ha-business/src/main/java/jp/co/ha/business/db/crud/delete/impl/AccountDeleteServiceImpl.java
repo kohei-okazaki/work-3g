@@ -1,9 +1,8 @@
 package jp.co.ha.business.db.crud.delete.impl;
 
-import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.delete.AccountDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
 import jp.co.ha.common.exception.BaseException;
@@ -15,6 +14,9 @@ import jp.co.ha.db.mapper.AccountMapper;
  */
 public class AccountDeleteServiceImpl implements AccountDeleteService {
 
+	@Autowired
+	private AccountMapper mapper;
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -22,10 +24,6 @@ public class AccountDeleteServiceImpl implements AccountDeleteService {
 	@Override
 	@Transactional
 	public void deleteByUserId(String userId) throws BaseException {
-		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
-			AccountMapper mapper = session.getMapper(AccountMapper.class);
-			mapper.deleteByPrimaryKey(userId);
-			session.commit();
-		}
+		mapper.deleteByPrimaryKey(userId);
 	}
 }

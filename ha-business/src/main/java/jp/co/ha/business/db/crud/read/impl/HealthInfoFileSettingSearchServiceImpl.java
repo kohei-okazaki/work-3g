@@ -1,9 +1,8 @@
 package jp.co.ha.business.db.crud.read.impl;
 
-import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -15,15 +14,15 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
  */
 public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSettingSearchService {
 
+	@Autowired
+	private HealthInfoFileSettingMapper mapper;
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	@Transactional
 	public HealthInfoFileSetting findByUserId(String userId) throws BaseException {
-		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
-			HealthInfoFileSettingMapper mapper = session.getMapper(HealthInfoFileSettingMapper.class);
-			return mapper.selectByPrimaryKey(userId);
-		}
+		return mapper.selectByPrimaryKey(userId);
 	}
 }
