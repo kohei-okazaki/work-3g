@@ -1,6 +1,7 @@
 package jp.co.ha.common.api.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.api.type.ResultType;
 
@@ -8,6 +9,7 @@ import jp.co.ha.common.api.type.ResultType;
  * 基底レスポンスクラス
  *
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public abstract class BaseResponse {
 
 	/** API結果コード */

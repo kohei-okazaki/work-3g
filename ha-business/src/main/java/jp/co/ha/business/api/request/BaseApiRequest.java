@@ -22,8 +22,8 @@ public abstract class BaseApiRequest extends BaseRequest {
 	/** ユーザID */
 	@Required(message = "userIdが未設定です")
 	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "userIdが半角英数でありません")
-	@Min(size = 2, message = "userIdが2桁未満です")
-	@Max(size = 16, message = "userIdが16桁以上です")
+	@Min(size = 2, message = "userIdが2byte未満です")
+	@Max(size = 16, message = "userIdが16byte以上です")
 	private String userId;
 	/** APIキー */
 	@Mask

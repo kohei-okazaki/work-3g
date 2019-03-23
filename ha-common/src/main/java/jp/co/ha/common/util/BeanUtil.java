@@ -190,9 +190,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * 指定したclazzのfieldNameのアクセサを返す<br>
-	 * typeにSETTERを指定した場合、setter<br>
-	 * それ以外の場合getterを取得<br>
+	 * 指定したclazzのfieldNameのアクセサを返す
 	 *
 	 * @param fieldName
 	 *     フィールド名
