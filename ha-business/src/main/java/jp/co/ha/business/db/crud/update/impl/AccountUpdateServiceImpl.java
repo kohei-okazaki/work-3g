@@ -1,9 +1,8 @@
 package jp.co.ha.business.db.crud.update.impl;
 
-import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import jp.co.ha.business.db.SqlSessionFactory;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.common.db.annotation.Update;
 import jp.co.ha.common.exception.BaseException;
@@ -16,6 +15,9 @@ import jp.co.ha.db.mapper.AccountMapper;
  */
 public class AccountUpdateServiceImpl implements AccountUpdateService {
 
+	@Autowired
+	private AccountMapper mapper;
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -23,10 +25,6 @@ public class AccountUpdateServiceImpl implements AccountUpdateService {
 	@Override
 	@Transactional
 	public void update(Account entity) throws BaseException {
-		try (SqlSession session = SqlSessionFactory.getInstance().getSqlSession()) {
-			AccountMapper mapper = session.getMapper(AccountMapper.class);
-			mapper.updateByPrimaryKey(entity);
-			session.commit();
-		}
+		mapper.updateByPrimaryKey(entity);
 	}
 }

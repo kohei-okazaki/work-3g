@@ -15,7 +15,7 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 public interface ExcelDownloadService<T extends BaseExcelComponent> {
 
 	/**
-	 * メイン処理<br>
+	 * メイン処理
 	 *
 	 * @param t
 	 *     Excel出力情報設定情報

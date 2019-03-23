@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.validator.annotation.Flag;
@@ -50,9 +49,6 @@ public class BeanValidator<T> {
 		Class<T> clazz = (Class<T>) t.getClass();
 		try {
 			for (Field f : BeanUtil.getFieldList(clazz)) {
-				if (IgnoreName.SERIAL_VERSION.is(f.getName())) {
-					continue;
-				}
 				Object value = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.GETTER).invoke(t);
 				String property  = value == null ? "" : value.toString();
 				if (f.isAnnotationPresent(Required.class)) {
@@ -216,54 +212,6 @@ public class BeanValidator<T> {
 			error.setMessage(f.getAnnotation(Flag.class).message());
 			error.setValue(value);
 			result.add(error);
-		}
-	}
-
-	/**
-	 * 妥当性チェック無視名の列挙
-	 *
-	 */
-	public static enum IgnoreName implements BaseEnum {
-
-		SERIAL_VERSION("serialVersionUID");
-
-		/**
-		 * コンストラクタ
-		 *
-		 * @param value
-		 *     値
-		 */
-		private IgnoreName(String value) {
-			this.value = value;
-		}
-
-		/** 値 */
-		private String value;
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getValue() {
-			return this.value;
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public boolean is(String value) {
-			return this.value.equals(value);
-		}
-
-		/**
-		 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-		 * @param value
-		 *     値
-		 * @return IgnoreName
-		 */
-		public static IgnoreName of(String value) {
-			return BaseEnum.of(IgnoreName.class, value);
 		}
 	}
 

@@ -173,11 +173,12 @@ public class HealthInfoReferenceController implements BaseWebController {
 	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/excelDownload.html")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
+
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		List<HealthInfoReferenceResult> resultList = sessionService.getValue(request.getSession(), "resultList", List.class)
 				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+
 		if (CollectionUtil.isEmpty(resultList)) {
-			// レコードが見つからなかった場合
 			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		ReferenceExcelComponent component = new ReferenceExcelComponent();
@@ -200,11 +201,11 @@ public class HealthInfoReferenceController implements BaseWebController {
 	@GetMapping(value = "/csvDownload.html")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
-		// sessionから検索結果リストとユーザIDを取得
 		HttpSession session = request.getSession();
 		List<HealthInfoReferenceResult> resultList = sessionService.getValue(session, "resultList", List.class)
 				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionService.getValue(session, "userId", String.class).get();
+
 		if (CollectionUtil.isEmpty(resultList)) {
 			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
