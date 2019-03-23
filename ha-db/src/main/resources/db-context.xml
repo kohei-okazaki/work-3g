@@ -35,10 +35,6 @@
     <property name="password" value="${jdbc.password}" />
   </bean>
 
-  <bean class="org.springframework.jdbc.core.JdbcTemplate">
-    <constructor-arg ref="dataSource" />
-  </bean>
-
   <tx:annotation-driven transaction-manager="transactionManager" />
 
   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
