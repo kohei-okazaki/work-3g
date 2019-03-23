@@ -7,12 +7,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import jp.co.ha.business.interceptor.AuthInterceptor;
+
 /**
  * CSRFトークンをチェックすることを示すアノテーション
  * <ul>
  * <li>トークンを生成したいメソッドに<code>@CsrfToken(factocy = true)</code>を付与</li>
  * <li>トークンチェックを行いたいメソッドに<code>@CsrfToken(check = true)</code>を付与</li>
  * </ul>
+ *
+ * @see AuthInterceptor
  */
 @Inherited
 @Documented

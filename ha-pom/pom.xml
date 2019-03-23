@@ -231,6 +231,7 @@
   </dependencies>
 
   <build>
+    <outputDirectory>${project.build.directory}/classes</outputDirectory>
     <resources>
       <resource>
         <directory>${resources.directory}</directory>
