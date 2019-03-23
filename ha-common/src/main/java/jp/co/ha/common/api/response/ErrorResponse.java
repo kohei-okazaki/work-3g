@@ -1,5 +1,7 @@
 package jp.co.ha.common.api.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 
@@ -10,6 +12,7 @@ import jp.co.ha.common.exception.BaseException;
 public class ErrorResponse extends BaseResponse {
 
 	/** 外部エラーコード */
+	@JsonProperty(value = "errorCode")
 	private String outerErrorCode;
 	/** 詳細 */
 	private String detail;
@@ -21,7 +24,7 @@ public class ErrorResponse extends BaseResponse {
 	 *     例外
 	 */
 	public ErrorResponse(BaseException e) {
-		super.setResult(ResultType.FAILURE);
+		super.setResultType(ResultType.FAILURE);
 		this.outerErrorCode = e.getErrorCode().getOuterErrorCode();
 		this.detail = e.getDetail();
 	}
