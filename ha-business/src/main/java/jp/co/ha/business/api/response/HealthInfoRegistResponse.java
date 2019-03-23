@@ -2,12 +2,15 @@ package jp.co.ha.business.api.response;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
  * 健康情報登録レスポンスクラス
  *
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public class HealthInfoRegistResponse extends BaseApiResponse {
 
 	/** 健康情報ID */

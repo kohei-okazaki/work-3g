@@ -61,11 +61,6 @@
     </multipart-config>
   </servlet>
 
-  <error-page>
-    <!-- システムエラー -->
-    <location>/WEB-INF/views/error/systemError.html</location>
-  </error-page>
-
   <servlet-mapping>
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>

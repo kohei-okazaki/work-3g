@@ -1,33 +1,37 @@
 package jp.co.ha.common.api.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import jp.co.ha.common.api.type.ResultType;
 
 /**
  * 基底レスポンスクラス
  *
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public abstract class BaseResponse {
 
 	/** API結果コード */
-	private ResultType result;
+	@JsonProperty(value = "result")
+	private ResultType resultType;
 
 	/**
-	 * resultを返す
+	 * resultTypeを返す
 	 *
-	 * @return result
+	 * @return resultType
 	 */
-	public ResultType getResult() {
-		return result;
+	public ResultType getResultType() {
+		return resultType;
 	}
 
 	/**
-	 * resultを設定する
+	 * resultTypeを設定する
 	 *
-	 * @param result
-	 *     API結果コード
+	 * @param resultType
 	 */
-	public void setResult(ResultType result) {
-		this.result = result;
+	public void setResultType(ResultType resultType) {
+		this.resultType = resultType;
 	}
 
 }

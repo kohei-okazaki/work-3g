@@ -1,14 +1,11 @@
 package jp.co.ha.common.api.type;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jp.co.ha.common.type.BaseEnum;
 
 /**
  * APIの結果コードの列挙
  *
  */
-@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum ResultType implements BaseEnum {
 
 	/** SUCCESS */

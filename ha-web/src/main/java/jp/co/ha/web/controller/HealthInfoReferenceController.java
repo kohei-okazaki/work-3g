@@ -123,7 +123,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 	public String reference(HttpServletRequest request, Model model
 			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseException {
 
-		System.out.println("req-->" + request.getRequestURI());
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 		}

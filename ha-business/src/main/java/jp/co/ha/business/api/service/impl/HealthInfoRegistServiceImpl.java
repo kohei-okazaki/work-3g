@@ -131,7 +131,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 			response.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(e.getUserId());
 			response.setHealthInfoId(lastEntity.getHealthInfoId());
-			response.setResult(ResultType.SUCCESS);
+			response.setResultType(ResultType.SUCCESS);
 			return response;
 		};
 	}

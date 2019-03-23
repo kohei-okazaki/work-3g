@@ -16,7 +16,9 @@ import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
- * SQLセッション取得のFactoryクラス
+ * SQLセッション取得のFactoryクラス<br>
+ * <code>SqlSession session = SqlSessionFactory.getInstance().getSqlSession();</code>
+ * <code>session.getMapper(XXXMapper.class);</code>
  *
  */
 public class SqlSessionFactory {

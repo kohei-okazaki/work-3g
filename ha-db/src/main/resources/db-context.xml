@@ -7,6 +7,7 @@
   xmlns:tx="http://www.springframework.org/schema/tx"
   xmlns:aop="http://www.springframework.org/schema/aop"
   xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:jee="http://www.springframework.org/schema/jee"
   xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
   xsi:schemaLocation="http://www.springframework.org/schema/mvc
                       http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -20,6 +21,8 @@
                       http://www.springframework.org/schema/aop/spring-aop.xsd
                       http://www.springframework.org/schema/util
                       http://www.springframework.org/schema/util/spring-util.xsd
+                      http://www.springframework.org/schema/jee
+                      http://www.springframework.org/schema/jee/spring-util.xsd
                       http://mybatis.org/schema/mybatis-spring
                       http://mybatis.org/schema/mybatis-spring.xsd">
 
@@ -46,9 +49,11 @@
     <property name="mapperLocations" value="classpath:jp/co/ha/db/mapper/*.xml" />
     <property name="typeAliasesPackage" value="jp.co.ha.db.entity" />
   </bean>
+<!--
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
     <property name="basePackage" value="jp.co.ha.db.mapper" />
   </bean>
+ -->
   <mybatis:scan base-package="jp.co.ha.db.mapper" />
 
 </beans>

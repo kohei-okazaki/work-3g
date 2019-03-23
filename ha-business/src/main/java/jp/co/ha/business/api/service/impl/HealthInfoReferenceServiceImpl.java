@@ -84,7 +84,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 			BeanUtil.copy(e, response);
 			response.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			response.setResult(ResultType.SUCCESS);
+			response.setResultType(ResultType.SUCCESS);
 			return response;
 		};
 	}
