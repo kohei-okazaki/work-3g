@@ -27,7 +27,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<HealthInfo> findByUserId(String userId) throws BaseException {
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
@@ -40,7 +40,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException {
 		return mapper.selectByPrimaryKey(healthInfoId);
 	}
@@ -49,7 +49,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public HealthInfo findLastByUserId(String userId) throws BaseException {
 		HealthInfoExample example = new HealthInfoExample();
 		example.setOrderByClause("HEALTH_INFO_REG_DATE");
@@ -63,7 +63,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromHealthInfoRegDate,
 			Date toHealthInfoRegDate) throws BaseException {
 		HealthInfoExample example = new HealthInfoExample();
@@ -79,7 +79,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) throws BaseException {
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
@@ -94,7 +94,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public int getSelectCountByUserId(String userId) throws BaseException {
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
