@@ -53,7 +53,6 @@
   </bean>
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
-    <property name="mapperLocations" value="classpath:jp/co/ha/db/mapper/*.xml" />
     <property name="typeAliasesPackage" value="jp.co.ha.db.entity" />
   </bean>
   <mybatis:scan base-package="jp.co.ha.db.mapper" />

@@ -1,6 +1,8 @@
 package jp.co.ha.web.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -137,6 +139,21 @@ public class HealthInfoReferenceController implements BaseWebController {
 		model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
 		// ログイン中のユーザの全レコードを検索する
 		model.addAttribute("resultList", resultList);
+
+		List<String> healthInfoRegDateList = new ArrayList<>();
+		List<BigDecimal> weightList = new ArrayList<>();
+		List<BigDecimal> bmiList = new ArrayList<>();
+		List<BigDecimal> standardWeightList = new ArrayList<>();
+		for (HealthInfoReferenceResult response : resultList) {
+			healthInfoRegDateList.add(response.getHealthInfoRegDate());
+			weightList.add(response.getWeight());
+			bmiList.add(response.getBmi());
+			standardWeightList.add(response.getStandardWeight());
+		}
+		model.addAttribute("label", healthInfoRegDateList);
+		model.addAttribute("weight", weightList);
+		model.addAttribute("bmi", bmiList);
+		model.addAttribute("standardWeight", standardWeightList);
 
 		// sessionに検索結果リストを設定
 		sessionService.setValue(request.getSession(), "resultList", resultList);

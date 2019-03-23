@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/chart.min.css" th:href="@{/resources/css/lib/chart.min.css}">
 </head>
 <body>
 
@@ -120,6 +121,13 @@
           </td>
         </tr>
       </table>
+
+      <br>
+
+      <div align="center" class="contentLayout">
+        <canvas id="chart" width="250" height="150"></canvas>
+      </div>
+
     </div>
 
   </div>
@@ -131,9 +139,10 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery-ui.min.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/datepicker-ja.min.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/chart.min.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
   <script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
-  <script type="text/javascript">
+  <script type="text/javascript" th:inline="javascript">
     $(function() {
       jQuery("#healthInfoReferenceForm").validationEngine({
           promptPosition : "bottomLeft:80"
@@ -151,6 +160,45 @@
           changeMonth : true
       });
     });
+
+    /*<![CDATA[*/
+    var ctx = document.getElementById("chart").getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: /*[[ ${label} ]]*/,
+        datasets: [
+          {
+            label: "体重",
+            borderColor: 'rgb(142, 0, 204)',
+            lineTension: 0,
+            fill: false,
+            pointHoverBackgroundColor: 'rgb(255, 0, 0)',
+            data: /*[[ ${weight} ]]*/,
+          },
+          {
+            label: "BMI",
+            borderColor: 'rgb(239, 117, 188)',
+            lineTension: 0,
+            fill: false,
+            pointHoverBackgroundColor: 'rgb(255, 0, 0)',
+            data: /*[[ ${bmi} ]]*/,
+          },
+          {
+            label: "標準体重",
+            borderColor: 'rgb(255, 94, 25)',
+            lineTension: 0,
+            fill: false,
+            pointHoverBackgroundColor: 'rgb(255, 0, 0)',
+            data: /*[[ ${standardWeight} ]]*/,
+          }
+        ]
+      },
+      option: {
+        responsive: true,
+      }
+    });
+    /*]]>*/
   </script>
 
 </body>

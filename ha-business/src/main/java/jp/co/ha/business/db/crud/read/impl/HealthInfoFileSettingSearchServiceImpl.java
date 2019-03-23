@@ -21,7 +21,7 @@ public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public HealthInfoFileSetting findByUserId(String userId) throws BaseException {
 		return mapper.selectByPrimaryKey(userId);
 	}

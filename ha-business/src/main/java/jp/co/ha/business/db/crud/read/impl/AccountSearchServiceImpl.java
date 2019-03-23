@@ -21,7 +21,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Account findByUserId(String userId) throws BaseException {
 		return mapper.selectByPrimaryKey(userId);
 	}

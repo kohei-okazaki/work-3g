@@ -2,6 +2,7 @@ package jp.co.ha.common.util;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -132,6 +133,19 @@ public class StringUtil {
 			}
 		}
 		return body;
+	}
+
+	/**
+	 * 指定したbyte配列を16進文字列に変換する
+	 *
+	 * @param bArray
+	 *     byte配列
+	 * @return 16進文字列
+	 */
+	public static String byteToHexString(byte[] bArray) {
+		StringBuilder result = new StringBuilder();
+		Stream.of(bArray).forEach(b -> result.append(String.format("%02x", b)));
+		return result.toString();
 	}
 
 	/**

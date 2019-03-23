@@ -21,7 +21,7 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public MailInfo findByUserId(String userId) throws BaseException {
 		return mapper.selectByPrimaryKey(userId);
 	}
