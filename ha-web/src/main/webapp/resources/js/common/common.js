@@ -1,5 +1,6 @@
 /**
  * TOP画面に戻る
+ *
  * @returns
  */
 function toTop() {
@@ -17,4 +18,3 @@ $("form").submit(function() {
     $(":submit", self).prop("disabled", false);
   }, 10000);
 });
-
