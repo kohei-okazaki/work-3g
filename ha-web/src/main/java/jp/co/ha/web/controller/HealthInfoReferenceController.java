@@ -213,6 +213,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = service.getCsvConfig(fileSetting);
+		conf.setOutputPath("C:\\app\\data\\healthInfoReference\\" + userId);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
@@ -220,6 +221,8 @@ public class HealthInfoReferenceController implements BaseWebController {
 			csvDownloadService.execute(response.getWriter(), conf, service.toModelList(userId, resultList));
 		} catch (IOException e) {
 			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
+		} catch (BaseException e) {
+			throw e;
 		}
 	}
 
