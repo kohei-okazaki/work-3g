@@ -46,7 +46,7 @@ public class FileFactory {
 
 		// ファイル書込
 		try (FileWriter fw = new FileWriter(file.getAbsolutePath());
-				PrintWriter pw = new PrintWriter(new BufferedWriter(fw));) {
+				PrintWriter pw = new PrintWriter(new BufferedWriter(fw))) {
 			pw.println(conf.getData());
 			pw.flush();
 		} catch (IOException e) {

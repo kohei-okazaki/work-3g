@@ -219,6 +219,28 @@ public class FileUtil {
 	}
 
 	/**
+	 * 指定した<code>path</code>までのファイルオブジェクトが存在するかどうか判定する
+	 *
+	 * @param path
+	 *     パス
+	 * @return 存在するtrue, それ以外の場合false
+	 */
+	public static boolean isExists(String path) {
+		return getFile(path).exists();
+	}
+
+	/**
+	 * 指定した<code>path</code>までのディレクトリを作成する
+	 *
+	 * @param path
+	 *     パス
+	 * @return 作成された場合true, それ以外の場合false
+	 */
+	public static boolean mkdir(String path) {
+		return getFile(path).mkdir();
+	}
+
+	/**
 	 * ファイル拡張子の列挙
 	 */
 	public static enum FileExtension implements BaseEnum {

@@ -204,6 +204,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 			csvDownloadService.execute(response.getWriter(), conf, modelList);
 		} catch (IOException e) {
 			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
+		} catch (BaseException e) {
+			throw e;
 		}
 	}
 

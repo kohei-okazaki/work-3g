@@ -8,7 +8,6 @@
   xmlns:aop="http://www.springframework.org/schema/aop"
   xmlns:util="http://www.springframework.org/schema/util"
   xmlns:jee="http://www.springframework.org/schema/jee"
-  xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
   xsi:schemaLocation="http://www.springframework.org/schema/mvc
                       http://www.springframework.org/schema/mvc/spring-mvc.xsd
                       http://www.springframework.org/schema/beans
@@ -22,13 +21,7 @@
                       http://www.springframework.org/schema/util
                       http://www.springframework.org/schema/util/spring-util.xsd
                       http://www.springframework.org/schema/jee
-                      http://www.springframework.org/schema/jee/spring-util.xsd
-                      http://mybatis.org/schema/mybatis-spring
-                      http://mybatis.org/schema/mybatis-spring.xsd">
-
-  <mvc:annotation-driven />
-
-  <aop:aspectj-autoproxy />
+                      http://www.springframework.org/schema/jee/spring-jee.xsd">
 
   <context:component-scan base-package="jp.co.ha.api.controller" />
   <context:component-scan base-package="jp.co.ha.api.config" />
@@ -39,22 +32,5 @@
       <bean class="jp.co.ha.business.interceptor.RequestInterceptor" />
     </mvc:interceptor>
   </mvc:interceptors>
-
-  <context:property-placeholder location="classpath:META-INF/jdbc.properties" />
-  <tx:annotation-driven transaction-manager="transactionManager" />
-  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-    <property name="driverClassName" value="${jdbc.driverClassName}" />
-    <property name="url" value="${jdbc.url}" />
-    <property name="username" value="${jdbc.username}" />
-    <property name="password" value="${jdbc.password}" />
-  </bean>
-  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-    <property name="dataSource" ref="dataSource" />
-  </bean>
-  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="dataSource" ref="dataSource" />
-    <property name="typeAliasesPackage" value="jp.co.ha.db.entity" />
-  </bean>
-  <mybatis:scan base-package="jp.co.ha.db.mapper" />
 
 </beans>

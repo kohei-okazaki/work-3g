@@ -4,7 +4,7 @@ import jp.co.ha.common.type.Charset;
 
 /**
  * CSV設定情報保持クラス<br>
- * 今後、追加するCSV設定情報は本クラスで定義する<br>
+ * 今後、追加するCSV設定情報は本クラスで定義する
  *
  */
 public class CsvConfig {
@@ -23,6 +23,8 @@ public class CsvConfig {
 	private boolean hasFooter;
 	/** マスク利用有無 */
 	private boolean useMask;
+	/** ファイル出力パス */
+	private String outputPath;
 
 	/**
 	 * fileNameを返す
@@ -155,6 +157,25 @@ public class CsvConfig {
 	 */
 	public void setUseMask(boolean useMask) {
 		this.useMask = useMask;
+	}
+
+	/**
+	 * outputPathを返す
+	 *
+	 * @return outputPath
+	 */
+	public String getOutputPath() {
+		return outputPath;
+	}
+
+	/**
+	 * outputPathを設定する
+	 *
+	 * @param outputPath
+	 *     ファイル出力パス
+	 */
+	public void setOutputPath(String outputPath) {
+		this.outputPath = outputPath;
 	}
 
 }
