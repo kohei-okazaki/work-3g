@@ -50,6 +50,9 @@
         /WEB-INF/spring/appServlet/servlet-context.xml
         /WEB-INF/spring/appServlet/view-context.xml
         /WEB-INF/spring/appServlet/web-service-context.xml
+        classpath:common-context.xml
+        classpath:db-context.xml
+        classpath:business-context.xml
       </param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>

@@ -11,6 +11,8 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context.xsd">
 
+  <!-- CRUD -->
+  <!-- select -->
   <!-- アカウント検索サービス -->
   <bean id="accountSearchService" class="jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl" />
   <!-- 健康情報検索サービス -->
@@ -20,6 +22,7 @@
   <!-- 健康情報ファイル設定検索サービス -->
   <bean id="healthInfoFileSettingSearchService" class="jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl" />
 
+  <!-- insert -->
   <!-- アカウント作成サービス -->
   <bean id="accountCreateService" class="jp.co.ha.business.db.crud.create.impl.AccountCreateServiceImpl" />
   <!-- 健康情報作成サービス -->
@@ -29,6 +32,7 @@
   <!-- 健康情報ファイル設定作成サービス -->
   <bean id="healthInfoFileSettingCreateService" class="jp.co.ha.business.db.crud.create.impl.HealthInfoFileSettingCreateServiceImpl" />
 
+  <!-- update -->
   <!-- アカウント更新サービス -->
   <bean id="accountUpdateService" class="jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl" />
   <!-- メール情報更新サービス -->
@@ -36,7 +40,7 @@
   <!-- 健康情報ファイル設定更新サービス -->
   <bean id="healthInfoFileSettingUpdateService" class="jp.co.ha.business.db.crud.update.impl.HealthInfoFileSettingUpdateServiceImpl" />
 
-
+  <!-- API -->
   <!-- 健康情報登録API -->
   <bean id="healthInfoRegistService" class="jp.co.ha.business.api.service.impl.HealthInfoRegistServiceImpl" />
   <!-- 健康情報照会API -->
@@ -44,10 +48,6 @@
 
   <!-- 健康情報計算サービス -->
   <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
-  <!-- セッション管理サービス-->
-  <bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />
-  <!-- sha256パスワードサービス -->
-  <bean id="sha256HashEncoder" class="jp.co.ha.common.system.impl.Sha256HashEncoder" />
 
   <!-- DB接続の共通処理 -->
   <bean id="dataBaseCommonExecutor" class="jp.co.ha.business.db.DataBaseCommonExecutor" />

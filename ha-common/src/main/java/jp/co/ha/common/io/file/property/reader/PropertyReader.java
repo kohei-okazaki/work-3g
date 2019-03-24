@@ -26,7 +26,7 @@ public class PropertyReader {
 	 */
 	public Properties read(String path, String fileName) {
 
-		LOG.debug(fileName + "の読み込み 開始");
+		LOG.debug(fileName + "の読込 開始");
 
 		Properties prop = new Properties();
 		try (InputStream is = new FileInputStream(path + FileSeparator.SYSTEM.getValue() + fileName)) {
@@ -36,7 +36,7 @@ public class PropertyReader {
 		} catch (IOException e) {
 			LOG.error("読込エラー", e);
 		} finally {
-			LOG.debug(fileName + "の読み込み 終了");
+			LOG.debug(fileName + "の読込 終了");
 		}
 		return prop;
 	}
