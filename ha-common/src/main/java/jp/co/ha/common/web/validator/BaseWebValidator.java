@@ -28,6 +28,28 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void validate(Object target, Errors errors) {
+
+		@SuppressWarnings("unchecked")
+		F form = (F) target;
+
+		this.validate(form, errors);
+	}
+
+	/**
+	 * 各継承クラスでvalidate処理を行う
+	 *
+	 * @param form
+	 *     validate対象form
+	 * @param errors
+	 *     Errors
+	 */
+	protected abstract void validate(F form, Errors errors);
+
+	/**
 	 * fieldのformの値が空文字の場合、errorsオブジェクトにエラーを追加する
 	 *
 	 * @param errors
