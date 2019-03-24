@@ -63,13 +63,11 @@ input[type="password"], input[type="text"] {
 }
 
 .iconPassword {
-  background-image:
-    url(https://cdn4.iconfinder.com/data/icons/font-awesome-2/2048/f09c-32.png);
+  background-image: url(https://cdn4.iconfinder.com/data/icons/font-awesome-2/2048/f09c-32.png);
 }
 
 .iconUser {
-  background-image:
-    url(https://cdn4.iconfinder.com/data/icons/font-awesome-2/2048/f007-32.png);
+  background-image: url(https://cdn4.iconfinder.com/data/icons/font-awesome-2/2048/f007-32.png);
 }
 
 input[type="submit"], input[type="button"] {
@@ -95,8 +93,4 @@ input[type="submit"], input[type="button"] {
 input[type="submit"]:hover, input[type="button"]:hover {
   background: #80ff80;
   box-shadow: none;
-}
-
-::-webkit-input-placeholder {
-
 }

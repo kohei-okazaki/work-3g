@@ -17,10 +17,11 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void validate(Object target, Errors errors) {
-		HealthInfoFileForm form = (HealthInfoFileForm) target;
+	protected void validate(HealthInfoFileForm form, Errors errors) {
 
+		// 必須チェック
 		this.checkRequire(form, errors);
+
 	}
 
 	/**
@@ -37,5 +38,7 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 					ValidateErrorCode.REQUIRE.getOuterErrorCode());
 		}
 	}
+
+
 
 }
