@@ -21,11 +21,7 @@
                       http://www.springframework.org/schema/util
                       http://www.springframework.org/schema/util/spring-util.xsd
                       http://www.springframework.org/schema/jee
-                      http://www.springframework.org/schema/jee/spring-util.xsd">
-
-  <mvc:annotation-driven />
-
-  <aop:aspectj-autoproxy />
+                      http://www.springframework.org/schema/jee/spring-jee.xsd">
 
   <bean id="webExceptionHandler" class="jp.co.ha.web.exception.WebExceptionHandler" />
 
