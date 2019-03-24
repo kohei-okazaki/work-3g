@@ -1,0 +1,11 @@
+/************/
+/* sort.css */
+/************/
+
+.sort.desc:after {
+  content: "▼";
+}
+
+.sort.asc:after {
+  content: "▲";
+}
