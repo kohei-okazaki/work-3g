@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.healthInfo.prop.HealthInfoProperties;
 import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
@@ -38,6 +39,7 @@ import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
@@ -72,6 +74,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+	/** 健康情報設定ファイル */
+	@Autowired
+	private HealthInfoProperties prop;
 
 	/**
 	 * Validateを設定
@@ -213,7 +218,8 @@ public class HealthInfoReferenceController implements BaseWebController {
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = service.getCsvConfig(fileSetting);
-		conf.setOutputPath("C:\\app\\data\\healthInfoReference\\" + userId);
+
+		conf.setOutputPath(prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue() + userId);
 		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
