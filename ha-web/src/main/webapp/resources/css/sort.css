@@ -1,6 +1,7 @@
 /************/
 /* sort.css */
 /************/
+@charset "UTF-8";
 
 .sort.desc:after {
   content: "▼";
