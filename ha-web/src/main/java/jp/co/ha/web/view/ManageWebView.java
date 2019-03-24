@@ -8,51 +8,51 @@ import jp.co.ha.common.web.view.BaseView;
  */
 public enum ManageWebView implements BaseView {
 
-	/** ログイン画面URL */
+	/** ログイン画面 */
 	LOGIN("login/index"),
-	/** トップ画面URL */
+	/** トップ画面 */
 	TOP("login/top"),
-	/** エラー画面URL */
+	/** エラー画面 */
 	ERROR("error/index"),
-	/** システムエラー画面URL */
+	/** システムエラー画面 */
 	SYSTEM_ERROR("error/systemError"),
 
-	/** 健康情報入力画面URL */
+	/** 健康情報入力画面 */
 	HEALTH_INFO_INPUT("healthInfo/input"),
-	/** 健康情報入力確認画面URL */
+	/** 健康情報入力確認画面 */
 	HEALTH_INFO_CONFIRM("healthInfo/confirm"),
-	/** 健康情報入力完了画面URL */
+	/** 健康情報入力完了画面 */
 	HEALTH_INFO_COMPLETE("healthInfo/complete"),
 
-	/** 健康情報照会画面URL */
+	/** 健康情報照会画面 */
 	HEALTH_INFO_REFFERNCE("healthInfoReference/index"),
 
-	/** アカウント設定入力画面URL */
+	/** アカウント設定入力画面 */
 	ACCOUNT_SETTING_INPUT("accountSetting/input"),
-	/** アカウント設定入力確認画面URL */
+	/** アカウント設定入力確認画面 */
 	ACCOUNT_SETTING_CONFIRM("accountSetting/confirm"),
-	/** アカウント設定入力完了画面URL */
+	/** アカウント設定入力完了画面 */
 	ACCOUNT_SETTING_COMPLETE("accountSetting/complete"),
 
-	/** アカウント作成入力画面URL */
+	/** アカウント作成入力画面 */
 	ACCOUNT_REGIST_INPUT("accountRegist/input"),
-	/** アカウント作成入力確認画面URL */
+	/** アカウント作成入力確認画面 */
 	ACCOUNT_REGIST_CONFIRM("accountRegist/confirm"),
-	/** アカウント作成入力完了画面URL */
+	/** アカウント作成入力完了画面 */
 	ACCOUNT_REGIST_COMPLETE("accountRegist/complete"),
 
-	/** 健康情報ファイル入力画面URL */
+	/** 健康情報ファイル入力画面 */
 	HEALTH_INFO_FILE_INPUT("healthInfoFile/input"),
-	/** 健康情報ファイル確認画面URL */
+	/** 健康情報ファイル確認画面 */
 	HEALTH_INFO_FILE_CONFIRM("healthInfoFile/confirm"),
-	/** 健康情報ファイル入力完了画面URL */
+	/** 健康情報ファイル入力完了画面 */
 	HEALTH_INFO_FILE_COMPLETE("healthInfoFile/complete"),
 
-	/** 健康情報ファイル設定入力画面URL */
+	/** 健康情報ファイル設定入力画面 */
 	HEALTH_INFO_FILE_SETTING_INPUT("healthInfoFileSetting/input"),
-	/** 健康情報ファイル設定確認画面URL */
+	/** 健康情報ファイル設定確認画面 */
 	HEALTH_INFO_FILE_SETTING_CONFIRM("healthInfoFileSetting/confirm"),
-	/** 健康情報ファイル設定入力完了画面URL */
+	/** 健康情報ファイル設定入力完了画面 */
 	HEALTH_INFO_FILE_SETTING_COMPLETE("healthInfoFileSetting/complete");
 
 	private String name;
