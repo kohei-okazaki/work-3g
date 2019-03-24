@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Pattern;
 /**
  * 型妥当性チェックvalidator
  *
- * @see jp.co.ha.common.validator.annotation.Max
+ * @see jp.co.ha.common.validator.annotation.Pattern
  *
  */
 public class PatternValidator implements ConstraintValidator<Pattern, Object> {

@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Decimal;
 /**
  * 浮動小数の妥当性チェックvalidator
  *
- * @see jp.co.ha.common.validator.DecimalValidator
+ * @see jp.co.ha.common.validator.annotation.Decimal
  *
  */
 public class DecimalValidator implements ConstraintValidator<Decimal, Object> {
