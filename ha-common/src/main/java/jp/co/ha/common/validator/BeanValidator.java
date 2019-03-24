@@ -14,6 +14,7 @@ import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.common.validator.annotation.ValidateIgnore;
 
 /**
  * 妥当性チェッククラス<br>
@@ -49,6 +50,9 @@ public class BeanValidator<T> {
 		Class<T> clazz = (Class<T>) t.getClass();
 		try {
 			for (Field f : BeanUtil.getFieldList(clazz)) {
+				if (isIgnore(f)) {
+					continue;
+				}
 				Object value = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.GETTER).invoke(t);
 				String property  = value == null ? "" : value.toString();
 				if (f.isAnnotationPresent(Required.class)) {
@@ -75,6 +79,17 @@ public class BeanValidator<T> {
 		}
 
 		return result;
+	}
+
+	/**
+	 * validate処理を実施するFフィールドがどうか判定する
+	 *
+	 * @param f
+	 *     フィールド
+	 * @return validate処理を実施しない場合true, それ以外の場合false
+	 */
+	private boolean isIgnore(Field f) {
+		return f.isAnnotationPresent(ValidateIgnore.class);
 	}
 
 	/**
