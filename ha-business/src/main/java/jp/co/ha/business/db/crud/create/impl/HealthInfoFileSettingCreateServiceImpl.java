@@ -23,7 +23,7 @@ public class HealthInfoFileSettingCreateServiceImpl implements HealthInfoFileSet
 	 */
 	@Insert
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void create(HealthInfoFileSetting entity) throws BaseException {
 		mapper.insert(entity);
 	}

@@ -22,7 +22,7 @@ public class MailInfoDeleteServiceImpl implements MailInfoDeleteService {
 	 */
 	@Delete
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteByUserId(String userId) throws BaseException {
 		mapper.deleteByPrimaryKey(userId);
 	}

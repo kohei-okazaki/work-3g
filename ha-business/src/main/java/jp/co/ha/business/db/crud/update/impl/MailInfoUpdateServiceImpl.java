@@ -23,7 +23,7 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 	 */
 	@Update
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void update(MailInfo entity) throws BaseException {
 		mapper.updateByPrimaryKey(entity);
 	}

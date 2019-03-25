@@ -23,7 +23,7 @@ public class HealthInfoFileSettingUpdateServiceImpl implements HealthInfoFileSet
 	 */
 	@Update
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void update(HealthInfoFileSetting entity) throws BaseException {
 		mapper.updateByPrimaryKey(entity);
 	}

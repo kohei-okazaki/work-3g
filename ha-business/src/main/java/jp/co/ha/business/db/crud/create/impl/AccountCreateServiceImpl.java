@@ -23,7 +23,7 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	 */
 	@Insert
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void create(Account entity) throws BaseException {
 		mapper.insert(entity);
 	}

@@ -23,7 +23,7 @@ public class AccountUpdateServiceImpl implements AccountUpdateService {
 	 */
 	@Update
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void update(Account entity) throws BaseException {
 		mapper.updateByPrimaryKey(entity);
 	}
