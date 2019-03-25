@@ -22,7 +22,7 @@ public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
 	 */
 	@Delete
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteByUserId(Integer healthInfoId) throws BaseException {
 		mapper.deleteByPrimaryKey(healthInfoId);
 	}

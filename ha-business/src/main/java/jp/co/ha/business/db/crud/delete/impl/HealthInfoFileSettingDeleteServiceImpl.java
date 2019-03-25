@@ -22,7 +22,7 @@ public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSet
 	 */
 	@Delete
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteByUserId(String userId) throws BaseException {
 		mapper.deleteByPrimaryKey(userId);
 	}

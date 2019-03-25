@@ -25,7 +25,7 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 	 */
 	@Insert
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void create(HealthInfo entity) throws BaseException {
 		mapper.insert(entity);
 	}
@@ -35,7 +35,7 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 	 */
 	@Insert
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void create(List<HealthInfo> entityList) throws BaseException {
 		entityList.stream().forEach(e -> mapper.insert(e));
 	}

@@ -23,7 +23,7 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 	 */
 	@Insert
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void create(MailInfo entity) throws BaseException {
 		mapper.insert(entity);
 	}

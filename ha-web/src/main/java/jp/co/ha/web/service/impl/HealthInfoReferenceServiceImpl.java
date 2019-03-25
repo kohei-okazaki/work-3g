@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.healthInfo.prop.HealthInfoProperties;
 import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
@@ -19,6 +20,7 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -35,6 +37,9 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
+	/** 健康情報設定ファイル */
+	@Autowired
+	private HealthInfoProperties prop;
 
 	/**
 	 * {@inheritDoc}
@@ -84,6 +89,7 @@ public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceServic
 		conf.setHasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()));
 		conf.setUseMask(CommonFlag.TRUE.is(entity.getMaskFlag()));
 		conf.setCharset(Charset.UTF_8);
+		conf.setOutputPath(prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue() + entity.getUserId());
 		return conf;
 	}
 
