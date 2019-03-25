@@ -202,7 +202,49 @@ var table = [
         size: ""
       }
     ]
-  }
+  },
+  {
+      physicalName: "BMI_RANGE_MT",
+      logicalName: "BMI範囲マスタ",
+      column : [
+        {
+          logicalName: "BMI範囲ID",
+          physicalName: "BMI_RANGE_ID",
+          type: "INT",
+          size: ""
+        },
+        {
+          logicalName: "範囲下限",
+          physicalName: "RANGE_MIN",
+          type: "INT",
+          size: ""
+        },
+        {
+          logicalName: "範囲上限",
+          physicalName: "RANGE_MAX",
+          type: "INT",
+          size: ""
+        },
+        {
+          logicalName: "肥満度ステータス",
+          physicalName: "OVER_WEIGHT_STATUS",
+          type: "VARCHAR",
+          size: "2"
+        },
+        {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "TIMESTAMP",
+          size: ""
+        },
+        {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "TIMESTAMP",
+          size: ""
+        }
+      ]
+    }
 ];
 
 // 指定したテーブル名のカラム情報をすべて取得する

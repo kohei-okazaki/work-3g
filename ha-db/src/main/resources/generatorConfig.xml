@@ -27,5 +27,7 @@
     <table schema="work3g" tableName="HEALTH_INFO" />
     <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" />
     <table schema="work3g" tableName="MAIL_INFO" />
+    <table schema="work3g" tableName="BMI_RANGE_MT" />
+
   </context>
 </generatorConfiguration>
