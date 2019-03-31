@@ -3,6 +3,7 @@ package jp.co.ha.business.api.service.impl;
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
@@ -30,6 +31,7 @@ import jp.co.ha.db.entity.HealthInfo;
  * 健康情報登録サービス実装クラス
  *
  */
+@Service
 public class HealthInfoRegistServiceImpl extends CommonService implements HealthInfoRegistService {
 
 	/** アカウント検索サービス */

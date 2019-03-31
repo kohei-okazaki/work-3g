@@ -20,6 +20,7 @@ import jp.co.ha.common.validator.annotation.ValidateIgnore;
 /**
  * 妥当性チェッククラス<br>
  * 以下の順に妥当性チェック実施
+ *
  * <ul>
  * <li>必須チェック</li>
  * <li>最大桁数チェック</li>

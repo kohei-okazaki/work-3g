@@ -1,5 +1,8 @@
 package jp.co.ha.common.http;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * HTTPクライアントの設定情報保持クラス
  *
@@ -12,6 +15,15 @@ public class HttpClientConfig {
 	private int timeout;
 	/** HTTPメソッド */
 	private HttpMethod httpMethod;
+	/** ヘッダー */
+	private Map<String, String> headerMap;
+	/** ボディ */
+	private Map<String, String> bodyMap;
+
+	public HttpClientConfig() {
+		this.headerMap = new HashMap<>();
+		this.bodyMap = new HashMap<>();
+	}
 
 	/**
 	 * requestUrlを返す
@@ -68,6 +80,22 @@ public class HttpClientConfig {
 	 */
 	public void setHttpMethod(HttpMethod httpMethod) {
 		this.httpMethod = httpMethod;
+	}
+
+	public Map<String, String> getHeaderMap() {
+		return headerMap;
+	}
+
+	public void setHeaderMap(Map<String, String> headerMap) {
+		this.headerMap = headerMap;
+	}
+
+	public Map<String, String> getBodyMap() {
+		return bodyMap;
+	}
+
+	public void setBodyMap(Map<String, String> bodyMap) {
+		this.bodyMap = bodyMap;
 	}
 
 }

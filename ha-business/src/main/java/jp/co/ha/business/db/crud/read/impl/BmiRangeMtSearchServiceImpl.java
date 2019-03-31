@@ -3,6 +3,7 @@ package jp.co.ha.business.db.crud.read.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
@@ -15,6 +16,7 @@ import jp.co.ha.db.mapper.BmiRangeMtMapper;
  * BMI範囲マスタ検索サービスインターフェース実装クラス
  *
  */
+@Service
 public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 
 	@Autowired

@@ -13,7 +13,7 @@ import jp.co.ha.web.form.HealthInfoReferenceForm;
  * 健康情報照会画面サービスインターフェース
  *
  */
-public interface HealthInfoReferenceService {
+public interface HealthInfoReferService {
 
 	/**
 	 * 健康情報レスポンスリストを取得する

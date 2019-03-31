@@ -41,7 +41,7 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
-import jp.co.ha.web.service.HealthInfoReferenceService;
+import jp.co.ha.web.service.HealthInfoReferService;
 import jp.co.ha.web.service.annotation.ReferenceDownloadCsv;
 import jp.co.ha.web.service.annotation.ReferenceDownloadExcel;
 import jp.co.ha.web.validator.HealthInfoReferenceValidator;
@@ -53,11 +53,11 @@ import jp.co.ha.web.view.ManageWebView;
  */
 @Controller
 @RequestMapping("healthInfoReference")
-public class HealthInfoReferenceController implements BaseWebController {
+public class HealthInfoReferController implements BaseWebController {
 
 	/** 結果照会画面サービス */
 	@Autowired
-	private HealthInfoReferenceService service;
+	private HealthInfoReferService service;
 	/** 結果照会Excelダウンロードサービス */
 	@Autowired
 	@ReferenceDownloadExcel
