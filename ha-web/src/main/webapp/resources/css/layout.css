@@ -60,3 +60,7 @@ th.data, td.data {
   /* 余白指定 */
   padding: 5px 10px;
 }
+
+.menuTitle:hover {
+  cursor: pointer;
+}
