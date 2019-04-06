@@ -21,6 +21,6 @@
                       http://www.springframework.org/schema/util
                       http://www.springframework.org/schema/util/spring-util.xsd
                       http://www.springframework.org/schema/jee
-                      http://www.springframework.org/schema/jee/spring-util.xsd">
+                      http://www.springframework.org/schema/jee/spring-jee.xsd">
 
 </beans>
