@@ -7,5 +7,6 @@ cls
 set CLASSPATH=C:\batchTest\lib\*
 set JAVA=C:\app\pleiades\java\11\bin\java
 
-chcp 65001
+rem 文字コードをUTF-8に変更する
+rem chcp 65001
 

@@ -65,6 +65,4 @@ public class BatchInvoker {
 		LOG.info("■■■■■ Batch処理終了 ■■■■■");
 	}
 
-
-
 }
