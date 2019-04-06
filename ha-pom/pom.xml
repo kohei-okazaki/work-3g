@@ -13,9 +13,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java-version>10</java-version>
-    <org.springframework-version>5.1.5.RELEASE</org.springframework-version>
-    <org.aspectj-version>1.9.2</org.aspectj-version>
+    <java-version>11</java-version>
+    <org.springframework-version>5.1.6.RELEASE</org.springframework-version>
+    <org.aspectj-version>1.9.3</org.aspectj-version>
     <org.slf4j-version>1.7.26</org.slf4j-version>
     <logback-version>1.2.3</logback-version>
     <org.jackson-version>2.9.8</org.jackson-version>
@@ -80,6 +80,16 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
+      <version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jms</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
     <dependency>
@@ -291,6 +301,11 @@
           <target>${java-version}</target>
           <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
       </plugin>
     </plugins>
   </build>
