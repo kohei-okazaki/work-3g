@@ -46,7 +46,7 @@ public class DropBuilder extends BaseBuilder {
 		list.remove(0);
 		List<Table> tableList = new ArrayList<>();
 		List<String> existTableList = new ArrayList<>();
-		for (Row row : rowList) {
+		for (Row row : list) {
 			String logicalName = row.getCell(CellPositionType.LOGICAL_NAME).getValue();
 			String physicalName = row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 			if (!containsTable(existTableList, physicalName) && !StringUtil.isEmpty(physicalName)) {

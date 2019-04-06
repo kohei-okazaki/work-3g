@@ -25,14 +25,14 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.form.HealthInfoReferenceForm;
-import jp.co.ha.web.service.HealthInfoReferenceService;
+import jp.co.ha.web.service.HealthInfoReferService;
 
 /**
  * 健康情報照会画面サービスインターフェース実装クラス
  *
  */
 @Service
-public class HealthInfoReferenceServiceImpl implements HealthInfoReferenceService {
+public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
 	/** 健康情報検索サービス */
 	@Autowired

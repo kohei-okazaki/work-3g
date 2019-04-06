@@ -1,5 +1,6 @@
 package jp.co.ha.common.api.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +42,9 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@PostMapping
+	@PostMapping(
+			headers = { "Content-type=application/json;charset=UTF-8" },
+			produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public Rs doPost(@RequestBody Rq request) throws BaseException {
 
 		Rs response = this.execute(request);

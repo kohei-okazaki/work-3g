@@ -1,9 +1,11 @@
 package jp.co.ha.db.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.BmiRangeMtExample;
-import org.apache.ibatis.annotations.Param;
 
 public interface BmiRangeMtMapper {
     /**

@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.delete.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.delete.HealthInfoFileSettingDeleteService;
@@ -12,6 +13,7 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
  * 健康情報ファイル設定削除サービスインターフェース実装クラス
  *
  */
+@Service
 public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSettingDeleteService {
 
 	@Autowired

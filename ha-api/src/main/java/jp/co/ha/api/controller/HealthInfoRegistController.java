@@ -1,7 +1,6 @@
 package jp.co.ha.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +20,7 @@ import jp.co.ha.common.validator.ValidateErrorResult;
  *
  */
 @RestController
-@RequestMapping(value = "/healthInfoRegist",
-	headers = { "Content-type=application/json;charset=UTF-8" },
-	produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+@RequestMapping(value = "/healthInfoRegist")
 public class HealthInfoRegistController extends
 		BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 

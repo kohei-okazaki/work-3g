@@ -24,39 +24,13 @@
   </bean>
 
   <!-- CRUD -->
-  <!-- select -->
-  <!-- アカウント検索サービス -->
-  <bean id="accountSearchService" class="jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl" />
-  <!-- 健康情報検索サービス -->
-  <bean id="healthInfoSearchService" class="jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl" />
-  <!-- メール情報検索サービス -->
-  <bean id="mailInfoSearchService" class="jp.co.ha.business.db.crud.read.impl.MailInfoSearchServiceImpl" />
-  <!-- 健康情報ファイル設定検索サービス -->
-  <bean id="healthInfoFileSettingSearchService" class="jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl" />
-
-  <!-- insert -->
-  <!-- アカウント作成サービス -->
-  <bean id="accountCreateService" class="jp.co.ha.business.db.crud.create.impl.AccountCreateServiceImpl" />
-  <!-- 健康情報作成サービス -->
-  <bean id="healthInfoCreateService" class="jp.co.ha.business.db.crud.create.impl.HealthInfoCreateServiceImpl" />
-  <!-- メール情報作成サービス -->
-  <bean id="mailInfoCreateService" class="jp.co.ha.business.db.crud.create.impl.MailInfoCreateServiceImpl" />
-  <!-- 健康情報ファイル設定作成サービス -->
-  <bean id="healthInfoFileSettingCreateService" class="jp.co.ha.business.db.crud.create.impl.HealthInfoFileSettingCreateServiceImpl" />
-
-  <!-- update -->
-  <!-- アカウント更新サービス -->
-  <bean id="accountUpdateService" class="jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl" />
-  <!-- メール情報更新サービス -->
-  <bean id="mailInfoUpdateService" class="jp.co.ha.business.db.crud.update.impl.MailInfoUpdateServiceImpl" />
-  <!-- 健康情報ファイル設定更新サービス -->
-  <bean id="healthInfoFileSettingUpdateService" class="jp.co.ha.business.db.crud.update.impl.HealthInfoFileSettingUpdateServiceImpl" />
+  <context:component-scan base-package="jp.co.ha.business.db.crud.read.impl" />
+  <context:component-scan base-package="jp.co.ha.business.db.crud.create.impl" />
+  <context:component-scan base-package="jp.co.ha.business.db.crud.update.impl" />
+  <context:component-scan base-package="jp.co.ha.business.db.crud.delete.impl" />
 
   <!-- API -->
-  <!-- 健康情報登録API -->
-  <bean id="healthInfoRegistService" class="jp.co.ha.business.api.service.impl.HealthInfoRegistServiceImpl" />
-  <!-- 健康情報照会API -->
-  <bean id="healthInfoReferenceService" class="jp.co.ha.business.api.service.impl.HealthInfoReferenceServiceImpl" />
+  <context:component-scan base-package="jp.co.ha.business.api.service.impl" />
 
   <!-- 健康情報計算サービス -->
   <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />

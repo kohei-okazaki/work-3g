@@ -1,6 +1,7 @@
 package jp.co.ha.common.validator;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ import jp.co.ha.common.validator.annotation.ValidateIgnore;
 /**
  * 妥当性チェッククラス<br>
  * 以下の順に妥当性チェック実施
+ *
  * <ul>
  * <li>必須チェック</li>
  * <li>最大桁数チェック</li>
@@ -38,19 +40,22 @@ public class BeanValidator<T> {
 	private final static Logger LOG = LoggerFactory.getLogger(BeanValidator.class);
 
 	/**
-	 * 指定したクラスの妥当性チェックを行う
+	 * 指定したクラスの妥当性チェックを行う<br>
+	 * targetは妥当性チェックを行わない
 	 *
 	 * @param t
 	 *     validate対象クラス
+	 * @param ignore
+	 *     妥当性チェックを行わないフィールド
 	 * @return 妥当性チェック結果
 	 */
 	@SuppressWarnings("unchecked")
-	public ValidateErrorResult validate(T t) {
+	public ValidateErrorResult validate(T t, String... ignore) {
 		ValidateErrorResult result = new ValidateErrorResult();
 		Class<T> clazz = (Class<T>) t.getClass();
 		try {
 			for (Field f : BeanUtil.getFieldList(clazz)) {
-				if (isIgnore(f)) {
+				if (isIgnore(f) || Arrays.asList(ignore).contains(f.getName())) {
 					continue;
 				}
 				Object value = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.GETTER).invoke(t);
@@ -82,7 +87,18 @@ public class BeanValidator<T> {
 	}
 
 	/**
-	 * validate処理を実施するFフィールドがどうか判定する
+	 * 指定したクラスの妥当性チェックを行う
+	 *
+	 * @param t
+	 *     validate対象クラス
+	 * @return 妥当性チェック結果
+	 */
+	public ValidateErrorResult validate(T t) {
+		return validate(t, "");
+	}
+
+	/**
+	 * validate処理を実施するフィールドがどうか判定する
 	 *
 	 * @param f
 	 *     フィールド

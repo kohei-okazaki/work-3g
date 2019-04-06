@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.read.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -12,6 +13,7 @@ import jp.co.ha.db.mapper.AccountMapper;
  * アカウント情報検索サービスインターフェース実装クラス
  *
  */
+@Service
 public class AccountSearchServiceImpl implements AccountSearchService {
 
 	@Autowired
