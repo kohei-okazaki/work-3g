@@ -52,12 +52,8 @@ public class BatchInvoker {
 			Method executeMethod = batch.getMethod("execute");
 			batchResult = (BatchResult) executeMethod.invoke(batchInstance);
 
-		} catch (ClassNotFoundException e) {
-			LOG.error(batchName + "が存在しません", e);
-		} catch (NoSuchMethodException | SecurityException e) {
-			LOG.error("setOptionsメソッドがありません", e);
 		} catch (Exception e) {
-			LOG.error("インスタンスの生成に失敗", e);
+			LOG.error("バッチ処理が失敗しました", e);
 		} finally {
 			LOG.info(batchResult.getComment());
 		}

@@ -15,12 +15,19 @@ public class HealthInfoRegistBatch extends BaseBatch {
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoRegistBatch.class);
 
+	/** filepath */
+	private static final String PATH = "C:\\app\\data\\healthInfoRegist";
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public BatchResult execute() {
+
 		LOG.info("execute");
+
+
+
 		return BatchResult.SUCCESS;
 	}
 
