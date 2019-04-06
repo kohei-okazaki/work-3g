@@ -11,6 +11,9 @@
 * ### ha-api  
 リクエストBodyにJSONを設定したPOST形式のHTTPリクエストを処理するプロジェクト  
 
+* ### ha-batch  
+batから処理するプロジェクト  
+
 * ### ha-build  
 ローカル環境でjarを作成するプロジェクト  
 windows, linuxでそれぞれbatとshを用意  
