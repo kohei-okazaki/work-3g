@@ -9,7 +9,7 @@ import static ch.qos.logback.classic.Level.*
 
 scan("30 seconds")
 
-def FILE_PATH = "C:/app/tool/logs";
+def FILE_PATH = "C:/app/logs";
 def ENCODE = "UTF-8";
 
 appender("STDOUT", ConsoleAppender) {
