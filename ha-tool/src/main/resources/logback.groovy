@@ -9,7 +9,7 @@ import static ch.qos.logback.classic.Level.*
 
 scan("30 seconds")
 
-def FILE_PATH = "C:/app/logs";
+def FILE_PATH = "C:/app/logs/";
 def ENCODE = "UTF-8";
 
 appender("STDOUT", ConsoleAppender) {
@@ -19,6 +19,10 @@ appender("STDOUT", ConsoleAppender) {
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
     pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
+  }
+
+  filter(ThresholdFilter) {
+    level = DEBUG
   }
 
 }
