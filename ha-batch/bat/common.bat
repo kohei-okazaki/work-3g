@@ -8,5 +8,5 @@ set CLASSPATH=C:\Users\HOGE\.m2\repository\org\mybatis\generator\mybatis-generat
 set JAVA=C:\app\pleiades\java\11\bin\java
 
 rem 文字コードをUTF-8に変更する
-rem chcp 65001
+chcp 65001
 
