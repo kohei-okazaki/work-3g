@@ -2,7 +2,10 @@ package jp.co.ha.batch.execute;
 
 import java.util.List;
 
+import org.apache.commons.cli.Options;
+
 import jp.co.ha.batch.type.BatchResult;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
@@ -22,11 +25,9 @@ public class HealthInfoRegistBatch extends BaseBatch {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BatchResult execute() {
+	public BatchResult execute() throws BaseException {
 
 		LOG.info("execute");
-
-
 
 		return BatchResult.SUCCESS;
 	}
@@ -35,8 +36,10 @@ public class HealthInfoRegistBatch extends BaseBatch {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void setOptions(List<String> optionList) {
-		LOG.info("setOptions");
+	public Options getOptions(List<String> optionList) {
+		LOG.info("getOptions");
+		Options options = new Options();
+		return options;
 	}
 
 }

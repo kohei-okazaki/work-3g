@@ -23,6 +23,13 @@
                       http://www.springframework.org/schema/jee
                       http://www.springframework.org/schema/jee/spring-jee.xsd">
 
+  <!-- common -->
+  <import resource="classpath:common-context.xml" />
+  <!-- db -->
+  <import resource="classpath:db-context.xml" />
+  <!-- business -->
+  <import resource="classpath:business-context.xml" />
+
   <context:component-scan base-package="jp.co.ha.api.controller" />
   <context:component-scan base-package="jp.co.ha.api.config" />
 
