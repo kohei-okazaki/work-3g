@@ -2,6 +2,8 @@ package jp.co.ha.batch.execute;
 
 import java.util.List;
 
+import org.apache.commons.cli.Options;
+
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.common.exception.BaseException;
 
@@ -20,9 +22,9 @@ public abstract class BaseBatch {
 	protected abstract BatchResult execute() throws BaseException;
 
 	/**
-	 * オプションリストを設定する
+	 * オプションを取得
 	 * @param optionList オプションリスト
 	 */
-	protected abstract void setOptions(List<String> optionList);
+	protected abstract Options getOptions(List<String> optionList);
 
 }

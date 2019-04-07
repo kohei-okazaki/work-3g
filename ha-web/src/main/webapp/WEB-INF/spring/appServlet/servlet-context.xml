@@ -23,6 +23,13 @@
                       http://www.springframework.org/schema/jee
                       http://www.springframework.org/schema/jee/spring-jee.xsd">
 
+  <!-- common -->
+  <import resource="classpath:common-context.xml" />
+  <!-- db -->
+  <import resource="classpath:db-context.xml" />
+  <!-- business -->
+  <import resource="classpath:business-context.xml" />
+
   <bean id="webExceptionHandler" class="jp.co.ha.web.exception.WebExceptionHandler" />
 
   <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />

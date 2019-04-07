@@ -48,9 +48,6 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>
         /WEB-INF/spring/appServlet/servlet-context.xml
-        classpath:common-context.xml
-        classpath:db-context.xml
-        classpath:business-context.xml
       </param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>

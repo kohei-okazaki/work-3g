@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.cli.Options;
+
 import jp.co.ha.batch.execute.BaseBatch;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.common.log.Logger;
@@ -30,23 +32,23 @@ public class BatchInvoker {
 		LOG.info("■■■■■ Batch処理開始 ■■■■■");
 
 		String batchName = PACKAGE_PREFIX + args[0];
-		List<String> optionList = new ArrayList<>();
-		for (int i = 0; i < args.length; i++) {
-			if (i == 0) {
-				continue;
-			} else {
-				optionList.add(args[i]);
-			}
-		}
 		BatchResult batchResult = BatchResult.FAILURE;
 		try {
 			// batch名からインスタンスを取得
 			Class<? extends BaseBatch> batch = (Class<? extends BaseBatch>) Class.forName(batchName);
 			BaseBatch batchInstance =  batch.getDeclaredConstructor().newInstance();
 
-			// setOptions 実行
-			Method setOptions = batch.getMethod("setOptions", List.class);
-			setOptions.invoke(batchInstance, optionList);
+			List<String> optionList = new ArrayList<>();
+			for (int i = 0; i < args.length; i++) {
+				if (i == 0) {
+					continue;
+				} else {
+					optionList.add(args[i]);
+				}
+			}
+			// getOptions 実行
+			Method getOptions = batch.getMethod("getOptions", List.class);
+			Options options = (Options) getOptions.invoke(batchInstance, optionList);
 
 			// execute 実行
 			Method executeMethod = batch.getMethod("execute");
