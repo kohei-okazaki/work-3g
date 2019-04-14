@@ -32,9 +32,10 @@ public class CreateTableBuilder extends BaseBuilder {
 		excel.activeSheet("TABLE_LIST");
 
 		for (String tableName : this.targetTableList) {
-			StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-			body.add("CREATE TABLE " + tableName + " (");
 			Table table = toTable(excel.getRowList(), tableName);
+			StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
+			body.add(getTableComment(table.getLogicalName()));
+			body.add("CREATE TABLE " + tableName + " (");
 			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + LineFeedType.CRLF.getValue());
 			table.getColumnList().stream().forEach(e -> {
 				String comment = e.getComment();
@@ -55,6 +56,11 @@ public class CreateTableBuilder extends BaseBuilder {
 	private Table toTable(List<Row> rowList, String tableName) {
 		Table table = new Table();
 		table.setPhysicalName(tableName);
+		String logicalName = rowList.stream().filter(e -> isTargetTable(e, tableName))
+										.map(e -> e.getCell(CellPositionType.LOGICAL_NAME))
+										.collect(Collectors.toList())
+										.get(0).getValue();
+		table.setLogicalName(logicalName);
 		table.setColumnList(rowList.stream().filter(e -> isTargetTable(e, tableName)).map(e -> {
 			Column column = new Column();
 			column.setName(getColumnName(e));
@@ -63,6 +69,10 @@ public class CreateTableBuilder extends BaseBuilder {
 			return column;
 		}).collect(Collectors.toList()));
 		return table;
+	}
+
+	private String getTableComment(String tableName) {
+		return "-- " + tableName;
 	}
 
 	private String getColumnComment(Row row) {
