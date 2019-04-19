@@ -26,7 +26,7 @@
     <h2 class="menuTitle">
       <img class="headericon" alt="健康情報照会画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">健康情報照会画面
     </h2>
-    <form id="healthInfoReferenceForm" action="./index.html" th:action="@{./index.html}" method="post" th:object="${healthInfoReferenceForm}">
+    <form id="healthInfoReferenceForm" action="./index" th:action="@{./index}" method="post" th:object="${healthInfoReferenceForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}"></div>

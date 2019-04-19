@@ -24,7 +24,7 @@
     <h2 class="menuTitle">
       <img class="headericon" alt="健康情報ファイル入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">健康情報ファイル入力画面
     </h2>
-    <form action="./confirm.html" id="healthInfoFileForm" th:action="@{./confirm.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+    <form action="./confirm" id="healthInfoFileForm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
       <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
       <br><br>

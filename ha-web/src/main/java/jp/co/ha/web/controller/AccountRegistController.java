@@ -57,7 +57,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	 */
 	@Override
 	@NonAuth
-	@GetMapping(value = "/input.html")
+	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
 	}
@@ -68,7 +68,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@NonAuth
 	@CsrfToken(factocy = true)
-	@PostMapping(value = "/confirm.html")
+	@PostMapping(value = "/confirm")
 	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result, HttpServletRequest request)
 			throws BaseException {
 
@@ -95,7 +95,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@Override
 	@NonAuth
 	@CsrfToken(check = true)
-	@PostMapping(value = "/complete.html")
+	@PostMapping(value = "/complete")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request) throws BaseException {
 
 		// 登録処理を行う

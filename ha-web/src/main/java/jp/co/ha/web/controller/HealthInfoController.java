@@ -87,7 +87,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/input.html")
+	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.HEALTH_INFO_INPUT);
 	}
@@ -97,7 +97,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 */
 	@Override
 	@CsrfToken(factocy = true)
-	@PostMapping(value = "/confirm.html")
+	@PostMapping(value = "/confirm")
 	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
 		if (result.hasErrors()) {
@@ -116,7 +116,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 */
 	@Override
 	@CsrfToken(check = true)
-	@PostMapping(value = "/complete.html")
+	@PostMapping(value = "/complete")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
@@ -153,7 +153,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@GetMapping(value = "/excelDownload.html")
+	@GetMapping(value = "/excelDownload")
 	public ModelAndView excelDownload(HttpServletRequest request, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
@@ -181,7 +181,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@GetMapping(value = "/csvDownload.html")
+	@GetMapping(value = "/csvDownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();

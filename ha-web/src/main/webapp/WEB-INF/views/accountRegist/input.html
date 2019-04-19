@@ -20,7 +20,7 @@
     <h2 class="menuTitle">
       <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">アカウント登録入力画面
     </h2>
-    <form action="./confirm.html" id="accountRegistForm" th:action="@{./confirm.html}" method="post" th:object="${accountRegistForm}">
+    <form action="./confirm" id="accountRegistForm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
 
       <div th:if="${errorMessage} != null">
         <div id="errorMessage" class="errorMessage">
