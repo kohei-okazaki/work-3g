@@ -79,7 +79,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/input.html")
+	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
 	}
@@ -89,7 +89,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 */
 	@Override
 	@CsrfToken(factocy = true)
-	@PostMapping(value = "/confirm.html")
+	@PostMapping(value = "/confirm")
 	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 		if (result.hasErrors()) {
 			return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
@@ -104,7 +104,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	 */
 	@Override
 	@CsrfToken(check = true)
-	@PostMapping(value = "/complete.html")
+	@PostMapping(value = "/complete")
 	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();

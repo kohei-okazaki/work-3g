@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.validator.MinValidator;
+import jp.co.ha.common.validator.LengthValidator;
 
 /**
  * 桁数妥当性チェックアノテーション
@@ -22,7 +22,7 @@ import jp.co.ha.common.validator.MinValidator;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@Constraint(validatedBy = MinValidator.class)
+@Constraint(validatedBy = LengthValidator.class)
 public @interface Length {
 
 	/** length */

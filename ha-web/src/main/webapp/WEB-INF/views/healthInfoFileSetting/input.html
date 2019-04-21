@@ -22,7 +22,7 @@
       <img class="headericon" alt="ファイル設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">ファイル設定入力画面
     </h2>
     <!--/* 入力画面 */-->
-    <form id="healthInfoFileSettingForm" action="./confirm.html" th:action="@{./confirm.html}" method="post" th:object="${healthInfoFileSettingForm}">
+    <form id="healthInfoFileSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${healthInfoFileSettingForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>

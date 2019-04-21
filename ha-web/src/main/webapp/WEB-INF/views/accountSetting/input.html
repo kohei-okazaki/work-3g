@@ -24,7 +24,7 @@
       <img class="headericon" alt="アカウント設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">アカウント設定入力画面
     </h2>
     <!--/* 入力画面 */-->
-    <form action="./confirm.html" id="accountSettingForm" th:action="@{./confirm.html}" method="post" th:object="${accountSettingForm}">
+    <form action="./confirm" id="accountSettingForm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
 
       <div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>

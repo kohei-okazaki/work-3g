@@ -5,7 +5,7 @@
  */
 function referenceExcelDownload() {
   var form = document.createElement('form');
-  form.action = '../healthInfoReference/excelDownload.html';
+  form.action = '../healthInfoReference/excelDownload';
   form.method = 'get';
   document.body.appendChild(form);
   form.submit();
@@ -18,7 +18,7 @@ function referenceExcelDownload() {
  */
 function referenceCsvDownload() {
   var form = document.createElement('form');
-  form.action = '../healthInfoReference/csvDownload.html';
+  form.action = '../healthInfoReference/csvDownload';
   form.method = 'get';
   document.body.appendChild(form);
   form.submit();

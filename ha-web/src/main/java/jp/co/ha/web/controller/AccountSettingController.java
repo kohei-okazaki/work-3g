@@ -86,7 +86,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/input.html")
+	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
 	}
@@ -96,7 +96,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@CsrfToken(factocy = true)
-	@PostMapping(value = "/confirm.html")
+	@PostMapping(value = "/confirm")
 	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
 		if (result.hasErrors()) {
@@ -113,7 +113,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 */
 	@Override
 	@CsrfToken(check = true)
-	@PostMapping(value = "/complete.html")
+	@PostMapping(value = "/complete")
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();

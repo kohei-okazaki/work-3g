@@ -23,7 +23,7 @@
     <h2 class="menuTitle">
       <img class="headericon" alt="健康情報入力確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">健康情報入力確認画面
     </h2>
-    <form action="./complete.html" th:action="@{./complete.html}" method="post" th:object="${healthInfoForm}">
+    <form action="./complete" th:action="@{./complete}" method="post" th:object="${healthInfoForm}">
       <p>身長：
       <input type="text" th:field="${form.height}" size="6" readonly />
       cm</p>

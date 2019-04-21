@@ -63,7 +63,7 @@ public class LoginController implements BaseWebController {
 	 * @return ログイン画面
 	 */
 	@NonAuth
-	@GetMapping("/index.html")
+	@GetMapping("/index")
 	public String index(HttpServletRequest request) {
 
 		sessionService.removeValues(request.getSession());
@@ -86,7 +86,7 @@ public class LoginController implements BaseWebController {
 	 *     基底例外
 	 */
 	@NonAuth
-	@PostMapping("/top.html")
+	@PostMapping("/top")
 	public String top(Model model, HttpServletRequest request, @Valid LoginForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
@@ -117,7 +117,7 @@ public class LoginController implements BaseWebController {
 	 *     HttpServletRequest
 	 * @return TOP画面
 	 */
-	@GetMapping("/top.html")
+	@GetMapping("/top")
 	public String top(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();

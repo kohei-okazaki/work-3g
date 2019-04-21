@@ -101,7 +101,7 @@ public class HealthInfoReferController implements BaseWebController {
 	 *
 	 * @return 検索照会画面
 	 */
-	@GetMapping(value = "/index.html")
+	@GetMapping(value = "/index")
 	public String reference() {
 		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
 	}
@@ -121,7 +121,7 @@ public class HealthInfoReferController implements BaseWebController {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@PostMapping(value = "/index.html")
+	@PostMapping(value = "/index")
 	public String reference(HttpServletRequest request, Model model
 			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseException {
 
@@ -171,7 +171,7 @@ public class HealthInfoReferController implements BaseWebController {
 	 *     基底例外
 	 */
 	@SuppressWarnings("unchecked")
-	@GetMapping(value = "/excelDownload.html")
+	@GetMapping(value = "/excelDownload")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
@@ -198,7 +198,7 @@ public class HealthInfoReferController implements BaseWebController {
 	 *     基底例外
 	 */
 	@SuppressWarnings("unchecked")
-	@GetMapping(value = "/csvDownload.html")
+	@GetMapping(value = "/csvDownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
 		HttpSession session = request.getSession();

@@ -75,7 +75,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	 * {@inheritDoc}
 	 */
 	@Override
-	@GetMapping(value = "/input.html")
+	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
 		return getView(ManageWebView.HEALTH_INFO_FILE_INPUT);
 	}
@@ -85,7 +85,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	 */
 	@Override
 	@CsrfToken(factocy = true)
-	@PostMapping(value = "/confirm.html")
+	@PostMapping(value = "/confirm")
 	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseException {
 
 		if (result.hasErrors()) {
@@ -110,7 +110,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	@Override
 	@CsrfToken(check = true)
 	@SuppressWarnings("unchecked")
-	@PostMapping(value = "/complete.html")
+	@PostMapping(value = "/complete")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
 
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class)

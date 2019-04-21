@@ -30,7 +30,7 @@
     <h2 class="menuTitle">
       <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:src="@{/resources/image/icon_input.jpg}">健康情報ファイル確認画面
     </h2>
-    <form action="./complete.html" th:action="@{./complete.html}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+    <form action="./complete" th:action="@{./complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <table class="data">
         <tr>
           <td align="center">
