@@ -25,7 +25,9 @@ public class BatchInvoker {
 
 	/**
 	 * invoke処理
-	 * @param args バッチ引数(第一引数：Batch名第二引数以降：オプション引数)
+	 *
+	 * @param args
+	 *     バッチ引数(第一引数：Batch名第二引数以降：オプション引数)
 	 */
 	@SuppressWarnings("unchecked")
 	public static void invoke(String[] args) {
@@ -36,7 +38,7 @@ public class BatchInvoker {
 		try {
 			// batch名からインスタンスを取得
 			Class<? extends BaseBatch> batch = (Class<? extends BaseBatch>) Class.forName(batchName);
-			BaseBatch batchInstance =  batch.getDeclaredConstructor().newInstance();
+			BaseBatch batchInstance = batch.getDeclaredConstructor().newInstance();
 
 			List<String> optionList = new ArrayList<>();
 			for (int i = 0; i < args.length; i++) {

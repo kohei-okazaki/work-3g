@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -170,7 +169,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	 *     テキスト
 	 */
 	protected void setText(Cell cell, String text) {
-		cell.setCellType(CellType.STRING);
+//		cell.setCellType(CellType.STRING);
 		cell.setCellValue(text);
 	}
 
