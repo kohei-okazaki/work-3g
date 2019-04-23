@@ -1,5 +1,8 @@
 package jp.co.ha.business.api.request;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.log.annotation.Mask;
@@ -17,6 +20,7 @@ import jp.co.ha.common.validator.annotation.Required;
 public abstract class BaseApiRequest extends BaseRequest {
 
 	/** リクエスト種別 */
+	@JsonDeserialize(using = RequestTypeDeserializer.class)
 	@Required(message = "requestTypeが未設定です")
 	private RequestType requestType;
 	/** ユーザID */
