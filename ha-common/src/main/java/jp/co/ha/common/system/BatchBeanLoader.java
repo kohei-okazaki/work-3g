@@ -24,16 +24,24 @@ public class BatchBeanLoader implements ApplicationContextAware {
 	/** ApplicationContext */
 	private static ApplicationContext context;
 
+	/**
+	 * プライベートコンストラクタ
+	 */
+	private BatchBeanLoader() {
+	}
+
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		BatchBeanLoader.context = applicationContext;
 	}
 
 	/**
-	 * Beanを取得
+	 * Beanを取得<br>
+	 * (例)<br>
+	 * AccountSearchService searchService = BatchBeanLoader.getBean(AccountSearchService.class);
 	 *
 	 * @param clazz
-	 *     Beanの実装クラス
+	 *     Beanの型
 	 * @return Bean
 	 */
 	public static <T> T getBean(Class<T> clazz) {
@@ -55,8 +63,7 @@ public class BatchBeanLoader implements ApplicationContextAware {
 		}
 
 		// XMLから取得
-		String[] xmls = new String[] { "classpath:common-context.xml", "classpath:db-context.xml",
-		"classpath:business-context.xml" };
+		String[] xmls = new String[] { "classpath:batch-context.xml" };
 		ClassPathXmlApplicationContext cxt = new ClassPathXmlApplicationContext(xmls);
 		cxt.refresh();
 		context = cxt;

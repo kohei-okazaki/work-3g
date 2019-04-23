@@ -21,6 +21,8 @@
   <bean id="healthInfoProperties" class="jp.co.ha.business.healthInfo.prop.HealthInfoProperties">
     <property name="referenceFilePath" value="C:\app\data\healthInfoReference" />
     <!-- <property name="referenceFilePath" value="${referenceFilePath}" /> -->
+    <!-- <property name="healthInfoRegistBatchFilePath" value="${healthInfoRegistBatchFilePath}" /> -->
+    <property name="healthInfoRegistBatchFilePath" value="C:\app\data\healthInfoRegist" />
   </bean>
 
   <!-- CRUD -->

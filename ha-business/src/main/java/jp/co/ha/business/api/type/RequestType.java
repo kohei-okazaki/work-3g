@@ -1,15 +1,11 @@
 package jp.co.ha.business.api.type;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jp.co.ha.common.type.BaseEnum;
 
 /**
  * APIのリクエスト種別の列挙
  *
  */
-@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum RequestType implements BaseEnum {
 
 	/** 健康情報登録 */
@@ -41,7 +37,6 @@ public enum RequestType implements BaseEnum {
 	 *     値
 	 * @return RequestType
 	 */
-	@JsonCreator
 	public static RequestType of(String value) {
 		return BaseEnum.of(RequestType.class, value);
 	}
