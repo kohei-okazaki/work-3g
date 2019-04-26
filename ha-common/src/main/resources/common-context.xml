@@ -29,13 +29,15 @@
 
   <tx:annotation-driven />
 
-  <!-- セッション管理サービス -->
+  <context:component-scan base-package="jp.co.ha.common.system.impl" />
+<!--
+  セッション管理サービス
   <bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />
-  <!-- BCryptパスワードサービス -->
+  BCryptパスワードサービス
   <bean id="bcryptHashEncoder" class="jp.co.ha.common.system.impl.BcryptHashEncoder" />
-  <!-- sha256パスワードサービス -->
+  sha256パスワードサービス
   <bean id="sha256HashEncoder" class="jp.co.ha.common.system.impl.Sha256HashEncoder" />
-  <!-- 妥当性チェック -->
+  妥当性チェック
   <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />
-
+ -->
 </beans>

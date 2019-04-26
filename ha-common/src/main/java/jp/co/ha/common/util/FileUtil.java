@@ -22,7 +22,6 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ファイル操作のUtilクラス
- *
  */
 public class FileUtil {
 
@@ -89,7 +88,8 @@ public class FileUtil {
 					continue;
 				}
 
-				try (FileInputStream fis = new FileInputStream(destFilePath + FileSeparator.SYSTEM.getValue() + srcFile);
+				try (FileInputStream fis = new FileInputStream(
+						destFilePath + FileSeparator.SYSTEM.getValue() + srcFile);
 						BufferedInputStream bis = new BufferedInputStream(fis)) {
 					int size = 0;
 					byte[] buffer = new byte[1024];

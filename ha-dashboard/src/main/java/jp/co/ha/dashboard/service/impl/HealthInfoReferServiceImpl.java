@@ -110,13 +110,16 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			Date healthInfoRegDate = editStrDate(form.getFromHealthInfoRegDate());
 			if (CommonFlag.TRUE.is(form.getHealthInfoRegDateSelectFlag())) {
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate, DateUtil.toEndDate(healthInfoRegDate));
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
+						DateUtil.toEndDate(healthInfoRegDate));
 			} else {
 				Date toHealthInfoRegDate = editStrDate(form.getToHealthInfoRegDate());
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate, toHealthInfoRegDate);
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
+						toHealthInfoRegDate);
 			}
 		} else {
-			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(Integer.valueOf(form.getHealthInfoId()), userId);
+			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(Integer.valueOf(form.getHealthInfoId()),
+					userId);
 		}
 
 		return resultList;

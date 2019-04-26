@@ -90,7 +90,9 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@Override
 	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result,
+			HttpServletRequest request) throws BaseException {
+
 		if (result.hasErrors()) {
 			return getView(DashboardView.HEALTH_INFO_FILE_SETTING_INPUT);
 		}
@@ -105,7 +107,8 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@Override
 	@CsrfToken(check = true)
 	@PostMapping(value = "/complete")
-	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request) throws BaseException {
+	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request)
+			throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		if (!userId.equals(form.getUserId())) {

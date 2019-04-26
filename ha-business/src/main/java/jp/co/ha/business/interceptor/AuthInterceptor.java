@@ -41,7 +41,8 @@ public class AuthInterceptor extends BaseWebInterceptor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 
 		if (isStaticResource().test(handler)) {
 			// 静的リソースの場合は認証不要

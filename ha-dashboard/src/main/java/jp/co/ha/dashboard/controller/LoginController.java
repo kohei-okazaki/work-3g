@@ -87,7 +87,8 @@ public class LoginController implements BaseWebController {
 	 */
 	@NonAuth
 	@PostMapping("/top")
-	public String top(Model model, HttpServletRequest request, @Valid LoginForm form, BindingResult result) throws BaseException {
+	public String top(Model model, HttpServletRequest request, @Valid LoginForm form, BindingResult result)
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -98,7 +99,8 @@ public class LoginController implements BaseWebController {
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		LoginCheckResult checkResult = new LoginCheck().check(account, form.getPassword());
 		if (checkResult.hasError()) {
-			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getOuterErrorCode(), null, Locale.getDefault());
+			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getOuterErrorCode(), null,
+					Locale.getDefault());
 			model.addAttribute("errorMessage", errorMessage);
 			return getView(DashboardView.LOGIN);
 		}

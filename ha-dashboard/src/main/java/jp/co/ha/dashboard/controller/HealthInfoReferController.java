@@ -122,8 +122,8 @@ public class HealthInfoReferController implements BaseWebController {
 	 *     基底例外
 	 */
 	@PostMapping(value = "/index")
-	public String reference(HttpServletRequest request, Model model
-			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseException {
+	public String reference(HttpServletRequest request, Model model, @Valid HealthInfoReferenceForm form,
+			BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
 			return getView(DashboardView.HEALTH_INFO_REFFERNCE);
@@ -175,7 +175,8 @@ public class HealthInfoReferController implements BaseWebController {
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		List<HealthInfoReferenceResult> resultList = sessionService.getValue(request.getSession(), "resultList", List.class)
+		List<HealthInfoReferenceResult> resultList = sessionService
+				.getValue(request.getSession(), "resultList", List.class)
 				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 
 		if (CollectionUtil.isEmpty(resultList)) {
@@ -214,7 +215,8 @@ public class HealthInfoReferController implements BaseWebController {
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = service.getCsvConfig(fileSetting);
 
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
+		response.setContentType(
+				MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {

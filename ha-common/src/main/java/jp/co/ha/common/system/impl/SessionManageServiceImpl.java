@@ -5,12 +5,15 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Service;
+
 import jp.co.ha.common.system.SessionManageService;
 
 /**
  * session管理サービス実装クラス
  *
  */
+@Service
 public class SessionManageServiceImpl implements SessionManageService {
 
 	/**

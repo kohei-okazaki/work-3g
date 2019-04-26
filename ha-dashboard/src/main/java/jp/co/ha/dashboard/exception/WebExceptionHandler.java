@@ -28,7 +28,8 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
+	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
+			Exception e) {
 
 		ModelAndView modelView = new ModelAndView();
 		// error画面を設定
@@ -38,7 +39,6 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 		request.setAttribute("errorMessage", getDispErrorMessage(e));
 		return modelView;
 	}
-
 
 	/**
 	 * 指定した例外の画面エラーメッセージを作成する
@@ -57,7 +57,8 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			errorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
 			// 予期せぬ例外にする
-			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null, Locale.JAPANESE);
+			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
+					Locale.JAPANESE);
 			errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
@@ -73,7 +74,8 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 			detail = be.getDetail();
 			outerErrorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
-			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null, Locale.JAPANESE);
+			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
+					Locale.JAPANESE);
 			outerErrorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(outerErrorCode).append(")");

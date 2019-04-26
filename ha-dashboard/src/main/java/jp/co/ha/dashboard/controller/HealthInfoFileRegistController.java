@@ -86,7 +86,8 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	@Override
 	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request)
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
@@ -113,7 +114,8 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	@PostMapping(value = "/complete")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
 
-		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class)
+		List<HealthInfoCsvUploadModel> modelList = sessionManageService
+				.getValue(request.getSession(), "modelList", List.class)
 				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
 

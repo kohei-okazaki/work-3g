@@ -98,7 +98,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Override
 	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result, HttpServletRequest request)
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// バリエーションエラーの場合
@@ -158,7 +159,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		Integer requestHealthInfoId = form.getHealthInfoId();
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId, userId);
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId,
+				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "session情報が不正です");
@@ -182,10 +184,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *     基底例外
 	 */
 	@GetMapping(value = "/csvDownload")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form)
+			throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(), userId);
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(),
+				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
@@ -197,7 +201,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
+		response.setContentType(
+				MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {

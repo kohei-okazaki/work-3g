@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import org.springframework.stereotype.Service;
+
 import jp.co.ha.common.system.BaseEncodeAndDecoder;
 import jp.co.ha.common.type.Charset;
 
@@ -11,6 +13,7 @@ import jp.co.ha.common.type.Charset;
  * URLエンコード/デコードクラス
  *
  */
+@Service("urlEncodeAndDecoder")
 public class UrlEncodeAndDecoder implements BaseEncodeAndDecoder {
 
 	/**
