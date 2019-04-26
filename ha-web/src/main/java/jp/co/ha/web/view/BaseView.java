@@ -1,4 +1,4 @@
-package jp.co.ha.common.web.view;
+package jp.co.ha.web.view;
 
 /**
  * viewEnumの基底インターフェース<br>

@@ -1,4 +1,4 @@
-package jp.co.ha.common.web.controller;
+package jp.co.ha.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.web.form.BaseForm;
+import jp.co.ha.web.form.BaseForm;
 
 /**
  * ウィザード型式の基底コントローラ<br>

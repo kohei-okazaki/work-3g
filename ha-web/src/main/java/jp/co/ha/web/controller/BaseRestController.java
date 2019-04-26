@@ -9,15 +9,15 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
-import jp.co.ha.common.api.request.BaseRequest;
-import jp.co.ha.common.api.response.BaseResponse;
-import jp.co.ha.common.api.response.ErrorResponse;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
+import jp.co.ha.web.request.BaseRequest;
+import jp.co.ha.web.response.BaseResponse;
+import jp.co.ha.web.response.ErrorResponse;
 
 /**
  * Rest形式の基底コントローラ<br>

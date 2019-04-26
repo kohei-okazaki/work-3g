@@ -1,6 +1,6 @@
-package jp.co.ha.common.web.controller;
+package jp.co.ha.web.controller;
 
-import jp.co.ha.common.web.view.BaseView;
+import jp.co.ha.web.view.BaseView;
 
 /**
  * 基底Webコントローラ<br>

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
 
 /**
  * 画面例外ハンドラー
@@ -32,7 +32,7 @@ public class WebExceptionHandler implements BaseExceptionHandler {
 
 		ModelAndView modelView = new ModelAndView();
 		// error画面を設定
-		modelView.setViewName(ManageWebView.ERROR.getName());
+		modelView.setViewName(DashboardView.ERROR.getName());
 		// log出力
 		outLog(getLogErrorMessage(e), e);
 		request.setAttribute("errorMessage", getDispErrorMessage(e));

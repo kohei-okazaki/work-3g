@@ -1,4 +1,4 @@
-package jp.co.ha.common.web.validator;
+package jp.co.ha.web.validator;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -7,7 +7,7 @@ import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.form.BaseForm;
+import jp.co.ha.web.form.BaseForm;
 
 /**
  * 基底Validator<br>

@@ -38,14 +38,14 @@ import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.service.HealthInfoReferService;
 import jp.co.ha.dashboard.service.annotation.ReferenceDownloadCsv;
 import jp.co.ha.dashboard.service.annotation.ReferenceDownloadExcel;
 import jp.co.ha.dashboard.validator.HealthInfoReferenceValidator;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_健康情報照会画面コントローラ
@@ -103,7 +103,7 @@ public class HealthInfoReferController implements BaseWebController {
 	 */
 	@GetMapping(value = "/index")
 	public String reference() {
-		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
+		return getView(DashboardView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class HealthInfoReferController implements BaseWebController {
 			, @Valid HealthInfoReferenceForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {
-			return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
+			return getView(DashboardView.HEALTH_INFO_REFFERNCE);
 		}
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
@@ -158,7 +158,7 @@ public class HealthInfoReferController implements BaseWebController {
 		// sessionに検索結果リストを設定
 		sessionService.setValue(request.getSession(), "resultList", resultList);
 
-		return getView(ManageWebView.HEALTH_INFO_REFFERNCE);
+		return getView(DashboardView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**

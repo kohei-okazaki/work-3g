@@ -5,8 +5,8 @@ import org.springframework.validation.Errors;
 import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.dashboard.form.HealthInfoReferenceForm;
+import jp.co.ha.web.validator.BaseWebValidator;
 
 /**
  * 結果照会画面のValidator

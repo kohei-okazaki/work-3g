@@ -1,12 +1,12 @@
 package jp.co.ha.dashboard.view;
 
-import jp.co.ha.common.web.view.BaseView;
+import jp.co.ha.web.view.BaseView;
 
 /**
  * 健康管理View列挙
  *
  */
-public enum ManageWebView implements BaseView {
+public enum DashboardView implements BaseView {
 
 	/** ログイン画面 */
 	LOGIN("login/index"),
@@ -57,7 +57,7 @@ public enum ManageWebView implements BaseView {
 
 	private String name;
 
-	private ManageWebView(String name) {
+	private DashboardView(String name) {
 		this.name = name;
 	}
 
