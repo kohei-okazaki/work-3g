@@ -10,9 +10,10 @@ call initialize.bat
 
 rem jarが配置されてるディレクトリ
 set dbLibDir=%baseDir%\ha-db\src\main\webapp\WEB-INF\lib
+set webLibDir=%baseDir%\ha-web\src\main\webapp\WEB-INF\lib
 set businessLibDir=%baseDir%\ha-business\src\main\webapp\WEB-INF\lib
 set apiLibDir=%baseDir%\ha-api\src\main\webapp\WEB-INF\lib
-set webLibDir=%baseDir%\ha-web\src\main\webapp\WEB-INF\lib
+set dashboardLibDir=%baseDir%\ha-dashboard\src\main\webapp\WEB-INF\lib
 
 cls
 
@@ -25,6 +26,10 @@ rem db/libのファイルを削除
 cd %dbLibDir%
 del *.jar
 
+rem web/libのファイルを削除
+cd %webLibDir%
+del *.jar
+
 rem business/libのファイルを削除
 cd %businessLibDir%
 del *.jar
@@ -33,8 +38,8 @@ rem api/libのファイルを削除
 cd %apiLibDir%
 del *.jar
 
-rem web/libのファイルを削除
-cd %webLibDir%
+rem dashboard/libのファイルを削除
+cd %dashboardLibDir%
 del *.jar
 
 

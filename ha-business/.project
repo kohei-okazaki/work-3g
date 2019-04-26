@@ -3,6 +3,9 @@
 	<name>ha-business</name>
 	<comment></comment>
 	<projects>
+		<project>ha-common</project>
+		<project>ha-db</project>
+		<project>ha-web</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
