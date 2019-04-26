@@ -1,11 +1,15 @@
 package jp.co.ha.common.api.type;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import jp.co.ha.common.api.response.serialize.ResultTypeSerializer;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
  * APIの結果コードの列挙
  *
  */
+@JsonSerialize(using = ResultTypeSerializer.class)
 public enum ResultType implements BaseEnum {
 
 	/** SUCCESS */

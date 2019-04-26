@@ -29,6 +29,13 @@ call mvn install
 call mvn install:install-file -Dfile=target\ha-db-%ver%.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
+rem webのjarを作成
+cd %baseDir%\ha-web
+call mvn clean package -DskipTests
+call mvn install
+call mvn install:install-file -Dfile=target\ha-web-%ver%.jar -DgroupId=jp.co.ha.web -DartifactId=ha-web -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
+
+
 rem businessのjarを作成
 cd %baseDir%\ha-business
 call mvn clean package -DskipTests
