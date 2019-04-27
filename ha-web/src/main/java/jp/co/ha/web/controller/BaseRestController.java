@@ -1,9 +1,11 @@
 package jp.co.ha.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,6 +17,9 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
+import jp.co.ha.common.validator.BeanValidator;
+import jp.co.ha.common.validator.ValidateError;
+import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseApiResponse;
 import jp.co.ha.web.form.ErrorResponse;
@@ -28,10 +33,14 @@ import jp.co.ha.web.form.ErrorResponse;
  * @param <Rs>
  *     レスポンス
  */
+@RestController
 public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends BaseApiResponse> {
 
 	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	/** 妥当性チェック */
+	@Autowired
+	private BeanValidator<Rq> validator;
 
 	/**
 	 * POST通信の処理を行う
@@ -45,6 +54,14 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 	@PostMapping(headers = { "Content-type=application/json;charset=UTF-8" }, produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public Rs doPost(@RequestBody Rq request) throws BaseException {
+
+		ValidateErrorResult result = validator.validate(request);
+		if (result.hasError()) {
+			ValidateError error = result.getFirst();
+			// 妥当性チェックエラー
+			throw new ApiException(CommonErrorCode.VALIDATE_ERROR,
+					error.getMessage() + " " + error.getName() + "=" + error.getValue());
+		}
 
 		Rs response = this.execute(request);
 

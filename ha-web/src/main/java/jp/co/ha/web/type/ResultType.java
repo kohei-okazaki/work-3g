@@ -9,9 +9,9 @@ import jp.co.ha.common.type.BaseEnum;
 public enum ResultType implements BaseEnum {
 
 	/** SUCCESS */
-	SUCCESS("1", "成功"),
+	SUCCESS("0", "成功"),
 	/** FAILURE */
-	FAILURE("0", "失敗");
+	FAILURE("1", "失敗");
 
 	/** コード値 */
 	private String value;

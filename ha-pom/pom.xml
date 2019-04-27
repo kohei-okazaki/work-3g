@@ -29,9 +29,10 @@
     <module>../ha-common</module>
     <module>../ha-tool</module>
     <module>../ha-db</module>
+    <module>../ha-web</module>
     <module>../ha-business</module>
     <module>../ha-api</module>
-    <module>../ha-web</module>
+    <module>../ha-dashboard</module>
   </modules>
 
   <dependencies>
@@ -253,6 +254,9 @@
         <directory>${basedir}/../ha-db/src/main/resources</directory>
       </resource>
       <resource>
+        <directory>${basedir}/../ha-web/src/main/resources</directory>
+      </resource>
+      <resource>
         <directory>${basedir}/../ha-business/src/main/resources</directory>
       </resource>
     </resources>
@@ -268,6 +272,9 @@
       </testResource>
       <testResource>
         <directory>${basedir}/../ha-db/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-web/src/test/resources</directory>
       </testResource>
       <testResource>
         <directory>${basedir}/../ha-business/src/test/resources</directory>

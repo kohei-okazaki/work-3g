@@ -1,4 +1,4 @@
-package jp.co.ha.business.healthInfo.prop;
+package jp.co.ha.business.io.file.properties;
 
 /**
  * 健康情報設定ファイル

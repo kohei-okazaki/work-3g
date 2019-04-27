@@ -29,6 +29,11 @@
       <artifactId>ha-db</artifactId>
       <version>1.0</version>
     </dependency>
+    <dependency>
+      <groupId>jp.co.ha.web</groupId>
+      <artifactId>ha-web</artifactId>
+      <version>1.0</version>
+    </dependency>
   </dependencies>
 
 </project>
