@@ -16,7 +16,6 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.exception.WebErrorCode;
-import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.type.DateFormatType;
@@ -25,6 +24,7 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.web.type.ResultType;
 
 /**
  * 健康情報照会サービス実装クラス
@@ -68,11 +68,14 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	@Override
 	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
 
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(), request.getUserId());
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(),
+				request.getUserId());
 		if (CollectionUtil.isEmpty(healthInfoList)) {
-			throw new HealthInfoException(CommonErrorCode.DB_NO_DATA, "該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
+			throw new HealthInfoException(CommonErrorCode.DB_NO_DATA,
+					"該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
 		} else if (CollectionUtil.isMultiple(healthInfoList)) {
-			throw new HealthInfoException(CommonErrorCode.MULTIPLE_DATA, "データが複数存在します 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
+			throw new HealthInfoException(CommonErrorCode.MULTIPLE_DATA,
+					"データが複数存在します 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
 		}
 		return toResponse().apply(CollectionUtil.getFirst(healthInfoList));
 	}

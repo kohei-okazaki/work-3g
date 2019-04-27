@@ -8,7 +8,7 @@ import jp.co.ha.common.validator.annotation.Required;
  * 健康情報照会リクエストクラス
  *
  */
-public class HealthInfoReferenceRequest extends BaseApiRequest {
+public class HealthInfoReferenceRequest extends CommonApiRequest {
 
 	/** 健康情報ID */
 	@Required(message = "healthInfoIdが未設定です")

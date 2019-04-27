@@ -1,8 +1,8 @@
 package jp.co.ha.web.service;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.request.BaseRequest;
-import jp.co.ha.web.response.BaseResponse;
+import jp.co.ha.web.request.BaseApiRequest;
+import jp.co.ha.web.response.BaseApiResponse;
 
 /**
  * API基底サービス<br>
@@ -13,7 +13,7 @@ import jp.co.ha.web.response.BaseResponse;
  * @param <Rs>
  *     レスポンス
  */
-public interface BaseService<Rq extends BaseRequest, Rs extends BaseResponse> {
+public interface BaseService<Rq extends BaseApiRequest, Rs extends BaseApiResponse> {
 
 	/**
 	 * 継承先でそれぞれチェックを実装

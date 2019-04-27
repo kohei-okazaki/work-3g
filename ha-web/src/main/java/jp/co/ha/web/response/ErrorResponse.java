@@ -3,15 +3,15 @@ package jp.co.ha.web.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.web.type.ResultType;
 
 /**
  * エラーレスポンスクラス
  *
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
-public class ErrorResponse extends BaseResponse {
+public class ErrorResponse extends BaseApiResponse {
 
 	/** 外部エラーコード */
 	@JsonProperty(value = "errorCode")

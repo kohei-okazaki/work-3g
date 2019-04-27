@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
-import jp.co.ha.common.api.request.BaseRequest;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.validator.annotation.Length;
@@ -12,12 +11,13 @@ import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.web.request.BaseApiRequest;
 
 /**
- * API共通リクエスト情報保持クラス
+ * API共通リクエスト
  *
  */
-public abstract class BaseApiRequest extends BaseRequest {
+public abstract class CommonApiRequest extends BaseApiRequest {
 
 	/** リクエスト種別 */
 	@JsonDeserialize(using = RequestTypeDeserializer.class)

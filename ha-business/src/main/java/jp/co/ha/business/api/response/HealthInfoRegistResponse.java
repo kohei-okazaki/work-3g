@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.web.response.BaseApiResponse;
 
 /**
  * 健康情報登録レスポンスクラス

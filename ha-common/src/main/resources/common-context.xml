@@ -30,6 +30,8 @@
   <tx:annotation-driven />
 
   <context:component-scan base-package="jp.co.ha.common.system.impl" />
+  <!-- 妥当性チェック -->
+  <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />
 <!--
   セッション管理サービス
   <bean id="sessionManageService" class="jp.co.ha.common.system.impl.SessionManageServiceImpl" />

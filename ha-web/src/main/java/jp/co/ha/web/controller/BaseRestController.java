@@ -15,8 +15,8 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
-import jp.co.ha.web.request.BaseRequest;
-import jp.co.ha.web.response.BaseResponse;
+import jp.co.ha.web.request.BaseApiRequest;
+import jp.co.ha.web.response.BaseApiResponse;
 import jp.co.ha.web.response.ErrorResponse;
 
 /**
@@ -28,7 +28,7 @@ import jp.co.ha.web.response.ErrorResponse;
  * @param <Rs>
  *     レスポンス
  */
-public abstract class BaseRestController<Rq extends BaseRequest, Rs extends BaseResponse> {
+public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends BaseApiResponse> {
 
 	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
@@ -42,9 +42,8 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@PostMapping(
-			headers = { "Content-type=application/json;charset=UTF-8" },
-			produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@PostMapping(headers = { "Content-type=application/json;charset=UTF-8" }, produces = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public Rs doPost(@RequestBody Rq request) throws BaseException {
 
 		Rs response = this.execute(request);
@@ -79,9 +78,11 @@ public abstract class BaseRestController<Rq extends BaseRequest, Rs extends Base
 			InvalidFormatException ife = (InvalidFormatException) e;
 			baseException = new ApiException(CommonErrorCode.JSON_FORMAT_ERROR, ife.getValue() + "はリクエスト形式エラーです", e);
 		} else if (e instanceof JsonParseException) {
-			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + "行目がjson形式ではありません", e);
+			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
+					e.getLocation().getColumnNr() + "行目がjson形式ではありません", e);
 		} else if (e instanceof JsonProcessingException) {
-			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, e.getLocation().getColumnNr() + ":json形式ではありません", e);
+			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
+					e.getLocation().getColumnNr() + ":json形式ではありません", e);
 		}
 		Rs response = (Rs) new ErrorResponse(baseException);
 		LOG.warnRes(response, baseException);

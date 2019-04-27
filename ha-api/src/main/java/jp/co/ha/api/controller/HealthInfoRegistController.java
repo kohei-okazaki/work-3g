@@ -8,12 +8,12 @@ import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.exception.HealthInfoException;
-import jp.co.ha.common.api.controller.BaseRestController;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateError;
 import jp.co.ha.common.validator.ValidateErrorResult;
+import jp.co.ha.web.controller.BaseRestController;
 
 /**
  * 健康情報登録コントローラ

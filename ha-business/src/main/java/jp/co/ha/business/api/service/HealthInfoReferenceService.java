@@ -4,8 +4,8 @@ import java.util.function.Function;
 
 import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.common.api.service.BaseService;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.web.service.BaseService;
 
 /**
  * 健康情報照会サービスインターフェース

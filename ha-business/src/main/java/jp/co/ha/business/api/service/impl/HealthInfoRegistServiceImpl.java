@@ -18,7 +18,6 @@ import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
-import jp.co.ha.common.api.type.ResultType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.function.ThrowableFunction;
 import jp.co.ha.common.type.DateFormatType;
@@ -26,6 +25,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.web.type.ResultType;
 
 /**
  * 健康情報登録サービス実装クラス

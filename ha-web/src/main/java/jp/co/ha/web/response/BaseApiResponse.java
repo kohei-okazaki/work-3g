@@ -3,14 +3,15 @@ package jp.co.ha.web.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import jp.co.ha.common.api.type.ResultType;
+import jp.co.ha.web.form.BaseForm;
+import jp.co.ha.web.type.ResultType;
 
 /**
- * 基底レスポンスクラス
+ * API共通レスポンス
  *
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
-public abstract class BaseResponse {
+public abstract class BaseApiResponse implements BaseForm {
 
 	/** API結果コード */
 	@JsonProperty(value = "result")
