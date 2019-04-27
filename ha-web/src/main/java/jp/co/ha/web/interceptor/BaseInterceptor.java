@@ -1,4 +1,4 @@
-package jp.co.ha.common.interceptor;
+package jp.co.ha.web.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 

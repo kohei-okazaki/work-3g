@@ -9,8 +9,8 @@ import org.aspectj.lang.annotation.Aspect;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.web.controller.BaseRestController;
-import jp.co.ha.web.request.BaseApiRequest;
-import jp.co.ha.web.response.BaseApiResponse;
+import jp.co.ha.web.form.BaseApiRequest;
+import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * API通信共通クラス

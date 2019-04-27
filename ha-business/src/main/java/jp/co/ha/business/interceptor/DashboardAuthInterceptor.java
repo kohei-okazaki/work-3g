@@ -12,12 +12,12 @@ import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SessionIllegalException;
-import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.system.annotation.Sha256;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.web.interceptor.BaseWebInterceptor;
 
 /**
  * 認証チェックを行うインターセプター
@@ -27,7 +27,7 @@ import jp.co.ha.common.util.StringUtil;
  * </ul>
  *
  */
-public class AuthInterceptor extends BaseWebInterceptor {
+public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
 	/** session管理サービス */
 	@Autowired

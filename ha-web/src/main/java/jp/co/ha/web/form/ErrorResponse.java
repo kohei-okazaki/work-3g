@@ -1,4 +1,4 @@
-package jp.co.ha.web.response;
+package jp.co.ha.web.form;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

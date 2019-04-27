@@ -15,9 +15,9 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
-import jp.co.ha.web.request.BaseApiRequest;
-import jp.co.ha.web.response.BaseApiResponse;
-import jp.co.ha.web.response.ErrorResponse;
+import jp.co.ha.web.form.BaseApiRequest;
+import jp.co.ha.web.form.BaseApiResponse;
+import jp.co.ha.web.form.ErrorResponse;
 
 /**
  * Rest形式の基底コントローラ<br>

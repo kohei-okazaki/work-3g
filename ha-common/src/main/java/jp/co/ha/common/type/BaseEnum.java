@@ -4,7 +4,6 @@ import java.util.stream.Stream;
 
 /**
  * 列挙型の基底インターフェース<br>
- * 単一の値を持つ列挙の親インターフェースとする
  */
 public interface BaseEnum {
 
@@ -27,8 +26,8 @@ public interface BaseEnum {
 	}
 
 	/**
-	 * 指定した値と列挙と指定した値が一致する列挙型を返す<br>
-	 * 一致するenumがない場合nullを返す<br>
+	 * 指定した値が一致する列挙型を返す<br>
+	 * 一致するenumがない場合nullを返す
 	 *
 	 * @param enumClass
 	 *     BaseEnumを継承した列挙型

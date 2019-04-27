@@ -1,10 +1,9 @@
-package jp.co.ha.web.response;
+package jp.co.ha.web.form;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import jp.co.ha.web.form.BaseForm;
-import jp.co.ha.web.response.serialize.ResultTypeSerializer;
+import jp.co.ha.web.convert.ResultTypeSerializer;
 import jp.co.ha.web.type.ResultType;
 
 /**

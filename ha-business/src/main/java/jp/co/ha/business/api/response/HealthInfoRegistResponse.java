@@ -3,7 +3,7 @@ package jp.co.ha.business.api.response;
 import java.math.BigDecimal;
 
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.web.response.BaseApiResponse;
+import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * 健康情報登録レスポンスクラス

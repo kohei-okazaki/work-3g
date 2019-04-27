@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import jp.co.ha.business.interceptor.AuthInterceptor;
+import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
 
 /**
  * CSRFトークンをチェックすることを示すアノテーション
@@ -16,7 +16,7 @@ import jp.co.ha.business.interceptor.AuthInterceptor;
  * <li>トークンチェックを行いたいメソッドに<code>@CsrfToken(check = true)</code>を付与</li>
  * </ul>
  *
- * @see AuthInterceptor
+ * @see DashboardAuthInterceptor
  */
 @Inherited
 @Documented

@@ -43,7 +43,7 @@
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/**" />
-      <bean class="jp.co.ha.business.interceptor.AuthInterceptor" />
+      <bean class="jp.co.ha.business.interceptor.DashboardAuthInterceptor" />
     </mvc:interceptor>
     <mvc:interceptor>
       <mvc:mapping path="/**" />

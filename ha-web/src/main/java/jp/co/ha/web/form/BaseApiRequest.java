@@ -1,6 +1,4 @@
-package jp.co.ha.web.request;
-
-import jp.co.ha.web.form.BaseForm;
+package jp.co.ha.web.form;
 
 /**
  * API基底リクエスト

@@ -1,4 +1,4 @@
-package jp.co.ha.web.response.serialize;
+package jp.co.ha.web.convert;
 
 import java.io.IOException;
 
