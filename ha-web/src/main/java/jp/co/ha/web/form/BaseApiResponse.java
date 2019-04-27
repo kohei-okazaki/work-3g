@@ -7,7 +7,7 @@ import jp.co.ha.web.convert.ResultTypeSerializer;
 import jp.co.ha.web.type.ResultType;
 
 /**
- * API共通レスポンス
+ * API基底レスポンス
  *
  */
 public abstract class BaseApiResponse implements BaseForm {
