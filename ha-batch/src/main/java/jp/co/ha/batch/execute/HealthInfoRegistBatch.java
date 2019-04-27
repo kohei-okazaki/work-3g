@@ -75,7 +75,6 @@ public class HealthInfoRegistBatch extends BaseBatch {
 			service.execute(request);
 		}
 
-
 		return BatchResult.SUCCESS;
 	}
 
