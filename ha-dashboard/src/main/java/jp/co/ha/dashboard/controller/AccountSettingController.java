@@ -24,12 +24,12 @@ import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.form.AccountSettingForm;
 import jp.co.ha.dashboard.service.AccountSettingService;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.MailInfo;
+import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_アカウント設定コントローラ
@@ -88,7 +88,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@Override
 	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
-		return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
+		return getView(DashboardView.ACCOUNT_SETTING_INPUT);
 	}
 
 	/**
@@ -97,15 +97,16 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@Override
 	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid AccountSettingForm form, BindingResult result, HttpServletRequest request)
+			throws BaseException {
 
 		if (result.hasErrors()) {
-			return getView(ManageWebView.ACCOUNT_SETTING_INPUT);
+			return getView(DashboardView.ACCOUNT_SETTING_INPUT);
 		}
 
 		model.addAttribute("form", form);
 
-		return getView(ManageWebView.ACCOUNT_SETTING_CONFIRM);
+		return getView(DashboardView.ACCOUNT_SETTING_CONFIRM);
 	}
 
 	/**
@@ -123,7 +124,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		// form情報から更新処理を行う
 		accountSettingService.execute(form);
 
-		return getView(ManageWebView.ACCOUNT_SETTING_COMPLETE);
+		return getView(DashboardView.ACCOUNT_SETTING_COMPLETE);
 	}
 
 }

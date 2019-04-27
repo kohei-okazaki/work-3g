@@ -22,10 +22,10 @@ import jp.co.ha.business.login.LoginCheckResult;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.form.LoginForm;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_ログイン画面コントローラ
@@ -67,7 +67,7 @@ public class LoginController implements BaseWebController {
 	public String index(HttpServletRequest request) {
 
 		sessionService.removeValues(request.getSession());
-		return getView(ManageWebView.LOGIN);
+		return getView(DashboardView.LOGIN);
 	}
 
 	/**
@@ -87,26 +87,28 @@ public class LoginController implements BaseWebController {
 	 */
 	@NonAuth
 	@PostMapping("/top")
-	public String top(Model model, HttpServletRequest request, @Valid LoginForm form, BindingResult result) throws BaseException {
+	public String top(Model model, HttpServletRequest request, @Valid LoginForm form, BindingResult result)
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
-			return getView(ManageWebView.LOGIN);
+			return getView(DashboardView.LOGIN);
 		}
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		LoginCheckResult checkResult = new LoginCheck().check(account, form.getPassword());
 		if (checkResult.hasError()) {
-			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getOuterErrorCode(), null, Locale.getDefault());
+			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getOuterErrorCode(), null,
+					Locale.getDefault());
 			model.addAttribute("errorMessage", errorMessage);
-			return getView(ManageWebView.LOGIN);
+			return getView(DashboardView.LOGIN);
 		}
 
 		// セッションにユーザIDを登録する。
 		sessionService.setValue(request.getSession(), "userId", form.getUserId());
 
-		return getView(ManageWebView.TOP);
+		return getView(DashboardView.TOP);
 
 	}
 
@@ -121,6 +123,6 @@ public class LoginController implements BaseWebController {
 	public String top(HttpServletRequest request) {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		return getView(StringUtil.isEmpty(userId) ? ManageWebView.LOGIN : ManageWebView.TOP);
+		return getView(StringUtil.isEmpty(userId) ? DashboardView.LOGIN : DashboardView.TOP);
 	}
 }

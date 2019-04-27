@@ -6,11 +6,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
-import jp.co.ha.common.api.controller.BaseRestController;
-import jp.co.ha.common.api.request.BaseRequest;
-import jp.co.ha.common.api.response.BaseResponse;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.web.controller.BaseRestController;
+import jp.co.ha.web.form.BaseApiRequest;
+import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * API通信共通クラス
@@ -37,13 +37,13 @@ public class ApiConnectionExecutor {
 	 *     実行時のエラー
 	 */
 	@Around("execution(* *jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
-	public BaseResponse outApiLog(ProceedingJoinPoint pjp) throws Throwable {
+	public BaseApiResponse outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
 		// リクエストログを出力
-		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseRequest).forEach(e -> LOG.infoRes(e));
+		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiRequest).forEach(e -> LOG.infoRes(e));
 
 		// jp.co.ha.business.api.service.impl.*ServiceImpl#execute実行
-		BaseResponse response = (BaseResponse) pjp.proceed();
+		BaseApiResponse response = (BaseApiResponse) pjp.proceed();
 		// レスポンスログを出力
 		LOG.infoRes(response);
 		return response;

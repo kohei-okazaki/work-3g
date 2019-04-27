@@ -5,7 +5,6 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 共通エラーコード
- *
  */
 public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 
@@ -27,7 +26,6 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 	/** DB切断エラー */
 	DB_CLOSE_ERROR("DB_CLOSE_ERROR", "CE_008", LogLevel.ERROR),
 
-
 	/* WARN */
 	/** 該当データ存在しないエラー */
 	DB_NO_DATA("DB_NO_DATA", "CW_001", LogLevel.WARN),
@@ -46,8 +44,7 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 	/** データ重複エラー */
 	MULTIPLE_DATA("MULTIPLE_DATA", "CW_008", LogLevel.WARN),
 	/** 妥当性チェックエラー */
-	VALIDATE_ERROR("VALIDATE_ERROR", "CW_009", LogLevel.WARN)
-	;
+	VALIDATE_ERROR("VALIDATE_ERROR", "CW_009", LogLevel.WARN);
 
 	/**
 	 * コンストラクタ
@@ -94,14 +91,6 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 	@Override
 	public LogLevel getLogLevel() {
 		return this.logLevel;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

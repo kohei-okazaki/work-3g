@@ -35,14 +35,14 @@ import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.form.HealthInfoForm;
 import jp.co.ha.dashboard.service.HealthInfoService;
 import jp.co.ha.dashboard.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.dashboard.service.annotation.HealthInfoDownloadExcel;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_健康情報登録画面コントローラ
@@ -89,7 +89,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Override
 	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
-		return getView(ManageWebView.HEALTH_INFO_INPUT);
+		return getView(DashboardView.HEALTH_INFO_INPUT);
 	}
 
 	/**
@@ -98,17 +98,18 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	@Override
 	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result, HttpServletRequest request)
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// バリエーションエラーの場合
-			return getView(ManageWebView.HEALTH_INFO_INPUT);
+			return getView(DashboardView.HEALTH_INFO_INPUT);
 		}
 
 		// 入力情報を設定
 		model.addAttribute("form", form);
 
-		return getView(ManageWebView.HEALTH_INFO_CONFIRM);
+		return getView(DashboardView.HEALTH_INFO_CONFIRM);
 	}
 
 	/**
@@ -139,7 +140,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// レスポンスを設定
 		model.addAttribute("healthInfo", form);
 
-		return getView(ManageWebView.HEALTH_INFO_COMPLETE);
+		return getView(DashboardView.HEALTH_INFO_COMPLETE);
 	}
 
 	/**
@@ -158,7 +159,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		Integer requestHealthInfoId = form.getHealthInfoId();
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId, userId);
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId,
+				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "session情報が不正です");
@@ -182,10 +184,12 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 	 *     基底例外
 	 */
 	@GetMapping(value = "/csvDownload")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form) throws BaseException {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form)
+			throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(), userId);
+		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(),
+				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
@@ -197,7 +201,8 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
-		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
+		response.setContentType(
+				MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {

@@ -7,9 +7,8 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
  * 健康情報Excel出力モデルクラス
  *
  */
-@ExcelDownloadModel(sheetName = "健康情報"
-					, headerNames = { "身長", "体重", "BMI", "標準体重" }
-					, footerNames = { "身長", "体重", "BMI", "標準体重" } )
+@ExcelDownloadModel(sheetName = "健康情報", headerNames = { "身長", "体重", "BMI", "標準体重" }, footerNames = { "身長", "体重", "BMI",
+		"標準体重" })
 public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/** 身長 */

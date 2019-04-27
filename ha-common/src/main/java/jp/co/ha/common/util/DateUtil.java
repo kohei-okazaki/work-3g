@@ -13,7 +13,6 @@ import jp.co.ha.common.type.DateFormatType;
 
 /**
  * 日付のUtilクラス
- *
  */
 public class DateUtil {
 
@@ -125,10 +124,13 @@ public class DateUtil {
 	 * @return 文字列型の日付
 	 */
 	public static String toString(Date date, DateFormatType format) {
+
 		if (BeanUtil.isNull(format) || StringUtil.isEmpty(format.getValue())) {
 			return StringUtil.EMPTY;
 		}
-		BiFunction<Date, DateFormatType, String> toStringFunction = (d, f) -> new SimpleDateFormat(f.getValue()).format(d);
+
+		BiFunction<Date, DateFormatType, String> toStringFunction = (d, f) -> new SimpleDateFormat(f.getValue())
+				.format(d);
 		return toStringFunction.apply(date, format);
 	}
 

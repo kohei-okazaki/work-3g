@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Required;
  * 健康情報登録リクエストクラス
  *
  */
-public class HealthInfoRegistRequest extends BaseApiRequest {
+public class HealthInfoRegistRequest extends CommonApiRequest {
 
 	/** 身長 */
 	@Mask

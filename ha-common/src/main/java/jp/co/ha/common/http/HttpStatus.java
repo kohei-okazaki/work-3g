@@ -4,7 +4,6 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * HTTPステータス列挙
- *
  */
 public enum HttpStatus implements BaseEnum {
 
@@ -32,14 +31,6 @@ public enum HttpStatus implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

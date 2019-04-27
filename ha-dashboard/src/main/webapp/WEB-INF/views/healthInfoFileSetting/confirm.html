@@ -23,21 +23,21 @@
     </h2>
     <!--/* 確認画面 */-->
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${healthInfoFileSettingForm}">
-      <table>
-        <tr>
-          <th>
+      <table class="data">
+        <tr class="data">
+          <th class="data">
             <label>ユーザID</label>
           </th>
-          <td>
+          <td class="data">
             <p th:text="*{userId}"></p>
             <input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
           </td>
         </tr>
-        <tr>
-          <th>
+        <tr class="data">
+          <th class="data">
             <label>ヘッダ利用</label>
           </th>
-          <td>
+          <td class="data">
             <div th:if="${form.headerFlag} == 1">
               <label>する</label>
             </div>
@@ -47,11 +47,11 @@
             <input type="hidden" th:field="${form.headerFlag}" />
           </td>
         </tr>
-        <tr>
-          <th>
+        <tr class="data">
+          <th class="data">
             <label>フッタ利用</label>
           </th>
-          <td>
+          <td class="data">
             <div th:if="${form.footerFlag} == 1">
               <label>する</label>
             </div>
@@ -61,11 +61,11 @@
             <input type="hidden" th:field="${form.footerFlag}" />
           </td>
         </tr>
-        <tr>
-          <th>
+        <tr class="data">
+          <th class="data">
             <label>マスク利用</label>
           </th>
-          <td>
+          <td class="data">
             <div th:if="${form.maskFlag} == 1">
               <label>する</label>
             </div>
@@ -75,11 +75,11 @@
             <input type="hidden" th:field="${form.maskFlag}" />
           </td>
         </tr>
-        <tr>
-          <th>
+        <tr class="data">
+          <th class="data">
             <label>囲み文字利用</label>
           </th>
-          <td>
+          <td class="data">
             <div th:if="${form.enclosureCharFlag} == 1">
               <label>する</label>
             </div>

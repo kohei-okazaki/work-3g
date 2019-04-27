@@ -36,7 +36,8 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(PrintWriter pw, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList) throws BaseException {
+	public void execute(PrintWriter pw, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList)
+			throws BaseException {
 
 		try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf, pw)) {
 			// CSVに書込
@@ -55,7 +56,8 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
-				throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, file.getAbsolutePath() + "のファイル作成に失敗しました", e);
+				throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, file.getAbsolutePath() + "のファイル作成に失敗しました",
+						e);
 			}
 
 			try (FileWriter fw = new FileWriter(file.getAbsolutePath());

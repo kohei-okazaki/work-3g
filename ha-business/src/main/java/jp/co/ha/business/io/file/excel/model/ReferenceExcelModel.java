@@ -9,9 +9,8 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
  * 結果照会Excel出力モデルクラス
  *
  */
-@ExcelDownloadModel(sheetName = "健康情報照会",
-				headerNames = { "身長", "体重", "BMI", "標準体重", "健康情報作成日時" },
-				footerNames = { "身長", "体重", "BMI", "標準体重", "健康情報作成日時" })
+@ExcelDownloadModel(sheetName = "健康情報照会", headerNames = { "身長", "体重", "BMI", "標準体重", "健康情報作成日時" }, footerNames = { "身長",
+		"体重", "BMI", "標準体重", "健康情報作成日時" })
 public class ReferenceExcelModel implements BaseExcelModel {
 
 	/** 身長 */

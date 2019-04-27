@@ -2,7 +2,7 @@ package jp.co.ha.business.healthInfo.result;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.common.web.form.BaseForm;
+import jp.co.ha.web.form.BaseForm;
 
 /**
  * 健康情報照会結果フォームクラス

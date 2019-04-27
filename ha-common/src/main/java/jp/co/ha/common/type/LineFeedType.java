@@ -2,7 +2,6 @@ package jp.co.ha.common.type;
 
 /**
  * 改行コードの列挙
- *
  */
 public enum LineFeedType implements BaseEnum {
 
@@ -32,14 +31,6 @@ public enum LineFeedType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

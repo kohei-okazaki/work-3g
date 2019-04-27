@@ -7,12 +7,12 @@ import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.HashEncoder;
+import jp.co.ha.common.system.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.dashboard.form.AccountRegistForm;
 import jp.co.ha.dashboard.service.AccountRegistService;
-import jp.co.ha.dashboard.service.annotation.Sha256;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 

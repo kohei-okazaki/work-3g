@@ -13,7 +13,7 @@ import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.exception.HealthInfoException;
-import jp.co.ha.business.healthInfo.prop.HealthInfoProperties;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;

@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.method.HandlerMethod;
 
-import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.web.interceptor.BaseWebInterceptor;
 
 /**
  * Requestインターセプター
@@ -24,14 +24,17 @@ public class RequestInterceptor extends BaseWebInterceptor {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 
 		if (isStaticResource().test(handler)) {
 			// 静的リソースの場合は認証不要
 			return true;
 		}
+
 		Method method = ((HandlerMethod) handler).getMethod();
-		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName() + "[" + request.getRequestURI() + "]");
+		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName() + "["
+				+ request.getRequestURI() + "]");
 
 		return true;
 	}

@@ -24,12 +24,12 @@ import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.service.HealthInfoFileRegistService;
 import jp.co.ha.dashboard.service.annotation.HealthInfoUploadCsv;
 import jp.co.ha.dashboard.validator.HealthInfoFileInputValidator;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
+import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康情報ファイル登録画面コントローラ
@@ -77,7 +77,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	@Override
 	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
-		return getView(ManageWebView.HEALTH_INFO_FILE_INPUT);
+		return getView(DashboardView.HEALTH_INFO_FILE_INPUT);
 	}
 
 	/**
@@ -86,11 +86,12 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	@Override
 	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoFileForm form, BindingResult result, HttpServletRequest request)
+			throws BaseException {
 
 		if (result.hasErrors()) {
 			// validationエラーの場合
-			return getView(ManageWebView.HEALTH_INFO_FILE_INPUT);
+			return getView(DashboardView.HEALTH_INFO_FILE_INPUT);
 		}
 
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
@@ -101,7 +102,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 		model.addAttribute("modelList", modelList);
 		model.addAttribute("count", modelList.size());
 
-		return getView(ManageWebView.HEALTH_INFO_FILE_CONFIRM);
+		return getView(DashboardView.HEALTH_INFO_FILE_CONFIRM);
 	}
 
 	/**
@@ -113,7 +114,8 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 	@PostMapping(value = "/complete")
 	public String complete(Model model, HealthInfoFileForm form, HttpServletRequest request) throws BaseException {
 
-		List<HealthInfoCsvUploadModel> modelList = sessionManageService.getValue(request.getSession(), "modelList", List.class)
+		List<HealthInfoCsvUploadModel> modelList = sessionManageService
+				.getValue(request.getSession(), "modelList", List.class)
 				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
 
@@ -122,7 +124,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 		}
 		fileService.regist(modelList, userId);
 		sessionManageService.removeValue(request.getSession(), "modelList");
-		return getView(ManageWebView.HEALTH_INFO_FILE_COMPLETE);
+		return getView(DashboardView.HEALTH_INFO_FILE_COMPLETE);
 	}
 
 }

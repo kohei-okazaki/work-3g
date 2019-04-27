@@ -49,7 +49,8 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			ValidateErrorResult result = validator.validate(model);
 			if (result.hasError()) {
 				ValidateError error = result.getFirst();
-				throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, ++i + "行目のファイルフォーマットが不正です " + error.getMessage());
+				throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR,
+						++i + "行目のファイルフォーマットが不正です " + error.getMessage());
 			}
 		}
 	}
@@ -76,7 +77,8 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
+	private List<HealthInfoRegistRequest> toRequestList(List<HealthInfoCsvUploadModel> modelList, String userId)
+			throws BaseException {
 		Account account = accountSearchService.findByUserId(userId);
 		return modelList.stream().map(e -> {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();

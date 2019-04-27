@@ -40,7 +40,8 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	public View execute(ReferenceExcelComponent component) throws BaseException {
 
 		// 健康情報Entityから健康情報ファイル設定を検索
-		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(component.getUserId());
+		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
+				.findByUserId(component.getUserId());
 
 		List<ReferenceExcelModel> modelList = toModelList(component.getResultList());
 

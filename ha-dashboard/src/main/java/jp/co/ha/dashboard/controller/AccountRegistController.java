@@ -19,11 +19,11 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.form.AccountRegistForm;
 import jp.co.ha.dashboard.service.AccountRegistService;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_アカウント登録画面コントローラ
@@ -59,7 +59,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@NonAuth
 	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
-		return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
+		return getView(DashboardView.ACCOUNT_REGIST_INPUT);
 	}
 
 	/**
@@ -74,19 +74,19 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 		if (result.hasErrors()) {
 			// validatationエラーの場合
-			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
+			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
 		}
 
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
 			model.addAttribute("errorMessage", "アカウント情報が既に登録されています");
 			LOG.warn("アカウント情報が既に登録されています");
-			return getView(ManageWebView.ACCOUNT_REGIST_INPUT);
+			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
 		}
 
 		model.addAttribute("form", form);
 
-		return getView(ManageWebView.ACCOUNT_REGIST_CONFIRM);
+		return getView(DashboardView.ACCOUNT_REGIST_CONFIRM);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 		// 登録処理を行う
 		accountRegistService.regist(form);
 
-		return getView(ManageWebView.ACCOUNT_REGIST_COMPLETE);
+		return getView(DashboardView.ACCOUNT_REGIST_COMPLETE);
 	}
 
 }

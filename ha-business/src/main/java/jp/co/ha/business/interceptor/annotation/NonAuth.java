@@ -7,12 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import jp.co.ha.business.interceptor.AuthInterceptor;
+import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
 
 /**
  * ログイン情報のチェックを<b>行わない</b>ことを示すマーカーアノテーション
  *
- * @see AuthInterceptor
+ * @see DashboardAuthInterceptor
  */
 @Inherited
 @Documented

@@ -20,11 +20,11 @@ import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.form.HealthInfoFileSettingForm;
 import jp.co.ha.dashboard.service.HealthInfoFileSettingService;
-import jp.co.ha.dashboard.view.ManageWebView;
+import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_健康情報ファイル設定コントローラ
@@ -81,7 +81,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@Override
 	@GetMapping(value = "/input")
 	public String input(Model model, HttpServletRequest request) throws BaseException {
-		return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
+		return getView(DashboardView.HEALTH_INFO_FILE_SETTING_INPUT);
 	}
 
 	/**
@@ -90,13 +90,15 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@Override
 	@CsrfToken(factocy = true)
 	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result, HttpServletRequest request) throws BaseException {
+	public String confirm(Model model, @Valid HealthInfoFileSettingForm form, BindingResult result,
+			HttpServletRequest request) throws BaseException {
+
 		if (result.hasErrors()) {
-			return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_INPUT);
+			return getView(DashboardView.HEALTH_INFO_FILE_SETTING_INPUT);
 		}
 
 		model.addAttribute("form", form);
-		return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_CONFIRM);
+		return getView(DashboardView.HEALTH_INFO_FILE_SETTING_CONFIRM);
 	}
 
 	/**
@@ -105,7 +107,8 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	@Override
 	@CsrfToken(check = true)
 	@PostMapping(value = "/complete")
-	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request) throws BaseException {
+	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request)
+			throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		if (!userId.equals(form.getUserId())) {
@@ -114,7 +117,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 
 		healthInfoFileSettingService.execute(form);
 
-		return getView(ManageWebView.HEALTH_INFO_FILE_SETTING_COMPLETE);
+		return getView(DashboardView.HEALTH_INFO_FILE_SETTING_COMPLETE);
 	}
 
 }

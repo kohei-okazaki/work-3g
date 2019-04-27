@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.healthInfo.prop.HealthInfoProperties;
 import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
@@ -110,13 +110,16 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 		if (StringUtil.isEmpty(form.getHealthInfoId())) {
 			Date healthInfoRegDate = editStrDate(form.getFromHealthInfoRegDate());
 			if (CommonFlag.TRUE.is(form.getHealthInfoRegDateSelectFlag())) {
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate, DateUtil.toEndDate(healthInfoRegDate));
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
+						DateUtil.toEndDate(healthInfoRegDate));
 			} else {
 				Date toHealthInfoRegDate = editStrDate(form.getToHealthInfoRegDate());
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate, toHealthInfoRegDate);
+				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
+						toHealthInfoRegDate);
 			}
 		} else {
-			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(Integer.valueOf(form.getHealthInfoId()), userId);
+			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(Integer.valueOf(form.getHealthInfoId()),
+					userId);
 		}
 
 		return resultList;

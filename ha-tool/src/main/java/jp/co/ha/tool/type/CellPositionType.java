@@ -65,14 +65,6 @@ public enum CellPositionType implements BaseEnum {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
-	}
-
-	/**
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
 	 * @param value
 	 *     値

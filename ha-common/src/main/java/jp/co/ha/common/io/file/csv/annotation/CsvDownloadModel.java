@@ -1,10 +1,11 @@
 package jp.co.ha.common.io.file.csv.annotation;
 
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.*;
+
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
@@ -14,13 +15,21 @@ import java.lang.annotation.Target;
  */
 @Inherited
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Retention(RUNTIME)
+@Target(TYPE)
 public @interface CsvDownloadModel {
 
-	/** ヘッダ名 */
+	/**
+	 * ヘッダ名
+	 *
+	 * @return ヘッダ名
+	 */
 	String[] headerNames() default "";
 
-	/** フッタ名 */
+	/**
+	 * フッタ名
+	 *
+	 * @return フッタ名
+	 */
 	String[] footerNames() default "";
 }

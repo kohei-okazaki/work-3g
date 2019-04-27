@@ -1,5 +1,7 @@
 package jp.co.ha.common.system.impl;
 
+import org.springframework.stereotype.Service;
+
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.HashEncoder;
 
@@ -7,6 +9,7 @@ import jp.co.ha.common.system.HashEncoder;
  * Bcryptハッシュ値エンコードクラス
  *
  */
+@Service("bcryptHashEncoder")
 public class BcryptHashEncoder implements HashEncoder {
 
 	/**

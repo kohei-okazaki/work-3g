@@ -5,8 +5,8 @@ import org.springframework.validation.Errors;
 import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.dashboard.form.HealthInfoReferenceForm;
+import jp.co.ha.web.validator.BaseWebValidator;
 
 /**
  * 結果照会画面のValidator
@@ -39,21 +39,23 @@ public class HealthInfoReferenceValidator extends BaseWebValidator<HealthInfoRef
 			if (CommonFlag.TRUE.is(form.getHealthInfoRegDateSelectFlag())) {
 				// 直接指定フラグが指定されてる場合
 				if (StringUtil.isEmpty(form.getFromHealthInfoRegDate())) {
-					errors.rejectValue("fromHealthInfoRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "健康情報作成日" },
+					errors.rejectValue("fromHealthInfoRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(),
+							new String[] { "健康情報作成日" },
 							ValidateErrorCode.REQUIRE.getOuterErrorCode());
 				}
 			} else {
 				if (StringUtil.isEmpty(form.getFromHealthInfoRegDate())) {
-					errors.rejectValue("fromHealthInfoRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "健康情報作成日(開始)" },
+					errors.rejectValue("fromHealthInfoRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(),
+							new String[] { "健康情報作成日(開始)" },
 							ValidateErrorCode.REQUIRE.getOuterErrorCode());
 				}
 				if (StringUtil.isEmpty(form.getToHealthInfoRegDate())) {
-					errors.rejectValue("toHealthInfoRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(), new String[] { "健康情報作成日(終了)" },
+					errors.rejectValue("toHealthInfoRegDate", ValidateErrorCode.REQUIRE.getOuterErrorCode(),
+							new String[] { "健康情報作成日(終了)" },
 							ValidateErrorCode.REQUIRE.getOuterErrorCode());
 				}
 			}
 		}
 	}
-
 
 }
