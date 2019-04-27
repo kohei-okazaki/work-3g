@@ -27,7 +27,7 @@ public class HealthInfoRegistController extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
+	public HealthInfoRegistResponse receipt(HealthInfoRegistRequest request) throws BaseException {
 
 		// リクエスト情報のチェック
 		service.checkRequest(request);

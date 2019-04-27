@@ -63,21 +63,21 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 					error.getMessage() + " " + error.getName() + "=" + error.getValue());
 		}
 
-		Rs response = this.execute(request);
+		Rs response = this.receipt(request);
 
 		return response;
 	}
 
 	/**
-	 * 継承先のコントローラクラスで処理する
+	 * リクエストを受付処理を行い、レスポンスを返却する
 	 *
 	 * @param request
-	 *     リクエストクラス
+	 *     リクエスト
 	 * @return response
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	protected abstract Rs execute(Rq request) throws BaseException;
+	protected abstract Rs receipt(Rq request) throws BaseException;
 
 	/**
 	 * JSONで例外が起きた場合のエラーハンドリング
@@ -88,7 +88,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 	 */
 	@SuppressWarnings("unchecked")
 	@ExceptionHandler(JsonProcessingException.class)
-	public Rs jsonProcessingExceptionHandle(JsonProcessingException e) {
+	public Rs jsonExceptionHandle(JsonProcessingException e) {
 
 		BaseException baseException = null;
 		if (e instanceof InvalidFormatException) {
