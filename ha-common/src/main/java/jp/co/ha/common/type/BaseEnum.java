@@ -4,8 +4,7 @@ import java.util.stream.Stream;
 
 /**
  * 列挙型の基底インターフェース<br>
- * 単一の値を持つ列挙の親インターフェースとする<br>
- *
+ * 単一の値を持つ列挙の親インターフェースとする
  */
 public interface BaseEnum {
 
@@ -23,7 +22,9 @@ public interface BaseEnum {
 	 *     値
 	 * @return 同じ値の場合true、それ以外の場合false
 	 */
-	boolean is(String value);
+	public default boolean is(String value) {
+		return getValue().equals(value);
+	}
 
 	/**
 	 * 指定した値と列挙と指定した値が一致する列挙型を返す<br>

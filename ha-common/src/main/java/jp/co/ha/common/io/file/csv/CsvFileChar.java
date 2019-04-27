@@ -4,7 +4,6 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * CSVファイル囲い文字列挙
- *
  */
 public enum CsvFileChar implements BaseEnum {
 
@@ -32,14 +31,6 @@ public enum CsvFileChar implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

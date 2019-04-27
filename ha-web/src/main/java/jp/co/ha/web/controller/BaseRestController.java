@@ -81,8 +81,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
 					e.getLocation().getColumnNr() + "行目がjson形式ではありません", e);
 		} else if (e instanceof JsonProcessingException) {
-			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
-					e.getLocation().getColumnNr() + ":json形式ではありません", e);
+			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, "JSON生成処理が失敗しました", e);
 		}
 		Rs response = (Rs) new ErrorResponse(baseException);
 		LOG.warnRes(response, baseException);

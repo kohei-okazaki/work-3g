@@ -4,7 +4,6 @@ import java.util.function.Predicate;
 
 /**
  * 正規表現の列挙
- *
  */
 public enum RegixType implements BaseEnum {
 
@@ -42,14 +41,6 @@ public enum RegixType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

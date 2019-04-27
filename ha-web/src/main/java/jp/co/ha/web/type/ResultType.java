@@ -1,15 +1,11 @@
 package jp.co.ha.web.type;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import jp.co.ha.common.type.BaseEnum;
-import jp.co.ha.web.response.serialize.ResultTypeSerializer;
 
 /**
  * APIの結果コードの列挙
  *
  */
-@JsonSerialize(using = ResultTypeSerializer.class)
 public enum ResultType implements BaseEnum {
 
 	/** SUCCESS */
@@ -41,14 +37,6 @@ public enum ResultType implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

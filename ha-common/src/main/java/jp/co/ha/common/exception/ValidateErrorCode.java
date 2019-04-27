@@ -5,9 +5,13 @@ import jp.co.ha.common.type.BaseEnum;
 
 public enum ValidateErrorCode implements BaseErrorCode, BaseEnum {
 
+	/** 必須 */
 	REQUIRE("REQUIRE", "validate.message.NotEmpty"),
+	/** 桁数超過 */
 	LENGTH_OVER("LENGTH_OVER", "validate.message.LengthOver"),
+	/** 桁数不足 */
 	LENGTH_LACK("LENGTH_LACK", "validate.message.LengthLack"),
+	/** 属性不一致 */
 	TYPE_ERROR("TYPE_ERROR", "validate.message.TypeError"),
 
 	;
@@ -52,14 +56,6 @@ public enum ValidateErrorCode implements BaseErrorCode, BaseEnum {
 	@Override
 	public LogLevel getLogLevel() {
 		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

@@ -20,10 +20,7 @@ public class ResultTypeSerializer extends JsonSerializer<ResultType> {
 	 */
 	@Override
 	public void serialize(ResultType resultType, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-
-		gen.writeStartObject();
-		gen.writeStringField("resultType", resultType.getValue());
-		gen.writeEndObject();
+		gen.writeString(resultType.getValue());
 	}
 
 }

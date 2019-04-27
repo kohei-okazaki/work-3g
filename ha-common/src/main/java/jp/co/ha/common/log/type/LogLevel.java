@@ -4,7 +4,6 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ログレベルの列挙
- *
  */
 public enum LogLevel implements BaseEnum {
 
@@ -38,14 +37,6 @@ public enum LogLevel implements BaseEnum {
 	@Override
 	public String getValue() {
 		return this.value;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

@@ -15,8 +15,11 @@ public enum BatchResult implements BaseEnum {
 
 	/**
 	 * コンストラクタ
-	 * @param value 値
-	 * @param comment コメント
+	 * 
+	 * @param value
+	 *     値
+	 * @param comment
+	 *     コメント
 	 */
 	private BatchResult(String value, String comment) {
 		this.value = value;
@@ -38,14 +41,6 @@ public enum BatchResult implements BaseEnum {
 
 	public String getComment() {
 		return this.comment;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
 	}
 
 	/**

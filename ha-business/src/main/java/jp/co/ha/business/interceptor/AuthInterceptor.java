@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +15,7 @@ import jp.co.ha.common.exception.SessionIllegalException;
 import jp.co.ha.common.interceptor.BaseWebInterceptor;
 import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.annotation.Sha256;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 
@@ -33,8 +33,8 @@ public class AuthInterceptor extends BaseWebInterceptor {
 	@Autowired
 	private SessionManageService sessionService;
 	/** SHA-256 ハッシュ値生成 */
+	@Sha256
 	@Autowired
-	@Qualifier(value = "sha256HashEncoder")
 	private HashEncoder encoder;
 
 	/**

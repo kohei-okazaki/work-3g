@@ -4,10 +4,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
+import jp.co.ha.common.io.file.property.annotation.Property;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.BeanUtil.AccessorType;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 public class PropertyReader {
@@ -39,6 +47,47 @@ public class PropertyReader {
 			LOG.debug(fileName + "の読込 終了");
 		}
 		return prop;
+	}
+
+	public <T> T read(String path, String fileName, Class<T> clazz) {
+		Properties prop = read(path, fileName);
+		try {
+			T t = clazz.getDeclaredConstructor().newInstance();
+
+			for (String name : getPropNameList(clazz)) {
+				Method setter = BeanUtil.getAccessor(name, clazz, AccessorType.SETTER);
+				Object value = prop.get(name);
+				setter.invoke(t, value);
+			}
+			return t;
+
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 指定したクラス型のフィールドに付与されている<code>@Propery</code>のnameをリストにして返す
+	 *
+	 * @param clazz
+	 *     対象クラス
+	 * @return nameリスト
+	 */
+	private static List<String> getPropNameList(Class<?> clazz) {
+		return CollectionUtil.toList(clazz.getDeclaredFields()).stream()
+				.filter(e -> e.isAnnotationPresent(Property.class))
+				.map(e -> e.getAnnotation(Property.class).name()).collect(Collectors.toList());
 	}
 
 }

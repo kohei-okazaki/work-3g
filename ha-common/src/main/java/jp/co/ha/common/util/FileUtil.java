@@ -276,14 +276,6 @@ public class FileUtil {
 		}
 
 		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public boolean is(String value) {
-			return this.value.equals(value);
-		}
-
-		/**
 		 * 指定したファイル拡張子列挙が自身と一致するか判定する<br>
 		 * 一致する場合true, それ以外の場合false<br>
 		 *
@@ -348,14 +340,6 @@ public class FileUtil {
 		@Override
 		public String getValue() {
 			return this.value;
-		}
-
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public boolean is(String value) {
-			return this.value.equals(value);
 		}
 
 		/**

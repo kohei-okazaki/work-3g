@@ -49,14 +49,6 @@ public enum ColumnType implements BaseEnum {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean is(String value) {
-		return this.value.equals(value);
-	}
-
-	/**
 	 * classTypeを返す
 	 *
 	 * @return classType
