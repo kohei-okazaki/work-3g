@@ -117,11 +117,12 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 		List<HealthInfoCsvUploadModel> modelList = sessionManageService
 				.getValue(request.getSession(), "modelList", List.class)
 				.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
-		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
-
 		if (CollectionUtil.isEmpty(modelList)) {
 			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
+
+		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
+
 		fileService.regist(modelList, userId);
 		sessionManageService.removeValue(request.getSession(), "modelList");
 		return getView(DashboardView.HEALTH_INFO_FILE_COMPLETE);

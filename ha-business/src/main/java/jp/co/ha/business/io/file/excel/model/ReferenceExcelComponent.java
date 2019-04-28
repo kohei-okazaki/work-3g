@@ -2,7 +2,7 @@ package jp.co.ha.business.io.file.excel.model;
 
 import java.util.List;
 
-import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
+import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 
 public class ReferenceExcelComponent implements BaseExcelComponent {
@@ -10,7 +10,7 @@ public class ReferenceExcelComponent implements BaseExcelComponent {
 	/** ユーザID */
 	private String userId;
 	/** 結果リスト */
-	private List<HealthInfoReferenceResult> resultList;
+	private List<HealthInfoReferenceDto> resultList;
 
 	/**
 	 * userIdを返す
@@ -36,7 +36,7 @@ public class ReferenceExcelComponent implements BaseExcelComponent {
 	 *
 	 * @return resultList
 	 */
-	public List<HealthInfoReferenceResult> getResultList() {
+	public List<HealthInfoReferenceDto> getResultList() {
 		return resultList;
 	}
 
@@ -46,7 +46,7 @@ public class ReferenceExcelComponent implements BaseExcelComponent {
 	 * @param resultList
 	 *     結果リスト
 	 */
-	public void setResultList(List<HealthInfoReferenceResult> resultList) {
+	public void setResultList(List<HealthInfoReferenceDto> resultList) {
 		this.resultList = resultList;
 	}
 

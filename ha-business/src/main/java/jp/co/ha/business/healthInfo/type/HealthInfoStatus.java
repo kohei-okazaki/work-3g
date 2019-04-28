@@ -3,7 +3,7 @@ package jp.co.ha.business.healthInfo.type;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * 健康ステータス
+ * 健康情報ステータス
  *
  */
 public enum HealthInfoStatus implements BaseEnum {

@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.WebErrorCode;
-import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.BaseException;
@@ -36,6 +36,7 @@ import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.CommonFlag;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.dashboard.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.service.HealthInfoReferService;
@@ -130,7 +131,9 @@ public class HealthInfoReferController implements BaseWebController {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
-		List<HealthInfoReferenceResult> resultList = service.getHealthInfoResponseList(form, userId);
+		HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
+		BeanUtil.copy(form, dto);
+		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto, userId);
 
 		// 検索情報を設定
 		model.addAttribute("form", form);
@@ -143,11 +146,11 @@ public class HealthInfoReferController implements BaseWebController {
 		List<BigDecimal> weightList = new ArrayList<>();
 		List<BigDecimal> bmiList = new ArrayList<>();
 		List<BigDecimal> standardWeightList = new ArrayList<>();
-		for (HealthInfoReferenceResult response : resultList) {
-			healthInfoRegDateList.add(response.getHealthInfoRegDate());
-			weightList.add(response.getWeight());
-			bmiList.add(response.getBmi());
-			standardWeightList.add(response.getStandardWeight());
+		for (HealthInfoReferenceDto referenceResult : resultList) {
+			healthInfoRegDateList.add(referenceResult.getHealthInfoRegDate());
+			weightList.add(referenceResult.getWeight());
+			bmiList.add(referenceResult.getBmi());
+			standardWeightList.add(referenceResult.getStandardWeight());
 		}
 		model.addAttribute("label", healthInfoRegDateList);
 		model.addAttribute("weight", weightList);
@@ -174,16 +177,16 @@ public class HealthInfoReferController implements BaseWebController {
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		List<HealthInfoReferenceResult> resultList = sessionService
+		List<HealthInfoReferenceDto> referList = sessionService
 				.getValue(request.getSession(), "resultList", List.class)
 				.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 
-		if (CollectionUtil.isEmpty(resultList)) {
+		if (CollectionUtil.isEmpty(referList)) {
 			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		ReferenceExcelComponent component = new ReferenceExcelComponent();
 		component.setUserId(userId);
-		component.setResultList(resultList);
+		component.setResultList(referList);
 		return new ModelAndView(excelDownloadService.download(component));
 	}
 
@@ -202,7 +205,7 @@ public class HealthInfoReferController implements BaseWebController {
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
 		HttpSession session = request.getSession();
-		List<HealthInfoReferenceResult> resultList = sessionService.getValue(session, "resultList", List.class)
+		List<HealthInfoReferenceDto> resultList = sessionService.getValue(session, "resultList", List.class)
 				.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionService.getValue(session, "userId", String.class).get();
 

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
+import jp.co.ha.business.dto.HealthInfoFileSettingDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.dashboard.form.HealthInfoFileSettingForm;
 import jp.co.ha.dashboard.service.HealthInfoFileSettingService;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
@@ -33,10 +33,11 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(HealthInfoFileSettingForm form) throws BaseException {
-		HealthInfoFileSetting befEntity = searchService.findByUserId(form.getUserId());
+	public void execute(HealthInfoFileSettingDto dto) throws BaseException {
+
+		HealthInfoFileSetting befEntity = searchService.findByUserId(dto.getUserId());
 		boolean isFirstReg = BeanUtil.isNull(befEntity);
-		HealthInfoFileSetting entity = toEntity(form);
+		HealthInfoFileSetting entity = toEntity(dto);
 		if (isFirstReg) {
 			createService.create(entity);
 		} else {
@@ -45,15 +46,15 @@ public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingSe
 	}
 
 	/**
-	 * フォーム情報を健康情報ファイル設定情報Entityに変換する
+	 * 健康情報ファイル設定DTOを健康情報ファイル設定情報Entityに変換する
 	 *
-	 * @param form
-	 *     健康情報ファイル設定フォーム
+	 * @param dto
+	 *     健康情報ファイル設定DTO
 	 * @return HealthInfoFileSetting
 	 */
-	private HealthInfoFileSetting toEntity(HealthInfoFileSettingForm form) {
+	private HealthInfoFileSetting toEntity(HealthInfoFileSettingDto dto) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
-		BeanUtil.copy(form, entity);
+		BeanUtil.copy(dto, entity);
 		return entity;
 	}
 

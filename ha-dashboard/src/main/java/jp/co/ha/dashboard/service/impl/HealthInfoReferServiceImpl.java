@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
+import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -22,7 +22,6 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.dashboard.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.service.HealthInfoReferService;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -45,13 +44,17 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoReferenceResult> getHealthInfoResponseList(HealthInfoReferenceForm form, String userId)
+	public List<HealthInfoReferenceDto> getHealthInfoResponseList(HealthInfoReferenceDto dto, String userId)
 			throws BaseException {
 
-		// ユーザIDと検索条件フォームから健康情報Entityを取得
-		List<HealthInfo> entityList = getHealthInfoList(form, userId);
+		// ユーザIDと検索条件フォームから健康情報Entityリストを取得
+		List<HealthInfo> entityList = getHealthInfoList(dto, userId);
 		return entityList.stream().map(e -> {
-			HealthInfoReferenceResult result = new HealthInfoReferenceResult();
+			HealthInfoReferenceDto result = new HealthInfoReferenceDto();
+			// リクエストDTOを設定
+			BeanUtil.copy(dto, result);
+
+			// 健康情報Entityを設定
 			BeanUtil.copy(e, result);
 			result.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			return result;
@@ -62,7 +65,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceResult> resultList) {
+	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceDto> resultList) {
 		return resultList.stream().map(e -> {
 			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
 			BeanUtil.copy(e, model);
@@ -96,30 +99,30 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	/**
 	 * 健康情報リストを取得する
 	 *
-	 * @param form
-	 *     健康情報照会画面フォーム
+	 * @param dto
+	 *     健康情報照会DTO
 	 * @param userId
 	 *     ユーザID
 	 * @return 健康情報リスト
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceForm form, String userId) throws BaseException {
+	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceDto dto, String userId) throws BaseException {
 
 		List<HealthInfo> resultList;
-		if (StringUtil.isEmpty(form.getHealthInfoId())) {
-			Date healthInfoRegDate = editStrDate(form.getFromHealthInfoRegDate());
-			if (CommonFlag.TRUE.is(form.getHealthInfoRegDateSelectFlag())) {
+
+		if (StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
+			Date healthInfoRegDate = editStrDate(dto.getFromHealthInfoRegDate());
+			if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
 						DateUtil.toEndDate(healthInfoRegDate));
 			} else {
-				Date toHealthInfoRegDate = editStrDate(form.getToHealthInfoRegDate());
+				Date toHealthInfoRegDate = editStrDate(dto.getToHealthInfoRegDate());
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
 						toHealthInfoRegDate);
 			}
 		} else {
-			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(Integer.valueOf(form.getHealthInfoId()),
-					userId);
+			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(dto.getHealthInfoId(), userId);
 		}
 
 		return resultList;
