@@ -10,6 +10,7 @@ baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
 # プロジェクトディレクトリ
 commonDir=${baseDir}"/ha-common"
 dbDir=${baseDir}"/ha-db"
+webDir=${baseDir}"/ha-web"
 businessDir=${baseDir}"/ha-business"
 
 
@@ -36,6 +37,15 @@ echo "------------------------------------------------------------------------"
 echo "END db project compile"
 echo "------------------------------------------------------------------------"
 
+echo "------------------------------------------------------------------------"
+echo "START web project compile"
+echo "------------------------------------------------------------------------"
+cd ${webDir}
+mvn compile
+echo "------------------------------------------------------------------------"
+echo "END web project compile"
+echo "------------------------------------------------------------------------"
+
 
 echo "------------------------------------------------------------------------"
 echo "START business project compile"
@@ -49,6 +59,7 @@ echo "------------------------------------------------------------------------"
 
 # 元のshellのディレクトリに戻る
 cd ${baseDir}"/ha-build/shell"
+
 echo "---------------------"
 echo "END maven-compile.sh"
 echo "---------------------"
