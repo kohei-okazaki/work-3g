@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.apache.commons.cli.Options;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
@@ -15,9 +13,9 @@ import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.exception.HealthInfoException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
-import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.BatchBeanLoader;
@@ -50,15 +48,11 @@ public class HealthInfoRegistBatch extends BaseBatch {
 
 		LOG.info("execute");
 		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
-		try {
-			for (File f : FileUtil.getFileList(prop.getHealthInfoRegistBatchFilePath())) {
-				ObjectMapper mapper = new ObjectMapper();
-				HealthInfoRegistRequest request = mapper.readValue(f, HealthInfoRegistRequest.class);
-				request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-				requestList.add(request);
-			}
-		} catch (Exception e) {
-			throw new AppIOException(CommonErrorCode.JSON_MAPPING_ERROR, "JSONのマッピングに失敗しました", e);
+		JsonReader reader = new JsonReader();
+		for (File file : FileUtil.getFileList(prop.getHealthInfoRegistBatchFilePath())) {
+			HealthInfoRegistRequest request = reader.read(file, HealthInfoRegistRequest.class);
+			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
+			requestList.add(request);
 		}
 
 		for (HealthInfoRegistRequest request : requestList) {

@@ -3,8 +3,10 @@ package jp.co.ha.batch.invoke;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.commons.cli.Options;
+import org.springframework.context.MessageSource;
 
 import jp.co.ha.batch.execute.BaseBatch;
 import jp.co.ha.batch.type.BatchResult;
@@ -20,7 +22,8 @@ public class BatchInvoker {
 
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(BatchInvoker.class);
-
+	/** MessageSource */
+	private static final MessageSource MESSAGE_SOURCE = BatchBeanLoader.getBean(MessageSource.class);
 	/** パッケージ名の接頭語 */
 	private static final String PACKAGE_PREFIX = "jp.co.ha.batch.execute.";
 
@@ -32,6 +35,7 @@ public class BatchInvoker {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void invoke(String[] args) {
+
 		LOG.info("■■■■■ Batch処理開始 ■■■■■");
 
 		// Beanの初期化を行う
@@ -63,7 +67,7 @@ public class BatchInvoker {
 		} catch (Exception e) {
 			LOG.error("バッチ処理が失敗しました", e);
 		} finally {
-			LOG.info(batchResult.getComment());
+			LOG.info(MESSAGE_SOURCE.getMessage(batchResult.getComment(), null, Locale.getDefault()));
 		}
 
 		LOG.info("■■■■■ Batch処理終了 ■■■■■");

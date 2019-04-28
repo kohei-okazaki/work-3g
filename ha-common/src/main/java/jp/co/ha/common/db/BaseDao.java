@@ -7,15 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.DataBaseException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
  * Dao実装の基底クラス
- *
  */
 public abstract class BaseDao {
 
@@ -31,10 +31,10 @@ public abstract class BaseDao {
 	/**
 	 * DBへ接続を行う
 	 *
-	 * @throws DataBaseException
+	 * @throws BaseException
 	 *     DBエラー
 	 */
-	protected void connect() throws DataBaseException {
+	protected void connect() throws BaseException {
 
 		try {
 			JdbcConfig conf = JdbcConfig.getInstance();
@@ -45,32 +45,32 @@ public abstract class BaseDao {
 				this.stm = this.con.createStatement();
 			}
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "JDBCドライバのロードに失敗", e);
+			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "JDBCドライバのロードに失敗", e);
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DBに接続に失敗", e);
+			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "DBに接続に失敗", e);
 		} catch (IllegalArgumentException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます", e);
+			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます", e);
 		} catch (InvocationTargetException e) {
 			LOG.error("", e);
 		} catch (NoSuchMethodException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません", e);
+			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません", e);
 		} catch (SecurityException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタの生成に失敗しました", e);
+			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタの生成に失敗しました", e);
 		}
 	}
 
 	/**
 	 * 次の要素が存在するか返す
 	 *
-	 * @return　判定結果
-	 * @throws DataBaseException
+	 * @return 判定結果
+	 * @throws BaseException
 	 *     SQL実行時に出る例外
 	 */
-	protected boolean hasNext() throws DataBaseException {
+	protected boolean hasNext() throws BaseException {
 		try {
 			return this.rs.next();
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました", e);
+			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "SQLの実行に失敗しました", e);
 		}
 	}
 
@@ -85,7 +85,7 @@ public abstract class BaseDao {
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */
-	protected int execute(String sql, SqlType type) throws DataBaseException {
+	protected int execute(String sql, SqlType type) throws BaseException {
 		LOG.info("[SQL]--->" + sql);
 		try {
 			if (SqlType.SELECT == type) {
@@ -94,10 +94,10 @@ public abstract class BaseDao {
 			} else if (SqlType.INSERT == type || SqlType.UPDATE == type) {
 				return this.stm.executeUpdate(sql);
 			} else {
-				throw new DataBaseException(CommonErrorCode.DB_SQL_SELECT_ERROR, "実行するSQlが存在しません");
+				throw new SystemException(CommonErrorCode.DB_SQL_SELECT_ERROR, "実行するSQlが存在しません");
 			}
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました", e);
+			throw new SystemException(CommonErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました", e);
 		}
 
 	}
@@ -108,7 +108,7 @@ public abstract class BaseDao {
 	 * @throws DataBaseException
 	 *     DBエラー
 	 */
-	protected void close() throws DataBaseException {
+	protected void close() throws BaseException {
 		try {
 			if (BeanUtil.notNull(this.stm)) {
 				this.stm.close();
@@ -123,7 +123,7 @@ public abstract class BaseDao {
 				LOG.debug("DB切断します");
 			}
 		} catch (SQLException e) {
-			throw new DataBaseException(CommonErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました", e);
+			throw new SystemException(CommonErrorCode.DB_CLOSE_ERROR, "クローズに失敗しました", e);
 		}
 	}
 

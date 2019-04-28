@@ -8,7 +8,7 @@ public class HealthInfoProperties {
 
 	/** 照会ファイル格納パス */
 	private String referenceFilePath;
-	/** 健康情報格納ファイルパス */
+	/** 健康情報登録バッチファイルパス */
 	private String healthInfoRegistBatchFilePath;
 
 	/**
@@ -44,6 +44,7 @@ public class HealthInfoProperties {
 	 * healthInfoRegistBatchFilePathを設定する
 	 *
 	 * @param healthInfoRegistBatchFilePath
+	 *     健康情報登録バッチファイルパス
 	 *
 	 */
 	public void setHealthInfoRegistBatchFilePath(String healthInfoRegistBatchFilePath) {

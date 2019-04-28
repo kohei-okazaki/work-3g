@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.csv.writer.ReferenceCsvWriter;
-import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
@@ -56,7 +56,7 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
-				throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, file.getAbsolutePath() + "のファイル作成に失敗しました",
+				throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR, file.getAbsolutePath() + "のファイル作成に失敗しました",
 						e);
 			}
 

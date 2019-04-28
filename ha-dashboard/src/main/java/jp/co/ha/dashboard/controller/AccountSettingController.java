@@ -19,7 +19,7 @@ import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SessionIllegalException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
@@ -119,7 +119,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		if (!userId.equals(form.getUserId())) {
-			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		// form情報から更新処理を行う
 		accountSettingService.execute(form);

@@ -9,9 +9,9 @@ import java.io.InputStream;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
@@ -57,9 +57,9 @@ public class SqlSessionFactory {
 		try (InputStream is = new FileInputStream(xmlFile.getAbsolutePath())) {
 			return new SqlSessionFactoryBuilder().build(is).openSession();
 		} catch (FileNotFoundException e) {
-			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, CONF_FILE + "が見つかりません", e);
+			throw new SystemException(CommonErrorCode.FILE_READING_ERROR, CONF_FILE + "が見つかりません", e);
 		} catch (IOException e) {
-			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, CONF_FILE + "の読込に失敗しました", e);
+			throw new SystemException(CommonErrorCode.FILE_READING_ERROR, CONF_FILE + "の読込に失敗しました", e);
 		}
 	}
 

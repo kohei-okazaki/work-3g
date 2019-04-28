@@ -16,7 +16,7 @@ import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SessionIllegalException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
@@ -112,7 +112,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		if (!userId.equals(form.getUserId())) {
-			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 
 		healthInfoFileSettingService.execute(form);
