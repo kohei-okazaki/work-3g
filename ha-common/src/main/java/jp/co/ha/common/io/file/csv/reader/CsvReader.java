@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -58,9 +58,9 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 				modelList.add(this.read(record));
 			}
 		} catch (UnsupportedEncodingException e) {
-			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "指定した文字コードが無効です:" + charset.getValue(), e);
+			throw new SystemException(CommonErrorCode.FILE_READING_ERROR, "指定した文字コードが無効です:" + charset.getValue(), e);
 		} catch (IOException e) {
-			throw new AppIOException(CommonErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。", e);
+			throw new SystemException(CommonErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。", e);
 		}
 
 		return modelList;
@@ -80,8 +80,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
 		List<String> colList = BeanUtil.getFieldList(clazz).stream()
-															.map(e -> e.getName())
-															.collect(Collectors.toList());
+				.map(e -> e.getName()).collect(Collectors.toList());
 		List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
 		checkFileLength(colList, dataList);
 		T model = null;
@@ -127,7 +126,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	 */
 	private void checkFileLength(List<String> colList, List<String> dataList) throws BaseException {
 		if (dataList.size() != colList.size()) {
-			throw new AppIOException(CommonErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
+			throw new SystemException(CommonErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
 		}
 	}
 

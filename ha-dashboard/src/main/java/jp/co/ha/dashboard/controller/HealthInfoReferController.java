@@ -28,10 +28,9 @@ import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
-import jp.co.ha.common.exception.AppIOException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.SessionIllegalException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
@@ -177,10 +176,10 @@ public class HealthInfoReferController implements BaseWebController {
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		List<HealthInfoReferenceResult> resultList = sessionService
 				.getValue(request.getSession(), "resultList", List.class)
-				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+				.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 
 		if (CollectionUtil.isEmpty(resultList)) {
-			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		ReferenceExcelComponent component = new ReferenceExcelComponent();
 		component.setUserId(userId);
@@ -204,11 +203,11 @@ public class HealthInfoReferController implements BaseWebController {
 
 		HttpSession session = request.getSession();
 		List<HealthInfoReferenceResult> resultList = sessionService.getValue(session, "resultList", List.class)
-				.orElseThrow(() -> new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+				.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionService.getValue(session, "userId", String.class).get();
 
 		if (CollectionUtil.isEmpty(resultList)) {
-			throw new SessionIllegalException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 
 		// CSV設定情報取得
@@ -222,7 +221,7 @@ public class HealthInfoReferController implements BaseWebController {
 		try {
 			csvDownloadService.download(response.getWriter(), conf, service.toModelList(userId, resultList));
 		} catch (IOException e) {
-			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
+			throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
 		} catch (BaseException e) {
 			throw e;
 		}

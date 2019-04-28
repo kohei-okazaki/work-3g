@@ -18,6 +18,9 @@ import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
+/**
+ * Propertyの読み取りクラス
+ */
 public class PropertyReader {
 
 	/** LOG */
