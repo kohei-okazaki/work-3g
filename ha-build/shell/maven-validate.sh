@@ -10,9 +10,10 @@ baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
 # プロジェクトディレクトリ
 commonDir=${baseDir}"/ha-common"
 dbDir=${baseDir}"/ha-db"
+webDir=${baseDir}"/ha-web"
 businessDir=${baseDir}"/ha-business"
 apiDir=${baseDir}"/ha-api"
-webDir=${baseDir}"/ha-web"
+dashboardDir=${baseDir}"/ha-dashboard"
 
 echo "-----------------------"
 echo "START maven-validate.sh"
@@ -39,6 +40,16 @@ echo "------------------------------------------------------------------------"
 
 
 echo "------------------------------------------------------------------------"
+echo "START web project validate"
+echo "------------------------------------------------------------------------"
+cd ${webDir}
+mvn validate
+echo "------------------------------------------------------------------------"
+echo "END web project validate"
+echo "------------------------------------------------------------------------"
+
+
+echo "------------------------------------------------------------------------"
 echo "START business project validate"
 echo "------------------------------------------------------------------------"
 cd ${businessDir}
@@ -59,17 +70,18 @@ echo "------------------------------------------------------------------------"
 
 
 echo "------------------------------------------------------------------------"
-echo "START web project validate"
+echo "START dashboard project validate"
 echo "------------------------------------------------------------------------"
-cd ${webDir}
+cd ${dashboardDir}
 mvn validate
 echo "------------------------------------------------------------------------"
-echo "END web project validate"
+echo "END dashboard project validate"
 echo "------------------------------------------------------------------------"
 
 
 # 元のshellのディレクトリに戻る
 cd ${baseDir}"/ha-build/shell"
+
 echo "---------------------"
 echo "END maven-validate.sh"
 echo "---------------------"
