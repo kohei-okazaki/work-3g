@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.healthInfo.result.HealthInfoReferenceResult;
+import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.io.file.excel.builder.ResultReferenceExcelBuiler;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelModel;
@@ -55,11 +55,11 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 *     健康情報照会リスト
 	 * @return modelList
 	 */
-	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceResult> resultList) {
+	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceDto> resultList) {
 		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
 			// Excel出力モデル
 			ReferenceExcelModel model = new ReferenceExcelModel();
-			HealthInfoReferenceResult result = resultList.get(i);
+			HealthInfoReferenceDto result = resultList.get(i);
 			model.setHeight(result.getHeight().toString());
 			model.setWeight(result.getWeight().toString());
 			model.setBmi(result.getBmi().toString());
