@@ -76,29 +76,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	}
 
 	/**
-	 * 健康情報登録APIリクエストの設定を行う
-	 *
-	 * @param form
-	 *     健康情報入力フォーム
-	 * @param userId
-	 *     ユーザID
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	private HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseException {
-		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
-		// フォーム情報をリクエストクラスにコピー
-		BeanUtil.copy(form, apiRequest);
-		apiRequest.setUserId(userId);
-		// リクエストタイプ設定
-		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
-		// アカウント情報.APIキーを設定
-		Account account = accountSearchService.findByUserId(userId);
-		apiRequest.setApiKey(account.getApiKey());
-		return apiRequest;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -169,6 +146,29 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	private BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo healthInfo) {
 		return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(), form.getWeight());
+	}
+
+	/**
+	 * 健康情報登録APIリクエストの設定を行う
+	 *
+	 * @param form
+	 *     健康情報入力フォーム
+	 * @param userId
+	 *     ユーザID
+	 * @throws BaseException
+	 *     基底例外
+	 */
+	private HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseException {
+		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
+		// フォーム情報をリクエストクラスにコピー
+		BeanUtil.copy(form, apiRequest);
+		apiRequest.setUserId(userId);
+		// リクエストタイプ設定
+		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
+		// アカウント情報.APIキーを設定
+		Account account = accountSearchService.findByUserId(userId);
+		apiRequest.setApiKey(account.getApiKey());
+		return apiRequest;
 	}
 
 }
