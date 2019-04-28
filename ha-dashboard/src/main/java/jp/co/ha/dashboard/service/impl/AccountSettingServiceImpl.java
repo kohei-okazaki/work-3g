@@ -60,9 +60,10 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
 		if (BeanUtil.isNull(befMailInfo)) {
 			// メール情報が登録されてない場合
-			MailInfo mailInfo = convertMailInfo(dto);
+			befMailInfo = new MailInfo();
+			mergeMailInfo(dto, befMailInfo);
 			// メール情報を新規登録する
-			mailInfoCreateService.create(mailInfo);
+			mailInfoCreateService.create(befMailInfo);
 			// アカウント情報を更新する
 			accountUpdateService.update(befAccount);
 		} else {
@@ -101,19 +102,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	private void mergeAccount(AccountDto dto, Account account) {
 		BeanUtil.copy(dto, account, List.of("userId"));
 		account.setPasswordExpire(DateUtil.toDate(dto.getPasswordExpire(), DateFormatType.YYYYMMDD));
-	}
-
-	/**
-	 * アカウントDTOをメール情報に変換する
-	 *
-	 * @param dto
-	 *     アカウントDTO
-	 * @return メール情報
-	 */
-	private MailInfo convertMailInfo(AccountDto dto) {
-		MailInfo mailInfo = new MailInfo();
-		BeanUtil.copy(dto, mailInfo);
-		return mailInfo;
 	}
 
 	/**
