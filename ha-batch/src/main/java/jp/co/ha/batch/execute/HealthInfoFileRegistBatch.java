@@ -25,13 +25,13 @@ import jp.co.ha.common.validator.ValidateError;
 import jp.co.ha.common.validator.ValidateErrorResult;
 
 /**
- * 健康情報登録Batch
+ * 健康情報ファイル登録Batch
  *
  */
-public class HealthInfoRegistBatch extends BaseBatch {
+public class HealthInfoFileRegistBatch extends BaseBatch {
 
 	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoRegistBatch.class);
+	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoFileRegistBatch.class);
 	/** 健康情報設定ファイル */
 	private HealthInfoProperties prop = BatchBeanLoader.getBean(HealthInfoProperties.class);
 	/** 健康情報登録APIサービス */
