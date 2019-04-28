@@ -49,6 +49,17 @@ public class PropertyReader {
 		return prop;
 	}
 
+	/**
+	 * 指定したパスのプロパティを読み取り、対応するBeanを返す
+	 *
+	 * @param path
+	 *     ファイルパス
+	 * @param fileName
+	 *     ファイル名
+	 * @param clazz
+	 *     bean
+	 * @return
+	 */
 	public <T> T read(String path, String fileName, Class<T> clazz) {
 		Properties prop = read(path, fileName);
 		try {

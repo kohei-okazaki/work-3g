@@ -12,6 +12,13 @@ import jp.co.ha.web.type.ResultType;
  */
 public abstract class BaseApiResponse implements BaseForm {
 
+	/**
+	 * デフォルトコンストラクタ
+	 */
+	public BaseApiResponse() {
+		this.resultType = ResultType.SUCCESS;
+	}
+
 	/** API結果コード */
 	@JsonSerialize(using = ResultTypeSerializer.class)
 	@JsonProperty(value = "result")

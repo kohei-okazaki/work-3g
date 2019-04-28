@@ -27,14 +27,21 @@ public class HealthInfoRegistController extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse receipt(HealthInfoRegistRequest request) throws BaseException {
+	public HealthInfoRegistResponse getApiResponse() {
+		return new HealthInfoRegistResponse();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void accept(HealthInfoRegistRequest request, HealthInfoRegistResponse response) throws BaseException {
 
 		// リクエスト情報のチェック
 		service.checkRequest(request);
 
-		HealthInfoRegistResponse response = service.execute(request);
+		service.execute(request, response);
 
-		return response;
 	}
 
 }

@@ -27,14 +27,15 @@ public interface BaseApiService<Rq extends BaseApiRequest, Rs extends BaseApiRes
 
 	/**
 	 * メイン処理<br>
-	 * リクエスト型を処理し、レスポンス型で返す
+	 * リクエスト処理を行い、レスポンスにbindする
 	 *
 	 * @param request
-	 *     Request実装クラス
-	 * @return Rs Response実装クラス
+	 *     APIリクエスト
+	 * @param response
+	 *     APIレスポンス
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	Rs execute(Rq request) throws BaseException;
+	void execute(Rq request, Rs response) throws BaseException;
 
 }

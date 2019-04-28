@@ -115,9 +115,13 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	@Override
 	public HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException {
+
 		HealthInfoRegistRequest apiRequest = setUpApiRequest(form, userId);
 		healthInfoRegistService.checkRequest(apiRequest);
-		return healthInfoRegistService.execute(apiRequest);
+		HealthInfoRegistResponse apiResponse = new HealthInfoRegistResponse();
+		healthInfoRegistService.execute(apiRequest, apiResponse);
+
+		return apiResponse;
 	}
 
 	/**

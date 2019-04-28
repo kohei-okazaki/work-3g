@@ -1,7 +1,6 @@
 package jp.co.ha.business.api.service.impl;
 
 import java.util.List;
-import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,6 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.web.type.ResultType;
 
 /**
  * 健康情報照会サービス実装クラス
@@ -66,7 +64,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoReferenceResponse execute(HealthInfoReferenceRequest request) throws BaseException {
+	public void execute(HealthInfoReferenceRequest request, HealthInfoReferenceResponse response) throws BaseException {
 
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(),
 				request.getUserId());
@@ -77,21 +75,11 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 			throw new HealthInfoException(CommonErrorCode.MULTIPLE_DATA,
 					"データが複数存在します 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
 		}
-		return toResponse().apply(CollectionUtil.getFirst(healthInfoList));
-	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Function<HealthInfo, HealthInfoReferenceResponse> toResponse() {
-		return e -> {
-			HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
-			BeanUtil.copy(e, response);
-			response.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			response.setResultType(ResultType.SUCCESS);
-			return response;
-		};
+		HealthInfo healthInfo = CollectionUtil.getFirst(healthInfoList);
+		BeanUtil.copy(healthInfo, response);
+		response.setHealthInfoRegDate(
+				DateUtil.toString(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 	}
 
 }

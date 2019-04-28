@@ -10,7 +10,7 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
  * 継承先で@Service(value = "サービス実装用のAnnotation") をつけてInjectionすること
  *
  * @param <T>
- *    Excel出力情報設定情報継承クラス
+ *     Excel出力情報設定情報継承クラス
  */
 public interface ExcelDownloadService<T extends BaseExcelComponent> {
 
@@ -23,6 +23,6 @@ public interface ExcelDownloadService<T extends BaseExcelComponent> {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	View execute(T t) throws BaseException;
+	View download(T t) throws BaseException;
 
 }

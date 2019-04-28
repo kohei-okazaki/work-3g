@@ -185,7 +185,7 @@ public class HealthInfoReferController implements BaseWebController {
 		ReferenceExcelComponent component = new ReferenceExcelComponent();
 		component.setUserId(userId);
 		component.setResultList(resultList);
-		return new ModelAndView(excelDownloadService.execute(component));
+		return new ModelAndView(excelDownloadService.download(component));
 	}
 
 	/**
@@ -220,7 +220,7 @@ public class HealthInfoReferController implements BaseWebController {
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {
-			csvDownloadService.execute(response.getWriter(), conf, service.toModelList(userId, resultList));
+			csvDownloadService.download(response.getWriter(), conf, service.toModelList(userId, resultList));
 		} catch (IOException e) {
 			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
 		} catch (BaseException e) {

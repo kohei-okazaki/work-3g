@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.function.ThrowableBiConsumer;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.type.LogLevel;
@@ -34,7 +35,8 @@ import jp.co.ha.web.form.ErrorResponse;
  *     レスポンス
  */
 @RestController
-public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends BaseApiResponse> {
+public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends BaseApiResponse>
+		implements ThrowableBiConsumer<Rq, Rs> {
 
 	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
@@ -63,21 +65,19 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 					error.getMessage() + " " + error.getName() + "=" + error.getValue());
 		}
 
-		Rs response = this.receipt(request);
+		Rs response = getApiResponse();
+
+		this.accept(request, response);
 
 		return response;
 	}
 
 	/**
-	 * リクエストを受付処理を行い、レスポンスを返却する
+	 * APIレスポンスを返す
 	 *
-	 * @param request
-	 *     リクエスト
-	 * @return response
-	 * @throws BaseException
-	 *     基底例外
+	 * @return APIレスポンス
 	 */
-	protected abstract Rs receipt(Rq request) throws BaseException;
+	protected abstract Rs getApiResponse();
 
 	/**
 	 * JSONで例外が起きた場合のエラーハンドリング
@@ -100,8 +100,10 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 		} else if (e instanceof JsonProcessingException) {
 			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, "JSON生成処理が失敗しました", e);
 		}
+
 		Rs response = (Rs) new ErrorResponse(baseException);
 		LOG.warnRes(response, baseException);
+
 		return response;
 	}
 
