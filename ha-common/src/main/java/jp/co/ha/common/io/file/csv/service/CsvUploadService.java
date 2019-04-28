@@ -24,6 +24,6 @@ public interface CsvUploadService<T extends BaseCsvModel> {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	List<T> execute(MultipartFile uploadFile) throws BaseException;
+	List<T> upload(MultipartFile uploadFile) throws BaseException;
 
 }

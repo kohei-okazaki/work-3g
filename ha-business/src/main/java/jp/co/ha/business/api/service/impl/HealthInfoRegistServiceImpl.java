@@ -20,12 +20,10 @@ import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.function.ThrowableFunction;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.web.type.ResultType;
 
 /**
  * 健康情報登録サービス実装クラス
@@ -64,7 +62,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse execute(HealthInfoRegistRequest request) throws BaseException {
+	public void execute(HealthInfoRegistRequest request, HealthInfoRegistResponse response) throws BaseException {
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
@@ -81,7 +79,9 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		// Entityの登録処理を行う
 		healthInfoCreateService.create(entity);
 
-		return toResponse().apply(entity);
+		BeanUtil.copy(entity, response);
+		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(entity.getUserId());
+		response.setHealthInfoId(lastEntity.getHealthInfoId());
 	}
 
 	/**
@@ -119,23 +119,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		};
 
 		return function;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ThrowableFunction<HealthInfo, HealthInfoRegistResponse> toResponse() throws BaseException {
-
-		return e -> {
-			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
-			BeanUtil.copy(e, response);
-			response.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-			HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(e.getUserId());
-			response.setHealthInfoId(lastEntity.getHealthInfoId());
-			response.setResultType(ResultType.SUCCESS);
-			return response;
-		};
 	}
 
 }

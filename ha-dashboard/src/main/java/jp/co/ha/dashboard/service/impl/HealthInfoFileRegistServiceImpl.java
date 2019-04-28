@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -62,7 +63,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	public void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		for (HealthInfoRegistRequest apiRequest : toRequestList(modelList, userId)) {
 			healthInfoRegistService.checkRequest(apiRequest);
-			healthInfoRegistService.execute(apiRequest);
+			healthInfoRegistService.execute(apiRequest, new HealthInfoRegistResponse());
 		}
 	}
 

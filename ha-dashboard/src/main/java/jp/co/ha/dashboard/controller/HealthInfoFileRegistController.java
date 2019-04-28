@@ -96,7 +96,7 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
 
-		List<HealthInfoCsvUploadModel> modelList = csvUploadService.execute(form.getMultipartFile());
+		List<HealthInfoCsvUploadModel> modelList = csvUploadService.upload(form.getMultipartFile());
 		fileService.formatCheck(modelList, userId);
 		sessionManageService.setValue(request.getSession(), "modelList", modelList);
 		model.addAttribute("modelList", modelList);

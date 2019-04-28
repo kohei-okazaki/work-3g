@@ -33,7 +33,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 * {@inheritDoc}
 	 */
 	@Override
-	public View execute(HealthInfoExcelComponent component) throws BaseException {
+	public View download(HealthInfoExcelComponent component) throws BaseException {
 		HealthInfo healthInfo = component.getHealthInfo();
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService

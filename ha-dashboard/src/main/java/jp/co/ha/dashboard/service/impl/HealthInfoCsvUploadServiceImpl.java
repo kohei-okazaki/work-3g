@@ -23,7 +23,7 @@ public class HealthInfoCsvUploadServiceImpl implements CsvUploadService<HealthIn
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<HealthInfoCsvUploadModel> execute(MultipartFile uploadFile) throws BaseException {
+	public List<HealthInfoCsvUploadModel> upload(MultipartFile uploadFile) throws BaseException {
 		CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
 		List<HealthInfoCsvUploadModel> modelList = reader.readMultipartFile(uploadFile, Charset.UTF_8);
 		return modelList;

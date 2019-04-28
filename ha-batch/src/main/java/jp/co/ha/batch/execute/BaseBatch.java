@@ -16,14 +16,18 @@ public abstract class BaseBatch {
 
 	/**
 	 * 実処理を行う
+	 *
 	 * @return Batch結果
-	 * @throws BaseException 基底例外
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	protected abstract BatchResult execute() throws BaseException;
 
 	/**
 	 * オプションを取得
-	 * @param optionList オプションリスト
+	 *
+	 * @param optionList
+	 *     オプションリスト
 	 */
 	protected abstract Options getOptions(List<String> optionList);
 

@@ -23,13 +23,4 @@ public interface HealthInfoRegistService
 	 */
 	ThrowableFunction<HealthInfoRegistRequest, HealthInfo> toEntity() throws BaseException;
 
-	/**
-	 * 健康情報Entityを健康情報登録レスポンスクラスに変換する
-	 *
-	 * @return ThrowableFunction<HealthInfo, HealthInfoRegistResponse>
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	ThrowableFunction<HealthInfo, HealthInfoRegistResponse> toResponse() throws BaseException;
-
 }

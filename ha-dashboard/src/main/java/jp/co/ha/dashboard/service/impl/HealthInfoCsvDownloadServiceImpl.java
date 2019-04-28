@@ -23,7 +23,7 @@ public class HealthInfoCsvDownloadServiceImpl implements CsvDownloadService<Heal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(PrintWriter pw, CsvConfig conf, List<HealthInfoCsvDownloadModel> modelList)
+	public void download(PrintWriter pw, CsvConfig conf, List<HealthInfoCsvDownloadModel> modelList)
 			throws BaseException {
 		try (CsvWriter<HealthInfoCsvDownloadModel> writer = new HealthInfoCsvWriter(conf, pw)) {
 			// CSVに書込

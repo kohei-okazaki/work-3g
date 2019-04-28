@@ -37,16 +37,15 @@ public class ApiConnectionExecutor {
 	 *     実行時のエラー
 	 */
 	@Around("execution(* *jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
-	public BaseApiResponse outApiLog(ProceedingJoinPoint pjp) throws Throwable {
+	public void outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
-		// リクエストログを出力
+		// Requestログ出力
 		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiRequest).forEach(e -> LOG.infoRes(e));
 
-		// jp.co.ha.business.api.service.impl.*ServiceImpl#execute実行
-		BaseApiResponse response = (BaseApiResponse) pjp.proceed();
-		// レスポンスログを出力
-		LOG.infoRes(response);
-		return response;
+		pjp.proceed();
+
+		// Responseログ出力
+		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiResponse).forEach(e -> LOG.infoRes(e));
 	}
 
 }

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.exception.HealthInfoException;
@@ -71,10 +72,11 @@ public class HealthInfoRegistBatch extends BaseBatch {
 			}
 			service.checkRequest(request);
 
-			// リクエストを送信する
-			service.execute(request);
-		}
+			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
 
+			// リクエストを送信する
+			service.execute(request, response);
+		}
 
 		return BatchResult.SUCCESS;
 	}

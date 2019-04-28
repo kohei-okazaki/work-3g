@@ -14,7 +14,6 @@ import jp.co.ha.common.util.BeanUtil;
 /**
  * Bean読込クラス(batch用)<br>
  * TODO jp.co.ha.common.system.BeanLoader からbeanを取得するように修正する予定
- *
  */
 public class BatchBeanLoader implements ApplicationContextAware {
 
@@ -38,7 +37,8 @@ public class BatchBeanLoader implements ApplicationContextAware {
 	/**
 	 * Beanを取得<br>
 	 * (例)<br>
-	 * AccountSearchService searchService = BatchBeanLoader.getBean(AccountSearchService.class);
+	 * AccountSearchService searchService =
+	 * BatchBeanLoader.getBean(AccountSearchService.class);
 	 *
 	 * @param clazz
 	 *     Beanの型
@@ -54,6 +54,13 @@ public class BatchBeanLoader implements ApplicationContextAware {
 			LOG.warn(clazz.getName() + "のBeanの取得に失敗しました", e);
 			return null;
 		}
+	}
+
+	/**
+	 * Beanを初期化する
+	 */
+	public static void initializeBean() {
+		getContext();
 	}
 
 	private static ApplicationContext getContext() {

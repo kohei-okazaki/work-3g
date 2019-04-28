@@ -168,7 +168,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
 		HealthInfoExcelComponent component = new HealthInfoExcelComponent();
 		component.setHealthInfo(entity);
-		return new ModelAndView(excelDownloadService.execute(component));
+		return new ModelAndView(excelDownloadService.download(component));
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
 
 		try {
-			csvDownloadService.execute(response.getWriter(), conf, modelList);
+			csvDownloadService.download(response.getWriter(), conf, modelList);
 		} catch (IOException e) {
 			throw new AppIOException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
 		} catch (BaseException e) {
