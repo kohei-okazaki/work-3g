@@ -9,13 +9,13 @@ import jp.co.ha.common.type.BaseEnum;
 public enum BatchResult implements BaseEnum {
 
 	/** 正常終了 */
-	SUCCESS("0", "正常終了"),
+	SUCCESS("0", "batch.result.success"),
 	/** 異常終了 */
-	FAILURE("1", "異常終了");
+	FAILURE("1", "batch.result.failure");
 
 	/**
 	 * コンストラクタ
-	 * 
+	 *
 	 * @param value
 	 *     値
 	 * @param comment
