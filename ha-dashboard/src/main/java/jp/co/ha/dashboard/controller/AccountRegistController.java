@@ -73,7 +73,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 			throws BaseException {
 
 		if (result.hasErrors()) {
-			// validatationエラーの場合
 			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
 		}
 
