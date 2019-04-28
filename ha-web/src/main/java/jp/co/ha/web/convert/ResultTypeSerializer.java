@@ -9,8 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import jp.co.ha.web.type.ResultType;
 
 /**
- * JSONのAPIの結果コードのシリアライズクラス<br>
- * ResultTypeを文字列型のJSONに変換する
+ * JSONのAPIの結果コードのシリアライズクラス
  *
  */
 public class ResultTypeSerializer extends JsonSerializer<ResultType> {

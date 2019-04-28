@@ -20,7 +20,6 @@ import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.function.ThrowableFunction;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
@@ -81,7 +80,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		healthInfoCreateService.create(entity);
 
 		BeanUtil.copy(entity, response);
-		response.setHealthInfoRegDate(DateUtil.toString(entity.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(entity.getUserId());
 		response.setHealthInfoId(lastEntity.getHealthInfoId());
 	}

@@ -1,7 +1,9 @@
 package jp.co.ha.business.api.response;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.log.annotation.Mask;
@@ -31,7 +33,8 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	@Mask
 	private BigDecimal standardWeight;
 	/** 健康情報作成日時 */
-	private String healthInfoRegDate;
+	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
+	private Date healthInfoRegDate;
 
 	/**
 	 * healthInfoIdを返す
@@ -152,7 +155,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	 *
 	 * @return healthInfoRegDate
 	 */
-	public String getHealthInfoRegDate() {
+	public Date getHealthInfoRegDate() {
 		return healthInfoRegDate;
 	}
 
@@ -162,7 +165,7 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
 	 * @param healthInfoRegDate
 	 *     健康情報作成日時
 	 */
-	public void setHealthInfoRegDate(String healthInfoRegDate) {
+	public void setHealthInfoRegDate(Date healthInfoRegDate) {
 		this.healthInfoRegDate = healthInfoRegDate;
 	}
 
