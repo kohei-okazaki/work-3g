@@ -10,11 +10,11 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
+import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.dashboard.form.AccountSettingForm;
 import jp.co.ha.dashboard.service.AccountSettingService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.MailInfo;
@@ -46,21 +46,21 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(AccountSettingForm form) throws BaseException {
+	public void execute(AccountDto dto) throws BaseException {
 
-		// アカウント情報を検索し、アカウント情報にフォームをマージする
-		Account befAccount = accountSearchService.findByUserId(form.getUserId());
-		mergeAccount(befAccount, form);
+		// アカウント情報を検索し、アカウント情報をDTOにマージする
+		Account befAccount = accountSearchService.findByUserId(dto.getUserId());
+		mergeAccount(dto, befAccount);
 
 		// メール情報を検索し、メール情報にフォームをマージする
-		MailInfo befMailInfo = mailInfoSearchService.findByUserId(form.getUserId());
+		MailInfo befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
 		if (BeanUtil.notNull(befMailInfo)) {
-			mergeMailInfo(befMailInfo, form);
+			mergeMailInfo(dto, befMailInfo);
 		}
 
 		if (BeanUtil.isNull(befMailInfo)) {
 			// メール情報が登録されてない場合
-			MailInfo mailInfo = convertMailInfo(form);
+			MailInfo mailInfo = convertMailInfo(dto);
 			// メール情報を新規登録する
 			mailInfoCreateService.create(mailInfo);
 			// アカウント情報を更新する
@@ -91,41 +91,41 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	}
 
 	/**
-	 * フォーム情報をアカウント情報にマージする
+	 * アカウントDTOをアカウント情報にマージする
 	 *
+	 * @param dto
+	 *     アカウントDTO
 	 * @param account
 	 *     アカウント情報
-	 * @param form
-	 *     アカウント設定情報フォーム
 	 */
-	private void mergeAccount(Account account, AccountSettingForm form) {
-		BeanUtil.copy(form, account, List.of("userId"));
-		account.setPasswordExpire(DateUtil.toDate(form.getPasswordExpire(), DateFormatType.YYYYMMDD));
+	private void mergeAccount(AccountDto dto, Account account) {
+		BeanUtil.copy(dto, account, List.of("userId"));
+		account.setPasswordExpire(DateUtil.toDate(dto.getPasswordExpire(), DateFormatType.YYYYMMDD));
 	}
 
 	/**
-	 * フォーム情報をメール情報に変換する
+	 * アカウントDTOをメール情報に変換する
 	 *
-	 * @param form
-	 *     アカウント設定情報フォーム
+	 * @param dto
+	 *     アカウントDTO
 	 * @return メール情報
 	 */
-	private MailInfo convertMailInfo(AccountSettingForm form) {
+	private MailInfo convertMailInfo(AccountDto dto) {
 		MailInfo mailInfo = new MailInfo();
-		BeanUtil.copy(form, mailInfo);
+		BeanUtil.copy(dto, mailInfo);
 		return mailInfo;
 	}
 
 	/**
-	 * フォーム情報をメール情報にマージする
+	 * アカウントDTOをメール情報にマージする
 	 *
+	 * @param dto
+	 *     アカウントDTO
 	 * @param mailInfo
 	 *     メール情報
-	 * @param form
-	 *     アカウント設定情報フォーム
 	 */
-	private void mergeMailInfo(MailInfo mailInfo, AccountSettingForm form) {
-		BeanUtil.copy(form, mailInfo, List.of("userId"));
+	private void mergeMailInfo(AccountDto dto, MailInfo mailInfo) {
+		BeanUtil.copy(dto, mailInfo, List.of("userId"));
 	}
 
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
-import jp.co.ha.business.dto.AccountRegistDto;
+import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.annotation.Sha256;
@@ -38,7 +38,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void regist(AccountRegistDto dto) throws BaseException {
+	public void regist(AccountDto dto) throws BaseException {
 		// アカウント情報を作成
 		accountCreateService.create(toAccount(dto));
 		// 健康情報ファイル設定情報を作成
@@ -54,7 +54,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	private Account toAccount(AccountRegistDto dto) throws BaseException {
+	private Account toAccount(AccountDto dto) throws BaseException {
 		Account account = new Account();
 		BeanUtil.copy(dto, account);
 		account.setDeleteFlag(CommonFlag.FALSE.getValue());
@@ -70,7 +70,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 *     アカウント登録DTO
 	 * @return 健康情報ファイル設定
 	 */
-	private HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistDto dto) {
+	private HealthInfoFileSetting toHealthInfoFileSetting(AccountDto dto) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
 		entity.setUserId(dto.getUserId());
 		entity.setEnclosureCharFlag(CommonFlag.FALSE.getValue());

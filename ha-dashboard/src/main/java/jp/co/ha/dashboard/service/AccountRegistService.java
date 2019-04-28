@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.service;
 
-import jp.co.ha.business.dto.AccountRegistDto;
+import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.common.exception.BaseException;
 
 /**
@@ -17,6 +17,6 @@ public interface AccountRegistService {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	void regist(AccountRegistDto dto) throws BaseException;
+	void regist(AccountDto dto) throws BaseException;
 
 }
