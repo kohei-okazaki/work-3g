@@ -24,6 +24,9 @@ api, webで共通的に使うbusinessロジックをまとめたプロジェク�
 * ### ha-common  
 Util, 基底クラスをまとめたプロジェクト  
 
+* ### ha-dashboard  
+健康管理のダッシュボードのプロジェクト  
+
 * ### ha-db  
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
 
