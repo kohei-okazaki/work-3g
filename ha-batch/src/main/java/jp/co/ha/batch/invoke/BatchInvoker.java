@@ -36,13 +36,14 @@ public class BatchInvoker {
 	@SuppressWarnings("unchecked")
 	public static void invoke(String[] args) {
 
-		LOG.info("■■■■■ Batch処理開始 ■■■■■");
+		LOG.debug("■■■■■ Batch処理開始 ■■■■■");
 
 		// Beanの初期化を行う
 		initializeBean();
 
 		String batchName = PACKAGE_PREFIX + args[0];
 		BatchResult batchResult = BatchResult.FAILURE;
+
 		try {
 			// batch名からインスタンスを取得
 			Class<? extends BaseBatch> batch = (Class<? extends BaseBatch>) Class.forName(batchName);
@@ -65,12 +66,12 @@ public class BatchInvoker {
 			batchResult = (BatchResult) executeMethod.invoke(batchInstance);
 
 		} catch (Exception e) {
-			LOG.error("バッチ処理が失敗しました", e);
+			LOG.error(batchName + "が失敗しました", e);
 		} finally {
 			LOG.info(MESSAGE_SOURCE.getMessage(batchResult.getComment(), null, Locale.getDefault()));
 		}
 
-		LOG.info("■■■■■ Batch処理終了 ■■■■■");
+		LOG.debug("■■■■■ Batch処理終了 ■■■■■");
 	}
 
 	/**

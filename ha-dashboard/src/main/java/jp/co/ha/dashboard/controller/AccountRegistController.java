@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.dto.AccountRegistDto;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
@@ -97,8 +98,10 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@PostMapping(value = "/complete")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request) throws BaseException {
 
+		AccountRegistDto dto = new AccountRegistDto();
+		BeanUtil.copy(dto, form);
 		// 登録処理を行う
-		accountRegistService.regist(form);
+		accountRegistService.regist(dto);
 
 		return getView(DashboardView.ACCOUNT_REGIST_COMPLETE);
 	}

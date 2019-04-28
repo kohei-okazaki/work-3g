@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
+import jp.co.ha.business.dto.AccountRegistDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.dashboard.form.AccountRegistForm;
 import jp.co.ha.dashboard.service.AccountRegistService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -38,41 +38,41 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void regist(AccountRegistForm form) throws BaseException {
+	public void regist(AccountRegistDto dto) throws BaseException {
 		// アカウント情報を作成
-		accountCreateService.create(toAccount(form));
+		accountCreateService.create(toAccount(dto));
 		// 健康情報ファイル設定情報を作成
-		healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(form));
+		healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(dto));
 	}
 
 	/**
 	 * アカウント情報に変換する
 	 *
-	 * @param form
-	 *     アカウント登録画面フォーム
+	 * @param dto
+	 *     アカウント登録DTO
 	 * @return アカウント情報Entity
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	private Account toAccount(AccountRegistForm form) throws BaseException {
+	private Account toAccount(AccountRegistDto dto) throws BaseException {
 		Account account = new Account();
-		BeanUtil.copy(form, account);
+		BeanUtil.copy(dto, account);
 		account.setDeleteFlag(CommonFlag.FALSE.getValue());
 		account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
-		account.setApiKey(encoder.encode(form.getPassword(), form.getUserId()));
+		account.setApiKey(encoder.encode(dto.getPassword(), dto.getUserId()));
 		return account;
 	}
 
 	/**
 	 * 健康情報ファイル設定に変換する
 	 *
-	 * @param form
-	 *     アカウント登録画面フォーム
+	 * @param dto
+	 *     アカウント登録DTO
 	 * @return 健康情報ファイル設定
 	 */
-	private HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistForm form) {
+	private HealthInfoFileSetting toHealthInfoFileSetting(AccountRegistDto dto) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
-		entity.setUserId(form.getUserId());
+		entity.setUserId(dto.getUserId());
 		entity.setEnclosureCharFlag(CommonFlag.FALSE.getValue());
 		entity.setHeaderFlag(CommonFlag.FALSE.getValue());
 		entity.setFooterFlag(CommonFlag.FALSE.getValue());

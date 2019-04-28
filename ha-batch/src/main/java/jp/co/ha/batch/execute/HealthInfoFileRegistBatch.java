@@ -16,8 +16,6 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.BatchBeanLoader;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
@@ -30,8 +28,6 @@ import jp.co.ha.common.validator.ValidateErrorResult;
  */
 public class HealthInfoFileRegistBatch extends BaseBatch {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoFileRegistBatch.class);
 	/** 健康情報設定ファイル */
 	private HealthInfoProperties prop = BatchBeanLoader.getBean(HealthInfoProperties.class);
 	/** 健康情報登録APIサービス */
@@ -46,7 +42,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 	@Override
 	public BatchResult execute() throws BaseException {
 
-		LOG.info("execute");
 		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
 		JsonReader reader = new JsonReader();
 		for (File file : FileUtil.getFileList(prop.getHealthInfoRegistBatchFilePath())) {
@@ -80,7 +75,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 	 */
 	@Override
 	public Options getOptions(List<String> optionList) {
-		LOG.info("getOptions");
 		Options options = new Options();
 		return options;
 	}
