@@ -36,7 +36,7 @@ import jp.co.ha.web.form.ErrorResponse;
  */
 @RestController
 public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends BaseApiResponse>
-		implements ThrowableBiConsumer<Rq, Rs> {
+		implements ThrowableBiConsumer<Rq, Rs>, BaseController {
 
 	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());

@@ -3,11 +3,11 @@ package jp.co.ha.web.controller;
 import jp.co.ha.web.view.BaseView;
 
 /**
- * 基底Webコントローラ<br>
- * すべてのwebコントローラはこのインターフェースを継承すること<br>
+ * 基底画面コントローラ<br>
+ * すべての画面のコントローラはこのクラスを継承すること
  *
  */
-public interface BaseWebController {
+public interface BaseWebController extends BaseController {
 
 	/**
 	 * viewを返す
