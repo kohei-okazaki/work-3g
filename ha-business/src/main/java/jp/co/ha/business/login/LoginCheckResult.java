@@ -1,6 +1,6 @@
 package jp.co.ha.business.login;
 
-import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.exception.DashboardErrorCode;
 
 /**
  * ログイン情報チェック結果保持クラス
@@ -11,7 +11,7 @@ public class LoginCheckResult {
 	/** エラーカウント */
 	private int errorCount = 0;
 	/** エラーコード */
-	private WebErrorCode errorCode;
+	private DashboardErrorCode errorCode;
 
 	/**
 	 * エラーが存在するかどうかを返す
@@ -34,7 +34,7 @@ public class LoginCheckResult {
 	 *
 	 * @return errorCode
 	 */
-	public WebErrorCode getErrorCode() {
+	public DashboardErrorCode getErrorCode() {
 		return errorCode;
 	}
 
@@ -44,7 +44,7 @@ public class LoginCheckResult {
 	 * @param errorCode
 	 *     エラーコード
 	 */
-	public void setErrorCode(WebErrorCode errorCode) {
+	public void setErrorCode(DashboardErrorCode errorCode) {
 		this.errorCode = errorCode;
 	}
 

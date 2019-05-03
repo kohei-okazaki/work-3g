@@ -1,6 +1,7 @@
 package jp.co.ha.web.form;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jp.co.ha.web.convert.ResultTypeSerializer;
@@ -10,6 +11,7 @@ import jp.co.ha.web.type.ResultType;
  * API基底レスポンス
  *
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public abstract class BaseApiResponse implements BaseForm {
 
 	/**

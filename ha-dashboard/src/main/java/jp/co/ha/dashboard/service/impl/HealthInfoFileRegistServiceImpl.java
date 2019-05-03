@@ -13,7 +13,7 @@ import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
@@ -50,7 +50,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			ValidateErrorResult result = validator.validate(model);
 			if (result.hasError()) {
 				ValidateError error = result.getFirst();
-				throw new BusinessException(WebErrorCode.REQUEST_INFO_ERROR,
+				throw new BusinessException(DashboardErrorCode.REQUEST_INFO_ERROR,
 						++i + "行目のファイルフォーマットが不正です " + error.getMessage());
 			}
 		}

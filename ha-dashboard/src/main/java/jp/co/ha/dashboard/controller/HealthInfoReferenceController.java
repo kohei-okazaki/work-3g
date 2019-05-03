@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
-import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.BaseException;
@@ -179,10 +179,10 @@ public class HealthInfoReferenceController implements BaseWebController {
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		List<HealthInfoReferenceDto> referList = sessionService
 				.getValue(request.getSession(), "resultList", List.class)
-				.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 
 		if (CollectionUtil.isEmpty(referList)) {
-			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		ReferenceExcelComponent component = new ReferenceExcelComponent();
 		component.setUserId(userId);
@@ -206,11 +206,11 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		HttpSession session = request.getSession();
 		List<HealthInfoReferenceDto> resultList = sessionService.getValue(session, "resultList", List.class)
-				.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionService.getValue(session, "userId", String.class).get();
 
 		if (CollectionUtil.isEmpty(resultList)) {
-			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 
 		// CSV設定情報取得

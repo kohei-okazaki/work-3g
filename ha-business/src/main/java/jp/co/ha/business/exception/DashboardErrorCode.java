@@ -8,7 +8,7 @@ import jp.co.ha.common.type.BaseEnum;
  * WEBのエラーコード列挙
  *
  */
-public enum WebErrorCode implements BaseErrorCode, BaseEnum {
+public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
 
 	/* ERROR */
 
@@ -40,7 +40,7 @@ public enum WebErrorCode implements BaseErrorCode, BaseEnum {
 	 * @param logLevel
 	 *     ログレベル
 	 */
-	private WebErrorCode(String value, String outerErrorCode, LogLevel logLevel) {
+	private DashboardErrorCode(String value, String outerErrorCode, LogLevel logLevel) {
 		this.value = value;
 		this.outerErrorCode = outerErrorCode;
 		this.logLevel = logLevel;
@@ -83,7 +83,7 @@ public enum WebErrorCode implements BaseErrorCode, BaseEnum {
 	 *     値
 	 * @return WebErrorCode
 	 */
-	public static WebErrorCode of(String value) {
-		return BaseEnum.of(WebErrorCode.class, value);
+	public static DashboardErrorCode of(String value) {
+		return BaseEnum.of(DashboardErrorCode.class, value);
 	}
 }

@@ -1,6 +1,6 @@
 package jp.co.ha.business.login;
 
-import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -64,7 +64,7 @@ public class LoginCheck {
 	private void checkExistAccount(LoginCheckResult result, Account account) {
 		if (BeanUtil.isNull(account)) {
 			result.addError();
-			result.setErrorCode(WebErrorCode.ACCOUNT_ILLEGAL);
+			result.setErrorCode(DashboardErrorCode.ACCOUNT_ILLEGAL);
 		}
 	}
 
@@ -81,7 +81,7 @@ public class LoginCheck {
 	private void checkInvalidPassword(LoginCheckResult result, String inputPassword, String dbPassword) {
 		if (!inputPassword.equals(dbPassword)) {
 			result.addError();
-			result.setErrorCode(WebErrorCode.ACCOUNT_INVALID_PASSWORD);
+			result.setErrorCode(DashboardErrorCode.ACCOUNT_INVALID_PASSWORD);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class LoginCheck {
 	private void checkDeleteAccount(LoginCheckResult result, Account account) {
 		if (CommonFlag.TRUE.is(account.getDeleteFlag())) {
 			result.addError();
-			result.setErrorCode(WebErrorCode.ACCOUNT_DELETE);
+			result.setErrorCode(DashboardErrorCode.ACCOUNT_DELETE);
 		}
 	}
 
@@ -113,7 +113,7 @@ public class LoginCheck {
 	private void checkAccountExpired(LoginCheckResult result, Account account) {
 		if (DateUtil.isAfter(account.getPasswordExpire(), false)) {
 			result.addError();
-			result.setErrorCode(WebErrorCode.ACCOUNT_EXPIRED);
+			result.setErrorCode(DashboardErrorCode.ACCOUNT_EXPIRED);
 		}
 	}
 
