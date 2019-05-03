@@ -20,7 +20,7 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.interceptor.BaseWebInterceptor;
 
 /**
- * 認証チェックを行うインターセプター
+ * ダッシュボード認証チェックを行うインターセプター
  * <ul>
  * <li>ログイン認証チェック</li>
  * <li>CSRFトークンチェック</li>
