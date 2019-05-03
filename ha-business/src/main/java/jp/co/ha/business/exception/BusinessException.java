@@ -4,10 +4,10 @@ import jp.co.ha.common.exception.BaseErrorCode;
 import jp.co.ha.common.exception.BaseException;
 
 /**
- * アカウント設定例外クラス
+ * 業務処理による例外クラス
  *
  */
-public class AccountSettingException extends BaseException {
+public class BusinessException extends BaseException {
 
 	/** シリアルバージョンUID */
 	private static final long serialVersionUID = 1L;
@@ -18,7 +18,7 @@ public class AccountSettingException extends BaseException {
 	 * @param e
 	 *     例外クラス
 	 */
-	public AccountSettingException(Exception e) {
+	public BusinessException(Exception e) {
 		super(e);
 	}
 
@@ -30,7 +30,7 @@ public class AccountSettingException extends BaseException {
 	 * @param detail
 	 *     詳細
 	 */
-	public AccountSettingException(BaseErrorCode errorCode, String detail) {
+	public BusinessException(BaseErrorCode errorCode, String detail) {
 		super(errorCode, detail);
 	}
 
@@ -44,7 +44,8 @@ public class AccountSettingException extends BaseException {
 	 * @param e
 	 *     例外クラス
 	 */
-	public AccountSettingException(BaseErrorCode errorCode, String detail, Exception e) {
+	public BusinessException(BaseErrorCode errorCode, String detail, Exception e) {
 		super(errorCode, detail, e);
 	}
+
 }

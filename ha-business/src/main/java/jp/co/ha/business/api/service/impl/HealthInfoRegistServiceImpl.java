@@ -14,7 +14,7 @@ import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
-import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
@@ -53,7 +53,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 
 		// リクエスト種別チェック
 		if (!RequestType.HEALTH_INFO_REGIST.is(request.getRequestType())) {
-			throw new HealthInfoException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
+			throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
 					"リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 	}
@@ -67,7 +67,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
-			throw new HealthInfoException(WebErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+			throw new BusinessException(WebErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
 		}
 
 		// API利用判定
