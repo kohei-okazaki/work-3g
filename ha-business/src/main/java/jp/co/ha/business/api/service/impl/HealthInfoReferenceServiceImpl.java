@@ -13,7 +13,7 @@ import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
-import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -44,14 +44,14 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 
 		// リクエスト種別チェック
 		if (!RequestType.HEALTH_INFO_REFERENCE.is(request.getRequestType())) {
-			throw new HealthInfoException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
+			throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
 					"リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
-			throw new HealthInfoException(WebErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+			throw new BusinessException(WebErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
 		}
 
 		// API利用判定
@@ -67,10 +67,10 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(),
 				request.getUserId());
 		if (CollectionUtil.isEmpty(healthInfoList)) {
-			throw new HealthInfoException(CommonErrorCode.DB_NO_DATA,
+			throw new BusinessException(CommonErrorCode.DB_NO_DATA,
 					"該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
 		} else if (CollectionUtil.isMultiple(healthInfoList)) {
-			throw new HealthInfoException(CommonErrorCode.MULTIPLE_DATA,
+			throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
 					"データが複数存在します 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
 		}
 

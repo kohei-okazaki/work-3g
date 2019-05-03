@@ -14,8 +14,6 @@ public enum DashboardView implements BaseView {
 	TOP("login/top"),
 	/** エラー画面 */
 	ERROR("error/index"),
-	/** システムエラー画面 */
-	SYSTEM_ERROR("error/systemError"),
 
 	/** 健康情報入力画面 */
 	HEALTH_INFO_INPUT("healthInfo/input"),

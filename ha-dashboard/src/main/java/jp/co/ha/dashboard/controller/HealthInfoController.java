@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.WebErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
@@ -163,7 +163,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
-			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "session情報が不正です");
+			throw new BusinessException(WebErrorCode.REQUEST_INFO_ERROR, "session情報が不正です");
 		}
 		HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
 		HealthInfoExcelComponent component = new HealthInfoExcelComponent();
@@ -192,7 +192,7 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
-			throw new HealthInfoException(WebErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+			throw new BusinessException(WebErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
 		}
 
 		// CSV出力モデルリストに変換する

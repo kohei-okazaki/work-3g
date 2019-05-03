@@ -11,7 +11,7 @@ import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
-import jp.co.ha.business.exception.HealthInfoException;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -56,7 +56,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 			ValidateErrorResult result = validator.validate(request);
 			if (result.hasError()) {
 				ValidateError error = result.getFirst();
-				throw new HealthInfoException(CommonErrorCode.VALIDATE_ERROR,
+				throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
 						error.getMessage() + " " + error.getName() + "=" + error.getValue());
 			}
 			service.checkRequest(request);
