@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
@@ -52,15 +52,15 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 		if (isLoginAuthCheck(handler)) {
 			// ログイン情報のチェック対象の場合
 			sessionService.getValue(request.getSession(), "userId", String.class)
-					.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+					.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 		}
 
 		if (isCsrfTokenCheck(handler)) {
 			// CSRFトークンチェックを行う
 			String sessionCsrfToken = sessionService.getValue(request.getSession(), "csrfToken", String.class)
-					.orElseThrow(() -> new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+					.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 			if (StringUtil.isEmpty(sessionCsrfToken)) {
-				throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです");
+				throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです");
 			}
 		}
 		return true;

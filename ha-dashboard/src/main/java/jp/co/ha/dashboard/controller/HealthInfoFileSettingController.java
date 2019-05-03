@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoFileSettingDto;
-import jp.co.ha.business.exception.WebErrorCode;
+import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
@@ -113,7 +113,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 		if (!userId.equals(form.getUserId())) {
-			throw new SystemException(WebErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
+			throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		HealthInfoFileSettingDto dto = new HealthInfoFileSettingDto();
 		BeanUtil.copy(form, dto);
