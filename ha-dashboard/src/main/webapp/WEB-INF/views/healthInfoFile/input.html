@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>健康アプリ_健康情報ファイル入力画面</title>
+<title>健康アプリ_健康情報一括登録画面</title>
 <link rel="icon" type="image/png" href="../resources/image/favicon.png" th:href="@{/resources/image/favicon.png}">
 <link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
@@ -22,7 +22,7 @@
   <!--/* 入力画面 */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
-      <img class="headericon" alt="健康情報ファイル入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">健康情報ファイル入力画面
+      <img class="headericon" alt="健康情報一括登録画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">健康情報一括登録画面
     </h2>
     <form action="./confirm" id="healthInfoFileForm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
