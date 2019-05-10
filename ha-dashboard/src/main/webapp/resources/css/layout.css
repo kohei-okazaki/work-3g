@@ -8,6 +8,10 @@
   padding: 5px;
 }
 
+.appTitle:hover {
+  cursor: pointer;
+}
+
 /* 戻るボタン */
 .browseBack {
   width: 20px;
@@ -61,6 +65,3 @@ th.data, td.data {
   padding: 5px 10px;
 }
 
-.menuTitle:hover {
-  cursor: pointer;
-}
