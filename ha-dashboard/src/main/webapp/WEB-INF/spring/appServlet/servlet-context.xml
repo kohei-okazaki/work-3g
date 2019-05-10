@@ -20,7 +20,7 @@
   <!-- business -->
   <import resource="classpath:business-context.xml" />
 
-  <bean id="webExceptionHandler" class="jp.co.ha.dashboard.exception.WebExceptionHandler" />
+  <bean id="dashboardExceptionHandler" class="jp.co.ha.dashboard.exception.DashboardExceptionHandler" />
 
   <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
@@ -126,14 +127,17 @@ public class HealthInfoController implements BaseWizardController<HealthInfoForm
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
 
+		HealthInfoDto dto = new HealthInfoDto();
+		BeanUtil.copy(form, dto);
+
 		if (!isFirstReg) {
 			// 初回登録でない場合
 			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
-			healthInfoService.addModel(model, form, lastHealthInfo);
+			healthInfoService.addModel(model, dto, lastHealthInfo);
 		}
 
 		// 健康情報登録処理を行う
-		HealthInfoRegistResponse apiResponse = healthInfoService.regist(form, userId);
+		HealthInfoRegistResponse apiResponse = healthInfoService.regist(dto, userId);
 
 		// レスポンス情報をformに設定
 		BeanUtil.copy(apiResponse, form);

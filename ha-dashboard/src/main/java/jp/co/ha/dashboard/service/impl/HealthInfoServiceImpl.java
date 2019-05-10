@@ -16,6 +16,7 @@ import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
@@ -28,7 +29,6 @@ import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.dashboard.form.HealthInfoForm;
 import jp.co.ha.dashboard.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
@@ -61,10 +61,10 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addModel(Model model, HealthInfoForm form, HealthInfo lastHealthInfo) {
+	public void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo) {
 		model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
-		model.addAttribute("diffWeight", getDiffWeight(form, lastHealthInfo));
-		model.addAttribute("resultMessage", getDiffMessage(form, lastHealthInfo));
+		model.addAttribute("diffWeight", getDiffWeight(dto, lastHealthInfo));
+		model.addAttribute("resultMessage", getDiffMessage(dto, lastHealthInfo));
 	}
 
 	/**
@@ -91,9 +91,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException {
+	public HealthInfoRegistResponse regist(HealthInfoDto dto, String userId) throws BaseException {
 
-		HealthInfoRegistRequest apiRequest = setUpApiRequest(form, userId);
+		HealthInfoRegistRequest apiRequest = setUpApiRequest(dto, userId);
 		healthInfoRegistService.checkRequest(apiRequest);
 		HealthInfoRegistResponse apiResponse = new HealthInfoRegistResponse();
 		healthInfoRegistService.execute(apiRequest, apiResponse);
@@ -123,14 +123,14 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/**
 	 * 体重差メッセージを返す
 	 *
-	 * @param form
-	 *     健康情報入力フォーム
+	 * @param dto
+	 *     健康情報DTO
 	 * @param healthInfo
 	 *     健康情報
 	 * @return 体重差メッセージ
 	 */
-	private String getDiffMessage(HealthInfoForm form, HealthInfo healthInfo) {
-		HealthInfoStatus status = healthInfoCalcService.getHealthInfoStatus().apply(form.getWeight(),
+	private String getDiffMessage(HealthInfoDto dto, HealthInfo healthInfo) {
+		HealthInfoStatus status = healthInfoCalcService.getHealthInfoStatus().apply(dto.getWeight(),
 				healthInfo.getWeight());
 		return messageSource.getMessage(status.getMessage(), null, Locale.getDefault());
 	}
@@ -138,30 +138,30 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/**
 	 * 体重差を返す
 	 *
-	 * @param form
-	 *     健康情報入力フォーム
+	 * @param dto
+	 *     健康情報DTO
 	 * @param healthInfo
 	 *     健康情報
 	 * @return 体重差
 	 */
-	private BigDecimal getDiffWeight(HealthInfoForm form, HealthInfo healthInfo) {
-		return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(), form.getWeight());
+	private BigDecimal getDiffWeight(HealthInfoDto dto, HealthInfo healthInfo) {
+		return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(), dto.getWeight());
 	}
 
 	/**
 	 * 健康情報登録APIリクエストの設定を行う
 	 *
-	 * @param form
-	 *     健康情報入力フォーム
+	 * @param dto
+	 *     健康情報DTO
 	 * @param userId
 	 *     ユーザID
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	private HealthInfoRegistRequest setUpApiRequest(HealthInfoForm form, String userId) throws BaseException {
+	private HealthInfoRegistRequest setUpApiRequest(HealthInfoDto dto, String userId) throws BaseException {
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
-		// フォーム情報をリクエストクラスにコピー
-		BeanUtil.copy(form, apiRequest);
+		// フォーム情報DTOをリクエストクラスにコピー
+		BeanUtil.copy(dto, apiRequest);
 		apiRequest.setUserId(userId);
 		// リクエストタイプ設定
 		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
