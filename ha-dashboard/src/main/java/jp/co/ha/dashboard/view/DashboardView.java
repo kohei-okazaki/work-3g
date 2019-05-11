@@ -51,7 +51,10 @@ public enum DashboardView implements BaseView {
 	/** 健康情報ファイル設定確認画面 */
 	HEALTH_INFO_FILE_SETTING_CONFIRM("healthInfoFileSetting/confirm"),
 	/** 健康情報ファイル設定入力完了画面 */
-	HEALTH_INFO_FILE_SETTING_COMPLETE("healthInfoFileSetting/complete");
+	HEALTH_INFO_FILE_SETTING_COMPLETE("healthInfoFileSetting/complete"),
+
+	/** カロリー計算画面 */
+	CALORIE_CALC("calorieCalc/index");
 
 	private String name;
 
