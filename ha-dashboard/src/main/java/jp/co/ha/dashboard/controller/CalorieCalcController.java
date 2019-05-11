@@ -57,7 +57,7 @@ public class CalorieCalcController implements BaseWebController {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@PostMapping(value = "/calc")
+	@PostMapping(value = "/index")
 	public String calc(Model model, @Valid CalorieCalcForm form, BindingResult result) throws BaseException {
 
 		if (result.hasErrors()) {

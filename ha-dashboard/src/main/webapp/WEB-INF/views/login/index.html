@@ -42,35 +42,47 @@
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
   <script type="text/javascript" src="../resources/js/accountRegist.js" th:src="@{/resources/js/accountRegist.js}"></script>
   <script type="text/javascript">
+    // validate処理
     $(function() {
       jQuery("#loginForm").validationEngine({
         promptPosition : "topLeft:0"
       });
-    });
-    var mprogress = new Mprogress();
-    $("#userId").change(function() {
-      var value = 0;
-      if ($("#userId").val() !== "") {
-        value += 1;
-      }
-      if ($("#password").val() !== "") {
-        value += 1;
-      }
-      var progressValue = value / 2;
-      mprogress.set(progressValue);
-    });
-    $("#password").change(function() {
-      var value = 0;
-      if ($("#userId").val() !== "") {
-        value += 1;
-      }
-      if ($("#password").val() !== "") {
-        value += 1;
-      }
-      var progressValue = value / 2;
-      mprogress.set(progressValue);
-    });
-  </script>
 
+      // 進捗バーの処理
+      var mprogress = new Mprogress();
+      $("#userId").change(function() {
+        var value = 0;
+        if ($("#userId").val() !== "") {
+          value += 1;
+        }
+        if ($("#password").val() !== "") {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+      $("#password").change(function() {
+        var value = 0;
+        if ($("#userId").val() !== "") {
+          value += 1;
+        }
+        if ($("#password").val() !== "") {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+
+      // アカウント登録処理
+      function accountRegist() {
+        var form = document.createElement('form');
+        form.action = '../accountRegist/input';
+        form.method = 'get';
+        document.body.appendChild(form);
+        form.submit();
+      }
+    });
+
+  </script>
 </body>
 </html>

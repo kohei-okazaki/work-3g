@@ -48,6 +48,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 			// 静的リソースの場合は認証不要
 			return true;
 		}
+		String s = request.getMethod();
 
 		if (isLoginAuthCheck(handler)) {
 			// ログイン情報のチェック対象の場合
@@ -92,7 +93,11 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 	}
 
 	/**
-	 * ログイン情報をチェックするかどうかを返す
+	 * ログイン情報をチェックするかどうかを返す<br>
+	 * <ul>
+	 * <li>ログイン情報をチェックする場合、true</li>
+	 * <li>ログイン情報をチェックしない場合、false</li>
+	 * </ul>
 	 *
 	 * @param handler
 	 *     ハンドラー

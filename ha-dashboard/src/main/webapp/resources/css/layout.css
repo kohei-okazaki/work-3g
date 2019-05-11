@@ -8,6 +8,12 @@
   padding: 5px;
 }
 
+/* 注意文言の設定 */
+.attention {
+  color: #ff8080;
+  font-size: 60%;
+}
+
 .appTitle:hover {
   cursor: pointer;
 }

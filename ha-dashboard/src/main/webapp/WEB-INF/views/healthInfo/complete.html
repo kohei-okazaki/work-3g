@@ -18,7 +18,7 @@
 
   <div th:replace="./common/navigation.html"></div>
 
-  <!--/* 完了画面 */-->
+  <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
       <img class="headericon" alt="確認" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">健康情報入力完了画面
@@ -31,6 +31,7 @@
       <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
     </div>
 
+    <!--/* contentLayout部ここから */-->
     <div class="contentLayout">
       <table class="data">
         <tr class="data">
@@ -76,7 +77,7 @@
               </div>
             </form>
           </td>
-          <td>　　</td>
+          <td>&ensp;&ensp;</td>
           <td>
             <!--/* CSV出力 */-->
             <form action="./csvDownload" th:action="@{./csvDownload}" method="get" th:object="${healthInfoForm}">
@@ -86,7 +87,7 @@
               </div>
             </form>
           </td>
-          <td>　　</td>
+          <td>&ensp;&ensp;</td>
           <td>
             <!--/* TOP画面へ */-->
             <form action="../login/top" th:action="@{/login/top}" method="get">
@@ -98,7 +99,9 @@
         </tr>
       </table>
     </div>
+    <!--/* contentLayout部ここまで */-->
   </div>
+  <!--/* contentLayout部ここまで */-->
 
   <div th:replace="layout/layout :: footer"></div>
 

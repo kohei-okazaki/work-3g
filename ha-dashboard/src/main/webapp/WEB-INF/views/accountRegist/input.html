@@ -15,7 +15,7 @@
 
   <div th:replace="layout/layout :: header"></div>
 
-  <!--/* 入力画面 */-->
+  <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
       <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">アカウント登録入力画面
@@ -46,9 +46,7 @@
           <td>
             <input type="submit" value="確 認" />
           </td>
-          <td>
-            <label>　　</label>
-          </td>
+          <td>&ensp;&ensp;</td>
           <td>
             <input type="reset" class="reset" value="リセット" />
           </td>
@@ -56,6 +54,8 @@
       </table>
     </form>
   </div>
+  <!--/* contentLayout部ここまで */-->
+
   <div th:replace="layout/layout :: footer"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
@@ -66,60 +66,65 @@
   <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script type="text/javascript">
     $(function() {
+      // validate処理
       jQuery("#accountRegistForm").validationEngine({
         promptPosition : "topLeft:80"
       });
+
+      // アカウント登録画面⇒TOP画面には遷移できないようにする
+      $(".appTitle").removeAttr("onclick");
+
+      $("input.reset").click(function() {
+        $("#userId").val("");
+        $("#password").val("");
+        $("#confirmPassword").val("");
+      });
+
+      var mprogress = new Mprogress();
+      $("#userId").change(function() {
+        var value = 0;
+        if ($('#userId').val() !== '') {
+          value += 1;
+        }
+        if ($('#password').val() !== '') {
+          value += 1;
+        }
+        if ($('#confirmPassword').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 3;
+        mprogress.set(progressValue);
+      });
+      $("#password").change(function() {
+        var value = 0;
+        if ($('#userId').val() !== '') {
+          value += 1;
+        }
+        if ($('#password').val() !== '') {
+          value += 1;
+        }
+        if ($('#confirmPassword').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 3;
+        mprogress.set(progressValue);
+      });
+      $("#confirmPassword").change(function() {
+        var value = 0;
+        if ($('#userId').val() !== '') {
+          value += 1;
+        }
+        if ($('#password').val() !== '') {
+          value += 1;
+        }
+        if ($('#confirmPassword').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 3;
+        mprogress.set(progressValue);
+      });
     });
 
-    $("input.reset").click(function() {
-      $("#userId").val("");
-      $("#password").val("");
-      $("#confirmPassword").val("");
-    });
-
-    var mprogress = new Mprogress();
-    $("#userId").change(function() {
-      var value = 0;
-      if ($('#userId').val() !== '') {
-        value += 1;
-      }
-      if ($('#password').val() !== '') {
-        value += 1;
-      }
-      if ($('#confirmPassword').val() !== '') {
-        value += 1;
-      }
-      var progressValue = value / 3;
-      mprogress.set(progressValue);
-    });
-    $("#password").change(function() {
-      var value = 0;
-      if ($('#userId').val() !== '') {
-        value += 1;
-      }
-      if ($('#password').val() !== '') {
-        value += 1;
-      }
-      if ($('#confirmPassword').val() !== '') {
-        value += 1;
-      }
-      var progressValue = value / 3;
-      mprogress.set(progressValue);
-    });
-    $("#confirmPassword").change(function() {
-      var value = 0;
-      if ($('#userId').val() !== '') {
-        value += 1;
-      }
-      if ($('#password').val() !== '') {
-        value += 1;
-      }
-      if ($('#confirmPassword').val() !== '') {
-        value += 1;
-      }
-      var progressValue = value / 3;
-      mprogress.set(progressValue);
-    });
   </script>
 </body>
 </html>

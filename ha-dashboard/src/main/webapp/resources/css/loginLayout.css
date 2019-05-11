@@ -81,12 +81,13 @@ input[type="submit"], input[type="button"] {
   text-decoration: none;
   color: #FFFFFF;
   background: #71f145;
-  border: solid 5px #15df15;
+  border: solid 5px #71f145;
   border-radius: 3px;
   transition: .6s;
 }
 
 input[type="submit"]:hover, input[type="button"]:hover {
-  background: #80ff80;
-  box-shadow: none;
+  background: #FFFFFF;
+  color: #32cd32;
+  transform: translateY(2px);
 }

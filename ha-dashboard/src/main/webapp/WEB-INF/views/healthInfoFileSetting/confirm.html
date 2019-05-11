@@ -17,11 +17,12 @@
 
   <div th:replace="./common/navigation.html"></div>
 
+  <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
       <img class="headericon" alt="ファイル設定入力確認画面" src="../resources/image/icon_reference.png" th:src="@{/resources/image/icon_reference.png}">ファイル設定入力確認画面
     </h2>
-    <!--/* 確認画面 */-->
+
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${healthInfoFileSettingForm}">
       <table class="data">
         <tr class="data">
@@ -108,6 +109,7 @@
       </table>
     </form>
   </div>
+  <!--/* contentLayout部ここまで */-->
 
   <div th:replace="layout/layout :: footer"></div>
 
