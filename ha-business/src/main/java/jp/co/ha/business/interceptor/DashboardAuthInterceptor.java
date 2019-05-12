@@ -48,7 +48,6 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 			// 静的リソースの場合は認証不要
 			return true;
 		}
-		String s = request.getMethod();
 
 		if (isLoginAuthCheck(handler)) {
 			// ログイン情報のチェック対象の場合
