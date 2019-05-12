@@ -65,7 +65,7 @@
         </li>
         <li><a class="navigation" href="#">規約</a>
           <ul>
-            <li><a id="service-modal-open" class="service-button-link">利用規約</a></li>
+            <li><a id="service-modal" class="navigation">利用規約</a></li>
           </ul>
         </li>
       </ul>
@@ -99,9 +99,6 @@
   <!-- APIリファレンス-健康情報照会のモーダルを描画 -->
   <div th:replace="./common/apiReferenceResponseModal.html"></div>
 
-
-  <!-- 利用規約のモーダルを描画 -->
-  <div th:replace="./common/serviceModal.html"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/bmiModal.min.js" th:src="@{/resources/js/common/bmiModal.min.js}"></script>

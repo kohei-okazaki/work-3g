@@ -117,11 +117,12 @@
         // モーダルウィンドウを表示
         $("#calorie-modal-bg,#calorie-modal-content").fadeIn("slow");
 
-        // 画面のどこかをクリックしたらモーダルを閉じる
+        // 背景のどこかをクリックしたらモーダルを閉じる
         $("#calorie-modal-bg").on("click", function() {
           $("#calorie-modal-content,#calorie-modal-bg").fadeOut("slow", function() {
-            // 挿入した<div id="calorie-modal-bg"></div>を削除
+            // modalを削除
             $('#calorie-modal-bg').remove();
+            $('#calorie-modal-content').remove();
           });
         });
 
