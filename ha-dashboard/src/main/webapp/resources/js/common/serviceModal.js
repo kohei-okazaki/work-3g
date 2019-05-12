@@ -23,7 +23,7 @@ $(function() {
     $("#service-modal-content").css({
       "display" : "none",
       "width" : "500px",
-      "height" : "300px",
+      "height" : "auto",
       "margin" : "0",
       "padding" : "0",
       "background-color" : "#ffffff",
