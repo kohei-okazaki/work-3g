@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.springframework.stereotype.Service;
+
 import jp.co.ha.business.calc.BmiCalcFunction;
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
@@ -16,6 +18,7 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
  * 計算サービス実装クラス
  *
  */
+@Service
 public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 
 	/**
