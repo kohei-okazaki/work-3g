@@ -15,10 +15,10 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
- * 画面例外ハンドラー
+ * ダッシュボード例外ハンドラー
  *
  */
-public class WebExceptionHandler implements BaseExceptionHandler {
+public class DashboardExceptionHandler implements BaseExceptionHandler {
 
 	/** MessageSource */
 	@Autowired

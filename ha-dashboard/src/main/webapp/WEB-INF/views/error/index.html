@@ -13,6 +13,7 @@
 
   <div th:replace="layout/layout :: header"></div>
 
+  <!--/* contentLayout部ここから */-->
   <div class="contentLayout" align="center">
     <h2 class="menuTitle">
       <img class="headericon" alt="エラー画面" src="../resources/image/icon_error.png" th:src="@{/resources/image/icon_error.png}">エラー画面
@@ -23,6 +24,7 @@
     <p class="errorMessage" th:text="${errorMessage}"></p>
     <br><br><br><br><br><br><br>
   </div>
+  <!--/* contentLayout部ここまで */-->
 
   <div th:replace="layout/layout :: footer"></div>
 

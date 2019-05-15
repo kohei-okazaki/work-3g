@@ -33,8 +33,8 @@ public class RequestInterceptor extends BaseWebInterceptor {
 		}
 
 		Method method = ((HandlerMethod) handler).getMethod();
-		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName() + "["
-				+ request.getRequestURI() + "]");
+		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName() + "[URI:"
+				+ request.getRequestURI() + ",METHOD:" + request.getMethod() + "]");
 
 		return true;
 	}

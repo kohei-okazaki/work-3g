@@ -99,6 +99,8 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 					e.getLocation().getColumnNr() + "行目がjson形式ではありません", e);
 		} else if (e instanceof JsonProcessingException) {
 			baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR, "JSON生成処理が失敗しました", e);
+		} else {
+			baseException = new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "JSON生成で予期せぬエラーが発生しました", e);
 		}
 
 		Rs response = (Rs) new ErrorResponse(baseException);

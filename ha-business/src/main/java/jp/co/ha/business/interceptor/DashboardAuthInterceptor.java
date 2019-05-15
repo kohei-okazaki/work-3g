@@ -92,7 +92,11 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 	}
 
 	/**
-	 * ログイン情報をチェックするかどうかを返す
+	 * ログイン情報をチェックするかどうかを返す<br>
+	 * <ul>
+	 * <li>ログイン情報をチェックする場合、true</li>
+	 * <li>ログイン情報をチェックしない場合、false</li>
+	 * </ul>
 	 *
 	 * @param handler
 	 *     ハンドラー

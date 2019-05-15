@@ -32,7 +32,7 @@ import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWizardController;
 
 /**
- * 健康情報ファイル登録画面コントローラ
+ * 健康情報一括登録画面コントローラ
  *
  */
 @Controller

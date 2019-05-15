@@ -8,6 +8,16 @@
   padding: 5px;
 }
 
+/* 注意文言の設定 */
+.attention {
+  color: #ff8080;
+  font-size: 60%;
+}
+
+.appTitle:hover {
+  cursor: pointer;
+}
+
 /* 戻るボタン */
 .browseBack {
   width: 20px;
@@ -61,6 +71,3 @@ th.data, td.data {
   padding: 5px 10px;
 }
 
-.menuTitle:hover {
-  cursor: pointer;
-}

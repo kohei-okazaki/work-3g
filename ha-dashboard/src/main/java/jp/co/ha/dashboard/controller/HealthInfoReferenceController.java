@@ -133,6 +133,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
 		BeanUtil.copy(form, dto);
+		dto.setHealthInfoId(Integer.valueOf(form.getHealthInfoId()));
 		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto, userId);
 
 		// 検索情報を設定

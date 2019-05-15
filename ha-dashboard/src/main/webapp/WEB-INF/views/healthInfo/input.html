@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <!--/* 入力画面 */-->
+  <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
       <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">健康情報入力画面
@@ -35,10 +35,10 @@
     <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{height}" required placeholder="身長" />　cm
+      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{height}" required placeholder="身長" />&ensp;cm
       <p class="attention">※半角数字とピリオドで入力してください</p>
       <br><br>
-      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{weight}" required placeholder="体重" />　kg
+      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{weight}" required placeholder="体重" />&ensp;kg
       <p class="attention">※半角数字とピリオドで入力してください</p>
       <br>
       <br>
@@ -47,9 +47,7 @@
           <td>
             <input type="submit" value="確 認" />
           </td>
-          <td>
-            <p>　　</p>
-          </td>
+          <td>&ensp;&ensp;</td>
           <td>
             <input type="reset" value="リセット" />
           </td>
@@ -57,6 +55,7 @@
       </table>
     </form>
   </div>
+  <!--/* contentLayout部ここまで */-->
 
   <div th:replace="layout/layout :: footer"></div>
 

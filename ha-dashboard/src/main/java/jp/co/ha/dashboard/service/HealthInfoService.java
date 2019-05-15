@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
+import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
-import jp.co.ha.dashboard.form.HealthInfoForm;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
@@ -23,12 +23,12 @@ public interface HealthInfoService {
 	 *
 	 * @param model
 	 *     Model
-	 * @param form
-	 *     健康情報入力フォーム
+	 * @param dto
+	 *     健康情報DTO
 	 * @param lastHealthInfo
 	 *     最後に登録した健康情報
 	 */
-	void addModel(Model model, HealthInfoForm form, HealthInfo lastHealthInfo);
+	void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo);
 
 	/**
 	 * 指定されたユーザIDが初回登録かどうか判定する<br>
@@ -54,15 +54,15 @@ public interface HealthInfoService {
 	/**
 	 * 健康情報を登録する
 	 *
-	 * @param form
-	 *     健康情報入力フォーム
+	 * @param dto
+	 *     健康情報DTO
 	 * @param userId
 	 *     ユーザID
 	 * @return HealthInfoRegistResponse
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	HealthInfoRegistResponse regist(HealthInfoForm form, String userId) throws BaseException;
+	HealthInfoRegistResponse regist(HealthInfoDto dto, String userId) throws BaseException;
 
 	/**
 	 * CSV設定情報を取得する

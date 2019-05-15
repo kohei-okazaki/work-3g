@@ -154,8 +154,8 @@
   <script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.js}"></script>
   <script type="text/javascript" th:inline="javascript">
 
-    // Validate処理
     $(function() {
+      // Validate処理
       jQuery("#healthInfoReferenceForm").validationEngine({
           promptPosition : "bottomLeft:80"
       });
@@ -215,7 +215,7 @@
 
     // Sort処理
     var options = {
-      valueNames:[
+      valueNames : [
         'height',
         'weight',
         'standardWeight',

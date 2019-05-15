@@ -17,11 +17,12 @@
 
   <div th:replace="./common/navigation.html"></div>
 
+  <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
       <img class="headericon" alt="アカウント設定確認画面" src="../resources/image/icon_confirm.png" th:href="@{/resources/image/icon_confirm.png}">アカウント設定確認画面
     </h2>
-    <!--/* 確認画面 */-->
+
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountSettingForm}">
       <table>
         <tr>
@@ -94,9 +95,7 @@
           <td>
             <input type="submit" value="確 定" />
           </td>
-          <td>
-            <label>　　</label>
-          </td>
+          <td>&ensp;&ensp;</td>
           <td>
             <input type="button" value="戻 る" onclick="history.back()" />
           </td>
@@ -104,6 +103,7 @@
       </table>
     </form>
   </div>
+  <!--/* contentLayout部ここまで */-->
 
   <div th:replace="layout/layout :: footer"></div>
 

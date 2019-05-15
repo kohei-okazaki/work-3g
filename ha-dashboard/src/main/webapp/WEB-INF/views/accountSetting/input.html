@@ -19,6 +19,7 @@
 
   <div th:replace="./common/navigation.html"></div>
 
+  <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">
       <img class="headericon" alt="アカウント設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">アカウント設定入力画面
@@ -113,9 +114,7 @@
           <td>
             <input type="submit" value="確 認" />
           </td>
-          <td>
-            <label>　　</label>
-          </td>
+          <td>&ensp;&ensp;</td>
           <td>
             <input type="reset" value="リセット" />
           </td>
@@ -123,6 +122,8 @@
       </table>
     </form>
   </div>
+  <!--/* contentLayout部ここまで */-->
+
   <div th:replace="layout/layout :: footer"></div>
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>

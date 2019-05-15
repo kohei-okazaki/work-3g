@@ -79,8 +79,8 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
 		Account account = accountSearchService.findByUserId(form.getUserId());
 		if (BeanUtil.notNull(account)) {
-			model.addAttribute("errorMessage", "アカウント情報が既に登録されています");
-			LOG.warn("アカウント情報が既に登録されています");
+			model.addAttribute("errorMessage", "指定されたユーザIDは既にアカウント情報が登録されています");
+			LOG.warn("指定されたユーザIDは既にアカウント情報が登録されています userId:" + form.getUserId());
 			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
 		}
 
