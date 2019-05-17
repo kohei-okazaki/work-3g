@@ -45,7 +45,7 @@ public interface SessionManageService {
 	 * 呼び出し元で以下の方法でT型に変換して下さい<br>
 	 * <ul>
 	 * <li>getValue(session, "key", T.class).get()</li>
-	 * <li>getValue(session, "key", T.class).orElseThrow(() -> new SessionIllegalException())</li>
+	 * <li>getValue(session, "key", T.class).orElseThrow(() -> new SystemException())</li>
 	 * </ul>
 	 *
 	 * @param session
