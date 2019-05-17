@@ -111,7 +111,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
 		List<HealthInfo> resultList;
 
-		if (StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
+		if (BeanUtil.isNull(dto.getHealthInfoId()) || StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
 			Date healthInfoRegDate = editStrDate(dto.getFromHealthInfoRegDate());
 			if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
 				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,

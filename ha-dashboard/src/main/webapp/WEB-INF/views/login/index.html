@@ -29,7 +29,7 @@
       <div class="iconPassword icon"></div>
       <input type="password" class="validate[required]" th:field="*{password}" maxlength="16" placeholder="パスワード" required />
       <input type="submit" value="ログイン" />
-      <input type="button" value="アカウント作成" onclick="accountRegist();" />
+      <input id="account-regist" type="button" value="アカウント作成" />
     </form>
   </fieldset>
 
@@ -41,8 +41,9 @@
   <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
   <script type="text/javascript">
-    // validate処理
+
     $(function() {
+      // validate処理
       jQuery("#loginForm").validationEngine({
         promptPosition : "topLeft:0"
       });
@@ -72,14 +73,15 @@
         mprogress.set(progressValue);
       });
 
-      // アカウント登録処理
-      function accountRegist() {
-        var form = document.createElement('form');
+      $("#account-regist").on("click", function() {
+    	// アカウント登録処理
+    	var form = document.createElement('form');
         form.action = '../accountRegist/input';
         form.method = 'get';
         document.body.appendChild(form);
         form.submit();
-      }
+      });
+
     });
 
   </script>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,7 @@ import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.service.HealthInfoReferService;
 import jp.co.ha.dashboard.service.annotation.ReferenceDownloadCsv;
@@ -132,8 +134,20 @@ public class HealthInfoReferenceController implements BaseWebController {
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
-		BeanUtil.copy(form, dto);
-		dto.setHealthInfoId(Integer.valueOf(form.getHealthInfoId()));
+		BeanUtil.copy(form, dto, new BiConsumer<Object, Object>() {
+
+			@Override
+			public void accept(Object src, Object dest) {
+				HealthInfoReferenceForm form = (HealthInfoReferenceForm) src;
+				HealthInfoReferenceDto dto = (HealthInfoReferenceDto) dest;
+
+				if (StringUtil.hasValue(form.getHealthInfoId())) {
+					dto.setHealthInfoId(Integer.valueOf(form.getHealthInfoId()));
+				}
+			}
+
+		});
+
 		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto, userId);
 
 		// 検索情報を設定
