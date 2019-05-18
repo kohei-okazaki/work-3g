@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -22,16 +23,18 @@
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">健康情報入力完了画面</h2>
 
-    <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
-    <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
+    <div data-sal="slide-up">
+      <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
+      <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
+    </div>
 
-    <div th:if="${!isFirstReg}">
+    <div th:if="${!isFirstReg}" data-sal="slide-up">
       <p th:text="'前回より' + ${diffWeight} + 'kg ' + ${resultMessage}" />
       <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
     </div>
 
     <!--/* contentLayout部ここから */-->
-    <div class="contentLayout">
+    <div class="contentLayout"  data-sal="slide-up">
       <table class="data">
         <tr class="data">
           <th class="data">
@@ -109,8 +112,14 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/healthInfo.js" th:src="@{/resources/js/healthInfo.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
-
+    $(function() {
+      sal({
+        threshold: 1,
+        once: false
+      });
+    });
   </script>
 </body>
 </html>

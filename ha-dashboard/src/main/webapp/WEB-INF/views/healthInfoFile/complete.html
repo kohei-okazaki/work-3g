@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -22,14 +23,14 @@
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">健康情報一括登録完了画面</h2>
 
-    <label>完了しました</label>
+    <div data-sal="slide-up">完了しました</div>
     <br><br>
     <table>
       <tr>
         <td align="center">
           <!--/* TOP画面へ */-->
           <form action="../login/top" th:action="@{/login/top}" method="get">
-            <div>
+            <div data-sal="slide-up">
               <input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:src="@{/resources/image/icon_menu.jpg}" />
             </div>
           </form>
@@ -43,8 +44,14 @@
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
-
+    $(function() {
+      sal({
+        threshold: 1,
+        once: false
+      });
+    });
   </script>
 </body>
 </html>

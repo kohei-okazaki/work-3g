@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -17,7 +18,7 @@
   <div class="contentLayout" align="center">
     <h2 class="menuTitle">エラー画面</h2>
 
-    <div th:if="${errorMessage} == null">
+    <div th:if="${errorMessage} == null"  data-sal="slide-up">
       <p>入力情報に誤りがあります。もう一度入力してください</p>
     </div>
     <p class="errorMessage" th:text="${errorMessage}"></p>
@@ -29,8 +30,14 @@
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
-
+    $(function() {
+      sal({
+        threshold: 1,
+        once: false
+      });
+    });
   </script>
 </body>
 </html>

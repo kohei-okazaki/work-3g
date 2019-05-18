@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/mprogress.min.css" th:href="@{/resources/css/lib/mprogress.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -32,8 +33,8 @@
     <h2 class="menuTitle">健康情報入力画面</h2>
 
     <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
-      <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
       <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{height}" required placeholder="身長" />&ensp;cm
       <p class="attention">※半角数字とピリオドで入力してください</p>
       <br><br>
@@ -63,8 +64,13 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
     $(function() {
+      sal({
+        threshold: 1,
+        once: false
+      });
       jQuery("#healthInfoForm").validationEngine({
         promptPosition : "topLeft:80"
       });

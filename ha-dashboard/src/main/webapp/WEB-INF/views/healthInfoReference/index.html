@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/chart.min.css" th:href="@{/resources/css/lib/chart.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -25,10 +26,10 @@
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">健康情報照会画面</h2>
     <form id="healthInfoReferenceForm" action="./index" th:action="@{./index}" method="post" th:object="${healthInfoReferenceForm}">
-      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}" data-sal="slide-up"></div>
       <table>
         <tr>
           <th>
@@ -75,7 +76,7 @@
     <br>
 
     <!--/* 結果部ここから */-->
-    <div th:if="${hasResult}" align="center" class="contentLayout" id="resultList">
+    <div th:if="${hasResult}" align="center" class="contentLayout" id="resultList" data-sal="slide-up">
       <table class="data">
         <tr>
           <th class="data sort" align="center" data-sort="height">
@@ -111,7 +112,7 @@
         <tr>
           <td align="center">
             <!--/* Excel出力ここから */-->
-            <div>
+            <div data-sal="slide-up">
               <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
             </div>
             <!--/* Excel出力ここまで */-->
@@ -119,7 +120,7 @@
           <td>&ensp;&ensp;</td>
           <td align="center">
             <!--/* CSV出力ここから */-->
-            <div>
+            <div data-sal="slide-up">
               <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
             </div>
             <!--/* CSV出力ここまで */-->
@@ -129,7 +130,7 @@
 
       <br>
 
-      <div align="center" class="contentLayout">
+      <div align="center" class="contentLayout" data-sal="slide-up">
         <canvas id="chart" width="250" height="150"></canvas>
       </div>
 
@@ -150,6 +151,7 @@
   <script type="text/javascript" src="../resources/js/lib/list.min.js" th:src="@{/resources/js/lib/list.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/reference.min.js" th:src="@{/resources/js/reference.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript" th:inline="javascript">
 
     $(function() {
@@ -174,7 +176,7 @@
     // Chart処理
     /*<![CDATA[*/
     var hasResult = /*[[ ${hasResult} ]]*/
-    if (hasResult != null) {
+    if (hasResult != null && hasResult == true) {
       // 検索結果が存在する場合
 
       var ctx = $("#chart").getContext('2d');
