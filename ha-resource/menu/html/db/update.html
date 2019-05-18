@@ -73,7 +73,7 @@
   </div>
 
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
-  <script type="text/javascript" src="../../js/table.js"></script>
+  <script type="text/javascript" src="../../js/table.min.js"></script>
   <script type="text/javascript">
 
     // テーブル名のセレクトボックスを初期化する
@@ -90,7 +90,7 @@
       var columnValue = $("#columnValue").val();
       var whereColumnName = $("#whereColumnName option:selected").val();
       var whereColumnValue = $("#whereColumnValue").val();
-      var sql = "UPDATE " + $("#tableName" + " option:selected").val() + " SET (\r\n" 
+      var sql = "UPDATE " + $("#tableName" + " option:selected").val() + " SET (\r\n"
                           + "  " + columnName + " = '" + columnValue + "'\r\n)"
                           + "\r\nWHERE "
                           + whereColumnName + " = '" + whereColumnValue + "';";
