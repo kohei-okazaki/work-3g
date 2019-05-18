@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -24,7 +25,7 @@
     <h2 class="menuTitle">健康情報一括登録画面</h2>
 
     <form id="healthInfoFileForm" action="./confirm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
-      <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" data-sal="slide-up"></div>
       <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
       <br><br>
       <table>
@@ -45,8 +46,15 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
     $(function() {
+
+      sal({
+        threshold: 1,
+        once: false
+      });
+
       jQuery("#healthInfoFileForm").validationEngine({
         promptPosition : "topLeft:80"
       });

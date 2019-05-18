@@ -23,10 +23,12 @@
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">健康情報入力完了画面</h2>
 
-    <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
-    <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
+    <div data-sal="slide-up">
+      <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
+      <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
+    </div>
 
-    <div th:if="${!isFirstReg}"  data-sal="slide-up">
+    <div th:if="${!isFirstReg}" data-sal="slide-up">
       <p th:text="'前回より' + ${diffWeight} + 'kg ' + ${resultMessage}" />
       <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
     </div>

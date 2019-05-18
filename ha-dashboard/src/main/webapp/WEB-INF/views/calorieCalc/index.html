@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -23,12 +24,12 @@
     <h2 class="menuTitle">カロリー計算画面</h2>
 
     <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
-      <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('bodyType')}" th:errors="*{bodyType}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('type')}" th:errors="*{type}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('bodyType')}" th:errors="*{bodyType}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}" data-sal="slide-up"></div>
 
       <input type="text" class="validate[required,custom[number]]" size="3" th:field="*{age}" placeholder="年齢" />&ensp;歳
       <br><br>
@@ -70,8 +71,15 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery-ui.min.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
     $(function() {
+
+      sal({
+        threshold: 1,
+        once: false
+      });
+
       jQuery("#calorieCalcForm").validationEngine({
         promptPosition : "topLeft:0"
       });

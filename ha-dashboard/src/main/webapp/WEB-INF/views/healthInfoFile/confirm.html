@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -18,7 +19,7 @@
 
   <div th:replace="./common/navigation.html"></div>
 
-  <div th:if="${errorMessage} != null">
+  <div th:if="${errorMessage} != null" data-sal="slide-up">
     <br><br>
     <div class="errorMessage">
       <p th:text="${errorMessage}"></p>
@@ -76,8 +77,14 @@
 
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
-
+    $(function() {
+      sal({
+        threshold: 1,
+        once: false
+      });
+    });
   </script>
 </body>
 </html>
