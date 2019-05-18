@@ -179,7 +179,16 @@
     if (hasResult != null && hasResult == true) {
       // 検索結果が存在する場合
 
-      var ctx = $("#chart").getContext('2d');
+      // canvasタグの生成
+      var canvas = document.createElement("canvas");
+      canvas.id = "chart";
+      // document.body.appendChild(canvas);
+      $("#chart").css({
+        width : "250",
+        height : "150"
+      });
+
+      var ctx = $("#chart").getContext("2d");
       var chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -187,26 +196,26 @@
           datasets: [
             {
               label: "体重",
-              borderColor: 'rgb(142, 0, 204)',
+              borderColor: "rgb(142, 0, 204)",
               lineTension: 0,
               fill: false,
-              pointHoverBackgroundColor: 'rgb(255, 0, 0)',
+              pointHoverBackgroundColor: "rgb(255, 0, 0)",
               data: /*[[ ${weight} ]]*/,
             },
             {
               label: "BMI",
-              borderColor: 'rgb(239, 117, 188)',
+              borderColor: "rgb(239, 117, 188)",
               lineTension: 0,
               fill: false,
-              pointHoverBackgroundColor: 'rgb(255, 0, 0)',
+              pointHoverBackgroundColor: "rgb(255, 0, 0)",
               data: /*[[ ${bmi} ]]*/,
             },
             {
               label: "標準体重",
-              borderColor: 'rgb(255, 94, 25)',
+              borderColor: "rgb(255, 94, 25)",
               lineTension: 0,
               fill: false,
-              pointHoverBackgroundColor: 'rgb(255, 0, 0)',
+              pointHoverBackgroundColor: "rgb(255, 0, 0)",
               data: /*[[ ${standardWeight} ]]*/,
             }
           ]
@@ -219,16 +228,16 @@
       // Sort処理
       var options = {
         valueNames : [
-          'height',
-          'weight',
-          'standardWeight',
-          'bmi',
-          'healthInfoRegDate'
+          "height",
+          "weight",
+          "standardWeight",
+          "bmi",
+          "healthInfoRegDate"
         ]
       };
-      var columnList = new List('resultList', options);
-      columnList.sort('healthInfoRegDate', {
-        order: 'desc'
+      var columnList = new List("resultList", options);
+      columnList.sort("healthInfoRegDate", {
+        order: "desc"
       });
     }
     /*]]>*/
