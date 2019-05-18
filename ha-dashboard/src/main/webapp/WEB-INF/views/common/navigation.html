@@ -60,7 +60,7 @@
         <li><a class="navigation" href="#">健康情報</a>
           <ul>
             <li><a id="bmi-modal">BMI</a></li>
-            <li><a id="standardWeight-modal-open" class="standardWeight-button-link">標準体重</a></li>
+            <li><a id="standardWeight-modal">標準体重</a></li>
           </ul>
         </li>
         <li><a class="navigation" href="#">規約</a>
@@ -72,10 +72,6 @@
     </li>
     <li><a class="navigation" href="../login/index" th:href="@{/login/index}">ログアウト</a></li>
   </ul>
-
-  <!-- 標準体重のモーダルを描画 -->
-  <div th:replace="./common/standardWeightModal.html"></div>
-
 
   <!-- APIリファレンス-健康情報登録の概要モーダルを描画 -->
   <div th:replace="./common/apiRegistGeneralModal.html"></div>

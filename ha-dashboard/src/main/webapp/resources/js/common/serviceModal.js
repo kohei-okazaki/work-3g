@@ -1,5 +1,9 @@
 $(function() {
 
+  $("#service-modal").css({
+    "cursor": "pointer"
+  });
+
   // modalの内容を非表示
   $("#service-modal-content").css({
     "display" : "none"
