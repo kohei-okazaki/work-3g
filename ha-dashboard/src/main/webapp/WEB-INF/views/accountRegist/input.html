@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/mprogress.min.css" th:href="@{/resources/css/lib/mprogress.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -21,16 +22,16 @@
 
     <form action="./confirm" id="accountRegistForm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
 
-      <div th:if="${errorMessage} != null">
-        <div id="errorMessage" class="errorMessage">
+      <div th:if="${errorMessage} != null" data-sal="slide-up">
+        <div id="errorMessage" class="errorMessage" data-sal="slide-up">
           <p th:text="${errorMessage}"></p>
         </div>
       </div>
 
-      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}" data-sal="slide-up"></div>
 
       <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
       <br><br>
@@ -62,8 +63,15 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
     $(function() {
+
+      sal({
+        threshold: 1,
+        once: false
+      });
+
       // validate処理
       jQuery("#accountRegistForm").validationEngine({
         promptPosition : "topLeft:80"
