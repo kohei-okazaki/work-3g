@@ -15,9 +15,8 @@
 
   <!--/* contentLayout部ここから */-->
   <div class="contentLayout" align="center">
-    <h2 class="menuTitle">
-      <img class="headericon" alt="エラー画面" src="../resources/image/icon_error.png" th:src="@{/resources/image/icon_error.png}">エラー画面
-    </h2>
+    <h2 class="menuTitle">エラー画面</h2>
+
     <div th:if="${errorMessage} == null">
       <p>入力情報に誤りがあります。もう一度入力してください</p>
     </div>

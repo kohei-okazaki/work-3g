@@ -29,9 +29,8 @@
 
   <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
-    <h2 class="menuTitle">
-      <img class="headericon" alt="入力" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">健康情報入力画面
-    </h2>
+    <h2 class="menuTitle">健康情報入力画面</h2>
+
     <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>

@@ -19,9 +19,7 @@
 
   <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
-    <h2 class="menuTitle">
-      <img class="headericon" alt="ファイル設定入力画面" src="../resources/image/icon_input.jpg" th:href="@{/resources/image/icon_input.jpg}">ファイル設定入力画面
-    </h2>
+    <h2 class="menuTitle">ファイル設定入力画面</h2>
 
     <form id="healthInfoFileSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${healthInfoFileSettingForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
