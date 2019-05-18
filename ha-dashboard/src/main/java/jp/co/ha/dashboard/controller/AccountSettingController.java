@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.controller;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -74,8 +75,17 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		MailInfo mailInfo = mailInfoSearchService.findByUserId(userId);
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
-		BeanUtil.copy(account, accountSettingForm);
-		accountSettingForm.setPasswordExpire(DateUtil.toString(account.getPasswordExpire(), DateFormatType.YYYYMMDD));
+		BeanUtil.copy(account, accountSettingForm, new BiConsumer<Object, Object>() {
+
+			@Override
+			public void accept(Object src, Object dest) {
+				Account account = (Account) src;
+				AccountSettingForm accountSettingForm = (AccountSettingForm) dest;
+				accountSettingForm.setPasswordExpire(DateUtil.toString(account.getPasswordExpire(), DateFormatType.YYYYMMDD));
+			}
+
+		});
+
 		if (BeanUtil.notNull(mailInfo)) {
 			BeanUtil.copy(mailInfo, accountSettingForm, List.of("userId"));
 		}

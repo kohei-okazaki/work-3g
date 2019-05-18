@@ -53,7 +53,7 @@ public class BeanUtil {
 	 * @param function
 	 *     コールバック処理
 	 */
-	public static <T1, T2> void copy(Object src, Object dest, BiConsumer<Object, Object> function) {
+	public static void copy(Object src, Object dest, BiConsumer<Object, Object> function) {
 		copy(src, dest, Collections.emptyList(), function);
 	}
 
@@ -120,7 +120,6 @@ public class BeanUtil {
 		}
 
 		if (notNull(function)) {
-			// コピー処理後に呼ばれる処理
 			function.accept(src, dest);
 		}
 

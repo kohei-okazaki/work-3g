@@ -2,6 +2,7 @@ package jp.co.ha.dashboard.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,12 +52,21 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 		List<HealthInfo> entityList = getHealthInfoList(dto, userId);
 		return entityList.stream().map(e -> {
 			HealthInfoReferenceDto result = new HealthInfoReferenceDto();
-			// リクエストDTOを設定
-			BeanUtil.copy(dto, result);
+//			// リクエストDTOを設定
+//			BeanUtil.copy(dto, result);
 
 			// 健康情報Entityを設定
-			BeanUtil.copy(e, result);
-			result.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+			BeanUtil.copy(e, result, new BiConsumer<>() {
+
+				@Override
+				public void accept(Object src, Object dest) {
+					HealthInfo healthInfo = (HealthInfo) src;
+					HealthInfoReferenceDto result = (HealthInfoReferenceDto) dest;
+
+					result.setHealthInfoRegDate(DateUtil.toString(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+				}
+			});
+
 			return result;
 		}).collect(Collectors.toList());
 	}
@@ -68,9 +78,18 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceDto> resultList) {
 		return resultList.stream().map(e -> {
 			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
-			BeanUtil.copy(e, model);
+			BeanUtil.copy(e, model, new BiConsumer<>() {
+
+				@Override
+				public void accept(Object src, Object dest) {
+					HealthInfoReferenceDto dto = (HealthInfoReferenceDto) src;
+					ReferenceCsvDownloadModel model = (ReferenceCsvDownloadModel) dest;
+
+					model.setHealthInfoRegDate(DateUtil.toDate(dto.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+				}
+			});
 			model.setUserId(userId);
-			model.setHealthInfoRegDate(DateUtil.toDate(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+
 			return model;
 		}).collect(Collectors.toList());
 	}

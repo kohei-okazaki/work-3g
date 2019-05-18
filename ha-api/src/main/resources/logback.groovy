@@ -11,6 +11,7 @@ scan("30 seconds")
 
 def FILE_PATH = "C:/app/logs/";
 def ENCODE = "UTF-8";
+context.name = "api"
 
 appender("STDOUT", ConsoleAppender) {
 
