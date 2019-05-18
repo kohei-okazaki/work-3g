@@ -22,8 +22,8 @@
   <fieldset>
     <h1>健康管理アプリ</h1>
     <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
-      <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-      <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+      <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
+      <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" data-sal="slide-up"></div>
       <div class="iconUser icon"></div>
       <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" placeholder="ユーザID" required />
       <br><br>
