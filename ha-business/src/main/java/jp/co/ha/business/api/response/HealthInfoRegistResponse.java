@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.web.form.BaseApiResponse;
@@ -12,7 +13,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  * 健康情報登録レスポンスクラス
  *
  */
-// @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
+ @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public class HealthInfoRegistResponse extends BaseApiResponse {
 
 	/** 健康情報ID */

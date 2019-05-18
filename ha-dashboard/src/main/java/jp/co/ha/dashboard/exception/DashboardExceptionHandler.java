@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.common.exception.BaseException;
@@ -18,6 +19,7 @@ import jp.co.ha.dashboard.view.DashboardView;
  * ダッシュボード例外ハンドラー
  *
  */
+@Component
 public class DashboardExceptionHandler implements BaseExceptionHandler {
 
 	/** MessageSource */
