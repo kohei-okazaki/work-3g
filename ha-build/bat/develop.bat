@@ -73,6 +73,28 @@ if not exist %directory% (
   mkdir WEB-INF
 )
 
+rem 以下の機能で必要なディレクトリを作成する
+rem 1.健康情報登録バッチ
+set directory="C:\app\data"
+if not exist %directory% (
+  rem ディレクトリが存在しない場合
+  cd "C:\app"
+  mkdir "data"
+)
+set directory="C:\app\data\healthInfoReference"
+if not exist %directory% (
+  rem ディレクトリが存在しない場合
+  cd "C:\app\data"
+  mkdir "healthInfoReference"
+)
+
+rem 2.健康情報照会画面で出力後のCSVファイル
+set directory="C:\app\data\healthInfoRegist"
+if not exist %directory% (
+  rem ディレクトリが存在しない場合
+  cd "C:\app\data"
+  mkdir "healthInfoRegist"
+)
 
 echo ------------------------------------------------------------------------
 echo END develop.bat

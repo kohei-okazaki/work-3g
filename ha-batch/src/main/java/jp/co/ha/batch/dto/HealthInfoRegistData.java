@@ -73,7 +73,7 @@ public class HealthInfoRegistData {
 		this.healthInfoRequestData = healthInfoRequestData;
 	}
 
-	private static class HealthInfoRequestData {
+	public static class HealthInfoRequestData {
 
 		/** 身長 */
 		private BigDecimal height;
