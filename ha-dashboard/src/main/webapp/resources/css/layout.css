@@ -14,6 +14,12 @@
   font-size: 60%;
 }
 
+.appTitle {
+  border-bottom: 2px solid #32cd32;
+  border-left: 10px solid #32cd32;
+  padding: 7px;
+}
+
 .appTitle:hover {
   cursor: pointer;
 }
@@ -40,7 +46,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: auto;
-  width: 95%;
+  width: 96%;
   padding: 5px;
   background: #d2e8d561;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
