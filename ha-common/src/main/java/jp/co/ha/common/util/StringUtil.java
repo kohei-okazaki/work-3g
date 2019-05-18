@@ -55,9 +55,8 @@ public class StringUtil {
 	}
 
 	/**
-	 * 空文字かどうか判定する<br>
-	 * トリム処理を行う<br>
-	 * 空文字の場合true, それ以外の場合false
+	 * 指定した文字列<code>target</code>が空文字の場合true、それ以外の場合false<br>
+	 * トリム処理を行う
 	 *
 	 * @param target
 	 *     対象文字列
@@ -69,8 +68,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 空文字かどうか判定する<br>
-	 * 空文字の場合true, それ以外の場合false
+	 * 指定した文字列<code>target</code>が空文字の場合true、それ以外の場合false<br>
 	 *
 	 * @param target
 	 *     対象文字列
@@ -78,6 +76,15 @@ public class StringUtil {
 	 */
 	public static boolean isBrank(String target) {
 		return BeanUtil.isNull(target) || EMPTY.equals(target);
+	}
+
+	/**
+	 * 指定した文字列<code>target</code>に値が指定されていればtrue、それ以外の場合false
+	 * @param target 対象文字列
+	 * @return 判定結果
+	 */
+	public static boolean hasValue(String target) {
+		return !isEmpty(target);
 	}
 
 	/**

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -30,7 +31,7 @@ public class BeanUtil {
 
 	/**
 	 * <code>src</code>のフィールドを<code>dest</code>のフィールドにコピーする<br>
-	 * コピー先のクラスと同じフィールド名の場合、コピー元のフィールドに値を設定する<br>
+	 * コピー先のクラスと同じフィールド名の場合、コピー元のフィールドに値を設定する
 	 *
 	 * @param src
 	 *     コピー元
@@ -43,8 +44,23 @@ public class BeanUtil {
 
 	/**
 	 * <code>src</code>のフィールドを<code>dest</code>のフィールドにコピーする<br>
+	 * コピー先のクラスと同じフィールド名の場合、コピー元のフィールドに値を設定する
+	 *
+	 * @param src
+	 *     コピー元
+	 * @param dest
+	 *     コピー先
+	 * @param function
+	 *     コールバック処理
+	 */
+	public static <T1, T2> void copy(Object src, Object dest, BiConsumer<Object, Object> function) {
+		copy(src, dest, Collections.emptyList(), function);
+	}
+
+	/**
+	 * <code>src</code>のフィールドを<code>dest</code>のフィールドにコピーする<br>
 	 * コピー先のクラスと同じフィールド名の場合、コピー元のフィールドに値を設定する<br>
-	 * コピー時に無視リストの名前のフィールドの場合、コピーを行わない。<br>
+	 * コピー時に無視リストの名前のフィールドの場合、コピーを行わない。
 	 *
 	 * @param src
 	 *     コピー元
@@ -54,6 +70,24 @@ public class BeanUtil {
 	 *     無視リスト
 	 */
 	public static void copy(Object src, Object dest, List<String> ignoreList) {
+		copy(src, dest, ignoreList, null);
+	}
+
+	/**
+	 * <code>src</code>のフィールドを<code>dest</code>のフィールドにコピーする<br>
+	 * コピー先のクラスと同じフィールド名の場合、コピー元のフィールドに値を設定する<br>
+	 * コピー時に無視リストの名前のフィールドの場合、コピーを行わない。
+	 *
+	 * @param src
+	 *     コピー元
+	 * @param dest
+	 *     コピー先
+	 * @param ignoreList
+	 *     無視リスト
+	 * @param function
+	 *     コールバック処理
+	 */
+	public static void copy(Object src, Object dest, List<String> ignoreList, BiConsumer<Object, Object> function) {
 
 		// コピー元のクラス型
 		Class<?> srcClass = src.getClass();
@@ -84,6 +118,12 @@ public class BeanUtil {
 		} catch (InvocationTargetException e) {
 			LOG.warn("フィールドのアクセスに失敗", e);
 		}
+
+		if (notNull(function)) {
+			// コピー処理後に呼ばれる処理
+			function.accept(src, dest);
+		}
+
 	}
 
 	/**
@@ -217,7 +257,7 @@ public class BeanUtil {
 	}
 
 	/**
-	 * メソッドのアクセス列挙<br>
+	 * メソッドのアクセス列挙
 	 *
 	 * @see BeanUtil#getAccessor(String, Class, AccessorType)
 	 */

@@ -14,13 +14,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>11</java-version>
-    <org.springframework-version>5.1.6.RELEASE</org.springframework-version>
-    <org.aspectj-version>1.9.3</org.aspectj-version>
+    <org.springframework-version>5.1.7.RELEASE</org.springframework-version>
+    <org.aspectj-version>1.9.4</org.aspectj-version>
     <org.slf4j-version>1.7.26</org.slf4j-version>
     <logback-version>1.2.3</logback-version>
     <org.jackson-version>2.9.8</org.jackson-version>
     <poi-version>4.1.0</poi-version>
-    <mysql-version>8.0.15</mysql-version>
+    <mysql-version>8.0.16</mysql-version>
     <mybatis-version>3.5.1</mybatis-version>
     <hibernate-version>6.0.16.Final</hibernate-version>
   </properties>
