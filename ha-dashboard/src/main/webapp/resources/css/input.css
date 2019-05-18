@@ -31,16 +31,13 @@ input[type="text"], input[type=password], input[type="email"], textarea {
   -moz-border-radius: 3px;
   border-radius: 3px;
   font-size: 16px;
-  -webkit-transition: all 1.0s;
-  -moz-transition: all 1.0s;
-  transition: all 1.0s;
 }
 
 /* 入力タグをクリックしたとき */
 input[type="text"]:focus, input[type=password]:focus, input[type="email"]:focus, textarea:focus {
   background: #ffffca;
   box-shadow: 0 0 7px #80ff00;
-  border: solid 4px #71f145;
+  border: solid 2px #71f145;
 }
 
 .radio {

@@ -49,6 +49,12 @@ input[type="password"], input[type="text"] {
   color: #555;
 }
 
+input[type="password"]:focus, input[type="text"]:focus {
+  background: #ffffca;
+  box-shadow: 0 0 7px #80ff00;
+  border: solid 2px #71f145;
+}
+
 .icon {
   width: 20px;
   height: 20px;
@@ -89,5 +95,4 @@ input[type="submit"], input[type="button"] {
 input[type="submit"]:hover, input[type="button"]:hover {
   background: #FFFFFF;
   color: #32cd32;
-  transform: translateY(2px);
 }
