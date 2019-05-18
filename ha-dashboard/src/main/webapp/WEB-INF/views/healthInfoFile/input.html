@@ -23,7 +23,7 @@
   <div align="center" class="contentLayout">
     <h2 class="menuTitle">健康情報一括登録画面</h2>
 
-    <form action="./confirm" id="healthInfoFileForm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+    <form id="healthInfoFileForm" action="./confirm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
       <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
       <br><br>
@@ -43,7 +43,7 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/mprogress.min.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script type="text/javascript">
     $(function() {

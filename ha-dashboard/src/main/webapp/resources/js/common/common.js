@@ -1,14 +1,10 @@
-/**
- * TOP画面に戻る
- *
- * @returns
- */
 function toTop() {
-  var form = document.createElement('form');
-  form.action = '../login/top';
-  form.method = 'get';
-  document.body.appendChild(form);
-  form.submit();
+  var $form = $("<form></form>", {
+    action : '../login/top',
+    method : 'get'
+  });
+  $form.appendTo(document.body);
+  $form.submit();
 }
 
 $("form").submit(function() {
