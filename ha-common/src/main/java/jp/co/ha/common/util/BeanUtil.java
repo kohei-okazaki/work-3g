@@ -50,12 +50,11 @@ public class BeanUtil {
 	 *     コピー元
 	 * @param dest
 	 *     コピー先
-	 * @param functionList
+	 * @param function
 	 *     コールバック処理
 	 */
-	@SafeVarargs
-	public static void copy(Object src, Object dest, BiConsumer<Object, Object>... functionList) {
-		copy(src, dest, Collections.emptyList(), functionList);
+	public static void copy(Object src, Object dest, BiConsumer<Object, Object> function) {
+		copy(src, dest, Collections.emptyList(), function);
 	}
 
 	/**
@@ -88,8 +87,7 @@ public class BeanUtil {
 	 * @param function
 	 *     コールバック処理
 	 */
-	@SafeVarargs
-	public static void copy(Object src, Object dest, List<String> ignoreList, BiConsumer<Object, Object>... functionList) {
+	public static void copy(Object src, Object dest, List<String> ignoreList, BiConsumer<Object, Object> function) {
 
 		// コピー元のクラス型
 		Class<?> srcClass = src.getClass();
@@ -121,7 +119,7 @@ public class BeanUtil {
 			LOG.warn("フィールドのアクセスに失敗", e);
 		}
 
-		for (BiConsumer<Object, Object> function : functionList) {
+		if (notNull(function)) {
 			function.accept(src, dest);
 		}
 

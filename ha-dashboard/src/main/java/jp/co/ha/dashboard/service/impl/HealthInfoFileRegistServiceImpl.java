@@ -92,12 +92,6 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 					HealthInfoRegistRequest request = (HealthInfoRegistRequest) dest;
 					request.setHeight(new BigDecimal(model.getHeight()));
 					request.setWeight(new BigDecimal(model.getWeight()));
-				}
-
-			}, new BiConsumer<>() {
-
-				@Override
-				public void accept(Object t, Object u) {
 					request.setRequestType(RequestType.HEALTH_INFO_REGIST);
 				}
 
