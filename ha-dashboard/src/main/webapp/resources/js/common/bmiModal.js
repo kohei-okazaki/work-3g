@@ -1,5 +1,9 @@
 $(function() {
 
+  $("#bmi-modal").css({
+    "cursor" : "pointer"
+  });
+
   // modalの内容を非表示
   $("#bmi-modal-content").css({
     "display" : "none"
