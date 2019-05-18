@@ -41,16 +41,16 @@
       <ul>
         <li><a class="navigation" href="#">健康情報登録</a>
           <ul>
-            <li><a id="api-regist-general-modal-open" class="api-regist-general-button-link">概要</a></li>
-            <li><a id="api-regist-request-modal-open" class="api-regist-request-button-link">リクエスト</a></li>
-            <li><a id="api-regist-response-modal-open" class="api-regist-response-button-link">レスポンス</a></li>
+            <li><a id="api-regist-general-modal">概要</a></li>
+            <li><a id="api-regist-request-modal">リクエスト</a></li>
+            <li><a id="api-regist-response-modal">レスポンス</a></li>
           </ul>
         </li>
         <li><a class="navigation" href="#">健康情報照会</a>
           <ul>
-            <li><a id="api-reference-general-modal-open" class="api-reference-general-button-link">概要</a></li>
-            <li><a id="api-reference-request-modal-open" class="api-reference-request-button-link">リクエスト</a></li>
-            <li><a id="api-reference-response-modal-open" class="api-reference-response-button-link">レスポンス</a></li>
+            <li><a id="api-reference-general-modal">概要</a></li>
+            <li><a id="api-reference-request-modal">リクエスト</a></li>
+            <li><a id="api-reference-response-modal">レスポンス</a></li>
           </ul>
         </li>
       </ul>
@@ -73,11 +73,8 @@
     <li><a class="navigation" href="../login/index" th:href="@{/login/index}">ログアウト</a></li>
   </ul>
 
-  <!-- APIリファレンス-健康情報登録の概要モーダルを描画 -->
-  <div th:replace="./common/apiRegistGeneralModal.html"></div>
-
   <!-- APIリファレンス-健康情報登録のリクエスト情報モーダルを描画 -->
-  <div th:replace="./common/apiRegistRequestModal.html"></div>
+  <!-- <div th:replace="./common/apiRegistRequestModal.html"></div> -->
 
   <!-- APIリファレンス-健康情報登録のリクエスト情報モーダルを描画 -->
   <div th:replace="./common/apiRegistResponseModal.html"></div>
