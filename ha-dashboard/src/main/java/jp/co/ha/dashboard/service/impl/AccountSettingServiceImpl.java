@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.service.impl;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,8 +101,16 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 *     アカウント情報
 	 */
 	private void mergeAccount(AccountDto dto, Account account) {
-		BeanUtil.copy(dto, account, List.of("userId"));
-		account.setPasswordExpire(DateUtil.toDate(dto.getPasswordExpire(), DateFormatType.YYYYMMDD));
+
+		BeanUtil.copy(dto, account, List.of("userId"), new BiConsumer<>() {
+			@Override
+			public void accept(Object src, Object dest) {
+				AccountDto dto = (AccountDto) src;
+				Account account = (Account) dest;
+				account.setPasswordExpire(DateUtil.toDate(dto.getPasswordExpire(), DateFormatType.YYYYMMDD));
+			}
+		});
+
 	}
 
 	/**
@@ -113,7 +122,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 *     メール情報
 	 */
 	private void mergeMailInfo(AccountDto dto, MailInfo mailInfo) {
+
 		BeanUtil.copy(dto, mailInfo, List.of("userId"));
+
 	}
 
 }

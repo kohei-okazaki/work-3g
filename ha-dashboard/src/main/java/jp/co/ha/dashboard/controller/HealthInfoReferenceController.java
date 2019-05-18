@@ -134,7 +134,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
-		BeanUtil.copy(form, dto, new BiConsumer<Object, Object>() {
+		BeanUtil.copy(form, dto, new BiConsumer<>() {
 
 			@Override
 			public void accept(Object src, Object dest) {
