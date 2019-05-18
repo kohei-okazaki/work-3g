@@ -3,9 +3,11 @@ package jp.co.ha.batch.execute;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.cli.Options;
 
+import jp.co.ha.batch.dto.HealthInfoRegistData;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
@@ -17,6 +19,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.system.BatchBeanLoader;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateError;
@@ -44,10 +47,18 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
 		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
 		JsonReader reader = new JsonReader();
+
 		for (File file : FileUtil.getFileList(prop.getHealthInfoRegistBatchFilePath())) {
-			HealthInfoRegistRequest request = reader.read(file, HealthInfoRegistRequest.class);
-			request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-			requestList.add(request);
+			HealthInfoRegistData dto = reader.read(file, HealthInfoRegistData.class);
+			List<HealthInfoRegistRequest> list = dto.getHealthInfoRequestData().stream().map(e -> {
+				HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+				request.setRequestType(RequestType.HEALTH_INFO_REGIST);
+				BeanUtil.copy(dto, request);
+				BeanUtil.copy(e, request);
+				return request;
+			}).collect(Collectors.toList());
+
+			requestList.addAll(list);
 		}
 
 		for (HealthInfoRegistRequest request : requestList) {
@@ -61,10 +72,8 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 			}
 			service.checkRequest(request);
 
-			HealthInfoRegistResponse response = new HealthInfoRegistResponse();
-
 			// リクエストを送信する
-			service.execute(request, response);
+			service.execute(request, new HealthInfoRegistResponse());
 		}
 
 		return BatchResult.SUCCESS;

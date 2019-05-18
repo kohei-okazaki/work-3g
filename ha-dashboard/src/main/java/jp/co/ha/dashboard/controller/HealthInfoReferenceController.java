@@ -151,7 +151,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto, userId);
 
 		// 検索情報を設定
-		model.addAttribute("form", form);
+		model.addAttribute("form", dto);
 		// 検索結果有無を設定
 		model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
 		// ログイン中のユーザの全レコードを検索する

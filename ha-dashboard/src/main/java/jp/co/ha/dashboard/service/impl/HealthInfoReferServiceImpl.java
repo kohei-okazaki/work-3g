@@ -52,8 +52,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 		List<HealthInfo> entityList = getHealthInfoList(dto, userId);
 		return entityList.stream().map(e -> {
 			HealthInfoReferenceDto result = new HealthInfoReferenceDto();
-//			// リクエストDTOを設定
-//			BeanUtil.copy(dto, result);
+			// リクエストDTOを設定(検索条件部の設定)
+			BeanUtil.copy(dto, result);
 
 			// 健康情報Entityを設定
 			BeanUtil.copy(e, result, new BiConsumer<>() {

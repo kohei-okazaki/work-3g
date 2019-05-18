@@ -1,17 +1,17 @@
 {
-  "userId": "admin",
-  "apiKey": "6c8069a1104708d8de2175f953c5e98192191ea068ff6fff686d8687846ebf3a",
+  "userId": "master",
+  "apiKey": "d9095f2c47b0a651748521077659d03539f4376f17ed79ef070c32d2f6198fb1",
   "healthInfoRequestData" : [
     {
       "height": 170.01,
-      "weight": 51.03
+      "weight": 51.01
     },
         {
-      "height": 170.01,
-      "weight": 51.03
+      "height": 170.02,
+      "weight": 51.02
     },
         {
-      "height": 170.01,
+      "height": 170.03,
       "weight": 51.03
     }
   ]
