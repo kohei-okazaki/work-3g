@@ -250,7 +250,7 @@
       });
 
       // 追加ボタン押下時の処理
-      $("input#add").click(function() {
+      $("input#add").on("click", function() {
         if (0 < columnCount && columnCount < 3) {
           columnCount += 1;
           $(".columnCount" + columnCount).css("display", "table-row");
@@ -258,7 +258,7 @@
       });
 
       // 削除ボタン押下時の処理
-      $("input#remove").click(function() {
+      $("input#remove").on("click", function() {
         if (1 < columnCount && columnCount < 4) {
           $(".columnCount" + columnCount).css("display", "none");
           columnCount -= 1;
@@ -266,7 +266,7 @@
       });
 
       // 作成ボタン押下時の処理
-      $("input#create").click(function() {
+      $("input#create").on("click", function() {
         if (validate()) {
           return;
         }
@@ -275,7 +275,7 @@
       });
 
       // 入力値クリアボタン押下時の処理
-      $("input#inputClear").click(function() {
+      $("input#inputClear").on("click", function() {
         $("#tableName").val("");
         for (var i = 1; i < columnCount + 1; i++) {
           $("#oldColumn" + i).val("");
@@ -285,14 +285,14 @@
       });
 
       // 結果クリアボタン押下時の処理
-      $("input#responseClear").click(function() {
+      $("input#responseClear").on("click", function() {
         $("#response").val("");
       });
 
     });
 
     // 作成ボタン押下時の処理
-    $("input#create").click(function() {
+    $("input#create").on("click", function() {
 
       if (validate()) {
         return;

@@ -80,14 +80,14 @@
       // アカウント登録画面⇒TOP画面には遷移できないようにする
       $(".appTitle").removeAttr("onclick");
 
-      $("input.reset").click(function() {
+      $("input.reset").on("click", function() {
         $("#userId").val("");
         $("#password").val("");
         $("#confirmPassword").val("");
       });
 
       var mprogress = new Mprogress();
-      $("#userId").change(function() {
+      $("#userId").on("change", function() {
         var value = 0;
         if ($('#userId').val() !== '') {
           value += 1;
@@ -101,7 +101,8 @@
         var progressValue = value / 3;
         mprogress.set(progressValue);
       });
-      $("#password").change(function() {
+
+      $("#password").on("change", function() {
         var value = 0;
         if ($('#userId').val() !== '') {
           value += 1;
@@ -115,7 +116,8 @@
         var progressValue = value / 3;
         mprogress.set(progressValue);
       });
-      $("#confirmPassword").change(function() {
+
+      $("#confirmPassword").on("change", function() {
         var value = 0;
         if ($('#userId').val() !== '') {
           value += 1;
