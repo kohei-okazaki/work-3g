@@ -25,7 +25,7 @@
 
     <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('type')}" th:errors="*{type}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('bodyType')}" th:errors="*{bodyType}" data-sal="slide-up"></div>

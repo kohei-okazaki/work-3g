@@ -23,7 +23,7 @@ public class CalorieCalcForm implements BaseForm {
 	private BigDecimal age;
 	/** 性別 */
 	@Required(message = "性別が未入力です")
-	private String type;
+	private String gender;
 	/** 身長 */
 	@Mask
 	@Required(message = "身長が未入力です")
@@ -64,22 +64,22 @@ public class CalorieCalcForm implements BaseForm {
 	}
 
 	/**
-	 * typeを返す
+	 * genderを返す
 	 *
-	 * @return type
+	 * @return gender
 	 */
-	public String getType() {
-		return type;
+	public String getGender() {
+		return gender;
 	}
 
 	/**
-	 * typeを設定する
+	 * genderを設定する
 	 *
-	 * @param type
+	 * @param gender
 	 *     性別
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	/**
