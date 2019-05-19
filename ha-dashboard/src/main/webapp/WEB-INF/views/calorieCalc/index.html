@@ -24,39 +24,79 @@
     <h2 class="menuTitle">カロリー計算画面</h2>
 
     <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
-      <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('bodyType')}" th:errors="*{bodyType}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}" data-sal="slide-up"></div>
 
-      <input type="text" class="validate[required,custom[number]]" size="3" th:field="*{age}" placeholder="年齢" />&ensp;歳
-      <br><br>
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" data-sal="slide-up"></div>
+        <div class="errorMessage" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" data-sal="slide-up"></div>
+        <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
+        <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
+        <div class="errorMessage" th:if="${#fields.hasErrors('bodyType')}" th:errors="*{bodyType}" data-sal="slide-up"></div>
+        <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}" data-sal="slide-up"></div>
 
-      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{height}" required placeholder="身長" />&ensp;cm
-      <p class="attention">※半角数字とピリオドで入力してください</p>
+        <div class="table-row">
+          <div class="table-cell">年齢</div>
+          <div class="table-cell">
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{age}" placeholder="年齢" />&ensp;歳
+          </div>
+        </div>
 
-      <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{weight}" required placeholder="体重" />&ensp;kg
-      <p class="attention">※半角数字とピリオドで入力してください</p>
+        <div class="table-row">&ensp;</div>
 
-      <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="生活活動代謝" />&ensp;kcal
-      <p class="attention">※半角数字とピリオドで入力してください</p>
+        <div class="table-row">
+          <div class="table-cell">身長</div>
+          <div class="table-cell">
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="身長" />&ensp;cm
+          </div>
+          <div class="table-cell">
+            <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
+          </div>
+        </div>
 
-      <a id="calorie-modal">生活活動代謝って</a>
+        <div class="table-row">&ensp;</div>
 
-      <br><br>
-      <table>
-        <tr>
-          <td>
+        <div class="table-row">
+          <div class="table-cell">体重</div>
+          <div class="table-cell">
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="体重" />&ensp;kg
+          </div>
+          <div class="table-cell">
+            <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-cell">生活活動代謝</div>
+          <div class="table-cell">
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="生活活動代謝" />&ensp;kcal
+            <br>
+            <a id="calorie-modal">生活活動代謝って</a>
+          </div>
+          <div class="table-cell">
+            <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
+          </div>
+        </div>
+
+        <br>
+
+      </div>
+      <!--/* table部ここまで */-->
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-cell">
             <input type="submit" value="検 索" />
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-cell">&ensp;&ensp;</div>
+          <div class="table-cell">
             <input type="reset" value="リセット" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
     </form>
 
     <br>
