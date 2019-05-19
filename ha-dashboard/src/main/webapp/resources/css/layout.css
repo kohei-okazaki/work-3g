@@ -85,22 +85,22 @@ th.data, td.data {
   display : table;
 }
 
+/* <tr>の代わり */
 .table-row {
-  /* <tr>の代わり */
   margin : 5px 5px 5px 5px;
   padding : 5px 5px 5px 5px;
   display : table-row;
 }
 
+/* <th>の代わり */
 .table-header {
-  /* <th>の代わり */
   margin : 5px 5px 5px 5px;
   padding : 5px 5px 5px 5px;
   display: table-cell;
 }
 
+/* <td>の代わり */
 .table-data {
-  /* <td>の代わり */
   margin : 5px 5px 5px 5px;
   padding : 5px 5px 5px 5px;
   margin-right: auto;
