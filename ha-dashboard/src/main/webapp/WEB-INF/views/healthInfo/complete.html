@@ -68,9 +68,10 @@
 
       <br>
 
-      <table>
-        <tr>
-          <td>
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <!--/* Excel出力 */-->
             <form action="./excelDownload" th:action="@{./excelDownload}" method="get" th:object="${healthInfoForm}">
               <input type="hidden" th:field="*{healthInfoId}" />
@@ -78,9 +79,9 @@
                 <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
               </div>
             </form>
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <!--/* CSV出力 */-->
             <form action="./csvDownload" th:action="@{./csvDownload}" method="get" th:object="${healthInfoForm}">
               <input type="hidden" th:field="*{healthInfoId}" />
@@ -88,18 +89,18 @@
                 <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
               </div>
             </form>
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <!--/* TOP画面へ */-->
             <form action="../login/top" th:action="@{/login/top}" method="get">
               <div>
                 <input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:src="@{/resources/image/icon_menu.jpg}" />
               </div>
             </form>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
     </div>
     <!--/* contentLayout部ここまで */-->
   </div>

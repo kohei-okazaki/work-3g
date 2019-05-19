@@ -22,12 +22,14 @@
     <h2 class="menuTitle">アカウント設定確認画面</h2>
 
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountSettingForm}">
-      <table>
-        <tr>
-          <th>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">
             <label>削除</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <div th:if="${form.deleteFlag} == 1">
               <label>する</label>
             </div>
@@ -35,70 +37,76 @@
               <label>しない</label>
             </div>
             <input type="hidden" th:field="${form.deleteFlag}" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>ユーザID</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <p th:text="${form.userId}"></p>
             <input type="hidden" th:field="${form.userId}" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>パスワード</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" th:field="${form.password}" readonly />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>パスワード有効期限</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" th:field="*{passwordExpire}" readonly />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>メールアドレス</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" th:field="${form.mailAddress}" readonly />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>メールパスワード</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" th:field="${form.mailPassword}" readonly />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>備 考</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <textarea rows="10" cols="30" th:field="${form.remarks}" readonly></textarea>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
       <br><br>
-      <table>
-        <tr>
-          <td>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <input type="submit" value="確 定" />
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <input type="button" value="戻 る" onclick="history.back()" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
     </form>
   </div>
   <!--/* contentLayout部ここまで */-->

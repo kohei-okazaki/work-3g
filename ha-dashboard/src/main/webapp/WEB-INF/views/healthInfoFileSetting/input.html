@@ -28,79 +28,85 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}" data-sal="slide-up"></div>
-      <table>
-        <tr>
-          <th>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">
             <label>ユーザID</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <p th:text="*{userId}"></p>
             <input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>ヘッダ利用</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked />
               <label for="headerFlagFalse" class="switch-off">しない</label>
               <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagTrue" value="1" />
               <label for="headerFlagTrue">する</label>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>フッタ利用</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked />
               <label for="footerFlagFalse" class="switch-off">しない</label>
               <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagTrue" value="1" />
               <label for="footerFlagTrue">する</label>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>マスク利用</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked />
               <label for="maskFlagFalse" class="switch-off">しない</label>
               <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagTrue" value="1" />
               <label for="maskFlagTrue">する</label>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <th>
+         </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>囲み文字利用</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked />
               <label for="enclosureCharFlagFalse" class="switch-off">しない</label>
               <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1" />
               <label for="enclosureCharFlagTrue">する</label>
             </div>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
 
       <br>
 
-      <table>
-        <tr>
-          <td>
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <input type="submit" value="確 認" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
     </form>
   </div>
   <!--/* contentLayout部ここまで */-->

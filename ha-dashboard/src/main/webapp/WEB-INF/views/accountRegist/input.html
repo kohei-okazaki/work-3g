@@ -40,18 +40,23 @@
       <input type="text" class="validate[required,equals[password]]" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
       <br><br>
       <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
+
       <br><br>
-      <table>
-        <tr>
-          <td>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <input type="submit" value="確 認" />
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <input type="reset" class="reset" value="リセット" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
     </form>
   </div>
   <!--/* contentLayout部ここまで */-->
