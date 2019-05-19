@@ -62,7 +62,7 @@
   padding: 10px;
 }
 
-/* テーブルの行の背景を変更 */
+/* ▼テーブルの行の背景を変更▼ */
 table.data {
   /* セルの線を重ねる */
   border-collapse: collapse;
@@ -77,9 +77,9 @@ th.data, td.data {
   /* 余白指定 */
   padding: 5px 10px;
 }
-/* テーブルの行の背景を変更 */
+/* ▲テーブルの行の背景を変更▲ */
 
-/* divをテーブル構成にする */
+/* ▼divをテーブル構成にする▼ */
 .table {
   /* <table>の代わり */
   display : table;
@@ -92,10 +92,19 @@ th.data, td.data {
   display : table-row;
 }
 
-.table-cell {
-  /* <th>, <td>の代わり */
+.table-header {
+  /* <th>の代わり */
   margin : 5px 5px 5px 5px;
   padding : 5px 5px 5px 5px;
   display: table-cell;
 }
-/* divをテーブル構成にする */
+
+.table-data {
+  /* <td>の代わり */
+  margin : 5px 5px 5px 5px;
+  padding : 5px 5px 5px 5px;
+  margin-right: auto;
+  text-align: left;
+  display: table-cell;
+}
+/* ▲divをテーブル構成にする▲ */

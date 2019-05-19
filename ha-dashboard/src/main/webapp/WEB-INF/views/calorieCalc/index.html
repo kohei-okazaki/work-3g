@@ -35,8 +35,8 @@
         <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}" data-sal="slide-up"></div>
 
         <div class="table-row">
-          <div class="table-cell">年齢</div>
-          <div class="table-cell">
+          <div class="table-data">年齢</div>
+          <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{age}" placeholder="年齢" />&ensp;歳
           </div>
         </div>
@@ -44,11 +44,11 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-cell">身長</div>
-          <div class="table-cell">
+          <div class="table-data">身長</div>
+          <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="身長" />&ensp;cm
           </div>
-          <div class="table-cell">
+          <div class="table-data">
             <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
           </div>
         </div>
@@ -56,11 +56,11 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-cell">体重</div>
-          <div class="table-cell">
+          <div class="table-data">体重</div>
+          <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="体重" />&ensp;kg
           </div>
-          <div class="table-cell">
+          <div class="table-data">
             <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
           </div>
         </div>
@@ -68,13 +68,13 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-cell">生活活動代謝</div>
-          <div class="table-cell">
+          <div class="table-data">生活活動代謝</div>
+          <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="生活活動代謝" />&ensp;kcal
             <br>
             <a id="calorie-modal">生活活動代謝って</a>
           </div>
-          <div class="table-cell">
+          <div class="table-data">
             <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
           </div>
         </div>
@@ -87,11 +87,11 @@
       <!--/* table部ここから */-->
       <div class="table">
         <div class="table-row">
-          <div class="table-cell">
+          <div class="table-data">
             <input type="submit" value="検 索" />
           </div>
-          <div class="table-cell">&ensp;&ensp;</div>
-          <div class="table-cell">
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <input type="reset" value="リセット" />
           </div>
         </div>

@@ -35,80 +35,82 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-      <table>
-        <tr>
-          <th>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">
             <label>削除</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <div class="radio">
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
               <label for="deleteFlagFalse" class="switch-off">しない</label>
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagTrue" value="1">
               <label for="deleteFlagTrue">する</label>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>ユーザID</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <p th:text="*{userId}"></p>
             <input type="hidden" th:field="*{userId}" th:value="${userId}" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>パスワード</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>パスワード有効期限</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>APIキー</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <p th:text="*{apiKey}"></p>
             <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>メールアドレス</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
             <div id="suggest"></div>
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>メールパスワード</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-header">
             <label>備 考</label>
-          </th>
-          <td>
-            <textarea rows="10" cols="100" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
-          </td>
-        </tr>
-      </table>
+          </div>
+          <div class="table-data">
+            <textarea rows="10" cols="80" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
+          </div>
+        </div>
+      </div>
       <br><br>
       <table>
         <tr>
