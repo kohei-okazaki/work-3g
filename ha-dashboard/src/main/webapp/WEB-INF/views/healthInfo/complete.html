@@ -36,36 +36,36 @@
     <!--/* contentLayout部ここから */-->
     <div class="contentLayout"  data-sal="slide-up">
       <!--/* table部ここから */-->
-      <table class="data">
-        <tr class="data">
-          <th class="data">
+      <div class="table data">
+        <div class="table-row data">
+          <div class="table-header data">
             <label>身長</label>
-          </th>
-          <th class="data">
+          </div>
+          <div class="table-header data">
             <label>体重</label>
-          </th>
-          <th class="data">
+          </div>
+          <div class="table-header data">
             <label>標準体重</label>
-          </th>
-          <th class="data">
+          </div>
+          <div class="table-header data">
             <label>BMI</label>
-          </th>
-        </tr>
-        <tr class="data">
-          <td class="data">
+          </div>
+        </div>
+        <div class="table-row data">
+          <div class="table-data data">
             <label th:text="${healthInfo.height}"></label>
-          </td>
-          <td class="data">
+          </div>
+          <div class="table-data data">
             <label th:text="${healthInfo.weight}"></label>
-          </td>
-          <td class="data">
+          </div>
+          <div class="table-data data">
             <label th:text="${healthInfo.standardWeight}"></label>
-          </td>
-          <td class="data">
+          </div>
+          <div class="table-data data">
             <label th:text="${healthInfo.bmi}"></label>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
       <!--/* table部ここまで */-->
 
       <br>
