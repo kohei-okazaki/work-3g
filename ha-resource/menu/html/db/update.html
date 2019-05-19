@@ -103,7 +103,7 @@
       initTableSelectBox();
 
       // セレクトボックス変更時の処理を設定
-      $("select#tableName").change(function() {
+      $("select#tableName").on("change", function() {
         var tableName = $(this).val();
         $("select#columnName").children().remove();
         $("select#whereColumnName").children().remove();

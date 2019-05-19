@@ -200,21 +200,21 @@
       load();
 
       // セレクトボックス変更時の処理
-      $("select#columnType1").change(function() {
+      $("select#columnType1").on("change", function() {
         if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
           $(".hideColumnSize1").css("display", "none");
         } else {
           $(".hideColumnSize1").css("display", "table-row");
         }
       });
-      $("select#columnType2").change(function() {
+      $("select#columnType2").on("change", function() {
         if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
           $(".hideColumnSize2").css("display", "none");
         } else {
           $(".hideColumnSize2").css("display", "table-row");
         }
       });
-      $("select#columnType3").change(function() {
+      $("select#columnType3").on("change", function() {
         if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
           $(".hideColumnSize3").css("display", "none");
         } else {
