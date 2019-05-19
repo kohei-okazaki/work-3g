@@ -3,8 +3,8 @@
  * https://davidwalsh.name/detect-node-insertion
  */
 @keyframes chartjs-render-animation {
-	from { opacity: 0.99; }
-	to { opacity: 1; }
+  from { opacity: 0.99; }
+  to { opacity: 1; }
 }
 
 .chartjs-render-monitor {

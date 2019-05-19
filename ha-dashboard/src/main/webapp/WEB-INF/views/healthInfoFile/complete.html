@@ -24,19 +24,24 @@
     <h2 class="menuTitle">健康情報一括登録完了画面</h2>
 
     <div data-sal="slide-up">完了しました</div>
+
     <br><br>
-    <table>
-      <tr>
-        <td align="center">
+
+    <!--/* table部ここから */-->
+    <div class="table">
+      <div class="table-row">
+        <div class="table-data">
           <!--/* TOP画面へ */-->
           <form action="../login/top" th:action="@{/login/top}" method="get">
             <div data-sal="slide-up">
               <input class="menuicon" type="image" src="../resources/image/icon_menu.jpg" th:src="@{/resources/image/icon_menu.jpg}" />
             </div>
           </form>
-        </td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
+    <!--/* table部ここまで */-->
+
   </div>
   <!--/* contentLayout部ここまで */-->
 

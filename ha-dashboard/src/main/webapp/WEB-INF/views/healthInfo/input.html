@@ -40,19 +40,23 @@
       <br><br>
       <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{weight}" required placeholder="体重" />&ensp;kg
       <p class="attention">※半角数字とピリオドで入力してください</p>
-      <br>
-      <br>
-      <table>
-        <tr>
-          <td>
+
+      <br><br>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <input type="submit" value="確 認" />
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <input type="reset" value="リセット" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
     </form>
   </div>
   <!--/* contentLayout部ここまで */-->

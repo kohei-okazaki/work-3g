@@ -32,53 +32,61 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}" data-sal="slide-up"></div>
 
-      <table>
-        <tr>
-          <th>
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <label>健康情報ID</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
-          </td>
-        </tr>
-        <tr>
-          <th>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-data">
             <label>健康情報作成日</label>
-          </th>
-          <td>
+          </div>
+          <div class="table-data">
             <div class="radio" align="center">
               <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" />
               <label for="healthInfoRegDateSelectFlagFalse" class="switch-off">直接指定しない</label>
               <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" />
               <label for="healthInfoRegDateSelectFlagTrue">直接指定する</label>
             </div>
-          </td>
-          <td>
+          </div>
+          <div class="table-data">
             <input type="text" th:field="*{fromHealthInfoRegDate}" />
-          </td>
-          <td class="hideCalendar">
+          </div>
+          <div class="table-data hideCalendar">
             <label>～</label><input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
       <br>
-      <table>
-        <tr>
-          <td>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <input type="submit" value="検 索" />
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <input type="reset" value="リセット" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
     </form>
 
     <br>
 
     <!--/* 結果部ここから */-->
     <div th:if="${hasResult}" align="center" class="contentLayout" id="resultList">
+
+      <!--/* table部ここから */-->
       <table class="data">
         <tr>
           <th class="data sort" align="center" data-sort="height">
@@ -107,28 +115,31 @@
           </tr>
         </tbody>
       </table>
+      <!--/* table部ここまで */-->
 
       <br>
 
-      <table>
-        <tr>
-          <td align="center">
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <!--/* Excel出力ここから */-->
             <div data-sal="slide-up">
               <input id="excel-download" class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
             </div>
             <!--/* Excel出力ここまで */-->
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td align="center">
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <!--/* CSV出力ここから */-->
             <div data-sal="slide-up">
               <input id="csv-download" class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
             </div>
             <!--/* CSV出力ここまで */-->
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
 
       <br>
 

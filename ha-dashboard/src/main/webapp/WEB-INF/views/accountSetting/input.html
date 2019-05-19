@@ -25,102 +25,115 @@
     <h2 class="menuTitle">アカウント設定入力画面</h2>
 
     <!--/* 入力画面 */-->
-    <form action="./confirm" id="accountSettingForm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
+    <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
 
-      <div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('passwordExpire')}" th:errors="*{passwordExpire}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-      <table>
-        <tr>
-          <th>
-            <label>削除</label>
-          </th>
-          <td>
+      <div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('passwordExpire')}" th:errors="*{passwordExpire}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}" data-sal="slide-up"></div>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header">削除</div>
+          <div class="table-data">
             <div class="radio">
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
               <label for="deleteFlagFalse" class="switch-off">しない</label>
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagTrue" value="1">
               <label for="deleteFlagTrue">する</label>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label>ユーザID</label>
-          </th>
-          <td>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-header">ユーザID</div>
+          <div class="table-data">
             <p th:text="*{userId}"></p>
             <input type="hidden" th:field="*{userId}" th:value="${userId}" />
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label>パスワード</label>
-          </th>
-          <td>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-header">パスワード</div>
+          <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label>パスワード有効期限</label>
-          </th>
-          <td>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-header">パスワード有効期限</div>
+          <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label>APIキー</label>
-          </th>
-          <td>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-header">APIキー</div>
+          <div class="table-data">
             <p th:text="*{apiKey}"></p>
             <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label>メールアドレス</label>
-          </th>
-          <td>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-header">メールアドレス</div>
+          <div class="table-data">
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
             <div id="suggest"></div>
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label>メールパスワード</label>
-          </th>
-          <td>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-header">メールパスワード</div>
+          <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
-          </td>
-        </tr>
-        <tr>
-          <th>
-            <label>備 考</label>
-          </th>
-          <td>
-            <textarea rows="10" cols="100" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+
+        <div class="table-row">
+          <div class="table-header">備 考</div>
+          <div class="table-data">
+            <textarea rows="10" cols="80" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
       <br><br>
-      <table>
-        <tr>
-          <td>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <input type="submit" value="確 認" />
-          </td>
-          <td>&ensp;&ensp;</td>
-          <td>
+          </div>
+          <div class="table-data">&ensp;&ensp;</div>
+          <div class="table-data">
             <input type="reset" value="リセット" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
+
     </form>
   </div>
   <!--/* contentLayout部ここまで */-->
@@ -144,7 +157,7 @@
       });
 
       jQuery("#accountSettingForm").validationEngine({
-        promptPosition : "bottomRight:80"
+        promptPosition : "topLeft:80"
       });
 
       $("#passwordExpire").datepicker({

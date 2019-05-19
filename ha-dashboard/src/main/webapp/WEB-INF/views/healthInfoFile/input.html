@@ -27,14 +27,18 @@
     <form id="healthInfoFileForm" action="./confirm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
       <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" data-sal="slide-up"></div>
       <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
+
       <br><br>
-      <table>
-        <tr>
-          <td>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-data">
             <input type="submit" value="確 認" />
-          </td>
-        </tr>
-      </table>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
     </form>
   </div>
   <!--/* contentLayout部ここまで */-->
