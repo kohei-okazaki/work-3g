@@ -80,8 +80,8 @@ th.data, td.data {
 /* ▲テーブルの行の背景を変更▲ */
 
 /* ▼divをテーブル構成にする▼ */
+/* <table>の代わり */
 .table {
-  /* <table>の代わり */
   display : table;
 }
 
