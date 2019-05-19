@@ -89,7 +89,7 @@
           </th>
           <td>
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
-            <div id="sug"></div>
+            <div id="suggest"></div>
           </td>
         </tr>
         <tr>
@@ -139,8 +139,8 @@
     $(function() {
 
       sal({
-        threshold: 1,
-        once: false
+        threshold : 1,
+        once : false
       });
 
       jQuery("#accountSettingForm").validationEngine({
@@ -155,29 +155,27 @@
       });
 
       var domains = [
-        "@gmail.com",
-        "@yahoo.co.jp",
-        "@ezweb.ne.jp",
-        "@au.com",
-        "@docomo.ne.jp",
-        "@i.softbank.jp",
-        "@softbank.ne.jp",
-        "@outlook.com",
-        "@outlook.jp"
+        "gmail.com",
+        "yahoo.co.jp",
+        "ezweb.ne.jp",
+        "au.com",
+        "docomo.ne.jp",
+        "i.softbank.jp",
+        "softbank.ne.jp",
+        "outlook.com",
+        "outlook.jp"
       ];
 
       $("#mailAddress").on("blur", function() {
         $(this).mailcheck({
           domains : domains,
-          suggested: function(element, suggestion) {
-            $("#sug").text(suggestion.full);
-            //idがsugにこれじゃない？ってのを表示します。
-            $("#sug").on("click", function() {
-              //sugをクリックした時にinput内の記述を変更します。
-              $("#mailAddress").attr("value", suggestion.full);
+          suggested : function(element, suggestion) {
+            $("#suggest").text(suggestion.full);
+            $("#suggest").on("click", function() {
+              $("#mailAddress").val(suggestion.full);
               $(this).hide();
             });
-          },
+          }
         });
       });
     });
