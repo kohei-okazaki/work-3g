@@ -53,7 +53,7 @@
       return false;
     }
 
-    $("input#create").click(function() {
+    $("input#create").on("click", function() {
 
       var hasError = validate();
         if (hasError) {
@@ -65,12 +65,12 @@
       $("#response").val(sql);
     });
 
-    $("input#inputClear").click(function() {
+    $("input#inputClear").on("click", function() {
       $("#tableName").val("");
       $("#columnName").val("");
     });
 
-    $("input#responseClear").click(function() {
+    $("input#responseClear").on("click", function() {
       $("#response").val("");
     });
 

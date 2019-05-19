@@ -50,7 +50,7 @@
   <script type="text/javascript">
     $(function() {
       //.accordion1の中のp要素がクリックされたら
-      $('.accordion1 p').click(function() {
+      $('.accordion1 p').on("click", function() {
         //クリックされた.accordion1の中のp要素に隣接するul要素が開閉する。
         $(this).next('ul').slideToggle();
       });

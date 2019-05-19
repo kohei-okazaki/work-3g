@@ -56,7 +56,7 @@
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
   <script type="text/javascript">
 
-    $("input#create").click(function() {
+    $("input#create").on("click", function() {
 
       var json = {
         requestType : $("#requestType").val(),
@@ -72,13 +72,13 @@
       $("#response").val(result);
     });
 
-    $("input#inputClear").click(function() {
+    $("input#inputClear").on("click", function() {
       $("#userId").val("");
       $("#healthInfoId").val("");
       $("#apiKey").val("");
     });
 
-    $("input#responseClear").click(function() {
+    $("input#responseClear").on("click", function() {
       $("#response").val("");
     });
 

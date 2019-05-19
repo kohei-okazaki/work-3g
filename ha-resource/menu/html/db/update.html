@@ -119,19 +119,19 @@
       });
 
       // 作成ボタン押下時の処理
-      $("input#create").click(function() {
+      $("input#create").on("click", function() {
         var sql = createSql();
         $("#response").val(sql);
       });
 
       // 入力値クリアボタン押下時の処理
-      $("input#inputClear").click(function() {
+      $("input#inputClear").on("click", function() {
          $("#columnValue").val("");
          $("#whereColumnValue").val("");
       });
 
       // 結果クリアボタン押下時の処理
-      $("input#responseClear").click(function() {
+      $("input#responseClear").on("click", function() {
         $("#response").val("");
       });
 
