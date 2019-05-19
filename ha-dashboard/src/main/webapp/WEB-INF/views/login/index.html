@@ -48,7 +48,7 @@
 
       sal({
         threshold: 1,
-        once: false,
+        once: false
       });
 
       // validate処理
@@ -58,7 +58,7 @@
 
       // 進捗バーの処理
       var mprogress = new Mprogress();
-      $("#userId").change(function() {
+      $("#userId").on("change", function() {
         var value = 0;
         if ($("#userId").val() !== "") {
           value += 1;
@@ -69,7 +69,7 @@
         var progressValue = value / 2;
         mprogress.set(progressValue);
       });
-      $("#password").change(function() {
+      $("#password").on("change", function() {
         var value = 0;
         if ($("#userId").val() !== "") {
           value += 1;
@@ -83,10 +83,11 @@
 
       $("#account-regist").on("click", function() {
     	// アカウント登録処理
-    	var form = document.createElement("form");
-        form.action = "../accountRegist/input';
-        form.method = "get";
-        document.body.appendChild(form);
+        var form = $("<form></form>", {
+          method : "get",
+          action : "../accountRegist/input"
+        });
+        form.appendTo(document.body);
         form.submit();
       });
 

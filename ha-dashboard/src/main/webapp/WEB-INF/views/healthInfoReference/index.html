@@ -47,9 +47,9 @@
           </th>
           <td>
             <div class="radio" align="center">
-              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" onclick ="showCalendar()" />
+              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" />
               <label for="healthInfoRegDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" onclick="hideCalendar()" />
+              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" />
               <label for="healthInfoRegDateSelectFlagTrue">直接指定する</label>
             </div>
           </td>
@@ -115,7 +115,7 @@
           <td align="center">
             <!--/* Excel出力ここから */-->
             <div data-sal="slide-up">
-              <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" onclick="referenceExcelDownload()" />
+              <input id="excel-download" class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
             </div>
             <!--/* Excel出力ここまで */-->
           </td>
@@ -123,7 +123,7 @@
           <td align="center">
             <!--/* CSV出力ここから */-->
             <div data-sal="slide-up">
-              <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" onclick="referenceCsvDownload()" />
+              <input id="csv-download" class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
             </div>
             <!--/* CSV出力ここまで */-->
           </td>
@@ -165,19 +165,19 @@
 
       // Validate処理
       jQuery("#healthInfoReferenceForm").validationEngine({
-          promptPosition : "bottomLeft:80"
+        promptPosition : "bottomLeft:80"
       });
       $("#fromHealthInfoRegDate").datepicker({
-          firstDay : 0,
-          showButtonPanel : true,
-          changeYear : true,
-          changeMonth : true
+        firstDay : 0,
+        showButtonPanel : true,
+        changeYear : true,
+        changeMonth : true
       });
       $("#toHealthInfoRegDate").datepicker({
-          firstDay : 0,
-          showButtonPanel : true,
-          changeYear : true,
-          changeMonth : true
+        firstDay : 0,
+        showButtonPanel : true,
+        changeYear : true,
+        changeMonth : true
       });
     });
 
