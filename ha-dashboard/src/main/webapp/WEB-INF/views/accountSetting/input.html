@@ -89,6 +89,7 @@
           </th>
           <td>
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
+            <div id="sug"></div>
           </td>
         </tr>
         <tr>
@@ -133,20 +134,51 @@
   <script type="text/javascript" src="../resources/js/lib/jquery-ui.min.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/datepicker-ja.min.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/mailcheck.min.js" th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
   <script type="text/javascript">
     $(function() {
+
       sal({
         threshold: 1,
         once: false
       });
+
       jQuery("#accountSettingForm").validationEngine({
         promptPosition : "bottomRight:80"
       });
+
       $("#passwordExpire").datepicker({
-          firstDay : 0,
-          showButtonPanel : true,
-          changeYear : true,
-          changeMonth : true
+        firstDay : 0,
+        showButtonPanel : true,
+        changeYear : true,
+        changeMonth : true
+      });
+
+      var domains = [
+        "@gmail.com",
+        "@yahoo.co.jp",
+        "@ezweb.ne.jp",
+        "@au.com",
+        "@docomo.ne.jp",
+        "@i.softbank.jp",
+        "@softbank.ne.jp",
+        "@outlook.com",
+        "@outlook.jp"
+      ];
+
+      $("#mailAddress").on("blur", function() {
+        $(this).mailcheck({
+          domains : domains,
+          suggested: function(element, suggestion) {
+            $("#sug").text(suggestion.full);
+            //idがsugにこれじゃない？ってのを表示します。
+            $("#sug").on("click", function() {
+              //sugをクリックした時にinput内の記述を変更します。
+              $("#mailAddress").attr("value", suggestion.full);
+              $(this).hide();
+            });
+          },
+        });
       });
     });
   </script>
