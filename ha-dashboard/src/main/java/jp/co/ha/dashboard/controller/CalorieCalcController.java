@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.dashboard.form.CalorieCalcForm;
 import jp.co.ha.dashboard.view.DashboardView;
@@ -31,6 +32,7 @@ public class CalorieCalcController implements BaseWebController {
 	@ModelAttribute("calorieCalcForm")
 	public CalorieCalcForm setUpForm() {
 		CalorieCalcForm form = new CalorieCalcForm();
+		form.setGender(GenderType.MALE.getValue());
 		return form;
 	}
 
