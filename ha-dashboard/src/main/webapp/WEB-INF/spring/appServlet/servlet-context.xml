@@ -20,8 +20,6 @@
   <!-- business -->
   <import resource="classpath:business-context.xml" />
 
-  <bean id="dashboardExceptionHandler" class="jp.co.ha.dashboard.exception.DashboardExceptionHandler" />
-
   <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
   <context:component-scan base-package="jp.co.ha.dashboard.controller" />
