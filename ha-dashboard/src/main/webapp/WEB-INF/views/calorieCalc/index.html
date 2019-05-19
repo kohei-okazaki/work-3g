@@ -25,14 +25,15 @@
 
     <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
 
+      <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('bodyType')}" th:errors="*{bodyType}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}" data-sal="slide-up"></div>
+
       <!--/* table部ここから */-->
       <div class="table">
-        <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" data-sal="slide-up"></div>
-        <div class="errorMessage" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" data-sal="slide-up"></div>
-        <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
-        <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
-        <div class="errorMessage" th:if="${#fields.hasErrors('bodyType')}" th:errors="*{bodyType}" data-sal="slide-up"></div>
-        <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}" data-sal="slide-up"></div>
 
         <div class="table-row">
           <div class="table-header">年齢</div>

@@ -25,7 +25,7 @@
     <h2 class="menuTitle">アカウント設定入力画面</h2>
 
     <!--/* 入力画面 */-->
-    <form action="./confirm" id="accountSettingForm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
+    <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
 
       <div class="errorMessage" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
@@ -49,6 +49,9 @@
             </div>
           </div>
         </div>
+
+        <div class="table-row">&ensp;</div>
+
         <div class="table-row">
           <div class="table-header">ユーザID</div>
           <div class="table-data">
@@ -56,18 +59,27 @@
             <input type="hidden" th:field="*{userId}" th:value="${userId}" />
           </div>
         </div>
+
+        <div class="table-row">&ensp;</div>
+
         <div class="table-row">
           <div class="table-header">パスワード</div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
           </div>
         </div>
+
+        <div class="table-row">&ensp;</div>
+
         <div class="table-row">
           <div class="table-header">パスワード有効期限</div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
           </div>
         </div>
+
+        <div class="table-row">&ensp;</div>
+
         <div class="table-row">
           <div class="table-header">APIキー</div>
           <div class="table-data">
@@ -75,6 +87,9 @@
             <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
           </div>
         </div>
+
+        <div class="table-row">&ensp;</div>
+
         <div class="table-row">
           <div class="table-header">メールアドレス</div>
           <div class="table-data">
@@ -82,12 +97,18 @@
             <div id="suggest"></div>
           </div>
         </div>
+
+        <div class="table-row">&ensp;</div>
+
         <div class="table-row">
           <div class="table-header">メールパスワード</div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
           </div>
         </div>
+
+        <div class="table-row">&ensp;</div>
+
         <div class="table-row">
           <div class="table-header">備 考</div>
           <div class="table-data">
