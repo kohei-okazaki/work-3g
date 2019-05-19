@@ -1,49 +1,37 @@
-/**
- * Excelをダウンロードする関数
- *
- * @returns
- */
-function referenceExcelDownload() {
-  var form = document.createElement('form');
-  form.action = '../healthInfoReference/excelDownload';
-  form.method = 'get';
-  document.body.appendChild(form);
-  form.submit();
-}
+$(function() {
+  $("#excel-download").on("click", function() {
+    // excelダウンロードを行う
+    var form = $("<form></form>", {
+      method : "get",
+      action : "../healthInfoReference/excelDownload"
+    });
+    form.appendTo(document.body);
+    form.submit();
+  });
 
-/**
- * CSVをダウンロードする関数
- *
- * @returns
- */
-function referenceCsvDownload() {
-  var form = document.createElement('form');
-  form.action = '../healthInfoReference/csvDownload';
-  form.method = 'get';
-  document.body.appendChild(form);
-  form.submit();
-}
+  $("#csv-download").on("click", function() {
+    // excelダウンロードを行う
+    var form = $("<form></form>", {
+      method : "get",
+      action : "../healthInfoReference/csvDownload"
+    });
+    form.appendTo(document.body);
+    form.submit();
+  });
 
-/**
- * カレンダーを隠す関数
- *
- * @returns
- */
-function hideCalendar() {
-  var classList = document.getElementsByClassName('hideCalendar');
-  for (var i = 0; i < classList.length; i++) {
-    classList[i].style.display = "none";
-  }
-}
+  $("#healthInfoRegDateSelectFlagFalse").on("click", function() {
 
-/**
- * カレンダーを表示させる関数
- *
- * @returns
- */
-function showCalendar() {
-  var classList = document.getElementsByClassName('hideCalendar');
-  for (var i = 0; i < classList.length; i++) {
-    classList[i].style.display = "";
-  }
-}
+    var classList = document.getElementsByClassName('hideCalendar');
+    for (var i = 0; i < classList.length; i++) {
+      classList[i].style.display = "";
+    }
+  });
+
+  $("#healthInfoRegDateSelectFlagTrue").on("click", function() {
+    var classList = document.getElementsByClassName('hideCalendar');
+    for (var i = 0; i < classList.length; i++) {
+      classList[i].style.display = "none";
+    }
+  });
+
+});
