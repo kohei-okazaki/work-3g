@@ -9,11 +9,11 @@ call initialize.bat
 
 
 rem jarが配置されてるディレクトリ
-set dbLibDir=%baseDir%\ha-db\src\main\webapp\WEB-INF\lib
-set webLibDir=%baseDir%\ha-web\src\main\webapp\WEB-INF\lib
-set businessLibDir=%baseDir%\ha-business\src\main\webapp\WEB-INF\lib
-set apiLibDir=%baseDir%\ha-api\src\main\webapp\WEB-INF\lib
-set dashboardLibDir=%baseDir%\ha-dashboard\src\main\webapp\WEB-INF\lib
+set dbLibDir=%BASE_DIR%\ha-db\src\main\webapp\WEB-INF\lib
+set webLibDir=%BASE_DIR%\ha-web\src\main\webapp\WEB-INF\lib
+set businessLibDir=%BASE_DIR%\ha-business\src\main\webapp\WEB-INF\lib
+set apiLibDir=%BASE_DIR%\ha-api\src\main\webapp\WEB-INF\lib
+set dashboardLibDir=%BASE_DIR%\ha-dashboard\src\main\webapp\WEB-INF\lib
 
 cls
 

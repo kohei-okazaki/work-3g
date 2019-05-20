@@ -16,28 +16,28 @@ set ver=1.0
 echo jar.version = %ver%
 
 rem commonのjarを作成
-cd %baseDir%\ha-common
+cd %BASE_DIR%\ha-common
 call mvn clean package -DskipTests
 call mvn install
 call mvn install:install-file -Dfile=target\ha-common-%ver%.jar -DgroupId=jp.co.ha.common -DartifactId=ha-common -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
 rem dbのjarを作成
-cd %baseDir%\ha-db
+cd %BASE_DIR%\ha-db
 call mvn clean package -DskipTests
 call mvn install
 call mvn install:install-file -Dfile=target\ha-db-%ver%.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
 rem webのjarを作成
-cd %baseDir%\ha-web
+cd %BASE_DIR%\ha-web
 call mvn clean package -DskipTests
 call mvn install
 call mvn install:install-file -Dfile=target\ha-web-%ver%.jar -DgroupId=jp.co.ha.web -DartifactId=ha-web -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
 rem businessのjarを作成
-cd %baseDir%\ha-business
+cd %BASE_DIR%\ha-business
 call mvn clean package -DskipTests
 call mvn install
 call mvn install:install-file -Dfile=target\ha-business-%ver%.jar -DgroupId=jp.co.ha.business -DartifactId=ha-business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip

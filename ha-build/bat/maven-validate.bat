@@ -15,7 +15,7 @@ rem commonをvalidate
 echo ------------------------------------------------------------------------
 echo START common project validate
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-common
+cd %BASE_DIR%\ha-common
 call mvn validate
 echo ------------------------------------------------------------------------
 echo END common project validate
@@ -27,7 +27,7 @@ rem dbをvalidate
 echo ------------------------------------------------------------------------
 echo START db project validate
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-db
+cd %BASE_DIR%\ha-db
 call mvn validate
 echo ------------------------------------------------------------------------
 echo END db project validate
@@ -39,7 +39,7 @@ rem webをvalidate
 echo ------------------------------------------------------------------------
 echo START web project validate
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-web
+cd %BASE_DIR%\ha-web
 call mvn validate
 echo ------------------------------------------------------------------------
 echo END web project validate
@@ -51,7 +51,7 @@ rem businessをvalidate
 echo ------------------------------------------------------------------------
 echo START business project validate
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-business
+cd %BASE_DIR%\ha-business
 call mvn validate
 echo ------------------------------------------------------------------------
 echo END business project validate
@@ -63,7 +63,7 @@ rem apiをvalidate
 echo ------------------------------------------------------------------------
 echo START api project validate
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-api
+cd %BASE_DIR%\ha-api
 call mvn validate
 echo ------------------------------------------------------------------------
 echo END api project validate
@@ -75,7 +75,7 @@ rem webをvalidate
 echo ------------------------------------------------------------------------
 echo START web project validate
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-web
+cd %BASE_DIR%\ha-web
 call mvn validate
 echo ------------------------------------------------------------------------
 echo END web project validate

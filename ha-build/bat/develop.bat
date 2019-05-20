@@ -19,17 +19,17 @@ rem - db -
 rem ------
 rem ha-db\src\main\webapp\WEB-INFを用意
 
-set directory=%baseDir%\ha-db\src\main\webapp
+set directory=%BASE_DIR%\ha-db\src\main\webapp
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd %baseDir%\ha-db\src\main
+  cd %BASE_DIR%\ha-db\src\main
   mkdir webapp
 )
 
-set directory=%baseDir%\ha-db\src\main\webapp\WEB-INF
+set directory=%BASE_DIR%\ha-db\src\main\webapp\WEB-INF
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd %baseDir%\ha-db\src\main\webapp
+  cd %BASE_DIR%\ha-db\src\main\webapp
   mkdir WEB-INF
 )
 
@@ -39,17 +39,17 @@ rem - web -
 rem -------
 rem ha-web\src\main\webapp\WEB-INFを用意
 
-set directory=%baseDir%\ha-web\src\main\webapp
+set directory=%BASE_DIR%\ha-web\src\main\webapp
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd %baseDir%\ha-web\src\main
+  cd %BASE_DIR%\ha-web\src\main
   mkdir webapp
 )
 
-set directory=%baseDir%\ha-web\src\main\webapp\WEB-INF
+set directory=%BASE_DIR%\ha-web\src\main\webapp\WEB-INF
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd %baseDir%\ha-web\src\main\webapp
+  cd %BASE_DIR%\ha-web\src\main\webapp
   mkdir WEB-INF
 )
 
@@ -59,17 +59,17 @@ rem - business -
 rem ------------
 rem ha-business\src\main\webapp\WEB-INFを用意
 
-set directory=%baseDir%\ha-business\src\main\webapp
+set directory=%BASE_DIR%\ha-business\src\main\webapp
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd %baseDir%\ha-business\src\main
+  cd %BASE_DIR%\ha-business\src\main
   mkdir webapp
 )
 
-set directory=%baseDir%\ha-business\src\main\webapp\WEB-INF
+set directory=%BASE_DIR%\ha-business\src\main\webapp\WEB-INF
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd %baseDir%\ha-business\src\main\webapp
+  cd %BASE_DIR%\ha-business\src\main\webapp
   mkdir WEB-INF
 )
 
