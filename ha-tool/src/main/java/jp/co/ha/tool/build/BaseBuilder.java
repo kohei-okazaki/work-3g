@@ -45,7 +45,9 @@ public abstract class BaseBuilder {
 	 * 初期処理
 	 */
 	private void init() {
-		String resourcePath = this.getClass().getClassLoader().getResource("").getPath() + FileSeparator.SYSTEM.getValue() + "META-INF";
+
+		String resourcePath = this.getClass().getClassLoader().getResource("").getPath()
+				+ FileSeparator.SYSTEM.getValue() + "META-INF";
 		Properties prop = new PropertyReader().read(resourcePath, "target.properties");
 
 		String targetTable = prop.getProperty("targetTable");
@@ -90,8 +92,13 @@ public abstract class BaseBuilder {
 			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\drop");
 			break;
 		case DML:
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\dml");
+			break;
+		case TABLE_DEFINE:
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\others");
 			break;
 		default:
+			LOG.warn("SQL生成の指定が間違っています execType:" + execType.getValue());
 			break;
 		}
 		return conf;

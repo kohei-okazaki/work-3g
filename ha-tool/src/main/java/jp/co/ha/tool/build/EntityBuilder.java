@@ -26,7 +26,7 @@ import jp.co.ha.tool.type.ColumnType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
- * Entityのビルダー<br>
+ * Entityのビルダー
  *
  * @deprecated MybatisのgeneratorでEntityを生成している為
  *
@@ -50,7 +50,8 @@ public class EntityBuilder extends BaseBuilder {
 					source.setClassName(toJavaFileName(getClassName(row)));
 
 					// fieldの設定
-					Field<?> field = new Field(toCamelCase(getFieldName(row)), getColumnComment(row), getClassType(row));
+					Field<?> field = new Field(toCamelCase(getFieldName(row)), getColumnComment(row),
+							getClassType(row));
 					source.addField(field);
 
 					// fieldのimport文を設定

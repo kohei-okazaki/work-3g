@@ -21,7 +21,8 @@ public class BuildInvoker {
 	public static void build(final String... names) {
 		try {
 			for (String name : names) {
-				Class<? extends BaseBuilder> builderClass = (Class<BaseBuilder>) Class.forName("jp.co.ha.tool.build." + name);
+				Class<? extends BaseBuilder> builderClass = (Class<BaseBuilder>) Class
+						.forName("jp.co.ha.tool.build." + name);
 				for (Method m : builderClass.getDeclaredMethods()) {
 					if (m.isAnnotationPresent(Build.class)) {
 						BaseBuilder builder = builderClass.getDeclaredConstructor().newInstance();
@@ -30,7 +31,7 @@ public class BuildInvoker {
 				}
 			}
 		} catch (Exception e) {
-			LOG.error("", e);
+			LOG.error("SQLの生成処理が失敗しました", e);
 		}
 	}
 }

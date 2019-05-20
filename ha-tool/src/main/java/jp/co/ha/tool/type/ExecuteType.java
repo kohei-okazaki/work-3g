@@ -15,7 +15,9 @@ public enum ExecuteType implements BaseEnum {
 	/** DML作成 */
 	DML("DML"),
 	/** DROP作成 */
-	DROP("DROP");
+	DROP("DROP"),
+	/** TABLE_DEFINE */
+	TABLE_DEFINE("TABLE_DEFINE");
 
 	/** 値 */
 	private String value;
