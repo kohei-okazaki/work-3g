@@ -1,7 +1,10 @@
 package jp.co.ha.dashboard.controller;
 
+import java.util.function.BiConsumer;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,9 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.dto.CalorieCalcDto;
+import jp.co.ha.business.healthInfo.type.BodyType;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.form.CalorieCalcForm;
+import jp.co.ha.dashboard.service.CalorieCalcService;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWebController;
 
@@ -23,6 +30,10 @@ import jp.co.ha.web.controller.BaseWebController;
 @Controller
 @RequestMapping("calorieCalc")
 public class CalorieCalcController implements BaseWebController {
+
+	/** カロリー計算サービス */
+	@Autowired
+	private CalorieCalcService calorieCalcService;
 
 	/**
 	 * Formを返す
@@ -65,6 +76,21 @@ public class CalorieCalcController implements BaseWebController {
 		if (result.hasErrors()) {
 			return getView(DashboardView.CALORIE_CALC);
 		}
+
+		// DTOに変換
+		CalorieCalcDto dto = new CalorieCalcDto();
+		BeanUtil.copy(form, dto, new BiConsumer<>() {
+
+			@Override
+			public void accept(Object src, Object dest) {
+				CalorieCalcForm form = (CalorieCalcForm) src;
+				CalorieCalcDto dto = (CalorieCalcDto) dest;
+				dto.setGenderType(GenderType.of(form.getGender()));
+				dto.setBodyType(BodyType.of(form.getBodyType()));
+			}
+		});
+
+		CalorieCalcDto calcResult = calorieCalcService.calc(dto);
 
 		return getView(DashboardView.CALORIE_CALC);
 	}

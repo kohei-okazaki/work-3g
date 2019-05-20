@@ -94,7 +94,6 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 					request.setWeight(new BigDecimal(model.getWeight()));
 					request.setRequestType(RequestType.HEALTH_INFO_REGIST);
 				}
-
 			});
 			request.setApiKey(account.getApiKey());
 
