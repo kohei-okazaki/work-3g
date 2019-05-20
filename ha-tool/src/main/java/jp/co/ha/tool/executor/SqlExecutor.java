@@ -15,7 +15,9 @@ public class SqlExecutor {
 	 * <li>CreateTableBuilder</li>
 	 * <li>DropBuilder</li>
 	 * <li>EntityBuilder</li>
+	 * <li>TableDefineBuilder</li>
 	 * </ul>
+	 *
 	 * @param args
 	 *     使わない
 	 */
