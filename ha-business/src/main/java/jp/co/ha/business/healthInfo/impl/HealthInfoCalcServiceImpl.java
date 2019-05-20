@@ -11,6 +11,7 @@ import jp.co.ha.business.calc.BmiCalcFunction;
 import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.calc.StandardWeightCalcFunction;
+import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
@@ -82,6 +83,15 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	@Override
 	public BigDecimal calcDiffWeight(BigDecimal before, BigDecimal now) {
 		return now.subtract(before).abs().setScale(1, RoundingMode.HALF_UP);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 }

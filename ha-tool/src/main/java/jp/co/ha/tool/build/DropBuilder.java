@@ -17,7 +17,7 @@ import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
- * DropSQLビルダー
+ * DROP.sqlのビルダー
  *
  */
 public class DropBuilder extends BaseBuilder {
@@ -34,6 +34,7 @@ public class DropBuilder extends BaseBuilder {
 			body.add(buildComment(e.getLogicalName()));
 			body.add(buildDropSql(e.getPhysicalName()));
 		});
+
 		FileConfig conf = getFileConfig(ExecuteType.DROP);
 		conf.setFileName("DROP" + FileExtension.SQL.getValue());
 		conf.setData(body.toString());

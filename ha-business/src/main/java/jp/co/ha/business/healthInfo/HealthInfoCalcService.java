@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
@@ -61,4 +62,13 @@ public interface HealthInfoCalcService {
 	 * @return 体重の差(小数第2位を四捨五入する)
 	 */
 	BigDecimal calcDiffWeight(BigDecimal before, BigDecimal now);
+
+	/**
+	 * 基礎代謝量を計算
+	 *
+	 * @param calorieCalcDto
+	 *     カロリー計算DTO
+	 * @return
+	 */
+	BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto);
 }

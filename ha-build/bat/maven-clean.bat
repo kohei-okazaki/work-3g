@@ -15,7 +15,7 @@ rem common/targetディレクトリをクリーン
 echo ------------------------------------------------------------------------
 echo START common project clean
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-common
+cd %BASE_DIR%\ha-common
 call mvn clean
 echo ------------------------------------------------------------------------
 echo END common project clean
@@ -27,7 +27,7 @@ rem db/targetディレクトリをクリーン
 echo ------------------------------------------------------------------------
 echo START db project clean
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-db
+cd %BASE_DIR%\ha-db
 call mvn clean
 echo ------------------------------------------------------------------------
 echo END db project clean
@@ -39,7 +39,7 @@ rem web/targetディレクトリをクリーン
 echo ------------------------------------------------------------------------
 echo START web project clean
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-web
+cd %BASE_DIR%\ha-web
 call mvn clean
 echo ------------------------------------------------------------------------
 echo END web project clean
@@ -51,7 +51,7 @@ rem business/targetディレクトリをクリーン
 echo ------------------------------------------------------------------------
 echo START business project clean
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-business
+cd %BASE_DIR%\ha-business
 call mvn clean
 echo ------------------------------------------------------------------------
 echo END business project clean

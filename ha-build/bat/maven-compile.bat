@@ -15,7 +15,7 @@ rem commonをcompile
 echo ------------------------------------------------------------------------
 echo START common project compile
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-common
+cd %BASE_DIR%\ha-common
 call mvn compile
 echo ------------------------------------------------------------------------
 echo END common project compile
@@ -27,7 +27,7 @@ rem dbをcompile
 echo ------------------------------------------------------------------------
 echo START db project compile
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-db
+cd %BASE_DIR%\ha-db
 call mvn compile
 echo ------------------------------------------------------------------------
 echo END db project compile
@@ -39,7 +39,7 @@ rem webをcompile
 echo ------------------------------------------------------------------------
 echo START web project compile
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-web
+cd %BASE_DIR%\ha-web
 call mvn compile
 echo ------------------------------------------------------------------------
 echo END web project compile
@@ -51,7 +51,7 @@ rem businessをcompile
 echo ------------------------------------------------------------------------
 echo START business project compile
 echo ------------------------------------------------------------------------
-cd %baseDir%\ha-business
+cd %BASE_DIR%\ha-business
 call mvn compile
 echo ------------------------------------------------------------------------
 echo END business project compile
