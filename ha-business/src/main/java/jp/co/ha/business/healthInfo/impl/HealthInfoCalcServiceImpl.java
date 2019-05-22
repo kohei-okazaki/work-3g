@@ -108,10 +108,10 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 
 		} else {
 
-			WEIGHT_ADJUST_VALUE = new BigDecimal("13.397");
-			HEIGHT_ADJUST_VALUE = new BigDecimal("4.799");
-			AGE_ADJUST_VALUE = new BigDecimal("5.677");
-			ADJUST_VALUE = new BigDecimal("88.362");
+			WEIGHT_ADJUST_VALUE = new BigDecimal("9.247");
+			HEIGHT_ADJUST_VALUE = new BigDecimal("3.098");
+			AGE_ADJUST_VALUE = new BigDecimal("4.33");
+			ADJUST_VALUE = new BigDecimal("447.593");
 
 		}
 
