@@ -1,6 +1,4 @@
 <div class="footer">
   <img class="browseBack" alt="戻る" src="../resources/image/icon_browseBack.jpg" th:src="@{/resources/image/icon_browseBack.jpg}" onclick="history.back()">
-  <div align="center">
-    <p>--- 健康管理アプリ ---</p>
-  </div>
+  <div align="center" th:text="'--- ' + #{healthInfoAppName} + ' ---'"></div>
 </div>

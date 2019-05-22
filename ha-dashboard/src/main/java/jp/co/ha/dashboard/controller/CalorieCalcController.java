@@ -50,10 +50,13 @@ public class CalorieCalcController implements BaseWebController {
 	/**
 	 * カロリー計算前画面
 	 *
+	 * @param model
+	 *     Model
+	 *
 	 * @return カロリー計算画面
 	 */
 	@GetMapping(value = "/index")
-	public String index() {
+	public String index(Model model) {
 		return getView(DashboardView.CALORIE_CALC);
 	}
 
@@ -91,6 +94,7 @@ public class CalorieCalcController implements BaseWebController {
 		});
 
 		CalorieCalcDto calcResult = calorieCalcService.calc(dto);
+		model.addAttribute("calcResult", calcResult);
 
 		return getView(DashboardView.CALORIE_CALC);
 	}

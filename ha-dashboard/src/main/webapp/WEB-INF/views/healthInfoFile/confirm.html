@@ -44,12 +44,8 @@
           <th class="data">
             <label>行数</label>
           </th>
-          <th class="data">
-            <label>身長</label>
-          </th>
-          <th class="data">
-            <label>体重</label>
-          </th>
+          <th class="data" th:text="#{height}"></th>
+          <th class="data" th:text="#{weight}"></th>
         </tr>
         <tr th:each="model, status : ${modelList}" class="data">
           <td th:text="${status.count}" align="center" class="data">

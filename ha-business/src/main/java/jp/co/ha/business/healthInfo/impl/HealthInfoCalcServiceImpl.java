@@ -13,6 +13,7 @@ import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.calc.StandardWeightCalcFunction;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
@@ -90,8 +91,44 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 */
 	@Override
 	public BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+
+		BigDecimal result = null;
+
+		BigDecimal WEIGHT_ADJUST_VALUE = null;
+		BigDecimal HEIGHT_ADJUST_VALUE = null;
+		BigDecimal AGE_ADJUST_VALUE = null;
+		BigDecimal ADJUST_VALUE = null;
+
+		if (GenderType.MALE == calorieCalcDto.getGenderType()) {
+
+			WEIGHT_ADJUST_VALUE = new BigDecimal("13.397");
+			HEIGHT_ADJUST_VALUE = new BigDecimal("4.799");
+			AGE_ADJUST_VALUE = new BigDecimal("5.677");
+			ADJUST_VALUE = new BigDecimal("88.362");
+
+		} else {
+
+			WEIGHT_ADJUST_VALUE = new BigDecimal("9.247");
+			HEIGHT_ADJUST_VALUE = new BigDecimal("3.098");
+			AGE_ADJUST_VALUE = new BigDecimal("4.33");
+			ADJUST_VALUE = new BigDecimal("447.593");
+
+		}
+
+		BigDecimal calcWeight = Calculator.calc(WEIGHT_ADJUST_VALUE, CalcMethod.MULTIPLY,
+				calorieCalcDto.getWeight(), 3,
+				RoundingMode.HALF_UP);
+		BigDecimal calcHeight = Calculator.calc(HEIGHT_ADJUST_VALUE, CalcMethod.MULTIPLY,
+				calorieCalcDto.getHeight(), 3,
+				RoundingMode.HALF_UP);
+		BigDecimal calcAge = Calculator.calc(AGE_ADJUST_VALUE, CalcMethod.MULTIPLY, calorieCalcDto.getAge(), 3,
+				RoundingMode.HALF_UP);
+
+		result = Calculator.calc(calcWeight, CalcMethod.ADD, calcHeight, 3, RoundingMode.HALF_UP);
+		result = Calculator.calc(result, CalcMethod.SUBTRACT, calcAge, 3, RoundingMode.HALF_UP);
+		result = Calculator.calc(result, CalcMethod.ADD, ADJUST_VALUE, 3, RoundingMode.HALF_UP);
+
+		return result;
 	}
 
 }

@@ -39,7 +39,7 @@
       <!--/* table部ここから */-->
       <div class="table">
         <div class="table-row">
-          <div class="table-header">削除</div>
+          <div class="table-header" th:text="#{delete}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
@@ -53,7 +53,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">ユーザID</div>
+          <div class="table-header" th:text="#{userId}"></div>
           <div class="table-data">
             <p th:text="*{userId}"></p>
             <input type="hidden" th:field="*{userId}" th:value="${userId}" />
@@ -63,7 +63,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">パスワード</div>
+          <div class="table-header" th:text="#{password}"></div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
           </div>
@@ -72,7 +72,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">パスワード有効期限</div>
+          <div class="table-header" th:text="#{passwordExpire}"></div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
           </div>
@@ -81,7 +81,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">APIキー</div>
+          <div class="table-header" th:text="#{apiKey}"></div>
           <div class="table-data">
             <p th:text="*{apiKey}"></p>
             <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
@@ -91,7 +91,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">メールアドレス</div>
+          <div class="table-header" th:text="#{mailAddress}"></div>
           <div class="table-data">
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
             <div id="suggest"></div>
@@ -101,7 +101,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">メールパスワード</div>
+          <div class="table-header" th:text="#{mailPassword}"></div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
           </div>
@@ -110,7 +110,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">備 考</div>
+          <div class="table-header" th:text="#{remarks}"></div>
           <div class="table-data">
             <textarea rows="10" cols="80" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
           </div>

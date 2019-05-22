@@ -33,8 +33,10 @@
     <h2 class="menuTitle">健康情報入力画面</h2>
 
     <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
+
       <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
+
       <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{height}" required placeholder="身長" />&ensp;cm
       <p class="attention">※半角数字とピリオドで入力してください</p>
       <br><br>
