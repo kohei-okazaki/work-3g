@@ -36,7 +36,7 @@
       <div class="table">
 
         <div class="table-row">
-          <div class="table-header">年齢</div>
+          <div class="table-header" th:text="#{age}"></div>
           <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{age}" placeholder="年齢" />&ensp;歳
           </div>
@@ -45,7 +45,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">性別</div>
+          <div class="table-header" th:text="#{gender}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" th:field="*{gender}" id="male" value="0" checked="checked">
@@ -59,7 +59,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">身長</div>
+          <div class="table-header" th:text="#{height}"></div>
           <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="身長" />&ensp;cm
           </div>
@@ -71,7 +71,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">体重</div>
+          <div class="table-header" th:text="#{weight}"></div>
           <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="体重" />&ensp;kg
           </div>
@@ -83,7 +83,7 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div class="table-header">生活活動代謝</div>
+          <div class="table-header" th:text="#{lifeWorkMetabolism}"></div>
           <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="生活活動代謝" />&ensp;kcal
             <br>
@@ -115,6 +115,12 @@
     </form>
 
     <br>
+
+    <!--/* 結果部ここから */-->
+    <div th:if="${calcResult} != null">
+      <div th:replace="./calorieCalc/calcResult.html"></div>
+    </div>
+    <!--/* 結果部ここまで */-->
 
   </div>
   <!--/* contentLayout部ここまで */-->
