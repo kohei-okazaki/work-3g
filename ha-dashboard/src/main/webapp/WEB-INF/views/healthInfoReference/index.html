@@ -35,17 +35,13 @@
       <!--/* table部ここから */-->
       <div class="table">
         <div class="table-row">
-          <div class="table-data">
-            <label>健康情報ID</label>
-          </div>
+          <div class="table-header" th:text="#{healthInfoId}"></div>
           <div class="table-data">
             <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
           </div>
         </div>
         <div class="table-row">
-          <div class="table-data">
-            <label>健康情報作成日</label>
-          </div>
+          <div class="table-header" th:text="#{healthInfoRegDate}"></div>
           <div class="table-data">
             <div class="radio" align="center">
               <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" />
@@ -89,21 +85,11 @@
       <!--/* table部ここから */-->
       <table class="data">
         <tr>
-          <th class="data sort" align="center" data-sort="height">
-            <label>身長</label>
-          </th>
-          <th class="data sort" align="center" data-sort="weight">
-            <label>体重</label>
-          </th>
-          <th class="data sort" align="center" data-sort="standardWeight">
-            <label>標準体重</label>
-          </th>
-          <th class="data sort" align="center" data-sort="bmi">
-            <label>BMI</label>
-          </th>
-          <th class="data sort" align="center" data-sort="healthInfoRegDate">
-            <label>健康情報作成日時</label>
-          </th>
+          <th class="data sort" align="center" data-sort="height" th:text="#{height}"></th>
+          <th class="data sort" align="center" data-sort="weight" th:text="#{weight}"></th>
+          <th class="data sort" align="center" data-sort="standardWeight" th:text="#{bmi}"></th>
+          <th class="data sort" align="center" data-sort="bmi" th:text="#{standardWeight}"></th>
+          <th class="data sort" align="center" data-sort="healthInfoRegDate" th:text="#{healthInfoRegDate}"></th>
         </tr>
         <tbody class="data list">
           <tr th:each="result : ${resultList}" class="data">

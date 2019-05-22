@@ -25,10 +25,21 @@
     <h2 class="menuTitle">健康情報一括登録画面</h2>
 
     <form id="healthInfoFileForm" action="./confirm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
-      <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" data-sal="slide-up"></div>
-      <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
 
-      <br><br>
+      <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" data-sal="slide-up"></div>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header" th:text="#{age}"></div>
+          <div class="table-data">
+            <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
+          </div>
+        </div>
+
+        <div class="table-row">&ensp;</div>
+      </div>
+      <!--/* table部ここまで */-->
 
       <!--/* table部ここから */-->
       <div class="table">

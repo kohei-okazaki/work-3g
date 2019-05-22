@@ -26,18 +26,14 @@
       <!--/* table部ここから */-->
       <div class="table">
         <div class="table-row">
-          <div class="table-header">
-            <label>ユーザID</label>
-          </div>
+          <div class="table-header" th:text="#{userId}"></div>
           <div class="table-data">
             <p th:text="*{userId}"></p>
             <input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
           </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>ヘッダ利用</label>
-          </div>
+          <div class="table-header" th:text="#{headerUse}"></div>
           <div class="table-data">
             <div th:if="${form.headerFlag} == 1">
               <label>する</label>
@@ -49,9 +45,7 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>フッタ利用</label>
-          </div>
+          <div class="table-header" th:text="#{footerUse}"></div>
           <div class="table-data">
             <div th:if="${form.footerFlag} == 1">
               <label>する</label>
@@ -63,9 +57,7 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>マスク利用</label>
-          </div>
+          <div class="table-header" th:text="#{maskUse}"></div>
           <div class="table-data">
             <div th:if="${form.maskFlag} == 1">
               <label>する</label>
@@ -77,9 +69,7 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>囲み文字利用</label>
-          </div>
+          <div class="table-header" th:text="#{enclosureCharUse}"></div>
           <div class="table-data">
             <div th:if="${form.enclosureCharFlag} == 1">
               <label>する</label>

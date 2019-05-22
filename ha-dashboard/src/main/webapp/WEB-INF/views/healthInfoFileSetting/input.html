@@ -23,6 +23,7 @@
     <h2 class="menuTitle">ファイル設定入力画面</h2>
 
     <form id="healthInfoFileSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${healthInfoFileSettingForm}">
+
       <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}" data-sal="slide-up"></div>
@@ -32,18 +33,14 @@
       <!--/* table部ここから */-->
       <div class="table">
         <div class="table-row">
-          <div class="table-header">
-            <label>ユーザID</label>
-          </div>
+          <div class="table-header" th:text="#{userId}"></div>
           <div class="table-data">
             <p th:text="*{userId}"></p>
             <input type="hidden" class="validate[required]" th:field="*{userId}" value="${userId}" />
           </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>ヘッダ利用</label>
-          </div>
+          <div class="table-header" th:text="#{headerUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked />
@@ -54,9 +51,7 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>フッタ利用</label>
-          </div>
+          <div class="table-header" th:text="#{footerUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked />
@@ -67,9 +62,7 @@
           </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>マスク利用</label>
-          </div>
+          <div class="table-header" th:text="#{maskUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked />
@@ -80,9 +73,7 @@
          </div>
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>囲み文字利用</label>
-          </div>
+          <div class="table-header" th:text="#{enclosureCharUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked />
