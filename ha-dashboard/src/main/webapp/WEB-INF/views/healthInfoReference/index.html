@@ -103,6 +103,10 @@
       </table>
       <!--/* table部ここまで */-->
 
+      <div class="pager">
+        <ul class="pagination"></ul>
+      </div>
+
       <br>
 
       <!--/* table部ここから */-->
@@ -229,7 +233,13 @@
           "standardWeight",
           "bmi",
           "healthInfoRegDate"
-        ]
+        ],
+        page : 10,
+        pagination : {
+          pageationClass : "pagination",
+          innerWindow : 1,
+          outerWindow : 1
+        }
       };
       var columnList = new List("resultList", options);
       columnList.sort("healthInfoRegDate", {
