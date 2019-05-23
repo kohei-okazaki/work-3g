@@ -5,7 +5,7 @@ import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseApiResponse;
 
 /**
- * API基底サービスインターフェース<br>
+ * API基底サービスインターフェース
  *
  * @param <Rq>
  *     リクエスト
