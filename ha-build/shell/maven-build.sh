@@ -5,34 +5,34 @@
 ########################################
 
 # 基底ディレクトリ
-baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
-commonDir=${baseDir}"/ha-common"
-dbDir=${baseDir}"/ha-db"
-webDir=${baseDir}"/ha-web"
-businessDir=${baseDir}"/ha-business"
-apiDir=${baseDir}"/ha-api"
-dashboardDir=${baseDir}"/ha-dashboard"
+BASE_DIR="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
+COMMON_DIR=${BASE_DIR}"/ha-common"
+DB_DIR=${BASE_DIR}"/ha-db"
+WEB_DIR=${BASE_DIR}"/ha-web"
+BUSINESS_DIR=${BASE_DIR}"/ha-business"
+API_DIR=${BASE_DIR}"/ha-api"
+DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard"
 
 # 成果物ディレクトリ
-commonTargetDir=${baseDir}"/ha-common/target"
-dbTargetDir=${baseDir}"/ha-db/target"
-webTargetDir=${baseDir}"/ha-web/target"
-businessTargetDir=${baseDir}"/ha-business/target"
+COMMON_TARGET_DIR=${BASE_DIR}"/ha-common/target"
+DB_TARGET_DIR=${BASE_DIR}"/ha-db/target"
+WEB_TARGET_DIR=${BASE_DIR}"/ha-web/target"
+BUSINESS_TARGET_DIR=${BASE_DIR}"/ha-business/target"
 
 # コピー先ディレクトリ
-dbLibDir=${baseDir}"/ha-db/src/main/webapp/WEB-INF/lib"
-webLibDir=${baseDir}"/ha-web/src/main/webapp/WEB-INF/lib"
-businessLibDir=${baseDir}"/ha-business/src/main/webapp/WEB-INF/lib"
-apiLibDir=${baseDir}"/ha-api/src/main/webapp/WEB-INF/lib"
-dashboardLibDir=${baseDir}"/ha-dashboard/src/main/webapp/WEB-INF/lib"
+DB_LIB_DIR=${BASE_DIR}"/ha-db/src/main/webapp/WEB-INF/lib"
+WEB_LIB_DIR=${BASE_DIR}"/ha-web/src/main/webapp/WEB-INF/lib"
+BUSINESS_LIB_DIR=${BASE_DIR}"/ha-business/src/main/webapp/WEB-INF/lib"
+API_LIB_DIR=${BASE_DIR}"/ha-api/src/main/webapp/WEB-INF/lib"
+DASHBOARD_LIB_DIR=${BASE_DIR}"/ha-dashboard/src/main/webapp/WEB-INF/lib"
 
 
 # libディレクトリ確認用変数
-checkDbDir=${baseDir}"/ha-db/src/main/webapp/WEB-INF"
-checkWebDir=${baseDir}"/ha-web/src/main/webapp/WEB-INF"
-checkBusinessDir=${baseDir}"/ha-business/src/main/webapp/WEB-INF"
-checkApiDir=${baseDir}"/ha-api/src/main/webapp/WEB-INF"
-checkDashboardDir=${baseDir}"/ha-dashboard/src/main/webapp/WEB-INF"
+CHECK_DB_DIR=${BASE_DIR}"/ha-db/src/main/webapp/WEB-INF"
+CHECK_WEB_DIR=${BASE_DIR}"/ha-web/src/main/webapp/WEB-INF"
+CHECK_BUSINESS_DIR=${BASE_DIR}"/ha-business/src/main/webapp/WEB-INF"
+CHECK_API_DIR=${BASE_DIR}"/ha-api/src/main/webapp/WEB-INF"
+CHECK_DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard/src/main/webapp/WEB-INF"
 
 
 echo "--------------------"
@@ -44,54 +44,54 @@ JAR_VERSION="1.0"
 ########################################
 # common jarを作成
 ########################################
-cd ${commonDir}
+cd ${COMMON_DIR}
 mvn package
 mvn install:install-file -Dfile=target/ha-common-${JAR_VERSION}.jar -DgroupId=jp.co.ha.common -DartifactId=ha-common -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 ########################################
 # db jarを作成
 ########################################
-cd ${dbDir}
+cd ${DB_DIR}
 mvn package
 mvn install:install-file -Dfile=target/ha-db-${JAR_VERSION}.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 ########################################
 # web jarを作成
 ########################################
-cd ${businessDir}
+cd ${BUSINESS_DIR}
 mvn package
 mvn install:install-file -Dfile=target/ha-web-${JAR_VERSION}.jar -DgroupId=jp.co.ha.web -DartifactId=ha-web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 ########################################
 # business jarを作成
 ########################################
-cd ${businessDir}
+cd ${BUSINESS_DIR}
 mvn package
 mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=jp.co.ha.business -DartifactId=ha-business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 # libディレクトリを確認する
-cd ${checkDbDir}
+cd ${CHECK_DB_DIR}
 if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
-cd ${checkWebDir}
+cd ${CHECK_WEB_DIR}
 if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
-cd ${checkBusinessDir}
+cd ${CHECK_BUSINESS_DIR}
 if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
-cd ${checkApiDir}
+cd ${CHECK_API_DIR}
 if [ ! -e "lib" ] ; then
   mkdir lib
 fi
 
-cd ${checkDashboardDir}
+cd ${CHECK_DASHBOARD_DIR}
 if [ ! -e "lib" ] ; then
   mkdir lib
 fi
@@ -99,87 +99,87 @@ fi
 ########################################
 # deploy common
 ########################################
-cd ${commonTargetDir}
-cp *.jar ${dbLibDir}
+cd ${COMMON_TARGET_DIR}
+cp *.jar ${DB_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${dbLibDir}
+  echo "コピーに失敗しました. to : "${DB_LIB_DIR}
 fi
 
-cp *.jar ${webLibDir}
+cp *.jar ${WEB_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${webLibDir}
+  echo "コピーに失敗しました. to : "${WEB_LIB_DIR}
 fi
 
-cp *.jar ${businessLibDir}
+cp *.jar ${BUSINESS_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${businessLibDir}
+  echo "コピーに失敗しました. to : "${BUSINESS_LIB_DIR}
 fi
 
-cp *.jar ${apiLibDir}
+cp *.jar ${API_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${apiLibDir}
+  echo "コピーに失敗しました. to : "${API_LIB_DIR}
 fi
 
-cp *.jar ${dashboardLibDir}
+cp *.jar ${DASHBOARD_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${dashboardLibDir}
+  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
 fi
 
 ########################################
 # deploy db
 ########################################
-cd ${dbTargetDir}
-cp *.jar ${businessLibDir}
+cd ${DB_TARGET_DIR}
+cp *.jar ${BUSINESS_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${businessLibDir}
+  echo "コピーに失敗しました. to : "${BUSINESS_LIB_DIR}
 fi
 
-cp *.jar ${webLibDir}
+cp *.jar ${WEB_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${webLibDir}
+  echo "コピーに失敗しました. to : "${WEB_LIB_DIR}
 fi
 
-cp *.jar ${apiLibDir}
+cp *.jar ${API_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${apiLibDir}
+  echo "コピーに失敗しました. to : "${API_LIB_DIR}
 fi
 
-cp *.jar ${dashboardLibDir}
+cp *.jar ${DASHBOARD_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${dashboardLibDir}
+  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
 fi
 
 ########################################
 # deploy web
 ########################################
-cd ${webTargetDir}
-cp *.jar ${apiLibDir}
+cd ${WEB_TARGET_DIR}
+cp *.jar ${API_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${apiLibDir}
+  echo "コピーに失敗しました. to : "${API_LIB_DIR}
 fi
 
-cp *.jar ${dashboardLibDir}
+cp *.jar ${DASHBOARD_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${dashboardLibDir}
+  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
 fi
 
 ########################################
 # deploy business
 ########################################
-cd ${businessTargetDir}
-cp *.jar ${webLibDir}
+cd ${BUSINESS_TARGET_DIR}
+cp *.jar ${WEB_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${webLibDir}
+  echo "コピーに失敗しました. to : "${WEB_LIB_DIR}
 fi
 
-cp *.jar ${apiLibDir}
+cp *.jar ${API_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${apiLibDir}
+  echo "コピーに失敗しました. to : "${API_LIB_DIR}
 fi
 
-cp *.jar ${dashboardLibDir}
+cp *.jar ${DASHBOARD_LIB_DIR}
 if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${dashboardLibDir}
+  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
 fi
 
 
@@ -187,4 +187,4 @@ echo "------------------"
 echo "END maven-build.sh"
 echo "------------------"
 
-cd ${baseDir}"/ha-build/shell"
+cd ${BASE_DIR}"/ha-build/shell"

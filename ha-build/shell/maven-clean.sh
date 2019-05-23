@@ -5,13 +5,13 @@
 ########################################
 
 # 基底ディレクトリ
-baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
+BASE_DIR="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
 
 # プロジェクトディレクトリ
-commonDir=${baseDir}"/ha-common"
-dbDir=${baseDir}"/ha-db"
-webDir=${baseDir}"/ha-web"
-businessDir=${baseDir}"/ha-business"
+COMMON_DIR=${BASE_DIR}"/ha-common"
+DB_DIR=${BASE_DIR}"/ha-db"
+WEB_DIR=${BASE_DIR}"/ha-web"
+BUSINESS_DIR=${BASE_DIR}"/ha-business"
 
 echo "-------------------"
 echo "START maven-clean.sh"
@@ -20,7 +20,7 @@ echo "-------------------"
 echo "------------------------------------------------------------------------"
 echo "START common project clean"
 echo "------------------------------------------------------------------------"
-cd ${commonDir}
+cd ${COMMON_DIR}
 mvn clean
 echo "------------------------------------------------------------------------"
 echo "END common project clean"
@@ -30,7 +30,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START db project clean"
 echo "------------------------------------------------------------------------"
-cd ${dbDir}
+cd ${DB_DIR}
 mvn clean
 echo "------------------------------------------------------------------------"
 echo "END db project clean"
@@ -39,7 +39,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START web project clean"
 echo "------------------------------------------------------------------------"
-cd ${webDir}
+cd ${WEB_DIR}
 mvn clean
 echo "------------------------------------------------------------------------"
 echo "END web project clean"
@@ -48,14 +48,14 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START business project clean"
 echo "------------------------------------------------------------------------"
-cd ${businessDir}
+cd ${BUSINESS_DIR}
 mvn clean
 echo "------------------------------------------------------------------------"
 echo "END business project clean"
 echo "------------------------------------------------------------------------"
 
 # 元のshellのディレクトリに戻る
-cd ${baseDir}"/ha-build/shell"
+cd ${BASE_DIR}"/ha-build/shell"
 
 echo "-------------------"
 echo "END maven-clean.sh"
