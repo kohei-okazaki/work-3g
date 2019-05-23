@@ -169,7 +169,6 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 	 *     テキスト
 	 */
 	protected void setText(Cell cell, String text) {
-//		cell.setCellType(CellType.STRING);
 		cell.setCellValue(text);
 	}
 

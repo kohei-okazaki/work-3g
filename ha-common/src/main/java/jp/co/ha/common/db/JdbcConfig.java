@@ -40,7 +40,8 @@ public class JdbcConfig {
 	 * 初期化処理
 	 */
 	private void init() {
-		String resourcePath = this.getClass().getClassLoader().getResource("").getPath() + FileSeparator.SYSTEM.getValue() + "META-INF";
+		String resourcePath = this.getClass().getClassLoader().getResource("").getPath()
+				+ FileSeparator.SYSTEM.getValue() + "META-INF";
 		Properties prop = new PropertyReader().read(resourcePath, "jdbc.properties");
 		this.driverClassName = prop.getProperty("jdbc.driverClassName");
 		this.url = prop.getProperty("jdbc.url");

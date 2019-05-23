@@ -63,7 +63,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 					HealthInfo healthInfo = (HealthInfo) src;
 					HealthInfoReferenceDto result = (HealthInfoReferenceDto) dest;
 
-					result.setHealthInfoRegDate(DateUtil.toString(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+					result.setHealthInfoRegDate(
+							DateUtil.toString(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 				}
 			});
 
@@ -85,7 +86,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 					HealthInfoReferenceDto dto = (HealthInfoReferenceDto) src;
 					ReferenceCsvDownloadModel model = (ReferenceCsvDownloadModel) dest;
 
-					model.setHealthInfoRegDate(DateUtil.toDate(dto.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+					model.setHealthInfoRegDate(
+							DateUtil.toDate(dto.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 				}
 			});
 			model.setUserId(userId);
