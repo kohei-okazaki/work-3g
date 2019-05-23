@@ -1,7 +1,7 @@
 package jp.co.ha.web.view;
 
 /**
- * viewEnumの基底インターフェース<br>
+ * ViewEnumの基底インターフェース<br>
  * すべてのViewEnumはこのインターフェースを継承すること
  *
  */

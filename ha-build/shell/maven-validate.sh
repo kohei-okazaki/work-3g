@@ -5,15 +5,15 @@
 ########################################
 
 # 基底ディレクトリ
-baseDir="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
+BASE_DIR="/Applications/Eclipse_4.8.0.app/Contents/workspace/work-3g"
 
 # プロジェクトディレクトリ
-commonDir=${baseDir}"/ha-common"
-dbDir=${baseDir}"/ha-db"
-webDir=${baseDir}"/ha-web"
-businessDir=${baseDir}"/ha-business"
-apiDir=${baseDir}"/ha-api"
-dashboardDir=${baseDir}"/ha-dashboard"
+COMMON_DIR=${BASE_DIR}"/ha-common"
+DB_DIR=${BASE_DIR}"/ha-db"
+WEB_DIR=${BASE_DIR}"/ha-web"
+BUSINESS_DIR=${BASE_DIR}"/ha-business"
+API_DIR=${BASE_DIR}"/ha-api"
+DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard"
 
 echo "-----------------------"
 echo "START maven-validate.sh"
@@ -22,7 +22,7 @@ echo "-----------------------"
 echo "------------------------------------------------------------------------"
 echo "START common project validate"
 echo "------------------------------------------------------------------------"
-cd ${commonDir}
+cd ${COMMON_DIR}
 mvn validate
 echo "------------------------------------------------------------------------"
 echo "END common project validate"
@@ -32,7 +32,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START db project validate"
 echo "------------------------------------------------------------------------"
-cd ${dbDir}
+cd ${DB_DIR}
 mvn validate
 echo "------------------------------------------------------------------------"
 echo "END db project validate"
@@ -42,7 +42,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START web project validate"
 echo "------------------------------------------------------------------------"
-cd ${webDir}
+cd ${WEB_DIR}
 mvn validate
 echo "------------------------------------------------------------------------"
 echo "END web project validate"
@@ -52,7 +52,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START business project validate"
 echo "------------------------------------------------------------------------"
-cd ${businessDir}
+cd ${BUSINESS_DIR}
 mvn validate
 echo "------------------------------------------------------------------------"
 echo "END business project validate"
@@ -62,7 +62,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START api project validate"
 echo "------------------------------------------------------------------------"
-cd ${apiDir}
+cd ${API_DIR}
 mvn validate
 echo "------------------------------------------------------------------------"
 echo "END api project validate"
@@ -72,7 +72,7 @@ echo "------------------------------------------------------------------------"
 echo "------------------------------------------------------------------------"
 echo "START dashboard project validate"
 echo "------------------------------------------------------------------------"
-cd ${dashboardDir}
+cd ${DASHBOARD_DIR}
 mvn validate
 echo "------------------------------------------------------------------------"
 echo "END dashboard project validate"
@@ -80,7 +80,7 @@ echo "------------------------------------------------------------------------"
 
 
 # 元のshellのディレクトリに戻る
-cd ${baseDir}"/ha-build/shell"
+cd ${BASE_DIR}"/ha-build/shell"
 
 echo "---------------------"
 echo "END maven-validate.sh"

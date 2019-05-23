@@ -51,7 +51,7 @@ import jp.co.ha.web.controller.BaseWizardController;
  */
 @Controller
 @RequestMapping("healthInfo")
-public class HealthInfoController implements BaseWizardController<HealthInfoForm> {
+public class HealthInfoRegistController implements BaseWizardController<HealthInfoForm> {
 
 	/** 健康情報画面サービス */
 	@Autowired
