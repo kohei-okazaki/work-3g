@@ -18,7 +18,7 @@
     <org.aspectj-version>1.9.4</org.aspectj-version>
     <org.slf4j-version>1.7.26</org.slf4j-version>
     <logback-version>1.2.3</logback-version>
-    <org.jackson-version>2.9.8</org.jackson-version>
+    <org.jackson-version>2.9.9</org.jackson-version>
     <poi-version>4.1.0</poi-version>
     <mysql-version>8.0.16</mysql-version>
     <mybatis-version>3.5.1</mybatis-version>
@@ -186,7 +186,7 @@
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy</artifactId>
-      <version>2.5.6</version>
+      <version>2.5.7</version>
     </dependency>
 
     <!-- @Inject -->
@@ -299,7 +299,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1</version>
         <configuration>
           <source>${java-version}</source>
           <target>${java-version}</target>
