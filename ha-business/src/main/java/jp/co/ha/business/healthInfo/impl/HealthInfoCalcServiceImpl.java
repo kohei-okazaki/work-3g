@@ -121,7 +121,8 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 		BigDecimal calcHeight = Calculator.calc(HEIGHT_ADJUST_VALUE, CalcMethod.MULTIPLY,
 				calorieCalcDto.getHeight(), 3,
 				RoundingMode.HALF_UP);
-		BigDecimal calcAge = Calculator.calc(AGE_ADJUST_VALUE, CalcMethod.MULTIPLY, calorieCalcDto.getAge(), 3,
+		BigDecimal calcAge = Calculator.calc(AGE_ADJUST_VALUE, CalcMethod.MULTIPLY,
+				BigDecimal.valueOf(calorieCalcDto.getAge()), 3,
 				RoundingMode.HALF_UP);
 
 		result = Calculator.calc(calcWeight, CalcMethod.ADD, calcHeight, 3, RoundingMode.HALF_UP);
