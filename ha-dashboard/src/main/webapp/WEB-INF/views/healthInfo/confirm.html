@@ -23,13 +23,21 @@
     <h2 class="menuTitle">健康情報入力確認画面</h2>
 
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${healthInfoForm}">
-      <p>身長：
-      <input type="text" th:field="${form.height}" size="6" readonly />
-      cm</p>
-      <br>
-      <p>体重：
-      <input type="text" th:field="${form.weight}" size="6" readonly />
-      kg</p>
+
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header" th:text="#{height}"></div>
+          <div class="table-data" th:text="${form.height} + '&ensp;cm'"></div>
+          <input type="hidden" th:field="*{height}">
+        </div>
+        <div class="table-row">
+          <div class="table-header" th:text="#{weight}"></div>
+          <div class="table-data" th:text="${form.weight} + '&ensp;kg'"></div>
+          <input type="hidden" th:field="*{weight}">
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
 
       <br><br>
 

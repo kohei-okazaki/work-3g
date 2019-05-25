@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.db.crud.read.SystemEnvironmentMtSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
@@ -47,6 +48,7 @@ import jp.co.ha.dashboard.service.annotation.ReferenceDownloadExcel;
 import jp.co.ha.dashboard.validator.HealthInfoReferenceValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.db.entity.SystemEnvironmentMt;
 import jp.co.ha.web.controller.BaseWebController;
 
 /**
@@ -74,6 +76,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+	/** システム環境マスタ検索サービス */
+	@Autowired
+	private SystemEnvironmentMtSearchService systemEnvironmentMtSearchService;
 
 	/**
 	 * Validateを設定
@@ -99,17 +104,17 @@ public class HealthInfoReferenceController implements BaseWebController {
 	}
 
 	/**
-	 * 検索照会画面
+	 * 照会前画面
 	 *
 	 * @return 検索照会画面
 	 */
 	@GetMapping(value = "/index")
-	public String reference() {
+	public String index() {
 		return getView(DashboardView.HEALTH_INFO_REFFERNCE);
 	}
 
 	/**
-	 * 検索結果画面を表示
+	 * 照会後画面
 	 *
 	 * @param request
 	 *     HttpServletRequest
@@ -171,6 +176,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 		model.addAttribute("weight", weightList);
 		model.addAttribute("bmi", bmiList);
 		model.addAttribute("standardWeight", standardWeightList);
+
+		SystemEnvironmentMt systemEnvironmentMt = systemEnvironmentMtSearchService.find();
+		model.addAttribute("systemInfo", systemEnvironmentMt);
 
 		// sessionに検索結果リストを設定
 		sessionService.setValue(request.getSession(), "resultList", resultList);
