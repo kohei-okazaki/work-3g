@@ -10,9 +10,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import jp.co.ha.business.api.HealthInfoRegistApi;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -50,9 +50,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** 健康情報登録サービス */
+	/** 健康情報登録API */
 	@Autowired
-	private HealthInfoRegistService healthInfoRegistService;
+	private HealthInfoRegistApi registApi;
 	/** messageSource */
 	@Autowired
 	private MessageSource messageSource;
@@ -94,10 +94,8 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	public HealthInfoRegistResponse regist(HealthInfoDto dto, String userId) throws BaseException {
 
 		HealthInfoRegistRequest apiRequest = setUpApiRequest(dto, userId);
-		healthInfoRegistService.checkRequest(apiRequest);
 		HealthInfoRegistResponse apiResponse = new HealthInfoRegistResponse();
-		healthInfoRegistService.execute(apiRequest, apiResponse);
-
+		registApi.execute(apiRequest, apiResponse);
 		return apiResponse;
 	}
 

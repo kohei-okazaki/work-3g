@@ -56,6 +56,16 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 			throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
 					"リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
 		}
+
+		// アカウント取得
+		Account account = accountSearchService.findByUserId(request.getUserId());
+		if (BeanUtil.isNull(account)) {
+			throw new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
+					"アカウントが存在しません userId:" + request.getUserId());
+		}
+
+		// API利用判定
+		checkApiUse(account, request);
 	}
 
 	/**
@@ -63,15 +73,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	 */
 	@Override
 	public void execute(HealthInfoRegistRequest request, HealthInfoRegistResponse response) throws BaseException {
-
-		// アカウント取得
-		Account account = accountSearchService.findByUserId(request.getUserId());
-		if (BeanUtil.isNull(account)) {
-			throw new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
-		}
-
-		// API利用判定
-		checkApiUse(account, request);
 
 		// リクエストをEntityにつめる
 		HealthInfo entity = toEntity().apply(request);

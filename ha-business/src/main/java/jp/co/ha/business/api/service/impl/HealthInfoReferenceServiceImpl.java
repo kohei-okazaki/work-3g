@@ -29,12 +29,12 @@ import jp.co.ha.db.entity.HealthInfo;
 @Service
 public class HealthInfoReferenceServiceImpl extends CommonService implements HealthInfoReferenceService {
 
-	/** 健康情報検索サービス */
-	@Autowired
-	private HealthInfoSearchService healthInfoSearchService;
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報検索サービス */
+	@Autowired
+	private HealthInfoSearchService healthInfoSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -45,13 +45,14 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 		// リクエスト種別チェック
 		if (!RequestType.HEALTH_INFO_REFERENCE.is(request.getRequestType())) {
 			throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
-					"リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
+					"リクエスト種別が一致しません requestType:" + request.getRequestType().getName());
 		}
 
 		// アカウント取得
 		Account account = accountSearchService.findByUserId(request.getUserId());
 		if (BeanUtil.isNull(account)) {
-			throw new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL, "アカウントが存在しません userId:" + request.getUserId());
+			throw new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
+					"アカウントが存在しません userId:" + request.getUserId());
 		}
 
 		// API利用判定
@@ -68,10 +69,10 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 				request.getUserId());
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			throw new BusinessException(CommonErrorCode.DB_NO_DATA,
-					"該当のレコードがみつかりません 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
+					"該当のレコードが見つかりません healthInfoId:" + request.getHealthInfoId() + ",userId:" + request.getUserId());
 		} else if (CollectionUtil.isMultiple(healthInfoList)) {
 			throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
-					"データが複数存在します 健康情報ID:" + request.getHealthInfoId() + ",ユーザID:" + request.getUserId());
+					"該当のデータが複数存在します healthInfoId:" + request.getHealthInfoId() + ",userId:" + request.getUserId());
 		}
 
 		HealthInfo healthInfo = CollectionUtil.getFirst(healthInfoList);
