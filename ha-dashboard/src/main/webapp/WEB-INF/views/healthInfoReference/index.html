@@ -80,63 +80,8 @@
     <br>
 
     <!--/* 結果部ここから */-->
-    <div th:if="${hasResult}" align="center" class="contentLayout" id="resultList">
-
-      <!--/* table部ここから */-->
-      <table class="data">
-        <tr>
-          <th class="data sort" align="center" data-sort="height" th:text="#{height}"></th>
-          <th class="data sort" align="center" data-sort="weight" th:text="#{weight}"></th>
-          <th class="data sort" align="center" data-sort="standardWeight" th:text="#{bmi}"></th>
-          <th class="data sort" align="center" data-sort="bmi" th:text="#{standardWeight}"></th>
-          <th class="data sort" align="center" data-sort="healthInfoRegDate" th:text="#{healthInfoRegDate}"></th>
-        </tr>
-        <tbody class="data list">
-          <tr th:each="result : ${resultList}" class="data">
-            <td th:text="${result.height}" align="center" class="data height">
-            <td th:text="${result.weight}" align="center" class="data weight">
-            <td th:text="${result.standardWeight}" align="center" class="data standardWeight">
-            <td th:text="${result.bmi}" align="center" class="data bmi">
-            <td th:text="${result.healthInfoRegDate}" align="center" class="data healthInfoRegDate">
-          </tr>
-        </tbody>
-      </table>
-      <!--/* table部ここまで */-->
-
-      <div class="pager">
-        <ul class="pagination"></ul>
-      </div>
-
-      <br>
-
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-data">
-            <!--/* Excel出力ここから */-->
-            <div data-sal="slide-up">
-              <input id="excel-download" class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
-            </div>
-            <!--/* Excel出力ここまで */-->
-          </div>
-          <div class="table-data">&ensp;&ensp;</div>
-          <div class="table-data">
-            <!--/* CSV出力ここから */-->
-            <div data-sal="slide-up">
-              <input id="csv-download" class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
-            </div>
-            <!--/* CSV出力ここまで */-->
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
-
-      <br>
-
-      <div align="center" class="contentLayout">
-        <canvas id="chart" width="250" height="150"></canvas>
-      </div>
-
+    <div th:if="${hasResult}">
+      <div th:replace="./healthInfoReference/result.html"></div>
     </div>
     <!--/* 結果部ここまで */-->
 
@@ -156,7 +101,6 @@
   <script type="text/javascript" src="../resources/js/reference.min.js" th:src="@{/resources/js/reference.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript" th:inline="javascript">
-
     $(function() {
 
       sal({
@@ -225,22 +169,36 @@
         }
       });
 
+      var systemInfo = /*[[ ${systemInfo} ]]*/;
+      var options;
+      if (systemInfo == null) {
+        options = {
+            valueNames : [
+              "height",
+              "weight",
+              "standardWeight",
+              "bmi",
+              "healthInfoRegDate"
+            ]
+        };
+      } else {
+        options = {
+          valueNames : [
+            "height",
+            "weight",
+            "standardWeight",
+            "bmi",
+            "healthInfoRegDate"
+          ],
+          page : systemInfo.pagingCount,
+          pagination : {
+            pageationClass : "pagination",
+            innerWindow : 1,
+            outerWindow : 1
+          }
+        };
+      }
       // Sort処理
-      var options = {
-        valueNames : [
-          "height",
-          "weight",
-          "standardWeight",
-          "bmi",
-          "healthInfoRegDate"
-        ],
-        page : 10,
-        pagination : {
-          pageationClass : "pagination",
-          innerWindow : 1,
-          outerWindow : 1
-        }
-      };
       var columnList = new List("resultList", options);
       columnList.sort("healthInfoRegDate", {
         order: "desc"
@@ -249,6 +207,5 @@
     /*]]>*/
 
   </script>
-
 </body>
 </html>
