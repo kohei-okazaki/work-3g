@@ -12,7 +12,7 @@ import jp.co.ha.business.healthInfo.type.GenderType;
 public class CalorieCalcDto {
 
 	/** 年齢 */
-	private BigDecimal age;
+	private Integer age;
 	/** 性別 */
 	private GenderType genderType;
 	/** 身長 */
@@ -31,7 +31,7 @@ public class CalorieCalcDto {
 	 *
 	 * @return age
 	 */
-	public BigDecimal getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
@@ -41,7 +41,7 @@ public class CalorieCalcDto {
 	 * @param age
 	 *     年齢
 	 */
-	public void setAge(BigDecimal age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 

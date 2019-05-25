@@ -25,7 +25,7 @@ public class CalorieCalcForm implements BaseForm {
 	/** 年齢 */
 	@Required(message = "年齢が未入力です")
 	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "年齢は半角数字で入力して下さい")
-	private BigDecimal age;
+	private Integer age;
 	/** 性別 */
 	@Required(message = "性別が未入力です")
 	private String gender;
@@ -54,7 +54,7 @@ public class CalorieCalcForm implements BaseForm {
 	 *
 	 * @return age
 	 */
-	public BigDecimal getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
@@ -64,7 +64,7 @@ public class CalorieCalcForm implements BaseForm {
 	 * @param age
 	 *     年齢
 	 */
-	public void setAge(BigDecimal age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 
