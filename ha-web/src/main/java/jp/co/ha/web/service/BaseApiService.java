@@ -18,7 +18,7 @@ public interface BaseApiService<Rq extends BaseApiRequest, Rs extends BaseApiRes
 	 * 継承先でそれぞれチェックを実装
 	 *
 	 * @param request
-	 *     Request実装クラス
+	 *     APIリクエスト
 	 * @throws BaseException
 	 *     基底例外
 	 */

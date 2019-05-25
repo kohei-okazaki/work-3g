@@ -25,6 +25,7 @@ public class ValidateError {
 	 * nameを設定する
 	 *
 	 * @param name
+	 *     フィールド名
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -43,6 +44,7 @@ public class ValidateError {
 	 * messageを設定する
 	 *
 	 * @param message
+	 *     エラーメッセージ
 	 */
 	public void setMessage(String message) {
 		this.message = message;
@@ -61,6 +63,7 @@ public class ValidateError {
 	 * valueを設定する
 	 *
 	 * @param value
+	 *     値
 	 */
 	public void setValue(String value) {
 		this.value = value;

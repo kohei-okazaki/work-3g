@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -17,6 +18,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  *
  */
 @Aspect
+@Component
 public class ApiConnectionExecutor {
 
 	/** LOG */
@@ -36,7 +38,7 @@ public class ApiConnectionExecutor {
 	 * @throws Throwable
 	 *     実行時のエラー
 	 */
-	@Around("execution(* *jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
+	@Around("execution(* jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
 	public void outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
 		// Requestログ出力

@@ -106,7 +106,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/**
 	 * 照会前画面
 	 *
-	 * @return 検索照会画面
+	 * @return 照会前画面
 	 */
 	@GetMapping(value = "/index")
 	public String index() {
@@ -124,7 +124,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     検索情報フォーム
 	 * @param result
 	 *     BindingResult
-	 * @return 検索結果画面
+	 * @return 照会後画面
 	 * @throws BaseException
 	 *     基底例外
 	 */

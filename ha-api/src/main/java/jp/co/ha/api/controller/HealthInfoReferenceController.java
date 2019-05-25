@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.HealthInfoReferenceApi;
 import jp.co.ha.business.api.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
-import jp.co.ha.business.api.service.HealthInfoReferenceService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.controller.BaseRestController;
 
@@ -19,9 +19,9 @@ import jp.co.ha.web.controller.BaseRestController;
 public class HealthInfoReferenceController extends
 		BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
-	/** 健康情報照会サービス */
+	/** 健康情報照会API */
 	@Autowired
-	private HealthInfoReferenceService service;
+	private HealthInfoReferenceApi api;
 
 	/**
 	 * {@inheritDoc}
@@ -37,10 +37,7 @@ public class HealthInfoReferenceController extends
 	@Override
 	public void accept(HealthInfoReferenceRequest request, HealthInfoReferenceResponse response) throws BaseException {
 
-		// リクエスト情報のチェック
-		service.checkRequest(request);
-
-		service.execute(request, response);
+		api.execute(request, response);
 
 	}
 

@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.api.HealthInfoRegistApi;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;
@@ -34,9 +34,9 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
-	/** 健康情報登録APIサービス */
+	/** 健康情報登録API */
 	@Autowired
-	private HealthInfoRegistService healthInfoRegistService;
+	private HealthInfoRegistApi registApi;
 	/** 妥当性チェック */
 	@Autowired
 	private BeanValidator<HealthInfoCsvUploadModel> validator;
@@ -63,8 +63,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 	@Override
 	public void regist(List<HealthInfoCsvUploadModel> modelList, String userId) throws BaseException {
 		for (HealthInfoRegistRequest apiRequest : toRequestList(modelList, userId)) {
-			healthInfoRegistService.checkRequest(apiRequest);
-			healthInfoRegistService.execute(apiRequest, new HealthInfoRegistResponse());
+			registApi.execute(apiRequest, new HealthInfoRegistResponse());
 		}
 	}
 
