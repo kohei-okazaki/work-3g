@@ -49,9 +49,9 @@
           <div class="table-data">
             <div class="radio">
               <input type="radio" th:field="*{gender}" id="male" value="0" checked="checked">
-              <label for="male" class="switch-off">男性</label>
+              <label for="male" class="switch-off" th:text="#{male}"></label>
               <input type="radio" th:field="*{gender}" id="female" value="1">
-              <label for="female">女性</label>
+              <label for="female" th:text="#{female}"></label>
             </div>
           </div>
         </div>
@@ -215,6 +215,5 @@
     });
 
   </script>
-
 </body>
 </html>
