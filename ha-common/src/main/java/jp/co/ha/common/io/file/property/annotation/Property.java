@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Documented
 @Retention(RUNTIME)
-@Target(METHOD)
+@Target(FIELD)
 public @interface Property {
 
 	/**
