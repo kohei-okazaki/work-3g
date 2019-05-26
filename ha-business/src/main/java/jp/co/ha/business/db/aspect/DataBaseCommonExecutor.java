@@ -1,4 +1,4 @@
-package jp.co.ha.business.db;
+package jp.co.ha.business.db.aspect;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.Logger;
@@ -17,6 +18,7 @@ import jp.co.ha.common.util.DateUtil;
  *
  */
 @Aspect
+@Component
 public class DataBaseCommonExecutor {
 
 	/** LOG */

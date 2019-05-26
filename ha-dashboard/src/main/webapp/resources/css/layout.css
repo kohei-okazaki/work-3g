@@ -96,6 +96,7 @@ th.data, td.data {
 .table-header {
   margin : 5px 5px 5px 5px;
   padding : 5px 5px 5px 5px;
+  vertical-align: middle;
   display : table-cell;
 }
 
@@ -104,6 +105,7 @@ th.data, td.data {
   margin : 5px 5px 5px 5px;
   padding : 5px 5px 5px 5px;
   text-align : left;
+  vertical-align: middle;
   display : table-cell;
 }
 /* ▲divをテーブル構成にする▲ */

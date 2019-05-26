@@ -33,14 +33,13 @@
 
   <!-- API -->
   <context:component-scan base-package="jp.co.ha.business.api" />
+  <context:component-scan base-package="jp.co.ha.business.api.aspect" />
   <context:component-scan base-package="jp.co.ha.business.api.service.impl" />
+
+  <!-- DB -->
+  <context:component-scan base-package="jp.co.ha.business.db.aspect" />
 
   <!-- 健康情報計算サービス -->
   <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
-
-  <!-- DB接続の共通処理 -->
-  <bean id="dataBaseCommonExecutor" class="jp.co.ha.business.db.DataBaseCommonExecutor" />
-  <!-- API通信共通処理 -->
-  <bean id="apiConnectionService" class="jp.co.ha.business.api.service.ApiConnectionExecutor" />
 
 </beans>
