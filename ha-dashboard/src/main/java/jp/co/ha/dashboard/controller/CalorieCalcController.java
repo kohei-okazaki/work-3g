@@ -1,7 +1,5 @@
 package jp.co.ha.dashboard.controller;
 
-import java.util.function.BiConsumer;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,15 +80,11 @@ public class CalorieCalcController implements BaseWebController {
 
 		// DTOに変換
 		CalorieCalcDto dto = new CalorieCalcDto();
-		BeanUtil.copy(form, dto, new BiConsumer<>() {
-
-			@Override
-			public void accept(Object src, Object dest) {
-				CalorieCalcForm form = (CalorieCalcForm) src;
-				CalorieCalcDto dto = (CalorieCalcDto) dest;
-				dto.setGenderType(GenderType.of(form.getGender()));
-				dto.setBodyType(BodyType.of(form.getBodyType()));
-			}
+		BeanUtil.copy(form, dto, (src, dest) -> {
+			CalorieCalcForm srcForm = (CalorieCalcForm) src;
+			CalorieCalcDto destDto = (CalorieCalcDto) dest;
+			destDto.setGenderType(GenderType.of(srcForm.getGender()));
+			destDto.setBodyType(BodyType.of(srcForm.getBodyType()));
 		});
 
 		CalorieCalcDto calcResult = calorieCalcService.calc(dto);
