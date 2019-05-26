@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.web.api.annotation.Execute;
+import jp.co.ha.web.api.annotation.ApiExecute;
 import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseApiResponse;
 
@@ -32,7 +32,7 @@ public interface BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiResponse> 
 	public default void execute(Rq request, Rs response) throws BaseException {
 		try {
 			for (Method m : this.getClass().getDeclaredMethods()) {
-				if (m.isAnnotationPresent(Execute.class)) {
+				if (m.isAnnotationPresent(ApiExecute.class)) {
 					m.invoke(this, request, response);
 				}
 			}
