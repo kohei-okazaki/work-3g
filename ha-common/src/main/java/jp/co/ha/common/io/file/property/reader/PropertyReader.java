@@ -76,17 +76,17 @@ public class PropertyReader {
 			return t;
 
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			LOG.error("インスタンスの生成に失敗しました", e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			LOG.error("アクセス修飾子が不正です", e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			LOG.error("constructor or setterの引数が不正です", e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			LOG.error("constructor or setterの処理に失敗しました", e);
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			LOG.error("setterが存在しません", e);
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			LOG.error("インスタンスの生成に失敗しました", e);
 		}
 		return null;
 	}

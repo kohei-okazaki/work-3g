@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -139,18 +138,12 @@ public class HealthInfoReferenceController implements BaseWebController {
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
-		BeanUtil.copy(form, dto, new BiConsumer<>() {
-
-			@Override
-			public void accept(Object src, Object dest) {
-				HealthInfoReferenceForm form = (HealthInfoReferenceForm) src;
-				HealthInfoReferenceDto dto = (HealthInfoReferenceDto) dest;
-
-				if (StringUtil.hasValue(form.getHealthInfoId())) {
-					dto.setHealthInfoId(Integer.valueOf(form.getHealthInfoId()));
-				}
+		BeanUtil.copy(form, dto, (src, dest) -> {
+			HealthInfoReferenceForm srcForm = (HealthInfoReferenceForm) src;
+			HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
+			if (StringUtil.hasValue(srcForm.getHealthInfoId())) {
+				destDto.setHealthInfoId(Integer.valueOf(srcForm.getHealthInfoId()));
 			}
-
 		});
 
 		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto, userId);

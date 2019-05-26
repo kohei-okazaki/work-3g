@@ -37,7 +37,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{healthInfoId}"></div>
           <div class="table-data">
-            <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="健康情報ID" />
+            <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="1000" />
           </div>
         </div>
         <div class="table-row">
@@ -51,10 +51,10 @@
             </div>
           </div>
           <div class="table-data">
-            <input type="text" th:field="*{fromHealthInfoRegDate}" />
+            <input type="text" th:field="*{fromHealthInfoRegDate}" placeholder="2017/01/01" />
           </div>
           <div class="table-data hideCalendar">
-            <label>～</label><input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar" />
+            <label>～</label><input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar" placeholder="2017/01/02" />
           </div>
         </div>
       </div>
@@ -129,7 +129,7 @@
     // Chart処理
     /*<![CDATA[*/
     var hasResult = /*[[ ${hasResult} ]]*/
-    if (hasResult != null && hasResult == true) {
+    if (hasResult != null && hasResult) {
       // 検索結果が存在する場合
 
       var ctx = document.getElementById("chart").getContext('2d');

@@ -2,7 +2,6 @@ package jp.co.ha.dashboard.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,16 +82,12 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 		Account account = accountSearchService.findByUserId(userId);
 		return modelList.stream().map(e -> {
 			HealthInfoRegistRequest request = new HealthInfoRegistRequest();
-			BeanUtil.copy(e, request, new BiConsumer<>() {
-
-				@Override
-				public void accept(Object src, Object dest) {
-					HealthInfoCsvUploadModel model = (HealthInfoCsvUploadModel) src;
-					HealthInfoRegistRequest request = (HealthInfoRegistRequest) dest;
-					request.setHeight(new BigDecimal(model.getHeight()));
-					request.setWeight(new BigDecimal(model.getWeight()));
-					request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-				}
+			BeanUtil.copy(e, request, (src, dest) -> {
+				HealthInfoCsvUploadModel srcModel = (HealthInfoCsvUploadModel) src;
+				HealthInfoRegistRequest destRequest = (HealthInfoRegistRequest) dest;
+				destRequest.setHeight(new BigDecimal(srcModel.getHeight()));
+				destRequest.setWeight(new BigDecimal(srcModel.getWeight()));
+				destRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
 			});
 			request.setApiKey(account.getApiKey());
 

@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.service;
+package jp.co.ha.business.api.aspect;
 
 import java.util.Arrays;
 
@@ -38,7 +38,7 @@ public class ApiConnectionExecutor {
 	 * @throws Throwable
 	 *     実行時のエラー
 	 */
-	@Around("execution(* jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..)) throws BaseException")
+	@Around("execution(* jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..))")
 	public void outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
 		// Requestログ出力

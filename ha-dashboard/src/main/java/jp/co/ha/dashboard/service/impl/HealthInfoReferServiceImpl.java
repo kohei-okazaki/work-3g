@@ -2,7 +2,6 @@ package jp.co.ha.dashboard.service.impl;
 
 import java.util.Date;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,16 +55,12 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 			BeanUtil.copy(dto, result);
 
 			// 健康情報Entityを設定
-			BeanUtil.copy(e, result, new BiConsumer<>() {
+			BeanUtil.copy(e, result, (src, dest) -> {
+				HealthInfo srcEntity = (HealthInfo) src;
+				HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
 
-				@Override
-				public void accept(Object src, Object dest) {
-					HealthInfo healthInfo = (HealthInfo) src;
-					HealthInfoReferenceDto result = (HealthInfoReferenceDto) dest;
-
-					result.setHealthInfoRegDate(
-							DateUtil.toString(healthInfo.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-				}
+				destDto.setHealthInfoRegDate(
+						DateUtil.toString(srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 			});
 
 			return result;
@@ -79,16 +74,13 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	public List<ReferenceCsvDownloadModel> toModelList(String userId, List<HealthInfoReferenceDto> resultList) {
 		return resultList.stream().map(e -> {
 			ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
-			BeanUtil.copy(e, model, new BiConsumer<>() {
+			BeanUtil.copy(e, model, (src, dest) -> {
+				HealthInfoReferenceDto srcDto = (HealthInfoReferenceDto) src;
+				ReferenceCsvDownloadModel destModel = (ReferenceCsvDownloadModel) dest;
 
-				@Override
-				public void accept(Object src, Object dest) {
-					HealthInfoReferenceDto dto = (HealthInfoReferenceDto) src;
-					ReferenceCsvDownloadModel model = (ReferenceCsvDownloadModel) dest;
+				destModel.setHealthInfoRegDate(
+						DateUtil.toDate(srcDto.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
 
-					model.setHealthInfoRegDate(
-							DateUtil.toDate(dto.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-				}
 			});
 			model.setUserId(userId);
 
