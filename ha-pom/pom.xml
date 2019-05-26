@@ -164,6 +164,11 @@
       <artifactId>aspectjweaver</artifactId>
       <version>${org.aspectj-version}</version>
     </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib</artifactId>
+      <version>3.2.12</version>
+    </dependency>
 
     <!-- Logging -->
     <dependency>
