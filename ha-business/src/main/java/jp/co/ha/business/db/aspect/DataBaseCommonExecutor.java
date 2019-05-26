@@ -14,7 +14,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateUtil;
 
 /**
- * DB接続の共通処理クラス
+ * DB共通処理クラス
  *
  */
 @Aspect

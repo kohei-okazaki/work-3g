@@ -48,8 +48,8 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 	 * POST通信の処理を行う
 	 *
 	 * @param request
-	 *     Rq
-	 * @return response
+	 *     リクエスト
+	 * @return レスポンス
 	 * @throws BaseException
 	 *     基底例外
 	 */

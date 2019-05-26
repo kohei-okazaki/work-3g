@@ -92,7 +92,7 @@ public class HttpClient {
 				LOG.warn("HTTP ステータス = " + httpStatus + "(" + httpStatus.getValue() + ")");
 			}
 		} catch (IOException e) {
-			LOG.error("", e);
+			LOG.error("通信に失敗しました", e);
 		} finally {
 			if (BeanUtil.notNull(connection)) {
 				connection.disconnect();
