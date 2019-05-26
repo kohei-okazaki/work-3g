@@ -27,3 +27,4 @@ hs_err_pid*
 #その他
 /work/
 /.settings/
+/src/main/java/META-INF/MANIFEST.MF
