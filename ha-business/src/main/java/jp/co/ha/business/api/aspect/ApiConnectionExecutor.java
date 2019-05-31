@@ -38,7 +38,9 @@ public class ApiConnectionExecutor {
 	 * @throws Throwable
 	 *     実行時のエラー
 	 */
-	@Around("execution(* jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..))")
+	// @Around("execution(*
+	// jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..))")
+	@Around("@annotation(jp.co.ha.web.api.annotation.ApiExecute)")
 	public void outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
 		// Requestログ出力

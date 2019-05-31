@@ -3,7 +3,7 @@ package jp.co.ha.common.system.impl;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.system.BaseEncodeAndDecoder;
 import jp.co.ha.common.type.Charset;
@@ -12,7 +12,7 @@ import jp.co.ha.common.type.Charset;
  * Base64エンコード/デコードクラス
  *
  */
-@Service("base64EncodeAndDecoder")
+@Component("base64EncodeAndDecoder")
 public class Base64EncodeAndDecoder implements BaseEncodeAndDecoder {
 
 	/**

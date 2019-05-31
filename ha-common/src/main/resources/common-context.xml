@@ -23,6 +23,8 @@
 
   <tx:annotation-driven />
 
+  <context:annotation-config />
+
   <context:component-scan base-package="jp.co.ha.common.system.impl" />
 
   <!-- 妥当性チェック -->

@@ -14,10 +14,13 @@
           <label>テーブル名</label>
         </th>
         <td>
-          <input type="text" id="tableName" size="16" placeholder="対象テーブル名" />
+          <div class="select cp_sl04">
+            <select id="tableName">
+              <option value="">選択して下さい</option>
+            </select>
+          </div>
         </td>
       </tr>
-      <!-- 1 -->
       <tr>
         <td colspan="2"><hr></td>
       </tr>
@@ -26,7 +29,9 @@
           <label>カラム名</label>
         </th>
         <td>
-          <input type="text" id="columnName1" size="16" placeholder="追加するカラム名" />
+          <div class="select cp_sl04">
+            <select id="columnName"></select>
+          </div>
         </td>
       </tr>
       <tr>
@@ -35,7 +40,7 @@
         </th>
         <td>
           <div class="select cp_sl04">
-            <select id="columnType1">
+            <select id="columnType">
               <option value="VARCHAR">VARCHAR</option>
               <option value="DECIMAL">DECIMAL</option>
               <option value="INT">INT</option>
@@ -45,95 +50,16 @@
           </div>
         </td>
       </tr>
-      <tr class="hideColumnSize1">
+      <tr class="hideColumnSize">
         <th>
           <label>カラムサイズ</label>
         </th>
         <td>
-          <input type="text" id="columnSize1" size="16" placeholder="追加するカラムサイズ" />
+          <input type="text" id="columnSize" size="16" placeholder="追加するカラムサイズ" />
         </td>
       </tr>
-      <!-- 1 -->
-      <!-- 2 -->
-      <tr class="columnCount2">
-        <td colspan="2"><hr></td>
-      </tr>
-      <tr class="columnCount2">
-        <th>
-          <label>カラム名</label>
-        </th>
-        <td>
-          <input type="text" id="columnName2" size="16" placeholder="追加するカラム名" />
-        </td>
-      </tr>
-      <tr class="columnCount2">
-        <th>
-          <label>カラム型</label>
-        </th>
-        <td>
-          <div class="select cp_sl04">
-            <select id="columnType2">
-              <option value="VARCHAR">VARCHAR</option>
-              <option value="DECIMAL">DECIMAL</option>
-              <option value="INT">INT</option>
-              <option value="DATE">DATE</option>
-              <option value="TIMESTAMP">TIMESTAMP</option>
-            </select>
-          </div>
-        </td>
-      </tr>
-      <tr class="columnCount2 hideColumnSize2">
-        <th>
-          <label>カラムサイズ</label>
-        </th>
-        <td>
-          <input type="text" id="columnSize2" size="16" placeholder="追加するカラムサイズ" />
-        </td>
-      </tr>
-      <!-- 2 -->
-      <!-- 3 -->
-      <tr class="columnCount3">
-        <td colspan="2"><hr></td>
-      </tr>
-      <tr class="columnCount3">
-        <th>
-          <label>カラム名</label>
-        </th>
-        <td>
-          <input type="text" id="columnName3" size="16" placeholder="追加するカラム名" />
-        </td>
-      </tr>
-      <tr class="columnCount3">
-        <th>
-          <label>カラム型</label>
-        </th>
-        <td>
-          <div class="select cp_sl04">
-            <select id="columnType3">
-              <option value="VARCHAR" selected>VARCHAR</option>
-              <option value="DECIMAL">DECIMAL</option>
-              <option value="INT">INT</option>
-              <option value="DATE">DATE</option>
-              <option value="TIMESTAMP">TIMESTAMP</option>
-            </select>
-          </div>
-        </td>
-      </tr>
-      <tr class="columnCount3 hideColumnSize3">
-        <th>
-          <label>カラムサイズ</label>
-        </th>
-        <td>
-          <input type="text" id="columnSize3" size="16" placeholder="追加するカラムサイズ" />
-        </td>
-      </tr>
-      <!-- 3 -->
     </table>
 
-    <div class="button">
-      <input id="add" type="button" value="追 加" />
-      <input id="remove" type="button" value="削 除" />
-    </div>
     <div class="button">
       <input id="create" type="button" value="作 成" />
       <input id="inputClear" type="button" value="入力値 クリア" />
@@ -143,98 +69,79 @@
   </div>
 
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../../js/table.min.js"></script>
   <script type="text/javascript">
 
-    // カラム数
-    var columnCount = 1;
+    // テーブル名のセレクトボックスを初期化する
+    function initTableSelectBox() {
+      for (var i = 0; i < table.length; i++) {
+        var tableData = table[i];
+        $("select#tableName").append($("<option>").val(tableData.physicalName).text(tableData.logicalName));
+      }
+    };
 
     function validate() {
       if ($("#tableName").val() === "") {
         alert("テーブル名は必須です");
         return true;
       }
-      for (var i = 1; i < columnCount + 1; i++) {
-        if ($("#columnName" + i).val() === "") {
-          alert("カラム名は必須です");
-          return true;
-        } else if ($("#columnType" + i + " option:selected").val() === "VARCHAR" && $("#columnSize" + i).val() === "") {
-          alert("VARCHAR指定時、カラムサイズは必須です");
-          return true;
-        } else if ($("#columnType" + i + " option:selected").val() === "DECIMAL" && $("#columnSize" + i).val() === "") {
-          alert("DECIMAL指定時、カラムサイズは必須です");
-          return true;
-        }
-      }
-      return false;
-    }
 
-    function load() {
-      columnCount = 1;
-      $(".columnCount2").css("display", "none");
-      $(".columnCount3").css("display", "none");
+      if ($("#columnName").val() === "") {
+        alert("カラム名は必須です");
+        return true;
+      } else if ($("#columnType option:selected").val() === "VARCHAR" && $("#columnSize").val() === "") {
+        alert("VARCHAR指定時、カラムサイズは必須です");
+        return true;
+      } else if ($("#columnType option:selected").val() === "DECIMAL" && $("#columnSize").val() === "") {
+        alert("DECIMAL指定時、カラムサイズは必須です");
+        return true;
+      }
+
+      return false;
     }
 
     // DDLを作成する
     function createDdl() {
 
-      var ddl = "ALTER TABLE " + $("#tableName").val() + " ADD (";
+      var ddl = "ALTER TABLE " + $("#tableName").val() + " ADD ";
 
-      for (var i = 1; i < columnCount + 1; i++) {
-        var type = $("#columnType" + i + " option:selected").val();
-        if (type === "VARCHAR" || type === "DECIMAL") {
-          type += "(" + $("#columnSize" + i).val() + ")";
-        }
-        ddl += "\r\n  " + $("#columnName" + i).val() + " " + type;
-        if (i !== columnCount) {
-          // カラムが最後でない場合
-          ddl += ",";
-        }
+      var type = $("#columnType option:selected").val();
+      if (type === "VARCHAR" || type === "DECIMAL") {
+        type += "(" + $("#columnSize").val() + ")";
       }
-      return ddl + "\r\n);";
+      ddl += $("#columnName").val() + " " + type + ";";
+
+      return ddl;
     }
 
     // 画面描画時の処理
     $(document).ready(function() {
 
-      // 初期化処理を行う
-      load();
+      // テーブル名をセレクトボックスに設定
+      initTableSelectBox();
 
-      // セレクトボックス変更時の処理
-      $("select#columnType1").on("change", function() {
-        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
-          $(".hideColumnSize1").css("display", "none");
-        } else {
-          $(".hideColumnSize1").css("display", "table-row");
+      // セレクトボックス変更時の処理を設定
+      $("select#tableName").on("change", function() {
+        var tableName = $(this).val();
+        $("select#columnName").children().remove();
+        $("select#whereColumnName").children().remove();
+        if (tableName === "") {
+          return;
         }
-      });
-      $("select#columnType2").on("change", function() {
-        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
-          $(".hideColumnSize2").css("display", "none");
-        } else {
-          $(".hideColumnSize2").css("display", "table-row");
-        }
-      });
-      $("select#columnType3").on("change", function() {
-        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
-          $(".hideColumnSize3").css("display", "none");
-        } else {
-          $(".hideColumnSize3").css("display", "table-row");
+        var columnList = getColumnList(tableName);
+        for (var i = 0; i < columnList.length; i++) {
+          var column = columnList[i];
+          $("select#columnName").append($("<option>").val(column.physicalName).text(column.logicalName));
+          $("select#whereColumnName").append($("<option>").val(column.physicalName).text(column.logicalName));
         }
       });
 
-      // 追加ボタン押下時の処理
-      $("input#add").on("click", function() {
-        if (0 < columnCount && columnCount < 3) {
-          columnCount += 1;
-          $(".columnCount" + columnCount).css("display", "table-row");
-        }
-      });
-
-      // 削除ボタン押下時の処理
-      $("input#remove").on("click", function() {
-        if (1 < columnCount && columnCount < 4) {
-          $(".columnCount" + columnCount).css("display", "none");
-          columnCount -= 1;
+      // セレクトボックス変更時の処理
+      $("select#columnType").on("change", function() {
+        if ($(this).val() === "INT" || $(this).val() === "DATE" || $(this).val() === "TIMESTAMP") {
+          $(".hideColumnSize").css("display", "none");
+        } else {
+          $(".hideColumnSize").css("display", "table-row");
         }
       });
 
@@ -251,8 +158,8 @@
       $("input#inputClear").on("click", function() {
         $("#tableName").val("");
         for (var i = 1; i < columnCount + 1; i++) {
-          $("#columnName" + i).val("");
-          $("#columnSize" + i).val("");
+          $("#columnName").val("");
+          $("#columnSize").val("");
         }
       });
 

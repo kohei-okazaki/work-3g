@@ -244,6 +244,36 @@ var table = [
           size: ""
         }
       ]
+    },
+    {
+      physicalName: "SYSTEM_ENVIRONMENT_MT",
+      logicalName: "システム環境マスタ",
+      column : [
+        {
+          logicalName: "環境ID",
+          physicalName: "ENVIRONMENT_ID",
+          type: "VARCHAR",
+          size: "16"
+        },
+        {
+          logicalName: "ページング件数",
+          physicalName: "PAGING_COUNT",
+          type: "INT",
+          size: ""
+        },
+        {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "TIMESTAMP",
+          size: ""
+        },
+        {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "TIMESTAMP",
+          size: "2"
+        }
+      ]
     }
 ];
 

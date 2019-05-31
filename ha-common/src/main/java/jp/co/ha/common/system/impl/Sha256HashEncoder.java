@@ -3,7 +3,7 @@ package jp.co.ha.common.system.impl;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.exception.BaseException;
@@ -16,7 +16,7 @@ import jp.co.ha.common.type.Charset;
  * SHA-256ハッシュ値作成クラス
  *
  */
-@Service("sha256HashEncoder")
+@Component("sha256HashEncoder")
 public class Sha256HashEncoder implements HashEncoder {
 
 	/** HASH化アルゴリズム */

@@ -9,16 +9,19 @@ import org.apache.commons.cli.Options;
 
 import jp.co.ha.batch.dto.HealthInfoRegistData;
 import jp.co.ha.batch.type.BatchResult;
+import jp.co.ha.business.api.HealthInfoRegistApi;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.BatchBeanLoader;
+import jp.co.ha.common.system.SystemMemory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
@@ -31,10 +34,12 @@ import jp.co.ha.common.validator.ValidateErrorResult;
  */
 public class HealthInfoFileRegistBatch extends BaseBatch {
 
+	/** LOG */
+	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoFileRegistBatch.class);
 	/** 健康情報設定ファイル */
 	private HealthInfoProperties prop = BatchBeanLoader.getBean(HealthInfoProperties.class);
-	/** 健康情報登録APIサービス */
-	private HealthInfoRegistService service = BatchBeanLoader.getBean(HealthInfoRegistService.class);
+	/** 健康情報登録API */
+	private HealthInfoRegistApi api = BatchBeanLoader.getBean(HealthInfoRegistApi.class);
 	/** 妥当性チェック */
 	@SuppressWarnings("unchecked")
 	private BeanValidator<HealthInfoRegistRequest> validator = BatchBeanLoader.getBean(BeanValidator.class);
@@ -45,6 +50,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 	@Override
 	public BatchResult execute() throws BaseException {
 
+		LOG.info("健康情報ファイル登録Batch START メモリ使用量" + SystemMemory.getInstance().getMemoryUsage());
 		List<HealthInfoRegistRequest> requestList = new ArrayList<>();
 		JsonReader reader = new JsonReader();
 
@@ -70,12 +76,11 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 				throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
 						error.getMessage() + " " + error.getName() + "=" + error.getValue());
 			}
-			service.checkRequest(request);
 
-			// リクエストを送信する
-			service.execute(request, new HealthInfoRegistResponse());
+			api.execute(request, new HealthInfoRegistResponse());
 		}
 
+		LOG.info("健康情報ファイル登録Batch END メモリ使用量" + SystemMemory.getInstance().getMemoryUsage());
 		return BatchResult.SUCCESS;
 	}
 

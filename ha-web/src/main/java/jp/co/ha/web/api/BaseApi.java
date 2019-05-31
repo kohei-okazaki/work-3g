@@ -37,7 +37,11 @@ public interface BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiResponse> 
 				}
 			}
 		} catch (Exception e) {
-			throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "APIの実行に失敗しました", e);
+			if (e.getCause() instanceof BaseException) {
+				throw (BaseException) e.getCause();
+			} else {
+				throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "APIの実行に失敗しました", e);
+			}
 		}
 	}
 }

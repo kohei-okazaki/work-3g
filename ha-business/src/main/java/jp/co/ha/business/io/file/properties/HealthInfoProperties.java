@@ -1,9 +1,12 @@
 package jp.co.ha.business.io.file.properties;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 健康情報設定ファイル
  *
  */
+@Component
 public class HealthInfoProperties {
 
 	/** 照会ファイル格納パス */
