@@ -3,7 +3,7 @@ package jp.co.ha.common.system.impl;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.exception.AlgorithmException;
 import jp.co.ha.common.exception.BaseException;
@@ -16,7 +16,7 @@ import jp.co.ha.common.type.Charset;
  * SHA-512ハッシュ値作成クラス
  *
  */
-@Service("sha512HashEncoder")
+@Component("sha512HashEncoder")
 public class Sha512HashEncoder implements HashEncoder {
 
 	/** HASH化アルゴリズム */
