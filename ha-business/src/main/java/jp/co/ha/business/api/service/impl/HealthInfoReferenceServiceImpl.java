@@ -10,16 +10,13 @@ import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.api.service.CommonService;
 import jp.co.ha.business.api.service.HealthInfoReferenceService;
 import jp.co.ha.business.api.type.RequestType;
-import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -29,9 +26,6 @@ import jp.co.ha.db.entity.HealthInfo;
 @Service
 public class HealthInfoReferenceServiceImpl extends CommonService implements HealthInfoReferenceService {
 
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
 	/** 健康情報検索サービス */
 	@Autowired
 	private HealthInfoSearchService healthInfoSearchService;
@@ -48,15 +42,8 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 					"リクエスト種別が一致しません requestType:" + request.getRequestType().getName());
 		}
 
-		// アカウント取得
-		Account account = accountSearchService.findByUserId(request.getUserId());
-		if (BeanUtil.isNull(account)) {
-			throw new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
-					"アカウントが存在しません userId:" + request.getUserId());
-		}
-
 		// API利用判定
-		checkApiUse(account, request);
+		checkApiUse(request);
 	}
 
 	/**
