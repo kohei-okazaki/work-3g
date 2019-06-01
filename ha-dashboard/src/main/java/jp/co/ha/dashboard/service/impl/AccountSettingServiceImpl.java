@@ -54,41 +54,27 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
 		// メール情報を検索し、メール情報にフォームをマージする
 		MailInfo befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
-		if (BeanUtil.notNull(befMailInfo)) {
-			mergeMailInfo(dto, befMailInfo);
-		}
-
 		if (BeanUtil.isNull(befMailInfo)) {
 			// メール情報が登録されてない場合
 			befMailInfo = new MailInfo();
 			mergeMailInfo(dto, befMailInfo);
-			// メール情報を新規登録する
-			mailInfoCreateService.create(befMailInfo);
+
 			// アカウント情報を更新する
 			accountUpdateService.update(befAccount);
+
+			// メール情報を新規登録する
+			mailInfoCreateService.create(befMailInfo);
+
 		} else {
-			// 更新処理を行う
-			update(befAccount, befMailInfo);
+			mergeMailInfo(dto, befMailInfo);
+
+			// アカウント情報を更新する
+			accountUpdateService.update(befAccount);
+
+			// メール情報を更新する
+			mailInfoUpdateService.update(befMailInfo);
 		}
-	}
 
-	/**
-	 * 更新処理を行う
-	 *
-	 * @param account
-	 *     アカウント情報
-	 * @param mailInfo
-	 *     メール情報
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	private void update(Account account, MailInfo mailInfo) throws BaseException {
-
-		// アカウント情報を更新する
-		accountUpdateService.update(account);
-
-		// メール情報を更新する
-		mailInfoUpdateService.update(mailInfo);
 	}
 
 	/**
@@ -119,7 +105,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 */
 	private void mergeMailInfo(AccountDto dto, MailInfo mailInfo) {
 
-		BeanUtil.copy(dto, mailInfo, List.of("userId"));
+		BeanUtil.copy(dto, mailInfo);
 
 	}
 

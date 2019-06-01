@@ -33,13 +33,37 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}" data-sal="slide-up"></div>
 
-      <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" oninput="changeValue()" />
-      <br><br>
-      <input type="text" class="validate[required]" th:field="*{password}" maxlength="16" required placeholder="パスワード" oninput="changeValue()" />
-      <br><br>
-      <input type="text" class="validate[required,equals[password]]" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" oninput="changeValue()" />
-      <br><br>
-      <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
+      <!--/* table部ここから */-->
+      <div class="table">
+        <div class="table-row">
+          <div class="table-header" th:text="#{userId}"></div>
+          <div class="table-data">
+            <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" />
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-header" th:text="#{password}"></div>
+          <div class="table-data">
+            <input type="password" class="validate[required]" th:field="*{password}" maxlength="16" required placeholder="パスワード" />
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-header" th:text="#{confirmPassword}"></div>
+          <div class="table-data">
+            <input type="password" class="validate[required,equals[password]]" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" />
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="table-header" th:text="#{remarks}"></div>
+          <div class="table-data">
+            <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
+          </div>
+        </div>
+      </div>
+      <!--/* table部ここまで */-->
 
       <br><br>
 
