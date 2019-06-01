@@ -12,6 +12,7 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.system.BeanLoader;
 import jp.co.ha.common.util.BeanUtil;
 
 /**
@@ -37,7 +38,7 @@ public abstract class BaseDao {
 	protected void connect() throws BaseException {
 
 		try {
-			JdbcConfig conf = JdbcConfig.getInstance();
+			JdbcConfig conf = BeanLoader.getBean(JdbcConfig.class);
 			Class.forName(conf.getDriverClassName()).getDeclaredConstructor().newInstance();
 			this.con = DriverManager.getConnection(conf.getUrl(), conf.getUsername(), conf.getPassword());
 			LOG.debug("DBに接続");
