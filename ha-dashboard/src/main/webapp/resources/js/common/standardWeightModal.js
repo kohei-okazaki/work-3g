@@ -59,7 +59,7 @@ $(function() {
       var h = $(window).height();
       var cw = $("#standardWeight-modal-content").outerWidth();
       var ch = $("#standardWeight-modal-content").outerHeight();
-      //取得した値をcssに追加する
+      // 取得した値をcssに追加する
       $("#standardWeight-modal-content").css({
         "left" : ((w - cw) / 2) + "px",
         "top" : ((h - ch) / 2) + "px"

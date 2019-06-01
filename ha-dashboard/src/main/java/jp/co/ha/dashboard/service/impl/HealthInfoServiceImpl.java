@@ -158,7 +158,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 */
 	private HealthInfoRegistRequest setUpApiRequest(HealthInfoDto dto, String userId) throws BaseException {
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
-		// フォーム情報DTOをリクエストクラスにコピー
+		// 健康情報DTOをリクエストクラスにコピー
 		BeanUtil.copy(dto, apiRequest);
 		apiRequest.setUserId(userId);
 		// リクエストタイプ設定

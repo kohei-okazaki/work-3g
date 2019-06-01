@@ -5,14 +5,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>健康アプリ_アカウント設定入力画面</title>
 <link rel="icon" type="image/png" href="../resources/image/favicon.png" th:href="@{/resources/image/favicon.png}">
-<link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.min.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -65,7 +65,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{password}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
+            <input type="password" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
           </div>
         </div>
 
@@ -103,7 +103,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{mailPassword}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
+            <input type="password" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
           </div>
         </div>
 
@@ -140,14 +140,14 @@
 
   <div th:replace="layout/layout :: footer"></div>
 
-  <script type="text/javascript" src="../resources/js/lib/jquery.min.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.min.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.min.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/common/common.min.js" th:src="@{/resources/js/common/common.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/jquery-ui.min.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/datepicker-ja.min.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/sal.min.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/mailcheck.min.js" th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/mailcheck.js" th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
   <script type="text/javascript">
     $(function() {
 

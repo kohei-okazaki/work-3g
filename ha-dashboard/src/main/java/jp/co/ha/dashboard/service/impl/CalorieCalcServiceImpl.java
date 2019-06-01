@@ -16,6 +16,7 @@ import jp.co.ha.dashboard.service.CalorieCalcService;
 @Service
 public class CalorieCalcServiceImpl implements CalorieCalcService {
 
+	/** 健康情報計算サービス */
 	@Autowired
 	private HealthInfoCalcService healthInfoCalcService;
 

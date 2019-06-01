@@ -59,7 +59,7 @@ $(function() {
       var h = $(window).height();
       var cw = $("#api-regist-general-modal-content").outerWidth();
       var ch = $("#api-regist-general-modal-content").outerHeight();
-      //取得した値をcssに追加する
+      // 取得した値をcssに追加する
       $("#api-regist-general-modal-content").css({
         "left" : ((w - cw) / 2) + "px",
         "top" : ((h - ch) / 2) + "px"

@@ -26,7 +26,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
  * 結果照会画面Excelダウンロードサービス実装クラス
  *
  */
-@Service(value = "referenceDownloadExcel")
+@Service("referenceDownloadExcel")
 public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadService<ReferenceExcelComponent> {
 
 	/** 健康情報ファイル設定検索サービス */

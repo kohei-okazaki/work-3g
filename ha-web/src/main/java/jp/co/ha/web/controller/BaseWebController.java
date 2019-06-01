@@ -19,4 +19,15 @@ public interface BaseWebController extends BaseController {
 	default String getView(BaseView view) {
 		return view.getName();
 	}
+
+	/**
+	 * viewにリダイレクトする
+	 *
+	 * @param view
+	 *     BaseView
+	 * @return View名
+	 */
+	default String redirectView(BaseView view) {
+		return "redirect:" + view.getName();
+	}
 }
