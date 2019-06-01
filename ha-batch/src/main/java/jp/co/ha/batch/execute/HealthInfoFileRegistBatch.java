@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.cli.Options;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.dto.HealthInfoRegistData;
 import jp.co.ha.batch.type.BatchResult;
@@ -32,6 +33,7 @@ import jp.co.ha.common.validator.ValidateErrorResult;
  * 健康情報ファイル登録Batch
  *
  */
+@Component
 public class HealthInfoFileRegistBatch extends BaseBatch {
 
 	/** LOG */

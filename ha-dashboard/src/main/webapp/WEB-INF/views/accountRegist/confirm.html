@@ -22,36 +22,24 @@
       <!--/* table部ここから */-->
       <div class="table">
         <div class="table-row">
-          <div class="table-header">
-            <label>ユーザID</label>
-          </div>
-          <div class="table-data">
-            <input type="text" maxlength="16" th:field="*{userId}" readonly required />
-          </div>
+          <div class="table-header" th:text="#{userId}"></div>
+          <div class="table-data" th:text="*{userId}"></div>
+          <input type="hidden" th:field="*{userId}">
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>パスワード</label>
-          </div>
-          <div class="table-data">
-            <input type="text" maxlength="16" th:field="*{password}" readonly required />
-          </div>
+          <div class="table-header" th:text="#{password}"></div>
+          <div class="table-data" th:text="*{password}"></div>
+          <input type="hidden" th:field="*{password}">
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>確認用 パスワード</label>
-          </div>
-          <div class="table-data">
-            <input type="text" maxlength="16" th:field="*{confirmPassword}" readonly required />
-          </div>
+          <div class="table-header" th:text="#{confirmPassword}"></div>
+          <div class="table-data" th:text="*{confirmPassword}"></div>
+          <input type="hidden" th:field="*{confirmPassword}">
         </div>
         <div class="table-row">
-          <div class="table-header">
-            <label>備 考</label>
-          </div>
-          <div class="table-data">
-            <textarea rows="10" cols="30" th:field="*{remarks}" readonly></textarea>
-          </div>
+          <div class="table-header" th:text="#{remarks}"></div>
+          <div class="table-data" th:text="*{remarks}"></div>
+          <input type="hidden" th:field="*{remarks}">
         </div>
       </div>
       <!--/* table部ここまで */-->

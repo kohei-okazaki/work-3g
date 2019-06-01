@@ -65,7 +65,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{password}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
+            <input type="password" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
           </div>
         </div>
 
@@ -103,7 +103,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{mailPassword}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
+            <input type="password" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
           </div>
         </div>
 
