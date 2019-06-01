@@ -1,10 +1,12 @@
 package jp.co.ha.common.db;
 
+import org.springframework.stereotype.Component;
+
 /**
- * JDBC設定ファイル情報保持クラス<br>
- * jdbc.propertiesの読み込みを行う
+ * JDBC設定ファイル情報保持クラス
  *
  */
+@Component
 public class JdbcConfig {
 
 	private String driverClassName;

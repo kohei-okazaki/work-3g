@@ -30,4 +30,12 @@
   <!-- 妥当性チェック -->
   <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />
 
+  <bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:META-INF/jdbc.properties</value>
+      </list>
+    </property>
+  </bean>
+
 </beans>
