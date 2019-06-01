@@ -22,7 +22,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
  * 健康情報Excelダウンロードサービス実装クラス
  *
  */
-@Service(value = "healthInfoDownloadExcel")
+@Service("healthInfoDownloadExcel")
 public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfoExcelComponent> {
 
 	/** 健康情報ファイル設定検索サービス */
