@@ -65,7 +65,13 @@
         <div class="table-row">
           <div class="table-header" th:text="#{password}"></div>
           <div class="table-data">
-            <input type="password" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
+            <div class="checkbox">
+              <input type="password" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
+              <label>
+                <input type="checkbox" id="password-check" class="checkbox-input" />
+                <span class="checkbox-parts">パスワードを表示する</span>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -93,7 +99,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{mailAddress}"></div>
           <div class="table-data">
-            <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="メールアドレス" />
+            <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="test@gmail.com" />
             <div id="suggest"></div>
           </div>
         </div>
@@ -103,7 +109,13 @@
         <div class="table-row">
           <div class="table-header" th:text="#{mailPassword}"></div>
           <div class="table-data">
-            <input type="password" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
+            <div class="checkbox">
+              <input type="password" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
+              <label>
+                <input type="checkbox" id="mailPassword-check" class="checkbox-input" />
+                <span class="checkbox-parts">パスワードを表示する</span>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -191,6 +203,27 @@
           }
         });
       });
+
+      var password = $('#password').get(0);
+      var passwordCheck = $('#password-check').get(0);
+      passwordCheck.addEventListener('change', function() {
+        if (passwordCheck.checked) {
+          password.setAttribute('type', 'text');
+        } else {
+          password.setAttribute('type', 'password');
+        }
+      }, false);
+
+      var mailPassword = $('#mailPassword').get(0);
+      var mailPasswordCheck = $('#mailPassword-check').get(0);
+      mailPasswordCheck.addEventListener('change', function() {
+        if (mailPasswordCheck.checked) {
+          mailPassword.setAttribute('type', 'text');
+        } else {
+          mailPassword.setAttribute('type', 'password');
+        }
+      }, false);
+
     });
   </script>
 </body>
