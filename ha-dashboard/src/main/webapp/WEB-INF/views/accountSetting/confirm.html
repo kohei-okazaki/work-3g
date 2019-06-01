@@ -39,40 +39,33 @@
         </div>
         <div class="table-row">
           <div class="table-header" th:text="#{userId}"></div>
-          <div class="table-data">
-            <p th:text="${form.userId}"></p>
-            <input type="hidden" th:field="${form.userId}" />
-          </div>
+          <div class="table-data" th:text="*{userId}"></div>
+          <input type="hidden" th:field="${form.userId}" readonly />
         </div>
         <div class="table-row">
           <div class="table-header" th:text="#{password}"></div>
-          <div class="table-data">
-            <input type="text" th:field="${form.password}" readonly />
-          </div>
+          <div class="table-data">****</div>
+          <input type="hidden" th:field="${form.password}" readonly />
         </div>
         <div class="table-row">
           <div class="table-header" th:text="#{passwordExpire}"></div>
-          <div class="table-data">
-            <input type="text" th:field="*{passwordExpire}" readonly />
-          </div>
+          <div class="table-data" th:text="*{passwordExpire}"></div>
+          <input type="hidden" th:field="*{passwordExpire}" readonly />
         </div>
         <div class="table-row">
           <div class="table-header" th:text="#{mailAddress}"></div>
-          <div class="table-data">
-            <input type="text" th:field="${form.mailAddress}" readonly />
-          </div>
+          <div class="table-data" th:text="*{mailAddress}"></div>
+          <input type="hidden" th:field="*{mailAddress}" readonly />
         </div>
         <div class="table-row">
           <div class="table-header" th:text="#{mailPassword}"></div>
-          <div class="table-data">
-            <input type="text" th:field="${form.mailPassword}" readonly />
-          </div>
+          <div class="table-data">****</div>
+          <input type="hidden" th:field="*{mailPassword}" readonly />
         </div>
         <div class="table-row">
           <div class="table-header" th:text="#{remarks}"></div>
-          <div class="table-data">
-            <textarea rows="10" cols="30" th:field="${form.remarks}" readonly></textarea>
-          </div>
+          <div class="table-data" th:text="*{remarks}"></div>
+          <input type="hidden" th:field="*{remarks}">
         </div>
       </div>
       <!--/* table部ここまで */-->
