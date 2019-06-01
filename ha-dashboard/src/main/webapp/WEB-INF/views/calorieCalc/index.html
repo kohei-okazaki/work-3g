@@ -167,8 +167,8 @@
         $("body").append('<div id="calorie-modal-content"><div class="contentLayout"><b>生活活動代謝って</b><p>日常の生活活動や運動で消費するエネルギー。</p></div></div>');
         $("#calorie-modal-content").css({
           "display" : "none",
-          "width" : "500px",
-          "height" : "300px",
+          "width" : "auto",
+          "height" : "auto",
           "margin" : "0",
           "padding" : "0",
           "background-color" : "#ffffff",
@@ -200,7 +200,7 @@
           var h = $(window).height();
           var cw = $("#calorie-modal-content").outerWidth();
           var ch = $("#calorie-modal-content").outerHeight();
-          //取得した値をcssに追加する
+          // 取得した値をcssに追加する
           $("#calorie-modal-content").css({
             "left" : ((w - cw) / 2) + "px",
             "top" : ((h - ch) / 2) + "px"
