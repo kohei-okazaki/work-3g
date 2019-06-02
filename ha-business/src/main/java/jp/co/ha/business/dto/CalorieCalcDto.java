@@ -25,6 +25,8 @@ public class CalorieCalcDto {
 	private BigDecimal lifeWorkMetabolism;
 	/** 基礎代謝量 */
 	private BigDecimal baseMetabolism;
+	/** 1日の消費カロリー */
+	private BigDecimal lostCaloriePerDay;
 
 	/**
 	 * ageを返す
@@ -157,6 +159,25 @@ public class CalorieCalcDto {
 	 */
 	public void setBaseMetabolism(BigDecimal baseMetabolism) {
 		this.baseMetabolism = baseMetabolism;
+	}
+
+	/**
+	 * lostCaloriePerDayを返す
+	 *
+	 * @return lostCaloriePerDay
+	 */
+	public BigDecimal getLostCaloriePerDay() {
+		return lostCaloriePerDay;
+	}
+
+	/**
+	 * lostCaloriePerDayを設定する
+	 *
+	 * @param lostCaloriePerDay
+	 *     1日の消費カロリー
+	 */
+	public void setLostCaloriePerDay(BigDecimal lostCaloriePerDay) {
+		this.lostCaloriePerDay = lostCaloriePerDay;
 	}
 
 }

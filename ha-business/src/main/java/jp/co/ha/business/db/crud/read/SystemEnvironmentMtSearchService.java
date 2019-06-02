@@ -12,7 +12,7 @@ public interface SystemEnvironmentMtSearchService {
 	/**
 	 * システム環境マスタを取得する
 	 *
-	 * @return
+	 * @return システム環境マスタ
 	 * @throws BaseException
 	 *     基底例外
 	 */

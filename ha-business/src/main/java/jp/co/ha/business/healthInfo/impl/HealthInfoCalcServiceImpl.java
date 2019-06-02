@@ -2,8 +2,6 @@ package jp.co.ha.business.healthInfo.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
 
@@ -27,26 +25,25 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public BiFunction<BigDecimal, BigDecimal, HealthInfoStatus> getHealthInfoStatus() {
-		return (inputWeight, beforeWeight) -> {
-			HealthInfoStatus status;
-			if (beforeWeight.compareTo(inputWeight) == 0) {
-				status = HealthInfoStatus.EVEN;
-			} else if (beforeWeight.compareTo(inputWeight) == -1) {
-				status = HealthInfoStatus.INCREASE;
-			} else {
-				status = HealthInfoStatus.DOWN;
-			}
-			return status;
-		};
+	public HealthInfoStatus getHealthInfoStatus(BigDecimal inputWeight, BigDecimal beforeWeight) {
+
+		HealthInfoStatus status;
+		if (beforeWeight.compareTo(inputWeight) == 0) {
+			status = HealthInfoStatus.EVEN;
+		} else if (beforeWeight.compareTo(inputWeight) == -1) {
+			status = HealthInfoStatus.INCREASE;
+		} else {
+			status = HealthInfoStatus.DOWN;
+		}
+		return status;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Function<BigDecimal, BigDecimal> convertMeterFromCentiMeter() {
-		return e -> e.scaleByPowerOfTen(-2);
+	public BigDecimal convertMeterFromCentiMeter(BigDecimal centiMeter) {
+		return centiMeter.scaleByPowerOfTen(-2);
 	}
 
 	/**
@@ -130,6 +127,16 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 		result = Calculator.calc(result, CalcMethod.ADD, ADJUST_VALUE, 3, RoundingMode.HALF_UP);
 
 		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BigDecimal calcLostCaloriePerDay(CalorieCalcDto calorieCalcDto) {
+		return Calculator.calc(calorieCalcDto.getBaseMetabolism(), CalcMethod.ADD,
+				calorieCalcDto.getLifeWorkMetabolism(), 2,
+				RoundingMode.HALF_UP);
 	}
 
 }

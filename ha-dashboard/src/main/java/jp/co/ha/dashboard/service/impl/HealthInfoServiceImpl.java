@@ -128,8 +128,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * @return 体重差メッセージ
 	 */
 	private String getDiffMessage(HealthInfoDto dto, HealthInfo healthInfo) {
-		HealthInfoStatus status = healthInfoCalcService.getHealthInfoStatus().apply(dto.getWeight(),
-				healthInfo.getWeight());
+		HealthInfoStatus status = healthInfoCalcService.getHealthInfoStatus(dto.getWeight(), healthInfo.getWeight());
 		return messageSource.getMessage(status.getMessage(), null, Locale.getDefault());
 	}
 

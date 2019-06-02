@@ -42,7 +42,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{height}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{height}" required placeholder="170.00" />&ensp;cm
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="170.00" />&ensp;cm
           </div>
           <div class="table-data">
             <p class="attention">※半角数字とピリオドで入力してください</p>
@@ -52,7 +52,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{weight}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="6" th:field="*{weight}" required placeholder="50.00" />&ensp;kg
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="50.00" />&ensp;kg
           </div>
           <div class="table-data">
             <p class="attention">※半角数字とピリオドで入力してください</p>
@@ -91,37 +91,43 @@
   <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
     $(function() {
+
       sal({
         threshold: 1,
         once: false
       });
+
       jQuery("#healthInfoForm").validationEngine({
-        promptPosition : "topLeft:80"
+        promptPosition : "topLeft:0"
       });
+
+      var mprogress = new Mprogress();
+      $("#height").on("change", function() {
+        var value = 0;
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        if ($('#weight').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+
+      $("#weight").on("change", function() {
+        var value = 0;
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        if ($('#weight').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+
     });
-    var mprogress = new Mprogress();
-    $("#height").on("change", function() {
-      var value = 0;
-      if ($('#height').val() !== '') {
-        value += 1;
-      }
-      if ($('#weight').val() !== '') {
-        value += 1;
-      }
-      var progressValue = value / 2;
-      mprogress.set(progressValue);
-    });
-    $("#weight").on("change", function() {
-      var value = 0;
-      if ($('#height').val() !== '') {
-        value += 1;
-      }
-      if ($('#weight').val() !== '') {
-        value += 1;
-      }
-      var progressValue = value / 2;
-      mprogress.set(progressValue);
-    });
+
   </script>
 </body>
 </html>
