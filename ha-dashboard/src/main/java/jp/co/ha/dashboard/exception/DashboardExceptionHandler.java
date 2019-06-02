@@ -60,7 +60,7 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 		} else {
 			// 予期せぬ例外にする
 			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
-					Locale.JAPANESE);
+					Locale.getDefault());
 			errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(errorCode).append(")");
@@ -77,7 +77,7 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 			outerErrorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
 			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
-					Locale.JAPANESE);
+					Locale.getDefault());
 			outerErrorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 		}
 		body.append(detail).append("(").append(outerErrorCode).append(")");

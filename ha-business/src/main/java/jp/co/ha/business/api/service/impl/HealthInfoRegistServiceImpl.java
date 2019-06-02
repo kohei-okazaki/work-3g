@@ -84,7 +84,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 			BigDecimal weight = request.getWeight();
 
 			// メートルに変換する
-			BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter().apply(height);
+			BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
 
 			BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, weight, 2);
 			BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
@@ -94,7 +94,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 
 			HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
 					? HealthInfoStatus.EVEN
-					: healthInfoCalcService.getHealthInfoStatus().apply(weight, lastHealthInfo.getWeight());
+					: healthInfoCalcService.getHealthInfoStatus(weight, lastHealthInfo.getWeight());
 
 			HealthInfo entity = new HealthInfo();
 			BeanUtil.copy(request, entity);

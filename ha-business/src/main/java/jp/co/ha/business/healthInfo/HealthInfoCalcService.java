@@ -1,8 +1,6 @@
 package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
@@ -16,17 +14,24 @@ public interface HealthInfoCalcService {
 	/**
 	 * 健康情報ステータスを返す
 	 *
+	 * @param inputWeight
+	 *     入力値
+	 * @param beforeWeight
+	 *     以前の体重
 	 * @return 健康情報ステータス
 	 */
-	BiFunction<BigDecimal, BigDecimal, HealthInfoStatus> getHealthInfoStatus();
+	HealthInfoStatus getHealthInfoStatus(BigDecimal inputWeight, BigDecimal beforeWeight);
 
 	/**
 	 * 単位を以下に変換する<br>
 	 * cm → m
+	 * 
+	 * @param centiMeter
+	 *     センチメートル
 	 *
 	 * @return メートル
 	 */
-	Function<BigDecimal, BigDecimal> convertMeterFromCentiMeter();
+	BigDecimal convertMeterFromCentiMeter(BigDecimal centiMeter);
 
 	/**
 	 * BMIを計算
