@@ -38,7 +38,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{age}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{age}" placeholder="年齢" />&ensp;歳
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{age}" placeholder="20" />&ensp;歳
           </div>
         </div>
 
@@ -61,7 +61,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{height}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="身長" />&ensp;cm
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="170.00" />&ensp;cm
           </div>
           <div class="table-data">
             <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
@@ -73,7 +73,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{weight}"></div>
           <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="体重" />&ensp;kg
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="50.00" />&ensp;kg
           </div>
           <div class="table-data">
             <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
@@ -85,7 +85,7 @@
         <div class="table-row">
           <div class="table-header" th:text="#{lifeWorkMetabolism}" id="calorie-modal"></div>
           <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="生活活動代謝" />&ensp;kcal
+            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="消費カロリー" />&ensp;kcal
           </div>
           <div class="table-data">
             <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
@@ -128,6 +128,7 @@
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/common/calorieCalc.js" th:src="@{/resources/js/common/calorieCalc.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript">
     $(function() {
@@ -141,73 +142,6 @@
         promptPosition : "topLeft:0"
       });
 
-      $("#calorie-modal").css({
-        "cursor": "pointer"
-      });
-
-      // モーダルの内容を非表示にする
-      $("#calorie-modal-content").css({
-        "display" : "none"
-      });
-
-      // モーダルを開くイベント処理
-      $("#calorie-modal").on("click", function() {
-        $("body").append('<div id="calorie-modal-bg"></div>');
-        $("#calorie-modal-bg").css({
-          "display" : "none",
-          "width" : "100%",
-          "height" : "100%",
-          "background-color" : "rgba(0,0,0,0.5)",
-          "position" : "fixed",
-          "top" : "0",
-          "left" : "0",
-          "z-index" : "1"
-        });
-
-        $("body").append('<div id="calorie-modal-content"><div class="contentLayout"><b>生活活動代謝って</b><p>日常の生活活動や運動で消費するエネルギー。</p></div></div>');
-        $("#calorie-modal-content").css({
-          "display" : "none",
-          "width" : "auto",
-          "height" : "auto",
-          "margin" : "0",
-          "padding" : "0",
-          "background-color" : "#ffffff",
-          "color" : "#666666",
-          "position" : "fixed",
-          "z-index" : "9999"
-        });
-
-        // 画面中央を計算する関数を実行
-        modalResize();
-
-        // モーダルウィンドウを表示
-        $("#calorie-modal-bg,#calorie-modal-content").fadeIn("slow");
-
-        // 背景のどこかをクリックしたらモーダルを閉じる
-        $("#calorie-modal-bg").on("click", function() {
-          $("#calorie-modal-content,#calorie-modal-bg").fadeOut("slow", function() {
-            // modalを削除
-            $('#calorie-modal-bg').remove();
-            $('#calorie-modal-content').remove();
-          });
-        });
-
-        // 画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
-        $(window).resize(modalResize);
-
-        function modalResize() {
-          var w = $(window).width();
-          var h = $(window).height();
-          var cw = $("#calorie-modal-content").outerWidth();
-          var ch = $("#calorie-modal-content").outerHeight();
-          // 取得した値をcssに追加する
-          $("#calorie-modal-content").css({
-            "left" : ((w - cw) / 2) + "px",
-            "top" : ((h - ch) / 2) + "px"
-          });
-        }
-
-      });
     });
 
   </script>
