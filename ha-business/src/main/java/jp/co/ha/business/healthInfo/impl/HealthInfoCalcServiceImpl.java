@@ -132,4 +132,14 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 		return result;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public BigDecimal calcLostCaloriePerDay(CalorieCalcDto calorieCalcDto) {
+		return Calculator.calc(calorieCalcDto.getBaseMetabolism(), CalcMethod.ADD,
+				calorieCalcDto.getLifeWorkMetabolism(), 2,
+				RoundingMode.HALF_UP);
+	}
+
 }

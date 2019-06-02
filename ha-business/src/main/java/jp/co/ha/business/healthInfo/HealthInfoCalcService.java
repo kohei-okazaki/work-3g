@@ -68,7 +68,16 @@ public interface HealthInfoCalcService {
 	 *
 	 * @param calorieCalcDto
 	 *     カロリー計算DTO
-	 * @return
+	 * @return 基礎代謝量
 	 */
 	BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto);
+
+	/**
+	 * 1日の消費カロリーを計算する
+	 *
+	 * @param calorieCalcDto
+	 *     カロリー計算DTO
+	 * @return 1日の消費カロリー
+	 */
+	BigDecimal calcLostCaloriePerDay(CalorieCalcDto calorieCalcDto);
 }

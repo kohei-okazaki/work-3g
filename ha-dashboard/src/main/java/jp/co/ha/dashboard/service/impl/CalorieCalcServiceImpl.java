@@ -29,6 +29,9 @@ public class CalorieCalcServiceImpl implements CalorieCalcService {
 		BigDecimal baseMetabolism = healthInfoCalcService.calcBaseMetabolism(dto);
 		dto.setBaseMetabolism(baseMetabolism);
 
+		BigDecimal lostCaloriePerDay = healthInfoCalcService.calcLostCaloriePerDay(dto);
+		dto.setLostCaloriePerDay(lostCaloriePerDay);
+
 		return dto;
 	}
 
