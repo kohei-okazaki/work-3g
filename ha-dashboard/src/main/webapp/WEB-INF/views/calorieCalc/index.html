@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
@@ -130,6 +131,7 @@
   <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/common/lifeWorkMetabolism.js" th:src="@{/resources/js/common/lifeWorkMetabolism.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script type="text/javascript">
     $(function() {
 
@@ -140,6 +142,79 @@
 
       jQuery("#calorieCalcForm").validationEngine({
         promptPosition : "topLeft:0"
+      });
+
+      var mprogress = new Mprogress();
+      $("#age").on("change", function() {
+        var value = 0;
+        if ($('#age').val() !== '') {
+          value += 1;
+        }
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        if ($('#weight').val() !== '') {
+          value += 1;
+        }
+        if ($('#lifeWorkMetabolism').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 4;
+        mprogress.set(progressValue);
+      });
+
+      $("#height").on("change", function() {
+        var value = 0;
+        if ($('#age').val() !== '') {
+          value += 1;
+        }
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        if ($('#weight').val() !== '') {
+          value += 1;
+        }
+        if ($('#lifeWorkMetabolism').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 4;
+        mprogress.set(progressValue);
+      });
+
+      $("#weight").on("change", function() {
+        var value = 0;
+        if ($('#age').val() !== '') {
+          value += 1;
+        }
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        if ($('#weight').val() !== '') {
+          value += 1;
+        }
+        if ($('#lifeWorkMetabolism').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 4;
+        mprogress.set(progressValue);
+      });
+
+      $("#lifeWorkMetabolism").on("change", function() {
+        var value = 0;
+        if ($('#age').val() !== '') {
+          value += 1;
+        }
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        if ($('#weight').val() !== '') {
+          value += 1;
+        }
+        if ($('#lifeWorkMetabolism').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 4;
+        mprogress.set(progressValue);
       });
 
     });
