@@ -1,16 +1,16 @@
-$("#calorie-modal").css({
+$("#lifeWorkMetabolism-modal").css({
   "cursor": "pointer"
 });
 
 // モーダルの内容を非表示にする
-$("#calorie-modal-content").css({
+$("#lifeWorkMetabolism-modal-content").css({
   "display" : "none"
 });
 
 // モーダルを開くイベント処理
-$("#calorie-modal").on("click", function() {
-  $("body").append('<div id="calorie-modal-bg"></div>');
-  $("#calorie-modal-bg").css({
+$("#lifeWorkMetabolism-modal").on("click", function() {
+  $("body").append('<div id="lifeWorkMetabolism-modal-bg"></div>');
+  $("#lifeWorkMetabolism-modal-bg").css({
     "display" : "none",
     "width" : "100%",
     "height" : "100%",
@@ -21,8 +21,8 @@ $("#calorie-modal").on("click", function() {
     "z-index" : "1"
   });
 
-  $("body").append('<div id="calorie-modal-content"><div class="contentLayout"><b>生活活動代謝って</b><p>日常の生活活動や運動で消費するエネルギー。</p></div></div>');
-  $("#calorie-modal-content").css({
+  $("body").append('<div id="lifeWorkMetabolism-modal-content"><div class="contentLayout"><b>生活活動代謝って</b><p>日常の生活活動や運動で消費するエネルギー。</p></div></div>');
+  $("#lifeWorkMetabolism-modal-content").css({
     "display" : "none",
     "width" : "auto",
     "height" : "auto",
@@ -38,14 +38,14 @@ $("#calorie-modal").on("click", function() {
   modalResize();
 
   // モーダルウィンドウを表示
-  $("#calorie-modal-bg,#calorie-modal-content").fadeIn("slow");
+  $("#lifeWorkMetabolism-modal-bg,#lifeWorkMetabolism-modal-content").fadeIn("slow");
 
   // 背景のどこかをクリックしたらモーダルを閉じる
-  $("#calorie-modal-bg").on("click", function() {
-    $("#calorie-modal-content,#calorie-modal-bg").fadeOut("slow", function() {
+  $("#lifeWorkMetabolism-modal-bg").on("click", function() {
+    $("#lifeWorkMetabolism-modal-content,#lifeWorkMetabolism-modal-bg").fadeOut("slow", function() {
       // modalを削除
-      $('#calorie-modal-bg').remove();
-      $('#calorie-modal-content').remove();
+      $('#lifeWorkMetabolism-modal-bg').remove();
+      $('#lifeWorkMetabolism-modal-content').remove();
     });
   });
 
@@ -55,10 +55,10 @@ $("#calorie-modal").on("click", function() {
   function modalResize() {
     var w = $(window).width();
     var h = $(window).height();
-    var cw = $("#calorie-modal-content").outerWidth();
-    var ch = $("#calorie-modal-content").outerHeight();
+    var cw = $("#lifeWorkMetabolism-modal-content").outerWidth();
+    var ch = $("#lifeWorkMetabolism-modal-content").outerHeight();
     // 取得した値をcssに追加する
-    $("#calorie-modal-content").css({
+    $("#lifeWorkMetabolism-modal-content").css({
       "left" : ((w - cw) / 2) + "px",
       "top" : ((h - ch) / 2) + "px"
     });
