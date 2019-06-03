@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
@@ -28,6 +29,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public List<HealthInfo> findByUserId(String userId) throws BaseException {
@@ -41,6 +43,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException {
@@ -50,6 +53,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public HealthInfo findLastByUserId(String userId) throws BaseException {
@@ -64,6 +68,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromHealthInfoRegDate,
@@ -80,6 +85,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) throws BaseException {
@@ -95,6 +101,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public int getSelectCountByUserId(String userId) throws BaseException {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
@@ -22,6 +23,7 @@ public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSet
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public HealthInfoFileSetting findByUserId(String userId) throws BaseException {

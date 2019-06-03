@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.SystemEnvironmentMtSearchService;
+import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.SystemEnvironmentMt;
 import jp.co.ha.db.entity.SystemEnvironmentMtExample;
@@ -25,6 +26,7 @@ public class SystemEnvironmentMtSearchServiceImpl implements SystemEnvironmentMt
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public SystemEnvironmentMt find() throws BaseException {
