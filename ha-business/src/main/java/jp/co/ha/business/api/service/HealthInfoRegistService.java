@@ -3,7 +3,6 @@ package jp.co.ha.business.api.service;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.function.ThrowableFunction;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.web.service.BaseApiService;
 
@@ -16,11 +15,13 @@ public interface HealthInfoRegistService
 
 	/**
 	 * リクエスト情報を健康情報に変換する
-	 *
-	 * @return ThrowableFunction<HealthInfoRegistRequest, HealthInfo>
+	 * 
+	 * @param request
+	 *     健康情報登録リクエスト
+	 * @return 健康情報Entity
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	ThrowableFunction<HealthInfoRegistRequest, HealthInfo> toEntity() throws BaseException;
+	HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException;
 
 }
