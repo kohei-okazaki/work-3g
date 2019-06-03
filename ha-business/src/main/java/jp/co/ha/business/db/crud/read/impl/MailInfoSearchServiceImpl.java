@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
+import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.db.mapper.MailInfoMapper;
@@ -22,6 +23,7 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public MailInfo findByUserId(String userId) throws BaseException {

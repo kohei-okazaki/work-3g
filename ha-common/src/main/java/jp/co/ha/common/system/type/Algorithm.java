@@ -7,6 +7,8 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public enum Algorithm implements BaseEnum {
 
+	/** AES */
+	AES("AES"),
 	/** SHA-256 */
 	SHA_256("SHA-256"),
 	/** SHA-512 */

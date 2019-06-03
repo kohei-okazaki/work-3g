@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
+import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.BmiRangeMtExample;
@@ -25,6 +26,7 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public BmiRangeMt findByBmiRangeId(Integer bmiRangeId) throws BaseException {
@@ -34,6 +36,7 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Select
 	@Override
 	@Transactional(readOnly = true)
 	public List<BmiRangeMt> findAll() throws BaseException {

@@ -17,7 +17,6 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.function.ThrowableFunction;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.HealthInfo;
@@ -62,7 +61,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	public void execute(HealthInfoRegistRequest request, HealthInfoRegistResponse response) throws BaseException {
 
 		// リクエストをEntityにつめる
-		HealthInfo entity = toEntity().apply(request);
+		HealthInfo entity = toEntity(request);
 
 		// Entityの登録処理を行う
 		healthInfoCreateService.create(entity);
@@ -76,37 +75,34 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ThrowableFunction<HealthInfoRegistRequest, HealthInfo> toEntity() throws BaseException {
+	public HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException {
 
-		ThrowableFunction<HealthInfoRegistRequest, HealthInfo> function = request -> {
-			String userId = request.getUserId();
-			BigDecimal height = request.getHeight();
-			BigDecimal weight = request.getWeight();
+		String userId = request.getUserId();
+		BigDecimal height = request.getHeight();
+		BigDecimal weight = request.getWeight();
 
-			// メートルに変換する
-			BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
+		// メートルに変換する
+		BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
 
-			BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, weight, 2);
-			BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
+		BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, weight, 2);
+		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
 
-			// 最後に登録した健康情報を取得する
-			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
+		// 最後に登録した健康情報を取得する
+		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
 
-			HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
-					? HealthInfoStatus.EVEN
-					: healthInfoCalcService.getHealthInfoStatus(weight, lastHealthInfo.getWeight());
+		HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
+				? HealthInfoStatus.EVEN
+				: healthInfoCalcService.getHealthInfoStatus(weight, lastHealthInfo.getWeight());
 
-			HealthInfo entity = new HealthInfo();
-			BeanUtil.copy(request, entity);
-			entity.setBmi(bmi);
-			entity.setStandardWeight(standardWeight);
-			entity.setHealthInfoStatus(status.getValue());
-			entity.setHealthInfoRegDate(DateUtil.getSysDate());
+		HealthInfo entity = new HealthInfo();
+		BeanUtil.copy(request, entity);
+		entity.setBmi(bmi);
+		entity.setStandardWeight(standardWeight);
+		entity.setHealthInfoStatus(status.getValue());
+		entity.setHealthInfoRegDate(DateUtil.getSysDate());
 
-			return entity;
-		};
+		return entity;
 
-		return function;
 	}
 
 }

@@ -14,23 +14,25 @@
           <label>テーブル名</label>
         </th>
         <td>
-          <input type="text" id="tableName" size="16" placeholder="対象テーブル名" />
+          <div class="select cp_sl04">
+            <select id="tableName">
+              <option value="">選択して下さい</option>
+            </select>
+          </div>
         </td>
       </tr>
       <tr>
         <th>
-          <label>カラム名</label>
+          <label>削除するカラム名</label>
         </th>
         <td>
-          <input type="text" id="columnName" size="16" placeholder="削除するカラム名" />
+          <div class="select cp_sl04">
+            <select id="columnName"></select>
+          </div>
         </td>
       </tr>
     </table>
 
-    <div class="button">
-      <input id="add" type="button" value="追 加" />
-      <input id="remove" type="button" value="削 除" />
-    </div>
     <div class="button">
       <input id="create" type="button" value="作 成" />
       <input id="inputClear" type="button" value="入力値 クリア" />
@@ -40,40 +42,72 @@
   </div>
 
   <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../../js/table.min.js"></script>
   <script type="text/javascript">
+
+    // テーブル名のセレクトボックスを初期化する
+    function initTableSelectBox() {
+      for (var i = 0; i < table.length; i++) {
+        var tableData = table[i];
+        $("select#tableName").append($("<option>").val(tableData.physicalName).text(tableData.logicalName));
+      }
+    };
 
     function validate() {
       if ($("#tableName").val() === "") {
         alert("テーブル名は必須です");
         return true;
       } else if ($("#columnName").val() === "") {
-        alert("旧カラム名は必須です");
+        alert("カラム名は必須です");
         return true;
       }
       return false;
     }
 
-    $("input#create").on("click", function() {
+    // 画面描画時の処理
+    $(document).ready(function() {
 
-      var hasError = validate();
-        if (hasError) {
+      // テーブル名をセレクトボックスに設定
+      initTableSelectBox();
+
+      // セレクトボックス変更時の処理を設定
+      $("select#tableName").on("change", function() {
+        var tableName = $(this).val();
+        $("select#columnName").children().remove();
+        if (tableName === "") {
           return;
-      }
+        }
+        var columnList = getColumnList(tableName);
+        for (var i = 0; i < columnList.length; i++) {
+          var column = columnList[i];
+          $("select#columnName").append($("<option>").val(column.physicalName).text(column.logicalName));
+        }
+      });
 
-      // DDLを組み立てる
-      var sql = "ALTER TABLE " + $("#tableName").val() + " DROP " + $("#columnName").val() + ";";
-      $("#response").val(sql);
+      // 作成ボタン押下時の処理
+      $("input#create").on("click", function() {
+
+        var hasError = validate();
+          if (hasError) {
+            return;
+        }
+
+        // DDLを組み立てる
+        var sql = "ALTER TABLE " + $("#tableName").val() + " DROP " + $("#columnName").val() + ";";
+        $("#response").val(sql);
+      });
+
+      // 入力値クリアボタン押下時の処理
+      $("input#inputClear").on("click", function() {
+        $("#tableName").val("");
+        $("#columnName").val("");
+      });
+
+      // 結果クリアボタン押下時の処理
+      $("input#responseClear").on("click", function() {
+        $("#response").val("");
+      });
     });
-
-    $("input#inputClear").on("click", function() {
-      $("#tableName").val("");
-      $("#columnName").val("");
-    });
-
-    $("input#responseClear").on("click", function() {
-      $("#response").val("");
-    });
-
   </script>
 </body>
 </html>
