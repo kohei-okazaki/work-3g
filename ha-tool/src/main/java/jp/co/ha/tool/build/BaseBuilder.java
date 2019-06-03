@@ -48,7 +48,7 @@ public abstract class BaseBuilder {
 
 		String resourcePath = this.getClass().getClassLoader().getResource("").getPath()
 				+ FileSeparator.SYSTEM.getValue() + "META-INF";
-		Properties prop = new PropertyReader().read(resourcePath, "target.properties");
+		Properties prop = new PropertyReader().read(resourcePath, "tool.properties");
 
 		String targetTable = prop.getProperty("targetTable");
 		if (BeanUtil.notNull(targetTable)) {
