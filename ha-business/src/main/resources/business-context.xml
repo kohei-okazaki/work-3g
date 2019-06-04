@@ -36,9 +36,6 @@
   <context:component-scan base-package="jp.co.ha.business.api.aspect" />
   <context:component-scan base-package="jp.co.ha.business.api.service.impl" />
 
-  <!-- DB -->
-  <context:component-scan base-package="jp.co.ha.business.db.aspect" />
-
   <!-- 健康情報計算サービス -->
   <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
 

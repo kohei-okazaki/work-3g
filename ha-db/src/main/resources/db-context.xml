@@ -36,4 +36,7 @@
   </bean>
   <mybatis:scan base-package="jp.co.ha.db.mapper" />
 
+  <!-- DB -->
+  <context:component-scan base-package="jp.co.ha.db.aspect" />
+
 </beans>

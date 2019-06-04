@@ -64,7 +64,7 @@ public class LoginCheck {
 	private void checkExistAccount(LoginCheckResult result, Account account) {
 		if (BeanUtil.isNull(account)) {
 			result.addError();
-			result.setErrorCode(DashboardErrorCode.ACCOUNT_ILLEGAL);
+			result.setErrorCode(DashboardErrorCode.ACCOUNT_EXIST);
 		}
 	}
 
@@ -106,7 +106,7 @@ public class LoginCheck {
 	 * アカウント情報.パスワード有効期限 < システム日付の場合、true
 	 *
 	 * @param result
-	 *    ログイン情報チェック結果
+	 *     ログイン情報チェック結果
 	 * @param account
 	 *     アカウント情報
 	 */
