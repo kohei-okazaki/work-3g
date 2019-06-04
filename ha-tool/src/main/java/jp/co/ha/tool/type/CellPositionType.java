@@ -16,18 +16,20 @@ public enum CellPositionType implements BaseEnum {
 	PRIMARY_KEY(2, "primaryKey"),
 	/** シーケンス */
 	SEQUENCE(3, "sequence"),
+	/** シーケンス */
+	CRYPT(4, "crypt"),
 	/** カラム名(コメント) */
-	COLUMN_NAME_COMMENT(4, "columnNameComment"),
+	COLUMN_NAME_COMMENT(5, "columnNameComment"),
 	/** カラム名 */
-	COLUMN_NAME(5, "columnName"),
+	COLUMN_NAME(6, "columnName"),
 	/** カラムタイプ */
-	COLUMN_TYPE(6, "columnType"),
+	COLUMN_TYPE(7, "columnType"),
 	/** カラムサイズ */
-	COLUMN_SIZE(7, "columnSize"),
+	COLUMN_SIZE(8, "columnSize"),
 	/** 備考 */
-	REMARKS(8, "remarks"),
+	REMARKS(9, "remarks"),
 	/** 追加フラグ */
-	ADD_FLG(9, "addFlg");
+	ADD_FLG(10, "addFlg");
 
 	/** 位置 */
 	private int position;
