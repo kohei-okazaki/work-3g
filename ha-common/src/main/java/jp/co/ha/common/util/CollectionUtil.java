@@ -3,7 +3,6 @@ package jp.co.ha.common.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,8 +29,7 @@ public class CollectionUtil {
 	 * @return 判定結果
 	 */
 	public static boolean isEmpty(List<?> list) {
-		Predicate<List<?>> predicate = l -> BeanUtil.isNull(l) || l.isEmpty();
-		return predicate.test(list);
+		return BeanUtil.isNull(list) || list.isEmpty();
 	}
 
 	/**
@@ -42,8 +40,7 @@ public class CollectionUtil {
 	 * @return 判定結果
 	 */
 	public static boolean isMultiple(List<?> list) {
-		Predicate<List<?>> predicate = l -> BeanUtil.notNull(l) && l.size() > 1;
-		return predicate.test(list);
+		return BeanUtil.notNull(list) && list.size() > 1;
 	}
 
 	/**
@@ -84,8 +81,7 @@ public class CollectionUtil {
 	 * @return リストに要素が1以上の場合true, それ以外の場合false
 	 */
 	public static boolean exists(List<?> list) {
-		Predicate<List<?>> predicate = l -> !isEmpty(l);
-		return predicate.test(list);
+		return !isEmpty(list);
 	}
 
 	/**

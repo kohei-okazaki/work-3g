@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -99,15 +100,14 @@ public class FileUtil {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			srcFileList.stream().forEach(srcFile -> LOG.warn(srcFile.getPath(), e));
-			LOG.warn("ファイルが見つかりません destFile:" + destFilePath, e);
+			LOG.error("ファイルが見つかりません destFile:" + destFilePath, e);
 		} catch (IOException e) {
-			LOG.warn("Zipへの圧縮に失敗しました", e);
+			LOG.error("Zipへの圧縮に失敗しました", e);
 		}
 		return zipFile;
 	}
 
-	public static List<File> unZip(File srcZipFile) {
+	public static List<File> unZip(File srcFile) {
 		// TODO
 		List<File> destFileList = new ArrayList<>();
 
@@ -123,21 +123,13 @@ public class FileUtil {
 	 *     コピー先ファイル
 	 */
 	public static void copyFile(File srcFile, File destFile) {
-		try (FileInputStream fis = new FileInputStream(srcFile);
-				FileOutputStream fos = new FileOutputStream(destFile)) {
-
-			byte[] buf = new byte[1024];
-			int length = 0;
-
-			// Fileの終わりまで読込
-			while ((length = fis.read(buf)) != -1) {
-				fos.write(buf);
-				fos.flush();
-			}
+		try (FileChannel srcChannel = new FileInputStream(srcFile).getChannel();
+				FileChannel destChannel = new FileOutputStream(destFile).getChannel()) {
+			srcChannel.transferTo(0, srcChannel.size(), destChannel);
 		} catch (FileNotFoundException e) {
-			LOG.warn("ファイルが見つかりません srcFile:" + srcFile.getPath() + " destFile:" + destFile.getPath(), e);
+			LOG.error("ファイルが見つかりません srcFile:" + srcFile.getPath() + " destFile:" + destFile.getPath(), e);
 		} catch (IOException e) {
-			LOG.warn("ファイルの書き込みや読み込みに失敗しました", e);
+			LOG.error("ファイルの書き込みや読み込みに失敗しました", e);
 		}
 	}
 
@@ -150,13 +142,13 @@ public class FileUtil {
 	 *     コピー先ファイル
 	 */
 	public static void copyFile(String srcPath, String destPath) {
-		Path src = Paths.get(srcPath);
-		Path dest = Paths.get(destPath);
 		try {
+			Path src = Paths.get(srcPath);
+			Path dest = Paths.get(destPath);
 			Files.deleteIfExists(dest);
 			Files.copy(src, dest);
 		} catch (IOException e) {
-			LOG.warn("ファイルのコピーに失敗しました srcFilePath:" + srcPath + " destFilePath:" + destPath, e);
+			LOG.error("ファイルのコピーに失敗しました srcFilePath:" + srcPath + " destFilePath:" + destPath, e);
 		}
 	}
 

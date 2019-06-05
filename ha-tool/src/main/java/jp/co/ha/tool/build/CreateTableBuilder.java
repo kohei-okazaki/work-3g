@@ -57,9 +57,7 @@ public class CreateTableBuilder extends BaseBuilder {
 		Table table = new Table();
 		table.setPhysicalName(tableName);
 		String logicalName = rowList.stream().filter(e -> isTargetTable(e, tableName))
-				.map(e -> e.getCell(CellPositionType.LOGICAL_NAME))
-				.collect(Collectors.toList())
-				.get(0).getValue();
+				.map(e -> e.getCell(CellPositionType.LOGICAL_NAME)).collect(Collectors.toList()).get(0).getValue();
 		table.setLogicalName(logicalName);
 		table.setColumnList(rowList.stream().filter(e -> isTargetTable(e, tableName)).map(e -> {
 			Column column = new Column();
