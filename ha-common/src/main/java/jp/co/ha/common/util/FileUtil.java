@@ -153,6 +153,25 @@ public class FileUtil {
 	}
 
 	/**
+	 * 指定したパス配下のファイルをすべて削除する
+	 *
+	 * @param path
+	 *     対象パス
+	 */
+	public static void deleteFiles(String path) {
+
+		// 削除対象のファイルを取得
+		List<File> fileList = getFileList(path);
+
+		for (File file : fileList) {
+			if (file.isFile()) {
+				file.delete();
+			}
+		}
+
+	}
+
+	/**
 	 * 指定された<code>srcPath</code>を指定された<code>sep</code>のパスに変換する
 	 *
 	 * @param srcPath
