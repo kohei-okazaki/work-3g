@@ -52,4 +52,40 @@ public class CollectionUtilTest {
 			assertEquals(CollectionUtil.isEmpty(list), false);
 		}
 	}
+
+	@Test
+	public void isMultipleTest() {
+		{
+			List<String> list = null;
+			assertEquals(CollectionUtil.isMultiple(list), false);
+		}
+		{
+			List<String> list = new ArrayList<>();
+			assertEquals(CollectionUtil.isMultiple(list), false);
+		}
+		{
+			List<String> list = Arrays.asList("1");
+			assertEquals(CollectionUtil.isMultiple(list), false);
+		}
+		{
+			List<String> list = Arrays.asList("1", "2");
+			assertEquals(CollectionUtil.isMultiple(list), true);
+		}
+	}
+
+	@Test
+	public void existsTest() {
+		{
+			List<String> list = null;
+			assertEquals(CollectionUtil.exists(list), false);
+		}
+		{
+			List<String> list = new ArrayList<>();
+			assertEquals(CollectionUtil.exists(list), false);
+		}
+		{
+			List<String> list = Arrays.asList("1");
+			assertEquals(CollectionUtil.exists(list), true);
+		}
+	}
 }
