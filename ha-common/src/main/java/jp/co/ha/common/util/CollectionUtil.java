@@ -2,7 +2,6 @@ package jp.co.ha.common.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -91,16 +90,10 @@ public class CollectionUtil {
 	 *     対象のリスト
 	 * @param count
 	 *     要素数
-	 * @return リストに要素が<code>count</code>以上の場合true, それ以外の場合false
+	 * @return リストの要素数が<code>count</code>の場合true, それ以外の場合false
 	 */
 	public static boolean existsCount(List<?> list, int count) {
-		BiPredicate<List<?>, Integer> biPredicate = (l, c) -> {
-			if (BeanUtil.isNull(l)) {
-				return false;
-			}
-			return l.size() == c.intValue();
-		};
-		return biPredicate.test(list, count);
+		return BeanUtil.isNull(list) ? false : list.size() == count;
 	}
 
 	/**
