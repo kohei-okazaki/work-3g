@@ -113,14 +113,11 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 		}
 
 		BigDecimal calcWeight = Calculator.calc(WEIGHT_ADJUST_VALUE, CalcMethod.MULTIPLY,
-				calorieCalcDto.getWeight(), 3,
-				RoundingMode.HALF_UP);
+				calorieCalcDto.getWeight(), 3, RoundingMode.HALF_UP);
 		BigDecimal calcHeight = Calculator.calc(HEIGHT_ADJUST_VALUE, CalcMethod.MULTIPLY,
-				calorieCalcDto.getHeight(), 3,
-				RoundingMode.HALF_UP);
+				calorieCalcDto.getHeight(), 3, RoundingMode.HALF_UP);
 		BigDecimal calcAge = Calculator.calc(AGE_ADJUST_VALUE, CalcMethod.MULTIPLY,
-				BigDecimal.valueOf(calorieCalcDto.getAge()), 3,
-				RoundingMode.HALF_UP);
+				BigDecimal.valueOf(calorieCalcDto.getAge()), 3, RoundingMode.HALF_UP);
 
 		result = Calculator.calc(calcWeight, CalcMethod.ADD, calcHeight, 3, RoundingMode.HALF_UP);
 		result = Calculator.calc(result, CalcMethod.SUBTRACT, calcAge, 3, RoundingMode.HALF_UP);
@@ -135,8 +132,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	@Override
 	public BigDecimal calcLostCaloriePerDay(CalorieCalcDto calorieCalcDto) {
 		return Calculator.calc(calorieCalcDto.getBaseMetabolism(), CalcMethod.ADD,
-				calorieCalcDto.getLifeWorkMetabolism(), 2,
-				RoundingMode.HALF_UP);
+				calorieCalcDto.getLifeWorkMetabolism(), 2, RoundingMode.HALF_UP);
 	}
 
 }
