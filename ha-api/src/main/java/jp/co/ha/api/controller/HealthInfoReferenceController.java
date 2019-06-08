@@ -27,7 +27,7 @@ public class HealthInfoReferenceController extends
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected HealthInfoReferenceResponse getApiResponse() {
+	public HealthInfoReferenceResponse getApiResponse() {
 		return new HealthInfoReferenceResponse();
 	}
 

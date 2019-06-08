@@ -31,7 +31,7 @@ import jp.co.ha.web.controller.BaseWizardController;
  *
  */
 @Controller
-@RequestMapping(value = "accountRegist")
+@RequestMapping("accountRegist")
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
 	/** LOG */
