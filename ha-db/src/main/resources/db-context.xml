@@ -43,6 +43,16 @@
       <tx:method name="*" propagation="REQUIRED" isolation="READ_COMMITTED" timeout="32" read-only="false" rollback-for="java.lang.Exception" />
     </tx:attributes>
   </tx:advice>
+  <!-- 明示的トランザクションの設定 -->
+  <bean id="transactionDefinition" class="org.springframework.transaction.support.DefaultTransactionDefinition">
+    <property name="propagationBehavior">
+      <util:constant static-field="org.springframework.transaction.TransactionDefinition.PROPAGATION_REQUIRED" />
+    </property>
+    <property name="isolationLevel">
+      <util:constant static-field="org.springframework.transaction.TransactionDefinition.ISOLATION_READ_COMMITTED" />
+    </property>
+    <property name="readOnly" value="false" />
+  </bean>
 
   <!-- DB -->
   <context:component-scan base-package="jp.co.ha.db.aspect" />

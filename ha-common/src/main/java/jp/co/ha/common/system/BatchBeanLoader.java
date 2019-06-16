@@ -1,10 +1,8 @@
 package jp.co.ha.common.system;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import jp.co.ha.common.log.Logger;
@@ -15,7 +13,7 @@ import jp.co.ha.common.util.BeanUtil;
  * Bean読込クラス(batch用)<br>
  * TODO jp.co.ha.common.system.BeanLoader からbeanを取得するように修正する予定
  */
-public class BatchBeanLoader implements ApplicationContextAware {
+public class BatchBeanLoader {
 
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(BatchBeanLoader.class);
@@ -29,8 +27,7 @@ public class BatchBeanLoader implements ApplicationContextAware {
 	private BatchBeanLoader() {
 	}
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+	public static void setApplicationContext(ApplicationContext applicationContext) {
 		BatchBeanLoader.context = applicationContext;
 	}
 
