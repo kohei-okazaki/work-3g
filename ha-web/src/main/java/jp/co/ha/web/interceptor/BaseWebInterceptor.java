@@ -12,7 +12,7 @@ public abstract class BaseWebInterceptor implements BaseInterceptor {
 
 	/**
 	 * インターセプターで検査対象のリソースかどうか判定する<br>
-	 * javascriptなどの静的リソースはtrueを返す<br>
+	 * javascriptなどの静的リソースはtrueを返す
 	 *
 	 * @return 判定結果
 	 */
