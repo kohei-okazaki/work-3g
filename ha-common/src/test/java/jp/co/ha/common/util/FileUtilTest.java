@@ -15,9 +15,9 @@ public class FileUtilTest {
 
 	@Test
 	public void toZipTest() {
-
-		String destPath = "C:\\app\\git\\work-3g\\ha-common\\src\\test\\resources\\zip\\dest\\result.zip";
-		List<File> list = FileUtil.getFileList("C:\\app\\git\\work-3g\\ha-common\\src\\test\\resources\\zip\\src");
+		String basePath = "C:\\app\\git\\work-3g\\ha-common";
+		String destPath = basePath + "\\src\\test\\resources\\zip\\dest\\result.zip";
+		List<File> list = FileUtil.getFileList(basePath + "\\src\\test\\resources\\zip\\src");
 		File zip = FileUtil.compressZip(list, destPath);
 		assertTrue(zip.isFile());
 	}
