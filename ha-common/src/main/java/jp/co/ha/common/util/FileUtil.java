@@ -95,7 +95,14 @@ public class FileUtil {
 		return new File(destFilePath);
 	}
 
-	public static List<File> unZip(File srcFile) {
+	/**
+	 * 指定されたZipを解凍し、中のファイルを返す
+	 *
+	 * @param srcFile
+	 *     ZIPファイル
+	 * @return 解凍後のファイル
+	 */
+	public static List<File> unCompressZip(File srcFile) {
 		// TODO
 		List<File> destFileList = new ArrayList<>();
 
