@@ -1,13 +1,13 @@
 package jp.co.ha.common.util;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -74,28 +74,16 @@ public class FileUtil {
 	 *     出力先ファイルパス
 	 * @return zipファイル
 	 */
-	public static File toZip(List<File> srcFileList, String destFilePath) {
-		// TODO
-		File zipFile = getFile(destFilePath);
-		try (FileOutputStream fos = new FileOutputStream(zipFile.getName());
-				ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zipFile.getName()));
-				BufferedOutputStream bos = new BufferedOutputStream(fos)) {
+	public static File compressZip(List<File> srcFileList, String destFilePath) {
 
-			for (File srcFile : srcFileList) {
-				ZipEntry entry = new ZipEntry(srcFile.getName());
-				zos.putNextEntry(entry);
-				if (srcFile.getName().endsWith(FileSeparator.SYSTEM.getValue())) {
-					zos.closeEntry();
-					continue;
-				}
-
-				try (FileInputStream fis = new FileInputStream(
-						destFilePath + FileSeparator.SYSTEM.getValue() + srcFile);
-						BufferedInputStream bis = new BufferedInputStream(fis)) {
-					int size = 0;
-					byte[] buffer = new byte[1024];
-					while ((size = bis.read(buffer)) > 0) {
-						zos.write(buffer, 0, size);
+		try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(destFilePath), Charset.forName("UTF-8"))) {
+			byte[] buffer = new byte[1024];
+			for (File file : srcFileList) {
+				try (InputStream in = new FileInputStream(file)) {
+					zos.putNextEntry(new ZipEntry(file.getName()));
+					int len = 0;
+					while ((len = in.read(buffer)) > 0) {
+						zos.write(buffer, 0, len);
 					}
 				}
 			}
@@ -104,7 +92,7 @@ public class FileUtil {
 		} catch (IOException e) {
 			LOG.error("Zipへの圧縮に失敗しました", e);
 		}
-		return zipFile;
+		return new File(destFilePath);
 	}
 
 	public static List<File> unZip(File srcFile) {

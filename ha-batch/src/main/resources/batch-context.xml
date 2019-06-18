@@ -17,6 +17,8 @@
   <import resource="classpath:db-context.xml" />
   <!-- business -->
   <import resource="classpath:business-context.xml" />
+  <!-- web -->
+  <import resource="classpath:web-context.xml" />
 
   <context:component-scan base-package="jp.co.ha.batch.execute" />
 
