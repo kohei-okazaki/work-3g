@@ -29,7 +29,8 @@ input[type="button"]:hover {
 /* 入力タグの設定 */
 input[type="text"],
 input[type=password],
-input[type="email"], textarea {
+input[type="email"],
+textarea {
   padding: 0.8em;
   outline: none;
   border: 1px solid #DDD;
