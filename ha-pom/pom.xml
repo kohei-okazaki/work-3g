@@ -22,7 +22,9 @@
     <poi-version>4.1.0</poi-version>
     <mysql-version>8.0.16</mysql-version>
     <mybatis-version>3.5.1</mybatis-version>
-    <hibernate-version>6.0.16.Final</hibernate-version>
+    <hibernate-version>6.0.17.Final</hibernate-version>
+    <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
+    <org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
   </properties>
 
   <modules>
@@ -164,11 +166,6 @@
       <artifactId>aspectjweaver</artifactId>
       <version>${org.aspectj-version}</version>
     </dependency>
-    <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib</artifactId>
-      <version>3.2.12</version>
-    </dependency>
 
     <!-- Logging -->
     <dependency>
@@ -192,6 +189,23 @@
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy</artifactId>
       <version>2.5.7</version>
+    </dependency>
+
+    <!-- thymeleaf -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>${org.thymeleaf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf</artifactId>
+      <version>${org.thymeleaf-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>nz.net.ultraq.thymeleaf</groupId>
+      <artifactId>thymeleaf-layout-dialect</artifactId>
+      <version>${org.thymeleaf-layout-version}</version>
     </dependency>
 
     <!-- @Inject -->
@@ -231,15 +245,6 @@
       <version>5.4.2</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- Tomcat -->
-    <!--
-    <dependency>
-      <groupId>org.apache.tomcat</groupId>
-      <artifactId>tomcat-catalina</artifactId>
-      <version>9.0.17</version>
-    </dependency>
-    -->
 
   </dependencies>
 
