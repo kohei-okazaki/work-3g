@@ -85,10 +85,7 @@
       var columnValue = $("#columnValue").val();
       var whereColumnName = $("#whereColumnName option:selected").val();
       var whereColumnValue = $("#whereColumnValue").val();
-      var sql = "UPDATE " + $("#tableName" + " option:selected").val() + " SET (\r\n"
-                          + "  " + columnName + " = '" + columnValue + "'\r\n)"
-                          + "\r\nWHERE "
-                          + whereColumnName + " = '" + whereColumnValue + "';";
+      var sql = "UPDATE " + $("#tableName" + " option:selected").val() + " SET " + columnName + " = '" + columnValue + "' WHERE " + whereColumnName + " = '" + whereColumnValue + "';";
       return sql;
     }
 

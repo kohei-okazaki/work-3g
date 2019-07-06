@@ -6,62 +6,40 @@
                       http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>jp.co.ha.dashboard</groupId>
-  <artifactId>ha-dashboard</artifactId>
+  <groupId>jp.co.ha</groupId>
+  <artifactId>dashboard</artifactId>
   <version>1.0</version>
+  <name>ha-dashboard</name>
   <packaging>war</packaging>
 
-  <properties>
-    <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
-    <org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
-  </properties>
-
   <parent>
-    <groupId>jp.co.ha.pom</groupId>
-    <artifactId>ha-pom</artifactId>
+    <groupId>jp.co.ha</groupId>
+    <artifactId>pom</artifactId>
     <version>1.0</version>
     <relativePath>../ha-pom</relativePath>
   </parent>
 
   <dependencies>
-    <!-- thymeleaf -->
     <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring5</artifactId>
-      <version>${org.thymeleaf-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>${org.thymeleaf-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>nz.net.ultraq.thymeleaf</groupId>
-      <artifactId>thymeleaf-layout-dialect</artifactId>
-      <version>${org.thymeleaf-layout-version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>jp.co.ha.common</groupId>
-      <artifactId>ha-common</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>common</artifactId>
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>jp.co.ha.business</groupId>
-      <artifactId>ha-business</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>db</artifactId>
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>jp.co.ha.db</groupId>
-      <artifactId>ha-db</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>web</artifactId>
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>jp.co.ha.web</groupId>
-      <artifactId>ha-web</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>business</artifactId>
       <version>1.0</version>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -70,7 +48,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
       </plugin>
     </plugins>
   </build>

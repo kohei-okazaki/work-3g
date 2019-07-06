@@ -46,28 +46,28 @@ JAR_VERSION="1.0"
 ########################################
 cd ${COMMON_DIR}
 mvn package
-mvn install:install-file -Dfile=target/ha-common-${JAR_VERSION}.jar -DgroupId=jp.co.ha.common -DartifactId=ha-common -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/ha-common-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=common -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 ########################################
 # db jarを作成
 ########################################
 cd ${DB_DIR}
 mvn package
-mvn install:install-file -Dfile=target/ha-db-${JAR_VERSION}.jar -DgroupId=jp.co.ha.db -DartifactId=ha-db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/ha-db-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 ########################################
 # web jarを作成
 ########################################
 cd ${BUSINESS_DIR}
 mvn package
-mvn install:install-file -Dfile=target/ha-web-${JAR_VERSION}.jar -DgroupId=jp.co.ha.web -DartifactId=ha-web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/ha-web-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 ########################################
 # business jarを作成
 ########################################
 cd ${BUSINESS_DIR}
 mvn package
-mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=jp.co.ha.business -DartifactId=ha-business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 # libディレクトリを確認する

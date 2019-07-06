@@ -6,37 +6,38 @@
                       http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>jp.co.ha.api</groupId>
-  <artifactId>ha-api</artifactId>
+  <groupId>jp.co.ha</groupId>
+  <artifactId>api</artifactId>
   <version>1.0</version>
+  <name>ha-api</name>
   <packaging>war</packaging>
 
   <parent>
-    <groupId>jp.co.ha.pom</groupId>
-    <artifactId>ha-pom</artifactId>
+    <groupId>jp.co.ha</groupId>
+    <artifactId>pom</artifactId>
     <version>1.0</version>
     <relativePath>../ha-pom</relativePath>
   </parent>
 
   <dependencies>
     <dependency>
-      <groupId>jp.co.ha.common</groupId>
-      <artifactId>ha-common</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>common</artifactId>
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>jp.co.ha.business</groupId>
-      <artifactId>ha-business</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>db</artifactId>
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>jp.co.ha.db</groupId>
-      <artifactId>ha-db</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>web</artifactId>
       <version>1.0</version>
     </dependency>
     <dependency>
-      <groupId>jp.co.ha.web</groupId>
-      <artifactId>ha-web</artifactId>
+      <groupId>jp.co.ha</groupId>
+      <artifactId>business</artifactId>
       <version>1.0</version>
     </dependency>
   </dependencies>
@@ -47,7 +48,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
       </plugin>
     </plugins>
   </build>
