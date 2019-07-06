@@ -6,8 +6,9 @@
                       http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>jp.co.ha.pom</groupId>
-  <artifactId>ha-pom</artifactId>
+  <groupId>jp.co.ha</groupId>
+  <artifactId>pom</artifactId>
+  <name>ha-pom</name>
   <packaging>pom</packaging>
   <version>1.0</version>
 
@@ -24,7 +25,7 @@
     <mybatis-version>3.5.1</mybatis-version>
     <hibernate-version>6.0.17.Final</hibernate-version>
     <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
-    <org.thymeleaf-layout-version>2.3.0</org.thymeleaf-layout-version>
+    <org.thymeleaf-layout-version>2.4.1</org.thymeleaf-layout-version>
   </properties>
 
   <modules>
@@ -242,7 +243,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.4.2</version>
+      <version>5.5.0</version>
       <scope>test</scope>
     </dependency>
 

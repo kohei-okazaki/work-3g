@@ -87,7 +87,7 @@ public class LoginCheck {
 
 	/**
 	 * アカウント情報が有効かどうかチェック<br>
-	 * 有効でない場合true, そうでない場合false
+	 * 有効でない場合、エラー
 	 *
 	 * @param result
 	 *     ログイン情報チェック結果
@@ -103,7 +103,7 @@ public class LoginCheck {
 
 	/**
 	 * アカウント情報が有効期限切れかどうか判定する<br>
-	 * アカウント情報.パスワード有効期限 < システム日付の場合、true
+	 * アカウント情報.パスワード有効期限 < システム日付の場合、エラー
 	 *
 	 * @param result
 	 *     ログイン情報チェック結果
@@ -111,7 +111,7 @@ public class LoginCheck {
 	 *     アカウント情報
 	 */
 	private void checkAccountExpired(LoginCheckResult result, Account account) {
-		if (DateUtil.isAfter(account.getPasswordExpire(), false)) {
+		if (DateUtil.isBefore(account.getPasswordExpire(), false)) {
 			result.addError();
 			result.setErrorCode(DashboardErrorCode.ACCOUNT_EXPIRED);
 		}
