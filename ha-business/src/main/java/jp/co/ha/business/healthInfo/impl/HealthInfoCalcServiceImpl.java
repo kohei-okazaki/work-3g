@@ -89,8 +89,6 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	@Override
 	public BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto) {
 
-		BigDecimal result = null;
-
 		BigDecimal WEIGHT_ADJUST_VALUE = null;
 		BigDecimal HEIGHT_ADJUST_VALUE = null;
 		BigDecimal AGE_ADJUST_VALUE = null;
@@ -119,6 +117,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 		BigDecimal calcAge = Calculator.calc(AGE_ADJUST_VALUE, CalcMethod.MULTIPLY,
 				BigDecimal.valueOf(calorieCalcDto.getAge()), 3, RoundingMode.HALF_UP);
 
+		BigDecimal result = null;
 		result = Calculator.calc(calcWeight, CalcMethod.ADD, calcHeight, 3, RoundingMode.HALF_UP);
 		result = Calculator.calc(result, CalcMethod.SUBTRACT, calcAge, 3, RoundingMode.HALF_UP);
 		result = Calculator.calc(result, CalcMethod.ADD, ADJUST_VALUE, 3, RoundingMode.HALF_UP);

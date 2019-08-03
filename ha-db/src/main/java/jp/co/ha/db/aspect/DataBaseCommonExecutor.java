@@ -195,29 +195,32 @@ public class DataBaseCommonExecutor {
 	 *
 	 * @param entity
 	 *     対象Entity
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
+	 * @throws BaseException
+	 *     基底例外
 	 */
-	private void encryptEntity(Object entity)
-			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		for (Field f : entity.getClass().getDeclaredFields()) {
-			if (isCryptField(f)) {
-				// 暗号化前の値を取得
-				Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.GETTER);
-				Object value = getter.invoke(entity);
+	private void encryptEntity(Object entity) throws BaseException {
+		try {
+			for (Field f : entity.getClass().getDeclaredFields()) {
+				if (isCryptField(f)) {
+					// 暗号化前の値を取得
+					Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.GETTER);
+					Object value = getter.invoke(entity);
 
-				if (value != null) {
-					// 暗号化
-					String enc = crypter.encrypt(value.toString());
+					if (value != null) {
+						// 暗号化
+						String enc = crypter.encrypt(value.toString());
 
-					// 暗号化後の値を設定
-					Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
-							AccessorType.SETTER);
-					setter.invoke(entity, enc);
+						// 暗号化後の値を設定
+						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
+								AccessorType.SETTER);
+						setter.invoke(entity, enc);
+					}
 				}
 			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "entityから値を取得できません", e);
 		}
+
 	}
 
 	/**

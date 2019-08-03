@@ -16,6 +16,12 @@ public enum GenderType implements BaseEnum {
 	/** 値 */
 	private String value;
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param value
+	 *     値
+	 */
 	private GenderType(String value) {
 		this.value = value;
 	}
