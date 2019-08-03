@@ -18,10 +18,19 @@ public enum BodyType implements BaseEnum {
 	/** 値 */
 	private String value;
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param value
+	 *     値
+	 */
 	private BodyType(String value) {
 		this.value = value;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getValue() {
 		return this.value;
