@@ -1,4 +1,4 @@
-package jp.co.ha.common.db.impl;
+package jp.co.ha.common.db;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;

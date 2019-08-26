@@ -23,9 +23,13 @@
     <org.poi-version>4.1.0</org.poi-version>
     <org.mysql-version>8.0.17</org.mysql-version>
     <org.mybatis-version>3.5.2</org.mybatis-version>
+    <org.mybatis-spring-version>2.0.2</org.mybatis-spring-version>
     <org.hibernate-version>6.0.17.Final</org.hibernate-version>
     <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
     <org.thymeleaf-layout-version>2.4.1</org.thymeleaf-layout-version>
+    <org.java-mail-version>1.6.2</org.java-mail-version>
+    <org.groovy-version>2.5.8</org.groovy-version>
+    <org.dbcp2-version>2.7.0</org.dbcp2-version>
   </properties>
 
   <modules>
@@ -142,7 +146,6 @@
       <version>${org.jackson-version}</version>
     </dependency>
 
-
     <!-- DB -->
     <dependency>
       <groupId>mysql</groupId>
@@ -157,12 +160,12 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>2.0.2</version>
+      <version>${org.mybatis-spring-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-dbcp2</artifactId>
-      <version>2.6.0</version>
+      <version>${org.dbcp2-version}</version>
     </dependency>
 
     <!-- Batch -->
@@ -205,7 +208,7 @@
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy</artifactId>
-      <version>2.5.7</version>
+      <version>${org.groovy-version}</version>
     </dependency>
 
     <!-- thymeleaf -->
@@ -254,7 +257,12 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.9</version>
     </dependency>
-
+    <!-- Mail -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>javax.mail-api</artifactId>
+      <version>${org.java-mail-version}</version>
+    </dependency>
     <!-- Test -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
