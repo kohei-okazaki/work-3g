@@ -21,7 +21,7 @@
   <context:annotation-config />
 
   <context:component-scan base-package="jp.co.ha.common.system.impl" />
-  <context:component-scan base-package="jp.co.ha.common.db.impl" />
+  <context:component-scan base-package="jp.co.ha.common.db" />
 
   <!-- 妥当性チェック -->
   <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />

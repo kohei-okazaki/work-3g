@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * エンコードアノテーション<br>
+ * URLエンコードアノテーション<br>
  * ex)<br>
  * <code>
  * @Url
