@@ -75,24 +75,24 @@ if not exist %directory% (
 
 rem 以下の機能で必要なディレクトリを作成する
 rem 1.健康情報登録バッチ
-set directory="C:\app\data"
+set directory="D:\app\data"
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd "C:\app"
+  cd "D:\app"
   mkdir "data"
 )
-set directory="C:\app\data\healthInfoReference"
+set directory="D:\app\data\healthInfoReference"
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd "C:\app\data"
+  cd "D:\app\data"
   mkdir "healthInfoReference"
 )
 
 rem 2.健康情報照会画面で出力後のCSVファイル
-set directory="C:\app\data\healthInfoRegist"
+set directory="D:\app\data\healthInfoRegist"
 if not exist %directory% (
   rem ディレクトリが存在しない場合
-  cd "C:\app\data"
+  cd "D:\app\data"
   mkdir "healthInfoRegist"
 )
 
