@@ -179,7 +179,7 @@ public class DataBaseCommonExecutor {
 
 				if (value != null) {
 
-					// 暗号化
+					// 復号化
 					String dec = crypter.decrypt(value.toString());
 					// 復号後の値を設定
 					Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),

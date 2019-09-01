@@ -4,13 +4,15 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
+import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link DateUtil} のjUnit
  *
  */
-public class DateUtilTest {
+public class DateUtilTest extends BaseCommonTest {
 
 	@Test
 	public void toDateTest() {

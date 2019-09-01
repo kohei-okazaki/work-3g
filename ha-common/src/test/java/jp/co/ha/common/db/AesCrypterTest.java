@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.db.Crypter;
-import jp.co.ha.common.test.BaseCommonTest;
 
 /**
  * {@link AesCrypter} のjUnit

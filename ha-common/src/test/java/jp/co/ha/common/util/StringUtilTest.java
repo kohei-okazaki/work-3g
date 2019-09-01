@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
+import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -16,7 +17,7 @@ import jp.co.ha.common.util.StringUtil.PaddingType;
  * {@link StringUtil} のjUnit
  *
  */
-public class StringUtilTest {
+public class StringUtilTest extends BaseCommonTest {
 
 	private static Logger LOG = LoggerFactory.getLogger(StringUtilTest.class);
 

@@ -2,8 +2,9 @@ package jp.co.ha.common.validator;
 
 import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
+import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.RegixType;
@@ -15,7 +16,7 @@ import jp.co.ha.common.validator.annotation.Required;
 /**
  * {@link BeanValidator} のjUnit
  */
-public class BeanValidatorTest {
+public class BeanValidatorTest extends BaseCommonTest {
 
 	/** LOG */
 	private final static Logger LOG = LoggerFactory.getLogger(BeanValidatorTest.class);

@@ -6,13 +6,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
+import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link CollectionUtil} のjUnit
  *
  */
-public class CollectionUtilTest {
+public class CollectionUtilTest extends BaseCommonTest {
 
 	@Test
 	public void existsCountTest() {

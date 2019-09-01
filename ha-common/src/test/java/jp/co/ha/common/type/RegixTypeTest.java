@@ -5,13 +5,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
+import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link RegixType} のjUnit
  *
  */
-public class RegixTypeTest {
+public class RegixTypeTest extends BaseCommonTest {
 
 	@Test
 	public void halfNumberTest() {
