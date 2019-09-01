@@ -1,4 +1,4 @@
-package jp.co.ha.common.test;
+package jp.co.ha.common;
 
 import org.junit.After;
 import org.junit.Before;

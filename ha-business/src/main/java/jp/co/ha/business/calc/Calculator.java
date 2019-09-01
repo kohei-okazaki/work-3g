@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * 計算機クラス
+ * 計算器クラス
  *
  */
 public class Calculator {

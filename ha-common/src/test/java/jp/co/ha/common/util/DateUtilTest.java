@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import jp.co.ha.common.test.BaseCommonTest;
+import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link DateUtil} のjUnit

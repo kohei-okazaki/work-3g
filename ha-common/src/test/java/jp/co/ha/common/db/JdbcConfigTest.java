@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jp.co.ha.common.test.BaseCommonTest;
+import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link JdbcConfig} のjUnit

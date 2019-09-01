@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.test.BaseCommonTest;
 import jp.co.ha.common.util.StringUtil.PaddingType;
 
 /**
