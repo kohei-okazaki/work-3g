@@ -1,4 +1,4 @@
-package jp.co.ha.business;
+package jp.co.ha.db;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,23 +11,21 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.BeanLoader;
 
-@ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml",
-		"classpath:web-context.xml", "classpath:business-context.xml" })
+@ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BaseBusinessTest {
+public class BaseDbTest {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BaseBusinessTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(BaseDbTest.class);
 
 	@Before
 	public void before() {
-		LOG.debug("BaseBusinessTest#before");
+		LOG.debug("BaseDbTest#before");
 		BeanLoader.setContext(new ClassPathXmlApplicationContext(
-				new String[] { "classpath:common-context.xml", "classpath:db-context.xml", "classpath:web-context.xml",
-						"classpath:business-context.xml" }));
+				new String[] { "classpath:common-context.xml", "classpath:db-context.xml" }));
 	}
 
 	@After
 	public void after() {
-		LOG.debug("BaseBusinessTest#after");
+		LOG.debug("BaseDbTest#after");
 	}
 }
