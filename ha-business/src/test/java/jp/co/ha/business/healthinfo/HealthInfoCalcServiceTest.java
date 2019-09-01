@@ -44,4 +44,11 @@ public class HealthInfoCalcServiceTest extends BaseBusinessTest {
 			assertEquals(HealthInfoStatus.INCREASE, service.getHealthInfoStatus(inputWeight, beforeWeight));
 		}
 	}
+
+	@Test
+	public void convertMeterFromCentiMeterTest() {
+		// 100cm
+		BigDecimal centiMeter = BigDecimal.TEN.multiply(BigDecimal.TEN);
+		assertEquals(new BigDecimal("1.00"), service.convertMeterFromCentiMeter(centiMeter));
+	}
 }
