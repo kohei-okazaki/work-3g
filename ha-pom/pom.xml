@@ -17,7 +17,7 @@
     <java-version>11</java-version>
     <org.springframework-version>5.1.9.RELEASE</org.springframework-version>
     <org.aspectj-version>1.9.4</org.aspectj-version>
-    <org.slf4j-version>1.7.26</org.slf4j-version>
+    <org.slf4j-version>1.7.28</org.slf4j-version>
     <org.logback-version>1.2.3</org.logback-version>
     <org.jackson-version>2.9.9</org.jackson-version>
     <org.poi-version>4.1.0</org.poi-version>
@@ -31,6 +31,28 @@
     <org.groovy-version>2.5.8</org.groovy-version>
     <org.dbcp2-version>2.7.0</org.dbcp2-version>
   </properties>
+
+  <profiles>
+    <!-- local -->
+    <profile>
+      <id>local</id>
+      <properties>
+        <environment>local</environment>
+        <resources.directory>${basedir}/profile/local</resources.directory>
+      </properties>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <!-- other -->
+    <profile>
+      <id>other</id>
+      <properties>
+        <environment>other</environment>
+        <resources.directory>${basedir}/profile/other</resources.directory>
+      </properties>
+    </profile>
+  </profiles>
 
   <modules>
     <module>../ha-common</module>
@@ -339,6 +361,8 @@
           <source>${java-version}</source>
           <target>${java-version}</target>
           <encoding>${project.build.sourceEncoding}</encoding>
+          <showWarnings>true</showWarnings>
+          <showDeprecation>true</showDeprecation>
         </configuration>
       </plugin>
       <plugin>
