@@ -17,6 +17,9 @@ import jp.co.ha.common.util.BeanUtil;
 
 /**
  * Dao実装の基底クラス
+ *
+ * @deprecated MyBatisを利用するため
+ * @since 1.0
  */
 public abstract class BaseDao {
 

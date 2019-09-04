@@ -30,7 +30,7 @@
   <bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
       <list>
-        <value>classpath:META-INF/jdbc.properties</value>
+        <value>classpath:jdbc.properties</value>
       </list>
     </property>
   </bean>
