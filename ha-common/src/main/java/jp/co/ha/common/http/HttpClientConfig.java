@@ -20,6 +20,10 @@ public class HttpClientConfig {
 	/** ボディ */
 	private Map<String, String> bodyMap;
 
+	/**
+	 * コンストラクタ
+	 *
+	 */
 	public HttpClientConfig() {
 		this.headerMap = new HashMap<>();
 		this.bodyMap = new HashMap<>();
@@ -82,18 +86,40 @@ public class HttpClientConfig {
 		this.httpMethod = httpMethod;
 	}
 
+	/**
+	 * headerMapを返す
+	 *
+	 * @return headerMap
+	 */
 	public Map<String, String> getHeaderMap() {
 		return headerMap;
 	}
 
+	/**
+	 * headerMapを設定する
+	 *
+	 * @param headerMap
+	 *     ヘッダMap
+	 */
 	public void setHeaderMap(Map<String, String> headerMap) {
 		this.headerMap = headerMap;
 	}
 
+	/**
+	 * bodyMapを返す
+	 * 
+	 * @return bodyMap
+	 */
 	public Map<String, String> getBodyMap() {
 		return bodyMap;
 	}
 
+	/**
+	 * bodyMapを設定する
+	 *
+	 * @param bodyMap
+	 *     ボディMap
+	 */
 	public void setBodyMap(Map<String, String> bodyMap) {
 		this.bodyMap = bodyMap;
 	}

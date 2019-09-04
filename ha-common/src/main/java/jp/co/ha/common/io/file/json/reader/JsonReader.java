@@ -25,8 +25,10 @@ public class JsonReader {
 	/**
 	 * 指定されたファイルパスからJavaオブジェクトに変換する
 	 *
-	 * @param target
-	 *     対象文字列
+	 * @param path
+	 *     ファイルパス
+	 * @param fileName
+	 *     ファイル名
 	 * @param clazz
 	 *     Beanクラス型
 	 * @return Javaインスタンス

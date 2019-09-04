@@ -36,7 +36,7 @@ public interface HashEncoder {
 	 *     ソルト
 	 * @param algorithm
 	 *     アルゴリズム
-	 * @return
+	 * @return ハッシュ化後の文字列
 	 * @throws NoSuchAlgorithmException
 	 *     指定したアルゴリズムが存在しない場合
 	 * @throws UnsupportedEncodingException

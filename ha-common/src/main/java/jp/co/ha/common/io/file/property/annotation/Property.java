@@ -8,6 +8,10 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+/**
+ * プロパティに付与するアノテーション
+ *
+ */
 @Inherited
 @Documented
 @Retention(RUNTIME)

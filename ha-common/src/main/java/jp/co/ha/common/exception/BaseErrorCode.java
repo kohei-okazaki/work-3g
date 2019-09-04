@@ -10,14 +10,14 @@ public interface BaseErrorCode {
 	/**
 	 * エラーコード(外部用)を返却
 	 *
-	 * @return
+	 * @return エラーコード(外部用)
 	 */
 	String getOuterErrorCode();
 
 	/**
 	 * ログレベルを返却
 	 *
-	 * @return
+	 * @return ログレベル
 	 */
 	LogLevel getLogLevel();
 }

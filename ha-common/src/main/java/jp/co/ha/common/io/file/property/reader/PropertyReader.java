@@ -61,7 +61,7 @@ public class PropertyReader {
 	 *     ファイル名
 	 * @param clazz
 	 *     bean
-	 * @return
+	 * @return T
 	 */
 	public <T> T read(String path, String fileName, Class<T> clazz) {
 		Properties prop = read(path, fileName);

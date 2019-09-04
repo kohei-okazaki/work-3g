@@ -17,7 +17,7 @@ public interface BaseEncodeAndDecoder {
 	 *     エンコード対象文字列
 	 * @param charset
 	 *     文字コード
-	 * @return
+	 * @return エンコード後の文字列
 	 * @throws UnsupportedEncodingException
 	 *     指定した文字コードが不正だった場合
 	 */
@@ -30,7 +30,7 @@ public interface BaseEncodeAndDecoder {
 	 *     デコード対象文字列
 	 * @param charset
 	 *     文字コード
-	 * @return
+	 * @return デコード後の文字列
 	 * @throws UnsupportedEncodingException
 	 *     指定した文字コードが不正だった場合
 	 */

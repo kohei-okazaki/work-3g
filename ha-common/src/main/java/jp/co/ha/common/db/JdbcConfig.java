@@ -9,9 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class JdbcConfig {
 
+	/** driverClassName */
 	private String driverClassName;
+	/** url */
 	private String url;
+	/** username */
 	private String username;
+	/** password */
 	private String password;
 
 	/**
