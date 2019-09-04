@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.log.annotation.Mask;
@@ -17,22 +18,29 @@ import jp.co.ha.web.form.BaseApiResponse;
 public class HealthInfoReferenceResponse extends BaseApiResponse {
 
 	/** 健康情報ID */
+	@JsonProperty("healthInfoId")
 	private Integer healthInfoId;
 	/** ユーザID */
+	@JsonProperty("userId")
 	private String userId;
 	/** 身長 */
 	@Mask
+	@JsonProperty("height")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
+	@JsonProperty("weight")
 	private BigDecimal weight;
 	/** BMI */
 	@Mask
+	@JsonProperty("bmi")
 	private BigDecimal bmi;
 	/** 標準体重 */
 	@Mask
+	@JsonProperty("standardWeight")
 	private BigDecimal standardWeight;
 	/** 健康情報作成日時 */
+	@JsonProperty("healthInfoRegDate")
 	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
 	private Date healthInfoRegDate;
 
