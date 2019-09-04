@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,10 +78,11 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 	public T read(String record) throws BaseException {
 
 		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
-		List<String> colList = BeanUtil.getFieldList(clazz).stream()
-				.map(e -> e.getName()).collect(Collectors.toList());
+		List<String> colList = BeanUtil.getFieldList(clazz).stream().map(e -> e.getName()).collect(Collectors.toList());
 		List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
+
 		checkFileLength(colList, dataList);
+
 		T model = null;
 		try {
 			model = clazz.getDeclaredConstructor().newInstance();
@@ -97,20 +97,11 @@ public abstract class CsvReader<T extends BaseCsvModel> {
 					}
 				}
 			}
-		} catch (IllegalAccessException e) {
-			LOG.error("", e);
-		} catch (IllegalArgumentException e) {
-			LOG.error("", e);
-		} catch (InvocationTargetException e) {
-			LOG.error("", e);
-		} catch (InstantiationException e) {
-			LOG.error("", e);
-		} catch (NoSuchMethodException e) {
-			LOG.error("", e);
-		} catch (SecurityException e) {
-			LOG.error("", e);
+		} catch (Exception e) {
+			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "Beanの生成に失敗しました", e);
 		}
-		LOG.infoRes(model);
+
+		LOG.debugRes(model);
 		return model;
 	}
 
