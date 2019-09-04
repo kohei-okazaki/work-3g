@@ -37,7 +37,6 @@
     <profile>
       <id>local</id>
       <properties>
-        <environment>local</environment>
         <resources.directory>${basedir}/profile/local</resources.directory>
       </properties>
       <activation>
@@ -48,7 +47,6 @@
     <profile>
       <id>other</id>
       <properties>
-        <environment>other</environment>
         <resources.directory>${basedir}/profile/other</resources.directory>
       </properties>
     </profile>
@@ -296,7 +294,7 @@
   </dependencies>
 
   <build>
-    <outputDirectory>${project.build.directory}/classes</outputDirectory>
+    <!-- <outputDirectory>${project.build.directory}/classes</outputDirectory> -->
     <resources>
       <resource>
         <directory>${resources.directory}</directory>
@@ -319,7 +317,7 @@
     </resources>
     <testResources>
       <testResource>
-        <directory>${resources.testdirectory}</directory>
+        <directory>${resources.directory}</directory>
       </testResource>
       <testResource>
         <directory>${basedir}/src/test/resources</directory>
@@ -369,6 +367,25 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.1.0</version>
+<!--
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${resources.directory}</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+              <outputDirectory>${project.build.directory}/classes</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+ -->
       </plugin>
     </plugins>
   </build>

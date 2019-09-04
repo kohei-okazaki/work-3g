@@ -1,11 +1,10 @@
-package jp.co.ha.common.system.impl;
+package jp.co.ha.common.io.encodeanddecode;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.system.BaseEncodeAndDecoder;
 import jp.co.ha.common.type.Charset;
 
 /**

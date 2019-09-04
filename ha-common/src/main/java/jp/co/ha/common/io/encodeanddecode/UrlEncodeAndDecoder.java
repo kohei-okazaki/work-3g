@@ -1,4 +1,4 @@
-package jp.co.ha.common.system.impl;
+package jp.co.ha.common.io.encodeanddecode;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -6,7 +6,6 @@ import java.net.URLEncoder;
 
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.system.BaseEncodeAndDecoder;
 import jp.co.ha.common.type.Charset;
 
 /**

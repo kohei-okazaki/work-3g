@@ -7,7 +7,7 @@ import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.system.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;

@@ -1,4 +1,4 @@
-package jp.co.ha.common.system;
+package jp.co.ha.common.io.encodeanddecode;
 
 import java.io.UnsupportedEncodingException;
 

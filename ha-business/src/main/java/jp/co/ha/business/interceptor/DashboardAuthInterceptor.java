@@ -12,7 +12,7 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.system.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.system.annotation.Sha256;
 import jp.co.ha.common.util.BeanUtil;

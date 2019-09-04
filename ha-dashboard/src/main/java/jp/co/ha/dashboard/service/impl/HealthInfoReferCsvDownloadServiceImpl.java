@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.csv.writer.ReferenceCsvWriter;
 import jp.co.ha.common.exception.BaseException;
@@ -17,20 +18,15 @@ import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
- * 結果照会画面CSVダウンロードサービスクラス実装クラス
+ * 健康情報照会画面CSVダウンロードサービス実装クラス
  *
  */
 @Service("referenceDownloadCsv")
 public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService<ReferenceCsvDownloadModel> {
-
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(HealthInfoReferCsvDownloadServiceImpl.class);
 
 	/**
 	 * {@inheritDoc}
@@ -40,6 +36,7 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 			throws BaseException {
 
 		try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf, pw)) {
+
 			// CSVに書込
 			writer.execute(modelList);
 			writer.flush();
@@ -65,7 +62,7 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 				pWriter.println(writer.getData());
 				pWriter.flush();
 			} catch (IOException e) {
-				LOG.error("", e);
+				throw new BusinessException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの書き込みに失敗しました", e);
 			}
 		}
 	}

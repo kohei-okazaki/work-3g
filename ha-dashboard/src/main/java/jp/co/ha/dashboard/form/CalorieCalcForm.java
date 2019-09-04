@@ -45,7 +45,7 @@ public class CalorieCalcForm implements BaseForm {
 	// @Required(message = "体型が未入力です")
 	private String bodyType;
 	/** 生活活動代謝 */
-	// @Required(message = "生活活動代謝が未入力です")
+	@Required(message = "生活活動代謝が未入力です")
 	@Pattern(regixPattern = RegixType.DECIMAL, message = "生活活動代謝は半角数字の少数型で入力して下さい")
 	private BigDecimal lifeWorkMetabolism;
 

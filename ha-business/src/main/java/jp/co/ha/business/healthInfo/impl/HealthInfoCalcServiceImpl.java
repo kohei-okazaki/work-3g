@@ -11,11 +11,10 @@ import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.calc.StandardWeightCalcFunction;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
- * 計算サービス実装クラス
+ * 健康情報計算サービス実装クラス
  *
  */
 @Service
@@ -89,38 +88,37 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 	@Override
 	public BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto) {
 
-		BigDecimal WEIGHT_ADJUST_VALUE = null;
-		BigDecimal HEIGHT_ADJUST_VALUE = null;
-		BigDecimal AGE_ADJUST_VALUE = null;
-		BigDecimal ADJUST_VALUE = null;
+		BigDecimal weightAdjustValue = null;
+		BigDecimal heightAdjustValue = null;
+		BigDecimal ageAdjustValue = null;
+		BigDecimal adjustValue = null;
 
-		if (GenderType.MALE == calorieCalcDto.getGenderType()) {
-
-			WEIGHT_ADJUST_VALUE = new BigDecimal("13.397");
-			HEIGHT_ADJUST_VALUE = new BigDecimal("4.799");
-			AGE_ADJUST_VALUE = new BigDecimal("5.677");
-			ADJUST_VALUE = new BigDecimal("88.362");
-
-		} else {
-
-			WEIGHT_ADJUST_VALUE = new BigDecimal("9.247");
-			HEIGHT_ADJUST_VALUE = new BigDecimal("3.098");
-			AGE_ADJUST_VALUE = new BigDecimal("4.33");
-			ADJUST_VALUE = new BigDecimal("447.593");
-
+		switch (calorieCalcDto.getGenderType()) {
+		case MALE:
+			weightAdjustValue = new BigDecimal("13.397");
+			heightAdjustValue = new BigDecimal("4.799");
+			ageAdjustValue = new BigDecimal("5.677");
+			adjustValue = new BigDecimal("88.362");
+			break;
+		case FEMALE:
+			weightAdjustValue = new BigDecimal("9.247");
+			heightAdjustValue = new BigDecimal("3.098");
+			ageAdjustValue = new BigDecimal("4.33");
+			adjustValue = new BigDecimal("447.593");
+			break;
 		}
 
-		BigDecimal calcWeight = Calculator.calc(WEIGHT_ADJUST_VALUE, CalcMethod.MULTIPLY,
+		BigDecimal calcWeight = Calculator.calc(weightAdjustValue, CalcMethod.MULTIPLY,
 				calorieCalcDto.getWeight(), 3, RoundingMode.HALF_UP);
-		BigDecimal calcHeight = Calculator.calc(HEIGHT_ADJUST_VALUE, CalcMethod.MULTIPLY,
+		BigDecimal calcHeight = Calculator.calc(heightAdjustValue, CalcMethod.MULTIPLY,
 				calorieCalcDto.getHeight(), 3, RoundingMode.HALF_UP);
-		BigDecimal calcAge = Calculator.calc(AGE_ADJUST_VALUE, CalcMethod.MULTIPLY,
+		BigDecimal calcAge = Calculator.calc(ageAdjustValue, CalcMethod.MULTIPLY,
 				BigDecimal.valueOf(calorieCalcDto.getAge()), 3, RoundingMode.HALF_UP);
 
 		BigDecimal result = null;
 		result = Calculator.calc(calcWeight, CalcMethod.ADD, calcHeight, 3, RoundingMode.HALF_UP);
 		result = Calculator.calc(result, CalcMethod.SUBTRACT, calcAge, 3, RoundingMode.HALF_UP);
-		result = Calculator.calc(result, CalcMethod.ADD, ADJUST_VALUE, 3, RoundingMode.HALF_UP);
+		result = Calculator.calc(result, CalcMethod.ADD, adjustValue, 3, RoundingMode.HALF_UP);
 
 		return result;
 	}
