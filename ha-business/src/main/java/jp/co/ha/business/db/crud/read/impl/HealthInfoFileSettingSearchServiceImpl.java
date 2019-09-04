@@ -17,6 +17,7 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 @Service
 public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSettingSearchService {
 
+	/** HealthInfoFileSettingMapper */
 	@Autowired
 	private HealthInfoFileSettingMapper mapper;
 

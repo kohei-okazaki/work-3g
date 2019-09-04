@@ -13,9 +13,13 @@ import jp.co.ha.common.BaseCommonTest;
  */
 public class JdbcConfigTest extends BaseCommonTest {
 
+	/** JdbcConfig */
 	@Autowired
 	private JdbcConfig conf;
 
+	/**
+	 * JdbcConfigのテスト
+	 */
 	@Test
 	public void test() {
 		assertEquals("com.mysql.cj.jdbc.Driver", conf.getDriverClassName());

@@ -15,8 +15,11 @@ import jp.co.ha.common.BaseCommonTest;
  */
 public class FileUtilTest extends BaseCommonTest {
 
+	/**
+	 * {@link FileUtil#compressZip}
+	 */
 	@Test
-	public void toZipTest() {
+	public void compressZipTest() {
 		String basePath = "D:\\app\\git\\work-3g\\ha-common";
 		String destPath = basePath + "\\src\\test\\resources\\zip\\dest\\result.zip";
 		List<File> list = FileUtil.getFileList(basePath + "\\src\\test\\resources\\zip\\src");

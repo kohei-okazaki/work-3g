@@ -13,7 +13,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  * 健康情報登録レスポンスクラス
  *
  */
- @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public class HealthInfoRegistResponse extends BaseApiResponse {
 
 	/** 健康情報ID */

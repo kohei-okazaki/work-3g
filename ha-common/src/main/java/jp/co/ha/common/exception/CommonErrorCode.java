@@ -39,7 +39,7 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "CW_005", LogLevel.WARN),
 	/** ファイル読込例外 */
 	FILE_READING_ERROR("FILE_READING_ERROR", "CW_006", LogLevel.WARN),
-	/** ファイル処理エラー */
+	/** ファイル書込処理エラー */
 	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "CW_007", LogLevel.WARN),
 	/** データ重複エラー */
 	MULTIPLE_DATA("MULTIPLE_DATA", "CW_008", LogLevel.WARN),

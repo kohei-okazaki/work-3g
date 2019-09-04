@@ -28,13 +28,12 @@ public class ApiConnectionExecutor {
 	 * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
 	 * レスポンスログ(異常系)は以下のクラスのメソッドで行う<br>
 	 * <ul>
-	 * <li>{@link BaseRestController#jsonProcessingExceptionHandle}</li>
+	 * <li>{@link BaseRestController#jsonExceptionHandle}</li>
 	 * <li>{@link BaseRestController#appExceptionHandle}</li>
 	 * </ul>
 	 *
 	 * @param pjp
 	 *     リクエスト情報
-	 * @return response
 	 * @throws Throwable
 	 *     実行時のエラー
 	 */

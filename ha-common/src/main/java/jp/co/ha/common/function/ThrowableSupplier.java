@@ -12,5 +12,12 @@ import jp.co.ha.common.exception.BaseException;
 @FunctionalInterface
 public interface ThrowableSupplier<T> {
 
+	/**
+	 * 関数を実行する
+	 * 
+	 * @return T
+	 * @throws BaseException
+	 *     基底例外
+	 */
 	T get() throws BaseException;
 }

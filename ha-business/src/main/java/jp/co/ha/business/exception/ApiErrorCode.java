@@ -11,6 +11,7 @@ import jp.co.ha.common.type.BaseEnum;
 public enum ApiErrorCode implements BaseErrorCode, BaseEnum {
 
 	/* ERROR */
+	/** API実行時エラー */
 	API_EXEC_ERROR("API_EXEC_ERROR", "AE_001", LogLevel.WARN),
 
 	/* WARN */

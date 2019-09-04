@@ -16,7 +16,7 @@ public interface BmiRangeMtSearchService {
 	 *
 	 * @param bmiRangeId
 	 *     BMI範囲ID
-	 * @return
+	 * @return BmiRangeMt
 	 * @throws BaseException
 	 *     基底例外
 	 */

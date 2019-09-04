@@ -1,4 +1,4 @@
-package jp.co.ha.common.system;
+package jp.co.ha.common.io.encodeanddecode;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -36,7 +36,7 @@ public interface HashEncoder {
 	 *     ソルト
 	 * @param algorithm
 	 *     アルゴリズム
-	 * @return
+	 * @return ハッシュ化後の文字列
 	 * @throws NoSuchAlgorithmException
 	 *     指定したアルゴリズムが存在しない場合
 	 * @throws UnsupportedEncodingException

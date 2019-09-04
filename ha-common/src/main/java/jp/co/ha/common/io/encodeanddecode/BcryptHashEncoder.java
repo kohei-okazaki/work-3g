@@ -1,9 +1,8 @@
-package jp.co.ha.common.system.impl;
+package jp.co.ha.common.io.encodeanddecode;
 
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.HashEncoder;
 
 /**
  * Bcryptハッシュ値エンコードクラス

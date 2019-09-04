@@ -113,39 +113,36 @@ public class DataBaseCommonExecutor {
 	 * <li>暗号化カラムの復号</li>
 	 * </ul>
 	 *
-	 * @param jp
-	 *     JoinPoint
-	 * @throws BaseException
-	 *     基底例外
+	 * @param pjp
+	 *     ProceedingJoinPoint
+	 * @return pjp.proceed()
+	 * @throws Throwable
+	 *     例外発生
 	 */
 	@Around("@annotation(jp.co.ha.common.db.annotation.Select)")
 	public Object select(ProceedingJoinPoint pjp) throws Throwable {
 
-		try {
-			Object o = pjp.proceed();
-			if (BeanUtil.isNull(o)) {
-				// select結果がない場合
-				return o;
-			}
-			if (o instanceof List) {
-				@SuppressWarnings("unchecked")
-				List<Object> list = (List<Object>) o;
-				for (Object entity : list) {
-					if (isEntity(entity)) {
-						decryptEntity(entity);
-						LOG.infoRes(entity);
-					}
-				}
-			} else {
-				if (isEntity(o)) {
-					decryptEntity(o);
-					LOG.infoRes(o);
-				}
-			}
+		Object o = pjp.proceed();
+		if (BeanUtil.isNull(o)) {
+			// select結果がない場合
 			return o;
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "setterの実行に失敗しました", e);
 		}
+		if (o instanceof List) {
+			@SuppressWarnings("unchecked")
+			List<Object> list = (List<Object>) o;
+			for (Object entity : list) {
+				if (isEntity(entity)) {
+					decryptEntity(entity);
+					LOG.infoRes(entity);
+				}
+			}
+		} else {
+			if (isEntity(o)) {
+				decryptEntity(o);
+				LOG.infoRes(o);
+			}
+		}
+		return o;
 	}
 
 	/**
@@ -164,30 +161,35 @@ public class DataBaseCommonExecutor {
 	 *
 	 * @param entity
 	 *     対象Entity
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
+	 *
+	 * @throws BaseException
+	 *     基底例外
 	 */
 	private void decryptEntity(Object entity)
-			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		for (Field f : entity.getClass().getDeclaredFields()) {
-			if (isCryptField(f)) {
-				// 値を取得
-				Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
-						AccessorType.GETTER);
-				Object value = getter.invoke(entity);
+			throws BaseException {
+		try {
+			for (Field f : entity.getClass().getDeclaredFields()) {
+				if (isCryptField(f)) {
+					// 値を取得
+					Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
+							AccessorType.GETTER);
+					Object value = getter.invoke(entity);
 
-				if (value != null) {
+					if (value != null) {
 
-					// 復号化
-					String dec = crypter.decrypt(value.toString());
-					// 復号後の値を設定
-					Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
-							AccessorType.SETTER);
-					setter.invoke(entity, dec);
+						// 復号化
+						String dec = crypter.decrypt(value.toString());
+						// 復号後の値を設定
+						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
+								AccessorType.SETTER);
+						setter.invoke(entity, dec);
+					}
 				}
 			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "entityから値を取得できません", e);
 		}
+
 	}
 
 	/**

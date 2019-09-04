@@ -17,10 +17,17 @@ public enum AccessType implements BaseEnum {
 	/** private */
 	PRIVATE("private");
 
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param value
+	 *     値
+	 */
 	private AccessType(String value) {
 		this.value = value;
 	}
 
+	/** 値 */
 	private String value;
 
 	/**

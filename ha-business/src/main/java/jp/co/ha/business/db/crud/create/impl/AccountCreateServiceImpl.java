@@ -17,6 +17,7 @@ import jp.co.ha.db.mapper.AccountMapper;
 @Service
 public class AccountCreateServiceImpl implements AccountCreateService {
 
+	/** AccountMapper */
 	@Autowired
 	private AccountMapper mapper;
 

@@ -19,7 +19,7 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * userIdを返す
-	 * 
+	 *
 	 * @return userId
 	 */
 	public String getUserId() {
@@ -28,8 +28,9 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * userIdを設定する
-	 * 
+	 *
 	 * @param userId
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -37,7 +38,7 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * headerFlagを返す
-	 * 
+	 *
 	 * @return headerFlag
 	 */
 	public String getHeaderFlag() {
@@ -46,8 +47,9 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * headerFlagを設定する
-	 * 
+	 *
 	 * @param headerFlag
+	 *     ヘッダ利用有無フラグ
 	 */
 	public void setHeaderFlag(String headerFlag) {
 		this.headerFlag = headerFlag;
@@ -55,7 +57,7 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * footerFlagを返す
-	 * 
+	 *
 	 * @return footerFlag
 	 */
 	public String getFooterFlag() {
@@ -64,8 +66,9 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * footerFlagを設定する
-	 * 
+	 *
 	 * @param footerFlag
+	 *     フッタ利用有無フラグ
 	 */
 	public void setFooterFlag(String footerFlag) {
 		this.footerFlag = footerFlag;
@@ -73,7 +76,7 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * maskFlagを返す
-	 * 
+	 *
 	 * @return maskFlag
 	 */
 	public String getMaskFlag() {
@@ -82,8 +85,9 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * maskFlagを設定する
-	 * 
+	 *
 	 * @param maskFlag
+	 *     マスク利用有無フラグ
 	 */
 	public void setMaskFlag(String maskFlag) {
 		this.maskFlag = maskFlag;
@@ -91,7 +95,7 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * enclosureCharFlagを返す
-	 * 
+	 *
 	 * @return enclosureCharFlag
 	 */
 	public String getEnclosureCharFlag() {
@@ -100,8 +104,9 @@ public class HealthInfoFileSettingDto {
 
 	/**
 	 * enclosureCharFlagを設定する
-	 * 
+	 *
 	 * @param enclosureCharFlag
+	 *     囲み文字利用有無フラグ
 	 */
 	public void setEnclosureCharFlag(String enclosureCharFlag) {
 		this.enclosureCharFlag = enclosureCharFlag;

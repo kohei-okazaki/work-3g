@@ -83,7 +83,7 @@ public abstract class BaseDao {
 	 * @param type
 	 *     SQL文のタイプ
 	 * @return 実行結果
-	 * @throws DataBaseException
+	 * @throws BaseException
 	 *     DBエラー
 	 */
 	protected int execute(String sql, SqlType type) throws BaseException {
@@ -106,7 +106,7 @@ public abstract class BaseDao {
 	/**
 	 * close処理を行う
 	 *
-	 * @throws DataBaseException
+	 * @throws BaseException
 	 *     DBエラー
 	 */
 	protected void close() throws BaseException {

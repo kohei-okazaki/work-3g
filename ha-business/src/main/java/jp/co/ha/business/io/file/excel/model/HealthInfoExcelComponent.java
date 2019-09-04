@@ -3,6 +3,10 @@ package jp.co.ha.business.io.file.excel.model;
 import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 import jp.co.ha.db.entity.HealthInfo;
 
+/**
+ * 健康情報ExcelComponent
+ *
+ */
 public class HealthInfoExcelComponent implements BaseExcelComponent {
 
 	/** 健康情報 */

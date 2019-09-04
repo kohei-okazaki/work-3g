@@ -20,6 +20,7 @@ import jp.co.ha.db.mapper.BmiRangeMtMapper;
 @Service
 public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 
+	/** BmiRangeMtMapper */
 	@Autowired
 	private BmiRangeMtMapper mapper;
 

@@ -23,7 +23,7 @@ public class HealthInfoDto {
 
 	/**
 	 * healthInfoIdを返す
-	 * 
+	 *
 	 * @return healthInfoId
 	 */
 	public Integer getHealthInfoId() {
@@ -32,8 +32,9 @@ public class HealthInfoDto {
 
 	/**
 	 * healthInfoIdを設定する
-	 * 
+	 *
 	 * @param healthInfoId
+	 *     健康情報ID
 	 */
 	public void setHealthInfoId(Integer healthInfoId) {
 		this.healthInfoId = healthInfoId;
@@ -41,7 +42,7 @@ public class HealthInfoDto {
 
 	/**
 	 * userIdを返す
-	 * 
+	 *
 	 * @return userId
 	 */
 	public String getUserId() {
@@ -50,8 +51,9 @@ public class HealthInfoDto {
 
 	/**
 	 * userIdを設定する
-	 * 
+	 *
 	 * @param userId
+	 *     ユーザID
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -59,7 +61,7 @@ public class HealthInfoDto {
 
 	/**
 	 * heightを返す
-	 * 
+	 *
 	 * @return height
 	 */
 	public BigDecimal getHeight() {
@@ -68,8 +70,9 @@ public class HealthInfoDto {
 
 	/**
 	 * heightを設定する
-	 * 
+	 *
 	 * @param height
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -77,7 +80,7 @@ public class HealthInfoDto {
 
 	/**
 	 * weightを返す
-	 * 
+	 *
 	 * @return weight
 	 */
 	public BigDecimal getWeight() {
@@ -86,8 +89,9 @@ public class HealthInfoDto {
 
 	/**
 	 * weightを設定する
-	 * 
+	 *
 	 * @param weight
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -95,7 +99,7 @@ public class HealthInfoDto {
 
 	/**
 	 * bmiを返す
-	 * 
+	 *
 	 * @return bmi
 	 */
 	public BigDecimal getBmi() {
@@ -104,8 +108,9 @@ public class HealthInfoDto {
 
 	/**
 	 * bmiを設定する
-	 * 
+	 *
 	 * @param bmi
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -113,7 +118,7 @@ public class HealthInfoDto {
 
 	/**
 	 * standardWeightを返す
-	 * 
+	 *
 	 * @return standardWeight
 	 */
 	public BigDecimal getStandardWeight() {
@@ -122,8 +127,9 @@ public class HealthInfoDto {
 
 	/**
 	 * standardWeightを設定する
-	 * 
+	 *
 	 * @param standardWeight
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;

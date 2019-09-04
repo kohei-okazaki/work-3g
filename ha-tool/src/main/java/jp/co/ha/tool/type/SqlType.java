@@ -17,12 +17,18 @@ public enum SqlType implements BaseEnum {
 	/** delete */
 	DELETE("delete");
 
-	/** 値 */
-	private String value;
-
+	/**
+	 * コンストラクタ
+	 *
+	 * @param value
+	 *     値
+	 */
 	private SqlType(String value) {
 		this.value = value;
 	}
+
+	/** 値 */
+	private String value;
 
 	/**
 	 * {@inheritDoc}

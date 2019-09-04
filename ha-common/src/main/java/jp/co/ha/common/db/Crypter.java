@@ -11,7 +11,7 @@ public interface Crypter {
 	 *
 	 * @param str
 	 *     暗号化したい文字列
-	 * @return
+	 * @return 暗号化の文字列
 	 */
 	String encrypt(String str);
 
@@ -20,7 +20,7 @@ public interface Crypter {
 	 *
 	 * @param str
 	 *     復号したい文字列
-	 * @return
+	 * @return 復号化の文字列
 	 */
 	String decrypt(String str);
 }

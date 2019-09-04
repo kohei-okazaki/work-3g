@@ -27,6 +27,12 @@ public class BatchBeanLoader {
 	private BatchBeanLoader() {
 	}
 
+	/**
+	 * applicationContextを設定する
+	 *
+	 * @param applicationContext
+	 *     ApplicationContext
+	 */
 	public static void setApplicationContext(ApplicationContext applicationContext) {
 		BatchBeanLoader.context = applicationContext;
 	}
@@ -43,7 +49,7 @@ public class BatchBeanLoader {
 	 */
 	public static <T> T getBean(Class<T> clazz) {
 		try {
-			return getContext().getBean(clazz);
+			return getApplicationContext().getBean(clazz);
 		} catch (NoUniqueBeanDefinitionException e) {
 			LOG.warn("同一のBeanが登録されています" + clazz.getName(), e);
 			return null;
@@ -57,10 +63,17 @@ public class BatchBeanLoader {
 	 * Beanを初期化する
 	 */
 	public static void initializeBean() {
-		getContext();
+		// XMLから取得
+		String[] xmls = new String[] { "classpath:batch-context.xml" };
+		setApplicationContext(new ClassPathXmlApplicationContext(xmls));
 	}
 
-	private static ApplicationContext getContext() {
+	/**
+	 * ApplicationContextを返す
+	 *
+	 * @return ApplicationContext
+	 */
+	public static ApplicationContext getApplicationContext() {
 
 		if (BeanUtil.notNull(context)) {
 			return context;

@@ -1,4 +1,4 @@
-package jp.co.ha.common.system.impl;
+package jp.co.ha.common.io.encodeanddecode;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -8,19 +8,18 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.system.HashEncoder;
 import jp.co.ha.common.system.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
 /**
- * SHA-256ハッシュ値作成クラス
+ * SHA-512ハッシュ値作成クラス
  *
  */
-@Component("sha256HashEncoder")
-public class Sha256HashEncoder implements HashEncoder {
+@Component("sha512HashEncoder")
+public class Sha512HashEncoder implements HashEncoder {
 
 	/** HASH化アルゴリズム */
-	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_256;
+	private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_512;
 
 	/**
 	 * {@inheritDoc}

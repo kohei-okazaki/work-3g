@@ -10,12 +10,13 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.mapper.AccountMapper;
 
 /**
- *  アカウント情報削除サービスインターフェース実装クラス
+ * アカウント情報削除サービスインターフェース実装クラス
  *
  */
 @Service
 public class AccountDeleteServiceImpl implements AccountDeleteService {
 
+	/** AccountMapper */
 	@Autowired
 	private AccountMapper mapper;
 

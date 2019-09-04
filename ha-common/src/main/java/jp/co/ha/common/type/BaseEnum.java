@@ -3,7 +3,8 @@ package jp.co.ha.common.type;
 import java.util.stream.Stream;
 
 /**
- * 列挙型の基底インターフェース<br>
+ * 列挙型の基底インターフェース
+ *
  */
 public interface BaseEnum {
 

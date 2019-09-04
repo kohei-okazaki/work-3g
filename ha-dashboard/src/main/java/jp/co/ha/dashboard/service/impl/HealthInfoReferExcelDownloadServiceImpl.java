@@ -10,7 +10,7 @@ import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
-import jp.co.ha.business.io.file.excel.builder.ResultReferenceExcelBuiler;
+import jp.co.ha.business.io.file.excel.builder.ReferenceExcelBuiler;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelModel;
 import jp.co.ha.common.exception.BaseException;
@@ -23,7 +23,7 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
- * 結果照会画面Excelダウンロードサービス実装クラス
+ * 健康情報照会画面Excelダウンロードサービス実装クラス
  *
  */
 @Service("referenceDownloadExcel")
@@ -45,7 +45,7 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 
 		List<ReferenceExcelModel> modelList = toModelList(component.getResultList());
 
-		return new ResultReferenceExcelBuiler(getExcelConfig(healthInfoFileSetting), modelList);
+		return new ReferenceExcelBuiler(getExcelConfig(healthInfoFileSetting), modelList);
 	}
 
 	/**

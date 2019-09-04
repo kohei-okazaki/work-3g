@@ -22,7 +22,7 @@ public class BeanValidatorTest extends BaseCommonTest {
 	private final static Logger LOG = LoggerFactory.getLogger(BeanValidatorTest.class);
 
 	/**
-	 * 妥当性チェック(必須チェック)のケース
+	 * {@link BeanValidator#validate}
 	 */
 	@Test
 	public void requiredTest() {
@@ -44,7 +44,7 @@ public class BeanValidatorTest extends BaseCommonTest {
 	}
 
 	/**
-	 * 妥当性チェック(最小桁数チェック)のケース
+	 * {@link BeanValidator#validate}
 	 */
 	@Test
 	public void minTest() {
@@ -95,7 +95,7 @@ public class BeanValidatorTest extends BaseCommonTest {
 	}
 
 	/**
-	 * 妥当性チェック(最大桁数チェック)のケース
+	 * {@link BeanValidator#validate}
 	 */
 	@Test
 	public void maxTest() {
@@ -146,7 +146,7 @@ public class BeanValidatorTest extends BaseCommonTest {
 	}
 
 	/**
-	 * 妥当性チェック(属性チェック)のケース
+	 * {@link BeanValidator#validate}
 	 */
 	@Test
 	public void patternTest() {
@@ -216,8 +216,13 @@ public class BeanValidatorTest extends BaseCommonTest {
 
 	}
 
+	/**
+	 * RequiredTestBean
+	 *
+	 */
 	private static class RequiredTestBean {
 
+		/** name */
 		@Required
 		private String name;
 
@@ -242,8 +247,13 @@ public class BeanValidatorTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * MinEqualsTestBean
+	 *
+	 */
 	private static class MinEqualsTestBean {
 
+		/** name */
 		@Min(size = 3)
 		private String name;
 
@@ -268,8 +278,13 @@ public class BeanValidatorTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * MinTestBean
+	 *
+	 */
 	private static class MinTestBean {
 
+		/** name */
 		@Min(size = 3, isEqual = false)
 		private String name;
 
@@ -295,8 +310,13 @@ public class BeanValidatorTest extends BaseCommonTest {
 
 	}
 
+	/**
+	 * MaxEqualsTestBean
+	 *
+	 */
 	private static class MaxEqualsTestBean {
 
+		/** name */
 		@Max(size = 3)
 		private String name;
 
@@ -321,8 +341,13 @@ public class BeanValidatorTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * MaxTestBean
+	 *
+	 */
 	private static class MaxTestBean {
 
+		/** name */
 		@Max(size = 3, isEqual = false)
 		private String name;
 
@@ -348,8 +373,13 @@ public class BeanValidatorTest extends BaseCommonTest {
 
 	}
 
+	/**
+	 * HalfNumberPatternTestBean
+	 *
+	 */
 	private static class HalfNumberPatternTestBean {
 
+		/** name */
 		@Pattern(regixPattern = RegixType.HALF_NUMBER)
 		private String value;
 
@@ -375,8 +405,13 @@ public class BeanValidatorTest extends BaseCommonTest {
 
 	}
 
+	/**
+	 * HalfCharPatternTestBean
+	 *
+	 */
 	private static class HalfCharPatternTestBean {
 
+		/** name */
 		@Pattern(regixPattern = RegixType.HALF_CHAR)
 		private String value;
 

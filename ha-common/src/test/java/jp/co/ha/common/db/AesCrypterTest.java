@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import jp.co.ha.common.BaseCommonTest;
-import jp.co.ha.common.db.Crypter;
 
 /**
  * {@link AesCrypter} のjUnit
@@ -15,10 +14,14 @@ import jp.co.ha.common.db.Crypter;
  */
 public class AesCrypterTest extends BaseCommonTest {
 
+	/** Crypter */
 	@Autowired
 	@Qualifier("aesCrypter")
 	private Crypter crypter;
 
+	/**
+	 * 暗号化復号化テスト
+	 */
 	@Test
 	public void cryptTest() {
 		String value = "あいうえお12345";

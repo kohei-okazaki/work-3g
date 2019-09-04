@@ -16,6 +16,7 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 @Service
 public class MailInfoDeleteServiceImpl implements MailInfoDeleteService {
 
+	/** MailInfoMapper */
 	@Autowired
 	private MailInfoMapper mapper;
 

@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.UnExpectedException;
+import jp.co.ha.common.exception.SystemException;
 
 /**
  * 文字列のUtilクラス
@@ -80,7 +80,9 @@ public class StringUtil {
 
 	/**
 	 * 指定した文字列<code>target</code>に値が指定されていればtrue、それ以外の場合false
-	 * @param target 対象文字列
+	 *
+	 * @param target
+	 *     対象文字列
 	 * @return 判定結果
 	 */
 	public static boolean hasValue(String target) {
@@ -90,7 +92,8 @@ public class StringUtil {
 	/**
 	 * 半角スペースでPaddingする
 	 *
-	 * @see StringUtil#padding(String target, int length, String str, PaddingType paddingType)
+	 * @see StringUtil#padding(String target, int length, String str,
+	 * PaddingType paddingType)
 	 *
 	 * @param target
 	 *     対象文字列
@@ -136,7 +139,7 @@ public class StringUtil {
 				// 右詰
 				body = str + body;
 			} else {
-				throw new UnExpectedException(CommonErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
+				throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
 			}
 		}
 		return body;

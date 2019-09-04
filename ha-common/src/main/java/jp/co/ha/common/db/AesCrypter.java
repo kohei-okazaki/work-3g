@@ -8,7 +8,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.db.Crypter;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.type.Algorithm;
@@ -22,8 +21,9 @@ import jp.co.ha.common.util.StringUtil;
 @Component("aesCrypter")
 public class AesCrypter implements Crypter {
 
+	/** LOG */
 	private static Logger LOG = LoggerFactory.getLogger(AesCrypter.class);
-
+	/** MODE */
 	private static final String MODE = "AES/ECB/PKCS5Padding";
 
 	/**
@@ -82,6 +82,13 @@ public class AesCrypter implements Crypter {
 		}
 	}
 
+	/**
+	 * 秘密鍵を返す
+	 * 
+	 * @return 秘密鍵
+	 * @throws UnsupportedEncodingException
+	 *     文字コードの指定が正しくない
+	 */
 	private static byte[] getKey() throws UnsupportedEncodingException {
 		String key = "1234567890123456";
 		return key.getBytes(Charset.UTF_8.getValue());

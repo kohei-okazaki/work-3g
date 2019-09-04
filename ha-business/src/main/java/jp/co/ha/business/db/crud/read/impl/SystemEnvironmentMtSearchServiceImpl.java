@@ -20,6 +20,7 @@ import jp.co.ha.db.mapper.SystemEnvironmentMtMapper;
 @Service
 public class SystemEnvironmentMtSearchServiceImpl implements SystemEnvironmentMtSearchService {
 
+	/** SystemEnvironmentMtMapper */
 	@Autowired
 	private SystemEnvironmentMtMapper mapper;
 

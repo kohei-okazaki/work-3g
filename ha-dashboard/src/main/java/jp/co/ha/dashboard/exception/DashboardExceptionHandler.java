@@ -76,6 +76,7 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 			detail = be.getDetail();
 			outerErrorCode = be.getErrorCode().getOuterErrorCode();
 		} else {
+			// 予期せぬ例外にする
 			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
 					Locale.getDefault());
 			outerErrorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
