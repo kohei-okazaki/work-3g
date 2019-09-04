@@ -12,10 +12,10 @@ public interface AccountUpdateService {
 	/**
 	 * 指定したアカウント情報を更新する
 	 *
-	 * @param account
+	 * @param entity
 	 *     アカウント情報
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	void update(Account account) throws BaseException;
+	void update(Account entity) throws BaseException;
 }

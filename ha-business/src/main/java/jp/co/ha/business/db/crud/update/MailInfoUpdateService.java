@@ -12,10 +12,10 @@ public interface MailInfoUpdateService {
 	/**
 	 * メール情報を更新する
 	 *
-	 * @param mailInfo
+	 * @param entity
 	 *     メール情報
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	void update(MailInfo mailInfo) throws BaseException;
+	void update(MailInfo entity) throws BaseException;
 }
