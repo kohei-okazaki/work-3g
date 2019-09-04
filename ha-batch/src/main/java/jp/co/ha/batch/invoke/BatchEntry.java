@@ -7,6 +7,12 @@ package jp.co.ha.batch.invoke;
  */
 public class BatchEntry {
 
+	/**
+	 * 起動メソッド
+	 * 
+	 * @param args
+	 *     String[]
+	 */
 	public static void main(String[] args) {
 		BatchInvoker.invoke(args);
 	}

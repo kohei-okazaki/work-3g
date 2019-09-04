@@ -73,6 +73,10 @@ public class HealthInfoRegistData {
 		this.healthInfoRequestData = healthInfoRequestData;
 	}
 
+	/**
+	 * 健康情報必須情報
+	 *
+	 */
 	public static class HealthInfoRequestData {
 
 		/** 身長 */

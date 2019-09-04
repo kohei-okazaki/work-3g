@@ -39,6 +39,11 @@ public enum BatchResult implements BaseEnum {
 		return this.value;
 	}
 
+	/**
+	 * commentを返す
+	 *
+	 * @return comment
+	 */
 	public String getComment() {
 		return this.comment;
 	}

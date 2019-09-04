@@ -28,6 +28,7 @@ public abstract class BaseBatch {
 	 *
 	 * @param optionList
 	 *     オプションリスト
+	 * @return Options
 	 */
 	protected abstract Options getOptions(List<String> optionList);
 
