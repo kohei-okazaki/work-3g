@@ -57,10 +57,12 @@ public class BatchBeanLoader {
 	 * Beanを初期化する
 	 */
 	public static void initializeBean() {
-		getContext();
+		// XMLから取得
+		String[] xmls = new String[] { "classpath:batch-context.xml" };
+		setApplicationContext(new ClassPathXmlApplicationContext(xmls));
 	}
 
-	private static ApplicationContext getContext() {
+	public static ApplicationContext getContext() {
 
 		if (BeanUtil.notNull(context)) {
 			return context;
