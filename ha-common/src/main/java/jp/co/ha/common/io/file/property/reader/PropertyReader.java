@@ -4,12 +4,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.property.annotation.Property;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -62,8 +64,10 @@ public class PropertyReader {
 	 * @param clazz
 	 *     bean
 	 * @return T
+	 * @throws BaseException
+	 *     基底例外
 	 */
-	public <T> T read(String path, String fileName, Class<T> clazz) {
+	public <T> T read(String path, String fileName, Class<T> clazz) throws BaseException {
 		Properties prop = read(path, fileName);
 		try {
 			T t = clazz.getDeclaredConstructor().newInstance();
@@ -74,21 +78,9 @@ public class PropertyReader {
 				setter.invoke(t, value);
 			}
 			return t;
-
-		} catch (InstantiationException e) {
-			LOG.error("インスタンスの生成に失敗しました", e);
-		} catch (IllegalAccessException e) {
-			LOG.error("アクセス修飾子が不正です", e);
-		} catch (IllegalArgumentException e) {
-			LOG.error("constructor or setterの引数が不正です", e);
-		} catch (InvocationTargetException e) {
-			LOG.error("constructor or setterの処理に失敗しました", e);
-		} catch (NoSuchMethodException e) {
-			LOG.error("setterが存在しません", e);
-		} catch (SecurityException e) {
-			LOG.error("インスタンスの生成に失敗しました", e);
+		} catch (Exception e) {
+			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "", e);
 		}
-		return null;
 	}
 
 	/**

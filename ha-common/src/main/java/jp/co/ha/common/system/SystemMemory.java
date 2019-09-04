@@ -8,8 +8,14 @@ import java.text.DecimalFormat;
  */
 public class SystemMemory {
 
+	/** SystemMemory */
 	private static SystemMemory instance = new SystemMemory();
 
+	/**
+	 * SystemMemoryを返す
+	 *
+	 * @return SystemMemory
+	 */
 	public static SystemMemory getInstance() {
 		return instance;
 	}

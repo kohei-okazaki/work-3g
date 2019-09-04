@@ -15,8 +15,9 @@ import jp.co.ha.common.validator.annotation.Min;
  */
 public class MinValidator implements ConstraintValidator<Min, Object> {
 
+	/** 桁数 */
 	private int size;
-
+	/** 同じ値を含むかどうか */
 	private boolean isEqual;
 
 	/**

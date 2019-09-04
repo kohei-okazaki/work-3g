@@ -15,8 +15,9 @@ import jp.co.ha.common.validator.annotation.Max;
  */
 public class MaxValidator implements ConstraintValidator<Max, Object> {
 
+	/** 桁数 */
 	private int size;
-
+	/** 同じ値を含むかどうか */
 	private boolean isEqual;
 
 	/**
