@@ -32,10 +32,10 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void download(PrintWriter pw, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList)
+	public void download(PrintWriter printWriter, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList)
 			throws BaseException {
 
-		try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf, pw)) {
+		try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf, printWriter)) {
 
 			// CSVに書込
 			writer.execute(modelList);
@@ -58,9 +58,9 @@ public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService
 			}
 
 			try (FileWriter fw = new FileWriter(file.getAbsolutePath());
-					PrintWriter pWriter = new PrintWriter(new BufferedWriter(fw))) {
-				pWriter.println(writer.getData());
-				pWriter.flush();
+					PrintWriter pw = new PrintWriter(new BufferedWriter(fw))) {
+				pw.println(writer.getData());
+				pw.flush();
 			} catch (IOException e) {
 				throw new BusinessException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの書き込みに失敗しました", e);
 			}

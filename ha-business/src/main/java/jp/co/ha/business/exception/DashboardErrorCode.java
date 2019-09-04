@@ -5,7 +5,7 @@ import jp.co.ha.common.log.type.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * WEBのエラーコード列挙
+ * ダッシュボードのエラーコード列挙
  *
  */
 public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {

@@ -18,7 +18,7 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	/**
 	 * メイン処理
 	 *
-	 * @param pw
+	 * @param printWriter
 	 *     出力用Writer
 	 * @param conf
 	 *     CSV設定情報
@@ -27,6 +27,6 @@ public interface CsvDownloadService<T extends BaseCsvModel> {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	void download(PrintWriter pw, CsvConfig conf, List<T> modelList) throws BaseException;
+	void download(PrintWriter printWriter, CsvConfig conf, List<T> modelList) throws BaseException;
 
 }
