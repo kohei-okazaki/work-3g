@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
@@ -13,6 +15,7 @@ public class HealthInfoReferenceRequest extends CommonApiRequest {
 	/** 健康情報ID */
 	@Required(message = "healthInfoIdが未設定です")
 	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "healthInfoIdが半角数字でありません")
+	@JsonProperty("healthInfoId")
 	private Integer healthInfoId;
 
 	/**

@@ -2,6 +2,8 @@ package jp.co.ha.business.api.request;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.validator.annotation.Pattern;
@@ -17,11 +19,13 @@ public class HealthInfoRegistRequest extends CommonApiRequest {
 	@Mask
 	@Required(message = "heightが未設定です")
 	@Pattern(regixPattern = RegixType.DECIMAL)
+	@JsonProperty("height")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
 	@Required(message = "weightが未設定です")
 	@Pattern(regixPattern = RegixType.DECIMAL)
+	@JsonProperty("weight")
 	private BigDecimal weight;
 
 	/**

@@ -1,5 +1,6 @@
 package jp.co.ha.business.api.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
@@ -22,17 +23,20 @@ public abstract class CommonApiRequest extends BaseApiRequest {
 	/** リクエスト種別 */
 	@JsonDeserialize(using = RequestTypeDeserializer.class)
 	@Required(message = "requestTypeが未設定です")
+	@JsonProperty("requestType")
 	private RequestType requestType;
 	/** ユーザID */
 	@Required(message = "userIdが未設定です")
 	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "userIdが半角英数でありません")
 	@Min(size = 2, message = "userIdが2byte未満です")
 	@Max(size = 16, message = "userIdが16byte以上です")
+	@JsonProperty("userId")
 	private String userId;
 	/** APIキー */
 	@Mask
 	@Required(message = "apiKeyが未設定です")
 	@Length(length = 64, message = "apiKeyが64byteではありません")
+	@JsonProperty("apiKey")
 	private String apiKey;
 
 	/**
