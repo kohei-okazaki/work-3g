@@ -43,11 +43,18 @@
         <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
-    <!-- other -->
+    <!-- test -->
     <profile>
-      <id>other</id>
+      <id>test</id>
       <properties>
-        <resources.directory>${basedir}/profile/other</resources.directory>
+        <resources.directory>${basedir}/profile/test</resources.directory>
+      </properties>
+    </profile>
+    <!-- live -->
+    <profile>
+      <id>live</id>
+      <properties>
+        <resources.directory>${basedir}/profile/live</resources.directory>
       </properties>
     </profile>
   </profiles>
@@ -290,7 +297,6 @@
       <version>5.5.1</version>
       <!-- <scope>test</scope> -->
     </dependency>
-
   </dependencies>
 
   <build>
@@ -317,7 +323,7 @@
     </resources>
     <testResources>
       <testResource>
-        <directory>${resources.directory}</directory>
+        <directory>${resources.testdirectory}</directory>
       </testResource>
       <testResource>
         <directory>${basedir}/src/test/resources</directory>
