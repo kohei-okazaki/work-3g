@@ -25,7 +25,7 @@ public class ExcelReader extends BaseFileReader {
 
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(ExcelReader.class);
-
+	/** ExcelConfig */
 	private ExcelConfig conf;
 
 	/**
@@ -73,6 +73,15 @@ public class ExcelReader extends BaseFileReader {
 		return excel;
 	}
 
+	/**
+	 * Cellを返す
+	 * 
+	 * @param row
+	 *     Row
+	 * @param type
+	 *     CellPositionType
+	 * @return Cell
+	 */
 	private Cell getCell(Row row, CellPositionType type) {
 		String cellValue = row.getCell(type.getPosition()).getStringCellValue();
 		return new Cell(cellValue);

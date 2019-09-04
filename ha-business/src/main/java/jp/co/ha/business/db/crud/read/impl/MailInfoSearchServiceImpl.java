@@ -17,6 +17,7 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 @Service
 public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 
+	/** MailInfoMapper */
 	@Autowired
 	private MailInfoMapper mapper;
 

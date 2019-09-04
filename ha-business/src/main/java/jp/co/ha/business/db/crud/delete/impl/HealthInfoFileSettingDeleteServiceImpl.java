@@ -16,6 +16,7 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 @Service
 public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSettingDeleteService {
 
+	/** HealthInfoFileSettingMapper */
 	@Autowired
 	private HealthInfoFileSettingMapper mapper;
 

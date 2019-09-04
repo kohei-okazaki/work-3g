@@ -43,6 +43,7 @@ public class HealthInfoReferenceDto {
 	 * healthInfoIdを設定する
 	 *
 	 * @param healthInfoId
+	 *     健康情報ID
 	 */
 	public void setHealthInfoId(Integer healthInfoId) {
 		this.healthInfoId = healthInfoId;
@@ -61,6 +62,7 @@ public class HealthInfoReferenceDto {
 	 * healthInfoRegDateSelectFlagを設定する
 	 *
 	 * @param healthInfoRegDateSelectFlag
+	 *     健康情報作成日直接指定フラグ
 	 */
 	public void setHealthInfoRegDateSelectFlag(String healthInfoRegDateSelectFlag) {
 		this.healthInfoRegDateSelectFlag = healthInfoRegDateSelectFlag;
@@ -79,6 +81,7 @@ public class HealthInfoReferenceDto {
 	 * fromHealthInfoRegDateを設定する
 	 *
 	 * @param fromHealthInfoRegDate
+	 *     健康情報作成日(開始)
 	 */
 	public void setFromHealthInfoRegDate(String fromHealthInfoRegDate) {
 		this.fromHealthInfoRegDate = fromHealthInfoRegDate;
@@ -97,6 +100,7 @@ public class HealthInfoReferenceDto {
 	 * toHealthInfoRegDateを設定する
 	 *
 	 * @param toHealthInfoRegDate
+	 *     健康情報作成日(終了)
 	 */
 	public void setToHealthInfoRegDate(String toHealthInfoRegDate) {
 		this.toHealthInfoRegDate = toHealthInfoRegDate;
@@ -104,7 +108,7 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * heightを返す
-	 * 
+	 *
 	 * @return height
 	 */
 	public BigDecimal getHeight() {
@@ -113,8 +117,9 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * heightを設定する
-	 * 
+	 *
 	 * @param height
+	 *     身長
 	 */
 	public void setHeight(BigDecimal height) {
 		this.height = height;
@@ -122,7 +127,7 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * weightを返す
-	 * 
+	 *
 	 * @return weight
 	 */
 	public BigDecimal getWeight() {
@@ -131,8 +136,9 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * weightを設定する
-	 * 
+	 *
 	 * @param weight
+	 *     体重
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
@@ -140,7 +146,7 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * bmiを返す
-	 * 
+	 *
 	 * @return bmi
 	 */
 	public BigDecimal getBmi() {
@@ -149,8 +155,9 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * bmiを設定する
-	 * 
+	 *
 	 * @param bmi
+	 *     BMI
 	 */
 	public void setBmi(BigDecimal bmi) {
 		this.bmi = bmi;
@@ -158,7 +165,7 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * standardWeightを返す
-	 * 
+	 *
 	 * @return standardWeight
 	 */
 	public BigDecimal getStandardWeight() {
@@ -167,8 +174,9 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * standardWeightを設定する
-	 * 
+	 *
 	 * @param standardWeight
+	 *     標準体重
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
@@ -176,7 +184,7 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * healthInfoRegDateを返す
-	 * 
+	 *
 	 * @return healthInfoRegDate
 	 */
 	public String getHealthInfoRegDate() {
@@ -185,8 +193,9 @@ public class HealthInfoReferenceDto {
 
 	/**
 	 * healthInfoRegDateを設定する
-	 * 
+	 *
 	 * @param healthInfoRegDate
+	 *     健康情報作成日時
 	 */
 	public void setHealthInfoRegDate(String healthInfoRegDate) {
 		this.healthInfoRegDate = healthInfoRegDate;

@@ -15,6 +15,9 @@ import jp.co.ha.common.BaseCommonTest;
  */
 public class RegixTypeTest extends BaseCommonTest {
 
+	/**
+	 * 半角数字をテスト
+	 */
 	@Test
 	public void halfNumberTest() {
 		{
@@ -31,6 +34,9 @@ public class RegixTypeTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * 半角数字とピリオドをテスト
+	 */
 	@Test
 	public void halfNumberPeriodTest() {
 		{
@@ -47,6 +53,9 @@ public class RegixTypeTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * 半角文字をテスト
+	 */
 	@Test
 	public void halfNumberCharTest() {
 		{

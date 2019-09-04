@@ -21,11 +21,18 @@ public class Excel {
 		this.sheetList = new ArrayList<>();
 	}
 
+	/**
+	 * シートを返す
+	 *
+	 * @param sheetName
+	 *     シート名
+	 * @return Sheet
+	 */
 	private Sheet getSheet(String sheetName) {
 		return this.sheetList.stream()
-					.filter(e -> e.getName().equals(sheetName))
-					.findFirst()
-					.orElse(null);
+				.filter(e -> e.getName().equals(sheetName))
+				.findFirst()
+				.orElse(null);
 	}
 
 	/**

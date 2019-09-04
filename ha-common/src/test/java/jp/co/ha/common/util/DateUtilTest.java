@@ -14,6 +14,9 @@ import jp.co.ha.common.BaseCommonTest;
  */
 public class DateUtilTest extends BaseCommonTest {
 
+	/**
+	 * {@link DateUtil#toDate}
+	 */
 	@Test
 	public void toDateTest() {
 		{
@@ -32,6 +35,9 @@ public class DateUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link DateUtil#isBefore}
+	 */
 	@Test
 	public void isBeforeTest() {
 		{
@@ -51,6 +57,9 @@ public class DateUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link DateUtil#isAfter}
+	 */
 	@Test
 	public void isAfterTest() {
 		{
@@ -70,6 +79,9 @@ public class DateUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link DateUtil#isSameDate}
+	 */
 	@Test
 	public void isSameDateTest() {
 		{
@@ -84,6 +96,9 @@ public class DateUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link DateUtil#isBetWeenDate}
+	 */
 	@Test
 	public void isBetWeenDateTest() {
 		{
@@ -101,6 +116,9 @@ public class DateUtilTest extends BaseCommonTest {
 
 	}
 
+	/**
+	 * {@link DateUtil#toStartDate}
+	 */
 	@Test
 	public void toStartDateTest() {
 		{
@@ -110,6 +128,9 @@ public class DateUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link DateUtil#toEndDate}
+	 */
 	@Test
 	public void toEndDateTest() {
 		{

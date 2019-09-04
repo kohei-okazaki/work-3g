@@ -16,6 +16,9 @@ import jp.co.ha.common.BaseCommonTest;
  */
 public class CollectionUtilTest extends BaseCommonTest {
 
+	/**
+	 * {@link CollectionUtil#existsCount}
+	 */
 	@Test
 	public void existsCountTest() {
 		{
@@ -35,6 +38,9 @@ public class CollectionUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link CollectionUtil#isEmpty}
+	 */
 	@Test
 	public void isEmptyTest() {
 		{
@@ -55,6 +61,9 @@ public class CollectionUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link CollectionUtil#isMultiple}
+	 */
 	@Test
 	public void isMultipleTest() {
 		{
@@ -75,6 +84,9 @@ public class CollectionUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link CollectionUtil#exists}
+	 */
 	@Test
 	public void existsTest() {
 		{

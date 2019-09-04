@@ -23,6 +23,7 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
 @Service
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
+	/** HealthInfoMapper */
 	@Autowired
 	private HealthInfoMapper mapper;
 

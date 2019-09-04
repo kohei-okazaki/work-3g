@@ -17,9 +17,13 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
  */
 public class HealthInfoCalcServiceTest extends BaseBusinessTest {
 
+	/** 健康情報計算サービス */
 	@Autowired
 	private HealthInfoCalcService service;
 
+	/**
+	 * {@link HealthInfoCalcService#getHealthInfoStatus}
+	 */
 	@Test
 	public void getHealthInfoStatusTest() {
 		{
@@ -45,6 +49,9 @@ public class HealthInfoCalcServiceTest extends BaseBusinessTest {
 		}
 	}
 
+	/**
+	 * {@link HealthInfoCalcService#convertMeterFromCentiMeter}
+	 */
 	@Test
 	public void convertMeterFromCentiMeterTest() {
 		// 100cm

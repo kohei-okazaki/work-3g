@@ -5,6 +5,10 @@ import java.util.List;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 
+/**
+ * 健康情報照会ExcelComponent
+ *
+ */
 public class ReferenceExcelComponent implements BaseExcelComponent {
 
 	/** ユーザID */

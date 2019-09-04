@@ -15,6 +15,9 @@ import jp.co.ha.business.BaseBusinessTest;
  */
 public class CalculatorTest extends BaseBusinessTest {
 
+	/**
+	 * {@link Calculator#calc}
+	 */
 	@Test
 	public void addTest() {
 		final BigDecimal ONE = BigDecimal.ONE;

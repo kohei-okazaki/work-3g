@@ -19,8 +19,12 @@ import jp.co.ha.common.util.StringUtil.PaddingType;
  */
 public class StringUtilTest extends BaseCommonTest {
 
+	/** LOG */
 	private static Logger LOG = LoggerFactory.getLogger(StringUtilTest.class);
 
+	/**
+	 * {@link StringUtil#toStrList}
+	 */
 	@Test
 	public void toStrListTest() {
 		{
@@ -42,6 +46,9 @@ public class StringUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link StringUtil#isEmpty}
+	 */
 	@Test
 	public void isEmptyTest() {
 		{
@@ -62,6 +69,9 @@ public class StringUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link StringUtil#isBrank}
+	 */
 	@Test
 	public void isBrankTest() {
 		{
@@ -82,6 +92,9 @@ public class StringUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link StringUtil#hasValue}
+	 */
 	@Test
 	public void hasValueTest() {
 		{
@@ -98,6 +111,9 @@ public class StringUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link StringUtil#paddingSpace}
+	 */
 	@Test
 	public void paddingSpaceTest() {
 		try {

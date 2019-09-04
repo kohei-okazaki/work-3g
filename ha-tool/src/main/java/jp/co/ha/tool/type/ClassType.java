@@ -17,10 +17,17 @@ public enum ClassType implements BaseEnum {
 	/** 列挙 */
 	ENUM("enum");
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param value
+	 *     値
+	 */
 	private ClassType(String value) {
 		this.value = value;
 	}
 
+	/** 値 */
 	private String value;
 
 	/**
