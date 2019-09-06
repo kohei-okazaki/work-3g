@@ -67,7 +67,7 @@ public class CalorieCalcController implements BaseWebController {
 	 *     カロリー計算画面フォーム
 	 * @param result
 	 *     妥当性チェック結果
-	 * @return
+	 * @return カロリー計算後画面
 	 * @throws BaseException
 	 *     基底例外
 	 */

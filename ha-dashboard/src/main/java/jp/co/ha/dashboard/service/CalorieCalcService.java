@@ -10,10 +10,10 @@ public interface CalorieCalcService {
 
 	/**
 	 * カロリー計算を行う
-	 * 
+	 *
 	 * @param dto
 	 *     カロリー計算DTO
-	 * @return
+	 * @return CalorieCalcDto
 	 */
 	CalorieCalcDto calc(CalorieCalcDto dto);
 }
