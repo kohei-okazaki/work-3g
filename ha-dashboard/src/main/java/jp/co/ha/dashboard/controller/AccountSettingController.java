@@ -75,9 +75,9 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
 		BeanUtil.copy(account, accountSettingForm, (src, dest) -> {
-			Account arcAccount = (Account) src;
+			Account srcAccount = (Account) src;
 			AccountSettingForm destForm = (AccountSettingForm) dest;
-			destForm.setPasswordExpire(DateUtil.toString(arcAccount.getPasswordExpire(), DateFormatType.YYYYMMDD));
+			destForm.setPasswordExpire(DateUtil.toString(srcAccount.getPasswordExpire(), DateFormatType.YYYYMMDD));
 		});
 
 		if (BeanUtil.notNull(mailInfo)) {

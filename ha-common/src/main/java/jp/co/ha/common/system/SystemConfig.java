@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class SystemProperties {
+public class SystemConfig {
 
 	/** ページング数 */
 	private String paging;
