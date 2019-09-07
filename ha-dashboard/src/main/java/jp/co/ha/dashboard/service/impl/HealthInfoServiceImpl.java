@@ -152,6 +152,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 *     健康情報DTO
 	 * @param userId
 	 *     ユーザID
+	 * @return 健康情報登録APIリクエストを返す
 	 * @throws BaseException
 	 *     基底例外
 	 */

@@ -3,7 +3,7 @@ package jp.co.ha.common.db;
 import org.springframework.stereotype.Component;
 
 /**
- * JDBC設定ファイル情報保持クラス
+ * jdbc.propertiesのBean
  *
  */
 @Component

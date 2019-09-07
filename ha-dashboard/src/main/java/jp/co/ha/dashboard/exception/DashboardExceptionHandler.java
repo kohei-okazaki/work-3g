@@ -67,6 +67,13 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 		return body.toString();
 	}
 
+	/**
+	 * ログエラーメッセージを返す
+	 * 
+	 * @param e
+	 *     例外
+	 * @return エラーメッセージ
+	 */
 	private String getLogErrorMessage(Exception e) {
 		String detail;
 		String outerErrorCode;

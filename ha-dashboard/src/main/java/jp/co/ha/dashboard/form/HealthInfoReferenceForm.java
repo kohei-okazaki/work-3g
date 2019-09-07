@@ -1,7 +1,9 @@
 package jp.co.ha.dashboard.form;
 
 import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.validator.annotation.Date;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
@@ -29,8 +31,10 @@ public class HealthInfoReferenceForm implements BaseForm {
 	@Flag(message = "健康情報作成日直接指定フラグの値が不正です")
 	private String healthInfoRegDateSelectFlag;
 	/** 健康情報作成日(開始) */
+	@Date(formatType = DateFormatType.YYYYMMDD)
 	private String fromHealthInfoRegDate;
 	/** 健康情報作成日(終了) */
+	@Date(formatType = DateFormatType.YYYYMMDD)
 	private String toHealthInfoRegDate;
 
 	/**

@@ -19,35 +19,9 @@
   <import resource="classpath:web-context.xml" />
   <!-- business -->
   <import resource="classpath:business-context.xml" />
-
-  <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
-
-  <context:component-scan base-package="jp.co.ha.dashboard.controller" />
-  <context:component-scan base-package="jp.co.ha.dashboard.service.impl" />
-  <context:component-scan base-package="jp.co.ha.dashboard.service.annotation" />
-  <context:component-scan base-package="jp.co.ha.dashboard.exception" />
-
-  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-    <property name="basenames">
-      <list>
-        <value>META-INF/messages</value>
-        <value>META-INF/apiErrorCode</value>
-        <value>META-INF/dashboardErrorCode</value>
-        <value>META-INF/commonErrorCode</value>
-        <value>META-INF/validateErrorCode</value>
-      </list>
-    </property>
-  </bean>
-
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/**" />
-      <bean class="jp.co.ha.business.interceptor.RequestInterceptor" />
-    </mvc:interceptor>
-    <mvc:interceptor>
-      <mvc:mapping path="/**" />
-      <bean class="jp.co.ha.business.interceptor.DashboardAuthInterceptor" />
-    </mvc:interceptor>
-  </mvc:interceptors>
+  <!-- dashboard -->
+  <import resource="classpath:dashboard-context.xml" />
+  <!-- view -->
+  <import resource="classpath:view-context.xml" />
 
 </beans>
