@@ -9,7 +9,7 @@ public class BatchEntry {
 
 	/**
 	 * 起動メソッド
-	 * 
+	 *
 	 * @param args
 	 *     String[]
 	 */

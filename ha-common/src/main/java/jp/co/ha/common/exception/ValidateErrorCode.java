@@ -17,8 +17,8 @@ public enum ValidateErrorCode implements BaseErrorCode, BaseEnum {
 	LENGTH_LACK("LENGTH_LACK", "validate.message.LengthLack"),
 	/** 属性不一致 */
 	TYPE_ERROR("TYPE_ERROR", "validate.message.TypeError"),
-
-	;
+	/** 日付超過 */
+	DATE_OVER("DATE_OVER", "validate.message.DateOver");
 
 	/**
 	 * コンストラクタ

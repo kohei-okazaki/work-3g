@@ -2,6 +2,9 @@ package jp.co.ha.common.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.function.BiFunction;
@@ -251,5 +254,25 @@ public class DateUtil {
 			return isSameDate(target, compareDate);
 		}
 		return target.before(compareDate);
+	}
+
+	/**
+	 * 日付型チェックを行う。<br>
+	 * 正しい日付の場合true<br>
+	 * 不正な文字列型の日付を指定した場合、false<br>
+	 *
+	 * @param strDate
+	 *     検査対象日付
+	 * @param formatType
+	 *     日付フォーマット
+	 * @return 判定結果
+	 */
+	public static boolean isDate(String strDate, DateFormatType formatType) {
+		try {
+			LocalDate.parse(strDate, DateTimeFormatter.ofPattern(formatType.getValue()));
+			return true;
+		} catch (DateTimeParseException e) {
+			return false;
+		}
 	}
 }

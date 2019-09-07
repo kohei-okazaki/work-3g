@@ -56,8 +56,15 @@ public enum DashboardView implements BaseView {
 	/** カロリー計算画面 */
 	CALORIE_CALC("calorieCalc/index");
 
+	/** パス名 */
 	private String name;
 
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param name
+	 *     パス名
+	 */
 	private DashboardView(String name) {
 		this.name = name;
 	}

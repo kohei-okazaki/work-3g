@@ -1,4 +1,4 @@
-package jp.co.ha.common.system.impl;
+package jp.co.ha.common.system;
 
 import java.util.Enumeration;
 import java.util.Optional;
@@ -6,8 +6,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
-
-import jp.co.ha.common.system.SessionManageService;
 
 /**
  * session管理サービス実装クラス

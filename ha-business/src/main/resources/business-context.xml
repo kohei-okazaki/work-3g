@@ -15,6 +15,7 @@
     <property name="locations">
       <list>
         <value>classpath:jdbc.properties</value>
+        <value>classpath:system.properties</value>
         <value>classpath:healthInfo.properties</value>
       </list>
     </property>

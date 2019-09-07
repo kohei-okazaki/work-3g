@@ -20,7 +20,7 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 	protected void validate(HealthInfoFileForm form, Errors errors) {
 
 		// 必須チェック
-		this.checkRequire(form, errors);
+		checkRequire(form, errors);
 
 	}
 

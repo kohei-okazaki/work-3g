@@ -33,7 +33,7 @@ import jp.co.ha.common.validator.ValidateErrorResult;
  * 健康情報ファイル登録Batch
  *
  */
-@Component
+@Component("healthInfoFileRegistBatch")
 public class HealthInfoFileRegistBatch extends BaseBatch {
 
 	/** LOG */

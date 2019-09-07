@@ -71,14 +71,14 @@ echo ------------------------------------------------------------------------
 
 
 
-rem webをvalidate
+rem dashboardをvalidate
 echo ------------------------------------------------------------------------
-echo START web project validate
+echo START dashboard project validate
 echo ------------------------------------------------------------------------
-cd %BASE_DIR%\ha-web
+cd %BASE_DIR%\ha-dashboard
 call mvn validate
 echo ------------------------------------------------------------------------
-echo END web project validate
+echo END dashboard project validate
 echo ------------------------------------------------------------------------
 
 
