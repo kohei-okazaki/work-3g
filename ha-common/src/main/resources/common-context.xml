@@ -30,19 +30,27 @@
   <bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="locations">
       <list>
+        <value>classpath:crypt.properties</value>
         <value>classpath:jdbc.properties</value>
         <value>classpath:system.properties</value>
       </list>
     </property>
   </bean>
+  <!-- jdbc.propertiess -->
   <bean id="jdbcConfig" class="jp.co.ha.common.db.JdbcConfig" lazy-init="true">
     <property name="driverClassName" value="${jdbc.driverClassName}" />
     <property name="url" value="${jdbc.url}" />
     <property name="username" value="${jdbc.username}" />
     <property name="password" value="${jdbc.password}" />
   </bean>
-  <bean id="systemProperties" class="jp.co.ha.common.system.SystemProperties" lazy-init="true">
+  <!-- system.properties -->
+  <bean id="systemConfig" class="jp.co.ha.common.system.SystemConfig" lazy-init="true">
     <property name="paging" value="${system.paging}" />
+  </bean>
+  <!-- crypt.properties -->
+  <bean id="cryptConfig" class="jp.co.ha.common.db.CryptConfig" lazy-init="true">
+    <property name="mode" value="${crypt.mode}" />
+    <property name="key" value="${crypt.key}" />
   </bean>
 
 </beans>

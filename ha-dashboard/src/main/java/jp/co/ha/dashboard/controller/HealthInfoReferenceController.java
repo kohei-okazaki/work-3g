@@ -35,7 +35,7 @@ import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.system.SystemProperties;
+import jp.co.ha.common.system.SystemConfig;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
@@ -76,7 +76,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 	/** System設定情報 */
 	@Autowired
-	private SystemProperties systemProp;
+	private SystemConfig systemProp;
 
 	/**
 	 * Validateを設定
