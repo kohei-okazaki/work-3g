@@ -20,7 +20,7 @@ import jp.co.ha.tool.type.ExecuteType;
  * DROP.sqlのビルダー
  *
  */
-public class DropBuilder extends BaseBuilder {
+public class DropBuilder extends BaseSqlSourceBuilder {
 
 	@Build
 	public void execute() {
@@ -31,7 +31,7 @@ public class DropBuilder extends BaseBuilder {
 		List<Table> tableList = getTableList(excel.getRowList());
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		tableList.stream().forEach(e -> {
-			body.add(buildComment(e.getLogicalName()));
+			body.add(getTableComment(e.getLogicalName()));
 			body.add(buildDropSql(e.getPhysicalName()));
 		});
 
@@ -69,11 +69,6 @@ public class DropBuilder extends BaseBuilder {
 		String prefix = "DROP TABLE ";
 		String suffix = ";";
 		return prefix + physicalName + suffix;
-	}
-
-	private String buildComment(String logicalName) {
-		String prefix = "-- ";
-		return prefix + logicalName;
 	}
 
 }

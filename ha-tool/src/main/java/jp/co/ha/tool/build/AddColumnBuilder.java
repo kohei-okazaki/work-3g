@@ -29,7 +29,7 @@ import jp.co.ha.tool.type.ExecuteType;
  * のDDLを作成
  *
  */
-public class AddColumnBuilder extends BaseBuilder {
+public class AddColumnBuilder extends BaseSqlSourceBuilder {
 
 	@Build
 	public void execute() {
@@ -59,20 +59,8 @@ public class AddColumnBuilder extends BaseBuilder {
 	}
 
 	private List<Row> getTargetRowList(List<Row> rowList) {
-		return rowList.stream()
-				.filter(e -> CommonFlag.TRUE.is(e.getCell(CellPositionType.ADD_FLG).getValue()))
+		return rowList.stream().filter(e -> CommonFlag.TRUE.is(e.getCell(CellPositionType.ADD_FLG).getValue()))
 				.collect(Collectors.toList());
-	}
-
-	private String getColumnType(Row row) {
-		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
-		String size = getSize(row);
-		return columnType + size;
-	}
-
-	private String getSize(Row row) {
-		String size = row.getCell(CellPositionType.COLUMN_SIZE).getValue();
-		return StringUtil.isBrank(size) ? StringUtil.EMPTY : "(" + size + ")";
 	}
 
 }
