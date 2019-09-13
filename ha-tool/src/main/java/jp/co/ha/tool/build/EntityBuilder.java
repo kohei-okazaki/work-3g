@@ -31,7 +31,7 @@ import jp.co.ha.tool.type.ExecuteType;
  * @deprecated MybatisのgeneratorでEntityを生成している為
  *
  */
-@Deprecated
+@Deprecated(since = "1.0")
 public class EntityBuilder extends BaseBuilder {
 
 	@Build

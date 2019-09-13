@@ -20,7 +20,7 @@ import jp.co.ha.tool.type.ExecuteType;
  * TABLE_DEFINE.sqlのビルダー
  *
  */
-public class TableDefineBuilder extends BaseBuilder {
+public class TableDefineBuilder extends BaseSqlSourceBuilder {
 
 	@Build
 	public void execute() {
@@ -31,7 +31,7 @@ public class TableDefineBuilder extends BaseBuilder {
 		List<Table> tableList = getTableList(excel.getRowList());
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		tableList.stream().forEach(e -> {
-			body.add(buildComment(e.getLogicalName()));
+			body.add(getTableComment(e.getLogicalName()));
 			body.add(buildTableDefineSql(e.getPhysicalName()));
 		});
 
@@ -72,8 +72,4 @@ public class TableDefineBuilder extends BaseBuilder {
 		return prefix + physicalName + suffix;
 	}
 
-	private String buildComment(String logicalName) {
-		String prefix = "-- ";
-		return prefix + logicalName;
-	}
 }

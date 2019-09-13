@@ -50,12 +50,12 @@ public abstract class BaseBuilder {
 				+ FileSeparator.SYSTEM.getValue() + "META-INF";
 		Properties prop = new PropertyReader().read(resourcePath, "tool.properties");
 
-		String targetTable = prop.getProperty("targetTable");
+		String targetTable = prop.getProperty("tool.targetTable");
 		if (BeanUtil.notNull(targetTable)) {
 			this.targetTableList = StringUtil.toStrList(targetTable, StringUtil.COMMA);
 		}
 
-		this.baseDir = prop.getProperty("baseDir");
+		this.baseDir = prop.getProperty("tool.baseDir");
 
 		this.reader = new ExcelReader(getExcelConfig());
 	}
