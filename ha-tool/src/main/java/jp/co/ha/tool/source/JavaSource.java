@@ -15,7 +15,7 @@ public class JavaSource {
 	/** パッケージ */
 	private Package pack;
 	/** import文のリスト */
-	private List<Import> importList;
+	private List<Import> importList = new ArrayList<>();
 	/** アクセス型 */
 	private AccessType accessType;
 	/** クラス型 */
@@ -25,21 +25,11 @@ public class JavaSource {
 	/** 継承クラス */
 	private Class<?> extendsClass;
 	/** 実装インターフェース */
-	private List<Class<?>> implInterfaceList;
+	private List<Class<?>> implInterfaceList = new ArrayList<>();
 	/** フィールド情報のリスト */
-	private List<Field<?>> fieldList;
+	private List<Field<?>> fieldList = new ArrayList<>();
 	/** メソッドのリスト */
-	private List<Method<?>> methodList;
-
-	/**
-	 * コンストラクタ
-	 */
-	public JavaSource() {
-		this.importList = new ArrayList<>();
-		this.implInterfaceList = new ArrayList<>();
-		this.fieldList = new ArrayList<>();
-		this.methodList = new ArrayList<>();
-	}
+	private List<Method<?>> methodList = new ArrayList<>();
 
 	/**
 	 * packを返す

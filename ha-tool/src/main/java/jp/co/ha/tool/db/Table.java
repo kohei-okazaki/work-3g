@@ -14,14 +14,7 @@ public class Table {
 	/** 物理名 */
 	private String physicalName;
 	/** カラムリスト */
-	private List<Column> columnList;
-
-	/**
-	 * コンストラクタ
-	 */
-	public Table() {
-		this.columnList = new ArrayList<>();
-	}
+	private List<Column> columnList = new ArrayList<>();
 
 	/**
 	 * logicalNameを返す

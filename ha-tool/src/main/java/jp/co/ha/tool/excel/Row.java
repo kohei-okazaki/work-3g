@@ -12,14 +12,7 @@ import jp.co.ha.tool.type.CellPositionType;
 public class Row {
 
 	/** セルリスト */
-	private List<Cell> cellList;
-
-	/**
-	 * コンストラクタ
-	 */
-	public Row() {
-		this.cellList = new ArrayList<>();
-	}
+	private List<Cell> cellList = new ArrayList<>();
 
 	/**
 	 * セルを追加する

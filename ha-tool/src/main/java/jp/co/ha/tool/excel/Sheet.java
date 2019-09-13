@@ -12,14 +12,7 @@ public class Sheet {
 	/** 名前 */
 	private String name;
 	/** 行リスト */
-	private List<Row> rowList;
-
-	/**
-	 * コンストラクタ
-	 */
-	public Sheet() {
-		this.rowList = new ArrayList<>();
-	}
+	private List<Row> rowList = new ArrayList<>();
 
 	/**
 	 * nameを返す
