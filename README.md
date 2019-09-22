@@ -20,10 +20,10 @@
 windows, linuxでそれぞれbatとshを用意  
 
 * ### ha-business  
-api, webで共通的に使うbusinessロジックをまとめたプロジェクト  
+api, dashboard, batchで共通的に使うbusinessロジックをまとめたプロジェクト  
 
 * ### ha-common  
-Util, 基底クラスをまとめたプロジェクト  
+共通処理を定義したプロジェクト  
 
 * ### ha-dashboard  
 健康管理のダッシュボードのプロジェクト  
@@ -32,7 +32,7 @@ Util, 基底クラスをまとめたプロジェクト
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
 
 * ### ha-pom  
-api, business, common, tool, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+api, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
 * ### ha-resource  
 ddlなどを定義したプロジェクト  
