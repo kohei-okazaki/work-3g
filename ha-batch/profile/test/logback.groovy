@@ -9,22 +9,8 @@ import static ch.qos.logback.classic.Level.*
 
 scan("30 seconds")
 
-def FILE_PATH = "D:/app/logs/";
+def FILE_PATH = "/app/logs/";
 def ENCODE = "UTF-8";
-
-appender("STDOUT", ConsoleAppender) {
-
-  target = "System.out"
-
-  encoder(PatternLayoutEncoder) {
-    charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
-  }
-
-  filter(ThresholdFilter) {
-    level = DEBUG
-  }
-}
 
 appender("FILE", RollingFileAppender) {
 
@@ -37,16 +23,16 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %message%n"
+    pattern = "%d [%thread] %X{id} %-5level %logger{10} - %msg%n"
   }
 
   filter(ThresholdFilter) {
-    level = DEBUG
+    level = INFO
   }
 
 }
 
 // Mybatisで発行されるSQLのログ設定
-// logger("jp.co.ha.db.mapper", DEBUG, ["STDOUT", "FILE"], false)
+logger("jp.co.ha.db.mapper", INFO, ["FILE"], false)
 
-root(INFO, ["STDOUT", "FILE"])
+root(INFO, ["FILE"])

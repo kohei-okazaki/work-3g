@@ -10,9 +10,13 @@ import org.springframework.context.MessageSource;
 
 import jp.co.ha.batch.execute.BaseBatch;
 import jp.co.ha.batch.type.BatchResult;
+import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.log.MDC;
 import jp.co.ha.common.system.BatchBeanLoader;
+import jp.co.ha.common.util.DateUtil;
 
 /**
  * Batchの呼び出しクラス
@@ -24,6 +28,8 @@ public class BatchInvoker {
 	private static final Logger LOG = LoggerFactory.getLogger(BatchInvoker.class);
 	/** MessageSource */
 	private static final MessageSource MESSAGE_SOURCE = BatchBeanLoader.getBean(MessageSource.class);
+	/** ハッシュ生成関数 */
+	private static final HashEncoder HASH_ENCODER = BatchBeanLoader.getBean(Sha256HashEncoder.class);
 	/** パッケージ名の接頭語 */
 	private static final String PACKAGE_PREFIX = "jp.co.ha.batch.execute.";
 
@@ -45,6 +51,10 @@ public class BatchInvoker {
 		BatchResult batchResult = BatchResult.FAILURE;
 
 		try {
+
+			// MDCを設定する
+			MDC.put("id", HASH_ENCODER.encode(DateUtil.getSysDate().toString(), "dummy"));
+
 			// batch名からインスタンスを取得
 			Class<? extends BaseBatch> batch = (Class<? extends BaseBatch>) Class.forName(batchName);
 			BaseBatch batchInstance = batch.getDeclaredConstructor().newInstance();

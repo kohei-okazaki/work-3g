@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.db.annotation.Crypt;
 import jp.co.ha.common.exception.BaseException;
@@ -18,6 +19,7 @@ import jp.co.ha.common.util.BeanUtil.AccessorType;
  * Entityの暗号/復号インターフェース実装クラス
  *
  */
+@Component
 public class EntityCrypterImpl implements EntityCrypter {
 
 	/** 暗号/復号インターフェース */

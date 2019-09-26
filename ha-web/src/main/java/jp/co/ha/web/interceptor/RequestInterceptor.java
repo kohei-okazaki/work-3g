@@ -1,15 +1,19 @@
-package jp.co.ha.business.interceptor;
+package jp.co.ha.web.interceptor;
 
 import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.method.HandlerMethod;
 
+import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.web.interceptor.BaseWebInterceptor;
+import jp.co.ha.common.log.MDC;
+import jp.co.ha.common.util.DateUtil;
 
 /**
  * Requestインターセプター
@@ -19,6 +23,11 @@ public class RequestInterceptor extends BaseWebInterceptor {
 
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(RequestInterceptor.class);
+
+	/** ハッシュ生成関数 */
+	@Autowired
+	@Qualifier("sha256HashEncoder")
+	private HashEncoder hashEncoder;
 
 	/**
 	 * {@inheritDoc}
@@ -32,6 +41,8 @@ public class RequestInterceptor extends BaseWebInterceptor {
 			return true;
 		}
 
+		// MDCを設定する
+		MDC.put("id", hashEncoder.encode(DateUtil.getSysDate().toString(), "dummy"));
 		Method method = ((HandlerMethod) handler).getMethod();
 		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName() + "[URI:"
 				+ request.getRequestURI() + ",METHOD:" + request.getMethod() + "]");

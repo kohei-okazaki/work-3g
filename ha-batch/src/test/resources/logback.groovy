@@ -9,7 +9,7 @@ import static ch.qos.logback.classic.Level.*
 
 scan("30 seconds")
 
-def FILE_PATH = "D:/app/testlogs";
+def FILE_PATH = "D:/app/testlogs/";
 def ENCODE = "UTF-8";
 
 appender("STDOUT", ConsoleAppender) {
@@ -37,7 +37,7 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %message%n"
+    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
   }
 
   filter(ThresholdFilter) {
