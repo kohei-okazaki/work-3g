@@ -2,6 +2,7 @@ package jp.co.ha.common.validator;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -41,7 +42,7 @@ public class BeanValidator<T> {
 
 	/**
 	 * 指定したクラスの妥当性チェックを行う<br>
-	 * targetは妥当性チェックを行わない
+	 * <code>ignore</code>は妥当性チェックを行わない
 	 *
 	 * @param t
 	 *     validate対象クラス
@@ -59,7 +60,7 @@ public class BeanValidator<T> {
 					continue;
 				}
 				Object value = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.GETTER).invoke(t);
-				String property  = value == null ? "" : value.toString();
+				String property = Optional.ofNullable(value).orElse("").toString();
 				if (f.isAnnotationPresent(Required.class)) {
 					validateRequired(property, f, result);
 				}

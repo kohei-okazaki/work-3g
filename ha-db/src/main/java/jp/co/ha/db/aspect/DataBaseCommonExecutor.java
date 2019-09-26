@@ -128,13 +128,13 @@ public class DataBaseCommonExecutor {
 			List<Object> list = (List<Object>) o;
 			for (Object entity : list) {
 				if (isEntity(entity)) {
-					entityCrypter.encrypt(entity);
+					entityCrypter.decrypt(entity);
 					LOG.debugRes(entity);
 				}
 			}
 		} else {
 			if (isEntity(o)) {
-				entityCrypter.encrypt(o);
+				entityCrypter.decrypt(o);
 				LOG.debugRes(o);
 			}
 		}

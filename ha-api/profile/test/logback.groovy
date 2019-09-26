@@ -9,42 +9,31 @@ import static ch.qos.logback.classic.Level.*
 
 scan("30 seconds")
 
-def FILE_PATH = "D:/app/tool/testlogs";
+def FILE_PATH = "D:/app/logs/";
 def ENCODE = "UTF-8";
-
-appender("STDOUT", ConsoleAppender) {
-
-  target = "System.out"
-
-  encoder(PatternLayoutEncoder) {
-    charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
-  }
-
-  filter(ThresholdFilter) {
-    level = DEBUG
-  }
-
-}
+context.name = "api"
 
 appender("FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/tool.log"
+  file = "${FILE_PATH}/api.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "tool_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "api_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
+    pattern = "%d [%thread] %X{id} %-5level %logger{10} - %msg%n"
   }
 
   filter(ThresholdFilter) {
-    level = DEBUG
+    level = INFO
   }
 
 }
+
+// Mybatisで発行されるSQLのログ設定
+logger("jp.co.ha.db.mapper", INFO, ["STDOUT", "FILE"], false)
 
 root(INFO, ["STDOUT", "FILE"])

@@ -38,7 +38,7 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %message%n"
+    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
   }
 
   filter(ThresholdFilter) {

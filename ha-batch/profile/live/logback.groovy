@@ -12,20 +12,6 @@ scan("30 seconds")
 def FILE_PATH = "D:/app/logs/";
 def ENCODE = "UTF-8";
 
-appender("STDOUT", ConsoleAppender) {
-
-  target = "System.out"
-
-  encoder(PatternLayoutEncoder) {
-    charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
-  }
-
-  filter(ThresholdFilter) {
-    level = DEBUG
-  }
-}
-
 appender("FILE", RollingFileAppender) {
 
   file = "${FILE_PATH}/batch.log"
@@ -37,7 +23,7 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %message%n"
+    pattern = "%d [%thread] %X{id} %-5level %logger{10} - %msg%n"
   }
 
   filter(ThresholdFilter) {
