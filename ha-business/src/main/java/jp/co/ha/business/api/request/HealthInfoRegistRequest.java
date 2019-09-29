@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.business.api.type.TestMode;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegixType;
 import jp.co.ha.common.validator.annotation.Pattern;
@@ -27,6 +28,10 @@ public class HealthInfoRegistRequest extends CommonApiRequest {
 	@Pattern(regixPattern = RegixType.DECIMAL)
 	@JsonProperty("weight")
 	private BigDecimal weight;
+	/** テストモード種別 */
+	@Required(message = "testModeが未設定です")
+	@JsonProperty("testMode")
+	private TestMode testMode;
 
 	/**
 	 * heightを返す
@@ -64,6 +69,25 @@ public class HealthInfoRegistRequest extends CommonApiRequest {
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
+	}
+
+	/**
+	 * testModeを返す
+	 *
+	 * @return testMode
+	 */
+	public TestMode getTestMode() {
+		return testMode;
+	}
+
+	/**
+	 * testModeを設定する
+	 *
+	 * @param testMode
+	 *     テストモード種別
+	 */
+	public void setTestMode(TestMode testMode) {
+		this.testMode = testMode;
 	}
 
 }

@@ -14,9 +14,7 @@ public enum LogLevel implements BaseEnum {
 	/** WARN */
 	WARN("WARN"),
 	/** ERROR */
-	ERROR("ERROR"),
-	/** FATAL */
-	FATAL("FATAL");
+	ERROR("ERROR");
 
 	/** 値 */
 	private String value;

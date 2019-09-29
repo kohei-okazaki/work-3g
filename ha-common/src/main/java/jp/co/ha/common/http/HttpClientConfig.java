@@ -16,18 +16,9 @@ public class HttpClientConfig {
 	/** HTTPメソッド */
 	private HttpMethod httpMethod;
 	/** ヘッダー */
-	private Map<String, String> headerMap;
+	private Map<String, String> headerMap = new HashMap<>();
 	/** ボディ */
-	private Map<String, String> bodyMap;
-
-	/**
-	 * コンストラクタ
-	 *
-	 */
-	public HttpClientConfig() {
-		this.headerMap = new HashMap<>();
-		this.bodyMap = new HashMap<>();
-	}
+	private Map<String, String> bodyMap = new HashMap<>();
 
 	/**
 	 * requestUrlを返す
@@ -107,7 +98,7 @@ public class HttpClientConfig {
 
 	/**
 	 * bodyMapを返す
-	 * 
+	 *
 	 * @return bodyMap
 	 */
 	public Map<String, String> getBodyMap() {
