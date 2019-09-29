@@ -19,7 +19,7 @@
     <org.aspectj-version>1.9.4</org.aspectj-version>
     <org.slf4j-version>1.7.28</org.slf4j-version>
     <org.logback-version>1.2.3</org.logback-version>
-    <org.jackson-version>2.9.9</org.jackson-version>
+    <org.jackson-version>2.9.10</org.jackson-version>
     <org.poi-version>4.1.0</org.poi-version>
     <org.mysql-version>8.0.17</org.mysql-version>
     <org.mybatis-version>3.5.2</org.mybatis-version>
@@ -294,7 +294,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.5.1</version>
+      <version>5.5.2</version>
       <!-- <scope>test</scope> -->
     </dependency>
   </dependencies>
@@ -373,25 +373,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.1.0</version>
-<!--
-        <executions>
-          <execution>
-            <id>copy-resources</id>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>${resources.directory}</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-              <outputDirectory>${project.build.directory}/classes</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
- -->
       </plugin>
     </plugins>
   </build>
