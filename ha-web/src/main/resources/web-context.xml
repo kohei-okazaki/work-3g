@@ -11,4 +11,11 @@
                       http://www.springframework.org/schema/context
                       http://www.springframework.org/schema/context/spring-context.xsd">
 
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/**" />
+      <bean class="jp.co.ha.web.interceptor.RequestInterceptor" />
+    </mvc:interceptor>
+  </mvc:interceptors>
+
 </beans>

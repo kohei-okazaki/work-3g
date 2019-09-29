@@ -58,8 +58,7 @@ public class EntityCrypterImpl implements EntityCrypter {
 			for (Field f : entity.getClass().getDeclaredFields()) {
 				if (isCryptField(f)) {
 					// 値を取得
-					Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
-							AccessorType.GETTER);
+					Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.GETTER);
 					Object value = getter.invoke(entity);
 
 					if (value != null) {

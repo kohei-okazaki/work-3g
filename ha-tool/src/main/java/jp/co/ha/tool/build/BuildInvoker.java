@@ -6,6 +6,10 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.tool.build.annotation.Build;
 
+/**
+ * SQLビルドツールのinvoke
+ *
+ */
 public class BuildInvoker {
 
 	/** LOG */

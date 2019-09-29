@@ -11,7 +11,7 @@ import jp.co.ha.business.api.type.RequestType;
 
 /**
  * JSONのリクエスト種別のデシリアライズクラス<br>
- * 文字列型のJSONをJavaのクラスに変換する<br>
+ * 文字列型のJSONをJavaのクラスに変換する
  *
  */
 public class RequestTypeDeserializer extends JsonDeserializer<RequestType> {

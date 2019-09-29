@@ -10,7 +10,11 @@ public enum HttpMethod implements BaseEnum {
 	/** GET */
 	GET("GET"),
 	/** POST */
-	POST("POST");
+	POST("POST"),
+	/** DELETE */
+	DELETE("DELETE"),
+	/** PUT */
+	PUT("PUT");
 
 	/**
 	 * コンストラクタ
