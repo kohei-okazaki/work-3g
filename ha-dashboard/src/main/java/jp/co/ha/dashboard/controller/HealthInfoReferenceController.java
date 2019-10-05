@@ -54,7 +54,7 @@ import jp.co.ha.web.controller.BaseWebController;
  *
  */
 @Controller
-@RequestMapping("healthInfoReference")
+@RequestMapping("healthinforeference")
 public class HealthInfoReferenceController implements BaseWebController {
 
 	/** 結果照会画面サービス */

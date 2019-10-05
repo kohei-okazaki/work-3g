@@ -37,7 +37,7 @@ import jp.co.ha.web.controller.BaseWizardController;
  *
  */
 @Controller
-@RequestMapping("accountSetting")
+@RequestMapping("accountsetting")
 public class AccountSettingController implements BaseWizardController<AccountSettingForm> {
 
 	/** アカウント設定サービス */

@@ -26,7 +26,7 @@ import jp.co.ha.web.controller.BaseWebController;
  *
  */
 @Controller
-@RequestMapping("calorieCalc")
+@RequestMapping("caloriecalc")
 public class CalorieCalcController implements BaseWebController {
 
 	/** カロリー計算サービス */

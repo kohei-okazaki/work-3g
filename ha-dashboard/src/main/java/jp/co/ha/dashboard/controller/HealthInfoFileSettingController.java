@@ -32,7 +32,7 @@ import jp.co.ha.web.controller.BaseWizardController;
  *
  */
 @Controller
-@RequestMapping("healthInfoFileSetting")
+@RequestMapping("healthinfofilesetting")
 public class HealthInfoFileSettingController implements BaseWizardController<HealthInfoFileSettingForm> {
 
 	/** 健康情報ファイル設定サービス */
