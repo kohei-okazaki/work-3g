@@ -16,52 +16,52 @@ public enum DashboardView implements BaseView {
 	ERROR("error/index"),
 
 	/** 健康情報入力画面 */
-	HEALTH_INFO_INPUT("healthInfo/input"),
+	HEALTH_INFO_INPUT("healthinfo/input"),
 	/** 健康情報入力確認画面 */
-	HEALTH_INFO_CONFIRM("healthInfo/confirm"),
+	HEALTH_INFO_CONFIRM("healthinfo/confirm"),
 	/** 健康情報入力完了画面 */
-	HEALTH_INFO_COMPLETE("healthInfo/complete"),
+	HEALTH_INFO_COMPLETE("healthinfo/complete"),
 
 	/** 健康情報照会画面 */
-	HEALTH_INFO_REFFERNCE("healthInfoReference/index"),
+	HEALTH_INFO_REFFERNCE("healthinforeference/index"),
 
 	/** アカウント設定入力画面 */
-	ACCOUNT_SETTING_INPUT("accountSetting/input"),
+	ACCOUNT_SETTING_INPUT("accountsetting/input"),
 	/** アカウント設定入力確認画面 */
-	ACCOUNT_SETTING_CONFIRM("accountSetting/confirm"),
+	ACCOUNT_SETTING_CONFIRM("accountsetting/confirm"),
 	/** アカウント設定入力完了画面 */
-	ACCOUNT_SETTING_COMPLETE("accountSetting/complete"),
+	ACCOUNT_SETTING_COMPLETE("accountsetting/complete"),
 
 	/** アカウント作成入力画面 */
-	ACCOUNT_REGIST_INPUT("accountRegist/input"),
+	ACCOUNT_REGIST_INPUT("accountregist/input"),
 	/** アカウント作成入力確認画面 */
-	ACCOUNT_REGIST_CONFIRM("accountRegist/confirm"),
+	ACCOUNT_REGIST_CONFIRM("accountregist/confirm"),
 	/** アカウント作成入力完了画面 */
-	ACCOUNT_REGIST_COMPLETE("accountRegist/complete"),
+	ACCOUNT_REGIST_COMPLETE("accountregist/complete"),
 
 	/** 健康情報ファイル入力画面 */
-	HEALTH_INFO_FILE_INPUT("healthInfoFile/input"),
+	HEALTH_INFO_FILE_INPUT("healthinfofile/input"),
 	/** 健康情報ファイル確認画面 */
-	HEALTH_INFO_FILE_CONFIRM("healthInfoFile/confirm"),
+	HEALTH_INFO_FILE_CONFIRM("healthinfofile/confirm"),
 	/** 健康情報ファイル入力完了画面 */
-	HEALTH_INFO_FILE_COMPLETE("healthInfoFile/complete"),
+	HEALTH_INFO_FILE_COMPLETE("healthinfofile/complete"),
 
 	/** 健康情報ファイル設定入力画面 */
-	HEALTH_INFO_FILE_SETTING_INPUT("healthInfoFileSetting/input"),
+	HEALTH_INFO_FILE_SETTING_INPUT("healthinfofilesetting/input"),
 	/** 健康情報ファイル設定確認画面 */
-	HEALTH_INFO_FILE_SETTING_CONFIRM("healthInfoFileSetting/confirm"),
+	HEALTH_INFO_FILE_SETTING_CONFIRM("healthinfofilesetting/confirm"),
 	/** 健康情報ファイル設定入力完了画面 */
-	HEALTH_INFO_FILE_SETTING_COMPLETE("healthInfoFileSetting/complete"),
+	HEALTH_INFO_FILE_SETTING_COMPLETE("healthinfofilesetting/complete"),
 
 	/** カロリー計算画面 */
-	CALORIE_CALC("calorieCalc/index");
+	CALORIE_CALC("caloriecalc/index");
 
 	/** パス名 */
 	private String name;
 
 	/**
 	 * コンストラクタ
-	 * 
+	 *
 	 * @param name
 	 *     パス名
 	 */
