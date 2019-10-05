@@ -15,11 +15,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>11</java-version>
-    <org.springframework-version>5.1.9.RELEASE</org.springframework-version>
+    <org.springframework-version>5.2.0.RELEASE</org.springframework-version>
     <org.aspectj-version>1.9.4</org.aspectj-version>
     <org.slf4j-version>1.7.28</org.slf4j-version>
     <org.logback-version>1.2.3</org.logback-version>
-    <org.jackson-version>2.9.10</org.jackson-version>
+    <org.jackson-version>2.10.0</org.jackson-version>
     <org.poi-version>4.1.0</org.poi-version>
     <org.mysql-version>8.0.17</org.mysql-version>
     <org.mybatis-version>3.5.2</org.mybatis-version>
