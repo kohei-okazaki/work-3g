@@ -2,6 +2,13 @@
 
 rem ------------------------------------------------------------------------
 rem jarを配置するバッチファイル
+rem
+rem ha-dashboard/target配下にha-common-1.0.jar, ha-db-1.0.jar, ha-web-1.0.jar, ha-business-1.0.jarを配置
+rem ha-api/target配下に              ha-common-1.0.jar, ha-db-1.0.jar, ha-web-1.0.jar, ha-business-1.0.jarを配置
+rem ha-business/target配下に  ha-common-1.0.jar, ha-db-1.0.jar, ha-web-1.0.jarを配置
+rem ha-web/target配下に              ha-common-1.0.jar, ha-db-1.0.jarを配置
+rem ha-db/target配下に                ha-common-1.0.jarを配置
+rem
 rem ------------------------------------------------------------------------
 
 rem iniファイルを読み込む
