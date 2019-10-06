@@ -187,7 +187,14 @@ public class BeanUtil {
 	}
 
 	/**
-	 * パラメータ引数にしているクラス型を取得する
+	 * パラメータ引数にしているクラス型を取得する<br>
+	 *
+	 * <pre>
+	 * public class Hoge<X, Y, Z> {
+	 * }
+	 * </pre>
+	 *
+	 * の場合、Xをのクラス型を返す
 	 *
 	 * @param clazz
 	 *     対象クラス
@@ -198,7 +205,15 @@ public class BeanUtil {
 	}
 
 	/**
-	 * パラメータ引数にしているクラス型を取得する
+	 * 指定した位置<code>position</code>でパラメータ引数にしているクラス型を取得する<br>
+	 * position = 2の場合
+	 *
+	 * <pre>
+	 * public class Hoge<X, Y, Z> {
+	 * }
+	 * </pre>
+	 *
+	 * の場合、Zのクラス型を返す
 	 *
 	 * @param clazz
 	 *     対象クラス
@@ -243,12 +258,16 @@ public class BeanUtil {
 		Method accessor = null;
 		try {
 			PropertyDescriptor pd = new PropertyDescriptor(fieldName, clazz);
-			if (AccessorType.SETTER == type) {
+			switch (type) {
+			case SETTER:
 				accessor = pd.getWriteMethod();
-			} else if (AccessorType.GETTER == type) {
+				break;
+			case GETTER:
 				accessor = pd.getReadMethod();
-			} else {
+				break;
+			default:
 				LOG.error("AccessTypeの指定が不正です。accessType = " + type);
+				break;
 			}
 		} catch (IntrospectionException e) {
 			LOG.warn("メソッドがみつかりません", e);

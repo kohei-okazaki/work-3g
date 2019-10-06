@@ -11,7 +11,8 @@ scan("30 seconds")
 
 def FILE_PATH = "D:/app/logs/";
 def ENCODE = "UTF-8";
-context.name = "api"
+def appenderList = ["FILE"];
+context.name = "api";
 
 appender("FILE", RollingFileAppender) {
 
@@ -24,7 +25,7 @@ appender("FILE", RollingFileAppender) {
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %X{id} %-5level %logger{10} - %msg%n"
+    pattern = "%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n"
   }
 
   filter(ThresholdFilter) {
@@ -34,6 +35,6 @@ appender("FILE", RollingFileAppender) {
 }
 
 // Mybatisで発行されるSQLのログ設定
-logger("jp.co.ha.db.mapper", INFO, ["STDOUT", "FILE"], false)
+logger("jp.co.ha.db.mapper", INFO, appenderList, false)
 
-root(INFO, ["STDOUT", "FILE"])
+root(INFO, appenderList)
