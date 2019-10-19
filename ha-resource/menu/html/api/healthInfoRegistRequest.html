@@ -49,6 +49,14 @@
           <input type="text" id="apiKey" size="80" placeholder="APIキー" />
         </td>
       </tr>
+      <tr>
+        <th>
+          <label>テストモード</label>
+        </th>
+        <td>
+          <input type="text" id="testMode" size="1" placeholder="テストモード" />
+        </td>
+      </tr>
     </table>
 
     <div class="button">
@@ -69,13 +77,12 @@
         userId : $("#userId").val(),
         height : parseFloat($("#height").val()),
         weight : parseFloat($("#weight").val()),
-        apiKey : $("#apiKey").val()
+        apiKey : $("#apiKey").val(),
+        testMode : $("#testMode").val()
       };
 
       // Json形式に変換
       var result = JSON.stringify(json);
-      //console.log(result);
-      //alert(result);
       $("#response").val(result);
     });
 
@@ -84,6 +91,7 @@
       $("#height").val("");
       $("#weight").val("");
       $("#apiKey").val("");
+      $("#testMode").val("");
     });
 
     $("input#responseClear").on("click", function() {

@@ -3,7 +3,9 @@ package jp.co.ha.business.api.request;
 import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import jp.co.ha.business.api.request.deserialize.TestModeDeserializer;
 import jp.co.ha.business.api.type.TestMode;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegixType;
@@ -29,6 +31,7 @@ public class HealthInfoRegistRequest extends CommonApiRequest {
 	@JsonProperty("weight")
 	private BigDecimal weight;
 	/** テストモード種別 */
+	@JsonDeserialize(using = TestModeDeserializer.class)
 	@Required(message = "testModeが未設定です")
 	@JsonProperty("testMode")
 	private TestMode testMode;

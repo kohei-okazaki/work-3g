@@ -1,10 +1,12 @@
 package jp.co.ha.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -17,7 +19,6 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.function.ThrowableBiConsumer;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.log.type.LogLevel;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateError;
 import jp.co.ha.common.validator.ValidateErrorResult;
@@ -54,7 +55,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 	 *     基底例外
 	 */
 	@PostMapping(headers = { "Content-type=application/json;charset=UTF-8" }, produces = {
-			MediaType.APPLICATION_JSON_UTF8_VALUE })
+			MediaType.APPLICATION_JSON_VALUE })
 	public Rs doPost(@RequestBody Rq request) throws BaseException {
 
 		ValidateErrorResult result = validator.validate(request);
@@ -87,6 +88,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 	 * @return エラーレスポンス
 	 */
 	@SuppressWarnings("unchecked")
+	@ResponseStatus(code = HttpStatus.OK)
 	@ExceptionHandler(JsonProcessingException.class)
 	public Rs jsonExceptionHandle(JsonProcessingException e) {
 
@@ -117,13 +119,19 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 	 * @return エラーレスポンス
 	 */
 	@SuppressWarnings("unchecked")
+	@ResponseStatus(code = HttpStatus.OK)
 	@ExceptionHandler(BaseException.class)
 	public Rs appExceptionHandle(BaseException e) {
 		Rs response = (Rs) new ErrorResponse(e);
-		if (LogLevel.WARN.is(e.getErrorCode().getLogLevel())) {
+		switch (e.getErrorCode().getLogLevel()) {
+		case WARN:
 			LOG.warnRes(response, e);
-		} else if (LogLevel.ERROR.is(e.getErrorCode().getLogLevel())) {
+			break;
+		case ERROR:
 			LOG.errorRes(response, e);
+			break;
+		default:
+			break;
 		}
 		return response;
 	}
