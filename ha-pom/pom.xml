@@ -30,6 +30,7 @@
     <org.java-mail-version>1.6.2</org.java-mail-version>
     <org.groovy-version>2.5.8</org.groovy-version>
     <org.dbcp2-version>2.7.0</org.dbcp2-version>
+    <org.selenium-version>3.141.59</org.selenium-version>
   </properties>
 
   <profiles>
@@ -301,13 +302,28 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>3.141.59</version>
+      <version>${org.selenium-version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-ie-driver</artifactId>
+      <version>${org.selenium-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-chrome-driver</artifactId>
-      <version>3.141.59</version>
+      <version>${org.selenium-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-firefox-driver</artifactId>
+      <version>${org.selenium-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-safari-driver</artifactId>
+      <version>${org.selenium-version}</version>
     </dependency>
   </dependencies>
 
