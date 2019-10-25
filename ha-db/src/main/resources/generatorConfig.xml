@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.17.jar" />
+  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.18.jar" />
 
   <context id="context1">
 
