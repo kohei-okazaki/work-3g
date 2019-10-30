@@ -1,10 +1,10 @@
-package jo.co.ha.auto.dashboard.login;
+package jp.co.ha.auto.dashboard.login;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import jo.co.ha.auto.BaseAutoTest;
+import jp.co.ha.auto.BaseAutoTest;
 
 /**
  * Login処理の自動テストクラス

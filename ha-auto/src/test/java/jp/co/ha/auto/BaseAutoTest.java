@@ -1,4 +1,4 @@
-package jo.co.ha.auto;
+package jp.co.ha.auto;
 
 import org.openqa.selenium.WebDriver;
 

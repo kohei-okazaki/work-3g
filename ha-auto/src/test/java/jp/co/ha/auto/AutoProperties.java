@@ -1,4 +1,4 @@
-package jo.co.ha.auto;
+package jp.co.ha.auto;
 
 import jp.co.ha.common.io.file.property.annotation.Property;
 
