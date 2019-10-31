@@ -95,7 +95,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
 
 		CsvConfig conf = new CsvConfig();
-		var fileName = "healthInfoReference_"
+		String fileName = "healthInfoReference_"
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
 				+ FileExtension.CSV.getValue();
 		conf.setFileName(fileName);

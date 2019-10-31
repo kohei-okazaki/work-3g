@@ -33,7 +33,7 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelMode
 	 */
 	@Override
 	protected void writeData(Sheet sheet) {
-		var rowPosition = this.conf.hasHeader() ? 1 : 0;
+		int rowPosition = this.conf.hasHeader() ? 1 : 0;
 		this.modelList.stream().forEach(model -> {
 			Cell cell = getCell(sheet, rowPosition, 0);
 			setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getHeight());

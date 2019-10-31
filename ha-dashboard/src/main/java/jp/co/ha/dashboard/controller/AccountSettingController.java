@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.controller;
 
-import java.util.List;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -81,7 +81,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		});
 
 		if (BeanUtil.notNull(mailInfo)) {
-			BeanUtil.copy(mailInfo, accountSettingForm, List.of("userId"));
+			BeanUtil.copy(mailInfo, accountSettingForm, Arrays.asList("userId"));
 		}
 
 		return accountSettingForm;

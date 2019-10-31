@@ -35,8 +35,8 @@ public class ReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelModel> 
 	 */
 	@Override
 	protected void writeData(Sheet sheet) {
-		var rowPosition = this.conf.hasHeader() ? 1 : 0;
-		for (var i = 0; i < this.modelList.size(); i++) {
+		int rowPosition = this.conf.hasHeader() ? 1 : 0;
+		for (int i = 0; i < this.modelList.size(); i++) {
 			ReferenceExcelModel model = modelList.get(i);
 			Cell cell = getCell(sheet, rowPosition + i, 0);
 			setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getHeight());

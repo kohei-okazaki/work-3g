@@ -105,7 +105,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	@Override
 	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
 		CsvConfig csvConfig = new CsvConfig();
-		var fileName = "healthInfoRegist_"
+		String fileName = "healthInfoRegist_"
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
 				+ FileExtension.CSV.getValue();
 		csvConfig.setFileName(fileName);
