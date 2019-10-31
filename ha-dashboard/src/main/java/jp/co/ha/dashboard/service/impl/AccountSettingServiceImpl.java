@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.service.impl;
 
-import java.util.List;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,7 +87,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	 */
 	private void mergeAccount(AccountDto dto, Account account) {
 
-		BeanUtil.copy(dto, account, List.of("userId"), (src, dest) -> {
+		BeanUtil.copy(dto, account, Arrays.asList("userId"), (src, dest) -> {
 			AccountDto srcDto = (AccountDto) src;
 			Account destEntity = (Account) dest;
 			destEntity.setPasswordExpire(DateUtil.toDate(srcDto.getPasswordExpire(), DateFormatType.YYYYMMDD));

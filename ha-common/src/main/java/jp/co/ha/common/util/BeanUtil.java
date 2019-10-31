@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -237,7 +238,7 @@ public class BeanUtil {
 		List<Field> fieldList = new ArrayList<>();
 		Class<?> tmpClass = clazz;
 		while (BeanUtil.notNull(tmpClass)) {
-			fieldList.addAll(List.of(tmpClass.getDeclaredFields()));
+			fieldList.addAll(Arrays.asList(tmpClass.getDeclaredFields()));
 			tmpClass = tmpClass.getSuperclass();
 		}
 		return fieldList;

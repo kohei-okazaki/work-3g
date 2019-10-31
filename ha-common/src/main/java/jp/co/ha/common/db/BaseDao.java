@@ -21,14 +21,15 @@ import jp.co.ha.common.util.BeanUtil;
  * @deprecated MyBatisを利用するため
  * @since 1.0
  */
+@Deprecated
 public abstract class BaseDao {
 
 	/** LOG */
 	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	/** Connection */
-	private Connection con;
+	protected Connection con;
 	/** Statement */
-	private Statement stm;
+	protected Statement stm;
 	/** ResultSet */
 	protected ResultSet rs;
 
@@ -103,7 +104,6 @@ public abstract class BaseDao {
 		} catch (SQLException e) {
 			throw new SystemException(CommonErrorCode.DB_SQL_EXE_ERROR, "SQLの実行に失敗しました", e);
 		}
-
 	}
 
 	/**

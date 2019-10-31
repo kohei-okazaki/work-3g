@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.service.impl;
 
-import java.util.List;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +42,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		// 健康情報Excelモデルに変換
 		HealthInfoExcelModel model = toModel(healthInfo);
 
-		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), List.of(model));
+		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), Arrays.asList(model));
 	}
 
 	/**
