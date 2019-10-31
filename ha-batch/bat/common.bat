@@ -14,7 +14,7 @@ set CLASSPATH=C:\Users\HOGE\.m2\repository\org\mybatis\generator\mybatis-generat
 rem バッチ起動クラス
 set MAIN=jp.co.ha.batch.invoke.BatchEntry
 rem Java
-set JAVA=C:\app\pleiades\java\11\bin\java
+set JAVA=C:\app\pleiades\java\8\bin\java
 
 rem 文字コードをUTF-8に変更する
 chcp 65001
