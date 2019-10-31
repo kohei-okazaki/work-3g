@@ -65,7 +65,6 @@ public class LoginController implements BaseWebController {
 	@NonAuth
 	@GetMapping("/index")
 	public String index(HttpServletRequest request) {
-
 		sessionService.removeValues(request.getSession());
 		return getView(DashboardView.LOGIN);
 	}
@@ -119,10 +118,12 @@ public class LoginController implements BaseWebController {
 	 *     HttpServletRequest
 	 * @return TOP画面
 	 */
+	@NonAuth
 	@GetMapping("/top")
 	public String top(HttpServletRequest request) {
-
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+		// jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
+		// ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
+		String userId = sessionService.getValue(request.getSession(), "userId", String.class).orElse(null);
 		return getView(StringUtil.isEmpty(userId) ? DashboardView.LOGIN : DashboardView.TOP);
 	}
 }
