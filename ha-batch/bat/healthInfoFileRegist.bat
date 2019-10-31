@@ -11,6 +11,6 @@ call common.bat
 cd %BASE_DIR%\ha-batch\target\classes
 
 rem システム環境変数のJava(JAVA_HOME)だとeclipseでコンパイルしたときのJavaのversionと異なるので、直接、eclipseのJavaで実行する
-%JAVA% -cp .\;%CLASSPATH% %MAIN% HealthInfoFileRegistBatch
+%JAVA% -cp %CLASSPATH% %MAIN% HealthInfoFileRegistBatch
 
 cd %~dp0
