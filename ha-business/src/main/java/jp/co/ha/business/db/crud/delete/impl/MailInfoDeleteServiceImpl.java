@@ -11,7 +11,8 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
  * メール情報削除サービスインターフェース実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class MailInfoDeleteServiceImpl implements MailInfoDeleteService {

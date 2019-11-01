@@ -9,7 +9,8 @@ import jp.co.ha.common.function.ListOperatorFunction;
 
 /**
  * CollectionのUtilクラス
- *
+ * 
+ * @since 1.0
  */
 public class CollectionUtil {
 

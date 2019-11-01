@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Max;
  * 最大桁数の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Max
- *
+ * @since 1.0
  */
 public class MaxValidator implements ConstraintValidator<Max, Object> {
 

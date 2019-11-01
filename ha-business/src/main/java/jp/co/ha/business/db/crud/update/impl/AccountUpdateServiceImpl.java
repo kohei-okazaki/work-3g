@@ -12,7 +12,8 @@ import jp.co.ha.db.mapper.AccountMapper;
 
 /**
  * アカウント情報更新サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class AccountUpdateServiceImpl implements AccountUpdateService {

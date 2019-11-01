@@ -5,7 +5,8 @@ import java.math.RoundingMode;
 
 /**
  * 四則演算オペレータインターフェース
- *
+ * 
+ * @since 1.0
  */
 @FunctionalInterface
 public interface CalcOperatorFunction {

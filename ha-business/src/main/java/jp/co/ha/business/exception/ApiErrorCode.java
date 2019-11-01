@@ -6,7 +6,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * APIのエラーコード列挙
- *
+ * 
+ * @since 1.0
  */
 public enum ApiErrorCode implements BaseErrorCode, BaseEnum {
 

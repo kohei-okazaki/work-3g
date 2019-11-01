@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
 
 /**
  * DBへのSelect処理を行うメソッドにつけるマーカーアノテーション
- *
+ * 
+ * @since 1.0
  */
 @Inherited
 @Documented

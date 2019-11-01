@@ -7,7 +7,8 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
  * 健康情報計算サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface HealthInfoCalcService {
 
@@ -25,7 +26,7 @@ public interface HealthInfoCalcService {
 	/**
 	 * 単位を以下に変換する<br>
 	 * cm → m
-	 * 
+	 *
 	 * @param centiMeter
 	 *     センチメートル
 	 *

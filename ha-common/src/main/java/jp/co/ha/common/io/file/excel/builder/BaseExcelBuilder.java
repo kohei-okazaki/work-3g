@@ -25,6 +25,7 @@ import jp.co.ha.common.util.CollectionUtil;
  *
  * @param <T>
  *     Excel出力モデル
+ * @since 1.0
  */
 public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends AbstractXlsxView {
 

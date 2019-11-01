@@ -10,7 +10,8 @@ import jp.co.ha.common.exception.SystemException;
 
 /**
  * 文字列のUtilクラス
- *
+ * 
+ * @since 1.0
  */
 public class StringUtil {
 

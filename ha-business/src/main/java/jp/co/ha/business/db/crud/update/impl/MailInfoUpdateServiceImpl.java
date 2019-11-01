@@ -12,7 +12,8 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
  * メール情報更新サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {

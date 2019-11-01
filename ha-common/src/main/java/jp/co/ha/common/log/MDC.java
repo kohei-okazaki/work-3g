@@ -6,7 +6,8 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * Logの追加情報を管理するクラス
- *
+ * 
+ * @since 1.0
  */
 public class MDC {
 

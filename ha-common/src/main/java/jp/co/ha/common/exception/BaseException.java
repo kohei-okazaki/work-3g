@@ -2,7 +2,8 @@ package jp.co.ha.common.exception;
 
 /**
  * アプリ内で扱う基底例外クラス
- *
+ * 
+ * @since 1.0
  */
 public abstract class BaseException extends Exception {
 

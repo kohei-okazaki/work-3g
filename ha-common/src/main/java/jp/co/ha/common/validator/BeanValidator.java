@@ -33,6 +33,7 @@ import jp.co.ha.common.validator.annotation.ValidateIgnore;
  *
  * @param <T>
  *     検査対象クラス
+ * @since 1.0
  */
 @Component
 public class BeanValidator<T> {

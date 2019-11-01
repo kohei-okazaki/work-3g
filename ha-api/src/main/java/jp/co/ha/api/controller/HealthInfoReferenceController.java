@@ -12,7 +12,8 @@ import jp.co.ha.web.controller.BaseRestController;
 
 /**
  * 健康情報照会コントローラ
- *
+ * 
+ * @since 1.0
  */
 @RestController
 @RequestMapping(value = "/healthInfoReference")

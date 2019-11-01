@@ -4,7 +4,8 @@ import jp.co.ha.common.exception.BaseException;
 
 /**
  * 健康情報ファイル設定削除サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface HealthInfoFileSettingDeleteService {
 

@@ -15,7 +15,8 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * 結果照会CSVWriterクラス
- *
+ * 
+ * @since 1.0
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 

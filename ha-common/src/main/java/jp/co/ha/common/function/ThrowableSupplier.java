@@ -8,13 +8,14 @@ import jp.co.ha.common.exception.BaseException;
  *
  * @param <T>
  *     T型
+ * @since 1.0
  */
 @FunctionalInterface
 public interface ThrowableSupplier<T> {
 
 	/**
 	 * 関数を実行する
-	 * 
+	 *
 	 * @return T
 	 * @throws BaseException
 	 *     基底例外

@@ -8,14 +8,15 @@ import jp.co.ha.web.service.BaseApiService;
 
 /**
  * 健康情報登録サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface HealthInfoRegistService
 		extends BaseApiService<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
 	/**
 	 * リクエスト情報を健康情報に変換する
-	 * 
+	 *
 	 * @param request
 	 *     健康情報登録リクエスト
 	 * @return 健康情報Entity

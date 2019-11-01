@@ -4,7 +4,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * 健康情報設定ファイル
- *
+ * 
+ * @since 1.0
  */
 @Component
 public class HealthInfoProperties {

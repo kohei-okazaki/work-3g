@@ -10,7 +10,8 @@ import jp.co.ha.common.exception.BaseException;
 /**
  * 基底Batchクラス<br>
  * すべてのBatchクラスはこのクラスを継承する
- *
+ * 
+ * @since 1.0
  */
 public abstract class BaseBatch {
 

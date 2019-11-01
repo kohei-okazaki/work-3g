@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
 
 /**
  * ログ出力非対象項目につけるマーカーアノテーション
- *
+ * 
+ * @since 1.0
  */
 @Inherited
 @Documented

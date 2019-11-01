@@ -12,7 +12,7 @@ import jp.co.ha.common.validator.annotation.Url;
  * URL妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Url
- *
+ * @since 1.0
  */
 public class UrlValidator implements ConstraintValidator<Url, Object> {
 

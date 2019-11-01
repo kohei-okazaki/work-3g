@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * session管理サービス
+ * 
+ * @since 1.0
  *
  */
 public interface SessionManageService {
@@ -45,7 +47,8 @@ public interface SessionManageService {
 	 * 呼び出し元で以下の方法でT型に変換して下さい<br>
 	 * <ul>
 	 * <li>getValue(session, "key", T.class).get()</li>
-	 * <li>getValue(session, "key", T.class).orElseThrow(() -> new SystemException())</li>
+	 * <li>getValue(session, "key", T.class).orElseThrow(() -> new
+	 * SystemException())</li>
 	 * </ul>
 	 *
 	 * @param session

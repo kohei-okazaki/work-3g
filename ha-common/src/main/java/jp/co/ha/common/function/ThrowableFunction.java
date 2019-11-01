@@ -10,6 +10,7 @@ import jp.co.ha.common.exception.BaseException;
  *     T型
  * @param <R>
  *     R型
+ * @since 1.0
  */
 @FunctionalInterface
 public interface ThrowableFunction<T, R> {

@@ -13,7 +13,8 @@ import jp.co.ha.common.type.Charset;
 
 /**
  * SHA-512ハッシュ値作成クラス
- *
+ * 
+ * @since 1.0
  */
 @Component("sha512HashEncoder")
 public class Sha512HashEncoder implements HashEncoder {

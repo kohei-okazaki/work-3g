@@ -17,7 +17,7 @@ import jp.co.ha.common.validator.DateValidator;
  * 日付の妥当性チェックのアノテーション
  *
  * @see jp.co.ha.common.validator.DateValidator
- *
+ * @since 1.0
  */
 @Inherited
 @Documented

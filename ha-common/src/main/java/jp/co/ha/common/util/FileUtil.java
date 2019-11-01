@@ -23,6 +23,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ファイル操作のUtilクラス
+ * 
+ * @since 1.0
  */
 public class FileUtil {
 

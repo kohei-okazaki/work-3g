@@ -11,6 +11,7 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
  *
  * @param <T>
  *     Excel出力情報設定情報継承クラス
+ * @since 1.0
  */
 public interface ExcelDownloadService<T extends BaseExcelComponent> {
 

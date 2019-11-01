@@ -15,7 +15,8 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * 健康情報CSVWriterクラス
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 

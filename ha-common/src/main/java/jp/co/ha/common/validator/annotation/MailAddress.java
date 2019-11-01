@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.MailAddressValidator;
  * メールアドレス形式妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MailAddressValidator
- *
+ * @since 1.0
  */
 @Inherited
 @Documented

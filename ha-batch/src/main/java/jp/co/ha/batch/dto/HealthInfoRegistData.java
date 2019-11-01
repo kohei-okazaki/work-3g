@@ -5,7 +5,8 @@ import java.util.List;
 
 /**
  * 健康情報登録情報
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoRegistData {
 

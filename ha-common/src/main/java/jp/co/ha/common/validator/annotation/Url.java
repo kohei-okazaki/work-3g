@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.UrlValidator;
  * URL形式の妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.UrlValidator
- *
+ * @since 1.0
  */
 @Inherited
 @Documented

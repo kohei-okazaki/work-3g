@@ -2,7 +2,8 @@ package jp.co.ha.common.exception;
 
 /**
  * API例外クラス
- *
+ * 
+ * @since 1.0
  */
 public class ApiException extends BaseException {
 

@@ -4,7 +4,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 体型の列挙
- *
+ * 
+ * @since 1.0
  */
 public enum BodyType implements BaseEnum {
 

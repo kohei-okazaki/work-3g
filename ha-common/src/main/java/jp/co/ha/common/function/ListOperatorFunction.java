@@ -7,6 +7,7 @@ import java.util.List;
  *
  * @param <T>
  *     返す要素の型
+ * @since 1.0
  */
 @FunctionalInterface
 public interface ListOperatorFunction<T> {

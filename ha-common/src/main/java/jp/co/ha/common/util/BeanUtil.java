@@ -18,6 +18,8 @@ import jp.co.ha.common.log.LoggerFactory;
 
 /**
  * Bean系のUtilクラス
+ *
+ * @since 1.0
  */
 public class BeanUtil {
 

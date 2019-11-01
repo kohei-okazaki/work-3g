@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.MinValidator;
  * 最小桁数の妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MinValidator
- *
+ * @since 1.0
  */
 @Inherited
 @Documented

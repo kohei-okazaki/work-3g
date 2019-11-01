@@ -23,7 +23,8 @@ import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報登録サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class HealthInfoRegistServiceImpl extends CommonService implements HealthInfoRegistService {

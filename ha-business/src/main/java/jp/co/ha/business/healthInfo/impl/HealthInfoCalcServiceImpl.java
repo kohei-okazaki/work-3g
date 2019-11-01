@@ -15,7 +15,8 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
  * 健康情報計算サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {

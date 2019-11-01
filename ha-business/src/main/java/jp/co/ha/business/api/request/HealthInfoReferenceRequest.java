@@ -8,7 +8,8 @@ import jp.co.ha.common.validator.annotation.Required;
 
 /**
  * 健康情報照会リクエストクラス
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoReferenceRequest extends CommonApiRequest {
 
