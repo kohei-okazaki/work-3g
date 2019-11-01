@@ -6,7 +6,7 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ダッシュボードのエラーコード列挙
- * 
+ *
  * @since 1.0
  */
 public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
@@ -15,19 +15,19 @@ public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
 
 	/* WARN */
 	/** アカウント存在チェックエラー */
-	ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "WW_001", LogLevel.WARN),
+	ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "DW0022", LogLevel.WARN),
 	/** アカウント不整合エラー */
-	ACCOUNT_DELETE("ACCOUNT_DELETE", "WW_002", LogLevel.WARN),
+	ACCOUNT_DELETE("ACCOUNT_DELETE", "DW0023", LogLevel.WARN),
 	/** アカウント存在エラー */
-	ACCOUNT_EXIST("ACCOUNT_EXIST", "WW_003", LogLevel.WARN),
+	ACCOUNT_EXIST("ACCOUNT_EXIST", "DW0024", LogLevel.WARN),
 	/** アカウント不一致エラー */
-	ACCOUNT_INVALID_PASSWORD("ACCOUNT_INVALID_PASSWORD", "WW_004", LogLevel.WARN),
-	/** アカウント不一致エラー */
-	ACCOUNT_EXPIRED("ACCOUNT_EXPIRED", "WW_005", LogLevel.WARN),
+	ACCOUNT_INVALID_PASSWORD("ACCOUNT_INVALID_PASSWORD", "DW0025", LogLevel.WARN),
+	/** アカウント有効期限エラー */
+	ACCOUNT_EXPIRED("ACCOUNT_EXPIRED", "DW0026", LogLevel.WARN),
 	/** リクエスト情報エラー */
-	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "WW_006", LogLevel.WARN),
+	REQUEST_INFO_ERROR("REQUEST_INFO_ERROR", "DW0027", LogLevel.WARN),
 	/** 不正リクエストエラー */
-	ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "WW_007", LogLevel.WARN),
+	ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "DW0028", LogLevel.WARN),
 
 	;
 
