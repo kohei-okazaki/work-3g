@@ -5,7 +5,8 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報ファイル設定検索サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface HealthInfoFileSettingSearchService {
 

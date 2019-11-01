@@ -14,7 +14,8 @@ import jp.co.ha.common.util.BeanUtil;
 
 /**
  * HTTPクライアント
- *
+ * 
+ * @since 1.0
  */
 public class HttpClient {
 

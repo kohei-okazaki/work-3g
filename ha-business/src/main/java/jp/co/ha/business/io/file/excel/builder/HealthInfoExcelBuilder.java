@@ -12,7 +12,8 @@ import jp.co.ha.common.log.MaskExecutor;
 
 /**
  * 健康情報入力画面Excel生成クラス
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelModel> {
 

@@ -19,7 +19,8 @@ import jp.co.ha.dashboard.view.DashboardView;
 
 /**
  * ダッシュボード例外ハンドラー
- *
+ * 
+ * @since 1.0
  */
 @Component
 public class DashboardExceptionHandler implements BaseExceptionHandler {

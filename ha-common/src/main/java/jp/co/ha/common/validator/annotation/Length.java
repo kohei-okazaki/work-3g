@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.LengthValidator;
  * 桁数妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.LengthValidator
- *
+ * @since 1.0
  */
 @Inherited
 @Documented

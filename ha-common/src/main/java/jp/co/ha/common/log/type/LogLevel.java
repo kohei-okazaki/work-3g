@@ -4,6 +4,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ログレベルの列挙
+ * 
+ * @since 1.0
  */
 public enum LogLevel implements BaseEnum {
 

@@ -4,7 +4,8 @@ import jp.co.ha.common.exception.BaseException;
 
 /**
  * アカウント削除サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface AccountDeleteService {
 

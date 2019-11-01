@@ -5,7 +5,8 @@ import jp.co.ha.db.entity.Account;
 
 /**
  * アカウント作成サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface AccountCreateService {
 

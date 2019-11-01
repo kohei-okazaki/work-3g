@@ -12,7 +12,8 @@ import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * 健康情報照会レスポンスクラス
- *
+ * 
+ * @since 1.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public class HealthInfoReferenceResponse extends BaseApiResponse {

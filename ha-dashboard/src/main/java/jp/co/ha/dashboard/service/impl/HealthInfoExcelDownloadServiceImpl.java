@@ -20,7 +20,8 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報Excelダウンロードサービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service("healthInfoDownloadExcel")
 public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfoExcelComponent> {

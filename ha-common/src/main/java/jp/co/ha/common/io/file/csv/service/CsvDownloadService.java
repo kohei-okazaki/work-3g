@@ -12,6 +12,7 @@ import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
  *
  * @param <T>
  *     CSVモデル
+ * @since 1.0
  */
 public interface CsvDownloadService<T extends BaseCsvModel> {
 

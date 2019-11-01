@@ -7,7 +7,8 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * 健康情報ファイル設定フォームクラス
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoFileSettingForm implements BaseForm {
 

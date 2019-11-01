@@ -4,6 +4,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * HTTPステータス列挙
+ * 
+ * @since 1.0
  */
 public enum HttpStatus implements BaseEnum {
 

@@ -5,7 +5,8 @@ import java.util.Map;
 
 /**
  * HTTPクライアントの設定情報保持クラス
- *
+ * 
+ * @since 1.0
  */
 public class HttpClientConfig {
 

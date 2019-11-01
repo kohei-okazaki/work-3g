@@ -15,7 +15,8 @@ import jp.co.ha.common.util.StringUtil.PaddingType;
 
 /**
  * {@link StringUtil} のjUnit
- *
+ * 
+ * @since 1.0
  */
 public class StringUtilTest extends BaseCommonTest {
 

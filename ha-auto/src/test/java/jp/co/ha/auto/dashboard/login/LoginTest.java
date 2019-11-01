@@ -8,7 +8,8 @@ import jp.co.ha.auto.BaseAutoTest;
 
 /**
  * Login処理の自動テストクラス
- *
+ * 
+ * @since 1.0
  */
 public class LoginTest extends BaseAutoTest {
 

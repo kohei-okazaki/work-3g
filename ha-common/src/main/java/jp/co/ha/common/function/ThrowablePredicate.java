@@ -8,6 +8,7 @@ import jp.co.ha.common.exception.BaseException;
  *
  * @param <T>
  *     T型
+ * @since 1.0
  */
 @FunctionalInterface
 public interface ThrowablePredicate<T> {

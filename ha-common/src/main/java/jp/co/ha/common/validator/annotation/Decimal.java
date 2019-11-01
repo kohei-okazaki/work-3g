@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.DecimalValidator;
  * 浮動小数妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.DecimalValidator
- *
+ * @since 1.0
  */
 @Inherited
 @Documented

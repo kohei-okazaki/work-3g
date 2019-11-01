@@ -11,7 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * 結果照会CSVダウンロードサービス実装クラスのマーカーアノテーション
- *
+ * 
+ * @since 1.0
  */
 @Inherited
 @Documented

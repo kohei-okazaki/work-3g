@@ -12,6 +12,7 @@ import jp.co.ha.common.exception.BaseException;
  *     U型
  * @param <R>
  *     R型
+ * @since 1.0
  */
 @FunctionalInterface
 public interface ThrowableBiFunction<T, U, R> {

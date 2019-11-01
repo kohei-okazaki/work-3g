@@ -11,7 +11,8 @@ import jp.co.ha.business.BaseBusinessTest;
 
 /**
  * {@link Calculator} のjUnit
- *
+ * 
+ * @since 1.0
  */
 public class CalculatorTest extends BaseBusinessTest {
 

@@ -13,6 +13,8 @@ import jp.co.ha.common.util.BeanUtil;
 
 /**
  * Bean読込クラス
+ * 
+ * @since 1.0
  */
 public class BeanLoader {
 

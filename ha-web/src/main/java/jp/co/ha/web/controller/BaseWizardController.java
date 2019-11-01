@@ -15,6 +15,7 @@ import jp.co.ha.web.form.BaseForm;
  *
  * @param <F>
  *     対象formクラス
+ * @since 1.0
  */
 public interface BaseWizardController<F extends BaseForm> extends BaseWebController {
 

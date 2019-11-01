@@ -12,7 +12,7 @@ import jp.co.ha.common.validator.annotation.MailAddress;
  * メールアドレス形式の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.MailAddress
- *
+ * @since 1.0
  */
 public class MailAddressValidator implements ConstraintValidator<MailAddress, Object> {
 

@@ -11,7 +11,8 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * 健康情報ファイル入力画面フォームクラス
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoFileForm implements BaseForm {
 

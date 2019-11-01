@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Min;
  * 最小桁数の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Min
- *
+ * @since 1.0
  */
 public class MinValidator implements ConstraintValidator<Min, Object> {
 

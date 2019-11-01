@@ -17,7 +17,8 @@ import jp.co.ha.common.util.DateUtil;
 
 /**
  * Requestインターセプター
- *
+ * 
+ * @since 1.0
  */
 public class RequestInterceptor extends BaseWebInterceptor {
 

@@ -10,10 +10,11 @@ import jp.co.ha.common.log.annotation.Mask;
 /**
  * 結果照会CSVダウンロードモデル<br>
  * CSV出力したい項目のみを持つ
- *
+ * 
+ * @since 1.0
  */
-@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "健康情報作成日時" }
-				, footerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "健康情報作成日時" })
+@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "健康情報作成日時" }, footerNames = { "ユーザID", "身長", "体重",
+		"BMI", "標準体重", "健康情報作成日時" })
 public class ReferenceCsvDownloadModel implements BaseCsvModel {
 
 	/** ユーザID */

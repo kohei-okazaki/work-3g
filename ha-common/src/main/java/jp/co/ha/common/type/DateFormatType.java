@@ -2,6 +2,8 @@ package jp.co.ha.common.type;
 
 /**
  * 日付の列挙
+ * 
+ * @since 1.0
  */
 public enum DateFormatType implements BaseEnum {
 

@@ -7,7 +7,8 @@ import jp.co.ha.business.healthInfo.type.GenderType;
 
 /**
  * カロリー計算DTO
- *
+ * 
+ * @since 1.0
  */
 public class CalorieCalcDto {
 

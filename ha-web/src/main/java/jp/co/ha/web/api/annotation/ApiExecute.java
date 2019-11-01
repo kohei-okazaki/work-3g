@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
 
 /**
  * API実行のマーカーアノテーション
- *
+ * 
+ * @since 1.0
  */
 @Inherited
 @Documented

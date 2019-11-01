@@ -2,6 +2,7 @@ package jp.co.ha.tool.build;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.StringJoiner;
 
 import jp.co.ha.common.io.file.property.reader.PropertyReader;
 import jp.co.ha.common.log.Logger;
@@ -67,7 +68,9 @@ public abstract class BaseBuilder {
 	 */
 	protected ExcelConfig getExcelConfig() {
 		ExcelConfig conf = new ExcelConfig();
-		conf.setFilePath("META-INF" + FileSeparator.SYSTEM.getValue() + "DB.xlsx");
+		StringJoiner sj = new StringJoiner(FileSeparator.SYSTEM.getValue());
+		sj.add(this.baseDir).add("ha-resource").add("02_db").add("DB.xlsx");
+		conf.setFilePath(sj.toString());
 		conf.setSheetName("TABLE_LIST");
 		return conf;
 	}
@@ -83,19 +86,19 @@ public abstract class BaseBuilder {
 		FileConfig conf = new FileConfig();
 		switch (execType) {
 		case DDL:
-			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\ddl");
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\02_db\\ddl");
 			break;
 		case ENTITY:
 			conf.setOutputPath(this.baseDir + "\\ha-tool\\src\\main\\java\\jp\\co\\ha\\tool\\source");
 			break;
 		case DROP:
-			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\drop");
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\02_db\\drop");
 			break;
 		case DML:
-			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\dml");
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\02_db\\dml");
 			break;
 		case TABLE_DEFINE:
-			conf.setOutputPath(this.baseDir + "\\ha-resource\\db\\others");
+			conf.setOutputPath(this.baseDir + "\\ha-resource\\02_db\\others");
 			break;
 		default:
 			LOG.warn("SQL生成の指定が間違っています execType:" + execType.getValue());

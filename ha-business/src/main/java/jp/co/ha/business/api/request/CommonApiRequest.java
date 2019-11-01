@@ -16,7 +16,8 @@ import jp.co.ha.web.form.BaseApiRequest;
 
 /**
  * API共通リクエスト
- *
+ * 
+ * @since 1.0
  */
 public abstract class CommonApiRequest extends BaseApiRequest {
 

@@ -12,7 +12,7 @@ import jp.co.ha.common.validator.annotation.Flag;
  * フラグの妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Flag
- *
+ * @since 1.0
  */
 public class FlagValidator implements ConstraintValidator<Flag, Object> {
 

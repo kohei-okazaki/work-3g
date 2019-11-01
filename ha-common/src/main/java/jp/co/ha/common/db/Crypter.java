@@ -2,7 +2,8 @@ package jp.co.ha.common.db;
 
 /**
  * 暗号化インターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface Crypter {
 

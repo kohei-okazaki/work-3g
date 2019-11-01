@@ -36,7 +36,8 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報_入力画面サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {

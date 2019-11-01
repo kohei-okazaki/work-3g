@@ -5,7 +5,8 @@ import jp.co.ha.common.type.Charset;
 /**
  * Excel設定情報保持クラス<br>
  * 今後、追加するExcel設定情報は本クラスで定義する<br>
- *
+ * 
+ * @since 1.0
  */
 public class ExcelConfig {
 

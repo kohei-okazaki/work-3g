@@ -13,7 +13,8 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
  * {@link HealthInfoCalcService} のjUnit
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoCalcServiceTest extends BaseBusinessTest {
 

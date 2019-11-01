@@ -22,6 +22,8 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
  * Propertyの読み取りクラス
+ * 
+ * @since 1.0
  */
 public class PropertyReader {
 

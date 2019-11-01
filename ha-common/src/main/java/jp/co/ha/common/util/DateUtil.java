@@ -16,6 +16,9 @@ import jp.co.ha.common.type.DateFormatType;
 
 /**
  * 日付のUtilクラス
+ *
+ * @since 1.0
+ *
  */
 public class DateUtil {
 

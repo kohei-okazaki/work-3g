@@ -10,7 +10,8 @@ import jp.co.ha.web.type.ResultType;
 
 /**
  * JSONのAPIの結果コードのシリアライズクラス
- *
+ * 
+ * @since 1.0
  */
 public class ResultTypeSerializer extends JsonSerializer<ResultType> {
 

@@ -2,6 +2,8 @@ package jp.co.ha.common.validator;
 
 /**
  * 妥当性チェックエラー
+ * 
+ * @since 1.0
  */
 public class ValidateError {
 

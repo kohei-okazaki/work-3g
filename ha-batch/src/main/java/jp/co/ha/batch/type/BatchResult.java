@@ -4,7 +4,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * Batch結果列挙
- *
+ * 
+ * @since 1.0
  */
 public enum BatchResult implements BaseEnum {
 

@@ -4,6 +4,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * CSVファイル囲い文字列挙
+ * 
+ * @since 1.0
  */
 public enum CsvFileChar implements BaseEnum {
 

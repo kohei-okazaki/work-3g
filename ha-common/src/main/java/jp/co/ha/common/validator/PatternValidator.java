@@ -12,7 +12,7 @@ import jp.co.ha.common.validator.annotation.Pattern;
  * 型妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Pattern
- *
+ * @since 1.0
  */
 public class PatternValidator implements ConstraintValidator<Pattern, Object> {
 

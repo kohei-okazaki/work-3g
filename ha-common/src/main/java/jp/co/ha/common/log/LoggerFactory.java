@@ -2,7 +2,8 @@ package jp.co.ha.common.log;
 
 /**
  * ロガーファクトリークラス
- *
+ * 
+ * @since 1.0
  */
 public class LoggerFactory {
 

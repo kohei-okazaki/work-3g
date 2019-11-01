@@ -4,6 +4,8 @@ import java.util.function.Predicate;
 
 /**
  * 正規表現の列挙
+ * 
+ * @since 1.0
  */
 public enum RegixType implements BaseEnum {
 

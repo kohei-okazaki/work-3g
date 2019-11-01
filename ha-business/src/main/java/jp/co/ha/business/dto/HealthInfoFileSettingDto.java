@@ -2,7 +2,8 @@ package jp.co.ha.business.dto;
 
 /**
  * 健康情報ファイルDTO
- *
+ * 
+ * @since 1.0
  */
 public class HealthInfoFileSettingDto {
 

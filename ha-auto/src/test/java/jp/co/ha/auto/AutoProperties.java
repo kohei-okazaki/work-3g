@@ -4,7 +4,8 @@ import jp.co.ha.common.io.file.property.annotation.Property;
 
 /**
  * auto.proertiesのBean
- *
+ * 
+ * @since 1.0
  */
 public class AutoProperties {
 
@@ -23,7 +24,7 @@ public class AutoProperties {
 
 	/**
 	 * browserを返す
-	 * 
+	 *
 	 * @return browser
 	 */
 	public String getBrowser() {
@@ -32,7 +33,7 @@ public class AutoProperties {
 
 	/**
 	 * browserを設定する
-	 * 
+	 *
 	 * @param browser
 	 */
 	public void setBrowser(String browser) {

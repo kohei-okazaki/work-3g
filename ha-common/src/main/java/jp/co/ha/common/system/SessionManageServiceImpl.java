@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * session管理サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class SessionManageServiceImpl implements SessionManageService {

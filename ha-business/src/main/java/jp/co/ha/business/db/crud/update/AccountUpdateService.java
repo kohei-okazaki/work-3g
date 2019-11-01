@@ -5,7 +5,8 @@ import jp.co.ha.db.entity.Account;
 
 /**
  * アカウント情報更新サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface AccountUpdateService {
 

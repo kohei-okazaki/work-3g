@@ -23,7 +23,8 @@ import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_カロリー計算画面コントローラ
- *
+ * 
+ * @since 1.0
  */
 @Controller
 @RequestMapping("caloriecalc")

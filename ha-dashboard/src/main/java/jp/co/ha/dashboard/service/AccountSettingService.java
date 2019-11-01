@@ -5,7 +5,8 @@ import jp.co.ha.common.exception.BaseException;
 
 /**
  * アカウント設定サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface AccountSettingService {
 

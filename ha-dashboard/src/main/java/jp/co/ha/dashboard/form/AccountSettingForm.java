@@ -14,7 +14,8 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * アカウント設定画面フォームクラス
- *
+ * 
+ * @since 1.0
  */
 public class AccountSettingForm implements BaseForm {
 

@@ -5,7 +5,8 @@ import jp.co.ha.db.entity.MailInfo;
 
 /**
  * メール情報作成サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface MailInfoCreateService {
 

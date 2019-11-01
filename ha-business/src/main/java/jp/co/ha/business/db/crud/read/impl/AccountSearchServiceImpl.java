@@ -12,7 +12,8 @@ import jp.co.ha.db.mapper.AccountMapper;
 
 /**
  * アカウント情報検索サービスインターフェース実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class AccountSearchServiceImpl implements AccountSearchService {

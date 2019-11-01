@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.MaxValidator;
  * 最大桁数の妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MaxValidator
- *
+ * @since 1.0
  */
 @Inherited
 @Documented

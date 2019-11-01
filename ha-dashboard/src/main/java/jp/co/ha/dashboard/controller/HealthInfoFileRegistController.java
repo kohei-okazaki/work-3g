@@ -33,7 +33,8 @@ import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康情報一括登録画面コントローラ
- *
+ * 
+ * @since 1.0
  */
 @Controller
 @RequestMapping("healthinfofile")

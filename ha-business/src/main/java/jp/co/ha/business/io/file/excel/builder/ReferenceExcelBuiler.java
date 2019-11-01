@@ -14,7 +14,8 @@ import jp.co.ha.common.util.DateUtil;
 
 /**
  * 結果照会画面Excel生成クラス
- *
+ * 
+ * @since 1.0
  */
 public class ReferenceExcelBuiler extends BaseExcelBuilder<ReferenceExcelModel> {
 

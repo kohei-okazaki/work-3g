@@ -14,7 +14,8 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報ファイル設定サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class HealthInfoFileSettingServiceImpl implements HealthInfoFileSettingService {

@@ -15,7 +15,8 @@ import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * API通信共通クラス
- *
+ * 
+ * @since 1.0
  */
 @Aspect
 @Component
