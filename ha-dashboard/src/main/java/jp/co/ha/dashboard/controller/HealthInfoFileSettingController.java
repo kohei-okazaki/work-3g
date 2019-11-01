@@ -29,7 +29,8 @@ import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_健康情報ファイル設定コントローラ
- *
+ * 
+ * @since 1.0
  */
 @Controller
 @RequestMapping("healthinfofilesetting")

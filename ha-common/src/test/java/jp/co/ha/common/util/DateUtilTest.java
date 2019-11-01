@@ -10,7 +10,8 @@ import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link DateUtil} のjUnit
- *
+ * 
+ * @since 1.0
  */
 public class DateUtilTest extends BaseCommonTest {
 

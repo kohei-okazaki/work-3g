@@ -4,7 +4,8 @@ import jp.co.ha.business.dto.CalorieCalcDto;
 
 /**
  * カロリー計算サービスインターフェース
- *
+ * 
+ * @since 1.0
  */
 public interface CalorieCalcService {
 

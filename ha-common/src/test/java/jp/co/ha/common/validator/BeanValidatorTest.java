@@ -15,6 +15,8 @@ import jp.co.ha.common.validator.annotation.Required;
 
 /**
  * {@link BeanValidator} のjUnit
+ * 
+ * @since 1.0
  */
 public class BeanValidatorTest extends BaseCommonTest {
 

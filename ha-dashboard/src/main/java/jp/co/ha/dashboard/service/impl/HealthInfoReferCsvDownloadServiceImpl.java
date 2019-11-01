@@ -23,7 +23,8 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
  * 健康情報照会画面CSVダウンロードサービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service("referenceDownloadCsv")
 public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService<ReferenceCsvDownloadModel> {

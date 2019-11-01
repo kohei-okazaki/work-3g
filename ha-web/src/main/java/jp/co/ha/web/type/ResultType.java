@@ -4,7 +4,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * APIの結果コードの列挙
- *
+ * 
+ * @since 1.0
  */
 public enum ResultType implements BaseEnum {
 

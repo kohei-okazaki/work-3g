@@ -10,7 +10,8 @@ import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link AesCrypter} のjUnit
- *
+ * 
+ * @since 1.0
  */
 public class AesCrypterTest extends BaseCommonTest {
 

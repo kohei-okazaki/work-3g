@@ -9,7 +9,8 @@ import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link JdbcConfig} のjUnit
- *
+ * 
+ * @since 1.0
  */
 public class JdbcConfigTest extends BaseCommonTest {
 

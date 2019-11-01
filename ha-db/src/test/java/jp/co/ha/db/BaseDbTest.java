@@ -13,7 +13,8 @@ import jp.co.ha.common.system.BeanLoader;
 
 /**
  * 基底dbテストクラス
- *
+ * 
+ * @since 1.0
  */
 @ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -18,7 +18,8 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * アカウント作成サービス実装クラス
- *
+ * 
+ * @since 1.0
  */
 @Service
 public class AccountRegistServiceImpl implements AccountRegistService {

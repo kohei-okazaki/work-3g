@@ -11,7 +11,8 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * ログインフォームクラス
- *
+ * 
+ * @since 1.0
  */
 public class LoginForm implements BaseForm {
 

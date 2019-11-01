@@ -29,7 +29,8 @@ import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_ログイン画面コントローラ
- *
+ * 
+ * @since 1.0
  */
 @Controller
 @RequestMapping("login")

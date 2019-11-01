@@ -9,7 +9,8 @@ import jp.co.ha.web.type.ResultType;
 
 /**
  * API基底レスポンス
- *
+ * 
+ * @since 1.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public abstract class BaseApiResponse implements BaseForm {

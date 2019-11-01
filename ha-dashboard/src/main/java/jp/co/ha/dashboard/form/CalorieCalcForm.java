@@ -14,7 +14,8 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * カロリー計算画面フォーム
- *
+ * 
+ * @since 1.0
  */
 public class CalorieCalcForm implements BaseForm {
 
