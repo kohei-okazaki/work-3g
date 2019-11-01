@@ -1,5 +1,6 @@
 package jp.co.ha.tool.reader;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -46,7 +47,7 @@ public class ExcelReader extends BaseFileReader {
 	public Excel read() {
 
 		Iterator<Sheet> sheetIte;
-		try (Workbook wb = WorkbookFactory.create(getFile(conf.getFilePath()))) {
+		try (Workbook wb = WorkbookFactory.create(new File(conf.getFilePath()))) {
 			sheetIte = wb.sheetIterator();
 		} catch (EncryptedDocumentException | IOException e) {
 			LOG.error("excelファイル読込エラー", e);
@@ -57,6 +58,10 @@ public class ExcelReader extends BaseFileReader {
 		while (sheetIte.hasNext()) {
 			jp.co.ha.tool.excel.Sheet excelSheet = new jp.co.ha.tool.excel.Sheet();
 			Sheet sheet = sheetIte.next();
+			if (!"TABLE_LIST".equals(sheet.getSheetName())) {
+				// TABLE_LIST以外の場合、次のシートへ
+				continue;
+			}
 			excelSheet.setName(sheet.getSheetName());
 			Iterator<Row> rowIte = sheet.iterator();
 			while (rowIte.hasNext()) {
@@ -75,7 +80,7 @@ public class ExcelReader extends BaseFileReader {
 
 	/**
 	 * Cellを返す
-	 * 
+	 *
 	 * @param row
 	 *     Row
 	 * @param type
