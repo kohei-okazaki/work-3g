@@ -56,7 +56,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
 	 *     基底例外
 	 */
 	@PostMapping(headers = { "Content-type=application/json;charset=UTF-8" }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
+			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public Rs doPost(@RequestBody Rq request) throws BaseException {
 
 		ValidateErrorResult result = validator.validate(request);
