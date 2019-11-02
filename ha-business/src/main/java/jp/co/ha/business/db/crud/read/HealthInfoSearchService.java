@@ -8,7 +8,7 @@ import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報検索サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HealthInfoSearchService {
@@ -59,8 +59,8 @@ public interface HealthInfoSearchService {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	List<HealthInfo> findByUserIdBetweenRegDate(String userId, Date fromHealthInfoRegDate, Date toHealthInfoRegDate)
-			throws BaseException;
+	List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
+			Date toHealthInfoRegDate) throws BaseException;
 
 	/**
 	 * 指定された健康情報IDとユーザIDと一致する健康情報を返す

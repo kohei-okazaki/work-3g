@@ -1,5 +1,7 @@
 package jp.co.ha.business.db.crud.read.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +14,7 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
  * メール情報検索サービスインターフェース実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -28,7 +30,7 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 	@Select
 	@Override
 	@Transactional(readOnly = true)
-	public MailInfo findByUserId(String userId) throws BaseException {
-		return mapper.selectByPrimaryKey(userId);
+	public Optional<MailInfo> findByUserId(String userId) throws BaseException {
+		return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
 	}
 }

@@ -28,7 +28,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報照会画面サービスインターフェース実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -128,11 +128,11 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 		if (BeanUtil.isNull(dto.getHealthInfoId()) || StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
 			Date healthInfoRegDate = editStrDate(dto.getFromHealthInfoRegDate());
 			if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
+				resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(userId, healthInfoRegDate,
 						DateUtil.toEndDate(healthInfoRegDate));
 			} else {
 				Date toHealthInfoRegDate = editStrDate(dto.getToHealthInfoRegDate());
-				resultList = healthInfoSearchService.findByUserIdBetweenRegDate(userId, healthInfoRegDate,
+				resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(userId, healthInfoRegDate,
 						toHealthInfoRegDate);
 			}
 		} else {
