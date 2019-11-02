@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.service.impl;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import jp.co.ha.db.entity.MailInfo;
 
 /**
  * アカウント設定サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -53,27 +54,28 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 		Account befAccount = accountSearchService.findByUserId(dto.getUserId());
 		mergeAccount(dto, befAccount);
 
-		// メール情報を検索し、メール情報にフォームをマージする
-		MailInfo befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
-		if (BeanUtil.isNull(befMailInfo)) {
-			// メール情報が登録されてない場合
-			befMailInfo = new MailInfo();
-			mergeMailInfo(dto, befMailInfo);
-
-			// アカウント情報を更新する
-			accountUpdateService.update(befAccount);
-
-			// メール情報を新規登録する
-			mailInfoCreateService.create(befMailInfo);
-
-		} else {
-			mergeMailInfo(dto, befMailInfo);
+		// メール情報を検索
+		Optional<MailInfo> befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
+		if (befMailInfo.isPresent()) {
+			// メール情報が登録されている場合
+			mergeMailInfo(dto, befMailInfo.get());
 
 			// アカウント情報を更新する
 			accountUpdateService.update(befAccount);
 
 			// メール情報を更新する
-			mailInfoUpdateService.update(befMailInfo);
+			mailInfoUpdateService.update(befMailInfo.get());
+		} else {
+			// メール情報が登録されてない場合
+			MailInfo mailInfo = new MailInfo();
+
+			mergeMailInfo(dto, mailInfo);
+
+			// アカウント情報を更新する
+			accountUpdateService.update(befAccount);
+
+			// メール情報を新規登録する
+			mailInfoCreateService.create(mailInfo);
 		}
 
 	}

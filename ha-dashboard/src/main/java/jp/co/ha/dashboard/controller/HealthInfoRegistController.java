@@ -47,7 +47,7 @@ import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_健康情報登録画面コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -122,14 +122,13 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 	@PostMapping(value = "/complete")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseException {
 
+		HealthInfoDto dto = new HealthInfoDto();
+		BeanUtil.copy(form, dto);
 		// セッションからユーザIDを取得
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
-
-		HealthInfoDto dto = new HealthInfoDto();
-		BeanUtil.copy(form, dto);
 
 		if (!isFirstReg) {
 			// 初回登録でない場合
@@ -168,7 +167,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
-			throw new BusinessException(DashboardErrorCode.REQUEST_INFO_ERROR, "session情報が不正です");
+			throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 		HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
 		HealthInfoExcelComponent component = new HealthInfoExcelComponent();
@@ -197,13 +196,13 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 				userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
-			throw new BusinessException(DashboardErrorCode.REQUEST_INFO_ERROR, "不正リクエストエラーが起きました");
+			throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
 		}
 
 		// CSV出力モデルリストに変換する
 		List<HealthInfoCsvDownloadModel> modelList = healthInfoService.toModelList(healthInfoList);
 
-		// CSV設定情報取得
+		// 健康情報ファイル設定情報 取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
 		CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
 		response.setContentType(

@@ -25,7 +25,7 @@ import jp.co.ha.db.entity.Account;
 
 /**
  * 健康情報ファイル入力画面サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -51,7 +51,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 			ValidateErrorResult result = validator.validate(model);
 			if (result.hasError()) {
 				ValidateError error = result.getFirst();
-				throw new BusinessException(DashboardErrorCode.REQUEST_INFO_ERROR,
+				throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
 						++i + "行目のファイルフォーマットが不正です " + error.getMessage());
 			}
 		}

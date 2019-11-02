@@ -15,7 +15,7 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * 健康情報CSVWriterクラス
- * 
+ *
  * @since 1.0
  */
 public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
@@ -41,7 +41,7 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
 	@Override
 	protected void writeData(StringJoiner record, HealthInfoCsvDownloadModel model) {
 
-		LOG.infoRes(model);
+		LOG.debugRes(model);
 		// 1項目ごと区切る
 		StringJoiner body = new StringJoiner(StringUtil.COMMA);
 

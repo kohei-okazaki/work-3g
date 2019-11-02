@@ -15,7 +15,7 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * 結果照会CSVWriterクラス
- * 
+ *
  * @since 1.0
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
@@ -41,7 +41,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 	@Override
 	protected void writeData(StringJoiner record, ReferenceCsvDownloadModel model) {
 
-		LOG.infoRes(model);
+		LOG.debugRes(model);
 		// 1項目ごと区切る
 		StringJoiner body = new StringJoiner(StringUtil.COMMA);
 
