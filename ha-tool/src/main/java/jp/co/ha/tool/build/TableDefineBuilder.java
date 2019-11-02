@@ -18,7 +18,8 @@ import jp.co.ha.tool.type.ExecuteType;
 
 /**
  * TABLE_DEFINE.sqlのビルダー
- *
+ * 
+ * @since 1.0
  */
 public class TableDefineBuilder extends BaseSqlSourceBuilder {
 

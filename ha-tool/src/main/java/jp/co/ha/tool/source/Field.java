@@ -10,6 +10,7 @@ import jp.co.ha.tool.type.AccessType;
  *
  * @param <T>
  *     任意の型
+ * @since 1.0
  */
 public class Field<T> {
 

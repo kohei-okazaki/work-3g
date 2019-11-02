@@ -5,7 +5,8 @@ import java.util.List;
 
 /**
  * テーブル情報保持クラス
- *
+ * 
+ * @since 1.0
  */
 public class Table {
 

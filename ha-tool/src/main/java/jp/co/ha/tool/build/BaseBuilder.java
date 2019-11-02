@@ -20,7 +20,8 @@ import jp.co.ha.tool.type.ExecuteType;
 
 /**
  * 基底ビルダー
- *
+ * 
+ * @since 1.0
  */
 public abstract class BaseBuilder {
 

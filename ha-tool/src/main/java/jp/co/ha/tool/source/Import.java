@@ -6,7 +6,8 @@ import jp.co.ha.common.util.StringUtil;
 
 /**
  * Import
- *
+ * 
+ * @since 1.0
  */
 public class Import {
 

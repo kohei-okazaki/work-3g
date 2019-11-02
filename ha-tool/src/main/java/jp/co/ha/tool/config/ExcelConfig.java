@@ -2,7 +2,8 @@ package jp.co.ha.tool.config;
 
 /**
  * Excel設定情報保持クラス
- *
+ * 
+ * @since 1.0
  */
 public class ExcelConfig {
 

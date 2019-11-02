@@ -19,7 +19,8 @@ import jp.co.ha.tool.type.ExecuteType;
 
 /**
  * テーブル作成のDDLを作成するビルダー
- *
+ * 
+ * @since 1.0
  */
 public class CreateTableBuilder extends BaseSqlSourceBuilder {
 

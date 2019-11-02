@@ -14,7 +14,8 @@ import jp.co.ha.tool.config.FileConfig;
 
 /**
  * ファイル作成クラス
- *
+ * 
+ * @since 1.0
  */
 public class FileFactory {
 
