@@ -20,7 +20,8 @@ import jp.co.ha.tool.type.CellPositionType;
 
 /**
  * エクセル読込クラス
- *
+ * 
+ * @since 1.0
  */
 public class ExcelReader extends BaseFileReader {
 

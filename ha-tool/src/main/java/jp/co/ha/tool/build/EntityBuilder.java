@@ -29,7 +29,7 @@ import jp.co.ha.tool.type.ExecuteType;
  * Entityのビルダー
  *
  * @deprecated MybatisのgeneratorでEntityを生成している為
- *
+ * @since 1.0
  */
 // @Deprecated(since = "1.0")
 @Deprecated

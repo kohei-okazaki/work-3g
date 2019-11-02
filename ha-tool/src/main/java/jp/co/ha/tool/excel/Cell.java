@@ -4,7 +4,8 @@ import jp.co.ha.tool.type.ColumnType;
 
 /**
  * セル情報保持クラス
- *
+ * 
+ * @since 1.0
  */
 public class Cell {
 

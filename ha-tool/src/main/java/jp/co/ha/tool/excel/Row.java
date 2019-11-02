@@ -7,7 +7,8 @@ import jp.co.ha.tool.type.CellPositionType;
 
 /**
  * エクセル行情報保持クラス
- *
+ * 
+ * @since 1.0
  */
 public class Row {
 

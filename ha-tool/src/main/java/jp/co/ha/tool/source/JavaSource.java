@@ -8,7 +8,8 @@ import jp.co.ha.tool.type.ClassType;
 
 /**
  * Javaファイル情報
- *
+ * 
+ * @since 1.0
  */
 public class JavaSource {
 

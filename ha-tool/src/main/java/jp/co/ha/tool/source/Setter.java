@@ -12,6 +12,7 @@ import jp.co.ha.tool.type.AccessType;
  *
  * @param <T>
  *     任意の型
+ * @since 1.0
  */
 public class Setter<T> extends Method<T> {
 
@@ -50,7 +51,7 @@ public class Setter<T> extends Method<T> {
 
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 		body.add(TAB + accessType.getValue() + " void " + getMethodName()
-			+ "(" + field.getClassType().getSimpleName() + " " + field.getName() + ") {");
+				+ "(" + field.getClassType().getSimpleName() + " " + field.getName() + ") {");
 		body.add(TAB + TAB + "this." + field.getName() + " = " + field.getName() + ";");
 		body.add(TAB + "}");
 

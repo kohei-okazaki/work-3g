@@ -170,16 +170,6 @@
       <artifactId>jackson-annotations</artifactId>
       <version>${org.jackson-version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-csv</artifactId>
-      <version>${org.jackson-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-xml</artifactId>
-      <version>${org.jackson-version}</version>
-    </dependency>
 
     <!-- DB -->
     <dependency>

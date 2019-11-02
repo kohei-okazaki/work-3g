@@ -7,7 +7,8 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * カラム定義の列挙
- *
+ * 
+ * @since 1.0
  */
 public enum ColumnType implements BaseEnum {
 

@@ -5,48 +5,48 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 共通エラーコード
- * 
+ *
  * @since 1.0
  */
 public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 
 	/* ERROR */
 	/** 実行環境エラー */
-	RUNTIME_ERROR("RUNTIME_ERROR", "CE_001", LogLevel.ERROR),
+	RUNTIME_ERROR("RUNTIME_ERROR", "CE0001", LogLevel.ERROR),
 	/** 予期せぬ例外 */
-	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "CE_002", LogLevel.ERROR),
+	UNEXPECTED_ERROR("UNEXPECTED_ERROR", "CE0002", LogLevel.ERROR),
 	/** アルゴリズムエラー */
-	ALGORITH_ERROR("ALGORITH_ERROR", "CE_003", LogLevel.ERROR),
-	/** DB暗号化・複合化エラー */
-	DB_ENCRYPT_ERROR("DB_ENCRYPT_ERROR", "CE_004", LogLevel.ERROR),
+	ALGORITH_ERROR("ALGORITH_ERROR", "CE0003", LogLevel.ERROR),
+	/** DB暗号化・復号エラー */
+	DB_ENCRYPT_ERROR("DB_CRYPT_ERROR", "CE0004", LogLevel.ERROR),
 	/** DBアクセスエラー */
-	DB_ACCESS_ERROR("DB_ACCESS_ERROR", "CE_005", LogLevel.ERROR),
+	DB_ACCESS_ERROR("DB_ACCESS_ERROR", "CE0005", LogLevel.ERROR),
 	/** SQLの実行に失敗エラー */
-	DB_SQL_EXE_ERROR("DB_SQL_EXE_ERROR", "CE_006", LogLevel.ERROR),
+	DB_SQL_EXE_ERROR("DB_SQL_EXE_ERROR", "CE0006", LogLevel.ERROR),
 	/** SQL指定なしエラー */
-	DB_SQL_SELECT_ERROR("DB_SQL_SELECT_ERROR", "CE_007", LogLevel.ERROR),
+	DB_SQL_SELECT_ERROR("DB_SQL_SELECT_ERROR", "CE0007", LogLevel.ERROR),
 	/** DB切断エラー */
-	DB_CLOSE_ERROR("DB_CLOSE_ERROR", "CE_008", LogLevel.ERROR),
+	DB_CLOSE_ERROR("DB_CLOSE_ERROR", "CE0008", LogLevel.ERROR),
 
 	/* WARN */
 	/** 該当データ存在しないエラー */
-	DB_NO_DATA("DB_NO_DATA", "CW_001", LogLevel.WARN),
+	DB_NO_DATA("DB_NO_DATA", "CW0009", LogLevel.WARN),
 	/** JSON変換エラー例外 */
-	JSON_FORMAT_ERROR("JSON_FORMAT_ERROR", "CW_002", LogLevel.WARN),
+	JSON_FORMAT_ERROR("JSON_FORMAT_ERROR", "CW0010", LogLevel.WARN),
 	/** JSON変換エラー例外 */
-	JSON_MAPPING_ERROR("JSON_MAPPING_ERROR", "CW_003", LogLevel.WARN),
+	JSON_MAPPING_ERROR("JSON_MAPPING_ERROR", "CW0011", LogLevel.WARN),
 	/** JSON変換エラー例外 */
-	JSON_PARSE_ERROR("JSON_PARSE_ERROR", "CW_004", LogLevel.WARN),
+	JSON_PARSE_ERROR("JSON_PARSE_ERROR", "CW0012", LogLevel.WARN),
 	/** ファイルアップロード例外 */
-	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "CW_005", LogLevel.WARN),
+	FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "CW0013", LogLevel.WARN),
 	/** ファイル読込例外 */
-	FILE_READING_ERROR("FILE_READING_ERROR", "CW_006", LogLevel.WARN),
+	FILE_READING_ERROR("FILE_READING_ERROR", "CW0014", LogLevel.WARN),
 	/** ファイル書込処理エラー */
-	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "CW_007", LogLevel.WARN),
+	FILE_WRITE_ERROR("FILE_WRITE_ERROR", "CW0015", LogLevel.WARN),
 	/** データ重複エラー */
-	MULTIPLE_DATA("MULTIPLE_DATA", "CW_008", LogLevel.WARN),
+	MULTIPLE_DATA("MULTIPLE_DATA", "CW0016", LogLevel.WARN),
 	/** 妥当性チェックエラー */
-	VALIDATE_ERROR("VALIDATE_ERROR", "CW_009", LogLevel.WARN);
+	VALIDATE_ERROR("VALIDATE_ERROR", "CW0017", LogLevel.WARN);
 
 	/**
 	 * コンストラクタ

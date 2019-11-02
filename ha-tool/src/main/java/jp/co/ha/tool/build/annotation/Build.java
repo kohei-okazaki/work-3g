@@ -9,7 +9,8 @@ import java.lang.annotation.Target;
 
 /**
  * Buildアノテーション
- *
+ * 
+ * @since 1.0
  */
 @Documented
 @Retention(RUNTIME)

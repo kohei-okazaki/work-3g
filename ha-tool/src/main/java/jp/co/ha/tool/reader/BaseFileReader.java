@@ -7,7 +7,8 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
  * 基底ファイル読込クラス
- *
+ * 
+ * @since 1.0
  */
 public abstract class BaseFileReader {
 
