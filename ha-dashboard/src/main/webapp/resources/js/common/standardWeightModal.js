@@ -23,7 +23,7 @@ $(function() {
       "z-index" : "1"
     });
 
-    $("body").append('<div id="standardWeight-modal-content"><div class="contentLayout"><b>標準体重</b><br><div align="center" class="contentLayout"><label>身長(m) × 身長(m) × 22</label></div><br><label>で計算されます。</label><br><div align="center" class="contentLayout"><label>165cmの人の場合、1.65 × 1.65 × 22 = 59.895となります。</label></div></div></div>');
+    $("body").append('<div id="standardWeight-modal-content"><div class="modal-layout"><b>標準体重</b><br><div align="center" class="modal-layout formula"> <label>身長(m) × 身長(m) × 22</label></div><br><label>で計算されます。</label><br> <label>165cmの人の場合</label><div align="center" class="modal-layout formula"> <label>1.65(m) × 1.65(m) × 22 = 59.895</label></div></div></div>');
     $("#standardWeight-modal-content").css({
       "display" : "none",
       "width" : "auto",
@@ -34,6 +34,16 @@ $(function() {
       "color" : "#666666",
       "position" : "fixed",
       "z-index" : "9999"
+    });
+    $(".modal-layout").css({
+      "margin" : "0px",
+      "width" : "auto",
+      "padding" : "15px",
+      "background" : "#d2e8d561",
+      "box-shadow" : "0 3px 4px rgba(0, 0, 0, 0.32)"
+    });
+    $(".formula").css({
+      "width" : "510px"
     });
 
     // modalの位置を画面中央に計算する関数を実行

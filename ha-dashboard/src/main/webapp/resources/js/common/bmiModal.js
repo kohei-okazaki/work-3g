@@ -23,7 +23,7 @@ $(function() {
       "z-index" : "1"
     });
 
-    $("body").append('<div id="bmi-modal-content"><div class="contentLayout"><b>BMI</b><br><label>計算式</label><br><label>体重(kg) / 身長(m)の2剰</label><br><div align="center" class="contentLayout"><table class="data"><tr class="data"><th class="data"><label>範囲</label></th><th class="data"><label>肥満度</label></th></tr><tr class="data"><td class="data"><label>18.5未満</label></td><td class="data"><label>低体重</label></td></tr><tr class="data"><td class="data"><label>18.5 ~ 25未満</label></td><td class="data"><label>普通体重</label></td></tr><tr class="data"><td class="data"><label>25 ~ 30未満</label></td><td class="data"><label>肥満(1)</label></td></tr><tr class="data"><td class="data"><label>30 ~ 35未満</label></td><td class="data"><label>肥満(2)</label></td></tr><tr class="data"><td class="data"><label>35 ~ 40未満</label></td><td class="data"><label>肥満(3)</label></td></tr><tr class="data"><td class="data"><label>40以上</label></td><td class="data"><label>肥満(4)</label></td></tr></table></div></div></div>');
+    $("body").append('<div id="bmi-modal-content"><div class="modal-layout"><b>BMI</b><br> <label>計算式</label><br><div align="center" class="modal-layout formula"> <label>体重(kg) / 身長(m)の2剰</label></div><br><div align="center" class="modal-layout"><table class="data"><tr class="data"><th class="data"><label>範囲</label><th class="data"><label>肥満度</label><tr class="data"><td class="data"><label>18.5未満</label><td class="data"><label>低体重</label><tr class="data"><td class="data"><label>18.5 ~ 25未満</label><td class="data"><label>普通体重</label><tr class="data"><td class="data"><label>25 ~ 30未満</label><td class="data"><label>肥満(1)</label><tr class="data"><td class="data"><label>30 ~ 35未満</label><td class="data"><label>肥満(2)</label><tr class="data"><td class="data"><label>35 ~ 40未満</label><td class="data"><label>肥満(3)</label><tr class="data"><td class="data"><label>40以上</label><td class="data"><label>肥満(4)</label></table></div></div></div>');
     $("#bmi-modal-content").css({
       "display" : "none",
       "width" : "auto",
@@ -35,6 +35,16 @@ $(function() {
       "position" : "fixed",
       "z-index" : "9999"
     });
+    $(".modal-layout").css({
+        "margin" : "0px",
+        "width" : "auto",
+        "padding" : "15px",
+        "background" : "#d2e8d561",
+        "box-shadow" : "0 3px 4px rgba(0, 0, 0, 0.32)"
+      });
+      $(".formula").css({
+        "width" : "510px"
+      });
 
     // modalの位置を画面中央に計算する関数を実行
     modalResize();
