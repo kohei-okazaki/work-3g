@@ -16,7 +16,7 @@ public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
 	/* WARN */
 	/** アカウント存在チェックエラー */
 	ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "DW0022", LogLevel.WARN),
-	/** アカウント不整合エラー */
+	/** アカウント削除済エラー */
 	ACCOUNT_DELETE("ACCOUNT_DELETE", "DW0023", LogLevel.WARN),
 	/** アカウント存在エラー */
 	ACCOUNT_EXIST("ACCOUNT_EXIST", "DW0024", LogLevel.WARN),
