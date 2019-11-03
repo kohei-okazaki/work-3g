@@ -23,7 +23,7 @@ public abstract class CommonService {
 	private AccountSearchService accountSearchService;
 
 	/**
-	 * 指定したアカウントがAPIを実行できるか判定する<br>
+	 * 指定したAPI実行ユーザがAPIを実行できるか判定する<br>
 	 * 実行出来ない場合throw<br>
 	 *
 	 * @param request
@@ -33,10 +33,10 @@ public abstract class CommonService {
 	 */
 	protected void checkApiUse(CommonApiRequest request) throws BaseException {
 
-		// アカウント取得
+		// アカウント情報取得
 		Account account = accountSearchService.findByUserId(request.getUserId())
 				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
-						"アカウントが存在しません userId:" + request.getUserId()));
+						"アカウント情報が存在しません userId:" + request.getUserId()));
 
 		if (!account.getApiKey().equals(request.getApiKey())) {
 			throw new ApiException(ApiErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");

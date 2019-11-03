@@ -23,7 +23,7 @@ import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報登録サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -73,10 +73,15 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * 指定した健康情報登録APIリクエスト情報を健康情報Entityに変換する
+	 *
+	 * @param request
+	 *     健康情報登録APIリクエスト情報
+	 * @return 健康情報Entity
+	 * @throws BaseException
+	 *     基底例外
 	 */
-	@Override
-	public HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException {
+	private HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException {
 
 		String userId = request.getUserId();
 		BigDecimal height = request.getHeight();
