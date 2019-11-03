@@ -3,6 +3,7 @@ package jp.co.ha.db.aspect;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.aspectj.lang.JoinPoint;
@@ -25,7 +26,7 @@ import jp.co.ha.common.util.DateUtil;
 
 /**
  * DB共通処理クラス
- * 
+ *
  * @since 1.0
  */
 @Aspect
@@ -116,6 +117,7 @@ public class DataBaseCommonExecutor {
 	 * @throws Throwable
 	 *     例外発生
 	 */
+	@SuppressWarnings("unchecked")
 	@Around("@annotation(jp.co.ha.common.db.annotation.Select)")
 	public Object select(ProceedingJoinPoint pjp) throws Throwable {
 
@@ -137,6 +139,10 @@ public class DataBaseCommonExecutor {
 			if (isEntity(o)) {
 				entityCrypter.decrypt(o);
 				LOG.debugRes(o);
+			} else if (isEntity(((Optional<Object>) o).get())) {
+				Object object = ((Optional<Object>) o).get();
+				entityCrypter.decrypt(object);
+				LOG.debugRes(object);
 			}
 		}
 		return o;
