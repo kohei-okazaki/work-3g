@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.controller;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -34,7 +35,7 @@ import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_アカウント設定コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -70,9 +71,9 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		// アカウント情報を検索
-		Account account = accountSearchService.findByUserId(userId);
+		Account account = accountSearchService.findByUserId(userId).get();
 		// メール情報を検索
-		MailInfo mailInfo = mailInfoSearchService.findByUserId(userId);
+		Optional<MailInfo> mailInfo = mailInfoSearchService.findByUserId(userId);
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
 		BeanUtil.copy(account, accountSettingForm, (src, dest) -> {
@@ -81,8 +82,8 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 			destForm.setPasswordExpire(DateUtil.toString(srcAccount.getPasswordExpire(), DateFormatType.YYYYMMDD));
 		});
 
-		if (BeanUtil.notNull(mailInfo)) {
-			BeanUtil.copy(mailInfo, accountSettingForm, Arrays.asList("userId"));
+		if (mailInfo.isPresent()) {
+			BeanUtil.copy(mailInfo.get(), accountSettingForm, Arrays.asList("userId"));
 		}
 
 		return accountSettingForm;

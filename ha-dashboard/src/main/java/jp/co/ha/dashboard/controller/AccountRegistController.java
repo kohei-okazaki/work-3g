@@ -23,12 +23,11 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.form.AccountRegistForm;
 import jp.co.ha.dashboard.service.AccountRegistService;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.Account;
 import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_アカウント登録画面コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -78,8 +77,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
 		}
 
-		Account account = accountSearchService.findByUserId(form.getUserId());
-		if (BeanUtil.notNull(account)) {
+		if (accountSearchService.findByUserId(form.getUserId()).isPresent()) {
 			model.addAttribute("errorMessage", "指定されたユーザIDは既にアカウント情報が登録されています");
 			LOG.warn("指定されたユーザIDは既にアカウント情報が登録されています userId:" + form.getUserId());
 			return getView(DashboardView.ACCOUNT_REGIST_INPUT);

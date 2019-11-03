@@ -20,7 +20,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報Excelダウンロードサービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service("healthInfoDownloadExcel")
@@ -38,7 +38,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		HealthInfo healthInfo = component.getHealthInfo();
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-				.findByUserId(healthInfo.getUserId());
+				.findByUserId(healthInfo.getUserId()).get();
 
 		// 健康情報Excelモデルに変換
 		HealthInfoExcelModel model = toModel(healthInfo);

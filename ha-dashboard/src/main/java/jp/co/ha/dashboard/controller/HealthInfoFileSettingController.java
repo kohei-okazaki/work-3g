@@ -19,7 +19,6 @@ import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.form.HealthInfoFileSettingForm;
 import jp.co.ha.dashboard.service.HealthInfoFileSettingService;
@@ -29,7 +28,7 @@ import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_健康情報ファイル設定コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -62,18 +61,10 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
 
 		// 健康情報ファイル設定を取得
-		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId);
+		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId).get();
 		HealthInfoFileSettingForm form = new HealthInfoFileSettingForm();
-		if (BeanUtil.isNull(entity)) {
-			// 健康情報ファイル設定が未登録の場合
-			form.setUserId(userId);
-			form.setHeaderFlag(CommonFlag.TRUE.getValue());
-			form.setFooterFlag(CommonFlag.TRUE.getValue());
-			form.setMaskFlag(CommonFlag.TRUE.getValue());
-			form.setEnclosureCharFlag(CommonFlag.TRUE.getValue());
-		} else {
-			BeanUtil.copy(entity, form);
-		}
+		BeanUtil.copy(entity, form);
+
 		return form;
 	}
 

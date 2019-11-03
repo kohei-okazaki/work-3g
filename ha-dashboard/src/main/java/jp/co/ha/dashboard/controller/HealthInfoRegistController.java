@@ -203,7 +203,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 		List<HealthInfoCsvDownloadModel> modelList = healthInfoService.toModelList(healthInfoList);
 
 		// 健康情報ファイル設定情報 取得
-		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
+		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId).get();
 		CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
 		response.setContentType(
 				MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());

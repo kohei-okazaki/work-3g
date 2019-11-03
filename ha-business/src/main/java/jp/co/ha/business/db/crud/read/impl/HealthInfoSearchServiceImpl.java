@@ -34,30 +34,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Select
 	@Override
 	@Transactional(readOnly = true)
-	public List<HealthInfo> findByUserId(String userId) throws BaseException {
-		HealthInfoExample example = new HealthInfoExample();
-		Criteria criteria = example.createCriteria();
-		// ユーザID
-		criteria.andUserIdEqualTo(userId);
-		return mapper.selectByExample(example);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException {
-		return mapper.selectByPrimaryKey(healthInfoId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
 	public HealthInfo findLastByUserId(String userId) throws BaseException {
 		HealthInfoExample example = new HealthInfoExample();
 		example.setOrderByClause("HEALTH_INFO_REG_DATE");
