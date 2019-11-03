@@ -282,6 +282,7 @@ public class BeanUtil {
 	 * メソッドのアクセス列挙
 	 *
 	 * @see BeanUtil#getAccessor(String, Class, AccessorType)
+	 * @since 1.0
 	 */
 	public static enum AccessorType {
 		/** setter */

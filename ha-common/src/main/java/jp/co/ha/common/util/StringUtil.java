@@ -10,7 +10,7 @@ import jp.co.ha.common.exception.SystemException;
 
 /**
  * 文字列のUtilクラス
- * 
+ *
  * @since 1.0
  */
 public class StringUtil {
@@ -161,7 +161,8 @@ public class StringUtil {
 
 	/**
 	 * Padding指定の列挙
-	 *
+	 * 
+	 * @since 1.0
 	 */
 	public static enum PaddingType {
 		/** 右詰 */

@@ -23,7 +23,7 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ファイル操作のUtilクラス
- * 
+ *
  * @since 1.0
  */
 public class FileUtil {
@@ -250,6 +250,8 @@ public class FileUtil {
 
 	/**
 	 * ファイル拡張子の列挙
+	 * 
+	 * @since 1.0
 	 */
 	public static enum FileExtension implements BaseEnum {
 
@@ -308,6 +310,8 @@ public class FileUtil {
 
 	/**
 	 * ファイルセパレータの列挙
+	 *
+	 * @since 1.0
 	 */
 	public static enum FileSeparator implements BaseEnum {
 

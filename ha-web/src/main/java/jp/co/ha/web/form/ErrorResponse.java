@@ -8,7 +8,7 @@ import jp.co.ha.web.type.ResultType;
 
 /**
  * エラーレスポンスクラス
- * 
+ *
  * @since 1.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
@@ -18,6 +18,7 @@ public class ErrorResponse extends BaseApiResponse {
 	@JsonProperty(value = "errorCode")
 	private String outerErrorCode;
 	/** 詳細 */
+	@JsonProperty(value = "detail")
 	private String detail;
 
 	/**
