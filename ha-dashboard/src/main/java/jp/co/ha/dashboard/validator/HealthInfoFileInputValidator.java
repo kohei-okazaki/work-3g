@@ -9,7 +9,7 @@ import jp.co.ha.web.validator.BaseWebValidator;
 
 /**
  * 健康情報CSVアップロードvalidator
- * 
+ *
  * @since 1.0
  */
 public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFileForm> {
@@ -36,8 +36,7 @@ public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFil
 	private void checkRequire(HealthInfoFileForm form, Errors errors) {
 		if (BeanUtil.isNull(form.getMultipartFile())) {
 			errors.rejectValue("multipartFile", ValidateErrorCode.REQUIRE.getOuterErrorCode(),
-					new String[] { "健康情報CSVファイル" },
-					ValidateErrorCode.REQUIRE.getOuterErrorCode());
+					new String[] { "健康情報CSVファイル" }, ValidateErrorCode.REQUIRE.getOuterErrorCode());
 		}
 	}
 

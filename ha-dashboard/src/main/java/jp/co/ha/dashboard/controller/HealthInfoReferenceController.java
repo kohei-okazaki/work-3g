@@ -51,7 +51,7 @@ import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_健康情報照会画面コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -229,7 +229,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		}
 
 		// CSV設定情報取得
-		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId);
+		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId).get();
 		CsvConfig conf = service.getCsvConfig(fileSetting);
 
 		response.setContentType(

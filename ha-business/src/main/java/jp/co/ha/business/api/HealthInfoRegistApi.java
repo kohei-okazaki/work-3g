@@ -12,7 +12,7 @@ import jp.co.ha.web.api.annotation.ApiExecute;
 
 /**
  * 健康情報登録API
- * 
+ *
  * @since 1.0
  */
 @Component

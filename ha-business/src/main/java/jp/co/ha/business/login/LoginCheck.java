@@ -1,14 +1,15 @@
 package jp.co.ha.business.login;
 
+import java.util.Optional;
+
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.type.CommonFlag;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
 
 /**
  * ログイン情報チェッククラス
- * 
+ *
  * @since 1.0
  */
 public class LoginCheck {
@@ -28,7 +29,7 @@ public class LoginCheck {
 	 *     入力されたパスワード
 	 * @return ログイン情報チェック結果
 	 */
-	public LoginCheckResult check(Account account, String inputPassword) {
+	public LoginCheckResult check(Optional<Account> account, String inputPassword) {
 
 		LoginCheckResult result = new LoginCheckResult();
 		checkExistAccount(result, account);
@@ -36,17 +37,17 @@ public class LoginCheck {
 			return result;
 		}
 
-		checkInvalidPassword(result, inputPassword, account.getPassword());
+		checkInvalidPassword(result, inputPassword, account.get().getPassword());
 		if (result.hasError()) {
 			return result;
 		}
 
-		checkDeleteAccount(result, account);
+		checkDeleteAccount(result, account.get());
 		if (result.hasError()) {
 			return result;
 		}
 
-		checkAccountExpired(result, account);
+		checkAccountExpired(result, account.get());
 		if (result.hasError()) {
 			return result;
 		}
@@ -62,8 +63,8 @@ public class LoginCheck {
 	 * @param account
 	 *     アカウント情報
 	 */
-	private void checkExistAccount(LoginCheckResult result, Account account) {
-		if (BeanUtil.isNull(account)) {
+	private void checkExistAccount(LoginCheckResult result, Optional<Account> account) {
+		if (!account.isPresent()) {
 			result.addError();
 			result.setErrorCode(DashboardErrorCode.ACCOUNT_EXIST);
 		}

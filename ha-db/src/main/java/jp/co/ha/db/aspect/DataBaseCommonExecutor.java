@@ -3,6 +3,7 @@ package jp.co.ha.db.aspect;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.aspectj.lang.JoinPoint;
@@ -25,7 +26,7 @@ import jp.co.ha.common.util.DateUtil;
 
 /**
  * DB共通処理クラス
- * 
+ *
  * @since 1.0
  */
 @Aspect
@@ -63,7 +64,7 @@ public class DataBaseCommonExecutor {
 						}
 					}
 					entityCrypter.encrypt(entity);
-					LOG.debugRes(entity);
+					LOG.infoRes(entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -96,7 +97,7 @@ public class DataBaseCommonExecutor {
 						}
 					}
 					entityCrypter.encrypt(entity);
-					LOG.debugRes(entity);
+					LOG.infoRes(entity);
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -116,6 +117,7 @@ public class DataBaseCommonExecutor {
 	 * @throws Throwable
 	 *     例外発生
 	 */
+	@SuppressWarnings("unchecked")
 	@Around("@annotation(jp.co.ha.common.db.annotation.Select)")
 	public Object select(ProceedingJoinPoint pjp) throws Throwable {
 
@@ -130,13 +132,17 @@ public class DataBaseCommonExecutor {
 			for (Object entity : list) {
 				if (isEntity(entity)) {
 					entityCrypter.decrypt(entity);
-					LOG.debugRes(entity);
+					LOG.infoRes(entity);
 				}
 			}
 		} else {
 			if (isEntity(o)) {
 				entityCrypter.decrypt(o);
-				LOG.debugRes(o);
+				LOG.infoRes(o);
+			} else if (((Optional<Object>) o).isPresent() && isEntity(((Optional<Object>) o).get())) {
+				Object object = ((Optional<Object>) o).get();
+				entityCrypter.decrypt(object);
+				LOG.infoRes(object);
 			}
 		}
 		return o;
@@ -150,7 +156,7 @@ public class DataBaseCommonExecutor {
 	 */
 	@Before("@annotation(jp.co.ha.common.db.annotation.Delete)")
 	public void delete(JoinPoint jp) {
-		Stream.of(jp.getArgs()).filter(e -> isEntity(e)).forEach(e -> LOG.debugRes(e));
+		Stream.of(jp.getArgs()).filter(e -> isEntity(e)).forEach(e -> LOG.infoRes(e));
 	}
 
 	/**

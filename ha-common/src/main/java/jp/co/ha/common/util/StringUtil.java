@@ -10,7 +10,7 @@ import jp.co.ha.common.exception.SystemException;
 
 /**
  * 文字列のUtilクラス
- * 
+ *
  * @since 1.0
  */
 public class StringUtil {
@@ -69,7 +69,7 @@ public class StringUtil {
 	}
 
 	/**
-	 * 指定した文字列<code>target</code>が空文字の場合true、それ以外の場合false<br>
+	 * 指定した文字列<code>target</code>が空文字の場合true、それ以外の場合false
 	 *
 	 * @param target
 	 *     対象文字列
@@ -162,6 +162,7 @@ public class StringUtil {
 	/**
 	 * Padding指定の列挙
 	 *
+	 * @since 1.0
 	 */
 	public static enum PaddingType {
 		/** 右詰 */

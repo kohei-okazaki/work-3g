@@ -51,7 +51,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	public void execute(AccountDto dto) throws BaseException {
 
 		// アカウント情報を検索し、アカウント情報をDTOにマージする
-		Account befAccount = accountSearchService.findByUserId(dto.getUserId());
+		Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
 		mergeAccount(dto, befAccount);
 
 		// メール情報を検索

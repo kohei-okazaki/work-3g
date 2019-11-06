@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.controller;
 
 import java.util.Locale;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -29,7 +30,7 @@ import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_ログイン画面コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -96,7 +97,7 @@ public class LoginController implements BaseWebController {
 		}
 
 		// アカウント情報を検索
-		Account account = accountSearchService.findByUserId(form.getUserId());
+		Optional<Account> account = accountSearchService.findByUserId(form.getUserId());
 		LoginCheckResult checkResult = new LoginCheck().check(account, form.getPassword());
 		if (checkResult.hasError()) {
 			String errorMessage = messageSource.getMessage(checkResult.getErrorCode().getOuterErrorCode(), null,

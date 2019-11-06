@@ -1,11 +1,13 @@
 package jp.co.ha.business.db.crud.read;
 
+import java.util.Optional;
+
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報ファイル設定検索サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HealthInfoFileSettingSearchService {
@@ -19,5 +21,5 @@ public interface HealthInfoFileSettingSearchService {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	HealthInfoFileSetting findByUserId(String userId) throws BaseException;
+	Optional<HealthInfoFileSetting> findByUserId(String userId) throws BaseException;
 }

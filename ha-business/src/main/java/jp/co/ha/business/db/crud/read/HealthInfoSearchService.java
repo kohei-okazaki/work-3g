@@ -14,28 +14,6 @@ import jp.co.ha.db.entity.HealthInfo;
 public interface HealthInfoSearchService {
 
 	/**
-	 * 指定されたユーザIDと一致する健康情報のリストを返す
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @return 健康情報のリスト
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	List<HealthInfo> findByUserId(String userId) throws BaseException;
-
-	/**
-	 * 指定された健康情報IDと一致する健康情報を返す
-	 *
-	 * @param healthInfoId
-	 *     健康情報ID
-	 * @return 健康情報Entity
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	HealthInfo findByHealthInfoId(Integer healthInfoId) throws BaseException;
-
-	/**
 	 * 指定したユーザIDで最後に登録した健康情報を返す
 	 *
 	 * @param userId

@@ -36,7 +36,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報_入力画面サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -165,7 +165,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		// リクエストタイプ設定
 		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
 		// アカウント情報.APIキーを設定
-		Account account = accountSearchService.findByUserId(userId);
+		Account account = accountSearchService.findByUserId(userId).get();
 		apiRequest.setApiKey(account.getApiKey());
 		return apiRequest;
 	}

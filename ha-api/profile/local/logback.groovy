@@ -51,4 +51,4 @@ appender("FILE", RollingFileAppender) {
 // Mybatisで発行されるSQLのログ設定
 logger("jp.co.ha.db.mapper", DEBUG, appenderList, false)
 
-root(INFO, appenderList)
+root(DEBUG, appenderList)
