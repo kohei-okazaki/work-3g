@@ -14,11 +14,4 @@
   <context:component-scan base-package="jp.co.ha.api.controller" />
   <context:component-scan base-package="jp.co.ha.api.config" />
 
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/**" />
-      <bean class="jp.co.ha.web.interceptor.RequestInterceptor" />
-    </mvc:interceptor>
-  </mvc:interceptors>
-
 </beans>

@@ -17,7 +17,7 @@ import jp.co.ha.common.util.BeanUtil.AccessorType;
 
 /**
  * Entityの暗号/復号インターフェース実装クラス
- * 
+ *
  * @since 1.0
  */
 @Component
@@ -42,8 +42,7 @@ public class EntityCrypterImpl implements EntityCrypter {
 						String enc = crypter.encrypt(value.toString());
 
 						// 暗号化後の値を設定
-						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
-								AccessorType.SETTER);
+						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
 						setter.invoke(entity, enc);
 					}
 				}
@@ -64,11 +63,10 @@ public class EntityCrypterImpl implements EntityCrypter {
 
 					if (value != null) {
 
-						// 復号化
+						// 復号
 						String dec = crypter.decrypt(value.toString());
 						// 復号後の値を設定
-						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
-								AccessorType.SETTER);
+						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
 						setter.invoke(entity, dec);
 					}
 				}

@@ -17,7 +17,7 @@ import jp.co.ha.common.util.DateUtil;
 
 /**
  * Requestインターセプター
- * 
+ *
  * @since 1.0
  */
 public class RequestInterceptor extends BaseWebInterceptor {
@@ -45,7 +45,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
 		// MDCを設定する
 		MDC.put("id", hashEncoder.encode(DateUtil.getSysDate().toString(), "dummy"));
 		Method method = ((HandlerMethod) handler).getMethod();
-		LOG.info("---> START " + method.getDeclaringClass().getName() + "#" + method.getName() + "[URI:"
+		LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName() + "[URI:"
 				+ request.getRequestURI() + ",METHOD:" + request.getMethod() + "]");
 
 		return true;
@@ -63,7 +63,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
 			return;
 		}
 		Method method = ((HandlerMethod) handler).getMethod();
-		LOG.info("---> END " + method.getDeclaringClass().getName() + "#" + method.getName());
+		LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName());
 
 	}
 }
