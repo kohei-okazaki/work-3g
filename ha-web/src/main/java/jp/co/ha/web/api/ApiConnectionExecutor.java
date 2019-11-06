@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.aspect;
+package jp.co.ha.web.api;
 
 import java.util.Arrays;
 
@@ -15,7 +15,7 @@ import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * API通信共通クラス
- * 
+ *
  * @since 1.0
  */
 @Aspect
@@ -34,22 +34,24 @@ public class ApiConnectionExecutor {
 	 * </ul>
 	 *
 	 * @param pjp
-	 *     リクエスト情報
+	 *     ProceedingJoinPoint
 	 * @throws Throwable
 	 *     実行時のエラー
 	 */
 	// @Around("execution(*
 	// jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..))")
 	@Around("@annotation(jp.co.ha.web.api.annotation.ApiExecute)")
-	public void outApiLog(ProceedingJoinPoint pjp) throws Throwable {
+	public Object outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
 		// Requestログ出力
 		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiRequest).forEach(e -> LOG.infoRes(e));
 
-		pjp.proceed();
+		Object object = pjp.proceed();
 
 		// Responseログ出力
 		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiResponse).forEach(e -> LOG.infoRes(e));
+
+		return object;
 	}
 
 }

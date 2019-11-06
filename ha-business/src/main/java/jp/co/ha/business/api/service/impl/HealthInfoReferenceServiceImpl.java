@@ -21,7 +21,7 @@ import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報照会サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -57,10 +57,10 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 				request.getUserId());
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			throw new BusinessException(CommonErrorCode.DB_NO_DATA,
-					"該当のレコードが見つかりません healthInfoId:" + request.getHealthInfoId() + ",userId:" + request.getUserId());
+					"該当のレコードが見つかりません healthInfoId:" + request.getHealthInfoId() + ", userId:" + request.getUserId());
 		} else if (CollectionUtil.isMultiple(healthInfoList)) {
 			throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
-					"該当のデータが複数存在します healthInfoId:" + request.getHealthInfoId() + ",userId:" + request.getUserId());
+					"該当のデータが複数存在します healthInfoId:" + request.getHealthInfoId() + ", userId:" + request.getUserId());
 		}
 
 		HealthInfo healthInfo = CollectionUtil.getFirst(healthInfoList);
