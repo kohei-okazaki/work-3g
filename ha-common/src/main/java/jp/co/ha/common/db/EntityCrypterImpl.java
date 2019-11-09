@@ -37,14 +37,15 @@ public class EntityCrypterImpl implements EntityCrypter {
 					Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.GETTER);
 					Object value = getter.invoke(entity);
 
-					if (value != null) {
-						// 暗号化
-						String enc = crypter.encrypt(value.toString());
-
-						// 暗号化後の値を設定
-						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
-						setter.invoke(entity, enc);
+					if (BeanUtil.isNull(value)) {
+						continue;
 					}
+					// 暗号化
+					String enc = crypter.encrypt(value.toString());
+					// 暗号化後の値を設定
+					Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
+					setter.invoke(entity, enc);
+
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -61,14 +62,15 @@ public class EntityCrypterImpl implements EntityCrypter {
 					Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.GETTER);
 					Object value = getter.invoke(entity);
 
-					if (value != null) {
-
-						// 復号
-						String dec = crypter.decrypt(value.toString());
-						// 復号後の値を設定
-						Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
-						setter.invoke(entity, dec);
+					if (BeanUtil.isNull(value)) {
+						continue;
 					}
+					// 復号
+					String dec = crypter.decrypt(value.toString());
+					// 復号後の値を設定
+					Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
+					setter.invoke(entity, dec);
+
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

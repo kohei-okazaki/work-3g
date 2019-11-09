@@ -2,13 +2,13 @@ package jp.co.ha.common.db;
 
 /**
  * 暗号化インターフェース
- * 
+ *
  * @since 1.0
  */
 public interface Crypter {
 
 	/**
-	 * 暗号化を行う
+	 * 暗号化処理を行う
 	 *
 	 * @param str
 	 *     暗号化したい文字列

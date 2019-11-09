@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * jdbc.propertiesのBean
- * 
+ *
  * @since 1.0
  */
 @Component
