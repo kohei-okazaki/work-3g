@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta charset="UTF-8">
-<title>健康アプリ_アカウント登録確認画面</title>
-<link rel="icon" type="image/png" href="../resources/image/favicon.png" th:href="@{/resources/image/favicon.png}">
-<link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.min.css}">
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録確認画面', scripts = ~{::script}, links = ~{::link})">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.min.css}">
 </head>
 <body>
 
@@ -67,10 +62,6 @@
 
   <div th:replace="layout/layout :: footer"></div>
 
-  <script type="text/javascript" src="../resources/js/lib/jquery.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript">
     $(function() {
       jQuery("#accountRegistForm").validationEngine({

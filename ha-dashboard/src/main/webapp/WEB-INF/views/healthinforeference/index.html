@@ -1,16 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta charset="UTF-8">
-<title>健康アプリ_健康情報照会画面</title>
-<link rel="icon" type="image/png" href="../resources/image/favicon.png" th:href="@{/resources/image/favicon.png}">
-<link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.min.css}">
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報照会画面', scripts = ~{::script}, links = ~{::link})">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/common/headericon.css" th:href="@{/resources/css/common/headericon.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
@@ -91,14 +85,12 @@
 
   <div th:replace="layout/layout :: footer"></div>
 
-  <script type="text/javascript" src="../resources/js/lib/jquery.js" th:src="@{/resources/js/lib/jquery.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/common/common.js" th:src="@{/resources/js/common/common.min.js}"></script>
   <script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.min.js}"></script>
   <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript" th:inline="javascript">
@@ -170,9 +162,9 @@
         }
       });
 
-      var systemInfo = /*[[ ${systemInfo} ]]*/;
+      var systemConfig = /*[[ ${systemConfig} ]]*/;
       var options;
-      if (systemInfo == null) {
+      if (systemConfig == null) {
         options = {
             valueNames : [
               "height",
@@ -191,7 +183,7 @@
             "bmi",
             "healthInfoRegDate"
           ],
-          page : systemInfo.paging,
+          page : systemConfig.paging,
           pagination : {
             pageationClass : "pagination",
             innerWindow : 1,
