@@ -11,6 +11,7 @@ import jp.co.ha.business.api.HealthInfoRegistApi;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.business.api.type.TestMode;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -49,6 +50,12 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 		for (int i = 0; i < modelList.size(); i++) {
 			HealthInfoCsvUploadModel model = modelList.get(i);
 			ValidateErrorResult result = validator.validate(model);
+
+			// 相関チェック
+			if (!model.getUserId().equals(userId)) {
+				throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+						++i + "行目のユーザIDが不正です");
+			}
 			if (result.hasError()) {
 				ValidateError error = result.getFirst();
 				throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
@@ -89,6 +96,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 				destRequest.setHeight(new BigDecimal(srcModel.getHeight()));
 				destRequest.setWeight(new BigDecimal(srcModel.getWeight()));
 				destRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
+				destRequest.setTestMode(TestMode.DB_REGIST);
 			});
 			request.setApiKey(account.getApiKey());
 
