@@ -35,6 +35,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 	 */
 	@Override
 	public View download(HealthInfoExcelComponent component) throws BaseException {
+
 		HealthInfo healthInfo = component.getHealthInfo();
 		// 健康情報Entityから健康情報ファイル設定を検索
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
@@ -59,6 +60,7 @@ public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<
 		model.setWeight(healthInfo.getWeight().toString());
 		model.setBmi(healthInfo.getBmi().toString());
 		model.setStandardWeight(healthInfo.getStandardWeight().toString());
+		model.setHealthInfoRegDate(healthInfo.getHealthInfoRegDate());
 		return model;
 	}
 

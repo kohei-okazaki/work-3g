@@ -3,7 +3,7 @@ $(function() {
     // excelダウンロードを行う
     var form = $("<form></form>", {
       method : "get",
-      action : "../healthInfoReference/excelDownload"
+      action : "../healthinforeference/exceldownload"
     });
     form.appendTo(document.body);
     form.submit();
@@ -13,7 +13,7 @@ $(function() {
     // excelダウンロードを行う
     var form = $("<form></form>", {
       method : "get",
-      action : "../healthInfoReference/csvDownload"
+      action : "../healthinforeference/csvdownload"
     });
     form.appendTo(document.body);
     form.submit();

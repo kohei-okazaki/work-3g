@@ -158,7 +158,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@GetMapping(value = "/excelDownload")
+	@GetMapping(value = "/exceldownload")
 	public ModelAndView excelDownload(HttpServletRequest request, HealthInfoForm form) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
@@ -187,7 +187,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@GetMapping(value = "/csvDownload")
+	@GetMapping(value = "/csvdownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form)
 			throws BaseException {
 

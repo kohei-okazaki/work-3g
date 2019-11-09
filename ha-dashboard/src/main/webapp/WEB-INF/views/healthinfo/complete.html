@@ -53,7 +53,7 @@
         <div class="table-row">
           <div class="table-data">
             <!--/* Excel出力 */-->
-            <form action="./excelDownload" th:action="@{./excelDownload}" method="get" th:object="${healthInfoForm}">
+            <form action="./exceldownload" th:action="@{./exceldownload}" method="get" th:object="${healthInfoForm}">
               <input type="hidden" th:field="*{healthInfoId}" />
               <div>
                 <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
@@ -63,7 +63,7 @@
           <div class="table-data">&ensp;&ensp;</div>
           <div class="table-data">
             <!--/* CSV出力 */-->
-            <form action="./csvDownload" th:action="@{./csvDownload}" method="get" th:object="${healthInfoForm}">
+            <form action="./csvdownload" th:action="@{./csvdownload}" method="get" th:object="${healthInfoForm}">
               <input type="hidden" th:field="*{healthInfoId}" />
               <div>
                 <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />

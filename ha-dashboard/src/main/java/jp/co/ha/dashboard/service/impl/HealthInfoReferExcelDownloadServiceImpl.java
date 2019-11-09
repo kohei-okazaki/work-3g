@@ -10,9 +10,9 @@ import org.springframework.web.servlet.View;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
-import jp.co.ha.business.io.file.excel.builder.ReferenceExcelBuiler;
+import jp.co.ha.business.io.file.excel.builder.HealthInfoExcelBuilder;
+import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
-import jp.co.ha.business.io.file.excel.model.ReferenceExcelModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
@@ -44,9 +44,9 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
 				.findByUserId(component.getUserId()).get();
 
-		List<ReferenceExcelModel> modelList = toModelList(component.getResultList());
+		List<HealthInfoExcelModel> modelList = toModelList(component.getResultList());
 
-		return new ReferenceExcelBuiler(getExcelConfig(healthInfoFileSetting), modelList);
+		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), modelList);
 	}
 
 	/**
@@ -56,10 +56,10 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 *     健康情報照会リスト
 	 * @return modelList
 	 */
-	private List<ReferenceExcelModel> toModelList(List<HealthInfoReferenceDto> resultList) {
+	private List<HealthInfoExcelModel> toModelList(List<HealthInfoReferenceDto> resultList) {
 		return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
 			// Excel出力モデル
-			ReferenceExcelModel model = new ReferenceExcelModel();
+			HealthInfoExcelModel model = new HealthInfoExcelModel();
 			HealthInfoReferenceDto result = resultList.get(i);
 			model.setHeight(result.getHeight().toString());
 			model.setWeight(result.getWeight().toString());

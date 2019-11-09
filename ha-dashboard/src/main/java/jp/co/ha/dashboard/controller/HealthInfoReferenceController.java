@@ -188,7 +188,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     基底例外
 	 */
 	@SuppressWarnings("unchecked")
-	@GetMapping(value = "/excelDownload")
+	@GetMapping(value = "/exceldownload")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
@@ -216,7 +216,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 *     基底例外
 	 */
 	@SuppressWarnings("unchecked")
-	@GetMapping(value = "/csvDownload")
+	@GetMapping(value = "/csvdownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
 		HttpSession session = request.getSession();

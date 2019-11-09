@@ -129,7 +129,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 		List<String> footer = getFooterList(clazz);
 		Stream.iterate(0, i -> ++i).limit(footer.size()).forEach(i -> {
 			String footerName = footer.get(i);
-			Cell cell = getCell(sheet, HEADER_POSITION, i);
+			Cell cell = getCell(sheet, modelList.size(), i);
 			setText(cell, footerName);
 		});
 	}
