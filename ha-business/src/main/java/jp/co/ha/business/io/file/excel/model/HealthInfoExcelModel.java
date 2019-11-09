@@ -1,5 +1,7 @@
 package jp.co.ha.business.io.file.excel.model;
 
+import java.util.Date;
+
 import jp.co.ha.common.io.file.excel.annotation.ExcelDownloadModel;
 import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
 
@@ -8,8 +10,8 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
  *
  * @since 1.0
  */
-@ExcelDownloadModel(sheetName = "健康情報", headerNames = { "身長", "体重", "BMI", "標準体重" }, footerNames = { "身長", "体重", "BMI",
-		"標準体重" })
+@ExcelDownloadModel(sheetName = "健康情報", headerNames = { "身長", "体重", "BMI", "標準体重", "健康情報登録日時" }, footerNames = { "身長",
+		"体重", "BMI", "標準体重", "健康情報登録日時" })
 public class HealthInfoExcelModel implements BaseExcelModel {
 
 	/** 身長 */
@@ -20,6 +22,8 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	private String bmi;
 	/** 標準体重 */
 	private String standardWeight;
+	/** 健康情報作成日時 */
+	private Date healthInfoRegDate;
 
 	/**
 	 * heightを返す
@@ -95,6 +99,25 @@ public class HealthInfoExcelModel implements BaseExcelModel {
 	 */
 	public void setStandardWeight(String standardWeight) {
 		this.standardWeight = standardWeight;
+	}
+
+	/**
+	 * healthInfoRegDateを返す
+	 *
+	 * @return healthInfoRegDate
+	 */
+	public Date getHealthInfoRegDate() {
+		return healthInfoRegDate;
+	}
+
+	/**
+	 * healthInfoRegDateを設定する
+	 *
+	 * @param healthInfoRegDate
+	 *     健康情報作成日時
+	 */
+	public void setHealthInfoRegDate(Date healthInfoRegDate) {
+		this.healthInfoRegDate = healthInfoRegDate;
 	}
 
 }
