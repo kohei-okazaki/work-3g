@@ -139,10 +139,12 @@ public class DataBaseCommonExecutor {
 			if (isEntity(o)) {
 				entityCrypter.decrypt(o);
 				LOG.infoRes(o);
-			} else if (((Optional<Object>) o).isPresent() && isEntity(((Optional<Object>) o).get())) {
-				Object object = ((Optional<Object>) o).get();
-				entityCrypter.decrypt(object);
-				LOG.infoRes(object);
+			} else if (o instanceof Optional<?>) {
+				if (((Optional<Object>) o).isPresent() && isEntity(((Optional<Object>) o).get())) {
+					Object object = ((Optional<Object>) o).get();
+					entityCrypter.decrypt(object);
+					LOG.infoRes(object);
+				}
 			}
 		}
 		return o;
