@@ -77,7 +77,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 	/** System設定情報 */
 	@Autowired
-	private SystemConfig systemProp;
+	private SystemConfig systemConfig;
 
 	/**
 	 * Validateを設定
@@ -170,7 +170,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		model.addAttribute("bmi", bmiList);
 		model.addAttribute("standardWeight", standardWeightList);
 
-		model.addAttribute("systemInfo", systemProp);
+		model.addAttribute("systemConfig", systemConfig);
 
 		// sessionに検索結果リストを設定
 		sessionService.setValue(request.getSession(), "resultList", resultList);

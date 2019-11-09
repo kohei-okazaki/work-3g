@@ -162,9 +162,9 @@
         }
       });
 
-      var systemInfo = /*[[ ${systemInfo} ]]*/;
+      var systemConfig = /*[[ ${systemConfig} ]]*/;
       var options;
-      if (systemInfo == null) {
+      if (systemConfig == null) {
         options = {
             valueNames : [
               "height",
@@ -183,7 +183,7 @@
             "bmi",
             "healthInfoRegDate"
           ],
-          page : systemInfo.paging,
+          page : systemConfig.paging,
           pagination : {
             pageationClass : "pagination",
             innerWindow : 1,

@@ -55,8 +55,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		Criteria criteria = example.createCriteria();
 		// ユーザID
 		criteria.andUserIdEqualTo(userId);
-		// 登録日時
-		criteria.andRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
+		// 健康情報登録日時
+		criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
+
+		// 健康情報登録日時の昇順でソート
+		example.setOrderByClause("HEALTH_INFO_REG_DATE");
 		return mapper.selectByExample(example);
 	}
 
