@@ -12,7 +12,6 @@ scan("30 seconds")
 def FILE_PATH = "/app/logs/";
 def ENCODE = "UTF-8";
 def appenderList = ["FILE"];
-context.name = "api";
 
 appender("FILE", RollingFileAppender) {
 
