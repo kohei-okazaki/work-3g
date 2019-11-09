@@ -17,13 +17,21 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 自動テスト実行時の共通処理をまとめたクラス
- * 
+ *
  * @since 1.0
  */
 public class AutoTestCommonExecuter {
 
-	private Logger LOG = LoggerFactory.getLogger(this.getClass());
+	/** LOG */
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
+	/**
+	 * 共通処理を行う
+	 *
+	 * @return 共通処理設定情報
+	 * @throws SystemException
+	 *     設定ファイルの読み込みに失敗
+	 */
 	public AutoTestConfig execute() throws SystemException {
 
 		AutoProperties prop = read().orElseThrow(
@@ -52,6 +60,11 @@ public class AutoTestCommonExecuter {
 		return conf;
 	}
 
+	/**
+	 * 設定ファイルを読み取る
+	 *
+	 * @return 設定ファイル情報
+	 */
 	private Optional<AutoProperties> read() {
 		try {
 			String path = this.getClass().getClassLoader().getResource("").getPath();
@@ -65,7 +78,8 @@ public class AutoTestCommonExecuter {
 
 	/**
 	 * ブラウザ種別の列挙
-	 *
+	 * 
+	 * @since 1.0
 	 */
 	public static enum BrowserType implements BaseEnum {
 
@@ -78,17 +92,34 @@ public class AutoTestCommonExecuter {
 		/** SAFARI */
 		SAFARI("safari");
 
+		/** 値 */
 		private String value;
 
+		/**
+		 * コンストラクタ
+		 *
+		 * @param value
+		 *     値
+		 */
 		private BrowserType(String value) {
 			this.value = value;
 		}
 
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public String getValue() {
 			return this.value;
 		}
 
+		/**
+		 * 指定された値からブラウザ種別の列挙を返す
+		 *
+		 * @param value
+		 *     値
+		 * @return ブラウザ種別の列挙
+		 */
 		public static BrowserType of(String value) {
 			return BaseEnum.of(BrowserType.class, value);
 		}
