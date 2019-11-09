@@ -27,7 +27,7 @@
   <!-- 妥当性チェック -->
   <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />
 
-  <bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <bean id="properties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
     <property name="locations">
       <list>
         <value>classpath:crypt.properties</value>

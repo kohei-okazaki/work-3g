@@ -15,7 +15,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>1.8</java-version>
-    <org.springframework-version>5.2.0.RELEASE</org.springframework-version>
+    <org.springframework-version>5.2.1.RELEASE</org.springframework-version>
     <org.aspectj-version>1.9.4</org.aspectj-version>
     <org.slf4j-version>1.7.28</org.slf4j-version>
     <org.logback-version>1.2.3</org.logback-version>
@@ -24,7 +24,7 @@
     <org.mysql-version>8.0.18</org.mysql-version>
     <org.mybatis-version>3.5.3</org.mybatis-version>
     <org.mybatis-spring-version>2.0.3</org.mybatis-spring-version>
-    <org.hibernate-version>6.0.17.Final</org.hibernate-version>
+    <org.hibernate-version>6.1.0.Final</org.hibernate-version>
     <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
     <org.thymeleaf-layout-version>2.4.1</org.thymeleaf-layout-version>
     <org.java-mail-version>1.6.2</org.java-mail-version>
