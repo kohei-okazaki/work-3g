@@ -127,7 +127,6 @@ public class DataBaseCommonExecutor {
 			return o;
 		}
 		if (o instanceof List) {
-			@SuppressWarnings("unchecked")
 			List<Object> list = (List<Object>) o;
 			for (Object entity : list) {
 				if (isEntity(entity)) {
