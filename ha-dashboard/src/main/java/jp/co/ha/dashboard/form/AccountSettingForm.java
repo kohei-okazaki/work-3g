@@ -14,7 +14,7 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * アカウント設定画面フォームクラス
- * 
+ *
  * @since 1.0
  */
 public class AccountSettingForm implements BaseForm {
@@ -37,7 +37,7 @@ public class AccountSettingForm implements BaseForm {
 	@Max(size = 16, message = "パスワードは16桁以下で入力してください")
 	private String password;
 	/** 削除フラグ */
-	@Required
+	@Required(message = "削除フラグが未入力です")
 	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "削除フラグが半角数字でありません")
 	@Flag(message = "削除フラグの値が不正です")
 	private String deleteFlag;
