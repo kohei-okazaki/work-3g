@@ -16,11 +16,12 @@
 WEB画面の自動テストをするプロジェクト  
 
 * ### ha-batch  
-バッチ処理を定義したプロジェクト  
+Batch処理を定義したプロジェクト  
 
 * ### ha-build  
 ローカル環境でjarを作成するプロジェクト  
 windows, linuxでそれぞれbatとshを用意  
+(都度jarを配置せずにpomから必要なjarを読み取って動くように修正した為、buildシェルを流す無くても良い)  
 
 * ### ha-business  
 api, dashboard, batchで共通的に使うbusinessロジックをまとめたプロジェクト  
@@ -35,16 +36,14 @@ api, dashboard, batchで共通的に使うbusinessロジックをまとめたプ
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
 
 * ### ha-pom  
-api, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+api, auto, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
 * ### ha-resource  
-ddlなどを定義したプロジェクト  
+詳細設計書、DDL等を定義したドキュメントプロジェクト  
 
 * ### ha-tool  
-指定のフォーマットのExcelからDDLなどを自動生成するプロジェクト  
+指定のフォーマットのExcelからDDLなどを自動生成するツールプロジェクト  
 
 * ### ha-web  
-Webフレームワークを定義したプロジェクト  
-
-
+WebFWを定義したプロジェクト  
 
