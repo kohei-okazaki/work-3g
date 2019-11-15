@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.dto.CalorieCalcDto;
-import jp.co.ha.business.healthInfo.type.BodyType;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
@@ -23,7 +22,7 @@ import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_カロリー計算画面コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -85,7 +84,6 @@ public class CalorieCalcController implements BaseWebController {
 			CalorieCalcForm srcForm = (CalorieCalcForm) src;
 			CalorieCalcDto destDto = (CalorieCalcDto) dest;
 			destDto.setGenderType(GenderType.of(srcForm.getGender()));
-			destDto.setBodyType(BodyType.of(srcForm.getBodyType()));
 		});
 
 		CalorieCalcDto calcResult = calorieCalcService.calc(dto);
