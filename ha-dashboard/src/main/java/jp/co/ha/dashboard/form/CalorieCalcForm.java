@@ -14,7 +14,7 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * カロリー計算画面フォーム
- * 
+ *
  * @since 1.0
  */
 public class CalorieCalcForm implements BaseForm {
@@ -33,21 +33,18 @@ public class CalorieCalcForm implements BaseForm {
 	/** 身長 */
 	@Mask
 	@Required(message = "身長が未入力です")
-	@DecimalMin(value = "1", message = "身長が桁数不足です")
+	@DecimalMin(value = "1", message = "身長は1以上の値を入力してください")
 	@DecimalMax(value = "999", message = "身長が桁数超過です")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
 	@Required(message = "体重が未入力です")
-	@DecimalMin(value = "1", message = "体重が桁数不足です")
+	@DecimalMin(value = "1", message = "体重は1以上の値を入力してください")
 	@DecimalMax(value = "999", message = "体重が桁数超過です")
 	private BigDecimal weight;
-	/** 体型 */
-	// @Required(message = "体型が未入力です")
-	private String bodyType;
 	/** 生活活動代謝 */
 	@Required(message = "生活活動代謝が未入力です")
-	@Pattern(regixPattern = RegixType.DECIMAL, message = "生活活動代謝は半角数字の少数型で入力して下さい")
+	@Pattern(regixPattern = RegixType.DECIMAL, message = "生活活動代謝は半角数字の少数で入力して下さい")
 	private BigDecimal lifeWorkMetabolism;
 
 	/**
@@ -124,25 +121,6 @@ public class CalorieCalcForm implements BaseForm {
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
-	}
-
-	/**
-	 * bodyTypeを返す
-	 *
-	 * @return bodyType
-	 */
-	public String getBodyType() {
-		return bodyType;
-	}
-
-	/**
-	 * bodyTypeを設定する
-	 *
-	 * @param bodyType
-	 *     体型
-	 */
-	public void setBodyType(String bodyType) {
-		this.bodyType = bodyType;
 	}
 
 	/**

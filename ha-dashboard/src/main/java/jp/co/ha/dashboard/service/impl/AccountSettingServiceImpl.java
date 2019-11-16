@@ -53,15 +53,14 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 		// アカウント情報を検索し、アカウント情報をDTOにマージする
 		Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
 		mergeAccount(dto, befAccount);
+		// アカウント情報を更新する
+		accountUpdateService.update(befAccount);
 
 		// メール情報を検索
 		Optional<MailInfo> befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
 		if (befMailInfo.isPresent()) {
 			// メール情報が登録されている場合
 			mergeMailInfo(dto, befMailInfo.get());
-
-			// アカウント情報を更新する
-			accountUpdateService.update(befAccount);
 
 			// メール情報を更新する
 			mailInfoUpdateService.update(befMailInfo.get());
@@ -70,9 +69,6 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 			MailInfo mailInfo = new MailInfo();
 
 			mergeMailInfo(dto, mailInfo);
-
-			// アカウント情報を更新する
-			accountUpdateService.update(befAccount);
 
 			// メール情報を新規登録する
 			mailInfoCreateService.create(mailInfo);

@@ -2,12 +2,11 @@ package jp.co.ha.business.dto;
 
 import java.math.BigDecimal;
 
-import jp.co.ha.business.healthInfo.type.BodyType;
 import jp.co.ha.business.healthInfo.type.GenderType;
 
 /**
  * カロリー計算DTO
- * 
+ *
  * @since 1.0
  */
 public class CalorieCalcDto {
@@ -20,8 +19,6 @@ public class CalorieCalcDto {
 	private BigDecimal height;
 	/** 体重 */
 	private BigDecimal weight;
-	/** 体型 */
-	private BodyType bodyType;
 	/** 生活活動代謝 */
 	private BigDecimal lifeWorkMetabolism;
 	/** 基礎代謝量 */
@@ -103,25 +100,6 @@ public class CalorieCalcDto {
 	 */
 	public void setWeight(BigDecimal weight) {
 		this.weight = weight;
-	}
-
-	/**
-	 * bodyTypeを返す
-	 *
-	 * @return bodyType
-	 */
-	public BodyType getBodyType() {
-		return bodyType;
-	}
-
-	/**
-	 * bodyTypeを設定する
-	 *
-	 * @param bodyType
-	 *     体型
-	 */
-	public void setBodyType(BodyType bodyType) {
-		this.bodyType = bodyType;
 	}
 
 	/**

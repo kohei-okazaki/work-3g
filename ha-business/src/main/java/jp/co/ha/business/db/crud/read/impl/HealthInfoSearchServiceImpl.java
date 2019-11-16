@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.HealthInfoExample.Criteria;
@@ -35,12 +34,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	@Transactional(readOnly = true)
 	public HealthInfo findLastByUserId(String userId) throws BaseException {
-		HealthInfoExample example = new HealthInfoExample();
-		example.setOrderByClause("HEALTH_INFO_REG_DATE");
-		Criteria criteria = example.createCriteria();
-		// ユーザID
-		criteria.andUserIdEqualTo(userId);
-		return CollectionUtil.getLast(mapper.selectByExample(example));
+		return mapper.selectByUserIdLast(userId);
 	}
 
 	/**

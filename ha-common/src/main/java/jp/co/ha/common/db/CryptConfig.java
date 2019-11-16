@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * crypt.propertiesのBean
- * 
+ *
  * @since 1.0
  */
 @Component
@@ -14,6 +14,8 @@ public class CryptConfig {
 	private String mode;
 	/** Key */
 	private String key;
+	/** Shift数 */
+	private int shift;
 
 	/**
 	 * modeを返す
@@ -51,6 +53,24 @@ public class CryptConfig {
 	 */
 	public void setKey(String key) {
 		this.key = key;
+	}
+
+	/**
+	 * shiftを返す
+	 *
+	 * @return shift
+	 */
+	public int getShift() {
+		return shift;
+	}
+
+	/**
+	 * shiftを設定する
+	 *
+	 * @param shift
+	 */
+	public void setShift(String shift) {
+		this.shift = Integer.parseInt(shift);
 	}
 
 }

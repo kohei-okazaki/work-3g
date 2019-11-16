@@ -14,7 +14,7 @@ import jp.co.ha.common.validator.annotation.Required;
 
 /**
  * 健康情報登録リクエストクラス
- * 
+ *
  * @since 1.0
  */
 public class HealthInfoRegistRequest extends CommonApiRequest {
@@ -22,13 +22,13 @@ public class HealthInfoRegistRequest extends CommonApiRequest {
 	/** 身長 */
 	@Mask
 	@Required(message = "heightが未設定です")
-	@Pattern(regixPattern = RegixType.DECIMAL)
+	@Pattern(regixPattern = RegixType.DECIMAL, message = "heightが数値でありません")
 	@JsonProperty("height")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
 	@Required(message = "weightが未設定です")
-	@Pattern(regixPattern = RegixType.DECIMAL)
+	@Pattern(regixPattern = RegixType.DECIMAL, message = "weightが数値でありません")
 	@JsonProperty("weight")
 	private BigDecimal weight;
 	/** テストモード種別 */

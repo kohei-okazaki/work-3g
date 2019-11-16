@@ -9,23 +9,16 @@ import jp.co.ha.web.type.ResultType;
 
 /**
  * API基底レスポンス
- * 
+ *
  * @since 1.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public abstract class BaseApiResponse implements BaseForm {
 
-	/**
-	 * デフォルトコンストラクタ
-	 */
-	public BaseApiResponse() {
-		this.resultType = ResultType.SUCCESS;
-	}
-
 	/** API結果コード */
 	@JsonSerialize(using = ResultTypeSerializer.class)
 	@JsonProperty(value = "result")
-	private ResultType resultType;
+	private ResultType resultType = ResultType.SUCCESS;
 
 	/**
 	 * resultTypeを返す

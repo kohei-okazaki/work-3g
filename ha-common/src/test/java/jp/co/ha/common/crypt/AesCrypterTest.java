@@ -1,4 +1,4 @@
-package jp.co.ha.common.db;
+package jp.co.ha.common.crypt;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,7 @@ import jp.co.ha.common.BaseCommonTest;
 
 /**
  * {@link AesCrypter} のjUnit
- * 
+ *
  * @since 1.0
  */
 public class AesCrypterTest extends BaseCommonTest {
@@ -21,7 +21,7 @@ public class AesCrypterTest extends BaseCommonTest {
 	private Crypter crypter;
 
 	/**
-	 * 暗号化復号化テスト
+	 * 暗号化復号テスト
 	 */
 	@Test
 	public void cryptTest() {

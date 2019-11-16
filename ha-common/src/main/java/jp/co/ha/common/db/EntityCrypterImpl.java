@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.common.crypt.Crypter;
 import jp.co.ha.common.db.annotation.Crypt;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -79,8 +80,11 @@ public class EntityCrypterImpl implements EntityCrypter {
 	}
 
 	/**
-	 * 指定したフィールドが暗号化項目かどうか判定する 暗号化項目の場合true<br>
-	 * それ以外の場合false
+	 * 指定したフィールドが暗号化項目かどうか判定する<br>
+	 * <ul>
+	 * <li>暗号化項目の場合、true</li>
+	 * <li>それ以外の場合、false</li>
+	 * </ul>
 	 *
 	 * @param f
 	 *     フィールド
