@@ -21,6 +21,7 @@
   <context:annotation-config />
 
   <context:component-scan base-package="jp.co.ha.common.system" />
+  <context:component-scan base-package="jp.co.ha.common.crypt" />
   <context:component-scan base-package="jp.co.ha.common.db" />
   <context:component-scan base-package="jp.co.ha.common.io" />
 
@@ -51,6 +52,7 @@
   <bean id="cryptConfig" class="jp.co.ha.common.db.CryptConfig" lazy-init="true">
     <property name="mode" value="${crypt.mode}" />
     <property name="key" value="${crypt.key}" />
+    <property name="shift" value="${crypt.shift}" />
   </bean>
 
 </beans>

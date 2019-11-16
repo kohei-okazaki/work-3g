@@ -1,4 +1,4 @@
-package jp.co.ha.common.db;
+package jp.co.ha.common.crypt;
 
 /**
  * 暗号化インターフェース

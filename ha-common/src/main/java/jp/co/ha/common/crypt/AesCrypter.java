@@ -1,4 +1,4 @@
-package jp.co.ha.common.db;
+package jp.co.ha.common.crypt;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
@@ -9,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.common.db.CryptConfig;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.type.Algorithm;

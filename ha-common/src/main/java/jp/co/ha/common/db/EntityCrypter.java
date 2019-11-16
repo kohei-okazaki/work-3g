@@ -20,7 +20,7 @@ public interface EntityCrypter {
 	void encrypt(Object entity) throws BaseException;
 
 	/**
-	 * 指定されたEntityクラスの復号化を行う
+	 * 指定されたEntityクラスの復号を行う
 	 *
 	 * @param entity
 	 *     Entityクラス
