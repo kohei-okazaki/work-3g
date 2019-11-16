@@ -68,8 +68,6 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		healthInfoCreateService.create(entity);
 
 		BeanUtil.copy(entity, response);
-		HealthInfo lastEntity = healthInfoSearchService.findLastByUserId(entity.getUserId());
-		response.setHealthInfoId(lastEntity.getHealthInfoId());
 	}
 
 	/**
@@ -88,10 +86,10 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		BigDecimal weight = request.getWeight();
 
 		// メートルに変換する
-		BigDecimal centiMeterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
+		BigDecimal meterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
 
-		BigDecimal bmi = healthInfoCalcService.calcBmi(centiMeterHeight, weight, 2);
-		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(centiMeterHeight, 2);
+		BigDecimal bmi = healthInfoCalcService.calcBmi(meterHeight, weight, 2);
+		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(meterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
 		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
