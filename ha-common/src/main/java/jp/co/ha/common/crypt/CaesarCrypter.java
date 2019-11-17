@@ -34,6 +34,7 @@ public class CaesarCrypter implements Crypter {
 			int shifted = str.charAt(i);
 			char c = (char) (shifted + cryptConfig.getShift());
 			if (c > 'z') {
+				// zより後ろの文字列の場合、aに戻す為26引く
 				result += (char) (c - 26);
 			} else {
 				result += c;
@@ -55,6 +56,7 @@ public class CaesarCrypter implements Crypter {
 			int shifted = str.charAt(i);
 			char c = (char) (shifted - cryptConfig.getShift());
 			if (c < 'a') {
+				// zより後ろの文字列の場合、aに戻す為26引く
 				result += (char) (c + 26);
 			} else {
 				result += c;

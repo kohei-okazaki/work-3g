@@ -7,7 +7,7 @@ import jp.co.ha.tool.build.BuildInvoker;
  * 
  * @since 1.0
  */
-public class SqlExecutor {
+public class ToolExecutor {
 
 	/**
 	 * 実行したいビルダークラスをjp.co.ha.tool.build.BuildInvoker#buildの引数に設定して下さい

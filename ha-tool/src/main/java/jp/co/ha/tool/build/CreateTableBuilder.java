@@ -54,6 +54,7 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 	}
 
 	private Table toTable(List<Row> rowList, String tableName) {
+
 		Table table = new Table();
 		table.setPhysicalName(tableName);
 		String logicalName = rowList.stream().filter(e -> isTargetTable(e, tableName))
