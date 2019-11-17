@@ -69,12 +69,4 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 		return table;
 	}
 
-	private String getColumnComment(Row row) {
-		return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
-	}
-
-	private String getColumnName(Row row) {
-		return row.getCell(CellPositionType.COLUMN_NAME).getValue();
-	}
-
 }

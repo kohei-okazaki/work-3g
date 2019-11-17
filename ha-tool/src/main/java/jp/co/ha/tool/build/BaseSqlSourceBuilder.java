@@ -10,7 +10,7 @@ import jp.co.ha.tool.type.CellPositionType;
 
 /**
  * SQLのビルダー
- * 
+ *
  * @since 1.0
  */
 public abstract class BaseSqlSourceBuilder extends BaseBuilder {
@@ -27,6 +27,14 @@ public abstract class BaseSqlSourceBuilder extends BaseBuilder {
 			body.add("NOT NULL PRIMARY KEY");
 		}
 		return body.toString();
+	}
+
+	protected String getColumnName(Row row) {
+		return row.getCell(CellPositionType.COLUMN_NAME).getValue();
+	}
+
+	protected String getColumnComment(Row row) {
+		return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
 
 	protected boolean isSequence(Row row) {
