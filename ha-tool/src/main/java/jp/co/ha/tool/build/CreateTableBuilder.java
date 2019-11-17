@@ -1,5 +1,6 @@
 package jp.co.ha.tool.build;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
@@ -13,23 +14,23 @@ import jp.co.ha.tool.db.Column;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
-import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
  * テーブル作成のDDLを作成するビルダー
- * 
+ *
  * @since 1.0
  */
 public class CreateTableBuilder extends BaseSqlSourceBuilder {
 
 	@Build
-	public void execute() {
+	public List<FileConfig> execute() {
 
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
 
+		List<FileConfig> list = new ArrayList<>();
 		for (String tableName : this.targetTableList) {
 			Table table = toTable(excel.getRowList(), tableName);
 			StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
@@ -40,7 +41,8 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 				String comment = e.getComment();
 				String name = e.getName();
 				String type = e.getType();
-				columnData.add(comment + StringUtil.NEW_LINE + name + StringUtil.SPACE + type);
+				columnData.add("-- " + comment + StringUtil.NEW_LINE + name + StringUtil.SPACE + type + " comment '"
+						+ comment + "'");
 			});
 			body.add(columnData.toString());
 			body.add(");");
@@ -48,11 +50,13 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 			FileConfig conf = getFileConfig(ExecuteType.DDL);
 			conf.setFileName(tableName.toUpperCase() + FileExtension.SQL.getValue());
 			conf.setData(body.toString());
-			FileFactory.create(conf);
+			list.add(conf);
 		}
+		return list;
 	}
 
 	private Table toTable(List<Row> rowList, String tableName) {
+
 		Table table = new Table();
 		table.setPhysicalName(tableName);
 		String logicalName = rowList.stream().filter(e -> isTargetTable(e, tableName))
@@ -66,14 +70,6 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 			return column;
 		}).collect(Collectors.toList()));
 		return table;
-	}
-
-	private String getColumnComment(Row row) {
-		return "-- " + row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
-	}
-
-	private String getColumnName(Row row) {
-		return row.getCell(CellPositionType.COLUMN_NAME).getValue();
 	}
 
 }

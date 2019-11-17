@@ -19,8 +19,9 @@ import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
- * 基底ビルダー
- * 
+ * 基底Builder<br>
+ * すべての自動生成のメイン処理を定義するBuilderは本クラスを継承する
+ *
  * @since 1.0
  */
 public abstract class BaseBuilder {
@@ -67,7 +68,7 @@ public abstract class BaseBuilder {
 	 *
 	 * @return ExcelConfig
 	 */
-	protected ExcelConfig getExcelConfig() {
+	private ExcelConfig getExcelConfig() {
 		ExcelConfig conf = new ExcelConfig();
 		StringJoiner sj = new StringJoiner(FileSeparator.SYSTEM.getValue());
 		sj.add(this.baseDir).add("ha-resource").add("02_db").add("DB.xlsx");
@@ -77,7 +78,8 @@ public abstract class BaseBuilder {
 	}
 
 	/**
-	 * ファイル設定情報を返す
+	 * ファイル設定情報を返す<br>
+	 * 今後SQLを自動生成する場合、ここに出力先を定義する
 	 *
 	 * @param execType
 	 *     実行タイプ
@@ -114,7 +116,7 @@ public abstract class BaseBuilder {
 	 * @param row
 	 *     excelの行情報
 	 * @param tableName
-	 *     テーブル名
+	 *     物理テーブル名
 	 * @return 判定結果
 	 */
 	protected boolean isTargetTable(Row row, String tableName) {

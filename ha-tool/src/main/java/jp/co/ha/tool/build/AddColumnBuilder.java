@@ -13,7 +13,6 @@ import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
-import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
@@ -27,13 +26,13 @@ import jp.co.ha.tool.type.ExecuteType;
  * の場合、<br>
  * <code>ALTER TABLE HOGE ADD PIYO FUGA;</code><br>
  * のDDLを作成
- * 
+ *
  * @since 1.0
  */
 public class AddColumnBuilder extends BaseSqlSourceBuilder {
 
 	@Build
-	public void execute() {
+	public FileConfig execute() {
 
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
@@ -48,7 +47,9 @@ public class AddColumnBuilder extends BaseSqlSourceBuilder {
 			String tableName = e.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 			String columnName = e.getCell(CellPositionType.COLUMN_NAME).getValue();
 			String columnType = getColumnType(e);
-			String ddl = ddlPrefix + tableName + " ADD " + columnName + " " + columnType + ddlSuffix;
+			String columnComment = getColumnComment(e);
+			String ddl = ddlPrefix + tableName + " ADD " + columnName + " " + columnType + " '" + columnComment + "'"
+					+ ddlSuffix;
 			body.add(ddl);
 		});
 
@@ -56,7 +57,7 @@ public class AddColumnBuilder extends BaseSqlSourceBuilder {
 		fileConf.setFileName(DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
 				+ FileExtension.SQL.getValue());
 		fileConf.setData(body.toString());
-		FileFactory.create(fileConf);
+		return fileConf;
 	}
 
 	private List<Row> getTargetRowList(List<Row> rowList) {

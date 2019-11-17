@@ -12,19 +12,18 @@ import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
-import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
  * DROP.sqlのビルダー
- * 
+ *
  * @since 1.0
  */
 public class DropBuilder extends BaseSqlSourceBuilder {
 
 	@Build
-	public void execute() {
+	public FileConfig execute() {
 
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
@@ -39,7 +38,7 @@ public class DropBuilder extends BaseSqlSourceBuilder {
 		FileConfig conf = getFileConfig(ExecuteType.DROP);
 		conf.setFileName("DROP" + FileExtension.SQL.getValue());
 		conf.setData(body.toString());
-		FileFactory.create(conf);
+		return conf;
 	}
 
 	private List<Table> getTableList(List<Row> rowList) {

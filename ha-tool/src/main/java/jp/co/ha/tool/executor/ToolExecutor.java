@@ -4,10 +4,10 @@ import jp.co.ha.tool.build.BuildInvoker;
 
 /**
  * 処理クラス
- * 
+ *
  * @since 1.0
  */
-public class SqlExecutor {
+public class ToolExecutor {
 
 	/**
 	 * 実行したいビルダークラスをjp.co.ha.tool.build.BuildInvoker#buildの引数に設定して下さい
@@ -23,6 +23,6 @@ public class SqlExecutor {
 	 *     使わない
 	 */
 	public static void main(String[] args) {
-		BuildInvoker.build("CreateTableBuilder");
+		BuildInvoker.build("CreateTableBuilder", "DropBuilder", "TableDefineBuilder");
 	}
 }

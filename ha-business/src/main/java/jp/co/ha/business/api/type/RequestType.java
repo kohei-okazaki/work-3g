@@ -4,7 +4,7 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * APIのリクエスト種別の列挙
- * 
+ *
  * @since 1.0
  */
 public enum RequestType implements BaseEnum {
@@ -40,17 +40,6 @@ public enum RequestType implements BaseEnum {
 	 */
 	public static RequestType of(String value) {
 		return BaseEnum.of(RequestType.class, value);
-	}
-
-	/**
-	 * 指定したリクエストタイプが自身と一致するかどうか判定する
-	 *
-	 * @param requestType
-	 *     リクエストタイプ
-	 * @return 一致する場合true, それ以外の場合false
-	 */
-	public boolean is(RequestType requestType) {
-		return this == requestType;
 	}
 
 	/**

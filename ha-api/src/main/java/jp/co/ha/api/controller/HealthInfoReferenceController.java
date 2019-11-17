@@ -12,13 +12,13 @@ import jp.co.ha.web.controller.BaseRestController;
 
 /**
  * 健康情報照会コントローラ
- * 
+ *
  * @since 1.0
  */
 @RestController
 @RequestMapping(value = "/healthInfoReference")
-public class HealthInfoReferenceController extends
-		BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+public class HealthInfoReferenceController
+		extends BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
 	/** 健康情報照会API */
 	@Autowired
