@@ -31,10 +31,10 @@ import jp.co.ha.common.util.DateUtil;
  */
 @Aspect
 @Component
-public class DataBaseCommonExecutor {
+public class DataBaseCommonAspect {
 
 	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(DataBaseCommonExecutor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DataBaseCommonAspect.class);
 
 	/** Entity暗号/復号インターフェース */
 	@Autowired
