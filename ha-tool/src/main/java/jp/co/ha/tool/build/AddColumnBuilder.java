@@ -13,7 +13,6 @@ import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
-import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
@@ -33,7 +32,7 @@ import jp.co.ha.tool.type.ExecuteType;
 public class AddColumnBuilder extends BaseSqlSourceBuilder {
 
 	@Build
-	public void execute() {
+	public FileConfig execute() {
 
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
@@ -58,7 +57,7 @@ public class AddColumnBuilder extends BaseSqlSourceBuilder {
 		fileConf.setFileName(DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
 				+ FileExtension.SQL.getValue());
 		fileConf.setData(body.toString());
-		FileFactory.create(fileConf);
+		return fileConf;
 	}
 
 	private List<Row> getTargetRowList(List<Row> rowList) {

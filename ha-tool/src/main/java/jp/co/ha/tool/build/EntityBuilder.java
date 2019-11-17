@@ -12,7 +12,6 @@ import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
-import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.source.Field;
 import jp.co.ha.tool.source.Getter;
 import jp.co.ha.tool.source.Import;
@@ -37,11 +36,12 @@ public class EntityBuilder extends BaseBuilder {
 
 	@Build
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void execute() {
+	public List<FileConfig> execute() {
 
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
 
+		List<FileConfig> list = new ArrayList<>();
 		for (String table : this.targetTableList) {
 			JavaSource source = new JavaSource();
 			setCommonInfo(source);
@@ -72,8 +72,10 @@ public class EntityBuilder extends BaseBuilder {
 			FileConfig fileConf = getFileConfig(ExecuteType.ENTITY);
 			fileConf.setFileName(toJavaFileName(table) + FileExtension.JAVA.getValue());
 			fileConf.setData(build(source));
-			FileFactory.create(fileConf);
+			list.add(fileConf);
 		}
+
+		return list;
 	}
 
 	private String getColumnComment(Row row) {

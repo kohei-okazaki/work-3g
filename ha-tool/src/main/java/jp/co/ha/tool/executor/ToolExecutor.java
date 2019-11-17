@@ -4,7 +4,7 @@ import jp.co.ha.tool.build.BuildInvoker;
 
 /**
  * 処理クラス
- * 
+ *
  * @since 1.0
  */
 public class ToolExecutor {
@@ -23,6 +23,6 @@ public class ToolExecutor {
 	 *     使わない
 	 */
 	public static void main(String[] args) {
-		BuildInvoker.build("CreateTableBuilder");
+		BuildInvoker.build("CreateTableBuilder", "DropBuilder", "TableDefineBuilder");
 	}
 }

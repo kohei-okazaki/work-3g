@@ -12,19 +12,18 @@ import jp.co.ha.tool.config.FileConfig;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
-import jp.co.ha.tool.factory.FileFactory;
 import jp.co.ha.tool.type.CellPositionType;
 import jp.co.ha.tool.type.ExecuteType;
 
 /**
  * TABLE_DEFINE.sqlのビルダー
- * 
+ *
  * @since 1.0
  */
 public class TableDefineBuilder extends BaseSqlSourceBuilder {
 
 	@Build
-	public void execute() {
+	public FileConfig create() {
 
 		Excel excel = super.reader.read();
 		excel.activeSheet("TABLE_LIST");
@@ -39,7 +38,7 @@ public class TableDefineBuilder extends BaseSqlSourceBuilder {
 		FileConfig conf = getFileConfig(ExecuteType.TABLE_DEFINE);
 		conf.setFileName("TABLE_DEFINE" + FileExtension.SQL.getValue());
 		conf.setData(body.toString());
-		FileFactory.create(conf);
+		return conf;
 
 	}
 
