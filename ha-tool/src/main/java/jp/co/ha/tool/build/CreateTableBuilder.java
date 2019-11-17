@@ -19,7 +19,7 @@ import jp.co.ha.tool.type.ExecuteType;
 
 /**
  * テーブル作成のDDLを作成するビルダー
- * 
+ *
  * @since 1.0
  */
 public class CreateTableBuilder extends BaseSqlSourceBuilder {
@@ -40,7 +40,8 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 				String comment = e.getComment();
 				String name = e.getName();
 				String type = e.getType();
-				columnData.add(comment + StringUtil.NEW_LINE + name + StringUtil.SPACE + type);
+				columnData.add("-- " + comment + StringUtil.NEW_LINE + name + StringUtil.SPACE + type + " comment '"
+						+ comment + "'");
 			});
 			body.add(columnData.toString());
 			body.add(");");
@@ -69,7 +70,7 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 	}
 
 	private String getColumnComment(Row row) {
-		return "-- " + row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
+		return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
 
 	private String getColumnName(Row row) {
