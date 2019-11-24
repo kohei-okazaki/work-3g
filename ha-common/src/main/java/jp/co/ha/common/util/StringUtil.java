@@ -1,6 +1,8 @@
 package jp.co.ha.common.util;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -157,6 +159,28 @@ public class StringUtil {
 		StringBuilder result = new StringBuilder();
 		Stream.of(bArray).forEach(b -> result.append(String.format("%02x", b)));
 		return result.toString();
+	}
+
+	/**
+	 * 指定した区切り文字で対象文字列を結合する
+	 *
+	 * @param delim
+	 *     区切り文字
+	 * @param ignoreRule
+	 *     結合しない条件
+	 * @param values
+	 *     対象文字列
+	 * @return
+	 */
+	public String join(String delim, Predicate<String> ignoreRule, String... values) {
+
+		if (isEmpty(delim) || CollectionUtil.isEmpty(Arrays.asList(values))) {
+			return null;
+		}
+		StringJoiner sj = new StringJoiner(delim);
+		Arrays.asList(values).stream().filter(e -> ignoreRule == null || !ignoreRule.test(e)).forEach(e -> sj.add(e));
+
+		return sj.toString();
 	}
 
 	/**
