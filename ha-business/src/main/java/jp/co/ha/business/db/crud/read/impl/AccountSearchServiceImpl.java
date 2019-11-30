@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.db.annotation.Select;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.mapper.AccountMapper;
 
@@ -30,7 +29,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
 	@Select
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Account> findByUserId(String userId) throws BaseException {
+	public Optional<Account> findByUserId(String userId) {
 		return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
 	}
 }

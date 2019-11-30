@@ -56,7 +56,7 @@ public abstract class BaseDao {
 		} catch (IllegalArgumentException e) {
 			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "不正な引数が指定されてます", e);
 		} catch (InvocationTargetException e) {
-			LOG.error("", e);
+			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "クラスのインスタンスの生成に失敗しました", e);
 		} catch (NoSuchMethodException e) {
 			throw new SystemException(CommonErrorCode.DB_ACCESS_ERROR, "DB接続時のコンストラクタが見つかりません", e);
 		} catch (SecurityException e) {

@@ -6,12 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.delete.MailInfoDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
  * メール情報削除サービスインターフェース実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -27,7 +26,7 @@ public class MailInfoDeleteServiceImpl implements MailInfoDeleteService {
 	@Delete
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void deleteByUserId(String userId) throws BaseException {
+	public void deleteByUserId(String userId) {
 		mapper.deleteByPrimaryKey(userId);
 	}
 }

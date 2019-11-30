@@ -6,13 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.create.MailInfoCreateService;
 import jp.co.ha.common.db.annotation.Insert;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
  * メール情報作成サービスインターフェース実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -28,7 +27,7 @@ public class MailInfoCreateServiceImpl implements MailInfoCreateService {
 	@Insert
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void create(MailInfo entity) throws BaseException {
+	public void create(MailInfo entity) {
 		mapper.insert(entity);
 	}
 }

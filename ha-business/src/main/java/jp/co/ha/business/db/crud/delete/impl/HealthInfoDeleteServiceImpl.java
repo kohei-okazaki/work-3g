@@ -6,12 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.delete.HealthInfoDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
  * 健康情報削除サービスインターフェース実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -27,7 +26,7 @@ public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
 	@Delete
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void deleteByUserId(Integer healthInfoId) throws BaseException {
+	public void deleteByUserId(Integer healthInfoId) {
 		mapper.deleteByPrimaryKey(healthInfoId);
 	}
 }

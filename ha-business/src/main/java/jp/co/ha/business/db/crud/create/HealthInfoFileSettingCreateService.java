@@ -1,11 +1,10 @@
 package jp.co.ha.business.db.crud.create;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報ファイル設定作成サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HealthInfoFileSettingCreateService {
@@ -15,8 +14,6 @@ public interface HealthInfoFileSettingCreateService {
 	 *
 	 * @param entity
 	 *     健康情報ファイル設定
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	void create(HealthInfoFileSetting entity) throws BaseException;
+	void create(HealthInfoFileSetting entity);
 }

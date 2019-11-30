@@ -1,11 +1,10 @@
 package jp.co.ha.business.db.crud.update;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.MailInfo;
 
 /**
  * メール情報更新サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface MailInfoUpdateService {
@@ -15,8 +14,6 @@ public interface MailInfoUpdateService {
 	 *
 	 * @param entity
 	 *     メール情報
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	void update(MailInfo entity) throws BaseException;
+	void update(MailInfo entity);
 }

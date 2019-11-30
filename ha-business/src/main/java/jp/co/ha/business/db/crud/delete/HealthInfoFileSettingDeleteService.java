@@ -1,10 +1,8 @@
 package jp.co.ha.business.db.crud.delete;
 
-import jp.co.ha.common.exception.BaseException;
-
 /**
  * 健康情報ファイル設定削除サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HealthInfoFileSettingDeleteService {
@@ -14,8 +12,6 @@ public interface HealthInfoFileSettingDeleteService {
 	 *
 	 * @param userId
 	 *     ユーザID
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	void deleteByUserId(String userId) throws BaseException;
+	void deleteByUserId(String userId);
 }

@@ -11,11 +11,12 @@ import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil.PaddingType;
 
 /**
  * {@link StringUtil} のjUnit
- * 
+ *
  * @since 1.0
  */
 public class StringUtilTest extends BaseCommonTest {
@@ -158,6 +159,62 @@ public class StringUtilTest extends BaseCommonTest {
 			LOG.error("PaddingTypeの指定が不正", e);
 		}
 
+	}
+
+	/**
+	 * {@link StringUtil#slice}
+	 */
+	@Test
+	public void testSlice() {
+		{
+			String str = "あいうえお";
+			Charset charset = Charset.SHIFT_JIS;
+			int length = 4;
+			assertEquals("あい", StringUtil.slice(str, charset, length));
+		}
+		{
+			String str = "あいうえお";
+			Charset charset = Charset.SHIFT_JIS;
+			int length = 5;
+			assertEquals("あい", StringUtil.slice(str, charset, length));
+		}
+		{
+			String str = "";
+			Charset charset = Charset.SHIFT_JIS;
+			int length = 4;
+			assertEquals(null, StringUtil.slice(str, charset, length));
+		}
+		{
+			String str = null;
+			Charset charset = Charset.SHIFT_JIS;
+			int length = 5;
+			assertEquals(null, StringUtil.slice(str, charset, length));
+		}
+
+		{
+			String str = "あいうえお";
+			Charset charset = Charset.UTF_8;
+			int length = 4;
+			assertEquals("あ", StringUtil.slice(str, charset, length));
+		}
+		{
+			String str = "あいうえお";
+			Charset charset = Charset.UTF_8;
+			int length = 5;
+			assertEquals("あ", StringUtil.slice(str, charset, length));
+		}
+		{
+			String str = "あいうえお";
+			Charset charset = Charset.UTF_8;
+			int length = 6;
+			assertEquals("あい", StringUtil.slice(str, charset, length));
+		}
+		{
+			String str = "あいうえお";
+			Charset charset = Charset.UTF_8;
+			int length = 7;
+			assertEquals("あい", StringUtil.slice(str, charset, length));
+		}
 	}
 
 }
