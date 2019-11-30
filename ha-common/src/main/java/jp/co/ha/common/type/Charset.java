@@ -10,7 +10,9 @@ public enum Charset implements BaseEnum {
 	/** MS932 */
 	MS_932("MS932"),
 	/** UTF-8 */
-	UTF_8("UTF-8");
+	UTF_8("UTF-8"),
+	/** Shift-JIS */
+	SHIFT_JIS("Shift-JIS");
 
 	/** 値 */
 	private String value;

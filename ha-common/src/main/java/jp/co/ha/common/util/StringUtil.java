@@ -8,7 +8,8 @@ import java.util.stream.Stream;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.SystemException;
+import jp.co.ha.common.exception.SystemRuntimeException;
+import jp.co.ha.common.type.Charset;
 
 /**
  * 文字列のUtilクラス
@@ -125,10 +126,8 @@ public class StringUtil {
 	 * @param paddingType
 	 *     Paddingタイプ(右詰/左詰)
 	 * @return Padding後の文字列
-	 * @throws BaseException
-	 *     PaddingTypeの指定が不正の場合
 	 */
-	public static String padding(String target, int length, String str, PaddingType paddingType) throws BaseException {
+	public static String padding(String target, int length, String str, PaddingType paddingType) {
 		if (length <= target.length()) {
 			// 指定した文字長がlength以上の場合
 			return target;
@@ -142,7 +141,7 @@ public class StringUtil {
 				// 右詰
 				body = str + body;
 			} else {
-				throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
+				throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
 			}
 		}
 		return body;
@@ -181,6 +180,51 @@ public class StringUtil {
 		Arrays.asList(values).stream().filter(e -> ignoreRule == null || !ignoreRule.test(e)).forEach(e -> sj.add(e));
 
 		return sj.toString();
+	}
+
+	/**
+	 * 指定した文字列<code>str</code>を<code>length</code>で切り取る<br>
+	 *
+	 * @param str
+	 *     対象文字列
+	 * @param charset
+	 *     文字コード
+	 * @param length
+	 *     切りたい文字列の長さ
+	 * @return 切り取った後の文字列
+	 */
+	public static String slice(String str, Charset charset, int length) {
+
+		String result = null;
+		if (isEmpty(str)) {
+			return result;
+		}
+
+		try {
+			byte[] b = str.getBytes(charset.getValue());
+			if (b.length <= length) {
+				result = str;
+			} else {
+				String s = new String(b, 0, length, charset.getValue());
+				// 切り取った文字列の最後の1文字の位置
+				int cutLastLen = s.length() - 1;
+				// 切り取った文字列の最後の文字
+				char c1 = s.charAt(cutLastLen);
+				// 切り取る前の文字列の切り取り位置の文字
+				char c2 = str.charAt(cutLastLen);
+				if (c1 == c2) {
+					result = s;
+				} else {
+					// 切り取った文字列の最後の1文字が半端なbyteの場合
+					result = slice(str, charset, length - 1);
+				}
+			}
+		} catch (Exception e) {
+			// 文字コードが不正な場合
+			throw new SystemRuntimeException(e);
+		}
+		return result;
+
 	}
 
 	/**
