@@ -2,7 +2,6 @@ package jp.co.ha.business.db.crud.read;
 
 import java.util.Optional;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 
 /**
@@ -18,9 +17,7 @@ public interface AccountSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return アカウント情報
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	Optional<Account> findByUserId(String userId) throws BaseException;
+	Optional<Account> findByUserId(String userId);
 
 }

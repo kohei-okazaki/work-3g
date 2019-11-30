@@ -6,13 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.common.db.annotation.Insert;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.mapper.AccountMapper;
 
 /**
  * アカウント情報作成サービスインターフェース実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -28,7 +27,7 @@ public class AccountCreateServiceImpl implements AccountCreateService {
 	@Insert
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public void create(Account entity) throws BaseException {
+	public void create(Account entity) {
 		mapper.insert(entity);
 	}
 

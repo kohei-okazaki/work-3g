@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.common.db.annotation.Select;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.HealthInfoExample.Criteria;
@@ -33,7 +32,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Select
 	@Override
 	@Transactional(readOnly = true)
-	public HealthInfo findLastByUserId(String userId) throws BaseException {
+	public HealthInfo findLastByUserId(String userId) {
 		return mapper.selectByUserIdLast(userId);
 	}
 
@@ -44,7 +43,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
-			Date toHealthInfoRegDate) throws BaseException {
+			Date toHealthInfoRegDate) {
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
 		// ユーザID
@@ -63,7 +62,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Select
 	@Override
 	@Transactional(readOnly = true)
-	public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) throws BaseException {
+	public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) {
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
 		// 健康情報ID
@@ -79,7 +78,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Select
 	@Override
 	@Transactional(readOnly = true)
-	public int getSelectCountByUserId(String userId) throws BaseException {
+	public int getSelectCountByUserId(String userId) {
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
 		// ユーザID

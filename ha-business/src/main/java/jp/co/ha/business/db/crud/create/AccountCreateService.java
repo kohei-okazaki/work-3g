@@ -1,11 +1,10 @@
 package jp.co.ha.business.db.crud.create;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
 
 /**
  * アカウント作成サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface AccountCreateService {
@@ -15,8 +14,6 @@ public interface AccountCreateService {
 	 *
 	 * @param entity
 	 *     アカウント情報
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	void create(Account entity) throws BaseException;
+	void create(Account entity);
 }

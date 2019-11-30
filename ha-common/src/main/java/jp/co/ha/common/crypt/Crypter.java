@@ -1,7 +1,7 @@
 package jp.co.ha.common.crypt;
 
 /**
- * 暗号化インターフェース
+ * 暗号化復号インターフェース
  *
  * @since 1.0
  */

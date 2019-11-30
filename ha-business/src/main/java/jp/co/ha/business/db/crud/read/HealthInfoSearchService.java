@@ -3,7 +3,6 @@ package jp.co.ha.business.db.crud.read;
 import java.util.Date;
 import java.util.List;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -19,10 +18,8 @@ public interface HealthInfoSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return 健康情報Entity
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	HealthInfo findLastByUserId(String userId) throws BaseException;
+	HealthInfo findLastByUserId(String userId);
 
 	/**
 	 * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
@@ -34,11 +31,9 @@ public interface HealthInfoSearchService {
 	 * @param toHealthInfoRegDate
 	 *     YYYYMMDD
 	 * @return 健康情報のリスト
-	 * @throws BaseException
-	 *     基底例外
 	 */
 	List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
-			Date toHealthInfoRegDate) throws BaseException;
+			Date toHealthInfoRegDate);
 
 	/**
 	 * 指定された健康情報IDとユーザIDと一致する健康情報を返す
@@ -48,10 +43,8 @@ public interface HealthInfoSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return 健康情報リスト
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) throws BaseException;
+	List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId);
 
 	/**
 	 * 指定されたユーザIDの件数を返す
@@ -59,9 +52,7 @@ public interface HealthInfoSearchService {
 	 * @param userId
 	 *     ユーザID
 	 * @return 件数
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	int getSelectCountByUserId(String userId) throws BaseException;
+	int getSelectCountByUserId(String userId);
 
 }
