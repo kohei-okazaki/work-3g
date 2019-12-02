@@ -1,0 +1,1 @@
+select * from health_info;
