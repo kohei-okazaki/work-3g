@@ -1,16 +1,16 @@
 @echo off
 
 rem ----------------------------------------------------------------------------------------
-rem 健康情報ファイル登録バッチ
-rem 指定したディレクトリのJSONファイルから健康情報を登録する
+rem ���N���t�@�C���o�^�o�b�`
+rem �w�肵���f�B���N�g����JSON�t�@�C�����猒�N����o�^����
 rem ----------------------------------------------------------------------------------------
 
-rem 共通シェルの読込
+rem ���ʃV�F���̓Ǎ�
 call common.bat
 
 cd %BASE_DIR%\ha-batch\target\classes
 
-rem システム環境変数のJava(JAVA_HOME)だとeclipseでコンパイルしたときのJavaのversionと異なるので、直接、eclipseのJavaで実行する
+rem �V�X�e�����ϐ���Java(JAVA_HOME)����eclipse�ŃR���p�C�������Ƃ���Java��version�ƈقȂ�̂ŁA���ځAeclipse��Java�Ŏ��s����
 %JAVA% -cp %CLASSPATH% %MAIN% HealthInfoFileRegistBatch
 
 cd %~dp0
