@@ -83,6 +83,13 @@ public class EntityBuilder extends BaseBuilder {
 		return list;
 	}
 
+	/**
+	 * カラムコメントを返す
+	 *
+	 * @param row
+	 *     行
+	 * @return カラムコメント
+	 */
 	private String getColumnComment(Row row) {
 		return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
 	}
@@ -101,6 +108,13 @@ public class EntityBuilder extends BaseBuilder {
 		source.addImport(new Import(Serializable.class));
 	}
 
+	/**
+	 * カラム名を返す
+	 * 
+	 * @param row
+	 *     行
+	 * @return カラム名
+	 */
 	private String getFieldName(Row row) {
 		return row.getCell(CellPositionType.COLUMN_NAME).getValue();
 	}

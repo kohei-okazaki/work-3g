@@ -34,21 +34,25 @@ public class BuildInvoker {
 			for (String name : names) {
 				Class<? extends BaseBuilder> builderClass = (Class<BaseBuilder>) Class.forName(PACKEGE + name);
 				for (Method m : builderClass.getDeclaredMethods()) {
-					if (m.isAnnotationPresent(Build.class)) {
-						BaseBuilder builder = builderClass.getDeclaredConstructor().newInstance();
-						Object o = m.invoke(builder);
-						if (o instanceof FileConfig) {
-							FileConfig fileConfig = (FileConfig) m.invoke(builder);
-							// 自動生成ファイルを生成
-							FileFactory.create(fileConfig);
-						} else if (o instanceof List) {
-							List<FileConfig> confList = (List<FileConfig>) m.invoke(builder);
-							// 自動生成ファイルを生成
-							confList.stream().forEach(FileFactory::create);
-						} else {
-							LOG.error("レスポンスが実装されていない");
-						}
+
+					if (!m.isAnnotationPresent(Build.class)) {
+						continue;
 					}
+
+					BaseBuilder builder = builderClass.getDeclaredConstructor().newInstance();
+					Object o = m.invoke(builder);
+					if (o instanceof FileConfig) {
+						FileConfig fileConfig = (FileConfig) m.invoke(builder);
+						// 自動生成ファイルを生成
+						FileFactory.create(fileConfig);
+					} else if (o instanceof List) {
+						List<FileConfig> confList = (List<FileConfig>) m.invoke(builder);
+						// 自動生成ファイルを生成
+						confList.stream().forEach(FileFactory::create);
+					} else {
+						LOG.error("レスポンスが実装されていない");
+					}
+
 				}
 			}
 		} catch (Exception e) {
