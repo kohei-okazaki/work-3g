@@ -1,5 +1,6 @@
 package jp.co.ha.tool.build;
 
+import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Predicate;
 
@@ -103,6 +104,19 @@ public abstract class BaseSqlSourceBuilder extends BaseBuilder {
 	 */
 	protected String getTableComment(String tableLogicalName) {
 		return "-- " + tableLogicalName;
+	}
+
+	/**
+	 * テーブル名が含まれるかどうかを返す
+	 *
+	 * @param tableList
+	 *     テーブルリスト
+	 * @param tblName
+	 *     テーブル名
+	 * @return テーブル名が含まれるかどうか
+	 */
+	protected boolean containsTable(List<String> tableList, String tblName) {
+		return tableList.contains(tblName);
 	}
 
 }

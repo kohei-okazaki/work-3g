@@ -34,6 +34,11 @@ import jp.co.ha.tool.type.ExecuteType;
 @Deprecated
 public class EntityBuilder extends BaseBuilder {
 
+	/**
+	 * 実処理
+	 *
+	 * @return ファイル設定情報リスト
+	 */
 	@Build
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<FileConfig> execute() {
@@ -170,6 +175,13 @@ public class EntityBuilder extends BaseBuilder {
 		return result.toString();
 	}
 
+	/**
+	 * パッケージ形式に変換する
+	 *
+	 * @param source
+	 *     JavaSource
+	 * @return パッケージ形式
+	 */
 	private String buildPackage(JavaSource source) {
 		return source.getPackage().toString();
 	}
