@@ -22,6 +22,11 @@ import jp.co.ha.tool.type.ExecuteType;
  */
 public class DropBuilder extends BaseSqlSourceBuilder {
 
+	/**
+	 * 実処理
+	 *
+	 * @return ファイル設定情報
+	 */
 	@Build
 	public FileConfig execute() {
 

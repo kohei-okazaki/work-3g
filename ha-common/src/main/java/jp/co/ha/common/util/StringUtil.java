@@ -169,7 +169,7 @@ public class StringUtil {
 	 *     結合しない条件
 	 * @param values
 	 *     対象文字列
-	 * @return
+	 * @return 結合した文字列
 	 */
 	public String join(String delim, Predicate<String> ignoreRule, String... values) {
 

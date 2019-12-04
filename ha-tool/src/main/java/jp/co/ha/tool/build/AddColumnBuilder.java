@@ -31,6 +31,11 @@ import jp.co.ha.tool.type.ExecuteType;
  */
 public class AddColumnBuilder extends BaseSqlSourceBuilder {
 
+	/**
+	 * 実処理
+	 *
+	 * @return ファイル設定情報
+	 */
 	@Build
 	public FileConfig execute() {
 
@@ -60,6 +65,13 @@ public class AddColumnBuilder extends BaseSqlSourceBuilder {
 		return fileConf;
 	}
 
+	/**
+	 * <code>rowList</code>から対象行リストを返す
+	 *
+	 * @param rowList
+	 *     行リスト
+	 * @return 対象行リスト
+	 */
 	private List<Row> getTargetRowList(List<Row> rowList) {
 		return rowList.stream().filter(e -> CommonFlag.TRUE.is(e.getCell(CellPositionType.ADD_FLG).getValue()))
 				.collect(Collectors.toList());

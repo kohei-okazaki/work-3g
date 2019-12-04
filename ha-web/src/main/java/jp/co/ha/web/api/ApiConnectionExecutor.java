@@ -35,6 +35,7 @@ public class ApiConnectionExecutor {
 	 *
 	 * @param pjp
 	 *     ProceedingJoinPoint
+	 * @return APIレスポンス
 	 * @throws Throwable
 	 *     実行時のエラー
 	 */

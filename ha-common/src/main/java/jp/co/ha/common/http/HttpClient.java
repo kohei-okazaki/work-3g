@@ -4,9 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
+import jp.co.ha.common.exception.ApiException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Charset;
@@ -14,7 +15,7 @@ import jp.co.ha.common.util.BeanUtil;
 
 /**
  * HTTPクライアント
- * 
+ *
  * @since 1.0
  */
 public class HttpClient {
@@ -60,8 +61,11 @@ public class HttpClient {
 
 	/**
 	 * リクエスト情報を送信する
+	 *
+	 * @throws BaseException
+	 *     HTTP送信に失敗した場合
 	 */
-	public void send() {
+	public void send() throws BaseException {
 
 		HttpURLConnection connection = null;
 		try {
@@ -73,10 +77,8 @@ public class HttpClient {
 
 			connection.connect();
 			httpStatus = HttpStatus.of(String.valueOf(connection.getResponseCode()));
-		} catch (MalformedURLException e) {
-			LOG.error("", e);
 		} catch (IOException e) {
-			LOG.error("", e);
+			throw new ApiException(e);
 		}
 
 		String encoding = getEncoding(connection.getContentEncoding());
