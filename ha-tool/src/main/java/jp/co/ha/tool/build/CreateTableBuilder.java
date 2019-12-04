@@ -24,6 +24,11 @@ import jp.co.ha.tool.type.ExecuteType;
  */
 public class CreateTableBuilder extends BaseSqlSourceBuilder {
 
+	/**
+	 * 実処理
+	 *
+	 * @return ファイル設定情報
+	 */
 	@Build
 	public List<FileConfig> execute() {
 
@@ -55,6 +60,15 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 		return list;
 	}
 
+	/**
+	 * Tableを返す
+	 * 
+	 * @param rowList
+	 *     行リスト
+	 * @param tableName
+	 *     テーブル名
+	 * @return Tableインスタンス
+	 */
 	private Table toTable(List<Row> rowList, String tableName) {
 
 		Table table = new Table();

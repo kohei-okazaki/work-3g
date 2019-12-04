@@ -22,6 +22,11 @@ import jp.co.ha.tool.type.ExecuteType;
  */
 public class DropBuilder extends BaseSqlSourceBuilder {
 
+	/**
+	 * 実処理
+	 *
+	 * @return ファイル設定情報
+	 */
 	@Build
 	public FileConfig execute() {
 
@@ -41,6 +46,13 @@ public class DropBuilder extends BaseSqlSourceBuilder {
 		return conf;
 	}
 
+	/**
+	 * テーブルリストを返す
+	 *
+	 * @param rowList
+	 *     行リスト
+	 * @return テーブルリスト
+	 */
 	private List<Table> getTableList(List<Row> rowList) {
 		// header行を除外
 		List<Row> list = CollectionUtil.copyList(rowList);
@@ -61,10 +73,13 @@ public class DropBuilder extends BaseSqlSourceBuilder {
 		return tableList;
 	}
 
-	private boolean containsTable(List<String> tableList, String tblName) {
-		return tableList.contains(tblName);
-	}
-
+	/**
+	 * DropSQLを返す
+	 *
+	 * @param physicalName
+	 *     物理名
+	 * @return DropSQL
+	 */
 	private String buildDropSql(String physicalName) {
 		String prefix = "DROP TABLE ";
 		String suffix = ";";
