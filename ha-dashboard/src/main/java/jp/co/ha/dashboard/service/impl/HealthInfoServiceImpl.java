@@ -22,8 +22,8 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
+import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
-import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
@@ -104,19 +104,22 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) {
-		CsvConfig csvConfig = new CsvConfig();
+	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
+
+		// ファイル名
 		String fileName = "healthInfoRegist_"
 				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
 				+ FileExtension.CSV.getValue();
-		csvConfig.setFileName(fileName);
-		csvConfig.setHasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()));
-		csvConfig.setHasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()));
-		csvConfig.setCsvFileChar(CsvFileChar.DOBBLE_QUOTE);
-		csvConfig.setHasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()));
-		csvConfig.setUseMask(CommonFlag.TRUE.is(entity.getMaskFlag()));
-		csvConfig.setCharset(Charset.UTF_8);
-		return csvConfig;
+		// ファイル出力先
+		String path = null;
+
+		return new CsvConfigBuilder(fileName, path)
+				.hasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()))
+				.hasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()))
+				.csvFileChar(CsvFileChar.DOBBLE_QUOTE)
+				.hasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()))
+				.useMask(CommonFlag.TRUE.is(entity.getMaskFlag()))
+				.build();
 	}
 
 	/**

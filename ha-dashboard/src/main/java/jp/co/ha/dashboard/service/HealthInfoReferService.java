@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報照会画面サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HealthInfoReferService {
@@ -46,6 +46,8 @@ public interface HealthInfoReferService {
 	 * @param entity
 	 *     健康情報ファイル設定
 	 * @return CSV設定情報
+	 * @throws BaseException
+	 *     基底例外
 	 */
-	CsvConfig getCsvConfig(HealthInfoFileSetting entity);
+	CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException;
 }

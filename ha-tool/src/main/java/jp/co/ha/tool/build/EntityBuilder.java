@@ -110,7 +110,7 @@ public class EntityBuilder extends BaseBuilder {
 
 	/**
 	 * カラム名を返す
-	 * 
+	 *
 	 * @param row
 	 *     行
 	 * @return カラム名
@@ -157,15 +157,36 @@ public class EntityBuilder extends BaseBuilder {
 		return result.replaceFirst(startChar.toString(), large.toString());
 	}
 
+	/**
+	 * クラス名を返す
+	 *
+	 * @param row
+	 *     行
+	 * @return クラス名
+	 */
 	private String getClassName(Row row) {
 		return row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 	}
 
+	/**
+	 * クラス型を取得
+	 *
+	 * @param row
+	 *     行
+	 * @return クラス型
+	 */
 	private Class<?> getClassType(Row row) {
 		String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
 		return ColumnType.of(columnType).getClassType();
 	}
 
+	/**
+	 * Javaファイルを組み立てる
+	 *
+	 * @param source
+	 *     Javaソース
+	 * @return Javaファイル
+	 */
 	private String build(JavaSource source) {
 		StringBuilder result = new StringBuilder();
 

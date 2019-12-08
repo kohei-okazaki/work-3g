@@ -55,12 +55,12 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 			writeHeader((Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
 		// データを書込
-		modelList.stream().forEach(e -> writeData(data, e));
+		modelList.stream().forEach(e -> writeData(this.data, e));
 		if (this.conf.hasFooter()) {
 			// フッタを書込
 			writeFooter((Class<T>) BeanUtil.getParameterType(this.getClass()));
 		}
-		this.pw.print(data.toString());
+		this.pw.print(this.data.toString());
 	}
 
 	/**
@@ -97,7 +97,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	}
 
 	/**
-	 * ヘッダを書込
+	 * ヘッダ部を書込
 	 *
 	 * @param clazz
 	 *     CSVモデルクラス型
@@ -109,19 +109,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	}
 
 	/**
-	 * フッタを書込
-	 *
-	 * @param clazz
-	 *     CSVモデルクラス型
-	 */
-	protected void writeFooter(Class<T> clazz) {
-		StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-		getFooterList(clazz).stream().forEach(e -> write(sj, e));
-		data.add(sj.toString());
-	}
-
-	/**
-	 * データレコードをつめる
+	 * データ部を書込
 	 *
 	 * @param data
 	 *     出力データ
@@ -129,6 +117,18 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 *     T CSV出力モデル
 	 */
 	protected abstract void writeData(StringJoiner data, T model);
+
+	/**
+	 * フッタ部を書込
+	 *
+	 * @param clazz
+	 *     CSVモデルクラス型
+	 */
+	protected void writeFooter(Class<T> clazz) {
+		StringJoiner sj = new StringJoiner(StringUtil.COMMA);
+		getFooterList(clazz).stream().forEach(e -> write(sj, e));
+		this.data.add(sj.toString());
+	}
 
 	/**
 	 * ヘッダ名を取得する
@@ -158,7 +158,7 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 	 * @return data
 	 */
 	public StringJoiner getData() {
-		return data;
+		return this.data;
 	}
 
 }
