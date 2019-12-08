@@ -5,14 +5,14 @@ import jp.co.ha.common.type.Charset;
 /**
  * Excel設定情報保持クラス<br>
  * 今後、追加するExcel設定情報は本クラスで定義する<br>
- * 
+ *
  * @since 1.0
  */
 public class ExcelConfig {
 
 	/** ファイル名 */
 	private String fileName;
-	/** キャラセット */
+	/** 文字コード */
 	private Charset charset;
 	/** ヘッダ有無 */
 	private boolean hasHeader;
