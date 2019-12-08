@@ -1,163 +1,177 @@
 package jp.co.ha.common.io.file.csv;
 
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.function.Builder;
 import jp.co.ha.common.type.Charset;
 
 /**
  * CSV設定情報保持クラス<br>
  * 今後、追加するCSV設定情報は本クラスで定義する
- * 
+ *
  * @since 1.0
  */
 public class CsvConfig {
 
 	/** ファイル名 */
-	private String fileName;
-	/** ヘッダ有無 */
-	private boolean hasHeader;
-	/** 囲い文字有無 */
-	private boolean hasEnclosure;
-	/** 囲い文字 */
-	private CsvFileChar csvFileChar;
-	/** 文字コード */
-	private Charset charset;
-	/** フッタ有無 */
-	private boolean hasFooter;
-	/** マスク利用有無 */
-	private boolean useMask;
+	private final String fileName;
 	/** ファイル出力パス */
-	private String outputPath;
+	private final String outputPath;
+	/** ヘッダ有無 */
+	private final boolean hasHeader;
+	/** 囲い文字有無 */
+	private final boolean hasEnclosure;
+	/** 囲い文字 */
+	private final CsvFileChar csvFileChar;
+	/** 文字コード */
+	private final Charset charset;
+	/** フッタ有無 */
+	private final boolean hasFooter;
+	/** マスク利用有無 */
+	private final boolean useMask;
+
+	/**
+	 * CsvConfigのビルダー
+	 *
+	 * @since 1.0
+	 */
+	public static class CsvConfigBuilder implements Builder<CsvConfig> {
+
+		/* 必須項目 */
+		/** ファイル名 */
+		private final String fileName;
+		/** ファイル出力パス */
+		private final String outputPath;
+
+		/* 任意項目 */
+		/** ヘッダ有無 */
+		private boolean hasHeader = false;
+		/** 囲い文字有無 */
+		private boolean hasEnclosure = false;
+		/** 囲い文字 */
+		private CsvFileChar csvFileChar = CsvFileChar.DOBBLE_QUOTE;
+		/** 文字コード */
+		private Charset charset = Charset.UTF_8;
+		/** フッタ有無 */
+		private boolean hasFooter = false;
+		/** マスク利用有無 */
+		private boolean useMask = false;
+
+		/**
+		 * コンストラクタ
+		 *
+		 * @param fileName
+		 *     ファイル名
+		 * @param outputPath
+		 *     ファイル出力パス
+		 */
+		public CsvConfigBuilder(String fileName, String outputPath) {
+			this.fileName = fileName;
+			this.outputPath = outputPath;
+		}
+
+		/**
+		 * ヘッダ有無を設定
+		 *
+		 * @param hasHeader
+		 *     ヘッダ有無
+		 * @return CsvConfigBuilder
+		 */
+		public CsvConfigBuilder hasHeader(boolean hasHeader) {
+			this.hasHeader = hasHeader;
+			return this;
+		}
+
+		/**
+		 * 囲い文字有無を設定
+		 *
+		 * @param hasEnclosure
+		 *     囲い文字有無
+		 * @return CsvConfigBuilder
+		 */
+		public CsvConfigBuilder hasEnclosure(boolean hasEnclosure) {
+			this.hasEnclosure = hasEnclosure;
+			return this;
+		}
+
+		/**
+		 * 囲い文字を設定
+		 *
+		 * @param csvFileChar
+		 *     囲い文字
+		 * @return CsvConfigBuilder
+		 */
+		public CsvConfigBuilder csvFileChar(CsvFileChar csvFileChar) {
+			this.csvFileChar = csvFileChar;
+			return this;
+		}
+
+		/**
+		 * 文字コードを設定
+		 *
+		 * @param charset
+		 *     文字コード
+		 * @return CsvConfigBuilder
+		 */
+		public CsvConfigBuilder charset(Charset charset) {
+			this.charset = charset;
+			return this;
+		}
+
+		/**
+		 * フッタ有無を設定
+		 *
+		 * @param hasFooter
+		 *     フッタ有無
+		 * @return CsvConfigBuilder
+		 */
+		public CsvConfigBuilder hasFooter(boolean hasFooter) {
+			this.hasFooter = hasFooter;
+			return this;
+		}
+
+		/**
+		 * マスク利用有無を設定
+		 *
+		 * @param useMask
+		 *     マスク利用有無
+		 * @return CsvConfigBuilder
+		 */
+		public CsvConfigBuilder useMask(boolean useMask) {
+			this.useMask = useMask;
+			return this;
+		}
+
+		@Override
+		public CsvConfig build() throws BaseException {
+			return new CsvConfig(this);
+		}
+
+	}
+
+	/**
+	 * コンストラクタ
+	 *
+	 * @param builder
+	 *     CsvConfigのビルダー
+	 */
+	private CsvConfig(CsvConfigBuilder builder) {
+		this.fileName = builder.fileName;
+		this.outputPath = builder.outputPath;
+		this.hasHeader = builder.hasHeader;
+		this.hasEnclosure = builder.hasEnclosure;
+		this.csvFileChar = builder.csvFileChar;
+		this.charset = builder.charset;
+		this.hasFooter = builder.hasFooter;
+		this.useMask = builder.useMask;
+	}
 
 	/**
 	 * fileNameを返す
 	 *
-	 * @return fileName ファイル名
+	 * @return fileName
 	 */
 	public String getFileName() {
 		return fileName;
-	}
-
-	/**
-	 * fileNameを設定する
-	 *
-	 * @param fileName
-	 *     ファイル名
-	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	/**
-	 * hasHeaderを返す
-	 *
-	 * @return hasHeader ヘッダー有無
-	 */
-	public boolean hasHeader() {
-		return hasHeader;
-	}
-
-	/**
-	 * hasHeaderを設定する
-	 *
-	 * @param hasHeader
-	 *     ヘッダー有無
-	 */
-	public void setHasHeader(boolean hasHeader) {
-		this.hasHeader = hasHeader;
-	}
-
-	/**
-	 * hasEnclosureを返す
-	 *
-	 * @return hasEnclosure 囲い文字有無
-	 */
-	public boolean hasEnclosure() {
-		return hasEnclosure;
-	}
-
-	/**
-	 * hasEnclosureを設定する
-	 *
-	 * @param hasEnclosure
-	 *     囲い文字有無
-	 */
-	public void setHasEnclosure(boolean hasEnclosure) {
-		this.hasEnclosure = hasEnclosure;
-	}
-
-	/**
-	 * csvFileCharを返す
-	 *
-	 * @return csvFileChar CSVファイル囲い文字列挙
-	 */
-	public CsvFileChar getCsvFileChar() {
-		return csvFileChar;
-	}
-
-	/**
-	 * csvFileCharを設定する
-	 *
-	 * @param csvFileChar
-	 *     CSVファイル囲い文字列挙
-	 */
-	public void setCsvFileChar(CsvFileChar csvFileChar) {
-		this.csvFileChar = csvFileChar;
-	}
-
-	/**
-	 * charsetを返す
-	 *
-	 * @return charset 文字コード
-	 */
-	public Charset getCharset() {
-		return charset;
-	}
-
-	/**
-	 * charsetを設定する
-	 *
-	 * @param charset
-	 *     文字コード
-	 */
-	public void setCharset(Charset charset) {
-		this.charset = charset;
-	}
-
-	/**
-	 * hasFooterを返す
-	 *
-	 * @return hasFooter フッタ有無
-	 */
-	public boolean hasFooter() {
-		return hasFooter;
-	}
-
-	/**
-	 * hasFooterを設定する
-	 *
-	 * @param hasFooter
-	 *     フッタ有無
-	 */
-	public void setHasFooter(boolean hasFooter) {
-		this.hasFooter = hasFooter;
-	}
-
-	/**
-	 * useMaskを返す
-	 *
-	 * @return useMask
-	 */
-	public boolean useMask() {
-		return useMask;
-	}
-
-	/**
-	 * useMaskを設定する
-	 *
-	 * @param useMask
-	 *     マスク利用有無
-	 */
-	public void setUseMask(boolean useMask) {
-		this.useMask = useMask;
 	}
 
 	/**
@@ -170,13 +184,57 @@ public class CsvConfig {
 	}
 
 	/**
-	 * outputPathを設定する
+	 * hasHeaderを返す
 	 *
-	 * @param outputPath
-	 *     ファイル出力パス
+	 * @return hasHeader
 	 */
-	public void setOutputPath(String outputPath) {
-		this.outputPath = outputPath;
+	public boolean hasHeader() {
+		return hasHeader;
+	}
+
+	/**
+	 * hasEnclosureを返す
+	 *
+	 * @return hasEnclosure
+	 */
+	public boolean hasEnclosure() {
+		return hasEnclosure;
+	}
+
+	/**
+	 * csvFileCharを返す
+	 *
+	 * @return csvFileChar
+	 */
+	public CsvFileChar getCsvFileChar() {
+		return csvFileChar;
+	}
+
+	/**
+	 * charsetを返す
+	 *
+	 * @return charset
+	 */
+	public Charset getCharset() {
+		return charset;
+	}
+
+	/**
+	 * hasFooterを返す
+	 *
+	 * @return hasFooter
+	 */
+	public boolean hasFooter() {
+		return hasFooter;
+	}
+
+	/**
+	 * useMaskを返す
+	 *
+	 * @return useMask
+	 */
+	public boolean useMask() {
+		return useMask;
 	}
 
 }

@@ -14,7 +14,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報入力画面サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HealthInfoService {
@@ -71,7 +71,9 @@ public interface HealthInfoService {
 	 * @param entity
 	 *     健康情報ファイル設定
 	 * @return CsvConfig
+	 * @throws BaseException
+	 *     基底例外
 	 */
-	CsvConfig getCsvConfig(HealthInfoFileSetting entity);
+	CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException;
 
 }
