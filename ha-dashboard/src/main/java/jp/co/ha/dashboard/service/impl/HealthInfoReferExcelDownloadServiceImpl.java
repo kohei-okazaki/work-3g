@@ -15,8 +15,8 @@ import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
+import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
@@ -76,14 +76,15 @@ public class HealthInfoReferExcelDownloadServiceImpl implements ExcelDownloadSer
 	 * @param healthInfoFileSetting
 	 *     健康情報設定情報
 	 * @return Excel設定情報
+	 * @throws BaseException
+	 *     基底例外
 	 */
-	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) {
-		ExcelConfig conf = new ExcelConfig();
-		conf.setCharsetType(Charset.UTF_8);
-		conf.setHasHeader(CommonFlag.TRUE.is(healthInfoFileSetting.getHeaderFlag()));
-		conf.setHasFooter(CommonFlag.TRUE.is(healthInfoFileSetting.getFooterFlag()));
-		conf.setUseMask(CommonFlag.TRUE.is(healthInfoFileSetting.getMaskFlag()));
-		return conf;
+	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) throws BaseException {
+		return new ExcelConfigBuilder(null)
+				.hasHeader(CommonFlag.TRUE.is(healthInfoFileSetting.getHeaderFlag()))
+				.hasFooter(CommonFlag.TRUE.is(healthInfoFileSetting.getFooterFlag()))
+				.useMask(CommonFlag.TRUE.is(healthInfoFileSetting.getMaskFlag()))
+				.build();
 	}
 
 }

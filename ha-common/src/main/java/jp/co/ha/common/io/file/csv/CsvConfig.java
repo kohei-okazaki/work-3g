@@ -149,8 +149,9 @@ public class CsvConfig {
 	}
 
 	/**
-	 * コンストラクタ
-	 *
+	 * コンストラクタ<br>
+	 * ビルダーからのみインスタンスの生成を行うためprivateにする
+	 * 
 	 * @param builder
 	 *     CsvConfigのビルダー
 	 */
