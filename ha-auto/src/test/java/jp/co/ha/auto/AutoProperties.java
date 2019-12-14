@@ -4,7 +4,7 @@ import jp.co.ha.common.io.file.property.annotation.Property;
 
 /**
  * auto.proertiesのBean
- * 
+ *
  * @since 1.0
  */
 public class AutoProperties {
@@ -21,6 +21,9 @@ public class AutoProperties {
 	/** Firefox driverのパス */
 	@Property(name = "fireFoxDriverPath")
 	private String fireFoxDriverPath;
+	/** ブラウザの基底パス */
+	@Property(name = "baseUrl")
+	private String baseUrl;
 
 	/**
 	 * browserを返す
@@ -92,6 +95,24 @@ public class AutoProperties {
 	 */
 	public void setFireFoxDriverPath(String fireFoxDriverPath) {
 		this.fireFoxDriverPath = fireFoxDriverPath;
+	}
+
+	/**
+	 * baseUrlを返す
+	 * 
+	 * @return baseUrl
+	 */
+	public String getBaseUrl() {
+		return baseUrl;
+	}
+
+	/**
+	 * baseUrlを設定する
+	 * 
+	 * @param baseUrl
+	 */
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
 	}
 
 }

@@ -57,6 +57,8 @@ public class AutoTestCommonExecuter {
 			break;
 		}
 
+		conf.setBaseUrl(prop.getBaseUrl());
+
 		return conf;
 	}
 
@@ -78,7 +80,7 @@ public class AutoTestCommonExecuter {
 
 	/**
 	 * ブラウザ種別の列挙
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static enum BrowserType implements BaseEnum {
