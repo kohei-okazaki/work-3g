@@ -126,12 +126,12 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseException {
 
 		// sessionよりアカウント設定form情報を取得
-		AccountSettingForm AccountSettingForm = sessionManagerService
+		AccountSettingForm accountSettingForm = sessionManagerService
 				.getValue(request.getSession(), "accountSettingForm", AccountSettingForm.class)
 				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
 		AccountDto dto = new AccountDto();
-		BeanUtil.copy(AccountSettingForm, dto);
+		BeanUtil.copy(accountSettingForm, dto);
 
 		// form情報から更新処理を行う
 		accountSettingService.execute(dto);
