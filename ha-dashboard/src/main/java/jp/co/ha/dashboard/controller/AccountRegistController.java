@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.dto.AccountDto;
+import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.form.AccountRegistForm;
 import jp.co.ha.dashboard.service.AccountRegistService;
@@ -42,6 +45,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** session管理サービス */
+	@Autowired
+	private SessionManageService sessionManagerService;
 
 	/**
 	 * Formを返す
@@ -83,7 +89,8 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
 		}
 
-		model.addAttribute("form", form);
+		// sessionにアカウント登録Form情報を保持
+		sessionManagerService.setValue(request.getSession(), "accountRegistForm", form);
 
 		return getView(DashboardView.ACCOUNT_REGIST_CONFIRM);
 	}
@@ -97,10 +104,18 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 	@PostMapping(value = "/complete")
 	public String complete(Model model, AccountRegistForm form, HttpServletRequest request) throws BaseException {
 
+		// sessionよりアカウント登録Form情報を取得
+		AccountRegistForm accountRegistForm = sessionManagerService
+				.getValue(request.getSession(), "accountRegistForm", AccountRegistForm.class)
+				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+
 		AccountDto dto = new AccountDto();
-		BeanUtil.copy(form, dto);
-		// 登録処理を行う
+		BeanUtil.copy(accountRegistForm, dto);
+
+		// FormForm情報から登録処理を行う
 		accountRegistService.regist(dto);
+
+		sessionManagerService.removeValue(request.getSession(), "accountRegistForm");
 
 		return getView(DashboardView.ACCOUNT_REGIST_COMPLETE);
 	}

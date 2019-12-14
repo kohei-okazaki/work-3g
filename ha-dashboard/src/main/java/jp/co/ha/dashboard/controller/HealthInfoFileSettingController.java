@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoFileSettingDto;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.form.HealthInfoFileSettingForm;
@@ -38,12 +38,12 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	/** 健康情報ファイル設定サービス */
 	@Autowired
 	private HealthInfoFileSettingService healthInfoFileSettingService;
-	/** session管理サービス */
-	@Autowired
-	private SessionManageService sessionService;
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+	/** session管理サービス */
+	@Autowired
+	private SessionManageService sessionManagerService;
 
 	/**
 	 * Formを返す
@@ -58,7 +58,7 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	public HealthInfoFileSettingForm setUpForm(HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+		String userId = sessionManagerService.getValue(request.getSession(), "userId", String.class).get();
 
 		// 健康情報ファイル設定を取得
 		HealthInfoFileSetting entity = healthInfoFileSettingSearchService.findByUserId(userId).get();
@@ -90,7 +90,9 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 			return getView(DashboardView.HEALTH_INFO_FILE_SETTING_INPUT);
 		}
 
-		model.addAttribute("form", form);
+		// sessionに健康情報ファイル設定Form情報を保持
+		sessionManagerService.setValue(request.getSession(), "healthInfoFileSettingForm", form);
+
 		return getView(DashboardView.HEALTH_INFO_FILE_SETTING_CONFIRM);
 	}
 
@@ -103,13 +105,18 @@ public class HealthInfoFileSettingController implements BaseWizardController<Hea
 	public String complete(Model model, HealthInfoFileSettingForm form, HttpServletRequest request)
 			throws BaseException {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		if (!userId.equals(form.getUserId())) {
-			throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-		}
+		// sessionより健康情報ファイル設定Form情報を取得
+		HealthInfoFileSettingForm healthInfoFileSettingForm = sessionManagerService
+				.getValue(request.getSession(), "healthInfoFileSettingForm", HealthInfoFileSettingForm.class)
+				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+
 		HealthInfoFileSettingDto dto = new HealthInfoFileSettingDto();
-		BeanUtil.copy(form, dto);
+		BeanUtil.copy(healthInfoFileSettingForm, dto);
+
+		// Form情報から更新処理を行う
 		healthInfoFileSettingService.execute(dto);
+
+		sessionManagerService.removeValue(request.getSession(), "healthInfoFileSettingForm");
 
 		return getView(DashboardView.HEALTH_INFO_FILE_SETTING_COMPLETE);
 	}

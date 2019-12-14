@@ -33,7 +33,7 @@ import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康情報一括登録画面コントローラ
- * 
+ *
  * @since 1.0
  */
 @Controller
@@ -125,7 +125,9 @@ public class HealthInfoFileRegistController implements BaseWizardController<Heal
 		String userId = sessionManageService.getValue(request.getSession(), "userId", String.class).get();
 
 		fileService.regist(modelList, userId);
+
 		sessionManageService.removeValue(request.getSession(), "modelList");
+
 		return getView(DashboardView.HEALTH_INFO_FILE_COMPLETE);
 	}
 
