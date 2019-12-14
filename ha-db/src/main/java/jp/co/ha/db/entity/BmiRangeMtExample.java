@@ -37,7 +37,7 @@ public class BmiRangeMtExample {
 	 * @mbg.generated Mon Mar 25 21:39:34 JST 2019
 	 */
 	public BmiRangeMtExample() {
-		oredCriteria = new ArrayList<Criteria>();
+		oredCriteria = new ArrayList<>();
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class BmiRangeMtExample {
 
 		protected GeneratedCriteria() {
 			super();
-			criteria = new ArrayList<Criterion>();
+			criteria = new ArrayList<>();
 		}
 
 		public boolean isValid() {

@@ -8,6 +8,11 @@ import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 
+/**
+ * 健康情報Entity
+ * 
+ * @since 1.0
+ */
 @Entity
 public class HealthInfo implements Serializable {
 

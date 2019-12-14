@@ -6,6 +6,11 @@ import java.util.Date;
 import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.annotation.Ignore;
 
+/**
+ * BMI範囲マスタEntity
+ * 
+ * @since 1.0
+ */
 @Entity
 public class BmiRangeMt implements Serializable {
 

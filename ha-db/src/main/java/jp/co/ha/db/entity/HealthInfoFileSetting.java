@@ -6,6 +6,11 @@ import java.util.Date;
 import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.annotation.Ignore;
 
+/**
+ * 健康情報ファイル設定情報
+ * 
+ * @since 1.0
+ */
 @Entity
 public class HealthInfoFileSetting implements Serializable {
 

@@ -36,7 +36,7 @@ public class HealthInfoExample {
 	 * @mbg.generated Thu Feb 14 20:37:33 JST 2019
 	 */
 	public HealthInfoExample() {
-		oredCriteria = new ArrayList<Criteria>();
+		oredCriteria = new ArrayList<>();
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class HealthInfoExample {
 
 		protected GeneratedCriteria() {
 			super();
-			criteria = new ArrayList<Criterion>();
+			criteria = new ArrayList<>();
 		}
 
 		public boolean isValid() {

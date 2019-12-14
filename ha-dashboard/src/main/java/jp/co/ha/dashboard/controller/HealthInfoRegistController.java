@@ -70,7 +70,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 	private CsvDownloadService<HealthInfoCsvDownloadModel> csvDownloadService;
 	/** セッション管理サービス */
 	@Autowired
-	private SessionManageService sessionService;
+	private SessionManageService sessionManagerService;
 	/** 健康情報ファイル設定検索サービス */
 	@Autowired
 	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
@@ -108,8 +108,8 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 			return getView(DashboardView.HEALTH_INFO_INPUT);
 		}
 
-		// 入力情報を設定
-		model.addAttribute("form", form);
+		// sessionに健康情報Form情報を保持
+		sessionManagerService.setValue(request.getSession(), "healthInfoForm", form);
 
 		return getView(DashboardView.HEALTH_INFO_CONFIRM);
 	}
@@ -122,10 +122,16 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 	@PostMapping(value = "/complete")
 	public String complete(Model model, HealthInfoForm form, HttpServletRequest request) throws BaseException {
 
+		// sessionより健康情報Form情報を取得
+		HealthInfoForm healthInfoForm = sessionManagerService
+				.getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
+				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+
 		HealthInfoDto dto = new HealthInfoDto();
-		BeanUtil.copy(form, dto);
+		BeanUtil.copy(healthInfoForm, dto);
+
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+		String userId = sessionManagerService.getValue(request.getSession(), "userId", String.class).get();
 
 		boolean isFirstReg = healthInfoService.isFirstReg(userId);
 		model.addAttribute("isFirstReg", isFirstReg);
@@ -140,9 +146,11 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 		HealthInfoRegistResponse apiResponse = healthInfoService.regist(dto, userId);
 
 		// レスポンス情報をformに設定
-		BeanUtil.copy(apiResponse, form);
+		BeanUtil.copy(apiResponse, healthInfoForm);
 		// レスポンスを設定
-		model.addAttribute("healthInfo", form);
+		model.addAttribute("healthInfo", healthInfoForm);
+
+		sessionManagerService.setValue(request.getSession(), "healthInfoForm", healthInfoForm);
 
 		return getView(DashboardView.HEALTH_INFO_COMPLETE);
 	}
@@ -152,19 +160,21 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 	 *
 	 * @param request
 	 *     HttpServletRequest
-	 * @param form
-	 *     健康情報画面Form
 	 * @return ModelAndView
 	 * @throws BaseException
 	 *     基底例外
 	 */
 	@GetMapping(value = "/exceldownload")
-	public ModelAndView excelDownload(HttpServletRequest request, HealthInfoForm form) throws BaseException {
+	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		Integer requestHealthInfoId = form.getHealthInfoId();
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(requestHealthInfoId,
-				userId);
+		// sessionよりユーザIDと健康情報Form情報を取得
+		String userId = sessionManagerService.getValue(request.getSession(), "userId", String.class).get();
+		HealthInfoForm healthInfoForm = sessionManagerService
+				.getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
+				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+
+		List<HealthInfo> healthInfoList = healthInfoSearchService
+				.findByHealthInfoIdAndUserId(healthInfoForm.getHealthInfoId(), userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
@@ -182,18 +192,20 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 	 *     HttpServletRequest
 	 * @param response
 	 *     HttpServletResponse
-	 * @param form
-	 *     健康情報画面Form
 	 * @throws BaseException
 	 *     基底例外
 	 */
 	@GetMapping(value = "/csvdownload")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response, HealthInfoForm form)
-			throws BaseException {
+	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(form.getHealthInfoId(),
-				userId);
+		// sessionよりユーザIDと健康情報Form情報を取得
+		String userId = sessionManagerService.getValue(request.getSession(), "userId", String.class).get();
+		HealthInfoForm healthInfoForm = sessionManagerService
+				.getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
+				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+
+		List<HealthInfo> healthInfoList = healthInfoSearchService
+				.findByHealthInfoIdAndUserId(healthInfoForm.getHealthInfoId(), userId);
 		if (CollectionUtil.isEmpty(healthInfoList)) {
 			// レコードが見つからなかった場合
 			throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");

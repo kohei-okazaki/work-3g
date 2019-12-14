@@ -6,8 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.validator.annotation.Flag;
@@ -37,9 +36,6 @@ import jp.co.ha.common.validator.annotation.ValidateIgnore;
  */
 @Component
 public class BeanValidator<T> {
-
-	/** LOG */
-	private final static Logger LOG = LoggerFactory.getLogger(BeanValidator.class);
 
 	/**
 	 * 指定したクラスの妥当性チェックを行う<br>
@@ -82,7 +78,7 @@ public class BeanValidator<T> {
 				}
 			}
 		} catch (Exception e) {
-			LOG.error("validate処理に失敗しました", e);
+			throw new SystemRuntimeException(e);
 		}
 
 		return result;

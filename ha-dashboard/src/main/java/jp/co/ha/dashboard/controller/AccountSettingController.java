@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.dto.AccountDto;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
@@ -53,7 +53,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	private MailInfoSearchService mailInfoSearchService;
 	/** session管理サービス */
 	@Autowired
-	private SessionManageService sessionService;
+	private SessionManageService sessionManagerService;
 
 	/**
 	 * Formを返す
@@ -68,7 +68,7 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseException {
 
 		// セッションからユーザIDを取得
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+		String userId = sessionManagerService.getValue(request.getSession(), "userId", String.class).get();
 
 		// アカウント情報を検索
 		Account account = accountSearchService.findByUserId(userId).get();
@@ -111,7 +111,8 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 			return getView(DashboardView.ACCOUNT_SETTING_INPUT);
 		}
 
-		model.addAttribute("form", form);
+		// sessionにアカウント設定form情報を保持
+		sessionManagerService.setValue(request.getSession(), "accountSettingForm", form);
 
 		return getView(DashboardView.ACCOUNT_SETTING_CONFIRM);
 	}
@@ -124,16 +125,18 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	@PostMapping(value = "/complete")
 	public String complete(Model model, AccountSettingForm form, HttpServletRequest request) throws BaseException {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		if (!userId.equals(form.getUserId())) {
-			throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-		}
+		// sessionよりアカウント設定form情報を取得
+		AccountSettingForm accountSettingForm = sessionManagerService
+				.getValue(request.getSession(), "accountSettingForm", AccountSettingForm.class)
+				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
 		AccountDto dto = new AccountDto();
-		BeanUtil.copy(form, dto);
+		BeanUtil.copy(accountSettingForm, dto);
 
 		// form情報から更新処理を行う
 		accountSettingService.execute(dto);
+
+		sessionManagerService.removeValue(request.getSession(), "accountSettingForm");
 
 		return getView(DashboardView.ACCOUNT_SETTING_COMPLETE);
 	}

@@ -22,13 +22,11 @@
       <div class="table">
         <div class="table-row">
           <div class="table-header" th:text="#{height}"></div>
-          <div class="table-data" th:text="${form.height} + '&ensp;cm'"></div>
-          <input type="hidden" th:field="*{height}">
+          <div class="table-data" th:text="*{height} + '&ensp;cm'"></div>
         </div>
         <div class="table-row">
           <div class="table-header" th:text="#{weight}"></div>
-          <div class="table-data" th:text="${form.weight} + '&ensp;kg'"></div>
-          <input type="hidden" th:field="*{weight}">
+          <div class="table-data" th:text="*{weight} + '&ensp;kg'"></div>
         </div>
       </div>
       <!--/* table部ここまで */-->
