@@ -19,6 +19,7 @@ import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -68,7 +69,7 @@ public class DataBaseCommonAspect {
 				}
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "setterの実行に失敗しました", e);
+			throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR, "setterの実行に失敗しました", e);
 		}
 	}
 

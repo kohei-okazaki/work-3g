@@ -35,7 +35,7 @@ public class MailInfoExample {
 	 * @mbg.generated Mon Nov 05 12:25:08 JST 2018
 	 */
 	public MailInfoExample() {
-		oredCriteria = new ArrayList<Criteria>();
+		oredCriteria = new ArrayList<>();
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class MailInfoExample {
 
 		protected GeneratedCriteria() {
 			super();
-			criteria = new ArrayList<Criterion>();
+			criteria = new ArrayList<>();
 		}
 
 		public boolean isValid() {
