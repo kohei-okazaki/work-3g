@@ -31,14 +31,10 @@
 }
 
 .errorMessage {
-  background : #96ef10;
-  color : #000000;
-  font-size : 15px;
-  padding : 10px 10px 10px 10px;
-  margin : 10px 200px;
+  color : #ff0000;
+  font-size : 16px;
+  padding : 5px 5px 5px 5px;
   text-align : center;
-  font-weight : bold;
-  border : 2px #FF0000 dashed;
 }
 
 .contentLayout {
