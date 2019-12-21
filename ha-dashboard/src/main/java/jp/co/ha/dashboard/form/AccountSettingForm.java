@@ -61,6 +61,22 @@ public class AccountSettingForm implements BaseForm {
 	/** パスワード有効期限 */
 	@Required(message = "パスワード有効期限が未入力です")
 	private String passwordExpire;
+	/** ヘッダ利用有無フラグ */
+	@Required(message = "ヘッダ利用有無フラグが未入力です")
+	@Flag(message = "ヘッダ利用有無フラグの値が不正です")
+	private String headerFlag;
+	/** フッタ利用有無フラグ */
+	@Required(message = "フッタ利用有無フラグが未入力です")
+	@Flag(message = "フッタ利用有無フラグの値が不正です")
+	private String footerFlag;
+	/** マスク利用有無フラグ */
+	@Required(message = "マスク利用有無フラグが未入力です")
+	@Flag(message = "マスク利用有無フラグの値が不正です")
+	private String maskFlag;
+	/** 囲み文字利用有無フラグ */
+	@Required(message = "囲み文字利用有無フラグが未入力です")
+	@Flag(message = "囲み文字利用有無フラグの値が不正です")
+	private String enclosureCharFlag;
 
 	/**
 	 * userIdを返す
@@ -212,6 +228,82 @@ public class AccountSettingForm implements BaseForm {
 	 */
 	public void setPasswordExpire(String passwordExpire) {
 		this.passwordExpire = passwordExpire;
+	}
+
+	/**
+	 * headerFlagを返す
+	 *
+	 * @return headerFlag
+	 */
+	public String getHeaderFlag() {
+		return headerFlag;
+	}
+
+	/**
+	 * headerFlagを設定する
+	 *
+	 * @param headerFlag
+	 *     ヘッダー利用フラグ
+	 */
+	public void setHeaderFlag(String headerFlag) {
+		this.headerFlag = headerFlag;
+	}
+
+	/**
+	 * footerFlagを返す
+	 *
+	 * @return footerFlag
+	 */
+	public String getFooterFlag() {
+		return footerFlag;
+	}
+
+	/**
+	 * footerFlagを設定する
+	 *
+	 * @param footerFlag
+	 *     フッター利用フラグ
+	 */
+	public void setFooterFlag(String footerFlag) {
+		this.footerFlag = footerFlag;
+	}
+
+	/**
+	 * maskFlagを返す
+	 *
+	 * @return maskFlag
+	 */
+	public String getMaskFlag() {
+		return maskFlag;
+	}
+
+	/**
+	 * maskFlagを設定する
+	 *
+	 * @param maskFlag
+	 *     マスク利用フラグ
+	 */
+	public void setMaskFlag(String maskFlag) {
+		this.maskFlag = maskFlag;
+	}
+
+	/**
+	 * enclosureCharFlagを返す
+	 *
+	 * @return enclosureCharFlag
+	 */
+	public String getEnclosureCharFlag() {
+		return enclosureCharFlag;
+	}
+
+	/**
+	 * enclosureCharFlagを設定する
+	 *
+	 * @param enclosureCharFlag
+	 *     囲い文字利用フラグ
+	 */
+	public void setEnclosureCharFlag(String enclosureCharFlag) {
+		this.enclosureCharFlag = enclosureCharFlag;
 	}
 
 }

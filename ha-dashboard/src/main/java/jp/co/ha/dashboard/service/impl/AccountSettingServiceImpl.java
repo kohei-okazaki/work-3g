@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.create.MailInfoCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
+import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.common.exception.BaseException;
@@ -18,6 +20,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.dashboard.service.AccountSettingService;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.MailInfo;
 
 /**
@@ -43,6 +46,12 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	/** メール情報更新サービス */
 	@Autowired
 	private MailInfoUpdateService mailInfoUpdateService;
+	/** 健康情報ファイル設定検索サービス */
+	@Autowired
+	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+	/** 健康情報ファイル設定更新サービス */
+	@Autowired
+	private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
 
 	/**
 	 * {@inheritDoc}
@@ -50,13 +59,13 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	@Override
 	public void execute(AccountDto dto) throws BaseException {
 
-		// アカウント情報を検索し、アカウント情報をDTOにマージする
+		// アカウント情報を検索し、Dtoの内容をマージする
 		Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
 		mergeAccount(dto, befAccount);
 		// アカウント情報を更新する
 		accountUpdateService.update(befAccount);
 
-		// メール情報を検索
+		// メール情報を検索し、Dtoの内容をマージする
 		Optional<MailInfo> befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
 		if (befMailInfo.isPresent()) {
 			// メール情報が登録されている場合
@@ -73,6 +82,13 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 			// メール情報を新規登録する
 			mailInfoCreateService.create(mailInfo);
 		}
+
+		// 健康情報ファイル設定情報を検索し、Dtoの内容をマージする
+		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(dto.getUserId())
+				.get();
+		mergeHealthInfoFileSetting(dto, healthInfoFileSetting);
+		// 健康情報ファイル設定情報を更新する
+		healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
 
 	}
 
@@ -106,6 +122,19 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
 		BeanUtil.copy(dto, mailInfo);
 
+	}
+
+	/**
+	 * アカウントDTOを健康情報ファイル設定情報にマージする
+	 *
+	 * @param dto
+	 *     アカウントDTO
+	 * @param healthInfoFileSetting
+	 *     健康情報ファイル設定情報
+	 */
+	private void mergeHealthInfoFileSetting(AccountDto dto, HealthInfoFileSetting healthInfoFileSetting) {
+
+		BeanUtil.copy(dto, healthInfoFileSetting, Arrays.asList("userId"));
 	}
 
 }

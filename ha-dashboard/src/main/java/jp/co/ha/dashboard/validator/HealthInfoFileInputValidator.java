@@ -8,7 +8,7 @@ import jp.co.ha.dashboard.form.HealthInfoFileForm;
 import jp.co.ha.web.validator.BaseWebValidator;
 
 /**
- * 健康情報CSVアップロードvalidator
+ * 健康情報CSVアップロードValidator
  *
  * @since 1.0
  */

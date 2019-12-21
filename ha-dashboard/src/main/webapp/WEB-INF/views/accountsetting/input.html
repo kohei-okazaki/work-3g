@@ -29,9 +29,17 @@
       <div class="errorMessage" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}" data-sal="slide-up"></div>
       <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}" data-sal="slide-up"></div>
+      <div class="errorMessage" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}" data-sal="slide-up"></div>
 
       <!--/* table部ここから */-->
       <div class="table">
+        <div class="table-row"><b style="font-size:20px;">アカウント情報</b></div>
+
+        <!--/* 削除フラグここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{delete}"></div>
           <div class="table-data">
@@ -43,9 +51,9 @@
             </div>
           </div>
         </div>
+        <!--/* 削除フラグここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
+        <!--/* ユーザIDここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{userId}"></div>
           <div class="table-data">
@@ -53,9 +61,9 @@
             <input type="hidden" th:field="*{userId}" th:value="${userId}" />
           </div>
         </div>
+        <!--/* ユーザIDここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
+        <!--/* パスワードここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{password}"></div>
           <div class="table-data">
@@ -68,18 +76,18 @@
             </div>
           </div>
         </div>
+        <!--/* パスワードここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
+        <!--/* パスワード有効期限日ここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{passwordExpire}"></div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
           </div>
         </div>
+        <!--/* パスワード有効期限日ここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
+        <!--/* APIキーここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{apiKey}"></div>
           <div class="table-data">
@@ -87,9 +95,10 @@
             <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
           </div>
         </div>
+        <!--/* APIキーここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
+        <div class="table-row"><b style="font-size:20px;">メール情報</b></div>
+        <!--/* メールアドレスここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{mailAddress}"></div>
           <div class="table-data">
@@ -97,9 +106,9 @@
             <div id="suggest"></div>
           </div>
         </div>
+        <!--/* メールアドレスここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
+        <!--/* メールパスワードここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{mailPassword}"></div>
           <div class="table-data">
@@ -112,15 +121,75 @@
             </div>
           </div>
         </div>
+        <!--/*メールパスワードここまで */-->
 
-        <div class="table-row">&ensp;</div>
+        <div class="table-row"><b style="font-size:20px;">健康情報ファイル設定</b></div>
 
+        <!--/* ヘッダ利用ここから */-->
+        <div class="table-row">
+          <div class="table-header" th:text="#{headerUse}"></div>
+          <div class="table-data">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked />
+              <label for="headerFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagTrue" value="1" />
+              <label for="headerFlagTrue">する</label>
+            </div>
+          </div>
+        </div>
+        <!--/* ヘッダ利用ここまで */-->
+
+        <!--/* フッタ利用ここから */-->
+        <div class="table-row">
+          <div class="table-header" th:text="#{footerUse}"></div>
+          <div class="table-data">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked />
+              <label for="footerFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagTrue" value="1" />
+              <label for="footerFlagTrue">する</label>
+            </div>
+          </div>
+        </div>
+        <!--/* フッタ利用ここまで */-->
+
+        <!--/* マスク利用ここから */-->
+        <div class="table-row">
+          <div class="table-header" th:text="#{maskUse}"></div>
+          <div class="table-data">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked />
+              <label for="maskFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagTrue" value="1" />
+              <label for="maskFlagTrue">する</label>
+            </div>
+         </div>
+        </div>
+        <!--/* マスク利用ここまで */-->
+
+        <!--/* 囲み文字ここから */-->
+        <div class="table-row">
+          <div class="table-header" th:text="#{enclosureCharUse}"></div>
+          <div class="table-data">
+            <div class="radio">
+              <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked />
+              <label for="enclosureCharFlagFalse" class="switch-off">しない</label>
+              <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1" />
+              <label for="enclosureCharFlagTrue">する</label>
+            </div>
+          </div>
+        </div>
+        <!--/* 囲み文字ここまで */-->
+
+        <!--/* 備考ここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{remarks}"></div>
           <div class="table-data">
             <textarea rows="10" cols="80" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
           </div>
         </div>
+        <!--/* 備考ここまで */-->
+
       </div>
       <!--/* table部ここまで */-->
 
