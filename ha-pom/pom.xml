@@ -53,11 +53,11 @@
         <resources.directory>${basedir}/profile/test</resources.directory>
       </properties>
     </profile>
-    <!-- live -->
+    <!-- AWS環境 -->
     <profile>
-      <id>live</id>
+      <id>aws</id>
       <properties>
-        <resources.directory>${basedir}/profile/live</resources.directory>
+        <resources.directory>${basedir}/profile/aws</resources.directory>
       </properties>
 <!--
       <activation>
