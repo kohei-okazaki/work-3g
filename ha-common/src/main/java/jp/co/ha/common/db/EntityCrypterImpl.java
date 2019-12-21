@@ -36,7 +36,7 @@ public class EntityCrypterImpl implements EntityCrypter {
 			for (Field f : entity.getClass().getDeclaredFields()) {
 
 				if (!isCryptField(f)) {
-					// 暗号化項目出ない場合
+					// 暗号化項目でない場合
 					continue;
 				}
 
@@ -66,7 +66,7 @@ public class EntityCrypterImpl implements EntityCrypter {
 			for (Field f : entity.getClass().getDeclaredFields()) {
 
 				if (!isCryptField(f)) {
-					// 暗号化項目出ない場合
+					// 暗号化項目でない場合
 					continue;
 				}
 

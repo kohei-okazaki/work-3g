@@ -39,7 +39,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService implements Hea
 
 		// リクエスト種別チェック
 		if (RequestType.HEALTH_INFO_REFERENCE != request.getRequestType()) {
-			throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID_ERROR,
+			throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID,
 					"リクエスト種別が一致しません requestType:" + request.getRequestType().getName());
 		}
 

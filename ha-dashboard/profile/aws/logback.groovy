@@ -9,16 +9,16 @@ import static ch.qos.logback.classic.Level.*
 
 scan("30 seconds")
 
-def FILE_PATH = "/app/logs/";
+def FILE_PATH = "/var/log/app";
 def ENCODE = "UTF-8";
 def appenderList = ["FILE"];
 
 appender("FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/api.log"
+  file = "${FILE_PATH}/dashboard.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "api_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "dashboard_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 

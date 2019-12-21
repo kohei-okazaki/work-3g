@@ -24,7 +24,7 @@ public abstract class CommonService {
 
 	/**
 	 * 指定したAPI実行ユーザがAPIを実行できるか判定する<br>
-	 * 実行出来ない場合throw<br>
+	 * 指定したユーザIDが存在しない場合、またはAPIキーが一致しない場合エラーとする
 	 *
 	 * @param request
 	 *     リクエスト

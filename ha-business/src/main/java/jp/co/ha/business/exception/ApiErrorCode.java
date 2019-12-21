@@ -16,12 +16,10 @@ public enum ApiErrorCode implements BaseErrorCode, BaseEnum {
 	API_EXEC_ERROR("API_EXEC_ERROR", "AE0018", LogLevel.WARN),
 
 	/* WARN */
-	/** 健康情報登録API必須エラー */
-	HEALTH_INFO_REG_EMPTY("HEALTH_INFO_REG_EMPTY", "AW0019", LogLevel.WARN),
-	/** 健康情報照会API必須エラー */
-	HEALTH_INFO_REF_EMPTY("HEALTH_INFO_REG_EMPTY", "AW0020", LogLevel.WARN),
+	/** API必須エラー */
+	API_REQUIRE("API_REQUIRE", "AW0019", LogLevel.WARN),
 	/** リクエスト種別エラー */
-	REQUEST_TYPE_INVALID_ERROR("REQUEST_TYPE_INVALID_ERROR", "AW0021", LogLevel.WARN),
+	REQUEST_TYPE_INVALID("REQUEST_TYPE_INVALID", "AW0020", LogLevel.WARN),
 
 	;
 

@@ -7,6 +7,7 @@
   xmlns:tx="http://www.springframework.org/schema/tx"
   xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
   xmlns:util="http://www.springframework.org/schema/util"
+  xmlns:cache="http://www.springframework.org/schema/cache"
   xsi:schemaLocation="http://www.springframework.org/schema/mvc
                       http://www.springframework.org/schema/mvc/spring-mvc.xsd
                       http://www.springframework.org/schema/beans
@@ -18,7 +19,9 @@
                       http://mybatis.org/schema/mybatis-spring
                       http://mybatis.org/schema/mybatis-spring.xsd
                       http://www.springframework.org/schema/util
-                      http://www.springframework.org/schema/util/spring-util.xsd">
+                      http://www.springframework.org/schema/util/spring-util.xsd
+                      http://www.springframework.org/schema/cache
+                      http://www.springframework.org/schema/cache/spring-cache.xsd">
 
   <context:property-placeholder location="classpath:jdbc.properties" />
   <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -56,5 +59,17 @@
 
   <!-- DB -->
   <context:component-scan base-package="jp.co.ha.db.aspect" />
+
+  <!-- キャッシュ機能 -->
+  <cache:annotation-driven order="-1" />
+  <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+    <property name="caches">
+      <set>
+        <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+          <property name="name" value="bmiRangeMt" />
+        </bean>
+      </set>
+    </property>
+  </bean>
 
 </beans>

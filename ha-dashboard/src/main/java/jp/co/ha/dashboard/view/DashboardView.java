@@ -46,13 +46,6 @@ public enum DashboardView implements BaseView {
 	/** 健康情報ファイル入力完了画面 */
 	HEALTH_INFO_FILE_COMPLETE("healthinfofile/complete"),
 
-	/** 健康情報ファイル設定入力画面 */
-	HEALTH_INFO_FILE_SETTING_INPUT("healthinfofilesetting/input"),
-	/** 健康情報ファイル設定確認画面 */
-	HEALTH_INFO_FILE_SETTING_CONFIRM("healthinfofilesetting/confirm"),
-	/** 健康情報ファイル設定入力完了画面 */
-	HEALTH_INFO_FILE_SETTING_COMPLETE("healthinfofilesetting/complete"),
-
 	/** カロリー計算画面 */
 	CALORIE_CALC("caloriecalc/index");
 

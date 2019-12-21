@@ -100,14 +100,3 @@ input[type="button"]:hover {
   background: #FFFFFF;
   color: #32cd32;
 }
-
-.errorMessage {
-  background : #96ef10;
-  color : #000000;
-  font-size : 15px;
-  padding : 10px 10px 10px 10px;
-  margin : 10px 200px;
-  text-align : center;
-  font-weight : bold;
-  border : 2px #FF0000 dashed;
-}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.business.exception.BusinessException;
@@ -30,6 +31,7 @@ import jp.co.ha.dashboard.form.AccountSettingForm;
 import jp.co.ha.dashboard.service.AccountSettingService;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.web.controller.BaseWizardController;
 
@@ -54,6 +56,9 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	/** session管理サービス */
 	@Autowired
 	private SessionManageService sessionManagerService;
+	/** 健康情報ファイル設定検索サービス */
+	@Autowired
+	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
 	/**
 	 * Formを返す
@@ -74,17 +79,25 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 		Account account = accountSearchService.findByUserId(userId).get();
 		// メール情報を検索
 		Optional<MailInfo> mailInfo = mailInfoSearchService.findByUserId(userId);
+		// 健康情報ファイル設定を検索
+		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(userId).get();
 
 		AccountSettingForm accountSettingForm = new AccountSettingForm();
+
+		// アカウント情報
 		BeanUtil.copy(account, accountSettingForm, (src, dest) -> {
 			Account srcAccount = (Account) src;
 			AccountSettingForm destForm = (AccountSettingForm) dest;
 			destForm.setPasswordExpire(DateUtil.toString(srcAccount.getPasswordExpire(), DateFormatType.YYYYMMDD));
 		});
 
+		// メール情報
 		if (mailInfo.isPresent()) {
 			BeanUtil.copy(mailInfo.get(), accountSettingForm, Arrays.asList("userId"));
 		}
+
+		// 健康情報ファイル設定
+		BeanUtil.copy(healthInfoFileSetting, accountSettingForm);
 
 		return accountSettingForm;
 	}
