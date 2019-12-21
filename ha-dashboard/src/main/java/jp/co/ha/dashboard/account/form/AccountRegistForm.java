@@ -11,7 +11,7 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * アカウント登録画面フォームクラス
- * 
+ *
  * @since 1.0
  */
 public class AccountRegistForm implements BaseForm {

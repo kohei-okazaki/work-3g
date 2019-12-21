@@ -18,7 +18,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * アカウント作成サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -30,7 +30,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	/** 健康情報ファイル設定作成サービス */
 	@Autowired
 	private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
-	/** パスワード作成サービス */
+	/** ハッシュ値作成クラス */
 	@Sha256
 	@Autowired
 	private HashEncoder encoder;
