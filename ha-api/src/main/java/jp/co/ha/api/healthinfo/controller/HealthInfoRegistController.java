@@ -1,4 +1,4 @@
-package jp.co.ha.api.controller;
+package jp.co.ha.api.healthinfo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
