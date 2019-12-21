@@ -1,29 +1,41 @@
-package jp.co.ha.business.io.file.csv.model;
+package jp.co.ha.dashboard.healthinfo.form;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
-import jp.co.ha.common.io.file.csv.annotation.CsvDownloadModel;
-import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+
+import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.web.form.BaseForm;
 
 /**
- * 健康情報CSVダウンロードモデル<br>
- * CSV出力したい項目のみを持つ
- *
+ * 健康情報入力画面フォームクラス
+ * 
  * @since 1.0
  */
-@CsvDownloadModel(headerNames = { "ユーザID", "身長", "体重", "BMI", "標準体重", "健康情報作成日時" }, footerNames = { "ユーザID", "身長", "体重",
-		"BMI", "標準体重", "健康情報作成日時" })
-public class HealthInfoCsvDownloadModel implements BaseCsvModel {
+public class HealthInfoForm implements BaseForm {
 
+	/** シリアルバージョンUID */
+	@Ignore
+	private static final long serialVersionUID = 1L;
+
+	/** 健康情報ID */
+	private Integer healthInfoId;
 	/** ユーザID */
 	private String userId;
 	/** 身長 */
 	@Mask
+	@Required(message = "身長が未入力です")
+	@DecimalMin(value = "1", message = "身長が桁数不足です")
+	@DecimalMax(value = "999", message = "身長が桁数超過です")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
+	@Required(message = "体重が未入力です")
+	@DecimalMin(value = "1", message = "体重が桁数不足です")
+	@DecimalMax(value = "999", message = "体重が桁数超過です")
 	private BigDecimal weight;
 	/** BMI */
 	@Mask
@@ -31,8 +43,25 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	/** 標準体重 */
 	@Mask
 	private BigDecimal standardWeight;
-	/** 健康情報作成日時 */
-	private Date healthInfoRegDate;
+
+	/**
+	 * healthInfoIdを返す
+	 *
+	 * @return healthInfoId
+	 */
+	public Integer getHealthInfoId() {
+		return healthInfoId;
+	}
+
+	/**
+	 * healthInfoIdを設定する
+	 *
+	 * @param healthInfoId
+	 *     健康情報ID
+	 */
+	public void setHealthInfoId(Integer healthInfoId) {
+		this.healthInfoId = healthInfoId;
+	}
 
 	/**
 	 * userIdを返す
@@ -127,25 +156,6 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 	 */
 	public void setStandardWeight(BigDecimal standardWeight) {
 		this.standardWeight = standardWeight;
-	}
-
-	/**
-	 * healthInfoRegDateを返す
-	 *
-	 * @return healthInfoRegDate
-	 */
-	public Date getHealthInfoRegDate() {
-		return healthInfoRegDate;
-	}
-
-	/**
-	 * healthInfoRegDateを設定する
-	 *
-	 * @param healthInfoRegDate
-	 *     健康情報作成日時
-	 */
-	public void setHealthInfoRegDate(Date healthInfoRegDate) {
-		this.healthInfoRegDate = healthInfoRegDate;
 	}
 
 }

@@ -7,7 +7,7 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 
 /**
  * 健康情報照会ExcelComponent
- * 
+ *
  * @since 1.0
  */
 public class ReferenceExcelComponent implements BaseExcelComponent {
