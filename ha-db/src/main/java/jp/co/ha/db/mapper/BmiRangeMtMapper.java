@@ -7,6 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.BmiRangeMtExample;
 
+/**
+ * BMI範囲マスタMapper
+ *
+ * @since 1.0
+ */
 public interface BmiRangeMtMapper {
 
 	/**

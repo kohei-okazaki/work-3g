@@ -106,3 +106,30 @@ th.data, td.data {
 }
 /* ▲divをテーブル構成にする▲ */
 
+h3 {
+  /* 相対位置 */
+  position: relative;
+  /* アイコン分のスペース */
+  padding: 0.5em 0.5em 0.5em 1.5em;
+  /* 行高 */
+  line-height: 1.4;
+  /* 文字色 */
+  color: #006400;
+}
+
+h3:before {
+  /* 忘れずに */
+  font-family: "Font Awesome 5 Free";
+  /* アイコンのユニコード */
+  content: "\f138";
+  /* 絶対位置 */
+  position: absolute;
+  /* サイズ */
+  font-size: 1em;
+  /* アイコンの位置 */
+  left: 0.25em;
+  /* アイコンの位置 */
+  top: 0.5em;
+  /* アイコン色 */
+  color: #006400;
+}

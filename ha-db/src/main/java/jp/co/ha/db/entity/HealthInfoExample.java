@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 健康情報Example
+ *
+ * @since 1.0
+ */
 public class HealthInfoExample {
 
 	/**

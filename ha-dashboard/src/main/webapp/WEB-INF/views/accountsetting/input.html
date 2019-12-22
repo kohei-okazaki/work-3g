@@ -16,7 +16,7 @@
 
   <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
-    <h2 class="menuTitle">アカウント設定入力画面</h2>
+    <h2 class="menuTitle">アカウント設定入力</h2>
 
     <!--/* 入力画面 */-->
     <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
@@ -37,7 +37,8 @@
 
       <!--/* table部ここから */-->
       <div class="table">
-        <div class="table-row"><b style="font-size:20px;">アカウント情報</b></div>
+
+        <h3>アカウント設定</h3>
 
         <!--/* 削除フラグここから */-->
         <div class="table-row">
@@ -97,7 +98,7 @@
         </div>
         <!--/* APIキーここまで */-->
 
-        <div class="table-row"><b style="font-size:20px;">メール情報</b></div>
+        <h3>メール設定</h3>
         <!--/* メールアドレスここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{mailAddress}"></div>
@@ -123,8 +124,7 @@
         </div>
         <!--/*メールパスワードここまで */-->
 
-        <div class="table-row"><b style="font-size:20px;">健康情報ファイル設定</b></div>
-
+        <h3>健康情報ファイル設定</h3>
         <!--/* ヘッダ利用ここから */-->
         <div class="table-row">
           <div class="table-header" th:text="#{headerUse}"></div>

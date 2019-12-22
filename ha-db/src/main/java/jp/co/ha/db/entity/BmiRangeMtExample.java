@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * BMI範囲マスタExample
+ *
+ * @since 1.0
+ */
 public class BmiRangeMtExample {
 
 	/**

@@ -7,6 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.AccountExample;
 
+/**
+ * アカウント情報Mapper
+ *
+ * @since 1.0
+ */
 public interface AccountMapper {
 
 	/**
