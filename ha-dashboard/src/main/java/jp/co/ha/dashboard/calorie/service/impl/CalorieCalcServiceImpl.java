@@ -10,8 +10,8 @@ import jp.co.ha.business.healthInfo.HealthInfoCalcService;
 import jp.co.ha.dashboard.calorie.service.CalorieCalcService;
 
 /**
- * カロリー計算サービスインターフェース実装クラス
- * 
+ * カロリー計算サービス実装クラス
+ *
  * @since 1.0
  */
 @Service
