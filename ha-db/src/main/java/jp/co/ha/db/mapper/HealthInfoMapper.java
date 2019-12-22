@@ -7,6 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
 
+/**
+ * 健康情報Mapper
+ * 
+ * @since 1.0
+ */
 public interface HealthInfoMapper {
 
 	/**

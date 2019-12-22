@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * アカウント情報Example
+ * 
+ * @since 1.0
+ */
 public class AccountExample {
 
 	/**
