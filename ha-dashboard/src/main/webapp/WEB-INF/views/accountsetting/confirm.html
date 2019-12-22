@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント設定確認画面', scripts = ~{::script}, links = ~{::link})">
+<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント設定変更確認画面', scripts = ~{::script}, links = ~{::link})">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
 </head>
 <body>
@@ -14,12 +14,15 @@
 
   <!--/* contentLayout部ここから */-->
   <div align="center" class="contentLayout">
-    <h2 class="menuTitle">アカウント設定確認画面</h2>
+    <h2 class="menuTitle">アカウント設定変更確認</h2>
 
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountSettingForm}">
 
       <!--/* table部ここから */-->
       <div class="table">
+
+        <h3>アカウント設定</h3>
+
         <div class="table-row">
           <div class="table-header" th:text="#{delete}"></div>
           <div class="table-data">
@@ -43,6 +46,9 @@
           <div class="table-header" th:text="#{passwordExpire}"></div>
           <div class="table-data" th:text="*{passwordExpire}"></div>
         </div>
+
+        <h3>メール設定</h3>
+
         <div class="table-row">
           <div class="table-header" th:text="#{mailAddress}"></div>
           <div class="table-data" th:text="*{mailAddress}"></div>
@@ -51,6 +57,9 @@
           <div class="table-header" th:text="#{mailPassword}"></div>
           <div class="table-data">****</div>
         </div>
+
+        <h3>健康情報ファイル設定</h3>
+
         <div class="table-row">
           <div class="table-header" th:text="#{headerUse}"></div>
           <div class="table-data">
