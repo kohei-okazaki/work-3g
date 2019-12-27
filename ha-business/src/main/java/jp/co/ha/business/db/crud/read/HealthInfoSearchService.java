@@ -48,7 +48,12 @@ public interface HealthInfoSearchService {
 	int getSelectCountByUserId(String userId);
 
 	/**
-	 * 指定されたユーザIDで健康情報を検索する
+	 * 指定されたユーザIDで健康情報を検索する<br>
+	 * 以下の検索オプションを実行する
+	 * <ul>
+	 * <li>ソート処理</li>
+	 * <li>検索上限</li>
+	 * </ul>
 	 *
 	 * @param userId
 	 *     ユーザID
