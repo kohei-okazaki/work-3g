@@ -6,8 +6,8 @@ import java.math.RoundingMode;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.calc.BmiCalcFunction;
-import jp.co.ha.business.calc.CalcMethod;
 import jp.co.ha.business.calc.Calculator;
+import jp.co.ha.business.calc.Calculator.CalcMethod;
 import jp.co.ha.business.calc.StandardWeightCalcFunction;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.HealthInfoCalcService;
@@ -15,7 +15,7 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
  * 健康情報計算サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
