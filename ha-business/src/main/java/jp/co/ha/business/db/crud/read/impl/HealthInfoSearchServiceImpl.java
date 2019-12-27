@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
@@ -33,7 +35,16 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	@Transactional(readOnly = true)
 	public HealthInfo findLastByUserId(String userId) {
-		return mapper.selectByUserIdLast(userId);
+
+		HealthInfoExample example = new HealthInfoExample();
+		Criteria criteria = example.createCriteria();
+		// ユーザID
+		criteria.andUserIdEqualTo(userId);
+		// ソート処理
+		SelectOption selectOption = new SelectOption().put("HEALTH_INFO_ID", SortType.DESC).setLimit(1);
+		example.setOrderByClause(selectOption.toOrderBy());
+
+		return mapper.selectByExample(example).get(0);
 	}
 
 	/**
@@ -44,6 +55,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Transactional(readOnly = true)
 	public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
 			Date toHealthInfoRegDate) {
+
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
 		// ユーザID
@@ -63,12 +75,14 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) {
+
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
 		// 健康情報ID
 		criteria.andHealthInfoIdEqualTo(healthInfoId);
 		// ユーザID
 		criteria.andUserIdEqualTo(userId);
+
 		return mapper.selectByExample(example);
 	}
 
@@ -79,11 +93,33 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	@Transactional(readOnly = true)
 	public int getSelectCountByUserId(String userId) {
+
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
 		// ユーザID
 		criteria.andUserIdEqualTo(userId);
+
 		return (int) mapper.countByExample(example);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Select
+	@Override
+	@Transactional(readOnly = true)
+	public List<HealthInfo> findByUserIdForDashboard(String userId, SelectOption selectOption) {
+
+		HealthInfoExample example = new HealthInfoExample();
+		Criteria criteria = example.createCriteria();
+		// ユーザID
+		criteria.andUserIdEqualTo(userId);
+		// ソート処理
+		example.setOrderByClause(selectOption.toOrderBy());
+		// 検索上限数
+		example.setLimit(selectOption.getLimit());
+
+		return mapper.selectByExample(example);
 	}
 
 }

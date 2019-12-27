@@ -3,6 +3,7 @@ package jp.co.ha.business.db.crud.read;
 import java.util.Date;
 import java.util.List;
 
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -54,5 +55,16 @@ public interface HealthInfoSearchService {
 	 * @return 件数
 	 */
 	int getSelectCountByUserId(String userId);
+
+	/**
+	 * ダッシュボードTOP画面に表示する健康情報を検索する
+	 *
+	 * @param userId
+	 *     ユーザID
+	 * @param selectOption
+	 *     検索オプション
+	 * @return 健康情報リスト
+	 */
+	List<HealthInfo> findByUserIdForDashboard(String userId, SelectOption selectOption);
 
 }

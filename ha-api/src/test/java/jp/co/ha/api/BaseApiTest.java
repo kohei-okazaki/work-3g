@@ -12,7 +12,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.BeanLoader;
 
 /**
- * API基底クラス
+ * API基底テストクラス
  *
  * @since 1.0
  */

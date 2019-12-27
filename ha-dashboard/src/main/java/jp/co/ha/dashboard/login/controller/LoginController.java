@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.login.controller;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -17,15 +18,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.login.LoginCheck;
 import jp.co.ha.business.login.LoginCheckResult;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.web.controller.BaseWebController;
 
 /**
@@ -43,6 +49,9 @@ public class LoginController implements BaseWebController {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報検索サービス */
+	@Autowired
+	private HealthInfoSearchService healthInfoSearchService;
 	/** MessageSource */
 	@Autowired
 	private MessageSource messageSource;
@@ -109,6 +118,14 @@ public class LoginController implements BaseWebController {
 		// セッションにユーザIDを登録する。
 		sessionService.setValue(request.getSession(), "userId", form.getUserId());
 
+		// 健康情報を検索する
+		SelectOption selectOption = new SelectOption().put("HEALTH_INFO_REG_DATE", SortType.ASC).setLimit(10);
+		List<HealthInfo> list = healthInfoSearchService.findByUserIdForDashboard(form.getUserId(), selectOption);
+		if (list == null) {
+			LoggerFactory.getLogger(this.getClass()).info("検索結果なし");
+		} else {
+			list.stream().forEach(e -> LoggerFactory.getLogger(this.getClass()).infoRes(e));
+		}
 		return getView(DashboardView.TOP);
 
 	}

@@ -113,6 +113,9 @@
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
+    <if test="limit != null">
+      limit ${limit}
+    </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
@@ -366,12 +369,5 @@
       HEALTH_INFO_REG_DATE = #{healthInfoRegDate,jdbcType=TIMESTAMP}
     where HEALTH_INFO_ID = #{healthInfoId,jdbcType=INTEGER}
   </update>
-  <select id="selectByUserIdLast" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from HEALTH_INFO
-    where USER_ID = #{userId,jdbcType=VARCHAR}
-    order by HEALTH_INFO_id desc
-    limit 1
-  </select>
+
 </mapper>
