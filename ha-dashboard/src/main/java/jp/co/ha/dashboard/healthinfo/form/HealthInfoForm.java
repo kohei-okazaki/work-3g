@@ -5,21 +5,16 @@ import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
-import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.web.form.BaseForm;
 
 /**
  * 健康情報入力画面フォームクラス
- * 
+ *
  * @since 1.0
  */
 public class HealthInfoForm implements BaseForm {
-
-	/** シリアルバージョンUID */
-	@Ignore
-	private static final long serialVersionUID = 1L;
 
 	/** 健康情報ID */
 	private Integer healthInfoId;

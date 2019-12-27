@@ -3,7 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Decimal;
@@ -44,7 +44,7 @@ public class DecimalValidator implements ConstraintValidator<Decimal, Object> {
 		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
-		if (RegixType.DECIMAL.is().test(value.toString())) {
+		if (RegexType.DECIMAL.is().test(value.toString())) {
 			int length = value.toString().replaceAll(".", "").length();
 			if (minEqual && maxEqual) {
 				return (min <= length) && (length <= max);

@@ -7,7 +7,7 @@ import org.junit.Test;
 import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
 import jp.co.ha.common.validator.annotation.Pattern;
@@ -382,7 +382,7 @@ public class BeanValidatorTest extends BaseCommonTest {
 	private static class HalfNumberPatternTestBean {
 
 		/** name */
-		@Pattern(regixPattern = RegixType.HALF_NUMBER)
+		@Pattern(regixPattern = RegexType.HALF_NUMBER)
 		private String value;
 
 		/**
@@ -414,7 +414,7 @@ public class BeanValidatorTest extends BaseCommonTest {
 	private static class HalfCharPatternTestBean {
 
 		/** name */
-		@Pattern(regixPattern = RegixType.HALF_CHAR)
+		@Pattern(regixPattern = RegexType.HALF_CHAR)
 		private String value;
 
 		/**

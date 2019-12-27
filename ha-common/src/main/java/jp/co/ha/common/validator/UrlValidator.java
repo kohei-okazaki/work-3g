@@ -3,7 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Url;
@@ -24,6 +24,6 @@ public class UrlValidator implements ConstraintValidator<Url, Object> {
 		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
-		return RegixType.URL.is().test(value.toString());
+		return RegexType.URL.is().test(value.toString());
 	}
 }

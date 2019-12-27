@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.PatternValidator;
 
 /**
@@ -27,7 +27,7 @@ import jp.co.ha.common.validator.PatternValidator;
 public @interface Pattern {
 
 	/** 正規表現 */
-	RegixType regixPattern();
+	RegexType regixPattern();
 
 	/** message */
 	String message() default "";

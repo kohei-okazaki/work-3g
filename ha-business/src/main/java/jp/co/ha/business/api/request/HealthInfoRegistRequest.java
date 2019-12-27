@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jp.co.ha.business.api.request.deserialize.TestModeDeserializer;
 import jp.co.ha.business.api.type.TestMode;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 
@@ -22,13 +22,13 @@ public class HealthInfoRegistRequest extends CommonApiRequest {
 	/** 身長 */
 	@Mask
 	@Required(message = "heightが未設定です")
-	@Pattern(regixPattern = RegixType.DECIMAL, message = "heightが数値でありません")
+	@Pattern(regixPattern = RegexType.DECIMAL, message = "heightが数値でありません")
 	@JsonProperty("height")
 	private BigDecimal height;
 	/** 体重 */
 	@Mask
 	@Required(message = "weightが未設定です")
-	@Pattern(regixPattern = RegixType.DECIMAL, message = "weightが数値でありません")
+	@Pattern(regixPattern = RegexType.DECIMAL, message = "weightが数値でありません")
 	@JsonProperty("weight")
 	private BigDecimal weight;
 	/** テストモード種別 */

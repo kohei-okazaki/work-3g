@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
@@ -16,7 +16,7 @@ import jp.co.ha.web.form.BaseApiRequest;
 
 /**
  * API共通リクエスト
- * 
+ *
  * @since 1.0
  */
 public abstract class CommonApiRequest extends BaseApiRequest {
@@ -28,7 +28,7 @@ public abstract class CommonApiRequest extends BaseApiRequest {
 	private RequestType requestType;
 	/** ユーザID */
 	@Required(message = "userIdが未設定です")
-	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "userIdが半角英数でありません")
+	@Pattern(regixPattern = RegexType.HALF_CHAR, message = "userIdが半角英数でありません")
 	@Min(size = 2, message = "userIdが2byte未満です")
 	@Max(size = 16, message = "userIdが16byte以上です")
 	@JsonProperty("userId")
@@ -39,6 +39,13 @@ public abstract class CommonApiRequest extends BaseApiRequest {
 	@Length(length = 64, message = "apiKeyが64byteではありません")
 	@JsonProperty("apiKey")
 	private String apiKey;
+
+	/**
+	 * デフォルトコンストラクタ
+	 */
+	public CommonApiRequest() {
+		super();
+	}
 
 	/**
 	 * requestTypeを返す

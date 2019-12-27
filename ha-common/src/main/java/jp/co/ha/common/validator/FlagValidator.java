@@ -3,7 +3,7 @@ package jp.co.ha.common.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Flag;
@@ -24,6 +24,6 @@ public class FlagValidator implements ConstraintValidator<Flag, Object> {
 		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
 			return true;
 		}
-		return RegixType.FLAG.is().test(value.toString());
+		return RegexType.FLAG.is().test(value.toString());
 	}
 }
