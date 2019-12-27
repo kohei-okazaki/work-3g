@@ -120,7 +120,7 @@ public class LoginController implements BaseWebController {
 
 		// 健康情報を検索する
 		SelectOption selectOption = new SelectOption().put("HEALTH_INFO_REG_DATE", SortType.ASC).setLimit(10);
-		List<HealthInfo> list = healthInfoSearchService.findByUserIdForDashboard(form.getUserId(), selectOption);
+		List<HealthInfo> list = healthInfoSearchService.findByUserId(form.getUserId(), selectOption);
 		if (list == null) {
 			LoggerFactory.getLogger(this.getClass()).info("検索結果なし");
 		} else {

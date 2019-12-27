@@ -14,15 +14,6 @@ import jp.co.ha.db.entity.HealthInfo;
 public interface HealthInfoSearchService {
 
 	/**
-	 * 指定したユーザIDで最後に登録した健康情報を返す
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @return 健康情報Entity
-	 */
-	HealthInfo findLastByUserId(String userId);
-
-	/**
 	 * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
 	 *
 	 * @param userId
@@ -57,7 +48,7 @@ public interface HealthInfoSearchService {
 	int getSelectCountByUserId(String userId);
 
 	/**
-	 * ダッシュボードTOP画面に表示する健康情報を検索する
+	 * 指定されたユーザIDで健康情報を検索する
 	 *
 	 * @param userId
 	 *     ユーザID
@@ -65,6 +56,6 @@ public interface HealthInfoSearchService {
 	 *     検索オプション
 	 * @return 健康情報リスト
 	 */
-	List<HealthInfo> findByUserIdForDashboard(String userId, SelectOption selectOption);
+	List<HealthInfo> findByUserId(String userId, SelectOption selectOption);
 
 }

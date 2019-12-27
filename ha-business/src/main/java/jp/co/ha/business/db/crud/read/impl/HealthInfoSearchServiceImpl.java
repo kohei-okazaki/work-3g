@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
@@ -27,25 +26,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	/** HealthInfoMapper */
 	@Autowired
 	private HealthInfoMapper mapper;
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public HealthInfo findLastByUserId(String userId) {
-
-		HealthInfoExample example = new HealthInfoExample();
-		Criteria criteria = example.createCriteria();
-		// ユーザID
-		criteria.andUserIdEqualTo(userId);
-		// ソート処理
-		SelectOption selectOption = new SelectOption().put("HEALTH_INFO_ID", SortType.DESC).setLimit(1);
-		example.setOrderByClause(selectOption.toOrderBy());
-
-		return mapper.selectByExample(example).get(0);
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -108,7 +88,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Select
 	@Override
 	@Transactional(readOnly = true)
-	public List<HealthInfo> findByUserIdForDashboard(String userId, SelectOption selectOption) {
+	public List<HealthInfo> findByUserId(String userId, SelectOption selectOption) {
 
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
