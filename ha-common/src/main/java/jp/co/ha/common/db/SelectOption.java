@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import jp.co.ha.common.util.StringUtil;
+
 /**
  * 検索オプション<br>
  * 検索における共通事項をまとめて保持するクラス
@@ -29,25 +31,6 @@ public class SelectOption {
 	public SelectOption put(String column, SortType sortType) {
 		orderByMap.put(column, sortType);
 		return this;
-	}
-
-	/**
-	 * orderByMapを返す
-	 *
-	 * @return orderByMap
-	 */
-	public Map<String, SortType> getOrderByMap() {
-		return orderByMap;
-	}
-
-	/**
-	 * orderByMapを設定する
-	 *
-	 * @param orderByMap
-	 *     ソートマップ
-	 */
-	public void setOrderByMap(Map<String, SortType> orderByMap) {
-		this.orderByMap = orderByMap;
 	}
 
 	/**
@@ -77,10 +60,10 @@ public class SelectOption {
 	 * @return ORDER BY句の文字列表現
 	 */
 	public String toOrderBy() {
-		StringJoiner sj = new StringJoiner(",");
+		StringJoiner sj = new StringJoiner(StringUtil.COMMA);
 		this.orderByMap.entrySet()
 				.stream()
-				.map(e -> e.getKey() + " " + e.getValue())
+				.map(e -> e.getKey() + StringUtil.SPACE + e.getValue())
 				.forEach(e -> sj.add(e));
 		return sj.toString();
 	}

@@ -2,13 +2,13 @@ package jp.co.ha.common.exception;
 
 /**
  * 実行環境エラーの例外クラス
- * 
+ *
  * @since 1.0
  */
 public class SystemRuntimeException extends BaseRuntimeException {
 
 	/** シリアルバージョンUID */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8788668488567180289L;
 
 	/**
 	 * コンストラクタ

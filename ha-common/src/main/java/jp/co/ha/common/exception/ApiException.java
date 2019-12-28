@@ -2,13 +2,13 @@ package jp.co.ha.common.exception;
 
 /**
  * API例外クラス
- * 
+ *
  * @since 1.0
  */
 public class ApiException extends BaseException {
 
 	/** シリアルバージョンUID */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2872621907290147159L;
 
 	/**
 	 * コンストラクタ
