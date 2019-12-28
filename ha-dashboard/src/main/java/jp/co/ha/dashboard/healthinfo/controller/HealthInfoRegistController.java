@@ -140,7 +140,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 
 		if (!isFirstReg) {
 			// 初回登録でない場合
-			SelectOption selectOption = new SelectOption().put("HEALTH_INFO_ID", SortType.DESC).setLimit(1);
+			SelectOption selectOption = new SelectOption().orderBy("HEALTH_INFO_ID", SortType.DESC).setLimit(1);
 			HealthInfo lastHealthInfo = healthInfoSearchService.findByUserId(userId, selectOption).get(0);
 			healthInfoService.addModel(model, dto, lastHealthInfo);
 		}

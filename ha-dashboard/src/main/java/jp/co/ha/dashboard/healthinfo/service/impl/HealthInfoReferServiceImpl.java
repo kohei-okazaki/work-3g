@@ -21,8 +21,8 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
-import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
@@ -48,7 +48,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	public List<HealthInfoReferenceDto> getHealthInfoResponseList(HealthInfoReferenceDto dto, String userId)
 			throws BaseException {
 
-		// ユーザIDと検索条件フォームから健康情報Entityリストを取得
+		// ユーザIDと健康情報照会DTOから健康情報Entityリストを取得
 		List<HealthInfo> entityList = getHealthInfoList(dto, userId);
 		return entityList.stream().map(e -> {
 			HealthInfoReferenceDto result = new HealthInfoReferenceDto();

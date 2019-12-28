@@ -96,7 +96,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(meterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
-		SelectOption selectOption = new SelectOption().put("HEALTH_INFO_ID", SortType.DESC).setLimit(1);
+		SelectOption selectOption = new SelectOption().orderBy("HEALTH_INFO_ID", SortType.DESC).setLimit(1);
 		List<HealthInfo> lastHealthInfo = healthInfoSearchService.findByUserId(userId, selectOption);
 
 		HealthInfoStatus status = CollectionUtil.isEmpty(lastHealthInfo)

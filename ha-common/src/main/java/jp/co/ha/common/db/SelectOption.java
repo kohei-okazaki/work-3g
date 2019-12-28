@@ -28,7 +28,7 @@ public class SelectOption {
 	 *     昇順/降順の列挙
 	 * @return メソッドチェーン用に検索オプション
 	 */
-	public SelectOption put(String column, SortType sortType) {
+	public SelectOption orderBy(String column, SortType sortType) {
 		orderByMap.put(column, sortType);
 		return this;
 	}
