@@ -11,6 +11,7 @@
     <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
     <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
     <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+    <plugin type="jp.co.ha.db.plugin.ExtendBaseExamplePlugin" />
 
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                     connectionURL="jdbc:mysql://localhost:3306/work3g?serverTimezone=JST"
