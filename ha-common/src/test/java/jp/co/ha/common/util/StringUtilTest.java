@@ -217,4 +217,31 @@ public class StringUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link StringUtil#trimFullAndHalfSpace}
+	 */
+	@Test
+	public void testTrimFullAndHalfSpace() {
+		{
+			String value = null;
+			assertEquals(null, StringUtil.trimFullAndHalfSpace(value));
+		}
+		{
+			String value = "";
+			assertEquals("", StringUtil.trimFullAndHalfSpace(value));
+		}
+		{
+			String value = null;
+			assertEquals(null, StringUtil.trimFullAndHalfSpace(value));
+		}
+		{
+			String value = " 　";
+			assertEquals("", StringUtil.trimFullAndHalfSpace(value));
+		}
+		{
+			String value = " 　A 　B 　";
+			assertEquals("AB", StringUtil.trimFullAndHalfSpace(value));
+		}
+	}
+
 }
