@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * 結果照会Excelダウンロードサービス実装クラスのマーカーアノテーション
- * 
+ *
  * @since 1.0
  */
 @Inherited
@@ -20,4 +20,5 @@ import org.springframework.beans.factory.annotation.Qualifier;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ReferenceDownloadExcel {
+
 }
