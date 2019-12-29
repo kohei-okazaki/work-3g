@@ -133,3 +133,8 @@ h3:before {
   /* アイコン色 */
   color: #006400;
 }
+
+.chart {
+  width: 250px;
+  height: 60px;
+}
