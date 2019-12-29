@@ -23,6 +23,6 @@ public class ToolExecutor {
 	 *     使わない
 	 */
 	public static void main(String[] args) {
-		BuildInvoker.build("CreateTableBuilder", "DropBuilder", "TableDefineBuilder");
+		BuildInvoker.build("AddColumnBuilder", "TableDefineBuilder");
 	}
 }

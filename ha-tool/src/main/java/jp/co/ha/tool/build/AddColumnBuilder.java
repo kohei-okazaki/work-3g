@@ -47,15 +47,24 @@ public class AddColumnBuilder extends BaseSqlSourceBuilder {
 		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 
 		targetRowList.stream().forEach(e -> {
-			String ddlPrefix = "ALTER TABLE ";
-			String ddlSuffix = ";";
+
 			String tableName = e.getCell(CellPositionType.PHYSICAL_NAME).getValue();
 			String columnName = e.getCell(CellPositionType.COLUMN_NAME).getValue();
 			String columnType = getColumnType(e);
 			String columnComment = getColumnComment(e);
-			String ddl = ddlPrefix + tableName + " ADD " + columnName + " " + columnType + " '" + columnComment + "'"
-					+ ddlSuffix;
-			body.add(ddl);
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("ALTER TABLE ");
+			sb.append(tableName);
+			sb.append(" ADD ");
+			sb.append(columnName);
+			sb.append(" ");
+			sb.append(columnType);
+			sb.append(" COMMENT '");
+			sb.append(columnComment);
+			sb.append("';");
+
+			body.add(sb.toString());
 		});
 
 		FileConfig fileConf = getFileConfig(ExecuteType.DDL);

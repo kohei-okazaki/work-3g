@@ -37,17 +37,31 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 
 		List<FileConfig> list = new ArrayList<>();
 		for (String tableName : this.targetTableList) {
+
 			Table table = toTable(excel.getRowList(), tableName);
 			StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
 			body.add(getTableComment(table.getLogicalName()));
 			body.add("CREATE TABLE " + tableName + " (");
 			StringJoiner columnData = new StringJoiner(StringUtil.COMMA + LineFeedType.CRLF.getValue());
+
 			table.getColumnList().stream().forEach(e -> {
+
 				String comment = e.getComment();
 				String name = e.getName();
 				String type = e.getType();
-				columnData.add("-- " + comment + StringUtil.NEW_LINE + name + StringUtil.SPACE + type + " comment '"
-						+ comment + "'");
+
+				StringBuilder sb = new StringBuilder();
+				sb.append("-- ");
+				sb.append(comment);
+				sb.append(StringUtil.NEW_LINE);
+				sb.append(name);
+				sb.append(StringUtil.SPACE);
+				sb.append(type);
+				sb.append(" comment '");
+				sb.append(comment);
+				sb.append("'");
+
+				columnData.add(sb.toString());
 			});
 			body.add(columnData.toString());
 			body.add(");");
