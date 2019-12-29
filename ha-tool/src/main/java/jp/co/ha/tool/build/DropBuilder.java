@@ -9,6 +9,7 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.config.FileConfig.FileConfigBuilder;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
@@ -40,10 +41,10 @@ public class DropBuilder extends BaseSqlSourceBuilder {
 			body.add(buildDropSql(e.getPhysicalName()));
 		});
 
-		FileConfig conf = getFileConfig(ExecuteType.DROP);
-		conf.setFileName("DROP" + FileExtension.SQL.getValue());
-		conf.setData(body.toString());
-		return conf;
+		String outputPath = getOutputPath(ExecuteType.DROP);
+		String fileName = "DROP" + FileExtension.SQL.getValue();
+
+		return new FileConfigBuilder(outputPath, fileName, body.toString()).build();
 	}
 
 	/**

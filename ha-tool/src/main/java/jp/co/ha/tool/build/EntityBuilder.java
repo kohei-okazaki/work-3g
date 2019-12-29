@@ -10,6 +10,7 @@ import jp.co.ha.common.util.FileUtil.LineFeedType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.config.FileConfig.FileConfigBuilder;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.source.Field;
@@ -74,10 +75,11 @@ public class EntityBuilder extends BaseBuilder {
 				}
 			}
 
-			FileConfig fileConf = getFileConfig(ExecuteType.ENTITY);
-			fileConf.setFileName(toJavaFileName(table) + FileExtension.JAVA.getValue());
-			fileConf.setData(build(source));
-			list.add(fileConf);
+			String outputPath = getOutputPath(ExecuteType.ENTITY);
+			String fileName = toJavaFileName(table) + FileExtension.JAVA.getValue();
+			String body = build(source);
+
+			list.add(new FileConfigBuilder(outputPath, fileName, body).build());
 		}
 
 		return list;

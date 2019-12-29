@@ -9,6 +9,7 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.config.FileConfig.FileConfigBuilder;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
@@ -40,10 +41,10 @@ public class TableDefineBuilder extends BaseSqlSourceBuilder {
 			body.add(buildTableDefineSql(e.getPhysicalName()));
 		});
 
-		FileConfig conf = getFileConfig(ExecuteType.TABLE_DEFINE);
-		conf.setFileName("TABLE_DEFINE" + FileExtension.SQL.getValue());
-		conf.setData(body.toString());
-		return conf;
+		String outputPath = getOutputPath(ExecuteType.TABLE_DEFINE);
+		String fileName = "TABLE_DEFINE" + FileExtension.SQL.getValue();
+
+		return new FileConfigBuilder(outputPath, fileName, body.toString()).build();
 
 	}
 

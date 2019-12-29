@@ -14,7 +14,7 @@ import jp.co.ha.tool.config.FileConfig;
 
 /**
  * ファイル作成クラス
- * 
+ *
  * @since 1.0
  */
 public class FileFactory {
@@ -42,7 +42,7 @@ public class FileFactory {
 		try {
 			file.createNewFile();
 		} catch (IOException e) {
-			LOG.error("", e);
+			LOG.error("ファイルの作成に失敗しました。ファイル名=" + file.getName(), e);
 		}
 
 		// ファイル書込
@@ -51,7 +51,7 @@ public class FileFactory {
 			pw.println(conf.getData());
 			pw.flush();
 		} catch (IOException e) {
-			LOG.error("", e);
+			LOG.error("ファイル内容の書き込みに失敗しました。ファイル名=" + file.getName(), e);
 		}
 		LOG.info("作成 終了 ---> " + conf.getFileName());
 	}

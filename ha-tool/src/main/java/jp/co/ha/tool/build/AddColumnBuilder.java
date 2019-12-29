@@ -11,6 +11,7 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.config.FileConfig.FileConfigBuilder;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.Row;
 import jp.co.ha.tool.type.CellPositionType;
@@ -67,11 +68,11 @@ public class AddColumnBuilder extends BaseSqlSourceBuilder {
 			body.add(sb.toString());
 		});
 
-		FileConfig fileConf = getFileConfig(ExecuteType.DDL);
-		fileConf.setFileName(DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
-				+ FileExtension.SQL.getValue());
-		fileConf.setData(body.toString());
-		return fileConf;
+		String outputPath = getOutputPath(ExecuteType.DDL);
+		String fileName = DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+				+ FileExtension.SQL.getValue();
+
+		return new FileConfigBuilder(outputPath, fileName, body.toString()).build();
 	}
 
 	/**
