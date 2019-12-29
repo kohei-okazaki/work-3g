@@ -14,6 +14,7 @@ import jp.co.ha.business.api.HealthInfoRegistApi;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.business.api.type.TestMode;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
@@ -97,6 +98,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		HealthInfoRegistRequest apiRequest = setUpApiRequest(dto, userId);
 		HealthInfoRegistResponse apiResponse = new HealthInfoRegistResponse();
 		registApi.execute(apiRequest, apiResponse);
+
 		return apiResponse;
 	}
 
@@ -161,6 +163,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 	 *     基底例外
 	 */
 	private HealthInfoRegistRequest setUpApiRequest(HealthInfoDto dto, String userId) throws BaseException {
+
 		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
 		// 健康情報DTOをリクエストクラスにコピー
 		BeanUtil.copy(dto, apiRequest);
@@ -170,6 +173,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 		// アカウント情報.APIキーを設定
 		Account account = accountSearchService.findByUserId(userId).get();
 		apiRequest.setApiKey(account.getApiKey());
+		// DB登録モードを設定
+		apiRequest.setTestMode(TestMode.DB_REGIST);
+
 		return apiRequest;
 	}
 

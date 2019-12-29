@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
-import jp.co.ha.common.type.LineFeedType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.util.FileUtil.LineFeedType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
@@ -62,7 +62,7 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 
 	/**
 	 * Tableを返す
-	 * 
+	 *
 	 * @param rowList
 	 *     行リスト
 	 * @param tableName
