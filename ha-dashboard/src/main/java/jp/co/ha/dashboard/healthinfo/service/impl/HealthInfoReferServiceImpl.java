@@ -11,6 +11,9 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
@@ -21,8 +24,8 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
-import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
@@ -48,7 +51,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	public List<HealthInfoReferenceDto> getHealthInfoResponseList(HealthInfoReferenceDto dto, String userId)
 			throws BaseException {
 
-		// ユーザIDと検索条件フォームから健康情報Entityリストを取得
+		// ユーザIDと健康情報照会DTOから健康情報Entityリストを取得
 		List<HealthInfo> entityList = getHealthInfoList(dto, userId);
 		return entityList.stream().map(e -> {
 			HealthInfoReferenceDto result = new HealthInfoReferenceDto();
@@ -119,23 +122,21 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	 * @param userId
 	 *     ユーザID
 	 * @return 健康情報リスト
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceDto dto, String userId) throws BaseException {
+	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceDto dto, String userId) {
 
 		List<HealthInfo> resultList;
-
+		SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.ASC).build();
 		if (BeanUtil.isNull(dto.getHealthInfoId()) || StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
 			// 健康情報IDが未指定の場合
 			Date healthInfoRegDate = editStrDate(dto.getFromHealthInfoRegDate());
 			if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
 				resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(userId, healthInfoRegDate,
-						DateUtil.toEndDate(healthInfoRegDate));
+						DateUtil.toEndDate(healthInfoRegDate), selectOption);
 			} else {
 				Date toHealthInfoRegDate = editStrDate(dto.getToHealthInfoRegDate());
 				resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(userId, healthInfoRegDate,
-						toHealthInfoRegDate);
+						toHealthInfoRegDate, selectOption);
 			}
 		} else {
 			resultList = healthInfoSearchService.findByHealthInfoIdAndUserId(dto.getHealthInfoId(), userId);

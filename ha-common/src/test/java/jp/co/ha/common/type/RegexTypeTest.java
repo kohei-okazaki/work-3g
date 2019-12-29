@@ -10,11 +10,11 @@ import org.junit.Test;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link RegixType} のjUnit
+ * {@link RegexType} のjUnit
  *
  * @since 1.0
  */
-public class RegixTypeTest extends BaseCommonTest {
+public class RegexTypeTest extends BaseCommonTest {
 
 	/**
 	 * 半角数字をテスト
@@ -24,13 +24,13 @@ public class RegixTypeTest extends BaseCommonTest {
 		{
 			List<String> list = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
 			for (String str : list) {
-				assertEquals(RegixType.HALF_NUMBER.is().test(str), true);
+				assertEquals(RegexType.HALF_NUMBER.is().test(str), true);
 			}
 		}
 		{
 			List<String> list = Arrays.asList("a", "あ", "2f2", "///");
 			for (String str : list) {
-				assertNotEquals(RegixType.HALF_NUMBER.is().test(str), true);
+				assertNotEquals(RegexType.HALF_NUMBER.is().test(str), true);
 			}
 		}
 	}
@@ -43,13 +43,13 @@ public class RegixTypeTest extends BaseCommonTest {
 		{
 			List<String> list = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", ".");
 			for (String str : list) {
-				assertEquals(RegixType.HALF_NUMBER_PERIOD.is().test(str), true);
+				assertEquals(RegexType.HALF_NUMBER_PERIOD.is().test(str), true);
 			}
 		}
 		{
 			List<String> list = Arrays.asList("a", "あ", "2f2", "///");
 			for (String str : list) {
-				assertNotEquals(RegixType.HALF_NUMBER_PERIOD.is().test(str), true);
+				assertNotEquals(RegexType.HALF_NUMBER_PERIOD.is().test(str), true);
 			}
 		}
 	}
@@ -62,13 +62,13 @@ public class RegixTypeTest extends BaseCommonTest {
 		{
 			List<String> list = Arrays.asList("0", "aa", "AA", "cc", "CcC");
 			for (String str : list) {
-				assertEquals(RegixType.HALF_CHAR.is().test(str), true);
+				assertEquals(RegexType.HALF_CHAR.is().test(str), true);
 			}
 		}
 		{
 			List<String> list = Arrays.asList("ア", "あ", "ｱ");
 			for (String str : list) {
-				assertNotEquals(RegixType.HALF_CHAR.is().test(str), true);
+				assertNotEquals(RegexType.HALF_CHAR.is().test(str), true);
 			}
 		}
 	}

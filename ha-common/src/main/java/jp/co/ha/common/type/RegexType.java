@@ -7,7 +7,7 @@ import java.util.function.Predicate;
  *
  * @since 1.0
  */
-public enum RegixType implements BaseEnum {
+public enum RegexType implements BaseEnum {
 
 	/** 半角数字 */
 	HALF_NUMBER("^[0-9]*$"),
@@ -35,7 +35,7 @@ public enum RegixType implements BaseEnum {
 	 * @param value
 	 *     正規表現
 	 */
-	private RegixType(String value) {
+	private RegexType(String value) {
 		this.value = value;
 	}
 
@@ -63,8 +63,8 @@ public enum RegixType implements BaseEnum {
 	 *     値
 	 * @return RegixType
 	 */
-	public static RegixType of(String value) {
-		return BaseEnum.of(RegixType.class, value);
+	public static RegexType of(String value) {
+		return BaseEnum.of(RegexType.class, value);
 	}
 
 }

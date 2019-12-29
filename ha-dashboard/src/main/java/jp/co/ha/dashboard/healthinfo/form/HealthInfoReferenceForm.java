@@ -1,8 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.form;
 
-import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.type.DateFormatType;
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Date;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Max;
@@ -13,17 +12,13 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * 健康情報照会画面フォームクラス
- * 
+ *
  * @since 1.0
  */
 public class HealthInfoReferenceForm implements BaseForm {
 
-	/** シリアルバージョンUID */
-	@Ignore
-	private static final long serialVersionUID = 1L;
-
 	/** 健康情報ID */
-	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "健康情報IDは半角数字で入力してください")
+	@Pattern(regixPattern = RegexType.HALF_NUMBER, message = "健康情報IDは半角数字で入力してください")
 	@Min(size = 1, message = "健康情報IDは1桁以上で入力してください")
 	@Max(size = 8, message = "健康情報IDは8桁以下で入力してください")
 	private String healthInfoId;

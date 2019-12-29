@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.dto.CalorieCalcDto;
-import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.dashboard.calorie.service.CalorieCalcService;
 
 /**

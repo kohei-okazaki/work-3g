@@ -1,4 +1,4 @@
-package jp.co.ha.business.healthInfo;
+package jp.co.ha.business.healthInfo.service;
 
 import java.math.BigDecimal;
 

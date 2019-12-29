@@ -17,11 +17,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
+import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.login.LoginCheck;
 import jp.co.ha.business.login.LoginCheckResult;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.dashboard.view.DashboardView;
@@ -43,6 +50,12 @@ public class LoginController implements BaseWebController {
 	/** アカウント検索サービス */
 	@Autowired
 	private AccountSearchService accountSearchService;
+	/** 健康情報検索サービス */
+	@Autowired
+	private HealthInfoSearchService healthInfoSearchService;
+	/** 健康情報グラフ作成サービス */
+	@Autowired
+	private HealthInfoGraphService healthInfoGraphService;
 	/** MessageSource */
 	@Autowired
 	private MessageSource messageSource;
@@ -108,6 +121,22 @@ public class LoginController implements BaseWebController {
 
 		// セッションにユーザIDを登録する。
 		sessionService.setValue(request.getSession(), "userId", form.getUserId());
+
+		healthInfoGraphService.putGraph(model, () -> {
+
+			// 健康情報を検索する
+			SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+					.limit(10).build();
+			HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
+			healthInfoSearchService.findByUserId(form.getUserId(), selectOption).stream().forEach(e -> {
+				graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS);
+				graphModel.addWeight(e.getWeight());
+				graphModel.addBmi(e.getBmi());
+				graphModel.addStandardWeight(e.getStandardWeight());
+			});
+
+			return graphModel;
+		});
 
 		return getView(DashboardView.TOP);
 

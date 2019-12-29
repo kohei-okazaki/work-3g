@@ -1,8 +1,7 @@
 package jp.co.ha.dashboard.login.form;
 
-import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
 import jp.co.ha.common.validator.annotation.Pattern;
@@ -11,25 +10,21 @@ import jp.co.ha.web.form.BaseForm;
 
 /**
  * ログインフォームクラス
- * 
+ *
  * @since 1.0
  */
 public class LoginForm implements BaseForm {
 
-	/** シリアルバージョンUID */
-	@Ignore
-	private static final long serialVersionUID = 1L;
-
 	/** ユーザID */
 	@Required(message = "ユーザIDが未入力です")
-	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "ユーザIDが半角英数でありません")
+	@Pattern(regixPattern = RegexType.HALF_CHAR, message = "ユーザIDが半角英数でありません")
 	@Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
 	@Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
 	private String userId;
 	/** パスワード */
 	@Mask
 	@Required(message = "パスワードが未入力です")
-	@Pattern(regixPattern = RegixType.HALF_CHAR, message = "パスワードが半角英数でありません")
+	@Pattern(regixPattern = RegexType.HALF_CHAR, message = "パスワードが半角英数でありません")
 	@Min(size = 2, message = "パスワードは2桁以上で入力してください")
 	@Max(size = 16, message = "パスワードは16桁以下で入力してください")
 	private String password;

@@ -1,8 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.DashboardErrorCode;
+import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
+import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.BaseException;
@@ -78,6 +78,9 @@ public class HealthInfoReferenceController implements BaseWebController {
 	/** System設定情報 */
 	@Autowired
 	private SystemConfig systemConfig;
+	/** 健康情報グラフ作成サービス */
+	@Autowired
+	private HealthInfoGraphService healthInfoGraphService;
 
 	/**
 	 * Validateを設定
@@ -152,23 +155,21 @@ public class HealthInfoReferenceController implements BaseWebController {
 		model.addAttribute("form", dto);
 		// 検索結果有無を設定
 		model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
-		// ログイン中のユーザの全レコードを検索する
+		// ログイン中ユーザの健康情報を設定
 		model.addAttribute("resultList", resultList);
 
-		List<String> healthInfoRegDateList = new ArrayList<>();
-		List<BigDecimal> weightList = new ArrayList<>();
-		List<BigDecimal> bmiList = new ArrayList<>();
-		List<BigDecimal> standardWeightList = new ArrayList<>();
-		for (HealthInfoReferenceDto referenceResult : resultList) {
-			healthInfoRegDateList.add(referenceResult.getHealthInfoRegDate());
-			weightList.add(referenceResult.getWeight());
-			bmiList.add(referenceResult.getBmi());
-			standardWeightList.add(referenceResult.getStandardWeight());
-		}
-		model.addAttribute("label", healthInfoRegDateList);
-		model.addAttribute("weight", weightList);
-		model.addAttribute("bmi", bmiList);
-		model.addAttribute("standardWeight", standardWeightList);
+		healthInfoGraphService.putGraph(model, () -> {
+
+			HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
+			resultList.stream().forEach(e -> {
+				graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate());
+				graphModel.addWeight(e.getWeight());
+				graphModel.addBmi(e.getBmi());
+				graphModel.addStandardWeight(e.getStandardWeight());
+			});
+
+			return graphModel;
+		});
 
 		model.addAttribute("systemConfig", systemConfig);
 

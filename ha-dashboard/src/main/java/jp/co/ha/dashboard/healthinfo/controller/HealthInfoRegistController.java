@@ -27,6 +27,9 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
@@ -138,7 +141,9 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 
 		if (!isFirstReg) {
 			// 初回登録でない場合
-			HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
+			SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_ID", SortType.DESC).limit(1)
+					.build();
+			HealthInfo lastHealthInfo = healthInfoSearchService.findByUserId(userId, selectOption).get(0);
 			healthInfoService.addModel(model, dto, lastHealthInfo);
 		}
 

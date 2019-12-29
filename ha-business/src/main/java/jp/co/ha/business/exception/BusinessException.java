@@ -5,13 +5,13 @@ import jp.co.ha.common.exception.BaseException;
 
 /**
  * 業務処理による例外クラス
- * 
+ *
  * @since 1.0
  */
 public class BusinessException extends BaseException {
 
 	/** シリアルバージョンUID */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1168840693409783721L;
 
 	/**
 	 * コンストラクタ

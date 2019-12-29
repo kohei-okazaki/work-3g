@@ -8,7 +8,7 @@ package jp.co.ha.common.exception;
 public abstract class BaseRuntimeException extends RuntimeException {
 
 	/** シリアルバージョンUID */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5362739275313802447L;
 
 	/** エラーコード */
 	private BaseErrorCode errorCode;

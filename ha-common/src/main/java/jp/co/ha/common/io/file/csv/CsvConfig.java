@@ -1,6 +1,5 @@
 package jp.co.ha.common.io.file.csv;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.function.Builder;
 import jp.co.ha.common.type.Charset;
 
@@ -142,7 +141,7 @@ public class CsvConfig {
 		}
 
 		@Override
-		public CsvConfig build() throws BaseException {
+		public CsvConfig build() {
 			return new CsvConfig(this);
 		}
 
@@ -151,7 +150,7 @@ public class CsvConfig {
 	/**
 	 * コンストラクタ<br>
 	 * ビルダーからのみインスタンスの生成を行うためprivateにする
-	 * 
+	 *
 	 * @param builder
 	 *     CsvConfigのビルダー
 	 */

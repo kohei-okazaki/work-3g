@@ -2,7 +2,7 @@ package jp.co.ha.business.io.file.csv.model;
 
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 
@@ -19,12 +19,12 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
 	/** 身長 */
 	@Mask
 	@Required(message = "身長が未指定です")
-	@Pattern(regixPattern = RegixType.DECIMAL, message = "身長が半角数字とピリオドでありません")
+	@Pattern(regixPattern = RegexType.DECIMAL, message = "身長が半角数字とピリオドでありません")
 	private String height;
 	/** 体重 */
 	@Mask
 	@Required(message = "体重が未指定です")
-	@Pattern(regixPattern = RegixType.DECIMAL, message = "体重が半角数字とピリオドでありません")
+	@Pattern(regixPattern = RegexType.DECIMAL, message = "体重が半角数字とピリオドでありません")
 	private String weight;
 
 	/**

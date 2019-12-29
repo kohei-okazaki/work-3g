@@ -7,13 +7,13 @@ package jp.co.ha.common.exception;
  * <li>IO関連で発生した例外</li>
  * <li>Session関連で発生した例外</li>
  * </ul>
- * 
+ *
  * @since 1.0
  */
 public class SystemException extends BaseException {
 
 	/** シリアルバージョンUID */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8975593059485986641L;
 
 	/**
 	 * コンストラクタ

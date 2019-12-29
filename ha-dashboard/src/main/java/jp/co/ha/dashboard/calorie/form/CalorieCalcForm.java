@@ -5,9 +5,8 @@ import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
-import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.common.type.RegixType;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.web.form.BaseForm;
@@ -19,13 +18,9 @@ import jp.co.ha.web.form.BaseForm;
  */
 public class CalorieCalcForm implements BaseForm {
 
-	/** シリアルバージョンUID */
-	@Ignore
-	private static final long serialVersionUID = 1L;
-
 	/** 年齢 */
 	@Required(message = "年齢が未入力です")
-	@Pattern(regixPattern = RegixType.HALF_NUMBER, message = "年齢は半角数字で入力して下さい")
+	@Pattern(regixPattern = RegexType.HALF_NUMBER, message = "年齢は半角数字で入力して下さい")
 	private Integer age;
 	/** 性別 */
 	@Required(message = "性別が未入力です")
@@ -44,7 +39,7 @@ public class CalorieCalcForm implements BaseForm {
 	private BigDecimal weight;
 	/** 生活活動代謝 */
 	@Required(message = "生活活動代謝が未入力です")
-	@Pattern(regixPattern = RegixType.DECIMAL, message = "生活活動代謝は半角数字の少数で入力して下さい")
+	@Pattern(regixPattern = RegexType.DECIMAL, message = "生活活動代謝は半角数字の少数で入力して下さい")
 	private BigDecimal lifeWorkMetabolism;
 
 	/**

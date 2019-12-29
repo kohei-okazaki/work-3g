@@ -35,7 +35,7 @@
   <!-- API -->
   <context:component-scan base-package="jp.co.ha.business.api" />
 
-  <!-- 健康情報計算サービス -->
-  <bean id="healthInfoCalcService" class="jp.co.ha.business.healthInfo.impl.HealthInfoCalcServiceImpl" />
+  <!-- Business -->
+  <context:component-scan base-package="jp.co.ha.business.healthInfo.*.impl" />
 
 </beans>

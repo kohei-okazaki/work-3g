@@ -2,13 +2,13 @@ package jp.co.ha.common.exception;
 
 /**
  * アプリ内で扱う基底例外クラス
- * 
+ *
  * @since 1.0
  */
 public abstract class BaseException extends Exception {
 
 	/** シリアルバージョンUID */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5399990606605542371L;
 
 	/** エラーコード */
 	private BaseErrorCode errorCode;

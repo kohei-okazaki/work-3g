@@ -228,6 +228,23 @@ public class StringUtil {
 	}
 
 	/**
+	 * 全角と半角スペースを除去した値を返す<br>
+	 * <ul>
+	 * <li>" A B "の場合"AB"となる</li>
+	 * </ul>
+	 *
+	 * @param value
+	 *     値
+	 * @return 全角と半角スペースを除去後の値
+	 */
+	public static String trimFullAndHalfSpace(String value) {
+		if (isEmpty(value)) {
+			return value;
+		}
+		return value.replaceAll("(\\s|　)", "");
+	}
+
+	/**
 	 * Padding指定の列挙
 	 *
 	 * @since 1.0

@@ -3,6 +3,7 @@ package jp.co.ha.business.db.crud.read;
 import java.util.Date;
 import java.util.List;
 
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -13,15 +14,6 @@ import jp.co.ha.db.entity.HealthInfo;
 public interface HealthInfoSearchService {
 
 	/**
-	 * 指定したユーザIDで最後に登録した健康情報を返す
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @return 健康情報Entity
-	 */
-	HealthInfo findLastByUserId(String userId);
-
-	/**
 	 * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
 	 *
 	 * @param userId
@@ -30,10 +22,12 @@ public interface HealthInfoSearchService {
 	 *     YYYYMMDD
 	 * @param toHealthInfoRegDate
 	 *     YYYYMMDD
+	 * @param selectOption
+	 *     検索オプション
 	 * @return 健康情報のリスト
 	 */
 	List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
-			Date toHealthInfoRegDate);
+			Date toHealthInfoRegDate, SelectOption selectOption);
 
 	/**
 	 * 指定された健康情報IDとユーザIDと一致する健康情報を返す
@@ -54,5 +48,21 @@ public interface HealthInfoSearchService {
 	 * @return 件数
 	 */
 	int getSelectCountByUserId(String userId);
+
+	/**
+	 * 指定されたユーザIDで健康情報を検索する<br>
+	 * 以下の検索オプションを実行する
+	 * <ul>
+	 * <li>ソート処理</li>
+	 * <li>検索上限</li>
+	 * </ul>
+	 *
+	 * @param userId
+	 *     ユーザID
+	 * @param selectOption
+	 *     検索オプション
+	 * @return 健康情報リスト
+	 */
+	List<HealthInfo> findByUserId(String userId, SelectOption selectOption);
 
 }

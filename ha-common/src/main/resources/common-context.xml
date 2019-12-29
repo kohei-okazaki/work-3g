@@ -28,6 +28,9 @@
   <!-- 妥当性チェック -->
   <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />
 
+  <!-- RestTemplate -->
+  <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
+
   <bean id="properties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
     <property name="locations">
       <list>
@@ -47,6 +50,7 @@
   <!-- system.properties -->
   <bean id="systemConfig" class="jp.co.ha.common.system.SystemConfig" lazy-init="true">
     <property name="paging" value="${system.paging}" />
+    <property name="baseApiUrl" value="${system.base.api.url}" />
   </bean>
   <!-- crypt.properties -->
   <bean id="cryptConfig" class="jp.co.ha.common.db.CryptConfig" lazy-init="true">

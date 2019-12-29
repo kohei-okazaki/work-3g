@@ -1,6 +1,7 @@
 package jp.co.ha.business.api.service.impl;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,14 @@ import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.HealthInfo;
 
@@ -92,11 +97,12 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(meterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
-		HealthInfo lastHealthInfo = healthInfoSearchService.findLastByUserId(userId);
+		SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_ID", SortType.DESC).limit(1).build();
+		List<HealthInfo> lastHealthInfo = healthInfoSearchService.findByUserId(userId, selectOption);
 
-		HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
+		HealthInfoStatus status = CollectionUtil.isEmpty(lastHealthInfo)
 				? HealthInfoStatus.EVEN
-				: healthInfoCalcService.getHealthInfoStatus(weight, lastHealthInfo.getWeight());
+				: healthInfoCalcService.getHealthInfoStatus(weight, lastHealthInfo.get(0).getWeight());
 
 		HealthInfo entity = new HealthInfo();
 		BeanUtil.copy(request, entity);
