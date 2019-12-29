@@ -12,6 +12,7 @@ import jp.co.ha.business.api.service.CommonService;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
+import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
@@ -21,9 +22,11 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -43,6 +46,9 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 	/** 健康情報作成サービス */
 	@Autowired
 	private HealthInfoCreateService healthInfoCreateService;
+	/** BMI範囲マスタ検索サービス */
+	@Autowired
+	private BmiRangeMtSearchService bmiRangeMtSearchService;
 
 	/**
 	 * {@inheritDoc}
@@ -104,11 +110,18 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 				? HealthInfoStatus.EVEN
 				: healthInfoCalcService.getHealthInfoStatus(weight, lastHealthInfo.get(0).getWeight());
 
+		List<BmiRangeMt> mtList = bmiRangeMtSearchService.findAll();
+		BmiRangeMt bmiRangeMt = mtList.stream().filter(
+				e -> e.getRangeMin().intValue() <= bmi.intValue() && bmi.intValue() < e.getRangeMax().intValue())
+				.findFirst().orElseThrow(
+						() -> new BusinessException(CommonErrorCode.DB_NO_DATA, "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
+
 		HealthInfo entity = new HealthInfo();
 		BeanUtil.copy(request, entity);
 		entity.setBmi(bmi);
 		entity.setStandardWeight(standardWeight);
 		entity.setHealthInfoStatus(status.getValue());
+		entity.setBmiRangeId(bmiRangeMt.getBmiRangeId());
 		entity.setHealthInfoRegDate(DateUtil.getSysDate());
 
 		return entity;
