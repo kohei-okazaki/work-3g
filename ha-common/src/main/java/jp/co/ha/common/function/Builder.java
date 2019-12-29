@@ -1,7 +1,5 @@
 package jp.co.ha.common.function;
 
-import jp.co.ha.common.exception.BaseException;
-
 /**
  * Builderパターンの関数インターフェース
  *
@@ -16,10 +14,7 @@ public interface Builder<T> {
 	 * ビルド後のクラスを返す
 	 *
 	 * @return ビルド後のクラス
-	 * @throws BaseException
-	 *     基底例外
-	 *
 	 */
-	T build() throws BaseException;
+	T build();
 
 }

@@ -1,6 +1,5 @@
 package jp.co.ha.common.io.file.excel;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.function.Builder;
 import jp.co.ha.common.type.Charset;
 
@@ -103,7 +102,7 @@ public class ExcelConfig {
 		}
 
 		@Override
-		public ExcelConfig build() throws BaseException {
+		public ExcelConfig build() {
 			return new ExcelConfig(this);
 		}
 

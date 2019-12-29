@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import jp.co.ha.common.function.Builder;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -15,57 +16,54 @@ import jp.co.ha.common.util.StringUtil;
 public class SelectOption {
 
 	/** ソートマップ */
-	private Map<String, SortType> orderByMap = new LinkedHashMap<>();
+	private final Map<String, SortType> orderByMap;
 	/** 検索上限数 */
-	private int limit = 10000;
+	private final int limit;
 
 	/**
-	 * 指定したカラムでのソートを設定する
+	 * 検索オプションのビルダー
 	 *
-	 * @param column
-	 *     カラム
-	 * @param sortType
-	 *     昇順/降順の列挙
-	 * @return メソッドチェーン用に検索オプション
+	 * @since 1.0
 	 */
-	public SelectOption orderBy(String column, SortType sortType) {
-		orderByMap.put(column, sortType);
-		return this;
-	}
+	public static class SelectOptionBuilder implements Builder<SelectOption> {
 
-	/**
-	 * limitを返す
-	 *
-	 * @return limit
-	 */
-	public int getLimit() {
-		return limit;
-	}
+		/* 任意項目 */
+		/** ソートマップ */
+		private Map<String, SortType> orderByMap = new LinkedHashMap<>();
+		/** 検索上限数 */
+		private int limit = 10000;
 
-	/**
-	 * limitを設定する
-	 *
-	 * @param limit
-	 *     検索上限数
-	 * @return メソッドチェーン用に検索オプション
-	 */
-	public SelectOption setLimit(int limit) {
-		this.limit = limit;
-		return this;
-	}
+		@Override
+		public SelectOption build() {
+			return new SelectOption(this);
+		}
 
-	/**
-	 * ORDER BY句を文字列表現で返す
-	 *
-	 * @return ORDER BY句の文字列表現
-	 */
-	public String toOrderBy() {
-		StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-		this.orderByMap.entrySet()
-				.stream()
-				.map(e -> e.getKey() + StringUtil.SPACE + e.getValue())
-				.forEach(e -> sj.add(e));
-		return sj.toString();
+		/**
+		 * 指定したカラムでのソートを設定
+		 *
+		 * @param column
+		 *     カラム
+		 * @param sortType
+		 *     昇順/降順の列挙
+		 * @return SelectOptionBuilder
+		 */
+		public SelectOptionBuilder orderBy(String column, SortType sortType) {
+			orderByMap.put(column, sortType);
+			return this;
+		}
+
+		/**
+		 * limitを設定
+		 *
+		 * @param limit
+		 *     検索上限数
+		 * @return SelectOptionBuilder
+		 */
+		public SelectOptionBuilder limit(int limit) {
+			this.limit = limit;
+			return this;
+		}
+
 	}
 
 	/**
@@ -80,6 +78,41 @@ public class SelectOption {
 		/** 降順 */
 		DESC;
 
+	}
+
+	/**
+	 * コンストラクタ<br>
+	 * ビルダーからのみインスタンスの生成を行うためprivateにする
+	 *
+	 * @param builder
+	 *     SelectOptionのビルダー
+	 */
+	private SelectOption(SelectOptionBuilder builder) {
+		this.orderByMap = builder.orderByMap;
+		this.limit = builder.limit;
+	}
+
+	/**
+	 * ORDER BY句を文字列表現で返す
+	 *
+	 * @return ORDER BY句の文字列表現
+	 */
+	public String getOrderBy() {
+		StringJoiner sj = new StringJoiner(StringUtil.COMMA);
+		this.orderByMap.entrySet()
+				.stream()
+				.map(e -> e.getKey() + StringUtil.SPACE + e.getValue())
+				.forEach(e -> sj.add(e));
+		return sj.toString();
+	}
+
+	/**
+	 * limitを返す
+	 *
+	 * @return limit
+	 */
+	public int getLimit() {
+		return limit;
 	}
 
 }

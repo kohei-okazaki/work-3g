@@ -1,4 +1,4 @@
-package jp.co.ha.business.healthInfo.impl;
+package jp.co.ha.business.healthInfo.service.impl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -10,7 +10,7 @@ import jp.co.ha.business.calc.Calculator;
 import jp.co.ha.business.calc.Calculator.CalcMethod;
 import jp.co.ha.business.calc.StandardWeightCalcFunction;
 import jp.co.ha.business.dto.CalorieCalcDto;
-import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**

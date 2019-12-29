@@ -34,7 +34,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
-			Date toHealthInfoRegDate) {
+			Date toHealthInfoRegDate, SelectOption selectOption) {
 
 		HealthInfoExample example = new HealthInfoExample();
 		Criteria criteria = example.createCriteria();
@@ -42,9 +42,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		criteria.andUserIdEqualTo(userId);
 		// 健康情報登録日時
 		criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
-
-		// 健康情報登録日時の昇順でソート
-		example.setOrderByClause("HEALTH_INFO_REG_DATE");
+		// ソート処理
+		example.setOrderByClause(selectOption.getOrderBy());
 		return mapper.selectByExample(example);
 	}
 
@@ -95,7 +94,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 		// ユーザID
 		criteria.andUserIdEqualTo(userId);
 		// ソート処理
-		example.setOrderByClause(selectOption.toOrderBy());
+		example.setOrderByClause(selectOption.getOrderBy());
 		// 検索上限数
 		example.setLimit(selectOption.getLimit());
 

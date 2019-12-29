@@ -15,9 +15,10 @@ import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.healthInfo.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
@@ -96,7 +97,7 @@ public class HealthInfoRegistServiceImpl extends CommonService implements Health
 		BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(meterHeight, 2);
 
 		// 最後に登録した健康情報を取得する
-		SelectOption selectOption = new SelectOption().orderBy("HEALTH_INFO_ID", SortType.DESC).setLimit(1);
+		SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_ID", SortType.DESC).limit(1).build();
 		List<HealthInfo> lastHealthInfo = healthInfoSearchService.findByUserId(userId, selectOption);
 
 		HealthInfoStatus status = CollectionUtil.isEmpty(lastHealthInfo)

@@ -22,10 +22,12 @@ public interface HealthInfoSearchService {
 	 *     YYYYMMDD
 	 * @param toHealthInfoRegDate
 	 *     YYYYMMDD
+	 * @param selectOption
+	 *     検索オプション
 	 * @return 健康情報のリスト
 	 */
 	List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
-			Date toHealthInfoRegDate);
+			Date toHealthInfoRegDate, SelectOption selectOption);
 
 	/**
 	 * 指定された健康情報IDとユーザIDと一致する健康情報を返す
