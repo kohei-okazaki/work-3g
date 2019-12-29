@@ -250,7 +250,7 @@ public class FileUtil {
 
 	/**
 	 * ファイル拡張子の列挙
-	 * 
+	 *
 	 * @since 1.0
 	 */
 	public static enum FileExtension implements BaseEnum {
@@ -362,6 +362,53 @@ public class FileUtil {
 		 */
 		public static FileSeparator of(String value) {
 			return BaseEnum.of(FileSeparator.class, value);
+		}
+
+	}
+
+	/**
+	 * 改行コードの列挙
+	 *
+	 * @since 1.0
+	 */
+	public static enum LineFeedType implements BaseEnum {
+
+		/** CR */
+		CR("\r"),
+		/** LF */
+		LF("\n"),
+		/** CRLF */
+		CRLF("\r\n");
+
+		/**
+		 * コンストラクタ
+		 *
+		 * @param value
+		 *     値
+		 */
+		private LineFeedType(String value) {
+			this.value = value;
+		}
+
+		/** 値 */
+		private String value;
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public String getValue() {
+			return this.value;
+		}
+
+		/**
+		 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+		 * @param value
+		 *     値
+		 * @return LineFeedType
+		 */
+		public static LineFeedType of(String value) {
+			return BaseEnum.of(LineFeedType.class, value);
 		}
 
 	}

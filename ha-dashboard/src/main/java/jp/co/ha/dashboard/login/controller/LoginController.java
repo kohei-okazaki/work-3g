@@ -80,7 +80,10 @@ public class LoginController implements BaseWebController {
 	@NonAuth
 	@GetMapping("/index")
 	public String index(HttpServletRequest request) {
+
+		// ログアウト時にすべてのセッション情報を削除する
 		sessionService.removeValues(request.getSession());
+
 		return getView(DashboardView.LOGIN);
 	}
 
@@ -145,16 +148,38 @@ public class LoginController implements BaseWebController {
 	/**
 	 * TOP画面
 	 *
+	 * @param model
+	 *     model
 	 * @param request
 	 *     HttpServletRequest
 	 * @return TOP画面
 	 */
 	@NonAuth
 	@GetMapping("/top")
-	public String top(HttpServletRequest request) {
+	public String top(Model model, HttpServletRequest request) {
 		// jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
 		// ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).orElse(null);
+		if (StringUtil.isEmpty(userId)) {
+			return getView(DashboardView.LOGIN);
+		}
+
+		// 健康情報グラフを作成
+		healthInfoGraphService.putGraph(model, () -> {
+
+			// 健康情報を検索する
+			SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+					.limit(10).build();
+			HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
+			healthInfoSearchService.findByUserId(userId, selectOption).stream().forEach(e -> {
+				graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS);
+				graphModel.addWeight(e.getWeight());
+				graphModel.addBmi(e.getBmi());
+				graphModel.addStandardWeight(e.getStandardWeight());
+			});
+
+			return graphModel;
+		});
 		return getView(StringUtil.isEmpty(userId) ? DashboardView.LOGIN : DashboardView.TOP);
 	}
 }
