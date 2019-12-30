@@ -32,7 +32,7 @@ public abstract class MultiThreadFunction<T> {
 	 * @throws InterruptedException
 	 *     スレッドへの割り込み処理が発生した場合
 	 */
-	public ResultType execute(T t) throws InterruptedException {
+	public final ResultType execute(T t) throws InterruptedException {
 
 		LOG.debug("並列処理開始, スレッド数=" + getThreadCount());
 
