@@ -171,11 +171,8 @@
       var password = $('#password').get(0);
       var passwordCheck = $('#password-check').get(0);
       passwordCheck.addEventListener('change', function() {
-        if (passwordCheck.checked) {
-          password.setAttribute('type', 'text');
-        } else {
-          password.setAttribute('type', 'password');
-        }
+        var inputType = passwordCheck.checked ? 'text' : 'password';
+        password.setAttribute('type', inputType);
       }, false);
 
       var confirmPassword = $('#confirmPassword').get(0);
