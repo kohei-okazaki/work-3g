@@ -84,7 +84,7 @@ textarea:focus {
   background-color: #71f145;
 }
 
-/* css checkbox */
+/* チェックボックスのデザイン ここから */
 .checkbox-input {
   display: none;
 }
@@ -122,4 +122,11 @@ textarea:focus {
   transform: rotate(40deg);
   border-bottom: 3px solid #32cd32;
   border-right: 3px solid #32cd32;
+}
+/* チェックボックスのデザイン ここまで */
+
+/* 注意文言の設定 */
+.attention {
+  color: #ff8080;
+  font-size: 60%;
 }
