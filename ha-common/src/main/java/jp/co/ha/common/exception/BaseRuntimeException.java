@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * アプリないで扱う基底Runtime例外クラス
+ * アプリ内で扱う基底Runtime例外クラス
  *
  * @since 1.0
  */

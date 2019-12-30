@@ -4,7 +4,7 @@ import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * エラーコードの基底インターフェース
- * 
+ *
  * @since 1.0
  */
 public interface BaseErrorCode {
