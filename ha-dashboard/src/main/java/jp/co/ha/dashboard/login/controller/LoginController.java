@@ -128,7 +128,7 @@ public class LoginController implements BaseWebController {
 		healthInfoGraphService.putGraph(model, () -> {
 
 			// 健康情報を検索する
-			SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+			SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
 					.limit(10).build();
 			HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
 			healthInfoSearchService.findByUserId(form.getUserId(), selectOption).stream().forEach(e -> {
@@ -168,7 +168,7 @@ public class LoginController implements BaseWebController {
 		healthInfoGraphService.putGraph(model, () -> {
 
 			// 健康情報を検索する
-			SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+			SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
 					.limit(10).build();
 			HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
 			healthInfoSearchService.findByUserId(userId, selectOption).stream().forEach(e -> {
