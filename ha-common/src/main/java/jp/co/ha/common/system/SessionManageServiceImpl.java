@@ -3,13 +3,15 @@ package jp.co.ha.common.system;
 import java.util.Enumeration;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.WebUtils;
 
 /**
  * session管理サービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service
@@ -49,6 +51,14 @@ public class SessionManageServiceImpl implements SessionManageService {
 	@SuppressWarnings("unchecked")
 	public <T> Optional<T> getValue(HttpSession session, String key, Class<T> clazz) {
 		return Optional.ofNullable((T) session.getAttribute(key));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getSessionId(HttpServletRequest request) {
+		return WebUtils.getSessionId(request);
 	}
 
 }
