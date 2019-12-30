@@ -147,3 +147,38 @@ h3:before {
   width: 250px;
   height: 60px;
 }
+
+/* ヘッダーアイコンここから */
+.headericon {
+  width: 30px;
+  height: 30px;
+}
+/* ヘッダーアイコンここまで */
+
+/* メニューアイコンここから */
+.menuicon:hover {
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+  -webkit-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+.menuicon {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.menuicon img {
+  -moz-transition: -moz-transform 3.0s linear;
+  -webkit-transition: -webkit-transform 3.0s linear;
+  -o-transition: -o-transform 3.0s linear;
+  -ms-transition: -ms-transform 3.0s linear;
+  transition: transform 3.0s linear;
+}
+/* メニューアイコンここまで */
+
