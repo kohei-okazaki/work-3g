@@ -19,7 +19,7 @@ import jp.co.ha.dashboard.view.DashboardView;
 
 /**
  * ダッシュボード例外ハンドラー
- * 
+ *
  * @since 1.0
  */
 @Component
@@ -42,6 +42,7 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 		// log出力
 		outLog(getLogErrorMessage(e), e);
 		request.setAttribute("errorMessage", getDispErrorMessage(e));
+
 		return modelView;
 	}
 
@@ -53,10 +54,13 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 	 * @return エラーメッセージ
 	 */
 	private String getDispErrorMessage(Exception e) {
+
 		String detail;
 		String errorCode;
 		StringBuilder body = new StringBuilder();
+
 		if (e instanceof BaseException) {
+
 			BaseException be = (BaseException) e;
 			// エラーのスタックトレースを表示
 			StringWriter sw = new StringWriter();
@@ -67,7 +71,9 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 			detail = str;
 			// detail = be.getDetail();
 			errorCode = be.getErrorCode().getOuterErrorCode();
+
 		} else {
+
 			// 予期せぬ例外にする
 			detail = messageSource.getMessage(CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
 					Locale.getDefault());
@@ -79,8 +85,11 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 			String str = sw.toString();
 			detail = str;
 			errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+
 		}
+
 		body.append(detail).append("(").append(errorCode).append(")");
+
 		return body.toString();
 	}
 

@@ -22,7 +22,7 @@ $(function() {
       "z-index" : "1"
     });
 
-    $("body").append('<div id="calorieCalcMethod-modal-content"><div class="contentLayout"><b>カロリー計算の方法</b><p>以下の2種類の合計が1日に消費するカロリーです</p><ul><li>生活活動代謝(kcal)</li><li>基礎代謝量(kcal)</li></ul></div></div>');
+    $("body").append('<div id="calorieCalcMethod-modal-content"><div class="contentLayout"><b>カロリー計算の方法</b> <p>以下の2種類の合計が1日に消費するカロリーです<ul><li>生活活動代謝(kcal)</li><br><li>基礎代謝量(kcal)</ul></div></div>');
     $("#calorieCalcMethod-modal-content").css({
       "display" : "none",
       "width" : "auto",

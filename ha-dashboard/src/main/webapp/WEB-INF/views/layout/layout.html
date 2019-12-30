@@ -9,15 +9,15 @@
 <meta charset="UTF-8">
 <title th:text="${title}"></title>
 <link rel="icon" type="image/png" href="../resources/image/favicon.png" th:href="@{/resources/image/favicon.png}">
+
 <!-- 共通CSS -->
 <link rel="stylesheet" type="text/css" href="../resources/css/layout.css" th:href="@{/resources/css/layout.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/headericon.css" th:href="@{/resources/css/headericon.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/input.css" th:href="@{/resources/css/input.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/menuicon.css" th:href="@{/resources/css/menuicon.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/healthInfo.css" th:href="@{/resources/css/healthInfo.min.css}">
 <link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+
 <!-- 個別CSS -->
 <th:block th:replace="${links}" />
 
@@ -30,18 +30,17 @@
 <!-- 個別JavaScript -->
 <th:block th:replace="${scripts}" />
 </head>
-<body>
+  <body>
 
-  <header xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/header :: header}">
-    <div th:replace="layout/header.html"></div>
-  </header>
+    <header xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/header :: header}">
+      <div th:replace="layout/header.html"></div>
+    </header>
 
-  <div id="body" layout:fragment="contents"></div>
+    <div id="body" layout:fragment="contents"></div>
 
-  <footer xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/footer :: footer">
-    <div th:replace="layout/footer.html"></div>
-  </footer>
+    <footer xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/footer :: footer">
+      <div th:replace="layout/footer.html"></div>
+    </footer>
 
-
-</body>
+  </body>
 </html>

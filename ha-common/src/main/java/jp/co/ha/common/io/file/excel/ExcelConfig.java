@@ -109,7 +109,7 @@ public class ExcelConfig {
 	}
 
 	/**
-	 * コンストラクタ<br>
+	 * プライベートコンストラクタ<br>
 	 * ビルダーからのみインスタンスの生成を行うためprivateにする
 	 *
 	 * @param builder

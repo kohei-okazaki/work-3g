@@ -10,6 +10,7 @@ import jp.co.ha.common.util.FileUtil.LineFeedType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;
 import jp.co.ha.tool.config.FileConfig;
+import jp.co.ha.tool.config.FileConfig.FileConfigBuilder;
 import jp.co.ha.tool.db.Column;
 import jp.co.ha.tool.db.Table;
 import jp.co.ha.tool.excel.Excel;
@@ -66,10 +67,10 @@ public class CreateTableBuilder extends BaseSqlSourceBuilder {
 			body.add(columnData.toString());
 			body.add(");");
 
-			FileConfig conf = getFileConfig(ExecuteType.DDL);
-			conf.setFileName(tableName.toUpperCase() + FileExtension.SQL.getValue());
-			conf.setData(body.toString());
-			list.add(conf);
+			String outputPath = getOutputPath(ExecuteType.DDL);
+			String fileName = tableName.toUpperCase() + FileExtension.SQL.getValue();
+
+			list.add(new FileConfigBuilder(outputPath, fileName, body.toString()).build());
 		}
 		return list;
 	}

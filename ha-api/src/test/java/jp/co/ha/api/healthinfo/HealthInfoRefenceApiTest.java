@@ -41,6 +41,7 @@ public class HealthInfoRefenceApiTest extends BaseApiTest {
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 
+			// TODO
 			// src/test/resources配下のJSONファイルインスタンスを引数に渡すように、JSOM文字列を使わないようにする
 			String json = "{\"requestType\":\"002\",\"userId\":\"master\",\"healthInfoId\":10,\"apiKey\":\"1bc073967f4c24f000d0fc34006cf8de83752a9d8fde68278b18c033bbb68d2c\"}";
 
