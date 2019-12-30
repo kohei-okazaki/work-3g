@@ -1,11 +1,10 @@
 package jp.co.ha.dashboard.account.service;
 
 import jp.co.ha.business.dto.AccountDto;
-import jp.co.ha.common.exception.BaseException;
 
 /**
  * アカウント設定サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface AccountSettingService {
@@ -15,9 +14,7 @@ public interface AccountSettingService {
 	 *
 	 * @param dto
 	 *     アカウントDTO
-	 * @throws BaseException
-	 *     基底例外
 	 */
-	void execute(AccountDto dto) throws BaseException;
+	void execute(AccountDto dto);
 
 }

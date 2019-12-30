@@ -2,6 +2,9 @@ package jp.co.ha.dashboard.account.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
@@ -34,20 +37,43 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	@Sha256
 	@Autowired
 	private HashEncoder encoder;
+	/** トランザクション管理クラス */
+	@Autowired
+	private PlatformTransactionManager transactionManager;
+	/** トランザクションクラス */
+	@Autowired
+	private DefaultTransactionDefinition defaultTransactionDefinition;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void regist(AccountDto dto) throws BaseException {
-		// アカウント情報を作成
-		accountCreateService.create(toAccount(dto));
-		// 健康情報ファイル設定情報を作成
-		healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(dto));
+
+		// トランザクション開始
+		TransactionStatus status = transactionManager.getTransaction(defaultTransactionDefinition);
+
+		try {
+
+			// アカウント情報を作成
+			accountCreateService.create(toAccount(dto));
+			// 健康情報ファイル設定情報を作成
+			healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(dto));
+
+			// 正常にDB登録出来た場合、コミット
+			transactionManager.commit(status);
+
+		} catch (Exception e) {
+
+			// 登録処理中にエラーが起きた場合、ロールバック
+			transactionManager.rollback(status);
+			throw e;
+		}
+
 	}
 
 	/**
-	 * アカウント情報に変換する
+	 * アカウント情報Entityに変換する
 	 *
 	 * @param dto
 	 *     アカウント登録DTO
@@ -65,11 +91,11 @@ public class AccountRegistServiceImpl implements AccountRegistService {
 	}
 
 	/**
-	 * 健康情報ファイル設定に変換する
+	 * 健康情報ファイル設定Entityに変換する
 	 *
 	 * @param dto
 	 *     アカウント登録DTO
-	 * @return 健康情報ファイル設定
+	 * @return 健康情報ファイル設定Entity
 	 */
 	private HealthInfoFileSetting toHealthInfoFileSetting(AccountDto dto) {
 		HealthInfoFileSetting entity = new HealthInfoFileSetting();
