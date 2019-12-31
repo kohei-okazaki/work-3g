@@ -197,7 +197,7 @@ public class BeanUtil {
 	 * }
 	 * </pre>
 	 *
-	 * の場合、Xをのクラス型を返す
+	 * の場合、Xのクラス型を返す
 	 *
 	 * @param clazz
 	 *     対象クラス
