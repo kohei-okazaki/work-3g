@@ -1,6 +1,6 @@
 package jp.co.ha.common.exception;
 
-import jp.co.ha.common.log.type.LogLevel;
+import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
