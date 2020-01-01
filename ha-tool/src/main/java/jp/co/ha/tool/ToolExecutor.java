@@ -1,4 +1,4 @@
-package jp.co.ha.tool.executor;
+package jp.co.ha.tool;
 
 import jp.co.ha.tool.build.BuildInvoker;
 
