@@ -9,8 +9,8 @@ import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.builder.BaseExcelBuilder;
 import jp.co.ha.common.log.MaskExecutor;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 
 /**
  * 健康情報Excel生成クラス

@@ -55,7 +55,7 @@ public abstract class BaseException extends Exception {
 	}
 
 	/**
-	 * errorCodeを返す
+	 * {@linkplain BaseErrorCode}を返す
 	 *
 	 * @return errorCode エラーコード
 	 */

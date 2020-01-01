@@ -109,7 +109,7 @@ public class SelectOption {
 	/**
 	 * limitを返す
 	 *
-	 * @return limit
+	 * @return 検索上限数
 	 */
 	public int getLimit() {
 		return limit;

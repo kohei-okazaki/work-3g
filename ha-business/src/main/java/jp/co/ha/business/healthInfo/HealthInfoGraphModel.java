@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 
 /**
  * 健康情報グラフ描画モデル

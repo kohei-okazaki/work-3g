@@ -18,8 +18,8 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.type.CommonFlag;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**

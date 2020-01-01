@@ -55,7 +55,7 @@ public abstract class BaseRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * errorCodeを返す
+	 * {@linkplain BaseErrorCode}を返す
 	 *
 	 * @return errorCode エラーコード
 	 */

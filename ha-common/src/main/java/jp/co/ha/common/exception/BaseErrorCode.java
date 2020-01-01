@@ -10,14 +10,14 @@ import jp.co.ha.common.log.Logger.LogLevel;
 public interface BaseErrorCode {
 
 	/**
-	 * エラーコード(外部用)を返却
+	 * エラーコード(外部用)を返す
 	 *
 	 * @return エラーコード(外部用)
 	 */
 	String getOuterErrorCode();
 
 	/**
-	 * ログレベルを返却
+	 * {@linkplain LogLevel}を返す
 	 *
 	 * @return ログレベル
 	 */

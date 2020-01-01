@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.type.DateFormatType;
+import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 日付のUtilクラス
@@ -277,5 +277,54 @@ public class DateUtil {
 		} catch (DateTimeParseException e) {
 			return false;
 		}
+	}
+
+	/**
+	 * 日付フォーマットの列挙
+	 *
+	 * @since 1.0
+	 */
+	public static enum DateFormatType implements BaseEnum {
+
+		/** YYYY/MM/DD */
+		YYYYMMDD("yyyy/MM/dd"),
+		/** YYYYMMDD */
+		YYYYMMDD_NOSEQ("yyyyMMdd"),
+		/** YYYY/MM/DD HH:mm:ss */
+		YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss"),
+		/** YYYYMMDDHHmmss */
+		YYYYMMDD_HHMMSS_NOSEP("yyyyMMddHHmmss");
+
+		/** 名前 */
+		private String value;
+
+		/**
+		 * コンストラクタ
+		 *
+		 * @param value
+		 *     値
+		 */
+		private DateFormatType(String value) {
+			this.value = value;
+		}
+
+		/**
+		 * {@inheritDoc}
+		 */
+		@Override
+		public String getValue() {
+			return this.value;
+		}
+
+		/**
+		 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+		 * @param value
+		 *     値
+		 * @return DateFormatType
+		 */
+		public static DateFormatType of(String value) {
+			return BaseEnum.of(DateFormatType.class, value);
+		}
+
 	}
 }

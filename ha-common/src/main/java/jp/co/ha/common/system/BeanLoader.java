@@ -13,7 +13,7 @@ import jp.co.ha.common.util.BeanUtil;
 
 /**
  * Bean読込クラス
- * 
+ *
  * @since 1.0
  */
 public class BeanLoader {
@@ -21,7 +21,7 @@ public class BeanLoader {
 	/** LOG */
 	private static final Logger LOG = LoggerFactory.getLogger(BeanLoader.class);
 
-	/** ApplicationContext */
+	/** {@linkplain ApplicationContext} */
 	private static ApplicationContext context;
 
 	/**
