@@ -24,6 +24,7 @@ public class CalorieCalcForm implements BaseForm {
 	private Integer age;
 	/** 性別 */
 	@Required(message = "性別が未入力です")
+	@Pattern(regixPattern = RegexType.HALF_NUMBER, message = "性別の値が不正です")
 	private String gender;
 	/** 身長 */
 	@Mask
@@ -39,7 +40,7 @@ public class CalorieCalcForm implements BaseForm {
 	private BigDecimal weight;
 	/** 生活活動代謝 */
 	@Required(message = "生活活動代謝が未入力です")
-	@Pattern(regixPattern = RegexType.DECIMAL, message = "生活活動代謝は半角数字の少数で入力して下さい")
+	@Pattern(regixPattern = RegexType.DECIMAL, message = "生活活動代謝は数字で入力して下さい")
 	private BigDecimal lifeWorkMetabolism;
 
 	/**
