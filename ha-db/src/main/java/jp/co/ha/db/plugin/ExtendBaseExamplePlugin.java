@@ -8,8 +8,10 @@ import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 
+import jp.co.ha.db.entity.BaseExample;
+
 /**
- * 各XXXXExampleにBaseExampleを継承させるためのプラグインクラス
+ * 各XXXXExampleに{@linkplain BaseExample}を継承させるためのプラグインクラス
  *
  * @since 1.0
  */
@@ -37,7 +39,7 @@ public class ExtendBaseExamplePlugin extends PluginAdapter {
 	}
 
 	/**
-	 * BaseExampleを継承させる
+	 * {@linkplain BaseExample}を継承させる
 	 *
 	 * @param topLevelClass
 	 *     TopLevelClass
