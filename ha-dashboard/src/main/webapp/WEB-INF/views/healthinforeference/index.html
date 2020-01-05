@@ -29,7 +29,10 @@
 
       <!--/* table部ここから */-->
       <div class="table">
-        <div class="table-row">
+
+        <h3 id="selectConditionToggle">検索条件</h3>
+
+        <div class="table-row selectConditionToggle">
           <div class="table-header" th:text="#{healthInfoId}"></div>
           <div class="table-data">
             <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="1000" />
@@ -38,7 +41,7 @@
             <p class="attention">※半角数字で入力してください</p>
           </div>
         </div>
-        <div class="table-row">
+        <div class="table-row selectConditionToggle">
           <div class="table-header" th:text="#{healthInfoRegDate}"></div>
           <div class="table-data">
             <div class="radio" align="center">
@@ -120,6 +123,15 @@
         showButtonPanel : true,
         changeYear : true,
         changeMonth : true
+      });
+
+      let dispOffTime = 400;
+      // 検索条件のトグルを設定
+      $("#selectConditionToggle").css({
+          "cursor": "pointer"
+        });
+      $("#selectConditionToggle").on("click", function() {
+        $(".selectConditionToggle").toggle(dispOffTime);
       });
     });
 

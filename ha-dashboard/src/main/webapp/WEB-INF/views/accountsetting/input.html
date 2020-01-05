@@ -38,10 +38,10 @@
       <!--/* table部ここから */-->
       <div class="table">
 
-        <h3>アカウント設定</h3>
+        <h3 id="accountToggle">アカウント設定</h3>
 
         <!--/* 削除フラグここから */-->
-        <div class="table-row">
+        <div class="table-row accountToggle">
           <div class="table-header" th:text="#{delete}"></div>
           <div class="table-data">
             <div class="radio">
@@ -55,7 +55,7 @@
         <!--/* 削除フラグここまで */-->
 
         <!--/* ユーザIDここから */-->
-        <div class="table-row">
+        <div class="table-row accountToggle">
           <div class="table-header" th:text="#{userId}"></div>
           <div class="table-data">
             <p th:text="*{userId}"></p>
@@ -65,7 +65,7 @@
         <!--/* ユーザIDここまで */-->
 
         <!--/* パスワードここから */-->
-        <div class="table-row">
+        <div class="table-row accountToggle">
           <div class="table-header" th:text="#{password}"></div>
           <div class="table-data">
             <div class="checkbox">
@@ -80,7 +80,7 @@
         <!--/* パスワードここまで */-->
 
         <!--/* パスワード有効期限日ここから */-->
-        <div class="table-row">
+        <div class="table-row accountToggle">
           <div class="table-header" th:text="#{passwordExpire}"></div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
@@ -89,7 +89,7 @@
         <!--/* パスワード有効期限日ここまで */-->
 
         <!--/* APIキーここから */-->
-        <div class="table-row">
+        <div class="table-row accountToggle">
           <div class="table-header" th:text="#{apiKey}"></div>
           <div class="table-data">
             <p th:text="*{apiKey}"></p>
@@ -98,9 +98,10 @@
         </div>
         <!--/* APIキーここまで */-->
 
-        <h3>メール設定</h3>
+        <h3 id="mailToggle">メール設定</h3>
+
         <!--/* メールアドレスここから */-->
-        <div class="table-row">
+        <div class="table-row mailToggle">
           <div class="table-header" th:text="#{mailAddress}"></div>
           <div class="table-data">
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="test@gmail.com" />
@@ -110,7 +111,7 @@
         <!--/* メールアドレスここまで */-->
 
         <!--/* メールパスワードここから */-->
-        <div class="table-row">
+        <div class="table-row mailToggle">
           <div class="table-header" th:text="#{mailPassword}"></div>
           <div class="table-data">
             <div class="checkbox">
@@ -124,9 +125,10 @@
         </div>
         <!--/*メールパスワードここまで */-->
 
-        <h3>健康情報ファイル設定</h3>
+        <h3 id="healthInfoFileToggle">健康情報ファイル設定</h3>
+
         <!--/* ヘッダ利用ここから */-->
-        <div class="table-row">
+        <div class="table-row healthInfoFileToggle">
           <div class="table-header" th:text="#{headerUse}"></div>
           <div class="table-data">
             <div class="radio">
@@ -140,7 +142,7 @@
         <!--/* ヘッダ利用ここまで */-->
 
         <!--/* フッタ利用ここから */-->
-        <div class="table-row">
+        <div class="table-row healthInfoFileToggle">
           <div class="table-header" th:text="#{footerUse}"></div>
           <div class="table-data">
             <div class="radio">
@@ -154,7 +156,7 @@
         <!--/* フッタ利用ここまで */-->
 
         <!--/* マスク利用ここから */-->
-        <div class="table-row">
+        <div class="table-row healthInfoFileToggle">
           <div class="table-header" th:text="#{maskUse}"></div>
           <div class="table-data">
             <div class="radio">
@@ -168,7 +170,7 @@
         <!--/* マスク利用ここまで */-->
 
         <!--/* 囲み文字ここから */-->
-        <div class="table-row">
+        <div class="table-row healthInfoFileToggle">
           <div class="table-header" th:text="#{enclosureCharUse}"></div>
           <div class="table-data">
             <div class="radio">
@@ -231,6 +233,32 @@
 
       jQuery("#accountSettingForm").validationEngine({
         promptPosition : "topLeft:0"
+      });
+
+
+      let dispOffTime = 400;
+      // アカウント設定のトグルを設定
+      $("#accountToggle").css({
+        "cursor": "pointer"
+      });
+      $("#accountToggle").on("click", function() {
+          $(".accountToggle").toggle(dispOffTime);
+      });
+
+      // メール設定のトグル
+      $("#mailToggle").css({
+        "cursor": "pointer"
+      });
+      $("#mailToggle").on("click", function() {
+          $(".mailToggle").toggle(dispOffTime);
+      });
+
+      // 健康情報ファイル設定のトグル
+      $("#healthInfoFileToggle").css({
+        "cursor": "pointer"
+      });
+      $("#healthInfoFileToggle").on("click", function() {
+          $(".healthInfoFileToggle").toggle(dispOffTime);
       });
 
       $("#passwordExpire").datepicker({
