@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import jp.co.ha.business.db.crud.create.MailInfoCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -14,10 +17,9 @@ import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
 import jp.co.ha.business.dto.AccountDto;
-import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.dashboard.account.service.AccountSettingService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -52,44 +54,65 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 	/** 健康情報ファイル設定更新サービス */
 	@Autowired
 	private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
+	/** トランザクション管理クラス */
+	@Autowired
+	private PlatformTransactionManager transactionManager;
+	/** トランザクションクラス */
+	@Autowired
+	private DefaultTransactionDefinition defaultTransactionDefinition;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void execute(AccountDto dto) throws BaseException {
+	public void execute(AccountDto dto) {
 
-		// アカウント情報を検索し、Dtoの内容をマージする
-		Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
-		mergeAccount(dto, befAccount);
-		// アカウント情報を更新する
-		accountUpdateService.update(befAccount);
+		// トランザクション開始
+		TransactionStatus status = transactionManager.getTransaction(defaultTransactionDefinition);
 
-		// メール情報を検索し、Dtoの内容をマージする
-		Optional<MailInfo> befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
-		if (befMailInfo.isPresent()) {
-			// メール情報が登録されている場合
-			mergeMailInfo(dto, befMailInfo.get());
+		try {
 
-			// メール情報を更新する
-			mailInfoUpdateService.update(befMailInfo.get());
-		} else {
-			// メール情報が登録されてない場合
-			MailInfo mailInfo = new MailInfo();
+			// アカウント情報を検索し、Dtoの内容をマージする
+			Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
+			mergeAccount(dto, befAccount);
+			// アカウント情報を更新する
+			accountUpdateService.update(befAccount);
 
-			mergeMailInfo(dto, mailInfo);
+			// メール情報を検索し、Dtoの内容をマージする
+			Optional<MailInfo> befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
+			if (befMailInfo.isPresent()) {
+				// メール情報が登録されている場合
+				mergeMailInfo(dto, befMailInfo.get());
 
-			// メール情報を新規登録する
-			mailInfoCreateService.create(mailInfo);
+				// メール情報を更新する
+				mailInfoUpdateService.update(befMailInfo.get());
+			} else {
+				// メール情報が登録されてない場合
+				MailInfo mailInfo = new MailInfo();
+
+				mergeMailInfo(dto, mailInfo);
+
+				// メール情報を新規登録する
+				mailInfoCreateService.create(mailInfo);
+			}
+
+			// 健康情報ファイル設定情報を検索し、Dtoの内容をマージする
+			HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
+					.findByUserId(dto.getUserId())
+					.get();
+			mergeHealthInfoFileSetting(dto, healthInfoFileSetting);
+			// 健康情報ファイル設定情報を更新する
+			healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
+
+			// 正常にDB更新出来た場合、コミット
+			transactionManager.commit(status);
+
+		} catch (Exception e) {
+
+			// 登録処理中にエラーが起きた場合、ロールバック
+			transactionManager.rollback(status);
+			throw e;
 		}
-
-		// 健康情報ファイル設定情報を検索し、Dtoの内容をマージする
-		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService.findByUserId(dto.getUserId())
-				.get();
-		mergeHealthInfoFileSetting(dto, healthInfoFileSetting);
-		// 健康情報ファイル設定情報を更新する
-		healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
-
 	}
 
 	/**

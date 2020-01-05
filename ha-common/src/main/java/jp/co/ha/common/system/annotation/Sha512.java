@@ -12,12 +12,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 /**
  * SHA-512エンコードアノテーション<br>
  * ex)<br>
- * <code>
+ * 
+ * <pre>
  * &#64;Sha512
  * &#64;Autowired
  * private PasswordEncoder passwordEncoder;
- * </code>
- * 
+ * </pre>
+ *
  * @since 1.0
  */
 @Inherited

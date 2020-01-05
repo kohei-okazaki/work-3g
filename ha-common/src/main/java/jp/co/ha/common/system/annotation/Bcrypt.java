@@ -12,12 +12,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 /**
  * パスワード暗号化アノテーション<br>
  * ex)<br>
- * <code>
+ * 
+ * <pre>
  * &#64;Bcript
  * &#64;Autowired
  * private PasswordEncoder passwordEncoder;
- * </code>
- * 
+ * </pre>
+ *
  * @since 1.0
  */
 @Inherited

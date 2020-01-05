@@ -3,17 +3,17 @@ package jp.co.ha.common.exception;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.log.type.LogLevel;
 
 /**
  * Exceptionハンドラー基底インターフェース
- * 
+ *
  * @since 1.0
  */
 public interface BaseExceptionHandler extends HandlerExceptionResolver {
 
-	/** ロガー */
+	/** LOG */
 	static final Logger LOG = LoggerFactory.getLogger(BaseExceptionHandler.class);
 
 	/**

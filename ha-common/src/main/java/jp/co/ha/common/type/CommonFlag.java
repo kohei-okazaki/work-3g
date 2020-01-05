@@ -2,14 +2,14 @@ package jp.co.ha.common.type;
 
 /**
  * フラグ値列挙
- * 
+ *
  * @since 1.0
  */
 public enum CommonFlag implements BaseEnum {
 
-	/** true */
+	/** 真 */
 	TRUE("1"),
-	/** false */
+	/** 偽 */
 	FALSE("0");
 
 	/**

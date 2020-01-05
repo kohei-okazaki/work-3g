@@ -1,7 +1,7 @@
 package jp.co.ha.common.exception;
 
 /**
- * アプリないで扱う基底Runtime例外クラス
+ * アプリ内で扱う基底Runtime例外クラス
  *
  * @since 1.0
  */
@@ -55,7 +55,7 @@ public abstract class BaseRuntimeException extends RuntimeException {
 	}
 
 	/**
-	 * errorCodeを返す
+	 * {@linkplain BaseErrorCode}を返す
 	 *
 	 * @return errorCode エラーコード
 	 */

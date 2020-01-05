@@ -129,7 +129,14 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends Abstrac
 		List<String> footer = getFooterList(clazz);
 		Stream.iterate(0, i -> ++i).limit(footer.size()).forEach(i -> {
 			String footerName = footer.get(i);
-			Cell cell = getCell(sheet, modelList.size(), i);
+			Cell cell = null;
+			if (conf.hasHeader()) {
+				// ヘッダ利用する場合、ヘッダレコード + データレコードの行数にフッタを書き出す
+				cell = getCell(sheet, modelList.size() + 1, i);
+			} else {
+				// ヘッダ利用しない場合、データレコードの行数のみ計算してフッタを書き出す
+				cell = getCell(sheet, modelList.size(), i);
+			}
 			setText(cell, footerName);
 		});
 	}

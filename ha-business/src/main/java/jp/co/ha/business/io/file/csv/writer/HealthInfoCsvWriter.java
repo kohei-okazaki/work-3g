@@ -9,8 +9,8 @@ import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MaskExecutor;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 
 /**

@@ -1,11 +1,11 @@
 package jp.co.ha.common.exception;
 
-import jp.co.ha.common.log.type.LogLevel;
+import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 妥当性チェック時に発生するエラーコードの列挙
- * 
+ *
  * @since 1.0
  */
 public enum ValidateErrorCode implements BaseErrorCode, BaseEnum {

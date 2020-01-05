@@ -5,8 +5,8 @@ import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import jp.co.ha.common.type.CommonFlag;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.build.annotation.Build;

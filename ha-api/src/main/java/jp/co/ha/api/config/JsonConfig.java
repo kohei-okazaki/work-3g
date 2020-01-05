@@ -15,7 +15,7 @@ import jp.co.ha.web.convert.ResultTypeSerializer;
 import jp.co.ha.web.type.ResultType;
 
 /**
- * Jsonの設定クラス
+ * JSONの設定クラス
  *
  * @since 1.0
  */

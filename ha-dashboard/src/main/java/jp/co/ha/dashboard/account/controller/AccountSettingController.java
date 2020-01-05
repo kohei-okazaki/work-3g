@@ -24,9 +24,9 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.dashboard.account.form.AccountSettingForm;
 import jp.co.ha.dashboard.account.service.AccountSettingService;
 import jp.co.ha.dashboard.view.DashboardView;
@@ -66,11 +66,9 @@ public class AccountSettingController implements BaseWizardController<AccountSet
 	 * @param request
 	 *     HttpServletRequest
 	 * @return AccountSettingForm
-	 * @throws BaseException
-	 *     基底例外
 	 */
 	@ModelAttribute("accountSettingForm")
-	public AccountSettingForm setUpForm(HttpServletRequest request) throws BaseException {
+	public AccountSettingForm setUpForm(HttpServletRequest request) {
 
 		// セッションからユーザIDを取得
 		String userId = sessionManagerService.getValue(request.getSession(), "userId", String.class).get();

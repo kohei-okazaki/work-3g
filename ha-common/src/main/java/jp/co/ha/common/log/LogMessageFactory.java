@@ -8,15 +8,15 @@ import java.util.StringJoiner;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.LogParam;
-import jp.co.ha.common.type.DateFormatType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 
 /**
  * ログメッセージ作成クラス
- * 
+ *
  * @since 1.0
  */
 public class LogMessageFactory {

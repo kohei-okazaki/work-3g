@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * 暗号化カラムに付与するマーカーアノテーション
- * 
+ *
  * @since 1.0
  */
 @Inherited
