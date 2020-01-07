@@ -244,4 +244,31 @@ public class StringUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link StringUtil#toFullKana}
+	 */
+	@Test
+	public void testToFullKana() {
+		{
+			String str = null;
+			assertEquals(null, StringUtil.toFullKana(str));
+		}
+		{
+			String str = "";
+			assertEquals("", StringUtil.toFullKana(str));
+		}
+		{
+			String str = "ｱｲ";
+			assertEquals("アイ", StringUtil.toFullKana(str));
+		}
+		{
+			String str = "ガｶﾞガ";
+			assertEquals("ガガガ", StringUtil.toFullKana(str));
+		}
+		{
+			String str = "ガﾊﾞﾊﾟガ";
+			assertEquals("ガバパガ", StringUtil.toFullKana(str));
+		}
+	}
+
 }
