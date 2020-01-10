@@ -10,7 +10,7 @@ import jp.co.ha.common.type.Charset;
 
 /**
  * ハッシュ化処理インターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HashEncoder {

@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  * CSVダウンロードモデルアノテーション<br>
  * headerNamesでヘッダ名を設定<br>
  * footerNamesでフッタ名を設定
- * 
+ *
  * @since 1.0
  */
 @Inherited

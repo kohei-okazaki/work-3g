@@ -6,7 +6,7 @@ import jp.co.ha.common.type.Charset;
 
 /**
  * エンコード/デコードの基底インターフェース
- * 
+ *
  * @since 1.0
  */
 public interface BaseEncodeAndDecoder {
