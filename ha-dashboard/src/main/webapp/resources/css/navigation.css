@@ -26,7 +26,7 @@
   display: block;
   margin: 0;
   padding: 16px 0;
-  background: #45e60f;
+  background: #32cd32;
   color: #fff;
   font-size: 14px;
   font-weight: bold;
@@ -55,7 +55,7 @@
 
 #dropmenu li ul li a {
   padding: 13px 15px;
-  background: #45e60f;
+  background: #32cd32;
   text-align: left;
   font-size: 12px;
   font-weight: normal;
@@ -85,7 +85,7 @@
 }
 
 #dropmenu li ul li ul li a {
-  background: #45e60f;
+  background: #32cd32;
 }
 
 #dropmenu li:hover ul li ul li:hover>a {
@@ -100,7 +100,7 @@
   width: 0;
   height: 0;
   border: 5px solid transparent;
-  border-left-color: #45e60f;
+  border-left-color: #32cd32;
 }
 
 #dropmenu li:last-child ul li ul:before {
@@ -110,7 +110,7 @@
   left: 200%;
   margin-left: -20px;
   border: 5px solid transparent;
-  border-right-color: #45e60f;
+  border-right-color: #32cd32;
 }
 
 ul>li {

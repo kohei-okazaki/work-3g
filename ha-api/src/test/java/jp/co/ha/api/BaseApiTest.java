@@ -29,7 +29,7 @@ public class BaseApiTest {
 	 */
 	@Before
 	public void before() {
-		LOG.debug("BaseBusinessTest#before");
+		LOG.debug("BaseApiTest#before");
 		BeanLoader.setContext(new ClassPathXmlApplicationContext(
 				new String[] { "classpath:common-context.xml", "classpath:db-context.xml", "classpath:web-context.xml",
 						"classpath:business-context.xml", "classpath:api-context.xml" }));
@@ -40,6 +40,6 @@ public class BaseApiTest {
 	 */
 	@After
 	public void after() {
-		LOG.debug("BaseBusinessTest#after");
+		LOG.debug("BaseApiTest#after");
 	}
 }

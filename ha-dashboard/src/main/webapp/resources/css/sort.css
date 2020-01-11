@@ -14,6 +14,7 @@
 .pager {
   overflow: hidden;
 }
+
 .pager ul {
   list-style: none;
   position: relative;
@@ -28,8 +29,7 @@
   float: left;
 }
 
-.pager ul li span,
-.pager ul li a {
+.pager ul li span, .pager ul li a {
   display: block;
   font-size: 16px;
   padding: 0.6em 1em;
