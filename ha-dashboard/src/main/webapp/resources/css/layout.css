@@ -3,19 +3,16 @@
 /**************/
 @charset "UTF-8";
 
-.menuTitle {
-  margin: 5px;
-  padding: 5px;
-}
-
-/* 注意文言の設定 */
-.attention {
-  color: #ff8080;
-  font-size: 60%;
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin-top: 0px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .appTitle {
@@ -28,6 +25,17 @@ body {
 
 .appTitle:hover {
   cursor: pointer;
+}
+
+.menuTitle {
+  margin: 5px;
+  padding: 5px;
+}
+
+/* 注意文言の設定 */
+.attention {
+  color: #ff8080;
+  font-size: 60%;
 }
 
 /* 戻るボタン */
@@ -54,6 +62,15 @@ body {
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
 }
 
+.body-main {
+  width: 100%;
+  background: #eeffcc;
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+
+/* ▼Header▼ */
 .header {
   position: fixed;
   width: 100%;
@@ -61,11 +78,17 @@ body {
   background-color: #fff;
   z-index: 10;
 }
+/* ▲Header▲ */
 
+/* ▼Footer▼ */
 .footer {
-  margin: 10px;
-  padding: 10px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  background: #c0c0c0;
 }
+/* ▲Footer▲ */
 
 /* ▼テーブルの行の背景を変更▼ */
 table.data {
@@ -114,31 +137,21 @@ th.data, td.data {
   display: table-cell;
 }
 /* ▲divをテーブル構成にする▲ */
+
 h3 {
-  /* 相対位置 */
   position: relative;
-  /* アイコン分のスペース */
   padding: 0.5em 0.5em 0.5em 1.5em;
-  /* 行高 */
   line-height: 1.4;
-  /* 文字色 */
   color: #006400;
 }
 
 h3:before {
-  /* 忘れずに */
   font-family: "Font Awesome 5 Free";
-  /* アイコンのユニコード */
   content: "\f138";
-  /* 絶対位置 */
   position: absolute;
-  /* サイズ */
   font-size: 1em;
-  /* アイコンの位置 */
   left: 0.25em;
-  /* アイコンの位置 */
   top: 0.5em;
-  /* アイコン色 */
   color: #006400;
 }
 
@@ -147,14 +160,14 @@ h3:before {
   height: 60px;
 }
 
-/* ヘッダーアイコンここから */
+/* ▼ヘッダーアイコン▼ */
 .headericon {
   width: 30px;
   height: 30px;
 }
-/* ヘッダーアイコンここまで */
+/* ▲ヘッダーアイコン▲ */
 
-/* メニューアイコンここから */
+/* ▼メニューアイコン▼ */
 .menuicon:hover {
   -webkit-transform: scale(1.5);
   -moz-transform: scale(1.5);
@@ -179,9 +192,9 @@ h3:before {
   -ms-transition: -ms-transform 3.0s linear;
   transition: transform 3.0s linear;
 }
-/* メニューアイコンここまで */
+/* ▲メニューアイコン▲ */
 
-/* <a>の設定 */
+/* ▼<a>の設定▼ */
 a.link {
   position: relative;
   display: inline-block;
@@ -203,5 +216,43 @@ a.link::after {
 a.link:hover::after {
   width: 100%;
 }
-/* <a>の設定 */
+/* ▲<a>の設定▲ */
+
+/* ▼画面TOPへ戻るアイコンについてのCSS▼ */
+#page_top {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 0;
+  bottom: -50px;
+  background: #00ff00;
+  opacity: 0.6;
+  border-radius: 50%;
+}
+
+#page_top a {
+  position: relative;
+  display: block;
+  width: 50px;
+  height: 50px;
+  text-decoration: none;
+}
+
+#page_top a::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f102';
+  font-size: 25px;
+  color: #fff;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: -5px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
+}
+/* ▲画面TOPへ戻るアイコンについてのCSS▲ */
 
