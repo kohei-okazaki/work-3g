@@ -4,7 +4,7 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 性別の列挙
- * 
+ *
  * @since 1.0
  */
 public enum GenderType implements BaseEnum {
