@@ -23,7 +23,7 @@ $(function() {
       "z-index" : "1"
     });
 
-    $("body").append('<div id="api-regist-request-modal-content"><div class="contentLayout"><table class="data"><tr class="data"><th class="data" colspan="2">リクエストパラメータ<th class="data">詳細<tr class="data"><td class="data">リクエストタイプ<td class="data">requestType<td class="data">健康情報登録のリクエスト種別<br>"001"を固定とする<tr class="data"><td class="data">ユーザID<td class="data">userId<td class="data">健康情報アプリでユーザを一意に識別するID<tr class="data"><td class="data">APIキー<td class="data">apiKey<td class="data">健康情報アプリでユーザに払い出されているキー<tr class="data"><td class="data">身長<td class="data">height<td class="data">ユーザの登録したい身長<tr class="data"><td class="data">体重<td class="data">weight<td class="data">ユーザの登録したい体重<tr class="data"><td class="data">テストモード<td class="data">testMode<td class="data"><ul><li>0:DB登録を行う</li><br><li>1:DB登録を行わない</ul></table></div></div>');
+    $("body").append('<div id="api-regist-request-modal-content"><div class="modal-layout"><table class="data"><tr class="data"><th class="data" colspan="2">リクエストパラメータ<th class="data">詳細<tr class="data"><td class="data">リクエストタイプ<td class="data">requestType<td class="data">健康情報登録のリクエスト種別<br>"001"を固定とする<tr class="data"><td class="data">ユーザID<td class="data">userId<td class="data">健康情報アプリでユーザを一意に識別するID<tr class="data"><td class="data">APIキー<td class="data">apiKey<td class="data">健康情報アプリでユーザに払い出されているキー<tr class="data"><td class="data">身長<td class="data">height<td class="data">ユーザの登録したい身長<tr class="data"><td class="data">体重<td class="data">weight<td class="data">ユーザの登録したい体重<tr class="data"><td class="data">テストモード<td class="data">testMode<td class="data"><ul><li>0:DB登録を行う</li><br><li>1:DB登録を行わない</ul></table></div></div>');
     $("#api-regist-request-modal-content").css({
       "display" : "none",
       "width" : "auto",
@@ -34,6 +34,13 @@ $(function() {
       "color" : "#666666",
       "position" : "fixed",
       "z-index" : "9999"
+    });
+    $(".modal-layout").css({
+      "margin" : "0px",
+      "width" : "auto",
+      "padding" : "15px",
+      "background" : "#d2e8d561",
+      "box-shadow" : "0 3px 4px rgba(0, 0, 0, 0.32)"
     });
 
     // modalの位置を画面中央に計算する関数を実行

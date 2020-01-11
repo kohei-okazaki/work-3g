@@ -23,7 +23,7 @@ $(function() {
       "z-index" : "1"
     });
 
-    $("body").append('<div id="api-regist-general-modal-content"><div class="contentLayout"><b>API 健康情報登録</b><br><br><div class="contentLayout"><label>jsonにより指定されたデータからユーザの健康情報を登録する</label><br><label>リクエストURL:/ha-api/healthInfoRegist</label></div></div></div>');
+    $("body").append('<div id="api-regist-general-modal-content"><div class="modal-layout"><b>API 健康情報登録</b><br><br><div class="contentLayout"><label>JSONにより指定されたデータからユーザの健康情報を登録する</label><br><label>リクエストURL:/ha-api/healthInfoRegist</label></div></div></div>');
     $("#api-regist-general-modal-content").css({
       "display" : "none",
       "width" : "auto",
@@ -34,6 +34,13 @@ $(function() {
       "color" : "#666666",
       "position" : "fixed",
       "z-index" : "9999"
+    });
+    $(".modal-layout").css({
+      "margin" : "0px",
+      "width" : "auto",
+      "padding" : "15px",
+      "background" : "#d2e8d561",
+      "box-shadow" : "0 3px 4px rgba(0, 0, 0, 0.32)"
     });
 
     // modalの位置を画面中央に計算する関数を実行

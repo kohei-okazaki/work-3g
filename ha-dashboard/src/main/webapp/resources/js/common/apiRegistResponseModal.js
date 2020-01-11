@@ -23,7 +23,7 @@ $(function() {
       "z-index" : "1"
     });
 
-    $("body").append('<div id="api-regist-response-modal-content"><div class="contentLayout"><table class="data"><tr class="data"><th class="data" colspan="2">レスポンスパラメータ<th class="data">詳細<tr class="data"><td class="data">結果区分<td class="data">result<td class="data">API実施時の結果区分<tr class="data"><td class="data">健康情報ID<td class="data">healthInfoId<td class="data">健康情報を登録したときに採番される健康情報を一意に識別するID<tr class="data"><td class="data">ユーザID<td class="data">userId<td class="data">健康情報アプリでユーザを一意に識別するID<tr class="data"><td class="data">身長<td class="data">height<td class="data">健康情報IDに紐づく健康情報に登録された身長(入力値)<tr class="data"><td class="data">体重<td class="data">weight<td class="data">健康情報IDに紐づく健康情報に登録された体重(入力値)<tr class="data"><td class="data">BMI<td class="data">bmi<td class="data">健康情報IDに紐づく健康情報に登録されたBMI<tr class="data"><td class="data">標準体重<td class="data">standardWeight<td class="data">健康情報IDに紐づく健康情報に登録された標準体重<tr class="data"><td class="data">健康情報ステータス<td class="data">healthInfoStatus<td class="data">前回登録された健康情報と比較し<br><ul><li>減少した場合:10</li><br><li>変化なしの場合:20</li><br><li>増加した場合:30</ul><tr class="data"><td class="data">健康情報作成日時<td class="data">healthInfoRegDate<td class="data">健康情報IDに紐づく健康情報に登録された登録日時</table></div></div>');
+    $("body").append('<div id="api-regist-response-modal-content"><div class="modal-layout"><table class="data"><tr class="data"><th class="data" colspan="2">レスポンスパラメータ<th class="data">詳細<tr class="data"><td class="data">結果区分<td class="data">result<td class="data">API実施時の結果区分<tr class="data"><td class="data">健康情報ID<td class="data">healthInfoId<td class="data">健康情報を登録したときに採番される健康情報を一意に識別するID<tr class="data"><td class="data">ユーザID<td class="data">userId<td class="data">健康情報アプリでユーザを一意に識別するID<tr class="data"><td class="data">身長<td class="data">height<td class="data">健康情報IDに紐づく健康情報に登録された身長(入力値)<tr class="data"><td class="data">体重<td class="data">weight<td class="data">健康情報IDに紐づく健康情報に登録された体重(入力値)<tr class="data"><td class="data">BMI<td class="data">bmi<td class="data">健康情報IDに紐づく健康情報に登録されたBMI<tr class="data"><td class="data">標準体重<td class="data">standardWeight<td class="data">健康情報IDに紐づく健康情報に登録された標準体重<tr class="data"><td class="data">健康情報ステータス<td class="data">healthInfoStatus<td class="data">前回登録された健康情報と比較し<br><ul><li>減少した場合:10</li><br><li>変化なしの場合:20</li><br><li>増加した場合:30</ul><tr class="data"><td class="data">健康情報作成日時<td class="data">healthInfoRegDate<td class="data">健康情報IDに紐づく健康情報に登録された登録日時</table></div></div>');
     $("#api-regist-response-modal-content").css({
       "display" : "none",
       "width" : "auto",
@@ -34,6 +34,13 @@ $(function() {
       "color" : "#666666",
       "position" : "fixed",
       "z-index" : "9999"
+    });
+    $(".modal-layout").css({
+      "margin" : "0px",
+      "width" : "auto",
+      "padding" : "15px",
+      "background" : "#d2e8d561",
+      "box-shadow" : "0 3px 4px rgba(0, 0, 0, 0.32)"
     });
 
     // modalの位置を画面中央に計算する関数を実行
