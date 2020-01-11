@@ -20,14 +20,14 @@
 
       <!--/* table部ここから */-->
       <div class="table">
-        <h3>健康情報</h3>
+        <h3 id="healthInfoToggle">健康情報</h3>
 
-        <div class="table-row">
-          <div class="table-header" th:text="#{height}"></div>
+        <div class="table-row healthInfoToggle">
+          <div class="table-header" align="left" th:text="#{height}"></div>
           <div class="table-data" th:text="*{height} + '&ensp;cm'"></div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{weight}"></div>
+        <div class="table-row healthInfoToggle">
+          <div class="table-header" align="left" th:text="#{weight}"></div>
           <div class="table-data" th:text="*{weight} + '&ensp;kg'"></div>
         </div>
       </div>
@@ -57,7 +57,14 @@
 
   <script type="text/javascript">
     $(function() {
-
+      let dispOffTime = 400;
+      // 健康情報のトグルを設定
+      $("#healthInfoToggle").css({
+        "cursor": "pointer"
+      });
+      $("#healthInfoToggle").on("click", function() {
+          $(".healthInfoToggle").toggle(dispOffTime);
+      });
     });
   </script>
 </body>
