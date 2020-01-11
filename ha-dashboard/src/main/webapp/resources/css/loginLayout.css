@@ -26,7 +26,7 @@ fieldset {
 }
 
 h1 {
-  background: #71f145;
+  background: #006400;
   padding: 20px 0;
   font-size: 140%;
   font-weight: 300;
@@ -39,8 +39,7 @@ form {
   padding: 6% 4%;
 }
 
-input[type="password"],
-input[type="text"] {
+input[type="password"], input[type="text"] {
   width: 76%;
   margin-bottom: 4%;
   border: 1px solid #ccc;
@@ -50,17 +49,16 @@ input[type="text"] {
   color: #555;
 }
 
-input[type="password"]:focus,
-input[type="text"]:focus {
+input[type="password"]:focus, input[type="text"]:focus {
   background: #ffffca;
   box-shadow: 0 0 7px #80ff00;
-  border: solid 2px #71f145;
+  border: solid 2px #006400;
 }
 
 .icon {
   width: 20px;
   height: 20px;
-  background-color: #71f145;
+  background-color: #006400;
   float: left;
   padding: 4% 4% 4% 4%;
   margin-bottom: 4%;
@@ -77,8 +75,7 @@ input[type="text"]:focus {
   background-image: url(https://cdn4.iconfinder.com/data/icons/font-awesome-2/2048/f007-32.png);
 }
 
-input[type="submit"],
-input[type="button"] {
+input[type="submit"], input[type="button"] {
   width: 100%;
   cursor: pointer;
   display: inline-block;
@@ -89,14 +86,13 @@ input[type="button"] {
   padding: 0.3em 1em;
   text-decoration: none;
   color: #FFFFFF;
-  background: #71f145;
-  border: solid 5px #71f145;
+  background: #006400;
+  border: solid 5px #006400;
   border-radius: 3px;
   transition: .6s;
 }
 
-input[type="submit"]:hover,
-input[type="button"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
   background: #FFFFFF;
   color: #32cd32;
 }

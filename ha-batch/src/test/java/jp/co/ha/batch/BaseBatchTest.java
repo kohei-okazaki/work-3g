@@ -1,4 +1,4 @@
-package jp.co.ha.api;
+package jp.co.ha.batch;
 
 import org.junit.After;
 import org.junit.Before;
@@ -12,27 +12,27 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.BeanLoader;
 
 /**
- * API基底テストクラス
+ * Batch基底テストクラス
  *
  * @since 1.0
  */
 @ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml",
-		"classpath:web-context.xml", "classpath:business-context.xml", "classpath:api-context.xml" })
+		"classpath:web-context.xml", "classpath:business-context.xml", "classpath:batch-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BaseApiTest {
+public class BaseBatchTest {
 
 	/** LOG */
-	protected static final Logger LOG = LoggerFactory.getLogger(BaseApiTest.class);
+	protected static final Logger LOG = LoggerFactory.getLogger(BaseBatchTest.class);
 
 	/**
 	 * before
 	 */
 	@Before
 	public void before() {
-		LOG.debug("BaseApiTest#before");
+		LOG.debug("BaseBatchTest#before");
 		BeanLoader.setContext(new ClassPathXmlApplicationContext(
 				new String[] { "classpath:common-context.xml", "classpath:db-context.xml", "classpath:web-context.xml",
-						"classpath:business-context.xml", "classpath:api-context.xml" }));
+						"classpath:business-context.xml", "classpath:batch.xml" }));
 	}
 
 	/**
@@ -40,6 +40,7 @@ public class BaseApiTest {
 	 */
 	@After
 	public void after() {
-		LOG.debug("BaseApiTest#after");
+		LOG.debug("BaseBatchTest#after");
 	}
+
 }

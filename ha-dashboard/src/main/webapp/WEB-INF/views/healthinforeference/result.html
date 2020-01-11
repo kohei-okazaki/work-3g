@@ -3,6 +3,7 @@
   <!--/* table部ここから */-->
   <table class="data">
     <tr>
+      <th class="data sort" align="center"></th>
       <th class="data sort" align="center" data-sort="height" th:text="#{height}"></th>
       <th class="data sort" align="center" data-sort="weight" th:text="#{weight}"></th>
       <th class="data sort" align="center" data-sort="standardWeight" th:text="#{bmi}"></th>
@@ -11,11 +12,12 @@
     </tr>
     <tbody class="data list">
       <tr th:each="result : ${resultList}" class="data">
-        <td th:text="${result.height}" align="center" class="data height">
-        <td th:text="${result.weight}" align="center" class="data weight">
-        <td th:text="${result.standardWeight}" align="center" class="data standardWeight">
-        <td th:text="${result.bmi}" align="center" class="data bmi">
-        <td th:text="${result.healthInfoRegDate}" align="center" class="data healthInfoRegDate">
+        <td align="center" class="data"><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}" ontouchstart="">詳細</a></td>
+        <td th:text="${result.height}" align="center" class="data height"></td>
+        <td th:text="${result.weight}" align="center" class="data weight"></td>
+        <td th:text="${result.standardWeight}" align="center" class="data standardWeight"></td>
+        <td th:text="${result.bmi}" align="center" class="data bmi"></td>
+        <td th:text="${result.healthInfoRegDate}" align="center" class="data healthInfoRegDate"></td>
       </tr>
     </tbody>
   </table>

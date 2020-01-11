@@ -13,7 +13,7 @@ import jp.co.ha.common.type.Charset;
 
 /**
  * SHA-256ハッシュ値作成クラス
- * 
+ *
  * @since 1.0
  */
 @Component("sha256HashEncoder")

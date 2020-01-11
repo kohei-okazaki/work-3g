@@ -155,7 +155,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 		model.addAttribute("form", dto);
 		// 検索結果有無を設定
 		model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
-		// ログイン中ユーザの健康情報を設定
+		// ログイン中ユーザの健康情報リストを設定
 		model.addAttribute("resultList", resultList);
 
 		healthInfoGraphService.putGraph(model, () -> {
@@ -173,8 +173,8 @@ public class HealthInfoReferenceController implements BaseWebController {
 
 		model.addAttribute("systemConfig", systemConfig);
 
-		// sessionに検索結果リストを設定
-		sessionService.setValue(request.getSession(), "resultList", resultList);
+		// sessionに検索条件を設定
+		sessionService.setValue(request.getSession(), "healthInfoReferenceDto", dto);
 
 		return getView(DashboardView.HEALTH_INFO_REFFERNCE);
 	}
@@ -188,21 +188,20 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/exceldownload")
 	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
 		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
-		List<HealthInfoReferenceDto> referList = sessionService
-				.getValue(request.getSession(), "resultList", List.class)
-				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 
-		if (CollectionUtil.isEmpty(referList)) {
-			throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-		}
+		// sessionにある前画面の検索条件で再度検索する
+		HealthInfoReferenceDto referDto = sessionService
+				.getValue(request.getSession(), "healthInfoReferenceDto", HealthInfoReferenceDto.class)
+				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(referDto, userId);
+
 		ReferenceExcelComponent component = new ReferenceExcelComponent();
 		component.setUserId(userId);
-		component.setResultList(referList);
+		component.setResultList(resultList);
 		return new ModelAndView(excelDownloadService.download(component));
 	}
 
@@ -216,18 +215,16 @@ public class HealthInfoReferenceController implements BaseWebController {
 	 * @throws BaseException
 	 *     基底例外
 	 */
-	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/csvdownload")
 	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
 
 		HttpSession session = request.getSession();
-		List<HealthInfoReferenceDto> resultList = sessionService.getValue(session, "resultList", List.class)
-				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
 		String userId = sessionService.getValue(session, "userId", String.class).get();
-
-		if (CollectionUtil.isEmpty(resultList)) {
-			throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です");
-		}
+		// sessionにある前画面の検索条件で再度検索する
+		HealthInfoReferenceDto referDto = sessionService
+				.getValue(request.getSession(), "healthInfoReferenceDto", HealthInfoReferenceDto.class)
+				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(referDto, userId);
 
 		// CSV設定情報取得
 		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId).get();
@@ -241,8 +238,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 			csvDownloadService.download(response.getWriter(), conf, service.toModelList(userId, resultList));
 		} catch (IOException e) {
 			throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
-		} catch (BaseException e) {
-			throw e;
 		}
 	}
 

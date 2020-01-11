@@ -9,7 +9,7 @@ import jp.co.ha.common.type.Charset;
 
 /**
  * Base64エンコード/デコードクラス
- * 
+ *
  * @since 1.0
  */
 @Component("base64EncodeAndDecoder")
