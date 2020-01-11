@@ -11,13 +11,13 @@
       <th class="data sort" align="center" data-sort="healthInfoRegDate" th:text="#{healthInfoRegDate}"></th>
     </tr>
     <tbody class="data list">
-      <tr th:each="result : ${resultList}" class="data">
-        <td align="center" class="data"><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}" ontouchstart="">詳細</a></td>
-        <td th:text="${result.height}" align="center" class="data height"></td>
-        <td th:text="${result.weight}" align="center" class="data weight"></td>
-        <td th:text="${result.standardWeight}" align="center" class="data standardWeight"></td>
-        <td th:text="${result.bmi}" align="center" class="data bmi"></td>
-        <td th:text="${result.healthInfoRegDate}" align="center" class="data healthInfoRegDate"></td>
+      <tr class="data" th:each="result : ${resultList}">
+        <td class="data" align="center"><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}" ontouchstart="">詳細</a></td>
+        <td class="data height" align="center" th:text="${result.height}"></td>
+        <td class="data weight" align="center" th:text="${result.weight}"></td>
+        <td class="data standardWeight"  align="center" th:text="${result.standardWeight}"></td>
+        <td class="data bmi" align="center" th:text="${result.bmi}"></td>
+        <td class="data healthInfoRegDate" align="center" th:text="${result.healthInfoRegDate}"></td>
       </tr>
     </tbody>
   </table>
