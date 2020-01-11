@@ -15,7 +15,7 @@
   <div th:replace="./common/navigation.html"></div>
 
   <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
+  <div class="contentLayout" align="center">
     <h2 class="menuTitle">アカウント設定入力</h2>
 
     <!--/* 入力画面 */-->
@@ -42,7 +42,7 @@
 
         <!--/* 削除フラグここから */-->
         <div class="table-row accountToggle">
-          <div class="table-header" th:text="#{delete}"></div>
+          <div class="table-header" align="left" th:text="#{delete}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
@@ -56,7 +56,7 @@
 
         <!--/* ユーザIDここから */-->
         <div class="table-row accountToggle">
-          <div class="table-header" th:text="#{userId}"></div>
+          <div class="table-header" align="left" th:text="#{userId}"></div>
           <div class="table-data">
             <p th:text="*{userId}"></p>
             <input type="hidden" th:field="*{userId}" th:value="${userId}" />
@@ -66,7 +66,7 @@
 
         <!--/* パスワードここから */-->
         <div class="table-row accountToggle">
-          <div class="table-header" th:text="#{password}"></div>
+          <div class="table-header" align="left" th:text="#{password}"></div>
           <div class="table-data">
             <div class="checkbox">
               <input type="password" class="validate[required]" th:field="*{password}" th:value="${password}" required placeholder="パスワード" />
@@ -81,7 +81,7 @@
 
         <!--/* パスワード有効期限日ここから */-->
         <div class="table-row accountToggle">
-          <div class="table-header" th:text="#{passwordExpire}"></div>
+          <div class="table-header" align="left" th:text="#{passwordExpire}"></div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="パスワード有効期限日" />
           </div>
@@ -90,7 +90,7 @@
 
         <!--/* APIキーここから */-->
         <div class="table-row accountToggle">
-          <div class="table-header" th:text="#{apiKey}"></div>
+          <div class="table-header" align="left" th:text="#{apiKey}"></div>
           <div class="table-data">
             <p th:text="*{apiKey}"></p>
             <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
@@ -102,7 +102,7 @@
 
         <!--/* メールアドレスここから */-->
         <div class="table-row mailToggle">
-          <div class="table-header" th:text="#{mailAddress}"></div>
+          <div class="table-header" align="left" th:text="#{mailAddress}"></div>
           <div class="table-data">
             <input type="email" class="validate[required,custom[email]]" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="test@gmail.com" />
             <div id="suggest"></div>
@@ -112,7 +112,7 @@
 
         <!--/* メールパスワードここから */-->
         <div class="table-row mailToggle">
-          <div class="table-header" th:text="#{mailPassword}"></div>
+          <div class="table-header" align="left" th:text="#{mailPassword}"></div>
           <div class="table-data">
             <div class="checkbox">
               <input type="password" class="validate[required]" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="メールパスワード" />
@@ -129,7 +129,7 @@
 
         <!--/* ヘッダ利用ここから */-->
         <div class="table-row healthInfoFileToggle">
-          <div class="table-header" th:text="#{headerUse}"></div>
+          <div class="table-header" align="left" th:text="#{headerUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked />
@@ -143,7 +143,7 @@
 
         <!--/* フッタ利用ここから */-->
         <div class="table-row healthInfoFileToggle">
-          <div class="table-header" th:text="#{footerUse}"></div>
+          <div class="table-header" align="left" th:text="#{footerUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked />
@@ -157,7 +157,7 @@
 
         <!--/* マスク利用ここから */-->
         <div class="table-row healthInfoFileToggle">
-          <div class="table-header" th:text="#{maskUse}"></div>
+          <div class="table-header" align="left" th:text="#{maskUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked />
@@ -171,7 +171,7 @@
 
         <!--/* 囲み文字ここから */-->
         <div class="table-row healthInfoFileToggle">
-          <div class="table-header" th:text="#{enclosureCharUse}"></div>
+          <div class="table-header" align="left" th:text="#{enclosureCharUse}"></div>
           <div class="table-data">
             <div class="radio">
               <input type="radio" class="validate[required]" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked />
@@ -185,7 +185,7 @@
 
         <!--/* 備考ここから */-->
         <div class="table-row">
-          <div class="table-header" th:text="#{remarks}"></div>
+          <div class="table-header" align="left" th:text="#{remarks}"></div>
           <div class="table-data">
             <textarea rows="10" cols="80" th:field="*{remarks}" placeholder="備 考">${account.remarks}</textarea>
           </div>

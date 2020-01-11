@@ -7,7 +7,7 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
  * 健康情報計算サービスインターフェース
- * 
+ *
  * @since 1.0
  */
 public interface HealthInfoCalcService {

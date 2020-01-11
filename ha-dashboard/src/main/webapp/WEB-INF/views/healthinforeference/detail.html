@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報照会詳細画面', scripts = ~{::script}, links = ~{::link})">
+<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+</head>
+<body>
+
+  <!--/* ヘッダ部 */-->
+  <div th:replace="layout/layout :: header"></div>
+
+  <!--/* メニュー部 */-->
+  <div th:replace="./common/navigation.html"></div>
+
+  <!--/* contentLayout部ここから */-->
+  <div class="contentLayout" align="center">
+    <h2 class="menuTitle">健康情報詳細</h2>
+
+    <!--/* table部ここから */-->
+    <div class="table">
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{healthInfoId}"></div>
+        <div class="table-data" th:text="${detail.healthInfoId}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{userId}"></div>
+        <div class="table-data" th:text="${detail.userId}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{height}"></div>
+        <div class="table-data" th:text="${detail.height}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{weight}"></div>
+        <div class="table-data" th:text="${detail.weight}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{bmi}"></div>
+        <div class="table-data" th:text="${detail.bmi}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{standardWeight}"></div>
+        <div class="table-data" th:text="${detail.standardWeight}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{healthInfoStatus}"></div>
+        <div class="table-data" th:text="'前回と比べて' + #{${detail.healthInfoStatusMessage}}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{healthInfoRegDate}"></div>
+        <div class="table-data" th:text="${detail.healthInfoRegDate}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{bmiRangeId}"></div>
+        <div class="table-data" th:text="${detail.bmiRangeId}"></div>
+      </div>
+      <div class="table-row">
+        <div class="table-header" align="left" th:text="#{bmiRangeIdComment}"></div>
+        <div class="table-data" th:text="#{'overweightMessage.' + ${detail.overweightMessage}}"></div>
+      </div>
+    </div>
+    <!--/* table部ここまで */-->
+
+  </div>
+  <!--/* contentLayout部ここまで */-->
+
+  <!--/* フッタ部 */-->
+  <div th:replace="layout/layout :: footer"></div>
+
+  <script type="text/javascript" src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
+  <script type="text/javascript">
+
+  </script>
+</body>
+</html>

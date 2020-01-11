@@ -4,7 +4,7 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 健康情報ステータスの列挙
- * 
+ *
  * @since 1.0
  */
 public enum HealthInfoStatus implements BaseEnum {

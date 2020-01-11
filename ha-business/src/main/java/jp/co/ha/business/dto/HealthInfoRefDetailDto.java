@@ -1,7 +1,6 @@
 package jp.co.ha.business.dto;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  * 健康情報照会詳細DTO
@@ -22,12 +21,14 @@ public class HealthInfoRefDetailDto {
 	private BigDecimal bmi;
 	/** 標準体重 */
 	private BigDecimal standardWeight;
-	/** 健康情報ステータス */
-	private String healthInfoStatus;
+	/** 健康情報ステータスメッセージ */
+	private String healthInfoStatusMessage;
 	/** 健康情報登録日時 */
-	private Date healthInfoRegDate;
+	private String healthInfoRegDate;
 	/** BMI範囲ID */
 	private Integer bmiRangeId;
+	/** 肥満度メッセージ */
+	private String overweightMessage;
 
 	/**
 	 * healthInfoIdを返す
@@ -144,22 +145,22 @@ public class HealthInfoRefDetailDto {
 	}
 
 	/**
-	 * healthInfoStatusを返す
+	 * healthInfoStatusMessageを返す
 	 *
-	 * @return healthInfoStatus
+	 * @return healthInfoStatusMessage
 	 */
-	public String getHealthInfoStatus() {
-		return healthInfoStatus;
+	public String getHealthInfoStatusMessage() {
+		return healthInfoStatusMessage;
 	}
 
 	/**
-	 * healthInfoStatusを設定する
+	 * healthInfoStatusMessageを設定する
 	 *
-	 * @param healthInfoStatus
-	 *     健康情報ステータス
+	 * @param healthInfoStatusMessage
+	 *     健康情報ステータスメッセージ
 	 */
-	public void setHealthInfoStatus(String healthInfoStatus) {
-		this.healthInfoStatus = healthInfoStatus;
+	public void setHealthInfoStatusMessage(String healthInfoStatusMessage) {
+		this.healthInfoStatusMessage = healthInfoStatusMessage;
 	}
 
 	/**
@@ -167,7 +168,7 @@ public class HealthInfoRefDetailDto {
 	 *
 	 * @return healthInfoRegDate
 	 */
-	public Date getHealthInfoRegDate() {
+	public String getHealthInfoRegDate() {
 		return healthInfoRegDate;
 	}
 
@@ -177,7 +178,7 @@ public class HealthInfoRefDetailDto {
 	 * @param healthInfoRegDate
 	 *     健康情報登録日時
 	 */
-	public void setHealthInfoRegDate(Date healthInfoRegDate) {
+	public void setHealthInfoRegDate(String healthInfoRegDate) {
 		this.healthInfoRegDate = healthInfoRegDate;
 	}
 
@@ -198,6 +199,24 @@ public class HealthInfoRefDetailDto {
 	 */
 	public void setBmiRangeId(Integer bmiRangeId) {
 		this.bmiRangeId = bmiRangeId;
+	}
+
+	/**
+	 * overweightMessageを返す
+	 *
+	 * @return overweightMessage
+	 */
+	public String getOverweightMessage() {
+		return overweightMessage;
+	}
+
+	/**
+	 * overweightMessageを設定する
+	 *
+	 * @param overweightMessage
+	 */
+	public void setOverweightMessage(String overweightMessage) {
+		this.overweightMessage = overweightMessage;
 	}
 
 }

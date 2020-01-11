@@ -36,15 +36,15 @@ $(function() {
       "z-index" : "9999"
     });
     $(".modal-layout").css({
-        "margin" : "0px",
-        "width" : "auto",
-        "padding" : "15px",
-        "background" : "#d2e8d561",
-        "box-shadow" : "0 3px 4px rgba(0, 0, 0, 0.32)"
-      });
-      $(".formula").css({
-        "width" : "510px"
-      });
+      "margin" : "0px",
+      "width" : "auto",
+      "padding" : "15px",
+      "background" : "#d2e8d561",
+      "box-shadow" : "0 3px 4px rgba(0, 0, 0, 0.32)"
+    });
+    $(".formula").css({
+      "width" : "510px"
+    });
 
     // modalの位置を画面中央に計算する関数を実行
     modalResize();

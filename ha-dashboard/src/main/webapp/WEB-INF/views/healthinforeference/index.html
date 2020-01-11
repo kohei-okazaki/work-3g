@@ -33,7 +33,7 @@
         <h3 id="selectConditionToggle">検索条件</h3>
 
         <div class="table-row selectConditionToggle">
-          <div class="table-header" th:text="#{healthInfoId}"></div>
+          <div class="table-header" align="left" th:text="#{healthInfoId}"></div>
           <div class="table-data">
             <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="1000" />
           </div>
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="table-row selectConditionToggle">
-          <div class="table-header" th:text="#{healthInfoRegDate}"></div>
+          <div class="table-header" align="left" th:text="#{healthInfoRegDate}"></div>
           <div class="table-data">
             <div class="radio" align="center">
               <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" />
