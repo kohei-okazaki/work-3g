@@ -50,4 +50,5 @@ public interface HealthInfoReferService {
 	 *     基底例外
 	 */
 	CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException;
+
 }

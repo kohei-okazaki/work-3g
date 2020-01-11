@@ -180,3 +180,27 @@ h3:before {
   transition: transform 3.0s linear;
 }
 /* メニューアイコンここまで */
+
+/* <a>の設定 */
+a.link {
+  position: relative;
+  display: inline-block;
+  transition: .3s;
+}
+
+a.link::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #32cd32;
+  transition: .3s;
+  transform: translateX(-50%);
+}
+
+a.link:hover::after {
+  width: 100%;
+}
+/* <a>の設定 */

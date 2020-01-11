@@ -126,7 +126,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 	private List<HealthInfo> getHealthInfoList(HealthInfoReferenceDto dto, String userId) {
 
 		List<HealthInfo> resultList;
-		SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.ASC).build();
+		SelectOption selectOption = new SelectOptionBuilder().orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).build();
 		if (BeanUtil.isNull(dto.getHealthInfoId()) || StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
 			// 健康情報IDが未指定の場合
 			Date healthInfoRegDate = editStrDate(dto.getFromHealthInfoRegDate());
