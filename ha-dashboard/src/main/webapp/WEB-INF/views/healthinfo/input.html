@@ -36,9 +36,9 @@
 
         <!--/* table部ここから */-->
         <div class="table">
-          <h3>健康情報</h3>
+          <h3 id="healthInfoToggle">健康情報</h3>
 
-          <div class="table-row">
+          <div class="table-row healthInfoToggle">
             <div class="table-header" th:text="#{height}"></div>
             <div class="table-data">
               <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="170.00" />&ensp;cm
@@ -48,7 +48,7 @@
             </div>
           </div>
 
-          <div class="table-row">
+          <div class="table-row healthInfoToggle">
             <div class="table-header" th:text="#{weight}"></div>
             <div class="table-data">
               <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="50.00" />&ensp;kg
@@ -99,6 +99,15 @@
 
       jQuery("#healthInfoForm").validationEngine({
         promptPosition : "topLeft:0"
+      });
+
+      let dispOffTime = 400;
+      // 健康情報のトグルを設定
+      $("#healthInfoToggle").css({
+        "cursor": "pointer"
+      });
+      $("#healthInfoToggle").on("click", function() {
+          $(".healthInfoToggle").toggle(dispOffTime);
       });
 
       var mprogress = new Mprogress();

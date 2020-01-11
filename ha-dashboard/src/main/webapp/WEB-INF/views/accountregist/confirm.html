@@ -17,20 +17,23 @@
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountRegistForm}">
       <!--/* table部ここから */-->
       <div class="table">
-        <div class="table-row">
-          <div class="table-header" th:text="#{userId}"></div>
+
+        <h3 id="accountToggle">アカウント設定</h3>
+
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{userId}"></div>
           <div class="table-data" th:text="*{userId}"></div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{password}"></div>
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{password}"></div>
           <div class="table-data">****</div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{confirmPassword}"></div>
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{confirmPassword}"></div>
           <div class="table-data">****</div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{remarks}"></div>
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{remarks}"></div>
           <div class="table-data" th:text="*{remarks}"></div>
         </div>
       </div>
@@ -60,9 +63,20 @@
 
   <script type="text/javascript">
     $(function() {
+
       jQuery("#accountRegistForm").validationEngine({
         promptPosition : "topLeft:80"
       });
+
+      let dispOffTime = 400;
+      // アカウント設定のトグルを設定
+      $("#accountToggle").css({
+        "cursor": "pointer"
+      });
+      $("#accountToggle").on("click", function() {
+          $(".accountToggle").toggle(dispOffTime);
+      });
+
     });
   </script>
 </body>

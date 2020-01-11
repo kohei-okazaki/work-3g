@@ -21,10 +21,10 @@
       <!--/* table部ここから */-->
       <div class="table">
 
-        <h3>アカウント設定</h3>
+        <h3 id="accountToggle">アカウント設定</h3>
 
-        <div class="table-row">
-          <div class="table-header" th:text="#{delete}"></div>
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{delete}"></div>
           <div class="table-data">
             <div th:if="*{deleteFlag} == 1">
               <label>する</label>
@@ -34,34 +34,34 @@
             </div>
           </div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{userId}"></div>
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{userId}"></div>
           <div class="table-data" th:text="*{userId}"></div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{password}"></div>
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{password}"></div>
           <div class="table-data">****</div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{passwordExpire}"></div>
+        <div class="table-row accountToggle">
+          <div class="table-header" align="left" th:text="#{passwordExpire}"></div>
           <div class="table-data" th:text="*{passwordExpire}"></div>
         </div>
 
-        <h3>メール設定</h3>
+        <h3 id="mailToggle">メール設定</h3>
 
-        <div class="table-row">
-          <div class="table-header" th:text="#{mailAddress}"></div>
+        <div class="table-row mailToggle">
+          <div class="table-header" align="left" th:text="#{mailAddress}"></div>
           <div class="table-data" th:text="*{mailAddress}"></div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{mailPassword}"></div>
+        <div class="table-row mailToggle">
+          <div class="table-header" align="left" th:text="#{mailPassword}"></div>
           <div class="table-data">****</div>
         </div>
 
-        <h3>健康情報ファイル設定</h3>
+        <h3 id="healthInfoFileToggle">健康情報ファイル設定</h3>
 
-        <div class="table-row">
-          <div class="table-header" th:text="#{headerUse}"></div>
+        <div class="table-row healthInfoFileToggle">
+          <div class="table-header" align="left" th:text="#{headerUse}"></div>
           <div class="table-data">
             <div th:if="*{headerFlag} == 1">
               <label>する</label>
@@ -71,8 +71,8 @@
             </div>
           </div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{footerUse}"></div>
+        <div class="table-row healthInfoFileToggle">
+          <div class="table-header" align="left" th:text="#{footerUse}"></div>
           <div class="table-data">
             <div th:if="*{footerFlag} == 1">
               <label>する</label>
@@ -82,8 +82,8 @@
             </div>
           </div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{maskUse}"></div>
+        <div class="table-row healthInfoFileToggle">
+          <div class="table-header" align="left" th:text="#{maskUse}"></div>
           <div class="table-data">
             <div th:if="*{maskFlag} == 1">
               <label>する</label>
@@ -93,8 +93,8 @@
             </div>
           </div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{enclosureCharUse}"></div>
+        <div class="table-row healthInfoFileToggle">
+          <div class="table-header" align="left" th:text="#{enclosureCharUse}"></div>
           <div class="table-data">
             <div th:if="*{enclosureCharFlag} == 1">
               <label>する</label>
@@ -104,8 +104,8 @@
             </div>
           </div>
         </div>
-        <div class="table-row">
-          <div class="table-header" th:text="#{remarks}"></div>
+        <div class="table-row healthInfoFileToggle">
+          <div class="table-header" align="left" th:text="#{remarks}"></div>
           <div class="table-data" th:text="*{remarks}"></div>
         </div>
       </div>
@@ -135,7 +135,30 @@
 
   <script type="text/javascript">
     $(function() {
+        let dispOffTime = 400;
+        // アカウント設定のトグルを設定
+        $("#accountToggle").css({
+          "cursor": "pointer"
+        });
+        $("#accountToggle").on("click", function() {
+            $(".accountToggle").toggle(dispOffTime);
+        });
 
+        // メール設定のトグル
+        $("#mailToggle").css({
+          "cursor": "pointer"
+        });
+        $("#mailToggle").on("click", function() {
+            $(".mailToggle").toggle(dispOffTime);
+        });
+
+        // 健康情報ファイル設定のトグル
+        $("#healthInfoFileToggle").css({
+          "cursor": "pointer"
+        });
+        $("#healthInfoFileToggle").on("click", function() {
+            $(".healthInfoFileToggle").toggle(dispOffTime);
+        });
     });
   </script>
 </body>
