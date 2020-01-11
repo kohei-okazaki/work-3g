@@ -10,8 +10,8 @@ input[type="submit"], input[type="reset"], input[type="button"] {
   padding: 0.3em 1em;
   text-decoration: none;
   color: #FFFFFF;
-  background: #71f145;
-  border: solid 5px #71f145;
+  background: #228b22;
+  border: solid 5px #228b22;
   border-radius: 3px;
   transition: .6s;
 }
@@ -40,7 +40,7 @@ input[type="text"]:focus, input[type=password]:focus, input[type="email"]:focus,
   textarea:focus {
   background: #ffffca;
   box-shadow: 0 0 7px #80ff00;
-  border: solid 2px #71f145;
+  border: solid 2px #228b22;
 }
 
 .radio {
@@ -58,7 +58,7 @@ input[type="text"]:focus, input[type=password]:focus, input[type="email"]:focus,
   cursor: pointer;
   margin: 0;
   padding: 8px 16px;
-  background-color: #32cd32;
+  background-color: #228b22;
   color: #FFF;
   text-align: center;
   transition: 0.2s;
@@ -74,7 +74,7 @@ input[type="text"]:focus, input[type=password]:focus, input[type="email"]:focus,
 }
 
 .radio input[type="radio"]:checked+label {
-  background-color: #71f145;
+  background-color: #32cd32;
 }
 
 /* チェックボックスのデザイン ここから */

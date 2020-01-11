@@ -19,8 +19,8 @@ body {
 }
 
 .appTitle {
-  border-bottom: 2px solid #32cd32;
-  border-left: 10px solid #32cd32;
+  border-bottom: 2px solid #006400;
+  border-left: 10px solid #006400;
   padding: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -195,7 +195,7 @@ a.link::after {
   content: '';
   width: 0;
   height: 2px;
-  background-color: #32cd32;
+  background-color: #006400;
   transition: .3s;
   transform: translateX(-50%);
 }
@@ -204,3 +204,4 @@ a.link:hover::after {
   width: 100%;
 }
 /* <a>の設定 */
+
