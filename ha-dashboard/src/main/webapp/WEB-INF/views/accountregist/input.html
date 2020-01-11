@@ -30,16 +30,22 @@
 
       <!--/* table部ここから */-->
       <div class="table">
-        <div class="table-row">
+
+        <h3 id="accountToggle">アカウント設定</h3>
+
+        <!--/* ユーザIDここから */-->
+        <div class="table-row accountToggle">
           <div class="table-header" align="left" th:text="#{userId}"></div>
           <div class="table-data">
             <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" />
           </div>
         </div>
+        <!--/* ユーザIDここまで */-->
 
         <div class="table-row">&ensp;</div>
 
-        <div class="table-row">
+        <!--/* パスワードここから */-->
+        <div class="table-row accountToggle">
           <div class="table-header" align="left" th:text="#{password}"></div>
           <div class="table-data">
             <div class="checkbox">
@@ -51,10 +57,12 @@
             </div>
           </div>
         </div>
+        <!--/* パスワードここまで */-->
 
         <div class="table-row">&ensp;</div>
 
-        <div class="table-row">
+        <!--/* 確認用パスワードここから */-->
+        <div class="table-row accountToggle">
           <div class="table-header" align="left" th:text="#{confirmPassword}"></div>
           <div class="table-data">
             <div class="checkbox">
@@ -66,15 +74,19 @@
             </div>
           </div>
         </div>
+        <!--/* 確認用パスワードここまで */-->
 
         <div class="table-row">&ensp;</div>
 
-        <div class="table-row">
+        <!--/* 備考ここから */-->
+        <div class="table-row accountToggle">
           <div class="table-header" align="left" th:text="#{remarks}"></div>
           <div class="table-data">
             <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
           </div>
         </div>
+        <!--/* 備考ここまで */-->
+
       </div>
       <!--/* table部ここまで */-->
 
@@ -111,6 +123,15 @@
       // validate処理
       jQuery("#accountRegistForm").validationEngine({
         promptPosition : "bottomLeft:80"
+      });
+
+      let dispOffTime = 400;
+      // アカウント設定のトグルを設定
+      $("#accountToggle").css({
+        "cursor": "pointer"
+      });
+      $("#accountToggle").on("click", function() {
+          $(".accountToggle").toggle(dispOffTime);
       });
 
       // アカウント登録画面⇒TOP画面には遷移できないようにする
@@ -178,11 +199,8 @@
       var confirmPassword = $('#confirmPassword').get(0);
       var confirmPasswordCheck = $('#confirmPassword-check').get(0);
       confirmPasswordCheck.addEventListener('change', function() {
-        if (confirmPasswordCheck.checked) {
-          confirmPassword.setAttribute('type', 'text');
-        } else {
-          confirmPassword.setAttribute('type', 'password');
-        }
+        var inputType = confirmPasswordCheck.checked ? 'text' : 'password';
+        confirmPassword.setAttribute('type', inputType);
       }, false);
     });
 
