@@ -4,7 +4,7 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * セル位置の列挙
- * 
+ *
  * @since 1.0
  */
 public enum CellPositionType implements BaseEnum {

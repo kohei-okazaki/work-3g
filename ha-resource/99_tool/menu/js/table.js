@@ -6,7 +6,7 @@ var table = [
       {
         logicalName: "健康情報ID",
         physicalName: "HEALTH_INFO_ID",
-        type: "INTEGER",
+        type: "INT",
         size: ""
       },
       {
@@ -49,6 +49,12 @@ var table = [
         logicalName: "健康情報作成日時",
         physicalName: "HEALTH_INFO_REG_DATE",
         type: "TIMESTAMP",
+        size: ""
+      },
+      {
+        logicalName: "BMI範囲ID",
+        physicalName: "BMI_RANGE_ID",
+        type: "INT",
         size: ""
       },
       {

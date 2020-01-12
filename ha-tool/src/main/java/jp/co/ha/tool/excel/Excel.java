@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * エクセル情報保持クラス
- * 
+ *
  * @since 1.0
  */
 public class Excel {
