@@ -36,7 +36,7 @@ api, dashboard, batchで共通的に使うbusinessロジックをまとめたプ
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
 
 * ### ha-pom  
-api, auto, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+api, auto, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
 * ### ha-resource  
 詳細設計書、DDL等を定義したドキュメントプロジェクト  
