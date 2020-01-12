@@ -19,9 +19,9 @@ WEB画面の自動テストをするプロジェクト
 Batch処理を定義したプロジェクト  
 
 * ### ha-build  
-ローカル環境でjarを作成するプロジェクト  
+ローカル環境でJarやAWS環境にデプロイするWarを作成するプロジェクト  
 windows, linuxでそれぞれbatとshを用意  
-(都度jarを配置せずにpomから必要なjarを読み取って動くように修正した為、buildシェルを流す無くても良い)  
+(都度Jarを配置せずにpomから必要なJarを読み取って動くように修正した為、buildシェルを流す無くても良い)  
 
 * ### ha-business  
 api, dashboard, batchで共通的に使うbusinessロジックをまとめたプロジェクト  
