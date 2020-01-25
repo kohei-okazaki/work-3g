@@ -271,4 +271,31 @@ public class StringUtilTest extends BaseCommonTest {
 		}
 	}
 
+	/**
+	 * {@link StringUtil#abbreviate}
+	 */
+	@Test
+	public void testAbbreviate() {
+		{
+			String str = null;
+			int maxWidth = 4;
+			assertEquals(null, StringUtil.abbreviate(str, maxWidth));
+		}
+		{
+			String str = "";
+			int maxWidth = 4;
+			assertEquals("", StringUtil.abbreviate(str, maxWidth));
+		}
+		{
+			String str = "abcd";
+			int maxWidth = 4;
+			assertEquals("abcd", StringUtil.abbreviate(str, maxWidth));
+		}
+		{
+			String str = "abcdefghi";
+			int maxWidth = 4;
+			assertEquals("a...", StringUtil.abbreviate(str, maxWidth));
+		}
+	}
+
 }

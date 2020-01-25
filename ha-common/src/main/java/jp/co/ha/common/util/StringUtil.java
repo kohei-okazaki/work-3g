@@ -6,6 +6,9 @@ import java.util.StringJoiner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
@@ -389,6 +392,46 @@ public class StringUtil {
 			}
 		}
 		return c1;
+	}
+
+	/**
+	 * {@link StringUtils#abbreviate(String, int)}のラッパーメソッド
+	 *
+	 * @param str
+	 *     文字列
+	 * @param maxWidth
+	 *     最大文字数
+	 * @return 「...」で省略後の文字列
+	 */
+	public static String abbreviate(String str, int maxWidth) {
+		return StringUtils.abbreviate(str, maxWidth);
+	}
+
+	/**
+	 * {@link StringUtils#abbreviate(String, int, int)}のラッパーメソッド
+	 *
+	 * @param str
+	 *     文字列
+	 * @param offset
+	 *     開始位置
+	 * @param maxWidth
+	 *     最大文字数
+	 * @return 「...」で省略後の文字列
+	 */
+	public static String abbreviate(String str, int offset, int maxWidth) {
+		return StringUtils.abbreviate(str, offset, maxWidth);
+	}
+
+	/**
+	 * 指定して桁数のランダム文字列を返す<br>
+	 * {@link org.apache.commons.lang3.RandomStringUtils#randomAlphabetic(int)}のラッパーメソッド
+	 *
+	 * @param length
+	 *     文字列長
+	 * @return ランダム文字列
+	 */
+	public static String getRandamStr(int length) {
+		return RandomStringUtils.randomAlphabetic(length);
 	}
 
 	/**
