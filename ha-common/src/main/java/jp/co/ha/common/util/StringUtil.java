@@ -6,6 +6,7 @@ import java.util.StringJoiner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import jp.co.ha.common.exception.BaseException;
@@ -419,6 +420,18 @@ public class StringUtil {
 	 */
 	public static String abbreviate(String str, int offset, int maxWidth) {
 		return StringUtils.abbreviate(str, offset, maxWidth);
+	}
+
+	/**
+	 * 指定して桁数のランダム文字列を返す<br>
+	 * {@link org.apache.commons.lang3.RandomStringUtils#randomAlphabetic(int)}のラッパーメソッド
+	 *
+	 * @param length
+	 *     文字列長
+	 * @return ランダム文字列
+	 */
+	public static String getRandamStr(int length) {
+		return RandomStringUtils.randomAlphabetic(length);
 	}
 
 	/**
