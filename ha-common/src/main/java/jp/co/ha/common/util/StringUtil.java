@@ -6,6 +6,8 @@ import java.util.StringJoiner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import org.apache.commons.lang3.StringUtils;
+
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
@@ -389,6 +391,34 @@ public class StringUtil {
 			}
 		}
 		return c1;
+	}
+
+	/**
+	 * {@link StringUtils#abbreviate(String, int)}のラッパーメソッド
+	 *
+	 * @param str
+	 *     文字列
+	 * @param maxWidth
+	 *     最大文字数
+	 * @return 「...」で省略後の文字列
+	 */
+	public static String abbreviate(String str, int maxWidth) {
+		return StringUtils.abbreviate(str, maxWidth);
+	}
+
+	/**
+	 * {@link StringUtils#abbreviate(String, int, int)}のラッパーメソッド
+	 *
+	 * @param str
+	 *     文字列
+	 * @param offset
+	 *     開始位置
+	 * @param maxWidth
+	 *     最大文字数
+	 * @return 「...」で省略後の文字列
+	 */
+	public static String abbreviate(String str, int offset, int maxWidth) {
+		return StringUtils.abbreviate(str, offset, maxWidth);
 	}
 
 	/**
