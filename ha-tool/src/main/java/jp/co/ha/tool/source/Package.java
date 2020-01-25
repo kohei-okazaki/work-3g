@@ -2,7 +2,7 @@ package jp.co.ha.tool.source;
 
 /**
  * Package
- * 
+ *
  * @since 1.0
  */
 public class Package {

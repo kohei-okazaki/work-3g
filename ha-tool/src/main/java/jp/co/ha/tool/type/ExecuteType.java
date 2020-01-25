@@ -4,7 +4,7 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * SqlExecutorの列挙
- * 
+ *
  * @since 1.0
  */
 public enum ExecuteType implements BaseEnum {
