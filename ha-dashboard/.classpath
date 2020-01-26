@@ -60,5 +60,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/ha-common"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ha-db"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ha-web"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ha-business"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
