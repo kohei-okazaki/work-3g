@@ -154,6 +154,7 @@ th.data, td.data {
 }
 /* ▲divをテーブル構成にする▲ */
 
+/* ▼サブメニュー▼ */
 h3 {
   position: relative;
   padding: 0.5em 0.5em 0.5em 1.5em;
@@ -170,7 +171,7 @@ h3:before {
   top: 0.5em;
   color: #006400;
 }
-
+/* ▲サブメニュー▲ */
 .chart {
   width: 250px;
   height: 60px;
@@ -273,12 +274,22 @@ a.link:hover::after {
 /* ▲画面TOPへ戻るアイコンについてのCSS▲ */
 
 /* ▼お知らせ一覧のCSS▼ */
-.news-item {
+tr.news-item {
   background: #d2e8d561;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.32);
+  padding: 50px 20px;
+  width: 100%;
 }
 
-.news-item:hover {
+tr.news-item:hover {
   cursor: pointer;
 }
-/* ▲お知らせ一覧のタイルのCSS▲ */
+
+td.news-item-date {
+  padding: 10px 10px;
+}
+
+td.news-item-title {
+  padding: 10px 30px;
+}
+/* ▲お知らせ一覧のCSS▲ */

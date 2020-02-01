@@ -24,8 +24,10 @@
       <table class="data">
         <tbody class="list">
           <tr class="news-item" th:each="news : ${newsList}">
-             <td class="data date" th:text="${news.date}" />
-             <td class="data title" th:text="${news.title}" />
+             <td class="news-item-date" th:text="${news.date}" />
+             <td class="news-item-title">
+               <a class="link" href="../news/detail" th:href="'./detail?index=' + ${news.index}" th:text="${news.title}"></a>
+             </td>
           </tr>
         </tbody>
       </table>
