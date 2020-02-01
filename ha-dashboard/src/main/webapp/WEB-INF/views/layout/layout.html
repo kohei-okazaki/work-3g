@@ -28,17 +28,17 @@
 <!-- 個別JavaScript -->
 <!-- <th:block th:replace="${scripts}" /> -->
 </head>
-  <body class="body-main">
+<body class="body-main">
 
-    <header xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/header :: header}">
-      <div th:replace="layout/header.html"></div>
-    </header>
+  <header xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/header :: header}">
+    <div th:replace="layout/header.html"></div>
+  </header>
 
-    <div id="body" layout:fragment="contents"></div>
+  <div id="body" layout:fragment="contents"></div>
 
-    <footer xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/footer :: footer">
-      <div th:replace="layout/footer.html"></div>
-    </footer>
+  <footer xmlns:th="http://www.thymeleaf.org" th:fragment="~{layout/footer :: footer">
+    <div th:replace="layout/footer.html"></div>
+  </footer>
 
-  </body>
+</body>
 </html>

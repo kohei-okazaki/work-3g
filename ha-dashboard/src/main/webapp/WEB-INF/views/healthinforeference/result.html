@@ -12,7 +12,7 @@
     </tr>
     <tbody class="data list">
       <tr class="data" th:each="result : ${resultList}">
-        <td class="data" align="center"><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}" ontouchstart="">詳細</a></td>
+        <td class="data" align="center"><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}">詳細</a></td>
         <td class="data height" align="center" th:text="${result.height}"></td>
         <td class="data weight" align="center" th:text="${result.weight}"></td>
         <td class="data standardWeight"  align="center" th:text="${result.standardWeight}"></td>

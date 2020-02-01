@@ -49,7 +49,12 @@ public enum DashboardView implements BaseView {
 	HEALTH_INFO_FILE_COMPLETE("healthinfofile/complete"),
 
 	/** カロリー計算画面 */
-	CALORIE_CALC("caloriecalc/index");
+	CALORIE_CALC("caloriecalc/index"),
+
+	/** お知らせ一覧画面 */
+	NEWS_LIST("news/list"),
+	/** お知らせ詳細画面 */
+	NEWS_DETAIL("news/detail");
 
 	/** パス名 */
 	private String name;

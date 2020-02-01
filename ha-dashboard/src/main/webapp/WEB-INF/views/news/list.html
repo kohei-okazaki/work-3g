@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_お知らせ一覧画面', scripts = ~{::script}, links = ~{::link})">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
+<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+</head>
+<body>
+
+  <div th:replace="layout/layout :: header"></div>
+
+  <div th:replace="./common/navigation.html"></div>
+
+  <!--/* contentLayout部ここから */-->
+  <div align="center" class="contentLayout">
+    <h2 class="menuTitle">お知らせ一覧画面</h2>
+
+    <div id="newsList" class="contentLayout">
+      <table class="data">
+        <tbody class="list">
+          <tr class="news-item" th:each="news : ${newsList}">
+             <td class="news-item-date" th:text="${news.date}" />
+             <td class="news-item-title">
+               <a class="link" href="../news/detail" th:href="'./detail?index=' + ${news.index}" th:text="${news.title}"></a>
+             </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pager">
+        <ul class="pagination"></ul>
+      </div>
+    </div>
+  </div>
+  <!--/* contentLayout部ここまで */-->
+
+  <div th:replace="layout/layout :: footer"></div>
+
+  <script type="text/javascript" src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>
+  <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
+  <script type="text/javascript" th:inline="javascript">
+    $(function() {
+      /*<![CDATA[*/
+      var systemConfig = /*[[ ${systemConfig} ]]*/;
+      var options = {
+        valueNames: [
+          "date",
+          "title"
+        ],
+        page: systemConfig.paging,
+        pagination: {
+          pageationClass: "pagination",
+          innerWindow: 1,
+          outerWindow: 1
+        }
+      };
+      var columnList = new List("newsList", options);
+      /*]]>*/
+    });
+  </script>
+</body>
+</html>
