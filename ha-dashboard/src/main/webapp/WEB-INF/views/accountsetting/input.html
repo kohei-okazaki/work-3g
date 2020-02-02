@@ -227,8 +227,8 @@
     $(function() {
 
       sal({
-        threshold : 1,
-        once : false
+        threshold: 1,
+        once: false
       });
 
       jQuery("#accountSettingForm").validationEngine({
@@ -261,10 +261,10 @@
       });
 
       $("#passwordExpire").datepicker({
-        firstDay : 0,
-        showButtonPanel : true,
-        changeYear : true,
-        changeMonth : true
+        firstDay: 0,
+        showButtonPanel: true,
+        changeYear: true,
+        changeMonth: true
       });
 
       const domains = [
@@ -281,8 +281,8 @@
 
       $("#mailAddress").on("blur", function() {
         $(this).mailcheck({
-          domains : domains,
-          suggested : function(element, suggestion) {
+          domains: domains,
+          suggested: function(element, suggestion) {
             $("#suggest").text(suggestion.full);
             $("#suggest").on("click", function() {
               $("#mailAddress").val(suggestion.full);

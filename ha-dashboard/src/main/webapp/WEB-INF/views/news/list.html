@@ -23,10 +23,10 @@
     <div id="newsList" class="contentLayout">
       <table class="data">
         <tbody class="list">
-          <tr class="news-item" th:each="news : ${newsList}">
+          <tr class="news-item" th:class="'news-item news-toggle[' + ${news.index} + ']'" th:each="news : ${newsList}">
              <td class="news-item-date" th:text="${news.date}" />
-             <td class="news-item-title">
-               <a class="link" href="../news/detail" th:href="'./detail?index=' + ${news.index}" th:text="${news.title}"></a>
+             <td class="news-item-title" th:text="${news.title}" />
+             <td class="news-item-contents" th:class="'news-item-contents news-toggle-contents[' + ${news.index} + ']'" th:utext="${news.detail}" />
              </td>
           </tr>
         </tbody>
@@ -47,13 +47,12 @@
   <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script type="text/javascript" th:inline="javascript">
     $(function() {
+
       /*<![CDATA[*/
+      // ページング処理
       var systemConfig = /*[[ ${systemConfig} ]]*/;
       var options = {
-        valueNames: [
-          "date",
-          "title"
-        ],
+        valueNames: [ "date", "title" ],
         page: systemConfig.paging,
         pagination: {
           pageationClass: "pagination",
@@ -63,6 +62,15 @@
       };
       var columnList = new List("newsList", options);
       /*]]>*/
+
+      // お知らせのToggle設定
+      $.each($("tr.news-item"), function(i, val) {
+        var child = $(val).children();
+        child.on("click", function() {
+          $(child[2]).fadeToggle(500);
+        })
+      });
+
     });
   </script>
 </body>

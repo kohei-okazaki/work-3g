@@ -6,11 +6,10 @@
   <!--/* table部ここから */-->
   <div class="table" th:if="${session[userId]} != null">
     <!--/* ログイン状態の場合のみ表示 */-->
-    <div class="table-row">
-      <div class="table-data">
-        <a class="link" href="../news/list" th:href="@{/news/list}">お知らせ一覧</a>
-      </div>
-    </div>
+    <ul class="footer-submenu">
+      <li><a class="link" href="../login/top" th:href="@{/login/top}">home</a></li>
+      <li><a class="link" href="../news/list" th:href="@{/news/list}">news</a></li>
+    </ul>
   </div>
   <!--/* table部ここまで */-->
   <p align="center" th:text="'---&nbsp;' + #{healthInfoAppName} + '&nbsp;---'"></p>
