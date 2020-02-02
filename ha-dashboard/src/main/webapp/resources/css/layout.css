@@ -92,6 +92,11 @@ body {
   background: #c0c0c0;
 }
 
+.footer-submenu {
+  display: inline;
+  text-align: center;
+}
+
 .sub-footer {
   position: relative;
   width: 100%;
@@ -291,5 +296,10 @@ td.news-item-date {
 
 td.news-item-title {
   padding: 10px 30px;
+}
+
+td.news-item-contents {
+  /* お知らせ詳細のコンテンツは最初非表示のためnoneを指定 */
+  display:none;
 }
 /* ▲お知らせ一覧のCSS▲ */
