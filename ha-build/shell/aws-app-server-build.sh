@@ -11,16 +11,20 @@
 ########################################
 # 1:ログファイルを用意
 ########################################
+# ログディレクトリを定義
+LOG_DIR=/var/log
+APP_LOG_DIR=/var/log/app
 # ログファイルを定義
 DASHBOARD_LOG=dashboard.log
+
 # Rootユーザに変更
 sudo su - root
 # /var/logへ移動
-cd /var/log
+cd LOG_DIR
 # appディレクトリ作成
 mkdir -m 777 app
 # appディレクトリへ移動
-cd app
+cd APP_LOG_DIR
 # 空ファイルを作成
 touch DASHBOARD_LOG
 # ファイルのパーミッションを変更
