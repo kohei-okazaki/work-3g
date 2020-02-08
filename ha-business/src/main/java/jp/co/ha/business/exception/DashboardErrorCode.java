@@ -80,7 +80,7 @@ public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
 	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
 	 * @param value
 	 *     値
-	 * @return WebErrorCode
+	 * @return DashboardErrorCode
 	 */
 	public static DashboardErrorCode of(String value) {
 		return BaseEnum.of(DashboardErrorCode.class, value);

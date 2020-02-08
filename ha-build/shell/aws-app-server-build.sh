@@ -20,15 +20,15 @@ DASHBOARD_LOG=dashboard.log
 # Rootユーザに変更
 sudo su - root
 # /var/logへ移動
-cd LOG_DIR
+cd ${LOG_DIR}
 # appディレクトリ作成
 mkdir -m 777 app
 # appディレクトリへ移動
-cd APP_LOG_DIR
+cd ${APP_LOG_DIR}
 # 空ファイルを作成
-touch DASHBOARD_LOG
+touch ${DASHBOARD_LOG}
 # ファイルのパーミッションを変更
-chmod 777 DASHBOARD_LOG
+chmod 777 ${DASHBOARD_LOG}
 
 ########################################
 # 2:システム日時を設定
