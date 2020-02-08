@@ -2,15 +2,15 @@
   "newsDtoList": [
     {
       "index": 1,
-      "title": "健康管理アプリ、リリースについて",
+      "title": "健康管理アプリ Version 1.0 リリースについて",
       "date": "2020/02/01",
-      "detail": "初回リリース情報<br><ul><li>健康管理ダッシュボードの作成</li></ul>"
+      "detail": "Version 1.0 リリース情報<br><ul><li>アカウント登録/変更機能</li><li>健康情報登録/照会/ダウンロード機能</li><li>カロリー計算機能</li></ul>"
     },
     {
       "index": 2,
-      "title": "健康管理アプリ、次回リリースについて",
+      "title": "健康管理アプリ Version 1.1 リリースについて",
       "date": "2020/02/02",
-      "detail": "次回リリース情報<br><ul><li>ダミー情報</li><li>ダミー情報</li></ul>"
+      "detail": "Version 1.1 リリース情報<br><ul><li>ダミー情報</li><li>ダミー情報</li></ul>"
     }
   ]
 }

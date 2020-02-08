@@ -27,7 +27,6 @@
              <td class="news-item-date" th:text="${news.date}" />
              <td class="news-item-title" th:text="${news.title}" />
              <td class="news-item-contents" th:class="'news-item-contents news-toggle-contents[' + ${news.index} + ']'" th:utext="${news.detail}" />
-             </td>
           </tr>
         </tbody>
       </table>

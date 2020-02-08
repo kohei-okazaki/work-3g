@@ -16,7 +16,7 @@ import jp.co.ha.web.controller.BaseRestController;
  * @since 1.0
  */
 @RestController
-@RequestMapping(value = "/healthInfoReference")
+@RequestMapping(value = "/healthinforeference")
 public class HealthInfoReferenceController
 		extends BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
