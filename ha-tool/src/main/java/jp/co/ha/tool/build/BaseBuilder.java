@@ -48,8 +48,10 @@ public abstract class BaseBuilder {
 	 */
 	private void init() {
 
-		String resourcePath = this.getClass().getClassLoader().getResource("").getPath()
-				+ FileSeparator.SYSTEM.getValue() + "META-INF";
+		String resourcePath = new StringJoiner(FileSeparator.SYSTEM.getValue())
+				.add(this.getClass().getClassLoader().getResource("").getPath())
+				.add("META-INF")
+				.toString();
 		Properties prop = new PropertyReader().read(resourcePath, "tool.properties");
 
 		String targetTable = prop.getProperty("tool.targetTable");
