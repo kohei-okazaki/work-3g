@@ -77,7 +77,9 @@
         <div class="table-row">&ensp;</div>
 
         <div class="table-row">
-          <div id="lifeWorkMetabolism-modal" class="table-header" align="left" th:text="#{lifeWorkMetabolism}"></div>
+          <div id="lifeWorkMetabolism-modal" class="table-header" align="left">
+            <a class="link" href="#" th:text="#{lifeWorkMetabolism}"></a>
+          </div>
           <div class="table-data">
             <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="消費カロリー" />&ensp;kcal
           </div>
