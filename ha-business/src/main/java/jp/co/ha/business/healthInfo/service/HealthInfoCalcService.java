@@ -43,7 +43,7 @@ public interface HealthInfoCalcService {
 	 *     体重
 	 * @param digit
 	 *     四捨五入桁数
-	 * @return BMIを計算
+	 * @return BMI
 	 */
 	BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit);
 
@@ -54,7 +54,7 @@ public interface HealthInfoCalcService {
 	 *     身長
 	 * @param digit
 	 *     四捨五入桁数
-	 * @return 標準体重を計算
+	 * @return 標準体重
 	 */
 	BigDecimal calcStandardWeight(BigDecimal height, int digit);
 
@@ -79,11 +79,12 @@ public interface HealthInfoCalcService {
 	BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto);
 
 	/**
-	 * 1日の消費カロリーを計算する
+	 * 1日の消費カロリーを計算
 	 *
 	 * @param calorieCalcDto
 	 *     カロリー計算DTO
 	 * @return 1日の消費カロリー
 	 */
 	BigDecimal calcLostCaloriePerDay(CalorieCalcDto calorieCalcDto);
+
 }

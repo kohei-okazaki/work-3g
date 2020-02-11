@@ -16,7 +16,7 @@ import jp.co.ha.web.controller.BaseRestController;
  * @since 1.0
  */
 @RestController
-@RequestMapping(value = "/healthInfoRegist")
+@RequestMapping(value = "/healthinforegist")
 public class HealthInfoRegistController extends BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
 	/** 健康情報登録API */
