@@ -1,5 +1,6 @@
 package jp.co.ha.common.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
@@ -153,13 +154,16 @@ public class StringUtil {
 		}
 		String body = target;
 		while (body.length() < length) {
-			if (PaddingType.LEFT == paddingType) {
+			switch (paddingType) {
+			case LEFT:
 				// 左詰
 				body = body + str;
-			} else if (PaddingType.RIGHT == paddingType) {
+				break;
+			case RIGHT:
 				// 右詰
 				body = str + body;
-			} else {
+				break;
+			default:
 				throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
 			}
 		}
@@ -238,7 +242,7 @@ public class StringUtil {
 					result = slice(str, charset, length - 1);
 				}
 			}
-		} catch (Exception e) {
+		} catch (UnsupportedEncodingException e) {
 			// 文字コードが不正な場合
 			throw new SystemRuntimeException(e);
 		}

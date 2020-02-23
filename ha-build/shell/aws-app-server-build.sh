@@ -5,6 +5,7 @@
 #
 # 1:ログファイルを用意
 # 2:システム日時を設定
+# 3:健康情報照会画面で出力後のCSVファイルを保管するディレクトリを用意
 #
 ########################################
 
@@ -35,3 +36,10 @@ chmod 777 $DASHBOARD_LOG
 sudo cp -i /home/ec2-user/clock /etc/sysconfig/
 # 時間帯ファイルにシンボリックリンク
 sudo ln -sf /usr/share/zoneinfo/Japan /etc/localtime
+
+########################################
+# 3:健康情報照会画面で出力後のCSVファイルを保管するディレクトリを用意
+########################################
+mkdir -m 777 /home/ec2-user/data
+mkdir -m 777 /home/ec2-user/data/healthInfoReference
+

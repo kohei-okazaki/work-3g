@@ -2,7 +2,6 @@ package jp.co.ha.business.db.crud.read;
 
 import java.util.List;
 
-import jp.co.ha.common.exception.BaseRuntimeException;
 import jp.co.ha.db.entity.BmiRangeMt;
 
 /**
@@ -18,10 +17,8 @@ public interface BmiRangeMtSearchService {
 	 * @param bmiRangeId
 	 *     BMI範囲ID
 	 * @return BmiRangeMt
-	 * @throws BaseRuntimeException
-	 *     基底例外
 	 */
-	BmiRangeMt findByBmiRangeId(Integer bmiRangeId) throws BaseRuntimeException;
+	BmiRangeMt findByBmiRangeId(Integer bmiRangeId);
 
 	/**
 	 * BMI範囲マスタを全件取得する
