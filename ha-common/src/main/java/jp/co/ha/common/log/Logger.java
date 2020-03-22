@@ -196,16 +196,6 @@ public class Logger {
         public static LogLevel of(String value) {
             return BaseEnum.of(LogLevel.class, value);
         }
-
-        /**
-         * 指定した<code>logLevel</code>と自身が一致するかどうか返す
-         *
-         * @param logLevel
-         *     LogLevel
-         * @return 判定結果
-         */
-        public boolean is(LogLevel logLevel) {
-            return this == logLevel;
-        }
     }
+
 }
