@@ -27,7 +27,7 @@ public class CaesarCrypter implements Crypter {
         if (StringUtil.isEmpty(str)
                 || !Pattern.matches(RegexType.HALF_ALPHABET.getValue(), str)) {
             // null or 空文字 or 半角英字以外の場合
-            return null;
+            return str;
         }
 
         String result = "";
@@ -50,7 +50,7 @@ public class CaesarCrypter implements Crypter {
         if (StringUtil.isEmpty(str)
                 || !Pattern.matches(RegexType.HALF_ALPHABET.getValue(), str)) {
             // null or 空文字 or 半角英字以外の場合
-            return null;
+            return str;
         }
 
         String result = "";

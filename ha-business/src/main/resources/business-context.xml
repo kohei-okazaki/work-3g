@@ -17,15 +17,22 @@
         <value>classpath:crypt.properties</value>
         <value>classpath:jdbc.properties</value>
         <value>classpath:system.properties</value>
+        <value>classpath:aws.properties</value>
         <value>classpath:healthInfo.properties</value>
       </list>
     </property>
   </bean>
+  <!-- healthinfo.properties -->
   <bean id="healthInfoProperties" class="jp.co.ha.business.io.file.properties.HealthInfoProperties" lazy-init="true">
     <property name="referenceFilePath" value="${referenceFilePath}" />
     <property name="healthInfoRegistBatchFilePath" value="${healthInfoRegistBatchFilePath}" />
   </bean>
-
+  <!-- aws.properties -->
+  <bean id="awsConfig" class="jp.co.ha.business.aws.AwsConfig" lazy-init="true">
+    <property name="accesskey" value="${aws.accesskey}" />
+    <property name="secretAccesskey" value="${aws.secret.accesskey}" />
+    <property name="region" value="${aws.region}" />
+  </bean>
   <!-- CRUD -->
   <context:component-scan base-package="jp.co.ha.business.db.crud.read.impl" />
   <context:component-scan base-package="jp.co.ha.business.db.crud.create.impl" />
@@ -38,4 +45,6 @@
   <!-- Business -->
   <context:component-scan base-package="jp.co.ha.business.healthInfo.*.impl" />
 
+  <!-- AWS -->
+  <context:component-scan base-package="jp.co.ha.business.aws" />
 </beans>

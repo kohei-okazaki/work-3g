@@ -29,12 +29,15 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
         if (e instanceof BaseException) {
             BaseException be = (BaseException) e;
             LogLevel level = be.getErrorCode().getLogLevel();
-            if (LogLevel.ERROR.is(level)) {
-                // ERRORの場合
+            switch (level) {
+            case ERROR:
                 LOG.error(errorMessage, be);
-            } else if (LogLevel.WARN.is(level)) {
-                // WARNの場合
+                break;
+            case WARN:
                 LOG.warn(errorMessage, be);
+                break;
+            default:
+                break;
             }
         } else {
             // 予期せぬエラー

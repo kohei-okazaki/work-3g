@@ -19,7 +19,18 @@
     <relativePath>../ha-pom</relativePath>
   </parent>
 
+  <properties>
+    <com.amazonaws-version>1.11.748</com.amazonaws-version>
+  </properties>
+
   <dependencies>
+    <!-- AWS SDK -->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-s3</artifactId>
+      <version>${com.amazonaws-version}</version>
+    </dependency>
+
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
