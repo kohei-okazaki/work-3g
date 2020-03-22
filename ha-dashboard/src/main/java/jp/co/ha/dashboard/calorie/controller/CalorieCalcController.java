@@ -29,66 +29,67 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("caloriecalc")
 public class CalorieCalcController implements BaseWebController {
 
-	/** カロリー計算サービス */
-	@Autowired
-	private CalorieCalcService calorieCalcService;
+    /** カロリー計算サービス */
+    @Autowired
+    private CalorieCalcService calorieCalcService;
 
-	/**
-	 * Formを返す
-	 *
-	 * @return CalorieCalcForm
-	 */
-	@ModelAttribute("calorieCalcForm")
-	public CalorieCalcForm setUpForm() {
-		CalorieCalcForm form = new CalorieCalcForm();
-		form.setGender(GenderType.MALE.getValue());
-		return form;
-	}
+    /**
+     * Formを返す
+     *
+     * @return CalorieCalcForm
+     */
+    @ModelAttribute("calorieCalcForm")
+    public CalorieCalcForm setUpForm() {
+        CalorieCalcForm form = new CalorieCalcForm();
+        form.setGender(GenderType.MALE.getValue());
+        return form;
+    }
 
-	/**
-	 * カロリー計算前画面
-	 *
-	 * @param model
-	 *     Model
-	 *
-	 * @return カロリー計算画面
-	 */
-	@GetMapping(value = "/index")
-	public String index(Model model) {
-		return getView(DashboardView.CALORIE_CALC);
-	}
+    /**
+     * カロリー計算前画面
+     *
+     * @param model
+     *     Model
+     *
+     * @return カロリー計算画面
+     */
+    @GetMapping(value = "/index")
+    public String index(Model model) {
+        return getView(DashboardView.CALORIE_CALC);
+    }
 
-	/**
-	 * カロリー計算後画面
-	 *
-	 * @param model
-	 *     Model
-	 * @param form
-	 *     カロリー計算画面フォーム
-	 * @param result
-	 *     妥当性チェック結果
-	 * @return カロリー計算後画面
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@PostMapping(value = "/index")
-	public String calc(Model model, @Valid CalorieCalcForm form, BindingResult result) throws BaseException {
+    /**
+     * カロリー計算後画面
+     *
+     * @param model
+     *     Model
+     * @param form
+     *     カロリー計算画面フォーム
+     * @param result
+     *     妥当性チェック結果
+     * @return カロリー計算後画面
+     * @throws BaseException
+     *     基底例外
+     */
+    @PostMapping(value = "/index")
+    public String calc(Model model, @Valid CalorieCalcForm form, BindingResult result)
+            throws BaseException {
 
-		if (result.hasErrors()) {
-			return getView(DashboardView.CALORIE_CALC);
-		}
+        if (result.hasErrors()) {
+            return getView(DashboardView.CALORIE_CALC);
+        }
 
-		// DTOに変換
-		CalorieCalcDto dto = new CalorieCalcDto();
-		BeanUtil.copy(form, dto, (src, dest) -> {
-			CalorieCalcForm srcForm = (CalorieCalcForm) src;
-			CalorieCalcDto destDto = (CalorieCalcDto) dest;
-			destDto.setGenderType(GenderType.of(srcForm.getGender()));
-		});
+        // DTOに変換
+        CalorieCalcDto dto = new CalorieCalcDto();
+        BeanUtil.copy(form, dto, (src, dest) -> {
+            CalorieCalcForm srcForm = (CalorieCalcForm) src;
+            CalorieCalcDto destDto = (CalorieCalcDto) dest;
+            destDto.setGenderType(GenderType.of(srcForm.getGender()));
+        });
 
-		CalorieCalcDto calcResult = calorieCalcService.calc(dto);
-		model.addAttribute("calcResult", calcResult);
+        CalorieCalcDto calcResult = calorieCalcService.calc(dto);
+        model.addAttribute("calcResult", calcResult);
 
-		return getView(DashboardView.CALORIE_CALC);
-	}
+        return getView(DashboardView.CALORIE_CALC);
+    }
 }

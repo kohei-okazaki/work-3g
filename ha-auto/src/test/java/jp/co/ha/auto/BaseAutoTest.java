@@ -12,27 +12,27 @@ import junit.framework.TestCase;
  */
 public abstract class BaseAutoTest extends TestCase {
 
-	/** LOG */
-	protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
-	/** 自動テストの設定ファイル保持情報 */
-	protected AutoTestConfig conf;
+    /** LOG */
+    protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    /** 自動テストの設定ファイル保持情報 */
+    protected AutoTestConfig conf;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		LOG.info("#setUp");
-		this.conf = new AutoTestCommonExecuter().execute();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void setUp() throws Exception {
+        LOG.info("#setUp");
+        this.conf = new AutoTestCommonExecuter().execute();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		LOG.info("#tearDown");
-		// driver.quit();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void tearDown() throws Exception {
+        LOG.info("#tearDown");
+        // driver.quit();
+    }
 
 }

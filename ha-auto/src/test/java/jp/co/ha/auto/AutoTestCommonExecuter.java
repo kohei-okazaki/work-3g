@@ -22,109 +22,111 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public class AutoTestCommonExecuter {
 
-	/** LOG */
-	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+    /** LOG */
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
-	/**
-	 * 共通処理を行う
-	 *
-	 * @return 共通処理設定情報
-	 * @throws SystemException
-	 *     設定ファイルの読み込みに失敗
-	 */
-	public AutoTestConfig execute() throws SystemException {
+    /**
+     * 共通処理を行う
+     *
+     * @return 共通処理設定情報
+     * @throws SystemException
+     *     設定ファイルの読み込みに失敗
+     */
+    public AutoTestConfig execute() throws SystemException {
 
-		AutoProperties prop = read().orElseThrow(
-				() -> new SystemException(CommonErrorCode.FILE_READING_ERROR, "auto.propertiesの読み込みに失敗しました"));
+        AutoProperties prop = read().orElseThrow(
+                () -> new SystemException(CommonErrorCode.FILE_READING_ERROR,
+                        "auto.propertiesの読み込みに失敗しました"));
 
-		AutoTestConfig conf = new AutoTestConfig();
-		switch (BrowserType.of(prop.getBrowser())) {
-		case IE:
-			System.setProperty("webdriver.chrome.driver", prop.getIeDriverPath());
-			conf.setDriver(new InternetExplorerDriver());
-			break;
-		case CHROME:
-			System.setProperty("webdriver.chrome.driver", prop.getChromeDriverPath());
-			conf.setDriver(new ChromeDriver());
-			break;
-		case FIRE_FOX:
-			System.setProperty("webdriver.chrome.driver", prop.getFireFoxDriverPath());
-			conf.setDriver(new FirefoxDriver());
-			break;
-		case SAFARI:
-			System.setProperty("webdriver.chrome.driver", prop.getFireFoxDriverPath());
-			conf.setDriver(new SafariDriver());
-			break;
-		}
+        AutoTestConfig conf = new AutoTestConfig();
+        switch (BrowserType.of(prop.getBrowser())) {
+        case IE:
+            System.setProperty("webdriver.chrome.driver", prop.getIeDriverPath());
+            conf.setDriver(new InternetExplorerDriver());
+            break;
+        case CHROME:
+            System.setProperty("webdriver.chrome.driver", prop.getChromeDriverPath());
+            conf.setDriver(new ChromeDriver());
+            break;
+        case FIRE_FOX:
+            System.setProperty("webdriver.chrome.driver", prop.getFireFoxDriverPath());
+            conf.setDriver(new FirefoxDriver());
+            break;
+        case SAFARI:
+            System.setProperty("webdriver.chrome.driver", prop.getFireFoxDriverPath());
+            conf.setDriver(new SafariDriver());
+            break;
+        }
 
-		conf.setBaseUrl(prop.getBaseUrl());
+        conf.setBaseUrl(prop.getBaseUrl());
 
-		return conf;
-	}
+        return conf;
+    }
 
-	/**
-	 * 設定ファイルを読み取る
-	 *
-	 * @return 設定ファイル情報
-	 */
-	private Optional<AutoProperties> read() {
-		try {
-			String path = this.getClass().getClassLoader().getResource("").getPath();
-			AutoProperties prop = new PropertyReader().read(path, "auto.properties", AutoProperties.class);
-			return Optional.ofNullable(prop);
-		} catch (BaseException e) {
-			LOG.error("auto.propertiesの読み込みに失敗しました", e);
-			return Optional.empty();
-		}
-	}
+    /**
+     * 設定ファイルを読み取る
+     *
+     * @return 設定ファイル情報
+     */
+    private Optional<AutoProperties> read() {
+        try {
+            String path = this.getClass().getClassLoader().getResource("").getPath();
+            AutoProperties prop = new PropertyReader().read(path, "auto.properties",
+                    AutoProperties.class);
+            return Optional.ofNullable(prop);
+        } catch (BaseException e) {
+            LOG.error("auto.propertiesの読み込みに失敗しました", e);
+            return Optional.empty();
+        }
+    }
 
-	/**
-	 * ブラウザ種別の列挙
-	 *
-	 * @since 1.0
-	 */
-	public static enum BrowserType implements BaseEnum {
+    /**
+     * ブラウザ種別の列挙
+     *
+     * @since 1.0
+     */
+    public static enum BrowserType implements BaseEnum {
 
-		/** IE */
-		IE("Internet Explore"),
-		/** CHROME */
-		CHROME("google chrome"),
-		/** FIRE_FOX */
-		FIRE_FOX("fire fox"),
-		/** SAFARI */
-		SAFARI("safari");
+        /** IE */
+        IE("Internet Explore"),
+        /** CHROME */
+        CHROME("google chrome"),
+        /** FIRE_FOX */
+        FIRE_FOX("fire fox"),
+        /** SAFARI */
+        SAFARI("safari");
 
-		/** 値 */
-		private String value;
+        /** 値 */
+        private String value;
 
-		/**
-		 * コンストラクタ
-		 *
-		 * @param value
-		 *     値
-		 */
-		private BrowserType(String value) {
-			this.value = value;
-		}
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private BrowserType(String value) {
+            this.value = value;
+        }
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getValue() {
-			return this.value;
-		}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getValue() {
+            return this.value;
+        }
 
-		/**
-		 * 指定された値からブラウザ種別の列挙を返す
-		 *
-		 * @param value
-		 *     値
-		 * @return ブラウザ種別の列挙
-		 */
-		public static BrowserType of(String value) {
-			return BaseEnum.of(BrowserType.class, value);
-		}
-	}
+        /**
+         * 指定された値からブラウザ種別の列挙を返す
+         *
+         * @param value
+         *     値
+         * @return ブラウザ種別の列挙
+         */
+        public static BrowserType of(String value) {
+            return BaseEnum.of(BrowserType.class, value);
+        }
+    }
 
 }

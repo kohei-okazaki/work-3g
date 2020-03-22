@@ -10,17 +10,18 @@ import jp.co.ha.web.type.ResultType;
 
 /**
  * JSONのAPIの結果コードのシリアライズクラス
- * 
+ *
  * @since 1.0
  */
 public class ResultTypeSerializer extends JsonSerializer<ResultType> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void serialize(ResultType resultType, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-		gen.writeString(resultType.getValue());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void serialize(ResultType resultType, JsonGenerator gen,
+            SerializerProvider serializers) throws IOException {
+        gen.writeString(resultType.getValue());
+    }
 
 }

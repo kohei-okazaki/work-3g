@@ -14,19 +14,20 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
  * @since 1.0
  */
 @Service
-public class HealthInfoFileSettingDeleteServiceImpl implements HealthInfoFileSettingDeleteService {
+public class HealthInfoFileSettingDeleteServiceImpl
+        implements HealthInfoFileSettingDeleteService {
 
-	/** HealthInfoFileSettingMapper */
-	@Autowired
-	private HealthInfoFileSettingMapper mapper;
+    /** HealthInfoFileSettingMapper */
+    @Autowired
+    private HealthInfoFileSettingMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Delete
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void deleteByUserId(String userId) {
-		mapper.deleteByPrimaryKey(userId);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Delete
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByUserId(String userId) {
+        mapper.deleteByPrimaryKey(userId);
+    }
 }

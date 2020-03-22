@@ -17,17 +17,18 @@ import jp.co.ha.db.mapper.AccountMapper;
 @Service
 public class AccountUpdateServiceImpl implements AccountUpdateService {
 
-	/** AccountMapper */
-	@Autowired
-	private AccountMapper mapper;
+    /** AccountMapper */
+    @Autowired
+    private AccountMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Update
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void update(Account entity) {
-		mapper.updateByPrimaryKey(entity);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Update
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(Account entity) {
+        mapper.updateByPrimaryKey(entity);
+    }
+
 }

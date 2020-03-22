@@ -15,32 +15,33 @@ import jp.co.ha.common.validator.annotation.Min;
  */
 public class MinValidator implements ConstraintValidator<Min, Object> {
 
-	/** 桁数 */
-	private int size;
-	/** 同じ値を含むかどうか */
-	private boolean isEqual;
+    /** 桁数 */
+    private int size;
+    /** 同じ値を含むかどうか */
+    private boolean isEqual;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize(Min annotation) {
-		this.size = annotation.size();
-		this.isEqual = annotation.isEqual();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialize(Min annotation) {
+        this.size = annotation.size();
+        this.isEqual = annotation.isEqual();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isValid(Object value, ConstraintValidatorContext context) {
-		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
-			return true;
-		}
-		if (isEqual) {
-			return this.size <= value.toString().length();
-		} else {
-			return this.size < value.toString().length();
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
+            return true;
+        }
+        if (isEqual) {
+            return this.size <= value.toString().length();
+        } else {
+            return this.size < value.toString().length();
+        }
+    }
+
 }

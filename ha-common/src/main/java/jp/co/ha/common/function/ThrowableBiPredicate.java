@@ -15,16 +15,16 @@ import jp.co.ha.common.exception.BaseException;
 @FunctionalInterface
 public interface ThrowableBiPredicate<T, U> {
 
-	/**
-	 * 関数を実行する
-	 *
-	 * @param t
-	 *     T
-	 * @param u
-	 *     U
-	 * @return 関数実行結果
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	boolean test(T t, U u) throws BaseException;
+    /**
+     * 関数を実行する
+     *
+     * @param t
+     *     T
+     * @param u
+     *     U
+     * @return 関数実行結果
+     * @throws BaseException
+     *     基底例外
+     */
+    boolean test(T t, U u) throws BaseException;
 }

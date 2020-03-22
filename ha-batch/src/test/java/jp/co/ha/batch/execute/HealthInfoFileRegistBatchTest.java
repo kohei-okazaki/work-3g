@@ -12,13 +12,13 @@ import jp.co.ha.batch.invoke.BatchInvoker;
  */
 public class HealthInfoFileRegistBatchTest extends BaseBatchTest {
 
-	/**
-	 * 正常系のテスト
-	 */
-	@Test
-	public void test() {
-		String[] args = new String[] { "HealthInfoFileRegistBatch" };
-		BatchInvoker.invoke(args);
-	}
+    /**
+     * 正常系のテスト
+     */
+    @Test
+    public void test() {
+        String[] args = new String[] { "HealthInfoFileRegistBatch" };
+        BatchInvoker.invoke(args);
+    }
 
 }

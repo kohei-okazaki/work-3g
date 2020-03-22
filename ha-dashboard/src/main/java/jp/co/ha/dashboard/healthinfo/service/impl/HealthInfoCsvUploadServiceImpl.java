@@ -14,20 +14,23 @@ import jp.co.ha.common.type.Charset;
 
 /**
  * 健康情報ファイルアップロードサービス実装クラス
- * 
+ *
  * @since 1.0
  */
 @Service("healthInfoUploadCsv")
-public class HealthInfoCsvUploadServiceImpl implements CsvUploadService<HealthInfoCsvUploadModel> {
+public class HealthInfoCsvUploadServiceImpl
+        implements CsvUploadService<HealthInfoCsvUploadModel> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<HealthInfoCsvUploadModel> upload(MultipartFile uploadFile) throws BaseException {
-		CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
-		List<HealthInfoCsvUploadModel> modelList = reader.readMultipartFile(uploadFile, Charset.UTF_8);
-		return modelList;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<HealthInfoCsvUploadModel> upload(MultipartFile uploadFile)
+            throws BaseException {
+        CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
+        List<HealthInfoCsvUploadModel> modelList = reader.readMultipartFile(uploadFile,
+                Charset.UTF_8);
+        return modelList;
+    }
 
 }

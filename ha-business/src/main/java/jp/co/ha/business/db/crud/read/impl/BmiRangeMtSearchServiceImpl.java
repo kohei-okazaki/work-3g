@@ -25,33 +25,33 @@ import jp.co.ha.db.mapper.BmiRangeMtMapper;
 @CacheConfig(cacheNames = "bmiRangeMt")
 public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 
-	/** BmiRangeMtMapper */
-	@Autowired
-	private BmiRangeMtMapper mapper;
+    /** BmiRangeMtMapper */
+    @Autowired
+    private BmiRangeMtMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public BmiRangeMt findByBmiRangeId(Integer bmiRangeId) {
-		return findAll().stream()
-				.filter(e -> e.getBmiRangeId().equals(bmiRangeId))
-				.findFirst()
-				.orElseThrow(() -> new SystemRuntimeException(CommonErrorCode.DB_NO_DATA,
-						"BMI範囲マスタが存在しません bmiRangeId=" + bmiRangeId));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public BmiRangeMt findByBmiRangeId(Integer bmiRangeId) {
+        return findAll().stream()
+                .filter(e -> e.getBmiRangeId().equals(bmiRangeId))
+                .findFirst()
+                .orElseThrow(() -> new SystemRuntimeException(CommonErrorCode.DB_NO_DATA,
+                        "BMI範囲マスタが存在しません bmiRangeId=" + bmiRangeId));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(key = "'bmiRangeMt/' + #customerNo")
-	public List<BmiRangeMt> findAll() {
-		return mapper.selectByExample(new BmiRangeMtExample());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    @Cacheable(key = "'bmiRangeMt/' + #customerNo")
+    public List<BmiRangeMt> findAll() {
+        return mapper.selectByExample(new BmiRangeMtExample());
+    }
 
 }

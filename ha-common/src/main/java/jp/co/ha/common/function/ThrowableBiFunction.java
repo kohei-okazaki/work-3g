@@ -17,16 +17,16 @@ import jp.co.ha.common.exception.BaseException;
 @FunctionalInterface
 public interface ThrowableBiFunction<T, U, R> {
 
-	/**
-	 * 関数を実行する
-	 *
-	 * @param t
-	 *     T
-	 * @param u
-	 *     U
-	 * @return R
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	R apply(T t, U u) throws BaseException;
+    /**
+     * 関数を実行する
+     *
+     * @param t
+     *     T
+     * @param u
+     *     U
+     * @return R
+     * @throws BaseException
+     *     基底例外
+     */
+    R apply(T t, U u) throws BaseException;
 }

@@ -11,19 +11,20 @@ import jp.co.ha.db.entity.BmiRangeMt;
  */
 public interface BmiRangeMtSearchService {
 
-	/**
-	 * BMI範囲IDからBMI範囲マスタを取得する
-	 *
-	 * @param bmiRangeId
-	 *     BMI範囲ID
-	 * @return BmiRangeMt
-	 */
-	BmiRangeMt findByBmiRangeId(Integer bmiRangeId);
+    /**
+     * BMI範囲IDからBMI範囲マスタを取得する
+     *
+     * @param bmiRangeId
+     *     BMI範囲ID
+     * @return BmiRangeMt
+     */
+    BmiRangeMt findByBmiRangeId(Integer bmiRangeId);
 
-	/**
-	 * BMI範囲マスタを全件取得する
-	 *
-	 * @return BMI範囲マスタリスト
-	 */
-	List<BmiRangeMt> findAll();
+    /**
+     * BMI範囲マスタを全件取得する
+     *
+     * @return BMI範囲マスタリスト
+     */
+    List<BmiRangeMt> findAll();
+
 }

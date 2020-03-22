@@ -15,20 +15,23 @@ import jp.co.ha.common.type.Charset;
 @Component("base64EncodeAndDecoder")
 public class Base64EncodeAndDecoder implements BaseEncodeAndDecoder {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String encode(String src, Charset charset) throws UnsupportedEncodingException {
-		return Base64.getEncoder().encodeToString(src.getBytes(charset.getValue()));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String encode(String src, Charset charset)
+            throws UnsupportedEncodingException {
+        return Base64.getEncoder().encodeToString(src.getBytes(charset.getValue()));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String decode(String src, Charset charset) throws UnsupportedEncodingException {
-		return new String(Base64.getDecoder().decode(src.getBytes(charset.getValue())), charset.getValue());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String decode(String src, Charset charset)
+            throws UnsupportedEncodingException {
+        return new String(Base64.getDecoder().decode(src.getBytes(charset.getValue())),
+                charset.getValue());
+    }
 
 }

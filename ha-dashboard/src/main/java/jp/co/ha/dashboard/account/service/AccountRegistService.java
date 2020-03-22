@@ -10,14 +10,14 @@ import jp.co.ha.common.exception.BaseException;
  */
 public interface AccountRegistService {
 
-	/**
-	 * 登録処理を行う
-	 *
-	 * @param dto
-	 *     アカウントDTO
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	void regist(AccountDto dto) throws BaseException;
+    /**
+     * 登録処理を行う
+     *
+     * @param dto
+     *     アカウントDTO
+     * @throws BaseException
+     *     基底例外
+     */
+    void regist(AccountDto dto) throws BaseException;
 
 }

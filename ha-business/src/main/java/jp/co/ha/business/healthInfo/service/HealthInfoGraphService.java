@@ -13,14 +13,14 @@ import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
  */
 public interface HealthInfoGraphService {
 
-	/**
-	 * 健康情報グラフを作成する
-	 *
-	 * @param model
-	 *     Model
-	 * @param supplier
-	 *     健康情報グラフへの変換Supplier。呼び出し元で健康情報グラフのインスタンスを返すSupplier処理を実装する
-	 */
-	void putGraph(Model model, Supplier<HealthInfoGraphModel> supplier);
+    /**
+     * 健康情報グラフを作成する
+     *
+     * @param model
+     *     Model
+     * @param supplier
+     *     健康情報グラフへの変換Supplier。呼び出し元で健康情報グラフのインスタンスを返すSupplier処理を実装する
+     */
+    void putGraph(Model model, Supplier<HealthInfoGraphModel> supplier);
 
 }

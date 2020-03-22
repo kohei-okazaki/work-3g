@@ -25,12 +25,12 @@ import jp.co.ha.common.validator.FlagValidator;
 @Constraint(validatedBy = FlagValidator.class)
 public @interface Flag {
 
-	/** message */
-	String message() default "";
+    /** message */
+    String message() default "";
 
-	/** groups */
-	Class<?>[] groups() default {};
+    /** groups */
+    Class<?>[] groups() default {};
 
-	/** payload */
-	Class<? extends Payload>[] payload() default {};
+    /** payload */
+    Class<? extends Payload>[] payload() default {};
 }

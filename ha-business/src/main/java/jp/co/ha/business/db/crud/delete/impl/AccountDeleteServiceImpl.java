@@ -16,17 +16,17 @@ import jp.co.ha.db.mapper.AccountMapper;
 @Service
 public class AccountDeleteServiceImpl implements AccountDeleteService {
 
-	/** AccountMapper */
-	@Autowired
-	private AccountMapper mapper;
+    /** AccountMapper */
+    @Autowired
+    private AccountMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Delete
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void deleteByUserId(String userId) {
-		mapper.deleteByPrimaryKey(userId);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Delete
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByUserId(String userId) {
+        mapper.deleteByPrimaryKey(userId);
+    }
 }

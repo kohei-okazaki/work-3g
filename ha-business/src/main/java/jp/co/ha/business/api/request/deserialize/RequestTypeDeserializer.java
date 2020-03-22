@@ -17,13 +17,13 @@ import jp.co.ha.business.api.type.RequestType;
  */
 public class RequestTypeDeserializer extends JsonDeserializer<RequestType> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public RequestType deserialize(JsonParser parser, DeserializationContext context)
-			throws IOException, JsonProcessingException {
-		return RequestType.of(parser.getValueAsString("requestType"));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public RequestType deserialize(JsonParser parser, DeserializationContext context)
+            throws IOException, JsonProcessingException {
+        return RequestType.of(parser.getValueAsString("requestType"));
+    }
 
 }

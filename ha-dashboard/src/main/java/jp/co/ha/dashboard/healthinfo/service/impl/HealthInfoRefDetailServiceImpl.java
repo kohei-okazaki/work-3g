@@ -25,42 +25,45 @@ import jp.co.ha.db.entity.HealthInfo;
 @Service
 public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailService {
 
-	/** 健康情報検索サービス */
-	@Autowired
-	private HealthInfoSearchService healthInfoSearchService;
-	/** BMI範囲マスタ検索サービス */
-	@Autowired
-	private BmiRangeMtSearchService bmiRangeMtSearchService;
+    /** 健康情報検索サービス */
+    @Autowired
+    private HealthInfoSearchService healthInfoSearchService;
+    /** BMI範囲マスタ検索サービス */
+    @Autowired
+    private BmiRangeMtSearchService bmiRangeMtSearchService;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public HealthInfoRefDetailDto getHealthInfoRefDetailDto(HealthInfoRefDetailDto dto) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HealthInfoRefDetailDto getHealthInfoRefDetailDto(HealthInfoRefDetailDto dto) {
 
-		// 健康情報を検索
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(dto.getHealthInfoId(),
-				dto.getUserId());
+        // 健康情報を検索
+        List<HealthInfo> healthInfoList = healthInfoSearchService
+                .findByHealthInfoIdAndUserId(dto.getHealthInfoId(), dto.getUserId());
 
-		return healthInfoList.stream().map(e -> {
+        return healthInfoList.stream().map(e -> {
 
-			HealthInfoRefDetailDto detailDto = new HealthInfoRefDetailDto();
-			BeanUtil.copy(dto, detailDto);
-			BeanUtil.copy(e, detailDto, (src, dest) -> {
-				HealthInfo srcEntity = (HealthInfo) src;
-				HealthInfoRefDetailDto destDto = (HealthInfoRefDetailDto) dest;
+            HealthInfoRefDetailDto detailDto = new HealthInfoRefDetailDto();
+            BeanUtil.copy(dto, detailDto);
+            BeanUtil.copy(e, detailDto, (src, dest) -> {
+                HealthInfo srcEntity = (HealthInfo) src;
+                HealthInfoRefDetailDto destDto = (HealthInfoRefDetailDto) dest;
 
-				// 健康情報ステータスメッセージ
-				destDto.setHealthInfoStatusMessage(HealthInfoStatus.of(srcEntity.getHealthInfoStatus()).getMessage());
-				// 健康情報作成日時
-				destDto.setHealthInfoRegDate(
-						DateUtil.toString(srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-				// 肥満度メッセージ
-				BmiRangeMt mt = bmiRangeMtSearchService.findByBmiRangeId(srcEntity.getBmiRangeId());
-				destDto.setOverweightMessage(mt.getOverWeightStatus());
-			});
-			return detailDto;
-		}).collect(Collectors.toList()).get(0);
-	}
+                // 健康情報ステータスメッセージ
+                destDto.setHealthInfoStatusMessage(HealthInfoStatus
+                        .of(srcEntity.getHealthInfoStatus()).getMessage());
+                // 健康情報作成日時
+                destDto.setHealthInfoRegDate(
+                        DateUtil.toString(srcEntity.getHealthInfoRegDate(),
+                                DateFormatType.YYYYMMDD_HHMMSS));
+                // 肥満度メッセージ
+                BmiRangeMt mt = bmiRangeMtSearchService
+                        .findByBmiRangeId(srcEntity.getBmiRangeId());
+                destDto.setOverweightMessage(mt.getOverWeightStatus());
+            });
+            return detailDto;
+        }).collect(Collectors.toList()).get(0);
+    }
 
 }

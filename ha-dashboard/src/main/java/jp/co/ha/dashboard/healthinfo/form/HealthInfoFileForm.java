@@ -16,49 +16,49 @@ import jp.co.ha.web.form.BaseForm;
  */
 public class HealthInfoFileForm implements BaseForm {
 
-	/** アップロードファイル */
-	@Ignore
-	@Required(message = "アップロードファイルが未入力です")
-	private MultipartFile multipartFile;
-	/** 健康情報ファイルモデルリスト */
-	private List<HealthInfoCsvUploadModel> modelList;
+    /** アップロードファイル */
+    @Ignore
+    @Required(message = "アップロードファイルが未入力です")
+    private MultipartFile multipartFile;
+    /** 健康情報ファイルモデルリスト */
+    private List<HealthInfoCsvUploadModel> modelList;
 
-	/**
-	 * multipartFileを返す
-	 *
-	 * @return multipartFile
-	 */
-	public MultipartFile getMultipartFile() {
-		return multipartFile;
-	}
+    /**
+     * multipartFileを返す
+     *
+     * @return multipartFile
+     */
+    public MultipartFile getMultipartFile() {
+        return multipartFile;
+    }
 
-	/**
-	 * multipartFileを設定する
-	 *
-	 * @param multipartFile
-	 *     アップロードファイル
-	 */
-	public void setMultipartFile(MultipartFile multipartFile) {
-		this.multipartFile = multipartFile;
-	}
+    /**
+     * multipartFileを設定する
+     *
+     * @param multipartFile
+     *     アップロードファイル
+     */
+    public void setMultipartFile(MultipartFile multipartFile) {
+        this.multipartFile = multipartFile;
+    }
 
-	/**
-	 * modelListを返す
-	 *
-	 * @return modelList
-	 */
-	public List<HealthInfoCsvUploadModel> getModelList() {
-		return modelList;
-	}
+    /**
+     * modelListを返す
+     *
+     * @return modelList
+     */
+    public List<HealthInfoCsvUploadModel> getModelList() {
+        return modelList;
+    }
 
-	/**
-	 * modelListを設定する
-	 *
-	 * @param modelList
-	 *     健康情報モデルリスト
-	 */
-	public void setModelList(List<HealthInfoCsvUploadModel> modelList) {
-		this.modelList = modelList;
-	}
+    /**
+     * modelListを設定する
+     *
+     * @param modelList
+     *     健康情報モデルリスト
+     */
+    public void setModelList(List<HealthInfoCsvUploadModel> modelList) {
+        this.modelList = modelList;
+    }
 
 }

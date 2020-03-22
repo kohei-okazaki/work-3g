@@ -1,39 +1,90 @@
 package jp.co.ha.tool.source;
 
-import jp.co.ha.tool.type.AccessType;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import jp.co.ha.tool.source.type.AccessType;
 
 /**
- * Method
+ * 自動生成JavaソースのMethodクラス
  *
- * @param <T>
- *     任意の型
  * @since 1.0
  */
-public abstract class Method<T> {
+public abstract class Method {
 
-	/** 当メソッドのフィールド情報 */
-	protected Field<T> field;
-	/** メソッドのアクセスタイプ */
-	protected AccessType accessType;
+    /** 当メソッドのフィールド情報 */
+    protected Field field;
+    /** メソッドのアクセスタイプ */
+    protected AccessType accessType;
+    /** AnnotationMap */
+    protected Map<Class<?>, String> annotationMap = new LinkedHashMap<>();
+    /** 戻り値 */
+    protected Class<?> returnType;
+    /** 抽象メソッドかどうか */
+    protected boolean isAbstract;
+    /** 引数情報 */
+    protected Signature signature;
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param field
-	 *     当メソッドのフィールド情報
-	 * @param accessType
-	 *     メソッドのアクセスタイプ
-	 */
-	public Method(Field<T> field, AccessType accessType) {
-		this.field = field;
-		this.accessType = accessType;
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param field
+     *     当メソッドのフィールド情報
+     * @param accessType
+     *     メソッドのアクセスタイプ
+     */
+    public Method(Field field, AccessType accessType) {
+        this.field = field;
+        this.accessType = accessType;
+    }
 
-	/**
-	 * メソッド名を返す
-	 *
-	 * @return メソッド名
-	 */
-	protected abstract String getMethodName();
+    /**
+     * メソッド名を返す
+     *
+     * @return メソッド名
+     */
+    protected abstract String getMethodName();
+
+    /**
+     * annotationを追加する
+     *
+     * @param clazz
+     *     クラス型
+     * @param option
+     *     追加オプション
+     */
+    public void addAnnotation(Class<?> clazz, String option) {
+        this.annotationMap.put(clazz, option);
+    }
+
+    /**
+     * returnTypeを設定する
+     *
+     * @param returnType
+     *     returnType
+     */
+    public void setReturnType(Class<?> returnType) {
+        this.returnType = returnType;
+    }
+
+    /**
+     * isAbstractを設定する
+     *
+     * @param isAbstract
+     *     isAbstract
+     */
+    public void setAbstract(boolean isAbstract) {
+        this.isAbstract = isAbstract;
+    }
+
+    /**
+     * signatureを設定する
+     *
+     * @param signature
+     *     signature
+     */
+    public void setSignature(Signature signature) {
+        this.signature = signature;
+    }
 
 }

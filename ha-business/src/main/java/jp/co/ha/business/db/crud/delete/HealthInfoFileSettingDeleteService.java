@@ -7,11 +7,11 @@ package jp.co.ha.business.db.crud.delete;
  */
 public interface HealthInfoFileSettingDeleteService {
 
-	/**
-	 * 指定したユーザIDの健康情報ファイル設定を削除する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 */
-	void deleteByUserId(String userId);
+    /**
+     * 指定したユーザIDの健康情報ファイル設定を削除する
+     *
+     * @param userId
+     *     ユーザID
+     */
+    void deleteByUserId(String userId);
 }

@@ -13,31 +13,33 @@ import jp.co.ha.common.system.BeanLoader;
 
 /**
  * 基底dbテストクラス
- * 
+ *
  * @since 1.0
  */
-@ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml" })
+@ContextConfiguration(locations = { "classpath:common-context.xml",
+        "classpath:db-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BaseDbTest {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(BaseDbTest.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(BaseDbTest.class);
 
-	/**
-	 * before
-	 */
-	@Before
-	public void before() {
-		LOG.debug("BaseDbTest#before");
-		BeanLoader.setContext(new ClassPathXmlApplicationContext(
-				new String[] { "classpath:common-context.xml", "classpath:db-context.xml" }));
-	}
+    /**
+     * before
+     */
+    @Before
+    public void before() {
+        LOG.debug("BaseDbTest#before");
+        BeanLoader.setContext(new ClassPathXmlApplicationContext(
+                new String[] { "classpath:common-context.xml",
+                        "classpath:db-context.xml" }));
+    }
 
-	/**
-	 * after
-	 */
-	@After
-	public void after() {
-		LOG.debug("BaseDbTest#after");
-	}
+    /**
+     * after
+     */
+    @After
+    public void after() {
+        LOG.debug("BaseDbTest#after");
+    }
 }

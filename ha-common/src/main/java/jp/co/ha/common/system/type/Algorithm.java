@@ -9,41 +9,41 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public enum Algorithm implements BaseEnum {
 
-	/** AES */
-	AES("AES"),
-	/** SHA-256 */
-	SHA_256("SHA-256"),
-	/** SHA-512 */
-	SHA_512("SHA-512");
+    /** AES */
+    AES("AES"),
+    /** SHA-256 */
+    SHA_256("SHA-256"),
+    /** SHA-512 */
+    SHA_512("SHA-512");
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param value
-	 *     値
-	 */
-	private Algorithm(String value) {
-		this.value = value;
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param value
+     *     値
+     */
+    private Algorithm(String value) {
+        this.value = value;
+    }
 
-	/** 値 */
-	private String value;
+    /** 値 */
+    private String value;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getValue() {
-		return this.value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue() {
+        return this.value;
+    }
 
-	/**
-	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value
-	 *     値
-	 * @return Algorithm
-	 */
-	public static Algorithm of(String value) {
-		return BaseEnum.of(Algorithm.class, value);
-	}
+    /**
+     * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+     * @param value
+     *     値
+     * @return Algorithm
+     */
+    public static Algorithm of(String value) {
+        return BaseEnum.of(Algorithm.class, value);
+    }
 }

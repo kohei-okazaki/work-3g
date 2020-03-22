@@ -12,18 +12,18 @@ import jp.co.ha.business.api.type.TestMode;
 /**
  * JSONのテストモード種別のデシリアライズクラス<br>
  * 文字列型のJSONをJavaのクラスに変換する
- * 
+ *
  * @since 1.0
  */
 public class TestModeDeserializer extends JsonDeserializer<TestMode> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public TestMode deserialize(JsonParser parser, DeserializationContext ctxt)
-			throws IOException, JsonProcessingException {
-		return TestMode.of(parser.getValueAsString("testMode"));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TestMode deserialize(JsonParser parser, DeserializationContext ctxt)
+            throws IOException, JsonProcessingException {
+        return TestMode.of(parser.getValueAsString("testMode"));
+    }
 
 }

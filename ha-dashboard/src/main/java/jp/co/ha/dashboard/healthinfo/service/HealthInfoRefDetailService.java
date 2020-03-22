@@ -9,12 +9,13 @@ import jp.co.ha.business.dto.HealthInfoRefDetailDto;
  */
 public interface HealthInfoRefDetailService {
 
-	/**
-	 * 健康情報照会詳細Dtoを返す
-	 *
-	 * @param dto
-	 *     健康情報照会詳細Dto
-	 * @return 健康情報照会詳細Dto
-	 */
-	HealthInfoRefDetailDto getHealthInfoRefDetailDto(HealthInfoRefDetailDto dto);
+    /**
+     * 健康情報照会詳細Dtoを返す
+     *
+     * @param dto
+     *     健康情報照会詳細Dto
+     * @return 健康情報照会詳細Dto
+     */
+    HealthInfoRefDetailDto getHealthInfoRefDetailDto(HealthInfoRefDetailDto dto);
+
 }

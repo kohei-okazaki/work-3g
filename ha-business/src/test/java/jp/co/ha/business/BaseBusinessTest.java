@@ -13,33 +13,34 @@ import jp.co.ha.common.system.BeanLoader;
 
 /**
  * 基底Businessテストクラス
- * 
+ *
  * @since 1.0
  */
-@ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml",
-		"classpath:web-context.xml", "classpath:business-context.xml" })
+@ContextConfiguration(locations = { "classpath:common-context.xml",
+        "classpath:db-context.xml", "classpath:web-context.xml",
+        "classpath:business-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BaseBusinessTest {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(BaseBusinessTest.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(BaseBusinessTest.class);
 
-	/**
-	 * before
-	 */
-	@Before
-	public void before() {
-		LOG.debug("BaseBusinessTest#before");
-		BeanLoader.setContext(new ClassPathXmlApplicationContext(
-				new String[] { "classpath:common-context.xml", "classpath:db-context.xml", "classpath:web-context.xml",
-						"classpath:business-context.xml" }));
-	}
+    /**
+     * before
+     */
+    @Before
+    public void before() {
+        LOG.debug("BaseBusinessTest#before");
+        BeanLoader.setContext(new ClassPathXmlApplicationContext(
+                new String[] { "classpath:common-context.xml", "classpath:db-context.xml",
+                        "classpath:web-context.xml", "classpath:business-context.xml" }));
+    }
 
-	/**
-	 * after
-	 */
-	@After
-	public void after() {
-		LOG.debug("BaseBusinessTest#after");
-	}
+    /**
+     * after
+     */
+    @After
+    public void after() {
+        LOG.debug("BaseBusinessTest#after");
+    }
 }

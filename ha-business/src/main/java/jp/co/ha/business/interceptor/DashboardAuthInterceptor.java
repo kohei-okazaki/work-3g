@@ -30,111 +30,119 @@ import jp.co.ha.web.interceptor.BaseWebInterceptor;
  */
 public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
-	/** session管理サービス */
-	@Autowired
-	private SessionManageService sessionService;
-	/** SHA-256 ハッシュ値生成 */
-	@Sha256
-	@Autowired
-	private HashEncoder encoder;
+    /** session管理サービス */
+    @Autowired
+    private SessionManageService sessionService;
+    /** SHA-256 ハッシュ値生成 */
+    @Sha256
+    @Autowired
+    private HashEncoder encoder;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+            Object handler)
+            throws Exception {
 
-		if (isStaticResource().test(handler)) {
-			// 静的リソースの場合は認証不要
-			return true;
-		}
+        if (isStaticResource().test(handler)) {
+            // 静的リソースの場合は認証不要
+            return true;
+        }
 
-		if (isLoginAuthCheck(handler)) {
-			// ログイン情報のチェック対象の場合
-			sessionService.getValue(request.getSession(), "userId", String.class)
-					.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
-		}
+        if (isLoginAuthCheck(handler)) {
+            // ログイン情報のチェック対象の場合
+            sessionService.getValue(request.getSession(), "userId", String.class)
+                    .orElseThrow(() -> new SystemException(
+                            DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+        }
 
-		if (isCsrfTokenCheck(handler)) {
-			// CSRFトークンチェックを行う
-			String sessionCsrfToken = sessionService.getValue(request.getSession(), "csrfToken", String.class)
-					.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
-			if (StringUtil.isEmpty(sessionCsrfToken)) {
-				throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです");
-			}
-		}
-		return true;
-	}
+        if (isCsrfTokenCheck(handler)) {
+            // CSRFトークンチェックを行う
+            String sessionCsrfToken = sessionService
+                    .getValue(request.getSession(), "csrfToken", String.class)
+                    .orElseThrow(() -> new SystemException(
+                            DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+            if (StringUtil.isEmpty(sessionCsrfToken)) {
+                throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                        "不正リクエストエラーです");
+            }
+        }
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response,
+            Object handler,
+            ModelAndView modelAndView) throws Exception {
 
-		if (isStaticResource().test(handler)) {
-			// 静的リソースの場合は認証不要
-			return;
-		}
+        if (isStaticResource().test(handler)) {
+            // 静的リソースの場合は認証不要
+            return;
+        }
 
-		if (isCsrfTokenCheck(handler)) {
-			// CSRFトークンチェック後、トークンを削除する
-			sessionService.removeValue(request.getSession(), "csrfToken");
-		}
+        if (isCsrfTokenCheck(handler)) {
+            // CSRFトークンチェック後、トークンを削除する
+            sessionService.removeValue(request.getSession(), "csrfToken");
+        }
 
-		if (isCsrfTokenFactory(handler)) {
-			// CSRFトークンを作成する
-			String random = RandomStringUtils.randomAlphabetic(10);
-			String csrfToken = encoder.encode(random, "");
-			sessionService.setValue(request.getSession(), "csrfToken", csrfToken);
-		}
-	}
+        if (isCsrfTokenFactory(handler)) {
+            // CSRFトークンを作成する
+            String random = RandomStringUtils.randomAlphabetic(10);
+            String csrfToken = encoder.encode(random, "");
+            sessionService.setValue(request.getSession(), "csrfToken", csrfToken);
+        }
+    }
 
-	/**
-	 * ログイン情報をチェックするかどうかを返す<br>
-	 * <ul>
-	 * <li>ログイン情報をチェックする場合、true</li>
-	 * <li>ログイン情報をチェックしない場合、false</li>
-	 * </ul>
-	 *
-	 * @param handler
-	 *     ハンドラー
-	 * @return 判定結果
-	 */
-	private boolean isLoginAuthCheck(Object handler) {
-		return !((HandlerMethod) handler).getMethod().isAnnotationPresent(NonAuth.class);
-	}
+    /**
+     * ログイン情報をチェックするかどうかを返す<br>
+     * <ul>
+     * <li>ログイン情報をチェックする場合、true</li>
+     * <li>ログイン情報をチェックしない場合、false</li>
+     * </ul>
+     *
+     * @param handler
+     *     ハンドラー
+     * @return 判定結果
+     */
+    private boolean isLoginAuthCheck(Object handler) {
+        return !((HandlerMethod) handler).getMethod().isAnnotationPresent(NonAuth.class);
+    }
 
-	/**
-	 * CSRFチェックを行うかどうかを返す
-	 *
-	 * @param handler
-	 *     ハンドラー
-	 * @return 判定結果
-	 */
-	private boolean isCsrfTokenCheck(Object handler) {
-		CsrfToken csrfToken = ((HandlerMethod) handler).getMethod().getAnnotation(CsrfToken.class);
-		if (BeanUtil.isNull(csrfToken)) {
-			return false;
-		}
-		return csrfToken.check();
-	}
+    /**
+     * CSRFチェックを行うかどうかを返す
+     *
+     * @param handler
+     *     ハンドラー
+     * @return 判定結果
+     */
+    private boolean isCsrfTokenCheck(Object handler) {
+        CsrfToken csrfToken = ((HandlerMethod) handler).getMethod()
+                .getAnnotation(CsrfToken.class);
+        if (BeanUtil.isNull(csrfToken)) {
+            return false;
+        }
+        return csrfToken.check();
+    }
 
-	/**
-	 * CSRFトークンを作成するかどうかを返す
-	 *
-	 * @param handler
-	 *     ハンドラー
-	 * @return 判定結果
-	 */
-	private boolean isCsrfTokenFactory(Object handler) {
-		CsrfToken csrfToken = ((HandlerMethod) handler).getMethod().getAnnotation(CsrfToken.class);
-		if (BeanUtil.isNull(csrfToken)) {
-			return false;
-		}
-		return csrfToken.factocy();
-	}
+    /**
+     * CSRFトークンを作成するかどうかを返す
+     *
+     * @param handler
+     *     ハンドラー
+     * @return 判定結果
+     */
+    private boolean isCsrfTokenFactory(Object handler) {
+        CsrfToken csrfToken = ((HandlerMethod) handler).getMethod()
+                .getAnnotation(CsrfToken.class);
+        if (BeanUtil.isNull(csrfToken)) {
+            return false;
+        }
+        return csrfToken.factocy();
+    }
 
 }

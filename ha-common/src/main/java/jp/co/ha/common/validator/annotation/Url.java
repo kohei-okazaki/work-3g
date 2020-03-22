@@ -25,12 +25,12 @@ import jp.co.ha.common.validator.UrlValidator;
 @Constraint(validatedBy = UrlValidator.class)
 public @interface Url {
 
-	/** message */
-	String message() default "";
+    /** message */
+    String message() default "";
 
-	/** groups */
-	Class<?>[] groups() default {};
+    /** groups */
+    Class<?>[] groups() default {};
 
-	/** payload */
-	Class<? extends Payload>[] payload() default {};
+    /** payload */
+    Class<? extends Payload>[] payload() default {};
 }

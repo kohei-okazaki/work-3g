@@ -22,40 +22,40 @@ import jp.co.ha.web.type.ResultType;
 @Configuration
 public class JsonConfig {
 
-	/**
-	 * ObjectMapperをBeanに登録
-	 *
-	 * @return ObjectMapper
-	 */
-	@Bean
-	public ObjectMapper jsonObjectMapper() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(getDeserializeModule());
-		mapper.registerModule(getSerializeModule());
-		return mapper;
-	}
+    /**
+     * ObjectMapperをBeanに登録
+     *
+     * @return ObjectMapper
+     */
+    @Bean
+    public ObjectMapper jsonObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(getDeserializeModule());
+        mapper.registerModule(getSerializeModule());
+        return mapper;
+    }
 
-	/**
-	 * JSONデシリアライズするModuleを返す
-	 *
-	 * @return Module
-	 */
-	private Module getDeserializeModule() {
-		SimpleModule module = new SimpleModule();
-		module.addDeserializer(RequestType.class, new RequestTypeDeserializer());
-		module.addDeserializer(TestMode.class, new TestModeDeserializer());
-		return module;
-	}
+    /**
+     * JSONデシリアライズするModuleを返す
+     *
+     * @return Module
+     */
+    private Module getDeserializeModule() {
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(RequestType.class, new RequestTypeDeserializer());
+        module.addDeserializer(TestMode.class, new TestModeDeserializer());
+        return module;
+    }
 
-	/**
-	 * JSONシリアライズするModuleを返す
-	 *
-	 * @return Module
-	 */
-	private Module getSerializeModule() {
-		SimpleModule module = new SimpleModule();
-		module.addSerializer(ResultType.class, new ResultTypeSerializer());
-		return module;
-	}
+    /**
+     * JSONシリアライズするModuleを返す
+     *
+     * @return Module
+     */
+    private Module getSerializeModule() {
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(ResultType.class, new ResultTypeSerializer());
+        return module;
+    }
 
 }

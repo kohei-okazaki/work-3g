@@ -1,13 +1,13 @@
 -- メール情報
-CREATE TABLE MAIL_INFO (
--- ユーザID
-USER_ID VARCHAR(16) NOT NULL PRIMARY KEY comment 'ユーザID',
--- メールアドレス
-MAIL_ADDRESS VARCHAR(108) comment 'メールアドレス',
--- メールパスワード
-MAIL_PASSWORD VARCHAR(44) comment 'メールパスワード',
--- 更新日時
-UPDATE_DATE TIMESTAMP comment '更新日時',
--- 登録日時
-REG_DATE TIMESTAMP comment '登録日時'
+CREATE TABLE IF NOT EXISTS MAIL_INFO (
+  -- ユーザID
+  USER_ID VARCHAR(16) NOT NULL PRIMARY KEY COMMENT 'ユーザID',
+  -- メールアドレス
+  MAIL_ADDRESS VARBINARY(432) NOT NULL COMMENT 'メールアドレス',
+  -- メールパスワード
+  MAIL_PASSWORD VARBINARY(176) NOT NULL COMMENT 'メールパスワード',
+  -- 更新日時
+  UPDATE_DATE TIMESTAMP COMMENT '更新日時',
+  -- 登録日時
+  REG_DATE TIMESTAMP COMMENT '登録日時'
 );

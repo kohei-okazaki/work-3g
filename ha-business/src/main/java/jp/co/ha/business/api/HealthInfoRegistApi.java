@@ -16,28 +16,30 @@ import jp.co.ha.web.api.annotation.ApiExecute;
  * @since 1.0
  */
 @Component
-public class HealthInfoRegistApi implements BaseApi<HealthInfoRegistRequest, HealthInfoRegistResponse> {
+public class HealthInfoRegistApi
+        implements BaseApi<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
-	/** 健康情報登録サービス */
-	@Autowired
-	private HealthInfoRegistService service;
+    /** 健康情報登録サービス */
+    @Autowired
+    private HealthInfoRegistService service;
 
-	/**
-	 * 登録
-	 *
-	 * @param request
-	 *     リクエスト
-	 * @param response
-	 *     レスポンス
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@ApiExecute
-	public void regist(HealthInfoRegistRequest request, HealthInfoRegistResponse response) throws BaseException {
+    /**
+     * 登録
+     *
+     * @param request
+     *     リクエスト
+     * @param response
+     *     レスポンス
+     * @throws BaseException
+     *     基底例外
+     */
+    @ApiExecute
+    public void regist(HealthInfoRegistRequest request, HealthInfoRegistResponse response)
+            throws BaseException {
 
-		service.checkRequest(request);
+        service.checkRequest(request);
 
-		service.execute(request, response);
-	}
+        service.execute(request, response);
+    }
 
 }

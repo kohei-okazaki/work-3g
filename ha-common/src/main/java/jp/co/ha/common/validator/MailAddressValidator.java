@@ -16,14 +16,15 @@ import jp.co.ha.common.validator.annotation.MailAddress;
  */
 public class MailAddressValidator implements ConstraintValidator<MailAddress, Object> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isValid(Object value, ConstraintValidatorContext context) {
-		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
-			return true;
-		}
-		return RegexType.MAIL_ADDRESS.is().test(value.toString());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
+            return true;
+        }
+        return RegexType.MAIL_ADDRESS.is().test(value.toString());
+    }
+
 }

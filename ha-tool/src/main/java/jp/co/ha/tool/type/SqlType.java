@@ -9,43 +9,43 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public enum SqlType implements BaseEnum {
 
-	/** select */
-	SELECT("select"),
-	/** update */
-	UPDATE("update"),
-	/** insert */
-	INSERT("insert"),
-	/** delete */
-	DELETE("delete");
+    /** select */
+    SELECT("select"),
+    /** update */
+    UPDATE("update"),
+    /** insert */
+    INSERT("insert"),
+    /** delete */
+    DELETE("delete");
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param value
-	 *     値
-	 */
-	private SqlType(String value) {
-		this.value = value;
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param value
+     *     値
+     */
+    private SqlType(String value) {
+        this.value = value;
+    }
 
-	/** 値 */
-	private String value;
+    /** 値 */
+    private String value;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getValue() {
-		return this.value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue() {
+        return this.value;
+    }
 
-	/**
-	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value
-	 *     値
-	 * @return SqlType
-	 */
-	public static SqlType of(String value) {
-		return BaseEnum.of(SqlType.class, value);
-	}
+    /**
+     * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+     * @param value
+     *     値
+     * @return SqlType
+     */
+    public static SqlType of(String value) {
+        return BaseEnum.of(SqlType.class, value);
+    }
 }

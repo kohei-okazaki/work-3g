@@ -19,37 +19,40 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
  */
 public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelModel> {
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param conf
-	 *     Excel設定情報
-	 * @param modelList
-	 *     Excel出力モデルリスト
-	 */
-	public HealthInfoExcelBuilder(ExcelConfig conf, List<HealthInfoExcelModel> modelList) {
-		super(conf, modelList);
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param conf
+     *     Excel設定情報
+     * @param modelList
+     *     Excel出力モデルリスト
+     */
+    public HealthInfoExcelBuilder(ExcelConfig conf,
+            List<HealthInfoExcelModel> modelList) {
+        super(conf, modelList);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void writeData(Sheet sheet) {
-		int rowPosition = this.conf.hasHeader() ? 1 : 0;
-		for (int i = 0; i < this.modelList.size(); i++) {
-			HealthInfoExcelModel model = modelList.get(i);
-			Cell cell = getCell(sheet, rowPosition + i, 0);
-			setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getHeight());
-			cell = getCell(sheet, rowPosition + i, 1);
-			setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getWeight());
-			cell = getCell(sheet, rowPosition + i, 2);
-			setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getBmi());
-			cell = getCell(sheet, rowPosition + i, 3);
-			setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight());
-			cell = getCell(sheet, rowPosition + i, 4);
-			setText(cell, DateUtil.toString(model.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void writeData(Sheet sheet) {
+        int rowPosition = this.conf.hasHeader() ? 1 : 0;
+        for (int i = 0; i < this.modelList.size(); i++) {
+            HealthInfoExcelModel model = modelList.get(i);
+            Cell cell = getCell(sheet, rowPosition + i, 0);
+            setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getHeight());
+            cell = getCell(sheet, rowPosition + i, 1);
+            setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getWeight());
+            cell = getCell(sheet, rowPosition + i, 2);
+            setText(cell, this.conf.useMask() ? MaskExecutor.MASK : model.getBmi());
+            cell = getCell(sheet, rowPosition + i, 3);
+            setText(cell,
+                    this.conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight());
+            cell = getCell(sheet, rowPosition + i, 4);
+            setText(cell, DateUtil.toString(model.getHealthInfoRegDate(),
+                    DateFormatType.YYYYMMDD_HHMMSS));
+        }
+    }
 
 }

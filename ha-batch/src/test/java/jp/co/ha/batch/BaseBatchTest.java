@@ -16,31 +16,33 @@ import jp.co.ha.common.system.BeanLoader;
  *
  * @since 1.0
  */
-@ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml",
-		"classpath:web-context.xml", "classpath:business-context.xml", "classpath:batch-context.xml" })
+@ContextConfiguration(locations = { "classpath:common-context.xml",
+        "classpath:db-context.xml", "classpath:web-context.xml",
+        "classpath:business-context.xml", "classpath:batch-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BaseBatchTest {
 
-	/** LOG */
-	protected static final Logger LOG = LoggerFactory.getLogger(BaseBatchTest.class);
+    /** LOG */
+    protected static final Logger LOG = LoggerFactory.getLogger(BaseBatchTest.class);
 
-	/**
-	 * before
-	 */
-	@Before
-	public void before() {
-		LOG.debug("BaseBatchTest#before");
-		BeanLoader.setContext(new ClassPathXmlApplicationContext(
-				new String[] { "classpath:common-context.xml", "classpath:db-context.xml", "classpath:web-context.xml",
-						"classpath:business-context.xml", "classpath:batch.xml" }));
-	}
+    /**
+     * before
+     */
+    @Before
+    public void before() {
+        LOG.debug("BaseBatchTest#before");
+        BeanLoader.setContext(new ClassPathXmlApplicationContext(
+                new String[] { "classpath:common-context.xml", "classpath:db-context.xml",
+                        "classpath:web-context.xml", "classpath:business-context.xml",
+                        "classpath:batch.xml" }));
+    }
 
-	/**
-	 * after
-	 */
-	@After
-	public void after() {
-		LOG.debug("BaseBatchTest#after");
-	}
+    /**
+     * after
+     */
+    @After
+    public void after() {
+        LOG.debug("BaseBatchTest#after");
+    }
 
 }

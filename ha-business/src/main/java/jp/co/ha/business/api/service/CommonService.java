@@ -18,28 +18,29 @@ import jp.co.ha.db.entity.Account;
  */
 public abstract class CommonService {
 
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
+    /** アカウント検索サービス */
+    @Autowired
+    private AccountSearchService accountSearchService;
 
-	/**
-	 * 指定したAPI実行ユーザがAPIを実行できるか判定する<br>
-	 * 指定したユーザIDが存在しない場合、またはAPIキーが一致しない場合エラーとする
-	 *
-	 * @param request
-	 *     リクエスト
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	protected void checkApiUse(CommonApiRequest request) throws BaseException {
+    /**
+     * 指定したAPI実行ユーザがAPIを実行できるか判定する<br>
+     * 指定したユーザIDが存在しない場合、またはAPIキーが一致しない場合エラーとする
+     *
+     * @param request
+     *     リクエスト
+     * @throws BaseException
+     *     基底例外
+     */
+    protected void checkApiUse(CommonApiRequest request) throws BaseException {
 
-		// アカウント情報取得
-		Account account = accountSearchService.findByUserId(request.getUserId())
-				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
-						"アカウント情報が存在しません userId:" + request.getUserId()));
+        // アカウント情報取得
+        Account account = accountSearchService.findByUserId(request.getUserId())
+                .orElseThrow(
+                        () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
+                                "アカウント情報が存在しません userId:" + request.getUserId()));
 
-		if (!account.getApiKey().equals(request.getApiKey())) {
-			throw new ApiException(ApiErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");
-		}
-	}
+        if (!account.getApiKey().equals(request.getApiKey())) {
+            throw new ApiException(ApiErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");
+        }
+    }
 }

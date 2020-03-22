@@ -2,67 +2,59 @@ package jp.co.ha.tool.source;
 
 import java.util.StringJoiner;
 
-import org.apache.commons.lang3.StringUtils;
-
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.tool.type.AccessType;
+import jp.co.ha.tool.source.type.AccessType;
 
 /**
- * Setter
+ * 自動生成JavaソースのSetterクラス
  *
- * @param <T>
- *     任意の型
  * @since 1.0
  */
-public class Setter<T> extends Method<T> {
+public class Setter extends Method {
 
-	/** 接頭語 */
-	private static final String PREFIX = "set";
+    /** 接頭語 */
+    private static final String PREFIX = "set";
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param field
-	 *     Field
-	 */
-	public Setter(Field<T> field) {
-		this(field, AccessType.PUBLIC);
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param field
+     *     Field
+     */
+    public Setter(Field field) {
+        this(field, AccessType.PUBLIC);
+    }
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param field
-	 *     Field
-	 * @param accessType
-	 *     アクセスタイプ
-	 */
-	public Setter(Field<T> field, AccessType accessType) {
-		super(field, accessType);
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param field
+     *     Field
+     * @param accessType
+     *     アクセスタイプ
+     */
+    public Setter(Field field, AccessType accessType) {
+        super(field, accessType);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
+    @Override
+    public String toString() {
 
-		final String TAB = "	";
+        final String TAB = "	";
 
-		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-		body.add(TAB + accessType.getValue() + " void " + getMethodName()
-				+ "(" + field.getClassType().getSimpleName() + " " + field.getName() + ") {");
-		body.add(TAB + TAB + "this." + field.getName() + " = " + field.getName() + ";");
-		body.add(TAB + "}");
+        StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
+        body.add(TAB + accessType.getValue() + " void " + getMethodName() + "("
+                + field.getClassType().getSimpleName() + " " + field.getName()
+                + ") {");
+        body.add(TAB + TAB + "this." + field.getName() + " = " + field.getName()
+                + ";");
+        body.add(TAB + "}");
 
-		return body.toString();
-	}
+        return body.toString();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected String getMethodName() {
-		return PREFIX + StringUtils.capitalize(field.getName());
-	}
+    @Override
+    public String getMethodName() {
+        return PREFIX + StringUtil.capitalize(field.getName());
+    }
 }

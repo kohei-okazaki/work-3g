@@ -19,27 +19,27 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
 @Service
 public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
 
-	/** HealthInfoMapper */
-	@Autowired
-	private HealthInfoMapper mapper;
+    /** HealthInfoMapper */
+    @Autowired
+    private HealthInfoMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Insert
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void create(HealthInfo entity) {
-		mapper.insert(entity);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Insert
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void create(HealthInfo entity) {
+        mapper.insert(entity);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Insert
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void create(List<HealthInfo> entityList) {
-		entityList.stream().forEach(e -> mapper.insert(e));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Insert
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void create(List<HealthInfo> entityList) {
+        entityList.stream().forEach(e -> mapper.insert(e));
+    }
 }

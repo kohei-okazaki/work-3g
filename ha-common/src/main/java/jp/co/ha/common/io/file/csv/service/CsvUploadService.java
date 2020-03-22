@@ -16,15 +16,15 @@ import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
  */
 public interface CsvUploadService<T extends BaseCsvModel> {
 
-	/**
-	 * アップロードファイルを解析し、CSVモデルリストを返す
-	 *
-	 * @param uploadFile
-	 *     アップロードファイル
-	 * @return List<T> CSVアップロードモデルリスト
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	List<T> upload(MultipartFile uploadFile) throws BaseException;
+    /**
+     * アップロードファイルを解析し、CSVモデルリストを返す
+     *
+     * @param uploadFile
+     *     アップロードファイル
+     * @return List<T> CSVアップロードモデルリスト
+     * @throws BaseException
+     *     基底例外
+     */
+    List<T> upload(MultipartFile uploadFile) throws BaseException;
 
 }

@@ -13,30 +13,32 @@ import jp.co.ha.common.system.BeanLoader;
 
 /**
  * commonの基底テストクラス
- * 
+ *
  * @since 1.0
  */
 @ContextConfiguration(locations = { "classpath:common-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BaseCommonTest {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(BaseCommonTest.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(BaseCommonTest.class);
 
-	/**
-	 * before処理
-	 */
-	@Before
-	public void before() {
-		LOG.debug("BaseCommonTest#before");
-		BeanLoader.setContext(new ClassPathXmlApplicationContext(new String[] { "classpath:common-context.xml" }));
-	}
+    /**
+     * before処理
+     */
+    @Before
+    public void before() {
+        LOG.debug("BaseCommonTest#before");
+        BeanLoader.setContext(new ClassPathXmlApplicationContext(
+                new String[] { "classpath:common-context.xml" }));
+    }
 
-	/**
-	 * after処理
-	 */
-	@After
-	public void after() {
-		LOG.debug("BaseCommonTest#after");
-	}
+    /**
+     * after処理
+     */
+    @After
+    public void after() {
+        LOG.debug("BaseCommonTest#after");
+    }
+
 }

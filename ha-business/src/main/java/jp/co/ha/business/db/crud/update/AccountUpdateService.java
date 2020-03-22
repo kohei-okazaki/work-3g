@@ -9,11 +9,12 @@ import jp.co.ha.db.entity.Account;
  */
 public interface AccountUpdateService {
 
-	/**
-	 * 指定したアカウント情報を更新する
-	 *
-	 * @param entity
-	 *     アカウント情報
-	 */
-	void update(Account entity);
+    /**
+     * 指定したアカウント情報を更新する
+     *
+     * @param entity
+     *     アカウント情報
+     */
+    void update(Account entity);
+
 }

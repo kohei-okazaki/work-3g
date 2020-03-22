@@ -11,13 +11,13 @@ import jp.co.ha.db.entity.Account;
  */
 public interface AccountSearchService {
 
-	/**
-	 * ユーザIDからアカウント情報を取得する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @return アカウント情報
-	 */
-	Optional<Account> findByUserId(String userId);
+    /**
+     * ユーザIDからアカウント情報を取得する
+     *
+     * @param userId
+     *     ユーザID
+     * @return アカウント情報
+     */
+    Optional<Account> findByUserId(String userId);
 
 }

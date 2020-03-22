@@ -15,19 +15,20 @@ import jp.co.ha.common.BaseCommonTest;
  */
 public class CaesarCrypterTest extends BaseCommonTest {
 
-	/** Crypter */
-	@Autowired
-	@Qualifier("caesarCrypter")
-	private Crypter crypter;
+    /** Crypter */
+    @Autowired
+    @Qualifier("caesarCrypter")
+    private Crypter crypter;
 
-	/**
-	 * 暗号化復号テスト
-	 */
-	@Test
-	public void cryptTest() {
-		String value = "abcdef";
-		String encryptValue = crypter.encrypt(value);
-		String decryptValue = crypter.decrypt(encryptValue);
-		assertEquals(value, decryptValue);
-	}
+    /**
+     * 暗号化復号テスト
+     */
+    @Test
+    public void cryptTest() {
+        String value = "abcdef";
+        String encryptValue = crypter.encrypt(value);
+        String decryptValue = crypter.decrypt(encryptValue);
+        assertEquals(value, decryptValue);
+    }
+
 }

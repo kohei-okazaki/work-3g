@@ -7,12 +7,11 @@ package jp.co.ha.business.db.crud.delete;
  */
 public interface HealthInfoDeleteService {
 
-	/**
-	 * 指定された健康情報IDの健康情報を削除する
-	 *
-	 * @param healthInfoId
-	 *     健康情報ID
-	 */
-	void deleteByUserId(Integer healthInfoId);
-
+    /**
+     * 指定された健康情報IDの健康情報を削除する
+     *
+     * @param healthInfoId
+     *     健康情報ID
+     */
+    void deleteByUserId(Integer healthInfoId);
 }

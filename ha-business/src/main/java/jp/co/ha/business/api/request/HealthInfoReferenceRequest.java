@@ -15,36 +15,36 @@ import jp.co.ha.common.validator.annotation.Required;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HealthInfoReferenceRequest extends CommonApiRequest {
 
-	/** 健康情報ID */
-	@Required(message = "healthInfoIdが未設定です")
-	@Pattern(regixPattern = RegexType.HALF_NUMBER, message = "healthInfoIdが半角数字でありません")
-	@JsonProperty("healthInfoId")
-	private Integer healthInfoId;
+    /** 健康情報ID */
+    @Required(message = "healthInfoIdが未設定です")
+    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "healthInfoIdが半角数字でありません")
+    @JsonProperty("healthInfoId")
+    private Integer healthInfoId;
 
-	/**
-	 * デフォルトコンストラクタ
-	 */
-	public HealthInfoReferenceRequest() {
-		super();
-	}
+    /**
+     * デフォルトコンストラクタ
+     */
+    public HealthInfoReferenceRequest() {
+        super();
+    }
 
-	/**
-	 * healthInfoIdを返す
-	 *
-	 * @return healthInfoId
-	 */
-	public Integer getHealthInfoId() {
-		return healthInfoId;
-	}
+    /**
+     * healthInfoIdを返す
+     *
+     * @return healthInfoId
+     */
+    public Integer getHealthInfoId() {
+        return healthInfoId;
+    }
 
-	/**
-	 * healthInfoIdを設定する
-	 *
-	 * @param healthInfoId
-	 *     健康情報ID
-	 */
-	public void setHealthInfoId(Integer healthInfoId) {
-		this.healthInfoId = healthInfoId;
-	}
+    /**
+     * healthInfoIdを設定する
+     *
+     * @param healthInfoId
+     *     健康情報ID
+     */
+    public void setHealthInfoId(Integer healthInfoId) {
+        this.healthInfoId = healthInfoId;
+    }
 
 }

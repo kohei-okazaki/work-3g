@@ -17,23 +17,23 @@ import jp.co.ha.dashboard.calorie.service.CalorieCalcService;
 @Service
 public class CalorieCalcServiceImpl implements CalorieCalcService {
 
-	/** 健康情報計算サービス */
-	@Autowired
-	private HealthInfoCalcService healthInfoCalcService;
+    /** 健康情報計算サービス */
+    @Autowired
+    private HealthInfoCalcService healthInfoCalcService;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public CalorieCalcDto calc(CalorieCalcDto dto) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CalorieCalcDto calc(CalorieCalcDto dto) {
 
-		BigDecimal baseMetabolism = healthInfoCalcService.calcBaseMetabolism(dto);
-		dto.setBaseMetabolism(baseMetabolism);
+        BigDecimal baseMetabolism = healthInfoCalcService.calcBaseMetabolism(dto);
+        dto.setBaseMetabolism(baseMetabolism);
 
-		BigDecimal lostCaloriePerDay = healthInfoCalcService.calcLostCaloriePerDay(dto);
-		dto.setLostCaloriePerDay(lostCaloriePerDay);
+        BigDecimal lostCaloriePerDay = healthInfoCalcService.calcLostCaloriePerDay(dto);
+        dto.setLostCaloriePerDay(lostCaloriePerDay);
 
-		return dto;
-	}
+        return dto;
+    }
 
 }

@@ -32,41 +32,42 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(NewsController.class);
-	/** System設定情報 */
-	@Autowired
-	private SystemConfig systemConfig;
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(NewsController.class);
+    /** System設定情報 */
+    @Autowired
+    private SystemConfig systemConfig;
 
-	/**
-	 * お知らせ一覧
-	 *
-	 * @param model
-	 *     Model
-	 * @return お知らせ一覧画面
-	 * @throws BaseException
-	 *     JSONファイルの読み込みに失敗した場合
-	 */
-	@GetMapping("/list")
-	public String list(Model model) throws BaseException {
+    /**
+     * お知らせ一覧
+     *
+     * @param model
+     *     Model
+     * @return お知らせ一覧画面
+     * @throws BaseException
+     *     JSONファイルの読み込みに失敗した場合
+     */
+    @GetMapping("/list")
+    public String list(Model model) throws BaseException {
 
-		String path = new StringJoiner(FileSeparator.SYSTEM.getValue())
-				.add(this.getClass().getClassLoader().getResource("").getPath())
-				.add("META-INF")
-				.add("news.json")
-				.toString();
-		LOG.info(path);
+        String path = new StringJoiner(FileSeparator.SYSTEM.getValue())
+                .add(this.getClass().getClassLoader().getResource("").getPath())
+                .add("META-INF")
+                .add("news.json")
+                .toString();
+        LOG.info(path);
 
-		List<NewsDto> newsList = new JsonReader().read(new File(path), NewsListDto.class).getNewsDtoList();
-		// Indexの降順ソート
-		newsList = newsList.stream()
-				.sorted(Comparator.comparing(NewsDto::getIndex).reversed())
-				.collect(Collectors.toList());
+        List<NewsDto> newsList = new JsonReader().read(new File(path), NewsListDto.class)
+                .getNewsDtoList();
+        // Indexの降順ソート
+        newsList = newsList.stream()
+                .sorted(Comparator.comparing(NewsDto::getIndex).reversed())
+                .collect(Collectors.toList());
 
-		model.addAttribute("newsList", newsList);
-		model.addAttribute("systemConfig", systemConfig);
+        model.addAttribute("newsList", newsList);
+        model.addAttribute("systemConfig", systemConfig);
 
-		return getView(DashboardView.NEWS_LIST);
-	}
+        return getView(DashboardView.NEWS_LIST);
+    }
 
 }

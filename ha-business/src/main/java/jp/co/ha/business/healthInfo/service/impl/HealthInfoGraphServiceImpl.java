@@ -16,19 +16,19 @@ import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 @Service
 public class HealthInfoGraphServiceImpl implements HealthInfoGraphService {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void putGraph(Model model, Supplier<HealthInfoGraphModel> supplier) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void putGraph(Model model, Supplier<HealthInfoGraphModel> supplier) {
 
-		HealthInfoGraphModel graphModel = supplier.get();
+        HealthInfoGraphModel graphModel = supplier.get();
 
-		model.addAttribute("label", graphModel.getHealthInfoRegDateList());
-		model.addAttribute("weight", graphModel.getWeightList());
-		model.addAttribute("bmi", graphModel.getBmiList());
-		model.addAttribute("standardWeight", graphModel.getStandardWeightList());
+        model.addAttribute("label", graphModel.getHealthInfoRegDateList());
+        model.addAttribute("weight", graphModel.getWeightList());
+        model.addAttribute("bmi", graphModel.getBmiList());
+        model.addAttribute("standardWeight", graphModel.getStandardWeightList());
 
-	}
+    }
 
 }

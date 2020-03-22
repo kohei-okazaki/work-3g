@@ -19,61 +19,62 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
  */
 public interface HealthInfoService {
 
-	/**
-	 * Modelに表示用のメッセージを追加する
-	 *
-	 * @param model
-	 *     Model
-	 * @param dto
-	 *     健康情報DTO
-	 * @param lastHealthInfo
-	 *     最後に登録した健康情報
-	 */
-	void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo);
+    /**
+     * Modelに表示用のメッセージを追加する
+     *
+     * @param model
+     *     Model
+     * @param dto
+     *     健康情報DTO
+     * @param lastHealthInfo
+     *     最後に登録した健康情報
+     */
+    void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo);
 
-	/**
-	 * 指定されたユーザIDが初回登録かどうか判定する<br>
-	 * 初回登録の場合true, それ以外の場合falseを返す<br>
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @return 判定結果
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	boolean isFirstReg(String userId) throws BaseException;
+    /**
+     * 指定されたユーザIDが初回登録かどうか判定する<br>
+     * 初回登録の場合true, それ以外の場合falseを返す<br>
+     *
+     * @param userId
+     *     ユーザID
+     * @return 判定結果
+     * @throws BaseException
+     *     基底例外
+     */
+    boolean isFirstReg(String userId) throws BaseException;
 
-	/**
-	 * CSVモデルリストに変換する
-	 *
-	 * @param healthInfoList
-	 *     健康情報リスト
-	 * @return CSVモデルリスト
-	 */
-	List<HealthInfoCsvDownloadModel> toModelList(List<HealthInfo> healthInfoList);
+    /**
+     * CSVモデルリストに変換する
+     *
+     * @param healthInfoList
+     *     健康情報リスト
+     * @return CSVモデルリスト
+     */
+    List<HealthInfoCsvDownloadModel> toModelList(List<HealthInfo> healthInfoList);
 
-	/**
-	 * 健康情報を登録する
-	 *
-	 * @param dto
-	 *     健康情報DTO
-	 * @param userId
-	 *     ユーザID
-	 * @return HealthInfoRegistResponse
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	HealthInfoRegistResponse regist(HealthInfoDto dto, String userId) throws BaseException;
+    /**
+     * 健康情報を登録する
+     *
+     * @param dto
+     *     健康情報DTO
+     * @param userId
+     *     ユーザID
+     * @return HealthInfoRegistResponse
+     * @throws BaseException
+     *     基底例外
+     */
+    HealthInfoRegistResponse regist(HealthInfoDto dto, String userId)
+            throws BaseException;
 
-	/**
-	 * CSV設定情報を取得する
-	 *
-	 * @param entity
-	 *     健康情報ファイル設定
-	 * @return CsvConfig
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException;
+    /**
+     * CSV設定情報を取得する
+     *
+     * @param entity
+     *     健康情報ファイル設定
+     * @return CsvConfig
+     * @throws BaseException
+     *     基底例外
+     */
+    CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException;
 
 }

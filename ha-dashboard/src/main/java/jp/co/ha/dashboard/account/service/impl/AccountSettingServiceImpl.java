@@ -33,131 +33,135 @@ import jp.co.ha.db.entity.MailInfo;
 @Service
 public class AccountSettingServiceImpl implements AccountSettingService {
 
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
-	/** アカウント更新サービス */
-	@Autowired
-	private AccountUpdateService accountUpdateService;
-	/** メール情報検索サービス */
-	@Autowired
-	private MailInfoSearchService mailInfoSearchService;
-	/** メール情報作成サービス */
-	@Autowired
-	private MailInfoCreateService mailInfoCreateService;
-	/** メール情報更新サービス */
-	@Autowired
-	private MailInfoUpdateService mailInfoUpdateService;
-	/** 健康情報ファイル設定検索サービス */
-	@Autowired
-	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-	/** 健康情報ファイル設定更新サービス */
-	@Autowired
-	private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
-	/** トランザクション管理クラス */
-	@Autowired
-	private PlatformTransactionManager transactionManager;
-	/** トランザクションクラス */
-	@Autowired
-	private DefaultTransactionDefinition defaultTransactionDefinition;
+    /** アカウント検索サービス */
+    @Autowired
+    private AccountSearchService accountSearchService;
+    /** アカウント更新サービス */
+    @Autowired
+    private AccountUpdateService accountUpdateService;
+    /** メール情報検索サービス */
+    @Autowired
+    private MailInfoSearchService mailInfoSearchService;
+    /** メール情報作成サービス */
+    @Autowired
+    private MailInfoCreateService mailInfoCreateService;
+    /** メール情報更新サービス */
+    @Autowired
+    private MailInfoUpdateService mailInfoUpdateService;
+    /** 健康情報ファイル設定検索サービス */
+    @Autowired
+    private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+    /** 健康情報ファイル設定更新サービス */
+    @Autowired
+    private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
+    /** トランザクション管理クラス */
+    @Autowired
+    private PlatformTransactionManager transactionManager;
+    /** トランザクションクラス */
+    @Autowired
+    private DefaultTransactionDefinition defaultTransactionDefinition;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void execute(AccountDto dto) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(AccountDto dto) {
 
-		// トランザクション開始
-		TransactionStatus status = transactionManager.getTransaction(defaultTransactionDefinition);
+        // トランザクション開始
+        TransactionStatus status = transactionManager
+                .getTransaction(defaultTransactionDefinition);
 
-		try {
+        try {
 
-			// アカウント情報を検索し、Dtoの内容をマージする
-			Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
-			mergeAccount(dto, befAccount);
-			// アカウント情報を更新する
-			accountUpdateService.update(befAccount);
+            // アカウント情報を検索し、Dtoの内容をマージする
+            Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
+            mergeAccount(dto, befAccount);
+            // アカウント情報を更新する
+            accountUpdateService.update(befAccount);
 
-			// メール情報を検索し、Dtoの内容をマージする
-			Optional<MailInfo> befMailInfo = mailInfoSearchService.findByUserId(dto.getUserId());
-			if (befMailInfo.isPresent()) {
-				// メール情報が登録されている場合
-				mergeMailInfo(dto, befMailInfo.get());
+            // メール情報を検索し、Dtoの内容をマージする
+            Optional<MailInfo> befMailInfo = mailInfoSearchService
+                    .findByUserId(dto.getUserId());
+            if (befMailInfo.isPresent()) {
+                // メール情報が登録されている場合
+                mergeMailInfo(dto, befMailInfo.get());
 
-				// メール情報を更新する
-				mailInfoUpdateService.update(befMailInfo.get());
-			} else {
-				// メール情報が登録されてない場合
-				MailInfo mailInfo = new MailInfo();
+                // メール情報を更新する
+                mailInfoUpdateService.update(befMailInfo.get());
+            } else {
+                // メール情報が登録されてない場合
+                MailInfo mailInfo = new MailInfo();
 
-				mergeMailInfo(dto, mailInfo);
+                mergeMailInfo(dto, mailInfo);
 
-				// メール情報を新規登録する
-				mailInfoCreateService.create(mailInfo);
-			}
+                // メール情報を新規登録する
+                mailInfoCreateService.create(mailInfo);
+            }
 
-			// 健康情報ファイル設定情報を検索し、Dtoの内容をマージする
-			HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-					.findByUserId(dto.getUserId())
-					.get();
-			mergeHealthInfoFileSetting(dto, healthInfoFileSetting);
-			// 健康情報ファイル設定情報を更新する
-			healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
+            // 健康情報ファイル設定情報を検索し、Dtoの内容をマージする
+            HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
+                    .findByUserId(dto.getUserId())
+                    .get();
+            mergeHealthInfoFileSetting(dto, healthInfoFileSetting);
+            // 健康情報ファイル設定情報を更新する
+            healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
 
-			// 正常にDB更新出来た場合、コミット
-			transactionManager.commit(status);
+            // 正常にDB更新出来た場合、コミット
+            transactionManager.commit(status);
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			// 登録処理中にエラーが起きた場合、ロールバック
-			transactionManager.rollback(status);
-			throw e;
-		}
-	}
+            // 登録処理中にエラーが起きた場合、ロールバック
+            transactionManager.rollback(status);
+            throw e;
+        }
+    }
 
-	/**
-	 * アカウントDTOをアカウント情報にマージする
-	 *
-	 * @param dto
-	 *     アカウントDTO
-	 * @param account
-	 *     アカウント情報
-	 */
-	private void mergeAccount(AccountDto dto, Account account) {
+    /**
+     * アカウントDTOをアカウント情報にマージする
+     *
+     * @param dto
+     *     アカウントDTO
+     * @param account
+     *     アカウント情報
+     */
+    private void mergeAccount(AccountDto dto, Account account) {
 
-		BeanUtil.copy(dto, account, Arrays.asList("userId"), (src, dest) -> {
-			AccountDto srcDto = (AccountDto) src;
-			Account destEntity = (Account) dest;
-			destEntity.setPasswordExpire(DateUtil.toDate(srcDto.getPasswordExpire(), DateFormatType.YYYYMMDD));
-		});
+        BeanUtil.copy(dto, account, Arrays.asList("userId"), (src, dest) -> {
+            AccountDto srcDto = (AccountDto) src;
+            Account destEntity = (Account) dest;
+            destEntity.setPasswordExpire(
+                    DateUtil.toDate(srcDto.getPasswordExpire(), DateFormatType.YYYYMMDD));
+        });
 
-	}
+    }
 
-	/**
-	 * アカウントDTOをメール情報にマージする
-	 *
-	 * @param dto
-	 *     アカウントDTO
-	 * @param mailInfo
-	 *     メール情報
-	 */
-	private void mergeMailInfo(AccountDto dto, MailInfo mailInfo) {
+    /**
+     * アカウントDTOをメール情報にマージする
+     *
+     * @param dto
+     *     アカウントDTO
+     * @param mailInfo
+     *     メール情報
+     */
+    private void mergeMailInfo(AccountDto dto, MailInfo mailInfo) {
 
-		BeanUtil.copy(dto, mailInfo);
+        BeanUtil.copy(dto, mailInfo);
 
-	}
+    }
 
-	/**
-	 * アカウントDTOを健康情報ファイル設定情報にマージする
-	 *
-	 * @param dto
-	 *     アカウントDTO
-	 * @param healthInfoFileSetting
-	 *     健康情報ファイル設定情報
-	 */
-	private void mergeHealthInfoFileSetting(AccountDto dto, HealthInfoFileSetting healthInfoFileSetting) {
+    /**
+     * アカウントDTOを健康情報ファイル設定情報にマージする
+     *
+     * @param dto
+     *     アカウントDTO
+     * @param healthInfoFileSetting
+     *     健康情報ファイル設定情報
+     */
+    private void mergeHealthInfoFileSetting(AccountDto dto,
+            HealthInfoFileSetting healthInfoFileSetting) {
 
-		BeanUtil.copy(dto, healthInfoFileSetting, Arrays.asList("userId"));
-	}
+        BeanUtil.copy(dto, healthInfoFileSetting, Arrays.asList("userId"));
+    }
 
 }

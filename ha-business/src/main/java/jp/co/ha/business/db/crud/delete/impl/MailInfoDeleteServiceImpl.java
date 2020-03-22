@@ -16,17 +16,17 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 @Service
 public class MailInfoDeleteServiceImpl implements MailInfoDeleteService {
 
-	/** MailInfoMapper */
-	@Autowired
-	private MailInfoMapper mapper;
+    /** MailInfoMapper */
+    @Autowired
+    private MailInfoMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Delete
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void deleteByUserId(String userId) {
-		mapper.deleteByPrimaryKey(userId);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Delete
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByUserId(String userId) {
+        mapper.deleteByPrimaryKey(userId);
+    }
 }

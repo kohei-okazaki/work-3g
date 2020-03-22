@@ -9,12 +9,12 @@ import jp.co.ha.business.dto.AccountDto;
  */
 public interface AccountSettingService {
 
-	/**
-	 * アカウント設定のメイン処理を行う
-	 *
-	 * @param dto
-	 *     アカウントDTO
-	 */
-	void execute(AccountDto dto);
+    /**
+     * アカウント設定のメイン処理を行う
+     *
+     * @param dto
+     *     アカウントDTO
+     */
+    void execute(AccountDto dto);
 
 }

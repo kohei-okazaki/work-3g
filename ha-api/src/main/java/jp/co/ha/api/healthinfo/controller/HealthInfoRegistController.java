@@ -17,28 +17,30 @@ import jp.co.ha.web.controller.BaseRestController;
  */
 @RestController
 @RequestMapping(value = "/healthinforegist")
-public class HealthInfoRegistController extends BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
+public class HealthInfoRegistController
+        extends BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
-	/** 健康情報登録API */
-	@Autowired
-	private HealthInfoRegistApi api;
+    /** 健康情報登録API */
+    @Autowired
+    private HealthInfoRegistApi api;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public HealthInfoRegistResponse getApiResponse() {
-		return new HealthInfoRegistResponse();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HealthInfoRegistResponse getApiResponse() {
+        return new HealthInfoRegistResponse();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void accept(HealthInfoRegistRequest request, HealthInfoRegistResponse response) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void accept(HealthInfoRegistRequest request, HealthInfoRegistResponse response)
+            throws BaseException {
 
-		api.execute(request, response);
+        api.execute(request, response);
 
-	}
+    }
 
 }

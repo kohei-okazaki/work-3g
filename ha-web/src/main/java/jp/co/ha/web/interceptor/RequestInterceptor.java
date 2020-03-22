@@ -22,48 +22,51 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class RequestInterceptor extends BaseWebInterceptor {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(RequestInterceptor.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(RequestInterceptor.class);
 
-	/** ハッシュ生成関数 */
-	@Autowired
-	@Qualifier("sha256HashEncoder")
-	private HashEncoder hashEncoder;
+    /** ハッシュ生成関数 */
+    @Autowired
+    @Qualifier("sha256HashEncoder")
+    private HashEncoder hashEncoder;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+            Object handler)
+            throws Exception {
 
-		if (isStaticResource().test(handler)) {
-			// 静的リソースの場合は認証不要
-			return true;
-		}
+        if (isStaticResource().test(handler)) {
+            // 静的リソースの場合は認証不要
+            return true;
+        }
 
-		// MDCを設定する
-		MDC.put("id", hashEncoder.encode(DateUtil.getSysDate().toString(), "dummy"));
-		Method method = ((HandlerMethod) handler).getMethod();
-		LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName() + "[URI:"
-				+ request.getRequestURI() + ",METHOD:" + request.getMethod() + "]");
+        // MDCを設定する
+        MDC.put("id", hashEncoder.encode(DateUtil.getSysDate().toString(), "dummy"));
+        Method method = ((HandlerMethod) handler).getMethod();
+        LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
+                + "[URI:"
+                + request.getRequestURI() + ",METHOD:" + request.getMethod() + "]");
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e)
-			throws Exception {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+            Object handler, Exception e)
+            throws Exception {
 
-		if (isStaticResource().test(handler)) {
-			// 静的リソースの場合は認証不要
-			return;
-		}
-		Method method = ((HandlerMethod) handler).getMethod();
-		LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName());
+        if (isStaticResource().test(handler)) {
+            // 静的リソースの場合は認証不要
+            return;
+        }
+        Method method = ((HandlerMethod) handler).getMethod();
+        LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName());
 
-	}
+    }
 }

@@ -37,87 +37,92 @@ import jp.co.ha.web.controller.BaseWizardController;
 @RequestMapping("accountregist")
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(AccountRegistController.class);
-	/** アカウント登録画面サービス */
-	@Autowired
-	private AccountRegistService accountRegistService;
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
-	/** session管理サービス */
-	@Autowired
-	private SessionManageService sessionManagerService;
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(AccountRegistController.class);
+    /** アカウント登録画面サービス */
+    @Autowired
+    private AccountRegistService accountRegistService;
+    /** アカウント検索サービス */
+    @Autowired
+    private AccountSearchService accountSearchService;
+    /** session管理サービス */
+    @Autowired
+    private SessionManageService sessionManagerService;
 
-	/**
-	 * Formを返す
-	 *
-	 * @return AccountRegistForm
-	 */
-	@ModelAttribute("accountRegistForm")
-	public AccountRegistForm setUpForm() {
-		return new AccountRegistForm();
-	}
+    /**
+     * Formを返す
+     *
+     * @return AccountRegistForm
+     */
+    @ModelAttribute("accountRegistForm")
+    public AccountRegistForm setUpForm() {
+        return new AccountRegistForm();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@NonAuth
-	@GetMapping(value = "/input")
-	public String input(Model model, HttpServletRequest request) throws BaseException {
-		return getView(DashboardView.ACCOUNT_REGIST_INPUT);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @NonAuth
+    @GetMapping(value = "/input")
+    public String input(Model model, HttpServletRequest request) throws BaseException {
+        return getView(DashboardView.ACCOUNT_REGIST_INPUT);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@NonAuth
-	@CsrfToken(factocy = true)
-	@PostMapping(value = "/confirm")
-	public String confirm(Model model, @Valid AccountRegistForm form, BindingResult result, HttpServletRequest request)
-			throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @NonAuth
+    @CsrfToken(factocy = true)
+    @PostMapping(value = "/confirm")
+    public String confirm(Model model, @Valid AccountRegistForm form,
+            BindingResult result, HttpServletRequest request)
+            throws BaseException {
 
-		if (result.hasErrors()) {
-			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
-		}
+        if (result.hasErrors()) {
+            return getView(DashboardView.ACCOUNT_REGIST_INPUT);
+        }
 
-		if (accountSearchService.findByUserId(form.getUserId()).isPresent()) {
-			model.addAttribute("errorMessage", "指定されたユーザIDは既にアカウント情報が登録されています");
-			LOG.warn("指定されたユーザIDは既にアカウント情報が登録されています userId:" + form.getUserId());
-			return getView(DashboardView.ACCOUNT_REGIST_INPUT);
-		}
+        if (accountSearchService.findByUserId(form.getUserId()).isPresent()) {
+            model.addAttribute("errorMessage", "指定されたユーザIDは既にアカウント情報が登録されています");
+            LOG.warn("指定されたユーザIDは既にアカウント情報が登録されています userId:" + form.getUserId());
+            return getView(DashboardView.ACCOUNT_REGIST_INPUT);
+        }
 
-		// sessionにアカウント登録Form情報を保持
-		sessionManagerService.setValue(request.getSession(), "accountRegistForm", form);
+        // sessionにアカウント登録Form情報を保持
+        sessionManagerService.setValue(request.getSession(), "accountRegistForm", form);
 
-		return getView(DashboardView.ACCOUNT_REGIST_CONFIRM);
-	}
+        return getView(DashboardView.ACCOUNT_REGIST_CONFIRM);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@NonAuth
-	@CsrfToken(check = true)
-	@PostMapping(value = "/complete")
-	public String complete(Model model, AccountRegistForm form, HttpServletRequest request) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @NonAuth
+    @CsrfToken(check = true)
+    @PostMapping(value = "/complete")
+    public String complete(Model model, AccountRegistForm form,
+            HttpServletRequest request) throws BaseException {
 
-		// sessionよりアカウント登録Form情報を取得
-		AccountRegistForm accountRegistForm = sessionManagerService
-				.getValue(request.getSession(), "accountRegistForm", AccountRegistForm.class)
-				.orElseThrow(() -> new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+        // sessionよりアカウント登録Form情報を取得
+        AccountRegistForm accountRegistForm = sessionManagerService
+                .getValue(request.getSession(), "accountRegistForm",
+                        AccountRegistForm.class)
+                .orElseThrow(() -> new BusinessException(
+                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
-		AccountDto dto = new AccountDto();
-		BeanUtil.copy(accountRegistForm, dto);
+        AccountDto dto = new AccountDto();
+        BeanUtil.copy(accountRegistForm, dto);
 
-		// FormForm情報から登録処理を行う
-		accountRegistService.regist(dto);
+        // FormForm情報から登録処理を行う
+        accountRegistService.regist(dto);
 
-		sessionManagerService.removeValue(request.getSession(), "accountRegistForm");
+        sessionManagerService.removeValue(request.getSession(), "accountRegistForm");
 
-		return getView(DashboardView.ACCOUNT_REGIST_COMPLETE);
-	}
+        return getView(DashboardView.ACCOUNT_REGIST_COMPLETE);
+    }
 
 }

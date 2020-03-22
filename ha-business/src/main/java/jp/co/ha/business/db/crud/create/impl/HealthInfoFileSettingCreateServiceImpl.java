@@ -15,19 +15,20 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
  * @since 1.0
  */
 @Service
-public class HealthInfoFileSettingCreateServiceImpl implements HealthInfoFileSettingCreateService {
+public class HealthInfoFileSettingCreateServiceImpl
+        implements HealthInfoFileSettingCreateService {
 
-	/** HealthInfoFileSettingMapper */
-	@Autowired
-	private HealthInfoFileSettingMapper mapper;
+    /** HealthInfoFileSettingMapper */
+    @Autowired
+    private HealthInfoFileSettingMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Insert
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void create(HealthInfoFileSetting entity) {
-		mapper.insert(entity);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Insert
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void create(HealthInfoFileSetting entity) {
+        mapper.insert(entity);
+    }
 }

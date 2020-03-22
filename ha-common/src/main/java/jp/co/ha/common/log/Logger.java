@@ -9,203 +9,203 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public class Logger {
 
-	/** ロガー */
-	private org.slf4j.Logger logger;
+    /** ロガー */
+    private org.slf4j.Logger logger;
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param logger
-	 *     org.slf4j.Logger
-	 */
-	Logger(org.slf4j.Logger logger) {
-		this.logger = logger;
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param logger
+     *     org.slf4j.Logger
+     */
+    Logger(org.slf4j.Logger logger) {
+        this.logger = logger;
+    }
 
-	/**
-	 * Debugログを出力する
-	 *
-	 * @param bean
-	 *     Bean
-	 */
-	public void debugRes(Object bean) {
-		logger.debug(LogMessageFactory.getLogMessage(bean));
-	}
+    /**
+     * Debugログを出力する
+     *
+     * @param bean
+     *     Bean
+     */
+    public void debugRes(Object bean) {
+        logger.debug(LogMessageFactory.getLogMessage(bean));
+    }
 
-	/**
-	 * Debugログを出力する
-	 *
-	 * @param msg
-	 *     ログメッセージ
-	 */
-	public void debug(String msg) {
-		logger.debug(msg);
-	}
+    /**
+     * Debugログを出力する
+     *
+     * @param msg
+     *     ログメッセージ
+     */
+    public void debug(String msg) {
+        logger.debug(msg);
+    }
 
-	/**
-	 * Debugログを出力する
-	 *
-	 * @param bean
-	 *     Bean
-	 */
-	public void infoRes(Object bean) {
-		logger.info(LogMessageFactory.getLogMessage(bean));
-	}
+    /**
+     * Debugログを出力する
+     *
+     * @param bean
+     *     Bean
+     */
+    public void infoRes(Object bean) {
+        logger.info(LogMessageFactory.getLogMessage(bean));
+    }
 
-	/**
-	 * Infoログを出力する
-	 *
-	 * @param msg
-	 *     ログメッセージ
-	 */
-	public void info(String msg) {
-		logger.info(msg);
-	}
+    /**
+     * Infoログを出力する
+     *
+     * @param msg
+     *     ログメッセージ
+     */
+    public void info(String msg) {
+        logger.info(msg);
+    }
 
-	/**
-	 * Warnログを出力する
-	 *
-	 * @param bean
-	 *     Bean
-	 */
-	public void warnRes(Object bean) {
-		logger.warn(LogMessageFactory.getLogMessage(bean));
-	}
+    /**
+     * Warnログを出力する
+     *
+     * @param bean
+     *     Bean
+     */
+    public void warnRes(Object bean) {
+        logger.warn(LogMessageFactory.getLogMessage(bean));
+    }
 
-	/**
-	 * Warnログを出力する
-	 *
-	 * @param bean
-	 *     Bean
-	 * @param t
-	 *     例外
-	 */
-	public void warnRes(Object bean, Throwable t) {
-		logger.warn(LogMessageFactory.getLogMessage(bean), t);
-	}
+    /**
+     * Warnログを出力する
+     *
+     * @param bean
+     *     Bean
+     * @param t
+     *     例外
+     */
+    public void warnRes(Object bean, Throwable t) {
+        logger.warn(LogMessageFactory.getLogMessage(bean), t);
+    }
 
-	/**
-	 * Warnログを出力する
-	 *
-	 * @param msg
-	 *     ログメッセージ
-	 */
-	public void warn(String msg) {
-		logger.warn(msg);
-	}
+    /**
+     * Warnログを出力する
+     *
+     * @param msg
+     *     ログメッセージ
+     */
+    public void warn(String msg) {
+        logger.warn(msg);
+    }
 
-	/**
-	 * Warnログを出力する
-	 *
-	 * @param msg
-	 *     ログメッセージ
-	 * @param t
-	 *     例外
-	 */
-	public void warn(String msg, Throwable t) {
-		logger.warn(msg, t);
-	}
+    /**
+     * Warnログを出力する
+     *
+     * @param msg
+     *     ログメッセージ
+     * @param t
+     *     例外
+     */
+    public void warn(String msg, Throwable t) {
+        logger.warn(msg, t);
+    }
 
-	/**
-	 * Errorログを出力する
-	 *
-	 * @param bean
-	 *     Bean
-	 */
-	public void errorRes(Object bean) {
-		logger.error(LogMessageFactory.getLogMessage(bean));
-	}
+    /**
+     * Errorログを出力する
+     *
+     * @param bean
+     *     Bean
+     */
+    public void errorRes(Object bean) {
+        logger.error(LogMessageFactory.getLogMessage(bean));
+    }
 
-	/**
-	 * Errorログを出力する
-	 *
-	 * @param bean
-	 *     Bean
-	 * @param t
-	 *     例外
-	 */
-	public void errorRes(Object bean, Throwable t) {
-		logger.error(LogMessageFactory.getLogMessage(bean), t);
-	}
+    /**
+     * Errorログを出力する
+     *
+     * @param bean
+     *     Bean
+     * @param t
+     *     例外
+     */
+    public void errorRes(Object bean, Throwable t) {
+        logger.error(LogMessageFactory.getLogMessage(bean), t);
+    }
 
-	/**
-	 * Errorログを出力する
-	 *
-	 * @param msg
-	 *     ログメッセージ
-	 */
-	public void error(String msg) {
-		logger.error(msg);
-	}
+    /**
+     * Errorログを出力する
+     *
+     * @param msg
+     *     ログメッセージ
+     */
+    public void error(String msg) {
+        logger.error(msg);
+    }
 
-	/**
-	 * Errorログを出力する
-	 *
-	 * @param msg
-	 *     ログメッセージ
-	 * @param t
-	 *     例外
-	 */
-	public void error(String msg, Throwable t) {
-		logger.error(msg, t);
-	}
+    /**
+     * Errorログを出力する
+     *
+     * @param msg
+     *     ログメッセージ
+     * @param t
+     *     例外
+     */
+    public void error(String msg, Throwable t) {
+        logger.error(msg, t);
+    }
 
-	/**
-	 * ログレベルの列挙
-	 *
-	 * @since 1.0
-	 */
-	public static enum LogLevel implements BaseEnum {
+    /**
+     * ログレベルの列挙
+     *
+     * @since 1.0
+     */
+    public static enum LogLevel implements BaseEnum {
 
-		/** DEBUG */
-		DEBUG("DEBUG"),
-		/** INFO */
-		INFO("INFO"),
-		/** WARN */
-		WARN("WARN"),
-		/** ERROR */
-		ERROR("ERROR");
+        /** DEBUG */
+        DEBUG("DEBUG"),
+        /** INFO */
+        INFO("INFO"),
+        /** WARN */
+        WARN("WARN"),
+        /** ERROR */
+        ERROR("ERROR");
 
-		/** 値 */
-		private String value;
+        /** 値 */
+        private String value;
 
-		/**
-		 * コンストラクタ
-		 *
-		 * @param value
-		 *     値
-		 */
-		private LogLevel(String value) {
-			this.value = value;
-		}
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private LogLevel(String value) {
+            this.value = value;
+        }
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public String getValue() {
-			return this.value;
-		}
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public String getValue() {
+            return this.value;
+        }
 
-		/**
-		 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-		 * @param value
-		 *     値
-		 * @return LogLevel
-		 */
-		public static LogLevel of(String value) {
-			return BaseEnum.of(LogLevel.class, value);
-		}
+        /**
+         * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+         * @param value
+         *     値
+         * @return LogLevel
+         */
+        public static LogLevel of(String value) {
+            return BaseEnum.of(LogLevel.class, value);
+        }
 
-		/**
-		 * 指定した<code>logLevel</code>と自身が一致するかどうか返す
-		 *
-		 * @param logLevel
-		 *     LogLevel
-		 * @return 判定結果
-		 */
-		public boolean is(LogLevel logLevel) {
-			return this == logLevel;
-		}
-	}
+        /**
+         * 指定した<code>logLevel</code>と自身が一致するかどうか返す
+         *
+         * @param logLevel
+         *     LogLevel
+         * @return 判定結果
+         */
+        public boolean is(LogLevel logLevel) {
+            return this == logLevel;
+        }
+    }
 }

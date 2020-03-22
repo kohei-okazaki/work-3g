@@ -9,11 +9,12 @@ import jp.co.ha.db.entity.MailInfo;
  */
 public interface MailInfoUpdateService {
 
-	/**
-	 * 指定したメール情報を更新する
-	 *
-	 * @param entity
-	 *     メール情報
-	 */
-	void update(MailInfo entity);
+    /**
+     * 指定したメール情報を更新する
+     *
+     * @param entity
+     *     メール情報
+     */
+    void update(MailInfo entity);
+
 }

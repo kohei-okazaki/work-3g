@@ -21,87 +21,87 @@ import jp.co.ha.web.form.BaseApiRequest;
  */
 public abstract class CommonApiRequest extends BaseApiRequest {
 
-	/** リクエスト種別 */
-	@JsonDeserialize(using = RequestTypeDeserializer.class)
-	@Required(message = "requestTypeが未設定です")
-	@JsonProperty("requestType")
-	private RequestType requestType;
-	/** ユーザID */
-	@Required(message = "userIdが未設定です")
-	@Pattern(regixPattern = RegexType.HALF_CHAR, message = "userIdが半角英数でありません")
-	@Min(size = 2, message = "userIdが2byte未満です")
-	@Max(size = 16, message = "userIdが16byte以上です")
-	@JsonProperty("userId")
-	private String userId;
-	/** APIキー */
-	@Mask
-	@Required(message = "apiKeyが未設定です")
-	@Length(length = 64, message = "apiKeyが64byteではありません")
-	@JsonProperty("apiKey")
-	private String apiKey;
+    /** リクエスト種別 */
+    @JsonDeserialize(using = RequestTypeDeserializer.class)
+    @Required(message = "requestTypeが未設定です")
+    @JsonProperty("requestType")
+    private RequestType requestType;
+    /** ユーザID */
+    @Required(message = "userIdが未設定です")
+    @Pattern(regixPattern = RegexType.HALF_CHAR, message = "userIdが半角英数でありません")
+    @Min(size = 2, message = "userIdが2byte未満です")
+    @Max(size = 16, message = "userIdが16byte以上です")
+    @JsonProperty("userId")
+    private String userId;
+    /** APIキー */
+    @Mask
+    @Required(message = "apiKeyが未設定です")
+    @Length(length = 64, message = "apiKeyが64byteではありません")
+    @JsonProperty("apiKey")
+    private String apiKey;
 
-	/**
-	 * デフォルトコンストラクタ
-	 */
-	public CommonApiRequest() {
-		super();
-	}
+    /**
+     * デフォルトコンストラクタ
+     */
+    public CommonApiRequest() {
+        super();
+    }
 
-	/**
-	 * requestTypeを返す
-	 *
-	 * @return requestType
-	 */
-	public RequestType getRequestType() {
-		return requestType;
-	}
+    /**
+     * requestTypeを返す
+     *
+     * @return requestType
+     */
+    public RequestType getRequestType() {
+        return requestType;
+    }
 
-	/**
-	 * requestTypeを設定する
-	 *
-	 * @param requestType
-	 *     リクエスト種別
-	 */
-	public void setRequestType(RequestType requestType) {
-		this.requestType = requestType;
-	}
+    /**
+     * requestTypeを設定する
+     *
+     * @param requestType
+     *     リクエスト種別
+     */
+    public void setRequestType(RequestType requestType) {
+        this.requestType = requestType;
+    }
 
-	/**
-	 * userIdを返す
-	 *
-	 * @return userId
-	 */
-	public String getUserId() {
-		return userId;
-	}
+    /**
+     * userIdを返す
+     *
+     * @return userId
+     */
+    public String getUserId() {
+        return userId;
+    }
 
-	/**
-	 * userIdを設定する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    /**
+     * userIdを設定する
+     *
+     * @param userId
+     *     ユーザID
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	/**
-	 * apiKeyを返す
-	 *
-	 * @return apiKey
-	 */
-	public String getApiKey() {
-		return apiKey;
-	}
+    /**
+     * apiKeyを返す
+     *
+     * @return apiKey
+     */
+    public String getApiKey() {
+        return apiKey;
+    }
 
-	/**
-	 * apiKeyを設定する
-	 *
-	 * @param apiKey
-	 *     APIキー
-	 */
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
+    /**
+     * apiKeyを設定する
+     *
+     * @param apiKey
+     *     APIキー
+     */
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
 }

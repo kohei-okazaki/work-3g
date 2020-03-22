@@ -14,24 +14,24 @@ import jp.co.ha.auto.BaseAutoTest;
  */
 public class LoginTest extends BaseAutoTest {
 
-	/**
-	 * ログインテスト
-	 *
-	 * @throws InterruptedException
-	 */
-	@Test
-	public void test() throws InterruptedException {
+    /**
+     * ログインテスト
+     *
+     * @throws InterruptedException
+     */
+    @Test
+    public void test() throws InterruptedException {
 
-		LOG.info("#test");
-		WebDriver driver = conf.getDriver();
-		driver.get(conf.getBaseUrl() + "/login/index");
-		WebElement loginIdElement = driver.findElement(By.id("userId"));
-		loginIdElement.sendKeys("master");
-		WebElement passwordElement = driver.findElement(By.id("password"));
-		passwordElement.sendKeys("master");
-		WebElement submitButton = driver.findElement(By.id("submit"));
-		submitButton.click();
-		Thread.sleep(3000);
-	}
+        LOG.info("#test");
+        WebDriver driver = conf.getDriver();
+        driver.get(conf.getBaseUrl() + "/login/index");
+        WebElement loginIdElement = driver.findElement(By.id("userId"));
+        loginIdElement.sendKeys("master");
+        WebElement passwordElement = driver.findElement(By.id("password"));
+        passwordElement.sendKeys("master");
+        WebElement submitButton = driver.findElement(By.id("submit"));
+        submitButton.click();
+        Thread.sleep(3000);
+    }
 
 }
