@@ -1,9 +1,9 @@
 package jp.co.ha.tool.excel;
 
-import jp.co.ha.tool.type.ColumnType;
+import jp.co.ha.tool.excel.type.ColumnType;
 
 /**
- * セル情報保持クラス
+ * 自動生成ツールのCellクラス
  *
  * @since 1.0
  */

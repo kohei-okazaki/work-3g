@@ -3,7 +3,7 @@ package jp.co.ha.tool.excel;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.co.ha.tool.type.CellPositionType;
+import jp.co.ha.tool.excel.type.CellPositionType;
 
 /**
  * エクセル行情報保持クラス

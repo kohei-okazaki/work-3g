@@ -38,6 +38,26 @@ public class FileUtil {
 	}
 
 	/**
+	 * ファイルを作成する<br>
+	 * ファイルが存在しない場合のみ、作成
+	 *
+	 * @param filePath
+	 *     ファイルパス
+	 * @return ファイルのパスクラス
+	 * @throws IOException
+	 *     ファイル作成処理に失敗した場合
+	 */
+	public static Path createFile(String filePath) throws IOException {
+
+		Path path = Paths.get(filePath);
+		if (Files.exists(path)) {
+			// ファイルが存在する場合
+			return path;
+		}
+		return Files.createFile(path);
+	}
+
+	/**
 	 * 指定したファイルパス配下の全ファイルのリストを返す
 	 *
 	 * @param path

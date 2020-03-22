@@ -1,4 +1,4 @@
-package jp.co.ha.tool.type;
+package jp.co.ha.tool.source.type;
 
 import jp.co.ha.common.type.BaseEnum;
 

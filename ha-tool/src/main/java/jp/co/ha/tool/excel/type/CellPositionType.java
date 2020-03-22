@@ -1,4 +1,4 @@
-package jp.co.ha.tool.type;
+package jp.co.ha.tool.excel.type;
 
 import jp.co.ha.common.type.BaseEnum;
 
@@ -17,20 +17,22 @@ public enum CellPositionType implements BaseEnum {
 	PRIMARY_KEY(2, "primaryKey"),
 	/** シーケンス */
 	SEQUENCE(3, "sequence"),
-	/** シーケンス */
+	/** 暗号化 */
 	CRYPT(4, "crypt"),
+	/** NotNULL制約 */
+	NOT_NULL(5, "notNull"),
 	/** カラム名(コメント) */
-	COLUMN_NAME_COMMENT(5, "columnNameComment"),
+	COLUMN_NAME_COMMENT(6, "columnNameComment"),
 	/** カラム名 */
-	COLUMN_NAME(6, "columnName"),
+	COLUMN_NAME(7, "columnName"),
 	/** カラムタイプ */
-	COLUMN_TYPE(7, "columnType"),
+	COLUMN_TYPE(8, "columnType"),
 	/** カラムサイズ */
-	COLUMN_SIZE(8, "columnSize"),
+	COLUMN_SIZE(9, "columnSize"),
 	/** 備考 */
-	REMARKS(9, "remarks"),
+	REMARKS(10, "remarks"),
 	/** 追加フラグ */
-	ADD_FLG(10, "addFlg");
+	ADD_FLG(11, "addFlg");
 
 	/** 位置 */
 	private int position;

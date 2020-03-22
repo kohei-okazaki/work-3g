@@ -1,4 +1,4 @@
-package jp.co.ha.tool.type;
+package jp.co.ha.tool.excel.type;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,6 +23,11 @@ public enum ColumnType implements BaseEnum {
 	/** INT */
 	INT("INT", BigDecimal.class);
 
+	/** 値 */
+	private String value;
+	/** クラス型 */
+	private Class<?> classType;
+
 	/**
 	 * コンストラクタ
 	 *
@@ -35,11 +40,6 @@ public enum ColumnType implements BaseEnum {
 		this.value = value;
 		this.classType = classType;
 	}
-
-	/** 値 */
-	private String value;
-	/** クラス型 */
-	private Class<?> classType;
 
 	/**
 	 * {@inheritDoc}

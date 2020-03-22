@@ -42,6 +42,8 @@ public class StringUtil {
 	public static final String THRASH = "/";
 	/** アンダースコア */
 	public static final String UNDER_SCORE = "_";
+	/** タブ */
+	public static final String TAB = "	";
 	/** 半角ｶﾅ */
 	private static final char[] HALF_KANA = { '｡', '｢', '｣', '､', '･',
 			'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ',
@@ -448,6 +450,17 @@ public class StringUtil {
 		RIGHT,
 		/** 左詰 */
 		LEFT;
+	}
+
+	/**
+	 * {@link org.springframework.util.StringUtils#capitalize(String)} のラッパーメソッド
+	 *
+	 * @param str
+	 *     対象文字列
+	 * @return capitalize後の文字列
+	 */
+	public static String capitalize(String str) {
+		return StringUtils.capitalize(str);
 	}
 
 }

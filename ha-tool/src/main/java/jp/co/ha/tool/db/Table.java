@@ -74,4 +74,14 @@ public class Table {
 		this.columnList = columnList;
 	}
 
+	/**
+	 * 指定したカラムを追加する
+	 * 
+	 * @param column
+	 *     カラム
+	 */
+	public void addColumn(Column column) {
+		this.columnList.add(column);
+	}
+
 }

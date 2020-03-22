@@ -4,10 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.util.List;
+import java.lang.reflect.Field;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -17,12 +15,11 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
-import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 
 /**
  * Propertyの読み取りクラス
- * 
+ *
  * @since 1.0
  */
 public class PropertyReader {
@@ -74,28 +71,21 @@ public class PropertyReader {
 		try {
 			T t = clazz.getDeclaredConstructor().newInstance();
 
-			for (String name : getPropNameList(clazz)) {
-				Method setter = BeanUtil.getAccessor(name, clazz, AccessorType.SETTER);
-				Object value = prop.get(name);
-				setter.invoke(t, value);
+			for (Field f : BeanUtil.getFieldList(clazz)) {
+				if (!f.isAnnotationPresent(Property.class)) {
+					// @Propertyが付与されていないフィールドの場合、次のフィールドへ
+					continue;
+				}
+
+				// プロパティファイル.プロパティ名から値を取得
+				Object value = prop.get(f.getAnnotation(Property.class).name());
+				BeanUtil.getAccessor(f.getName(), clazz, AccessorType.SETTER)
+						.invoke(t, value);
 			}
 			return t;
 		} catch (Exception e) {
 			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "", e);
 		}
-	}
-
-	/**
-	 * 指定したクラス型のフィールドに付与されている<code>@Propery</code>のnameをリストにして返す
-	 *
-	 * @param clazz
-	 *     対象クラス
-	 * @return nameリスト
-	 */
-	private static List<String> getPropNameList(Class<?> clazz) {
-		return CollectionUtil.toList(clazz.getDeclaredFields()).stream()
-				.filter(e -> e.isAnnotationPresent(Property.class))
-				.map(e -> e.getAnnotation(Property.class).name()).collect(Collectors.toList());
 	}
 
 }

@@ -1,10 +1,12 @@
 package jp.co.ha.tool.source;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-import jp.co.ha.tool.type.AccessType;
-import jp.co.ha.tool.type.ClassType;
+import jp.co.ha.tool.source.type.AccessType;
+import jp.co.ha.tool.source.type.ClassType;
 
 /**
  * Javaファイル情報
@@ -17,6 +19,8 @@ public class JavaSource {
 	private Package pack;
 	/** import文のリスト */
 	private List<Import> importList = new ArrayList<>();
+	/** クラスのJavaDoc */
+	private String classJavaDoc;
 	/** アクセス型 */
 	private AccessType accessType;
 	/** クラス型 */
@@ -27,10 +31,12 @@ public class JavaSource {
 	private Class<?> extendsClass;
 	/** 実装インターフェース */
 	private List<Class<?>> implInterfaceList = new ArrayList<>();
+	/** クラスに付与するアノテーションのリスト */
+	private Map<Class<?>, String> classAnnotationMap = new LinkedHashMap<>();
 	/** フィールド情報のリスト */
-	private List<Field<?>> fieldList = new ArrayList<>();
+	private List<Field> fieldList = new ArrayList<>();
 	/** メソッドのリスト */
-	private List<Method<?>> methodList = new ArrayList<>();
+	private List<Method> methodList = new ArrayList<>();
 
 	/**
 	 * packを返す
@@ -68,6 +74,24 @@ public class JavaSource {
 	 */
 	public List<Import> getImportList() {
 		return importList;
+	}
+
+	/**
+	 * classJavaDocを返す
+	 *
+	 * @return classJavaDoc
+	 */
+	public String getClassJavaDoc() {
+		return classJavaDoc;
+	}
+
+	/**
+	 * classJavaDocを設定する
+	 *
+	 * @param classJavaDoc
+	 */
+	public void setClassJavaDoc(String classJavaDoc) {
+		this.classJavaDoc = classJavaDoc;
 	}
 
 	/**
@@ -147,11 +171,32 @@ public class JavaSource {
 	}
 
 	/**
+	 * classAnnotationMapを返す
+	 *
+	 * @return classAnnotationMap
+	 */
+	public Map<Class<?>, String> getClassAnnotationMap() {
+		return classAnnotationMap;
+	}
+
+	/**
+	 * クラスアノテーションを追加する
+	 *
+	 * @param clazz
+	 *     アノテーションのクラス型
+	 * @param value
+	 *     値
+	 */
+	public void addClassAnnotation(Class<?> clazz, String value) {
+		this.classAnnotationMap.put(clazz, value);
+	}
+
+	/**
 	 * fieldListを返す
 	 *
 	 * @return fieldList
 	 */
-	public List<Field<?>> getFieldList() {
+	public List<Field> getFieldList() {
 		return fieldList;
 	}
 
@@ -161,7 +206,7 @@ public class JavaSource {
 	 * @param field
 	 *     フィールド
 	 */
-	public void addField(Field<?> field) {
+	public void addField(Field field) {
 		this.fieldList.add(field);
 	}
 
@@ -170,7 +215,7 @@ public class JavaSource {
 	 *
 	 * @return methodList
 	 */
-	public List<Method<?>> getMethodList() {
+	public List<Method> getMethodList() {
 		return methodList;
 	}
 
@@ -180,7 +225,7 @@ public class JavaSource {
 	 * @param method
 	 *     メソッド
 	 */
-	public void addMethod(Method<?> method) {
+	public void addMethod(Method method) {
 		this.methodList.add(method);
 	}
 

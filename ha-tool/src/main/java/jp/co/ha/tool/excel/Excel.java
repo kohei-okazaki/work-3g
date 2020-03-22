@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * エクセル情報保持クラス
+ * 自動生成ツールのExcelクラス
  *
  * @since 1.0
  */
