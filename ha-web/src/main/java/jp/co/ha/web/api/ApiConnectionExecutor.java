@@ -22,37 +22,40 @@ import jp.co.ha.web.form.BaseApiResponse;
 @Component
 public class ApiConnectionExecutor {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(ApiConnectionExecutor.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(ApiConnectionExecutor.class);
 
-	/**
-	 * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
-	 * レスポンスログ(異常系)は以下のクラスのメソッドで行う<br>
-	 * <ul>
-	 * <li>{@link BaseRestController#jsonExceptionHandle}</li>
-	 * <li>{@link BaseRestController#appExceptionHandle}</li>
-	 * </ul>
-	 *
-	 * @param pjp
-	 *     ProceedingJoinPoint
-	 * @return APIレスポンス
-	 * @throws Throwable
-	 *     実行時のエラー
-	 */
-	// @Around("execution(*
-	// jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..))")
-	@Around("@annotation(jp.co.ha.web.api.annotation.ApiExecute)")
-	public Object outApiLog(ProceedingJoinPoint pjp) throws Throwable {
+    /**
+     * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
+     * レスポンスログ(異常系)は以下のクラスのメソッドで行う<br>
+     * <ul>
+     * <li>{@link BaseRestController#jsonExceptionHandle}</li>
+     * <li>{@link BaseRestController#appExceptionHandle}</li>
+     * </ul>
+     *
+     * @param pjp
+     *     ProceedingJoinPoint
+     * @return APIレスポンス
+     * @throws Throwable
+     *     実行時のエラー
+     */
+    // @Around("execution(*
+    // jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..))")
+    @Around("@annotation(jp.co.ha.web.api.annotation.ApiExecute)")
+    public Object outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
-		// Requestログ出力
-		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiRequest).forEach(e -> LOG.infoRes(e));
+        // Requestログ出力
+        Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiRequest)
+                .forEach(e -> LOG.infoRes(e));
 
-		Object object = pjp.proceed();
+        Object object = pjp.proceed();
 
-		// Responseログ出力
-		Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiResponse).forEach(e -> LOG.infoRes(e));
+        // Responseログ出力
+        Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiResponse)
+                .forEach(e -> LOG.infoRes(e));
 
-		return object;
-	}
+        return object;
+    }
 
 }

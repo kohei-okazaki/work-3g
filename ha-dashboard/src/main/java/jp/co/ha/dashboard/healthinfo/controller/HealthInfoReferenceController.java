@@ -58,187 +58,203 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("healthinforeference")
 public class HealthInfoReferenceController implements BaseWebController {
 
-	/** 結果照会画面サービス */
-	@Autowired
-	private HealthInfoReferService service;
-	/** 結果照会Excelダウンロードサービス */
-	@Autowired
-	@ReferenceDownloadExcel
-	private ExcelDownloadService<ReferenceExcelComponent> excelDownloadService;
-	/** 結果照会CSVダウンロードサービス */
-	@Autowired
-	@ReferenceDownloadCsv
-	private CsvDownloadService<ReferenceCsvDownloadModel> csvDownloadService;
-	/** セッション管理サービス */
-	@Autowired
-	private SessionManageService sessionService;
-	/** 健康情報ファイル設定検索サービス */
-	@Autowired
-	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-	/** System設定情報 */
-	@Autowired
-	private SystemConfig systemConfig;
-	/** 健康情報グラフ作成サービス */
-	@Autowired
-	private HealthInfoGraphService healthInfoGraphService;
+    /** 結果照会画面サービス */
+    @Autowired
+    private HealthInfoReferService service;
+    /** 結果照会Excelダウンロードサービス */
+    @Autowired
+    @ReferenceDownloadExcel
+    private ExcelDownloadService<ReferenceExcelComponent> excelDownloadService;
+    /** 結果照会CSVダウンロードサービス */
+    @Autowired
+    @ReferenceDownloadCsv
+    private CsvDownloadService<ReferenceCsvDownloadModel> csvDownloadService;
+    /** セッション管理サービス */
+    @Autowired
+    private SessionManageService sessionService;
+    /** 健康情報ファイル設定検索サービス */
+    @Autowired
+    private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+    /** System設定情報 */
+    @Autowired
+    private SystemConfig systemConfig;
+    /** 健康情報グラフ作成サービス */
+    @Autowired
+    private HealthInfoGraphService healthInfoGraphService;
 
-	/**
-	 * Validateを設定
-	 *
-	 * @param binder
-	 *     WebDataBinder
-	 */
-	@InitBinder(value = "healthInfoReferenceForm")
-	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(new HealthInfoReferenceValidator());
-	}
+    /**
+     * Validateを設定
+     *
+     * @param binder
+     *     WebDataBinder
+     */
+    @InitBinder(value = "healthInfoReferenceForm")
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(new HealthInfoReferenceValidator());
+    }
 
-	/**
-	 * Formを返す
-	 *
-	 * @return HealthInfoReferenceForm
-	 */
-	@ModelAttribute("healthInfoReferenceForm")
-	public HealthInfoReferenceForm setUpForm() {
-		HealthInfoReferenceForm form = new HealthInfoReferenceForm();
-		form.setHealthInfoRegDateSelectFlag(CommonFlag.FALSE.getValue());
-		return form;
-	}
+    /**
+     * Formを返す
+     *
+     * @return HealthInfoReferenceForm
+     */
+    @ModelAttribute("healthInfoReferenceForm")
+    public HealthInfoReferenceForm setUpForm() {
+        HealthInfoReferenceForm form = new HealthInfoReferenceForm();
+        form.setHealthInfoRegDateSelectFlag(CommonFlag.FALSE.getValue());
+        return form;
+    }
 
-	/**
-	 * 照会前画面
-	 *
-	 * @return 照会前画面
-	 */
-	@GetMapping(value = "/index")
-	public String index() {
-		return getView(DashboardView.HEALTH_INFO_REFFERNCE);
-	}
+    /**
+     * 照会前画面
+     *
+     * @return 照会前画面
+     */
+    @GetMapping(value = "/index")
+    public String index() {
+        return getView(DashboardView.HEALTH_INFO_REFFERNCE);
+    }
 
-	/**
-	 * 照会後画面
-	 *
-	 * @param request
-	 *     HttpServletRequest
-	 * @param model
-	 *     Model
-	 * @param form
-	 *     検索情報フォーム
-	 * @param result
-	 *     BindingResult
-	 * @return 照会後画面
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@PostMapping(value = "/index")
-	public String reference(HttpServletRequest request, Model model, @Valid HealthInfoReferenceForm form,
-			BindingResult result) throws BaseException {
+    /**
+     * 照会後画面
+     *
+     * @param request
+     *     HttpServletRequest
+     * @param model
+     *     Model
+     * @param form
+     *     検索情報フォーム
+     * @param result
+     *     BindingResult
+     * @return 照会後画面
+     * @throws BaseException
+     *     基底例外
+     */
+    @PostMapping(value = "/index")
+    public String reference(HttpServletRequest request, Model model,
+            @Valid HealthInfoReferenceForm form,
+            BindingResult result) throws BaseException {
 
-		if (result.hasErrors()) {
-			return getView(DashboardView.HEALTH_INFO_REFFERNCE);
-		}
+        if (result.hasErrors()) {
+            return getView(DashboardView.HEALTH_INFO_REFFERNCE);
+        }
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+        String userId = sessionService
+                .getValue(request.getSession(), "userId", String.class).get();
 
-		HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
-		BeanUtil.copy(form, dto, (src, dest) -> {
-			HealthInfoReferenceForm srcForm = (HealthInfoReferenceForm) src;
-			HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
-			if (StringUtil.hasValue(srcForm.getHealthInfoId())) {
-				destDto.setHealthInfoId(Integer.valueOf(srcForm.getHealthInfoId()));
-			}
-		});
+        HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
+        BeanUtil.copy(form, dto, (src, dest) -> {
+            HealthInfoReferenceForm srcForm = (HealthInfoReferenceForm) src;
+            HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
+            if (StringUtil.hasValue(srcForm.getHealthInfoId())) {
+                destDto.setHealthInfoId(Integer.valueOf(srcForm.getHealthInfoId()));
+            }
+        });
 
-		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto, userId);
+        List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto,
+                userId);
 
-		// 検索情報を設定
-		model.addAttribute("form", dto);
-		// 検索結果有無を設定
-		model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
-		// ログイン中ユーザの健康情報リストを設定
-		model.addAttribute("resultList", resultList);
+        // 検索情報を設定
+        model.addAttribute("form", dto);
+        // 検索結果有無を設定
+        model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
+        // ログイン中ユーザの健康情報リストを設定
+        model.addAttribute("resultList", resultList);
 
-		healthInfoGraphService.putGraph(model, () -> {
+        healthInfoGraphService.putGraph(model, () -> {
 
-			HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-			resultList.stream().forEach(e -> {
-				graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate());
-				graphModel.addWeight(e.getWeight());
-				graphModel.addBmi(e.getBmi());
-				graphModel.addStandardWeight(e.getStandardWeight());
-			});
+            HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
+            resultList.stream().forEach(e -> {
+                graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate());
+                graphModel.addWeight(e.getWeight());
+                graphModel.addBmi(e.getBmi());
+                graphModel.addStandardWeight(e.getStandardWeight());
+            });
 
-			return graphModel;
-		});
+            return graphModel;
+        });
 
-		model.addAttribute("systemConfig", systemConfig);
+        model.addAttribute("systemConfig", systemConfig);
 
-		// sessionに検索条件を設定
-		sessionService.setValue(request.getSession(), "healthInfoReferenceDto", dto);
+        // sessionに検索条件を設定
+        sessionService.setValue(request.getSession(), "healthInfoReferenceDto", dto);
 
-		return getView(DashboardView.HEALTH_INFO_REFFERNCE);
-	}
+        return getView(DashboardView.HEALTH_INFO_REFFERNCE);
+    }
 
-	/**
-	 * Excelダウンロードを実行
-	 *
-	 * @param request
-	 *     HttpServletRequest
-	 * @return ModelAndView
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@GetMapping(value = "/exceldownload")
-	public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
+    /**
+     * Excelダウンロードを実行
+     *
+     * @param request
+     *     HttpServletRequest
+     * @return ModelAndView
+     * @throws BaseException
+     *     基底例外
+     */
+    @GetMapping(value = "/exceldownload")
+    public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+        String userId = sessionService
+                .getValue(request.getSession(), "userId", String.class).get();
 
-		// sessionにある前画面の検索条件で再度検索する
-		HealthInfoReferenceDto referDto = sessionService
-				.getValue(request.getSession(), "healthInfoReferenceDto", HealthInfoReferenceDto.class)
-				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
-		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(referDto, userId);
+        // sessionにある前画面の検索条件で再度検索する
+        HealthInfoReferenceDto referDto = sessionService
+                .getValue(request.getSession(), "healthInfoReferenceDto",
+                        HealthInfoReferenceDto.class)
+                .orElseThrow(() -> new SystemException(
+                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+        List<HealthInfoReferenceDto> resultList = service
+                .getHealthInfoResponseList(referDto, userId);
 
-		ReferenceExcelComponent component = new ReferenceExcelComponent();
-		component.setUserId(userId);
-		component.setResultList(resultList);
-		return new ModelAndView(excelDownloadService.download(component));
-	}
+        ReferenceExcelComponent component = new ReferenceExcelComponent();
+        component.setUserId(userId);
+        component.setResultList(resultList);
+        return new ModelAndView(excelDownloadService.download(component));
+    }
 
-	/**
-	 * CSVダウンロードを実行
-	 *
-	 * @param request
-	 *     HttpServletRequest
-	 * @param response
-	 *     HttpServletResponse
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@GetMapping(value = "/csvdownload")
-	public void csvDownload(HttpServletRequest request, HttpServletResponse response) throws BaseException {
+    /**
+     * CSVダウンロードを実行
+     *
+     * @param request
+     *     HttpServletRequest
+     * @param response
+     *     HttpServletResponse
+     * @throws BaseException
+     *     基底例外
+     */
+    @GetMapping(value = "/csvdownload")
+    public void csvDownload(HttpServletRequest request, HttpServletResponse response)
+            throws BaseException {
 
-		HttpSession session = request.getSession();
-		String userId = sessionService.getValue(session, "userId", String.class).get();
-		// sessionにある前画面の検索条件で再度検索する
-		HealthInfoReferenceDto referDto = sessionService
-				.getValue(request.getSession(), "healthInfoReferenceDto", HealthInfoReferenceDto.class)
-				.orElseThrow(() -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
-		List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(referDto, userId);
+        HttpSession session = request.getSession();
+        String userId = sessionService.getValue(session, "userId", String.class).get();
+        // sessionにある前画面の検索条件で再度検索する
+        HealthInfoReferenceDto referDto = sessionService
+                .getValue(request.getSession(), "healthInfoReferenceDto",
+                        HealthInfoReferenceDto.class)
+                .orElseThrow(() -> new SystemException(
+                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+        List<HealthInfoReferenceDto> resultList = service
+                .getHealthInfoResponseList(referDto, userId);
 
-		// CSV設定情報取得
-		HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService.findByUserId(userId).get();
-		CsvConfig conf = service.getCsvConfig(fileSetting);
+        // CSV設定情報取得
+        HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService
+                .findByUserId(userId).get();
+        CsvConfig conf = service.getCsvConfig(fileSetting);
 
-		response.setContentType(
-				MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=" + conf.getCharset().getValue());
-		response.setHeader("Content-Disposition", "attachment; filename=" + conf.getFileName());
+        response.setContentType(
+                MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset="
+                        + conf.getCharset().getValue());
+        response.setHeader("Content-Disposition",
+                "attachment; filename=" + conf.getFileName());
 
-		try {
-			csvDownloadService.download(response.getWriter(), conf, service.toModelList(userId, resultList));
-		} catch (IOException e) {
-			throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
-		}
-	}
+        try {
+            csvDownloadService.download(response.getWriter(), conf,
+                    service.toModelList(userId, resultList));
+        } catch (IOException e) {
+            throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
+                    "ファイルの出力処理に失敗しました", e);
+        }
+    }
 
 }

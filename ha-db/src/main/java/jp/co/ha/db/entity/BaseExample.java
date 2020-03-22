@@ -10,47 +10,47 @@ package jp.co.ha.db.entity;
  */
 public abstract class BaseExample {
 
-	/** 検索上限数 */
-	protected Integer limit;
-	/** ロック有無 */
-	protected Boolean lock;
+    /** 検索上限数 */
+    protected Integer limit;
+    /** ロック有無 */
+    protected Boolean lock;
 
-	/**
-	 * limitを返す
-	 *
-	 * @return limit
-	 */
-	public Integer getLimit() {
-		return limit;
-	}
+    /**
+     * limitを返す
+     *
+     * @return limit
+     */
+    public Integer getLimit() {
+        return limit;
+    }
 
-	/**
-	 * limitを設定する
-	 *
-	 * @param limit
-	 *     検索上限数
-	 */
-	public void setLimit(Integer limit) {
-		this.limit = limit;
-	}
+    /**
+     * limitを設定する
+     *
+     * @param limit
+     *     検索上限数
+     */
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
 
-	/**
-	 * lockを返す
-	 *
-	 * @return lock
-	 */
-	public Boolean getLock() {
-		return lock;
-	}
+    /**
+     * lockを返す
+     *
+     * @return lock
+     */
+    public Boolean getLock() {
+        return lock;
+    }
 
-	/**
-	 * lockを設定する
-	 *
-	 * @param lock
-	 *     ロック有無
-	 */
-	public void setLock(Boolean lock) {
-		this.lock = lock;
-	}
+    /**
+     * lockを設定する
+     *
+     * @param lock
+     *     ロック有無
+     */
+    public void setLock(Boolean lock) {
+        this.lock = lock;
+    }
 
 }

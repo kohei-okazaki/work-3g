@@ -24,62 +24,65 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
  * @since 1.0
  */
 @Service("healthInfoDownloadExcel")
-public class HealthInfoExcelDownloadServiceImpl implements ExcelDownloadService<HealthInfoExcelComponent> {
+public class HealthInfoExcelDownloadServiceImpl
+        implements ExcelDownloadService<HealthInfoExcelComponent> {
 
-	/** 健康情報ファイル設定検索サービス */
-	@Autowired
-	private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+    /** 健康情報ファイル設定検索サービス */
+    @Autowired
+    private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public View download(HealthInfoExcelComponent component) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public View download(HealthInfoExcelComponent component) throws BaseException {
 
-		HealthInfo healthInfo = component.getHealthInfo();
-		// 健康情報Entityから健康情報ファイル設定を検索
-		HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-				.findByUserId(healthInfo.getUserId()).get();
+        HealthInfo healthInfo = component.getHealthInfo();
+        // 健康情報Entityから健康情報ファイル設定を検索
+        HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
+                .findByUserId(healthInfo.getUserId()).get();
 
-		// 健康情報Excelモデルに変換
-		HealthInfoExcelModel model = toModel(healthInfo);
+        // 健康情報Excelモデルに変換
+        HealthInfoExcelModel model = toModel(healthInfo);
 
-		return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting), Arrays.asList(model));
-	}
+        return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting),
+                Arrays.asList(model));
+    }
 
-	/**
-	 * 健康情報をモデルに変換する
-	 *
-	 * @param healthInfo
-	 *     健康情報
-	 * @return model
-	 */
-	private HealthInfoExcelModel toModel(HealthInfo healthInfo) {
-		HealthInfoExcelModel model = new HealthInfoExcelModel();
-		model.setHeight(healthInfo.getHeight().toString());
-		model.setWeight(healthInfo.getWeight().toString());
-		model.setBmi(healthInfo.getBmi().toString());
-		model.setStandardWeight(healthInfo.getStandardWeight().toString());
-		model.setHealthInfoRegDate(healthInfo.getHealthInfoRegDate());
-		return model;
-	}
+    /**
+     * 健康情報をモデルに変換する
+     *
+     * @param healthInfo
+     *     健康情報
+     * @return model
+     */
+    private HealthInfoExcelModel toModel(HealthInfo healthInfo) {
+        HealthInfoExcelModel model = new HealthInfoExcelModel();
+        model.setHeight(healthInfo.getHeight().toString());
+        model.setWeight(healthInfo.getWeight().toString());
+        model.setBmi(healthInfo.getBmi().toString());
+        model.setStandardWeight(healthInfo.getStandardWeight().toString());
+        model.setHealthInfoRegDate(healthInfo.getHealthInfoRegDate());
+        return model;
+    }
 
-	/**
-	 * Excel設定情報を取得
-	 *
-	 * @param healthInfoFileSetting
-	 *     健康情報設定情報
-	 * @return Excel設定情報
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting) throws BaseException {
+    /**
+     * Excel設定情報を取得
+     *
+     * @param healthInfoFileSetting
+     *     健康情報設定情報
+     * @return Excel設定情報
+     * @throws BaseException
+     *     基底例外
+     */
+    private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting)
+            throws BaseException {
 
-		return new ExcelConfigBuilder(null)
-				.hasHeader(CommonFlag.TRUE.is(healthInfoFileSetting.getHeaderFlag()))
-				.hasFooter(CommonFlag.TRUE.is(healthInfoFileSetting.getFooterFlag()))
-				.useMask(CommonFlag.TRUE.is(healthInfoFileSetting.getMaskFlag()))
-				.build();
-	}
+        return new ExcelConfigBuilder(null)
+                .hasHeader(CommonFlag.TRUE.is(healthInfoFileSetting.getHeaderFlag()))
+                .hasFooter(CommonFlag.TRUE.is(healthInfoFileSetting.getFooterFlag()))
+                .useMask(CommonFlag.TRUE.is(healthInfoFileSetting.getMaskFlag()))
+                .build();
+    }
 
 }

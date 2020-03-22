@@ -18,59 +18,63 @@ import jp.co.ha.common.log.LoggerFactory;
  */
 public class MultiThreadFunctionTest extends BaseCommonTest {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(MultiThreadFunctionTest.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(MultiThreadFunctionTest.class);
 
-	/**
-	 * {@linkplain MultiThreadFunction#execute(Object)} のjUnit
-	 */
-	@Test
-	public void testExecute() {
+    /**
+     * {@linkplain MultiThreadFunction#execute(Object)} のjUnit
+     */
+    @Test
+    public void testExecute() {
 
-		try {
+        try {
 
-			String s = "VALUE=";
-			StringPrint sp = new StringPrint();
-			ResultType result = sp.execute(s);
-			assertEquals(ResultType.SUCCESS, result);
+            String s = "VALUE=";
+            StringPrint sp = new StringPrint();
+            ResultType result = sp.execute(s);
+            assertEquals(ResultType.SUCCESS, result);
 
-		} catch (InterruptedException e) {
-			LOG.error("割り込み処理が発生しました", e);
-		}
-	}
+        } catch (InterruptedException e) {
+            LOG.error("割り込み処理が発生しました", e);
+        }
+    }
 
-	/**
-	 * {@linkplain MultiThreadFunction}のテスト用の継承クラス
-	 *
-	 * @since 1.0
-	 */
-	private static class StringPrint extends MultiThreadFunction<String> {
+    /**
+     * {@linkplain MultiThreadFunction}のテスト用の継承クラス
+     *
+     * @since 1.0
+     */
+    private static class StringPrint extends MultiThreadFunction<String> {
 
-		/**
-		 * {@inheritDoc}<br>
-		 * 並列処理で行いたい処理を実装
-		 */
-		@Override
-		public Consumer<String> getConsumer() {
+        /**
+         * {@inheritDoc}<br>
+         * 並列処理で行いたい処理を実装
+         */
+        @Override
+        public Consumer<String> getConsumer() {
 
-			return (s) -> {
+            return (s) -> {
 
-				for (int i = 0; i < 10; i++) {
-					if (i % 5 == 0 && i % 3 == 0) {
-						LOG.info(s + Thread.currentThread().getName() + ", No=" + i + ", fizzbazz");
-					} else if (i % 5 == 0) {
-						LOG.info(s + Thread.currentThread().getName() + ", No=" + i + ", bazz");
-					} else if (i % 3 == 0) {
-						LOG.info(s + Thread.currentThread().getName() + ", No=" + i + ", fizz");
-					}
-				}
-			};
-		}
+                for (int i = 0; i < 10; i++) {
+                    if (i % 5 == 0 && i % 3 == 0) {
+                        LOG.info(s + Thread.currentThread().getName() + ", No=" + i
+                                + ", fizzbazz");
+                    } else if (i % 5 == 0) {
+                        LOG.info(s + Thread.currentThread().getName() + ", No=" + i
+                                + ", bazz");
+                    } else if (i % 3 == 0) {
+                        LOG.info(s + Thread.currentThread().getName() + ", No=" + i
+                                + ", fizz");
+                    }
+                }
+            };
+        }
 
-		@Override
-		public int getThreadCount() {
-			return 2;
-		}
+        @Override
+        public int getThreadCount() {
+            return 2;
+        }
 
-	}
+    }
 }

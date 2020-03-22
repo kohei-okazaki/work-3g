@@ -19,49 +19,50 @@ import jp.co.ha.web.form.BaseForm;
  */
 public interface BaseWizardController<F extends BaseForm> extends BaseWebController {
 
-	/**
-	 * 入力画面
-	 *
-	 * @param model
-	 *     Model
-	 * @param request
-	 *     HttpServletRequest
-	 * @return view名
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	String input(Model model, HttpServletRequest request) throws BaseException;
+    /**
+     * 入力画面
+     *
+     * @param model
+     *     Model
+     * @param request
+     *     HttpServletRequest
+     * @return view名
+     * @throws BaseException
+     *     基底例外
+     */
+    String input(Model model, HttpServletRequest request) throws BaseException;
 
-	/**
-	 * 確認画面
-	 *
-	 * @param model
-	 *     Model
-	 * @param form
-	 *     F extends BaseForm
-	 * @param result
-	 *     BindingResult
-	 * @param request
-	 *     HttpServletRequest
-	 * @return view名
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	String confirm(Model model, @Valid F form, BindingResult result, HttpServletRequest request) throws BaseException;
+    /**
+     * 確認画面
+     *
+     * @param model
+     *     Model
+     * @param form
+     *     F extends BaseForm
+     * @param result
+     *     BindingResult
+     * @param request
+     *     HttpServletRequest
+     * @return view名
+     * @throws BaseException
+     *     基底例外
+     */
+    String confirm(Model model, @Valid F form, BindingResult result,
+            HttpServletRequest request) throws BaseException;
 
-	/**
-	 * 完了画面
-	 *
-	 * @param model
-	 *     Model
-	 * @param form
-	 *     F extends BaseForm
-	 * @param request
-	 *     HttpServletRequest
-	 * @return view名
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	String complete(Model model, F form, HttpServletRequest request) throws BaseException;
+    /**
+     * 完了画面
+     *
+     * @param model
+     *     Model
+     * @param form
+     *     F extends BaseForm
+     * @param request
+     *     HttpServletRequest
+     * @return view名
+     * @throws BaseException
+     *     基底例外
+     */
+    String complete(Model model, F form, HttpServletRequest request) throws BaseException;
 
 }

@@ -9,44 +9,44 @@ import jp.co.ha.business.exception.DashboardErrorCode;
  */
 public class LoginCheckResult {
 
-	/** エラーカウント */
-	private int errorCount = 0;
-	/** エラーコード */
-	private DashboardErrorCode errorCode;
+    /** エラーカウント */
+    private int errorCount = 0;
+    /** エラーコード */
+    private DashboardErrorCode errorCode;
 
-	/**
-	 * エラーが存在するかどうかを返す
-	 *
-	 * @return 判定結果
-	 */
-	public boolean hasError() {
-		return errorCount > 0;
-	}
+    /**
+     * エラーが存在するかどうかを返す
+     *
+     * @return 判定結果
+     */
+    public boolean hasError() {
+        return errorCount > 0;
+    }
 
-	/**
-	 * エラーを追加する
-	 */
-	public void addError() {
-		this.errorCount++;
-	}
+    /**
+     * エラーを追加する
+     */
+    public void addError() {
+        this.errorCount++;
+    }
 
-	/**
-	 * errorCodeを返す
-	 *
-	 * @return errorCode
-	 */
-	public DashboardErrorCode getErrorCode() {
-		return errorCode;
-	}
+    /**
+     * errorCodeを返す
+     *
+     * @return errorCode
+     */
+    public DashboardErrorCode getErrorCode() {
+        return errorCode;
+    }
 
-	/**
-	 * errorCodeを設定する
-	 *
-	 * @param errorCode
-	 *     エラーコード
-	 */
-	public void setErrorCode(DashboardErrorCode errorCode) {
-		this.errorCode = errorCode;
-	}
+    /**
+     * errorCodeを設定する
+     *
+     * @param errorCode
+     *     エラーコード
+     */
+    public void setErrorCode(DashboardErrorCode errorCode) {
+        this.errorCode = errorCode;
+    }
 
 }

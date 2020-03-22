@@ -15,14 +15,15 @@ import jp.co.ha.common.validator.annotation.Required;
  */
 public class RequiredValidator implements ConstraintValidator<Required, Object> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isValid(Object value, ConstraintValidatorContext context) {
-		if (BeanUtil.isNull(value)) {
-			return false;
-		}
-		return !StringUtil.isEmpty(value.toString());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        if (BeanUtil.isNull(value)) {
+            return false;
+        }
+        return !StringUtil.isEmpty(value.toString());
+    }
+
 }

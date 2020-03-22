@@ -7,9 +7,10 @@ package jp.co.ha.web.form;
  */
 public abstract class BaseApiRequest implements BaseForm {
 
-	/**
-	 * デフォルトコンストラクタ
-	 */
-	public BaseApiRequest() {
-	}
+    /**
+     * デフォルトコンストラクタ
+     */
+    public BaseApiRequest() {
+    }
+
 }

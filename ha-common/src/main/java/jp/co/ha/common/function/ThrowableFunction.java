@@ -15,14 +15,14 @@ import jp.co.ha.common.exception.BaseException;
 @FunctionalInterface
 public interface ThrowableFunction<T, R> {
 
-	/**
-	 * 関数を実行する
-	 *
-	 * @param t
-	 *     T
-	 * @return 関数実行結果
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	R apply(T t) throws BaseException;
+    /**
+     * 関数を実行する
+     *
+     * @param t
+     *     T
+     * @return 関数実行結果
+     * @throws BaseException
+     *     基底例外
+     */
+    R apply(T t) throws BaseException;
 }

@@ -27,189 +27,197 @@ import jp.co.ha.common.util.CollectionUtil;
  *     Excel出力モデル
  * @since 1.0
  */
-public abstract class BaseExcelBuilder<T extends BaseExcelModel> extends AbstractXlsxView {
+public abstract class BaseExcelBuilder<T extends BaseExcelModel>
+        extends AbstractXlsxView {
 
-	/** ヘッダー位置 */
-	protected final int HEADER_POSITION = 0;
-	/** Excelモデルリスト */
-	protected List<T> modelList;
-	/** Excel設定情報 */
-	protected ExcelConfig conf;
+    /** ヘッダー位置 */
+    protected final int HEADER_POSITION = 0;
+    /** Excelモデルリスト */
+    protected List<T> modelList;
+    /** Excel設定情報 */
+    protected ExcelConfig conf;
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param conf
-	 *     Excel設定情報
-	 * @param modelList
-	 *     Excel出力モデルリスト
-	 */
-	public BaseExcelBuilder(ExcelConfig conf, List<T> modelList) {
-		this.conf = conf;
-		this.modelList = modelList;
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param conf
+     *     Excel設定情報
+     * @param modelList
+     *     Excel出力モデルリスト
+     */
+    public BaseExcelBuilder(ExcelConfig conf, List<T> modelList) {
+        this.conf = conf;
+        this.modelList = modelList;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    protected void buildExcelDocument(Map<String, Object> model, Workbook workbook,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
-		init(response);
-		String sheetName = getSheetName((Class<BaseExcelModel>) BeanUtil.getParameterType(this.getClass()));
-		Sheet sheet = workbook.createSheet(sheetName);
+        init(response);
+        String sheetName = getSheetName(
+                (Class<BaseExcelModel>) BeanUtil.getParameterType(this.getClass()));
+        Sheet sheet = workbook.createSheet(sheetName);
 
-		if (this.conf.hasHeader()) {
-			// ヘッダを書込
-			writeHeader(sheet, (Class<BaseExcelModel>) BeanUtil.getParameterType(this.getClass()));
-		}
+        if (this.conf.hasHeader()) {
+            // ヘッダを書込
+            writeHeader(sheet,
+                    (Class<BaseExcelModel>) BeanUtil.getParameterType(this.getClass()));
+        }
 
-		// データを書込
-		writeData(sheet);
+        // データを書込
+        writeData(sheet);
 
-		if (this.conf.hasFooter()) {
-			// フッタを書込
-			writeFooter(sheet, (Class<BaseExcelModel>) BeanUtil.getParameterType(this.getClass()));
-		}
+        if (this.conf.hasFooter()) {
+            // フッタを書込
+            writeFooter(sheet,
+                    (Class<BaseExcelModel>) BeanUtil.getParameterType(this.getClass()));
+        }
 
-	}
+    }
 
-	/**
-	 * 初期処理
-	 *
-	 * @param response
-	 *     HttpServletResponse
-	 * @throws UnsupportedEncodingException
-	 *     Encoding例外
-	 */
-	private void init(HttpServletResponse response) throws UnsupportedEncodingException {
+    /**
+     * 初期処理
+     *
+     * @param response
+     *     HttpServletResponse
+     * @throws UnsupportedEncodingException
+     *     Encoding例外
+     */
+    private void init(HttpServletResponse response) throws UnsupportedEncodingException {
 
-		String fileName = new String("sample.xlsx".getBytes(conf.getCharsetType().getValue()), "ISO-8859-1");
-		response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
-	}
+        String fileName = new String(
+                "sample.xlsx".getBytes(conf.getCharsetType().getValue()), "ISO-8859-1");
+        response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
+    }
 
-	/**
-	 * ヘッダを書込
-	 *
-	 * @param sheet
-	 *     Sheet
-	 * @param clazz
-	 *     Excelモデルインターフェースクラス型
-	 */
-	protected void writeHeader(Sheet sheet, Class<BaseExcelModel> clazz) {
-		// ヘッダ名取得
-		List<String> header = getHeaderList(clazz);
-		Stream.iterate(0, i -> ++i).limit(header.size()).forEach(i -> {
-			String headerName = header.get(i);
-			Cell cell = getCell(sheet, HEADER_POSITION, i);
-			setText(cell, headerName);
-		});
-	}
+    /**
+     * ヘッダを書込
+     *
+     * @param sheet
+     *     Sheet
+     * @param clazz
+     *     Excelモデルインターフェースクラス型
+     */
+    protected void writeHeader(Sheet sheet, Class<BaseExcelModel> clazz) {
+        // ヘッダ名取得
+        List<String> header = getHeaderList(clazz);
+        Stream.iterate(0, i -> ++i).limit(header.size()).forEach(i -> {
+            String headerName = header.get(i);
+            Cell cell = getCell(sheet, HEADER_POSITION, i);
+            setText(cell, headerName);
+        });
+    }
 
-	/**
-	 * データを書込
-	 *
-	 * @param sheet
-	 *     Sheet
-	 */
-	protected abstract void writeData(Sheet sheet);
+    /**
+     * データを書込
+     *
+     * @param sheet
+     *     Sheet
+     */
+    protected abstract void writeData(Sheet sheet);
 
-	/**
-	 * フッタを書込
-	 *
-	 * @param sheet
-	 *     Sheet
-	 * @param clazz
-	 *     Excelモデルインターフェースクラス型
-	 */
-	protected void writeFooter(Sheet sheet, Class<BaseExcelModel> clazz) {
-		// フッタ名取得
-		List<String> footer = getFooterList(clazz);
-		Stream.iterate(0, i -> ++i).limit(footer.size()).forEach(i -> {
-			String footerName = footer.get(i);
-			Cell cell = null;
-			if (conf.hasHeader()) {
-				// ヘッダ利用する場合、ヘッダレコード + データレコードの行数にフッタを書き出す
-				cell = getCell(sheet, modelList.size() + 1, i);
-			} else {
-				// ヘッダ利用しない場合、データレコードの行数のみ計算してフッタを書き出す
-				cell = getCell(sheet, modelList.size(), i);
-			}
-			setText(cell, footerName);
-		});
-	}
+    /**
+     * フッタを書込
+     *
+     * @param sheet
+     *     Sheet
+     * @param clazz
+     *     Excelモデルインターフェースクラス型
+     */
+    protected void writeFooter(Sheet sheet, Class<BaseExcelModel> clazz) {
+        // フッタ名取得
+        List<String> footer = getFooterList(clazz);
+        Stream.iterate(0, i -> ++i).limit(footer.size()).forEach(i -> {
+            String footerName = footer.get(i);
+            Cell cell = null;
+            if (conf.hasHeader()) {
+                // ヘッダ利用する場合、ヘッダレコード + データレコードの行数にフッタを書き出す
+                cell = getCell(sheet, modelList.size() + 1, i);
+            } else {
+                // ヘッダ利用しない場合、データレコードの行数のみ計算してフッタを書き出す
+                cell = getCell(sheet, modelList.size(), i);
+            }
+            setText(cell, footerName);
+        });
+    }
 
-	/**
-	 * 指定されたシートのrow行目のcol番目のセルを返す
-	 *
-	 * @param sheet
-	 *     Sheet
-	 * @param row
-	 *     行数
-	 * @param col
-	 *     カラム位置
-	 * @return cell
-	 */
-	protected Cell getCell(Sheet sheet, final int row, int col) {
+    /**
+     * 指定されたシートのrow行目のcol番目のセルを返す
+     *
+     * @param sheet
+     *     Sheet
+     * @param row
+     *     行数
+     * @param col
+     *     カラム位置
+     * @return cell
+     */
+    protected Cell getCell(Sheet sheet, final int row, int col) {
 
-		// row取得
-		Row sheetRow = sheet.getRow(row);
-		if (BeanUtil.isNull(sheetRow)) {
-			sheetRow = sheet.createRow(row);
-		}
+        // row取得
+        Row sheetRow = sheet.getRow(row);
+        if (BeanUtil.isNull(sheetRow)) {
+            sheetRow = sheet.createRow(row);
+        }
 
-		// cell取得
-		Cell cell = sheetRow.getCell(col);
-		if (BeanUtil.isNull(cell)) {
-			cell = sheetRow.createCell(col);
-		}
-		return cell;
-	}
+        // cell取得
+        Cell cell = sheetRow.getCell(col);
+        if (BeanUtil.isNull(cell)) {
+            cell = sheetRow.createCell(col);
+        }
+        return cell;
+    }
 
-	/**
-	 * 指定されたセルにtextを設定する
-	 *
-	 * @param cell
-	 *     Cell
-	 * @param text
-	 *     テキスト
-	 */
-	protected void setText(Cell cell, String text) {
-		cell.setCellValue(text);
-	}
+    /**
+     * 指定されたセルにtextを設定する
+     *
+     * @param cell
+     *     Cell
+     * @param text
+     *     テキスト
+     */
+    protected void setText(Cell cell, String text) {
+        cell.setCellValue(text);
+    }
 
-	/**
-	 * シート名を取得する
-	 *
-	 * @param clazz
-	 *     ExcelDownloadModelアノテーションのついたクラス型
-	 * @return シート名
-	 */
-	protected String getSheetName(Class<BaseExcelModel> clazz) {
-		return clazz.getAnnotation(ExcelDownloadModel.class).sheetName();
-	}
+    /**
+     * シート名を取得する
+     *
+     * @param clazz
+     *     ExcelDownloadModelアノテーションのついたクラス型
+     * @return シート名
+     */
+    protected String getSheetName(Class<BaseExcelModel> clazz) {
+        return clazz.getAnnotation(ExcelDownloadModel.class).sheetName();
+    }
 
-	/**
-	 * ヘッダ名を取得する
-	 *
-	 * @param clazz
-	 *     ExcelDownloadModelアノテーションのついたクラス型
-	 * @return headerList
-	 */
-	protected List<String> getHeaderList(Class<?> clazz) {
-		return CollectionUtil.toList(clazz.getAnnotation(ExcelDownloadModel.class).headerNames());
-	}
+    /**
+     * ヘッダ名を取得する
+     *
+     * @param clazz
+     *     ExcelDownloadModelアノテーションのついたクラス型
+     * @return headerList
+     */
+    protected List<String> getHeaderList(Class<?> clazz) {
+        return CollectionUtil
+                .toList(clazz.getAnnotation(ExcelDownloadModel.class).headerNames());
+    }
 
-	/**
-	 * フッタ名を取得する
-	 *
-	 * @param clazz
-	 *     ExcelDownloadModelアノテーションのついたクラス型
-	 * @return footerList
-	 */
-	protected List<String> getFooterList(Class<?> clazz) {
-		return CollectionUtil.toList(clazz.getAnnotation(ExcelDownloadModel.class).footerNames());
-	}
+    /**
+     * フッタ名を取得する
+     *
+     * @param clazz
+     *     ExcelDownloadModelアノテーションのついたクラス型
+     * @return footerList
+     */
+    protected List<String> getFooterList(Class<?> clazz) {
+        return CollectionUtil
+                .toList(clazz.getAnnotation(ExcelDownloadModel.class).footerNames());
+    }
 }

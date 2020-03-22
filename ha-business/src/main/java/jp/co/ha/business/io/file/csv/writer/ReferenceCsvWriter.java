@@ -20,46 +20,48 @@ import jp.co.ha.common.util.StringUtil;
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(ReferenceCsvWriter.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(ReferenceCsvWriter.class);
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param conf
-	 *     CSV設定情報
-	 * @param pw
-	 *     出力用PrintWriter
-	 */
-	public ReferenceCsvWriter(CsvConfig conf, PrintWriter pw) {
-		super(conf, pw);
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param conf
+     *     CSV設定情報
+     * @param pw
+     *     出力用PrintWriter
+     */
+    public ReferenceCsvWriter(CsvConfig conf, PrintWriter pw) {
+        super(conf, pw);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void writeData(StringJoiner record, ReferenceCsvDownloadModel model) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void writeData(StringJoiner record, ReferenceCsvDownloadModel model) {
 
-		LOG.debugRes(model);
-		// 1項目ごと区切る
-		StringJoiner body = new StringJoiner(StringUtil.COMMA);
+        LOG.debugRes(model);
+        // 1項目ごと区切る
+        StringJoiner body = new StringJoiner(StringUtil.COMMA);
 
-		// ユーザID
-		write(body, model.getUserId());
-		// 身長
-		write(body, conf.useMask() ? MaskExecutor.MASK : model.getHeight().toString());
-		// 体重
-		write(body, conf.useMask() ? MaskExecutor.MASK : model.getWeight().toString());
-		// BMI
-		write(body, conf.useMask() ? MaskExecutor.MASK : model.getBmi().toString());
-		// 標準体重
-		write(body, conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight().toString());
-		// 健康情報作成日時
-		write(body, DateUtil.toString(model.getHealthInfoRegDate(), DateFormatType.YYYYMMDD_HHMMSS));
+        // ユーザID
+        write(body, model.getUserId());
+        // 身長
+        write(body, conf.useMask() ? MaskExecutor.MASK : model.getHeight().toString());
+        // 体重
+        write(body, conf.useMask() ? MaskExecutor.MASK : model.getWeight().toString());
+        // BMI
+        write(body, conf.useMask() ? MaskExecutor.MASK : model.getBmi().toString());
+        // 標準体重
+        write(body, conf.useMask() ? MaskExecutor.MASK
+                : model.getStandardWeight().toString());
+        // 健康情報作成日時
+        write(body, DateUtil.toString(model.getHealthInfoRegDate(),
+                DateFormatType.YYYYMMDD_HHMMSS));
 
-		// 1行書き込む
-		record.add(body.toString());
-	}
+        // 1行書き込む
+        record.add(body.toString());
+    }
 
 }

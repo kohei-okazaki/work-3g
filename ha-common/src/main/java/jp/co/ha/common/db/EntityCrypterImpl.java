@@ -24,84 +24,92 @@ import jp.co.ha.common.util.BeanUtil.AccessorType;
 @Component
 public class EntityCrypterImpl implements EntityCrypter {
 
-	/** 暗号/復号インターフェース */
-	@Autowired
-	@Qualifier("aesCrypter")
-	private Crypter crypter;
+    /** 暗号/復号インターフェース */
+    @Autowired
+    @Qualifier("aesCrypter")
+    private Crypter crypter;
 
-	@Override
-	public void encrypt(Object entity) throws BaseException {
+    @Override
+    public void encrypt(Object entity) throws BaseException {
 
-		try {
-			for (Field f : entity.getClass().getDeclaredFields()) {
+        try {
+            for (Field f : entity.getClass().getDeclaredFields()) {
 
-				if (!isCryptField(f)) {
-					// 暗号化項目でない場合
-					continue;
-				}
+                if (!isCryptField(f)) {
+                    // 暗号化項目でない場合
+                    continue;
+                }
 
-				// 暗号化前の値を取得
-				Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.GETTER);
-				Object value = getter.invoke(entity);
+                // 暗号化前の値を取得
+                Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
+                        AccessorType.GETTER);
+                Object value = getter.invoke(entity);
 
-				if (BeanUtil.isNull(value)) {
-					continue;
-				}
-				// 暗号化
-				String enc = crypter.encrypt(value.toString());
-				// 暗号化後の値を設定
-				Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
-				setter.invoke(entity, enc);
+                if (BeanUtil.isNull(value)) {
+                    continue;
+                }
+                // 暗号化
+                String enc = crypter.encrypt(value.toString());
+                // 暗号化後の値を設定
+                Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
+                        AccessorType.SETTER);
+                setter.invoke(entity, enc);
 
-			}
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "entityから値を取得できません", e);
-		}
-	}
+            }
+        } catch (IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR,
+                    "entityから値を取得できません", e);
+        }
+    }
 
-	@Override
-	public void decrypt(Object entity) throws BaseException {
+    @Override
+    public void decrypt(Object entity) throws BaseException {
 
-		try {
-			for (Field f : entity.getClass().getDeclaredFields()) {
+        try {
+            for (Field f : entity.getClass().getDeclaredFields()) {
 
-				if (!isCryptField(f)) {
-					// 暗号化項目でない場合
-					continue;
-				}
+                if (!isCryptField(f)) {
+                    // 暗号化項目でない場合
+                    continue;
+                }
 
-				// 値を取得
-				Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.GETTER);
-				Object value = getter.invoke(entity);
+                // 値を取得
+                Method getter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
+                        AccessorType.GETTER);
+                Object value = getter.invoke(entity);
 
-				if (BeanUtil.isNull(value)) {
-					continue;
-				}
-				// 復号
-				String dec = crypter.decrypt(value.toString());
-				// 復号後の値を設定
-				Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(), AccessorType.SETTER);
-				setter.invoke(entity, dec);
+                if (BeanUtil.isNull(value)) {
+                    continue;
+                }
+                // 復号
+                String dec = crypter.decrypt(value.toString());
+                // 復号後の値を設定
+                Method setter = BeanUtil.getAccessor(f.getName(), entity.getClass(),
+                        AccessorType.SETTER);
+                setter.invoke(entity, dec);
 
-			}
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "entityから値を取得できません", e);
-		}
-	}
+            }
+        } catch (IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR,
+                    "entityから値を取得できません", e);
+        }
+    }
 
-	/**
-	 * 指定したフィールドが暗号化項目かどうか判定する<br>
-	 * <ul>
-	 * <li>暗号化項目の場合、true</li>
-	 * <li>それ以外の場合、false</li>
-	 * </ul>
-	 *
-	 * @param f
-	 *     フィールド
-	 * @return 判定結果
-	 */
-	private boolean isCryptField(Field f) {
-		return f.isAnnotationPresent(Crypt.class);
-	}
+    /**
+     * 指定したフィールドが暗号化項目かどうか判定する<br>
+     * <ul>
+     * <li>暗号化項目の場合、true</li>
+     * <li>それ以外の場合、false</li>
+     * </ul>
+     *
+     * @param f
+     *     フィールド
+     * @return 判定結果
+     */
+    private boolean isCryptField(Field f) {
+        return f.isAnnotationPresent(Crypt.class);
+    }
 
 }

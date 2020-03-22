@@ -25,24 +25,24 @@ import jp.co.ha.common.validator.DecimalValidator;
 @Constraint(validatedBy = DecimalValidator.class)
 public @interface Decimal {
 
-	/** 最小桁数 */
-	int min() default 1;
+    /** 最小桁数 */
+    int min() default 1;
 
-	/** 最大桁数 */
-	int max() default 99999;
+    /** 最大桁数 */
+    int max() default 99999;
 
-	/** 最小桁数を含むかどうか */
-	boolean minEqual() default true;
+    /** 最小桁数を含むかどうか */
+    boolean minEqual() default true;
 
-	/** 最大桁数を含むかどうか */
-	boolean maxEqual() default true;
+    /** 最大桁数を含むかどうか */
+    boolean maxEqual() default true;
 
-	/** message */
-	String message() default "";
+    /** message */
+    String message() default "";
 
-	/** groups */
-	Class<?>[] groups() default {};
+    /** groups */
+    Class<?>[] groups() default {};
 
-	/** payload */
-	Class<? extends Payload>[] payload() default {};
+    /** payload */
+    Class<? extends Payload>[] payload() default {};
 }

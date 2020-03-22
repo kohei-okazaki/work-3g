@@ -25,47 +25,52 @@ import jp.co.ha.db.entity.HealthInfo;
  * @since 1.0
  */
 @Service
-public class HealthInfoReferenceServiceImpl extends CommonService implements HealthInfoReferenceService {
+public class HealthInfoReferenceServiceImpl extends CommonService
+        implements HealthInfoReferenceService {
 
-	/** 健康情報検索サービス */
-	@Autowired
-	private HealthInfoSearchService healthInfoSearchService;
+    /** 健康情報検索サービス */
+    @Autowired
+    private HealthInfoSearchService healthInfoSearchService;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void checkRequest(HealthInfoReferenceRequest request) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void checkRequest(HealthInfoReferenceRequest request) throws BaseException {
 
-		// リクエスト種別チェック
-		if (RequestType.HEALTH_INFO_REFERENCE != request.getRequestType()) {
-			throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID,
-					"リクエスト種別が一致しません requestType:" + request.getRequestType().getName());
-		}
+        // リクエスト種別チェック
+        if (RequestType.HEALTH_INFO_REFERENCE != request.getRequestType()) {
+            throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID,
+                    "リクエスト種別が一致しません requestType:" + request.getRequestType().getName());
+        }
 
-		// API利用判定
-		checkApiUse(request);
-	}
+        // API利用判定
+        checkApiUse(request);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void execute(HealthInfoReferenceRequest request, HealthInfoReferenceResponse response) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(HealthInfoReferenceRequest request,
+            HealthInfoReferenceResponse response) throws BaseException {
 
-		List<HealthInfo> healthInfoList = healthInfoSearchService.findByHealthInfoIdAndUserId(request.getHealthInfoId(),
-				request.getUserId());
-		if (CollectionUtil.isEmpty(healthInfoList)) {
-			throw new BusinessException(CommonErrorCode.DB_NO_DATA,
-					"該当のレコードが見つかりません healthInfoId:" + request.getHealthInfoId() + ", userId:" + request.getUserId());
-		} else if (CollectionUtil.isMultiple(healthInfoList)) {
-			throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
-					"該当のデータが複数存在します healthInfoId:" + request.getHealthInfoId() + ", userId:" + request.getUserId());
-		}
+        List<HealthInfo> healthInfoList = healthInfoSearchService
+                .findByHealthInfoIdAndUserId(request.getHealthInfoId(),
+                        request.getUserId());
+        if (CollectionUtil.isEmpty(healthInfoList)) {
+            throw new BusinessException(CommonErrorCode.DB_NO_DATA,
+                    "該当のレコードが見つかりません healthInfoId:" + request.getHealthInfoId()
+                            + ", userId:" + request.getUserId());
+        } else if (CollectionUtil.isMultiple(healthInfoList)) {
+            throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
+                    "該当のデータが複数存在します healthInfoId:" + request.getHealthInfoId()
+                            + ", userId:" + request.getUserId());
+        }
 
-		HealthInfo healthInfo = CollectionUtil.getFirst(healthInfoList);
-		BeanUtil.copy(healthInfo, response);
+        HealthInfo healthInfo = CollectionUtil.getFirst(healthInfoList);
+        BeanUtil.copy(healthInfo, response);
 
-	}
+    }
 
 }

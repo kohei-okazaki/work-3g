@@ -10,11 +10,11 @@ package jp.co.ha.common.function;
 @FunctionalInterface
 public interface Builder<T> {
 
-	/**
-	 * ビルド後のクラスを返す
-	 *
-	 * @return ビルド後のクラス
-	 */
-	T build();
+    /**
+     * ビルド後のクラスを返す
+     *
+     * @return ビルド後のクラス
+     */
+    T build();
 
 }

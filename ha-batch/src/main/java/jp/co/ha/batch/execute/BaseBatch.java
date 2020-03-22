@@ -10,27 +10,27 @@ import jp.co.ha.common.exception.BaseException;
 /**
  * 基底Batchクラス<br>
  * すべてのBatchクラスはこのクラスを継承する
- * 
+ *
  * @since 1.0
  */
 public abstract class BaseBatch {
 
-	/**
-	 * 実処理を行う
-	 *
-	 * @return Batch結果
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	protected abstract BatchResult execute() throws BaseException;
+    /**
+     * 実処理を行う
+     *
+     * @return Batch結果
+     * @throws BaseException
+     *     基底例外
+     */
+    protected abstract BatchResult execute() throws BaseException;
 
-	/**
-	 * オプションを取得
-	 *
-	 * @param optionList
-	 *     オプションリスト
-	 * @return Options
-	 */
-	protected abstract Options getOptions(List<String> optionList);
+    /**
+     * オプションを取得
+     *
+     * @param optionList
+     *     オプションリスト
+     * @return Options
+     */
+    protected abstract Options getOptions(List<String> optionList);
 
 }

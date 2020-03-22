@@ -17,28 +17,28 @@ import jp.co.ha.common.validator.annotation.Date;
  */
 public class DateValidator implements ConstraintValidator<Date, Object> {
 
-	/** 日付フォーマットの列挙 */
-	private DateFormatType formatType;
+    /** 日付フォーマットの列挙 */
+    private DateFormatType formatType;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize(Date annotation) {
-		this.formatType = annotation.formatType();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialize(Date annotation) {
+        this.formatType = annotation.formatType();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isValid(Object value, ConstraintValidatorContext context) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
 
-		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
-			return true;
-		}
+        if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
+            return true;
+        }
 
-		return DateUtil.isDate(value.toString(), this.formatType);
-	}
+        return DateUtil.isDate(value.toString(), this.formatType);
+    }
 
 }

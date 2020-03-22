@@ -24,77 +24,77 @@ import jp.co.ha.common.util.StringUtil;
 @Component("aesCrypter")
 public class AesCrypter implements Crypter {
 
-	/** LOG */
-	private static Logger LOG = LoggerFactory.getLogger(AesCrypter.class);
-	/** CryptConfig */
-	@Autowired
-	private CryptConfig cryptConfig;
+    /** LOG */
+    private static Logger LOG = LoggerFactory.getLogger(AesCrypter.class);
+    /** CryptConfig */
+    @Autowired
+    private CryptConfig cryptConfig;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String encrypt(String str) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String encrypt(String str) {
 
-		if (StringUtil.isEmpty(str)) {
-			return null;
-		}
+        if (StringUtil.isEmpty(str)) {
+            return null;
+        }
 
-		try {
-			byte[] key = getKey();
-			SecretKeySpec sks = new SecretKeySpec(key, Algorithm.AES.getValue());
-			byte[] input = str.getBytes(Charset.UTF_8.getValue());
+        try {
+            byte[] key = getKey();
+            SecretKeySpec sks = new SecretKeySpec(key, Algorithm.AES.getValue());
+            byte[] input = str.getBytes(Charset.UTF_8.getValue());
 
-			// 暗号化
-			Cipher c = Cipher.getInstance(cryptConfig.getMode());
-			c.init(Cipher.ENCRYPT_MODE, sks);
+            // 暗号化
+            Cipher c = Cipher.getInstance(cryptConfig.getMode());
+            c.init(Cipher.ENCRYPT_MODE, sks);
 
-			byte[] encrypted = c.doFinal(input);
-			return Base64.getEncoder().encodeToString(encrypted);
+            byte[] encrypted = c.doFinal(input);
+            return Base64.getEncoder().encodeToString(encrypted);
 
-		} catch (Exception e) {
-			LOG.error("暗号化処理が失敗しました", e);
-			return null;
-		}
-	}
+        } catch (Exception e) {
+            LOG.error("暗号化処理が失敗しました", e);
+            return null;
+        }
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String decrypt(String str) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String decrypt(String str) {
 
-		if (StringUtil.isEmpty(str)) {
-			return null;
-		}
+        if (StringUtil.isEmpty(str)) {
+            return null;
+        }
 
-		try {
-			byte[] key = getKey();
-			SecretKeySpec sks = new SecretKeySpec(key, Algorithm.AES.getValue());
-			byte[] input = Base64.getDecoder().decode(str);
+        try {
+            byte[] key = getKey();
+            SecretKeySpec sks = new SecretKeySpec(key, Algorithm.AES.getValue());
+            byte[] input = Base64.getDecoder().decode(str);
 
-			// 復号
-			Cipher c = Cipher.getInstance(cryptConfig.getMode());
-			c.init(Cipher.DECRYPT_MODE, sks);
+            // 復号
+            Cipher c = Cipher.getInstance(cryptConfig.getMode());
+            c.init(Cipher.DECRYPT_MODE, sks);
 
-			byte[] decrypted = c.doFinal(input);
-			return new String(decrypted, Charset.UTF_8.getValue());
+            byte[] decrypted = c.doFinal(input);
+            return new String(decrypted, Charset.UTF_8.getValue());
 
-		} catch (Exception e) {
-			LOG.error("復号処理が失敗しました", e);
-			return null;
-		}
-	}
+        } catch (Exception e) {
+            LOG.error("復号処理が失敗しました", e);
+            return null;
+        }
+    }
 
-	/**
-	 * 秘密鍵を返す
-	 *
-	 * @return 秘密鍵
-	 * @throws UnsupportedEncodingException
-	 *     文字コードの指定が正しくない
-	 */
-	private byte[] getKey() throws UnsupportedEncodingException {
-		return cryptConfig.getKey().getBytes(Charset.UTF_8.getValue());
-	}
+    /**
+     * 秘密鍵を返す
+     *
+     * @return 秘密鍵
+     * @throws UnsupportedEncodingException
+     *     文字コードの指定が正しくない
+     */
+    private byte[] getKey() throws UnsupportedEncodingException {
+        return cryptConfig.getKey().getBytes(Charset.UTF_8.getValue());
+    }
 
 }

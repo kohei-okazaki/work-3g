@@ -12,48 +12,48 @@ import jp.co.ha.tool.source.type.AccessType;
  */
 public class Getter extends Method {
 
-	/** 接頭語 */
-	private static final String PREFIX = "get";
+    /** 接頭語 */
+    private static final String PREFIX = "get";
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param field
-	 *     Field
-	 */
-	public Getter(Field field) {
-		this(field, AccessType.PUBLIC);
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param field
+     *     Field
+     */
+    public Getter(Field field) {
+        this(field, AccessType.PUBLIC);
+    }
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param field
-	 *     Field
-	 * @param accessType
-	 *     アクセスタイプ
-	 */
-	public Getter(Field field, AccessType accessType) {
-		super(field, accessType);
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param field
+     *     Field
+     * @param accessType
+     *     アクセスタイプ
+     */
+    public Getter(Field field, AccessType accessType) {
+        super(field, accessType);
+    }
 
-	@Override
-	public String toString() {
+    @Override
+    public String toString() {
 
-		final String TAB = "	";
+        final String TAB = "	";
 
-		StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-		body.add(TAB + accessType.getValue() + " "
-				+ field.getClassType().getSimpleName() + " "
-				+ getMethodName() + "() {");
-		body.add(TAB + TAB + "return " + field.getName() + ";");
-		body.add(TAB + "}");
+        StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
+        body.add(TAB + accessType.getValue() + " "
+                + field.getClassType().getSimpleName() + " "
+                + getMethodName() + "() {");
+        body.add(TAB + TAB + "return " + field.getName() + ";");
+        body.add(TAB + "}");
 
-		return body.toString();
-	}
+        return body.toString();
+    }
 
-	@Override
-	public String getMethodName() {
-		return PREFIX + StringUtil.capitalize(field.getName());
-	}
+    @Override
+    public String getMethodName() {
+        return PREFIX + StringUtil.capitalize(field.getName());
+    }
 }

@@ -17,48 +17,48 @@ import org.springframework.web.util.WebUtils;
 @Service
 public class SessionManageServiceImpl implements SessionManageService {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void removeValue(HttpSession session, String key) {
-		session.removeAttribute(key);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeValue(HttpSession session, String key) {
+        session.removeAttribute(key);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void setValue(HttpSession session, String key, Object value) {
-		session.setAttribute(key, value);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValue(HttpSession session, String key, Object value) {
+        session.setAttribute(key, value);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void removeValues(HttpSession session) {
-		Enumeration<String> enm = session.getAttributeNames();
-		while (enm.hasMoreElements()) {
-			this.removeValue(session, enm.nextElement());
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeValues(HttpSession session) {
+        Enumeration<String> enm = session.getAttributeNames();
+        while (enm.hasMoreElements()) {
+            this.removeValue(session, enm.nextElement());
+        }
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public <T> Optional<T> getValue(HttpSession session, String key, Class<T> clazz) {
-		return Optional.ofNullable((T) session.getAttribute(key));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> Optional<T> getValue(HttpSession session, String key, Class<T> clazz) {
+        return Optional.ofNullable((T) session.getAttribute(key));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getSessionId(HttpServletRequest request) {
-		return WebUtils.getSessionId(request);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getSessionId(HttpServletRequest request) {
+        return WebUtils.getSessionId(request);
+    }
 
 }

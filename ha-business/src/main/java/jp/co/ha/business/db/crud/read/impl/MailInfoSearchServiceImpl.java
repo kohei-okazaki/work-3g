@@ -19,17 +19,17 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 @Service
 public class MailInfoSearchServiceImpl implements MailInfoSearchService {
 
-	/** MailInfoMapper */
-	@Autowired
-	private MailInfoMapper mapper;
+    /** MailInfoMapper */
+    @Autowired
+    private MailInfoMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<MailInfo> findByUserId(String userId) {
-		return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<MailInfo> findByUserId(String userId) {
+        return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
+    }
 }

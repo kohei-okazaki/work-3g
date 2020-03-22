@@ -20,86 +20,86 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public abstract class MultiThreadFunction<T> {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(MultiThreadFunction.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(MultiThreadFunction.class);
 
-	/**
-	 * 並列処理を実装する
-	 *
-	 * @param t
-	 *     並列処理に必要な対象クラス
-	 * @return 処理結果
-	 * @throws InterruptedException
-	 *     スレッドへの割り込み処理が発生した場合
-	 */
-	public final ResultType execute(T t) throws InterruptedException {
+    /**
+     * 並列処理を実装する
+     *
+     * @param t
+     *     並列処理に必要な対象クラス
+     * @return 処理結果
+     * @throws InterruptedException
+     *     スレッドへの割り込み処理が発生した場合
+     */
+    public final ResultType execute(T t) throws InterruptedException {
 
-		LOG.debug("並列処理開始, スレッド数=" + getThreadCount());
+        LOG.debug("並列処理開始, スレッド数=" + getThreadCount());
 
-		// 処理結果
-		ResultType result = ResultType.FAILURE;
-		ExecutorService es = Executors.newFixedThreadPool(getThreadCount());
+        // 処理結果
+        ResultType result = ResultType.FAILURE;
+        ExecutorService es = Executors.newFixedThreadPool(getThreadCount());
 
-		try {
+        try {
 
-			for (int i = 0; i < getThreadCount(); i++) {
-				es.execute(() -> getConsumer().accept(t));
-			}
-			result = ResultType.SUCCESS;
+            for (int i = 0; i < getThreadCount(); i++) {
+                es.execute(() -> getConsumer().accept(t));
+            }
+            result = ResultType.SUCCESS;
 
-		} finally {
+        } finally {
 
-			es.shutdown();
-			es.awaitTermination(1, TimeUnit.MINUTES);
-			LOG.debug("並列処理終了");
+            es.shutdown();
+            es.awaitTermination(1, TimeUnit.MINUTES);
+            LOG.debug("並列処理終了");
 
-		}
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * 並列処理の実装を返す
-	 *
-	 * @return 並列処理の実装
-	 */
-	public abstract Consumer<T> getConsumer();
+    /**
+     * 並列処理の実装を返す
+     *
+     * @return 並列処理の実装
+     */
+    public abstract Consumer<T> getConsumer();
 
-	/**
-	 * スレッド数を返す
-	 *
-	 * @return スレッド数
-	 */
-	public abstract int getThreadCount();
+    /**
+     * スレッド数を返す
+     *
+     * @return スレッド数
+     */
+    public abstract int getThreadCount();
 
-	/**
-	 * 処理結果の列挙
-	 *
-	 * @since 1.0
-	 */
-	public static enum ResultType implements BaseEnum {
+    /**
+     * 処理結果の列挙
+     *
+     * @since 1.0
+     */
+    public static enum ResultType implements BaseEnum {
 
-		/** 正常終了 */
-		SUCCESS("0"),
-		/** 失敗 */
-		FAILURE("1");
+        /** 正常終了 */
+        SUCCESS("0"),
+        /** 失敗 */
+        FAILURE("1");
 
-		/** 値 */
-		private String value;
+        /** 値 */
+        private String value;
 
-		/**
-		 * コンストラクタ
-		 *
-		 * @param value
-		 *     値
-		 */
-		private ResultType(String value) {
-			this.value = value;
-		}
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private ResultType(String value) {
+            this.value = value;
+        }
 
-		@Override
-		public String getValue() {
-			return this.value;
-		}
-	}
+        @Override
+        public String getValue() {
+            return this.value;
+        }
+    }
 }

@@ -26,16 +26,16 @@ import jp.co.ha.common.validator.DateValidator;
 @Constraint(validatedBy = DateValidator.class)
 public @interface Date {
 
-	/** 日付フォーマット */
-	DateFormatType formatType();
+    /** 日付フォーマット */
+    DateFormatType formatType();
 
-	/** message */
-	String message() default "";
+    /** message */
+    String message() default "";
 
-	/** groups */
-	Class<?>[] groups() default {};
+    /** groups */
+    Class<?>[] groups() default {};
 
-	/** payload */
-	Class<? extends Payload>[] payload() default {};
+    /** payload */
+    Class<? extends Payload>[] payload() default {};
 
 }

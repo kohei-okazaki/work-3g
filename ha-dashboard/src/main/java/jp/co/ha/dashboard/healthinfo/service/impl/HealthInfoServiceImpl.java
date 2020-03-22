@@ -43,140 +43,145 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {
 
-	/** 健康情報検索サービス */
-	@Autowired
-	private HealthInfoSearchService healthInfoSearchService;
-	/** 健康情報計算サービス */
-	@Autowired
-	private HealthInfoCalcService healthInfoCalcService;
-	/** アカウント検索サービス */
-	@Autowired
-	private AccountSearchService accountSearchService;
-	/** 健康情報登録API */
-	@Autowired
-	private HealthInfoRegistApi registApi;
-	/** messageSource */
-	@Autowired
-	private MessageSource messageSource;
+    /** 健康情報検索サービス */
+    @Autowired
+    private HealthInfoSearchService healthInfoSearchService;
+    /** 健康情報計算サービス */
+    @Autowired
+    private HealthInfoCalcService healthInfoCalcService;
+    /** アカウント検索サービス */
+    @Autowired
+    private AccountSearchService accountSearchService;
+    /** 健康情報登録API */
+    @Autowired
+    private HealthInfoRegistApi registApi;
+    /** messageSource */
+    @Autowired
+    private MessageSource messageSource;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo) {
-		model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
-		model.addAttribute("diffWeight", getDiffWeight(dto, lastHealthInfo));
-		model.addAttribute("resultMessage", getDiffMessage(dto, lastHealthInfo));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo) {
+        model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
+        model.addAttribute("diffWeight", getDiffWeight(dto, lastHealthInfo));
+        model.addAttribute("resultMessage", getDiffMessage(dto, lastHealthInfo));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isFirstReg(String userId) throws BaseException {
-		return healthInfoSearchService.getSelectCountByUserId(userId) == 0;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isFirstReg(String userId) throws BaseException {
+        return healthInfoSearchService.getSelectCountByUserId(userId) == 0;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<HealthInfoCsvDownloadModel> toModelList(List<HealthInfo> healthInfo) {
-		return healthInfo.stream().map(e -> {
-			HealthInfoCsvDownloadModel model = new HealthInfoCsvDownloadModel();
-			BeanUtil.copy(e, model);
-			return model;
-		}).collect(Collectors.toList());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<HealthInfoCsvDownloadModel> toModelList(List<HealthInfo> healthInfo) {
+        return healthInfo.stream().map(e -> {
+            HealthInfoCsvDownloadModel model = new HealthInfoCsvDownloadModel();
+            BeanUtil.copy(e, model);
+            return model;
+        }).collect(Collectors.toList());
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public HealthInfoRegistResponse regist(HealthInfoDto dto, String userId) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HealthInfoRegistResponse regist(HealthInfoDto dto, String userId)
+            throws BaseException {
 
-		HealthInfoRegistRequest apiRequest = setUpApiRequest(dto, userId);
-		HealthInfoRegistResponse apiResponse = new HealthInfoRegistResponse();
-		registApi.execute(apiRequest, apiResponse);
+        HealthInfoRegistRequest apiRequest = setUpApiRequest(dto, userId);
+        HealthInfoRegistResponse apiResponse = new HealthInfoRegistResponse();
+        registApi.execute(apiRequest, apiResponse);
 
-		return apiResponse;
-	}
+        return apiResponse;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
 
-		// ファイル名
-		String fileName = "healthInfoRegist_"
-				+ DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
-				+ FileExtension.CSV.getValue();
-		// ファイル出力先
-		String path = null;
+        // ファイル名
+        String fileName = "healthInfoRegist_"
+                + DateUtil.toString(DateUtil.getSysDate(),
+                        DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+                + FileExtension.CSV.getValue();
+        // ファイル出力先
+        String path = null;
 
-		return new CsvConfigBuilder(fileName, path)
-				.hasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()))
-				.hasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()))
-				.csvFileChar(CsvFileChar.DOBBLE_QUOTE)
-				.hasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()))
-				.useMask(CommonFlag.TRUE.is(entity.getMaskFlag()))
-				.build();
-	}
+        return new CsvConfigBuilder(fileName, path)
+                .hasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()))
+                .hasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()))
+                .csvFileChar(CsvFileChar.DOBBLE_QUOTE)
+                .hasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()))
+                .useMask(CommonFlag.TRUE.is(entity.getMaskFlag()))
+                .build();
+    }
 
-	/**
-	 * 体重差メッセージを返す
-	 *
-	 * @param dto
-	 *     健康情報DTO
-	 * @param healthInfo
-	 *     健康情報
-	 * @return 体重差メッセージ
-	 */
-	private String getDiffMessage(HealthInfoDto dto, HealthInfo healthInfo) {
-		HealthInfoStatus status = healthInfoCalcService.getHealthInfoStatus(dto.getWeight(), healthInfo.getWeight());
-		return messageSource.getMessage(status.getMessage(), null, Locale.getDefault());
-	}
+    /**
+     * 体重差メッセージを返す
+     *
+     * @param dto
+     *     健康情報DTO
+     * @param healthInfo
+     *     健康情報
+     * @return 体重差メッセージ
+     */
+    private String getDiffMessage(HealthInfoDto dto, HealthInfo healthInfo) {
+        HealthInfoStatus status = healthInfoCalcService
+                .getHealthInfoStatus(dto.getWeight(), healthInfo.getWeight());
+        return messageSource.getMessage(status.getMessage(), null, Locale.getDefault());
+    }
 
-	/**
-	 * 体重差を返す
-	 *
-	 * @param dto
-	 *     健康情報DTO
-	 * @param healthInfo
-	 *     健康情報
-	 * @return 体重差
-	 */
-	private BigDecimal getDiffWeight(HealthInfoDto dto, HealthInfo healthInfo) {
-		return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(), dto.getWeight());
-	}
+    /**
+     * 体重差を返す
+     *
+     * @param dto
+     *     健康情報DTO
+     * @param healthInfo
+     *     健康情報
+     * @return 体重差
+     */
+    private BigDecimal getDiffWeight(HealthInfoDto dto, HealthInfo healthInfo) {
+        return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(),
+                dto.getWeight());
+    }
 
-	/**
-	 * 健康情報登録APIリクエストの設定を行う
-	 *
-	 * @param dto
-	 *     健康情報DTO
-	 * @param userId
-	 *     ユーザID
-	 * @return 健康情報登録APIリクエストを返す
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	private HealthInfoRegistRequest setUpApiRequest(HealthInfoDto dto, String userId) throws BaseException {
+    /**
+     * 健康情報登録APIリクエストの設定を行う
+     *
+     * @param dto
+     *     健康情報DTO
+     * @param userId
+     *     ユーザID
+     * @return 健康情報登録APIリクエストを返す
+     * @throws BaseException
+     *     基底例外
+     */
+    private HealthInfoRegistRequest setUpApiRequest(HealthInfoDto dto, String userId)
+            throws BaseException {
 
-		HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
-		// 健康情報DTOをリクエストクラスにコピー
-		BeanUtil.copy(dto, apiRequest);
-		apiRequest.setUserId(userId);
-		// リクエストタイプ設定
-		apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
-		// アカウント情報.APIキーを設定
-		Account account = accountSearchService.findByUserId(userId).get();
-		apiRequest.setApiKey(account.getApiKey());
-		// DB登録モードを設定
-		apiRequest.setTestMode(TestMode.DB_REGIST);
+        HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
+        // 健康情報DTOをリクエストクラスにコピー
+        BeanUtil.copy(dto, apiRequest);
+        apiRequest.setUserId(userId);
+        // リクエストタイプ設定
+        apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
+        // アカウント情報.APIキーを設定
+        Account account = accountSearchService.findByUserId(userId).get();
+        apiRequest.setApiKey(account.getApiKey());
+        // DB登録モードを設定
+        apiRequest.setTestMode(TestMode.DB_REGIST);
 
-		return apiRequest;
-	}
+        return apiRequest;
+    }
 
 }

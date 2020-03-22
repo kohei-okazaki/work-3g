@@ -17,19 +17,21 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
  * @since 1.0
  */
 @Service
-public class HealthInfoFileSettingSearchServiceImpl implements HealthInfoFileSettingSearchService {
+public class HealthInfoFileSettingSearchServiceImpl
+        implements HealthInfoFileSettingSearchService {
 
-	/** HealthInfoFileSettingMapper */
-	@Autowired
-	private HealthInfoFileSettingMapper mapper;
+    /** HealthInfoFileSettingMapper */
+    @Autowired
+    private HealthInfoFileSettingMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public Optional<HealthInfoFileSetting> findByUserId(String userId) {
-		return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<HealthInfoFileSetting> findByUserId(String userId) {
+        return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
+    }
+
 }

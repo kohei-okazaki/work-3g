@@ -16,14 +16,15 @@ import jp.co.ha.common.validator.annotation.Url;
  */
 public class UrlValidator implements ConstraintValidator<Url, Object> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isValid(Object value, ConstraintValidatorContext context) {
-		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
-			return true;
-		}
-		return RegexType.URL.is().test(value.toString());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
+            return true;
+        }
+        return RegexType.URL.is().test(value.toString());
+    }
+
 }

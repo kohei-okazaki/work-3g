@@ -16,29 +16,31 @@ import jp.co.ha.web.api.annotation.ApiExecute;
  * @since 1.0
  */
 @Component
-public class HealthInfoReferenceApi implements BaseApi<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+public class HealthInfoReferenceApi
+        implements BaseApi<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
-	/** 健康情報照会サービス */
-	@Autowired
-	private HealthInfoReferenceService service;
+    /** 健康情報照会サービス */
+    @Autowired
+    private HealthInfoReferenceService service;
 
-	/**
-	 * 照会
-	 *
-	 * @param request
-	 *     リクエスト
-	 * @param response
-	 *     レスポンス
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@ApiExecute
-	public void reference(HealthInfoReferenceRequest request, HealthInfoReferenceResponse response)
-			throws BaseException {
+    /**
+     * 照会
+     *
+     * @param request
+     *     リクエスト
+     * @param response
+     *     レスポンス
+     * @throws BaseException
+     *     基底例外
+     */
+    @ApiExecute
+    public void reference(HealthInfoReferenceRequest request,
+            HealthInfoReferenceResponse response)
+            throws BaseException {
 
-		service.checkRequest(request);
+        service.checkRequest(request);
 
-		service.execute(request, response);
-	}
+        service.execute(request, response);
+    }
 
 }

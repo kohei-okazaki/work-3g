@@ -9,43 +9,43 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public enum ClassType implements BaseEnum {
 
-	/** クラス */
-	CLASS("class"),
-	/** インターフェース */
-	INTERFACE("interface"),
-	/** アノテーション */
-	ANNOTATION("@interface"),
-	/** 列挙 */
-	ENUM("enum");
+    /** クラス */
+    CLASS("class"),
+    /** インターフェース */
+    INTERFACE("interface"),
+    /** アノテーション */
+    ANNOTATION("@interface"),
+    /** 列挙 */
+    ENUM("enum");
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param value
-	 *     値
-	 */
-	private ClassType(String value) {
-		this.value = value;
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param value
+     *     値
+     */
+    private ClassType(String value) {
+        this.value = value;
+    }
 
-	/** 値 */
-	private String value;
+    /** 値 */
+    private String value;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getValue() {
-		return this.value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue() {
+        return this.value;
+    }
 
-	/**
-	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value
-	 *     値
-	 * @return ClassType
-	 */
-	public static ClassType of(String value) {
-		return BaseEnum.of(ClassType.class, value);
-	}
+    /**
+     * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+     * @param value
+     *     値
+     * @return ClassType
+     */
+    public static ClassType of(String value) {
+        return BaseEnum.of(ClassType.class, value);
+    }
 }

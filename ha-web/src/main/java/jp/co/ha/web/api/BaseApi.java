@@ -20,29 +20,30 @@ import jp.co.ha.web.form.BaseApiResponse;
  */
 public interface BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiResponse> {
 
-	/**
-	 * APIを実行する
-	 *
-	 * @param request
-	 *     リクエスト
-	 * @param response
-	 *     レスポンス
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	public default void execute(Rq request, Rs response) throws BaseException {
-		try {
-			for (Method m : this.getClass().getDeclaredMethods()) {
-				if (m.isAnnotationPresent(ApiExecute.class)) {
-					m.invoke(this, request, response);
-				}
-			}
-		} catch (Exception e) {
-			if (e.getCause() instanceof BaseException) {
-				throw (BaseException) e.getCause();
-			} else {
-				throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "APIの実行に失敗しました", e);
-			}
-		}
-	}
+    /**
+     * APIを実行する
+     *
+     * @param request
+     *     リクエスト
+     * @param response
+     *     レスポンス
+     * @throws BaseException
+     *     基底例外
+     */
+    public default void execute(Rq request, Rs response) throws BaseException {
+        try {
+            for (Method m : this.getClass().getDeclaredMethods()) {
+                if (m.isAnnotationPresent(ApiExecute.class)) {
+                    m.invoke(this, request, response);
+                }
+            }
+        } catch (Exception e) {
+            if (e.getCause() instanceof BaseException) {
+                throw (BaseException) e.getCause();
+            } else {
+                throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "APIの実行に失敗しました",
+                        e);
+            }
+        }
+    }
 }

@@ -11,13 +11,13 @@ import jp.co.ha.db.entity.MailInfo;
  */
 public interface MailInfoSearchService {
 
-	/**
-	 * ユーザIDからメール情報を取得する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @return メール情報
-	 */
-	Optional<MailInfo> findByUserId(String userId);
+    /**
+     * ユーザIDからメール情報を取得する
+     *
+     * @param userId
+     *     ユーザID
+     * @return メール情報
+     */
+    Optional<MailInfo> findByUserId(String userId);
 
 }

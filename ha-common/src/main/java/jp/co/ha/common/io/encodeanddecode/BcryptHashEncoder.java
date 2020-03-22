@@ -12,13 +12,13 @@ import jp.co.ha.common.exception.BaseException;
 @Component("bcryptHashEncoder")
 public class BcryptHashEncoder implements HashEncoder {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String encode(String password, String salt) throws BaseException {
-		// TODO
-		return null;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String encode(String password, String salt) throws BaseException {
+        // TODO
+        return null;
+    }
 
 }

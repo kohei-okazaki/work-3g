@@ -4,45 +4,45 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * HTTPステータス列挙
- * 
+ *
  * @since 1.0
  */
 public enum HttpStatus implements BaseEnum {
 
-	/** OK */
-	OK("200"),
-	/** リクエストエラー */
-	BAD_REQUEST("400");
+    /** OK */
+    OK("200"),
+    /** リクエストエラー */
+    BAD_REQUEST("400");
 
-	/**
-	 * コンストラクタ
-	 *
-	 * @param value
-	 *     値
-	 */
-	private HttpStatus(String value) {
-		this.value = value;
-	}
+    /**
+     * コンストラクタ
+     *
+     * @param value
+     *     値
+     */
+    private HttpStatus(String value) {
+        this.value = value;
+    }
 
-	/** 値 */
-	private String value;
+    /** 値 */
+    private String value;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String getValue() {
-		return this.value;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue() {
+        return this.value;
+    }
 
-	/**
-	 * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
-	 * @param value
-	 *     値
-	 * @return HttpStatus
-	 */
-	public static HttpStatus of(String value) {
-		return BaseEnum.of(HttpStatus.class, value);
-	}
+    /**
+     * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+     * @param value
+     *     値
+     * @return HttpStatus
+     */
+    public static HttpStatus of(String value) {
+        return BaseEnum.of(HttpStatus.class, value);
+    }
 
 }

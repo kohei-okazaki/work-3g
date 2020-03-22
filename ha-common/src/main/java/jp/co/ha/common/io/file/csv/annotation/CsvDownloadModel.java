@@ -21,17 +21,17 @@ import java.lang.annotation.Target;
 @Target(TYPE)
 public @interface CsvDownloadModel {
 
-	/**
-	 * ヘッダ名
-	 *
-	 * @return ヘッダ名
-	 */
-	String[] headerNames() default "";
+    /**
+     * ヘッダ名
+     *
+     * @return ヘッダ名
+     */
+    String[] headerNames() default "";
 
-	/**
-	 * フッタ名
-	 *
-	 * @return フッタ名
-	 */
-	String[] footerNames() default "";
+    /**
+     * フッタ名
+     *
+     * @return フッタ名
+     */
+    String[] footerNames() default "";
 }

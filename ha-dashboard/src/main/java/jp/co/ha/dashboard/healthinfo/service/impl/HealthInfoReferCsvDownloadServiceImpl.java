@@ -27,45 +27,51 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
  * @since 1.0
  */
 @Service("referenceDownloadCsv")
-public class HealthInfoReferCsvDownloadServiceImpl implements CsvDownloadService<ReferenceCsvDownloadModel> {
+public class HealthInfoReferCsvDownloadServiceImpl
+        implements CsvDownloadService<ReferenceCsvDownloadModel> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void download(PrintWriter printWriter, CsvConfig conf, List<ReferenceCsvDownloadModel> modelList)
-			throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void download(PrintWriter printWriter, CsvConfig conf,
+            List<ReferenceCsvDownloadModel> modelList)
+            throws BaseException {
 
-		try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf, printWriter)) {
+        try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf,
+                printWriter)) {
 
-			// CSVに書込
-			writer.execute(modelList);
-			writer.flush();
+            // CSVに書込
+            writer.execute(modelList);
+            writer.flush();
 
-			if (!FileUtil.isExists(conf.getOutputPath())) {
-				// ユーザIDディレクトリが存在しない場合
-				FileUtil.mkdir(conf.getOutputPath());
-			}
+            if (!FileUtil.isExists(conf.getOutputPath())) {
+                // ユーザIDディレクトリが存在しない場合
+                FileUtil.mkdir(conf.getOutputPath());
+            }
 
-			// ダウンロードファイル
-			File file = FileUtil
-					.getFile(conf.getOutputPath() + FileSeparator.SYSTEM.getValue() + conf.getFileName());
+            // ダウンロードファイル
+            File file = FileUtil
+                    .getFile(conf.getOutputPath() + FileSeparator.SYSTEM.getValue()
+                            + conf.getFileName());
 
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR, file.getAbsolutePath() + "のファイル作成に失敗しました",
-						e);
-			}
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
+                        file.getAbsolutePath() + "のファイル作成に失敗しました",
+                        e);
+            }
 
-			try (FileWriter fw = new FileWriter(file.getAbsolutePath());
-					PrintWriter pw = new PrintWriter(new BufferedWriter(fw))) {
-				pw.println(writer.getData());
-				pw.flush();
-			} catch (IOException e) {
-				throw new BusinessException(CommonErrorCode.FILE_WRITE_ERROR, "ファイルの書き込みに失敗しました", e);
-			}
-		}
-	}
+            try (FileWriter fw = new FileWriter(file.getAbsolutePath());
+                    PrintWriter pw = new PrintWriter(new BufferedWriter(fw))) {
+                pw.println(writer.getData());
+                pw.flush();
+            } catch (IOException e) {
+                throw new BusinessException(CommonErrorCode.FILE_WRITE_ERROR,
+                        "ファイルの書き込みに失敗しました", e);
+            }
+        }
+    }
 
 }

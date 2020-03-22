@@ -33,93 +33,101 @@ import jp.co.ha.common.util.StringUtil;
  */
 public abstract class CsvReader<T extends BaseCsvModel> {
 
-	/** LOG */
-	private static final Logger LOG = LoggerFactory.getLogger(CsvReader.class);
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(CsvReader.class);
 
-	/**
-	 * 指定されたアップロードファイルを読み込み、CSVモデルリストを返す
-	 *
-	 * @param uploadFile
-	 *     アップロードファイル
-	 * @param charset
-	 *     Charset
-	 * @return CSVモデルリスト
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	public List<T> readMultipartFile(MultipartFile uploadFile, Charset charset) throws BaseException {
+    /**
+     * 指定されたアップロードファイルを読み込み、CSVモデルリストを返す
+     *
+     * @param uploadFile
+     *     アップロードファイル
+     * @param charset
+     *     Charset
+     * @return CSVモデルリスト
+     * @throws BaseException
+     *     基底例外
+     */
+    public List<T> readMultipartFile(MultipartFile uploadFile, Charset charset)
+            throws BaseException {
 
-		List<T> modelList = new ArrayList<>();
-		try (InputStream is = uploadFile.getInputStream();
-				InputStreamReader isr = new InputStreamReader(is, charset.getValue());
-				BufferedReader br = new BufferedReader(isr)) {
-			String record;
-			while (BeanUtil.notNull(record = br.readLine())) {
-				modelList.add(this.read(record));
-			}
-		} catch (UnsupportedEncodingException e) {
-			throw new SystemException(CommonErrorCode.FILE_READING_ERROR, "指定した文字コードが無効です:" + charset.getValue(), e);
-		} catch (IOException e) {
-			throw new SystemException(CommonErrorCode.FILE_READING_ERROR, "ファイルの読込に失敗しました。", e);
-		}
+        List<T> modelList = new ArrayList<>();
+        try (InputStream is = uploadFile.getInputStream();
+                InputStreamReader isr = new InputStreamReader(is, charset.getValue());
+                BufferedReader br = new BufferedReader(isr)) {
+            String record;
+            while (BeanUtil.notNull(record = br.readLine())) {
+                modelList.add(this.read(record));
+            }
+        } catch (UnsupportedEncodingException e) {
+            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
+                    "指定した文字コードが無効です:" + charset.getValue(), e);
+        } catch (IOException e) {
+            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
+                    "ファイルの読込に失敗しました。", e);
+        }
 
-		return modelList;
-	}
+        return modelList;
+    }
 
-	/**
-	 * 1行読込を行う
-	 *
-	 * @param record
-	 *     レコード
-	 * @return CSVモデル
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@SuppressWarnings("unchecked")
-	public T read(String record) throws BaseException {
+    /**
+     * 1行読込を行う
+     *
+     * @param record
+     *     レコード
+     * @return CSVモデル
+     * @throws BaseException
+     *     基底例外
+     */
+    @SuppressWarnings("unchecked")
+    public T read(String record) throws BaseException {
 
-		Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
-		List<String> colList = BeanUtil.getFieldList(clazz).stream().map(e -> e.getName()).collect(Collectors.toList());
-		List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
+        Class<T> clazz = (Class<T>) BeanUtil.getParameterType(this.getClass());
+        List<String> colList = BeanUtil.getFieldList(clazz).stream().map(e -> e.getName())
+                .collect(Collectors.toList());
+        List<String> dataList = StringUtil.toStrList(record, StringUtil.COMMA);
 
-		checkFileLength(colList, dataList);
+        checkFileLength(colList, dataList);
 
-		T model = null;
-		try {
-			model = clazz.getDeclaredConstructor().newInstance();
-			for (int i = 0; i < colList.size(); i++) {
-				String column = colList.get(i);
-				String data = dataList.get(i);
-				for (Field f : BeanUtil.getFieldList(clazz)) {
-					if (column.equals(f.getName())) {
-						// setter呼び出し
-						Method setter = BeanUtil.getAccessor(f.getName(), clazz, AccessorType.SETTER);
-						setter.invoke(model, data);
-					}
-				}
-			}
-		} catch (Exception e) {
-			throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "Beanの生成に失敗しました", e);
-		}
+        T model = null;
+        try {
+            model = clazz.getDeclaredConstructor().newInstance();
+            for (int i = 0; i < colList.size(); i++) {
+                String column = colList.get(i);
+                String data = dataList.get(i);
+                for (Field f : BeanUtil.getFieldList(clazz)) {
+                    if (column.equals(f.getName())) {
+                        // setter呼び出し
+                        Method setter = BeanUtil.getAccessor(f.getName(), clazz,
+                                AccessorType.SETTER);
+                        setter.invoke(model, data);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "Beanの生成に失敗しました",
+                    e);
+        }
 
-		LOG.debugRes(model);
-		return model;
-	}
+        LOG.debugRes(model);
+        return model;
+    }
 
-	/**
-	 * ファイル内の長さチェックを行う
-	 *
-	 * @param colList
-	 *     カラムリスト
-	 * @param dataList
-	 *     データリスト
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	private void checkFileLength(List<String> colList, List<String> dataList) throws BaseException {
-		if (dataList.size() != colList.size()) {
-			throw new SystemException(CommonErrorCode.FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
-		}
-	}
+    /**
+     * ファイル内の長さチェックを行う
+     *
+     * @param colList
+     *     カラムリスト
+     * @param dataList
+     *     データリスト
+     * @throws BaseException
+     *     基底例外
+     */
+    private void checkFileLength(List<String> colList, List<String> dataList)
+            throws BaseException {
+        if (dataList.size() != colList.size()) {
+            throw new SystemException(CommonErrorCode.FILE_UPLOAD_ERROR,
+                    "CSV1行あたりのレコードが一致しません。");
+        }
+    }
 
 }

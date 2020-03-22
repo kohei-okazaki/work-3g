@@ -7,12 +7,12 @@ package jp.co.ha.business.db.crud.delete;
  */
 public interface MailInfoDeleteService {
 
-	/**
-	 * 指定されたユーザIDのメール情報を削除する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 */
-	void deleteByUserId(String userId);
+    /**
+     * 指定されたユーザIDのメール情報を削除する
+     *
+     * @param userId
+     *     ユーザID
+     */
+    void deleteByUserId(String userId);
 
 }

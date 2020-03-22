@@ -10,47 +10,47 @@ import org.openqa.selenium.WebDriver;
  */
 public class AutoTestConfig {
 
-	/** WebDriver */
-	private WebDriver driver;
-	/** ブラウザの基底パス */
-	private String baseUrl;
+    /** WebDriver */
+    private WebDriver driver;
+    /** ブラウザの基底パス */
+    private String baseUrl;
 
-	/**
-	 * driverを返す
-	 *
-	 * @return driver
-	 */
-	public WebDriver getDriver() {
-		return driver;
-	}
+    /**
+     * driverを返す
+     *
+     * @return driver
+     */
+    public WebDriver getDriver() {
+        return driver;
+    }
 
-	/**
-	 * driverを設定する
-	 *
-	 * @param driver
-	 *     WebDriver
-	 */
-	public void setDriver(WebDriver driver) {
-		this.driver = driver;
-	}
+    /**
+     * driverを設定する
+     *
+     * @param driver
+     *     WebDriver
+     */
+    public void setDriver(WebDriver driver) {
+        this.driver = driver;
+    }
 
-	/**
-	 * baseUrlを返す
-	 *
-	 * @return baseUrl
-	 */
-	public String getBaseUrl() {
-		return baseUrl;
-	}
+    /**
+     * baseUrlを返す
+     *
+     * @return baseUrl
+     */
+    public String getBaseUrl() {
+        return baseUrl;
+    }
 
-	/**
-	 * baseUrlを設定する
-	 *
-	 * @param baseUrl
-	 *     ブラウザの基底パス
-	 */
-	public void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
-	}
+    /**
+     * baseUrlを設定する
+     *
+     * @param baseUrl
+     *     ブラウザの基底パス
+     */
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
 
 }

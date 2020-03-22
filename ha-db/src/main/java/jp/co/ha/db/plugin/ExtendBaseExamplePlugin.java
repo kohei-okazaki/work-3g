@@ -17,38 +17,40 @@ import jp.co.ha.db.entity.BaseExample;
  */
 public class ExtendBaseExamplePlugin extends PluginAdapter {
 
-	/** クラス情報を保持するクラス */
-	private FullyQualifiedJavaType bean;
+    /** クラス情報を保持するクラス */
+    private FullyQualifiedJavaType bean;
 
-	/**
-	 * コンストラクタ
-	 */
-	public ExtendBaseExamplePlugin() {
-		this.bean = new FullyQualifiedJavaType("jp.co.ha.db.entity.BaseExample");
-	}
+    /**
+     * コンストラクタ
+     */
+    public ExtendBaseExamplePlugin() {
+        this.bean = new FullyQualifiedJavaType("jp.co.ha.db.entity.BaseExample");
+    }
 
-	@Override
-	public boolean validate(List<String> warnings) {
-		return true;
-	}
+    @Override
+    public boolean validate(List<String> warnings) {
+        return true;
+    }
 
-	@Override
-	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		extendsBaseExample(topLevelClass, introspectedTable.getFullyQualifiedTable());
-		return true;
-	}
+    @Override
+    public boolean modelExampleClassGenerated(TopLevelClass topLevelClass,
+            IntrospectedTable introspectedTable) {
+        extendsBaseExample(topLevelClass, introspectedTable.getFullyQualifiedTable());
+        return true;
+    }
 
-	/**
-	 * {@linkplain BaseExample}を継承させる
-	 *
-	 * @param topLevelClass
-	 *     TopLevelClass
-	 * @param table
-	 *     FullyQualifiedTable
-	 */
-	private void extendsBaseExample(TopLevelClass topLevelClass, FullyQualifiedTable table) {
-		topLevelClass.addImportedType(bean);
-		topLevelClass.setSuperClass(bean);
-	}
+    /**
+     * {@linkplain BaseExample}を継承させる
+     *
+     * @param topLevelClass
+     *     TopLevelClass
+     * @param table
+     *     FullyQualifiedTable
+     */
+    private void extendsBaseExample(TopLevelClass topLevelClass,
+            FullyQualifiedTable table) {
+        topLevelClass.addImportedType(bean);
+        topLevelClass.setSuperClass(bean);
+    }
 
 }

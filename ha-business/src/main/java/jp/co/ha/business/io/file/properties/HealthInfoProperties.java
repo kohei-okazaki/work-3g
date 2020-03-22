@@ -10,49 +10,49 @@ import org.springframework.stereotype.Component;
 @Component
 public class HealthInfoProperties {
 
-	/** 照会ファイル格納パス */
-	private String referenceFilePath;
-	/** 健康情報登録バッチファイルパス */
-	private String healthInfoRegistBatchFilePath;
+    /** 照会ファイル格納パス */
+    private String referenceFilePath;
+    /** 健康情報登録バッチファイルパス */
+    private String healthInfoRegistBatchFilePath;
 
-	/**
-	 * referenceFilePathを返す
-	 *
-	 * @return referenceFilePath
-	 */
-	public String getReferenceFilePath() {
-		return referenceFilePath;
-	}
+    /**
+     * referenceFilePathを返す
+     *
+     * @return referenceFilePath
+     */
+    public String getReferenceFilePath() {
+        return referenceFilePath;
+    }
 
-	/**
-	 * referenceFilePathを設定する
-	 *
-	 * @param referenceFilePath
-	 *     照会ファイル格納パス
-	 */
-	public void setReferenceFilePath(String referenceFilePath) {
-		this.referenceFilePath = referenceFilePath;
-	}
+    /**
+     * referenceFilePathを設定する
+     *
+     * @param referenceFilePath
+     *     照会ファイル格納パス
+     */
+    public void setReferenceFilePath(String referenceFilePath) {
+        this.referenceFilePath = referenceFilePath;
+    }
 
-	/**
-	 * healthInfoRegistBatchFilePathを返す
-	 *
-	 * @return healthInfoRegistBatchFilePath
-	 *
-	 */
-	public String getHealthInfoRegistBatchFilePath() {
-		return healthInfoRegistBatchFilePath;
-	}
+    /**
+     * healthInfoRegistBatchFilePathを返す
+     *
+     * @return healthInfoRegistBatchFilePath
+     *
+     */
+    public String getHealthInfoRegistBatchFilePath() {
+        return healthInfoRegistBatchFilePath;
+    }
 
-	/**
-	 * healthInfoRegistBatchFilePathを設定する
-	 *
-	 * @param healthInfoRegistBatchFilePath
-	 *     健康情報登録バッチファイルパス
-	 *
-	 */
-	public void setHealthInfoRegistBatchFilePath(String healthInfoRegistBatchFilePath) {
-		this.healthInfoRegistBatchFilePath = healthInfoRegistBatchFilePath;
-	}
+    /**
+     * healthInfoRegistBatchFilePathを設定する
+     *
+     * @param healthInfoRegistBatchFilePath
+     *     健康情報登録バッチファイルパス
+     *
+     */
+    public void setHealthInfoRegistBatchFilePath(String healthInfoRegistBatchFilePath) {
+        this.healthInfoRegistBatchFilePath = healthInfoRegistBatchFilePath;
+    }
 
 }

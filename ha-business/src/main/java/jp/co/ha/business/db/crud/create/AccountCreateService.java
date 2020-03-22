@@ -9,11 +9,11 @@ import jp.co.ha.db.entity.Account;
  */
 public interface AccountCreateService {
 
-	/**
-	 * 指定したアカウント情報を登録する
-	 *
-	 * @param entity
-	 *     アカウント情報
-	 */
-	void create(Account entity);
+    /**
+     * 指定したアカウント情報を登録する
+     *
+     * @param entity
+     *     アカウント情報
+     */
+    void create(Account entity);
 }

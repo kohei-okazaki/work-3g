@@ -26,15 +26,15 @@ import jp.co.ha.common.validator.PatternValidator;
 @Constraint(validatedBy = PatternValidator.class)
 public @interface Pattern {
 
-	/** 正規表現 */
-	RegexType regixPattern();
+    /** 正規表現 */
+    RegexType regixPattern();
 
-	/** message */
-	String message() default "";
+    /** message */
+    String message() default "";
 
-	/** groups */
-	Class<?>[] groups() default {};
+    /** groups */
+    Class<?>[] groups() default {};
 
-	/** payload */
-	Class<? extends Payload>[] payload() default {};
+    /** payload */
+    Class<? extends Payload>[] payload() default {};
 }

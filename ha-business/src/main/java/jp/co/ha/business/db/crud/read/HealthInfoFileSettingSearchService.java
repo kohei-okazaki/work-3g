@@ -11,12 +11,13 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
  */
 public interface HealthInfoFileSettingSearchService {
 
-	/**
-	 * 健康情報ファイル設定を検索する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 * @return 健康情報ファイル設定
-	 */
-	Optional<HealthInfoFileSetting> findByUserId(String userId);
+    /**
+     * 健康情報ファイル設定を検索する
+     *
+     * @param userId
+     *     ユーザID
+     * @return 健康情報ファイル設定
+     */
+    Optional<HealthInfoFileSetting> findByUserId(String userId);
+
 }

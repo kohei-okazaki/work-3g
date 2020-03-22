@@ -15,56 +15,56 @@ import jp.co.ha.web.form.BaseForm;
  */
 public class LoginForm implements BaseForm {
 
-	/** ユーザID */
-	@Required(message = "ユーザIDが未入力です")
-	@Pattern(regixPattern = RegexType.HALF_CHAR, message = "ユーザIDが半角英数でありません")
-	@Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
-	@Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
-	private String userId;
-	/** パスワード */
-	@Mask
-	@Required(message = "パスワードが未入力です")
-	@Pattern(regixPattern = RegexType.HALF_CHAR, message = "パスワードが半角英数でありません")
-	@Min(size = 2, message = "パスワードは2桁以上で入力してください")
-	@Max(size = 16, message = "パスワードは16桁以下で入力してください")
-	private String password;
+    /** ユーザID */
+    @Required(message = "ユーザIDが未入力です")
+    @Pattern(regixPattern = RegexType.HALF_CHAR, message = "ユーザIDが半角英数でありません")
+    @Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
+    @Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
+    private String userId;
+    /** パスワード */
+    @Mask
+    @Required(message = "パスワードが未入力です")
+    @Pattern(regixPattern = RegexType.HALF_CHAR, message = "パスワードが半角英数でありません")
+    @Min(size = 2, message = "パスワードは2桁以上で入力してください")
+    @Max(size = 16, message = "パスワードは16桁以下で入力してください")
+    private String password;
 
-	/**
-	 * userIdを返す
-	 *
-	 * @return userId
-	 */
-	public String getUserId() {
-		return userId;
-	}
+    /**
+     * userIdを返す
+     *
+     * @return userId
+     */
+    public String getUserId() {
+        return userId;
+    }
 
-	/**
-	 * userIdを設定する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    /**
+     * userIdを設定する
+     *
+     * @param userId
+     *     ユーザID
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	/**
-	 * passwordを返す
-	 *
-	 * @return password
-	 */
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * passwordを返す
+     *
+     * @return password
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	/**
-	 * passwordを設定する
-	 *
-	 * @param password
-	 *     パスワード
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * passwordを設定する
+     *
+     * @param password
+     *     パスワード
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

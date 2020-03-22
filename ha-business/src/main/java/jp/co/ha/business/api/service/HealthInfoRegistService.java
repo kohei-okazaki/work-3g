@@ -10,6 +10,6 @@ import jp.co.ha.web.service.BaseApiService;
  * @since 1.0
  */
 public interface HealthInfoRegistService
-		extends BaseApiService<HealthInfoRegistRequest, HealthInfoRegistResponse> {
+        extends BaseApiService<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
 }

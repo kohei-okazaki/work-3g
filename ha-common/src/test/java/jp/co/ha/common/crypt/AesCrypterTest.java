@@ -15,19 +15,20 @@ import jp.co.ha.common.BaseCommonTest;
  */
 public class AesCrypterTest extends BaseCommonTest {
 
-	/** Crypter */
-	@Autowired
-	@Qualifier("aesCrypter")
-	private Crypter crypter;
+    /** Crypter */
+    @Autowired
+    @Qualifier("aesCrypter")
+    private Crypter crypter;
 
-	/**
-	 * 暗号化復号テスト
-	 */
-	@Test
-	public void cryptTest() {
-		String value = "あいうえお12345";
-		String encryptValue = crypter.encrypt(value);
-		String decryptValue = crypter.decrypt(encryptValue);
-		assertEquals(value, decryptValue);
-	}
+    /**
+     * 暗号化復号テスト
+     */
+    @Test
+    public void cryptTest() {
+        String value = "あいうえお12345";
+        String encryptValue = crypter.encrypt(value);
+        String decryptValue = crypter.decrypt(encryptValue);
+        assertEquals(value, decryptValue);
+    }
+
 }

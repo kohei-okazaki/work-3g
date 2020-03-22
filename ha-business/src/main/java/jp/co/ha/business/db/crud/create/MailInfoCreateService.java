@@ -9,11 +9,11 @@ import jp.co.ha.db.entity.MailInfo;
  */
 public interface MailInfoCreateService {
 
-	/**
-	 * 指定したメール情報を登録する
-	 *
-	 * @param entity
-	 *     メール情報
-	 */
-	void create(MailInfo entity);
+    /**
+     * 指定したメール情報を登録する
+     *
+     * @param entity
+     *     メール情報
+     */
+    void create(MailInfo entity);
 }

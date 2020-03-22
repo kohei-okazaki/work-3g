@@ -17,17 +17,18 @@ import jp.co.ha.db.mapper.MailInfoMapper;
 @Service
 public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
 
-	/** MailInfoMapper */
-	@Autowired
-	private MailInfoMapper mapper;
+    /** MailInfoMapper */
+    @Autowired
+    private MailInfoMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Update
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void update(MailInfo entity) {
-		mapper.updateByPrimaryKey(entity);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Update
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(MailInfo entity) {
+        mapper.updateByPrimaryKey(entity);
+    }
+
 }

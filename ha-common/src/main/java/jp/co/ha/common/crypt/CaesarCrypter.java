@@ -17,52 +17,54 @@ import jp.co.ha.common.util.StringUtil;
 @Component("caesarCrypter")
 public class CaesarCrypter implements Crypter {
 
-	/** CryptConfig */
-	@Autowired
-	private CryptConfig cryptConfig;
+    /** CryptConfig */
+    @Autowired
+    private CryptConfig cryptConfig;
 
-	@Override
-	public String encrypt(String str) {
+    @Override
+    public String encrypt(String str) {
 
-		if (StringUtil.isEmpty(str) || !Pattern.matches(RegexType.HALF_ALPHABET.getValue(), str)) {
-			// null or 空文字 or 半角英字以外の場合
-			return null;
-		}
+        if (StringUtil.isEmpty(str)
+                || !Pattern.matches(RegexType.HALF_ALPHABET.getValue(), str)) {
+            // null or 空文字 or 半角英字以外の場合
+            return null;
+        }
 
-		String result = "";
-		for (int i = 0; i < str.length(); i++) {
-			int shifted = str.charAt(i);
-			char c = (char) (shifted + cryptConfig.getShift());
-			if (c > 'z') {
-				// zより後ろの文字列の場合、aに戻す為26引く
-				result += (char) (c - 26);
-			} else {
-				result += c;
-			}
-		}
-		return result;
-	}
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            int shifted = str.charAt(i);
+            char c = (char) (shifted + cryptConfig.getShift());
+            if (c > 'z') {
+                // zより後ろの文字列の場合、aに戻す為26引く
+                result += (char) (c - 26);
+            } else {
+                result += c;
+            }
+        }
+        return result;
+    }
 
-	@Override
-	public String decrypt(String str) {
+    @Override
+    public String decrypt(String str) {
 
-		if (StringUtil.isEmpty(str) || !Pattern.matches(RegexType.HALF_ALPHABET.getValue(), str)) {
-			// null or 空文字 or 半角英字以外の場合
-			return null;
-		}
+        if (StringUtil.isEmpty(str)
+                || !Pattern.matches(RegexType.HALF_ALPHABET.getValue(), str)) {
+            // null or 空文字 or 半角英字以外の場合
+            return null;
+        }
 
-		String result = "";
-		for (int i = 0; i < str.length(); i++) {
-			int shifted = str.charAt(i);
-			char c = (char) (shifted - cryptConfig.getShift());
-			if (c < 'a') {
-				// zより後ろの文字列の場合、aに戻す為26引く
-				result += (char) (c + 26);
-			} else {
-				result += c;
-			}
-		}
-		return result;
-	}
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            int shifted = str.charAt(i);
+            char c = (char) (shifted - cryptConfig.getShift());
+            if (c < 'a') {
+                // zより後ろの文字列の場合、aに戻す為26引く
+                result += (char) (c + 26);
+            } else {
+                result += c;
+            }
+        }
+        return result;
+    }
 
 }

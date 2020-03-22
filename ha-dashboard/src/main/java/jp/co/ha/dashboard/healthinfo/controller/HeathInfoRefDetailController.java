@@ -29,45 +29,48 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("healthinforeference")
 public class HeathInfoRefDetailController implements BaseWebController {
 
-	/** セッション管理サービス */
-	@Autowired
-	private SessionManageService sessionService;
-	/** 健康情報詳細サービス */
-	@Autowired
-	private HealthInfoRefDetailService healthInfoRefDetailService;
+    /** セッション管理サービス */
+    @Autowired
+    private SessionManageService sessionService;
+    /** 健康情報詳細サービス */
+    @Autowired
+    private HealthInfoRefDetailService healthInfoRefDetailService;
 
-	/**
-	 * 詳細画面
-	 *
-	 * @param model
-	 *     Model
-	 * @param healthInfoId
-	 *     健康情報ID
-	 * @param request
-	 *     HttpServletRequest
-	 * @return 照会前画面
-	 * @throws BaseException
-	 *     基底例外
-	 */
-	@GetMapping(value = "/detail")
-	public String detail(Model model,
-			@RequestParam(name = "healthInfoId", required = false) Optional<Integer> healthInfoId,
-			HttpServletRequest request) throws BaseException {
+    /**
+     * 詳細画面
+     *
+     * @param model
+     *     Model
+     * @param healthInfoId
+     *     健康情報ID
+     * @param request
+     *     HttpServletRequest
+     * @return 照会前画面
+     * @throws BaseException
+     *     基底例外
+     */
+    @GetMapping(value = "/detail")
+    public String detail(Model model,
+            @RequestParam(name = "healthInfoId", required = false) Optional<Integer> healthInfoId,
+            HttpServletRequest request) throws BaseException {
 
-		// 健康情報ID
-		Integer healthInfoIdVal = healthInfoId.orElseThrow(() -> new SystemException(CommonErrorCode.DB_NO_DATA,
-				"リクエスト情報が不正です. 健康情報ID=" + healthInfoId));
-		// ユーザID
-		String userId = sessionService.getValue(request.getSession(), "userId", String.class).get();
+        // 健康情報ID
+        Integer healthInfoIdVal = healthInfoId
+                .orElseThrow(() -> new SystemException(CommonErrorCode.DB_NO_DATA,
+                        "リクエスト情報が不正です. 健康情報ID=" + healthInfoId));
+        // ユーザID
+        String userId = sessionService
+                .getValue(request.getSession(), "userId", String.class).get();
 
-		HealthInfoRefDetailDto dto = new HealthInfoRefDetailDto();
-		dto.setHealthInfoId(healthInfoIdVal);
-		dto.setUserId(userId);
+        HealthInfoRefDetailDto dto = new HealthInfoRefDetailDto();
+        dto.setHealthInfoId(healthInfoIdVal);
+        dto.setUserId(userId);
 
-		// 詳細情報
-		HealthInfoRefDetailDto detail = healthInfoRefDetailService.getHealthInfoRefDetailDto(dto);
-		model.addAttribute("detail", detail);
-		return getView(DashboardView.HEALTH_INFO_REF_DETAIL);
-	}
+        // 詳細情報
+        HealthInfoRefDetailDto detail = healthInfoRefDetailService
+                .getHealthInfoRefDetailDto(dto);
+        model.addAttribute("detail", detail);
+        return getView(DashboardView.HEALTH_INFO_REF_DETAIL);
+    }
 
 }

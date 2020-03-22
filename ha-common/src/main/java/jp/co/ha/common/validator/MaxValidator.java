@@ -15,32 +15,33 @@ import jp.co.ha.common.validator.annotation.Max;
  */
 public class MaxValidator implements ConstraintValidator<Max, Object> {
 
-	/** 桁数 */
-	private int size;
-	/** 同じ値を含むかどうか */
-	private boolean isEqual;
+    /** 桁数 */
+    private int size;
+    /** 同じ値を含むかどうか */
+    private boolean isEqual;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void initialize(Max annotation) {
-		this.size = annotation.size();
-		this.isEqual = annotation.isEqual();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initialize(Max annotation) {
+        this.size = annotation.size();
+        this.isEqual = annotation.isEqual();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean isValid(Object value, ConstraintValidatorContext context) {
-		if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
-			return true;
-		}
-		if (isEqual) {
-			return value.toString().length() <= this.size;
-		} else {
-			return value.toString().length() < this.size;
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
+            return true;
+        }
+        if (isEqual) {
+            return value.toString().length() <= this.size;
+        } else {
+            return value.toString().length() < this.size;
+        }
+    }
+
 }

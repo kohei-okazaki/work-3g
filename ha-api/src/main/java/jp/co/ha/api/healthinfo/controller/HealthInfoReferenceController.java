@@ -17,29 +17,30 @@ import jp.co.ha.web.controller.BaseRestController;
  */
 @RestController
 @RequestMapping(value = "/healthinforeference")
-public class HealthInfoReferenceController
-		extends BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+public class HealthInfoReferenceController extends
+        BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
-	/** 健康情報照会API */
-	@Autowired
-	private HealthInfoReferenceApi api;
+    /** 健康情報照会API */
+    @Autowired
+    private HealthInfoReferenceApi api;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public HealthInfoReferenceResponse getApiResponse() {
-		return new HealthInfoReferenceResponse();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HealthInfoReferenceResponse getApiResponse() {
+        return new HealthInfoReferenceResponse();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void accept(HealthInfoReferenceRequest request, HealthInfoReferenceResponse response) throws BaseException {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void accept(HealthInfoReferenceRequest request,
+            HealthInfoReferenceResponse response) throws BaseException {
 
-		api.execute(request, response);
+        api.execute(request, response);
 
-	}
+    }
 
 }

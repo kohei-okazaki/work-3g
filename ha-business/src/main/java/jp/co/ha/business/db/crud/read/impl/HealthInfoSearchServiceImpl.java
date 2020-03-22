@@ -23,82 +23,84 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
 @Service
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
-	/** HealthInfoMapper */
-	@Autowired
-	private HealthInfoMapper mapper;
+    /** HealthInfoMapper */
+    @Autowired
+    private HealthInfoMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId, Date fromHealthInfoRegDate,
-			Date toHealthInfoRegDate, SelectOption selectOption) {
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId,
+            Date fromHealthInfoRegDate,
+            Date toHealthInfoRegDate, SelectOption selectOption) {
 
-		HealthInfoExample example = new HealthInfoExample();
-		Criteria criteria = example.createCriteria();
-		// ユーザID
-		criteria.andUserIdEqualTo(userId);
-		// 健康情報登録日時
-		criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
-		// ソート処理
-		example.setOrderByClause(selectOption.getOrderBy());
-		return mapper.selectByExample(example);
-	}
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+        // ユーザID
+        criteria.andUserIdEqualTo(userId);
+        // 健康情報登録日時
+        criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
+        // ソート処理
+        example.setOrderByClause(selectOption.getOrderBy());
+        return mapper.selectByExample(example);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId) {
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId,
+            String userId) {
 
-		HealthInfoExample example = new HealthInfoExample();
-		Criteria criteria = example.createCriteria();
-		// 健康情報ID
-		criteria.andHealthInfoIdEqualTo(healthInfoId);
-		// ユーザID
-		criteria.andUserIdEqualTo(userId);
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+        // 健康情報ID
+        criteria.andHealthInfoIdEqualTo(healthInfoId);
+        // ユーザID
+        criteria.andUserIdEqualTo(userId);
 
-		return mapper.selectByExample(example);
-	}
+        return mapper.selectByExample(example);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public int getSelectCountByUserId(String userId) {
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public int getSelectCountByUserId(String userId) {
 
-		HealthInfoExample example = new HealthInfoExample();
-		Criteria criteria = example.createCriteria();
-		// ユーザID
-		criteria.andUserIdEqualTo(userId);
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+        // ユーザID
+        criteria.andUserIdEqualTo(userId);
 
-		return (int) mapper.countByExample(example);
-	}
+        return (int) mapper.countByExample(example);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Select
-	@Override
-	@Transactional(readOnly = true)
-	public List<HealthInfo> findByUserId(String userId, SelectOption selectOption) {
+    /**
+     * {@inheritDoc}
+     */
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<HealthInfo> findByUserId(String userId, SelectOption selectOption) {
 
-		HealthInfoExample example = new HealthInfoExample();
-		Criteria criteria = example.createCriteria();
-		// ユーザID
-		criteria.andUserIdEqualTo(userId);
-		// ソート処理
-		example.setOrderByClause(selectOption.getOrderBy());
-		// 検索上限数
-		example.setLimit(selectOption.getLimit());
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+        // ユーザID
+        criteria.andUserIdEqualTo(userId);
+        // ソート処理
+        example.setOrderByClause(selectOption.getOrderBy());
+        // 検索上限数
+        example.setLimit(selectOption.getLimit());
 
-		return mapper.selectByExample(example);
-	}
+        return mapper.selectByExample(example);
+    }
 
 }

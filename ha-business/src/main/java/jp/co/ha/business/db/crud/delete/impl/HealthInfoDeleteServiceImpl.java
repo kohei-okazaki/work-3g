@@ -16,17 +16,17 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
 @Service
 public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
 
-	/** HealthInfoMapper */
-	@Autowired
-	private HealthInfoMapper mapper;
+    /** HealthInfoMapper */
+    @Autowired
+    private HealthInfoMapper mapper;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Delete
-	@Override
-	@Transactional(rollbackFor = Exception.class)
-	public void deleteByUserId(Integer healthInfoId) {
-		mapper.deleteByPrimaryKey(healthInfoId);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Delete
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteByUserId(Integer healthInfoId) {
+        mapper.deleteByPrimaryKey(healthInfoId);
+    }
 }

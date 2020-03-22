@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * Excelダウンロードモデルアノテーション
- * 
+ *
  * @since 1.0
  */
 @Inherited
@@ -18,12 +18,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface ExcelDownloadModel {
 
-	/** シート名 */
-	String sheetName() default "Sheet1";
+    /** シート名 */
+    String sheetName() default "Sheet1";
 
-	/** ヘッダ名 */
-	String[] headerNames() default "";
+    /** ヘッダ名 */
+    String[] headerNames() default "";
 
-	/** フッタ名 */
-	String[] footerNames() default "";
+    /** フッタ名 */
+    String[] footerNames() default "";
 }

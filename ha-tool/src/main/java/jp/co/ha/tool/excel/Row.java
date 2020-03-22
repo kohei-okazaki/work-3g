@@ -12,36 +12,36 @@ import jp.co.ha.tool.excel.type.CellPositionType;
  */
 public class Row {
 
-	/** セルリスト */
-	private List<Cell> cellList = new ArrayList<>();
+    /** セルリスト */
+    private List<Cell> cellList = new ArrayList<>();
 
-	/**
-	 * セルを追加する
-	 *
-	 * @param cell
-	 *     セル
-	 */
-	public void addCell(Cell cell) {
-		this.cellList.add(cell);
-	}
+    /**
+     * セルを追加する
+     *
+     * @param cell
+     *     セル
+     */
+    public void addCell(Cell cell) {
+        this.cellList.add(cell);
+    }
 
-	/**
-	 * セルリストを返す
-	 *
-	 * @return cellList
-	 */
-	public List<Cell> getCellList() {
-		return cellList;
-	}
+    /**
+     * セルリストを返す
+     *
+     * @return cellList
+     */
+    public List<Cell> getCellList() {
+        return cellList;
+    }
 
-	/**
-	 * セル位置に対応するセルを返す
-	 *
-	 * @param type
-	 *     セル位置
-	 * @return セル
-	 */
-	public Cell getCell(CellPositionType type) {
-		return this.cellList.get(type.getPosition());
-	}
+    /**
+     * セル位置に対応するセルを返す
+     *
+     * @param type
+     *     セル位置
+     * @return セル
+     */
+    public Cell getCell(CellPositionType type) {
+        return this.cellList.get(type.getPosition());
+    }
 }

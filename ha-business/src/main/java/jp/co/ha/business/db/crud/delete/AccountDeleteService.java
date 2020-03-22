@@ -7,11 +7,11 @@ package jp.co.ha.business.db.crud.delete;
  */
 public interface AccountDeleteService {
 
-	/**
-	 * 指定されたユーザIDのアカウント情報を削除する
-	 *
-	 * @param userId
-	 *     ユーザID
-	 */
-	void deleteByUserId(String userId);
+    /**
+     * 指定されたユーザIDのアカウント情報を削除する
+     *
+     * @param userId
+     *     ユーザID
+     */
+    void deleteByUserId(String userId);
 }
