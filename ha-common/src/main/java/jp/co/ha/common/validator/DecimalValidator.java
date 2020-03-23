@@ -45,7 +45,7 @@ public class DecimalValidator implements ConstraintValidator<Decimal, Object> {
             return true;
         }
         if (RegexType.DECIMAL.is().test(value.toString())) {
-            int length = value.toString().replaceAll(".", "").length();
+            int length = value.toString().replace(".", "").length();
             if (minEqual && maxEqual) {
                 return (min <= length) && (length <= max);
             } else if (minEqual) {

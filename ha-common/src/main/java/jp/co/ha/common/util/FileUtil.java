@@ -77,6 +77,9 @@ public class FileUtil {
      */
     public static List<File> getFileList(File file) {
         List<File> fileList = new ArrayList<>();
+        if (file == null) {
+            return fileList;
+        }
         for (File childFile : file.listFiles()) {
             if (childFile.isFile()) {
                 fileList.add(childFile);
