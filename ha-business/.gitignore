@@ -30,3 +30,6 @@ hs_err_pid*
 .settings
 .classpath
 .project
+/profile/local/aws.properties
+/profile/test/aws.properties
+/profile/aws/aws.properties
