@@ -47,7 +47,7 @@ appender("FILE", RollingFileAppender) {
 
 }
 
-// Mybatisで発行されるSQLのログ設定
+// アプリで出力されるログのログレベルを設定
 logger("jp.co.ha", DEBUG, appenderList, false)
 
 root(INFO, appenderList)

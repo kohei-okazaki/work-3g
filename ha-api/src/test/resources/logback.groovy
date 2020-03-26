@@ -11,6 +11,7 @@ scan("30 seconds")
 
 def FILE_PATH = "C:/app/testlogs";
 def ENCODE = "UTF-8";
+def appenderList = ["STDOUT", "FILE"];
 
 appender("STDOUT", ConsoleAppender) {
 
@@ -46,7 +47,7 @@ appender("FILE", RollingFileAppender) {
 
 }
 
-// Mybatisで発行されるSQLのログ設定
-logger("jp.co.ha.db.mapper", DEBUG, ["STDOUT", "FILE"], false)
+// アプリで出力されるログのログレベルを設定
+logger("jp.co.ha", DEBUG, appenderList, false)
 
-root(INFO, ["STDOUT", "FILE"])
+root(INFO, appenderList)
