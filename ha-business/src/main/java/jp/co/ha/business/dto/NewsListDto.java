@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * お知らせ情報一覧リストDto
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class NewsListDto {
 

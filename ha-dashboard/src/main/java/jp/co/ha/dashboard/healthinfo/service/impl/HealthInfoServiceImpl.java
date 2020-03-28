@@ -38,7 +38,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 /**
  * 健康情報_入力画面サービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {
@@ -112,7 +112,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         // ファイル名
         String fileName = "healthInfoRegist_"
                 + DateUtil.toString(DateUtil.getSysDate(),
-                        DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)
                 + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = null;

@@ -14,7 +14,7 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 /**
  * 健康情報ファイル設定検索サービスインターフェース実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoFileSettingSearchServiceImpl

@@ -12,7 +12,7 @@ import jp.co.ha.dashboard.calorie.service.CalorieCalcService;
 /**
  * カロリー計算サービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class CalorieCalcServiceImpl implements CalorieCalcService {

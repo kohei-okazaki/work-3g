@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * Excelダウンロードモデルアノテーション
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

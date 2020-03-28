@@ -13,7 +13,7 @@ import jp.co.ha.web.api.annotation.ApiExecute;
 /**
  * 健康情報照会API
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Component
 public class HealthInfoReferenceApi

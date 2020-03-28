@@ -13,7 +13,7 @@ import jp.co.ha.business.api.type.TestMode;
  * JSONのテストモード種別のデシリアライズクラス<br>
  * 文字列型のJSONをJavaのクラスに変換する
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class TestModeDeserializer extends JsonDeserializer<TestMode> {
 

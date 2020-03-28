@@ -16,7 +16,7 @@ import jp.co.ha.common.util.StringUtil;
 /**
  * 結果照会CSVWriterクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
 
@@ -58,7 +58,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
                 : model.getStandardWeight().toString());
         // 健康情報作成日時
         write(body, DateUtil.toString(model.getHealthInfoRegDate(),
-                DateFormatType.YYYYMMDD_HHMMSS));
+                DateFormatType.YYYYMMDDHHMMSS));
 
         // 1行書き込む
         record.add(body.toString());

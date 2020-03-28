@@ -17,7 +17,7 @@ import jp.co.ha.common.util.StringUtil;
 /**
  * ログメッセージ作成クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class LogMessageFactory {
 
@@ -119,7 +119,7 @@ public class LogMessageFactory {
         if (BeanUtil.isNull(value)) {
             strValue = StringUtil.EMPTY;
         } else if (value instanceof Date) {
-            strValue = DateUtil.toString((Date) value, DateFormatType.YYYYMMDD_HHMMSS);
+            strValue = DateUtil.toString((Date) value, DateFormatType.YYYYMMDDHHMMSS);
         } else {
             strValue = value.toString();
         }

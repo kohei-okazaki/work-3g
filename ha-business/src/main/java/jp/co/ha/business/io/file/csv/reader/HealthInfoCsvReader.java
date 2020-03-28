@@ -6,7 +6,7 @@ import jp.co.ha.common.io.file.csv.reader.CsvReader;
 /**
  * 健康情報CSV読込クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoCsvReader extends CsvReader<HealthInfoCsvUploadModel> {
 

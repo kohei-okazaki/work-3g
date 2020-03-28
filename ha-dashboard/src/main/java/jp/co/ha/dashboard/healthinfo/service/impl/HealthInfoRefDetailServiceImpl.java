@@ -20,7 +20,7 @@ import jp.co.ha.db.entity.HealthInfo;
 /**
  * 健康情報詳細サービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailService {
@@ -56,7 +56,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
                 // 健康情報作成日時
                 destDto.setHealthInfoRegDate(
                         DateUtil.toString(srcEntity.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDD_HHMMSS));
+                                DateFormatType.YYYYMMDDHHMMSS));
                 // 肥満度メッセージ
                 BmiRangeMt mt = bmiRangeMtSearchService
                         .findByBmiRangeId(srcEntity.getBmiRangeId());

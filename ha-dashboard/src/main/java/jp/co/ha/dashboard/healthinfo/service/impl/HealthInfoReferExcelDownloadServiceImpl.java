@@ -25,7 +25,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 /**
  * 健康情報照会画面Excelダウンロードサービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service("referenceDownloadExcel")
 public class HealthInfoReferExcelDownloadServiceImpl
@@ -69,7 +69,7 @@ public class HealthInfoReferExcelDownloadServiceImpl
             model.setBmi(result.getBmi().toString());
             model.setStandardWeight(result.getStandardWeight().toString());
             model.setHealthInfoRegDate(DateUtil.toDate(result.getHealthInfoRegDate(),
-                    DateFormatType.YYYYMMDD_HHMMSS));
+                    DateFormatType.YYYYMMDDHHMMSS));
             return model;
         }).collect(Collectors.toList());
     }

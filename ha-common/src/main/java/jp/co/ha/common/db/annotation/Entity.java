@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 /**
  * Entityを示すマーカーアノテーション
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

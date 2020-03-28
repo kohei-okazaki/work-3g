@@ -18,7 +18,7 @@ import jp.co.ha.tool.util.ToolUtil;
 /**
  * 自動生成基底クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class BaseGenerator {
 
@@ -95,7 +95,7 @@ public abstract class BaseGenerator {
     /**
      * 自動生成区分の列挙
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum GenerateType implements BaseEnum {
 

@@ -6,7 +6,7 @@ import jp.co.ha.common.exception.BaseException;
 /**
  * 業務処理による例外クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class BusinessException extends BaseException {
 

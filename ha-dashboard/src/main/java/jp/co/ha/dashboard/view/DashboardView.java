@@ -5,6 +5,7 @@ import jp.co.ha.web.view.BaseView;
 /**
  * 健康管理View列挙
  *
+ * @version 1.0.0
  */
 public enum DashboardView implements BaseView {
 

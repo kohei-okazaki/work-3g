@@ -8,7 +8,7 @@ import jp.co.ha.tool.source.type.AccessType;
 /**
  * 自動生成JavaソースのMethodクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class Method {
 

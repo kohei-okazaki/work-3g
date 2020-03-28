@@ -12,7 +12,7 @@ import jp.co.ha.tool.util.ToolUtil;
 /**
  * TABLE_DEFINE.sqlの自動生成クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class TableDefineGenerator extends BaseGenerator {
 

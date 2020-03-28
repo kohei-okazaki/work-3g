@@ -13,7 +13,7 @@ import jp.co.ha.db.entity.BaseExample;
 /**
  * 各XXXXExampleに{@linkplain BaseExample}を継承させるためのプラグインクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class ExtendBaseExamplePlugin extends PluginAdapter {
 

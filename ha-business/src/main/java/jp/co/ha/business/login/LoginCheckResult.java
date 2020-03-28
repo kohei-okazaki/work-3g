@@ -5,7 +5,7 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 /**
  * ログイン情報チェック結果保持クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class LoginCheckResult {
 

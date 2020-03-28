@@ -11,7 +11,7 @@ import jp.co.ha.db.mapper.AccountMapper;
 /**
  * アカウント情報削除サービスインターフェース実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class AccountDeleteServiceImpl implements AccountDeleteService {

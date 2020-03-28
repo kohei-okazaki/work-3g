@@ -8,7 +8,7 @@ import jp.co.ha.common.util.CollectionUtil;
 /**
  * 妥当性チェック結果保持クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class ValidateErrorResult {
 
@@ -53,7 +53,7 @@ public class ValidateErrorResult {
     /**
      * 妥当性チェックエラー
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static class ValidateError {
 

@@ -2,6 +2,7 @@ package jp.co.ha.common.io.file.json.reader;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,7 +18,7 @@ import jp.co.ha.common.log.LoggerFactory;
 /**
  * JSONの読み取りクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class JsonReader {
 
@@ -44,6 +45,8 @@ public class JsonReader {
     /**
      * 指定されたJSONからJSONオブジェクトに変換する
      *
+     * @param <T>
+     *     Beanクラスタイプ
      * @param json
      *     JSONファイル
      * @param clazz
@@ -62,6 +65,33 @@ public class JsonReader {
         } catch (IOException e) {
             throw new SystemException(CommonErrorCode.RUNTIME_ERROR,
                     json.getName() + "をjavaクラスへの変換に失敗しました", e);
+        }
+        return null;
+    }
+
+    /**
+     * 指定された入力StreamからJSONオブジェクトに変換する
+     *
+     * @param <T>
+     *     Beanクラスタイプ
+     * @param is
+     *     入力Stream
+     * @param clazz
+     *     Beanクラス型
+     * @return Javaインスタンス
+     * @throws BaseException
+     *     基底例外
+     */
+    public <T> T read(InputStream is, Class<T> clazz) throws BaseException {
+        try {
+            return new ObjectMapper().readValue(is, clazz);
+        } catch (JsonParseException e) {
+            LOG.error("javaクラスへのParseに失敗しました", e);
+        } catch (JsonMappingException e) {
+            LOG.error("javaクラスへのMappingに失敗しました", e);
+        } catch (IOException e) {
+            throw new SystemException(CommonErrorCode.RUNTIME_ERROR, "javaクラスへの変換に失敗しました",
+                    e);
         }
         return null;
     }

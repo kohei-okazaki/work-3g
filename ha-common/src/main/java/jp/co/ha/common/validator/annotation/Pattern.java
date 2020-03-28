@@ -17,7 +17,7 @@ import jp.co.ha.common.validator.PatternValidator;
  * 型チェックアノテーション
  *
  * @see jp.co.ha.common.validator.PatternValidator
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

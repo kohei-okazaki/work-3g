@@ -26,7 +26,7 @@ import jp.co.ha.web.interceptor.BaseWebInterceptor;
  * <li>CSRFトークンチェック</li>
  * </ul>
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
@@ -43,8 +43,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-            Object handler)
-            throws Exception {
+            Object handler) throws Exception {
 
         if (isStaticResource().test(handler)) {
             // 静的リソースの場合は認証不要
@@ -77,8 +76,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
      */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
-            Object handler,
-            ModelAndView modelAndView) throws Exception {
+            Object handler, ModelAndView modelAndView) throws Exception {
 
         if (isStaticResource().test(handler)) {
             // 静的リソースの場合は認証不要

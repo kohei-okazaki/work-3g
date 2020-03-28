@@ -7,7 +7,7 @@ import jp.co.ha.common.log.annotation.Mask;
 /**
  * マスク判定クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class MaskExecutor {
 

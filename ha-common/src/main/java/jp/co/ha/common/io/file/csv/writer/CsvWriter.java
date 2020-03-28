@@ -17,7 +17,7 @@ import jp.co.ha.common.util.StringUtil;
  *
  * @param <T>
  *     CSVモデル
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
 

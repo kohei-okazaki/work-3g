@@ -19,7 +19,7 @@ import jp.co.ha.common.log.LoggerFactory;
 /**
  * Bean系のUtilクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class BeanUtil {
 
@@ -288,7 +288,7 @@ public class BeanUtil {
      * メソッドのアクセス列挙
      *
      * @see BeanUtil#getAccessor(String, Class, AccessorType)
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum AccessorType {
         /** setter */

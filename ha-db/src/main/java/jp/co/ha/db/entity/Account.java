@@ -11,7 +11,7 @@ import jp.co.ha.common.log.annotation.Mask;
 /**
  * アカウント情報Entity
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Entity
 public class Account implements Serializable {

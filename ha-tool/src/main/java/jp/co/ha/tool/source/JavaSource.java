@@ -11,7 +11,7 @@ import jp.co.ha.tool.source.type.ClassType;
 /**
  * Javaファイル情報
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class JavaSource {
 

@@ -17,7 +17,7 @@ import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
  * </ul>
  *
  * @see DashboardAuthInterceptor
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

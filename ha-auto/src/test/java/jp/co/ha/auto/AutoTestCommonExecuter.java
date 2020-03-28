@@ -18,7 +18,7 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * 自動テスト実行時の共通処理をまとめたクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class AutoTestCommonExecuter {
 
@@ -83,7 +83,7 @@ public class AutoTestCommonExecuter {
     /**
      * ブラウザ種別の列挙
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum BrowserType implements BaseEnum {
 

@@ -16,7 +16,7 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @param <T>
  *     並列処理に必要な対象クラス
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class MultiThreadFunction<T> {
 
@@ -75,7 +75,7 @@ public abstract class MultiThreadFunction<T> {
     /**
      * 処理結果の列挙
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum ResultType implements BaseEnum {
 

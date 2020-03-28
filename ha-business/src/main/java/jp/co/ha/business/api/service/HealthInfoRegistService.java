@@ -7,7 +7,7 @@ import jp.co.ha.web.service.BaseApiService;
 /**
  * 健康情報登録サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoRegistService
         extends BaseApiService<HealthInfoRegistRequest, HealthInfoRegistResponse> {

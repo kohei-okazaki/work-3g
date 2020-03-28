@@ -4,12 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.type.ResultType;
 
 /**
  * エラーレスポンスクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public class ErrorResponse extends BaseApiResponse {

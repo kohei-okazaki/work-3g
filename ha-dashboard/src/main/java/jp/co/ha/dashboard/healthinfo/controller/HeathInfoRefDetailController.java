@@ -23,7 +23,7 @@ import jp.co.ha.web.controller.BaseWebController;
 /**
  * 健康管理_健康情報照会詳細画面コントローラ
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Controller
 @RequestMapping("healthinforeference")

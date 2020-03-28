@@ -18,7 +18,7 @@ import jp.co.ha.common.type.Charset;
 /**
  * 文字列のUtilクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class StringUtil {
 
@@ -448,7 +448,7 @@ public class StringUtil {
     /**
      * Padding指定の列挙
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum PaddingType {
         /** 右詰 */

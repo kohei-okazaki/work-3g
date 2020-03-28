@@ -10,7 +10,7 @@ import jp.co.ha.common.validator.annotation.Required;
 /**
  * 健康情報照会リクエストクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HealthInfoReferenceRequest extends CommonApiRequest {

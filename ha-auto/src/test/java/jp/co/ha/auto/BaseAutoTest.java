@@ -8,7 +8,7 @@ import junit.framework.TestCase;
  * 自動テストの基底クラス<br>
  * 画面テストはchromeのバージョンは79で行うことを想定している
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class BaseAutoTest extends TestCase {
 

@@ -13,7 +13,7 @@ import jp.co.ha.tool.gen.ToolProperty;
 /**
  * 自動生成ツールExcelの読込を行うクラス
  *
- * @version 1.0
+ * @version 1.0.0
  */
 public class ExcelReader {
 

@@ -15,7 +15,7 @@ import jp.co.ha.web.form.BaseForm;
  *
  * @param <F>
  *     validate対象form
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class BaseWebValidator<F extends BaseForm> implements Validator {
 

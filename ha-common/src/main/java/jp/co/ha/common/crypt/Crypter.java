@@ -3,7 +3,7 @@ package jp.co.ha.common.crypt;
 /**
  * 暗号化復号インターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface Crypter {
 

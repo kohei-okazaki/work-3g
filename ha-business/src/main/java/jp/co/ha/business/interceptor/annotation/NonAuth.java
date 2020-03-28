@@ -13,7 +13,7 @@ import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
  * ログイン情報のチェックを<b>行わない</b>ことを示すマーカーアノテーション
  *
  * @see DashboardAuthInterceptor
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

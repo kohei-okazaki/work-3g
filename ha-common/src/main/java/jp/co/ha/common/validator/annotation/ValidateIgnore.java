@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 
 /**
  * 妥当性チェックを行わないことを示すマーカーアノテーション
- * 
- * @since 1.0
+ *
+ * @version 1.0.0
  */
 @Inherited
 @Documented

@@ -15,7 +15,7 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
 /**
  * 健康情報Excel生成クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelModel> {
 
@@ -51,7 +51,7 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelMode
                     this.conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight());
             cell = getCell(sheet, rowPosition + i, 4);
             setText(cell, DateUtil.toString(model.getHealthInfoRegDate(),
-                    DateFormatType.YYYYMMDD_HHMMSS));
+                    DateFormatType.YYYYMMDDHHMMSS));
         }
     }
 

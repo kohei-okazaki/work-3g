@@ -3,7 +3,7 @@ package jp.co.ha.common.exception;
 /**
  * 実行環境エラーの例外クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class SystemRuntimeException extends BaseRuntimeException {
 

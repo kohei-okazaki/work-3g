@@ -19,7 +19,7 @@ import jp.co.ha.db.mapper.BmiRangeMtMapper;
 /**
  * BMI範囲マスタ検索サービスインターフェース実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 @CacheConfig(cacheNames = "bmiRangeMt")

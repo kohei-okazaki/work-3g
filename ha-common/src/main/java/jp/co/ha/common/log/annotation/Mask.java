@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * ログ出力時マスク処理対象項目につけるアノテーション<br>
  * 出力したいマスク文字列をvalueで指定する
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

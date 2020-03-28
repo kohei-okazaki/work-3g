@@ -11,7 +11,7 @@ import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 /**
  * 健康情報グラフ作成サービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoGraphServiceImpl implements HealthInfoGraphService {

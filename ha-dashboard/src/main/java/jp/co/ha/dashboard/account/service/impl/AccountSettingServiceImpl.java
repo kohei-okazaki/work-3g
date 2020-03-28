@@ -28,7 +28,7 @@ import jp.co.ha.db.entity.MailInfo;
 /**
  * アカウント設定サービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class AccountSettingServiceImpl implements AccountSettingService {

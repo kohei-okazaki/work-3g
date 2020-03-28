@@ -11,7 +11,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  *     リクエスト
  * @param <Rs>
  *     レスポンス
- * @since 1.0
+ * @version 1.0.0
  */
 public interface BaseApiService<Rq extends BaseApiRequest, Rs extends BaseApiResponse> {
 

@@ -5,7 +5,7 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * アクセス修飾子の列挙
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public enum AccessType implements BaseEnum {
 

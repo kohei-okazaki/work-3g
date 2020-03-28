@@ -12,7 +12,7 @@ import jp.co.ha.common.util.StringUtil;
 /**
  * シーザー可逆暗号化クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Component("caesarCrypter")
 public class CaesarCrypter implements Crypter {

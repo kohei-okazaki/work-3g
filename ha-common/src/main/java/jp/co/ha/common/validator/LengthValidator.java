@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Length;
  * 桁数の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Length
- * @since 1.0
+ * @version 1.0.0
  */
 public class LengthValidator implements ConstraintValidator<Length, Object> {
 

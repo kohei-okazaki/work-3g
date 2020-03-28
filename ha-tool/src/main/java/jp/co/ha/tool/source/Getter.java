@@ -8,7 +8,7 @@ import jp.co.ha.tool.source.type.AccessType;
 /**
  * Getter
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class Getter extends Method {
 

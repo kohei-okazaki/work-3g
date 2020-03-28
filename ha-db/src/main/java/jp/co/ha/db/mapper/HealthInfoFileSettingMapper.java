@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.HealthInfoFileSettingExample;
 /**
  * 健康情報ファイル設定情報Mapper
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoFileSettingMapper {
 

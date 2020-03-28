@@ -5,7 +5,7 @@ import jp.co.ha.business.dto.HealthInfoRefDetailDto;
 /**
  * 健康情報詳細サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoRefDetailService {
 

@@ -7,11 +7,15 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * ダッシュボードのエラーコード列挙
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
 
     /* ERROR */
+    /** S3 ダウンロードエラー */
+    AWS_S3_DOWNLOAD_ERROR("AWS_S3_DOWNLOAD_ERROR", "DE0027", LogLevel.ERROR),
+    /** S3 アップロードエラー */
+    AWS_S3_UPLOAD_ERROR("AWS_S3_UPLOAD_ERROR", "DE0028", LogLevel.ERROR),
 
     /* WARN */
     /** アカウント存在チェックエラー */

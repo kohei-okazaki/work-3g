@@ -4,7 +4,7 @@ package jp.co.ha.web.view;
  * ViewEnumの基底インターフェース<br>
  * すべてのViewEnumはこのインターフェースを継承すること
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface BaseView {
 

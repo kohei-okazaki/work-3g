@@ -34,7 +34,7 @@ import jp.co.ha.web.form.ErrorResponse;
  *     リクエスト
  * @param <Rs>
  *     レスポンス
- * @since 1.0
+ * @version 1.0.0
  */
 @RestController
 public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends BaseApiResponse>

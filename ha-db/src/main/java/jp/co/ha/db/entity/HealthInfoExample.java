@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 健康情報Example
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoExample extends BaseExample {
 

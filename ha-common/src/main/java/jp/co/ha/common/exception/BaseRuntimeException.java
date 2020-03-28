@@ -3,7 +3,7 @@ package jp.co.ha.common.exception;
 /**
  * アプリ内で扱う基底Runtime例外クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class BaseRuntimeException extends RuntimeException {
 

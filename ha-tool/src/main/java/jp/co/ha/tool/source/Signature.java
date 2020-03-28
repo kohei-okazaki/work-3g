@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 /**
  * 自動生成JavaソースのSignatureクラス
  *
- * @version 1.0
+ * @version 1.0.0
  */
 public class Signature {
 

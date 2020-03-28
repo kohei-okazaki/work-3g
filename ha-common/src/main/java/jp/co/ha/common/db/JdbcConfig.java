@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 /**
  * jdbc.propertiesのBean
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Component
 public class JdbcConfig {

@@ -32,6 +32,7 @@
     <property name="accesskey" value="${aws.accesskey}" />
     <property name="secretAccesskey" value="${aws.secret.accesskey}" />
     <property name="region" value="${aws.region}" />
+    <property name="backet" value="${aws.s3.backet}" />
   </bean>
   <!-- CRUD -->
   <context:component-scan base-package="jp.co.ha.business.db.crud.read.impl" />

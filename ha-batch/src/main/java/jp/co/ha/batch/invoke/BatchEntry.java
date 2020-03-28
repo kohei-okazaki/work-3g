@@ -4,7 +4,7 @@ package jp.co.ha.batch.invoke;
  * Batchのエントリー部分クラス<br>
  * 本クラスからBatchInvokerを起動する
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class BatchEntry {
 

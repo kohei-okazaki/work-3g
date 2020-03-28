@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 /**
  * 健康情報CSVダウンロードサービス実装クラスのマーカーアノテーション
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

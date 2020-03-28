@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 /**
  * エンコードアノテーション<br>
  * ex)<br>
- * 
+ *
  * <pre>
  * &#64;Base64
  * &#64;Autowired
  * private BaseEncodeAndDecoder encoder;
  * </pre>
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

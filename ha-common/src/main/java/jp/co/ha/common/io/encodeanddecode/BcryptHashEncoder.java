@@ -7,7 +7,7 @@ import jp.co.ha.common.exception.BaseException;
 /**
  * Bcryptハッシュ値エンコードクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Component("bcryptHashEncoder")
 public class BcryptHashEncoder implements HashEncoder {

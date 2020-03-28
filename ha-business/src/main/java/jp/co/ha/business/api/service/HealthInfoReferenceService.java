@@ -7,7 +7,7 @@ import jp.co.ha.web.service.BaseApiService;
 /**
  * 健康情報照会サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoReferenceService
         extends BaseApiService<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
