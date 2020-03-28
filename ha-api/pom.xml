@@ -8,14 +8,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>api</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <name>ha-api</name>
   <packaging>war</packaging>
 
   <parent>
     <groupId>jp.co.ha</groupId>
     <artifactId>pom</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <relativePath>../ha-pom</relativePath>
   </parent>
 
@@ -23,22 +23,22 @@
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>db</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>web</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>business</artifactId>
-      <version>1.0</version>
+      <version>1.0.1</version>
     </dependency>
   </dependencies>
 

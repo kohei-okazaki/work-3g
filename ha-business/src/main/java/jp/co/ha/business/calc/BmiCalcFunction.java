@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * BMIを計算する関数インターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @FunctionalInterface
 public interface BmiCalcFunction {

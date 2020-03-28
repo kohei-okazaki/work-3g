@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="filecomment_context" deleted="false" description="作成済みの Java ファイルのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.filecomment" name="filecomment">/**
  *
  */</template><template autoinsert="true" context="typecomment_context" deleted="false" description="作成済みの型のコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.typecomment" name="typecomment">/**
- * @author ${user}
- * @version 1.0
+ * @version 1.0.0
  * ${tags}
  */</template><template autoinsert="true" context="delegatecomment_context" deleted="false" description="委譲メソッドのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.delegatecomment" name="delegatecomment">/**
  * ${tags}

@@ -3,7 +3,7 @@ package jp.co.ha.business.dto;
 /**
  * アカウントDTO
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class AccountDto {
 

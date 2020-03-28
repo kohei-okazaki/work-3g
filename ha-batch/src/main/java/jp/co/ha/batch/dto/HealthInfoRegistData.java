@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 健康情報登録情報
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoRegistData {
 
@@ -78,7 +78,7 @@ public class HealthInfoRegistData {
     /**
      * 健康情報必須情報
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static class HealthInfoRequestData {
 

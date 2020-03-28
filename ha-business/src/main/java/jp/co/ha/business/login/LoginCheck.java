@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.Account;
 /**
  * ログイン情報チェッククラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class LoginCheck {
 

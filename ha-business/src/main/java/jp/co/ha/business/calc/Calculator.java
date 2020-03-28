@@ -6,7 +6,7 @@ import java.math.RoundingMode;
 /**
  * 計算機クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class Calculator {
 

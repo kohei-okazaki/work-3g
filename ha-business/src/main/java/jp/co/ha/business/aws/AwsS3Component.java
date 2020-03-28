@@ -14,7 +14,7 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 /**
  * AWS-S3のComponent
  *
- * @version 1.0
+ * @version 1.0.0
  */
 @Component
 public class AwsS3Component {
@@ -41,7 +41,7 @@ public class AwsS3Component {
 
     /**
      * バケット内に保存されているファイル一覧を返す
-     * 
+     *
      * @param backetName
      *     バケット名
      * @return ファイルリスト

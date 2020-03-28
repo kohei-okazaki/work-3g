@@ -8,14 +8,14 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>common</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <name>ha-common</name>
   <packaging>jar</packaging>
 
   <parent>
     <groupId>jp.co.ha</groupId>
     <artifactId>pom</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <relativePath>../ha-pom</relativePath>
   </parent>
 

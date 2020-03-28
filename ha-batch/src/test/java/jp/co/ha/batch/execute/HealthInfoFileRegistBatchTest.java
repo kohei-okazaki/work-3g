@@ -8,7 +8,7 @@ import jp.co.ha.batch.invoke.BatchInvoker;
 /**
  * {@linkplain HealthInfoFileRegistBatch}のjUnit
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoFileRegistBatchTest extends BaseBatchTest {
 

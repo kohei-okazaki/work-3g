@@ -18,7 +18,7 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
 /**
  * 健康情報検索サービスインターフェース実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {

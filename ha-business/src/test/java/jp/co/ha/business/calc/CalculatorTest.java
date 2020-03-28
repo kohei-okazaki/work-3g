@@ -13,7 +13,7 @@ import jp.co.ha.business.calc.Calculator.CalcMethod;
 /**
  * {@link Calculator} のjUnit
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class CalculatorTest extends BaseBusinessTest {
 

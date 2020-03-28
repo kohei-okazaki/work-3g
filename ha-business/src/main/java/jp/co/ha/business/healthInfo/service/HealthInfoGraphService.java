@@ -9,7 +9,7 @@ import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 /**
  * 健康情報グラフ作成サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoGraphService {
 

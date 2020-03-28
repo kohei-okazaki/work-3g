@@ -9,7 +9,7 @@ import jp.co.ha.db.entity.HealthInfo;
 /**
  * 健康情報検索サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoSearchService {
 

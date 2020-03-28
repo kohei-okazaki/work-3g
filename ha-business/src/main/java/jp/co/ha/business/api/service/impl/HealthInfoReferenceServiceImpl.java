@@ -22,7 +22,7 @@ import jp.co.ha.db.entity.HealthInfo;
 /**
  * 健康情報照会サービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoReferenceServiceImpl extends CommonService

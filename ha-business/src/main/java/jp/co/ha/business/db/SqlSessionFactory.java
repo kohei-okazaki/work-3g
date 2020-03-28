@@ -21,7 +21,7 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
  * <code>SqlSession session = SqlSessionFactory.getInstance().getSqlSession();</code>
  * <code>session.getMapper(XXXMapper.class);</code>
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class SqlSessionFactory {
 

@@ -14,7 +14,7 @@ import jp.co.ha.db.entity.Account;
 /**
  * API共通サービス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class CommonService {
 

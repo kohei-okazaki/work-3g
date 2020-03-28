@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * 健康情報照会詳細DTO
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoRefDetailDto {
 

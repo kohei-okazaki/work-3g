@@ -15,7 +15,7 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
 /**
  * 健康情報Excel生成クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelModel> {
 

@@ -5,7 +5,7 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * APIのテストモード種別の列挙
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public enum TestMode implements BaseEnum {
 

@@ -26,7 +26,7 @@ import jp.co.ha.web.interceptor.BaseWebInterceptor;
  * <li>CSRFトークンチェック</li>
  * </ul>
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class DashboardAuthInterceptor extends BaseWebInterceptor {
 

@@ -8,7 +8,7 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
 /**
  * 健康情報Excel出力モデルクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @ExcelDownloadModel(sheetName = "健康情報", headerNames = { "身長", "体重", "BMI", "標準体重",
         "健康情報登録日時" }, footerNames = { "身長",

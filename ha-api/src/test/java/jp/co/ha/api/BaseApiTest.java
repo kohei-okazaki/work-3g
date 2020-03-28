@@ -14,32 +14,34 @@ import jp.co.ha.common.system.BeanLoader;
 /**
  * API基底テストクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
-@ContextConfiguration(locations = { "classpath:common-context.xml", "classpath:db-context.xml",
-		"classpath:web-context.xml", "classpath:business-context.xml", "classpath:api-context.xml" })
+@ContextConfiguration(locations = { "classpath:common-context.xml",
+        "classpath:db-context.xml", "classpath:web-context.xml",
+        "classpath:business-context.xml", "classpath:api-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BaseApiTest {
 
-	/** LOG */
-	protected static final Logger LOG = LoggerFactory.getLogger(BaseApiTest.class);
+    /** LOG */
+    protected static final Logger LOG = LoggerFactory.getLogger(BaseApiTest.class);
 
-	/**
-	 * before
-	 */
-	@Before
-	public void before() {
-		LOG.debug("BaseApiTest#before");
-		BeanLoader.setContext(new ClassPathXmlApplicationContext(
-				new String[] { "classpath:common-context.xml", "classpath:db-context.xml", "classpath:web-context.xml",
-						"classpath:business-context.xml", "classpath:api-context.xml" }));
-	}
+    /**
+     * before
+     */
+    @Before
+    public void before() {
+        LOG.debug("BaseApiTest#before");
+        BeanLoader.setContext(new ClassPathXmlApplicationContext(
+                new String[] { "classpath:common-context.xml", "classpath:db-context.xml",
+                        "classpath:web-context.xml",
+                        "classpath:business-context.xml", "classpath:api-context.xml" }));
+    }
 
-	/**
-	 * after
-	 */
-	@After
-	public void after() {
-		LOG.debug("BaseApiTest#after");
-	}
+    /**
+     * after
+     */
+    @After
+    public void after() {
+        LOG.debug("BaseApiTest#after");
+    }
 }

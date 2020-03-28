@@ -9,7 +9,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 /**
  * AWS認証情報のComponent
  *
- * @version 1.0
+ * @version 1.0.0
  */
 @Component
 public class AwsAuthComponent {

@@ -5,8 +5,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * 自動テストの設定情報クラス
  *
- * @since 1.0
- *
+ * @version 1.0.0
  */
 public class AutoTestConfig {
 

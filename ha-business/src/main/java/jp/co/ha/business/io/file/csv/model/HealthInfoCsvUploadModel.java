@@ -9,7 +9,7 @@ import jp.co.ha.common.validator.annotation.Required;
 /**
  * 健康情報CSVアップロードモデル
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoCsvUploadModel implements BaseCsvModel {
 

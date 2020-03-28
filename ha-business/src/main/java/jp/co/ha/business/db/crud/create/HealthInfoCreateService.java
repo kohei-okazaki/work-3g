@@ -7,7 +7,7 @@ import jp.co.ha.db.entity.HealthInfo;
 /**
  * 健康情報作成サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoCreateService {
 

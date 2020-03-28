@@ -14,7 +14,7 @@ import jp.co.ha.common.system.BeanLoader;
 /**
  * Batch基底テストクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @ContextConfiguration(locations = { "classpath:common-context.xml",
         "classpath:db-context.xml", "classpath:web-context.xml",

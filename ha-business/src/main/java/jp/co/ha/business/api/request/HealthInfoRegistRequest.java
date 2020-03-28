@@ -15,7 +15,7 @@ import jp.co.ha.common.validator.annotation.Required;
 /**
  * 健康情報登録リクエストクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoRegistRequest extends CommonApiRequest {
 

@@ -21,7 +21,7 @@ import jp.co.ha.common.util.DateUtil;
 /**
  * Batchの呼び出しクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class BatchInvoker {
 

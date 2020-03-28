@@ -3,7 +3,7 @@ package jp.co.ha.business.db.crud.delete;
 /**
  * 健康情報ファイル設定削除サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoFileSettingDeleteService {
 

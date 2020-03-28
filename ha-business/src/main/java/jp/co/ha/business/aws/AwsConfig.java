@@ -7,7 +7,7 @@ import com.amazonaws.regions.Regions;
 /**
  * AWSの設定情報保持クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Component
 public class AwsConfig {

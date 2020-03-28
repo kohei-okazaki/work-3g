@@ -17,7 +17,7 @@ import jp.co.ha.web.type.ResultType;
 /**
  * JSONの設定クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Configuration
 public class JsonConfig {
