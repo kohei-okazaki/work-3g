@@ -4,6 +4,7 @@ import java.util.List;
 
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.web.form.BaseApiResponse.ResultType;
 
 /**
  * 健康情報ファイル入力画面サービスインターフェース
@@ -32,10 +33,11 @@ public interface HealthInfoFileRegistService {
      *     健康情報CSVアップロードモデルリスト
      * @param userId
      *     ユーザID
+     * @return 処理結果
      * @throws BaseException
      *     基底例外
      */
-    void regist(List<HealthInfoCsvUploadModel> modelList, String userId)
+    ResultType regist(List<HealthInfoCsvUploadModel> modelList, String userId)
             throws BaseException;
 
 }

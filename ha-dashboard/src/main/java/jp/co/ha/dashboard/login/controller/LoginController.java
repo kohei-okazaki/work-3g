@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.amazonaws.services.s3.model.S3ObjectSummary;
-
-import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
@@ -30,8 +27,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionManageService;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
@@ -49,9 +44,6 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("login")
 public class LoginController implements BaseWebController {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
-
     /** sessionサービス */
     @Autowired
     private SessionManageService sessionService;
@@ -67,9 +59,6 @@ public class LoginController implements BaseWebController {
     /** MessageSource */
     @Autowired
     private MessageSource messageSource;
-    /** AWS-S3 */
-    @Autowired
-    private AwsS3Component awsS3Component;
 
     /**
      * Formを返す
@@ -95,13 +84,6 @@ public class LoginController implements BaseWebController {
         // ログアウト時にすべてのセッション情報を削除する
         sessionService.removeValues(request.getSession());
 
-        // ファイル一覧を出力
-        for (S3ObjectSummary obj : awsS3Component
-                .getS3ObjectSummaryListByBacketName("healthinfo-app-local")) {
-            // キー(ファイルパス)・サイズ・最終更新日
-            LOG.debug("Key [" + obj.getKey() + "] / Size [" + obj.getSize()
-                    + " B] / Last Modified [" + obj.getLastModified() + "]");
-        }
         return getView(DashboardView.LOGIN);
     }
 
@@ -156,7 +138,7 @@ public class LoginController implements BaseWebController {
             healthInfoSearchService.findByUserId(form.getUserId(), selectOption).stream()
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDD_HHMMSS);
+                                DateFormatType.YYYYMMDDHHMMSS);
                         graphModel.addWeight(e.getWeight());
                         graphModel.addBmi(e.getBmi());
                         graphModel.addStandardWeight(e.getStandardWeight());
@@ -200,7 +182,7 @@ public class LoginController implements BaseWebController {
             healthInfoSearchService.findByUserId(userId, selectOption).stream()
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDD_HHMMSS);
+                                DateFormatType.YYYYMMDDHHMMSS);
                         graphModel.addWeight(e.getWeight());
                         graphModel.addBmi(e.getBmi());
                         graphModel.addStandardWeight(e.getStandardWeight());

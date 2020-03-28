@@ -48,7 +48,7 @@ public class DateUtil {
      * @return 日付
      */
     public static Date toDate(String target) {
-        return DateUtil.toDate(target, DateFormatType.YYYYMMDD_HHMMSS);
+        return DateUtil.toDate(target, DateFormatType.YYYYMMDDHHMMSS);
     }
 
     /**
@@ -294,9 +294,9 @@ public class DateUtil {
         /** YYYYMMDD */
         YYYYMMDD_NOSEQ("yyyyMMdd"),
         /** YYYY/MM/DD HH:mm:ss */
-        YYYYMMDD_HHMMSS("yyyy/MM/dd HH:mm:ss"),
+        YYYYMMDDHHMMSS("yyyy/MM/dd HH:mm:ss"),
         /** YYYYMMDDHHmmss */
-        YYYYMMDD_HHMMSS_NOSEP("yyyyMMddHHmmss");
+        YYYYMMDDHHMMSS_NOSEP("yyyyMMddHHmmss");
 
         /** 名前 */
         private String value;

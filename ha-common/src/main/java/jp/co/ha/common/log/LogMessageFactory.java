@@ -119,7 +119,7 @@ public class LogMessageFactory {
         if (BeanUtil.isNull(value)) {
             strValue = StringUtil.EMPTY;
         } else if (value instanceof Date) {
-            strValue = DateUtil.toString((Date) value, DateFormatType.YYYYMMDD_HHMMSS);
+            strValue = DateUtil.toString((Date) value, DateFormatType.YYYYMMDDHHMMSS);
         } else {
             strValue = value.toString();
         }

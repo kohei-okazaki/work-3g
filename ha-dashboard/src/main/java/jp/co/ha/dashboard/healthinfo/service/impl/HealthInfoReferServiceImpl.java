@@ -66,7 +66,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
                 destDto.setHealthInfoRegDate(
                         DateUtil.toString(srcEntity.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDD_HHMMSS));
+                                DateFormatType.YYYYMMDDHHMMSS));
             });
 
             return result;
@@ -87,7 +87,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
                 destModel.setHealthInfoRegDate(
                         DateUtil.toDate(srcDto.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDD_HHMMSS));
+                                DateFormatType.YYYYMMDDHHMMSS));
 
             });
             model.setUserId(userId);
@@ -105,7 +105,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
         // ファイル名
         String fileName = "healthInfoReference_"
                 + DateUtil.toString(DateUtil.getSysDate(),
-                        DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)
                 + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()

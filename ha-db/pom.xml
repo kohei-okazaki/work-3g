@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>db</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.0</version>
   <name>ha-db</name>
   <packaging>jar</packaging>
 
@@ -31,7 +31,7 @@
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-      <version>1.0.1</version>
+    <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis.generator</groupId>

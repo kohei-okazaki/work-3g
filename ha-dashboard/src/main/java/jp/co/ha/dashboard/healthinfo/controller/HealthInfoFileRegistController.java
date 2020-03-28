@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.aws.AwsConfig;
 import jp.co.ha.business.aws.AwsS3Component;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
@@ -36,6 +39,7 @@ import jp.co.ha.dashboard.healthinfo.service.annotation.HealthInfoUploadCsv;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWizardController;
+import jp.co.ha.web.form.BaseApiResponse.ResultType;
 
 /**
  * 健康情報一括登録画面コントローラ
@@ -57,6 +61,9 @@ public class HealthInfoFileRegistController
     /** session管理サービス */
     @Autowired
     private SessionManageService sessionManageService;
+    /** AWS個別設定情報 */
+    @Autowired
+    private AwsConfig awsConfig;
     /** S3コンポーネント */
     @Autowired
     private AwsS3Component awsS3Component;
@@ -115,16 +122,16 @@ public class HealthInfoFileRegistController
                 .readMultipartFile(form.getMultipartFile(), Charset.UTF_8);
 
         String fileName = DateUtil.toString(DateUtil.getSysDate(),
-                DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + ".csv";
-        awsS3Component.putFile("healthinfo-app-local",
-                "healthinfo-file-regist/" + userId + "/" + fileName,
+                DateFormatType.YYYYMMDDHHMMSS_NOSEP) + ".csv";
+        awsS3Component.putFile("healthinfo-file-regist/" + userId + "/" + fileName,
                 form.getMultipartFile());
 
         // フォーマットチェックを行う
         fileService.formatCheck(modelList, userId);
 
-        // sessionManageService.setValue(request.getSession(), "modelList",
-        // modelList);
+        // アップロードファイル名を設定
+        sessionManageService.setValue(request.getSession(),
+                "healthinfo-file-regist/" + userId, fileName);
 
         model.addAttribute("modelList", modelList);
         model.addAttribute("count", modelList.size());
@@ -137,26 +144,41 @@ public class HealthInfoFileRegistController
      */
     @Override
     @CsrfToken(check = true)
-    @SuppressWarnings("unchecked")
     @PostMapping(value = "/complete")
     public String complete(Model model, HealthInfoFileForm form,
             HttpServletRequest request) throws BaseException {
 
-        List<HealthInfoCsvUploadModel> modelList = sessionManageService
-                .getValue(request.getSession(), "modelList", List.class)
-                .orElseThrow(() -> new SystemException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+        String userId = sessionManageService
+                .getValue(request.getSession(), "userId", String.class).get();
+
+        String fileName = sessionManageService
+                .getValue(request.getSession(), "healthinfo-file-regist/" + userId,
+                        String.class)
+                .orElseThrow(() -> new BusinessException(
+                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "リクエスト情報が不正です セッションキー"
+                                + "healthinfo-file-regist/" + userId + "が存在しない"));
+
+        // S3から健康情報CSVファイルを取得
+        InputStream is = awsS3Component.getS3ObjectByBacketAndKey(
+                awsConfig.getBacket(),
+                "healthinfo-file-regist/" + userId + "/" + fileName);
+        CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
+        List<HealthInfoCsvUploadModel> modelList = reader.readInputStream(is,
+                Charset.UTF_8);
+
         if (CollectionUtil.isEmpty(modelList)) {
             throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                     "session情報が不正です");
         }
 
-        String userId = sessionManageService
-                .getValue(request.getSession(), "userId", String.class).get();
+        ResultType result = fileService.regist(modelList, userId);
 
-        fileService.regist(modelList, userId);
+        sessionManageService.removeValue(request.getSession(),
+                "healthinfo-file-regist/" + userId);
 
-        sessionManageService.removeValue(request.getSession(), "modelList");
+        if (ResultType.FAILURE == result) {
+            // TODO DB登録成功時、S3から登録ファイルを削除
+        }
 
         return getView(DashboardView.HEALTH_INFO_FILE_COMPLETE);
     }

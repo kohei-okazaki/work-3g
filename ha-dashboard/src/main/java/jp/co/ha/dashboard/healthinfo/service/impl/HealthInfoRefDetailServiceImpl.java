@@ -56,7 +56,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
                 // 健康情報作成日時
                 destDto.setHealthInfoRegDate(
                         DateUtil.toString(srcEntity.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDD_HHMMSS));
+                                DateFormatType.YYYYMMDDHHMMSS));
                 // 肥満度メッセージ
                 BmiRangeMt mt = bmiRangeMtSearchService
                         .findByBmiRangeId(srcEntity.getBmiRangeId());

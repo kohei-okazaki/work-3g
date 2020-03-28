@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>tool</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.0</version>
   <name>ha-tool</name>
   <packaging>jar</packaging>
 
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 

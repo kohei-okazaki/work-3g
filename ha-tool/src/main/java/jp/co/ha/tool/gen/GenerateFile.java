@@ -38,6 +38,7 @@ public class GenerateFile implements Serializable {
      * outputPathを設定する
      *
      * @param outputPath
+     *     出力先ファイルパス
      */
     public void setOutputPath(String outputPath) {
         this.outputPath = outputPath;
@@ -56,6 +57,7 @@ public class GenerateFile implements Serializable {
      * fileNameを設定する
      *
      * @param fileName
+     *     ファイル名
      */
     public void setFileName(String fileName) {
         this.fileName = fileName;
@@ -74,6 +76,7 @@ public class GenerateFile implements Serializable {
      * dataを設定する
      *
      * @param data
+     *     ファイル内容
      */
     public void setData(String data) {
         this.data = data;
@@ -92,6 +95,7 @@ public class GenerateFile implements Serializable {
      * charsetを設定する
      *
      * @param charset
+     *     文字コード
      */
     public void setCharset(Charset charset) {
         this.charset = charset;

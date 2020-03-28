@@ -69,7 +69,7 @@ public class HealthInfoReferExcelDownloadServiceImpl
             model.setBmi(result.getBmi().toString());
             model.setStandardWeight(result.getStandardWeight().toString());
             model.setHealthInfoRegDate(DateUtil.toDate(result.getHealthInfoRegDate(),
-                    DateFormatType.YYYYMMDD_HHMMSS));
+                    DateFormatType.YYYYMMDDHHMMSS));
             return model;
         }).collect(Collectors.toList());
     }

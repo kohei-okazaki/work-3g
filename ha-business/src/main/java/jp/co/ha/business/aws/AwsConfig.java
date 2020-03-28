@@ -18,6 +18,8 @@ public class AwsConfig {
     private String secretAccesskey;
     /** リージョン */
     private Regions region;
+    /** バケット名 */
+    private String backet;
 
     /**
      * accesskeyを返す
@@ -74,6 +76,25 @@ public class AwsConfig {
      */
     public void setRegion(String region) {
         this.region = Regions.fromName(region);
+    }
+
+    /**
+     * backetを返す
+     *
+     * @return backet
+     */
+    public String getBacket() {
+        return backet;
+    }
+
+    /**
+     * backetを設定する
+     *
+     * @param backet
+     *     バケット
+     */
+    public void setBacket(String backet) {
+        this.backet = backet;
     }
 
 }

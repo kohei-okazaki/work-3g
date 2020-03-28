@@ -1,9 +1,8 @@
 package jp.co.ha.dashboard.news.controller;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.Comparator;
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.aws.AwsConfig;
+import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.dto.NewsListDto;
 import jp.co.ha.business.dto.NewsListDto.NewsDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SystemConfig;
-import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWebController;
 
@@ -32,11 +30,15 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory.getLogger(NewsController.class);
     /** System設定情報 */
     @Autowired
     private SystemConfig systemConfig;
+    /** AWS個別設定情報 */
+    @Autowired
+    private AwsConfig awsConfig;
+    /** S3コンポーネント */
+    @Autowired
+    private AwsS3Component awsS3Component;
 
     /**
      * お知らせ一覧
@@ -45,21 +47,18 @@ public class NewsController implements BaseWebController {
      *     Model
      * @return お知らせ一覧画面
      * @throws BaseException
-     *     JSONファイルの読み込みに失敗した場合
+     *     JSONファイルの読込に失敗した場合
      */
     @GetMapping("/list")
     public String list(Model model) throws BaseException {
 
-        String path = new StringJoiner(FileSeparator.SYSTEM.getValue())
-                .add(this.getClass().getClassLoader().getResource("").getPath())
-                .add("META-INF")
-                .add("news.json")
-                .toString();
-        LOG.info(path);
-
-        List<NewsDto> newsList = new JsonReader().read(new File(path), NewsListDto.class)
+        // S3からお知らせJSONを取得
+        InputStream is = awsS3Component.getS3ObjectByBacketAndKey(
+                awsConfig.getBacket(), "news/news.json");
+        List<NewsDto> newsList = new JsonReader().read(is, NewsListDto.class)
                 .getNewsDtoList();
-        // Indexの降順ソート
+
+        // Indexの降順でソート
         newsList = newsList.stream()
                 .sorted(Comparator.comparing(NewsDto::getIndex).reversed())
                 .collect(Collectors.toList());

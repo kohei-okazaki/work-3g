@@ -37,22 +37,20 @@ public abstract class CsvReader<T extends BaseCsvModel> {
     private static final Logger LOG = LoggerFactory.getLogger(CsvReader.class);
 
     /**
-     * 指定されたアップロードファイルを読み込み、CSVモデルリストを返す
+     * 指定された入力Streamを読み込み、CSVモデルリストを返す
      *
-     * @param uploadFile
-     *     アップロードファイル
+     * @param is
+     *     入力Stream
      * @param charset
-     *     Charset
+     *     文字コード
      * @return CSVモデルリスト
      * @throws BaseException
      *     基底例外
      */
-    public List<T> readMultipartFile(MultipartFile uploadFile, Charset charset)
-            throws BaseException {
+    public List<T> readInputStream(InputStream is, Charset charset) throws BaseException {
 
         List<T> modelList = new ArrayList<>();
-        try (InputStream is = uploadFile.getInputStream();
-                InputStreamReader isr = new InputStreamReader(is, charset.getValue());
+        try (InputStreamReader isr = new InputStreamReader(is, charset.getValue());
                 BufferedReader br = new BufferedReader(isr)) {
             String record;
             while (BeanUtil.notNull(record = br.readLine())) {
@@ -67,6 +65,30 @@ public abstract class CsvReader<T extends BaseCsvModel> {
         }
 
         return modelList;
+    }
+
+    /**
+     * 指定されたアップロードファイルを読み込み、CSVモデルリストを返す
+     *
+     * @param uploadFile
+     *     アップロードファイル
+     * @param charset
+     *     Charset
+     * @return CSVモデルリスト
+     * @throws BaseException
+     *     ファイルの読込に失敗した場合
+     * @see CsvReader#readInputStream(InputStream, Charset)
+     */
+    public List<T> readMultipartFile(MultipartFile uploadFile, Charset charset)
+            throws BaseException {
+
+        try (InputStream is = uploadFile.getInputStream()) {
+            return readInputStream(is, charset);
+        } catch (IOException e) {
+            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
+                    "ファイルの読込に失敗しました。", e);
+        }
+
     }
 
     /**

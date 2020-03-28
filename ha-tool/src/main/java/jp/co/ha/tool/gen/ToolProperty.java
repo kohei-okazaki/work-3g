@@ -40,6 +40,7 @@ public class ToolProperty {
      * baseDirを設定する
      *
      * @param baseDir
+     *     基底パス
      */
     public void setBaseDir(String baseDir) {
         this.baseDir = baseDir;
@@ -58,6 +59,7 @@ public class ToolProperty {
      * excelPathを設定する
      *
      * @param excelPath
+     *     自動生成ツールExcelまでのパス
      */
     public void setExcelPath(String excelPath) {
         this.excelPath = excelPath;
@@ -76,6 +78,7 @@ public class ToolProperty {
      * targetTablesを設定する
      *
      * @param targetTables
+     *     処理対象テーブルリスト
      */
     public void setTargetTables(String targetTables) {
         this.targetTables = targetTables;
@@ -94,6 +97,7 @@ public class ToolProperty {
      * versionを設定する
      *
      * @param version
+     *     バージョン情報
      */
     public void setVersion(String version) {
         this.version = version;
@@ -112,6 +116,7 @@ public class ToolProperty {
      * targetTableListを設定する
      *
      * @param targetTableList
+     *     処理対象テーブルリスト
      */
     public void setTargetTableList(List<String> targetTableList) {
         this.targetTableList = targetTableList;

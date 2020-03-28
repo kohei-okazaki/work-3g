@@ -112,7 +112,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         // ファイル名
         String fileName = "healthInfoRegist_"
                 + DateUtil.toString(DateUtil.getSysDate(),
-                        DateFormatType.YYYYMMDD_HHMMSS_NOSEP)
+                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)
                 + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = null;

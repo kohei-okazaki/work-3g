@@ -8,7 +8,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>web</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.0</version>
   <name>ha-web</name>
   <packaging>jar</packaging>
 
@@ -23,12 +23,12 @@
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>db</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 

@@ -23,7 +23,7 @@ public class SelectOption {
     /**
      * 検索オプションのビルダー
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static class SelectOptionBuilder implements Builder<SelectOption> {
 
@@ -69,7 +69,7 @@ public class SelectOption {
     /**
      * DB検索のソートの列挙体
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum SortType {
 

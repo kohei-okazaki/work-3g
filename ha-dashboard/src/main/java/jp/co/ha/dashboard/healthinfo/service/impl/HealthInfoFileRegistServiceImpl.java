@@ -23,6 +23,7 @@ import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.web.form.BaseApiResponse.ResultType;
 
 /**
  * 健康情報ファイル入力画面サービス実装クラス
@@ -69,11 +70,19 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
      * {@inheritDoc}
      */
     @Override
-    public void regist(List<HealthInfoCsvUploadModel> modelList, String userId)
+    public ResultType regist(List<HealthInfoCsvUploadModel> modelList, String userId)
             throws BaseException {
+
+        ResultType result = ResultType.SUCCESS;
         for (HealthInfoRegistRequest apiRequest : toRequestList(modelList, userId)) {
-            registApi.execute(apiRequest, new HealthInfoRegistResponse());
+            HealthInfoRegistResponse response = new HealthInfoRegistResponse();
+            registApi.execute(apiRequest, response);
+            if (ResultType.FAILURE == response.getResultType()) {
+                result = response.getResultType();
+            }
         }
+
+        return result;
     }
 
     /**
