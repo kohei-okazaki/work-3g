@@ -5,7 +5,7 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * ロガークラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class Logger {
 
@@ -153,7 +153,7 @@ public class Logger {
     /**
      * ログレベルの列挙
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum LogLevel implements BaseEnum {
 

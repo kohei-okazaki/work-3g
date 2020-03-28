@@ -29,7 +29,7 @@ import jp.co.ha.common.util.StringUtil;
  *
  * @param <T>
  *     CSVモデル
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class CsvReader<T extends BaseCsvModel> {
 

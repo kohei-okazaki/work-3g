@@ -7,7 +7,7 @@ import jp.co.ha.tool.gen.BaseGenerator.GenerateType;
 /**
  * 自動生成呼び出しクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class GenerateInvoker {
 

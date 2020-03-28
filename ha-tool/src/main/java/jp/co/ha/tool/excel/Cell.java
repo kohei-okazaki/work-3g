@@ -5,7 +5,7 @@ import jp.co.ha.tool.excel.type.ColumnType;
 /**
  * 自動生成ツールのCellクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class Cell {
 

@@ -8,7 +8,7 @@ import jp.co.ha.common.exception.BaseException;
 /**
  * 健康情報ファイル入力画面サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface HealthInfoFileRegistService {
 

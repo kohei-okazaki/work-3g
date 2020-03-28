@@ -15,7 +15,7 @@ import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 /**
  * 健康情報CSVダウンロードサービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service("healthInfoDownloadCsv")
 public class HealthInfoCsvDownloadServiceImpl

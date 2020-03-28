@@ -19,7 +19,7 @@ import jp.co.ha.common.util.BeanUtil.AccessorType;
 /**
  * Entityの暗号/復号インターフェース実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Component
 public class EntityCrypterImpl implements EntityCrypter {

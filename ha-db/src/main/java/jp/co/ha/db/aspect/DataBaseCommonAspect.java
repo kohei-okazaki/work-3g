@@ -28,7 +28,7 @@ import jp.co.ha.common.util.DateUtil;
 /**
  * DB共通処理クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Aspect
 @Component

@@ -83,7 +83,7 @@ public class AutoTestCommonExecuter {
     /**
      * ブラウザ種別の列挙
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum BrowserType implements BaseEnum {
 

@@ -8,7 +8,7 @@ package jp.co.ha.common.exception;
  * <li>Session関連で発生した例外</li>
  * </ul>
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class SystemException extends BaseException {
 

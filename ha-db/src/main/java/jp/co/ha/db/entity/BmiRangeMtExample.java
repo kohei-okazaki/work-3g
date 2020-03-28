@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * BMI範囲マスタExample
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class BmiRangeMtExample extends BaseExample {
 

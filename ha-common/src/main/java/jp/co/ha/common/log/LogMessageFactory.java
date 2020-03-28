@@ -17,7 +17,7 @@ import jp.co.ha.common.util.StringUtil;
 /**
  * ログメッセージ作成クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class LogMessageFactory {
 

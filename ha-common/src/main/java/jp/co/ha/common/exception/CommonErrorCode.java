@@ -6,7 +6,7 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * 共通エラーコード
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
 

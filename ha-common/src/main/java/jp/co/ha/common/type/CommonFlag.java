@@ -3,7 +3,7 @@ package jp.co.ha.common.type;
 /**
  * フラグ値列挙
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public enum CommonFlag implements BaseEnum {
 

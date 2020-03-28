@@ -3,9 +3,9 @@ package jp.co.ha.common.function;
 /**
  * Builderパターンの関数インターフェース
  *
- * @since 1.0
  * @param <T>
  *     生成後のクラス型
+ * @version 1.0.0
  */
 @FunctionalInterface
 public interface Builder<T> {

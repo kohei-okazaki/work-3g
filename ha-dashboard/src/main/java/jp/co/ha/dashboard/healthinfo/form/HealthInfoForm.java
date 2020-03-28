@@ -12,7 +12,7 @@ import jp.co.ha.web.form.BaseForm;
 /**
  * 健康情報入力画面フォームクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoForm implements BaseForm {
 

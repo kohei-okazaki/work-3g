@@ -5,7 +5,7 @@ import jp.co.ha.business.dto.AccountDto;
 /**
  * アカウント設定サービスインターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface AccountSettingService {
 

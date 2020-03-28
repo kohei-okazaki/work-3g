@@ -7,7 +7,7 @@ import jp.co.ha.common.type.Charset;
  * CSV設定情報保持クラス<br>
  * 今後、追加するCSV設定情報は本クラスで定義する
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class CsvConfig {
 

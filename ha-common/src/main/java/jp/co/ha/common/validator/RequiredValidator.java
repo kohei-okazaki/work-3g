@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Required;
  * 必須妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Required
- * @since 1.0
+ * @version 1.0.0
  */
 public class RequiredValidator implements ConstraintValidator<Required, Object> {
 

@@ -6,12 +6,12 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import jp.co.ha.web.type.ResultType;
+import jp.co.ha.web.form.BaseApiResponse.ResultType;
 
 /**
  * JSONのAPIの結果コードのシリアライズクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class ResultTypeSerializer extends JsonSerializer<ResultType> {
 

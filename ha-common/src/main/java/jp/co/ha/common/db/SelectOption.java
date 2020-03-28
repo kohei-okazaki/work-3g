@@ -11,7 +11,7 @@ import jp.co.ha.common.util.StringUtil;
  * 検索オプション<br>
  * 検索における共通事項をまとめて保持するクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class SelectOption {
 

@@ -6,7 +6,7 @@ package jp.co.ha.db.entity;
  * TODO ロック処理はまだどのMapper.xmlに反映させていない<br>
  * TODO ここで定義したオプションを使う場合、各Mapper.xmlにその記述を入れること<br>
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class BaseExample {
 

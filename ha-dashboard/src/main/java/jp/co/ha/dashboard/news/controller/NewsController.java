@@ -26,7 +26,7 @@ import jp.co.ha.web.controller.BaseWebController;
 /**
  * お知らせ情報画面コントローラ
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Controller
 @RequestMapping("news")

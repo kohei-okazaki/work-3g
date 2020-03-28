@@ -15,7 +15,7 @@ import jp.co.ha.common.type.Charset;
 /**
  * 健康情報ファイルアップロードサービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service("healthInfoUploadCsv")
 public class HealthInfoCsvUploadServiceImpl

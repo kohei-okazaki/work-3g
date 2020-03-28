@@ -13,7 +13,7 @@ import jp.co.ha.common.validator.annotation.Date;
  * 日付の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Date
- * @since 1.0
+ * @version 1.0.0
  */
 public class DateValidator implements ConstraintValidator<Date, Object> {
 

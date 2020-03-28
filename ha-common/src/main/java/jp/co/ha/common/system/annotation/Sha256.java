@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 /**
  * SHA-256エンコードアノテーション<br>
  * ex)<br>
- * 
+ *
  * <pre>
  * &#64;Sha256
  * &#64;Autowired
  * private PasswordEncoder passwordEncoder;
  * </pre>
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

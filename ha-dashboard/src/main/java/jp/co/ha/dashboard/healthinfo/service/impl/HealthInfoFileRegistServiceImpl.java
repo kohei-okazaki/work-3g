@@ -27,7 +27,7 @@ import jp.co.ha.db.entity.Account;
 /**
  * 健康情報ファイル入力画面サービス実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {

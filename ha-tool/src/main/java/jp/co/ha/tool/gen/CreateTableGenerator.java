@@ -14,7 +14,7 @@ import jp.co.ha.tool.util.ToolUtil;
 /**
  * create tableの自動生成のクラス
  *
- * @version 1.0
+ * @version 1.0.0
  */
 public class CreateTableGenerator extends BaseGenerator {
 

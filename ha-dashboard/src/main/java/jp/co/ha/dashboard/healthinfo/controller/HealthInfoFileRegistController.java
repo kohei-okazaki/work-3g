@@ -16,14 +16,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
+import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
+import jp.co.ha.common.io.file.csv.reader.CsvReader;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.dashboard.healthinfo.service.annotation.HealthInfoUploadCsv;
@@ -34,7 +40,7 @@ import jp.co.ha.web.controller.BaseWizardController;
 /**
  * 健康情報一括登録画面コントローラ
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Controller
 @RequestMapping("healthinfofile")
@@ -51,6 +57,9 @@ public class HealthInfoFileRegistController
     /** session管理サービス */
     @Autowired
     private SessionManageService sessionManageService;
+    /** S3コンポーネント */
+    @Autowired
+    private AwsS3Component awsS3Component;
 
     /**
      * フォームを返す
@@ -100,10 +109,23 @@ public class HealthInfoFileRegistController
         String userId = sessionManageService
                 .getValue(request.getSession(), "userId", String.class).get();
 
-        List<HealthInfoCsvUploadModel> modelList = csvUploadService
-                .upload(form.getMultipartFile());
+        // CSV読み取りクラス
+        CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
+        List<HealthInfoCsvUploadModel> modelList = reader
+                .readMultipartFile(form.getMultipartFile(), Charset.UTF_8);
+
+        String fileName = DateUtil.toString(DateUtil.getSysDate(),
+                DateFormatType.YYYYMMDD_HHMMSS_NOSEP) + ".csv";
+        awsS3Component.putFile("healthinfo-app-local",
+                "healthinfo-file-regist/" + userId + "/" + fileName,
+                form.getMultipartFile());
+
+        // フォーマットチェックを行う
         fileService.formatCheck(modelList, userId);
-        sessionManageService.setValue(request.getSession(), "modelList", modelList);
+
+        // sessionManageService.setValue(request.getSession(), "modelList",
+        // modelList);
+
         model.addAttribute("modelList", modelList);
         model.addAttribute("count", modelList.size());
 

@@ -9,7 +9,7 @@ import jp.co.ha.common.type.Charset;
  * 自動生成ファイル情報を保持するクラス<br>
  * 基本的にSQLファイルもJavaファイルも文字コードはUTF-8とする
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class GenerateFile implements Serializable {
 

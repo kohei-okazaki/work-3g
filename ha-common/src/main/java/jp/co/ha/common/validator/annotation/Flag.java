@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.FlagValidator;
  * フラグの妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.FlagValidator
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

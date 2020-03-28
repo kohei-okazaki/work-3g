@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 /**
  * プロパティに付与するアノテーション
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

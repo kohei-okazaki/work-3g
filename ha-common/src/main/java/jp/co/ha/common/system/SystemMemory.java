@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 /**
  * メモリ使用量クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class SystemMemory {
 

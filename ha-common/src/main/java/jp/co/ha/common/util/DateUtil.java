@@ -17,7 +17,7 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * 日付のUtilクラス
  *
- * @since 1.0
+ * @version 1.0.0
  *
  */
 public class DateUtil {
@@ -285,7 +285,7 @@ public class DateUtil {
     /**
      * 日付フォーマットの列挙
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum DateFormatType implements BaseEnum {
 

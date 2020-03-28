@@ -5,7 +5,7 @@ import jp.co.ha.common.exception.BaseException;
 /**
  * Entityの暗号/復号インターフェース
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface EntityCrypter {
 

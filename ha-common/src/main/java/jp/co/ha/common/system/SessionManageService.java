@@ -10,7 +10,7 @@ import org.springframework.web.util.WebUtils;
 /**
  * session管理サービス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public interface SessionManageService {
 

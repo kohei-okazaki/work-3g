@@ -35,7 +35,7 @@ import jp.co.ha.tool.source.type.ClassType;
 /**
  * 自動生成ツールのUtilクラス
  *
- * @version 1.0
+ * @version 1.0.0
  */
 public class ToolUtil {
 

@@ -18,7 +18,7 @@ import jp.co.ha.tool.util.ToolUtil;
 /**
  * 自動生成基底クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public abstract class BaseGenerator {
 

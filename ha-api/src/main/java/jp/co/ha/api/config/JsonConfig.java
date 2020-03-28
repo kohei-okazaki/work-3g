@@ -12,7 +12,7 @@ import jp.co.ha.business.api.request.deserialize.TestModeDeserializer;
 import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.business.api.type.TestMode;
 import jp.co.ha.web.convert.ResultTypeSerializer;
-import jp.co.ha.web.type.ResultType;
+import jp.co.ha.web.form.BaseApiResponse.ResultType;
 
 /**
  * JSONの設定クラス

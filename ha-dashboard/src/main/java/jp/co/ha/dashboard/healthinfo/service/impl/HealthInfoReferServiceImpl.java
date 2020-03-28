@@ -32,7 +32,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 /**
  * 健康情報照会画面サービスインターフェース実装クラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Service
 public class HealthInfoReferServiceImpl implements HealthInfoReferService {

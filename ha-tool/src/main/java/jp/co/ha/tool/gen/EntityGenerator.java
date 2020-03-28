@@ -20,7 +20,7 @@ import jp.co.ha.tool.util.ToolUtil;
  * Entityのビルダー
  *
  * @deprecated MybatisのgeneratorでEntityを生成している為
- * @since 1.0
+ * @version 1.0.0
  */
 @Deprecated
 public class EntityGenerator extends BaseGenerator {

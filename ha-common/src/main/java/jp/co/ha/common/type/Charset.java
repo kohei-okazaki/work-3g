@@ -3,7 +3,7 @@ package jp.co.ha.common.type;
 /**
  * 文字コードの列挙
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public enum Charset implements BaseEnum {
 

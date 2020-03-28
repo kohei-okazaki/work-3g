@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  * headerNamesでヘッダ名を設定<br>
  * footerNamesでフッタ名を設定
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @Inherited
 @Documented

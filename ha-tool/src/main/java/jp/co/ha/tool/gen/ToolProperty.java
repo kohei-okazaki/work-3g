@@ -8,7 +8,7 @@ import jp.co.ha.common.io.file.property.annotation.Property;
 /**
  * tool.propertiesのBeanクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class ToolProperty {
 
