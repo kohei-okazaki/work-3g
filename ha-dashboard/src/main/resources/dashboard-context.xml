@@ -21,11 +21,11 @@
   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     <property name="basenames">
       <list>
-        <value>META-INF/messages</value>
-        <value>META-INF/apiErrorCode</value>
-        <value>META-INF/dashboardErrorCode</value>
-        <value>META-INF/commonErrorCode</value>
-        <value>META-INF/validateErrorCode</value>
+        <value>messages</value>
+        <value>apiErrorCode</value>
+        <value>dashboardErrorCode</value>
+        <value>commonErrorCode</value>
+        <value>validateErrorCode</value>
       </list>
     </property>
   </bean>

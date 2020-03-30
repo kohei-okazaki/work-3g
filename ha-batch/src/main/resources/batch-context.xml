@@ -25,7 +25,7 @@
   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     <property name="basenames">
       <list>
-        <value>META-INF/messages</value>
+        <value>messages</value>
       </list>
     </property>
   </bean>
