@@ -14,7 +14,7 @@ import jp.co.ha.common.log.LoggerFactory;
 /**
  * {@linkplain MultiThreadFunction} のjUnit
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class MultiThreadFunctionTest extends BaseCommonTest {
 
@@ -43,7 +43,7 @@ public class MultiThreadFunctionTest extends BaseCommonTest {
     /**
      * {@linkplain MultiThreadFunction}のテスト用の継承クラス
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     private static class StringPrint extends MultiThreadFunction<String> {
 

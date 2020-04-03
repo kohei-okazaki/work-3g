@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.annotation.Required;
 /**
  * {@link BeanValidator} のjUnit
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class BeanValidatorTest extends BaseCommonTest {
 
@@ -222,6 +222,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     /**
      * RequiredTestBean
      *
+     * @version 1.0.0
      */
     static class RequiredTestBean {
 
@@ -253,6 +254,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     /**
      * MinEqualsTestBean
      *
+     * @version 1.0.0
      */
     static class MinEqualsTestBean {
 
@@ -284,6 +286,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     /**
      * MinTestBean
      *
+     * @version 1.0.0
      */
     static class MinTestBean {
 
@@ -316,6 +319,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     /**
      * MaxEqualsTestBean
      *
+     * @version 1.0.0
      */
     static class MaxEqualsTestBean {
 
@@ -347,6 +351,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     /**
      * MaxTestBean
      *
+     * @version 1.0.0
      */
     static class MaxTestBean {
 
@@ -379,6 +384,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     /**
      * HalfNumberPatternTestBean
      *
+     * @version 1.0.0
      */
     static class HalfNumberPatternTestBean {
 
@@ -410,6 +416,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     /**
      * HalfCharPatternTestBean
      *
+     * @version 1.0.0
      */
     static class HalfCharPatternTestBean {
 

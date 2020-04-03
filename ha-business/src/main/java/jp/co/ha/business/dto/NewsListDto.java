@@ -34,7 +34,7 @@ public class NewsListDto {
     /**
      * お知らせ情報Dto
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static class NewsDto {
 

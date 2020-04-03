@@ -29,7 +29,6 @@ public interface HealthInfoCalcService {
      *
      * @param centiMeter
      *     センチメートル
-     *
      * @return メートル
      */
     BigDecimal convertMeterFromCentiMeter(BigDecimal centiMeter);

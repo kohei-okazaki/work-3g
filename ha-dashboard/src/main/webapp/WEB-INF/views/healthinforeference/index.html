@@ -4,12 +4,12 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報照会画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
+<link rel="stylesheet" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
+<link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+<link rel="stylesheet" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
+<link rel="stylesheet" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
+<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
@@ -92,15 +92,15 @@
 
   <div th:replace="layout/layout :: footer"></div>
 
-  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/reference.js" th:src="@{/resources/js/reference.min.js}"></script>
-  <script type="text/javascript" src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
-  <script type="text/javascript" th:inline="javascript">
+  <script src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
+  <script src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
+  <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
+  <script src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
+  <script src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
+  <script src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>
+  <script src="../resources/js/reference.js" th:src="@{/resources/js/reference.min.js}"></script>
+  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
+  <script th:inline="javascript">
     $(function() {
 
       sal({
