@@ -4,8 +4,8 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_Top画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" type="text/css" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" type="text/css" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
+<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
+<link rel="stylesheet" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
 </head>
 <body>
   <div th:replace="layout/layout :: header"></div>
@@ -20,8 +20,8 @@
 
   <div th:replace="layout/layout :: footer"></div>
 
-  <script type="text/javascript" src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
-  <script type="text/javascript" th:inline="javascript">
+  <script src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
+  <script th:inline="javascript">
     $(function() {
 
       /*<![CDATA[*/
