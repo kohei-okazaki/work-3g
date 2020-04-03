@@ -47,7 +47,7 @@ public class Calculator {
      * <li>商 -> DIVIDE</li>
      * </ul>
      *
-     * @since 1.0
+     * @version 1.0.0
      */
     public static enum CalcMethod {
 
