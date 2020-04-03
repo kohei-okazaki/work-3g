@@ -11,7 +11,7 @@ import jp.co.ha.common.BaseCommonTest;
 /**
  * {@link CaesarCrypter} のjUnit
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class CaesarCrypterTest extends BaseCommonTest {
 

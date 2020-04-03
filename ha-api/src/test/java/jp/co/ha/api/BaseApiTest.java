@@ -33,8 +33,8 @@ public class BaseApiTest {
         LOG.debug("BaseApiTest#before");
         BeanLoader.setContext(new ClassPathXmlApplicationContext(
                 new String[] { "classpath:common-context.xml", "classpath:db-context.xml",
-                        "classpath:web-context.xml",
-                        "classpath:business-context.xml", "classpath:api-context.xml" }));
+                        "classpath:web-context.xml", "classpath:business-context.xml",
+                        "classpath:api-context.xml" }));
     }
 
     /**

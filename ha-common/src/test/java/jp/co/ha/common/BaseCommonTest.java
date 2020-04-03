@@ -14,7 +14,7 @@ import jp.co.ha.common.system.BeanLoader;
 /**
  * commonの基底テストクラス
  *
- * @since 1.0
+ * @version 1.0.0
  */
 @ContextConfiguration(locations = { "classpath:common-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -49,8 +49,7 @@ public class HealthInfoRefenceApiTest extends BaseApiTest {
                     HttpMethod.POST, uri);
 
             ResponseEntity<HealthInfoReferenceResponse> responseEntity = this.client
-                    .exchange(requestEntity,
-                            HealthInfoReferenceResponse.class);
+                    .exchange(requestEntity, HealthInfoReferenceResponse.class);
 
             LOG.info(responseEntity.getStatusCode().toString());
 
