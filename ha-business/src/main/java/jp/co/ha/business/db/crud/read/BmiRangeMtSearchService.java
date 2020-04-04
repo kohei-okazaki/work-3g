@@ -14,11 +14,11 @@ public interface BmiRangeMtSearchService {
     /**
      * BMI範囲IDからBMI範囲マスタを取得する
      *
-     * @param bmiRangeId
+     * @param seqBmiRangeId
      *     BMI範囲ID
      * @return BmiRangeMt
      */
-    BmiRangeMt findByBmiRangeId(Integer bmiRangeId);
+    BmiRangeMt findByBmiRangeId(Integer seqBmiRangeId);
 
     /**
      * BMI範囲マスタを全件取得する

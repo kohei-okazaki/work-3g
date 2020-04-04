@@ -13,7 +13,7 @@
     <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
     <plugin type="jp.co.ha.db.plugin.ExtendBaseExamplePlugin" />
 
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+    <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                     connectionURL="jdbc:mysql://localhost:3306/work3g?serverTimezone=JST"
                     userId="root"
                     password="admin" />
@@ -29,7 +29,6 @@
     <!-- <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" /> -->
     <!-- <table schema="work3g" tableName="MAIL_INFO" /> -->
     <!-- <table schema="work3g" tableName="BMI_RANGE_MT" /> -->
-    <!-- <table schema="work3g" tableName="SYSTEM_ENVIRONMENT_MT" /> -->
 
   </context>
 </generatorConfiguration>

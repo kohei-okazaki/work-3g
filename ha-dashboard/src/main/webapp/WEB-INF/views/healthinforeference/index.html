@@ -1,82 +1,55 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報照会画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/validationEngine.jquery.css" th:href="@{/resources/css/lib/validationEngine.jquery.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
 <link rel="stylesheet" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
-<link rel="stylesheet" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
 </head>
 <body>
 
+  <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
+  <br><br><br><br><br><br><br>
 
-  <div th:replace="./common/navigation.html"></div>
-
-  <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
-    <h2 class="menuTitle">健康情報照会画面</h2>
+  <div class="container border col-8">
+    <h2 class="menuTitle">健康情報照会</h2>
     <form id="healthInfoReferenceForm" action="./index" th:action="@{./index}" method="post" th:object="${healthInfoReferenceForm}">
 
-      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}" data-sal="slide-up"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}" data-sal="slide-up"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}" data-sal="slide-up"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}" data-sal="slide-up"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}" data-sal="slide-up"></div>
 
-      <!--/* table部ここから */-->
-      <div class="table">
-
-        <h3 id="selectConditionToggle">検索条件</h3>
-
-        <div class="table-row selectConditionToggle">
-          <div class="table-header" align="left" th:text="#{healthInfoId}"></div>
-          <div class="table-data">
-            <input type="text" class="validate[custom[number]]" size="6" th:field="*{healthInfoId}" placeholder="1000" />
-          </div>
-          <div class="table-data">
-            <p class="attention">※半角数字で入力してください</p>
-          </div>
-        </div>
-        <div class="table-row selectConditionToggle">
-          <div class="table-header" align="left" th:text="#{healthInfoRegDate}"></div>
-          <div class="table-data">
-            <div class="radio" align="center">
-              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" />
-              <label for="healthInfoRegDateSelectFlagFalse" class="switch-off">直接指定しない</label>
-              <input type="radio" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" />
-              <label for="healthInfoRegDateSelectFlagTrue">直接指定する</label>
-            </div>
-          </div>
-          <div class="table-data">
-            <input type="text" th:field="*{fromHealthInfoRegDate}" placeholder="2017/01/01" />
-          </div>
-          <div class="table-data hideCalendar">
-            <label>～</label>
-            <input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar" placeholder="2017/01/02" />
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
+      <h3>検索条件</h3>
+      <div class="form-group">
+        <p th:text="#{healthInfoId}"></p>
+        <input type="text" class="validate[custom[number]] form-control" size="6" th:field="*{healthInfoId}" placeholder="1000" />
+      </div><!-- /.form-group -->
+      <div class="form-group">
+        <p th:text="#{healthInfoRegDate}"></p>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" checked="checked">
+          <label for="healthInfoRegDateSelectFlagFalse" class="custom-control-label">直接指定しない</label>
+        </div><!-- /.custom-control custom-radio -->
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" checked="checked">
+          <label for="healthInfoRegDateSelectFlagTrue" class="custom-control-label">直接指定する</label>
+        </div><!-- /.custom-control custom-radio -->
+        <input type="text" th:field="*{fromHealthInfoRegDate}" class="form-control" placeholder="2017/01/01" />
+        <div class="hideCalendar">
+          <label>～</label>
+          <input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar form-control" placeholder="2017/01/02" />
+        </div><!-- /.hideCalendar -->
+      </div><!-- /.form-group -->
 
       <br>
 
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-data">
-            <input type="submit" value="検 索" />
-          </div>
-          <div class="table-data">&ensp;&ensp;</div>
-          <div class="table-data">
-            <input type="reset" value="リセット" />
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
+      <!--/* ボタン部ここから */-->
+      <input type="submit" class="btn btn-success" value="検 索" />
+      <input type="reset" class="btn btn-secondary" value="リセット" />
+      <!--/* ボタン部ここまで */-->
     </form>
 
     <br>
@@ -88,25 +61,16 @@
     <!--/* 結果部ここまで */-->
 
   </div>
-  <!--/* contentLayout部ここまで */-->
-
+  <br><br>
   <div th:replace="layout/layout :: footer"></div>
 
-  <script src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-  <script src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
   <script src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
   <script src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
   <script src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>
   <script src="../resources/js/reference.js" th:src="@{/resources/js/reference.min.js}"></script>
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script th:inline="javascript">
     $(function() {
-
-      sal({
-        threshold: 1,
-        once: false
-      });
 
       // Validate処理
       jQuery("#healthInfoReferenceForm").validationEngine({
@@ -125,14 +89,6 @@
         changeMonth: true
       });
 
-      let dispOffTime = 400;
-      // 検索条件のトグルを設定
-      $("#selectConditionToggle").css({
-        "cursor": "pointer"
-      });
-      $("#selectConditionToggle").on("click", function() {
-        $(".selectConditionToggle").toggle(dispOffTime);
-      });
     });
 
     // Chart処理

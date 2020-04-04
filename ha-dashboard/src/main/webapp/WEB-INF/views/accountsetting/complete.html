@@ -1,38 +1,20 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント設定変更完了画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link>
 </head>
 <body>
-
   <div th:replace="layout/layout :: header"></div>
-
-  <div th:replace="./common/navigation.html"></div>
-
-  <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
+  <br><br><br><br><br><br><br>
+  <div class="container border col-7">
     <h2 class="menuTitle">アカウント設定変更完了</h2>
-
-    <div data-sal="slide-up">完了しました</div>
+    <div class="alert alert-primary" role="alert">アカウントの更新が完了しました</div>
     <br><br>
-
-  </div>
-  <!--/* contentLayout部ここまで */-->
-
+  </div><!-- /.container border col-8 -->
+  <br><br>
   <div th:replace="layout/layout :: footer"></div>
-
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
-  <script>
-    $(function() {
-      sal({
-        threshold: 1,
-        once: false,
-      });
-    });
-  </script>
 </body>
 </html>

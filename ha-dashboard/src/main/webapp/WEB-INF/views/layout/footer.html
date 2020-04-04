@@ -1,15 +1,13 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
 <div class="footer">
   <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<img class="browseBack" alt="戻る" src="../resources/image/icon_browseBack.jpg" th:src="@{/resources/image/icon_browseBack.jpg}" onclick="history.back()">
-  <br><br>
   <!--/* table部ここから */-->
   <div class="table" th:if="${session[userId]} != null">
     <!--/* ログイン状態の場合のみ表示 */-->
     <ul class="footer-submenu">
       <li><a class="link" href="../login/top" th:href="@{/login/top}">home</a></li>
       <li><a class="link" href="../news/list" th:href="@{/news/list}">news</a></li>
-    </ul>
+    </ul><!-- /.footer-submenu -->
   </div>
   <!--/* table部ここまで */-->
   <p align="center" th:text="'---&nbsp;' + #{healthInfoAppName} + '&nbsp;---'"></p>
@@ -17,6 +15,6 @@
   <div class="sub-footer">
     <p align="left" th:text="'&nbsp;&nbsp;&copy;' +${#dates.format(#dates.createNow(), 'yyyy')} + '&nbsp;HealthInfo App'"></p>
     <p align="right" th:text="'version&nbsp;' + #{appVersion} + '&nbsp;&nbsp;'"></p>
-  </div>
-</div>
+  </div><!-- /.sub-footer -->
+</div><!-- /.footer -->
 <div id="page_top"><a href="#"></a></div>
