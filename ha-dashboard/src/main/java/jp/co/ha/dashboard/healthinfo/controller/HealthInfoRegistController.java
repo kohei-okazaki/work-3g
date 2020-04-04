@@ -146,8 +146,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         if (!isFirstReg) {
             // 初回登録でない場合
             SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("HEALTH_INFO_ID", SortType.DESC).limit(1)
-                    .build();
+                    .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
             HealthInfo lastHealthInfo = healthInfoSearchService
                     .findByUserId(userId, selectOption).get(0);
             healthInfoService.addModel(model, dto, lastHealthInfo);
@@ -188,7 +187,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(healthInfoForm.getHealthInfoId(), userId);
+                .findByHealthInfoIdAndUserId(healthInfoForm.getSeqHealthInfoId(), userId);
         if (CollectionUtil.isEmpty(healthInfoList)) {
             // レコードが見つからなかった場合
             throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
@@ -223,7 +222,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(healthInfoForm.getHealthInfoId(), userId);
+                .findByHealthInfoIdAndUserId(healthInfoForm.getSeqHealthInfoId(), userId);
         if (CollectionUtil.isEmpty(healthInfoList)) {
             // レコードが見つからなかった場合
             throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,

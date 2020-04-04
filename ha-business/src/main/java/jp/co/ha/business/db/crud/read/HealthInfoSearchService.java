@@ -33,13 +33,13 @@ public interface HealthInfoSearchService {
     /**
      * 指定された健康情報IDとユーザIDと一致する健康情報を返す
      *
-     * @param healthInfoId
+     * @param seqHealthInfoId
      *     健康情報ID
      * @param userId
      *     ユーザID
      * @return 健康情報リスト
      */
-    List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId, String userId);
+    List<HealthInfo> findByHealthInfoIdAndUserId(Integer seqHealthInfoId, String userId);
 
     /**
      * 指定されたユーザIDの件数を返す
