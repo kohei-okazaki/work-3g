@@ -11,7 +11,7 @@
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
   <div class="container border col-8">
-    <h2 class="menuTitle">カロリー計算画面</h2>
+    <h2 class="menuTitle">カロリー計算</h2>
 
     <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
 
@@ -88,7 +88,7 @@
     <!--/* 生活活動代謝モーダル */-->
     <div th:replace="./caloriecalc/lifework-metabolism-model.html"></div>
 
-    <br><br>
+    <br>
 
     <!--/* 結果部ここから */-->
     <div th:if="${calcResult} != null">
@@ -96,9 +96,8 @@
       <br><br>
     </div>
     <!--/* 結果部ここまで */-->
-
   </div><!-- /.container border col-8 -->
-
+  <br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>

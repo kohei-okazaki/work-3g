@@ -12,13 +12,11 @@
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
 
-  <!--/* contentLayout部ここから */-->
-    <div class="container border col-8">
+  <div class="container border col-8">
     <h2 class="menuTitle">健康情報入力確認</h2>
     <p>以下の情報で健康情報を登録します</p>
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${healthInfoForm}">
 
-      <!--/* table部ここから */-->
       <table class="table table-hover table-striped">
         <tr>
           <th colspan="2">
@@ -34,7 +32,6 @@
           <td th:text="*{weight} + '&ensp;kg'"></td>
         </tr>
       </table><!-- /.table table-hover table-striped -->
-      <!--/* table部ここまで */-->
 
       <br><br>
 
@@ -45,22 +42,8 @@
       <br><br>
 
     </form>
-  </div>
-  <!--/* contentLayout部ここまで */-->
-
+  </div><!-- /.container border col-8 -->
+  <br>
   <div th:replace="layout/layout :: footer"></div>
-
-  <script>
-    $(function() {
-      let dispOffTime = 400;
-      // 健康情報のトグルを設定
-      $("#healthInfoToggle").css({
-        "cursor": "pointer"
-      });
-      $("#healthInfoToggle").on("click", function() {
-        $(".healthInfoToggle").toggle(dispOffTime);
-      });
-    });
-  </script>
 </body>
 </html>

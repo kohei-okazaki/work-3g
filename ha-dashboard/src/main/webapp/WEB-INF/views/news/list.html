@@ -21,15 +21,15 @@
              <td th:text="${news.title}" />
              <td th:id="'news-toggle-contents[' + ${news.index} + ']'" class="news-item" th:utext="${news.detail}"></td>
           </tr>
-        </tbody>
-      </table>
+        </tbody><!-- /.list -->
+      </table><!-- /.table -->
       <div class="pager">
         <ul class="pagination"></ul>
       </div><!-- /.pager -->
-    </div>
+    </div><!-- /#newsList -->
     <br>
   </div><!-- /.container border col-10 -->
-  <br><br>
+  <br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>
