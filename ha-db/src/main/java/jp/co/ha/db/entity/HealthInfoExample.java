@@ -708,63 +708,63 @@ public class HealthInfoExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdIsNull() {
-            addCriterion("BMI_RANGE_ID is null");
+        public Criteria andSeqBmiRangeIdIsNull() {
+            addCriterion("SEQ_BMI_RANGE_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdIsNotNull() {
-            addCriterion("BMI_RANGE_ID is not null");
+        public Criteria andSeqBmiRangeIdIsNotNull() {
+            addCriterion("SEQ_BMI_RANGE_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdEqualTo(Integer value) {
-            addCriterion("BMI_RANGE_ID =", value, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdEqualTo(Integer value) {
+            addCriterion("SEQ_BMI_RANGE_ID =", value, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdNotEqualTo(Integer value) {
-            addCriterion("BMI_RANGE_ID <>", value, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdNotEqualTo(Integer value) {
+            addCriterion("SEQ_BMI_RANGE_ID <>", value, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdGreaterThan(Integer value) {
-            addCriterion("BMI_RANGE_ID >", value, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdGreaterThan(Integer value) {
+            addCriterion("SEQ_BMI_RANGE_ID >", value, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("BMI_RANGE_ID >=", value, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("SEQ_BMI_RANGE_ID >=", value, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdLessThan(Integer value) {
-            addCriterion("BMI_RANGE_ID <", value, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdLessThan(Integer value) {
+            addCriterion("SEQ_BMI_RANGE_ID <", value, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("BMI_RANGE_ID <=", value, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("SEQ_BMI_RANGE_ID <=", value, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdIn(List<Integer> values) {
-            addCriterion("BMI_RANGE_ID in", values, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdIn(List<Integer> values) {
+            addCriterion("SEQ_BMI_RANGE_ID in", values, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdNotIn(List<Integer> values) {
-            addCriterion("BMI_RANGE_ID not in", values, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdNotIn(List<Integer> values) {
+            addCriterion("SEQ_BMI_RANGE_ID not in", values, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdBetween(Integer value1, Integer value2) {
-            addCriterion("BMI_RANGE_ID between", value1, value2, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdBetween(Integer value1, Integer value2) {
+            addCriterion("SEQ_BMI_RANGE_ID between", value1, value2, "seqRmiRangeId");
             return (Criteria) this;
         }
 
-        public Criteria andBmiRangeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("BMI_RANGE_ID not between", value1, value2, "bmiRangeId");
+        public Criteria andSeqBmiRangeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("SEQ_BMI_RANGE_ID not between", value1, value2, "seqRmiRangeId");
             return (Criteria) this;
         }
 
