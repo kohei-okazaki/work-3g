@@ -1,42 +1,21 @@
-<!--/* contentLayout部ここから */-->
-<div class="contentLayout">
+<div class="container">
   <!--/* table部ここから */-->
-  <div class="table">
-
-    <div class="table-row">
-      <div class="table-header" th:text="#{baseMetabolism}"></div>
-      <div class="table-data">
-        <p th:text="${calcResult.baseMetabolism} + '&ensp;kcal'"></p>
-      </div>
-    </div>
-
-    <div class="table-row">
-      <div class="table-header" th:text="#{lifeWorkMetabolism}"></div>
-      <div class="table-data">
-        <p th:text="${calcResult.lifeWorkMetabolism} + '&ensp;kcal'"></p>
-      </div>
-    </div>
-
-    <div class="table-row">
-      <div class="table-header" th:text="#{lostCaloriePerDay}"></div>
-      <div class="table-data">
-        <p th:text="${calcResult.lostCaloriePerDay} + '&ensp;kcal'"></p>
-      </div>
-    </div>
-
-    <div class="table-row">&ensp;</div>
-  </div>
+  <table class="table table-hover table-striped">
+    <tr>
+      <th th:text="#{baseMetabolism}" />
+      <td th:text="${calcResult.baseMetabolism} + '&ensp;kcal'" />
+    </tr>
+    <tr>
+      <th th:text="#{lifeWorkMetabolism}" />
+      <td th:text="${calcResult.lifeWorkMetabolism} + '&ensp;kcal'" />
+    </tr>
+    <tr>
+      <th th:text="#{lostCaloriePerDay}" />
+      <td th:text="${calcResult.lostCaloriePerDay} + '&ensp;kcal'" />
+    </tr>
+  </table>
   <!--/* table部ここまで */-->
-
-  <!--/* table部ここから */-->
-  <div class="table">
-    <div class="table-row">
-      <div id="calorieCalcMethod-modal" class="table-data">
-        <a class="link" href="#">1日のカロリーの計算方法</a>
-      </div>
-    </div>
-  </div>
-  <!--/* table部ここまで */-->
-
-</div>
-<!--/* contentLayout部ここまで */-->
+  <a data-toggle="modal" href="#calorieCalcMethonModal">1日のカロリーの計算方法</a>
+  <!--/* 1日のカロリーの計算方法モーダル */-->
+  <div th:replace="./caloriecalc/caloriecalcmethod-modal.html"></div>
+</div><!-- /.container -->

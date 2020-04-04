@@ -1,137 +1,93 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録画面', scripts = ~{::script}, links = ~{::link})">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
-  <div th:replace="layout/layout :: header"></div>
-  <br><br>
-  <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
-    <h2 class="menuTitle">アカウント登録画面</h2>
+  <div class="header">
+    <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
+  </div><!-- /.header -->
+  <br><br><br><br>
 
-    <form action="./confirm" id="accountRegistForm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
-
-      <div th:if="${errorMessage} != null" data-sal="slide-up">
-        <div id="errorMessage" class="errorMessage" data-sal="slide-up">
-          <p th:text="${errorMessage}"></p>
-        </div>
-      </div>
-
-      <div class="errorMessage" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}" data-sal="slide-up"></div>
-
-      <!--/* table部ここから */-->
-      <div class="table">
-
-        <h3 id="accountToggle">アカウント設定</h3>
-
-        <!--/* ユーザIDここから */-->
-        <div class="table-row accountToggle">
-          <div class="table-header" align="left" th:text="#{userId}"></div>
-          <div class="table-data">
-            <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" required placeholder="ユーザID" />
+    <form id="accountRegistForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
+      <div class="container border col-7">
+        <h2 class="menuTitle">アカウント登録画面</h2>
+        <div class="row">
+          <div th:if="${errorMessage} != null">
+            <br>
+            <div id="errorMessage" class="alert alert-danger" role="alert"  th:text="${errorMessage}"></div>
           </div>
-        </div>
+        </div><!-- /.row -->
+
+      <div class="row">
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+      </div><!-- /.row -->
+      <br>
+        <!--/* ユーザIDここから */-->
+        <div class="form-group">
+          <p th:text="#{userId}"></p>
+          <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" required placeholder="admin" />
+        </div><!-- /.form-group -->
         <!--/* ユーザIDここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
         <!--/* パスワードここから */-->
-        <div class="table-row accountToggle">
-          <div class="table-header" align="left" th:text="#{password}"></div>
-          <div class="table-data">
-            <div class="checkbox">
-              <input type="password" class="validate[required]" th:field="*{password}" maxlength="16" required placeholder="パスワード" />
-              <label>
-                <input type="checkbox" id="password-check" class="checkbox-input" />
-                <span class="checkbox-parts"></span>
-              </label>
-            </div>
-          </div>
-        </div>
+        <div class="form-group">
+          <p th:text="#{password}"></p>
+          <div class="checkbox">
+            <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" required placeholder="adminpass" />
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" id="password-check" class="checkbox-input custom-control-input" />
+              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
+            </label><!-- /.custom-control custom-checkbox -->
+          </div><!-- /.checkbox -->
+        </div><!-- /.form-group -->
         <!--/* パスワードここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
         <!--/* 確認用パスワードここから */-->
-        <div class="table-row accountToggle">
-          <div class="table-header" align="left" th:text="#{confirmPassword}"></div>
-          <div class="table-data">
-            <div class="checkbox">
-              <input type="password" class="validate[required,equals[password]]" th:field="*{confirmPassword}" maxlength="16" required placeholder="確認用パスワード" />
-              <label>
-                <input type="checkbox" id="confirmPassword-check" class="checkbox-input" />
-                <span class="checkbox-parts"></span>
-              </label>
-            </div>
-          </div>
-        </div>
+        <div class="form-group">
+          <p th:text="#{confirmPassword}"></p>
+          <div class="checkbox">
+            <input type="password" class="validate[required,equals[password]] form-control" th:field="*{confirmPassword}" maxlength="16" required placeholder="adminpass" />
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" id="confirmPassword-check" class="checkbox-input custom-control-input" />
+              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
+            </label><!-- /.custom-control custom-checkbox -->
+          </div><!-- /.checkbox -->
+        </div><!-- /.form-group -->
         <!--/* 確認用パスワードここまで */-->
 
-        <div class="table-row">&ensp;</div>
-
         <!--/* 備考ここから */-->
-        <div class="table-row accountToggle">
-          <div class="table-header" align="left" th:text="#{remarks}"></div>
-          <div class="table-data">
-            <textarea rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
-          </div>
-        </div>
+        <div class="form-group">
+          <p th:text="#{remarks}"></p>
+          <textarea class="form-control" rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
+        </div><!-- /.form-group -->
         <!--/* 備考ここまで */-->
 
-      </div>
-      <!--/* table部ここまで */-->
-
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-data">
-            <input type="submit" value="確 認" />
-          </div>
-          <div class="table-data">&ensp;&ensp;</div>
-          <div class="table-data">
-            <input type="reset" class="reset" value="リセット" />
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
-
-    </form>
-  </div>
-  <!--/* contentLayout部ここまで */-->
+      <!--/* ボタン部ここから */-->
+      <input type="submit" class="btn btn-success" value="確 認" />
+      <input type="reset" class="btn btn-secondary" value="リセット" />
+      <!--/* ボタン部ここまで */-->
+      <br><br>
+      </div><!-- /.container border col-7 -->
+      <br><br>
+    </form><!-- /#accountRegistForm -->
 
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script>
     $(function() {
-
-      sal({
-        threshold: 1,
-        once: false
-      });
 
       // validate処理
       jQuery("#accountRegistForm").validationEngine({
         promptPosition : "bottomLeft:80"
-      });
-
-      let dispOffTime = 400;
-      // アカウント設定のトグルを設定
-      $("#accountToggle").css({
-        "cursor": "pointer"
-      });
-      $("#accountToggle").on("click", function() {
-          $(".accountToggle").toggle(dispOffTime);
       });
 
       // アカウント登録画面⇒TOP画面には遷移できないようにする

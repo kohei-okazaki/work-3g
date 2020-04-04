@@ -34,8 +34,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId,
-            Date fromHealthInfoRegDate,
-            Date toHealthInfoRegDate, SelectOption selectOption) {
+            Date fromHealthInfoRegDate, Date toHealthInfoRegDate,
+            SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
@@ -60,7 +60,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
         // 健康情報ID
-        criteria.andHealthInfoIdEqualTo(healthInfoId);
+        criteria.andSeqHealthInfoIdEqualTo(healthInfoId);
         // ユーザID
         criteria.andUserIdEqualTo(userId);
 

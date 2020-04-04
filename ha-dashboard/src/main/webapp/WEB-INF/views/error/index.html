@@ -1,38 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_エラー画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link>
 </head>
 <body>
 
+  <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
+  <br><br><br><br><br><br><br>
 
-  <!--/* contentLayout部ここから */-->
-  <div class="contentLayout" align="center">
-    <h2 class="menuTitle">エラー画面</h2>
-
-    <div th:if="${errorMessage} == null"  data-sal="slide-up">
-      <p>入力情報に誤りがあります。もう一度入力してください</p>
-    </div>
-    <p class="errorMessage" th:text="${errorMessage}"></p>
+  <div class="container border col-8">
+    <h2 class="menuTitle">エラー</h2>
+    <p class="alert alert-danger" role="alert" th:text="${errorMessage}"></p>
     <br><br><br><br><br><br><br>
-  </div>
-  <!--/* contentLayout部ここまで */-->
-
+    <br>
+  </div><!-- /.container border col-8 -->
+  <br>
   <div th:replace="layout/layout :: footer"></div>
-
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
-  <script>
-    $(function() {
-      sal({
-        threshold: 1,
-        once: false
-      });
-    });
-  </script>
 </body>
 </html>

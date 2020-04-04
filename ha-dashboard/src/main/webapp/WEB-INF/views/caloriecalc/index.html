@@ -1,138 +1,109 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_カロリー計算画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
 
   <div th:replace="layout/layout :: header"></div>
-
-  <div th:replace="./common/navigation.html"></div>
-
-  <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
-    <h2 class="menuTitle">カロリー計算画面</h2>
+  <br><br><br><br><br><br><br>
+  <div class="container border col-8">
+    <h2 class="menuTitle">カロリー計算</h2>
 
     <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
 
-      <div class="errorMessage" th:if="${#fields.hasErrors('age')}" th:errors="*{age}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('height')}" th:errors="*{height}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" data-sal="slide-up"></div>
-      <div class="errorMessage" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}" data-sal="slide-up"></div>
+      <div class="row">
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}"></div>
+      </div>
 
-      <!--/* table部ここから */-->
-      <div class="table">
+        <label for="age" th:text="#{age}"></label>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="validate[required,custom[number]] form-control" size="3" th:field="*{age}" placeholder="20" aria-describedby="basic-addon1" />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon1">歳</span>
+            </div><!-- /.input-group-append -->
+          </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
 
-        <div class="table-row">
-          <div class="table-header" align="left" th:text="#{age}"></div>
-          <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{age}" placeholder="20" />&ensp;歳
-          </div>
-        </div>
+        <div class="form-group">
+          <div class="control-label" th:text="#{gender}"></div>
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{gender}" id="male" value="0" checked="checked">
+            <label for="male" class="custom-control-label" th:text="#{male}"></label>
+          </div><!-- /.custom-control custom-radio -->
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{gender}" id="female" value="1">
+            <label for="female" class="custom-control-label" th:text="#{female}"></label>
+          </div><!-- /.custom-control custom-radio -->
+        </div><!-- /.form-group -->
 
-        <div class="table-row">&ensp;</div>
+        <label for="height" th:text="#{height}"></label>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">cm</span>
+            </div><!-- /.input-group-append -->
+          </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
 
-        <div class="table-row">
-          <div class="table-header" align="left" th:text="#{gender}"></div>
-          <div class="table-data">
-            <div class="radio">
-              <input type="radio" th:field="*{gender}" id="male" value="0" checked="checked">
-              <label for="male" class="switch-off" th:text="#{male}"></label>
-              <input type="radio" th:field="*{gender}" id="female" value="1">
-              <label for="female" th:text="#{female}"></label>
+        <label for="weight" th:text="#{weight}"></label>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{weight}" required placeholder="50.00" aria-describedby="basic-addon3" />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon3">kg</span>
+            </div><!-- /.input-group-append -->
+          </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
+
+        <label for="lifeWorkMetabolism" th:text="#{lifeWorkMetabolism}"></label>
+        <a data-toggle="modal" href="#lifeWorkMetabolismModal">
+          <br>
+          <label>生活活動代謝について</label>
+        </a>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{lifeWorkMetabolism}" placeholder="消費カロリー" aria-describedby="basic-addon4" />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon3">kcal</span>
             </div>
           </div>
         </div>
 
-        <div class="table-row">&ensp;</div>
-
-        <div class="table-row">
-          <div class="table-header" align="left" th:text="#{height}"></div>
-          <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{height}" required placeholder="170.00" />&ensp;cm
-          </div>
-          <div class="table-data">
-            <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
-          </div>
-        </div>
-
-        <div class="table-row">&ensp;</div>
-
-        <div class="table-row">
-          <div class="table-header" align="left" th:text="#{weight}"></div>
-          <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{weight}" required placeholder="50.00" />&ensp;kg
-          </div>
-          <div class="table-data">
-            <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
-          </div>
-        </div>
-
-        <div class="table-row">&ensp;</div>
-
-        <div class="table-row">
-          <div id="lifeWorkMetabolism-modal" class="table-header" align="left">
-            <a class="link" href="#" th:text="#{lifeWorkMetabolism}"></a>
-          </div>
-          <div class="table-data">
-            <input type="text" class="validate[required,custom[number]]" size="12" th:field="*{lifeWorkMetabolism}" placeholder="消費カロリー" />&ensp;kcal
-          </div>
-          <div class="table-data">
-            <p class="attention">&ensp;&ensp;※半角数字とピリオドで入力してください</p>
-          </div>
-        </div>
-
-      </div>
-      <!--/* table部ここまで */-->
-
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-data">
-            <input type="submit" value="計 算" />
-          </div>
-          <div class="table-data">&ensp;&ensp;</div>
-          <div class="table-data">
-            <input type="reset" value="リセット" />
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
+      <!--/* ボタン部ここから */-->
+      <input type="submit" class="btn btn-success" value="確 認" />
+      <input type="reset" class="btn btn-secondary" value="リセット" />
+      <!--/* ボタン部ここまで */-->
     </form>
 
-    <br><br>
+    <!--/* 生活活動代謝モーダル */-->
+    <div th:replace="./caloriecalc/lifework-metabolism-model.html"></div>
+
+    <br>
 
     <!--/* 結果部ここから */-->
     <div th:if="${calcResult} != null">
       <div th:replace="./caloriecalc/result.html"></div>
+      <br><br>
     </div>
     <!--/* 結果部ここまで */-->
-
-  </div>
-  <!--/* contentLayout部ここまで */-->
-
+  </div><!-- /.container border col-8 -->
+  <br>
   <div th:replace="layout/layout :: footer"></div>
 
-  <script src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-  <script src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
-  <script src="../resources/js/common/lifeWorkMetabolism.js" th:src="@{/resources/js/common/lifeWorkMetabolism.min.js}"></script>
-  <script src="../resources/js/common/calorieCalcMethod.js" th:src="@{/resources/js/common/calorieCalcMethod.min.js}"></script>
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script>
     $(function() {
-
-      sal({
-        threshold: 1,
-        once: false
-      });
 
       jQuery("#calorieCalcForm").validationEngine({
         promptPosition : "topLeft:0"

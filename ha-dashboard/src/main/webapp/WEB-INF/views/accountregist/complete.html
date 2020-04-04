@@ -1,44 +1,31 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録完了画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
 
-  <div th:replace="layout/layout :: header"></div>
+  <div class="header">
+    <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
+  </div><!-- /.header -->
 
-  <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
+  <br><br>
+
+  <div class="container border col-7">
     <br><br>
     <h2 class="menuTitle">アカウント登録完了画面</h2>
-
-    <div data-sal="slide-up">完了しました</div>
+    <div class="alert alert-primary" role="alert">アカウント作成完了しました</div>
+    <div>「ログイン画面」から今登録したユーザIDとパスワードでログインしてください。</div>
     <br><br>
-    <div class="table">
-      <div class="table-row">
-        <div class="table-data">
-          <form action="../login/index" th:action="@{/login/index}" method="get">
-            <input type="submit" value="ログイン画面" />
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/* contentLayout部ここまで */-->
-
+    <form action="../login/index" th:action="@{/login/index}" method="get">
+      <input type="submit" class="btn btn-success" value="ログイン画面" />
+    </form>
+  <br><br>
+  </div><!-- /.container border col-7 -->
+  <br>
   <div th:replace="layout/layout :: footer"></div>
-
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
-  <script>
-    $(function() {
-      sal({
-        threshold: 1,
-        once: false,
-      });
-    });
-  </script>
 </body>
 </html>

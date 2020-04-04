@@ -1,0 +1,64 @@
+<!-- 健康情報照会APIレスポンスモーダルの設定 -->
+<div class="modal fade" id="apiReferenceResponseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">健康情報照会APIレスポンスについて</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button><!-- /.close -->
+      </div><!-- /.modal-header -->
+      <div class="modal-body">
+        <table class="table table-hover table-striped">
+          <tr>
+            <th colspan="2">レスポンスパラメータ</th>
+            <th>詳細</th>
+          </tr>
+          <tr>
+            <td>結果区分</td>
+            <td>result</td>
+            <td>API実施時の結果区分</td>
+          </tr>
+          <tr>
+            <td>ユーザID</td>
+            <td>userId</td>
+            <td>健康管理アプリでユーザを一意に識別するID</td>
+          </tr>
+          <tr>
+            <td>健康情報ID</td>
+            <td>healthInfoId</td>
+            <td>健康情報を登録したときに採番される健康情報を一意に識別するID</td>
+          </tr>
+          <tr>
+            <td>身長</td>
+            <td>height</td>
+            <td>健康情報IDに紐づく健康情報に登録された身長</td>
+          </tr>
+          <tr>
+            <td>体重</td>
+            <td>weight</td>
+            <td>健康情報IDに紐づく健康情報に登録された体重</td>
+          </tr>
+          <tr>
+            <td>BMI</td>
+            <td>bmi</td>
+            <td>健康情報IDに紐づく健康情報に登録されたBMI</td>
+          </tr>
+          <tr>
+            <td>標準体重</td>
+            <td>standardWeight</td>
+            <td>健康情報IDに紐づく健康情報に登録された標準体重</td>
+          </tr>
+          <tr>
+            <td>健康情報作成日時</td>
+            <td>healthInfoRegDate</td>
+            <td>健康情報IDに紐づく健康情報に登録された日時</td>
+          </tr>
+        </table><!-- /.table table-hover table-striped -->
+      </div><!-- /.modal-body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
