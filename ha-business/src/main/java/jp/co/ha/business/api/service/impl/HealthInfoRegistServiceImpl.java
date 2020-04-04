@@ -107,7 +107,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         // 最後に登録した健康情報を取得する
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("HEALTH_INFO_ID", SortType.DESC).limit(1).build();
+                .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
         List<HealthInfo> lastHealthInfo = healthInfoSearchService.findByUserId(userId,
                 selectOption);
 
@@ -129,7 +129,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         entity.setBmi(bmi);
         entity.setStandardWeight(standardWeight);
         entity.setHealthInfoStatus(status.getValue());
-        entity.setBmiRangeId(bmiRangeMt.getBmiRangeId());
+        entity.setSeqBmiRangeId(bmiRangeMt.getSeqBmiRangeId());
         entity.setHealthInfoRegDate(DateUtil.getSysDate());
 
         return entity;

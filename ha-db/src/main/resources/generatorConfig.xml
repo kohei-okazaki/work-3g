@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.19.jar" />
+  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.18.jar" />
 
   <context id="context1">
 
@@ -13,7 +13,7 @@
     <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
     <plugin type="jp.co.ha.db.plugin.ExtendBaseExamplePlugin" />
 
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+    <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                     connectionURL="jdbc:mysql://localhost:3306/work3g?serverTimezone=JST"
                     userId="root"
                     password="admin" />
@@ -24,11 +24,11 @@
 
     <javaClientGenerator targetPackage="jp.co.ha.db.mapper" targetProject="ha-db/src/main/java" type="XMLMAPPER" />
 
-    <!-- <table schema="work3g" tableName="ACCOUNT" /> -->
-    <table schema="work3g" tableName="HEALTH_INFO" />
+    <table schema="work3g" tableName="ACCOUNT" />
+    <!-- <table schema="work3g" tableName="HEALTH_INFO" /> -->
     <!-- <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" /> -->
     <!-- <table schema="work3g" tableName="MAIL_INFO" /> -->
-    <table schema="work3g" tableName="BMI_RANGE_MT" />
+    <!-- <table schema="work3g" tableName="BMI_RANGE_MT" /> -->
 
   </context>
 </generatorConfiguration>

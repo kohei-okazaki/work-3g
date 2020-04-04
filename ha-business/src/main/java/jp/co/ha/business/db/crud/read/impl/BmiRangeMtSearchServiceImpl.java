@@ -35,12 +35,12 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public BmiRangeMt findByBmiRangeId(Integer bmiRangeId) {
+    public BmiRangeMt findByBmiRangeId(Integer seqBmiRangeId) {
         return findAll().stream()
-                .filter(e -> e.getBmiRangeId().equals(bmiRangeId))
+                .filter(e -> e.getSeqBmiRangeId().equals(seqBmiRangeId))
                 .findFirst()
                 .orElseThrow(() -> new SystemRuntimeException(CommonErrorCode.DB_NO_DATA,
-                        "BMI範囲マスタが存在しません bmiRangeId=" + bmiRangeId));
+                        "BMI範囲マスタが存在しません seqBmiRangeId=" + seqBmiRangeId));
     }
 
     /**

@@ -59,7 +59,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
                                 DateFormatType.YYYYMMDDHHMMSS));
                 // 肥満度メッセージ
                 BmiRangeMt mt = bmiRangeMtSearchService
-                        .findByBmiRangeId(srcEntity.getBmiRangeId());
+                        .findByBmiRangeId(srcEntity.getSeqBmiRangeId());
                 destDto.setOverweightMessage(mt.getOverWeightStatus());
             });
             return detailDto;

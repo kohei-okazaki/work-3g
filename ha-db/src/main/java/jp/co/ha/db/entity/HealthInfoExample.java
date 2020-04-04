@@ -202,63 +202,64 @@ public class HealthInfoExample extends BaseExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andHealthInfoIdIsNull() {
-            addCriterion("HEALTH_INFO_ID is null");
+        public Criteria andSeqHealthInfoIdIsNull() {
+            addCriterion("SEQ_HEALTH_INFO_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdIsNotNull() {
-            addCriterion("HEALTH_INFO_ID is not null");
+        public Criteria andSeqHealthInfoIdIsNotNull() {
+            addCriterion("SEQ_HEALTH_INFO_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdEqualTo(Integer value) {
-            addCriterion("HEALTH_INFO_ID =", value, "healthInfoId");
+        public Criteria andSeqHealthInfoIdEqualTo(Integer value) {
+            addCriterion("SEQ_HEALTH_INFO_ID =", value, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdNotEqualTo(Integer value) {
-            addCriterion("HEALTH_INFO_ID <>", value, "healthInfoId");
+        public Criteria andSeqHealthInfoIdNotEqualTo(Integer value) {
+            addCriterion("SEQ_HEALTH_INFO_ID <>", value, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdGreaterThan(Integer value) {
-            addCriterion("HEALTH_INFO_ID >", value, "healthInfoId");
+        public Criteria andSeqHealthInfoIdGreaterThan(Integer value) {
+            addCriterion("SEQ_HEALTH_INFO_ID >", value, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("HEALTH_INFO_ID >=", value, "healthInfoId");
+        public Criteria andSeqHealthInfoIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("SEQ_HEALTH_INFO_ID >=", value, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdLessThan(Integer value) {
-            addCriterion("HEALTH_INFO_ID <", value, "healthInfoId");
+        public Criteria andSeqHealthInfoIdLessThan(Integer value) {
+            addCriterion("SEQ_HEALTH_INFO_ID <", value, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdLessThanOrEqualTo(Integer value) {
-            addCriterion("HEALTH_INFO_ID <=", value, "healthInfoId");
+        public Criteria andSeqHealthInfoIdLessThanOrEqualTo(Integer value) {
+            addCriterion("SEQ_HEALTH_INFO_ID <=", value, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdIn(List<Integer> values) {
-            addCriterion("HEALTH_INFO_ID in", values, "healthInfoId");
+        public Criteria andSeqHealthInfoIdIn(List<Integer> values) {
+            addCriterion("SEQ_HEALTH_INFO_ID in", values, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdNotIn(List<Integer> values) {
-            addCriterion("HEALTH_INFO_ID not in", values, "healthInfoId");
+        public Criteria andSeqHealthInfoIdNotIn(List<Integer> values) {
+            addCriterion("SEQ_HEALTH_INFO_ID not in", values, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdBetween(Integer value1, Integer value2) {
-            addCriterion("HEALTH_INFO_ID between", value1, value2, "healthInfoId");
+        public Criteria andSeqHealthInfoIdBetween(Integer value1, Integer value2) {
+            addCriterion("SEQ_HEALTH_INFO_ID between", value1, value2, "seqHealthInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andHealthInfoIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("HEALTH_INFO_ID not between", value1, value2, "healthInfoId");
+        public Criteria andSeqHealthInfoIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("SEQ_HEALTH_INFO_ID not between", value1, value2,
+                    "seqHealthInfoId");
             return (Criteria) this;
         }
 
