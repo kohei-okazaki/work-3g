@@ -1,3 +1,74 @@
 <div class="header">
   <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
+    <ul id="dropmenu">
+    <li><a href="#">MENU</a>
+      <ul>
+        <li><a href="#">健康情報</a>
+          <ul>
+            <li><a href="../healthinfo/input" th:href="@{/healthinfo/input}">入力</a></li>
+            <li><a href="../healthinfofile/input" th:href="@{/healthinfofile/input}">一括</a></li>
+            <li><a href="../healthinforeference/index" th:href="@{/healthinforeference/index}">照会</a></li>
+          </ul>
+        </li>
+        <li><a href="#">アカウント</a>
+          <ul>
+            <li><a href="../accountsetting/input" th:href="@{/accountsetting/input}">設定変更</a></li>
+          </ul>
+        </li>
+        <li><a href="#">カロリー</a>
+          <ul>
+            <li><a href="../caloriecalc/index" th:href="@{/caloriecalc/index}">計算</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#">API</a>
+      <ul>
+        <li><a href="#">健康情報登録</a>
+          <ul>
+            <li><a data-toggle="modal" href="#apiRegistGeneralModal">概要</a></li>
+            <li><a data-toggle="modal" href="#apiRegistRequestModal">リクエスト</a></li>
+            <li><a data-toggle="modal" href="#apiRegistResponseModal">レスポンス</a></li>
+          </ul>
+        </li>
+        <li><a href="#">健康情報照会</a>
+          <ul>
+            <li><a data-toggle="modal" href="#apiReferenceGeneralModal">概要</a></li>
+            <li><a data-toggle="modal" href="#apiReferenceRequestModal">リクエスト</a></li>
+            <li><a data-toggle="modal" href="#apiReferenceResponseModal">レスポンス</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#">その他</a>
+      <ul>
+        <li><a href="#">健康情報</a>
+          <ul>
+            <li><a data-toggle="modal" href="#bmiModal">BMI</a></li>
+            <li><a data-toggle="modal" href="#standardWeightModal">標準体重</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="../login/index" th:href="@{/login/index}">ログアウト</a></li>
+  </ul>
 </div>
+
+<!-- 健康情報登録API概要モーダル -->
+<div th:replace="./layout/api-regist-general-modal.html"></div>
+<!-- 健康情報登録APIリクエストモーダル -->
+<div th:replace="./layout/api-regist-request-modal.html"></div>
+<!-- 健康情報登録APIレスポンスモーダル -->
+<div th:replace="./layout/api-regist-response-modal.html"></div>
+
+<!-- 健康情報照会API概要モーダル -->
+<div th:replace="./layout/api-reference-general-modal.html"></div>
+<!-- 健康情報照会APIリクエストモーダル -->
+<div th:replace="./layout/api-reference-request-modal.html"></div>
+<!-- 健康情報照会APIレスポンスモーダル -->
+<div th:replace="./layout/api-reference-response-modal.html"></div>
+
+<!-- BMIモーダル -->
+<div th:replace="./layout/bmi-modal.html"></div>
+<!-- 標準体重モーダル -->
+<div th:replace="./layout/standardweight-modal.html"></div>

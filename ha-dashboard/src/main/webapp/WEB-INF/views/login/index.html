@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_ログイン画面', scripts = ~{::script}, links = ~{::link})">
-<meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/loginLayout.css" th:href="@{/resources/css/loginLayout.min.css}">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
 </head>
 <body>
+  <div class="header">
+    <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
+  </div><!-- /.header -->
 
-  <div th:if="${errorMessage} != null" data-sal="slide-up">
-    <div class="errorMessage">
-      <p th:text="${errorMessage}"></p>
-    </div>
-  </div>
+  <br><br><br><br>
 
-  <fieldset>
-    <h1>健康管理アプリ</h1>
-    <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
+  <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
+    <div class="container border col-7">
+      <div th:if="${errorMessage} != null">
+        <br>
+        <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+      </div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+      <br>
+      <div class="form-group" >
+        <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" placeholder="ユーザID" required />
+      </div><!-- /.form-group -->
+      <br>
+      <div class="form-group" >
+        <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" placeholder="パスワード" required />
+      </div><!-- /.form-group -->
 
-      <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" data-sal="slide-up"></div>
-      <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" data-sal="slide-up"></div>
-
-      <div class="iconUser icon"></div>
-      <input type="text" class="validate[required]" th:field="*{userId}" maxlength="16" placeholder="ユーザID" required />
       <br><br>
-      <div class="iconPassword icon"></div>
-      <input type="password" class="validate[required]" th:field="*{password}" maxlength="16" placeholder="パスワード" required />
-      <input id="submit" type="submit" value="ログイン" />
-      <input id="account-regist" type="button" value="アカウント作成" />
-    </form>
-  </fieldset>
-
+      <input id="submit" class="btn btn-success" type="submit" value="ログイン" />
+      <input id="account-regist" class="btn btn-success" type="button" value="アカウント作成" />
+      <br><br>
+    </div><!-- /.container border col-7 -->
+  </form>
   <br>
 
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script>
-
     $(function() {
-
-      sal({
-        threshold: 1,
-        once: false
-      });
-
       // validate処理
       jQuery("#loginForm").validationEngine({
         promptPosition : "topLeft:0"

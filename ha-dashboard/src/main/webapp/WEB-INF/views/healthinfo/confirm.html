@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報入力確認画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
+<link>
 </head>
 <body>
 
+  <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
-
-  <div th:replace="./common/navigation.html"></div>
+  <br><br><br><br><br><br><br>
 
   <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
-    <h2 class="menuTitle">健康情報入力確認画面</h2>
-
+    <div class="container border col-8">
+    <h2 class="menuTitle">健康情報入力確認</h2>
+    <p>以下の情報で健康情報を登録します</p>
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${healthInfoForm}">
 
       <!--/* table部ここから */-->
-      <div class="table">
-        <h3 id="healthInfoToggle">健康情報</h3>
-
-        <div class="table-row healthInfoToggle">
-          <div class="table-header" align="left" th:text="#{height}"></div>
-          <div class="table-data" th:text="*{height} + '&ensp;cm'"></div>
-        </div>
-        <div class="table-row healthInfoToggle">
-          <div class="table-header" align="left" th:text="#{weight}"></div>
-          <div class="table-data" th:text="*{weight} + '&ensp;kg'"></div>
-        </div>
-      </div>
+      <table class="table table-hover table-striped">
+        <tr>
+          <th colspan="2">
+            <h3>健康情報</h3>
+          </th>
+        </tr>
+        <tr>
+          <th th:text="#{height}"></th>
+          <td th:text="*{height} + '&ensp;cm'"></td>
+        </tr>
+        <tr>
+          <th th:text="#{weight}"></th>
+          <td th:text="*{weight} + '&ensp;kg'"></td>
+        </tr>
+      </table><!-- /.table table-hover table-striped -->
       <!--/* table部ここまで */-->
 
       <br><br>
 
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-data">
-            <input type="submit" value="確定" />
-          </div>
-          <div class="table-data">&ensp;&ensp;</div>
-          <div class="table-data">
-            <input type="button" value="戻る" onclick="history.back()" />
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
+      <!--/* ボタン部ここから */-->
+      <input type="submit" class="btn btn-success" value="確 定" />
+      <input type="button" class="btn btn-secondary" value="戻 る" onclick="history.back()" />
+      <!--/* ボタン部ここまで */-->
+      <br><br>
 
     </form>
   </div>

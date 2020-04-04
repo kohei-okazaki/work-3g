@@ -1,66 +1,42 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報一括登録画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link>
 </head>
 <body>
 
+  <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
+  <br><br><br><br><br><br><br>
 
-  <div th:replace="./common/navigation.html"></div>
-
-  <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
+  <div class="container border col-8">
     <h2 class="menuTitle">健康情報一括登録画面</h2>
 
     <form id="healthInfoFileForm" action="./confirm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
 
-      <div class="errorMessage" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}" data-sal="slide-up"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
 
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-header" th:text="#{healthInfoFile}"></div>
-          <div class="table-data">
-            <input type="file" class="validate[required]" th:field="*{multipartFile}" required />
-          </div>
-        </div>
-
-        <div class="table-row">&ensp;</div>
+      <div class="form-group custom-file">
+        <p th:text="#{healthInfoFile}"></p>
+        <input type="file" class="validate[required] custom-file-input" th:field="*{multipartFile}" required />
+        <label class="custom-file-label" for="multipartFile">ファイルを選択</label>
       </div>
-      <!--/* table部ここまで */-->
 
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-data">
-            <input type="submit" value="確 認" />
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
-    </form>
-  </div>
-  <!--/* contentLayout部ここまで */-->
+      <input type="submit" class="btn btn-success" value="検 索" />
+    </form><!-- /#healthInfoFileForm -->
+    <br>
+  </div><!-- /.container border col-8 -->
 
+  <br><br>
+  <!--/* フッタ部 */-->
   <div th:replace="layout/layout :: footer"></div>
 
-  <script src="../resources/js/lib/jquery.validationEngine-ja.js" th:src="@{/resources/js/lib/jquery.validationEngine-ja.min.js}"></script>
-  <script src="../resources/js/lib/jquery.validationEngine.js" th:src="@{/resources/js/lib/jquery.validationEngine.min.js}"></script>
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
   <script>
     $(function() {
-
-      sal({
-        threshold: 1,
-        once: false
-      });
-
       jQuery("#healthInfoFileForm").validationEngine({
         promptPosition : "topLeft:80"
       });

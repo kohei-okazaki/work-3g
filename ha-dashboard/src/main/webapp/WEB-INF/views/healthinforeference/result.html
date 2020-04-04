@@ -1,60 +1,46 @@
-<div class="contentLayout" id="resultList">
+<div id="resultList">
 
   <!--/* table部ここから */-->
-  <table class="data">
+  <table class="table table-hover table-striped">
     <tr>
-      <th class="data sort" align="center"></th>
-      <th class="data sort" align="center" data-sort="height" th:text="#{height}"></th>
-      <th class="data sort" align="center" data-sort="weight" th:text="#{weight}"></th>
-      <th class="data sort" align="center" data-sort="standardWeight" th:text="#{bmi}"></th>
-      <th class="data sort" align="center" data-sort="bmi" th:text="#{standardWeight}"></th>
-      <th class="data sort" align="center" data-sort="healthInfoRegDate" th:text="#{healthInfoRegDate}"></th>
+      <th class="sort"></th>
+      <th class="sort" data-sort="height" th:text="#{height}"></th>
+      <th class="sort" data-sort="weight" th:text="#{weight}"></th>
+      <th class="sort" data-sort="standardWeight" th:text="#{bmi}"></th>
+      <th class="sort" data-sort="bmi" th:text="#{standardWeight}"></th>
+      <th class="sort" data-sort="healthInfoRegDate" th:text="#{healthInfoRegDate}"></th>
     </tr>
-    <tbody class="data list">
-      <tr class="data" th:each="result : ${resultList}">
-        <td class="data" align="center"><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}">詳細</a></td>
-        <td class="data height" align="center" th:text="${result.height}"></td>
-        <td class="data weight" align="center" th:text="${result.weight}"></td>
-        <td class="data standardWeight"  align="center" th:text="${result.standardWeight}"></td>
-        <td class="data bmi" align="center" th:text="${result.bmi}"></td>
-        <td class="data healthInfoRegDate" align="center" th:text="${result.healthInfoRegDate}"></td>
+    <tbody class="list">
+      <tr th:each="result : ${resultList}">
+        <td><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}">詳細</a></td>
+        <td class="height" th:text="${result.height}"></td>
+        <td class="weight" th:text="${result.weight}"></td>
+        <td class="standardWeight" th:text="${result.standardWeight}"></td>
+        <td class="bmi" th:text="${result.bmi}"></td>
+        <td class="healthInfoRegDate"  th:text="${result.healthInfoRegDate}"></td>
       </tr>
     </tbody>
   </table>
   <!--/* table部ここまで */-->
-
   <div class="pager">
     <ul class="pagination"></ul>
-  </div>
-
+  </div><!-- /.pager -->
   <br>
-
-  <!--/* table部ここから */-->
-  <div class="table">
-    <div class="table-row">
-      <div class="table-data">
-        <!--/* Excel出力ここから */-->
-        <div data-sal="slide-up">
+  <div class="container col-4">
+    <table>
+      <tr>
+        <td>
           <input id="excel-download" class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
-        </div>
-        <!--/* Excel出力ここまで */-->
-      </div>
-      <div class="table-data">&ensp;&ensp;</div>
-      <div class="table-data">
-        <!--/* CSV出力ここから */-->
-        <div data-sal="slide-up">
+        </td>
+        <td>
           <input id="csv-download" class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
-        </div>
-        <!--/* CSV出力ここまで */-->
-      </div>
-    </div>
-  </div>
-  <!--/* table部ここまで */-->
-
+        </td>
+      </tr>
+    </table>
+  </div><!-- /.container col-4 -->
   <br>
-
-  <div align="center" class="contentLayout">
+  <div class="border">
     <canvas id="chart" width="250" height="150"></canvas>
   </div>
-
+  <br>
 </div>

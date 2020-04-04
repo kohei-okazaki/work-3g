@@ -1,73 +1,53 @@
 <!DOCTYPE html>
 <html lang="ja"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報一括登録確認画面', scripts = ~{::script}, links = ~{::link})">
-<link rel="stylesheet" href="../resources/css/navigation.css" th:href="@{/resources/css/navigation.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/sal.css" th:href="@{/resources/css/lib/sal.min.css}">
+<link>
 </head>
 <body>
 
+  <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
+  <br><br><br><br><br><br><br>
 
-  <div th:replace="./common/navigation.html"></div>
-
-  <div th:if="${errorMessage} != null" data-sal="slide-up">
+  <div th:if="${errorMessage} != null">
     <br><br>
-    <div class="errorMessage">
-      <p th:text="${errorMessage}"></p>
-    </div>
+    <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
   </div>
 
-  <!--/* contentLayout部ここから */-->
-  <div align="center" class="contentLayout">
+  <div class="container border col-8">
     <h2 class="menuTitle">健康情報一括登録確認画面</h2>
 
     <form action="./complete" th:action="@{./complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
-      <table class="data">
+      <table class="table table-hover table-striped">
         <tr>
-          <td align="center">
-            <label>登録件数</label>
-          </td>
-          <td align="center">
-            <p th:text="${count}"></p>
-          </td>
+          <td colspan="3" th:text="'登録件数 ' + ${count}"></td>
         </tr>
-        <tr class="data">
-          <th class="data">
-            <label>行数</label>
-          </th>
-          <th class="data" th:text="#{height}"></th>
-          <th class="data" th:text="#{weight}"></th>
+        <tr>
+          <th>行数</th>
+          <th th:text="#{height}"></th>
+          <th th:text="#{weight}"></th>
         </tr>
-        <tr th:each="model, status : ${modelList}" class="data">
-          <td th:text="${status.count}" align="center" class="data">
-          <td th:text="${model.height}" align="center" class="data">
-          <td th:text="${model.weight}" align="center" class="data">
+        <tr th:each="model, status : ${modelList}">
+          <td th:text="${status.count}">
+          <td th:text="${model.height}">
+          <td th:text="${model.weight}">
         </tr>
-      </table>
+      </table><!-- /.table table-hover table-striped -->
 
       <br>
 
-      <!--/* table部ここから */-->
-      <div class="table">
-        <div class="table-row">
-          <div class="table-data">
-            <input type="submit" value="確 定" />
-          </div>
-          <div class="table-data">&ensp;&ensp;</div>
-          <div class="table-data">
-            <input type="button" value="戻 る" onclick="history.back()" />
-          </div>
-        </div>
-      </div>
-      <!--/* table部ここまで */-->
+      <!--/* ボタン部ここから */-->
+      <input type="submit" class="btn btn-success" value="確 定" />
+      <input type="button" class="btn btn-secondary" value="戻 る" onclick="history.back()" />
+      <!--/* ボタン部ここまで */-->
 
     </form>
-  </div>
-  <!--/* contentLayout部ここまで */-->
-
+    <br>
+  </div><!-- /.container border col-8 -->
+  <br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
