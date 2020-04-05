@@ -34,7 +34,6 @@ public class BmiRangeMtKey implements Serializable {
      * value of the database column bmi_range_mt.SEQ_BMI_RANGE_ID
      *
      * @return the value of bmi_range_mt.SEQ_BMI_RANGE_ID
-     *
      * @mbg.generated Sun Apr 05 13:39:31 GMT+09:00 2020
      */
     public Integer getSeqBmiRangeId() {
@@ -47,7 +46,6 @@ public class BmiRangeMtKey implements Serializable {
      *
      * @param seqBmiRangeId
      *     the value for bmi_range_mt.SEQ_BMI_RANGE_ID
-     *
      * @mbg.generated Sun Apr 05 13:39:31 GMT+09:00 2020
      */
     public void setSeqBmiRangeId(Integer seqBmiRangeId) {
