@@ -5,7 +5,7 @@
 <generatorConfiguration>
   <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.19.jar" />
 
-  <context id="context1">
+  <context id="context1" targetRuntime="MyBatis3">
     <!-- 文字コードをUTF-8 設定 -->
     <property name="javaFileEncoding" value="UTF-8" />
     <!-- プラグイン -->
