@@ -17,15 +17,15 @@
     <h2 class="menuTitle">健康情報照会</h2>
     <form id="healthInfoReferenceForm" action="./index" th:action="@{./index}" method="post" th:object="${healthInfoReferenceForm}">
 
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}" data-sal="slide-up"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}" data-sal="slide-up"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}" data-sal="slide-up"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}" data-sal="slide-up"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqHealthInfoId')}" th:errors="*{seqHealthInfoId}"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}"></div>
+      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}"></div>
 
       <h3>検索条件</h3>
       <div class="form-group">
-        <p th:text="#{healthInfoId}"></p>
-        <input type="text" class="validate[custom[number]] form-control" size="6" th:field="*{healthInfoId}" placeholder="1000" />
+        <p th:text="#{seqHealthInfoId}"></p>
+        <input type="text" class="validate[custom[number]] form-control" size="6" th:field="*{seqHealthInfoId}" placeholder="1000" />
       </div><!-- /.form-group -->
       <div class="form-group">
         <p th:text="#{healthInfoRegDate}"></p>

@@ -41,7 +41,7 @@ public class HeathInfoRefDetailController implements BaseWebController {
      *
      * @param model
      *     Model
-     * @param healthInfoId
+     * @param seqHealthInfoId
      *     健康情報ID
      * @param request
      *     HttpServletRequest
@@ -51,25 +51,29 @@ public class HeathInfoRefDetailController implements BaseWebController {
      */
     @GetMapping(value = "/detail")
     public String detail(Model model,
-            @RequestParam(name = "healthInfoId", required = false) Optional<Integer> healthInfoId,
+            @RequestParam(name = "seqHealthInfoId", required = false) Optional<Integer> seqHealthInfoId,
             HttpServletRequest request) throws BaseException {
 
         // 健康情報ID
-        Integer healthInfoIdVal = healthInfoId
+        Integer seqHealthInfoIdVal = seqHealthInfoId
                 .orElseThrow(() -> new SystemException(CommonErrorCode.DB_NO_DATA,
-                        "リクエスト情報が不正です. 健康情報ID=" + healthInfoId));
+                        "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
         // ユーザID
         String userId = sessionService
                 .getValue(request.getSession(), "userId", String.class).get();
 
         HealthInfoRefDetailDto dto = new HealthInfoRefDetailDto();
-        dto.setHealthInfoId(healthInfoIdVal);
+        dto.setSeqHealthInfoId(seqHealthInfoIdVal);
         dto.setUserId(userId);
 
         // 詳細情報
         HealthInfoRefDetailDto detail = healthInfoRefDetailService
                 .getHealthInfoRefDetailDto(dto);
-        model.addAttribute("detail", detail);
+        if (detail == null) {
+            model.addAttribute("errorMessage", "健康情報IDの指定が不正なため、健康情報がありません。");
+        } else {
+            model.addAttribute("detail", detail);
+        }
         return getView(DashboardView.HEALTH_INFO_REF_DETAIL);
     }
 
