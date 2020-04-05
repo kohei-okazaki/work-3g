@@ -196,7 +196,7 @@ public class BeanUtil {
 
     /**
      * パラメータ引数にしているクラス型を取得する<br>
-     *
+     * 
      * <pre>
      * public class Hoge<X, Y, Z> {
      * }

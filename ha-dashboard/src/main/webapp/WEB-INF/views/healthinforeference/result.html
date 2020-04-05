@@ -12,7 +12,7 @@
     </tr>
     <tbody class="list">
       <tr th:each="result : ${resultList}">
-        <td><a class="link" href="./detail" th:href="'./detail?healthInfoId=' + ${result.healthInfoId}">詳細</a></td>
+        <td><a class="link" href="./detail" th:href="'./detail?seqHealthInfoId=' + ${result.seqHealthInfoId}">詳細</a></td>
         <td class="height" th:text="${result.height}"></td>
         <td class="weight" th:text="${result.weight}"></td>
         <td class="standardWeight" th:text="${result.standardWeight}"></td>

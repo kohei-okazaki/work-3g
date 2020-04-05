@@ -146,8 +146,8 @@ public class HealthInfoReferenceController implements BaseWebController {
         BeanUtil.copy(form, dto, (src, dest) -> {
             HealthInfoReferenceForm srcForm = (HealthInfoReferenceForm) src;
             HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
-            if (StringUtil.hasValue(srcForm.getHealthInfoId())) {
-                destDto.setHealthInfoId(Integer.valueOf(srcForm.getHealthInfoId()));
+            if (StringUtil.hasValue(srcForm.getSeqHealthInfoId())) {
+                destDto.setSeqHealthInfoId(Integer.valueOf(srcForm.getSeqHealthInfoId()));
             }
         });
 

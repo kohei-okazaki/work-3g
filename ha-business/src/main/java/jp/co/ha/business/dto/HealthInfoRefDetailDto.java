@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class HealthInfoRefDetailDto {
 
     /** 健康情報ID */
-    private Integer healthInfoId;
+    private Integer seqHealthInfoId;
     /** ユーザID */
     private String userId;
     /** 身長 */
@@ -31,22 +31,22 @@ public class HealthInfoRefDetailDto {
     private String overweightMessage;
 
     /**
-     * healthInfoIdを返す
+     * seqHealthInfoIdを返す
      *
-     * @return healthInfoId
+     * @return seqHealthInfoId
      */
-    public Integer getHealthInfoId() {
-        return healthInfoId;
+    public Integer getSeqHealthInfoId() {
+        return seqHealthInfoId;
     }
 
     /**
-     * healthInfoIdを設定する
+     * seqHealthInfoIdを設定する
      *
-     * @param healthInfoId
+     * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setHealthInfoId(Integer healthInfoId) {
-        this.healthInfoId = healthInfoId;
+    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+        this.seqHealthInfoId = seqHealthInfoId;
     }
 
     /**

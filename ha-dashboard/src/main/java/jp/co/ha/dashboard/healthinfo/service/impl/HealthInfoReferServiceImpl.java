@@ -135,8 +135,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
         List<HealthInfo> resultList;
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).build();
-        if (BeanUtil.isNull(dto.getHealthInfoId())
-                || StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
+        if (BeanUtil.isNull(dto.getSeqHealthInfoId())
+                || StringUtil.isEmpty(dto.getSeqHealthInfoId().toString())) {
             // 健康情報IDが未指定の場合
             Date healthInfoRegDate = editStrDate(dto.getFromHealthInfoRegDate());
             if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
@@ -151,7 +151,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
             }
         } else {
             resultList = healthInfoSearchService
-                    .findByHealthInfoIdAndUserId(dto.getHealthInfoId(), userId);
+                    .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), userId);
         }
 
         return resultList;

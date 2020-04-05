@@ -14,10 +14,14 @@
   <div class="container border col-8">
     <h2 class="menuTitle">健康情報詳細</h2>
 
-    <table class="table table-hover table-striped">
+     <div th:if="${errorMessage} != null">
+        <br>
+        <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+      </div>
+    <table class="table table-hover table-striped" th:if="${detail != null}">
       <tr>
-        <th th:text="#{healthInfoId}"></th>
-        <td th:text="${detail.healthInfoId}"></td>
+        <th th:text="#{seqHealthInfoId}"></th>
+        <td th:text="${detail.seqHealthInfoId}"></td>
       </tr>
       <tr>
         <th th:text="#{userId}"></th>

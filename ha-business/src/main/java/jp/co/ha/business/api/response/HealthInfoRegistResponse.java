@@ -19,8 +19,8 @@ import jp.co.ha.web.form.BaseApiResponse;
 public class HealthInfoRegistResponse extends BaseApiResponse {
 
     /** 健康情報ID */
-    @JsonProperty("healthInfoId")
-    private Integer healthInfoId;
+    @JsonProperty("seqHealthInfoId")
+    private Integer seqHealthInfoId;
     /** ユーザID */
     @JsonProperty("userId")
     private String userId;
@@ -49,22 +49,22 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
     private Date healthInfoRegDate;
 
     /**
-     * healthInfoIdを返す
+     * seqHealthInfoIdを返す
      *
-     * @return healthInfoId
+     * @return seqHealthInfoId
      */
-    public Integer getHealthInfoId() {
-        return healthInfoId;
+    public Integer getSeqHealthInfoId() {
+        return seqHealthInfoId;
     }
 
     /**
-     * healthInfoIdを設定する
+     * seqHealthInfoIdを設定する
      *
-     * @param healthInfoId
+     * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setHealthInfoId(Integer healthInfoId) {
-        this.healthInfoId = healthInfoId;
+    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+        this.seqHealthInfoId = seqHealthInfoId;
     }
 
     /**

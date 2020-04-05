@@ -15,7 +15,7 @@
 
     <form id="accountRegistForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
       <div class="container border col-7">
-        <h2 class="menuTitle">アカウント登録画面</h2>
+        <h2 class="menuTitle">アカウント登録</h2>
         <div class="row">
           <div th:if="${errorMessage} != null">
             <br>
@@ -23,13 +23,14 @@
           </div>
         </div><!-- /.row -->
 
-      <div class="row">
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-      </div><!-- /.row -->
-      <br>
+        <div class="row">
+          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+        </div><!-- /.row -->
+        <br>
+
         <!--/* ユーザIDここから */-->
         <div class="form-group">
           <p th:text="#{userId}"></p>
@@ -70,11 +71,11 @@
         </div><!-- /.form-group -->
         <!--/* 備考ここまで */-->
 
-      <!--/* ボタン部ここから */-->
-      <input type="submit" class="btn btn-success" value="確 認" />
-      <input type="reset" class="btn btn-secondary" value="リセット" />
-      <!--/* ボタン部ここまで */-->
-      <br><br>
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success" value="確 認" />
+        <input type="reset" class="btn btn-secondary" value="リセット" />
+        <!--/* ボタン部ここまで */-->
+        <br><br>
       </div><!-- /.container border col-7 -->
       <br><br>
     </form><!-- /#accountRegistForm -->

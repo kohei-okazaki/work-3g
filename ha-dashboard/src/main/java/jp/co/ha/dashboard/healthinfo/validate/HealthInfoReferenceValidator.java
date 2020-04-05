@@ -41,7 +41,7 @@ public class HealthInfoReferenceValidator
      */
     private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
-        if (StringUtil.hasValue(form.getHealthInfoId())) {
+        if (StringUtil.hasValue(form.getSeqHealthInfoId())) {
             // 健康情報IDを指定している場合、後続の日付チェックを行わない
             return;
         }
