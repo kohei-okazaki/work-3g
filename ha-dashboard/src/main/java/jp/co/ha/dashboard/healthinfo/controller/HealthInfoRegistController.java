@@ -104,8 +104,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     @CsrfToken(factocy = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result,
-            HttpServletRequest request)
-            throws BaseException {
+            HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
             // バリエーションエラーの場合
@@ -248,8 +247,6 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         } catch (IOException e) {
             throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
                     "ファイルの出力処理に失敗しました", e);
-        } catch (BaseException e) {
-            throw e;
         }
     }
 
