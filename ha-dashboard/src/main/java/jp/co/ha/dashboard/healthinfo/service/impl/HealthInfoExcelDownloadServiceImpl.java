@@ -40,7 +40,7 @@ public class HealthInfoExcelDownloadServiceImpl
         HealthInfo healthInfo = component.getHealthInfo();
         // 健康情報Entityから健康情報ファイル設定を検索
         HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findByUserId(healthInfo.getUserId()).get();
+                .findById(healthInfo.getUserId()).get();
 
         // 健康情報Excelモデルに変換
         HealthInfoExcelModel model = toModel(healthInfo);

@@ -61,7 +61,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
                                 DateFormatType.YYYYMMDDHHMMSS));
                 // 肥満度メッセージ
                 BmiRangeMt mt = bmiRangeMtSearchService
-                        .findByBmiRangeId(srcEntity.getSeqBmiRangeId())
+                        .findById(srcEntity.getSeqBmiRangeId())
                         .orElseThrow(() -> new SystemRuntimeException(
                                 CommonErrorCode.DB_NO_DATA,
                                 "BMI範囲マスタが存在しません seqBmiRangeId="

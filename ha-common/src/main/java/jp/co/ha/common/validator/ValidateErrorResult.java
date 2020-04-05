@@ -13,14 +13,7 @@ import jp.co.ha.common.util.CollectionUtil;
 public class ValidateErrorResult {
 
     /** 妥当性チェックのリスト */
-    private List<ValidateError> errorList;
-
-    /**
-     * コンストラクタ
-     */
-    public ValidateErrorResult() {
-        this.errorList = new ArrayList<>();
-    }
+    private List<ValidateError> errorList = new ArrayList<>();
 
     /**
      * エラー情報を追加する

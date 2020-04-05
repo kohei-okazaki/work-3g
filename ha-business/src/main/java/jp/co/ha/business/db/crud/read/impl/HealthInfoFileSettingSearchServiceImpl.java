@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.db.entity.HealthInfoFileSettingKey;
 import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 
 /**
@@ -30,8 +31,10 @@ public class HealthInfoFileSettingSearchServiceImpl
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<HealthInfoFileSetting> findByUserId(String userId) {
-        return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
+    public Optional<HealthInfoFileSetting> findById(String userId) {
+        HealthInfoFileSettingKey key = new HealthInfoFileSettingKey();
+        key.setUserId(userId);
+        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
     }
 
 }

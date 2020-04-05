@@ -13,15 +13,14 @@
 
   <br><br><br><br>
 
-  <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
-    <div class="container border col-7">
-      <div th:if="${errorMessage} != null">
-        <br>
-        <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
-      </div>
+  <div class="container border col-7">
+    <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
+      <br>
+      <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-      <br>
+      <div class="alert alert-info" role="alert" th:if="${isLogout != null}">ログアウトしました</div>
+
       <div class="form-group" >
         <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" placeholder="ユーザID" required />
       </div><!-- /.form-group -->
@@ -34,8 +33,8 @@
       <input id="submit" class="btn btn-success" type="submit" value="ログイン" />
       <input id="account-regist" class="btn btn-info" type="button" value="アカウント作成" />
       <br><br>
-    </div><!-- /.container border col-7 -->
-  </form>
+    </form><!-- /#loginForm -->
+  </div><!-- /.container border col-7 -->
   <br>
 
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>

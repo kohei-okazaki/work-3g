@@ -16,20 +16,13 @@
     <form id="accountRegistForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
       <div class="container border col-7">
         <h2 class="menuTitle">アカウント登録</h2>
-        <div class="row">
-          <div th:if="${errorMessage} != null">
-            <br>
-            <div id="errorMessage" class="alert alert-danger" role="alert"  th:text="${errorMessage}"></div>
-          </div>
-        </div><!-- /.row -->
 
-        <div class="row">
-          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-        </div><!-- /.row -->
         <br>
+        <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
         <!--/* ユーザIDここから */-->
         <div class="form-group">

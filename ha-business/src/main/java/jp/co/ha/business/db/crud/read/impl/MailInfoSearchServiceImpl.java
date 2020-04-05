@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.MailInfo;
+import jp.co.ha.db.entity.MailInfoKey;
 import jp.co.ha.db.mapper.MailInfoMapper;
 
 /**
@@ -29,7 +30,9 @@ public class MailInfoSearchServiceImpl implements MailInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<MailInfo> findByUserId(String userId) {
-        return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
+    public Optional<MailInfo> findById(String userId) {
+        MailInfoKey key = new MailInfoKey();
+        key.setUserId(userId);
+        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
     }
 }

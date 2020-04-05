@@ -18,6 +18,6 @@ public interface AccountSearchService {
      *     ユーザID
      * @return アカウント情報
      */
-    Optional<Account> findByUserId(String userId);
+    Optional<Account> findById(String userId);
 
 }
