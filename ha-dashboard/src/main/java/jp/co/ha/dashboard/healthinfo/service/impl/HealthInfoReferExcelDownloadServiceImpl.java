@@ -43,7 +43,7 @@ public class HealthInfoReferExcelDownloadServiceImpl
 
         // 健康情報Entityから健康情報ファイル設定を検索
         HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findByUserId(component.getUserId()).get();
+                .findById(component.getUserId()).get();
 
         List<HealthInfoExcelModel> modelList = toModelList(component.getResultList());
 

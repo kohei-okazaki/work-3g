@@ -99,7 +99,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     private List<HealthInfoRegistRequest> toRequestList(
             List<HealthInfoCsvUploadModel> modelList, String userId)
             throws BaseException {
-        Account account = accountSearchService.findByUserId(userId).get();
+        Account account = accountSearchService.findById(userId).get();
         return modelList.stream().map(e -> {
             HealthInfoRegistRequest request = new HealthInfoRegistRequest();
             BeanUtil.copy(e, request, (src, dest) -> {

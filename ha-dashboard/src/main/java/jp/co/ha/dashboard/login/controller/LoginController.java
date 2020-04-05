@@ -114,7 +114,7 @@ public class LoginController implements BaseWebController {
         }
 
         // アカウント情報を検索
-        Optional<Account> account = accountSearchService.findByUserId(form.getUserId());
+        Optional<Account> account = accountSearchService.findById(form.getUserId());
         LoginCheckResult checkResult = new LoginCheck().check(account,
                 form.getPassword());
         if (checkResult.hasError()) {

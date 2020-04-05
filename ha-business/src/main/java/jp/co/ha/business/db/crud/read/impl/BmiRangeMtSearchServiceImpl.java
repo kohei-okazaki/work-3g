@@ -34,7 +34,7 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<BmiRangeMt> findByBmiRangeId(Integer seqBmiRangeId) {
+    public Optional<BmiRangeMt> findById(Integer seqBmiRangeId) {
         return findAll().stream()
                 .filter(e -> e.getSeqBmiRangeId().equals(seqBmiRangeId))
                 .findFirst();

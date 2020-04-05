@@ -18,6 +18,6 @@ public interface MailInfoSearchService {
      *     ユーザID
      * @return メール情報
      */
-    Optional<MailInfo> findByUserId(String userId);
+    Optional<MailInfo> findById(String userId);
 
 }

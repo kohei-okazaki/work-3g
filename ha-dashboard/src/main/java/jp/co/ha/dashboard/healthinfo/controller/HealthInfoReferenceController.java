@@ -239,7 +239,7 @@ public class HealthInfoReferenceController implements BaseWebController {
 
         // CSV設定情報取得
         HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService
-                .findByUserId(userId).get();
+                .findById(userId).get();
         CsvConfig conf = service.getCsvConfig(fileSetting);
 
         response.setContentType(

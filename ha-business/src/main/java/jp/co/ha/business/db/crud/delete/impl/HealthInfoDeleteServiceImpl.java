@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.delete.HealthInfoDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
+import jp.co.ha.db.entity.HealthInfoKey;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
@@ -26,7 +27,9 @@ public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
     @Delete
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteByUserId(Integer healthInfoId) {
-        mapper.deleteByPrimaryKey(healthInfoId);
+    public void deleteById(Integer seqHealthInfoId) {
+        HealthInfoKey key = new HealthInfoKey();
+        key.setSeqHealthInfoId(seqHealthInfoId);
+        mapper.deleteByPrimaryKey(key);
     }
 }

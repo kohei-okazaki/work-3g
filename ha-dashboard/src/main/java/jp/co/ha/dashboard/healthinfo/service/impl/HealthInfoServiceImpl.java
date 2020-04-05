@@ -176,7 +176,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         // リクエストタイプ設定
         apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
         // アカウント情報.APIキーを設定
-        Account account = accountSearchService.findByUserId(userId).get();
+        Account account = accountSearchService.findById(userId).get();
         apiRequest.setApiKey(account.getApiKey());
         // DB登録モードを設定
         apiRequest.setTestMode(TestMode.DB_REGIST);

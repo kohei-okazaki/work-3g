@@ -76,12 +76,12 @@ public class AccountSettingController
                 .getValue(request.getSession(), "userId", String.class).get();
 
         // アカウント情報を検索
-        Account account = accountSearchService.findByUserId(userId).get();
+        Account account = accountSearchService.findById(userId).get();
         // メール情報を検索
-        Optional<MailInfo> mailInfo = mailInfoSearchService.findByUserId(userId);
+        Optional<MailInfo> mailInfo = mailInfoSearchService.findById(userId);
         // 健康情報ファイル設定を検索
         HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findByUserId(userId).get();
+                .findById(userId).get();
 
         AccountSettingForm accountSettingForm = new AccountSettingForm();
 
