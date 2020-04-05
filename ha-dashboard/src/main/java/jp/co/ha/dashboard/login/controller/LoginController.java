@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -73,18 +74,39 @@ public class LoginController implements BaseWebController {
     /**
      * ログイン画面
      *
+     * @param model
+     *     Model
      * @param request
      *     HttpServletRequest
      * @return ログイン画面
      */
     @NonAuth
     @GetMapping("/index")
-    public String index(HttpServletRequest request) {
+    public String index(Model model, HttpServletRequest request) {
+
+        model.addAttribute("isLogout", request.getParameter("isLogout"));
+
+        return getView(DashboardView.LOGIN);
+    }
+
+    /**
+     * ログアウト処理
+     *
+     * @param request
+     *     HTTPリクエスト
+     * @param redirectAttr
+     *     リダイレクト情報
+     * @return ログイン画面へリダイレクトする
+     */
+    @NonAuth
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, RedirectAttributes redirectAttr) {
 
         // ログアウト時にすべてのセッション情報を削除する
         sessionService.removeValues(request.getSession());
 
-        return getView(DashboardView.LOGIN);
+        redirectAttr.addAttribute("isLogout", true);
+        return "redirect:index";
     }
 
     /**
@@ -105,8 +127,7 @@ public class LoginController implements BaseWebController {
     @NonAuth
     @PostMapping("/top")
     public String top(Model model, HttpServletRequest request, @Valid LoginForm form,
-            BindingResult result)
-            throws BaseException {
+            BindingResult result) throws BaseException {
 
         if (result.hasErrors()) {
             // validationエラーの場合
@@ -190,7 +211,6 @@ public class LoginController implements BaseWebController {
 
             return graphModel;
         });
-        return getView(
-                StringUtil.isEmpty(userId) ? DashboardView.LOGIN : DashboardView.TOP);
+        return getView(DashboardView.TOP);
     }
 }

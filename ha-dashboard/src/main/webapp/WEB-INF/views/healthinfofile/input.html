@@ -14,17 +14,16 @@
 
   <div class="container border col-8">
     <h2 class="menuTitle">健康情報一括登録画面</h2>
-
+    <br>
     <form id="healthInfoFileForm" action="./confirm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
 
       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
-
+      <p th:text="#{healthInfoFile}"></p>
       <div class="form-group custom-file">
-        <p th:text="#{healthInfoFile}"></p>
         <input type="file" class="validate[required] custom-file-input" th:field="*{multipartFile}" required />
         <label class="custom-file-label" for="multipartFile">ファイルを選択</label>
       </div>
-
+      <br><br>
       <input type="submit" class="btn btn-success" value="アップロード" />
     </form><!-- /#healthInfoFileForm -->
     <br>

@@ -132,8 +132,8 @@ public class HealthInfoReferenceController implements BaseWebController {
      */
     @PostMapping(value = "/index")
     public String reference(HttpServletRequest request, Model model,
-            @Valid HealthInfoReferenceForm form,
-            BindingResult result) throws BaseException {
+            @Valid HealthInfoReferenceForm form, BindingResult result)
+            throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.HEALTH_INFO_REFFERNCE);

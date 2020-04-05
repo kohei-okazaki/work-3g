@@ -263,9 +263,11 @@ public class DateUtil {
     }
 
     /**
-     * 日付型チェックを行う。<br>
-     * 正しい日付の場合true<br>
-     * 不正な文字列型の日付を指定した場合、false<br>
+     * 日付型チェックを行う。
+     * <ul>
+     * <li>正しい日付の場合、true</li>
+     * <li>不正な日付の場合、false</li>
+     * </ul>
      *
      * @param strDate
      *     検査対象日付

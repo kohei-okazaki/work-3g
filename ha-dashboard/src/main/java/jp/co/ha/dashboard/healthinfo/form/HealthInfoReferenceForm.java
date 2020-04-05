@@ -27,10 +27,10 @@ public class HealthInfoReferenceForm implements BaseForm {
     @Flag(message = "健康情報作成日直接指定フラグの値が不正です")
     private String healthInfoRegDateSelectFlag;
     /** 健康情報作成日(開始) */
-    @Date(formatType = DateFormatType.YYYYMMDD)
+    @Date(formatType = DateFormatType.YYYYMMDD, message = "健康情報作成日(開始)はyyyy/mm/dd形式で入力してください")
     private String fromHealthInfoRegDate;
     /** 健康情報作成日(終了) */
-    @Date(formatType = DateFormatType.YYYYMMDD)
+    @Date(formatType = DateFormatType.YYYYMMDD, message = "健康情報作成日(終了)はyyyy/mm/dd形式で入力してください")
     private String toHealthInfoRegDate;
 
     /**

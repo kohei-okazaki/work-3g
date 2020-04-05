@@ -34,6 +34,11 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
     @Override
     public void validate(Object target, Errors errors) {
 
+        if (errors.hasErrors()) {
+            // アノテーションでエラーになっている場合
+            return;
+        }
+
         @SuppressWarnings("unchecked")
         F form = (F) target;
 
