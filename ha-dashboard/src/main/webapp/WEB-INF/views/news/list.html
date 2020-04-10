@@ -14,20 +14,25 @@
     <h2 class="menuTitle">お知らせ一覧画面</h2>
 
     <div id="newsList">
-      <table class="table">
+      <table class="table table-hover table-striped">
         <tbody class="list">
-          <tr th:class="'news-item news-toggle[' + ${news.index} + ']'" th:each="news : ${newsList}">
-             <td>
-               <!-- リリース情報 -->
-               <span class="badge badge-primary" th:if="${news.tagColor == '1'}" th:text="${news.tagName}"></span>
-               <!-- バグ情報 -->
-               <span class="badge badge-danger" th:if="${news.tagColor == '2'}" th:text="${news.tagName}"></span>
-               <!-- 停止情報 -->
-               <span class="badge badge-warning" th:if="${news.tagColor == '3'}" th:text="${news.tagName}"></span>
-             </td>
-             <td th:text="${news.date}" />
-             <td th:text="${news.title}" />
-             <td th:id="'news-toggle-contents[' + ${news.index} + ']'" class="news-item" th:utext="${news.detail}"></td>
+           <tr th:each="news : ${newsList}">
+             <td class="card card-body bg-light">
+               <div>
+                 <!-- リリース情報 -->
+                 <span class="badge badge-primary" th:if="${news.tagColor == '1'}" th:text="${news.tagName}"></span>
+                 <!-- バグ情報 -->
+                 <span class="badge badge-danger" th:if="${news.tagColor == '2'}" th:text="${news.tagName}"></span>
+                 <!-- 停止情報 -->
+                 <span class="badge badge-warning" th:if="${news.tagColor == '3'}" th:text="${news.tagName}"></span>
+               </div>
+               <a data-toggle="collapse" th:href="${'#newsId' + news.index}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.index}" th:text="${news.date + '　' + news.title}"></a>
+               <div class="collapse" th:id="${'newsId' + news.index}">
+                 <div class="card card-body">
+                   <div th:utext="${news.detail}"></div>
+                 </div><!-- /.card card-body -->
+               </div><!-- /.collapse /#newsId[i] -->
+             </td><!-- /.card card-body bg-light -->
           </tr>
         </tbody><!-- /.list -->
       </table><!-- /.table -->
@@ -58,14 +63,6 @@
       };
       var columnList = new List("newsList", options);
       /*]]>*/
-
-      // お知らせのToggle設定
-      $.each($("tr.news-item"), function(i, val) {
-        var child = $(val).children();
-        child.on("click", function() {
-          $(child[2]).fadeToggle(500);
-        })
-      });
 
     });
   </script>
