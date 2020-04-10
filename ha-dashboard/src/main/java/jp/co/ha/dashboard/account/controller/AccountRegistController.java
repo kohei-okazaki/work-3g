@@ -78,8 +78,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
     @CsrfToken(factocy = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid AccountRegistForm form,
-            BindingResult result, HttpServletRequest request)
-            throws BaseException {
+            BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.ACCOUNT_REGIST_INPUT);
