@@ -10,7 +10,7 @@ import jp.co.ha.web.validator.BaseWebValidator;
 /**
  * 健康情報CSVアップロードValidator
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFileForm> {
 

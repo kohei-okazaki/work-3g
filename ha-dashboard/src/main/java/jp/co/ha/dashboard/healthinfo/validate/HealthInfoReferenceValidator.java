@@ -15,7 +15,7 @@ import jp.co.ha.web.validator.BaseWebValidator;
 /**
  * 結果照会画面のValidator
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoReferenceValidator
         extends BaseWebValidator<HealthInfoReferenceForm> {

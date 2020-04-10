@@ -49,8 +49,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
      */
     @Override
     public List<HealthInfoReferenceDto> getHealthInfoResponseList(
-            HealthInfoReferenceDto dto, String userId)
-            throws BaseException {
+            HealthInfoReferenceDto dto, String userId) throws BaseException {
 
         // ユーザIDと健康情報照会DTOから健康情報Entityリストを取得
         List<HealthInfo> entityList = getHealthInfoList(dto, userId);

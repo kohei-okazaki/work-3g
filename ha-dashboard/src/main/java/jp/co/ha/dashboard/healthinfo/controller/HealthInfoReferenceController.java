@@ -108,10 +108,14 @@ public class HealthInfoReferenceController implements BaseWebController {
     /**
      * 照会前画面
      *
+     * @param model
+     *     Model
      * @return 照会前画面
      */
     @GetMapping(value = "/index")
-    public String index() {
+    public String index(Model model) {
+        // 検索処理実行フラグを設定
+        model.addAttribute("isRefered", false);
         return getView(DashboardView.HEALTH_INFO_REFFERNCE);
     }
 
@@ -154,6 +158,8 @@ public class HealthInfoReferenceController implements BaseWebController {
         List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto,
                 userId);
 
+        // 検索処理実行フラグを設定
+        model.addAttribute("isRefered", true);
         // 検索情報を設定
         model.addAttribute("form", dto);
         // 検索結果有無を設定

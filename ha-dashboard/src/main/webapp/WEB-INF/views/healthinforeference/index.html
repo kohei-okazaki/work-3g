@@ -17,6 +17,7 @@
     <h2 class="menuTitle">健康情報照会</h2>
     <form id="healthInfoReferenceForm" action="./index" th:action="@{./index}" method="post" th:object="${healthInfoReferenceForm}">
       <br>
+      <div class="alert alert-danger" role="alert" th:if="${isRefered != null && isRefered && hasResult != null && !hasResult}">検索結果が存在しません</div>
       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqHealthInfoId')}" th:errors="*{seqHealthInfoId}"></div>
       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}"></div>
       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}"></div>
