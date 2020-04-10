@@ -17,6 +17,14 @@
       <table class="table">
         <tbody class="list">
           <tr th:class="'news-item news-toggle[' + ${news.index} + ']'" th:each="news : ${newsList}">
+             <td>
+               <!-- リリース情報 -->
+               <span class="badge badge-primary" th:if="${news.tagColor == '1'}" th:text="${news.tagName}"></span>
+               <!-- バグ情報 -->
+               <span class="badge badge-danger" th:if="${news.tagColor == '2'}" th:text="${news.tagName}"></span>
+               <!-- 停止情報 -->
+               <span class="badge badge-warning" th:if="${news.tagColor == '3'}" th:text="${news.tagName}"></span>
+             </td>
              <td th:text="${news.date}" />
              <td th:text="${news.title}" />
              <td th:id="'news-toggle-contents[' + ${news.index} + ']'" class="news-item" th:utext="${news.detail}"></td>

@@ -2,11 +2,15 @@ package jp.co.ha.business.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * お知らせ情報一覧リストDto
  *
  * @version 1.0.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsListDto {
 
     /** お知らせ情報一覧リスト */
@@ -36,6 +40,7 @@ public class NewsListDto {
      *
      * @version 1.0.0
      */
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class NewsDto {
 
         /** 順序 */
@@ -46,6 +51,12 @@ public class NewsListDto {
         private String date;
         /** 詳細 */
         private String detail;
+        /** タグ色 */
+        @JsonProperty("tag_color")
+        private String tagColor;
+        /** タグ名 */
+        @JsonProperty("tag_name")
+        private String tagName;
 
         /**
          * indexを返す
@@ -121,6 +132,44 @@ public class NewsListDto {
          */
         public void setDetail(String detail) {
             this.detail = detail;
+        }
+
+        /**
+         * tagColorを返す
+         *
+         * @return tagColor
+         */
+        public String getTagColor() {
+            return tagColor;
+        }
+
+        /**
+         * tagColorを設定する
+         *
+         * @param tagColor
+         *     タグ色
+         */
+        public void setTagColor(String tagColor) {
+            this.tagColor = tagColor;
+        }
+
+        /**
+         * tagNameを返す
+         *
+         * @return tagName
+         */
+        public String getTagName() {
+            return tagName;
+        }
+
+        /**
+         * tagNameを設定する
+         *
+         * @param tagName
+         *     タグ名
+         */
+        public void setTagName(String tagName) {
+            this.tagName = tagName;
         }
 
     }
