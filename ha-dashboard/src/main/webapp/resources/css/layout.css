@@ -34,25 +34,6 @@ body {
   padding: 5px;
 }
 
-/* 注意文言の設定 */
-.attention {
-  color: #ff8080;
-  font-size: 60%;
-}
-
-/* 戻るボタン */
-.browseBack {
-  width: 20px;
-  height: 20px;
-}
-
-.errorMessage {
-  color: #ff0000;
-  font-size: 16px;
-  padding: 5px 5px 5px 5px;
-  text-align: center;
-}
-
 .contentLayout {
   margin-top: auto;
   margin-left: auto;
@@ -62,14 +43,6 @@ body {
   padding: 5px;
   background: #d2e8d561;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
-}
-
-.body-main {
-  width: 100%;
-  background: #eeffcc;
-  position: relative;
-  height: 100%;
-  min-height: 100%;
 }
 
 /* ▼Header▼ */
@@ -111,83 +84,10 @@ body {
 }
 /* ▲Footer▲ */
 
-/* ▼テーブルの行の背景を変更▼ */
-table.data {
-  /* セルの線を重ねる */
-  border-collapse: collapse;
-}
-
-tr.data:nth-child(odd) {
-  /* 背景色指定 */
-  background-color: #ddd;
-}
-
-th.data, td.data {
-  /* 余白指定 */
-  padding: 5px 10px;
-}
-/* ▲テーブルの行の背景を変更▲ */
-
-/* ▼divをテーブル構成にする▼ */
-/* <table>の代わり */
-.table {
-  display: table;
-}
-
-/* <tr>の代わり */
-.table-row {
-  margin: 5px 5px 5px 5px;
-  padding: 5px 5px 5px 5px;
-  display: table-row;
-}
-
-/* <th>の代わり */
-.table-header {
-  margin: 5px 5px 5px 5px;
-  padding: 5px 5px 5px 5px;
-  vertical-align: middle;
-  display: table-cell;
-}
-
-/* <td>の代わり */
-.table-data {
-  margin: 5px 5px 5px 5px;
-  padding: 5px 5px 5px 5px;
-  text-align: left;
-  vertical-align: middle;
-  display: table-cell;
-}
-/* ▲divをテーブル構成にする▲ */
-
-/* ▼サブメニュー▼ */
-h3 {
-  position: relative;
-  padding: 0.5em 0.5em 0.5em 1.5em;
-  line-height: 1.4;
-  color: #006400;
-}
-
-h3:before {
-  font-family: "Font Awesome 5 Free";
-  content: "\f138";
-  position: absolute;
-  font-size: 1em;
-  left: 0.25em;
-  top: 0.5em;
-  color: #006400;
-}
-/* ▲サブメニュー▲ */
 .chart {
   width: 250px;
   height: 60px;
 }
-
-/* ▼ヘッダーアイコン▼ */
-.headericon {
-  width: 30px;
-  height: 30px;
-}
-/* ▲ヘッダーアイコン▲ */
 
 /* ▼メニューアイコン▼ */
 .menuicon:hover {
@@ -277,29 +177,3 @@ a.link:hover::after {
   text-align: center;
 }
 /* ▲画面TOPへ戻るアイコンについてのCSS▲ */
-
-/* ▼お知らせ一覧のCSS▼ */
-tr.news-item {
-  background: #d2e8d561;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.32);
-  padding: 50px 20px;
-  width: 100%;
-}
-
-tr.news-item:hover {
-  cursor: pointer;
-}
-
-td.news-item-date {
-  padding: 10px 10px;
-}
-
-td.news-item-title {
-  padding: 10px 30px;
-}
-
-td.news-item-contents {
-  /* お知らせ詳細のコンテンツは最初非表示のためnoneを指定 */
-  display:none;
-}
-/* ▲お知らせ一覧のCSS▲ */

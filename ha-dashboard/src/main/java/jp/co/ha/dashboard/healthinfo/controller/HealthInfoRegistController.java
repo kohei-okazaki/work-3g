@@ -24,6 +24,8 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
+import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadCsv;
+import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadExcel;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
@@ -41,8 +43,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
-import jp.co.ha.dashboard.healthinfo.service.annotation.HealthInfoDownloadCsv;
-import jp.co.ha.dashboard.healthinfo.service.annotation.HealthInfoDownloadExcel;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -228,14 +228,12 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                     "session情報が不正です");
         }
 
-        // CSV出力モデルリストに変換する
-        List<HealthInfoCsvDownloadModel> modelList = healthInfoService
-                .toModelList(healthInfoList);
-
         // 健康情報ファイル設定情報 取得
         HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService
                 .findById(userId).get();
+        // CSV設定情報取得
         CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
+
         response.setContentType(
                 MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset="
                         + conf.getCharset().getValue());
@@ -243,7 +241,8 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                 "attachment; filename=" + conf.getFileName());
 
         try {
-            csvDownloadService.download(response.getWriter(), conf, modelList);
+            csvDownloadService.download(response.getWriter(), conf,
+                    healthInfoService.toModelList(healthInfoList));
         } catch (IOException e) {
             throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
                     "ファイルの出力処理に失敗しました", e);

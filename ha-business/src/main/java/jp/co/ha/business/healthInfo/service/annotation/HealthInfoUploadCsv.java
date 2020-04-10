@@ -1,4 +1,4 @@
-package jp.co.ha.dashboard.healthinfo.service.annotation;
+package jp.co.ha.business.healthInfo.service.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,15 +10,15 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 健康情報Excelダウンロードサービス実装クラスのマーカーアノテーション
+ * 健康情報CSVアップロードサービス実装クラスのマーカーアノテーション
  *
  * @version 1.0.0
  */
 @Inherited
 @Documented
-@Qualifier("healthInfoDownloadExcel")
+@Qualifier("healthInfoUploadCsv")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface HealthInfoDownloadExcel {
+public @interface HealthInfoUploadCsv {
 
 }

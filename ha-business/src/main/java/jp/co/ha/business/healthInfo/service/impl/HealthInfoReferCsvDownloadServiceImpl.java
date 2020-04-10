@@ -1,4 +1,4 @@
-package jp.co.ha.dashboard.healthinfo.service.impl;
+package jp.co.ha.business.healthInfo.service.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -51,9 +51,8 @@ public class HealthInfoReferCsvDownloadServiceImpl
             }
 
             // ダウンロードファイル
-            File file = FileUtil
-                    .getFile(conf.getOutputPath() + FileSeparator.SYSTEM.getValue()
-                            + conf.getFileName());
+            File file = FileUtil.getFile(conf.getOutputPath()
+                    + FileSeparator.SYSTEM.getValue() + conf.getFileName());
 
             try {
                 file.createNewFile();

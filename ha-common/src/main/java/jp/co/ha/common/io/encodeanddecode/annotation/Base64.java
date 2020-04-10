@@ -1,4 +1,4 @@
-package jp.co.ha.dashboard.healthinfo.service.annotation;
+package jp.co.ha.common.io.encodeanddecode.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,15 +10,22 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 健康情報CSVアップロードサービス実装クラスのマーカーアノテーション
+ * エンコードアノテーション<br>
+ * ex)<br>
+ *
+ * <pre>
+ * &#64;Base64
+ * &#64;Autowired
+ * private BaseEncodeAndDecoder encoder;
+ * </pre>
  *
  * @version 1.0.0
  */
 @Inherited
 @Documented
-@Qualifier("healthInfoUploadCsv")
+@Qualifier("base64EncodeAndDecoder")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface HealthInfoUploadCsv {
+public @interface Base64 {
 
 }

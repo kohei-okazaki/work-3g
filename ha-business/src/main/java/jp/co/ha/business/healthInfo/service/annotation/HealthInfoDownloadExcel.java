@@ -1,4 +1,4 @@
-package jp.co.ha.common.system.annotation;
+package jp.co.ha.business.healthInfo.service.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,22 +10,15 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * エンコードアノテーション<br>
- * ex)<br>
- *
- * <pre>
- * &#64;Base64
- * &#64;Autowired
- * private BaseEncodeAndDecoder encoder;
- * </pre>
+ * 健康情報Excelダウンロードサービス実装クラスのマーカーアノテーション
  *
  * @version 1.0.0
  */
 @Inherited
 @Documented
-@Qualifier("base64EncodeAndDecoder")
+@Qualifier("healthInfoDownloadExcel")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Base64 {
+public @interface HealthInfoDownloadExcel {
 
 }

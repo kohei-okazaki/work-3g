@@ -1,6 +1,4 @@
-package jp.co.ha.common.system.type;
-
-import jp.co.ha.common.type.BaseEnum;
+package jp.co.ha.common.type;
 
 /**
  * アルゴリズム列挙

@@ -49,8 +49,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
      */
     @Override
     public List<HealthInfoReferenceDto> getHealthInfoResponseList(
-            HealthInfoReferenceDto dto, String userId)
-            throws BaseException {
+            HealthInfoReferenceDto dto, String userId) throws BaseException {
 
         // ユーザIDと健康情報照会DTOから健康情報Entityリストを取得
         List<HealthInfo> entityList = getHealthInfoList(dto, userId);
@@ -64,9 +63,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 HealthInfo srcEntity = (HealthInfo) src;
                 HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
 
-                destDto.setHealthInfoRegDate(
-                        DateUtil.toString(srcEntity.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDDHHMMSS));
+                destDto.setHealthInfoRegDate(DateUtil.toString(
+                        srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
             });
 
             return result;
@@ -85,9 +83,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 HealthInfoReferenceDto srcDto = (HealthInfoReferenceDto) src;
                 ReferenceCsvDownloadModel destModel = (ReferenceCsvDownloadModel) dest;
 
-                destModel.setHealthInfoRegDate(
-                        DateUtil.toDate(srcDto.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDDHHMMSS));
+                destModel.setHealthInfoRegDate(DateUtil.toDate(
+                        srcDto.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
 
             });
             model.setUserId(userId);

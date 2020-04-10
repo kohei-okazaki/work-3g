@@ -35,17 +35,11 @@
     <property name="backet" value="${aws.s3.backet}" />
   </bean>
   <!-- CRUD -->
-  <context:component-scan base-package="jp.co.ha.business.db.crud.read.impl" />
-  <context:component-scan base-package="jp.co.ha.business.db.crud.create.impl" />
-  <context:component-scan base-package="jp.co.ha.business.db.crud.update.impl" />
-  <context:component-scan base-package="jp.co.ha.business.db.crud.delete.impl" />
-
+  <context:component-scan base-package="jp.co.ha.business.db.crud.*.impl" />
   <!-- API -->
   <context:component-scan base-package="jp.co.ha.business.api" />
-
   <!-- Business -->
-  <context:component-scan base-package="jp.co.ha.business.healthInfo.*.impl" />
-
+  <context:component-scan base-package="jp.co.ha.business.healthInfo.service" />
   <!-- AWS -->
   <context:component-scan base-package="jp.co.ha.business.aws" />
 </beans>
