@@ -1,4 +1,4 @@
-package jp.co.ha.common.system.annotation;
+package jp.co.ha.common.io.encodeanddecode.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

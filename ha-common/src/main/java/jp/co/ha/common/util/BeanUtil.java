@@ -105,13 +105,13 @@ public class BeanUtil {
                     continue;
                 }
 
-                for (Field sourceField : BeanUtil.getFieldList(srcClass)) {
-                    if (isCopyTarget(sourceField, targetField)) {
+                for (Field srcField : BeanUtil.getFieldList(srcClass)) {
+                    if (isCopyTarget(srcField, targetField)) {
                         // getter呼び出し
-                        Method getter = getAccessor(sourceField.getName(), srcClass,
+                        Method getter = getAccessor(srcField.getName(), srcClass,
                                 AccessorType.GETTER);
                         // setter呼び出し
-                        Method setter = getAccessor(sourceField.getName(), destClass,
+                        Method setter = getAccessor(srcField.getName(), destClass,
                                 AccessorType.SETTER);
 
                         // 値を設定
@@ -161,11 +161,11 @@ public class BeanUtil {
      * @return 判定結果
      */
     private static boolean isCopyTarget(Field src, Field dest) {
-        String sourceFieldName = src.getName();
+        String srcFieldName = src.getName();
         Class<?> sourcefieldType = src.getType();
-        String targetFieldName = dest.getName();
+        String destFieldName = dest.getName();
         Class<?> targetFieldType = dest.getType();
-        return targetFieldName.equals(sourceFieldName)
+        return destFieldName.equals(srcFieldName)
                 && targetFieldType.equals(sourcefieldType);
     }
 
@@ -185,10 +185,10 @@ public class BeanUtil {
      * targetがnullでないかどうか判定する<br>
      * 判定結果:nullの場合false, それ以外の場合true<br>
      *
-     * @see jp.co.ha.common.util.BeanUtil#isNull
      * @param target
      *     検査対象インスタンス
      * @return 判定結果
+     * @see jp.co.ha.common.util.BeanUtil#isNull
      */
     public static boolean notNull(Object target) {
         return !isNull(target);
@@ -196,7 +196,7 @@ public class BeanUtil {
 
     /**
      * パラメータ引数にしているクラス型を取得する<br>
-     * 
+     *
      * <pre>
      * public class Hoge<X, Y, Z> {
      * }

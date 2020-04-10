@@ -1,4 +1,4 @@
-package jp.co.ha.common.system.annotation;
+package jp.co.ha.common.io.encodeanddecode.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * SHA-512エンコードアノテーション<br>
+ * パスワード暗号化アノテーション<br>
  * ex)<br>
  *
  * <pre>
- * &#64;Sha512
+ * &#64;Bcript
  * &#64;Autowired
  * private PasswordEncoder passwordEncoder;
  * </pre>
@@ -23,9 +23,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
  */
 @Inherited
 @Documented
-@Qualifier("sha512HashEncoder")
+@Qualifier("bcryptHashEncoder")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Sha512 {
+public @interface Bcrypt {
 
 }
