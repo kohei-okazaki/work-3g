@@ -25,11 +25,11 @@ public class HealthInfoCsvDownloadServiceImpl
      * {@inheritDoc}
      */
     @Override
-    public void download(PrintWriter printWriter, CsvConfig conf,
+    public void download(PrintWriter pw, CsvConfig conf,
             List<HealthInfoCsvDownloadModel> modelList) throws BaseException {
 
         try (CsvWriter<HealthInfoCsvDownloadModel> writer = new HealthInfoCsvWriter(conf,
-                printWriter)) {
+                pw)) {
             // CSVに書込
             writer.execute(modelList);
             writer.flush();

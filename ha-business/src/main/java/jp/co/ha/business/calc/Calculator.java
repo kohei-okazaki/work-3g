@@ -32,8 +32,7 @@ public class Calculator {
      * @return 計算結果
      */
     public static BigDecimal calc(BigDecimal target1, CalcMethod method,
-            BigDecimal target2, int digit,
-            RoundingMode roundingMode) {
+            BigDecimal target2, int digit, RoundingMode roundingMode) {
         return method.getCalcOperatorFunction().apply(target1, target2, digit,
                 roundingMode);
     }

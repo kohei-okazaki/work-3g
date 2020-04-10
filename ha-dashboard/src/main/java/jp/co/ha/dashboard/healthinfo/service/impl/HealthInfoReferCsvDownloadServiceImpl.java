@@ -51,9 +51,8 @@ public class HealthInfoReferCsvDownloadServiceImpl
             }
 
             // ダウンロードファイル
-            File file = FileUtil
-                    .getFile(conf.getOutputPath() + FileSeparator.SYSTEM.getValue()
-                            + conf.getFileName());
+            File file = FileUtil.getFile(conf.getOutputPath()
+                    + FileSeparator.SYSTEM.getValue() + conf.getFileName());
 
             try {
                 file.createNewFile();
