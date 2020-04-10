@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,8 @@ import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
+import jp.co.ha.business.healthInfo.service.annotation.ReferenceDownloadCsv;
+import jp.co.ha.business.healthInfo.service.annotation.ReferenceDownloadExcel;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.BaseException;
@@ -42,8 +43,6 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
-import jp.co.ha.dashboard.healthinfo.service.annotation.ReferenceDownloadCsv;
-import jp.co.ha.dashboard.healthinfo.service.annotation.ReferenceDownloadExcel;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoReferenceValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -232,8 +231,8 @@ public class HealthInfoReferenceController implements BaseWebController {
     public void csvDownload(HttpServletRequest request, HttpServletResponse response)
             throws BaseException {
 
-        HttpSession session = request.getSession();
-        String userId = sessionService.getValue(session, "userId", String.class).get();
+        String userId = sessionService
+                .getValue(request.getSession(), "userId", String.class).get();
         // sessionにある前画面の検索条件で再度検索する
         HealthInfoReferenceDto referDto = sessionService
                 .getValue(request.getSession(), "healthInfoReferenceDto",
@@ -243,9 +242,10 @@ public class HealthInfoReferenceController implements BaseWebController {
         List<HealthInfoReferenceDto> resultList = service
                 .getHealthInfoResponseList(referDto, userId);
 
-        // CSV設定情報取得
+        // 健康情報ファイル設定情報 取得
         HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService
                 .findById(userId).get();
+        // CSV設定情報取得
         CsvConfig conf = service.getCsvConfig(fileSetting);
 
         response.setContentType(

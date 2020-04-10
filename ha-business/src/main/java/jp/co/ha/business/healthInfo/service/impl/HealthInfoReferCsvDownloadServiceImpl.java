@@ -1,4 +1,4 @@
-package jp.co.ha.dashboard.healthinfo.service.impl;
+package jp.co.ha.business.healthInfo.service.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -39,7 +39,7 @@
   <!-- API -->
   <context:component-scan base-package="jp.co.ha.business.api" />
   <!-- Business -->
-  <context:component-scan base-package="jp.co.ha.business.healthInfo.*.impl" />
+  <context:component-scan base-package="jp.co.ha.business.healthInfo.service" />
   <!-- AWS -->
   <context:component-scan base-package="jp.co.ha.business.aws" />
 </beans>

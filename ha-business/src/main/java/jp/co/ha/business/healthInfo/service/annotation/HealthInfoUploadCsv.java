@@ -1,4 +1,4 @@
-package jp.co.ha.dashboard.healthinfo.service.annotation;
+package jp.co.ha.business.healthInfo.service.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
