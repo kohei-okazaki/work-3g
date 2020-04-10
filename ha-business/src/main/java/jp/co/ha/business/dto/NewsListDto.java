@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class NewsListDto {
 
     /** お知らせ情報一覧リスト */
+    @JsonProperty("news_list")
     private List<NewsDto> newsDtoList;
 
     /**
@@ -44,12 +45,16 @@ public class NewsListDto {
     public static class NewsDto {
 
         /** 順序 */
+        @JsonProperty("index")
         private Integer index;
         /** タイトル */
+        @JsonProperty("title")
         private String title;
         /** 日付 */
+        @JsonProperty("date")
         private String date;
         /** 詳細 */
+        @JsonProperty("detail")
         private String detail;
         /** タグ色 */
         @JsonProperty("tag_color")
