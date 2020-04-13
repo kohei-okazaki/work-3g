@@ -47,7 +47,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
     private BeanValidator<Rq> validator;
 
     /**
-     * POST通信の処理を行う
+     * POST形式のJSON通信の処理を行う
      *
      * @param request
      *     リクエスト
@@ -58,7 +58,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
     @PostMapping(headers = { "Content-type=application/json;charset=UTF-8" }, produces = {
             MediaType.APPLICATION_JSON_VALUE }, consumes = {
                     MediaType.APPLICATION_JSON_VALUE })
-    public Rs doPost(@RequestBody Rq request) throws BaseException {
+    public Rs jsonApi(@RequestBody Rq request) throws BaseException {
 
         ValidateErrorResult result = validator.validate(request);
         if (result.hasError()) {
