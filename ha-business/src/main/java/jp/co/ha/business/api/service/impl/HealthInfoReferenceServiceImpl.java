@@ -56,16 +56,16 @@ public class HealthInfoReferenceServiceImpl extends CommonService
             HealthInfoReferenceResponse response) throws BaseException {
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(request.getHealthInfoId(),
-                        request.getUserId());
+                .findByHealthInfoIdAndUserId(request.getSeqHealthInfoId(),
+                        request.getAccount().getUserId());
         if (CollectionUtil.isEmpty(healthInfoList)) {
             throw new BusinessException(CommonErrorCode.DB_NO_DATA,
-                    "該当のレコードが見つかりません healthInfoId:" + request.getHealthInfoId()
-                            + ", userId:" + request.getUserId());
+                    "該当のレコードが見つかりません seqHealthInfoId:" + request.getSeqHealthInfoId()
+                            + ", userId:" + request.getAccount().getUserId());
         } else if (CollectionUtil.isMultiple(healthInfoList)) {
             throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
-                    "該当のデータが複数存在します healthInfoId:" + request.getHealthInfoId()
-                            + ", userId:" + request.getUserId());
+                    "該当のデータが複数存在します seqHealthInfoId:" + request.getSeqHealthInfoId()
+                            + ", userId:" + request.getAccount().getUserId());
         }
 
         HealthInfo healthInfo = CollectionUtil.getFirst(healthInfoList);

@@ -27,8 +27,8 @@ import jp.co.ha.web.form.BaseApiResponse;
 import jp.co.ha.web.form.ErrorResponse;
 
 /**
- * Rest形式の基底コントローラ<br>
- * すべてのRestコントローラはこのクラスを継承すること
+ * JSON形式APIの基底コントローラ<br>
+ * すべてのJSON形式APIコントローラはこのクラスを継承すること
  *
  * @param <Rq>
  *     リクエスト
@@ -37,7 +37,7 @@ import jp.co.ha.web.form.ErrorResponse;
  * @version 1.0.0
  */
 @RestController
-public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends BaseApiResponse>
+public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends BaseApiResponse>
         implements ThrowableBiConsumer<Rq, Rs>, BaseController {
 
     /** LOG */
@@ -58,7 +58,7 @@ public abstract class BaseRestController<Rq extends BaseApiRequest, Rs extends B
     @PostMapping(headers = { "Content-type=application/json;charset=UTF-8" }, produces = {
             MediaType.APPLICATION_JSON_VALUE }, consumes = {
                     MediaType.APPLICATION_JSON_VALUE })
-    public Rs jsonApi(@RequestBody Rq request) throws BaseException {
+    public Rs execute(@RequestBody Rq request) throws BaseException {
 
         ValidateErrorResult result = validator.validate(request);
         if (result.hasError()) {

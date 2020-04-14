@@ -8,7 +8,7 @@ import jp.co.ha.business.api.HealthInfoRegistApi;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.controller.BaseRestController;
+import jp.co.ha.web.controller.BaseJsonController;
 
 /**
  * 健康情報登録コントローラ
@@ -18,7 +18,7 @@ import jp.co.ha.web.controller.BaseRestController;
 @RestController
 @RequestMapping(value = "/healthinforegist")
 public class HealthInfoRegistController
-        extends BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
+        extends BaseJsonController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
     /** 健康情報登録API */
     @Autowired

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.HealthInfoRegistApi;
+import jp.co.ha.business.api.request.CommonApiRequest;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.type.RequestType;
@@ -110,7 +111,12 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
                 destRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
                 destRequest.setTestMode(TestMode.DB_REGIST);
             });
-            request.setApiKey(account.getApiKey());
+
+            // APIの共通部分の設定
+            CommonApiRequest.Account apiAccount = new CommonApiRequest.Account();
+            apiAccount.setUserId(account.getUserId());
+            apiAccount.setApiKey(account.getApiKey());
+            request.setAccount(apiAccount);
 
             return request;
         }).collect(Collectors.toList());

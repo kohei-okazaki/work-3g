@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.web.controller.BaseRestController;
+import jp.co.ha.web.controller.BaseJsonController;
 import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseApiResponse;
 
@@ -30,8 +30,8 @@ public class ApiConnectionExecutor {
      * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
      * レスポンスログ(異常系)は以下のクラスのメソッドで行う<br>
      * <ul>
-     * <li>{@link BaseRestController#jsonExceptionHandle}</li>
-     * <li>{@link BaseRestController#appExceptionHandle}</li>
+     * <li>{@link BaseJsonController#jsonExceptionHandle}</li>
+     * <li>{@link BaseJsonController#appExceptionHandle}</li>
      * </ul>
      *
      * @param pjp

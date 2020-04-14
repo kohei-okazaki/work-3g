@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.batch.dto.HealthInfoRegistData;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.HealthInfoRegistApi;
+import jp.co.ha.business.api.request.CommonApiRequest.Account;
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.type.RequestType;
@@ -63,11 +64,14 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
         for (File file : FileUtil.getFileList(prop.getHealthInfoRegistBatchFilePath())) {
             HealthInfoRegistData dto = reader.read(file, HealthInfoRegistData.class);
-            List<HealthInfoRegistRequest> list = dto.getHealthInfoRequestData().stream()
+            Account apiAccount = new Account();
+            BeanUtil.copy(dto, apiAccount);
+            List<HealthInfoRegistRequest> list = dto.getHealthInfoRequestDataList()
+                    .stream()
                     .map(e -> {
                         HealthInfoRegistRequest request = new HealthInfoRegistRequest();
                         request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-                        BeanUtil.copy(dto, request);
+                        request.setAccount(apiAccount);
                         BeanUtil.copy(e, request);
                         return request;
                     }).collect(Collectors.toList());

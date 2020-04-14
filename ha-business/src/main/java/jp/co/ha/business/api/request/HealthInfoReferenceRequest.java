@@ -18,8 +18,8 @@ public class HealthInfoReferenceRequest extends CommonApiRequest {
     /** 健康情報ID */
     @Required(message = "healthInfoIdが未設定です")
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "healthInfoIdが半角数字でありません")
-    @JsonProperty("healthInfoId")
-    private Integer healthInfoId;
+    @JsonProperty("seqHealthInfoId")
+    private Integer seqHealthInfoId;
 
     /**
      * デフォルトコンストラクタ
@@ -29,22 +29,22 @@ public class HealthInfoReferenceRequest extends CommonApiRequest {
     }
 
     /**
-     * healthInfoIdを返す
+     * seqHealthInfoIdを返す
      *
-     * @return healthInfoId
+     * @return seqHealthInfoId
      */
-    public Integer getHealthInfoId() {
-        return healthInfoId;
+    public Integer getSeqHealthInfoId() {
+        return seqHealthInfoId;
     }
 
     /**
-     * healthInfoIdを設定する
+     * seqHealthInfoIdを設定する
      *
-     * @param healthInfoId
+     * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setHealthInfoId(Integer healthInfoId) {
-        this.healthInfoId = healthInfoId;
+    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+        this.seqHealthInfoId = seqHealthInfoId;
     }
 
 }

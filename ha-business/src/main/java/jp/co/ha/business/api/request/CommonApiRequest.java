@@ -26,25 +26,77 @@ public abstract class CommonApiRequest extends BaseApiRequest {
     @Required(message = "requestTypeが未設定です")
     @JsonProperty("requestType")
     private RequestType requestType;
-    /** ユーザID */
-    @Required(message = "userIdが未設定です")
-    @Pattern(regixPattern = RegexType.HALF_CHAR, message = "userIdが半角英数でありません")
-    @Min(size = 2, message = "userIdが2byte未満です")
-    @Max(size = 16, message = "userIdが16byte以上です")
-    @JsonProperty("userId")
-    private String userId;
-    /** APIキー */
-    @Mask
-    @Required(message = "apiKeyが未設定です")
-    @Length(length = 64, message = "apiKeyが64byteではありません")
-    @JsonProperty("apiKey")
-    private String apiKey;
+    /** アカウント */
+    @Required
+    @JsonProperty("account")
+    private Account account;
 
     /**
      * デフォルトコンストラクタ
      */
     public CommonApiRequest() {
         super();
+    }
+
+    /**
+     * APIの共通情報-account
+     *
+     * @version 1.0.0
+     */
+    public static class Account {
+        /** ユーザID */
+        @Required(message = "userIdが未設定です")
+        @Pattern(regixPattern = RegexType.HALF_CHAR, message = "userIdが半角英数でありません")
+        @Min(size = 2, message = "userIdが2byte未満です")
+        @Max(size = 16, message = "userIdが16byte以上です")
+        @JsonProperty("userId")
+        private String userId;
+
+        /** APIキー */
+        @Mask
+        @Required(message = "apiKeyが未設定です")
+        @Length(length = 64, message = "apiKeyが64byteではありません")
+        @JsonProperty("apiKey")
+        private String apiKey;
+
+        /**
+         * userIdを返す
+         *
+         * @return userId
+         */
+        public String getUserId() {
+            return userId;
+        }
+
+        /**
+         * userIdを設定する
+         *
+         * @param userId
+         *     ユーザID
+         */
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        /**
+         * apiKeyを返す
+         *
+         * @return apiKey
+         */
+        public String getApiKey() {
+            return apiKey;
+        }
+
+        /**
+         * apiKeyを設定する
+         *
+         * @param apiKey
+         *     APIキー
+         */
+        public void setApiKey(String apiKey) {
+            this.apiKey = apiKey;
+        }
+
     }
 
     /**
@@ -67,41 +119,22 @@ public abstract class CommonApiRequest extends BaseApiRequest {
     }
 
     /**
-     * userIdを返す
+     * accountを返す
      *
-     * @return userId
+     * @return account
      */
-    public String getUserId() {
-        return userId;
+    public Account getAccount() {
+        return account;
     }
 
     /**
-     * userIdを設定する
+     * accountを設定する
      *
-     * @param userId
-     *     ユーザID
+     * @param account
+     *     アカウント
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    /**
-     * apiKeyを返す
-     *
-     * @return apiKey
-     */
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    /**
-     * apiKeyを設定する
-     *
-     * @param apiKey
-     *     APIキー
-     */
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }
