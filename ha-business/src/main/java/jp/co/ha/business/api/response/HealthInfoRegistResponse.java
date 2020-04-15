@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * 健康情報登録レスポンスクラス
@@ -16,14 +15,11 @@ import jp.co.ha.web.form.BaseApiResponse;
  * @version 1.0.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
-public class HealthInfoRegistResponse extends BaseApiResponse {
+public class HealthInfoRegistResponse extends CommonApiResponse {
 
     /** 健康情報ID */
     @JsonProperty("seqHealthInfoId")
     private Integer seqHealthInfoId;
-    /** ユーザID */
-    @JsonProperty("userId")
-    private String userId;
     /** 身長 */
     @Mask
     @JsonProperty("height")
@@ -65,25 +61,6 @@ public class HealthInfoRegistResponse extends BaseApiResponse {
      */
     public void setSeqHealthInfoId(Integer seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
-    }
-
-    /**
-     * userIdを返す
-     *
-     * @return userId
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * userIdを設定する
-     *
-     * @param userId
-     *     ユーザID
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     /**

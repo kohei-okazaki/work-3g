@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * 健康情報照会レスポンスクラス
@@ -16,14 +15,11 @@ import jp.co.ha.web.form.BaseApiResponse;
  * @version 1.0.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
-public class HealthInfoReferenceResponse extends BaseApiResponse {
+public class HealthInfoReferenceResponse extends CommonApiResponse {
 
     /** 健康情報ID */
     @JsonProperty("seqHealthInfoId")
     private Integer seqHealthInfoId;
-    /** ユーザID */
-    @JsonProperty("userId")
-    private String userId;
     /** 身長 */
     @Mask
     @JsonProperty("height")
@@ -40,6 +36,9 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
     @Mask
     @JsonProperty("standardWeight")
     private BigDecimal standardWeight;
+    /** 健康情報ステータス */
+    @JsonProperty("healthInfoStatus")
+    private String healthInfoStatus;
     /** 健康情報作成日時 */
     @JsonProperty("healthInfoRegDate")
     @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
@@ -62,25 +61,6 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
      */
     public void setSeqHealthInfoId(Integer seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
-    }
-
-    /**
-     * userIdを返す
-     *
-     * @return userId
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * userIdを設定する
-     *
-     * @param userId
-     *     ユーザID
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     /**
@@ -157,6 +137,25 @@ public class HealthInfoReferenceResponse extends BaseApiResponse {
      */
     public void setStandardWeight(BigDecimal standardWeight) {
         this.standardWeight = standardWeight;
+    }
+
+    /**
+     * healthInfoStatusを返す
+     *
+     * @return healthInfoStatus
+     */
+    public String getHealthInfoStatus() {
+        return healthInfoStatus;
+    }
+
+    /**
+     * healthInfoStatusを設定する
+     *
+     * @param healthInfoStatus
+     *     健康情報ステータス
+     */
+    public void setHealthInfoStatus(String healthInfoStatus) {
+        this.healthInfoStatus = healthInfoStatus;
     }
 
     /**

@@ -1,11 +1,13 @@
 {
   "result": "0",
-  "healthInfoId": 55,
-  "userId": "test",
-  "height": 160,
-  "weight": 50,
-  "bmi": 19.53,
-  "standardWeight": 56.32,
-  "healthInfoStatus": "10",
-  "healthInfoRegDate": "2018/07/22 15:17:31"
+  "account": {
+    "userId": "master"
+  },
+  "seqHealthInfoId": 15,
+  "height": 177.01,
+  "weight": 65.4,
+  "bmi": 20.89,
+  "standardWeight": 68.86,
+  "healthInfoStatus": "20",
+  "healthInfoRegDate": "20200415203150"
 }

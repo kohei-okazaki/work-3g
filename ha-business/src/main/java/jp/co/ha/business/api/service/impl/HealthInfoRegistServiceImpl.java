@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.response.CommonApiResponse;
 import jp.co.ha.business.api.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.service.CommonService;
 import jp.co.ha.business.api.service.HealthInfoRegistService;
@@ -81,6 +82,10 @@ public class HealthInfoRegistServiceImpl extends CommonService
         healthInfoCreateService.create(entity);
 
         BeanUtil.copy(entity, response);
+        CommonApiResponse.Account account = new CommonApiResponse.Account();
+        account.setUserId(request.getAccount().getUserId());
+        response.setAccount(account);
+
     }
 
     /**
