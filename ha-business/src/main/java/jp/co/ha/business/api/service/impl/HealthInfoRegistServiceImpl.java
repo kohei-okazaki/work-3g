@@ -126,6 +126,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         HealthInfo entity = new HealthInfo();
         BeanUtil.copy(request, entity);
+        entity.setUserId(userId);
         entity.setBmi(bmi);
         entity.setStandardWeight(standardWeight);
         entity.setHealthInfoStatus(status.getValue());

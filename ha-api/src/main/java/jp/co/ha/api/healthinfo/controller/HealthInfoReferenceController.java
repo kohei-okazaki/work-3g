@@ -16,7 +16,7 @@ import jp.co.ha.web.controller.BaseJsonController;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping(value = "/healthinforeference")
+@RequestMapping(value = "/api/healthinfo/reference")
 public class HealthInfoReferenceController extends
         BaseJsonController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 

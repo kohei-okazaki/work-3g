@@ -39,7 +39,7 @@ public abstract class CommonApiRequest extends BaseApiRequest {
     }
 
     /**
-     * APIの共通情報-account
+     * APIリクエストの共通情報-account
      *
      * @version 1.0.0
      */
