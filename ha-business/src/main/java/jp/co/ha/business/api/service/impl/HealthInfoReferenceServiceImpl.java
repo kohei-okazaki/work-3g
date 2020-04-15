@@ -69,11 +69,17 @@ public class HealthInfoReferenceServiceImpl extends CommonService
                             + ", userId:" + request.getAccount().getUserId());
         }
 
-        HealthInfo healthInfo = CollectionUtil.getFirst(healthInfoList);
-        BeanUtil.copy(healthInfo, response);
-        CommonApiResponse.Account account = new CommonApiResponse.Account();
-        account.setUserId(request.getAccount().getUserId());
-        response.setAccount(account);
+        HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
+        {
+            CommonApiResponse.Account account = new CommonApiResponse.Account();
+            account.setUserId(request.getAccount().getUserId());
+            response.setAccount(account);
+        }
+        {
+            HealthInfoReferenceResponse.HealthInfo healthInfo = new HealthInfoReferenceResponse.HealthInfo();
+            BeanUtil.copy(entity, healthInfo);
+            response.setHealthInfo(healthInfo);
+        }
 
     }
 

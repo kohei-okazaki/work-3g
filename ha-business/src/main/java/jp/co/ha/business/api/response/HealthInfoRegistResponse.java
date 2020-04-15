@@ -17,164 +17,195 @@ import jp.co.ha.common.log.annotation.Mask;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public class HealthInfoRegistResponse extends CommonApiResponse {
 
-    /** 健康情報ID */
-    @JsonProperty("seqHealthInfoId")
-    private Integer seqHealthInfoId;
-    /** 身長 */
-    @Mask
-    @JsonProperty("height")
-    private BigDecimal height;
-    /** 体重 */
-    @Mask
-    @JsonProperty("weight")
-    private BigDecimal weight;
-    /** BMI */
-    @Mask
-    @JsonProperty("bmi")
-    private BigDecimal bmi;
-    /** 標準体重 */
-    @Mask
-    @JsonProperty("standardWeight")
-    private BigDecimal standardWeight;
-    /** 健康情報ステータス */
-    @JsonProperty("healthInfoStatus")
-    private String healthInfoStatus;
-    /** 健康情報作成日時 */
-    @JsonProperty("healthInfoRegDate")
-    @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
-    private Date healthInfoRegDate;
+    /** 健康情報 */
+    @JsonProperty("healthInfo")
+    private HealthInfo healthInfo;
 
     /**
-     * seqHealthInfoIdを返す
+     * healthInfoを返す
      *
-     * @return seqHealthInfoId
+     * @return healthInfo
      */
-    public Integer getSeqHealthInfoId() {
-        return seqHealthInfoId;
+    public HealthInfo getHealthInfo() {
+        return healthInfo;
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * healthInfoを設定する
      *
-     * @param seqHealthInfoId
-     *     健康情報ID
+     * @param healthInfo
+     *     健康情報
      */
-    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
-        this.seqHealthInfoId = seqHealthInfoId;
+    public void setHealthInfo(HealthInfo healthInfo) {
+        this.healthInfo = healthInfo;
     }
 
     /**
-     * heightを返す
+     * 健康情報登録API-healthinfo
      *
-     * @return height
+     * @version 1.0.0
      */
-    public BigDecimal getHeight() {
-        return height;
-    }
+    public static class HealthInfo {
 
-    /**
-     * heightを設定する
-     *
-     * @param height
-     *     身長
-     */
-    public void setHeight(BigDecimal height) {
-        this.height = height;
-    }
+        /** 健康情報ID */
+        @JsonProperty("seqHealthInfoId")
+        private Integer seqHealthInfoId;
+        /** 身長 */
+        @Mask
+        @JsonProperty("height")
+        private BigDecimal height;
+        /** 体重 */
+        @Mask
+        @JsonProperty("weight")
+        private BigDecimal weight;
+        /** BMI */
+        @Mask
+        @JsonProperty("bmi")
+        private BigDecimal bmi;
+        /** 標準体重 */
+        @Mask
+        @JsonProperty("standardWeight")
+        private BigDecimal standardWeight;
+        /** 健康情報ステータス */
+        @JsonProperty("status")
+        private String healthInfoStatus;
+        /** 健康情報作成日時 */
+        @JsonProperty("regDate")
+        @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
+        private Date healthInfoRegDate;
 
-    /**
-     * weightを返す
-     *
-     * @return weight
-     */
-    public BigDecimal getWeight() {
-        return weight;
-    }
+        /**
+         * seqHealthInfoIdを返す
+         *
+         * @return seqHealthInfoId
+         */
+        public Integer getSeqHealthInfoId() {
+            return seqHealthInfoId;
+        }
 
-    /**
-     * weightを設定する
-     *
-     * @param weight
-     *     体重
-     */
-    public void setWeight(BigDecimal weight) {
-        this.weight = weight;
-    }
+        /**
+         * seqHealthInfoIdを設定する
+         *
+         * @param seqHealthInfoId
+         *     健康情報ID
+         */
+        public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+            this.seqHealthInfoId = seqHealthInfoId;
+        }
 
-    /**
-     * bmiを返す
-     *
-     * @return bmi
-     */
-    public BigDecimal getBmi() {
-        return bmi;
-    }
+        /**
+         * heightを返す
+         *
+         * @return height
+         */
+        public BigDecimal getHeight() {
+            return height;
+        }
 
-    /**
-     * bmiを設定する
-     *
-     * @param bmi
-     *     BMI
-     */
-    public void setBmi(BigDecimal bmi) {
-        this.bmi = bmi;
-    }
+        /**
+         * heightを設定する
+         *
+         * @param height
+         *     身長
+         */
+        public void setHeight(BigDecimal height) {
+            this.height = height;
+        }
 
-    /**
-     * standardWeightを返す
-     *
-     * @return standardWeight
-     */
-    public BigDecimal getStandardWeight() {
-        return standardWeight;
-    }
+        /**
+         * weightを返す
+         *
+         * @return weight
+         */
+        public BigDecimal getWeight() {
+            return weight;
+        }
 
-    /**
-     * standardWeightを設定する
-     *
-     * @param standardWeight
-     *     標準体重
-     */
-    public void setStandardWeight(BigDecimal standardWeight) {
-        this.standardWeight = standardWeight;
-    }
+        /**
+         * weightを設定する
+         *
+         * @param weight
+         *     体重
+         */
+        public void setWeight(BigDecimal weight) {
+            this.weight = weight;
+        }
 
-    /**
-     * healthInfoStatusを返す
-     *
-     * @return healthInfoStatus
-     */
-    public String getHealthInfoStatus() {
-        return healthInfoStatus;
-    }
+        /**
+         * bmiを返す
+         *
+         * @return bmi
+         */
+        public BigDecimal getBmi() {
+            return bmi;
+        }
 
-    /**
-     * healthInfoStatusを設定する
-     *
-     * @param healthInfoStatus
-     *     健康情報ステータス
-     */
-    public void setHealthInfoStatus(String healthInfoStatus) {
-        this.healthInfoStatus = healthInfoStatus;
-    }
+        /**
+         * bmiを設定する
+         *
+         * @param bmi
+         *     BMI
+         */
+        public void setBmi(BigDecimal bmi) {
+            this.bmi = bmi;
+        }
 
-    /**
-     * healthInfoRegDateを返す
-     *
-     * @return healthInfoRegDate
-     */
-    public Date getHealthInfoRegDate() {
-        return healthInfoRegDate;
-    }
+        /**
+         * standardWeightを返す
+         *
+         * @return standardWeight
+         */
+        public BigDecimal getStandardWeight() {
+            return standardWeight;
+        }
 
-    /**
-     * healthInfoRegDateを設定する
-     *
-     * @param healthInfoRegDate
-     *     健康情報作成日時
-     */
-    public void setHealthInfoRegDate(Date healthInfoRegDate) {
-        this.healthInfoRegDate = healthInfoRegDate;
+        /**
+         * standardWeightを設定する
+         *
+         * @param standardWeight
+         *     標準体重
+         */
+        public void setStandardWeight(BigDecimal standardWeight) {
+            this.standardWeight = standardWeight;
+        }
+
+        /**
+         * healthInfoStatusを返す
+         *
+         * @return healthInfoStatus
+         */
+        public String getHealthInfoStatus() {
+            return healthInfoStatus;
+        }
+
+        /**
+         * healthInfoStatusを設定する
+         *
+         * @param healthInfoStatus
+         *     健康情報ステータス
+         */
+        public void setHealthInfoStatus(String healthInfoStatus) {
+            this.healthInfoStatus = healthInfoStatus;
+        }
+
+        /**
+         * healthInfoRegDateを返す
+         *
+         * @return healthInfoRegDate
+         */
+        public Date getHealthInfoRegDate() {
+            return healthInfoRegDate;
+        }
+
+        /**
+         * healthInfoRegDateを設定する
+         *
+         * @param healthInfoRegDate
+         *     健康情報作成日時
+         */
+        public void setHealthInfoRegDate(Date healthInfoRegDate) {
+            this.healthInfoRegDate = healthInfoRegDate;
+        }
     }
 
 }

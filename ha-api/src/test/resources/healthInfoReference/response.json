@@ -3,11 +3,13 @@
   "account": {
     "userId": "master"
   },
-  "seqHealthInfoId": 15,
-  "height": 177.01,
-  "weight": 65.4,
-  "bmi": 20.89,
-  "standardWeight": 68.86,
-  "healthInfoStatus": "20",
-  "healthInfoRegDate": "20200415203150"
+  "healthInfo": {
+    "seqHealthInfoId": 15,
+    "height": 177.01,
+    "weight": 65.4,
+    "bmi": 20.89,
+    "standardWeight": 68.86,
+    "status": "20",
+    "regDate": "20200415203150"
+  }
 }

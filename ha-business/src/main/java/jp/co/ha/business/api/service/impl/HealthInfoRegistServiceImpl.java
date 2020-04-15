@@ -81,10 +81,17 @@ public class HealthInfoRegistServiceImpl extends CommonService
         // Entityの登録処理を行う
         healthInfoCreateService.create(entity);
 
-        BeanUtil.copy(entity, response);
-        CommonApiResponse.Account account = new CommonApiResponse.Account();
-        account.setUserId(request.getAccount().getUserId());
-        response.setAccount(account);
+        {
+            CommonApiResponse.Account account = new CommonApiResponse.Account();
+            account.setUserId(request.getAccount().getUserId());
+            response.setAccount(account);
+        }
+
+        {
+            HealthInfoRegistResponse.HealthInfo healthInfo = new HealthInfoRegistResponse.HealthInfo();
+            BeanUtil.copy(entity, healthInfo);
+            response.setHealthInfo(healthInfo);
+        }
 
     }
 
