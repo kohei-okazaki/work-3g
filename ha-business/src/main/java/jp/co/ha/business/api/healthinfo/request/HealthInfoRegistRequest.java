@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.api.healthinfo.type.TestMode.TestModeDeserializer;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;

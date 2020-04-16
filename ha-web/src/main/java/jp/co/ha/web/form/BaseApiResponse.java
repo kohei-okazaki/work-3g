@@ -1,18 +1,20 @@
 package jp.co.ha.web.form;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jp.co.ha.common.type.BaseEnum;
-import jp.co.ha.web.convert.ResultTypeSerializer;
 
 /**
  * API基底レスポンス
  *
  * @version 1.0.0
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
 public abstract class BaseApiResponse implements BaseForm {
 
     /** API結果コード */
@@ -94,6 +96,24 @@ public abstract class BaseApiResponse implements BaseForm {
          */
         public static ResultType of(String value) {
             return BaseEnum.of(ResultType.class, value);
+        }
+
+    }
+
+    /**
+     * JSONのAPIの結果コードのシリアライズクラス
+     *
+     * @version 1.0.0
+     */
+    public static class ResultTypeSerializer extends JsonSerializer<ResultType> {
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void serialize(ResultType resultType, JsonGenerator gen,
+                SerializerProvider serializers) throws IOException {
+            gen.writeString(resultType.getValue());
         }
 
     }

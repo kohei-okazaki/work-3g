@@ -7,10 +7,10 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import jp.co.ha.business.api.healthinfo.request.TestModeDeserializer;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
-import jp.co.ha.web.convert.ResultTypeSerializer;
+import jp.co.ha.business.api.healthinfo.type.TestMode.TestModeDeserializer;
 import jp.co.ha.web.form.BaseApiResponse.ResultType;
+import jp.co.ha.web.form.BaseApiResponse.ResultTypeSerializer;
 
 /**
  * JSONの設定クラス
