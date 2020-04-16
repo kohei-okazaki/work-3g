@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.request;
+package jp.co.ha.business.api.healthinfo.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.web.form.BaseUserAuthApiRequest;
 
 /**
  * 健康情報照会リクエストクラス
@@ -13,7 +14,7 @@ import jp.co.ha.common.validator.annotation.Required;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoReferenceRequest extends CommonApiRequest {
+public class HealthInfoReferenceRequest extends BaseUserAuthApiRequest {
 
     /** 健康情報ID */
     @Required(message = "healthInfoIdが未設定です")

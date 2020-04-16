@@ -1,11 +1,11 @@
-package jp.co.ha.business.api;
+package jp.co.ha.business.api.healthinfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.service.HealthInfoRegistService;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.api.BaseApi;
 import jp.co.ha.web.api.annotation.ApiExecute;

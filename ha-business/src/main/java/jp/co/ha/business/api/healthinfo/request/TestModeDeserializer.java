@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.request.deserialize;
+package jp.co.ha.business.api.healthinfo.request;
 
 import java.io.IOException;
 
@@ -7,23 +7,23 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.business.api.healthinfo.type.TestMode;
 
 /**
- * JSONのリクエスト種別のデシリアライズクラス<br>
+ * JSONのテストモード種別のデシリアライズクラス<br>
  * 文字列型のJSONをJavaのクラスに変換する
  *
  * @version 1.0.0
  */
-public class RequestTypeDeserializer extends JsonDeserializer<RequestType> {
+public class TestModeDeserializer extends JsonDeserializer<TestMode> {
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public RequestType deserialize(JsonParser parser, DeserializationContext context)
+    public TestMode deserialize(JsonParser parser, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
-        return RequestType.of(parser.getValueAsString("requestType"));
+        return TestMode.of(parser.getValueAsString("testMode"));
     }
 
 }

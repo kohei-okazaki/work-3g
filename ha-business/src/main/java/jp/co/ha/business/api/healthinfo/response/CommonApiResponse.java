@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.response;
+package jp.co.ha.business.api.healthinfo.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

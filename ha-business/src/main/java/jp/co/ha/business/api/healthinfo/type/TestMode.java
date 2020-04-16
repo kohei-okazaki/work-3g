@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.type;
+package jp.co.ha.business.api.healthinfo.type;
 
 import jp.co.ha.common.type.BaseEnum;
 

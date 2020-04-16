@@ -1,8 +1,7 @@
-package jp.co.ha.business.api.service;
+package jp.co.ha.business.api.healthinfo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jp.co.ha.business.api.request.CommonApiRequest;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
@@ -10,6 +9,7 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.web.form.BaseUserAuthApiRequest;
 
 /**
  * API共通サービス
@@ -31,17 +31,16 @@ public abstract class CommonService {
      * @throws BaseException
      *     基底例外
      */
-    protected void checkApiUse(CommonApiRequest request) throws BaseException {
+    protected void checkApiUse(BaseUserAuthApiRequest request) throws BaseException {
 
         // アカウント情報取得
-        Account account = accountSearchService.findById(request.getAccount().getUserId())
-                .orElseThrow(
-                        () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
-                                "アカウント情報が存在しません userId:"
-                                        + request.getAccount().getUserId()));
+        Account account = accountSearchService.findById(request.getUserId()).orElseThrow(
+                () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
+                        "アカウント情報が存在しません userId:" + request.getUserId()));
 
-        if (!account.getApiKey().equals(request.getAccount().getApiKey())) {
-            throw new ApiException(ApiErrorCode.API_EXEC_ERROR, "このユーザはAPIを実行できません");
+        if (!account.getApiKey().equals(request.getApiKey())) {
+            throw new ApiException(ApiErrorCode.API_EXEC_ERROR,
+                    "このユーザはAPIを実行できません");
         }
     }
 }

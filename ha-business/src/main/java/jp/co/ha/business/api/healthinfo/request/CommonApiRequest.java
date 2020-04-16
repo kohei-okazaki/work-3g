@@ -1,10 +1,7 @@
-package jp.co.ha.business.api.request;
+package jp.co.ha.business.api.healthinfo.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
-import jp.co.ha.business.api.type.RequestType;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Length;
@@ -21,22 +18,10 @@ import jp.co.ha.web.form.BaseApiRequest;
  */
 public abstract class CommonApiRequest extends BaseApiRequest {
 
-    /** リクエスト種別 */
-    @JsonDeserialize(using = RequestTypeDeserializer.class)
-    @Required(message = "requestTypeが未設定です")
-    @JsonProperty("requestType")
-    private RequestType requestType;
     /** アカウント */
     @Required
     @JsonProperty("account")
     private Account account;
-
-    /**
-     * デフォルトコンストラクタ
-     */
-    public CommonApiRequest() {
-        super();
-    }
 
     /**
      * APIリクエストの共通情報-account
@@ -44,6 +29,7 @@ public abstract class CommonApiRequest extends BaseApiRequest {
      * @version 1.0.0
      */
     public static class Account {
+
         /** ユーザID */
         @Required(message = "userIdが未設定です")
         @Pattern(regixPattern = RegexType.HALF_CHAR, message = "userIdが半角英数でありません")
@@ -97,25 +83,6 @@ public abstract class CommonApiRequest extends BaseApiRequest {
             this.apiKey = apiKey;
         }
 
-    }
-
-    /**
-     * requestTypeを返す
-     *
-     * @return requestType
-     */
-    public RequestType getRequestType() {
-        return requestType;
-    }
-
-    /**
-     * requestTypeを設定する
-     *
-     * @param requestType
-     *     リクエスト種別
-     */
-    public void setRequestType(RequestType requestType) {
-        this.requestType = requestType;
     }
 
     /**

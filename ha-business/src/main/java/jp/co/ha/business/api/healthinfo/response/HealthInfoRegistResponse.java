@@ -1,21 +1,20 @@
-package jp.co.ha.business.api.response;
+package jp.co.ha.business.api.healthinfo.response;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.web.form.BaseUserAuthApiResponse;
 
 /**
  * 健康情報登録レスポンスクラス
  *
  * @version 1.0.0
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
-public class HealthInfoRegistResponse extends CommonApiResponse {
+public class HealthInfoRegistResponse extends BaseUserAuthApiResponse {
 
     /** 健康情報 */
     @JsonProperty("healthInfo")

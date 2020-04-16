@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.service.impl;
+package jp.co.ha.business.api.healthinfo.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -6,16 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.response.CommonApiResponse;
-import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.service.CommonService;
-import jp.co.ha.business.api.service.HealthInfoRegistService;
-import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.service.CommonService;
+import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
@@ -29,6 +26,7 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.web.form.BaseUserAuthApiResponse;
 
 /**
  * 健康情報登録サービス実装クラス
@@ -58,12 +56,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
     @Override
     public void checkRequest(HealthInfoRegistRequest request) throws BaseException {
 
-        // リクエスト種別チェック
-        if (RequestType.HEALTH_INFO_REGIST != request.getRequestType()) {
-            throw new BusinessException(ApiErrorCode.REQUEST_TYPE_INVALID,
-                    "リクエスト種別が一致しません リクエスト種別:" + request.getRequestType().getName());
-        }
-
         // API利用判定
         checkApiUse(request);
     }
@@ -82,8 +74,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
         healthInfoCreateService.create(entity);
 
         {
-            CommonApiResponse.Account account = new CommonApiResponse.Account();
-            account.setUserId(request.getAccount().getUserId());
+            BaseUserAuthApiResponse.Account account = new BaseUserAuthApiResponse.Account();
+            account.setUserId(request.getUserId());
             response.setAccount(account);
         }
 
@@ -106,7 +98,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
      */
     private HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException {
 
-        String userId = request.getAccount().getUserId();
+        String userId = request.getUserId();
         BigDecimal height = request.getHeight();
         BigDecimal weight = request.getWeight();
 

@@ -7,12 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.HealthInfoRegistApi;
-import jp.co.ha.business.api.request.CommonApiRequest;
-import jp.co.ha.business.api.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.type.RequestType;
-import jp.co.ha.business.api.type.TestMode;
+import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -103,20 +101,17 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         Account account = accountSearchService.findById(userId).get();
         return modelList.stream().map(e -> {
             HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+
             BeanUtil.copy(e, request, (src, dest) -> {
                 HealthInfoCsvUploadModel srcModel = (HealthInfoCsvUploadModel) src;
                 HealthInfoRegistRequest destRequest = (HealthInfoRegistRequest) dest;
                 destRequest.setHeight(new BigDecimal(srcModel.getHeight()));
                 destRequest.setWeight(new BigDecimal(srcModel.getWeight()));
-                destRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
                 destRequest.setTestMode(TestMode.DB_REGIST);
             });
 
-            // APIの共通部分の設定
-            CommonApiRequest.Account apiAccount = new CommonApiRequest.Account();
-            apiAccount.setUserId(account.getUserId());
-            apiAccount.setApiKey(account.getApiKey());
-            request.setAccount(apiAccount);
+            request.setUserId(userId);
+            request.setApiKey(account.getApiKey());
 
             return request;
         }).collect(Collectors.toList());

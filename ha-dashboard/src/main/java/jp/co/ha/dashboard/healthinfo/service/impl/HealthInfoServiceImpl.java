@@ -10,12 +10,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import jp.co.ha.business.api.HealthInfoRegistApi;
-import jp.co.ha.business.api.request.CommonApiRequest;
-import jp.co.ha.business.api.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.type.RequestType;
-import jp.co.ha.business.api.type.TestMode;
+import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
@@ -170,23 +168,19 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     private HealthInfoRegistRequest setUpApiRequest(HealthInfoDto dto, String userId)
             throws BaseException {
 
-        HealthInfoRegistRequest apiRequest = new HealthInfoRegistRequest();
+        HealthInfoRegistRequest request = new HealthInfoRegistRequest();
         // 健康情報DTOをリクエストクラスにコピー
-        BeanUtil.copy(dto, apiRequest);
+        BeanUtil.copy(dto, request);
 
-        // リクエストタイプ設定
-        apiRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
         // アカウント情報.APIキーを設定
         Account account = accountSearchService.findById(userId).get();
-        CommonApiRequest.Account apiAccount = new CommonApiRequest.Account();
-        apiAccount.setUserId(userId);
-        apiAccount.setApiKey(account.getApiKey());
-        apiRequest.setAccount(apiAccount);
+        request.setUserId(userId);
+        request.setApiKey(account.getApiKey());
 
         // DB登録モードを設定
-        apiRequest.setTestMode(TestMode.DB_REGIST);
+        request.setTestMode(TestMode.DB_REGIST);
 
-        return apiRequest;
+        return request;
     }
 
 }

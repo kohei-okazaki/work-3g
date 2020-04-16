@@ -10,11 +10,9 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.dto.HealthInfoRegistData;
 import jp.co.ha.batch.type.BatchResult;
-import jp.co.ha.business.api.HealthInfoRegistApi;
-import jp.co.ha.business.api.request.CommonApiRequest.Account;
-import jp.co.ha.business.api.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.type.RequestType;
+import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -64,14 +62,11 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
         for (File file : FileUtil.getFileList(prop.getHealthInfoRegistBatchFilePath())) {
             HealthInfoRegistData dto = reader.read(file, HealthInfoRegistData.class);
-            Account apiAccount = new Account();
-            BeanUtil.copy(dto, apiAccount);
             List<HealthInfoRegistRequest> list = dto.getHealthInfoRequestDataList()
                     .stream()
                     .map(e -> {
                         HealthInfoRegistRequest request = new HealthInfoRegistRequest();
-                        request.setRequestType(RequestType.HEALTH_INFO_REGIST);
-                        request.setAccount(apiAccount);
+                        BeanUtil.copy(dto, request);
                         BeanUtil.copy(e, request);
                         return request;
                     }).collect(Collectors.toList());

@@ -27,8 +27,8 @@ import jp.co.ha.web.form.BaseApiResponse;
 import jp.co.ha.web.form.ErrorResponse;
 
 /**
- * JSON形式APIの基底コントローラ<br>
- * すべてのJSON形式APIコントローラはこのクラスを継承すること
+ * ユーザ認証を必要としないJSON形式のAPIの基底コントローラ<br>
+ * ユーザ認証が必要な場合は{@linkplain BaseUserAuthPostRestController}を継承すること
  *
  * @param <Rq>
  *     リクエスト
@@ -47,7 +47,7 @@ public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends B
     private BeanValidator<Rq> validator;
 
     /**
-     * POST形式のJSON通信の処理を行う
+     * POST形式のJSON通信の受付を行う
      *
      * @param request
      *     リクエスト
@@ -55,10 +55,8 @@ public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends B
      * @throws BaseException
      *     基底例外
      */
-    @PostMapping(headers = { "Content-type=application/json;charset=UTF-8" }, produces = {
-            MediaType.APPLICATION_JSON_VALUE }, consumes = {
-                    MediaType.APPLICATION_JSON_VALUE })
-    public Rs execute(@RequestBody Rq request) throws BaseException {
+    @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+    public Rs doPost(@RequestBody Rq request) throws BaseException {
 
         ValidateErrorResult result = validator.validate(request);
         if (result.hasError()) {
@@ -89,7 +87,6 @@ public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends B
      *     JSON系のエラー
      * @return エラーレスポンス
      */
-    @SuppressWarnings("unchecked")
     @ResponseStatus(code = HttpStatus.OK)
     @ExceptionHandler(JsonProcessingException.class)
     public Rs jsonExceptionHandle(JsonProcessingException e) {
@@ -110,6 +107,7 @@ public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends B
                     "JSON生成で予期せぬエラーが発生しました", e);
         }
 
+        @SuppressWarnings("unchecked")
         Rs response = (Rs) new ErrorResponse(baseException);
         LOG.warnRes(response, baseException);
 
@@ -123,10 +121,11 @@ public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends B
      *     アプリエラー
      * @return エラーレスポンス
      */
-    @SuppressWarnings("unchecked")
     @ResponseStatus(code = HttpStatus.OK)
     @ExceptionHandler(BaseException.class)
     public Rs appExceptionHandle(BaseException e) {
+
+        @SuppressWarnings("unchecked")
         Rs response = (Rs) new ErrorResponse(e);
         switch (e.getErrorCode().getLogLevel()) {
         case WARN:
