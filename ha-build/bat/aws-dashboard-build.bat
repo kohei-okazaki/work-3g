@@ -10,7 +10,7 @@ rem ------------------------------------------------------------------------
 rem 出力先
 set OUTPUT_PATH=C:\app
 rem 資材位置
-set SRC_PATH=%OUTPUT_PATH%\pleiades\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ha-dashboard
+set SRC_PATH=%OUTPUT_PATH%\pleiades\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\ha-dashboard
 
 rem ディレクトリ 削除
 echo ------------------------------------------------------------------------
