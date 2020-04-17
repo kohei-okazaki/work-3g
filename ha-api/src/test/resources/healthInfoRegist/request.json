@@ -1,10 +1,5 @@
 {
-  "requestType": "001",
-  "account": {
-    "userId": "master",
-    "apiKey": "1bc073967f4c24f000d0fc34006cf8de83752a9d8fde68278b18c033bbb68d2c"
-  },
-  "height": 160.00,
-  "weight": 50.00,
+  "height": 176.26,
+  "weight": 65.41,
   "testMode": "1"
 }
