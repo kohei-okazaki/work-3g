@@ -3,85 +3,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>健康情報照会API JSON生成ツール</title>
-<link rel="stylesheet" type="text/css" href="../../css/common.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-grid.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-reboot.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 </head>
 <body>
   <h1>健康情報照会API JSON生成ツール</h1>
-  <div class="contentLayout">
-    <table>
+  <div class="container">
+    <table class="table table-striped table-hover">
       <tr>
-        <th>
-          <label>リクエストタイプ</label>
-        </th>
         <td>
-          <input type="text" id="requestType" size="10" value="002" />
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <label>ユーザID</label>
-        </th>
-        <td>
-          <input type="text" id="userId" size="10" placeholder="ユーザID" />
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <label>健康情報ID</label>
-        </th>
-        <td>
-          <input type="text" id="healthInfoId" size="10" placeholder="健康情報ID" />
-        </td>
-      </tr>
-      <tr>
-        <th>
-          <label>APIキー</label>
-        </th>
-        <td>
-          <input type="text" id="apiKey" size="80" placeholder="APIキー" />
+          <label>GET通信なのでJSONは送信しない</label>
         </td>
       </tr>
     </table>
-
-    <div class="button">
-      <input id="create" type="button" value="作 成" />
-      <input id="inputClear" type="button" value="入力値 クリア" />
-      <input id="responseClear" type="button" value="結果 クリア" />
-    </div>
-
-    <textarea id="response" cols=80 rows=5></textarea>
-
   </div>
-
-  <script type="text/javascript" src="../../js/jquery.min.js"></script>
-  <script type="text/javascript">
-
-    $("input#create").on("click", function() {
-
-      var json = {
-        requestType : $("#requestType").val(),
-        userId : $("#userId").val(),
-        healthInfoId : parseInt($("#healthInfoId").val()),
-        apiKey : $("#apiKey").val()
-      };
-
-      // Json形式に変換
-      var result = JSON.stringify(json);
-      //console.log(result);
-      //alert(result);
-      $("#response").val(result);
-    });
-
-    $("input#inputClear").on("click", function() {
-      $("#userId").val("");
-      $("#healthInfoId").val("");
-      $("#apiKey").val("");
-    });
-
-    $("input#responseClear").on("click", function() {
-      $("#response").val("");
-    });
-
-</script>
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
