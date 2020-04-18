@@ -6,7 +6,7 @@ import jp.co.ha.common.validator.annotation.Required;
 
 /**
  * ユーザ認証が必要な基底リクエストクラス
- * 
+ *
  * @version 1.0.0
  */
 public abstract class BaseUserAuthApiRequest extends BaseApiRequest {
@@ -33,6 +33,7 @@ public abstract class BaseUserAuthApiRequest extends BaseApiRequest {
      * userIdを設定する
      *
      * @param userId
+     *     ユーザID
      */
     public void setUserId(String userId) {
         this.userId = userId;
@@ -51,6 +52,7 @@ public abstract class BaseUserAuthApiRequest extends BaseApiRequest {
      * apiKeyを設定する
      *
      * @param apiKey
+     *     APIキー
      */
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;

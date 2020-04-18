@@ -12,17 +12,17 @@ import jp.co.ha.business.api.healthinfo.HealthInfoReferenceApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.controller.BaseUserAuthGetRestController;
+import jp.co.ha.web.controller.BaseRestController;
 
 /**
- * 健康情報照会コントローラ
+ * 健康情報照会APIコントローラ
  *
  * @version 1.0.0
  */
 @RestController
 @RequestMapping(value = "/api/{userId}/healthinfo/{seqHealthInfoId}")
 public class HealthInfoReferenceController extends
-        BaseUserAuthGetRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+        BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
     /** 健康情報照会API */
     @Autowired
@@ -47,8 +47,8 @@ public class HealthInfoReferenceController extends
             @RequestHeader(value = "Api-Key", required = false) String apiKey)
             throws BaseException {
 
-        HealthInfoReferenceRequest request = getApiRequest();
-        HealthInfoReferenceResponse response = getApiResponse();
+        HealthInfoReferenceRequest request = new HealthInfoReferenceRequest();
+        HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 
         request.setUserId(userId);
         request.setApiKey(apiKey);
@@ -59,22 +59,6 @@ public class HealthInfoReferenceController extends
         this.accept(request, response);
 
         return response;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected HealthInfoReferenceRequest getApiRequest() {
-        return new HealthInfoReferenceRequest();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public HealthInfoReferenceResponse getApiResponse() {
-        return new HealthInfoReferenceResponse();
     }
 
     /**

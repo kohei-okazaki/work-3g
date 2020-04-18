@@ -1,6 +1,7 @@
 package jp.co.ha.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
@@ -17,10 +18,14 @@ import jp.co.ha.web.form.BaseUserAuthApiResponse;
 /**
  * ユーザ認証の必要なRest APIのGETメソッド受付の基底コントローラ<br>
  * ユーザ認証が必要な場合は本クラスを継承すること<br>
- * TODO
- * {@link BaseUserAuthPostRestController#doPost(String, String, BaseUserAuthApiRequest)}<br>
- * のように親クラスでリクエスト受付を行いたいが、/api/{userId}/${function}/***のような自由なURI設計ができないため、<br>
- * このクラスの継承クラスにGetMappingを付けている
+ * TODO 各REST APIのコントローラが継承するこの基底コントローラで処理の大きな流れを実装し、<br>
+ * 各個別処理を継承先のコントローラで実装したいが<br>
+ * <ul>
+ * <li>/api/{userId}/{function}/***</li>
+ * <li>/api/hoge/***</li>
+ * </ul>
+ * のような自由なURI設計ができないため、<br>
+ * このクラスの継承クラスに{@linkplain RequestMapping}をつけて継承先でリクエストを受け付けるように実装している<br>
  *
  * @param <Rq>
  *     リクエスト
@@ -28,7 +33,7 @@ import jp.co.ha.web.form.BaseUserAuthApiResponse;
  *     レスポンス
  * @version 1.0.0
  */
-public abstract class BaseUserAuthGetRestController<Rq extends BaseUserAuthApiRequest, Rs extends BaseUserAuthApiResponse>
+public abstract class BaseRestController<Rq extends BaseUserAuthApiRequest, Rs extends BaseUserAuthApiResponse>
         implements ThrowableBiConsumer<Rq, Rs>, BaseController {
 
     /** LOG */
@@ -54,19 +59,5 @@ public abstract class BaseUserAuthGetRestController<Rq extends BaseUserAuthApiRe
                     error.getMessage() + " " + error.getName() + "=" + error.getValue());
         }
     }
-
-    /**
-     * APIリクエストを返す
-     *
-     * @return APIリクエスト
-     */
-    protected abstract Rq getApiRequest();
-
-    /**
-     * APIレスポンスを返す
-     *
-     * @return APIレスポンス
-     */
-    protected abstract Rs getApiResponse();
 
 }

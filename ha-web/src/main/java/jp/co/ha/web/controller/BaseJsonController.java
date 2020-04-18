@@ -20,7 +20,7 @@ import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * ユーザ認証を必要としないJSON形式のAPIの基底コントローラ<br>
- * ユーザ認証が必要な場合は{@linkplain BaseUserAuthPostRestController}を継承すること
+ * ユーザ認証が必要な場合は{@linkplain BaseRestController}を継承すること
  *
  * @param <Rq>
  *     リクエスト
