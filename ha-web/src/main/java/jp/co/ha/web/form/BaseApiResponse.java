@@ -15,12 +15,15 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
-public abstract class BaseApiResponse implements BaseForm {
+public class BaseApiResponse implements BaseForm {
 
     /** API結果コード */
     @JsonSerialize(using = ResultTypeSerializer.class)
     @JsonProperty(value = "result")
     private ResultType resultType = ResultType.SUCCESS;
+    /** エラー情報 */
+    @JsonProperty("error")
+    private ErrorInfo errorInfo;
 
     /**
      * resultTypeを返す
@@ -39,6 +42,25 @@ public abstract class BaseApiResponse implements BaseForm {
      */
     public void setResultType(ResultType resultType) {
         this.resultType = resultType;
+    }
+
+    /**
+     * errorInfoを返す
+     *
+     * @return errorInfo
+     */
+    public ErrorInfo getErrorInfo() {
+        return errorInfo;
+    }
+
+    /**
+     * errorInfoを設定する
+     *
+     * @param errorInfo
+     *     エラー情報
+     */
+    public void setErrorInfo(ErrorInfo errorInfo) {
+        this.errorInfo = errorInfo;
     }
 
     /**
@@ -114,6 +136,57 @@ public abstract class BaseApiResponse implements BaseForm {
         public void serialize(ResultType resultType, JsonGenerator gen,
                 SerializerProvider serializers) throws IOException {
             gen.writeString(resultType.getValue());
+        }
+
+    }
+
+    /**
+     * APIレスポンスの共通情報-error
+     *
+     * @version 1.0.0
+     */
+    public static class ErrorInfo {
+        /** 外部エラーコード */
+        @JsonProperty(value = "code")
+        private String outerErrorCode;
+        /** 詳細 */
+        @JsonProperty(value = "detail")
+        private String detail;
+
+        /**
+         * outerErrorCodeを返す
+         *
+         * @return outerErrorCode
+         */
+        public String getOuterErrorCode() {
+            return outerErrorCode;
+        }
+
+        /**
+         * outerErrorCodeを設定する
+         *
+         * @param outerErrorCode
+         */
+        public void setOuterErrorCode(String outerErrorCode) {
+            this.outerErrorCode = outerErrorCode;
+        }
+
+        /**
+         * detailを返す
+         *
+         * @return detail
+         */
+        public String getDetail() {
+            return detail;
+        }
+
+        /**
+         * detailを設定する
+         *
+         * @param detail
+         */
+        public void setDetail(String detail) {
+            this.detail = detail;
         }
 
     }

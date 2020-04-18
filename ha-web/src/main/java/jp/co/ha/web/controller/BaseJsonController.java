@@ -1,17 +1,10 @@
 package jp.co.ha.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
@@ -24,7 +17,6 @@ import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseApiResponse;
-import jp.co.ha.web.form.ErrorResponse;
 
 /**
  * ユーザ認証を必要としないJSON形式のAPIの基底コントローラ<br>
@@ -37,6 +29,7 @@ import jp.co.ha.web.form.ErrorResponse;
  * @version 1.0.0
  */
 @RestController
+@Deprecated
 public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends BaseApiResponse>
         implements ThrowableBiConsumer<Rq, Rs>, BaseController {
 
@@ -79,65 +72,5 @@ public abstract class BaseJsonController<Rq extends BaseApiRequest, Rs extends B
      * @return APIレスポンス
      */
     protected abstract Rs getApiResponse();
-
-    /**
-     * JSONで例外が起きた場合のエラーハンドリング
-     *
-     * @param e
-     *     JSON系のエラー
-     * @return エラーレスポンス
-     */
-    @ResponseStatus(code = HttpStatus.OK)
-    @ExceptionHandler(JsonProcessingException.class)
-    public Rs jsonExceptionHandle(JsonProcessingException e) {
-
-        BaseException baseException = null;
-        if (e instanceof InvalidFormatException) {
-            InvalidFormatException ife = (InvalidFormatException) e;
-            baseException = new ApiException(CommonErrorCode.JSON_FORMAT_ERROR,
-                    ife.getValue() + "はリクエスト形式エラーです", e);
-        } else if (e instanceof JsonParseException) {
-            baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
-                    "JSON形式ではありません", e);
-        } else if (e instanceof JsonProcessingException) {
-            baseException = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
-                    "JSON生成処理が失敗しました", e);
-        } else {
-            baseException = new ApiException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "JSON生成で予期せぬエラーが発生しました", e);
-        }
-
-        @SuppressWarnings("unchecked")
-        Rs response = (Rs) new ErrorResponse(baseException);
-        LOG.warnRes(response, baseException);
-
-        return response;
-    }
-
-    /**
-     * アプリケーション例外のエラーハンドリング
-     *
-     * @param e
-     *     アプリエラー
-     * @return エラーレスポンス
-     */
-    @ResponseStatus(code = HttpStatus.OK)
-    @ExceptionHandler(BaseException.class)
-    public Rs appExceptionHandle(BaseException e) {
-
-        @SuppressWarnings("unchecked")
-        Rs response = (Rs) new ErrorResponse(e);
-        switch (e.getErrorCode().getLogLevel()) {
-        case WARN:
-            LOG.warnRes(response, e);
-            break;
-        case ERROR:
-            LOG.errorRes(response, e);
-            break;
-        default:
-            break;
-        }
-        return response;
-    }
 
 }
