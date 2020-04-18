@@ -61,11 +61,17 @@ public class HealthInfoReferenceController extends
         return response;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected HealthInfoReferenceRequest getApiRequest() {
         return new HealthInfoReferenceRequest();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public HealthInfoReferenceResponse getApiResponse() {
         return new HealthInfoReferenceResponse();
