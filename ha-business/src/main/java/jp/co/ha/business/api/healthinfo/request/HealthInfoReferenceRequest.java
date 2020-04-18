@@ -17,8 +17,8 @@ import jp.co.ha.web.form.BaseUserAuthApiRequest;
 public class HealthInfoReferenceRequest extends BaseUserAuthApiRequest {
 
     /** 健康情報ID */
-    @Required(message = "healthInfoIdが未設定です")
-    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "healthInfoIdが半角数字でありません")
+    @Required(message = "seqHealthInfoIdが未設定です")
+    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "seqHealthInfoIdが半角数字でありません")
     @JsonProperty("seqHealthInfoId")
     private Integer seqHealthInfoId;
 
