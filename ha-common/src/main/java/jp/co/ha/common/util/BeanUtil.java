@@ -134,42 +134,6 @@ public class BeanUtil {
     }
 
     /**
-     * コピー時にコピーを行わないfieldかどうかを判定する<br>
-     * 以下の場合、そのfieldではコピーを行わない<br>
-     * <ul>
-     * <li><code>fieldName</code>が"serialVersionUID"の場合</li>
-     * <li><code>fieldName</code>がignoreListに含まれてる場合</li>
-     * </ul>
-     *
-     * @param ignoreList
-     *     無視リスト
-     * @param fieldName
-     *     フィールド名
-     * @return 判定結果
-     */
-    private static boolean ignore(List<String> ignoreList, String fieldName) {
-        return "serialVersionUID".equals(fieldName) || ignoreList.contains(fieldName);
-    }
-
-    /**
-     * コピー対象かどうか判定する
-     *
-     * @param src
-     *     Field コピー元のフィールド
-     * @param dest
-     *     Field コピー先のフィールド
-     * @return 判定結果
-     */
-    private static boolean isCopyTarget(Field src, Field dest) {
-        String srcFieldName = src.getName();
-        Class<?> sourcefieldType = src.getType();
-        String destFieldName = dest.getName();
-        Class<?> targetFieldType = dest.getType();
-        return destFieldName.equals(srcFieldName)
-                && targetFieldType.equals(sourcefieldType);
-    }
-
-    /**
      * targetがnullかどうか判定する<br>
      * 判定結果:nullの場合true, それ以外の場合false<br>
      *
@@ -282,6 +246,42 @@ public class BeanUtil {
             LOG.warn("メソッドがみつかりません", e);
         }
         return accessor;
+    }
+
+    /**
+     * コピー時にコピーを行わないfieldかどうかを判定する<br>
+     * 以下の場合、そのfieldではコピーを行わない<br>
+     * <ul>
+     * <li><code>fieldName</code>が"serialVersionUID"の場合</li>
+     * <li><code>fieldName</code>がignoreListに含まれてる場合</li>
+     * </ul>
+     *
+     * @param ignoreList
+     *     無視リスト
+     * @param fieldName
+     *     フィールド名
+     * @return 判定結果
+     */
+    private static boolean ignore(List<String> ignoreList, String fieldName) {
+        return "serialVersionUID".equals(fieldName) || ignoreList.contains(fieldName);
+    }
+
+    /**
+     * コピー対象かどうか判定する
+     *
+     * @param src
+     *     Field コピー元のフィールド
+     * @param dest
+     *     Field コピー先のフィールド
+     * @return 判定結果
+     */
+    private static boolean isCopyTarget(Field src, Field dest) {
+        String srcFieldName = src.getName();
+        Class<?> sourcefieldType = src.getType();
+        String destFieldName = dest.getName();
+        Class<?> targetFieldType = dest.getType();
+        return destFieldName.equals(srcFieldName)
+                && targetFieldType.equals(sourcefieldType);
     }
 
     /**

@@ -32,8 +32,7 @@ public class Sha512HashEncoder implements HashEncoder {
             return encodeDefault(password, salt, HASH_ALGORITHM);
         } catch (NoSuchAlgorithmException e) {
             throw new SystemException(CommonErrorCode.ALGORITH_ERROR,
-                    HASH_ALGORITHM.getValue() + "でのハッシュ化に失敗しました",
-                    e);
+                    HASH_ALGORITHM.getValue() + "でのハッシュ化に失敗しました", e);
         } catch (UnsupportedEncodingException e) {
             throw new SystemException(CommonErrorCode.ALGORITH_ERROR,
                     "指定した文字コードが不正です。文字コード：" + Charset.UTF_8.getValue(), e);

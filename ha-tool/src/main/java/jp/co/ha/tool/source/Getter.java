@@ -40,14 +40,14 @@ public class Getter extends Method {
     @Override
     public String toString() {
 
-        final String TAB = "	";
+        final String SPACE = "    ";
 
         StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-        body.add(TAB + accessType.getValue() + " "
+        body.add(SPACE + accessType.getValue() + " "
                 + field.getClassType().getSimpleName() + " "
                 + getMethodName() + "() {");
-        body.add(TAB + TAB + "return " + field.getName() + ";");
-        body.add(TAB + "}");
+        body.add(SPACE + SPACE + "return " + field.getName() + ";");
+        body.add(SPACE + "}");
 
         return body.toString();
     }

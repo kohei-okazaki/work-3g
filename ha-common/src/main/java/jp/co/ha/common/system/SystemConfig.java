@@ -12,7 +12,7 @@ public class SystemConfig {
 
     /** ページング数 */
     private String paging;
-    /** 健康情報APIの基底URL */
+    /** APIの基底URL */
     private String baseApiUrl;
 
     /**
@@ -47,7 +47,7 @@ public class SystemConfig {
      * baseApiUrlを設定する
      *
      * @param baseApiUrl
-     *     健康情報APIの基底URL
+     *     APIの基底URL
      */
     public void setBaseApiUrl(String baseApiUrl) {
         this.baseApiUrl = baseApiUrl;

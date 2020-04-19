@@ -26,6 +26,9 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
+/**
+ * @version 1.0.0
+ */
 public class FileUtil {
 
     /** LOG */
@@ -204,20 +207,34 @@ public class FileUtil {
      * @return ファイル
      */
     public static File convertPathFile(String srcPath, FileSeparator sep) {
-        if (FileSeparator.WINDOWS.is(sep)) {
-            if (srcPath.contains(FileSeparator.WINDOWS.getValue())) {
-                return getFile(srcPath);
-            } else {
-                return getFile(srcPath.replaceAll(FileSeparator.LINUX.getValue(),
-                        FileSeparator.WINDOWS.getValue()));
-            }
+        if (FileSeparator.WINDOWS == sep) {
+            return convertPathFile(srcPath, FileSeparator.LINUX, FileSeparator.WINDOWS);
+        } else if (FileSeparator.LINUX == sep) {
+            return convertPathFile(srcPath, FileSeparator.WINDOWS, FileSeparator.LINUX);
         } else {
-            if (srcPath.contains(FileSeparator.LINUX.getValue())) {
-                return getFile(srcPath);
-            } else {
-                return getFile(srcPath.replaceAll(FileSeparator.WINDOWS.getValue(),
-                        FileSeparator.LINUX.getValue()));
-            }
+            // WindowsでもLinuxでもない場合、そのまま返す
+            return getFile(srcPath);
+        }
+    }
+
+    /**
+     * 指定された元ファイルパス<code>srcPath</code>を<br>
+     * 指定された<code>from</code>のパスから指定された<code>to</code>のパスに変換する
+     *
+     * @param srcPath
+     *     元ファイルパス
+     * @param from
+     *     ファイルセパレータ
+     * @param to
+     *     ファイルセパレータ
+     * @return パス変換後のファイルオブジェクト
+     */
+    private static File convertPathFile(String srcPath, FileSeparator from,
+            FileSeparator to) {
+        if (srcPath.contains(to.getValue())) {
+            return getFile(srcPath);
+        } else {
+            return getFile(srcPath.replaceAll(from.getValue(), to.getValue()));
         }
     }
 
@@ -362,17 +379,6 @@ public class FileUtil {
 
         /** セパレータ */
         private String value;
-
-        /**
-         * 指定したファイルセパレータが自身と一致するかどうか返す<br>
-         *
-         * @param separator
-         *     セパレータ
-         * @return 判定結果
-         */
-        public boolean is(FileSeparator separator) {
-            return this == separator;
-        }
 
         /**
          * {@inheritDoc}
