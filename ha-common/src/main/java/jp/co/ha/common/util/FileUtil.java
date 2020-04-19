@@ -26,9 +26,6 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
-/**
- * @version 1.0.0
- */
 public class FileUtil {
 
     /** LOG */

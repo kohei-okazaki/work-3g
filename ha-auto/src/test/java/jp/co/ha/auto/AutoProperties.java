@@ -38,6 +38,7 @@ public class AutoProperties {
      * browserを設定する
      *
      * @param browser
+     *     ブラウザ種別
      */
     public void setBrowser(String browser) {
         this.browser = browser;
@@ -56,6 +57,7 @@ public class AutoProperties {
      * ieDriverPathを設定する
      *
      * @param ieDriverPath
+     *     IE driverのパス
      */
     public void setIeDriverPath(String ieDriverPath) {
         this.ieDriverPath = ieDriverPath;
@@ -74,6 +76,7 @@ public class AutoProperties {
      * chromeDriverPathを設定する
      *
      * @param chromeDriverPath
+     *     Chrome driverのパス
      */
     public void setChromeDriverPath(String chromeDriverPath) {
         this.chromeDriverPath = chromeDriverPath;
@@ -92,6 +95,7 @@ public class AutoProperties {
      * fireFoxDriverPathを設定する
      *
      * @param fireFoxDriverPath
+     *     Firefox driverのパス
      */
     public void setFireFoxDriverPath(String fireFoxDriverPath) {
         this.fireFoxDriverPath = fireFoxDriverPath;
@@ -110,6 +114,7 @@ public class AutoProperties {
      * baseUrlを設定する
      *
      * @param baseUrl
+     *     ブラウザの基底パス
      */
     public void setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
