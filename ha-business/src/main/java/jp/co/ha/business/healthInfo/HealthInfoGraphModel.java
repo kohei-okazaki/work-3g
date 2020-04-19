@@ -89,6 +89,7 @@ public class HealthInfoGraphModel {
      * 体重を追加する
      *
      * @param weight
+     *     体重
      */
     public void addWeight(BigDecimal weight) {
         this.weightList.add(weight);
@@ -98,6 +99,7 @@ public class HealthInfoGraphModel {
      * BMIを追加する
      *
      * @param bmi
+     *     BMI
      */
     public void addBmi(BigDecimal bmi) {
         this.bmiList.add(bmi);
@@ -107,6 +109,7 @@ public class HealthInfoGraphModel {
      * 標準体重を追加する
      *
      * @param standardWeight
+     *     標準体重
      */
     public void addStandardWeight(BigDecimal standardWeight) {
         this.standardWeightList.add(standardWeight);

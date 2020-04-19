@@ -214,6 +214,7 @@ public class HealthInfoRefDetailDto {
      * overweightMessageを設定する
      *
      * @param overweightMessage
+     *     肥満度メッセージ
      */
     public void setOverweightMessage(String overweightMessage) {
         this.overweightMessage = overweightMessage;

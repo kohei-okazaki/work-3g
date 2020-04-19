@@ -12,15 +12,15 @@ import jp.co.ha.common.type.Charset;
 public class ExcelConfig {
 
     /** ファイル名 */
-    private final String fileName;
+    private final String FILE_NAME;
     /** 文字コード */
-    private final Charset charset;
+    private final Charset CHARSET;
     /** ヘッダ有無 */
-    private final boolean hasHeader;
+    private final boolean HAS_HEADER;
     /** フッタ有無 */
-    private final boolean hasFooter;
+    private final boolean HAS_FOOTER;
     /** マスク利用有無 */
-    private final boolean useMask;
+    private final boolean USE_MASK;
 
     /**
      * ExcelConfigのビルダー
@@ -101,6 +101,9 @@ public class ExcelConfig {
             return this;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public ExcelConfig build() {
             return new ExcelConfig(this);
@@ -116,11 +119,11 @@ public class ExcelConfig {
      *     ExcelConfigのビルダー
      */
     private ExcelConfig(ExcelConfigBuilder builder) {
-        this.fileName = builder.fileName;
-        this.charset = builder.charset;
-        this.hasHeader = builder.hasHeader;
-        this.hasFooter = builder.hasFooter;
-        this.useMask = builder.useMask;
+        this.FILE_NAME = builder.fileName;
+        this.CHARSET = builder.charset;
+        this.HAS_HEADER = builder.hasHeader;
+        this.HAS_FOOTER = builder.hasFooter;
+        this.USE_MASK = builder.useMask;
     }
 
     /**
@@ -129,7 +132,7 @@ public class ExcelConfig {
      * @return fileName
      */
     public String getFileName() {
-        return fileName;
+        return FILE_NAME;
     }
 
     /**
@@ -138,7 +141,7 @@ public class ExcelConfig {
      * @return charset Charset
      */
     public Charset getCharsetType() {
-        return charset;
+        return CHARSET;
     }
 
     /**
@@ -147,7 +150,7 @@ public class ExcelConfig {
      * @return hasHeader
      */
     public boolean hasHeader() {
-        return hasHeader;
+        return HAS_HEADER;
     }
 
     /**
@@ -156,7 +159,7 @@ public class ExcelConfig {
      * @return hasFooter
      */
     public boolean hasFooter() {
-        return hasFooter;
+        return HAS_FOOTER;
     }
 
     /**
@@ -165,7 +168,7 @@ public class ExcelConfig {
      * @return useMask
      */
     public boolean useMask() {
-        return useMask;
+        return USE_MASK;
     }
 
 }

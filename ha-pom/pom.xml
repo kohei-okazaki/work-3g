@@ -28,7 +28,7 @@
     <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
     <org.thymeleaf-layout-version>2.4.1</org.thymeleaf-layout-version>
     <org.java-mail-version>1.6.2</org.java-mail-version>
-    <org.groovy-version>3.0.2</org.groovy-version>
+    <org.groovy-version>3.0.3</org.groovy-version>
     <org.dbcp2-version>2.7.0</org.dbcp2-version>
     <org.selenium-version>3.141.59</org.selenium-version>
     <org.junit-version>5.6.1</org.junit-version>
@@ -280,9 +280,10 @@
     </dependency>
     <!-- Mail -->
     <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>javax.mail-api</artifactId>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>javax.mail</artifactId>
       <version>${org.java-mail-version}</version>
+      <scope>provided</scope>
     </dependency>
     <!-- Test -->
     <dependency>
