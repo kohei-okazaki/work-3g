@@ -16,7 +16,7 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.web.form.BaseApiResponse.ErrorInfo;
 import jp.co.ha.web.form.BaseApiResponse.ResultType;
-import jp.co.ha.web.form.BaseUserAuthApiResponse;
+import jp.co.ha.web.form.BaseRestApiResponse;
 
 /***
  * REST APIの例外ハンドラークラス<br>
@@ -41,7 +41,7 @@ public class RestApiExceptionHandler {
      */
     @ResponseStatus(code = HttpStatus.OK)
     @ExceptionHandler(Exception.class)
-    public BaseUserAuthApiResponse handleException(Exception e) {
+    public BaseRestApiResponse handleException(Exception e) {
 
         BaseException baseException = null;
         if (e instanceof InvalidFormatException) {
@@ -63,7 +63,7 @@ public class RestApiExceptionHandler {
         }
 
         // 例外からレスポンスを作成
-        BaseUserAuthApiResponse response = new BaseUserAuthApiResponse();
+        BaseRestApiResponse response = new BaseRestApiResponse();
         response.setResultType(ResultType.FAILURE);
         ErrorInfo error = new ErrorInfo();
         error.setOuterErrorCode(baseException.getErrorCode().getOuterErrorCode());

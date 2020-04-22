@@ -9,7 +9,7 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.web.form.BaseUserAuthApiRequest;
+import jp.co.ha.web.form.BaseRestApiRequest;
 
 /**
  * API共通サービス
@@ -31,7 +31,7 @@ public abstract class CommonService {
      * @throws BaseException
      *     基底例外
      */
-    protected void checkApiUse(BaseUserAuthApiRequest request) throws BaseException {
+    protected void checkApiUse(BaseRestApiRequest request) throws BaseException {
 
         // アカウント情報取得
         Account account = accountSearchService.findById(request.getUserId()).orElseThrow(

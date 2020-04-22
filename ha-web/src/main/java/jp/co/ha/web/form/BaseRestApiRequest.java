@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ha.common.validator.annotation.Required;
 
 /**
- * ユーザ認証が必要な基底リクエストクラス
+ * RestAPIの基底リクエストクラス
  *
  * @version 1.0.0
  */
-public abstract class BaseUserAuthApiRequest extends BaseApiRequest {
+public abstract class BaseRestApiRequest extends BaseApiRequest {
 
     /** ユーザID */
     @JsonIgnore

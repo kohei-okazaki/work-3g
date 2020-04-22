@@ -2,7 +2,7 @@ package jp.co.ha.business.api.healthinfo.service;
 
 import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
-import jp.co.ha.web.service.BaseUserAuthApiService;
+import jp.co.ha.web.service.BaseRestApiService;
 
 /**
  * 健康情報照会サービスインターフェース
@@ -10,6 +10,6 @@ import jp.co.ha.web.service.BaseUserAuthApiService;
  * @version 1.0.0
  */
 public interface HealthInfoReferenceService extends
-        BaseUserAuthApiService<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+        BaseRestApiService<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
 }

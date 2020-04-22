@@ -15,7 +15,7 @@ import jp.co.ha.business.dto.HealthInfoRefDetailDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWebController;
@@ -29,9 +29,9 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("healthinforeference")
 public class HeathInfoRefDetailController implements BaseWebController {
 
-    /** セッション管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionService;
+    private SessionComponent sessionComponent;
     /** 健康情報詳細サービス */
     @Autowired
     private HealthInfoRefDetailService healthInfoRefDetailService;
@@ -59,7 +59,7 @@ public class HeathInfoRefDetailController implements BaseWebController {
                 .orElseThrow(() -> new SystemException(CommonErrorCode.DB_NO_DATA,
                         "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
         // ユーザID
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         HealthInfoRefDetailDto dto = new HealthInfoRefDetailDto();

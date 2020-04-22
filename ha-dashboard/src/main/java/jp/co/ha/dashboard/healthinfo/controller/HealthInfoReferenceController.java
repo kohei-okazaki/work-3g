@@ -35,7 +35,7 @@ import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.system.SystemConfig;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
@@ -68,9 +68,9 @@ public class HealthInfoReferenceController implements BaseWebController {
     @Autowired
     @ReferenceDownloadCsv
     private CsvDownloadService<ReferenceCsvDownloadModel> csvDownloadService;
-    /** セッション管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionService;
+    private SessionComponent sessionComponent;
     /** 健康情報ファイル設定検索サービス */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
@@ -142,7 +142,7 @@ public class HealthInfoReferenceController implements BaseWebController {
             return getView(DashboardView.HEALTH_INFO_REFFERNCE);
         }
 
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
@@ -182,7 +182,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         model.addAttribute("systemConfig", systemConfig);
 
         // sessionに検索条件を設定
-        sessionService.setValue(request.getSession(), "healthInfoReferenceDto", dto);
+        sessionComponent.setValue(request.getSession(), "healthInfoReferenceDto", dto);
 
         return getView(DashboardView.HEALTH_INFO_REFFERNCE);
     }
@@ -199,11 +199,11 @@ public class HealthInfoReferenceController implements BaseWebController {
     @GetMapping(value = "/exceldownload")
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         // sessionにある前画面の検索条件で再度検索する
-        HealthInfoReferenceDto referDto = sessionService
+        HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
                 .orElseThrow(() -> new SystemException(
@@ -231,10 +231,10 @@ public class HealthInfoReferenceController implements BaseWebController {
     public void csvDownload(HttpServletRequest request, HttpServletResponse response)
             throws BaseException {
 
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
         // sessionにある前画面の検索条件で再度検索する
-        HealthInfoReferenceDto referDto = sessionService
+        HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
                 .orElseThrow(() -> new SystemException(

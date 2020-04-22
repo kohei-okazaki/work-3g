@@ -16,7 +16,7 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.web.form.BaseUserAuthApiResponse;
+import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
  * 健康情報照会サービス実装クラス
@@ -63,7 +63,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService
 
         HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
         {
-            BaseUserAuthApiResponse.Account account = new BaseUserAuthApiResponse.Account();
+            BaseRestApiResponse.Account account = new BaseRestApiResponse.Account();
             account.setUserId(request.getUserId());
             response.setAccount(account);
         }

@@ -3,11 +3,11 @@ package jp.co.ha.web.form;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ユーザ認証の必要なRestAPIの基底レスポンス
+ * RestAPIの基底レスポンス
  *
  * @version 1.0.0
  */
-public class BaseUserAuthApiResponse extends BaseApiResponse {
+public class BaseRestApiResponse extends BaseApiResponse {
 
     /** アカウント情報 */
     @JsonProperty("account")

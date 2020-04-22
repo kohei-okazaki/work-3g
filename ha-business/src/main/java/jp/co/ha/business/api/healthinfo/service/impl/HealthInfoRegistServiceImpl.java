@@ -26,7 +26,7 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.web.form.BaseUserAuthApiResponse;
+import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
  * 健康情報登録サービス実装クラス
@@ -74,7 +74,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         healthInfoCreateService.create(entity);
 
         {
-            BaseUserAuthApiResponse.Account account = new BaseUserAuthApiResponse.Account();
+            BaseRestApiResponse.Account account = new BaseRestApiResponse.Account();
             account.setUserId(request.getUserId());
             response.setAccount(account);
         }

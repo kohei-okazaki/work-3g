@@ -12,8 +12,8 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
-import jp.co.ha.web.form.BaseUserAuthApiRequest;
-import jp.co.ha.web.form.BaseUserAuthApiResponse;
+import jp.co.ha.web.form.BaseRestApiRequest;
+import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
  * ユーザ認証の必要なRest APIのGETメソッド受付の基底コントローラ<br>
@@ -33,7 +33,7 @@ import jp.co.ha.web.form.BaseUserAuthApiResponse;
  *     レスポンス
  * @version 1.0.0
  */
-public abstract class BaseRestController<Rq extends BaseUserAuthApiRequest, Rs extends BaseUserAuthApiResponse>
+public abstract class BaseRestController<Rq extends BaseRestApiRequest, Rs extends BaseRestApiResponse>
         implements ThrowableBiConsumer<Rq, Rs>, BaseController {
 
     /** LOG */

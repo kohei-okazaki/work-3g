@@ -7,14 +7,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.web.form.BaseUserAuthApiResponse;
+import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
  * 健康情報照会レスポンスクラス
  *
  * @version 1.0.0
  */
-public class HealthInfoReferenceResponse extends BaseUserAuthApiResponse {
+public class HealthInfoReferenceResponse extends BaseRestApiResponse {
 
     /** 健康情報 */
     @JsonProperty("healthInfo")

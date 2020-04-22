@@ -29,7 +29,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.reader.CsvReader;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -58,9 +58,9 @@ public class HealthInfoFileRegistController
     /** 健康情報ファイル登録画面サービス */
     @Autowired
     private HealthInfoFileRegistService fileService;
-    /** session管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionManageService;
+    private SessionComponent sessionComponent;
     /** AWS個別設定情報 */
     @Autowired
     private AwsConfig awsConfig;
@@ -112,7 +112,7 @@ public class HealthInfoFileRegistController
             return getView(DashboardView.HEALTH_INFO_FILE_INPUT);
         }
 
-        String userId = sessionManageService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         // CSV読み取りクラス
@@ -129,7 +129,7 @@ public class HealthInfoFileRegistController
         fileService.formatCheck(modelList, userId);
 
         // アップロードファイル名を設定
-        sessionManageService.setValue(request.getSession(),
+        sessionComponent.setValue(request.getSession(),
                 "healthinfo-file-regist/" + userId, fileName);
 
         model.addAttribute("modelList", modelList);
@@ -147,10 +147,10 @@ public class HealthInfoFileRegistController
     public String complete(Model model, HealthInfoFileForm form,
             HttpServletRequest request) throws BaseException {
 
-        String userId = sessionManageService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
-        String fileName = sessionManageService
+        String fileName = sessionComponent
                 .getValue(request.getSession(), "healthinfo-file-regist/" + userId,
                         String.class)
                 .orElseThrow(() -> new BusinessException(
@@ -172,7 +172,7 @@ public class HealthInfoFileRegistController
 
         ResultType result = fileService.regist(modelList, userId);
 
-        sessionManageService.removeValue(request.getSession(),
+        sessionComponent.removeValue(request.getSession(),
                 "healthinfo-file-regist/" + userId);
 
         if (ResultType.FAILURE == result) {

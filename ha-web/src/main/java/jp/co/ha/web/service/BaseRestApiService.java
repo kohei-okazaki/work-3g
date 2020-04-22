@@ -1,11 +1,11 @@
 package jp.co.ha.web.service;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.form.BaseUserAuthApiRequest;
-import jp.co.ha.web.form.BaseUserAuthApiResponse;
+import jp.co.ha.web.form.BaseRestApiRequest;
+import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
- * ユーザ認証が必要なAPIの基底サービスインターフェース
+ * Rest APIの基底サービスインターフェース
  *
  * @param <Rq>
  *     リクエスト
@@ -13,7 +13,7 @@ import jp.co.ha.web.form.BaseUserAuthApiResponse;
  *     レスポンス
  * @version 1.0.0
  */
-public interface BaseUserAuthApiService<Rq extends BaseUserAuthApiRequest, Rs extends BaseUserAuthApiResponse> {
+public interface BaseRestApiService<Rq extends BaseRestApiRequest, Rs extends BaseRestApiResponse> {
 
     /**
      * 継承先でそれぞれチェックを実装

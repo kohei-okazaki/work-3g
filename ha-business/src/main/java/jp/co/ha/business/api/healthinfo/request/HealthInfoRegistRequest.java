@@ -11,14 +11,14 @@ import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
-import jp.co.ha.web.form.BaseUserAuthApiRequest;
+import jp.co.ha.web.form.BaseRestApiRequest;
 
 /**
  * 健康情報登録リクエストクラス
  *
  * @version 1.0.0
  */
-public class HealthInfoRegistRequest extends BaseUserAuthApiRequest {
+public class HealthInfoRegistRequest extends BaseRestApiRequest {
 
     /** 身長 */
     @Mask

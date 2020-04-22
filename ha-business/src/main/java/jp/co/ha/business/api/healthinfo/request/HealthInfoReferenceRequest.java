@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
-import jp.co.ha.web.form.BaseUserAuthApiRequest;
+import jp.co.ha.web.form.BaseRestApiRequest;
 
 /**
  * 健康情報照会リクエストクラス
@@ -14,20 +14,13 @@ import jp.co.ha.web.form.BaseUserAuthApiRequest;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoReferenceRequest extends BaseUserAuthApiRequest {
+public class HealthInfoReferenceRequest extends BaseRestApiRequest {
 
     /** 健康情報ID */
     @Required(message = "seqHealthInfoIdが未設定です")
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "seqHealthInfoIdが半角数字でありません")
     @JsonProperty("seqHealthInfoId")
     private Integer seqHealthInfoId;
-
-    /**
-     * デフォルトコンストラクタ
-     */
-    public HealthInfoReferenceRequest() {
-        super();
-    }
 
     /**
      * seqHealthInfoIdを返す
