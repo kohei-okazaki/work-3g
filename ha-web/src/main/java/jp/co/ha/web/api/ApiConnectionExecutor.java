@@ -28,7 +28,7 @@ public class ApiConnectionExecutor {
     /**
      * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
      * レスポンスログ(異常系)は以下のクラスのメソッドで行う<br>
-     * {@linkplain jp.co.ha.api.config.RestApiExceptionHandler#handleException}
+     * <li>{@linkplain RestApiExceptionHandler#handleException}</li>
      *
      * @param pjp
      *     ProceedingJoinPoint
