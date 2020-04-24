@@ -6,6 +6,7 @@
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報照会画面', scripts = ~{::script}, links = ~{::link})">
 <link rel="stylesheet" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
 <link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+<link rel="stylesheet" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
 </head>
 <body>
 
@@ -61,8 +62,8 @@
     </div>
     <!--/* 結果部ここまで */-->
 
-  </div>
-  <br><br>
+  </div><!-- /.container border col-8 -->
+  <br><br><br><br><br><br><br><br><br><br><br><br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
