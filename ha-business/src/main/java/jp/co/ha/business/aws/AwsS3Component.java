@@ -26,6 +26,8 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 
 /**
  * AWS-S3のComponent
@@ -34,6 +36,9 @@ import jp.co.ha.common.exception.BaseException;
  */
 @Component
 public class AwsS3Component {
+
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(AwsS3Component.class);
 
     /** AWS個別設定情報 */
     @Autowired
@@ -48,6 +53,7 @@ public class AwsS3Component {
      * @return AmazonS3
      */
     public AmazonS3 getAmazonS3() {
+        LOG.info("Amazon S3 called");
         return AmazonS3ClientBuilder
                 .standard()
                 // 認証情報を設定

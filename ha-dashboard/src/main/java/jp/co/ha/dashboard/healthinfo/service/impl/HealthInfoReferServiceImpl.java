@@ -100,10 +100,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
 
         // ファイル名
-        String fileName = "healthInfoReference_"
-                + DateUtil.toString(DateUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)
-                + FileExtension.CSV.getValue();
+        String fileName = DateUtil.toString(DateUtil.getSysDate(),
+                DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()
                 + entity.getUserId();

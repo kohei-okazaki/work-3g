@@ -236,14 +236,25 @@ public class FileUtil {
     }
 
     /**
-     * 指定した<code>path</code>のファイルオブジェクトを返す
+     * 指定した<code>path</code>の{@linkplain File}オブジェクトを返す
      *
      * @param path
      *     パス
-     * @return ファイル
+     * @return File
      */
     public static File getFile(String path) {
-        return new File(path);
+        return getPath(path).toFile();
+    }
+
+    /**
+     * 指定した<code>path</code>の{@linkplain Path}オブジェクトを返す
+     *
+     * @param path
+     *     ファイルパス
+     * @return Path
+     */
+    public static Path getPath(String path) {
+        return Paths.get(path);
     }
 
     /**

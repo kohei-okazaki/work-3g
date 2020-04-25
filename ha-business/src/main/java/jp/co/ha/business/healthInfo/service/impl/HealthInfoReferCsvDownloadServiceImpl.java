@@ -14,7 +14,6 @@ import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.csv.writer.ReferenceCsvWriter;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
@@ -35,8 +34,7 @@ public class HealthInfoReferCsvDownloadServiceImpl
      */
     @Override
     public void download(PrintWriter printWriter, CsvConfig conf,
-            List<ReferenceCsvDownloadModel> modelList)
-            throws BaseException {
+            List<ReferenceCsvDownloadModel> modelList) throws BaseException {
 
         try (CsvWriter<ReferenceCsvDownloadModel> writer = new ReferenceCsvWriter(conf,
                 printWriter)) {
@@ -50,25 +48,32 @@ public class HealthInfoReferCsvDownloadServiceImpl
                 FileUtil.mkdir(conf.getOutputPath());
             }
 
-            // ダウンロードファイル
+            // 一時ファイル
             File file = FileUtil.getFile(conf.getOutputPath()
                     + FileSeparator.SYSTEM.getValue() + conf.getFileName());
+            // 一時ファイル書込
+            writeFile(file, writer);
+        }
+    }
 
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
-                        file.getAbsolutePath() + "のファイル作成に失敗しました", e);
-            }
-
-            try (FileWriter fw = new FileWriter(file.getAbsolutePath());
-                    PrintWriter pw = new PrintWriter(new BufferedWriter(fw))) {
-                pw.println(writer.getData());
-                pw.flush();
-            } catch (IOException e) {
-                throw new BusinessException(CommonErrorCode.FILE_WRITE_ERROR,
-                        "ファイルの書き込みに失敗しました", e);
-            }
+    /**
+     * {@linkplain CsvWriter}のデータを{@linkplain File}に書き込みを行う
+     *
+     * @param file
+     *     ファイル
+     * @param writer
+     *     {@linkplain CsvWriter}
+     * @throws BaseException
+     *     ファイルの書き込みに失敗した場合
+     */
+    private void writeFile(File file, CsvWriter<ReferenceCsvDownloadModel> writer)
+            throws BaseException {
+        try (FileWriter fw = new FileWriter(file.getPath());
+                PrintWriter pw = new PrintWriter(new BufferedWriter(fw), true)) {
+            pw.println(writer.getData());
+        } catch (IOException e) {
+            throw new BusinessException(CommonErrorCode.FILE_WRITE_ERROR,
+                    "ファイルの書き込みに失敗しました", e);
         }
     }
 
