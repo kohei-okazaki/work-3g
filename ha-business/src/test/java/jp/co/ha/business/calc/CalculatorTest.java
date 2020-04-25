@@ -11,14 +11,14 @@ import jp.co.ha.business.BaseBusinessTest;
 import jp.co.ha.business.calc.Calculator.CalcMethod;
 
 /**
- * {@link Calculator} のjUnit
+ * {@linkplain Calculator} のjUnit
  *
  * @version 1.0.0
  */
 public class CalculatorTest extends BaseBusinessTest {
 
     /**
-     * {@link Calculator#calc}
+     * {@linkplain Calculator#calc}
      */
     @Test
     public void addTest() {

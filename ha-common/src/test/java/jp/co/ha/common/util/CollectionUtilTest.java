@@ -11,14 +11,14 @@ import org.junit.Test;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link CollectionUtil} のjUnit
+ * {@linkplain CollectionUtil} のjUnit
  *
  * @version 1.0.0
  */
 public class CollectionUtilTest extends BaseCommonTest {
 
     /**
-     * {@link CollectionUtil#existsCount}
+     * {@linkplain CollectionUtil#existsCount}
      */
     @Test
     public void existsCountTest() {
@@ -40,7 +40,7 @@ public class CollectionUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link CollectionUtil#isEmpty}
+     * {@linkplain CollectionUtil#isEmpty}
      */
     @Test
     public void isEmptyTest() {
@@ -63,7 +63,7 @@ public class CollectionUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link CollectionUtil#isMultiple}
+     * {@linkplain CollectionUtil#isMultiple}
      */
     @Test
     public void isMultipleTest() {

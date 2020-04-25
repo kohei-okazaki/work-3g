@@ -14,7 +14,7 @@ import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 
 /**
- * {@link BeanValidator} のjUnit
+ * {@linkplain BeanValidator} のjUnit
  *
  * @version 1.0.0
  */
@@ -24,7 +24,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     private final static Logger LOG = LoggerFactory.getLogger(BeanValidatorTest.class);
 
     /**
-     * {@link BeanValidator#validate}
+     * {@linkplain BeanValidator#validate}
      */
     @Test
     public void requiredTest() {
@@ -47,7 +47,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     }
 
     /**
-     * {@link BeanValidator#validate}
+     * {@linkplain BeanValidator#validate}
      */
     @Test
     public void minTest() {
@@ -98,7 +98,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     }
 
     /**
-     * {@link BeanValidator#validate}
+     * {@linkplain BeanValidator#validate}
      */
     @Test
     public void maxTest() {
@@ -149,7 +149,7 @@ public class BeanValidatorTest extends BaseCommonTest {
     }
 
     /**
-     * {@link BeanValidator#validate}
+     * {@linkplain BeanValidator#validate}
      */
     @Test
     public void patternTest() {
@@ -235,7 +235,6 @@ public class BeanValidatorTest extends BaseCommonTest {
          *
          * @param name
          *     name
-         *
          */
         public void setName(String name) {
             this.name = name;
@@ -267,7 +266,6 @@ public class BeanValidatorTest extends BaseCommonTest {
          *
          * @param name
          *     name
-         *
          */
         public void setName(String name) {
             this.name = name;
@@ -299,7 +297,6 @@ public class BeanValidatorTest extends BaseCommonTest {
          *
          * @param name
          *     name
-         *
          */
         public void setName(String name) {
             this.name = name;
@@ -332,7 +329,6 @@ public class BeanValidatorTest extends BaseCommonTest {
          *
          * @param name
          *     name
-         *
          */
         public void setName(String name) {
             this.name = name;
@@ -364,7 +360,6 @@ public class BeanValidatorTest extends BaseCommonTest {
          *
          * @param name
          *     name
-         *
          */
         public void setName(String name) {
             this.name = name;
