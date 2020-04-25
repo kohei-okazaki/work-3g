@@ -64,10 +64,11 @@ public class HealthInfoReferCsvDownloadServiceImpl
      * @param writer
      *     {@linkplain CsvWriter}
      * @throws BaseException
-     *     ファイルの書き込みに失敗した場合
+     *     ファイルの書込に失敗した場合
      */
     private void writeFile(File file, CsvWriter<ReferenceCsvDownloadModel> writer)
             throws BaseException {
+
         try (FileWriter fw = new FileWriter(file.getPath());
                 PrintWriter pw = new PrintWriter(new BufferedWriter(fw), true)) {
             pw.println(writer.getData());

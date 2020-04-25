@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
@@ -295,10 +298,18 @@ public class FileUtil {
      *
      * @param path
      *     パス
-     * @return 作成された場合true, それ以外の場合false
+     * @throws BaseException
+     *     ディレクトリの作成に失敗した場合
      */
-    public static boolean mkdir(String path) {
-        return getFile(path).mkdir();
+    public static void mkdir(String path) throws BaseException {
+
+        try {
+            LOG.info("path=" + path + "を作成");
+            Files.createDirectories(getPath(path));
+        } catch (IOException e) {
+            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+                    "ディレクトリの作成に失敗しました. path=" + path, e);
+        }
     }
 
     /**
@@ -454,4 +465,5 @@ public class FileUtil {
         }
 
     }
+
 }
