@@ -58,8 +58,7 @@ public class HealthInfoReferCsvDownloadServiceImpl
                 file.createNewFile();
             } catch (IOException e) {
                 throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
-                        file.getAbsolutePath() + "のファイル作成に失敗しました",
-                        e);
+                        file.getAbsolutePath() + "のファイル作成に失敗しました", e);
             }
 
             try (FileWriter fw = new FileWriter(file.getAbsolutePath());

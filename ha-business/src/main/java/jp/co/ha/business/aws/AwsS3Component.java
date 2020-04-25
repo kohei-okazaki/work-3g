@@ -158,8 +158,8 @@ public class AwsS3Component {
         try {
             ObjectMetadata om = new ObjectMetadata();
             om.setContentLength(length);
-            PutObjectRequest putRequest = new PutObjectRequest(awsConfig.getBacket(),
-                    key, is, om);
+            PutObjectRequest putRequest = new PutObjectRequest(awsConfig.getBacket(), key,
+                    is, om);
             // 権限の設定
             putRequest.setCannedAcl(CannedAccessControlList.PublicReadWrite);
             // アップロード
