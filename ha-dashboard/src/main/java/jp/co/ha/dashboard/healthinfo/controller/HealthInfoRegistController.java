@@ -101,7 +101,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result,
             HttpServletRequest request) throws BaseException {

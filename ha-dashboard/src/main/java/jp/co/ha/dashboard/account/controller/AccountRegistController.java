@@ -75,7 +75,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
      */
     @Override
     @NonAuth
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid AccountRegistForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {

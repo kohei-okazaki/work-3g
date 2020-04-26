@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.service;
 
+import java.util.Optional;
+
 import jp.co.ha.business.dto.HealthInfoRefDetailDto;
 
 /**
@@ -16,6 +18,7 @@ public interface HealthInfoRefDetailService {
      *     健康情報照会詳細Dto
      * @return 健康情報照会詳細Dto
      */
-    HealthInfoRefDetailDto getHealthInfoRefDetailDto(HealthInfoRefDetailDto dto);
+    Optional<HealthInfoRefDetailDto> getHealthInfoRefDetailDto(
+            HealthInfoRefDetailDto dto);
 
 }

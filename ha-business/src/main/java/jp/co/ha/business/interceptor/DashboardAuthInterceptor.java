@@ -140,7 +140,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
         if (BeanUtil.isNull(csrfToken)) {
             return false;
         }
-        return csrfToken.factocy();
+        return csrfToken.factory();
     }
 
 }

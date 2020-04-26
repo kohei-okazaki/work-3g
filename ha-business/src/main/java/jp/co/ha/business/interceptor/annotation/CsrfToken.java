@@ -30,7 +30,7 @@ public @interface CsrfToken {
      *
      * @return 生成する場合true、それ以外の場合false
      */
-    boolean factocy() default false;
+    boolean factory() default false;
 
     /**
      * トークンをチェックする

@@ -20,6 +20,8 @@ public class AwsConfig {
     private Regions region;
     /** バケット名 */
     private String backet;
+    /** S3タイムアウト */
+    private int timeout;
 
     /**
      * accesskeyを返す
@@ -60,7 +62,7 @@ public class AwsConfig {
     }
 
     /**
-     * regionを返す
+     * {@linkplain Regions}を返す
      *
      * @return region
      */
@@ -95,6 +97,25 @@ public class AwsConfig {
      */
     public void setBacket(String backet) {
         this.backet = backet;
+    }
+
+    /**
+     * timeoutを返す
+     *
+     * @return timeout
+     */
+    public int getTimeout() {
+        return timeout;
+    }
+
+    /**
+     * timeoutを設定する
+     *
+     * @param timeout
+     *     S3タイムアウト
+     */
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 
 }

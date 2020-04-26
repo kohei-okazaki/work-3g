@@ -102,7 +102,7 @@ public class HealthInfoFileRegistController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid HealthInfoFileForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.ClientConfigurationFactory;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -48,7 +50,7 @@ public class AwsS3Component {
     private AwsAuthComponent awsAuthComponent;
 
     /**
-     * AmazonS3を返す
+     * {@linkplain AmazonS3}を返す
      *
      * @return AmazonS3
      */
@@ -59,12 +61,13 @@ public class AwsS3Component {
                 // 認証情報を設定
                 .withCredentials(new AWSStaticCredentialsProvider(
                         awsAuthComponent.getCredentials()))
+                .withClientConfiguration(getClientConfiguration())
                 .withRegion(awsConfig.getRegion())
                 .build();
     }
 
     /**
-     * バケット内に保存されているファイル一覧を返す
+     * バケット内に保存されている{@linkplain S3ObjectSummary}のリストを返す
      *
      * @param backet
      *     バケット名
@@ -104,7 +107,7 @@ public class AwsS3Component {
     }
 
     /**
-     * 指定されたバケットへファイルを配置する
+     * 指定されたバケットへ{@linkplain MultipartFile}を配置する
      *
      * @param key
      *     バケット内のキー(ファイル名込)
@@ -114,8 +117,7 @@ public class AwsS3Component {
      *     S3へファイルアップロードに失敗した場合
      * @see AwsS3Component#putFile(String, long, InputStream)
      */
-    public void putFile(String key, MultipartFile multipartFile)
-            throws BaseException {
+    public void putFile(String key, MultipartFile multipartFile) throws BaseException {
 
         try (InputStream is = multipartFile.getInputStream()) {
             putFile(key, multipartFile.getSize(), is);
@@ -158,8 +160,7 @@ public class AwsS3Component {
      * @throws BaseException
      *     S3へのファイルアップロードに失敗した場合
      */
-    private void putFile(String key, long length, InputStream is)
-            throws BaseException {
+    private void putFile(String key, long length, InputStream is) throws BaseException {
 
         try {
             ObjectMetadata om = new ObjectMetadata();
@@ -176,6 +177,17 @@ public class AwsS3Component {
                             + key,
                     e);
         }
+    }
+
+    /**
+     * {@linkplain ClientConfiguration}を返す
+     *
+     * @return ClientConfiguration
+     */
+    private ClientConfiguration getClientConfiguration() {
+        ClientConfiguration config = new ClientConfigurationFactory().getConfig();
+        config.setConnectionTimeout(awsConfig.getTimeout());
+        return config;
     }
 
 }

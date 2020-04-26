@@ -19,7 +19,7 @@ public class AwsAuthComponent {
     private AwsConfig awsConfig;
 
     /**
-     * AWSCredentialsを返す
+     * {@linkplain AWSCredentials}を返す
      *
      * @return AWSCredentials
      */

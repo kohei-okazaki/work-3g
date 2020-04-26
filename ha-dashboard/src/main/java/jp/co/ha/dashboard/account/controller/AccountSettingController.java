@@ -117,7 +117,7 @@ public class AccountSettingController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid AccountSettingForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
