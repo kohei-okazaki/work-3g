@@ -71,7 +71,7 @@ public class HeathInfoRefDetailController implements BaseWebController {
                 .getHealthInfoRefDetailDto(dto);
 
         if (detail.isPresent()) {
-            model.addAttribute("detail", detail);
+            model.addAttribute("detail", detail.get());
         } else {
             model.addAttribute("errorMessage", "健康情報IDの指定が不正なため、健康情報がありません。");
         }
