@@ -5,7 +5,14 @@ import org.springframework.stereotype.Component;
 import com.amazonaws.regions.Regions;
 
 /**
- * AWSの設定情報保持クラス
+ * AWSの設定情報保持クラス<br>
+ * <ul>
+ * <li>アクセスキー：設定ファイルでAWSから払い出されたアクセスキーを設定</li>
+ * <li>シークレットアクセスキー：設定ファイルでAWSから払い出されたアシークレットアクセスキーを設定</li>
+ * <li>リージョン：設定ファイルで東京を設定</li>
+ * <li>バケット名：環境毎にバケットを設定</li>
+ * <li>S3タイムアウト：設定ファイルで10秒を設定</li>
+ * </ul>
  *
  * @version 1.0.0
  */

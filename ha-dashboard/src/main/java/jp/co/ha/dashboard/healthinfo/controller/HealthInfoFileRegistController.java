@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.aws.AwsConfig;
 import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -61,9 +60,6 @@ public class HealthInfoFileRegistController
     /** SessionComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** AWS個別設定情報 */
-    @Autowired
-    private AwsConfig awsConfig;
     /** S3コンポーネント */
     @Autowired
     private AwsS3Component awsS3Component;
@@ -158,9 +154,8 @@ public class HealthInfoFileRegistController
                                 + "healthinfo-file-regist/" + userId + "が存在しない"));
 
         // S3から健康情報CSVファイルを取得
-        InputStream is = awsS3Component.getS3ObjectByBacketAndKey(
-                awsConfig.getBacket(),
-                "healthinfo-file-regist/" + userId + "/" + fileName);
+        InputStream is = awsS3Component
+                .getS3ObjectByKey("healthinfo-file-regist/" + userId + "/" + fileName);
         CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
         List<HealthInfoCsvUploadModel> modelList = reader.readInputStream(is,
                 Charset.UTF_8);
