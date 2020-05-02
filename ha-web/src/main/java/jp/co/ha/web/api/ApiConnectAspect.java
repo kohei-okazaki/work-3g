@@ -19,11 +19,10 @@ import jp.co.ha.web.form.BaseApiResponse;
  */
 @Aspect
 @Component
-public class ApiConnectionExecutor {
+public class ApiConnectAspect {
 
     /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(ApiConnectionExecutor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApiConnectAspect.class);
 
     /**
      * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
