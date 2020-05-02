@@ -2,6 +2,7 @@ package jp.co.ha.business.api.healthinfo.request;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -18,6 +19,7 @@ import jp.co.ha.web.form.BaseRestApiRequest;
  *
  * @version 1.0.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class HealthInfoRegistRequest extends BaseRestApiRequest {
 
     /** 身長 */

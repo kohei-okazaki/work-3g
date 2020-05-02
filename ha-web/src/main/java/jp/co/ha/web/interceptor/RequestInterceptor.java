@@ -15,7 +15,7 @@ import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
-import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * Requestインターセプター
@@ -45,7 +45,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
         }
 
         // MDCを設定する
-        MDC.put("id", hashEncoder.encode(DateUtil.getSysDate().toString(), "dummy"));
+        MDC.put("id", StringUtil.getRandamStr(20));
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
                 + "[URI=" + request.getRequestURI()

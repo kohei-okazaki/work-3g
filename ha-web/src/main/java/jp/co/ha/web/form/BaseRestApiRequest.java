@@ -1,6 +1,7 @@
 package jp.co.ha.web.form;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ha.common.validator.annotation.Required;
 
@@ -9,6 +10,7 @@ import jp.co.ha.common.validator.annotation.Required;
  *
  * @version 1.0.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class BaseRestApiRequest extends BaseApiRequest {
 
     /** ユーザID */

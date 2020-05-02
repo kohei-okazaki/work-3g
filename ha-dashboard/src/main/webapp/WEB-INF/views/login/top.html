@@ -9,12 +9,13 @@
 <body>
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br>
+  <label>最近登録した10件</label>
   <div class="container border col-10">
     <canvas id="chart" class="chart"></canvas>
    </div><!-- /.container border col-10 -->
   <br>
   <div th:replace="layout/layout :: footer"></div>
-
+  <br><br><br><br><br><br><br><br><br><br><br><br>
   <script src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
   <script th:inline="javascript">
     $(function() {

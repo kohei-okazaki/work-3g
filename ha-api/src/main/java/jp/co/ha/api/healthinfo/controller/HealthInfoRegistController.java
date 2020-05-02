@@ -30,7 +30,7 @@ public class HealthInfoRegistController extends
     private HealthInfoRegistApi api;
 
     /**
-     * ユーザIDを必要とするPOST形式のJSON通信の受付を行う
+     * 健康情報登録APIを受け付ける
      *
      * @param userId
      *     ユーザID
