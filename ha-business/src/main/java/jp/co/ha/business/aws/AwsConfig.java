@@ -7,8 +7,6 @@ import com.amazonaws.regions.Regions;
 /**
  * AWSの設定情報保持クラス<br>
  * <ul>
- * <li>アクセスキー：設定ファイルでAWSから払い出されたアクセスキーを設定</li>
- * <li>シークレットアクセスキー：設定ファイルでAWSから払い出されたアシークレットアクセスキーを設定</li>
  * <li>リージョン：設定ファイルで東京を設定</li>
  * <li>バケット名：環境毎にバケットを設定</li>
  * <li>S3タイムアウト：設定ファイルで10秒を設定</li>
@@ -19,54 +17,12 @@ import com.amazonaws.regions.Regions;
 @Component
 public class AwsConfig {
 
-    /** アクセスキー */
-    private String accesskey;
-    /** シークレットアクセスキー */
-    private String secretAccesskey;
     /** リージョン */
     private Regions region;
     /** バケット名 */
     private String backet;
     /** S3タイムアウト */
     private int timeout;
-
-    /**
-     * accesskeyを返す
-     *
-     * @return accesskey
-     */
-    public String getAccesskey() {
-        return accesskey;
-    }
-
-    /**
-     * accesskeyを設定する
-     *
-     * @param accesskey
-     *     アクセスキー
-     */
-    public void setAccesskey(String accesskey) {
-        this.accesskey = accesskey;
-    }
-
-    /**
-     * secretAccesskeyを返す
-     *
-     * @return secretAccesskey
-     */
-    public String getSecretAccesskey() {
-        return secretAccesskey;
-    }
-
-    /**
-     * secretAccesskeyを設定する
-     *
-     * @param secretAccesskey
-     *     シークレットアクセスキー
-     */
-    public void setSecretAccesskey(String secretAccesskey) {
-        this.secretAccesskey = secretAccesskey;
-    }
 
     /**
      * {@linkplain Regions}を返す

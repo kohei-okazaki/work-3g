@@ -15,7 +15,6 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.ClientConfiguration;
 import com.amazonaws.ClientConfigurationFactory;
 import com.amazonaws.SdkClientException;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -59,9 +58,8 @@ public class AwsS3Component {
         LOG.info("Amazon S3 called");
         return AmazonS3ClientBuilder
                 .standard()
-                // 認証情報を設定
-                .withCredentials(new AWSStaticCredentialsProvider(
-                        awsAuthComponent.getCredentials()))
+                // IAMユーザ認証情報を設定
+                .withCredentials(awsAuthComponent.getProfileCredentialsProvider())
                 .withClientConfiguration(getClientConfiguration())
                 .withRegion(awsConfig.getRegion())
                 .build();
@@ -81,11 +79,10 @@ public class AwsS3Component {
             return objectListing.getObjectSummaries();
         } catch (AmazonServiceException e) {
             throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
-                    "リクエストの処理中にAmazon S3でエラーが発生した場合。backet=" + awsConfig.getBacket(), e);
+                    "リクエストの処理中にAmazon S3でエラーが発生。backet=" + awsConfig.getBacket(), e);
         } catch (SdkClientException e) {
             throw new BusinessException(BusinessErrorCode.SDK_CLIENT_CONNECT_ERROR,
-                    "リクエストの作成中またはレスポンスの処理中にクライアントでエラーが発生した場合。backet="
-                            + awsConfig.getBacket(),
+                    "リクエストの作成中またはレスポンスの処理中にクライアントでエラーが発生。backet=" + awsConfig.getBacket(),
                     e);
         }
     }
@@ -99,8 +96,7 @@ public class AwsS3Component {
      * @throws BusinessException
      *     S3へのファイルダウンロードに失敗した場合
      */
-    public InputStream getS3ObjectByKey(String key)
-            throws BusinessException {
+    public InputStream getS3ObjectByKey(String key) throws BusinessException {
 
         try {
             GetObjectRequest request = new GetObjectRequest(awsConfig.getBacket(), key);
@@ -109,12 +105,12 @@ public class AwsS3Component {
 
         } catch (AmazonServiceException e) {
             throw new BusinessException(BusinessErrorCode.AWS_S3_DOWNLOAD_ERROR,
-                    "リクエストの処理中にAmazon S3でエラーが発生した場合。backet=" + awsConfig.getBacket()
+                    "リクエストの処理中にAmazon S3でエラーが発生。backet=" + awsConfig.getBacket()
                             + ", key=" + key,
                     e);
         } catch (SdkClientException e) {
             throw new BusinessException(BusinessErrorCode.SDK_CLIENT_CONNECT_ERROR,
-                    "リクエストの作成中またはレスポンスの処理中にクライアントでエラーが発生した場合" + awsConfig.getBacket()
+                    "リクエストの作成中またはレスポンスの処理中にクライアントでエラーが発生" + awsConfig.getBacket()
                             + ", key=" + key,
                     e);
         }
@@ -188,7 +184,7 @@ public class AwsS3Component {
             getAmazonS3().putObject(putRequest);
         } catch (AmazonServiceException e) {
             throw new BusinessException(BusinessErrorCode.AWS_S3_UPLOAD_ERROR,
-                    "リクエストの処理中にAmazon S3でエラーが発生し、S3へのファイルアップロードに失敗しました。backet="
+                    "リクエストの処理中にAmazon S3でエラーが発生し、S3へのファイルアップロードに失敗。backet="
                             + awsConfig.getBacket() + ", key=" + key,
                     e);
         } catch (SdkClientException e) {
