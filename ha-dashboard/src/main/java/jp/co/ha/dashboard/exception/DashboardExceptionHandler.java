@@ -60,7 +60,8 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
         if (e instanceof BaseException) {
 
             BaseException be = (BaseException) e;
-            detail = be.getDetail();
+            detail = messageSource.getMessage(be.getErrorCode().getOuterErrorCode(), null,
+                    Locale.getDefault());
             errorCode = be.getErrorCode().getOuterErrorCode();
 
         } else {
