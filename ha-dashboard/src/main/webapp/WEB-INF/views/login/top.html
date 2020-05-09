@@ -4,16 +4,22 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_Top画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
 </head>
 <body>
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br>
-  <label>最近登録した10件</label>
-  <div class="container border col-10">
-    <canvas id="chart" class="chart"></canvas>
-   </div><!-- /.container border col-10 -->
-  <br>
+  <main role="main" class="px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">最近登録した10件</h1>
+    </div>
+
+    <div class="container border col-10">
+      <canvas id="chart" class="chart"></canvas>
+     </div><!-- /.container border col-10 -->
+    <br>
+  </main>
   <div th:replace="layout/layout :: footer"></div>
   <br><br><br><br><br><br><br><br><br><br><br><br>
   <script src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
@@ -21,7 +27,8 @@
     $(function() {
 
       /*<![CDATA[*/
-      var ctx = document.getElementById("chart").getContext('2d');
+      //var ctx = document.getElementById("chart").getContext('2d');
+      var ctx = document.getElementById("chart");
       var chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -34,6 +41,7 @@
               fill: false,
               pointHoverBackgroundColor: "rgb(255, 0, 0)",
               data: /*[[ ${weight} ]]*/,
+              borderWidth: 4,
             },
             {
               label: "BMI",
@@ -42,6 +50,7 @@
               fill: false,
               pointHoverBackgroundColor: "rgb(255, 0, 0)",
               data: /*[[ ${bmi} ]]*/,
+              borderWidth: 4,
             },
             {
               label: "標準体重",
@@ -50,6 +59,7 @@
               fill: false,
               pointHoverBackgroundColor: "rgb(255, 0, 0)",
               data: /*[[ ${standardWeight} ]]*/,
+              borderWidth: 4,
             }
           ]
         },

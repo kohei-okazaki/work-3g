@@ -4,6 +4,7 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_ログイン画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
@@ -12,29 +13,30 @@
   </div><!-- /.header -->
 
   <br><br><br><br>
+  <main role="main" class="px-4">
+    <div class="container border col-7">
+      <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
+        <br>
+        <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <div class="alert alert-info" role="alert" th:if="${isLogout != null}">ログアウトしました</div>
 
-  <div class="container border col-7">
-    <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
-      <br>
-      <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-      <div class="alert alert-info" role="alert" th:if="${isLogout != null}">ログアウトしました</div>
+        <div class="form-group" >
+          <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" placeholder="ユーザID" required />
+        </div><!-- /.form-group -->
+        <br>
+        <div class="form-group" >
+          <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" placeholder="パスワード" required />
+        </div><!-- /.form-group -->
 
-      <div class="form-group" >
-        <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" placeholder="ユーザID" required />
-      </div><!-- /.form-group -->
-      <br>
-      <div class="form-group" >
-        <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" placeholder="パスワード" required />
-      </div><!-- /.form-group -->
-
-      <br>
-      <input id="submit" class="btn btn-success" type="submit" value="ログイン" />
-      <input id="account-regist" class="btn btn-info" type="button" value="アカウント作成" />
-      <br><br>
-    </form><!-- /#loginForm -->
-  </div><!-- /.container border col-7 -->
+        <br>
+        <input id="submit" class="btn btn-success" type="submit" value="ログイン" />
+        <input id="account-regist" class="btn btn-info" type="button" value="アカウント作成" />
+        <br><br>
+      </form><!-- /#loginForm -->
+    </div><!-- /.container border col-7 -->
+  </main>
 
   <div th:replace="layout/layout :: footer"></div>
 

@@ -45,6 +45,9 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("login")
 public class LoginController implements BaseWebController {
 
+    /** 健康情報検索条件 */
+    private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
+            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
     /** SessionComponent */
     @Autowired
     private SessionComponent sessionComponent;
@@ -151,12 +154,12 @@ public class LoginController implements BaseWebController {
 
         healthInfoGraphService.putGraph(model, () -> {
 
-            // 健康情報を検索する
-            SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
-                    .limit(10).build();
+            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            healthInfoSearchService.findByUserId(form.getUserId(), selectOption).stream()
+            healthInfoSearchService
+                    .findByUserId(form.getUserId(), SELECT_OPTION).stream()
+                    .sorted((o1, o2) -> o1.getSeqHealthInfoId()
+                            .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
                                 DateFormatType.YYYYMMDDHHMMSS);
@@ -195,12 +198,12 @@ public class LoginController implements BaseWebController {
         // 健康情報グラフを作成
         healthInfoGraphService.putGraph(model, () -> {
 
-            // 健康情報を検索する
-            SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
-                    .limit(10).build();
+            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            healthInfoSearchService.findByUserId(userId, selectOption).stream()
+            healthInfoSearchService
+                    .findByUserId(userId, SELECT_OPTION).stream()
+                    .sorted((o1, o2) -> o1.getSeqHealthInfoId()
+                            .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
                                 DateFormatType.YYYYMMDDHHMMSS);

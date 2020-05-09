@@ -4,16 +4,19 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント設定変更完了画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link>
 </head>
 <body>
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
-  <div class="container border col-7">
-    <h2 class="menuTitle">アカウント設定変更完了</h2>
-    <div class="alert alert-primary" role="alert">アカウントの更新が完了しました</div>
-    <br><br>
-  </div><!-- /.container border col-8 -->
+  <main role="main" class="px-4">
+    <div class="container border col-7">
+      <h2 class="menuTitle">アカウント設定変更完了</h2>
+      <div class="alert alert-primary" role="alert">アカウントの更新が完了しました</div>
+      <br><br>
+    </div><!-- /.container border col-8 -->
+  </main>
   <br><br>
   <div th:replace="layout/layout :: footer"></div>
 </body>
