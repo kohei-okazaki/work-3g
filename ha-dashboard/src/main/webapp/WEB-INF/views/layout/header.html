@@ -1,6 +1,16 @@
 <div class="header">
-  <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
-  <ul id="dropmenu">
+  <!-- ヘッダ部 -->
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <h1 id="appTitle" class="appTitle col-sm-3 text-nowrap text-muted" th:text="#{healthInfoAppName}"></h1>
+    <div class="collapse navbar-collapse justify-content-end">
+    <ul class="navbar-nav">
+      <li class="nav-item link text-muted" th:if="${session[userId]} != null" th:text="${'ユーザID&nbsp;:&nbsp;' + session[userId]}"></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ナビゲーションバー部 -->
+  <ul id="dropmenu" th:if="${session[userId]} != null">
     <li><a href="#">MENU</a>
       <ul>
         <li><a href="#">健康情報</a>

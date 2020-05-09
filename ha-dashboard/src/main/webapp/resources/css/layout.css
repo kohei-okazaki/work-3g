@@ -17,12 +17,10 @@ body {
 
 .appTitle {
   font-family: monospace;
-  border-bottom: 2px solid #006400;
-  border-left: 10px solid #006400;
   margin-top: 0px;
   margin-bottom: 0px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .appTitle:hover {
