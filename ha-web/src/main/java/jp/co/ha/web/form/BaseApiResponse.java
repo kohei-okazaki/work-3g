@@ -166,6 +166,7 @@ public class BaseApiResponse implements BaseForm {
          * outerErrorCodeを設定する
          *
          * @param outerErrorCode
+         *     外部エラーコード
          */
         public void setOuterErrorCode(String outerErrorCode) {
             this.outerErrorCode = outerErrorCode;
@@ -184,6 +185,7 @@ public class BaseApiResponse implements BaseForm {
          * detailを設定する
          *
          * @param detail
+         *     詳細
          */
         public void setDetail(String detail) {
             this.detail = detail;

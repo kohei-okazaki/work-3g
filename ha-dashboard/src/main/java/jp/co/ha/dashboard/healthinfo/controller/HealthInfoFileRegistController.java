@@ -26,7 +26,6 @@ import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.io.file.csv.reader.CsvReader;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.Charset;
@@ -111,9 +110,8 @@ public class HealthInfoFileRegistController
         String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
-        // CSV読み取りクラス
-        CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
-        List<HealthInfoCsvUploadModel> modelList = reader
+        // Formの健康情報CSVからmodelリストを読み取る
+        List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
                 .readMultipartFile(form.getMultipartFile(), Charset.UTF_8);
 
         String fileName = DateUtil.toString(DateUtil.getSysDate(),
@@ -156,9 +154,8 @@ public class HealthInfoFileRegistController
         // S3から健康情報CSVファイルを取得
         InputStream is = awsS3Component
                 .getS3ObjectByKey("healthinfo-file-regist/" + userId + "/" + fileName);
-        CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
-        List<HealthInfoCsvUploadModel> modelList = reader.readInputStream(is,
-                Charset.UTF_8);
+        List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
+                .readInputStream(is, Charset.UTF_8);
 
         if (CollectionUtil.isEmpty(modelList)) {
             throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
