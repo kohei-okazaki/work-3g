@@ -16,13 +16,54 @@ import com.amazonaws.regions.Regions;
  */
 @Component
 public class AwsConfig {
-
+    /** アクセスキー */
+    private String accesskey;
+    /** シークレットアクセスキー */
+    private String secretAccesskey;
     /** リージョン */
     private Regions region;
     /** バケット名 */
     private String backet;
     /** S3タイムアウト */
     private int timeout;
+
+    /**
+     * accesskeyを返す
+     *
+     * @return accesskey
+     */
+    public String getAccesskey() {
+        return accesskey;
+    }
+
+    /**
+     * accesskeyを設定する
+     *
+     * @param accesskey
+     *     アクセスキー
+     */
+    public void setAccesskey(String accesskey) {
+        this.accesskey = accesskey;
+    }
+
+    /**
+     * secretAccesskeyを返す
+     *
+     * @return secretAccesskey
+     */
+    public String getSecretAccesskey() {
+        return secretAccesskey;
+    }
+
+    /**
+     * secretAccesskeyを設定する
+     *
+     * @param secretAccesskey
+     *     シークレットアクセスキー
+     */
+    public void setSecretAccesskey(String secretAccesskey) {
+        this.secretAccesskey = secretAccesskey;
+    }
 
     /**
      * {@linkplain Regions}を返す

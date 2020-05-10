@@ -24,6 +24,7 @@
         <value>messages</value>
         <value>apiErrorCode</value>
         <value>dashboardErrorCode</value>
+        <value>businessErrorCode</value>
         <value>commonErrorCode</value>
         <value>validateErrorCode</value>
       </list>

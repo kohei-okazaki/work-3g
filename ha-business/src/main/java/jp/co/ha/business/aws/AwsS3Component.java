@@ -63,6 +63,12 @@ public class AwsS3Component {
                 .withClientConfiguration(getClientConfiguration())
                 .withRegion(awsConfig.getRegion())
                 .build();
+
+        // return AmazonS3ClientBuilder.standard()
+        // .withCredentials(new InstanceProfileCredentialsProvider(false))
+        // .withClientConfiguration(getClientConfiguration())
+        // .withRegion(awsConfig.getRegion())
+        // .build();
     }
 
     /**
