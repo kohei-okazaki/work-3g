@@ -67,7 +67,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
     public void execute(HealthInfoRegistRequest request,
             HealthInfoRegistResponse response) throws BaseException {
 
-        // リクエストをEntityにつめる
+        // リクエストをEntityに変換
         HealthInfo entity = toEntity(request);
 
         // Entityの登録処理を行う
@@ -120,9 +120,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
                 : healthInfoCalcService.getHealthInfoStatus(weight,
                         lastHealthInfo.get(0).getWeight());
 
-        List<BmiRangeMt> mtList = bmiRangeMtSearchService.findAll();
-        BmiRangeMt bmiRangeMt = mtList.stream().filter(
-                e -> e.getRangeMin().intValue() <= bmi.intValue()
+        BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()
+                .filter(e -> e.getRangeMin().intValue() <= bmi.intValue()
                         && bmi.intValue() < e.getRangeMax().intValue())
                 .findFirst().orElseThrow(
                         () -> new BusinessException(CommonErrorCode.DB_NO_DATA,
