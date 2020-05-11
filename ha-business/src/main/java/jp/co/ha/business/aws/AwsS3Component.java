@@ -59,16 +59,10 @@ public class AwsS3Component {
         return AmazonS3ClientBuilder
                 .standard()
                 // IAMユーザ認証情報を設定
-                .withCredentials(awsAuthComponent.getProfileCredentialsProvider())
+                .withCredentials(awsAuthComponent.getAWSCredentialsProvider())
                 .withClientConfiguration(getClientConfiguration())
                 .withRegion(awsConfig.getRegion())
                 .build();
-
-        // return AmazonS3ClientBuilder.standard()
-        // .withCredentials(new InstanceProfileCredentialsProvider(false))
-        // .withClientConfiguration(getClientConfiguration())
-        // .withRegion(awsConfig.getRegion())
-        // .build();
     }
 
     /**
@@ -166,7 +160,7 @@ public class AwsS3Component {
     }
 
     /**
-     * S3の指定したキーにInputStramのデータをファイルとしてアップロードする<br>
+     * S3の指定したキーにInputStreamのデータをファイルとしてアップロードする
      *
      * @param key
      *     バケット内のキー(ファイル名込)
