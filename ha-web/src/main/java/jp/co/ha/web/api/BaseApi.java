@@ -6,8 +6,8 @@ import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.web.api.annotation.ApiExecute;
-import jp.co.ha.web.form.BaseApiRequest;
-import jp.co.ha.web.form.BaseApiResponse;
+import jp.co.ha.web.form.BaseRestApiRequest;
+import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
  * 基底API
@@ -18,7 +18,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  *     レスポンス
  * @version 1.0.0
  */
-public interface BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiResponse> {
+public interface BaseApi<Rq extends BaseRestApiRequest, Rs extends BaseRestApiResponse> {
 
     /**
      * APIを実行する

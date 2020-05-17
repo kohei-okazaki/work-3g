@@ -11,7 +11,7 @@ import jp.co.ha.common.validator.annotation.Required;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class BaseRestApiRequest extends BaseApiRequest {
+public abstract class BaseRestApiRequest implements BaseForm {
 
     /** ユーザID */
     @JsonIgnore

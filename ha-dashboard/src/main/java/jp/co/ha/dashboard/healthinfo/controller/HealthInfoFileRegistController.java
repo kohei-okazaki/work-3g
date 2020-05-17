@@ -37,7 +37,7 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWizardController;
-import jp.co.ha.web.form.BaseApiResponse.ResultType;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報一括登録画面コントローラ

@@ -9,8 +9,8 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.api.healthinfo.type.TestMode.TestModeDeserializer;
-import jp.co.ha.web.form.BaseApiResponse.ResultType;
-import jp.co.ha.web.form.BaseApiResponse.ResultTypeSerializer;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultTypeSerializer;
 
 /**
  * JSONの設定クラス

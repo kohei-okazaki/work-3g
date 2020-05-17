@@ -14,9 +14,9 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.web.form.BaseApiResponse.ErrorInfo;
-import jp.co.ha.web.form.BaseApiResponse.ResultType;
 import jp.co.ha.web.form.BaseRestApiResponse;
+import jp.co.ha.web.form.BaseRestApiResponse.ErrorInfo;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /***
  * REST APIの例外ハンドラークラス<br>
