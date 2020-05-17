@@ -14,7 +14,7 @@ import jp.co.ha.common.util.BeanUtil;
 
 /**
  * AWS認証情報のComponent<br>
- * ※事前にAWS-CLIでローカルPCまたは仮想マシンに対し、CLI用のIAMユーザを設定しておくこと
+ * ※事前にAWS-CLIでローカルPCに対し、CLI用のIAMユーザを設定しておくこと
  *
  * @version 1.0.0
  */
