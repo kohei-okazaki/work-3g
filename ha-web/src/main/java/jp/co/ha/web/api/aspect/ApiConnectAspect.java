@@ -36,8 +36,6 @@ public class ApiConnectAspect {
      * @throws Throwable
      *     実行時のエラー
      */
-    // @Around("execution(*
-    // jp.co.ha.business.api.service.impl.*ServiceImpl.execute(..))")
     @Around("@annotation(jp.co.ha.web.api.annotation.ApiExecute)")
     public Object outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
