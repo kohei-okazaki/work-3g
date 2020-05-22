@@ -48,6 +48,13 @@
             <li><a data-toggle="modal" href="#apiReferenceResponseModal">レスポンス</a></li>
           </ul>
         </li>
+        <li><a href="#">ヘルスチェック</a>
+          <ul>
+            <li><a data-toggle="modal" href="#apiHealthCheckGeneralModal">概要</a></li>
+            <li><a data-toggle="modal" href="#apiHealthCheckRequestModal">リクエスト</a></li>
+            <li><a data-toggle="modal" href="#apiHealthCheckResponseModal">レスポンス</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#">その他</a>
@@ -77,6 +84,13 @@
 <div th:replace="./layout/api-reference-request-modal.html"></div>
 <!-- 健康情報照会APIレスポンスモーダル -->
 <div th:replace="./layout/api-reference-response-modal.html"></div>
+
+<!-- ヘルスチェックAPI概要モーダル -->
+<div th:replace="./layout/api-health-check-general-modal.html"></div>
+<!-- ヘルスチェックAPIリクエストモーダル -->
+<div th:replace="./layout/api-health-check-request-modal.html"></div>
+<!-- ヘルスチェックAPIレスポンスモーダル -->
+<div th:replace="./layout/api-health-check-response-modal.html"></div>
 
 <!-- BMIモーダル -->
 <div th:replace="./layout/bmi-modal.html"></div>
