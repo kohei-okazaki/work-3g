@@ -31,8 +31,6 @@
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
 
-        <h3>アカウント設定</h3>
-
         <!--/* 削除フラグここから */-->
         <div class="form-group">
           <label class="control-label" th:text="#{delete}"></label>
@@ -83,8 +81,6 @@
         </div><!-- /.form-group -->
         <!--/* APIキーここまで */-->
 
-        <h3>メール設定</h3>
-
         <!--/* メールアドレスここから */-->
         <div class="form-group">
           <p th:text="#{mailAddress}"></p>
@@ -105,8 +101,6 @@
           </div><!-- /.checkbox -->
         </div><!-- /.form-group -->
         <!--/*メールパスワードここまで */-->
-
-        <h3>健康情報ファイル設定</h3>
 
         <!--/* ヘッダ利用ここから */-->
         <div class="form-group">

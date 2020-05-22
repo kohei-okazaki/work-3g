@@ -17,19 +17,10 @@
       <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountSettingForm}">
         <table class="table table-hover table-striped">
           <tr>
-            <th colspan="2">
-              <h3>アカウント設定</h3>
-            </th>
-          </tr>
-          <tr>
             <th th:text="#{delete}"></th>
             <td>
-              <div th:if="*{deleteFlag} == 1">
-                <label>する</label>
-              </div>
-              <div th:if="*{deleteFlag} == 0">
-                <label>しない</label>
-              </div>
+              <div th:if="*{deleteFlag} == 1">する</div>
+              <div th:if="*{deleteFlag} == 0">しない</div>
             </td>
           </tr>
           <tr>
@@ -44,13 +35,6 @@
             <th th:text="#{passwordExpire}"></th>
             <td th:text="*{passwordExpire}"></td>
           </tr>
-        </table><!-- /.table table-hover table-striped -->
-        <table class="table table-hover table-striped">
-          <tr>
-            <th colspan="2">
-              <h3>メール設定</h3>
-            </th>
-          </tr>
           <tr>
             <th th:text="#{mailAddress}"></th>
             <td th:text="*{mailAddress}"></td>
@@ -59,59 +43,34 @@
             <th th:text="#{mailPassword}"></th>
             <td>****</td>
           </tr>
-        </table><!-- /.table table-hover table-striped -->
-        <table class="table table-hover table-striped">
-          <tr>
-            <th colspan="2">
-              <h3>健康情報ファイル設定</h3>
-            </th>
-          </tr>
           <tr>
             <th th:text="#{headerUse}"></th>
             <td>
-              <div th:if="*{headerFlag} == 1">
-                <label>する</label>
-              </div>
-              <div th:if="*{headerFlag} == 0">
-                <label>しない</label>
-              </div>
+              <div th:if="*{headerFlag} == 1">する</div>
+              <div th:if="*{headerFlag} == 0">しない</div>
             </td>
           </tr>
           <tr>
             <th th:text="#{footerUse}"></th>
             <td>
-              <div th:if="*{footerFlag} == 1">
-                <label>する</label>
-              </div>
-              <div th:if="*{footerFlag} == 0">
-                <label>しない</label>
-              </div>
+              <div th:if="*{footerFlag} == 1">する</div>
+              <div th:if="*{footerFlag} == 0">しない</div>
             </td>
           </tr>
           <tr>
             <th th:text="#{maskUse}"></th>
             <td>
-              <div th:if="*{maskFlag} == 1">
-                <label>する</label>
-              </div>
-              <div th:if="*{maskFlag} == 0">
-                <label>しない</label>
-              </div>
+              <div th:if="*{maskFlag} == 1">する</div>
+              <div th:if="*{maskFlag} == 0">しない</div>
             </td>
           </tr>
           <tr>
             <th th:text="#{enclosureCharUse}"></th>
             <td>
-              <div th:if="*{enclosureCharFlag} == 1">
-                <label>する</label>
-              </div>
-              <div th:if="*{enclosureCharFlag} == 0">
-                <label>しない</label>
-              </div>
+              <div th:if="*{enclosureCharFlag} == 1">する</div>
+              <div th:if="*{enclosureCharFlag} == 0">しない</div>
             </td>
           </tr>
-        </table><!-- /.table table-hover table-striped -->
-        <table class="table table-hover table-striped">
           <tr>
             <th th:text="#{remarks}"></th>
             <td th:text="*{remarks}"></td>
