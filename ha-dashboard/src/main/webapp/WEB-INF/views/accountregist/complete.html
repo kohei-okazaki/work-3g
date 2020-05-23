@@ -4,27 +4,26 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録完了画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
-
-  <div class="header">
-    <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
-  </div><!-- /.header -->
-
+  <!-- ヘッダ部 -->
+  <div th:replace="layout/layout :: header"></div>
   <br><br><br><br>
-
-  <div class="container border col-7">
-    <h2 class="menuTitle">アカウント登録完了</h2>
-    <div class="alert alert-primary" role="alert">アカウント作成完了しました</div>
-    <div>「ログイン画面」から今登録したユーザIDとパスワードでログインしてください。</div>
+  <main role="main" class="px-4">
+    <div class="container border col-7">
+      <h2 class="menuTitle">アカウント登録完了</h2>
+      <div class="alert alert-primary" role="alert">アカウント作成完了しました</div>
+      <div>「ログイン画面」から今登録したユーザIDとパスワードでログインしてください。</div>
+      <br><br>
+      <form action="../login/index" th:action="@{/login/index}" method="get">
+        <input type="submit" class="btn btn-success" value="ログイン画面" />
+      </form>
     <br><br>
-    <form action="../login/index" th:action="@{/login/index}" method="get">
-      <input type="submit" class="btn btn-success" value="ログイン画面" />
-    </form>
+    </div><!-- /.container border col-7 -->
+  </main>
   <br><br>
-  </div><!-- /.container border col-7 -->
-  <br>
   <div th:replace="layout/layout :: footer"></div>
 </body>
 </html>

@@ -4,45 +4,48 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_お知らせ一覧画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
 </head>
 <body>
 
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br>
-  <div class="container border col-10">
-    <h2 class="menuTitle">お知らせ一覧画面</h2>
+  <main role="main" class="px-4">
+    <div class="container border col-10">
+      <h2 class="menuTitle">お知らせ一覧画面</h2>
 
-    <div id="newsList">
-      <table class="table table-hover table-striped">
-        <tbody class="list">
-           <tr th:each="news : ${newsList}">
-             <td class="card card-body bg-light">
-               <div>
-                 <!-- リリース情報 -->
-                 <span class="badge badge-primary" th:if="${news.tagColor == '1'}" th:text="${news.tagName}"></span>
-                 <!-- バグ情報 -->
-                 <span class="badge badge-danger" th:if="${news.tagColor == '2'}" th:text="${news.tagName}"></span>
-                 <!-- 停止情報 -->
-                 <span class="badge badge-warning" th:if="${news.tagColor == '3'}" th:text="${news.tagName}"></span>
-               </div>
-               <a data-toggle="collapse" th:href="${'#newsId' + news.index}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.index}" th:text="${news.date + '　' + news.title}"></a>
-               <div class="collapse" th:id="${'newsId' + news.index}">
-                 <div class="card card-body">
-                   <div th:utext="${news.detail}"></div>
-                 </div><!-- /.card card-body -->
-               </div><!-- /.collapse /#newsId[i] -->
-             </td><!-- /.card card-body bg-light -->
-          </tr>
-        </tbody><!-- /.list -->
-      </table><!-- /.table -->
-      <div class="pager">
-        <ul class="pagination"></ul>
-      </div><!-- /.pager -->
-    </div><!-- /#newsList -->
-    <br>
-  </div><!-- /.container border col-10 -->
-  <br>
+      <div id="newsList">
+        <table class="table table-hover table-striped">
+          <tbody class="list">
+             <tr th:each="news : ${newsList}">
+               <td class="card card-body bg-light">
+                 <div>
+                   <!-- リリース情報 -->
+                   <span class="badge badge-primary" th:if="${news.tagColor == '1'}" th:text="${news.tagName}"></span>
+                   <!-- バグ情報 -->
+                   <span class="badge badge-danger" th:if="${news.tagColor == '2'}" th:text="${news.tagName}"></span>
+                   <!-- 停止情報 -->
+                   <span class="badge badge-warning" th:if="${news.tagColor == '3'}" th:text="${news.tagName}"></span>
+                 </div>
+                 <a data-toggle="collapse" th:href="${'#newsId' + news.index}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.index}" th:text="${news.date + '　' + news.title}"></a>
+                 <div class="collapse" th:id="${'newsId' + news.index}">
+                   <div class="card card-body">
+                     <div th:utext="${news.detail}"></div>
+                   </div><!-- /.card card-body -->
+                 </div><!-- /.collapse /#newsId[i] -->
+               </td><!-- /.card card-body bg-light -->
+            </tr>
+          </tbody><!-- /.list -->
+        </table><!-- /.table -->
+        <div class="pager">
+          <ul class="pagination"></ul>
+        </div><!-- /.pager -->
+      </div><!-- /#newsList -->
+      <br>
+    </div><!-- /.container border col-10 -->
+  </main>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>

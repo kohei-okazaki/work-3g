@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import jp.co.ha.api.BaseApiTest;
-import jp.co.ha.business.api.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
 import jp.co.ha.common.system.SystemConfig;
 
 /**

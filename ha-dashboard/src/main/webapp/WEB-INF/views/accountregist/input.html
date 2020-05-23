@@ -4,15 +4,14 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
-
-  <div class="header">
-    <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
-  </div><!-- /.header -->
+  <!-- ヘッダ部 -->
+  <div th:replace="layout/layout :: header"></div>
   <br><br><br><br>
-
+  <main role="main" class="px-4">
     <form id="accountRegistForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
       <div class="container border col-7">
         <h2 class="menuTitle">アカウント登録</h2>
@@ -70,9 +69,9 @@
         <!--/* ボタン部ここまで */-->
         <br><br>
       </div><!-- /.container border col-7 -->
-      <br><br>
     </form><!-- /#accountRegistForm -->
-
+  </main>
+  <br><br><br><br><br><br><br><br><br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>

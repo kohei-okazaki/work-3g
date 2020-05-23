@@ -12,7 +12,7 @@ call initialize.bat
 
 
 rem jar.version
-set ver=1.0
+set ver=1.0.0
 echo jar.version = %ver%
 
 rem commonのjarを作成

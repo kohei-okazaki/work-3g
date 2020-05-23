@@ -21,7 +21,7 @@ import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.account.form.AccountRegistForm;
 import jp.co.ha.dashboard.account.service.AccountRegistService;
@@ -46,9 +46,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** session管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionManagerService;
+    private SessionComponent sessionComponent;
 
     /**
      * Formを返す
@@ -75,7 +75,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
      */
     @Override
     @NonAuth
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid AccountRegistForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
@@ -91,7 +91,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         }
 
         // sessionにアカウント登録Form情報を保持
-        sessionManagerService.setValue(request.getSession(), "accountRegistForm", form);
+        sessionComponent.setValue(request.getSession(), "accountRegistForm", form);
 
         return getView(DashboardView.ACCOUNT_REGIST_CONFIRM);
     }
@@ -107,7 +107,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
             HttpServletRequest request) throws BaseException {
 
         // sessionよりアカウント登録Form情報を取得
-        AccountRegistForm accountRegistForm = sessionManagerService
+        AccountRegistForm accountRegistForm = sessionComponent
                 .getValue(request.getSession(), "accountRegistForm",
                         AccountRegistForm.class)
                 .orElseThrow(() -> new BusinessException(
@@ -119,7 +119,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         // FormForm情報から登録処理を行う
         accountRegistService.regist(dto);
 
-        sessionManagerService.removeValue(request.getSession(), "accountRegistForm");
+        sessionComponent.removeValue(request.getSession(), "accountRegistForm");
 
         return getView(DashboardView.ACCOUNT_REGIST_COMPLETE);
     }

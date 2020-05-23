@@ -3,6 +3,8 @@ package jp.co.ha.common.http;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpMethod;
+
 /**
  * HTTPクライアントの設定情報保持クラス
  *

@@ -1,6 +1,8 @@
 package jp.co.ha.web.interceptor;
 
 import java.lang.reflect.Method;
+import java.util.Enumeration;
+import java.util.StringJoiner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +15,7 @@ import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
-import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * Requestインターセプター
@@ -43,11 +45,12 @@ public class RequestInterceptor extends BaseWebInterceptor {
         }
 
         // MDCを設定する
-        MDC.put("id", hashEncoder.encode(DateUtil.getSysDate().toString(), "dummy"));
+        MDC.put("id", StringUtil.getRandamStr(20));
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
-                + "[URI:"
-                + request.getRequestURI() + ",METHOD:" + request.getMethod() + "]");
+                + "[URI=" + request.getRequestURI()
+                + ",METHOD=" + request.getMethod()
+                + ",HEADER=" + getHeader(request) + "]");
 
         return true;
     }
@@ -66,5 +69,35 @@ public class RequestInterceptor extends BaseWebInterceptor {
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName());
 
+    }
+
+    /**
+     * 指定された{@linkplain HttpServletRequest}よりヘッダー情報を取得する
+     *
+     * @param request
+     *     HttpServletRequest
+     * @return ヘッダー情報
+     */
+    private String getHeader(HttpServletRequest request) {
+
+        StringJoiner headers = new StringJoiner(",");
+
+        // キーの一覧を取得
+        Enumeration<String> keys = request.getHeaderNames();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+
+            StringJoiner header = new StringJoiner(",");
+
+            // 値の一覧を取得
+            Enumeration<String> values = request.getHeaders(key);
+            while (values.hasMoreElements()) {
+                String value = values.nextElement();
+                header.add(value);
+            }
+            headers.add(header.toString());
+        }
+
+        return headers.toString();
     }
 }

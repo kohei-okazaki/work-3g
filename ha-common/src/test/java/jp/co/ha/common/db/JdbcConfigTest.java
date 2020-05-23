@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link JdbcConfig} のjUnit
+ * {@linkplain JdbcConfig} のjUnit
  *
  * @version 1.0.0
  */

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link CaesarCrypter} のjUnit
+ * {@linkplain CaesarCrypter} のjUnit
  *
  * @version 1.0.0
  */

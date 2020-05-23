@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -35,11 +37,13 @@ import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.system.SystemConfig;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.FileUtil;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
@@ -68,9 +72,9 @@ public class HealthInfoReferenceController implements BaseWebController {
     @Autowired
     @ReferenceDownloadCsv
     private CsvDownloadService<ReferenceCsvDownloadModel> csvDownloadService;
-    /** セッション管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionService;
+    private SessionComponent sessionComponent;
     /** 健康情報ファイル設定検索サービス */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
@@ -80,6 +84,9 @@ public class HealthInfoReferenceController implements BaseWebController {
     /** 健康情報グラフ作成サービス */
     @Autowired
     private HealthInfoGraphService healthInfoGraphService;
+    /** S3コンポーネント */
+    @Autowired
+    private AwsS3Component awsS3Component;
 
     /**
      * Validateを設定
@@ -142,7 +149,7 @@ public class HealthInfoReferenceController implements BaseWebController {
             return getView(DashboardView.HEALTH_INFO_REFFERNCE);
         }
 
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
@@ -182,7 +189,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         model.addAttribute("systemConfig", systemConfig);
 
         // sessionに検索条件を設定
-        sessionService.setValue(request.getSession(), "healthInfoReferenceDto", dto);
+        sessionComponent.setValue(request.getSession(), "healthInfoReferenceDto", dto);
 
         return getView(DashboardView.HEALTH_INFO_REFFERNCE);
     }
@@ -199,11 +206,11 @@ public class HealthInfoReferenceController implements BaseWebController {
     @GetMapping(value = "/exceldownload")
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         // sessionにある前画面の検索条件で再度検索する
-        HealthInfoReferenceDto referDto = sessionService
+        HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
                 .orElseThrow(() -> new SystemException(
@@ -231,10 +238,10 @@ public class HealthInfoReferenceController implements BaseWebController {
     public void csvDownload(HttpServletRequest request, HttpServletResponse response)
             throws BaseException {
 
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
         // sessionにある前画面の検索条件で再度検索する
-        HealthInfoReferenceDto referDto = sessionService
+        HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
                 .orElseThrow(() -> new SystemException(
@@ -255,12 +262,20 @@ public class HealthInfoReferenceController implements BaseWebController {
                 "attachment; filename=" + conf.getFileName());
 
         try {
+            // ResponseにCSV情報を書き出す
             csvDownloadService.download(response.getWriter(), conf,
                     service.toModelList(userId, resultList));
         } catch (IOException e) {
             throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
                     "ファイルの出力処理に失敗しました", e);
         }
+
+        // S3にCSVファイルをアップロードする
+        // 一時ダウンロードファイル
+        File file = FileUtil.getFile(conf.getOutputPath()
+                + FileSeparator.SYSTEM.getValue() + conf.getFileName());
+        awsS3Component.putFile("healthinfo-refer-file/" + userId + "/" + file.getName(),
+                file);
     }
 
 }

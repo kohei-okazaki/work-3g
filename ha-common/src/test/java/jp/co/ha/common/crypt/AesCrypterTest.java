@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link AesCrypter} のjUnit
+ * {@linkplain AesCrypter} のjUnit
  *
  * @version 1.0.0
  */

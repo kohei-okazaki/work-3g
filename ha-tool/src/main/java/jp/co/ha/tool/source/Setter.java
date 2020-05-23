@@ -40,15 +40,14 @@ public class Setter extends Method {
     @Override
     public String toString() {
 
-        final String TAB = "	";
+        final String SPACE = "    ";
 
         StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-        body.add(TAB + accessType.getValue() + " void " + getMethodName() + "("
-                + field.getClassType().getSimpleName() + " " + field.getName()
-                + ") {");
-        body.add(TAB + TAB + "this." + field.getName() + " = " + field.getName()
+        body.add(SPACE + accessType.getValue() + " void " + getMethodName() + "("
+                + field.getClassType().getSimpleName() + " " + field.getName() + ") {");
+        body.add(SPACE + SPACE + "this." + field.getName() + " = " + field.getName()
                 + ";");
-        body.add(TAB + "}");
+        body.add(SPACE + "}");
 
         return body.toString();
     }

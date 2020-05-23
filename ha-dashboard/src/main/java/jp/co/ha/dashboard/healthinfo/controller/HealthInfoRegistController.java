@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.api.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
@@ -38,7 +38,7 @@ import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
@@ -71,9 +71,9 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     @Autowired
     @HealthInfoDownloadCsv
     private CsvDownloadService<HealthInfoCsvDownloadModel> csvDownloadService;
-    /** セッション管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionManagerService;
+    private SessionComponent sessionComponent;
     /** 健康情報ファイル設定検索サービス */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
@@ -101,7 +101,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result,
             HttpServletRequest request) throws BaseException {
@@ -112,7 +112,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         }
 
         // sessionに健康情報Form情報を保持
-        sessionManagerService.setValue(request.getSession(), "healthInfoForm", form);
+        sessionComponent.setValue(request.getSession(), "healthInfoForm", form);
 
         return getView(DashboardView.HEALTH_INFO_CONFIRM);
     }
@@ -127,7 +127,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             throws BaseException {
 
         // sessionより健康情報Form情報を取得
-        HealthInfoForm healthInfoForm = sessionManagerService
+        HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
@@ -136,7 +136,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         BeanUtil.copy(healthInfoForm, dto);
 
         // セッションからユーザIDを取得
-        String userId = sessionManagerService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         boolean isFirstReg = healthInfoService.isFirstReg(userId);
@@ -155,11 +155,11 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         HealthInfoRegistResponse apiResponse = healthInfoService.regist(dto, userId);
 
         // レスポンス情報をformに設定
-        BeanUtil.copy(apiResponse, healthInfoForm);
+        BeanUtil.copy(apiResponse.getHealthInfo(), healthInfoForm);
         // レスポンスを設定
         model.addAttribute("healthInfo", healthInfoForm);
 
-        sessionManagerService.setValue(request.getSession(), "healthInfoForm",
+        sessionComponent.setValue(request.getSession(), "healthInfoForm",
                 healthInfoForm);
 
         return getView(DashboardView.HEALTH_INFO_COMPLETE);
@@ -178,9 +178,9 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
         // sessionよりユーザIDと健康情報Form情報を取得
-        String userId = sessionManagerService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
-        HealthInfoForm healthInfoForm = sessionManagerService
+        HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
@@ -213,9 +213,9 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             throws BaseException {
 
         // sessionよりユーザIDと健康情報Form情報を取得
-        String userId = sessionManagerService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
-        HealthInfoForm healthInfoForm = sessionManagerService
+        HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));

@@ -40,6 +40,7 @@ public class BeanUtil {
      *     コピー元
      * @param dest
      *     コピー先
+     * @see BeanUtil#copy(Object, Object, List, BiConsumer)
      */
     public static void copy(Object src, Object dest) {
         copy(src, dest, Collections.emptyList());
@@ -56,6 +57,7 @@ public class BeanUtil {
      *     コピー先
      * @param function
      *     コールバック処理
+     * @see BeanUtil#copy(Object, Object, List, BiConsumer)
      */
     public static void copy(Object src, Object dest,
             BiConsumer<Object, Object> function) {
@@ -73,6 +75,7 @@ public class BeanUtil {
      *     コピー先
      * @param ignoreList
      *     無視リスト
+     * @see BeanUtil#copy(Object, Object, List, BiConsumer)
      */
     public static void copy(Object src, Object dest, List<String> ignoreList) {
         copy(src, dest, ignoreList, null);
@@ -134,42 +137,6 @@ public class BeanUtil {
     }
 
     /**
-     * コピー時にコピーを行わないfieldかどうかを判定する<br>
-     * 以下の場合、そのfieldではコピーを行わない<br>
-     * <ul>
-     * <li><code>fieldName</code>が"serialVersionUID"の場合</li>
-     * <li><code>fieldName</code>がignoreListに含まれてる場合</li>
-     * </ul>
-     *
-     * @param ignoreList
-     *     無視リスト
-     * @param fieldName
-     *     フィールド名
-     * @return 判定結果
-     */
-    private static boolean ignore(List<String> ignoreList, String fieldName) {
-        return "serialVersionUID".equals(fieldName) || ignoreList.contains(fieldName);
-    }
-
-    /**
-     * コピー対象かどうか判定する
-     *
-     * @param src
-     *     Field コピー元のフィールド
-     * @param dest
-     *     Field コピー先のフィールド
-     * @return 判定結果
-     */
-    private static boolean isCopyTarget(Field src, Field dest) {
-        String srcFieldName = src.getName();
-        Class<?> sourcefieldType = src.getType();
-        String destFieldName = dest.getName();
-        Class<?> targetFieldType = dest.getType();
-        return destFieldName.equals(srcFieldName)
-                && targetFieldType.equals(sourcefieldType);
-    }
-
-    /**
      * targetがnullかどうか判定する<br>
      * 判定結果:nullの場合true, それ以外の場合false<br>
      *
@@ -188,7 +155,7 @@ public class BeanUtil {
      * @param target
      *     検査対象インスタンス
      * @return 判定結果
-     * @see jp.co.ha.common.util.BeanUtil#isNull
+     * @see BeanUtil#isNull
      */
     public static boolean notNull(Object target) {
         return !isNull(target);
@@ -207,6 +174,7 @@ public class BeanUtil {
      * @param clazz
      *     対象クラス
      * @return クラス型
+     * @see BeanUtil#getParameterType(Class, int)
      */
     public static Class<?> getParameterType(Class<?> clazz) {
         return getParameterType(clazz, 0);
@@ -282,6 +250,42 @@ public class BeanUtil {
             LOG.warn("メソッドがみつかりません", e);
         }
         return accessor;
+    }
+
+    /**
+     * コピー時にコピーを行わないfieldかどうかを判定する<br>
+     * 以下の場合、そのfieldではコピーを行わない<br>
+     * <ul>
+     * <li><code>fieldName</code>が"serialVersionUID"の場合</li>
+     * <li><code>fieldName</code>がignoreListに含まれてる場合</li>
+     * </ul>
+     *
+     * @param ignoreList
+     *     無視リスト
+     * @param fieldName
+     *     フィールド名
+     * @return 判定結果
+     */
+    private static boolean ignore(List<String> ignoreList, String fieldName) {
+        return "serialVersionUID".equals(fieldName) || ignoreList.contains(fieldName);
+    }
+
+    /**
+     * コピー対象かどうか判定する
+     *
+     * @param src
+     *     Field コピー元のフィールド
+     * @param dest
+     *     Field コピー先のフィールド
+     * @return 判定結果
+     */
+    private static boolean isCopyTarget(Field src, Field dest) {
+        String srcFieldName = src.getName();
+        Class<?> sourcefieldType = src.getType();
+        String destFieldName = dest.getName();
+        Class<?> targetFieldType = dest.getType();
+        return destFieldName.equals(srcFieldName)
+                && targetFieldType.equals(sourcefieldType);
     }
 
     /**

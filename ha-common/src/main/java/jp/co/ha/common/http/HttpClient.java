@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.springframework.http.HttpStatus;
+
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
@@ -73,10 +75,10 @@ public class HttpClient {
             connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(conf.getTimeout());
             connection.setReadTimeout(conf.getTimeout());
-            connection.setRequestMethod(conf.getHttpMethod().getValue());
+            connection.setRequestMethod(conf.getHttpMethod().toString());
 
             connection.connect();
-            httpStatus = HttpStatus.of(String.valueOf(connection.getResponseCode()));
+            httpStatus = HttpStatus.valueOf(connection.getResponseCode());
         } catch (IOException e) {
             throw new ApiException(e);
         }
@@ -94,7 +96,7 @@ public class HttpClient {
                 this.responseBody = sb.toString();
             } else {
                 LOG.warn(
-                        "HTTP ステータス = " + httpStatus + "(" + httpStatus.getValue() + ")");
+                        "HTTP ステータス = " + httpStatus + "(" + httpStatus + ")");
             }
         } catch (IOException e) {
             LOG.error("通信に失敗しました", e);

@@ -4,6 +4,7 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報入力完了画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link>
 </head>
 <body>
@@ -11,64 +12,64 @@
   <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
+  <main role="main" class="px-4">
+    <div class="container border col-8">
+      <h2 class="menuTitle">健康情報入力完了</h2>
+      <div class="alert alert-primary" role="alert">健康情報作成完了しました</div>
+      <div>
+        <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
+        <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
+      </div>
 
-  <!--/* contentLayout部ここから */-->
-  <div class="container border col-8">
-    <h2 class="menuTitle">健康情報入力完了</h2>
-    <div class="alert alert-primary" role="alert">健康情報作成完了しました</div>
-    <div>
-      <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
-      <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
-    </div>
+      <div th:if="${!isFirstReg}">
+        <p th:text="'前回より' + ${diffWeight} + 'kg ' + ${resultMessage}" />
+        <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
+      </div>
 
-    <div th:if="${!isFirstReg}">
-      <p th:text="'前回より' + ${diffWeight} + 'kg ' + ${resultMessage}" />
-      <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
-    </div>
-
-      <table class="table table-hover table-striped">
-        <tr>
-          <th th:text="#{height}" />
-          <th th:text="#{weight}" />
-          <th th:text="#{standardWeight}" />
-          <th th:text="#{bmi}" />
-        </tr>
-        <tr>
-          <td th:text="${healthInfo.height}" />
-          <td th:text="${healthInfo.weight}" />
-          <td th:text="${healthInfo.standardWeight}" />
-          <td th:text="${healthInfo.bmi}" />
-        </tr>
-      </table><!-- /.table table-hover table-striped -->
-
-      <br>
-
-      <!--/* table部ここから */-->
-      <div class="container col-4">
-        <table>
+        <table class="table table-hover table-striped">
           <tr>
-            <td>
-              <form action="./exceldownload" th:action="@{./exceldownload}" method="get" th:object="${healthInfoForm}">
-                <input type="hidden" th:field="*{seqHealthInfoId}" />
-                <div>
-                  <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
-                </div>
-              </form>
-            </td>
-            <td></td>
-            <td>
-              <form action="./csvdownload" th:action="@{./csvdownload}" method="get" th:object="${healthInfoForm}">
-                <input type="hidden" th:field="*{seqHealthInfoId}" />
-                <div>
-                  <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
-                </div>
-              </form>
-            </td>
+            <th th:text="#{height}" />
+            <th th:text="#{weight}" />
+            <th th:text="#{standardWeight}" />
+            <th th:text="#{bmi}" />
           </tr>
-        </table>
-      </div><!-- /.container col-4 -->
-    <br><br>
-  </div><!-- /.container border col-8 -->
+          <tr>
+            <td th:text="${healthInfo.height}" />
+            <td th:text="${healthInfo.weight}" />
+            <td th:text="${healthInfo.standardWeight}" />
+            <td th:text="${healthInfo.bmi}" />
+          </tr>
+        </table><!-- /.table table-hover table-striped -->
+
+        <br>
+
+        <!--/* table部ここから */-->
+        <div class="container col-4">
+          <table>
+            <tr>
+              <td>
+                <form action="./exceldownload" th:action="@{./exceldownload}" method="get" th:object="${healthInfoForm}">
+                  <input type="hidden" th:field="*{seqHealthInfoId}" />
+                  <div>
+                    <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
+                  </div>
+                </form>
+              </td>
+              <td></td>
+              <td>
+                <form action="./csvdownload" th:action="@{./csvdownload}" method="get" th:object="${healthInfoForm}">
+                  <input type="hidden" th:field="*{seqHealthInfoId}" />
+                  <div>
+                    <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
+                  </div>
+                </form>
+              </td>
+            </tr>
+          </table>
+        </div><!-- /.container col-4 -->
+      <br><br>
+    </div><!-- /.container border col-8 -->
+  </main>
   <br>
   <div th:replace="layout/layout :: footer"></div>
 </body>

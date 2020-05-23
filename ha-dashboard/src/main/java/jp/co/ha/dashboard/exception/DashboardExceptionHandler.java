@@ -1,7 +1,5 @@
 package jp.co.ha.dashboard.exception;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,35 +60,19 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
         if (e instanceof BaseException) {
 
             BaseException be = (BaseException) e;
-            // エラーのスタックトレースを表示
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            pw.flush();
-            String str = sw.toString();
-            detail = str;
-            // detail = be.getDetail();
+            detail = messageSource.getMessage(be.getErrorCode().getOuterErrorCode(), null,
+                    Locale.getDefault());
             errorCode = be.getErrorCode().getOuterErrorCode();
 
         } else {
-
             // 予期せぬ例外にする
             detail = messageSource.getMessage(
                     CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
                     Locale.getDefault());
-            // エラーのスタックトレースを表示
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            pw.flush();
-            String str = sw.toString();
-            detail = str;
             errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
 
         }
-
         body.append(detail).append("(").append(errorCode).append(")");
-
         return body.toString();
     }
 

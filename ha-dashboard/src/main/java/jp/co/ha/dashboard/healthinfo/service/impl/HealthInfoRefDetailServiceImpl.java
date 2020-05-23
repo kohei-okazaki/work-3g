@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,15 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
      * {@inheritDoc}
      */
     @Override
-    public HealthInfoRefDetailDto getHealthInfoRefDetailDto(HealthInfoRefDetailDto dto) {
+    public Optional<HealthInfoRefDetailDto> getHealthInfoRefDetailDto(
+            HealthInfoRefDetailDto dto) {
 
         // 健康情報を検索
         List<HealthInfo> healthInfoList = healthInfoSearchService
                 .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), dto.getUserId());
+        if (healthInfoList == null) {
+            return Optional.empty();
+        }
 
         List<HealthInfoRefDetailDto> list = healthInfoList.stream().map(e -> {
 
@@ -71,7 +76,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
             return detailDto;
         }).collect(Collectors.toList());
 
-        return list.isEmpty() ? null : list.get(0);
+        return list.isEmpty() ? Optional.empty() : Optional.ofNullable(list.get(0));
     }
 
 }

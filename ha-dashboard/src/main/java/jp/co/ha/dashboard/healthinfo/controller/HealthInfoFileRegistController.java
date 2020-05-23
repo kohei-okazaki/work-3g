@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.aws.AwsConfig;
 import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -27,9 +26,8 @@ import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.io.file.csv.reader.CsvReader;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
@@ -39,7 +37,7 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWizardController;
-import jp.co.ha.web.form.BaseApiResponse.ResultType;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報一括登録画面コントローラ
@@ -58,12 +56,9 @@ public class HealthInfoFileRegistController
     /** 健康情報ファイル登録画面サービス */
     @Autowired
     private HealthInfoFileRegistService fileService;
-    /** session管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionManageService;
-    /** AWS個別設定情報 */
-    @Autowired
-    private AwsConfig awsConfig;
+    private SessionComponent sessionComponent;
     /** S3コンポーネント */
     @Autowired
     private AwsS3Component awsS3Component;
@@ -102,7 +97,7 @@ public class HealthInfoFileRegistController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid HealthInfoFileForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
@@ -112,12 +107,11 @@ public class HealthInfoFileRegistController
             return getView(DashboardView.HEALTH_INFO_FILE_INPUT);
         }
 
-        String userId = sessionManageService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
-        // CSV読み取りクラス
-        CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
-        List<HealthInfoCsvUploadModel> modelList = reader
+        // Formの健康情報CSVからmodelリストを読み取る
+        List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
                 .readMultipartFile(form.getMultipartFile(), Charset.UTF_8);
 
         String fileName = DateUtil.toString(DateUtil.getSysDate(),
@@ -129,7 +123,7 @@ public class HealthInfoFileRegistController
         fileService.formatCheck(modelList, userId);
 
         // アップロードファイル名を設定
-        sessionManageService.setValue(request.getSession(),
+        sessionComponent.setValue(request.getSession(),
                 "healthinfo-file-regist/" + userId, fileName);
 
         model.addAttribute("modelList", modelList);
@@ -147,10 +141,10 @@ public class HealthInfoFileRegistController
     public String complete(Model model, HealthInfoFileForm form,
             HttpServletRequest request) throws BaseException {
 
-        String userId = sessionManageService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
-        String fileName = sessionManageService
+        String fileName = sessionComponent
                 .getValue(request.getSession(), "healthinfo-file-regist/" + userId,
                         String.class)
                 .orElseThrow(() -> new BusinessException(
@@ -158,12 +152,10 @@ public class HealthInfoFileRegistController
                                 + "healthinfo-file-regist/" + userId + "が存在しない"));
 
         // S3から健康情報CSVファイルを取得
-        InputStream is = awsS3Component.getS3ObjectByBacketAndKey(
-                awsConfig.getBacket(),
-                "healthinfo-file-regist/" + userId + "/" + fileName);
-        CsvReader<HealthInfoCsvUploadModel> reader = new HealthInfoCsvReader();
-        List<HealthInfoCsvUploadModel> modelList = reader.readInputStream(is,
-                Charset.UTF_8);
+        InputStream is = awsS3Component
+                .getS3ObjectByKey("healthinfo-file-regist/" + userId + "/" + fileName);
+        List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
+                .readInputStream(is, Charset.UTF_8);
 
         if (CollectionUtil.isEmpty(modelList)) {
             throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
@@ -172,7 +164,7 @@ public class HealthInfoFileRegistController
 
         ResultType result = fileService.regist(modelList, userId);
 
-        sessionManageService.removeValue(request.getSession(),
+        sessionComponent.removeValue(request.getSession(),
                 "healthinfo-file-regist/" + userId);
 
         if (ResultType.FAILURE == result) {

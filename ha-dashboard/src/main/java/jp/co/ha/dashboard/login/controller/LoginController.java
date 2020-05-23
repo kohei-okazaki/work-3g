@@ -28,7 +28,7 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.login.form.LoginForm;
@@ -45,9 +45,12 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("login")
 public class LoginController implements BaseWebController {
 
-    /** sessionサービス */
+    /** 健康情報検索条件 */
+    private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
+            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionService;
+    private SessionComponent sessionComponent;
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
@@ -103,7 +106,7 @@ public class LoginController implements BaseWebController {
     public String logout(HttpServletRequest request, RedirectAttributes redirectAttr) {
 
         // ログアウト時にすべてのセッション情報を削除する
-        sessionService.removeValues(request.getSession());
+        sessionComponent.removeValues(request.getSession());
 
         redirectAttr.addAttribute("isLogout", true);
         return "redirect:index";
@@ -147,16 +150,16 @@ public class LoginController implements BaseWebController {
         }
 
         // セッションにユーザIDを登録する。
-        sessionService.setValue(request.getSession(), "userId", form.getUserId());
+        sessionComponent.setValue(request.getSession(), "userId", form.getUserId());
 
         healthInfoGraphService.putGraph(model, () -> {
 
-            // 健康情報を検索する
-            SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
-                    .limit(10).build();
+            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            healthInfoSearchService.findByUserId(form.getUserId(), selectOption).stream()
+            healthInfoSearchService
+                    .findByUserId(form.getUserId(), SELECT_OPTION).stream()
+                    .sorted((o1, o2) -> o1.getSeqHealthInfoId()
+                            .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
                                 DateFormatType.YYYYMMDDHHMMSS);
@@ -186,7 +189,7 @@ public class LoginController implements BaseWebController {
     public String top(Model model, HttpServletRequest request) {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
         // ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).orElse(null);
         if (StringUtil.isEmpty(userId)) {
             return getView(DashboardView.LOGIN);
@@ -195,12 +198,12 @@ public class LoginController implements BaseWebController {
         // 健康情報グラフを作成
         healthInfoGraphService.putGraph(model, () -> {
 
-            // 健康情報を検索する
-            SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
-                    .limit(10).build();
+            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            healthInfoSearchService.findByUserId(userId, selectOption).stream()
+            healthInfoSearchService
+                    .findByUserId(userId, SELECT_OPTION).stream()
+                    .sorted((o1, o2) -> o1.getSeqHealthInfoId()
+                            .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
                                 DateFormatType.YYYYMMDDHHMMSS);
