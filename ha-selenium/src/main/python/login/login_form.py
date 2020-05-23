@@ -22,7 +22,7 @@ class LoginForm:
         '''
         ユーザIDを返す
         '''
-        return self.params["userId"]
+        return self.params["user_id"]
 
     def getPassword(self):
         '''
