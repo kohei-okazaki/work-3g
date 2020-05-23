@@ -11,3 +11,5 @@ BASE_SYSTEM_PATH = 'C:/app/git/work-3g/ha-selenium'
 SELENIUM_DRIVER_PATH = BASE_SYSTEM_PATH + '/src/main/resources/bin/chromedriver.exe'
 # Request基底URL
 BASE_REQUEST_URL = 'http://localhost:8080/'
+# Logディレクトリ
+LOG_DIR = 'C:/app/logs/'

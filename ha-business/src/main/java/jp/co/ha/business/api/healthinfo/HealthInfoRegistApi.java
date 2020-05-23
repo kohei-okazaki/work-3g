@@ -17,7 +17,7 @@ import jp.co.ha.web.api.annotation.ApiExecute;
  */
 @Component
 public class HealthInfoRegistApi
-        implements BaseApi<HealthInfoRegistRequest, HealthInfoRegistResponse> {
+        extends BaseApi<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
     /** 健康情報登録サービス */
     @Autowired

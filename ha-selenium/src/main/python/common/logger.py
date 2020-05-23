@@ -20,7 +20,7 @@ class Logger:
         Constructor
         @param filepath ファイルパス
         '''
-        self.__filepath = str(const_data.BASE_SYSTEM_PATH) + "/log/" + filename
+        self.__filepath = str(const_data.LOG_DIR) + filename
 
     def write(self, msg):
         '''

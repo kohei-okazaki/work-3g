@@ -18,7 +18,7 @@ import jp.co.ha.web.form.BaseRestApiResponse;
  *     レスポンス
  * @version 1.0.0
  */
-public interface BaseApi<Rq extends BaseRestApiRequest, Rs extends BaseRestApiResponse> {
+public abstract class BaseApi<Rq extends BaseRestApiRequest, Rs extends BaseRestApiResponse> {
 
     /**
      * APIを実行する
@@ -30,7 +30,7 @@ public interface BaseApi<Rq extends BaseRestApiRequest, Rs extends BaseRestApiRe
      * @throws BaseException
      *     基底例外
      */
-    public default void execute(Rq request, Rs response) throws BaseException {
+    public void execute(Rq request, Rs response) throws BaseException {
         try {
             for (Method m : this.getClass().getDeclaredMethods()) {
                 if (m.isAnnotationPresent(ApiExecute.class)) {

@@ -17,7 +17,7 @@ import jp.co.ha.web.api.annotation.ApiExecute;
  */
 @Component
 public class HealthInfoReferenceApi
-        implements BaseApi<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+        extends BaseApi<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
     /** 健康情報照会サービス */
     @Autowired
@@ -35,8 +35,7 @@ public class HealthInfoReferenceApi
      */
     @ApiExecute
     public void reference(HealthInfoReferenceRequest request,
-            HealthInfoReferenceResponse response)
-            throws BaseException {
+            HealthInfoReferenceResponse response) throws BaseException {
 
         service.checkRequest(request);
 

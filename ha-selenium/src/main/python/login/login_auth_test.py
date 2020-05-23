@@ -35,4 +35,5 @@ LoginAuth(driver, userId, password).doLogin()
 
 log.write("login_auth_test終了")
 
+exit
 # ここまでメイン処理
