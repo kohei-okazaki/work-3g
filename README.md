@@ -1,12 +1,8 @@
 # work-3g
 健康管理アプリ  
 
-## 01_ビルド手順(windows)  
-1.コマンドプロンプトでha-build/batまで移動  
-2.maven-build.batを実行(build.iniのbaseDirの値を適宜合わせて下さい、work3gの直下のha-common等がみれるように)  
-3.ha-api/pom.xmlのha-XXXのライブラリの依存関係をコメントアウト  
-4.ha-web/pom.xmlのha-XXXのライブラリの依存関係をコメントアウト  
-※上記の手順を行わなくてよいです(2019/06/01)  
+## 01_ビルド手順  
+https://github.com/kohei-okazaki/work-3g/wiki/00_%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86 を参考にローカル環境構築を行う  
 
 ## 02_Project構成  
 * ### ha-api  
@@ -46,4 +42,3 @@ seleniumを利用した画面の自動テスト処理を定義したプロジェ
 
 * ### ha-web  
 WebFWを定義したプロジェクト  
-
