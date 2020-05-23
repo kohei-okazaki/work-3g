@@ -27,10 +27,8 @@
     <org.hibernate-version>6.1.5.Final</org.hibernate-version>
     <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
     <org.thymeleaf-layout-version>2.4.1</org.thymeleaf-layout-version>
-    <org.java-mail-version>1.6.2</org.java-mail-version>
-    <org.groovy-version>3.0.3</org.groovy-version>
+    <org.groovy-version>3.0.4</org.groovy-version>
     <org.dbcp2-version>2.7.0</org.dbcp2-version>
-    <org.selenium-version>3.141.59</org.selenium-version>
     <org.junit-version>5.6.2</org.junit-version>
   </properties>
 
@@ -278,46 +276,12 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.10</version>
     </dependency>
-    <!-- Mail -->
-    <dependency>
-      <groupId>com.sun.mail</groupId>
-      <artifactId>javax.mail</artifactId>
-      <version>${org.java-mail-version}</version>
-      <scope>provided</scope>
-    </dependency>
     <!-- Test -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${org.junit-version}</version>
       <scope>test</scope>
-    </dependency>
-    <!-- Selenium -->
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>${org.selenium-version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-ie-driver</artifactId>
-      <version>${org.selenium-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-chrome-driver</artifactId>
-      <version>${org.selenium-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-firefox-driver</artifactId>
-      <version>${org.selenium-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-safari-driver</artifactId>
-      <version>${org.selenium-version}</version>
     </dependency>
   </dependencies>
 
