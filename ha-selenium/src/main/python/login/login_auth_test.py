@@ -7,10 +7,10 @@ Created on 2020/05/23
 '''
 
 from selenium import webdriver
-
 from src.main.python.common import const_data
 from src.main.python.common.logger import Logger
 from src.main.python.login.login_auth import LoginAuth
+from src.main.python.login.login_form import LoginForm
 
 # ここからメイン処理
 
@@ -21,17 +21,21 @@ log.write("login_auth_test開始")
 driver = webdriver.Chrome(const_data.SELENIUM_DRIVER_PATH)
 
 # 正しいログイン情報でログイン
-userId = "master"
-password = "master"
-LoginAuth(driver, userId, password).doLogin()
+login_form = LoginForm({
+  "userId": "master",
+  "password": "master",
+})
+LoginAuth(driver).doLogin(login_form)
 
 # ブラウザバック
 driver.back()
 
 # 正しくないパスワードでログイン
-userId = "master"
-password = "hoge"
-LoginAuth(driver, userId, password).doLogin()
+login_form = LoginForm({
+  "userId": "master",
+  "password": "hoge",
+})
+LoginAuth(driver).doLogin(login_form)
 
 log.write("login_auth_test終了")
 

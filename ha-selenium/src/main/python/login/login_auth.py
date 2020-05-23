@@ -14,39 +14,35 @@ class LoginAuth:
     ログイン認証処理を行うクラス
     '''
 
-    def __init__(self, driver, userId, password):
+    def __init__(self, driver):
         '''
         Constructor
         @param driver Driver
-        @param userId ログインID
-        @param password パスワード
         '''
         self.driver = driver
-        self.userId = userId
-        self.password = password
 
-    def doLogin(self):
+    def doLogin(self, login_form):
         '''
         ログイン処理
         '''
 
         # ログイン画面を表示する
-        self.driver.get(const_data.BASE_REQUEST_URL + '/login/index')
+        self.driver.get(const_data.BASE_REQUEST_URL + 'login/index')
 
-        # ログイン画面 - loginIdを設定
+        # ログイン画面 - userIdを設定
         loginIdElement = self.driver.find_element_by_id("userId")
-        loginIdElement.send_keys(self.userId)
+        loginIdElement.send_keys(login_form.getUserId())
 
         # ログイン画面 - passwordを設定
         passwordElement = self.driver.find_element_by_id("password")
-        passwordElement.send_keys(self.password)
+        passwordElement.send_keys(login_form.getPassword())
 
-        # 読み込みを待つために2秒間処理を止める
+        # 読込を待つために1秒間処理を止める
         sleep(1)
 
         # ログインボタン押下し、TOP画面へ遷移
         submitButton = self.driver.find_element_by_id("submit")
         submitButton.click()
 
-        # 読み込みを待つために2秒間処理を止める
+        # 読込を待つために1秒間処理を止める
         sleep(1)
