@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class HealthInfoRefDetailDto {
 
     /** 健康情報ID */
-    private Integer healthInfoId;
+    private Integer seqHealthInfoId;
     /** ユーザID */
     private String userId;
     /** 身長 */
@@ -26,27 +26,27 @@ public class HealthInfoRefDetailDto {
     /** 健康情報登録日時 */
     private String healthInfoRegDate;
     /** BMI範囲ID */
-    private Integer bmiRangeId;
+    private Integer seqBmiRangeId;
     /** 肥満度メッセージ */
     private String overweightMessage;
 
     /**
-     * healthInfoIdを返す
+     * seqHealthInfoIdを返す
      *
-     * @return healthInfoId
+     * @return seqHealthInfoId
      */
-    public Integer getHealthInfoId() {
-        return healthInfoId;
+    public Integer getSeqHealthInfoId() {
+        return seqHealthInfoId;
     }
 
     /**
-     * healthInfoIdを設定する
+     * seqHealthInfoIdを設定する
      *
-     * @param healthInfoId
+     * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setHealthInfoId(Integer healthInfoId) {
-        this.healthInfoId = healthInfoId;
+    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+        this.seqHealthInfoId = seqHealthInfoId;
     }
 
     /**
@@ -183,22 +183,22 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * bmiRangeIdを返す
+     * seqBmiRangeIdを返す
      *
-     * @return bmiRangeId
+     * @return seqBmiRangeId
      */
-    public Integer getBmiRangeId() {
-        return bmiRangeId;
+    public Integer getSeqBmiRangeId() {
+        return seqBmiRangeId;
     }
 
     /**
-     * bmiRangeIdを設定する
+     * seqBmiRangeIdを設定する
      *
-     * @param bmiRangeId
+     * @param seqBmiRangeId
      *     BMI範囲ID
      */
-    public void setBmiRangeId(Integer bmiRangeId) {
-        this.bmiRangeId = bmiRangeId;
+    public void setSeqBmiRangeId(Integer seqBmiRangeId) {
+        this.seqBmiRangeId = seqBmiRangeId;
     }
 
     /**
@@ -214,6 +214,7 @@ public class HealthInfoRefDetailDto {
      * overweightMessageを設定する
      *
      * @param overweightMessage
+     *     肥満度メッセージ
      */
     public void setOverweightMessage(String overweightMessage) {
         this.overweightMessage = overweightMessage;

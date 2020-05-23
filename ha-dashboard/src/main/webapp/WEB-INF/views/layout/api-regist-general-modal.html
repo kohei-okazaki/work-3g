@@ -9,7 +9,20 @@
         </button><!-- /.close -->
       </div><!-- /.modal-header -->
       <div class="modal-body">
-        <label>以下のHTTPヘッダを設定したHTTPリクエストより、ユーザの健康情報を登録する</label>
+        <label>以下のHTTPリクエストより、ユーザの健康情報を登録する</label>
+        <li>エンドポイントURL</li>
+        <table class="table table-hover">
+           <tr>
+             <td>/api/自身のユーザID/healthinfo<td>
+           </tr>
+        </table><!-- /.table table-hover -->
+        <li>HTTPメソッド</li>
+        <table class="table table-hover">
+           <tr>
+             <td>POST<td>
+           </tr>
+        </table><!-- /.table table-hover -->
+        <li>HTTPヘッダ</li>
         <table class="table table-hover">
           <tr>
             <th scope="row">Content-Type</th>
@@ -19,10 +32,11 @@
             <th scope="row">Accept-Charset</th>
             <td>utf-8</td>
           </tr>
-        </table><!-- /.table table-hover table-striped -->
-        <label>エンドポイントURL</label>
-        <br>
-        <p>/ha-api/healthInforegist</p>
+          <tr>
+            <th scope="row">Api-Key</th>
+            <td>ユーザに発行されているアカウントのAPIキー<br>アカウント設定画面で確認してください</td>
+          </tr>
+        </table><!-- /.table table-hover -->
       </div><!-- /.modal-body -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

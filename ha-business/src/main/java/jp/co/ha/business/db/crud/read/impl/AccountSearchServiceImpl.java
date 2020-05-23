@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.AccountKey;
 import jp.co.ha.db.mapper.AccountMapper;
 
 /**
@@ -29,8 +30,10 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<Account> findByUserId(String userId) {
-        return Optional.ofNullable(mapper.selectByPrimaryKey(userId));
+    public Optional<Account> findById(String userId) {
+        AccountKey key = new AccountKey();
+        key.setUserId(userId);
+        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
     }
 
 }

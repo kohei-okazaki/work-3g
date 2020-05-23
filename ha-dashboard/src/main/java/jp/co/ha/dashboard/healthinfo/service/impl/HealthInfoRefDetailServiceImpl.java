@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoRefDetailDto;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
+import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
@@ -36,13 +39,17 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
      * {@inheritDoc}
      */
     @Override
-    public HealthInfoRefDetailDto getHealthInfoRefDetailDto(HealthInfoRefDetailDto dto) {
+    public Optional<HealthInfoRefDetailDto> getHealthInfoRefDetailDto(
+            HealthInfoRefDetailDto dto) {
 
         // 健康情報を検索
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(dto.getHealthInfoId(), dto.getUserId());
+                .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), dto.getUserId());
+        if (healthInfoList == null) {
+            return Optional.empty();
+        }
 
-        return healthInfoList.stream().map(e -> {
+        List<HealthInfoRefDetailDto> list = healthInfoList.stream().map(e -> {
 
             HealthInfoRefDetailDto detailDto = new HealthInfoRefDetailDto();
             BeanUtil.copy(dto, detailDto);
@@ -59,11 +66,17 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
                                 DateFormatType.YYYYMMDDHHMMSS));
                 // 肥満度メッセージ
                 BmiRangeMt mt = bmiRangeMtSearchService
-                        .findByBmiRangeId(srcEntity.getSeqBmiRangeId());
+                        .findById(srcEntity.getSeqBmiRangeId())
+                        .orElseThrow(() -> new SystemRuntimeException(
+                                CommonErrorCode.DB_NO_DATA,
+                                "BMI範囲マスタが存在しません seqBmiRangeId="
+                                        + srcEntity.getSeqBmiRangeId()));
                 destDto.setOverweightMessage(mt.getOverWeightStatus());
             });
             return detailDto;
-        }).collect(Collectors.toList()).get(0);
+        }).collect(Collectors.toList());
+
+        return list.isEmpty() ? Optional.empty() : Optional.ofNullable(list.get(0));
     }
 
 }

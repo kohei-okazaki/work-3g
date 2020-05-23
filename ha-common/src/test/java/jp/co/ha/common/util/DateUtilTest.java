@@ -9,14 +9,14 @@ import org.junit.Test;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link DateUtil} のjUnit
+ * {@linkplain DateUtil} のjUnit
  *
  * @version 1.0.0
  */
 public class DateUtilTest extends BaseCommonTest {
 
     /**
-     * {@link DateUtil#toDate}
+     * {@linkplain DateUtil#toDate}
      */
     @Test
     public void toDateTest() {
@@ -37,7 +37,7 @@ public class DateUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link DateUtil#isBefore}
+     * {@linkplain DateUtil#isBefore}
      */
     @Test
     public void isBeforeTest() {
@@ -59,7 +59,7 @@ public class DateUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link DateUtil#isAfter}
+     * {@linkplain DateUtil#isAfter}
      */
     @Test
     public void isAfterTest() {
@@ -81,7 +81,7 @@ public class DateUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link DateUtil#isSameDate}
+     * {@linkplain DateUtil#isSameDate}
      */
     @Test
     public void isSameDateTest() {
@@ -98,7 +98,7 @@ public class DateUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link DateUtil#isBetWeenDate}
+     * {@linkplain DateUtil#isBetWeenDate}
      */
     @Test
     public void isBetWeenDateTest() {
@@ -118,7 +118,7 @@ public class DateUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link DateUtil#toStartDate}
+     * {@linkplain DateUtil#toStartDate}
      */
     @Test
     public void toStartDateTest() {
@@ -130,7 +130,7 @@ public class DateUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link DateUtil#toEndDate}
+     * {@linkplain DateUtil#toEndDate}
      */
     @Test
     public void toEndDateTest() {

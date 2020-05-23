@@ -1,7 +1,10 @@
 package jp.co.ha.batch.dto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 健康情報登録情報
@@ -11,11 +14,14 @@ import java.util.List;
 public class HealthInfoRegistData {
 
     /** ユーザID */
+    @JsonProperty("userid")
     private String userId;
     /** APIキー */
+    @JsonProperty("apiKey")
     private String apiKey;
-    /** 健康情報要求情報 */
-    private List<HealthInfoRequestData> healthInfoRequestData;
+    /** 健康情報要求情報リスト */
+    @JsonProperty("healthInfoRequestDataList")
+    private List<HealthInfoRequestData> healthInfoRequestDataList = new ArrayList<>();
 
     /**
      * userIdを返す
@@ -56,23 +62,23 @@ public class HealthInfoRegistData {
     }
 
     /**
-     * healthInfoRequestDataを返す
+     * healthInfoRequestDataListを返す
      *
-     * @return healthInfoRequestData
+     * @return healthInfoRequestDataList
      */
-    public List<HealthInfoRequestData> getHealthInfoRequestData() {
-        return healthInfoRequestData;
+    public List<HealthInfoRequestData> getHealthInfoRequestDataList() {
+        return healthInfoRequestDataList;
     }
 
     /**
-     * healthInfoRequestDataを設定する
+     * healthInfoRequestDataListを設定する
      *
-     * @param healthInfoRequestData
-     *     健康情報要求情報
+     * @param healthInfoRequestDataList
+     *     健康情報要求情報リスト
      */
-    public void setHealthInfoRequestData(
-            List<HealthInfoRequestData> healthInfoRequestData) {
-        this.healthInfoRequestData = healthInfoRequestData;
+    public void setHealthInfoRequestDataList(
+            List<HealthInfoRequestData> healthInfoRequestDataList) {
+        this.healthInfoRequestDataList = healthInfoRequestDataList;
     }
 
     /**

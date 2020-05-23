@@ -12,7 +12,7 @@ import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
- * {@link HealthInfoCalcService} のjUnit
+ * {@linkplain HealthInfoCalcService} のjUnit
  *
  * @version 1.0.0
  */
@@ -23,7 +23,7 @@ public class HealthInfoCalcServiceTest extends BaseBusinessTest {
     private HealthInfoCalcService service;
 
     /**
-     * {@link HealthInfoCalcService#getHealthInfoStatus}
+     * {@linkplain HealthInfoCalcService#getHealthInfoStatus}
      */
     @Test
     public void getHealthInfoStatusTest() {
@@ -54,7 +54,7 @@ public class HealthInfoCalcServiceTest extends BaseBusinessTest {
     }
 
     /**
-     * {@link HealthInfoCalcService#convertMeterFromCentiMeter}
+     * {@linkplain HealthInfoCalcService#convertMeterFromCentiMeter}
      */
     @Test
     public void convertMeterFromCentiMeterTest() {

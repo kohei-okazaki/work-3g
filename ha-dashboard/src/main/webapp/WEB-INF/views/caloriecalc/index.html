@@ -4,24 +4,24 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_カロリー計算画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
 
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
-  <div class="container border col-8">
-    <h2 class="menuTitle">カロリー計算</h2>
+  <main role="main" class="px-4">
+    <div class="container border col-8">
+      <h2 class="menuTitle">カロリー計算</h2>
 
-    <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
-
-      <div class="row">
+      <form id="calorieCalcForm" action="./index" th:action="@{./index}" method="post" th:object="${calorieCalcForm}">
+        <br>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}"></div>
-      </div>
 
         <label for="age" th:text="#{age}"></label>
         <div class="form-group">
@@ -75,29 +75,30 @@
             <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{lifeWorkMetabolism}" placeholder="消費カロリー" aria-describedby="basic-addon4" />
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">kcal</span>
-            </div>
-          </div>
-        </div>
+            </div><!-- /.input-group-append -->
+          </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
 
-      <!--/* ボタン部ここから */-->
-      <input type="submit" class="btn btn-success" value="確 認" />
-      <input type="reset" class="btn btn-secondary" value="リセット" />
-      <!--/* ボタン部ここまで */-->
-    </form>
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success" value="確 認" />
+        <input type="reset" class="btn btn-secondary" value="リセット" />
+        <!--/* ボタン部ここまで */-->
+      </form>
 
-    <!--/* 生活活動代謝モーダル */-->
-    <div th:replace="./caloriecalc/lifework-metabolism-model.html"></div>
+      <!--/* 生活活動代謝モーダル */-->
+      <div th:replace="./caloriecalc/lifework-metabolism-model.html"></div>
 
-    <br>
+      <br>
 
-    <!--/* 結果部ここから */-->
-    <div th:if="${calcResult} != null">
-      <div th:replace="./caloriecalc/result.html"></div>
-      <br><br>
-    </div>
-    <!--/* 結果部ここまで */-->
-  </div><!-- /.container border col-8 -->
-  <br>
+      <!--/* 結果部ここから */-->
+      <div th:if="${calcResult} != null">
+        <div th:replace="./caloriecalc/result.html"></div>
+        <br><br>
+      </div>
+      <!--/* 結果部ここまで */-->
+    </div><!-- /.container border col-8 -->
+  </main>
+  <br><br><br><br><br><br><br><br><br><br><br><br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>

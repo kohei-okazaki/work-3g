@@ -18,6 +18,6 @@ public interface HealthInfoFileSettingSearchService {
      *     ユーザID
      * @return 健康情報ファイル設定
      */
-    Optional<HealthInfoFileSetting> findByUserId(String userId);
+    Optional<HealthInfoFileSetting> findById(String userId);
 
 }

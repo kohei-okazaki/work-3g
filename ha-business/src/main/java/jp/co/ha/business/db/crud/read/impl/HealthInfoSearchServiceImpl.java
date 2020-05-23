@@ -54,13 +54,13 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByHealthInfoIdAndUserId(Integer healthInfoId,
+    public List<HealthInfo> findByHealthInfoIdAndUserId(Integer seqHealthInfoId,
             String userId) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
         // 健康情報ID
-        criteria.andSeqHealthInfoIdEqualTo(healthInfoId);
+        criteria.andSeqHealthInfoIdEqualTo(seqHealthInfoId);
         // ユーザID
         criteria.andUserIdEqualTo(userId);
 

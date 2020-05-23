@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
@@ -102,7 +105,7 @@ public class FileUtil {
     public static File compressZip(List<File> srcFileList, String destFilePath) {
 
         try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(destFilePath),
-                Charset.forName("UTF-8"))) {
+                Charset.forName(jp.co.ha.common.type.Charset.UTF_8.getValue()))) {
             byte[] buffer = new byte[1024];
             for (File file : srcFileList) {
                 try (InputStream in = new FileInputStream(file)) {
@@ -142,16 +145,22 @@ public class FileUtil {
      *     コピー元ファイル
      * @param destFile
      *     コピー先ファイル
+     * @throws BaseException
      */
-    public static void copyFile(File srcFile, File destFile) {
-        try (FileChannel srcChannel = new FileInputStream(srcFile).getChannel();
-                FileChannel destChannel = new FileOutputStream(destFile).getChannel()) {
+    public static void copyFile(File srcFile, File destFile) throws BaseException {
+        try (FileInputStream fis = new FileInputStream(srcFile);
+                FileChannel srcChannel = fis.getChannel();
+                FileOutputStream fos = new FileOutputStream(destFile);
+                FileChannel destChannel = fos.getChannel()) {
             srcChannel.transferTo(0, srcChannel.size(), destChannel);
         } catch (FileNotFoundException e) {
-            LOG.error("ファイルが見つかりません srcFile:" + srcFile.getPath() + " destFile:"
-                    + destFile.getPath(), e);
+            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+                    "ファイルが見つかりません srcFile:" + srcFile.getPath() + " destFile:"
+                            + destFile.getPath(),
+                    e);
         } catch (IOException e) {
-            LOG.error("ファイルの書き込みや読み込みに失敗しました", e);
+            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+                    "ファイルの書き込みや読み込みに失敗しました", e);
         }
     }
 
@@ -162,16 +171,20 @@ public class FileUtil {
      *     コピー元ファイル
      * @param destPath
      *     コピー先ファイル
+     * @throws BaseException
+     *     ファイルのコピーに失敗した場合
      */
-    public static void copyFile(String srcPath, String destPath) {
+    public static void copyFile(String srcPath, String destPath) throws BaseException {
         try {
             Path src = Paths.get(srcPath);
             Path dest = Paths.get(destPath);
             Files.deleteIfExists(dest);
             Files.copy(src, dest);
         } catch (IOException e) {
-            LOG.error("ファイルのコピーに失敗しました srcFilePath:" + srcPath + " destFilePath:"
-                    + destPath, e);
+            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+                    "ファイルのコピーに失敗しました srcFilePath:" + srcPath + " destFilePath:"
+                            + destPath,
+                    e);
         }
     }
 
@@ -185,12 +198,7 @@ public class FileUtil {
 
         // 削除対象のファイルを取得
         List<File> fileList = getFileList(path);
-
-        for (File file : fileList) {
-            if (file.isFile()) {
-                file.delete();
-            }
-        }
+        fileList.stream().filter(File::isFile).forEach(e -> e.delete());
 
     }
 
@@ -204,32 +212,36 @@ public class FileUtil {
      * @return ファイル
      */
     public static File convertPathFile(String srcPath, FileSeparator sep) {
-        if (FileSeparator.WINDOWS.is(sep)) {
-            if (srcPath.contains(FileSeparator.WINDOWS.getValue())) {
-                return getFile(srcPath);
-            } else {
-                return getFile(srcPath.replaceAll(FileSeparator.LINUX.getValue(),
-                        FileSeparator.WINDOWS.getValue()));
-            }
+        if (FileSeparator.WINDOWS == sep) {
+            return convertPathFile(srcPath, FileSeparator.LINUX, FileSeparator.WINDOWS);
+        } else if (FileSeparator.LINUX == sep) {
+            return convertPathFile(srcPath, FileSeparator.WINDOWS, FileSeparator.LINUX);
         } else {
-            if (srcPath.contains(FileSeparator.LINUX.getValue())) {
-                return getFile(srcPath);
-            } else {
-                return getFile(srcPath.replaceAll(FileSeparator.WINDOWS.getValue(),
-                        FileSeparator.LINUX.getValue()));
-            }
+            // WindowsでもLinuxでもない場合、そのまま返す
+            return getFile(srcPath);
         }
     }
 
     /**
-     * 指定した<code>path</code>のファイルオブジェクトを返す
+     * 指定した<code>path</code>の{@linkplain File}オブジェクトを返す
      *
      * @param path
      *     パス
-     * @return ファイル
+     * @return File
      */
     public static File getFile(String path) {
-        return new File(path);
+        return getPath(path).toFile();
+    }
+
+    /**
+     * 指定した<code>path</code>の{@linkplain Path}オブジェクトを返す
+     *
+     * @param path
+     *     ファイルパス
+     * @return Path
+     */
+    public static Path getPath(String path) {
+        return Paths.get(path);
     }
 
     /**
@@ -270,10 +282,40 @@ public class FileUtil {
      *
      * @param path
      *     パス
-     * @return 作成された場合true, それ以外の場合false
+     * @throws BaseException
+     *     ディレクトリの作成に失敗した場合
      */
-    public static boolean mkdir(String path) {
-        return getFile(path).mkdir();
+    public static void mkdir(String path) throws BaseException {
+
+        try {
+            LOG.info("path=" + path + "を作成");
+            Files.createDirectories(getPath(path));
+        } catch (IOException e) {
+            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+                    "ディレクトリの作成に失敗しました. path=" + path, e);
+        }
+    }
+
+    /**
+     * 指定された元ファイルパス<code>srcPath</code>を<br>
+     * 指定された<code>from</code>のパスから指定された<code>to</code>のパスに変換する
+     *
+     * @param srcPath
+     *     元ファイルパス
+     * @param from
+     *     ファイルセパレータ
+     * @param to
+     *     ファイルセパレータ
+     * @return パス変換後のファイルオブジェクト
+     * @see FileUtil#convertPathFile(String, FileSeparator)
+     */
+    private static File convertPathFile(String srcPath, FileSeparator from,
+            FileSeparator to) {
+        if (srcPath.contains(to.getValue())) {
+            return getFile(srcPath);
+        } else {
+            return getFile(srcPath.replaceAll(from.getValue(), to.getValue()));
+        }
     }
 
     /**
@@ -314,18 +356,6 @@ public class FileUtil {
         }
 
         /**
-         * 指定したファイル拡張子列挙が自身と一致するか判定する<br>
-         * 一致する場合true, それ以外の場合false<br>
-         *
-         * @param fileExtension
-         *     ファイル拡張子列挙
-         * @return 判定結果
-         */
-        public boolean is(FileExtension fileExtension) {
-            return this == fileExtension;
-        }
-
-        /**
          * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
          * @param value
          *     値
@@ -362,17 +392,6 @@ public class FileUtil {
 
         /** セパレータ */
         private String value;
-
-        /**
-         * 指定したファイルセパレータが自身と一致するかどうか返す<br>
-         *
-         * @param separator
-         *     セパレータ
-         * @return 判定結果
-         */
-        public boolean is(FileSeparator separator) {
-            return this == separator;
-        }
 
         /**
          * {@inheritDoc}
@@ -440,4 +459,5 @@ public class FileUtil {
         }
 
     }
+
 }

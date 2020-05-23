@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.read.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -10,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.common.db.annotation.Select;
-import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.BmiRangeMtExample;
 import jp.co.ha.db.mapper.BmiRangeMtMapper;
@@ -35,12 +34,10 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public BmiRangeMt findByBmiRangeId(Integer seqBmiRangeId) {
+    public Optional<BmiRangeMt> findById(Integer seqBmiRangeId) {
         return findAll().stream()
                 .filter(e -> e.getSeqBmiRangeId().equals(seqBmiRangeId))
-                .findFirst()
-                .orElseThrow(() -> new SystemRuntimeException(CommonErrorCode.DB_NO_DATA,
-                        "BMI範囲マスタが存在しません seqBmiRangeId=" + seqBmiRangeId));
+                .findFirst();
     }
 
     /**

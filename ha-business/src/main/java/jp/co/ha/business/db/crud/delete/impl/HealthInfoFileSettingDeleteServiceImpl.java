@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.delete.HealthInfoFileSettingDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
+import jp.co.ha.db.entity.HealthInfoFileSettingKey;
 import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 
 /**
@@ -27,7 +28,9 @@ public class HealthInfoFileSettingDeleteServiceImpl
     @Delete
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteByUserId(String userId) {
-        mapper.deleteByPrimaryKey(userId);
+    public void deleteById(String userId) {
+        HealthInfoFileSettingKey key = new HealthInfoFileSettingKey();
+        key.setUserId(userId);
+        mapper.deleteByPrimaryKey(key);
     }
 }

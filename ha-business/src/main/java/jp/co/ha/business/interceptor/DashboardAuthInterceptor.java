@@ -13,8 +13,8 @@ import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.system.SessionManageService;
-import jp.co.ha.common.system.annotation.Sha256;
+import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.interceptor.BaseWebInterceptor;
@@ -30,9 +30,9 @@ import jp.co.ha.web.interceptor.BaseWebInterceptor;
  */
 public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
-    /** session管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionService;
+    private SessionComponent sessionComponent;
     /** SHA-256 ハッシュ値生成 */
     @Sha256
     @Autowired
@@ -52,14 +52,14 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isLoginAuthCheck(handler)) {
             // ログイン情報のチェック対象の場合
-            sessionService.getValue(request.getSession(), "userId", String.class)
+            sessionComponent.getValue(request.getSession(), "userId", String.class)
                     .orElseThrow(() -> new SystemException(
                             DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
         }
 
         if (isCsrfTokenCheck(handler)) {
             // CSRFトークンチェックを行う
-            String sessionCsrfToken = sessionService
+            String sessionCsrfToken = sessionComponent
                     .getValue(request.getSession(), "csrfToken", String.class)
                     .orElseThrow(() -> new SystemException(
                             DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
@@ -85,14 +85,14 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isCsrfTokenCheck(handler)) {
             // CSRFトークンチェック後、トークンを削除する
-            sessionService.removeValue(request.getSession(), "csrfToken");
+            sessionComponent.removeValue(request.getSession(), "csrfToken");
         }
 
         if (isCsrfTokenFactory(handler)) {
             // CSRFトークンを作成する
             String random = RandomStringUtils.randomAlphabetic(10);
             String csrfToken = encoder.encode(random, "");
-            sessionService.setValue(request.getSession(), "csrfToken", csrfToken);
+            sessionComponent.setValue(request.getSession(), "csrfToken", csrfToken);
         }
     }
 
@@ -140,7 +140,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
         if (BeanUtil.isNull(csrfToken)) {
             return false;
         }
-        return csrfToken.factocy();
+        return csrfToken.factory();
     }
 
 }

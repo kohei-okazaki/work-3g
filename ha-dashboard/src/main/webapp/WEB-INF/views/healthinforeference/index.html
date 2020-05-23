@@ -4,64 +4,68 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報照会画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
 <link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+<link rel="stylesheet" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
 </head>
 <body>
 
   <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
+  <main role="main" class="px-4">
+    <div class="container border col-8">
+      <h2 class="menuTitle">健康情報照会</h2>
+      <form id="healthInfoReferenceForm" action="./index" th:action="@{./index}" method="post" th:object="${healthInfoReferenceForm}">
+        <br>
+        <div class="alert alert-danger" role="alert" th:if="${isRefered != null && isRefered && hasResult != null && !hasResult}">検索結果が存在しません</div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqHealthInfoId')}" th:errors="*{seqHealthInfoId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}"></div>
 
-  <div class="container border col-8">
-    <h2 class="menuTitle">健康情報照会</h2>
-    <form id="healthInfoReferenceForm" action="./index" th:action="@{./index}" method="post" th:object="${healthInfoReferenceForm}">
+        <h3>検索条件</h3>
+        <div class="form-group">
+          <p th:text="#{seqHealthInfoId}"></p>
+          <input type="text" class="validate[custom[number]] form-control" size="6" th:field="*{seqHealthInfoId}" placeholder="1000" />
+        </div><!-- /.form-group -->
+        <div class="form-group">
+          <p th:text="#{healthInfoRegDate}"></p>
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" checked="checked">
+            <label for="healthInfoRegDateSelectFlagFalse" class="custom-control-label">直接指定しない</label>
+          </div><!-- /.custom-control custom-radio -->
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" checked="checked">
+            <label for="healthInfoRegDateSelectFlagTrue" class="custom-control-label">直接指定する</label>
+          </div><!-- /.custom-control custom-radio -->
+          <input type="text" th:field="*{fromHealthInfoRegDate}" class="form-control" placeholder="2017/01/01" />
+          <div class="hideCalendar">
+            <label>～</label>
+            <input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar form-control" placeholder="2017/01/02" />
+          </div><!-- /.hideCalendar -->
+        </div><!-- /.form-group -->
 
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoId')}" th:errors="*{healthInfoId}" data-sal="slide-up"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}" data-sal="slide-up"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}" data-sal="slide-up"></div>
-      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}" data-sal="slide-up"></div>
+        <br>
 
-      <h3>検索条件</h3>
-      <div class="form-group">
-        <p th:text="#{healthInfoId}"></p>
-        <input type="text" class="validate[custom[number]] form-control" size="6" th:field="*{healthInfoId}" placeholder="1000" />
-      </div><!-- /.form-group -->
-      <div class="form-group">
-        <p th:text="#{healthInfoRegDate}"></p>
-        <div class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" checked="checked">
-          <label for="healthInfoRegDateSelectFlagFalse" class="custom-control-label">直接指定しない</label>
-        </div><!-- /.custom-control custom-radio -->
-        <div class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" checked="checked">
-          <label for="healthInfoRegDateSelectFlagTrue" class="custom-control-label">直接指定する</label>
-        </div><!-- /.custom-control custom-radio -->
-        <input type="text" th:field="*{fromHealthInfoRegDate}" class="form-control" placeholder="2017/01/01" />
-        <div class="hideCalendar">
-          <label>～</label>
-          <input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar form-control" placeholder="2017/01/02" />
-        </div><!-- /.hideCalendar -->
-      </div><!-- /.form-group -->
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success" value="検 索" />
+        <input type="reset" class="btn btn-secondary" value="リセット" />
+        <!--/* ボタン部ここまで */-->
+      </form>
 
       <br>
 
-      <!--/* ボタン部ここから */-->
-      <input type="submit" class="btn btn-success" value="検 索" />
-      <input type="reset" class="btn btn-secondary" value="リセット" />
-      <!--/* ボタン部ここまで */-->
-    </form>
+      <!--/* 結果部ここから */-->
+      <div th:if="${hasResult}">
+        <div th:replace="./healthinforeference/result.html"></div>
+      </div>
+      <!--/* 結果部ここまで */-->
 
-    <br>
-
-    <!--/* 結果部ここから */-->
-    <div th:if="${hasResult}">
-      <div th:replace="./healthinforeference/result.html"></div>
-    </div>
-    <!--/* 結果部ここまで */-->
-
-  </div>
-  <br><br>
+    </div><!-- /.container border col-8 -->
+  </main>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>

@@ -21,35 +21,35 @@ public class HealthInfoReferenceForm implements BaseForm {
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "健康情報IDは半角数字で入力してください")
     @Min(size = 1, message = "健康情報IDは1桁以上で入力してください")
     @Max(size = 8, message = "健康情報IDは8桁以下で入力してください")
-    private String healthInfoId;
+    private String seqHealthInfoId;
     /** 健康情報作成日直接指定フラグ */
     @Required(message = "健康情報作成日直接指定フラグが未入力です")
     @Flag(message = "健康情報作成日直接指定フラグの値が不正です")
     private String healthInfoRegDateSelectFlag;
     /** 健康情報作成日(開始) */
-    @Date(formatType = DateFormatType.YYYYMMDD)
+    @Date(formatType = DateFormatType.YYYYMMDD, message = "健康情報作成日(開始)はyyyy/mm/dd形式で入力してください")
     private String fromHealthInfoRegDate;
     /** 健康情報作成日(終了) */
-    @Date(formatType = DateFormatType.YYYYMMDD)
+    @Date(formatType = DateFormatType.YYYYMMDD, message = "健康情報作成日(終了)はyyyy/mm/dd形式で入力してください")
     private String toHealthInfoRegDate;
 
     /**
-     * healthInfoIdを返す
+     * seqHealthInfoIdを返す
      *
-     * @return healthInfoId
+     * @return seqHealthInfoId
      */
-    public String getHealthInfoId() {
-        return healthInfoId;
+    public String getSeqHealthInfoId() {
+        return seqHealthInfoId;
     }
 
     /**
-     * healthInfoIdを設定する
+     * seqHealthInfoIdを設定する
      *
-     * @param healthInfoId
+     * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setHealthInfoId(String healthInfoId) {
-        this.healthInfoId = healthInfoId;
+    public void setSeqHealthInfoId(String seqHealthInfoId) {
+        this.seqHealthInfoId = seqHealthInfoId;
     }
 
     /**

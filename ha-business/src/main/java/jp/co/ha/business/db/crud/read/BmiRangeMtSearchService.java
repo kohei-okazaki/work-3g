@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.read;
 
 import java.util.List;
+import java.util.Optional;
 
 import jp.co.ha.db.entity.BmiRangeMt;
 
@@ -18,7 +19,7 @@ public interface BmiRangeMtSearchService {
      *     BMI範囲ID
      * @return BmiRangeMt
      */
-    BmiRangeMt findByBmiRangeId(Integer seqBmiRangeId);
+    Optional<BmiRangeMt> findById(Integer seqBmiRangeId);
 
     /**
      * BMI範囲マスタを全件取得する

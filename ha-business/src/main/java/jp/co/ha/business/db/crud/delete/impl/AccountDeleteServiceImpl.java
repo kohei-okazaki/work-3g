@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.delete.AccountDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
+import jp.co.ha.db.entity.AccountKey;
 import jp.co.ha.db.mapper.AccountMapper;
 
 /**
@@ -26,7 +27,9 @@ public class AccountDeleteServiceImpl implements AccountDeleteService {
     @Delete
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteByUserId(String userId) {
-        mapper.deleteByPrimaryKey(userId);
+    public void deleteById(String userId) {
+        AccountKey key = new AccountKey();
+        key.setUserId(userId);
+        mapper.deleteByPrimaryKey(key);
     }
 }

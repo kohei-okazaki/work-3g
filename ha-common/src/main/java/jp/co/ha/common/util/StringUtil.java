@@ -406,7 +406,7 @@ public class StringUtil {
     }
 
     /**
-     * {@link StringUtils#abbreviate(String, int)}のラッパーメソッド
+     * {@linkplain StringUtils#abbreviate(String, int)}のラッパーメソッド
      *
      * @param str
      *     文字列
@@ -419,7 +419,7 @@ public class StringUtil {
     }
 
     /**
-     * {@link StringUtils#abbreviate(String, int, int)}のラッパーメソッド
+     * {@linkplain StringUtils#abbreviate(String, int, int)}のラッパーメソッド
      *
      * @param str
      *     文字列
@@ -435,7 +435,7 @@ public class StringUtil {
 
     /**
      * 指定して桁数のランダム文字列を返す<br>
-     * {@link org.apache.commons.lang3.RandomStringUtils#randomAlphabetic(int)}のラッパーメソッド
+     * {@linkplain org.apache.commons.lang3.RandomStringUtils#randomAlphabetic(int)}のラッパーメソッド
      *
      * @param length
      *     文字列長
@@ -458,7 +458,7 @@ public class StringUtil {
     }
 
     /**
-     * {@link org.springframework.util.StringUtils#capitalize(String)} のラッパーメソッド
+     * {@linkplain org.springframework.util.StringUtils#capitalize(String)}のラッパーメソッド
      *
      * @param str
      *     対象文字列

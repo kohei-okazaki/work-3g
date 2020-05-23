@@ -18,7 +18,7 @@ public class MDC {
     }
 
     /**
-     * {@code MDC}に値を設定
+     * {@linkplain org.slf4j.MDC}に値を設定
      *
      * @param key
      *     キー
@@ -30,7 +30,7 @@ public class MDC {
     }
 
     /**
-     * {@code MDC}から<code>key</code>に対応する値を取得
+     * {@linkplain org.slf4j.MDC}から<code>key</code>に対応する値を取得
      *
      * @param key
      *     キー
@@ -41,7 +41,7 @@ public class MDC {
     }
 
     /**
-     * {@code MDC}から<code>key</code>を削除
+     * {@linkplain org.slf4j.MDC}から<code>key</code>を削除
      *
      * @param key
      *     キー
@@ -51,7 +51,7 @@ public class MDC {
     }
 
     /**
-     * {@code MDC}に<code>key</code>が設定されているかどうか評価
+     * {@linkplain org.slf4j.MDC}に<code>key</code>が設定されているかどうか評価
      *
      * @param key
      *     キー

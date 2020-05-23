@@ -10,7 +10,7 @@ import org.junit.Test;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link RegexType} のjUnit
+ * {@linkplain RegexType} のjUnit
  *
  * @version 1.0.0
  */

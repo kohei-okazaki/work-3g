@@ -7,12 +7,10 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import jp.co.ha.business.api.request.deserialize.RequestTypeDeserializer;
-import jp.co.ha.business.api.request.deserialize.TestModeDeserializer;
-import jp.co.ha.business.api.type.RequestType;
-import jp.co.ha.business.api.type.TestMode;
-import jp.co.ha.web.convert.ResultTypeSerializer;
-import jp.co.ha.web.form.BaseApiResponse.ResultType;
+import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.api.healthinfo.type.TestMode.TestModeDeserializer;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultTypeSerializer;
 
 /**
  * JSONの設定クラス
@@ -42,7 +40,6 @@ public class JsonConfig {
      */
     private Module getDeserializeModule() {
         SimpleModule module = new SimpleModule();
-        module.addDeserializer(RequestType.class, new RequestTypeDeserializer());
         module.addDeserializer(TestMode.class, new TestModeDeserializer());
         return module;
     }

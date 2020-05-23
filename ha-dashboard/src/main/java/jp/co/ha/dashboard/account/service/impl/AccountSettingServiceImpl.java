@@ -74,14 +74,14 @@ public class AccountSettingServiceImpl implements AccountSettingService {
         try {
 
             // アカウント情報を検索し、Dtoの内容をマージする
-            Account befAccount = accountSearchService.findByUserId(dto.getUserId()).get();
+            Account befAccount = accountSearchService.findById(dto.getUserId()).get();
             mergeAccount(dto, befAccount);
             // アカウント情報を更新する
             accountUpdateService.update(befAccount);
 
             // メール情報を検索し、Dtoの内容をマージする
             Optional<MailInfo> befMailInfo = mailInfoSearchService
-                    .findByUserId(dto.getUserId());
+                    .findById(dto.getUserId());
             if (befMailInfo.isPresent()) {
                 // メール情報が登録されている場合
                 mergeMailInfo(dto, befMailInfo.get());
@@ -100,8 +100,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
             // 健康情報ファイル設定情報を検索し、Dtoの内容をマージする
             HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                    .findByUserId(dto.getUserId())
-                    .get();
+                    .findById(dto.getUserId()).get();
             mergeHealthInfoFileSetting(dto, healthInfoFileSetting);
             // 健康情報ファイル設定情報を更新する
             healthInfoFileSettingUpdateService.update(healthInfoFileSetting);

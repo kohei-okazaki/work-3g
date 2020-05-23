@@ -4,44 +4,45 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録確認画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
-
-  <div class="header">
-    <h1 id="appTitle" class="appTitle" th:text="'&nbsp;' + #{healthInfoAppName}"></h1>
-  </div><!-- /.header -->
-    <br><br>
-    <h2 class="menuTitle">アカウント登録確認画面</h2>
+  <!-- ヘッダ部 -->
+  <div th:replace="layout/layout :: header"></div>
+  <br><br><br><br>
+  <main role="main" class="px-4">
     <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountRegistForm}">
       <div class="container border col-7">
+        <h2 class="menuTitle">アカウント登録確認</h2>
         <table class="table">
-        <tr>
-          <th scope="row" th:text="#{userId}"></th >
-          <td th:text="*{userId}"></td>
-        </tr>
-        <tr>
-          <th scope="row" th:text="#{password}"></th >
-          <td>****</td>
-        </tr>
-        <tr>
-          <th scope="row" th:text="#{confirmPassword}"></th>
-          <td>****</td>
-        </tr>
-        <tr>
-          <th scope="row" th:text="#{remarks}"></th>
-          <td th:text="*{remarks}"></td>
-        </tr>
-      </table><!-- ./table -->
+          <tr>
+            <th scope="row" th:text="#{userId}"></th >
+            <td th:text="*{userId}"></td>
+          </tr>
+          <tr>
+            <th scope="row" th:text="#{password}"></th >
+            <td>****</td>
+          </tr>
+          <tr>
+            <th scope="row" th:text="#{confirmPassword}"></th>
+            <td>****</td>
+          </tr>
+          <tr>
+            <th scope="row" th:text="#{remarks}"></th>
+            <td th:text="*{remarks}"></td>
+          </tr>
+        </table><!-- ./table -->
 
-      <!--/* ボタン部ここから */-->
-      <input type="submit" class="btn btn-success" value="確 定" />
-      <input type="button" class="btn btn-secondary" value="戻 る" onclick="history.back()" />
-      <!--/* ボタン部ここまで */-->
-      <br><br>
-    </div><!-- /.container border col-7 -->
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success" value="確 定" />
+        <input type="button" class="btn btn-secondary" value="戻 る" onclick="history.back()" />
+        <!--/* ボタン部ここまで */-->
+        <br><br>
+      </div><!-- /.container border col-7 -->
     </form>
-
+    <br><br>
+  </main>
   <div th:replace="layout/layout :: footer"></div>
 </body>
 </html>

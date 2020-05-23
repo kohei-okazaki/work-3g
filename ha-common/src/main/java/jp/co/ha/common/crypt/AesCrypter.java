@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.db.CryptConfig;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.system.type.Algorithm;
+import jp.co.ha.common.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
 

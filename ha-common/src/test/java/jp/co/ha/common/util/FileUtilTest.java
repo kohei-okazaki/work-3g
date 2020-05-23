@@ -10,14 +10,14 @@ import org.junit.Test;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@link FileUtil} のjUnit
+ * {@linkplain FileUtil} のjUnit
  *
  * @version 1.0.0
  */
 public class FileUtilTest extends BaseCommonTest {
 
     /**
-     * {@link FileUtil#compressZip}
+     * {@linkplain FileUtil#compressZip}
      */
     @Test
     public void compressZipTest() {

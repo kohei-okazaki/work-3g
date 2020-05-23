@@ -11,7 +11,7 @@ public class HealthInfoReferenceDto {
 
     /* request */
     /** 健康情報ID */
-    private Integer healthInfoId;
+    private Integer seqHealthInfoId;
     /** 健康情報作成日直接指定フラグ */
     private String healthInfoRegDateSelectFlag;
     /** 健康情報作成日(開始) */
@@ -32,22 +32,22 @@ public class HealthInfoReferenceDto {
     private String healthInfoRegDate;
 
     /**
-     * healthInfoIdを返す
-     *
-     * @return healthInfoId
+     * seqHealthInfoIdを返す
+     * 
+     * @return seqHealthInfoId
      */
-    public Integer getHealthInfoId() {
-        return healthInfoId;
+    public Integer getSeqHealthInfoId() {
+        return seqHealthInfoId;
     }
 
     /**
-     * healthInfoIdを設定する
-     *
-     * @param healthInfoId
+     * seqHealthInfoIdを設定する
+     * 
+     * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setHealthInfoId(Integer healthInfoId) {
-        this.healthInfoId = healthInfoId;
+    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+        this.seqHealthInfoId = seqHealthInfoId;
     }
 
     /**

@@ -4,6 +4,7 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報入力画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link>
 </head>
 <body>
@@ -11,56 +12,54 @@
   <!--/* ヘッダ部 */-->
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
-  <div class="container border col-8">
+  <main role="main" class="px-4">
+    <div class="container border col-8">
 
-    <div th:if="${errorMessage} != null">
-      <br><br>
-      <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
-    </div>
-
-      <h2 class="menuTitle">健康情報入力</h2>
-
-      <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
-
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-
-        <!--/* table部ここから */-->
-        <div class="table">
-          <h3 id="healthInfoToggle">健康情報</h3>
-
-          <label for="height" th:text="#{height}"></label>
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">cm</span>
-              </div><!-- /.input-group-append -->
-            </div><!-- /.input-group -->
-          </div><!-- /.form-group -->
-
-          <label for="weight" th:text="#{weight}"></label>
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{weight}" required placeholder="50.00" aria-describedby="basic-addon3" />
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon3">kg</span>
-              </div><!-- /.input-group-append -->
-            </div><!-- /.input-group -->
-          </div><!-- /.form-group -->
-        </div>
-        <!--/* table部ここまで */-->
-
+      <div th:if="${errorMessage} != null">
         <br><br>
+        <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+      </div>
 
-      <!--/* ボタン部ここから */-->
-      <input type="submit" class="btn btn-success" value="確 認" />
-      <input type="reset" class="btn btn-secondary" value="リセット" />
-      <!--/* ボタン部ここまで */-->
-      <br><br>
-      </form>
+        <h2 class="menuTitle">健康情報入力</h2>
 
-  </div><!-- container border col-8 -->
+        <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
+
+          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+
+          <!--/* table部ここから */-->
+          <div class="table">
+            <label for="height" th:text="#{height}"></label>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">cm</span>
+                </div><!-- /.input-group-append -->
+              </div><!-- /.input-group -->
+            </div><!-- /.form-group -->
+
+            <label for="weight" th:text="#{weight}"></label>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{weight}" required placeholder="50.00" aria-describedby="basic-addon3" />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon3">kg</span>
+                </div><!-- /.input-group-append -->
+              </div><!-- /.input-group -->
+            </div><!-- /.form-group -->
+          </div><!-- /.table -->
+          <!--/* table部ここまで */-->
+
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success" value="確 認" />
+        <input type="reset" class="btn btn-secondary" value="リセット" />
+        <!--/* ボタン部ここまで */-->
+        <br><br>
+        </form>
+
+    </div><!-- container border col-8 -->
+  </main>
   <br><br>
   <!--/* フッタ部 */-->
   <div th:replace="layout/layout :: footer"></div>

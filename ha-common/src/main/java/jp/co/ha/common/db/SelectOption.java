@@ -16,9 +16,9 @@ import jp.co.ha.common.util.StringUtil;
 public class SelectOption {
 
     /** ソートマップ */
-    private final Map<String, SortType> orderByMap;
+    private final Map<String, SortType> ORDER_BY_MAP;
     /** 検索上限数 */
-    private final int limit;
+    private final int LIMIT;
 
     /**
      * 検索オプションのビルダー
@@ -33,6 +33,9 @@ public class SelectOption {
         /** 検索上限数 */
         private int limit = 10000;
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public SelectOption build() {
             return new SelectOption(this);
@@ -88,8 +91,8 @@ public class SelectOption {
      *     SelectOptionのビルダー
      */
     private SelectOption(SelectOptionBuilder builder) {
-        this.orderByMap = builder.orderByMap;
-        this.limit = builder.limit;
+        this.ORDER_BY_MAP = builder.orderByMap;
+        this.LIMIT = builder.limit;
     }
 
     /**
@@ -99,7 +102,7 @@ public class SelectOption {
      */
     public String getOrderBy() {
         StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-        this.orderByMap.entrySet()
+        this.ORDER_BY_MAP.entrySet()
                 .stream()
                 .map(e -> e.getKey() + StringUtil.SPACE + e.getValue())
                 .forEach(e -> sj.add(e));
@@ -112,7 +115,7 @@ public class SelectOption {
      * @return 検索上限数
      */
     public int getLimit() {
-        return limit;
+        return LIMIT;
     }
 
 }

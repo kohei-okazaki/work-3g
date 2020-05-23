@@ -15,7 +15,7 @@ import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil.PaddingType;
 
 /**
- * {@link StringUtil} のjUnit
+ * {@linkplain StringUtil} のjUnit
  *
  * @version 1.0.0
  */
@@ -25,7 +25,7 @@ public class StringUtilTest extends BaseCommonTest {
     private static Logger LOG = LoggerFactory.getLogger(StringUtilTest.class);
 
     /**
-     * {@link StringUtil#toStrList}
+     * {@linkplain StringUtil#toStrList}
      */
     @Test
     public void toStrListTest() {
@@ -49,7 +49,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#isEmpty}
+     * {@linkplain StringUtil#isEmpty}
      */
     @Test
     public void isEmptyTest() {
@@ -72,7 +72,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#isBrank}
+     * {@linkplain StringUtil#isBrank}
      */
     @Test
     public void isBrankTest() {
@@ -95,7 +95,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#hasValue}
+     * {@linkplain StringUtil#hasValue}
      */
     @Test
     public void hasValueTest() {
@@ -114,7 +114,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#paddingSpace}
+     * {@linkplain StringUtil#paddingSpace}
      */
     @Test
     public void paddingSpaceTest() {
@@ -168,7 +168,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#slice}
+     * {@linkplain StringUtil#slice}
      */
     @Test
     public void testSlice() {
@@ -224,7 +224,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#trimFullAndHalfSpace}
+     * {@linkplain StringUtil#trimFullAndHalfSpace}
      */
     @Test
     public void testTrimFullAndHalfSpace() {
@@ -251,7 +251,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#toFullKana}
+     * {@linkplain StringUtil#toFullKana}
      */
     @Test
     public void testToFullKana() {
@@ -278,7 +278,7 @@ public class StringUtilTest extends BaseCommonTest {
     }
 
     /**
-     * {@link StringUtil#abbreviate}
+     * {@linkplain StringUtil#abbreviate}
      */
     @Test
     public void testAbbreviate() {

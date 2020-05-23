@@ -115,9 +115,9 @@ public class ToolUtil {
     public static String getColumnType(Row row) {
         StringJoiner body = new StringJoiner(StringUtil.SPACE);
         String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
-        if (isCrypt(row)) {
-            columnType = "VARBINARY";
-        }
+        // if (isCrypt(row)) {
+        // columnType = "VARBINARY";
+        // }
         String size = getSize(row);
         body.add(columnType + size);
         return body.toString();

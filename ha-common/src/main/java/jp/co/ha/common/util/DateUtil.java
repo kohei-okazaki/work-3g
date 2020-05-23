@@ -8,7 +8,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -61,15 +60,12 @@ public class DateUtil {
      * @return 日付
      */
     public static Date toDate(String strDate, DateFormatType format) {
-        Function<String, Date> toDateFunction = s -> {
-            try {
-                return new SimpleDateFormat(format.getValue()).parse(s);
-            } catch (ParseException e) {
-                LOG.error("指定された日付のフォーマットが不正です format -> " + format.getValue(), e);
-                return null;
-            }
-        };
-        return toDateFunction.apply(strDate);
+        try {
+            return new SimpleDateFormat(format.getValue()).parse(strDate);
+        } catch (ParseException e) {
+            LOG.warn("指定された日付のフォーマットが不正です format -> " + format.getValue(), e);
+            return null;
+        }
     }
 
     /**
@@ -263,9 +259,11 @@ public class DateUtil {
     }
 
     /**
-     * 日付型チェックを行う。<br>
-     * 正しい日付の場合true<br>
-     * 不正な文字列型の日付を指定した場合、false<br>
+     * 日付型チェックを行う。
+     * <ul>
+     * <li>正しい日付の場合、true</li>
+     * <li>不正な日付の場合、false</li>
+     * </ul>
      *
      * @param strDate
      *     検査対象日付

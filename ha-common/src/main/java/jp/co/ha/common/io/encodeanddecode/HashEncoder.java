@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.type.Algorithm;
+import jp.co.ha.common.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
 /**

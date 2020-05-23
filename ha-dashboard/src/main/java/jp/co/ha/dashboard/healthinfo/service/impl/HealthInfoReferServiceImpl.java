@@ -49,8 +49,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
      */
     @Override
     public List<HealthInfoReferenceDto> getHealthInfoResponseList(
-            HealthInfoReferenceDto dto, String userId)
-            throws BaseException {
+            HealthInfoReferenceDto dto, String userId) throws BaseException {
 
         // ユーザIDと健康情報照会DTOから健康情報Entityリストを取得
         List<HealthInfo> entityList = getHealthInfoList(dto, userId);
@@ -64,9 +63,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 HealthInfo srcEntity = (HealthInfo) src;
                 HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
 
-                destDto.setHealthInfoRegDate(
-                        DateUtil.toString(srcEntity.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDDHHMMSS));
+                destDto.setHealthInfoRegDate(DateUtil.toString(
+                        srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
             });
 
             return result;
@@ -85,9 +83,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 HealthInfoReferenceDto srcDto = (HealthInfoReferenceDto) src;
                 ReferenceCsvDownloadModel destModel = (ReferenceCsvDownloadModel) dest;
 
-                destModel.setHealthInfoRegDate(
-                        DateUtil.toDate(srcDto.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDDHHMMSS));
+                destModel.setHealthInfoRegDate(DateUtil.toDate(
+                        srcDto.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
 
             });
             model.setUserId(userId);
@@ -103,10 +100,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
 
         // ファイル名
-        String fileName = "healthInfoReference_"
-                + DateUtil.toString(DateUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)
-                + FileExtension.CSV.getValue();
+        String fileName = DateUtil.toString(DateUtil.getSysDate(),
+                DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()
                 + entity.getUserId();
@@ -135,38 +130,46 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
         List<HealthInfo> resultList;
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).build();
-        if (BeanUtil.isNull(dto.getHealthInfoId())
-                || StringUtil.isEmpty(dto.getHealthInfoId().toString())) {
+        if (BeanUtil.isNull(dto.getSeqHealthInfoId())
+                || StringUtil.isEmpty(dto.getSeqHealthInfoId().toString())) {
             // 健康情報IDが未指定の場合
-            Date healthInfoRegDate = editStrDate(dto.getFromHealthInfoRegDate());
             if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
                 resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(
-                        userId, healthInfoRegDate,
-                        DateUtil.toEndDate(healthInfoRegDate), selectOption);
+                        userId, editFromDate(dto.getFromHealthInfoRegDate()),
+                        editToDate(dto.getFromHealthInfoRegDate()), selectOption);
             } else {
-                Date toHealthInfoRegDate = editStrDate(dto.getToHealthInfoRegDate());
                 resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(
-                        userId, healthInfoRegDate,
-                        toHealthInfoRegDate, selectOption);
+                        userId, editFromDate(dto.getFromHealthInfoRegDate()),
+                        editToDate(dto.getToHealthInfoRegDate()), selectOption);
             }
         } else {
             resultList = healthInfoSearchService
-                    .findByHealthInfoIdAndUserId(dto.getHealthInfoId(), userId);
+                    .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), userId);
         }
 
         return resultList;
     }
 
     /**
-     * 指定した文字列型のyyyy-MM-ddをDate型で返す
+     * 指定した文字列型の日付をYYYYMMDD 00:00:00のDate型に直す
      *
      * @param date
-     *     日付
-     * @return 日付
+     *     文字列型の日付
+     * @return YYYYMMDD 00:00:00
      */
-    private Date editStrDate(String date) {
-        return DateUtil.toDate(date.replace(StringUtil.HYPHEN, StringUtil.THRASH),
-                DateFormatType.YYYYMMDD);
+    private Date editFromDate(String date) {
+        return DateUtil.toStartDate(DateUtil.toDate(date, DateFormatType.YYYYMMDD));
+    }
+
+    /**
+     * 指定した文字列型の日付をYYYYMMDD 23:59:59のDate型に直す
+     *
+     * @param date
+     *     文字列型の日付
+     * @return YYYYMMDD 23:59:59
+     */
+    private Date editToDate(String date) {
+        return DateUtil.toEndDate(DateUtil.toDate(date, DateFormatType.YYYYMMDD));
     }
 
 }

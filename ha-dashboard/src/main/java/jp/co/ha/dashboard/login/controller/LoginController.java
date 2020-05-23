@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -27,7 +28,7 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.login.form.LoginForm;
@@ -44,9 +45,12 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("login")
 public class LoginController implements BaseWebController {
 
-    /** sessionサービス */
+    /** 健康情報検索条件 */
+    private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
+            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionService;
+    private SessionComponent sessionComponent;
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
@@ -73,18 +77,39 @@ public class LoginController implements BaseWebController {
     /**
      * ログイン画面
      *
+     * @param model
+     *     Model
      * @param request
      *     HttpServletRequest
      * @return ログイン画面
      */
     @NonAuth
     @GetMapping("/index")
-    public String index(HttpServletRequest request) {
+    public String index(Model model, HttpServletRequest request) {
 
-        // ログアウト時にすべてのセッション情報を削除する
-        sessionService.removeValues(request.getSession());
+        model.addAttribute("isLogout", request.getParameter("isLogout"));
 
         return getView(DashboardView.LOGIN);
+    }
+
+    /**
+     * ログアウト処理
+     *
+     * @param request
+     *     HTTPリクエスト
+     * @param redirectAttr
+     *     リダイレクト情報
+     * @return ログイン画面へリダイレクトする
+     */
+    @NonAuth
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, RedirectAttributes redirectAttr) {
+
+        // ログアウト時にすべてのセッション情報を削除する
+        sessionComponent.removeValues(request.getSession());
+
+        redirectAttr.addAttribute("isLogout", true);
+        return "redirect:index";
     }
 
     /**
@@ -105,8 +130,7 @@ public class LoginController implements BaseWebController {
     @NonAuth
     @PostMapping("/top")
     public String top(Model model, HttpServletRequest request, @Valid LoginForm form,
-            BindingResult result)
-            throws BaseException {
+            BindingResult result) throws BaseException {
 
         if (result.hasErrors()) {
             // validationエラーの場合
@@ -114,7 +138,7 @@ public class LoginController implements BaseWebController {
         }
 
         // アカウント情報を検索
-        Optional<Account> account = accountSearchService.findByUserId(form.getUserId());
+        Optional<Account> account = accountSearchService.findById(form.getUserId());
         LoginCheckResult checkResult = new LoginCheck().check(account,
                 form.getPassword());
         if (checkResult.hasError()) {
@@ -126,16 +150,16 @@ public class LoginController implements BaseWebController {
         }
 
         // セッションにユーザIDを登録する。
-        sessionService.setValue(request.getSession(), "userId", form.getUserId());
+        sessionComponent.setValue(request.getSession(), "userId", form.getUserId());
 
         healthInfoGraphService.putGraph(model, () -> {
 
-            // 健康情報を検索する
-            SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
-                    .limit(10).build();
+            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            healthInfoSearchService.findByUserId(form.getUserId(), selectOption).stream()
+            healthInfoSearchService
+                    .findByUserId(form.getUserId(), SELECT_OPTION).stream()
+                    .sorted((o1, o2) -> o1.getSeqHealthInfoId()
+                            .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
                                 DateFormatType.YYYYMMDDHHMMSS);
@@ -165,7 +189,7 @@ public class LoginController implements BaseWebController {
     public String top(Model model, HttpServletRequest request) {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
         // ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
-        String userId = sessionService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).orElse(null);
         if (StringUtil.isEmpty(userId)) {
             return getView(DashboardView.LOGIN);
@@ -174,12 +198,12 @@ public class LoginController implements BaseWebController {
         // 健康情報グラフを作成
         healthInfoGraphService.putGraph(model, () -> {
 
-            // 健康情報を検索する
-            SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
-                    .limit(10).build();
+            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            healthInfoSearchService.findByUserId(userId, selectOption).stream()
+            healthInfoSearchService
+                    .findByUserId(userId, SELECT_OPTION).stream()
+                    .sorted((o1, o2) -> o1.getSeqHealthInfoId()
+                            .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
                                 DateFormatType.YYYYMMDDHHMMSS);
@@ -190,7 +214,6 @@ public class LoginController implements BaseWebController {
 
             return graphModel;
         });
-        return getView(
-                StringUtil.isEmpty(userId) ? DashboardView.LOGIN : DashboardView.TOP);
+        return getView(DashboardView.TOP);
     }
 }

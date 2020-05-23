@@ -29,23 +29,16 @@
   </bean>
   <!-- aws.properties -->
   <bean id="awsConfig" class="jp.co.ha.business.aws.AwsConfig" lazy-init="true">
-    <property name="accesskey" value="${aws.accesskey}" />
-    <property name="secretAccesskey" value="${aws.secret.accesskey}" />
     <property name="region" value="${aws.region}" />
     <property name="backet" value="${aws.s3.backet}" />
+    <property name="timeout" value="${aws.s3.timeout}" />
   </bean>
   <!-- CRUD -->
-  <context:component-scan base-package="jp.co.ha.business.db.crud.read.impl" />
-  <context:component-scan base-package="jp.co.ha.business.db.crud.create.impl" />
-  <context:component-scan base-package="jp.co.ha.business.db.crud.update.impl" />
-  <context:component-scan base-package="jp.co.ha.business.db.crud.delete.impl" />
-
+  <context:component-scan base-package="jp.co.ha.business.db.crud.*.impl" />
   <!-- API -->
   <context:component-scan base-package="jp.co.ha.business.api" />
-
   <!-- Business -->
-  <context:component-scan base-package="jp.co.ha.business.healthInfo.*.impl" />
-
+  <context:component-scan base-package="jp.co.ha.business.healthInfo.service" />
   <!-- AWS -->
   <context:component-scan base-package="jp.co.ha.business.aws" />
 </beans>

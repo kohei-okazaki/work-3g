@@ -12,21 +12,21 @@ import jp.co.ha.common.type.Charset;
 public class CsvConfig {
 
     /** ファイル名 */
-    private final String fileName;
+    private final String FILE_NAME;
     /** ファイル出力パス */
-    private final String outputPath;
+    private final String OUTPUT_PATH;
     /** ヘッダ有無 */
-    private final boolean hasHeader;
+    private final boolean HAS_HEADER;
     /** 囲い文字有無 */
-    private final boolean hasEnclosure;
+    private final boolean HAS_ENCLOSURE;
     /** 囲い文字 */
-    private final CsvFileChar csvFileChar;
+    private final CsvFileChar CSV_FILE_CHAR;
     /** 文字コード */
-    private final Charset charset;
+    private final Charset CHARSET;
     /** フッタ有無 */
-    private final boolean hasFooter;
+    private final boolean HAS_FOOTER;
     /** マスク利用有無 */
-    private final boolean useMask;
+    private final boolean USE_MASK;
 
     /**
      * CsvConfigのビルダー
@@ -37,9 +37,9 @@ public class CsvConfig {
 
         /* 必須項目 */
         /** ファイル名 */
-        private final String fileName;
+        private final String FILE_NAME;
         /** ファイル出力パス */
-        private final String outputPath;
+        private final String OUTPUT_PATH;
 
         /* 任意項目 */
         /** ヘッダ有無 */
@@ -64,8 +64,8 @@ public class CsvConfig {
          *     ファイル出力パス
          */
         public CsvConfigBuilder(String fileName, String outputPath) {
-            this.fileName = fileName;
-            this.outputPath = outputPath;
+            this.FILE_NAME = fileName;
+            this.OUTPUT_PATH = outputPath;
         }
 
         /**
@@ -140,6 +140,9 @@ public class CsvConfig {
             return this;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public CsvConfig build() {
             return new CsvConfig(this);
@@ -155,14 +158,14 @@ public class CsvConfig {
      *     CsvConfigのビルダー
      */
     private CsvConfig(CsvConfigBuilder builder) {
-        this.fileName = builder.fileName;
-        this.outputPath = builder.outputPath;
-        this.hasHeader = builder.hasHeader;
-        this.hasEnclosure = builder.hasEnclosure;
-        this.csvFileChar = builder.csvFileChar;
-        this.charset = builder.charset;
-        this.hasFooter = builder.hasFooter;
-        this.useMask = builder.useMask;
+        this.FILE_NAME = builder.FILE_NAME;
+        this.OUTPUT_PATH = builder.OUTPUT_PATH;
+        this.HAS_HEADER = builder.hasHeader;
+        this.HAS_ENCLOSURE = builder.hasEnclosure;
+        this.CSV_FILE_CHAR = builder.csvFileChar;
+        this.CHARSET = builder.charset;
+        this.HAS_FOOTER = builder.hasFooter;
+        this.USE_MASK = builder.useMask;
     }
 
     /**
@@ -171,7 +174,7 @@ public class CsvConfig {
      * @return fileName
      */
     public String getFileName() {
-        return fileName;
+        return FILE_NAME;
     }
 
     /**
@@ -180,7 +183,7 @@ public class CsvConfig {
      * @return outputPath
      */
     public String getOutputPath() {
-        return outputPath;
+        return OUTPUT_PATH;
     }
 
     /**
@@ -189,7 +192,7 @@ public class CsvConfig {
      * @return hasHeader
      */
     public boolean hasHeader() {
-        return hasHeader;
+        return HAS_HEADER;
     }
 
     /**
@@ -198,7 +201,7 @@ public class CsvConfig {
      * @return hasEnclosure
      */
     public boolean hasEnclosure() {
-        return hasEnclosure;
+        return HAS_ENCLOSURE;
     }
 
     /**
@@ -207,7 +210,7 @@ public class CsvConfig {
      * @return csvFileChar
      */
     public CsvFileChar getCsvFileChar() {
-        return csvFileChar;
+        return CSV_FILE_CHAR;
     }
 
     /**
@@ -216,7 +219,7 @@ public class CsvConfig {
      * @return charset
      */
     public Charset getCharset() {
-        return charset;
+        return CHARSET;
     }
 
     /**
@@ -225,7 +228,7 @@ public class CsvConfig {
      * @return hasFooter
      */
     public boolean hasFooter() {
-        return hasFooter;
+        return HAS_FOOTER;
     }
 
     /**
@@ -234,7 +237,7 @@ public class CsvConfig {
      * @return useMask
      */
     public boolean useMask() {
-        return useMask;
+        return USE_MASK;
     }
 
 }

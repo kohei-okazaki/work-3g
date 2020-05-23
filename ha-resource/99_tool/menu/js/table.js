@@ -5,7 +5,7 @@ var table = [
     column : [
       {
         logicalName: "健康情報ID",
-        physicalName: "HEALTH_INFO_ID",
+        physicalName: "SEQ_HEALTH_INFO_ID",
         type: "INT",
         size: ""
       },
@@ -53,7 +53,7 @@ var table = [
       },
       {
         logicalName: "BMI範囲ID",
-        physicalName: "BMI_RANGE_ID",
+        physicalName: "SEQ_BMI_RANGE_ID",
         type: "INT",
         size: ""
       },
@@ -85,7 +85,7 @@ var table = [
         logicalName: "パスワード",
         physicalName: "PASSWORD",
         type: "VARCHAR",
-        size: "16"
+        size: "44"
       },
       {
         logicalName: "削除フラグ",
@@ -187,13 +187,13 @@ var table = [
         logicalName: "メールアドレス",
         physicalName: "MAIL_ADDRESS",
         type: "VARCHAR",
-        size: "64"
+        size: "128"
       },
       {
         logicalName: "メールパスワード",
         physicalName: "MAIL_PASSWORD",
         type: "VARCHAR",
-        size: "64"
+        size: "44"
       },
       {
         logicalName: "更新日時",
@@ -215,7 +215,7 @@ var table = [
       column : [
         {
           logicalName: "BMI範囲ID",
-          physicalName: "BMI_RANGE_ID",
+          physicalName: "SEQ_BMI_RANGE_ID",
           type: "INT",
           size: ""
         },

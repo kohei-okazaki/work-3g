@@ -3,10 +3,11 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.18.jar" />
+  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.20.jar" />
 
-  <context id="context1">
-
+  <context id="context1" targetRuntime="MyBatis3">
+    <!-- 文字コードをUTF-8 設定 -->
+    <property name="javaFileEncoding" value="UTF-8" />
     <!-- プラグイン -->
     <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
     <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
@@ -24,11 +25,11 @@
 
     <javaClientGenerator targetPackage="jp.co.ha.db.mapper" targetProject="ha-db/src/main/java" type="XMLMAPPER" />
 
-    <table schema="work3g" tableName="ACCOUNT" />
-    <!-- <table schema="work3g" tableName="HEALTH_INFO" /> -->
-    <!-- <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" /> -->
-    <!-- <table schema="work3g" tableName="MAIL_INFO" /> -->
-    <!-- <table schema="work3g" tableName="BMI_RANGE_MT" /> -->
+    <table schema="work3g" tableName="ACCOUNT" modelType="hierarchical" />
+    <table schema="work3g" tableName="HEALTH_INFO" modelType="hierarchical" />
+    <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" modelType="hierarchical" />
+    <table schema="work3g" tableName="MAIL_INFO" modelType="hierarchical" />
+    <table schema="work3g" tableName="BMI_RANGE_MT" modelType="hierarchical" />
 
   </context>
 </generatorConfiguration>

@@ -4,18 +4,19 @@
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント設定入力画面', scripts = ~{::script}, links = ~{::link})">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
 </head>
 <body>
 
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
-  <div class="container border col-8">
-    <h2 class="menuTitle">アカウント設定入力</h2>
+  <main role="main" class="px-4">
+    <div class="container border col-8">
+      <h2 class="menuTitle">アカウント設定入力</h2>
 
-    <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
+      <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
 
-      <div class="row">
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}"></div>
@@ -29,9 +30,6 @@
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
-      </div>
-
-        <h3>アカウント設定</h3>
 
         <!--/* 削除フラグここから */-->
         <div class="form-group">
@@ -83,8 +81,6 @@
         </div><!-- /.form-group -->
         <!--/* APIキーここまで */-->
 
-        <h3>メール設定</h3>
-
         <!--/* メールアドレスここから */-->
         <div class="form-group">
           <p th:text="#{mailAddress}"></p>
@@ -105,8 +101,6 @@
           </div><!-- /.checkbox -->
         </div><!-- /.form-group -->
         <!--/*メールパスワードここまで */-->
-
-        <h3>健康情報ファイル設定</h3>
 
         <!--/* ヘッダ利用ここから */-->
         <div class="form-group">
@@ -171,16 +165,17 @@
         </div><!-- /.form-group -->
         <!--/* 備考ここまで */-->
 
-      <!--/* ボタン部ここから */-->
-      <input type="submit" class="btn btn-success" value="確 認" />
-      <input type="reset" class="btn btn-secondary" value="リセット" />
-      <!--/* ボタン部ここまで */-->
-      <br><br>
-    </form><!-- /#accountSettingForm -->
-  </div><!-- /.container border col-8 -->
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success" value="確 認" />
+        <input type="reset" class="btn btn-secondary" value="リセット" />
+        <!--/* ボタン部ここまで */-->
+        <br><br>
+      </form><!-- /#accountSettingForm -->
+    </div><!-- /.container border col-8 -->
+  </main>
   <br>
   <div th:replace="layout/layout :: footer"></div>
-
+  <br><br><br><br><br><br><br><br><br><br><br><br>
   <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
   <script src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
   <script src="../resources/js/lib/mailcheck.js" th:src="@{/resources/js/lib/mailcheck.min.js}"></script>

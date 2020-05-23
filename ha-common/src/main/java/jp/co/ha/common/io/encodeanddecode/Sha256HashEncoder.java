@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.system.type.Algorithm;
+import jp.co.ha.common.type.Algorithm;
 import jp.co.ha.common.type.Charset;
 
 /**
@@ -32,8 +32,7 @@ public class Sha256HashEncoder implements HashEncoder {
             return encodeDefault(password, salt, HASH_ALGORITHM);
         } catch (NoSuchAlgorithmException e) {
             throw new SystemException(CommonErrorCode.ALGORITH_ERROR,
-                    HASH_ALGORITHM.getValue() + "でのハッシュ化に失敗しました",
-                    e);
+                    HASH_ALGORITHM.getValue() + "でのハッシュ化に失敗しました", e);
         } catch (UnsupportedEncodingException e) {
             throw new SystemException(CommonErrorCode.ALGORITH_ERROR,
                     "指定した文字コードが不正です。文字コード：" + Charset.UTF_8.getValue(), e);

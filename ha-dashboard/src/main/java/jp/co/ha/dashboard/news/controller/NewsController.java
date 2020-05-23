@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.aws.AwsConfig;
 import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.dto.NewsListDto;
 import jp.co.ha.business.dto.NewsListDto.NewsDto;
@@ -33,9 +32,6 @@ public class NewsController implements BaseWebController {
     /** System設定情報 */
     @Autowired
     private SystemConfig systemConfig;
-    /** AWS個別設定情報 */
-    @Autowired
-    private AwsConfig awsConfig;
     /** S3コンポーネント */
     @Autowired
     private AwsS3Component awsS3Component;
@@ -53,8 +49,7 @@ public class NewsController implements BaseWebController {
     public String list(Model model) throws BaseException {
 
         // S3からお知らせJSONを取得
-        InputStream is = awsS3Component.getS3ObjectByBacketAndKey(
-                awsConfig.getBacket(), "news/news.json");
+        InputStream is = awsS3Component.getS3ObjectByKey("news/news.json");
         List<NewsDto> newsList = new JsonReader().read(is, NewsListDto.class)
                 .getNewsDtoList();
 

@@ -68,6 +68,7 @@ public class CryptConfig {
      * shiftを設定する
      *
      * @param shift
+     *     Shift数
      */
     public void setShift(String shift) {
         this.shift = Integer.parseInt(shift);

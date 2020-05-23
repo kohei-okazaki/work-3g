@@ -7,11 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.HealthInfoRegistApi;
-import jp.co.ha.business.api.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.response.HealthInfoRegistResponse;
-import jp.co.ha.business.api.type.RequestType;
-import jp.co.ha.business.api.type.TestMode;
+import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -23,7 +22,7 @@ import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.web.form.BaseApiResponse.ResultType;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報ファイル入力画面サービス実装クラス
@@ -99,17 +98,19 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     private List<HealthInfoRegistRequest> toRequestList(
             List<HealthInfoCsvUploadModel> modelList, String userId)
             throws BaseException {
-        Account account = accountSearchService.findByUserId(userId).get();
+        Account account = accountSearchService.findById(userId).get();
         return modelList.stream().map(e -> {
             HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+
             BeanUtil.copy(e, request, (src, dest) -> {
                 HealthInfoCsvUploadModel srcModel = (HealthInfoCsvUploadModel) src;
                 HealthInfoRegistRequest destRequest = (HealthInfoRegistRequest) dest;
                 destRequest.setHeight(new BigDecimal(srcModel.getHeight()));
                 destRequest.setWeight(new BigDecimal(srcModel.getWeight()));
-                destRequest.setRequestType(RequestType.HEALTH_INFO_REGIST);
                 destRequest.setTestMode(TestMode.DB_REGIST);
             });
+
+            request.setUserId(userId);
             request.setApiKey(account.getApiKey());
 
             return request;

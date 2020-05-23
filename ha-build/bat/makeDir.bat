@@ -11,8 +11,8 @@ rem 第2引数:作成したいディレクトリ名
 
 cd %1
 if not exist %2\ (
-	echo dir create
-	mkdir %2
+  echo dir create
+  mkdir %2
 )
 
 rem 呼び出し元のディレクトリまで戻る

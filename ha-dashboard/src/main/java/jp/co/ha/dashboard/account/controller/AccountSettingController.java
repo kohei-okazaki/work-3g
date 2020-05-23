@@ -23,7 +23,7 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.CsrfToken;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.SessionManageService;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
@@ -54,9 +54,9 @@ public class AccountSettingController
     /** メール情報検索サービス */
     @Autowired
     private MailInfoSearchService mailInfoSearchService;
-    /** session管理サービス */
+    /** SessionComponent */
     @Autowired
-    private SessionManageService sessionManagerService;
+    private SessionComponent sessionComponent;
     /** 健康情報ファイル設定検索サービス */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
@@ -72,16 +72,16 @@ public class AccountSettingController
     public AccountSettingForm setUpForm(HttpServletRequest request) {
 
         // セッションからユーザIDを取得
-        String userId = sessionManagerService
+        String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
         // アカウント情報を検索
-        Account account = accountSearchService.findByUserId(userId).get();
+        Account account = accountSearchService.findById(userId).get();
         // メール情報を検索
-        Optional<MailInfo> mailInfo = mailInfoSearchService.findByUserId(userId);
+        Optional<MailInfo> mailInfo = mailInfoSearchService.findById(userId);
         // 健康情報ファイル設定を検索
         HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findByUserId(userId).get();
+                .findById(userId).get();
 
         AccountSettingForm accountSettingForm = new AccountSettingForm();
 
@@ -117,18 +117,17 @@ public class AccountSettingController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factocy = true)
+    @CsrfToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid AccountSettingForm form,
-            BindingResult result, HttpServletRequest request)
-            throws BaseException {
+            BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.ACCOUNT_SETTING_INPUT);
         }
 
         // sessionにアカウント設定form情報を保持
-        sessionManagerService.setValue(request.getSession(), "accountSettingForm", form);
+        sessionComponent.setValue(request.getSession(), "accountSettingForm", form);
 
         return getView(DashboardView.ACCOUNT_SETTING_CONFIRM);
     }
@@ -143,7 +142,7 @@ public class AccountSettingController
             HttpServletRequest request) throws BaseException {
 
         // sessionよりアカウント設定form情報を取得
-        AccountSettingForm accountSettingForm = sessionManagerService
+        AccountSettingForm accountSettingForm = sessionComponent
                 .getValue(request.getSession(), "accountSettingForm",
                         AccountSettingForm.class)
                 .orElseThrow(() -> new BusinessException(
@@ -155,7 +154,7 @@ public class AccountSettingController
         // form情報から更新処理を行う
         accountSettingService.execute(dto);
 
-        sessionManagerService.removeValue(request.getSession(), "accountSettingForm");
+        sessionComponent.removeValue(request.getSession(), "accountSettingForm");
 
         return getView(DashboardView.ACCOUNT_SETTING_COMPLETE);
     }

@@ -15,7 +15,7 @@ import jp.co.ha.web.validator.BaseWebValidator;
 /**
  * 結果照会画面のValidator
  *
- * @since 1.0
+ * @version 1.0.0
  */
 public class HealthInfoReferenceValidator
         extends BaseWebValidator<HealthInfoReferenceForm> {
@@ -41,7 +41,7 @@ public class HealthInfoReferenceValidator
      */
     private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
-        if (StringUtil.hasValue(form.getHealthInfoId())) {
+        if (StringUtil.hasValue(form.getSeqHealthInfoId())) {
             // 健康情報IDを指定している場合、後続の日付チェックを行わない
             return;
         }

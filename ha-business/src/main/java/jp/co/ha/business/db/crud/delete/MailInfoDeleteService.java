@@ -13,6 +13,6 @@ public interface MailInfoDeleteService {
      * @param userId
      *     ユーザID
      */
-    void deleteByUserId(String userId);
+    void deleteById(String userId);
 
 }
