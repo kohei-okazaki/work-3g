@@ -10,10 +10,7 @@
 
 ## 02_Project構成  
 * ### ha-api  
-リクエストBodyにJSONを設定したPOST形式のHTTPリクエストを処理するプロジェクト  
-
-* ### ha-auto  
-WEB画面の自動テストをするプロジェクト  
+リクエストBodyにJSONを設定したPOST形式のHTTPリクエストを処理するプロジェクト   
 
 * ### ha-batch  
 Batch処理を定義したプロジェクト  
@@ -40,6 +37,9 @@ api, auto, batch, business, common, tool, dashboard, webで共通的に使う外
 
 * ### ha-resource  
 詳細設計書、DDL等を定義したドキュメントプロジェクト  
+
+* ### ha-selenium  
+seleniumを利用した画面の自動テスト処理を定義したプロジェクト  
 
 * ### ha-tool  
 指定のフォーマットのExcelからDDLなどを自動生成するツールプロジェクト  
