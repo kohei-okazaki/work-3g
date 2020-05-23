@@ -2,7 +2,7 @@
 '''
 Created on 2020/05/23
 
-ログインForm
+ログインFormのPython
 @version: 1.0.0
 '''
 
