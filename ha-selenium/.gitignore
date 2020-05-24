@@ -3,6 +3,7 @@
 
 # Package Files 
 *.exe
+*.pyc
 __init__.py
 
 #その他
