@@ -16,7 +16,7 @@ log = Logger("selenium.log")
 log.write("login_auth_test開始")
 
 # driverを取得
-driver = SeleniumDriver.getDriver()
+driver = SeleniumDriver().getDriver()
 
 # 正しいログイン情報でログイン
 login_form = LoginForm({
@@ -28,10 +28,27 @@ LoginAuth(driver).doLogin(login_form)
 # ブラウザバック
 driver.back()
 
+# 正しいログイン情報でログイン
+login_form = LoginForm({
+  "user_id": "master",
+  "password": "master",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# ログアウトボタン押下
+LoginAuth(driver).doLogout()
+
 # 正しくないパスワードでログイン
 login_form = LoginForm({
   "user_id": "master",
   "password": "hoge",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# 存在しないユーザIDでログイン
+login_form = LoginForm({
+  "user_id": "tejamvpose4jt4ebtjos",
+  "password": "tejamvpose4jt4ebtjos",
 })
 LoginAuth(driver).doLogin(login_form)
 
