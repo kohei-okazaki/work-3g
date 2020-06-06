@@ -21,7 +21,7 @@
 
   <properties>
     <mybatis-generator-version>1.4.0</mybatis-generator-version>
-    <flywaydb-version>6.4.2</flywaydb-version>
+    <flywaydb-version>6.4.3</flywaydb-version>
     <jdbc.url>jdbc:mysql://localhost:3306/work3g?serverTimezone=JST</jdbc.url>
     <jdbc.user>root</jdbc.user>
     <jdbc.password>admin</jdbc.password>

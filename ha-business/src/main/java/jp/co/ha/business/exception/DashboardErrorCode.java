@@ -26,6 +26,8 @@ public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
     ACCOUNT_EXPIRED("ACCOUNT_EXPIRED", "DW0025", LogLevel.WARN),
     /** 不正リクエストエラー */
     ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "DW0026", LogLevel.WARN),
+    /** 多重送信エラー */
+    MULTI_SUBMIT_ERROR("MULTI_SUBMIT_ERROR", "DW0031", LogLevel.WARN),
 
     ;
 

@@ -9,7 +9,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.exception.DashboardErrorCode;
-import jp.co.ha.business.interceptor.annotation.CsrfToken;
+import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
@@ -23,7 +23,7 @@ import jp.co.ha.web.interceptor.BaseWebInterceptor;
  * ダッシュボード認証チェックを行うインターセプター
  * <ul>
  * <li>ログイン認証チェック</li>
- * <li>CSRFトークンチェック</li>
+ * <li>多重送信トークンチェック</li>
  * </ul>
  *
  * @version 1.0.0
@@ -57,8 +57,8 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
                             DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
         }
 
-        if (isCsrfTokenCheck(handler)) {
-            // CSRFトークンチェックを行う
+        if (isMultiSubmitTokenCheck(handler)) {
+            // 多重送信トークンチェックを行う
             String sessionCsrfToken = sessionComponent
                     .getValue(request.getSession(), "csrfToken", String.class)
                     .orElseThrow(() -> new SystemException(
@@ -83,13 +83,13 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
             return;
         }
 
-        if (isCsrfTokenCheck(handler)) {
-            // CSRFトークンチェック後、トークンを削除する
+        if (isMultiSubmitTokenCheck(handler)) {
+            // 多重送信トークンチェック後、トークンを削除する
             sessionComponent.removeValue(request.getSession(), "csrfToken");
         }
 
-        if (isCsrfTokenFactory(handler)) {
-            // CSRFトークンを作成する
+        if (isMultiSubmitTokenFactory(handler)) {
+            // 多重送信トークンを作成する
             String random = RandomStringUtils.randomAlphabetic(10);
             String csrfToken = encoder.encode(random, "");
             sessionComponent.setValue(request.getSession(), "csrfToken", csrfToken);
@@ -112,35 +112,35 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
     }
 
     /**
-     * CSRFチェックを行うかどうかを返す
+     * 多重送信チェックを行うかどうかを返す
      *
      * @param handler
      *     ハンドラー
      * @return 判定結果
      */
-    private boolean isCsrfTokenCheck(Object handler) {
-        CsrfToken csrfToken = ((HandlerMethod) handler).getMethod()
-                .getAnnotation(CsrfToken.class);
-        if (BeanUtil.isNull(csrfToken)) {
+    private boolean isMultiSubmitTokenCheck(Object handler) {
+        MultiSubmitToken multiSubmitToken = ((HandlerMethod) handler).getMethod()
+                .getAnnotation(MultiSubmitToken.class);
+        if (BeanUtil.isNull(multiSubmitToken)) {
             return false;
         }
-        return csrfToken.check();
+        return multiSubmitToken.check();
     }
 
     /**
-     * CSRFトークンを作成するかどうかを返す
+     * 多重送信トークンを作成するかどうかを返す
      *
      * @param handler
      *     ハンドラー
      * @return 判定結果
      */
-    private boolean isCsrfTokenFactory(Object handler) {
-        CsrfToken csrfToken = ((HandlerMethod) handler).getMethod()
-                .getAnnotation(CsrfToken.class);
-        if (BeanUtil.isNull(csrfToken)) {
+    private boolean isMultiSubmitTokenFactory(Object handler) {
+        MultiSubmitToken multiSubmitToken = ((HandlerMethod) handler).getMethod()
+                .getAnnotation(MultiSubmitToken.class);
+        if (BeanUtil.isNull(multiSubmitToken)) {
             return false;
         }
-        return csrfToken.factory();
+        return multiSubmitToken.factory();
     }
 
 }
