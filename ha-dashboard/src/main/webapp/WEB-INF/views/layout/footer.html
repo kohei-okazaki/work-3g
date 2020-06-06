@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
 <div class="footer fixed-bottom">
   <br>
   <!--/* table部ここから */-->
@@ -10,11 +9,9 @@
     </ul><!-- /.footer-submenu -->
   </div>
   <!--/* table部ここまで */-->
-  <p align="center" th:text="'---&nbsp;' + #{healthInfoAppName} + '&nbsp;---'"></p>
-  <br>
+  <p class="zero-padding-margin" align="center" th:text="'---&nbsp;' + #{healthInfoAppName} + '&nbsp;---'"></p>
   <div class="sub-footer">
-    <p align="left" th:text="'&nbsp;&nbsp;&copy;' +${#dates.format(#dates.createNow(), 'yyyy')} + '&nbsp;HealthInfo App'"></p>
-    <p align="right" th:text="'version&nbsp;' + #{appVersion} + '&nbsp;&nbsp;'"></p>
+    <p class="zero-padding-margin" align="left" th:text="'&nbsp;&nbsp;&copy;' +${#dates.format(#dates.createNow(), 'yyyy')} + '&nbsp;HealthInfo App'"></p>
+    <p class="zero-padding-margin" align="right" th:text="'version&nbsp;' + #{appVersion} + '&nbsp;&nbsp;'"></p>
   </div><!-- /.sub-footer -->
 </div><!-- /.footer -->
-<div id="page_top"><a href="#"></a></div>

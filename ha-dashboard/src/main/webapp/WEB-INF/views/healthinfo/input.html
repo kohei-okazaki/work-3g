@@ -29,8 +29,8 @@
 
           <!--/* table部ここから */-->
           <div class="table">
-            <label for="height" th:text="#{height}"></label>
             <div class="form-group">
+              <label class="control-label"  for="height" th:text="#{height}"></label><span class="badge badge-danger">必須</span>
               <div class="input-group">
                 <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
                 <div class="input-group-append">
@@ -39,8 +39,8 @@
               </div><!-- /.input-group -->
             </div><!-- /.form-group -->
 
-            <label for="weight" th:text="#{weight}"></label>
             <div class="form-group">
+              <label class="control-label" for="weight" th:text="#{weight}"></label><span class="badge badge-danger">必須</span>
               <div class="input-group">
                 <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{weight}" required placeholder="50.00" aria-describedby="basic-addon3" />
                 <div class="input-group-append">

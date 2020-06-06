@@ -16,7 +16,7 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
-import jp.co.ha.business.interceptor.annotation.CsrfToken;
+import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
@@ -75,7 +75,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
      */
     @Override
     @NonAuth
-    @CsrfToken(factory = true)
+    @MultiSubmitToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid AccountRegistForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
@@ -101,7 +101,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
      */
     @Override
     @NonAuth
-    @CsrfToken(check = true)
+    @MultiSubmitToken(check = true)
     @PostMapping(value = "/complete")
     public String complete(Model model, AccountRegistForm form,
             HttpServletRequest request) throws BaseException {

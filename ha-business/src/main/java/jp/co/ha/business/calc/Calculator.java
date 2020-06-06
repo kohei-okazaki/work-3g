@@ -33,8 +33,7 @@ public class Calculator {
      */
     public static BigDecimal calc(BigDecimal target1, CalcMethod method,
             BigDecimal target2, int digit, RoundingMode roundingMode) {
-        return method.getCalcOperatorFunction().apply(target1, target2, digit,
-                roundingMode);
+        return method.function.apply(target1, target2, digit, roundingMode);
     }
 
     /**
@@ -74,15 +73,6 @@ public class Calculator {
          */
         private CalcMethod(CalcOperatorFunction function) {
             this.function = function;
-        }
-
-        /**
-         * 四則演算関数を返す
-         *
-         * @return function
-         */
-        public CalcOperatorFunction getCalcOperatorFunction() {
-            return this.function;
         }
 
     }

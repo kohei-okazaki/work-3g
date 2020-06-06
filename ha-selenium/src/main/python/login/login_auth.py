@@ -24,6 +24,7 @@ class LoginAuth:
     def doLogin(self, login_form):
         '''
         ログイン処理
+        @param login_form ログインForm情報
         '''
 
         # ログイン画面を表示する
@@ -46,3 +47,13 @@ class LoginAuth:
 
         # 読込を待つために1秒間処理を止める
         sleep(1)
+
+    def doLogout(self):
+        '''
+        ログアウト処理
+        '''
+
+        # ログアウトのリンクを選択
+        logout_link_element = self.driver.find_element_by_link_text("ログアウト")
+
+        logout_link_element.click()

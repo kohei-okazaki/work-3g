@@ -21,7 +21,7 @@ import jp.co.ha.business.aws.AwsS3Component;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoUploadCsv;
-import jp.co.ha.business.interceptor.annotation.CsrfToken;
+import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
 import jp.co.ha.common.exception.BaseException;
@@ -97,7 +97,7 @@ public class HealthInfoFileRegistController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factory = true)
+    @MultiSubmitToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid HealthInfoFileForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
@@ -136,7 +136,7 @@ public class HealthInfoFileRegistController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(check = true)
+    @MultiSubmitToken(check = true)
     @PostMapping(value = "/complete")
     public String complete(Model model, HealthInfoFileForm form,
             HttpServletRequest request) throws BaseException {
