@@ -27,7 +27,7 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.dashboard.account.form.AccountSettingForm;
 import jp.co.ha.dashboard.account.service.AccountSettingService;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.CompositAccount;
+import jp.co.ha.db.entity.composit.CompositAccount;
 import jp.co.ha.web.controller.BaseWizardController;
 
 /**

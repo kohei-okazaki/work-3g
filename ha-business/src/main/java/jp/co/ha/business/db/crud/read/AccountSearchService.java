@@ -3,7 +3,7 @@ package jp.co.ha.business.db.crud.read;
 import java.util.Optional;
 
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.db.entity.CompositAccount;
+import jp.co.ha.db.entity.composit.CompositAccount;
 
 /**
  * アカウント検索サービスインターフェース
