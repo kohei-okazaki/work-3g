@@ -33,7 +33,7 @@ public class RestApiExceptionHandler {
 
     /**
      * APIで発生した例外をハンドリングする<br>
-     * {@linkplain java.lang.Exception}などのJavaの例外をすべてアプリの用の例外でラップする
+     * 発生した例外が{@linkplain java.lang.Exception}などのJavaの例外はすべてアプリ用の例外でラップする
      *
      * @param e
      *     APIで発生した例外
