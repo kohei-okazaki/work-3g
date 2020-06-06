@@ -1,6 +1,5 @@
 package jp.co.ha.dashboard.account.controller;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -30,9 +27,7 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.dashboard.account.form.AccountSettingForm;
 import jp.co.ha.dashboard.account.service.AccountSettingService;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.Account;
-import jp.co.ha.db.entity.HealthInfoFileSetting;
-import jp.co.ha.db.entity.MailInfo;
+import jp.co.ha.db.entity.CompositAccount;
 import jp.co.ha.web.controller.BaseWizardController;
 
 /**
@@ -51,15 +46,9 @@ public class AccountSettingController
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** メール情報検索サービス */
-    @Autowired
-    private MailInfoSearchService mailInfoSearchService;
     /** SessionComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** 健康情報ファイル設定検索サービス */
-    @Autowired
-    private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
     /**
      * Formを返す
@@ -75,33 +64,18 @@ public class AccountSettingController
         String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
-        // アカウント情報を検索
-        Account account = accountSearchService.findById(userId).get();
-        // メール情報を検索
-        Optional<MailInfo> mailInfo = mailInfoSearchService.findById(userId);
-        // 健康情報ファイル設定を検索
-        HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findById(userId).get();
+        Optional<CompositAccount> entity = accountSearchService
+                .findCompositAccountById(userId);
 
-        AccountSettingForm accountSettingForm = new AccountSettingForm();
-
-        // アカウント情報
-        BeanUtil.copy(account, accountSettingForm, (src, dest) -> {
-            Account srcAccount = (Account) src;
+        AccountSettingForm form = new AccountSettingForm();
+        BeanUtil.copy(entity.get(), form, (src, dest) -> {
+            CompositAccount srcAccount = (CompositAccount) src;
             AccountSettingForm destForm = (AccountSettingForm) dest;
             destForm.setPasswordExpire(DateUtil.toString(srcAccount.getPasswordExpire(),
                     DateFormatType.YYYYMMDD));
         });
 
-        // メール情報
-        if (mailInfo.isPresent()) {
-            BeanUtil.copy(mailInfo.get(), accountSettingForm, Arrays.asList("userId"));
-        }
-
-        // 健康情報ファイル設定
-        BeanUtil.copy(healthInfoFileSetting, accountSettingForm);
-
-        return accountSettingForm;
+        return form;
     }
 
     /**
