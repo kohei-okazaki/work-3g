@@ -26,7 +26,7 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadExcel;
-import jp.co.ha.business.interceptor.annotation.CsrfToken;
+import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
 import jp.co.ha.common.db.SelectOption;
@@ -101,7 +101,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factory = true)
+    @MultiSubmitToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result,
             HttpServletRequest request) throws BaseException {
@@ -121,7 +121,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(check = true)
+    @MultiSubmitToken(check = true)
     @PostMapping(value = "/complete")
     public String complete(Model model, HealthInfoForm form, HttpServletRequest request)
             throws BaseException {

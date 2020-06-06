@@ -10,10 +10,10 @@ import java.lang.annotation.Target;
 import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
 
 /**
- * CSRFトークンをチェックすることを示すアノテーション
+ * 多重送信トークンをチェックすることを示すアノテーション
  * <ul>
- * <li>トークンを生成したいメソッドに<code>@CsrfToken(factocy = true)</code>を付与</li>
- * <li>トークンチェックを行いたいメソッドに<code>@CsrfToken(check = true)</code>を付与</li>
+ * <li>トークンを生成したいメソッドに<code>@MultiSubmitToken(factocy = true)</code>を付与</li>
+ * <li>トークンチェックを行いたいメソッドに<code>@MultiSubmitToken(check = true)</code>を付与</li>
  * </ul>
  *
  * @see DashboardAuthInterceptor
@@ -23,7 +23,7 @@ import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
 @Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CsrfToken {
+public @interface MultiSubmitToken {
 
     /**
      * トークンを生成する

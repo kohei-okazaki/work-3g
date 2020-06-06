@@ -21,7 +21,7 @@ import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
-import jp.co.ha.business.interceptor.annotation.CsrfToken;
+import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
@@ -117,7 +117,7 @@ public class AccountSettingController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(factory = true)
+    @MultiSubmitToken(factory = true)
     @PostMapping(value = "/confirm")
     public String confirm(Model model, @Valid AccountSettingForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
@@ -136,7 +136,7 @@ public class AccountSettingController
      * {@inheritDoc}
      */
     @Override
-    @CsrfToken(check = true)
+    @MultiSubmitToken(check = true)
     @PostMapping(value = "/complete")
     public String complete(Model model, AccountSettingForm form,
             HttpServletRequest request) throws BaseException {

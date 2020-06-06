@@ -21,7 +21,7 @@ public class HealthCheckController
         extends BaseRestController<HealthCheckRequest, HealthCheckResponse> {
 
     /**
-     * ヘルスチェックAPIのリクエスト受付処理
+     * ヘルスチェックAPIを受け付ける
      *
      * @return レスポンス
      */
@@ -38,6 +38,6 @@ public class HealthCheckController
     @Deprecated
     public void accept(HealthCheckRequest request, HealthCheckResponse response)
             throws BaseException {
-        // TODO ヘルスチェックではリクエストを受け付けてそのまま返却するだけ
+        // ヘルスチェックAPIではリクエストを受け付けてそのまま返却するだけ
     }
 }
