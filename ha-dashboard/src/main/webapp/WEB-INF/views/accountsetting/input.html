@@ -12,7 +12,7 @@
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br><br><br><br>
   <main role="main" class="px-4">
-    <div class="container border col-8">
+    <div class="container border col-10">
       <h2 class="menuTitle">アカウント設定入力</h2>
 
       <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
@@ -33,7 +33,7 @@
 
         <!--/* 削除フラグここから */-->
         <div class="form-group">
-          <label class="control-label" th:text="#{delete}"></label>
+          <label class="control-label" for="delete" th:text="#{delete}"></label><span class="badge badge-danger">必須</span>
           <div class="custom-control custom-radio">
             <input type="radio" class="custom-control-input" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
             <label for="deleteFlagFalse" class="custom-control-label">しない</label>
@@ -55,7 +55,7 @@
 
         <!--/* パスワードここから */-->
         <div class="form-group">
-          <p th:text="#{password}"></p>
+          <label class="control-label" for="password" th:text="#{password}"></label><span class="badge badge-danger">必須</span>
           <div class="checkbox">
             <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" required placeholder="adminpass" />
             <label class="custom-control custom-checkbox">
@@ -68,14 +68,14 @@
 
         <!--/* パスワード有効期限日ここから */-->
         <div class="form-group">
-          <p th:text="#{passwordExpire}"></p>
+          <label class="control-label" for="passwordExpire" th:text="#{passwordExpire}"></label><span class="badge badge-danger">必須</span>
           <input type="text" class="validate[required] form-control" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="2020/03/01" />
         </div><!-- /.form-group -->
         <!--/* パスワード有効期限日ここまで */-->
 
         <!--/* APIキーここから */-->
         <div class="form-group">
-          <p th:text="#{apiKey}"></p>
+          <label for="apiKey" th:text="#{apiKey}"></label>
           <p th:text="*{apiKey}"></p>
           <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
         </div><!-- /.form-group -->
@@ -83,7 +83,7 @@
 
         <!--/* メールアドレスここから */-->
         <div class="form-group">
-          <p th:text="#{mailAddress}"></p>
+          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
           <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="test@gmail.com" />
           <div id="suggest"></div>
         </div><!-- /.form-group -->
@@ -91,7 +91,7 @@
 
         <!--/* メールパスワードここから */-->
         <div class="form-group">
-          <p th:text="#{mailPassword}"></p>
+          <label class="control-label" for="mailPassword" th:text="#{mailPassword}"></label><span class="badge badge-danger">必須</span>
           <div class="checkbox">
             <input type="password" class="validate[required] form-control" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="mailpass" />
             <label class="custom-control custom-checkbox">
@@ -104,7 +104,7 @@
 
         <!--/* ヘッダ利用ここから */-->
         <div class="form-group">
-          <p class="control-label" th:text="#{headerUse}"></p>
+          <label class="control-label" for="headerUse" th:text="#{headerUse}"></label><span class="badge badge-danger">必須</span>
           <div class="custom-control custom-radio">
             <input type="radio" class="validate[required] custom-control-input" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked />
             <label for="headerFlagFalse" class="custom-control-label">しない</label>
@@ -118,7 +118,7 @@
 
         <!--/* フッタ利用ここから */-->
         <div class="form-group">
-          <p class="control-label" th:text="#{footerUse}"></p>
+          <label class="control-label" for="footerUse" th:text="#{footerUse}"></label><span class="badge badge-danger">必須</span>
           <div class="custom-control custom-radio">
             <input type="radio" class="validate[required] custom-control-input" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked />
             <label for="footerFlagFalse" class="custom-control-label">しない</label>
@@ -132,7 +132,7 @@
 
         <!--/* マスク利用ここから */-->
         <div class="form-group">
-          <p class="control-label" th:text="#{maskUse}"></p>
+          <label class="control-label" for="maskUse" th:text="#{maskUse}"></label><span class="badge badge-danger">必須</span>
           <div class="custom-control custom-radio">
             <input type="radio" class="validate[required] custom-control-input" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked />
             <label for="maskFlagFalse" class="custom-control-label">しない</label>
@@ -146,7 +146,7 @@
 
         <!--/* 囲み文字ここから */-->
         <div class="form-group">
-          <p class="control-label" th:text="#{enclosureCharUse}"></p>
+          <label class="control-label" for="enclosureCharUse" th:text="#{enclosureCharUse}"></label><span class="badge badge-danger">必須</span>
           <div class="custom-control custom-radio">
             <input type="radio" class="validate[required] custom-control-input" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked />
             <label for="enclosureCharFlagFalse" class="custom-control-label">しない</label>
@@ -160,7 +160,7 @@
 
         <!--/* 備考ここから */-->
         <div class="form-group">
-          <p th:text="#{remarks}"></p>
+          <label for="remarks" th:text="#{remarks}"></label>
           <textarea class="form-control" rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
         </div><!-- /.form-group -->
         <!--/* 備考ここまで */-->
@@ -171,7 +171,7 @@
         <!--/* ボタン部ここまで */-->
         <br><br>
       </form><!-- /#accountSettingForm -->
-    </div><!-- /.container border col-8 -->
+    </div><!-- /.container border col-10 -->
   </main>
   <br>
   <div th:replace="layout/layout :: footer"></div>

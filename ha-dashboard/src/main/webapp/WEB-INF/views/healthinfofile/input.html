@@ -19,7 +19,8 @@
       <form id="healthInfoFileForm" action="./confirm" th:action="@{./confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
 
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
-        <p th:text="#{healthInfoFile}"></p>
+
+        <label class="control-label" th:text="#{healthInfoFile}"></label><span class="badge badge-danger">必須</span>
         <div class="form-group custom-file">
           <input type="file" class="validate[required] custom-file-input" th:field="*{multipartFile}" required />
           <label class="custom-file-label" for="multipartFile">ファイルを選択</label>

@@ -25,14 +25,14 @@
 
         <!--/* ユーザIDここから */-->
         <div class="form-group">
-          <p th:text="#{userId}"></p>
+          <label class="control-label" th:text="#{userId}"></label><span class="badge badge-danger">必須</span>
           <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" required placeholder="admin" />
         </div><!-- /.form-group -->
         <!--/* ユーザIDここまで */-->
 
         <!--/* パスワードここから */-->
         <div class="form-group">
-          <p th:text="#{password}"></p>
+          <label class="control-label" th:text="#{password}"></label><span class="badge badge-danger">必須</span>
           <div class="checkbox">
             <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" required placeholder="adminpass" />
             <label class="custom-control custom-checkbox">
@@ -45,7 +45,7 @@
 
         <!--/* 確認用パスワードここから */-->
         <div class="form-group">
-          <p th:text="#{confirmPassword}"></p>
+          <label class="control-label" th:text="#{confirmPassword}"></label><span class="badge badge-danger">必須</span>
           <div class="checkbox">
             <input type="password" class="validate[required,equals[password]] form-control" th:field="*{confirmPassword}" maxlength="16" required placeholder="adminpass" />
             <label class="custom-control custom-checkbox">
