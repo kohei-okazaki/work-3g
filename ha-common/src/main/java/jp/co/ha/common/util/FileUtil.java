@@ -119,7 +119,7 @@ public class FileUtil {
         } catch (FileNotFoundException e) {
             LOG.error("ファイルが見つかりません destFile:" + destFilePath, e);
         } catch (IOException e) {
-            LOG.error("Zipへの圧縮に失敗しました", e);
+            LOG.error("Zipへの圧縮に失敗しました destFile:" + destFilePath, e);
         }
         return new File(destFilePath);
     }

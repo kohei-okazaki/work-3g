@@ -102,7 +102,7 @@ public class SelectOption {
      */
     public String getOrderBy() {
         StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-        this.ORDER_BY_MAP.entrySet()
+        ORDER_BY_MAP.entrySet()
                 .stream()
                 .map(e -> e.getKey() + StringUtil.SPACE + e.getValue())
                 .forEach(e -> sj.add(e));

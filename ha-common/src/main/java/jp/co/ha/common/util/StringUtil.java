@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.type.Charset;
@@ -128,11 +127,9 @@ public class StringUtil {
      * @param paddingType
      *     Paddingタイプ(右詰/左詰)
      * @return Padding後の文字列
-     * @throws BaseException
-     *     PaddingTypeの指定が不正の場合
      */
-    public static String paddingSpace(String target, int length, PaddingType paddingType)
-            throws BaseException {
+    public static String paddingSpace(String target, int length,
+            PaddingType paddingType) {
         return padding(target, length, SPACE, paddingType);
     }
 
