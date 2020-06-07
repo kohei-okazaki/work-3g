@@ -54,12 +54,111 @@ account_regist_form = AccountRegistForm({
 AccountRegist(driver).doRegst(account_regist_form, False)
 
 # # 異常系
-# 既に登録したユーザIDで登録処理を行う(N001のデータを利用)
+# E001:既に登録したユーザIDで登録処理を行う(N001のデータを利用)
 account_regist_form = AccountRegistForm({
   "user_id": "testID001",
   "password": "hoge123456",
   "confirmPassword": "hoge123456",
   "remarks": "ここが備考欄",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E002:ユーザIDのみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "",
+  "password": "hoge123456",
+  "confirmPassword": "hoge123456",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E003:パスワードのみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "",
+  "confirmPassword": "hoge123456",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E004:確認用パスワードのみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "hoge123456",
+  "confirmPassword": "",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E005:ユーザ1桁のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "a",
+  "password": "hoge123456",
+  "confirmPassword": "hoge123456",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E006:パスワード1桁のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "a",
+  "confirmPassword": "hoge123456",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E007:確認用パスワード1桁のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "hoge123456",
+  "confirmPassword": "a",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E008:ユーザIDを最大 + 1のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "12345678901234567",
+  "password": "hoge123456",
+  "confirmPassword": "hoge123456",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E009:パスワードを最大 + 1のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "12345678901234567",
+  "confirmPassword": "hoge123456",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E010:確認用パスワードを最大 + 1のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "hoge123456",
+  "confirmPassword": "12345678901234567",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E011:パスワードと確認用パスワードを最大 + 1のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "12345678901234567",
+  "confirmPassword": "12345678901234567",
+  "remarks": "",
+})
+AccountRegist(driver).doRegst(account_regist_form, True)
+
+# E012:備考を最大 + 1のみ未入力
+account_regist_form = AccountRegistForm({
+  "user_id": "testID005",
+  "password": "hoge123456",
+  "confirmPassword": "hoge123456",
+  "remarks": "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567",
 })
 AccountRegist(driver).doRegst(account_regist_form, True)
 
