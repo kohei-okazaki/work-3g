@@ -18,7 +18,7 @@ log.write("login_auth_test開始")
 # driverを取得
 driver = SeleniumDriver().getDriver()
 
-# 正しいログイン情報でログイン
+# N001:正しいログイン情報でログイン
 login_form = LoginForm({
   "user_id": "master",
   "password": "master",
@@ -28,7 +28,7 @@ LoginAuth(driver).doLogin(login_form)
 # ブラウザバック
 driver.back()
 
-# 正しいログイン情報でログイン
+# N002:正しいログイン情報でログイン
 login_form = LoginForm({
   "user_id": "master",
   "password": "master",
@@ -38,17 +38,60 @@ LoginAuth(driver).doLogin(login_form)
 # ログアウトボタン押下
 LoginAuth(driver).doLogout()
 
-# 正しくないパスワードでログイン
+# E001:正しくないパスワードでログイン
 login_form = LoginForm({
   "user_id": "master",
   "password": "hoge",
 })
 LoginAuth(driver).doLogin(login_form)
 
-# 存在しないユーザIDでログイン
+# E002:存在しないユーザIDでログイン
 login_form = LoginForm({
   "user_id": "tejamvpose4jt4ebtjos",
   "password": "tejamvpose4jt4ebtjos",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# 入力チェック
+# E003:ユーザIDのみを未入力でログイン
+login_form = LoginForm({
+  "user_id": "",
+  "password": "tejamvpose4jt4ebtjos",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# E004:パスワードのみを未入力でログイン
+login_form = LoginForm({
+  "user_id": "master",
+  "password": "",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# E005:ユーザIDのみを最小桁 - 1桁でログイン
+login_form = LoginForm({
+  "user_id": "1",
+  "password": "tejamvpose4jt4ebtjos",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# E006:パスワードのみを最小桁 - 1桁でログイン
+login_form = LoginForm({
+  "user_id": "master",
+  "password": "1",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# E007:ユーザIDのみを最大桁 + 1でログイン
+login_form = LoginForm({
+  "user_id": "12345678901234567",
+  "password": "tejamvpose4jt4ebtjos",
+})
+LoginAuth(driver).doLogin(login_form)
+
+# E008:パスワードのみを最大桁 + 1でログイン
+login_form = LoginForm({
+  "user_id": "E008",
+  "password": "12345678901234567",
 })
 LoginAuth(driver).doLogin(login_form)
 
