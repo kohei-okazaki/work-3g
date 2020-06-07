@@ -1,6 +1,7 @@
 '''
 Created on 2020/06/07
-アカウント関連のPython
+
+アカウント操作関連の処理を行う
 @version: 1.0.0
 '''
 from time import sleep
@@ -8,7 +9,7 @@ from time import sleep
 from src.main.python.common import const_data
 
 
-class AccountRegist(object):
+class AccountRegist:
     '''
     アカウント作成を行うクラス
     '''
