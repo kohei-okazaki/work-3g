@@ -23,7 +23,7 @@ import jp.co.ha.dashboard.view.DashboardView;
 @Component
 public class DashboardExceptionHandler implements BaseExceptionHandler {
 
-    /** MessageSource */
+    /** {@linkplain MessageSource} */
     @Autowired
     private MessageSource messageSource;
 
@@ -61,7 +61,7 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
 
             BaseException be = (BaseException) e;
             detail = messageSource.getMessage(be.getErrorCode().getOuterErrorCode(), null,
-                    Locale.getDefault());
+                    Locale.getDefault()) + be.getDetail();
             errorCode = be.getErrorCode().getOuterErrorCode();
 
         } else {
@@ -85,20 +85,20 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
      */
     private String getLogErrorMessage(Exception e) {
         String detail;
-        String outerErrorCode;
+        String errorCode;
         StringBuilder body = new StringBuilder();
         if (e instanceof BaseException) {
             BaseException be = (BaseException) e;
             detail = be.getDetail();
-            outerErrorCode = be.getErrorCode().getOuterErrorCode();
+            errorCode = be.getErrorCode().getOuterErrorCode();
         } else {
             // 予期せぬ例外にする
             detail = messageSource.getMessage(
                     CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
                     Locale.getDefault());
-            outerErrorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+            errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
         }
-        body.append(detail).append("(").append(outerErrorCode).append(")");
+        body.append(detail).append("(").append(errorCode).append(")");
         return body.toString();
     }
 }

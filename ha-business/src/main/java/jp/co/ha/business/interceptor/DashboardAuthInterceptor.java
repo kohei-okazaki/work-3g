@@ -62,9 +62,9 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
             String sessionCsrfToken = sessionComponent
                     .getValue(request.getSession(), "csrfToken", String.class)
                     .orElseThrow(() -> new SystemException(
-                            DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+                            DashboardErrorCode.MULTI_SUBMIT_ERROR, "不正リクエストエラーです"));
             if (StringUtil.isEmpty(sessionCsrfToken)) {
-                throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                throw new SystemException(DashboardErrorCode.MULTI_SUBMIT_ERROR,
                         "不正リクエストエラーです");
             }
         }
