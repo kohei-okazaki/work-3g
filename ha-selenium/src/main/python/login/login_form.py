@@ -15,6 +15,7 @@ class LoginForm:
     def __init__(self, params):
         '''
         Constructor
+        @params params パラメータMap
         '''
         self.params = params;
 

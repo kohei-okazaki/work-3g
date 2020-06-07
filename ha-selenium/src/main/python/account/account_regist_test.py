@@ -33,13 +33,14 @@ account_regist_form = AccountRegistForm({
   "confirmPassword": "hoge123456",
   "remarks": "ここが備考欄",
 })
-AccountRegist(driver).doRegst(account_regist_form, True)
+AccountRegist(driver).doRegst(account_regist_form, False)
 
 # N003:任意のアカウントを作成(備考設定なし かつ ログイン画面に戻る)
 account_regist_form = AccountRegistForm({
   "user_id": "testID003",
   "password": "hoge123456",
   "confirmPassword": "hoge123456",
+  "remarks": "",
 })
 AccountRegist(driver).doRegst(account_regist_form, True)
 
@@ -48,8 +49,9 @@ account_regist_form = AccountRegistForm({
   "user_id": "testID004",
   "password": "hoge123456",
   "confirmPassword": "hoge123456",
+  "remarks": "",
 })
-AccountRegist(driver).doRegst(account_regist_form, True)
+AccountRegist(driver).doRegst(account_regist_form, False)
 
 # # 異常系
 # 既に登録したユーザIDで登録処理を行う(N001のデータを利用)

@@ -69,7 +69,20 @@ class AccountRegist(object):
         '''
         アカウント作成完了画面の処理
         '''
-        if (is_return_login):
+        if is_return_login:
             # ログイン画面に戻る場合、送信ボタンのタグを取得し押下
             submit_button = self.driver.find_element_by_class_name("btn-success")
             submit_button.click()
+
+
+class AccountSetting:
+    '''
+    アカウント設定を行うクラス
+    '''
+
+    def __init__(self, driver):
+        '''
+        Constructor
+        @param driver Driver
+        '''
+        self.driver = driver
