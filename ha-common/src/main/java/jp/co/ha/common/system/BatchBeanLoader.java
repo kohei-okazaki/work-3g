@@ -11,7 +11,7 @@ import jp.co.ha.common.util.BeanUtil;
 
 /**
  * Bean読込クラス(batch用)<br>
- * TODO jp.co.ha.common.system.BeanLoader からbeanを取得するように修正する予定
+ * TODO {@linkplain BeanLoader}からbeanを取得するように修正する予定
  *
  * @version 1.0.0
  */

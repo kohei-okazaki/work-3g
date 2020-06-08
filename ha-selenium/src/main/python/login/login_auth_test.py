@@ -6,6 +6,8 @@ Created on 2020/05/23
 @version: 1.0.0
 '''
 
+from os import path
+
 from src.main.python.common.logger import Logger
 from src.main.python.common.selenium_driver import SeleniumDriver
 from src.main.python.login.login_auth import LoginAuth
@@ -13,7 +15,7 @@ from src.main.python.login.login_form import LoginForm
 
 # ここからメイン処理
 log = Logger("selenium.log")
-log.write("login_auth_test開始")
+log.write(str(path.basename(__file__)) + "開始")
 
 # driverを取得
 driver = SeleniumDriver().getDriver()
@@ -95,7 +97,7 @@ login_form = LoginForm({
 })
 LoginAuth(driver).doLogin(login_form)
 
-log.write("login_auth_test終了")
+log.write(str(path.basename(__file__)) + "終了")
 
 exit
 # ここまでメイン処理

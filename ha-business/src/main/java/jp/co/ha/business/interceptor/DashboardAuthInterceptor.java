@@ -59,12 +59,12 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isMultiSubmitTokenCheck(handler)) {
             // 多重送信トークンチェックを行う
-            String sessionCsrfToken = sessionComponent
-                    .getValue(request.getSession(), "csrfToken", String.class)
+            String multiSubmitToken = sessionComponent
+                    .getValue(request.getSession(), "multiSubmitToken", String.class)
                     .orElseThrow(() -> new SystemException(
-                            DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
-            if (StringUtil.isEmpty(sessionCsrfToken)) {
-                throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                            DashboardErrorCode.MULTI_SUBMIT_ERROR, "不正リクエストエラーです"));
+            if (StringUtil.isEmpty(multiSubmitToken)) {
+                throw new SystemException(DashboardErrorCode.MULTI_SUBMIT_ERROR,
                         "不正リクエストエラーです");
             }
         }
@@ -85,14 +85,15 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isMultiSubmitTokenCheck(handler)) {
             // 多重送信トークンチェック後、トークンを削除する
-            sessionComponent.removeValue(request.getSession(), "csrfToken");
+            sessionComponent.removeValue(request.getSession(), "multiSubmitToken");
         }
 
         if (isMultiSubmitTokenFactory(handler)) {
             // 多重送信トークンを作成する
-            String random = RandomStringUtils.randomAlphabetic(10);
-            String csrfToken = encoder.encode(random, "");
-            sessionComponent.setValue(request.getSession(), "csrfToken", csrfToken);
+            String multiSubmitToken = encoder
+                    .encode(RandomStringUtils.randomAlphabetic(10), "");
+            sessionComponent.setValue(request.getSession(), "multiSubmitToken",
+                    multiSubmitToken);
         }
     }
 
