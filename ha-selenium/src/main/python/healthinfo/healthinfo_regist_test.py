@@ -6,33 +6,23 @@ Created on 2020/06/07
 @version: 1.0.0
 '''
 
+from os import path
+
 from src.main.python.common.logger import Logger
 from src.main.python.common.selenium_driver import SeleniumDriver
+from src.main.python.common.util import login_default_selenium_user
 from src.main.python.healthinfo.healthinfo import HealthInfoRegist
 from src.main.python.healthinfo.healthinfo_form import HealthInfoRegistForm
-from src.main.python.login.login_auth import LoginAuth
-from src.main.python.login.login_form import LoginForm
-
-
-def initialize(driver):
-    '''
-    健康情報画面がログイン後の画面のため、最初にログイン処理を行う
-    '''
-    LoginAuth(driver).doLogin(LoginForm({
-        "user_id": "seleniumuser",
-        "password": "seleniumuser",
-    }))
-
 
 # ここからメイン処理
 log = Logger("selenium.log")
-log.write("account_regist_test開始")
+log.write(str(path.basename(__file__)) + "開始")
 
 # driverを取得
 driver = SeleniumDriver().getDriver()
 
 # ログイン処理を先に行う
-initialize(driver)
+login_default_selenium_user(driver)
 
 # # 正常系
 # N001:適当な健康情報を登録
@@ -71,7 +61,7 @@ healthinfo_regist_form = HealthInfoRegistForm({
 })
 HealthInfoRegist(driver).doRegist(healthinfo_regist_form)
 
-log.write("login_auth_test終了")
+log.write(str(path.basename(__file__)) + "終了")
 
 exit
 # ここまでメイン処理

@@ -31,12 +31,14 @@ class LoginAuth:
         self.driver.get(const_data.BASE_REQUEST_URL + 'login/index')
 
         # ログイン画面 - userIdを設定
-        user_id_element = self.driver.find_element_by_id("userId")
-        user_id_element.send_keys(login_form.getUserId())
+        self.driver.find_element_by_id("userId").click()
+        self.driver.find_element_by_id("userId").clear()
+        self.driver.find_element_by_id("userId").send_keys(login_form.getUserId())
 
         # ログイン画面 - passwordを設定
-        password_element = self.driver.find_element_by_id("password")
-        password_element.send_keys(login_form.getPassword())
+        self.driver.find_element_by_id("password").click()
+        self.driver.find_element_by_id("password").clear()
+        self.driver.find_element_by_id("password").send_keys(login_form.getPassword())
 
         # 読込を待つために1秒間処理を止める
         sleep(1)

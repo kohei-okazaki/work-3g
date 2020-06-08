@@ -5,6 +5,8 @@ Created on 2020/06/07
 アカウント作成処理をテストするPython
 @version: 1.0.0
 '''
+from os import path
+
 from src.main.python.account.account import AccountRegist
 from src.main.python.account.account_form import AccountRegistForm
 from src.main.python.common.logger import Logger
@@ -12,7 +14,7 @@ from src.main.python.common.selenium_driver import SeleniumDriver
 
 # ここからメイン処理
 log = Logger("selenium.log")
-log.write("account_regist_test開始")
+log.write(str(path.basename(__file__)) + "開始")
 
 # driverを取得
 driver = SeleniumDriver().getDriver()
@@ -172,7 +174,7 @@ account_regist_form = AccountRegistForm({
 })
 AccountRegist(driver).doRegst(account_regist_form, True)
 
-log.write("login_auth_test終了")
+log.write(str(path.basename(__file__)) + "終了")
 
 exit
 # ここまでメイン処理
