@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 '''
 Created on 2020/06/07
 
@@ -29,3 +30,40 @@ class HealthInfoRegistForm:
         体重を返す
         '''
         return self.params["weight"]
+
+
+class HealthInfoReferenceForm:
+    '''
+    健康情報登録画面Form
+    '''
+
+    def __init__(self, params):
+        '''
+        Constructor
+        @params params パラメータMap
+        '''
+        self.params = params;
+
+    def getSeqHealthInfoId(self):
+        '''
+        健康情報IDを返す
+        '''
+        return self.params["seqHealthInfoId"]
+
+    def getHealthInfoRegDateSelectFlag(self):
+        '''
+        健康情報作成日直接指定フラグを返す
+        '''
+        return self.params["healthInfoRegDateSelectFlag"]
+
+    def getFromHealthInfoRegDate(self):
+        '''
+        健康情報作成日(開始)を返す
+        '''
+        return self.params["fromHealthInfoRegDate"]
+
+    def getToHealthInfoRegDate(self):
+        '''
+        健康情報作成日(終了)を返す
+        '''
+        return self.params["toHealthInfoRegDate"]

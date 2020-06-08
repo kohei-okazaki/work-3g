@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 '''
 Created on 2020/06/07
 
@@ -35,20 +36,24 @@ class AccountRegist:
         self.driver.get(const_data.BASE_REQUEST_URL + 'accountregist/input')
 
         # アカウント作成画面 - userIdを設定
-        user_id_element = self.driver.find_element_by_id("userId")
-        user_id_element.send_keys(account_regist_form.getUserId())
+        self.driver.find_element_by_id("userId").click()
+        self.driver.find_element_by_id("userId").clear()
+        self.driver.find_element_by_id("userId").send_keys(account_regist_form.getUserId())
 
         # アカウント作成画面 - passwordを設定
-        password_element = self.driver.find_element_by_id("password")
-        password_element.send_keys(account_regist_form.getPassword())
+        self.driver.find_element_by_id("password").click()
+        self.driver.find_element_by_id("password").clear()
+        self.driver.find_element_by_id("password").send_keys(account_regist_form.getPassword())
 
         # アカウント作成画面 - confirmPasswordを設定
-        confirm_password_element = self.driver.find_element_by_id("confirmPassword")
-        confirm_password_element.send_keys(account_regist_form.getConfirmPassword())
+        self.driver.find_element_by_id("confirmPassword").click()
+        self.driver.find_element_by_id("confirmPassword").clear()
+        self.driver.find_element_by_id("confirmPassword").send_keys(account_regist_form.getConfirmPassword())
 
         # アカウント作成画面 - remarksを設定
-        remarks_element = self.driver.find_element_by_id("remarks")
-        remarks_element.send_keys(account_regist_form.getRemarks())
+        self.driver.find_element_by_id("remarks").click()
+        self.driver.find_element_by_id("remarks").clear()
+        self.driver.find_element_by_id("remarks").send_keys(account_regist_form.getRemarks())
 
         # 読込を待つために1秒間処理を止める
         sleep(1)
