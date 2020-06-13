@@ -55,7 +55,6 @@ public class AwsS3Component {
      * @return AmazonS3
      */
     public AmazonS3 getAmazonS3() {
-        LOG.info("Amazon S3 called... region=" + awsConfig.getRegion().getName());
         return AmazonS3ClientBuilder
                 .standard()
                 // IAMユーザ認証情報を設定
@@ -74,6 +73,8 @@ public class AwsS3Component {
      */
     public List<S3ObjectSummary> getS3ObjectList() throws BaseException {
         try {
+            LOG.debug("Amazon S3 region=" + awsConfig.getRegion().getName() + ",backet="
+                    + awsConfig.getBacket());
             ObjectListing objectListing = getAmazonS3()
                     .listObjects(awsConfig.getBacket());
             return objectListing.getObjectSummaries();
@@ -100,7 +101,8 @@ public class AwsS3Component {
 
         try {
 
-            LOG.debug("AmazonS3 bakect= " + awsConfig.getBacket() + ",key=" + key);
+            LOG.debug("Amazon S3 region=" + awsConfig.getRegion().getName() + ",backet="
+                    + awsConfig.getBacket() + ",key=" + key);
             GetObjectRequest request = new GetObjectRequest(awsConfig.getBacket(), key);
             S3Object s3Object = getAmazonS3().getObject(request);
             return s3Object.getObjectContent();

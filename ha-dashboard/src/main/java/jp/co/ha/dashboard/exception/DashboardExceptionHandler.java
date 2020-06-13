@@ -10,8 +10,10 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.common.exception.BaseErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
+import jp.co.ha.common.exception.BaseRuntimeException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.dashboard.view.DashboardView;
 
@@ -45,7 +47,10 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
     }
 
     /**
-     * 指定した例外の画面エラーメッセージを作成する
+     * 指定した例外の画面エラーメッセージを返す<br>
+     * <ul>
+     * <li>BaseExceptionまたはBaseRuntimeExceptionを継承した例外の場合、throw時のエラーコード</li>
+     * </ul>
      *
      * @param e
      *     例外
@@ -53,27 +58,19 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
      */
     private String getDispErrorMessage(Exception e) {
 
-        String detail;
-        String errorCode;
-        StringBuilder body = new StringBuilder();
-
+        BaseErrorCode code = CommonErrorCode.UNEXPECTED_ERROR;
         if (e instanceof BaseException) {
-
-            BaseException be = (BaseException) e;
-            detail = messageSource.getMessage(be.getErrorCode().getOuterErrorCode(), null,
-                    Locale.getDefault()) + be.getDetail();
-            errorCode = be.getErrorCode().getOuterErrorCode();
-
-        } else {
-            // 予期せぬ例外にする
-            detail = messageSource.getMessage(
-                    CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
-                    Locale.getDefault());
-            errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
-
+            code = ((BaseException) e).getErrorCode();
+        } else if (e instanceof BaseRuntimeException) {
+            code = ((BaseRuntimeException) e).getErrorCode();
         }
-        body.append(detail).append("(").append(errorCode).append(")");
-        return body.toString();
+
+        String errorMessage = messageSource.getMessage(code.getOuterErrorCode(), null,
+                Locale.getDefault());
+        String errorCode = code.getOuterErrorCode();
+
+        return new StringBuilder().append(errorMessage).append("(").append(errorCode)
+                .append(")").toString();
     }
 
     /**
@@ -98,7 +95,6 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
                     Locale.getDefault());
             errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
         }
-        body.append(detail).append("(").append(errorCode).append(")");
-        return body.toString();
+        return body.append("(").append(errorCode).append(")").append(detail).toString();
     }
 }
