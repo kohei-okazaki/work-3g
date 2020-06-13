@@ -26,12 +26,12 @@ login_default_selenium_user(driver)
 # # 正常系
 # N001:健康情報IDで検索
 healthinfo_reference_form = HealthInfoReferenceForm({
-  "seqHealthInfoId": "20",
-  "healthInfoRegDateSelectFlag": "0",
+  "seqHealthInfoId": "75",
+  "healthInfoRegDateSelectFlag": "",
   "fromHealthInfoRegDate": "",
   "toHealthInfoRegDate": "",
 })
-HealthInfoReference().doReference(healthinfo_reference_form)
+HealthInfoReference(driver).doReferenceBySeqHealthInfoId(healthinfo_reference_form)
 
 log.write(str(path.basename(__file__)) + "終了")
 

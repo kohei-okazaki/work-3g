@@ -12,6 +12,7 @@ from src.main.python.login.login_form import LoginForm
 def login_default_selenium_user(driver):
     '''
     健康情報画面がログイン後の画面のため、最初にログイン処理を行う
+    @driver Driver
     '''
     LoginAuth(driver).doLogin(LoginForm({
         "user_id": "seleniumuser",
