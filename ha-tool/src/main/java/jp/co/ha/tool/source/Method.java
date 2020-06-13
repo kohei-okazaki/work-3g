@@ -46,7 +46,7 @@ public abstract class Method {
     protected abstract String getMethodName();
 
     /**
-     * annotationを追加する
+     * Annotationを追加する
      *
      * @param clazz
      *     クラス型
@@ -61,7 +61,7 @@ public abstract class Method {
      * returnTypeを設定する
      *
      * @param returnType
-     *     returnType
+     *     戻り値
      */
     public void setReturnType(Class<?> returnType) {
         this.returnType = returnType;
@@ -71,7 +71,7 @@ public abstract class Method {
      * isAbstractを設定する
      *
      * @param isAbstract
-     *     isAbstract
+     *     抽象メソッドかどうか
      */
     public void setAbstract(boolean isAbstract) {
         this.isAbstract = isAbstract;
@@ -81,7 +81,7 @@ public abstract class Method {
      * signatureを設定する
      *
      * @param signature
-     *     signature
+     *     引数情報
      */
     public void setSignature(Signature signature) {
         this.signature = signature;

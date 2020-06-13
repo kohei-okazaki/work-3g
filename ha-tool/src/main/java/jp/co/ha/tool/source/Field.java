@@ -77,6 +77,7 @@ public class Field {
      * nameを設定する
      *
      * @param name
+     *     フィールド名
      */
     public void setName(String name) {
         this.name = name;
@@ -95,6 +96,7 @@ public class Field {
      * commentを設定する
      *
      * @param comment
+     *     コメント
      */
     public void setComment(String comment) {
         this.comment = comment;
@@ -113,6 +115,7 @@ public class Field {
      * classTypeを設定する
      *
      * @param classType
+     *     型
      */
     public void setClassType(Class<?> classType) {
         this.classType = classType;
@@ -131,6 +134,7 @@ public class Field {
      * accessTypeを設定する
      *
      * @param accessType
+     *     アクセスタイプ
      */
     public void setAccessType(AccessType accessType) {
         this.accessType = accessType;
@@ -149,6 +153,7 @@ public class Field {
      * annotationMapを設定する
      *
      * @param annotationMap
+     *     アノテーションMap
      */
     public void setAnnotationMap(Map<Class<?>, String> annotationMap) {
         this.annotationMap = annotationMap;
