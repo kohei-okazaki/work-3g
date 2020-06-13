@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoUploadCsv;

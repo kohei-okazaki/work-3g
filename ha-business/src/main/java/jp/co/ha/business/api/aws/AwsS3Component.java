@@ -1,4 +1,4 @@
-package jp.co.ha.business.aws;
+package jp.co.ha.business.api.aws;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,7 +55,7 @@ public class AwsS3Component {
      * @return AmazonS3
      */
     public AmazonS3 getAmazonS3() {
-        LOG.info("Amazon S3 called");
+        LOG.info("Amazon S3 called... region=" + awsConfig.getRegion().getName());
         return AmazonS3ClientBuilder
                 .standard()
                 // IAMユーザ認証情報を設定
@@ -99,6 +99,8 @@ public class AwsS3Component {
     public InputStream getS3ObjectByKey(String key) throws BusinessException {
 
         try {
+
+            LOG.debug("AmazonS3 bakect= " + awsConfig.getBacket() + ",key=" + key);
             GetObjectRequest request = new GetObjectRequest(awsConfig.getBacket(), key);
             S3Object s3Object = getAmazonS3().getObject(request);
             return s3Object.getObjectContent();

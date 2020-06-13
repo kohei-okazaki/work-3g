@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.DashboardErrorCode;

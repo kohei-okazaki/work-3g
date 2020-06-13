@@ -28,7 +28,7 @@
     <property name="healthInfoRegistBatchFilePath" value="${healthInfoRegistBatchFilePath}" />
   </bean>
   <!-- aws.properties -->
-  <bean id="awsConfig" class="jp.co.ha.business.aws.AwsConfig" lazy-init="true">
+  <bean id="awsConfig" class="jp.co.ha.business.api.aws.AwsConfig" lazy-init="true">
     <property name="region" value="${aws.region}" />
     <property name="backet" value="${aws.s3.backet}" />
     <property name="timeout" value="${aws.s3.timeout}" />
@@ -39,6 +39,4 @@
   <context:component-scan base-package="jp.co.ha.business.api" />
   <!-- Business -->
   <context:component-scan base-package="jp.co.ha.business.healthInfo.service" />
-  <!-- AWS -->
-  <context:component-scan base-package="jp.co.ha.business.aws" />
 </beans>
