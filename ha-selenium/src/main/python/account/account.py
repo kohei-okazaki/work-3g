@@ -94,3 +94,6 @@ class AccountSetting:
         @param driver Driver
         '''
         self.driver = driver
+
+    def doSetting(self, account_setting_form):
+        pass;

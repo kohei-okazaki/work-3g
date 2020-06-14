@@ -33,6 +33,24 @@ healthinfo_reference_form = HealthInfoReferenceForm({
 })
 HealthInfoReference(driver).doReferenceBySeqHealthInfoId(healthinfo_reference_form)
 
+# # 異常系
+# E001:存在しない健康情報IDで検索
+healthinfo_reference_form = HealthInfoReferenceForm({
+  "seqHealthInfoId": "9999999",
+  "healthInfoRegDateSelectFlag": "",
+  "fromHealthInfoRegDate": "",
+  "toHealthInfoRegDate": "",
+})
+HealthInfoReference(driver).doReferenceBySeqHealthInfoId(healthinfo_reference_form)
+
+# E002:健康情報IDを数字以外で検索
+healthinfo_reference_form = HealthInfoReferenceForm({
+  "seqHealthInfoId": "a",
+  "healthInfoRegDateSelectFlag": "",
+  "fromHealthInfoRegDate": "",
+  "toHealthInfoRegDate": "",
+})
+HealthInfoReference(driver).doReferenceBySeqHealthInfoId(healthinfo_reference_form)
 log.write(str(path.basename(__file__)) + "終了")
 
 exit
