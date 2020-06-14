@@ -18,3 +18,14 @@ def login_default_selenium_user(driver):
         "user_id": "seleniumuser",
         "password": "seleniumuser",
     }))
+
+
+def setTextById(driver, element_id, text):
+    '''
+    指定したブラウザに文字列を設定する
+    @param element_id ブラウザ情報のDOMのキー
+    @param text 設定対象文字列
+    '''
+    driver.find_element_by_id(element_id).click()
+    driver.find_element_by_id(element_id).clear()
+    driver.find_element_by_id(element_id).send_keys(text)
