@@ -5,9 +5,10 @@ Created on 2020/06/07
 健康情報関連のForm
 @version: 1.0.0
 '''
+from src.main.python.common.form import BaseForm
 
 
-class HealthInfoRegistForm:
+class HealthInfoRegistForm(BaseForm):
     '''
     健康情報登録画面Form
     '''
@@ -32,7 +33,7 @@ class HealthInfoRegistForm:
         return self.params["weight"]
 
 
-class HealthInfoReferenceForm:
+class HealthInfoReferenceForm(BaseForm):
     '''
     健康情報登録画面Form
     '''

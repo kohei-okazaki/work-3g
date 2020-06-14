@@ -545,7 +545,7 @@ public class ToolUtil {
     }
 
     /**
-     * 指定された行情報リストから<code>jp.co.nok.tool.db.Table</code>を返す
+     * 指定された行情報リストから{@linkplain Table}を返す
      *
      * @param rowList
      *     行情報リスト

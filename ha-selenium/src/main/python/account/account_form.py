@@ -5,9 +5,10 @@ Created on 2020/06/07
 アカウント関連のForm
 @version: 1.0.0
 '''
+from src.main.python.common.form import BaseForm
 
 
-class BaseAccountForm:
+class BaseAccountForm(BaseForm):
     '''
     アカウントの親Formクラス
     '''

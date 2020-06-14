@@ -62,8 +62,8 @@ class AccountRegist:
         submit_button = self.driver.find_element_by_class_name("btn-success")
         submit_button.click()
 
-        # 読込を待つために1秒間処理を止める
-        sleep(1)
+        # 読込を待つために2秒間処理を止める
+        sleep(2)
 
         '''
         アカウント作成確認画面の処理
@@ -77,6 +77,8 @@ class AccountRegist:
         '''
         if is_return_login:
             # ログイン画面に戻る場合、送信ボタンのタグを取得し押下
+            # 読込を待つために2秒間処理を止める
+            sleep(2)
             submit_button = self.driver.find_element_by_class_name("btn-success")
             submit_button.click()
 
@@ -92,3 +94,6 @@ class AccountSetting:
         @param driver Driver
         '''
         self.driver = driver
+
+    def doSetting(self, account_setting_form):
+        pass;

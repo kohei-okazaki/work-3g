@@ -3,8 +3,9 @@
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <h1 id="appTitle" class="appTitle col-sm-3 text-nowrap text-muted" th:text="#{healthInfoAppName}"></h1>
     <div class="collapse navbar-collapse justify-content-end">
-    <ul class="navbar-nav">
-      <li class="nav-item link text-muted" th:if="${session[userId]} != null" th:text="${'ユーザID&nbsp;:&nbsp;' + session[userId]}"></li>
+      <img th:src="@{/resources/image/icon_people.png}" th:if="${session[userId]} != null" alt="hitogata"  title="hitogata">
+      <ul class="navbar-nav">
+        <li class="nav-item link text-muted" th:if="${session[userId]} != null" th:text="${'ユーザID&nbsp;:&nbsp;' + session[userId]}"></li>
       </ul>
     </div>
   </nav>

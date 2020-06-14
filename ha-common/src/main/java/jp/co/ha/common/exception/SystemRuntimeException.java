@@ -37,6 +37,18 @@ public class SystemRuntimeException extends BaseRuntimeException {
      *
      * @param errorCode
      *     エラーコード
+     * @param e
+     *     例外クラス
+     */
+    public SystemRuntimeException(BaseErrorCode errorCode, Exception e) {
+        this(errorCode, "", e);
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param errorCode
+     *     エラーコード
      * @param detail
      *     詳細
      * @param e

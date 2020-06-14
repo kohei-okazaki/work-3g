@@ -37,6 +37,18 @@ public class ApiException extends BaseException {
      *
      * @param errorCode
      *     エラーコード
+     * @param e
+     *     例外クラス
+     */
+    public ApiException(BaseErrorCode errorCode, Exception e) {
+        super(errorCode, e);
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param errorCode
+     *     エラーコード
      * @param detail
      *     詳細
      * @param e

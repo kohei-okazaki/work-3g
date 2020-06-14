@@ -17,6 +17,9 @@ import jp.co.ha.tool.gen.ToolProperty;
  */
 public class ExcelReader {
 
+    /** 対象シート名 */
+    private static final String TARGET_SHEET_NAME = "TABLE_LIST";
+
     /**
      * 指定された自動生成ツール設定ファイルからExcelの読込を行う
      *
@@ -37,14 +40,14 @@ public class ExcelReader {
 
         // シート毎の処理
         while (sheetIte.hasNext()) {
-            Sheet excelSheet = new Sheet();
-            org.apache.poi.ss.usermodel.Sheet sheet = sheetIte.next();
 
-            if (!"TABLE_LIST".equals(sheet.getSheetName())) {
+            org.apache.poi.ss.usermodel.Sheet sheet = sheetIte.next();
+            if (!TARGET_SHEET_NAME.equals(sheet.getSheetName())) {
                 // ”TABLE_LIST” シートでない場合、次のシートへ
                 break;
             }
 
+            Sheet excelSheet = new Sheet();
             excelSheet.setName(sheet.getSheetName());
             Iterator<org.apache.poi.ss.usermodel.Row> rowIte = sheet.iterator();
 
@@ -65,7 +68,7 @@ public class ExcelReader {
         }
 
         // 現在のシートをTABLE_LISTに設定
-        excel.activeSheet("TABLE_LIST");
+        excel.activeSheet(TARGET_SHEET_NAME);
         return excel;
     }
 
