@@ -92,6 +92,7 @@ public class Column {
      * isPrimaryを設定する
      *
      * @param isPrimary
+     *     プライマリー
      */
     public void setPrimary(boolean isPrimary) {
         this.isPrimary = isPrimary;
@@ -110,6 +111,7 @@ public class Column {
      * isSequenceを設定する
      *
      * @param isSequence
+     *     シーケンス
      */
     public void setSequence(boolean isSequence) {
         this.isSequence = isSequence;
@@ -128,6 +130,7 @@ public class Column {
      * isCryptを設定する
      *
      * @param isCrypt
+     *     暗号化
      */
     public void setCrypt(boolean isCrypt) {
         this.isCrypt = isCrypt;
@@ -146,6 +149,7 @@ public class Column {
      * isNotNullを設定する
      *
      * @param isNotNull
+     *     NotNull制約
      */
     public void setNotNull(boolean isNotNull) {
         this.isNotNull = isNotNull;

@@ -5,9 +5,10 @@ Created on 2020/05/23
 ログインFormのPython
 @version: 1.0.0
 '''
+from src.main.python.common.form import BaseForm
 
 
-class LoginForm:
+class LoginForm(BaseForm):
     '''
     ログインForm
     '''

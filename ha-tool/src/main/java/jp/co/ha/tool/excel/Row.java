@@ -35,7 +35,7 @@ public class Row {
     }
 
     /**
-     * セル位置に対応するセルを返す
+     * セル位置に対応する{@linkplain Cell}を返す
      *
      * @param type
      *     セル位置

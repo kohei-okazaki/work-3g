@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.dto.NewsListDto;
 import jp.co.ha.business.dto.NewsListDto.NewsDto;
 import jp.co.ha.common.exception.BaseException;

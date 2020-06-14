@@ -22,7 +22,7 @@ public abstract class BaseRuntimeException extends RuntimeException {
      *     例外クラス
      */
     public BaseRuntimeException(Exception e) {
-        super(e);
+        this(CommonErrorCode.UNEXPECTED_ERROR, e);
     }
 
     /**
@@ -36,6 +36,18 @@ public abstract class BaseRuntimeException extends RuntimeException {
     public BaseRuntimeException(BaseErrorCode errorCode, String detail) {
         this.errorCode = errorCode;
         this.detail = detail;
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param errorCode
+     *     エラーコード
+     * @param e
+     *     例外クラス
+     */
+    public BaseRuntimeException(BaseErrorCode errorCode, Exception e) {
+        this(errorCode, "", e);
     }
 
     /**
@@ -57,7 +69,7 @@ public abstract class BaseRuntimeException extends RuntimeException {
     /**
      * {@linkplain BaseErrorCode}を返す
      *
-     * @return errorCode エラーコード
+     * @return errorCode
      */
     public BaseErrorCode getErrorCode() {
         return errorCode;
@@ -66,7 +78,7 @@ public abstract class BaseRuntimeException extends RuntimeException {
     /**
      * detailを返す
      *
-     * @return detail 詳細
+     * @return detail
      */
     public String getDetail() {
         return detail;

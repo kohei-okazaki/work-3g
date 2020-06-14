@@ -1,4 +1,4 @@
-package jp.co.ha.business.aws;
+package jp.co.ha.business.api.aws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

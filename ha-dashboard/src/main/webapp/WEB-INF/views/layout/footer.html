@@ -4,8 +4,8 @@
   <div class="table" th:if="${session[userId]} != null">
     <!--/* ログイン状態の場合のみ表示 */-->
     <ul class="footer-submenu">
-      <li><a class="link" href="../login/top" th:href="@{/login/top}">home</a></li>
-      <li><a class="link" href="../news/list" th:href="@{/news/list}">news</a></li>
+      <li><a class="link" href="../login/top" th:href="@{/login/top}"><img th:src="@{/resources/image/icon_home_green.png}" alt="hitogata"  title="hitogata"></a></li>
+      <li><a class="link" href="../news/list" th:href="@{/news/list}"><img th:src="@{/resources/image/icon_notice_green.png}" alt="hitogata"  title="hitogata"></a></li>
     </ul><!-- /.footer-submenu -->
   </div>
   <!--/* table部ここまで */-->
