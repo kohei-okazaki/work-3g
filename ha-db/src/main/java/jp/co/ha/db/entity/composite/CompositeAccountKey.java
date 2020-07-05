@@ -1,4 +1,4 @@
-package jp.co.ha.db.entity.composit;
+package jp.co.ha.db.entity.composite;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ import jp.co.ha.common.log.annotation.Ignore;
  *
  * @version 1.0.0
  */
-public class CompositAccountKey implements Serializable {
+public class CompositeAccountKey implements Serializable {
 
     /** serialVersionUID */
     @Ignore
@@ -59,7 +59,7 @@ public class CompositAccountKey implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        CompositAccountKey other = (CompositAccountKey) that;
+        CompositeAccountKey other = (CompositeAccountKey) that;
         return (this.getUserId() == null ? other.getUserId() == null
                 : this.getUserId().equals(other.getUserId()));
     }

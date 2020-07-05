@@ -1,14 +1,14 @@
-package jp.co.ha.db.mapper.composit;
+package jp.co.ha.db.mapper.composite;
 
-import jp.co.ha.db.entity.composit.CompositAccount;
-import jp.co.ha.db.entity.composit.CompositAccountKey;
+import jp.co.ha.db.entity.composite.CompositeAccount;
+import jp.co.ha.db.entity.composite.CompositeAccountKey;
 
 /**
  * アカウント情報とメール情報と健康情報ファイル設定の複合Mapper
  *
  * @version 1.0.0
  */
-public interface CompositAccountMapper {
+public interface CompositAccounteMapper {
 
     /**
      * アカウント情報とメール情報と健康情報ファイル設定の複合Entityを返す
@@ -17,6 +17,6 @@ public interface CompositAccountMapper {
      *     ユーザID
      * @return アカウント情報とメール情報と健康情報ファイル設定の複合Entity
      */
-    CompositAccount selectByPrimaryKey(CompositAccountKey key);
+    CompositeAccount selectByPrimaryKey(CompositeAccountKey key);
 
 }

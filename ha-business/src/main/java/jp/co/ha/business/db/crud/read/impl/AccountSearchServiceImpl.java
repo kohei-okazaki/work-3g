@@ -10,10 +10,10 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.AccountKey;
-import jp.co.ha.db.entity.composit.CompositAccount;
-import jp.co.ha.db.entity.composit.CompositAccountKey;
+import jp.co.ha.db.entity.composite.CompositeAccount;
+import jp.co.ha.db.entity.composite.CompositeAccountKey;
 import jp.co.ha.db.mapper.AccountMapper;
-import jp.co.ha.db.mapper.composit.CompositAccountMapper;
+import jp.co.ha.db.mapper.composite.CompositAccounteMapper;
 
 /**
  * アカウント情報検索サービスインターフェース実装クラス
@@ -28,7 +28,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     private AccountMapper mapper;
     /** アカウント複合Mapper */
     @Autowired
-    private CompositAccountMapper compositAccountMapper;
+    private CompositAccounteMapper compositAccountMapper;
 
     /**
      * {@inheritDoc}
@@ -48,8 +48,8 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<CompositAccount> findCompositAccountById(String userId) {
-        CompositAccountKey key = new CompositAccountKey();
+    public Optional<CompositeAccount> findCompositAccountById(String userId) {
+        CompositeAccountKey key = new CompositeAccountKey();
         key.setUserId(userId);
         return Optional.ofNullable(compositAccountMapper.selectByPrimaryKey(key));
     }
