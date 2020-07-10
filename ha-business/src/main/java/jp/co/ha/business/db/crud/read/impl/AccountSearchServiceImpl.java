@@ -13,7 +13,7 @@ import jp.co.ha.db.entity.AccountKey;
 import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.db.entity.composite.CompositeAccountKey;
 import jp.co.ha.db.mapper.AccountMapper;
-import jp.co.ha.db.mapper.composite.CompositAccounteMapper;
+import jp.co.ha.db.mapper.composite.CompositeAccountMapper;
 
 /**
  * アカウント情報検索サービスインターフェース実装クラス
@@ -28,7 +28,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     private AccountMapper mapper;
     /** アカウント複合Mapper */
     @Autowired
-    private CompositAccounteMapper compositAccountMapper;
+    private CompositeAccountMapper compositAccountMapper;
 
     /**
      * {@inheritDoc}

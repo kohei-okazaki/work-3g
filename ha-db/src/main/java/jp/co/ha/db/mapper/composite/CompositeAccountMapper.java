@@ -8,7 +8,7 @@ import jp.co.ha.db.entity.composite.CompositeAccountKey;
  *
  * @version 1.0.0
  */
-public interface CompositAccounteMapper {
+public interface CompositeAccountMapper {
 
     /**
      * アカウント情報とメール情報と健康情報ファイル設定の複合Entityを返す
