@@ -3,7 +3,7 @@ package jp.co.ha.business.db.crud.read;
 import java.util.Optional;
 
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.db.entity.composit.CompositAccount;
+import jp.co.ha.db.entity.composite.CompositeAccount;
 
 /**
  * アカウント検索サービスインターフェース
@@ -28,6 +28,6 @@ public interface AccountSearchService {
      *     ユーザID
      * @return アカウント情報とメール情報と健康情報ファイル設定の複合Entity
      */
-    Optional<CompositAccount> findCompositAccountById(String userId);
+    Optional<CompositeAccount> findCompositAccountById(String userId);
 
 }

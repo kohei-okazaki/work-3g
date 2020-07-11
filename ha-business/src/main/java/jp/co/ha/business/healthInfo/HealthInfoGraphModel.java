@@ -17,13 +17,10 @@ public class HealthInfoGraphModel {
 
     /** 健康情報登録日時リスト */
     private List<String> healthInfoRegDateList = new ArrayList<>();
-
     /** 体重リスト */
     private List<BigDecimal> weightList = new ArrayList<>();
-
     /** BMIリスト */
     private List<BigDecimal> bmiList = new ArrayList<>();
-
     /** 標準体重リスト */
     private List<BigDecimal> standardWeightList = new ArrayList<>();
 

@@ -34,6 +34,7 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(key = "'bmiRangeMt/' + #seqBmiRangeId", value = "bmiRangeMt")
     public Optional<BmiRangeMt> findById(Integer seqBmiRangeId) {
         return findAll().stream()
                 .filter(e -> e.getSeqBmiRangeId().equals(seqBmiRangeId))
@@ -46,7 +47,7 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(key = "'bmiRangeMt/' + #customerNo")
+    @Cacheable(key = "'bmiRangeMt'", value = "bmiRangeMt")
     public List<BmiRangeMt> findAll() {
         return mapper.selectByExample(new BmiRangeMtExample());
     }
