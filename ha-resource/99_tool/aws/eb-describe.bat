@@ -1,11 +1,10 @@
 @echo off
 
 rem ------------------------------------------------------------------------
-rem EC2環境のアプリケーションの状態を確認するバッチ
-rem 第一引数:環境名
+rem EC2環境のElasticBeanstalkの状態を確認するバッチ
+rem 第一引数:アプリケーション名
 rem ------------------------------------------------------------------------
 
 cls
 
-aws elasticbeanstalk describe-environments --environment-names %1
-
+aws elasticbeanstalk describe-applications --application-name %1
