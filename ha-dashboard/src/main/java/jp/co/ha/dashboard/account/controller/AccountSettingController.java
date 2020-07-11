@@ -27,7 +27,7 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.dashboard.account.form.AccountSettingForm;
 import jp.co.ha.dashboard.account.service.AccountSettingService;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.composit.CompositAccount;
+import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.web.controller.BaseWizardController;
 
 /**
@@ -64,12 +64,12 @@ public class AccountSettingController
         String userId = sessionComponent
                 .getValue(request.getSession(), "userId", String.class).get();
 
-        Optional<CompositAccount> entity = accountSearchService
+        Optional<CompositeAccount> entity = accountSearchService
                 .findCompositAccountById(userId);
 
         AccountSettingForm form = new AccountSettingForm();
         BeanUtil.copy(entity.get(), form, (src, dest) -> {
-            CompositAccount srcAccount = (CompositAccount) src;
+            CompositeAccount srcAccount = (CompositeAccount) src;
             AccountSettingForm destForm = (AccountSettingForm) dest;
             destForm.setPasswordExpire(DateUtil.toString(srcAccount.getPasswordExpire(),
                     DateFormatType.YYYYMMDD));

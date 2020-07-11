@@ -10,6 +10,8 @@ rem ARG1          : ログ出力先
 rem                            "console"を指定した場合、ターミナル上にSQLと処理結果が出力される
 rem                            未指定の場合、本batと同階層に"result.log"としてSQLと処理結果が出力される
 
+cls
+
 rem ユーザ
 SET USER=root
 rem パスワード
