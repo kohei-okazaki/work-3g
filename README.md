@@ -28,6 +28,9 @@ api, dashboard, batchで共通的に使うbusinessロジックをまとめたプ
 * ### ha-db  
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
 
+* ### ha-node  
+健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装している) 
+
 * ### ha-pom  
 api, auto, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
