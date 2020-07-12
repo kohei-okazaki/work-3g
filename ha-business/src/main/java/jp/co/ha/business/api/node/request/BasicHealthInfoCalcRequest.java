@@ -4,12 +4,15 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.log.LogMessageFactory;
+import jp.co.ha.web.form.BaseNodeRequest;
+
 /**
  * 基礎健康情報計算APIのリクエストクラス
  *
  * @version 1.0.0
  */
-public class BasicHealthInfoCalcRequest extends BaseHealthInfoCalcRequest {
+public class BasicHealthInfoCalcRequest extends BaseNodeRequest {
 
     /** 身長 */
     @JsonProperty("height")
@@ -54,6 +57,11 @@ public class BasicHealthInfoCalcRequest extends BaseHealthInfoCalcRequest {
      */
     public void setWeight(BigDecimal weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return LogMessageFactory.getLogMessage(this);
     }
 
 }

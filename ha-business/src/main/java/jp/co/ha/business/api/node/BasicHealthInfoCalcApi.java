@@ -1,56 +1,48 @@
 package jp.co.ha.business.api.node;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.web.api.BaseNodeApi;
 
 /**
- * 基礎健康情報計算API
+ * 基礎健康情報計算API<br>
+ * 身長と体重からBMIと標準体重を計算する
  *
  * @version 1.0.0
  */
 @Component
-public class BasicHealthInfoCalcApi {
+public class BasicHealthInfoCalcApi
+        extends BaseNodeApi<BasicHealthInfoCalcRequest, BasicHealthInfoCalcResponse> {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(BasicHealthInfoCalcApi.class);
-
+    /** NodeAPIの種別 */
+    private static final NodeApiType TYPE = NodeApiType.BASIC;
     /** 健康情報関連プロパティ */
     @Autowired
     private HealthInfoProperties prop;
-    /** APIを通信するためのClient */
-    @Autowired
-    private RestTemplate restTemplate;
 
-    /**
-     * @param request
-     *     基礎健康情報計算APIリクエスト
-     * @return 基礎健康情報計算APIレスポンスクラス
-     */
-    public BasicHealthInfoCalcResponse execute(BasicHealthInfoCalcRequest request) {
+    @Override
+    public BasicHealthInfoCalcResponse getResponse() {
+        return new BasicHealthInfoCalcResponse();
+    }
 
-        LOG.info("基礎健康情報計算API START");
+    @Override
+    public String getUrl() {
+        return prop.getHealthInfoCalcUrl() + TYPE.getValue();
+    }
 
-        BasicHealthInfoCalcResponse response = null;
-        try {
-            String url = prop.getHealthInfoCalcUrl() + "healthinfo";
-            response = restTemplate.postForObject(url,
-                    request, BasicHealthInfoCalcResponse.class);
+    @Override
+    public HttpMethod getHttpMethod() {
+        return HttpMethod.POST;
+    }
 
-        } catch (Throwable e) {
-            LOG.error("APIの実施に失敗しました", e);
-        } finally {
-            LOG.info("基礎健康情報計算API END");
-        }
-
-        return response;
+    @Override
+    public NodeApiType getNodeApiType() {
+        return TYPE;
     }
 
 }

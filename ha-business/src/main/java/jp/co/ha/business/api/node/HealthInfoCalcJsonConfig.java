@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import jp.co.ha.business.api.node.response.BaseHealthinfoCalcResponse.Result;
+import jp.co.ha.web.form.BaseNodeResponse.Result;
 
 /**
  * JSONの設定クラス

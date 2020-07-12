@@ -12,7 +12,6 @@ import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
-import jp.co.ha.business.api.node.response.BaseHealthinfoCalcResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
@@ -33,6 +32,7 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.web.form.BaseNodeResponse.Result;
 import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
@@ -116,20 +116,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
             BasicHealthInfo basicHealthInfo) throws BaseException {
 
         String userId = request.getUserId();
-        // BigDecimal height = request.getHeight();
         BigDecimal weight = request.getWeight();
         BigDecimal bmi = basicHealthInfo.getBmi();
-        BigDecimal standardWeight = basicHealthInfo.getStandardWeight();
-
-        // // メートルに変換する
-        // BigDecimal meterHeight =
-        // healthInfoCalcService.convertMeterFromCentiMeter(height);
-        //
-        // BigDecimal bmi = healthInfoCalcService.calcBmi(meterHeight, weight,
-        // 2);
-        // BigDecimal standardWeight =
-        // healthInfoCalcService.calcStandardWeight(meterHeight,
-        // 2);
 
         // 最後に登録した健康情報を取得する
         SelectOption selectOption = new SelectOptionBuilder()
@@ -153,7 +141,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         BeanUtil.copy(request, entity);
         entity.setUserId(userId);
         entity.setBmi(bmi);
-        entity.setStandardWeight(standardWeight);
+        entity.setStandardWeight(basicHealthInfo.getStandardWeight());
         entity.setHealthInfoStatus(status.getValue());
         entity.setSeqBmiRangeId(bmiRangeMt.getSeqBmiRangeId());
         entity.setHealthInfoRegDate(DateUtil.getSysDate());
@@ -175,14 +163,13 @@ public class HealthInfoRegistServiceImpl extends CommonService
             HealthInfoRegistRequest request) throws ApiException {
 
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
-        apiRequest.setHeight(request.getHeight());
-        apiRequest.setWeight(request.getWeight());
+        BeanUtil.copy(request, apiRequest);
 
         BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
-                .execute(apiRequest);
+                .callApi(apiRequest);
 
         if (Result.SUCCESS != apiResponse.getResult()) {
-            // 基礎健康情報計算APIの処理が成功していない場合
+            // 基礎健康情報計算APIの処理が成功以外の場合
             throw new ApiException(BusinessErrorCode.BASIC_HEALTH_INFO_CALC_API_CONNERR,
                     apiResponse.getDetail());
         }

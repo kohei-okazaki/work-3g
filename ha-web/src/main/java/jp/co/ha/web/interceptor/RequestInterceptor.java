@@ -15,6 +15,7 @@ import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
+import jp.co.ha.common.system.SystemMemory;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -50,7 +51,8 @@ public class RequestInterceptor extends BaseWebInterceptor {
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
                 + "[URI=" + request.getRequestURI()
                 + ",METHOD=" + request.getMethod()
-                + ",HEADER=" + getHeader(request) + "]");
+                + ",HEADER=" + getHeader(request) + "]"
+                + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
 
         return true;
     }
@@ -67,7 +69,8 @@ public class RequestInterceptor extends BaseWebInterceptor {
             return;
         }
         Method method = ((HandlerMethod) handler).getMethod();
-        LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName());
+        LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName()
+                + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
 
     }
 

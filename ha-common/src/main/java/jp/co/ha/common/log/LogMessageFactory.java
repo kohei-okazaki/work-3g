@@ -38,6 +38,11 @@ public class LogMessageFactory {
      * @return ログメッセージ
      */
     public static String getLogMessage(Object bean) {
+
+        if (BeanUtil.isNull(bean)) {
+            return "<NULL>";
+        }
+
         StringJoiner body = new StringJoiner(", ");
         Class<?> clazz = bean.getClass();
 
@@ -53,7 +58,7 @@ public class LogMessageFactory {
                 body.add(name + StringUtil.EQUAL + editValue(getValue(bean, name)));
             }
         }
-        return clazz.getName() + StringUtil.SPACE + body.toString();
+        return body.toString();
     }
 
     /**
@@ -117,7 +122,7 @@ public class LogMessageFactory {
     private static String editValue(Object value) {
         String strValue;
         if (BeanUtil.isNull(value)) {
-            strValue = StringUtil.EMPTY;
+            strValue = "<NULL>";
         } else if (value instanceof Date) {
             strValue = DateUtil.toString((Date) value, DateFormatType.YYYYMMDDHHMMSS);
         } else {

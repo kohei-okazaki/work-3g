@@ -1,15 +1,15 @@
-package jp.co.ha.business.api.node.response;
+package jp.co.ha.web.form;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * 基底健康情報計算APIのレスポンスクラス
+ * 基底NodeAPIレスポンス
  *
  * @version 1.0.0
  */
-public abstract class BaseHealthinfoCalcResponse {
+public abstract class BaseNodeResponse implements BaseForm {
 
     /** 処理結果 */
     @JsonProperty("result")
@@ -51,11 +51,10 @@ public abstract class BaseHealthinfoCalcResponse {
         }
 
         /**
-         * Statusを返す
-         *
+         * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
          * @param value
          *     値
-         * @return Status
+         * @return Result
          */
         public static Result of(String value) {
             return BaseEnum.of(Result.class, value);
