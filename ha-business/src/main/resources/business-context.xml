@@ -24,8 +24,9 @@
   </bean>
   <!-- healthinfo.properties -->
   <bean id="healthInfoProperties" class="jp.co.ha.business.io.file.properties.HealthInfoProperties" lazy-init="true">
-    <property name="referenceFilePath" value="${referenceFilePath}" />
-    <property name="healthInfoRegistBatchFilePath" value="${healthInfoRegistBatchFilePath}" />
+    <property name="referenceFilePath" value="${reference.file.path}" />
+    <property name="registBatchFilePath" value="${healthinfo.regist.batch.file.path}" />
+    <property name="healthInfoCalcUrl" value="${healthinfo.calc.url}" />
   </bean>
   <!-- aws.properties -->
   <bean id="awsConfig" class="jp.co.ha.business.api.aws.AwsConfig" lazy-init="true">

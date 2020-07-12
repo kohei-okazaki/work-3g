@@ -119,7 +119,7 @@ public class StringUtil {
     /**
      * 半角スペースでPaddingする
      *
-     * @see StringUtil#padding
+     * @see StringUtil#padding(String, int, String, PaddingType)
      * @param target
      *     対象文字列
      * @param length
@@ -403,7 +403,7 @@ public class StringUtil {
     }
 
     /**
-     * {@linkplain StringUtils#abbreviate(String, int)}のラッパーメソッド
+     * {@linkplain org.apache.commons.lang3.StringUtils#abbreviate(String, int)}のラッパーメソッド
      *
      * @param str
      *     文字列
@@ -416,7 +416,7 @@ public class StringUtil {
     }
 
     /**
-     * {@linkplain StringUtils#abbreviate(String, int, int)}のラッパーメソッド
+     * {@linkplain org.apache.commons.lang3.StringUtils#abbreviate(String, int, int)}のラッパーメソッド
      *
      * @param str
      *     文字列
@@ -455,7 +455,7 @@ public class StringUtil {
     }
 
     /**
-     * {@linkplain org.springframework.util.StringUtils#capitalize(String)}のラッパーメソッド
+     * {@linkplain org.apache.commons.lang3.StringUtils#capitalize(String)}のラッパーメソッド
      *
      * @param str
      *     対象文字列

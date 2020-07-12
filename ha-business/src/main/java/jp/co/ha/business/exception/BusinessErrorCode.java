@@ -19,7 +19,11 @@ public enum BusinessErrorCode implements BaseErrorCode, BaseEnum {
     /** AWS接続エラー */
     AWS_CLIENT_CONNECT_ERROR("AWS_CLIENT_CONNECT_ERROR", "BE0029", LogLevel.ERROR),
     /** SDK接続エラー */
-    SDK_CLIENT_CONNECT_ERROR("SDK_CLIENT_CONNECT_ERROR", "BE0030", LogLevel.ERROR);
+    SDK_CLIENT_CONNECT_ERROR("SDK_CLIENT_CONNECT_ERROR", "BE0030", LogLevel.ERROR),
+    /** 基礎健康情報計算API接続エラー */
+    BASIC_HEALTH_INFO_CALC_API_CONNERR("BASIC_HEALTH_INFO_CALC_API_CONNERR", "BE0030",
+            LogLevel.ERROR);
+    ;
 
     /**
      * コンストラクタ
