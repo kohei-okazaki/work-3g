@@ -60,7 +60,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
         List<HealthInfoRegistRequest> requestList = new ArrayList<>();
         JsonReader reader = new JsonReader();
 
-        for (File file : FileUtil.getFileList(prop.getHealthInfoRegistBatchFilePath())) {
+        for (File file : FileUtil.getFileList(prop.getRegistBatchFilePath())) {
             HealthInfoRegistData dto = reader.read(file, HealthInfoRegistData.class);
             List<HealthInfoRegistRequest> list = dto.getHealthInfoRequestDataList()
                     .stream()
