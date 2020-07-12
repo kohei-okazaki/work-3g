@@ -10,15 +10,22 @@ import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
+import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
+import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
+import jp.co.ha.business.api.node.response.BaseHealthinfoCalcResponse.Result;
+import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
+import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
+import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
@@ -49,6 +56,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
+    /** 基礎健康情報計算API */
+    @Autowired
+    private BasicHealthInfoCalcApi basicHealthInfoCalcApi;
 
     /**
      * {@inheritDoc}
@@ -67,8 +77,12 @@ public class HealthInfoRegistServiceImpl extends CommonService
     public void execute(HealthInfoRegistRequest request,
             HealthInfoRegistResponse response) throws BaseException {
 
+        // 基礎健康情報計算API実施
+        BasicHealthInfoCalcResponse apiResponse = callBasicHealthInfoCalcApi(
+                request);
+
         // リクエストをEntityに変換
-        HealthInfo entity = toEntity(request);
+        HealthInfo entity = toEntity(request, apiResponse.getBasicHealthInfo());
 
         // Entityの登録処理を行う
         healthInfoCreateService.create(entity);
@@ -92,22 +106,30 @@ public class HealthInfoRegistServiceImpl extends CommonService
      *
      * @param request
      *     健康情報登録APIリクエスト情報
+     * @param basicHealthInfo
+     *     基礎健康情報計算APIレスポンス
      * @return 健康情報Entity
      * @throws BaseException
      *     基底例外
      */
-    private HealthInfo toEntity(HealthInfoRegistRequest request) throws BaseException {
+    private HealthInfo toEntity(HealthInfoRegistRequest request,
+            BasicHealthInfo basicHealthInfo) throws BaseException {
 
         String userId = request.getUserId();
-        BigDecimal height = request.getHeight();
+        // BigDecimal height = request.getHeight();
         BigDecimal weight = request.getWeight();
+        BigDecimal bmi = basicHealthInfo.getBmi();
+        BigDecimal standardWeight = basicHealthInfo.getStandardWeight();
 
-        // メートルに変換する
-        BigDecimal meterHeight = healthInfoCalcService.convertMeterFromCentiMeter(height);
-
-        BigDecimal bmi = healthInfoCalcService.calcBmi(meterHeight, weight, 2);
-        BigDecimal standardWeight = healthInfoCalcService.calcStandardWeight(meterHeight,
-                2);
+        // // メートルに変換する
+        // BigDecimal meterHeight =
+        // healthInfoCalcService.convertMeterFromCentiMeter(height);
+        //
+        // BigDecimal bmi = healthInfoCalcService.calcBmi(meterHeight, weight,
+        // 2);
+        // BigDecimal standardWeight =
+        // healthInfoCalcService.calcStandardWeight(meterHeight,
+        // 2);
 
         // 最後に登録した健康情報を取得する
         SelectOption selectOption = new SelectOptionBuilder()
@@ -138,6 +160,34 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         return entity;
 
+    }
+
+    /**
+     * 基礎健康情報計算APIを呼び出す
+     *
+     * @param request
+     *     リクエスト情報
+     * @return 基礎健康情報計算APIレスポンス
+     * @throws ApiException
+     *     API実施に失敗した場合
+     */
+    private BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
+            HealthInfoRegistRequest request) throws ApiException {
+
+        BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
+        apiRequest.setHeight(request.getHeight());
+        apiRequest.setWeight(request.getWeight());
+
+        BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
+                .execute(apiRequest);
+
+        if (Result.SUCCESS != apiResponse.getResult()) {
+            // 基礎健康情報計算APIの処理が成功していない場合
+            throw new ApiException(BusinessErrorCode.BASIC_HEALTH_INFO_CALC_API_CONNERR,
+                    apiResponse.getDetail());
+        }
+
+        return apiResponse;
     }
 
 }

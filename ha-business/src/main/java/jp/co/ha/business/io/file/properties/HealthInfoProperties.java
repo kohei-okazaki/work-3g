@@ -13,7 +13,9 @@ public class HealthInfoProperties {
     /** 照会ファイル格納パス */
     private String referenceFilePath;
     /** 健康情報登録バッチファイルパス */
-    private String healthInfoRegistBatchFilePath;
+    private String registBatchFilePath;
+    /** 健康情報計算APIのベースパス */
+    private String healthInfoCalcUrl;
 
     /**
      * referenceFilePathを返す
@@ -35,24 +37,41 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthInfoRegistBatchFilePathを返す
+     * registBatchFilePathを返す
      *
-     * @return healthInfoRegistBatchFilePath
-     *
+     * @return registBatchFilePath
      */
-    public String getHealthInfoRegistBatchFilePath() {
-        return healthInfoRegistBatchFilePath;
+    public String getRegistBatchFilePath() {
+        return registBatchFilePath;
     }
 
     /**
-     * healthInfoRegistBatchFilePathを設定する
+     * registBatchFilePathを設定する
      *
-     * @param healthInfoRegistBatchFilePath
+     * @param registBatchFilePath
      *     健康情報登録バッチファイルパス
-     *
      */
-    public void setHealthInfoRegistBatchFilePath(String healthInfoRegistBatchFilePath) {
-        this.healthInfoRegistBatchFilePath = healthInfoRegistBatchFilePath;
+    public void setRegistBatchFilePath(String registBatchFilePath) {
+        this.registBatchFilePath = registBatchFilePath;
+    }
+
+    /**
+     * healthInfoCalcUrlを返す
+     *
+     * @return healthInfoCalcUrl
+     */
+    public String getHealthInfoCalcUrl() {
+        return healthInfoCalcUrl;
+    }
+
+    /**
+     * healthInfoCalcUrlを設定する
+     *
+     * @param healthInfoCalcUrl
+     *     健康情報計算APIの基底URL
+     */
+    public void setHealthInfoCalcUrl(String healthInfoCalcUrl) {
+        this.healthInfoCalcUrl = healthInfoCalcUrl;
     }
 
 }
