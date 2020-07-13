@@ -24,9 +24,10 @@ public abstract class BaseNodeResponse implements BaseForm {
      * @version 1.0.0
      */
     public static enum Result implements BaseEnum {
-        /**  */
+
+        /** 成功 */
         SUCCESS("0"),
-        /**  */
+        /** 失敗 */
         FAILURE("1");
 
         /** 値 */

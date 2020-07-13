@@ -117,7 +117,7 @@ public abstract class BaseNodeApi<Rq extends BaseNodeRequest, Rs extends BaseNod
     public static enum NodeApiType implements BaseEnum {
 
         /** 基礎健康情報計算API */
-        BASIC("healthinfo", "基礎健康情報計算API"),
+        BASIC("basic", "基礎健康情報計算API"),
         /** カロリー計算API */
         CALORIE("calorie", "カロリー計算API");
 

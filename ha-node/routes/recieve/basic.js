@@ -15,7 +15,6 @@ var env = require('../conf/env');
  */
 router.post('/', function(req, res, next) {
 
-    console.log("環境名=" + env.config.name);
     console.log(req.body);
 
     let meter_height = req.body['height'] / 100;

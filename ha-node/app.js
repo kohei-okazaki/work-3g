@@ -6,7 +6,8 @@ var logger = require('morgan');
 var dotenv = require('dotenv');
 
 // ルーティング関数
-var healthinfoRouter = require('./routes/business/healthinfo');
+var basicRouter = require('./routes/recieve/basic');
+var calorieRouter = require('./routes/recieve/calorie');
 
 var app = express();
 
@@ -17,7 +18,8 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 
-app.use('/healthinfo', healthinfoRouter);
+app.use('/basic', basicRouter);
+app.use('/calorie', calorieRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -157,7 +157,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
      *     リクエスト情報
      * @return 基礎健康情報計算APIレスポンス
      * @throws ApiException
-     *     API実施に失敗した場合
+     *     API通信に失敗した場合
      */
     private BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
             HealthInfoRegistRequest request) throws ApiException {
@@ -170,7 +170,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BASIC_HEALTH_INFO_CALC_API_CONNERR,
+            throw new ApiException(BusinessErrorCode.BASIC_API_CONNERR,
                     apiResponse.getDetail());
         }
 
