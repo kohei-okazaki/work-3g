@@ -44,6 +44,7 @@ public interface HealthInfoCalcService {
      *     四捨五入桁数
      * @return BMI
      */
+    @Deprecated
     BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit);
 
     /**
@@ -55,6 +56,7 @@ public interface HealthInfoCalcService {
      *     四捨五入桁数
      * @return 標準体重
      */
+    @Deprecated
     BigDecimal calcStandardWeight(BigDecimal height, int digit);
 
     /**
@@ -75,6 +77,7 @@ public interface HealthInfoCalcService {
      *     カロリー計算DTO
      * @return 基礎代謝量
      */
+    @Deprecated
     BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto);
 
     /**
@@ -84,6 +87,7 @@ public interface HealthInfoCalcService {
      *     カロリー計算DTO
      * @return 1日の消費カロリー
      */
+    @Deprecated
     BigDecimal calcLostCaloriePerDay(CalorieCalcDto calorieCalcDto);
 
 }
