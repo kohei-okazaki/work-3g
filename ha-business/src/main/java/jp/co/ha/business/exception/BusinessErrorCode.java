@@ -21,9 +21,9 @@ public enum BusinessErrorCode implements BaseErrorCode, BaseEnum {
     /** SDK接続エラー */
     SDK_CLIENT_CONNECT_ERROR("SDK_CLIENT_CONNECT_ERROR", "BE0030", LogLevel.ERROR),
     /** 基礎健康情報計算API接続エラー */
-    BASIC_HEALTH_INFO_CALC_API_CONNERR("BASIC_HEALTH_INFO_CALC_API_CONNERR", "BE0030",
-            LogLevel.ERROR);
-    ;
+    BASIC_API_CONNERR("BASIC_API_CONNERR", "BE0031", LogLevel.ERROR),
+    /** カロリー計算API接続エラー */
+    CALORIE_API_CONNERR("CALORIE_API_CONNERR", "BE0032", LogLevel.ERROR);
 
     /**
      * コンストラクタ
