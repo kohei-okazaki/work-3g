@@ -1,5 +1,12 @@
 package jp.co.ha.business.healthInfo.type;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializable;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+
 import jp.co.ha.common.type.BaseEnum;
 
 /**
@@ -7,7 +14,7 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
-public enum GenderType implements BaseEnum {
+public enum GenderType implements BaseEnum, JsonSerializable {
 
     /** 男性 */
     MALE("0"),
@@ -43,6 +50,18 @@ public enum GenderType implements BaseEnum {
      */
     public static GenderType of(String value) {
         return BaseEnum.of(GenderType.class, value);
+    }
+
+    @Override
+    public void serialize(JsonGenerator gen, SerializerProvider serializers)
+            throws IOException {
+        gen.writeString(getValue());
+    }
+
+    @Override
+    public void serializeWithType(JsonGenerator gen, SerializerProvider serializers,
+            TypeSerializer typeSer) throws IOException {
+        gen.writeString(getValue());
     }
 
 }

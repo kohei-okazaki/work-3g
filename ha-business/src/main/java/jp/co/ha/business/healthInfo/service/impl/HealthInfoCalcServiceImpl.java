@@ -43,6 +43,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
      * {@inheritDoc}
      */
     @Override
+    @Deprecated
     public BigDecimal convertMeterFromCentiMeter(BigDecimal centiMeter) {
         return centiMeter.scaleByPowerOfTen(-2);
     }
@@ -51,6 +52,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
      * {@inheritDoc}
      */
     @Override
+    @Deprecated
     public BigDecimal calcBmi(BigDecimal height, BigDecimal weight, int digit) {
         BmiCalcFunction function = (h, w, d) -> {
             // height * height
@@ -68,6 +70,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
      * {@inheritDoc}
      */
     @Override
+    @Deprecated
     public BigDecimal calcStandardWeight(BigDecimal height, int digit) {
         StandardWeightCalcFunction function = (h, d) -> {
             // height * height
@@ -92,6 +95,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
      * {@inheritDoc}
      */
     @Override
+    @Deprecated
     public BigDecimal calcBaseMetabolism(CalorieCalcDto calorieCalcDto) {
 
         BigDecimal weightAdjustValue = null;
@@ -136,6 +140,7 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
      * {@inheritDoc}
      */
     @Override
+    @Deprecated
     public BigDecimal calcLostCaloriePerDay(CalorieCalcDto calorieCalcDto) {
         return Calculator.calc(calorieCalcDto.getBaseMetabolism(), CalcMethod.ADD,
                 calorieCalcDto.getLifeWorkMetabolism(), 2, RoundingMode.HALF_UP);
