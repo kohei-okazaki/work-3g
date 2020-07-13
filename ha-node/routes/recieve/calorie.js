@@ -24,7 +24,6 @@ var env = require('../conf/env');
  */
 router.post('/', function(req, res, next) {
 
-    console.log("環境名=" + env.config.name);
     console.log(req.body);
 
     let gender_info;
@@ -36,13 +35,15 @@ router.post('/', function(req, res, next) {
             "age_def" : 5.677,
             "adjust_def" : 88.362
         };
-    } else {
+    } else if ("1" == req.body['gender']) {
         gender_info = {
             "weight_def" : 9.247,
             "height_def" : 3.098,
             "age_def" : 4.33,
             "adjust_def" : 447.593
         };
+    } else {
+        throw new Error('gender is invalid. gender=' + req.body['gender']);
     }
 
     // 体重部分の計算
