@@ -9,7 +9,7 @@
 
 ## 02_Project構成  
 * ### ha-api  
-リクエストBodyにJSONを設定したPOST形式のHTTPリクエストを処理するプロジェクト   
+JSONでのHTTP通信を受け付けるプロジェクト   
 
 * ### ha-batch  
 Batch処理を定義したプロジェクト  
