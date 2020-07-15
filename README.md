@@ -35,7 +35,7 @@ Tableに対応したEntityとMapperのみを定義したプロジェクト
 健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装している) 
 
 * ### ha-pom  
-api, auto, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+api, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
 * ### ha-resource  
 詳細設計書、DDL等を定義したドキュメントプロジェクト  
