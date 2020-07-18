@@ -1,5 +1,6 @@
 package jp.co.ha.business.api.healthcheck.request;
 
+import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseRestApiRequest;
 
 /**
@@ -7,6 +8,6 @@ import jp.co.ha.web.form.BaseRestApiRequest;
  *
  * @version 1.0.0
  */
-public class HealthCheckRequest extends BaseRestApiRequest {
+public class HealthCheckRequest extends BaseRestApiRequest implements BaseApiRequest {
 
 }

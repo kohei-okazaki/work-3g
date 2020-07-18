@@ -14,8 +14,10 @@ public class HealthInfoProperties {
     private String referenceFilePath;
     /** 健康情報登録バッチファイルパス */
     private String registBatchFilePath;
-    /** 健康情報計算APIのベースパス */
-    private String healthInfoCalcUrl;
+    /** NodeAPIの基底URL */
+    private String healthinfoNodeApiUrl;
+    /** 健康情報APIの基底URL */
+    private String healthInfoApiUrl;
 
     /**
      * referenceFilePathを返す
@@ -56,22 +58,41 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthInfoCalcUrlを返す
+     * healthinfoNodeApiUrlを返す
      *
-     * @return healthInfoCalcUrl
+     * @return healthinfoNodeApiUrl
      */
-    public String getHealthInfoCalcUrl() {
-        return healthInfoCalcUrl;
+    public String getHealthinfoNodeApiUrl() {
+        return healthinfoNodeApiUrl;
     }
 
     /**
-     * healthInfoCalcUrlを設定する
+     * healthinfoNodeApiUrlを設定する
      *
-     * @param healthInfoCalcUrl
-     *     健康情報計算APIの基底URL
+     * @param healthinfoNodeApiUrl
+     *     NodeAPIの基底URL
      */
-    public void setHealthInfoCalcUrl(String healthInfoCalcUrl) {
-        this.healthInfoCalcUrl = healthInfoCalcUrl;
+    public void setHealthinfoNodeApiUrl(String healthinfoNodeApiUrl) {
+        this.healthinfoNodeApiUrl = healthinfoNodeApiUrl;
+    }
+
+    /**
+     * healthInfoApiUrlを返す
+     *
+     * @return healthInfoApiUrl
+     */
+    public String getHealthInfoApiUrl() {
+        return healthInfoApiUrl;
+    }
+
+    /**
+     * healthInfoApiUrlを設定する
+     *
+     * @param healthInfoApiUrl
+     *     健康情報APIの基底URL
+     */
+    public void setHealthInfoApiUrl(String healthInfoApiUrl) {
+        this.healthInfoApiUrl = healthInfoApiUrl;
     }
 
 }

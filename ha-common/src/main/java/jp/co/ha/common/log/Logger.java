@@ -29,7 +29,7 @@ public class Logger {
      *     Bean
      */
     public void debugRes(Object bean) {
-        logger.debug(LogMessageFactory.getLogMessage(bean));
+        logger.debug(LogMessageFactory.toString(bean));
     }
 
     /**
@@ -43,13 +43,13 @@ public class Logger {
     }
 
     /**
-     * Debugログを出力する
+     * Infoログを出力する
      *
      * @param bean
      *     Bean
      */
     public void infoRes(Object bean) {
-        logger.info(LogMessageFactory.getLogMessage(bean));
+        logger.info(LogMessageFactory.toString(bean));
     }
 
     /**
@@ -69,7 +69,7 @@ public class Logger {
      *     Bean
      */
     public void warnRes(Object bean) {
-        logger.warn(LogMessageFactory.getLogMessage(bean));
+        logger.warn(LogMessageFactory.toString(bean));
     }
 
     /**
@@ -81,7 +81,7 @@ public class Logger {
      *     例外
      */
     public void warnRes(Object bean, Throwable t) {
-        logger.warn(LogMessageFactory.getLogMessage(bean), t);
+        logger.warn(LogMessageFactory.toString(bean), t);
     }
 
     /**
@@ -113,7 +113,7 @@ public class Logger {
      *     Bean
      */
     public void errorRes(Object bean) {
-        logger.error(LogMessageFactory.getLogMessage(bean));
+        logger.error(LogMessageFactory.toString(bean));
     }
 
     /**
@@ -125,7 +125,7 @@ public class Logger {
      *     例外
      */
     public void errorRes(Object bean, Throwable t) {
-        logger.error(LogMessageFactory.getLogMessage(bean), t);
+        logger.error(LogMessageFactory.toString(bean), t);
     }
 
     /**

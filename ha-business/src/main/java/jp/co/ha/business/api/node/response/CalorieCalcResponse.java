@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.log.LogMessageFactory;
+import jp.co.ha.web.form.BaseApiResponse;
 import jp.co.ha.web.form.BaseNodeResponse;
 
 /**
@@ -13,7 +14,7 @@ import jp.co.ha.web.form.BaseNodeResponse;
  *
  * @version 1.0.0
  */
-public class CalorieCalcResponse extends BaseNodeResponse {
+public class CalorieCalcResponse extends BaseNodeResponse implements BaseApiResponse {
 
     /** カロリー計算結果情報 */
     @JsonProperty("calorie_calc_result")
@@ -76,7 +77,7 @@ public class CalorieCalcResponse extends BaseNodeResponse {
 
         @Override
         public String toString() {
-            return LogMessageFactory.getLogMessage(this);
+            return LogMessageFactory.toString(this);
         }
 
     }
@@ -201,7 +202,7 @@ public class CalorieCalcResponse extends BaseNodeResponse {
 
         @Override
         public String toString() {
-            return LogMessageFactory.getLogMessage(this);
+            return LogMessageFactory.toString(this);
         }
     }
 

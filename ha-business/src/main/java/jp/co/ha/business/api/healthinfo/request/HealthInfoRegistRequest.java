@@ -12,6 +12,7 @@ import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseRestApiRequest;
 
 /**
@@ -20,7 +21,8 @@ import jp.co.ha.web.form.BaseRestApiRequest;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoRegistRequest extends BaseRestApiRequest {
+public class HealthInfoRegistRequest extends BaseRestApiRequest
+        implements BaseApiRequest {
 
     /** 身長 */
     @Mask

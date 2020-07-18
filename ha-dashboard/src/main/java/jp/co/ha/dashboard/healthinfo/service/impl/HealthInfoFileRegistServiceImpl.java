@@ -15,6 +15,7 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.validator.BeanValidator;
@@ -22,6 +23,7 @@ import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.web.api.ApiConnectInfo;
 import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
@@ -38,6 +40,9 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
+    /** 健康情報関連プロパティ */
+    @Autowired
+    private HealthInfoProperties prop;
     /** 妥当性チェック */
     @Autowired
     private BeanValidator<HealthInfoCsvUploadModel> validator;
@@ -72,10 +77,17 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     public ResultType regist(List<HealthInfoCsvUploadModel> modelList, String userId)
             throws BaseException {
 
+        ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
+        // アカウント情報.APIキーを設定
+        Account account = accountSearchService.findById(userId).get();
+        apiConnectInfo.addHeader("Api-Key", account.getApiKey());
+        apiConnectInfo.setUrlSupplier(
+                () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
+
         ResultType result = ResultType.SUCCESS;
-        for (HealthInfoRegistRequest apiRequest : toRequestList(modelList, userId)) {
-            HealthInfoRegistResponse response = new HealthInfoRegistResponse();
-            registApi.execute(apiRequest, response);
+        for (HealthInfoRegistRequest request : toRequestList(modelList, userId)) {
+            HealthInfoRegistResponse response = registApi.callApi(request,
+                    apiConnectInfo);
             if (ResultType.FAILURE == response.getResultType()) {
                 result = response.getResultType();
             }
@@ -98,7 +110,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     private List<HealthInfoRegistRequest> toRequestList(
             List<HealthInfoCsvUploadModel> modelList, String userId)
             throws BaseException {
-        Account account = accountSearchService.findById(userId).get();
+
         return modelList.stream().map(e -> {
             HealthInfoRegistRequest request = new HealthInfoRegistRequest();
 
@@ -109,9 +121,6 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
                 destRequest.setWeight(new BigDecimal(srcModel.getWeight()));
                 destRequest.setTestMode(TestMode.DB_REGIST);
             });
-
-            request.setUserId(userId);
-            request.setApiKey(account.getApiKey());
 
             return request;
         }).collect(Collectors.toList());

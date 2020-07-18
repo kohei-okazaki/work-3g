@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.log.LogMessageFactory;
+import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseNodeRequest;
 
 /**
@@ -12,7 +13,8 @@ import jp.co.ha.web.form.BaseNodeRequest;
  *
  * @version 1.0.0
  */
-public class BasicHealthInfoCalcRequest extends BaseNodeRequest {
+public class BasicHealthInfoCalcRequest extends BaseNodeRequest
+        implements BaseApiRequest {
 
     /** 身長 */
     @JsonProperty("height")
@@ -61,7 +63,7 @@ public class BasicHealthInfoCalcRequest extends BaseNodeRequest {
 
     @Override
     public String toString() {
-        return LogMessageFactory.getLogMessage(this);
+        return LogMessageFactory.toString(this);
     }
 
 }
