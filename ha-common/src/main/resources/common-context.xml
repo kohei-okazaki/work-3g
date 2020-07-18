@@ -50,7 +50,6 @@
   <!-- system.properties -->
   <bean id="systemConfig" class="jp.co.ha.common.system.SystemConfig" lazy-init="true">
     <property name="paging" value="${system.paging}" />
-    <property name="baseApiUrl" value="${system.base.api.url}" />
     <property name="environment" value="${system.env}" />
   </bean>
   <!-- crypt.properties -->

@@ -21,6 +21,7 @@ import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -32,6 +33,8 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.web.api.ApiConnectInfo;
+import jp.co.ha.web.api.BaseApi.NodeApiType;
 import jp.co.ha.web.form.BaseNodeResponse.Result;
 import jp.co.ha.web.form.BaseRestApiResponse;
 
@@ -59,6 +62,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** 基礎健康情報計算API */
     @Autowired
     private BasicHealthInfoCalcApi basicHealthInfoCalcApi;
+    /** 健康情報関連プロパティ */
+    @Autowired
+    private HealthInfoProperties prop;
 
     /**
      * {@inheritDoc}
@@ -165,12 +171,15 @@ public class HealthInfoRegistServiceImpl extends CommonService
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
         BeanUtil.copy(request, apiRequest);
 
+        ApiConnectInfo connectInfo = new ApiConnectInfo();
+        connectInfo.setUrlSupplier(
+                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.BASIC.getValue());
         BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
-                .callApi(apiRequest);
+                .callApi(apiRequest, connectInfo);
 
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BASIC_API_CONNERR,
+            throw new ApiException(BusinessErrorCode.BASIC_API_CONNECT_ERROR,
                     apiResponse.getDetail());
         }
 

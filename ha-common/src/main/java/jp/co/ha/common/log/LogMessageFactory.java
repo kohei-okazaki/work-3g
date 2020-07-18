@@ -37,13 +37,13 @@ public class LogMessageFactory {
      *     Bean
      * @return ログメッセージ
      */
-    public static String getLogMessage(Object bean) {
+    public static String toString(Object bean) {
 
         if (BeanUtil.isNull(bean)) {
             return "<NULL>";
         }
 
-        StringJoiner body = new StringJoiner(", ");
+        StringJoiner body = new StringJoiner(StringUtil.COMMA);
         Class<?> clazz = bean.getClass();
 
         for (Field f : BeanUtil.getFieldList(clazz)) {

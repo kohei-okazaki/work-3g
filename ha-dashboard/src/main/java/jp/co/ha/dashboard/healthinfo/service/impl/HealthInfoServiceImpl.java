@@ -20,6 +20,7 @@ import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
@@ -33,6 +34,7 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.web.api.ApiConnectInfo;
 
 /**
  * 健康情報_入力画面サービス実装クラス
@@ -57,6 +59,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     /** messageSource */
     @Autowired
     private MessageSource messageSource;
+    /** 健康情報関連プロパティ */
+    @Autowired
+    private HealthInfoProperties prop;
 
     /**
      * {@inheritDoc}
@@ -95,9 +100,18 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     public HealthInfoRegistResponse regist(HealthInfoDto dto, String userId)
             throws BaseException {
 
-        HealthInfoRegistRequest apiRequest = setUpApiRequest(dto, userId);
-        HealthInfoRegistResponse apiResponse = new HealthInfoRegistResponse();
-        registApi.execute(apiRequest, apiResponse);
+        HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+        BeanUtil.copy(dto, request);
+        request.setTestMode(TestMode.DB_REGIST);
+
+        ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
+        // アカウント情報.APIキーを設定
+        Account account = accountSearchService.findById(userId).get();
+        apiConnectInfo.addHeader("Api-Key", account.getApiKey());
+        apiConnectInfo.setUrlSupplier(
+                () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
+        HealthInfoRegistResponse apiResponse = registApi.callApi(request,
+                apiConnectInfo);
 
         return apiResponse;
     }
@@ -152,35 +166,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     private BigDecimal getDiffWeight(HealthInfoDto dto, HealthInfo healthInfo) {
         return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(),
                 dto.getWeight());
-    }
-
-    /**
-     * 健康情報登録APIリクエストの設定を行う
-     *
-     * @param dto
-     *     健康情報DTO
-     * @param userId
-     *     ユーザID
-     * @return 健康情報登録APIリクエストを返す
-     * @throws BaseException
-     *     基底例外
-     */
-    private HealthInfoRegistRequest setUpApiRequest(HealthInfoDto dto, String userId)
-            throws BaseException {
-
-        HealthInfoRegistRequest request = new HealthInfoRegistRequest();
-        // 健康情報DTOをリクエストクラスにコピー
-        BeanUtil.copy(dto, request);
-
-        // アカウント情報.APIキーを設定
-        Account account = accountSearchService.findById(userId).get();
-        request.setUserId(userId);
-        request.setApiKey(account.getApiKey());
-
-        // DB登録モードを設定
-        request.setTestMode(TestMode.DB_REGIST);
-
-        return request;
     }
 
 }

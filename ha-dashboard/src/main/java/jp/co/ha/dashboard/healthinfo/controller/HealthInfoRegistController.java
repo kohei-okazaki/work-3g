@@ -2,6 +2,8 @@ package jp.co.ha.dashboard.healthinfo.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import java.util.StringJoiner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -41,12 +45,16 @@ import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.db.entity.MailInfo;
 import jp.co.ha.web.controller.BaseWizardController;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康管理_健康情報登録画面コントローラ
@@ -77,6 +85,12 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     /** 健康情報ファイル設定検索サービス */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+    /** AwsSesComponent */
+    @Autowired
+    private AwsSesComponent sesComponent;
+    /** メール情報検索サービス */
+    @Autowired
+    private MailInfoSearchService mailInfoSearchService;
 
     /**
      * Formを返す
@@ -153,6 +167,30 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 
         // 健康情報登録処理を行う
         HealthInfoRegistResponse apiResponse = healthInfoService.regist(dto, userId);
+
+        if (ResultType.SUCCESS == apiResponse.getResultType()) {
+            // 健康情報の登録に成功した場合
+            Optional<MailInfo> mailOptional = mailInfoSearchService.findById(userId);
+            if (mailOptional.isPresent()) {
+                String to = mailInfoSearchService.findById(userId).get().getMailAddress();
+                String titleText = "健康情報登録完了メール"
+                        + DateUtil.toString(DateUtil.getSysDate(),
+                                DateFormatType.YYYYMMDD_NOSEP);
+                StringJoiner sj = new StringJoiner("<br>");
+                sj.add("ユーザID " + userId + "さんの以下の健康情報を登録しました");
+                sj.add("健康情報ID  " + apiResponse.getHealthInfo().getSeqHealthInfoId());
+                sj.add("身長 " + apiResponse.getHealthInfo().getHeight() + "cm");
+                sj.add("体重 " + apiResponse.getHealthInfo().getWeight() + "kg");
+                sj.add("BMI " + apiResponse.getHealthInfo().getBmi());
+                sj.add("標準体重 " + apiResponse.getHealthInfo().getStandardWeight() + "kg");
+                sj.add("登録日時 " + DateUtil.toString(
+                        apiResponse.getHealthInfo().getHealthInfoRegDate(),
+                        DateFormatType.YYYYMMDDHHMMSS));
+                String bodyText = sj.toString();
+                sesComponent.sendMail(to, titleText, bodyText);
+            }
+
+        }
 
         // レスポンス情報をformに設定
         BeanUtil.copy(apiResponse.getHealthInfo(), healthInfoForm);

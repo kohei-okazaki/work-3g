@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.healthinfo.HealthInfoReferenceApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.healthinfo.service.HealthInfoReferenceService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.controller.BaseRestController;
 
@@ -24,9 +24,9 @@ import jp.co.ha.web.controller.BaseRestController;
 public class HealthInfoReferenceController extends
         BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
-    /** 健康情報照会API */
+    /** 健康情報照会サービス */
     @Autowired
-    private HealthInfoReferenceApi api;
+    private HealthInfoReferenceService service;
 
     /**
      * 健康情報照会APIを受け付ける
@@ -44,7 +44,7 @@ public class HealthInfoReferenceController extends
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
     public HealthInfoReferenceResponse doGet(@PathVariable("userId") String userId,
             @PathVariable("seqHealthInfoId") Integer seqHealthInfoId,
-            @RequestHeader(value = "Api-Key", required = false) String apiKey)
+            @RequestHeader(value = "Api-Key") String apiKey)
             throws BaseException {
 
         HealthInfoReferenceRequest request = new HealthInfoReferenceRequest();
@@ -68,7 +68,9 @@ public class HealthInfoReferenceController extends
     public void accept(HealthInfoReferenceRequest request,
             HealthInfoReferenceResponse response) throws BaseException {
 
-        api.execute(request, response);
+        service.checkRequest(request);
+
+        service.execute(request, response);
 
     }
 

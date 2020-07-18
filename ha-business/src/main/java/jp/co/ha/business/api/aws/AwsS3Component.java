@@ -206,7 +206,7 @@ public class AwsS3Component {
      */
     private ClientConfiguration getClientConfiguration() {
         ClientConfiguration config = new ClientConfigurationFactory().getConfig();
-        config.setConnectionTimeout(awsConfig.getTimeout());
+        config.setConnectionTimeout(awsConfig.getS3Timeout());
         return config;
     }
 

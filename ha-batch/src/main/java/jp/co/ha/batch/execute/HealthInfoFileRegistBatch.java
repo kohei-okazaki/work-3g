@@ -12,7 +12,9 @@ import jp.co.ha.batch.dto.HealthInfoRegistData;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -27,6 +29,8 @@ import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
+import jp.co.ha.db.entity.Account;
+import jp.co.ha.web.api.ApiConnectInfo;
 
 /**
  * 健康情報ファイル登録Batch
@@ -44,6 +48,9 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
             .getBean(HealthInfoProperties.class);
     /** 健康情報登録API */
     private HealthInfoRegistApi api = BatchBeanLoader.getBean(HealthInfoRegistApi.class);
+    /** アカウント検索サービス */
+    private AccountSearchService accountSearchService = BatchBeanLoader
+            .getBean(AccountSearchServiceImpl.class);
     /** 妥当性チェック */
     @SuppressWarnings("unchecked")
     private BeanValidator<HealthInfoRegistRequest> validator = BatchBeanLoader
@@ -68,6 +75,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
                         HealthInfoRegistRequest request = new HealthInfoRegistRequest();
                         BeanUtil.copy(dto, request);
                         BeanUtil.copy(e, request);
+                        request.setTestMode(TestMode.DB_REGIST);
                         return request;
                     }).collect(Collectors.toList());
 
@@ -85,7 +93,13 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
                                 + error.getValue());
             }
 
-            api.execute(request, new HealthInfoRegistResponse());
+            ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
+            // アカウント情報.APIキーを設定
+            Account account = accountSearchService.findById(request.getUserId()).get();
+            apiConnectInfo.addHeader("Api-Key", account.getApiKey());
+            apiConnectInfo.setUrlSupplier(() -> prop.getHealthInfoApiUrl()
+                    + request.getUserId() + "/healthinfo");
+            api.callApi(request, apiConnectInfo);
         }
 
         LOG.info("健康情報ファイル登録Batch END メモリ使用量"
