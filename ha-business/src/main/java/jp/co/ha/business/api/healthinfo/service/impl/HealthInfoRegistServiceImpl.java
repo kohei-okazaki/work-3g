@@ -179,7 +179,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BASIC_API_CONNERR,
+            throw new ApiException(BusinessErrorCode.BASIC_API_CONNECT_ERROR,
                     apiResponse.getDetail());
         }
 

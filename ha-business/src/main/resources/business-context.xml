@@ -35,7 +35,10 @@
   <bean id="awsConfig" class="jp.co.ha.business.api.aws.AwsConfig" lazy-init="true">
     <property name="region" value="${aws.region}" />
     <property name="backet" value="${aws.s3.backet}" />
-    <property name="timeout" value="${aws.s3.timeout}" />
+    <property name="s3Timeout" value="${aws.s3.timeout}" />
+    <property name="mailAddress" value="${aws.ses.mailaddress}" />
+    <property name="sesTimeout" value="${aws.ses.timeout}" />
+    <property name="sesStubFlag" value="${aws.ses.stubflag}" />
   </bean>
 
   <!-- CRUD -->

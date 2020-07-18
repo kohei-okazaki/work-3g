@@ -290,7 +290,7 @@ public class DateUtil {
         /** YYYY/MM/DD */
         YYYYMMDD("yyyy/MM/dd"),
         /** YYYYMMDD */
-        YYYYMMDD_NOSEQ("yyyyMMdd"),
+        YYYYMMDD_NOSEP("yyyyMMdd"),
         /** YYYY/MM/DD HH:mm:ss */
         YYYYMMDDHHMMSS("yyyy/MM/dd HH:mm:ss"),
         /** YYYYMMDDHHmmss */
