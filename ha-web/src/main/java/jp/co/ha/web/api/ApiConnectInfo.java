@@ -83,6 +83,12 @@ public class ApiConnectInfo {
      * @return qureyString
      */
     public String getQureyString() {
+
+        if (urlParameter.isEmpty()) {
+            // クエリパラメータを設定していない場合
+            return "";
+        }
+
         StringJoiner sj = new StringJoiner("&");
         for (Entry<String, String> entry : urlParameter.entrySet()) {
             sj.add(entry.getKey() + "=" + entry.getValue());

@@ -66,7 +66,7 @@ public class CalorieCalcServiceImpl implements CalorieCalcService {
 
         if (Result.SUCCESS != response.getResult()) {
             // カロリー計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.CALORIE_API_CONNERR,
+            throw new ApiException(BusinessErrorCode.CALORIE_API_CONNECT_ERROR,
                     response.getDetail());
         }
 

@@ -10,6 +10,8 @@ import com.amazonaws.regions.Regions;
  * <li>リージョン：設定ファイルで東京を設定</li>
  * <li>バケット名：環境毎にバケットを設定</li>
  * <li>S3タイムアウト：設定ファイルで10秒を設定</li>
+ * <li>SESメールアドレス：healthinfo.app.dev@gmail.com</li>
+ * <li>SESタイムアウト：設定ファイルで10秒を設定</li>
  * </ul>
  *
  * @version 1.0.0
@@ -22,7 +24,13 @@ public class AwsConfig {
     /** バケット名 */
     private String backet;
     /** S3タイムアウト */
-    private int timeout;
+    private int s3Timeout;
+    /** SESメールアドレス */
+    private String mailAddress;
+    /** SESタイムアウト */
+    private int sesTimeout;
+    /** SESスタブフラグ(true:メールを送信しない、false:送信する) */
+    private boolean sesStubFlag;
 
     /**
      * {@linkplain Regions}を返す
@@ -63,22 +71,79 @@ public class AwsConfig {
     }
 
     /**
-     * timeoutを返す
+     * s3Timeoutを返す
      *
-     * @return timeout
+     * @return s3Timeout
      */
-    public int getTimeout() {
-        return timeout;
+    public int getS3Timeout() {
+        return s3Timeout;
     }
 
     /**
-     * timeoutを設定する
+     * s3Timeoutを設定する
      *
-     * @param timeout
-     *     S3タイムアウト
+     * @param s3Timeout
+     *     S3のタイムアウト
      */
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
+    public void setS3Timeout(int s3Timeout) {
+        this.s3Timeout = s3Timeout;
+    }
+
+    /**
+     * mailAddressを返す
+     *
+     * @return mailAddress
+     */
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    /**
+     * mailAddressを設定する
+     *
+     * @param mailAddress
+     *     SESメールアドレス
+     */
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
+    }
+
+    /**
+     * sesTimeoutを返す
+     *
+     * @return sesTimeout
+     */
+    public int getSesTimeout() {
+        return sesTimeout;
+    }
+
+    /**
+     * sesTimeoutを設定する
+     *
+     * @param sesTimeout
+     *     SESタイムアウト
+     */
+    public void setSesTimeout(int sesTimeout) {
+        this.sesTimeout = sesTimeout;
+    }
+
+    /**
+     * sesStubFlagを返す
+     *
+     * @return sesStubFlag
+     */
+    public boolean isSesStubFlag() {
+        return sesStubFlag;
+    }
+
+    /**
+     * sesStubFlagを設定する
+     *
+     * @param sesStubFlag
+     *     SESスタブフラグ(true:メールを送信しない、false:送信する)
+     */
+    public void setSesStubFlag(String sesStubFlag) {
+        this.sesStubFlag = Boolean.valueOf(sesStubFlag);
     }
 
 }
