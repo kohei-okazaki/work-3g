@@ -15,9 +15,8 @@ JSONでのHTTP通信を受け付けるプロジェクト
 Batch処理を定義したプロジェクト  
 
 * ### ha-build  
-ローカル環境でJarやAWS環境にデプロイするWarを作成するプロジェクト  
+ローカル環境でJarやEC2環境にデプロイするWarを作成するプロジェクト  
 windows, linuxでそれぞれbatとshを用意  
-(都度Jarを配置せずにpomから必要なJarを読み取って動くように修正した為、buildシェルを流す無くても良い)  
 
 * ### ha-business  
 api, dashboard, batchで共通的に使うbusinessロジックをまとめたプロジェクト  
@@ -26,13 +25,14 @@ api, dashboard, batchで共通的に使うbusinessロジックをまとめたプ
 共通処理を定義したプロジェクト  
 
 * ### ha-dashboard  
-健康管理のダッシュボードのプロジェクト  
+健康管理のダッシュボードプロジェクト  
 
 * ### ha-db  
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
+環境へのDB反映は本プロジェクトよりFlywayで行う  
 
 * ### ha-node  
-健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装している) 
+健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装) 
 
 * ### ha-pom  
 api, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
@@ -47,4 +47,4 @@ seleniumを利用した画面の自動テスト処理を定義したプロジェ
 指定のフォーマットのExcelからDDLなどを自動生成するツールプロジェクト  
 
 * ### ha-web  
-WebFWを定義したプロジェクト  
+WebFW部分を定義したプロジェクト  
