@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var util = require('../util/util');
 var env = require('../conf/env');
+var prettyjson = require('prettyjson');
 
 /**
  * カロリー計算APIの受付<br>
@@ -24,7 +25,7 @@ var env = require('../conf/env');
  */
 router.post('/', function(req, res, next) {
 
-    console.log(req.body);
+    console.log(prettyjson.render(req.body) + "\n");
 
     let gender_info;
     if ("0" == req.body['gender']) {
@@ -78,7 +79,7 @@ router.post('/', function(req, res, next) {
         'user_data' : req.body
     }
 
-    console.log(res_body);
+    console.log(prettyjson.render(res_body));
     res.json(res_body);
 
 })
