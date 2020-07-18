@@ -10,7 +10,7 @@ import com.amazonaws.regions.Regions;
  * <li>リージョン：設定ファイルで東京を設定</li>
  * <li>バケット名：環境毎にバケットを設定</li>
  * <li>S3タイムアウト：設定ファイルで10秒を設定</li>
- * <li>SESメールアドレス：healthinfo.app.dev@gmail.com</li>
+ * <li>SESメールアドレス：アプリの送信元メールアドレス</li>
  * <li>SESタイムアウト：設定ファイルで10秒を設定</li>
  * </ul>
  *
