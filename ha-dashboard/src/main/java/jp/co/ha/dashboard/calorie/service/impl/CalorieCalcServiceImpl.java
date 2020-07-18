@@ -8,10 +8,13 @@ import jp.co.ha.business.api.node.request.CalorieCalcRequest;
 import jp.co.ha.business.api.node.response.CalorieCalcResponse;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.calorie.service.CalorieCalcService;
+import jp.co.ha.web.api.ApiConnectInfo;
+import jp.co.ha.web.api.BaseApi.NodeApiType;
 import jp.co.ha.web.form.BaseNodeResponse.Result;
 
 /**
@@ -25,6 +28,9 @@ public class CalorieCalcServiceImpl implements CalorieCalcService {
     /** カロリー計算API */
     @Autowired
     private CalorieCalcApi calorieCalcApi;
+    /** 健康情報関連プロパティ */
+    @Autowired
+    private HealthInfoProperties prop;
 
     /**
      * {@inheritDoc}
@@ -52,7 +58,11 @@ public class CalorieCalcServiceImpl implements CalorieCalcService {
 
         CalorieCalcRequest request = new CalorieCalcRequest();
         BeanUtil.copy(dto, request);
-        CalorieCalcResponse response = calorieCalcApi.callApi(request);
+
+        ApiConnectInfo connectInfo = new ApiConnectInfo();
+        connectInfo.setUrlSupplier(
+                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.CALORIE.getValue());
+        CalorieCalcResponse response = calorieCalcApi.callApi(request, connectInfo);
 
         if (Result.SUCCESS != response.getResult()) {
             // カロリー計算APIの処理が成功以外の場合

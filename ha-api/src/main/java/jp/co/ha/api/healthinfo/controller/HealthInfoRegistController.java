@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.web.controller.BaseRestController;
 
@@ -25,9 +25,9 @@ import jp.co.ha.web.controller.BaseRestController;
 public class HealthInfoRegistController extends
         BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
-    /** 健康情報登録API */
+    /** 健康情報登録サービス */
     @Autowired
-    private HealthInfoRegistApi api;
+    private HealthInfoRegistService service;
 
     /**
      * 健康情報登録APIを受け付ける
@@ -66,7 +66,9 @@ public class HealthInfoRegistController extends
     public void accept(HealthInfoRegistRequest request, HealthInfoRegistResponse response)
             throws BaseException {
 
-        api.execute(request, response);
+        service.checkRequest(request);
+
+        service.execute(request, response);
 
     }
 

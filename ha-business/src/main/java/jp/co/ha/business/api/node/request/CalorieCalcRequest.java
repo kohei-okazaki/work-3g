@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.healthInfo.type.GenderType;
+import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseNodeRequest;
 
 /**
@@ -12,7 +13,7 @@ import jp.co.ha.web.form.BaseNodeRequest;
  *
  * @version 1.0.0
  */
-public class CalorieCalcRequest extends BaseNodeRequest {
+public class CalorieCalcRequest extends BaseNodeRequest implements BaseApiRequest {
 
     /** 性別 */
     @JsonProperty("gender")

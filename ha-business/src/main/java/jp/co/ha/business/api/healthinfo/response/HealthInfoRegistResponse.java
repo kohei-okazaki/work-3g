@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.web.form.BaseApiResponse;
 import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
@@ -14,7 +15,8 @@ import jp.co.ha.web.form.BaseRestApiResponse;
  *
  * @version 1.0.0
  */
-public class HealthInfoRegistResponse extends BaseRestApiResponse {
+public class HealthInfoRegistResponse extends BaseRestApiResponse
+        implements BaseApiResponse {
 
     /** 健康情報 */
     @JsonProperty("healthInfo")
