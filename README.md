@@ -5,7 +5,8 @@
 [環境構築手順](https://github.com/kohei-okazaki/work-3g/wiki/00_%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86)を参考にローカル環境構築を行う  
 
 構成図イメージ  
-![構成図](https://user-images.githubusercontent.com/24481212/87325148-0b99f380-c56c-11ea-9f7f-a807fb1b2e85.png)  
+ローカル環境図
+![image](https://user-images.githubusercontent.com/24481212/87867075-1a493600-c9c4-11ea-8351-cd0aad6eca4a.png) 
 
 ## 02_Project構成  
 * ### ha-api  
