@@ -67,6 +67,16 @@ public interface HealthInfoService {
             throws BaseException;
 
     /**
+     * 健康情報登録確認メールを送信する
+     *
+     * @param apiResponse
+     *     健康情報登録APIレスポンス
+     * @throws BaseException
+     *     メール送信に失敗した場合
+     */
+    void sendHealthInfoMail(HealthInfoRegistResponse apiResponse) throws BaseException;
+
+    /**
      * CSV設定情報を取得する
      *
      * @param entity

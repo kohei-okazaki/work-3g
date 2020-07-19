@@ -30,6 +30,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfo;
@@ -37,7 +38,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.api.ApiConnectInfo;
 
 /**
- * 健康情報_入力画面サービス実装クラス
+ * 健康情報登録画面サービス実装クラス
  *
  * @version 1.0.0
  */
@@ -47,6 +48,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
+    /** 健康情報メールService */
+    @Autowired
+    private HealthInfoMailService healthInfoMailService;
     /** 健康情報計算サービス */
     @Autowired
     private HealthInfoCalcService healthInfoCalcService;
@@ -114,6 +118,12 @@ public class HealthInfoServiceImpl implements HealthInfoService {
                 apiConnectInfo);
 
         return apiResponse;
+    }
+
+    @Override
+    public void sendHealthInfoMail(HealthInfoRegistResponse apiResponse)
+            throws BaseException {
+        healthInfoMailService.sendHealthInfoMail(apiResponse);
     }
 
     /**
