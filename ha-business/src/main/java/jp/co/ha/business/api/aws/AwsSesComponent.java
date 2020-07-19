@@ -25,6 +25,8 @@ import com.amazonaws.services.simpleemail.model.SendEmailRequest;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Charset;
@@ -133,8 +135,11 @@ public class AwsSesComponent {
      * @param bodyMap
      *     メール本文の置換用Map
      * @return Body
+     * @throws BaseException
+     *     メールテンプレートの取得に失敗した場合
      */
-    private Body getBody(String template, Map<String, String> bodyMap) {
+    private Body getBody(String template, Map<String, String> bodyMap)
+            throws BaseException {
 
         String bodyText = replace(getBodyTemplate(template), bodyMap);
         return new Body()
@@ -158,22 +163,25 @@ public class AwsSesComponent {
      * @param template
      *     テンプレートファイル
      * @return メール本文
+     * @throws BaseException
+     *     メールテンプレートの取得に失敗した場合
      */
-    private String getBodyTemplate(String template) {
+    private String getBodyTemplate(String template) throws BaseException {
 
-        StringBuilder sb = new StringBuilder();
         try (InputStream is = new ClassPathResource(template).getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
+            StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = br.readLine()) != null) {
                 sb.append(line);
             }
+            return sb.toString();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+                    "メールテンプレートの取得に失敗しました.template=" + template, e);
         }
-        return sb.toString();
     }
 
     /**
