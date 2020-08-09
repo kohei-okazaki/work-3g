@@ -27,6 +27,10 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
     DB_SQL_SELECT_ERROR("DB_SQL_SELECT_ERROR", "CE0007", LogLevel.ERROR),
     /** DB切断エラー */
     DB_CLOSE_ERROR("DB_CLOSE_ERROR", "CE0008", LogLevel.ERROR),
+    /** API通信エラー(400系) */
+    API_400_CONNECT_ERROR("API_400_CONNECT_ERROR", "CE0035", LogLevel.ERROR),
+    /** API通信エラー(500系) */
+    API_500_CONNECT_ERROR("API_500_CONNECT_ERROR", "CE0036", LogLevel.ERROR),
 
     /* WARN */
     /** 該当データ存在しないエラー */

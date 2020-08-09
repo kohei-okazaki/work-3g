@@ -16,6 +16,9 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import jp.co.ha.common.exception.ApiException;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
@@ -67,9 +70,10 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @param apiConnectInfo
      *     API接続に必要な情報
      * @return APIレスポンス
+     * @throws BaseException
      */
     @SuppressWarnings("unchecked")
-    public Rs callApi(Rq request, ApiConnectInfo apiConnectInfo) {
+    public Rs callApi(Rq request, ApiConnectInfo apiConnectInfo) throws BaseException {
 
         Rs response = getResponse();
         HttpStatus code = HttpStatus.OK;
@@ -124,10 +128,12 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             }
         } catch (HttpClientErrorException e) {
             code = e.getStatusCode();
-            LOG.error("APIの送信に失敗しました. HttpStatusCode=" + code.value(), e);
+            throw new ApiException(CommonErrorCode.API_400_CONNECT_ERROR,
+                    "APIの送信に失敗しました. HttpStatusCode=" + code.value(), e);
         } catch (HttpServerErrorException e) {
             code = e.getStatusCode();
-            LOG.error("対向サーバに問題があります. HttpStatusCode=" + code.value(), e);
+            throw new ApiException(CommonErrorCode.API_500_CONNECT_ERROR,
+                    "対向サーバに問題があります. HttpStatusCode=" + code.value(), e);
         } catch (Exception e) {
             LOG.error("APIの通信に失敗しました.", e);
         } finally {
