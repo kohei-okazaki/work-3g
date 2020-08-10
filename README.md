@@ -13,7 +13,7 @@
 ### **EC2環境図**  
 ![image](https://user-images.githubusercontent.com/24481212/87866924-62ffef80-c9c2-11ea-8ac4-63b578ae8ce9.png)
 
-![link]()
+![link](https://github.com/kohei-okazaki/work-3g/blob/master/ha-resource/01_design/02_api/90_sphinx/docs/_build/index.html)
 
 
 ## 02_Project構成  
