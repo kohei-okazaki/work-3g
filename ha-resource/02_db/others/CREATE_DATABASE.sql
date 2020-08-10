@@ -1,0 +1,2 @@
+-- データベースを作成
+CREATE DATABASE IF NOT EXISTS work3g;

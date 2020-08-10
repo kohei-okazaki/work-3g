@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
@@ -31,7 +33,7 @@ public class ExcelReader {
      */
     public Excel read(ToolProperty prop) throws Exception {
 
-        Iterator<org.apache.poi.ss.usermodel.Sheet> sheetIte;
+        Iterator<Sheet> sheetIte;
         try (Workbook wb = WorkbookFactory.create(new File(prop.getExcelPath()))) {
             sheetIte = wb.sheetIterator();
         }
@@ -41,25 +43,25 @@ public class ExcelReader {
         // シート毎の処理
         while (sheetIte.hasNext()) {
 
-            org.apache.poi.ss.usermodel.Sheet sheet = sheetIte.next();
+            Sheet sheet = sheetIte.next();
             if (!TARGET_SHEET_NAME.equals(sheet.getSheetName())) {
                 // ”TABLE_LIST” シートでない場合、次のシートへ
                 break;
             }
 
-            Sheet excelSheet = new Sheet();
+            ExcelSheet excelSheet = new ExcelSheet();
             excelSheet.setName(sheet.getSheetName());
-            Iterator<org.apache.poi.ss.usermodel.Row> rowIte = sheet.iterator();
+            Iterator<Row> rowIte = sheet.iterator();
 
             // 行毎の処理
             while (rowIte.hasNext()) {
-                Row excelRow = new Row();
-                org.apache.poi.ss.usermodel.Row row = rowIte.next();
+                ExcelRow excelRow = new ExcelRow();
+                Row row = rowIte.next();
                 Arrays.asList(CellPositionType.class.getEnumConstants()).stream()
                         .forEach(e -> {
                             String cellValue = row.getCell(e.getPosition())
                                     .getStringCellValue();
-                            Cell cell = new Cell(cellValue);
+                            ExcelCell cell = new ExcelCell(cellValue);
                             excelRow.addCell(cell);
                         });
                 excelSheet.addRow(excelRow);

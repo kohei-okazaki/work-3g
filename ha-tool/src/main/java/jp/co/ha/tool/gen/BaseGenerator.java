@@ -106,7 +106,7 @@ public abstract class BaseGenerator {
         /** DDL作成 */
         DDL("DDL", "ha-resource\\02_db\\ddl", CreateTableGenerator.class),
         /** DROP作成 */
-        DROP("DROP", "ha-resource\\02_db\\drop", DropSqlGenerator.class),
+        DROP("DROP", "ha-resource\\02_db\\others", DropSqlGenerator.class),
         /** テーブル定義作成 */
         TABLE_DEFINE("TABLE_DEFINE", "ha-resource\\02_db\\others",
                 TableDefineGenerator.class);
