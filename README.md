@@ -54,3 +54,6 @@ seleniumを利用した画面の自動テスト処理を定義したプロジェ
 
 * ### ha-web  
 WebFW部分を定義したプロジェクト  
+
+## 03_APIドキュメント  
+[健康管理APIドキュメント](https://github.com/kohei-okazaki/work-3g/blob/master/ha-resource/01_design/02_api/90_sphinx/docs/_build/index.html)を参考にローカル環境構築を行う  
