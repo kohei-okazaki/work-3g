@@ -1,19 +1,32 @@
-class TestClass:
-    """Summary line.
+# -*- coding: utf-8 -*-
+class HealthCheckAPI:
+    """
+    ヘルスチェックAPI
     """
 
-    def testfunc(self, x, y):
-        """sum
+    def health_check(self):
+        """
+        健康管理APIサーバのヘルスチェックを行う
 
-        Args:
-            x (int): 1st argument
-            y (int): 2nd argument
+        Url:
+            http://localhost:8081/api/healthcheck
+
+        Method:
+            GET
+
+        Header:
+            ==============  ================
+            Key             Value
+            ==============  ================
+            Accept-Charset  utf-8
+            ==============  ================
 
         Returns:
-            int: sum result
+            string: ヘルスチェックAPI 応答JSON
 
-        Examples:
-            >>> print(testfunc(2,5))
-            7
         """
-        return x + y
+        return {
+            "result": "0",
+            "error": null,
+            "account":null
+        }

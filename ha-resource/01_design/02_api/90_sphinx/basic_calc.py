@@ -1,19 +1,25 @@
-class TestClass:
-    """Summary line.
+# -*- coding: utf-8 -*-
+class BasicCalcAPI:
+    """
+    基礎健康情報計算API
     """
 
-    def testfunc(self, x, y):
-        """sum
+    def calc(self):
+        """
+        基礎健康情報を計算する
 
-        Args:
-            x (int): 1st argument
-            y (int): 2nd argument
+        Url:
+            http://localhost:3000/basic
 
-        Returns:
-            int: sum result
+        Method:
+            POST
 
-        Examples:
-            >>> print(testfunc(2,5))
-            7
+        Header:
+            ==============  ================
+            Key             Value
+            ==============  ================
+            Content-Type    application/json
+            ==============  ================
+
         """
         return x + y
