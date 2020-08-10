@@ -162,11 +162,11 @@ public class HealthInfoRegistServiceImpl extends CommonService
      * @param request
      *     リクエスト情報
      * @return 基礎健康情報計算APIレスポンス
-     * @throws ApiException
+     * @throws BaseException
      *     API通信に失敗した場合
      */
     private BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
-            HealthInfoRegistRequest request) throws ApiException {
+            HealthInfoRegistRequest request) throws BaseException {
 
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
         BeanUtil.copy(request, apiRequest);
