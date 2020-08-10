@@ -8,12 +8,12 @@ import java.util.List;
  *
  * @version 1.0.0
  */
-public class Sheet {
+public class ExcelSheet {
 
     /** 名前 */
     private String name;
     /** 行リスト */
-    private List<Row> rowList = new ArrayList<>();
+    private List<ExcelRow> rowList = new ArrayList<>();
 
     /**
      * nameを返す
@@ -39,7 +39,7 @@ public class Sheet {
      *
      * @return rowList
      */
-    public List<Row> getRowList() {
+    public List<ExcelRow> getRowList() {
         return rowList;
     }
 
@@ -49,7 +49,7 @@ public class Sheet {
      * @param row
      *     行
      */
-    public void addRow(Row row) {
+    public void addRow(ExcelRow row) {
         this.rowList.add(row);
     }
 

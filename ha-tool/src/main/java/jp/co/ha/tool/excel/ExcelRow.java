@@ -10,10 +10,10 @@ import jp.co.ha.tool.excel.type.CellPositionType;
  *
  * @version 1.0.0
  */
-public class Row {
+public class ExcelRow {
 
     /** セルリスト */
-    private List<Cell> cellList = new ArrayList<>();
+    private List<ExcelCell> cellList = new ArrayList<>();
 
     /**
      * セルを追加する
@@ -21,7 +21,7 @@ public class Row {
      * @param cell
      *     セル
      */
-    public void addCell(Cell cell) {
+    public void addCell(ExcelCell cell) {
         this.cellList.add(cell);
     }
 
@@ -30,18 +30,18 @@ public class Row {
      *
      * @return cellList
      */
-    public List<Cell> getCellList() {
+    public List<ExcelCell> getCellList() {
         return cellList;
     }
 
     /**
-     * セル位置に対応する{@linkplain Cell}を返す
+     * セル位置に対応する{@linkplain ExcelCell}を返す
      *
      * @param type
      *     セル位置
      * @return セル
      */
-    public Cell getCell(CellPositionType type) {
+    public ExcelCell getCell(CellPositionType type) {
         return this.cellList.get(type.getPosition());
     }
 }
