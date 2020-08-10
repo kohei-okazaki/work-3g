@@ -7,7 +7,7 @@ import jp.co.ha.tool.excel.type.ColumnType;
  *
  * @version 1.0.0
  */
-public class Cell {
+public class ExcelCell {
 
     /** 値 */
     private String value;
@@ -18,7 +18,7 @@ public class Cell {
      * @param value
      *     値
      */
-    public Cell(String value) {
+    public ExcelCell(String value) {
         this.value = value;
     }
 

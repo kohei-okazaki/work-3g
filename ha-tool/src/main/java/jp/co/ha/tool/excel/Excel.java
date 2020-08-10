@@ -11,9 +11,9 @@ import java.util.List;
 public class Excel {
 
     /** シートリスト */
-    private List<Sheet> sheetList = new ArrayList<>();
+    private List<ExcelSheet> sheetList = new ArrayList<>();
     /** アクティブなシート */
-    private Sheet currentSheet;
+    private ExcelSheet currentSheet;
 
     /**
      * シートを返す
@@ -22,7 +22,7 @@ public class Excel {
      *     シート名
      * @return Sheet
      */
-    private Sheet getSheet(String sheetName) {
+    private ExcelSheet getSheet(String sheetName) {
         return this.sheetList.stream()
                 .filter(e -> e.getName().equals(sheetName))
                 .findFirst()
@@ -35,7 +35,7 @@ public class Excel {
      * @param sheet
      *     シート
      */
-    public void addSheet(Sheet sheet) {
+    public void addSheet(ExcelSheet sheet) {
         this.sheetList.add(sheet);
     }
 
@@ -54,7 +54,7 @@ public class Excel {
      *
      * @return 全行リスト
      */
-    public List<Row> getRowList() {
+    public List<ExcelRow> getRowList() {
         return this.currentSheet.getRowList();
     }
 }

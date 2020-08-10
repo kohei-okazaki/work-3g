@@ -22,8 +22,8 @@ import jp.co.ha.common.util.FileUtil.LineFeedType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.db.Column;
 import jp.co.ha.tool.db.Table;
-import jp.co.ha.tool.excel.Cell;
-import jp.co.ha.tool.excel.Row;
+import jp.co.ha.tool.excel.ExcelCell;
+import jp.co.ha.tool.excel.ExcelRow;
 import jp.co.ha.tool.excel.type.CellPositionType;
 import jp.co.ha.tool.excel.type.ColumnType;
 import jp.co.ha.tool.gen.GenerateFile;
@@ -78,8 +78,8 @@ public class ToolUtil {
      *     テーブル名
      * @return 処理対象の場合true、それ以外の場合false
      */
-    public static boolean isTargetTable(Row row, String tableName) {
-        Cell cell = row.getCell(CellPositionType.PHYSICAL_NAME);
+    public static boolean isTargetTable(ExcelRow row, String tableName) {
+        ExcelCell cell = row.getCell(CellPositionType.PHYSICAL_NAME);
         return tableName.equals(cell.getValue());
     }
 
@@ -90,7 +90,7 @@ public class ToolUtil {
      *     行情報
      * @return 物理名
      */
-    public static String getPhysicalName(Row row) {
+    public static String getPhysicalName(ExcelRow row) {
         return row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
     }
 
@@ -101,7 +101,7 @@ public class ToolUtil {
      *     行情報
      * @return 論理名
      */
-    public static String getLogicalName(Row row) {
+    public static String getLogicalName(ExcelRow row) {
         return row.getCell(CellPositionType.LOGICAL_NAME).getValue();
     }
 
@@ -112,7 +112,7 @@ public class ToolUtil {
      *     行情報
      * @return カラムタイプ
      */
-    public static String getColumnType(Row row) {
+    public static String getColumnType(ExcelRow row) {
         StringJoiner body = new StringJoiner(StringUtil.SPACE);
         String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
         // if (isCrypt(row)) {
@@ -130,7 +130,7 @@ public class ToolUtil {
      *     行情報
      * @return カラムサイズ
      */
-    public static String getSize(Row row) {
+    public static String getSize(ExcelRow row) {
         String size = row.getCell(CellPositionType.COLUMN_SIZE).getValue();
         if (StringUtil.isBrank(size)) {
             return StringUtil.EMPTY;
@@ -148,7 +148,7 @@ public class ToolUtil {
      *     行情報
      * @return 暗号化カラムの場合true、それ以外の場合false
      */
-    public static boolean isCrypt(Row row) {
+    public static boolean isCrypt(ExcelRow row) {
         return CommonFlag.TRUE == CommonFlag
                 .of(row.getCell(CellPositionType.CRYPT).getValue());
     }
@@ -160,7 +160,7 @@ public class ToolUtil {
      *     行情報
      * @return シーケンスカラムの場合true、それ以外の場合false
      */
-    public static boolean isSequence(Row row) {
+    public static boolean isSequence(ExcelRow row) {
         return CommonFlag.TRUE == CommonFlag
                 .of(row.getCell(CellPositionType.SEQUENCE).getValue());
     }
@@ -172,7 +172,7 @@ public class ToolUtil {
      *     行情報
      * @return Not NULLの場合true、それ以外の場合false
      */
-    public static boolean isNotNull(Row row) {
+    public static boolean isNotNull(ExcelRow row) {
         return CommonFlag.TRUE == CommonFlag
                 .of(row.getCell(CellPositionType.NOT_NULL).getValue());
     }
@@ -184,7 +184,7 @@ public class ToolUtil {
      *     行情報
      * @return プライマリーキーの場合true、それ以外の場合false
      */
-    public static boolean isPrimaryKey(Row row) {
+    public static boolean isPrimaryKey(ExcelRow row) {
         return CommonFlag.TRUE == CommonFlag
                 .of(row.getCell(CellPositionType.PRIMARY_KEY).getValue());
     }
@@ -196,7 +196,7 @@ public class ToolUtil {
      *     行情報
      * @return フィールド名
      */
-    public static String getFieldName(Row row) {
+    public static String getFieldName(ExcelRow row) {
         return row.getCell(CellPositionType.COLUMN_NAME).getValue();
     }
 
@@ -207,7 +207,7 @@ public class ToolUtil {
      *     行情報
      * @return クラスタイプ
      */
-    public static Class<?> getClassType(Row row) {
+    public static Class<?> getClassType(ExcelRow row) {
         String columnType = row.getCell(CellPositionType.COLUMN_TYPE).getValue();
         return ColumnType.of(columnType).getClassType();
     }
@@ -219,7 +219,7 @@ public class ToolUtil {
      *     行情報
      * @return カラム名(コメント)
      */
-    public static String getColumnComment(Row row) {
+    public static String getColumnComment(ExcelRow row) {
         return row.getCell(CellPositionType.COLUMN_NAME_COMMENT).getValue();
     }
 
@@ -230,7 +230,7 @@ public class ToolUtil {
      *     行情報
      * @return カラム名
      */
-    public static String getColumnName(Row row) {
+    public static String getColumnName(ExcelRow row) {
         return row.getCell(CellPositionType.COLUMN_NAME).getValue();
     }
 
@@ -243,12 +243,12 @@ public class ToolUtil {
      *     Javaソース
      * @return フィールドに付与するアノテーションのMap
      */
-    public static Map<Class<?>, String> getFieldAnnotationMap(Row row,
+    public static Map<Class<?>, String> getFieldAnnotationMap(ExcelRow row,
             JavaSource source) {
 
         Map<Class<?>, String> map = new HashMap<>();
 
-        Cell cryptCell = row.getCell(CellPositionType.CRYPT);
+        ExcelCell cryptCell = row.getCell(CellPositionType.CRYPT);
         if (StringUtil.hasValue(cryptCell.getValue())) {
             map.put(Mask.class, "");
             source.addImport(new Import(Mask.class));
@@ -509,14 +509,14 @@ public class ToolUtil {
      *     行情報リスト
      * @return テーブル情報リスト
      */
-    public static List<Table> getTableList(List<Row> rowList) {
+    public static List<Table> getTableList(List<ExcelRow> rowList) {
 
         // header行を除外
-        List<Row> list = CollectionUtil.copyList(rowList);
+        List<ExcelRow> list = CollectionUtil.copyList(rowList);
         list.remove(0);
         List<Table> tableList = new ArrayList<>();
         List<String> existTableList = new ArrayList<>();
-        for (Row row : list) {
+        for (ExcelRow row : list) {
             String logicalName = row.getCell(CellPositionType.LOGICAL_NAME).getValue();
             String physicalName = row.getCell(CellPositionType.PHYSICAL_NAME).getValue();
             if (!containsTable(existTableList, physicalName)
@@ -553,7 +553,7 @@ public class ToolUtil {
      *     テーブル名
      * @return Tableクラス
      */
-    public static Table getTable(List<Row> rowList, String tableName) {
+    public static Table getTable(List<ExcelRow> rowList, String tableName) {
 
         Table table = new Table();
         table.setPhysicalName(tableName);
