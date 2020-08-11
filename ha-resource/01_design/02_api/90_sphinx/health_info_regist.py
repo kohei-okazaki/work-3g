@@ -15,21 +15,49 @@ class HealthInfoRegistAPI:
             POST
 
         Header:
-            ==============  ================
+            ==============  ==================
             Key             Value
-            ==============  ================
-            Content-Type    application/json
-            Accept-Charset  utf-8
-            Api-Key         APIKEY
-            ==============  ================
+            ==============  ==================
+            Content-Type    application/json  
+            Accept-Charset  utf-8             
+            Api-Key         APIKEY            
+            ==============  ==================
 
-        Args:
+        Request_Body:
             json (string): 健康情報登録API 要求JSON
 
-        Returns:
-            string: 健康情報登録API 応答JSON
+            ==============  ================  ==========================================
+            Key             Type              Detail
+            ==============  ================  ==========================================
+            height          double            ユーザの身長
+            weight          double            ユーザの体重
+            testMode        string            非推奨、試験モード
+            ==============  ================  ==========================================
+
+        Response_Body:
+            json (string): 健康情報登録API 応答JSON
+
+            ==============  ================  ================  ==========================================
+            Key                               Type              Detail
+            ==============  ================  ================  ==========================================
+            result                            string            API実行処理結果
+            error                             object            status = 0の時、Null
+            error           code              string            エラーコード
+            error           detail            string            エラー詳細情報
+            account                           object            status = 1の時、Null
+            account         userId            string            ユーザを一意に識別するID
+            healthInfo                        object            status = 1の時、Null
+            healthInfo      seqHealthInfoId   int               健康情報一意に識別するID
+            healthInfo      height            double            ユーザの身長
+            healthInfo      weight            double            ユーザの体重
+            healthInfo      bmi               double            ユーザのBMI
+            healthInfo      standardWeight    double            ユーザの標準体重
+            healthInfo      status            string            前回登録したときとの体重差のステータス
+            healthInfo      regDate           string            yyyyMMddHHmmss
+            ==============  ================  ================  ==========================================
 
         """
+
         return {
             "result": "0",
             "error": null,
