@@ -25,8 +25,6 @@ import jp.co.ha.db.entity.MailInfo;
 public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
     /** 健康情報登録メールテンプレートID */
-    // private static final String TEMPLATE_ID = File.separator + "mailtemplate"
-    // + File.separator + "healthinfo-regist-template.txt";
     private static final String TEMPLATE_ID = "mail-template/healthinfo-regist-template.txt";
 
     /** メール情報検索サービス */
