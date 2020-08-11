@@ -23,7 +23,6 @@
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passwordExpire')}" th:errors="*{passwordExpire}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailPassword')}" th:errors="*{mailPassword}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
@@ -88,19 +87,6 @@
           <div id="suggest"></div>
         </div><!-- /.form-group -->
         <!--/* メールアドレスここまで */-->
-
-        <!--/* メールパスワードここから */-->
-        <div class="form-group">
-          <label class="control-label" for="mailPassword" th:text="#{mailPassword}"></label><span class="badge badge-danger">必須</span>
-          <div class="checkbox">
-            <input type="password" class="validate[required] form-control" th:field="*{mailPassword}" th:value="${mailPassword}" required placeholder="mailpass" />
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="mailPassword-check" class="checkbox-input custom-control-input" />
-              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
-            </label><!-- /.custom-control custom-checkbox -->
-          </div><!-- /.checkbox -->
-        </div><!-- /.form-group -->
-        <!--/*メールパスワードここまで */-->
 
         <!--/* ヘッダ利用ここから */-->
         <div class="form-group">
