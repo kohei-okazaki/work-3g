@@ -21,10 +21,19 @@ class HealthCheckAPI:
             Accept-Charset  utf-8
             ==============  ================
 
-        Returns:
-            string: ヘルスチェックAPI 応答JSON
+        Response_Body:
+            json (string): ヘルスチェックAPI 応答JSON
+
+            ==============  ================  ==========================================
+            Key             Type              Detail
+            ==============  ================  ==========================================
+            result          double            API実行処理結果
+            error           double            status = 0の時、Null
+            account         string            Null
+            ==============  ================  ==========================================
 
         """
+
         return {
             "result": "0",
             "error": null,
