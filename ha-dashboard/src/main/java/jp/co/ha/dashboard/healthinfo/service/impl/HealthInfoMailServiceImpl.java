@@ -1,6 +1,5 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -25,9 +24,11 @@ import jp.co.ha.db.entity.MailInfo;
 @Service
 public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
-    /** メールテンプレート */
-    private static final String TEMPLATE = File.separator + "mailtemplate"
-            + File.separator + "healthinfo-regist-template.txt";
+    /** 健康情報登録メールテンプレートID */
+    // private static final String TEMPLATE_ID = File.separator + "mailtemplate"
+    // + File.separator + "healthinfo-regist-template.txt";
+    private static final String TEMPLATE_ID = "mail-template/healthinfo-regist-template.txt";
+
     /** メール情報検索サービス */
     @Autowired
     private MailInfoSearchService mailInfoSearchService;
@@ -62,7 +63,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
                     apiResponse.getHealthInfo().getHealthInfoRegDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
 
-            sesComponent.sendMail(to, titleText, TEMPLATE, bodyMap);
+            sesComponent.sendMail(to, titleText, TEMPLATE_ID, bodyMap);
         }
     }
 }
