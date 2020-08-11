@@ -116,7 +116,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         AccountDto dto = new AccountDto();
         BeanUtil.copy(accountRegistForm, dto);
 
-        // FormForm情報から登録処理を行う
+        // Form情報から登録処理を行う
         accountRegistService.regist(dto);
 
         sessionComponent.removeValue(request.getSession(), "accountRegistForm");
