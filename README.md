@@ -1,20 +1,28 @@
 # work-3g
 健康管理アプリ  
 
-## 01_ビルド手順  
-https://github.com/kohei-okazaki/work-3g/wiki/00_%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86 を参考にローカル環境構築を行う  
+## 01_環境構築手順  
+[環境構築手順](https://github.com/kohei-okazaki/work-3g/wiki/00_%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86)を参考にローカル環境構築を行う  
+
+ 
+### **ローカル環境図**
+![image](https://user-images.githubusercontent.com/24481212/87867075-1a493600-c9c4-11ea-8351-cd0aad6eca4a.png)  
+
+-----
+
+### **EC2環境図**  
+![image](https://user-images.githubusercontent.com/24481212/87866924-62ffef80-c9c2-11ea-8ac4-63b578ae8ce9.png)
 
 ## 02_Project構成  
 * ### ha-api  
-リクエストBodyにJSONを設定したPOST形式のHTTPリクエストを処理するプロジェクト   
+JSONでのHTTP通信を受け付けるプロジェクト   
 
 * ### ha-batch  
 Batch処理を定義したプロジェクト  
 
 * ### ha-build  
-ローカル環境でJarやAWS環境にデプロイするWarを作成するプロジェクト  
+ローカル環境でJarやEC2環境にデプロイするWarを作成するプロジェクト  
 windows, linuxでそれぞれbatとshを用意  
-(都度Jarを配置せずにpomから必要なJarを読み取って動くように修正した為、buildシェルを流す無くても良い)  
 
 * ### ha-business  
 api, dashboard, batchで共通的に使うbusinessロジックをまとめたプロジェクト  
@@ -23,13 +31,17 @@ api, dashboard, batchで共通的に使うbusinessロジックをまとめたプ
 共通処理を定義したプロジェクト  
 
 * ### ha-dashboard  
-健康管理のダッシュボードのプロジェクト  
+健康管理のダッシュボードプロジェクト  
 
 * ### ha-db  
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
+環境へのDB反映は本プロジェクトよりFlywayで行う  
+
+* ### ha-node  
+健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装) 
 
 * ### ha-pom  
-api, auto, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+api, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
 * ### ha-resource  
 詳細設計書、DDL等を定義したドキュメントプロジェクト  
@@ -41,4 +53,7 @@ seleniumを利用した画面の自動テスト処理を定義したプロジェ
 指定のフォーマットのExcelからDDLなどを自動生成するツールプロジェクト  
 
 * ### ha-web  
-WebFWを定義したプロジェクト  
+WebFW部分を定義したプロジェクト  
+
+## 03_APIドキュメント  
+[健康管理APIドキュメント](https://github.com/kohei-okazaki/work-3g/blob/master/ha-resource/01_design/02_api/90_sphinx/docs/_build/index.html)  
