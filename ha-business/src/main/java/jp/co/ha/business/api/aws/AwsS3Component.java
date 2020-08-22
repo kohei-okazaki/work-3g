@@ -122,7 +122,7 @@ public class AwsS3Component {
     }
 
     /**
-     * 指定されたバケットへ{@linkplain MultipartFile}を配置する
+     * 指定されたキーへ{@linkplain MultipartFile}を配置する
      *
      * @param key
      *     バケット内のキー(ファイル名込)
@@ -142,7 +142,7 @@ public class AwsS3Component {
     }
 
     /**
-     * 指定されたバケットへファイルを配置する
+     * 指定されたキーへファイルを配置する
      *
      * @param key
      *     バケット内のキー(ファイル名込)
