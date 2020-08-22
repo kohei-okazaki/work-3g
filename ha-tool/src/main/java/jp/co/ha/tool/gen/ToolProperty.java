@@ -24,8 +24,14 @@ public class ToolProperty {
     /** バージョン情報 */
     @Property(name = "tool.version")
     private String version;
+    /** DML対象テーブル */
+    @Property(name = "tool.dml.tables")
+    private String dmlTables;
+
     /** 処理対象テーブルリスト */
     private List<String> targetTableList = new ArrayList<>();
+    /** DML対象テーブルリスト */
+    private List<String> dmlTableList = new ArrayList<>();
 
     /**
      * baseDirを返す
@@ -104,6 +110,25 @@ public class ToolProperty {
     }
 
     /**
+     * dmlTablesを返す
+     *
+     * @return dmlTables
+     */
+    public String getDmlTables() {
+        return dmlTables;
+    }
+
+    /**
+     * dmlTablesを設定する
+     *
+     * @param dmlTables
+     *     DML対象テーブル
+     */
+    public void setDmlTables(String dmlTables) {
+        this.dmlTables = dmlTables;
+    }
+
+    /**
      * targetTableListを返す
      *
      * @return targetTableList
@@ -130,6 +155,35 @@ public class ToolProperty {
      */
     public void addTargetTable(String targetTable) {
         this.targetTableList.add(targetTable);
+    }
+
+    /**
+     * dmlTableListを返す
+     *
+     * @return dmlTableList
+     */
+    public List<String> getDmlTableList() {
+        return dmlTableList;
+    }
+
+    /**
+     * dmlTableListを設定する
+     *
+     * @param dmlTableList
+     *     DML対象テーブルリスト
+     */
+    public void setDmlTableList(List<String> dmlTableList) {
+        this.dmlTableList = dmlTableList;
+    }
+
+    /**
+     * 指定した対象テーブルを追加する
+     *
+     * @param dmlTable
+     *     DML対象テーブル
+     */
+    public void addDmlTable(String dmlTable) {
+        this.dmlTableList.add(dmlTable);
     }
 
 }
