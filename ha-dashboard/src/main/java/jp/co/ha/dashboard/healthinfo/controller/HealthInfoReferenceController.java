@@ -94,7 +94,7 @@ public class HealthInfoReferenceController implements BaseWebController {
      * @param binder
      *     WebDataBinder
      */
-    @InitBinder(value = "healthInfoReferenceForm")
+    @InitBinder("healthInfoReferenceForm")
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(new HealthInfoReferenceValidator());
     }
@@ -115,10 +115,10 @@ public class HealthInfoReferenceController implements BaseWebController {
      * 照会前画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @return 照会前画面
      */
-    @GetMapping(value = "/index")
+    @GetMapping("/index")
     public String index(Model model) {
         // 検索処理実行フラグを設定
         model.addAttribute("isRefered", false);
@@ -129,18 +129,18 @@ public class HealthInfoReferenceController implements BaseWebController {
      * 照会後画面
      *
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param form
      *     検索情報フォーム
      * @param result
-     *     BindingResult
+     *     {@linkplain BindingResult}
      * @return 照会後画面
      * @throws BaseException
      *     基底例外
      */
-    @PostMapping(value = "/index")
+    @PostMapping("/index")
     public String reference(HttpServletRequest request, Model model,
             @Valid HealthInfoReferenceForm form, BindingResult result)
             throws BaseException {
@@ -198,12 +198,12 @@ public class HealthInfoReferenceController implements BaseWebController {
      * Excelダウンロードを実行
      *
      * @param request
-     *     HttpServletRequest
-     * @return ModelAndView
+     *     {@linkplain HttpServletRequest}
+     * @return {@linkplain ModelAndView}
      * @throws BaseException
      *     基底例外
      */
-    @GetMapping(value = "/exceldownload")
+    @GetMapping("/exceldownload")
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
         String userId = sessionComponent
@@ -228,13 +228,13 @@ public class HealthInfoReferenceController implements BaseWebController {
      * CSVダウンロードを実行
      *
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @param response
-     *     HttpServletResponse
+     *     {@linkplain HttpServletResponse}
      * @throws BaseException
      *     基底例外
      */
-    @GetMapping(value = "/csvdownload")
+    @GetMapping("/csvdownload")
     public void csvDownload(HttpServletRequest request, HttpServletResponse response)
             throws BaseException {
 

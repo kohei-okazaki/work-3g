@@ -65,7 +65,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
      */
     @Override
     @NonAuth
-    @GetMapping(value = "/input")
+    @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
         return getView(DashboardView.ACCOUNT_REGIST_INPUT);
     }
@@ -76,7 +76,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
     @Override
     @NonAuth
     @MultiSubmitToken(factory = true)
-    @PostMapping(value = "/confirm")
+    @PostMapping("/confirm")
     public String confirm(Model model, @Valid AccountRegistForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
 
@@ -102,7 +102,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
     @Override
     @NonAuth
     @MultiSubmitToken(check = true)
-    @PostMapping(value = "/complete")
+    @PostMapping("/complete")
     public String complete(Model model, AccountRegistForm form,
             HttpServletRequest request) throws BaseException {
 

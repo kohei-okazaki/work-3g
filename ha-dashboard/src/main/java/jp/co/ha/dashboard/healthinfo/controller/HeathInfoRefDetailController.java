@@ -40,16 +40,16 @@ public class HeathInfoRefDetailController implements BaseWebController {
      * 詳細画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param seqHealthInfoId
      *     健康情報ID
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @return 照会前画面
      * @throws BaseException
      *     基底例外
      */
-    @GetMapping(value = "/detail")
+    @GetMapping("/detail")
     public String detail(Model model,
             @RequestParam(name = "seqHealthInfoId", required = false) Optional<Integer> seqHealthInfoId,
             HttpServletRequest request) throws BaseException {
