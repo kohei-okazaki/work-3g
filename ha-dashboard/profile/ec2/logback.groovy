@@ -28,12 +28,12 @@ appender("FILE", RollingFileAppender) {
   }
 
   filter(ThresholdFilter) {
-    level = INFO
+    level = DEBUG
   }
 
 }
 
 // アプリで出力されるログのログレベルを設定
-logger("jp.co.ha", INFO, appenderList, false)
+logger("jp.co.ha", DEBUG, appenderList, false)
 
 root(INFO, appenderList)
