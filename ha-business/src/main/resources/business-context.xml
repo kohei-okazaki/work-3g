@@ -46,7 +46,8 @@
 
   <!-- API -->
   <context:component-scan base-package="jp.co.ha.business.api" />
-
+  <!-- Component -->
+  <context:component-scan base-package="jp.co.ha.business.component" />
   <!-- Business -->
   <context:component-scan base-package="jp.co.ha.business.healthInfo.service" />
 
