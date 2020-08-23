@@ -195,7 +195,9 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         /** 基礎健康情報計算API */
         BASIC("basic", "基礎健康情報計算API"),
         /** カロリー計算API */
-        CALORIE("calorie", "カロリー計算API");
+        CALORIE("calorie", "カロリー計算API"),
+        /** 肺活量計算API */
+        BREATHING_CAPACITY("breathing_capacity", "肺活量計算API");
 
         /** 値 */
         private String value;

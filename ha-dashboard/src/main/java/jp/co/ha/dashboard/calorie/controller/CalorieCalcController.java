@@ -29,7 +29,7 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("caloriecalc")
 public class CalorieCalcController implements BaseWebController {
 
-    /** カロリー計算サービス */
+    /** カロリー計算Component */
     @Autowired
     private CalorieCalcComponent calorieCalcComponent;
 

@@ -2,14 +2,20 @@ package jp.co.ha.dashboard.breathingcapacity.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.component.BreathingCapacityComponent;
+import jp.co.ha.business.dto.BreathingCapacityDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.breathingcapacity.form.BreathingCapacityForm;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWebController;
@@ -22,6 +28,10 @@ import jp.co.ha.web.controller.BaseWebController;
 @Controller
 @RequestMapping("breathingcapacity")
 public class BreathingCapacityController implements BaseWebController {
+
+    /** 肺活量計算Component */
+    @Autowired
+    private BreathingCapacityComponent component;
 
     /**
      * Formを返す
@@ -55,13 +65,27 @@ public class BreathingCapacityController implements BaseWebController {
      * @param result
      *     {@linkplain BindingResult}
      * @return 肺活量計算画面
+     * @throws BaseException
+     *     基底例外
      */
+    @PostMapping("/index")
     public String calc(Model model, @Valid BreathingCapacityForm form,
-            BindingResult result) {
+            BindingResult result) throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.BREATHING_CAPACITY_CALC);
         }
+
+        // DTOに変換
+        BreathingCapacityDto dto = new BreathingCapacityDto();
+        BeanUtil.copy(form, dto, (src, dest) -> {
+            BreathingCapacityForm srcForm = (BreathingCapacityForm) src;
+            BreathingCapacityDto destDto = (BreathingCapacityDto) dest;
+            destDto.setGenderType(GenderType.of(srcForm.getGender()));
+        });
+
+        BreathingCapacityDto calcResult = component.calc(dto);
+        model.addAttribute("calcResult", calcResult);
 
         return getView(DashboardView.BREATHING_CAPACITY_CALC);
     }

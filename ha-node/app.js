@@ -8,6 +8,7 @@ var dotenv = require('dotenv');
 // ルーティング関数
 var basicRouter = require('./routes/recieve/basic');
 var calorieRouter = require('./routes/recieve/calorie');
+var breathingCapacityRouter = require('./routes/recieve/breathing_capacity');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use('/basic', basicRouter);
 app.use('/calorie', calorieRouter);
+app.use('/breathing_capacity', breathingCapacityRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -33,8 +35,8 @@ app.use(function(err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // 環境ファイルを読込
-    // dotenv.config();
-    // console.log("環境名=" + process.env.ENV);
+    dotenv.config();
+    console.log("環境名=" + process.env.ENV);
 
     // render the error page
     res.status(err.status || 200);
