@@ -431,7 +431,7 @@ public class StringUtil {
     }
 
     /**
-     * 指定して桁数のランダム文字列を返す<br>
+     * 指定した桁数のランダム文字列を返す<br>
      * {@linkplain org.apache.commons.lang3.RandomStringUtils#randomAlphabetic(int)}のラッパーメソッド
      *
      * @param length
