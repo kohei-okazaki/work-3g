@@ -11,7 +11,9 @@ import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
+import jp.co.ha.business.api.node.NodeApiType;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
@@ -34,8 +36,6 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.api.BaseApi.NodeApiType;
-import jp.co.ha.web.form.BaseNodeResponse.Result;
 import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**

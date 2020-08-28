@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.CalorieCalcApi;
+import jp.co.ha.business.api.node.NodeApiType;
 import jp.co.ha.business.api.node.request.CalorieCalcRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.CalorieCalcResponse;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
@@ -13,8 +15,6 @@ import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.api.BaseApi.NodeApiType;
-import jp.co.ha.web.form.BaseNodeResponse.Result;
 
 /**
  * カロリー計算Component

@@ -1,4 +1,4 @@
-package jp.co.ha.web.form;
+package jp.co.ha.business.api.node.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,7 +9,7 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
-public abstract class BaseNodeResponse implements BaseForm {
+public abstract class BaseNodeResponse {
 
     /** 処理結果 */
     @JsonProperty("result")

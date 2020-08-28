@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.web.form.BaseApiRequest;
-import jp.co.ha.web.form.BaseNodeRequest;
 
 /**
  * 肺活量計算APIリクエストクラス
