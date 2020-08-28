@@ -33,7 +33,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  * <pre>
  * ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
  * apiConnectInfo.setUrlSupplier(() -> リクエストURL);
- * XXXAPIのインスタンス.calApi(XXXAPIリクエスト, apiConnectInfo);
+ * XXXAPIのインスタンス.callApi(XXXAPIリクエスト, apiConnectInfo);
  * </pre>
  *
  * リクエストヘッダーを任意で設定したい場合、以下の方法で設定する<br>
@@ -44,7 +44,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  * apiConnectInfo.addHeader("Header-Key2", "Header-Value2");
  * apiConnectInfo.addHeader("Header-Key3", "Header-Value3");
  * apiConnectInfo.setUrlSupplier(() -> リクエストURL);
- * XXXAPIのインスタンス.calApi(XXXAPIリクエスト, apiConnectInfo);
+ * XXXAPIのインスタンス.callApi(XXXAPIリクエスト, apiConnectInfo);
  * </pre>
  *
  * @param <Rq>
@@ -186,6 +186,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * <ul>
      * <li>BASIC：基礎健康情報計算API</li>
      * <li>CALORIE：カロリー計算API</li>
+     * <li>BREATHING_CAPACITY：肺活量計算API</li>
      * </ul>
      *
      * @version 1.0.0
