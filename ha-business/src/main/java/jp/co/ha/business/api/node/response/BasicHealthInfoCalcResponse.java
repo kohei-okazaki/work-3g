@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.log.LogMessageFactory;
 import jp.co.ha.web.form.BaseApiResponse;
-import jp.co.ha.web.form.BaseNodeResponse;
 
 /**
  * 基礎健康情報計算APIのレスポンスクラス

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.ClientConfiguration;
@@ -50,6 +49,9 @@ public class AwsSesComponent {
     /** AWS認証情報 */
     @Autowired
     private AwsAuthComponent awsAuthComponent;
+    /** AWSS3Component */
+    @Autowired
+    private AwsS3Component awsS3Component;
 
     /**
      * Eメールを送信する
@@ -58,14 +60,14 @@ public class AwsSesComponent {
      *     宛先メールアドレス
      * @param titleText
      *     メール件名
-     * @param template
-     *     メール本文のテンプレート名
+     * @param templateId
+     *     テンプレートID
      * @param bodyMap
      *     メール本文を置換するmap
      * @throws BaseException
      *     メール送信に失敗した場合
      */
-    public void sendMail(String to, String titleText, String template,
+    public void sendMail(String to, String titleText, String templateId,
             Map<String, String> bodyMap) throws BaseException {
 
         if (awsConfig.isSesStubFlag()) {
@@ -81,7 +83,7 @@ public class AwsSesComponent {
                     .withToAddresses(to)
                     .withBccAddresses(awsConfig.getMailAddress());
 
-            Body body = getBody(template, bodyMap);
+            Body body = getBody(templateId, bodyMap);
             Message message = new Message()
                     .withSubject(getContent(titleText))
                     .withBody(body);
@@ -130,18 +132,18 @@ public class AwsSesComponent {
     /**
      * {@linkplain Body}を返す
      *
-     * @param template
-     *     メール本文テンプレート
+     * @param templateId
+     *     テンプレートID
      * @param bodyMap
      *     メール本文の置換用Map
      * @return Body
      * @throws BaseException
      *     メールテンプレートの取得に失敗した場合
      */
-    private Body getBody(String template, Map<String, String> bodyMap)
+    private Body getBody(String templateId, Map<String, String> bodyMap)
             throws BaseException {
 
-        String bodyText = replace(getBodyTemplate(template), bodyMap);
+        String bodyText = replace(getBodyTemplate(templateId), bodyMap);
         return new Body()
                 .withHtml(getContent(bodyText));
     }
@@ -160,15 +162,15 @@ public class AwsSesComponent {
     /**
      * 指定されたtemplateファイルのメール本文を返す
      *
-     * @param template
-     *     テンプレートファイル
+     * @param templateId
+     *     テンプレートID
      * @return メール本文
      * @throws BaseException
      *     メールテンプレートの取得に失敗した場合
      */
-    private String getBodyTemplate(String template) throws BaseException {
+    private String getBodyTemplate(String templateId) throws BaseException {
 
-        try (InputStream is = new ClassPathResource(template).getInputStream();
+        try (InputStream is = awsS3Component.getS3ObjectByKey(templateId);
                 BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 
             StringBuilder sb = new StringBuilder();
@@ -180,7 +182,7 @@ public class AwsSesComponent {
 
         } catch (IOException e) {
             throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
-                    "メールテンプレートの取得に失敗しました.template=" + template, e);
+                    "メールテンプレートの取得に失敗しました.templateId=" + templateId, e);
         }
     }
 

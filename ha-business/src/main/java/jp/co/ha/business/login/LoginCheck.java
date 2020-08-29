@@ -3,6 +3,8 @@ package jp.co.ha.business.login;
 import java.util.Optional;
 
 import jp.co.ha.business.exception.DashboardErrorCode;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.Account;
@@ -28,8 +30,10 @@ public class LoginCheck {
      * @param inputPassword
      *     入力されたパスワード
      * @return ログイン情報チェック結果
+     * @throws BaseException
      */
-    public LoginCheckResult check(Optional<Account> account, String inputPassword) {
+    public LoginCheckResult check(Optional<Account> account, String inputPassword)
+            throws BaseException {
 
         LoginCheckResult result = new LoginCheckResult();
         checkExistAccount(result, account);
@@ -37,7 +41,7 @@ public class LoginCheck {
             return result;
         }
 
-        checkInvalidPassword(result, inputPassword, account.get().getPassword());
+        checkInvalidPassword(result, inputPassword, account.get());
         if (result.hasError()) {
             return result;
         }
@@ -77,12 +81,16 @@ public class LoginCheck {
      *     ログイン情報チェック結果
      * @param inputPassword
      *     フォーム情報.パスワード
-     * @param dbPassword
+     * @param account
      *     DB情報.パスワード
+     * @throws BaseException
      */
     private void checkInvalidPassword(LoginCheckResult result, String inputPassword,
-            String dbPassword) {
-        if (!inputPassword.equals(dbPassword)) {
+            Account account) throws BaseException {
+
+        String hashPassword = new Sha256HashEncoder().encode(inputPassword,
+                account.getUserId());
+        if (!hashPassword.equals(account.getPassword())) {
             result.addError();
             result.setErrorCode(DashboardErrorCode.ACCOUNT_INVALID_PASSWORD);
         }

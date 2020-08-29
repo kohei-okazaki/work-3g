@@ -17,17 +17,17 @@ public class HealthInfoRegistApi
         extends BaseApi<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
     @Override
-    protected HealthInfoRegistResponse getResponse() {
+    public HealthInfoRegistResponse getResponse() {
         return new HealthInfoRegistResponse();
     }
 
     @Override
-    protected HttpMethod getHttpMethod() {
+    public HttpMethod getHttpMethod() {
         return HttpMethod.POST;
     }
 
     @Override
-    protected String getApiName() {
+    public String getApiName() {
         return "健康情報登録API";
     }
 

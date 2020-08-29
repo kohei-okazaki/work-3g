@@ -17,6 +17,9 @@ import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.crud.update.MailInfoUpdateService;
 import jp.co.ha.business.dto.AccountDto;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
@@ -60,12 +63,16 @@ public class AccountSettingServiceImpl implements AccountSettingService {
     /** トランザクションクラス */
     @Autowired
     private DefaultTransactionDefinition defaultTransactionDefinition;
+    /** ハッシュ値作成クラス */
+    @Sha256
+    @Autowired
+    private HashEncoder encoder;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void execute(AccountDto dto) {
+    public void execute(AccountDto dto) throws BaseException {
 
         // トランザクション開始
         TransactionStatus status = transactionManager
@@ -123,16 +130,16 @@ public class AccountSettingServiceImpl implements AccountSettingService {
      *     アカウントDTO
      * @param account
      *     アカウント情報
+     * @throws BaseException
+     *     基底例外
      */
-    private void mergeAccount(AccountDto dto, Account account) {
+    private void mergeAccount(AccountDto dto, Account account) throws BaseException {
 
-        BeanUtil.copy(dto, account, Arrays.asList("userId"), (src, dest) -> {
-            AccountDto srcDto = (AccountDto) src;
-            Account destEntity = (Account) dest;
-            destEntity.setPasswordExpire(
-                    DateUtil.toDate(srcDto.getPasswordExpire(), DateFormatType.YYYYMMDD));
-        });
-
+        BeanUtil.copy(dto, account, Arrays.asList("userId"));
+        account.setPasswordExpire(
+                DateUtil.toDate(dto.getPasswordExpire(), DateFormatType.YYYYMMDD));
+        account.setPassword(
+                encoder.encode(dto.getPassword(), dto.getUserId()));
     }
 
     /**

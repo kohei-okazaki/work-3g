@@ -20,7 +20,7 @@ import jp.co.ha.web.api.BaseApi;
 public class BasicHealthInfoCalcApi
         extends BaseApi<BasicHealthInfoCalcRequest, BasicHealthInfoCalcResponse> {
 
-    /** NodeAPIの種別 */
+    /** 基礎健康情報計算APIの種別 */
     private static final NodeApiType TYPE = NodeApiType.BASIC;
 
     @Override

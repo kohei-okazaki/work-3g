@@ -26,7 +26,8 @@ public class ToolInvoker {
     public static void main(String[] args) {
         // GenerateInvoker.invoke(GenerateType.TABLE_DEFINE);
         // GenerateInvoker.invoke(GenerateType.DDL);
-        GenerateInvoker.invoke(GenerateType.DROP);
+        // GenerateInvoker.invoke(GenerateType.DROP);
+        GenerateInvoker.invoke(GenerateType.DML);
         // GenerateInvoker.invoke(GenerateType.ENTITY);
     }
 

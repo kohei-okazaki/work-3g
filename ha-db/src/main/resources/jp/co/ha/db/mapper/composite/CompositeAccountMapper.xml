@@ -26,7 +26,6 @@
       , AC.API_KEY
       <!-- MAIL_INFO -->
       , MI.MAIL_ADDRESS
-      , MI.MAIL_PASSWORD
       <!-- HEALTH_INFO_FILE_SETTING -->
       , HF.HEADER_FLAG
       , HF.FOOTER_FLAG

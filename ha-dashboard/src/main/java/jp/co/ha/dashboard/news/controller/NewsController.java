@@ -40,7 +40,7 @@ public class NewsController implements BaseWebController {
      * お知らせ一覧
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @return お知らせ一覧画面
      * @throws BaseException
      *     JSONファイルの読込に失敗した場合

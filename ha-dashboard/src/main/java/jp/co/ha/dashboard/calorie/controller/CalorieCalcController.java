@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.calorie.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.component.CalorieCalcComponent;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.calorie.form.CalorieCalcForm;
-import jp.co.ha.dashboard.calorie.service.CalorieCalcService;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.web.controller.BaseWebController;
 
@@ -29,9 +31,12 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("caloriecalc")
 public class CalorieCalcController implements BaseWebController {
 
-    /** カロリー計算サービス */
+    /** SessionComponent */
     @Autowired
-    private CalorieCalcService calorieCalcService;
+    private SessionComponent sessionComponent;
+    /** カロリー計算Component */
+    @Autowired
+    private CalorieCalcComponent calorieCalcComponent;
 
     /**
      * Formを返す
@@ -48,13 +53,10 @@ public class CalorieCalcController implements BaseWebController {
     /**
      * カロリー計算前画面
      *
-     * @param model
-     *     Model
-     *
      * @return カロリー計算画面
      */
-    @GetMapping(value = "/index")
-    public String index(Model model) {
+    @GetMapping("/index")
+    public String index() {
         return getView(DashboardView.CALORIE_CALC);
     }
 
@@ -62,18 +64,20 @@ public class CalorieCalcController implements BaseWebController {
      * カロリー計算後画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param form
-     *     カロリー計算画面フォーム
+     *     {@linkplain CalorieCalcForm}
      * @param result
-     *     妥当性チェック結果
+     *     {@linkplain BindingResult}
+     * @param request
+     *     {@linkplain HttpServletRequest}
      * @return カロリー計算後画面
      * @throws BaseException
      *     基底例外
      */
-    @PostMapping(value = "/index")
-    public String calc(Model model, @Valid CalorieCalcForm form, BindingResult result)
-            throws BaseException {
+    @PostMapping("/index")
+    public String calc(Model model, @Valid CalorieCalcForm form, BindingResult result,
+            HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.CALORIE_CALC);
@@ -87,7 +91,8 @@ public class CalorieCalcController implements BaseWebController {
             destDto.setGenderType(GenderType.of(srcForm.getGender()));
         });
 
-        CalorieCalcDto calcResult = calorieCalcService.calc(dto);
+        CalorieCalcDto calcResult = calorieCalcComponent.calc(dto, sessionComponent
+                .getValue(request.getSession(), "userId", String.class).get());
         model.addAttribute("calcResult", calcResult);
 
         return getView(DashboardView.CALORIE_CALC);

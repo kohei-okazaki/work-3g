@@ -44,11 +44,6 @@ public class AccountSettingForm implements BaseForm {
     @Required(message = "メールアドレスが未入力です")
     @Email(message = "メールアドレス形式ではありません")
     private String mailAddress;
-    /** メールパスワード */
-    @Mask
-    @Required(message = "メールパスワードが未入力です")
-    @Pattern(regixPattern = RegexType.HALF_CHAR, message = "メールパスワードが半角英数でありません")
-    private String mailPassword;
     /** APIキー */
     @Mask
     @Required(message = "APIキーが未入力です")
@@ -166,25 +161,6 @@ public class AccountSettingForm implements BaseForm {
      */
     public void setMailAddress(String mailAddress) {
         this.mailAddress = mailAddress;
-    }
-
-    /**
-     * mailPasswordを返す
-     *
-     * @return mailPassword
-     */
-    public String getMailPassword() {
-        return mailPassword;
-    }
-
-    /**
-     * mailPasswordを設定する
-     *
-     * @param mailPassword
-     *     メールパスワード
-     */
-    public void setMailPassword(String mailPassword) {
-        this.mailPassword = mailPassword;
     }
 
     /**

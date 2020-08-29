@@ -78,7 +78,7 @@ public class AesCrypter implements Crypter {
     }
 
     /**
-     * Cipherを返す
+     * {@linkplain Cipher}を返す
      *
      * @param mode
      *     モード

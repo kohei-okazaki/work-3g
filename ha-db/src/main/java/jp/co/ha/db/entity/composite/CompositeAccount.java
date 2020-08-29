@@ -21,7 +21,6 @@ public class CompositeAccount extends CompositeAccountKey implements Serializabl
     private static final long serialVersionUID = 1L;
     /** パスワード */
     @Mask
-    @Crypt
     private String password;
     /** 削除フラグ */
     private String deleteFlag;
@@ -31,10 +30,6 @@ public class CompositeAccount extends CompositeAccountKey implements Serializabl
     @Mask
     @Crypt
     private String mailAddress;
-    /** メールパスワード */
-    @Mask
-    @Crypt
-    private String mailPassword;
     /** APIキー */
     @Mask
     private String apiKey;
@@ -123,25 +118,6 @@ public class CompositeAccount extends CompositeAccountKey implements Serializabl
      */
     public void setMailAddress(String mailAddress) {
         this.mailAddress = mailAddress;
-    }
-
-    /**
-     * mailPasswordを返す
-     *
-     * @return mailPassword
-     */
-    public String getMailPassword() {
-        return mailPassword;
-    }
-
-    /**
-     * mailPasswordを設定する
-     *
-     * @param mailPassword
-     *     メールパスワード
-     */
-    public void setMailPassword(String mailPassword) {
-        this.mailPassword = mailPassword;
     }
 
     /**

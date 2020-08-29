@@ -93,7 +93,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      * {@inheritDoc}
      */
     @Override
-    @GetMapping(value = "/input")
+    @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
         return getView(DashboardView.HEALTH_INFO_INPUT);
     }
@@ -103,7 +103,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      */
     @Override
     @MultiSubmitToken(factory = true)
-    @PostMapping(value = "/confirm")
+    @PostMapping("/confirm")
     public String confirm(Model model, @Valid HealthInfoForm form, BindingResult result,
             HttpServletRequest request) throws BaseException {
 
@@ -123,7 +123,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      */
     @Override
     @MultiSubmitToken(check = true)
-    @PostMapping(value = "/complete")
+    @PostMapping("/complete")
     public String complete(Model model, HealthInfoForm form, HttpServletRequest request)
             throws BaseException {
 
@@ -175,12 +175,12 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      * 健康情報Excelをダウンロードする
      *
      * @param request
-     *     HttpServletRequest
-     * @return ModelAndView
+     *     {@linkplain HttpServletRequest}
+     * @return {@linkplain ModelAndView}
      * @throws BaseException
      *     基底例外
      */
-    @GetMapping(value = "/exceldownload")
+    @GetMapping("/exceldownload")
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
         // sessionよりユーザIDと健康情報Form情報を取得
@@ -214,7 +214,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
      * @throws BaseException
      *     基底例外
      */
-    @GetMapping(value = "/csvdownload")
+    @GetMapping("/csvdownload")
     public void csvDownload(HttpServletRequest request, HttpServletResponse response)
             throws BaseException {
 

@@ -26,7 +26,11 @@ public enum BusinessErrorCode implements BaseErrorCode, BaseEnum {
     CALORIE_API_CONNECT_ERROR("CALORIE_API_CONNECT_ERROR", "BE0033", LogLevel.ERROR),
     /** SESメールアドレス認証エラー */
     AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR("AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR", "BE0034",
-            LogLevel.ERROR);
+            LogLevel.ERROR),
+    /** 肺活量計算API接続エラー */
+    BREATHING_API_CONNECT_ERROR("BREATHING_API_CONNECT_ERROR", "BE0037", LogLevel.ERROR),
+    /** Token発行API接続エラー */
+    TOKEN_API_CONNECT_ERROR("TOKEN_API_CONNECT_ERROR", "BE0038", LogLevel.ERROR);
 
     /**
      * コンストラクタ

@@ -77,7 +77,7 @@ public class HealthInfoFileRegistController
      * validatorを設定
      *
      * @param binder
-     *     WebDataBinder
+     *     {@linkplain WebDataBinder}
      */
     @InitBinder("healthInfoFileForm")
     public void initBinder(WebDataBinder binder) {
@@ -88,7 +88,7 @@ public class HealthInfoFileRegistController
      * {@inheritDoc}
      */
     @Override
-    @GetMapping(value = "/input")
+    @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
         return getView(DashboardView.HEALTH_INFO_FILE_INPUT);
     }
@@ -98,7 +98,7 @@ public class HealthInfoFileRegistController
      */
     @Override
     @MultiSubmitToken(factory = true)
-    @PostMapping(value = "/confirm")
+    @PostMapping("/confirm")
     public String confirm(Model model, @Valid HealthInfoFileForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
 
@@ -137,7 +137,7 @@ public class HealthInfoFileRegistController
      */
     @Override
     @MultiSubmitToken(check = true)
-    @PostMapping(value = "/complete")
+    @PostMapping("/complete")
     public String complete(Model model, HealthInfoFileForm form,
             HttpServletRequest request) throws BaseException {
 
