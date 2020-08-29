@@ -23,9 +23,9 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
      * 入力画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @return view名
      * @throws BaseException
      *     基底例外
@@ -36,13 +36,13 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
      * 確認画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param form
      *     F extends BaseForm
      * @param result
-     *     BindingResult
+     *     {@linkplain BindingResult}
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @return view名
      * @throws BaseException
      *     基底例外
@@ -54,11 +54,11 @@ public interface BaseWizardController<F extends BaseForm> extends BaseWebControl
      * 完了画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param form
      *     F extends BaseForm
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @return view名
      * @throws BaseException
      *     基底例外

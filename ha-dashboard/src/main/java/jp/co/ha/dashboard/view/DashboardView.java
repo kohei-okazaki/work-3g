@@ -52,6 +52,9 @@ public enum DashboardView implements BaseView {
     /** カロリー計算画面 */
     CALORIE_CALC("caloriecalc/index"),
 
+    /** 肺活量計算画面 */
+    BREATHING_CAPACITY_CALC("breathingcapacity/index"),
+
     /** お知らせ一覧画面 */
     NEWS_LIST("news/list"),
     /** お知らせ詳細画面 */

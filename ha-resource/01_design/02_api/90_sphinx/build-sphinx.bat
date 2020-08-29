@@ -1,6 +1,7 @@
 @echo off
 
 rem Sphinxで健康管理APIのドキュメントを作成する
+rem 第一引数：ユーザディレクトリ名
 
 cls
 

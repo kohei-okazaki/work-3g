@@ -19,7 +19,7 @@ import jp.co.ha.web.api.BaseApi;
 @Component
 public class CalorieCalcApi extends BaseApi<CalorieCalcRequest, CalorieCalcResponse> {
 
-    /** NodeAPIの種別 */
+    /** カロリー計算APIの種別 */
     private static final NodeApiType TYPE = NodeApiType.CALORIE;
 
     @Override

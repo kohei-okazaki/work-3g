@@ -11,9 +11,14 @@ import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
+import jp.co.ha.business.api.node.NodeApiType;
+import jp.co.ha.business.api.node.TokenApi;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
+import jp.co.ha.business.api.node.request.TokenRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
+import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -34,8 +39,6 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.api.BaseApi.NodeApiType;
-import jp.co.ha.web.form.BaseNodeResponse.Result;
 import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
@@ -59,6 +62,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
+    /** トークン発行API */
+    @Autowired
+    private TokenApi tokenApi;
     /** 基礎健康情報計算API */
     @Autowired
     private BasicHealthInfoCalcApi basicHealthInfoCalcApi;
@@ -83,9 +89,12 @@ public class HealthInfoRegistServiceImpl extends CommonService
     public void execute(HealthInfoRegistRequest request,
             HealthInfoRegistResponse response) throws BaseException {
 
+        // トークン発行API実施
+        TokenResponse tokenResponse = callTokenApi(request.getUserId());
+
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcResponse apiResponse = callBasicHealthInfoCalcApi(
-                request);
+                request, tokenResponse.getToken());
 
         // リクエストをEntityに変換
         HealthInfo entity = toEntity(request, apiResponse.getBasicHealthInfo());
@@ -105,6 +114,33 @@ public class HealthInfoRegistServiceImpl extends CommonService
             response.setHealthInfo(healthInfo);
         }
 
+    }
+
+    /**
+     * Token発行APIを呼び出す
+     *
+     * @param userId
+     *     ユーザID
+     * @return Token発行APIのレスポンス
+     * @throws BaseException
+     *     API通信に失敗した場合
+     */
+    private TokenResponse callTokenApi(String userId) throws BaseException {
+
+        TokenRequest request = new TokenRequest();
+        request.setUserId(userId);
+        ApiConnectInfo connectInfo = new ApiConnectInfo();
+        connectInfo.setUrlSupplier(
+                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.TOKEN.getValue());
+        TokenResponse response = tokenApi.callApi(request, connectInfo);
+
+        if (Result.SUCCESS != response.getResult()) {
+            // Token発行APIの処理が成功以外の場合
+            throw new ApiException(BusinessErrorCode.TOKEN_API_CONNECT_ERROR,
+                    response.getDetail());
+        }
+
+        return response;
     }
 
     /**
@@ -161,12 +197,14 @@ public class HealthInfoRegistServiceImpl extends CommonService
      *
      * @param request
      *     リクエスト情報
+     * @param token
+     *     トークン
      * @return 基礎健康情報計算APIレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
     private BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
-            HealthInfoRegistRequest request) throws BaseException {
+            HealthInfoRegistRequest request, String token) throws BaseException {
 
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
         BeanUtil.copy(request, apiRequest);
@@ -174,6 +212,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         ApiConnectInfo connectInfo = new ApiConnectInfo();
         connectInfo.setUrlSupplier(
                 () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.BASIC.getValue());
+        connectInfo.addHeader("X-NODE-TOKEN", token);
         BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);
 

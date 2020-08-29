@@ -54,7 +54,7 @@ public class AccountSettingController
      * Formを返す
      *
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @return AccountSettingForm
      */
     @ModelAttribute("accountSettingForm")
@@ -82,7 +82,7 @@ public class AccountSettingController
      * {@inheritDoc}
      */
     @Override
-    @GetMapping(value = "/input")
+    @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
         return getView(DashboardView.ACCOUNT_SETTING_INPUT);
     }
@@ -92,7 +92,7 @@ public class AccountSettingController
      */
     @Override
     @MultiSubmitToken(factory = true)
-    @PostMapping(value = "/confirm")
+    @PostMapping("/confirm")
     public String confirm(Model model, @Valid AccountSettingForm form,
             BindingResult result, HttpServletRequest request) throws BaseException {
 
@@ -111,7 +111,7 @@ public class AccountSettingController
      */
     @Override
     @MultiSubmitToken(check = true)
-    @PostMapping(value = "/complete")
+    @PostMapping("/complete")
     public String complete(Model model, AccountSettingForm form,
             HttpServletRequest request) throws BaseException {
 

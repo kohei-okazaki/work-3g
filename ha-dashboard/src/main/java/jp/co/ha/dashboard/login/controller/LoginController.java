@@ -78,9 +78,9 @@ public class LoginController implements BaseWebController {
      * ログイン画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @return ログイン画面
      */
     @NonAuth
@@ -96,9 +96,9 @@ public class LoginController implements BaseWebController {
      * ログアウト処理
      *
      * @param request
-     *     HTTPリクエスト
+     *     {@linkplain HttpServletRequest}
      * @param redirectAttr
-     *     リダイレクト情報
+     *     {@linkplain RedirectAttributes}
      * @return ログイン画面へリダイレクトする
      */
     @NonAuth
@@ -116,13 +116,13 @@ public class LoginController implements BaseWebController {
      * TOP画面
      *
      * @param model
-     *     Model
+     *     {@linkplain Model}
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @param form
-     *     LoginForm
+     *     {@linkplain LoginForm}
      * @param result
-     *     BindingResult
+     *     {@linkplain BindingResult}
      * @return TOP画面
      * @throws BaseException
      *     基底例外
@@ -179,9 +179,9 @@ public class LoginController implements BaseWebController {
      * TOP画面
      *
      * @param model
-     *     model
+     *     {@linkplain Model}
      * @param request
-     *     HttpServletRequest
+     *     {@linkplain HttpServletRequest}
      * @return TOP画面
      */
     @NonAuth
