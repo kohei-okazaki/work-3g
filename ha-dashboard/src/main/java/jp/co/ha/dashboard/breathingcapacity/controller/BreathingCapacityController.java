@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.breathingcapacity.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import jp.co.ha.business.component.BreathingCapacityComponent;
 import jp.co.ha.business.dto.BreathingCapacityDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.breathingcapacity.form.BreathingCapacityForm;
 import jp.co.ha.dashboard.view.DashboardView;
@@ -29,6 +31,9 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("breathingcapacity")
 public class BreathingCapacityController implements BaseWebController {
 
+    /** SessionComponent */
+    @Autowired
+    private SessionComponent sessionComponent;
     /** 肺活量計算Component */
     @Autowired
     private BreathingCapacityComponent component;
@@ -64,13 +69,15 @@ public class BreathingCapacityController implements BaseWebController {
      *     {@linkplain BreathingCapacityForm}
      * @param result
      *     {@linkplain BindingResult}
+     * @param request
+     *     {@linkplain HttpServletRequest}
      * @return 肺活量計算画面
      * @throws BaseException
      *     基底例外
      */
     @PostMapping("/index")
     public String calc(Model model, @Valid BreathingCapacityForm form,
-            BindingResult result) throws BaseException {
+            BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.BREATHING_CAPACITY_CALC);
@@ -84,7 +91,8 @@ public class BreathingCapacityController implements BaseWebController {
             destDto.setGenderType(GenderType.of(srcForm.getGender()));
         });
 
-        BreathingCapacityDto calcResult = component.calc(dto);
+        BreathingCapacityDto calcResult = component.calc(dto, sessionComponent
+                .getValue(request.getSession(), "userId", String.class).get());
         model.addAttribute("calcResult", calcResult);
 
         return getView(DashboardView.BREATHING_CAPACITY_CALC);

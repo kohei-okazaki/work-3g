@@ -20,7 +20,7 @@ import jp.co.ha.web.api.BaseApi;
 public class BreathingCapacityCalcApi
         extends BaseApi<BreathingCapacityCalcRequest, BreathingCapacityCalcResponse> {
 
-    /** NodeAPIの種別 */
+    /** 肺活量計算APIの種別 */
     private static final NodeApiType TYPE = NodeApiType.BREATHING_CAPACITY;
 
     @Override

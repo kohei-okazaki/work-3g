@@ -19,7 +19,9 @@ public enum NodeApiType implements BaseEnum {
     /** カロリー計算API */
     CALORIE("calorie", "カロリー計算API"),
     /** 肺活量計算API */
-    BREATHING_CAPACITY("breathing_capacity", "肺活量計算API");
+    BREATHING_CAPACITY("breathing_capacity", "肺活量計算API"),
+    /** トークン発行API */
+    TOKEN("token", "トークン発行API");
 
     /** 値 */
     private String value;

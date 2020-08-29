@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.calorie.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import jp.co.ha.business.component.CalorieCalcComponent;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.dashboard.calorie.form.CalorieCalcForm;
 import jp.co.ha.dashboard.view.DashboardView;
@@ -29,6 +31,9 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("caloriecalc")
 public class CalorieCalcController implements BaseWebController {
 
+    /** SessionComponent */
+    @Autowired
+    private SessionComponent sessionComponent;
     /** カロリー計算Component */
     @Autowired
     private CalorieCalcComponent calorieCalcComponent;
@@ -64,13 +69,15 @@ public class CalorieCalcController implements BaseWebController {
      *     {@linkplain CalorieCalcForm}
      * @param result
      *     {@linkplain BindingResult}
+     * @param request
+     *     {@linkplain HttpServletRequest}
      * @return カロリー計算後画面
      * @throws BaseException
      *     基底例外
      */
     @PostMapping("/index")
-    public String calc(Model model, @Valid CalorieCalcForm form, BindingResult result)
-            throws BaseException {
+    public String calc(Model model, @Valid CalorieCalcForm form, BindingResult result,
+            HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.CALORIE_CALC);
@@ -84,7 +91,8 @@ public class CalorieCalcController implements BaseWebController {
             destDto.setGenderType(GenderType.of(srcForm.getGender()));
         });
 
-        CalorieCalcDto calcResult = calorieCalcComponent.calc(dto);
+        CalorieCalcDto calcResult = calorieCalcComponent.calc(dto, sessionComponent
+                .getValue(request.getSession(), "userId", String.class).get());
         model.addAttribute("calcResult", calcResult);
 
         return getView(DashboardView.CALORIE_CALC);
