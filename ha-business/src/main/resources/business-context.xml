@@ -41,6 +41,8 @@
     <property name="sesStubFlag" value="${aws.ses.stubflag}" />
   </bean>
 
+  <bean id="jsonConfig" class="jp.co.ha.business.io.file.json.conf.JsonConfig" lazy-init="true" />
+
   <!-- CRUD -->
   <context:component-scan base-package="jp.co.ha.business.db.crud.*.impl" />
 

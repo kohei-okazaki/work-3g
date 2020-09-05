@@ -11,6 +11,7 @@
   <name>ha-pom</name>
   <packaging>pom</packaging>
   <version>1.0.0</version>
+  <url>https://repo.maven.apache.org/maven2</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -308,9 +309,11 @@
       </resource>
     </resources>
     <testResources>
+<!--
       <testResource>
         <directory>${resources.testdirectory}</directory>
       </testResource>
+ -->
       <testResource>
         <directory>${basedir}/src/test/resources</directory>
       </testResource>
@@ -358,7 +361,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
       </plugin>
     </plugins>
   </build>
