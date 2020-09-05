@@ -32,6 +32,7 @@ import jp.co.ha.common.system.SystemMemory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.db.entity.HealthInfo;
 
@@ -46,6 +47,8 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(MonthlyHealthInfoSummaryBatch.class);
+    /** S3キーの接頭辞 */
+    private static final String PREFIX_S3_KEY = "monthly/healthinfo/";
     /** 健康情報検索サービス */
     private HealthInfoSearchService searchService = BatchBeanLoader
             .getBean(HealthInfoSearchServiceImpl.class);
@@ -53,7 +56,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
     private HealthInfoProperties prop = BatchBeanLoader
             .getBean(HealthInfoProperties.class);
     /** S3のComponent */
-    private AwsS3Component component = BatchBeanLoader.getBean(AwsS3Component.class);
+    private AwsS3Component s3 = BatchBeanLoader.getBean(AwsS3Component.class);
 
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
@@ -72,8 +75,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         // 月次健康情報集計CSV
         File csv = writeCsv(targetDate, modelList);
         // S3ファイルをアップロード
-        component.putFile("healthinfo-app-local/monthly/healthinfo/" + csv.getName(),
-                csv);
+        s3.putFile(PREFIX_S3_KEY + csv.getName(), csv);
 
         LOG.info("月次健康情報集計Batch END メモリ使用量"
                 + SystemMemory.getInstance().getMemoryUsage());
@@ -152,7 +154,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
     private File writeCsv(String targetDate,
             List<MonthlyHealthInfoSummaryModel> modelList) throws BaseException {
 
-        String fileName = targetDate + ".csv";
+        String fileName = targetDate + FileExtension.CSV.getValue();
         File file = new File(prop.getMonthlySummaryBatchFilePath()
                 + FileSeparator.SYSTEM.getValue() + fileName);
         CsvConfig conf = new CsvConfigBuilder(fileName,

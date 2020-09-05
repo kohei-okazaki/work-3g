@@ -18,7 +18,7 @@ public abstract class BaseBatch {
      * 実処理を行う
      *
      * @param cmd
-     *     コマンドライン引数
+     *     {@linkplain CommandLine}
      * @return Batch結果
      * @throws BaseException
      *     基底例外
