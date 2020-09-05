@@ -1,12 +1,13 @@
 @echo off
 
 rem ------------------------------------------------------------------------
-rem maven-buildを行うbat
+rem maven build
+rem arg1:profile (ex. ec2)
 rem ------------------------------------------------------------------------
 
 cls
 
-rem iniファイルを読み込む
+rem read build.ini
 call initialize.bat
 
 
@@ -15,40 +16,52 @@ rem jar.version
 set ver=1.0.0
 echo jar.version = %ver%
 
-rem commonのjarを作成
+rem profile
+set profile=%1
+echo profile = %profile%
+if "%profile%" equ "" (
+  echo profile is invalid
+  exit /B 0
+)
+
+rem build common
 cd %BASE_DIR%\ha-common
-call mvn clean package -Dmaven.test.skip=true -Pec2
+call mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn install:install-file -Dfile=target\common-%ver%.jar -DgroupId=jp.co.ha -DartifactId=common -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
-rem dbのjarを作成
+rem build db
 cd %BASE_DIR%\ha-db
-call mvn clean package -Dmaven.test.skip=true -Pec2
+call mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn install:install-file -Dfile=target\db-%ver%.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
-rem webのjarを作成
+rem build web
 cd %BASE_DIR%\ha-web
-call mvn clean package -Dmaven.test.skip=true -Pec2
+call mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn install:install-file -Dfile=target\web-%ver%.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
-rem businessのjarを作成
+rem build business
 cd %BASE_DIR%\ha-business
-call mvn clean package -Dmaven.test.skip=true -Pec2
+call mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn install:install-file -Dfile=target\business-%ver%.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
 
-rem apiのwarを作成
+rem build batch
+cd %BASE_DIR%\ha-batch
+call mvn clean package -Dmaven.test.skip=true -P%profile%
+call mvn install:install-file -Dfile=target\batch-%ver%.jar -DgroupId=jp.co.ha -DartifactId=batch -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
+
+
+rem build api
 cd %BASE_DIR%\ha-api
-call mvn clean package -Dmaven.test.skip=true -Pec2
-rem call mvn install:install-file -Dfile=target\business-%ver%.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
+call mvn clean package -Dmaven.test.skip=true -P%profile%
 
 
-rem dashboardのwarを作成
+rem build dashboard
 cd %BASE_DIR%\ha-dashboard
-call mvn clean package -Dmaven.test.skip=true -Pec2
-rem call mvn install:install-file -Dfile=target\business-%ver%.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
+call mvn clean package -Dmaven.test.skip=true -P%profile%
 
 rem call deploy.bat
 
