@@ -7,18 +7,15 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * 健康情報登録情報
+ * 健康情報一括登録情報JSONファイル
  *
  * @version 1.0.0
  */
-public class HealthInfoRegistData {
+public class HealthInfoRegistFileDto {
 
     /** ユーザID */
-    @JsonProperty("userid")
+    @JsonProperty("userId")
     private String userId;
-    /** APIキー */
-    @JsonProperty("apiKey")
-    private String apiKey;
     /** 健康情報要求情報リスト */
     @JsonProperty("healthInfoRequestDataList")
     private List<HealthInfoRequestData> healthInfoRequestDataList = new ArrayList<>();
@@ -40,25 +37,6 @@ public class HealthInfoRegistData {
      */
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    /**
-     * apiKeyを返す
-     *
-     * @return apiKey
-     */
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    /**
-     * apiKeyを設定する
-     *
-     * @param apiKey
-     *     APIキー
-     */
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
     }
 
     /**
@@ -89,8 +67,10 @@ public class HealthInfoRegistData {
     public static class HealthInfoRequestData {
 
         /** 身長 */
+        @JsonProperty("height")
         private BigDecimal height;
         /** 体重 */
+        @JsonProperty("weight")
         private BigDecimal weight;
 
         /**

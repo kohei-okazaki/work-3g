@@ -35,6 +35,15 @@ public class ValidateErrorResult {
     }
 
     /**
+     * エラー情報リストを返す
+     *
+     * @return errorList
+     */
+    public List<ValidateError> getErrorList() {
+        return errorList;
+    }
+
+    /**
      * 妥当性チェックエラーを返す
      *
      * @return ValidateError

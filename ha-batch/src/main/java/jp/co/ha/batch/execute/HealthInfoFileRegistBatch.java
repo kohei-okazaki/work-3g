@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.cli.Options;
-import org.springframework.stereotype.Component;
 
-import jp.co.ha.batch.dto.HealthInfoRegistData;
+import jp.co.ha.batch.dto.HealthInfoRegistFileDto;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
@@ -37,7 +36,8 @@ import jp.co.ha.web.api.ApiConnectInfo;
  *
  * @version 1.0.0
  */
-@Component("healthInfoFileRegistBatch")
+// Componentをつけるとログが出続ける
+// @Component("healthInfoFileRegistBatch")
 public class HealthInfoFileRegistBatch extends BaseBatch {
 
     /** LOG */
@@ -68,7 +68,8 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
         JsonReader reader = new JsonReader();
 
         for (File file : FileUtil.getFileList(prop.getRegistBatchFilePath())) {
-            HealthInfoRegistData dto = reader.read(file, HealthInfoRegistData.class);
+            HealthInfoRegistFileDto dto = reader.read(file,
+                    HealthInfoRegistFileDto.class);
             List<HealthInfoRegistRequest> list = dto.getHealthInfoRequestDataList()
                     .stream()
                     .map(e -> {
@@ -86,11 +87,12 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
             // 妥当性チェックを行う
             ValidateErrorResult result = validator.validate(request);
-            if (result.hasError()) {
-                ValidateError error = result.getFirst();
-                throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
-                        error.getMessage() + " " + error.getName() + "="
-                                + error.getValue());
+            for (ValidateError error : result.getErrorList()) {
+                if (!"apiKey".equals(error.getName())) {
+                    throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
+                            error.getMessage() + ", " + error.getName() + "="
+                                    + error.getValue());
+                }
             }
 
             ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
