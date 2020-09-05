@@ -18,6 +18,8 @@ public class HealthInfoProperties {
     private String healthinfoNodeApiUrl;
     /** 健康情報APIの基底URL */
     private String healthInfoApiUrl;
+    /** 月次健康情報集計バッチCSV格納パス */
+    private String monthlySummaryBatchFilePath;
 
     /**
      * referenceFilePathを返す
@@ -93,6 +95,25 @@ public class HealthInfoProperties {
      */
     public void setHealthInfoApiUrl(String healthInfoApiUrl) {
         this.healthInfoApiUrl = healthInfoApiUrl;
+    }
+
+    /**
+     * monthlySummaryBatchFilePathを返す
+     *
+     * @return monthlySummaryBatchFilePath
+     */
+    public String getMonthlySummaryBatchFilePath() {
+        return monthlySummaryBatchFilePath;
+    }
+
+    /**
+     * monthlySummaryBatchFilePathを設定する
+     *
+     * @param monthlySummaryBatchFilePath
+     *     月次健康情報集計バッチCSV格納パス
+     */
+    public void setMonthlySummaryBatchFilePath(String monthlySummaryBatchFilePath) {
+        this.monthlySummaryBatchFilePath = monthlySummaryBatchFilePath;
     }
 
 }
