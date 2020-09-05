@@ -23,7 +23,7 @@ public interface HealthInfoSearchService {
      * @param toHealthInfoRegDate
      *     YYYYMMDD
      * @param selectOption
-     *     検索オプション
+     *     {@linkplain SelectOption}
      * @return 健康情報のリスト
      */
     List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId,
@@ -61,9 +61,23 @@ public interface HealthInfoSearchService {
      * @param userId
      *     ユーザID
      * @param selectOption
-     *     検索オプション
+     *     {@linkplain SelectOption}
      * @return 健康情報リスト
      */
     List<HealthInfo> findByUserId(String userId, SelectOption selectOption);
+
+    /**
+     * 指定した開始日時から終了日時の間の健康情報リストを返す
+     *
+     * @param fromHealthInfoRegDate
+     *     開始日時
+     * @param toHealthInfoRegDate
+     *     終了日時
+     * @param selectOption
+     *     {@linkplain SelectOption}
+     * @return 健康情報リスト
+     */
+    List<HealthInfo> findByBetweenHealthInfoRegDate(Date fromHealthInfoRegDate,
+            Date toHealthInfoRegDate, SelectOption selectOption);
 
 }

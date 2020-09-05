@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.springframework.context.MessageSource;
 
@@ -25,22 +28,24 @@ import jp.co.ha.common.util.DateUtil;
  */
 public class BatchInvoker {
 
-    /** LOG */
+    /** {@linkplain Logger} */
     private static final Logger LOG = LoggerFactory.getLogger(BatchInvoker.class);
-    /** MessageSource */
+    /** {@linkplain MessageSource} */
     private static final MessageSource MESSAGE_SOURCE = BatchBeanLoader
             .getBean(MessageSource.class);
-    /** ハッシュ生成関数 */
+    /** {@linkplain HashEncoder} */
     private static final HashEncoder HASH_ENCODER = BatchBeanLoader
             .getBean(Sha256HashEncoder.class);
     /** パッケージ名の接頭語 */
     private static final String PACKAGE_PREFIX = "jp.co.ha.batch.execute.";
+    /** {@linkplain HelpFormatter} */
+    private static final HelpFormatter HELP_FORMATTER = new HelpFormatter();
 
     /**
      * invoke処理
      *
      * @param args
-     *     バッチ引数(第一引数：Batch名第二引数以降：オプション引数)
+     *     バッチ引数(第一引数：Batch名、第二引数以降：オプション引数)
      */
     @SuppressWarnings("unchecked")
     public static void invoke(String[] args) {
@@ -48,7 +53,7 @@ public class BatchInvoker {
         LOG.debug("■■■■■ Batch処理開始 ■■■■■");
 
         // Beanの初期化を行う
-        initializeBean();
+        BatchBeanLoader.initializeBean();
 
         String batchName = PACKAGE_PREFIX + args[0];
         BatchResult batchResult = BatchResult.FAILURE;
@@ -71,13 +76,22 @@ public class BatchInvoker {
                     optionList.add(args[i]);
                 }
             }
+
             // getOptions 実行
-            Method getOptions = batch.getMethod("getOptions", List.class);
-            Options options = (Options) getOptions.invoke(batchInstance, optionList);
+            Method getOptions = batch.getMethod("getOptions");
+            Options options = (Options) getOptions.invoke(batchInstance);
+
+            // オプションのヘルプ情報を表示する。
+            HELP_FORMATTER.printHelp("[opts]", options);
+
+            // コマンドライン解析
+            String[] a = optionList.toArray(new String[0]);
+            CommandLine cmd = new DefaultParser().parse(options,
+                    optionList.toArray(new String[0]));
 
             // execute 実行
-            Method executeMethod = batch.getMethod("execute");
-            batchResult = (BatchResult) executeMethod.invoke(batchInstance);
+            Method executeMethod = batch.getMethod("execute", CommandLine.class);
+            batchResult = (BatchResult) executeMethod.invoke(batchInstance, cmd);
 
         } catch (Exception e) {
             LOG.error(batchName + "が失敗しました", e);
@@ -87,13 +101,6 @@ public class BatchInvoker {
         }
 
         LOG.debug("■■■■■ Batch処理終了 ■■■■■");
-    }
-
-    /**
-     * Beanを初期化する
-     */
-    private static void initializeBean() {
-        BatchBeanLoader.initializeBean();
     }
 
 }
