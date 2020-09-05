@@ -82,7 +82,9 @@ public class BatchBeanLoader {
         }
 
         // XMLから取得
-        String[] xmls = new String[] { "classpath:batch-context.xml" };
+        String[] xmls = new String[] { "classpath:common-context.xml",
+                "classpath:db-context.xml", "classpath:web-context.xml",
+                "classpath:business-context.xml", "classpath:batch-context.xml" };
         ClassPathXmlApplicationContext cxt = new ClassPathXmlApplicationContext(xmls);
         cxt.refresh();
         context = cxt;

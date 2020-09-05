@@ -37,10 +37,10 @@ public abstract class CsvReader<T extends BaseCsvModel> {
     private static final Logger LOG = LoggerFactory.getLogger(CsvReader.class);
 
     /**
-     * 指定された入力Streamを読み込み、CSVモデルリストを返す
+     * 指定された{@linkplain InputStream}を読み込み、CSVモデルリストを返す
      *
      * @param is
-     *     入力Stream
+     *     {@linkplain InputStream}
      * @param charset
      *     文字コード
      * @return CSVモデルリスト
@@ -68,12 +68,12 @@ public abstract class CsvReader<T extends BaseCsvModel> {
     }
 
     /**
-     * 指定されたアップロードファイルを読み込み、CSVモデルリストを返す
+     * 指定された{@linkplain MultipartFile}を読み込み、CSVモデルリストを返す
      *
      * @param uploadFile
-     *     アップロードファイル
+     *     {@linkplain MultipartFile}
      * @param charset
-     *     Charset
+     *     文字コード
      * @return CSVモデルリスト
      * @throws BaseException
      *     ファイルの読込に失敗した場合
