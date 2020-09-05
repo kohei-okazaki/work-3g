@@ -6,185 +6,82 @@
 
 # 基底ディレクトリ
 BASE_DIR="/Applications/Eclipse_2019-03.app/Contents/work-3g"
+
+# プロジェクトディレクトリ
 COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
 WEB_DIR=${BASE_DIR}"/ha-web"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
+BATCH_DIR=${BASE_DIR}"/ha-build"
 API_DIR=${BASE_DIR}"/ha-api"
 DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard"
 
-# 成果物ディレクトリ
-COMMON_TARGET_DIR=${BASE_DIR}"/ha-common/target"
-DB_TARGET_DIR=${BASE_DIR}"/ha-db/target"
-WEB_TARGET_DIR=${BASE_DIR}"/ha-web/target"
-BUSINESS_TARGET_DIR=${BASE_DIR}"/ha-business/target"
+echo "------------------------------------------------------------------------"
+echo "START ${basename}"
+echo "------------------------------------------------------------------------"
 
-# コピー先ディレクトリ
-DB_LIB_DIR=${BASE_DIR}"/ha-db/src/main/webapp/WEB-INF/lib"
-WEB_LIB_DIR=${BASE_DIR}"/ha-web/src/main/webapp/WEB-INF/lib"
-BUSINESS_LIB_DIR=${BASE_DIR}"/ha-business/src/main/webapp/WEB-INF/lib"
-API_LIB_DIR=${BASE_DIR}"/ha-api/src/main/webapp/WEB-INF/lib"
-DASHBOARD_LIB_DIR=${BASE_DIR}"/ha-dashboard/src/main/webapp/WEB-INF/lib"
-
-
-# libディレクトリ確認用変数
-CHECK_DB_DIR=${BASE_DIR}"/ha-db/src/main/webapp/WEB-INF"
-CHECK_WEB_DIR=${BASE_DIR}"/ha-web/src/main/webapp/WEB-INF"
-CHECK_BUSINESS_DIR=${BASE_DIR}"/ha-business/src/main/webapp/WEB-INF"
-CHECK_API_DIR=${BASE_DIR}"/ha-api/src/main/webapp/WEB-INF"
-CHECK_DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard/src/main/webapp/WEB-INF"
-
-
-echo "--------------------"
-echo "START maven-build.sh"
-echo "--------------------"
-
-JAR_VERSION="1.0"
+# jar version
+JAR_VERSION="1.0.0"
+# build profile
+PROFILE="ec2"
 
 ########################################
-# common jarを作成
+# build common
 ########################################
 cd ${COMMON_DIR}
-mvn package
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 mvn install:install-file -Dfile=target/ha-common-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=common -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
+
 ########################################
-# db jarを作成
+# build db
 ########################################
 cd ${DB_DIR}
-mvn package
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 mvn install:install-file -Dfile=target/ha-db-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
-########################################
-# web jarを作成
-########################################
-cd ${BUSINESS_DIR}
-mvn package
-mvn install:install-file -Dfile=target/ha-web-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 ########################################
-# business jarを作成
+# build web
+########################################
+cd ${WEB_DIR}
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
+mvn install:install-file -Dfile=target/ha-web-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+
+
+########################################
+# build business
 ########################################
 cd ${BUSINESS_DIR}
-mvn package
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
-# libディレクトリを確認する
-cd ${CHECK_DB_DIR}
-if [ ! -e "lib" ] ; then
-  mkdir lib
-fi
+########################################
+# build batch
+########################################
+cd ${BATCH_DIR}
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
+mvn install:install-file -Dfile=target/ha-batch-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=batch -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
-cd ${CHECK_WEB_DIR}
-if [ ! -e "lib" ] ; then
-  mkdir lib
-fi
-
-cd ${CHECK_BUSINESS_DIR}
-if [ ! -e "lib" ] ; then
-  mkdir lib
-fi
-
-cd ${CHECK_API_DIR}
-if [ ! -e "lib" ] ; then
-  mkdir lib
-fi
-
-cd ${CHECK_DASHBOARD_DIR}
-if [ ! -e "lib" ] ; then
-  mkdir lib
-fi
 
 ########################################
-# deploy common
+# build api
 ########################################
-cd ${COMMON_TARGET_DIR}
-cp *.jar ${DB_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${DB_LIB_DIR}
-fi
+cd ${API_DIR}
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 
-cp *.jar ${WEB_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${WEB_LIB_DIR}
-fi
-
-cp *.jar ${BUSINESS_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${BUSINESS_LIB_DIR}
-fi
-
-cp *.jar ${API_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${API_LIB_DIR}
-fi
-
-cp *.jar ${DASHBOARD_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
-fi
 
 ########################################
-# deploy db
+# build dashboard
 ########################################
-cd ${DB_TARGET_DIR}
-cp *.jar ${BUSINESS_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${BUSINESS_LIB_DIR}
-fi
-
-cp *.jar ${WEB_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${WEB_LIB_DIR}
-fi
-
-cp *.jar ${API_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${API_LIB_DIR}
-fi
-
-cp *.jar ${DASHBOARD_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
-fi
-
-########################################
-# deploy web
-########################################
-cd ${WEB_TARGET_DIR}
-cp *.jar ${API_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${API_LIB_DIR}
-fi
-
-cp *.jar ${DASHBOARD_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
-fi
-
-########################################
-# deploy business
-########################################
-cd ${BUSINESS_TARGET_DIR}
-cp *.jar ${WEB_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${WEB_LIB_DIR}
-fi
-
-cp *.jar ${API_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${API_LIB_DIR}
-fi
-
-cp *.jar ${DASHBOARD_LIB_DIR}
-if [ $? != "0" ] ; then
-  echo "コピーに失敗しました. to : "${DASHBOARD_LIB_DIR}
-fi
+cd ${DASHBOARD_DIR}
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 
 
-echo "------------------"
-echo "END maven-build.sh"
-echo "------------------"
-
+# 元のshellのディレクトリに戻る
 cd ${BASE_DIR}"/ha-build/shell"
+
+echo "------------------------------------------------------------------------"
+echo "END ${basename}"
+echo "------------------------------------------------------------------------"
