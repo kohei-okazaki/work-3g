@@ -1,7 +1,6 @@
 package jp.co.ha.batch.execute;
 
-import java.util.List;
-
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 
 import jp.co.ha.batch.type.BatchResult;
@@ -18,19 +17,19 @@ public abstract class BaseBatch {
     /**
      * 実処理を行う
      *
+     * @param cmd
+     *     {@linkplain CommandLine}
      * @return Batch結果
      * @throws BaseException
      *     基底例外
      */
-    protected abstract BatchResult execute() throws BaseException;
+    protected abstract BatchResult execute(CommandLine cmd) throws BaseException;
 
     /**
-     * オプションを取得
+     * {@linkplain Options}を返す
      *
-     * @param optionList
-     *     オプションリスト
      * @return Options
      */
-    protected abstract Options getOptions(List<String> optionList);
+    protected abstract Options getOptions();
 
 }

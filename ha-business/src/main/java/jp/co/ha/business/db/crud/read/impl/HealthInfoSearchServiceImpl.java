@@ -103,4 +103,20 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         return mapper.selectByExample(example);
     }
 
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<HealthInfo> findByBetweenHealthInfoRegDate(Date fromHealthInfoRegDate,
+            Date toHealthInfoRegDate, SelectOption selectOption) {
+
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate,
+                toHealthInfoRegDate);
+
+        // ソート処理
+        example.setOrderByClause(selectOption.getOrderBy());
+        return mapper.selectByExample(example);
+    }
+
 }

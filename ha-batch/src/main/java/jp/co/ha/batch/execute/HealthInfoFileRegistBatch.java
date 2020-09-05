@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 
 import jp.co.ha.batch.dto.HealthInfoRegistFileDto;
@@ -60,7 +61,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
      * {@inheritDoc}
      */
     @Override
-    public BatchResult execute() throws BaseException {
+    public BatchResult execute(CommandLine cmd) throws BaseException {
 
         LOG.info("健康情報ファイル登録Batch START メモリ使用量"
                 + SystemMemory.getInstance().getMemoryUsage());
@@ -113,7 +114,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
      * {@inheritDoc}
      */
     @Override
-    public Options getOptions(List<String> optionList) {
+    public Options getOptions() {
         Options options = new Options();
         return options;
     }

@@ -43,6 +43,14 @@ if not exist %BAT_REG_DIR% (
   mkdir "healthInfoRegist"
 )
 
+rem 3. 月次健康情報集計バッチの一時保存ディレクトリ
+set MONTHY_SUMMARY_DIR=%DATA_DIR%"\monthly"
+if not exist %MONTHY_SUMMARY_DIR% (
+  rem ディレクトリが存在しない場合
+  cd %DATA_DIR%
+  mkdir "monthly"
+)
+
 echo ------------------------------------------------------------------------
 echo END develop.bat
 echo ------------------------------------------------------------------------

@@ -29,7 +29,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
      * @param conf
      *     CSV設定情報
      * @param pw
-     *     出力用PrintWriter
+     *     {@linkplain PrintWriter}
      */
     public ReferenceCsvWriter(CsvConfig conf, PrintWriter pw) {
         super(conf, pw);
