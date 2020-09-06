@@ -2,9 +2,6 @@ package jp.co.ha.common.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.function.BiFunction;
@@ -61,7 +58,9 @@ public class DateUtil {
      */
     public static Date toDate(String strDate, DateFormatType format) {
         try {
-            return new SimpleDateFormat(format.getValue()).parse(strDate);
+            SimpleDateFormat sdf = new SimpleDateFormat(format.getValue());
+            sdf.setLenient(false);
+            return sdf.parse(strDate);
         } catch (ParseException e) {
             LOG.warn("指定された日付のフォーマットが不正です format -> " + format.getValue(), e);
             return null;
@@ -272,12 +271,8 @@ public class DateUtil {
      * @return 判定結果
      */
     public static boolean isDate(String strDate, DateFormatType formatType) {
-        try {
-            LocalDate.parse(strDate, DateTimeFormatter.ofPattern(formatType.getValue()));
-            return true;
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+        return toDate(strDate, formatType) != null;
+
     }
 
     /**
@@ -304,9 +299,9 @@ public class DateUtil {
      */
     public static enum DateFormatType implements BaseEnum {
 
-        /** YYYY/MM/DD */
+        /** YYYY/MM */
         YYYYMM("yyyy/MM"),
-        /** YYYYMMDD */
+        /** YYYYMM */
         YYYYMM_NOSEP("yyyyMM"),
         /** YYYY/MM/DD */
         YYYYMMDD("yyyy/MM/dd"),
