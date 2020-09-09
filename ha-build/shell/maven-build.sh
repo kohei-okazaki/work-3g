@@ -12,25 +12,31 @@ COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
 WEB_DIR=${BASE_DIR}"/ha-web"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
-BATCH_DIR=${BASE_DIR}"/ha-build"
+BATCH_DIR=${BASE_DIR}"/ha-batch"
 API_DIR=${BASE_DIR}"/ha-api"
 DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard"
 
 echo "------------------------------------------------------------------------"
-echo "START ${basename}"
+echo "START $0"
 echo "------------------------------------------------------------------------"
+
+# arg check
+if [ $# -ne 1 ]; then
+  echo "profile is not found";
+  exit 1;
+fi
 
 # jar version
 JAR_VERSION="1.0.0"
 # build profile
-PROFILE="ec2"
+PROFILE=$1
 
 ########################################
 # build common
 ########################################
 cd ${COMMON_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/ha-common-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=common -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/common-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=common -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################
@@ -38,7 +44,7 @@ mvn install:install-file -Dfile=target/ha-common-${JAR_VERSION}.jar -DgroupId=jp
 ########################################
 cd ${DB_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/ha-db-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/db-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################
@@ -46,7 +52,7 @@ mvn install:install-file -Dfile=target/ha-db-${JAR_VERSION}.jar -DgroupId=jp.co.
 ########################################
 cd ${WEB_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/ha-web-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/web-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################
@@ -54,7 +60,7 @@ mvn install:install-file -Dfile=target/ha-web-${JAR_VERSION}.jar -DgroupId=jp.co
 ########################################
 cd ${BUSINESS_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/business-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################
@@ -62,7 +68,7 @@ mvn install:install-file -Dfile=target/ha-business-${JAR_VERSION}.jar -DgroupId=
 ########################################
 cd ${BATCH_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/ha-batch-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=batch -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile=target/batch-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=batch -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################
@@ -83,5 +89,5 @@ mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 cd ${BASE_DIR}"/ha-build/shell"
 
 echo "------------------------------------------------------------------------"
-echo "END ${basename}"
+echo "END $0"
 echo "------------------------------------------------------------------------"
