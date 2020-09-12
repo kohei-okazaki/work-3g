@@ -14,6 +14,7 @@ import org.springframework.context.MessageSource;
 import jp.co.ha.batch.execute.BaseBatch;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.log.Logger;
@@ -86,7 +87,6 @@ public class BatchInvoker {
             HELP_FORMATTER.printHelp("[opts]", options);
 
             // コマンドライン解析
-            String[] a = optionList.toArray(new String[0]);
             CommandLine cmd = new DefaultParser().parse(options,
                     optionList.toArray(new String[0]));
 
@@ -94,16 +94,58 @@ public class BatchInvoker {
             Method executeMethod = batch.getMethod("execute", CommandLine.class);
             batchResult = (BatchResult) executeMethod.invoke(batchInstance, cmd);
 
-        } catch (BaseException e) {
-            LOG.error(batchName + "が失敗しました", e);
         } catch (Exception e) {
-            LOG.error(batchName + "が失敗しました", e);
+            handleException(e);
         } finally {
             LOG.info(MESSAGE_SOURCE.getMessage(batchResult.getComment(), null,
                     Locale.getDefault()));
         }
 
         LOG.debug("■■■■■ Batch処理終了 ■■■■■");
+    }
+
+    /**
+     * 例外処理を行う
+     * 
+     * @param e
+     *     例外
+     */
+    private static void handleException(Exception e) {
+        String detail;
+        String errorCode;
+        StringBuilder body = new StringBuilder();
+        if (e instanceof BaseException) {
+            BaseException be = (BaseException) e;
+            detail = be.getDetail();
+            errorCode = be.getErrorCode().getOuterErrorCode();
+        } else {
+            // 予期せぬ例外にする
+            detail = MESSAGE_SOURCE.getMessage(
+                    CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
+                    Locale.getDefault());
+            errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
+        }
+
+        String errorMessage = body.append("(").append(errorCode).append(")")
+                .append(detail).toString();
+
+        if (e instanceof BaseException) {
+            BaseException be = (BaseException) e;
+            switch (be.getErrorCode().getLogLevel()) {
+            case ERROR:
+                LOG.error(errorMessage, be);
+                break;
+            case WARN:
+                LOG.warn(errorMessage, be);
+                break;
+            default:
+                break;
+            }
+        } else {
+            // 予期せぬエラー
+            LOG.error(errorMessage, e);
+        }
+
     }
 
 }

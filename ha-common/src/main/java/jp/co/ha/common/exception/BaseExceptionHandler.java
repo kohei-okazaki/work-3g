@@ -3,7 +3,6 @@ package jp.co.ha.common.exception;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
@@ -28,8 +27,7 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
 
         if (e instanceof BaseException) {
             BaseException be = (BaseException) e;
-            LogLevel level = be.getErrorCode().getLogLevel();
-            switch (level) {
+            switch (be.getErrorCode().getLogLevel()) {
             case ERROR:
                 LOG.error(errorMessage, be);
                 break;
