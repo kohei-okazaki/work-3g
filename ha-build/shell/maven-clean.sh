@@ -12,7 +12,7 @@ COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
 WEB_DIR=${BASE_DIR}"/ha-web"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
-BATCH_DIR=${BASE_DIR}"/ha-build"
+BATCH_DIR=${BASE_DIR}"/ha-batch"
 API_DIR=${BASE_DIR}"/ha-api"
 DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard"
 
