@@ -7,6 +7,7 @@ import java.util.Date;
 import org.junit.Test;
 
 import jp.co.ha.common.BaseCommonTest;
+import jp.co.ha.common.util.DateUtil.DateFormatType;
 
 /**
  * {@linkplain DateUtil} のjUnit
@@ -138,6 +139,29 @@ public class DateUtilTest extends BaseCommonTest {
             Date date1 = DateUtil.toDate("2000/01/01 23:59:59");
             Date date2 = DateUtil.toEndDate(DateUtil.toDate("2000/01/01 12:34:56"));
             assertEquals(date1, date2);
+        }
+    }
+
+    /**
+     * {@linkplain DateUtil#isDate(String, DateFormatType)}
+     */
+    @Test
+    public void testIsDate() {
+        {
+            String date = "2020101";
+            assertFalse("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP));
+        }
+        {
+            String date = "202009";
+            assertTrue("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP));
+        }
+        {
+            String date = "2020/09";
+            assertTrue("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMM));
+        }
+        {
+            String date = "2020/09/01";
+            assertTrue("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMMDD));
         }
     }
 }
