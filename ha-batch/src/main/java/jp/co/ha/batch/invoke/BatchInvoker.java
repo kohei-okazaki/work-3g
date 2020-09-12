@@ -11,10 +11,9 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.springframework.context.MessageSource;
 
+import jp.co.ha.batch.exception.BatchExceptionHandler;
 import jp.co.ha.batch.execute.BaseBatch;
 import jp.co.ha.batch.type.BatchResult;
-import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.log.Logger;
@@ -43,6 +42,9 @@ public class BatchInvoker {
     private static final String PACKAGE_PREFIX = "jp.co.ha.batch.execute.";
     /** {@linkplain HelpFormatter} */
     private static final HelpFormatter HELP_FORMATTER = new HelpFormatter();
+    /** 例外処理クラス */
+    private static final BatchExceptionHandler EXCEPTION_HANDLER = BatchBeanLoader
+            .getBean(BatchExceptionHandler.class);
 
     /**
      * invoke処理
@@ -99,7 +101,7 @@ public class BatchInvoker {
             batchResult = (BatchResult) executeMethod.invoke(batchInstance, cmd);
 
         } catch (Exception e) {
-            handleException(e);
+            EXCEPTION_HANDLER.handleException(e);
         } finally {
             LOG.info(MESSAGE_SOURCE.getMessage(batchResult.getComment(), null,
                     Locale.getDefault()));
@@ -109,50 +111,6 @@ public class BatchInvoker {
                 + SystemMemory.getInstance().getMemoryUsage());
 
         LOG.debug("■■■■■ Batch処理終了 ■■■■■");
-    }
-
-    /**
-     * 例外処理を行う
-     *
-     * @param e
-     *     例外
-     */
-    private static void handleException(Exception e) {
-        String detail;
-        String errorCode;
-        StringBuilder body = new StringBuilder();
-        if (e instanceof BaseException) {
-            BaseException be = (BaseException) e;
-            detail = be.getDetail();
-            errorCode = be.getErrorCode().getOuterErrorCode();
-        } else {
-            // 予期せぬ例外にする
-            detail = MESSAGE_SOURCE.getMessage(
-                    CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
-                    Locale.getDefault());
-            errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
-        }
-
-        String errorMessage = body.append("(").append(errorCode).append(")")
-                .append(detail).toString();
-
-        if (e instanceof BaseException) {
-            BaseException be = (BaseException) e;
-            switch (be.getErrorCode().getLogLevel()) {
-            case ERROR:
-                LOG.error(errorMessage, be);
-                break;
-            case WARN:
-                LOG.warn(errorMessage, be);
-                break;
-            default:
-                break;
-            }
-        } else {
-            // 予期せぬエラー
-            LOG.error(errorMessage, e);
-        }
-
     }
 
 }

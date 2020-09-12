@@ -5,7 +5,7 @@ package jp.co.ha.common.exception;
  *
  * @version 1.0.0
  */
-public abstract class BaseException extends Exception {
+public abstract class BaseException extends Exception implements BaseAppError {
 
     /** シリアルバージョンUID */
     private static final long serialVersionUID = -5399990606605542371L;
@@ -66,20 +66,12 @@ public abstract class BaseException extends Exception {
         this.detail = detail;
     }
 
-    /**
-     * {@linkplain BaseErrorCode}を返す
-     *
-     * @return errorCode
-     */
+    @Override
     public BaseErrorCode getErrorCode() {
         return errorCode;
     }
 
-    /**
-     * detailを返す
-     *
-     * @return detail
-     */
+    @Override
     public String getDetail() {
         return detail;
     }
