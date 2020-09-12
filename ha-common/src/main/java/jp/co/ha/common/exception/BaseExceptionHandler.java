@@ -1,9 +1,11 @@
 package jp.co.ha.common.exception;
 
-import org.springframework.web.servlet.HandlerExceptionResolver;
+import java.util.Locale;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.log.LoggerFactory;
 
 /**
@@ -11,10 +13,35 @@ import jp.co.ha.common.log.LoggerFactory;
  *
  * @version 1.0.0
  */
-public interface BaseExceptionHandler extends HandlerExceptionResolver {
+public abstract class BaseExceptionHandler {
 
     /** LOG */
-    static final Logger LOG = LoggerFactory.getLogger(BaseExceptionHandler.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BaseExceptionHandler.class);
+    /** {@linkplain MessageSource} */
+    @Autowired
+    private MessageSource messageSource;
+
+    /**
+     * アプリ例外を返す
+     *
+     * @param e
+     *     例外
+     * @return アプリ例外
+     */
+    protected BaseAppError getAppError(Exception e) {
+
+        BaseAppError error = null;
+        if (e instanceof BaseAppError) {
+            error = (BaseAppError) e;
+        } else {
+            BaseErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
+            String detail = messageSource.getMessage(errorCode.getOuterErrorCode(), null,
+                    Locale.getDefault());
+            error = new SystemException(errorCode, detail, e);
+        }
+
+        return error;
+    }
 
     /**
      * 指定したエラーメッセージのログを出力する
@@ -24,12 +51,11 @@ public interface BaseExceptionHandler extends HandlerExceptionResolver {
      * @param e
      *     例外クラス
      */
-    default void outLog(String errorMessage, Exception e) {
+    protected void outLog(String errorMessage, Exception e) {
 
         if (e instanceof BaseException) {
             BaseException be = (BaseException) e;
-            LogLevel level = be.getErrorCode().getLogLevel();
-            switch (level) {
+            switch (be.getErrorCode().getLogLevel()) {
             case ERROR:
                 LOG.error(errorMessage, be);
                 break;

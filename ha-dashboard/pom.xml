@@ -12,7 +12,6 @@
   <name>ha-dashboard</name>
   <packaging>war</packaging>
 
-
   <parent>
     <groupId>jp.co.ha</groupId>
     <artifactId>pom</artifactId>
@@ -44,7 +43,7 @@
   </dependencies>
 
   <build>
-    <finalName>ha-dashboard</finalName>
+    <finalName>dashboard-${project.version}</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

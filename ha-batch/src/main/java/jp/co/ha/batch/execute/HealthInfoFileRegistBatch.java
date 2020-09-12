@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.dto.HealthInfoRegistFileDto;
 import jp.co.ha.batch.type.BatchResult;
@@ -14,16 +16,11 @@ import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.system.BatchBeanLoader;
-import jp.co.ha.common.system.SystemMemory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
@@ -37,25 +34,21 @@ import jp.co.ha.web.api.ApiConnectInfo;
  *
  * @version 1.0.0
  */
-// Componentをつけるとログが出続ける
-// @Component("healthInfoFileRegistBatch")
+@Component("healthInfoFileRegistBatch")
 public class HealthInfoFileRegistBatch extends BaseBatch {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(HealthInfoFileRegistBatch.class);
     /** 健康情報設定ファイル */
-    private HealthInfoProperties prop = BatchBeanLoader
-            .getBean(HealthInfoProperties.class);
+    @Autowired
+    private HealthInfoProperties prop;
     /** 健康情報登録API */
-    private HealthInfoRegistApi api = BatchBeanLoader.getBean(HealthInfoRegistApi.class);
+    @Autowired
+    private HealthInfoRegistApi api;
     /** アカウント検索サービス */
-    private AccountSearchService accountSearchService = BatchBeanLoader
-            .getBean(AccountSearchServiceImpl.class);
+    @Autowired
+    private AccountSearchService accountSearchService;
     /** 妥当性チェック */
-    @SuppressWarnings("unchecked")
-    private BeanValidator<HealthInfoRegistRequest> validator = BatchBeanLoader
-            .getBean(BeanValidator.class);
+    @Autowired
+    private BeanValidator<HealthInfoRegistRequest> validator;
 
     /**
      * {@inheritDoc}
@@ -63,8 +56,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
 
-        LOG.info("健康情報ファイル登録Batch START メモリ使用量"
-                + SystemMemory.getInstance().getMemoryUsage());
         List<HealthInfoRegistRequest> requestList = new ArrayList<>();
         JsonReader reader = new JsonReader();
 
@@ -105,8 +96,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
             api.callApi(request, apiConnectInfo);
         }
 
-        LOG.info("健康情報ファイル登録Batch END メモリ使用量"
-                + SystemMemory.getInstance().getMemoryUsage());
         return BatchResult.SUCCESS;
     }
 

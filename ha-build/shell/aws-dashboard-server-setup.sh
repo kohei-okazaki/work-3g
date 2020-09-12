@@ -8,7 +8,6 @@
 ##########################################################################
 LOG_DIR=/var/log
 APP_LOG_DIR=$LOG_DIR/app
-DASHBOARD_LOG=dashboard.log
 APP_BASE_DIR=/home/admin
 APP_DATA_DIR=$APP_BASE_DIR/data
 HEALTH_INFO_REF_DIR=$APP_DATA_DIR/healthInfoReference
@@ -18,9 +17,6 @@ HEALTH_INFO_REF_DIR=$APP_DATA_DIR/healthInfoReference
 ##########################################################################
 cd $LOG_DIR
 sudo mkdir -m 777 app
-cd $APP_LOG_DIR
-touch $DASHBOARD_LOG
-chmod 777 $DASHBOARD_LOG
 
 ##########################################################################
 # 2 sysdate setup

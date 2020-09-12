@@ -17,6 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>1.8</java-version>
     <org.springframework-version>5.2.8.RELEASE</org.springframework-version>
+    <com.amazonaws-version>1.11.831</com.amazonaws-version>
     <org.aspectj-version>1.9.6</org.aspectj-version>
     <org.slf4j-version>1.7.30</org.slf4j-version>
     <org.logback-version>1.2.3</org.logback-version>
@@ -40,11 +41,9 @@
       <properties>
         <resources.directory>${basedir}/profile/local</resources.directory>
       </properties>
-
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-
     </profile>
     <!-- test -->
     <profile>
@@ -59,11 +58,6 @@
       <properties>
         <resources.directory>${basedir}/profile/ec2</resources.directory>
       </properties>
-<!--
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
- -->
     </profile>
   </profiles>
 
@@ -135,6 +129,13 @@
       <artifactId>spring-test</artifactId>
       <version>${org.springframework-version}</version>
       <scope>test</scope>
+    </dependency>
+
+    <!-- AWS SDK -->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk</artifactId>
+      <version>${com.amazonaws-version}</version>
     </dependency>
 
     <!-- poi -->

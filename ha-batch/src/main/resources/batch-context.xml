@@ -21,11 +21,17 @@
   <import resource="classpath:business-context.xml" />
 
   <context:component-scan base-package="jp.co.ha.batch.execute" />
+  <context:component-scan base-package="jp.co.ha.batch.exception" />
 
   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
     <property name="basenames">
       <list>
         <value>messages</value>
+        <value>apiErrorCode</value>
+        <value>dashboardErrorCode</value>
+        <value>businessErrorCode</value>
+        <value>commonErrorCode</value>
+        <value>validateErrorCode</value>
       </list>
     </property>
   </bean>

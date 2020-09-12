@@ -8,13 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.common.exception.BaseErrorCode;
-import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.BaseAppError;
 import jp.co.ha.common.exception.BaseExceptionHandler;
-import jp.co.ha.common.exception.BaseRuntimeException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -23,7 +21,8 @@ import jp.co.ha.dashboard.view.DashboardView;
  * @version 1.0.0
  */
 @Component
-public class DashboardExceptionHandler implements BaseExceptionHandler {
+public class DashboardExceptionHandler extends BaseExceptionHandler
+        implements HandlerExceptionResolver {
 
     /** {@linkplain MessageSource} */
     @Autowired
@@ -47,10 +46,7 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
     }
 
     /**
-     * 指定した例外の画面エラーメッセージを返す<br>
-     * <ul>
-     * <li>BaseExceptionまたはBaseRuntimeExceptionを継承した例外の場合、throw時のエラーコード</li>
-     * </ul>
+     * 指定した例外の画面エラーメッセージを返す
      *
      * @param e
      *     例外
@@ -58,19 +54,16 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
      */
     private String getDispErrorMessage(Exception e) {
 
-        BaseErrorCode code = CommonErrorCode.UNEXPECTED_ERROR;
-        if (e instanceof BaseException) {
-            code = ((BaseException) e).getErrorCode();
-        } else if (e instanceof BaseRuntimeException) {
-            code = ((BaseRuntimeException) e).getErrorCode();
-        }
-
-        String errorMessage = messageSource.getMessage(code.getOuterErrorCode(), null,
-                Locale.getDefault());
-        String errorCode = code.getOuterErrorCode();
-
-        return new StringBuilder().append(errorMessage).append("(").append(errorCode)
-                .append(")").toString();
+        BaseAppError error = getAppError(e);
+        // 設定ファイルからエラーコードを元にエラーメッセージを取得
+        String errorMessage = messageSource.getMessage(
+                error.getErrorCode().getOuterErrorCode(), null, Locale.getDefault());
+        return new StringBuilder()
+                .append(errorMessage)
+                .append("(")
+                .append(error.getErrorCode().getOuterErrorCode())
+                .append(")")
+                .toString();
     }
 
     /**
@@ -81,20 +74,13 @@ public class DashboardExceptionHandler implements BaseExceptionHandler {
      * @return エラーメッセージ
      */
     private String getLogErrorMessage(Exception e) {
-        String detail;
-        String errorCode;
-        StringBuilder body = new StringBuilder();
-        if (e instanceof BaseException) {
-            BaseException be = (BaseException) e;
-            detail = be.getDetail();
-            errorCode = be.getErrorCode().getOuterErrorCode();
-        } else {
-            // 予期せぬ例外にする
-            detail = messageSource.getMessage(
-                    CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode(), null,
-                    Locale.getDefault());
-            errorCode = CommonErrorCode.UNEXPECTED_ERROR.getOuterErrorCode();
-        }
-        return body.append("(").append(errorCode).append(")").append(detail).toString();
+
+        BaseAppError error = getAppError(e);
+        return new StringBuilder()
+                .append("(")
+                .append(error.getErrorCode().getOuterErrorCode())
+                .append(")")
+                .append(error.getDetail())
+                .toString();
     }
 }
