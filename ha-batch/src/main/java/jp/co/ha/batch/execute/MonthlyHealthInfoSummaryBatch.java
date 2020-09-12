@@ -23,6 +23,7 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.log.Logger;
@@ -34,6 +35,7 @@ import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -67,6 +69,8 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         // 処理対象年月
         String targetDate = cmd.getOptionValue("m",
                 DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMM_NOSEP));
+        LOG.info(targetDate);
+        validate(targetDate);
 
         // 健康情報リスト
         List<HealthInfo> healthInfoList = getHealthInfoList(targetDate);
@@ -88,6 +92,26 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         Options options = new Options();
         options.addOption("m", true, "処理対象年月");
         return options;
+    }
+
+    /**
+     * 処理対象年月の妥当性チェックを行う
+     *
+     * @param date
+     *     対象日付
+     * @throws BusinessException
+     *     日付形式でない場合、エラー
+     */
+    private void validate(String date) throws BusinessException {
+
+        if (StringUtil.isEmpty(date)) {
+            // 未指定の場合、エラー
+            throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
+                    "-m is required -m=" + date);
+        } else if (!DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP)) {
+            throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
+                    "-m is not date format -m=" + date);
+        }
     }
 
     /**

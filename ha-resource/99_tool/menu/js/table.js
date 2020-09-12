@@ -190,12 +190,6 @@ var table = [
         size: "128"
       },
       {
-        logicalName: "メールパスワード",
-        physicalName: "MAIL_PASSWORD",
-        type: "VARCHAR",
-        size: "44"
-      },
-      {
         logicalName: "更新日時",
         physicalName: "UPDATE_DATE",
         type: "TIMESTAMP",

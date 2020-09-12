@@ -13,6 +13,7 @@ import org.springframework.context.MessageSource;
 
 import jp.co.ha.batch.execute.BaseBatch;
 import jp.co.ha.batch.type.BatchResult;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.log.Logger;
@@ -93,6 +94,8 @@ public class BatchInvoker {
             Method executeMethod = batch.getMethod("execute", CommandLine.class);
             batchResult = (BatchResult) executeMethod.invoke(batchInstance, cmd);
 
+        } catch (BaseException e) {
+            LOG.error(batchName + "が失敗しました", e);
         } catch (Exception e) {
             LOG.error(batchName + "が失敗しました", e);
         } finally {
