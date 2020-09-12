@@ -10,11 +10,12 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
 import jp.co.ha.business.io.file.csv.writer.MonthlyHealthInfoSummaryCsvWriter;
@@ -26,10 +27,6 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.system.BatchBeanLoader;
-import jp.co.ha.common.system.SystemMemory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateUtil;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
@@ -44,32 +41,29 @@ import jp.co.ha.db.entity.HealthInfo;
  *
  * @version 1.0.0
  */
+@Component("monthlyHealthInfoSummaryBatch")
 public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(MonthlyHealthInfoSummaryBatch.class);
     /** S3キーの接頭辞 */
     private static final String PREFIX_S3_KEY = "monthly/healthinfo/";
+
     /** 健康情報検索サービス */
-    private HealthInfoSearchService searchService = BatchBeanLoader
-            .getBean(HealthInfoSearchServiceImpl.class);
+    @Autowired
+    private HealthInfoSearchService searchService;
     /** 健康情報設定ファイル */
-    private HealthInfoProperties prop = BatchBeanLoader
-            .getBean(HealthInfoProperties.class);
+    @Autowired
+    private HealthInfoProperties prop;
     /** S3のComponent */
-    private AwsS3Component s3 = BatchBeanLoader.getBean(AwsS3Component.class);
+    @Autowired
+    private AwsS3Component s3;
 
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
 
-        LOG.info("月次健康情報集計Batch START メモリ使用量"
-                + SystemMemory.getInstance().getMemoryUsage());
-
         // 処理対象年月
         String targetDate = cmd.getOptionValue("m",
                 DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMM_NOSEP));
-        LOG.info(targetDate);
+
         validate(targetDate);
 
         // 健康情報リスト
@@ -80,9 +74,6 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         File csv = writeCsv(targetDate, modelList);
         // S3ファイルをアップロード
         s3.putFile(PREFIX_S3_KEY + csv.getName(), csv);
-
-        LOG.info("月次健康情報集計Batch END メモリ使用量"
-                + SystemMemory.getInstance().getMemoryUsage());
 
         return BatchResult.SUCCESS;
     }

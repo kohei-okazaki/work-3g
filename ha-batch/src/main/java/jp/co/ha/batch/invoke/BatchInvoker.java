@@ -21,6 +21,7 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
 import jp.co.ha.common.system.BatchBeanLoader;
+import jp.co.ha.common.system.SystemMemory;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -58,6 +59,9 @@ public class BatchInvoker {
         BatchBeanLoader.initializeBean();
 
         String batchName = PACKAGE_PREFIX + args[0];
+        LOG.info(batchName + " START memory use "
+                + SystemMemory.getInstance().getMemoryUsage());
+
         BatchResult batchResult = BatchResult.FAILURE;
 
         try {
@@ -68,7 +72,7 @@ public class BatchInvoker {
             // batch名からインスタンスを取得
             Class<? extends BaseBatch> batch = (Class<? extends BaseBatch>) Class
                     .forName(batchName);
-            BaseBatch batchInstance = batch.getDeclaredConstructor().newInstance();
+            BaseBatch batchInstance = BatchBeanLoader.getBean(batch);
 
             List<String> optionList = new ArrayList<>();
             for (int i = 0; i < args.length; i++) {
@@ -101,12 +105,15 @@ public class BatchInvoker {
                     Locale.getDefault()));
         }
 
+        LOG.info(batchName + " END memory use "
+                + SystemMemory.getInstance().getMemoryUsage());
+
         LOG.debug("■■■■■ Batch処理終了 ■■■■■");
     }
 
     /**
      * 例外処理を行う
-     * 
+     *
      * @param e
      *     例外
      */
