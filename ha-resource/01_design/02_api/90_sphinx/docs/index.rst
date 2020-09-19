@@ -10,11 +10,13 @@
    :maxdepth: 2
    :caption: Contents:
 
-   health_info_regist
-   health_info_ref
-   health_check
-   basic_calc
-   calorie_calc
+   token_api
+   basic_calc_api
+   calorie_calc_api
+   breathing_capacity_api
+   health_check_api
+   health_info_ref_api
+   health_info_regist_api
 
 Indices and tables
 ==================

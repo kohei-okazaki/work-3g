@@ -5,7 +5,8 @@ package jp.co.ha.common.exception;
  *
  * @version 1.0.0
  */
-public abstract class BaseRuntimeException extends RuntimeException {
+public abstract class BaseRuntimeException extends RuntimeException
+        implements BaseAppError {
 
     /** シリアルバージョンUID */
     private static final long serialVersionUID = -5362739275313802447L;
@@ -66,20 +67,12 @@ public abstract class BaseRuntimeException extends RuntimeException {
         this.detail = detail;
     }
 
-    /**
-     * {@linkplain BaseErrorCode}を返す
-     *
-     * @return errorCode
-     */
+    @Override
     public BaseErrorCode getErrorCode() {
         return errorCode;
     }
 
-    /**
-     * detailを返す
-     *
-     * @return detail
-     */
+    @Override
     public String getDetail() {
         return detail;
     }

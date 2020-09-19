@@ -17,7 +17,7 @@ public enum ColumnType implements BaseEnum {
     /** DATE */
     DATE("DATE", Date.class),
     /** TIMESTAMP */
-    TIMESTAMP("TIMESTAMP", Date.class),
+    DATETIME("DATETIME", Date.class),
     /** DOUBLE */
     DECIMAL("DECIMAL", BigDecimal.class),
     /** INT */

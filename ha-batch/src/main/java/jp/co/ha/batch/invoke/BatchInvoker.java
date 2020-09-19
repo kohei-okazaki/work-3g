@@ -1,6 +1,5 @@
 package jp.co.ha.batch.invoke;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -11,15 +10,16 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.springframework.context.MessageSource;
 
+import jp.co.ha.batch.exception.BatchExceptionHandler;
 import jp.co.ha.batch.execute.BaseBatch;
 import jp.co.ha.batch.type.BatchResult;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
 import jp.co.ha.common.system.BatchBeanLoader;
+import jp.co.ha.common.system.SystemMemory;
 import jp.co.ha.common.util.DateUtil;
 
 /**
@@ -41,6 +41,9 @@ public class BatchInvoker {
     private static final String PACKAGE_PREFIX = "jp.co.ha.batch.execute.";
     /** {@linkplain HelpFormatter} */
     private static final HelpFormatter HELP_FORMATTER = new HelpFormatter();
+    /** 例外処理クラス */
+    private static final BatchExceptionHandler EXCEPTION_HANDLER = BatchBeanLoader
+            .getBean(BatchExceptionHandler.class);
 
     /**
      * invoke処理
@@ -57,6 +60,9 @@ public class BatchInvoker {
         BatchBeanLoader.initializeBean();
 
         String batchName = PACKAGE_PREFIX + args[0];
+        LOG.info(batchName + " START memory use "
+                + SystemMemory.getInstance().getMemoryUsage());
+
         BatchResult batchResult = BatchResult.FAILURE;
 
         try {
@@ -67,7 +73,7 @@ public class BatchInvoker {
             // batch名からインスタンスを取得
             Class<? extends BaseBatch> batch = (Class<? extends BaseBatch>) Class
                     .forName(batchName);
-            BaseBatch batchInstance = batch.getDeclaredConstructor().newInstance();
+            BaseBatch batchInstance = BatchBeanLoader.getBean(batch);
 
             List<String> optionList = new ArrayList<>();
             for (int i = 0; i < args.length; i++) {
@@ -79,29 +85,27 @@ public class BatchInvoker {
             }
 
             // getOptions 実行
-            Method getOptions = batch.getMethod("getOptions");
-            Options options = (Options) getOptions.invoke(batchInstance);
+            Options options = batchInstance.getOptions();
 
             // オプションのヘルプ情報を表示する。
             HELP_FORMATTER.printHelp("[opts]", options);
 
             // コマンドライン解析
-            String[] a = optionList.toArray(new String[0]);
             CommandLine cmd = new DefaultParser().parse(options,
                     optionList.toArray(new String[0]));
 
             // execute 実行
-            Method executeMethod = batch.getMethod("execute", CommandLine.class);
-            batchResult = (BatchResult) executeMethod.invoke(batchInstance, cmd);
+            batchResult = batchInstance.execute(cmd);
 
-        } catch (BaseException e) {
-            LOG.error(batchName + "が失敗しました", e);
         } catch (Exception e) {
-            LOG.error(batchName + "が失敗しました", e);
+            EXCEPTION_HANDLER.handleException(e);
         } finally {
             LOG.info(MESSAGE_SOURCE.getMessage(batchResult.getComment(), null,
                     Locale.getDefault()));
         }
+
+        LOG.info(batchName + " END memory use "
+                + SystemMemory.getInstance().getMemoryUsage());
 
         LOG.debug("■■■■■ Batch処理終了 ■■■■■");
     }

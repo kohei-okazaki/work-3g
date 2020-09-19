@@ -30,10 +30,10 @@ public class BatchBeanLoader {
     }
 
     /**
-     * applicationContextを設定する
+     * {@linkplain ApplicationContext}を設定する
      *
      * @param applicationContext
-     *     ApplicationContext
+     *     {@linkplain ApplicationContext}
      */
     public static void setApplicationContext(ApplicationContext applicationContext) {
         BatchBeanLoader.context = applicationContext;
@@ -43,7 +43,7 @@ public class BatchBeanLoader {
      * Beanを取得<br>
      * (例)<br>
      * AccountSearchService searchService =
-     * BatchBeanLoader.getBean(AccountSearchService.class);
+     * BatchBeanLoader.getBean(AccountSearchServiceImpl.class);
      *
      * @param clazz
      *     Beanの型
@@ -66,7 +66,13 @@ public class BatchBeanLoader {
      */
     public static void initializeBean() {
         // XMLから取得
-        String[] xmls = new String[] { "classpath:batch-context.xml" };
+        String[] xmls = new String[] {
+                "classpath:common-context.xml",
+                "classpath:db-context.xml",
+                "classpath:web-context.xml",
+                "classpath:business-context.xml",
+                "classpath:batch-context.xml"
+        };
         setApplicationContext(new ClassPathXmlApplicationContext(xmls));
     }
 
@@ -82,9 +88,13 @@ public class BatchBeanLoader {
         }
 
         // XMLから取得
-        String[] xmls = new String[] { "classpath:common-context.xml",
-                "classpath:db-context.xml", "classpath:web-context.xml",
-                "classpath:business-context.xml", "classpath:batch-context.xml" };
+        String[] xmls = new String[] {
+                "classpath:common-context.xml",
+                "classpath:db-context.xml",
+                "classpath:web-context.xml",
+                "classpath:business-context.xml",
+                "classpath:batch-context.xml"
+        };
         ClassPathXmlApplicationContext cxt = new ClassPathXmlApplicationContext(xmls);
         cxt.refresh();
         context = cxt;

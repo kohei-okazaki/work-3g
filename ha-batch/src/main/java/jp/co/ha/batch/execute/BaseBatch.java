@@ -23,13 +23,13 @@ public abstract class BaseBatch {
      * @throws BaseException
      *     基底例外
      */
-    protected abstract BatchResult execute(CommandLine cmd) throws BaseException;
+    public abstract BatchResult execute(CommandLine cmd) throws BaseException;
 
     /**
      * {@linkplain Options}を返す
      *
      * @return Options
      */
-    protected abstract Options getOptions();
+    public abstract Options getOptions();
 
 }
