@@ -4,8 +4,10 @@
 .. toctree::
    :maxdepth: 4
 
-   basic_calc
-   calorie_calc
-   health_check
-   health_info_ref
-   health_info_regist
+   basic_calc_api
+   breathing_capacity_api
+   calorie_calc_api
+   health_check_api
+   health_info_ref_api
+   health_info_regist_api
+   token_api

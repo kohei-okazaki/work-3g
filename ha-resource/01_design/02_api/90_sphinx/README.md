@@ -20,8 +20,10 @@ sphinx-build -b singlehtml ./docs ./docs/_build
 ```
 
 ## API一覧
-* 健康情報登録API : health_info_regist.py
-* 健康情報照会API : health_info_ref.py
-* ヘルスチェックAPI : health_check.py
-* 基礎健康情報計算API : basic_calc.py
-* カロリー計算API : calorie_calc.py
+* 健康情報登録API : health_info_regist_api.py
+* 健康情報照会API : health_info_ref_api.py
+* ヘルスチェックAPI : health_check_api.py
+* トークン発行API : token_api.py
+* 基礎健康情報計算API : basic_calc_api.py
+* カロリー計算API : calorie_calc_api.py
+* 肺活量計算API: breathing_capacity_api.py

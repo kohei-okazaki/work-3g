@@ -1,6 +1,5 @@
 package jp.co.ha.batch.invoke;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -86,8 +85,7 @@ public class BatchInvoker {
             }
 
             // getOptions 実行
-            Method getOptions = batch.getMethod("getOptions");
-            Options options = (Options) getOptions.invoke(batchInstance);
+            Options options = batchInstance.getOptions();
 
             // オプションのヘルプ情報を表示する。
             HELP_FORMATTER.printHelp("[opts]", options);
@@ -97,8 +95,7 @@ public class BatchInvoker {
                     optionList.toArray(new String[0]));
 
             // execute 実行
-            Method executeMethod = batch.getMethod("execute", CommandLine.class);
-            batchResult = (BatchResult) executeMethod.invoke(batchInstance, cmd);
+            batchResult = batchInstance.execute(cmd);
 
         } catch (Exception e) {
             EXCEPTION_HANDLER.handleException(e);
