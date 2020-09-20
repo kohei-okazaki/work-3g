@@ -14,8 +14,8 @@ import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.account.service.AccountRegistService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -88,9 +88,10 @@ public class AccountRegistServiceImpl implements AccountRegistService {
         BeanUtil.copy(dto, account);
         account.setPassword(encoder.encode(dto.getPassword(), dto.getUserId()));
         account.setDeleteFlag(CommonFlag.FALSE.getValue());
-        account.setPasswordExpire(DateUtil.addMonth(DateUtil.getSysDate(), 6));
-        account.setApiKey(encoder.encode(dto.getPassword(), DateUtil
-                .toString(DateUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
+        account.setPasswordExpire(DateTimeUtil
+                .addMonth(DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate()), 6));
+        account.setApiKey(encoder.encode(dto.getPassword(), DateTimeUtil.toString(
+                DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
         return account;
     }
 

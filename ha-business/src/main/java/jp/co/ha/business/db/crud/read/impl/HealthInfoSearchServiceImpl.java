@@ -1,6 +1,6 @@
 package jp.co.ha.business.db.crud.read.impl;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId,
-            Date fromHealthInfoRegDate, Date toHealthInfoRegDate,
+            LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
@@ -106,8 +106,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByBetweenHealthInfoRegDate(Date fromHealthInfoRegDate,
-            Date toHealthInfoRegDate, SelectOption selectOption) {
+    public List<HealthInfo> findByBetweenHealthInfoRegDate(
+            LocalDateTime fromHealthInfoRegDate,
+            LocalDateTime toHealthInfoRegDate, SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();

@@ -1,12 +1,12 @@
 package jp.co.ha.business.healthInfo;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 
 /**
  * 健康情報グラフ描画モデル
@@ -78,8 +78,9 @@ public class HealthInfoGraphModel {
      * @param type
      *     日付フォーマット
      */
-    public void addHealthInfoRegDate(Date healthInfoRegDate, DateFormatType type) {
-        this.healthInfoRegDateList.add(DateUtil.toString(healthInfoRegDate, type));
+    public void addHealthInfoRegDate(LocalDateTime healthInfoRegDate,
+            DateFormatType type) {
+        this.healthInfoRegDateList.add(DateTimeUtil.toString(healthInfoRegDate, type));
     }
 
     /**

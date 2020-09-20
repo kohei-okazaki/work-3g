@@ -27,9 +27,9 @@ import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
@@ -134,7 +134,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 
         // ファイル名
         String fileName = "healthInfoRegist_"
-                + DateUtil.toString(DateUtil.getSysDate(),
+                + DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                         DateFormatType.YYYYMMDDHHMMSS_NOSEP)
                 + FileExtension.CSV.getValue();
         // ファイル出力先

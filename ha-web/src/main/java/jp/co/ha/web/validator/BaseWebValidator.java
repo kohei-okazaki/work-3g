@@ -51,7 +51,7 @@ public abstract class BaseWebValidator<F extends BaseForm> implements Validator 
      * @param form
      *     validate対象form
      * @param errors
-     *     Errors
+     *     {@linkplain Errors}
      */
     protected abstract void validate(F form, Errors errors);
 

@@ -21,8 +21,8 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.account.service.AccountSettingService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -137,7 +137,8 @@ public class AccountSettingServiceImpl implements AccountSettingService {
 
         BeanUtil.copy(dto, account, Arrays.asList("userId"));
         account.setPasswordExpire(
-                DateUtil.toDate(dto.getPasswordExpire(), DateFormatType.YYYYMMDD));
+                DateTimeUtil.toLocalDate(dto.getPasswordExpire(),
+                        DateFormatType.YYYYMMDD_STRICT));
         account.setPassword(
                 encoder.encode(dto.getPassword(), dto.getUserId()));
     }

@@ -1,7 +1,8 @@
 package jp.co.ha.tool.excel.type;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jp.co.ha.common.type.BaseEnum;
 
@@ -15,9 +16,9 @@ public enum ColumnType implements BaseEnum {
     /** VARCHAR */
     VARCHAR("VARCHAR", String.class),
     /** DATE */
-    DATE("DATE", Date.class),
+    DATE("DATE", LocalDate.class),
     /** TIMESTAMP */
-    DATETIME("DATETIME", Date.class),
+    DATETIME("DATETIME", LocalDateTime.class),
     /** DOUBLE */
     DECIMAL("DECIMAL", BigDecimal.class),
     /** INT */

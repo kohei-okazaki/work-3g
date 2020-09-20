@@ -3,15 +3,16 @@ package jp.co.ha.common.log;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.LogParam;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -123,8 +124,12 @@ public class LogMessageFactory {
         String strValue;
         if (BeanUtil.isNull(value)) {
             strValue = "<NULL>";
-        } else if (value instanceof Date) {
-            strValue = DateUtil.toString((Date) value, DateFormatType.YYYYMMDDHHMMSS);
+        } else if (value instanceof LocalDateTime) {
+            strValue = DateTimeUtil.toString((LocalDateTime) value,
+                    DateFormatType.YYYYMMDDHHMMSS);
+        } else if (value instanceof LocalDate) {
+            strValue = DateTimeUtil.toString((LocalDate) value,
+                    DateFormatType.YYYYMMDD);
         } else {
             strValue = value.toString();
         }
