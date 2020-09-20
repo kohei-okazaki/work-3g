@@ -61,7 +61,6 @@ public class DataBaseCommonAspect {
                     for (Method m : entity.getClass().getDeclaredMethods()) {
                         if ("setUpdateDate".equals(m.getName())) {
                             // 更新日時の設定
-                            // m.invoke(entity, DateUtil.getSysDate());
                             m.invoke(entity, DateTimeUtil.getSysDate());
                         }
                     }
@@ -98,7 +97,6 @@ public class DataBaseCommonAspect {
                         if ("setRegDate".equals(m.getName())
                                 || "setUpdateDate".equals(m.getName())) {
                             // 登録日時/更新日時の設定
-                            // m.invoke(entity, DateUtil.getSysDate());
                             m.invoke(entity, DateTimeUtil.getSysDate());
                         }
                     }
