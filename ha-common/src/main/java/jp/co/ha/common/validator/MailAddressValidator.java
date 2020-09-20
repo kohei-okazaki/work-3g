@@ -24,7 +24,7 @@ public class MailAddressValidator implements ConstraintValidator<MailAddress, Ob
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
             return true;
         }
-        return RegexType.MAIL_ADDRESS.is().test(value.toString());
+        return RegexType.MAIL_ADDRESS.is(value.toString());
     }
 
 }

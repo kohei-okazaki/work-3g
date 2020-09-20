@@ -3,8 +3,8 @@ package jp.co.ha.batch.execute;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,10 +28,10 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 
@@ -62,7 +62,8 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
 
         // 処理対象年月
         String targetDate = cmd.getOptionValue("m",
-                DateUtil.toString(DateUtil.getSysDate(), DateFormatType.YYYYMM_NOSEP));
+                DateTimeUtil.toString(DateTimeUtil.getSysDate(),
+                        DateFormatType.YYYYMM_NOSEP));
 
         validate(targetDate);
 
@@ -99,7 +100,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
             // 未指定の場合、エラー
             throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
                     "-m is required -m=" + date);
-        } else if (!DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP)) {
+        } else if (!DateTimeUtil.isDate(date, DateFormatType.YYYYMM_NOSEP)) {
             throw new BusinessException(CommonErrorCode.VALIDATE_ERROR,
                     "-m is not date format -m=" + date);
         }
@@ -116,12 +117,10 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
 
         int year = Integer.parseInt(targetDate.substring(0, 4));
         int month = Integer.parseInt(targetDate.substring(4));
-        Date from = DateUtil.toDate(year + "/" + month + "/01 00:00:00",
-                DateFormatType.YYYYMMDDHHMMSS);
+        LocalDateTime from = LocalDateTime.of(year, month, 1, 0, 0, 0);
 
-        int lastDay = DateUtil.getLastDay(year, month);
-        Date to = DateUtil.toDate(year + "/" + month + "/" + lastDay + " 23:59:59",
-                DateFormatType.YYYYMMDDHHMMSS);
+        int lastDay = DateTimeUtil.getLastDayOfMonth(from);
+        LocalDateTime to = LocalDateTime.of(year, month, lastDay, 23, 59, 59);
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
@@ -145,11 +144,11 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         return healthInfoList.stream().map(e -> {
             MonthlyHealthInfoSummaryModel model = new MonthlyHealthInfoSummaryModel();
             BeanUtil.copy(e, model, Arrays.asList("serialVersionUID"));
-            model.setHealthInfoRegDate(DateUtil.toString(e.getHealthInfoRegDate(),
+            model.setHealthInfoRegDate(DateTimeUtil.toString(e.getHealthInfoRegDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
-            model.setRegDate(DateUtil.toString(e.getRegDate(),
+            model.setRegDate(DateTimeUtil.toString(e.getRegDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
-            model.setUpdateDate(DateUtil.toString(e.getUpdateDate(),
+            model.setUpdateDate(DateTimeUtil.toString(e.getUpdateDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
             return model;
         }).collect(Collectors.toList());

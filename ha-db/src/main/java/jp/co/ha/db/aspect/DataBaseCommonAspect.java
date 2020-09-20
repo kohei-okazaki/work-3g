@@ -23,7 +23,7 @@ import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateTimeUtil;
 
 /**
  * DB共通処理クラス
@@ -61,7 +61,7 @@ public class DataBaseCommonAspect {
                     for (Method m : entity.getClass().getDeclaredMethods()) {
                         if ("setUpdateDate".equals(m.getName())) {
                             // 更新日時の設定
-                            m.invoke(entity, DateUtil.getSysDate());
+                            m.invoke(entity, DateTimeUtil.getSysDate());
                         }
                     }
                     entityCrypter.encrypt(entity);
@@ -84,7 +84,7 @@ public class DataBaseCommonAspect {
      * </ul>
      *
      * @param jp
-     *     JoinPoint
+     *     {@linkplain JoinPoint}
      * @throws BaseException
      *     基底例外
      */
@@ -97,7 +97,7 @@ public class DataBaseCommonAspect {
                         if ("setRegDate".equals(m.getName())
                                 || "setUpdateDate".equals(m.getName())) {
                             // 登録日時/更新日時の設定
-                            m.invoke(entity, DateUtil.getSysDate());
+                            m.invoke(entity, DateTimeUtil.getSysDate());
                         }
                     }
                     entityCrypter.encrypt(entity);
@@ -118,7 +118,7 @@ public class DataBaseCommonAspect {
      * </ul>
      *
      * @param pjp
-     *     ProceedingJoinPoint
+     *     {@linkplain ProceedingJoinPoint}
      * @return pjp.proceed()
      * @throws Throwable
      *     例外発生
@@ -160,7 +160,7 @@ public class DataBaseCommonAspect {
      * 削除処理の共通処理を行う
      *
      * @param jp
-     *     JoinPoint
+     *     {@linkplain JoinPoint}
      */
     @Before("@annotation(jp.co.ha.common.db.annotation.Delete)")
     public void delete(JoinPoint jp) {

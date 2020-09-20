@@ -20,7 +20,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
 import jp.co.ha.common.system.BatchBeanLoader;
 import jp.co.ha.common.system.SystemMemory;
-import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateTimeUtil;
 
 /**
  * Batchの呼び出しクラス
@@ -68,7 +68,8 @@ public class BatchInvoker {
         try {
 
             // MDCを設定する
-            MDC.put("id", HASH_ENCODER.encode(DateUtil.getSysDate().toString(), "dummy"));
+            MDC.put("id",
+                    HASH_ENCODER.encode(DateTimeUtil.getSysDate().toString(), "dummy"));
 
             // batch名からインスタンスを取得
             Class<? extends BaseBatch> batch = (Class<? extends BaseBatch>) Class

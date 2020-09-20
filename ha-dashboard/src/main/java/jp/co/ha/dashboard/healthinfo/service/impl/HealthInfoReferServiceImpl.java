@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,10 +21,10 @@ import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.db.entity.HealthInfo;
@@ -63,7 +64,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 HealthInfo srcEntity = (HealthInfo) src;
                 HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
 
-                destDto.setHealthInfoRegDate(DateUtil.toString(
+                destDto.setHealthInfoRegDate(DateTimeUtil.toString(
                         srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
             });
 
@@ -83,7 +84,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 HealthInfoReferenceDto srcDto = (HealthInfoReferenceDto) src;
                 ReferenceCsvDownloadModel destModel = (ReferenceCsvDownloadModel) dest;
 
-                destModel.setHealthInfoRegDate(DateUtil.toDate(
+                destModel.setHealthInfoRegDate(DateTimeUtil.toLocalDateTime(
                         srcDto.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
 
             });
@@ -100,7 +101,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
 
         // ファイル名
-        String fileName = DateUtil.toString(DateUtil.getSysDate(),
+        String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()
@@ -151,25 +152,29 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     }
 
     /**
-     * 指定した文字列型の日付をYYYYMMDD 00:00:00のDate型に直す
+     * 指定した文字列型の日付をYYYYMMDD 00:00:00の{@linkplainLocalDateTime}に直す
      *
      * @param date
      *     文字列型の日付
      * @return YYYYMMDD 00:00:00
      */
-    private Date editFromDate(String date) {
-        return DateUtil.toStartDate(DateUtil.toDate(date, DateFormatType.YYYYMMDD));
+    private LocalDateTime editFromDate(String date) {
+        LocalDate localDate = DateTimeUtil.toLocalDate(date,
+                DateFormatType.YYYYMMDD_STRICT);
+        return DateTimeUtil.getStartDay(localDate);
     }
 
     /**
-     * 指定した文字列型の日付をYYYYMMDD 23:59:59のDate型に直す
+     * 指定した文字列型の日付をYYYYMMDD 23:59:59の{@linkplainLocalDateTime}に直す
      *
      * @param date
      *     文字列型の日付
      * @return YYYYMMDD 23:59:59
      */
-    private Date editToDate(String date) {
-        return DateUtil.toEndDate(DateUtil.toDate(date, DateFormatType.YYYYMMDD));
+    private LocalDateTime editToDate(String date) {
+        LocalDate localDate = DateTimeUtil.toLocalDate(date,
+                DateFormatType.YYYYMMDD_STRICT);
+        return DateTimeUtil.getEndDay(localDate);
     }
 
 }

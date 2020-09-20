@@ -19,6 +19,10 @@
                     userId="root"
                     password="admin" />
 
+    <javaTypeResolver>
+      <property name="useJSR310Types" value="true"/>
+    </javaTypeResolver>
+
     <javaModelGenerator targetPackage="jp.co.ha.db.entity" targetProject="ha-db/src/main/java" />
 
     <sqlMapGenerator targetPackage="jp.co.ha.db.mapper" targetProject="ha-db/src/main/resources" />

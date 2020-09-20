@@ -1,12 +1,13 @@
 package jp.co.ha.business.login;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.type.CommonFlag;
-import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.Account;
 
 /**
@@ -122,7 +123,9 @@ public class LoginCheck {
      *     アカウント情報
      */
     private void checkAccountExpired(LoginCheckResult result, Account account) {
-        if (DateUtil.isBefore(account.getPasswordExpire(), false)) {
+        LocalDateTime sysdate = DateTimeUtil.getSysDate();
+        if (DateTimeUtil.isBefore(account.getPasswordExpire(),
+                DateTimeUtil.toLocalDate(sysdate), false)) {
             result.addError();
             result.setErrorCode(DashboardErrorCode.ACCOUNT_EXPIRED);
         }

@@ -4,8 +4,8 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Date;
 
@@ -37,8 +37,7 @@ public class DateValidator implements ConstraintValidator<Date, Object> {
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
             return true;
         }
-
-        return DateUtil.isDate(value.toString(), this.formatType);
+        return DateTimeUtil.isDate(value.toString(), this.formatType);
     }
 
 }

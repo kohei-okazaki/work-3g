@@ -25,13 +25,13 @@ public class RegexTypeTest extends BaseCommonTest {
             List<String> list = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8",
                     "9", "10");
             for (String str : list) {
-                assertEquals(RegexType.HALF_NUMBER.is().test(str), true);
+                assertEquals(RegexType.HALF_NUMBER.is(str), true);
             }
         }
         {
             List<String> list = Arrays.asList("a", "あ", "2f2", "///");
             for (String str : list) {
-                assertNotEquals(RegexType.HALF_NUMBER.is().test(str), true);
+                assertNotEquals(RegexType.HALF_NUMBER.is(str), true);
             }
         }
     }
@@ -45,13 +45,13 @@ public class RegexTypeTest extends BaseCommonTest {
             List<String> list = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8",
                     "9", "10", ".");
             for (String str : list) {
-                assertEquals(RegexType.HALF_NUMBER_PERIOD.is().test(str), true);
+                assertEquals(RegexType.HALF_NUMBER_PERIOD.is(str), true);
             }
         }
         {
             List<String> list = Arrays.asList("a", "あ", "2f2", "///");
             for (String str : list) {
-                assertNotEquals(RegexType.HALF_NUMBER_PERIOD.is().test(str), true);
+                assertNotEquals(RegexType.HALF_NUMBER_PERIOD.is(str), true);
             }
         }
     }
@@ -64,13 +64,13 @@ public class RegexTypeTest extends BaseCommonTest {
         {
             List<String> list = Arrays.asList("0", "aa", "AA", "cc", "CcC");
             for (String str : list) {
-                assertEquals(RegexType.HALF_CHAR.is().test(str), true);
+                assertEquals(RegexType.HALF_CHAR.is(str), true);
             }
         }
         {
             List<String> list = Arrays.asList("ア", "あ", "ｱ");
             for (String str : list) {
-                assertNotEquals(RegexType.HALF_CHAR.is().test(str), true);
+                assertNotEquals(RegexType.HALF_CHAR.is(str), true);
             }
         }
     }

@@ -1,6 +1,6 @@
 package jp.co.ha.business.db.crud.read;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jp.co.ha.common.db.SelectOption;
@@ -27,7 +27,7 @@ public interface HealthInfoSearchService {
      * @return 健康情報のリスト
      */
     List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId,
-            Date fromHealthInfoRegDate, Date toHealthInfoRegDate,
+            LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption);
 
     /**
@@ -77,7 +77,7 @@ public interface HealthInfoSearchService {
      *     {@linkplain SelectOption}
      * @return 健康情報リスト
      */
-    List<HealthInfo> findByBetweenHealthInfoRegDate(Date fromHealthInfoRegDate,
-            Date toHealthInfoRegDate, SelectOption selectOption);
+    List<HealthInfo> findByBetweenHealthInfoRegDate(LocalDateTime fromHealthInfoRegDate,
+            LocalDateTime toHealthInfoRegDate, SelectOption selectOption);
 
 }

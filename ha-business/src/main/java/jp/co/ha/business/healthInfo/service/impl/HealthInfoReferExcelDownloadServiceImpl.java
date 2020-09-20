@@ -18,8 +18,8 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.type.CommonFlag;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
@@ -68,8 +68,9 @@ public class HealthInfoReferExcelDownloadServiceImpl
             model.setWeight(result.getWeight().toString());
             model.setBmi(result.getBmi().toString());
             model.setStandardWeight(result.getStandardWeight().toString());
-            model.setHealthInfoRegDate(DateUtil.toDate(result.getHealthInfoRegDate(),
-                    DateFormatType.YYYYMMDDHHMMSS));
+            model.setHealthInfoRegDate(
+                    DateTimeUtil.toLocalDateTime(result.getHealthInfoRegDate(),
+                            DateFormatType.YYYYMMDDHHMMSS));
             return model;
         }).collect(Collectors.toList());
     }
