@@ -4,6 +4,8 @@ import javax.validation.constraints.Email;
 
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.validator.annotation.Date;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
@@ -50,6 +52,7 @@ public class AccountSettingForm implements BaseForm {
     private String apiKey;
     /** パスワード有効期限 */
     @Required(message = "パスワード有効期限が未入力です")
+    @Date(formatType = DateFormatType.YYYYMMDD, message = "パスワード有効期限がyyyy/mm/dd形式でありません")
     private String passwordExpire;
     /** ヘッダ利用有無フラグ */
     @Required(message = "ヘッダ利用有無フラグが未入力です")
