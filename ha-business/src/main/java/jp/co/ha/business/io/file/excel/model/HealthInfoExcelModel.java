@@ -1,6 +1,6 @@
 package jp.co.ha.business.io.file.excel.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jp.co.ha.common.io.file.excel.annotation.ExcelDownloadModel;
 import jp.co.ha.common.io.file.excel.model.BaseExcelModel;
@@ -24,7 +24,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     /** 標準体重 */
     private String standardWeight;
     /** 健康情報作成日時 */
-    private Date healthInfoRegDate;
+    private LocalDateTime healthInfoRegDate;
 
     /**
      * heightを返す
@@ -107,7 +107,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
      *
      * @return healthInfoRegDate
      */
-    public Date getHealthInfoRegDate() {
+    public LocalDateTime getHealthInfoRegDate() {
         return healthInfoRegDate;
     }
 
@@ -117,7 +117,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
      * @param healthInfoRegDate
      *     健康情報作成日時
      */
-    public void setHealthInfoRegDate(Date healthInfoRegDate) {
+    public void setHealthInfoRegDate(LocalDateTime healthInfoRegDate) {
         this.healthInfoRegDate = healthInfoRegDate;
     }
 

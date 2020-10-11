@@ -14,8 +14,8 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
@@ -62,7 +62,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
                         .of(srcEntity.getHealthInfoStatus()).getMessage());
                 // 健康情報作成日時
                 destDto.setHealthInfoRegDate(
-                        DateUtil.toString(srcEntity.getHealthInfoRegDate(),
+                        DateTimeUtil.toString(srcEntity.getHealthInfoRegDate(),
                                 DateFormatType.YYYYMMDDHHMMSS));
                 // 肥満度メッセージ
                 BmiRangeMt mt = bmiRangeMtSearchService

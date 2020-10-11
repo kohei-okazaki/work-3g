@@ -1,13 +1,13 @@
 package jp.co.ha.dashboard.healthinfo.validate;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.validation.Errors;
 
 import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.type.CommonFlag;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 import jp.co.ha.web.validator.BaseWebValidator;
@@ -37,7 +37,7 @@ public class HealthInfoReferenceValidator
      * @param form
      *     結果検索フォーム
      * @param errors
-     *     エラークラス
+     *     {@linkplain Errors}
      */
     private void correlationCheck(HealthInfoReferenceForm form, Errors errors) {
 
@@ -61,11 +61,13 @@ public class HealthInfoReferenceValidator
 
             } else {
 
-                Date fromDate = DateUtil.toDate(form.getFromHealthInfoRegDate(),
-                        DateFormatType.YYYYMMDD);
-                Date toDate = DateUtil.toDate(form.getToHealthInfoRegDate(),
-                        DateFormatType.YYYYMMDD);
-                if (DateUtil.isAfter(fromDate, toDate, false)) {
+                LocalDate fromDate = DateTimeUtil.toLocalDate(
+                        form.getFromHealthInfoRegDate(),
+                        DateFormatType.YYYYMMDD_STRICT);
+                LocalDate toDate = DateTimeUtil.toLocalDate(
+                        form.getToHealthInfoRegDate(),
+                        DateFormatType.YYYYMMDD_STRICT);
+                if (DateTimeUtil.isAfter(fromDate, toDate, false)) {
                     // 健康情報作成日(終了) < 健康情報作成日(開始) となっている場合
                     errors.rejectValue("toHealthInfoRegDate",
                             ValidateErrorCode.DATE_OVER.getOuterErrorCode(),

@@ -14,8 +14,8 @@ import jp.co.ha.common.type.BaseEnum;
  * 日付のUtilクラス
  *
  * @version 1.0.0
- *
  */
+@Deprecated
 public class DateUtil {
 
     /** LOG */

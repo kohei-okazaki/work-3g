@@ -30,8 +30,8 @@ import jp.co.ha.common.io.file.csv.service.CsvUploadService;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
@@ -114,7 +114,7 @@ public class HealthInfoFileRegistController
         List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
                 .readMultipartFile(form.getMultipartFile(), Charset.UTF_8);
 
-        String fileName = DateUtil.toString(DateUtil.getSysDate(),
+        String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateFormatType.YYYYMMDDHHMMSS_NOSEP) + ".csv";
         awsS3Component.putFile("healthinfo-file-regist/" + userId + "/" + fileName,
                 form.getMultipartFile());

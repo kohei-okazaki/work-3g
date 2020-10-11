@@ -47,10 +47,6 @@ public class MultiThreadFunctionTest extends BaseCommonTest {
      */
     private static class StringPrint extends MultiThreadFunction<String> {
 
-        /**
-         * {@inheritDoc}<br>
-         * 並列処理で行いたい処理を実装
-         */
         @Override
         public Consumer<String> getConsumer() {
 

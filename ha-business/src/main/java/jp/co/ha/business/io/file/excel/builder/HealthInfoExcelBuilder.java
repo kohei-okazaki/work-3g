@@ -9,8 +9,8 @@ import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.builder.BaseExcelBuilder;
 import jp.co.ha.common.log.MaskExecutor;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 
 /**
  * 健康情報Excel生成クラス
@@ -50,7 +50,7 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelMode
             setText(cell,
                     this.conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight());
             cell = getCell(sheet, rowPosition + i, 4);
-            setText(cell, DateUtil.toString(model.getHealthInfoRegDate(),
+            setText(cell, DateTimeUtil.toString(model.getHealthInfoRegDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
         }
     }

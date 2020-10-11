@@ -35,7 +35,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.common.util.DateUtil;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.web.api.ApiConnectInfo;
@@ -111,6 +111,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
         {
             HealthInfoRegistResponse.HealthInfo healthInfo = new HealthInfoRegistResponse.HealthInfo();
             BeanUtil.copy(entity, healthInfo);
+            healthInfo.setHealthInfoRegDate(
+                    DateTimeUtil.toDate(entity.getHealthInfoRegDate()));
             response.setHealthInfo(healthInfo);
         }
 
@@ -186,7 +188,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         entity.setStandardWeight(basicHealthInfo.getStandardWeight());
         entity.setHealthInfoStatus(status.getValue());
         entity.setSeqBmiRangeId(bmiRangeMt.getSeqBmiRangeId());
-        entity.setHealthInfoRegDate(DateUtil.getSysDate());
+        entity.setHealthInfoRegDate(DateTimeUtil.getSysDate());
 
         return entity;
 

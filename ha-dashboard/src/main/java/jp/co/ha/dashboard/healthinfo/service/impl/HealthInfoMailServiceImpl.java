@@ -11,8 +11,8 @@ import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.MailInfoSearchService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.DateUtil;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.db.entity.MailInfo;
 
@@ -46,8 +46,8 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
             String to = mailInfoSearchService.findById(userId).get().getMailAddress();
             String titleText = "健康情報登録完了メール"
-                    + DateUtil.toString(DateUtil.getSysDate(),
-                            DateFormatType.YYYYMMDD_NOSEP);
+                    + DateTimeUtil.toString(DateTimeUtil.getSysDate(),
+                            DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
             Map<String, String> bodyMap = new HashMap<>();
             bodyMap.put("${userId}", userId);
             bodyMap.put("${seqHealthInfoId}",
@@ -57,9 +57,11 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
             bodyMap.put("${bmi}", apiResponse.getHealthInfo().getBmi().toString());
             bodyMap.put("${standardWeight}",
                     apiResponse.getHealthInfo().getStandardWeight() + "kg");
-            bodyMap.put("${healthInfoRegDate}", DateUtil.toString(
-                    apiResponse.getHealthInfo().getHealthInfoRegDate(),
-                    DateFormatType.YYYYMMDDHHMMSS));
+            bodyMap.put("${healthInfoRegDate}",
+                    DateTimeUtil.toString(
+                            DateTimeUtil.toLocalDateTime(
+                                    apiResponse.getHealthInfo().getHealthInfoRegDate()),
+                            DateFormatType.YYYYMMDDHHMMSS));
 
             sesComponent.sendMail(to, titleText, TEMPLATE_ID, bodyMap);
         }

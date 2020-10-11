@@ -14,7 +14,17 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
  *
  * @version 1.0.0
  */
+@SuppressWarnings("javadoc")
 public class DateUtilTest extends BaseCommonTest {
+
+    @Test
+    public void test() {
+        String yyyymm = "202009";
+        DateTimeUtil.DateFormatType type = DateTimeUtil.DateFormatType.YYYYMM_NOSEP;
+        boolean b = DateTimeUtil.isDate(yyyymm, type);
+        System.out.println(b);
+        assertTrue(b);
+    }
 
     /**
      * {@linkplain DateUtil#toDate}

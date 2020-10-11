@@ -1,7 +1,7 @@
 package jp.co.ha.business.io.file.csv.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jp.co.ha.common.io.file.csv.annotation.CsvDownloadModel;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
@@ -32,7 +32,7 @@ public class ReferenceCsvDownloadModel implements BaseCsvModel {
     @Mask
     private BigDecimal standardWeight;
     /** 健康情報作成日時 */
-    private Date healthInfoRegDate;
+    private LocalDateTime healthInfoRegDate;
 
     /**
      * userIdを返す
@@ -134,7 +134,7 @@ public class ReferenceCsvDownloadModel implements BaseCsvModel {
      *
      * @return healthInfoRegDate
      */
-    public Date getHealthInfoRegDate() {
+    public LocalDateTime getHealthInfoRegDate() {
         return healthInfoRegDate;
     }
 
@@ -144,7 +144,7 @@ public class ReferenceCsvDownloadModel implements BaseCsvModel {
      * @param healthInfoRegDate
      *     健康情報作成日時
      */
-    public void setHealthInfoRegDate(Date healthInfoRegDate) {
+    public void setHealthInfoRegDate(LocalDateTime healthInfoRegDate) {
         this.healthInfoRegDate = healthInfoRegDate;
     }
 

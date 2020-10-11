@@ -1,7 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.form;
 
 import jp.co.ha.common.type.RegexType;
-import jp.co.ha.common.util.DateUtil.DateFormatType;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.validator.annotation.Date;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Max;

@@ -1,16 +1,16 @@
 {
   "result": "0",
+  "error": null,
   "account": {
     "userId": "master"
   },
-  "error": null,
   "healthInfo": {
-    "seqHealthInfoId": 40,
-    "height": 176.26,
-    "weight": 65.41,
-    "bmi": 21.03,
-    "standardWeight": 68.42,
-    "status": "20",
-    "regDate": "20200417214331"
+    "seqHealthInfoId": 20,
+    "height": 170,
+    "weight": 50,
+    "bmi": 17.301,
+    "standardWeight": 63.579,
+    "status": "10",
+    "regDate": "20200921130208"
   }
 }
