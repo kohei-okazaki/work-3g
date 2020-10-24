@@ -73,9 +73,9 @@ public class BreathingCapacityComponent {
 
         TokenRequest request = new TokenRequest();
         request.setUserId(userId);
-        ApiConnectInfo connectInfo = new ApiConnectInfo();
-        connectInfo.setUrlSupplier(
-                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.TOKEN.getValue());
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
+                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                        + NodeApiType.TOKEN.getValue());
         TokenResponse response = tokenApi.callApi(request, connectInfo);
 
         if (Result.SUCCESS != response.getResult()) {
@@ -104,11 +104,11 @@ public class BreathingCapacityComponent {
         BreathingCapacityCalcRequest request = new BreathingCapacityCalcRequest();
         BeanUtil.copy(dto, request);
 
-        ApiConnectInfo connectInfo = new ApiConnectInfo();
-        connectInfo.setUrlSupplier(
-                () -> prop.getHealthinfoNodeApiUrl()
-                        + NodeApiType.BREATHING_CAPACITY.getValue());
-        connectInfo.addHeader("X-NODE-TOKEN", token);
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
+                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                        + NodeApiType.BREATHING_CAPACITY.getValue())
+                .withHeader("X-NODE-TOKEN", token);
+
         BreathingCapacityCalcResponse response = breathingCapacityCalcApi.callApi(request,
                 connectInfo);
 

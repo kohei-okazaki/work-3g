@@ -87,12 +87,14 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
                 }
             }
 
-            ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
             // アカウント情報.APIキーを設定
             Account account = accountSearchService.findById(request.getUserId()).get();
-            apiConnectInfo.addHeader("Api-Key", account.getApiKey());
-            apiConnectInfo.setUrlSupplier(() -> prop.getHealthInfoApiUrl()
-                    + request.getUserId() + "/healthinfo");
+
+            ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+                    .withHeader("Api-Key", account.getApiKey())
+                    .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
+                            + request.getUserId() + "/healthinfo");
+
             api.callApi(request, apiConnectInfo);
         }
 

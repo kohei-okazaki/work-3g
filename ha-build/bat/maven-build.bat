@@ -2,7 +2,7 @@
 
 rem ------------------------------------------------------------------------
 rem maven build
-rem arg1:profile (ex. ec2)
+rem arg1:profile (ex. local or ec2)
 rem ------------------------------------------------------------------------
 
 cls
@@ -10,15 +10,13 @@ cls
 rem read build.ini
 call initialize.bat
 
-
-
 rem jar.version
 set ver=1.0.0
-echo jar.version = %ver%
+echo jar.version=%ver%
 
 rem profile
 set profile=%1
-echo profile = %profile%
+echo profile=%profile%
 if "%profile%" equ "" (
   echo profile is invalid
   exit /B 0

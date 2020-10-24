@@ -20,6 +20,8 @@ import com.amazonaws.services.simpleemail.model.Destination;
 import com.amazonaws.services.simpleemail.model.MailFromDomainNotVerifiedException;
 import com.amazonaws.services.simpleemail.model.Message;
 import com.amazonaws.services.simpleemail.model.SendEmailRequest;
+import com.amazonaws.services.simpleemail.model.VerifyEmailIdentityRequest;
+import com.amazonaws.services.simpleemail.model.VerifyEmailIdentityResult;
 
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
@@ -29,6 +31,7 @@ import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * AWS-SimpleEmailServiceのComponent
@@ -52,6 +55,30 @@ public class AwsSesComponent {
     /** AWSS3Component */
     @Autowired
     private AwsS3Component awsS3Component;
+
+    /**
+     * Eメールアドレスの検証を行う
+     *
+     * @param mailAddress
+     *     検証用Eメールアドレス
+     */
+    public void verifyEmailAddress(String mailAddress) {
+
+        VerifyEmailIdentityRequest verifyEmailIdentityRequest = new VerifyEmailIdentityRequest();
+        // 検証用メールアドレス
+        verifyEmailIdentityRequest.setEmailAddress(mailAddress);
+        // AWS認証情報
+        verifyEmailIdentityRequest.setRequestCredentialsProvider(
+                awsAuthComponent.getAWSCredentialsProvider());
+
+        VerifyEmailIdentityResult result = getAmazonSES()
+                .verifyEmailIdentity(verifyEmailIdentityRequest);
+
+        boolean isSuccess = StringUtil
+                .isEmpty(result.getSdkResponseMetadata().getRequestId());
+        LOG.debug("認証メール送信完了 認証結果=" + isSuccess);
+
+    }
 
     /**
      * Eメールを送信する
@@ -91,7 +118,9 @@ public class AwsSesComponent {
             SendEmailRequest request = new SendEmailRequest()
                     .withSource(awsConfig.getMailAddress())
                     .withDestination(destination)
-                    .withMessage(message);
+                    .withMessage(message)
+                    .withRequestCredentialsProvider(
+                            awsAuthComponent.getAWSCredentialsProvider());
 
             getAmazonSES().sendEmail(request);
 
@@ -124,9 +153,9 @@ public class AwsSesComponent {
      * @return ClientConfiguration
      */
     private ClientConfiguration getClientConfiguration() {
-        ClientConfiguration config = new ClientConfigurationFactory().getConfig();
-        config.setConnectionTimeout(awsConfig.getSesTimeout());
-        return config;
+        return new ClientConfigurationFactory()
+                .getConfig()
+                .withConnectionTimeout(awsConfig.getSesTimeout());
     }
 
     /**

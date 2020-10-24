@@ -71,9 +71,9 @@ public class CalorieCalcComponent {
 
         TokenRequest request = new TokenRequest();
         request.setUserId(userId);
-        ApiConnectInfo connectInfo = new ApiConnectInfo();
-        connectInfo.setUrlSupplier(
-                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.TOKEN.getValue());
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
+                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                        + NodeApiType.TOKEN.getValue());
         TokenResponse response = tokenApi.callApi(request, connectInfo);
 
         if (Result.SUCCESS != response.getResult()) {
@@ -102,10 +102,11 @@ public class CalorieCalcComponent {
         CalorieCalcRequest request = new CalorieCalcRequest();
         BeanUtil.copy(dto, request);
 
-        ApiConnectInfo connectInfo = new ApiConnectInfo();
-        connectInfo.setUrlSupplier(
-                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.CALORIE.getValue());
-        connectInfo.addHeader("X-NODE-TOKEN", token);
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
+                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                        + NodeApiType.CALORIE.getValue())
+                .withHeader("X-NODE-TOKEN", token);
+
         CalorieCalcResponse response = calorieCalcApi.callApi(request, connectInfo);
 
         if (Result.SUCCESS != response.getResult()) {
