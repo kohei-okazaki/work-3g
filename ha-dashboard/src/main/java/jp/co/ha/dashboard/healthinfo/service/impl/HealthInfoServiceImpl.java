@@ -27,9 +27,9 @@ import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
@@ -108,12 +108,14 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         BeanUtil.copy(dto, request);
         request.setTestMode(TestMode.DB_REGIST);
 
-        ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
         // アカウント情報.APIキーを設定
         Account account = accountSearchService.findById(userId).get();
-        apiConnectInfo.addHeader("Api-Key", account.getApiKey());
-        apiConnectInfo.setUrlSupplier(
-                () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
+
+        ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+                .withHeader("Api-Key", account.getApiKey())
+                .withUrlSupplier(
+                        () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
+
         HealthInfoRegistResponse apiResponse = registApi.callApi(request,
                 apiConnectInfo);
 

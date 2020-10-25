@@ -14,7 +14,7 @@ import jp.co.ha.common.util.DateUtil.DateFormatType;
  *
  * @version 1.0.0
  */
-@SuppressWarnings("javadoc")
+@SuppressWarnings({ "javadoc", "deprecation" })
 public class DateUtilTest extends BaseCommonTest {
 
     @Test

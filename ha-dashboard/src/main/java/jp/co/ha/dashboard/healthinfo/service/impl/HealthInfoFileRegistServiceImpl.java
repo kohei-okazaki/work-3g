@@ -77,12 +77,13 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     public ResultType regist(List<HealthInfoCsvUploadModel> modelList, String userId)
             throws BaseException {
 
-        ApiConnectInfo apiConnectInfo = new ApiConnectInfo();
         // アカウント情報.APIキーを設定
         Account account = accountSearchService.findById(userId).get();
-        apiConnectInfo.addHeader("Api-Key", account.getApiKey());
-        apiConnectInfo.setUrlSupplier(
-                () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
+
+        ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+                .withHeader("Api-Key", account.getApiKey())
+                .withUrlSupplier(
+                        () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
 
         ResultType result = ResultType.SUCCESS;
         for (HealthInfoRegistRequest request : toRequestList(modelList, userId)) {

@@ -31,10 +31,10 @@ import jp.co.ha.web.controller.BaseWebController;
 @RequestMapping("breathingcapacity")
 public class BreathingCapacityController implements BaseWebController {
 
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** 肺活量計算Component */
+    /** {@linkplain BreathingCapacityComponent} */
     @Autowired
     private BreathingCapacityComponent component;
 
