@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.type.BatchResult;
+import jp.co.ha.business.api.aws.AwsConfig;
+import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthcheck.HealthCheckApi;
 import jp.co.ha.business.api.healthcheck.request.HealthCheckRequest;
 import jp.co.ha.business.api.healthcheck.response.HealthCheckResponse;
@@ -25,13 +27,20 @@ public class HealthCheckApiBatch extends BaseBatch {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(HealthCheckApiBatch.class);
-
+    /** 健康情報登録メールテンプレートID */
+    private static final String TEMPLATE_ID = "mail-template/health-check-template.txt";
     /** 健康情報関連プロパティ */
     @Autowired
     private HealthInfoProperties prop;
     /** ヘルスチェックAPI */
     @Autowired
     private HealthCheckApi healthCheckApi;
+    /** AWS-SES */
+    @Autowired
+    private AwsSesComponent awsSesComponent;
+    /** AWS個別設定情報 */
+    @Autowired
+    private AwsConfig awsConfig;
 
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
@@ -48,6 +57,8 @@ public class HealthCheckApiBatch extends BaseBatch {
             break;
         case FAILURE:
             LOG.error("健康管理APIサーバの状態が異常...");
+            awsSesComponent.sendMail(awsConfig.getMailAddress(), "ヘルスチェックAPI結果",
+                    TEMPLATE_ID);
             break;
         }
         return BatchResult.SUCCESS;
