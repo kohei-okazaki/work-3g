@@ -17,68 +17,60 @@ var PERCENTAGE = 100;
  * <ul>
  * <li>肺活量 / 予測肺活量 * 100</li>
  * </ul>
- * 
+ *
  * @param req
  *            リクエスト情報
  * @param res
  *            レスポンス情報
  * @param next
  */
-router
-        .post(
-                '/',
-                function(req, res, next) {
+router.post( '/', function(req, res, next) {
 
-                    console.log(prettyjson.render(req.body) + "\n");
+    console.log(prettyjson.render(req.body) + "\n");
 
-                    let gender_info;
-                    if ("0" == req.body['gender']) {
-                        // 男性の場合
-                        gender_info = {
-                            "base_breathing_capacity_def" : 3500,
-                            "base_val_def" : 27.63,
-                            "minus_def" : 0.122
-                        };
-                    } else if ("1" == req.body['gender']) {
-                        gender_info = {
-                            "base_breathing_capacity_def" : 2500,
-                            "base_val_def" : 21.78,
-                            "minus_def" : 0.101
-                        };
-                    } else {
-                        throw new Error('gender is invalid. gender='
-                                + req.body['gender']);
-                    }
+    let gender_info;
+    if ("0" == req.body['gender']) {
+        // 男性の場合
+        gender_info = {
+            "base_breathing_capacity_def" : 3500,
+            "base_val_def" : 27.63,
+            "minus_def" : 0.122
+        };
+    } else if ("1" == req.body['gender']) {
+        gender_info = {
+            "base_breathing_capacity_def" : 2500,
+            "base_val_def" : 21.78,
+            "minus_def" : 0.101
+        };
+    } else {
+        throw new Error('gender is invalid. gender=' + req.body['gender']);
+    }
 
-                    // 年齢部分の計算
-                    let calc_age = gender_info["minus_def"] * req.body['age']
-                    calc_age = util.round(calc_age, 3);
+    // 年齢部分の計算
+    let calc_age = gender_info["minus_def"] * req.body['age'];
+    calc_age = util.round(calc_age, 3);
 
-                    // 予測肺活量の計算
-                    let predict_breathing_capacity = (gender_info["base_val_def"] - calc_age)
-                            * req.body['height'];
-                    predict_breathing_capacity = util.round(
-                            predict_breathing_capacity, 3);
+    // 予測肺活量の計算
+    let predict_breathing_capacity = (gender_info["base_val_def"] - calc_age) * req.body['height'];
+    predict_breathing_capacity = util.round(predict_breathing_capacity, 3);
 
-                    // 肺活量％の計算
-                    let breathing_capacity_percentage = gender_info["base_breathing_capacity_def"]
-                            / predict_breathing_capacity * PERCENTAGE;
-                    breathing_capacity_percentage = util.round(
-                            breathing_capacity_percentage, 3);
+    // 肺活量％の計算
+    let breathing_capacity_percentage = gender_info["base_breathing_capacity_def"] / predict_breathing_capacity * PERCENTAGE;
+    breathing_capacity_percentage = util.round(breathing_capacity_percentage, 3);
 
-                    // レスポンスデータの作成
-                    let res_body = {
-                        'result' : 0,
-                        'breathing_capacity_calc_result' : {
-                            'predict_breathing_capacity' : predict_breathing_capacity,
-                            'breathing_capacity_percentage' : breathing_capacity_percentage,
-                        },
-                        'user_data' : req.body
-                    }
+    // レスポンスデータの作成
+    let res_body = {
+        'result' : 0,
+        'breathing_capacity_calc_result' : {
+            'predict_breathing_capacity' : predict_breathing_capacity,
+            'breathing_capacity_percentage' : breathing_capacity_percentage,
+        },
+        'user_data' : req.body
+    };
 
-                    console.log(prettyjson.render(res_body));
-                    res.json(res_body);
+    console.log(prettyjson.render(res_body));
+    res.json(res_body);
 
-                })
+})
 
 module.exports = router;

@@ -131,9 +131,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         TokenRequest request = new TokenRequest();
         request.setUserId(userId);
-        ApiConnectInfo connectInfo = new ApiConnectInfo();
-        connectInfo.setUrlSupplier(
-                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.TOKEN.getValue());
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
+                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                        + NodeApiType.TOKEN.getValue());
         TokenResponse response = tokenApi.callApi(request, connectInfo);
 
         if (Result.SUCCESS != response.getResult()) {
@@ -211,10 +211,11 @@ public class HealthInfoRegistServiceImpl extends CommonService
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
         BeanUtil.copy(request, apiRequest);
 
-        ApiConnectInfo connectInfo = new ApiConnectInfo();
-        connectInfo.setUrlSupplier(
-                () -> prop.getHealthinfoNodeApiUrl() + NodeApiType.BASIC.getValue());
-        connectInfo.addHeader("X-NODE-TOKEN", token);
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
+                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                        + NodeApiType.BASIC.getValue())
+                .withHeader("X-NODE-TOKEN", token);
+
         BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);
 

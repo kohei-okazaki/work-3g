@@ -49,6 +49,18 @@ public class ApiConnectInfo {
     }
 
     /**
+     * urlSupplierを設定する
+     *
+     * @param urlSupplier
+     *     URLSupplier
+     * @return ApiConnectInfo
+     */
+    public ApiConnectInfo withUrlSupplier(Supplier<String> urlSupplier) {
+        this.urlSupplier = urlSupplier;
+        return this;
+    }
+
+    /**
      * charsetを返す
      *
      * @return charset
@@ -75,6 +87,18 @@ public class ApiConnectInfo {
      */
     public void setCharset(String charset) {
         this.charset = Charset.forName(charset);
+    }
+
+    /**
+     * charsetを設定する
+     *
+     * @param charset
+     *     文字コード
+     * @return ApiConnectInfo
+     */
+    public ApiConnectInfo withCharset(Charset charset) {
+        this.charset = charset;
+        return this;
     }
 
     /**
@@ -118,6 +142,20 @@ public class ApiConnectInfo {
     }
 
     /**
+     * ヘッダーを追加する
+     *
+     * @param key
+     *     パラメータキー
+     * @param value
+     *     パラメータ値
+     * @return ApiConnectInfo
+     */
+    public ApiConnectInfo withHeader(String key, String value) {
+        this.headerMap.put(key, value);
+        return this;
+    }
+
+    /**
      * パラメータを追加する
      *
      * @param key
@@ -127,6 +165,20 @@ public class ApiConnectInfo {
      */
     public void addQueryParameter(String key, String value) {
         this.urlParameter.put(key, value);
+    }
+
+    /**
+     * パラメータを追加する
+     *
+     * @param key
+     *     パラメータキー
+     * @param value
+     *     パラメータ値
+     * @return ApiConnectInfo
+     */
+    public ApiConnectInfo withQueryParameter(String key, String value) {
+        this.urlParameter.put(key, value);
+        return this;
     }
 
 }
