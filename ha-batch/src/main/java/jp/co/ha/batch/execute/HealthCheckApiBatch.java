@@ -27,7 +27,7 @@ public class HealthCheckApiBatch extends BaseBatch {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(HealthCheckApiBatch.class);
-    /** 健康情報登録メールテンプレートID */
+    /** ヘルスチェックAPIメールテンプレートID */
     private static final String TEMPLATE_ID = "mail-template/health-check-template.txt";
     /** 健康情報関連プロパティ */
     @Autowired
