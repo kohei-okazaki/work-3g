@@ -81,7 +81,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
 
             // URIを生成
             URI uri = getUri(apiConnectInfo);
-            LOG.info(" ====> " + getApiName() + ",URL=" + uri.toString());
+            LOG.info("====> API名=" + getApiName() + ",URL=" + uri.toString());
             LOG.infoRes(request);
 
             if (HttpMethod.POST == getHttpMethod()) {
@@ -137,8 +137,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             LOG.error("APIの通信に失敗しました.", e);
         } finally {
             LOG.infoRes(response);
-            LOG.info(" <==== " + getApiName() + " HttpStatusCode="
-                    + code.value());
+            LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code.value());
         }
 
         return response;

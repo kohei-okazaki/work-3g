@@ -5,9 +5,10 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * API種別<br>
  * <ul>
- * <li>BASIC：基礎健康情報計算API</li>
- * <li>CALORIE：カロリー計算API</li>
- * <li>BREATHING_CAPACITY：肺活量計算API</li>
+ * <li>{@linkplain #BASIC}：基礎健康情報計算API</li>
+ * <li>{@linkplain #CALORIE}：カロリー計算API</li>
+ * <li>{@linkplain #BREATHING_CAPACITY}：肺活量計算API</li>
+ * <li>{@linkplain #TOKEN}：トークン発行API</li>
  * </ul>
  *
  * @version 1.0.0
