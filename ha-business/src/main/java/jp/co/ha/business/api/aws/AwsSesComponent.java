@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -30,6 +31,7 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
 
@@ -57,12 +59,55 @@ public class AwsSesComponent {
     private AwsS3Component awsS3Component;
 
     /**
+     * 認証結果
+     *
+     * @version 1.0.0
+     */
+    public static enum VerifyResultType implements BaseEnum {
+
+        /** 認証済 */
+        AUTHED("0"),
+        /** 未認証 */
+        STILL("1");
+
+        /** 値 */
+        private String value;
+
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private VerifyResultType(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String getValue() {
+            return this.value;
+        }
+
+        /**
+         * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+         * @param value
+         *     値
+         * @return VerifyResultType
+         */
+        public static VerifyResultType of(String value) {
+            return BaseEnum.of(VerifyResultType.class, value);
+        }
+
+    }
+
+    /**
      * Eメールアドレスの検証を行う
      *
      * @param mailAddress
      *     検証用Eメールアドレス
+     * @return 認証結果
      */
-    public void verifyEmailAddress(String mailAddress) {
+    public VerifyResultType verifyEmailAddress(String mailAddress) {
 
         VerifyEmailIdentityRequest verifyEmailIdentityRequest = new VerifyEmailIdentityRequest();
         // 検証用メールアドレス
@@ -74,10 +119,32 @@ public class AwsSesComponent {
         VerifyEmailIdentityResult result = getAmazonSES()
                 .verifyEmailIdentity(verifyEmailIdentityRequest);
 
-        boolean isSuccess = StringUtil
-                .isEmpty(result.getSdkResponseMetadata().getRequestId());
-        LOG.debug("認証メール送信完了 認証結果=" + isSuccess);
+        VerifyResultType res = StringUtil
+                .isEmpty(result.getSdkResponseMetadata().getRequestId())
+                        ? VerifyResultType.STILL
+                        : VerifyResultType.AUTHED;
 
+        LOG.debug("認証メール送信完了 認証結果=" + res);
+
+        return res;
+    }
+
+    /**
+     * Eメールを送信する
+     *
+     * @param to
+     *     宛先メールアドレス
+     * @param titleText
+     *     メール件名
+     * @param templateId
+     *     テンプレートID
+     * @throws BaseException
+     *     メール送信に失敗した場合
+     * @see #sendMail(String, String, String, Map)
+     */
+    public void sendMail(String to, String titleText, String templateId)
+            throws BaseException {
+        this.sendMail(to, titleText, templateId, Collections.emptyMap());
     }
 
     /**

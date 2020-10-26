@@ -2,7 +2,7 @@
 '''
 Created on 2020/06/14
 
-カロリー計算を行うクラス
+カロリー計算を行う
 @version: 1.0.0
 '''
 from time import sleep
@@ -22,10 +22,11 @@ class Calorie(object):
         '''
         self.driver = driver
 
-    def doCalc(self, calorie_form):
+    def doCalc(self, calorie_form, isMale):
         '''
         カロリー計算を行う
         @param calorie_form カロリー計算画面のForm
+        @param isMale 男性の場合True、それ以外の場合False
         '''
 
         '''
@@ -39,8 +40,11 @@ class Calorie(object):
         self.driver.find_element_by_id("age").clear()
         self.driver.find_element_by_id("age").send_keys(calorie_form.getAge())
 
-        # カロリー計算入力画面 - 性別を設定
-        self.driver.find_element_by_id("male").send_keys(calorie_form.getGender())
+        #  肺活量計算入力画面 - 性別を設定
+        if isMale:
+            self.driver.find_element_by_id("male").send_keys(calorie_form.getGender())
+        else :
+            self.driver.find_element_by_id("female").send_keys(calorie_form.getGender())
 
         # カロリー計算入力画面 - 身長を設定
         self.driver.find_element_by_id("height").click()
