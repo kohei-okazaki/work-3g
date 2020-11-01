@@ -4,6 +4,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
 import jp.co.ha.web.api.BaseApi;
 
@@ -24,18 +25,24 @@ public class BreathingCapacityCalcApi
     private static final NodeApiType TYPE = NodeApiType.BREATHING_CAPACITY;
 
     @Override
-    protected BreathingCapacityCalcResponse getResponse() {
+    public BreathingCapacityCalcResponse getResponse() {
         return new BreathingCapacityCalcResponse();
     }
 
     @Override
-    protected HttpMethod getHttpMethod() {
+    public HttpMethod getHttpMethod() {
         return HttpMethod.POST;
     }
 
     @Override
-    protected String getApiName() {
+    public String getApiName() {
         return TYPE.getName();
+    }
+
+    @Override
+    public void bindErrorInfo(BreathingCapacityCalcResponse response) {
+        response.setResult(Result.FAILURE);
+        response.setDetail("肺活量計算APIに失敗しました");
     }
 
 }

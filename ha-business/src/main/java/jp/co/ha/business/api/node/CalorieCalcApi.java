@@ -4,6 +4,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.CalorieCalcRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.CalorieCalcResponse;
 import jp.co.ha.web.api.BaseApi;
 
@@ -35,6 +36,12 @@ public class CalorieCalcApi extends BaseApi<CalorieCalcRequest, CalorieCalcRespo
     @Override
     public String getApiName() {
         return TYPE.getName();
+    }
+
+    @Override
+    public void bindErrorInfo(CalorieCalcResponse response) {
+        response.setResult(Result.FAILURE);
+        response.setDetail("カロリー計算APIに失敗しました");
     }
 
 }
