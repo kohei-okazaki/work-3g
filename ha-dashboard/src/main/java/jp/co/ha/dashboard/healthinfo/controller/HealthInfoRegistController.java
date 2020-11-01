@@ -89,18 +89,12 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         return new HealthInfoForm();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
         return getView(DashboardView.HEALTH_INFO_INPUT);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @MultiSubmitToken(factory = true)
     @PostMapping("/confirm")
@@ -118,9 +112,6 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         return getView(DashboardView.HEALTH_INFO_CONFIRM);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @MultiSubmitToken(check = true)
     @PostMapping("/complete")
@@ -137,10 +128,10 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         BeanUtil.copy(healthInfoForm, dto);
 
         // セッションからユーザIDを取得
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
 
-        boolean isFirstReg = healthInfoService.isFirstReg(userId);
+        boolean isFirstReg = healthInfoService.isFirstReg(seqUserId);
         model.addAttribute("isFirstReg", isFirstReg);
 
         if (!isFirstReg) {
@@ -148,12 +139,12 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             SelectOption selectOption = new SelectOptionBuilder()
                     .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
             HealthInfo lastHealthInfo = healthInfoSearchService
-                    .findByUserId(userId, selectOption).get(0);
+                    .findByUserId(seqUserId, selectOption).get(0);
             healthInfoService.addModel(model, dto, lastHealthInfo);
         }
 
         // 健康情報登録処理を行う
-        HealthInfoRegistResponse apiResponse = healthInfoService.regist(dto, userId);
+        HealthInfoRegistResponse apiResponse = healthInfoService.regist(dto, seqUserId);
 
         if (ResultType.SUCCESS == apiResponse.getResultType()) {
             // 健康情報の登録に成功した場合
@@ -184,15 +175,16 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
         // sessionよりユーザIDと健康情報Form情報を取得
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
         HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(healthInfoForm.getSeqHealthInfoId(), userId);
+                .findByHealthInfoIdAndUserId(healthInfoForm.getSeqHealthInfoId(),
+                        seqUserId);
         if (CollectionUtil.isEmpty(healthInfoList)) {
             // レコードが見つからなかった場合
             throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
@@ -219,15 +211,16 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             throws BaseException {
 
         // sessionよりユーザIDと健康情報Form情報を取得
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
         HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(healthInfoForm.getSeqHealthInfoId(), userId);
+                .findByHealthInfoIdAndUserId(healthInfoForm.getSeqHealthInfoId(),
+                        seqUserId);
         if (CollectionUtil.isEmpty(healthInfoList)) {
             // レコードが見つからなかった場合
             throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
@@ -236,7 +229,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 
         // 健康情報ファイル設定情報 取得
         HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService
-                .findById(userId).get();
+                .findById(seqUserId).get();
         // CSV設定情報取得
         CsvConfig conf = healthInfoService.getCsvConfig(fileSetting);
 

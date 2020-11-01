@@ -35,9 +35,6 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
         super(conf, pw);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void writeData(StringJoiner record, ReferenceCsvDownloadModel model) {
 
@@ -46,7 +43,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
         StringJoiner body = new StringJoiner(StringUtil.COMMA);
 
         // ユーザID
-        write(body, model.getUserId());
+        write(body, model.getSeqUserId().toString());
         // 身長
         write(body, conf.useMask() ? MaskExecutor.MASK : model.getHeight().toString());
         // 体重

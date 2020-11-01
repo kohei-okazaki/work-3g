@@ -20,25 +20,25 @@ public interface HealthInfoReferService {
      *
      * @param dto
      *     健康情報照会DTO
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 健康情報レスポンスリスト
      * @throws BaseException
      *     基底例外
      */
     List<HealthInfoReferenceDto> getHealthInfoResponseList(HealthInfoReferenceDto dto,
-            String userId) throws BaseException;
+            Integer seqUserId) throws BaseException;
 
     /**
      * 結果照会CSVモデルリストに変換する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @param resultList
      *     健康情報照会レスポンスリスト
      * @return modelList
      */
-    List<ReferenceCsvDownloadModel> toModelList(String userId,
+    List<ReferenceCsvDownloadModel> toModelList(Integer seqUserId,
             List<HealthInfoReferenceDto> resultList);
 
     /**

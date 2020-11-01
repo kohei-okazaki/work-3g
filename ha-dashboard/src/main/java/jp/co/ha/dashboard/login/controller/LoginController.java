@@ -29,8 +29,8 @@ import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
@@ -138,7 +138,8 @@ public class LoginController implements BaseWebController {
         }
 
         // アカウント情報を検索
-        Optional<Account> account = accountSearchService.findById(form.getUserId());
+        Optional<Account> account = accountSearchService
+                .findByMailAddress(form.getMailAddress());
         LoginCheckResult checkResult = new LoginCheck().check(account,
                 form.getPassword());
         if (checkResult.hasError()) {
@@ -150,14 +151,15 @@ public class LoginController implements BaseWebController {
         }
 
         // セッションにユーザIDを登録する。
-        sessionComponent.setValue(request.getSession(), "userId", form.getUserId());
+        sessionComponent.setValue(request.getSession(), "seqUserId",
+                account.get().getSeqUserId());
 
         healthInfoGraphService.putGraph(model, () -> {
 
             // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
             healthInfoSearchService
-                    .findByUserId(form.getUserId(), SELECT_OPTION).stream()
+                    .findByUserId(account.get().getSeqUserId(), SELECT_OPTION).stream()
                     .sorted((o1, o2) -> o1.getSeqHealthInfoId()
                             .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
@@ -189,9 +191,9 @@ public class LoginController implements BaseWebController {
     public String top(Model model, HttpServletRequest request) {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
         // ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).orElse(null);
-        if (StringUtil.isEmpty(userId)) {
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).orElse(null);
+        if (BeanUtil.isNull(seqUserId)) {
             return getView(DashboardView.LOGIN);
         }
 
@@ -201,7 +203,7 @@ public class LoginController implements BaseWebController {
             // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
             healthInfoSearchService
-                    .findByUserId(userId, SELECT_OPTION).stream()
+                    .findByUserId(seqUserId, SELECT_OPTION).stream()
                     .sorted((o1, o2) -> o1.getSeqHealthInfoId()
                             .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {

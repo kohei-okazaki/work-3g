@@ -47,18 +47,15 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     @Autowired
     private BeanValidator<HealthInfoCsvUploadModel> validator;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId)
+    public void formatCheck(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
             throws BaseException {
         for (int i = 0; i < modelList.size(); i++) {
             HealthInfoCsvUploadModel model = modelList.get(i);
             ValidateErrorResult result = validator.validate(model);
 
             // 相関チェック
-            if (!model.getUserId().equals(userId)) {
+            if (!model.getSeqUserId().equals(seqUserId)) {
                 throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                         ++i + "行目のユーザIDが不正です");
             }
@@ -70,23 +67,20 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public ResultType regist(List<HealthInfoCsvUploadModel> modelList, String userId)
+    public ResultType regist(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
             throws BaseException {
 
         // アカウント情報.APIキーを設定
-        Account account = accountSearchService.findById(userId).get();
+        Account account = accountSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
                 .withHeader("Api-Key", account.getApiKey())
                 .withUrlSupplier(
-                        () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
+                        () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         ResultType result = ResultType.SUCCESS;
-        for (HealthInfoRegistRequest request : toRequestList(modelList, userId)) {
+        for (HealthInfoRegistRequest request : toRequestList(modelList, seqUserId)) {
             HealthInfoRegistResponse response = registApi.callApi(request,
                     apiConnectInfo);
             if (ResultType.FAILURE == response.getResultType()) {
@@ -102,14 +96,14 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
      *
      * @param modelList
      *     健康情報CSVアップロードモデルリスト
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 健康情報登録APIリクエストリスト
      * @throws BaseException
      *     基底例外
      */
     private List<HealthInfoRegistRequest> toRequestList(
-            List<HealthInfoCsvUploadModel> modelList, String userId)
+            List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
             throws BaseException {
 
         return modelList.stream().map(e -> {

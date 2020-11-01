@@ -35,13 +35,13 @@ public interface HealthInfoService {
      * 指定されたユーザIDが初回登録かどうか判定する<br>
      * 初回登録の場合true, それ以外の場合falseを返す<br>
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 判定結果
      * @throws BaseException
      *     基底例外
      */
-    boolean isFirstReg(String userId) throws BaseException;
+    boolean isFirstReg(Integer seqUserId) throws BaseException;
 
     /**
      * CSVモデルリストに変換する
@@ -57,13 +57,13 @@ public interface HealthInfoService {
      *
      * @param dto
      *     健康情報DTO
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return HealthInfoRegistResponse
      * @throws BaseException
      *     基底例外
      */
-    HealthInfoRegistResponse regist(HealthInfoDto dto, String userId)
+    HealthInfoRegistResponse regist(HealthInfoDto dto, Integer seqUserId)
             throws BaseException;
 
     /**

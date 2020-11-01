@@ -11,11 +11,11 @@ import jp.co.ha.db.entity.composite.CompositeAccountKey;
 public interface CompositeAccountMapper {
 
     /**
-     * アカウント情報とメール情報と健康情報ファイル設定の複合Entityを返す
+     * アカウント情報と健康情報ファイル設定の複合Entityを返す
      *
      * @param key
      *     ユーザID
-     * @return アカウント情報とメール情報と健康情報ファイル設定の複合Entity
+     * @return アカウント情報と健康情報ファイル設定の複合Entity
      */
     CompositeAccount selectByPrimaryKey(CompositeAccountKey key);
 

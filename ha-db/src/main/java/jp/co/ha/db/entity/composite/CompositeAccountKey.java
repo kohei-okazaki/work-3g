@@ -15,25 +15,25 @@ public class CompositeAccountKey implements Serializable {
     @Ignore
     private static final long serialVersionUID = 1L;
     /** ユーザID */
-    private String userId;
+    private Integer seqUserId;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CompositeAccountKey implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", userId=").append(userId);
+        sb.append(", seqUserId=").append(seqUserId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -60,15 +60,16 @@ public class CompositeAccountKey implements Serializable {
             return false;
         }
         CompositeAccountKey other = (CompositeAccountKey) that;
-        return (this.getUserId() == null ? other.getUserId() == null
-                : this.getUserId().equals(other.getUserId()));
+        return (this.getSeqUserId() == null ? other.getSeqUserId() == null
+                : this.getSeqUserId().equals(other.getSeqUserId()));
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result
+                + ((getSeqUserId() == null) ? 0 : getSeqUserId().hashCode());
         return result;
     }
 

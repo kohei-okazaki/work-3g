@@ -50,9 +50,6 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
         this.modelList = modelList;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @SuppressWarnings("unchecked")
     protected void buildExcelDocument(Map<String, Object> model, Workbook workbook,

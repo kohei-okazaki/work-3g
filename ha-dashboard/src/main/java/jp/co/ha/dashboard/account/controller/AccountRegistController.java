@@ -60,9 +60,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         return new AccountRegistForm();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @NonAuth
     @GetMapping("/input")
@@ -70,9 +67,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         return getView(DashboardView.ACCOUNT_REGIST_INPUT);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @NonAuth
     @MultiSubmitToken(factory = true)
@@ -84,9 +78,9 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
             return getView(DashboardView.ACCOUNT_REGIST_INPUT);
         }
 
-        if (accountSearchService.findById(form.getUserId()).isPresent()) {
-            model.addAttribute("errorMessage", "指定されたユーザIDは既にアカウント情報が登録されています");
-            LOG.warn("指定されたユーザIDは既にアカウント情報が登録されています userId:" + form.getUserId());
+        if (accountSearchService.isExistByMailAddress(form.getMailAddress())) {
+            model.addAttribute("errorMessage", "指定されたメールアドレスは既に登録されています");
+            LOG.warn("指定されたメールアドレスは既に登録されています. mail_address:" + form.getMailAddress());
             return getView(DashboardView.ACCOUNT_REGIST_INPUT);
         }
 
@@ -96,9 +90,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         return getView(DashboardView.ACCOUNT_REGIST_CONFIRM);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @NonAuth
     @MultiSubmitToken(check = true)

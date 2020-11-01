@@ -33,9 +33,6 @@ public class AesCrypter implements Crypter {
     @Autowired
     private CryptConfig cryptConfig;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String encrypt(String str) {
 
@@ -55,9 +52,6 @@ public class AesCrypter implements Crypter {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String decrypt(String str) {
 

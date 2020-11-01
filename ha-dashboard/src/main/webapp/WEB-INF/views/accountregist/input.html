@@ -18,15 +18,15 @@
 
         <br>
         <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
         <!--/* ユーザIDここから */-->
         <div class="form-group">
-          <label class="control-label" th:text="#{userId}"></label><span class="badge badge-danger">必須</span>
-          <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" required placeholder="admin" />
+          <label class="control-label" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
+          <input type="text" class="validate[required] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
         </div><!-- /.form-group -->
         <!--/* ユーザIDここまで */-->
 
@@ -87,15 +87,15 @@
       $(".appTitle").removeAttr("onclick");
 
       $("input.reset").on("click", function() {
-        $("#userId").val("");
+        $("#mailAddress").val("");
         $("#password").val("");
         $("#confirmPassword").val("");
       });
 
       var mprogress = new Mprogress();
-      $("#userId").on("change", function() {
+      $("#mailAddress").on("change", function() {
         var value = 0;
-        if ($('#userId').val() !== '') {
+        if ($('#mailAddress').val() !== '') {
           value += 1;
         }
         if ($('#password').val() !== '') {
@@ -110,7 +110,7 @@
 
       $("#password").on("change", function() {
         var value = 0;
-        if ($('#userId').val() !== '') {
+        if ($('#mailAddress').val() !== '') {
           value += 1;
         }
         if ($('#password').val() !== '') {
@@ -125,7 +125,7 @@
 
       $("#confirmPassword").on("change", function() {
         var value = 0;
-        if ($('#userId').val() !== '') {
+        if ($('#mailAddress').val() !== '') {
           value += 1;
         }
         if ($('#password').val() !== '') {

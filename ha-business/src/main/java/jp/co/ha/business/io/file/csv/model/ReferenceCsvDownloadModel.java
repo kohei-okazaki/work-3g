@@ -18,7 +18,7 @@ import jp.co.ha.common.log.annotation.Mask;
 public class ReferenceCsvDownloadModel implements BaseCsvModel {
 
     /** ユーザID */
-    private String userId;
+    private Integer userId;
     /** 身長 */
     @Mask
     private BigDecimal height;
@@ -39,7 +39,7 @@ public class ReferenceCsvDownloadModel implements BaseCsvModel {
      *
      * @return userId
      */
-    public String getUserId() {
+    public Integer getSeqUserId() {
         return userId;
     }
 
@@ -49,7 +49,7 @@ public class ReferenceCsvDownloadModel implements BaseCsvModel {
      * @param userId
      *     ユーザID
      */
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

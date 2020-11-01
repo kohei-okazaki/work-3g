@@ -42,9 +42,6 @@ public enum ColumnType implements BaseEnum {
         this.classType = classType;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return value;

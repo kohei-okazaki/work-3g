@@ -59,12 +59,12 @@ public class HeathInfoRefDetailController implements BaseWebController {
                 .orElseThrow(() -> new SystemException(CommonErrorCode.DB_NO_DATA,
                         "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
         // sessionよりユーザID
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
 
         HealthInfoRefDetailDto dto = new HealthInfoRefDetailDto();
         dto.setSeqHealthInfoId(healthInfoId);
-        dto.setUserId(userId);
+        dto.setSeqUserId(seqUserId);
 
         // 詳細情報
         Optional<HealthInfoRefDetailDto> detail = healthInfoRefDetailService

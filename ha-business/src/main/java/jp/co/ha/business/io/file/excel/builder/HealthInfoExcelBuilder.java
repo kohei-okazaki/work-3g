@@ -32,9 +32,6 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelMode
         super(conf, modelList);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void writeData(Sheet sheet) {
         int rowPosition = this.conf.hasHeader() ? 1 : 0;

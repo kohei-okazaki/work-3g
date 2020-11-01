@@ -31,9 +31,6 @@ public class HealthInfoReferenceServiceImpl extends CommonService
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void checkRequest(HealthInfoReferenceRequest request) throws BaseException {
 
@@ -41,30 +38,27 @@ public class HealthInfoReferenceServiceImpl extends CommonService
         checkApiUse(request);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void execute(HealthInfoReferenceRequest request,
             HealthInfoReferenceResponse response) throws BaseException {
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
                 .findByHealthInfoIdAndUserId(request.getSeqHealthInfoId(),
-                        request.getUserId());
+                        request.getSeqUserId());
         if (CollectionUtil.isEmpty(healthInfoList)) {
             throw new BusinessException(CommonErrorCode.DB_NO_DATA,
                     "該当のレコードが見つかりません seqHealthInfoId:" + request.getSeqHealthInfoId()
-                            + ", userId:" + request.getUserId());
+                            + ", userId:" + request.getSeqUserId());
         } else if (CollectionUtil.isMultiple(healthInfoList)) {
             throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
                     "該当のデータが複数存在します seqHealthInfoId:" + request.getSeqHealthInfoId()
-                            + ", userId:" + request.getUserId());
+                            + ", userId:" + request.getSeqUserId());
         }
 
         HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
         {
             BaseRestApiResponse.Account account = new BaseRestApiResponse.Account();
-            account.setUserId(request.getUserId());
+            account.setSeqUserId(request.getSeqUserId());
             response.setAccount(account);
         }
         {

@@ -37,9 +37,6 @@ public enum RegexType implements BaseEnum {
         this.value = value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return this.value;

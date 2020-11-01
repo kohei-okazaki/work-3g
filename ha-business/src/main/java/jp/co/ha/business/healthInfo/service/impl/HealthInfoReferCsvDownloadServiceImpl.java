@@ -29,9 +29,6 @@ import jp.co.ha.common.util.FileUtil.FileSeparator;
 public class HealthInfoReferCsvDownloadServiceImpl
         implements CsvDownloadService<ReferenceCsvDownloadModel> {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void download(PrintWriter printWriter, CsvConfig conf,
             List<ReferenceCsvDownloadModel> modelList) throws BaseException {

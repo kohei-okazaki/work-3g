@@ -14,10 +14,10 @@ public interface HealthInfoFileSettingSearchService {
     /**
      * 健康情報ファイル設定を検索する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 健康情報ファイル設定
      */
-    Optional<HealthInfoFileSetting> findById(String userId);
+    Optional<HealthInfoFileSetting> findById(Integer seqUserId);
 
 }

@@ -18,17 +18,11 @@ public class LengthValidator implements ConstraintValidator<Length, Object> {
     /** length */
     private int length;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void initialize(Length annotation) {
         this.length = annotation.length();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {

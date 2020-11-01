@@ -15,19 +15,41 @@ public interface AccountSearchService {
     /**
      * ユーザIDからアカウント情報を取得する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return アカウント情報
      */
-    Optional<Account> findById(String userId);
+    Optional<Account> findById(Integer seqUserId);
 
     /**
-     * ユーザIDからアカウント情報とメール情報と健康情報ファイル設定の複合Entityを取得する
-     * 
-     * @param userId
+     * ユーザIDからアカウント情報と健康情報ファイル設定の複合Entityを取得する
+     *
+     * @param seqUserId
      *     ユーザID
      * @return アカウント情報とメール情報と健康情報ファイル設定の複合Entity
      */
-    Optional<CompositeAccount> findCompositAccountById(String userId);
+    Optional<CompositeAccount> findCompositAccountById(Integer seqUserId);
+
+    /**
+     * メールアドレスからアカウント情報を取得する
+     *
+     * @param mailAddress
+     *     メールアドレス
+     * @return アカウント情報
+     */
+    Optional<Account> findByMailAddress(String mailAddress);
+
+    /**
+     * 指定したメールアドレスが存在するかどうか判定する<br>
+     * <ul>
+     * <li>存在する場合、true</li>
+     * <li>存在しない場合、false</li>
+     * </ul>
+     *
+     * @param mailAddress
+     *     メールアドレス
+     * @return 判定結果
+     */
+    boolean isExistByMailAddress(String mailAddress);
 
 }

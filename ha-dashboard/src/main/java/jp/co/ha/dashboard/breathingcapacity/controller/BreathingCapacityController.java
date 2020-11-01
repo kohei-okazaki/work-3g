@@ -92,7 +92,7 @@ public class BreathingCapacityController implements BaseWebController {
         });
 
         BreathingCapacityDto calcResult = component.calc(dto, sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get());
+                .getValue(request.getSession(), "seqUserId", Integer.class).get());
         model.addAttribute("calcResult", calcResult);
 
         return getView(DashboardView.BREATHING_CAPACITY_CALC);

@@ -73,9 +73,6 @@ public enum DashboardView implements BaseView {
         this.name = name;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getName() {
         return this.name;

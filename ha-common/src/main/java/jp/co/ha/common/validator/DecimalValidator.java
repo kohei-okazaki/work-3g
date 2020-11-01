@@ -25,9 +25,6 @@ public class DecimalValidator implements ConstraintValidator<Decimal, Object> {
     /** 最大桁数で同値含むか */
     private boolean maxEqual;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void initialize(Decimal annotation) {
         this.min = annotation.min();
@@ -36,9 +33,6 @@ public class DecimalValidator implements ConstraintValidator<Decimal, Object> {
         this.maxEqual = annotation.maxEqual();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {

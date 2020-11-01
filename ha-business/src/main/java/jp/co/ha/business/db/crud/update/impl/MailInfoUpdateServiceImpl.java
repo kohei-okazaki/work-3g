@@ -21,9 +21,6 @@ public class MailInfoUpdateServiceImpl implements MailInfoUpdateService {
     @Autowired
     private MailInfoMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Update
     @Override
     @Transactional(rollbackFor = Exception.class)
