@@ -127,13 +127,16 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             }
         } catch (HttpClientErrorException e) {
             code = e.getStatusCode();
+            bindErrorInfo(response);
             throw new ApiException(CommonErrorCode.API_400_CONNECT_ERROR,
                     "APIの送信に失敗しました. HttpStatusCode=" + code.value(), e);
         } catch (HttpServerErrorException e) {
             code = e.getStatusCode();
+            bindErrorInfo(response);
             throw new ApiException(CommonErrorCode.API_500_CONNECT_ERROR,
                     "対向サーバに問題があります. HttpStatusCode=" + code.value(), e);
         } catch (Exception e) {
+            bindErrorInfo(response);
             LOG.error("APIの通信に失敗しました.", e);
         } finally {
             LOG.infoRes(response);
@@ -163,6 +166,14 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @return API名
      */
     protected abstract String getApiName();
+
+    /**
+     * レスポンス情報にエラー情報を割り当てる
+     *
+     * @param response
+     *     レスポンス情報
+     */
+    protected abstract void bindErrorInfo(Rs response);
 
     /**
      * リクエストURIを返す

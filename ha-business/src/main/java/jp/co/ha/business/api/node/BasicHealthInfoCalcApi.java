@@ -4,6 +4,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.web.api.BaseApi;
 
@@ -36,6 +37,12 @@ public class BasicHealthInfoCalcApi
     @Override
     public String getApiName() {
         return TYPE.getName();
+    }
+
+    @Override
+    public void bindErrorInfo(BasicHealthInfoCalcResponse response) {
+        response.setResult(Result.FAILURE);
+        response.setDetail("基礎健康情報計算APIに失敗しました");
     }
 
 }

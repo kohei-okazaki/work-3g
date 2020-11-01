@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.business.api.healthcheck.request.HealthCheckRequest;
 import jp.co.ha.business.api.healthcheck.response.HealthCheckResponse;
 import jp.co.ha.web.api.BaseApi;
+import jp.co.ha.web.form.BaseRestApiResponse.ErrorInfo;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * ヘルスチェックAPI
@@ -28,6 +30,13 @@ public class HealthCheckApi extends BaseApi<HealthCheckRequest, HealthCheckRespo
     @Override
     public String getApiName() {
         return "ヘルスチェックAPI";
+    }
+
+    @Override
+    public void bindErrorInfo(HealthCheckResponse response) {
+        response.setResultType(ResultType.FAILURE);
+        ErrorInfo errorInfo = new ErrorInfo();
+        response.setErrorInfo(errorInfo);
     }
 
 }
