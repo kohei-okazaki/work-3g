@@ -99,12 +99,12 @@ public class AccountSettingServiceImpl implements AccountSettingService {
      */
     private void mergeAccount(AccountDto dto, Account account) throws BaseException {
 
-        BeanUtil.copy(dto, account, Arrays.asList("userId"));
+        BeanUtil.copy(dto, account, Arrays.asList("seqUserId"));
         account.setPasswordExpire(
                 DateTimeUtil.toLocalDate(dto.getPasswordExpire(),
                         DateFormatType.YYYYMMDD_STRICT));
         account.setPassword(
-                encoder.encode(dto.getPassword(), dto.getSeqUserId().toString()));
+                encoder.encode(dto.getPassword(), dto.getMailAddress().toString()));
     }
 
     /**
@@ -118,7 +118,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
     private void mergeHealthInfoFileSetting(AccountDto dto,
             HealthInfoFileSetting healthInfoFileSetting) {
 
-        BeanUtil.copy(dto, healthInfoFileSetting, Arrays.asList("userId"));
+        BeanUtil.copy(dto, healthInfoFileSetting, Arrays.asList("seqUserId"));
     }
 
 }

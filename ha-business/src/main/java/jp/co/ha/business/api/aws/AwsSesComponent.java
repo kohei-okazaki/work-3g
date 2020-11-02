@@ -267,7 +267,8 @@ public class AwsSesComponent {
     private String getBodyTemplate(String templateId) throws BaseException {
 
         try (InputStream is = awsS3Component.getS3ObjectByKey(templateId);
-                BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(is, CHARSET.getValue()))) {
 
             StringBuilder sb = new StringBuilder();
             String line = null;
