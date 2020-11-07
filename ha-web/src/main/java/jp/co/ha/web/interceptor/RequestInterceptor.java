@@ -77,14 +77,14 @@ public class RequestInterceptor extends BaseWebInterceptor {
      */
     private String getHeader(HttpServletRequest request) {
 
-        StringJoiner headers = new StringJoiner(",");
+        StringJoiner headers = new StringJoiner(StringUtil.COMMA);
 
         // キーの一覧を取得
         Enumeration<String> keys = request.getHeaderNames();
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
 
-            StringJoiner header = new StringJoiner(",");
+            StringJoiner header = new StringJoiner(StringUtil.COMMA);
 
             // 値の一覧を取得
             Enumeration<String> values = request.getHeaders(key);
