@@ -1,0 +1,15 @@
+# Log file
+*.log
+
+# Package Files 
+*.exe
+*.pyc
+__init__.py
+
+#その他
+.settings
+.classpath
+.project
+__pycache__
+
+
