@@ -12,6 +12,7 @@ import com.amazonaws.regions.Regions;
  * <li>S3タイムアウト：設定ファイルで10秒を設定</li>
  * <li>SESメールアドレス：アプリの送信元メールアドレス</li>
  * <li>SESタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>SESスタブフラグ：true:メールを送信しない、false:送信する</li>
  * </ul>
  *
  * @version 1.0.0
