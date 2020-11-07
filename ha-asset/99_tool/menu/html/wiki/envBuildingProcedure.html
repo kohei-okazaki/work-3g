@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>環境構築手順</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-grid.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-reboot.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+</head>
+<body>
+  <h1>環境構築手順</h1>
+  <div class="container border">
+    <br>
+    <h2>概要</h2>
+    <div>ローカル環境の開発構築手順書になります<br>以下の手順に従って環境構築を行って下さい</div>
+    <table class="table">
+      <tr>
+        <td class="card card-body">
+          <a data-toggle="collapse" href="#db-env-build-procedure" role="button" aria-expanded="false" aria-controls="db-env-build-procedure">DB構築手順</a>
+          <div class="collapse" id="db-env-build-procedure">
+            <div class="card card-body bg-light">
+              <p>----DB構築手順----</p>
+              <div class="alert alert-danger" role="alert">実際に各Tableに対し、DDLなどの適用はmavenコマンドよりFlywayが行うため直接SQLを流さなくてよい</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="card card-body">
+          <a data-toggle="collapse" href="#java-env-build-procedure" role="button" aria-expanded="false" aria-controls="java-env-build-procedure">Java環境構築手順</a>
+          <div class="collapse" id="java-env-build-procedure">
+            <div class="card card-body bg-light">
+              <p>----Javaの環境構築手順----</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="card card-body">
+          <a data-toggle="collapse" href="#python-env-build-procedure" role="button" aria-expanded="false" aria-controls="python-env-build-procedure">Python構築手順</a>
+          <div class="collapse" id="python-env-build-procedure">
+            <div class="card card-body bg-light">
+              <p>----Python構築手順----</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="card card-body">
+          <a data-toggle="collapse" href="#node-env-build-procedure" role="button" aria-expanded="false" aria-controls="node-env-build-procedure">Node.js構築手順</a>
+          <div class="collapse" id="node-env-build-procedure">
+            <div class="card card-body bg-light">
+              <p>----Node.js構築手順----</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="card card-body">
+          <a data-toggle="collapse" href="#ide-env-build-procedure" role="button" aria-expanded="false" aria-controls="ide-env-build-procedure">IDE設定手順</a>
+          <div class="collapse" id="ide-env-build-procedure">
+            <div class="card card-body bg-light">
+              <p>----IDE設定手順----</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

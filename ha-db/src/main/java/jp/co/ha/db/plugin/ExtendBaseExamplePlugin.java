@@ -43,9 +43,9 @@ public class ExtendBaseExamplePlugin extends PluginAdapter {
      * {@linkplain BaseExample}を継承させる
      *
      * @param topLevelClass
-     *     TopLevelClass
+     *     {@linkplain TopLevelClass}
      * @param table
-     *     FullyQualifiedTable
+     *     {@linkplain FullyQualifiedTable}
      */
     private void extendsBaseExample(TopLevelClass topLevelClass,
             FullyQualifiedTable table) {
