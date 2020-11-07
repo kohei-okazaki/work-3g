@@ -20,18 +20,12 @@ public class MaxValidator implements ConstraintValidator<Max, Object> {
     /** 同じ値を含むかどうか */
     private boolean isEqual;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void initialize(Max annotation) {
         this.size = annotation.size();
         this.isEqual = annotation.isEqual();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {

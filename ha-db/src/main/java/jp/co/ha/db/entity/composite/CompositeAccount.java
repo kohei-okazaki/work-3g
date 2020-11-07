@@ -9,7 +9,7 @@ import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * アカウント情報とメール情報と健康情報ファイル設定の複合Entity
+ * アカウント情報と健康情報ファイル設定の複合Entity
  *
  * @version 1.0.0
  */

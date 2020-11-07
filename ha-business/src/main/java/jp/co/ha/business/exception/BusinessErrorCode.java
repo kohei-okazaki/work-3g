@@ -55,25 +55,16 @@ public enum BusinessErrorCode implements BaseErrorCode, BaseEnum {
     /** ログレベル */
     private LogLevel logLevel;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return this.value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getOuterErrorCode() {
         return this.outerErrorCode;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LogLevel getLogLevel() {
         return this.logLevel;

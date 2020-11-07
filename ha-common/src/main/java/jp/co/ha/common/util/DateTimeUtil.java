@@ -745,9 +745,6 @@ public class DateTimeUtil {
             this.value = value;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String getValue() {
             return this.value;

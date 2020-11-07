@@ -21,9 +21,6 @@ public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
     @Autowired
     private HealthInfoMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Delete
     @Override
     @Transactional(rollbackFor = Exception.class)

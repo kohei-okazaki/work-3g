@@ -38,9 +38,6 @@ public enum TestMode implements BaseEnum, JsonSerializable {
         this.value = value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return this.value;
@@ -76,9 +73,6 @@ public enum TestMode implements BaseEnum, JsonSerializable {
      */
     public static class TestModeDeserializer extends JsonDeserializer<TestMode> {
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public TestMode deserialize(JsonParser parser, DeserializationContext ctxt)
                 throws IOException, JsonProcessingException {

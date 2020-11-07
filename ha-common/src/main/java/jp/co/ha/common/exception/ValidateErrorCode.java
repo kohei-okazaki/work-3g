@@ -39,25 +39,16 @@ public enum ValidateErrorCode implements BaseErrorCode, BaseEnum {
     /** ErrorCode(外部用) */
     private String outerErrorCode;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return this.value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getOuterErrorCode() {
         return this.outerErrorCode;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public LogLevel getLogLevel() {
         return null;

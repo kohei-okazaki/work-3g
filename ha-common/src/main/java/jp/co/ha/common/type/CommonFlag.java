@@ -25,9 +25,6 @@ public enum CommonFlag implements BaseEnum {
     /** 値 */
     private String value;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return this.value;

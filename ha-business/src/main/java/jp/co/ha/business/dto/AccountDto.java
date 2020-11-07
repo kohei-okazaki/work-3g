@@ -8,7 +8,7 @@ package jp.co.ha.business.dto;
 public class AccountDto {
 
     /** ユーザID */
-    private String userId;
+    private Integer seqUserId;
     /** パスワード */
     private String password;
     /** 確認用パスワード */
@@ -35,22 +35,22 @@ public class AccountDto {
     private String enclosureCharFlag;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**

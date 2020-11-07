@@ -34,9 +34,6 @@ public enum HealthInfoStatus implements BaseEnum {
         this.message = message;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return value;

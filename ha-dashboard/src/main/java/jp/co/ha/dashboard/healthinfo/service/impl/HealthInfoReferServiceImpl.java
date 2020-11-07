@@ -21,10 +21,10 @@ import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.db.entity.HealthInfo;
@@ -45,15 +45,12 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     @Autowired
     private HealthInfoProperties prop;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<HealthInfoReferenceDto> getHealthInfoResponseList(
-            HealthInfoReferenceDto dto, String userId) throws BaseException {
+            HealthInfoReferenceDto dto, Integer seqUserId) throws BaseException {
 
         // ユーザIDと健康情報照会DTOから健康情報Entityリストを取得
-        List<HealthInfo> entityList = getHealthInfoList(dto, userId);
+        List<HealthInfo> entityList = getHealthInfoList(dto, seqUserId);
         return entityList.stream().map(e -> {
             HealthInfoReferenceDto result = new HealthInfoReferenceDto();
             // リクエストDTOを設定(検索条件部の設定)
@@ -72,11 +69,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
         }).collect(Collectors.toList());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public List<ReferenceCsvDownloadModel> toModelList(String userId,
+    public List<ReferenceCsvDownloadModel> toModelList(Integer seqUserId,
             List<HealthInfoReferenceDto> resultList) {
         return resultList.stream().map(e -> {
             ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();
@@ -88,15 +82,12 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                         srcDto.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
 
             });
-            model.setUserId(userId);
+            model.setUserId(seqUserId);
 
             return model;
         }).collect(Collectors.toList());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
 
@@ -105,7 +96,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()
-                + entity.getUserId();
+                + entity.getSeqUserId();
 
         return new CsvConfigBuilder(fileName, path)
                 .hasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()))
@@ -121,12 +112,12 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
      *
      * @param dto
      *     健康情報照会DTO
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 健康情報リスト
      */
     private List<HealthInfo> getHealthInfoList(HealthInfoReferenceDto dto,
-            String userId) {
+            Integer seqUserId) {
 
         List<HealthInfo> resultList;
         SelectOption selectOption = new SelectOptionBuilder()
@@ -136,16 +127,16 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
             // 健康情報IDが未指定の場合
             if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
                 resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(
-                        userId, editFromDate(dto.getFromHealthInfoRegDate()),
+                        seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
                         editToDate(dto.getFromHealthInfoRegDate()), selectOption);
             } else {
                 resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(
-                        userId, editFromDate(dto.getFromHealthInfoRegDate()),
+                        seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
                         editToDate(dto.getToHealthInfoRegDate()), selectOption);
             }
         } else {
             resultList = healthInfoSearchService
-                    .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), userId);
+                    .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), seqUserId);
         }
 
         return resultList;

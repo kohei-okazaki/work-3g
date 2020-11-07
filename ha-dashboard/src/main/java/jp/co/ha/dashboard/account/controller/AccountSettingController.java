@@ -61,11 +61,11 @@ public class AccountSettingController
     public AccountSettingForm setUpForm(HttpServletRequest request) {
 
         // セッションからユーザIDを取得
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
 
         Optional<CompositeAccount> entity = accountSearchService
-                .findCompositAccountById(userId);
+                .findCompositAccountById(seqUserId);
 
         AccountSettingForm form = new AccountSettingForm();
         BeanUtil.copy(entity.get(), form, (src, dest) -> {
@@ -79,18 +79,12 @@ public class AccountSettingController
         return form;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
         return getView(DashboardView.ACCOUNT_SETTING_INPUT);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @MultiSubmitToken(factory = true)
     @PostMapping("/confirm")
@@ -107,9 +101,6 @@ public class AccountSettingController
         return getView(DashboardView.ACCOUNT_SETTING_CONFIRM);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @MultiSubmitToken(check = true)
     @PostMapping("/complete")

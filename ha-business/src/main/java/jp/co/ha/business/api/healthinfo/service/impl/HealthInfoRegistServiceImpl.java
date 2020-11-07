@@ -72,9 +72,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
     @Autowired
     private HealthInfoProperties prop;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void checkRequest(HealthInfoRegistRequest request) throws BaseException {
 
@@ -82,15 +79,12 @@ public class HealthInfoRegistServiceImpl extends CommonService
         checkApiUse(request);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void execute(HealthInfoRegistRequest request,
             HealthInfoRegistResponse response) throws BaseException {
 
         // トークン発行API実施
-        TokenResponse tokenResponse = callTokenApi(request.getUserId());
+        TokenResponse tokenResponse = callTokenApi(request.getSeqUserId());
 
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcResponse apiResponse = callBasicHealthInfoCalcApi(
@@ -104,7 +98,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         {
             BaseRestApiResponse.Account account = new BaseRestApiResponse.Account();
-            account.setUserId(request.getUserId());
+            account.setSeqUserId(request.getSeqUserId());
             response.setAccount(account);
         }
 
@@ -121,16 +115,16 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /**
      * Token発行APIを呼び出す
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return Token発行APIのレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private TokenResponse callTokenApi(String userId) throws BaseException {
+    private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
 
         TokenRequest request = new TokenRequest();
-        request.setUserId(userId);
+        request.setSeqUserId(seqUserId);
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());
@@ -159,14 +153,14 @@ public class HealthInfoRegistServiceImpl extends CommonService
     private HealthInfo toEntity(HealthInfoRegistRequest request,
             BasicHealthInfo basicHealthInfo) throws BaseException {
 
-        String userId = request.getUserId();
+        Integer seqUserId = request.getSeqUserId();
         BigDecimal weight = request.getWeight();
         BigDecimal bmi = basicHealthInfo.getBmi();
 
         // 最後に登録した健康情報を取得する
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
-        List<HealthInfo> lastHealthInfo = healthInfoSearchService.findByUserId(userId,
+        List<HealthInfo> lastHealthInfo = healthInfoSearchService.findByUserId(seqUserId,
                 selectOption);
 
         HealthInfoStatus status = CollectionUtil.isEmpty(lastHealthInfo)
@@ -183,7 +177,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         HealthInfo entity = new HealthInfo();
         BeanUtil.copy(request, entity);
-        entity.setUserId(userId);
+        entity.setSeqUserId(seqUserId);
         entity.setBmi(bmi);
         entity.setStandardWeight(basicHealthInfo.getStandardWeight());
         entity.setHealthInfoStatus(status.getValue());

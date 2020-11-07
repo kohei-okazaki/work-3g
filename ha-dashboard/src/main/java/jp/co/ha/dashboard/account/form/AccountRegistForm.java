@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.account.form;
 
+import javax.validation.constraints.Email;
+
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Max;
@@ -15,12 +17,11 @@ import jp.co.ha.web.form.BaseForm;
  */
 public class AccountRegistForm implements BaseForm {
 
-    /** ユーザID */
-    @Required(message = "ユーザIDが未入力です")
-    @Pattern(regixPattern = RegexType.HALF_CHAR, message = "ユーザIDは半角英数で入力してください")
-    @Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
-    @Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
-    private String userId;
+    /** メールアドレス */
+    @Required(message = "メールアドレスが未入力です")
+    @Max(size = 64, message = "メールアドレスは64桁以下で入力してください")
+    @Email(message = "メールアドレス形式ではありません")
+    private String mailAddress;
     /** パスワード */
     @Mask
     @Required(message = "パスワードが未入力です")
@@ -40,22 +41,22 @@ public class AccountRegistForm implements BaseForm {
     private String remarks;
 
     /**
-     * userIdを返す
+     * mailAddressを返す
      *
-     * @return userId
+     * @return mailAddress
      */
-    public String getUserId() {
-        return userId;
+    public String getMailAddress() {
+        return mailAddress;
     }
 
     /**
-     * userIdを設定する
+     * mailAddressを設定する
      *
-     * @param userId
-     *     ユーザID
+     * @param mailAddress
+     *     メールアドレス
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 
     /**

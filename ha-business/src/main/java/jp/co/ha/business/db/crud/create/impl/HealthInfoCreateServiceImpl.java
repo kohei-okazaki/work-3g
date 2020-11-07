@@ -23,9 +23,6 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
     @Autowired
     private HealthInfoMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Insert
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -33,9 +30,6 @@ public class HealthInfoCreateServiceImpl implements HealthInfoCreateService {
         mapper.insert(entity);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Insert
     @Override
     @Transactional(rollbackFor = Exception.class)

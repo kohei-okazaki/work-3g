@@ -18,17 +18,17 @@
 
         <br>
         <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
-        <!--/* ユーザIDここから */-->
+        <!--/* メールアドレスここから */-->
         <div class="form-group">
-          <label class="control-label" th:text="#{userId}"></label><span class="badge badge-danger">必須</span>
-          <input type="text" class="validate[required] form-control" th:field="*{userId}" maxlength="16" required placeholder="admin" />
+          <label class="control-label" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
+          <input type="text" class="validate[required] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
         </div><!-- /.form-group -->
-        <!--/* ユーザIDここまで */-->
+        <!--/* メールアドレスここまで */-->
 
         <!--/* パスワードここから */-->
         <div class="form-group">
@@ -75,6 +75,7 @@
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
+  <script src="../resources/js/common/password.js" th:src="@{/resources/js/common/password.min.js}"></script>
   <script>
     $(function() {
 
@@ -87,15 +88,15 @@
       $(".appTitle").removeAttr("onclick");
 
       $("input.reset").on("click", function() {
-        $("#userId").val("");
+        $("#mailAddress").val("");
         $("#password").val("");
         $("#confirmPassword").val("");
       });
 
       var mprogress = new Mprogress();
-      $("#userId").on("change", function() {
+      $("#mailAddress").on("change", function() {
         var value = 0;
-        if ($('#userId').val() !== '') {
+        if ($('#mailAddress').val() !== '') {
           value += 1;
         }
         if ($('#password').val() !== '') {
@@ -110,7 +111,7 @@
 
       $("#password").on("change", function() {
         var value = 0;
-        if ($('#userId').val() !== '') {
+        if ($('#mailAddress').val() !== '') {
           value += 1;
         }
         if ($('#password').val() !== '') {
@@ -125,7 +126,7 @@
 
       $("#confirmPassword").on("change", function() {
         var value = 0;
-        if ($('#userId').val() !== '') {
+        if ($('#mailAddress').val() !== '') {
           value += 1;
         }
         if ($('#password').val() !== '') {
@@ -138,19 +139,6 @@
         mprogress.set(progressValue);
       });
 
-      var password = $('#password').get(0);
-      var passwordCheck = $('#password-check').get(0);
-      passwordCheck.addEventListener('change', function() {
-        var inputType = passwordCheck.checked ? 'text' : 'password';
-        password.setAttribute('type', inputType);
-      }, false);
-
-      var confirmPassword = $('#confirmPassword').get(0);
-      var confirmPasswordCheck = $('#confirmPassword-check').get(0);
-      confirmPasswordCheck.addEventListener('change', function() {
-        var inputType = confirmPasswordCheck.checked ? 'text' : 'password';
-        confirmPassword.setAttribute('type', inputType);
-      }, false);
     });
 
   </script>

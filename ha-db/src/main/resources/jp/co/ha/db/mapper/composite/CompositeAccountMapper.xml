@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ha.db.mapper.composite.CompositeAccountMapper">
   <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.composite.CompositeAccount">
-    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <id column="SEQ_USER_ID" jdbcType="INTEGER" property="seqUserId" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="DELETE_FLAG" jdbcType="VARCHAR" property="deleteFlag" />
     <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
@@ -18,14 +18,13 @@
   <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.composite.CompositeAccountKey" resultMap="BaseResultMap">
     select
       <!-- ACCOUNT -->
-      AC.USER_ID
+      AC.SEQ_USER_ID
       , AC.PASSWORD
       , AC.DELETE_FLAG
       , AC.PASSWORD_EXPIRE
       , AC.REMARKS
       , AC.API_KEY
-      <!-- MAIL_INFO -->
-      , MI.MAIL_ADDRESS
+      , AC.MAIL_ADDRESS
       <!-- HEALTH_INFO_FILE_SETTING -->
       , HF.HEADER_FLAG
       , HF.FOOTER_FLAG
@@ -33,11 +32,9 @@
       , HF.ENCLOSURE_CHAR_FLAG
     from
       ACCOUNT AC
-      LEFT OUTER JOIN MAIL_INFO MI
-        ON AC.USER_ID = MI.USER_ID
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
-        ON AC.USER_ID = HF.USER_ID
+        ON AC.SEQ_USER_ID = HF.SEQ_USER_ID
     where
-      AC.USER_ID = #{userId,jdbcType=VARCHAR}
+      AC.SEQ_USER_ID = #{seqUserId,jdbcType=INTEGER}
   </select>
 </mapper>

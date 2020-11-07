@@ -28,6 +28,7 @@
     <property name="referenceFilePath" value="${reference.file.path}" />
     <property name="registBatchFilePath" value="${healthinfo.regist.batch.file.path}" />
     <property name="healthinfoNodeApiUrl" value="${healthinfo.node.api.url}" />
+    <property name="healthInfoDashboardUrl" value="${healthinfo.dashboard.url}" />
     <property name="healthInfoApiUrl" value="${healthinfo.api.url}" />
     <property name="monthlySummaryBatchFilePath" value="${healthinfo.monthly.summary.batch.file.path}" />
   </bean>

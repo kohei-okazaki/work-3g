@@ -16,9 +16,6 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 @Service
 public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public HealthInfoStatus getHealthInfoStatus(BigDecimal inputWeight,
             BigDecimal beforeWeight) {
@@ -34,9 +31,6 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
         return status;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public BigDecimal calcDiffWeight(BigDecimal before, BigDecimal now) {
         return now.subtract(before).abs().setScale(1, RoundingMode.HALF_UP);
