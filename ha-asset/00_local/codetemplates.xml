@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="filecomment_context" deleted="false" description="作成済みの Java ファイルのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.filecomment" name="filecomment">/**
+ *
+ */</template><template autoinsert="true" context="typecomment_context" deleted="false" description="作成済みの型のコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.typecomment" name="typecomment">/**
+ * @version 1.0.0
+ * ${tags}
+ */</template><template autoinsert="true" context="delegatecomment_context" deleted="false" description="委譲メソッドのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.delegatecomment" name="delegatecomment">/**
+ * ${tags}
+ * ${see_to_target}
+ */</template><template autoinsert="true" context="constructorcomment_context" deleted="false" description="作成済みコンストラクターのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.constructorcomment" name="constructorcomment">/**
+ * ${tags}
+ */</template><template autoinsert="true" context="fieldcomment_context" deleted="false" description="フィールドのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.fieldcomment" name="fieldcomment">/**
+ *
+ */</template><template autoinsert="false" context="settercomment_context" deleted="false" description="setter メソッドのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.settercomment" name="settercomment">/**
+ * ${bare_field_name}を設定する
+ * @param ${param}
+ */</template><template autoinsert="true" context="methodcomment_context" deleted="false" description="オーバーライドしないメソッドのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.methodcomment" name="methodcomment">/**
+ * ${tags}
+ */</template><template autoinsert="false" context="gettercomment_context" deleted="false" description="getter メソッドのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.gettercomment" name="gettercomment">/**
+ * ${bare_field_name}を返す
+ * @return ${bare_field_name}
+ */</template><template autoinsert="true" context="overridecomment_context" deleted="false" description="オーバーライドするメソッドのコメント" enabled="true" id="org.eclipse.jdt.ui.text.codetemplates.overridecomment" name="overridecomment">/* (非 Javadoc)
+ * ${see_to_overridden}
+ */</template></templates>

@@ -1,0 +1,1058 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>health_info_api_docs 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> health_info_api_docs
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-token_api">token_api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-basic_calc_api">basic_calc_api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-calorie_calc_api">calorie_calc_api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-breathing_capacity_api">breathing_capacity_api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-health_check_api">health_check_api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-health_info_ref_api">health_info_ref_api module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-health_info_regist_api">health_info_regist_api module</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">health_info_api_docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>health_info_api_docs 1.0.0 documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api">
+<h1>健康管理APIドキュメント<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<span id="document-token_api"></span><div class="section" id="module-token_api">
+<span id="token-api-module"></span><h2>token_api module<a class="headerlink" href="#module-token_api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="token_api.TokenAPI">
+<em class="property">class </em><code class="sig-prename descclassname">token_api.</code><code class="sig-name descname">TokenAPI</code><a class="headerlink" href="#token_api.TokenAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Token発行API</p>
+<dl class="py method">
+<dt id="token_api.TokenAPI.tokenApi">
+<code class="sig-name descname">tokenApi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#token_api.TokenAPI.tokenApi" title="Permalink to this definition">¶</a></dt>
+<dd><p>NodeAPIで共通的に事前に呼ぶToken発行を行う</p>
+<dl>
+<dt>Url:</dt><dd><p><a class="reference external" href="http://localhost:3000/token">http://localhost:3000/token</a></p>
+</dd>
+<dt>Method:</dt><dd><p>POST</p>
+</dd>
+<dt>Header:</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 53%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Content-Type</p></td>
+<td><p>application/json</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Request_Body:</dt><dd><p>json (string): Token発行API 要求JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>userId</p></td>
+<td><p>string</p></td>
+<td><p>ユーザID</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Response_Body:</dt><dd><p>json (string): Token発行API 応答JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 20%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>result</p></td>
+<td><p>int</p></td>
+<td><p>API実行処理結果</p></td>
+</tr>
+<tr class="row-odd"><td><p>detail</p></td>
+<td><p>string</p></td>
+<td><p>エラー事由</p></td>
+</tr>
+<tr class="row-even"><td><p>token</p></td>
+<td><p>string</p></td>
+<td><p>Nodeが発行したAPI用トークン(期限は1時間とする)</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span id="document-basic_calc_api"></span><div class="section" id="module-basic_calc_api">
+<span id="basic-calc-api-module"></span><h2>basic_calc_api module<a class="headerlink" href="#module-basic_calc_api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="basic_calc_api.BasicCalcAPI">
+<em class="property">class </em><code class="sig-prename descclassname">basic_calc_api.</code><code class="sig-name descname">BasicCalcAPI</code><a class="headerlink" href="#basic_calc_api.BasicCalcAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>基礎健康情報計算API</p>
+<dl class="py method">
+<dt id="basic_calc_api.BasicCalcAPI.calc">
+<code class="sig-name descname">calc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#basic_calc_api.BasicCalcAPI.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>基礎健康情報を計算する</p>
+<dl>
+<dt>Url:</dt><dd><p><a class="reference external" href="http://localhost:3000/basic">http://localhost:3000/basic</a></p>
+</dd>
+<dt>Method:</dt><dd><p>POST</p>
+</dd>
+<dt>Header:</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Content-Type</p></td>
+<td><p>application/json</p></td>
+</tr>
+<tr class="row-odd"><td><p>X-NODE-TOKEN</p></td>
+<td><p>${発行されたトークン}</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Request_Body:</dt><dd><p>json (string): 基礎健康情報計算API 要求JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-odd"><td><p>weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Response_Body:</dt><dd><p>json (string): 基礎健康情報計算API 応答JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>result</p></td>
+<td></td>
+<td><p>int</p></td>
+<td><p>API実行処理結果</p></td>
+</tr>
+<tr class="row-odd"><td><p>detail</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>エラー事由</p></td>
+</tr>
+<tr class="row-even"><td><p>basic_health_info</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-odd"><td><p>basic_health_info</p></td>
+<td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-even"><td><p>basic_health_info</p></td>
+<td><p>weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+<tr class="row-odd"><td><p>basic_health_info</p></td>
+<td><p>bmi</p></td>
+<td><p>double</p></td>
+<td><p>ユーザのBMI</p></td>
+</tr>
+<tr class="row-even"><td><p>basic_health_info</p></td>
+<td><p>standard_weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの標準体重</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span id="document-calorie_calc_api"></span><div class="section" id="module-calorie_calc_api">
+<span id="calorie-calc-api-module"></span><h2>calorie_calc_api module<a class="headerlink" href="#module-calorie_calc_api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="calorie_calc_api.CalorieCalcAPI">
+<em class="property">class </em><code class="sig-prename descclassname">calorie_calc_api.</code><code class="sig-name descname">CalorieCalcAPI</code><a class="headerlink" href="#calorie_calc_api.CalorieCalcAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>カロリー計算API</p>
+<dl class="py method">
+<dt id="calorie_calc_api.CalorieCalcAPI.calc">
+<code class="sig-name descname">calc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calorie_calc_api.CalorieCalcAPI.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>ユーザのカロリーを計算する</p>
+<dl>
+<dt>Url:</dt><dd><p><a class="reference external" href="http://localhost:3000/calorie">http://localhost:3000/calorie</a></p>
+</dd>
+<dt>Method:</dt><dd><p>POST</p>
+</dd>
+<dt>Header:</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Content-Type</p></td>
+<td><p>application/json</p></td>
+</tr>
+<tr class="row-odd"><td><p>X-NODE-TOKEN</p></td>
+<td><p>${発行されたトークン}</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Request_Body:</dt><dd><p>json (string): カロリー計算API 要求JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 26%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gender</p></td>
+<td><p>string</p></td>
+<td><p>ユーザの性別</p></td>
+</tr>
+<tr class="row-odd"><td><p>age</p></td>
+<td><p>int</p></td>
+<td><p>ユーザの年齢</p></td>
+</tr>
+<tr class="row-even"><td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-odd"><td><p>weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+<tr class="row-even"><td><p>life_work_metabolism</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの生活活動代謝</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Response_Body:</dt><dd><p>json (string): 基礎健康情報計算API 応答JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 22%" />
+<col style="width: 16%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>result</p></td>
+<td></td>
+<td><p>int</p></td>
+<td><p>API実行処理結果</p></td>
+</tr>
+<tr class="row-odd"><td><p>detail</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>エラー事由</p></td>
+</tr>
+<tr class="row-even"><td><p>calorie_calc_result</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-odd"><td><p>calorie_calc_result</p></td>
+<td><p>base_metabolism</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-even"><td><p>calorie_calc_result</p></td>
+<td><p>lost_calorie_per_day</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+<tr class="row-odd"><td><p>user_data</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-even"><td><p>user_data</p></td>
+<td><p>gender</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの性別</p></td>
+</tr>
+<tr class="row-odd"><td><p>user_data</p></td>
+<td><p>age</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの年齢</p></td>
+</tr>
+<tr class="row-even"><td><p>user_data</p></td>
+<td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-odd"><td><p>user_data</p></td>
+<td><p>weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+<tr class="row-even"><td><p>user_data</p></td>
+<td><p>life_work_metabolism</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの生活活動代謝</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span id="document-breathing_capacity_api"></span><div class="section" id="module-breathing_capacity_api">
+<span id="breathing-capacity-api-module"></span><h2>breathing_capacity_api module<a class="headerlink" href="#module-breathing_capacity_api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="breathing_capacity_api.BreathingCapacityAPI">
+<em class="property">class </em><code class="sig-prename descclassname">breathing_capacity_api.</code><code class="sig-name descname">BreathingCapacityAPI</code><a class="headerlink" href="#breathing_capacity_api.BreathingCapacityAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>肺活量計算API</p>
+<dl class="py method">
+<dt id="breathing_capacity_api.BreathingCapacityAPI.breathing_capacity">
+<code class="sig-name descname">breathing_capacity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#breathing_capacity_api.BreathingCapacityAPI.breathing_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>肺活量を計算する</p>
+<dl>
+<dt>Url:</dt><dd><p><a class="reference external" href="http://localhost:3000/breathing_capacity">http://localhost:3000/breathing_capacity</a></p>
+</dd>
+<dt>Method:</dt><dd><p>POST</p>
+</dd>
+<dt>Header:</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Content-Type</p></td>
+<td><p>application/json</p></td>
+</tr>
+<tr class="row-odd"><td><p>X-NODE-TOKEN</p></td>
+<td><p>${発行されたトークン}</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Request_Body:</dt><dd><p>json (string): 肺活量計算API 要求JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>age</p></td>
+<td><p>int</p></td>
+<td><p>ユーザの年齢</p></td>
+</tr>
+<tr class="row-odd"><td><p>gender</p></td>
+<td><p>string</p></td>
+<td><p>ユーザの性別</p></td>
+</tr>
+<tr class="row-even"><td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Response_Body:</dt><dd><p>json (string): 肺活量計算API 応答JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 27%" />
+<col style="width: 13%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>result</p></td>
+<td></td>
+<td><p>int</p></td>
+<td><p>API実行処理結果</p></td>
+</tr>
+<tr class="row-odd"><td><p>detail</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>エラー事由</p></td>
+</tr>
+<tr class="row-even"><td><p>breathing_capacity_calc_result</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-odd"><td><p>breathing_capacity_calc_result</p></td>
+<td><p>predict_breathing_capacity</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの予測肺活量</p></td>
+</tr>
+<tr class="row-even"><td><p>breathing_capacity_calc_result</p></td>
+<td><p>breathing_capacity_percentage</p></td>
+<td><p>double</p></td>
+<td><p>肺活量%</p></td>
+</tr>
+<tr class="row-odd"><td><p>user_data</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-even"><td><p>user_data</p></td>
+<td><p>age</p></td>
+<td><p>int</p></td>
+<td><p>ユーザの年齢</p></td>
+</tr>
+<tr class="row-odd"><td><p>user_data</p></td>
+<td><p>gender</p></td>
+<td><p>string</p></td>
+<td><p>ユーザの性別</p></td>
+</tr>
+<tr class="row-even"><td><p>user_data</p></td>
+<td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span id="document-health_check_api"></span><div class="section" id="module-health_check_api">
+<span id="health-check-api-module"></span><h2>health_check_api module<a class="headerlink" href="#module-health_check_api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="health_check_api.HealthCheckAPI">
+<em class="property">class </em><code class="sig-prename descclassname">health_check_api.</code><code class="sig-name descname">HealthCheckAPI</code><a class="headerlink" href="#health_check_api.HealthCheckAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>ヘルスチェックAPI</p>
+<dl class="py method">
+<dt id="health_check_api.HealthCheckAPI.health_check">
+<code class="sig-name descname">health_check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#health_check_api.HealthCheckAPI.health_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>健康管理APIサーバのヘルスチェックを行う</p>
+<dl>
+<dt>Url:</dt><dd><p><a class="reference external" href="http://localhost:8081/api/healthcheck">http://localhost:8081/api/healthcheck</a></p>
+</dd>
+<dt>Method:</dt><dd><p>GET</p>
+</dd>
+<dt>Header:</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 53%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Accept-Charset</p></td>
+<td><p>utf-8</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Response_Body:</dt><dd><p>json (string): ヘルスチェックAPI 応答JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>result</p></td>
+<td><p>double</p></td>
+<td><p>API実行処理結果</p></td>
+</tr>
+<tr class="row-odd"><td><p>error</p></td>
+<td><p>double</p></td>
+<td><p>status = 0の時、Null</p></td>
+</tr>
+<tr class="row-even"><td><p>account</p></td>
+<td><p>string</p></td>
+<td><p>Null</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span id="document-health_info_ref_api"></span><div class="section" id="module-health_info_ref_api">
+<span id="health-info-ref-api-module"></span><h2>health_info_ref_api module<a class="headerlink" href="#module-health_info_ref_api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="health_info_ref_api.HealthInfoRefenceAPI">
+<em class="property">class </em><code class="sig-prename descclassname">health_info_ref_api.</code><code class="sig-name descname">HealthInfoRefenceAPI</code><a class="headerlink" href="#health_info_ref_api.HealthInfoRefenceAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>健康情報照会API</p>
+<dl class="py method">
+<dt id="health_info_ref_api.HealthInfoRefenceAPI.reference">
+<code class="sig-name descname">reference</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#health_info_ref_api.HealthInfoRefenceAPI.reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>ユーザの健康情報を照会する</p>
+<dl>
+<dt>Url:</dt><dd><p><a class="reference external" href="http://localhost:8081/api">http://localhost:8081/api</a>/${user_id}/healthinfo/${seq_health_info_id}</p>
+</dd>
+<dt>Method:</dt><dd><p>GET</p>
+</dd>
+<dt>Header:</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 53%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Accept-Charset</p></td>
+<td><p>utf-8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Api-Key</p></td>
+<td><p>APIKEY</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Response_Body:</dt><dd><p>json (string): 健康情報照会API 応答JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>result</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>API実行処理結果</p></td>
+</tr>
+<tr class="row-odd"><td><p>error</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 0の時、Null</p></td>
+</tr>
+<tr class="row-even"><td><p>error</p></td>
+<td><p>code</p></td>
+<td><p>string</p></td>
+<td><p>エラーコード</p></td>
+</tr>
+<tr class="row-odd"><td><p>error</p></td>
+<td><p>detail</p></td>
+<td><p>string</p></td>
+<td><p>エラー詳細情報</p></td>
+</tr>
+<tr class="row-even"><td><p>account</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-odd"><td><p>account</p></td>
+<td><p>userId</p></td>
+<td><p>string</p></td>
+<td><p>ユーザを一意に識別するID</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>seqHealthInfoId</p></td>
+<td><p>int</p></td>
+<td><p>健康情報一意に識別するID</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td><p>bmi</p></td>
+<td><p>double</p></td>
+<td><p>ユーザのBMI</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>standardWeight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの標準体重</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td><p>status</p></td>
+<td><p>string</p></td>
+<td><p>前回登録したときとの体重差のステータス</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>regDate</p></td>
+<td><p>string</p></td>
+<td><p>yyyyMMddHHmmss</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<span id="document-health_info_regist_api"></span><div class="section" id="module-health_info_regist_api">
+<span id="health-info-regist-api-module"></span><h2>health_info_regist_api module<a class="headerlink" href="#module-health_info_regist_api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="health_info_regist_api.HealthInfoRegistAPI">
+<em class="property">class </em><code class="sig-prename descclassname">health_info_regist_api.</code><code class="sig-name descname">HealthInfoRegistAPI</code><a class="headerlink" href="#health_info_regist_api.HealthInfoRegistAPI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>健康情報登録API</p>
+<dl class="py method">
+<dt id="health_info_regist_api.HealthInfoRegistAPI.regist">
+<code class="sig-name descname">regist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#health_info_regist_api.HealthInfoRegistAPI.regist" title="Permalink to this definition">¶</a></dt>
+<dd><p>ユーザの健康情報を登録する</p>
+<dl>
+<dt>Url:</dt><dd><p><a class="reference external" href="http://localhost:8081/api">http://localhost:8081/api</a>/${user_id}/healthinfo</p>
+</dd>
+<dt>Method:</dt><dd><p>POST</p>
+</dd>
+<dt>Header:</dt><dd><table class="docutils align-default">
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Content-Type</p></td>
+<td><p>application/json</p></td>
+</tr>
+<tr class="row-odd"><td><p>Accept-Charset</p></td>
+<td><p>utf-8</p></td>
+</tr>
+<tr class="row-even"><td><p>Api-Key</p></td>
+<td><p>APIKEY</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Request_Body:</dt><dd><p>json (string): 健康情報登録API 要求JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 22%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-odd"><td><p>weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+<tr class="row-even"><td><p>testMode</p></td>
+<td><p>string</p></td>
+<td><p>非推奨、試験モード</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>Response_Body:</dt><dd><p>json (string): 健康情報登録API 応答JSON</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Detail</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>result</p></td>
+<td></td>
+<td><p>string</p></td>
+<td><p>API実行処理結果</p></td>
+</tr>
+<tr class="row-odd"><td><p>error</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 0の時、Null</p></td>
+</tr>
+<tr class="row-even"><td><p>error</p></td>
+<td><p>code</p></td>
+<td><p>string</p></td>
+<td><p>エラーコード</p></td>
+</tr>
+<tr class="row-odd"><td><p>error</p></td>
+<td><p>detail</p></td>
+<td><p>string</p></td>
+<td><p>エラー詳細情報</p></td>
+</tr>
+<tr class="row-even"><td><p>account</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-odd"><td><p>account</p></td>
+<td><p>userId</p></td>
+<td><p>string</p></td>
+<td><p>ユーザを一意に識別するID</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td></td>
+<td><p>object</p></td>
+<td><p>status = 1の時、Null</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>seqHealthInfoId</p></td>
+<td><p>int</p></td>
+<td><p>健康情報一意に識別するID</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td><p>height</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの身長</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>weight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの体重</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td><p>bmi</p></td>
+<td><p>double</p></td>
+<td><p>ユーザのBMI</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>standardWeight</p></td>
+<td><p>double</p></td>
+<td><p>ユーザの標準体重</p></td>
+</tr>
+<tr class="row-even"><td><p>healthInfo</p></td>
+<td><p>status</p></td>
+<td><p>string</p></td>
+<td><p>前回登録したときとの体重差のステータス</p></td>
+</tr>
+<tr class="row-odd"><td><p>healthInfo</p></td>
+<td><p>regDate</p></td>
+<td><p>string</p></td>
+<td><p>yyyyMMddHHmmss</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, okazaki
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

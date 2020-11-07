@@ -1,0 +1,117 @@
+/** 画面のタイトルの設定 */
+h1 {
+  width: auto;
+  /*文字色*/
+  color: #000000;
+  /*線色*/
+  border: solid 3px #000000;
+  /*文字周りの余白*/
+  padding: 0.5em;
+  /*角丸*/
+  border-radius: 0.5em;
+}
+
+/** 入力タグの設定 */
+input[type=text] {
+  border: 0;
+  padding: 10px;
+  font-size: 1.3em;
+  font-family: Meiryo;
+  color: #000000;
+  border: solid 1px #ccc;
+  margin: 10px 0 10px;
+  width: 300px;
+}
+
+/** テキストエリアの設定 */
+textarea {
+  border: 1;
+  font-size: 1.1em;
+  font-family: Meiryo;
+}
+
+.button {
+  margin: 7px;
+}
+
+input[type=button] {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #FFFFFF;
+  background: #35defb;
+  border: solid 3px #35defb;
+  border-radius: 3px;
+  transition: .4s;
+}
+
+input[type=button]:hover {
+  background: #FFFFFF;
+  color: #35defb;
+  transform: translateY(2px);
+  cursor: pointer;
+}
+
+.contentLayout {
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3%;
+  width: 95%;
+  padding: 10px;
+  background: #d3fdfb;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
+}
+
+.select {
+  overflow: hidden;
+  width: 90%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.select select {
+  width: 100%;
+  padding-right: 1em;
+  cursor: pointer;
+  text-indent: 0.01px;
+  text-overflow: ellipsis;
+  border: none;
+  outline: none;
+  background: transparent;
+  background-image: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.select select::-ms-expand {
+    display: none;
+}
+
+.select.cp_sl04 {
+  position: relative;
+  border-radius: 2px;
+  border: 2px solid #35defb;
+  border-radius: 50px;
+  background: #ffffff;
+}
+
+.select.cp_sl04::before {
+  position: absolute;
+  top: 0.8em;
+  right: 0.8em;
+  width: 0;
+  height: 0;
+  padding: 0;
+  content: '';
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #35defb;
+  pointer-events: none;
+}
+
+.select.cp_sl04 select {
+  padding: 8px 38px 8px 8px;
+  color: #35defb;
+}
