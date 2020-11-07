@@ -29,9 +29,6 @@ public class Package {
         return value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
         String prefix = "package ";

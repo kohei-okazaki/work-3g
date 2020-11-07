@@ -15,30 +15,30 @@ public abstract class BaseRestApiRequest implements BaseForm {
 
     /** ユーザID */
     @JsonIgnore
-    @Required(message = "userIdが未指定です")
-    private String userId;
+    @Required(message = "seqUserIdが未指定です")
+    private Integer seqUserId;
     /** APIキー */
     @JsonIgnore
     @Required(message = "apiKeyが未指定です")
     private String apiKey;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**

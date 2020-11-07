@@ -16,6 +16,8 @@ public class HealthInfoProperties {
     private String registBatchFilePath;
     /** NodeAPIの基底URL */
     private String healthinfoNodeApiUrl;
+    /** 健康情報ダッシュボードの基底URL */
+    private String healthInfoDashboardUrl;
     /** 健康情報APIの基底URL */
     private String healthInfoApiUrl;
     /** 月次健康情報集計バッチCSV格納パス */
@@ -76,6 +78,25 @@ public class HealthInfoProperties {
      */
     public void setHealthinfoNodeApiUrl(String healthinfoNodeApiUrl) {
         this.healthinfoNodeApiUrl = healthinfoNodeApiUrl;
+    }
+
+    /**
+     * healthInfoDashboardUrlを返す
+     *
+     * @return healthInfoDashboardUrl
+     */
+    public String getHealthInfoDashboardUrl() {
+        return healthInfoDashboardUrl;
+    }
+
+    /**
+     * healthInfoDashboardUrlを設定する
+     *
+     * @param healthInfoDashboardUrl
+     *     健康情報ダッシュボードの基底URL
+     */
+    public void setHealthInfoDashboardUrl(String healthInfoDashboardUrl) {
+        this.healthInfoDashboardUrl = healthInfoDashboardUrl;
     }
 
     /**

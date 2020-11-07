@@ -12,26 +12,25 @@ import jp.co.ha.web.form.BaseApiRequest;
 public class TokenRequest extends BaseNodeRequest implements BaseApiRequest {
 
     /** ユーザID */
-    @JsonProperty("user_id")
-    private String userId;
+    @JsonProperty("seq_user_id")
+    private Integer seqUserId;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
-     *     ユーザID
+     * @param seqUserId
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
 }

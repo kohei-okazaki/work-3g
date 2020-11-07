@@ -50,9 +50,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
     @Autowired
     private BeanValidator<HealthInfoRegistRequest> validator;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
 
@@ -88,12 +85,12 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
             }
 
             // アカウント情報.APIキーを設定
-            Account account = accountSearchService.findById(request.getUserId()).get();
+            Account account = accountSearchService.findById(request.getSeqUserId()).get();
 
             ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
                     .withHeader("Api-Key", account.getApiKey())
                     .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
-                            + request.getUserId() + "/healthinfo");
+                            + request.getSeqUserId() + "/healthinfo");
 
             api.callApi(request, apiConnectInfo);
         }
@@ -101,9 +98,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
         return BatchResult.SUCCESS;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Options getOptions() {
         Options options = new Options();

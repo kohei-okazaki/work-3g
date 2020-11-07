@@ -21,7 +21,7 @@ import jp.co.ha.web.controller.BaseRestController;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping(value = "/api/{userId}/healthinfo")
+@RequestMapping(value = "/api/{seqUserId}/healthinfo")
 public class HealthInfoRegistController extends
         BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
 
@@ -32,7 +32,7 @@ public class HealthInfoRegistController extends
     /**
      * 健康情報登録APIを受け付ける
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @param apiKey
      *     APIキー
@@ -43,11 +43,11 @@ public class HealthInfoRegistController extends
      *     基底例外
      */
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoRegistResponse doPost(@PathVariable("userId") String userId,
+    public HealthInfoRegistResponse doPost(@PathVariable("seqUserId") Integer seqUserId,
             @RequestHeader("Api-Key") String apiKey,
             @RequestBody HealthInfoRegistRequest request) throws BaseException {
 
-        request.setUserId(userId);
+        request.setSeqUserId(seqUserId);
         request.setApiKey(apiKey);
 
         super.validate(request);
@@ -59,9 +59,6 @@ public class HealthInfoRegistController extends
         return response;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void accept(HealthInfoRegistRequest request, HealthInfoRegistResponse response)
             throws BaseException {

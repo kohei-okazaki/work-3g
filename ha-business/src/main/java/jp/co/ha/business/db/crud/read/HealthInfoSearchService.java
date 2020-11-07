@@ -16,7 +16,7 @@ public interface HealthInfoSearchService {
     /**
      * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @param fromHealthInfoRegDate
      *     YYYYMMDD
@@ -26,7 +26,7 @@ public interface HealthInfoSearchService {
      *     {@linkplain SelectOption}
      * @return 健康情報のリスト
      */
-    List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId,
+    List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(Integer seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption);
 
@@ -35,20 +35,21 @@ public interface HealthInfoSearchService {
      *
      * @param seqHealthInfoId
      *     健康情報ID
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 健康情報リスト
      */
-    List<HealthInfo> findByHealthInfoIdAndUserId(Integer seqHealthInfoId, String userId);
+    List<HealthInfo> findByHealthInfoIdAndUserId(Integer seqHealthInfoId,
+            Integer seqUserId);
 
     /**
      * 指定されたユーザIDの件数を返す
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 件数
      */
-    int getSelectCountByUserId(String userId);
+    int getSelectCountByUserId(Integer seqUserId);
 
     /**
      * 指定されたユーザIDで健康情報を検索する<br>
@@ -58,13 +59,13 @@ public interface HealthInfoSearchService {
      * <li>検索上限</li>
      * </ul>
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @param selectOption
      *     {@linkplain SelectOption}
      * @return 健康情報リスト
      */
-    List<HealthInfo> findByUserId(String userId, SelectOption selectOption);
+    List<HealthInfo> findByUserId(Integer seqUserId, SelectOption selectOption);
 
     /**
      * 指定した開始日時から終了日時の間の健康情報リストを返す

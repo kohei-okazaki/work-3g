@@ -21,9 +21,6 @@ import jp.co.ha.common.type.Charset;
 public class HealthInfoCsvUploadServiceImpl
         implements CsvUploadService<HealthInfoCsvUploadModel> {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<HealthInfoCsvUploadModel> upload(MultipartFile uploadFile)
             throws BaseException {

@@ -15,7 +15,7 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
 
     /** ユーザID */
     @Required(message = "ユーザIDが未指定です")
-    private String userId;
+    private Integer seqUserId;
     /** 身長 */
     @Mask
     @Required(message = "身長が未指定です")
@@ -28,22 +28,22 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
     private String weight;
 
     /**
-     * userIdを返す
-     *
-     * @return userId
+     * seqUserIdを返す
+     * 
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
-     *
-     * @param userId
+     * seqUserIdを設定する
+     * 
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**

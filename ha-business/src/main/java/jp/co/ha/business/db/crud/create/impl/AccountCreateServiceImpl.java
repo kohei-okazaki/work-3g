@@ -21,9 +21,6 @@ public class AccountCreateServiceImpl implements AccountCreateService {
     @Autowired
     private AccountMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Insert
     @Override
     @Transactional(rollbackFor = Exception.class)

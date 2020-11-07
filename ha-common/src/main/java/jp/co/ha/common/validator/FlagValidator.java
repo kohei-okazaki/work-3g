@@ -16,9 +16,6 @@ import jp.co.ha.common.validator.annotation.Flag;
  */
 public class FlagValidator implements ConstraintValidator<Flag, Object> {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {

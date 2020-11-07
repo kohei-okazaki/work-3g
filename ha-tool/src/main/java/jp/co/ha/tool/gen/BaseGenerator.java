@@ -116,14 +116,14 @@ public abstract class BaseGenerator {
         ENTITY("ENTITY", "ha-db\\src\\main\\java\\jp\\co\\ha\\db\\entity",
                 EntityGenerator.class),
         /** DDL作成 */
-        DDL("DDL", "ha-resource\\02_db\\ddl", CreateTableGenerator.class),
+        DDL("DDL", "ha-asset\\02_db\\ddl", CreateTableGenerator.class),
         /** DROP作成 */
-        DROP("DROP", "ha-resource\\02_db\\others", DropSqlGenerator.class),
+        DROP("DROP", "ha-asset\\02_db\\others", DropSqlGenerator.class),
         /** テーブル定義作成 */
-        TABLE_DEFINE("TABLE_DEFINE", "ha-resource\\02_db\\others",
+        TABLE_DEFINE("TABLE_DEFINE", "ha-asset\\02_db\\others",
                 TableDefineGenerator.class),
         /** DML作成 */
-        DML("DML", "ha-resource\\02_db\\dml", DmlGenerator.class);
+        DML("DML", "ha-asset\\02_db\\dml", DmlGenerator.class);
 
         /** 値 */
         private String value;

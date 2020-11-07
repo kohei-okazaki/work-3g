@@ -42,15 +42,16 @@ public class CalorieCalcComponent {
      *
      * @param dto
      *     {@linkplain CalorieCalcDto}
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return {@linkplain CalorieCalcDto}
      * @throws BaseException
      *     カロリー計算APIの処理が成功以外
      */
-    public CalorieCalcDto calc(CalorieCalcDto dto, String userId) throws BaseException {
+    public CalorieCalcDto calc(CalorieCalcDto dto, Integer seqUserId)
+            throws BaseException {
 
-        TokenResponse tokenApiResponse = callTokenApi(userId);
+        TokenResponse tokenApiResponse = callTokenApi(seqUserId);
 
         CalorieCalcResponse apiResponse = callCalorieCalcApi(dto,
                 tokenApiResponse.getToken());
@@ -62,15 +63,15 @@ public class CalorieCalcComponent {
     /**
      * Token発行APIを呼び出す
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return Token発行APIのレスポンス
      * @throws BaseException
      */
-    private TokenResponse callTokenApi(String userId) throws BaseException {
+    private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
 
         TokenRequest request = new TokenRequest();
-        request.setUserId(userId);
+        request.setSeqUserId(seqUserId);
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());

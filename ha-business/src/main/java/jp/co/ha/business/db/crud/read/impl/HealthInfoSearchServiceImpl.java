@@ -27,20 +27,17 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Autowired
     private HealthInfoMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(String userId,
+    public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(Integer seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
         // ユーザID
-        criteria.andUserIdEqualTo(userId);
+        criteria.andSeqUserIdEqualTo(seqUserId);
         // 健康情報登録日時
         criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
         // ソート処理
@@ -48,53 +45,44 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         return mapper.selectByExample(example);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
     public List<HealthInfo> findByHealthInfoIdAndUserId(Integer seqHealthInfoId,
-            String userId) {
+            Integer seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
         // 健康情報ID
         criteria.andSeqHealthInfoIdEqualTo(seqHealthInfoId);
         // ユーザID
-        criteria.andUserIdEqualTo(userId);
+        criteria.andSeqUserIdEqualTo(seqUserId);
 
         return mapper.selectByExample(example);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
-    public int getSelectCountByUserId(String userId) {
+    public int getSelectCountByUserId(Integer seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
         // ユーザID
-        criteria.andUserIdEqualTo(userId);
+        criteria.andSeqUserIdEqualTo(seqUserId);
 
         return (int) mapper.countByExample(example);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByUserId(String userId, SelectOption selectOption) {
+    public List<HealthInfo> findByUserId(Integer seqUserId, SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
         // ユーザID
-        criteria.andUserIdEqualTo(userId);
+        criteria.andSeqUserIdEqualTo(seqUserId);
         // ソート処理
         example.setOrderByClause(selectOption.getOrderBy());
         // 検索上限数

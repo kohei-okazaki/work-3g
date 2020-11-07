@@ -21,9 +21,6 @@ import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 public class HealthInfoCsvDownloadServiceImpl
         implements CsvDownloadService<HealthInfoCsvDownloadModel> {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void download(PrintWriter pw, CsvConfig conf,
             List<HealthInfoCsvDownloadModel> modelList) throws BaseException {

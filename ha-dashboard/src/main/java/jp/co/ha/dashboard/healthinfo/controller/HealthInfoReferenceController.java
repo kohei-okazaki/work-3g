@@ -149,8 +149,8 @@ public class HealthInfoReferenceController implements BaseWebController {
             return getView(DashboardView.HEALTH_INFO_REFFERNCE);
         }
 
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
 
         HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
         BeanUtil.copy(form, dto, (src, dest) -> {
@@ -162,7 +162,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         });
 
         List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto,
-                userId);
+                seqUserId);
 
         // 検索処理実行フラグを設定
         model.addAttribute("isRefered", true);
@@ -206,8 +206,8 @@ public class HealthInfoReferenceController implements BaseWebController {
     @GetMapping("/exceldownload")
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
 
         // sessionにある前画面の検索条件で再度検索する
         HealthInfoReferenceDto referDto = sessionComponent
@@ -216,10 +216,10 @@ public class HealthInfoReferenceController implements BaseWebController {
                 .orElseThrow(() -> new SystemException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
-                .getHealthInfoResponseList(referDto, userId);
+                .getHealthInfoResponseList(referDto, seqUserId);
 
         ReferenceExcelComponent component = new ReferenceExcelComponent();
-        component.setUserId(userId);
+        component.setSeqUserId(seqUserId);
         component.setResultList(resultList);
         return new ModelAndView(excelDownloadService.download(component));
     }
@@ -238,8 +238,8 @@ public class HealthInfoReferenceController implements BaseWebController {
     public void csvDownload(HttpServletRequest request, HttpServletResponse response)
             throws BaseException {
 
-        String userId = sessionComponent
-                .getValue(request.getSession(), "userId", String.class).get();
+        Integer seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Integer.class).get();
         // sessionにある前画面の検索条件で再度検索する
         HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",
@@ -247,11 +247,11 @@ public class HealthInfoReferenceController implements BaseWebController {
                 .orElseThrow(() -> new SystemException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
-                .getHealthInfoResponseList(referDto, userId);
+                .getHealthInfoResponseList(referDto, seqUserId);
 
         // 健康情報ファイル設定情報 取得
         HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService
-                .findById(userId).get();
+                .findById(seqUserId).get();
         // CSV設定情報取得
         CsvConfig conf = service.getCsvConfig(fileSetting);
 
@@ -264,7 +264,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         try {
             // ResponseにCSV情報を書き出す
             csvDownloadService.download(response.getWriter(), conf,
-                    service.toModelList(userId, resultList));
+                    service.toModelList(seqUserId, resultList));
         } catch (IOException e) {
             throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
                     "ファイルの出力処理に失敗しました", e);
@@ -274,7 +274,8 @@ public class HealthInfoReferenceController implements BaseWebController {
         // 一時ダウンロードファイル
         File file = FileUtil.getFile(conf.getOutputPath()
                 + FileSeparator.SYSTEM.getValue() + conf.getFileName());
-        awsS3Component.putFile("healthinfo-refer-file/" + userId + "/" + file.getName(),
+        awsS3Component.putFile(
+                "healthinfo-refer-file/" + seqUserId + "/" + file.getName(),
                 file);
     }
 

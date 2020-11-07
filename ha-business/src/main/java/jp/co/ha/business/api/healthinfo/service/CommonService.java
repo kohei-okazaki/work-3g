@@ -34,9 +34,10 @@ public abstract class CommonService {
     protected void checkApiUse(BaseRestApiRequest request) throws BaseException {
 
         // アカウント情報取得
-        Account account = accountSearchService.findById(request.getUserId()).orElseThrow(
-                () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
-                        "アカウント情報が存在しません userId:" + request.getUserId()));
+        Account account = accountSearchService.findById(request.getSeqUserId())
+                .orElseThrow(
+                        () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
+                                "アカウント情報が存在しません userId:" + request.getSeqUserId()));
 
         if (!account.getApiKey().equals(request.getApiKey())) {
             throw new ApiException(ApiErrorCode.API_EXEC_ERROR,

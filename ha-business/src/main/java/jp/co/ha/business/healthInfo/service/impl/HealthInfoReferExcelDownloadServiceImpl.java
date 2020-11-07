@@ -35,15 +35,12 @@ public class HealthInfoReferExcelDownloadServiceImpl
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public View download(ReferenceExcelComponent component) throws BaseException {
 
         // 健康情報Entityから健康情報ファイル設定を検索
         HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findById(component.getUserId()).get();
+                .findById(component.getSeqUserId()).get();
 
         List<HealthInfoExcelModel> modelList = toModelList(component.getResultList());
 

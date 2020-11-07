@@ -31,9 +31,6 @@ public class HealthCheckController
         return response;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @Deprecated
     public void accept(HealthCheckRequest request, HealthCheckResponse response)

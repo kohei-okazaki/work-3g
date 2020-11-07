@@ -18,12 +18,12 @@ public interface HealthInfoFileRegistService {
      *
      * @param modelList
      *     健康情報CSVアップロードモデルリスト
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @throws BaseException
      *     基底例外
      */
-    void formatCheck(List<HealthInfoCsvUploadModel> modelList, String userId)
+    void formatCheck(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
             throws BaseException;
 
     /**
@@ -31,13 +31,13 @@ public interface HealthInfoFileRegistService {
      *
      * @param modelList
      *     健康情報CSVアップロードモデルリスト
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return 処理結果
      * @throws BaseException
      *     基底例外
      */
-    ResultType regist(List<HealthInfoCsvUploadModel> modelList, String userId)
+    ResultType regist(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
             throws BaseException;
 
 }

@@ -90,7 +90,7 @@ public class LoginCheck {
             Account account) throws BaseException {
 
         String hashPassword = new Sha256HashEncoder().encode(inputPassword,
-                account.getUserId());
+                account.getMailAddress());
         if (!hashPassword.equals(account.getPassword())) {
             result.addError();
             result.setErrorCode(DashboardErrorCode.ACCOUNT_INVALID_PASSWORD);

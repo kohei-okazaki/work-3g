@@ -4,6 +4,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.TokenRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.web.api.BaseApi;
 
@@ -32,6 +33,12 @@ public class TokenApi extends BaseApi<TokenRequest, TokenResponse> {
     @Override
     public String getApiName() {
         return TYPE.getName();
+    }
+
+    @Override
+    public void bindErrorInfo(TokenResponse response) {
+        response.setResult(Result.FAILURE);
+        response.setDetail("Token発行APIに失敗しました");
     }
 
 }

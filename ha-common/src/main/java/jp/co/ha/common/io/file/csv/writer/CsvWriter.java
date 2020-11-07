@@ -63,9 +63,6 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
         this.pw.print(this.data.toString());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() {
         if (BeanUtil.notNull(this.pw)) {

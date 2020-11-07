@@ -5,7 +5,6 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録完了画面', scripts = ~{::script}, links = ~{::link})">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
 <body>
   <!-- ヘッダ部 -->
@@ -15,7 +14,7 @@
     <div class="container border col-7">
       <h2 class="menuTitle">アカウント登録完了</h2>
       <div class="alert alert-primary" role="alert">アカウント作成完了しました</div>
-      <div>「ログイン画面」から今登録したユーザIDとパスワードでログインしてください。</div>
+      <div>「ログイン画面」から今登録したメールアドレスとパスワードでログインしてください。</div>
       <br><br>
       <form action="../login/index" th:action="@{/login/index}" method="get">
         <input type="submit" class="btn btn-success w-25" value="ログイン画面" />

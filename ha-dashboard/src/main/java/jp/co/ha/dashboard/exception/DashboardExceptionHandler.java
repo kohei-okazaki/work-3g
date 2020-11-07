@@ -28,9 +28,6 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
     @Autowired
     private MessageSource messageSource;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public ModelAndView resolveException(HttpServletRequest request,
             HttpServletResponse response, Object handler, Exception e) {

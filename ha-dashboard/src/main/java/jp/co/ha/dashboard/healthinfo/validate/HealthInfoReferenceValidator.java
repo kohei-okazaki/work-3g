@@ -20,11 +20,8 @@ import jp.co.ha.web.validator.BaseWebValidator;
 public class HealthInfoReferenceValidator
         extends BaseWebValidator<HealthInfoReferenceForm> {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    protected void validate(HealthInfoReferenceForm form, Errors errors) {
+    public void validate(HealthInfoReferenceForm form, Errors errors) {
 
         // 相関チェック
         correlationCheck(form, errors);

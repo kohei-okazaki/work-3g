@@ -2,9 +2,11 @@
 
 ## 作業ディレクトリへ移動
 ```
-cd C:\app\git\work-3g\ha-resource\01_design\02_api\90_sphinx
+cd C:\app\git\work-3g\ha-asset\01_design\02_api\90_sphinx
 ```
 ## APIドキュメントプロジェクトを生成
+※新しくドキュメントロジェクトを作成する場合、以下のコマンドを実行する
+
 ```
 sphinx-quickstart docs
 ```

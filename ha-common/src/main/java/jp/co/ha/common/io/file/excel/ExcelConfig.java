@@ -101,9 +101,6 @@ public class ExcelConfig {
             return this;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public ExcelConfig build() {
             return new ExcelConfig(this);

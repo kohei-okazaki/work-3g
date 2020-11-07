@@ -61,9 +61,6 @@ public enum CellPositionType implements BaseEnum {
         return this.position;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return this.value;

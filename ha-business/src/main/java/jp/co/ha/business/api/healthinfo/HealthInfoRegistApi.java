@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.web.api.BaseApi;
+import jp.co.ha.web.form.BaseRestApiResponse.ErrorInfo;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報登録API
@@ -29,6 +31,13 @@ public class HealthInfoRegistApi
     @Override
     public String getApiName() {
         return "健康情報登録API";
+    }
+
+    @Override
+    public void bindErrorInfo(HealthInfoRegistResponse response) {
+        response.setResultType(ResultType.FAILURE);
+        ErrorInfo errorInfo = new ErrorInfo();
+        response.setErrorInfo(errorInfo);
     }
 
 }
