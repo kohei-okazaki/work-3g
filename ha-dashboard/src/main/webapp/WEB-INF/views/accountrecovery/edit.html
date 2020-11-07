@@ -3,7 +3,7 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録画面', scripts = ~{::script}, links = ~{::link})">
+<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_パスワード再設定画面', scripts = ~{::script}, links = ~{::link})">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
 </head>
@@ -12,24 +12,16 @@
   <div th:replace="layout/layout :: header"></div>
   <br><br><br><br>
   <main role="main" class="px-4">
-    <form id="accountRegistForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
+    <form id="accountRecoveryForm" th:action="@{'~/accountrecovery/confirm/' + ${account.seqUserId}}" method="post" th:object="${accountRecoveryForm}">
       <div class="container border col-7">
-        <h2 class="menuTitle">アカウント登録</h2>
+        <h2 class="menuTitle">パスワード再設定</h2>
 
         <br>
         <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
-        <!--/* メールアドレスここから */-->
-        <div class="form-group">
-          <label class="control-label" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
-          <input type="text" class="validate[required] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
-        </div><!-- /.form-group -->
-        <!--/* メールアドレスここまで */-->
-
+        <input type="hidden" name="mailAddress" th:value="${account.mailAddress}" />
         <!--/* パスワードここから */-->
         <div class="form-group">
           <label class="control-label" th:text="#{password}"></label><span class="badge badge-danger">必須</span>
@@ -56,91 +48,19 @@
         </div><!-- /.form-group -->
         <!--/* 確認用パスワードここまで */-->
 
-        <!--/* 備考ここから */-->
-        <div class="form-group">
-          <p th:text="#{remarks}"></p>
-          <textarea class="form-control" rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
-        </div><!-- /.form-group -->
-        <!--/* 備考ここまで */-->
-
         <!--/* ボタン部ここから */-->
         <input type="submit" class="btn btn-success w-25" value="確 認" />
         <input type="reset" class="btn btn-secondary w-25" value="リセット" />
         <!--/* ボタン部ここまで */-->
         <br><br>
       </div><!-- /.container border col-7 -->
-    </form><!-- /#accountRegistForm -->
+    </form><!-- /#accountRecoveryForm -->
   </main>
   <br><br><br><br><br><br><br><br><br>
   <div th:replace="layout/layout :: footer"></div>
 
   <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script src="../resources/js/common/password.js" th:src="@{/resources/js/common/password.min.js}"></script>
-  <script>
-    $(function() {
 
-      // validate処理
-      jQuery("#accountRegistForm").validationEngine({
-        promptPosition : "bottomLeft:80"
-      });
-
-      // アカウント登録画面⇒TOP画面には遷移できないようにする
-      $(".appTitle").removeAttr("onclick");
-
-      $("input.reset").on("click", function() {
-        $("#mailAddress").val("");
-        $("#password").val("");
-        $("#confirmPassword").val("");
-      });
-
-      var mprogress = new Mprogress();
-      $("#mailAddress").on("change", function() {
-        var value = 0;
-        if ($('#mailAddress').val() !== '') {
-          value += 1;
-        }
-        if ($('#password').val() !== '') {
-          value += 1;
-        }
-        if ($('#confirmPassword').val() !== '') {
-          value += 1;
-        }
-        var progressValue = value / 3;
-        mprogress.set(progressValue);
-      });
-
-      $("#password").on("change", function() {
-        var value = 0;
-        if ($('#mailAddress').val() !== '') {
-          value += 1;
-        }
-        if ($('#password').val() !== '') {
-          value += 1;
-        }
-        if ($('#confirmPassword').val() !== '') {
-          value += 1;
-        }
-        var progressValue = value / 3;
-        mprogress.set(progressValue);
-      });
-
-      $("#confirmPassword").on("change", function() {
-        var value = 0;
-        if ($('#mailAddress').val() !== '') {
-          value += 1;
-        }
-        if ($('#password').val() !== '') {
-          value += 1;
-        }
-        if ($('#confirmPassword').val() !== '') {
-          value += 1;
-        }
-        var progressValue = value / 3;
-        mprogress.set(progressValue);
-      });
-
-    });
-
-  </script>
 </body>
 </html>

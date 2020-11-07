@@ -8,6 +8,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import jp.co.ha.business.component.AccountComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
@@ -53,6 +54,9 @@ public class AccountSettingServiceImpl implements AccountSettingService {
     @Sha256
     @Autowired
     private HashEncoder encoder;
+    /** AccountComponent */
+    @Autowired
+    private AccountComponent accountComponent;
 
     @Override
     public void execute(AccountDto dto) throws BaseException {
@@ -104,7 +108,8 @@ public class AccountSettingServiceImpl implements AccountSettingService {
                 DateTimeUtil.toLocalDate(dto.getPasswordExpire(),
                         DateFormatType.YYYYMMDD_STRICT));
         account.setPassword(
-                encoder.encode(dto.getPassword(), dto.getMailAddress().toString()));
+                accountComponent.getHashPassword(dto.getPassword(),
+                        dto.getMailAddress()));
     }
 
     /**

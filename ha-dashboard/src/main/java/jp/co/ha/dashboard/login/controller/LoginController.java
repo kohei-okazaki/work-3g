@@ -109,7 +109,8 @@ public class LoginController implements BaseWebController {
         sessionComponent.removeValues(request.getSession());
 
         redirectAttr.addAttribute("isLogout", true);
-        return "redirect:index";
+
+        return redirectView(DashboardView.LOGIN);
     }
 
     /**

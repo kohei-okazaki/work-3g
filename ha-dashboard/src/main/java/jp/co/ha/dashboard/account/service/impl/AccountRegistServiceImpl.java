@@ -6,6 +6,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import jp.co.ha.business.component.AccountComponent;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.dto.AccountDto;
@@ -38,6 +39,9 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     @Sha256
     @Autowired
     private HashEncoder encoder;
+    /** AccountComponent */
+    @Autowired
+    private AccountComponent accountComponent;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -84,8 +88,8 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     private Account toAccount(AccountDto dto) throws BaseException {
         Account account = new Account();
         BeanUtil.copy(dto, account);
-        account.setPassword(
-                encoder.encode(dto.getPassword(), dto.getMailAddress().toString()));
+        account.setPassword(accountComponent.getHashPassword(dto.getPassword(),
+                dto.getMailAddress()));
         account.setDeleteFlag(CommonFlag.FALSE.getValue());
         account.setPasswordExpire(DateTimeUtil
                 .addMonth(DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate()), 6));

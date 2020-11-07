@@ -38,9 +38,8 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
         Integer seqUserId = apiResponse.getAccount().getSeqUserId();
         String to = accountSearchService.findById(seqUserId).get().getMailAddress();
-        String titleText = "健康情報登録完了メール"
-                + DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
+        String titleText = "健康情報登録完了メール" + DateTimeUtil.toString(
+                DateTimeUtil.getSysDate(), DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
         Map<String, String> bodyMap = new HashMap<>();
         bodyMap.put("${userId}", seqUserId.toString());
         bodyMap.put("${seqHealthInfoId}",
