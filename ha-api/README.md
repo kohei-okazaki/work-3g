@@ -3,7 +3,7 @@
 ## 概要
 健康管理アプリのAPIプロジェクト
 
-### 01_API一覧
+## API一覧
 - 健康情報登録API：
     - 概要：ユーザの健康情報を登録するAPI
     - URL：${domain}/api/${seqUserId}/healthinfo
@@ -19,7 +19,7 @@
     - URL：${domain}/api/healthcheck
     - Method：Get
 
-### 02_ログ
+## ログ
 - 文字コード：UTF-8
 - 配置先：
     - local環境：C:/app/logs/
