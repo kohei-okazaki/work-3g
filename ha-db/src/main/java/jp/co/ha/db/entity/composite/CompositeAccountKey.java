@@ -5,7 +5,7 @@ import java.io.Serializable;
 import jp.co.ha.common.log.annotation.Ignore;
 
 /**
- * アカウント情報とメール情報と健康情報ファイル設定の複合EntityのPrimaryKey
+ * アカウント情報と健康情報ファイル設定の複合EntityのPrimaryKey
  *
  * @version 1.0.0
  */
