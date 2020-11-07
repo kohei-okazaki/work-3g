@@ -43,7 +43,7 @@ Tableに対応したEntityとMapperのみを定義したプロジェクト
 * ### ha-pom  
 api, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
-* ### ha-resource  
+* ### ha-asset  
 詳細設計書、DDL等を定義したドキュメントプロジェクト  
 
 * ### ha-selenium  
