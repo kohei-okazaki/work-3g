@@ -1,7 +1,7 @@
 $(function() {
   $("#appTitle").on("click", function() {
-    var $form = $("<form></form>", {
-      action : '../login/top',
+    var $form = $('<form></form>', {
+      action : '/login/top',
       method : 'get'
     });
     $form.appendTo(document.body);

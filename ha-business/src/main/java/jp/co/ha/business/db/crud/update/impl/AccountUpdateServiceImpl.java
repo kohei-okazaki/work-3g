@@ -21,9 +21,6 @@ public class AccountUpdateServiceImpl implements AccountUpdateService {
     @Autowired
     private AccountMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Update
     @Override
     @Transactional(rollbackFor = Exception.class)

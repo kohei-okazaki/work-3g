@@ -20,18 +20,12 @@ public class MinValidator implements ConstraintValidator<Min, Object> {
     /** 同じ値を含むかどうか */
     private boolean isEqual;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void initialize(Min annotation) {
         this.size = annotation.size();
         this.isEqual = annotation.isEqual();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {

@@ -29,6 +29,6 @@ public interface BaseWebController extends BaseController {
      * @return View名
      */
     default String redirectView(BaseView view) {
-        return "redirect:" + view.getName();
+        return "redirect:" + view.getRedirectPath();
     }
 }

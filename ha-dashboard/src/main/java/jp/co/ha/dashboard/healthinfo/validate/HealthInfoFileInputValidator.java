@@ -14,11 +14,8 @@ import jp.co.ha.web.validator.BaseWebValidator;
  */
 public class HealthInfoFileInputValidator extends BaseWebValidator<HealthInfoFileForm> {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    protected void validate(HealthInfoFileForm form, Errors errors) {
+    public void validate(HealthInfoFileForm form, Errors errors) {
 
         // 必須チェック
         checkRequire(form, errors);

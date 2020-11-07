@@ -16,18 +16,12 @@ import jp.co.ha.common.type.Charset;
 @Component("urlEncodeAndDecoder")
 public class UrlEncodeAndDecoder implements BaseEncodeAndDecoder {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String encode(String src, Charset charset)
             throws UnsupportedEncodingException {
         return URLEncoder.encode(src, charset.getValue());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String decode(String src, Charset charset)
             throws UnsupportedEncodingException {

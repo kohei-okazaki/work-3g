@@ -35,9 +35,6 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
         super(conf, pw);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void writeData(StringJoiner record, HealthInfoCsvDownloadModel model) {
 

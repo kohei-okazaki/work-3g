@@ -14,6 +14,7 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
@@ -35,17 +36,15 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Optional<HealthInfoRefDetailDto> getHealthInfoRefDetailDto(
             HealthInfoRefDetailDto dto) {
 
         // 健康情報を検索
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), dto.getUserId());
-        if (healthInfoList == null) {
+                .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(),
+                        dto.getSeqUserId());
+        if (CollectionUtil.isEmpty(healthInfoList)) {
             return Optional.empty();
         }
 

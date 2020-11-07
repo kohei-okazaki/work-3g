@@ -20,7 +20,7 @@ import jp.co.ha.web.controller.BaseRestController;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping(value = "/api/{userId}/healthinfo/{seqHealthInfoId}")
+@RequestMapping(value = "/api/{seqUserId}/healthinfo/{seqHealthInfoId}")
 public class HealthInfoReferenceController extends
         BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
 
@@ -31,7 +31,7 @@ public class HealthInfoReferenceController extends
     /**
      * 健康情報照会APIを受け付ける
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @param seqHealthInfoId
      *     健康情報ID
@@ -42,7 +42,7 @@ public class HealthInfoReferenceController extends
      *     基底例外
      */
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoReferenceResponse doGet(@PathVariable("userId") String userId,
+    public HealthInfoReferenceResponse doGet(@PathVariable("seqUserId") Integer seqUserId,
             @PathVariable("seqHealthInfoId") Integer seqHealthInfoId,
             @RequestHeader(value = "Api-Key") String apiKey)
             throws BaseException {
@@ -50,7 +50,7 @@ public class HealthInfoReferenceController extends
         HealthInfoReferenceRequest request = new HealthInfoReferenceRequest();
         HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
 
-        request.setUserId(userId);
+        request.setSeqUserId(seqUserId);
         request.setApiKey(apiKey);
         request.setSeqHealthInfoId(seqHealthInfoId);
 
@@ -61,9 +61,6 @@ public class HealthInfoReferenceController extends
         return response;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void accept(HealthInfoReferenceRequest request,
             HealthInfoReferenceResponse response) throws BaseException {

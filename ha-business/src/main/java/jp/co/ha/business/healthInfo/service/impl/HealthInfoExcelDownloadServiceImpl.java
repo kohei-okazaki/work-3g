@@ -31,16 +31,13 @@ public class HealthInfoExcelDownloadServiceImpl
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public View download(HealthInfoExcelComponent component) throws BaseException {
 
         HealthInfo healthInfo = component.getHealthInfo();
         // 健康情報Entityから健康情報ファイル設定を検索
         HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findById(healthInfo.getUserId()).get();
+                .findById(healthInfo.getSeqUserId()).get();
 
         // 健康情報Excelモデルに変換
         HealthInfoExcelModel model = toModel(healthInfo);
