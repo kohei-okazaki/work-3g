@@ -42,16 +42,16 @@ public class BreathingCapacityComponent {
      *
      * @param dto
      *     {@linkplain BreathingCapacityDto}
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return {@linkplain BreathingCapacityDto}
      * @throws BaseException
      *     肺活量計算APIの処理が成功以外
      */
-    public BreathingCapacityDto calc(BreathingCapacityDto dto, String userId)
+    public BreathingCapacityDto calc(BreathingCapacityDto dto, Integer seqUserId)
             throws BaseException {
 
-        TokenResponse tokenApiResponse = callTokenApi(userId);
+        TokenResponse tokenApiResponse = callTokenApi(seqUserId);
 
         BreathingCapacityCalcResponse apiResponse = callApi(dto,
                 tokenApiResponse.getToken());
@@ -63,16 +63,16 @@ public class BreathingCapacityComponent {
     /**
      * Token発行APIを呼び出す
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      * @return Token発行APIのレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private TokenResponse callTokenApi(String userId) throws BaseException {
+    private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
 
         TokenRequest request = new TokenRequest();
-        request.setUserId(userId);
+        request.setSeqUserId(seqUserId);
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());

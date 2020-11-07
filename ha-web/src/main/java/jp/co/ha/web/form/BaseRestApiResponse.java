@@ -58,9 +58,6 @@ public class BaseRestApiResponse implements BaseForm {
             this.message = message;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String getValue() {
             return this.value;
@@ -94,9 +91,6 @@ public class BaseRestApiResponse implements BaseForm {
      */
     public static class ResultTypeSerializer extends JsonSerializer<ResultType> {
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public void serialize(ResultType resultType, JsonGenerator gen,
                 SerializerProvider serializers) throws IOException {
@@ -166,26 +160,26 @@ public class BaseRestApiResponse implements BaseForm {
     public static class Account {
 
         /** ユーザID */
-        @JsonProperty("userId")
-        private String userId;
+        @JsonProperty("seqUserId")
+        private Integer seqUserId;
 
         /**
-         * userIdを返す
+         * seqUserIdを返す
          *
-         * @return userId
+         * @return seqUserId
          */
-        public String getUserId() {
-            return userId;
+        public Integer getSeqUserId() {
+            return seqUserId;
         }
 
         /**
-         * userIdを設定する
+         * seqUserIdを設定する
          *
-         * @param userId
+         * @param seqUserId
          *     ユーザID
          */
-        public void setUserId(String userId) {
-            this.userId = userId;
+        public void setSeqUserId(Integer seqUserId) {
+            this.seqUserId = seqUserId;
         }
 
     }

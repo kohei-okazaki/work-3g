@@ -28,9 +28,6 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Autowired
     private BmiRangeMtMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
@@ -41,9 +38,6 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
                 .findFirst();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)

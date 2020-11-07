@@ -34,9 +34,6 @@ public class Import {
         this.clazz = field.getClassType();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
         String prefix = "import";

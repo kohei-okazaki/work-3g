@@ -347,9 +347,6 @@ public class FileUtil {
             this.value = value;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String getValue() {
             return this.value;
@@ -393,9 +390,6 @@ public class FileUtil {
         /** セパレータ */
         private String value;
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String getValue() {
             return this.value;
@@ -440,9 +434,6 @@ public class FileUtil {
         /** 値 */
         private String value;
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public String getValue() {
             return this.value;

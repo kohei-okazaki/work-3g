@@ -19,18 +19,12 @@ import jp.co.ha.web.form.BaseForm;
  */
 public abstract class BaseWebValidator<F extends BaseForm> implements Validator {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean supports(Class<?> clazz) {
         Class<?> clz = BeanUtil.getParameterType(this.getClass());
         return clz.isAssignableFrom(clazz);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void validate(Object target, Errors errors) {
 

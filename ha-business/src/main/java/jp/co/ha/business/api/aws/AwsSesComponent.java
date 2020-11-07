@@ -59,7 +59,7 @@ public class AwsSesComponent {
     private AwsS3Component awsS3Component;
 
     /**
-     * 認証結果
+     * 認証結果区分
      *
      * @version 1.0.0
      */
@@ -101,6 +101,49 @@ public class AwsSesComponent {
     }
 
     /**
+     * Eメール送信結果区分
+     *
+     * @version 1.0.0
+     */
+    public static enum EmailSendResultType implements BaseEnum {
+
+        /** 送信成功 */
+        SUCCESS("0"),
+        /** 送信失敗 */
+        FAILED("1"),
+        /** 未送信 */
+        NOT_SEND("2");
+
+        /** 値 */
+        private String value;
+
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private EmailSendResultType(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String getValue() {
+            return this.value;
+        }
+
+        /**
+         * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
+         * @param value
+         *     値
+         * @return VerifyResultType
+         */
+        public static EmailSendResultType of(String value) {
+            return BaseEnum.of(EmailSendResultType.class, value);
+        }
+    }
+
+    /**
      * Eメールアドレスの検証を行う
      *
      * @param mailAddress
@@ -138,13 +181,14 @@ public class AwsSesComponent {
      *     メール件名
      * @param templateId
      *     テンプレートID
+     * @return Eメール送信結果区分
      * @throws BaseException
      *     メール送信に失敗した場合
      * @see #sendMail(String, String, String, Map)
      */
-    public void sendMail(String to, String titleText, String templateId)
+    public EmailSendResultType sendMail(String to, String titleText, String templateId)
             throws BaseException {
-        this.sendMail(to, titleText, templateId, Collections.emptyMap());
+        return sendMail(to, titleText, templateId, Collections.emptyMap());
     }
 
     /**
@@ -158,15 +202,16 @@ public class AwsSesComponent {
      *     テンプレートID
      * @param bodyMap
      *     メール本文を置換するmap
+     * @return Eメール送信結果区分
      * @throws BaseException
      *     メール送信に失敗した場合
      */
-    public void sendMail(String to, String titleText, String templateId,
+    public EmailSendResultType sendMail(String to, String titleText, String templateId,
             Map<String, String> bodyMap) throws BaseException {
 
         if (awsConfig.isSesStubFlag()) {
             // 料金節約のため、SESを利用しない場合メールは送信しない
-            return;
+            return EmailSendResultType.NOT_SEND;
         }
 
         try {
@@ -190,6 +235,8 @@ public class AwsSesComponent {
                             awsAuthComponent.getAWSCredentialsProvider());
 
             getAmazonSES().sendEmail(request);
+
+            return EmailSendResultType.SUCCESS;
 
         } catch (MailFromDomainNotVerifiedException e) {
             throw new BusinessException(BusinessErrorCode.AWS_S3_UPLOAD_ERROR,
@@ -267,7 +314,8 @@ public class AwsSesComponent {
     private String getBodyTemplate(String templateId) throws BaseException {
 
         try (InputStream is = awsS3Component.getS3ObjectByKey(templateId);
-                BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(is, CHARSET.getValue()))) {
 
             StringBuilder sb = new StringBuilder();
             String line = null;

@@ -67,9 +67,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     @Autowired
     private HealthInfoProperties prop;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo) {
         model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
@@ -77,17 +74,11 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         model.addAttribute("resultMessage", getDiffMessage(dto, lastHealthInfo));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean isFirstReg(String userId) throws BaseException {
-        return healthInfoSearchService.getSelectCountByUserId(userId) == 0;
+    public boolean isFirstReg(Integer seqUserId) throws BaseException {
+        return healthInfoSearchService.getSelectCountByUserId(seqUserId) == 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public List<HealthInfoCsvDownloadModel> toModelList(List<HealthInfo> healthInfo) {
         return healthInfo.stream().map(e -> {
@@ -97,11 +88,8 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         }).collect(Collectors.toList());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public HealthInfoRegistResponse regist(HealthInfoDto dto, String userId)
+    public HealthInfoRegistResponse regist(HealthInfoDto dto, Integer seqUserId)
             throws BaseException {
 
         HealthInfoRegistRequest request = new HealthInfoRegistRequest();
@@ -109,12 +97,12 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         request.setTestMode(TestMode.DB_REGIST);
 
         // アカウント情報.APIキーを設定
-        Account account = accountSearchService.findById(userId).get();
+        Account account = accountSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
                 .withHeader("Api-Key", account.getApiKey())
                 .withUrlSupplier(
-                        () -> prop.getHealthInfoApiUrl() + userId + "/healthinfo");
+                        () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         HealthInfoRegistResponse apiResponse = registApi.callApi(request,
                 apiConnectInfo);
@@ -128,9 +116,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         healthInfoMailService.sendHealthInfoMail(apiResponse);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
 

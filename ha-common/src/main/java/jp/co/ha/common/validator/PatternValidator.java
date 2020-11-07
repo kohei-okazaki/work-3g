@@ -19,17 +19,11 @@ public class PatternValidator implements ConstraintValidator<Pattern, Object> {
     /** 正規表現の列挙 */
     private RegexType regix;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void initialize(Pattern annotation) {
         this.regix = annotation.regixPattern();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {

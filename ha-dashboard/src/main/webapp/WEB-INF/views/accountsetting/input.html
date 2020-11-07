@@ -18,13 +18,13 @@
       <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
 
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqUserId')}" th:errors="*{seqUserId}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passwordExpire')}" th:errors="*{passwordExpire}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqUserId')}" th:errors="*{seqUserId}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
@@ -46,9 +46,9 @@
 
         <!--/* ユーザIDここから */-->
         <div class="form-group">
-          <p th:text="#{userId}"></p>
-          <p th:text="*{userId}"></p>
-           <input type="hidden" th:field="*{userId}" th:value="${userId}" />
+          <p th:text="#{seqUserId}"></p>
+          <p th:text="*{seqUserId}"></p>
+           <input type="hidden" th:field="*{seqUserId}" th:value="${seqUserId}" />
         </div><!-- /.form-group -->
         <!--/* ユーザIDここまで */-->
 

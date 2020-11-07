@@ -33,9 +33,6 @@ public class SelectOption {
         /** 検索上限数 */
         private int limit = 10000;
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public SelectOption build() {
             return new SelectOption(this);

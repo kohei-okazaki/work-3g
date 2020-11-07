@@ -22,10 +22,7 @@ public class AccountSettingForm implements BaseForm {
 
     /** ユーザID */
     @Required(message = "ユーザIDが未入力です")
-    @Pattern(regixPattern = RegexType.HALF_CHAR, message = "ユーザIDが半角英数でありません")
-    @Min(size = 2, message = "ユーザIDは2桁以上で入力してください")
-    @Max(size = 16, message = "ユーザIDは16桁以下で入力してください")
-    private String userId;
+    private Integer seqUserId;
     /** パスワード */
     @Mask
     @Required(message = "パスワードが未入力です")
@@ -72,22 +69,22 @@ public class AccountSettingForm implements BaseForm {
     private String enclosureCharFlag;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**

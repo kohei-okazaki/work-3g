@@ -32,9 +32,6 @@ public enum BatchResult implements BaseEnum {
     /** コメント */
     private String comment;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getValue() {
         return this.value;

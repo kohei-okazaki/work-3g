@@ -22,9 +22,6 @@ public class HealthInfoFileSettingCreateServiceImpl
     @Autowired
     private HealthInfoFileSettingMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Insert
     @Override
     @Transactional(rollbackFor = Exception.class)

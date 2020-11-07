@@ -22,9 +22,6 @@ public class Sha512HashEncoder implements HashEncoder {
     /** HASH化アルゴリズム */
     private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_512;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String encode(String password, String salt) throws BaseException {
 

@@ -140,9 +140,6 @@ public class CsvConfig {
             return this;
         }
 
-        /**
-         * {@inheritDoc}
-         */
         @Override
         public CsvConfig build() {
             return new CsvConfig(this);

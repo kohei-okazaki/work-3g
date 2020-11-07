@@ -16,9 +16,6 @@ import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 @Service
 public class HealthInfoGraphServiceImpl implements HealthInfoGraphService {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void putGraph(Model model, Supplier<HealthInfoGraphModel> supplier) {
 

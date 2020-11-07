@@ -1,14 +1,20 @@
 package jp.co.ha.business.db.crud.read.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.common.crypt.Crypter;
 import jp.co.ha.common.db.annotation.Select;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.AccountExample;
+import jp.co.ha.db.entity.AccountExample.Criteria;
 import jp.co.ha.db.entity.AccountKey;
 import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.db.entity.composite.CompositeAccountKey;
@@ -23,6 +29,10 @@ import jp.co.ha.db.mapper.composite.CompositeAccountMapper;
 @Service
 public class AccountSearchServiceImpl implements AccountSearchService {
 
+    /** 暗号/復号インターフェース */
+    @Autowired
+    @Qualifier("aesCrypter")
+    private Crypter crypter;
     /** AccountMapper */
     @Autowired
     private AccountMapper mapper;
@@ -30,28 +40,54 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Autowired
     private CompositeAccountMapper compositAccountMapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<Account> findById(String userId) {
+    public Optional<Account> findById(Integer seqUserId) {
         AccountKey key = new AccountKey();
-        key.setUserId(userId);
+        key.setSeqUserId(seqUserId);
         return Optional.ofNullable(mapper.selectByPrimaryKey(key));
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<CompositeAccount> findCompositAccountById(String userId) {
+    public Optional<CompositeAccount> findCompositAccountById(Integer seqUserId) {
         CompositeAccountKey key = new CompositeAccountKey();
-        key.setUserId(userId);
+        key.setSeqUserId(seqUserId);
         return Optional.ofNullable(compositAccountMapper.selectByPrimaryKey(key));
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Account> findByMailAddress(String mailAddress) {
+
+        AccountExample example = new AccountExample();
+        Criteria criteria = example.createCriteria();
+
+        // メールアドレス
+        criteria.andMailAddressEqualTo(crypter.encrypt(mailAddress));
+
+        List<Account> list = mapper.selectByExample(example);
+
+        // アカウント情報.メールアドレスは複数レコード存在する想定はないため、先頭1件を使用
+        return Optional.ofNullable(CollectionUtil.isEmpty(list) ? null : list.get(0));
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isExistByMailAddress(String mailAddress) {
+
+        AccountExample example = new AccountExample();
+        Criteria criteria = example.createCriteria();
+
+        // メールアドレス
+        criteria.andMailAddressEqualTo(crypter.encrypt(mailAddress));
+
+        long count = mapper.countByExample(example);
+        return count > 0;
     }
 
 }

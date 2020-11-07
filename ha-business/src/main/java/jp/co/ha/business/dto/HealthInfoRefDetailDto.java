@@ -12,7 +12,7 @@ public class HealthInfoRefDetailDto {
     /** 健康情報ID */
     private Integer seqHealthInfoId;
     /** ユーザID */
-    private String userId;
+    private Integer seqUserId;
     /** 身長 */
     private BigDecimal height;
     /** 体重 */
@@ -50,22 +50,22 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**

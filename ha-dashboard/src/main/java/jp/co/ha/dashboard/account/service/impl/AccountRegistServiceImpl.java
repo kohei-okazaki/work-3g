@@ -6,6 +6,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import jp.co.ha.business.component.AccountComponent;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.dto.AccountDto;
@@ -38,6 +39,9 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     @Sha256
     @Autowired
     private HashEncoder encoder;
+    /** AccountComponent */
+    @Autowired
+    private AccountComponent accountComponent;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -45,9 +49,6 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     @Autowired
     private DefaultTransactionDefinition defaultTransactionDefinition;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void regist(AccountDto dto) throws BaseException {
 
@@ -58,9 +59,10 @@ public class AccountRegistServiceImpl implements AccountRegistService {
         try {
 
             // アカウント情報を作成
-            accountCreateService.create(toAccount(dto));
+            Account account = toAccount(dto);
+            accountCreateService.create(account);
             // 健康情報ファイル設定情報を作成
-            healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(dto));
+            healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(account));
 
             // 正常にDB登録出来た場合、コミット
             transactionManager.commit(status);
@@ -86,7 +88,8 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     private Account toAccount(AccountDto dto) throws BaseException {
         Account account = new Account();
         BeanUtil.copy(dto, account);
-        account.setPassword(encoder.encode(dto.getPassword(), dto.getUserId()));
+        account.setPassword(accountComponent.getHashPassword(dto.getPassword(),
+                dto.getMailAddress()));
         account.setDeleteFlag(CommonFlag.FALSE.getValue());
         account.setPasswordExpire(DateTimeUtil
                 .addMonth(DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate()), 6));
@@ -98,13 +101,13 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     /**
      * 健康情報ファイル設定Entityに変換する
      *
-     * @param dto
-     *     アカウント登録DTO
-     * @return 健康情報ファイル設定Entity
+     * @param account
+     *     アカウント登録
+     * @return 健康情報ファイル設定
      */
-    private HealthInfoFileSetting toHealthInfoFileSetting(AccountDto dto) {
+    private HealthInfoFileSetting toHealthInfoFileSetting(Account account) {
         HealthInfoFileSetting entity = new HealthInfoFileSetting();
-        entity.setUserId(dto.getUserId());
+        entity.setSeqUserId(account.getSeqUserId());
         entity.setEnclosureCharFlag(CommonFlag.FALSE.getValue());
         entity.setHeaderFlag(CommonFlag.FALSE.getValue());
         entity.setFooterFlag(CommonFlag.FALSE.getValue());

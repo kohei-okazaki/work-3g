@@ -11,9 +11,9 @@ var table = [
       },
       {
         logicalName: "ユーザID",
-        physicalName: "USER_ID",
-        type: "VARCHAR",
-        size: "16"
+        physicalName: "SEQ_USER_ID",
+        type: "INT",
+        size: ""
       },
       {
         logicalName: "身長",
@@ -48,7 +48,7 @@ var table = [
       {
         logicalName: "健康情報作成日時",
         physicalName: "HEALTH_INFO_REG_DATE",
-        type: "TIMESTAMP",
+        type: "DATETIME",
         size: ""
       },
       {
@@ -60,13 +60,13 @@ var table = [
       {
         logicalName: "更新日時",
         physicalName: "UPDATE_DATE",
-        type: "TIMESTAMP",
+        type: "DATETIME",
         size: ""
       },
       {
         logicalName: "登録日時",
         physicalName: "REG_DATE",
-        type: "TIMESTAMP",
+        type: "DATETIME",
         size: ""
       }
     ]
@@ -76,10 +76,16 @@ var table = [
     logicalName: "アカウント情報",
     column : [
       {
-        logicalName: "ユーザID",
-        physicalName: "USER_ID",
-        type: "VARCHAR",
-        size: "16"
+          logicalName: "ユーザID",
+          physicalName: "SEQ_USER_ID",
+          type: "INT",
+          size: ""
+      },
+      {
+          logicalName: "メールアドレス",
+          physicalName: "MAILADDRESS",
+          type: "VARCHAR",
+          size: "64"
       },
       {
         logicalName: "パスワード",
@@ -114,13 +120,13 @@ var table = [
       {
         logicalName: "更新日時",
         physicalName: "UPDATE_DATE",
-        type: "TIMESTAMP",
+        type: "DATETIME",
         size: ""
       },
       {
         logicalName: "登録日時",
         physicalName: "REG_DATE",
-        type: "TIMESTAMP",
+        type: "DATETIME",
         size: ""
       }
     ]
@@ -130,10 +136,10 @@ var table = [
     logicalName: "健康情報ファイル設定",
     column : [
       {
-        logicalName: "ユーザID",
-        physicalName: "USER_ID",
-        type: "VARCHAR",
-        size: "16"
+          logicalName: "ユーザID",
+          physicalName: "SEQ_USER_ID",
+          type: "INT",
+          size: ""
       },
       {
         logicalName: "ヘッダーフラグ",
@@ -162,43 +168,13 @@ var table = [
       {
         logicalName: "更新日時",
         physicalName: "UPDATE_DATE",
-        type: "TIMESTAMP",
+        type: "DATETIME",
         size: ""
       },
       {
         logicalName: "登録日時",
         physicalName: "REG_DATE",
-        type: "TIMESTAMP",
-        size: ""
-      }
-    ]
-  },
-  {
-    physicalName: "MAIL_INFO",
-    logicalName: "メール情報",
-    column : [
-      {
-        logicalName: "ユーザID",
-        physicalName: "USER_ID",
-        type: "VARCHAR",
-        size: "16"
-      },
-      {
-        logicalName: "メールアドレス",
-        physicalName: "MAIL_ADDRESS",
-        type: "VARCHAR",
-        size: "128"
-      },
-      {
-        logicalName: "更新日時",
-        physicalName: "UPDATE_DATE",
-        type: "TIMESTAMP",
-        size: ""
-      },
-      {
-        logicalName: "登録日時",
-        physicalName: "REG_DATE",
-        type: "TIMESTAMP",
+        type: "DATETIME",
         size: ""
       }
     ]
@@ -234,13 +210,13 @@ var table = [
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
-          type: "TIMESTAMP",
+          type: "DATETIME",
           size: ""
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
-          type: "TIMESTAMP",
+          type: "DATETIME",
           size: ""
         }
       ]

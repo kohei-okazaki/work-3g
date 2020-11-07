@@ -13,27 +13,27 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 public class ReferenceExcelComponent implements BaseExcelComponent {
 
     /** ユーザID */
-    private String userId;
+    private Integer seqUserId;
     /** 結果リスト */
     private List<HealthInfoReferenceDto> resultList;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**

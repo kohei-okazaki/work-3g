@@ -15,4 +15,10 @@ public interface BaseView {
      */
     String getName();
 
+    /**
+     * リダイレクトパス名を返す
+     *
+     * @return リダイレクトパス名
+     */
+    String getRedirectPath();
 }

@@ -38,9 +38,6 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
     @Autowired
     private HashEncoder encoder;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler) throws Exception {
@@ -52,7 +49,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isLoginAuthCheck(handler)) {
             // ログイン情報のチェック対象の場合
-            sessionComponent.getValue(request.getSession(), "userId", String.class)
+            sessionComponent.getValue(request.getSession(), "seqUserId", Integer.class)
                     .orElseThrow(() -> new SystemException(
                             DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
         }
@@ -71,9 +68,6 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler, ModelAndView modelAndView) throws Exception {

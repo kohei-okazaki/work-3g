@@ -20,17 +20,11 @@ public class DateValidator implements ConstraintValidator<Date, Object> {
     /** 日付フォーマットの列挙 */
     private DateFormatType formatType;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void initialize(Date annotation) {
         this.formatType = annotation.formatType();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
 

@@ -25,15 +25,12 @@ public class HealthInfoFileSettingSearchServiceImpl
     @Autowired
     private HealthInfoFileSettingMapper mapper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<HealthInfoFileSetting> findById(String userId) {
+    public Optional<HealthInfoFileSetting> findById(Integer seqUserId) {
         HealthInfoFileSettingKey key = new HealthInfoFileSettingKey();
-        key.setUserId(userId);
+        key.setSeqUserId(seqUserId);
         return Optional.ofNullable(mapper.selectByPrimaryKey(key));
     }
 
