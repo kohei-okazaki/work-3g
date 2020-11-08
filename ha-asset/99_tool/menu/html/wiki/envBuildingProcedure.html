@@ -6,68 +6,279 @@
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap-grid.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap-reboot.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/docs.css">
 </head>
 <body>
-  <h1>環境構築手順</h1>
-  <div class="container border">
-    <br>
-    <h2>概要</h2>
-    <div>ローカル環境の開発構築手順書になります<br>以下の手順に従って環境構築を行って下さい</div>
-    <table class="table">
-      <tr>
-        <td class="card card-body">
-          <a data-toggle="collapse" href="#db-env-build-procedure" role="button" aria-expanded="false" aria-controls="db-env-build-procedure">DB構築手順</a>
-          <div class="collapse" id="db-env-build-procedure">
-            <div class="card card-body bg-light">
-              <p>----DB構築手順----</p>
-              <div class="alert alert-danger" role="alert">実際に各Tableに対し、DDLなどの適用はmavenコマンドよりFlywayが行うため直接SQLを流さなくてよい</div>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="card card-body">
-          <a data-toggle="collapse" href="#java-env-build-procedure" role="button" aria-expanded="false" aria-controls="java-env-build-procedure">Java環境構築手順</a>
-          <div class="collapse" id="java-env-build-procedure">
-            <div class="card card-body bg-light">
-              <p>----Javaの環境構築手順----</p>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="card card-body">
-          <a data-toggle="collapse" href="#python-env-build-procedure" role="button" aria-expanded="false" aria-controls="python-env-build-procedure">Python構築手順</a>
-          <div class="collapse" id="python-env-build-procedure">
-            <div class="card card-body bg-light">
-              <p>----Python構築手順----</p>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="card card-body">
-          <a data-toggle="collapse" href="#node-env-build-procedure" role="button" aria-expanded="false" aria-controls="node-env-build-procedure">Node.js構築手順</a>
-          <div class="collapse" id="node-env-build-procedure">
-            <div class="card card-body bg-light">
-              <p>----Node.js構築手順----</p>
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="card card-body">
-          <a data-toggle="collapse" href="#ide-env-build-procedure" role="button" aria-expanded="false" aria-controls="ide-env-build-procedure">IDE設定手順</a>
-          <div class="collapse" id="ide-env-build-procedure">
-            <div class="card card-body bg-light">
-              <p>----IDE設定手順----</p>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </table>
+  <br>
+  <div class="container border shadow">
 
-  </div>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="h2">環境構築手順</h2>
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+
+    <div class="row">
+      <div class="col-12">
+        <br>
+        <h3 class="h3">概要</h3>
+        <div>ローカル環境の開発構築手順書になります</div>
+        <div>以下の手順に従って環境構築を行って下さい</div>
+        <br>
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+
+    <div class="row">
+      <div class="col-12">
+        <table class="table">
+          <tr>
+            <td class="card-body">
+              <a data-toggle="collapse" href="#db-env-build-procedure" role="button" aria-expanded="false" aria-controls="db-env-build-procedure">DB構築手順</a>
+              <div class="collapse show" id="db-env-build-procedure">
+                <div class="card card-body bg-light">
+
+                  <div class="col-10">
+                    <details>
+                      <summary>ツール一覧</summary>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th>#</th>
+                            <th scope="col">役割</th>
+                            <th scope="col">ライブラリ/ツール名</th>
+                            <th scope="col">Version</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>データベース</td>
+                            <td>MySQL</td>
+                            <td>8.0.16</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>DBマイグレーション</td>
+                            <td>Flyway</td>
+                            <td>7.0.1</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>ORM</td>
+                            <td>MyBatis</td>
+                            <td>3.5.6</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </details>
+                  </div>
+
+                  <br>
+
+                  <div class="alert alert-danger" role="alert">実際に各Tableに対し、DDLなどの適用はmavenコマンドよりFlywayが行うため直接SQLを流さなくてよい</div>
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>ダウンロード手順</summary>
+                      <p><a href="https://www.mysql.com/jp/" target="_blank" rel="noopener noreferrer">公式</a>より以下の手順でMySQLをローカルPCにダウンロードして下さい</p>
+                      <p>以下ダウンロード手順は2016年頃のもののため、画面が更新されている可能性があります</p>
+                      <ol>
+                        <li>
+                          <p>上記説明のURLのリンクで遷移後の画面上部の「ダウンロード」タブ押下</p>
+                        </li>
+                        <li>
+                          <p>MySQL のダウンロードに関するページが表示されるので、画面の下の方に MySQL Community Edition (GPL) と書かれたブロックがあります。そこに表示されている「Community (GPL) Downloads」と書かれたリンク押下</p>
+                          <img src="../../png/mysql-install1.png" alt="mysqlインストール作業画像1" title="mysqlインストール作業画像1">
+                        </li>
+                        <li>
+                          <p>MySQL Community Downloads のページが表示されるので、MySQL Community Server (GPL) ブロックの中にある「DOWNLOAD」と書かれたリンク押下</p>
+                          <img src="../../png/mysql-install2.png" alt="mysqlインストール作業画像2" title="mysqlインストール作業画像2">
+                        </li>
+                        <li>
+                          <p>Download MySQL Community Server のページが表示されるので、画面下部のMySQL をインストールするプラットフォームを Select Platform の下に表示されているドロップダウンメニューで選択します</p>
+                          <img src="../../png/mysql-install3.png" alt="mysqlインストール作業画像3" title="mysqlインストール作業画像3">
+                          <p>今回は Windows 環境にインストールしますので Microsoft Windows を選択して下さい（デフォルトで選択されている場合は何もしなくて結構です）</p>
+                          <img src="../../png/mysql-install4.png" alt="mysqlインストール作業画像4" title="mysqlインストール作業画像4">
+                        </li>
+                        <li><p>今回はインストーラーが付いたものを利用します。 Windows (x86, 32 &amp; 64-bit), MySQL Installer MSI の右側にある「Go To Download Page」と書かれたリンク押下</p></li>
+                        <li>
+                          <p>少し下へスクロールするとインストーラーをダウンロードするためのリンクが表示されます。 </p>
+                          <p>2つありますが、上は必要なファイルをダウンロードしながらインストールするもの、下は最初にダウンロードを行ってからインストールするものです。</p>
+                          <p>今回はダウンロードしてからインストールするタイプのものを使用します。次の「DownLoad」と書かれたリンクをクリックして下さい。</p>
+                          <img src="../../png/mysql-install5.png" alt="mysqlインストール作業画像5" title="mysqlインストール作業画像5">
+                        </li>
+                        <li>
+                          <p>MySQL.com アカウントのログイン画面が表示されます。新規登録なども行えるようですが、今回はアカウントの登録は行わずにダウンロードのみ行います。</p>
+                          <p>画面下部にある「No thanks, just start my download.」と書かれたリンクをクリックして下さい。</p>
+                          <img src="../../png/mysql-install6.png" alt="mysqlインストール作業画像6" title="mysqlインストール作業画像6">
+                          <img src="../../png/mysql-install7.png" alt="mysqlインストール作業画像7" title="mysqlインストール作業画像7">
+                        </li>
+                      </ol>
+                    </details>
+
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>インストール手順</summary>
+                      <p>上記、ダウンロード手順を実施してあることを前提です</p>
+                      <ol>
+                        <li>
+                          <p>ダウンロードしたファイル名は mysql-installer-community-8.0.15.0.msi でインストールパッケージファイルとなっています。</p>
+                          <p>それではファイルをダブルクリックして下さい。インストールが開始されます。</p>
+                        </li>
+                        <li>
+                          <p>最初はライセンスの確認です。よく読んで頂き、同意できる場合に「I accept the license terms」の左側にあるチェックボックスをチェックして下さい。その後で「Next」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install8.png" alt="mysqlインストール作業画像8" title="mysqlインストール作業画像8">
+                        </li>
+                        <li>
+                          <p>次にMySQL のインストールタイプを選択します。どのタイプを選択すると何がインストールされるのかは画面右側に表示されます。</p>
+                          <p>今回は「Developer Default」を選択しました。選択が終わりましたら「Next」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install9.png" alt="mysqlインストール作業画像9" title="mysqlインストール作業画像9">
+                        </li>
+                        <li>
+                          <p>次の 2 つについては必要なファイルなどがないためインストールされませんと表示されています。今回は問題ないので「Next」押下</p>
+                          <img src="../../png/mysql-install10.png" alt="mysqlインストール作業画像10" title="mysqlインストール作業画像10">
+                        </li>
+                        <li>
+                          <p>確認画面が表示されます。「Yes」をクリックしてください。</p>
+                          <p>最終確認です。このままインストールしてよければ「Execute」をクリックして下さい。インストールが開始されます。</p>
+                        </li>
+                        <li>
+                          <p>最終的に次のような画面が表示されればインストールは完了です。続いて初期設定を行いますので「Next」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install11.png" alt="mysqlインストール作業画像11" title="mysqlインストール作業画像11">
+                        </li>
+                      </ol>
+                    </details>
+                  </div>
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>MySQL初期設定</summary>
+                      <ol>
+                        <li>
+                          <p>インストールした MySQL の初期設定を行います。「Next」ボタンをクリックして下さい。</p>
+                          <img src="../../png/mysql-install12.png" alt="mysqlインストール作業画像12" title="mysqlインストール作業画像12">
+                        </li>
+                        <li>
+                          <p>MySQL InnoDB Clusterを 利用するかどうかの選択です。今回は単独で MySQL を利用するので Standalone MySQL Server/Classic MySQL Replication を選択し、「Next」ボタンを押下して下さい</p>
+                          <img src="../../png/mysql-install13.png" alt="mysqlインストール作業画像13" title="mysqlインストール作業画像13">
+                        </li>
+                        <li>
+                          <p>次にコンフィギュレーションタイプと MySQL との通信に関する設定画面が表示されます。</p>
+                          <p>コンフィギュレーションタイプの設定は「Development Computer」、「Server Computer」、「Dedicated Computer」の3つから選択します。今回は開発用に使用しますので「Development Computer」を選択して下さい</p>
+                          <p>MySQLとの通信手段としてTCP/IP での接続の可否と、可の場合のポート番号を指定します。ポート番号はデフォルトの 3306 のままで構いませんが、既に他のアプリケーションで使用している場合などは変更して下さい。今回はデフォルトのままとしました。また MySQL X Protocol で使用するポート番号も変更できますがこちらもデフォルトのままとしました。設定が終わりましたら「Next」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install14.png" alt="mysqlインストール作業画像14" title="mysqlインストール作業画像14">
+                        </li>
+                        <li>
+                          <p>続いて認証方式の選択です。 MySQL 8 ではアカウント認証でより安全な暗号化パスワードの方式が利用可能なようです。</p>
+                          <p>インストール後、設定で以前の方式も利用可能なようですので新しい方式の「Use Strong Password Encryption for Authentication」を選択しました。選択が終わりましたら「Next」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install15.png" alt="mysqlインストール作業画像15" title="mysqlインストール作業画像15">
+                        </li>
+                        <li>
+                          <p>続いて root アカウントのパスワードの設定とユーザー追加の為の画面が表示されます。</p>
+                          <p>管理者アカウントである root アカウントのパスワードを設定して下さい。</p>
+                          <p>確認のために2か所に同じパスワードを入力して下さい。管理者以外のユーザーアカウントはここでは作成しません(後から追加できます)。設定が終わりましたら「Next」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install16.png" alt="mysqlインストール作業画像16" title="mysqlインストール作業画像16">
+                        </li>
+                        <li>
+                          <p>MySQL を Windows のサービスとして動かすかどうかの設定画面が表示されます。「Configure MySQL Server as a Windows Service」のチェックを付けます。その後で「Next」をクリックしてください。</p>
+                          <img src="../../png/mysql-install17.png" alt="mysqlインストール作業画像17" title="mysqlインストール作業画像17">
+                        </li>
+                        <li>
+                          <p>最終確認画面です。「Execute」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install18.png" alt="mysqlインストール作業画像18" title="mysqlインストール作業画像18">
+                          <p>下記の画面が表示されれば初期設定は完了です。「Finish」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install19.png" alt="mysqlインストール作業画像19" title="mysqlインストール作業画像19">
+                        </li>
+                        <li>
+                          <p>続いて MySQL Router やサンプルをインストールしている場合は続いて他の製品の初期設定を行います。最初に MySQL Router の設定です。「Next」をクリックしてください。</p>
+                          <p>MySQL Router の設定画面が表示されました。今回は特に設定を行わないので「Finish」をクリックしてください。</p>
+                          <p>最後にサンプルの設定です。「Next」をクリックしてください。</p>
+                          <p>次のような画面が表示されますのでMySQL をインストールした時に設定した root ユーザーのパスワードを入力し「Check」をクリックしてください。</p>
+                          <img src="../../png/mysql-install20.png" alt="mysqlインストール作業画像20" title="mysqlインストール作業画像20">
+                        </li>
+                        <li>
+                          <p>ログインに成功すると次のように表示されます。そのあとで「Next」をクリックしてください。</p>
+                          <img src="../../png/mysql-install21.png" alt="mysqlインストール作業画像21" title="mysqlインストール作業画像21">
+                          <p>「Execute」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install22.png" alt="mysqlインストール作業画像22" title="mysqlインストール作業画像22">
+                          <p>下記の画面が表示されれば初期設定は完了です。「Finish」をクリックして下さい。</p>
+                          <img src="../../png/mysql-install23.png" alt="mysqlインストール作業画像23" title="mysqlインストール作業画像23">
+                          <p>すべてのインストールが完了しました。「Next」をクリックしてください。</p>
+                          <img src="../../png/mysql-install24.png" alt="mysqlインストール作業画像24" title="mysqlインストール作業画像24">
+                          <p>次のように表示されれば初期設定も完了です。</p>
+                          <img src="../../png/mysql-install25.png" alt="mysqlインストール作業画像25" title="mysqlインストール作業画像25">
+                        </li>
+                      </ol>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>スキーマ設定</summary>
+                      <p>以下のファイルのuserとpasswordにインストール時に指定したものを設定</p>
+                      <kbd>ha-common/profile/local/jdbc.properties</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                </div><!-- /.card card-body bg-light -->
+              </div><!-- /#db-env-build-procedure /.collapse -->
+            </td><!-- /.card-body -->
+          </tr>
+          <tr>
+            <td class="card-body">
+              <a data-toggle="collapse" href="#java-env-build-procedure" role="button" aria-expanded="false" aria-controls="java-env-build-procedure">Java環境構築手順</a>
+              <div id="java-env-build-procedure" class="collapse show">
+                <div class="card card-body bg-light">
+                  <p>----Javaの環境構築手順----</p>
+                </div><!-- /.card card-body bg-light -->
+              </div><!-- /#java-env-build-procedure /.collapse -->
+            </td><!-- /.card-body -->
+          </tr>
+          <tr>
+            <td class="card-body">
+              <a data-toggle="collapse" href="#python-env-build-procedure" role="button" aria-expanded="false" aria-controls="python-env-build-procedure">Python構築手順</a>
+              <div id="python-env-build-procedure" class="collapse show">
+                <div class="card card-body bg-light">
+                  <p>----Python構築手順----</p>
+                </div><!-- /.card card-body bg-light -->
+              </div><!-- /#python-env-build-procedure /.collapse -->
+            </td><!-- /.card-body -->
+          </tr>
+          <tr>
+            <td class="card-body">
+              <a data-toggle="collapse" href="#node-env-build-procedure" role="button" aria-expanded="false" aria-controls="node-env-build-procedure">Node.js構築手順</a>
+              <div id="node-env-build-procedure" class="collapse show">
+                <div class="card card-body bg-light">
+                  <p>----Node.js構築手順----</p>
+                </div><!-- /.card card-body bg-light -->
+              </div><!-- /#node-env-build-procedure /.collapse -->
+            </td><!-- /.card-body -->
+          </tr>
+          <tr>
+            <td class="card-body">
+              <a data-toggle="collapse" href="#ide-env-build-procedure" role="button" aria-expanded="false" aria-controls="ide-env-build-procedure">IDE設定手順</a>
+              <div id="ide-env-build-procedure" class="collapse show">
+                <div class="card card-body bg-light">
+                  <p>----IDE設定手順----</p>
+                </div><!-- /.card card-body bg-light -->
+              </div><!-- /#ide-env-build-procedure /.collapse -->
+            </td><!-- /.card-body -->
+          </tr>
+        </table>
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container border shadow -->
+
   <script src="../../js/jquery.min.js"></script>
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/bootstrap.bundle.min.js"></script>
