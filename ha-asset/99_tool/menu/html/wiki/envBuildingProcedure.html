@@ -10,7 +10,7 @@
 </head>
 <body>
   <br>
-  <div class="container border">
+  <div class="container border shadow">
 
     <div class="row">
       <div class="col-12">
@@ -36,32 +36,52 @@
               <a data-toggle="collapse" href="#db-env-build-procedure" role="button" aria-expanded="false" aria-controls="db-env-build-procedure">DB構築手順</a>
               <div class="collapse" id="db-env-build-procedure">
                 <div class="card card-body bg-light">
-                  <div>利用ツール一覧</div>
-                  <table class="table">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th>#</th>
-                        <th scope="col">役割</th>
-                        <th scope="col">ライブラリ/ツール名</th>
-                        <th scope="col">Version</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>データベース</td>
-                        <td>MySQL</td>
-                        <td>8系</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>DBマイグレーション</td>
-                        <td>Flyway</td>
-                        <td>7系</td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+                  <div class="col-10">
+                    <h4 class="h4">ツール一覧</h4>
+                    <table class="table">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>#</th>
+                          <th scope="col">役割</th>
+                          <th scope="col">ライブラリ/ツール名</th>
+                          <th scope="col">Version</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>データベース</td>
+                          <td>MySQL</td>
+                          <td>8.0.16</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>DBマイグレーション</td>
+                          <td>Flyway</td>
+                          <td>7.0.1</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>ORM</td>
+                          <td>MyBatis</td>
+                          <td>3.5.6</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <br>
+
                   <div class="alert alert-danger" role="alert">実際に各Tableに対し、DDLなどの適用はmavenコマンドよりFlywayが行うため直接SQLを流さなくてよい</div>
+
+                  <br>
+
+                  <div class="col-10">
+                    <h4 class="h4">インストール手順</h4>
+                    <p><a href="https://www.mysql.com/jp/" target="_blank" rel="noopener noreferrer">公式</a>よりMySQLをローカルPCにインストールして下さい</p>
+                  </div><!-- /.col-10 -->
+
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#db-env-build-procedure /.collapse -->
             </td><!-- /.card card-body -->
@@ -109,7 +129,8 @@
         </table>
       </div><!-- /.col-12 -->
     </div><!-- /.row -->
-  </div><!-- /.container border -->
+  </div><!-- /.container border shadow -->
+
   <script src="../../js/jquery.min.js"></script>
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/bootstrap.bundle.min.js"></script>
