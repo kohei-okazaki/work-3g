@@ -6,91 +6,116 @@
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap-grid.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap-reboot.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/docs.css">
 </head>
 <body>
-  <h1>プロジェクト構成</h1>
-  <div class="container border">
-    <br>
-    <h2>概要</h2>
-    <div>健康管理アプリのサブプロジェクトの構成図</div>
-    <table class="table">
-      <thead class="thead-dark">
-        <tr>
-          <th>#</th>
-          <th scope="col">概要</th>
-          <th scope="col">詳細</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>１</td>
-          <td>ha-api</td>
-          <td>アプリが提供するAPI機能を管理するmavenプロジェクト</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>ha-asset</td>
-          <td>DDLなどアプリで必要なファイルを管理するドキュメントプロジェクト</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>ha-batch</td>
-          <td>アプリが提供するバッチ機能を管理するmavenプロジェクト</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>ha-build</td>
-          <td>ローカル環境のビルド機能を管理するドキュメントプロジェクト</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>ha-business</td>
-          <td>業務ロジック機能を管理するmavenプロジェクト</td>
-        </tr>
-        <tr>
-          <td>6</td>
-          <td>ha-common</td>
-          <td>共通処理を管理するmavenプロジェクト</td>
-        </tr>
-        <tr>
-          <td>7</td>
-          <td>ha-dashboard</td>
-          <td>アプリが提供するダッシュボード画面機能をまとめたmavenプロジェクト</td>
-        </tr>
-        <tr>
-          <td>8</td>
-          <td>ha-db</td>
-          <td>データベースアクセスを管理するmavenプロジェクト</td>
-        </tr>
-        <tr>
-          <td>９</td>
-          <td>ha-node</td>
-          <td>健康情報計算API(別名 NodeAPI)を管理するJavaScriptプロジェクト</td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>ha-pom</td>
-          <td>アプリのmavenプロジェクトで共通で読み込む親pomプロジェクト</td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td>ha-selenium</td>
-          <td>ダッシュボード画面をPython-seleniumでテストするPythonプロジェクト</td>
-        </tr>
-        <tr>
-          <td>12</td>
-          <td>ha-tool</td>
-          <td>アプリのDDLなどを自動生成するmavenプロジェクト</td>
-        </tr>
-        <tr>
-          <td>13</td>
-          <td>ha-web</td>
-          <td>WebAPIの共通的FWを定義したmavenプロジェクト</td>
-        </tr>
-      </tbody>
-    </table>
+  <br>
+  <div class="container border shadow">
 
-  </div>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="h2">プロジェクト構成</h2>
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+
+    <div class="row">
+      <div class="col-12">
+        <h3 class="h3">概要</h3>
+        <div>健康管理アプリのサブプロジェクトの依存関係図</div>
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <img src="../../png/project.png" alt="project依存関係図" title="project依存関係図">
+        </div>
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <h3 class="h3">プロジェクト一覧</h3>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+              <th scope="col">概要</th>
+              <th scope="col">詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>ha-api</td>
+              <td>アプリが提供するAPI機能を管理するmavenプロジェクト</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>ha-asset</td>
+              <td>DDLなどアプリで必要なファイルを管理するドキュメントプロジェクト</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>ha-batch</td>
+              <td>アプリが提供するバッチ機能を管理するmavenプロジェクト</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>ha-build</td>
+              <td>ローカル環境のビルド機能を管理するドキュメントプロジェクト</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>ha-business</td>
+              <td>業務ロジック機能を管理するmavenプロジェクト</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>ha-common</td>
+              <td>共通処理を管理するmavenプロジェクト</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>ha-dashboard</td>
+              <td>アプリが提供するダッシュボード画面機能をまとめたmavenプロジェクト</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>ha-db</td>
+              <td>データベースアクセスを管理するmavenプロジェクト</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>ha-node</td>
+              <td>健康情報計算API(別名 NodeAPI)を管理するJavaScriptプロジェクト</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>ha-pom</td>
+              <td>アプリのmavenプロジェクトで共通で読み込む親pomプロジェクト</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>ha-selenium</td>
+              <td>ダッシュボード画面をPython-seleniumでテストするPythonプロジェクト</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>ha-tool</td>
+              <td>アプリのDDLなどを自動生成するmavenプロジェクト</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>ha-web</td>
+              <td>WebAPIの共通的FWを定義したmavenプロジェクト</td>
+            </tr>
+          </tbody>
+        </table><!-- /.table -->
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container border shadow -->
+
   <script src="../../js/jquery.min.js"></script>
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/bootstrap.bundle.min.js"></script>
