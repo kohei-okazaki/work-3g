@@ -220,7 +220,49 @@ var table = [
           size: ""
         }
       ]
-    }
+    },
+    {
+        physicalName: "ACCOUNT_RECOVERY_TOKEN",
+        logicalName: "アカウント回復トークン",
+        column : [
+          {
+            logicalName: "アカウント回復トークンID",
+            physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
+            type: "INT",
+            size: ""
+          },
+          {
+            logicalName: "ユーザID",
+            physicalName: "SEQ_USER_ID",
+            type: "INT",
+            size: ""
+          },
+          {
+            logicalName: "トークン",
+            physicalName: "TOKEN",
+            type: "VARCHAR",
+            size: "64"
+          },
+          {
+            logicalName: "トークン作成日時",
+            physicalName: "TOKEN_CREATE_DATE",
+            type: "DATETIME",
+            size: ""
+          },
+          {
+            logicalName: "更新日時",
+            physicalName: "UPDATE_DATE",
+            type: "DATETIME",
+            size: ""
+          },
+          {
+            logicalName: "登録日時",
+            physicalName: "REG_DATE",
+            type: "DATETIME",
+            size: ""
+          }
+        ]
+      }
 ];
 
 // 指定したテーブル名のカラム情報をすべて取得する

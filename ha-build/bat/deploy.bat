@@ -3,7 +3,11 @@
 rem ------------------------------------------------------------------------
 rem jarを配置するバッチファイル
 rem
+<<<<<<< HEAD
+rem ■■■このファイルはpomを共通で定義する方法でうまく行ったので基本的に使用しない■■■
+=======
 rem ■■■pomを共通で定義する方法でうまく行ったので基本的にこのファイルは使用しない■■■
+>>>>>>> 8c90c43b2e480fb2d180a3ac63e6d3ad68084620
 rem
 rem ha-dashboard/target配下にha-common-1.0.jar, ha-db-1.0.jar, ha-web-1.0.jar, ha-business-1.0.jarを配置
 rem ha-api/target配下に              ha-common-1.0.jar, ha-db-1.0.jar, ha-web-1.0.jar, ha-business-1.0.jarを配置
