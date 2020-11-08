@@ -34,7 +34,7 @@
           <tr>
             <td class="card card-body">
               <a data-toggle="collapse" href="#db-env-build-procedure" role="button" aria-expanded="false" aria-controls="db-env-build-procedure">DB構築手順</a>
-              <div class="collapse" id="db-env-build-procedure">
+              <div class="collapse show" id="db-env-build-procedure">
                 <div class="card card-body bg-light">
 
                   <div class="col-10">
@@ -79,7 +79,49 @@
 
                   <div class="col-10">
                     <h4 class="h4">インストール手順</h4>
-                    <p><a href="https://www.mysql.com/jp/" target="_blank" rel="noopener noreferrer">公式</a>よりMySQLをローカルPCにインストールして下さい</p>
+                    <p><a href="https://www.mysql.com/jp/" target="_blank" rel="noopener noreferrer">公式</a>より以下の手順でMySQLをローカルPCにインストールして下さい</p>
+                    <p>以下インストール手順は2016年頃のもののため、画面が更新されている可能性があります</p>
+                    <ol>
+                      <li>
+                        <p>上記説明のURLのリンクで遷移後の画面上部の「ダウンロード」タブ押下</p>
+                      </li>
+                      <li>
+                        <p>MySQL のダウンロードに関するページが表示されるので、画面の下の方に MySQL Community Edition (GPL) と書かれたブロックがあります。そこに表示されている「Community (GPL) Downloads」と書かれたリンク押下</p>
+                        <img src="../../png/mysql-install1.png" alt="mysqlインストール作業画像1" title="mysqlインストール作業画像1">
+                      </li>
+                      <li>
+                        <p>MySQL Community Downloads のページが表示されるので、MySQL Community Server (GPL) ブロックの中にある「DOWNLOAD」と書かれたリンク押下</p>
+                        <img src="../../png/mysql-install2.png" alt="mysqlインストール作業画像2" title="mysqlインストール作業画像2">
+                      </li>
+                      <li>
+                        <p>Download MySQL Community Server のページが表示されるので、画面下部のMySQL をインストールするプラットフォームを Select Platform の下に表示されているドロップダウンメニューで選択します</p>
+                        <img src="../../png/mysql-install3.png" alt="mysqlインストール作業画像3" title="mysqlインストール作業画像3">
+                        <p>今回は Windows 環境にインストールしますので Microsoft Windows を選択して下さい（デフォルトで選択されている場合は何もしなくて結構です）</p>
+                        <img src="../../png/mysql-install4.png" alt="mysqlインストール作業画像4" title="mysqlインストール作業画像4">
+                      </li>
+                      <li><p>今回はインストーラーが付いたものを利用します。 Windows (x86, 32 &amp; 64-bit), MySQL Installer MSI の右側にある「Go To Download Page」と書かれたリンク押下</p></li>
+                      <li>
+                        <p>少し下へスクロールするとインストーラーをダウンロードするためのリンクが表示されます。 </p>
+                        <p>2つありますが、上は必要なファイルをダウンロードしながらインストールするもの、下は最初にダウンロードを行ってからインストールするものです。</p>
+                        <p>今回はダウンロードしてからインストールするタイプのものを使用します。次の「DownLoad」と書かれたリンクをクリックして下さい。</p>
+                        <img src="../../png/mysql-install5.png" alt="mysqlインストール作業画像5" title="mysqlインストール作業画像5">
+                      </li>
+                      <li>
+                        <p>MySQL.com アカウントのログイン画面が表示されます。新規登録なども行えるようですが、今回はアカウントの登録は行わずにダウンロードのみ行います。</p>
+                        <p>画面下部にある「No thanks, just start my download.」と書かれたリンクをクリックして下さい。</p>
+                        <img src="../../png/mysql-install6.png" alt="mysqlインストール作業画像6" title="mysqlインストール作業画像6">
+                        <img src="../../png/mysql-install7.png" alt="mysqlインストール作業画像7" title="mysqlインストール作業画像7">
+                      </li>
+                      <li><p></p></li>
+                      <li><p></p></li>
+                    </ol>
+
+                  </div><!-- /.col-10 -->
+
+                  <div class="col-10">
+                    <h4 class="h4">スキーマ設定</h4>
+                    <p>以下のファイルのuserとpasswordにインストール時に指定したものを設定</p>
+                    <kbd>ha-common/profile/local/jdbc.properties</kbd>
                   </div><!-- /.col-10 -->
 
                 </div><!-- /.card card-body bg-light -->
@@ -89,7 +131,7 @@
           <tr>
             <td class="card card-body">
               <a data-toggle="collapse" href="#java-env-build-procedure" role="button" aria-expanded="false" aria-controls="java-env-build-procedure">Java環境構築手順</a>
-              <div class="collapse" id="java-env-build-procedure">
+              <div id="java-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
                   <p>----Javaの環境構築手順----</p>
                 </div><!-- /.card card-body bg-light -->
@@ -99,7 +141,7 @@
           <tr>
             <td class="card card-body">
               <a data-toggle="collapse" href="#python-env-build-procedure" role="button" aria-expanded="false" aria-controls="python-env-build-procedure">Python構築手順</a>
-              <div class="collapse" id="python-env-build-procedure">
+              <div id="python-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
                   <p>----Python構築手順----</p>
                 </div><!-- /.card card-body bg-light -->
@@ -109,7 +151,7 @@
           <tr>
             <td class="card card-body">
               <a data-toggle="collapse" href="#node-env-build-procedure" role="button" aria-expanded="false" aria-controls="node-env-build-procedure">Node.js構築手順</a>
-              <div class="collapse" id="node-env-build-procedure">
+              <div id="node-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
                   <p>----Node.js構築手順----</p>
                 </div><!-- /.card card-body bg-light -->
@@ -119,7 +161,7 @@
           <tr>
             <td class="card card-body">
               <a data-toggle="collapse" href="#ide-env-build-procedure" role="button" aria-expanded="false" aria-controls="ide-env-build-procedure">IDE設定手順</a>
-              <div id="ide-env-build-procedure" class="collapse">
+              <div id="ide-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
                   <p>----IDE設定手順----</p>
                 </div><!-- /.card card-body bg-light -->
