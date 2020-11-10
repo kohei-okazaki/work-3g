@@ -239,7 +239,54 @@
               <a data-toggle="collapse" href="#java-env-build-procedure" role="button" aria-expanded="false" aria-controls="java-env-build-procedure">Java環境構築手順</a>
               <div id="java-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
-                  <p>----Javaの環境構築手順----</p>
+                  <div class="col-10">
+                    <details>
+                      <summary>Java インストール</summary>
+                      <p><a href="https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-8-ug/downloads-list.html" target="_blank" rel="noopener noreferrer">Amazon CorrettoのJava8</a>から各PCのOSに合わせ、Java8をインストール</p>
+                      <p>コマンドプロンプトまたはターミナルより以下をコマンドを実行</p>
+                      <kbd>$java -version</kbd>
+                      <p>以下の結果が出力されていればOK（メジャーバージョンである8系が出力されていればOK）</p>
+                      <kbd>openjdk version "1.8.0_252"</kbd><br>
+                      <kbd>OpenJDK Runtime Environment Corretto-8.252.09.2 (build 1.8.0_252-b09)</kbd><br>
+                      <kbd>OpenJDK 64-Bit Server VM Corretto-8.252.09.2 (build 25.252-b09, mixed mode)</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>AWS CLI インストール手順（Windows）</summary>
+                      <p><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-windows.html">Windowsの場合</a>よりインストーラをダウンロード</p>
+                      <p>ダウンロードしたインストーラ AWSCLI64PY3.msi を実行し、「Next」ボタン押下</p>
+                      <img src="../../png/win-cli-install1.png" alt="Windows Install手順1" title="Windows Install手順1">
+                      <p>チェックボックスにチェックを付け、「Next」ボタン押下</p>
+                      <img src="../../png/win-cli-install2.png" alt="Windows Install手順2" title="Windows Install手順2">
+                      <p>「Next」ボタン押下</p>
+                      <img src="../../png/win-cli-install3.png" alt="Windows Install手順3" title="Windows Install手順3">
+                      <p>「Install」ボタン押下</p>
+                      <img src="../../png/win-cli-install4.png" alt="Windows Install手順4" title="Windows Install手順4">
+                      <p>「Finish」ボタン押下</p>
+                      <img src="../../png/win-cli-install5.png" alt="Windows Install手順5" title="Windows Install手順5">
+                      <br>
+                      <p>上記インストールが正常に完了後、コマンドプロンプトより以下のコマンドを実行</p>
+                      <kbd>aws --version</kbd>
+                      <p>以下の結果が出力されていればOK（バージョンは任意とする）</p>
+                      <kbd>aws-cli/2.0.10 Python/3.7.5 Windows/10 botocore/2.0.0dev14</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>AWS CLI インストール手順（Mac）</summary>
+                      <p><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-mac.html">Macの場合</a>よりインストーラをダウンロード</p>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#java-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
