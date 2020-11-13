@@ -282,11 +282,52 @@
                     <details>
                       <summary>AWS CLI インストール手順（Mac）</summary>
                       <p><a href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-mac.html">Macの場合</a>よりインストーラをダウンロード</p>
+                      <p>コマンドを叩くだけなので、<a href="https://awscli.amazonaws.com/AWSCLIV2.pkg">ここ</a>から最新のAWS-CLI インストーラファイル（AWSCLIV2.pkg）をダウンロード</p>
+                      <p>ダウンロードした「AWSCLIV2.pkg」をダブルクリックし、インストール手順に従いインストール</p>
+                      <p>上記インストールが正常に完了後、コマンドプロンプトより以下のコマンドを実行</p>
+                      <kbd>aws --version</kbd>
+                      <p>以下の結果が出力されていればOK（バージョンは任意とする）</p>
+                      <kbd>aws-cli/2.0.10 Python/3.7.5 Windows/10 botocore/2.0.0dev14</kbd>
                     </details>
                   </div><!-- /.col-10 -->
 
                   <br>
 
+                  <div class="col-10">
+                    <details>
+                      <summary>AWS CLI ユーザを設定</summary>
+                      <p>次に以下のコマンドでローカル端末にAWSのIAMユーザを設定</p>
+                      <kbd>aws configure</kbd>
+                      <br><br>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">項目名</th>
+                            <th scope="col">設定値</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>AWS Access Key ID</td>
+                            <td>${事前に連携されたAWSアクセスキー}</td>
+                          </tr>
+                          <tr>
+                            <td>AWS Secret Access Key</td>
+                            <td>	${事前に連携されたAWS秘密アクセスキー}</td>
+                          </tr>
+                          <tr>
+                            <td>region name</td>
+                            <td>ap-northeast-1</td>
+                          </tr>
+                          <tr>
+                            <td>output format</td>
+                            <td>json</td>
+                          </tr>
+                        </tbody>
+                      </table><!-- /.table -->
+                      <div class="alert alert-danger" role="alert">上記設定を行わない場合、ローカルで呼び出すAWS-SDKの処理に失敗し、一部機能が使えない</div>
+                    </details>
+                  </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#java-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
@@ -316,7 +357,79 @@
               <a data-toggle="collapse" href="#ide-env-build-procedure" role="button" aria-expanded="false" aria-controls="ide-env-build-procedure">IDE設定手順</a>
               <div id="ide-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
-                  <p>----IDE設定手順----</p>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>IDEダウンロード</summary>
+                      <p><a href="https://mergedoc.osdn.jp/">ここ</a>から任意のバージョンのEclipseをダウンロード</p>
+                      <p>アプリ内に定義されているデフォルトのパスを有効にしたい場合、以下のパスに上記でダウンロードしたzipを解凍</p>
+                      <kbd>C:\app</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>アプリダウンロード</summary>
+                      <p>Eclipse の git パースペクティブ よりリモートリポジトリからクローン</p>
+                      <img src="../../png/eclipse-config2.png" alt="IDE手順2" title="IDE手順2">
+                      <br><br>
+                      <img src="../../png/eclipse-config3.png" alt="IDE手順3" title="IDE手順3">
+                      <br><br>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">項目名</th>
+                            <th scope="col">設定値</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>URI</td>
+                            <td>https://github.com/kohei-okazaki/work-3g.git</td>
+                          </tr>
+                          <tr>
+                            <td>ホスト</td>
+                            <td>	自動入力</td>
+                          </tr>
+                          <tr>
+                            <td>リポジトリーパス</td>
+                            <td>	自動入力</td>
+                          </tr>
+                          <tr>
+                            <td>ユーザー</td>
+                            <td>自身のユーザ</td>
+                          </tr>
+                          <tr>
+                            <td>パスワード</td>
+                            <td>自身のユーザのパスワード</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <p>ローカルリポジトリーは以下にダウンロード</p>
+                      <kbd>C:\app\git</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>プロジェクトインポート</summary>
+                      <p>Eclipse の git パースペクティブ よりGitリポジトリータブを選択。work3g配下のすべてのサブプロジェクトを選択。「プロジェクトのインポート」を押してimportする</p>
+                      <img src="../../png/eclipse-config1.png" alt="IDE手順1" title="IDE手順1">
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>ローカルサーバ設定</summary>
+                    </details>
+                  </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#ide-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
