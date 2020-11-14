@@ -328,6 +328,179 @@
                       <div class="alert alert-danger" role="alert">上記設定を行わない場合、ローカルで呼び出すAWS-SDKの処理に失敗し、一部機能が使えない</div>
                     </details>
                   </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>ローカルTomcatサーバ構築</summary>
+                      <p>Eclipseを開き、以下の操作で 「Java インストール」で設定したJavaを参照するようにする</p>
+                      <p>ウィンドゥ -> 設定 -> Java -> インストール済のJRE -> インストール済のJRE -> 標準VM</p>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">項目名</th>
+                            <th scope="col">設定値</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>JRE ホーム(J)</td>
+                            <td>Amazon Correttoを配置したディレクトリ<br>(デフォルトであれば以下のディレクトリになるはず)</td>
+                          </tr>
+                          <tr>
+                            <td>Windowsの場合</td>
+                            <td>	C:\Program Files\Amazon Corretto\jre8\bin</td>
+                          </tr>
+                          <tr>
+                            <td>Macの場合</td>
+                            <td>/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home/bin</td>
+                          </tr>
+                          <tr>
+                            <td>JRE 名(N)</td>
+                            <td>Amazon Corretto</td>
+                          </tr>
+                        </tbody>
+                      </table><!-- /.table -->
+                      <br>
+                      <p>次にローカルサーバの構築を行う</p>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">操作</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>パッケージエクスプローラ上で右クリック</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>新規 選択</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>その他 選択</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>「サーバー」フォルダの「サーバー」を選択して「次へ」 選択</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>ランタイム環境の構成 選択</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>追加 選択</td>
+                          </tr>
+                          <tr>
+                            <td>7</td>
+                            <td>Apache Tomcat v9.0 選択</td>
+                          </tr>
+                          <tr>
+                            <td>8</td>
+                            <td>次へ 選択</td>
+                          </tr>
+                          <tr>
+                            <td>9</td>
+                            <td>名前=Amazon Corretto, JRE=インストール済のJRE → 上記設定したJRE「Amazon Corretto」を選択</td>
+                          </tr>
+                        </tbody>
+                      </table><!-- /.table -->
+
+                      <b>ダッシュボードサーバの構築</b>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">操作</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>サーバービュー上で右クリック</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>新規 選択</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>Apache Tomcat v9.0 選択</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>↓の情報を入力</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>サーバーのホスト名(H) = localhost</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>サーバー名(M) = dashboard-server</td>
+                          </tr>
+                          <tr>
+                            <td>7</td>
+                            <td>サーバー・ランタイム環境(R) = Amazon Corretto</td>
+                          </tr>
+                        </tbody>
+                      </table><!-- /.table -->
+
+                      <b>APIサーバの構築</b>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">操作</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>1 ~ 4</td>
+                            <td>ダッシュボードサーバの構築と同様</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>サーバーのホスト名(H) = localhost</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>サーバー名(M) = api-server</td>
+                          </tr>
+                          <tr>
+                            <td>7</td>
+                            <td>サーバー・ランタイム環境(R) = Amazon Corretto</td>
+                          </tr>
+                          <tr>
+                            <td>8</td>
+                            <td>サーバービュー上のapi-serverをダブルクリック</td>
+                          </tr>
+                          <tr>
+                            <td>9</td>
+                            <td>ポート部分に↓の情報で更新</td>
+                          </tr>
+                          <tr>
+                            <td>10</td>
+                            <td>Tomcat管理ポート = 8006</td>
+                          </tr>
+                          <tr>
+                            <td>11</td>
+                            <td>HTTP/1.1 = 8081</td>
+                          </tr>
+                          <tr>
+                            <td>12</td>
+                            <td>AJP/1.3 = 8010</td>
+                          </tr>
+                        </tbody>
+                      </table><!-- /.table -->
+
+                    </details>
+                  </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#java-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
@@ -347,7 +520,46 @@
               <a data-toggle="collapse" href="#node-env-build-procedure" role="button" aria-expanded="false" aria-controls="node-env-build-procedure">Node.js構築手順</a>
               <div id="node-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
-                  <p>----Node.js構築手順----</p>
+                  <div class="col-10">
+                    <details>
+                      <summary>Node.js インストール</summary>
+                      <p><a href="https://nodejs.org/ja/download/">ここ</a>から各OSに合わせてインストーラをダウンロード</p>
+                      <p>バージョンは偶数バージョンを選択</p>
+                      <p>インストール完了後、コマンドプロンプトまたはターミナルで実行</p>
+                      <kbd>node -v</kbd>
+                      <p>インストールしたバージョン情報を表示されていればOK</p>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>npm インストール</summary>
+                      <p>ha-node上で以下のコマンドを実行</p>
+                      <kbd>npm install</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>npm モジュールの更新</summary>
+                      <p>Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行</p>
+                      <kbd>npm update</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>npm モジュールの追加</summary>
+                      <p>開発中、新しくモジュールを追加したい場合、Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行</p>
+                      <kbd>npm install --save ${module_name}</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#node-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
@@ -408,7 +620,7 @@
                         </tbody>
                       </table>
 
-                      <p>ローカルリポジトリーは以下にダウンロード</p>
+                      <p>ローカルリポジトリは以下にダウンロード</p>
                       <kbd>C:\app\git</kbd>
                     </details>
                   </div><!-- /.col-10 -->
@@ -427,7 +639,77 @@
 
                   <div class="col-10">
                     <details>
-                      <summary>ローカルサーバ設定</summary>
+                      <summary>開発用テンプレート設定</summary>
+                      <p>Eclipseより、以下の操作でテンプレートを設定する</p>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">操作</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>ウィンドゥ → 設定 → Java → コードスタイル → クリーンアップ → インポート</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>以下のxmlをインポート<br><kbd>/ha-asset/00_local/codecleanup.xml</kbd></td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>ウィンドゥ → 設定 → Java → コードスタイル → コードテンプレート → インポート</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>以下のxmlをインポート<br><kbd>/ha-asset/00_local/codetemplates.xml</kbd></td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>ウィンドゥ → 設定 → Java → コードスタイル → フォーマッター → インポート</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>以下のxmlをインポート<br><kbd>/ha-asset/00_local/codeformatter.xml</kbd></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <p>次にファイル保存時に自動でテンプレートが適用されるように以下を設定</p>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">操作</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>ウィンドゥ → 設定 → Java → エディター → 保存アクション を開く</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>「保存時に選択したアクションを実行」にチェック</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>「ソース・コードのフォーマット」にチェック</td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>すべての行をフォーマット を選択</td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>「インポートの編成」にチェック</td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>「追加アクション」にチェック。お好みで好きな設定を追加して下さい</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </details>
                   </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
