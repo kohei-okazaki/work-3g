@@ -224,12 +224,42 @@
 
                   <div class="col-10">
                     <details>
-                      <summary>スキーマ設定</summary>
+                      <summary>ユーザとパスワードを設定</summary>
                       <p>以下のファイルのuserとpasswordにインストール時に指定したものを設定</p>
                       <kbd>ha-common/profile/local/jdbc.properties</kbd>
+                      <br><br>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">項目名</th>
+                            <th scope="col">設定値</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>jdbc.username</td>
+                            <td>MySQLインストール時に作成したユーザ名</td>
+                          </tr>
+                          <tr>
+                            <td>jdbc.password</td>
+                            <td>	MySQLインストール時に作成したパスワード</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </details>
                   </div><!-- /.col-10 -->
 
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>データベース作成</summary>
+                      <p>「Windowsキー」押下、「mysql」と入力し以下画像のように「MySQL 8.0 Command Line Clinet」ツールを選択</p>
+                      <img src="../../png/mysql-command-line-client1.png" alt="mysqlツール作業画像1" title="mysqlツール作業画像1">
+                      <p>以下のファイルMySQLクライアントから実行し、データベース「work3g」を作成する</p>
+                      <kbd>/ha-asset/02_db/others/CREATE_DATABASE.sql</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#db-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
