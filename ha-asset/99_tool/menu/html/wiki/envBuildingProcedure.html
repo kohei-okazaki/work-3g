@@ -224,12 +224,42 @@
 
                   <div class="col-10">
                     <details>
-                      <summary>スキーマ設定</summary>
+                      <summary>ユーザとパスワードを設定</summary>
                       <p>以下のファイルのuserとpasswordにインストール時に指定したものを設定</p>
                       <kbd>ha-common/profile/local/jdbc.properties</kbd>
+                      <br><br>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">項目名</th>
+                            <th scope="col">設定値</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>jdbc.username</td>
+                            <td>MySQLインストール時に作成したユーザ名</td>
+                          </tr>
+                          <tr>
+                            <td>jdbc.password</td>
+                            <td>	MySQLインストール時に作成したパスワード</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </details>
                   </div><!-- /.col-10 -->
 
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>データベース作成</summary>
+                      <p>「Windowsキー」押下、「mysql」と入力し以下画像のように「MySQL 8.0 Command Line Clinet」ツールを選択</p>
+                      <img src="../../png/mysql-command-line-client1.png" alt="mysqlツール作業画像1" title="mysqlツール作業画像1">
+                      <p>以下のファイルMySQLクライアントから実行し、データベース「work3g」を作成する</p>
+                      <kbd>/ha-asset/02_db/others/CREATE_DATABASE.sql</kbd>
+                    </details>
+                  </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#db-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
@@ -349,12 +379,13 @@
                             <td>Amazon Correttoを配置したディレクトリ<br>(デフォルトであれば以下のディレクトリになるはず)</td>
                           </tr>
                           <tr>
-                            <td>Windowsの場合</td>
-                            <td>	C:\Program Files\Amazon Corretto\jre8\bin</td>
-                          </tr>
-                          <tr>
-                            <td>Macの場合</td>
-                            <td>/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home/bin</td>
+                            <td></td>
+                            <td>
+                              <ul class="list-group">
+                                <li class="list-group-item bg-light"><p>Windowsの場合<br><kbd>C:\Program Files\Amazon Corretto\jre8\bin</kbd></p></li>
+                                <li class="list-group-item bg-light"><p>Macの場合<br><kbd>/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home/bin</kbd></p></li>
+                              </ul>
+                            </td>
                           </tr>
                           <tr>
                             <td>JRE 名(N)</td>
@@ -510,7 +541,88 @@
               <a data-toggle="collapse" href="#python-env-build-procedure" role="button" aria-expanded="false" aria-controls="python-env-build-procedure">Python構築手順</a>
               <div id="python-env-build-procedure" class="collapse show">
                 <div class="card card-body bg-light">
-                  <p>----Python構築手順----</p>
+                  <div class="col-10">
+                    <details>
+                      <summary>Python インストール</summary>
+                      <p><a href="https://www.anaconda.com/products/individual">ここ</a>の画面下部から各OSに合わせてインストーラをダウンロード</p>
+                      <img style="width: 700px" src="../../png/python-install1.png" alt="Python install手順1" title="Python install手順1">
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>Eclipse インタープリター設定</summary>
+                      <p>ヘルプ → eclipseマーケットプレイス → PyDevを検索してInstall</p>
+                      <p>インタープリターは「Python インストール」でインストールしたAnacondaのパスを設定する</p>
+                      <p>ウィンドゥ → 設定 → PyDev → インタープリター → Pythonインタープリター → 一番上のBlowse for python...</p>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">項目名</th>
+                            <th scope="col">設定値</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>インタープリター名</td>
+                            <td>app-python</td>
+                          </tr>
+                          <tr>
+                            <td>インタープリター実行可能ファイル</td>
+                            <td>
+                              <ul class="list-group">
+                                <li class="list-group-item bg-light"><p>Windowsの場合<br><kbd>C:\Users\${user}\anaconda3\python.exe</kbd></p></li>
+                                <li class="list-group-item bg-light"><p>Macの場合<br><kbd>/Users/${user}/opt/anaconda3/bin/python3.7</kbd></p></li>
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table><!-- /.table -->
+                    </details>
+                  </div><!-- /.col-10 -->
+
+                  <br>
+
+                  <div class="col-10">
+                    <details>
+                      <summary>Python コマンド一覧</summary>
+                      <p>以下のコマンドはコマンドプロンプトやターミナルではなく、「Anaconda Prompt」で行う</p>
+                      <p>Anaconda Promptの開き方</p>
+                      <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">やりたいこと</th>
+                            <th scope="col">コマンド</th>
+                          </tr>
+                        </thead><!-- /.thead-dark -->
+                        <tbody>
+                          <tr>
+                            <td>本体のアップデート</td>
+                            <td><kbd>conda update conda -y</kbd></td>
+                          </tr>
+                          <tr>
+                            <td>パッケージ一式のアップデート</td>
+                            <td><kbd>conda update --all -y</kbd></td>
+                          </tr>
+                          <tr>
+                            <td>Pythonのバージョンのアップデート</td>
+                            <td><kbd>conda update python -y</kbd></td>
+                          </tr>
+                          <tr>
+                            <td>Anacondaのアンインストール</td>
+                            <td>
+                              <ol class="list-group">
+                                <li><kbd>conda install anaconda-clean</kbd></li>
+                                <li><kbd>anaconda-clean --yes</kbd></li>
+                              </ol>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table><!-- /.table -->
+                    </details>
+                  </div><!-- /.col-10 -->
                 </div><!-- /.card card-body bg-light -->
               </div><!-- /#python-env-build-procedure /.collapse -->
             </td><!-- /.card-body -->
