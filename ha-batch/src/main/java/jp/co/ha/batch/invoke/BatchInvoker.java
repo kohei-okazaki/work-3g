@@ -99,7 +99,9 @@ public class BatchInvoker {
             batchResult = batchInstance.execute(cmd);
 
         } catch (Exception e) {
+            // ログを出力する
             EXCEPTION_HANDLER.handleException(e);
+            batchResult = BatchResult.FAILURE;
         } finally {
             LOG.info(MESSAGE_SOURCE.getMessage(batchResult.getComment(), null,
                     Locale.getDefault()));
