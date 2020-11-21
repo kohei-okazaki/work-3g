@@ -37,7 +37,7 @@ public abstract class CommonService {
         Account account = accountSearchService.findById(request.getSeqUserId())
                 .orElseThrow(
                         () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
-                                "アカウント情報が存在しません userId:" + request.getSeqUserId()));
+                                "アカウント情報が存在しません seqUserId:" + request.getSeqUserId()));
 
         if (!account.getApiKey().equals(request.getApiKey())) {
             throw new ApiException(ApiErrorCode.API_EXEC_ERROR,

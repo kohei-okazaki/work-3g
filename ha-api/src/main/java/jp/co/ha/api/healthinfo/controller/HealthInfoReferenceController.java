@@ -44,8 +44,7 @@ public class HealthInfoReferenceController extends
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
     public HealthInfoReferenceResponse doGet(@PathVariable("seqUserId") Integer seqUserId,
             @PathVariable("seqHealthInfoId") Integer seqHealthInfoId,
-            @RequestHeader(value = "Api-Key") String apiKey)
-            throws BaseException {
+            @RequestHeader(value = "Api-Key") String apiKey) throws BaseException {
 
         HealthInfoReferenceRequest request = new HealthInfoReferenceRequest();
         HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
