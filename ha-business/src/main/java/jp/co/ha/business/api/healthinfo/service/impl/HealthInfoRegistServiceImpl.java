@@ -160,7 +160,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
         // 最後に登録した健康情報を取得する
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
-        List<HealthInfo> lastHealthInfo = healthInfoSearchService.findByUserId(seqUserId,
+        List<HealthInfo> lastHealthInfo = healthInfoSearchService.findBySeqUserId(
+                seqUserId,
                 selectOption);
 
         HealthInfoStatus status = CollectionUtil.isEmpty(lastHealthInfo)

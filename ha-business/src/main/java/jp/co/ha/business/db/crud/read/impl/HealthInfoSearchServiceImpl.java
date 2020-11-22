@@ -30,7 +30,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByUserIdBetweenHealthInfoRegDate(Integer seqUserId,
+    public List<HealthInfo> findBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption) {
 
@@ -48,7 +48,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByHealthInfoIdAndUserId(Integer seqHealthInfoId,
+    public List<HealthInfo> findByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
             Integer seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
@@ -64,7 +64,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public int getSelectCountByUserId(Integer seqUserId) {
+    public int getSelectCountBySeqUserId(Integer seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
@@ -77,7 +77,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByUserId(Integer seqUserId, SelectOption selectOption) {
+    public List<HealthInfo> findBySeqUserId(Integer seqUserId,
+            SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
@@ -95,8 +96,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<HealthInfo> findByBetweenHealthInfoRegDate(
-            LocalDateTime fromHealthInfoRegDate,
-            LocalDateTime toHealthInfoRegDate, SelectOption selectOption) {
+            LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
+            SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();

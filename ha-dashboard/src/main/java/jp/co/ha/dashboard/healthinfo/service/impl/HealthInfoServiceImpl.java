@@ -76,7 +76,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 
     @Override
     public boolean isFirstReg(Integer seqUserId) throws BaseException {
-        return healthInfoSearchService.getSelectCountByUserId(seqUserId) == 0;
+        return healthInfoSearchService.getSelectCountBySeqUserId(seqUserId) == 0;
     }
 
     @Override
