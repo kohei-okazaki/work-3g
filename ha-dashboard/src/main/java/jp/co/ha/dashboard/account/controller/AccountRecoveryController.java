@@ -198,20 +198,13 @@ public class AccountRecoveryController
         String strToken = token.orElseThrow(() -> new BusinessException(
                 DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "トークンが未指定です"));
 
-        if (seqUserId == null || !seqUserId.isPresent()
-                || !RegexType.HALF_NUMBER.is(seqUserId.get())) {
-            // ユーザIDが未指定または半角数字以外の場合
-            throw new BusinessException(
-                    DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
-                    "ユーザIDが未指定または半角数字以外です seq_user_id=" + seqUserId);
-        }
-
         // アカウント情報検索
         Account account = getAccount(seqUserId);
 
         // 上のアカウント検索ができているのであれば、そのままOptional#getをしても問題ない
         Integer userId = Integer.valueOf(seqUserId.get());
         // アカウント回復トークンを検索し、トークンが有効であるかを確認する
+        @SuppressWarnings("unused")
         AccountRecoveryToken accountRecoveryToken = accountRecoveryTokenSearchService
                 .findBySeqUserIdAndTokenAndValidTokenCreateDate(userId, strToken)
                 .orElseThrow(() -> new BusinessException(
@@ -343,7 +336,7 @@ public class AccountRecoveryController
         return accountSearchService.findById(userId)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
-                        "ユーザIDと紐づくアカウント情報がありません"));
+                        "ユーザIDと紐づくアカウント情報がありません seq_user_id=" + seqUserId));
     }
 
 }
