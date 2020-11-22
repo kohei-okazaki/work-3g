@@ -143,7 +143,6 @@ public class AccountRecoveryController
 
         if (result.hasErrors()) {
             // 妥当性チェックエラーの場合
-            LOG.warn("メールアドレスが未入力です");
             return getView(DashboardView.ACCOUNT_RECOVERY_INDEX);
         }
 
