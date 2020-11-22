@@ -43,7 +43,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService
             HealthInfoReferenceResponse response) throws BaseException {
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(request.getSeqHealthInfoId(),
+                .findByHealthInfoIdAndSeqUserId(request.getSeqHealthInfoId(),
                         request.getSeqUserId());
         if (CollectionUtil.isEmpty(healthInfoList)) {
             throw new BusinessException(CommonErrorCode.DB_NO_DATA,
