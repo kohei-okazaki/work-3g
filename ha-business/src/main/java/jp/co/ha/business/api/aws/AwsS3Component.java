@@ -114,7 +114,7 @@ public class AwsS3Component {
                     e);
         } catch (SdkClientException e) {
             throw new BusinessException(BusinessErrorCode.SDK_CLIENT_CONNECT_ERROR,
-                    "リクエストの作成中またはレスポンスの処理中にクライアントでエラーが発生" + awsConfig.getBacket()
+                    "リクエストの作成中またはレスポンスの処理中にクライアントでエラーが発生。" + awsConfig.getBacket()
                             + ", key=" + key,
                     e);
         }
