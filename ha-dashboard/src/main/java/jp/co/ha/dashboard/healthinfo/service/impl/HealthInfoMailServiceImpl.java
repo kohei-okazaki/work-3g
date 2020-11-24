@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -21,9 +22,6 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
  */
 @Service
 public class HealthInfoMailServiceImpl implements HealthInfoMailService {
-
-    /** 健康情報登録メールテンプレートID */
-    private static final String TEMPLATE_ID = "mail-template/healthinfo-regist-template.txt";
 
     /** アカウント情報検索サービス */
     @Autowired
@@ -55,7 +53,8 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
                                 apiResponse.getHealthInfo().getHealthInfoRegDate()),
                         DateFormatType.YYYYMMDDHHMMSS));
 
-        sesComponent.sendMail(to, titleText, TEMPLATE_ID, bodyMap);
+        sesComponent.sendMail(to, titleText, AwsS3Key.HEALTHINFO_REGIST_TEMPLATE,
+                bodyMap);
 
     }
 }

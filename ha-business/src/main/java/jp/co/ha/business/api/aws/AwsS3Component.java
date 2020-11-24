@@ -89,13 +89,27 @@ public class AwsS3Component {
     }
 
     /**
-     * 指定されたキーからファイルの入力Streamを返す
+     * 指定されたキーからファイルのInputStreamを返す
      *
      * @param key
      *     キー
-     * @return 入力Stream
+     * @return InputStream
      * @throws BusinessException
-     *     S3へのファイルダウンロードに失敗した場合
+     *     S3からファイルダウンロードに失敗した場合
+     * @see #getS3ObjectByKey(String)
+     */
+    public InputStream getS3ObjectByKey(AwsS3Key key) throws BusinessException {
+        return this.getS3ObjectByKey(key.getValue());
+    }
+
+    /**
+     * 指定されたキーからファイルのInputStreamを返す
+     *
+     * @param key
+     *     キー
+     * @return InputStream
+     * @throws BusinessException
+     *     S3からファイルダウンロードに失敗した場合
      */
     public InputStream getS3ObjectByKey(String key) throws BusinessException {
 

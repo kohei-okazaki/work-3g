@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
@@ -44,9 +45,6 @@ import jp.co.ha.db.entity.HealthInfo;
 @Component("monthlyHealthInfoSummaryBatch")
 public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
 
-    /** S3キーの接頭辞 */
-    private static final String PREFIX_S3_KEY = "monthly/healthinfo/";
-
     /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService searchService;
@@ -74,7 +72,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         // 月次健康情報集計CSV
         File csv = writeCsv(targetDate, modelList);
         // S3ファイルをアップロード
-        s3.putFile(PREFIX_S3_KEY + csv.getName(), csv);
+        s3.putFile(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName(), csv);
 
         return BatchResult.SUCCESS;
     }

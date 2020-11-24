@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoUploadCsv;
@@ -110,7 +111,8 @@ public class HealthInfoFileRegistController
 
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateFormatType.YYYYMMDDHHMMSS_NOSEP) + ".csv";
-        awsS3Component.putFile("healthinfo-file-regist/" + seqUserId + "/" + fileName,
+        awsS3Component.putFile(
+                AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId + "/" + fileName,
                 form.getMultipartFile());
 
         // フォーマットチェックを行う
@@ -144,7 +146,8 @@ public class HealthInfoFileRegistController
 
         // S3から健康情報CSVファイルを取得
         InputStream is = awsS3Component
-                .getS3ObjectByKey("healthinfo-file-regist/" + seqUserId + "/" + fileName);
+                .getS3ObjectByKey(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId
+                        + "/" + fileName);
         List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
                 .readInputStream(is, Charset.UTF_8);
 
