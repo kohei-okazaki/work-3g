@@ -55,7 +55,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
             ValidateErrorResult result = validator.validate(model);
 
             // 相関チェック
-            if (!model.getSeqUserId().equals(seqUserId)) {
+            if (!model.getSeqUserId().equals(String.valueOf(seqUserId))) {
                 throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                         ++i + "行目のユーザIDが不正です");
             }
