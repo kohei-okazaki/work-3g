@@ -160,7 +160,7 @@ public class LoginController implements BaseWebController {
             // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
             healthInfoSearchService
-                    .findByUserId(account.get().getSeqUserId(), SELECT_OPTION).stream()
+                    .findBySeqUserId(account.get().getSeqUserId(), SELECT_OPTION).stream()
                     .sorted((o1, o2) -> o1.getSeqHealthInfoId()
                             .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
@@ -204,7 +204,7 @@ public class LoginController implements BaseWebController {
             // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
             healthInfoSearchService
-                    .findByUserId(seqUserId, SELECT_OPTION).stream()
+                    .findBySeqUserId(seqUserId, SELECT_OPTION).stream()
                     .sorted((o1, o2) -> o1.getSeqHealthInfoId()
                             .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {

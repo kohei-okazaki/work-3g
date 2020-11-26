@@ -42,7 +42,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
 
         // 健康情報を検索
         List<HealthInfo> healthInfoList = healthInfoSearchService
-                .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(),
+                .findByHealthInfoIdAndSeqUserId(dto.getSeqHealthInfoId(),
                         dto.getSeqUserId());
         if (CollectionUtil.isEmpty(healthInfoList)) {
             return Optional.empty();

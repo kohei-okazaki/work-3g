@@ -28,10 +28,10 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 
@@ -124,7 +124,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
-                .orderBy("USER_ID", SortType.ASC)
+                .orderBy("SEQ_USER_ID", SortType.ASC)
                 .build();
 
         return searchService
