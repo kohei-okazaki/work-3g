@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -275,7 +276,8 @@ public class HealthInfoReferenceController implements BaseWebController {
         File file = FileUtil.getFile(conf.getOutputPath()
                 + FileSeparator.SYSTEM.getValue() + conf.getFileName());
         awsS3Component.putFile(
-                "healthinfo-refer-file/" + seqUserId + "/" + file.getName(),
+                AwsS3Key.HEALTHINFO_FILE_REFERENCE.getValue() + seqUserId + "/"
+                        + file.getName(),
                 file);
     }
 

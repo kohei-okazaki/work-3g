@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.dto.NewsListDto;
 import jp.co.ha.business.dto.NewsListDto.NewsDto;
 import jp.co.ha.common.exception.BaseException;
@@ -49,7 +50,7 @@ public class NewsController implements BaseWebController {
     public String list(Model model) throws BaseException {
 
         // S3からお知らせJSONを取得
-        InputStream is = awsS3Component.getS3ObjectByKey("news/news.json");
+        InputStream is = awsS3Component.getS3ObjectByKey(AwsS3Key.NEWS_JSON);
         List<NewsDto> newsList = new JsonReader().read(is, NewsListDto.class)
                 .getNewsDtoList();
 
