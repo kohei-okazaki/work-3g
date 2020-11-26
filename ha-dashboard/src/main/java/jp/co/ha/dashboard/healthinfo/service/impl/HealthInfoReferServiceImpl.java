@@ -126,17 +126,19 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 || StringUtil.isEmpty(dto.getSeqHealthInfoId().toString())) {
             // 健康情報IDが未指定の場合
             if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
-                resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(
-                        seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
-                        editToDate(dto.getFromHealthInfoRegDate()), selectOption);
+                resultList = healthInfoSearchService
+                        .findBySeqUserIdBetweenHealthInfoRegDate(
+                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
+                                editToDate(dto.getFromHealthInfoRegDate()), selectOption);
             } else {
-                resultList = healthInfoSearchService.findByUserIdBetweenHealthInfoRegDate(
-                        seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
-                        editToDate(dto.getToHealthInfoRegDate()), selectOption);
+                resultList = healthInfoSearchService
+                        .findBySeqUserIdBetweenHealthInfoRegDate(
+                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
+                                editToDate(dto.getToHealthInfoRegDate()), selectOption);
             }
         } else {
             resultList = healthInfoSearchService
-                    .findByHealthInfoIdAndUserId(dto.getSeqHealthInfoId(), seqUserId);
+                    .findByHealthInfoIdAndSeqUserId(dto.getSeqHealthInfoId(), seqUserId);
         }
 
         return resultList;
