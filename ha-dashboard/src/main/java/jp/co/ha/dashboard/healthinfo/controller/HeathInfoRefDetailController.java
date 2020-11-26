@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.ha.business.dto.HealthInfoRefDetailDto;
+import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
@@ -56,8 +56,9 @@ public class HeathInfoRefDetailController implements BaseWebController {
 
         // 健康情報ID
         Integer healthInfoId = seqHealthInfoId
-                .orElseThrow(() -> new SystemException(CommonErrorCode.DB_NO_DATA,
-                        "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
+                .orElseThrow(
+                        () -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                                "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
         // sessionよりユーザID
         Integer seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Integer.class).get();

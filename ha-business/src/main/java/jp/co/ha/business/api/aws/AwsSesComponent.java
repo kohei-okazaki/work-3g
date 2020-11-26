@@ -179,6 +179,25 @@ public class AwsSesComponent {
      *     宛先メールアドレス
      * @param titleText
      *     メール件名
+     * @param s3Key
+     *     S3キー
+     * @return Eメール送信結果区分
+     * @throws BaseException
+     *     メール送信に失敗した場合
+     * @see #sendMail(String, String, String, Map)
+     */
+    public EmailSendResultType sendMail(String to, String titleText, AwsS3Key s3Key)
+            throws BaseException {
+        return sendMail(to, titleText, s3Key.getValue(), Collections.emptyMap());
+    }
+
+    /**
+     * Eメールを送信する
+     *
+     * @param to
+     *     宛先メールアドレス
+     * @param titleText
+     *     メール件名
      * @param templateId
      *     テンプレートID
      * @return Eメール送信結果区分
@@ -189,6 +208,26 @@ public class AwsSesComponent {
     public EmailSendResultType sendMail(String to, String titleText, String templateId)
             throws BaseException {
         return sendMail(to, titleText, templateId, Collections.emptyMap());
+    }
+
+    /**
+     * Eメールを送信する
+     *
+     * @param to
+     *     宛先メールアドレス
+     * @param titleText
+     *     メール件名
+     * @param s3Key
+     *     S3キー
+     * @param bodyMap
+     *     メール本文を置換するmap
+     * @return Eメール送信結果区分
+     * @throws BaseException
+     *     メール送信に失敗した場合
+     */
+    public EmailSendResultType sendMail(String to, String titleText, AwsS3Key s3Key,
+            Map<String, String> bodyMap) throws BaseException {
+        return sendMail(to, titleText, s3Key.getValue(), bodyMap);
     }
 
     /**
