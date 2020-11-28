@@ -134,6 +134,11 @@ public class SelectOption {
         return LIMIT;
     }
 
+    /**
+     * Pageableを返す
+     *
+     * @return Pageable
+     */
     public Pageable getPageable() {
         return PAGEABLE;
     }

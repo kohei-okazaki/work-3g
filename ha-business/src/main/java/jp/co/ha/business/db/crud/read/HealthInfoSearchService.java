@@ -24,11 +24,24 @@ public interface HealthInfoSearchService {
      *     YYYYMMDD
      * @param selectOption
      *     {@linkplain SelectOption}
-     * @return 健康情報のリスト
+     * @return 健康情報リスト
      */
     List<HealthInfo> findBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption);
+
+    /**
+     * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報リストの件数を返す
+     *
+     * @param seqUserId
+     *     ユーザID
+     * @param fromHealthInfoRegDate
+     *     YYYYMMDD
+     * @param toHealthInfoRegDate
+     * @return 健康情報リストの件数
+     */
+    long countBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
+            LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate);
 
     /**
      * 指定された健康情報IDとユーザIDと一致する健康情報を返す
@@ -40,6 +53,18 @@ public interface HealthInfoSearchService {
      * @return 健康情報リスト
      */
     List<HealthInfo> findByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
+            Integer seqUserId);
+
+    /**
+     * 指定された健康情報IDとユーザIDと一致する健康情報の件数を返す
+     *
+     * @param seqHealthInfoId
+     *     健康情報ID
+     * @param seqUserId
+     *     ユーザID
+     * @return 健康情報リストの件数
+     */
+    long countByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
             Integer seqUserId);
 
     /**

@@ -129,37 +129,35 @@ public class HealthInfoReferenceController implements BaseWebController {
     }
 
     /**
-     * 照会後画面
+     * 照会処理を行う
      *
      * @param request
      *     {@linkplain HttpServletRequest}
      * @param model
      *     {@linkplain Model}
      * @param form
-     *     検索情報フォーム
+     *     {@linkplain HealthInfoReferenceForm}
      * @param result
      *     {@linkplain BindingResult}
      * @param page
      *     ページ数
-     * @param size
-     *     1ページあたりの表示件数
      * @return 照会後画面
      * @throws BaseException
      *     基底例外
      */
     @GetMapping("/refer")
-    public String reference(HttpServletRequest request, Model model,
+    public String refer(HttpServletRequest request, Model model,
             @Valid HealthInfoReferenceForm form, BindingResult result,
-            @RequestParam(name = "page", defaultValue = "0", required = false) String page,
-            @RequestParam(name = "size", defaultValue = "3", required = false) String size)
+            @RequestParam(name = "page", defaultValue = "0", required = false) String page)
             throws BaseException {
 
         if (result.hasErrors()) {
             return getView(DashboardView.HEALTH_INFO_REFERNCE);
         }
 
-        // ページング情報を取得
-        Pageable pageable = PagingViewFactory.getPageable(page, size);
+        // ページング情報を取得( 1ページあたりの表示件数は設定ファイルより取得)
+        Pageable pageable = PagingViewFactory.getPageable(page,
+                systemConfig.getPaging());
 
         Integer seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Integer.class).get();
@@ -192,7 +190,7 @@ public class HealthInfoReferenceController implements BaseWebController {
                         + "&fromHealthInfoRegDate=" + form.getFromHealthInfoRegDate()
                         + "&toHealthInfoRegDate=" + form.getToHealthInfoRegDate()
                         + "&page",
-                16));
+                service.getCount(dto, seqUserId)));
 
         healthInfoGraphService.putGraph(model, () -> {
 
@@ -206,8 +204,6 @@ public class HealthInfoReferenceController implements BaseWebController {
 
             return graphModel;
         });
-
-        model.addAttribute("systemConfig", systemConfig);
 
         // sessionに検索条件を設定
         sessionComponent.setValue(request.getSession(), "healthInfoReferenceDto", dto);
@@ -237,7 +233,7 @@ public class HealthInfoReferenceController implements BaseWebController {
                 .orElseThrow(() -> new SystemException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
-                .getHealthInfoResponseList(referDto, seqUserId);
+                .getHealthInfoResponseList(referDto, seqUserId, null);
 
         ReferenceExcelComponent component = new ReferenceExcelComponent();
         component.setSeqUserId(seqUserId);
@@ -268,7 +264,7 @@ public class HealthInfoReferenceController implements BaseWebController {
                 .orElseThrow(() -> new SystemException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
-                .getHealthInfoResponseList(referDto, seqUserId);
+                .getHealthInfoResponseList(referDto, seqUserId, null);
 
         // 健康情報ファイル設定情報 取得
         HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService

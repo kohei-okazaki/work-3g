@@ -48,7 +48,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
     @Override
     public List<HealthInfoReferenceDto> getHealthInfoResponseList(
-            HealthInfoReferenceDto dto, Integer seqUserId, Pageable pageable) {
+            HealthInfoReferenceDto dto, Integer seqUserId, Pageable pageable)
+            throws BaseException {
 
         List<HealthInfo> resultList;
         SelectOption selectOption = new SelectOptionBuilder()
@@ -94,27 +95,31 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     }
 
     @Override
-    public List<HealthInfoReferenceDto> getHealthInfoResponseList(
-            HealthInfoReferenceDto dto, Integer seqUserId) throws BaseException {
+    public long getCount(HealthInfoReferenceDto dto, Integer seqUserId)
+            throws BaseException {
 
-        // ユーザIDと健康情報照会DTOから健康情報Entityリストを取得
-        List<HealthInfo> entityList = getHealthInfoList(dto, seqUserId);
-        return entityList.stream().map(e -> {
-            HealthInfoReferenceDto result = new HealthInfoReferenceDto();
-            // リクエストDTOを設定(検索条件部の設定)
-            BeanUtil.copy(dto, result);
+        // ユーザIDと健康情報照会DTOから健康情報件数を取得
+        long count;
+        if (BeanUtil.isNull(dto.getSeqHealthInfoId())
+                || StringUtil.isEmpty(dto.getSeqHealthInfoId().toString())) {
+            // 健康情報IDが未指定の場合
+            if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
+                count = healthInfoSearchService
+                        .countBySeqUserIdBetweenHealthInfoRegDate(
+                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
+                                editToDate(dto.getFromHealthInfoRegDate()));
+            } else {
+                count = healthInfoSearchService
+                        .countBySeqUserIdBetweenHealthInfoRegDate(
+                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
+                                editToDate(dto.getToHealthInfoRegDate()));
+            }
+        } else {
+            count = healthInfoSearchService
+                    .countByHealthInfoIdAndSeqUserId(dto.getSeqHealthInfoId(), seqUserId);
+        }
 
-            // 健康情報Entityを設定
-            BeanUtil.copy(e, result, (src, dest) -> {
-                HealthInfo srcEntity = (HealthInfo) src;
-                HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
-
-                destDto.setHealthInfoRegDate(DateTimeUtil.toString(
-                        srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
-            });
-
-            return result;
-        }).collect(Collectors.toList());
+        return count;
     }
 
     @Override
@@ -155,43 +160,6 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 .hasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()))
                 .useMask(CommonFlag.TRUE.is(entity.getMaskFlag()))
                 .build();
-    }
-
-    /**
-     * 健康情報リストを取得する
-     *
-     * @param dto
-     *     健康情報照会DTO
-     * @param seqUserId
-     *     ユーザID
-     * @return 健康情報リスト
-     */
-    private List<HealthInfo> getHealthInfoList(HealthInfoReferenceDto dto,
-            Integer seqUserId) {
-
-        List<HealthInfo> resultList;
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).build();
-        if (BeanUtil.isNull(dto.getSeqHealthInfoId())
-                || StringUtil.isEmpty(dto.getSeqHealthInfoId().toString())) {
-            // 健康情報IDが未指定の場合
-            if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
-                resultList = healthInfoSearchService
-                        .findBySeqUserIdBetweenHealthInfoRegDate(
-                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
-                                editToDate(dto.getFromHealthInfoRegDate()), selectOption);
-            } else {
-                resultList = healthInfoSearchService
-                        .findBySeqUserIdBetweenHealthInfoRegDate(
-                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
-                                editToDate(dto.getToHealthInfoRegDate()), selectOption);
-            }
-        } else {
-            resultList = healthInfoSearchService
-                    .findByHealthInfoIdAndSeqUserId(dto.getSeqHealthInfoId(), seqUserId);
-        }
-
-        return resultList;
     }
 
     /**

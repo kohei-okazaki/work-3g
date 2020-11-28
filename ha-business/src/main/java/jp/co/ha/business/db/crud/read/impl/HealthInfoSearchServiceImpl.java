@@ -43,11 +43,33 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
         // ソート処理
         example.setOrderByClause(selectOption.getOrderBy());
-        // ページング
-        example.setPageable(selectOption.getPageable());
-        RowBounds r = new RowBounds((int) selectOption.getPageable().getOffset(),
-                selectOption.getPageable().getPageSize());
-        return mapper.selectByExampleWithRowbounds(example, r);
+
+        if (selectOption.getPageable() != null) {
+            // ページング
+            example.setPageable(selectOption.getPageable());
+            RowBounds rowBounds = new RowBounds(
+                    (int) selectOption.getPageable().getOffset(),
+                    selectOption.getPageable().getPageSize());
+            return mapper.selectByExampleWithRowbounds(example, rowBounds);
+        }
+
+        return mapper.selectByExample(example);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public long countBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
+            LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate) {
+
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+        // ユーザID
+        criteria.andSeqUserIdEqualTo(seqUserId);
+        // 健康情報登録日時
+        criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
+
+        return mapper.countByExample(example);
     }
 
     @Select
@@ -64,6 +86,22 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         criteria.andSeqUserIdEqualTo(seqUserId);
 
         return mapper.selectByExample(example);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public long countByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
+            Integer seqUserId) {
+
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+        // 健康情報ID
+        criteria.andSeqHealthInfoIdEqualTo(seqHealthInfoId);
+        // ユーザID
+        criteria.andSeqUserIdEqualTo(seqUserId);
+
+        return mapper.countByExample(example);
     }
 
     @Select
