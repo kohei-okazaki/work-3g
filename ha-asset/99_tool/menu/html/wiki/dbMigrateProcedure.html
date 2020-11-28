@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DB変更手順</title>
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-grid.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap-reboot.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../css/docs.css">
+</head>
+<body>
+  <br>
+  <div class="container border shadow">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="h2">DB変更手順</h2>
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+
+    <div class="row">
+      <div class="col-12">
+        <table class="table">
+          <tr>
+            <td class="card-body">
+              <a data-toggle="collapse" href="#create-table-procedure" role="button" aria-expanded="false" aria-controls="create-table-procedure">テーブル作成</a>
+              <div class="collapse show" id="create-table-procedure">
+                <div class="card card-body bg-light">
+                  <div class="col-10">
+                    <details>
+                      <summary>DB側対応</summary>
+                      <ol>
+                        <li>
+                          <p>ha-asset/99_tool/menu/js/table.js に新しいテーブル定義を追加</p>
+                        </li>
+                        <li>
+                          <p>ha-asset/99_tool/menu/js/table.min.js にtable.jsを圧縮させたファイルを設定</p>
+                        </li>
+                        <li>
+                          <p>ha-tool/src/main/resources/tool.properties に以下を追加</p>
+                          <kbd>tool.target.tables=追加したいテーブル名(物理名)</kbd>
+                        </li>
+                        <li>
+                          <p>ha-asset/02_db/DB.xlsx にテーブル定義を追加</p>
+                        </li>
+                        <li>
+                          <p>ha-tool/src/main/java/jp/co/ha/tool/ToolInvoker.javaを GenerateType.DDL 指定で起動</p>
+                        </li>
+                        <li>
+                          <p>ha-asset/02_db/ddl配下にsqlが作成されていることを確認</p>
+                        </li>
+                        <li>
+                          <p>ha-db/src/main/resources/db/migrationに新しいバージョンのsqlファイルを作成</p>
+                        </li>
+                        <li>
+                          <p>コマンドプロンプトから以下のファイルを実行</p>
+                          <ol>
+                            <li><kbd>ha-build/bat/maven-build.bat local</kbd></li>
+                            <li><kbd>ha-build/bat/maven-flyway.bat</kbd></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </details>
+                    <details>
+                      <summary>Java側対応</summary>
+                      <ol>
+                        <li>
+                          <p>ha-db/src/main/resources/generatorConfig.xmlを開き、以下を追加</p>
+                          <kbd>&lt;table schema="work3g" tableName="追加するテーブル名" modelType="hierarchical" /&gt;</kbd>
+                        </li>
+                        <li>
+                          <p>ha-db/src/main/resources/generatorConfig.xml上で右クリック</p>
+                        </li>
+                        <li>
+                          <p>実行 押下</p>
+                        </li>
+                        <li>
+                          <p>「Run MyBatis Generator」 押下</p>
+                        </li>
+                        <li>
+                          <p>作成されたMapper.xml内の物理テーブル名を大文字に置換すること</p>
+                          <div class="alert alert-danger" role="alert">EC2環境のDBは大文字と小文字を区別するため</div>
+                        </li>
+                      </ol>
+                    </details>
+                  </div><!-- /.col-10 -->
+                </div><!-- /.card card-body bg-light -->
+              </div><!-- /#create-table-procedure /.collapse show -->
+            </td><!-- /.card-body -->
+          </tr>
+          <tr>
+            <td class="card-body">
+              <a data-toggle="collapse" href="#add-column-procedure" role="button" aria-expanded="false" aria-controls="add-column-procedure">カラム追加</a>
+              <div class="collapse show" id="add-column-procedure">
+                <div class="card card-body bg-light">
+                  <div class="col-10">
+                    <details>
+                      <summary>DB側対応</summary>
+                      <ol>
+                        <li>
+                          <p>ha-asset/99_tool/menu/js/table.js に新しいテーブル定義を追加</p>
+                        </li>
+                        <li>
+                          <p>ha-asset/99_tool/menu/js/table.min.js にtable.jsを圧縮させたファイルを設定</p>
+                        </li>
+                        <li>
+                          <p>ha-tool/src/main/resources/tool.properties に以下を追加</p>
+                          <kbd>tool.target.tables=カラム追加したいテーブル名(物理名)</kbd>
+                        </li>
+                        <li>
+                          <p>ha-asset/02_db/DB.xlsx にテーブル定義を追加</p>
+                        </li>
+                        <li>
+                          <p>ha-tool/src/main/java/jp/co/ha/tool/ToolInvoker.javaを GenerateType.DDL 指定で起動</p>
+                        </li>
+                        <li>
+                          <p>ha-asset/02_db/ddl配下にsqlが作成されていることを確認</p>
+                        </li>
+                        <li>
+                          <p>ha-db/src/main/resources/db/migrationに新しいバージョンのsqlファイルを作成</p>
+                          <p>ただし、ファイル内容はddl配下にsqlから自作でALTER ADD ~~を追加する</p>
+                          <p>カラム追加ページに基本の構文がある</p>
+                        </li>
+                        <li>
+                          <p>コマンドプロンプトから以下のファイルを実行</p>
+                          <ol>
+                            <li><kbd>ha-build/bat/maven-build.bat local</kbd></li>
+                            <li><kbd>ha-build/bat/maven-flyway.bat</kbd></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </details>
+                  </div><!-- /.col-10 -->
+                  <div class="col-10">
+                    <details>
+                      <summary>Java側対応</summary>
+                      <ol>
+                        <li>
+                          <p>ha-db/src/main/resources/generatorConfig.xmlを開き、以下を追加</p>
+                          <kbd>&lt;table schema="work3g" tableName="カラム追加するテーブル名" modelType="hierarchical" /&gt;</kbd>
+                        </li>
+                        <li>
+                          <p>ha-db/src/main/resources/generatorConfig.xml上で右クリック</p>
+                        </li>
+                        <li>
+                          <p>実行 押下</p>
+                        </li>
+                        <li>
+                          <p>「Run MyBatis Generator」 押下</p>
+                        </li>
+                        <li>
+                          <p>作成されたMapper.xml内の物理テーブル名を大文字に置換すること</p>
+                          <div class="alert alert-danger" role="alert">EC2環境のDBは大文字と小文字を区別するため</div>
+                        </li>
+                      </ol>
+                    </details>
+                  </div><!-- /.col-10 -->
+                </div><!-- /.card card-body bg-light -->
+              </div><!-- /#add-column-procedure /.collapse show -->
+            </td><!-- /.card-body -->
+          </tr>
+        </table><!-- /.table -->
+      </div><!-- /.col-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container border shadow -->
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

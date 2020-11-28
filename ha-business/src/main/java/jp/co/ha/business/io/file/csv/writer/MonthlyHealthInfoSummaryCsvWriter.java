@@ -35,7 +35,7 @@ public class MonthlyHealthInfoSummaryCsvWriter
         StringJoiner body = new StringJoiner(StringUtil.COMMA);
 
         // ユーザID
-        write(body, model.getUserId());
+        write(body, model.getSeqUserId());
         // 身長
         write(body, model.getHeight().toString());
         // 体重
