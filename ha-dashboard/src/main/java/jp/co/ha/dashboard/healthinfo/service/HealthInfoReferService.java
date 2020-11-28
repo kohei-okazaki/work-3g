@@ -2,6 +2,8 @@ package jp.co.ha.dashboard.healthinfo.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
@@ -51,5 +53,8 @@ public interface HealthInfoReferService {
      *     基底例外
      */
     CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException;
+
+    List<HealthInfoReferenceDto> getHealthInfoResponseList(HealthInfoReferenceDto dto,
+            Integer seqUserId, Pageable pageable);
 
 }

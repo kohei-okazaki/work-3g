@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -44,6 +45,53 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
+
+    @Override
+    public List<HealthInfoReferenceDto> getHealthInfoResponseList(
+            HealthInfoReferenceDto dto, Integer seqUserId, Pageable pageable) {
+
+        List<HealthInfo> resultList;
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+                .pageable(pageable)
+                .build();
+        if (BeanUtil.isNull(dto.getSeqHealthInfoId())
+                || StringUtil.isEmpty(dto.getSeqHealthInfoId().toString())) {
+            // 健康情報IDが未指定の場合
+            if (CommonFlag.TRUE.is(dto.getHealthInfoRegDateSelectFlag())) {
+                resultList = healthInfoSearchService
+                        .findBySeqUserIdBetweenHealthInfoRegDate(
+                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
+                                editToDate(dto.getFromHealthInfoRegDate()), selectOption);
+            } else {
+                resultList = healthInfoSearchService
+                        .findBySeqUserIdBetweenHealthInfoRegDate(
+                                seqUserId, editFromDate(dto.getFromHealthInfoRegDate()),
+                                editToDate(dto.getToHealthInfoRegDate()), selectOption);
+            }
+        } else {
+            resultList = healthInfoSearchService
+                    .findByHealthInfoIdAndSeqUserId(dto.getSeqHealthInfoId(), seqUserId);
+        }
+
+        return resultList.stream().map(e -> {
+
+            HealthInfoReferenceDto result = new HealthInfoReferenceDto();
+            // リクエストDTOを設定(検索条件部の設定)
+            BeanUtil.copy(dto, result);
+
+            // 健康情報Entityを設定
+            BeanUtil.copy(e, result, (src, dest) -> {
+                HealthInfo srcEntity = (HealthInfo) src;
+                HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
+
+                destDto.setHealthInfoRegDate(DateTimeUtil.toString(
+                        srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
+            });
+
+            return result;
+        }).collect(Collectors.toList());
+    }
 
     @Override
     public List<HealthInfoReferenceDto> getHealthInfoResponseList(

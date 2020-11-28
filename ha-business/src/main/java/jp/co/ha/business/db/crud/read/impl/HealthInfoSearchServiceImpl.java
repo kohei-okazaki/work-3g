@@ -3,6 +3,7 @@ package jp.co.ha.business.db.crud.read.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
         // ソート処理
         example.setOrderByClause(selectOption.getOrderBy());
-        return mapper.selectByExample(example);
+        // ページング
+        example.setPageable(selectOption.getPageable());
+        RowBounds r = new RowBounds((int) selectOption.getPageable().getOffset(),
+                selectOption.getPageable().getPageSize());
+        return mapper.selectByExampleWithRowbounds(example, r);
     }
 
     @Select

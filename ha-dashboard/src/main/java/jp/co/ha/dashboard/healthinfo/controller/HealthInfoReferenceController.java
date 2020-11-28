@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
@@ -45,6 +46,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
+import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
@@ -123,7 +125,7 @@ public class HealthInfoReferenceController implements BaseWebController {
     public String index(Model model) {
         // 検索処理実行フラグを設定
         model.addAttribute("isRefered", false);
-        return getView(DashboardView.HEALTH_INFO_REFFERNCE);
+        return getView(DashboardView.HEALTH_INFO_REFERNCE);
     }
 
     /**
@@ -137,18 +139,27 @@ public class HealthInfoReferenceController implements BaseWebController {
      *     検索情報フォーム
      * @param result
      *     {@linkplain BindingResult}
+     * @param page
+     *     ページ数
+     * @param size
+     *     1ページあたりの表示件数
      * @return 照会後画面
      * @throws BaseException
      *     基底例外
      */
-    @PostMapping("/index")
+    @GetMapping("/refer")
     public String reference(HttpServletRequest request, Model model,
-            @Valid HealthInfoReferenceForm form, BindingResult result)
+            @Valid HealthInfoReferenceForm form, BindingResult result,
+            @RequestParam(name = "page", defaultValue = "0", required = false) String page,
+            @RequestParam(name = "size", defaultValue = "3", required = false) String size)
             throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(DashboardView.HEALTH_INFO_REFFERNCE);
+            return getView(DashboardView.HEALTH_INFO_REFERNCE);
         }
+
+        // ページング情報を取得
+        Pageable pageable = PagingViewFactory.getPageable(page, size);
 
         Integer seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Integer.class).get();
@@ -163,7 +174,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         });
 
         List<HealthInfoReferenceDto> resultList = service.getHealthInfoResponseList(dto,
-                seqUserId);
+                seqUserId, pageable);
 
         // 検索処理実行フラグを設定
         model.addAttribute("isRefered", true);
@@ -173,6 +184,15 @@ public class HealthInfoReferenceController implements BaseWebController {
         model.addAttribute("hasResult", !CollectionUtil.isEmpty(resultList));
         // ログイン中ユーザの健康情報リストを設定
         model.addAttribute("resultList", resultList);
+        // ページング情報を設定
+        model.addAttribute("paging", PagingViewFactory.getPageView(pageable,
+                "/healthinforeference/refer?seqHealthInfoId=" + form.getSeqHealthInfoId()
+                        + "&healthInfoRegDateSelectFlag="
+                        + form.getHealthInfoRegDateSelectFlag()
+                        + "&fromHealthInfoRegDate=" + form.getFromHealthInfoRegDate()
+                        + "&toHealthInfoRegDate=" + form.getToHealthInfoRegDate()
+                        + "&page",
+                16));
 
         healthInfoGraphService.putGraph(model, () -> {
 
@@ -192,7 +212,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         // sessionに検索条件を設定
         sessionComponent.setValue(request.getSession(), "healthInfoReferenceDto", dto);
 
-        return getView(DashboardView.HEALTH_INFO_REFFERNCE);
+        return getView(DashboardView.HEALTH_INFO_REFERNCE);
     }
 
     /**

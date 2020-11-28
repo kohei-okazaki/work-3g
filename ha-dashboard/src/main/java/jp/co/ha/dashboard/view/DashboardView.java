@@ -24,7 +24,7 @@ public enum DashboardView implements BaseView {
     HEALTH_INFO_COMPLETE("healthinfo/complete", "/healthinfo/complete"),
 
     /** 健康情報照会画面 */
-    HEALTH_INFO_REFFERNCE("healthinforeference/index", "/healthinforeference/index"),
+    HEALTH_INFO_REFERNCE("healthinforeference/index", "/healthinforeference/index"),
     /** 健康情報照会画面 */
     HEALTH_INFO_REF_DETAIL("healthinforeference/detail", "/healthinforeference/detail"),
 
