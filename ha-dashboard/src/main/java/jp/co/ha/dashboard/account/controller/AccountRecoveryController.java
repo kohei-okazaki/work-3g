@@ -52,11 +52,8 @@ import jp.co.ha.web.controller.BaseWebController;
  */
 @Controller
 @RequestMapping("accountrecovery")
-public class AccountRecoveryController
-        implements BaseWebController {
+public class AccountRecoveryController implements BaseWebController {
 
-    /** 健康情報登録メールテンプレートID */
-    private static final String TEMPLATE_ID = "mail-template/account-recovery-template.txt";
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(AccountRecoveryController.class);
