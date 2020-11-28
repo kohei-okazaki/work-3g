@@ -217,7 +217,7 @@ public class AccountRecoveryController
     }
 
     /**
-     * パスワード再設定入力画面表示
+     * パスワード再設定入力確認画面表示
      *
      * @param model
      *     {@linkplain Model}
@@ -227,7 +227,7 @@ public class AccountRecoveryController
      *     {@linkplain BindingResult}
      * @param seqUserId
      *     ユーザID
-     * @return パスワード再設定入力画面
+     * @return パスワード再設定入力確認画面
      * @throws BaseException
      *     入力エラー
      */
