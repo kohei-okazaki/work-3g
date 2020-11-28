@@ -79,10 +79,11 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 ReferenceCsvDownloadModel destModel = (ReferenceCsvDownloadModel) dest;
 
                 destModel.setHealthInfoRegDate(DateTimeUtil.toLocalDateTime(
-                        srcDto.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
+                        srcDto.getHealthInfoRegDate(),
+                        DateFormatType.YYYYMMDDHHMMSS_STRICT));
 
             });
-            model.setUserId(seqUserId);
+            model.setSeqUserId(seqUserId);
 
             return model;
         }).collect(Collectors.toList());
@@ -93,7 +94,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
         // ファイル名
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV.getValue();
+                DateFormatType.YYYYMMDDHHMMSS_NOSEP_STRICT)
+                + FileExtension.CSV.getValue();
         // ファイル出力先
         String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()
                 + entity.getSeqUserId();

@@ -7,7 +7,7 @@ var prettyjson = require('prettyjson');
 /**
  * 健康情報計算の処理<br>
  * 身長と体重からBMIと標準体重を計算する
- * 
+ *
  * @param req
  *            リクエスト情報
  * @param res

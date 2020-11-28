@@ -8,7 +8,7 @@ var jwt = require('jsonwebtoken');
 
 /**
  * 認証Token発行API
- * 
+ *
  * @param req
  *            リクエスト情報
  * @param res

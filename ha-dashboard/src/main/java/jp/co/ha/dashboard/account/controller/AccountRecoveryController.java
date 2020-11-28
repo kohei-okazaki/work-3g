@@ -52,11 +52,8 @@ import jp.co.ha.web.controller.BaseWebController;
  */
 @Controller
 @RequestMapping("accountrecovery")
-public class AccountRecoveryController
-        implements BaseWebController {
+public class AccountRecoveryController implements BaseWebController {
 
-    /** 健康情報登録メールテンプレートID */
-    private static final String TEMPLATE_ID = "mail-template/account-recovery-template.txt";
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(AccountRecoveryController.class);
@@ -217,7 +214,7 @@ public class AccountRecoveryController
     }
 
     /**
-     * パスワード再設定入力画面表示
+     * パスワード再設定入力確認画面表示
      *
      * @param model
      *     {@linkplain Model}
@@ -227,7 +224,7 @@ public class AccountRecoveryController
      *     {@linkplain BindingResult}
      * @param seqUserId
      *     ユーザID
-     * @return パスワード再設定入力画面
+     * @return パスワード再設定入力確認画面
      * @throws BaseException
      *     入力エラー
      */
