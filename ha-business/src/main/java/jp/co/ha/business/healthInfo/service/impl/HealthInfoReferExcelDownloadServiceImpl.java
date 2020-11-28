@@ -67,7 +67,7 @@ public class HealthInfoReferExcelDownloadServiceImpl
             model.setStandardWeight(result.getStandardWeight().toString());
             model.setHealthInfoRegDate(
                     DateTimeUtil.toLocalDateTime(result.getHealthInfoRegDate(),
-                            DateFormatType.YYYYMMDDHHMMSS));
+                            DateFormatType.YYYYMMDDHHMMSS_STRICT));
             return model;
         }).collect(Collectors.toList());
     }

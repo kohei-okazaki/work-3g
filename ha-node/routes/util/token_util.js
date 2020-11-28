@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken');
-var errorMessage = require('error_message');
+var errorMessage = require('./error_message');
 
 /**
  * Token認証に関連するUtil

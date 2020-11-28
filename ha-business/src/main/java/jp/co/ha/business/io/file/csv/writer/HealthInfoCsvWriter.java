@@ -43,7 +43,7 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
         StringJoiner body = new StringJoiner(StringUtil.COMMA);
 
         // ユーザID
-        write(body, model.getUserId());
+        write(body, String.valueOf(model.getSeqUserId()));
         // 身長
         write(body, conf.useMask() ? MaskExecutor.MASK : model.getHeight().toString());
         // 体重

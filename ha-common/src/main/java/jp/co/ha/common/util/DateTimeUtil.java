@@ -730,7 +730,11 @@ public class DateTimeUtil {
         /** YYYY/MM/DD HH:mm:ss */
         YYYYMMDDHHMMSS("yyyy/MM/dd HH:mm:ss"),
         /** YYYYMMDDHHmmss */
-        YYYYMMDDHHMMSS_NOSEP("yyyyMMddHHmmss");
+        YYYYMMDDHHMMSS_NOSEP("yyyyMMddHHmmss"),
+        /** uuuu/MM/DD HH:mm:ss */
+        YYYYMMDDHHMMSS_STRICT("uuuu/MM/dd HH:mm:ss"),
+        /** uuuuMMDDHHmmss */
+        YYYYMMDDHHMMSS_NOSEP_STRICT("uuuuMMddHHmmss"),;
 
         /** 名前 */
         private String value;
