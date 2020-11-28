@@ -16,7 +16,7 @@ var prettyjson = require('prettyjson');
  * <ul>
  * <li>基礎代謝量 + 生活活動代謝</li>
  * </ul>
- * 
+ *
  * @param req
  *            リクエスト情報
  * @param res

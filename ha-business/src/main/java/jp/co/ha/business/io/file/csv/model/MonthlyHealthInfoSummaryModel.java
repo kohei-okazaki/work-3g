@@ -13,7 +13,7 @@ import jp.co.ha.common.log.annotation.Mask;
 public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
 
     /** ユーザID */
-    private String userId;
+    private String seqUserId;
     /** 身長 */
     @Mask
     private BigDecimal height;
@@ -38,22 +38,22 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     private String regDate;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public String getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(String seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**

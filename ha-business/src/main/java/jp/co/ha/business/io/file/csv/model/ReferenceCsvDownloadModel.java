@@ -18,7 +18,7 @@ import jp.co.ha.common.log.annotation.Mask;
 public class ReferenceCsvDownloadModel implements BaseCsvModel {
 
     /** ユーザID */
-    private Integer userId;
+    private Integer seqUserId;
     /** 身長 */
     @Mask
     private BigDecimal height;
@@ -35,22 +35,22 @@ public class ReferenceCsvDownloadModel implements BaseCsvModel {
     private LocalDateTime healthInfoRegDate;
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
     public Integer getSeqUserId() {
-        return userId;
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**
