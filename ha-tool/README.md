@@ -12,3 +12,6 @@
 
 ## 依存関係
 Webアプリ側のプロジェクト__からの__参照を禁止
+
+## ツールの使い方
+/ha-tool/src/main/java/jp/co/ha/tool/ToolInvoker.javaをスタンドアローンで起動
