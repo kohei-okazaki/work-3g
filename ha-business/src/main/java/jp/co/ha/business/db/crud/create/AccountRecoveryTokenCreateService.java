@@ -1,6 +1,6 @@
 package jp.co.ha.business.db.crud.create;
 
-import jp.co.ha.db.entity.AccountRecoveryToken;
+import jp.co.ha.db.entity.AccountRecoveryTokenData;;
 
 /**
  * アカウント回復トークン作成サービスインターフェース
@@ -15,6 +15,6 @@ public interface AccountRecoveryTokenCreateService {
      * @param entity
      *     アカウント回復トークン
      */
-    void create(AccountRecoveryToken entity);
+    void create(AccountRecoveryTokenData entity);
 
 }
