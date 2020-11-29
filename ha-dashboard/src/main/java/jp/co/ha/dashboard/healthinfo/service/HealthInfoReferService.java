@@ -2,6 +2,8 @@ package jp.co.ha.dashboard.healthinfo.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
@@ -26,8 +28,24 @@ public interface HealthInfoReferService {
      * @throws BaseException
      *     基底例外
      */
+    long getCount(HealthInfoReferenceDto dto, Integer seqUserId)
+            throws BaseException;
+
+    /**
+     * 健康情報レスポンスリストを取得する
+     *
+     * @param dto
+     *     健康情報照会DTO
+     * @param seqUserId
+     *     ユーザID
+     * @param pageable
+     *     {@linkplain Pageable}
+     * @return 健康情報レスポンスリスト
+     * @throws BaseException
+     *     基底例外
+     */
     List<HealthInfoReferenceDto> getHealthInfoResponseList(HealthInfoReferenceDto dto,
-            Integer seqUserId) throws BaseException;
+            Integer seqUserId, Pageable pageable) throws BaseException;
 
     /**
      * 結果照会CSVモデルリストに変換する

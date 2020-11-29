@@ -27,6 +27,10 @@ body {
   cursor: pointer;
 }
 
+.disabled {
+  display: none !important;
+}
+
 .menuTitle {
   margin: 5px;
   padding: 5px;

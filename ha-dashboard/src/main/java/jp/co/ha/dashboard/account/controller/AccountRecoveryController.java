@@ -42,7 +42,7 @@ import jp.co.ha.dashboard.account.form.AccountRecoveryForm;
 import jp.co.ha.dashboard.account.form.AccountRecoveryMailAddressInputForm;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.db.entity.AccountRecoveryToken;
+import jp.co.ha.db.entity.AccountRecoveryTokenData;
 import jp.co.ha.web.controller.BaseWebController;
 
 /**
@@ -150,7 +150,7 @@ public class AccountRecoveryController implements BaseWebController {
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "メールアドレスが未登録です"));
 
         // アカウント回復トークン登録
-        AccountRecoveryToken entity = new AccountRecoveryToken();
+        AccountRecoveryTokenData entity = new AccountRecoveryTokenData();
         entity.setSeqUserId(account.getSeqUserId());
         entity.setToken(encoder.encode(account.getMailAddress(), DateTimeUtil
                 .toString(DateTimeUtil.getSysDate(),
@@ -203,7 +203,7 @@ public class AccountRecoveryController implements BaseWebController {
         Integer userId = Integer.valueOf(seqUserId.get());
         // アカウント回復トークンを検索し、トークンが有効であるかを確認する
         @SuppressWarnings("unused")
-        AccountRecoveryToken accountRecoveryToken = accountRecoveryTokenSearchService
+        AccountRecoveryTokenData accountRecoveryTokenData = accountRecoveryTokenSearchService
                 .findBySeqUserIdAndTokenAndValidTokenCreateDate(userId, strToken)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "トークンが不正または無効です"));
@@ -297,7 +297,7 @@ public class AccountRecoveryController implements BaseWebController {
      *     トークン
      * @return メールテンプレートBody
      */
-    private Map<String, String> getMailTemplateBody(AccountRecoveryToken entity) {
+    private Map<String, String> getMailTemplateBody(AccountRecoveryTokenData entity) {
 
         Map<String, String> bodyMap = new HashMap<>();
         // URL
