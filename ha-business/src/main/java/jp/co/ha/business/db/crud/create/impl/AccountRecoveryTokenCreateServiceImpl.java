@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.create.AccountRecoveryTokenCreateService;
 import jp.co.ha.common.db.annotation.Insert;
-import jp.co.ha.db.entity.AccountRecoveryToken;
-import jp.co.ha.db.mapper.AccountRecoveryTokenMapper;
+import jp.co.ha.db.entity.AccountRecoveryTokenData;
+import jp.co.ha.db.mapper.AccountRecoveryTokenDataMapper;
 
 /**
  * アカウント回復トークン作成サービス実装クラス
@@ -18,14 +18,14 @@ import jp.co.ha.db.mapper.AccountRecoveryTokenMapper;
 public class AccountRecoveryTokenCreateServiceImpl
         implements AccountRecoveryTokenCreateService {
 
-    /** AccountRecoveryTokenMapper */
+    /** AccountRecoveryTokenDataMapper */
     @Autowired
-    private AccountRecoveryTokenMapper mapper;
+    private AccountRecoveryTokenDataMapper mapper;
 
     @Insert
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void create(AccountRecoveryToken entity) {
+    public void create(AccountRecoveryTokenData entity) {
         mapper.insert(entity);
     }
 

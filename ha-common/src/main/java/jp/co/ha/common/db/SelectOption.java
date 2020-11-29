@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import org.springframework.data.domain.Pageable;
+
 import jp.co.ha.common.function.Builder;
 import jp.co.ha.common.util.StringUtil;
 
@@ -19,6 +21,8 @@ public class SelectOption {
     private final Map<String, SortType> ORDER_BY_MAP;
     /** 検索上限数 */
     private final int LIMIT;
+    /** Pageable */
+    private final Pageable PAGEABLE;
 
     /**
      * 検索オプションのビルダー
@@ -32,6 +36,8 @@ public class SelectOption {
         private Map<String, SortType> orderByMap = new LinkedHashMap<>();
         /** 検索上限数 */
         private int limit = 10000;
+        /** Pageable */
+        private Pageable pageable;
 
         @Override
         public SelectOption build() {
@@ -64,6 +70,18 @@ public class SelectOption {
             return this;
         }
 
+        /**
+         * pageableを設定
+         *
+         * @param pageable
+         *     {@linkplain Pageable}
+         * @return SelectOptionBuilder
+         */
+        public SelectOptionBuilder pageable(Pageable pageable) {
+            this.pageable = pageable;
+            return this;
+        }
+
     }
 
     /**
@@ -90,6 +108,7 @@ public class SelectOption {
     private SelectOption(SelectOptionBuilder builder) {
         this.ORDER_BY_MAP = builder.orderByMap;
         this.LIMIT = builder.limit;
+        this.PAGEABLE = builder.pageable;
     }
 
     /**
@@ -113,6 +132,15 @@ public class SelectOption {
      */
     public int getLimit() {
         return LIMIT;
+    }
+
+    /**
+     * Pageableを返す
+     *
+     * @return Pageable
+     */
+    public Pageable getPageable() {
+        return PAGEABLE;
     }
 
 }

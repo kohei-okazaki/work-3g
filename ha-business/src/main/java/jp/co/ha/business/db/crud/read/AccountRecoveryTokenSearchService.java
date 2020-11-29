@@ -2,7 +2,7 @@ package jp.co.ha.business.db.crud.read;
 
 import java.util.Optional;
 
-import jp.co.ha.db.entity.AccountRecoveryToken;
+import jp.co.ha.db.entity.AccountRecoveryTokenData;
 
 /**
  * アカウント回復トークン検索サービスインターフェース
@@ -25,7 +25,7 @@ public interface AccountRecoveryTokenSearchService {
      *     トークン
      * @return アカウント回復トークン
      */
-    Optional<AccountRecoveryToken> findBySeqUserIdAndTokenAndValidTokenCreateDate(
+    Optional<AccountRecoveryTokenData> findBySeqUserIdAndTokenAndValidTokenCreateDate(
             Integer seqUserId, String token);
 
 }

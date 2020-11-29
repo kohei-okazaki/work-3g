@@ -31,10 +31,10 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(key = "'bmiRangeMt/' + #seqBmiRangeId", value = "bmiRangeMt")
-    public Optional<BmiRangeMt> findById(Integer seqBmiRangeId) {
+    @Cacheable(key = "'bmiRangeMt/' + #seqBmiRangeMtId", value = "bmiRangeMt")
+    public Optional<BmiRangeMt> findById(Integer seqBmiRangeMtId) {
         return findAll().stream()
-                .filter(e -> e.getSeqBmiRangeId().equals(seqBmiRangeId))
+                .filter(e -> e.getSeqBmiRangeMtId().equals(seqBmiRangeMtId))
                 .findFirst();
     }
 
