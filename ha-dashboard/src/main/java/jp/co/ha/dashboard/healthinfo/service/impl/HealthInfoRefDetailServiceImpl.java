@@ -65,11 +65,11 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
                                 DateFormatType.YYYYMMDDHHMMSS));
                 // 肥満度メッセージ
                 BmiRangeMt mt = bmiRangeMtSearchService
-                        .findById(srcEntity.getSeqBmiRangeId())
+                        .findById(srcEntity.getSeqBmiRangeMtId())
                         .orElseThrow(() -> new SystemRuntimeException(
                                 CommonErrorCode.DB_NO_DATA,
-                                "BMI範囲マスタが存在しません seqBmiRangeId="
-                                        + srcEntity.getSeqBmiRangeId()));
+                                "BMI範囲マスタが存在しません seqBmiRangeMtId="
+                                        + srcEntity.getSeqBmiRangeMtId()));
                 destDto.setOverweightMessage(mt.getOverWeightStatus());
             });
             return detailDto;
