@@ -1,5 +1,7 @@
 package jp.co.ha.db.entity;
 
+import org.springframework.data.domain.Pageable;
+
 /**
  * MyBatisのExampleクラスの基底Exampleクラス<br>
  * 検索上限数等すべてのTableに対し、共通で処理すべきものを定義する<br>
@@ -14,6 +16,8 @@ public abstract class BaseExample {
     protected Integer limit;
     /** ロック有無 */
     protected Boolean lock;
+    /** Pageable */
+    protected Pageable pageable;
 
     /**
      * limitを返す
@@ -51,6 +55,25 @@ public abstract class BaseExample {
      */
     public void setLock(Boolean lock) {
         this.lock = lock;
+    }
+
+    /**
+     * pageableを返す
+     *
+     * @return pageable
+     */
+    public Pageable getPageable() {
+        return pageable;
+    }
+
+    /**
+     * pageableを設定する
+     *
+     * @param pageable
+     *     ページャブル
+     */
+    public void setPageable(Pageable pageable) {
+        this.pageable = pageable;
     }
 
 }

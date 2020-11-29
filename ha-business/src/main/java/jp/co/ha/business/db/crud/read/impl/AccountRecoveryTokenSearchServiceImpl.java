@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.db.crud.read.AccountRecoveryTokenSearchService;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.db.entity.AccountRecoveryToken;
-import jp.co.ha.db.entity.AccountRecoveryTokenExample;
-import jp.co.ha.db.entity.AccountRecoveryTokenExample.Criteria;
-import jp.co.ha.db.mapper.AccountRecoveryTokenMapper;
+import jp.co.ha.db.entity.AccountRecoveryTokenData;
+import jp.co.ha.db.entity.AccountRecoveryTokenDataExample;
+import jp.co.ha.db.entity.AccountRecoveryTokenDataExample.Criteria;
+import jp.co.ha.db.mapper.AccountRecoveryTokenDataMapper;
 
 /**
  * アカウント回復トークン検索サービス実装クラス
@@ -24,15 +24,15 @@ import jp.co.ha.db.mapper.AccountRecoveryTokenMapper;
 public class AccountRecoveryTokenSearchServiceImpl
         implements AccountRecoveryTokenSearchService {
 
-    /** AccountRecoveryTokenMapper */
+    /** AccountRecoveryTokenDataMapper */
     @Autowired
-    private AccountRecoveryTokenMapper mapper;
+    private AccountRecoveryTokenDataMapper mapper;
 
     @Override
-    public Optional<AccountRecoveryToken> findBySeqUserIdAndTokenAndValidTokenCreateDate(
+    public Optional<AccountRecoveryTokenData> findBySeqUserIdAndTokenAndValidTokenCreateDate(
             Integer seqUserId, String token) {
 
-        AccountRecoveryTokenExample example = new AccountRecoveryTokenExample();
+        AccountRecoveryTokenDataExample example = new AccountRecoveryTokenDataExample();
         Criteria creteria = example.createCriteria();
 
         // ユーザID
@@ -42,7 +42,7 @@ public class AccountRecoveryTokenSearchServiceImpl
         // トークン作成日時
         creteria.andTokenCreateDateGreaterThan(getTargetTokenDate());
 
-        List<AccountRecoveryToken> list = mapper.selectByExample(example);
+        List<AccountRecoveryTokenData> list = mapper.selectByExample(example);
 
         // 同一トークンは複数レコード存在しない想定のため、先頭1件を使用
         return Optional.ofNullable(CollectionUtil.isEmpty(list) ? null : list.get(0));
