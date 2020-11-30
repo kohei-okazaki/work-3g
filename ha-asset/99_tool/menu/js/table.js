@@ -52,8 +52,8 @@ var table = [
         size: ""
       },
       {
-        logicalName: "BMI範囲ID",
-        physicalName: "SEQ_BMI_RANGE_ID",
+        logicalName: "BMI範囲マスタID",
+        physicalName: "SEQ_BMI_RANGE_MT_ID",
         type: "INT",
         size: ""
       },
@@ -184,8 +184,8 @@ var table = [
       logicalName: "BMI範囲マスタ",
       column : [
         {
-          logicalName: "BMI範囲ID",
-          physicalName: "SEQ_BMI_RANGE_ID",
+            logicalName: "BMI範囲マスタID",
+            physicalName: "SEQ_BMI_RANGE_MT_ID",
           type: "INT",
           size: ""
         },
@@ -222,11 +222,11 @@ var table = [
       ]
     },
     {
-        physicalName: "ACCOUNT_RECOVERY_TOKEN",
-        logicalName: "アカウント回復トークン",
+        physicalName: "ACCOUNT_RECOVERY_TOKEN_DATA",
+        logicalName: "アカウント回復トークン情報",
         column : [
           {
-            logicalName: "アカウント回復トークンID",
+            logicalName: "アカウント回復トークン情報ID",
             physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
             type: "INT",
             size: ""
