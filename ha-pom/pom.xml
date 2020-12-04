@@ -45,13 +45,6 @@
         <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
-    <!-- test -->
-    <profile>
-      <id>test</id>
-      <properties>
-        <resources.directory>${basedir}/profile/test</resources.directory>
-      </properties>
-    </profile>
     <!-- EC2環境 -->
     <profile>
       <id>ec2</id>
