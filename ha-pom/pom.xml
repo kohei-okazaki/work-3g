@@ -28,14 +28,14 @@
     <org.mybatis-spring-version>2.0.5</org.mybatis-spring-version>
     <org.hibernate-version>6.1.6.Final</org.hibernate-version>
     <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
-    <org.thymeleaf-layout-version>2.4.1</org.thymeleaf-layout-version>
+    <org.thymeleaf-layout-version>2.5.1</org.thymeleaf-layout-version>
     <org.groovy-version>3.0.6</org.groovy-version>
     <org.dbcp2-version>2.8.0</org.dbcp2-version>
     <org.junit-version>5.7.0</org.junit-version>
   </properties>
 
   <profiles>
-    <!-- local -->
+    <!-- Local環境 -->
     <profile>
       <id>local</id>
       <properties>
