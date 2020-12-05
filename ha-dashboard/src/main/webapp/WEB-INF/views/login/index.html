@@ -12,7 +12,7 @@
 
   <div class="px-4">
     <div class="container border col-7">
-      <form id="loginForm" th:action="@{./top}" method="post" th:object="${loginForm}">
+      <form id="loginForm" th:action="@{/login/top}" method="post" th:object="${loginForm}">
         <br>
         <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
@@ -21,7 +21,7 @@
         <div class="alert alert-info" role="alert" th:if="${isPasswordReset}">パスワードが更新されました<br>新しいパスワードでログインして下さい</div>
 
         <div class="form-group" >
-          <input type="text" class="validate[required] form-control" th:field="*{mailAddress}" maxlength="64" placeholder="test@test.com" required />
+          <input type="text" class="validate[required] form-control" th:field="*{mailAddress}" maxlength="64" placeholder="メールアドレス" required />
         </div><!-- /.form-group -->
         <br>
         <div class="form-group" >
