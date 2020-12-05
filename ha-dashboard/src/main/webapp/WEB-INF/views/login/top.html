@@ -6,7 +6,7 @@
   th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <head>
 <title>TOP画面</title>
-<link rel="stylesheet" th:href="@{/resources/css/lib/chart.min.css}">
+<link>
 </head>
 <body>
   <div class="px-4">
@@ -20,8 +20,6 @@
     <br>
   </div>
 
-  <br><br><br><br><br><br><br><br><br><br><br><br>
-  <script th:src="@{/resources/js/lib/chart.min.js}"></script>
   <script th:inline="javascript">
     $(function() {
 

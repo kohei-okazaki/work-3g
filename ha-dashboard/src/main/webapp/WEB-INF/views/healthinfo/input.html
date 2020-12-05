@@ -19,7 +19,7 @@
 
         <h2 class="menuTitle">健康情報入力</h2>
 
-        <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
+        <form id="healthInfoForm" th:action="@{/healthinfo/confirm}" method="post" th:object="${healthInfoForm}">
 
           <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
           <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>

@@ -19,7 +19,7 @@
     <div class="container border col-8">
       <h2 class="menuTitle">健康情報一括登録確認画面</h2>
 
-      <form th:action="@{./complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+      <form th:action="@{/healthinfofile/complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
         <table class="table table-hover table-striped">
           <tr>
             <td colspan="3" th:text="'登録件数 ' + ${count}"></td>

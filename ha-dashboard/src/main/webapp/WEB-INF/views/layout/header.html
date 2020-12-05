@@ -1,4 +1,4 @@
-<div th:fragment="header" class="header">
+<div class="header">
   <!-- ヘッダ部 -->
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <h1 id="appTitle" class="appTitle col-sm-3 text-nowrap text-muted" th:text="#{healthInfoAppName}"></h1>
@@ -16,24 +16,24 @@
       <ul>
         <li><a href="#">健康情報</a>
           <ul>
-            <li><a href="../healthinfo/input" th:href="@{/healthinfo/input}">入力</a></li>
-            <li><a href="../healthinfofile/input" th:href="@{/healthinfofile/input}">一括</a></li>
-            <li><a href="../healthinforeference/index" th:href="@{/healthinforeference/index}">照会</a></li>
+            <li><a th:href="@{/healthinfo/input}">入力</a></li>
+            <li><a th:href="@{/healthinfofile/input}">一括</a></li>
+            <li><a th:href="@{/healthinforeference/index}">照会</a></li>
           </ul>
         </li>
         <li><a href="#">アカウント</a>
           <ul>
-            <li><a href="../accountsetting/input" th:href="@{/accountsetting/input}">設定変更</a></li>
+            <li><a th:href="@{/accountsetting/input}">設定変更</a></li>
           </ul>
         </li>
         <li><a href="#">カロリー</a>
           <ul>
-            <li><a href="../caloriecalc/index" th:href="@{/caloriecalc/index}">計算</a></li>
+            <li><a th:href="@{/caloriecalc/index}">計算</a></li>
           </ul>
         </li>
         <li><a href="#">肺活量</a>
           <ul>
-            <li><a href="../breathingcapacity/index" th:href="@{/breathingcapacity/index}">計算</a></li>
+            <li><a th:href="@{/breathingcapacity/index}">計算</a></li>
           </ul>
         </li>
       </ul>
@@ -103,6 +103,6 @@
 <div th:replace="./layout/bmi-modal.html"></div>
 <!-- 標準体重モーダル -->
 <div th:replace="./layout/standardweight-modal.html"></div>
-<!-- 標準体重モーダル -->
+<!-- 基礎代謝量モーダル -->
 <div th:replace="./layout/basemetabolism-modal.html"></div>
 

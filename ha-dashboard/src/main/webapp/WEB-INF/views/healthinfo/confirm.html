@@ -14,7 +14,7 @@
     <div class="container border col-8">
       <h2 class="menuTitle">健康情報入力確認</h2>
       <p>以下の情報で健康情報を登録します</p>
-      <form action="./complete" th:action="@{./complete}" method="post" th:object="${healthInfoForm}">
+      <form th:action="@{/healthinfo/complete}" method="post" th:object="${healthInfoForm}">
 
         <table class="table table-hover table-striped">
           <tr>

@@ -14,7 +14,7 @@
     <div class="container border col-10">
       <h2 class="menuTitle">アカウント設定入力</h2>
 
-      <form id="accountSettingForm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
+      <form id="accountSettingForm" th:action="@{/accountsetting/confirm}" method="post" th:object="${accountSettingForm}">
 
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqUserId')}" th:errors="*{seqUserId}"></div>

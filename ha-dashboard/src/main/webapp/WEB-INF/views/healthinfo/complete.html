@@ -46,7 +46,7 @@
           <table>
             <tr>
               <td>
-                <form action="./exceldownload" th:action="@{./exceldownload}" method="get" th:object="${healthInfoForm}">
+                <form th:action="@{/healthinfo/exceldownload}" method="get" th:object="${healthInfoForm}">
                   <input type="hidden" th:field="*{seqHealthInfoId}" />
                   <div>
                     <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
@@ -55,7 +55,7 @@
               </td>
               <td></td>
               <td>
-                <form action="./csvdownload" th:action="@{./csvdownload}" method="get" th:object="${healthInfoForm}">
+                <form th:action="@{/healthinfo/csvdownload}" method="get" th:object="${healthInfoForm}">
                   <input type="hidden" th:field="*{seqHealthInfoId}" />
                   <div>
                     <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />

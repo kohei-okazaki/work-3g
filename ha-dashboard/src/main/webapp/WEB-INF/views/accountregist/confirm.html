@@ -11,7 +11,7 @@
 <body>
 
   <div class="px-4">
-    <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountRegistForm}">
+    <form th:action="@{/accountregist/complete}" method="post" th:object="${accountRegistForm}">
       <div class="container border col-7">
         <h2 class="menuTitle">アカウント登録確認</h2>
         <table class="table">
