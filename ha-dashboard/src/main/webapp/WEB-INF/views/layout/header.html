@@ -6,9 +6,9 @@
       <img th:src="@{/resources/image/icon_people.png}" th:if="${session[seqUserId]} != null" alt="hitogata"  title="hitogata">
       <ul class="navbar-nav">
         <li class="nav-item link text-muted" th:if="${session[seqUserId]} != null" th:text="${'ユーザID&nbsp;:&nbsp;' + session[seqUserId]}"></li>
-      </ul>
-    </div>
-  </nav>
+      </ul><!-- /.navbar-nav -->
+    </div><!-- /.collapse navbar-collapse justify-content-end -->
+  </nav><!-- /.navbar navbar-expand-sm navbar-dark bg-dark -->
 
   <!-- ナビゲーションバー部 -->
   <ul id="dropmenu" th:if="${session[seqUserId]} != null">
@@ -74,9 +74,9 @@
         </li>
       </ul>
     </li>
-    <li><a href="../login/logout" th:href="@{/login/logout}">ログアウト</a></li>
+    <li><a th:href="@{/login/logout}">ログアウト</a></li>
   </ul><!-- /#dropmenu -->
-</div>
+</div><!-- /.header -->
 
 <!-- 健康情報登録API概要モーダル -->
 <div th:replace="./layout/api-regist-general-modal.html"></div>

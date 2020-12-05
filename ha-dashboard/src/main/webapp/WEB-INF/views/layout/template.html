@@ -37,17 +37,15 @@
 <!-- 個別JavaScript -->
 <!-- <th:block th:replace="${scripts}" /> -->
 </head>
-<body class="body-main">
-
-  <header th:fragment="~{layout/header :: header}">
+<body>
+  <div class="wrap">
     <div th:replace="layout/header.html"></div>
-  </header>
-  <br><br><br><br><br><br>
-  <div th:replace="${body}"></div>
-  <br><br><br><br><br><br><br><br>
-  <footer th:fragment="~{layout/footer :: footer">
-    <div th:replace="layout/footer.html"></div>
-  </footer>
+    <br><br><br><br><br><br>
+    <div th:replace="${body}"></div>
+    <div class="push"></div>
+  </div><!-- /.wrap -->
+
+  <div th:replace="layout/footer.html"></div>
 
 </body>
 </html>
