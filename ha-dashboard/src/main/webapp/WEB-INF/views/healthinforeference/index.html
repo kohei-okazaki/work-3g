@@ -2,22 +2,18 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報照会画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/css/lib/chart.css" th:href="@{/resources/css/lib/chart.min.css}">
-<link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
-<link rel="stylesheet" href="../resources/css/sort.css" th:href="@{/resources/css/sort.css}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>健康情報照会画面</title>
+<link>
 </head>
 <body>
 
-  <!--/* ヘッダ部 */-->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br><br><br><br>
-  <main role="main" class="px-4">
+  <div class="px-4">
     <div class="container border col-8">
       <h2 class="menuTitle">健康情報照会</h2>
-      <form id="healthInfoReferenceForm" action="./refer" th:action="@{./refer}" method="get" th:object="${healthInfoReferenceForm}">
+      <form id="healthInfoReferenceForm" th:action="@{/healthinforeference/refer}" method="get" th:object="${healthInfoReferenceForm}">
         <br>
         <div class="alert alert-danger" role="alert" th:if="${isRefered != null && isRefered && hasResult != null && !hasResult}">検索結果が存在しません</div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqHealthInfoId')}" th:errors="*{seqHealthInfoId}"></div>
@@ -64,15 +60,9 @@
       <!--/* 結果部ここまで */-->
 
     </div><!-- /.container border col-8 -->
-  </main>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
 
-  <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
-  <script src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
-  <script src="../resources/js/lib/chart.js" th:src="@{/resources/js/lib/chart.min.js}"></script>
-  <script src="../resources/js/lib/list.js" th:src="@{/resources/js/lib/list.min.js}"></script>
-  <script src="../resources/js/reference.js" th:src="@{/resources/js/reference.min.js}"></script>
+  <script th:src="@{/resources/js/reference.min.js}"></script>
   <script th:inline="javascript">
     $(function() {
 

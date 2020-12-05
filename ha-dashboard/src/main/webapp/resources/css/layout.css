@@ -1,18 +1,62 @@
-/**************/
+/***********/
 /* layout.css */
-/**************/
+/***********/
 @charset "UTF-8";
 
-html {
-  height: 100%;
+* {
   margin: 0;
   padding: 0;
 }
 
-body {
+html, body {
   height: 100%;
-  margin: 0;
-  padding: 0;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* ▼Header▼ */
+.header {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 10;
+}
+/* ▲Header▲ */
+
+/* ▼Footer▼ */
+.footer {
+  width: 100%;
+  bottom: 0px;
+  background: #c0c0c0;
+}
+
+.footer-submenu {
+  display: inline;
+  text-align: center;
+}
+
+.sub-footer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  bottom: 0px;
+  background: #3b3b3b;
+  color: #e5e5e5;
+  font-size: 10px;
+}
+/* ▲Footer▲ */
+
+.push {
+  height: 126px;
 }
 
 .appTitle {
@@ -35,54 +79,6 @@ body {
   margin: 5px;
   padding: 5px;
 }
-
-.contentLayout {
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: auto;
-  width: 96%;
-  padding: 5px;
-  background: #d2e8d561;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.32);
-}
-
-/* ▼Header▼ */
-.header {
-  position: fixed;
-  width: 100%;
-  background-color: #fff;
-  z-index: 10;
-}
-/* ▲Header▲ */
-
-/* ▼Footer▼ */
-.footer {
-  width: 100%;
-  bottom: 0px;
-  margin: 0px;
-  padding: 0px;
-  background: #c0c0c0;
-}
-
-.footer-submenu {
-  display: inline;
-  text-align: center;
-}
-
-.sub-footer {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  bottom: 0px;
-  background: #3b3b3b;
-  color: #e5e5e5;
-  font-size: 10px;
-}
-/* ▲Footer▲ */
 
 .chart {
   width: 250px;

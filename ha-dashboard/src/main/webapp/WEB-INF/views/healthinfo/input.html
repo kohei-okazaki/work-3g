@@ -2,17 +2,14 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報入力画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <link>
+<title>健康情報登録画面</title>
 </head>
 <body>
 
-  <!--/* ヘッダ部 */-->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br><br><br><br>
-  <main role="main" class="px-4">
+  <div class="px-4">
     <div class="container border col-8">
 
       <div th:if="${errorMessage} != null">
@@ -22,7 +19,7 @@
 
         <h2 class="menuTitle">健康情報入力</h2>
 
-        <form action="./confirm" id="healthInfoForm" th:action="@{./confirm}" method="post" th:object="${healthInfoForm}">
+        <form id="healthInfoForm" th:action="@{/healthinfo/confirm}" method="post" th:object="${healthInfoForm}">
 
           <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
           <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
@@ -59,12 +56,8 @@
         </form>
 
     </div><!-- container border col-8 -->
-  </main>
-  <br><br><br><br><br><br><br><br><br><br><br><br><br>
-  <!--/* フッタ部 */-->
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
 
-  <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script>
     $(function() {
 
