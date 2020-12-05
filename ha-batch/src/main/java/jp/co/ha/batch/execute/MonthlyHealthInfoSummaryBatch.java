@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +27,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
+import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -141,7 +141,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
 
         return healthInfoList.stream().map(e -> {
             MonthlyHealthInfoSummaryModel model = new MonthlyHealthInfoSummaryModel();
-            BeanUtil.copy(e, model, Arrays.asList("serialVersionUID"));
+            BeanUtil.copy(e, model);
             model.setHealthInfoRegDate(DateTimeUtil.toString(e.getHealthInfoRegDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
             model.setRegDate(DateTimeUtil.toString(e.getRegDate(),
@@ -173,7 +173,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
                 prop.getMonthlySummaryBatchFilePath()).build();
 
         try (PrintWriter pw = new PrintWriter(file);
-                MonthlyHealthInfoSummaryCsvWriter writer = new MonthlyHealthInfoSummaryCsvWriter(
+                CsvWriter<MonthlyHealthInfoSummaryModel> writer = new MonthlyHealthInfoSummaryCsvWriter(
                         conf, pw)) {
             // CSVに書込
             writer.execute(modelList);

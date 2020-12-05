@@ -25,8 +25,8 @@ public class HealthInfoRefDetailDto {
     private String healthInfoStatusMessage;
     /** 健康情報登録日時 */
     private String healthInfoRegDate;
-    /** BMI範囲ID */
-    private Integer seqBmiRangeId;
+    /** BMI範囲マスタID */
+    private Integer seqBmiRangeMtId;
     /** 肥満度メッセージ */
     private String overweightMessage;
 
@@ -183,22 +183,22 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * seqBmiRangeIdを返す
+     * seqBmiRangeMtIdを返す
      *
-     * @return seqBmiRangeId
+     * @return seqBmiRangeMtId
      */
-    public Integer getSeqBmiRangeId() {
-        return seqBmiRangeId;
+    public Integer getSeqBmiRangeMtId() {
+        return seqBmiRangeMtId;
     }
 
     /**
-     * seqBmiRangeIdを設定する
+     * seqBmiRangeMtIdを設定する
      *
-     * @param seqBmiRangeId
-     *     BMI範囲ID
+     * @param seqBmiRangeMtId
+     *     BMI範囲マスタID
      */
-    public void setSeqBmiRangeId(Integer seqBmiRangeId) {
-        this.seqBmiRangeId = seqBmiRangeId;
+    public void setSeqBmiRangeMtId(Integer seqBmiRangeMtId) {
+        this.seqBmiRangeMtId = seqBmiRangeMtId;
     }
 
     /**

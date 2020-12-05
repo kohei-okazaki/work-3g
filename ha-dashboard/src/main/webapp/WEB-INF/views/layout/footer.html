@@ -1,11 +1,19 @@
-<div class="footer fixed-bottom">
-  <br>
+<div class="footer">
+  <!-- <br> -->
   <!--/* table部ここから */-->
-  <div class="table" th:if="${session[seqUserId]} != null">
+  <div th:if="${session[seqUserId]} != null">
     <!--/* ログイン状態の場合のみ表示 */-->
     <ul class="footer-submenu">
-      <li><a class="link" href="../login/top" th:href="@{/login/top}"><img th:src="@{/resources/image/icon_home_green.png}" title="hitogata"></a></li>
-      <li><a class="link" href="../news/list" th:href="@{/news/list}"><img th:src="@{/resources/image/icon_notice_green.png}" title="hitogata"></a></li>
+      <li>
+        <a class="link" th:href="@{/login/top}">
+          <img th:src="@{/resources/image/icon_home_green.png}" title="hitogata">
+        </a>
+      </li>
+      <li>
+        <a class="link" th:href="@{/news/list}">
+          <img th:src="@{/resources/image/icon_notice_green.png}" title="hitogata">
+        </a>
+      </li>
     </ul><!-- /.footer-submenu -->
   </div>
   <!--/* table部ここまで */-->
@@ -14,4 +22,4 @@
     <p class="zero-padding-margin" align="left" th:text="'&nbsp;&nbsp;&copy;' +${#dates.format(#dates.createNow(), 'yyyy')} + '&nbsp;HealthInfo App'"></p>
     <p class="zero-padding-margin" align="right" th:text="'version&nbsp;' + #{appVersion} + '&nbsp;&nbsp;'"></p>
   </div><!-- /.sub-footer -->
-</div><!-- /.footer -->
+</div><!-- /.footer fixed-bottom -->

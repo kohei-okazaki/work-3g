@@ -2,16 +2,15 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_パスワード再設定確認画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>パスワード再設定画面</title>
 <link>
 </head>
 <body>
-  <!-- ヘッダ部 -->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br>
-  <main role="main" class="px-4">
+
+  <div class="px-4">
     <form th:action="@{'~/accountrecovery/complete/' + ${account.seqUserId}}" method="post" th:object="${accountRecoveryForm}">
       <input type="hidden" th:field="*{mailAddress}" />
       <input type="hidden" th:field="*{password}" />
@@ -36,7 +35,7 @@
       </div><!-- /.container border col-7 -->
     </form>
     <br><br>
-  </main>
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
+
 </body>
 </html>
