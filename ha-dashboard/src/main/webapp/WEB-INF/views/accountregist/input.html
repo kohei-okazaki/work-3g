@@ -2,17 +2,16 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント登録画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>アカウント登録画面</title>
+<link>
 </head>
 <body>
-  <!-- ヘッダ部 -->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br>
-  <main role="main" class="px-4">
-    <form id="accountRegistForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountRegistForm}">
+
+  <div class="px-4">
+    <form id="accountRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${accountRegistForm}">
       <div class="container border col-7">
         <h2 class="menuTitle">アカウント登録</h2>
 
@@ -25,8 +24,9 @@
 
         <!--/* メールアドレスここから */-->
         <div class="form-group">
-          <label class="control-label" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
-          <input type="text" class="validate[required] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
+          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
+          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
+          <div id="suggest"></div>
         </div><!-- /.form-group -->
         <!--/* メールアドレスここまで */-->
 
@@ -70,12 +70,10 @@
         <br><br>
       </div><!-- /.container border col-7 -->
     </form><!-- /#accountRegistForm -->
-  </main>
-  <br><br><br><br><br><br><br><br><br>
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
 
-  <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
-  <script src="../resources/js/common/password.js" th:src="@{/resources/js/common/password.min.js}"></script>
+  <script th:src="@{/resources/js/common/password.min.js}"></script>
+  <script th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
   <script>
     $(function() {
 
@@ -138,6 +136,31 @@
         var progressValue = value / 3;
         mprogress.set(progressValue);
       });
+
+      const domains = [
+          "gmail.com",
+          "yahoo.co.jp",
+          "ezweb.ne.jp",
+          "au.com",
+          "docomo.ne.jp",
+          "i.softbank.jp",
+          "softbank.ne.jp",
+          "outlook.com",
+          "outlook.jp"
+        ];
+
+        $("#mailAddress").on("blur", function() {
+          $(this).mailcheck({
+            domains: domains,
+            suggested: function(element, suggestion) {
+              $("#suggest").text(suggestion.full);
+              $("#suggest").on("click", function() {
+                $("#mailAddress").val(suggestion.full);
+                $(this).hide();
+              });
+            }
+          });
+        });
 
     });
 
