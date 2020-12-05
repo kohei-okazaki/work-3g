@@ -2,16 +2,15 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント設定変更確認画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>アカウント設定変更確認</title>
+<link>
 </head>
 <body>
 
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br><br><br><br>
-  <main role="main" class="px-4">
+  <div class="px-4">
     <div class="container border col-8">
       <h2 class="menuTitle">アカウント設定変更確認</h2>
       <form action="./complete" th:action="@{./complete}" method="post" th:object="${accountSettingForm}">
@@ -82,9 +81,7 @@
         <br><br>
       </form>
     </div><!-- /.container border col-8 -->
-  </main>
-  <br><br><br><br><br><br><br><br><br><br><br><br>
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
 
 </body>
 </html>

@@ -2,20 +2,19 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント回復用メールアドレス入力画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>アカウント回復用メールアドレス入力画面</title>
+<link>
 </head>
 <body>
-  <!-- ヘッダ部 -->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br>
-  <main role="main" class="px-4">
+
+  <div class="px-4">
     <div class="container border col-7">
 
       <!--/* アカウント回復メール送信前ここから */-->
-      <form id="accountRecoveryMailAddressInputForm" action="./accountrecovery/sendMail" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${accountRecoveryMailAddressInputForm}" th:if="${isInputMailAddress == true}">
+      <form id="accountRecoveryMailAddressInputForm" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${accountRecoveryMailAddressInputForm}" th:if="${isInputMailAddress == true}">
         <h2 class="menuTitle">アカウント回復用メールアドレス入力</h2>
         <br>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
@@ -38,7 +37,7 @@
       </form><!-- /#accountRecoveryMailAddressInputForm -->
       <!--/* アカウント回復メール送信前ここまで */-->
 
-      <!--/* アカウント回復メール送信後ここまで */-->
+      <!--/* アカウント回復メール送信後ここから */-->
       <div th:if="${isSendMailAddress == true}">
         <h2 class="menuTitle">アカウント回復用メール送信完了</h2>
         <div class="alert alert-info" role="alert">
@@ -50,10 +49,7 @@
       <!--/* アカウント回復メール送信後ここまで */-->
 
     </div><!-- /.container border col-7 -->
-  </main>
-  <br><br><br><br><br><br><br><br><br>
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
 
-  <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
 </body>
 </html>

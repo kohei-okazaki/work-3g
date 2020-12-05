@@ -2,17 +2,15 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報入力確認画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>健康情報登録確認画面</title>
 <link>
 </head>
 <body>
 
-  <!--/* ヘッダ部 */-->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br><br><br><br>
-  <main role="main" class="px-4">
+  <div class="px-4">
     <div class="container border col-8">
       <h2 class="menuTitle">健康情報入力確認</h2>
       <p>以下の情報で健康情報を登録します</p>
@@ -44,8 +42,7 @@
 
       </form>
     </div><!-- /.container border col-8 -->
-  </main>
-  <br><br><br><br><br><br><br><br><br>
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
+
 </body>
 </html>

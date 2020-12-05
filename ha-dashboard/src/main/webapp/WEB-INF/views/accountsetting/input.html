@@ -2,20 +2,19 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_アカウント設定入力画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/css/lib/jquery-ui.css" th:href="@{/resources/css/lib/jquery-ui.min.css}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>アカウント設定入力</title>
+<link>
 </head>
 <body>
 
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br><br><br><br>
-  <main role="main" class="px-4">
+  <div class="px-4">
     <div class="container border col-10">
       <h2 class="menuTitle">アカウント設定入力</h2>
 
-      <form id="accountSettingForm" action="./confirm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
+      <form id="accountSettingForm" th:action="@{./confirm}" method="post" th:object="${accountSettingForm}">
 
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqUserId')}" th:errors="*{seqUserId}"></div>
@@ -158,13 +157,9 @@
         <br><br>
       </form><!-- /#accountSettingForm -->
     </div><!-- /.container border col-10 -->
-  </main>
-  <br>
-  <div th:replace="layout/layout :: footer"></div>
-  <br><br><br><br><br><br><br><br><br><br><br><br>
-  <script src="../resources/js/lib/jquery-ui.js" th:src="@{/resources/js/lib/jquery-ui.min.js}"></script>
-  <script src="../resources/js/lib/datepicker-ja.js" th:src="@{/resources/js/lib/datepicker-ja.min.js}"></script>
-  <script src="../resources/js/lib/mailcheck.js" th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
+  </div>
+
+  <script th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
   <script>
     $(function() {
 

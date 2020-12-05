@@ -2,17 +2,15 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_健康情報一括登録確認画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>健康情報一括登録確認画面</title>
 <link>
 </head>
 <body>
 
-  <!--/* ヘッダ部 */-->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br><br><br><br>
-  <main role="main" class="px-4">
+  <div class="px-4">
     <div th:if="${errorMessage} != null">
       <br><br>
       <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
@@ -21,7 +19,7 @@
     <div class="container border col-8">
       <h2 class="menuTitle">健康情報一括登録確認画面</h2>
 
-      <form action="./complete" th:action="@{./complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+      <form th:action="@{./complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
         <table class="table table-hover table-striped">
           <tr>
             <td colspan="3" th:text="'登録件数 ' + ${count}"></td>
@@ -48,18 +46,7 @@
       </form>
       <br>
     </div><!-- /.container border col-8 -->
-  </main>
-  <br>
-  <div th:replace="layout/layout :: footer"></div>
+  </div>
 
-  <script src="../resources/js/lib/sal.js" th:src="@{/resources/js/lib/sal.min.js}"></script>
-  <script>
-    $(function() {
-      sal({
-        threshold: 1,
-        once: false
-      });
-    });
-  </script>
 </body>
 </html>

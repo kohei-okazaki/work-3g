@@ -2,18 +2,17 @@
 <html lang="ja"
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="layout/layout :: head_fragment(title = '健康アプリ_ログイン画面', scripts = ~{::script}, links = ~{::link})">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../resources/css/lib/mprogress.css" th:href="@{/resources/css/lib/mprogress.min.css}">
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>ログイン画面</title>
+<link>
 </head>
 <body>
-  <!-- ヘッダ部 -->
-  <div th:replace="layout/layout :: header"></div>
-  <br><br><br><br>
-  <main role="main" class="px-4">
+
+  <div class="px-4">
     <div class="container border col-7">
-      <form id="loginForm" action="./top" th:action="@{./top}" method="post" th:object="${loginForm}">
+      <form id="loginForm" th:action="@{./top}" method="post" th:object="${loginForm}">
         <br>
         <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
@@ -37,13 +36,11 @@
     </div><!-- /.container border col-7 -->
 
     <div class="container  col-7">
-      <a href="../accountrecovery/index" th:href="@{/accountrecovery/index}">パスワードを忘れた場合</a>
+      <a th:href="@{/accountrecovery/index}">パスワードを忘れた場合</a>
     </div>
-  </main>
+  </div>
 
-  <div th:replace="layout/layout :: footer"></div>
-
-  <script src="../resources/js/lib/mprogress.js" th:src="@{/resources/js/lib/mprogress.min.js}"></script>
+  <script th:src="@{/resources/js/lib/mprogress.min.js}"></script>
   <script>
     $(function() {
       // validate処理
