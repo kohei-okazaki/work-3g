@@ -159,6 +159,7 @@
     </div><!-- /.container border col-10 -->
   </div>
 
+  <script th:src="@{/resources/js/common/password.min.js}"></script>
   <script th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
   <script>
     $(function() {
@@ -198,20 +199,6 @@
           }
         });
       });
-
-      var password = $('#password').get(0);
-      var passwordCheck = $('#password-check').get(0);
-      passwordCheck.addEventListener('change', function() {
-        var inputType = passwordCheck.checked ? 'text' : 'password';
-        password.setAttribute('type', inputType);
-      }, false);
-
-      var mailPassword = $('#mailPassword').get(0);
-      var mailPasswordCheck = $('#mailPassword-check').get(0);
-      mailPasswordCheck.addEventListener('change', function() {
-        var inputType = mailPasswordCheck.checked ? 'text' : 'password';
-        mailPassword.setAttribute('type', inputType);
-      }, false);
 
     });
   </script>
