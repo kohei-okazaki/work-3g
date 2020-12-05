@@ -30,8 +30,8 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     private String healthInfoStatus;
     /** 健康情報登録日時 */
     private String healthInfoRegDate;
-    /** BMIマスタID */
-    private Integer seqBmiRangeId;
+    /** BMI範囲マスタID */
+    private Integer seqBmiRangeMtId;
     /** 更新日時 */
     private String updateDate;
     /** 登録日時 */
@@ -171,22 +171,22 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * seqBmiRangeIdを返す
+     * seqBmiRangeMtIdを返す
      *
-     * @return seqBmiRangeId
+     * @return seqBmiRangeMtId
      */
-    public Integer getSeqBmiRangeId() {
-        return seqBmiRangeId;
+    public Integer getSeqBmiRangeMtId() {
+        return seqBmiRangeMtId;
     }
 
     /**
-     * seqBmiRangeIdを設定する
+     * seqBmiRangeMtIdを設定する
      *
-     * @param seqBmiRangeId
-     *     BMIマスタID
+     * @param seqBmiRangeMtId
+     *     BMI範囲マスタID
      */
-    public void setSeqBmiRangeId(Integer seqBmiRangeId) {
-        this.seqBmiRangeId = seqBmiRangeId;
+    public void setSeqBmiRangeMtId(Integer seqBmiRangeMtId) {
+        this.seqBmiRangeMtId = seqBmiRangeMtId;
     }
 
     /**
