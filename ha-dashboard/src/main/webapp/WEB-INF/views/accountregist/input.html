@@ -24,8 +24,9 @@
 
         <!--/* メールアドレスここから */-->
         <div class="form-group">
-          <label class="control-label" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
-          <input type="text" class="validate[required] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
+          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
+          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
+          <div id="suggest"></div>
         </div><!-- /.form-group -->
         <!--/* メールアドレスここまで */-->
 
@@ -72,6 +73,7 @@
   </div>
 
   <script th:src="@{/resources/js/common/password.min.js}"></script>
+  <script th:src="@{/resources/js/lib/mailcheck.min.js}"></script>
   <script>
     $(function() {
 
@@ -134,6 +136,31 @@
         var progressValue = value / 3;
         mprogress.set(progressValue);
       });
+
+      const domains = [
+          "gmail.com",
+          "yahoo.co.jp",
+          "ezweb.ne.jp",
+          "au.com",
+          "docomo.ne.jp",
+          "i.softbank.jp",
+          "softbank.ne.jp",
+          "outlook.com",
+          "outlook.jp"
+        ];
+
+        $("#mailAddress").on("blur", function() {
+          $(this).mailcheck({
+            domains: domains,
+            suggested: function(element, suggestion) {
+              $("#suggest").text(suggestion.full);
+              $("#suggest").on("click", function() {
+                $("#mailAddress").val(suggestion.full);
+                $(this).hide();
+              });
+            }
+          });
+        });
 
     });
 
