@@ -1,5 +1,7 @@
 package jp.co.ha.web.controller;
 
+import org.springframework.ui.Model;
+
 import jp.co.ha.web.view.BaseView;
 
 /**
@@ -18,6 +20,21 @@ public interface BaseWebController extends BaseController {
      * @return View名
      */
     default String getView(BaseView view) {
+        return view.getName();
+    }
+
+    /**
+     * viewを返す
+     *
+     * @param model
+     *     {@linkplain Model}
+     * @param view
+     *     BaseView
+     * @return View名
+     */
+    default String getView(Model model, BaseView view) {
+        model.addAttribute("breadcrumbList",
+                view.getBreadcrumbView().getBreadcrumbList());
         return view.getName();
     }
 

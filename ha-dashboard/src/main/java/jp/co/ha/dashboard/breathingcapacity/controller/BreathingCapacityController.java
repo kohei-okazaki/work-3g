@@ -52,12 +52,14 @@ public class BreathingCapacityController implements BaseWebController {
 
     /**
      * 肺活量計算前画面
-     *
+     * 
+     * @param model
+     *     {@linkplain Model}
      * @return 肺活量計算画面
      */
     @GetMapping("/index")
-    public String index() {
-        return getView(DashboardView.BREATHING_CAPACITY_CALC);
+    public String index(Model model) {
+        return getView(model, DashboardView.BREATHING_CAPACITY_CALC);
     }
 
     /**
@@ -80,7 +82,7 @@ public class BreathingCapacityController implements BaseWebController {
             BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(DashboardView.BREATHING_CAPACITY_CALC);
+            return getView(model, DashboardView.BREATHING_CAPACITY_CALC);
         }
 
         // DTOに変換
@@ -95,7 +97,7 @@ public class BreathingCapacityController implements BaseWebController {
                 .getValue(request.getSession(), "seqUserId", Integer.class).get());
         model.addAttribute("calcResult", calcResult);
 
-        return getView(DashboardView.BREATHING_CAPACITY_CALC);
+        return getView(model, DashboardView.BREATHING_CAPACITY_CALC);
     }
 
 }

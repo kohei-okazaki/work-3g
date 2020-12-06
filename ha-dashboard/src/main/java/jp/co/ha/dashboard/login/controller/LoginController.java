@@ -174,7 +174,7 @@ public class LoginController implements BaseWebController {
             return graphModel;
         });
 
-        return getView(DashboardView.TOP);
+        return getView(model, DashboardView.TOP);
 
     }
 
@@ -217,6 +217,6 @@ public class LoginController implements BaseWebController {
 
             return graphModel;
         });
-        return getView(DashboardView.TOP);
+        return getView(model, DashboardView.TOP);
     }
 }

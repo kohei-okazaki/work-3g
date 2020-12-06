@@ -92,7 +92,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
-        return getView(DashboardView.HEALTH_INFO_INPUT);
+        return getView(model, DashboardView.HEALTH_INFO_INPUT);
     }
 
     @Override
@@ -103,13 +103,13 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 
         if (result.hasErrors()) {
             // バリエーションエラーの場合
-            return getView(DashboardView.HEALTH_INFO_INPUT);
+            return getView(model, DashboardView.HEALTH_INFO_INPUT);
         }
 
         // sessionに健康情報Form情報を保持
         sessionComponent.setValue(request.getSession(), "healthInfoForm", form);
 
-        return getView(DashboardView.HEALTH_INFO_CONFIRM);
+        return getView(model, DashboardView.HEALTH_INFO_CONFIRM);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         sessionComponent.setValue(request.getSession(), "healthInfoForm",
                 healthInfoForm);
 
-        return getView(DashboardView.HEALTH_INFO_COMPLETE);
+        return getView(model, DashboardView.HEALTH_INFO_COMPLETE);
     }
 
     /**

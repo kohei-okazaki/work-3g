@@ -53,11 +53,13 @@ public class CalorieCalcController implements BaseWebController {
     /**
      * カロリー計算前画面
      *
+     * @param model
+     *     {@linkplain Model}
      * @return カロリー計算画面
      */
     @GetMapping("/index")
-    public String index() {
-        return getView(DashboardView.CALORIE_CALC);
+    public String index(Model model) {
+        return getView(model, DashboardView.CALORIE_CALC);
     }
 
     /**
@@ -80,7 +82,7 @@ public class CalorieCalcController implements BaseWebController {
             HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(DashboardView.CALORIE_CALC);
+            return getView(model, DashboardView.CALORIE_CALC);
         }
 
         // DTOに変換
@@ -95,6 +97,6 @@ public class CalorieCalcController implements BaseWebController {
                 .getValue(request.getSession(), "seqUserId", Integer.class).get());
         model.addAttribute("calcResult", calcResult);
 
-        return getView(DashboardView.CALORIE_CALC);
+        return getView(model, DashboardView.CALORIE_CALC);
     }
 }
