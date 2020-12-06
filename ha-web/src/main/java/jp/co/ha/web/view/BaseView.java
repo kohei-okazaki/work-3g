@@ -1,5 +1,7 @@
 package jp.co.ha.web.view;
 
+import jp.co.ha.common.util.BreadcrumbView;
+
 /**
  * ViewEnumの基底インターフェース<br>
  * すべてのViewEnumはこのインターフェースを継承すること
@@ -21,4 +23,11 @@ public interface BaseView {
      * @return リダイレクトパス名
      */
     String getRedirectPath();
+
+    /**
+     * パンくず情報を返す
+     *
+     * @return パンくず情報
+     */
+    BreadcrumbView getBreadcrumbView();
 }

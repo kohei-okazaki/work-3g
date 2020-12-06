@@ -76,7 +76,7 @@ public class HeathInfoRefDetailController implements BaseWebController {
         } else {
             model.addAttribute("errorMessage", "健康情報IDの指定が不正なため、健康情報がありません。");
         }
-        return getView(DashboardView.HEALTH_INFO_REF_DETAIL);
+        return getView(model, DashboardView.HEALTH_INFO_REF_DETAIL);
     }
 
 }
