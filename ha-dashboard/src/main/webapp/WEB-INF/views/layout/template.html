@@ -40,7 +40,16 @@
 <body>
   <div class="wrap">
     <div th:replace="layout/header.html"></div>
-    <br><br><br><br><br><br>
+    <br><br><br><br><br>
+
+    <nav aria-label="パンくずリスト" th:if="${breadcrumbList != null && breadcrumbList.size() != 0}">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page" th:each="breadcrumb : ${breadcrumbList}">
+          <a th:href="@{${breadcrumb.url}}" th:text="${breadcrumb.viewName}"></a>
+        </li>
+      </ol>
+    </nav>
+
     <div th:replace="${body}"></div>
     <div class="push"></div>
   </div><!-- /.wrap -->

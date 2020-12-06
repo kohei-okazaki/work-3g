@@ -82,7 +82,7 @@ public class AccountSettingController
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
-        return getView(DashboardView.ACCOUNT_SETTING_INPUT);
+        return getView(model, DashboardView.ACCOUNT_SETTING_INPUT);
     }
 
     @Override
@@ -92,13 +92,13 @@ public class AccountSettingController
             BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(DashboardView.ACCOUNT_SETTING_INPUT);
+            return getView(model, DashboardView.ACCOUNT_SETTING_INPUT);
         }
 
         // sessionにアカウント設定form情報を保持
         sessionComponent.setValue(request.getSession(), "accountSettingForm", form);
 
-        return getView(DashboardView.ACCOUNT_SETTING_CONFIRM);
+        return getView(model, DashboardView.ACCOUNT_SETTING_CONFIRM);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class AccountSettingController
 
         sessionComponent.removeValue(request.getSession(), "accountSettingForm");
 
-        return getView(DashboardView.ACCOUNT_SETTING_COMPLETE);
+        return getView(model, DashboardView.ACCOUNT_SETTING_COMPLETE);
     }
 
 }
