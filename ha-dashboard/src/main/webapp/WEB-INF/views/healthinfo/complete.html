@@ -49,7 +49,7 @@
                 <form th:action="@{/healthinfo/exceldownload}" method="get" th:object="${healthInfoForm}">
                   <input type="hidden" th:field="*{seqHealthInfoId}" />
                   <div>
-                    <input class="menuicon" type="image" src="../resources/image/icon_xlsx.png" th:src="@{/resources/image/icon_xlsx.png}" />
+                    <input class="menuicon" type="image" th:src="@{/resources/image/icon_xlsx.png}" />
                   </div>
                 </form>
               </td>
@@ -58,7 +58,7 @@
                 <form th:action="@{/healthinfo/csvdownload}" method="get" th:object="${healthInfoForm}">
                   <input type="hidden" th:field="*{seqHealthInfoId}" />
                   <div>
-                    <input class="menuicon" type="image" src="../resources/image/icon_csv.png" th:src="@{/resources/image/icon_csv.png}" />
+                    <input class="menuicon" type="image" th:src="@{/resources/image/icon_csv.png}" />
                   </div>
                 </form>
               </td>

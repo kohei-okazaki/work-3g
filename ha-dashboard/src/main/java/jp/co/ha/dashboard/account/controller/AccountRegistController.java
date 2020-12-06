@@ -64,7 +64,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
     @NonAuth
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
-        return getView(DashboardView.ACCOUNT_REGIST_INPUT);
+        return getView(model, DashboardView.ACCOUNT_REGIST_INPUT);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
             BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(DashboardView.ACCOUNT_REGIST_INPUT);
+            return getView(model, DashboardView.ACCOUNT_REGIST_INPUT);
         }
 
         if (accountSearchService.isExistByMailAddress(form.getMailAddress())) {
@@ -87,7 +87,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         // sessionにアカウント登録Form情報を保持
         sessionComponent.setValue(request.getSession(), "accountRegistForm", form);
 
-        return getView(DashboardView.ACCOUNT_REGIST_CONFIRM);
+        return getView(model, DashboardView.ACCOUNT_REGIST_CONFIRM);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
         sessionComponent.removeValue(request.getSession(), "accountRegistForm");
 
-        return getView(DashboardView.ACCOUNT_REGIST_COMPLETE);
+        return getView(model, DashboardView.ACCOUNT_REGIST_COMPLETE);
     }
 
 }

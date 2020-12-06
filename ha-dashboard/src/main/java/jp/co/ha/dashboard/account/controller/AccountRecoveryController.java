@@ -118,7 +118,7 @@ public class AccountRecoveryController implements BaseWebController {
         // メールアドレスを入力させるためフラグをtrueに
         model.addAttribute("isInputMailAddress", true);
 
-        return getView(DashboardView.ACCOUNT_RECOVERY_INDEX);
+        return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
     }
 
     /**
@@ -141,7 +141,7 @@ public class AccountRecoveryController implements BaseWebController {
 
         if (result.hasErrors()) {
             // 妥当性チェックエラーの場合
-            return getView(DashboardView.ACCOUNT_RECOVERY_INDEX);
+            return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
         }
 
         // アカウント情報検索
@@ -169,7 +169,7 @@ public class AccountRecoveryController implements BaseWebController {
         // メールを送信したためフラグをtrueに
         model.addAttribute("isSendMailAddress", true);
 
-        return getView(DashboardView.ACCOUNT_RECOVERY_INDEX);
+        return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
     }
 
     /**
@@ -210,7 +210,7 @@ public class AccountRecoveryController implements BaseWebController {
 
         model.addAttribute("account", account);
 
-        return getView(DashboardView.ACCOUNT_RECOVERY_EDIT);
+        return getView(model, DashboardView.ACCOUNT_RECOVERY_EDIT);
     }
 
     /**
@@ -239,10 +239,10 @@ public class AccountRecoveryController implements BaseWebController {
         if (result.hasErrors()) {
             // 妥当性チェックエラー
             LOG.warn(result.getFieldErrors().toString());
-            return getView(DashboardView.ACCOUNT_RECOVERY_EDIT);
+            return getView(model, DashboardView.ACCOUNT_RECOVERY_EDIT);
         } else if (!form.getPassword().equals(form.getConfirmPassword())) {
             model.addAttribute("errorMessage", "パスワードと確認用パスワードが一致しません");
-            return getView(DashboardView.ACCOUNT_RECOVERY_EDIT);
+            return getView(model, DashboardView.ACCOUNT_RECOVERY_EDIT);
         }
 
         // アカウント情報検索
@@ -250,7 +250,7 @@ public class AccountRecoveryController implements BaseWebController {
 
         model.addAttribute("account", account);
 
-        return getView(DashboardView.ACCOUNT_RECOVERY_CONFIRM);
+        return getView(model, DashboardView.ACCOUNT_RECOVERY_CONFIRM);
     }
 
     /**

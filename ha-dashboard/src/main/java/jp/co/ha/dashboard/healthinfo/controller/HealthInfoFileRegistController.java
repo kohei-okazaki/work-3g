@@ -88,7 +88,7 @@ public class HealthInfoFileRegistController
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
-        return getView(DashboardView.HEALTH_INFO_FILE_INPUT);
+        return getView(model, DashboardView.HEALTH_INFO_FILE_INPUT);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class HealthInfoFileRegistController
 
         if (result.hasErrors()) {
             // validationエラーの場合
-            return getView(DashboardView.HEALTH_INFO_FILE_INPUT);
+            return getView(model, DashboardView.HEALTH_INFO_FILE_INPUT);
         }
 
         Integer seqUserId = sessionComponent
@@ -125,7 +125,7 @@ public class HealthInfoFileRegistController
         model.addAttribute("modelList", modelList);
         model.addAttribute("count", modelList.size());
 
-        return getView(DashboardView.HEALTH_INFO_FILE_CONFIRM);
+        return getView(model, DashboardView.HEALTH_INFO_FILE_CONFIRM);
     }
 
     @Override
@@ -165,7 +165,7 @@ public class HealthInfoFileRegistController
             // TODO DB登録成功時、S3から登録ファイルを削除
         }
 
-        return getView(DashboardView.HEALTH_INFO_FILE_COMPLETE);
+        return getView(model, DashboardView.HEALTH_INFO_FILE_COMPLETE);
     }
 
 }

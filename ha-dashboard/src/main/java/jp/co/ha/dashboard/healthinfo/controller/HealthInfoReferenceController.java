@@ -125,7 +125,7 @@ public class HealthInfoReferenceController implements BaseWebController {
     public String index(Model model) {
         // 検索処理実行フラグを設定
         model.addAttribute("isRefered", false);
-        return getView(DashboardView.HEALTH_INFO_REFERNCE);
+        return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
     }
 
     /**
@@ -152,7 +152,7 @@ public class HealthInfoReferenceController implements BaseWebController {
             throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(DashboardView.HEALTH_INFO_REFERNCE);
+            return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
         }
 
         // ページング情報を取得( 1ページあたりの表示件数は設定ファイルより取得)
@@ -208,7 +208,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         // sessionに検索条件を設定
         sessionComponent.setValue(request.getSession(), "healthInfoReferenceDto", dto);
 
-        return getView(DashboardView.HEALTH_INFO_REFERNCE);
+        return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
     }
 
     /**

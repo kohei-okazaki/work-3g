@@ -62,7 +62,7 @@ public class NewsController implements BaseWebController {
         model.addAttribute("newsList", newsList);
         model.addAttribute("systemConfig", systemConfig);
 
-        return getView(DashboardView.NEWS_LIST);
+        return getView(model, DashboardView.NEWS_LIST);
     }
 
 }
