@@ -11,7 +11,7 @@
 <body>
 
   <div class="px-4">
-    <div class="container border col-7">
+    <div class="container border col-7 shadow">
 
       <!--/* アカウント回復メール送信前ここから */-->
       <form id="accountRecoveryMailAddressInputForm" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${accountRecoveryMailAddressInputForm}" th:if="${isInputMailAddress == true}">

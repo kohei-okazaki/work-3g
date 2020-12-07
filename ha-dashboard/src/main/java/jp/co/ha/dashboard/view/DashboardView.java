@@ -46,13 +46,13 @@ public enum DashboardView implements BaseView {
 
     /** アカウント作成入力画面 */
     ACCOUNT_REGIST_INPUT("accountregist/input", "/accountregist/input",
-            DashboardBreadcrumbViewFactory.getAccountSetting()),
+            DashboardBreadcrumbViewFactory.getAccountRegist()),
     /** アカウント作成入力確認画面 */
     ACCOUNT_REGIST_CONFIRM("accountregist/confirm", "/accountregist/confirm",
-            DashboardBreadcrumbViewFactory.getAccountSetting()),
+            DashboardBreadcrumbViewFactory.getAccountRegist()),
     /** アカウント作成入力完了画面 */
     ACCOUNT_REGIST_COMPLETE("accountregist/complete", "/accountregist/complete",
-            DashboardBreadcrumbViewFactory.getAccountSetting()),
+            DashboardBreadcrumbViewFactory.getAccountRegist()),
 
     /** アカウント回復Index画面 */
     ACCOUNT_RECOVERY_INDEX("accountrecovery/index", "/accountrecovery/index",
