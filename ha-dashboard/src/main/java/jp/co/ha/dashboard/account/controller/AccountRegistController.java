@@ -81,7 +81,7 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
         if (accountSearchService.isExistByMailAddress(form.getMailAddress())) {
             model.addAttribute("errorMessage", "指定されたメールアドレスは既に登録されています");
             LOG.warn("指定されたメールアドレスは既に登録されています. mail_address:" + form.getMailAddress());
-            return getView(DashboardView.ACCOUNT_REGIST_INPUT);
+            return getView(model, DashboardView.ACCOUNT_REGIST_INPUT);
         }
 
         // sessionにアカウント登録Form情報を保持
