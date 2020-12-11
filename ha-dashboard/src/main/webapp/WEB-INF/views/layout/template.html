@@ -34,8 +34,6 @@
 <script th:src="@{/resources/js/lib/list.min.js}"></script>
 <script th:src="@{/resources/js/lib/mprogress.min.js}"></script>
 <script th:src="@{/resources/js/common/common.min.js}"></script>
-<!-- 個別JavaScript -->
-<!-- <th:block th:replace="${scripts}" /> -->
 </head>
 <body>
   <div class="wrap">
@@ -46,8 +44,8 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" th:each="breadcrumb : ${breadcrumbList}">
           <a th:href="@{${breadcrumb.url}}" th:text="${breadcrumb.viewName}"></a>
-        </li>
-      </ol>
+        </li><!-- /.breadcrumb-item active -->
+      </ol><!-- /.breadcrumb -->
     </nav>
 
     <div th:replace="${body}"></div>

@@ -16,7 +16,7 @@
       <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
     </div>
 
-    <div class="container border col-8">
+    <div class="container border col-8 shadow">
       <h2 class="menuTitle">健康情報一括登録確認画面</h2>
 
       <form th:action="@{/healthinfofile/complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">

@@ -14,7 +14,7 @@
     <form th:action="@{'~/accountrecovery/complete/' + ${account.seqUserId}}" method="post" th:object="${accountRecoveryForm}">
       <input type="hidden" th:field="*{mailAddress}" />
       <input type="hidden" th:field="*{password}" />
-      <div class="container border col-7">
+      <div class="container border col-7 shadow">
         <h2 class="menuTitle">パスワード再設定確認</h2>
         <table class="table">
           <tr>
