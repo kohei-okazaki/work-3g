@@ -4,7 +4,7 @@ import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.db.entity.composite.CompositeAccountKey;
 
 /**
- * アカウント情報とメール情報と健康情報ファイル設定の複合Mapper
+ * アカウント情報と健康情報ファイル設定の複合Mapper
  *
  * @version 1.0.0
  */

@@ -16,7 +16,7 @@
     <result column="ENCLOSURE_CHAR_FLAG" jdbcType="VARCHAR" property="enclosureCharFlag" />
   </resultMap>
   <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.composite.CompositeAccountKey" resultMap="BaseResultMap">
-    select
+    SELECT
       <!-- ACCOUNT -->
       AC.SEQ_USER_ID
       , AC.PASSWORD
@@ -30,11 +30,11 @@
       , HF.FOOTER_FLAG
       , HF.MASK_FLAG
       , HF.ENCLOSURE_CHAR_FLAG
-    from
+    FROM
       ACCOUNT AC
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
         ON AC.SEQ_USER_ID = HF.SEQ_USER_ID
-    where
+    WHERE
       AC.SEQ_USER_ID = #{seqUserId,jdbcType=INTEGER}
   </select>
 </mapper>

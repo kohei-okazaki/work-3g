@@ -14,7 +14,10 @@ import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.HealthInfoExample.Criteria;
+import jp.co.ha.db.entity.composite.CompositeHealthInfo;
+import jp.co.ha.db.entity.composite.CompositeHealthInfoKey;
 import jp.co.ha.db.mapper.HealthInfoMapper;
+import jp.co.ha.db.mapper.composite.CompositeHealthInfoMapper;
 
 /**
  * 健康情報検索サービスインターフェース実装クラス
@@ -27,6 +30,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     /** HealthInfoMapper */
     @Autowired
     private HealthInfoMapper mapper;
+    /** CompositeHealthInfoMapper */
+    @Autowired
+    private CompositeHealthInfoMapper compositeHealthInfoMapper;
 
     @Select
     @Override
@@ -150,6 +156,19 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         // ソート処理
         example.setOrderByClause(selectOption.getOrderBy());
         return mapper.selectByExample(example);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public CompositeHealthInfo findHealthInfoDetail(Integer seqHealthInfoId,
+            Integer seqUserId) {
+
+        CompositeHealthInfoKey key = new CompositeHealthInfoKey();
+        key.setSeqHealthInfoId(seqHealthInfoId);
+        key.setSeqUserId(seqUserId);
+
+        return compositeHealthInfoMapper.selectByPrimaryKey(key);
     }
 
 }
