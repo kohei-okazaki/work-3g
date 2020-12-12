@@ -5,6 +5,7 @@ import java.util.List;
 
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.composite.CompositeHealthInfo;
 
 /**
  * 健康情報検索サービスインターフェース
@@ -106,4 +107,14 @@ public interface HealthInfoSearchService {
     List<HealthInfo> findByBetweenHealthInfoRegDate(LocalDateTime fromHealthInfoRegDate,
             LocalDateTime toHealthInfoRegDate, SelectOption selectOption);
 
+    /**
+     * 指定された健康情報IDとユーザIDより健康情報とBMI範囲マスタの複合Entityを検索する
+     *
+     * @param seqHealthInfoId
+     *     健康情報ID
+     * @param seqUserId
+     *     ユーザID
+     * @return 健康情報とBMI範囲マスタの複合Entity
+     */
+    CompositeHealthInfo findHealthInfoDetail(Integer seqHealthInfoId, Integer seqUserId);
 }

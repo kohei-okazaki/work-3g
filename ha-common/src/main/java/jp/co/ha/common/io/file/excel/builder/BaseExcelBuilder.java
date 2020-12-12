@@ -53,8 +53,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
     @Override
     @SuppressWarnings("unchecked")
     protected void buildExcelDocument(Map<String, Object> model, Workbook workbook,
-            HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         init(response);
         String sheetName = getSheetName(

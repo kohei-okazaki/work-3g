@@ -135,7 +135,7 @@ public class ExcelConfig {
     /**
      * charsetを返す
      *
-     * @return charset Charset
+     * @return charset
      */
     public Charset getCharsetType() {
         return CHARSET;

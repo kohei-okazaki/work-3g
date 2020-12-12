@@ -2,11 +2,9 @@ package jp.co.ha.dashboard.healthinfo.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -18,7 +16,6 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -60,9 +57,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
-    /** messageSource */
-    @Autowired
-    private MessageSource messageSource;
     /** 健康情報関連プロパティ */
     @Autowired
     private HealthInfoProperties prop;
@@ -71,7 +65,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     public void addModel(Model model, HealthInfoDto dto, HealthInfo lastHealthInfo) {
         model.addAttribute("beforeWeight", lastHealthInfo.getWeight());
         model.addAttribute("diffWeight", getDiffWeight(dto, lastHealthInfo));
-        model.addAttribute("resultMessage", getDiffMessage(dto, lastHealthInfo));
+        model.addAttribute("resultMessage", getDiffStatus(dto, lastHealthInfo));
     }
 
     @Override
@@ -137,18 +131,17 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     }
 
     /**
-     * 体重差メッセージを返す
+     * 体重差より健康情報ステータスを返す
      *
      * @param dto
      *     健康情報DTO
      * @param healthInfo
      *     健康情報
-     * @return 体重差メッセージ
+     * @return 健康情報ステータス
      */
-    private String getDiffMessage(HealthInfoDto dto, HealthInfo healthInfo) {
-        HealthInfoStatus status = healthInfoCalcService
-                .getHealthInfoStatus(dto.getWeight(), healthInfo.getWeight());
-        return messageSource.getMessage(status.getMessage(), null, Locale.getDefault());
+    private String getDiffStatus(HealthInfoDto dto, HealthInfo healthInfo) {
+        return healthInfoCalcService
+                .getHealthInfoStatus(dto.getWeight(), healthInfo.getWeight()).getValue();
     }
 
     /**

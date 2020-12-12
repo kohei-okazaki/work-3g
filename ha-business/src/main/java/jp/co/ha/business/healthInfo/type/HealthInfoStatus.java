@@ -10,42 +10,28 @@ import jp.co.ha.common.type.BaseEnum;
 public enum HealthInfoStatus implements BaseEnum {
 
     /** 減少 */
-    DOWN("10", "healthInfoStatus.down"),
+    DOWN("10"),
     /** 変化なし */
-    EVEN("20", "healthInfoStatus.even"),
+    EVEN("20"),
     /** 増加 */
-    INCREASE("30", "healthInfoStatus.increase");
+    INCREASE("30");
 
     /** 値 */
     private String value;
-    /** メッセージ */
-    private String message;
 
     /**
      * コンストラクタ
      *
      * @param value
      *     値
-     * @param message
-     *     メッセージ
      */
-    private HealthInfoStatus(String value, String message) {
+    private HealthInfoStatus(String value) {
         this.value = value;
-        this.message = message;
     }
 
     @Override
     public String getValue() {
         return value;
-    }
-
-    /**
-     * messageを返す
-     *
-     * @return message
-     */
-    public String getMessage() {
-        return message;
     }
 
     /**

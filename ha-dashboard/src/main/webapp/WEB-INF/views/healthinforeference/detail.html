@@ -45,7 +45,7 @@
         </tr>
         <tr>
           <th th:text="#{healthInfoStatus}"></th>
-          <td th:text="'前回と比べて' + #{${detail.healthInfoStatusMessage}}"></td>
+          <td th:text="'前回と比べて' + #{'healthInfoStatus.' + ${detail.healthInfoStatus}}"></td>
         </tr>
         <tr>
           <th th:text="#{healthInfoRegDate}"></th>
@@ -56,8 +56,8 @@
           <td th:text="${detail.seqBmiRangeMtId}"></td>
         </tr>
         <tr>
-          <th th:text="#{bmiRangeIdComment}"></th>
-          <td th:text="#{'overweightMessage.' + ${detail.overweightMessage}}"></td>
+          <th th:text="#{overWeightStatus}"></th>
+          <td th:text="#{'overWeightStatusMessage.' + ${detail.overWeightStatus}}"></td>
         </tr>
       </table><!-- /.table table-striped -->
       <br>

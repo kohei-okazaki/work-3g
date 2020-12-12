@@ -1,72 +1,47 @@
-package jp.co.ha.business.dto;
+package jp.co.ha.db.entity.composite;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+import jp.co.ha.common.log.annotation.Ignore;
+import jp.co.ha.common.log.annotation.Mask;
 
 /**
- * 健康情報照会詳細DTO
+ * 健康情報とBMI範囲マスタの複合Entity
  *
  * @version 1.0.0
  */
-public class HealthInfoRefDetailDto {
+public class CompositeHealthInfo extends CompositeHealthInfoKey implements Serializable {
 
-    /** 健康情報ID */
-    private Integer seqHealthInfoId;
-    /** ユーザID */
-    private Integer seqUserId;
+    /** serialVersionUID */
+    @Ignore
+    private static final long serialVersionUID = -7954105828273613973L;
+
     /** 身長 */
+    @Mask
     private BigDecimal height;
     /** 体重 */
+    @Mask
     private BigDecimal weight;
     /** BMI */
+    @Mask
     private BigDecimal bmi;
     /** 標準体重 */
+    @Mask
     private BigDecimal standardWeight;
     /** 健康情報ステータス */
     private String healthInfoStatus;
     /** 健康情報登録日時 */
-    private String healthInfoRegDate;
+    private LocalDateTime healthInfoRegDate;
     /** BMI範囲マスタID */
     private Integer seqBmiRangeMtId;
+    /** 範囲下限 */
+    private Integer rangeMin;
+    /** 範囲上限 */
+    private Integer rangeMax;
     /** 肥満度ステータス */
     private String overWeightStatus;
-
-    /**
-     * seqHealthInfoIdを返す
-     *
-     * @return seqHealthInfoId
-     */
-    public Integer getSeqHealthInfoId() {
-        return seqHealthInfoId;
-    }
-
-    /**
-     * seqHealthInfoIdを設定する
-     *
-     * @param seqHealthInfoId
-     *     健康情報ID
-     */
-    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
-        this.seqHealthInfoId = seqHealthInfoId;
-    }
-
-    /**
-     * seqUserIdを返す
-     *
-     * @return seqUserId
-     */
-    public Integer getSeqUserId() {
-        return seqUserId;
-    }
-
-    /**
-     * seqUserIdを設定する
-     *
-     * @param seqUserId
-     *     ユーザID
-     */
-    public void setSeqUserId(Integer seqUserId) {
-        this.seqUserId = seqUserId;
-    }
 
     /**
      * heightを返す
@@ -168,7 +143,7 @@ public class HealthInfoRefDetailDto {
      *
      * @return healthInfoRegDate
      */
-    public String getHealthInfoRegDate() {
+    public LocalDateTime getHealthInfoRegDate() {
         return healthInfoRegDate;
     }
 
@@ -178,7 +153,7 @@ public class HealthInfoRefDetailDto {
      * @param healthInfoRegDate
      *     健康情報登録日時
      */
-    public void setHealthInfoRegDate(String healthInfoRegDate) {
+    public void setHealthInfoRegDate(LocalDateTime healthInfoRegDate) {
         this.healthInfoRegDate = healthInfoRegDate;
     }
 
@@ -202,6 +177,44 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
+     * rangeMinを返す
+     *
+     * @return rangeMin
+     */
+    public Integer getRangeMin() {
+        return rangeMin;
+    }
+
+    /**
+     * rangeMinを設定する
+     *
+     * @param rangeMin
+     *     範囲下限
+     */
+    public void setRangeMin(Integer rangeMin) {
+        this.rangeMin = rangeMin;
+    }
+
+    /**
+     * rangeMaxを返す
+     *
+     * @return rangeMax
+     */
+    public Integer getRangeMax() {
+        return rangeMax;
+    }
+
+    /**
+     * rangeMaxを設定する
+     *
+     * @param rangeMax
+     *     範囲上限
+     */
+    public void setRangeMax(Integer rangeMax) {
+        this.rangeMax = rangeMax;
+    }
+
+    /**
      * overWeightStatusを返す
      *
      * @return overWeightStatus
@@ -214,7 +227,7 @@ public class HealthInfoRefDetailDto {
      * overWeightStatusを設定する
      *
      * @param overWeightStatus
-     *     肥満度メッセージ
+     *     肥満度ステータス
      */
     public void setOverWeightStatus(String overWeightStatus) {
         this.overWeightStatus = overWeightStatus;
