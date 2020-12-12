@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ha.db.mapper.composite.CompositeHealthInfoMapper">
+  <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.composite.CompositeHealthInfo">
+    <id column="SEQ_HEALTH_INFO_ID" jdbcType="INTEGER" property="seqHealthInfoId" />
+    <id column="SEQ_USER_ID" jdbcType="INTEGER" property="seqUserId" />
+    <result column="HEIGHT" jdbcType="DECIMAL" property="height" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="BMI" jdbcType="DECIMAL" property="bmi" />
+    <result column="STANDARD_WEIGHT" jdbcType="DECIMAL" property="standardWeight" />
+    <result column="HEALTH_INFO_STATUS" jdbcType="VARCHAR" property="healthInfoStatus" />
+    <result column="HEALTH_INFO_REG_DATE" jdbcType="TIMESTAMP" property="healthInfoRegDate" />
+    <result column="SEQ_BMI_RANGE_MT_ID" jdbcType="INTEGER" property="seqBmiRangeMtId" />
+    <result column="RANGE_MIN" jdbcType="INTEGER" property="rangeMin" />
+    <result column="RANGE_MAX" jdbcType="INTEGER" property="rangeMax" />
+    <result column="OVER_WEIGHT_STATUS" jdbcType="VARCHAR" property="overWeightStatus" />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.composite.CompositeHealthInfoKey" resultMap="BaseResultMap">
+    SELECT
+      <!-- HEALTH_INFO -->
+      HI.SEQ_HEALTH_INFO_ID
+      , HI.SEQ_USER_ID
+      , HI.HEIGHT
+      , HI.WEIGHT
+      , HI.BMI
+      , HI.STANDARD_WEIGHT
+      , HI.HEALTH_INFO_STATUS
+      , HI.HEALTH_INFO_REG_DATE
+      , HI.SEQ_BMI_RANGE_MT_ID
+      <!-- BMI_RANGE_MT -->
+      , BRM.RANGE_MIN
+      , BRM.RANGE_MAX
+      , BRM.OVER_WEIGHT_STATUS
+    FROM
+      HEALTH_INFO HI
+      LEFT OUTER JOIN BMI_RANGE_MT BRM
+        ON HI.SEQ_BMI_RANGE_MT_ID = BRM.SEQ_BMI_RANGE_MT_ID
+    WHERE
+      HI.SEQ_USER_ID = #{seqUserId,jdbcType=INTEGER}
+      AND HI.SEQ_HEALTH_INFO_ID = #{seqHealthInfoId,jdbcType=INTEGER}
+  </select>
+</mapper>
