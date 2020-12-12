@@ -20,7 +20,7 @@
       </div>
 
       <div th:if="${!isFirstReg}">
-        <p th:text="'前回より' + ${diffWeight} + 'kg ' + ${resultMessage}" />
+        <p th:text="'前回より' + ${diffWeight} + 'kg ' + #{'healthInfoStatus.' + ${resultMessage}}" />
         <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
       </div>
 
