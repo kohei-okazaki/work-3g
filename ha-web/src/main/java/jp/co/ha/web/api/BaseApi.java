@@ -135,9 +135,9 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             bindErrorInfo(response);
             throw new ApiException(CommonErrorCode.API_500_CONNECT_ERROR,
                     "対向サーバに問題があります. HttpStatusCode=" + code.value(), e);
-        } catch (Exception e) {
+        } catch (URISyntaxException e) {
             bindErrorInfo(response);
-            LOG.error("APIの通信に失敗しました.", e);
+            throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "URLが不正です.", e);
         } finally {
             LOG.infoRes(response);
             LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code.value());
