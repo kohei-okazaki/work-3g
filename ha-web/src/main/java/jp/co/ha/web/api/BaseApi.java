@@ -75,7 +75,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
     public Rs callApi(Rq request, ApiConnectInfo apiConnectInfo) throws BaseException {
 
         Rs response = getResponse();
-        HttpStatus code = HttpStatus.OK;
+        HttpStatus code = null;
 
         try {
 
@@ -128,19 +128,21 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         } catch (HttpClientErrorException e) {
             code = e.getStatusCode();
             bindErrorInfo(response);
-            throw new ApiException(CommonErrorCode.API_400_CONNECT_ERROR,
-                    "APIの送信に失敗しました. HttpStatusCode=" + code.value(), e);
+            // throw new ApiException(CommonErrorCode.API_400_CONNECT_ERROR,
+            // "APIの送信に失敗しました. HttpStatusCode=" + code.value(), e);
         } catch (HttpServerErrorException e) {
             code = e.getStatusCode();
             bindErrorInfo(response);
-            throw new ApiException(CommonErrorCode.API_500_CONNECT_ERROR,
-                    "対向サーバに問題があります. HttpStatusCode=" + code.value(), e);
-        } catch (URISyntaxException e) {
+            // throw new ApiException(CommonErrorCode.API_500_CONNECT_ERROR,
+            // "対向サーバに問題があります. HttpStatusCode=" + code.value(), e);
+        } catch (Exception e) {
             bindErrorInfo(response);
             throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "URLが不正です.", e);
         } finally {
             LOG.infoRes(response);
-            LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code.value());
+            Integer intCode = (code == null) ? null : code.value();
+            LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + intCode);
+            apiConnectInfo.setHttpStatus(intCode);
         }
 
         return response;

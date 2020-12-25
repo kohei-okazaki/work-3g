@@ -3,11 +3,15 @@ package jp.co.ha.db.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import jp.co.ha.common.db.annotation.Entity;
+import jp.co.ha.common.log.annotation.Ignore;
+
 /**
  * API通信情報Entity
  *
  * @version 1.0.0
  */
+@Entity
 public class ApiCommunicationData extends ApiCommunicationDataKey
         implements Serializable {
 
@@ -98,6 +102,7 @@ public class ApiCommunicationData extends ApiCommunicationDataKey
      *
      * @mbg.generated Fri Dec 25 00:28:09 GMT+09:00 2020
      */
+    @Ignore
     private static final long serialVersionUID = 1L;
 
     /**

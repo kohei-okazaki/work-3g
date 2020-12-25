@@ -159,6 +159,9 @@
       #{seqUserId,jdbcType=INTEGER}, #{httpStatus,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR},
       #{detail,jdbcType=VARCHAR}, #{requestDate,jdbcType=TIMESTAMP}, #{responseDate,jdbcType=TIMESTAMP},
       #{updateDate,jdbcType=TIMESTAMP}, #{regDate,jdbcType=TIMESTAMP})
+      <selectKey resultType="INTEGER" keyProperty="seqApiCommunicationDataId" order="AFTER">
+        select @@IDENTITY
+      </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="jp.co.ha.db.entity.ApiCommunicationData">
     <!--

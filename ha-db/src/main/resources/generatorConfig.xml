@@ -21,6 +21,7 @@
                     password="admin" />
 
     <javaTypeResolver>
+      <!-- MyBatisの日付関係をLocalDateTimeなどで定義するため -->
       <property name="useJSR310Types" value="true" />
     </javaTypeResolver>
 

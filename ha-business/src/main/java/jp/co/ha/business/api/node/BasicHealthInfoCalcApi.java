@@ -42,7 +42,7 @@ public class BasicHealthInfoCalcApi
     @Override
     public void bindErrorInfo(BasicHealthInfoCalcResponse response) {
         response.setResult(Result.FAILURE);
-        response.setDetail("基礎健康情報計算APIに失敗しました");
+        response.setDetail(TYPE.getName() + "に失敗しました");
     }
 
 }

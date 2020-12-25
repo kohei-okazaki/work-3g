@@ -42,7 +42,7 @@ public class BreathingCapacityCalcApi
     @Override
     public void bindErrorInfo(BreathingCapacityCalcResponse response) {
         response.setResult(Result.FAILURE);
-        response.setDetail("肺活量計算APIに失敗しました");
+        response.setDetail(TYPE.getName() + "に失敗しました");
     }
 
 }

@@ -2,6 +2,7 @@ package jp.co.ha.web.form;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -23,9 +24,11 @@ public class BaseRestApiResponse implements BaseForm {
     private ResultType resultType = ResultType.SUCCESS;
     /** エラー情報 */
     @JsonProperty("error")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ErrorInfo errorInfo;
     /** アカウント情報 */
     @JsonProperty("account")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Account account;
 
     /**

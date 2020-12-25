@@ -41,7 +41,7 @@ public class CalorieCalcApi extends BaseApi<CalorieCalcRequest, CalorieCalcRespo
     @Override
     public void bindErrorInfo(CalorieCalcResponse response) {
         response.setResult(Result.FAILURE);
-        response.setDetail("カロリー計算APIに失敗しました");
+        response.setDetail(TYPE.getName() + "に失敗しました");
     }
 
 }

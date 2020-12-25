@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.log.annotation.Mask;
@@ -20,6 +21,7 @@ public class HealthInfoRegistResponse extends BaseRestApiResponse
 
     /** 健康情報 */
     @JsonProperty("healthInfo")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private HealthInfo healthInfo;
 
     /**

@@ -13,8 +13,8 @@ import jp.co.ha.web.form.BaseApiResponse;
 public class TokenResponse extends BaseNodeResponse implements BaseApiResponse {
 
     /** トークン */
-    @JsonProperty("token")
     @Mask
+    @JsonProperty("token")
     private String token;
 
     /**

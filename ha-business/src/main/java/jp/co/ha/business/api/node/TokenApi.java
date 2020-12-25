@@ -38,7 +38,7 @@ public class TokenApi extends BaseApi<TokenRequest, TokenResponse> {
     @Override
     public void bindErrorInfo(TokenResponse response) {
         response.setResult(Result.FAILURE);
-        response.setDetail("Token発行APIに失敗しました");
+        response.setDetail(TYPE.getName() + "に失敗しました");
     }
 
 }

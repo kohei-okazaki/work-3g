@@ -15,13 +15,16 @@ import jp.co.ha.business.api.node.NodeApiType;
 import jp.co.ha.business.api.node.TokenApi;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
 import jp.co.ha.business.api.node.request.TokenRequest;
+import jp.co.ha.business.api.node.response.BaseNodeResponse;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
 import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
@@ -36,6 +39,7 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.web.api.ApiConnectInfo;
@@ -62,6 +66,12 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
+    /** API通信情報作成サービス */
+    @Autowired
+    private ApiCommunicationDataCreateService apiCommunicationDataCreateService;
+    /** API通信情報更新サービス */
+    @Autowired
+    private ApiCommunicationDataUpdateService apiCommunicationDataUpdateService;
     /** トークン発行API */
     @Autowired
     private TokenApi tokenApi;
@@ -123,12 +133,19 @@ public class HealthInfoRegistServiceImpl extends CommonService
      */
     private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
 
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = createApiCommunicationData(
+                NodeApiType.TOKEN.getName(), seqUserId);
+
         TokenRequest request = new TokenRequest();
         request.setSeqUserId(seqUserId);
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());
         TokenResponse response = tokenApi.callApi(request, connectInfo);
+
+        // API通信情報を更新
+        updateApiCommunicationData(apiCommunicationData, connectInfo, response);
 
         if (Result.SUCCESS != response.getResult()) {
             // Token発行APIの処理が成功以外の場合
@@ -203,6 +220,10 @@ public class HealthInfoRegistServiceImpl extends CommonService
     private BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
             HealthInfoRegistRequest request, String token) throws BaseException {
 
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = createApiCommunicationData(
+                NodeApiType.BASIC.getName(), null);
+
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
         BeanUtil.copy(request, apiRequest);
 
@@ -214,6 +235,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
         BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);
 
+        // API通信情報を更新
+        updateApiCommunicationData(apiCommunicationData, connectInfo, apiResponse);
+
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合
             throw new ApiException(BusinessErrorCode.BASIC_API_CONNECT_ERROR,
@@ -221,6 +245,49 @@ public class HealthInfoRegistServiceImpl extends CommonService
         }
 
         return apiResponse;
+    }
+
+    /**
+     * API通信情報を登録する
+     *
+     * @param apiName
+     *     API名
+     * @param seqUserId
+     *     ユーザID
+     * @return API通信情報
+     */
+    private ApiCommunicationData createApiCommunicationData(String apiName,
+            Integer seqUserId) {
+
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = new ApiCommunicationData();
+        apiCommunicationData.setApiName(apiName);
+        apiCommunicationData.setSeqUserId(seqUserId);
+        apiCommunicationData.setRequestDate(DateTimeUtil.getSysDate());
+        apiCommunicationDataCreateService.create(apiCommunicationData);
+
+        return apiCommunicationData;
+    }
+
+    /**
+     * API通信情報を更新する
+     *
+     * @param apiCommunicationData
+     *     API通信情報
+     * @param connectInfo
+     *     API接続情報
+     * @param response
+     *     APIレスポンス情報
+     */
+    private void updateApiCommunicationData(ApiCommunicationData apiCommunicationData,
+            ApiConnectInfo connectInfo, BaseNodeResponse response) {
+
+        apiCommunicationData.setHttpStatus(String.valueOf(connectInfo.getHttpStatus()));
+        apiCommunicationData.setResult(response.getResult().getValue());
+        apiCommunicationData.setDetail(response.getDetail());
+        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
+        apiCommunicationDataUpdateService.update(apiCommunicationData);
+
     }
 
 }

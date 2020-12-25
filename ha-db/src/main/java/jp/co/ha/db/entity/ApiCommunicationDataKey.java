@@ -2,6 +2,8 @@ package jp.co.ha.db.entity;
 
 import java.io.Serializable;
 
+import jp.co.ha.common.log.annotation.Ignore;
+
 /**
  * API通信情報のPrimaryKey
  *
@@ -24,6 +26,7 @@ public class ApiCommunicationDataKey implements Serializable {
      *
      * @mbg.generated Fri Dec 25 00:28:09 GMT+09:00 2020
      */
+    @Ignore
     private static final long serialVersionUID = 1L;
 
     /**

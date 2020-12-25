@@ -164,6 +164,11 @@
       <artifactId>jackson-annotations</artifactId>
       <version>${org.jackson-version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>${org.jackson-version}</version>
+    </dependency>
 
     <!-- DB -->
     <dependency>
