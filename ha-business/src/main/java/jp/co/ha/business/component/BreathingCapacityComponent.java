@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.BreathingCapacityCalcApi;
-import jp.co.ha.business.api.node.NodeApiType;
 import jp.co.ha.business.api.node.TokenApi;
 import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
 import jp.co.ha.business.api.node.request.TokenRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
+import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
 import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;

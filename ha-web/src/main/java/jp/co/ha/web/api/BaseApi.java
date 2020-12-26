@@ -149,7 +149,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
     }
 
     /**
-     * Node APIレスポンスクラスを返す
+     * APIレスポンスクラスを返す
      *
      * @return Node APIレスポンス
      */

@@ -1,5 +1,6 @@
-package jp.co.ha.business.api.node;
+package jp.co.ha.business.api.node.type;
 
+import jp.co.ha.business.api.type.ApiNameType;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
@@ -16,30 +17,30 @@ import jp.co.ha.common.type.BaseEnum;
 public enum NodeApiType implements BaseEnum {
 
     /** 基礎健康情報計算API */
-    BASIC("basic", "基礎健康情報計算API"),
+    BASIC("basic", ApiNameType.BASIC),
     /** カロリー計算API */
-    CALORIE("calorie", "カロリー計算API"),
+    CALORIE("calorie", ApiNameType.CALORIE),
     /** 肺活量計算API */
-    BREATHING_CAPACITY("breathing_capacity", "肺活量計算API"),
+    BREATHING_CAPACITY("breathing_capacity", ApiNameType.BREATHING_CAPACITY),
     /** トークン発行API */
-    TOKEN("token", "トークン発行API");
+    TOKEN("token", ApiNameType.TOKEN);
 
     /** 値 */
     private String value;
     /** API名 */
-    private String name;
+    private ApiNameType apiNameType;
 
     /**
      * コンストラクタ
      *
      * @param value
      *     値
-     * @param name
-     *     名前
+     * @param apiNameType
+     *     API名
      */
-    private NodeApiType(String value, String name) {
+    private NodeApiType(String value, ApiNameType apiNameType) {
         this.value = value;
-        this.name = name;
+        this.apiNameType = apiNameType;
     }
 
     @Override
@@ -48,12 +49,12 @@ public enum NodeApiType implements BaseEnum {
     }
 
     /**
-     * nameを返す
+     * apiNameTypeを返す
      *
-     * @return name
+     * @return apiNameType
      */
-    public String getName() {
-        return name;
+    public ApiNameType getApiNameType() {
+        return apiNameType;
     }
 
     /**
