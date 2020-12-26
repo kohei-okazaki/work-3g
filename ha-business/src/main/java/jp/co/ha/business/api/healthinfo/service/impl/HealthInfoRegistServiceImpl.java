@@ -18,8 +18,8 @@ import jp.co.ha.business.api.node.response.BaseNodeResponse;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
-import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
@@ -115,8 +115,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
         {
             HealthInfoRegistResponse.HealthInfo healthInfo = new HealthInfoRegistResponse.HealthInfo();
             BeanUtil.copy(entity, healthInfo);
-            healthInfo.setHealthInfoRegDate(
-                    DateTimeUtil.toDate(entity.getHealthInfoRegDate()));
             response.setHealthInfo(healthInfo);
         }
 

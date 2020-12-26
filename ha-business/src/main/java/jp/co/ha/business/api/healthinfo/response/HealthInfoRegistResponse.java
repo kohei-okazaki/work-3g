@@ -1,11 +1,13 @@
 package jp.co.ha.business.api.healthinfo.response;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.web.form.BaseApiResponse;
@@ -74,8 +76,9 @@ public class HealthInfoRegistResponse extends BaseRestApiResponse
         private String healthInfoStatus;
         /** 健康情報作成日時 */
         @JsonProperty("regDate")
+        @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
-        private Date healthInfoRegDate;
+        private LocalDateTime healthInfoRegDate;
 
         /**
          * seqHealthInfoIdを返す
@@ -196,7 +199,7 @@ public class HealthInfoRegistResponse extends BaseRestApiResponse
          *
          * @return healthInfoRegDate
          */
-        public Date getHealthInfoRegDate() {
+        public LocalDateTime getHealthInfoRegDate() {
             return healthInfoRegDate;
         }
 
@@ -206,7 +209,7 @@ public class HealthInfoRegistResponse extends BaseRestApiResponse
          * @param healthInfoRegDate
          *     健康情報作成日時
          */
-        public void setHealthInfoRegDate(Date healthInfoRegDate) {
+        public void setHealthInfoRegDate(LocalDateTime healthInfoRegDate) {
             this.healthInfoRegDate = healthInfoRegDate;
         }
     }
