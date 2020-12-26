@@ -107,7 +107,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                    "健康情報登録API", request.getSeqUserId());
+                    api.getApiName(), request.getSeqUserId());
 
             HealthInfoRegistResponse response = api.callApi(request, apiConnectInfo);
 

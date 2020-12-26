@@ -95,7 +95,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                    "健康情報登録API", request.getSeqUserId());
+                    registApi.getApiName(), request.getSeqUserId());
 
             HealthInfoRegistResponse response = registApi.callApi(request,
                     apiConnectInfo);

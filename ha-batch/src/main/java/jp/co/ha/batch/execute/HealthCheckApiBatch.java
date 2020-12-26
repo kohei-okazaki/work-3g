@@ -62,7 +62,7 @@ public class HealthCheckApiBatch extends BaseBatch {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                "ヘルスチェックAPI");
+                healthCheckApi.getApiName());
 
         HealthCheckResponse response = healthCheckApi.callApi(new HealthCheckRequest(),
                 apiConnectInfo);

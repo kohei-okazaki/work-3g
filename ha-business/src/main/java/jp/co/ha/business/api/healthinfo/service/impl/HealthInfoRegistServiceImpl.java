@@ -135,7 +135,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                NodeApiType.TOKEN.getName(), seqUserId);
+                tokenApi.getApiName(), seqUserId);
 
         TokenRequest request = new TokenRequest();
         request.setSeqUserId(seqUserId);
@@ -222,7 +222,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                NodeApiType.BASIC.getName(), null);
+                basicHealthInfoCalcApi.getApiName(), request.getSeqUserId());
 
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
         BeanUtil.copy(request, apiRequest);
