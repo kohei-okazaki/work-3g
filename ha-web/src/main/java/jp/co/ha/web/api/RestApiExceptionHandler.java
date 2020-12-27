@@ -57,10 +57,10 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
         // 例外のログレベルからログを出力
         switch (appError.getErrorCode().getLogLevel()) {
         case WARN:
-            LOG.warnRes(response, (Exception) appError);
+            LOG.warnBean(response, (Exception) appError);
             break;
         case ERROR:
-            LOG.errorRes(response, (Exception) appError);
+            LOG.errorBean(response, (Exception) appError);
             break;
         default:
             // WARNとERROR以外は何もしない

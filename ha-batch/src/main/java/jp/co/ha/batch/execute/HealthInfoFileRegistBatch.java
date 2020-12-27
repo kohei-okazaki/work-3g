@@ -101,7 +101,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
             Account account = accountSearchService.findById(request.getSeqUserId()).get();
 
             ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                    .withHeader("Api-Key", account.getApiKey())
+                    .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
                     .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
                             + request.getSeqUserId() + "/healthinfo");
 

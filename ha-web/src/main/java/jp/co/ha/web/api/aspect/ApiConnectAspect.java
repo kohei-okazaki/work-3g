@@ -31,7 +31,7 @@ public class ApiConnectAspect {
      * <li>{@linkplain RestApiExceptionHandler#handleException}</li>
      *
      * @param pjp
-     *     ProceedingJoinPoint
+     *     {@linkplain ProceedingJoinPoint}
      * @return APIレスポンス
      * @throws Throwable
      *     実行時のエラー
@@ -41,13 +41,13 @@ public class ApiConnectAspect {
 
         // Requestログ出力
         Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiRequest)
-                .forEach(e -> LOG.infoRes(e));
+                .forEach(e -> LOG.infoBean(e));
 
         Object object = pjp.proceed();
 
         // Responseログ出力
         if (object instanceof BaseApiResponse) {
-            LOG.infoRes(object);
+            LOG.infoBean(object);
         }
 
         return object;

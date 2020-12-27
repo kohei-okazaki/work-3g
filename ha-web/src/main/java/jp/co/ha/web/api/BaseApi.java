@@ -82,7 +82,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             // URIを生成
             URI uri = getUri(apiConnectInfo);
             LOG.info("====> API名=" + getApiName() + ",URL=" + uri.toString());
-            LOG.infoRes(request);
+            LOG.infoBean(request);
 
             if (HttpMethod.POST == getHttpMethod()) {
                 // POST通信の場合
@@ -139,7 +139,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             bindErrorInfo(response);
             throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "URLが不正です.", e);
         } finally {
-            LOG.infoRes(response);
+            LOG.infoBean(response);
             Integer intCode = (code == null) ? null : code.value();
             LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + intCode);
             apiConnectInfo.setHttpStatus(intCode);

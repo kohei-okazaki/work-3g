@@ -20,6 +20,11 @@ import java.util.function.Supplier;
  */
 public class ApiConnectInfo {
 
+    /** 健康管理API リクエストヘッダー:API-KEY */
+    public static final String X_API_KEY = "Api-Key";
+    /** 健康情報計算API リクエストヘッダー:X-NODE-TOKEN */
+    public static final String X_NODE_TOKEN = "X-NODE-TOKEN";
+
     /** URLSupplier */
     private Supplier<String> urlSupplier;
     /** 文字コード */

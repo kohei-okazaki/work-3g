@@ -228,7 +228,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.BASIC.getValue())
-                .withHeader("X-NODE-TOKEN", token);
+                .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
         BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);

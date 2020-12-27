@@ -38,7 +38,7 @@ public class ReferenceCsvWriter extends CsvWriter<ReferenceCsvDownloadModel> {
     @Override
     protected void writeData(StringJoiner record, ReferenceCsvDownloadModel model) {
 
-        LOG.debugRes(model);
+        LOG.debugBean(model);
         // 1項目ごと区切る
         StringJoiner body = new StringJoiner(StringUtil.COMMA);
 

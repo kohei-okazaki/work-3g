@@ -86,7 +86,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         Account account = accountSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withHeader("Api-Key", account.getApiKey())
+                .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 

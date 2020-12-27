@@ -9,9 +9,9 @@ import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
 import jp.co.ha.business.api.node.request.TokenRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
 import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.dto.BreathingCapacityDto;
@@ -132,7 +132,7 @@ public class BreathingCapacityComponent {
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.BREATHING_CAPACITY.getValue())
-                .withHeader("X-NODE-TOKEN", token);
+                .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
         BreathingCapacityCalcResponse response = breathingCapacityCalcApi.callApi(request,
                 connectInfo);

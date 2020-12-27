@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * RestAPIの基底レスポンス
+ * RestAPIの基底レスポンスクラス
  *
  * @version 1.0.0
  */
