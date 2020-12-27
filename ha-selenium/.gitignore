@@ -8,8 +8,7 @@ __init__.py
 
 #その他
 .settings
-.classpath
-.project
 __pycache__
-
+.project
+.pydevproject
 
