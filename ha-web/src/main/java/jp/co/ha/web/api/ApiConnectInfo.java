@@ -20,6 +20,11 @@ import java.util.function.Supplier;
  */
 public class ApiConnectInfo {
 
+    /** 健康管理API リクエストヘッダー:API-KEY */
+    public static final String X_API_KEY = "Api-Key";
+    /** 健康情報計算API リクエストヘッダー:X-NODE-TOKEN */
+    public static final String X_NODE_TOKEN = "X-NODE-TOKEN";
+
     /** URLSupplier */
     private Supplier<String> urlSupplier;
     /** 文字コード */
@@ -28,6 +33,8 @@ public class ApiConnectInfo {
     private Map<String, String> headerMap = new HashMap<>();
     /** クエリパラメータMap */
     private Map<String, String> urlParameter = new HashMap<>();
+    /** HTTPステータス */
+    private Integer httpStatus;
 
     /**
      * urlSupplierを返す
@@ -179,6 +186,25 @@ public class ApiConnectInfo {
     public ApiConnectInfo withQueryParameter(String key, String value) {
         this.urlParameter.put(key, value);
         return this;
+    }
+
+    /**
+     * httpStatusを返す
+     *
+     * @return httpStatus
+     */
+    public Integer getHttpStatus() {
+        return httpStatus;
+    }
+
+    /**
+     * httpStatusを設定する
+     *
+     * @param httpStatus
+     *     HTTPステータス
+     */
+    public void setHttpStatus(Integer httpStatus) {
+        this.httpStatus = httpStatus;
     }
 
 }

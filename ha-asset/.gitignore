@@ -7,8 +7,7 @@
 __init__.py
 
 #その他
-.settings
-.classpath
+.pydevproject
 .project
 __pycache__
 _build

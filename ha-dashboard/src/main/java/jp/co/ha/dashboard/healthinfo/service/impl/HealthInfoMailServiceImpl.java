@@ -48,9 +48,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
         bodyMap.put("${standardWeight}",
                 apiResponse.getHealthInfo().getStandardWeight() + "kg");
         bodyMap.put("${healthInfoRegDate}",
-                DateTimeUtil.toString(
-                        DateTimeUtil.toLocalDateTime(
-                                apiResponse.getHealthInfo().getHealthInfoRegDate()),
+                DateTimeUtil.toString(apiResponse.getHealthInfo().getHealthInfoRegDate(),
                         DateFormatType.YYYYMMDDHHMMSS));
 
         sesComponent.sendMail(to, titleText, AwsS3Key.HEALTHINFO_REGIST_TEMPLATE,

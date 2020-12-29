@@ -13,6 +13,7 @@ import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.web.api.ApiConnectInfo;
 import jp.co.ha.web.controller.BaseRestController;
 
 /**
@@ -44,7 +45,7 @@ public class HealthInfoRegistController extends
      */
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
     public HealthInfoRegistResponse doPost(@PathVariable("seqUserId") Integer seqUserId,
-            @RequestHeader("Api-Key") String apiKey,
+            @RequestHeader(ApiConnectInfo.X_API_KEY) String apiKey,
             @RequestBody HealthInfoRegistRequest request) throws BaseException {
 
         request.setSeqUserId(seqUserId);

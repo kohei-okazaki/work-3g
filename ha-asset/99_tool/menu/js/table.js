@@ -136,10 +136,10 @@ var table = [
     logicalName: "健康情報ファイル設定",
     column : [
       {
-          logicalName: "ユーザID",
-          physicalName: "SEQ_USER_ID",
-          type: "INT",
-          size: ""
+        logicalName: "ユーザID",
+        physicalName: "SEQ_USER_ID",
+        type: "INT",
+        size: ""
       },
       {
         logicalName: "ヘッダーフラグ",
@@ -180,89 +180,155 @@ var table = [
     ]
   },
   {
-      physicalName: "BMI_RANGE_MT",
-      logicalName: "BMI範囲マスタ",
-      column : [
-        {
-            logicalName: "BMI範囲マスタID",
-            physicalName: "SEQ_BMI_RANGE_MT_ID",
-          type: "INT",
-          size: ""
-        },
-        {
-          logicalName: "範囲下限",
-          physicalName: "RANGE_MIN",
-          type: "INT",
-          size: ""
-        },
-        {
-          logicalName: "範囲上限",
-          physicalName: "RANGE_MAX",
-          type: "INT",
-          size: ""
-        },
-        {
-          logicalName: "肥満度ステータス",
-          physicalName: "OVER_WEIGHT_STATUS",
-          type: "VARCHAR",
-          size: "2"
-        },
-        {
-          logicalName: "更新日時",
-          physicalName: "UPDATE_DATE",
-          type: "DATETIME",
-          size: ""
-        },
-        {
-          logicalName: "登録日時",
-          physicalName: "REG_DATE",
-          type: "DATETIME",
-          size: ""
-        }
-      ]
-    },
-    {
-        physicalName: "ACCOUNT_RECOVERY_TOKEN_DATA",
-        logicalName: "アカウント回復トークン情報",
-        column : [
-          {
-            logicalName: "アカウント回復トークン情報ID",
-            physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
-            type: "INT",
-            size: ""
-          },
-          {
-            logicalName: "ユーザID",
-            physicalName: "SEQ_USER_ID",
-            type: "INT",
-            size: ""
-          },
-          {
-            logicalName: "トークン",
-            physicalName: "TOKEN",
-            type: "VARCHAR",
-            size: "64"
-          },
-          {
-            logicalName: "トークン作成日時",
-            physicalName: "TOKEN_CREATE_DATE",
-            type: "DATETIME",
-            size: ""
-          },
-          {
-            logicalName: "更新日時",
-            physicalName: "UPDATE_DATE",
-            type: "DATETIME",
-            size: ""
-          },
-          {
-            logicalName: "登録日時",
-            physicalName: "REG_DATE",
-            type: "DATETIME",
-            size: ""
-          }
-        ]
+    physicalName: "BMI_RANGE_MT",
+    logicalName: "BMI範囲マスタ",
+    column : [
+      {
+        logicalName: "BMI範囲マスタID",
+        physicalName: "SEQ_BMI_RANGE_MT_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "範囲下限",
+        physicalName: "RANGE_MIN",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "範囲上限",
+        physicalName: "RANGE_MAX",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "肥満度ステータス",
+        physicalName: "OVER_WEIGHT_STATUS",
+        type: "VARCHAR",
+        size: "2"
+      },
+      {
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
+        type: "DATETIME",
+        size: ""
       }
+    ]
+  },
+  {
+    physicalName: "ACCOUNT_RECOVERY_TOKEN_DATA",
+    logicalName: "アカウント回復トークン情報",
+    column : [
+      {
+        logicalName: "アカウント回復トークン情報ID",
+        physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "ユーザID",
+        physicalName: "SEQ_USER_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "トークン",
+        physicalName: "TOKEN",
+        type: "VARCHAR",
+        size: "64"
+      },
+      {
+        logicalName: "トークン作成日時",
+        physicalName: "TOKEN_CREATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
+        type: "DATETIME",
+        size: ""
+      }
+    ]
+  },
+  {
+    physicalName: "API_COMMUNICATION_DATA",
+    logicalName: "API通信情報",
+    column : [
+      {
+        logicalName: "API通信情報ID",
+        physicalName: "SEQ_API_COMMUNICATION_DATA_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "API名",
+        physicalName: "API_NAME",
+        type: "VARCHAR",
+        size: "64"
+      },
+      {
+        logicalName: "ユーザID",
+        physicalName: "SEQ_USER_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "HTTPステータス",
+        physicalName: "HTTP_STATUS",
+        type: "VARCHAR",
+        size: "3"
+      },
+      {
+        logicalName: "処理結果",
+        physicalName: "RESULT",
+        type: "VARCHAR",
+        size: "1"
+      },
+      {
+        logicalName: "エラー詳細",
+        physicalName: "DETAIL",
+        type: "VARCHAR",
+        size: "256"
+      },
+      {
+        logicalName: "リクエスト送信日時",
+        physicalName: "REQUEST_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "レスポンス受信日時",
+        physicalName: "RESPONSE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
+        type: "DATETIME",
+        size: ""
+      }
+    ]
+  }
 ];
 
 // 指定したテーブル名のカラム情報をすべて取得する

@@ -11,19 +11,24 @@ import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.web.api.ApiConnectInfo;
+import jp.co.ha.web.form.BaseRestApiResponse;
 import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
@@ -34,6 +39,12 @@ import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {
 
+    /** API通信情報作成サービス */
+    @Autowired
+    private ApiCommunicationDataCreateService apiCommunicationDataCreateService;
+    /** API通信情報更新サービス */
+    @Autowired
+    private ApiCommunicationDataUpdateService apiCommunicationDataUpdateService;
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
@@ -75,14 +86,23 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         Account account = accountSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withHeader("Api-Key", account.getApiKey())
+                .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         ResultType result = ResultType.SUCCESS;
         for (HealthInfoRegistRequest request : toRequestList(modelList, seqUserId)) {
+
+            // API通信情報を登録
+            ApiCommunicationData apiCommunicationData = createApiCommunicationData(
+                    registApi.getApiName(), request.getSeqUserId());
+
             HealthInfoRegistResponse response = registApi.callApi(request,
                     apiConnectInfo);
+
+            // API通信情報を更新
+            updateApiCommunicationData(apiCommunicationData, apiConnectInfo, response);
+
             if (ResultType.FAILURE == response.getResultType()) {
                 result = response.getResultType();
             }
@@ -119,6 +139,53 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 
             return request;
         }).collect(Collectors.toList());
+    }
+
+    /**
+     * API通信情報を登録する
+     *
+     * @param apiName
+     *     API名
+     * @param seqUserId
+     *     ユーザID
+     * @return API通信情報
+     */
+    private ApiCommunicationData createApiCommunicationData(String apiName,
+            Integer seqUserId) {
+
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = new ApiCommunicationData();
+        apiCommunicationData.setApiName(apiName);
+        apiCommunicationData.setSeqUserId(seqUserId);
+        apiCommunicationData.setRequestDate(DateTimeUtil.getSysDate());
+        apiCommunicationDataCreateService.create(apiCommunicationData);
+
+        return apiCommunicationData;
+    }
+
+    /**
+     * API通信情報を更新する
+     *
+     * @param apiCommunicationData
+     *     API通信情報
+     * @param connectInfo
+     *     API接続情報
+     * @param response
+     *     APIレスポンス情報
+     */
+    private void updateApiCommunicationData(ApiCommunicationData apiCommunicationData,
+            ApiConnectInfo connectInfo, BaseRestApiResponse response) {
+
+        apiCommunicationData.setHttpStatus(String.valueOf(connectInfo.getHttpStatus()));
+        apiCommunicationData.setResult(response.getResultType().getValue());
+        String detail = null;
+        if (response.getErrorInfo() != null) {
+            detail = response.getErrorInfo().getDetail();
+        }
+        apiCommunicationData.setDetail(detail);
+        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
+        apiCommunicationDataUpdateService.update(apiCommunicationData);
+
     }
 
 }

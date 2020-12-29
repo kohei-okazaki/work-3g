@@ -9,7 +9,6 @@
     <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
     <result column="API_KEY" jdbcType="VARCHAR" property="apiKey" />
     <result column="MAIL_ADDRESS" jdbcType="VARCHAR" property="mailAddress" />
-    <result column="MAIL_PASSWORD" jdbcType="VARCHAR" property="mailPassword" />
     <result column="HEADER_FLAG" jdbcType="VARCHAR" property="headerFlag" />
     <result column="FOOTER_FLAG" jdbcType="VARCHAR" property="footerFlag" />
     <result column="MASK_FLAG" jdbcType="VARCHAR" property="maskFlag" />
