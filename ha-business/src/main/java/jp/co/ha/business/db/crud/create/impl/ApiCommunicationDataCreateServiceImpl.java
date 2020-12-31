@@ -29,19 +29,4 @@ public class ApiCommunicationDataCreateServiceImpl
         mapper.insert(entity);
     }
 
-    // @Insert
-    // @Override
-    // @Transactional(rollbackFor = Exception.class)
-    // public ApiCommunicationData create(String apiName, Integer seqUserId) {
-    //
-    // ApiCommunicationData entity = new ApiCommunicationData();
-    // entity.setApiName(apiName);
-    // entity.setSeqUserId(seqUserId);
-    // entity.setRequestDate(DateTimeUtil.getSysDate());
-    //
-    // create(entity);
-    //
-    // return entity;
-    // }
-
 }
