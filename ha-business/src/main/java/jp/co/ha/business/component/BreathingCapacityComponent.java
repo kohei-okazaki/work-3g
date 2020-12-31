@@ -7,20 +7,16 @@ import jp.co.ha.business.api.node.BreathingCapacityCalcApi;
 import jp.co.ha.business.api.node.TokenApi;
 import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
 import jp.co.ha.business.api.node.request.TokenRequest;
-import jp.co.ha.business.api.node.response.BaseNodeResponse;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
 import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
-import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.dto.BreathingCapacityDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.web.api.ApiConnectInfo;
 
@@ -32,12 +28,9 @@ import jp.co.ha.web.api.ApiConnectInfo;
 @Component
 public class BreathingCapacityComponent {
 
-    /** API通信情報作成サービス */
+    /** API通信情報Component */
     @Autowired
-    private ApiCommunicationDataCreateService apiCommunicationDataCreateService;
-    /** API通信情報更新サービス */
-    @Autowired
-    private ApiCommunicationDataUpdateService apiCommunicationDataUpdateService;
+    private ApiCommunicationDataComponent apiCommunicationDataComponent;
     /** トークン発行API */
     @Autowired
     private TokenApi tokenApi;
@@ -83,8 +76,8 @@ public class BreathingCapacityComponent {
     private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
 
         // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                tokenApi.getApiName(), seqUserId);
+        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
+                .create(tokenApi.getApiName(), seqUserId);
 
         TokenRequest request = new TokenRequest();
         request.setSeqUserId(seqUserId);
@@ -94,7 +87,7 @@ public class BreathingCapacityComponent {
         TokenResponse response = tokenApi.callApi(request, connectInfo);
 
         // API通信情報を更新
-        updateApiCommunicationData(apiCommunicationData, connectInfo, response);
+        apiCommunicationDataComponent.update(apiCommunicationData, connectInfo, response);
 
         if (Result.SUCCESS != response.getResult()) {
             // Token発行APIの処理が成功以外の場合
@@ -123,8 +116,8 @@ public class BreathingCapacityComponent {
             throws BaseException {
 
         // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                breathingCapacityCalcApi.getApiName(), seqUserId);
+        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
+                .create(breathingCapacityCalcApi.getApiName(), seqUserId);
 
         BreathingCapacityCalcRequest request = new BreathingCapacityCalcRequest();
         BeanUtil.copy(dto, request);
@@ -138,7 +131,8 @@ public class BreathingCapacityComponent {
                 connectInfo);
 
         // API通信情報を更新
-        updateApiCommunicationData(apiCommunicationData, connectInfo, response);
+        apiCommunicationDataComponent.update(apiCommunicationData,
+                connectInfo, response);
 
         if (Result.SUCCESS != response.getResult()) {
             // 肺活量計算APIの処理が成功以外の場合
@@ -147,49 +141,6 @@ public class BreathingCapacityComponent {
         }
 
         return response;
-    }
-
-    /**
-     * API通信情報を登録する
-     *
-     * @param apiName
-     *     API名
-     * @param seqUserId
-     *     ユーザID
-     * @return API通信情報
-     */
-    private ApiCommunicationData createApiCommunicationData(String apiName,
-            Integer seqUserId) {
-
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = new ApiCommunicationData();
-        apiCommunicationData.setApiName(apiName);
-        apiCommunicationData.setSeqUserId(seqUserId);
-        apiCommunicationData.setRequestDate(DateTimeUtil.getSysDate());
-        apiCommunicationDataCreateService.create(apiCommunicationData);
-
-        return apiCommunicationData;
-    }
-
-    /**
-     * API通信情報を更新する
-     *
-     * @param apiCommunicationData
-     *     API通信情報
-     * @param connectInfo
-     *     API接続情報
-     * @param response
-     *     APIレスポンス情報
-     */
-    private void updateApiCommunicationData(ApiCommunicationData apiCommunicationData,
-            ApiConnectInfo connectInfo, BaseNodeResponse response) {
-
-        apiCommunicationData.setHttpStatus(String.valueOf(connectInfo.getHttpStatus()));
-        apiCommunicationData.setResult(response.getResult().getValue());
-        apiCommunicationData.setDetail(response.getDetail());
-        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
-        apiCommunicationDataUpdateService.update(apiCommunicationData);
-
     }
 
 }

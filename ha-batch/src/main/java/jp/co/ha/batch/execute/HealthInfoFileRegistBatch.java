@@ -16,16 +16,14 @@ import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
-import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
+import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
@@ -33,7 +31,6 @@ import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
  * 健康情報ファイル登録Batch
@@ -52,12 +49,9 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** API通信情報作成サービス */
+    /** API通信情報Component */
     @Autowired
-    private ApiCommunicationDataCreateService apiCommunicationDataCreateService;
-    /** API通信情報更新サービス */
-    @Autowired
-    private ApiCommunicationDataUpdateService apiCommunicationDataUpdateService;
+    private ApiCommunicationDataComponent apiCommunicationDataComponent;
 
     /** 妥当性チェック */
     @Autowired
@@ -106,13 +100,14 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
                             + request.getSeqUserId() + "/healthinfo");
 
             // API通信情報を登録
-            ApiCommunicationData apiCommunicationData = createApiCommunicationData(
-                    api.getApiName(), request.getSeqUserId());
+            ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
+                    .create(api.getApiName(), request.getSeqUserId());
 
             HealthInfoRegistResponse response = api.callApi(request, apiConnectInfo);
 
             // API通信情報を更新
-            updateApiCommunicationData(apiCommunicationData, apiConnectInfo, response);
+            apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
+                    response);
 
         }
 
@@ -123,53 +118,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
     public Options getOptions() {
         Options options = new Options();
         return options;
-    }
-
-    /**
-     * API通信情報を登録する
-     *
-     * @param apiName
-     *     API名
-     * @param seqUserId
-     *     ユーザID
-     * @return API通信情報
-     */
-    private ApiCommunicationData createApiCommunicationData(String apiName,
-            Integer seqUserId) {
-
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = new ApiCommunicationData();
-        apiCommunicationData.setApiName(apiName);
-        apiCommunicationData.setSeqUserId(seqUserId);
-        apiCommunicationData.setRequestDate(DateTimeUtil.getSysDate());
-        apiCommunicationDataCreateService.create(apiCommunicationData);
-
-        return apiCommunicationData;
-    }
-
-    /**
-     * API通信情報を更新する
-     *
-     * @param apiCommunicationData
-     *     API通信情報
-     * @param connectInfo
-     *     API接続情報
-     * @param response
-     *     APIレスポンス情報
-     */
-    private void updateApiCommunicationData(ApiCommunicationData apiCommunicationData,
-            ApiConnectInfo connectInfo, BaseRestApiResponse response) {
-
-        apiCommunicationData.setHttpStatus(String.valueOf(connectInfo.getHttpStatus()));
-        apiCommunicationData.setResult(response.getResultType().getValue());
-        String detail = null;
-        if (response.getErrorInfo() != null) {
-            detail = response.getErrorInfo().getDetail();
-        }
-        apiCommunicationData.setDetail(detail);
-        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
-        apiCommunicationDataUpdateService.update(apiCommunicationData);
-
     }
 
 }
