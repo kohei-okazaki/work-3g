@@ -1,0 +1,14 @@
+spring:
+  # プロファイル設定
+  profiles: local
+server:
+  port: 8082
+# Log設定
+logging:
+  file:
+    name: root-api.log
+    path: C:\app\logs
+  level:
+    org.springframework: INFO
+    org.thymeleaf: INFO
+    jp.co.ha.root: DEBUG

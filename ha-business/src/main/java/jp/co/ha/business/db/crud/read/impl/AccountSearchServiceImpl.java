@@ -90,4 +90,11 @@ public class AccountSearchServiceImpl implements AccountSearchService {
         return count > 0;
     }
 
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompositeAccount> findAll() {
+        return compositAccountMapper.selectAll();
+    }
+
 }
