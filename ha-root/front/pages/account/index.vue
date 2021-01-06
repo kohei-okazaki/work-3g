@@ -7,7 +7,8 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-data-table :headers="headers" :items="account_list"></v-data-table>
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+        <v-data-table :headers="headers" :items="account_list" :search="search"></v-data-table>
       </v-col>
     </v-row>
   </div>
@@ -15,11 +16,12 @@
 
 <script>
 const axios = require("axios");
-let url = "http://localhost:8082/api/root/account";
+let url = process.env.api_base_url + "account";
 
 export default {
   data: function() {
     return {
+      search: '',
       account_list: [],
       headers: [
         {

@@ -6,8 +6,9 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        <v-data-table :headers="headers" :items="api_data_list"></v-data-table>
+     <v-col>
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+        <v-data-table :headers="headers" :items="api_data_list" :search="search"></v-data-table>
       </v-col>
     </v-row>
   </div>
@@ -15,13 +16,14 @@
 
 <script>
 const axios = require("axios");
-let url = "http://localhost:8082/api/root/apidata";
+let url = process.env.api_base_url + "apidata";
 
 export default{
 
   data: function() {
     return {
-      account_list: [],
+      search: '',
+      api_data_list: [],
       headers: [
         {
           text: 'API通信情報ID',
@@ -71,5 +73,7 @@ export default{
 </script>
 
 <style>
-
+.base {
+  padding-left: 10px;
+}
 </style>
