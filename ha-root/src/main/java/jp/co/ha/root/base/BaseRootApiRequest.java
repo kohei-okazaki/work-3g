@@ -5,6 +5,6 @@ package jp.co.ha.root.base;
  *
  * @version 1.0.0
  */
-public abstract class BaseRootApiRequest {
+public abstract class BaseRootApiRequest extends JsonEntity {
 
 }
