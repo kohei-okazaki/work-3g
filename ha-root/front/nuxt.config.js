@@ -1,7 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 const environment = process.env.NODE_ENV || 'development';
-const envSet = require(`./env.${environment}.js`)
+const envSet = require(`./env.${environment}.js`);
 
 export default {
 
@@ -56,10 +56,43 @@ export default {
     // https://go.nuxtjs.dev/axios
     // API通信を可能にするライブラリ
     '@nuxtjs/axios',
+    // ログイン認証を可能にするライブラリ
+    '@nuxtjs/auth',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    // TODO URLの環境ごとの切り替えできない
+    // baseURL: process.env["api_base_url"]
+    // baseURL: process.env.api_base_url
+    baseURL: process.env.api_base_url || 'http://localhost:8082/api/root/'
+  },
+
+  auth: {
+    redirect: {
+      login: '/login', 
+      logout: '/login',
+      callback: false,
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { 
+            url: 'login',
+            method: 'post', 
+            propertyName: 'token'
+          },
+          logout: false,
+          user: false,
+        }
+      }
+    }  
+  },
+
+  router: {
+    middleware: [ 'auth' ]
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {

@@ -38,7 +38,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     private AccountMapper mapper;
     /** アカウント複合Mapper */
     @Autowired
-    private CompositeAccountMapper compositAccountMapper;
+    private CompositeAccountMapper compositeAccountMapper;
 
     @Select
     @Override
@@ -55,7 +55,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     public Optional<CompositeAccount> findCompositAccountById(Integer seqUserId) {
         CompositeAccountKey key = new CompositeAccountKey();
         key.setSeqUserId(seqUserId);
-        return Optional.ofNullable(compositAccountMapper.selectByPrimaryKey(key));
+        return Optional.ofNullable(compositeAccountMapper.selectByPrimaryKey(key));
     }
 
     @Select
@@ -94,7 +94,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<CompositeAccount> findAll() {
-        return compositAccountMapper.selectAll();
+        return compositeAccountMapper.selectAll();
     }
 
 }

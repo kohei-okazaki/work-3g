@@ -25,6 +25,7 @@
       </v-btn>
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <AppLogout />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -52,10 +53,12 @@
 
 <script>
 import AppFooter from '~/components/Footer.vue'
+import AppLogout from '~/components/Logout.vue'
 
 export default {
   components: {
     AppFooter,
+    AppLogout,
   },
   data () {
     return {
@@ -109,6 +112,6 @@ export default {
       rightDrawer: false,
       title: 'Root App'
     }
-  }
+  },
 }
 </script>

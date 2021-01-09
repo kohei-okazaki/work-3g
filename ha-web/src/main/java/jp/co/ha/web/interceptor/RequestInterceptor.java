@@ -44,6 +44,13 @@ public class RequestInterceptor extends BaseWebInterceptor {
 
         // MDCを設定する
         MDC.put("id", StringUtil.getRandamStr(20));
+        if (!(handler instanceof HandlerMethod)) {
+            LOG.info("[URI=" + request.getRequestURI()
+                    + ",METHOD=" + request.getMethod()
+                    + ",HEADER=" + getHeader(request) + "]"
+                    + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
+            return true;
+        }
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
                 + "[URI=" + request.getRequestURI()

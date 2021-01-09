@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import jp.co.ha.root.base.BaseRootApiResponse;
+import jp.co.ha.root.base.JsonEntity;
 import jp.co.ha.web.form.BaseApiResponse;
 
 /**
@@ -47,7 +48,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
      *
      * @version 1.0.0
      */
-    public static class Account {
+    public static class Account extends JsonEntity {
 
         /** ユーザID */
         @JsonProperty("seq_user_id")

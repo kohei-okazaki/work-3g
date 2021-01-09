@@ -12,7 +12,7 @@ import jp.co.ha.root.type.RootApiResult.RootApiResultSerializer;
  *
  * @version 1.0.0
  */
-public abstract class BaseRootApiResponse {
+public abstract class BaseRootApiResponse extends JsonEntity {
 
     /** 処理結果 */
     @JsonProperty("result")
@@ -28,7 +28,7 @@ public abstract class BaseRootApiResponse {
      *
      * @version 1.0.0
      */
-    public static class ErrorData {
+    public static class ErrorData extends JsonEntity {
 
         /** メッセージ */
         @JsonProperty("message")
