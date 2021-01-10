@@ -16,7 +16,9 @@ import jp.co.ha.common.type.BaseEnum;
 public enum RootApiResult implements BaseEnum {
 
     /** 正常終了 */
-    SUCCESS("0");
+    SUCCESS("0"),
+    /** 異常終了 */
+    FAILURE("1");
 
     /** 値 */
     private String value;

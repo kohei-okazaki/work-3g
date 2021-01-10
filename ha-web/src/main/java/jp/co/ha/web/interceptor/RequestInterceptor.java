@@ -69,6 +69,9 @@ public class RequestInterceptor extends BaseWebInterceptor {
             // 静的リソースの場合は認証不要
             return;
         }
+        if (!(handler instanceof HandlerMethod)) {
+            LOG.info("END Memory=" + SystemMemory.getInstance().getMemoryUsage());
+        }
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName()
                 + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());

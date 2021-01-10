@@ -34,10 +34,18 @@
           </v-card-text>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" @click="submit" v-on="on">
-            <v-icon>mdi-account-arrow-right</v-icon>
-            管理ユーザ作成
-          </v-btn>
+          <template v-if="api_data.api_result != '0'">
+            <!-- APIが正常終了していない場合 -->
+            <v-btn color="primary" @click="submit" v-on="on">
+              <v-icon>mdi-account-multiple-plus</v-icon>作成
+            </v-btn>
+          </template>
+          <template v-else>
+            <!-- APIが正常終了している場合 -->
+            <v-btn color="primary" to="/login">
+              <v-icon>mdi-account-arrow-right</v-icon>ログイン
+            </v-btn>
+          </template>
         </v-card-actions>
       </v-card>
       <AppConfirm ref="confirm"></AppConfirm>
