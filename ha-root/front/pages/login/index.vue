@@ -11,7 +11,15 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn text @click="submit">ログイン</v-btn>
+          <v-btn color="primary" @click="submit">
+            <v-icon>mdi-account-arrow-right</v-icon>
+            ログイン
+          </v-btn>
+          <v-spacer />
+          <v-btn color="primary" :to="`user/entry`">
+            <v-icon>mdi-account-multiple-plus</v-icon>
+            管理ユーザ作成
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -19,9 +27,6 @@
 </template>
 
 <script>
-const axios = require("axios");
-let url = process.env.api_base_url + "login";
-
 export default {
   // ログイン前のレイアウトを適用
   layout: 'nonAuthLayout',

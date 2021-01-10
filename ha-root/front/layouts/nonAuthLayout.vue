@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-toolbar-title v-text="title" />
+      <AppTop />
     </v-app-bar>
     <v-main>
       <v-container>
@@ -14,6 +14,7 @@
 
 <script>
 import AppFooter from '~/components/Footer.vue'
+import AppTop from '~/components/Top.vue'
 
 // ログイン前のレイアウト
 export default {
@@ -25,9 +26,10 @@ export default {
   },
   components: {
     AppFooter,
-  }
+    AppTop,
+  },
 };
 </script>
 
-<style>
+<style scope>
 </style> 

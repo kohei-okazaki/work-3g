@@ -23,7 +23,7 @@
       <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <AppTop />
       <v-spacer />
       <AppLogout />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
@@ -54,11 +54,13 @@
 <script>
 import AppFooter from '~/components/Footer.vue'
 import AppLogout from '~/components/Logout.vue'
+import AppTop from '~/components/Top.vue'
 
 export default {
   components: {
     AppFooter,
     AppLogout,
+    AppTop,
   },
   data () {
     return {
@@ -66,16 +68,6 @@ export default {
       drawer: true,
       fixed: false,
       items: [
-        // {
-        //   icon: 'mdi-apps',
-        //   title: 'Welcome',
-        //   to: '/'
-        // },
-        // {
-        //   icon: 'mdi-chart-bubble',
-        //   title: 'Inspire',
-        //   to: '/inspire'
-        // },
         {
           icon: 'mdi-apps',
           title: 'Top',
@@ -110,8 +102,10 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Root App'
     }
   },
 }
 </script>
+
+<style scope>
+</style> 

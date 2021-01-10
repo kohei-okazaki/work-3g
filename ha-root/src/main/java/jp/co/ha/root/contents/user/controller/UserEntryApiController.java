@@ -1,6 +1,7 @@
 package jp.co.ha.root.contents.user.controller;
 
 import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,11 +28,13 @@ public class UserEntryApiController
      * @return ユーザ登録APIレスポンス
      */
     @PostMapping(value = "user/entry", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public UserEntryApiResponse entry(@RequestBody UserEntryApiRequest request) {
+    public UserEntryApiResponse entry(
+            @RequestBody MultiValueMap<String, Object> request) {
         // TODO 要実装
 
         UserEntryApiResponse response = new UserEntryApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
+        response.setSeqLoginId(Integer.valueOf(1000));
 
         return response;
     }

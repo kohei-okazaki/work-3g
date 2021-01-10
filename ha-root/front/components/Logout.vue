@@ -14,7 +14,6 @@ export default {
   },
   methods: {
     logout: function () {
-      console.log("ログアウトします");
       this.$auth.logout();
     },
   },
