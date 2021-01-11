@@ -46,14 +46,15 @@ public class UserEntryApiController
      *     ハッシュ化に失敗した場合
      */
     @PostMapping(value = "user/entry", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public UserEntryApiResponse entry(
-            @RequestBody MultiValueMap<String, Object> request) throws BaseException {
+    public UserEntryApiResponse entry(@RequestBody MultiValueMap<String, Object> request)
+            throws BaseException {
 
         // TODO 妥当性チェックを追加
 
         RootLoginInfo entity = new RootLoginInfo();
         entity.setRole(RootRoleType.REF.getValue());
-        entity.setPassword(hashEncoder.encode(request.get("password").toString(), ""));
+        entity.setPassword(
+                hashEncoder.encode(request.get("password").get(0).toString(), ""));
         entity.setPasswordExpire(
                 DateTimeUtil.addMonth(DateTimeUtil.getSysDate().toLocalDate(), 6));
         entity.setDeleteFlag("0");

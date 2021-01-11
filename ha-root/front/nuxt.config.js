@@ -15,7 +15,8 @@ export default {
   head: {
     titleTemplate: '%s | front',
     title: '管理サイト',
-    meta: [{
+    meta: [
+      {
         charset: 'utf-8'
       },
       {

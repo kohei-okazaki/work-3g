@@ -53,14 +53,15 @@ export default {
         // 入力値エラーの場合
         return;
       }
-      console.log("[seq_login_id]=" + this.seq_login_id + ", [password]=" + this.password);
       await this.$auth.loginWith('local', {
         data: {
           seq_login_id: this.seq_login_id,
           password: this.password
         }
       }).then((response) => {
-        console.log('[response]=' + response);
+        // JWTをレスポンスヘッダから取得
+        let authorization = response.headers['authorization'];
+        console.log('[authorization]=' + authorization);
         return response
       }, (error) => {
         console.log('[error]=' + error);

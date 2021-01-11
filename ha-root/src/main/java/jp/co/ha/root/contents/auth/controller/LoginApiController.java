@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
 import jp.co.ha.root.contents.auth.request.LoginApiRequest;
@@ -58,6 +59,7 @@ public class LoginApiController
         }
 
         // 管理者サイトユーザログイン情報を検索
+        RootLoginInfo entity = searchService.findById(request.getSeqLoginId()).get();
 
         response.setRootApiResult(RootApiResult.SUCCESS);
         String strdate = DateTimeUtil.toString(DateTimeUtil.getSysDate(),

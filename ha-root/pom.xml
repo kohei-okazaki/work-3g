@@ -82,6 +82,18 @@
       <version>${org.springframework.boot-version}</version>
       <scope>test</scope>
     </dependency>
+    <!-- JWTのライブラリ -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+    <!-- SpringSecurity -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+      <version>${org.springframework.boot-version}</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -90,6 +102,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${org.springframework.boot-version}</version>
       </plugin>
     </plugins>
   </build>

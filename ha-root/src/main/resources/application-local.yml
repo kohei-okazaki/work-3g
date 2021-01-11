@@ -10,5 +10,6 @@ logging:
     path: C:\app\logs
   level:
     org.springframework: INFO
-    org.thymeleaf: INFO
     jp.co.ha.root: DEBUG
+front:
+  url: http://localhost:8083
