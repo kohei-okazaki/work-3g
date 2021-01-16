@@ -39,7 +39,7 @@ public class SlackApiComponent {
     private static final AwsS3Key KEY = AwsS3Key.SLACK_CONNECTION_DATA;
     /** AWS-S3Component */
     @Autowired
-    private AwsS3Component s3Component;
+    private AwsS3Component s3;
 
     /**
      * Slackにメッセージを送信する
@@ -69,7 +69,43 @@ public class SlackApiComponent {
         } catch (IOException e) {
             throw new BusinessException(e);
         }
+    }
 
+    /**
+     * Slackにファイルを送信する
+     *
+     * @param contentType
+     *     コンテンツタイプ
+     * @param data
+     *     ファイルデータ
+     * @param fileName
+     *     ファイル名
+     * @param title
+     *     件名
+     * @param initialComment
+     *     投稿コメント
+     * @throws BaseException
+     *     Slackセッションへの接続、またはSlack接続情報JSONの読み込みに失敗した場合
+     */
+    public void sendFile(ContentType contentType, byte[] data, String fileName,
+            String title, String initialComment) throws BaseException {
+
+        try {
+            Connection conn = getConnectionByContentType(contentType);
+            SlackSession session = SlackSessionFactory
+                    .createWebSocketSlackSession(conn.getToken());
+
+            session.connect();
+            SlackChannel channel = session.findChannelByName(conn.getChannelName());
+
+            LOG.debug("送信開始");
+            session.sendFile(channel, data, fileName, title, initialComment);
+            LOG.debug("送信終了");
+
+            session.disconnect();
+        } catch (IOException e) {
+            throw new BusinessException(e);
+        }
     }
 
     /**
@@ -85,7 +121,7 @@ public class SlackApiComponent {
             throws BaseException {
 
         SlackConnectionData slackConnectionData = new JsonReader()
-                .read(s3Component.getS3ObjectByKey(KEY), SlackConnectionData.class);
+                .read(s3.getS3ObjectByKey(KEY), SlackConnectionData.class);
         List<Connection> list = slackConnectionData.getConnectionList();
 
         return list.stream()

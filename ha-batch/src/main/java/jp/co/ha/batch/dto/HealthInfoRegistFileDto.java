@@ -14,29 +14,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class HealthInfoRegistFileDto {
 
     /** ユーザID */
-    @JsonProperty("userId")
-    private String userId;
+    @JsonProperty("seq_user_id")
+    private Integer seqUserId;
     /** 健康情報要求情報リスト */
-    @JsonProperty("healthInfoRequestDataList")
+    @JsonProperty("health_info_request_data_list")
     private List<HealthInfoRequestData> healthInfoRequestDataList = new ArrayList<>();
 
     /**
-     * userIdを返す
+     * seqUserIdを返す
      *
-     * @return userId
+     * @return seqUserId
      */
-    public String getUserId() {
-        return userId;
+    public Integer getSeqUserId() {
+        return seqUserId;
     }
 
     /**
-     * userIdを設定する
+     * seqUserIdを設定する
      *
-     * @param userId
+     * @param seqUserId
      *     ユーザID
      */
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setSeqUserId(Integer seqUserId) {
+        this.seqUserId = seqUserId;
     }
 
     /**
