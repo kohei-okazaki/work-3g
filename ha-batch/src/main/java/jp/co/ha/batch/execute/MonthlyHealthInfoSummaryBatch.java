@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Key;
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
@@ -54,6 +56,9 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
     /** S3のComponent */
     @Autowired
     private AwsS3Component s3;
+    /** SlackComponent */
+    @Autowired
+    private SlackApiComponent slackApiComponent;
 
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
@@ -73,6 +78,11 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         File csv = writeCsv(targetDate, modelList);
         // S3ファイルをアップロード
         s3.putFile(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName(), csv);
+
+        // Slackのbatch_${env}チャンネルにメッセージを投稿
+        slackApiComponent.send(ContentType.BATCH,
+                "S3ファイルアップロード完了. ファイル名=" + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue()
+                        + csv.getName());
 
         return BatchResult.SUCCESS;
     }
@@ -142,6 +152,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         return healthInfoList.stream().map(e -> {
             MonthlyHealthInfoSummaryModel model = new MonthlyHealthInfoSummaryModel();
             BeanUtil.copy(e, model);
+            model.setSeqUserId(String.valueOf(e.getSeqUserId()));
             model.setHealthInfoRegDate(DateTimeUtil.toString(e.getHealthInfoRegDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
             model.setRegDate(DateTimeUtil.toString(e.getRegDate(),
