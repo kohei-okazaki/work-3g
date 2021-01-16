@@ -61,14 +61,26 @@ export default{
 
     };
   },
+  created: function() {
+    // 保存済のAPIトークンを取得
+    let token = this.$store.state.auth.token;
 
-  asyncData: async function () {
-    // API情報一覧取得API 実行
-    let result = await axios.get(url);
-    return {
-      api_data_list: result.data.api_data_list,
-    };
+    axios.get(url, {
+      headers: { "Authorization": token },
+    }).then((response) => {
+      this.api_data_list = response.data.api_data_list;
+    }, (error) => {
+      console.log('[error]=' + error);
+      return error;
+    });
   },
+  // asyncData: async function () {
+  //   // API情報一覧取得API 実行
+  //   let result = await axios.get(url);
+  //   return {
+  //     api_data_list: result.data.api_data_list,
+  //   };
+  // },
 }
 </script>
 

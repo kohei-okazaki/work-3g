@@ -47,25 +47,49 @@ export default {
       };
     }
   },
+  created: function() {
+    // vuex情報を削除
+    this.$store.commit("auth/clearToken");
+  },
   methods: {
-    async submit() {
+    submit: function()  {
       if (!this.$refs.login_form.validate()) {
         // 入力値エラーの場合
         return;
       }
-      await this.$auth.loginWith('local', {
+      this.$auth.loginWith('local', {
         data: {
           seq_login_id: this.seq_login_id,
           password: this.password
         }
       }).then((response) => {
+
         // JWTをレスポンスヘッダから取得
         let authorization = response.headers['authorization'];
         console.log('[authorization]=' + authorization);
-        return response
+
+        // storeにログイン情報を保存
+        this.$store.commit("auth/setToken", {
+          seq_login_id: this.seq_login_id,
+          token: authorization,
+        });
+
+        // let list = this.$store.state.auth.auth_data_list;
+        // let value = null;
+        // for (var i = 0; i < list.length; i++) {
+        //   let auth_data = list[i];
+        //   if (auth_data.seq_login_id == this.seq_login_id) {
+        //     // 同一ログインIDの場合、トークン取得
+        //     value = auth_data.token;
+        //     break;
+        //   }
+        // }
+        // console.log("[saved token]=" + value);
+
+        return response;
       }, (error) => {
         console.log('[error]=' + error);
-        return error
+        return error;
       });
     },
   },
