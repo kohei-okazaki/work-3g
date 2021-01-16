@@ -1,7 +1,7 @@
 package jp.co.ha.root.contents.api.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.api.request.ApiDataListApiRequest;
 import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
-import jp.co.ha.root.contents.api.response.ApiDataListApiResponse.ApiData;
 import jp.co.ha.root.type.RootApiResult;
 
 /**
@@ -28,7 +26,7 @@ public class ApiDataListApiController
 
     /** API通信情報検索サービス */
     @Autowired
-    private ApiCommunicationDataSearchService apiCommunicationDataSearchService;
+    private ApiCommunicationDataSearchService searchService;
 
     /**
      * 一覧取得
@@ -40,12 +38,12 @@ public class ApiDataListApiController
     @GetMapping(value = "apidata", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ApiDataListApiResponse list(ApiDataListApiRequest request) {
 
-        List<ApiData> apiDataList = new ArrayList<>();
-        for (ApiCommunicationData entity : apiCommunicationDataSearchService.findAll()) {
-            ApiData apiData = new ApiData();
-            BeanUtil.copy(entity, apiData);
-            apiDataList.add(apiData);
-        }
+        List<ApiDataListApiResponse.ApiData> apiDataList = searchService.findAll()
+                .stream().map(e -> {
+                    ApiDataListApiResponse.ApiData response = new ApiDataListApiResponse.ApiData();
+                    BeanUtil.copy(e, response);
+                    return response;
+                }).collect(Collectors.toList());
 
         ApiDataListApiResponse response = new ApiDataListApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);

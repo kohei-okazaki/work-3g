@@ -1,7 +1,7 @@
 package jp.co.ha.root.contents.account.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.account.request.AccountListApiRequest;
 import jp.co.ha.root.contents.account.response.AccountListApiResponse;
@@ -39,13 +38,12 @@ public class AccountListApiController
     @GetMapping(value = "account", produces = { MediaType.APPLICATION_JSON_VALUE })
     public AccountListApiResponse list(AccountListApiRequest request) {
 
-        List<CompositeAccount> list = service.findAll();
-        List<AccountListApiResponse.Account> accountList = new ArrayList<>();
-        for (CompositeAccount account : list) {
-            AccountListApiResponse.Account accountResponse = new AccountListApiResponse.Account();
-            BeanUtil.copy(account, accountResponse);
-            accountList.add(accountResponse);
-        }
+        List<AccountListApiResponse.Account> accountList = service.findAll().stream()
+                .map(e -> {
+                    AccountListApiResponse.Account response = new AccountListApiResponse.Account();
+                    BeanUtil.copy(e, response);
+                    return response;
+                }).collect(Collectors.toList());
 
         AccountListApiResponse response = new AccountListApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
