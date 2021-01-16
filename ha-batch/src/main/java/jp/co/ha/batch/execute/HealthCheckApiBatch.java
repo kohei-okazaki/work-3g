@@ -11,6 +11,8 @@ import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthcheck.HealthCheckApi;
 import jp.co.ha.business.api.healthcheck.request.HealthCheckRequest;
 import jp.co.ha.business.api.healthcheck.response.HealthCheckResponse;
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -47,6 +49,9 @@ public class HealthCheckApiBatch extends BaseBatch {
     /** AWS個別設定情報 */
     @Autowired
     private AwsConfig awsConfig;
+    /** SlackComponent */
+    @Autowired
+    private SlackApiComponent slackApiComponent;
 
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
@@ -68,11 +73,13 @@ public class HealthCheckApiBatch extends BaseBatch {
         switch (response.getResultType()) {
         case SUCCESS:
             LOG.debug("健康管理APIサーバが起動状態...");
+            slackApiComponent.send(ContentType.BATCH, "健康管理APIサーバが起動状態...");
             break;
         case FAILURE:
             LOG.error("健康管理APIサーバの状態が異常...");
             awsSesComponent.sendMail(awsConfig.getMailAddress(), "ヘルスチェックAPI結果",
                     TEMPLATE_ID);
+            slackApiComponent.send(ContentType.BATCH, "健康管理APIサーバの状態が異常...");
             break;
         }
         return BatchResult.SUCCESS;
