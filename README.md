@@ -17,6 +17,9 @@
 * ### ha-api  
 JSONでのHTTP通信を受け付けるプロジェクト   
 
+* ### ha-asset  
+詳細設計書、DDL等を定義したドキュメントプロジェクト  
+
 * ### ha-batch  
 Batch処理を定義したプロジェクト  
 
@@ -43,8 +46,8 @@ Tableに対応したEntityとMapperのみを定義したプロジェクト
 * ### ha-pom  
 api, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
-* ### ha-asset  
-詳細設計書、DDL等を定義したドキュメントプロジェクト  
+* ### ha-root  
+健康管理アプリの管理者用サイト    
 
 * ### ha-selenium  
 seleniumを利用した画面の自動テスト処理を定義したプロジェクト  
