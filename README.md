@@ -6,12 +6,12 @@
 
  
 ### **ローカル環境図**
-![image](https://user-images.githubusercontent.com/24481212/87867075-1a493600-c9c4-11ea-8351-cd0aad6eca4a.png)  
+![image](https://user-images.githubusercontent.com/24481212/104831982-f7470280-58d0-11eb-8277-96886b961222.PNG)  
 
 -----
 
 ### **EC2環境図**  
-![image](https://user-images.githubusercontent.com/24481212/87866924-62ffef80-c9c2-11ea-8ac4-63b578ae8ce9.png)
+![image](https://user-images.githubusercontent.com/24481212/104831983-fdd57a00-58d0-11eb-9bea-23ccd3c9804e.PNG)
 
 ## 02_Project構成  
 * ### ha-api  
