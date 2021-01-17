@@ -1,5 +1,6 @@
 package jp.co.ha.business.db.crud.read;
 
+import java.util.List;
 import java.util.Optional;
 
 import jp.co.ha.db.entity.Account;
@@ -51,5 +52,12 @@ public interface AccountSearchService {
      * @return 判定結果
      */
     boolean isExistByMailAddress(String mailAddress);
+
+    /**
+     * アカウント情報と健康情報ファイル設定の複合Entityのリストを検索する
+     *
+     * @return アカウント情報と健康情報ファイル設定の複合Entityのリスト
+     */
+    List<CompositeAccount> findAll();
 
 }

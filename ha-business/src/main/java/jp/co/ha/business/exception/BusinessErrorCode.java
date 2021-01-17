@@ -30,7 +30,10 @@ public enum BusinessErrorCode implements BaseErrorCode, BaseEnum {
     /** 肺活量計算API接続エラー */
     BREATHING_API_CONNECT_ERROR("BREATHING_API_CONNECT_ERROR", "BE0037", LogLevel.ERROR),
     /** Token発行API接続エラー */
-    TOKEN_API_CONNECT_ERROR("TOKEN_API_CONNECT_ERROR", "BE0038", LogLevel.ERROR);
+    TOKEN_API_CONNECT_ERROR("TOKEN_API_CONNECT_ERROR", "BE0038", LogLevel.ERROR),
+    /** 健康情報登録API接続エラー */
+    HEALTH_INFO_REGIST_API_CONNECT_ERROR("HEALTH_INFO_REGIST_API_CONNECT_ERROR", "BE0039",
+            LogLevel.ERROR);
 
     /**
      * コンストラクタ

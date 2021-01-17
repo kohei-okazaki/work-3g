@@ -12,12 +12,15 @@ import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
+import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
@@ -30,9 +33,11 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.web.api.ApiConnectInfo;
+import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報登録画面サービス実装クラス
@@ -54,6 +59,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
+    /** API通信情報Component */
+    @Autowired
+    private ApiCommunicationDataComponent apiCommunicationDataComponent;
     /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
@@ -94,12 +102,25 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         Account account = accountSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withHeader("Api-Key", account.getApiKey())
+                .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
-        HealthInfoRegistResponse apiResponse = registApi.callApi(request,
-                apiConnectInfo);
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
+                .create(registApi.getApiName(), seqUserId);
+
+        HealthInfoRegistResponse apiResponse = registApi.callApi(request, apiConnectInfo);
+
+        // API通信情報を更新
+        apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
+                apiResponse);
+
+        if (ResultType.SUCCESS != apiResponse.getResultType()) {
+            // 健康情報登録APIの処理が成功以外の場合
+            throw new ApiException(BusinessErrorCode.HEALTH_INFO_REGIST_API_CONNECT_ERROR,
+                    apiResponse.getErrorInfo().getDetail());
+        }
 
         return apiResponse;
     }

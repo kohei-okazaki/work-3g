@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.web.api.RestApiExceptionHandler;
-import jp.co.ha.web.form.BaseRestApiRequest;
-import jp.co.ha.web.form.BaseRestApiResponse;
+import jp.co.ha.web.form.BaseApiRequest;
+import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * API通信共通クラス
@@ -31,7 +31,7 @@ public class ApiConnectAspect {
      * <li>{@linkplain RestApiExceptionHandler#handleException}</li>
      *
      * @param pjp
-     *     ProceedingJoinPoint
+     *     {@linkplain ProceedingJoinPoint}
      * @return APIレスポンス
      * @throws Throwable
      *     実行時のエラー
@@ -40,14 +40,15 @@ public class ApiConnectAspect {
     public Object outApiLog(ProceedingJoinPoint pjp) throws Throwable {
 
         // Requestログ出力
-        Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseRestApiRequest)
-                .forEach(e -> LOG.infoRes(e));
+        Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseApiRequest)
+                .forEach(e -> LOG.infoBean(e));
 
         Object object = pjp.proceed();
 
         // Responseログ出力
-        Arrays.stream(pjp.getArgs()).filter(e -> e instanceof BaseRestApiResponse)
-                .forEach(e -> LOG.infoRes(e));
+        if (object instanceof BaseApiResponse) {
+            LOG.infoBean(object);
+        }
 
         return object;
     }

@@ -2,6 +2,7 @@ package jp.co.ha.business.api.node.response;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.log.LogMessageFactory;
@@ -17,6 +18,7 @@ public class BasicHealthInfoCalcResponse extends BaseNodeResponse
 
     /** 基礎健康情報 */
     @JsonProperty("basic_health_info")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private BasicHealthInfo basicHealthInfo;
 
     /**

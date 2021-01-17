@@ -1,5 +1,6 @@
 package jp.co.ha.business.api.node.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.type.BaseEnum;
@@ -16,6 +17,7 @@ public abstract class BaseNodeResponse {
     private Result result;
     /** 処理詳細 */
     @JsonProperty("detail")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String detail;
 
     /**
