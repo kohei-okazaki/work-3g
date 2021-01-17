@@ -130,7 +130,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
                     e);
         }
 
-        LOG.debugRes(model);
+        LOG.debugBean(model);
         return model;
     }
 

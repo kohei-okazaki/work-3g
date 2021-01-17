@@ -275,7 +275,7 @@ public class AccountRecoveryController implements BaseWebController {
             @PathVariable(name = "seq_user_id", required = false) Optional<String> seqUserId,
             RedirectAttributes redirect) throws BaseException {
 
-        LOG.debugRes(form);
+        LOG.debugBean(form);
 
         Account entity = getAccount(seqUserId);
         entity.setPassword(accountComponent.getHashPassword(form.getPassword(),

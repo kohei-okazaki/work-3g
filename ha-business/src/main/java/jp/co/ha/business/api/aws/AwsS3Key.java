@@ -22,7 +22,9 @@ public enum AwsS3Key implements BaseEnum {
     /** 健康管理アプリパスワード再設定メールのテンプレートキー */
     HEALTHINFO_REGIST_TEMPLATE("mail-template/healthinfo-regist-template.txt"),
     /** 月次健康情報集計CSV配置キー */
-    MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo/");
+    MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo/"),
+    /** Slack接続情報キー */
+    SLACK_CONNECTION_DATA("slack/slack_connection_data.json");
 
     /**
      * コンストラクタ

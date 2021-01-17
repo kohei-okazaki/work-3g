@@ -11,6 +11,7 @@ import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -23,6 +24,7 @@ import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.web.api.ApiConnectInfo;
 import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
@@ -34,6 +36,9 @@ import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {
 
+    /** API通信情報Component */
+    @Autowired
+    private ApiCommunicationDataComponent apiCommunicationDataComponent;
     /** アカウント検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
@@ -75,14 +80,24 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         Account account = accountSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withHeader("Api-Key", account.getApiKey())
+                .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         ResultType result = ResultType.SUCCESS;
         for (HealthInfoRegistRequest request : toRequestList(modelList, seqUserId)) {
+
+            // API通信情報を登録
+            ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
+                    .create(registApi.getApiName(), seqUserId);
+
             HealthInfoRegistResponse response = registApi.callApi(request,
                     apiConnectInfo);
+
+            // API通信情報を更新
+            apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
+                    response);
+
             if (ResultType.FAILURE == response.getResultType()) {
                 result = response.getResultType();
             }

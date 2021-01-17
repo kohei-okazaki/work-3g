@@ -2,6 +2,7 @@ package jp.co.ha.business.api.node.response;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.healthInfo.type.GenderType;
@@ -17,9 +18,11 @@ public class CalorieCalcResponse extends BaseNodeResponse implements BaseApiResp
 
     /** カロリー計算結果情報 */
     @JsonProperty("calorie_calc_result")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private CalorieCalcResult calorieCalcResult;
     /** ユーザ健康情報 */
     @JsonProperty("user_data")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserData userData;
 
     /**

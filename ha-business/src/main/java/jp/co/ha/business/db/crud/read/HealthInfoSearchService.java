@@ -117,4 +117,12 @@ public interface HealthInfoSearchService {
      * @return 健康情報とBMI範囲マスタの複合Entity
      */
     CompositeHealthInfo findHealthInfoDetail(Integer seqHealthInfoId, Integer seqUserId);
+
+    /**
+     * 健康情報とBMI範囲マスタの複合Entityを検索する
+     *
+     * @return 健康情報とBMI範囲マスタの複合Entityリスト
+     */
+    List<CompositeHealthInfo> findHealthInfoDetailList();
+
 }

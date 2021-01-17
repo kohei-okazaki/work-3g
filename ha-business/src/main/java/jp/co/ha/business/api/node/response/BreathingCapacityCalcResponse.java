@@ -2,6 +2,7 @@ package jp.co.ha.business.api.node.response;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.healthInfo.type.GenderType;
@@ -17,9 +18,11 @@ public class BreathingCapacityCalcResponse extends BaseNodeResponse
 
     /** 肺活量計算結果情報 */
     @JsonProperty("breathing_capacity_calc_result")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private BreathingCapacityCalcResult breathingCapacityCalcResult;
     /** ユーザ情報 */
     @JsonProperty("user_data")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private UserData userData;
 
     /**
