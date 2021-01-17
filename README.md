@@ -11,7 +11,7 @@
 -----
 
 ### **EC2環境図**  
-![image](https://user-images.githubusercontent.com/24481212/104831983-fdd57a00-58d0-11eb-9bea-23ccd3c9804e.PNG)
+![image](https://user-images.githubusercontent.com/24481212/104832424-4cd0de80-58d4-11eb-9117-86cf24c6191d.png)  
 
 ## 02_Project構成  
 * ### ha-api  
