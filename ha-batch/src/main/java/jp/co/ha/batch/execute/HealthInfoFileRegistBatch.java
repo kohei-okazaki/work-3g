@@ -143,7 +143,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
         // Slackのbatch_${env}チャンネルにメッセージを投稿
         StringJoiner sj = new StringJoiner("\r\n");
-        // 健康情報一括登録完了.\r\n健康情報IDリスト\r\n
         seqHealthInfoIdList.stream().forEach(e -> sj.add(e.toString()));
         try {
             slackApiComponent.sendFile(ContentType.BATCH,

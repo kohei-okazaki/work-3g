@@ -16,8 +16,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>1.8</java-version>
-    <org.springframework-version>5.3.1</org.springframework-version>
-    <com.amazonaws-version>1.11.831</com.amazonaws-version>
+    <org.springframework-version>5.3.2</org.springframework-version>
+    <com.amazonaws-version>1.11.939</com.amazonaws-version>
     <org.aspectj-version>1.9.6</org.aspectj-version>
     <org.slf4j-version>1.7.30</org.slf4j-version>
     <org.logback-version>1.2.3</org.logback-version>

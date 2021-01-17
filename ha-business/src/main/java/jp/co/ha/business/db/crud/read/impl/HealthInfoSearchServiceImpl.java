@@ -171,4 +171,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         return compositeHealthInfoMapper.selectByPrimaryKey(key);
     }
 
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompositeHealthInfo> findHealthInfoDetailList() {
+        return compositeHealthInfoMapper.selectAll();
+    }
+
 }

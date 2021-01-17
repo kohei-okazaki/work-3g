@@ -1,0 +1,17 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  messages:
+    basename: messages
+    cache-duration: -1
+    encoding: UTF-8
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    # localを読み込む
+    default: local
+    active: local
+  web: 
+    resources:
+      add-mappings: false
