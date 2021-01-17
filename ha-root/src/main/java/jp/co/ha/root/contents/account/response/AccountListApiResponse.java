@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
@@ -22,25 +23,26 @@ public class AccountListApiResponse extends BaseRootApiResponse
 
     /** アカウント情報リスト */
     @JsonProperty("account_list")
-    private List<Account> accountList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<AccountResponse> accountResponseList;
 
     /**
-     * accountListを返す
+     * accountResponseListを返す
      *
-     * @return accountList
+     * @return accountResponseList
      */
-    public List<Account> getAccountList() {
-        return accountList;
+    public List<AccountResponse> getAccountResponseList() {
+        return accountResponseList;
     }
 
     /**
-     * accountListを設定する
+     * accountResponseListを設定する
      *
-     * @param accountList
+     * @param accountResponseList
      *     アカウント情報リスト
      */
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setAccountResponseList(List<AccountResponse> accountResponseList) {
+        this.accountResponseList = accountResponseList;
     }
 
     /**
@@ -48,7 +50,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
      *
      * @version 1.0.0
      */
-    public static class Account extends JsonEntity {
+    public static class AccountResponse extends JsonEntity {
 
         /** ユーザID */
         @JsonProperty("seq_user_id")

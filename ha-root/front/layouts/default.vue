@@ -22,6 +22,7 @@
       </v-btn>
       <AppTop />
       <v-spacer />
+      <AppLoginInfo />
       <AppLogout />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
@@ -52,12 +53,14 @@
 import AppFooter from '~/components/Footer.vue'
 import AppLogout from '~/components/Logout.vue'
 import AppTop from '~/components/Top.vue'
+import AppLoginInfo from '~/components/LoginInfo.vue'
 
 export default {
   components: {
     AppFooter,
     AppLogout,
     AppTop,
+    AppLoginInfo,
   },
   data () {
     return {

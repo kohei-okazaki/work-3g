@@ -38,16 +38,17 @@ public class AccountListApiController
     @GetMapping(value = "account", produces = { MediaType.APPLICATION_JSON_VALUE })
     public AccountListApiResponse list(AccountListApiRequest request) {
 
-        List<AccountListApiResponse.Account> accountList = service.findAll().stream()
+        List<AccountListApiResponse.AccountResponse> accountList = service.findAll()
+                .stream()
                 .map(e -> {
-                    AccountListApiResponse.Account response = new AccountListApiResponse.Account();
+                    AccountListApiResponse.AccountResponse response = new AccountListApiResponse.AccountResponse();
                     BeanUtil.copy(e, response);
                     return response;
                 }).collect(Collectors.toList());
 
         AccountListApiResponse response = new AccountListApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
-        response.setAccountList(accountList);
+        response.setAccountResponseList(accountList);
 
         return response;
     }

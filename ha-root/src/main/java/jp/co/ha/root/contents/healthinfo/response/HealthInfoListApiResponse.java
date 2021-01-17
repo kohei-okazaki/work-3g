@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.root.base.BaseRootApiResponse;
+import jp.co.ha.root.base.JsonEntity;
 import jp.co.ha.web.form.BaseApiResponse;;
 
 /**
@@ -22,7 +23,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
     /** 健康情報リスト */
-    @JsonProperty("health_info_response_list")
+    @JsonProperty("health_info_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<HealthInfoResponse> healthInfoResponseList;
 
@@ -51,7 +52,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
      *
      * @version 1.0.0
      */
-    public static class HealthInfoResponse {
+    public static class HealthInfoResponse extends JsonEntity {
 
         /** 健康情報ID */
         @JsonProperty("seq_health_info_id")
@@ -80,7 +81,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         /** 健康情報登録日時 */
         @JsonProperty("health_info_reg_date")
         @JsonSerialize(using = LocalDateTimeSerializer.class)
-        @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
+        @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
         private LocalDateTime healthInfoRegDate;
 
         /**
