@@ -13,6 +13,7 @@
 
   <properties>
     <org.springframework.boot-version>2.4.1</org.springframework.boot-version>
+    <org.jwt-version>0.9.1</org.jwt-version>
   </properties>
 
   <parent>
@@ -86,7 +87,7 @@
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt</artifactId>
-      <version>0.9.1</version>
+      <version>${org.jwt-version}</version>
     </dependency>
     <!-- SpringSecurity -->
     <dependency>

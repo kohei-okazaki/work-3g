@@ -1,6 +1,8 @@
 spring:
   # プロファイル設定
-  profiles: local
+  config:
+    activate:
+      on-profile: local
 server:
   port: 8082
 # Log設定
