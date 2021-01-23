@@ -6,9 +6,26 @@
       </v-col>
     </v-row>
     <v-row>
-     <v-col>
-        <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
-        <v-data-table :headers="headers" :items="api_data_list" :search="search"></v-data-table>
+      <v-col>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+        <v-data-table
+          :headers="headers"
+          :items="api_data_list"
+          :search="search"
+        >
+          <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
+          <template v-slot:[`item.http_status`]="{ item }">
+            <v-chip :color="getHttpStatusColor(item.http_status)" v-if="item.http_status != null">
+              {{ item.http_status }}
+            </v-chip>
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
   </div>
@@ -18,61 +35,64 @@
 const axios = require("axios");
 let url = process.env.api_base_url + "apidata";
 
-export default{
-
-  data: function() {
+export default {
+  data: function () {
     return {
-      search: '',
+      search: "",
       api_data_list: [],
       headers: [
         {
-          text: 'API通信情報ID',
-          value: 'seq_api_communication_data_id'
+          text: "API通信情報ID",
+          value: "seq_api_communication_data_id",
         },
         {
-          text: 'API名',
-          value: 'api_name'
+          text: "API名",
+          value: "api_name",
         },
         {
-          text: 'ユーザID',
-          value: 'seq_user_id'
+          text: "ユーザID",
+          value: "seq_user_id",
         },
         {
-          text: 'HTTPステータス',
-          value: 'http_status'
+          text: "HTTPステータス",
+          value: "http_status",
         },
         {
-          text: '処理結果',
-          value: 'result'
+          text: "処理結果",
+          value: "result",
         },
         {
-          text: '詳細',
-          value: 'detail'
+          text: "詳細",
+          value: "detail",
         },
         {
-          text: 'APIリクエスト日時',
-          value: 'request_date'
+          text: "APIリクエスト日時",
+          value: "request_date",
         },
         {
-          text: 'APIレスポンス日時',
-          value: 'response_date'
+          text: "APIレスポンス日時",
+          value: "response_date",
         },
       ],
-
     };
   },
-  created: function() {
+  created: function () {
     // 保存済のAPIトークンを取得
     let token = this.$store.state.auth.token;
 
-    axios.get(url, {
-      headers: { "Authorization": token },
-    }).then((response) => {
-      this.api_data_list = response.data.api_data_list;
-    }, (error) => {
-      console.log('[error]=' + error);
-      return error;
-    });
+    axios
+      .get(url, {
+        headers: { Authorization: token },
+      })
+      .then(
+        (response) => {
+          this.api_data_list = response.data.api_data_list;
+        },
+        (error) => {
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
   },
   // asyncData: async function () {
   //   // API情報一覧取得API 実行
@@ -81,7 +101,18 @@ export default{
   //     api_data_list: result.data.api_data_list,
   //   };
   // },
-}
+  methods: {
+    getHttpStatusColor: function (http_status) {
+      if (http_status == 200) {
+        return "green";
+      } else if (400 <= http_status && http_status < 500) {
+        return "yellow";
+      } else if (500 <= http_status && http_status < 600) {
+        return "red";
+      }
+    },
+  },
+};
 </script>
 
 <style>
