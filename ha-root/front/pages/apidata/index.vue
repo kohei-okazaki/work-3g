@@ -2,7 +2,7 @@
   <div>
     <v-row>
       <v-col class="text-center">
-        <h1>API通信情報一覧 index</h1>
+        <h1>API通信情報一覧</h1>
       </v-col>
     </v-row>
     <v-row>
@@ -10,7 +10,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search"
+          label="検索条件"
           single-line
           hide-details
         ></v-text-field>

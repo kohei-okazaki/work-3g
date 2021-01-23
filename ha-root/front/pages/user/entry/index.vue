@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import AppConfirm from "~/components/Confirm.vue";
+import AppConfirm from "~/components/ConfirmModal.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "user/entry";

@@ -6,7 +6,7 @@
 export default {
   data: function () {
     return {
-      title: "Root App",
+      title: "管理者サイト",
     };
   },
   methods: {
