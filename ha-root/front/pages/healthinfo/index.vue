@@ -10,7 +10,7 @@
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
-          label="Search"
+          label="検索条件"
           single-line
           hide-details
         ></v-text-field>
@@ -43,11 +43,11 @@ export default{
           value: "seq_user_id",
         },
         {
-          text: "身長",
+          text: "身長(cm)",
           value: "height",
         },
         {
-          text: "体重",
+          text: "体重(kg)",
           value: "weight",
         },
         {
@@ -55,7 +55,7 @@ export default{
           value: "bmi",
         },
         {
-          text: "標準体重",
+          text: "標準体重(kg)",
           value: "standard_weight",
         },
         {
