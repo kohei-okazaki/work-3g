@@ -36,4 +36,24 @@
     WHERE
       AC.SEQ_USER_ID = #{seqUserId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" parameterType="jp.co.ha.db.entity.composite.CompositeAccountKey" resultMap="BaseResultMap">
+    SELECT
+      <!-- ACCOUNT -->
+      AC.SEQ_USER_ID
+      , AC.PASSWORD
+      , AC.DELETE_FLAG
+      , AC.PASSWORD_EXPIRE
+      , AC.REMARKS
+      , AC.API_KEY
+      , AC.MAIL_ADDRESS
+      <!-- HEALTH_INFO_FILE_SETTING -->
+      , HF.HEADER_FLAG
+      , HF.FOOTER_FLAG
+      , HF.MASK_FLAG
+      , HF.ENCLOSURE_CHAR_FLAG
+    FROM
+      ACCOUNT AC
+      LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
+        ON AC.SEQ_USER_ID = HF.SEQ_USER_ID
+  </select>
 </mapper>

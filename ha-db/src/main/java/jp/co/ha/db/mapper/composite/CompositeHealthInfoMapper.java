@@ -1,5 +1,7 @@
 package jp.co.ha.db.mapper.composite;
 
+import java.util.List;
+
 import jp.co.ha.db.entity.composite.CompositeHealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfoKey;
 
@@ -18,5 +20,12 @@ public interface CompositeHealthInfoMapper {
      * @return 健康情報とBMI範囲マスタの複合Entity
      */
     CompositeHealthInfo selectByPrimaryKey(CompositeHealthInfoKey key);
+
+    /**
+     * 健康情報とBMI範囲マスタの複合Entityを検索する
+     *
+     * @return 健康情報とBMI範囲マスタの複合Entityのリスト
+     */
+    List<CompositeHealthInfo> selectAll();
 
 }

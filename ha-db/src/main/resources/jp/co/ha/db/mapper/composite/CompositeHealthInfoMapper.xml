@@ -40,4 +40,27 @@
       HI.SEQ_USER_ID = #{seqUserId,jdbcType=INTEGER}
       AND HI.SEQ_HEALTH_INFO_ID = #{seqHealthInfoId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT
+      <!-- HEALTH_INFO -->
+      HI.SEQ_HEALTH_INFO_ID
+      , HI.SEQ_USER_ID
+      , HI.HEIGHT
+      , HI.WEIGHT
+      , HI.BMI
+      , HI.STANDARD_WEIGHT
+      , HI.HEALTH_INFO_STATUS
+      , HI.HEALTH_INFO_REG_DATE
+      , HI.SEQ_BMI_RANGE_MT_ID
+      <!-- BMI_RANGE_MT -->
+      , BRM.RANGE_MIN
+      , BRM.RANGE_MAX
+      , BRM.OVER_WEIGHT_STATUS
+    FROM
+      HEALTH_INFO HI
+      LEFT OUTER JOIN BMI_RANGE_MT BRM
+        ON HI.SEQ_BMI_RANGE_MT_ID = BRM.SEQ_BMI_RANGE_MT_ID
+  </select>
+
 </mapper>
