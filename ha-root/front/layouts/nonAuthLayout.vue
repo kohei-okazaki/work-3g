@@ -20,7 +20,6 @@ import AppTop from '~/components/Top.vue'
 export default {
   data: function () {
     return {
-      title: "Root App",
       clipped: false,
     };
   },

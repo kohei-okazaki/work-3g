@@ -45,7 +45,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" @click="submit">
-            <v-icon>mdi-newspaper-plus</v-icon>登録
+            <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
           </v-btn>
         </v-card-actions>
         <Modal ref="finish" />
