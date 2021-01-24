@@ -7,21 +7,18 @@
             <v-text-field
               v-model="entry_info.title"
               label="タイトル"
-              :rules="[required]"
             ></v-text-field>
             <v-text-field
               v-model="entry_info.date"
               label="日付"
               hint="年/月/日"
               persistent-hint
-              :rules="[required]"
               @click="controllCalendar"
             ></v-text-field>
             <template v-if="isDispCalendar">
               <v-date-picker
                 v-model="entry_info.date"
                 no-title
-                :rules="[required]"
                 @input="controllCalendar"
               ></v-date-picker>
             </template>
@@ -29,7 +26,6 @@
             <v-select
               v-model="entry_info.tag_color"
               :items="tag_color_select_list"
-              :rules="[required]"
               label="タグ色"
               item-text="label"
               item-value="value"
@@ -39,7 +35,6 @@
             <v-text-field
               v-model="entry_info.tag_name"
               label="タグ名"
-              :rules="[required]"
             ></v-text-field>
           </v-form>
         </v-card-text>
@@ -106,10 +101,6 @@ export default {
       this.isDispCalendar = !this.isDispCalendar;
     },
     submit: function () {
-      if (!this.$refs.entry_form.validate()) {
-        // 必須項目が未指定の場合
-        return;
-      }
 
       // 保存済のAPIトークンを取得
       let token = this.$store.state.auth.token;
@@ -135,7 +126,8 @@ export default {
             this.api_data.api_entry_info = result.data.entry_data;
 
             // 処理完了モーダルを表示
-            this.$refs.finish.open("お知らせ情報登録処理", this.entry_info, {
+            let json = JSON.stringify(this.entry_info, null , "\t");
+            this.$refs.finish.open("お知らせ情報登録処理", json, {
               color: "blue",
               width: 550,
             });
