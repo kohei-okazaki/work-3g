@@ -43,7 +43,7 @@ export default {
   layout: "nonAuthLayout",
   data: function () {
     return {
-      title: "Root App Login",
+      title: "ログイン",
       seq_login_id: "",
       password: "",
       show: false,
