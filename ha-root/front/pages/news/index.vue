@@ -26,7 +26,7 @@
               :color="getTagColor(item.tag_color)"
               v-if="item.tag_color != null && item.tag_name != null"
             >
-              {{ item.tag_name }}
+              <b>{{ item.tag_name }}</b>
             </v-chip>
           </template>
           <template v-slot:[`item.detail`]="{ item }">

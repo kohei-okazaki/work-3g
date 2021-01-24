@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Key;
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.dto.NewsListDto;
 import jp.co.ha.business.dto.NewsListDto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
@@ -47,6 +50,9 @@ public class NewsEntiryApiController
     /** S3コンポーネント */
     @Autowired
     private AwsS3Component awsS3Component;
+    /** SlackComponent */
+    @Autowired
+    private SlackApiComponent slackApi;
 
     /**
      * お知らせ情報登録処理
@@ -84,7 +90,9 @@ public class NewsEntiryApiController
         entryData.setTagName(request.get("tag_name").get(0).toString());
         dtoList.add(entryData);
         dto.setNewsDtoList(dtoList);
-        uploadJson(dto);
+
+        uploadS3(dto);
+        sendSlack(entryData);
 
         NewsEntiryApiResponse response = new NewsEntiryApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
@@ -103,14 +111,14 @@ public class NewsEntiryApiController
      * @throws BaseException
      *     S3へのファイルアップロードに失敗した場合
      */
-    private void uploadJson(NewsListDto dto) throws BaseException {
+    private void uploadS3(NewsListDto dto) throws BaseException {
 
         try {
             String json = new ObjectMapper().writeValueAsString(dto);
-            InputStream is = new ByteArrayInputStream(
-                    json.getBytes(Charset.UTF_8.getValue()));
+            byte[] jsonByte = json.getBytes(Charset.UTF_8.getValue());
+            InputStream is = new ByteArrayInputStream(jsonByte);
             awsS3Component.putFileByInputStream(AwsS3Key.NEWS_JSON,
-                    Long.valueOf(json.getBytes(Charset.UTF_8.getValue()).length), is);
+                    Long.valueOf(jsonByte.length), is);
         } catch (JsonProcessingException e) {
             // JSON文字列への変換に失敗した場合
             throw new BusinessException(e);
@@ -118,6 +126,32 @@ public class NewsEntiryApiController
             // 文字コードが不正な場合
             throw new BusinessException(e);
         }
-
     }
+
+    /**
+     * 追加したお知らせ情報JSONをSlackに送信する
+     *
+     * @param dto
+     *     追加したお知らせ情報JSON
+     * @throws BaseException
+     *     Slackへのメッセージの送信に失敗した場合
+     */
+    private void sendSlack(NewsDto dto) throws BaseException {
+
+        try {
+            byte[] jsonByte = new ObjectMapper()
+                    .enable(SerializationFeature.INDENT_OUTPUT)
+                    .writeValueAsString(dto)
+                    .getBytes(Charset.UTF_8.getValue());
+            slackApi.sendFile(ContentType.ROOT, jsonByte, "news.json", "追加したお知らせ情報.json",
+                    "お知らせ情報JSONを追加.");
+        } catch (JsonProcessingException e) {
+            // JSON文字列への変換に失敗した場合
+            throw new BusinessException(e);
+        } catch (UnsupportedEncodingException e) {
+            // 文字コードが不正な場合
+            throw new BusinessException(e);
+        }
+    }
+
 }
