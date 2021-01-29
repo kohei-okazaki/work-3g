@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import Modal from "~/components/ProcessFinishModal.vue";
+import Modal from "~/components/modal/ProcessFinishModal.vue";
 
 const axios = require("axios");
 let entry_url = process.env.api_base_url + "news/entry";

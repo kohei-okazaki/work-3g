@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import AppFooter from '~/components/Footer.vue'
-import AppLogout from '~/components/Logout.vue'
-import AppTop from '~/components/Top.vue'
-import AppLoginInfo from '~/components/LoginInfo.vue'
-import AppTheme from '~/components/Theme.vue'
+import AppFooter from '~/components/AppFooter.vue'
+import AppLogout from '~/components/AppLogout.vue'
+import AppTop from '~/components/AppTop.vue'
+import AppLoginInfo from '~/components/AppLoginInfo.vue'
+import AppTheme from '~/components/AppTheme.vue'
 
 export default {
   components: {
