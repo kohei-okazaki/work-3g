@@ -20,7 +20,9 @@
       <AppTop />
       <v-spacer />
       <AppTheme />
+      &nbsp;&nbsp;
       <AppLoginInfo />
+      &nbsp;&nbsp;
       <AppLogout />
     </v-app-bar>
     <v-main>

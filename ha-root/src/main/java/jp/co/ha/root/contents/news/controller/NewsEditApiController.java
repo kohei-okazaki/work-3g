@@ -31,7 +31,7 @@ public class NewsEditApiController
      *     おしらせ情報編集APIリクエスト
      * @return おしらせ情報編集APIレスポンス
      */
-    @PutMapping(value = "news/edit/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PutMapping(value = "news/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public NewsEditApiResponse edit(
             @PathVariable(name = "id", required = false) Optional<String> id,
             @RequestBody NewsEditApiRequest request) {

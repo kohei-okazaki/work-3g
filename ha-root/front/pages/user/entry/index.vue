@@ -36,7 +36,7 @@
         <v-card-actions>
           <template v-if="api_data.api_result != '0'">
             <!-- APIが正常終了していない場合 -->
-            <v-btn color="primary" @click="submit" v-on="on">
+            <v-btn color="primary" @click="openUserEntryModal" v-on="on">
               <v-icon>mdi-account-multiple-plus</v-icon>&ensp;作成
             </v-btn>
           </template>
@@ -105,17 +105,17 @@ export default {
     },
   },
   methods: {
-    async submit() {
+    async openUserEntryModal() {
       if (
         await this.$refs.confirm.open(this.modal.title, this.modal.contents, {
           color: 'blue',
           width: 400,
         })
       ) {
-        this.send_user_entry();
+        this.entryUser();
       }
     },
-    send_user_entry: function () {
+    entryUser: function () {
       let params = new URLSearchParams();
       params.append("password", this.password);
       params.append("conf_password", this.conf_password);
