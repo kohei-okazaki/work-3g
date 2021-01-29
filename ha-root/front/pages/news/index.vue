@@ -42,10 +42,10 @@
             <v-btn small class="mx-1" @click="openNewsDeleteModal(item.index)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
-            <ConfirmModal ref="confirm" />
-            <ProcessFinishModal ref="finish" />
           </template>
         </v-data-table>
+        <ConfirmModal ref="confirm" />
+        <ProcessFinishModal ref="finish" />
       </v-col>
     </v-row>
   </div>
@@ -167,7 +167,7 @@ export default {
         this.deleteNews(id);
       }
     },
-    deleteNews: function (id) {
+    async deleteNews(id) {
       let deleteUrl = url + "/" + id;
       let token = this.$store.state.auth.token;
 
@@ -179,16 +179,16 @@ export default {
           (response) => {
             if (response.data.result == "0") {
               // 削除成功時
+
+              // 処理完了モーダルを表示
+              this.$refs.finish.open("お知らせ情報削除処理", "", {
+                color: "blue",
+                width: 400,
+              });
+
+              // おしらせ情報取得
+              this.getNews();
             }
-
-            // おしらせ情報取得
-            this.getNews();
-
-            // 処理完了モーダルを表示
-            this.$refs.finish.open("お知らせ情報削除処理", "", {
-              color: "blue",
-              width: 550,
-            });
           },
           (error) => {
             console.log("[error]=" + error);

@@ -43,21 +43,21 @@
             <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
           </v-btn>
         </v-card-actions>
-        <Modal ref="finish" />
+        <ProcessFinishModal ref="finish" />
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import Modal from "~/components/modal/ProcessFinishModal.vue";
+import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 
 const axios = require("axios");
 let entry_url = process.env.api_base_url + "news/entry";
 
 export default {
   components: {
-    Modal,
+    ProcessFinishModal,
   },
   data: function () {
     return {
@@ -102,18 +102,14 @@ export default {
     },
     submit: function () {
 
-      // 保存済のAPIトークンを取得
-      let token = this.$store.state.auth.token;
-      console.log("title=" + this.entry_info.title);
-      console.log("date=" + this.entry_info.date);
-
       let params = new URLSearchParams();
       params.append("title", this.entry_info.title);
       params.append("date", this.entry_info.date.replaceAll("-", "/"));
       params.append("detail", this.entry_info.detail);
       params.append("tag_color", this.entry_info.tag_color.value);
       params.append("tag_name", this.entry_info.tag_name);
-
+      // 保存済のAPIトークンを取得
+      let token = this.$store.state.auth.token;
       let headers = {
         Authorization: token,
       };
@@ -126,10 +122,10 @@ export default {
             this.api_data.api_entry_info = result.data.entry_data;
 
             // 処理完了モーダルを表示
-            let json = JSON.stringify(this.entry_info, null , "\t");
+            let json = JSON.stringify(this.entry_info, null, "\t");
             this.$refs.finish.open("お知らせ情報登録処理", json, {
               color: "blue",
-              width: 550,
+              width: 400,
             });
           }
         },
