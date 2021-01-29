@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
@@ -19,16 +20,12 @@ import jp.co.ha.db.entity.RootLoginInfo;
 public class AuthInfo extends RootLoginInfo implements UserDetails {
 
     /** serialVersionUID */
+    @Ignore
     private static final long serialVersionUID = 751942013999517940L;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList();
-    }
-
-    @Override
-    public String getPassword() {
-        return super.getPassword();
     }
 
     @Override
@@ -55,8 +52,7 @@ public class AuthInfo extends RootLoginInfo implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        CommonFlag deleteFlag = CommonFlag.of(super.getDeleteFlag());
-        return CommonFlag.FALSE == deleteFlag;
+        return CommonFlag.FALSE == CommonFlag.of(super.getDeleteFlag());
     }
 
 }

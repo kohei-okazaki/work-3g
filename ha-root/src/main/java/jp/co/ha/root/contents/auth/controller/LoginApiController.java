@@ -28,6 +28,7 @@ import jp.co.ha.root.type.RootApiResult;
  * @version 1.0.0
  */
 @RestController
+@Deprecated
 public class LoginApiController
         extends BaseRootApiController<LoginApiRequest, LoginApiResponse> {
 

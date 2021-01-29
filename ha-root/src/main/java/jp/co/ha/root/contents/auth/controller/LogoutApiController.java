@@ -15,6 +15,7 @@ import jp.co.ha.root.type.RootApiResult;
  * @version 1.0.0
  */
 @RestController
+@Deprecated
 public class LogoutApiController
         extends BaseRootApiController<LogoutApiRequest, LogoutApiResponse> {
 
