@@ -15,12 +15,12 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.12.5",
-    "core-js": "^3.8.2",
+    "core-js": "^3.8.3",
     "cross-env": "^7.0.3",
     "nuxt": "^2.14.6",
     "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.11.2"
+    "@nuxtjs/vuetify": "^1.11.3"
   }
 }

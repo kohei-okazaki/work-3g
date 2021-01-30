@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-row>
-      <v-col class="text-center">
-        <h1>API通信情報一覧</h1>
-      </v-col>
-    </v-row>
+    <AppTitle icon="mdi-api" title="API通信情報一覧" />
     <v-row>
       <v-col>
         <v-text-field
@@ -21,7 +17,10 @@
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.http_status`]="{ item }">
-            <v-chip :color="getHttpStatusColor(item.http_status)" v-if="item.http_status != null">
+            <v-chip
+              :color="getHttpStatusColor(item.http_status)"
+              v-if="item.http_status != null"
+            >
               {{ item.http_status }}
             </v-chip>
           </template>
@@ -32,10 +31,15 @@
 </template>
 
 <script>
+import AppTitle from "~/components/AppTitle.vue";
+
 const axios = require("axios");
 let url = process.env.api_base_url + "apidata";
 
 export default {
+  components: {
+    AppTitle,
+  },
   data: function () {
     return {
       search: "",
@@ -77,12 +81,10 @@ export default {
     };
   },
   created: function () {
-    // 保存済のAPIトークンを取得
-    let token = this.$store.state.auth.token;
 
     axios
       .get(url, {
-        headers: { Authorization: token },
+        headers: { Authorization: this.$store.state.auth.token },
       })
       .then(
         (response) => {
@@ -94,13 +96,6 @@ export default {
         }
       );
   },
-  // asyncData: async function () {
-  //   // API情報一覧取得API 実行
-  //   let result = await axios.get(url);
-  //   return {
-  //     api_data_list: result.data.api_data_list,
-  //   };
-  // },
   methods: {
     getHttpStatusColor: function (http_status) {
       if (http_status == 200) {

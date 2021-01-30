@@ -1,5 +1,5 @@
 <template>
-  <v-switch v-model="theme" :prepend-icon="themeIcon"></v-switch>
+  <v-switch v-model="theme" class="theme-postion" :prepend-icon="themeIcon"></v-switch>
 </template>
 
 <script>
@@ -22,5 +22,9 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
+.theme-postion {
+  margin-top: 16px;
+  padding-top: 4px;
+}
 </style> 

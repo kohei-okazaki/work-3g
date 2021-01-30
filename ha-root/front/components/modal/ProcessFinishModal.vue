@@ -4,12 +4,14 @@
       <v-toolbar dark :color="options.color" dense flat>
         <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
       </v-toolbar>
-      <br>
+      <br />
       <v-card-text v-show="!!message">{{ message }}</v-card-text>
-      <br>
+      <br />
       <v-card-actions class="pt-0">
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" flat="flat" @click.native="agree">{{ options.execMessage }}</v-btn>
+        <v-btn color="primary darken-1" @click.native="agree">{{
+          options.execMessage
+        }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -26,7 +28,7 @@ export default {
     options: {
       color: "primary",
       width: 290,
-      execMessage: '完了',
+      execMessage: "完了",
     },
   }),
   methods: {
@@ -51,3 +53,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>

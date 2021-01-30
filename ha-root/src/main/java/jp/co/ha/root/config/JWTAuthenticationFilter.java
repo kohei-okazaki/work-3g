@@ -48,7 +48,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /** ログインAPIのパス */
     private static final String LOGIN_API_METHOD = HttpMethod.POST.name();
     /** 要求パラメータ:ログインID */
-    private static final String REQ_PARAM_USER_NAME = "seq_login_id";
+    private static final String REQ_PARAM_SEQ_USER_ID = "seq_login_id";
     /** 要求パラメータ:パスワード */
     private static final String REQ_PARAM_PASSWORD = "password";
 
@@ -77,7 +77,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 new AntPathRequestMatcher(LOGIN_API_PATH, LOGIN_API_METHOD));
 
         // ログイン用のID/PWのパラメータ名を変更する
-        setUsernameParameter(REQ_PARAM_USER_NAME);
+        setUsernameParameter(REQ_PARAM_SEQ_USER_ID);
         setPasswordParameter(REQ_PARAM_PASSWORD);
     }
 
@@ -105,8 +105,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public void successfulAuthentication(HttpServletRequest req, HttpServletResponse res,
             FilterChain chain, Authentication auth) throws IOException, ServletException {
-
-        // 認証に成功した場合の処理
 
         // 認証情報を取得
         AuthInfo authInfo = (AuthInfo) auth.getPrincipal();
