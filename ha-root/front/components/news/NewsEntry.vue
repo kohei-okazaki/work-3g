@@ -101,7 +101,6 @@ export default {
       this.isDispCalendar = !this.isDispCalendar;
     },
     submit: function () {
-
       let params = new URLSearchParams();
       params.append("title", this.entry_info.title);
       params.append("date", this.entry_info.date.replaceAll("-", "/"));
@@ -127,6 +126,9 @@ export default {
               color: "blue",
               width: 400,
             });
+
+            // お知らせ情報登録後、最新のお知らせ情報を取得する
+            this.$emit("get-news");
           }
         },
         (error) => {

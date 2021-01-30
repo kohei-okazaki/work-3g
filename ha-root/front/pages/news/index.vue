@@ -5,7 +5,7 @@
         <h1>お知らせ情報一覧</h1>
       </v-col>
     </v-row>
-    <NewsEntry />
+    <NewsEntry @get-news="getNews" />
     <v-row>
       <v-col>
         <v-text-field
