@@ -53,7 +53,7 @@
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 
 const axios = require("axios");
-let entry_url = process.env.api_base_url + "news/entry";
+let url = process.env.api_base_url + "news";
 
 export default {
   components: {
@@ -113,7 +113,7 @@ export default {
         Authorization: token,
       };
 
-      axios.post(entry_url, params, { headers }).then(
+      axios.post(url, params, { headers }).then(
         (result) => {
           if (result.data.result == 0) {
             // お知らせ情報登録APIが正常終了した場合
