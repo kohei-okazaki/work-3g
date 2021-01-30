@@ -1,11 +1,12 @@
 <template>
   <div>
-    <v-row>
-      <v-col class="text-center">
-        <h1>お知らせ情報一覧</h1>
-      </v-col>
-    </v-row>
-    <NewsEntry @get-news="getNews" />
+    <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
+    <template v-if="entry_mode">
+      <NewsEntry @get-news="getNews" />
+    </template>
+    <template v-else>
+      <NewsEdit @get-news="getNews" :edit_news_form="edit_news_form" />
+    </template>
     <v-row>
       <v-col>
         <v-text-field
@@ -29,12 +30,7 @@
             <div v-html="item.detail"></div>
           </template>
           <template v-slot:[`item.edit_action`]="{ item }">
-            <v-btn
-              small
-              class="mx-1"
-              :to="'/news/edit/' + item.index"
-              @click="toNewsEditView('/news/edit/' + item.index)"
-            >
+            <v-btn small class="mx-1" @click="changeNewsEditView(item.index)">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
@@ -53,8 +49,10 @@
 
 <script>
 import NewsEntry from "~/components/news/NewsEntry.vue";
+import NewsEdit from "~/components/news/NewsEdit.vue";
 import ConfirmModal from "~/components/modal/ConfirmModal.vue";
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
+import AppTitle from "~/components/AppTitle.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
@@ -62,11 +60,14 @@ let url = process.env.api_base_url + "news";
 export default {
   components: {
     NewsEntry,
+    NewsEdit,
     ConfirmModal,
     ProcessFinishModal,
+    AppTitle,
   },
   data: function () {
     return {
+      entry_mode: true,
       search: "",
       news_list: [],
       headers: [
@@ -104,17 +105,28 @@ export default {
       tag_color_select_list: [
         {
           value: "1",
+          color: "blue",
           label: "1(blue)",
         },
         {
           value: "2",
+          color: "yellow",
           label: "2(yellow)",
         },
         {
           value: "3",
+          color: "red",
           label: "3(red)",
         },
       ],
+      edit_news_form: {
+        index: "",
+        title: "",
+        date: "",
+        detail: "",
+        tag_color: "",
+        tag_name: "",
+      },
     };
   },
   created: function () {
@@ -122,12 +134,11 @@ export default {
   },
   methods: {
     getTagColor: function (tag_color) {
-      if (tag_color == 1) {
-        return "blue";
-      } else if (tag_color == 2) {
-        return "red";
-      } else if (tag_color == 3) {
-        return "yellow";
+      for (var i = 0; i < this.tag_color_select_list.length; i++) {
+        let tag = this.tag_color_select_list[i];
+        if (tag.value == tag_color) {
+          return tag.color;
+        }
       }
     },
     getNews() {
@@ -147,8 +158,23 @@ export default {
           }
         );
     },
-    toNewsEditView: function (url) {
-      console.log("reqUrl = " + url);
+    changeNewsEditView: function (edit_news_id) {
+      for (var i = 0; i < this.news_list.length; i++) {
+        let targetNews = this.news_list[i];
+        if (edit_news_id == targetNews.index) {
+          for (var i = 0; i < this.tag_color_select_list.length; i++) {
+            let tag = this.tag_color_select_list[i];
+            if (targetNews.tag_color == tag.value) {
+              targetNews.tag_color = tag;
+            }
+          }
+          // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
+          targetNews.date = targetNews.date.replaceAll("/", "-");
+          this.edit_news_form = targetNews;
+          this.entry_mode = false;
+          break;
+        }
+      }
     },
     async openNewsDeleteModal(id) {
       let modalInfo = {

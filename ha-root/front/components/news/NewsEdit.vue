@@ -3,28 +3,41 @@
     <v-col class="text-center">
       <v-card>
         <v-card-text>
-          <v-form ref="entry_form">
+          <v-form ref="edit_form">
             <v-text-field
-              v-model="entry_info.title"
+              v-model="edit_news_form.index"
+              label="更新対象お知らせ情報ID"
+              disabled
+              >{{ edit_news_form.index }}</v-text-field
+            >
+            <v-text-field
+              v-model="edit_news_form.title"
               label="タイトル"
+              clearable
             ></v-text-field>
             <v-text-field
-              v-model="entry_info.date"
+              v-model="edit_news_form.date"
               label="日付"
               hint="年/月/日"
               persistent-hint
+              clearable
               @click="controllCalendar"
-            ></v-text-field>
+            >
+            </v-text-field>
             <template v-if="isDispCalendar">
               <v-date-picker
-                v-model="entry_info.date"
+                v-model="edit_news_form.date"
                 no-title
                 @input="controllCalendar"
               ></v-date-picker>
             </template>
-            <v-textarea v-model="entry_info.detail" label="詳細(htmlタグの入力も可能です)"></v-textarea>
+            <v-textarea
+              v-model="edit_news_form.detail"
+              label="詳細(htmlタグの入力も可能です)"
+              clearable
+            ></v-textarea>
             <v-select
-              v-model="entry_info.tag_color"
+              v-model="edit_news_form.tag_color"
               :items="tag_color_select_list"
               label="タグ色"
               item-text="label"
@@ -33,14 +46,15 @@
               single-line
             ></v-select>
             <v-text-field
-              v-model="entry_info.tag_name"
+              v-model="edit_news_form.tag_name"
               label="タグ名"
+              clearable
             ></v-text-field>
           </v-form>
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" @click="submit">
-            <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
+            <v-icon>mdi-comment-edit</v-icon>&ensp;更新
           </v-btn>
         </v-card-actions>
         <ProcessFinishModal ref="finish" />
@@ -53,11 +67,14 @@
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 
 const axios = require("axios");
-let entry_url = process.env.api_base_url + "news/entry";
+let url = process.env.api_base_url + "news/";
 
 export default {
   components: {
     ProcessFinishModal,
+  },
+  props: {
+    edit_news_form: Object,
   },
   data: function () {
     return {
@@ -76,24 +93,6 @@ export default {
           label: "3(red)",
         },
       ],
-      entry_info: {
-        title: "",
-        date: new Date().toISOString().substr(0, 10),
-        detail: "",
-        tag_color: "",
-        tag_name: "",
-      },
-      api_data: {
-        api_result: "",
-        api_entry_info: {
-          index: "",
-          title: "",
-          date: "",
-          detail: "",
-          tag_color: "",
-          tag_name: "",
-        },
-      },
     };
   },
   methods: {
@@ -101,33 +100,32 @@ export default {
       this.isDispCalendar = !this.isDispCalendar;
     },
     submit: function () {
-      let params = new URLSearchParams();
-      params.append("title", this.entry_info.title);
-      params.append("date", this.entry_info.date.replaceAll("-", "/"));
-      params.append("detail", this.entry_info.detail);
-      params.append("tag_color", this.entry_info.tag_color.value);
-      params.append("tag_name", this.entry_info.tag_name);
-      // 保存済のAPIトークンを取得
-      let token = this.$store.state.auth.token;
       let headers = {
-        Authorization: token,
+        Authorization: this.$store.state.auth.token,
+      }
+      let reqUrl = url + this.edit_news_form.index;
+      let reqBody = {
+        index: this.edit_news_form.index,
+        title: this.edit_news_form.title,
+        date: this.edit_news_form.date.replaceAll("-", "/"),
+        detail: this.edit_news_form.detail,
+        tag_color: this.edit_news_form.tag_color.value,
+        tag_name: this.edit_news_form.tag_name,
       };
+      console.log(JSON.stringify(reqBody, null, "\t"));
 
-      axios.post(entry_url, params, { headers }).then(
+      axios.put(reqUrl, reqBody, { headers }).then(
         (result) => {
           if (result.data.result == 0) {
-            // お知らせ情報登録APIが正常終了した場合
-            this.api_data.api_result = result.data.result;
-            this.api_data.api_entry_info = result.data.entry_data;
 
             // 処理完了モーダルを表示
-            let json = JSON.stringify(this.entry_info, null, "\t");
-            this.$refs.finish.open("お知らせ情報登録処理", json, {
+            let json = JSON.stringify(this.edit_news_form, null, "\t");
+            this.$refs.finish.open("お知らせ情報更新処理", json, {
               color: "blue",
               width: 400,
             });
 
-            // お知らせ情報登録後、最新のお知らせ情報を取得する
+            // お知らせ情報更新後、最新のお知らせ情報を取得する
             this.$emit("get-news");
           }
         },

@@ -1,17 +1,18 @@
 <template>
-  <v-row>
-    <v-col class="text-center">
-      <h1>ユーザ編集</h1>
-    </v-col>
-  </v-row>
+  <div>
+    <AppTitle icon="mdi-account-edit" title="ユーザ編集" />
+  </div>
 </template>
 
 <script>
-export default{
+import AppTitle from "~/components/AppTitle.vue";
 
-}
+export default {
+  components: {
+    AppTitle,
+  },
+};
 </script>
 
 <style>
-
 </style>
