@@ -13,14 +13,13 @@
 </template>
 
 <script>
-import AppFooter from '~/components/Footer.vue'
-import AppTop from '~/components/Top.vue'
+import AppFooter from '~/components/AppFooter.vue'
+import AppTop from '~/components/AppTop.vue'
 
 // ログイン前のレイアウト
 export default {
   data: function () {
     return {
-      title: "Root App",
       clipped: false,
     };
   },

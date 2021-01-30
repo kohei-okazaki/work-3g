@@ -10,20 +10,14 @@ export default {
     };
   },
   methods: {
-    toLoginView: function (isLogin) {
-      if (isLogin) {
-        // ログイン状態の場合
-        this.$router.push("/");
-      } else {
-        // 未ログインの場合
-        this.$router.push("/login");
-      }
+    toLoginView: function () {
+      this.$router.push("/");
     },
   },
 };
 </script>
 
-<style scope>
+<style scoped>
 .app-title {
   padding: 10px;
 }

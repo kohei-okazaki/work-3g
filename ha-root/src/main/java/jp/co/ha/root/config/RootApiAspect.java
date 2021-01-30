@@ -13,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseApiResponse;
 
@@ -50,7 +51,7 @@ public class RootApiAspect {
         Arrays.stream(pjp.getArgs()).filter(e -> e instanceof MultiValueMap)
                 .forEach(e -> {
 
-                    StringJoiner sj = new StringJoiner(",");
+                    StringJoiner sj = new StringJoiner(StringUtil.COMMA);
                     @SuppressWarnings("unchecked")
                     MultiValueMap<String, Object> map = (MultiValueMap<String, Object>) e;
                     for (Entry<String, List<Object>> entry : map.entrySet()) {

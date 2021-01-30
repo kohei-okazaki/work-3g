@@ -328,6 +328,96 @@ var table = [
         size: ""
       }
     ]
+  },
+  {
+    physicalName: "ROOT_LOGIN_INFO",
+    logicalName: "管理者サイトユーザログイン情報",
+    column : [
+      {
+          logicalName: "管理者サイトユーザログイン情報ID",
+          physicalName: "SEQ_ROOT_LOGIN_INFO_ID",
+          type: "INT",
+          size: ""
+      },
+      {
+          logicalName: "パスワード",
+          physicalName: "PASSWORD",
+          type: "VARCHAR",
+          size: "64"
+      },
+      {
+          logicalName: "削除フラグ",
+          physicalName: "DELETE_FLAG",
+          type: "VARCHAR",
+          size: "1"
+      },
+      {
+          logicalName: "パスワード有効期限",
+          physicalName: "PASSWORD_EXPIRE",
+          type: "DATE",
+          size: ""
+      },
+      {
+          logicalName: "ユーザ権限",
+          physicalName: "ROLE",
+          type: "VARCHAR",
+          size: "2"
+      },
+      {
+          logicalName: "備考",
+          physicalName: "REMARKS",
+          type: "VARCHAR",
+          size: "256"
+      },
+      {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "DATETIME",
+          size: ""
+      },
+      {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "DATETIME",
+          size: ""
+      }
+    ]
+  },
+  {
+    physicalName: "ROOT_ROLE_MT",
+    logicalName: "管理者サイト権限マスタ",
+    column : [
+      {
+          logicalName: "管理者サイト権限マスタID",
+          physicalName: "SEQ_ROOT_ROLE_MT_ID",
+          type: "INT",
+          size: ""
+      },
+      {
+          logicalName: "ユーザ権限",
+          physicalName: "ROLE",
+          type: "VARCHAR",
+          size: "2"
+      },
+      {
+          logicalName: "ユーザ権限名",
+          physicalName: "ROLE_NAME",
+          type: "VARCHAR",
+          size: "64"
+      },
+      {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "DATETIME",
+          size: ""
+      },
+      {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "DATETIME",
+          size: ""
+      }
+    ]
   }
 ];
 

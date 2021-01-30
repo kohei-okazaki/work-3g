@@ -1,9 +1,7 @@
 <template>
   <v-row>
     <v-col class="text-center">
-      <h1>お知らせ情報登録</h1>
       <v-card>
-        <v-card-title>{{ title }}</v-card-title>
         <v-card-text>
           <v-form ref="entry_form">
             <v-text-field
@@ -24,7 +22,7 @@
                 @input="controllCalendar"
               ></v-date-picker>
             </template>
-            <v-textarea v-model="entry_info.detail" label="詳細"></v-textarea>
+            <v-textarea v-model="entry_info.detail" label="詳細(htmlタグの入力も可能です)"></v-textarea>
             <v-select
               v-model="entry_info.tag_color"
               :items="tag_color_select_list"
@@ -42,28 +40,27 @@
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" @click="submit">
-            <v-icon>mdi-newspaper-plus</v-icon>登録
+            <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
           </v-btn>
         </v-card-actions>
-        <Modal ref="finish" />
+        <ProcessFinishModal ref="finish" />
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script>
-import Modal from "~/components/ProcessFinishModal.vue";
+import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 
 const axios = require("axios");
-let url = process.env.api_base_url + "news/entry";
+let url = process.env.api_base_url + "news";
 
 export default {
   components: {
-    Modal,
+    ProcessFinishModal,
   },
   data: function () {
     return {
-      title: "お知らせ情報登録",
       isDispCalendar: false,
       tag_color_select_list: [
         {
@@ -104,18 +101,14 @@ export default {
       this.isDispCalendar = !this.isDispCalendar;
     },
     submit: function () {
-      // 保存済のAPIトークンを取得
-      let token = this.$store.state.auth.token;
-      console.log("title=" + this.entry_info.title);
-      console.log("date=" + this.entry_info.date);
-
       let params = new URLSearchParams();
       params.append("title", this.entry_info.title);
       params.append("date", this.entry_info.date.replaceAll("-", "/"));
       params.append("detail", this.entry_info.detail);
       params.append("tag_color", this.entry_info.tag_color.value);
       params.append("tag_name", this.entry_info.tag_name);
-
+      // 保存済のAPIトークンを取得
+      let token = this.$store.state.auth.token;
       let headers = {
         Authorization: token,
       };
@@ -128,10 +121,14 @@ export default {
             this.api_data.api_entry_info = result.data.entry_data;
 
             // 処理完了モーダルを表示
-            this.$refs.finish.open("お知らせ情報登録処理", this.entry_info, {
+            let json = JSON.stringify(this.entry_info, null, "\t");
+            this.$refs.finish.open("お知らせ情報登録処理", json, {
               color: "blue",
-              width: 550,
+              width: 400,
             });
+
+            // お知らせ情報登録後、最新のお知らせ情報を取得する
+            this.$emit("get-news");
           }
         },
         (error) => {
@@ -144,5 +141,5 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 </style>

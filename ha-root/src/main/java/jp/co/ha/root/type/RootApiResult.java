@@ -39,6 +39,17 @@ public enum RootApiResult implements BaseEnum {
     }
 
     /**
+     * RootAPI処理結果の列挙体を返す
+     *
+     * @param value
+     *     値
+     * @return RootAPI処理結果の列挙体
+     */
+    public static RootApiResult of(String value) {
+        return BaseEnum.of(RootApiResult.class, value);
+    }
+
+    /**
      * RootAPI処理結果のシリアライズクラス
      *
      * @version 1.0.0

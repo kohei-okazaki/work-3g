@@ -13,7 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({
         "jp.co.ha.root.config",
         "jp.co.ha.root.base.*.controller",
-        "jp.co.ha.root.contents.*.controller" })
+        "jp.co.ha.root.contents.*.controller",
+        "jp.co.ha.root.contents.*.component" })
 public class RootApplication {
 
     /**

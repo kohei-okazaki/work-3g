@@ -1,10 +1,6 @@
 <template>
   <div>
-    <v-row>
-      <v-col class="text-center">
-        <h1>アカウント情報一覧 index</h1>
-      </v-col>
-    </v-row>
+    <AppTitle icon="mdi-account" title="アカウント情報一覧" />
     <v-row>
       <v-col>
         <v-text-field
@@ -25,10 +21,15 @@
 </template>
 
 <script>
+import AppTitle from "~/components/AppTitle.vue";
+
 const axios = require("axios");
 let url = process.env.api_base_url + "account";
 
 export default {
+  components: {
+    AppTitle,
+  },
   data: function () {
     return {
       search: "",

@@ -1,17 +1,14 @@
 <template>
   <div>
-    <v-row>
-      <v-col class="text-center">
-        <h1>お知らせ情報一覧</h1>
-      </v-col>
-    </v-row>
+    <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
+    <template v-if="entry_mode">
+      <NewsEntry @get-news="getNews" />
+    </template>
+    <template v-else>
+      <NewsEdit @get-news="getNews" :edit_news_form="edit_news_form" />
+    </template>
     <v-row>
       <v-col>
-        <v-toolbar flat>
-          <v-btn color="primary" @click="toEntryView"
-            ><v-icon>mdi-newspaper-plus</v-icon>新規登録</v-btn
-          >
-        </v-toolbar>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
@@ -26,28 +23,64 @@
               :color="getTagColor(item.tag_color)"
               v-if="item.tag_color != null && item.tag_name != null"
             >
-              {{ item.tag_name }}
+              <b>{{ item.tag_name }}</b>
             </v-chip>
           </template>
           <template v-slot:[`item.detail`]="{ item }">
             <div v-html="item.detail"></div>
           </template>
+          <template v-slot:[`item.edit_action`]="{ item }">
+            <v-btn small class="mx-1" @click="changeNewsEditView(item.index)">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:[`item.delete_action`]="{ item }">
+            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.index)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </template>
         </v-data-table>
+        <ConfirmModal ref="confirm" />
+        <ProcessFinishModal ref="finish" />
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
+import NewsEntry from "~/components/news/NewsEntry.vue";
+import NewsEdit from "~/components/news/NewsEdit.vue";
+import ConfirmModal from "~/components/modal/ConfirmModal.vue";
+import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
+import AppTitle from "~/components/AppTitle.vue";
+
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
 
 export default {
+  components: {
+    NewsEntry,
+    NewsEdit,
+    ConfirmModal,
+    ProcessFinishModal,
+    AppTitle,
+  },
   data: function () {
     return {
+      entry_mode: true,
       search: "",
       news_list: [],
       headers: [
+        {
+          text: "",
+          value: "edit_action",
+          sortable: false,
+        },
+        {
+          text: "",
+          value: "delete_action",
+          sortable: false,
+        },
         {
           text: "ID",
           value: "index",
@@ -69,43 +102,129 @@ export default {
           value: "tag_name",
         },
       ],
+      tag_color_select_list: [
+        {
+          value: "1",
+          color: "blue",
+          label: "1(blue)",
+        },
+        {
+          value: "2",
+          color: "yellow",
+          label: "2(yellow)",
+        },
+        {
+          value: "3",
+          color: "red",
+          label: "3(red)",
+        },
+      ],
+      edit_news_form: {
+        index: "",
+        title: "",
+        date: "",
+        detail: "",
+        tag_color: "",
+        tag_name: "",
+      },
     };
   },
   created: function () {
-    // 保存済のAPIトークンを取得
-    let token = this.$store.state.auth.token;
-
-    axios
-      .get(url, {
-        headers: { Authorization: token },
-      })
-      .then(
-        (response) => {
-          this.news_list = response.data.news_list;
-        },
-        (error) => {
-          console.log("[error]=" + error);
-          return error;
-        }
-      );
+    this.getNews();
   },
   methods: {
     getTagColor: function (tag_color) {
-      if (tag_color == 1) {
-        return "blue";
-      } else if (tag_color == 2) {
-        return "red";
-      } else if (tag_color == 3) {
-        return "yellow";
+      for (var i = 0; i < this.tag_color_select_list.length; i++) {
+        let tag = this.tag_color_select_list[i];
+        if (tag.value == tag_color) {
+          return tag.color;
+        }
       }
     },
-    toEntryView: function () {
-      // お知らせ情報登録画面に遷移
-      this.$router.push("/news/entry");
+    getNews() {
+      let token = this.$store.state.auth.token;
+
+      axios
+        .get(url, {
+          headers: { Authorization: token },
+        })
+        .then(
+          (response) => {
+            this.news_list = response.data.news_list;
+          },
+          (error) => {
+            console.log("[error]=" + error);
+            return error;
+          }
+        );
+    },
+    changeNewsEditView: function (edit_news_id) {
+      for (var i = 0; i < this.news_list.length; i++) {
+        let targetNews = this.news_list[i];
+        if (edit_news_id == targetNews.index) {
+          for (var i = 0; i < this.tag_color_select_list.length; i++) {
+            let tag = this.tag_color_select_list[i];
+            if (targetNews.tag_color == tag.value) {
+              targetNews.tag_color = tag;
+            }
+          }
+          // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
+          targetNews.date = targetNews.date.replaceAll("/", "-");
+          this.edit_news_form = targetNews;
+          this.entry_mode = false;
+          break;
+        }
+      }
+    },
+    async openNewsDeleteModal(id) {
+      let modalInfo = {
+        color: "red",
+        width: 400,
+      };
+
+      if (
+        await this.$refs.confirm.open(
+          "削除確認",
+          "お知らせ情報ID=" + id + "のレコードを削除しますか？",
+          modalInfo
+        )
+      ) {
+        // 確認モーダルで削除に同意した場合
+        this.deleteNews(id);
+      }
+    },
+    async deleteNews(id) {
+      let deleteUrl = url + "/" + id;
+      let token = this.$store.state.auth.token;
+
+      axios
+        .delete(deleteUrl, {
+          headers: { Authorization: token },
+        })
+        .then(
+          (response) => {
+            if (response.data.result == "0") {
+              // 削除成功時
+
+              // 処理完了モーダルを表示
+              this.$refs.finish.open("お知らせ情報削除処理", "", {
+                color: "blue",
+                width: 400,
+              });
+
+              // おしらせ情報取得
+              this.getNews();
+            }
+          },
+          (error) => {
+            console.log("[error]=" + error);
+            return error;
+          }
+        );
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 </style>
