@@ -25,11 +25,11 @@
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" @click="submit">
-            <v-icon>mdi-account-arrow-right</v-icon>ログイン
+            <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
           </v-btn>
           <v-spacer />
           <v-btn color="primary" :to="`user/entry`">
-            <v-icon>mdi-account-multiple-plus</v-icon>管理ユーザ作成
+            <v-icon>mdi-account-multiple-plus</v-icon>&ensp;管理ユーザ作成
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -43,7 +43,7 @@ export default {
   layout: "nonAuthLayout",
   data: function () {
     return {
-      title: "Root App Login",
+      title: "ログイン",
       seq_login_id: "",
       password: "",
       show: false,

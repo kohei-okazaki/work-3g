@@ -43,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                // .cors()
                 .cors().configurationSource(this.corsConfigurationSource())
                 .and().authorizeRequests()
                 .antMatchers(AUTH_IGNORE_URL).permitAll()

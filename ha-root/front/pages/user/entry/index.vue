@@ -36,14 +36,14 @@
         <v-card-actions>
           <template v-if="api_data.api_result != '0'">
             <!-- APIが正常終了していない場合 -->
-            <v-btn color="primary" @click="submit" v-on="on">
-              <v-icon>mdi-account-multiple-plus</v-icon>作成
+            <v-btn color="primary" @click="openUserEntryModal" v-on="on">
+              <v-icon>mdi-account-multiple-plus</v-icon>&ensp;作成
             </v-btn>
           </template>
           <template v-else>
             <!-- APIが正常終了している場合 -->
             <v-btn color="primary" to="/login">
-              <v-icon>mdi-account-arrow-right</v-icon>ログイン
+              <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
             </v-btn>
           </template>
         </v-card-actions>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import AppConfirm from "~/components/ConfirmModal.vue";
+import AppConfirm from "~/components/modal/ConfirmModal.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "user/entry";
@@ -105,17 +105,17 @@ export default {
     },
   },
   methods: {
-    async submit() {
+    async openUserEntryModal() {
       if (
         await this.$refs.confirm.open(this.modal.title, this.modal.contents, {
           color: 'blue',
           width: 400,
         })
       ) {
-        this.send_user_entry();
+        this.entryUser();
       }
     },
-    send_user_entry: function () {
+    entryUser: function () {
       let params = new URLSearchParams();
       params.append("password", this.password);
       params.append("conf_password", this.conf_password);
