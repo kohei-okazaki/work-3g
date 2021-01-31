@@ -8,7 +8,7 @@ Created on 2020/10/26
 from src.main.python.common.form import BaseForm
 
 
-class BreathingCapacity(BaseForm):
+class BreathingCapacityForm(BaseForm):
     '''
     肺活量計算計算用のFormクラス
     '''

@@ -22,11 +22,10 @@ class BreathingCapacity:
         '''
         self.driver = driver
 
-    def doCalc(self, breathingcapacity_form, isMale):
+    def doCalc(self, breathingcapacity_form):
         '''
         肺活量計算を行う
         @param breathingcapacity_form 肺活量計算画面のForm
-        @param isMale 男性の場合True、それ以外の場合False
         '''
 
         '''
@@ -41,7 +40,7 @@ class BreathingCapacity:
         self.driver.find_element_by_id("age").send_keys(breathingcapacity_form.getAge())
 
         #  肺活量計算入力画面 - 性別を設定
-        if isMale:
+        if breathingcapacity_form.getGender == "0":
             self.driver.find_element_by_id("male").send_keys(breathingcapacity_form.getGender())
         else :
             self.driver.find_element_by_id("female").send_keys(breathingcapacity_form.getGender())
