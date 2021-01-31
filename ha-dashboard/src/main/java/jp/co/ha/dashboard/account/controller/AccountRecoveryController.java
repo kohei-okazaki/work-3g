@@ -7,7 +7,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +32,7 @@ import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.RegexType;
@@ -74,8 +74,8 @@ public class AccountRecoveryController implements BaseWebController {
     @Autowired
     private HealthInfoProperties properties;
     /** SHA-256作成Encoder */
+    @Sha256
     @Autowired
-    @Qualifier("sha256HashEncoder")
     private HashEncoder encoder;
     /** AwsSesComponent */
     @Autowired
