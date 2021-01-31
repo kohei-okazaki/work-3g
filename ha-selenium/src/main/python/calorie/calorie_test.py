@@ -51,6 +51,7 @@ Calorie(driver).doCalc(calorie_form)
 # 目視のため1秒止める
 sleep(1)
 
+# # 異常系
 # E001:年齢のみ未指定
 calorie_form = CalorieForm({
     "age":"",
@@ -103,13 +104,78 @@ Calorie(driver).doCalc(calorie_form)
 # 目視のため1秒止める
 sleep(1)
 
-# E005:生活科都合代謝のみ未指定
+# E005:生活活動代謝のみ未指定
 calorie_form = CalorieForm({
     "age":"10",
     "gender":"0",
     "height":"165.0",
     "weight":"65.0",
     "lifeWorkMetabolism":"",
+})
+Calorie(driver).doCalc(calorie_form)
+
+# 目視のため1秒止める
+sleep(1)
+
+# E006:年齢に数字以外を指定
+calorie_form = CalorieForm({
+    "age":"test",
+    "gender":"0",
+    "height":"165.0",
+    "weight":"65.0",
+    "lifeWorkMetabolism":"100",
+})
+Calorie(driver).doCalc(calorie_form)
+
+# 目視のため1秒止める
+sleep(1)
+
+# E007:性別に数字以外を指定
+calorie_form = CalorieForm({
+    "age":"10",
+    "gender":"test",
+    "height":"165.0",
+    "weight":"65.0",
+    "lifeWorkMetabolism":"100",
+})
+Calorie(driver).doCalc(calorie_form)
+
+# 目視のため1秒止める
+sleep(1)
+
+# E008:身長に数字以外を指定
+calorie_form = CalorieForm({
+    "age":"10",
+    "gender":"0",
+    "height":"test",
+    "weight":"65.0",
+    "lifeWorkMetabolism":"100",
+})
+Calorie(driver).doCalc(calorie_form)
+
+# 目視のため1秒止める
+sleep(1)
+
+# E009:体重に数字以外を指定
+calorie_form = CalorieForm({
+    "age":"10",
+    "gender":"0",
+    "height":"165.0",
+    "weight":"test",
+    "lifeWorkMetabolism":"100",
+})
+Calorie(driver).doCalc(calorie_form)
+
+# 目視のため1秒止める
+sleep(1)
+
+# E010:生活活動代謝に数字以外を指定
+calorie_form = CalorieForm({
+    "age":"10",
+    "gender":"0",
+    "height":"165.0",
+    "weight":"65.0",
+    "lifeWorkMetabolism":"test",
 })
 Calorie(driver).doCalc(calorie_form)
 
