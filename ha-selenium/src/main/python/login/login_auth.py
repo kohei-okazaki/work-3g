@@ -30,10 +30,10 @@ class LoginAuth:
         # ログイン画面を表示する
         self.driver.get(const_data.BASE_REQUEST_URL + 'login/index')
 
-        # ログイン画面 - userIdを設定
-        self.driver.find_element_by_id("userId").click()
-        self.driver.find_element_by_id("userId").clear()
-        self.driver.find_element_by_id("userId").send_keys(login_form.getUserId())
+        # ログイン画面 - mailAddressを設定
+        self.driver.find_element_by_id("mailAddress").click()
+        self.driver.find_element_by_id("mailAddress").clear()
+        self.driver.find_element_by_id("mailAddress").send_keys(login_form.getMailAddress())
 
         # ログイン画面 - passwordを設定
         self.driver.find_element_by_id("password").click()

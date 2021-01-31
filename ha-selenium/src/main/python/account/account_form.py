@@ -20,11 +20,11 @@ class BaseAccountForm(BaseForm):
         '''
         self.params = params;
 
-    def getUserId(self):
+    def getMailAddress(self):
         '''
-        ユーザIDを返す
+        メールアドレスを返す
         '''
-        return self.params["user_id"]
+        return self.params["mailAddress"]
 
     def getPassword(self):
         '''
@@ -81,18 +81,6 @@ class AccountSettingForm(BaseAccountForm):
         備考を返す
         '''
         return self.params["remarks"]
-
-    def getMailAddress(self):
-        '''
-        メールアドレスを返す
-        '''
-        return self.params["mailAddress"]
-
-    def getMailPassword(self):
-        '''
-        メールパスワードを返す
-        '''
-        return self.params["mailPassword"]
 
     def getPasswordExpire(self):
         '''

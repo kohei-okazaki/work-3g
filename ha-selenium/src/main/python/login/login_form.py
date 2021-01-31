@@ -20,11 +20,11 @@ class LoginForm(BaseForm):
         '''
         self.params = params;
 
-    def getUserId(self):
+    def getMailAddress(self):
         '''
-        ユーザIDを返す
+        メールアドレスを返す
         '''
-        return self.params["user_id"]
+        return self.params["mailAddress"]
 
     def getPassword(self):
         '''

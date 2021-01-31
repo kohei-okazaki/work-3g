@@ -22,11 +22,10 @@ class Calorie(object):
         '''
         self.driver = driver
 
-    def doCalc(self, calorie_form, isMale):
+    def doCalc(self, calorie_form):
         '''
         カロリー計算を行う
         @param calorie_form カロリー計算画面のForm
-        @param isMale 男性の場合True、それ以外の場合False
         '''
 
         '''
@@ -41,7 +40,7 @@ class Calorie(object):
         self.driver.find_element_by_id("age").send_keys(calorie_form.getAge())
 
         #  肺活量計算入力画面 - 性別を設定
-        if isMale:
+        if calorie_form.getGender == "0":
             self.driver.find_element_by_id("male").send_keys(calorie_form.getGender())
         else :
             self.driver.find_element_by_id("female").send_keys(calorie_form.getGender())
@@ -65,5 +64,5 @@ class Calorie(object):
         sleep(2)
 
         # 確認ボタン押下し、カロリー計算処理を行い計算結果画面を表示
-        submit_button = self.driver.find_element_by_xpath(u"//input[@value='確 認']")
+        submit_button = self.driver.find_element_by_xpath(u"//input[@value='計 算']")
         submit_button.click()

@@ -35,10 +35,10 @@ class AccountRegist:
         # アカウント作成画面を表示する
         self.driver.get(const_data.BASE_REQUEST_URL + 'accountregist/input')
 
-        # アカウント作成画面 - userIdを設定
-        self.driver.find_element_by_id("userId").click()
-        self.driver.find_element_by_id("userId").clear()
-        self.driver.find_element_by_id("userId").send_keys(account_regist_form.getUserId())
+        # アカウント作成画面 - mailAddressを設定
+        self.driver.find_element_by_id("mailAddress").click()
+        self.driver.find_element_by_id("mailAddress").clear()
+        self.driver.find_element_by_id("mailAddress").send_keys(account_regist_form.getMailAddress())
 
         # アカウント作成画面 - passwordを設定
         self.driver.find_element_by_id("password").click()
