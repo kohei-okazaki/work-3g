@@ -15,7 +15,7 @@ def login_default_selenium_user(driver):
     @driver Driver
     '''
     LoginAuth(driver).doLogin(LoginForm({
-        "user_id": "seleniumuser",
+        "mailAddress": "selenium@gmail.com",
         "password": "seleniumuser",
     }))
 

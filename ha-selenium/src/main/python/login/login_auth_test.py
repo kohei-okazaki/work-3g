@@ -22,8 +22,8 @@ driver = SeleniumDriver().getDriver()
 
 # N001:正しいログイン情報でログイン
 login_form = LoginForm({
-  "user_id": "master",
-  "password": "master",
+  "mailAddress": "selenium@gmail.com",
+  "password": "seleniumuser",
 })
 LoginAuth(driver).doLogin(login_form)
 
@@ -32,8 +32,8 @@ driver.back()
 
 # N002:正しいログイン情報でログイン
 login_form = LoginForm({
-  "user_id": "master",
-  "password": "master",
+  "mailAddress": "selenium@gmail.com",
+  "password": "seleniumuser",
 })
 LoginAuth(driver).doLogin(login_form)
 
@@ -42,58 +42,51 @@ LoginAuth(driver).doLogout()
 
 # E001:正しくないパスワードでログイン
 login_form = LoginForm({
-  "user_id": "master",
+  "mailAddress": "selenium@gmail.com",
   "password": "hoge",
 })
 LoginAuth(driver).doLogin(login_form)
 
 # E002:存在しないユーザIDでログイン
 login_form = LoginForm({
-  "user_id": "tejamvpose4jt4ebtjos",
-  "password": "tejamvpose4jt4ebtjos",
+  "mailAddress": "selenium_no_user@gmail.com",
+  "password": "seleniumuser",
 })
 LoginAuth(driver).doLogin(login_form)
 
 # 入力チェック
-# E003:ユーザIDのみを未入力でログイン
+# E003:メールアドレスのみを未入力でログイン
 login_form = LoginForm({
-  "user_id": "",
-  "password": "tejamvpose4jt4ebtjos",
+  "mailAddress": "",
+  "password": "seleniumuser",
 })
 LoginAuth(driver).doLogin(login_form)
 
 # E004:パスワードのみを未入力でログイン
 login_form = LoginForm({
-  "user_id": "master",
-  "password": "",
+    "mailAddress": "selenium@gmail.com",
+    "password": "",
 })
 LoginAuth(driver).doLogin(login_form)
 
-# E005:ユーザIDのみを最小桁 - 1桁でログイン
+# E005:パスワードのみを最小桁 - 1桁でログイン
 login_form = LoginForm({
-  "user_id": "1",
-  "password": "tejamvpose4jt4ebtjos",
-})
-LoginAuth(driver).doLogin(login_form)
-
-# E006:パスワードのみを最小桁 - 1桁でログイン
-login_form = LoginForm({
-  "user_id": "master",
+  "mailAddress": "selenium@gmail.com",
   "password": "1",
 })
 LoginAuth(driver).doLogin(login_form)
 
 # E007:ユーザIDのみを最大桁 + 1でログイン
 login_form = LoginForm({
-  "user_id": "12345678901234567",
-  "password": "tejamvpose4jt4ebtjos",
+  "mailAddress": "12345678901234567890123456789012345678901234567890123456789012345678901234",
+  "password": "seleniumuser",
 })
 LoginAuth(driver).doLogin(login_form)
 
 # E008:パスワードのみを最大桁 + 1でログイン
 login_form = LoginForm({
-  "user_id": "E008",
-  "password": "12345678901234567",
+    "mailAddress": "selenium@gmail.com",
+    "password": "12345678901234567890123456789012345678901234567890123456789012345678901234",
 })
 LoginAuth(driver).doLogin(login_form)
 
