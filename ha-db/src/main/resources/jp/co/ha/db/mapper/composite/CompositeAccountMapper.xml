@@ -8,6 +8,8 @@
     <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
     <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
     <result column="API_KEY" jdbcType="VARCHAR" property="apiKey" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="MAIL_ADDRESS" jdbcType="VARCHAR" property="mailAddress" />
     <result column="HEADER_FLAG" jdbcType="VARCHAR" property="headerFlag" />
     <result column="FOOTER_FLAG" jdbcType="VARCHAR" property="footerFlag" />
@@ -24,6 +26,8 @@
       , AC.REMARKS
       , AC.API_KEY
       , AC.MAIL_ADDRESS
+      , AC.REG_DATE
+      , AC.UPDATE_DATE
       <!-- HEALTH_INFO_FILE_SETTING -->
       , HF.HEADER_FLAG
       , HF.FOOTER_FLAG
@@ -46,6 +50,8 @@
       , AC.REMARKS
       , AC.API_KEY
       , AC.MAIL_ADDRESS
+      , AC.REG_DATE
+      , AC.UPDATE_DATE
       <!-- HEALTH_INFO_FILE_SETTING -->
       , HF.HEADER_FLAG
       , HF.FOOTER_FLAG

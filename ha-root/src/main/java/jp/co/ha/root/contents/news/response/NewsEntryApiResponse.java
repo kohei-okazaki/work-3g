@@ -12,7 +12,7 @@ import jp.co.ha.web.form.BaseApiResponse;
  *
  * @version 1.0.0
  */
-public class NewsEntiryApiResponse extends BaseRootApiResponse
+public class NewsEntryApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
     /** 登録したお知らせ情報 */

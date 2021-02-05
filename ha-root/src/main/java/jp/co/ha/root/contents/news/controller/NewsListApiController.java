@@ -57,6 +57,10 @@ public class NewsListApiController
                 .map(e -> {
                     NewsListApiResponse.NewsDataResponse response = new NewsListApiResponse.NewsDataResponse();
                     BeanUtil.copy(e, response);
+
+                    NewsListApiResponse.Tag responseTag = new NewsListApiResponse.Tag();
+                    BeanUtil.copy(e.getTag(), responseTag);
+                    response.setTag(responseTag);
                     return response;
                 })
                 .sorted(Comparator

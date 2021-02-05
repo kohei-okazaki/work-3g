@@ -2,6 +2,7 @@ package jp.co.ha.db.entity.composite;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jp.co.ha.common.db.annotation.Crypt;
 import jp.co.ha.common.db.annotation.Entity;
@@ -35,6 +36,10 @@ public class CompositeAccount extends CompositeAccountKey implements Serializabl
     private String apiKey;
     /** パスワード有効期限 */
     private LocalDate passwordExpire;
+    /** 登録日時 */
+    private LocalDateTime regDate;
+    /** 更新日時 */
+    private LocalDateTime updateDate;
     /** ヘッダ利用有無フラグ */
     private String headerFlag;
     /** フッタ利用有無フラグ */
@@ -156,6 +161,44 @@ public class CompositeAccount extends CompositeAccountKey implements Serializabl
      */
     public void setPasswordExpire(LocalDate passwordExpire) {
         this.passwordExpire = passwordExpire;
+    }
+
+    /**
+     * regDateを返す
+     *
+     * @return regDate
+     */
+    public LocalDateTime getRegDate() {
+        return regDate;
+    }
+
+    /**
+     * regDateを設定する
+     *
+     * @param regDate
+     *     登録日時
+     */
+    public void setRegDate(LocalDateTime regDate) {
+        this.regDate = regDate;
+    }
+
+    /**
+     * updateDateを返す
+     *
+     * @return updateDate
+     */
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    /**
+     * updateDateを設定する
+     *
+     * @param updateDate
+     *     更新日時
+     */
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 
     /**

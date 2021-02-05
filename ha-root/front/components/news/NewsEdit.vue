@@ -36,17 +36,12 @@
               label="詳細(htmlタグの入力も可能です)"
               clearable
             ></v-textarea>
-            <v-select
-              v-model="edit_news_form.tag_color"
-              :items="tag_color_select_list"
-              label="タグ色"
-              item-text="label"
-              item-value="value"
-              return-object
-              single-line
-            ></v-select>
+            <NewsTagPullDown
+              v-model="edit_news_form.tag.color"
+              :color="edit_news_form.tag.color"
+            />
             <v-text-field
-              v-model="edit_news_form.tag_name"
+              v-model="edit_news_form.tag.name"
               label="タグ名"
               clearable
             ></v-text-field>
@@ -65,13 +60,14 @@
 
 <script>
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
-
+import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
 const axios = require("axios");
 let url = process.env.api_base_url + "news/";
 
 export default {
   components: {
     ProcessFinishModal,
+    NewsTagPullDown,
   },
   props: {
     edit_news_form: Object,
@@ -79,20 +75,6 @@ export default {
   data: function () {
     return {
       isDispCalendar: false,
-      tag_color_select_list: [
-        {
-          value: "1",
-          label: "1(blue)",
-        },
-        {
-          value: "2",
-          label: "2(yellow)",
-        },
-        {
-          value: "3",
-          label: "3(red)",
-        },
-      ],
     };
   },
   methods: {
@@ -102,22 +84,23 @@ export default {
     submit: function () {
       let headers = {
         Authorization: this.$store.state.auth.token,
-      }
+      };
       let reqUrl = url + this.edit_news_form.index;
       let reqBody = {
         index: this.edit_news_form.index,
         title: this.edit_news_form.title,
         date: this.edit_news_form.date.replaceAll("-", "/"),
         detail: this.edit_news_form.detail,
-        tag_color: this.edit_news_form.tag_color.value,
-        tag_name: this.edit_news_form.tag_name,
+        tag: {
+          color: this.edit_news_form.tag.color,
+          name: this.edit_news_form.tag.name,
+        },
       };
       console.log(JSON.stringify(reqBody, null, "\t"));
 
       axios.put(reqUrl, reqBody, { headers }).then(
         (result) => {
           if (result.data.result == 0) {
-
             // 処理完了モーダルを表示
             let json = JSON.stringify(this.edit_news_form, null, "\t");
             this.$refs.finish.open("お知らせ情報更新処理", json, {

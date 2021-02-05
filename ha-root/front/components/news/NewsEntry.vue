@@ -22,18 +22,13 @@
                 @input="controllCalendar"
               ></v-date-picker>
             </template>
-            <v-textarea v-model="entry_info.detail" label="詳細(htmlタグの入力も可能です)"></v-textarea>
-            <v-select
-              v-model="entry_info.tag_color"
-              :items="tag_color_select_list"
-              label="タグ色"
-              item-text="label"
-              item-value="value"
-              return-object
-              single-line
-            ></v-select>
+            <v-textarea
+              v-model="entry_info.detail"
+              label="詳細(htmlタグの入力も可能です)"
+            ></v-textarea>
+            <NewsTagPullDown v-model="entry_info.tag.color" color="blue" />
             <v-text-field
-              v-model="entry_info.tag_name"
+              v-model="entry_info.tag.name"
               label="タグ名"
             ></v-text-field>
           </v-form>
@@ -51,6 +46,7 @@
 
 <script>
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
+import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
@@ -58,30 +54,19 @@ let url = process.env.api_base_url + "news";
 export default {
   components: {
     ProcessFinishModal,
+    NewsTagPullDown,
   },
   data: function () {
     return {
       isDispCalendar: false,
-      tag_color_select_list: [
-        {
-          value: "1",
-          label: "1(blue)",
-        },
-        {
-          value: "2",
-          label: "2(yellow)",
-        },
-        {
-          value: "3",
-          label: "3(red)",
-        },
-      ],
       entry_info: {
         title: "",
         date: new Date().toISOString().substr(0, 10),
         detail: "",
-        tag_color: "",
-        tag_name: "",
+        tag: {
+          color: "",
+          name: "",
+        },
       },
       api_data: {
         api_result: "",
@@ -90,8 +75,10 @@ export default {
           title: "",
           date: "",
           detail: "",
-          tag_color: "",
-          tag_name: "",
+          tag: {
+            color: "",
+            name: "",
+          },
         },
       },
     };
@@ -101,19 +88,22 @@ export default {
       this.isDispCalendar = !this.isDispCalendar;
     },
     submit: function () {
-      let params = new URLSearchParams();
-      params.append("title", this.entry_info.title);
-      params.append("date", this.entry_info.date.replaceAll("-", "/"));
-      params.append("detail", this.entry_info.detail);
-      params.append("tag_color", this.entry_info.tag_color.value);
-      params.append("tag_name", this.entry_info.tag_name);
-      // 保存済のAPIトークンを取得
-      let token = this.$store.state.auth.token;
-      let headers = {
-        Authorization: token,
+      let reqBody = {
+        index: this.entry_info.index,
+        title: this.entry_info.title,
+        date: this.entry_info.date.replaceAll("-", "/"),
+        detail: this.entry_info.detail,
+        tag: {
+          color: this.entry_info.tag.color,
+          name: this.entry_info.tag.name,
+        },
       };
 
-      axios.post(url, params, { headers }).then(
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      console.log(JSON.stringify(reqBody, null, "\t"));
+      axios.post(url, reqBody, { headers }).then(
         (result) => {
           if (result.data.result == 0) {
             // お知らせ情報登録APIが正常終了した場合
