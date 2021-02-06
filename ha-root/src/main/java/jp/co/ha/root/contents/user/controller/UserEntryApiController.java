@@ -2,7 +2,6 @@ package jp.co.ha.root.contents.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +24,7 @@ import jp.co.ha.root.type.RootRoleType;
  * axios.postの場合で受け取る以下の方法ではリクエストのJSONをバインドできない<br>
  * <code>&#64;RequestBody MultiValueMap<String, Object> request</code><br>
  * そのためそのままRequestクラスで受け取る
- * 
+ *
  * @version 1.0.0
  */
 @RestController
@@ -50,7 +49,7 @@ public class UserEntryApiController
      *     ハッシュ化に失敗した場合
      */
     @PostMapping(value = "user/entry", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public UserEntryApiResponse entry(@RequestBody MultiValueMap<String, Object> request)
+    public UserEntryApiResponse entry(@RequestBody UserEntryApiRequest request)
             throws BaseException {
 
         // TODO 妥当性チェックを追加
@@ -58,7 +57,7 @@ public class UserEntryApiController
         RootLoginInfo entity = new RootLoginInfo();
         entity.setRole(RootRoleType.REF.getValue());
         entity.setPassword(
-                hashEncoder.encode(request.get("password").get(0).toString(), ""));
+                hashEncoder.encode(request.getPassword(), ""));
         entity.setPasswordExpire(
                 DateTimeUtil.addMonth(DateTimeUtil.getSysDate().toLocalDate(), 6));
         entity.setDeleteFlag("0");

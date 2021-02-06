@@ -61,12 +61,9 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         /** 詳細 */
         @JsonProperty("detail")
         private String detail;
-        /** タグ色 */
-        @JsonProperty("tag_color")
-        private String tagColor;
-        /** タグ名 */
-        @JsonProperty("tag_name")
-        private String tagName;
+        /** タグ */
+        @JsonProperty("tag")
+        private Tag tag;
 
         /**
          * indexを返す
@@ -145,42 +142,77 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * tagColorを返す
+         * tagを返す
          *
-         * @return tagColor
+         * @return tag
          */
-        public String getTagColor() {
-            return tagColor;
+        public Tag getTag() {
+            return tag;
         }
 
         /**
-         * tagColorを設定する
+         * tagを設定する
          *
-         * @param tagColor
-         *     タグ色
+         * @param tag
+         *     タグ
          */
-        public void setTagColor(String tagColor) {
-            this.tagColor = tagColor;
+        public void setTag(Tag tag) {
+            this.tag = tag;
+        }
+
+    }
+
+    /**
+     * タグ情報
+     *
+     * @version 1.0.0
+     */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Tag {
+
+        /** 色 */
+        @JsonProperty("color")
+        private String color;
+        /** 名前 */
+        @JsonProperty("name")
+        private String name;
+
+        /**
+         * colorを返す
+         *
+         * @return color
+         */
+        public String getColor() {
+            return color;
         }
 
         /**
-         * tagNameを返す
+         * colorを設定する
          *
-         * @return tagName
+         * @param color
+         *     色
          */
-        public String getTagName() {
-            return tagName;
+        public void setColor(String color) {
+            this.color = color;
         }
 
         /**
-         * tagNameを設定する
+         * nameを返す
          *
-         * @param tagName
-         *     タグ名
+         * @return name
          */
-        public void setTagName(String tagName) {
-            this.tagName = tagName;
+        public String getName() {
+            return name;
         }
 
+        /**
+         * nameを設定する
+         *
+         * @param name
+         *     名前
+         */
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

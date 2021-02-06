@@ -1,6 +1,7 @@
 package jp.co.ha.root.contents.account.response;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.root.base.BaseRootApiResponse;
 import jp.co.ha.root.base.JsonEntity;
@@ -72,6 +74,16 @@ public class AccountListApiResponse extends BaseRootApiResponse
         /** APIキー */
         @JsonProperty("api_key")
         private String apiKey;
+        /** 登録日時 */
+        @JsonProperty("reg_date")
+        @JsonSerialize(using = LocalDateTimeSerializer.class)
+        @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
+        private LocalDateTime regDate;
+        /** 更新日時 */
+        @JsonProperty("update_date")
+        @JsonSerialize(using = LocalDateTimeSerializer.class)
+        @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
+        private LocalDateTime updateDate;
         /** ヘッダ利用有無フラグ */
         @JsonProperty("header_flag")
         private String headerFlag;
@@ -197,6 +209,44 @@ public class AccountListApiResponse extends BaseRootApiResponse
          */
         public void setApiKey(String apiKey) {
             this.apiKey = apiKey;
+        }
+
+        /**
+         * regDateを返す
+         *
+         * @return regDate
+         */
+        public LocalDateTime getRegDate() {
+            return regDate;
+        }
+
+        /**
+         * regDateを設定する
+         *
+         * @param regDate
+         *     登録日時
+         */
+        public void setRegDate(LocalDateTime regDate) {
+            this.regDate = regDate;
+        }
+
+        /**
+         * updateDateを返す
+         *
+         * @return updateDate
+         */
+        public LocalDateTime getUpdateDate() {
+            return updateDate;
+        }
+
+        /**
+         * updateDateを設定する
+         *
+         * @param updateDate
+         *     更新日時
+         */
+        public void setUpdateDate(LocalDateTime updateDate) {
+            this.updateDate = updateDate;
         }
 
         /**

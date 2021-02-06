@@ -2,6 +2,7 @@ package jp.co.ha.root.contents.news.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.business.dto.NewsListDto.Tag;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.root.base.BaseRootApiRequest;
 import jp.co.ha.web.form.BaseApiRequest;
@@ -29,14 +30,9 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     @JsonProperty("detail")
     @Required
     private String detail;
-    /** タグ色 */
-    @JsonProperty("tag_color")
-    @Required
-    private String tagColor;
-    /** タグ名 */
-    @JsonProperty("tag_name")
-    @Required
-    private String tagName;
+    /** タグ */
+    @JsonProperty("tag")
+    private Tag tag;
 
     /**
      * indexを返す
@@ -111,39 +107,22 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * tagColorを返す
+     * tagを返す
      *
-     * @return tagColor
+     * @return tag
      */
-    public String getTagColor() {
-        return tagColor;
+    public Tag getTag() {
+        return tag;
     }
 
     /**
-     * tagColorを設定する
+     * tagを設定する
      *
-     * @param tagColor
+     * @param tag
+     *     タグ
      */
-    public void setTagColor(String tagColor) {
-        this.tagColor = tagColor;
-    }
-
-    /**
-     * tagNameを返す
-     *
-     * @return tagName
-     */
-    public String getTagName() {
-        return tagName;
-    }
-
-    /**
-     * tagNameを設定する
-     *
-     * @param tagName
-     */
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
+    public void setTag(Tag tag) {
+        this.tag = tag;
     }
 
 }
