@@ -1,7 +1,7 @@
 package jp.co.ha.dashboard.view;
 
-import jp.co.ha.common.util.BreadcrumbView;
 import jp.co.ha.web.view.BaseView;
+import jp.co.ha.web.view.BreadcrumbView;
 
 /**
  * 健康管理View列挙

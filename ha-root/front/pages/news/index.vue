@@ -18,12 +18,12 @@
         ></v-text-field>
         <v-data-table :headers="headers" :items="news_list" :search="search">
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
-          <template v-slot:[`item.tag_name`]="{ item }">
+          <template v-slot:[`item.tag.name`]="{ item }">
             <v-chip
-              :color="getTagColor(item.tag_color)"
-              v-if="item.tag_color != null && item.tag_name != null"
+              :color="item.tag.color"
+              v-if="item.tag.color != null && item.tag.name != null"
             >
-              <b>{{ item.tag_name }}</b>
+              <b>{{ item.tag.name }}</b>
             </v-chip>
           </template>
           <template v-slot:[`item.detail`]="{ item }">
@@ -35,7 +35,13 @@
             </v-btn>
           </template>
           <template v-slot:[`item.delete_action`]="{ item }">
-            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.index)">
+            <v-btn
+              small
+              class="mx-1"
+              :loading="loading"
+              :disabled="loading"
+              @click="openNewsDeleteModal(item.index)"
+            >
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -68,8 +74,10 @@ export default {
   data: function () {
     return {
       entry_mode: true,
+      loading: false,
       search: "",
       news_list: [],
+      api_loading: false,
       headers: [
         {
           text: "",
@@ -99,24 +107,7 @@ export default {
         },
         {
           text: "タグ名",
-          value: "tag_name",
-        },
-      ],
-      tag_color_select_list: [
-        {
-          value: "1",
-          color: "blue",
-          label: "1(blue)",
-        },
-        {
-          value: "2",
-          color: "yellow",
-          label: "2(yellow)",
-        },
-        {
-          value: "3",
-          color: "red",
-          label: "3(red)",
+          value: "tag.name",
         },
       ],
       edit_news_form: {
@@ -124,8 +115,10 @@ export default {
         title: "",
         date: "",
         detail: "",
-        tag_color: "",
-        tag_name: "",
+        tag: {
+          color: "",
+          name: "",
+        },
       },
     };
   },
@@ -133,20 +126,10 @@ export default {
     this.getNews();
   },
   methods: {
-    getTagColor: function (tag_color) {
-      for (var i = 0; i < this.tag_color_select_list.length; i++) {
-        let tag = this.tag_color_select_list[i];
-        if (tag.value == tag_color) {
-          return tag.color;
-        }
-      }
-    },
     getNews() {
-      let token = this.$store.state.auth.token;
-
       axios
         .get(url, {
-          headers: { Authorization: token },
+          headers: { Authorization: this.$store.state.auth.token },
         })
         .then(
           (response) => {
@@ -161,13 +144,7 @@ export default {
     changeNewsEditView: function (edit_news_id) {
       for (var i = 0; i < this.news_list.length; i++) {
         let targetNews = this.news_list[i];
-        if (edit_news_id == targetNews.index) {
-          for (var i = 0; i < this.tag_color_select_list.length; i++) {
-            let tag = this.tag_color_select_list[i];
-            if (targetNews.tag_color == tag.value) {
-              targetNews.tag_color = tag;
-            }
-          }
+        if (targetNews.index == edit_news_id) {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
           targetNews.date = targetNews.date.replaceAll("/", "-");
           this.edit_news_form = targetNews;
@@ -194,12 +171,14 @@ export default {
       }
     },
     async deleteNews(id) {
+      this.loading = true;
       let deleteUrl = url + "/" + id;
-      let token = this.$store.state.auth.token;
-
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
       axios
         .delete(deleteUrl, {
-          headers: { Authorization: token },
+          headers,
         })
         .then(
           (response) => {
@@ -214,6 +193,7 @@ export default {
 
               // おしらせ情報取得
               this.getNews();
+              this.loading = false;
             }
           },
           (error) => {

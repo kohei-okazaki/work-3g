@@ -7,10 +7,10 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      message: 'ログアウト'
-    }
+      message: "ログアウト",
+    };
   },
   methods: {
     logout: function () {

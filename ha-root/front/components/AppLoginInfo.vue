@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  data: function() {
+  data: function () {
     return {
-      messagePrefix: 'ログインID'
-    }
+      messagePrefix: "ログインID",
+    };
   },
   methods: {
     editLoginUser: function () {
@@ -17,8 +17,8 @@ export default {
     },
   },
   computed: {
-    viewLoginUser: function() {
-      return this.messagePrefix + "：" + this.$store.state.auth.seq_login_id
+    viewLoginUser: function () {
+      return this.messagePrefix + "：" + this.$store.state.auth.seq_login_id;
     },
   },
 };

@@ -1,4 +1,4 @@
-package jp.co.ha.common.util;
+package jp.co.ha.web.view;
 
 import java.util.ArrayList;
 import java.util.List;

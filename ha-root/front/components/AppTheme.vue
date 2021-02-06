@@ -1,5 +1,9 @@
 <template>
-  <v-switch v-model="theme" class="theme-postion" :prepend-icon="themeIcon"></v-switch>
+  <v-switch
+    v-model="theme"
+    class="theme-postion"
+    :prepend-icon="themeIcon"
+  ></v-switch>
 </template>
 
 <script>

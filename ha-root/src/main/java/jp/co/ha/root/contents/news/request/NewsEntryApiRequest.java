@@ -1,9 +1,8 @@
 package jp.co.ha.root.contents.news.request;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.business.dto.NewsListDto.Tag;
 import jp.co.ha.root.base.BaseRootApiRequest;
 import jp.co.ha.web.form.BaseApiRequest;
 
@@ -12,23 +11,20 @@ import jp.co.ha.web.form.BaseApiRequest;
  *
  * @version 1.0.0
  */
-public class NewsEntiryApiRequest extends BaseRootApiRequest implements BaseApiRequest {
+public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
     /** タイトル */
     @JsonProperty("title")
     private String title;
     /** 日付 */
     @JsonProperty("date")
-    private LocalDate date;
+    private String date;
     /** 詳細 */
     @JsonProperty("detail")
     private String detail;
-    /** タグ色 */
-    @JsonProperty("tag_color")
-    private String tagColor;
-    /** タグ名 */
-    @JsonProperty("tag_name")
-    private String tagName;
+    /** タグ */
+    @JsonProperty("tag")
+    private Tag tag;
 
     /**
      * titleを返す
@@ -54,7 +50,7 @@ public class NewsEntiryApiRequest extends BaseRootApiRequest implements BaseApiR
      *
      * @return date
      */
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -64,7 +60,7 @@ public class NewsEntiryApiRequest extends BaseRootApiRequest implements BaseApiR
      * @param date
      *     日付
      */
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -88,41 +84,22 @@ public class NewsEntiryApiRequest extends BaseRootApiRequest implements BaseApiR
     }
 
     /**
-     * tagColorを返す
+     * tagを返す
      *
-     * @return tagColor
+     * @return tag
      */
-    public String getTagColor() {
-        return tagColor;
+    public Tag getTag() {
+        return tag;
     }
 
     /**
-     * tagColorを設定する
+     * tagを設定する
      *
-     * @param tagColor
-     *     タグ色
+     * @param tag
+     *     タグ
      */
-    public void setTagColor(String tagColor) {
-        this.tagColor = tagColor;
-    }
-
-    /**
-     * tagNameを返す
-     *
-     * @return tagName
-     */
-    public String getTagName() {
-        return tagName;
-    }
-
-    /**
-     * tagNameを設定する
-     *
-     * @param tagName
-     *     タグ名
-     */
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
+    public void setTag(Tag tag) {
+        this.tag = tag;
     }
 
 }
