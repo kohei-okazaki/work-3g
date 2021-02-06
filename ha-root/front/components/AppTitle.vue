@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col class="text-center">
-      <h1><v-icon class="icon">{{ icon }}</v-icon>{{ title }}</h1>
+      <h1><v-icon class="icon" size="35">{{ icon }}</v-icon>{{ title }}</h1>
     </v-col>
   </v-row>
 </template>
@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 .icon {
-  margin: 0;
-  padding: 0;
+  padding-right: 10px;
+  padding-bottom: 7px;
 }
 </style>

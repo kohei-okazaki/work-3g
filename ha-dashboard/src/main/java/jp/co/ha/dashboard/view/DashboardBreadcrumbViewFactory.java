@@ -1,7 +1,7 @@
 package jp.co.ha.dashboard.view;
 
-import jp.co.ha.common.util.BreadcrumbView;
-import jp.co.ha.common.util.BreadcrumbView.Breadcrumb;
+import jp.co.ha.web.view.BreadcrumbView;
+import jp.co.ha.web.view.BreadcrumbView.Breadcrumb;
 
 /**
  * ダッシュボードのパンくず情報ViewのFactoryクラス
@@ -9,6 +9,12 @@ import jp.co.ha.common.util.BreadcrumbView.Breadcrumb;
  * @version 1.0.0
  */
 public class DashboardBreadcrumbViewFactory {
+
+    /**
+     * プライベートコンストラクタ
+     */
+    private DashboardBreadcrumbViewFactory() {
+    }
 
     /**
      * デフォルトのパンくずリスト情報Viewを返す

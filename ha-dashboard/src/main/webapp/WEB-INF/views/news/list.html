@@ -21,11 +21,11 @@
                <td class="card card-body bg-light">
                  <div>
                    <!-- リリース情報 -->
-                   <span class="badge badge-primary" th:if="${news.tagColor == '1'}" th:text="${news.tagName}"></span>
+                   <span class="badge badge-primary" th:if="${news.tag.color == 'blue'}" th:text="${news.tag.name}"></span>
                    <!-- バグ情報 -->
-                   <span class="badge badge-danger" th:if="${news.tagColor == '2'}" th:text="${news.tagName}"></span>
+                   <span class="badge badge-danger" th:if="${news.tag.color == 'red'}" th:text="${news.tag.name}"></span>
                    <!-- 停止情報 -->
-                   <span class="badge badge-warning" th:if="${news.tagColor == '3'}" th:text="${news.tagName}"></span>
+                   <span class="badge badge-warning" th:if="${news.tag.color == 'yellow'}" th:text="${news.tag.name}"></span>
                  </div>
                  <a data-toggle="collapse" th:href="${'#newsId' + news.index}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.index}" th:text="${news.date + '　' + news.title}"></a>
                  <div class="collapse" th:id="${'newsId' + news.index}">
