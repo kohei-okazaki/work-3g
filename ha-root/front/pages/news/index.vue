@@ -20,7 +20,7 @@
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.tag.name`]="{ item }">
             <v-chip
-              :color="getTagColor(item.tag.color)"
+              :color="item.tag.color"
               v-if="item.tag.color != null && item.tag.name != null"
             >
               <b>{{ item.tag.name }}</b>
@@ -35,7 +35,13 @@
             </v-btn>
           </template>
           <template v-slot:[`item.delete_action`]="{ item }">
-            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.index)">
+            <v-btn
+              small
+              class="mx-1"
+              :loading="loading"
+              :disabled="loading"
+              @click="openNewsDeleteModal(item.index)"
+            >
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -68,8 +74,10 @@ export default {
   data: function () {
     return {
       entry_mode: true,
+      loading: false,
       search: "",
       news_list: [],
+      api_loading: false,
       headers: [
         {
           text: "",
@@ -102,20 +110,6 @@ export default {
           value: "tag.name",
         },
       ],
-      tag_color_select_list: [
-        {
-          color: "blue",
-          label: "青色",
-        },
-        {
-          color: "yellow",
-          label: "黄色",
-        },
-        {
-          color: "red",
-          label: "赤色",
-        },
-      ],
       edit_news_form: {
         index: "",
         title: "",
@@ -132,14 +126,6 @@ export default {
     this.getNews();
   },
   methods: {
-    getTagColor: function (tag_color) {
-      for (var i = 0; i < this.tag_color_select_list.length; i++) {
-        let tag = this.tag_color_select_list[i];
-        if (tag.color == tag_color) {
-          return tag.color;
-        }
-      }
-    },
     getNews() {
       axios
         .get(url, {
@@ -185,6 +171,7 @@ export default {
       }
     },
     async deleteNews(id) {
+      this.loading = true;
       let deleteUrl = url + "/" + id;
       let headers = {
         Authorization: this.$store.state.auth.token,
@@ -206,6 +193,7 @@ export default {
 
               // おしらせ情報取得
               this.getNews();
+              this.loading = false;
             }
           },
           (error) => {

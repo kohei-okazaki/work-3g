@@ -48,7 +48,12 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" @click="submit">
+          <v-btn
+            color="primary"
+            @click="submit"
+            :loading="loading"
+            :disabled="loading"
+          >
             <v-icon>mdi-comment-edit</v-icon>&ensp;更新
           </v-btn>
         </v-card-actions>
@@ -75,6 +80,7 @@ export default {
   data: function () {
     return {
       isDispCalendar: false,
+      loading: false,
     };
   },
   methods: {
@@ -82,6 +88,7 @@ export default {
       this.isDispCalendar = !this.isDispCalendar;
     },
     submit: function () {
+      this.loading = true;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
@@ -110,6 +117,7 @@ export default {
 
             // お知らせ情報更新後、最新のお知らせ情報を取得する
             this.$emit("get-news");
+            this.loading = false;
           }
         },
         (error) => {

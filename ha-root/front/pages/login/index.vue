@@ -24,7 +24,12 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" @click="submit">
+          <v-btn
+            color="primary"
+            @click="submit"
+            :loading="loading"
+            :disabled="loading"
+          >
             <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
           </v-btn>
           <v-spacer />
@@ -47,6 +52,7 @@ export default {
       seq_login_id: "",
       password: "",
       show: false,
+      loading: false,
       required: (value) => !!value || "必ず入力してください",
     };
   },
@@ -66,6 +72,7 @@ export default {
   },
   methods: {
     submit: function () {
+      this.loading = true;
       if (!this.$refs.login_form.validate()) {
         // 入力値エラーの場合
         return;
@@ -89,17 +96,7 @@ export default {
               token: authorization,
             });
 
-            // let list = this.$store.state.auth.auth_data_list;
-            // let value = null;
-            // for (var i = 0; i < list.length; i++) {
-            //   let auth_data = list[i];
-            //   if (auth_data.seq_login_id == this.seq_login_id) {
-            //     // 同一ログインIDの場合、トークン取得
-            //     value = auth_data.token;
-            //     break;
-            //   }
-            // }
-            // console.log("[saved token]=" + value);
+            this.loading = false;
 
             return response;
           },

@@ -81,7 +81,6 @@ export default {
     };
   },
   created: function () {
-
     axios
       .get(url, {
         headers: { Authorization: this.$store.state.auth.token },

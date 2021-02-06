@@ -34,7 +34,12 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary" @click="submit">
+          <v-btn
+            color="primary"
+            @click="submit"
+            :loading="loading"
+            :disabled="loading"
+          >
             <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
           </v-btn>
         </v-card-actions>
@@ -59,6 +64,7 @@ export default {
   data: function () {
     return {
       isDispCalendar: false,
+      loading: false,
       entry_info: {
         title: "",
         date: new Date().toISOString().substr(0, 10),
@@ -88,6 +94,7 @@ export default {
       this.isDispCalendar = !this.isDispCalendar;
     },
     submit: function () {
+      this.loading = true;
       let reqBody = {
         index: this.entry_info.index,
         title: this.entry_info.title,
@@ -119,10 +126,13 @@ export default {
 
             // お知らせ情報登録後、最新のお知らせ情報を取得する
             this.$emit("get-news");
+
+            this.loading = false;
           }
         },
         (error) => {
           console.log("[error]=" + error);
+          this.loading = false;
           return error;
         }
       );

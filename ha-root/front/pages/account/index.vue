@@ -84,20 +84,23 @@ export default {
           value: "enclosure_char_flag",
         },
       ],
-
     };
   },
 
   created: function () {
-    
-    axios.get(url, {
-      headers: { "Authorization": this.$store.state.auth.token },
-    }).then((response) => {
-      this.account_list = response.data.account_list;
-    }, (error) => {
-      console.log('[error]=' + error);
-      return error;
-    });
+    axios
+      .get(url, {
+        headers: { Authorization: this.$store.state.auth.token },
+      })
+      .then(
+        (response) => {
+          this.account_list = response.data.account_list;
+        },
+        (error) => {
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
   },
 };
 </script>
