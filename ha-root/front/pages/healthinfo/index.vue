@@ -26,11 +26,11 @@ import AppTitle from "~/components/AppTitle.vue";
 const axios = require("axios");
 let url = process.env.api_base_url + "healthinfo";
 
-export default{
+export default {
   components: {
     AppTitle,
   },
-  data: function() {
+  data: function () {
     return {
       search: "",
       health_info_list: [],
@@ -71,25 +71,29 @@ export default{
           text: "健康情報登録日時",
           value: "health_info_reg_date",
         },
-      ]
-    }
+      ],
+    };
   },
   created: function () {
     // 保存済のAPIトークンを取得
     let token = this.$store.state.auth.token;
-    
-    axios.get(url, {
-      headers: { "Authorization": token },
-    }).then((response) => {
-      this.health_info_list = response.data.health_info_list;
-    }, (error) => {
-      console.log('[error]=' + error);
-      return error;
-    });
+
+    axios
+      .get(url, {
+        headers: { Authorization: token },
+      })
+      .then(
+        (response) => {
+          this.health_info_list = response.data.health_info_list;
+        },
+        (error) => {
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
   },
-}
+};
 </script>
 
 <style>
-
 </style>

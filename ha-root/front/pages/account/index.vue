@@ -60,6 +60,14 @@ export default {
           value: "api_key",
         },
         {
+          text: "登録日時",
+          value: "reg_date",
+        },
+        {
+          text: "更新日時",
+          value: "update_date",
+        },
+        {
           text: "ヘッダ利用有無フラグ",
           value: "header_flag",
         },
@@ -76,33 +84,24 @@ export default {
           value: "enclosure_char_flag",
         },
       ],
-
     };
   },
 
   created: function () {
-    // 保存済のAPIトークンを取得
-    let token = this.$store.state.auth.token;
-    
-    axios.get(url, {
-      headers: { "Authorization": token },
-    }).then((response) => {
-      this.account_list = response.data.account_list;
-    }, (error) => {
-      console.log('[error]=' + error);
-      return error;
-    });
+    axios
+      .get(url, {
+        headers: { Authorization: this.$store.state.auth.token },
+      })
+      .then(
+        (response) => {
+          this.account_list = response.data.account_list;
+        },
+        (error) => {
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
   },
-
-  // asyncData: async function () {
-  //   // アカウント情報一覧取得API 実行
-  //   // ユーザ情報を取得
-  //   console.log("[data]=" + this.$store.state.auth.user);
-  //   let result = await axios.get(url);
-  //   return {
-  //     account_list: result.data.account_list,
-  //   };
-  // },
 };
 </script>
 

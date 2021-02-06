@@ -36,13 +36,24 @@
         <v-card-actions>
           <template v-if="api_data.api_result != '0'">
             <!-- APIが正常終了していない場合 -->
-            <v-btn color="primary" @click="openUserEntryModal" v-on="on">
+            <v-btn
+              color="primary"
+              @click="openUserEntryModal"
+              v-on="on"
+              :loading="loading"
+              :disabled="loading"
+            >
               <v-icon>mdi-account-multiple-plus</v-icon>&ensp;作成
             </v-btn>
           </template>
           <template v-else>
             <!-- APIが正常終了している場合 -->
-            <v-btn color="primary" to="/login">
+            <v-btn
+              color="primary"
+              to="/login"
+              :loading="loading"
+              :disabled="loading"
+            >
               <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
             </v-btn>
           </template>
@@ -74,14 +85,15 @@ export default {
       conf_password: "",
       password_show: false,
       conf_password_show: false,
+      loading: false,
       api_data: {
         api_result: "",
         seq_login_id: "",
       },
       modal: {
-        title: 'ユーザ作成',
-        contents: '',
-      }
+        title: "ユーザ作成",
+        contents: "",
+      },
     };
   },
   computed: {
@@ -106,9 +118,10 @@ export default {
   },
   methods: {
     async openUserEntryModal() {
+      this.loading = true;
       if (
         await this.$refs.confirm.open(this.modal.title, this.modal.contents, {
-          color: 'blue',
+          color: "blue",
           width: 400,
         })
       ) {
@@ -116,15 +129,17 @@ export default {
       }
     },
     entryUser: function () {
-      let params = new URLSearchParams();
-      params.append("password", this.password);
-      params.append("conf_password", this.conf_password);
+      let reqBody = {
+        password: this.password,
+        conf_password: this.conf_password,
+      };
 
-      axios.post(url, params).then((result) => {
+      axios.post(url, reqBody).then((result) => {
         if (result.data.result === "0") {
           // ユーザ作成APIが正常終了した場合
           this.api_data.api_result = result.data.result;
           this.api_data.seq_login_id = result.data.seq_login_id;
+          this.loading = false;
         }
       });
     },
@@ -133,5 +148,4 @@ export default {
 </script>
 
 <style scope>
-
 </style>

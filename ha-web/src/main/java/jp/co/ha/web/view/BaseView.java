@@ -1,7 +1,5 @@
 package jp.co.ha.web.view;
 
-import jp.co.ha.common.util.BreadcrumbView;
-
 /**
  * ViewEnumの基底インターフェース<br>
  * すべてのViewEnumはこのインターフェースを継承すること
