@@ -51,7 +51,11 @@ export default {
           return tag;
         }
       }
+      return this.tag_color_select_list[0];
     },
+  },
+  mounted: function () {
+    this.$emit("input", this.tag_color_select_list[0].color);
   },
 };
 </script>

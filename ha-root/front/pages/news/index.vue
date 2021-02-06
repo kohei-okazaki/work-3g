@@ -18,12 +18,12 @@
         ></v-text-field>
         <v-data-table :headers="headers" :items="news_list" :search="search">
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
-          <template v-slot:[`item.tag_name`]="{ item }">
+          <template v-slot:[`item.tag.name`]="{ item }">
             <v-chip
-              :color="getTagColor(item.tag_color)"
-              v-if="item.tag_color != null && item.tag_name != null"
+              :color="getTagColor(item.tag.color)"
+              v-if="item.tag.color != null && item.tag.name != null"
             >
-              <b>{{ item.tag_name }}</b>
+              <b>{{ item.tag.name }}</b>
             </v-chip>
           </template>
           <template v-slot:[`item.detail`]="{ item }">
@@ -99,24 +99,21 @@ export default {
         },
         {
           text: "タグ名",
-          value: "tag_name",
+          value: "tag.name",
         },
       ],
       tag_color_select_list: [
         {
-          value: "1",
           color: "blue",
-          label: "1(blue)",
+          label: "青色",
         },
         {
-          value: "2",
           color: "yellow",
-          label: "2(yellow)",
+          label: "黄色",
         },
         {
-          value: "3",
           color: "red",
-          label: "3(red)",
+          label: "赤色",
         },
       ],
       edit_news_form: {
@@ -124,8 +121,10 @@ export default {
         title: "",
         date: "",
         detail: "",
-        tag_color: "",
-        tag_name: "",
+        tag: {
+          color: "",
+          name: "",
+        },
       },
     };
   },
@@ -136,17 +135,15 @@ export default {
     getTagColor: function (tag_color) {
       for (var i = 0; i < this.tag_color_select_list.length; i++) {
         let tag = this.tag_color_select_list[i];
-        if (tag.value == tag_color) {
+        if (tag.color == tag_color) {
           return tag.color;
         }
       }
     },
     getNews() {
-      let token = this.$store.state.auth.token;
-
       axios
         .get(url, {
-          headers: { Authorization: token },
+          headers: { Authorization: this.$store.state.auth.token },
         })
         .then(
           (response) => {
@@ -161,13 +158,7 @@ export default {
     changeNewsEditView: function (edit_news_id) {
       for (var i = 0; i < this.news_list.length; i++) {
         let targetNews = this.news_list[i];
-        if (edit_news_id == targetNews.index) {
-          for (var i = 0; i < this.tag_color_select_list.length; i++) {
-            let tag = this.tag_color_select_list[i];
-            if (targetNews.tag_color == tag.value) {
-              targetNews.tag_color = tag;
-            }
-          }
+        if (targetNews.index == edit_news_id) {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
           targetNews.date = targetNews.date.replaceAll("/", "-");
           this.edit_news_form = targetNews;
@@ -195,11 +186,12 @@ export default {
     },
     async deleteNews(id) {
       let deleteUrl = url + "/" + id;
-      let token = this.$store.state.auth.token;
-
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
       axios
         .delete(deleteUrl, {
-          headers: { Authorization: token },
+          headers,
         })
         .then(
           (response) => {
