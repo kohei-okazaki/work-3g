@@ -55,10 +55,13 @@ public class BreathingCapacityComponent {
     public BreathingCapacityDto calc(BreathingCapacityDto dto, Integer seqUserId)
             throws BaseException {
 
-        TokenResponse tokenApiResponse = callTokenApi(seqUserId);
+        // API通信情報.トランザクションIDを採番
+        Integer transactionId = apiCommunicationDataComponent.getTransactionId();
+
+        TokenResponse tokenApiResponse = callTokenApi(seqUserId, transactionId);
 
         BreathingCapacityCalcResponse apiResponse = callBreathingCapacityCalcApi(dto,
-                tokenApiResponse.getToken(), seqUserId);
+                tokenApiResponse.getToken(), seqUserId, transactionId);
         BeanUtil.copy(apiResponse.getBreathingCapacityCalcResult(), dto);
 
         return dto;
@@ -69,15 +72,18 @@ public class BreathingCapacityComponent {
      *
      * @param seqUserId
      *     ユーザID
+     * @param transactionId
+     *     トランザクションID
      * @return Token発行APIのレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
+    private TokenResponse callTokenApi(Integer seqUserId, Integer transactionId)
+            throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(tokenApi.getApiName(), seqUserId);
+                .create(tokenApi.getApiName(), seqUserId, transactionId);
 
         TokenRequest request = new TokenRequest();
         request.setSeqUserId(seqUserId);
@@ -107,17 +113,19 @@ public class BreathingCapacityComponent {
      *     トークン
      * @param seqUserId
      *     ユーザID
+     * @param transactionId
+     *     トランザクションID
      * @return 肺活量計算APIレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, String token, Integer seqUserId)
-            throws BaseException {
+            BreathingCapacityDto dto, String token, Integer seqUserId,
+            Integer transactionId) throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(breathingCapacityCalcApi.getApiName(), seqUserId);
+                .create(breathingCapacityCalcApi.getApiName(), seqUserId, transactionId);
 
         BreathingCapacityCalcRequest request = new BreathingCapacityCalcRequest();
         BeanUtil.copy(dto, request);

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.root.base.BaseRootApiResponse;
+import jp.co.ha.root.base.JsonEntity;
 import jp.co.ha.web.form.BaseApiResponse;
 
 /**
@@ -49,11 +50,14 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
      *
      * @version 1.0.0
      */
-    public static class ApiData {
+    public static class ApiData extends JsonEntity {
 
         /** API通信情報ID */
         @JsonProperty("seq_api_communication_data_id")
         private Integer seqApiCommunicationDataId;
+        /** トランザクションID */
+        @JsonProperty("transaction_id")
+        private Integer transactionId;
         /** API名 */
         @JsonProperty("api_name")
         private String apiName;
@@ -97,6 +101,25 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
          */
         public void setSeqApiCommunicationDataId(Integer seqApiCommunicationDataId) {
             this.seqApiCommunicationDataId = seqApiCommunicationDataId;
+        }
+
+        /**
+         * transactionIdを返す
+         *
+         * @return transactionId
+         */
+        public Integer getTransactionId() {
+            return transactionId;
+        }
+
+        /**
+         * transactionIdを設定する
+         *
+         * @param transactionId
+         *     トランザクションID
+         */
+        public void setTransactionId(Integer transactionId) {
+            this.transactionId = transactionId;
         }
 
         /**

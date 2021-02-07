@@ -18,7 +18,13 @@ $ npm run generate
 
 # vuex-persistedstateのinstall
 $ npm install --save vuex-persistedstate
+
+# devDependenciesからの削除
+$ npm uninstall パッケージ --save-dev
+
+# Dependenciesからの削除
+$ npm uninstall パッケージ --save
+
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-
