@@ -48,7 +48,7 @@ app.use(function(err, req, res, next) {
     console.log("環境名=" + process.env.ENV);
 
     // render the error page
-    res.status(err.status || 200);
+    // res.status(err.status || 200);
     let err_response = {
         "status" : 1,
         "detail" : errorMessage.fail_healthinfo_calc

@@ -94,10 +94,6 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     public HealthInfoRegistResponse regist(HealthInfoDto dto, Integer seqUserId)
             throws BaseException {
 
-        HealthInfoRegistRequest request = new HealthInfoRegistRequest();
-        BeanUtil.copy(dto, request);
-        request.setTestMode(TestMode.DB_REGIST);
-
         // アカウント情報.APIキーを設定
         Account account = accountSearchService.findById(seqUserId).get();
 
@@ -106,9 +102,16 @@ public class HealthInfoServiceImpl implements HealthInfoService {
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
+        // API通信情報.トランザクションIDを採番
+        Integer transactionId = apiCommunicationDataComponent.getTransactionId();
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(registApi.getApiName(), seqUserId);
+                .create(registApi.getApiName(), seqUserId, transactionId);
+
+        HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+        BeanUtil.copy(dto, request);
+        request.setTestMode(TestMode.DB_REGIST);
+        request.setTransactionId(transactionId);
 
         HealthInfoRegistResponse apiResponse = registApi.callApi(request, apiConnectInfo);
 
