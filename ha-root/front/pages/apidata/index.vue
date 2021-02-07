@@ -3,6 +3,29 @@
     <AppTitle icon="mdi-api" title="API通信情報一覧" />
     <v-row>
       <v-col>
+        <v-timeline align-top dense v-if="timelines.length != 0"
+          ><v-timeline-item
+            small
+            v-for="timeline in timelines"
+            :key="timeline.seq_api_communication_data_id"
+            :color="timeline.color"
+          >
+            <v-card :color="timeline.color">
+              <v-card-title class="title">{{ timeline.api_name }}</v-card-title>
+              <v-card-text class="white text--primary">
+                <div><b>API通信情報ID</b>={{ timeline.seq_api_communication_data_id }}</div>
+                <div><b>API名</b>={{ timeline.api_name }}</div>
+                <div><b>HTTPステータス</b>={{ timeline.http_status }}</div>
+                <div><b>APIリクエスト日時</b>={{ timeline.request_date }}</div>
+                <div><b>APIレスポンス日時</b>={{ timeline.response_date }}</div>
+              </v-card-text>
+            </v-card>
+          </v-timeline-item>
+        </v-timeline>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
@@ -14,6 +37,7 @@
           :headers="headers"
           :items="api_data_list"
           :search="search"
+          @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.http_status`]="{ item }">
@@ -42,12 +66,17 @@ export default {
   },
   data: function () {
     return {
+      timelines: [],
       search: "",
       api_data_list: [],
       headers: [
         {
           text: "API通信情報ID",
           value: "seq_api_communication_data_id",
+        },
+        {
+          text: "トランザクションID",
+          value: "transaction_id",
         },
         {
           text: "API名",
@@ -103,6 +132,26 @@ export default {
         return "yellow";
       } else if (500 <= http_status && http_status < 600) {
         return "red";
+      }
+    },
+    openTimelineModal: function (item) {
+      console.log(JSON.stringify(item, null, "\t"));
+      // タイムラインデータをクリア
+      this.timelines = [];
+      for (var i = 0; i < this.api_data_list.length; i++) {
+        let api_data = this.api_data_list[i];
+        if (item.transaction_id == api_data.transaction_id) {
+          let timeline = {
+            seq_api_communication_data_id:
+              api_data.seq_api_communication_data_id,
+            api_name: api_data.api_name,
+            http_status: api_data.http_status,
+            request_date: api_data.request_date,
+            response_date: api_data.response_date,
+            color: this.getHttpStatusColor(api_data.http_status),
+          };
+          this.timelines.push(timeline);
+        }
       }
     },
   },

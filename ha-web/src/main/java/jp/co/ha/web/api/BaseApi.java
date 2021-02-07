@@ -128,16 +128,13 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         } catch (HttpClientErrorException e) {
             code = e.getStatusCode();
             bindErrorInfo(response);
-            // throw new ApiException(CommonErrorCode.API_400_CONNECT_ERROR,
-            // "APIの送信に失敗しました. HttpStatusCode=" + code.value(), e);
         } catch (HttpServerErrorException e) {
             code = e.getStatusCode();
             bindErrorInfo(response);
-            // throw new ApiException(CommonErrorCode.API_500_CONNECT_ERROR,
-            // "対向サーバに問題があります. HttpStatusCode=" + code.value(), e);
         } catch (Exception e) {
             bindErrorInfo(response);
-            throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "URLが不正です.", e);
+            throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "対向サーバでエラーが発生しました.",
+                    e);
         } finally {
             LOG.infoBean(response);
             Integer intCode = (code == null) ? null : code.value();
