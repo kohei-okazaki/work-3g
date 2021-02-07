@@ -55,10 +55,13 @@ public class CalorieCalcComponent {
     public CalorieCalcDto calc(CalorieCalcDto dto, Integer seqUserId)
             throws BaseException {
 
-        TokenResponse tokenApiResponse = callTokenApi(seqUserId);
+        // API通信情報.トランザクションIDを採番
+        Integer transactionId = apiCommunicationDataComponent.getTransactionId();
+
+        TokenResponse tokenApiResponse = callTokenApi(seqUserId, transactionId);
 
         CalorieCalcResponse apiResponse = callCalorieCalcApi(dto,
-                tokenApiResponse.getToken(), seqUserId);
+                tokenApiResponse.getToken(), seqUserId, transactionId);
         BeanUtil.copy(apiResponse.getCalorieCalcResult(), dto);
 
         return dto;
@@ -69,15 +72,17 @@ public class CalorieCalcComponent {
      *
      * @param seqUserId
      *     ユーザID
+     * @param transactionId
      * @return Token発行APIのレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
+    private TokenResponse callTokenApi(Integer seqUserId, Integer transactionId)
+            throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(tokenApi.getApiName(), seqUserId);
+                .create(tokenApi.getApiName(), seqUserId, transactionId);
 
         TokenRequest request = new TokenRequest();
         request.setSeqUserId(seqUserId);
@@ -107,16 +112,18 @@ public class CalorieCalcComponent {
      *     トークン
      * @param seqUserId
      *     ユーザID
+     * @param transactionId
+     *     トランザクションID
      * @return カロリー計算APIレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
     private CalorieCalcResponse callCalorieCalcApi(CalorieCalcDto dto, String token,
-            Integer seqUserId) throws BaseException {
+            Integer seqUserId, Integer transactionId) throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(calorieCalcApi.getApiName(), seqUserId);
+                .create(calorieCalcApi.getApiName(), seqUserId, transactionId);
 
         CalorieCalcRequest request = new CalorieCalcRequest();
         BeanUtil.copy(dto, request);

@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.ApiCommunicationDataExample;
 import jp.co.ha.db.mapper.ApiCommunicationDataMapper;
@@ -27,6 +31,19 @@ public class ApiCommunicationDataSearchServiceImpl
     public List<ApiCommunicationData> findAll() {
         ApiCommunicationDataExample example = new ApiCommunicationDataExample();
         return mapper.selectByExample(example);
+    }
+
+    @Override
+    public Integer selectLastTransactionId() {
+
+        ApiCommunicationDataExample example = new ApiCommunicationDataExample();
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("SEQ_API_COMMUNICATION_DATA_ID", SortType.DESC).limit(1).build();
+        example.setOrderByClause(selectOption.getOrderBy());
+        example.setLimit(selectOption.getLimit());
+
+        List<ApiCommunicationData> list = mapper.selectByExample(example);
+        return CollectionUtil.isEmpty(list) ? 1 : list.get(0).getTransactionId() + 1;
     }
 
 }

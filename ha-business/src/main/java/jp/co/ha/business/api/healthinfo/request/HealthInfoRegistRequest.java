@@ -41,6 +41,9 @@ public class HealthInfoRegistRequest extends BaseRestApiRequest
     @Required(message = "testModeが未設定です")
     @JsonProperty("testMode")
     private TestMode testMode;
+    /** トランザクションID */
+    @JsonProperty("transactionId")
+    private Integer transactionId;
 
     /**
      * heightを返す
@@ -97,6 +100,25 @@ public class HealthInfoRegistRequest extends BaseRestApiRequest
      */
     public void setTestMode(TestMode testMode) {
         this.testMode = testMode;
+    }
+
+    /**
+     * transactionIdを返す
+     *
+     * @return transactionId
+     */
+    public Integer getTransactionId() {
+        return transactionId;
+    }
+
+    /**
+     * transactionIdを設定する
+     *
+     * @param transactionId
+     *     トランザクションID
+     */
+    public void setTransactionId(Integer transactionId) {
+        this.transactionId = transactionId;
     }
 
 }

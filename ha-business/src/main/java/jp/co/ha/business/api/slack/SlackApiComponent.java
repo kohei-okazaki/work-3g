@@ -1,5 +1,6 @@
 package jp.co.ha.business.api.slack;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -99,7 +100,8 @@ public class SlackApiComponent {
             SlackChannel channel = session.findChannelByName(conn.getChannelName());
 
             LOG.debug("送信開始");
-            session.sendFile(channel, data, fileName, title, initialComment);
+            session.sendFile(channel, new ByteArrayInputStream(data), fileName, title,
+                    initialComment);
             LOG.debug("送信終了");
 
             session.disconnect();

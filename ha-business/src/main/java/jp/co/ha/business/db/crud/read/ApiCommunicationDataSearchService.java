@@ -17,4 +17,11 @@ public interface ApiCommunicationDataSearchService {
      * @return API通信情報のリスト
      */
     List<ApiCommunicationData> findAll();
+
+    /**
+     * トランザクションIDの最大値を取得する
+     *
+     * @return トランザクションIDの最大値
+     */
+    Integer selectLastTransactionId();
 }
