@@ -89,11 +89,12 @@ public class HealthInfoRegistServiceImpl extends CommonService
             HealthInfoRegistResponse response) throws BaseException {
 
         // トークン発行API実施
-        TokenResponse tokenResponse = callTokenApi(request.getSeqUserId());
+        TokenResponse tokenResponse = callTokenApi(request.getSeqUserId(),
+                request.getTransactionId());
 
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcResponse apiResponse = callBasicHealthInfoCalcApi(
-                request, tokenResponse.getToken());
+                request, tokenResponse.getToken(), request.getTransactionId());
 
         // リクエストをEntityに変換
         HealthInfo entity = toEntity(request, apiResponse.getBasicHealthInfo());
@@ -120,15 +121,18 @@ public class HealthInfoRegistServiceImpl extends CommonService
      *
      * @param seqUserId
      *     ユーザID
+     * @param transactionId
+     *     トランザクションID
      * @return Token発行APIのレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private TokenResponse callTokenApi(Integer seqUserId) throws BaseException {
+    private TokenResponse callTokenApi(Integer seqUserId, Integer transactionId)
+            throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(tokenApi.getApiName(), seqUserId);
+                .create(tokenApi.getApiName(), seqUserId, transactionId);
 
         TokenRequest request = new TokenRequest();
         request.setSeqUserId(seqUserId);
@@ -207,16 +211,20 @@ public class HealthInfoRegistServiceImpl extends CommonService
      *     リクエスト情報
      * @param token
      *     トークン
+     * @param transactionId
+     *     トランザクションID
      * @return 基礎健康情報計算APIレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
     private BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
-            HealthInfoRegistRequest request, String token) throws BaseException {
+            HealthInfoRegistRequest request, String token, Integer transactionId)
+            throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(basicHealthInfoCalcApi.getApiName(), request.getSeqUserId());
+                .create(basicHealthInfoCalcApi.getApiName(), request.getSeqUserId(),
+                        transactionId);
 
         BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
         BeanUtil.copy(request, apiRequest);
