@@ -1,6 +1,6 @@
 <template>
   <v-btn @click="editLoginUser">
-    <div>{{ viewLoginUser }}</div>
+    <div>変更</div>
   </v-btn>
 </template>
 
@@ -14,11 +14,6 @@ export default {
   methods: {
     editLoginUser: function () {
       this.$router.push("/user/edit/" + this.$store.state.auth.seq_login_id);
-    },
-  },
-  computed: {
-    viewLoginUser: function () {
-      return this.messagePrefix + "：" + this.$store.state.auth.seq_login_id;
     },
   },
 };
