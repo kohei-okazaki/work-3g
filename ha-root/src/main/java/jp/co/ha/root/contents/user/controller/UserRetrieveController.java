@@ -15,6 +15,7 @@ import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
 import jp.co.ha.root.contents.user.request.UserRetrieveApiRequest;
 import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse;
+import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse.Role;
 import jp.co.ha.root.type.RootApiResult;
 
 /**
@@ -59,7 +60,10 @@ public class UserRetrieveController
         UserRetrieveApiResponse response = new UserRetrieveApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
         response.setSeqLoginId(seqLoginId);
-        response.setRoles(Arrays.asList("00"));
+        Role role = new Role();
+        role.setLabel("管理者");
+        role.setValue(entity.get().getRole());
+        response.setRoles(Arrays.asList(role));
 
         return response;
     }

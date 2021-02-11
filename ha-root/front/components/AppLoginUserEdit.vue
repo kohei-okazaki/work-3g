@@ -6,11 +6,6 @@
 
 <script>
 export default {
-  data: function () {
-    return {
-      messagePrefix: "ログインID",
-    };
-  },
   methods: {
     editLoginUser: function () {
       this.$router.push("/user/edit/" + this.$store.state.auth.seq_login_id);

@@ -1,10 +1,10 @@
 <template>
   <v-menu
     :open-on-hover="true"
-    :open-on-click="true"
+    :open-on-click="false"
     :close-on-content-click="false"
     :close-on-hover="false"
-    :nudge-width="200"
+    :nudge-width="150"
     offset-y
   >
     <template v-slot:activator="{ on, attrs }">
@@ -17,7 +17,7 @@
       <v-list>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>{{ viewPopOverTitle }}</v-list-item-title>
+            <v-list-item-title>ログイン情報</v-list-item-title>
             <v-list-item-subtitle
               >{{ viewPopOverSeqLoginId }}
             </v-list-item-subtitle>
@@ -46,19 +46,19 @@ export default {
     getSeqLoginId: function () {
       return this.$store.state.auth.seq_login_id;
     },
+    getRoles: function () {
+      return this.$store.state.auth.roles;
+    },
   },
   computed: {
     viewLoginUser: function () {
       return "ログインID：" + this.getSeqLoginId();
     },
-    viewPopOverTitle: function () {
-      return "ログインユーザ情報";
-    },
     viewPopOverSeqLoginId: function () {
       return "ログインID=" + this.getSeqLoginId();
     },
     viewPopOverRole: function () {
-      return "権限=";
+      return "権限=" + this.getRoles().map(item => item.label).join(",");
     },
   },
 };

@@ -43,6 +43,7 @@
           :headers="headers"
           :items="api_data_list"
           :search="search"
+          class="pushable"
           @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
@@ -172,8 +173,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .base {
   padding-left: 10px;
+}
+.pushable {
+  cursor: pointer;
 }
 </style>

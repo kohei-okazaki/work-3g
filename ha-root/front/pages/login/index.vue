@@ -2,6 +2,9 @@
   <v-row justify="center" align-content="center">
     <v-col class="text-center">
       <br /><br />
+      <template v-if="api_error_data.hasError">
+        <v-alert border="left" color="red" type="error">{{ api_error_data.message }}</v-alert>
+      </template>
       <v-card>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text>
@@ -57,6 +60,10 @@ export default {
       show: false,
       loading: false,
       required: (value) => !!value || "必ず入力してください",
+      api_error_data: {
+        hasError: false,
+        message: null,
+      },
     };
   },
   computed: {
@@ -123,6 +130,10 @@ export default {
               roles: response.data.roles,
             };
             this.$store.commit("auth/setUserData", userData);
+          } else {
+            this.api_error_data.hasError = true;
+            this.api_error_data.message = response.data.error.message;
+            this.$auth.logout();
           }
         },
         (error) => {
