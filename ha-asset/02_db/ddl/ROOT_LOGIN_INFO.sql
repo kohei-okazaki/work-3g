@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS ROOT_LOGIN_INFO (
   -- パスワード有効期限
   PASSWORD_EXPIRE DATE NOT NULL COMMENT 'パスワード有効期限',
   -- 管理者サイトユーザ権限管理マスタID
-  SEQ_ROOT_USER_ROLE_MT_ID INT NOT NULL COMMENT '管理者サイトユーザ権限管理マスタID',
+  SEQ_ROOT_USER_ROLE_MNG_MT_ID INT NOT NULL COMMENT '管理者サイトユーザ権限管理マスタID',
   -- 備考
   REMARKS VARCHAR(256) COMMENT '備考',
   -- 更新日時
