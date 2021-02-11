@@ -68,7 +68,7 @@
 import AppConfirm from "~/components/modal/ConfirmModal.vue";
 
 const axios = require("axios");
-let url = process.env.api_base_url + "user/entry";
+let url = process.env.api_base_url + "user";
 
 export default {
   // ログイン前のレイアウトを適用

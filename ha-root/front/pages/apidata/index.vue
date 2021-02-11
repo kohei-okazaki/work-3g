@@ -6,18 +6,24 @@
         <v-timeline align-top dense v-if="timelines.length != 0"
           ><v-timeline-item
             small
-            v-for="timeline in timelines"
-            :key="timeline.seq_api_communication_data_id"
+            v-for="(timeline, i) in timelines"
+            :key="i"
             :color="timeline.color"
           >
-            <v-card :color="timeline.color">
+            <v-card max-width="650" :color="timeline.color">
               <v-card-title class="title">{{ timeline.api_name }}</v-card-title>
-              <v-card-text class="white text--primary">
-                <div><b>API通信情報ID</b>={{ timeline.seq_api_communication_data_id }}</div>
+              <!-- 白色を固定するとダークモードに切り替えたときに白色のままなので算出プロパティで常にモードを見て背景を決めるようにする -->
+              <v-card-text :class="timelineCardTextBgColor">
+                <br>
+                <div>
+                  <b>API通信情報ID</b>={{
+                    timeline.seq_api_communication_data_id
+                  }}
+                </div>
                 <div><b>API名</b>={{ timeline.api_name }}</div>
                 <div><b>HTTPステータス</b>={{ timeline.http_status }}</div>
-                <div><b>APIリクエスト日時</b>={{ timeline.request_date }}</div>
-                <div><b>APIレスポンス日時</b>={{ timeline.response_date }}</div>
+                <div><b>送信日時</b>={{ timeline.request_date }}</div>
+                <div><b>受信日時</b>={{ timeline.response_date }}</div>
               </v-card-text>
             </v-card>
           </v-timeline-item>
@@ -37,6 +43,7 @@
           :headers="headers"
           :items="api_data_list"
           :search="search"
+          class="pushable"
           @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
@@ -130,7 +137,10 @@ export default {
         return "green";
       } else if (400 <= http_status && http_status < 500) {
         return "yellow";
-      } else if (500 <= http_status && http_status < 600) {
+      } else if (
+        (500 <= http_status && http_status < 600) ||
+        http_status == null
+      ) {
         return "red";
       }
     },
@@ -155,11 +165,19 @@ export default {
       }
     },
   },
+  computed: {
+    timelineCardTextBgColor: function () {
+      return this.$vuetify.theme.dark ? "black" : "white";
+    },
+  },
 };
 </script>
 
-<style>
+<style scoped>
 .base {
   padding-left: 10px;
+}
+.pushable {
+  cursor: pointer;
 }
 </style>

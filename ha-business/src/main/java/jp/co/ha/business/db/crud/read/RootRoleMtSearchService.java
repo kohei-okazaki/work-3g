@@ -1,5 +1,7 @@
 package jp.co.ha.business.db.crud.read;
 
+import jp.co.ha.db.entity.RootRoleMt;
+
 /**
  * 管理者サイト権限マスタ検索サービスインターフェース
  *
@@ -7,4 +9,12 @@ package jp.co.ha.business.db.crud.read;
  */
 public interface RootRoleMtSearchService {
 
+    /**
+     * 指定した権限の管理者サイト権限マスタを返す
+     *
+     * @param role
+     *     権限
+     * @return 管理者サイト権限マスタ
+     */
+    RootRoleMt findByRole(String role);
 }

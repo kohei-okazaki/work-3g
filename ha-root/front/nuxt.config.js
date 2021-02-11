@@ -15,8 +15,7 @@ export default {
   head: {
     titleTemplate: '%s | front',
     title: '管理サイト',
-    meta: [
-      {
+    meta: [{
         charset: 'utf-8'
       },
       {
@@ -71,7 +70,7 @@ export default {
 
   auth: {
     redirect: {
-      login: '/login', 
+      login: '/login',
       logout: '/login',
       callback: false,
       home: '/'
@@ -79,20 +78,20 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { 
+          login: {
             url: 'login',
-            method: 'post', 
+            method: 'post',
             propertyName: 'token'
           },
           logout: false,
           user: false,
         }
       }
-    }  
+    }
   },
 
   router: {
-    middleware: [ 'auth' ]
+    middleware: ['auth']
   },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)

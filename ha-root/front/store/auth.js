@@ -1,6 +1,7 @@
 export const state = () => ({
   seq_login_id: '',
-  token: ''
+  token: '',
+  roles: [],
 });
 
 export const mutations = {
@@ -13,4 +14,7 @@ export const mutations = {
     state.seq_login_id = token_data.seq_login_id;
     state.token = token_data.token;
   },
+  setUserData: function(state, user_data) {
+    state.roles = user_data.roles;
+  }
 };
