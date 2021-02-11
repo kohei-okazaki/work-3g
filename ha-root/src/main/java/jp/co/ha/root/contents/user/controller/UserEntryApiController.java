@@ -15,7 +15,7 @@ import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
-import jp.co.ha.db.entity.RootUserRoleMt;
+import jp.co.ha.db.entity.RootUserRoleMngMt;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.user.request.UserEntryApiRequest;
 import jp.co.ha.root.contents.user.response.UserEntryApiResponse;
@@ -68,8 +68,8 @@ public class UserEntryApiController
         RootRoleMt RefRoleMt = rootRoleMtSearchService
                 .findByRole(RootRoleType.REF.getValue());
 
-        // 照会権限の管理者サイトユーザ権限マスタを登録
-        RootUserRoleMt userRoleMt = new RootUserRoleMt();
+        // 管理者サイトユーザ権限管理マスタを登録
+        RootUserRoleMngMt userRoleMt = new RootUserRoleMngMt();
         userRoleMt.setSeqRootRoleMtId(RefRoleMt.getSeqRootRoleMtId());
         rootUserRoleMtCreateService.create(userRoleMt);
 
