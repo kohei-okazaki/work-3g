@@ -1,5 +1,5 @@
 <template>
-  <v-footer :absolute="!fixed" app>
+  <v-footer :absolute="fixed" app>
     <span>&copy; {{ new Date().getFullYear() }}</span>
   </v-footer>
 </template>
@@ -8,7 +8,7 @@
 export default {
   data: function () {
     return {
-      fixed: false,
+      fixed: true,
     };
   },
 };

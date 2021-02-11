@@ -43,6 +43,9 @@
 </template>
 
 <script>
+const axios = require("axios");
+let retriveUrl = process.env.api_base_url + "user/";
+
 export default {
   // ログイン前のレイアウトを適用
   layout: "nonAuthLayout",
@@ -96,6 +99,9 @@ export default {
               token: authorization,
             });
 
+            // ログイン成功時、ユーザ情報照会APIを実行
+            this.retrieve(this.seq_login_id);
+
             this.loading = false;
 
             return response;
@@ -105,6 +111,25 @@ export default {
             return error;
           }
         );
+    },
+    retrieve: function (seq_login_id) {
+      let headers = { Authorization: this.$store.state.auth.token };
+      axios.get(retriveUrl + seq_login_id, { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            // 正常終了した場合
+            // storeにユーザ情報を保存
+            let userData = {
+              roles: response.data.roles,
+            };
+            this.$store.commit("auth/setUserData", userData);
+          }
+        },
+        (error) => {
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
     },
   },
 };

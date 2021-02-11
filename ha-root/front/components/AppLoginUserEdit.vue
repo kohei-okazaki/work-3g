@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="editLoginUser">
+  <v-btn color="primary" text @click="editLoginUser">
     <div>変更</div>
   </v-btn>
 </template>

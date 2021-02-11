@@ -3,6 +3,7 @@
     :open-on-hover="true"
     :open-on-click="true"
     :close-on-content-click="false"
+    :close-on-hover="false"
     :nudge-width="200"
     offset-y
   >

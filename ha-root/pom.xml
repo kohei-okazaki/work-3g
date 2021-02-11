@@ -105,6 +105,27 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${org.springframework.boot-version}</version>
       </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+            <archive>
+              <manifest>
+                <mainClass>jp.co.ha.root.RootApplication</mainClass>
+              </manifest>
+            </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 

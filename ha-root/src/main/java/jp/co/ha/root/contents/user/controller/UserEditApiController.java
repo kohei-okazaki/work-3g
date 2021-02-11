@@ -31,7 +31,7 @@ public class UserEditApiController
      *     ユーザ編集APIリクエスト
      * @return ユーザ編集APIレスポンス
      */
-    @PutMapping(value = "user/edit/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PutMapping(value = "user/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public UserEditApiResponse edit(
             @PathVariable(name = "id", required = false) Optional<String> id,
             @RequestBody UserEditApiRequest request) {
