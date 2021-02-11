@@ -147,6 +147,9 @@
       REG_DATE)
     values (#{seqRootUserRoleMngMtId,jdbcType=INTEGER}, #{updateDate,jdbcType=TIMESTAMP},
       #{regDate,jdbcType=TIMESTAMP})
+      <selectKey resultType="INTEGER" keyProperty="seqRootUserRoleMngMtId" order="AFTER">
+        select @@IDENTITY
+      </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="jp.co.ha.db.entity.RootUserRoleMngMt">
     <!--

@@ -70,7 +70,6 @@ public class UserEntryApiController
 
         // 管理者サイトユーザ権限管理マスタを登録
         RootUserRoleMngMt userRoleMt = new RootUserRoleMngMt();
-        userRoleMt.setSeqRootRoleMtId(RefRoleMt.getSeqRootRoleMtId());
         rootUserRoleMtCreateService.create(userRoleMt);
 
         RootLoginInfo entity = new RootLoginInfo();
