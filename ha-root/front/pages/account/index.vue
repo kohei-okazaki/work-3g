@@ -10,11 +10,37 @@
           single-line
           hide-details
         ></v-text-field>
-        <v-data-table
-          :headers="headers"
-          :items="account_list"
-          :search="search"
-        ></v-data-table>
+        <v-data-table :headers="headers" :items="account_list" :search="search">
+          <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
+          <template v-slot:[`item.delete_flag`]="{ item }">
+            <v-icon v-if="item.delete_flag == 1" color="green"
+              >mdi-check</v-icon
+            >
+            <v-icon v-else-if="item.delete_flag == 0">mdi-minus</v-icon>
+          </template>
+          <template v-slot:[`item.header_flag`]="{ item }">
+            <v-icon v-if="item.header_flag == 1" color="green"
+              >mdi-check</v-icon
+            >
+            <v-icon v-else-if="item.header_flag == 0">mdi-minus</v-icon>
+          </template>
+          <template v-slot:[`item.footer_flag`]="{ item }">
+            <v-icon v-if="item.footer_flag == 1" color="green"
+              >mdi-check</v-icon
+            >
+            <v-icon v-else-if="item.footer_flag == 0">mdi-minus</v-icon>
+          </template>
+          <template v-slot:[`item.mask_flag`]="{ item }">
+            <v-icon v-if="item.mask_flag == 1" color="green">mdi-check</v-icon>
+            <v-icon v-else-if="item.mask_flag == 0">mdi-minus</v-icon>
+          </template>
+          <template v-slot:[`item.enclosure_char_flag`]="{ item }">
+            <v-icon v-if="item.enclosure_char_flag == 1" color="green"
+              >mdi-check</v-icon
+            >
+            <v-icon v-else-if="item.enclosure_char_flag == 0">mdi-minus</v-icon>
+          </template>
+        </v-data-table>
       </v-col>
     </v-row>
   </div>
@@ -68,19 +94,19 @@ export default {
           value: "update_date",
         },
         {
-          text: "ヘッダ利用有無フラグ",
+          text: "ヘッダ利用有無",
           value: "header_flag",
         },
         {
-          text: "フッタ利用有無フラグ",
+          text: "フッタ利用有無",
           value: "footer_flag",
         },
         {
-          text: "マスク利用有無フラグ",
+          text: "マスク利用有無",
           value: "mask_flag",
         },
         {
-          text: "囲み文字利用有無フラグ",
+          text: "囲み文字利用有無",
           value: "enclosure_char_flag",
         },
       ],
