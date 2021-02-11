@@ -1,12 +1,17 @@
 package jp.co.ha.root.contents.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.create.RootLoginInfoCreateService;
+import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
 import jp.co.ha.business.db.crud.create.RootUserRoleMngMtCreateService;
 import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
 import jp.co.ha.common.exception.BaseException;
@@ -15,6 +20,7 @@ import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
+import jp.co.ha.db.entity.RootUserRoleDetailMt;
 import jp.co.ha.db.entity.RootUserRoleMngMt;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.user.request.UserEntryApiRequest;
@@ -38,9 +44,12 @@ public class UserEntryApiController
     /** 管理者サイト権限マスタ検索サービス */
     @Autowired
     private RootRoleMtSearchService rootRoleMtSearchService;
-    /** 管理者サイトユーザ権限マスタ作成サービス */
+    /** 管理者サイトユーザ権限管理マスタ作成サービス */
     @Autowired
-    private RootUserRoleMngMtCreateService rootUserRoleMtCreateService;
+    private RootUserRoleMngMtCreateService rootUserRoleMngMtCreateService;
+    /** 管理者サイトユーザ権限詳細マスタ作成サービス */
+    @Autowired
+    private RootUserRoleDetailMtCreateService rootUserRoleDetailMtCreateService;
     /** 管理者サイトユーザログイン情報作成サービス */
     @Autowired
     private RootLoginInfoCreateService createService;
@@ -48,6 +57,13 @@ public class UserEntryApiController
     @Sha256
     @Autowired
     private HashEncoder hashEncoder;
+    /** トランザクション管理クラス */
+    @Autowired
+    private PlatformTransactionManager transactionManager;
+    /** トランザクションクラス */
+    @Autowired
+    @Qualifier("transactionDefinition")
+    private DefaultTransactionDefinition defaultTransactionDefinition;
 
     /**
      * ユーザ登録処理
@@ -58,33 +74,58 @@ public class UserEntryApiController
      * @throws BaseException
      *     ハッシュ化に失敗した場合
      */
-    @PostMapping(value = "user/entry", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(value = "user", produces = { MediaType.APPLICATION_JSON_VALUE })
     public UserEntryApiResponse entry(@RequestBody UserEntryApiRequest request)
             throws BaseException {
 
         // TODO 妥当性チェックを追加
 
-        // 照会権限のマスタを取得
-        RootRoleMt RefRoleMt = rootRoleMtSearchService
-                .findByRole(RootRoleType.REF.getValue());
+        // トランザクション開始
+        TransactionStatus status = transactionManager
+                .getTransaction(defaultTransactionDefinition);
 
-        // 管理者サイトユーザ権限管理マスタを登録
-        RootUserRoleMngMt userRoleMt = new RootUserRoleMngMt();
-        rootUserRoleMtCreateService.create(userRoleMt);
+        Integer seqLoginId = null;
+        try {
 
-        RootLoginInfo entity = new RootLoginInfo();
-        entity.setSeqRootUserRoleMtId(userRoleMt.getSeqRootUserRoleMtId());
-        entity.setPassword(
-                hashEncoder.encode(request.getPassword(), ""));
-        entity.setPasswordExpire(
-                DateTimeUtil.addMonth(DateTimeUtil.getSysDate().toLocalDate(), 6));
-        entity.setDeleteFlag("0");
+            // 照会権限のマスタを取得
+            RootRoleMt RefRoleMt = rootRoleMtSearchService
+                    .findByRole(RootRoleType.REF.getValue());
 
-        createService.create(entity);
+            // 管理者サイトユーザ権限管理マスタを登録
+            RootUserRoleMngMt mngMt = new RootUserRoleMngMt();
+            rootUserRoleMngMtCreateService.create(mngMt);
+
+            // 管理者サイトユーザ権限詳細マスタを登録
+            RootUserRoleDetailMt detailMt = new RootUserRoleDetailMt();
+            detailMt.setSeqRootUserRoleMngMtId(mngMt.getSeqRootUserRoleMngMtId());
+            detailMt.setSeqRootRoleMtId(RefRoleMt.getSeqRootRoleMtId());
+            rootUserRoleDetailMtCreateService.create(detailMt);
+
+            // 管理者サイトユーザログイン情報を登録
+            RootLoginInfo entity = new RootLoginInfo();
+            entity.setSeqRootUserRoleMngMtId(mngMt.getSeqRootUserRoleMngMtId());
+            entity.setPassword(
+                    hashEncoder.encode(request.getPassword(), ""));
+            entity.setPasswordExpire(
+                    DateTimeUtil.addMonth(DateTimeUtil.getSysDate().toLocalDate(), 6));
+            entity.setDeleteFlag("0");
+
+            createService.create(entity);
+
+            // 正常にDB登録出来た場合、コミット
+            transactionManager.commit(status);
+
+            seqLoginId = entity.getSeqRootLoginInfoId();
+
+        } catch (Exception e) {
+            // 登録処理中にエラーが起きた場合、ロールバック
+            transactionManager.rollback(status);
+            throw e;
+        }
 
         UserEntryApiResponse response = new UserEntryApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
-        response.setSeqLoginId(entity.getSeqRootLoginInfoId());
+        response.setSeqLoginId(seqLoginId);
 
         return response;
     }

@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.create.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.create.RootUserRoleMngMtCreateService;
@@ -13,6 +14,7 @@ import jp.co.ha.db.mapper.RootUserRoleMngMtMapper;
  *
  * @version 1.0.0
  */
+@Service
 public class RootUserRoleMngMtCreateServiceImpl
         implements RootUserRoleMngMtCreateService {
 

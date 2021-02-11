@@ -1,7 +1,8 @@
 package jp.co.ha.root.contents.user.controller;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
-import jp.co.ha.db.entity.RootLoginInfo;
+import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
 import jp.co.ha.root.contents.user.request.UserRetrieveApiRequest;
@@ -47,8 +49,9 @@ public class UserRetrieveController
         // TODO 妥当性チェック処理
         Integer seqLoginId = Integer.valueOf(id.get());
 
-        Optional<RootLoginInfo> entity = searchService.findById(seqLoginId);
-        if (!entity.isPresent()) {
+        List<CompositeRootUserInfo> entityList = searchService
+                .findCompositeUserById(seqLoginId);
+        if (CollectionUtil.isEmpty(entityList)) {
             UserRetrieveApiResponse response = new UserRetrieveApiResponse();
             response.setRootApiResult(RootApiResult.FAILURE);
             ErrorData error = new ErrorData();
@@ -60,10 +63,12 @@ public class UserRetrieveController
         UserRetrieveApiResponse response = new UserRetrieveApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
         response.setSeqLoginId(seqLoginId);
-        Role role = new Role();
-        role.setLabel("管理者");
-        // role.setValue(entity.get().getRole());
-        response.setRoles(Arrays.asList(role));
+        response.setRoles(entityList.stream().map(e -> {
+            Role role = new Role();
+            role.setValue(e.getRole());
+            role.setLabel(e.getRoleName());
+            return role;
+        }).collect(Collectors.toList()));
 
         return response;
     }
