@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.create.RootLoginInfoCreateService;
+import jp.co.ha.business.db.crud.create.RootUserRoleMngMtCreateService;
+import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
+import jp.co.ha.db.entity.RootRoleMt;
+import jp.co.ha.db.entity.RootUserRoleMt;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.user.request.UserEntryApiRequest;
 import jp.co.ha.root.contents.user.response.UserEntryApiResponse;
@@ -31,6 +35,12 @@ import jp.co.ha.root.type.RootRoleType;
 public class UserEntryApiController
         extends BaseRootApiController<UserEntryApiRequest, UserEntryApiResponse> {
 
+    /** 管理者サイト権限マスタ検索サービス */
+    @Autowired
+    private RootRoleMtSearchService rootRoleMtSearchService;
+    /** 管理者サイトユーザ権限マスタ作成サービス */
+    @Autowired
+    private RootUserRoleMngMtCreateService rootUserRoleMtCreateService;
     /** 管理者サイトユーザログイン情報作成サービス */
     @Autowired
     private RootLoginInfoCreateService createService;
@@ -54,8 +64,17 @@ public class UserEntryApiController
 
         // TODO 妥当性チェックを追加
 
+        // 照会権限のマスタを取得
+        RootRoleMt RefRoleMt = rootRoleMtSearchService
+                .findByRole(RootRoleType.REF.getValue());
+
+        // 照会権限の管理者サイトユーザ権限マスタを登録
+        RootUserRoleMt userRoleMt = new RootUserRoleMt();
+        userRoleMt.setSeqRootRoleMtId(RefRoleMt.getSeqRootRoleMtId());
+        rootUserRoleMtCreateService.create(userRoleMt);
+
         RootLoginInfo entity = new RootLoginInfo();
-        entity.setRole(RootRoleType.REF.getValue());
+        entity.setSeqRootUserRoleMtId(userRoleMt.getSeqRootUserRoleMtId());
         entity.setPassword(
                 hashEncoder.encode(request.getPassword(), ""));
         entity.setPasswordExpire(

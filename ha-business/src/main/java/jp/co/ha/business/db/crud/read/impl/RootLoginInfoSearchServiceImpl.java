@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
+import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootLoginInfoKey;
 import jp.co.ha.db.mapper.RootLoginInfoMapper;
@@ -22,7 +24,9 @@ public class RootLoginInfoSearchServiceImpl implements RootLoginInfoSearchServic
     @Autowired
     private RootLoginInfoMapper mapper;
 
+    @Select
     @Override
+    @Transactional(readOnly = true)
     public Optional<RootLoginInfo> findById(Integer seqLoginId) {
 
         RootLoginInfoKey key = new RootLoginInfoKey();

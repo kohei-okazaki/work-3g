@@ -62,7 +62,7 @@ public class UserRetrieveController
         response.setSeqLoginId(seqLoginId);
         Role role = new Role();
         role.setLabel("管理者");
-        role.setValue(entity.get().getRole());
+        // role.setValue(entity.get().getRole());
         response.setRoles(Arrays.asList(role));
 
         return response;
