@@ -2,6 +2,9 @@
   <v-row justify="center" align-content="center">
     <v-col class="text-center">
       <br /><br />
+      <template v-if="api_error_data.hasError">
+        <v-alert border="left" color="red" type="error">{{ api_error_data.message }}</v-alert>
+      </template>
       <v-card>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text>
@@ -43,6 +46,9 @@
 </template>
 
 <script>
+const axios = require("axios");
+let retriveUrl = process.env.api_base_url + "user/";
+
 export default {
   // ログイン前のレイアウトを適用
   layout: "nonAuthLayout",
@@ -54,6 +60,10 @@ export default {
       show: false,
       loading: false,
       required: (value) => !!value || "必ず入力してください",
+      api_error_data: {
+        hasError: false,
+        message: null,
+      },
     };
   },
   computed: {
@@ -96,6 +106,9 @@ export default {
               token: authorization,
             });
 
+            // ログイン成功時、ユーザ情報照会APIを実行
+            this.retrieve(this.seq_login_id);
+
             this.loading = false;
 
             return response;
@@ -105,6 +118,29 @@ export default {
             return error;
           }
         );
+    },
+    retrieve: function (seq_login_id) {
+      let headers = { Authorization: this.$store.state.auth.token };
+      axios.get(retriveUrl + seq_login_id, { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            // 正常終了した場合
+            // storeにユーザ情報を保存
+            let userData = {
+              roles: response.data.roles,
+            };
+            this.$store.commit("auth/setUserData", userData);
+          } else {
+            this.api_error_data.hasError = true;
+            this.api_error_data.message = response.data.error.message;
+            this.$auth.logout();
+          }
+        },
+        (error) => {
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
     },
   },
 };

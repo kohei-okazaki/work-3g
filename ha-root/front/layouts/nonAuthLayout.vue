@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import AppFooter from '~/components/AppFooter.vue'
-import AppTop from '~/components/AppTop.vue'
+import AppFooter from "~/components/AppFooter.vue";
+import AppTop from "~/components/AppTop.vue";
 
 // ログイン前のレイアウト
 export default {

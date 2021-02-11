@@ -1,8 +1,10 @@
 package jp.co.ha.business.db.crud.read;
 
+import java.util.List;
 import java.util.Optional;
 
 import jp.co.ha.db.entity.RootLoginInfo;
+import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
 
 /**
  * 管理者サイトユーザログイン情報検索サービスインターフェース
@@ -19,5 +21,14 @@ public interface RootLoginInfoSearchService {
      * @return RootLoginInfo
      */
     Optional<RootLoginInfo> findById(Integer seqLoginId);
+
+    /**
+     * 指定したログインIDから管理者サイト複合ユーザ情報の一覧を検索する
+     * 
+     * @param seqLoginId
+     *     ログインID
+     * @return 管理者サイト複合ユーザ情報の一覧
+     */
+    List<CompositeRootUserInfo> findCompositeUserById(Integer seqLoginId);
 
 }

@@ -72,6 +72,7 @@
           <v-btn color="primary" nuxt to="/inspire">Continue</v-btn>
         </v-card-actions>
       </v-card>
+      <ContentAlertModal />
     </v-col>
   </v-row>
 </template>
@@ -79,11 +80,13 @@
 <script>
 import AppLogo from "~/components/AppLogo.vue";
 import AppVuetifyLogo from "~/components/AppVuetifyLogo.vue";
+import ContentAlertModal from "~/components/modal/ContentAlertModal.vue";
 
 export default {
   components: {
     AppLogo,
     AppVuetifyLogo,
+    ContentAlertModal,
   },
 };
 </script>
