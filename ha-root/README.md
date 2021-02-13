@@ -9,11 +9,6 @@
     - URL：${domain}/api/root/login
     - Method：Post
 
-- ログアウトAPI：
-    - 概要：管理サイトへのログアウトを行うAPI
-    - URL：${domain}/api/root/logout
-    - Method：Get
-
 - 管理ユーザ作成API：
     - 概要：管理サイトユーザの作成を行うAPI
     - URL：${domain}/api/root/user
@@ -21,7 +16,7 @@
 
 - 管理ユーザ編集API：
     - 概要：管理サイトユーザの編集を行うAPI
-    - URL：${domain}/api/root/user/edit/{seq_login_id}
+    - URL：${domain}/api/root/user/{seq_login_id}
     - Method：Put
 
 - アカウント情報一覧取得API：
@@ -46,11 +41,15 @@
 
 - お知らせ情報登録API：
     - 概要：健康管理アプリのお知らせを登録するAPI
-    - URL：${domain}/api/root/news/entry
+    - URL：${domain}/api/root/news
     - Method：Post
 
 - お知らせ情報編集API：
     - 概要：健康管理アプリのお知らせを変更するAPI
-    - URL：${domain}/api/root/news/edit/{id}
+    - URL：${domain}/api/root/news/{id}
     - Method：Put
 
+- お知らせ情報削除API：
+    - 概要：健康管理アプリのお知らせを変更するAPI
+    - URL：${domain}/api/root/news/{id}
+    - Method：Delete

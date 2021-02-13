@@ -1,66 +1,71 @@
 <template>
-  <v-row justify="center" align-content="center">
-    <v-col class="text-center">
-      <br /><br />
-      <template v-if="api_error_data.hasError">
-        <v-alert border="left" color="red" type="error">{{ api_error_data.message }}</v-alert>
-      </template>
-      <v-card>
-        <v-card-title>{{ title }}</v-card-title>
-        <v-card-text>
-          <v-form ref="login_form">
-            <v-text-field
-              v-model="seq_login_id"
-              label="ログインID"
-              prepend-icon="mdi-account-circle"
-              :rules="[required]"
-            ></v-text-field>
-            <v-text-field
-              v-model="password"
-              label="パスワード"
-              prepend-icon="mdi-lock"
-              :append-icon="toggle.icon"
-              :type="toggle.type"
-              @click:append="show = !show"
-              :rules="[required]"
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            @click="submit"
-            :loading="loading"
-            :disabled="loading"
-          >
-            <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
-          </v-btn>
-          <v-spacer />
-          <v-btn color="primary" :to="`user/entry`">
-            <v-icon>mdi-account-multiple-plus</v-icon>&ensp;管理ユーザ作成
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div>
+    <AppError v-if="error.hasError" :data="error" />
+    <v-row justify="center" align-content="center">
+      <v-col class="text-center">
+        <br />
+        <v-card>
+          <v-card-title>{{ title }}</v-card-title>
+          <v-card-text>
+            <v-form ref="loginForm">
+              <v-text-field
+                v-model="seq_login_id"
+                label="ログインID"
+                prepend-icon="mdi-account-circle"
+                :rules="[required]"
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                label="パスワード"
+                prepend-icon="mdi-lock"
+                :append-icon="toggle.icon"
+                :type="toggle.type"
+                @click:append="show = !show"
+                :rules="[required]"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              @click="submit"
+              :loading="loading"
+              :disabled="loading"
+            >
+              <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
+            </v-btn>
+            <v-spacer />
+            <v-btn color="primary" :to="`user/entry`">
+              <v-icon>mdi-account-multiple-plus</v-icon>&ensp;管理ユーザ作成
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+        <UserRetrieve ref="user-retrieve" />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
-const axios = require("axios");
-let retriveUrl = process.env.api_base_url + "user/";
+import AppError from "~/components/AppError.vue";
+import UserRetrieve from "~/components/user/UserRetrieve.vue";
 
 export default {
   // ログイン前のレイアウトを適用
   layout: "nonAuthLayout",
+  components: {
+    AppError,
+    UserRetrieve,
+  },
   data: function () {
     return {
       title: "ログイン",
-      seq_login_id: "",
+      seqLoginId: "",
       password: "",
       show: false,
       loading: false,
       required: (value) => !!value || "必ず入力してください",
-      api_error_data: {
+      error: {
         hasError: false,
         message: null,
       },
@@ -83,14 +88,15 @@ export default {
   methods: {
     submit: function () {
       this.loading = true;
-      if (!this.$refs.login_form.validate()) {
+      if (!this.$refs.loginForm.validate()) {
         // 入力値エラーの場合
+        this.loading = false;
         return;
       }
       this.$auth
         .loginWith("local", {
           data: {
-            seq_login_id: this.seq_login_id,
+            seq_login_id: this.seqLoginId,
             password: this.password,
           },
         })
@@ -102,49 +108,33 @@ export default {
 
             // storeにログイン情報を保存
             this.$store.commit("auth/setToken", {
-              seq_login_id: this.seq_login_id,
+              seq_login_id: this.seqLoginId,
               token: authorization,
             });
 
             // ログイン成功時、ユーザ情報照会APIを実行
-            this.retrieve(this.seq_login_id);
-
+            let retrieveResult = this.$refs.user-retrieve.retrieve(
+              this.seqLoginId
+            );
+            if (retrieveResult.hasError) {
+              this.error.hasError = true;
+              this.error.message = retrieveResult.message;
+            }
             this.loading = false;
-
             return response;
           },
           (error) => {
-            console.log("[error]=" + error);
+            this.loading = false;
+            this.error.hasError = true;
+            this.error.message = error;
+            console.log("login [error]=" + error);
             return error;
           }
         );
-    },
-    retrieve: function (seq_login_id) {
-      let headers = { Authorization: this.$store.state.auth.token };
-      axios.get(retriveUrl + seq_login_id, { headers }).then(
-        (response) => {
-          if (response.data.result == 0) {
-            // 正常終了した場合
-            // storeにユーザ情報を保存
-            let userData = {
-              roles: response.data.roles,
-            };
-            this.$store.commit("auth/setUserData", userData);
-          } else {
-            this.api_error_data.hasError = true;
-            this.api_error_data.message = response.data.error.message;
-            this.$auth.logout();
-          }
-        },
-        (error) => {
-          console.log("[error]=" + error);
-          return error;
-        }
-      );
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 </style>

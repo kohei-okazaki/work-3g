@@ -1,5 +1,7 @@
 package jp.co.ha.business.db.crud.read.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,15 +28,15 @@ public class RootRoleMtSearchServiceImpl implements RootRoleMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public RootRoleMt findByRole(String role) {
+    public List<RootRoleMt> findByRoles(List<String> roles) {
 
         RootRoleMtExample example = new RootRoleMtExample();
         Criteria criteria = example.createCriteria();
 
         // 権限
-        criteria.andRoleEqualTo(role);
+        criteria.andRoleIn(roles);
 
-        return mapper.selectByExample(example).get(0);
+        return mapper.selectByExample(example);
     }
 
 }

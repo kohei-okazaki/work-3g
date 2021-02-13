@@ -58,6 +58,7 @@ export default {
       return "ログインID=" + this.getSeqLoginId();
     },
     viewPopOverRole: function () {
+      // 権限配列をカンマ区切りの文字列に変換
       return "権限=" + this.getRoles().map(item => item.label).join(",");
     },
   },

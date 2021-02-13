@@ -1,33 +1,38 @@
 <template>
   <div>
     <AppTitle icon="mdi-api" title="API通信情報一覧" />
+    <AppError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col>
-        <v-timeline align-top dense v-if="timelines.length != 0"
-          ><v-timeline-item
-            small
-            v-for="(timeline, i) in timelines"
-            :key="i"
-            :color="timeline.color"
-          >
-            <v-card max-width="650" :color="timeline.color">
-              <v-card-title class="title">{{ timeline.api_name }}</v-card-title>
-              <!-- 白色を固定するとダークモードに切り替えたときに白色のままなので算出プロパティで常にモードを見て背景を決めるようにする -->
-              <v-card-text :class="timelineCardTextBgColor">
-                <br>
-                <div>
-                  <b>API通信情報ID</b>={{
-                    timeline.seq_api_communication_data_id
-                  }}
-                </div>
-                <div><b>API名</b>={{ timeline.api_name }}</div>
-                <div><b>HTTPステータス</b>={{ timeline.http_status }}</div>
-                <div><b>送信日時</b>={{ timeline.request_date }}</div>
-                <div><b>受信日時</b>={{ timeline.response_date }}</div>
-              </v-card-text>
-            </v-card>
-          </v-timeline-item>
-        </v-timeline>
+        <transition name="fade">
+          <v-timeline align-top dense v-if="timelines.length != 0">
+            <v-timeline-item
+              small
+              v-for="(timeline, i) in timelines"
+              :key="i"
+              :color="timeline.color"
+            >
+              <v-card max-width="650" :color="timeline.color">
+                <v-card-title class="title">{{
+                  timeline.api_name
+                }}</v-card-title>
+                <!-- 白色を固定するとダークモードに切り替えたときに白色のままなので算出プロパティで常にモードを見て背景を決めるようにする -->
+                <v-card-text :class="timelineCardTextBgColor">
+                  <br />
+                  <div>
+                    <b>API通信情報ID</b>={{
+                      timeline.seq_api_communication_data_id
+                    }}
+                  </div>
+                  <div><b>API名</b>={{ timeline.api_name }}</div>
+                  <div><b>HTTPステータス</b>={{ timeline.http_status }}</div>
+                  <div><b>送信日時</b>={{ timeline.request_date }}</div>
+                  <div><b>受信日時</b>={{ timeline.response_date }}</div>
+                </v-card-text>
+              </v-card>
+            </v-timeline-item>
+          </v-timeline></transition
+        >
       </v-col>
     </v-row>
     <v-row>
@@ -63,6 +68,7 @@
 
 <script>
 import AppTitle from "~/components/AppTitle.vue";
+import AppError from "~/components/AppError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "apidata";
@@ -70,9 +76,14 @@ let url = process.env.api_base_url + "apidata";
 export default {
   components: {
     AppTitle,
+    AppError,
   },
   data: function () {
     return {
+      error: {
+        hasError: false,
+        message: null,
+      },
       timelines: [],
       search: "",
       api_data_list: [],
@@ -106,11 +117,11 @@ export default {
           value: "detail",
         },
         {
-          text: "APIリクエスト日時",
+          text: "送信日時",
           value: "request_date",
         },
         {
-          text: "APIレスポンス日時",
+          text: "受信日時",
           value: "response_date",
         },
       ],
@@ -126,6 +137,8 @@ export default {
           this.api_data_list = response.data.api_data_list;
         },
         (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
           console.log("[error]=" + error);
           return error;
         }
@@ -179,5 +192,14 @@ export default {
 }
 .pushable {
   cursor: pointer;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: 0.8s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0);
 }
 </style>
