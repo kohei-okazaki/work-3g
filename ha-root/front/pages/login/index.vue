@@ -7,7 +7,7 @@
         <v-card>
           <v-card-title>{{ title }}</v-card-title>
           <v-card-text>
-            <v-form ref="login_form">
+            <v-form ref="loginForm">
               <v-text-field
                 v-model="seq_login_id"
                 label="ログインID"
@@ -40,6 +40,7 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        <UserRetrieve ref="user-retrieve" />
       </v-col>
     </v-row>
   </div>
@@ -47,20 +48,19 @@
 
 <script>
 import AppError from "~/components/AppError.vue";
-
-const axios = require("axios");
-let retriveUrl = process.env.api_base_url + "user/";
+import UserRetrieve from "~/components/user/UserRetrieve.vue";
 
 export default {
   // ログイン前のレイアウトを適用
   layout: "nonAuthLayout",
   components: {
     AppError,
+    UserRetrieve,
   },
   data: function () {
     return {
       title: "ログイン",
-      seq_login_id: "",
+      seqLoginId: "",
       password: "",
       show: false,
       loading: false,
@@ -88,7 +88,7 @@ export default {
   methods: {
     submit: function () {
       this.loading = true;
-      if (!this.$refs.login_form.validate()) {
+      if (!this.$refs.loginForm.validate()) {
         // 入力値エラーの場合
         this.loading = false;
         return;
@@ -96,7 +96,7 @@ export default {
       this.$auth
         .loginWith("local", {
           data: {
-            seq_login_id: this.seq_login_id,
+            seq_login_id: this.seqLoginId,
             password: this.password,
           },
         })
@@ -108,15 +108,19 @@ export default {
 
             // storeにログイン情報を保存
             this.$store.commit("auth/setToken", {
-              seq_login_id: this.seq_login_id,
+              seq_login_id: this.seqLoginId,
               token: authorization,
             });
 
             // ログイン成功時、ユーザ情報照会APIを実行
-            this.retrieve(this.seq_login_id);
-
+            let retrieveResult = this.$refs.user-retrieve.retrieve(
+              this.seqLoginId
+            );
+            if (retrieveResult.hasError) {
+              this.error.hasError = true;
+              this.error.message = retrieveResult.message;
+            }
             this.loading = false;
-
             return response;
           },
           (error) => {
@@ -127,31 +131,6 @@ export default {
             return error;
           }
         );
-    },
-    retrieve: function (seq_login_id) {
-      let headers = { Authorization: this.$store.state.auth.token };
-      axios.get(retriveUrl + seq_login_id, { headers }).then(
-        (response) => {
-          if (response.data.result == 0) {
-            // 正常終了した場合
-            // storeにユーザ情報を保存
-            let userData = {
-              roles: response.data.roles,
-            };
-            this.$store.commit("auth/setUserData", userData);
-          } else {
-            this.error.hasError = true;
-            this.error.message = response.data.error.message;
-            this.$auth.logout();
-          }
-        },
-        (error) => {
-          this.error.hasError = true;
-          this.error.message = response.data.error.message;
-          console.log("retrieve [error]=" + error);
-          return error;
-        }
-      );
     },
   },
 };

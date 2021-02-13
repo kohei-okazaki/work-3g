@@ -37,6 +37,7 @@
           </v-card-actions>
         </v-card>
         <AppConfirm ref="confirm"></AppConfirm>
+        <UserRetrieve ref="userRetrieve" />
       </v-col>
     </v-row>
   </div>
@@ -47,6 +48,7 @@ import AppConfirm from "~/components/modal/ConfirmModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
 import AppError from "~/components/AppError.vue";
 import AppSuccess from "~/components/AppSuccess.vue";
+import UserRetrieve from "~/components/user/UserRetrieve.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "user/";
@@ -57,6 +59,7 @@ export default {
     AppTitle,
     AppError,
     AppSuccess,
+    UserRetrieve,
   },
   data: function () {
     return {
@@ -134,6 +137,15 @@ export default {
           if (result.data.result === "0") {
             this.apiResult.isSuccess = true;
             this.apiResult.message = "更新完了";
+
+            // ユーザ情報照会APIを実行
+            let retrieveResult = this.$refs.userRetrieve.retrieve(
+              this.editUserForm.seqLoginId
+            );
+            if (retrieveResult.hasError) {
+              this.error.hasError = true;
+              this.error.message = retrieveResult.message;
+            }
           } else {
             this.error.hasError = true;
             this.error.message = result.data.error.message;
