@@ -1,6 +1,10 @@
 <template>
   <div>
     <AppTitle icon="mdi-account-edit" title="ユーザ編集" />
+    <v-row>
+      <v-col>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -14,5 +18,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

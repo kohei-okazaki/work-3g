@@ -85,6 +85,7 @@ export default {
       this.loading = true;
       if (!this.$refs.login_form.validate()) {
         // 入力値エラーの場合
+        this.loading = false;
         return;
       }
       this.$auth
@@ -146,5 +147,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

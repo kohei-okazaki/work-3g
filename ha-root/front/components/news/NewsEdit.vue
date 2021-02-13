@@ -14,6 +14,7 @@
               v-model="edit_news_form.title"
               label="タイトル"
               clearable
+              :rules="[required]"
             ></v-text-field>
             <v-text-field
               v-model="edit_news_form.date"
@@ -21,6 +22,7 @@
               hint="年/月/日"
               persistent-hint
               clearable
+              :rules="[required]"
               @click="controllCalendar"
             >
             </v-text-field>
@@ -35,6 +37,7 @@
               v-model="edit_news_form.detail"
               label="詳細(htmlタグの入力も可能です)"
               clearable
+              :rules="[required]"
             ></v-textarea>
             <NewsTagPullDown
               v-model="edit_news_form.tag.color"
@@ -44,6 +47,7 @@
               v-model="edit_news_form.tag.name"
               label="タグ名"
               clearable
+              :rules="[required]"
             ></v-text-field>
           </v-form>
         </v-card-text>
@@ -81,6 +85,7 @@ export default {
     return {
       isDispCalendar: false,
       loading: false,
+      required: (value) => !!value || "必ず入力してください",
     };
   },
   methods: {

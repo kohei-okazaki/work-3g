@@ -7,6 +7,8 @@
             <v-text-field
               v-model="entry_info.title"
               label="タイトル"
+              clearable
+              :rules="[required]"
             ></v-text-field>
             <v-text-field
               v-model="entry_info.date"
@@ -14,6 +16,8 @@
               hint="年/月/日"
               persistent-hint
               @click="controllCalendar"
+              clearable
+              :rules="[required]"
             ></v-text-field>
             <template v-if="isDispCalendar">
               <v-date-picker
@@ -25,11 +29,15 @@
             <v-textarea
               v-model="entry_info.detail"
               label="詳細(htmlタグの入力も可能です)"
+              clearable
+              :rules="[required]"
             ></v-textarea>
             <NewsTagPullDown v-model="entry_info.tag.color" color="blue" />
             <v-text-field
               v-model="entry_info.tag.name"
               label="タグ名"
+              clearable
+              :rules="[required]"
             ></v-text-field>
           </v-form>
         </v-card-text>
@@ -74,6 +82,7 @@ export default {
           name: "",
         },
       },
+      required: (value) => !!value || "必ず入力してください",
       api_data: {
         api_result: "",
         api_entry_info: {
@@ -95,6 +104,11 @@ export default {
     },
     submit: function () {
       this.loading = true;
+      if (!this.$refs.entry_form.validate()) {
+        // 入力値エラーの場合
+        this.loading = false;
+        return;
+      }
       let reqBody = {
         index: this.entry_info.index,
         title: this.entry_info.title,
