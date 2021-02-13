@@ -1,13 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-account-edit" title="ユーザ編集" />
-    <v-row v-if="error.hasError">
-      <v-col class="text-left">
-          <v-alert border="left" color="red" type="error">{{
-            error.message
-          }}</v-alert>
-      </v-col>
-    </v-row>
+    <AppError v-if="error.hasError" :message="error.message" />
     <v-row>
       <v-col class="text-center">
         <v-card>
@@ -33,7 +27,7 @@
           <v-card-actions>
             <v-btn
               color="primary"
-              @click="submit"
+              @click="openUserEditModal"
               :loading="loading"
               :disabled="loading"
             >
@@ -41,20 +35,25 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        <AppConfirm ref="confirm"></AppConfirm>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
+import AppConfirm from "~/components/modal/ConfirmModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
+import AppError from "~/components/AppError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "user/";
 
 export default {
   components: {
+    AppConfirm,
     AppTitle,
+    AppError,
   },
   data: function () {
     return {
@@ -85,19 +84,21 @@ export default {
     };
   },
   methods: {
-    submit: function () {
+    async openUserEditModal() {
       if (!this.validate()) {
         // 妥当性チェックエラーの場合
         this.error.hasError = true;
         this.error.message = "必須項目が未指定です";
         return;
       }
-
-      this.loading = true;
-      let headers = {
-        Authorization: this.$store.state.auth.token,
-      };
-      let reqUrl = url + this.edit_user_form.seq_login_id;
+      if (
+        await this.$refs.confirm.open("ユーザ更新", "", {
+          color: "blue",
+          width: 400,
+        })
+      ) {
+        this.sendUserEdit();
+      }
     },
     validate: function () {
       if (
@@ -109,9 +110,39 @@ export default {
       }
       return true;
     },
+    sendUserEdit: function () {
+      this.loading = true;
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      let reqUrl = url + this.edit_user_form.seq_login_id;
+      let reqBody = {
+        roles: this.edit_user_form.roles,
+      };
+      axios.put(reqUrl, reqBody, { headers }).then(
+        (result) => {
+          if (result.data.result === "0") {
+            this.loading = false;
+          } else {
+            this.loading = false;
+            this.error.hasError = true;
+            this.error.message = result.data.error.message;
+          }
+        },
+        (error) => {
+          this.loading = false;
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
+    },
   },
   mounted: function () {
+    // ログインID
     this.edit_user_form.seq_login_id = this.$store.state.auth.seq_login_id;
+    // ユーザ権限
     this.edit_user_form.roles = this.$store.state.auth.roles.map(
       (item) => item.value
     );

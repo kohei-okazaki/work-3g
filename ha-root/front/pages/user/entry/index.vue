@@ -118,7 +118,6 @@ export default {
   },
   methods: {
     async openUserEntryModal() {
-      this.loading = true;
       if (
         await this.$refs.confirm.open(this.modal.title, this.modal.contents, {
           color: "blue",
@@ -134,6 +133,7 @@ export default {
         conf_password: this.conf_password,
       };
 
+      this.loading = true;
       axios.post(url, reqBody).then((result) => {
         if (result.data.result === "0") {
           // ユーザ作成APIが正常終了した場合
