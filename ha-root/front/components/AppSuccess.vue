@@ -5,8 +5,8 @@
         class="pushable"
         elevation="2"
         border="left"
-        color="red"
-        type="error"
+        color="green"
+        type="success"
         @click="clear"
         >{{ data.message }}</v-alert
       >
@@ -17,12 +17,12 @@
 <script>
 export default {
   props: {
-    // hasErrorとmessageを持つオブジェクトを渡すこと
+    // isSuccessとmessageを持つオブジェクトを渡すこと
     data: Object,
   },
   methods: {
     clear: function () {
-      this.data.hasError = false;
+      this.data.isSuccess = false;
     },
   },
 };

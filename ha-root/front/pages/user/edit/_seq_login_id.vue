@@ -1,20 +1,21 @@
 <template>
   <div>
     <AppTitle icon="mdi-account-edit" title="ユーザ編集" />
-    <AppError v-if="error.hasError" :message="error.message" />
+    <AppError v-if="error.hasError" :data="error" />
+    <AppSuccess v-if="apiResult.isSuccess" :data="apiResult" />
     <v-row>
       <v-col class="text-center">
         <v-card>
           <v-card-text>
-            <v-form ref="edit_form">
+            <v-form ref="editForm">
               <v-text-field
-                v-model="edit_user_form.seq_login_id"
+                v-model="editUserForm.seqLoginId"
                 label="更新対象の管理者ユーザのログインID"
                 disabled
-                >{{ edit_user_form.seq_login_id }}</v-text-field
+                >{{ editUserForm.seqLoginId }}</v-text-field
               >
               <v-checkbox
-                v-model="edit_user_form.roles"
+                v-model="editUserForm.roles"
                 v-for="(role, i) in roles"
                 :key="i"
                 :label="role.label"
@@ -45,6 +46,7 @@
 import AppConfirm from "~/components/modal/ConfirmModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
 import AppError from "~/components/AppError.vue";
+import AppSuccess from "~/components/AppSuccess.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "user/";
@@ -54,6 +56,7 @@ export default {
     AppConfirm,
     AppTitle,
     AppError,
+    AppSuccess,
   },
   data: function () {
     return {
@@ -62,9 +65,13 @@ export default {
         hasError: false,
         message: null,
       },
+      apiResult: {
+        isSuccess: false,
+        message: "",
+      },
       required: (value) => !!value || "必ず入力してください",
-      edit_user_form: {
-        seq_login_id: null,
+      editUserForm: {
+        seqLoginId: null,
         roles: [],
       },
       roles: [
@@ -85,10 +92,11 @@ export default {
   },
   methods: {
     async openUserEditModal() {
-      if (!this.validate()) {
+      let validateResult = this.validate();
+      if (validateResult != null) {
         // 妥当性チェックエラーの場合
         this.error.hasError = true;
-        this.error.message = "必須項目が未指定です";
+        this.error.message = validateResult.message;
         return;
       }
       if (
@@ -102,32 +110,35 @@ export default {
     },
     validate: function () {
       if (
-        this.edit_user_form.roles == null ||
-        this.edit_user_form.roles.length == 0
+        this.editUserForm.roles == null ||
+        this.editUserForm.roles.length == 0
       ) {
         // 権限配列がnullまたは未指定の場合、エラー
-        return false;
+        return {
+          message: "権限が未指定です",
+        };
       }
-      return true;
+      return null;
     },
     sendUserEdit: function () {
       this.loading = true;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      let reqUrl = url + this.edit_user_form.seq_login_id;
+      let reqUrl = url + this.editUserForm.seqLoginId;
       let reqBody = {
-        roles: this.edit_user_form.roles,
+        roles: this.editUserForm.roles,
       };
       axios.put(reqUrl, reqBody, { headers }).then(
         (result) => {
           if (result.data.result === "0") {
-            this.loading = false;
+            this.apiResult.isSuccess = true;
+            this.apiResult.message = "更新完了";
           } else {
-            this.loading = false;
             this.error.hasError = true;
             this.error.message = result.data.error.message;
           }
+          this.loading = false;
         },
         (error) => {
           this.loading = false;
@@ -141,9 +152,9 @@ export default {
   },
   mounted: function () {
     // ログインID
-    this.edit_user_form.seq_login_id = this.$store.state.auth.seq_login_id;
+    this.editUserForm.seqLoginId = this.$store.state.auth.seq_login_id;
     // ユーザ権限
-    this.edit_user_form.roles = this.$store.state.auth.roles.map(
+    this.editUserForm.roles = this.$store.state.auth.roles.map(
       (item) => item.value
     );
   },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
-    <AppError v-if="error.hasError" :message="error.message" />
+    <AppError v-if="error.hasError" :data="error" />
     <template v-if="entry_mode">
       <NewsEntry @get-news="getNews" />
     </template>

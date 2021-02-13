@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-pill" title="健康情報一覧" />
-    <AppError v-if="error.hasError" :message="error.message" />
+    <AppError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col>
         <v-text-field

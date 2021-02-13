@@ -1,12 +1,6 @@
 <template>
   <div>
-    <v-row v-if="error.hasError">
-      <v-col class="text-left">
-        <v-alert border="left" color="red" type="error">{{
-          error.message
-        }}</v-alert>
-      </v-col>
-    </v-row>
+    <AppError v-if="error.hasError" :data="error" />
     <v-row justify="center" align-content="center">
       <v-col class="text-center">
         <br />
@@ -52,12 +46,17 @@
 </template>
 
 <script>
+import AppError from "~/components/AppError.vue";
+
 const axios = require("axios");
 let retriveUrl = process.env.api_base_url + "user/";
 
 export default {
   // ログイン前のレイアウトを適用
   layout: "nonAuthLayout",
+  components: {
+    AppError,
+  },
   data: function () {
     return {
       title: "ログイン",

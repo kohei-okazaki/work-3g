@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-account" title="アカウント情報一覧" />
-    <AppError v-if="error.hasError" :message="error.message" />
+    <AppError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col>
         <v-text-field

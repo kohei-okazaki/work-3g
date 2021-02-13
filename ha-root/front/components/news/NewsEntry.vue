@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppError v-if="error.hasError" :message="error.message" />
+    <AppError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col class="text-center">
         <v-card>
