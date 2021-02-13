@@ -26,6 +26,10 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
     @Ignore
     private static final long serialVersionUID = 1L;
 
+    /** 管理者サイトユーザ権限管理マスタID */
+    private Integer seqRootUserRoleMngMtId;
+    /** 管理者サイトユーザ権限詳細マスタID */
+    private Integer seqRootUserRoleDetailMtId;
     /** パスワード */
     @Mask
     private String password;
@@ -37,6 +41,44 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
     private LocalDateTime regDate;
     /** 更新日時 */
     private LocalDateTime updateDate;
+
+    /**
+     * seqRootUserRoleMngMtIdを返す
+     *
+     * @return seqRootUserRoleMngMtId
+     */
+    public Integer getSeqRootUserRoleMngMtId() {
+        return seqRootUserRoleMngMtId;
+    }
+
+    /**
+     * seqRootUserRoleMngMtIdを設定する
+     *
+     * @param seqRootUserRoleMngMtId
+     *     管理者サイトユーザ権限管理マスタID
+     */
+    public void setSeqRootUserRoleMngMtId(Integer seqRootUserRoleMngMtId) {
+        this.seqRootUserRoleMngMtId = seqRootUserRoleMngMtId;
+    }
+
+    /**
+     * seqRootUserRoleDetailMtIdを返す
+     *
+     * @return seqRootUserRoleDetailMtId
+     */
+    public Integer getSeqRootUserRoleDetailMtId() {
+        return seqRootUserRoleDetailMtId;
+    }
+
+    /**
+     * seqRootUserRoleDetailMtIdを設定する
+     *
+     * @param seqRootUserRoleDetailMtId
+     *     管理者サイトユーザ権限詳細マスタID
+     */
+    public void setSeqRootUserRoleDetailMtId(Integer seqRootUserRoleDetailMtId) {
+        this.seqRootUserRoleDetailMtId = seqRootUserRoleDetailMtId;
+    }
 
     /**
      * passwordを返す

@@ -3,6 +3,8 @@
 <mapper namespace="jp.co.ha.db.mapper.composite.CompositeRootUserInfoMapper">
   <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.composite.CompositeRootUserInfo">
     <id column="SEQ_ROOT_LOGIN_INFO_ID" jdbcType="INTEGER" property="seqRootLoginInfoId" />
+    <result column="SEQ_ROOT_USER_ROLE_MNG_MT_ID" jdbcType="INTEGER" property="seqRootUserRoleMngMtId" />
+    <result column="SEQ_ROOT_USER_ROLE_DETAIL_MT_ID" jdbcType="INTEGER" property="seqRootUserRoleDetailMtId" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="ROLE" jdbcType="VARCHAR" property="role" />
     <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
@@ -13,6 +15,8 @@
   <select id="selectBySeqRootLoginInfoId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT
       LI.SEQ_ROOT_LOGIN_INFO_ID
+      , URM.SEQ_ROOT_USER_ROLE_MNG_MT_ID
+      , URD.SEQ_ROOT_USER_ROLE_DETAIL_MT_ID
       , LI.PASSWORD
       , LI.REG_DATE
       , LI.UPDATE_DATE
