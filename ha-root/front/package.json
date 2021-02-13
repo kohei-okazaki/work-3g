@@ -6,10 +6,10 @@
     "dev": "nuxt --port 8083",
     "build": "nuxt build",
     "build:stg": "cross-env NODE_ENV=\"stg\" nuxt build",
-    "build:prod": "cross-env NODE_ENV=\"prod\" nuxt build",
+    "build:production": "cross-env NODE_ENV=\"production\" nuxt build",
     "start": "nuxt start",
     "start:stg": "cross-env NODE_ENV=\"stg\" nuxt start",
-    "start:prod": "cross-env NODE_ENV=\"prod\" nuxt start",
+    "start:production": "cross-env NODE_ENV=\"production\" nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
