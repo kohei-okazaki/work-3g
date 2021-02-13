@@ -164,9 +164,6 @@ public class DataBaseCommonAspect {
      */
     @Before("@annotation(jp.co.ha.common.db.annotation.Delete)")
     public void delete(JoinPoint jp) {
-        if (jp.getArgs() == null) {
-            return;
-        }
         Stream.of(jp.getArgs()).filter(e -> isEntity(e)).forEach(e -> LOG.infoBean(e));
     }
 
