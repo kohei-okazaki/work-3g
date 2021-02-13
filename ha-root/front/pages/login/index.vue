@@ -1,48 +1,54 @@
 <template>
-  <v-row justify="center" align-content="center">
-    <v-col class="text-center">
-      <br /><br />
-      <template v-if="api_error_data.hasError">
-        <v-alert border="left" color="red" type="error">{{ api_error_data.message }}</v-alert>
-      </template>
-      <v-card>
-        <v-card-title>{{ title }}</v-card-title>
-        <v-card-text>
-          <v-form ref="login_form">
-            <v-text-field
-              v-model="seq_login_id"
-              label="ログインID"
-              prepend-icon="mdi-account-circle"
-              :rules="[required]"
-            ></v-text-field>
-            <v-text-field
-              v-model="password"
-              label="パスワード"
-              prepend-icon="mdi-lock"
-              :append-icon="toggle.icon"
-              :type="toggle.type"
-              @click:append="show = !show"
-              :rules="[required]"
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            @click="submit"
-            :loading="loading"
-            :disabled="loading"
-          >
-            <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
-          </v-btn>
-          <v-spacer />
-          <v-btn color="primary" :to="`user/entry`">
-            <v-icon>mdi-account-multiple-plus</v-icon>&ensp;管理ユーザ作成
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div>
+    <v-row v-if="error.hasError">
+      <v-col class="text-left">
+        <v-alert border="left" color="red" type="error">{{
+          error.message
+        }}</v-alert>
+      </v-col>
+    </v-row>
+    <v-row justify="center" align-content="center">
+      <v-col class="text-center">
+        <br />
+        <v-card>
+          <v-card-title>{{ title }}</v-card-title>
+          <v-card-text>
+            <v-form ref="login_form">
+              <v-text-field
+                v-model="seq_login_id"
+                label="ログインID"
+                prepend-icon="mdi-account-circle"
+                :rules="[required]"
+              ></v-text-field>
+              <v-text-field
+                v-model="password"
+                label="パスワード"
+                prepend-icon="mdi-lock"
+                :append-icon="toggle.icon"
+                :type="toggle.type"
+                @click:append="show = !show"
+                :rules="[required]"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              @click="submit"
+              :loading="loading"
+              :disabled="loading"
+            >
+              <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
+            </v-btn>
+            <v-spacer />
+            <v-btn color="primary" :to="`user/entry`">
+              <v-icon>mdi-account-multiple-plus</v-icon>&ensp;管理ユーザ作成
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
@@ -60,7 +66,7 @@ export default {
       show: false,
       loading: false,
       required: (value) => !!value || "必ず入力してください",
-      api_error_data: {
+      error: {
         hasError: false,
         message: null,
       },
@@ -115,7 +121,10 @@ export default {
             return response;
           },
           (error) => {
-            console.log("[error]=" + error);
+            this.loading = false;
+            this.error.hasError = true;
+            this.error.message = error;
+            console.log("login [error]=" + error);
             return error;
           }
         );
@@ -132,13 +141,15 @@ export default {
             };
             this.$store.commit("auth/setUserData", userData);
           } else {
-            this.api_error_data.hasError = true;
-            this.api_error_data.message = response.data.error.message;
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
             this.$auth.logout();
           }
         },
         (error) => {
-          console.log("[error]=" + error);
+          this.error.hasError = true;
+          this.error.message = response.data.error.message;
+          console.log("retrieve [error]=" + error);
           return error;
         }
       );

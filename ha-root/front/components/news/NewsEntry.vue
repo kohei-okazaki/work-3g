@@ -1,65 +1,69 @@
 <template>
-  <v-row>
-    <v-col class="text-center">
-      <v-card>
-        <v-card-text>
-          <v-form ref="entry_form">
-            <v-text-field
-              v-model="entry_info.title"
-              label="タイトル"
-              clearable
-              :rules="[required]"
-            ></v-text-field>
-            <v-text-field
-              v-model="entry_info.date"
-              label="日付"
-              hint="年/月/日"
-              persistent-hint
-              @click="controllCalendar"
-              clearable
-              :rules="[required]"
-            ></v-text-field>
-            <template v-if="isDispCalendar">
-              <v-date-picker
+  <div>
+    <AppError v-if="error.hasError" :message="error.message" />
+    <v-row>
+      <v-col class="text-center">
+        <v-card>
+          <v-card-text>
+            <v-form ref="entry_form">
+              <v-text-field
+                v-model="entry_info.title"
+                label="タイトル"
+                clearable
+                :rules="[required]"
+              ></v-text-field>
+              <v-text-field
                 v-model="entry_info.date"
-                no-title
-                @input="controllCalendar"
-              ></v-date-picker>
-            </template>
-            <v-textarea
-              v-model="entry_info.detail"
-              label="詳細(htmlタグの入力も可能です)"
-              clearable
-              :rules="[required]"
-            ></v-textarea>
-            <NewsTagPullDown v-model="entry_info.tag.color" color="blue" />
-            <v-text-field
-              v-model="entry_info.tag.name"
-              label="タグ名"
-              clearable
-              :rules="[required]"
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            @click="submit"
-            :loading="loading"
-            :disabled="loading"
-          >
-            <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
-          </v-btn>
-        </v-card-actions>
-        <ProcessFinishModal ref="finish" />
-      </v-card>
-    </v-col>
-  </v-row>
+                label="日付"
+                hint="年/月/日"
+                persistent-hint
+                @click="controllCalendar"
+                clearable
+                :rules="[required]"
+              ></v-text-field>
+              <template v-if="isDispCalendar">
+                <v-date-picker
+                  v-model="entry_info.date"
+                  no-title
+                  @input="controllCalendar"
+                ></v-date-picker>
+              </template>
+              <v-textarea
+                v-model="entry_info.detail"
+                label="詳細(htmlタグの入力も可能です)"
+                clearable
+                :rules="[required]"
+              ></v-textarea>
+              <NewsTagPullDown v-model="entry_info.tag.color" color="blue" />
+              <v-text-field
+                v-model="entry_info.tag.name"
+                label="タグ名"
+                clearable
+                :rules="[required]"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              @click="submit"
+              :loading="loading"
+              :disabled="loading"
+            >
+              <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
+            </v-btn>
+          </v-card-actions>
+          <ProcessFinishModal ref="finish" />
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
+import AppError from "~/components/AppError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
@@ -68,9 +72,14 @@ export default {
   components: {
     ProcessFinishModal,
     NewsTagPullDown,
+    AppError,
   },
   data: function () {
     return {
+      error: {
+        hasError: false,
+        message: null,
+      },
       isDispCalendar: false,
       loading: false,
       entry_info: {
@@ -145,6 +154,8 @@ export default {
           }
         },
         (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
           console.log("[error]=" + error);
           this.loading = false;
           return error;

@@ -1,6 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-pill" title="健康情報一覧" />
+    <AppError v-if="error.hasError" :message="error.message" />
     <v-row>
       <v-col>
         <v-text-field
@@ -22,6 +23,7 @@
 
 <script>
 import AppTitle from "~/components/AppTitle.vue";
+import AppError from "~/components/AppError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "healthinfo";
@@ -29,9 +31,14 @@ let url = process.env.api_base_url + "healthinfo";
 export default {
   components: {
     AppTitle,
+    AppError,
   },
   data: function () {
     return {
+      error: {
+        hasError: false,
+        message: null,
+      },
       search: "",
       health_info_list: [],
       headers: [
@@ -87,7 +94,9 @@ export default {
           this.health_info_list = response.data.health_info_list;
         },
         (error) => {
-          console.log("[error]=" + error);
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("healthinfo [error]=" + error);
           return error;
         }
       );

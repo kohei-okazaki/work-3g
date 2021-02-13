@@ -1,6 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-account" title="アカウント情報一覧" />
+    <AppError v-if="error.hasError" :message="error.message" />
     <v-row>
       <v-col>
         <v-text-field
@@ -48,6 +49,7 @@
 
 <script>
 import AppTitle from "~/components/AppTitle.vue";
+import AppError from "~/components/AppError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "account";
@@ -55,9 +57,14 @@ let url = process.env.api_base_url + "account";
 export default {
   components: {
     AppTitle,
+    AppError,
   },
   data: function () {
     return {
+      error: {
+        hasError: false,
+        message: null,
+      },
       search: "",
       account_list: [],
       headers: [
@@ -123,6 +130,8 @@ export default {
           this.account_list = response.data.account_list;
         },
         (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
           console.log("[error]=" + error);
           return error;
         }

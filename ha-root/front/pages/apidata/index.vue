@@ -1,6 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-api" title="API通信情報一覧" />
+    <AppError v-if="error.hasError" :message="error.message" />
     <v-row>
       <v-col>
         <transition name="fade">
@@ -67,6 +68,7 @@
 
 <script>
 import AppTitle from "~/components/AppTitle.vue";
+import AppError from "~/components/AppError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "apidata";
@@ -74,9 +76,14 @@ let url = process.env.api_base_url + "apidata";
 export default {
   components: {
     AppTitle,
+    AppError,
   },
   data: function () {
     return {
+      error: {
+        hasError: false,
+        message: null,
+      },
       timelines: [],
       search: "",
       api_data_list: [],
@@ -130,6 +137,8 @@ export default {
           this.api_data_list = response.data.api_data_list;
         },
         (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
           console.log("[error]=" + error);
           return error;
         }
@@ -193,5 +202,4 @@ export default {
   opacity: 0;
   transform: scale(0);
 }
-
 </style>
