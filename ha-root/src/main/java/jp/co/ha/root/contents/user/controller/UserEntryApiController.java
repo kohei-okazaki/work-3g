@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.user.controller;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -17,6 +19,8 @@ import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
@@ -40,6 +44,10 @@ import jp.co.ha.root.type.RootRoleType;
 @RestController
 public class UserEntryApiController
         extends BaseRootApiController<UserEntryApiRequest, UserEntryApiResponse> {
+
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(UserEntryApiController.class);
 
     /** 管理者サイト権限マスタ検索サービス */
     @Autowired
@@ -89,7 +97,7 @@ public class UserEntryApiController
 
             // 照会権限のマスタを取得
             RootRoleMt RefRoleMt = rootRoleMtSearchService
-                    .findByRole(RootRoleType.REF.getValue());
+                    .findByRoles(Arrays.asList(RootRoleType.REF.getValue())).get(0);
 
             // 管理者サイトユーザ権限管理マスタを登録
             RootUserRoleMngMt mngMt = new RootUserRoleMngMt();
@@ -118,6 +126,8 @@ public class UserEntryApiController
             seqLoginId = entity.getSeqRootLoginInfoId();
 
         } catch (Exception e) {
+
+            LOG.error("データの登録に失敗しました", e);
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
             throw e;
