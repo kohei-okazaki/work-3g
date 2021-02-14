@@ -1,6 +1,6 @@
 <template>
   <v-select
-    :items="tag_color_select_list"
+    :items="tagColorSelectList"
     label="タグ色"
     item-text="label"
     item-value="color"
@@ -15,7 +15,7 @@
 export default {
   data: function () {
     return {
-      tag_color_select_list: [
+      tagColorSelectList: [
         {
           color: "blue",
           label: "青色",
@@ -41,21 +41,20 @@ export default {
   },
   methods: {
     updateValue: function (e) {
-      console.log("変更後色=" + e.color);
       this.$emit("input", e.color);
     },
     getTag: function (color) {
-      for (var i = 0; i < this.tag_color_select_list.length; i++) {
-        let tag = this.tag_color_select_list[i];
+      for (var i = 0; i < this.tagColorSelectList.length; i++) {
+        let tag = this.tagColorSelectList[i];
         if (tag.color == color) {
           return tag;
         }
       }
-      return this.tag_color_select_list[0];
+      return this.tagColorSelectList[0];
     },
   },
   mounted: function () {
-    this.$emit("input", this.tag_color_select_list[0].color);
+    this.$emit("input", this.tagColorSelectList[0].color);
   },
 };
 </script>

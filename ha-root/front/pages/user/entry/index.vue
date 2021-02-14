@@ -1,11 +1,11 @@
 <template>
-  <v-row justify="center" align-content="center">
-    <v-col class="text-center">
+  <v-row justify="center" align="center">
+    <v-col class="text-center" cols="12" sm="8" md="6">
       <br /><br />
       <v-card>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text>
-          <v-form ref="entry_form">
+          <v-form ref="entryForm">
             <v-text-field
               v-model="password"
               label="パスワード"
@@ -124,6 +124,10 @@ export default {
           width: 400,
         })
       ) {
+        if (!this.$refs.entryForm.validate()) {
+          // 入力値エラーの場合
+          return;
+        }
         this.entryUser();
       }
     },

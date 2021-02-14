@@ -15,9 +15,9 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
+import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse.Role;
 import jp.co.ha.root.contents.user.request.UserRetrieveApiRequest;
 import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse;
-import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse.Role;
 import jp.co.ha.root.type.RootApiResult;
 
 /**
