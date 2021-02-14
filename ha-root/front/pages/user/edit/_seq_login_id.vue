@@ -3,8 +3,8 @@
     <AppTitle icon="mdi-account-edit" title="ユーザ編集" />
     <AppMessageError v-if="error.hasError" :data="error" />
     <AppMessageSuccess v-if="apiResult.isSuccess" :data="apiResult" />
-    <v-row>
-      <v-col class="text-center">
+    <v-row justify="center" align="center">
+      <v-col class="text-center" cols="12" sm="8" md="6">
         <v-card>
           <v-card-text>
             <v-form ref="editForm">

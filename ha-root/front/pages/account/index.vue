@@ -127,7 +127,7 @@ export default {
       })
       .then(
         (response) => {
-          this.accountList = response.data.accountList;
+          this.accountList = response.data.account_list;
         },
         (error) => {
           this.error.hasError = true;

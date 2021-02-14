@@ -89,7 +89,7 @@ export default {
     axios.get(url, { headers }).then(
       (response) => {
         if (response.data.result == 0) {
-          this.healthInfoList = response.data.healthInfoList;
+          this.healthInfoList = response.data.health_info_list;
         } else {
           this.error.hasError = true;
           this.error.message = response.data.error.message;

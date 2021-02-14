@@ -1,8 +1,8 @@
 <template>
   <div>
     <AppMessageError v-if="error.hasError" :data="error" />
-    <v-row justify="center" align-content="center">
-      <v-col class="text-center">
+    <v-row justify="center" align="center">
+      <v-col class="text-center" cols="12" sm="8" md="6">
         <br />
         <v-card>
           <v-card-title>{{ title }}</v-card-title>

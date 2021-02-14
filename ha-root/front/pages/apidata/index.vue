@@ -52,12 +52,12 @@
           @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
-          <template v-slot:[`item.httpStatus`]="{ item }">
+          <template v-slot:[`item.http_status`]="{ item }">
             <v-chip
-              :color="getHttpStatusColor(item.httpStatus)"
-              v-if="item.httpStatus != null"
+              :color="getHttpStatusColor(item.http_status)"
+              v-if="item.http_status != null"
             >
-              {{ item.httpStatus }}
+              {{ item.http_status }}
             </v-chip>
           </template>
         </v-data-table>
@@ -106,7 +106,7 @@ export default {
         },
         {
           text: "HTTPステータス",
-          value: "httpStatus",
+          value: "http_status",
         },
         {
           text: "処理結果",
@@ -135,7 +135,7 @@ export default {
     axios.get(url, { headers }).then(
       (response) => {
         if (response.data.result == 0) {
-          this.apiDataList = response.data.apiDataList;
+          this.apiDataList = response.data.api_data_list;
         } else {
           this.error.hasError = true;
           this.error.message = response.data.error.message;
@@ -173,10 +173,10 @@ export default {
             seq_api_communication_data_id:
               apiData.seq_api_communication_data_id,
             api_name: apiData.api_name,
-            httpStatus: apiData.httpStatus,
+            http_status: apiData.http_status,
             request_date: apiData.request_date,
             response_date: apiData.response_date,
-            color: this.getHttpStatusColor(apiData.httpStatus),
+            color: this.getHttpStatusColor(apiData.http_status),
           };
           this.timelines.push(timeline);
         }
