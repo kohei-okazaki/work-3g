@@ -19,4 +19,11 @@ public interface RootRoleMtSearchService {
      * @return 管理者サイト権限マスタリスト
      */
     List<RootRoleMt> findByRoles(List<String> roles);
+
+    /**
+     * 管理者サイト権限マスタを全件返す
+     *
+     * @return 管理者サイト権限マスタリスト
+     */
+    List<RootRoleMt> findAll();
 }

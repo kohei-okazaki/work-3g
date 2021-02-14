@@ -1,8 +1,8 @@
 <template>
   <div>
     <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
-    <AppError v-if="error.hasError" :data="error" />
-    <template v-if="entry_mode">
+    <AppMessageError v-if="error.hasError" :data="error" />
+    <template v-if="entryMode">
       <NewsEntry @get-news="getNews" />
     </template>
     <template v-else>
@@ -60,7 +60,7 @@ import NewsEdit from "~/components/news/NewsEdit.vue";
 import ConfirmModal from "~/components/modal/ConfirmModal.vue";
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
-import AppError from "~/components/AppError.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
@@ -72,7 +72,7 @@ export default {
     ConfirmModal,
     ProcessFinishModal,
     AppTitle,
-    AppError,
+    AppMessageError,
   },
   data: function () {
     return {
@@ -80,11 +80,10 @@ export default {
         hasError: false,
         message: null,
       },
-      entry_mode: true,
+      entryMode: true,
       loading: false,
       search: "",
       news_list: [],
-      api_loading: false,
       headers: [
         {
           text: "",
@@ -157,7 +156,7 @@ export default {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
           targetNews.date = targetNews.date.replaceAll("/", "-");
           this.edit_news_form = targetNews;
-          this.entry_mode = false;
+          this.entryMode = false;
           break;
         }
       }

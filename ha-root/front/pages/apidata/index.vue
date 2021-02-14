@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-api" title="API通信情報一覧" />
-    <AppError v-if="error.hasError" :data="error" />
+    <AppMessageError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col>
         <transition name="fade">
@@ -25,7 +25,7 @@
                     }}
                   </div>
                   <div><b>API名</b>={{ timeline.api_name }}</div>
-                  <div><b>HTTPステータス</b>={{ timeline.http_status }}</div>
+                  <div><b>HTTPステータス</b>={{ timeline.httpStatus }}</div>
                   <div><b>送信日時</b>={{ timeline.request_date }}</div>
                   <div><b>受信日時</b>={{ timeline.response_date }}</div>
                 </v-card-text>
@@ -46,7 +46,7 @@
         ></v-text-field>
         <v-data-table
           :headers="headers"
-          :items="api_data_list"
+          :items="apiDataList"
           :search="search"
           class="pushable"
           @click:row="openTimelineModal"
@@ -68,7 +68,7 @@
 
 <script>
 import AppTitle from "~/components/AppTitle.vue";
-import AppError from "~/components/AppError.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "apidata";
@@ -76,7 +76,7 @@ let url = process.env.api_base_url + "apidata";
 export default {
   components: {
     AppTitle,
-    AppError,
+    AppMessageError,
   },
   data: function () {
     return {
@@ -86,7 +86,7 @@ export default {
       },
       timelines: [],
       search: "",
-      api_data_list: [],
+      apiDataList: [],
       headers: [
         {
           text: "API通信情報ID",
@@ -128,31 +128,36 @@ export default {
     };
   },
   created: function () {
-    axios
-      .get(url, {
-        headers: { Authorization: this.$store.state.auth.token },
-      })
-      .then(
-        (response) => {
-          this.api_data_list = response.data.api_data_list;
-        },
-        (error) => {
+    // 保存済のAPIトークンを取得
+    let headers = {
+      Authorization: this.$store.state.auth.token,
+    };
+    axios.get(url, { headers }).then(
+      (response) => {
+        if (response.data.result == 0) {
+          this.apiDataList = response.data.api_data_list;
+        } else {
           this.error.hasError = true;
-          this.error.message = error;
-          console.log("[error]=" + error);
-          return error;
+          this.error.message = response.data.error.message;
         }
-      );
+      },
+      (error) => {
+        this.error.hasError = true;
+        this.error.message = error;
+        console.log("apidata [error]=" + error);
+        return error;
+      }
+    );
   },
   methods: {
-    getHttpStatusColor: function (http_status) {
-      if (http_status == 200) {
+    getHttpStatusColor: function (httpStatus) {
+      if (httpStatus == 200) {
         return "green";
-      } else if (400 <= http_status && http_status < 500) {
+      } else if (400 <= httpStatus && httpStatus < 500) {
         return "yellow";
       } else if (
-        (500 <= http_status && http_status < 600) ||
-        http_status == null
+        (500 <= httpStatus && httpStatus < 600) ||
+        httpStatus == null
       ) {
         return "red";
       }
@@ -161,17 +166,17 @@ export default {
       console.log(JSON.stringify(item, null, "\t"));
       // タイムラインデータをクリア
       this.timelines = [];
-      for (var i = 0; i < this.api_data_list.length; i++) {
-        let api_data = this.api_data_list[i];
-        if (item.transaction_id == api_data.transaction_id) {
+      for (var i = 0; i < this.apiDataList.length; i++) {
+        let apiData = this.apiDataList[i];
+        if (item.transaction_id == apiData.transaction_id) {
           let timeline = {
             seq_api_communication_data_id:
-              api_data.seq_api_communication_data_id,
-            api_name: api_data.api_name,
-            http_status: api_data.http_status,
-            request_date: api_data.request_date,
-            response_date: api_data.response_date,
-            color: this.getHttpStatusColor(api_data.http_status),
+              apiData.seq_api_communication_data_id,
+            api_name: apiData.api_name,
+            http_status: apiData.http_status,
+            request_date: apiData.request_date,
+            response_date: apiData.response_date,
+            color: this.getHttpStatusColor(apiData.http_status),
           };
           this.timelines.push(timeline);
         }
