@@ -11,7 +11,7 @@
           single-line
           hide-details
         ></v-text-field>
-        <v-data-table :headers="headers" :items="account_list" :search="search">
+        <v-data-table :headers="headers" :items="accountList" :search="search">
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.delete_flag`]="{ item }">
             <v-icon v-if="item.delete_flag == 1" color="green"
@@ -66,7 +66,7 @@ export default {
         message: null,
       },
       search: "",
-      account_list: [],
+      accountList: [],
       headers: [
         {
           text: "ユーザID",
@@ -127,7 +127,7 @@ export default {
       })
       .then(
         (response) => {
-          this.account_list = response.data.account_list;
+          this.accountList = response.data.accountList;
         },
         (error) => {
           this.error.hasError = true;

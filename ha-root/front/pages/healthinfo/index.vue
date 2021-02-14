@@ -13,7 +13,7 @@
         ></v-text-field>
         <v-data-table
           :headers="headers"
-          :items="health_info_list"
+          :items="healthInfoList"
           :search="search"
         ></v-data-table>
       </v-col>
@@ -40,7 +40,7 @@ export default {
         message: null,
       },
       search: "",
-      health_info_list: [],
+      healthInfoList: [],
       headers: [
         {
           text: "健康情報ID",
@@ -83,23 +83,25 @@ export default {
   },
   created: function () {
     // 保存済のAPIトークンを取得
-    let token = this.$store.state.auth.token;
-
-    axios
-      .get(url, {
-        headers: { Authorization: token },
-      })
-      .then(
-        (response) => {
-          this.health_info_list = response.data.health_info_list;
-        },
-        (error) => {
+    let headers = {
+      Authorization: this.$store.state.auth.token,
+    };
+    axios.get(url, { headers }).then(
+      (response) => {
+        if (response.data.result == 0) {
+          this.healthInfoList = response.data.healthInfoList;
+        } else {
           this.error.hasError = true;
-          this.error.message = error;
-          console.log("healthinfo [error]=" + error);
-          return error;
+          this.error.message = response.data.error.message;
         }
-      );
+      },
+      (error) => {
+        this.error.hasError = true;
+        this.error.message = error;
+        console.log("healthinfo [error]=" + error);
+        return error;
+      }
+    );
   },
 };
 </script>

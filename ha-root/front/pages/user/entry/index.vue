@@ -5,7 +5,7 @@
       <v-card>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text>
-          <v-form ref="entry_form">
+          <v-form ref="entryForm">
             <v-text-field
               v-model="password"
               label="パスワード"
@@ -124,6 +124,10 @@ export default {
           width: 400,
         })
       ) {
+        if (!this.$refs.entryForm.validate()) {
+          // 入力値エラーの場合
+          return;
+        }
         this.entryUser();
       }
     },

@@ -5,15 +5,15 @@
       <v-col class="text-center">
         <v-card>
           <v-card-text>
-            <v-form ref="entry_form">
+            <v-form ref="entryForm">
               <v-text-field
-                v-model="entry_info.title"
+                v-model="entryInfo.title"
                 label="タイトル"
                 clearable
                 :rules="[required]"
               ></v-text-field>
               <v-text-field
-                v-model="entry_info.date"
+                v-model="entryInfo.date"
                 label="日付"
                 hint="年/月/日"
                 persistent-hint
@@ -23,20 +23,20 @@
               ></v-text-field>
               <template v-if="isDispCalendar">
                 <v-date-picker
-                  v-model="entry_info.date"
+                  v-model="entryInfo.date"
                   no-title
                   @input="controllCalendar"
                 ></v-date-picker>
               </template>
               <v-textarea
-                v-model="entry_info.detail"
+                v-model="entryInfo.detail"
                 label="詳細(htmlタグの入力も可能です)"
                 clearable
                 :rules="[required]"
               ></v-textarea>
-              <NewsTagPullDown v-model="entry_info.tag.color" color="blue" />
+              <NewsTagPullDown v-model="entryInfo.tag.color" color="blue" />
               <v-text-field
-                v-model="entry_info.tag.name"
+                v-model="entryInfo.tag.name"
                 label="タグ名"
                 clearable
                 :rules="[required]"
@@ -82,7 +82,7 @@ export default {
       },
       isDispCalendar: false,
       loading: false,
-      entry_info: {
+      entryInfo: {
         title: "",
         date: new Date().toISOString().substr(0, 10),
         detail: "",
@@ -92,19 +92,6 @@ export default {
         },
       },
       required: (value) => !!value || "必ず入力してください",
-      api_data: {
-        api_result: "",
-        api_entry_info: {
-          index: "",
-          title: "",
-          date: "",
-          detail: "",
-          tag: {
-            color: "",
-            name: "",
-          },
-        },
-      },
     };
   },
   methods: {
@@ -113,19 +100,19 @@ export default {
     },
     submit: function () {
       this.loading = true;
-      if (!this.$refs.entry_form.validate()) {
+      if (!this.$refs.entryForm.validate()) {
         // 入力値エラーの場合
         this.loading = false;
         return;
       }
       let reqBody = {
-        index: this.entry_info.index,
-        title: this.entry_info.title,
-        date: this.entry_info.date.replaceAll("-", "/"),
-        detail: this.entry_info.detail,
+        index: this.entryInfo.index,
+        title: this.entryInfo.title,
+        date: this.entryInfo.date.replaceAll("-", "/"),
+        detail: this.entryInfo.detail,
         tag: {
-          color: this.entry_info.tag.color,
-          name: this.entry_info.tag.name,
+          color: this.entryInfo.tag.color,
+          name: this.entryInfo.tag.name,
         },
       };
 
@@ -136,12 +123,9 @@ export default {
       axios.post(url, reqBody, { headers }).then(
         (result) => {
           if (result.data.result == 0) {
-            // お知らせ情報登録APIが正常終了した場合
-            this.api_data.api_result = result.data.result;
-            this.api_data.api_entry_info = result.data.entry_data;
 
             // 処理完了モーダルを表示
-            let json = JSON.stringify(this.entry_info, null, "\t");
+            let json = JSON.stringify(this.entryInfo, null, "\t");
             this.$refs.finish.open("お知らせ情報登録処理", json, {
               color: "blue",
               width: 400,

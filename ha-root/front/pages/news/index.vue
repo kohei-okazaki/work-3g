@@ -2,7 +2,7 @@
   <div>
     <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <template v-if="entry_mode">
+    <template v-if="entryMode">
       <NewsEntry @get-news="getNews" />
     </template>
     <template v-else>
@@ -80,11 +80,10 @@ export default {
         hasError: false,
         message: null,
       },
-      entry_mode: true,
+      entryMode: true,
       loading: false,
       search: "",
       news_list: [],
-      api_loading: false,
       headers: [
         {
           text: "",
@@ -157,7 +156,7 @@ export default {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
           targetNews.date = targetNews.date.replaceAll("/", "-");
           this.edit_news_form = targetNews;
-          this.entry_mode = false;
+          this.entryMode = false;
           break;
         }
       }
