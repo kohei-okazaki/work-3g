@@ -5,14 +5,6 @@ const axios = require("axios");
 let retriveUrl = process.env.api_base_url + "user/";
 
 export default {
-  data: function () {
-    return {
-      error: {
-        hasError: false,
-        message: null,
-      },
-    };
-  },
   methods: {
     retrieve: function (seqLoginId) {
       console.log("★★★retrieve★★★");
@@ -33,7 +25,7 @@ export default {
             apiResult.result = true;
           } else {
             apiResult.result = false;
-            this.error.message = response.data.error.message;
+            apiResult.message = response.data.error.message;
           }
         },
         (error) => {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-account" title="アカウント情報一覧" />
-    <AppError v-if="error.hasError" :data="error" />
+    <AppMessageError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col>
         <v-text-field
@@ -49,7 +49,7 @@
 
 <script>
 import AppTitle from "~/components/AppTitle.vue";
-import AppError from "~/components/AppError.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "account";
@@ -57,7 +57,7 @@ let url = process.env.api_base_url + "account";
 export default {
   components: {
     AppTitle,
-    AppError,
+    AppMessageError,
   },
   data: function () {
     return {

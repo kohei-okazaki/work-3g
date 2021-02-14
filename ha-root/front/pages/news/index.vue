@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
-    <AppError v-if="error.hasError" :data="error" />
+    <AppMessageError v-if="error.hasError" :data="error" />
     <template v-if="entry_mode">
       <NewsEntry @get-news="getNews" />
     </template>
@@ -60,7 +60,7 @@ import NewsEdit from "~/components/news/NewsEdit.vue";
 import ConfirmModal from "~/components/modal/ConfirmModal.vue";
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
-import AppError from "~/components/AppError.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
@@ -72,7 +72,7 @@ export default {
     ConfirmModal,
     ProcessFinishModal,
     AppTitle,
-    AppError,
+    AppMessageError,
   },
   data: function () {
     return {

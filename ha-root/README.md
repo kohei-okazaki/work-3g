@@ -53,3 +53,8 @@
     - 概要：健康管理アプリのお知らせを変更するAPI
     - URL：${domain}/api/root/news/{id}
     - Method：Delete
+
+- 権限マスタリスト取得API：
+    - 概要：権限マスタの一覧を取得するAPI
+    - URL：${domain}/api/root/roles
+    - Method：Get

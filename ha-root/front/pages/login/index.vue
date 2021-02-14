@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppError v-if="error.hasError" :data="error" />
+    <AppMessageError v-if="error.hasError" :data="error" />
     <v-row justify="center" align-content="center">
       <v-col class="text-center">
         <br />
@@ -9,7 +9,7 @@
           <v-card-text>
             <v-form ref="loginForm">
               <v-text-field
-                v-model="seq_login_id"
+                v-model="seqLoginId"
                 label="ログインID"
                 prepend-icon="mdi-account-circle"
                 :rules="[required]"
@@ -47,14 +47,14 @@
 </template>
 
 <script>
-import AppError from "~/components/AppError.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
 import UserRetrieve from "~/components/user/UserRetrieve.vue";
 
 export default {
   // ログイン前のレイアウトを適用
   layout: "nonAuthLayout",
   components: {
-    AppError,
+    AppMessageError,
     UserRetrieve,
   },
   data: function () {

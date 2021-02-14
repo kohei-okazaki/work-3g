@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppError v-if="error.hasError" :data="error" />
+    <AppMessageError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col class="text-center">
         <v-card>
@@ -73,7 +73,7 @@
 <script>
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
-import AppError from "~/components/AppError.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news/";
@@ -82,7 +82,7 @@ export default {
   components: {
     ProcessFinishModal,
     NewsTagPullDown,
-    AppError,
+    AppMessageError,
   },
   props: {
     edit_news_form: Object,

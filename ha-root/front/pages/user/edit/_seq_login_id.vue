@@ -1,8 +1,8 @@
 <template>
   <div>
     <AppTitle icon="mdi-account-edit" title="ユーザ編集" />
-    <AppError v-if="error.hasError" :data="error" />
-    <AppSuccess v-if="apiResult.isSuccess" :data="apiResult" />
+    <AppMessageError v-if="error.hasError" :data="error" />
+    <AppMessageSuccess v-if="apiResult.isSuccess" :data="apiResult" />
     <v-row>
       <v-col class="text-center">
         <v-card>
@@ -46,19 +46,20 @@
 <script>
 import AppConfirm from "~/components/modal/ConfirmModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
-import AppError from "~/components/AppError.vue";
-import AppSuccess from "~/components/AppSuccess.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
+import AppMessageSuccess from "~/components/AppMessageSuccess.vue";
 import UserRetrieve from "~/components/user/UserRetrieve.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "user/";
+let rolesUrl = process.env.api_base_url + "roles";
 
 export default {
   components: {
     AppConfirm,
     AppTitle,
-    AppError,
-    AppSuccess,
+    AppMessageError,
+    AppMessageSuccess,
     UserRetrieve,
   },
   data: function () {
@@ -77,20 +78,7 @@ export default {
         seqLoginId: null,
         roles: [],
       },
-      roles: [
-        {
-          label: "管理者権限",
-          value: "00",
-        },
-        {
-          label: "照会権限",
-          value: "01",
-        },
-        {
-          label: "作成権限",
-          value: "02",
-        },
-      ],
+      roles: [],
     };
   },
   methods: {
@@ -161,8 +149,31 @@ export default {
         }
       );
     },
+    getRoles: function () {
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(rolesUrl, { headers }).then(
+        (result) => {
+          if (result.data.result === "0") {
+            this.roles = result.data.roles;
+          } else {
+            this.error.hasError = true;
+            this.error.message = result.data.error.message;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("roles [error]=" + error);
+          return error;
+        }
+      );
+    },
   },
   mounted: function () {
+    // 権限リスト
+    this.getRoles();
     // ログインID
     this.editUserForm.seqLoginId = this.$store.state.auth.seq_login_id;
     // ユーザ権限
