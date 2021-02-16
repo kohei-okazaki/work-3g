@@ -7,6 +7,7 @@
     return-object
     single-line
     :value="init"
+    :rules="[required]"
     @change="updateValue"
   ></v-select>
 </template>
@@ -29,6 +30,7 @@ export default {
           label: "赤色",
         },
       ],
+      required: (value) => !!value || "必ず入力してください",
     };
   },
   props: {

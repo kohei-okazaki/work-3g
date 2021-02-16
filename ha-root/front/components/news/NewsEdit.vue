@@ -5,7 +5,7 @@
       <v-col class="text-center" cols="12" sm="8" md="6">
         <v-card>
           <v-card-text>
-            <v-form ref="edit_form">
+            <v-form ref="editForm">
               <v-text-field
                 v-model="edit_news_form.index"
                 label="更新対象お知らせ情報ID"
@@ -62,6 +62,9 @@
             >
               <v-icon>mdi-comment-edit</v-icon>&ensp;更新
             </v-btn>
+            <v-btn color="accent" @click="reset">
+              <v-icon>mdi-alert</v-icon>&ensp;リセット
+            </v-btn>
           </v-card-actions>
           <ProcessFinishModal ref="finish" />
         </v-card>
@@ -101,6 +104,9 @@ export default {
   methods: {
     controllCalendar: function () {
       this.isDispCalendar = !this.isDispCalendar;
+    },
+    reset: function () {
+      this.$refs.editForm.reset();
     },
     submit: function () {
       this.loading = true;

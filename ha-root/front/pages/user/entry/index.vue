@@ -57,6 +57,9 @@
               <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
             </v-btn>
           </template>
+          <v-btn color="accent" @click="reset">
+            <v-icon>mdi-alert</v-icon>&ensp;リセット
+          </v-btn>
         </v-card-actions>
       </v-card>
       <AppConfirm ref="confirm"></AppConfirm>
@@ -85,6 +88,7 @@ export default {
       conf_password: "",
       password_show: false,
       conf_password_show: false,
+      required: (value) => !!value || "必ず入力してください",
       loading: false,
       api_data: {
         api_result: "",
@@ -117,7 +121,15 @@ export default {
     },
   },
   methods: {
+    reset: function () {
+      this.$refs.entryForm.reset();
+    },
     async openUserEntryModal() {
+      if (!this.$refs.entryForm.validate()) {
+        // 入力値エラーの場合
+        return;
+      }
+
       if (
         await this.$refs.confirm.open(this.modal.title, this.modal.contents, {
           color: "blue",
