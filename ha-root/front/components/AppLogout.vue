@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="logout">
+  <v-btn @click="logout" text>
     <v-icon>mdi-account-cancel</v-icon>
     <div>{{ message }}</div>
   </v-btn>

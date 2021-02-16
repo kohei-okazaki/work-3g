@@ -4,13 +4,17 @@
       <v-toolbar dark :color="options.color" dense flat>
         <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
       </v-toolbar>
-      <br>
+      <br />
       <v-card-text v-show="!!message">{{ message }}</v-card-text>
-      <br>
+      <br />
       <v-card-actions class="pt-0">
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" @click.native="agree">{{ options.execMessage }}</v-btn>
-        <v-btn color="grey" @click.native="cancel">{{ options.cancelMessage }}</v-btn>
+        <v-btn color="primary" @click.native="agree">{{
+          options.execMessage
+        }}</v-btn>
+        <v-btn color="grey" @click.native="cancel">{{
+          options.cancelMessage
+        }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -27,8 +31,8 @@ export default {
     options: {
       color: "primary",
       width: 290,
-      execMessage: '確認',
-      cancelMessage: '取消',
+      execMessage: "確認",
+      cancelMessage: "取消",
     },
   }),
   methods: {
@@ -42,11 +46,11 @@ export default {
         this.reject = reject;
       });
     },
-    agree() {
+    agree: function () {
       this.resolve(true);
       this.dialog = false;
     },
-    cancel() {
+    cancel: function () {
       this.resolve(false);
       this.dialog = false;
     },
