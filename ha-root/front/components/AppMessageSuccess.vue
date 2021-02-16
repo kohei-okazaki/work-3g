@@ -7,7 +7,10 @@
         border="left"
         color="green"
         type="success"
+        :outlined="isOutlined ? true : false"
         @click="clear"
+        @mouseover="isOutlined = true"
+        @mouseleave="isOutlined = false"
         >{{ data.message }}</v-alert
       >
     </v-col>
@@ -19,6 +22,11 @@ export default {
   props: {
     // isSuccessとmessageを持つオブジェクトを渡すこと
     data: Object,
+  },
+  data: function () {
+    return {
+      isOutlined: false,
+    };
   },
   methods: {
     clear: function () {

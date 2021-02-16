@@ -9,7 +9,7 @@
       <br />
       <v-card-actions class="pt-0">
         <v-spacer></v-spacer>
-        <v-btn color="primary darken-1" @click.native="agree">{{
+        <v-btn color="primary" @click.native="agree">{{
           options.execMessage
         }}</v-btn>
       </v-card-actions>
@@ -44,10 +44,6 @@ export default {
     },
     agree() {
       this.resolve(true);
-      this.dialog = false;
-    },
-    cancel() {
-      this.resolve(false);
       this.dialog = false;
     },
   },

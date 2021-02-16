@@ -8,7 +8,7 @@
     offset-y
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn v-bind="attrs" v-on="on">
+      <v-btn v-bind="attrs" v-on="on" text>
         {{ viewLoginUser }}
       </v-btn>
     </template>
