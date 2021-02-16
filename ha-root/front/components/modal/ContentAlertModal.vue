@@ -6,11 +6,6 @@
       :max-height="height"
       scrollable
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" text dark v-bind="attrs" v-on="on" @click="open">
-          管理者サイトについて
-        </v-btn>
-      </template>
       <v-card>
         <v-toolbar dark :color="color" dense flat>
           <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
@@ -19,9 +14,16 @@
         <v-card-text>
           管理者サイトについての注意事項<br />
           推奨ブラウザは以下とする
-          <ol>
-            <li>推奨ブラウザはChromeとします。</li>
-          </ol>
+          <v-simple-table>
+            <tbody>
+              <tr>
+                <td v-for="(browser, i) in browsers" :key="i">
+                  {{ browser }}
+                </td>
+              </tr>
+            </tbody>
+          </v-simple-table>
+          <v-divider></v-divider>
         </v-card-text>
         <br />
         <v-card-actions class="pt-0">
@@ -44,6 +46,7 @@ export default {
       width: 600,
       height: 800,
       color: "primary darken-1",
+      browsers: ["Chrome"],
     };
   },
   methods: {

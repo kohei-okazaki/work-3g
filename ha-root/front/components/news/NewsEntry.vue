@@ -52,6 +52,9 @@
             >
               <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
             </v-btn>
+            <v-btn color="accent" @click="reset">
+              <v-icon>mdi-alert</v-icon>&ensp;リセット
+            </v-btn>
           </v-card-actions>
           <ProcessFinishModal ref="finish" />
         </v-card>
@@ -98,6 +101,9 @@ export default {
     controllCalendar: function () {
       this.isDispCalendar = !this.isDispCalendar;
     },
+    reset() {
+      this.$refs.entryForm.reset();
+    },
     submit: function () {
       this.loading = true;
       if (!this.$refs.entryForm.validate()) {
@@ -123,7 +129,6 @@ export default {
       axios.post(url, reqBody, { headers }).then(
         (result) => {
           if (result.data.result == 0) {
-
             // 処理完了モーダルを表示
             let json = JSON.stringify(this.entryInfo, null, "\t");
             this.$refs.finish.open("お知らせ情報登録処理", json, {
