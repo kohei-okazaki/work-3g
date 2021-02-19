@@ -65,6 +65,9 @@
             <v-btn color="accent" @click="reset">
               <v-icon>mdi-alert</v-icon>&ensp;リセット
             </v-btn>
+            <v-btn color="accent" @click="backEntry">
+              <v-icon>mdi-keyboard-return</v-icon>&ensp;登録画面に戻る
+            </v-btn>
           </v-card-actions>
           <ProcessFinishModal ref="finish" />
         </v-card>
@@ -107,6 +110,10 @@ export default {
     },
     reset: function () {
       this.$refs.editForm.reset();
+    },
+    backEntry: function () {
+      console.log("登録画面に戻る");
+      this.$emit("back-entry");
     },
     submit: function () {
       this.loading = true;

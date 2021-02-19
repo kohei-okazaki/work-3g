@@ -6,7 +6,11 @@
       <NewsEntry @get-news="getNews" />
     </template>
     <template v-else>
-      <NewsEdit @get-news="getNews" :edit_news_form="edit_news_form" />
+      <NewsEdit
+        @get-news="getNews"
+        @back-entry="backEntry"
+        :edit_news_form="edit_news_form"
+      />
     </template>
     <v-row>
       <v-col>
@@ -209,6 +213,9 @@ export default {
             return error;
           }
         );
+    },
+    backEntry: function () {
+      this.entryMode = true;
     },
   },
 };
