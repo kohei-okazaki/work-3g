@@ -57,8 +57,6 @@
             <v-btn
               color="primary"
               @click="submit"
-              :loading="loading"
-              :disabled="loading"
             >
               <v-icon>mdi-comment-edit</v-icon>&ensp;更新
             </v-btn>
@@ -70,6 +68,9 @@
             </v-btn>
           </v-card-actions>
           <ProcessFinishModal ref="finish" />
+          <v-overlay :value="loading">
+            <v-progress-circular indeterminate size="128"></v-progress-circular>
+          </v-overlay>
         </v-card>
       </v-col>
     </v-row>
@@ -112,7 +113,6 @@ export default {
       this.$refs.editForm.reset();
     },
     backEntry: function () {
-      console.log("登録画面に戻る");
       this.$emit("back-entry");
     },
     submit: function () {

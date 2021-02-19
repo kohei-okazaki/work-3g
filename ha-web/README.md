@@ -9,3 +9,4 @@
 - ha-batch
 - ha-business
 - ha-dashboard
+- ha-root
