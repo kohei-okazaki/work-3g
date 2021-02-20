@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.crypt.Crypter;
-import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.Account;
@@ -20,8 +19,10 @@ import jp.co.ha.db.entity.AccountExample.Criteria;
 import jp.co.ha.db.entity.AccountKey;
 import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.db.entity.composite.CompositeAccountKey;
+import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.db.mapper.AccountMapper;
 import jp.co.ha.db.mapper.composite.CompositeAccountMapper;
+import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 
 /**
  * アカウント情報検索サービスインターフェース実装クラス
@@ -41,6 +42,9 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     /** アカウント複合Mapper */
     @Autowired
     private CompositeAccountMapper compositeAccountMapper;
+    /** 月ごとの登録情報Mapper */
+    @Autowired
+    private CompositeMonthlyMapper compositeMonthlyMapper;
 
     @Select
     @Override
@@ -102,19 +106,9 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<Account> findByRegDate(LocalDateTime from, LocalDateTime to,
-            SelectOption selectOption) {
-
-        AccountExample example = new AccountExample();
-        Criteria criteria = example.createCriteria();
-
-        // 登録日時
-        criteria.andRegDateNotBetween(from, to);
-
-        // ソート処理
-        example.setOrderByClause(selectOption.getOrderBy());
-
-        return mapper.selectByExample(example);
+    public List<CompositeMonthlyRegData> findMonthly(LocalDateTime from,
+            LocalDateTime to) {
+        return compositeMonthlyMapper.selectAccountByRegDate(from, to);
     }
 
 }

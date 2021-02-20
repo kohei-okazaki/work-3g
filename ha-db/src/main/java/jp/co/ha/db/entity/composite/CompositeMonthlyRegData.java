@@ -3,14 +3,17 @@ package jp.co.ha.db.entity.composite;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import jp.co.ha.common.log.annotation.Ignore;
+
 /**
- * 月ごとの健康情報
+ * 月ごとの健康情報登録件数情報
  *
  * @version 1.0.0
  */
-public class CompositeMonthlyHealthInfo implements Serializable {
+public class CompositeMonthlyRegData implements Serializable {
 
     /** serialVersionUID */
+    @Ignore
     private static final long serialVersionUID = -5290848974397984465L;
 
     /** 登録件数 */

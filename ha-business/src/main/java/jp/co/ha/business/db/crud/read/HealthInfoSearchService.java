@@ -6,7 +6,7 @@ import java.util.List;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfo;
-import jp.co.ha.db.entity.composite.CompositeMonthlyHealthInfo;
+import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 
 /**
  * 健康情報検索サービスインターフェース
@@ -135,6 +135,6 @@ public interface HealthInfoSearchService {
      *     健康情報登録日時(to)
      * @return 月ごとの健康情報リスト
      */
-    List<CompositeMonthlyHealthInfo> findMonthly(LocalDateTime from, LocalDateTime to);
+    List<CompositeMonthlyRegData> findMonthly(LocalDateTime from, LocalDateTime to);
 
 }

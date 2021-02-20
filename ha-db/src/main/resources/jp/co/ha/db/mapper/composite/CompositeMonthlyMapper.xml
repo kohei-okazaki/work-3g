@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ha.db.mapper.composite.CompositeMonthlyMapper">
+  <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.composite.CompositeMonthlyRegData">
+    <result column="COUNT" jdbcType="INTEGER" property="count" />
+    <result column="DATE" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <select id="selectByHealthInfoRegDate" resultMap="BaseResultMap">
+    SELECT
+      DATE_FORMAT(HI.HEALTH_INFO_REG_DATE, '%Y-%m-%d') AS DATE
+      , COUNT(*) AS COUNT
+    FROM
+      HEALTH_INFO HI
+    WHERE
+      HI.HEALTH_INFO_REG_DATE BETWEEN #{from,jdbcType=TIMESTAMP} AND #{to,jdbcType=TIMESTAMP}
+    GROUP BY
+      DATE_FORMAT(HI.HEALTH_INFO_REG_DATE, '%Y%m%d');
+  </select>
+  <select id="selectAccountByRegDate" resultMap="BaseResultMap">
+    SELECT
+      DATE_FORMAT(AC.REG_DATE, '%Y-%m-%d') AS DATE
+      , COUNT(*) AS COUNT
+    FROM
+      ACCOUNT AC
+    WHERE
+      AC.REG_DATE BETWEEN #{from,jdbcType=TIMESTAMP} AND #{to,jdbcType=TIMESTAMP}
+    GROUP BY
+      DATE_FORMAT(AC.REG_DATE, '%Y%m%d');
+  </select>
+</mapper>

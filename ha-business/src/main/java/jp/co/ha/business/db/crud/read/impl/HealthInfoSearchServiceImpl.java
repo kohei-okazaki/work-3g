@@ -16,10 +16,10 @@ import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.HealthInfoExample.Criteria;
 import jp.co.ha.db.entity.composite.CompositeHealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfoKey;
-import jp.co.ha.db.entity.composite.CompositeMonthlyHealthInfo;
+import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 import jp.co.ha.db.mapper.composite.CompositeHealthInfoMapper;
-import jp.co.ha.db.mapper.composite.CompositeMonthlyHealthInfoMapper;
+import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 
 /**
  * 健康情報検索サービスインターフェース実装クラス
@@ -35,9 +35,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     /** CompositeHealthInfoMapper */
     @Autowired
     private CompositeHealthInfoMapper compositeHealthInfoMapper;
-    /** CompositeMonthlyHealthInfoMapper */
+    /** CompositeMonthlyMapper */
     @Autowired
-    private CompositeMonthlyHealthInfoMapper compositeMonthlyHealthInfoMapper;
+    private CompositeMonthlyMapper compositeMonthlyMapper;
 
     @Select
     @Override
@@ -186,9 +186,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<CompositeMonthlyHealthInfo> findMonthly(LocalDateTime from,
+    public List<CompositeMonthlyRegData> findMonthly(LocalDateTime from,
             LocalDateTime to) {
-        return compositeMonthlyHealthInfoMapper.selectByHealthInfoRegDate(from, to);
+        return compositeMonthlyMapper.selectByHealthInfoRegDate(from, to);
     }
 
 }

@@ -22,14 +22,18 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
     /** 健康情報登録グラフ情報リスト */
     @JsonProperty("health_info_reg_graph_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<HealthInfoRegGraph> healthInfoRegGraphList;
+    private List<RegGraph> healthInfoRegGraphList;
+    /** アカウント登録グラフ情報リスト */
+    @JsonProperty("account_reg_graph_list")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<RegGraph> accountRegGraphList;
 
     /**
      * healthInfoRegGraphListを返す
      *
      * @return healthInfoRegGraphList
      */
-    public List<HealthInfoRegGraph> getHealthInfoRegGraphList() {
+    public List<RegGraph> getHealthInfoRegGraphList() {
         return healthInfoRegGraphList;
     }
 
@@ -37,19 +41,37 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
      * healthInfoRegGraphListを設定する
      *
      * @param healthInfoRegGraphList
-     *     健康情報登録グラフ情報リスト
+     *     グラフ情報リスト
      */
-    public void setHealthInfoRegGraphList(
-            List<HealthInfoRegGraph> healthInfoRegGraphList) {
+    public void setHealthInfoRegGraphList(List<RegGraph> healthInfoRegGraphList) {
         this.healthInfoRegGraphList = healthInfoRegGraphList;
     }
 
     /**
-     * 健康情報登録グラフ情報
+     * accountRegGraphListを返す
+     *
+     * @return accountRegGraphList
+     */
+    public List<RegGraph> getAccountRegGraphList() {
+        return accountRegGraphList;
+    }
+
+    /**
+     * accountRegGraphListを設定する
+     *
+     * @param accountRegGraphList
+     *     アカウント登録グラフ情報リスト
+     */
+    public void setAccountRegGraphList(List<RegGraph> accountRegGraphList) {
+        this.accountRegGraphList = accountRegGraphList;
+    }
+
+    /**
+     * 登録グラフ情報
      *
      * @version 1.0.0
      */
-    public static class HealthInfoRegGraph {
+    public static class RegGraph {
 
         /** 登録件数 */
         @JsonProperty("count")
