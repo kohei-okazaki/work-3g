@@ -8,3 +8,4 @@
 - ha-api
 - ha-batch
 - ha-dashboard
+- ha-root

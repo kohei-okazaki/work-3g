@@ -47,8 +47,6 @@
             <v-btn
               color="primary"
               @click="submit"
-              :loading="loading"
-              :disabled="loading"
             >
               <v-icon>mdi-newspaper-plus</v-icon>&ensp;登録
             </v-btn>
@@ -57,6 +55,9 @@
             </v-btn>
           </v-card-actions>
           <ProcessFinishModal ref="finish" />
+          <v-overlay :value="loading">
+            <v-progress-circular indeterminate size="128"></v-progress-circular>
+          </v-overlay>
         </v-card>
       </v-col>
     </v-row>

@@ -14,8 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import io.jsonwebtoken.Jwts;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -24,10 +22,6 @@ import jp.co.ha.common.util.StringUtil;
  * @version 1.0.0
  */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(JWTAuthorizationFilter.class);
 
     /** 認証情報管理クラス */
     @SuppressWarnings("unused")
@@ -50,7 +44,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         String header = req.getHeader(JWTAuthenticationFilter.HEADER_AUTHORIZATION);
         if (header == null || !header.startsWith(JWTAuthenticationFilter.TOKEN_PREFIX)) {
-            LOG.debug("headerなし. header=" + header);
             chain.doFilter(req, res);
             return;
         }

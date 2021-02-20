@@ -105,5 +105,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.pushable {
+  cursor: pointer;
+}
 </style> 

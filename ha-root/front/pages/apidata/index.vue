@@ -25,7 +25,7 @@
                     }}
                   </div>
                   <div><b>API名</b>={{ timeline.api_name }}</div>
-                  <div><b>HTTPステータス</b>={{ timeline.httpStatus }}</div>
+                  <div><b>HTTPステータス</b>={{ timeline.http_status }}</div>
                   <div><b>送信日時</b>={{ timeline.request_date }}</div>
                   <div><b>受信日時</b>={{ timeline.response_date }}</div>
                 </v-card-text>
@@ -200,7 +200,7 @@ export default {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: 0.8s;
+  transition: 0.6s;
 }
 .fade-enter,
 .fade-leave-to {

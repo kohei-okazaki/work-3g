@@ -12,3 +12,4 @@
 - ha-db
 - ha-tool
 - ha-web
+- ha-root
