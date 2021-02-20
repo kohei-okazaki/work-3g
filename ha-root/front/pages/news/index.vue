@@ -6,7 +6,11 @@
       <NewsEntry @get-news="getNews" />
     </template>
     <template v-else>
-      <NewsEdit @get-news="getNews" :edit_news_form="edit_news_form" />
+      <NewsEdit
+        @get-news="getNews"
+        @back-entry="backEntry"
+        :edit_news_form="edit_news_form"
+      />
     </template>
     <v-row>
       <v-col>
@@ -39,8 +43,6 @@
             <v-btn
               small
               class="mx-1"
-              :loading="loading"
-              :disabled="loading"
               @click="openNewsDeleteModal(item.index)"
             >
               <v-icon>mdi-delete</v-icon>
@@ -49,6 +51,9 @@
         </v-data-table>
         <ConfirmModal ref="confirm" />
         <ProcessFinishModal ref="finish" />
+        <v-overlay :value="loading">
+          <v-progress-circular indeterminate size="128"></v-progress-circular>
+        </v-overlay>
       </v-col>
     </v-row>
   </div>
@@ -132,7 +137,7 @@ export default {
     this.getNews();
   },
   methods: {
-    getNews() {
+    getNews: function () {
       axios
         .get(url, {
           headers: { Authorization: this.$store.state.auth.token },
@@ -209,6 +214,9 @@ export default {
             return error;
           }
         );
+    },
+    backEntry: function () {
+      this.entryMode = true;
     },
   },
 };

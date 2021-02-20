@@ -1,5 +1,6 @@
 package jp.co.ha.business.db.crud.read.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +19,10 @@ import jp.co.ha.db.entity.AccountExample.Criteria;
 import jp.co.ha.db.entity.AccountKey;
 import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.db.entity.composite.CompositeAccountKey;
+import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.db.mapper.AccountMapper;
 import jp.co.ha.db.mapper.composite.CompositeAccountMapper;
+import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 
 /**
  * アカウント情報検索サービスインターフェース実装クラス
@@ -39,6 +42,9 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     /** アカウント複合Mapper */
     @Autowired
     private CompositeAccountMapper compositeAccountMapper;
+    /** 月ごとの登録情報Mapper */
+    @Autowired
+    private CompositeMonthlyMapper compositeMonthlyMapper;
 
     @Select
     @Override
@@ -95,6 +101,14 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Transactional(readOnly = true)
     public List<CompositeAccount> findAll() {
         return compositeAccountMapper.selectAll();
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompositeMonthlyRegData> findMonthly(LocalDateTime from,
+            LocalDateTime to) {
+        return compositeMonthlyMapper.selectAccountByRegDate(from, to);
     }
 
 }
