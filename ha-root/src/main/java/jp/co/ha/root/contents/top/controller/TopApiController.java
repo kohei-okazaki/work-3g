@@ -15,7 +15,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.composite.CompositeMonthlyHealthInfo;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
 import jp.co.ha.root.contents.top.request.TopApiRequest;
 import jp.co.ha.root.contents.top.response.TopApiResponse;
 import jp.co.ha.root.type.RootApiResult;
@@ -42,16 +41,6 @@ public class TopApiController
      */
     @GetMapping(value = "top", produces = { MediaType.APPLICATION_JSON_VALUE })
     public TopApiResponse top(TopApiRequest request) {
-
-        boolean b = true;
-        if (b) {
-            TopApiResponse response = new TopApiResponse();
-            response.setRootApiResult(RootApiResult.FAILURE);
-            ErrorData error = new ErrorData();
-            error.setMessage("test error");
-            response.setErrorData(error);
-            return response;
-        }
 
         LocalDate targetDate = DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         LocalDateTime from = LocalDateTime.of(targetDate.getYear(),
