@@ -1,5 +1,6 @@
 package jp.co.ha.business.db.crud.read.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.crypt.Crypter;
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.Account;
@@ -95,6 +97,24 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Transactional(readOnly = true)
     public List<CompositeAccount> findAll() {
         return compositeAccountMapper.selectAll();
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<Account> findByRegDate(LocalDateTime from, LocalDateTime to,
+            SelectOption selectOption) {
+
+        AccountExample example = new AccountExample();
+        Criteria criteria = example.createCriteria();
+
+        // 登録日時
+        criteria.andRegDateNotBetween(from, to);
+
+        // ソート処理
+        example.setOrderByClause(selectOption.getOrderBy());
+
+        return mapper.selectByExample(example);
     }
 
 }

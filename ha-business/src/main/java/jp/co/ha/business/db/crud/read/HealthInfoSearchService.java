@@ -6,6 +6,7 @@ import java.util.List;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfo;
+import jp.co.ha.db.entity.composite.CompositeMonthlyHealthInfo;
 
 /**
  * 健康情報検索サービスインターフェース
@@ -124,5 +125,16 @@ public interface HealthInfoSearchService {
      * @return 健康情報とBMI範囲マスタの複合Entityリスト
      */
     List<CompositeHealthInfo> findHealthInfoDetailList();
+
+    /**
+     * 月ごとの健康情報リストを検索する
+     *
+     * @param from
+     *     健康情報登録日時(from)
+     * @param to
+     *     健康情報登録日時(to)
+     * @return 月ごとの健康情報リスト
+     */
+    List<CompositeMonthlyHealthInfo> findMonthly(LocalDateTime from, LocalDateTime to);
 
 }

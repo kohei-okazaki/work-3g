@@ -1,0 +1,105 @@
+package jp.co.ha.root.contents.top.response;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
+import jp.co.ha.root.base.BaseRootApiResponse;
+import jp.co.ha.web.form.BaseApiResponse;
+
+/**
+ * Top情報取得APIレスポンスクラス
+ *
+ * @version 1.0.0
+ */
+public class TopApiResponse extends BaseRootApiResponse implements BaseApiResponse {
+
+    /** 健康情報登録グラフ情報リスト */
+    @JsonProperty("health_info_reg_graph_list")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<HealthInfoRegGraph> healthInfoRegGraphList;
+
+    /**
+     * healthInfoRegGraphListを返す
+     *
+     * @return healthInfoRegGraphList
+     */
+    public List<HealthInfoRegGraph> getHealthInfoRegGraphList() {
+        return healthInfoRegGraphList;
+    }
+
+    /**
+     * healthInfoRegGraphListを設定する
+     *
+     * @param healthInfoRegGraphList
+     *     健康情報登録グラフ情報リスト
+     */
+    public void setHealthInfoRegGraphList(
+            List<HealthInfoRegGraph> healthInfoRegGraphList) {
+        this.healthInfoRegGraphList = healthInfoRegGraphList;
+    }
+
+    /**
+     * 健康情報登録グラフ情報
+     *
+     * @version 1.0.0
+     */
+    public static class HealthInfoRegGraph {
+
+        /** 登録件数 */
+        @JsonProperty("count")
+        private Integer count;
+        /** 登録日 */
+        @JsonProperty("date")
+        @JsonSerialize(using = LocalDateSerializer.class)
+        @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+        private LocalDate date;
+
+        /**
+         * countを返す
+         *
+         * @return count
+         */
+        public Integer getCount() {
+            return count;
+        }
+
+        /**
+         * countを設定する
+         *
+         * @param count
+         *     登録件数
+         */
+        /**
+         * @param count
+         */
+        public void setCount(Integer count) {
+            this.count = count;
+        }
+
+        /**
+         * dateを返す
+         *
+         * @return date
+         */
+        public LocalDate getDate() {
+            return date;
+        }
+
+        /**
+         * dateを設定する
+         *
+         * @param date
+         *     登録日
+         */
+        public void setDate(LocalDate date) {
+            this.date = date;
+        }
+
+    }
+}

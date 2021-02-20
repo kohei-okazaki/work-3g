@@ -1,8 +1,10 @@
 package jp.co.ha.business.db.crud.read;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.composite.CompositeAccount;
 
@@ -59,5 +61,19 @@ public interface AccountSearchService {
      * @return アカウント情報と健康情報ファイル設定の複合Entityのリスト
      */
     List<CompositeAccount> findAll();
+
+    /**
+     * 指定した登録日時の範囲のアカウント情報リストを取得する
+     *
+     * @param from
+     *     登録日時(開始)
+     * @param to
+     *     登録日時(開始)
+     * @param selectOption
+     *     {@linkplain SelectOption}
+     * @return アカウント情報リスト
+     */
+    List<Account> findByRegDate(LocalDateTime from, LocalDateTime to,
+            SelectOption selectOption);
 
 }
