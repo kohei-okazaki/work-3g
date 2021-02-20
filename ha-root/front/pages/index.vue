@@ -1,92 +1,154 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <AppLogo />
-        <AppVuetifyLogo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              >documentation</a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-              >discord</a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Nuxt Documentation</a
-          >
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Nuxt GitHub</a
-          >
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire">Continue</v-btn>
-        </v-card-actions>
-      </v-card>
-      <ContentAlertModal />
-    </v-col>
-  </v-row>
+  <div>
+    <AppMessageError v-if="error.hasError" :data="error" />
+    <br />
+    <v-row justify="center" align="center">
+      <v-col cols="6" sm="8" md="6">
+        <AccountRegByMonthly
+          :error="error"
+          :labels="accountLabels"
+          :values="accountValues"
+          title="今月のユーザ登録者数"
+          text="今月の全ユーザの登録数"
+          color="teal"
+          @get-graph="getAccountGraph"
+        />
+      </v-col>
+      <v-col cols="6" sm="8" md="6">
+        <HealthInfoRegByMonthly
+          :error="error"
+          :labels="healthInfoLabels"
+          :values="healthInfoValues"
+          color="cyan"
+          title="今月の健康情報登録者数"
+          text="今月の全ユーザの健康情報登録情報の登録数"
+          @get-graph="getHealthInfoGraph"
+        />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
-import AppLogo from "~/components/AppLogo.vue";
-import AppVuetifyLogo from "~/components/AppVuetifyLogo.vue";
-import ContentAlertModal from "~/components/modal/ContentAlertModal.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
+import HealthInfoRegByMonthly from "~/components/top/MonthlyGraph.vue";
+import AccountRegByMonthly from "~/components/top/MonthlyGraph.vue";
+
+const axios = require("axios");
+let url = process.env.api_base_url + "top";
 
 export default {
   components: {
-    AppLogo,
-    AppVuetifyLogo,
-    ContentAlertModal,
+    AppMessageError,
+    HealthInfoRegByMonthly,
+    AccountRegByMonthly,
+  },
+  data: function () {
+    return {
+      error: {
+        hasError: false,
+        message: null,
+      },
+      healthInfoLabels: [],
+      healthInfoValues: [],
+      accountLabels: [],
+      accountValues: [],
+    };
+  },
+  methods: {
+    getGraph: function () {
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(url, { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            this.healthInfoLabels = response.data.health_info_reg_graph_list.map(
+              (item) => item.date
+            );
+            this.healthInfoValues = response.data.health_info_reg_graph_list.map(
+              (item) => item.count
+            );
+            this.accountLabels = response.data.account_reg_graph_list.map(
+              (item) => item.date
+            );
+            this.accountValues = response.data.account_reg_graph_list.map(
+              (item) => item.count
+            );
+          } else {
+            console.log(response.data.error.message);
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
+    },
+    getHealthInfoGraph: function () {
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(url + "/healthinfo", { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            this.healthInfoLabels = response.data.health_info_reg_graph_list.map(
+              (item) => item.date
+            );
+            this.healthInfoValues = response.data.health_info_reg_graph_list.map(
+              (item) => item.count
+            );
+          } else {
+            console.log(response.data.error.message);
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
+    },
+    getAccountGraph: function () {
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(url + "/account", { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            this.accountLabels = response.data.account_reg_graph_list.map(
+              (item) => item.date
+            );
+            this.accountValues = response.data.account_reg_graph_list.map(
+              (item) => item.count
+            );
+          } else {
+            console.log(response.data.error.message);
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
+    },
+  },
+  mounted: function () {
+    this.getGraph();
   },
 };
 </script>
+
+<style scoped>
+</style>

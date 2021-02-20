@@ -37,7 +37,5 @@ export default {
 </script>
 
 <style scoped>
-.pushable {
-  cursor: pointer;
-}
+
 </style>
