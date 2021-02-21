@@ -35,7 +35,7 @@
         >
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="isRefView">
       <v-col>
         <v-text-field
           v-model="search"
@@ -186,6 +186,16 @@ export default {
   computed: {
     timelineCardTextBgColor: function () {
       return this.$vuetify.theme.dark ? "black" : "white";
+    },
+    isRefView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "01") {
+          return true;
+        }
+      }
+      return false;
     },
   },
 };

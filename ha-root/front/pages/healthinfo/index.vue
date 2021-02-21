@@ -2,7 +2,7 @@
   <div>
     <AppTitle icon="mdi-pill" title="健康情報一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <v-row>
+    <v-row v-if="isRefView">
       <v-col>
         <v-text-field
           v-model="search"
@@ -102,6 +102,18 @@ export default {
         return error;
       }
     );
+  },
+  computed: {
+    isRefView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "01") {
+          return true;
+        }
+      }
+      return false;
+    },
   },
 };
 </script>

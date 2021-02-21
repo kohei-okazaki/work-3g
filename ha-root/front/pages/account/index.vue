@@ -2,7 +2,7 @@
   <div>
     <AppTitle icon="mdi-account" title="アカウント情報一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <v-row>
+    <v-row v-if="isRefView">
       <v-col>
         <v-text-field
           v-model="search"
@@ -119,7 +119,18 @@ export default {
       ],
     };
   },
-
+  computed: {
+    isRefView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "01") {
+          return true;
+        }
+      }
+      return false;
+    },
+  },
   created: function () {
     // 保存済のAPIトークンを取得
     let headers = {

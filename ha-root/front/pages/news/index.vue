@@ -12,7 +12,7 @@
         :edit_news_form="edit_news_form"
       />
     </template>
-    <v-row>
+    <v-row v-if="isRefView">
       <v-col>
         <v-text-field
           v-model="search"
@@ -217,6 +217,18 @@ export default {
     },
     backEntry: function () {
       this.entryMode = true;
+    },
+  },
+  computed: {
+    isRefView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "01") {
+          return true;
+        }
+      }
+      return false;
     },
   },
 };
