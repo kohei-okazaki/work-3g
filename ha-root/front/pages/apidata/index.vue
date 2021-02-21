@@ -195,9 +195,6 @@ export default {
 .base {
   padding-left: 10px;
 }
-.pushable {
-  cursor: pointer;
-}
 .fade-enter-active,
 .fade-leave-active {
   transition: 0.6s;

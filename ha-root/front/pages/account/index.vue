@@ -121,21 +121,26 @@ export default {
   },
 
   created: function () {
-    axios
-      .get(url, {
-        headers: { Authorization: this.$store.state.auth.token },
-      })
-      .then(
-        (response) => {
+    // 保存済のAPIトークンを取得
+    let headers = {
+      Authorization: this.$store.state.auth.token,
+    };
+    axios.get(url, { headers }).then(
+      (response) => {
+        if (response.data.result == 0) {
           this.accountList = response.data.account_list;
-        },
-        (error) => {
+        } else {
           this.error.hasError = true;
-          this.error.message = error;
-          console.log("[error]=" + error);
-          return error;
+          this.error.message = response.data.error.message;
         }
-      );
+      },
+      (error) => {
+        this.error.hasError = true;
+        this.error.message = error;
+        console.log("accountList [error]=" + error);
+        return error;
+      }
+    );
   },
 };
 </script>
