@@ -54,10 +54,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-              color="primary"
-              @click="submit"
-            >
+            <v-btn color="primary" @click="submit">
               <v-icon>mdi-comment-edit</v-icon>&ensp;更新
             </v-btn>
             <v-btn color="accent" @click="reset">
@@ -146,6 +143,9 @@ export default {
             // お知らせ情報更新後、最新のお知らせ情報を取得する
             this.$emit("get-news");
             this.loading = false;
+          } else {
+            this.error.hasError = true;
+            this.error.message = result.data.error.message;
           }
         },
         (error) => {

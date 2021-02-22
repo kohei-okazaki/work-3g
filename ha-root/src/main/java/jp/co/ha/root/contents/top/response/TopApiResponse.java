@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import jp.co.ha.root.base.BaseRootApiResponse;
+import jp.co.ha.root.base.JsonEntity;
 import jp.co.ha.web.form.BaseApiResponse;
 
 /**
@@ -71,7 +72,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
      *
      * @version 1.0.0
      */
-    public static class RegGraph {
+    public static class RegGraph extends JsonEntity {
 
         /** 登録件数 */
         @JsonProperty("count")

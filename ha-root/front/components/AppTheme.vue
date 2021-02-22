@@ -23,6 +23,9 @@ export default {
       this.$vuetify.theme.dark = this.theme;
     },
   },
+  created: function () {
+    this.theme = this.$vuetify.theme.dark;
+  },
 };
 </script>
 
