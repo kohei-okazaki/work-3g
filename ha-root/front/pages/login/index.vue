@@ -104,7 +104,6 @@ export default {
           (response) => {
             // JWTをレスポンスヘッダから取得
             let authorization = response.headers["authorization"];
-            console.log("[authorization]=" + authorization);
 
             // storeにログイン情報を保存
             this.$store.commit("auth/setToken", {

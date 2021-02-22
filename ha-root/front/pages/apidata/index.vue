@@ -35,7 +35,7 @@
         >
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="isRefShow">
       <v-col>
         <v-text-field
           v-model="search"
@@ -84,6 +84,7 @@ export default {
         hasError: false,
         message: null,
       },
+      isRefShow: false,
       timelines: [],
       search: "",
       apiDataList: [],
@@ -128,26 +129,11 @@ export default {
     };
   },
   created: function () {
-    // 保存済のAPIトークンを取得
-    let headers = {
-      Authorization: this.$store.state.auth.token,
-    };
-    axios.get(url, { headers }).then(
-      (response) => {
-        if (response.data.result == 0) {
-          this.apiDataList = response.data.api_data_list;
-        } else {
-          this.error.hasError = true;
-          this.error.message = response.data.error.message;
-        }
-      },
-      (error) => {
-        this.error.hasError = true;
-        this.error.message = error;
-        console.log("apidata [error]=" + error);
-        return error;
-      }
-    );
+    this.isRefView();
+    if (!this.isRefShow) {
+      return;
+    }
+    this.getApiDataList();
   },
   methods: {
     getHttpStatusColor: function (httpStatus) {
@@ -182,6 +168,39 @@ export default {
         }
       }
     },
+    isRefView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "01") {
+          this.isRefShow = true;
+          return;
+        }
+      }
+      this.isRefShow = false;
+    },
+    getApiDataList: function () {
+      // 保存済のAPIトークンを取得
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(url, { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            this.apiDataList = response.data.api_data_list;
+          } else {
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("apidata [error]=" + error);
+          return error;
+        }
+      );
+    },
   },
   computed: {
     timelineCardTextBgColor: function () {
@@ -194,9 +213,6 @@ export default {
 <style scoped>
 .base {
   padding-left: 10px;
-}
-.pushable {
-  cursor: pointer;
 }
 .fade-enter-active,
 .fade-leave-active {

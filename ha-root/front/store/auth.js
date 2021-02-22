@@ -5,8 +5,7 @@ export const state = () => ({
 });
 
 export const mutations = {
-  clearToken: function(state) {
-    console.log('vuex state clear');
+  clearToken: function (state) {
     state.seq_login_id = '';
     state.token = '';
   },
@@ -14,7 +13,7 @@ export const mutations = {
     state.seq_login_id = token_data.seq_login_id;
     state.token = token_data.token;
   },
-  setUserData: function(state, user_data) {
+  setUserData: function (state, user_data) {
     state.roles = user_data.roles;
-  }
+  },
 };

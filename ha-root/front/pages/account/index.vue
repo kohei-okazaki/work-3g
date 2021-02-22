@@ -2,7 +2,7 @@
   <div>
     <AppTitle icon="mdi-account" title="アカウント情報一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <v-row>
+    <v-row v-if="isRefShow">
       <v-col>
         <v-text-field
           v-model="search"
@@ -65,6 +65,7 @@ export default {
         hasError: false,
         message: null,
       },
+      isRefShow: false,
       search: "",
       accountList: [],
       headers: [
@@ -119,23 +120,47 @@ export default {
       ],
     };
   },
-
-  created: function () {
-    axios
-      .get(url, {
-        headers: { Authorization: this.$store.state.auth.token },
-      })
-      .then(
+  methods: {
+    isRefView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "01") {
+          this.isRefShow = true;
+          return;
+        }
+      }
+      this.isRefShow = false;
+    },
+    getAccountList: function () {
+      // 保存済のAPIトークンを取得
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(url, { headers }).then(
         (response) => {
-          this.accountList = response.data.account_list;
+          if (response.data.result == 0) {
+            this.accountList = response.data.account_list;
+          } else {
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
         },
         (error) => {
           this.error.hasError = true;
           this.error.message = error;
-          console.log("[error]=" + error);
+          console.log("accountList [error]=" + error);
           return error;
         }
       );
+    },
+  },
+  created: function () {
+    this.isRefView();
+    if (!this.isRefShow) {
+      return;
+    }
+    this.getAccountList();
   },
 };
 </script>

@@ -23,6 +23,8 @@
               </tr>
             </tbody>
           </v-simple-table>
+          ログインできたが、APIが呼べずエラーメッセージが表示される場合<br>
+          一度ログアウトし、再度ログインすること
           <v-divider></v-divider>
         </v-card-text>
         <br />

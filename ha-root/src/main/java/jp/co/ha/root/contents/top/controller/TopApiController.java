@@ -2,7 +2,6 @@ package jp.co.ha.root.contents.top.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.top.request.TopApiRequest;
 import jp.co.ha.root.contents.top.response.TopApiResponse;
@@ -54,24 +52,24 @@ public class TopApiController
                 targetDate.getMonthValue(),
                 DateTimeUtil.getLastDayOfMonth(targetDate), 23, 59, 59);
 
-        List<CompositeMonthlyRegData> accountList = accountSearchService.findMonthly(from,
-                to);
-
-        List<CompositeMonthlyRegData> healthInfoList = healthInfoSearchService
-                .findMonthly(from, to);
-
         TopApiResponse response = new TopApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
-        response.setAccountRegGraphList(accountList.stream().map(e -> {
-            TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
-            BeanUtil.copy(e, graph);
-            return graph;
-        }).collect(Collectors.toList()));
-        response.setHealthInfoRegGraphList(healthInfoList.stream().map(e -> {
-            TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
-            BeanUtil.copy(e, graph);
-            return graph;
-        }).collect(Collectors.toList()));
+        response.setAccountRegGraphList(accountSearchService.findMonthly(from,
+                to)
+                .stream()
+                .map(e -> {
+                    TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
+                    BeanUtil.copy(e, graph);
+                    return graph;
+                }).collect(Collectors.toList()));
+        response.setHealthInfoRegGraphList(healthInfoSearchService
+                .findMonthly(from, to)
+                .stream()
+                .map(e -> {
+                    TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
+                    BeanUtil.copy(e, graph);
+                    return graph;
+                }).collect(Collectors.toList()));
 
         return response;
     }
@@ -94,16 +92,16 @@ public class TopApiController
                 targetDate.getMonthValue(),
                 DateTimeUtil.getLastDayOfMonth(targetDate), 23, 59, 59);
 
-        List<CompositeMonthlyRegData> healthInfoList = healthInfoSearchService
-                .findMonthly(from, to);
-
         TopApiResponse response = new TopApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
-        response.setHealthInfoRegGraphList(healthInfoList.stream().map(e -> {
-            TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
-            BeanUtil.copy(e, graph);
-            return graph;
-        }).collect(Collectors.toList()));
+        response.setHealthInfoRegGraphList(healthInfoSearchService
+                .findMonthly(from, to)
+                .stream()
+                .map(e -> {
+                    TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
+                    BeanUtil.copy(e, graph);
+                    return graph;
+                }).collect(Collectors.toList()));
 
         return response;
     }
@@ -125,16 +123,16 @@ public class TopApiController
         LocalDateTime to = LocalDateTime.of(targetDate.getYear(),
                 targetDate.getMonthValue(),
                 DateTimeUtil.getLastDayOfMonth(targetDate), 23, 59, 59);
-        List<CompositeMonthlyRegData> accountList = accountSearchService.findMonthly(from,
-                to);
 
         TopApiResponse response = new TopApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
-        response.setAccountRegGraphList(accountList.stream().map(e -> {
-            TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
-            BeanUtil.copy(e, graph);
-            return graph;
-        }).collect(Collectors.toList()));
+        response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
+                .stream()
+                .map(e -> {
+                    TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
+                    BeanUtil.copy(e, graph);
+                    return graph;
+                }).collect(Collectors.toList()));
 
         return response;
     }
