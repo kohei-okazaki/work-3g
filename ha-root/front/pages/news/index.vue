@@ -2,15 +2,17 @@
   <div>
     <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <template v-if="entryMode">
-      <NewsEntry @get-news="getNews" />
-    </template>
-    <template v-else>
-      <NewsEdit
-        @get-news="getNews"
-        @back-entry="backEntry"
-        :edit_news_form="editNewsForm"
-      />
+    <template v-if="isEntryShow">
+      <template v-if="entryMode">
+        <NewsEntry @get-news="getNews" />
+      </template>
+      <template v-else>
+        <NewsEdit
+          @get-news="getNews"
+          @back-entry="backEntry"
+          :edit_news_form="editNewsForm"
+        />
+      </template>
     </template>
     <v-row v-if="isRefShow">
       <v-col>
@@ -82,6 +84,7 @@ export default {
         message: null,
       },
       isRefShow: false,
+      isEntryShow: false,
       entryMode: true,
       loading: false,
       search: "",
@@ -131,6 +134,7 @@ export default {
     };
   },
   created: function () {
+    this.isEntryView();
     this.isRefView();
     if (!this.isRefShow) {
       return;
@@ -229,6 +233,17 @@ export default {
         }
       }
       this.isRefShow = false;
+    },
+    isEntryView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "02") {
+          this.isEntryShow = true;
+          return;
+        }
+      }
+      this.isEntryShow = false;
     },
   },
 };
