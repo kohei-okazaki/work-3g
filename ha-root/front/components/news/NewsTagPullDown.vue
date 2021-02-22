@@ -56,7 +56,7 @@ export default {
     },
   },
   mounted: function () {
-    this.$emit("input", this.tagColorSelectList[0].color);
+    this.$emit("input", this.color);
   },
 };
 </script>

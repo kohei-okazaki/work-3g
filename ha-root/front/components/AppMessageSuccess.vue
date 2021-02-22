@@ -7,7 +7,7 @@
         border="left"
         color="green"
         type="success"
-        :outlined="isOutlined ? true : false"
+        :outlined="isOutlined"
         @click="clear"
         @mouseover="isOutlined = true"
         @mouseleave="isOutlined = false"

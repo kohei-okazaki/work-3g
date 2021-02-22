@@ -5,6 +5,7 @@
       :color="color"
       elevation="12"
       max-width="calc(100% - 32px)"
+      rounded
     >
       <v-sparkline
         :labels="labels"
@@ -13,6 +14,7 @@
         line-width="2"
         padding="16"
         smooth
+        auto-draw
       >
         <template v-slot:label="item">
           {{

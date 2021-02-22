@@ -2,17 +2,19 @@
   <div>
     <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <template v-if="entryMode">
-      <NewsEntry @get-news="getNews" />
+    <template v-if="isEntryShow">
+      <template v-if="entryMode">
+        <NewsEntry @get-news="getNews" />
+      </template>
+      <template v-else>
+        <NewsEdit
+          @get-news="getNews"
+          @back-entry="backEntry"
+          :edit_news_form="editNewsForm"
+        />
+      </template>
     </template>
-    <template v-else>
-      <NewsEdit
-        @get-news="getNews"
-        @back-entry="backEntry"
-        :edit_news_form="edit_news_form"
-      />
-    </template>
-    <v-row>
+    <v-row v-if="isRefShow">
       <v-col>
         <v-text-field
           v-model="search"
@@ -40,11 +42,7 @@
             </v-btn>
           </template>
           <template v-slot:[`item.delete_action`]="{ item }">
-            <v-btn
-              small
-              class="mx-1"
-              @click="openNewsDeleteModal(item.index)"
-            >
+            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.index)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -85,6 +83,8 @@ export default {
         hasError: false,
         message: null,
       },
+      isRefShow: false,
+      isEntryShow: false,
       entryMode: true,
       loading: false,
       search: "",
@@ -121,7 +121,7 @@ export default {
           value: "tag.name",
         },
       ],
-      edit_news_form: {
+      editNewsForm: {
         index: "",
         title: "",
         date: "",
@@ -134,6 +134,11 @@ export default {
     };
   },
   created: function () {
+    this.isEntryView();
+    this.isRefView();
+    if (!this.isRefShow) {
+      return;
+    }
     this.getNews();
   },
   methods: {
@@ -154,13 +159,13 @@ export default {
           }
         );
     },
-    changeNewsEditView: function (edit_news_id) {
+    changeNewsEditView: function (targetNewsId) {
       for (var i = 0; i < this.news_list.length; i++) {
         let targetNews = this.news_list[i];
-        if (targetNews.index == edit_news_id) {
+        if (targetNews.index == targetNewsId) {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
           targetNews.date = targetNews.date.replaceAll("/", "-");
-          this.edit_news_form = targetNews;
+          this.editNewsForm = targetNews;
           this.entryMode = false;
           break;
         }
@@ -217,6 +222,28 @@ export default {
     },
     backEntry: function () {
       this.entryMode = true;
+    },
+    isRefView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "01") {
+          this.isRefShow = true;
+          return;
+        }
+      }
+      this.isRefShow = false;
+    },
+    isEntryView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "02") {
+          this.isEntryShow = true;
+          return;
+        }
+      }
+      this.isEntryShow = false;
     },
   },
 };
