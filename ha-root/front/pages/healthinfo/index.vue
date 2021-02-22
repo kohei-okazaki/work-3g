@@ -2,7 +2,7 @@
   <div>
     <AppTitle icon="mdi-pill" title="健康情報一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <v-row v-if="isRefView">
+    <v-row v-if="isRefShow">
       <v-col>
         <v-text-field
           v-model="search"
@@ -39,6 +39,7 @@ export default {
         hasError: false,
         message: null,
       },
+      isRefShow: false,
       search: "",
       healthInfoList: [],
       headers: [
@@ -82,37 +83,45 @@ export default {
     };
   },
   created: function () {
-    // 保存済のAPIトークンを取得
-    let headers = {
-      Authorization: this.$store.state.auth.token,
-    };
-    axios.get(url, { headers }).then(
-      (response) => {
-        if (response.data.result == 0) {
-          this.healthInfoList = response.data.health_info_list;
-        } else {
-          this.error.hasError = true;
-          this.error.message = response.data.error.message;
-        }
-      },
-      (error) => {
-        this.error.hasError = true;
-        this.error.message = error;
-        console.log("healthinfo [error]=" + error);
-        return error;
-      }
-    );
+    this.isRefView();
+    if (!this.isRefShow) {
+      return;
+    }
+    this.getHealthInfoList();
   },
-  computed: {
+  methods: {
     isRefView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
         let role = roles[i];
         if (role.value == "01") {
-          return true;
+          this.isRefShow = true;
+          return;
         }
       }
-      return false;
+      this.isRefShow = false;
+    },
+    getHealthInfoList: function () {
+      // 保存済のAPIトークンを取得
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(url, { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            this.healthInfoList = response.data.health_info_list;
+          } else {
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("healthinfo [error]=" + error);
+          return error;
+        }
+      );
     },
   },
 };
