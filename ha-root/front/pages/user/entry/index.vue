@@ -1,74 +1,70 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col class="text-center" cols="12" sm="8" md="6">
-      <br /><br />
-      <v-card>
-        <v-card-title>{{ title }}</v-card-title>
-        <v-card-text>
-          <v-form ref="entryForm">
-            <v-text-field
-              v-model="password"
-              label="パスワード"
-              prepend-icon="mdi-lock"
-              :append-icon="password_toggle.password_icon"
-              :type="password_toggle.password_type"
-              @click:append="password_show = !password_show"
-              :rules="[required]"
-            ></v-text-field>
-            <v-text-field
-              v-model="conf_password"
-              label="確認用パスワード"
-              prepend-icon="mdi-lock"
-              :append-icon="conf_password_toggle.conf_password_icon"
-              :type="conf_password_toggle.conf_password_type"
-              @click:append="conf_password_show = !conf_password_show"
-              :rules="[required]"
-            ></v-text-field>
-          </v-form>
-          <v-card-text v-if="api_data.api_result === '0'">
-            以下の情報をログイン画面より入力し、ログインしてください
-            <ul>
-              <li>ログインID = {{ api_data.seq_login_id }}</li>
-              <li>パスワード = {{ this.password }}</li>
-            </ul>
+  <div>
+    <AppMessageError v-if="error.hasError" :data="error" />
+    <v-row justify="center" align="center">
+      <v-col class="text-center" cols="12" sm="8" md="6">
+        <br />
+        <br />
+        <v-card>
+          <v-card-title>{{ title }}</v-card-title>
+          <v-card-text>
+            <v-form ref="entryForm">
+              <v-text-field
+                v-model="password"
+                label="パスワード"
+                prepend-icon="mdi-lock"
+                :append-icon="passwordToggle.passwordIcon"
+                :type="passwordToggle.passwordType"
+                @click:append="passwordShow = !passwordShow"
+                :rules="[required]"
+              ></v-text-field>
+              <v-text-field
+                v-model="confPassword"
+                label="確認用パスワード"
+                prepend-icon="mdi-lock"
+                :append-icon="confPasswordToggle.confPasswordIcon"
+                :type="confPasswordToggle.confPasswordType"
+                @click:append="confPasswordShow = !confPasswordShow"
+                :rules="[required]"
+              ></v-text-field>
+            </v-form>
+            <v-card-text v-if="api_data.api_result === '0'">
+              以下の情報をログイン画面より入力し、ログインしてください
+              <ul>
+                <li>ログインID = {{ api_data.seq_login_id }}</li>
+                <li>パスワード = {{ this.password }}</li>
+              </ul>
+            </v-card-text>
           </v-card-text>
-        </v-card-text>
-        <v-card-actions>
-          <template v-if="api_data.api_result != '0'">
-            <!-- APIが正常終了していない場合 -->
-            <v-btn
-              color="primary"
-              @click="openUserEntryModal"
-              v-on="on"
-              :loading="loading"
-              :disabled="loading"
-            >
-              <v-icon>mdi-account-multiple-plus</v-icon>&ensp;作成
-            </v-btn>
-          </template>
-          <template v-else>
-            <!-- APIが正常終了している場合 -->
-            <v-btn
-              color="primary"
-              to="/login"
-              :loading="loading"
-              :disabled="loading"
-            >
-              <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
-            </v-btn>
-          </template>
-          <v-btn color="accent" @click="reset">
-            <v-icon>mdi-alert</v-icon>&ensp;リセット
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-      <AppConfirm ref="confirm"></AppConfirm>
-    </v-col>
-  </v-row>
+          <v-card-actions>
+            <template v-if="api_data.api_result != '0'">
+              <!-- APIが正常終了していない場合 -->
+              <v-btn color="primary" @click="openUserEntryModal">
+                <v-icon>mdi-account-multiple-plus</v-icon>&ensp;作成
+              </v-btn>
+              <v-btn color="accent" @click="reset">
+                <v-icon>mdi-alert</v-icon>&ensp;リセット
+              </v-btn>
+            </template>
+            <template v-else>
+              <!-- APIが正常終了している場合 -->
+              <v-btn color="primary" to="/login">
+                <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
+              </v-btn>
+            </template>
+          </v-card-actions>
+        </v-card>
+        <AppConfirm ref="confirm" />
+        <AppLoading :loading="loading" />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 import AppConfirm from "~/components/modal/ConfirmModal.vue";
+import AppMessageError from "~/components/AppMessageError.vue";
+import AppLoading from "~/components/AppLoading.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "user";
@@ -80,43 +76,45 @@ export default {
   auth: false,
   components: {
     AppConfirm,
+    AppMessageError,
+    AppLoading,
   },
   data: function () {
     return {
       title: "管理ユーザ作成",
+      error: {
+        hasError: false,
+        message: null,
+      },
       password: "",
-      conf_password: "",
-      password_show: false,
-      conf_password_show: false,
+      confPassword: "",
+      passwordShow: false,
+      confPasswordShow: false,
       required: (value) => !!value || "必ず入力してください",
       loading: false,
       api_data: {
         api_result: "",
         seq_login_id: "",
       },
-      modal: {
-        title: "ユーザ作成",
-        contents: "",
-      },
     };
   },
   computed: {
-    password_toggle: function () {
-      const password_icon = this.password_show ? "mdi-eye" : "mdi-eye-off";
-      const password_type = this.password_show ? "text" : "password";
+    passwordToggle: function () {
+      const passwordIcon = this.passwordShow ? "mdi-eye" : "mdi-eye-off";
+      const passwordType = this.passwordShow ? "text" : "password";
       return {
-        password_icon,
-        password_type,
+        passwordIcon,
+        passwordType,
       };
     },
-    conf_password_toggle: function () {
-      const conf_password_icon = this.conf_password_show
+    confPasswordToggle: function () {
+      const confPasswordIcon = this.confPasswordShow
         ? "mdi-eye"
         : "mdi-eye-off";
-      const conf_password_type = this.conf_password_show ? "text" : "password";
+      const confPasswordType = this.confPasswordShow ? "text" : "password";
       return {
-        conf_password_icon,
-        conf_password_type,
+        confPasswordIcon,
+        confPasswordType,
       };
     },
   },
@@ -131,7 +129,7 @@ export default {
       }
 
       if (
-        await this.$refs.confirm.open(this.modal.title, this.modal.contents, {
+        await this.$refs.confirm.open("ユーザ作成", "", {
           color: "blue",
           width: 400,
         })
@@ -144,20 +142,31 @@ export default {
       }
     },
     entryUser: function () {
+      this.loading = true;
       let reqBody = {
         password: this.password,
         conf_password: this.conf_password,
       };
-
-      this.loading = true;
-      axios.post(url, reqBody).then((result) => {
-        if (result.data.result === "0") {
-          // ユーザ作成APIが正常終了した場合
-          this.api_data.api_result = result.data.result;
-          this.api_data.seq_login_id = result.data.seq_login_id;
+      axios.post(url, reqBody).then(
+        (result) => {
+          if (result.data.result === "0") {
+            // ユーザ作成APIが正常終了した場合
+            this.api_data.api_result = result.data.result;
+            this.api_data.seq_login_id = result.data.seq_login_id;
+          } else {
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
           this.loading = false;
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          this.loading = false;
+          console.log("userentry [error]=" + error);
+          return error;
         }
-      });
+      );
     },
   },
 };

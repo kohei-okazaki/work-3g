@@ -19,8 +19,11 @@ import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
 import jp.co.ha.business.db.crud.delete.RootUserRoleDetailMtDeleteService;
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
+import jp.co.ha.business.db.crud.update.RootLoginInfoUpdateService;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
@@ -46,6 +49,9 @@ public class UserEditApiController
     /** 管理者サイトユーザログイン情報検索サービス */
     @Autowired
     private RootLoginInfoSearchService rootLoginInfoSearchService;
+    /** 管理者サイトユーザログイン情報更新サービス */
+    @Autowired
+    private RootLoginInfoUpdateService rootLoginInfoUpdateService;
     /** 管理者サイトユーザ権限詳細マスタ削除サービス */
     @Autowired
     private RootUserRoleDetailMtDeleteService rootUserRoleDetailMtDeleteService;
@@ -111,6 +117,16 @@ public class UserEditApiController
                 mt.setSeqRootRoleMtId(roleMt.getSeqRootRoleMtId());
                 rootUserRoleDetailMtCreateService.create(mt);
             }
+
+            // 管理者サイトユーザログイン情報を更新
+            // 結合しているので権限情報以外はここから取得する
+            CompositeRootUserInfo userRole = userRoleList.get(0);
+            RootLoginInfo entity = new RootLoginInfo();
+            BeanUtil.copy(userRole, entity);
+            if (request.getRemarks() != null) {
+                entity.setRemarks(request.getRemarks());
+            }
+            rootLoginInfoUpdateService.update(entity);
 
             // 正常にDB登録出来た場合、コミット
             transactionManager.commit(status);
