@@ -55,9 +55,7 @@
             </v-btn>
           </v-card-actions>
           <ProcessFinishModal ref="finish" />
-          <v-overlay :value="loading">
-            <v-progress-circular indeterminate size="128"></v-progress-circular>
-          </v-overlay>
+          <AppLoading :loading="loading" />
         </v-card>
       </v-col>
     </v-row>
@@ -68,6 +66,7 @@
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
+import AppLoading from "~/components/AppLoading.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
@@ -77,6 +76,7 @@ export default {
     ProcessFinishModal,
     NewsTagPullDown,
     AppMessageError,
+    AppLoading,
   },
   data: function () {
     return {

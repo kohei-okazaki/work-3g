@@ -18,6 +18,9 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     /** 権限 */
     @JsonProperty("roles")
     private List<RootRoleType> roles;
+    /** 備考 */
+    @JsonProperty("remarks")
+    private String remarks;
 
     /**
      * rolesを返す
@@ -32,9 +35,29 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
      * rolesを設定する
      *
      * @param roles
+     *     権限
      */
     public void setRoles(List<RootRoleType> roles) {
         this.roles = roles;
+    }
+
+    /**
+     * remarksを返す
+     *
+     * @return remarks
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+
+    /**
+     * remarksを設定する
+     *
+     * @param remarks
+     *     備考
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
 }

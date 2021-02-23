@@ -14,6 +14,8 @@ export default {
   },
   methods: {
     logout: function () {
+      // vuex情報を削除
+      this.$store.commit("auth/clearToken");
       this.$auth.logout();
     },
   },

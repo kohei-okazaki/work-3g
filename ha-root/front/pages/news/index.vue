@@ -49,9 +49,7 @@
         </v-data-table>
         <ConfirmModal ref="confirm" />
         <ProcessFinishModal ref="finish" />
-        <v-overlay :value="loading">
-          <v-progress-circular indeterminate size="128"></v-progress-circular>
-        </v-overlay>
+        <AppLoading :loading="loading" />
       </v-col>
     </v-row>
   </div>
@@ -64,6 +62,7 @@ import ConfirmModal from "~/components/modal/ConfirmModal.vue";
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
+import AppLoading from "~/components/AppLoading.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "news";
@@ -76,6 +75,7 @@ export default {
     ProcessFinishModal,
     AppTitle,
     AppMessageError,
+    AppLoading,
   },
   data: function () {
     return {
@@ -143,17 +143,25 @@ export default {
   },
   methods: {
     getNews: function () {
+      this.loading = true;
       axios
         .get(url, {
           headers: { Authorization: this.$store.state.auth.token },
         })
         .then(
           (response) => {
-            this.news_list = response.data.news_list;
+            if (response.data.result === "0") {
+              this.news_list = response.data.news_list;
+            } else {
+              this.error.hasError = true;
+              this.error.message = response.data.error.message;
+            }
+            this.loading = false;
           },
           (error) => {
             this.error.hasError = true;
             this.error.message = error;
+            this.loading = false;
             console.log("[error]=" + error);
             return error;
           }
