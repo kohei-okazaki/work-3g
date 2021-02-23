@@ -35,7 +35,7 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-        <UserRetrieve ref="userRetrieve" />
+        <UserDataSave ref="userDataSave" />
         <AppLoading :loading="loading" />
       </v-col>
     </v-row>
@@ -45,7 +45,7 @@
 <script>
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
-import UserRetrieve from "~/components/user/UserRetrieve.vue";
+import UserDataSave from "~/components/user/UserDataSave.vue";
 
 export default {
   // ログイン前のレイアウトを適用
@@ -53,7 +53,7 @@ export default {
   components: {
     AppMessageError,
     AppLoading,
-    UserRetrieve,
+    UserDataSave,
   },
   data: function () {
     return {
@@ -109,12 +109,8 @@ export default {
               token: authorization,
             });
 
-            // ログイン成功時、ユーザ情報照会APIを実行
-            let retrieveResult = this.$refs.userRetrieve.retrieve(this.seqLoginId);
-            if (retrieveResult.hasError) {
-              this.error.hasError = true;
-              this.error.message = retrieveResult.message;
-            }
+            // ログイン成功時、storeにユーザ情報を保存
+            this.$refs.userDataSave.save(this.seqLoginId);
             this.loading = false;
             return response;
           },

@@ -143,17 +143,25 @@ export default {
   },
   methods: {
     getNews: function () {
+      this.loading = true;
       axios
         .get(url, {
           headers: { Authorization: this.$store.state.auth.token },
         })
         .then(
           (response) => {
-            this.news_list = response.data.news_list;
+            if (response.data.result === "0") {
+              this.news_list = response.data.news_list;
+            } else {
+              this.error.hasError = true;
+              this.error.message = response.data.error.message;
+            }
+            this.loading = false;
           },
           (error) => {
             this.error.hasError = true;
             this.error.message = error;
+            this.loading = false;
             console.log("[error]=" + error);
             return error;
           }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -60,6 +61,9 @@ public class UserRetrieveController
             return response;
         }
 
+        // 結合しているので権限情報以外はここから取得する
+        CompositeRootUserInfo entity = entityList.get(0);
+
         UserRetrieveApiResponse response = new UserRetrieveApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
         response.setSeqLoginId(seqLoginId);
@@ -69,6 +73,7 @@ public class UserRetrieveController
             role.setLabel(e.getRoleName());
             return role;
         }).collect(Collectors.toList()));
+        BeanUtil.copy(entity, response);
 
         return response;
     }

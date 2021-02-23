@@ -5,7 +5,10 @@
     <id column="SEQ_ROOT_LOGIN_INFO_ID" jdbcType="INTEGER" property="seqRootLoginInfoId" />
     <result column="SEQ_ROOT_USER_ROLE_MNG_MT_ID" jdbcType="INTEGER" property="seqRootUserRoleMngMtId" />
     <result column="SEQ_ROOT_USER_ROLE_DETAIL_MT_ID" jdbcType="INTEGER" property="seqRootUserRoleDetailMtId" />
+    <result column="DELETE_FLAG" jdbcType="VARCHAR" property="deleteFlag" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
     <result column="ROLE" jdbcType="VARCHAR" property="role" />
     <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
     <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
@@ -17,7 +20,10 @@
       LI.SEQ_ROOT_LOGIN_INFO_ID
       , URM.SEQ_ROOT_USER_ROLE_MNG_MT_ID
       , URD.SEQ_ROOT_USER_ROLE_DETAIL_MT_ID
+      , LI.DELETE_FLAG
       , LI.PASSWORD
+      , LI.PASSWORD_EXPIRE
+      , LI.REMARKS
       , LI.REG_DATE
       , LI.UPDATE_DATE
       , RM.ROLE_NAME

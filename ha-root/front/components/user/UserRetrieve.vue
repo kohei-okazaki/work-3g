@@ -5,36 +5,48 @@ const axios = require("axios");
 let retriveUrl = process.env.api_base_url + "user/";
 
 export default {
-  methods: {
-    retrieve: function (seqLoginId) {
-      console.log("★★★retrieve★★★");
-      let headers = { Authorization: this.$store.state.auth.token };
-      let apiResult = {
+  props: {
+    // RetrieveAPI対象のログインID
+    seqLoginId: String,
+  },
+  data: function () {
+    return {
+      apiResult: {
         result: false,
         message: null,
-      };
+        seqLoginId: null,
+        deleteFlag: false,
+        passwordExpire: null,
+        remarks: null,
+      },
+    };
+  },
+  mounted: function () {
+    this.retrieve(this.seqLoginId);
+    this.$emit("setRetrieveApiResult", this.apiResult);
+  },
+  methods: {
+    retrieve: function (seqLoginId) {
+      let headers = { Authorization: this.$store.state.auth.token };
       axios.get(retriveUrl + seqLoginId, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
-            // 正常終了した場合
-            // storeにユーザ情報を保存
-            let userData = {
-              roles: response.data.roles,
-            };
-            this.$store.commit("auth/setUserData", userData);
-            apiResult.result = true;
+            this.apiResult.result = true;
+            this.apiResult.seqLoginId = response.data.seq_login_id.toString();
+            this.apiResult.deleteFlag = response.data.delete_flag == "1";
+            this.apiResult.passwordExpire = response.data.password_expire;
+            this.apiResult.remarks = response.data.remarks;
           } else {
-            apiResult.result = false;
-            apiResult.message = response.data.error.message;
+            this.apiResult.result = false;
+            this.apiResult.message = response.data.error.message;
           }
         },
         (error) => {
-          apiResult.result = false;
-          apiResult.message = error;
+          this.apiResult.result = false;
+          this.apiResult.message = error.toString();
           console.log("retrieve [error]=" + error);
         }
       );
-      return apiResult;
     },
   },
 };
