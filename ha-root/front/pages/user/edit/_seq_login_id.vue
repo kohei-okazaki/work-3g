@@ -36,7 +36,8 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-        <AppConfirm ref="confirm"></AppConfirm>
+        <AppConfirm ref="confirm" />
+        <AppLoading :loading="loading" />
         <UserRetrieve ref="userRetrieve" />
       </v-col>
     </v-row>
@@ -48,6 +49,7 @@ import AppConfirm from "~/components/modal/ConfirmModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppMessageSuccess from "~/components/AppMessageSuccess.vue";
+import AppLoading from "~/components/AppLoading.vue";
 import UserRetrieve from "~/components/user/UserRetrieve.vue";
 
 const axios = require("axios");
@@ -60,6 +62,7 @@ export default {
     AppTitle,
     AppMessageError,
     AppMessageSuccess,
+    AppLoading,
     UserRetrieve,
   },
   data: function () {
@@ -150,6 +153,7 @@ export default {
       );
     },
     getRoles: function () {
+      this.loading = true;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
@@ -161,10 +165,12 @@ export default {
             this.error.hasError = true;
             this.error.message = result.data.error.message;
           }
+          this.loading = false;
         },
         (error) => {
           this.error.hasError = true;
           this.error.message = error;
+          this.loading = false;
           console.log("roles [error]=" + error);
           return error;
         }

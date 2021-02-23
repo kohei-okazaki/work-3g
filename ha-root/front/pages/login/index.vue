@@ -26,12 +26,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-              color="primary"
-              @click="submit"
-              :loading="loading"
-              :disabled="loading"
-            >
+            <v-btn color="primary" @click="submit">
               <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
             </v-btn>
             <v-spacer />
@@ -40,7 +35,8 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-        <UserRetrieve ref="user-retrieve" />
+        <UserRetrieve ref="userRetrieve" />
+        <AppLoading :loading="loading" />
       </v-col>
     </v-row>
   </div>
@@ -48,6 +44,7 @@
 
 <script>
 import AppMessageError from "~/components/AppMessageError.vue";
+import AppLoading from "~/components/AppLoading.vue";
 import UserRetrieve from "~/components/user/UserRetrieve.vue";
 
 export default {
@@ -55,6 +52,7 @@ export default {
   layout: "nonAuthLayout",
   components: {
     AppMessageError,
+    AppLoading,
     UserRetrieve,
   },
   data: function () {
@@ -90,9 +88,9 @@ export default {
       this.loading = true;
       if (!this.$refs.loginForm.validate()) {
         // 入力値エラーの場合
-        this.loading = false;
         return;
       }
+      this.loading = true;
       this.$auth
         .loginWith("local", {
           data: {
@@ -112,9 +110,7 @@ export default {
             });
 
             // ログイン成功時、ユーザ情報照会APIを実行
-            let retrieveResult = this.$refs.user-retrieve.retrieve(
-              this.seqLoginId
-            );
+            let retrieveResult = this.$refs.userRetrieve.retrieve(this.seqLoginId);
             if (retrieveResult.hasError) {
               this.error.hasError = true;
               this.error.message = retrieveResult.message;
