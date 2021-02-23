@@ -1,6 +1,7 @@
 package jp.co.ha.db.entity.composite;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jp.co.ha.common.db.annotation.Entity;
@@ -30,9 +31,15 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
     private Integer seqRootUserRoleMngMtId;
     /** 管理者サイトユーザ権限詳細マスタID */
     private Integer seqRootUserRoleDetailMtId;
+    /** 削除フラグ */
+    private String deleteFlag;
     /** パスワード */
     @Mask
     private String password;
+    /** 登録日時 */
+    private LocalDate passwordExpire;
+    /** 備考 */
+    private String remarks;
     /** ユーザ権限 */
     private String role;
     /** ユーザ権限名 */
@@ -81,6 +88,25 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
     }
 
     /**
+     * deleteFlagを返す
+     *
+     * @return deleteFlag
+     */
+    public String getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    /**
+     * deleteFlagを設定する
+     *
+     * @param deleteFlag
+     *     削除フラグ
+     */
+    public void setDeleteFlag(String deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
+    /**
      * passwordを返す
      *
      * @return password
@@ -97,6 +123,44 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * passwordExpireを返す
+     *
+     * @return passwordExpire
+     */
+    public LocalDate getPasswordExpire() {
+        return passwordExpire;
+    }
+
+    /**
+     * passwordExpireを設定する
+     *
+     * @param passwordExpire
+     *     パスワード有効期限
+     */
+    public void setPasswordExpire(LocalDate passwordExpire) {
+        this.passwordExpire = passwordExpire;
+    }
+
+    /**
+     * remarksを返す
+     *
+     * @return remarks
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+
+    /**
+     * remarksを設定する
+     *
+     * @param remarks
+     *     備考
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     /**

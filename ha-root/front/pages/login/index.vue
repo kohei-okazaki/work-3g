@@ -26,12 +26,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-              color="primary"
-              @click="submit"
-              :loading="loading"
-              :disabled="loading"
-            >
+            <v-btn color="primary" @click="submit">
               <v-icon>mdi-account-arrow-right</v-icon>&ensp;ログイン
             </v-btn>
             <v-spacer />
@@ -40,7 +35,8 @@
             </v-btn>
           </v-card-actions>
         </v-card>
-        <UserRetrieve ref="user-retrieve" />
+        <UserDataSave ref="userDataSave" />
+        <AppLoading :loading="loading" />
       </v-col>
     </v-row>
   </div>
@@ -48,14 +44,16 @@
 
 <script>
 import AppMessageError from "~/components/AppMessageError.vue";
-import UserRetrieve from "~/components/user/UserRetrieve.vue";
+import AppLoading from "~/components/AppLoading.vue";
+import UserDataSave from "~/components/user/UserDataSave.vue";
 
 export default {
   // ログイン前のレイアウトを適用
   layout: "nonAuthLayout",
   components: {
     AppMessageError,
-    UserRetrieve,
+    AppLoading,
+    UserDataSave,
   },
   data: function () {
     return {
@@ -90,9 +88,9 @@ export default {
       this.loading = true;
       if (!this.$refs.loginForm.validate()) {
         // 入力値エラーの場合
-        this.loading = false;
         return;
       }
+      this.loading = true;
       this.$auth
         .loginWith("local", {
           data: {
@@ -111,14 +109,8 @@ export default {
               token: authorization,
             });
 
-            // ログイン成功時、ユーザ情報照会APIを実行
-            let retrieveResult = this.$refs.user-retrieve.retrieve(
-              this.seqLoginId
-            );
-            if (retrieveResult.hasError) {
-              this.error.hasError = true;
-              this.error.message = retrieveResult.message;
-            }
+            // ログイン成功時、storeにユーザ情報を保存
+            this.$refs.userDataSave.save(this.seqLoginId);
             this.loading = false;
             return response;
           },

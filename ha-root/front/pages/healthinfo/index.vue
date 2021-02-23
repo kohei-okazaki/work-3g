@@ -16,6 +16,7 @@
           :items="healthInfoList"
           :search="search"
         ></v-data-table>
+        <AppLoading :loading="loading" />
       </v-col>
     </v-row>
   </div>
@@ -24,6 +25,7 @@
 <script>
 import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
+import AppLoading from "~/components/AppLoading.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "healthinfo";
@@ -32,6 +34,7 @@ export default {
   components: {
     AppTitle,
     AppMessageError,
+    AppLoading,
   },
   data: function () {
     return {
@@ -39,6 +42,7 @@ export default {
         hasError: false,
         message: null,
       },
+      loading: false,
       isRefShow: false,
       search: "",
       healthInfoList: [],
@@ -102,6 +106,7 @@ export default {
       this.isRefShow = false;
     },
     getHealthInfoList: function () {
+      this.loading = true;
       // 保存済のAPIトークンを取得
       let headers = {
         Authorization: this.$store.state.auth.token,
@@ -114,10 +119,12 @@ export default {
             this.error.hasError = true;
             this.error.message = response.data.error.message;
           }
+          this.loading = false;
         },
         (error) => {
           this.error.hasError = true;
           this.error.message = error;
+          this.loading = false;
           console.log("healthinfo [error]=" + error);
           return error;
         }
