@@ -32,6 +32,24 @@
       <div class="subheading font-weight-light grey--text">
         {{ text }}
       </div>
+      <br />
+      <v-row>
+        <v-col align="left"
+          ><v-btn text @click="subMonth"
+            ><v-icon>mdi-arrow-left-circle</v-icon>前月</v-btn
+          ></v-col
+        >
+        <v-col align="center">
+          <div class="date">
+            <b>{{ viewDate }}</b>
+          </div>
+        </v-col>
+        <v-col align="right"
+          ><v-btn text @click="addMonth"
+            >翌月<v-icon>mdi-arrow-right-circle</v-icon></v-btn
+          ></v-col
+        >
+      </v-row>
       <v-divider class="my-2"></v-divider>
       <div class="pushable" @click="getGraph">
         <v-icon class="mr-2" small>mdi-reload</v-icon>
@@ -53,9 +71,46 @@ export default {
     text: String,
     color: String,
   },
+  data: function () {
+    return {
+      date: new Date(),
+      viewDate: "",
+    };
+  },
   methods: {
     getGraph: function () {
-      this.$emit("get-graph");
+      var y = this.date.getFullYear();
+      var m = ("00" + (this.date.getMonth() + 1)).slice(-2);
+      this.$emit("get-graph", y + m);
+    },
+    subMonth: function () {
+      this.date.setMonth(this.date.getMonth() - 1);
+      var y = this.date.getFullYear();
+      var m = ("00" + (this.date.getMonth() + 1)).slice(-2);
+      this.viewDate = y + "/" + m;
+    },
+    addMonth: function () {
+      this.date.setMonth(this.date.getMonth() + 1);
+      var y = this.date.getFullYear();
+      var m = ("00" + (this.date.getMonth() + 1)).slice(-2);
+      this.viewDate = y + "/" + m;
+    },
+  },
+  computed: {
+    titleDate: function () {
+      var y = this.date.getFullYear();
+      var m = ("00" + (this.date.getMonth() + 1)).slice(-2);
+      return y + "/" + m;
+    },
+  },
+  watch: {
+    viewDate: {
+      immediate: true,
+      handler: function () {
+        var y = this.date.getFullYear();
+        var m = ("00" + (this.date.getMonth() + 1)).slice(-2);
+        this.viewDate = y + "/" + m;
+      },
     },
   },
 };
@@ -65,5 +120,8 @@ export default {
 .v-sheet--offset {
   top: -24px;
   position: relative;
+}
+.date {
+  margin-top: 7px;
 }
 </style>

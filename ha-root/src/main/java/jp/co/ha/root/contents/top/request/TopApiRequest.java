@@ -1,6 +1,6 @@
 package jp.co.ha.root.contents.top.request;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.root.base.BaseRootApiRequest;
 import jp.co.ha.web.form.BaseApiRequest;
@@ -13,14 +13,15 @@ import jp.co.ha.web.form.BaseApiRequest;
 public class TopApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
     /** 対象年月 */
-    private LocalDate date;
+    @JsonProperty("date")
+    private String date;
 
     /**
      * dateを返す
      *
      * @return date
      */
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -30,7 +31,7 @@ public class TopApiRequest extends BaseRootApiRequest implements BaseApiRequest 
      * @param date
      *     対象年月
      */
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
