@@ -2,6 +2,8 @@ package jp.co.ha.web.interceptor;
 
 import java.lang.reflect.Method;
 import java.util.Enumeration;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.StringJoiner;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
         // MDCを設定する
         MDC.put("id", StringUtil.getRandamStr(20));
         if (!(handler instanceof HandlerMethod)) {
+            String s = request.getRequestURL().toString();
             LOG.info("[URI=" + request.getRequestURI()
                     + ",METHOD=" + request.getMethod()
                     + ",HEADER=" + getHeader(request) + "]"
@@ -52,6 +55,8 @@ public class RequestInterceptor extends BaseWebInterceptor {
             return true;
         }
         Method method = ((HandlerMethod) handler).getMethod();
+        String s = request.getRequestURL().toString();
+        Map<String, String[]> map = request.getParameterMap();
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
                 + "[URI=" + request.getRequestURI()
                 + ",METHOD=" + request.getMethod()
@@ -76,6 +81,23 @@ public class RequestInterceptor extends BaseWebInterceptor {
         LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName()
                 + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
 
+    }
+
+    /**
+     * 指定された{@linkplain HttpServletRequest}よりリクエストパラメータを取得する
+     *
+     * @param request
+     *     HttpServletRequest
+     * @return リクエストパラメータ
+     */
+    private String getParameter(HttpServletRequest request) {
+
+        StringJoiner sj = new StringJoiner(",");
+        for (Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+            String innerSj = new StringJoiner(",");
+        }
+
+        return sj.toString();
     }
 
     /**
