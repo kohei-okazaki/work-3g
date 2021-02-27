@@ -587,6 +587,9 @@ public class DateTimeUtil {
      */
     public static LocalDateTime toLocalDateTime(String strDate,
             DateFormatType formatType) {
+        if (strDate == null || formatType == null) {
+            return null;
+        }
         DateTimeFormatter dtf = DateTimeFormatter
                 .ofPattern(formatType.getValue())
                 .withLocale(Locale.JAPANESE)
@@ -604,6 +607,9 @@ public class DateTimeUtil {
      * @return {@linkplain LocalDate}型の日付
      */
     public static LocalDate toLocalDate(String strDate, DateFormatType formatType) {
+        if (strDate == null || formatType == null) {
+            return null;
+        }
         DateTimeFormatter dtf = DateTimeFormatter
                 .ofPattern(formatType.getValue())
                 .withLocale(Locale.JAPANESE)
