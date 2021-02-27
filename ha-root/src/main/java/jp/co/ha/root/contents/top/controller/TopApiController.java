@@ -55,24 +55,21 @@ public class TopApiController
 
         LocalDate targetDate = DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         LocalDateTime from = LocalDateTime.of(targetDate.getYear(),
-                targetDate.getMonthValue(),
-                1, 0, 0, 0);
+                targetDate.getMonthValue(), 1, 0, 0, 0);
         LocalDateTime to = LocalDateTime.of(targetDate.getYear(),
                 targetDate.getMonthValue(),
                 DateTimeUtil.getLastDayOfMonth(targetDate), 23, 59, 59);
 
         TopApiResponse response = new TopApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
-        response.setAccountRegGraphList(accountSearchService.findMonthly(from,
-                to)
+        response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
                     TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
                     BeanUtil.copy(e, graph);
                     return graph;
                 }).collect(Collectors.toList()));
-        response.setHealthInfoRegGraphList(healthInfoSearchService
-                .findMonthly(from, to)
+        response.setHealthInfoRegGraphList(healthInfoSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
                     TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
@@ -95,16 +92,14 @@ public class TopApiController
 
         LocalDate targetDate = DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         LocalDateTime from = LocalDateTime.of(targetDate.getYear(),
-                targetDate.getMonthValue(),
-                1, 0, 0, 0);
+                targetDate.getMonthValue(), 1, 0, 0, 0);
         LocalDateTime to = LocalDateTime.of(targetDate.getYear(),
                 targetDate.getMonthValue(),
                 DateTimeUtil.getLastDayOfMonth(targetDate), 23, 59, 59);
 
         TopApiResponse response = new TopApiResponse();
         response.setRootApiResult(RootApiResult.SUCCESS);
-        response.setHealthInfoRegGraphList(healthInfoSearchService
-                .findMonthly(from, to)
+        response.setHealthInfoRegGraphList(healthInfoSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
                     TopApiResponse.RegGraph graph = new TopApiResponse.RegGraph();
@@ -127,8 +122,7 @@ public class TopApiController
 
         LocalDate targetDate = DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         LocalDateTime from = LocalDateTime.of(targetDate.getYear(),
-                targetDate.getMonthValue(),
-                1, 0, 0, 0);
+                targetDate.getMonthValue(), 1, 0, 0, 0);
         LocalDateTime to = LocalDateTime.of(targetDate.getYear(),
                 targetDate.getMonthValue(),
                 DateTimeUtil.getLastDayOfMonth(targetDate), 23, 59, 59);
