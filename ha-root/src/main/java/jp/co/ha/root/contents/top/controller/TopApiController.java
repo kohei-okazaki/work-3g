@@ -2,12 +2,17 @@ package jp.co.ha.root.contents.top.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -42,7 +47,11 @@ public class TopApiController
      * @return Top情報取得APIレスポンス
      */
     @GetMapping(value = "top", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public TopApiResponse top(TopApiRequest request) {
+    public TopApiResponse top(@RequestParam Map<String, String> request) {
+
+        TopApiRequest apiRequest = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .convertValue(request, TopApiRequest.class);
 
         LocalDate targetDate = DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         LocalDateTime from = LocalDateTime.of(targetDate.getYear(),
@@ -82,7 +91,7 @@ public class TopApiController
      * @return Top情報取得APIレスポンス
      */
     @GetMapping(value = "top/healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public TopApiResponse healthinfo(TopApiRequest request) {
+    public TopApiResponse healthinfo(@RequestParam Map<String, String> request) {
 
         LocalDate targetDate = DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         LocalDateTime from = LocalDateTime.of(targetDate.getYear(),
@@ -114,7 +123,7 @@ public class TopApiController
      * @return Top情報取得APIレスポンス
      */
     @GetMapping(value = "top/account", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public TopApiResponse account(TopApiRequest request) {
+    public TopApiResponse account(@RequestParam Map<String, String> request) {
 
         LocalDate targetDate = DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         LocalDateTime from = LocalDateTime.of(targetDate.getYear(),

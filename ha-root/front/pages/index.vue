@@ -8,8 +8,8 @@
           :error="error"
           :labels="accountLabels"
           :values="accountValues"
-          title="今月のユーザ登録者数"
-          text="今月の全ユーザの登録数"
+          title="ユーザ登録者数"
+          text="下記年月に登録した全ユーザ数"
           color="teal"
           @get-graph="getAccountGraph"
         />
@@ -19,9 +19,9 @@
           :error="error"
           :labels="healthInfoLabels"
           :values="healthInfoValues"
+          title="健康情報登録者数"
+          text="下記年月に登録した全ユーザの健康情報登録情報数"
           color="cyan"
-          title="今月の健康情報登録者数"
-          text="今月の全ユーザの健康情報登録情報の登録数"
           @get-graph="getHealthInfoGraph"
         />
       </v-col>
@@ -56,11 +56,12 @@ export default {
     };
   },
   methods: {
-    getGraph: function () {
+    getGraph: function (d) {
+      let param = d == null ? "" : "?date=" + d;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      axios.get(url, { headers }).then(
+      axios.get(url + param, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
             this.healthInfoLabels = response.data.health_info_reg_graph_list.map(
@@ -89,11 +90,12 @@ export default {
         }
       );
     },
-    getHealthInfoGraph: function () {
+    getHealthInfoGraph: function (d) {
+      let param = d == null ? "" : "?date=" + d;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      axios.get(url + "/healthinfo", { headers }).then(
+      axios.get(url + "/healthinfo" + param, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
             this.healthInfoLabels = response.data.health_info_reg_graph_list.map(
@@ -116,11 +118,12 @@ export default {
         }
       );
     },
-    getAccountGraph: function () {
+    getAccountGraph: function (d) {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      axios.get(url + "/account", { headers }).then(
+      let param = d == null ? "" : "?date=" + d;
+      axios.get(url + "/account" + param, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
             this.accountLabels = response.data.account_reg_graph_list.map(
