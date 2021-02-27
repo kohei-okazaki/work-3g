@@ -2,7 +2,6 @@ package jp.co.ha.web.interceptor;
 
 import java.lang.reflect.Method;
 import java.util.Enumeration;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringJoiner;
 
@@ -10,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.method.HandlerMethod;
 
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
@@ -30,9 +29,9 @@ public class RequestInterceptor extends BaseWebInterceptor {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(RequestInterceptor.class);
 
-    /** ハッシュ生成関数 */
+    /** SHA-256ハッシュ化 */
+    @Sha256
     @Autowired
-    @Qualifier("sha256HashEncoder")
     private HashEncoder hashEncoder;
 
     @Override
@@ -47,18 +46,15 @@ public class RequestInterceptor extends BaseWebInterceptor {
         // MDCを設定する
         MDC.put("id", StringUtil.getRandamStr(20));
         if (!(handler instanceof HandlerMethod)) {
-            String s = request.getRequestURL().toString();
-            LOG.info("[URI=" + request.getRequestURI()
+            LOG.info("[URI=" + request.getRequestURI() + "?" + getParameter(request)
                     + ",METHOD=" + request.getMethod()
                     + ",HEADER=" + getHeader(request) + "]"
                     + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
             return true;
         }
         Method method = ((HandlerMethod) handler).getMethod();
-        String s = request.getRequestURL().toString();
-        Map<String, String[]> map = request.getParameterMap();
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
-                + "[URI=" + request.getRequestURI()
+                + "[URI=" + request.getRequestURI() + "?" + getParameter(request)
                 + ",METHOD=" + request.getMethod()
                 + ",HEADER=" + getHeader(request) + "]"
                 + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
@@ -92,11 +88,14 @@ public class RequestInterceptor extends BaseWebInterceptor {
      */
     private String getParameter(HttpServletRequest request) {
 
-        StringJoiner sj = new StringJoiner(",");
+        StringJoiner sj = new StringJoiner("&");
         for (Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
-            String innerSj = new StringJoiner(",");
+            StringJoiner innerSj = new StringJoiner(",");
+            for (String s : entry.getValue()) {
+                innerSj.add(s);
+            }
+            sj.add(entry.getKey() + "=" + innerSj.toString());
         }
-
         return sj.toString();
     }
 
