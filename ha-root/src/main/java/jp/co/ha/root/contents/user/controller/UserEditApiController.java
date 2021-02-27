@@ -20,9 +20,14 @@ import jp.co.ha.business.db.crud.delete.RootUserRoleDetailMtDeleteService;
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
 import jp.co.ha.business.db.crud.update.RootLoginInfoUpdateService;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
@@ -61,6 +66,10 @@ public class UserEditApiController
     /** 管理者サイト権限マスタ検索サービス */
     @Autowired
     private RootRoleMtSearchService rootRoleMtSearchService;
+    /** SHA-256ハッシュ化 */
+    @Sha256
+    @Autowired
+    private HashEncoder hashEncoder;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -121,12 +130,7 @@ public class UserEditApiController
             // 管理者サイトユーザログイン情報を更新
             // 結合しているので権限情報以外はここから取得する
             CompositeRootUserInfo userRole = userRoleList.get(0);
-            RootLoginInfo entity = new RootLoginInfo();
-            BeanUtil.copy(userRole, entity);
-            if (request.getRemarks() != null) {
-                entity.setRemarks(request.getRemarks());
-            }
-            rootLoginInfoUpdateService.update(entity);
+            updateRootLoginInfo(userRole, request);
 
             // 正常にDB登録出来た場合、コミット
             transactionManager.commit(status);
@@ -162,5 +166,29 @@ public class UserEditApiController
         errorData.setMessage(message);
         response.setErrorData(errorData);
         return response;
+    }
+
+    /**
+     * 管理者サイト用ログイン情報を更新する
+     *
+     * @param beforeData
+     *     更新前データ
+     * @param request
+     *     ユーザ編集APIリクエスト
+     * @throws BaseException
+     *     パスワードの更新に失敗した場合
+     */
+    private void updateRootLoginInfo(CompositeRootUserInfo beforeData,
+            UserEditApiRequest request) throws BaseException {
+
+        RootLoginInfo entity = new RootLoginInfo();
+        BeanUtil.copy(beforeData, entity);
+        BeanUtil.copy(request, entity);
+        entity.setPasswordExpire(DateTimeUtil.toLocalDate(request.getPasswordExpire(),
+                DateFormatType.YYYYMMDD_STRICT));
+        if (request.getPassword() != null) {
+            entity.setPassword(hashEncoder.encode(request.getPassword(), ""));
+        }
+        rootLoginInfoUpdateService.update(entity);
     }
 }

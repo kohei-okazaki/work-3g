@@ -183,6 +183,8 @@ export default {
       let reqBody = {
         roles: this.editUserForm.roles,
         remarks: this.editUserForm.remarks,
+        password: this.editUserForm.password,
+        password_expire: this.editUserForm.passwordExpire.replaceAll("-", "/"),
       };
       axios.put(reqUrl, reqBody, { headers }).then(
         (result) => {
