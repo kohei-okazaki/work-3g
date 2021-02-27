@@ -18,6 +18,9 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     /** 権限 */
     @JsonProperty("roles")
     private List<RootRoleType> roles;
+    /** 削除フラグ */
+    @JsonProperty("delete_flag")
+    private boolean deleteFlag;
     /** パスワード */
     @JsonProperty("password")
     private String password;
@@ -45,6 +48,25 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
      */
     public void setRoles(List<RootRoleType> roles) {
         this.roles = roles;
+    }
+
+    /**
+     * deleteFlagを返す
+     *
+     * @return deleteFlag
+     */
+    public boolean isDeleteFlag() {
+        return deleteFlag;
+    }
+
+    /**
+     * deleteFlagを設定する
+     *
+     * @param deleteFlag
+     *     削除フラグ
+     */
+    public void setDeleteFlag(boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     /**

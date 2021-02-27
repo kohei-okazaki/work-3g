@@ -25,6 +25,7 @@ import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -188,6 +189,9 @@ public class UserEditApiController
                 DateFormatType.YYYYMMDD_STRICT));
         if (request.getPassword() != null) {
             entity.setPassword(hashEncoder.encode(request.getPassword(), ""));
+        }
+        if (request.isDeleteFlag()) {
+            entity.setDeleteFlag(CommonFlag.TRUE.getValue());
         }
         rootLoginInfoUpdateService.update(entity);
     }
