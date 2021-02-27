@@ -34,7 +34,7 @@ export default {
             this.apiResult.result = true;
             this.apiResult.seqLoginId = response.data.seq_login_id.toString();
             this.apiResult.deleteFlag = response.data.delete_flag == "1";
-            this.apiResult.passwordExpire = response.data.password_expire;
+            this.apiResult.passwordExpire = response.data.password_expire.replaceAll("/", "-");
             this.apiResult.remarks = response.data.remarks;
           } else {
             this.apiResult.result = false;

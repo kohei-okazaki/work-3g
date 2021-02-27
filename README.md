@@ -28,7 +28,7 @@ Batch処理を定義したプロジェクト
 windows, linuxでそれぞれbatとshを用意  
 
 * ### ha-business  
-api, dashboard, batchで共通的に使うbusinessロジックをまとめたプロジェクト  
+api, dashboard, batch, rootで共通的に使うbusinessロジックをまとめたプロジェクト  
 
 * ### ha-common  
 共通処理を定義したプロジェクト  
@@ -44,7 +44,7 @@ Tableに対応したEntityとMapperのみを定義したプロジェクト
 健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装) 
 
 * ### ha-pom  
-api, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+api, batch, business, common, tool, dashboard, web, rootで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
 * ### ha-root  
 健康管理アプリの管理者用サイト    

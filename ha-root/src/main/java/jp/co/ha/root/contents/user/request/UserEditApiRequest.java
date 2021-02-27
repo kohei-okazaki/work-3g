@@ -18,6 +18,15 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     /** 権限 */
     @JsonProperty("roles")
     private List<RootRoleType> roles;
+    /** 削除フラグ */
+    @JsonProperty("delete_flag")
+    private boolean deleteFlag;
+    /** パスワード */
+    @JsonProperty("password")
+    private String password;
+    /** パスワード有効期限 */
+    @JsonProperty("password_expire")
+    private String passwordExpire;
     /** 備考 */
     @JsonProperty("remarks")
     private String remarks;
@@ -39,6 +48,63 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
      */
     public void setRoles(List<RootRoleType> roles) {
         this.roles = roles;
+    }
+
+    /**
+     * deleteFlagを返す
+     *
+     * @return deleteFlag
+     */
+    public boolean isDeleteFlag() {
+        return deleteFlag;
+    }
+
+    /**
+     * deleteFlagを設定する
+     *
+     * @param deleteFlag
+     *     削除フラグ
+     */
+    public void setDeleteFlag(boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
+    /**
+     * passwordを返す
+     *
+     * @return password
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * passwordを設定する
+     *
+     * @param password
+     *     パスワード
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * passwordExpireを返す
+     *
+     * @return passwordExpire
+     */
+    public String getPasswordExpire() {
+        return passwordExpire;
+    }
+
+    /**
+     * passwordExpireを設定する
+     *
+     * @param passwordExpire
+     *     パスワード有効期限
+     */
+    public void setPasswordExpire(String passwordExpire) {
+        this.passwordExpire = passwordExpire;
     }
 
     /**

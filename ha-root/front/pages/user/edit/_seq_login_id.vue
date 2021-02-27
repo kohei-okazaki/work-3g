@@ -182,7 +182,10 @@ export default {
       let reqUrl = url + this.editUserForm.seqLoginId;
       let reqBody = {
         roles: this.editUserForm.roles,
+        delete_flag: this.editUserForm.deleteFlag,
         remarks: this.editUserForm.remarks,
+        password: this.editUserForm.password,
+        password_expire: this.editUserForm.passwordExpire.replaceAll("-", "/"),
       };
       axios.put(reqUrl, reqBody, { headers }).then(
         (result) => {
