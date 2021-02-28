@@ -17,6 +17,7 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
 import jp.co.ha.common.system.SystemMemory;
+import jp.co.ha.common.util.MapUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -46,7 +47,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
         // MDCを設定する
         MDC.put("id", StringUtil.getRandamStr(20));
         if (!(handler instanceof HandlerMethod)) {
-            LOG.info("[URI=" + request.getRequestURI() + "?" + getParameter(request)
+            LOG.info("[URI=" + request.getRequestURI() + getParameter(request)
                     + ",METHOD=" + request.getMethod()
                     + ",HEADER=" + getHeader(request) + "]"
                     + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
@@ -54,7 +55,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
         }
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
-                + "[URI=" + request.getRequestURI() + "?" + getParameter(request)
+                + "[URI=" + request.getRequestURI() + getParameter(request)
                 + ",METHOD=" + request.getMethod()
                 + ",HEADER=" + getHeader(request) + "]"
                 + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
@@ -88,6 +89,10 @@ public class RequestInterceptor extends BaseWebInterceptor {
      */
     private String getParameter(HttpServletRequest request) {
 
+        if (MapUtil.isEmpty(request.getParameterMap())) {
+            return "";
+        }
+
         StringJoiner sj = new StringJoiner("&");
         for (Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
             StringJoiner innerSj = new StringJoiner(",");
@@ -96,7 +101,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
             }
             sj.add(entry.getKey() + "=" + innerSj.toString());
         }
-        return sj.toString();
+        return "?" + sj.toString();
     }
 
     /**
