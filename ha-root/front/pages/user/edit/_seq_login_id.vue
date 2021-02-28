@@ -66,7 +66,7 @@
             <v-card-title>権限</v-card-title>
             <v-card-text>
               <v-checkbox
-                v-model="editUserForm.roles"
+                v-model="userRoles"
                 v-for="(role, i) in roles"
                 :key="i"
                 :label="role.label"
@@ -138,8 +138,9 @@ export default {
         password: null,
         passwordExpire: null,
         remarks: null,
-        roles: [],
       },
+      // editUserFormの中で定義すると#setRetrieveApiResultの影響のようで権限を一気に2つ以上消せない状態になる
+      userRoles: [],
       roles: [],
     };
   },
@@ -163,10 +164,7 @@ export default {
       }
     },
     validate: function () {
-      if (
-        this.editUserForm.roles == null ||
-        this.editUserForm.roles.length == 0
-      ) {
+      if (this.userRoles == null || this.userRoles.length == 0) {
         // 権限配列がnullまたは未指定の場合、エラー
         return {
           message: "権限が未指定です",
@@ -181,7 +179,7 @@ export default {
       };
       let reqUrl = url + this.editUserForm.seqLoginId;
       let reqBody = {
-        roles: this.editUserForm.roles,
+        roles: this.userRoles,
         delete_flag: this.editUserForm.deleteFlag,
         remarks: this.editUserForm.remarks,
         password: this.editUserForm.password,
@@ -247,9 +245,7 @@ export default {
     // 権限リスト
     this.getRoles();
     // ユーザ権限
-    this.editUserForm.roles = this.$store.state.auth.roles.map(
-      (item) => item.value
-    );
+    this.userRoles = this.$store.state.auth.roles.map((item) => item.value);
   },
 };
 </script>

@@ -723,7 +723,7 @@ public class DateTimeUtil {
         YYYYMM_STRICT("uuuu/MM"),
         /** YYYYMM */
         YYYYMM_NOSEP("yyyyMM"),
-        /** uuuu/MM */
+        /** uuuuMM */
         YYYYMM_NOSEP_STRICT("uuuuMM"),
         /** YYYY/MM/DD */
         YYYYMMDD("yyyy/MM/dd"),

@@ -29,7 +29,6 @@ import jp.co.ha.db.entity.RootUserRoleMngMt;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.user.request.UserEntryApiRequest;
 import jp.co.ha.root.contents.user.response.UserEntryApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 import jp.co.ha.root.type.RootRoleType;
 
 /**
@@ -133,11 +132,15 @@ public class UserEntryApiController
             throw e;
         }
 
-        UserEntryApiResponse response = new UserEntryApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        UserEntryApiResponse response = getSuccessResponse();
         response.setSeqLoginId(seqLoginId);
 
         return response;
+    }
+
+    @Override
+    protected UserEntryApiResponse getResponse() {
+        return new UserEntryApiResponse();
     }
 
 }

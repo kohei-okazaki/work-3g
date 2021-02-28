@@ -13,7 +13,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.api.request.ApiDataListApiRequest;
 import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * API通信情報一覧取得APIコントローラ
@@ -45,10 +44,14 @@ public class ApiDataListApiController
                     return response;
                 }).collect(Collectors.toList());
 
-        ApiDataListApiResponse response = new ApiDataListApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        ApiDataListApiResponse response = getSuccessResponse();
         response.setApiDataList(apiDataList);
 
         return response;
+    }
+
+    @Override
+    protected ApiDataListApiResponse getResponse() {
+        return new ApiDataListApiResponse();
     }
 }
