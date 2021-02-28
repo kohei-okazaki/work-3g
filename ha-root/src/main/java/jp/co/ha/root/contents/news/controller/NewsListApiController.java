@@ -20,7 +20,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.news.request.NewsListApiRequest;
 import jp.co.ha.root.contents.news.response.NewsListApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * お知らせ情報一覧取得APIコントローラ
@@ -68,11 +67,15 @@ public class NewsListApiController
                         .reversed())
                 .collect(Collectors.toList());
 
-        NewsListApiResponse response = new NewsListApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        NewsListApiResponse response = getSuccessResponse();
         response.setNewsDataResponseList(newsResponseList);
 
         return response;
+    }
+
+    @Override
+    protected NewsListApiResponse getResponse() {
+        return new NewsListApiResponse();
     }
 
 }

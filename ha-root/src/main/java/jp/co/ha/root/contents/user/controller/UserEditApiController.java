@@ -34,10 +34,8 @@ import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
 import jp.co.ha.root.contents.user.request.UserEditApiRequest;
 import jp.co.ha.root.contents.user.response.UserEditApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * ユーザ編集APIコントローラ
@@ -94,6 +92,10 @@ public class UserEditApiController
             @RequestBody UserEditApiRequest request) {
         // TODO 要実装
 
+        if (id == null || !id.isPresent()) {
+            return getErrorResponse("ID is required");
+        }
+
         Integer seqLoginId = Integer.valueOf(id.get());
 
         // トランザクション開始
@@ -147,26 +149,13 @@ public class UserEditApiController
             return getErrorResponse("data update error");
         }
 
-        UserEditApiResponse response = new UserEditApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
-
+        UserEditApiResponse response = getSuccessResponse();
         return response;
     }
 
-    /**
-     * エラーレスポンスを返す
-     *
-     * @param message
-     *     エラーメッセージ
-     * @return エラーレスポンス
-     */
-    private UserEditApiResponse getErrorResponse(String message) {
-        UserEditApiResponse response = new UserEditApiResponse();
-        response.setRootApiResult(RootApiResult.FAILURE);
-        ErrorData errorData = new ErrorData();
-        errorData.setMessage(message);
-        response.setErrorData(errorData);
-        return response;
+    @Override
+    protected UserEditApiResponse getResponse() {
+        return new UserEditApiResponse();
     }
 
     /**
@@ -195,4 +184,5 @@ public class UserEditApiController
         }
         rootLoginInfoUpdateService.update(entity);
     }
+
 }

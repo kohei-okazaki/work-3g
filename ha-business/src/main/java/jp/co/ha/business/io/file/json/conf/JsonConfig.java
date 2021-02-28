@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.api.healthinfo.type.TestMode.TestModeDeserializer;
@@ -30,6 +31,7 @@ public class JsonConfig {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(getDeserializeModule());
         mapper.registerModule(getSerializeModule());
+        mapper.registerModule(new JavaTimeModule());
         return mapper;
     }
 

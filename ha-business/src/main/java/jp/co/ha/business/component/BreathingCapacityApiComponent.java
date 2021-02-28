@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.BreathingCapacityCalcApi;
-import jp.co.ha.business.api.node.TokenApi;
 import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
-import jp.co.ha.business.api.node.request.TokenRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
 import jp.co.ha.business.api.node.response.TokenResponse;
@@ -26,14 +24,14 @@ import jp.co.ha.web.api.ApiConnectInfo;
  * @version 1.0.0
  */
 @Component
-public class BreathingCapacityComponent {
+public class BreathingCapacityApiComponent {
 
     /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** トークン発行API */
+    /** トークン発行APIComponent */
     @Autowired
-    private TokenApi tokenApi;
+    private TokenApiComponent tokenApiComponent;
     /** 肺活量計算API */
     @Autowired
     private BreathingCapacityCalcApi breathingCapacityCalcApi;
@@ -58,50 +56,14 @@ public class BreathingCapacityComponent {
         // API通信情報.トランザクションIDを採番
         Integer transactionId = apiCommunicationDataComponent.getTransactionId();
 
-        TokenResponse tokenApiResponse = callTokenApi(seqUserId, transactionId);
+        TokenResponse tokenApiResponse = tokenApiComponent.callTokenApi(seqUserId,
+                transactionId);
 
         BreathingCapacityCalcResponse apiResponse = callBreathingCapacityCalcApi(dto,
                 tokenApiResponse.getToken(), seqUserId, transactionId);
         BeanUtil.copy(apiResponse.getBreathingCapacityCalcResult(), dto);
 
         return dto;
-    }
-
-    /**
-     * Token発行APIを呼び出す
-     *
-     * @param seqUserId
-     *     ユーザID
-     * @param transactionId
-     *     トランザクションID
-     * @return Token発行APIのレスポンス
-     * @throws BaseException
-     *     API通信に失敗した場合
-     */
-    private TokenResponse callTokenApi(Integer seqUserId, Integer transactionId)
-            throws BaseException {
-
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(tokenApi.getApiName(), seqUserId, transactionId);
-
-        TokenRequest request = new TokenRequest();
-        request.setSeqUserId(seqUserId);
-        ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
-                        + NodeApiType.TOKEN.getValue());
-        TokenResponse response = tokenApi.callApi(request, connectInfo);
-
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, connectInfo, response);
-
-        if (Result.SUCCESS != response.getResult()) {
-            // Token発行APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.TOKEN_API_CONNECT_ERROR,
-                    response.getDetail());
-        }
-
-        return response;
     }
 
     /**
