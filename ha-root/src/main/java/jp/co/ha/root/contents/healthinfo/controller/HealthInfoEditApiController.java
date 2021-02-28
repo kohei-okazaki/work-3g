@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
+import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
+import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.healthinfo.request.HealthInfoEditApiRequest;
@@ -35,9 +38,9 @@ public class HealthInfoEditApiController extends
     /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** 基礎健康情報計算API */
+    /** 基礎健康情報計算APIComponent */
     @Autowired
-    private BasicHealthInfoCalcApi basicHealthInfoCalcApi;
+    private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
     /** 健康情報更新サービス */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
@@ -64,6 +67,13 @@ public class HealthInfoEditApiController extends
         // トークン発行API実施
         TokenResponse tokenResponse = tokenApiComponent.callTokenApi(
                 request.getSeqUserId(), transactionId);
+
+        // 基礎健康情報計算API実施
+        BasicHealthInfoCalcRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcRequest();
+        BeanUtil.copy(request, basicHealthInfoCalcRequest);
+        BasicHealthInfoCalcResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+                .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
+                        tokenResponse.getToken(), request.getSeqUserId(), transactionId);
 
         HealthInfo healthInfo = new HealthInfo();
         healthInfoUpdateService.update(healthInfo);

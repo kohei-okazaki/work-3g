@@ -10,36 +10,28 @@ import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
-import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
-import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
 import jp.co.ha.business.api.node.response.TokenResponse;
-import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
-import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
-import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.web.api.ApiConnectInfo;
 import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
@@ -63,18 +55,12 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
-    /** API通信情報Component */
-    @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
     /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** 基礎健康情報計算API */
+    /** 基礎健康情報計算APIComponent */
     @Autowired
-    private BasicHealthInfoCalcApi basicHealthInfoCalcApi;
-    /** 健康情報関連プロパティ */
-    @Autowired
-    private HealthInfoProperties prop;
+    private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
 
     @Override
     public void checkRequest(HealthInfoRegistRequest request) throws BaseException {
@@ -91,27 +77,29 @@ public class HealthInfoRegistServiceImpl extends CommonService
         TokenResponse tokenResponse = tokenApiComponent.callTokenApi(
                 request.getSeqUserId(), request.getTransactionId());
 
+        BasicHealthInfoCalcRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcRequest();
+        BeanUtil.copy(request, basicHealthInfoCalcRequest);
+
         // 基礎健康情報計算API実施
-        BasicHealthInfoCalcResponse apiResponse = callBasicHealthInfoCalcApi(
-                request, tokenResponse.getToken(), request.getTransactionId());
+        BasicHealthInfoCalcResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+                .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
+                        tokenResponse.getToken(), request.getSeqUserId(),
+                        request.getTransactionId());
 
         // リクエストをEntityに変換
-        HealthInfo entity = toEntity(request, apiResponse.getBasicHealthInfo());
+        HealthInfo entity = toEntity(request,
+                basicHealthInfoCalcResponse.getBasicHealthInfo());
 
         // Entityの登録処理を行う
         healthInfoCreateService.create(entity);
 
-        {
-            BaseRestApiResponse.Account account = new BaseRestApiResponse.Account();
-            account.setSeqUserId(request.getSeqUserId());
-            response.setAccount(account);
-        }
+        BaseRestApiResponse.Account account = new BaseRestApiResponse.Account();
+        account.setSeqUserId(request.getSeqUserId());
+        response.setAccount(account);
 
-        {
-            HealthInfoRegistResponse.HealthInfo healthInfo = new HealthInfoRegistResponse.HealthInfo();
-            BeanUtil.copy(entity, healthInfo);
-            response.setHealthInfo(healthInfo);
-        }
+        HealthInfoRegistResponse.HealthInfo healthInfo = new HealthInfoRegistResponse.HealthInfo();
+        BeanUtil.copy(entity, healthInfo);
+        response.setHealthInfo(healthInfo);
 
     }
 
@@ -162,52 +150,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         return entity;
 
-    }
-
-    /**
-     * 基礎健康情報計算APIを呼び出す
-     *
-     * @param request
-     *     リクエスト情報
-     * @param token
-     *     トークン
-     * @param transactionId
-     *     トランザクションID
-     * @return 基礎健康情報計算APIレスポンス
-     * @throws BaseException
-     *     API通信に失敗した場合
-     */
-    private BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
-            HealthInfoRegistRequest request, String token, Integer transactionId)
-            throws BaseException {
-
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(basicHealthInfoCalcApi.getApiName(), request.getSeqUserId(),
-                        transactionId);
-
-        BasicHealthInfoCalcRequest apiRequest = new BasicHealthInfoCalcRequest();
-        BeanUtil.copy(request, apiRequest);
-
-        ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
-                        + NodeApiType.BASIC.getValue())
-                .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
-
-        BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
-                .callApi(apiRequest, connectInfo);
-
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, connectInfo,
-                apiResponse);
-
-        if (Result.SUCCESS != apiResponse.getResult()) {
-            // 基礎健康情報計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BASIC_API_CONNECT_ERROR,
-                    apiResponse.getDetail());
-        }
-
-        return apiResponse;
     }
 
 }
