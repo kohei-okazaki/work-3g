@@ -20,7 +20,6 @@ import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsEditApiRequest;
 import jp.co.ha.root.contents.news.response.NewsEditApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * お知らせ情報編集APIコントローラ
@@ -71,10 +70,14 @@ public class NewsEditApiController
         newsComponent.sendSlack(editData, "編集したお知らせ情報.json",
                 "お知らせ情報JSONを編集.");
 
-        NewsEditApiResponse response = new NewsEditApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        NewsEditApiResponse response = getSuccessResponse();
 
         return response;
+    }
+
+    @Override
+    protected NewsEditApiResponse getResponse() {
+        return new NewsEditApiResponse();
     }
 
 }

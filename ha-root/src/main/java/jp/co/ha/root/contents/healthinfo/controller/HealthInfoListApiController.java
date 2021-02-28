@@ -14,7 +14,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.healthinfo.request.HealthInfoListApiRequest;
 import jp.co.ha.root.contents.healthinfo.response.HealthInfoListApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * 健康情報一覧取得APIコントローラ
@@ -50,11 +49,15 @@ public class HealthInfoListApiController extends
                     return response;
                 }).collect(Collectors.toList());
 
-        HealthInfoListApiResponse response = new HealthInfoListApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        HealthInfoListApiResponse response = getSuccessResponse();
         response.setHealthInfoResponseList(healthInfoResponseList);
 
         return response;
+    }
+
+    @Override
+    protected HealthInfoListApiResponse getResponse() {
+        return new HealthInfoListApiResponse();
     }
 
     /**
@@ -114,4 +117,5 @@ public class HealthInfoListApiController extends
         }
         return status;
     }
+
 }

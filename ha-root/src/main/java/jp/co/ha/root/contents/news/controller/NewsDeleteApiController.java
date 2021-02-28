@@ -31,7 +31,6 @@ import jp.co.ha.common.type.Charset;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.news.request.NewsDeleteApiRequest;
 import jp.co.ha.root.contents.news.response.NewsDeleteApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * お知らせ情報削除APIコントローラ
@@ -83,11 +82,15 @@ public class NewsDeleteApiController
         slackApi.send(ContentType.ROOT,
                 "お知らせ情報ID=" + String.valueOf(deleteId) + "を削除しました");
 
-        NewsDeleteApiResponse response = new NewsDeleteApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        NewsDeleteApiResponse response = getSuccessResponse();
         response.setDeleteNewsId(deleteId);
 
         return response;
+    }
+
+    @Override
+    protected NewsDeleteApiResponse getResponse() {
+        return new NewsDeleteApiResponse();
     }
 
     /**

@@ -22,7 +22,6 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.top.request.TopApiRequest;
 import jp.co.ha.root.contents.top.response.TopApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * Top情報取得APIコントローラ
@@ -57,8 +56,7 @@ public class TopApiController
         LocalDateTime from = getFrom(apiRequest);
         LocalDateTime to = getTo(apiRequest);
 
-        TopApiResponse response = new TopApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        TopApiResponse response = getSuccessResponse();
         response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
@@ -91,8 +89,7 @@ public class TopApiController
         LocalDateTime from = getFrom(apiRequest);
         LocalDateTime to = getTo(apiRequest);
 
-        TopApiResponse response = new TopApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        TopApiResponse response = getSuccessResponse();
         response.setHealthInfoRegGraphList(healthInfoSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
@@ -118,8 +115,7 @@ public class TopApiController
         LocalDateTime from = getFrom(apiRequest);
         LocalDateTime to = getTo(apiRequest);
 
-        TopApiResponse response = new TopApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        TopApiResponse response = getSuccessResponse();
         response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
@@ -129,6 +125,11 @@ public class TopApiController
                 }).collect(Collectors.toList()));
 
         return response;
+    }
+
+    @Override
+    protected TopApiResponse getResponse() {
+        return new TopApiResponse();
     }
 
     /**
