@@ -16,7 +16,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
         implements BaseApiRequest {
 
     /** ユーザID */
-    @JsonProperty("seqUserId")
+    @JsonProperty("seq_user_id")
     private Integer seqUserId;
     /** 身長 */
     @JsonProperty("height")

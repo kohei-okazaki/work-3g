@@ -1,5 +1,6 @@
 package jp.co.ha.root.contents.healthinfo.controller;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,14 @@ import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
+import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
+import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.healthinfo.request.HealthInfoEditApiRequest;
@@ -41,6 +47,12 @@ public class HealthInfoEditApiController extends
     /** 基礎健康情報計算APIComponent */
     @Autowired
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
+    /** BMI範囲マスタ検索サービス */
+    @Autowired
+    private BmiRangeMtSearchService bmiRangeMtSearchService;
+    /** 健康情報検索サービス */
+    @Autowired
+    private HealthInfoSearchService healthInfoSearchService;
     /** 健康情報更新サービス */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
@@ -75,7 +87,17 @@ public class HealthInfoEditApiController extends
                 .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
                         tokenResponse.getToken(), request.getSeqUserId(), transactionId);
 
+        BigDecimal bmi = basicHealthInfoCalcResponse.getBasicHealthInfo().getBmi();
+        BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()
+                .filter(e -> e.getRangeMin().intValue() <= bmi.intValue()
+                        && bmi.intValue() < e.getRangeMax().intValue())
+                .findFirst()
+                .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
+                        "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
+
         HealthInfo healthInfo = new HealthInfo();
+        BeanUtil.copy(basicHealthInfoCalcResponse.getBasicHealthInfo(), healthInfo);
+        healthInfo.setSeqBmiRangeMtId(bmiRangeMt.getSeqBmiRangeMtId());
         healthInfoUpdateService.update(healthInfo);
 
         HealthInfoEditApiResponse response = getSuccessResponse();
