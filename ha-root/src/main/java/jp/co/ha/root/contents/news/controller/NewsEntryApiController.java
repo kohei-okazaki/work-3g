@@ -24,7 +24,6 @@ import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsEntryApiRequest;
 import jp.co.ha.root.contents.news.response.NewsEntryApiResponse;
 import jp.co.ha.root.contents.news.response.NewsListApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * お知らせ情報登録APIコントローラ
@@ -74,13 +73,17 @@ public class NewsEntryApiController
         newsComponent.sendSlack(entryData, "追加したお知らせ情報.json",
                 "お知らせ情報JSONを追加.");
 
-        NewsEntryApiResponse response = new NewsEntryApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        NewsEntryApiResponse response = getSuccessResponse();
         NewsListApiResponse.NewsDataResponse entryResponse = new NewsListApiResponse.NewsDataResponse();
         BeanUtil.copy(entryData, entryResponse);
         response.setNewsDataResponse(entryResponse);
 
         return response;
+    }
+
+    @Override
+    protected NewsEntryApiResponse getResponse() {
+        return new NewsEntryApiResponse();
     }
 
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.component.CalorieCalcComponent;
+import jp.co.ha.business.component.CalorieApiComponent;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
@@ -36,7 +36,7 @@ public class CalorieCalcController implements BaseWebController {
     private SessionComponent sessionComponent;
     /** カロリー計算Component */
     @Autowired
-    private CalorieCalcComponent calorieCalcComponent;
+    private CalorieApiComponent calorieCalcComponent;
 
     /**
      * Formを返す

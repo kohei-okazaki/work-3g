@@ -136,7 +136,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
                 .build();
 
         return searchService
-                .findByBetweenHealthInfoRegDate(from, to, selectOption);
+                .findBySeqUserIdBetweenHealthInfoRegDate(null, from, to, selectOption);
     }
 
     /**

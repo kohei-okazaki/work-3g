@@ -19,11 +19,11 @@ public interface HealthInfoSearchService {
      * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
      *
      * @param seqUserId
-     *     ユーザID
+     *     ユーザID(nullを指定した場合、ユーザIDをwhere句に含めない)
      * @param fromHealthInfoRegDate
-     *     YYYYMMDD
+     *     健康情報作成日時(開始)
      * @param toHealthInfoRegDate
-     *     YYYYMMDD
+     *     健康情報作成日時(終了)
      * @param selectOption
      *     {@linkplain SelectOption}
      * @return 健康情報リスト
@@ -38,8 +38,9 @@ public interface HealthInfoSearchService {
      * @param seqUserId
      *     ユーザID
      * @param fromHealthInfoRegDate
-     *     YYYYMMDD
+     *     健康情報作成日時(開始)
      * @param toHealthInfoRegDate
+     *     健康情報作成日時(終了)
      * @return 健康情報リストの件数
      */
     long countBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
@@ -93,20 +94,6 @@ public interface HealthInfoSearchService {
      * @return 健康情報リスト
      */
     List<HealthInfo> findBySeqUserId(Integer seqUserId, SelectOption selectOption);
-
-    /**
-     * 指定した開始日時から終了日時の間の健康情報リストを返す
-     *
-     * @param fromHealthInfoRegDate
-     *     開始日時
-     * @param toHealthInfoRegDate
-     *     終了日時
-     * @param selectOption
-     *     {@linkplain SelectOption}
-     * @return 健康情報リスト
-     */
-    List<HealthInfo> findByBetweenHealthInfoRegDate(LocalDateTime fromHealthInfoRegDate,
-            LocalDateTime toHealthInfoRegDate, SelectOption selectOption);
 
     /**
      * 指定された健康情報IDとユーザIDより健康情報とBMI範囲マスタの複合Entityを検索する

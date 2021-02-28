@@ -48,8 +48,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
+
         // ユーザID
-        criteria.andSeqUserIdEqualTo(seqUserId);
+        if (seqUserId != null) {
+            criteria.andSeqUserIdEqualTo(seqUserId);
+        }
         // 健康情報登録日時
         criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
         // ソート処理
@@ -143,23 +146,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         // 検索上限数
         example.setLimit(selectOption.getLimit());
 
-        return mapper.selectByExample(example);
-    }
-
-    @Select
-    @Override
-    @Transactional(readOnly = true)
-    public List<HealthInfo> findByBetweenHealthInfoRegDate(
-            LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
-            SelectOption selectOption) {
-
-        HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate,
-                toHealthInfoRegDate);
-
-        // ソート処理
-        example.setOrderByClause(selectOption.getOrderBy());
         return mapper.selectByExample(example);
     }
 

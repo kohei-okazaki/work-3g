@@ -15,11 +15,9 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
 import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse.Role;
 import jp.co.ha.root.contents.user.request.UserRetrieveApiRequest;
 import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse;
-import jp.co.ha.root.type.RootApiResult;
 
 /**
  * ユーザ情報取得APIコントローラ
@@ -53,19 +51,13 @@ public class UserRetrieveController
         List<CompositeRootUserInfo> entityList = searchService
                 .findCompositeUserById(seqLoginId);
         if (CollectionUtil.isEmpty(entityList)) {
-            UserRetrieveApiResponse response = new UserRetrieveApiResponse();
-            response.setRootApiResult(RootApiResult.FAILURE);
-            ErrorData error = new ErrorData();
-            error.setMessage("user data is not found");
-            response.setErrorData(error);
-            return response;
+            return getErrorResponse("user data is not found");
         }
 
         // 結合しているので権限情報以外はここから取得する
         CompositeRootUserInfo entity = entityList.get(0);
 
-        UserRetrieveApiResponse response = new UserRetrieveApiResponse();
-        response.setRootApiResult(RootApiResult.SUCCESS);
+        UserRetrieveApiResponse response = getSuccessResponse();
         response.setSeqLoginId(seqLoginId);
         response.setRoles(entityList.stream().map(e -> {
             Role role = new Role();
@@ -76,5 +68,10 @@ public class UserRetrieveController
         BeanUtil.copy(entity, response);
 
         return response;
+    }
+
+    @Override
+    protected UserRetrieveApiResponse getResponse() {
+        return new UserRetrieveApiResponse();
     }
 }
