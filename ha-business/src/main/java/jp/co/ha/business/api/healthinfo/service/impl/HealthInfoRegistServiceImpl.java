@@ -11,15 +11,14 @@ import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
-import jp.co.ha.business.api.node.TokenApi;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
-import jp.co.ha.business.api.node.request.TokenRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
 import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -67,9 +66,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** トークン発行API */
+    /** トークン発行APIComponent */
     @Autowired
-    private TokenApi tokenApi;
+    private TokenApiComponent tokenApiComponent;
     /** 基礎健康情報計算API */
     @Autowired
     private BasicHealthInfoCalcApi basicHealthInfoCalcApi;
@@ -89,8 +88,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
             HealthInfoRegistResponse response) throws BaseException {
 
         // トークン発行API実施
-        TokenResponse tokenResponse = callTokenApi(request.getSeqUserId(),
-                request.getTransactionId());
+        TokenResponse tokenResponse = tokenApiComponent.callTokenApi(
+                request.getSeqUserId(), request.getTransactionId());
 
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcResponse apiResponse = callBasicHealthInfoCalcApi(
@@ -117,44 +116,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
     }
 
     /**
-     * Token発行APIを呼び出す
-     *
-     * @param seqUserId
-     *     ユーザID
-     * @param transactionId
-     *     トランザクションID
-     * @return Token発行APIのレスポンス
-     * @throws BaseException
-     *     API通信に失敗した場合
-     */
-    private TokenResponse callTokenApi(Integer seqUserId, Integer transactionId)
-            throws BaseException {
-
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(tokenApi.getApiName(), seqUserId, transactionId);
-
-        TokenRequest request = new TokenRequest();
-        request.setSeqUserId(seqUserId);
-        ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
-                        + NodeApiType.TOKEN.getValue());
-        TokenResponse response = tokenApi.callApi(request, connectInfo);
-
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData,
-                connectInfo, response);
-
-        if (Result.SUCCESS != response.getResult()) {
-            // Token発行APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.TOKEN_API_CONNECT_ERROR,
-                    response.getDetail());
-        }
-
-        return response;
-    }
-
-    /**
      * 指定した健康情報登録APIリクエスト情報を健康情報Entityに変換する
      *
      * @param request
@@ -175,9 +136,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
         // 最後に登録した健康情報を取得する
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
-        List<HealthInfo> lastHealthInfo = healthInfoSearchService.findBySeqUserId(
-                seqUserId,
-                selectOption);
+        List<HealthInfo> lastHealthInfo = healthInfoSearchService
+                .findBySeqUserId(seqUserId, selectOption);
 
         HealthInfoStatus status = CollectionUtil.isEmpty(lastHealthInfo)
                 ? HealthInfoStatus.EVEN
@@ -187,9 +147,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
         BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()
                 .filter(e -> e.getRangeMin().intValue() <= bmi.intValue()
                         && bmi.intValue() < e.getRangeMax().intValue())
-                .findFirst().orElseThrow(
-                        () -> new BusinessException(CommonErrorCode.DB_NO_DATA,
-                                "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
+                .findFirst()
+                .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
+                        "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
 
         HealthInfo entity = new HealthInfo();
         BeanUtil.copy(request, entity);

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.component.BreathingCapacityComponent;
+import jp.co.ha.business.component.BreathingCapacityApiComponent;
 import jp.co.ha.business.dto.BreathingCapacityDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
@@ -34,9 +34,9 @@ public class BreathingCapacityController implements BaseWebController {
     /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain BreathingCapacityComponent} */
+    /** {@linkplain BreathingCapacityApiComponent} */
     @Autowired
-    private BreathingCapacityComponent component;
+    private BreathingCapacityApiComponent component;
 
     /**
      * Formを返す
