@@ -12,7 +12,7 @@
   <description>health app for root</description>
 
   <properties>
-    <org.springframework.boot-version>2.4.2</org.springframework.boot-version>
+    <org.springframework.boot-version>2.4.3</org.springframework.boot-version>
     <org.jwt-version>0.9.1</org.jwt-version>
   </properties>
 
