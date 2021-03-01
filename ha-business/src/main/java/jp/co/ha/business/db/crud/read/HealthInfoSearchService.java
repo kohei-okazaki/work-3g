@@ -124,4 +124,23 @@ public interface HealthInfoSearchService {
      */
     List<CompositeMonthlyRegData> findMonthly(LocalDateTime from, LocalDateTime to);
 
+    /**
+     * 以下の条件で健康情報を検索する
+     * <ul>
+     * <li>ユーザID = 指定したユーザID</li>
+     * <li>健康情報ID < 指定した健康情報ID</li>
+     * <li>最後の1件</li>
+     * </ul>
+     *
+     * @param seqHealthInfoId
+     *     健康情報ID
+     * @param seqUserId
+     *     ユーザID
+     * @param selectOption
+     *     {@linkplain SelectOption}
+     * @return 健康情報
+     */
+    HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Integer seqHealthInfoId,
+            Integer seqUserId, SelectOption selectOption);
+
 }

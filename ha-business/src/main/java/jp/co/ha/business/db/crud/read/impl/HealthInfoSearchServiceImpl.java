@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.HealthInfoExample.Criteria;
@@ -175,6 +176,28 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     public List<CompositeMonthlyRegData> findMonthly(LocalDateTime from,
             LocalDateTime to) {
         return compositeMonthlyMapper.selectByHealthInfoRegDate(from, to);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Integer seqHealthInfoId,
+            Integer seqUserId, SelectOption selectOption) {
+
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+
+        // 健康情報ID
+        criteria.andSeqHealthInfoIdLessThan(seqHealthInfoId);
+        // ユーザID
+        criteria.andSeqUserIdEqualTo(seqUserId);
+        // ソート処理
+        example.setOrderByClause(selectOption.getOrderBy());
+        // 検索上限数
+        example.setLimit(selectOption.getLimit());
+
+        List<HealthInfo> list = mapper.selectByExample(example);
+        return CollectionUtil.isEmpty(list) ? null : list.get(0);
     }
 
 }
