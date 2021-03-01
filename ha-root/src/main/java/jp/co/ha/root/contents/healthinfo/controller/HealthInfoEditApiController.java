@@ -20,6 +20,11 @@ import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
 import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
@@ -53,6 +58,9 @@ public class HealthInfoEditApiController extends
     /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
+    /** 健康情報計算サービス */
+    @Autowired
+    private HealthInfoCalcService healthInfoCalcService;
     /** 健康情報更新サービス */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
@@ -73,6 +81,9 @@ public class HealthInfoEditApiController extends
     public HealthInfoEditApiResponse edit(
             @PathVariable(name = "id", required = false) Optional<String> id,
             @RequestBody HealthInfoEditApiRequest request) throws BaseException {
+
+        // 健康情報ID
+        Integer seqHealthInfoId = Integer.valueOf(id.get());
 
         // API通信情報.トランザクションIDを採番
         Integer transactionId = apiCommunicationDataComponent.getTransactionId();
@@ -95,8 +106,22 @@ public class HealthInfoEditApiController extends
                 .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
                         "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
 
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
+        // 直前の健康情報を検索
+        HealthInfo lastHealthInfo = healthInfoSearchService
+                .findBySeqUserIdAndLowerSeqHealthInfoId(seqHealthInfoId,
+                        request.getSeqUserId(), selectOption);
+
+        HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
+                ? HealthInfoStatus.EVEN
+                : healthInfoCalcService.getHealthInfoStatus(request.getWeight(),
+                        lastHealthInfo.getWeight());
+
         HealthInfo healthInfo = new HealthInfo();
         BeanUtil.copy(basicHealthInfoCalcResponse.getBasicHealthInfo(), healthInfo);
+        healthInfo.setSeqHealthInfoId(seqHealthInfoId);
+        healthInfo.setHealthInfoStatus(status.getValue());
         healthInfo.setSeqBmiRangeMtId(bmiRangeMt.getSeqBmiRangeMtId());
         healthInfoUpdateService.update(healthInfo);
 
