@@ -36,14 +36,14 @@
 <script th:src="@{/resources/js/common/common.min.js}"></script>
 </head>
 <body>
-  <div class="wrap">
+  <div class="wrap" th:classappend="${session[seqUserId] != null} ? login-wrap">
     <div th:replace="layout/header.html"></div>
     <br><br><br><br><br>
 
     <nav aria-label="パンくずリスト" th:if="${breadcrumbList != null && breadcrumbList.size() != 0}">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page" th:each="breadcrumb : ${breadcrumbList}">
-          <a th:href="@{${breadcrumb.url}}" th:text="${breadcrumb.viewName}"></a>
+        <li class="breadcrumb-item active" aria-current="page" th:each="breadcrumb, status : ${breadcrumbList}" th:object="${breadcrumb}">
+          <a th:href="@{*{url}}" th:text="*{viewName}"></a>
         </li><!-- /.breadcrumb-item active -->
       </ol><!-- /.breadcrumb -->
     </nav>

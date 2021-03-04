@@ -8,6 +8,8 @@
     <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
     <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
     <result column="API_KEY" jdbcType="VARCHAR" property="apiKey" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="MAIL_ADDRESS" jdbcType="VARCHAR" property="mailAddress" />
     <result column="HEADER_FLAG" jdbcType="VARCHAR" property="headerFlag" />
     <result column="FOOTER_FLAG" jdbcType="VARCHAR" property="footerFlag" />
@@ -24,6 +26,8 @@
       , AC.REMARKS
       , AC.API_KEY
       , AC.MAIL_ADDRESS
+      , AC.REG_DATE
+      , AC.UPDATE_DATE
       <!-- HEALTH_INFO_FILE_SETTING -->
       , HF.HEADER_FLAG
       , HF.FOOTER_FLAG
@@ -35,5 +39,27 @@
         ON AC.SEQ_USER_ID = HF.SEQ_USER_ID
     WHERE
       AC.SEQ_USER_ID = #{seqUserId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="jp.co.ha.db.entity.composite.CompositeAccountKey" resultMap="BaseResultMap">
+    SELECT
+      <!-- ACCOUNT -->
+      AC.SEQ_USER_ID
+      , AC.PASSWORD
+      , AC.DELETE_FLAG
+      , AC.PASSWORD_EXPIRE
+      , AC.REMARKS
+      , AC.API_KEY
+      , AC.MAIL_ADDRESS
+      , AC.REG_DATE
+      , AC.UPDATE_DATE
+      <!-- HEALTH_INFO_FILE_SETTING -->
+      , HF.HEADER_FLAG
+      , HF.FOOTER_FLAG
+      , HF.MASK_FLAG
+      , HF.ENCLOSURE_CHAR_FLAG
+    FROM
+      ACCOUNT AC
+      LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
+        ON AC.SEQ_USER_ID = HF.SEQ_USER_ID
   </select>
 </mapper>

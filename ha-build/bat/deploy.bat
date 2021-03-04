@@ -3,11 +3,7 @@
 rem ------------------------------------------------------------------------
 rem jarを配置するバッチファイル
 rem
-<<<<<<< HEAD
-rem ■■■このファイルはpomを共通で定義する方法でうまく行ったので基本的に使用しない■■■
-=======
-rem ■■■pomを共通で定義する方法でうまく行ったので基本的にこのファイルは使用しない■■■
->>>>>>> 8c90c43b2e480fb2d180a3ac63e6d3ad68084620
+rem ※※※※※pomを共通で定義する方法でうまく行ったので基本的にこのファイルは使用しない※※※※※
 rem
 rem ha-dashboard/target配下にha-common-1.0.jar, ha-db-1.0.jar, ha-web-1.0.jar, ha-business-1.0.jarを配置
 rem ha-api/target配下に              ha-common-1.0.jar, ha-db-1.0.jar, ha-web-1.0.jar, ha-business-1.0.jarを配置
@@ -53,21 +49,17 @@ rem dbのlibディレクトリ 存在確認
 echo %dbLibDir% check
 call makeDir.bat %befDbDir% lib
 
-
 rem webのlibディレクトリ 存在確認
 echo %webLibDir% check
 call makeDir.bat %befWebDir% lib
-
 
 rem businessのlibディレクトリ 存在確認
 echo %businessLibDir% check
 call makeDir.bat %befBusinessDir% lib
 
-
 rem apiのlibディレクトリ 存在確認
 echo %apiLibDir% check
 call makeDir.bat %befApiDir% lib
-
 
 rem dashboardのlibディレクトリ 存在確認
 echo %dashboardLibDir% check
@@ -76,9 +68,6 @@ call makeDir.bat %befDashboardDir% lib
 echo ------------------------------------------------------------------------
 echo END check lib dir
 echo ------------------------------------------------------------------------
-
-
-
 
 rem common.jarを配置
 echo ------------------------------------------------------------------------
@@ -94,7 +83,6 @@ echo ------------------------------------------------------------------------
 echo END common.jar deploy
 echo ------------------------------------------------------------------------
 
-
 rem db.jarを配置
 echo ------------------------------------------------------------------------
 echo START db.jar deploy
@@ -107,7 +95,6 @@ echo ------------------------------------------------------------------------
 echo END db.jar deploy
 echo ------------------------------------------------------------------------
 
-
 rem web.jarを配置
 echo ------------------------------------------------------------------------
 echo START web.jar deploy
@@ -119,7 +106,6 @@ copy *.jar %dashboardLibDir%
 echo ------------------------------------------------------------------------
 echo END web.jar deploy
 echo ------------------------------------------------------------------------
-
 
 rem business.jarを配置
 echo ------------------------------------------------------------------------

@@ -6,6 +6,7 @@ import java.util.List;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfo;
+import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 
 /**
  * 健康情報検索サービスインターフェース
@@ -18,11 +19,11 @@ public interface HealthInfoSearchService {
      * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
      *
      * @param seqUserId
-     *     ユーザID
+     *     ユーザID(nullを指定した場合、ユーザIDをwhere句に含めない)
      * @param fromHealthInfoRegDate
-     *     YYYYMMDD
+     *     健康情報作成日時(開始)
      * @param toHealthInfoRegDate
-     *     YYYYMMDD
+     *     健康情報作成日時(終了)
      * @param selectOption
      *     {@linkplain SelectOption}
      * @return 健康情報リスト
@@ -37,8 +38,9 @@ public interface HealthInfoSearchService {
      * @param seqUserId
      *     ユーザID
      * @param fromHealthInfoRegDate
-     *     YYYYMMDD
+     *     健康情報作成日時(開始)
      * @param toHealthInfoRegDate
+     *     健康情報作成日時(終了)
      * @return 健康情報リストの件数
      */
     long countBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
@@ -94,20 +96,6 @@ public interface HealthInfoSearchService {
     List<HealthInfo> findBySeqUserId(Integer seqUserId, SelectOption selectOption);
 
     /**
-     * 指定した開始日時から終了日時の間の健康情報リストを返す
-     *
-     * @param fromHealthInfoRegDate
-     *     開始日時
-     * @param toHealthInfoRegDate
-     *     終了日時
-     * @param selectOption
-     *     {@linkplain SelectOption}
-     * @return 健康情報リスト
-     */
-    List<HealthInfo> findByBetweenHealthInfoRegDate(LocalDateTime fromHealthInfoRegDate,
-            LocalDateTime toHealthInfoRegDate, SelectOption selectOption);
-
-    /**
      * 指定された健康情報IDとユーザIDより健康情報とBMI範囲マスタの複合Entityを検索する
      *
      * @param seqHealthInfoId
@@ -117,4 +105,42 @@ public interface HealthInfoSearchService {
      * @return 健康情報とBMI範囲マスタの複合Entity
      */
     CompositeHealthInfo findHealthInfoDetail(Integer seqHealthInfoId, Integer seqUserId);
+
+    /**
+     * 健康情報とBMI範囲マスタの複合Entityを検索する
+     *
+     * @return 健康情報とBMI範囲マスタの複合Entityリスト
+     */
+    List<CompositeHealthInfo> findHealthInfoDetailList();
+
+    /**
+     * 月ごとの健康情報リストを検索する
+     *
+     * @param from
+     *     健康情報登録日時(from)
+     * @param to
+     *     健康情報登録日時(to)
+     * @return 月ごとの健康情報リスト
+     */
+    List<CompositeMonthlyRegData> findMonthly(LocalDateTime from, LocalDateTime to);
+
+    /**
+     * 以下の条件で健康情報を検索する
+     * <ul>
+     * <li>ユーザID = 指定したユーザID</li>
+     * <li>健康情報ID < 指定した健康情報ID</li>
+     * <li>最後の1件</li>
+     * </ul>
+     *
+     * @param seqHealthInfoId
+     *     健康情報ID
+     * @param seqUserId
+     *     ユーザID
+     * @param selectOption
+     *     {@linkplain SelectOption}
+     * @return 健康情報
+     */
+    HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Integer seqHealthInfoId,
+            Integer seqUserId, SelectOption selectOption);
+
 }

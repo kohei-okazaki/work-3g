@@ -164,6 +164,21 @@ public class AwsS3Component {
      *     ファイル
      * @throws BaseException
      *     S3へファイルアップロードに失敗した場合
+     * @see AwsS3Component#putFile(String, File)
+     */
+    public void putFile(AwsS3Key key, File file) throws BaseException {
+        this.putFile(key.getValue(), file);
+    }
+
+    /**
+     * 指定されたキーへファイルを配置する
+     *
+     * @param key
+     *     バケット内のキー(ファイル名込)
+     * @param file
+     *     ファイル
+     * @throws BaseException
+     *     S3へファイルアップロードに失敗した場合
      * @see AwsS3Component#putFile(String, long, InputStream)
      */
     public void putFile(String key, File file) throws BaseException {
@@ -175,6 +190,24 @@ public class AwsS3Component {
         } catch (IOException e) {
             throw new BusinessException(e);
         }
+    }
+
+    /**
+     * S3の指定したキーにInputStreamのデータをファイルとしてアップロードする
+     *
+     * @param key
+     *     バケット内のキー(ファイル名込)
+     * @param length
+     *     ファイルサイズ
+     * @param is
+     *     InputStream
+     * @throws BaseException
+     *     S3へのファイルアップロードに失敗した場合
+     * @see AwsS3Component#putFile(String, long, InputStream)
+     */
+    public void putFileByInputStream(AwsS3Key key, long length, InputStream is)
+            throws BaseException {
+        this.putFile(key.getValue(), length, is);
     }
 
     /**

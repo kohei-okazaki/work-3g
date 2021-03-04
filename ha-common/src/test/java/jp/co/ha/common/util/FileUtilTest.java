@@ -21,7 +21,7 @@ public class FileUtilTest extends BaseCommonTest {
      */
     @Test
     public void compressZipTest() {
-        String basePath = "D:\\app\\git\\work-3g\\ha-common";
+        String basePath = "C:\\app\\git\\work-3g\\ha-common";
         String destPath = basePath + "\\src\\test\\resources\\zip\\dest\\result.zip";
         List<File> list = FileUtil
                 .getFileList(basePath + "\\src\\test\\resources\\zip\\src");

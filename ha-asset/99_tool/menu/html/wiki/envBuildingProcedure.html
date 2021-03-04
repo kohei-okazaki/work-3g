@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>環境構築手順</title>
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap-grid.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap-reboot.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../../ha-dashboard/src/main/webapp/resources/css/lib/bootstrap-grid.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../../ha-dashboard/src/main/webapp/resources/css/lib/bootstrap-reboot.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../../ha-dashboard/src/main/webapp/resources/css/lib/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../../css/docs.css">
 </head>
 <body>
@@ -60,7 +60,7 @@
                             <td>2</td>
                             <td>DBマイグレーション</td>
                             <td>Flyway</td>
-                            <td>7.0.1</td>
+                            <td>7.5.4</td>
                           </tr>
                           <tr>
                             <td>3</td>
@@ -442,7 +442,7 @@
                         </tbody>
                       </table><!-- /.table -->
 
-                      <b>ダッシュボードサーバの構築</b>
+                      <b>健康管理ダッシュボードサーバの構築</b>
                       <table class="table">
                         <thead class="thead-dark">
                           <tr>
@@ -482,7 +482,7 @@
                         </tbody>
                       </table><!-- /.table -->
 
-                      <b>APIサーバの構築</b>
+                      <b>健康管理APIサーバの構築</b>
                       <table class="table">
                         <thead class="thead-dark">
                           <tr>
@@ -648,7 +648,9 @@
                   <div class="col-10">
                     <details>
                       <summary>npm インストール</summary>
-                      <p>ha-node上で以下のコマンドを実行</p>
+                      <p>ha-node上で以下のコマンドを実行（健康情報計算APIサーバのライブラリ依存関係を解消するため）</p>
+                      <kbd>npm install</kbd>
+                      <p>ha-root/front上で以下のコマンドを実行（管理者用サイトサーバのfrontライブラリ依存関係を解消するため）</p>
                       <kbd>npm install</kbd>
                     </details>
                   </div><!-- /.col-10 -->
@@ -660,6 +662,8 @@
                       <summary>npm モジュールの更新</summary>
                       <p>Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行</p>
                       <kbd>npm update</kbd>
+                      <p>Eclipseのha-root/frontディレクトリ上でコマンドプロンプトを開き、以下のコマンドを実行</p>
+                      <kbd>npm update</kbd>
                     </details>
                   </div><!-- /.col-10 -->
 
@@ -669,6 +673,8 @@
                     <details>
                       <summary>npm モジュールの追加</summary>
                       <p>開発中、新しくモジュールを追加したい場合、Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行</p>
+                      <kbd>npm install --save ${module_name}</kbd>
+                      <p>開発中、新しくモジュールを追加したい場合、Eclipseのha-root/frontディレクトリ上でコマンドプロンプトを開き、以下のコマンドを実行</p>
                       <kbd>npm install --save ${module_name}</kbd>
                     </details>
                   </div><!-- /.col-10 -->
@@ -833,8 +839,8 @@
     </div><!-- /.row -->
   </div><!-- /.container border shadow -->
 
-  <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/bootstrap.min.js"></script>
-  <script src="../../js/bootstrap.bundle.min.js"></script>
+  <script src="../../../../../ha-dashboard/src/main/webapp/resources/js/lib/jquery.min.js"></script>
+  <script src="../../../../../ha-dashboard/src/main/webapp/resources/js/lib/bootstrap.min.js"></script>
+  <script src="../../../../../ha-dashboard/src/main/webapp/resources/js/lib/bootstrap.bundle.min.js"></script>
 </body>
 </html>

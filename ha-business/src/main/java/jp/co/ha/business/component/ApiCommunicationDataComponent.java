@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.response.BaseNodeResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
+import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.ApiCommunicationData;
@@ -25,6 +26,18 @@ public class ApiCommunicationDataComponent {
     /** API通信情報更新サービス */
     @Autowired
     private ApiCommunicationDataUpdateService updateService;
+    /** API通信情報検索サービス */
+    @Autowired
+    private ApiCommunicationDataSearchService searchService;
+
+    /**
+     * トランザクションIDを取得
+     *
+     * @return トランザクションID
+     */
+    public Integer getTransactionId() {
+        return searchService.selectLastTransactionId();
+    }
 
     /**
      * API通信情報を作成する
@@ -33,11 +46,15 @@ public class ApiCommunicationDataComponent {
      *     API名
      * @param seqUserId
      *     ユーザID
+     * @param transactionId
+     *     トランザクションID
      * @return API通信情報
      */
-    public ApiCommunicationData create(String apiName, Integer seqUserId) {
+    public ApiCommunicationData create(String apiName, Integer seqUserId,
+            Integer transactionId) {
 
         ApiCommunicationData entity = new ApiCommunicationData();
+        entity.setTransactionId(transactionId);
         entity.setApiName(apiName);
         entity.setSeqUserId(seqUserId);
         entity.setRequestDate(DateTimeUtil.getSysDate());

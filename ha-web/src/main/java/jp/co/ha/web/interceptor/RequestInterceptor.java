@@ -2,20 +2,22 @@ package jp.co.ha.web.interceptor;
 
 import java.lang.reflect.Method;
 import java.util.Enumeration;
+import java.util.Map.Entry;
 import java.util.StringJoiner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.method.HandlerMethod;
 
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MDC;
 import jp.co.ha.common.system.SystemMemory;
+import jp.co.ha.common.util.MapUtil;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -28,9 +30,9 @@ public class RequestInterceptor extends BaseWebInterceptor {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(RequestInterceptor.class);
 
-    /** ハッシュ生成関数 */
+    /** SHA-256ハッシュ化 */
+    @Sha256
     @Autowired
-    @Qualifier("sha256HashEncoder")
     private HashEncoder hashEncoder;
 
     @Override
@@ -44,9 +46,16 @@ public class RequestInterceptor extends BaseWebInterceptor {
 
         // MDCを設定する
         MDC.put("id", StringUtil.getRandamStr(20));
+        if (!(handler instanceof HandlerMethod)) {
+            LOG.info("[URI=" + request.getRequestURI() + getParameter(request)
+                    + ",METHOD=" + request.getMethod()
+                    + ",HEADER=" + getHeader(request) + "]"
+                    + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
+            return true;
+        }
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("START " + method.getDeclaringClass().getName() + "#" + method.getName()
-                + "[URI=" + request.getRequestURI()
+                + "[URI=" + request.getRequestURI() + getParameter(request)
                 + ",METHOD=" + request.getMethod()
                 + ",HEADER=" + getHeader(request) + "]"
                 + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
@@ -62,10 +71,37 @@ public class RequestInterceptor extends BaseWebInterceptor {
             // 静的リソースの場合は認証不要
             return;
         }
+        if (!(handler instanceof HandlerMethod)) {
+            LOG.info("END Memory=" + SystemMemory.getInstance().getMemoryUsage());
+        }
         Method method = ((HandlerMethod) handler).getMethod();
         LOG.info("END " + method.getDeclaringClass().getName() + "#" + method.getName()
                 + ",Memory=" + SystemMemory.getInstance().getMemoryUsage());
 
+    }
+
+    /**
+     * 指定された{@linkplain HttpServletRequest}よりリクエストパラメータを取得する
+     *
+     * @param request
+     *     HttpServletRequest
+     * @return リクエストパラメータ
+     */
+    private String getParameter(HttpServletRequest request) {
+
+        if (MapUtil.isEmpty(request.getParameterMap())) {
+            return "";
+        }
+
+        StringJoiner sj = new StringJoiner("&");
+        for (Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+            StringJoiner innerSj = new StringJoiner(",");
+            for (String s : entry.getValue()) {
+                innerSj.add(s);
+            }
+            sj.add(entry.getKey() + "=" + innerSj.toString());
+        }
+        return "?" + sj.toString();
     }
 
     /**

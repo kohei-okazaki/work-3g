@@ -1,9 +1,7 @@
-var table = [
-  {
+var table = [{
     physicalName: "HEALTH_INFO",
     logicalName: "健康情報",
-    column : [
-      {
+    columns: [{
         logicalName: "健康情報ID",
         physicalName: "SEQ_HEALTH_INFO_ID",
         type: "INT",
@@ -74,18 +72,17 @@ var table = [
   {
     physicalName: "ACCOUNT",
     logicalName: "アカウント情報",
-    column : [
-      {
-          logicalName: "ユーザID",
-          physicalName: "SEQ_USER_ID",
-          type: "INT",
-          size: ""
+    columns: [{
+        logicalName: "ユーザID",
+        physicalName: "SEQ_USER_ID",
+        type: "INT",
+        size: ""
       },
       {
-          logicalName: "メールアドレス",
-          physicalName: "MAILADDRESS",
-          type: "VARCHAR",
-          size: "64"
+        logicalName: "メールアドレス",
+        physicalName: "MAILADDRESS",
+        type: "VARCHAR",
+        size: "64"
       },
       {
         logicalName: "パスワード",
@@ -134,8 +131,7 @@ var table = [
   {
     physicalName: "HEALTH_INFO_FILE_SETTING",
     logicalName: "健康情報ファイル設定",
-    column : [
-      {
+    columns: [{
         logicalName: "ユーザID",
         physicalName: "SEQ_USER_ID",
         type: "INT",
@@ -182,8 +178,7 @@ var table = [
   {
     physicalName: "BMI_RANGE_MT",
     logicalName: "BMI範囲マスタ",
-    column : [
-      {
+    columns: [{
         logicalName: "BMI範囲マスタID",
         physicalName: "SEQ_BMI_RANGE_MT_ID",
         type: "INT",
@@ -224,8 +219,7 @@ var table = [
   {
     physicalName: "ACCOUNT_RECOVERY_TOKEN_DATA",
     logicalName: "アカウント回復トークン情報",
-    column : [
-      {
+    columns: [{
         logicalName: "アカウント回復トークン情報ID",
         physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
         type: "INT",
@@ -266,8 +260,7 @@ var table = [
   {
     physicalName: "API_COMMUNICATION_DATA",
     logicalName: "API通信情報",
-    column : [
-      {
+    columns: [{
         logicalName: "API通信情報ID",
         physicalName: "SEQ_API_COMMUNICATION_DATA_ID",
         type: "INT",
@@ -328,6 +321,152 @@ var table = [
         size: ""
       }
     ]
+  },
+  {
+    physicalName: "ROOT_LOGIN_INFO",
+    logicalName: "管理者サイトユーザログイン情報",
+    columns: [{
+        logicalName: "管理者サイトユーザログイン情報ID",
+        physicalName: "SEQ_ROOT_LOGIN_INFO_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "パスワード",
+        physicalName: "PASSWORD",
+        type: "VARCHAR",
+        size: "64"
+      },
+      {
+        logicalName: "削除フラグ",
+        physicalName: "DELETE_FLAG",
+        type: "VARCHAR",
+        size: "1"
+      },
+      {
+        logicalName: "パスワード有効期限",
+        physicalName: "PASSWORD_EXPIRE",
+        type: "DATE",
+        size: ""
+      },
+      {
+        logicalName: "管理者サイトユーザ権限管理マスタID",
+        physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "備考",
+        physicalName: "REMARKS",
+        type: "VARCHAR",
+        size: "256"
+      },
+      {
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
+        type: "DATETIME",
+        size: ""
+      }
+    ]
+  },
+  {
+    physicalName: "ROOT_USER_ROLE_MNG_MT",
+    logicalName: "管理者サイトユーザ権限管理マスタ",
+    columns: [{
+        logicalName: "管理者サイトユーザ権限管理マスタID",
+        physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
+        type: "DATETIME",
+        size: ""
+      }
+    ]
+  },
+  {
+    physicalName: "ROOT_USER_ROLE_DETAIL_MT",
+    logicalName: "管理者サイトユーザ権限詳細マスタ",
+    columns: [{
+        logicalName: "管理者サイトユーザ権限詳細マスタID",
+        physicalName: "SEQ_ROOT_USER_ROLE_DETAIL_MT_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "管理者サイトユーザ権限管理マスタID",
+        physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "管理者サイト権限マスタID",
+        physicalName: "SEQ_ROOT_ROLE_MT_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
+        type: "DATETIME",
+        size: ""
+      }
+    ]
+  },
+  {
+    physicalName: "ROOT_ROLE_MT",
+    logicalName: "管理者サイト権限マスタ",
+    columns: [{
+        logicalName: "管理者サイト権限マスタID",
+        physicalName: "SEQ_ROOT_ROLE_MT_ID",
+        type: "INT",
+        size: ""
+      },
+      {
+        logicalName: "ユーザ権限",
+        physicalName: "ROLE",
+        type: "VARCHAR",
+        size: "2"
+      },
+      {
+        logicalName: "ユーザ権限名",
+        physicalName: "ROLE_NAME",
+        type: "VARCHAR",
+        size: "64"
+      },
+      {
+        logicalName: "更新日時",
+        physicalName: "UPDATE_DATE",
+        type: "DATETIME",
+        size: ""
+      },
+      {
+        logicalName: "登録日時",
+        physicalName: "REG_DATE",
+        type: "DATETIME",
+        size: ""
+      }
+    ]
   }
 ];
 
@@ -336,7 +475,7 @@ function getColumnList(tableName) {
   for (var i = 0; i < table.length; i++) {
     var tableData = table[i];
     if (tableData.physicalName === tableName) {
-      return tableData.column;
+      return tableData.columns;
     }
   }
 }

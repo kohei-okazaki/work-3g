@@ -3,17 +3,22 @@ package jp.co.ha.business.healthInfo.type;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * 健康情報ステータスの列挙
+ * 健康情報ステータスの列挙<br>
+ * <ul>
+ * <li>10:減少</li>
+ * <li>20:変化なし</li>
+ * <li>30:増加</li>
+ * </ul>
  *
  * @version 1.0.0
  */
 public enum HealthInfoStatus implements BaseEnum {
 
-    /** 減少 */
+    /** 10:減少 */
     DOWN("10"),
-    /** 変化なし */
+    /** 20:変化なし */
     EVEN("20"),
-    /** 増加 */
+    /** 30:増加 */
     INCREASE("30");
 
     /** 値 */

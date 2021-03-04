@@ -81,6 +81,8 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
                         BeanUtil.copy(dto, request);
                         BeanUtil.copy(e, request);
                         request.setTestMode(TestMode.DB_REGIST);
+                        request.setTransactionId(
+                                apiCommunicationDataComponent.getTransactionId());
                         return request;
                     }).collect(Collectors.toList());
 
@@ -110,7 +112,8 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                    .create(api.getApiName(), request.getSeqUserId());
+                    .create(api.getApiName(), request.getSeqUserId(),
+                            request.getTransactionId());
 
             HealthInfoRegistResponse response = api.callApi(request, apiConnectInfo);
             seqHealthInfoIdList.add(response.getHealthInfo().getSeqHealthInfoId());
@@ -143,7 +146,6 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
         // Slackのbatch_${env}チャンネルにメッセージを投稿
         StringJoiner sj = new StringJoiner("\r\n");
-        // 健康情報一括登録完了.\r\n健康情報IDリスト\r\n
         seqHealthInfoIdList.stream().forEach(e -> sj.add(e.toString()));
         try {
             slackApiComponent.sendFile(ContentType.BATCH,

@@ -11,13 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
 import jp.co.ha.db.entity.HealthInfoExample.Criteria;
 import jp.co.ha.db.entity.composite.CompositeHealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfoKey;
+import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 import jp.co.ha.db.mapper.composite.CompositeHealthInfoMapper;
+import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 
 /**
  * 健康情報検索サービスインターフェース実装クラス
@@ -33,6 +36,9 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     /** CompositeHealthInfoMapper */
     @Autowired
     private CompositeHealthInfoMapper compositeHealthInfoMapper;
+    /** CompositeMonthlyMapper */
+    @Autowired
+    private CompositeMonthlyMapper compositeMonthlyMapper;
 
     @Select
     @Override
@@ -43,8 +49,11 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
+
         // ユーザID
-        criteria.andSeqUserIdEqualTo(seqUserId);
+        if (seqUserId != null) {
+            criteria.andSeqUserIdEqualTo(seqUserId);
+        }
         // 健康情報登録日時
         criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate, toHealthInfoRegDate);
         // ソート処理
@@ -144,23 +153,6 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByBetweenHealthInfoRegDate(
-            LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
-            SelectOption selectOption) {
-
-        HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
-        criteria.andHealthInfoRegDateBetween(fromHealthInfoRegDate,
-                toHealthInfoRegDate);
-
-        // ソート処理
-        example.setOrderByClause(selectOption.getOrderBy());
-        return mapper.selectByExample(example);
-    }
-
-    @Select
-    @Override
-    @Transactional(readOnly = true)
     public CompositeHealthInfo findHealthInfoDetail(Integer seqHealthInfoId,
             Integer seqUserId) {
 
@@ -169,6 +161,43 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         key.setSeqUserId(seqUserId);
 
         return compositeHealthInfoMapper.selectByPrimaryKey(key);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompositeHealthInfo> findHealthInfoDetailList() {
+        return compositeHealthInfoMapper.selectAll();
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public List<CompositeMonthlyRegData> findMonthly(LocalDateTime from,
+            LocalDateTime to) {
+        return compositeMonthlyMapper.selectByHealthInfoRegDate(from, to);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Integer seqHealthInfoId,
+            Integer seqUserId, SelectOption selectOption) {
+
+        HealthInfoExample example = new HealthInfoExample();
+        Criteria criteria = example.createCriteria();
+
+        // 健康情報ID
+        criteria.andSeqHealthInfoIdLessThan(seqHealthInfoId);
+        // ユーザID
+        criteria.andSeqUserIdEqualTo(seqUserId);
+        // ソート処理
+        example.setOrderByClause(selectOption.getOrderBy());
+        // 検索上限数
+        example.setLimit(selectOption.getLimit());
+
+        List<HealthInfo> list = mapper.selectByExample(example);
+        return CollectionUtil.isEmpty(list) ? null : list.get(0);
     }
 
 }

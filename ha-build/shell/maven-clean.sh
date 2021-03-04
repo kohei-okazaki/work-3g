@@ -5,7 +5,7 @@
 ########################################
 
 # 基底ディレクトリ
-BASE_DIR="/Applications/Eclipse_2019-03.app/Contents/work-3g"
+BASE_DIR="/Applications/app/git/work-3g"
 
 # プロジェクトディレクトリ
 COMMON_DIR=${BASE_DIR}"/ha-common"

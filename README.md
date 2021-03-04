@@ -6,16 +6,19 @@
 
  
 ### **ローカル環境図**
-![image](https://user-images.githubusercontent.com/24481212/87867075-1a493600-c9c4-11ea-8351-cd0aad6eca4a.png)  
+![image](https://user-images.githubusercontent.com/24481212/104831982-f7470280-58d0-11eb-8277-96886b961222.PNG)  
 
 -----
 
 ### **EC2環境図**  
-![image](https://user-images.githubusercontent.com/24481212/87866924-62ffef80-c9c2-11ea-8ac4-63b578ae8ce9.png)
+![image](https://user-images.githubusercontent.com/24481212/104832424-4cd0de80-58d4-11eb-9117-86cf24c6191d.png)  
 
 ## 02_Project構成  
 * ### ha-api  
 JSONでのHTTP通信を受け付けるプロジェクト   
+
+* ### ha-asset  
+詳細設計書、DDL等を定義したドキュメントプロジェクト  
 
 * ### ha-batch  
 Batch処理を定義したプロジェクト  
@@ -25,7 +28,7 @@ Batch処理を定義したプロジェクト
 windows, linuxでそれぞれbatとshを用意  
 
 * ### ha-business  
-api, dashboard, batchで共通的に使うbusinessロジックをまとめたプロジェクト  
+api, dashboard, batch, rootで共通的に使うbusinessロジックをまとめたプロジェクト  
 
 * ### ha-common  
 共通処理を定義したプロジェクト  
@@ -41,10 +44,10 @@ Tableに対応したEntityとMapperのみを定義したプロジェクト
 健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装) 
 
 * ### ha-pom  
-api, batch, business, common, tool, dashboard, webで共通的に使う外部ライブラリを定義したpomプロジェクト  
+api, batch, business, common, tool, dashboard, web, rootで共通的に使う外部ライブラリを定義したpomプロジェクト  
 
-* ### ha-asset  
-詳細設計書、DDL等を定義したドキュメントプロジェクト  
+* ### ha-root  
+健康管理アプリの管理者用サイト    
 
 * ### ha-selenium  
 seleniumを利用した画面の自動テスト処理を定義したプロジェクト  

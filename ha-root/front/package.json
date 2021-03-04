@@ -1,0 +1,26 @@
+{
+  "name": "front",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt --port 8083",
+    "build": "nuxt build",
+    "build:stg": "cross-env NODE_ENV=\"stg\" nuxt build",
+    "build:production": "cross-env NODE_ENV=\"production\" nuxt build",
+    "start": "nuxt start",
+    "start:stg": "cross-env NODE_ENV=\"stg\" nuxt start",
+    "start:production": "cross-env NODE_ENV=\"production\" nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.13.1",
+    "core-js": "^3.9.0",
+    "cross-env": "^7.0.3",
+    "nuxt": "^2.15.0",
+    "vuex-persistedstate": "^4.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.3"
+  }
+}
