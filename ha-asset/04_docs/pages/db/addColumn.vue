@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="DB対応のページ" />
+    <AppContentsTitle title="カラム追加" />
   </div>
 </template>
 
@@ -26,8 +26,13 @@ export default {
         },
         {
           text: "DB",
-          disabled: true,
+          disabled: false,
           href: "/db",
+        },
+        {
+          text: "カラム追加",
+          disabled: true,
+          href: "/db/addColumn",
         },
       ],
     }
