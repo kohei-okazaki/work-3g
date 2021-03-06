@@ -86,22 +86,22 @@ export default {
       ],
       healthInfoDashboardLinks: [
         {
-          name: "local",
+          name: "local環境",
           url: "http://localhost:8080/login/index",
         },
         {
-          name: "EC2",
+          name: "EC2環境",
           url:
             "http://ec2-dashboard.ap-northeast-1.elasticbeanstalk.com/login/index",
         },
       ],
       rootAppLinks: [
         {
-          name: "local",
+          name: "local環境",
           url: "http://localhost:8083/login",
         },
         {
-          name: "EC2",
+          name: "EC2環境",
           url: "",
         },
       ],
