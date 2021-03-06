@@ -37,6 +37,7 @@
         <nuxt />
       </v-container>
     </v-main>
+    <AppScroll />
     <v-footer :absolute="fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -44,7 +45,12 @@
 </template>
 
 <script>
+import AppScroll from "~/components/AppScroll.vue";
+
 export default {
+  components: {
+    AppScroll,
+  },
   data: function () {
     return {
       clipped: true,
