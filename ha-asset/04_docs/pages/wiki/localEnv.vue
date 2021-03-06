@@ -18,11 +18,14 @@
       <v-col cols="12" sm="8" md="10">
         <v-expansion-panels multiple>
           <v-expansion-panel>
-            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
+            <v-expansion-panel-header
+              class="justify-self-start text-subtitle-1"
+              disable-icon-rotate
+            >
               <div>
                 <v-icon color="red">mdi-database</v-icon>
                 <span>DB構築手順</span>
-               </div>
+              </div>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="text-body-2">
               <details>
@@ -476,11 +479,14 @@
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header class="justify-self-start  text-subtitle-1" disable-icon-rotate>
+            <v-expansion-panel-header
+              class="justify-self-start text-subtitle-1"
+              disable-icon-rotate
+            >
               <div>
                 <v-icon color="red">mdi-language-java</v-icon>
                 <span>Java環境構築手順</span>
-               </div>
+              </div>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="text-body-2">
               <details>
@@ -852,11 +858,14 @@
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header class="justify-self-start  text-subtitle-1" disable-icon-rotate>
+            <v-expansion-panel-header
+              class="justify-self-start text-subtitle-1"
+              disable-icon-rotate
+            >
               <div>
                 <v-icon color="red">mdi-language-python</v-icon>
                 <span>Python構築手順</span>
-               </div>
+              </div>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="text-body-2">
               <details>
@@ -974,11 +983,14 @@
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header class="justify-self-start  text-subtitle-1" disable-icon-rotate>
+            <v-expansion-panel-header
+              class="justify-self-start text-subtitle-1"
+              disable-icon-rotate
+            >
               <div>
                 <v-icon color="red">mdi-nodejs</v-icon>
                 <span>Node.js構築手順</span>
-               </div>
+              </div>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="text-body-2">
               <details>
@@ -997,6 +1009,252 @@
                 </p>
                 <kbd>node -v</kbd>
                 <p>インストールしたバージョン情報を表示されていればOK</p>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>npm インストール</summary>
+                <p>
+                  ha-node上で以下のコマンドを実行（健康情報計算APIサーバのライブラリ依存関係を解消するため）
+                </p>
+                <kbd>npm install</kbd>
+                <p>
+                  ha-root/front上で以下のコマンドを実行（管理者用サイトサーバのfrontライブラリ依存関係を解消するため）
+                </p>
+                <kbd>npm install</kbd>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>npm モジュールの更新</summary>
+                <p>
+                  Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
+                </p>
+                <kbd>npm update</kbd>
+                <p>
+                  Eclipseのha-root/frontディレクトリ上でコマンドプロンプトを開き、以下のコマンドを実行
+                </p>
+                <kbd>npm update</kbd>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>npm モジュールの追加</summary>
+                <p>
+                  開発中、新しくモジュールを追加したい場合、Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
+                </p>
+                <kbd>npm install --save ${module_name}</kbd>
+                <p>
+                  開発中、新しくモジュールを追加したい場合、Eclipseのha-root/frontディレクトリ上でコマンドプロンプトを開き、以下のコマンドを実行
+                </p>
+                <kbd>npm install --save ${module_name}</kbd>
+              </details>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+
+          <v-expansion-panel>
+            <v-expansion-panel-header
+              class="justify-self-start text-subtitle-1"
+              disable-icon-rotate
+            >
+              <div>
+                <v-icon color="red">mdi-sitemap</v-icon>
+                <span>IDE設定手順</span>
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content class="text-body-2">
+              <details>
+                <summary>IDEダウンロード</summary>
+                <p>
+                  <a
+                    href="https://mergedoc.osdn.jp/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ここ</a
+                  >から任意のバージョンのEclipseをダウンロード
+                </p>
+                <p>
+                  アプリ内に定義されているデフォルトのパスを有効にしたい場合、以下のパスに上記でダウンロードしたzipを解凍
+                </p>
+                <kbd>C:\app</kbd>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>アプリダウンロード</summary>
+                <p>
+                  Eclipse の git パースペクティブ
+                  よりリモートリポジトリからクローン
+                </p>
+                <v-img
+                  style="width: 600px"
+                  src="/wiki/eclipse-config2.png"
+                  alt="IDE手順2"
+                  title="IDE手順2"
+                />
+                <br /><br />
+                <v-img
+                  style="width: 500px"
+                  src="/wiki/eclipse-config3.png"
+                  alt="IDE手順3"
+                  title="IDE手順3"
+                />
+                <br /><br />
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>URI</td>
+                      <td>https://github.com/kohei-okazaki/work-3g.git</td>
+                    </tr>
+                    <tr>
+                      <td>ホスト</td>
+                      <td>自動入力</td>
+                    </tr>
+                    <tr>
+                      <td>リポジトリーパス</td>
+                      <td>自動入力</td>
+                    </tr>
+                    <tr>
+                      <td>ユーザー</td>
+                      <td>自身のユーザ</td>
+                    </tr>
+                    <tr>
+                      <td>パスワード</td>
+                      <td>自身のユーザのパスワード</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <p>ローカルリポジトリは以下にダウンロード</p>
+                <kbd>C:\app\git</kbd>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>プロジェクトインポート</summary>
+                <p>
+                  Eclipse の git パースペクティブ
+                  よりGitリポジトリータブを選択。work3g配下のすべてのサブプロジェクトを選択。「プロジェクトのインポート」を押してimportする
+                </p>
+                <img
+                  src="/wiki/eclipse-config1.png"
+                  alt="IDE手順1"
+                  title="IDE手順1"
+                />
+              </details>
+
+              <br />
+
+              <details>
+                <summary>開発用テンプレート設定</summary>
+                <p>Eclipseより、以下の操作でテンプレートを設定する</p>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        ウィンドゥ → 設定 → Java → コードスタイル →
+                        クリーンアップ → インポート
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>
+                        以下のxmlをインポート<br /><kbd
+                          >/ha-asset/00_local/codecleanup.xml</kbd
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>
+                        ウィンドゥ → 設定 → Java → コードスタイル →
+                        コードテンプレート → インポート
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>
+                        以下のxmlをインポート<br /><kbd
+                          >/ha-asset/00_local/codetemplates.xml</kbd
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>
+                        ウィンドゥ → 設定 → Java → コードスタイル →
+                        フォーマッター → インポート
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>
+                        以下のxmlをインポート<br /><kbd
+                          >/ha-asset/00_local/codeformatter.xml</kbd
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <p>
+                  次にファイル保存時に自動でテンプレートが適用されるように以下を設定
+                </p>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        ウィンドゥ → 設定 → Java → エディター → 保存アクション
+                        を開く
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>「保存時に選択したアクションを実行」にチェック</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>「ソース・コードのフォーマット」にチェック</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>すべての行をフォーマット を選択</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>「インポートの編成」にチェック</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>
+                        「追加アクション」にチェック。お好みで好きな設定を追加して下さい
+                      </td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
               </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
