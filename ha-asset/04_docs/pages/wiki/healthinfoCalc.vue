@@ -7,10 +7,10 @@
         <div class="text-center d-flex pb-4">
           <v-expansion-panels multiple>
             <v-expansion-panel v-for="(item, i) in list" :key="i">
-              <v-expansion-panel-header>{{
+              <v-expansion-panel-header class="text-subtitle-1">{{
                 item.name
               }}</v-expansion-panel-header>
-              <v-expansion-panel-content>
+              <v-expansion-panel-content class="text-body-2">
                 <div v-html="item.exp" align="left"></div
               ></v-expansion-panel-content>
             </v-expansion-panel>
@@ -53,7 +53,7 @@ export default {
       list: [
         {
           name: "BMI計算方法",
-          exp: "体重 / (身長(m) * 身長(m))",
+          exp: "体重(kg) / (身長(m) * 身長(m))",
         },
         {
           name: "標準体重計算方法",
