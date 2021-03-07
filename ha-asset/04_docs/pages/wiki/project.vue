@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="プロジェクト構成" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
 
     <v-row justify="center" align="center">
       <v-col cols="12" sm="8" md="10">
@@ -38,9 +38,11 @@
     <v-row justify="center" align="center">
       <v-col cols="12" sm="10" md="10">
         <v-card>
-          <v-card-title class="text-subtitle-1">プロジェクト依存関係図</v-card-title>
+          <v-card-title class="text-subtitle-1"
+            >プロジェクト依存関係図</v-card-title
+          >
           <v-card-text align="center">
-            <img src="/wiki/project.png" width="75%">
+            <v-img src="/wiki/project.png" width="75%" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -49,9 +51,11 @@
     <v-row justify="center" align="center">
       <v-col cols="12" sm="10" md="10">
         <v-card>
-          <v-card-title class="text-subtitle-1">ローカル環境構成図</v-card-title>
+          <v-card-title class="text-subtitle-1"
+            >ローカル環境構成図</v-card-title
+          >
           <v-card-text align="center">
-            <img src="/wiki/project-config-local.png" width="70%">
+            <v-img src="/wiki/project-config-local.png" width="70%" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -62,7 +66,45 @@
         <v-card>
           <v-card-title class="text-subtitle-1">EC2環境構成図</v-card-title>
           <v-card-text align="center">
-            <img src="/wiki/project-config-ec2.png" width="70%">
+            <v-img src="/wiki/project-config-ec2.png" width="70%" />
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="8" md="10">
+        <v-card>
+          <v-card-title class="text-subtitle-1">使用言語一覧</v-card-title>
+          <v-card-subtitle class="text-subtitle-2"
+            >本アプリで使用しているプログラミング言語の一覧<br />FWやライブラリのバージョンについては<nuxt-link
+              to="/wiki/libraryList"
+              >ライブラリ一覧</nuxt-link
+            >を参照</v-card-subtitle
+          >
+          <v-card-text>
+            <v-simple-table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>言語名</th>
+                  <th>バージョン</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(language, i) in languages" :key="i">
+                  <td>
+                    <div>{{ i + 1 }}</div>
+                  </td>
+                  <td>
+                    <div>{{ language.name }}</div>
+                  </td>
+                  <td>
+                    <div>{{ language.version }}</div>
+                  </td>
+                </tr>
+              </tbody>
+            </v-simple-table>
           </v-card-text>
         </v-card>
       </v-col>
@@ -161,6 +203,20 @@ export default {
         {
           name: "ha-web",
           description: "WebAPIの共通的FWを定義したmavenプロジェクト",
+        },
+      ],
+      languages: [
+        {
+          name: "Java",
+          version: "1.8",
+        },
+        {
+          name: "Node.js",
+          version: "14.16.0",
+        },
+        {
+          name: "Python",
+          version: "3.8.8",
         },
       ],
     };

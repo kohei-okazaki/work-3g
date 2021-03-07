@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="DB対応のページ" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
   </div>
 </template>
 
@@ -30,11 +30,10 @@ export default {
           href: "/db",
         },
       ],
-    }
-  }
+    };
+  },
 };
 </script>
 
 <style scoped>
-
 </style>
