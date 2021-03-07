@@ -69,6 +69,11 @@ export default {
         },
         {
           icon: "mdi-apps",
+          title: "ライブラリ一覧",
+          to: "/wiki/libraryList",
+        },
+        {
+          icon: "mdi-apps",
           title: "ローカル環境構築手順",
           to: "/wiki/localEnv",
         },

@@ -85,7 +85,7 @@ export default {
         {
           icon: "mdi-link",
           title: "開発用リンク",
-          to: "/locallink",
+          to: "/developlink",
         },
         {
           icon: "mdi-database",

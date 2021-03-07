@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="DB変更手順" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
     <v-row justify="center" align="center">
       <v-col cols="12" sm="10" md="10">
         <div class="text-left">

@@ -1,8 +1,37 @@
 <template>
-  <div>健康管理アプリAPIのページ</div>
+  <div>
+    <AppBreadCrumbs :items="breadcrumbs" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+  </div>
 </template>
+
 <script>
-export default {};
+import AppBreadCrumbs from "~/components/AppBreadCrumbs.vue";
+import AppContentsTitle from "~/components/AppContentsTitle.vue";
+
+export default {
+  components: {
+    AppBreadCrumbs,
+    AppContentsTitle,
+  },
+  data: function () {
+    return {
+      breadcrumbs:[
+        {
+          text: "Top",
+          disabled: false,
+          href: "/",
+        },
+        {
+          text: "健康管理API",
+          disabled: true,
+          href: "/helthinfoapp/api",
+        },
+      ]
+    };
+  },
+};
 </script>
+
 <style scoped>
 </style>

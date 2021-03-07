@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="健康情報計算方法" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
     <v-row justify="center" align="center">
       <v-col cols="12" sm="8" md="9">
         <div class="text-center d-flex pb-4">
