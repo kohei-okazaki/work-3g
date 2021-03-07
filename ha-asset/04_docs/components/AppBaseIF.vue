@@ -5,7 +5,7 @@
         >{{ i + 1 }}.{{ ifItem.name }}
         <template v-slot:actions>
           <v-chip :color="getHttpMethodColor(ifItem.httpMethod)">
-            {{ ifItem.httpMethod }}
+            <b>{{ ifItem.httpMethod }}</b>
           </v-chip>
           <v-chip color="gray">
             {{ ifItem.endpoint }}

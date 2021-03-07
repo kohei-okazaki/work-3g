@@ -10,6 +10,8 @@ import AppBreadCrumbs from "~/components/AppBreadCrumbs.vue";
 import AppContentsTitle from "~/components/AppContentsTitle.vue";
 
 export default {
+  // RootAPIのレイアウトを適用
+  layout: "rootApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
