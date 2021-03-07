@@ -30,11 +30,10 @@ export default {
           href: "/db",
         },
       ],
-    }
-  }
+    };
+  },
 };
 </script>
 
 <style scoped>
-
 </style>

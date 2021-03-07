@@ -2,6 +2,50 @@
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
     <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+
+    <v-form ref="sqlForm">
+      <v-row>
+        <v-col cols="1" sm="1" md="1"></v-col>
+        <v-col class="text-left" cols="5" sm="5" md="5">
+          <v-select
+            :items="tables"
+            return-object
+            clearable
+            label="テーブル名"
+            item-text="logicalName"
+            item-value="physicalName"
+            v-model="table"
+            @input="setColumns"
+          ></v-select>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="1" sm="1" md="1"></v-col>
+        <v-col class="text-left" cols="5" sm="5" md="5">
+          <v-select
+            :items="columns"
+            return-object
+            clearable
+            label="カラム名"
+            item-text="logicalName"
+            item-value="physicalName"
+            v-model="column"
+          ></v-select>
+        </v-col>
+      </v-row>
+      <v-row v-if="table != null && column != null">
+        <v-col cols="1" sm="1" md="1"></v-col>
+        <v-col class="text-left" cols="5" sm="5" md="5">
+          <v-btn color="info" @click="createSql">SQL生成</v-btn>
+        </v-col>
+      </v-row>
+      <v-row v-if="sql != null">
+        <v-col cols="1" sm="1" md="1"></v-col>
+        <v-col class="text-left" cols="5" sm="5" md="5">
+          <v-textarea label="SQL" v-model="sql" readonly></v-textarea>
+        </v-col>
+      </v-row>
+    </v-form>
   </div>
 </template>
 
@@ -35,11 +79,33 @@ export default {
           href: "/db/dropColumn",
         },
       ],
-    }
-  }
+      tables: this.$store.state.db.tables,
+      columns: [],
+      table: null,
+      column: null,
+      sql: null,
+    };
+  },
+  methods: {
+    setColumns: function () {
+      if (this.table == null) {
+        // 選択テーブル名がnullの場合
+        this.columns = [];
+        return;
+      }
+      this.columns = this.table.columns;
+    },
+    createSql: function () {
+      this.sql =
+        "ALTER TABLE " +
+        this.table.physicalName +
+        " DROP " +
+        this.column.physicalName +
+        ";";
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 </style>
