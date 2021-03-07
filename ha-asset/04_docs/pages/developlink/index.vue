@@ -149,6 +149,11 @@ export default {
           url:
             "http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/",
         },
+        {
+          name: "AWS",
+          url:
+            "https://aws.amazon.com/jp/",
+        },
       ],
     };
   },
