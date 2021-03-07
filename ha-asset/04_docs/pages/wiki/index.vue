@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="Wikiのページ" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
   </div>
 </template>
 

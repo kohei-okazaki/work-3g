@@ -1,0 +1,209 @@
+<template>
+  <div>
+    <AppBreadCrumbs :items="breadcrumbs" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="8" md="10">
+        <v-card>
+          <v-card-title class="text-subtitle-1">ライブラリ一覧</v-card-title>
+          <v-card-text>
+            <v-simple-table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>名前</th>
+                  <th>Version</th>
+                  <th>内容</th>
+                  <th>dashboard</th>
+                  <th>api</th>
+                  <th>batch</th>
+                  <th>nodeapi</th>
+                  <th>rootapi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(lib, i) in libraryList" :key="i">
+                  <td>
+                    <div>{{ i + 1 }}</div>
+                  </td>
+                  <td>
+                    <div>{{ lib.name }}</div>
+                  </td>
+                  <td>
+                    <div>{{ lib.version }}</div>
+                  </td>
+                  <td>
+                    <div>{{ lib.description }}</div>
+                  </td>
+                  <td>
+                    <v-icon
+                      v-if="lib.projects.includes('dashboard')"
+                      color="green"
+                      >mdi-check</v-icon
+                    >
+                    <div v-else></div>
+                  </td>
+                  <td>
+                    <v-icon v-if="lib.projects.includes('api')" color="green"
+                      >mdi-check</v-icon
+                    >
+                    <div v-else></div>
+                  </td>
+                  <td>
+                    <v-icon v-if="lib.projects.includes('batch')" color="green"
+                      >mdi-check</v-icon
+                    >
+                    <div v-else></div>
+                  </td>
+                  <td>
+                    <v-icon
+                      v-if="lib.projects.includes('nodeapi')"
+                      color="green"
+                      >mdi-check</v-icon
+                    >
+                    <div v-else></div>
+                  </td>
+                  <td>
+                    <v-icon
+                      v-if="lib.projects.includes('rootapi')"
+                      color="green"
+                      >mdi-check</v-icon
+                    >
+                    <div v-else></div>
+                  </td>
+                </tr>
+              </tbody>
+            </v-simple-table>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
+</template>
+<script>
+import AppBreadCrumbs from "~/components/AppBreadCrumbs.vue";
+import AppContentsTitle from "~/components/AppContentsTitle.vue";
+
+export default {
+  // Wikiのレイアウトを適用
+  layout: "wikiLayout",
+  components: {
+    AppBreadCrumbs,
+    AppContentsTitle,
+  },
+  data: function () {
+    return {
+      breadcrumbs: [
+        {
+          text: "Top",
+          disabled: false,
+          href: "/",
+        },
+        {
+          text: "Wiki",
+          disabled: false,
+          href: "/wiki",
+        },
+        {
+          text: "ライブラリ一覧",
+          disabled: true,
+          href: "/wiki/libraryList",
+        },
+      ],
+      libraryList: [
+        {
+          name: "Spring Framework",
+          version: "5.3.4",
+          description: "健康管理API/ダッシュボードで使用するWeb FW",
+          projects: ["dashboard", "api", "rootapi", "batch"],
+        },
+        {
+          name: "Spring Boot",
+          version: "2.4.3",
+          description: "管理者APIで使用するWeb FW",
+          projects: ["rootapi"],
+        },
+        {
+          name: "express",
+          version: "4.17.1",
+          description: "Node.jsで使用するWeb FW",
+          projects: ["nodeapi"],
+        },
+        {
+          name: "Jackson",
+          version: "2.12.1",
+          description: "JSONパースライブラリ",
+          projects: ["dashboard", "api", "rootapi", "batch"],
+        },
+        {
+          name: "jwt",
+          version: "0.9.1",
+          description: "JSON Web Tokenライブラリ",
+          projects: ["rootapi"],
+        },
+        {
+          name: "jsonwebtoken",
+          version: "8.5.1",
+          description: "JSON Web Tokenライブラリ",
+          projects: ["nodeapi"],
+        },
+        {
+          name: "apache poi",
+          version: "5.0.0",
+          description: "健康管理ダッシュボードで使用する帳票用ライブラリ",
+          projects: ["dashboard"],
+        },
+        {
+          name: "logback",
+          version: "1.2.3",
+          description:
+            "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
+          projects: ["dashboard", "api", "rootapi", "batch"],
+        },
+        {
+          name: "mysql",
+          version: "8.0.23",
+          description:
+            "健康管理API/ダッシュボード/管理者APIで使用するMySQLライブラリ",
+          projects: ["dashboard", "api", "rootapi", "batch"],
+        },
+        {
+          name: "mybatis",
+          version: "3.5.6",
+          description:
+            "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
+          projects: ["dashboard", "api", "rootapi"],
+        },
+        {
+          name: "flyway",
+          version: "7.5.4",
+          description: "DataBaseのマイグレーションライブラリ",
+          projects: ["dashboard", "api", "rootapi"],
+        },
+        {
+          name: "thymeleaf",
+          version: "3.0.12.RELEASE",
+          description: "健康管理ダッシュボードで使用するテンプレートエンジン",
+          projects: ["dashboard"],
+        },
+        {
+          name: "slack",
+          version: "1.3.0",
+          description: "JavaからSlackAPIを呼び出すためのライブラリ",
+          projects: ["dashboard", "api", "rootapi", "batch"],
+        },
+        {
+          name: "junit",
+          version: "5.7.1",
+          description: "Javaのテストライブラリ",
+          projects: ["dashboard", "api", "rootapi", "batch"],
+        },
+      ],
+    };
+  },
+};
+</script>
+
+<style scoped>
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="ローカル環境構築手順" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
 
     <v-row justify="center" align="center">
       <v-col cols="12" sm="8" md="10">
@@ -1051,6 +1051,21 @@
                   開発中、新しくモジュールを追加したい場合、Eclipseのha-root/frontディレクトリ上でコマンドプロンプトを開き、以下のコマンドを実行
                 </p>
                 <kbd>npm install --save ${module_name}</kbd>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>Node.js の更新</summary>
+                <p>
+                  Node.jsのバージョンを更新したい場合、<a
+                    href="https://nodejs.org/ja/download/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ここ</a
+                  >を開き<b>「LTS」</b>の最新版のインストーラをダウンロードし、ウィザードの指示に従って画面を進めればOK</p>
+                <p>以下のコマンドを実行し、更新したNodeのバージョンになっていればOK</p>
+                <kbd>node -v</kbd>
               </details>
             </v-expansion-panel-content>
           </v-expansion-panel>

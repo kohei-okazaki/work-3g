@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="更新" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
     <v-row justify="center">
       <v-col class="text-left" cols="12" sm="8" md="10">
         <v-alert border="left" type="info" text elevation="2" dismissible
@@ -147,6 +147,11 @@ export default {
   },
   methods: {
     setColumns: function () {
+      if (this.updateTable == null) {
+        // 選択テーブル名がnullの場合
+        this.columns = [];
+        return;
+      }
       this.columns = this.updateTable.columns;
     },
     createSql: function () {
