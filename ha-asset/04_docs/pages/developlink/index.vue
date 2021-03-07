@@ -1,9 +1,9 @@
 <template>
   <div>
     <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle title="開発用のページ" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="9">
+      <v-col cols="12" sm="8" md="10">
         <v-card>
           <v-card-title>健康管理ダッシュボード</v-card-title>
           <v-card-text d-flex>
@@ -20,6 +20,8 @@
                       color="link"
                       min-height="20"
                       class="x-small post-link align-center py-1 px-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       >{{ link.url }}</v-btn
                     >
                   </td>
@@ -31,7 +33,7 @@
       >
     </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="9">
+      <v-col cols="12" sm="8" md="10">
         <v-card>
           <v-card-title>管理者サイト</v-card-title>
           <v-card-text d-flex>
@@ -48,6 +50,8 @@
                       color="link"
                       min-height="20"
                       class="x-small post-link align-center py-1 px-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       >{{ link.url }}</v-btn
                     >
                   </td>
@@ -57,6 +61,36 @@
           </v-card-text></v-card
         ></v-col
       >
+    </v-row>
+    <v-row justify="center" align="center">
+      <v-col cols="12" sm="8" md="10">
+        <v-card>
+          <v-card-title>その他</v-card-title>
+          <v-card-text d-flex>
+            <v-simple-table>
+              <template v-slot:default>
+                <tr v-for="(link, i) in otherLinks" :key="i">
+                  <th>
+                    <div class="text-left">{{ link.name }}</div>
+                  </th>
+                  <td>
+                    <v-btn
+                      :href="link.url"
+                      text
+                      color="link"
+                      min-height="20"
+                      class="x-small post-link align-center py-1 px-2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >{{ link.url }}</v-btn
+                    >
+                  </td>
+                </tr>
+              </template>
+            </v-simple-table>
+          </v-card-text></v-card
+        >
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -103,6 +137,22 @@ export default {
         {
           name: "EC2環境",
           url: "",
+        },
+      ],
+      otherLinks: [
+        {
+          name: "Github",
+          url: "https://github.com/kohei-okazaki/work-3g",
+        },
+        {
+          name: "健康管理アプリDocs",
+          url:
+            "http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/",
+        },
+        {
+          name: "AWS",
+          url:
+            "https://aws.amazon.com/jp/",
         },
       ],
     };
