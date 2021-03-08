@@ -6,17 +6,17 @@
 ## API一覧
 - 健康情報登録API：
     - 概要：ユーザの健康情報を登録するAPI
-    - URL：${domain}/api/${seqUserId}/healthinfo
+    - URL：/api/{seqUserId}/healthinfo
     - Method：Post
 
 - 健康情報照会API：
     - 概要：ユーザの健康情報を参照するAPI
-    - URL：${domain}/api/${seqUserId}/healthinfo/{seqHealthInfoId}
+    - URL：/api/{seqUserId}/healthinfo/{seqHealthInfoId}
     - Method：Get
 
 - ヘルスチェックAPI：
     - 概要：APIサーバ起動しているかをチェックするAPI
-    - URL：${domain}/api/healthcheck
+    - URL：/api/healthcheck
     - Method：Get
 
 ## ログ
