@@ -24,7 +24,7 @@
               <th>項目名(論理名)</th>
               <th>必須</th>
               <th>型</th>
-              <th>Byte数</th>
+              <th>Byte</th>
               <th>備考</th>
             </tr>
           </thead>
@@ -55,7 +55,7 @@
               <th>項目名(論理名)</th>
               <th>必須</th>
               <th>型</th>
-              <th>Byte数</th>
+              <th>Byte</th>
               <th>備考</th>
             </tr>
           </thead>
