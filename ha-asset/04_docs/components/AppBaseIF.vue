@@ -62,7 +62,10 @@
           <tbody>
             <tr v-for="(response, i) in ifItem.response" :key="i">
               <td>{{ i + 1 }}</td>
-              <td>{{ response.physicalName }}</td>
+              <td>
+                {{ putSpace(response.layer) }}
+                {{ response.physicalName }}
+              </td>
               <td>{{ response.logicalName }}</td>
               <td>
                 <v-icon v-if="response.required"
@@ -82,7 +85,7 @@
 <script>
 export default {
   props: {
-    ifs: Object,
+    ifs: Array,
   },
   methods: {
     getHttpMethodColor: function (httpMethod) {
@@ -96,6 +99,17 @@ export default {
         return "red";
       }
       return "gray";
+    },
+  },
+  computed: {
+    putSpace: function () {
+      return function (count) {
+        let space = "";
+        for (var i = 0; i < count; i++) {
+          space += "　";
+        }
+        return space;
+      };
     },
   },
 };
