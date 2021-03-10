@@ -29,41 +29,27 @@
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
-      <AppTop />
+      <v-toolbar-title v-text="title" />
       <v-spacer />
-      <AppTheme />
-      &nbsp;&nbsp;
-      <AppLoginUserMenu />
-      &nbsp;&nbsp;
-      <AppLogout />
     </v-app-bar>
-    <v-main>
+    <v-main class="base">
       <v-container>
         <nuxt />
       </v-container>
     </v-main>
-
     <AppScroll />
-    <AppFooter />
+    <v-footer :absolute="!fixed" app>
+      <span>&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import AppFooter from "~/components/AppFooter.vue";
-import AppLogout from "~/components/AppLogout.vue";
-import AppTop from "~/components/AppTop.vue";
-import AppTheme from "~/components/AppTheme.vue";
 import AppScroll from "~/components/AppScroll.vue";
-import AppLoginUserMenu from "~/components/AppLoginUserMenu.vue";
 
 export default {
   components: {
-    AppFooter,
-    AppLogout,
-    AppTop,
-    AppTheme,
     AppScroll,
-    AppLoginUserMenu,
   },
   data: function () {
     return {
@@ -73,39 +59,53 @@ export default {
       items: [
         {
           icon: "mdi-apps",
-          title: "Top",
+          title: "TOPページ",
           to: "/",
         },
         {
-          icon: "mdi-account",
-          title: "アカウント情報一覧",
-          to: "/account",
+          icon: "mdi-api",
+          title: "健康管理API",
+          to: "/healthinfoapp/api",
+        },
+        {
+          icon: "mdi-view-dashboard",
+          title: "健康管理Dashboard",
+          to: "/healthinfoapp/dashboard",
         },
         {
           icon: "mdi-api",
-          title: "API通信情報一覧",
-          to: "/apidata",
+          title: "NodeAPI",
+          to: "/node/api",
         },
         {
-          icon: "mdi-pill",
-          title: "健康情報一覧",
-          to: "/healthinfo",
+          icon: "mdi-api",
+          title: "管理者サイト用API",
+          to: "/root/api",
         },
         {
-          icon: "mdi-newspaper",
-          title: "お知らせ一覧",
-          to: "/news",
+          icon: "mdi-link",
+          title: "開発用リンク",
+          to: "/developlink",
+        },
+        {
+          icon: "mdi-database",
+          title: "DB",
+          to: "/db",
+        },
+        {
+          icon: "mdi-message-processing",
+          title: "Wiki",
+          to: "/wiki",
         },
       ],
       miniVariant: false,
       right: true,
+      title: "健康管理ドキュメント",
     };
   },
 };
 </script>
 
 <style>
-.pushable {
-  cursor: pointer;
-}
-</style> 
+
+</style>
