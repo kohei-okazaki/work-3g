@@ -3,7 +3,7 @@
     <AppMessageError v-if="error.hasError" :data="error" />
     <br />
     <v-row justify="center" align="center">
-      <v-col cols="6" sm="8" md="6">
+      <v-col cols="6" xs="12" sm="12" md="6">
         <AccountRegByMonthly
           :error="error"
           :labels="accountLabels"
@@ -14,7 +14,7 @@
           @get-graph="getAccountGraph"
         />
       </v-col>
-      <v-col cols="6" sm="8" md="6">
+      <v-col cols="6" xs="12" sm="12" md="6">
         <HealthInfoRegByMonthly
           :error="error"
           :labels="healthInfoLabels"
