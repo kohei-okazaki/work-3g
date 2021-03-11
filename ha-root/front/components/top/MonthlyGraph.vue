@@ -6,6 +6,7 @@
       elevation="12"
       max-width="calc(100% - 32px)"
       rounded
+      v-if="labels != null && labels.length > 1"
     >
       <v-sparkline
         :labels="labels"
