@@ -63,7 +63,11 @@ export default {
           edgeType: "round",
           next: ["3"],
         },
-        { id: "3", text: "レスポンスJSON返却", edgeType: "round" },
+        {
+          id: "3",
+          text: "レスポンスJSON返却",
+          edgeType: "round",
+        },
       ],
     };
   },

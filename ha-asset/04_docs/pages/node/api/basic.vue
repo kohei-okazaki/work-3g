@@ -63,7 +63,12 @@ export default {
           edgeType: "round",
           next: ["3"],
         },
-        { id: "3", text: "BMI計算", edgeType: "round", next: ["4"] },
+        {
+          id: "3",
+          text: "BMI計算",
+          edgeType: "round",
+          next: ["4"],
+        },
         {
           id: "4",
           text: "標準体重計算",

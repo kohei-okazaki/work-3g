@@ -57,7 +57,12 @@ export default {
           edgeType: "round",
           next: ["2"],
         },
-        { id: "2", text: "トークンを生成", edgeType: "round", next: ["3"] },
+        {
+          id: "2",
+          text: "トークンを生成",
+          edgeType: "round",
+          next: ["3"],
+        },
         {
           id: "3",
           text: "レスポンスJSON生成",

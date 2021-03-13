@@ -63,7 +63,12 @@ export default {
           edgeType: "round",
           next: ["3"],
         },
-        { id: "3", text: "生活活動代謝計算", edgeType: "round", next: ["4"] },
+        {
+          id: "3",
+          text: "生活活動代謝計算",
+          edgeType: "round",
+          next: ["4"],
+        },
         {
           id: "4",
           text: "1日の消費カロリー計算",
