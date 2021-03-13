@@ -1,12 +1,12 @@
 <template>
   <div>
-    <v-row>
-      <v-col class="text-center" sm="12">
+    <v-row justify="center">
+      <v-col sm="12">
         <AppBreadCrumbs :items="breadcrumbs" />
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-col class="text-left" sm="12">
+      <v-col sm="12">
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
