@@ -1,11 +1,5 @@
 <template>
-  <v-row justify="center">
-    <v-col class="text-left" cols="12" sm="8" md="10">
-      <v-alert border="left" color="purple" text elevation="2">{{
-        title
-      }}</v-alert>
-    </v-col>
-  </v-row>
+  <v-alert border="left" color="purple" text elevation="2">{{ title }}</v-alert>
 </template>
 <script>
 export default {

@@ -1,10 +1,18 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+    <v-row justify="center">
+      <v-col class="text-center" sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="text-left" sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
 
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="10">
+      <v-col sm="12">
         <v-alert text type="info" elevation="2" border="left">
           <div class="text-subtitle-1">概要</div>
           <div class="text-body-2">
@@ -15,7 +23,7 @@
     </v-row>
 
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="10">
+      <v-col sm="12">
         <v-expansion-panels multiple>
           <v-expansion-panel>
             <v-expansion-panel-header
@@ -69,12 +77,12 @@
                   >より以下の手順でMySQLをローカルPCにダウンロードして下さい
                 </p>
                 <p>
-                  以下ダウンロード手順は2016年頃のもののため、画面が更新されている可能性があります
+                  以下ダウンロード手順は2016年頃の為、画面が更新されている可能性があります
                 </p>
                 <ol>
                   <li>
                     <p>
-                      上記説明のURLのリンクで遷移後の画面上部の「ダウンロード」タブ押下
+                      上記、説明のURLのリンクで遷移後の画面上部の「ダウンロード」タブ押下
                     </p>
                   </li>
                   <li>
@@ -1318,7 +1326,7 @@ export default {
         {
           type: "DBマイグレーション",
           name: "Flyway",
-          version: "7.5.4",
+          version: "7.7.0",
         },
         {
           type: "ORM",
