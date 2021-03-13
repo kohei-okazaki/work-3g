@@ -5,7 +5,7 @@
       <v-spacer />
       <AppTheme />
     </v-app-bar>
-    <v-main>
+    <v-main :class="isDark">
       <v-container>
         <nuxt />
       </v-container>
@@ -34,6 +34,14 @@ export default {
     AppTop,
     AppTheme,
     AppScroll,
+  },
+  computed: {
+    isDark: function () {
+      if (this.$vuetify.theme.dark) {
+        return "";
+      }
+      return "light-main";
+    },
   },
 };
 </script>

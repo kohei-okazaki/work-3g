@@ -1,9 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="9">
+      <v-col sm="12">
         <div class="text-center d-flex pb-4">
           <v-expansion-panels multiple>
             <v-expansion-panel v-for="(item, i) in list" :key="i">

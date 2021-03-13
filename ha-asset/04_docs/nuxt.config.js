@@ -34,7 +34,7 @@ export default {
   css: ['~/assets/baseLayout.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/vue-mermaid', '~/plugins/vue-simple-context-menu'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
