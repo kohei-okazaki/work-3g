@@ -26,7 +26,7 @@ export default {
   },
   data: function () {
     return {
-      breadcrumbs:[
+      breadcrumbs: [
         {
           text: "Top",
           disabled: false,
@@ -37,7 +37,7 @@ export default {
           disabled: true,
           href: "/node/api",
         },
-      ]
+      ],
     };
   },
 };
