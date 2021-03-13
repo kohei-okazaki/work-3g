@@ -1,12 +1,18 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
-
+    <v-row>
+      <v-col class="text-center" sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="text-left" sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-form ref="sqlForm">
       <v-row>
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12" md="5">
           <v-select
             :items="tables"
             return-object
@@ -19,22 +25,21 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="3" sm="3" md="3">
+        <v-col class="text-left" sm="12" md="3">
           <v-text-field
             clearable
             label="変更前カラム名"
             v-model="oldColumn"
           ></v-text-field>
         </v-col>
-        <v-col class="text-left" cols="3" sm="3" md="3">
+        <v-col class="text-left" sm="12" md="3">
           <v-text-field
             clearable
             label="変更後カラム名"
             v-model="newColumn"
           ></v-text-field>
         </v-col>
-        <v-col class="text-left" cols="3" sm="3" md="3">
+        <v-col class="text-left" sm="12" md="3">
           <v-select
             :items="columnTypes"
             return-object
@@ -43,7 +48,7 @@
             v-model="columnType"
           ></v-select>
         </v-col>
-        <v-col class="text-left" cols="2" sm="2" md="2">
+        <v-col class="text-left" sm="12" md="3">
           <v-text-field
             clearable
             label="サイズ"
@@ -59,14 +64,12 @@
           columnType != null
         "
       >
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12">
           <v-btn color="info" @click="createSql">SQL生成</v-btn>
         </v-col>
       </v-row>
       <v-row v-if="sql != null">
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12">
           <v-textarea label="SQL" v-model="sql" readonly></v-textarea>
         </v-col>
       </v-row>

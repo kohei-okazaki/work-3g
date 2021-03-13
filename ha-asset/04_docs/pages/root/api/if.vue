@@ -1,10 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
-
+    <v-row justify="center">
+      <v-col class="text-center" sm="12" md="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="text-left" sm="12" md="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="12" md="12">
+      <v-col sm="12" md="12">
         <AppBaseIF :ifs="ifs" />
       </v-col>
     </v-row>
@@ -110,6 +117,16 @@ export default {
           endpoint: "/api/root/top",
           httpMethod: "GET",
           description: "管理サイトTop画面情報の取得を行うAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "date",
@@ -207,6 +224,16 @@ export default {
           endpoint: "/api/root/top/healthinfo",
           httpMethod: "GET",
           description: "管理サイトTop画面情報の取得を行うAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "date",
@@ -278,6 +305,16 @@ export default {
           endpoint: "/api/root/top/acount",
           httpMethod: "GET",
           description: "管理サイトTop画面情報の取得を行うAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "date",
@@ -349,6 +386,16 @@ export default {
           endpoint: "/api/root/user/{seq_login_id}",
           httpMethod: "GET",
           description: "管理サイトユーザ情報の取得を行うAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [],
           response: [
             {
@@ -446,6 +493,16 @@ export default {
           endpoint: "/api/root/user/",
           httpMethod: "POST",
           description: "管理サイトユーザの作成を行うAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "password",
@@ -507,6 +564,16 @@ export default {
           endpoint: "/api/root/user/{seq_login_id}",
           httpMethod: "PUT",
           description: "管理サイトユーザの編集を行うAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "roles",
@@ -585,6 +652,16 @@ export default {
           endpoint: "/api/root/account",
           httpMethod: "GET",
           description: "健康管理アプリのユーザの一覧を取得するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [],
           response: [
             {
@@ -742,6 +819,16 @@ export default {
           endpoint: "/api/root/apidata",
           httpMethod: "GET",
           description: "健康管理APIの実行履歴一覧を取得するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [],
           response: [
             {
@@ -876,6 +963,16 @@ export default {
           endpoint: "/api/root/healthinfo",
           httpMethod: "GET",
           description: "健康管理アプリのユーザの健康情報一覧を取得するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [],
           response: [
             {
@@ -1039,6 +1136,16 @@ export default {
           endpoint: "/api/root/healthinfo/{seq_health_info_id}",
           httpMethod: "PUT",
           description: "健康管理アプリのユーザの健康情報を更新するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "seq_user_id",
@@ -1100,6 +1207,16 @@ export default {
           endpoint: "/api/root/news",
           httpMethod: "GET",
           description: "健康管理アプリのお知らせ情報一覧を取得するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [],
           response: [
             {
@@ -1208,6 +1325,16 @@ export default {
           endpoint: "/api/root/news",
           httpMethod: "POST",
           description: "健康管理アプリのお知らせ情報を登録するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "title",
@@ -1372,6 +1499,16 @@ export default {
           endpoint: "/api/root/news/{id}",
           httpMethod: "PUT",
           description: "健康管理アプリのお知らせ情報を変更するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "index",
@@ -1545,6 +1682,16 @@ export default {
           endpoint: "/api/root/news/{id}",
           httpMethod: "DELETE",
           description: "健康管理アプリのお知らせ情報を削除するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
           request: [
           ],
           response: [

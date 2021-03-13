@@ -1,10 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
-
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="10">
+      <v-col sm="12">
         <v-card>
           <v-card-title class="text-subtitle-1">ライブラリ一覧</v-card-title>
           <v-card-text>
@@ -131,6 +138,12 @@ export default {
           projects: ["nodeapi"],
         },
         {
+          name: "AWS-SDK",
+          version: "1.11.939",
+          description: "AWSのサービスを使うためのライブラリ",
+          projects: ["dashboard", "api", "rootapi", "batch"],
+        },
+        {
           name: "Jackson",
           version: "2.12.1",
           description: "JSONパースライブラリ",
@@ -177,7 +190,7 @@ export default {
         },
         {
           name: "flyway",
-          version: "7.5.4",
+          version: "7.7.0",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },

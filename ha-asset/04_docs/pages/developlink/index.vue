@@ -1,9 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+    <v-row>
+      <v-col class="text-center" sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="text-left" sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="10">
+      <v-col sm="12">
         <v-card>
           <v-card-title>健康管理ダッシュボード</v-card-title>
           <v-card-text d-flex>
@@ -33,7 +41,7 @@
       >
     </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="10">
+      <v-col sm="12">
         <v-card>
           <v-card-title>管理者サイト</v-card-title>
           <v-card-text d-flex>
@@ -63,7 +71,7 @@
       >
     </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="8" md="10">
+      <v-col sm="12">
         <v-card>
           <v-card-title>その他</v-card-title>
           <v-card-text d-flex>
