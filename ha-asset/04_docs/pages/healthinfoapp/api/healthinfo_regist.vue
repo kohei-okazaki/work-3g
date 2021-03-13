@@ -117,6 +117,18 @@ export default {
         },
         {
           id: "10",
+          text: "健康情報 検索",
+          edgeType: "round",
+          next: ["11"],
+        },
+        {
+          id: "11",
+          text: "BMI範囲マスタ 検索",
+          edgeType: "round",
+          next: ["12"],
+        },
+        {
+          id: "12",
           text: "健康情報 登録",
           edgeType: "round",
           next: ["101"],
