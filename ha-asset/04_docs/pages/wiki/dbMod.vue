@@ -1,9 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="10" md="10">
+      <v-col sm="12">
         <div class="text-left">
           <v-expansion-panels multiple>
             <v-expansion-panel>

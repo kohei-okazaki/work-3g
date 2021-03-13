@@ -15,6 +15,24 @@
       <v-expansion-panel-content class="text-body-2">
         <div>{{ ifItem.description }}</div>
         <br />
+        <v-alert border="left" type="info">リクエストヘッダ</v-alert>
+        <v-simple-table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>キー</th>
+              <th>設定値</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(header, i) in ifItem.headers" :key="i">
+              <td>{{ i + 1 }}</td>
+              <td>{{ header.key }}</td>
+              <td>{{ header.value }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+        <br />
         <v-alert border="left" type="info">リクエストIF</v-alert>
         <v-simple-table>
           <thead>

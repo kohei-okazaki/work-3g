@@ -1,10 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
-
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="10" md="10">
+      <v-col sm="12">
         <AppBaseIF :ifs="ifs" />
       </v-col>
     </v-row>
@@ -49,7 +56,13 @@ export default {
           endpoint: "/token",
           httpMethod: "GET",
           description:
-            "健康情報計算APIに必要なトークン認証情報を取得するためのAPI",
+            "Node APIに必要なトークン認証情報を取得するためのAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+          ],
           request: [
             {
               physicalName: "seq_user_id",
@@ -94,6 +107,16 @@ export default {
           endpoint: "/basic",
           httpMethod: "GET",
           description: "BMI・標準体重を計算するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "X-NODE-TOKEN",
+              value: "トークン発行API.レスポンスIF.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "height",
@@ -182,6 +205,16 @@ export default {
           endpoint: "/calorie",
           httpMethod: "GET",
           description: "消費カロリーを計算するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "X-NODE-TOKEN",
+              value: "トークン発行API.レスポンスIF.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "gender",
@@ -329,6 +362,16 @@ export default {
           endpoint: "/breath_capacity",
           httpMethod: "GET",
           description: "肺活量を計算するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "X-NODE-TOKEN",
+              value: "トークン発行API.レスポンスIF.tokenを設定",
+            },
+          ],
           request: [
             {
               physicalName: "age",

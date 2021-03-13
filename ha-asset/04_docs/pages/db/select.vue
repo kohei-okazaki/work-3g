@@ -1,9 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+    <v-row>
+      <v-col class="text-center" sm="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
     <v-row justify="center">
-      <v-col class="text-left" cols="12" sm="8" md="10">
+      <v-col class="text-left" sm="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="text-left" sm="12">
         <v-alert border="left" type="info" text elevation="2" dismissible
           >簡易的にDBを検索するSQLを作成するツール。<br />以下に当たる部分を指定し作成ボタンでSQLを作成
           <ul>
@@ -16,8 +24,7 @@
 
     <v-form ref="sqlForm">
       <v-row>
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12" md="6">
           <v-select
             :items="tables"
             return-object
@@ -31,8 +38,7 @@
         </v-col>
       </v-row>
       <v-row v-if="selectedTable != null">
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12" md="6">
           <v-select
             :items="columns"
             return-object
@@ -43,7 +49,7 @@
             v-model="selectedColumn"
           ></v-select>
         </v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12" md="6">
           <v-text-field
             label="検索対象カラムの値"
             clearable
@@ -58,14 +64,12 @@
           selectedColumnValue != null
         "
       >
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12">
           <v-btn color="info" @click="createSql">SQL生成</v-btn>
         </v-col>
       </v-row>
       <v-row v-if="sql != null">
-        <v-col cols="1" sm="1" md="1"></v-col>
-        <v-col class="text-left" cols="5" sm="5" md="5">
+        <v-col class="text-left" sm="12">
           <v-textarea
             label="SQL"
             v-model="sql"
