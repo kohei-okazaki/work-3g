@@ -36,7 +36,7 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
+  css: ['~/assets/baseLayout.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [],
@@ -102,21 +102,21 @@ export default {
       themes: {
         dark: {
           primary: colors.cyan.darken2,
-          accent: colors.grey.darken3,
+          accent: colors.purple.darken1,
           secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          info: colors.cyan.darken2,
+          warning: colors.yellow.darken3,
+          error: colors.deepOrange.darken3,
+          success: colors.green.darken3
         },
         light: {
           primary: colors.cyan.darken2,
-          accent: colors.grey.darken3,
+          accent: colors.purple.darken1,
           secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          info: colors.cyan.lighten1,
+          warning: colors.yellow.darken3,
+          error: colors.deepOrange.darken3,
+          success: colors.green.darken3
         }
       }
     }

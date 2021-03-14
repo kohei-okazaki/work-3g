@@ -1,10 +1,17 @@
 <template>
   <div>
-    <AppBreadCrumbs :items="breadcrumbs" />
-    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
-
+    <v-row justify="center">
+      <v-col class="text-center" sm="12" md="12">
+        <AppBreadCrumbs :items="breadcrumbs" />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="text-left" sm="12" md="12">
+        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
+      </v-col>
+    </v-row>
     <v-row justify="center" align="center">
-      <v-col cols="12" sm="12" md="12">
+      <v-col sm="12" md="12">
         <AppBaseIF :ifs="ifs" />
       </v-col>
     </v-row>
@@ -49,6 +56,20 @@ export default {
           endpoint: "/api/{seqUserId}/healthinfo",
           httpMethod: "POST",
           description: "ユーザの健康情報を登録するAPI",
+          headers: [
+            {
+              key: "Accept-Charset",
+              value: "utf-8",
+            },
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Api-Key",
+              value: "{seqUserId}のアカウント情報.APIキーを指定",
+            },
+          ],
           request: [
             {
               physicalName: "height",
@@ -218,6 +239,20 @@ export default {
           endpoint: "/api/{seqUserId}/healthinfo/{seqHealthInfoId}",
           httpMethod: "GET",
           description: "ユーザの健康情報を参照するAPI",
+          headers: [
+            {
+              key: "Accept-Charset",
+              value: "utf-8",
+            },
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Api-Key",
+              value: "{seqUserId}のアカウント情報.APIキーを指定",
+            },
+          ],
           request: [],
           response: [
             {
@@ -326,8 +361,42 @@ export default {
           endpoint: "/api/healthcheck",
           httpMethod: "GET",
           description: "APIサーバ起動しているかをチェックするAPI",
+          headers: [
+            {
+              key: "Accept-Charset",
+              value: "utf-8",
+              description: "UTF-8を固定で指定",
+            },
+          ],
           request: [],
-          response: [],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "error",
+              logicalName: "エラー情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "message",
+              logicalName: "エラーメッセージ",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: 256,
+              description: "result='1'の場合、必須",
+            },
+          ],
         },
       ],
     };

@@ -37,7 +37,7 @@
       &nbsp;&nbsp;
       <AppLogout />
     </v-app-bar>
-    <v-main>
+    <v-main :class="isDark">
       <v-container>
         <nuxt />
       </v-container>
@@ -100,6 +100,14 @@ export default {
       miniVariant: false,
       right: true,
     };
+  },
+  computed: {
+    isDark: function () {
+      if (this.$vuetify.theme.dark) {
+        return "";
+      }
+      return "light-main";
+    },
   },
 };
 </script>
