@@ -70,7 +70,7 @@ export default {
           edgeType: "round",
           link: [
             "-- 検索結果 == 0 -->",
-            "-- 検索結果.API_KEY <br><> リクエストヘッダ.Api-Key -->",
+            "-- 検索結果.API_KEY <br><> ヘッダ.Api-Key -->",
             "-- それ以外場合 -->",
           ],
           next: ["100", "100", "4"],

@@ -24,8 +24,8 @@ import AppContentsTitle from "~/components/AppContentsTitle.vue";
 import AppDocs from "~/components/AppDocs.vue";
 
 export default {
-  // 健康管理APIのレイアウトを適用
-  layout: "healthinfoappApiLayout",
+  // RootAPIのレイアウトを適用
+  layout: "rootApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
@@ -40,14 +40,14 @@ export default {
           href: "/",
         },
         {
-          text: "健康管理API",
+          text: "管理者サイト用API",
           disabled: false,
-          href: "/healthinfoapp/api",
+          href: "/root/api",
         },
         {
-          text: "健康情報照会API",
+          text: "ログインAPI",
           disabled: true,
-          href: "/healthinfoapp/api/healthinfo_refer",
+          href: "/root/api/login",
         },
       ],
       flow: [
@@ -59,48 +59,41 @@ export default {
         },
         {
           id: "2",
-          text: "ヘッダ情報チェック",
+          text: "ログインIDチェック",
           edgeType: "round",
-          link: ["-- ヘッダ.Api-Keyが存在しない -->", "-- それ以外場合 -->"],
-          next: ["100", "3"],
+          link: [
+            "-- ログインIDが未指定<br>ログインIDが半角数字以外の場合 -->",
+            "-- それ以外場合 -->",
+          ],
+          next: ["404", "3"],
         },
         {
           id: "3",
-          text: "アカウント情報 検索",
+          text: "管理者サイトユーザログイン情報 検索",
           edgeType: "round",
-          link: [
-            "-- 検索結果 == 0 -->",
-            "-- 検索結果.API_KEY <br><> ヘッダ.Api-Key -->",
-            "-- それ以外場合 -->",
-          ],
-          next: ["100", "100", "4"],
+          link: ["-- 検索結果 == 0 -->", "-- それ以外場合 -->"],
+          next: ["404", "4"],
         },
         {
           id: "4",
-          text: "健康情報 検索",
+          text: "トークン情報 生成",
           edgeType: "round",
-          link: [
-            "-- 検索結果 == 0 -->",
-            "-- 検索結果 > 1 -->",
-            "-- 検索結果 == 1 -->",
-          ],
-          next: ["100", "100", "101"],
+          next: ["5"],
         },
         {
-          id: "100",
-          text: "異常系レスポンスJSON生成",
+          id: "5",
+          text: "トークン情報を<br>レスポンスヘッダに設定",
           edgeType: "round",
-          next: ["110"],
+          next: ["6"],
         },
         {
-          id: "101",
-          text: "正常系レスポンスJSON生成",
+          id: "6",
+          text: "レスポンス返却",
           edgeType: "round",
-          next: ["110"],
         },
         {
-          id: "110",
-          text: "レスポンスJSON返却",
+          id: "404",
+          text: "404エラー",
           edgeType: "round",
         },
       ],
