@@ -1,15 +1,7 @@
 <template>
   <div>
-    <v-row justify="center">
-      <v-col sm="12">
-        <AppBreadCrumbs :items="breadcrumbs" />
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-col sm="12">
-        <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
-      </v-col>
-    </v-row>
+    <AppBreadCrumbs :items="breadcrumbs" />
+    <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
   </div>
 </template>
 
@@ -18,26 +10,26 @@ import AppBreadCrumbs from "~/components/AppBreadCrumbs.vue";
 import AppContentsTitle from "~/components/AppContentsTitle.vue";
 
 export default {
-  // 健康管理APIのレイアウトを適用
-  layout: "healthinfoappApiLayout",
+  // 健康管理バッチのレイアウトを適用
+  layout: "healthinfoappBatchLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
   },
   data: function () {
     return {
-      breadcrumbs:[
+      breadcrumbs: [
         {
           text: "Top",
           disabled: false,
           href: "/",
         },
         {
-          text: "健康管理API",
+          text: "健康管理バッチ",
           disabled: true,
-          href: "/healthinfoapp/api",
+          href: "/healthinfoapp/batch",
         },
-      ]
+      ],
     };
   },
 };

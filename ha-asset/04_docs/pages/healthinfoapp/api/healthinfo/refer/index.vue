@@ -24,8 +24,8 @@ import AppContentsTitle from "~/components/AppContentsTitle.vue";
 import AppDocs from "~/components/AppDocs.vue";
 
 export default {
-  // NodeAPIのレイアウトを適用
-  layout: "nodeApiLayout",
+  // 健康管理APIのレイアウトを適用
+  layout: "healthinfoappApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
@@ -40,50 +40,66 @@ export default {
           href: "/",
         },
         {
-          text: "Node API",
+          text: "健康管理API",
           disabled: false,
-          href: "/node/api",
+          href: "/healthinfoapp/api",
         },
         {
-          text: "肺活量計算API",
+          text: "健康情報照会API",
           disabled: true,
-          href: "/node/api/breath_capacity",
+          href: "/healthinfoapp/api/healthinfo_refer",
         },
       ],
       flow: [
         {
           id: "1",
-          text: "トークン検証",
+          text: "リクエスト受付",
           edgeType: "round",
           next: ["2"],
         },
         {
           id: "2",
-          text: "リクエストログ出力",
+          text: "ヘッダ情報チェック",
           edgeType: "round",
-          next: ["3"],
+          link: ["-- ヘッダ.Api-Keyが存在しない -->", "-- それ以外の場合 -->"],
+          next: ["100", "3"],
         },
-        { id: "3", text: "予測肺活量計算", edgeType: "round", next: ["4"] },
+        {
+          id: "3",
+          text: "アカウント情報 検索",
+          edgeType: "round",
+          link: [
+            "-- 検索結果 == 0 -->",
+            "-- 検索結果.API_KEY <br><> ヘッダ.Api-Key -->",
+            "-- それ以外の場合 -->",
+          ],
+          next: ["100", "100", "4"],
+        },
         {
           id: "4",
-          text: "肺活量%計算",
+          text: "健康情報 検索",
           edgeType: "round",
-          next: ["5"],
+          link: [
+            "-- 検索結果 == 0 -->",
+            "-- 検索結果 > 1 -->",
+            "-- 検索結果 == 1 -->",
+          ],
+          next: ["100", "100", "101"],
         },
         {
-          id: "5",
-          text: "レスポンスJSON生成",
+          id: "100",
+          text: "異常系レスポンスJSON生成",
           edgeType: "round",
-          next: ["6"],
+          next: ["110"],
         },
         {
-          id: "6",
-          text: "レスポンスログ出力",
+          id: "101",
+          text: "正常系レスポンスJSON生成",
           edgeType: "round",
-          next: ["7"],
+          next: ["110"],
         },
         {
-          id: "7",
+          id: "110",
           text: "レスポンスJSON返却",
           edgeType: "round",
         },

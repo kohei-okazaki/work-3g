@@ -25,7 +25,7 @@ export default {
         {
           text: "健康管理ダッシュボード",
           disabled: true,
-          href: "/helthinfoapp/dashboard",
+          href: "/healthinfoapp/dashboard",
         },
       ]
     };

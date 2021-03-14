@@ -25,7 +25,7 @@ import AppBaseIF from "~/components/AppBaseIF.vue";
 
 export default {
   // 健康管理APIのレイアウトを適用
-  layout: "healthinfoappLayout",
+  layout: "healthinfoappApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,

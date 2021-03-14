@@ -46,6 +46,7 @@ public class NewsEditApiController
      *     おしらせ情報編集APIリクエスト
      * @return おしらせ情報編集APIレスポンス
      * @throws BaseException
+     *     JSONの取得/アップロードまたはSlackの通知に失敗した場合
      */
     @PutMapping(value = "news/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public NewsEditApiResponse edit(

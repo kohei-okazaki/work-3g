@@ -24,8 +24,8 @@ import AppContentsTitle from "~/components/AppContentsTitle.vue";
 import AppDocs from "~/components/AppDocs.vue";
 
 export default {
-  // NodeAPIのレイアウトを適用
-  layout: "nodeApiLayout",
+  // RootAPIのレイアウトを適用
+  layout: "rootApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
@@ -40,51 +40,50 @@ export default {
           href: "/",
         },
         {
-          text: "Node API",
+          text: "管理者サイト用API",
           disabled: false,
-          href: "/node/api",
+          href: "/root/api",
         },
         {
-          text: "カロリー計算API",
+          text: "API通信情報一覧API",
           disabled: true,
-          href: "/node/api/calorie",
+          href: "/root/api/apidata",
         },
       ],
       flow: [
         {
           id: "1",
-          text: "トークン検証",
+          text: "リクエスト受付",
           edgeType: "round",
           next: ["2"],
         },
         {
           id: "2",
-          text: "リクエストログ出力",
+          text: "トークン認証",
           edgeType: "round",
-          next: ["3"],
+          link: ["-- 認証エラー -->", "-- それ以外の場合 -->"],
+          next: ["404", "3"],
         },
-        { id: "3", text: "生活活動代謝計算", edgeType: "round", next: ["4"] },
+        {
+          id: "3",
+          text: "API通信情報 検索",
+          edgeType: "round",
+          next: ["4"],
+        },
         {
           id: "4",
-          text: "1日の消費カロリー計算",
+          text: "レスポンスJSON 生成",
           edgeType: "round",
           next: ["5"],
         },
         {
           id: "5",
-          text: "レスポンスJSON生成",
+          text: "レスポンス返却",
           edgeType: "round",
-          next: ["6"],
         },
         {
-          id: "6",
-          text: "レスポンスログ出力",
-          edgeType: "round",
-          next: ["7"],
-        },
-        {
-          id: "7",
-          text: "レスポンスJSON返却",
+          id: "404",
+          text: "404エラー",
           edgeType: "round",
         },
       ],

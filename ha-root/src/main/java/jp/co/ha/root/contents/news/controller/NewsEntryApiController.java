@@ -48,6 +48,7 @@ public class NewsEntryApiController
      *     お知らせ情報登録APIリクエスト
      * @return お知らせ情報登録APIレスポンス
      * @throws BaseException
+     *     JSONの取得/アップロードまたはSlackの通知に失敗した場合
      */
     @PostMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
     public NewsEntryApiResponse entry(@RequestBody NewsEntryApiRequest request)
