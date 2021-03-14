@@ -10,24 +10,26 @@ import AppBreadCrumbs from "~/components/AppBreadCrumbs.vue";
 import AppContentsTitle from "~/components/AppContentsTitle.vue";
 
 export default {
+  // 健康管理バッチのレイアウトを適用
+  layout: "healthinfoappBatchLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
   },
   data: function () {
     return {
-      breadcrumbs:[
+      breadcrumbs: [
         {
           text: "Top",
           disabled: false,
           href: "/",
         },
         {
-          text: "健康管理ダッシュボード",
+          text: "健康管理バッチ",
           disabled: true,
-          href: "/healthinfoapp/dashboard",
+          href: "/healthinfoapp/batch",
         },
-      ]
+      ],
     };
   },
 };
