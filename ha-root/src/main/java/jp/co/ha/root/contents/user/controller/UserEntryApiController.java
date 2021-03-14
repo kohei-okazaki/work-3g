@@ -32,11 +32,7 @@ import jp.co.ha.root.contents.user.response.UserEntryApiResponse;
 import jp.co.ha.root.type.RootRoleType;
 
 /**
- * ユーザ登録APIコントローラ<br>
- * Auth Moduleからリクエストを送っているため、 ヘッダにurlencodedが設定されない<br>
- * axios.postの場合で受け取る以下の方法ではリクエストのJSONをバインドできない<br>
- * <code>&#64;RequestBody MultiValueMap<String, Object> request</code><br>
- * そのためそのままRequestクラスで受け取る
+ * ユーザ登録APIコントローラ
  *
  * @version 1.0.0
  */

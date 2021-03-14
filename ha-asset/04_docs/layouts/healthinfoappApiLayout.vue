@@ -70,12 +70,12 @@ export default {
         {
           icon: "mdi-api",
           title: "健康情報登録API",
-          to: "/healthinfoapp/api/healthinfo/POST",
+          to: "/healthinfoapp/api/healthinfo/regist",
         },
         {
           icon: "mdi-api",
           title: "健康情報照会API",
-          to: "/healthinfoapp/api/healthinfo/GET",
+          to: "/healthinfoapp/api/healthinfo/refer",
         },
         {
           icon: "mdi-api",
