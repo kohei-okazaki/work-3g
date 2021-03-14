@@ -82,6 +82,8 @@ public class HealthInfoEditApiController extends
             @PathVariable(name = "id", required = false) Optional<String> id,
             @RequestBody HealthInfoEditApiRequest request) throws BaseException {
 
+        // TODO 妥当性チェック
+
         // 健康情報ID
         Integer seqHealthInfoId = Integer.valueOf(id.get());
 
