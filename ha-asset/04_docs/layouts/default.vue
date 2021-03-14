@@ -73,6 +73,11 @@ export default {
           to: "/healthinfoapp/dashboard",
         },
         {
+          icon: "mdi-server",
+          title: "健康管理バッチ",
+          to: "/healthinfoapp/batch",
+        },
+        {
           icon: "mdi-api",
           title: "NodeAPI",
           to: "/node/api",
