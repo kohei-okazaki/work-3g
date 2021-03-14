@@ -144,7 +144,7 @@ export default {
         },
         {
           icon: "mdi-api",
-          title: "権限マスタリスト取得API",
+          title: "権限マスタ一覧取得API",
           to: "/root/api/roles",
         },
       ],
