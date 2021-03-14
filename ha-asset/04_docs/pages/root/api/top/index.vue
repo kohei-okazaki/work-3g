@@ -24,8 +24,8 @@ import AppContentsTitle from "~/components/AppContentsTitle.vue";
 import AppDocs from "~/components/AppDocs.vue";
 
 export default {
-  // NodeAPIのレイアウトを適用
-  layout: "nodeApiLayout",
+  // RootAPIのレイアウトを適用
+  layout: "rootApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
@@ -40,39 +40,62 @@ export default {
           href: "/",
         },
         {
-          text: "Node API",
+          text: "管理者サイト用API",
           disabled: false,
-          href: "/node/api",
+          href: "/root/api",
         },
         {
-          text: "トークン発行API",
+          text: "Top情報取得API",
           disabled: true,
-          href: "/node/api/token",
+          href: "/root/api/top",
         },
       ],
       flow: [
         {
           id: "1",
-          text: "リクエストログ出力",
+          text: "リクエスト受付",
           edgeType: "round",
           next: ["2"],
         },
-        { id: "2", text: "トークンを生成", edgeType: "round", next: ["3"] },
+        {
+          id: "2",
+          text: "トークン認証",
+          edgeType: "round",
+          link: ["-- 認証エラー -->", "-- それ以外の場合 -->"],
+          next: ["404", "3"],
+        },
         {
           id: "3",
-          text: "レスポンスJSON生成",
+          text: "処理対象年月取得",
           edgeType: "round",
           next: ["4"],
         },
         {
           id: "4",
-          text: "レスポンスログ出力",
+          text: "アカウント情報 検索",
           edgeType: "round",
           next: ["5"],
         },
         {
           id: "5",
-          text: "レスポンスJSON返却",
+          text: "健康情報 検索",
+          edgeType: "round",
+          next: ["6"],
+        },
+        {
+          id: "6",
+          text: "レスポンスJSON 生成",
+          edgeType: "round",
+          next: ["7"],
+        },
+        {
+          id: "7",
+          text: "レスポンス返却",
+          edgeType: "round",
+        },
+        {
+          id: "404",
+          text: "404エラー",
           edgeType: "round",
         },
       ],
