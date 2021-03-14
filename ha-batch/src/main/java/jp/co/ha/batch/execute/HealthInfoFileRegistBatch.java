@@ -39,7 +39,7 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.web.api.ApiConnectInfo;
 
 /**
- * 健康情報ファイル登録Batch
+ * 健康情報一括登録Batch
  *
  * @version 1.0.0
  */

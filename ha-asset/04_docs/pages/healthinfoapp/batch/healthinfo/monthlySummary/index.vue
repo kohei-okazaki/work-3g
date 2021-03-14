@@ -24,8 +24,8 @@ import AppContentsTitle from "~/components/AppContentsTitle.vue";
 import AppDocs from "~/components/AppDocs.vue";
 
 export default {
-  // 健康管理APIのレイアウトを適用
-  layout: "healthinfoappApiLayout",
+  // 健康管理バッチのレイアウトを適用
+  layout: "healthinfoappBatchLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
@@ -40,67 +40,70 @@ export default {
           href: "/",
         },
         {
-          text: "健康管理API",
+          text: "健康管理バッチ",
           disabled: false,
-          href: "/healthinfoapp/api",
+          href: "/healthinfoapp/batch",
         },
         {
-          text: "健康情報照会API",
+          text: "月次健康情報集計バッチ",
           disabled: true,
-          href: "/healthinfoapp/api/healthinfo_refer",
+          href: "/healthinfoapp/batch/healthinfo/monthlySummary",
         },
       ],
       flow: [
         {
           id: "1",
-          text: "リクエスト受付",
+          text: "月次健康情報集計バッチJavaを呼び出す",
           edgeType: "round",
           next: ["2"],
         },
         {
           id: "2",
-          text: "ヘッダ情報チェック",
+          text: "処理対象年月 取得",
           edgeType: "round",
-          link: ["-- ヘッダ.Api-Keyが存在しない -->", "-- それ以外の場合 -->"],
-          next: ["100", "3"],
+          next: ["3"],
         },
         {
           id: "3",
-          text: "アカウント情報 検索",
+          text: "処理対象年月 妥当性チェック",
           edgeType: "round",
-          link: [
-            "-- 検索結果 == 0 -->",
-            "-- 検索結果.API_KEY <br><> ヘッダ.Api-Key -->",
-            "-- それ以外の場合 -->",
-          ],
-          next: ["100", "100", "4"],
+          link: ["-- 日付が未指定<br>または日付形式でない場合 -->", "-- それ以外の場合 -->"],
+          next: ["101", "4"],
         },
         {
           id: "4",
           text: "健康情報 検索",
           edgeType: "round",
-          link: [
-            "-- 検索結果 == 0 -->",
-            "-- 検索結果 > 1 -->",
-            "-- 検索結果 == 1 -->",
-          ],
-          next: ["100", "100", "101"],
+          next: ["5"],
+        },
+        {
+          id: "5",
+          text: "健康情報CSV 作成",
+          edgeType: "round",
+          next: ["6"],
+        },
+        {
+          id: "6",
+          text: "S3 Upload",
+          edgeType: "round",
+          link: ["-- Upload 失敗 -->", "-- Upload 成功 -->"],
+          next: ["101", "7"],
+        },
+        {
+          id: "7",
+          text: "Slack 通知",
+          edgeType: "round",
+          link: ["-- 通知 失敗 -->", "-- 通知 成功 -->"],
+          next: ["101", "100"],
         },
         {
           id: "100",
-          text: "異常系レスポンスJSON生成",
+          text: "バッチ正常ステータスを設定し<br>Shellに処理結果を返却",
           edgeType: "round",
-          next: ["110"],
         },
         {
           id: "101",
-          text: "正常系レスポンスJSON生成",
-          edgeType: "round",
-          next: ["110"],
-        },
-        {
-          id: "110",
-          text: "レスポンスJSON返却",
+          text: "バッチ異常ステータスを設定し<br>Shellに処理結果を返却",
           edgeType: "round",
         },
       ],
