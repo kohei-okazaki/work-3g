@@ -24,8 +24,8 @@ import AppContentsTitle from "~/components/AppContentsTitle.vue";
 import AppDocs from "~/components/AppDocs.vue";
 
 export default {
-  // 健康管理APIのレイアウトを適用
-  layout: "healthinfoappApiLayout",
+  // RootAPIのレイアウトを適用
+  layout: "rootApiLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
@@ -40,14 +40,14 @@ export default {
           href: "/",
         },
         {
-          text: "健康管理API",
+          text: "管理者サイト用API",
           disabled: false,
-          href: "/healthinfoapp/api",
+          href: "/root/api",
         },
         {
-          text: "健康情報登録API",
+          text: "健康情報編集API",
           disabled: true,
-          href: "/healthinfoapp/api/healthinfo_regist",
+          href: "/root/api/healthinfo/edit",
         },
       ],
       flow: [
@@ -59,21 +59,16 @@ export default {
         },
         {
           id: "2",
-          text: "ヘッダ情報チェック",
+          text: "トークン認証",
           edgeType: "round",
-          link: ["-- ヘッダ.Api-Keyが存在しない -->", "-- それ以外場合 -->"],
-          next: ["101", "3"],
+          link: ["-- 認証エラー -->", "-- それ以外の場合 -->"],
+          next: ["404", "3"],
         },
         {
           id: "3",
-          text: "アカウント情報 検索",
+          text: "API通信情報.トランザクションID 採番",
           edgeType: "round",
-          link: [
-            "-- 検索結果 == 0 -->",
-            "-- 検索結果.API_KEY <br><> ヘッダ.Api-Key -->",
-            "-- それ以外場合 -->",
-          ],
-          next: ["101", "101", "4"],
+          next: ["4"],
         },
         {
           id: "4",
@@ -117,19 +112,13 @@ export default {
         },
         {
           id: "10",
-          text: "健康情報 検索",
+          text: "BMI範囲マスタ 検索",
           edgeType: "round",
           next: ["11"],
         },
         {
           id: "11",
-          text: "BMI範囲マスタ 検索",
-          edgeType: "round",
-          next: ["12"],
-        },
-        {
-          id: "12",
-          text: "健康情報 登録",
+          text: "健康情報 検索",
           edgeType: "round",
           next: ["100"],
         },
@@ -147,7 +136,12 @@ export default {
         },
         {
           id: "999",
-          text: "レスポンスJSON返却",
+          text: "レスポンス返却",
+          edgeType: "round",
+        },
+        {
+          id: "404",
+          text: "404エラー",
           edgeType: "round",
         },
       ],
