@@ -70,7 +70,7 @@ export default {
         {
           icon: "mdi-apps",
           title: "ライブラリ一覧",
-          to: "/wiki/libraryList",
+          to: "/wiki/libraries",
         },
         {
           icon: "mdi-apps",

@@ -115,7 +115,7 @@ export default {
         {
           text: "ライブラリ一覧",
           disabled: true,
-          href: "/wiki/libraryList",
+          href: "/wiki/libraries",
         },
       ],
       libraryList: [
