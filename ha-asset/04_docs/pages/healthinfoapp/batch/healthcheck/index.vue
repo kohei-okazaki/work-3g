@@ -87,7 +87,8 @@ export default {
           id: "6.1",
           text: "Slack 通知",
           edgeType: "round",
-          next: ["999"],
+          link: ["-- 通知 失敗 -->", "-- 通知 成功 -->"],
+          next: ["101", "100"],
         },
         {
           id: "6.2",
