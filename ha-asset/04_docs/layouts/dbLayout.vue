@@ -64,6 +64,11 @@ export default {
         },
         {
           icon: "mdi-database",
+          title: "テーブル一覧",
+          to: "/db/tables",
+        },
+        {
+          icon: "mdi-database",
           title: "カラム追加",
           to: "/db/addColumn",
         },
