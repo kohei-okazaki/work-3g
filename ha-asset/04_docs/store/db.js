@@ -6,67 +6,111 @@ export const state = () => ({
           logicalName: "健康情報ID",
           physicalName: "SEQ_HEALTH_INFO_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "身長",
           physicalName: "HEIGHT",
           type: "DECIMAL",
-          size: "6, 3"
+          size: "6, 3",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "体重",
           physicalName: "WEIGHT",
           type: "DECIMAL",
-          size: "6, 3"
+          size: "6, 3",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "BMI",
           physicalName: "BMI",
           type: "DECIMAL",
-          size: "6, 3"
+          size: "6, 3",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "標準体重",
           physicalName: "STANDARD_WEIGHT",
           type: "DECIMAL",
-          size: "6, 3"
+          size: "6, 3",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "健康情報ステータス",
           physicalName: "HEALTH_INFO_STATUS",
           type: "VARCHAR",
-          size: 2
+          size: 2,
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "健康情報作成日時",
           physicalName: "HEALTH_INFO_REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "BMI範囲マスタID",
           physicalName: "SEQ_BMI_RANGE_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -77,55 +121,91 @@ export const state = () => ({
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "メールアドレス",
           physicalName: "MAILADDRESS",
           type: "VARCHAR",
-          size: "64"
+          size: "64",
+          primaryKey: false,
+          sequence: false,
+          crypt: true,
+          notNull: true,
         },
         {
           logicalName: "パスワード",
           physicalName: "PASSWORD",
           type: "VARCHAR",
-          size: "44"
+          size: "44",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "削除フラグ",
           physicalName: "DELETE_FLAG",
           type: "VARCHAR",
-          size: "1"
+          size: "1",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "パスワード有効期限",
           physicalName: "PASSWORD_EXPIRE",
           type: "DATE",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "備考",
           physicalName: "REMARKS",
           type: "VARCHAR",
-          size: "256"
+          size: "256",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "APIキー",
           physicalName: "API_KEY",
           type: "VARCHAR",
-          size: "64"
+          size: "64",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -136,43 +216,71 @@ export const state = () => ({
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "ヘッダーフラグ",
           physicalName: "HEADER_FLAG",
           type: "VARCHAR",
-          size: "1"
+          size: "1",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "フッターフラグ",
           physicalName: "FOOTER_FLAG",
           type: "VARCHAR",
-          size: "1"
+          size: "1",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "マスクフラグ",
           physicalName: "MASK_FLAG",
           type: "VARCHAR",
-          size: "1"
+          size: "1",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "囲い文字利用フラグ",
           physicalName: "ENCLOSURE_CHAR_FLAG",
           type: "VARCHAR",
-          size: "1"
+          size: "1",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -183,37 +291,61 @@ export const state = () => ({
           logicalName: "BMI範囲マスタID",
           physicalName: "SEQ_BMI_RANGE_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "範囲下限",
           physicalName: "RANGE_MIN",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "範囲上限",
           physicalName: "RANGE_MAX",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "肥満度ステータス",
           physicalName: "OVER_WEIGHT_STATUS",
           type: "VARCHAR",
-          size: "2"
+          size: "2",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -224,37 +356,61 @@ export const state = () => ({
           logicalName: "アカウント回復トークン情報ID",
           physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "トークン",
           physicalName: "TOKEN",
           type: "VARCHAR",
-          size: "64"
+          size: "64",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "トークン作成日時",
           physicalName: "TOKEN_CREATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -265,61 +421,101 @@ export const state = () => ({
           logicalName: "API通信情報ID",
           physicalName: "SEQ_API_COMMUNICATION_DATA_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "API名",
           physicalName: "API_NAME",
           type: "VARCHAR",
-          size: "64"
+          size: "64",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "HTTPステータス",
           physicalName: "HTTP_STATUS",
           type: "VARCHAR",
-          size: "3"
+          size: "3",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "処理結果",
           physicalName: "RESULT",
           type: "VARCHAR",
-          size: "1"
+          size: "1",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "エラー詳細",
           physicalName: "DETAIL",
           type: "VARCHAR",
-          size: "256"
+          size: "256",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "リクエスト送信日時",
           physicalName: "REQUEST_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "レスポンス受信日時",
           physicalName: "RESPONSE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -330,49 +526,81 @@ export const state = () => ({
           logicalName: "管理者サイトユーザログイン情報ID",
           physicalName: "SEQ_ROOT_LOGIN_INFO_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "パスワード",
           physicalName: "PASSWORD",
           type: "VARCHAR",
-          size: "64"
+          size: "64",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "削除フラグ",
           physicalName: "DELETE_FLAG",
           type: "VARCHAR",
-          size: "1"
+          size: "1",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "パスワード有効期限",
           physicalName: "PASSWORD_EXPIRE",
           type: "DATE",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "管理者サイトユーザ権限管理マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "備考",
           physicalName: "REMARKS",
           type: "VARCHAR",
-          size: "256"
+          size: "256",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -383,19 +611,31 @@ export const state = () => ({
           logicalName: "管理者サイトユーザ権限管理マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -406,31 +646,51 @@ export const state = () => ({
           logicalName: "管理者サイトユーザ権限詳細マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_DETAIL_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "管理者サイトユーザ権限管理マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "管理者サイト権限マスタID",
           physicalName: "SEQ_ROOT_ROLE_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     },
@@ -441,31 +701,51 @@ export const state = () => ({
           logicalName: "管理者サイト権限マスタID",
           physicalName: "SEQ_ROOT_ROLE_MT_ID",
           type: "INT",
-          size: ""
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "ユーザ権限",
           physicalName: "ROLE",
           type: "VARCHAR",
-          size: "2"
+          size: "2",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "ユーザ権限名",
           physicalName: "ROLE_NAME",
           type: "VARCHAR",
-          size: "64"
+          size: "64",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "更新日時",
           physicalName: "UPDATE_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         },
         {
           logicalName: "登録日時",
           physicalName: "REG_DATE",
           type: "DATETIME",
-          size: ""
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
         }
       ]
     }
