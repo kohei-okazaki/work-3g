@@ -24,14 +24,8 @@
                   <ol>
                     <li>
                       <p>
-                        ha-asset/99_tool/menu/js/table.js
+                        /store/db.js
                         に新しいテーブル定義を追加
-                      </p>
-                    </li>
-                    <li>
-                      <p>
-                        ha-asset/99_tool/menu/js/table.min.js
-                        にtable.jsを圧縮させたファイルを設定
                       </p>
                     </li>
                     <li>
@@ -116,14 +110,8 @@
                   <ol>
                     <li>
                       <p>
-                        ha-asset/99_tool/menu/js/table.js
+                        /store/db.js
                         に新しいテーブル定義を追加
-                      </p>
-                    </li>
-                    <li>
-                      <p>
-                        ha-asset/99_tool/menu/js/table.min.js
-                        にtable.jsを圧縮させたファイルを設定
                       </p>
                     </li>
                     <li>
