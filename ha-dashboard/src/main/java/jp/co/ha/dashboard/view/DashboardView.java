@@ -11,9 +11,9 @@ import jp.co.ha.web.view.BreadcrumbView;
 public enum DashboardView implements BaseView {
 
     /** ログイン画面 */
-    LOGIN("login/index", "/login/index", DashboardBreadcrumbViewFactory.getDefault()),
+    LOGIN("login/index", "/login", DashboardBreadcrumbViewFactory.getDefault()),
     /** トップ画面 */
-    TOP("login/top", "/login/top", DashboardBreadcrumbViewFactory.getTop()),
+    TOP("login/top", "/top", DashboardBreadcrumbViewFactory.getTop()),
     /** エラー画面 */
     ERROR("error/index", "/error/index", DashboardBreadcrumbViewFactory.getDefault()),
 
