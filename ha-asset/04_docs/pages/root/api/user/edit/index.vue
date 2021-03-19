@@ -78,6 +78,7 @@ export default {
           edgeType: "round",
           link: ["-- 検索結果 == 0 -->", "-- それ以外の場合 -->"],
           next: ["101", "5"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "5",
@@ -85,12 +86,14 @@ export default {
           edgeType: "round",
           next: ["6"],
           group: "トランザクション",
+          style: "fill:#c6ffc6",
         },
         {
           id: "6",
           text: "管理者サイトユーザ権限詳細マスタ 登録",
           edgeType: "round",
           group: "トランザクション",
+          style: "fill:#c6ffc6",
           next: ["7"],
         },
         {
@@ -99,6 +102,7 @@ export default {
           edgeType: "round",
           group: "トランザクション",
           next: ["100"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "100",
