@@ -73,6 +73,7 @@ export default {
           edgeType: "round",
           link: ["-- 検索結果 == 0 -->", "-- それ以外の場合 -->"],
           next: ["404", "4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",

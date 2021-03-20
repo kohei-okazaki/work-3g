@@ -124,7 +124,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -231,7 +231,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -312,7 +312,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -393,7 +393,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [],
@@ -500,7 +500,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -571,7 +571,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -659,7 +659,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [],
@@ -826,7 +826,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [],
@@ -970,7 +970,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [],
@@ -1143,7 +1143,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -1214,7 +1214,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [],
@@ -1332,7 +1332,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -1506,7 +1506,7 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
           request: [
@@ -1689,11 +1689,10 @@ export default {
             },
             {
               key: "Authorization",
-              value: "'Bearer ログインAPI.レスポンス.tokenを設定",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
-          request: [
-          ],
+          request: [],
           response: [
             {
               physicalName: "result",

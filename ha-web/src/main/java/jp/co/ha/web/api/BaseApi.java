@@ -1,8 +1,10 @@
 package jp.co.ha.web.api;
 
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map.Entry;
+import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -16,11 +18,16 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.BaseEnum;
+import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.web.form.BaseApiRequest;
 import jp.co.ha.web.form.BaseApiResponse;
 
@@ -80,7 +87,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         try {
 
             // URIを生成
-            URI uri = getUri(apiConnectInfo);
+            URI uri = getUri(apiConnectInfo, request);
             LOG.info("====> API名=" + getApiName() + ",URL=" + uri.toString());
             LOG.infoBean(request);
 
@@ -179,14 +186,56 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      *
      * @param apiConnectInfo
      *     API接続情報
+     * @param request
      * @return リクエストURI
      * @throws URISyntaxException
      *     URLとして正しくない場合
+     * @throws ApiException
      */
-    private static URI getUri(ApiConnectInfo apiConnectInfo) throws URISyntaxException {
+    private static URI getUri(ApiConnectInfo apiConnectInfo, BaseApiRequest request)
+            throws URISyntaxException, ApiException {
         String baseUrl = apiConnectInfo.getUrlSupplier().get();
-        baseUrl += apiConnectInfo.getQureyString();
+        baseUrl += toQueryParameter(request);
         return new URI(baseUrl);
+    }
+
+    /**
+     * クエリパラメータを返す
+     *
+     * @param request
+     *     リクエスト情報
+     * @return クエリパラメータ
+     * @throws ApiException
+     *     クエリパラメータの返却に失敗した場合
+     */
+    private static String toQueryParameter(BaseApiRequest request) throws ApiException {
+
+        StringJoiner sj = new StringJoiner("&");
+
+        try {
+            for (Field f : request.getClass().getDeclaredFields()) {
+
+                Object value = BeanUtil
+                        .getAccessor(f.getName(), request.getClass(), AccessorType.GETTER)
+                        .invoke(request);
+
+                if (value == null) {
+                    continue;
+                }
+
+                String key = f.getAnnotation(JsonProperty.class).value();
+                if (value instanceof BaseEnum) {
+                    BaseEnum baseEnum = (BaseEnum) value;
+                    sj.add(key + "=" + baseEnum.getValue());
+                } else {
+                    sj.add(key + "=" + value.toString());
+                }
+            }
+        } catch (Exception e) {
+            throw new ApiException(e);
+        }
+
+        return "?" + sj.toString();
     }
 
 }

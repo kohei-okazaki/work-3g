@@ -69,6 +69,7 @@ export default {
           text: "管理者サイト権限マスタ 検索",
           edgeType: "round",
           next: ["4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",
