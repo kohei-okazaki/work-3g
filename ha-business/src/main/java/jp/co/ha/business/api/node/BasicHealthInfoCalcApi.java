@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
+import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.web.api.BaseApi;
 
 /**
@@ -32,7 +32,7 @@ public class BasicHealthInfoCalcApi
 
     @Override
     public HttpMethod getHttpMethod() {
-        return HttpMethod.POST;
+        return HttpMethod.GET;
     }
 
     @Override

@@ -70,6 +70,7 @@ export default {
           edgeType: "round",
           next: ["4"],
           group: "トランザクション",
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",
@@ -77,6 +78,7 @@ export default {
           edgeType: "round",
           next: ["5"],
           group: "トランザクション",
+          style: "fill:#c6ffc6",
         },
         {
           id: "5",
@@ -84,6 +86,7 @@ export default {
           edgeType: "round",
           next: ["6"],
           group: "トランザクション",
+          style: "fill:#c6ffc6",
         },
         {
           id: "6",
@@ -91,6 +94,7 @@ export default {
           edgeType: "round",
           group: "トランザクション",
           next: ["100"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "100",

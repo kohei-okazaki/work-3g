@@ -75,6 +75,7 @@ export default {
           text: "API通信情報 登録<br>Token発行API",
           edgeType: "round",
           next: ["5"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "5",
@@ -82,6 +83,7 @@ export default {
           edgeType: "round",
           url: "/node/api/token",
           next: ["6"],
+          style: "fill:#ffce9e",
         },
         {
           id: "6",
@@ -102,6 +104,7 @@ export default {
           edgeType: "round",
           url: "/node/api/basic",
           next: ["9"],
+          style: "fill:#ffce9e",
         },
         {
           id: "9",
@@ -115,12 +118,14 @@ export default {
           text: "BMI範囲マスタ 検索",
           edgeType: "round",
           next: ["11"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "11",
           text: "健康情報 検索",
           edgeType: "round",
           next: ["100"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "100",

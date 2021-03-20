@@ -43,7 +43,10 @@
     <nav aria-label="パンくずリスト" th:if="${breadcrumbList != null && breadcrumbList.size() != 0}">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" th:each="breadcrumb, status : ${breadcrumbList}" th:object="${breadcrumb}">
-          <a th:href="@{*{url}}" th:text="*{viewName}"></a>
+          <!-- 現在のページでない場合 -->
+          <a th:href="@{*{url}}" th:text="*{viewName}" th:if="*{!isCurrent}"></a>
+          <!-- 現在のページである場合 -->
+          <span th:href="@{*{url}}" th:text="*{viewName}" th:if="*{isCurrent}"></span>
         </li><!-- /.breadcrumb-item active -->
       </ol><!-- /.breadcrumb -->
     </nav>
