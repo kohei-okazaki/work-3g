@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.TokenRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.web.api.BaseApi;
 
 /**

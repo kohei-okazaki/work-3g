@@ -3,8 +3,6 @@ package jp.co.ha.web.api;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.StringJoiner;
 import java.util.function.Supplier;
 
 /**
@@ -31,8 +29,6 @@ public class ApiConnectInfo {
     private Charset charset = Charset.forName("UTF-8");
     /** リクエストヘッダMap */
     private Map<String, String> headerMap = new HashMap<>();
-    /** クエリパラメータMap */
-    private Map<String, String> urlParameter = new HashMap<>();
     /** HTTPステータス */
     private Integer httpStatus;
 
@@ -109,25 +105,6 @@ public class ApiConnectInfo {
     }
 
     /**
-     * クエリパラメータを返す
-     *
-     * @return qureyString
-     */
-    public String getQureyString() {
-
-        if (urlParameter.isEmpty()) {
-            // クエリパラメータを設定していない場合
-            return "";
-        }
-
-        StringJoiner sj = new StringJoiner("&");
-        for (Entry<String, String> entry : urlParameter.entrySet()) {
-            sj.add(entry.getKey() + "=" + entry.getValue());
-        }
-        return "?" + sj.toString();
-    }
-
-    /**
      * headerMapを返す
      *
      * @return headerMap
@@ -159,32 +136,6 @@ public class ApiConnectInfo {
      */
     public ApiConnectInfo withHeader(String key, String value) {
         this.headerMap.put(key, value);
-        return this;
-    }
-
-    /**
-     * パラメータを追加する
-     *
-     * @param key
-     *     パラメータキー
-     * @param value
-     *     パラメータ値
-     */
-    public void addQueryParameter(String key, String value) {
-        this.urlParameter.put(key, value);
-    }
-
-    /**
-     * パラメータを追加する
-     *
-     * @param key
-     *     パラメータキー
-     * @param value
-     *     パラメータ値
-     * @return ApiConnectInfo
-     */
-    public ApiConnectInfo withQueryParameter(String key, String value) {
-        this.urlParameter.put(key, value);
         return this;
     }
 

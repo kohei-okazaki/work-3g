@@ -13,7 +13,7 @@ public enum DashboardView implements BaseView {
     /** ログイン画面 */
     LOGIN("login/index", "/login", DashboardBreadcrumbViewFactory.getDefault()),
     /** トップ画面 */
-    TOP("login/top", "/top", DashboardBreadcrumbViewFactory.getTop()),
+    TOP("login/top", "/top", DashboardBreadcrumbViewFactory.getTop(true)),
     /** エラー画面 */
     ERROR("error/index", "/error/index", DashboardBreadcrumbViewFactory.getDefault()),
 
