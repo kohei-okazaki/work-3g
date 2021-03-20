@@ -53,6 +53,8 @@ public class BreadcrumbView {
         private String viewName;
         /** URL */
         private String url;
+        /** 現在地 */
+        private boolean isCurrent;
 
         /**
          * viewNameを返す
@@ -90,6 +92,25 @@ public class BreadcrumbView {
          */
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        /**
+         * isCurrentを返す
+         *
+         * @return isCurrent
+         */
+        public boolean isCurrent() {
+            return isCurrent;
+        }
+
+        /**
+         * isCurrentを設定する
+         *
+         * @param isCurrent
+         *     現在地
+         */
+        public void setCurrent(boolean isCurrent) {
+            this.isCurrent = isCurrent;
         }
 
     }

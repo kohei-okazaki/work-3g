@@ -75,6 +75,7 @@ export default {
           text: "健康情報 検索",
           edgeType: "round",
           next: ["5"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "5",

@@ -14,20 +14,20 @@ var prettyjson = require('prettyjson');
  *            レスポンス情報
  * @param next
  */
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
-    console.log(prettyjson.render(req.body) + "\n");
+    console.log(prettyjson.render(req.query) + "\n");
 
-    let meter_height = req.body['height'] / 100;
-    let bmi = util.calc_bmi(req.body['weight'], meter_height);
+    let meter_height = req.query['height'] / 100;
+    let bmi = util.calc_bmi(req.query['weight'], meter_height);
     bmi = util.round(bmi, 3);
 
     let standard_weight = util.calc_standard_weight(meter_height);
     standard_weight = util.round(standard_weight, 3);
 
     let basic_health_info = {
-        'height' : req.body['height'],
-        'weight' : req.body['weight'],
+        'height' : parseFloat(req.query['height']),
+        'weight' : parseFloat(req.query['weight']),
         'bmi' : bmi,
         'standard_weight' : standard_weight
     }

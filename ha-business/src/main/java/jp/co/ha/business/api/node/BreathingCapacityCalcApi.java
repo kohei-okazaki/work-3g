@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
+import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.web.api.BaseApi;
 
 /**
@@ -32,7 +32,7 @@ public class BreathingCapacityCalcApi
 
     @Override
     public HttpMethod getHttpMethod() {
-        return HttpMethod.POST;
+        return HttpMethod.GET;
     }
 
     @Override

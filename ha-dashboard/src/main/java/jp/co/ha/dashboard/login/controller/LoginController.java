@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -42,7 +41,6 @@ import jp.co.ha.web.controller.BaseWebController;
  * @version 1.0.0
  */
 @Controller
-@RequestMapping("login")
 public class LoginController implements BaseWebController {
 
     /** 健康情報検索条件 */
@@ -84,7 +82,7 @@ public class LoginController implements BaseWebController {
      * @return ログイン画面
      */
     @NonAuth
-    @GetMapping("/index")
+    @GetMapping("login")
     public String index(Model model, HttpServletRequest request) {
 
         model.addAttribute("isLogout", request.getParameter("isLogout"));

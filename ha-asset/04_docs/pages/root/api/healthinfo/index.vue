@@ -69,6 +69,7 @@ export default {
           text: "健康情報<br>+ BMI範囲マスタ 検索",
           edgeType: "round",
           next: ["4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",
