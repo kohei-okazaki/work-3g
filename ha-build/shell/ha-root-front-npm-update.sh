@@ -2,8 +2,7 @@
 
 ########################################
 #
-# Nodeのモジュールの更新を行う
-# package.jsonのdependencies内のversionの最新化
+# root front npm update
 #
 ########################################
 

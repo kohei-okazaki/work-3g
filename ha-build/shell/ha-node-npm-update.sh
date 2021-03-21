@@ -2,13 +2,12 @@
 
 ########################################
 #
-# Nodeのモジュールの更新を行う
-# package.jsonのdependencies内のversionの最新化
+# node npm update
 #
 ########################################
 
 # ha-nodeまで移動
 cd ../../ha-node
 
-# nodeモジュールをインストール
+# nodeモジュールを更新
 npm update
