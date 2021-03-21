@@ -106,6 +106,7 @@ public class DashboardBreadcrumbViewFactory {
         Breadcrumb accountRegist = new Breadcrumb();
         accountRegist.setViewName("アカウント作成");
         accountRegist.setUrl("/accountregist/input");
+        accountRegist.setCurrent(true);
         view.addBreadcrumb(accountRegist);
 
         return view;
@@ -122,6 +123,7 @@ public class DashboardBreadcrumbViewFactory {
         Breadcrumb accountRecovery = new Breadcrumb();
         accountRecovery.setViewName("アカウント回復");
         accountRecovery.setUrl("/accountrecovery/index");
+        accountRecovery.setCurrent(true);
         view.addBreadcrumb(accountRecovery);
 
         return view;
