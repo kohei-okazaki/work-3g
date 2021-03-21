@@ -54,7 +54,7 @@ export default {
         {
           name: "トークン発行API",
           endpoint: "/token",
-          httpMethod: "GET",
+          httpMethod: "POST",
           description:
             "Node APIに必要なトークン認証情報を取得するためのAPI",
           headers: [
