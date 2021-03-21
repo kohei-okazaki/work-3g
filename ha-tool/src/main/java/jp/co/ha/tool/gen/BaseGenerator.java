@@ -11,6 +11,7 @@ import jp.co.ha.common.io.file.property.reader.PropertyReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.excel.DmlExcelReader;
 import jp.co.ha.tool.excel.Excel;
 import jp.co.ha.tool.excel.ExcelReader;
@@ -97,9 +98,10 @@ public abstract class BaseGenerator {
         // 設定ファイルを取得
         ToolProperty prop = new PropertyReader().read(classDir, "tool.properties",
                 ToolProperty.class);
-        Stream.of(prop.getTargetTables().split(","))
+        Stream.of(prop.getTargetTables().split(StringUtil.COMMA))
                 .forEach(e -> prop.addTargetTable(e));
-        Stream.of(prop.getDmlTables().split(",")).forEach(e -> prop.addDmlTable(e));
+        Stream.of(prop.getDmlTables().split(StringUtil.COMMA))
+                .forEach(e -> prop.addDmlTable(e));
         return prop;
 
     }
