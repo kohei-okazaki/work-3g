@@ -40,6 +40,9 @@ api, dashboard, batch, rootで共通的に使うbusinessロジックをまとめ
 Tableに対応したEntityとMapperのみを定義したプロジェクト  
 環境へのDB反映は本プロジェクトよりFlywayで行う  
 
+* ### ha-docs  
+健康管理アプリのドキュメントプロジェクト  
+
 * ### ha-node  
 健康情報計算を行うAPIプロジェクト(JavaScriptのNode.jsで実装) 
 
@@ -57,5 +60,3 @@ seleniumを利用した画面の自動テスト処理を定義したプロジェ
 
 * ### ha-web  
 WebFW部分を定義したプロジェクト  
-
-
