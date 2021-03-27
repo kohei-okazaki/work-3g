@@ -64,8 +64,8 @@ export default {
         },
         {
           icon: "mdi-format-list-bulleted",
-          title: "IF一覧",
-          to: "/healthinfoapp/api/if",
+          title: "バッチ一覧",
+          to: "/healthinfoapp/batch/list",
         },
         {
           icon: "mdi-server",
