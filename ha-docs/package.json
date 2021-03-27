@@ -1,0 +1,21 @@
+{
+  "name": "ha-docs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt --port 3001",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "core-js": "^3.9.1",
+    "nuxt": "^2.15.3",
+    "vue-mermaid": "0.0.14",
+    "vue-simple-context-menu": "^3.4.1",
+    "vuex-persistedstate": "^4.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.11.3"
+  }
+}
