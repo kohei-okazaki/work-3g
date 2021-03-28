@@ -47,7 +47,7 @@ export default {
         {
           text: "IF一覧",
           disabled: true,
-          href: "/node/api/if",
+          href: "/node/api/interface",
         },
       ],
       ifs: [

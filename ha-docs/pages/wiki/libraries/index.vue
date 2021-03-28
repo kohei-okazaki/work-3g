@@ -121,7 +121,7 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.4",
+          version: "5.3.5",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
@@ -145,7 +145,7 @@ export default {
         },
         {
           name: "Jackson",
-          version: "2.12.1",
+          version: "2.12.2",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },

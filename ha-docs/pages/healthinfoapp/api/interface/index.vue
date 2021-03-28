@@ -47,7 +47,7 @@ export default {
         {
           text: "IF一覧",
           disabled: true,
-          href: "/healthinfoapp/api/if",
+          href: "/healthinfoapp/api/interface",
         },
       ],
       ifs: [
