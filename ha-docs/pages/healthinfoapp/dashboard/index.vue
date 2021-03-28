@@ -10,6 +10,8 @@ import AppBreadCrumbs from "~/components/AppBreadCrumbs.vue";
 import AppContentsTitle from "~/components/AppContentsTitle.vue";
 
 export default {
+  // 健康管理Dashboardのレイアウトを適用
+  layout: "healthinfoappDashboardLayout",
   components: {
     AppBreadCrumbs,
     AppContentsTitle,
