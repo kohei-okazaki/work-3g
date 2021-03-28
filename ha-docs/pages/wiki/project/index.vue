@@ -186,6 +186,10 @@ export default {
           description: "データベースアクセスを管理するmavenプロジェクト",
         },
         {
+          name: "ha-docs",
+          description: "健康管理アプリのドキュメントプロジェクト",
+        },
+        {
           name: "ha-node",
           description:
             "健康情報計算API(別名 NodeAPI)を管理するJavaScriptプロジェクト",

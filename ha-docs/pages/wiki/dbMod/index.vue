@@ -23,10 +23,7 @@
                   <summary>DB側対応</summary>
                   <ol>
                     <li>
-                      <p>
-                        /store/db.js
-                        に新しいテーブル定義を追加
-                      </p>
+                      <p>ha-docs/store/db.jsに新しいテーブル定義を追加</p>
                     </li>
                     <li>
                       <p>
@@ -109,10 +106,7 @@
                   <summary>DB側対応</summary>
                   <ol>
                     <li>
-                      <p>
-                        /store/db.js
-                        に新しいテーブル定義を追加
-                      </p>
+                      <p>ha-docs/store/db.jsに新しいテーブル定義を追加</p>
                     </li>
                     <li>
                       <p>
@@ -141,8 +135,7 @@
                         ha-db/src/main/resources/db/migrationに新しいバージョンのsqlファイルを作成
                       </p>
                       <p>
-                        ただし、ファイル内容はddl配下にsqlから自作でALTER ADD
-                        ~~を追加する
+                        ただし、ファイル内容はddl配下にsqlから自作でALTER ADD ~~を追加する
                       </p>
                       <p>カラム追加ページに基本の構文がある</p>
                     </li>
