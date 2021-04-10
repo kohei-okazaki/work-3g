@@ -37,7 +37,7 @@ public class AuthServiceImpl implements UserDetailsService {
 
         // 管理者サイトユーザログイン情報を検索
         RootLoginInfo rootLoginInfo = searchService
-                .findById(Integer.valueOf(username))
+                .findById(Long.valueOf(username))
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "指定したログインIDは登録されていません. ログインID:" + Integer.valueOf(username)));
 

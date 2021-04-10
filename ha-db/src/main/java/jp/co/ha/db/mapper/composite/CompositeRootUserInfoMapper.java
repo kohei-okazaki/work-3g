@@ -24,5 +24,5 @@ public interface CompositeRootUserInfoMapper {
      *     ログインID
      * @return 管理者サイト複合ユーザ情報
      */
-    List<CompositeRootUserInfo> selectBySeqRootLoginInfoId(Integer seqRootLoginInfoId);
+    List<CompositeRootUserInfo> selectBySeqRootLoginInfoId(Long seqRootLoginInfoId);
 }

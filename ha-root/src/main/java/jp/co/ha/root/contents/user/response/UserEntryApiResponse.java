@@ -14,14 +14,14 @@ public class UserEntryApiResponse extends BaseRootApiResponse implements BaseApi
 
     /** ログインID */
     @JsonProperty("seq_login_id")
-    private Integer seqLoginId;
+    private Long seqLoginId;
 
     /**
      * seqLoginIdを返す
      *
      * @return seqLoginId
      */
-    public Integer getSeqLoginId() {
+    public Long getSeqLoginId() {
         return seqLoginId;
     }
 
@@ -31,7 +31,7 @@ public class UserEntryApiResponse extends BaseRootApiResponse implements BaseApi
      * @param seqLoginId
      *     ログインID
      */
-    public void setSeqLoginId(Integer seqLoginId) {
+    public void setSeqLoginId(Long seqLoginId) {
         this.seqLoginId = seqLoginId;
     }
 

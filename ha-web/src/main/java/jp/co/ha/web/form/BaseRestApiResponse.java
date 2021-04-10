@@ -164,14 +164,14 @@ public class BaseRestApiResponse implements BaseForm {
 
         /** ユーザID */
         @JsonProperty("seqUserId")
-        private Integer seqUserId;
+        private Long seqUserId;
 
         /**
          * seqUserIdを返す
          *
          * @return seqUserId
          */
-        public Integer getSeqUserId() {
+        public Long getSeqUserId() {
             return seqUserId;
         }
 
@@ -181,7 +181,7 @@ public class BaseRestApiResponse implements BaseForm {
          * @param seqUserId
          *     ユーザID
          */
-        public void setSeqUserId(Integer seqUserId) {
+        public void setSeqUserId(Long seqUserId) {
             this.seqUserId = seqUserId;
         }
 

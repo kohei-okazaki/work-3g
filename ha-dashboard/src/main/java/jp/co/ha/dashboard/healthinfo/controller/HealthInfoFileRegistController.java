@@ -102,8 +102,8 @@ public class HealthInfoFileRegistController
             return getView(model, DashboardView.HEALTH_INFO_FILE_INPUT);
         }
 
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         // Formの健康情報CSVからmodelリストを読み取る
         List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
@@ -134,8 +134,8 @@ public class HealthInfoFileRegistController
     public String complete(Model model, HealthInfoFileForm form,
             HttpServletRequest request) throws BaseException {
 
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         String fileName = sessionComponent
                 .getValue(request.getSession(), "healthinfo-file-regist/" + seqUserId,

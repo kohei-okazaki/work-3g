@@ -13,7 +13,7 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 public class ReferenceExcelComponent implements BaseExcelComponent {
 
     /** ユーザID */
-    private Integer seqUserId;
+    private Long seqUserId;
     /** 結果リスト */
     private List<HealthInfoReferenceDto> resultList;
 
@@ -22,7 +22,7 @@ public class ReferenceExcelComponent implements BaseExcelComponent {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -32,7 +32,7 @@ public class ReferenceExcelComponent implements BaseExcelComponent {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

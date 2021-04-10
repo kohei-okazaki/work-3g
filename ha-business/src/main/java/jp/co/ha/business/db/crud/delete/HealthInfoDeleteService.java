@@ -13,5 +13,5 @@ public interface HealthInfoDeleteService {
      * @param seqHealthInfoId
      *     健康情報ID
      */
-    void deleteById(Integer seqHealthInfoId);
+    void deleteById(Long seqHealthInfoId);
 }

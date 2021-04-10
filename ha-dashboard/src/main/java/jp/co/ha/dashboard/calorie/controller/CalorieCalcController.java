@@ -94,7 +94,7 @@ public class CalorieCalcController implements BaseWebController {
         });
 
         CalorieCalcDto calcResult = calorieCalcComponent.calc(dto, sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get());
+                .getValue(request.getSession(), "seqUserId", Long.class).get());
         model.addAttribute("calcResult", calcResult);
 
         return getView(model, DashboardView.CALORIE_CALC);

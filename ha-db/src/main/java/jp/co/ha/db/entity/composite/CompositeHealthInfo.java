@@ -35,7 +35,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey implements Seria
     /** 健康情報登録日時 */
     private LocalDateTime healthInfoRegDate;
     /** BMI範囲マスタID */
-    private Integer seqBmiRangeMtId;
+    private Long seqBmiRangeMtId;
     /** 範囲下限 */
     private Integer rangeMin;
     /** 範囲上限 */
@@ -162,7 +162,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey implements Seria
      *
      * @return seqBmiRangeMtId
      */
-    public Integer getSeqBmiRangeMtId() {
+    public Long getSeqBmiRangeMtId() {
         return seqBmiRangeMtId;
     }
 
@@ -172,7 +172,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey implements Seria
      * @param seqBmiRangeMtId
      *     BMI範囲マスタID
      */
-    public void setSeqBmiRangeMtId(Integer seqBmiRangeMtId) {
+    public void setSeqBmiRangeMtId(Long seqBmiRangeMtId) {
         this.seqBmiRangeMtId = seqBmiRangeMtId;
     }
 

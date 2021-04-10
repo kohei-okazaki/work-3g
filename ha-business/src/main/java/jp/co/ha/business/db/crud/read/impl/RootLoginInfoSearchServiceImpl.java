@@ -33,7 +33,7 @@ public class RootLoginInfoSearchServiceImpl implements RootLoginInfoSearchServic
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<RootLoginInfo> findById(Integer seqLoginId) {
+    public Optional<RootLoginInfo> findById(Long seqLoginId) {
 
         RootLoginInfoKey key = new RootLoginInfoKey();
         key.setSeqRootLoginInfoId(seqLoginId);
@@ -45,7 +45,7 @@ public class RootLoginInfoSearchServiceImpl implements RootLoginInfoSearchServic
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<CompositeRootUserInfo> findCompositeUserById(Integer seqLoginId) {
+    public List<CompositeRootUserInfo> findCompositeUserById(Long seqLoginId) {
         return compositeMapper.selectBySeqRootLoginInfoId(seqLoginId);
     }
 

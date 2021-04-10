@@ -190,8 +190,8 @@ public class LoginController implements BaseWebController {
     public String top(Model model, HttpServletRequest request) {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
         // ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).orElse(null);
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).orElse(null);
         if (BeanUtil.isNull(seqUserId)) {
             return getView(DashboardView.LOGIN);
         }

@@ -35,7 +35,7 @@ public class ApiCommunicationDataComponent {
      *
      * @return トランザクションID
      */
-    public Integer getTransactionId() {
+    public Long getTransactionId() {
         return searchService.selectLastTransactionId();
     }
 
@@ -50,8 +50,8 @@ public class ApiCommunicationDataComponent {
      *     トランザクションID
      * @return API通信情報
      */
-    public ApiCommunicationData create(String apiName, Integer seqUserId,
-            Integer transactionId) {
+    public ApiCommunicationData create(String apiName, Long seqUserId,
+            Long transactionId) {
 
         ApiCommunicationData entity = new ApiCommunicationData();
         entity.setTransactionId(transactionId);

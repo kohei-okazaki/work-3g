@@ -41,7 +41,7 @@ public interface HealthInfoService {
      * @throws BaseException
      *     基底例外
      */
-    boolean isFirstReg(Integer seqUserId) throws BaseException;
+    boolean isFirstReg(Long seqUserId) throws BaseException;
 
     /**
      * CSVモデルリストに変換する
@@ -63,7 +63,7 @@ public interface HealthInfoService {
      * @throws BaseException
      *     基底例外
      */
-    HealthInfoRegistResponse regist(HealthInfoDto dto, Integer seqUserId)
+    HealthInfoRegistResponse regist(HealthInfoDto dto, Long seqUserId)
             throws BaseException;
 
     /**

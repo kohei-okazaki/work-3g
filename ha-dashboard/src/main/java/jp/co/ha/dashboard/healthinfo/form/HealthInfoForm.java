@@ -17,7 +17,7 @@ import jp.co.ha.web.form.BaseForm;
 public class HealthInfoForm implements BaseForm {
 
     /** 健康情報ID */
-    private Integer seqHealthInfoId;
+    private Long seqHealthInfoId;
     /** ユーザID */
     private String userId;
     /** 身長 */
@@ -44,7 +44,7 @@ public class HealthInfoForm implements BaseForm {
      *
      * @return seqHealthInfoId
      */
-    public Integer getSeqHealthInfoId() {
+    public Long getSeqHealthInfoId() {
         return seqHealthInfoId;
     }
 
@@ -54,7 +54,7 @@ public class HealthInfoForm implements BaseForm {
      * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+    public void setSeqHealthInfoId(Long seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
     }
 

@@ -26,7 +26,7 @@ public class RootUserRoleDetailMtDeleteServiceImpl
     @Delete
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteByUser(Integer seqRootUserRoleMngMtId) {
+    public void deleteByUser(Long seqRootUserRoleMngMtId) {
 
         RootUserRoleDetailMtExample example = new RootUserRoleDetailMtExample();
         Criteria criteria = example.createCriteria();

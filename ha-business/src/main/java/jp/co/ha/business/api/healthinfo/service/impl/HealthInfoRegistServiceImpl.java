@@ -117,7 +117,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
     private HealthInfo toEntity(HealthInfoRegistRequest request,
             BasicHealthInfo basicHealthInfo) throws BaseException {
 
-        Integer seqUserId = request.getSeqUserId();
+        Long seqUserId = request.getSeqUserId();
         BigDecimal weight = request.getWeight();
         BigDecimal bmi = basicHealthInfo.getBmi();
 

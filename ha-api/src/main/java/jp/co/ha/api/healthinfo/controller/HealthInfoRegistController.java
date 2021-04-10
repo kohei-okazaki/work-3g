@@ -44,7 +44,7 @@ public class HealthInfoRegistController extends
      *     基底例外
      */
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoRegistResponse doPost(@PathVariable("seqUserId") Integer seqUserId,
+    public HealthInfoRegistResponse doPost(@PathVariable("seqUserId") Long seqUserId,
             @RequestHeader(ApiConnectInfo.X_API_KEY) String apiKey,
             @RequestBody HealthInfoRegistRequest request) throws BaseException {
 

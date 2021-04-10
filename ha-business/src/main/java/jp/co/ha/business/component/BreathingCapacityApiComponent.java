@@ -50,11 +50,11 @@ public class BreathingCapacityApiComponent {
      * @throws BaseException
      *     肺活量計算APIの処理が成功以外
      */
-    public BreathingCapacityDto calc(BreathingCapacityDto dto, Integer seqUserId)
+    public BreathingCapacityDto calc(BreathingCapacityDto dto, Long seqUserId)
             throws BaseException {
 
         // API通信情報.トランザクションIDを採番
-        Integer transactionId = apiCommunicationDataComponent.getTransactionId();
+        Long transactionId = apiCommunicationDataComponent.getTransactionId();
 
         TokenResponse tokenApiResponse = tokenApiComponent.callTokenApi(seqUserId,
                 transactionId);
@@ -82,8 +82,8 @@ public class BreathingCapacityApiComponent {
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, String token, Integer seqUserId,
-            Integer transactionId) throws BaseException {
+            BreathingCapacityDto dto, String token, Long seqUserId,
+            Long transactionId) throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent

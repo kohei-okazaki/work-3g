@@ -8,7 +8,7 @@ package jp.co.ha.business.dto;
 public class AccountDto {
 
     /** ユーザID */
-    private Integer seqUserId;
+    private Long seqUserId;
     /** パスワード */
     private String password;
     /** 確認用パスワード */
@@ -39,7 +39,7 @@ public class AccountDto {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -49,7 +49,7 @@ public class AccountDto {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

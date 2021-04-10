@@ -15,14 +15,14 @@ public class CompositeAccountKey implements Serializable {
     @Ignore
     private static final long serialVersionUID = 1L;
     /** ユーザID */
-    private Integer seqUserId;
+    private Long seqUserId;
 
     /**
      * seqUserIdを返す
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -32,7 +32,7 @@ public class CompositeAccountKey implements Serializable {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

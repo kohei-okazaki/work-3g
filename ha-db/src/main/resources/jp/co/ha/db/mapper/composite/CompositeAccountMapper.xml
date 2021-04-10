@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ha.db.mapper.composite.CompositeAccountMapper">
   <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.composite.CompositeAccount">
-    <id column="SEQ_USER_ID" jdbcType="INTEGER" property="seqUserId" />
+    <id column="SEQ_USER_ID" jdbcType="BIGINT" property="seqUserId" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="DELETE_FLAG" jdbcType="VARCHAR" property="deleteFlag" />
     <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
@@ -38,7 +38,7 @@
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
         ON AC.SEQ_USER_ID = HF.SEQ_USER_ID
     WHERE
-      AC.SEQ_USER_ID = #{seqUserId,jdbcType=INTEGER}
+      AC.SEQ_USER_ID = #{seqUserId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" parameterType="jp.co.ha.db.entity.composite.CompositeAccountKey" resultMap="BaseResultMap">
     SELECT

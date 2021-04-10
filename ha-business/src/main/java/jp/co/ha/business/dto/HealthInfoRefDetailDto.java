@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 public class HealthInfoRefDetailDto {
 
     /** 健康情報ID */
-    private Integer seqHealthInfoId;
+    private Long seqHealthInfoId;
     /** ユーザID */
-    private Integer seqUserId;
+    private Long seqUserId;
     /** 身長 */
     private BigDecimal height;
     /** 体重 */
@@ -26,7 +26,7 @@ public class HealthInfoRefDetailDto {
     /** 健康情報登録日時 */
     private String healthInfoRegDate;
     /** BMI範囲マスタID */
-    private Integer seqBmiRangeMtId;
+    private Long seqBmiRangeMtId;
     /** 肥満度ステータス */
     private String overWeightStatus;
 
@@ -35,7 +35,7 @@ public class HealthInfoRefDetailDto {
      *
      * @return seqHealthInfoId
      */
-    public Integer getSeqHealthInfoId() {
+    public Long getSeqHealthInfoId() {
         return seqHealthInfoId;
     }
 
@@ -45,7 +45,7 @@ public class HealthInfoRefDetailDto {
      * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+    public void setSeqHealthInfoId(Long seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
     }
 
@@ -54,7 +54,7 @@ public class HealthInfoRefDetailDto {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -64,7 +64,7 @@ public class HealthInfoRefDetailDto {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 
@@ -187,7 +187,7 @@ public class HealthInfoRefDetailDto {
      *
      * @return seqBmiRangeMtId
      */
-    public Integer getSeqBmiRangeMtId() {
+    public Long getSeqBmiRangeMtId() {
         return seqBmiRangeMtId;
     }
 
@@ -197,7 +197,7 @@ public class HealthInfoRefDetailDto {
      * @param seqBmiRangeMtId
      *     BMI範囲マスタID
      */
-    public void setSeqBmiRangeMtId(Integer seqBmiRangeMtId) {
+    public void setSeqBmiRangeMtId(Long seqBmiRangeMtId) {
         this.seqBmiRangeMtId = seqBmiRangeMtId;
     }
 
