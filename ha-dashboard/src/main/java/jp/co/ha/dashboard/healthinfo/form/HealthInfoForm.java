@@ -18,8 +18,6 @@ public class HealthInfoForm implements BaseForm {
 
     /** 健康情報ID */
     private Long seqHealthInfoId;
-    /** ユーザID */
-    private String userId;
     /** 身長 */
     @Mask
     @Required(message = "身長が未入力です")
@@ -56,25 +54,6 @@ public class HealthInfoForm implements BaseForm {
      */
     public void setSeqHealthInfoId(Long seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
-    }
-
-    /**
-     * userIdを返す
-     *
-     * @return userId
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * userIdを設定する
-     *
-     * @param userId
-     *     ユーザID
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     /**

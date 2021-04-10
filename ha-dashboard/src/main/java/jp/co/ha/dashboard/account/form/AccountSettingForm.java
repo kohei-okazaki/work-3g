@@ -22,7 +22,7 @@ public class AccountSettingForm implements BaseForm {
 
     /** ユーザID */
     @Required(message = "ユーザIDが未入力です")
-    private Integer seqUserId;
+    private Long seqUserId;
     /** パスワード */
     @Mask
     @Required(message = "パスワードが未入力です")
@@ -73,7 +73,7 @@ public class AccountSettingForm implements BaseForm {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -83,7 +83,7 @@ public class AccountSettingForm implements BaseForm {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 
