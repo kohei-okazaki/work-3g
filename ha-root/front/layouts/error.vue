@@ -21,7 +21,7 @@ export default {
   },
   data: function () {
     return {
-      pageNotFound: "404 Not Found",
+      pageNotFound: "指定されたページは存在しません。",
       otherError: "An error occurred",
     };
   },
