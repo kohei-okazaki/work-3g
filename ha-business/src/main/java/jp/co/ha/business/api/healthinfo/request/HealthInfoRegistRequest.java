@@ -43,7 +43,7 @@ public class HealthInfoRegistRequest extends BaseRestApiRequest
     private TestMode testMode;
     /** トランザクションID */
     @JsonProperty("transactionId")
-    private Integer transactionId;
+    private Long transactionId;
 
     /**
      * heightを返す
@@ -107,7 +107,7 @@ public class HealthInfoRegistRequest extends BaseRestApiRequest
      *
      * @return transactionId
      */
-    public Integer getTransactionId() {
+    public Long getTransactionId() {
         return transactionId;
     }
 
@@ -117,7 +117,7 @@ public class HealthInfoRegistRequest extends BaseRestApiRequest
      * @param transactionId
      *     トランザクションID
      */
-    public void setTransactionId(Integer transactionId) {
+    public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
     }
 

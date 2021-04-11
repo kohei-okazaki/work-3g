@@ -34,7 +34,7 @@ public class ApiCommunicationDataSearchServiceImpl
     }
 
     @Override
-    public Integer selectLastTransactionId() {
+    public Long selectLastTransactionId() {
 
         ApiCommunicationDataExample example = new ApiCommunicationDataExample();
         SelectOption selectOption = new SelectOptionBuilder()
@@ -43,7 +43,8 @@ public class ApiCommunicationDataSearchServiceImpl
         example.setLimit(selectOption.getLimit());
 
         List<ApiCommunicationData> list = mapper.selectByExample(example);
-        return CollectionUtil.isEmpty(list) ? 1 : list.get(0).getTransactionId() + 1;
+        return CollectionUtil.isEmpty(list) ? Long.valueOf(1)
+                : list.get(0).getTransactionId() + 1;
     }
 
 }

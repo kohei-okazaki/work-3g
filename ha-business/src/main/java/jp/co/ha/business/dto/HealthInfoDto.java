@@ -11,8 +11,6 @@ public class HealthInfoDto {
 
     /** 健康情報ID */
     private Integer seqHealthInfoId;
-    /** ユーザID */
-    private String userId;
     /** 身長 */
     private BigDecimal height;
     /** 体重 */
@@ -39,25 +37,6 @@ public class HealthInfoDto {
      */
     public void setSeqHealthInfoId(Integer seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
-    }
-
-    /**
-     * userIdを返す
-     *
-     * @return userId
-     */
-    public String getUserId() {
-        return userId;
-    }
-
-    /**
-     * userIdを設定する
-     *
-     * @param userId
-     *     ユーザID
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     /**

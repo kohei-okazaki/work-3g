@@ -24,7 +24,7 @@ public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
     @Delete
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteById(Integer seqHealthInfoId) {
+    public void deleteById(Long seqHealthInfoId) {
         HealthInfoKey key = new HealthInfoKey();
         key.setSeqHealthInfoId(seqHealthInfoId);
         mapper.deleteByPrimaryKey(key);

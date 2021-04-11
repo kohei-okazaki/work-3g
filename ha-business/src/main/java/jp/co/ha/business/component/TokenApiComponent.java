@@ -45,7 +45,7 @@ public class TokenApiComponent {
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    public TokenResponse callTokenApi(Integer seqUserId, Integer transactionId)
+    public TokenResponse callTokenApi(Long seqUserId, Long transactionId)
             throws BaseException {
 
         // API通信情報を登録

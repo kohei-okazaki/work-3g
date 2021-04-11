@@ -43,8 +43,7 @@ public class RootRoleMtSearchServiceImpl implements RootRoleMtSearchService {
     @Override
     @Transactional(readOnly = true)
     public List<RootRoleMt> findAll() {
-        RootRoleMtExample example = new RootRoleMtExample();
-        return mapper.selectByExample(example);
+        return mapper.selectByExample(new RootRoleMtExample());
     }
 
 }

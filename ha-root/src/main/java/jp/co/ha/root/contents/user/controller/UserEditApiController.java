@@ -96,7 +96,7 @@ public class UserEditApiController
             return getErrorResponse("ID is required");
         }
 
-        Integer seqLoginId = Integer.valueOf(id.get());
+        Long seqLoginId = Long.valueOf(id.get());
 
         // トランザクション開始
         TransactionStatus status = transactionManager
@@ -107,7 +107,7 @@ public class UserEditApiController
             List<CompositeRootUserInfo> userRoleList = rootLoginInfoSearchService
                     .findCompositeUserById(seqLoginId);
             // 管理者サイトユーザ権限管理マスタID
-            Integer seqRootUserRoleMngMtId = userRoleList.get(0)
+            Long seqRootUserRoleMngMtId = userRoleList.get(0)
                     .getSeqRootUserRoleMngMtId();
             if (seqRootUserRoleMngMtId == null) {
                 // エラーレスポンスを返却

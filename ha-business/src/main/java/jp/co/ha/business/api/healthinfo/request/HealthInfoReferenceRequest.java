@@ -22,14 +22,14 @@ public class HealthInfoReferenceRequest extends BaseRestApiRequest
     @Required(message = "seqHealthInfoIdが未設定です")
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "seqHealthInfoIdが半角数字でありません")
     @JsonProperty("seqHealthInfoId")
-    private Integer seqHealthInfoId;
+    private Long seqHealthInfoId;
 
     /**
      * seqHealthInfoIdを返す
      *
      * @return seqHealthInfoId
      */
-    public Integer getSeqHealthInfoId() {
+    public Long getSeqHealthInfoId() {
         return seqHealthInfoId;
     }
 
@@ -39,7 +39,7 @@ public class HealthInfoReferenceRequest extends BaseRestApiRequest
      * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+    public void setSeqHealthInfoId(Long seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
     }
 

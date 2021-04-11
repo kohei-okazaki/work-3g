@@ -46,7 +46,7 @@ public class UserRetrieveController
             @PathVariable(name = "id", required = false) Optional<String> id) {
 
         // TODO 妥当性チェック処理
-        Integer seqLoginId = Integer.valueOf(id.get());
+        Long seqLoginId = Long.valueOf(id.get());
 
         List<CompositeRootUserInfo> entityList = searchService
                 .findCompositeUserById(seqLoginId);

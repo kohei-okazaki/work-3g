@@ -24,7 +24,9 @@ public enum AwsS3Key implements BaseEnum {
     /** 月次健康情報集計CSV配置キー */
     MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo/"),
     /** Slack接続情報キー */
-    SLACK_CONNECTION_DATA("slack/slack_connection_data.json");
+    SLACK_CONNECTION_DATA("slack/slack_connection_data.json"),
+    /** メモ情報配置キー */
+    NOTE_FILE("note/");
 
     /**
      * コンストラクタ

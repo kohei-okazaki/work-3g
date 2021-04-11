@@ -51,17 +51,17 @@ public class HeathInfoRefDetailController implements BaseWebController {
      */
     @GetMapping("/detail")
     public String detail(Model model,
-            @RequestParam(name = "seqHealthInfoId", required = false) Optional<Integer> seqHealthInfoId,
+            @RequestParam(name = "seqHealthInfoId", required = false) Optional<Long> seqHealthInfoId,
             HttpServletRequest request) throws BaseException {
 
         // 健康情報ID
-        Integer healthInfoId = seqHealthInfoId
+        Long healthInfoId = seqHealthInfoId
                 .orElseThrow(
                         () -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                                 "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
         // sessionよりユーザID
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         HealthInfoRefDetailDto dto = new HealthInfoRefDetailDto();
         dto.setSeqHealthInfoId(healthInfoId);

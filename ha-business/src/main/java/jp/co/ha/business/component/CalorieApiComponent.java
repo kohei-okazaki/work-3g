@@ -50,11 +50,11 @@ public class CalorieApiComponent {
      * @throws BaseException
      *     カロリー計算APIの処理が成功以外
      */
-    public CalorieCalcDto calc(CalorieCalcDto dto, Integer seqUserId)
+    public CalorieCalcDto calc(CalorieCalcDto dto, Long seqUserId)
             throws BaseException {
 
         // API通信情報.トランザクションIDを採番
-        Integer transactionId = apiCommunicationDataComponent.getTransactionId();
+        Long transactionId = apiCommunicationDataComponent.getTransactionId();
 
         TokenResponse tokenApiResponse = tokenApiComponent.callTokenApi(seqUserId,
                 transactionId);
@@ -82,7 +82,7 @@ public class CalorieApiComponent {
      *     API通信に失敗した場合
      */
     private CalorieCalcResponse callCalorieCalcApi(CalorieCalcDto dto, String token,
-            Integer seqUserId, Integer transactionId) throws BaseException {
+            Long seqUserId, Long transactionId) throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent

@@ -44,7 +44,7 @@ public class NewsListApiController
      *     S3よりお知らせ情報JSONを取得できなかった場合
      */
     @GetMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public NewsListApiResponse list(NewsListApiRequest request) throws BaseException {
+    public NewsListApiResponse index(NewsListApiRequest request) throws BaseException {
 
         // S3からお知らせJSONを取得
         InputStream is = awsS3Component.getS3ObjectByKey(AwsS3Key.NEWS_JSON);

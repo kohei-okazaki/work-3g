@@ -44,8 +44,7 @@ public class HealthInfoListApiController extends
                     BeanUtil.copy(e, response);
                     response.setHealthInfoStatus(
                             getHealthInfoStatus(e.getHealthInfoStatus()));
-                    response.setBmiStatus(getBmiStatus(e.getSeqBmiRangeMtId(),
-                            e.getOverWeightStatus()));
+                    response.setBmiStatus(getBmiStatus(e.getOverWeightStatus()));
                     return response;
                 }).collect(Collectors.toList());
 
@@ -91,14 +90,11 @@ public class HealthInfoListApiController extends
     /**
      * 肥満度ステータス応答情報を返す
      *
-     * @param seqBmiRangeMtId
-     *     BMI範囲マスタID
      * @param overWeightStatus
      *     肥満度ステータス
      * @return 肥満度ステータス応答情報
      */
-    private HealthInfoListApiResponse.BmiStatus getBmiStatus(Integer seqBmiRangeMtId,
-            String overWeightStatus) {
+    private HealthInfoListApiResponse.BmiStatus getBmiStatus(String overWeightStatus) {
 
         HealthInfoListApiResponse.BmiStatus status = new HealthInfoListApiResponse.BmiStatus();
         status.setStatus(overWeightStatus);

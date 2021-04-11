@@ -61,8 +61,8 @@ public class AccountSettingController
     public AccountSettingForm setUpForm(HttpServletRequest request) {
 
         // セッションからユーザIDを取得
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         Optional<CompositeAccount> entity = accountSearchService
                 .findCompositAccountById(seqUserId);

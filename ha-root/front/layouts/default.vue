@@ -96,6 +96,11 @@ export default {
           title: "お知らせ一覧",
           to: "/news",
         },
+        {
+          icon: "mdi-notebook",
+          title: "メモ一覧",
+          to: "/note",
+        },
       ],
       miniVariant: false,
       right: true,

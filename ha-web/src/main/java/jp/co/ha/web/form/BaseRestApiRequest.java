@@ -16,7 +16,7 @@ public abstract class BaseRestApiRequest implements BaseForm {
     /** ユーザID */
     @JsonIgnore
     @Required(message = "seqUserIdが未指定です")
-    private Integer seqUserId;
+    private Long seqUserId;
     /** APIキー */
     @JsonIgnore
     @Required(message = "apiKeyが未指定です")
@@ -27,7 +27,7 @@ public abstract class BaseRestApiRequest implements BaseForm {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -37,7 +37,7 @@ public abstract class BaseRestApiRequest implements BaseForm {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

@@ -30,7 +30,7 @@ public class AccountRecoveryTokenSearchServiceImpl
 
     @Override
     public Optional<AccountRecoveryTokenData> findBySeqUserIdAndTokenAndValidTokenCreateDate(
-            Integer seqUserId, String token) {
+            Long seqUserId, String token) {
 
         AccountRecoveryTokenDataExample example = new AccountRecoveryTokenDataExample();
         Criteria creteria = example.createCriteria();
