@@ -18,7 +18,7 @@ import jp.co.ha.common.log.annotation.Mask;
 public class HealthInfoCsvDownloadModel implements BaseCsvModel {
 
     /** ユーザID */
-    private Integer seqUserId;
+    private Long seqUserId;
     /** 身長 */
     @Mask
     private BigDecimal height;
@@ -39,7 +39,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -49,7 +49,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

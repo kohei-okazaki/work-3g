@@ -28,7 +28,7 @@ public interface HealthInfoSearchService {
      *     {@linkplain SelectOption}
      * @return 健康情報リスト
      */
-    List<HealthInfo> findBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
+    List<HealthInfo> findBySeqUserIdBetweenHealthInfoRegDate(Long seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption);
 
@@ -43,7 +43,7 @@ public interface HealthInfoSearchService {
      *     健康情報作成日時(終了)
      * @return 健康情報リストの件数
      */
-    long countBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
+    long countBySeqUserIdBetweenHealthInfoRegDate(Long seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate);
 
     /**
@@ -55,8 +55,8 @@ public interface HealthInfoSearchService {
      *     ユーザID
      * @return 健康情報リスト
      */
-    List<HealthInfo> findByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
-            Integer seqUserId);
+    List<HealthInfo> findByHealthInfoIdAndSeqUserId(Long seqHealthInfoId,
+            Long seqUserId);
 
     /**
      * 指定された健康情報IDとユーザIDと一致する健康情報の件数を返す
@@ -67,8 +67,8 @@ public interface HealthInfoSearchService {
      *     ユーザID
      * @return 健康情報リストの件数
      */
-    long countByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
-            Integer seqUserId);
+    long countByHealthInfoIdAndSeqUserId(Long seqHealthInfoId,
+            Long seqUserId);
 
     /**
      * 指定されたユーザIDの件数を返す
@@ -77,7 +77,7 @@ public interface HealthInfoSearchService {
      *     ユーザID
      * @return 件数
      */
-    int getSelectCountBySeqUserId(Integer seqUserId);
+    int getSelectCountBySeqUserId(Long seqUserId);
 
     /**
      * 指定されたユーザIDで健康情報を検索する<br>
@@ -93,7 +93,7 @@ public interface HealthInfoSearchService {
      *     {@linkplain SelectOption}
      * @return 健康情報リスト
      */
-    List<HealthInfo> findBySeqUserId(Integer seqUserId, SelectOption selectOption);
+    List<HealthInfo> findBySeqUserId(Long seqUserId, SelectOption selectOption);
 
     /**
      * 指定された健康情報IDとユーザIDより健康情報とBMI範囲マスタの複合Entityを検索する
@@ -104,7 +104,7 @@ public interface HealthInfoSearchService {
      *     ユーザID
      * @return 健康情報とBMI範囲マスタの複合Entity
      */
-    CompositeHealthInfo findHealthInfoDetail(Integer seqHealthInfoId, Integer seqUserId);
+    CompositeHealthInfo findHealthInfoDetail(Long seqHealthInfoId, Long seqUserId);
 
     /**
      * 健康情報とBMI範囲マスタの複合Entityを検索する
@@ -140,7 +140,7 @@ public interface HealthInfoSearchService {
      *     {@linkplain SelectOption}
      * @return 健康情報
      */
-    HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Integer seqHealthInfoId,
-            Integer seqUserId, SelectOption selectOption);
+    HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Long seqHealthInfoId,
+            Long seqUserId, SelectOption selectOption);
 
 }

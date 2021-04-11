@@ -28,9 +28,9 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
     private static final long serialVersionUID = 1L;
 
     /** 管理者サイトユーザ権限管理マスタID */
-    private Integer seqRootUserRoleMngMtId;
+    private Long seqRootUserRoleMngMtId;
     /** 管理者サイトユーザ権限詳細マスタID */
-    private Integer seqRootUserRoleDetailMtId;
+    private Long seqRootUserRoleDetailMtId;
     /** 削除フラグ */
     private String deleteFlag;
     /** パスワード */
@@ -54,7 +54,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
      *
      * @return seqRootUserRoleMngMtId
      */
-    public Integer getSeqRootUserRoleMngMtId() {
+    public Long getSeqRootUserRoleMngMtId() {
         return seqRootUserRoleMngMtId;
     }
 
@@ -64,7 +64,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
      * @param seqRootUserRoleMngMtId
      *     管理者サイトユーザ権限管理マスタID
      */
-    public void setSeqRootUserRoleMngMtId(Integer seqRootUserRoleMngMtId) {
+    public void setSeqRootUserRoleMngMtId(Long seqRootUserRoleMngMtId) {
         this.seqRootUserRoleMngMtId = seqRootUserRoleMngMtId;
     }
 
@@ -73,7 +73,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
      *
      * @return seqRootUserRoleDetailMtId
      */
-    public Integer getSeqRootUserRoleDetailMtId() {
+    public Long getSeqRootUserRoleDetailMtId() {
         return seqRootUserRoleDetailMtId;
     }
 
@@ -83,7 +83,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializa
      * @param seqRootUserRoleDetailMtId
      *     管理者サイトユーザ権限詳細マスタID
      */
-    public void setSeqRootUserRoleDetailMtId(Integer seqRootUserRoleDetailMtId) {
+    public void setSeqRootUserRoleDetailMtId(Long seqRootUserRoleDetailMtId) {
         this.seqRootUserRoleDetailMtId = seqRootUserRoleDetailMtId;
     }
 

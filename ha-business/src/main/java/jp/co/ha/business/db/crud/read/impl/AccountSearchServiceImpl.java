@@ -49,7 +49,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<Account> findById(Integer seqUserId) {
+    public Optional<Account> findById(Long seqUserId) {
         AccountKey key = new AccountKey();
         key.setSeqUserId(seqUserId);
         return Optional.ofNullable(mapper.selectByPrimaryKey(key));
@@ -58,7 +58,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<CompositeAccount> findCompositAccountById(Integer seqUserId) {
+    public Optional<CompositeAccount> findCompositAccountById(Long seqUserId) {
         CompositeAccountKey key = new CompositeAccountKey();
         key.setSeqUserId(seqUserId);
         return Optional.ofNullable(compositeAccountMapper.selectByPrimaryKey(key));

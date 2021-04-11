@@ -53,7 +53,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     private BeanValidator<HealthInfoCsvUploadModel> validator;
 
     @Override
-    public void formatCheck(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
+    public void formatCheck(List<HealthInfoCsvUploadModel> modelList, Long seqUserId)
             throws BaseException {
         for (int i = 0; i < modelList.size(); i++) {
             HealthInfoCsvUploadModel model = modelList.get(i);
@@ -73,7 +73,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     }
 
     @Override
-    public ResultType regist(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
+    public ResultType regist(List<HealthInfoCsvUploadModel> modelList, Long seqUserId)
             throws BaseException {
 
         // アカウント情報.APIキーを設定
@@ -85,7 +85,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         ResultType result = ResultType.SUCCESS;
-        for (HealthInfoRegistRequest request : toRequestList(modelList, seqUserId)) {
+        for (HealthInfoRegistRequest request : toRequestList(modelList)) {
 
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
@@ -112,15 +112,10 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
      *
      * @param modelList
      *     健康情報CSVアップロードモデルリスト
-     * @param seqUserId
-     *     ユーザID
      * @return 健康情報登録APIリクエストリスト
-     * @throws BaseException
-     *     基底例外
      */
     private List<HealthInfoRegistRequest> toRequestList(
-            List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
-            throws BaseException {
+            List<HealthInfoCsvUploadModel> modelList) {
 
         return modelList.stream().map(e -> {
             HealthInfoRegistRequest request = new HealthInfoRegistRequest();

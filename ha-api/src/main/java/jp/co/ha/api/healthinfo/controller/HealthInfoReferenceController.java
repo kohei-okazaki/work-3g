@@ -42,8 +42,8 @@ public class HealthInfoReferenceController extends
      *     基底例外
      */
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoReferenceResponse doGet(@PathVariable("seqUserId") Integer seqUserId,
-            @PathVariable("seqHealthInfoId") Integer seqHealthInfoId,
+    public HealthInfoReferenceResponse doGet(@PathVariable("seqUserId") Long seqUserId,
+            @PathVariable("seqHealthInfoId") Long seqHealthInfoId,
             @RequestHeader(value = "Api-Key") String apiKey) throws BaseException {
 
         HealthInfoReferenceRequest request = new HealthInfoReferenceRequest();

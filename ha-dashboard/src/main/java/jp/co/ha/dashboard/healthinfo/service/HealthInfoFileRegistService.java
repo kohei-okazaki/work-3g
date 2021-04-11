@@ -23,7 +23,7 @@ public interface HealthInfoFileRegistService {
      * @throws BaseException
      *     基底例外
      */
-    void formatCheck(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
+    void formatCheck(List<HealthInfoCsvUploadModel> modelList, Long seqUserId)
             throws BaseException;
 
     /**
@@ -37,7 +37,7 @@ public interface HealthInfoFileRegistService {
      * @throws BaseException
      *     基底例外
      */
-    ResultType regist(List<HealthInfoCsvUploadModel> modelList, Integer seqUserId)
+    ResultType regist(List<HealthInfoCsvUploadModel> modelList, Long seqUserId)
             throws BaseException;
 
 }

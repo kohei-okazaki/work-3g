@@ -13,6 +13,6 @@ public interface RootUserRoleDetailMtDeleteService {
      * @param seqRootUserRoleMngMtId
      *     管理者サイトユーザ権限管理マスタID
      */
-    void deleteByUser(Integer seqRootUserRoleMngMtId);
+    void deleteByUser(Long seqRootUserRoleMngMtId);
 
 }

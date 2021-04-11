@@ -34,7 +34,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
     public void sendHealthInfoMail(HealthInfoRegistResponse apiResponse)
             throws BaseException {
 
-        Integer seqUserId = apiResponse.getAccount().getSeqUserId();
+        Long seqUserId = apiResponse.getAccount().getSeqUserId();
         String to = accountSearchService.findById(seqUserId).get().getMailAddress();
         String titleText = "健康情報登録完了メール" + DateTimeUtil.toString(
                 DateTimeUtil.getSysDate(), DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);

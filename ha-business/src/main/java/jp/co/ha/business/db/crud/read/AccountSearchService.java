@@ -22,7 +22,7 @@ public interface AccountSearchService {
      *     ユーザID
      * @return アカウント情報
      */
-    Optional<Account> findById(Integer seqUserId);
+    Optional<Account> findById(Long seqUserId);
 
     /**
      * ユーザIDからアカウント情報と健康情報ファイル設定の複合Entityを取得する
@@ -31,7 +31,7 @@ public interface AccountSearchService {
      *     ユーザID
      * @return アカウント情報とメール情報と健康情報ファイル設定の複合Entity
      */
-    Optional<CompositeAccount> findCompositAccountById(Integer seqUserId);
+    Optional<CompositeAccount> findCompositAccountById(Long seqUserId);
 
     /**
      * メールアドレスからアカウント情報を取得する

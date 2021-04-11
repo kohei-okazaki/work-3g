@@ -13,14 +13,14 @@ public class TokenRequest extends BaseNodeRequest implements BaseApiRequest {
 
     /** ユーザID */
     @JsonProperty("seq_user_id")
-    private Integer seqUserId;
+    private Long seqUserId;
 
     /**
      * seqUserIdを返す
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -29,7 +29,7 @@ public class TokenRequest extends BaseNodeRequest implements BaseApiRequest {
      *
      * @param seqUserId
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

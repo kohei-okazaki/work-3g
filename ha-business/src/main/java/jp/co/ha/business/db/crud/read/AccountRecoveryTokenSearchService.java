@@ -26,6 +26,6 @@ public interface AccountRecoveryTokenSearchService {
      * @return アカウント回復トークン
      */
     Optional<AccountRecoveryTokenData> findBySeqUserIdAndTokenAndValidTokenCreateDate(
-            Integer seqUserId, String token);
+            Long seqUserId, String token);
 
 }

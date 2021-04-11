@@ -1,10 +1,12 @@
 package jp.co.ha.business.api.aws;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,7 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.Charset;
 
 /**
  * AWS-S3のComponent
@@ -41,6 +44,8 @@ public class AwsS3Component {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(AwsS3Component.class);
+    /** 文字コード */
+    private static final String UTF_8 = Charset.UTF_8.getValue();
 
     /** AWS個別設定情報 */
     @Autowired
@@ -168,6 +173,26 @@ public class AwsS3Component {
      */
     public void putFile(AwsS3Key key, File file) throws BaseException {
         this.putFile(key.getValue(), file);
+    }
+
+    /**
+     * 指定されたキーへ文字列データをファイルとして配置する
+     *
+     * @param key
+     * @param strData
+     * @throws BaseException
+     *     S3へファイルアップロードに失敗した場合
+     * @see #putFile(String, long, InputStream)
+     */
+    public void putFile(String key, String strData) throws BaseException {
+        try {
+            byte[] b = strData.getBytes(UTF_8);
+            InputStream is = new ByteArrayInputStream(b);
+            putFile(key, b.length, is);
+        } catch (UnsupportedEncodingException e) {
+            // UTF-8指定のため、発生しない
+            LOG.warn("文字コードの指定が不正です", e);
+        }
     }
 
     /**

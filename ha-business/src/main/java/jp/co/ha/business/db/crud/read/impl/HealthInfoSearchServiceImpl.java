@@ -43,7 +43,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
+    public List<HealthInfo> findBySeqUserIdBetweenHealthInfoRegDate(Long seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate,
             SelectOption selectOption) {
 
@@ -74,7 +74,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public long countBySeqUserIdBetweenHealthInfoRegDate(Integer seqUserId,
+    public long countBySeqUserIdBetweenHealthInfoRegDate(Long seqUserId,
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate) {
 
         HealthInfoExample example = new HealthInfoExample();
@@ -90,8 +90,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
-            Integer seqUserId) {
+    public List<HealthInfo> findByHealthInfoIdAndSeqUserId(Long seqHealthInfoId,
+            Long seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
@@ -106,8 +106,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public long countByHealthInfoIdAndSeqUserId(Integer seqHealthInfoId,
-            Integer seqUserId) {
+    public long countByHealthInfoIdAndSeqUserId(Long seqHealthInfoId,
+            Long seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
@@ -122,7 +122,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public int getSelectCountBySeqUserId(Integer seqUserId) {
+    public int getSelectCountBySeqUserId(Long seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
@@ -135,7 +135,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<HealthInfo> findBySeqUserId(Integer seqUserId,
+    public List<HealthInfo> findBySeqUserId(Long seqUserId,
             SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
@@ -153,8 +153,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public CompositeHealthInfo findHealthInfoDetail(Integer seqHealthInfoId,
-            Integer seqUserId) {
+    public CompositeHealthInfo findHealthInfoDetail(Long seqHealthInfoId,
+            Long seqUserId) {
 
         CompositeHealthInfoKey key = new CompositeHealthInfoKey();
         key.setSeqHealthInfoId(seqHealthInfoId);
@@ -181,8 +181,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Integer seqHealthInfoId,
-            Integer seqUserId, SelectOption selectOption) {
+    public HealthInfo findBySeqUserIdAndLowerSeqHealthInfoId(Long seqHealthInfoId,
+            Long seqUserId, SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();

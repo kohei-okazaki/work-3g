@@ -85,10 +85,10 @@ public class HealthInfoEditApiController extends
         // TODO 妥当性チェック
 
         // 健康情報ID
-        Integer seqHealthInfoId = Integer.valueOf(id.get());
+        Long seqHealthInfoId = Long.valueOf(id.get());
 
         // API通信情報.トランザクションIDを採番
-        Integer transactionId = apiCommunicationDataComponent.getTransactionId();
+        Long transactionId = apiCommunicationDataComponent.getTransactionId();
         // トークン発行API実施
         TokenResponse tokenResponse = tokenApiComponent.callTokenApi(
                 request.getSeqUserId(), transactionId);

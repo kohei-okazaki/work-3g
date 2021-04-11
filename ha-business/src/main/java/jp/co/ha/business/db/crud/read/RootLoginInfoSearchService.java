@@ -20,15 +20,15 @@ public interface RootLoginInfoSearchService {
      *     ログインID
      * @return RootLoginInfo
      */
-    Optional<RootLoginInfo> findById(Integer seqLoginId);
+    Optional<RootLoginInfo> findById(Long seqLoginId);
 
     /**
      * 指定したログインIDから管理者サイト複合ユーザ情報の一覧を検索する
-     * 
+     *
      * @param seqLoginId
      *     ログインID
      * @return 管理者サイト複合ユーザ情報の一覧
      */
-    List<CompositeRootUserInfo> findCompositeUserById(Integer seqLoginId);
+    List<CompositeRootUserInfo> findCompositeUserById(Long seqLoginId);
 
 }

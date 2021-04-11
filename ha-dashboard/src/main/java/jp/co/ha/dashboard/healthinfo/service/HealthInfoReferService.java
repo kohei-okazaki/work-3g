@@ -28,7 +28,7 @@ public interface HealthInfoReferService {
      * @throws BaseException
      *     基底例外
      */
-    long getCount(HealthInfoReferenceDto dto, Integer seqUserId)
+    long getCount(HealthInfoReferenceDto dto, Long seqUserId)
             throws BaseException;
 
     /**
@@ -45,7 +45,7 @@ public interface HealthInfoReferService {
      *     基底例外
      */
     List<HealthInfoReferenceDto> getHealthInfoResponseList(HealthInfoReferenceDto dto,
-            Integer seqUserId, Pageable pageable) throws BaseException;
+            Long seqUserId, Pageable pageable) throws BaseException;
 
     /**
      * 結果照会CSVモデルリストに変換する
@@ -56,7 +56,7 @@ public interface HealthInfoReferService {
      *     健康情報照会レスポンスリスト
      * @return modelList
      */
-    List<ReferenceCsvDownloadModel> toModelList(Integer seqUserId,
+    List<ReferenceCsvDownloadModel> toModelList(Long seqUserId,
             List<HealthInfoReferenceDto> resultList);
 
     /**

@@ -332,7 +332,9 @@ public class FileUtil {
         /** java */
         JAVA(".java"),
         /** sql */
-        SQL(".sql");
+        SQL(".sql"),
+        /** text */
+        TEXT(".text");
 
         /** 値 */
         private String value;

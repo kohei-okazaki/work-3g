@@ -16,16 +16,16 @@ public class CompositeHealthInfoKey implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 健康情報ID */
-    private Integer seqHealthInfoId;
+    private Long seqHealthInfoId;
     /** ユーザID */
-    private Integer seqUserId;
+    private Long seqUserId;
 
     /**
      * seqHealthInfoIdを返す
      *
      * @return seqHealthInfoId
      */
-    public Integer getSeqHealthInfoId() {
+    public Long getSeqHealthInfoId() {
         return seqHealthInfoId;
     }
 
@@ -35,7 +35,7 @@ public class CompositeHealthInfoKey implements Serializable {
      * @param seqHealthInfoId
      *     健康情報ID
      */
-    public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+    public void setSeqHealthInfoId(Long seqHealthInfoId) {
         this.seqHealthInfoId = seqHealthInfoId;
     }
 
@@ -44,7 +44,7 @@ public class CompositeHealthInfoKey implements Serializable {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -54,7 +54,7 @@ public class CompositeHealthInfoKey implements Serializable {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

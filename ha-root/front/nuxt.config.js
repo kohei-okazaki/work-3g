@@ -58,6 +58,8 @@ export default {
     '@nuxtjs/axios',
     // ログイン認証を可能にするライブラリ
     '@nuxtjs/auth',
+    // basic認証を有効化するライブラリ
+    'nuxt-basic-auth-module'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -66,6 +68,11 @@ export default {
     // baseURL: process.env["api_base_url"]
     // baseURL: process.env.api_base_url
     baseURL: process.env.api_base_url || 'http://localhost:8082/api/root/'
+  },
+
+  basic: {
+    name: 'hoge',
+    pass: 'pass'
   },
 
   auth: {
