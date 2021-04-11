@@ -155,7 +155,7 @@
     values (#{seqRootLoginInfoId,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR},
       #{passwordExpire,jdbcType=DATE}, #{seqRootUserRoleMngMtId,jdbcType=BIGINT}, #{remarks,jdbcType=VARCHAR},
       #{updateDate,jdbcType=TIMESTAMP}, #{regDate,jdbcType=TIMESTAMP})
-      <selectKey resultType="INTEGER" keyProperty="seqRootLoginInfoId" order="AFTER">
+      <selectKey resultType="java.lang.Long" keyProperty="seqRootLoginInfoId" order="AFTER">
         select @@IDENTITY
       </selectKey>
   </insert>

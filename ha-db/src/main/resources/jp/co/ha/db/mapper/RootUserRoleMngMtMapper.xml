@@ -147,7 +147,7 @@
       REG_DATE)
     values (#{seqRootUserRoleMngMtId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
       #{regDate,jdbcType=TIMESTAMP})
-      <selectKey resultType="INTEGER" keyProperty="seqRootUserRoleMngMtId" order="AFTER">
+      <selectKey resultType="java.lang.Long" keyProperty="seqRootUserRoleMngMtId" order="AFTER">
         select @@IDENTITY
       </selectKey>
   </insert>

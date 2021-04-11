@@ -165,7 +165,7 @@
       #{result,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{requestDate,jdbcType=TIMESTAMP},
       #{responseDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{regDate,jdbcType=TIMESTAMP}
       )
-      <selectKey resultType="BIGINT" keyProperty="seqApiCommunicationDataId" order="AFTER">
+      <selectKey resultType="java.lang.Long" keyProperty="seqApiCommunicationDataId" order="AFTER">
         select @@IDENTITY
       </selectKey>
   </insert>

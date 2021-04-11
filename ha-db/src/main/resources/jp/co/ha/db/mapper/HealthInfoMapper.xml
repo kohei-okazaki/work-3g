@@ -165,7 +165,7 @@
       #{healthInfoStatus,jdbcType=VARCHAR}, #{healthInfoRegDate,jdbcType=TIMESTAMP},
       #{seqBmiRangeMtId,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, #{regDate,jdbcType=TIMESTAMP}
       )
-      <selectKey resultType="BIGINT" keyProperty="seqHealthInfoId" order="AFTER">
+      <selectKey resultType="java.lang.Long" keyProperty="seqHealthInfoId" order="AFTER">
         select @@IDENTITY
       </selectKey>
   </insert>
