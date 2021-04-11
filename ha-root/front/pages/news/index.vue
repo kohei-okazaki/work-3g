@@ -37,7 +37,7 @@
             <div v-html="item.detail"></div>
           </template>
           <template v-slot:[`item.edit_action`]="{ item }">
-            <v-btn small class="mx-1" @click="changeNewsEditView(item.index)">
+            <v-btn small class="mx-1" @click="changeNewsEditView(item.index)" v-if="isEntryShow">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
