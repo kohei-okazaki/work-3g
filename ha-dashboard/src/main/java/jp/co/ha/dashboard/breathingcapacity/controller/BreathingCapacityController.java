@@ -52,7 +52,7 @@ public class BreathingCapacityController implements BaseWebController {
 
     /**
      * 肺活量計算前画面
-     * 
+     *
      * @param model
      *     {@linkplain Model}
      * @return 肺活量計算画面
@@ -94,7 +94,7 @@ public class BreathingCapacityController implements BaseWebController {
         });
 
         BreathingCapacityDto calcResult = component.calc(dto, sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get());
+                .getValue(request.getSession(), "seqUserId", Long.class).get());
         model.addAttribute("calcResult", calcResult);
 
         return getView(model, DashboardView.BREATHING_CAPACITY_CALC);

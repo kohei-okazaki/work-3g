@@ -23,5 +23,5 @@ public interface ApiCommunicationDataSearchService {
      *
      * @return トランザクションIDの最大値
      */
-    Integer selectLastTransactionId();
+    Long selectLastTransactionId();
 }

@@ -128,8 +128,8 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         BeanUtil.copy(healthInfoForm, dto);
 
         // セッションからユーザIDを取得
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         boolean isFirstReg = healthInfoService.isFirstReg(seqUserId);
         model.addAttribute("isFirstReg", isFirstReg);
@@ -175,8 +175,8 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
         // sessionよりユーザIDと健康情報Form情報を取得
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
         HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
                 .orElseThrow(() -> new BusinessException(
@@ -211,8 +211,8 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             throws BaseException {
 
         // sessionよりユーザIDと健康情報Form情報を取得
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
         HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
                 .orElseThrow(() -> new BusinessException(

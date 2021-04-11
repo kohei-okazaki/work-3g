@@ -50,8 +50,8 @@ public class BasicHealthInfoCalcApiComponent {
      *     API通信に失敗した場合
      */
     public BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
-            BasicHealthInfoCalcRequest apiRequest, String token, Integer seqUserId,
-            Integer transactionId) throws BaseException {
+            BasicHealthInfoCalcRequest apiRequest, String token, Long seqUserId,
+            Long transactionId) throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent

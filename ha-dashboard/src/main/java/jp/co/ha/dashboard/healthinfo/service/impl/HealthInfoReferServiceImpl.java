@@ -48,7 +48,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
     @Override
     public List<HealthInfoReferenceDto> getHealthInfoResponseList(
-            HealthInfoReferenceDto dto, Integer seqUserId, Pageable pageable)
+            HealthInfoReferenceDto dto, Long seqUserId, Pageable pageable)
             throws BaseException {
 
         List<HealthInfo> resultList;
@@ -95,7 +95,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     }
 
     @Override
-    public long getCount(HealthInfoReferenceDto dto, Integer seqUserId)
+    public long getCount(HealthInfoReferenceDto dto, Long seqUserId)
             throws BaseException {
 
         // ユーザIDと健康情報照会DTOから健康情報件数を取得
@@ -123,7 +123,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
     }
 
     @Override
-    public List<ReferenceCsvDownloadModel> toModelList(Integer seqUserId,
+    public List<ReferenceCsvDownloadModel> toModelList(Long seqUserId,
             List<HealthInfoReferenceDto> resultList) {
         return resultList.stream().map(e -> {
             ReferenceCsvDownloadModel model = new ReferenceCsvDownloadModel();

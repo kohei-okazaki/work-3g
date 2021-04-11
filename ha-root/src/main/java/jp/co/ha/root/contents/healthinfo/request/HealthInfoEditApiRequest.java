@@ -17,7 +17,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
 
     /** ユーザID */
     @JsonProperty("seq_user_id")
-    private Integer seqUserId;
+    private Long seqUserId;
     /** 身長 */
     @JsonProperty("height")
     private BigDecimal height;
@@ -30,7 +30,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -40,7 +40,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 

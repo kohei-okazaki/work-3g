@@ -87,7 +87,7 @@ public class UserEntryApiController
         TransactionStatus status = transactionManager
                 .getTransaction(defaultTransactionDefinition);
 
-        Integer seqLoginId = null;
+        Long seqLoginId = null;
         try {
 
             // 照会権限のマスタを取得

@@ -77,7 +77,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     }
 
     @Override
-    public boolean isFirstReg(Integer seqUserId) throws BaseException {
+    public boolean isFirstReg(Long seqUserId) throws BaseException {
         return healthInfoSearchService.getSelectCountBySeqUserId(seqUserId) == 0;
     }
 
@@ -91,7 +91,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     }
 
     @Override
-    public HealthInfoRegistResponse regist(HealthInfoDto dto, Integer seqUserId)
+    public HealthInfoRegistResponse regist(HealthInfoDto dto, Long seqUserId)
             throws BaseException {
 
         // アカウント情報.APIキーを設定
@@ -103,7 +103,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         // API通信情報.トランザクションIDを採番
-        Integer transactionId = apiCommunicationDataComponent.getTransactionId();
+        Long transactionId = apiCommunicationDataComponent.getTransactionId();
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(registApi.getApiName(), seqUserId, transactionId);

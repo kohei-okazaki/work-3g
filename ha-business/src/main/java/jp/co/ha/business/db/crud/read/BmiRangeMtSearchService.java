@@ -19,7 +19,7 @@ public interface BmiRangeMtSearchService {
      *     BMI範囲ID
      * @return BmiRangeMt
      */
-    Optional<BmiRangeMt> findById(Integer seqBmiRangeMtId);
+    Optional<BmiRangeMt> findById(Long seqBmiRangeMtId);
 
     /**
      * BMI範囲マスタを全件取得する

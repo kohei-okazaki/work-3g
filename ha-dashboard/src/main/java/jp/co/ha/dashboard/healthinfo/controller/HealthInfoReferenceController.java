@@ -159,15 +159,15 @@ public class HealthInfoReferenceController implements BaseWebController {
         Pageable pageable = PagingViewFactory.getPageable(page,
                 systemConfig.getPaging());
 
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         HealthInfoReferenceDto dto = new HealthInfoReferenceDto();
         BeanUtil.copy(form, dto, (src, dest) -> {
             HealthInfoReferenceForm srcForm = (HealthInfoReferenceForm) src;
             HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
             if (StringUtil.hasValue(srcForm.getSeqHealthInfoId())) {
-                destDto.setSeqHealthInfoId(Integer.valueOf(srcForm.getSeqHealthInfoId()));
+                destDto.setSeqHealthInfoId(Long.valueOf(srcForm.getSeqHealthInfoId()));
             }
         });
 
@@ -223,8 +223,8 @@ public class HealthInfoReferenceController implements BaseWebController {
     @GetMapping("/exceldownload")
     public ModelAndView excelDownload(HttpServletRequest request) throws BaseException {
 
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         // sessionにある前画面の検索条件で再度検索する
         HealthInfoReferenceDto referDto = sessionComponent
@@ -255,8 +255,8 @@ public class HealthInfoReferenceController implements BaseWebController {
     public void csvDownload(HttpServletRequest request, HttpServletResponse response)
             throws BaseException {
 
-        Integer seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Integer.class).get();
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
         // sessionにある前画面の検索条件で再度検索する
         HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",

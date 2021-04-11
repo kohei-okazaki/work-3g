@@ -32,7 +32,7 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Override
     @Transactional(readOnly = true)
     @Cacheable(key = "'bmiRangeMt/' + #seqBmiRangeMtId", value = "bmiRangeMt")
-    public Optional<BmiRangeMt> findById(Integer seqBmiRangeMtId) {
+    public Optional<BmiRangeMt> findById(Long seqBmiRangeMtId) {
         return findAll().stream()
                 .filter(e -> e.getSeqBmiRangeMtId().equals(seqBmiRangeMtId))
                 .findFirst();

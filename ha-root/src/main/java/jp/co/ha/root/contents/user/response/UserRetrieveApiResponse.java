@@ -22,7 +22,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
 
     /** ログインID */
     @JsonProperty("seq_login_id")
-    private Integer seqLoginId;
+    private Long seqLoginId;
     /** 権限リスト */
     @JsonProperty("roles")
     private List<Role> roles;
@@ -43,7 +43,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
      *
      * @return seqLoginId
      */
-    public Integer getSeqLoginId() {
+    public Long getSeqLoginId() {
         return seqLoginId;
     }
 
@@ -53,7 +53,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
      * @param seqLoginId
      *     ログインID
      */
-    public void setSeqLoginId(Integer seqLoginId) {
+    public void setSeqLoginId(Long seqLoginId) {
         this.seqLoginId = seqLoginId;
     }
 

@@ -200,7 +200,7 @@ public class AccountRecoveryController implements BaseWebController {
         Account account = getAccount(seqUserId);
 
         // 上のアカウント検索ができているのであれば、そのままOptional#getをしても問題ない
-        Integer userId = Integer.valueOf(seqUserId.get());
+        Long userId = Long.valueOf(seqUserId.get());
         // アカウント回復トークンを検索し、トークンが有効であるかを確認する
         @SuppressWarnings("unused")
         AccountRecoveryTokenData accountRecoveryTokenData = accountRecoveryTokenSearchService
@@ -328,7 +328,7 @@ public class AccountRecoveryController implements BaseWebController {
                     "ユーザIDが未指定または半角数字以外です seq_user_id=" + seqUserId);
         }
 
-        Integer userId = Integer.valueOf(seqUserId.get());
+        Long userId = Long.valueOf(seqUserId.get());
 
         // アカウント情報検索
         return accountSearchService.findById(userId)

@@ -28,7 +28,7 @@ public class HealthInfoFileSettingSearchServiceImpl
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<HealthInfoFileSetting> findById(Integer seqUserId) {
+    public Optional<HealthInfoFileSetting> findById(Long seqUserId) {
         HealthInfoFileSettingKey key = new HealthInfoFileSettingKey();
         key.setSeqUserId(seqUserId);
         return Optional.ofNullable(mapper.selectByPrimaryKey(key));
