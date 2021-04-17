@@ -144,6 +144,26 @@ export default {
         },
         {
           icon: "mdi-api",
+          title: "メモ情報一覧取得API",
+          to: "/root/api/note",
+        },
+        {
+          icon: "mdi-api",
+          title: "メモ情報登録API",
+          to: "/root/api/note/entry",
+        },
+        {
+          icon: "mdi-api",
+          title: "メモ情報編集API",
+          to: "/root/api/note/edit",
+        },
+        {
+          icon: "mdi-api",
+          title: "メモ情報削除API",
+          to: "/root/api/note/delete",
+        },
+        {
+          icon: "mdi-api",
           title: "権限マスタ一覧取得API",
           to: "/root/api/roles",
         },

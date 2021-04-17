@@ -65,7 +65,7 @@ export default {
     };
   },
   methods: {
-    reset() {
+    reset: function () {
       this.$refs.entryForm.reset();
     },
     submit: function () {
