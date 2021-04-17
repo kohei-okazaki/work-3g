@@ -1,7 +1,10 @@
 package jp.co.ha.root.contents.note.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,25 +40,32 @@ public class NoteEditApiController
     /**
      * メモ情報編集
      *
+     * @param seqRootUserNoteInfoId
+     *     管理者サイトユーザメモ情報ID
      * @param request
      *     メモ情報編集APIリクエスト
      * @return メモ情報編集APIレスポンス
      * @throws BaseException
      *     API呼び出しに失敗した場合
      */
-    @PutMapping(value = "note", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public NoteEditApiResponse edit(@RequestBody NoteEditApiRequest request)
-            throws BaseException {
+    @PutMapping(value = "note/{seq_root_user_note_info_id}", produces = {
+            MediaType.APPLICATION_JSON_VALUE })
+    public NoteEditApiResponse edit(
+            @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<String> seqRootUserNoteInfoId,
+            @RequestBody NoteEditApiRequest request) throws BaseException {
 
-        RootUserNoteInfo note = rootUserNoteInfoSearchService
-                .findById(request.getSeqRootUserNoteInfoId());
-        String s3Key = note.getS3Key();
+        if (seqRootUserNoteInfoId == null || !seqRootUserNoteInfoId.isPresent()) {
+            return getErrorResponse("seq_root_user_note_info_id is required");
+        }
 
         // 管理者サイトユーザメモ情報更新
-        rootUserNoteInfoUpdateService.update(request.getSeqRootUserNoteInfoId(),
+        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId.get()),
                 request.getTitle());
+
+        RootUserNoteInfo note = rootUserNoteInfoSearchService
+                .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
         // メモファイルの更新
-        awsS3Component.putFile(s3Key, request.getDetail());
+        awsS3Component.putFile(note.getS3Key(), request.getDetail());
 
         NoteEditApiResponse response = getSuccessResponse();
         return response;

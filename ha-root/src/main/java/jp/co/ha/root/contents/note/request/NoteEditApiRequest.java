@@ -12,34 +12,12 @@ import jp.co.ha.web.form.BaseApiRequest;
  */
 public class NoteEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
-    /** 管理者サイトユーザメモ情報ID */
-    @JsonProperty("seq_root_user_note_info_id")
-    private Long seqRootUserNoteInfoId;
     /** 件名 */
     @JsonProperty("title")
     private String title;
     /** メモ内容 */
     @JsonProperty("detail")
     private String detail;
-
-    /**
-     * seqRootUserNoteInfoIdを返す
-     *
-     * @return seqRootUserNoteInfoId
-     */
-    public Long getSeqRootUserNoteInfoId() {
-        return seqRootUserNoteInfoId;
-    }
-
-    /**
-     * seqRootUserNoteInfoIdを設定する
-     *
-     * @param seqRootUserNoteInfoId
-     *     管理者サイトユーザメモ情報ID
-     */
-    public void setSeqRootUserNoteInfoId(Long seqRootUserNoteInfoId) {
-        this.seqRootUserNoteInfoId = seqRootUserNoteInfoId;
-    }
 
     /**
      * titleを返す
