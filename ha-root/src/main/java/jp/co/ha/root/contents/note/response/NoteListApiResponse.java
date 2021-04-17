@@ -54,6 +54,9 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Note extends JsonEntity {
 
+        /** 管理者サイトユーザメモ情報ID */
+        @JsonProperty("seq_root_user_note_info_id")
+        private Long seqRootUserNoteInfoId;
         /** 件名 */
         @JsonProperty("title")
         private String title;
@@ -70,6 +73,25 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
         private LocalDateTime updateDate;
+
+        /**
+         * seqRootUserNoteInfoIdを返す
+         *
+         * @return seqRootUserNoteInfoId
+         */
+        public Long getSeqRootUserNoteInfoId() {
+            return seqRootUserNoteInfoId;
+        }
+
+        /**
+         * seqRootUserNoteInfoIdを設定する
+         *
+         * @param seqRootUserNoteInfoId
+         *     管理者サイトユーザメモ情報ID
+         */
+        public void setSeqRootUserNoteInfoId(Long seqRootUserNoteInfoId) {
+            this.seqRootUserNoteInfoId = seqRootUserNoteInfoId;
+        }
 
         /**
          * titleを返す

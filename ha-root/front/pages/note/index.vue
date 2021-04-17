@@ -7,11 +7,79 @@
       <template v-if="entryMode">
         <NoteEntry @get-notes="getNotes" />
       </template>
+      <template v-else>
+        <v-dialog v-model="noteEditModal.dialog" max-width="600px">
+          <!--           
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-on="on" v-bind="attrs">記事を追加</v-btn>
+          </template> -->
+
+          <!-- ダイアログ本体 -->
+          <v-card>
+            <v-card-text>
+              <v-row>
+                <v-col class="text-center" cols="12" sm="12">
+                  <v-form ref="editNoteForm">
+                    <v-text-field
+                      v-model="noteEditModal.title"
+                      label="タイトル"
+                      clearable
+                      :rules="[required]"
+                    ></v-text-field>
+                    <v-textarea
+                      v-model="noteEditModal.detail"
+                      label="詳細(htmlタグの入力も可能です)"
+                      clearable
+                      :rules="[required]"
+                    ></v-textarea
+                  ></v-form>
+                </v-col>
+              </v-row>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" @click="editNote">
+                <v-icon>mdi-newspaper-plus</v-icon>&ensp;更新
+              </v-btn>
+              <v-btn color="accent" @click="reset">
+                <v-icon>mdi-alert</v-icon>&ensp;リセット
+              </v-btn>
+              <v-btn color="gray" @click="noteEditModal.dialog = false"
+                >Close</v-btn
+              >
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </template>
     </template>
 
     <v-row v-if="isRefShow">
       <v-col>
-        <v-data-table :headers="headers" :items="note_list"> </v-data-table>
+        <v-data-table :headers="headers" :items="note_list">
+          <template v-slot:[`item.edit_action`]="{ item }">
+            <v-btn
+              small
+              class="mx-1"
+              @click="openNoteEditModal(item.seq_root_user_note_info_id)"
+              v-if="isEntryShow"
+            >
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:[`item.delete_action`]="{ item }">
+            <v-btn
+              small
+              class="mx-1"
+              @click="openNoteDeleteModal(item.seq_root_user_note_info_id)"
+            >
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </template>
+          <template v-slot:[`item.detail`]="{ item }">
+            {{ viewMemoDetail(item.detail) }}
+          </template>
+        </v-data-table>
         <ConfirmModal ref="confirm" />
         <ProcessFinishModal ref="finish" />
         <AppLoading :loading="loading" />
@@ -83,9 +151,19 @@ export default {
         },
       ],
       note_list: [],
+      noteEditModal: {
+        dialog: false,
+        seq_root_user_note_info_id: null,
+        title: null,
+        detail: null,
+      },
+      required: (value) => !!value || "必ず入力してください",
     };
   },
   methods: {
+    /**
+     * 照会権限判定処理
+     */
     isRefView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
@@ -97,6 +175,9 @@ export default {
       }
       this.isRefShow = false;
     },
+    /**
+     * 登録権限判定処理
+     */
     isEntryView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
@@ -108,10 +189,12 @@ export default {
       }
       this.isEntryShow = false;
     },
+    /**
+     * メモ情報取得処理
+     */
     getNotes: function () {
       this.loading = true;
-      let reqUrl =
-        url + "?" + "seq_login_id=" + this.$store.state.auth.seq_login_id;
+      let reqUrl = url + "?seq_login_id=" + this.$store.state.auth.seq_login_id;
       axios
         .get(reqUrl, {
           headers: { Authorization: this.$store.state.auth.token },
@@ -135,6 +218,142 @@ export default {
           }
         );
     },
+    /**
+     * メモ内容表示制御
+     * @param detail メモ内容
+     */
+    viewMemoDetail: function (detail) {
+      // 文字列長が15byteより大きい場合、先頭15byteのみを表示
+      return detail.length > 15 ? detail.substr(0, 15) + "..." : detail;
+    },
+    /**
+     * メモ情報編集モーダル表示
+     * @param seq_root_user_note_info_id 管理者サイトユーザメモ情報ID
+     */
+    openNoteEditModal: function (seq_root_user_note_info_id) {
+      this.entryMode = false;
+      this.noteEditModal.dialog = true;
+      this.noteEditModal.seq_root_user_note_info_id = seq_root_user_note_info_id;
+      for (var i = 0; i < this.note_list.length; i++) {
+        let note = this.note_list[i];
+        if (note.seq_root_user_note_info_id == seq_root_user_note_info_id) {
+          this.noteEditModal.title = note.title;
+          this.noteEditModal.detail = note.detail;
+        }
+      }
+      console.log("メモID=" + seq_root_user_note_info_id);
+    },
+    /**
+     * メモ情報編集を行う
+     */
+    editNote: function () {
+      if (!this.$refs.editNoteForm.validate()) {
+        // 入力値エラーの場合
+        return;
+      }
+
+      let reqBody = {
+        seq_root_user_note_info_id: this.noteEditModal
+          .seq_root_user_note_info_id,
+        title: this.noteEditModal.title,
+        detail: this.noteEditModal.detail,
+      };
+
+      this.loading = true;
+      axios
+        .put(url, reqBody, {
+          headers: { Authorization: this.$store.state.auth.token },
+        })
+        .then(
+          (response) => {
+            if (response.data.result === "0") {
+              // this.note_list = response.data.note_list;
+            } else {
+              this.error.hasError = true;
+              this.error.message = response.data.error.message;
+            }
+            this.loading = false;
+
+            // 最新のメモ情報取得
+            this.getNotes();
+          },
+          (error) => {
+            this.error.hasError = true;
+            this.error.message = error;
+            this.loading = false;
+            console.log("[error]=" + error);
+            return error;
+          }
+        );
+      this.entryMode = true;
+      this.noteEditModal.dialog = false;
+    },
+    /**
+     * 編集モーダルの入力情報をクリアする
+     */
+    reset: function () {
+      this.$refs.editNoteForm.reset();
+    },
+    /**
+     * メモ情報削除モーダル表示
+     * @param seq_root_user_note_info_id 管理者サイトユーザメモ情報ID
+     */
+    async openNoteDeleteModal(seq_root_user_note_info_id) {
+      let modalInfo = {
+        color: "red",
+        width: 400,
+      };
+
+      if (
+        await this.$refs.confirm.open(
+          "削除確認",
+          "このメモを削除しますか？",
+          modalInfo
+        )
+      ) {
+        // 確認モーダルで削除に同意した場合、メモ情報削除APIを呼出
+        this.deleteNote(seq_root_user_note_info_id);
+      }
+    },
+    /**
+     * メモ情報削除処理
+     * @param seq_root_user_note_info_id 管理者サイトユーザメモ情報ID
+     */
+    async deleteNote(seq_root_user_note_info_id) {
+      this.loading = true;
+      let deleteUrl = url + "/" + seq_root_user_note_info_id;
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios
+        .delete(deleteUrl, {
+          headers,
+        })
+        .then(
+          (response) => {
+            if (response.data.result == "0") {
+              // 削除成功時
+
+              // 処理完了モーダルを表示
+              this.$refs.finish.open("メモ情報削除", "", {
+                color: "blue",
+                width: 400,
+              });
+
+              // 最新メモ情報取得
+              this.getNotes();
+              this.loading = false;
+            }
+          },
+          (error) => {
+            this.error.hasError = true;
+            this.error.message = error;
+            this.loading = false;
+            console.log("[error]=" + error);
+            return error;
+          }
+        );
+    },
   },
   created: function () {
     this.isEntryView();
@@ -142,9 +361,11 @@ export default {
     if (!this.isRefShow) {
       return;
     }
+    // 最新メモ情報取得
     this.getNotes();
   },
 };
 </script>
+
 <style scoped>
 </style>
