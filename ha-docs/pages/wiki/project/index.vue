@@ -212,10 +212,6 @@ export default {
           name: "ha-tool",
           description: "アプリのDDLなどを自動生成するmavenプロジェクト",
         },
-        {
-          name: "ha-web",
-          description: "WebAPIの共通的FWを定義したmavenプロジェクト",
-        },
       ],
       languages: [
         {
