@@ -9,7 +9,7 @@ import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
-import jp.co.ha.web.form.BaseForm;
+import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * 肺活量計算画面フォーム

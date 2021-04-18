@@ -3,9 +3,9 @@ package jp.co.ha.root.contents.news.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
 import jp.co.ha.root.contents.news.response.NewsListApiResponse.NewsDataResponse;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * おしらせ情報編集APIレスポンスクラス

@@ -2,7 +2,7 @@ package jp.co.ha.business.api.node.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jp.co.ha.web.form.BaseApiRequest;
+import jp.co.ha.common.web.form.BaseApiRequest;
 
 /**
  * Token発行APIのリクエストクラス

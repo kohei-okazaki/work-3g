@@ -1,7 +1,7 @@
 package jp.co.ha.business.api.healthcheck.request;
 
-import jp.co.ha.web.form.BaseApiRequest;
-import jp.co.ha.web.form.BaseRestApiRequest;
+import jp.co.ha.common.web.form.BaseApiRequest;
+import jp.co.ha.common.web.form.BaseRestApiRequest;
 
 /**
  * ヘルスチェックAPIのリクエスト情報クラス

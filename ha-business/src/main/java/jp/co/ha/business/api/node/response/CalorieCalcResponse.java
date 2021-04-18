@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.log.LogMessageFactory;
-import jp.co.ha.web.form.BaseApiResponse;
+import jp.co.ha.common.web.form.BaseApiResponse;
 
 /**
  * カロリー計算APIレスポンスクラス

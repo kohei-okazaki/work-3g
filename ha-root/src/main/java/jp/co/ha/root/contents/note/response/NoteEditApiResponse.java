@@ -2,8 +2,8 @@ package jp.co.ha.root.contents.note.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * メモ編集APIレスポンス情報

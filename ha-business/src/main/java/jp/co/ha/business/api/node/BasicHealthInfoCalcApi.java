@@ -7,7 +7,7 @@ import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.web.api.BaseApi;
+import jp.co.ha.common.web.api.BaseApi;
 
 /**
  * 基礎健康情報計算API<br>

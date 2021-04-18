@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
 import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse.Role;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * ユーザ情報取得APIレスポンスクラス

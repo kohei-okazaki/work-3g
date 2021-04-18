@@ -12,7 +12,7 @@ import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoReferenceService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.controller.BaseRestController;
+import jp.co.ha.common.web.controller.BaseRestController;
 
 /**
  * 健康情報照会APIコントローラ

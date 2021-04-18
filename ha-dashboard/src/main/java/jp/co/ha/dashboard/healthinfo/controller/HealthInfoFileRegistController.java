@@ -33,12 +33,12 @@ import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.web.controller.BaseWizardController;
+import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.web.controller.BaseWizardController;
-import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報一括登録画面コントローラ

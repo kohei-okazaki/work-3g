@@ -41,13 +41,13 @@ import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
+import jp.co.ha.common.web.controller.BaseWizardController;
+import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
-import jp.co.ha.web.controller.BaseWizardController;
-import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康管理_健康情報登録画面コントローラ

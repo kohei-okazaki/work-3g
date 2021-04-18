@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.api.healthcheck.request.HealthCheckRequest;
 import jp.co.ha.business.api.healthcheck.response.HealthCheckResponse;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.controller.BaseRestController;
+import jp.co.ha.common.web.controller.BaseRestController;
 
 /**
  * ヘルスチェックAPIコントローラ

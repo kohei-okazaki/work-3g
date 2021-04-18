@@ -18,8 +18,8 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
-import jp.co.ha.web.api.ApiConnectInfo;
 
 /**
  * 健康管理API_ヘルスチェックAPIを呼び出すバッチ
@@ -88,8 +88,7 @@ public class HealthCheckApiBatch extends BaseBatch {
 
     @Override
     public Options getOptions() {
-        Options options = new Options();
-        return options;
+        return new Options();
     }
 
 }
