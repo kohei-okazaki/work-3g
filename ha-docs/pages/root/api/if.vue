@@ -2024,6 +2024,78 @@ export default {
             },
           ],
         },
+
+        {
+          name: "権限マスタ一覧取得API",
+          endpoint: "/api/root/roles",
+          httpMethod: "GET",
+          description: "管理者サイト権限マスタの一覧を返却するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
+          request: [],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "error",
+              logicalName: "エラー情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "message",
+              logicalName: "エラーメッセージ",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: 256,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "roles",
+              logicalName: "メモ情報リスト",
+              required: false,
+              type: "配列",
+              byte: null,
+              description: "result='0'の場合、必須",
+            },
+            {
+              physicalName: "label",
+              logicalName: "権限名",
+              required: false,
+              type: null,
+              byte: null,
+              layer: 1,
+              description: "権限マスタの権限名<ul><li>00:管理者権限</li><li>01:照会権限</li><li>02:作成権限</li></ul>",
+            },
+            {
+              physicalName: "value",
+              logicalName: "値",
+              required: false,
+              type: null,
+              byte: null,
+              layer: 1,
+              description: "権限マスタの値",
+            },
+          ],
+        },
       ],
     };
   },
