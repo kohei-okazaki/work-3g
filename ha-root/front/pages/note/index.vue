@@ -6,16 +6,12 @@
     <template v-if="isEntryShow">
       <template v-if="entryMode">
         <NoteEntry @get-notes="getNotes" />
-      </template>
-      <template v-else>
         <v-dialog v-model="noteEditModal.dialog" max-width="600px">
-          <!--           
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn v-on="on" v-bind="attrs">記事を追加</v-btn>
-          </template> -->
-
           <!-- ダイアログ本体 -->
           <v-card>
+            <v-card-title>メモ情報更新</v-card-title>
+            <v-divider></v-divider>
+            <br />
             <v-card-text>
               <v-row>
                 <v-col class="text-center" cols="12" sm="12">
@@ -36,8 +32,7 @@
                 </v-col>
               </v-row>
             </v-card-text>
-
-            <v-card-actions>
+            <v-card-actions class="pt-0">
               <v-spacer></v-spacer>
               <v-btn color="primary" @click="editNote">
                 <v-icon>mdi-newspaper-plus</v-icon>&ensp;更新
@@ -45,8 +40,8 @@
               <v-btn color="accent" @click="reset">
                 <v-icon>mdi-alert</v-icon>&ensp;リセット
               </v-btn>
-              <v-btn color="gray" @click="noteEditModal.dialog = false"
-                >Close</v-btn
+              <v-btn color="grey" @click="noteEditModal.dialog = false"
+                >取消</v-btn
               >
             </v-card-actions>
           </v-card>
@@ -164,7 +159,7 @@ export default {
     /**
      * 照会権限判定処理
      */
-    isRefView: function () {
+    checkRefView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
         let role = roles[i];
@@ -178,7 +173,7 @@ export default {
     /**
      * 登録権限判定処理
      */
-    isEntryView: function () {
+    checkEntryView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
         let role = roles[i];
@@ -231,7 +226,6 @@ export default {
      * @param seq_root_user_note_info_id 管理者サイトユーザメモ情報ID
      */
     openNoteEditModal: function (seq_root_user_note_info_id) {
-      this.entryMode = false;
       this.noteEditModal.dialog = true;
       this.noteEditModal.seq_root_user_note_info_id = seq_root_user_note_info_id;
       for (var i = 0; i < this.note_list.length; i++) {
@@ -241,7 +235,6 @@ export default {
           this.noteEditModal.detail = note.detail;
         }
       }
-      console.log("メモID=" + seq_root_user_note_info_id);
     },
     /**
      * メモ情報編集を行う
@@ -253,22 +246,20 @@ export default {
       }
 
       let reqBody = {
-        seq_root_user_note_info_id: this.noteEditModal
-          .seq_root_user_note_info_id,
         title: this.noteEditModal.title,
         detail: this.noteEditModal.detail,
       };
 
       this.loading = true;
+      let reqUrl = url + "/" + this.noteEditModal.seq_root_user_note_info_id;
+
       axios
-        .put(url, reqBody, {
+        .put(reqUrl, reqBody, {
           headers: { Authorization: this.$store.state.auth.token },
         })
         .then(
           (response) => {
-            if (response.data.result === "0") {
-              // this.note_list = response.data.note_list;
-            } else {
+            if (response.data.result != "0") {
               this.error.hasError = true;
               this.error.message = response.data.error.message;
             }
@@ -285,7 +276,6 @@ export default {
             return error;
           }
         );
-      this.entryMode = true;
       this.noteEditModal.dialog = false;
     },
     /**
@@ -356,13 +346,12 @@ export default {
     },
   },
   created: function () {
-    this.isEntryView();
-    this.isRefView();
-    if (!this.isRefShow) {
-      return;
+    this.checkEntryView();
+    this.checkRefView();
+    if (this.isRefShow) {
+      // 照会権限がある場合、最新メモ情報取得
+      this.getNotes();
     }
-    // 最新メモ情報取得
-    this.getNotes();
   },
 };
 </script>

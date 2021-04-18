@@ -1746,7 +1746,17 @@ export default {
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "seq_login_id",
+              logicalName: "管理者サイトログイン情報ID",
+              required: true,
+              type: "半角数字",
+              byte: null,
+              layer: 1,
+              description: "ログインID",
+            },
+          ],
           response: [
             {
               physicalName: "result",
