@@ -8,8 +8,8 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.web.form.BaseRestApiRequest;
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.web.form.BaseRestApiRequest;
 
 /**
  * API共通サービス

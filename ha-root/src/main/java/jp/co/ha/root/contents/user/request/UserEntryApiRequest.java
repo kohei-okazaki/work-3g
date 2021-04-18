@@ -2,8 +2,8 @@ package jp.co.ha.root.contents.user.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
-import jp.co.ha.web.form.BaseApiRequest;
 
 /**
  * ユーザ登録APIリクエストクラス

@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.web.form.BaseApiResponse;
-import jp.co.ha.web.form.BaseRestApiResponse;
+import jp.co.ha.common.web.form.BaseApiResponse;
+import jp.co.ha.common.web.form.BaseRestApiResponse;
 
 /**
  * 健康情報登録レスポンスクラス
@@ -54,7 +54,7 @@ public class HealthInfoRegistResponse extends BaseRestApiResponse
 
         /** 健康情報ID */
         @JsonProperty("seqHealthInfoId")
-        private Integer seqHealthInfoId;
+        private Long seqHealthInfoId;
         /** 身長 */
         @Mask
         @JsonProperty("height")
@@ -85,7 +85,7 @@ public class HealthInfoRegistResponse extends BaseRestApiResponse
          *
          * @return seqHealthInfoId
          */
-        public Integer getSeqHealthInfoId() {
+        public Long getSeqHealthInfoId() {
             return seqHealthInfoId;
         }
 
@@ -95,7 +95,7 @@ public class HealthInfoRegistResponse extends BaseRestApiResponse
          * @param seqHealthInfoId
          *     健康情報ID
          */
-        public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+        public void setSeqHealthInfoId(Long seqHealthInfoId) {
             this.seqHealthInfoId = seqHealthInfoId;
         }
 

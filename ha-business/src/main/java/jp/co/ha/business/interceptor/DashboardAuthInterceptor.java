@@ -17,7 +17,7 @@ import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.web.interceptor.BaseWebInterceptor;
+import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
 
 /**
  * ダッシュボード認証チェックを行うインターセプター

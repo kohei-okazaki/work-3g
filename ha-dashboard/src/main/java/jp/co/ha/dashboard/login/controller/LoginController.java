@@ -30,10 +30,10 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
-import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_ログイン画面コントローラ

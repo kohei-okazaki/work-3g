@@ -8,7 +8,7 @@ import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Min;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
-import jp.co.ha.web.form.BaseForm;
+import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * ログインフォームクラス

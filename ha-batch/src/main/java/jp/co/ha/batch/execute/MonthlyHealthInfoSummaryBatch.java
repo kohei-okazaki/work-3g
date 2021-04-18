@@ -89,9 +89,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
 
     @Override
     public Options getOptions() {
-        Options options = new Options();
-        options.addOption("m", true, "処理対象年月");
-        return options;
+        return new Options().addOption("m", true, "処理対象年月");
     }
 
     /**

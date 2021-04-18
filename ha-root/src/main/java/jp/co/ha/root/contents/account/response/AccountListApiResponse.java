@@ -11,9 +11,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
 import jp.co.ha.root.base.JsonEntity;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * アカウント情報一覧レスポンスクラス

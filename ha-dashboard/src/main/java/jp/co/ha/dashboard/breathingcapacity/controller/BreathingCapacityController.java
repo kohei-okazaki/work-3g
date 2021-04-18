@@ -18,9 +18,9 @@ import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.breathingcapacity.form.BreathingCapacityForm;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_肺活量計算画面コントローラ

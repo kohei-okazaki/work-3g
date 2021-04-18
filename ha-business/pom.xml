@@ -30,11 +30,6 @@
       <artifactId>db</artifactId>
       <version>1.0.0</version>
     </dependency>
-    <dependency>
-      <groupId>jp.co.ha</groupId>
-      <artifactId>web</artifactId>
-      <version>1.0.0</version>
-    </dependency>
   </dependencies>
 
 </project>

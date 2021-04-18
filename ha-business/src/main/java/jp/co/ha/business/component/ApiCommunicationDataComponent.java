@@ -8,9 +8,9 @@ import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.web.api.ApiConnectInfo;
+import jp.co.ha.common.web.form.BaseRestApiResponse;
 import jp.co.ha.db.entity.ApiCommunicationData;
-import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.form.BaseRestApiResponse;
 
 /**
  * API通信情報の共通Componentクラス

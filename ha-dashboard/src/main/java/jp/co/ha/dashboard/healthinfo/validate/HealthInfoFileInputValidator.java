@@ -4,8 +4,8 @@ import org.springframework.validation.Errors;
 
 import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
-import jp.co.ha.web.validator.BaseWebValidator;
 
 /**
  * 健康情報CSVアップロードValidator
