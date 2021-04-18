@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
 import jp.co.ha.root.base.JsonEntity;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * メモ一覧取得APIレスポンス情報

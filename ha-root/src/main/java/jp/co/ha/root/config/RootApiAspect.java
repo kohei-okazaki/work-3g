@@ -14,8 +14,8 @@ import org.springframework.util.MultiValueMap;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.web.form.BaseApiRequest;
-import jp.co.ha.web.form.BaseApiResponse;
+import jp.co.ha.common.web.form.BaseApiRequest;
+import jp.co.ha.common.web.form.BaseApiResponse;
 
 /**
  * RootAPIの正常ログ出力クラス<br>

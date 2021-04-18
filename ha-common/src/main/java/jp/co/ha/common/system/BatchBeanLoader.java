@@ -69,7 +69,6 @@ public class BatchBeanLoader {
         String[] xmls = new String[] {
                 "classpath:common-context.xml",
                 "classpath:db-context.xml",
-                "classpath:web-context.xml",
                 "classpath:business-context.xml",
                 "classpath:batch-context.xml"
         };
@@ -91,7 +90,6 @@ public class BatchBeanLoader {
         String[] xmls = new String[] {
                 "classpath:common-context.xml",
                 "classpath:db-context.xml",
-                "classpath:web-context.xml",
                 "classpath:business-context.xml",
                 "classpath:batch-context.xml"
         };

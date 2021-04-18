@@ -22,11 +22,11 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
+import jp.co.ha.common.web.api.ApiConnectInfo;
+import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
-import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報ファイル入力画面サービス実装クラス

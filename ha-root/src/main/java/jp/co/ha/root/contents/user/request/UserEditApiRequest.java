@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 import jp.co.ha.root.type.RootRoleType;
-import jp.co.ha.web.form.BaseApiRequest;
 
 /**
  * ユーザ編集APIリクエストクラス

@@ -190,7 +190,7 @@ export default {
         },
         {
           name: "flyway",
-          version: "7.7.0",
+          version: "7.7.3",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },

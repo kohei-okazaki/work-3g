@@ -10,8 +10,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.api.healthinfo.type.TestMode.TestModeDeserializer;
-import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
-import jp.co.ha.web.form.BaseRestApiResponse.ResultTypeSerializer;
+import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
+import jp.co.ha.common.web.form.BaseRestApiResponse.ResultTypeSerializer;
 
 /**
  * JSONの設定クラス

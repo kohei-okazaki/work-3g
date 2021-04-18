@@ -2,8 +2,8 @@ package jp.co.ha.root.contents.user.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * ユーザ登録APIレスポンスクラス

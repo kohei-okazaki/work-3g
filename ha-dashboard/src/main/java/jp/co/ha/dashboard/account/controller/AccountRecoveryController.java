@@ -38,12 +38,12 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.account.form.AccountRecoveryForm;
 import jp.co.ha.dashboard.account.form.AccountRecoveryMailAddressInputForm;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.AccountRecoveryTokenData;
-import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * アカウント回復のコントローラ

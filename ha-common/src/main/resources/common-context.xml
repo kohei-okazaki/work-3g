@@ -24,9 +24,17 @@
   <context:component-scan base-package="jp.co.ha.common.crypt" />
   <context:component-scan base-package="jp.co.ha.common.db" />
   <context:component-scan base-package="jp.co.ha.common.io" />
+  <context:component-scan base-package="jp.co.ha.common.web.api.aspect" />
 
   <!-- 妥当性チェック -->
   <bean id="beanValidator" class="jp.co.ha.common.validator.BeanValidator" />
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/**" />
+      <bean class="jp.co.ha.common.web.interceptor.RequestInterceptor" />
+    </mvc:interceptor>
+  </mvc:interceptors>
 
   <!-- RestTemplate -->
   <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />

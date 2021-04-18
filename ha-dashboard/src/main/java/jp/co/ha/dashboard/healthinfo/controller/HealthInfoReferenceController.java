@@ -46,6 +46,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
@@ -53,7 +54,6 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoReferenceValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
-import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_健康情報照会画面コントローラ

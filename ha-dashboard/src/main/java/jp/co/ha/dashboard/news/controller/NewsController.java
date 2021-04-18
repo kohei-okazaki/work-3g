@@ -18,8 +18,8 @@ import jp.co.ha.business.dto.NewsListDto.NewsDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * お知らせ情報画面コントローラ

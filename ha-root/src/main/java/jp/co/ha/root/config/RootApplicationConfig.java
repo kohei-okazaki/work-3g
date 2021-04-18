@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource(value = {
         "classpath:common-context.xml",
         "classpath:db-context.xml",
-        "classpath:web-context.xml",
         "classpath:business-context.xml" })
 public class RootApplicationConfig {
 

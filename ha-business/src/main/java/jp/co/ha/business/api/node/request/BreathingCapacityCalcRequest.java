@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.healthInfo.type.GenderType;
-import jp.co.ha.web.form.BaseApiRequest;
+import jp.co.ha.common.web.form.BaseApiRequest;
 
 /**
  * 肺活量計算APIリクエストクラス

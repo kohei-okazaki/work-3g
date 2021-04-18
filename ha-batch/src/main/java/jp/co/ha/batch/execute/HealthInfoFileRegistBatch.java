@@ -34,9 +34,9 @@ import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
+import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
-import jp.co.ha.web.api.ApiConnectInfo;
 
 /**
  * 健康情報一括登録Batch
@@ -89,7 +89,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
             requestList.addAll(list);
         }
 
-        List<Integer> seqHealthInfoIdList = new ArrayList<>();
+        List<Long> seqHealthInfoIdList = new ArrayList<>();
         for (HealthInfoRegistRequest request : requestList) {
 
             // 妥当性チェックを行う
@@ -131,8 +131,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
 
     @Override
     public Options getOptions() {
-        Options options = new Options();
-        return options;
+        return new Options();
     }
 
     /**
@@ -142,12 +141,12 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
      *     登録した健康情報IDリスト
      * @throws BaseException
      */
-    private void sendSlack(List<Integer> seqHealthInfoIdList) throws BaseException {
+    private void sendSlack(List<Long> seqHealthInfoIdList) throws BaseException {
 
-        // Slackのbatch_${env}チャンネルにメッセージを投稿
         StringJoiner sj = new StringJoiner("\r\n");
         seqHealthInfoIdList.stream().forEach(e -> sj.add(e.toString()));
         try {
+            // Slackのbatch_${env}チャンネルにメッセージを投稿
             slackApiComponent.sendFile(ContentType.BATCH,
                     sj.toString().getBytes(Charset.UTF_8.getValue()), "fileName",
                     "健康情報IDリスト", "健康情報一括登録完了.");
