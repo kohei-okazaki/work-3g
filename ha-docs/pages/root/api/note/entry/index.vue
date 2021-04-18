@@ -66,29 +66,15 @@ export default {
         },
         {
           id: "3",
-          text: "お知らせ情報JSON 取得",
+          text: "メモ情報 Upload",
           edgeType: "round",
           next: ["4"],
         },
         {
           id: "4",
-          text: "リクエスト.お知らせ情報をJSONに追加",
+          text: "管理者サイトユーザメモ情報を登録",
           edgeType: "round",
-          next: ["5"],
-        },
-        {
-          id: "5",
-          text: "お知らせ情報JSON<br>Upload",
-          edgeType: "round",
-          link: ["-- Upload失敗 -->", "-- Upload成功 -->"],
-          next: ["101", "6"],
-        },
-        {
-          id: "6",
-          text: "Slack通知",
-          edgeType: "round",
-          link: ["-- 通知失敗 -->", "-- 通知成功 -->"],
-          next: ["101", "100"],
+          next: ["100"],
         },
         {
           id: "100",
