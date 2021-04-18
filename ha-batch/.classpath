@@ -44,6 +44,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ha-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ha-db"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ha-business"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ha-web"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
