@@ -66,38 +66,16 @@ export default {
         },
         {
           id: "3",
-          text: "リクエスト.お知らせ情報IDチェック",
+          text: "管理者サイトユーザメモ情報ID チェック",
           edgeType: "round",
           link: ["-- 未指定の場合 -->", "-- それ以外の場合 -->"],
           next: ["101", "4"],
         },
         {
           id: "4",
-          text: "お知らせ情報JSON 取得",
+          text: "管理者サイトユーザメモ情報 削除",
           edgeType: "round",
-          link: ["-- 取得失敗 -->", "-- 取得成功 -->"],
-          next: ["101", "5"],
-        },
-        {
-          id: "5",
-          text:
-            "お知らせ情報JSONから<br>指定したおしらせ情報IDのレコードを削除",
-          edgeType: "round",
-          next: ["6"],
-        },
-        {
-          id: "6",
-          text: "お知らせ情報JSON<br>Upload",
-          edgeType: "round",
-          link: ["-- Upload失敗 -->", "-- Upload成功 -->"],
-          next: ["101", "7"],
-        },
-        {
-          id: "7",
-          text: "Slack通知",
-          edgeType: "round",
-          link: ["-- 通知失敗 -->", "-- 通知成功 -->"],
-          next: ["101", "100"],
+          next: ["100"],
         },
         {
           id: "100",

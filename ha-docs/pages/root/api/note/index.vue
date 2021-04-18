@@ -66,14 +66,20 @@ export default {
         },
         {
           id: "3",
-          text: "お知らせ情報JSON 取得",
+          text: "ログインID チェック",
           edgeType: "round",
-          link: ["-- 取得失敗 -->", "-- 取得成功 -->"],
+          link: ["-- ログインID未指定 -->", "-- ログインID 指定あり -->"],
           next: ["101", "4"],
         },
         {
           id: "4",
-          text: "Indexで降順ソート",
+          text: "管理者サイトユーザメモ情報 取得",
+          edgeType: "round",
+          next: ["5"],
+        },
+        {
+          id: "5",
+          text: "メモ情報 取得",
           edgeType: "round",
           next: ["100"],
         },
