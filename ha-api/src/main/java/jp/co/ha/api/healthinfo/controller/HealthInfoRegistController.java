@@ -13,8 +13,8 @@ import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
 import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.controller.BaseRestController;
+import jp.co.ha.common.web.api.ApiConnectInfo;
+import jp.co.ha.common.web.controller.BaseRestController;
 
 /**
  * 健康情報登録APIコントローラ

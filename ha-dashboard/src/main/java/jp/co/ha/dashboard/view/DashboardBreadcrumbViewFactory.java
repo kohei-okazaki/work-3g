@@ -1,7 +1,7 @@
 package jp.co.ha.dashboard.view;
 
-import jp.co.ha.web.view.BreadcrumbView;
-import jp.co.ha.web.view.BreadcrumbView.Breadcrumb;
+import jp.co.ha.common.web.view.BreadcrumbView;
+import jp.co.ha.common.web.view.BreadcrumbView.Breadcrumb;
 
 /**
  * ダッシュボードのパンくず情報ViewのFactoryクラス

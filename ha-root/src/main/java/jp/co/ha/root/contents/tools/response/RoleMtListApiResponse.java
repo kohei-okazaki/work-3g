@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
 import jp.co.ha.root.base.JsonEntity;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * 権限マスタリスト取得APIレスポンスクラス

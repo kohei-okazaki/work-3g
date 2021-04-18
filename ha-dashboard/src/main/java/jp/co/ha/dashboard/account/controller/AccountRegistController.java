@@ -23,10 +23,10 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.account.form.AccountRegistForm;
 import jp.co.ha.dashboard.account.service.AccountRegistService;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_アカウント登録画面コントローラ

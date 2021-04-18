@@ -3,7 +3,7 @@ package jp.co.ha.business.api.node.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.log.annotation.Mask;
-import jp.co.ha.web.form.BaseApiResponse;
+import jp.co.ha.common.web.form.BaseApiResponse;
 
 /**
  * Token発行APIのレスポンスクラス

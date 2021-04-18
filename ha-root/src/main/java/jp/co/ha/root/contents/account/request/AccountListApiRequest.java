@@ -1,7 +1,7 @@
 package jp.co.ha.root.contents.account.request;
 
+import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
-import jp.co.ha.web.form.BaseApiRequest;
 
 /**
  * アカウント情報一覧リクエストクラス

@@ -30,14 +30,14 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.web.api.ApiConnectInfo;
+import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
-import jp.co.ha.web.api.ApiConnectInfo;
-import jp.co.ha.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報登録画面サービス実装クラス

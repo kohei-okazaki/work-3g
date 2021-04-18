@@ -15,8 +15,6 @@
   <import resource="classpath:common-context.xml" />
   <!-- db -->
   <import resource="classpath:db-context.xml" />
-  <!-- web -->
-  <import resource="classpath:web-context.xml" />
   <!-- business -->
   <import resource="classpath:business-context.xml" />
 

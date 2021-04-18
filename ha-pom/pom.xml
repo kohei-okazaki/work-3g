@@ -61,7 +61,6 @@
     <module>../ha-common</module>
     <module>../ha-tool</module>
     <module>../ha-db</module>
-    <module>../ha-web</module>
     <module>../ha-business</module>
     <module>../ha-api</module>
     <module>../ha-dashboard</module>

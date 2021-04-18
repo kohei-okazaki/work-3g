@@ -24,11 +24,11 @@ import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.account.form.AccountSettingForm;
 import jp.co.ha.dashboard.account.service.AccountSettingService;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.composite.CompositeAccount;
-import jp.co.ha.web.controller.BaseWizardController;
 
 /**
  * 健康管理_アカウント設定コントローラ

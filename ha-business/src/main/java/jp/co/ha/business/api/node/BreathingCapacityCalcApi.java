@@ -7,7 +7,7 @@ import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.web.api.BaseApi;
+import jp.co.ha.common.web.api.BaseApi;
 
 /**
  * 肺活量計算API<br>

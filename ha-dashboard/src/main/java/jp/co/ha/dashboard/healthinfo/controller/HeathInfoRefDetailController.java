@@ -16,9 +16,9 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionComponent;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.web.controller.BaseWebController;
 
 /**
  * 健康管理_健康情報照会詳細画面コントローラ

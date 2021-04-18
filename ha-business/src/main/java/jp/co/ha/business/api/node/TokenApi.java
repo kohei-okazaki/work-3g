@@ -7,7 +7,7 @@ import jp.co.ha.business.api.node.request.TokenRequest;
 import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
 import jp.co.ha.business.api.node.response.TokenResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.web.api.BaseApi;
+import jp.co.ha.common.web.api.BaseApi;
 
 /**
  * Token発行API<br>

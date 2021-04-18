@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.dto.NewsListDto.Tag;
 import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
-import jp.co.ha.web.form.BaseApiRequest;
 
 /**
  * おしらせ情報編集APIリクエストクラス

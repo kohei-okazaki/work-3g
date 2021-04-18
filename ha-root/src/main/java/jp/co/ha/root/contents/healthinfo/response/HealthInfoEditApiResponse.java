@@ -1,7 +1,7 @@
 package jp.co.ha.root.contents.healthinfo.response;
 
+import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
-import jp.co.ha.web.form.BaseApiResponse;
 
 /**
  * 健康情報編集APIレスポンス
