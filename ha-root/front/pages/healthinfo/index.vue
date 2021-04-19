@@ -2,9 +2,48 @@
   <div>
     <AppTitle icon="mdi-pill" title="健康情報一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
-    <v-row v-if="isEditMode">
+    <v-row>
       <v-col>
-        <HealthInfoEdit :healthInfoEditForm="healthInfoEditForm" />
+        <v-dialog v-model="healthInfoEditModal.dialog" max-width="600px">
+          <!-- ダイアログ本体 -->
+          <v-card>
+            <v-card-title>健康情報更新</v-card-title>
+            <v-divider></v-divider>
+            <br />
+            <v-card-text>
+              <v-row>
+                <v-col class="text-center" cols="12" sm="12">
+                  <v-form ref="editHealthInfoForm">
+                    <v-text-field
+                      v-model="healthInfoEditModal.height"
+                      label="身長"
+                      clearable
+                      :rules="[required]"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="healthInfoEditModal.weight"
+                      label="体重"
+                      clearable
+                      :rules="[required]"
+                    ></v-text-field
+                  ></v-form>
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-card-actions class="pt-0">
+              <v-spacer></v-spacer>
+              <v-btn color="primary" @click="editHealthInfo">
+                <v-icon>mdi-newspaper-plus</v-icon>&ensp;更新
+              </v-btn>
+              <v-btn color="accent" @click="reset">
+                <v-icon>mdi-alert</v-icon>&ensp;リセット
+              </v-btn>
+              <v-btn color="grey" @click="healthInfoEditModal.dialog = false"
+                >取消</v-btn
+              >
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-col>
     </v-row>
     <v-row v-if="isRefShow">
@@ -25,7 +64,7 @@
             <v-btn
               small
               class="mx-1"
-              @click="changeEditView(item.seq_health_info_id)"
+              @click="openHealthInfoEditModal(item.seq_health_info_id)"
             >
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
@@ -41,7 +80,6 @@
 import AppTitle from "~/components/AppTitle.vue";
 import AppMessageError from "~/components/AppMessageError.vue";
 import AppLoading from "~/components/AppLoading.vue";
-import HealthInfoEdit from "~/components/healthinfo/HealthInfoEdit.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "healthinfo";
@@ -51,7 +89,6 @@ export default {
     AppTitle,
     AppMessageError,
     AppLoading,
-    HealthInfoEdit,
   },
   data: function () {
     return {
@@ -60,7 +97,6 @@ export default {
         message: null,
       },
       loading: false,
-      isEditMode: false,
       isRefShow: false,
       search: "",
       healthInfoList: [],
@@ -106,22 +142,27 @@ export default {
           value: "health_info_reg_date",
         },
       ],
-      healthInfoEditForm: {
+      healthInfoEditModal: {
+        dialog: false,
         seqHealthInfoId: null,
+        seqUserId: null,
         height: null,
         weight: null,
       },
+      required: (value) => !!value || "必ず入力してください",
     };
   },
   created: function () {
-    this.isRefView();
-    if (!this.isRefShow) {
-      return;
+    this.checkRefView();
+    if (this.isRefShow) {
+      this.getHealthInfoList();
     }
-    this.getHealthInfoList();
   },
   methods: {
-    isRefView: function () {
+    /**
+     * 照会権限判定処理
+     */
+    checkRefView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
         let role = roles[i];
@@ -132,6 +173,9 @@ export default {
       }
       this.isRefShow = false;
     },
+    /**
+     * 健康情報取得処理
+     */
     getHealthInfoList: function () {
       this.loading = true;
       // 保存済のAPIトークンを取得
@@ -157,17 +201,69 @@ export default {
         }
       );
     },
-    changeEditView: function (seqHealthInfoId) {
+    /**
+     * 健康情報編集モーダル表示
+     * @param seqHealthInfoId 健康情報ID
+     */
+    openHealthInfoEditModal: function (seqHealthInfoId) {
+      this.healthInfoEditModal.dialog = true;
+      this.healthInfoEditModal.seqHealthInfoId = seqHealthInfoId;
       for (var i = 0; i < this.healthInfoList.length; i++) {
         let healthInfo = this.healthInfoList[i];
         if (healthInfo.seq_health_info_id == seqHealthInfoId) {
-          this.healthInfoEditForm.seqHealthInfoId = healthInfo.seq_health_info_id;
-          this.healthInfoEditForm.height = healthInfo.height;
-          this.healthInfoEditForm.weight = healthInfo.weight;
-          this.isEditMode = true;
+          this.healthInfoEditModal.seqUserId = healthInfo.seq_user_id;
+          this.healthInfoEditModal.height = healthInfo.height;
+          this.healthInfoEditModal.weight = healthInfo.weight;
           break;
         }
       }
+    },
+    /**
+     * 健康情報編集処理を行う
+     */
+    editHealthInfo: function () {
+      if (!this.$refs.editHealthInfoForm.validate()) {
+        // 入力値エラーの場合
+        return;
+      }
+      
+      this.loading = true;
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      let reqUrl = url + "/" + this.healthInfoEditModal.seqHealthInfoId;
+      let reqBody = {
+        seq_user_id: this.healthInfoEditModal.seqUserId,
+        height: this.healthInfoEditModal.height,
+        weight: this.healthInfoEditModal.weight,
+      };
+      console.log(JSON.stringify(reqBody, null, "\t"));
+
+      axios.put(reqUrl, reqBody, { headers }).then(
+        (result) => {
+          if (result.data.result != "0") {
+            this.error.hasError = true;
+            this.error.message = result.data.error.message;
+          }
+          this.loading = false;
+
+          // 最新の健康情報取得
+          this.getHealthInfoList();
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
+      this.healthInfoEditModal.dialog = false;
+    },
+    /**
+     * 編集モーダルの入力情報をクリアする
+     */
+    reset: function () {
+      this.$refs.editHealthInfoForm.reset();
     },
   },
 };

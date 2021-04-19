@@ -233,6 +233,7 @@ export default {
         if (note.seq_root_user_note_info_id == seq_root_user_note_info_id) {
           this.noteEditModal.title = note.title;
           this.noteEditModal.detail = note.detail;
+          break;
         }
       }
     },
@@ -251,31 +252,30 @@ export default {
       };
 
       this.loading = true;
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
       let reqUrl = url + "/" + this.noteEditModal.seq_root_user_note_info_id;
 
-      axios
-        .put(reqUrl, reqBody, {
-          headers: { Authorization: this.$store.state.auth.token },
-        })
-        .then(
-          (response) => {
-            if (response.data.result != "0") {
-              this.error.hasError = true;
-              this.error.message = response.data.error.message;
-            }
-            this.loading = false;
-
-            // 最新のメモ情報取得
-            this.getNotes();
-          },
-          (error) => {
+      axios.put(reqUrl, reqBody, headers).then(
+        (response) => {
+          if (response.data.result != "0") {
             this.error.hasError = true;
-            this.error.message = error;
-            this.loading = false;
-            console.log("[error]=" + error);
-            return error;
+            this.error.message = response.data.error.message;
           }
-        );
+          this.loading = false;
+
+          // 最新のメモ情報取得
+          this.getNotes();
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          this.loading = false;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
       this.noteEditModal.dialog = false;
     },
     /**
