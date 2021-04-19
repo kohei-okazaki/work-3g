@@ -69,13 +69,12 @@ export default {
       this.$refs.entryForm.reset();
     },
     submit: function () {
-      this.loading = true;
       if (!this.$refs.entryForm.validate()) {
         // 入力値エラーの場合
-        this.loading = false;
         return;
       }
 
+      this.loading = true;
       let reqBody = {
         seq_login_id: this.$store.state.auth.seq_login_id,
         title: this.entryInfo.title,

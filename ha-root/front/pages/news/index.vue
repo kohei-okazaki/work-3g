@@ -3,16 +3,76 @@
     <AppTitle icon="mdi-newspaper" title="お知らせ一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
     <template v-if="isEntryShow">
-      <template v-if="entryMode">
-        <NewsEntry @get-news="getNews" />
-      </template>
-      <template v-else>
-        <NewsEdit
-          @get-news="getNews"
-          @back-entry="backEntry"
-          :edit_news_form="editNewsForm"
-        />
-      </template>
+      <NewsEntry @get-news="getNews" />
+      <v-dialog v-model="newsEditModal.dialog" max-width="600px">
+        <!-- ダイアログ本体 -->
+        <v-card>
+          <v-card-title>お知らせ情報更新</v-card-title>
+          <v-divider></v-divider>
+          <br />
+          <v-card-text>
+            <v-row>
+              <v-col class="text-center" cols="12" sm="12">
+                <v-form ref="editNewsForm">
+                  <v-text-field
+                    v-model="newsEditModal.title"
+                    label="タイトル"
+                    clearable
+                    :rules="[required]"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="newsEditModal.date"
+                    label="日付"
+                    hint="年/月/日"
+                    persistent-hint
+                    @click="
+                      newsEditModal.isDispCalendar = !newsEditModal.isDispCalendar
+                    "
+                    clearable
+                    :rules="[required]"
+                  ></v-text-field>
+                  <template v-if="newsEditModal.isDispCalendar">
+                    <v-date-picker
+                      v-model="newsEditModal.date"
+                      no-title
+                      @input="
+                        newsEditModal.isDispCalendar = !newsEditModal.isDispCalendar
+                      "
+                    ></v-date-picker>
+                  </template>
+                  <v-textarea
+                    v-model="newsEditModal.detail"
+                    label="詳細(htmlタグの入力も可能です)"
+                    clearable
+                    :rules="[required]"
+                  ></v-textarea>
+                  <NewsTagPullDown
+                    v-model="newsEditModal.tag.color"
+                    color="blue" />
+                  <v-text-field
+                    v-model="newsEditModal.tag.name"
+                    label="タグ名"
+                    clearable
+                    :rules="[required]"
+                  ></v-text-field
+                ></v-form>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-actions class="pt-0">
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="editNews">
+              <v-icon>mdi-newspaper-plus</v-icon>&ensp;更新
+            </v-btn>
+            <v-btn color="accent" @click="reset">
+              <v-icon>mdi-alert</v-icon>&ensp;リセット
+            </v-btn>
+            <v-btn color="grey" @click="newsEditModal.dialog = false"
+              >取消</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </template>
     <v-row v-if="isRefShow">
       <v-col>
@@ -37,7 +97,12 @@
             <div v-html="item.detail"></div>
           </template>
           <template v-slot:[`item.edit_action`]="{ item }">
-            <v-btn small class="mx-1" @click="changeNewsEditView(item.index)" v-if="isEntryShow">
+            <v-btn
+              small
+              class="mx-1"
+              @click="openNewsEditModal(item.index)"
+              v-if="isEntryShow"
+            >
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
@@ -57,7 +122,7 @@
 
 <script>
 import NewsEntry from "~/components/news/NewsEntry.vue";
-import NewsEdit from "~/components/news/NewsEdit.vue";
+import NewsTagPullDown from "~/components/news/NewsTagPullDown.vue";
 import ConfirmModal from "~/components/modal/ConfirmModal.vue";
 import ProcessFinishModal from "~/components/modal/ProcessFinishModal.vue";
 import AppTitle from "~/components/AppTitle.vue";
@@ -70,7 +135,7 @@ let url = process.env.api_base_url + "news";
 export default {
   components: {
     NewsEntry,
-    NewsEdit,
+    NewsTagPullDown,
     ConfirmModal,
     ProcessFinishModal,
     AppTitle,
@@ -85,7 +150,6 @@ export default {
       },
       isRefShow: false,
       isEntryShow: false,
-      entryMode: true,
       loading: false,
       search: "",
       news_list: [],
@@ -121,7 +185,8 @@ export default {
           value: "tag.name",
         },
       ],
-      editNewsForm: {
+      newsEditModal: {
+        dialog: false,
         index: "",
         title: "",
         date: "",
@@ -130,18 +195,22 @@ export default {
           color: "",
           name: "",
         },
+        isDispCalendar: false,
       },
+      required: (value) => !!value || "必ず入力してください",
     };
   },
   created: function () {
-    this.isEntryView();
-    this.isRefView();
-    if (!this.isRefShow) {
-      return;
+    this.checkEntryView();
+    this.checkRefView();
+    if (this.isRefShow) {
+      this.getNews();
     }
-    this.getNews();
   },
   methods: {
+    /**
+     * お知らせ情報を取得
+     */
     getNews: function () {
       this.loading = true;
       axios
@@ -167,18 +236,89 @@ export default {
           }
         );
     },
-    changeNewsEditView: function (targetNewsId) {
+    /**
+     * お知らせ情報編集モーダル表示
+     * @param targetNewsId お知らせ情報ID
+     */
+    openNewsEditModal: function (targetNewsId) {
+      this.newsEditModal.dialog = true;
+      this.newsEditModal.index = targetNewsId;
       for (var i = 0; i < this.news_list.length; i++) {
-        let targetNews = this.news_list[i];
-        if (targetNews.index == targetNewsId) {
+        let news = this.news_list[i];
+        if (news.index == targetNewsId) {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
-          targetNews.date = targetNews.date.replaceAll("/", "-");
-          this.editNewsForm = targetNews;
-          this.entryMode = false;
+          news.date = news.date.replaceAll("/", "-");
+          this.newsEditModal.title = news.title;
+          this.newsEditModal.date = news.date;
+          this.newsEditModal.detail = news.detail;
+          this.newsEditModal.tag.color = news.tag.color;
+          this.newsEditModal.tag.name = news.tag.name;
           break;
         }
       }
     },
+    /**
+     * お知らせ情報編集処理
+     */
+    editNews: function () {
+      if (!this.$refs.editNewsForm.validate()) {
+        // 入力値エラーの場合
+        return;
+      }
+
+      this.loading = true;
+      let reqUrl = url + "/" + this.newsEditModal.index;
+      let reqBody = {
+        index: this.newsEditModal.index,
+        title: this.newsEditModal.title,
+        date: this.newsEditModal.date.replaceAll("-", "/"),
+        detail: this.newsEditModal.detail,
+        tag: {
+          color: this.newsEditModal.tag.color,
+          name: this.newsEditModal.tag.name,
+        },
+      };
+      console.log(JSON.stringify(reqBody, null, "\t"));
+
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+
+      axios.put(reqUrl, reqBody, { headers }).then(
+        (result) => {
+          if (result.data.result == 0) {
+            // 処理完了モーダルを表示
+            let json = JSON.stringify(reqBody, null, "\t");
+            this.$refs.finish.open("お知らせ情報 更新処理", json, {
+              color: "blue",
+              width: 400,
+            });
+
+            // 最新のお知らせ情報を取得する
+            this.getNews();
+            this.loading = false;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("[error]=" + error);
+          this.loading = false;
+          return error;
+        }
+      );
+      this.newsEditModal.dialog = false;
+    },
+    /**
+     * 編集モーダルの入力情報をクリアする
+     */
+    reset: function () {
+      this.$refs.editNewsForm.reset();
+    },
+    /**
+     * お知らせ情報削除モーダル表示
+     * @param id お知らせ情報ID
+     */
     async openNewsDeleteModal(id) {
       let modalInfo = {
         color: "red",
@@ -196,6 +336,10 @@ export default {
         this.deleteNews(id);
       }
     },
+    /**
+     * お知らせ情報を削除
+     * @param id お知らせ情報ID
+     */
     async deleteNews(id) {
       this.loading = true;
       let deleteUrl = url + "/" + id;
@@ -228,10 +372,10 @@ export default {
           }
         );
     },
-    backEntry: function () {
-      this.entryMode = true;
-    },
-    isRefView: function () {
+    /**
+     * 照会権限判定処理
+     */
+    checkRefView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
         let role = roles[i];
@@ -242,7 +386,10 @@ export default {
       }
       this.isRefShow = false;
     },
-    isEntryView: function () {
+    /**
+     * 登録権限判定処理
+     */
+    checkEntryView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
         let role = roles[i];
