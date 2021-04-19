@@ -15,7 +15,7 @@ public class HealthInfoRegistFileDto {
 
     /** ユーザID */
     @JsonProperty("seq_user_id")
-    private Integer seqUserId;
+    private Long seqUserId;
     /** 健康情報要求情報リスト */
     @JsonProperty("health_info_request_data_list")
     private List<HealthInfoRequestData> healthInfoRequestDataList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class HealthInfoRegistFileDto {
      *
      * @return seqUserId
      */
-    public Integer getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -35,7 +35,7 @@ public class HealthInfoRegistFileDto {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(Integer seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 
