@@ -56,10 +56,10 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
 
         /** 健康情報ID */
         @JsonProperty("seq_health_info_id")
-        private Integer seqHealthInfoId;
+        private Long seqHealthInfoId;
         /** ユーザID */
         @JsonProperty("seq_user_id")
-        private Integer seqUserId;
+        private Long seqUserId;
         /** 身長 */
         @JsonProperty("height")
         private BigDecimal height;
@@ -89,7 +89,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
          *
          * @return seqHealthInfoId
          */
-        public Integer getSeqHealthInfoId() {
+        public Long getSeqHealthInfoId() {
             return seqHealthInfoId;
         }
 
@@ -99,7 +99,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
          * @param seqHealthInfoId
          *     健康情報ID
          */
-        public void setSeqHealthInfoId(Integer seqHealthInfoId) {
+        public void setSeqHealthInfoId(Long seqHealthInfoId) {
             this.seqHealthInfoId = seqHealthInfoId;
         }
 
@@ -108,7 +108,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
          *
          * @return seqUserId
          */
-        public Integer getSeqUserId() {
+        public Long getSeqUserId() {
             return seqUserId;
         }
 
@@ -118,7 +118,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
          * @param seqUserId
          *     ユーザID
          */
-        public void setSeqUserId(Integer seqUserId) {
+        public void setSeqUserId(Long seqUserId) {
             this.seqUserId = seqUserId;
         }
 

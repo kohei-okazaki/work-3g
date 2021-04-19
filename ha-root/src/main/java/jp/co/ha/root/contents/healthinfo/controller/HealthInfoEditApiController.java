@@ -68,7 +68,7 @@ public class HealthInfoEditApiController extends
     /**
      * 健康情報編集
      *
-     * @param id
+     * @param seqHealthInfoId
      *     健康情報ID
      * @param request
      *     健康情報編集APIリクエスト
@@ -76,16 +76,13 @@ public class HealthInfoEditApiController extends
      * @throws BaseException
      *     API呼び出しに失敗した場合
      */
-    @PutMapping(value = "healthinfo/{id}", produces = {
+    @PutMapping(value = "healthinfo/{seq_health_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
     public HealthInfoEditApiResponse edit(
-            @PathVariable(name = "id", required = false) Optional<String> id,
+            @PathVariable(name = "seq_health_info_id", required = false) Optional<Long> seqHealthInfoId,
             @RequestBody HealthInfoEditApiRequest request) throws BaseException {
 
         // TODO 妥当性チェック
-
-        // 健康情報ID
-        Long seqHealthInfoId = Long.valueOf(id.get());
 
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
@@ -112,7 +109,7 @@ public class HealthInfoEditApiController extends
                 .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
         // 直前の健康情報を検索
         HealthInfo lastHealthInfo = healthInfoSearchService
-                .findBySeqUserIdAndLowerSeqHealthInfoId(seqHealthInfoId,
+                .findBySeqUserIdAndLowerSeqHealthInfoId(seqHealthInfoId.get(),
                         request.getSeqUserId(), selectOption);
 
         HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
@@ -122,7 +119,7 @@ public class HealthInfoEditApiController extends
 
         HealthInfo healthInfo = new HealthInfo();
         BeanUtil.copy(basicHealthInfoCalcResponse.getBasicHealthInfo(), healthInfo);
-        healthInfo.setSeqHealthInfoId(seqHealthInfoId);
+        healthInfo.setSeqHealthInfoId(seqHealthInfoId.get());
         healthInfo.setHealthInfoStatus(status.getValue());
         healthInfo.setSeqBmiRangeMtId(bmiRangeMt.getSeqBmiRangeMtId());
         healthInfoUpdateService.update(healthInfo);
