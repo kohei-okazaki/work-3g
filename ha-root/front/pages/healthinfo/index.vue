@@ -65,6 +65,7 @@
               small
               class="mx-1"
               @click="openHealthInfoEditModal(item.seq_health_info_id)"
+              v-if="isEntryShow"
             >
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
@@ -98,6 +99,7 @@ export default {
       },
       loading: false,
       isRefShow: false,
+      isEntryShow: false,
       search: "",
       healthInfoList: [],
       headers: [
@@ -153,6 +155,7 @@ export default {
     };
   },
   created: function () {
+    this.checkEntryView();
     this.checkRefView();
     if (this.isRefShow) {
       this.getHealthInfoList();
@@ -172,6 +175,20 @@ export default {
         }
       }
       this.isRefShow = false;
+    },
+    /**
+     * 登録権限判定処理
+     */
+    checkEntryView: function () {
+      let roles = this.$store.state.auth.roles;
+      for (var i = 0; i < roles.length; i++) {
+        let role = roles[i];
+        if (role.value == "02") {
+          this.isEntryShow = true;
+          return;
+        }
+      }
+      this.isEntryShow = false;
     },
     /**
      * 健康情報取得処理

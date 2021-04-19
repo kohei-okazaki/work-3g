@@ -246,27 +246,32 @@ export default {
         return;
       }
 
-      let reqBody = {
-        title: this.noteEditModal.title,
-        detail: this.noteEditModal.detail,
-      };
-
       this.loading = true;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
       let reqUrl = url + "/" + this.noteEditModal.seq_root_user_note_info_id;
+      let reqBody = {
+        title: this.noteEditModal.title,
+        detail: this.noteEditModal.detail,
+      };
 
-      axios.put(reqUrl, reqBody, headers).then(
+      axios.put(reqUrl, reqBody, { headers }).then(
         (response) => {
-          if (response.data.result != "0") {
+          if (response.data.result == 0) {
+            // 処理完了モーダルを表示
+            this.$refs.finish.open("メモ情報 更新処理", reqBody.detail, {
+              color: "blue",
+              width: 400,
+            });
+          } else {
             this.error.hasError = true;
             this.error.message = response.data.error.message;
           }
-          this.loading = false;
 
           // 最新のメモ情報取得
           this.getNotes();
+          this.loading = false;
         },
         (error) => {
           this.error.hasError = true;
