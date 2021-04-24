@@ -3,9 +3,9 @@ package jp.co.ha.business.api.node;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
-import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
+import jp.co.ha.business.api.node.request.BreathingCapacityCalcApiRequest;
+import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
+import jp.co.ha.business.api.node.response.BreathingCapacityCalcApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.common.web.api.BaseApi;
 
@@ -20,14 +20,14 @@ import jp.co.ha.common.web.api.BaseApi;
  */
 @Component
 public class BreathingCapacityCalcApi
-        extends BaseApi<BreathingCapacityCalcRequest, BreathingCapacityCalcResponse> {
+        extends BaseApi<BreathingCapacityCalcApiRequest, BreathingCapacityCalcApiResponse> {
 
     /** 肺活量計算APIの種別 */
     private static final NodeApiType TYPE = NodeApiType.BREATHING_CAPACITY;
 
     @Override
-    public BreathingCapacityCalcResponse getResponse() {
-        return new BreathingCapacityCalcResponse();
+    public BreathingCapacityCalcApiResponse getResponse() {
+        return new BreathingCapacityCalcApiResponse();
     }
 
     @Override
@@ -41,7 +41,7 @@ public class BreathingCapacityCalcApi
     }
 
     @Override
-    public void bindErrorInfo(BreathingCapacityCalcResponse response) {
+    public void bindErrorInfo(BreathingCapacityCalcApiResponse response) {
         response.setResult(Result.FAILURE);
         response.setDetail(getApiName() + "に失敗しました");
     }

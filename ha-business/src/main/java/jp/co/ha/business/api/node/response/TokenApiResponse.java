@@ -10,7 +10,7 @@ import jp.co.ha.common.web.form.BaseApiResponse;
  *
  * @version 1.0.0
  */
-public class TokenResponse extends BaseNodeResponse implements BaseApiResponse {
+public class TokenApiResponse extends BaseNodeApiResponse implements BaseApiResponse {
 
     /** トークン */
     @Mask

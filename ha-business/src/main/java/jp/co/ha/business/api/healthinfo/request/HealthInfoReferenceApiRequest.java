@@ -15,7 +15,7 @@ import jp.co.ha.common.web.form.BaseRestApiRequest;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoReferenceRequest extends BaseRestApiRequest
+public class HealthInfoReferenceApiRequest extends BaseRestApiRequest
         implements BaseApiRequest {
 
     /** 健康情報ID */

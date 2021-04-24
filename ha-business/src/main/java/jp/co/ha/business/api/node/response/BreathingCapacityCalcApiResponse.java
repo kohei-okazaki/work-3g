@@ -13,7 +13,7 @@ import jp.co.ha.common.web.form.BaseApiResponse;
  *
  * @version 1.0.0
  */
-public class BreathingCapacityCalcResponse extends BaseNodeResponse
+public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         implements BaseApiResponse {
 
     /** 肺活量計算結果情報 */

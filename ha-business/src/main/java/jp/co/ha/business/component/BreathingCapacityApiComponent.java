@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.BreathingCapacityCalcApi;
-import jp.co.ha.business.api.node.request.BreathingCapacityCalcRequest;
-import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.response.BreathingCapacityCalcResponse;
-import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.request.BreathingCapacityCalcApiRequest;
+import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
+import jp.co.ha.business.api.node.response.BreathingCapacityCalcApiResponse;
+import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.dto.BreathingCapacityDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
@@ -56,10 +56,10 @@ public class BreathingCapacityApiComponent {
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
 
-        TokenResponse tokenApiResponse = tokenApiComponent.callTokenApi(seqUserId,
+        TokenApiResponse tokenApiResponse = tokenApiComponent.callTokenApi(seqUserId,
                 transactionId);
 
-        BreathingCapacityCalcResponse apiResponse = callBreathingCapacityCalcApi(dto,
+        BreathingCapacityCalcApiResponse apiResponse = callBreathingCapacityCalcApi(dto,
                 tokenApiResponse.getToken(), seqUserId, transactionId);
         BeanUtil.copy(apiResponse.getBreathingCapacityCalcResult(), dto);
 
@@ -81,7 +81,7 @@ public class BreathingCapacityApiComponent {
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private BreathingCapacityCalcResponse callBreathingCapacityCalcApi(
+    private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
             BreathingCapacityDto dto, String token, Long seqUserId,
             Long transactionId) throws BaseException {
 
@@ -89,7 +89,7 @@ public class BreathingCapacityApiComponent {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(breathingCapacityCalcApi.getApiName(), seqUserId, transactionId);
 
-        BreathingCapacityCalcRequest request = new BreathingCapacityCalcRequest();
+        BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
         BeanUtil.copy(dto, request);
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
@@ -97,7 +97,7 @@ public class BreathingCapacityApiComponent {
                         + NodeApiType.BREATHING_CAPACITY.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
-        BreathingCapacityCalcResponse response = breathingCapacityCalcApi.callApi(request,
+        BreathingCapacityCalcApiResponse response = breathingCapacityCalcApi.callApi(request,
                 connectInfo);
 
         // API通信情報を更新

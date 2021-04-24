@@ -12,7 +12,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
  *
  * @version 1.0.0
  */
-public class CalorieCalcRequest extends BaseNodeRequest implements BaseApiRequest {
+public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApiRequest {
 
     /** 性別 */
     @JsonProperty("gender")

@@ -9,7 +9,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
  *
  * @version 1.0.0
  */
-public class TokenRequest extends BaseNodeRequest implements BaseApiRequest {
+public class TokenApiRequest extends BaseNodeApiRequest implements BaseApiRequest {
 
     /** ユーザID */
     @JsonProperty("seq_user_id")

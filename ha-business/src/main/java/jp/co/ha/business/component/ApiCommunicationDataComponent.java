@@ -3,7 +3,7 @@ package jp.co.ha.business.component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.node.response.BaseNodeResponse;
+import jp.co.ha.business.api.node.response.BaseNodeApiResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
@@ -72,10 +72,10 @@ public class ApiCommunicationDataComponent {
      * @param connectInfo
      *     {@linkplain ApiConnectInfo}
      * @param response
-     *     {@linkplain BaseNodeResponse}
+     *     {@linkplain BaseNodeApiResponse}
      */
     public void update(ApiCommunicationData apiCommunicationData,
-            ApiConnectInfo connectInfo, BaseNodeResponse response) {
+            ApiConnectInfo connectInfo, BaseNodeApiResponse response) {
 
         apiCommunicationData.setHttpStatus(String.valueOf(connectInfo.getHttpStatus()));
         apiCommunicationData.setResult(response.getResult().getValue());
