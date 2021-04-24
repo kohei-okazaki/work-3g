@@ -109,6 +109,11 @@ export default {
         },
         {
           icon: "mdi-api",
+          title: "アカウント情報編集API",
+          to: "/root/api/account/edit",
+        },
+        {
+          icon: "mdi-api",
           title: "API通信情報一覧API",
           to: "/root/api/apidata",
         },
