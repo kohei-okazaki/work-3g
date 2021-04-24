@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.CalorieCalcApi;
-import jp.co.ha.business.api.node.request.CalorieCalcRequest;
-import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.response.CalorieCalcResponse;
-import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.request.CalorieCalcApiRequest;
+import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
+import jp.co.ha.business.api.node.response.CalorieCalcApiResponse;
+import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
@@ -56,10 +56,10 @@ public class CalorieApiComponent {
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
 
-        TokenResponse tokenApiResponse = tokenApiComponent.callTokenApi(seqUserId,
+        TokenApiResponse tokenApiResponse = tokenApiComponent.callTokenApi(seqUserId,
                 transactionId);
 
-        CalorieCalcResponse apiResponse = callCalorieCalcApi(dto,
+        CalorieCalcApiResponse apiResponse = callCalorieCalcApi(dto,
                 tokenApiResponse.getToken(), seqUserId, transactionId);
         BeanUtil.copy(apiResponse.getCalorieCalcResult(), dto);
 
@@ -81,14 +81,14 @@ public class CalorieApiComponent {
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private CalorieCalcResponse callCalorieCalcApi(CalorieCalcDto dto, String token,
+    private CalorieCalcApiResponse callCalorieCalcApi(CalorieCalcDto dto, String token,
             Long seqUserId, Long transactionId) throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(calorieCalcApi.getApiName(), seqUserId, transactionId);
 
-        CalorieCalcRequest request = new CalorieCalcRequest();
+        CalorieCalcApiRequest request = new CalorieCalcApiRequest();
         BeanUtil.copy(dto, request);
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
@@ -96,7 +96,7 @@ public class CalorieApiComponent {
                         + NodeApiType.CALORIE.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
-        CalorieCalcResponse response = calorieCalcApi.callApi(request, connectInfo);
+        CalorieCalcApiResponse response = calorieCalcApi.callApi(request, connectInfo);
 
         // API通信情報を更新
         apiCommunicationDataComponent.update(apiCommunicationData, connectInfo, response);

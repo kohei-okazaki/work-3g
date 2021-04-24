@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.batch.dto.HealthInfoRegistFileDto;
 import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
@@ -63,21 +63,21 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
     private SlackApiComponent slackApiComponent;
     /** 妥当性チェック */
     @Autowired
-    private BeanValidator<HealthInfoRegistRequest> validator;
+    private BeanValidator<HealthInfoRegistApiRequest> validator;
 
     @Override
     public BatchResult execute(CommandLine cmd) throws BaseException {
 
-        List<HealthInfoRegistRequest> requestList = new ArrayList<>();
+        List<HealthInfoRegistApiRequest> requestList = new ArrayList<>();
         JsonReader reader = new JsonReader();
 
         for (File file : FileUtil.getFileList(prop.getRegistBatchFilePath())) {
             HealthInfoRegistFileDto dto = reader.read(file,
                     HealthInfoRegistFileDto.class);
-            List<HealthInfoRegistRequest> list = dto.getHealthInfoRequestDataList()
+            List<HealthInfoRegistApiRequest> list = dto.getHealthInfoRequestDataList()
                     .stream()
                     .map(e -> {
-                        HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+                        HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
                         BeanUtil.copy(dto, request);
                         BeanUtil.copy(e, request);
                         request.setTestMode(TestMode.DB_REGIST);
@@ -90,7 +90,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
         }
 
         List<Long> seqHealthInfoIdList = new ArrayList<>();
-        for (HealthInfoRegistRequest request : requestList) {
+        for (HealthInfoRegistApiRequest request : requestList) {
 
             // 妥当性チェックを行う
             ValidateErrorResult result = validator.validate(request);
@@ -115,7 +115,7 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
                     .create(api.getApiName(), request.getSeqUserId(),
                             request.getTransactionId());
 
-            HealthInfoRegistResponse response = api.callApi(request, apiConnectInfo);
+            HealthInfoRegistApiResponse response = api.callApi(request, apiConnectInfo);
             seqHealthInfoIdList.add(response.getHealthInfo().getSeqHealthInfoId());
 
             // API通信情報を更新

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.healthcheck.request.HealthCheckRequest;
-import jp.co.ha.business.api.healthcheck.response.HealthCheckResponse;
+import jp.co.ha.business.api.healthcheck.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.healthcheck.response.HealthCheckApiResponse;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.controller.BaseRestController;
 
@@ -18,7 +18,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 @RestController
 @RequestMapping(value = "/api/healthcheck")
 public class HealthCheckController
-        extends BaseRestController<HealthCheckRequest, HealthCheckResponse> {
+        extends BaseRestController<HealthCheckApiRequest, HealthCheckApiResponse> {
 
     /**
      * ヘルスチェックAPIを受け付ける
@@ -26,14 +26,14 @@ public class HealthCheckController
      * @return レスポンス
      */
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthCheckResponse doGet() {
-        HealthCheckResponse response = new HealthCheckResponse();
+    public HealthCheckApiResponse doGet() {
+        HealthCheckApiResponse response = new HealthCheckApiResponse();
         return response;
     }
 
     @Override
     @Deprecated
-    public void accept(HealthCheckRequest request, HealthCheckResponse response)
+    public void accept(HealthCheckApiRequest request, HealthCheckApiResponse response)
             throws BaseException {
         // ヘルスチェックAPIではリクエストを受け付けてそのまま返却するだけ
     }

@@ -3,8 +3,8 @@ package jp.co.ha.business.api.healthcheck;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.healthcheck.request.HealthCheckRequest;
-import jp.co.ha.business.api.healthcheck.response.HealthCheckResponse;
+import jp.co.ha.business.api.healthcheck.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.healthcheck.response.HealthCheckApiResponse;
 import jp.co.ha.business.api.type.ApiNameType;
 import jp.co.ha.common.web.api.BaseApi;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ErrorInfo;
@@ -16,11 +16,11 @@ import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
  * @version 1.0.0
  */
 @Component
-public class HealthCheckApi extends BaseApi<HealthCheckRequest, HealthCheckResponse> {
+public class HealthCheckApi extends BaseApi<HealthCheckApiRequest, HealthCheckApiResponse> {
 
     @Override
-    public HealthCheckResponse getResponse() {
-        return new HealthCheckResponse();
+    public HealthCheckApiResponse getResponse() {
+        return new HealthCheckApiResponse();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class HealthCheckApi extends BaseApi<HealthCheckRequest, HealthCheckRespo
     }
 
     @Override
-    public void bindErrorInfo(HealthCheckResponse response) {
+    public void bindErrorInfo(HealthCheckApiResponse response) {
         response.setResultType(ResultType.FAILURE);
         ErrorInfo errorInfo = new ErrorInfo();
         response.setErrorInfo(errorInfo);

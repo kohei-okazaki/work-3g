@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.TokenApi;
-import jp.co.ha.business.api.node.request.TokenRequest;
-import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.request.TokenApiRequest;
+import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
+import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
@@ -45,19 +45,19 @@ public class TokenApiComponent {
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    public TokenResponse callTokenApi(Long seqUserId, Long transactionId)
+    public TokenApiResponse callTokenApi(Long seqUserId, Long transactionId)
             throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(tokenApi.getApiName(), seqUserId, transactionId);
 
-        TokenRequest request = new TokenRequest();
+        TokenApiRequest request = new TokenApiRequest();
         request.setSeqUserId(seqUserId);
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());
-        TokenResponse response = tokenApi.callApi(request, connectInfo);
+        TokenApiResponse response = tokenApi.callApi(request, connectInfo);
 
         // API通信情報を更新
         apiCommunicationDataComponent.update(apiCommunicationData,

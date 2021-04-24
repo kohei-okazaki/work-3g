@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
@@ -24,7 +24,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 @RestController
 @RequestMapping(value = "/api/{seqUserId}/healthinfo")
 public class HealthInfoRegistController extends
-        BaseRestController<HealthInfoRegistRequest, HealthInfoRegistResponse> {
+        BaseRestController<HealthInfoRegistApiRequest, HealthInfoRegistApiResponse> {
 
     /** 健康情報登録サービス */
     @Autowired
@@ -44,16 +44,16 @@ public class HealthInfoRegistController extends
      *     基底例外
      */
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoRegistResponse doPost(@PathVariable("seqUserId") Long seqUserId,
+    public HealthInfoRegistApiResponse doPost(@PathVariable("seqUserId") Long seqUserId,
             @RequestHeader(ApiConnectInfo.X_API_KEY) String apiKey,
-            @RequestBody HealthInfoRegistRequest request) throws BaseException {
+            @RequestBody HealthInfoRegistApiRequest request) throws BaseException {
 
         request.setSeqUserId(seqUserId);
         request.setApiKey(apiKey);
 
         super.validate(request);
 
-        HealthInfoRegistResponse response = new HealthInfoRegistResponse();
+        HealthInfoRegistApiResponse response = new HealthInfoRegistApiResponse();
 
         this.accept(request, response);
 
@@ -61,7 +61,7 @@ public class HealthInfoRegistController extends
     }
 
     @Override
-    public void accept(HealthInfoRegistRequest request, HealthInfoRegistResponse response)
+    public void accept(HealthInfoRegistApiRequest request, HealthInfoRegistApiResponse response)
             throws BaseException {
 
         service.checkRequest(request);

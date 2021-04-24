@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
@@ -144,7 +144,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         }
 
         // 健康情報登録処理を行う
-        HealthInfoRegistResponse apiResponse = healthInfoService.regist(dto, seqUserId);
+        HealthInfoRegistApiResponse apiResponse = healthInfoService.regist(dto, seqUserId);
 
         if (ResultType.SUCCESS == apiResponse.getResultType()) {
             // 健康情報の登録に成功した場合

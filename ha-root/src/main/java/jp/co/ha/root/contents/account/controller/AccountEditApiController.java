@@ -14,8 +14,8 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.contents.account.request.AccountEditRequest;
-import jp.co.ha.root.contents.account.response.AccountEditResponse;
+import jp.co.ha.root.contents.account.request.AccountEditApiRequest;
+import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 
 /**
  * アカウント情報編集APIコントローラ
@@ -24,7 +24,7 @@ import jp.co.ha.root.contents.account.response.AccountEditResponse;
  */
 @RestController
 public class AccountEditApiController
-        extends BaseRootApiController<AccountEditRequest, AccountEditResponse> {
+        extends BaseRootApiController<AccountEditApiRequest, AccountEditApiResponse> {
 
     /** アカウント情報更新サービス */
     @Autowired
@@ -43,9 +43,9 @@ public class AccountEditApiController
      */
     @PutMapping(value = "account/{seq_user_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public AccountEditResponse edit(
+    public AccountEditApiResponse edit(
             @PathVariable(name = "seq_user_id", required = false) Optional<Long> seqUserId,
-            @RequestBody AccountEditRequest request) throws BaseException {
+            @RequestBody AccountEditApiRequest request) throws BaseException {
 
         if (seqUserId == null || !seqUserId.isPresent()) {
             return getErrorResponse("seq_user_id is required");
@@ -56,13 +56,13 @@ public class AccountEditApiController
         entity.setSeqUserId(seqUserId.get());
         updateService.updateSelective(entity);
 
-        AccountEditResponse response = getSuccessResponse();
+        AccountEditApiResponse response = getSuccessResponse();
         return response;
     }
 
     @Override
-    protected AccountEditResponse getResponse() {
-        return new AccountEditResponse();
+    protected AccountEditApiResponse getResponse() {
+        return new AccountEditApiResponse();
     }
 
 }

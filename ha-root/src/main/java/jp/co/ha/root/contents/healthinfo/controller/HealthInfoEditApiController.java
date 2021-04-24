@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
-import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
-import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
+import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
+import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
@@ -89,13 +89,13 @@ public class HealthInfoEditApiController extends
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
         // トークン発行API実施
-        TokenResponse tokenResponse = tokenApiComponent.callTokenApi(
+        TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(
                 request.getSeqUserId(), transactionId);
 
         // 基礎健康情報計算API実施
-        BasicHealthInfoCalcRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcRequest();
+        BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
         BeanUtil.copy(request, basicHealthInfoCalcRequest);
-        BasicHealthInfoCalcResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
                 .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
                         tokenResponse.getToken(), request.getSeqUserId(), transactionId);
 

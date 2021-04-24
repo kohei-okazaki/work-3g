@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+
+  <!-- <include resource="org/springframework/boot/logging/logback/base.xml" /> -->
+
+  <springProfile name="local">
+  <!-- 設定ローカル環境用 -->
+    <property name="logpath" value="C:/app/logs/" />
+    <property name="LOG_LEVEL" value="DEBUG" />
+  </springProfile>
+
+  <springProfile name="ec2">
+  <!-- 設定EC2環境用 -->
+    <property name="logpath" value="/home/admin/logs" />
+    <property name="LOG_LEVEL" value="INFO" />
+  </springProfile>
+
+  <!-- コンソール出力設定 -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.out</target>
+    <encoder>
+      <!--出力内容 -->
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- ファイル出力 -->
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--日ごとにログファイル作成 -->
+    <file>${logpath}${logname}.log</file>
+    <!--日ごとにログファイル作成 -->
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+      <fileNamePattern>${logpath}%d{yyyyMM,aux}/${logname}-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!--180日後に破棄 -->
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <!--出力内容 -->
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- アプリログレベルと使用出力ルール -->
+  <logger name="jp.co.ha" level="${LOG_LEVEL}">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </logger>
+
+  <logger name="org.springframework" level="INFO">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </logger>
+
+</configuration>
