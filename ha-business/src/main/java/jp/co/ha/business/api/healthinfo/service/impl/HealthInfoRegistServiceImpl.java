@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
-import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
-import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
-import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse.BasicHealthInfo;
-import jp.co.ha.business.api.node.response.TokenResponse;
+import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
+import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
+import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse.BasicHealthInfo;
+import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
@@ -63,25 +63,25 @@ public class HealthInfoRegistServiceImpl extends CommonService
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
 
     @Override
-    public void checkRequest(HealthInfoRegistRequest request) throws BaseException {
+    public void checkRequest(HealthInfoRegistApiRequest request) throws BaseException {
 
         // API利用判定
         checkApiUse(request);
     }
 
     @Override
-    public void execute(HealthInfoRegistRequest request,
-            HealthInfoRegistResponse response) throws BaseException {
+    public void execute(HealthInfoRegistApiRequest request,
+            HealthInfoRegistApiResponse response) throws BaseException {
 
         // トークン発行API実施
-        TokenResponse tokenResponse = tokenApiComponent.callTokenApi(
+        TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(
                 request.getSeqUserId(), request.getTransactionId());
 
-        BasicHealthInfoCalcRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcRequest();
+        BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
         BeanUtil.copy(request, basicHealthInfoCalcRequest);
 
         // 基礎健康情報計算API実施
-        BasicHealthInfoCalcResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
                 .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
                         tokenResponse.getToken(), request.getSeqUserId(),
                         request.getTransactionId());
@@ -97,7 +97,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         account.setSeqUserId(request.getSeqUserId());
         response.setAccount(account);
 
-        HealthInfoRegistResponse.HealthInfo healthInfo = new HealthInfoRegistResponse.HealthInfo();
+        HealthInfoRegistApiResponse.HealthInfo healthInfo = new HealthInfoRegistApiResponse.HealthInfo();
         BeanUtil.copy(entity, healthInfo);
         response.setHealthInfo(healthInfo);
 
@@ -114,7 +114,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
      * @throws BaseException
      *     基底例外
      */
-    private HealthInfo toEntity(HealthInfoRegistRequest request,
+    private HealthInfo toEntity(HealthInfoRegistApiRequest request,
             BasicHealthInfo basicHealthInfo) throws BaseException {
 
         Long seqUserId = request.getSeqUserId();

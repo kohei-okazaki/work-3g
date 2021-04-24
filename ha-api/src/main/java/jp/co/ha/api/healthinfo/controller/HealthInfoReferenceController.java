@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceApiResponse;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoReferenceService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.controller.BaseRestController;
@@ -22,7 +22,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 @RestController
 @RequestMapping(value = "/api/{seqUserId}/healthinfo/{seqHealthInfoId}")
 public class HealthInfoReferenceController extends
-        BaseRestController<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+        BaseRestController<HealthInfoReferenceApiRequest, HealthInfoReferenceApiResponse> {
 
     /** 健康情報照会サービス */
     @Autowired
@@ -42,12 +42,12 @@ public class HealthInfoReferenceController extends
      *     基底例外
      */
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoReferenceResponse doGet(@PathVariable("seqUserId") Long seqUserId,
+    public HealthInfoReferenceApiResponse doGet(@PathVariable("seqUserId") Long seqUserId,
             @PathVariable("seqHealthInfoId") Long seqHealthInfoId,
             @RequestHeader(value = "Api-Key") String apiKey) throws BaseException {
 
-        HealthInfoReferenceRequest request = new HealthInfoReferenceRequest();
-        HealthInfoReferenceResponse response = new HealthInfoReferenceResponse();
+        HealthInfoReferenceApiRequest request = new HealthInfoReferenceApiRequest();
+        HealthInfoReferenceApiResponse response = new HealthInfoReferenceApiResponse();
 
         request.setSeqUserId(seqUserId);
         request.setApiKey(apiKey);
@@ -61,8 +61,8 @@ public class HealthInfoReferenceController extends
     }
 
     @Override
-    public void accept(HealthInfoReferenceRequest request,
-            HealthInfoReferenceResponse response) throws BaseException {
+    public void accept(HealthInfoReferenceApiRequest request,
+            HealthInfoReferenceApiResponse response) throws BaseException {
 
         service.checkRequest(request);
 

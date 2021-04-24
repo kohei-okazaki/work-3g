@@ -15,7 +15,7 @@ import jp.co.ha.root.base.BaseRootApiRequest;
  *
  * @version 1.0.0
  */
-public class AccountEditRequest extends BaseRootApiRequest implements BaseApiRequest {
+public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
     /** メールアドレス */
     @JsonProperty("mail_address")

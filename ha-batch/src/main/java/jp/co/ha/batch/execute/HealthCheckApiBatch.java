@@ -9,8 +9,8 @@ import jp.co.ha.batch.type.BatchResult;
 import jp.co.ha.business.api.aws.AwsConfig;
 import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthcheck.HealthCheckApi;
-import jp.co.ha.business.api.healthcheck.request.HealthCheckRequest;
-import jp.co.ha.business.api.healthcheck.response.HealthCheckResponse;
+import jp.co.ha.business.api.healthcheck.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.healthcheck.response.HealthCheckApiResponse;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
@@ -64,7 +64,7 @@ public class HealthCheckApiBatch extends BaseBatch {
                 .create(healthCheckApi.getApiName(), null,
                         apiCommunicationDataComponent.getTransactionId());
 
-        HealthCheckResponse response = healthCheckApi.callApi(new HealthCheckRequest(),
+        HealthCheckApiResponse response = healthCheckApi.callApi(new HealthCheckApiRequest(),
                 apiConnectInfo);
 
         // API通信情報を更新

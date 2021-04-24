@@ -1,12 +1,4 @@
 server:
   port: 8082
-# Log設定
-logging:
-  file:
-    name: root-api.log
-    path: C:\app\logs
-  level:
-    org.springframework: INFO
-    jp.co.ha: DEBUG
 front:
   url: http://localhost:8083

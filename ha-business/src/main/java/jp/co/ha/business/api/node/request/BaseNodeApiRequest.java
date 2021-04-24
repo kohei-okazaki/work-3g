@@ -5,6 +5,6 @@ package jp.co.ha.business.api.node.request;
  *
  * @version 1.0.0
  */
-public abstract class BaseNodeRequest {
+public abstract class BaseNodeApiRequest {
 
 }

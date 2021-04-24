@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -85,14 +85,14 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         ResultType result = ResultType.SUCCESS;
-        for (HealthInfoRegistRequest request : toRequestList(modelList)) {
+        for (HealthInfoRegistApiRequest request : toRequestList(modelList)) {
 
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                     .create(registApi.getApiName(), seqUserId,
                             apiCommunicationDataComponent.getTransactionId());
 
-            HealthInfoRegistResponse response = registApi.callApi(request,
+            HealthInfoRegistApiResponse response = registApi.callApi(request,
                     apiConnectInfo);
 
             // API通信情報を更新
@@ -114,15 +114,15 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
      *     健康情報CSVアップロードモデルリスト
      * @return 健康情報登録APIリクエストリスト
      */
-    private List<HealthInfoRegistRequest> toRequestList(
+    private List<HealthInfoRegistApiRequest> toRequestList(
             List<HealthInfoCsvUploadModel> modelList) {
 
         return modelList.stream().map(e -> {
-            HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+            HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
 
             BeanUtil.copy(e, request, (src, dest) -> {
                 HealthInfoCsvUploadModel srcModel = (HealthInfoCsvUploadModel) src;
-                HealthInfoRegistRequest destRequest = (HealthInfoRegistRequest) dest;
+                HealthInfoRegistApiRequest destRequest = (HealthInfoRegistApiRequest) dest;
                 destRequest.setHeight(new BigDecimal(srcModel.getHeight()));
                 destRequest.setWeight(new BigDecimal(srcModel.getWeight()));
                 destRequest.setTestMode(TestMode.DB_REGIST);

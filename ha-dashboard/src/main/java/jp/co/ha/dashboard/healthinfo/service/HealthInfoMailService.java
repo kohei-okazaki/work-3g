@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.service;
 
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.common.exception.BaseException;
 
 /**
@@ -18,6 +18,6 @@ public interface HealthInfoMailService {
      * @throws BaseException
      *     メール送信に失敗した場合
      */
-    void sendHealthInfoMail(HealthInfoRegistResponse apiResponse) throws BaseException;
+    void sendHealthInfoMail(HealthInfoRegistApiResponse apiResponse) throws BaseException;
 
 }

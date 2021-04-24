@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.BasicHealthInfoCalcApi;
-import jp.co.ha.business.api.node.request.BasicHealthInfoCalcRequest;
-import jp.co.ha.business.api.node.response.BaseNodeResponse.Result;
-import jp.co.ha.business.api.node.response.BasicHealthInfoCalcResponse;
+import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
+import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
+import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
@@ -49,8 +49,8 @@ public class BasicHealthInfoCalcApiComponent {
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    public BasicHealthInfoCalcResponse callBasicHealthInfoCalcApi(
-            BasicHealthInfoCalcRequest apiRequest, String token, Long seqUserId,
+    public BasicHealthInfoCalcApiResponse callBasicHealthInfoCalcApi(
+            BasicHealthInfoCalcApiRequest apiRequest, String token, Long seqUserId,
             Long transactionId) throws BaseException {
 
         // API通信情報を登録
@@ -62,7 +62,7 @@ public class BasicHealthInfoCalcApiComponent {
                         + NodeApiType.BASIC.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
-        BasicHealthInfoCalcResponse apiResponse = basicHealthInfoCalcApi
+        BasicHealthInfoCalcApiResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);
 
         // API通信情報を更新

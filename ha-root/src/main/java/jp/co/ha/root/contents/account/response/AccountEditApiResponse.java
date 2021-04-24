@@ -8,7 +8,7 @@ import jp.co.ha.root.base.BaseRootApiResponse;
  *
  * @version 1.0.0
  */
-public class AccountEditResponse extends BaseRootApiResponse
+public class AccountEditApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
 }

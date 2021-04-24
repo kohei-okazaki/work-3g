@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceApiResponse;
 import jp.co.ha.business.api.healthinfo.service.CommonService;
 import jp.co.ha.business.api.healthinfo.service.HealthInfoReferenceService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -32,15 +32,15 @@ public class HealthInfoReferenceServiceImpl extends CommonService
     private HealthInfoSearchService healthInfoSearchService;
 
     @Override
-    public void checkRequest(HealthInfoReferenceRequest request) throws BaseException {
+    public void checkRequest(HealthInfoReferenceApiRequest request) throws BaseException {
 
         // API利用判定
         checkApiUse(request);
     }
 
     @Override
-    public void execute(HealthInfoReferenceRequest request,
-            HealthInfoReferenceResponse response) throws BaseException {
+    public void execute(HealthInfoReferenceApiRequest request,
+            HealthInfoReferenceApiResponse response) throws BaseException {
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
                 .findByHealthInfoIdAndSeqUserId(request.getSeqHealthInfoId(),
@@ -62,7 +62,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService
             response.setAccount(account);
         }
         {
-            HealthInfoReferenceResponse.HealthInfo healthInfo = new HealthInfoReferenceResponse.HealthInfo();
+            HealthInfoReferenceApiResponse.HealthInfo healthInfo = new HealthInfoReferenceApiResponse.HealthInfo();
             BeanUtil.copy(entity, healthInfo);
             response.setHealthInfo(healthInfo);
         }

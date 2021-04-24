@@ -12,7 +12,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
  *
  * @version 1.0.0
  */
-public class BasicHealthInfoCalcRequest extends BaseNodeRequest
+public class BasicHealthInfoCalcApiRequest extends BaseNodeApiRequest
         implements BaseApiRequest {
 
     /** 身長 */

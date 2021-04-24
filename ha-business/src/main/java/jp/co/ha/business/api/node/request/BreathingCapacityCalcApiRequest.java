@@ -12,7 +12,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
  *
  * @version 1.0.0
  */
-public class BreathingCapacityCalcRequest extends BaseNodeRequest
+public class BreathingCapacityCalcApiRequest extends BaseNodeApiRequest
         implements BaseApiRequest {
 
     /** 年齢 */
