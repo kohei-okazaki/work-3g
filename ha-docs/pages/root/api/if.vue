@@ -53,7 +53,7 @@ export default {
       ifs: [
         {
           name: "ログインAPI",
-          endpoint: "/root/api/login",
+          endpoint: "/api/root/login",
           httpMethod: "POST",
           description: "管理者サイトへログインするためのAPI",
           request: [
@@ -810,6 +810,71 @@ export default {
               byte: 1,
               description:
                 "<ul><li>0:ヘッダーをファイルに表示しない</li><li>1:ヘッダーをファイルに表示する</li></ul>",
+            },
+          ],
+        },
+
+        {
+          name: "アカウント情報編集API",
+          endpoint: "/api/root/account/{seq_user_id}",
+          httpMethod: "PUT",
+          description: "健康管理アプリのユーザを編集するAPI",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
+          request: [
+            {
+              physicalName: "mail_address",
+              logicalName: "メールアドレス",
+              required: true,
+              type: null,
+              layer: 1,
+              byte: 64,
+              description: "更新したいメールアドレスを指定",
+            },
+            {
+              physicalName: "password_expire",
+              logicalName: "パスワード有効期限",
+              required: true,
+              type: "YYYY/MM/DD",
+              layer: 1,
+              byte: null,
+              description: "更新したいパスワード有効期限を指定",
+            },
+          ],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "error",
+              logicalName: "エラー情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "message",
+              logicalName: "エラーメッセージ",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: 256,
+              description: "result='1'の場合、必須",
             },
           ],
         },
@@ -2083,7 +2148,8 @@ export default {
               type: null,
               byte: null,
               layer: 1,
-              description: "権限マスタの権限名<ul><li>00:管理者権限</li><li>01:照会権限</li><li>02:作成権限</li></ul>",
+              description:
+                "権限マスタの権限名<ul><li>00:管理者権限</li><li>01:照会権限</li><li>02:作成権限</li></ul>",
             },
             {
               physicalName: "value",

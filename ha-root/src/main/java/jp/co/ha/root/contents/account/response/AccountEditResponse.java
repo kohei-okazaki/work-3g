@@ -1,14 +1,14 @@
-package jp.co.ha.root.contents.note.response;
+package jp.co.ha.root.contents.account.response;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
 
 /**
- * メモ情報削除APIレスポンス情報
+ * アカウント情報編集APIレスポンス
  *
  * @version 1.0.0
  */
-public class NoteDeleteApiResponse extends BaseRootApiResponse
+public class AccountEditResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
 }
