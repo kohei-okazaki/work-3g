@@ -213,7 +213,7 @@ export default {
           this.error.hasError = true;
           this.error.message = error;
           this.loading = false;
-          console.log("healthinfo [error]=" + error);
+          console.log("healthinfo list [error]=" + error);
           return error;
         }
       );
@@ -270,7 +270,7 @@ export default {
         (error) => {
           this.error.hasError = true;
           this.error.message = error;
-          console.log("[error]=" + error);
+          console.log("healthinfo edit [error]=" + error);
           return error;
         }
       );

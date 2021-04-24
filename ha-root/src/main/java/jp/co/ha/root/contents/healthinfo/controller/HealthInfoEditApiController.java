@@ -82,7 +82,9 @@ public class HealthInfoEditApiController extends
             @PathVariable(name = "seq_health_info_id", required = false) Optional<Long> seqHealthInfoId,
             @RequestBody HealthInfoEditApiRequest request) throws BaseException {
 
-        // TODO 妥当性チェック
+        if (seqHealthInfoId == null || !seqHealthInfoId.isPresent()) {
+            return getErrorResponse("seq_health_info_id is required");
+        }
 
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();

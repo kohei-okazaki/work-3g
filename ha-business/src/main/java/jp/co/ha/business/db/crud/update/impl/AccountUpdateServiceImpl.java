@@ -28,4 +28,11 @@ public class AccountUpdateServiceImpl implements AccountUpdateService {
         mapper.updateByPrimaryKey(entity);
     }
 
+    @Update
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateSelective(Account entity) {
+        mapper.updateByPrimaryKeySelective(entity);
+    }
+
 }

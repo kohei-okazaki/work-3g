@@ -15,7 +15,6 @@ import jp.co.ha.root.base.JsonEntity;
  *
  * @version 1.0.0
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiResponse {
 
     /** お知らせ情報リスト */
