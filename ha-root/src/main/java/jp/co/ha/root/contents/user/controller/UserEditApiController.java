@@ -86,14 +86,14 @@ public class UserEditApiController
      *     ユーザ編集APIリクエスト
      * @return ユーザ編集APIレスポンス
      */
-    @PutMapping(value = "user/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PutMapping(value = "user/{seq_login_id}", produces = {
+            MediaType.APPLICATION_JSON_VALUE })
     public UserEditApiResponse edit(
-            @PathVariable(name = "id", required = false) Optional<String> id,
+            @PathVariable(name = "seq_login_id", required = false) Optional<String> id,
             @RequestBody UserEditApiRequest request) {
-        // TODO 要実装
 
         if (id == null || !id.isPresent()) {
-            return getErrorResponse("ID is required");
+            return getErrorResponse("seq_login_id is required");
         }
 
         Long seqLoginId = Long.valueOf(id.get());

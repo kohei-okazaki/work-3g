@@ -17,4 +17,13 @@ public interface AccountUpdateService {
      */
     void update(Account entity);
 
+    /**
+     * 指定したアカウント情報を更新する<br>
+     * null項目は更新しない
+     *
+     * @param entity
+     *     アカウント情報
+     */
+    void updateSelective(Account entity);
+
 }
