@@ -21,7 +21,7 @@ import jp.co.ha.common.web.form.BaseRestApiRequest;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoRegistRequest extends BaseRestApiRequest
+public class HealthInfoRegistApiRequest extends BaseRestApiRequest
         implements BaseApiRequest {
 
     /** 身長 */

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;
@@ -63,7 +63,7 @@ public interface HealthInfoService {
      * @throws BaseException
      *     基底例外
      */
-    HealthInfoRegistResponse regist(HealthInfoDto dto, Long seqUserId)
+    HealthInfoRegistApiResponse regist(HealthInfoDto dto, Long seqUserId)
             throws BaseException;
 
     /**
@@ -74,7 +74,7 @@ public interface HealthInfoService {
      * @throws BaseException
      *     メール送信に失敗した場合
      */
-    void sendHealthInfoMail(HealthInfoRegistResponse apiResponse) throws BaseException;
+    void sendHealthInfoMail(HealthInfoRegistApiResponse apiResponse) throws BaseException;
 
     /**
      * CSV設定情報を取得する

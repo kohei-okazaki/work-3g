@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfo.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -91,7 +91,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     }
 
     @Override
-    public HealthInfoRegistResponse regist(HealthInfoDto dto, Long seqUserId)
+    public HealthInfoRegistApiResponse regist(HealthInfoDto dto, Long seqUserId)
             throws BaseException {
 
         // アカウント情報.APIキーを設定
@@ -108,12 +108,12 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(registApi.getApiName(), seqUserId, transactionId);
 
-        HealthInfoRegistRequest request = new HealthInfoRegistRequest();
+        HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
         BeanUtil.copy(dto, request);
         request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
 
-        HealthInfoRegistResponse apiResponse = registApi.callApi(request, apiConnectInfo);
+        HealthInfoRegistApiResponse apiResponse = registApi.callApi(request, apiConnectInfo);
 
         // API通信情報を更新
         apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
@@ -129,7 +129,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     }
 
     @Override
-    public void sendHealthInfoMail(HealthInfoRegistResponse apiResponse)
+    public void sendHealthInfoMail(HealthInfoRegistApiResponse apiResponse)
             throws BaseException {
         healthInfoMailService.sendHealthInfoMail(apiResponse);
     }

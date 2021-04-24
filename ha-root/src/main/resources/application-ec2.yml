@@ -1,11 +1,3 @@
-# Log設定
-logging:
-  file:
-    name: root-api.log
-    path: /home/admin/logs
-  level:
-    org.springframework: INFO
-    jp.co.ha: DEBUG
 front:
   # TODO URLを変更すること
   url: http://localhost:8083

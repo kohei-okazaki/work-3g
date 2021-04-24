@@ -10,7 +10,7 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
-public abstract class BaseNodeResponse {
+public abstract class BaseNodeApiResponse {
 
     /** 処理結果 */
     @JsonProperty("result")

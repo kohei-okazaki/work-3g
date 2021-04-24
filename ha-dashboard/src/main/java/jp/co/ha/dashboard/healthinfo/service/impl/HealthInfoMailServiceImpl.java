@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistResponse;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -31,7 +31,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
     private AwsSesComponent sesComponent;
 
     @Override
-    public void sendHealthInfoMail(HealthInfoRegistResponse apiResponse)
+    public void sendHealthInfoMail(HealthInfoRegistApiResponse apiResponse)
             throws BaseException {
 
         Long seqUserId = apiResponse.getAccount().getSeqUserId();

@@ -13,7 +13,7 @@ import jp.co.ha.common.web.form.BaseApiResponse;
  *
  * @version 1.0.0
  */
-public class BasicHealthInfoCalcResponse extends BaseNodeResponse
+public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         implements BaseApiResponse {
 
     /** 基礎健康情報 */

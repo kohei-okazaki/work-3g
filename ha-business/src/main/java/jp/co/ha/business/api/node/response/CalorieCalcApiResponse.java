@@ -14,7 +14,7 @@ import jp.co.ha.common.web.form.BaseApiResponse;
  *
  * @version 1.0.0
  */
-public class CalorieCalcResponse extends BaseNodeResponse implements BaseApiResponse {
+public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseApiResponse {
 
     /** カロリー計算結果情報 */
     @JsonProperty("calorie_calc_result")

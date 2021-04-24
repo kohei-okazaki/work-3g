@@ -1,7 +1,7 @@
 package jp.co.ha.business.api.healthinfo.service;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceResponse;
+import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceApiRequest;
+import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceApiResponse;
 import jp.co.ha.common.web.service.BaseRestApiService;
 
 /**
@@ -10,6 +10,6 @@ import jp.co.ha.common.web.service.BaseRestApiService;
  * @version 1.0.0
  */
 public interface HealthInfoReferenceService extends
-        BaseRestApiService<HealthInfoReferenceRequest, HealthInfoReferenceResponse> {
+        BaseRestApiService<HealthInfoReferenceApiRequest, HealthInfoReferenceApiResponse> {
 
 }

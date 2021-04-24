@@ -8,6 +8,6 @@ import jp.co.ha.common.web.form.BaseRestApiRequest;
  *
  * @version 1.0.0
  */
-public class HealthCheckRequest extends BaseRestApiRequest implements BaseApiRequest {
+public class HealthCheckApiRequest extends BaseRestApiRequest implements BaseApiRequest {
 
 }
