@@ -1,36 +1,41 @@
 <template>
   <div>
-    <v-row justify="center">
+    <v-row>
       <v-col sm="12">
         <AppBreadCrumbs :items="breadcrumbs" />
       </v-col>
     </v-row>
-    <v-row justify="center">
+    <v-row>
       <v-col sm="12">
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
-    <v-row justify="center" align="center">
+    <v-row
+      align="center"
+      v-for="(link, i) in linkList"
+      :key="i"
+    >
       <v-col sm="12">
         <v-card>
-          <v-card-title>健康管理ダッシュボード</v-card-title>
+          <v-card-title>{{ link.name }}</v-card-title>
+          <v-divider />
           <v-card-text d-flex>
             <v-simple-table>
               <template v-slot:default>
-                <tr v-for="(link, i) in healthInfoDashboardLinks" :key="i">
+                <tr v-for="(env, i) in link.envList" :key="i">
                   <th>
-                    <div class="text-left">{{ link.name }}</div>
+                    <div class="text-left">{{ env.envName }}</div>
                   </th>
                   <td>
                     <v-btn
-                      :href="link.url"
+                      :href="env.url"
                       text
                       color="link"
                       min-height="20"
                       class="x-small post-link align-center py-1 px-2"
                       target="_blank"
                       rel="noopener noreferrer"
-                      >{{ link.url }}</v-btn
+                      >{{ env.url }}</v-btn
                     >
                   </td>
                 </tr>
@@ -40,57 +45,29 @@
         ></v-col
       >
     </v-row>
-    <v-row justify="center" align="center">
-      <v-col sm="12">
-        <v-card>
-          <v-card-title>管理者サイト</v-card-title>
-          <v-card-text d-flex>
-            <v-simple-table>
-              <template v-slot:default>
-                <tr v-for="(link, i) in rootAppLinks" :key="i">
-                  <th>
-                    <div class="text-left">{{ link.name }}</div>
-                  </th>
-                  <td>
-                    <v-btn
-                      :href="link.url"
-                      text
-                      color="link"
-                      min-height="20"
-                      class="x-small post-link align-center py-1 px-2"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >{{ link.url }}</v-btn
-                    >
-                  </td>
-                </tr>
-              </template>
-            </v-simple-table>
-          </v-card-text></v-card
-        ></v-col
-      >
-    </v-row>
-    <v-row justify="center" align="center">
+
+    <v-row align="center">
       <v-col sm="12">
         <v-card>
           <v-card-title>その他</v-card-title>
+          <v-divider />
           <v-card-text d-flex>
             <v-simple-table>
               <template v-slot:default>
-                <tr v-for="(link, i) in otherLinks" :key="i">
+                <tr v-for="(other, i) in otherList" :key="i">
                   <th>
-                    <div class="text-left">{{ link.name }}</div>
+                    <div class="text-left">{{ other.name }}</div>
                   </th>
                   <td>
                     <v-btn
-                      :href="link.url"
+                      :href="other.url"
                       text
                       color="link"
                       min-height="20"
                       class="x-small post-link align-center py-1 px-2"
                       target="_blank"
                       rel="noopener noreferrer"
-                      >{{ link.url }}</v-btn
+                      >{{ other.url }}</v-btn
                     >
                   </td>
                 </tr>
@@ -126,28 +103,36 @@ export default {
           href: "/locallink",
         },
       ],
-      healthInfoDashboardLinks: [
+      linkList: [
         {
-          name: "local環境",
-          url: "http://localhost:8080/login",
+          name: "健康管理ダッシュボード",
+          envList: [
+            {
+              envName: "local環境",
+              url: "http://localhost:8080/login",
+            },
+            {
+              envName: "EC2環境",
+              url:
+                "http://ec2-dashboard.ap-northeast-1.elasticbeanstalk.com/login",
+            },
+          ],
         },
         {
-          name: "EC2環境",
-          url:
-            "http://ec2-dashboard.ap-northeast-1.elasticbeanstalk.com/login",
+          name: "管理者サイト",
+          envList: [
+            {
+              envName: "local環境",
+              url: "http://localhost:8080/login",
+            },
+            {
+              envName: "EC2環境",
+              url: "",
+            },
+          ],
         },
       ],
-      rootAppLinks: [
-        {
-          name: "local環境",
-          url: "http://localhost:8083/login",
-        },
-        {
-          name: "EC2環境",
-          url: "",
-        },
-      ],
-      otherLinks: [
+      otherList: [
         {
           name: "Github",
           url: "https://github.com/kohei-okazaki/work-3g",
@@ -159,8 +144,7 @@ export default {
         },
         {
           name: "AWS",
-          url:
-            "https://aws.amazon.com/jp/",
+          url: "https://aws.amazon.com/jp/",
         },
       ],
     };

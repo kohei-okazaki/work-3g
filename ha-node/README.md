@@ -11,7 +11,7 @@ Node.js 14.16.0
 - トークン発行API：
     - 概要：Node健康情報計算APIのJWTを発行するAPI
     - URL：/token
-    - Method：Get
+    - Post
 
 - 基礎健康情報計算API：
     - 概要：基礎健康情報を計算するAPI

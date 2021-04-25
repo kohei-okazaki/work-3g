@@ -1,17 +1,17 @@
 <template>
   <div>
-    <v-row justify="center">
+    <v-row>
       <v-col class="text-center" sm="12">
         <AppBreadCrumbs :items="breadcrumbs" />
       </v-col>
     </v-row>
-    <v-row justify="center">
+    <v-row>
       <v-col class="text-left" sm="12">
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <v-card>
           <v-card-title class="text-subtitle-1">プロジェクト一覧</v-card-title>
@@ -43,7 +43,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <v-card>
           <v-card-title class="text-subtitle-1"
@@ -56,7 +56,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <v-card>
           <v-card-title class="text-subtitle-1"
@@ -69,7 +69,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <v-card>
           <v-card-title class="text-subtitle-1">EC2環境構成図</v-card-title>
@@ -80,7 +80,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <v-card>
           <v-card-title class="text-subtitle-1">使用言語一覧</v-card-title>
