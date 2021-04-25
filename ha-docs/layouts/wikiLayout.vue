@@ -84,6 +84,11 @@ export default {
         },
         {
           icon: "mdi-apps",
+          title: "接続先一覧",
+          to: "/wiki/dest",
+        },
+        {
+          icon: "mdi-apps",
           title: "健康情報計算方法",
           to: "/wiki/healthinfoCalc",
         },
