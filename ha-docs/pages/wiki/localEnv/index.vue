@@ -1,17 +1,17 @@
 <template>
   <div>
-    <v-row justify="center">
+    <v-row>
       <v-col class="text-center" sm="12">
         <AppBreadCrumbs :items="breadcrumbs" />
       </v-col>
     </v-row>
-    <v-row justify="center">
+    <v-row>
       <v-col class="text-left" sm="12">
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <v-alert text type="info" elevation="2" border="left">
           <div class="text-subtitle-1">概要</div>
@@ -22,7 +22,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <v-expansion-panels multiple>
           <v-expansion-panel>
