@@ -1,16 +1,16 @@
 <template>
   <div>
-    <v-row justify="center">
+    <v-row>
       <v-col sm="12">
         <AppBreadCrumbs :items="breadcrumbs" />
       </v-col>
     </v-row>
-    <v-row justify="center">
+    <v-row>
       <v-col sm="12">
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <div class="text-left">
           <v-expansion-panels multiple>
@@ -135,7 +135,8 @@
                         ha-db/src/main/resources/db/migrationに新しいバージョンのsqlファイルを作成
                       </p>
                       <p>
-                        ただし、ファイル内容はddl配下にsqlから自作でALTER ADD ~~を追加する
+                        ただし、ファイル内容はddl配下にsqlから自作でALTER ADD
+                        ~~を追加する
                       </p>
                       <p>カラム追加ページに基本の構文がある</p>
                     </li>

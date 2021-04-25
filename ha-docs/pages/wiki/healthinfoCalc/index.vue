@@ -1,16 +1,16 @@
 <template>
   <div>
-    <v-row justify="center">
+    <v-row>
       <v-col sm="12">
         <AppBreadCrumbs :items="breadcrumbs" />
       </v-col>
     </v-row>
-    <v-row justify="center">
+    <v-row>
       <v-col sm="12">
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
-    <v-row justify="center" align="center">
+    <v-row align="center">
       <v-col sm="12">
         <div class="text-center d-flex pb-4">
           <v-expansion-panels multiple>
