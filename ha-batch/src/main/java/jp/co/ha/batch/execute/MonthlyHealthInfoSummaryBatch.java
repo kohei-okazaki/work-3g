@@ -150,7 +150,6 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
         return healthInfoList.stream().map(e -> {
             MonthlyHealthInfoSummaryModel model = new MonthlyHealthInfoSummaryModel();
             BeanUtil.copy(e, model);
-            model.setSeqUserId(String.valueOf(e.getSeqUserId()));
             model.setHealthInfoRegDate(DateTimeUtil.toString(e.getHealthInfoRegDate(),
                     DateFormatType.YYYYMMDDHHMMSS));
             model.setRegDate(DateTimeUtil.toString(e.getRegDate(),
