@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * API接続に必要な情報を渡す用のBeanクラス<br>
  * 設定情報は以下とする
@@ -30,7 +32,7 @@ public class ApiConnectInfo {
     /** リクエストヘッダMap */
     private Map<String, String> headerMap = new HashMap<>();
     /** HTTPステータス */
-    private Integer httpStatus;
+    private HttpStatus httpStatus;
 
     /**
      * urlSupplierを返す
@@ -144,7 +146,7 @@ public class ApiConnectInfo {
      *
      * @return httpStatus
      */
-    public Integer getHttpStatus() {
+    public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
@@ -154,7 +156,7 @@ public class ApiConnectInfo {
      * @param httpStatus
      *     HTTPステータス
      */
-    public void setHttpStatus(Integer httpStatus) {
+    public void setHttpStatus(HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
     }
 
