@@ -57,6 +57,7 @@ export default {
           httpMethod: "POST",
           description:
             "Node APIに必要なトークン認証情報を取得するためのAPI",
+          url: "/node/api/token",
           headers: [
             {
               key: "Content-Type",
@@ -107,6 +108,7 @@ export default {
           endpoint: "/basic",
           httpMethod: "GET",
           description: "BMI・標準体重を計算するAPI",
+          url: "/node/api/basic",
           headers: [
             {
               key: "Content-Type",
@@ -205,6 +207,7 @@ export default {
           endpoint: "/calorie",
           httpMethod: "GET",
           description: "消費カロリーを計算するAPI",
+          url: "/node/api/calorie",
           headers: [
             {
               key: "Content-Type",
@@ -362,6 +365,7 @@ export default {
           endpoint: "/breath_capacity",
           httpMethod: "GET",
           description: "肺活量を計算するAPI",
+          url: "/node/api/breath_capacity",
           headers: [
             {
               key: "Content-Type",

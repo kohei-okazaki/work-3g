@@ -65,7 +65,7 @@ export default {
         {
           icon: "mdi-format-list-bulleted",
           title: "IF一覧",
-          to: "/root/api/if",
+          to: "/root/api/interface",
         },
         {
           icon: "mdi-api",
