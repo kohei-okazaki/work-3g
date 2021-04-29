@@ -10,7 +10,6 @@ BASE_DIR="/Applications/app/git/work-3g"
 # プロジェクトディレクトリ
 COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
-WEB_DIR=${BASE_DIR}"/ha-web"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
 BATCH_DIR=${BASE_DIR}"/ha-batch"
 API_DIR=${BASE_DIR}"/ha-api"
@@ -39,14 +38,6 @@ echo "------------------------------------------------------------------------"
 echo "END db project clean"
 echo "------------------------------------------------------------------------"
 
-echo "------------------------------------------------------------------------"
-echo "START web project clean"
-echo "------------------------------------------------------------------------"
-cd ${WEB_DIR}
-mvn clean
-echo "------------------------------------------------------------------------"
-echo "END web project clean"
-echo "------------------------------------------------------------------------"
 
 echo "------------------------------------------------------------------------"
 echo "START business project clean"
