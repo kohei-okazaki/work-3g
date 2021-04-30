@@ -32,11 +32,6 @@ cd %BASE_DIR%\ha-db
 call mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn install:install-file -Dfile=target\db-%ver%.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
-rem build web
-cd %BASE_DIR%\ha-web
-call mvn clean package -Dmaven.test.skip=true -P%profile%
-call mvn install:install-file -Dfile=target\web-%ver%.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-
 rem build business
 cd %BASE_DIR%\ha-business
 call mvn clean package -Dmaven.test.skip=true -P%profile%

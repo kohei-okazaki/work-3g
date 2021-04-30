@@ -68,8 +68,7 @@ public class EntityGenerator extends BaseGenerator {
                     });
 
             GenerateFile generateFile = new GenerateFile();
-            generateFile.setFileName(
-                    ToolUtil.toJavaFileName(table) + FileExtension.JAVA.getValue());
+            generateFile.setFileName(ToolUtil.toJavaFileName(table) + FileExtension.JAVA);
             generateFile.setData(ToolUtil.toStrJavaSource(source, prop));
             generateFile.setOutputPath(prop.getBaseDir() + FileSeparator.SYSTEM.getValue()
                     + GenerateType.ENTITY.getPath());

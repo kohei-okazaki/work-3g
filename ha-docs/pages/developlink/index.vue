@@ -10,11 +10,7 @@
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
-    <v-row
-      align="center"
-      v-for="(link, i) in linkList"
-      :key="i"
-    >
+    <v-row align="center" v-for="(link, i) in linkList" :key="i">
       <v-col sm="12">
         <v-card>
           <v-card-title>{{ link.name }}</v-card-title>
@@ -123,7 +119,7 @@ export default {
           envList: [
             {
               envName: "local環境",
-              url: "http://localhost:8080/login",
+              url: "http://localhost:8083/login",
             },
             {
               envName: "EC2環境",
@@ -153,14 +149,4 @@ export default {
 </script>
 
 <style scoped>
-.post-link {
-  display: inline-block;
-  word-break: break-all;
-  padding: 2px 8px;
-  border-radius: 5px;
-  text-transform: none !important;
-  white-space: normal;
-  max-width: calc(100% - 30px);
-  height: inherit !important;
-}
 </style>

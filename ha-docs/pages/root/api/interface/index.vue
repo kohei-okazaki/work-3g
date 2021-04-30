@@ -47,7 +47,7 @@ export default {
         {
           text: "IF一覧",
           disabled: true,
-          href: "/root/api/if",
+          href: "/root/api/interface",
         },
       ],
       ifs: [
@@ -56,6 +56,7 @@ export default {
           endpoint: "/api/root/login",
           httpMethod: "POST",
           description: "管理者サイトへログインするためのAPI",
+          url: "/root/api/login",
           request: [
             {
               physicalName: "seq_login_id",
@@ -117,6 +118,7 @@ export default {
           endpoint: "/api/root/top",
           httpMethod: "GET",
           description: "管理サイトTop画面情報の取得を行うAPI",
+          url: "/root/api/top",
           headers: [
             {
               key: "Content-Type",
@@ -224,6 +226,7 @@ export default {
           endpoint: "/api/root/top/healthinfo",
           httpMethod: "GET",
           description: "管理サイトTop画面情報の取得を行うAPI",
+          url: "/root/api/top/healthinfo",
           headers: [
             {
               key: "Content-Type",
@@ -305,6 +308,7 @@ export default {
           endpoint: "/api/root/top/acount",
           httpMethod: "GET",
           description: "管理サイトTop画面情報の取得を行うAPI",
+          url: "/root/api/top/acount",
           headers: [
             {
               key: "Content-Type",
@@ -386,6 +390,7 @@ export default {
           endpoint: "/api/root/user/{seq_login_id}",
           httpMethod: "GET",
           description: "管理サイトユーザ情報の取得を行うAPI",
+          url: "/root/api/user",
           headers: [
             {
               key: "Content-Type",
@@ -493,6 +498,7 @@ export default {
           endpoint: "/api/root/user/",
           httpMethod: "POST",
           description: "管理サイトユーザの作成を行うAPI",
+          url: "/root/api/user/entry",
           headers: [
             {
               key: "Content-Type",
@@ -564,6 +570,7 @@ export default {
           endpoint: "/api/root/user/{seq_login_id}",
           httpMethod: "PUT",
           description: "管理サイトユーザの編集を行うAPI",
+          url: "/root/api/user/edit",
           headers: [
             {
               key: "Content-Type",
@@ -652,6 +659,7 @@ export default {
           endpoint: "/api/root/account",
           httpMethod: "GET",
           description: "健康管理アプリのユーザの一覧を取得するAPI",
+          url: "/root/api/account",
           headers: [
             {
               key: "Content-Type",
@@ -819,6 +827,7 @@ export default {
           endpoint: "/api/root/account/{seq_user_id}",
           httpMethod: "PUT",
           description: "健康管理アプリのユーザを編集するAPI",
+          url: "/root/api/account/edit",
           headers: [
             {
               key: "Content-Type",
@@ -884,6 +893,7 @@ export default {
           endpoint: "/api/root/apidata",
           httpMethod: "GET",
           description: "健康管理APIの実行履歴一覧を取得するAPI",
+          url: "/root/api/apidata",
           headers: [
             {
               key: "Content-Type",
@@ -1028,6 +1038,7 @@ export default {
           endpoint: "/api/root/healthinfo",
           httpMethod: "GET",
           description: "健康管理アプリのユーザの健康情報一覧を取得するAPI",
+          url: "/root/api/healthinfo",
           headers: [
             {
               key: "Content-Type",
@@ -1201,6 +1212,7 @@ export default {
           endpoint: "/api/root/healthinfo/{seq_health_info_id}",
           httpMethod: "PUT",
           description: "健康管理アプリのユーザの健康情報を更新するAPI",
+          url: "/root/api/healthinfo/edit",
           headers: [
             {
               key: "Content-Type",
@@ -1272,6 +1284,7 @@ export default {
           endpoint: "/api/root/news",
           httpMethod: "GET",
           description: "健康管理アプリのお知らせ情報一覧を取得するAPI",
+          url: "/root/api/news",
           headers: [
             {
               key: "Content-Type",
@@ -1390,6 +1403,7 @@ export default {
           endpoint: "/api/root/news",
           httpMethod: "POST",
           description: "健康管理アプリのお知らせ情報を登録するAPI",
+          url: "/root/api/news/entry",
           headers: [
             {
               key: "Content-Type",
@@ -1564,6 +1578,7 @@ export default {
           endpoint: "/api/root/news/{id}",
           httpMethod: "PUT",
           description: "健康管理アプリのお知らせ情報を変更するAPI",
+          url: "/root/api/news/edit",
           headers: [
             {
               key: "Content-Type",
@@ -1747,6 +1762,7 @@ export default {
           endpoint: "/api/root/news/{id}",
           httpMethod: "DELETE",
           description: "健康管理アプリのお知らせ情報を削除するAPI",
+          url: "/root/api/news/delete",
           headers: [
             {
               key: "Content-Type",
@@ -1801,6 +1817,7 @@ export default {
           endpoint: "/api/root/note",
           httpMethod: "GET",
           description: "管理者用サイトユーザのメモ情報一覧を返却するAPI",
+          url: "/root/api/note",
           headers: [
             {
               key: "Content-Type",
@@ -1910,6 +1927,7 @@ export default {
           endpoint: "/api/root/note",
           httpMethod: "POST",
           description: "管理者用サイトユーザのメモ情報一覧を登録するAPI",
+          url: "/root/api/note/entry",
           headers: [
             {
               key: "Content-Type",
@@ -1984,6 +2002,7 @@ export default {
           endpoint: "/api/root/note/{seq_root_user_note_info_id}",
           httpMethod: "PUT",
           description: "管理者用サイトユーザのメモ情報一覧を編集するAPI",
+          url: "/root/api/note/edit",
           headers: [
             {
               key: "Content-Type",
@@ -2049,6 +2068,7 @@ export default {
           endpoint: "/api/root/note/{seq_root_user_note_info_id}",
           httpMethod: "DELETE",
           description: "管理者用サイトユーザのメモ情報一覧を削除するAPI",
+          url: "/root/api/note/delete",
           headers: [
             {
               key: "Content-Type",
@@ -2095,6 +2115,7 @@ export default {
           endpoint: "/api/root/roles",
           httpMethod: "GET",
           description: "管理者サイト権限マスタの一覧を返却するAPI",
+          url: "/root/api/roles",
           headers: [
             {
               key: "Content-Type",

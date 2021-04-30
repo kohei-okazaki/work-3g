@@ -10,7 +10,6 @@ BASE_DIR="/Applications/app/git/work-3g"
 # プロジェクトディレクトリ
 COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
-WEB_DIR=${BASE_DIR}"/ha-web"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
 BATCH_DIR=${BASE_DIR}"/ha-batch"
 API_DIR=${BASE_DIR}"/ha-api"
@@ -45,14 +44,6 @@ mvn install:install-file -Dfile=target/common-${JAR_VERSION}.jar -DgroupId=jp.co
 cd ${DB_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 mvn install:install-file -Dfile=target/db-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=db -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
-
-
-########################################
-# build web
-########################################
-cd ${WEB_DIR}
-mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/web-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=web -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################

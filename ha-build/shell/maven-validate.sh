@@ -10,7 +10,6 @@ BASE_DIR="/Applications/app/git/work-3g"
 # プロジェクトディレクトリ
 COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
-WEB_DIR=${BASE_DIR}"/ha-web"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
 BATCH_DIR=${BASE_DIR}"/ha-batch"
 API_DIR=${BASE_DIR}"/ha-api"
@@ -37,16 +36,6 @@ cd ${DB_DIR}
 mvn validate
 echo "------------------------------------------------------------------------"
 echo "END db project validate"
-echo "------------------------------------------------------------------------"
-
-
-echo "------------------------------------------------------------------------"
-echo "START web project validate"
-echo "------------------------------------------------------------------------"
-cd ${WEB_DIR}
-mvn validate
-echo "------------------------------------------------------------------------"
-echo "END web project validate"
 echo "------------------------------------------------------------------------"
 
 

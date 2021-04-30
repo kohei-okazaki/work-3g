@@ -113,7 +113,8 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
 
-        HealthInfoRegistApiResponse apiResponse = registApi.callApi(request, apiConnectInfo);
+        HealthInfoRegistApiResponse apiResponse = registApi.callApi(request,
+                apiConnectInfo);
 
         // API通信情報を更新
         apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
@@ -138,10 +139,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     public CsvConfig getCsvConfig(HealthInfoFileSetting entity) throws BaseException {
 
         // ファイル名
-        String fileName = "healthInfoRegist_"
-                + DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)
-                + FileExtension.CSV.getValue();
+        String fileName = "healthInfoRegist_" + DateTimeUtil
+                .toString(DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)
+                + FileExtension.CSV;
         // ファイル出力先
         String path = null;
 

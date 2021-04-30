@@ -43,6 +43,7 @@ export default {
           name: "健康情報一括登録バッチ",
           description:
             "健康情報のJSONファイルをもとに健康情報を一括登録するバッチ",
+          url: "/healthinfoapp/batch/healthinfo/regist",
           crons: ["毎日 10:00:00"],
           args: [],
         },
@@ -50,6 +51,7 @@ export default {
           name: "月次健康情報集計バッチ",
           description:
             "健康情報テーブルを月末に集計しS3にアップロードするバッチ",
+          url: "/healthinfoapp/batch/healthinfo/monthlySummary",
           crons: ["毎月 1日 00:00:00"],
           args: [
             {
@@ -63,6 +65,7 @@ export default {
         {
           name: "ヘルスチェックバッチ",
           description: "健康管理APIサーバの起動状態を確認するバッチ",
+          url: "/healthinfoapp/batch/healthcheck",
           crons: ["毎時 00:00:00"],
           args: [],
         },

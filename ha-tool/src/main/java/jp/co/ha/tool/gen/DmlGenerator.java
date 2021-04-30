@@ -57,7 +57,7 @@ public class DmlGenerator extends BaseGenerator {
             }
 
             GenerateFile genFile = new GenerateFile();
-            genFile.setFileName(table + FileExtension.SQL.getValue());
+            genFile.setFileName(table + FileExtension.SQL);
             genFile.setData(sj.toString());
             genFile.setOutputPath(prop.getBaseDir() + FileSeparator.SYSTEM.getValue()
                     + GenerateType.DML.getPath());
