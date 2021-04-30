@@ -13,7 +13,7 @@ import jp.co.ha.common.log.annotation.Mask;
 public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
 
     /** ユーザID */
-    private String seqUserId;
+    private Long seqUserId;
     /** 身長 */
     @Mask
     private BigDecimal height;
@@ -31,7 +31,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     /** 健康情報登録日時 */
     private String healthInfoRegDate;
     /** BMI範囲マスタID */
-    private Integer seqBmiRangeMtId;
+    private Long seqBmiRangeMtId;
     /** 更新日時 */
     private String updateDate;
     /** 登録日時 */
@@ -42,7 +42,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
      *
      * @return seqUserId
      */
-    public String getSeqUserId() {
+    public Long getSeqUserId() {
         return seqUserId;
     }
 
@@ -52,7 +52,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
      * @param seqUserId
      *     ユーザID
      */
-    public void setSeqUserId(String seqUserId) {
+    public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;
     }
 
@@ -175,7 +175,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
      *
      * @return seqBmiRangeMtId
      */
-    public Integer getSeqBmiRangeMtId() {
+    public Long getSeqBmiRangeMtId() {
         return seqBmiRangeMtId;
     }
 
@@ -185,7 +185,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
      * @param seqBmiRangeMtId
      *     BMI範囲マスタID
      */
-    public void setSeqBmiRangeMtId(Integer seqBmiRangeMtId) {
+    public void setSeqBmiRangeMtId(Long seqBmiRangeMtId) {
         this.seqBmiRangeMtId = seqBmiRangeMtId;
     }
 

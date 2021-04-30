@@ -63,7 +63,7 @@ public class CreateTableGenerator extends BaseGenerator {
             body.add(");");
 
             GenerateFile generateFile = new GenerateFile();
-            generateFile.setFileName(tableName + FileExtension.SQL.getValue());
+            generateFile.setFileName(tableName + FileExtension.SQL);
             generateFile.setData(body.toString());
             generateFile.setOutputPath(prop.getBaseDir() + FileSeparator.SYSTEM.getValue()
                     + GenerateType.DDL.getPath());

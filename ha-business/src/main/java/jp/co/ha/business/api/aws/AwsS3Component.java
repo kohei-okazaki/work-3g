@@ -20,6 +20,8 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectsRequest;
+import com.amazonaws.services.s3.model.DeleteObjectsResult;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -233,6 +235,23 @@ public class AwsS3Component {
     public void putFileByInputStream(AwsS3Key key, long length, InputStream is)
             throws BaseException {
         this.putFile(key.getValue(), length, is);
+    }
+
+    /**
+     * 指定されたS3キーのファイルを削除する
+     *
+     * @param keys
+     *     S3キー
+     */
+    public void removeS3ObjectByKeys(String... keys) {
+
+        // List<KeyVersion> deleteList = Stream.of(keys).map(KeyVersion::new)
+        // .collect(Collectors.toList());
+        // ファイル削除
+        @SuppressWarnings("unused")
+        DeleteObjectsResult result = getAmazonS3()
+                .deleteObjects(
+                        new DeleteObjectsRequest(awsConfig.getBacket()).withKeys(keys));
     }
 
     /**

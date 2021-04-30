@@ -7,6 +7,18 @@
       <v-expansion-panel-content class="text-body-2">
         <div>{{ batchItem.description }}</div>
         <br />
+        <div>
+          <v-btn
+            :href="batchItem.url"
+            text
+            color="link"
+            min-height="20"
+            class="x-small post-link align-center py-1 px-2"
+            target="_blank"
+            rel="noopener noreferrer"
+            >処理フロー</v-btn
+          >はこちら
+        </div>
         <v-alert border="left" type="info">起動タイミング</v-alert>
         <v-simple-table>
           <thead>

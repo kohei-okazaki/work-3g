@@ -33,6 +33,7 @@ import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
@@ -49,6 +50,9 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("healthinfofile")
 public class HealthInfoFileRegistController
         implements BaseWizardController<HealthInfoFileForm> {
+
+    /** 健康情報登録ファイルPrefix */
+    private static final String FILE_NAME_PREFIX = "healthinfo-file-regist/";
 
     /** 健康情報CSVアップロードサービス */
     @Autowired
@@ -110,7 +114,7 @@ public class HealthInfoFileRegistController
                 .readMultipartFile(form.getMultipartFile(), Charset.UTF_8);
 
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                DateFormatType.YYYYMMDDHHMMSS_NOSEP) + ".csv";
+                DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV;
         awsS3Component.putFile(
                 AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId + "/" + fileName,
                 form.getMultipartFile());
@@ -119,8 +123,8 @@ public class HealthInfoFileRegistController
         fileService.formatCheck(modelList, seqUserId);
 
         // アップロードファイル名を設定
-        sessionComponent.setValue(request.getSession(),
-                "healthinfo-file-regist/" + seqUserId, fileName);
+        sessionComponent.setValue(request.getSession(), FILE_NAME_PREFIX + seqUserId,
+                fileName);
 
         model.addAttribute("modelList", modelList);
         model.addAttribute("count", modelList.size());
@@ -138,11 +142,11 @@ public class HealthInfoFileRegistController
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         String fileName = sessionComponent
-                .getValue(request.getSession(), "healthinfo-file-regist/" + seqUserId,
+                .getValue(request.getSession(), FILE_NAME_PREFIX + seqUserId,
                         String.class)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "リクエスト情報が不正です セッションキー"
-                                + "healthinfo-file-regist/" + seqUserId + "が存在しない"));
+                                + FILE_NAME_PREFIX + seqUserId + "が存在しない"));
 
         // S3から健康情報CSVファイルを取得
         InputStream is = awsS3Component
@@ -158,11 +162,10 @@ public class HealthInfoFileRegistController
 
         ResultType result = fileService.regist(modelList, seqUserId);
 
-        sessionComponent.removeValue(request.getSession(),
-                "healthinfo-file-regist/" + seqUserId);
+        sessionComponent.removeValue(request.getSession(), FILE_NAME_PREFIX + seqUserId);
 
         if (ResultType.FAILURE == result) {
-            // TODO DB登録成功時、S3から登録ファイルを削除
+            awsS3Component.removeS3ObjectByKeys(FILE_NAME_PREFIX + seqUserId);
         }
 
         return getView(model, DashboardView.HEALTH_INFO_FILE_COMPLETE);
