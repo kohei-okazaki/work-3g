@@ -14,6 +14,7 @@ import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse.BasicHealthInfo;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
+import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
@@ -55,6 +56,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
+    /** API通信情報Component */
+    @Autowired
+    private ApiCommunicationDataComponent apiCommunicationDataComponent;
     /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
@@ -72,6 +76,12 @@ public class HealthInfoRegistServiceImpl extends CommonService
     @Override
     public void execute(HealthInfoRegistApiRequest request,
             HealthInfoRegistApiResponse response) throws BaseException {
+
+        if (request.getTransactionId() == null) {
+            // API通信情報.トランザクションIDを採番
+            Long transactionId = apiCommunicationDataComponent.getTransactionId();
+            request.setTransactionId(transactionId);
+        }
 
         // トークン発行API実施
         TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(

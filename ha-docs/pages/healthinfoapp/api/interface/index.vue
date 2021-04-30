@@ -56,6 +56,7 @@ export default {
           endpoint: "/api/{seqUserId}/healthinfo",
           httpMethod: "POST",
           description: "ユーザの健康情報を登録するAPI",
+          url: "/healthinfoapp/api/healthinfo/regist",
           headers: [
             {
               key: "Accept-Charset",
@@ -239,6 +240,7 @@ export default {
           endpoint: "/api/{seqUserId}/healthinfo/{seqHealthInfoId}",
           httpMethod: "GET",
           description: "ユーザの健康情報を参照するAPI",
+          url: "/healthinfoapp/api/healthinfo/refer",
           headers: [
             {
               key: "Accept-Charset",
@@ -361,6 +363,7 @@ export default {
           endpoint: "/api/healthcheck",
           httpMethod: "GET",
           description: "APIサーバ起動しているかをチェックするAPI",
+          url: "/healthinfoapp/api/healthcheck",
           headers: [
             {
               key: "Accept-Charset",

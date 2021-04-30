@@ -5,7 +5,7 @@ export const state = () => ({
       columns: [{
           logicalName: "健康情報ID",
           physicalName: "SEQ_HEALTH_INFO_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -15,7 +15,7 @@ export const state = () => ({
         {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -85,7 +85,7 @@ export const state = () => ({
         {
           logicalName: "BMI範囲マスタID",
           physicalName: "SEQ_BMI_RANGE_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -120,7 +120,7 @@ export const state = () => ({
       columns: [{
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -215,7 +215,7 @@ export const state = () => ({
       columns: [{
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: false,
@@ -290,7 +290,7 @@ export const state = () => ({
       columns: [{
           logicalName: "BMI範囲マスタID",
           physicalName: "SEQ_BMI_RANGE_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -300,7 +300,7 @@ export const state = () => ({
         {
           logicalName: "範囲下限",
           physicalName: "RANGE_MIN",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -310,7 +310,7 @@ export const state = () => ({
         {
           logicalName: "範囲上限",
           physicalName: "RANGE_MAX",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -355,7 +355,7 @@ export const state = () => ({
       columns: [{
           logicalName: "アカウント回復トークン情報ID",
           physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -365,7 +365,7 @@ export const state = () => ({
         {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -420,7 +420,7 @@ export const state = () => ({
       columns: [{
           logicalName: "API通信情報ID",
           physicalName: "SEQ_API_COMMUNICATION_DATA_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -440,7 +440,7 @@ export const state = () => ({
         {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -525,7 +525,7 @@ export const state = () => ({
       columns: [{
           logicalName: "管理者サイトユーザログイン情報ID",
           physicalName: "SEQ_ROOT_LOGIN_INFO_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -565,7 +565,7 @@ export const state = () => ({
         {
           logicalName: "管理者サイトユーザ権限管理マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -610,7 +610,7 @@ export const state = () => ({
       columns: [{
           logicalName: "管理者サイトユーザ権限管理マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -645,7 +645,7 @@ export const state = () => ({
       columns: [{
           logicalName: "管理者サイトユーザ権限詳細マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_DETAIL_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -655,7 +655,7 @@ export const state = () => ({
         {
           logicalName: "管理者サイトユーザ権限管理マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -665,7 +665,7 @@ export const state = () => ({
         {
           logicalName: "管理者サイト権限マスタID",
           physicalName: "SEQ_ROOT_ROLE_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: false,
           sequence: false,
@@ -700,7 +700,7 @@ export const state = () => ({
       columns: [{
           logicalName: "管理者サイト権限マスタID",
           physicalName: "SEQ_ROOT_ROLE_MT_ID",
-          type: "INT",
+          type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
@@ -722,6 +722,71 @@ export const state = () => ({
           physicalName: "ROLE_NAME",
           type: "VARCHAR",
           size: "64",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        }
+      ]
+    },
+    {
+      physicalName: "ROOT_USER_NOTE_INFO",
+      logicalName: "管理者サイトユーザメモ情報",
+      columns: [{
+          logicalName: "メモユーザ情報ID",
+          physicalName: "SEQ_ROOT_USER_NOTE_INFO_ID",
+          type: "BIGINT",
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "管理者サイトユーザログイン情報ID",
+          physicalName: "SEQ_ROOT_LOGIN_INFO_ID",
+          type: "BIGINT",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "件名",
+          physicalName: "TITLE",
+          type: "VARCHAR",
+          size: "30",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "S3キー",
+          physicalName: "S3_KEY",
+          type: "VARCHAR",
+          size: "100",
           primaryKey: false,
           sequence: false,
           crypt: false,

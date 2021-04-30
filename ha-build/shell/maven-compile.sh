@@ -10,7 +10,6 @@ BASE_DIR="/Applications/app/git/work-3g"
 # プロジェクトディレクトリ
 COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
-WEB_DIR=${BASE_DIR}"/ha-web"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
 BATCH_DIR=${BASE_DIR}"/ha-batch"
 API_DIR=${BASE_DIR}"/ha-api"
@@ -38,15 +37,6 @@ cd ${DB_DIR}
 mvn compile
 echo "------------------------------------------------------------------------"
 echo "END db project compile"
-echo "------------------------------------------------------------------------"
-
-echo "------------------------------------------------------------------------"
-echo "START web project compile"
-echo "------------------------------------------------------------------------"
-cd ${WEB_DIR}
-mvn compile
-echo "------------------------------------------------------------------------"
-echo "END web project compile"
 echo "------------------------------------------------------------------------"
 
 

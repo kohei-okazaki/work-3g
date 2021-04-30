@@ -77,7 +77,8 @@ public class ApiCommunicationDataComponent {
     public void update(ApiCommunicationData apiCommunicationData,
             ApiConnectInfo connectInfo, BaseNodeApiResponse response) {
 
-        apiCommunicationData.setHttpStatus(String.valueOf(connectInfo.getHttpStatus()));
+        apiCommunicationData
+                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         apiCommunicationData.setResult(response.getResult().getValue());
         apiCommunicationData.setDetail(response.getDetail());
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
@@ -98,7 +99,8 @@ public class ApiCommunicationDataComponent {
     public void update(ApiCommunicationData apiCommunicationData,
             ApiConnectInfo connectInfo, BaseRestApiResponse response) {
 
-        apiCommunicationData.setHttpStatus(String.valueOf(connectInfo.getHttpStatus()));
+        apiCommunicationData
+                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         apiCommunicationData.setResult(response.getResultType().getValue());
         String detail = null;
         if (response.getErrorInfo() != null) {

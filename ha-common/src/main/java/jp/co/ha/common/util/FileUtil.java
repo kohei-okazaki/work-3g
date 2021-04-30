@@ -363,6 +363,11 @@ public class FileUtil {
         public static FileExtension of(String value) {
             return BaseEnum.of(FileExtension.class, value);
         }
+
+        @Override
+        public String toString() {
+            return this.value;
+        }
     }
 
     /**

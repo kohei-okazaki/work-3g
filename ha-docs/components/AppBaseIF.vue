@@ -7,7 +7,7 @@
           <v-chip :color="getHttpMethodColor(ifItem.httpMethod)">
             <b>{{ ifItem.httpMethod }}</b>
           </v-chip>
-          <v-chip color="gray">
+          <v-chip>
             {{ ifItem.endpoint }}
           </v-chip>
         </template>
@@ -15,6 +15,18 @@
       <v-expansion-panel-content class="text-body-2">
         <div>{{ ifItem.description }}</div>
         <br />
+        <div>
+          <v-btn
+            :href="ifItem.url"
+            text
+            color="link"
+            min-height="20"
+            class="x-small post-link align-center py-1 px-2"
+            target="_blank"
+            rel="noopener noreferrer"
+            >処理フロー</v-btn
+          >はこちら
+        </div>
         <v-alert border="left" type="info">リクエストヘッダ</v-alert>
         <v-simple-table>
           <thead>

@@ -15,6 +15,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.note.request.NoteEntryApiRequest;
@@ -77,12 +78,11 @@ public class NoteEntryApiController
      * @return S3キー
      */
     private String getS3Key(Long seqRootLoginInfoId) {
-        return new StringJoiner("/")
+        return new StringJoiner(StringUtil.THRASH)
                 .add("note")
                 .add(seqRootLoginInfoId.toString())
                 .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)
-                        + FileExtension.TEXT.getValue())
+                        DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.TEXT)
                 .toString();
     }
 

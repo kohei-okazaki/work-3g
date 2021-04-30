@@ -144,9 +144,8 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
                     e);
         } finally {
             LOG.infoBean(response);
-            Integer intCode = (code == null) ? null : code.value();
-            LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + intCode);
-            apiConnectInfo.setHttpStatus(intCode);
+            LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code);
+            apiConnectInfo.setHttpStatus(code);
         }
 
         return response;
