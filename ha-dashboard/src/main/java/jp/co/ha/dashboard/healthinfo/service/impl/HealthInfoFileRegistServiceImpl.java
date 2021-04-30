@@ -87,10 +87,13 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         ResultType result = ResultType.SUCCESS;
         for (HealthInfoRegistApiRequest request : toRequestList(modelList)) {
 
+            // API通信情報.トランザクションIDを採番
+            Long transactionId = apiCommunicationDataComponent.getTransactionId();
+
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                    .create(registApi.getApiName(), seqUserId,
-                            apiCommunicationDataComponent.getTransactionId());
+                    .create(registApi.getApiName(), seqUserId, transactionId);
+            request.setTransactionId(transactionId);
 
             HealthInfoRegistApiResponse response = registApi.callApi(request,
                     apiConnectInfo);

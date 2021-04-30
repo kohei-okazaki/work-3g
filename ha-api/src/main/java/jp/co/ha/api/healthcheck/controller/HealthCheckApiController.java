@@ -17,7 +17,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
  */
 @RestController
 @RequestMapping(value = "/api/healthcheck")
-public class HealthCheckController
+public class HealthCheckApiController
         extends BaseRestController<HealthCheckApiRequest, HealthCheckApiResponse> {
 
     /**

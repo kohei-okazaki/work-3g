@@ -23,7 +23,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
  */
 @RestController
 @RequestMapping(value = "/api/{seqUserId}/healthinfo")
-public class HealthInfoRegistController extends
+public class HealthInfoRegistApiController extends
         BaseRestController<HealthInfoRegistApiRequest, HealthInfoRegistApiResponse> {
 
     /** 健康情報登録サービス */

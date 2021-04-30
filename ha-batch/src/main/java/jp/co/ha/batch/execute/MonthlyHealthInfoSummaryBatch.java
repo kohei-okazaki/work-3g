@@ -174,7 +174,7 @@ public class MonthlyHealthInfoSummaryBatch extends BaseBatch {
     private File writeCsv(String targetDate,
             List<MonthlyHealthInfoSummaryModel> modelList) throws BaseException {
 
-        String fileName = targetDate + FileExtension.CSV.getValue();
+        String fileName = targetDate + FileExtension.CSV;
         File file = new File(prop.getMonthlySummaryBatchFilePath()
                 + FileSeparator.SYSTEM.getValue() + fileName);
         CsvConfig conf = new CsvConfigBuilder(fileName,
