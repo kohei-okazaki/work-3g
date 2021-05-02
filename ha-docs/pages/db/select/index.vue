@@ -70,11 +70,7 @@
       </v-row>
       <v-row v-if="sql != null">
         <v-col class="text-left" sm="12">
-          <v-textarea
-            label="SQL"
-            v-model="sql"
-            readonly
-          ></v-textarea>
+          <v-textarea label="SQL" v-model="sql" readonly />
         </v-col>
       </v-row>
     </v-form>
