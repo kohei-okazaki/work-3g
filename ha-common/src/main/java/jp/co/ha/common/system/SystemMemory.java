@@ -9,6 +9,10 @@ import java.text.DecimalFormat;
  */
 public class SystemMemory {
 
+    /** 使用量フォーマット */
+    private static final DecimalFormat USAGE_FORMAT = new DecimalFormat("#,###KB");
+    /** 使用率フォーマット */
+    private static final DecimalFormat RATE_FORMAT = new DecimalFormat("##.#");
     /** SystemMemory */
     private static SystemMemory instance = new SystemMemory();
 
@@ -27,10 +31,9 @@ public class SystemMemory {
      * @return メモリ使用量
      */
     public String getMemoryUsage() {
-        DecimalFormat usedFormat = new DecimalFormat("#,###KB");
         Long free = Runtime.getRuntime().freeMemory() / 1024;
         Long total = Runtime.getRuntime().totalMemory() / 1024;
-        return usedFormat.format(total - free);
+        return USAGE_FORMAT.format(total - free);
     }
 
     /**
@@ -39,12 +42,11 @@ public class SystemMemory {
      * @return メモリ使用量(%)
      */
     public String getMemoryUsageRate() {
-        DecimalFormat usedFormat = new DecimalFormat("##.#");
         Long free = Runtime.getRuntime().freeMemory() / 1024;
         Long total = Runtime.getRuntime().totalMemory() / 1024;
         Long used = total - free;
-        double ratio = (used * 100 / total.doubleValue());
-        return usedFormat.format(ratio);
+        double rate = (used * 100 / total.doubleValue());
+        return RATE_FORMAT.format(rate);
     }
 
 }

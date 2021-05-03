@@ -10,20 +10,20 @@ Node.js 14.16.0
 
 - トークン発行API：
     - 概要：Node健康情報計算APIのJWTを発行するAPI
-    - URL：/token
+    - エンドポイント：/token
     - Post
 
 - 基礎健康情報計算API：
     - 概要：基礎健康情報を計算するAPI
-    - URL：/basic
+    - エンドポイント：/basic
     - Method：Get
 
 - 肺活量計算API：
     - 概要：肺活量計算を計算するAPI
-    - URL：/breathing_capacity
+    - エンドポイント：/breathing\_capacity
     - Method：Get
 
 - カロリー計算API：
     - 概要：カロリーを計算するAPI
-    - URL：/calorie
+    - エンドポイント：/calorie
     - Method：Get

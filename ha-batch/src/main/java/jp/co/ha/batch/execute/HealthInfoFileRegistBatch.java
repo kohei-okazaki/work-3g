@@ -103,7 +103,11 @@ public class HealthInfoFileRegistBatch extends BaseBatch {
             }
 
             // アカウント情報.APIキーを設定
-            Account account = accountSearchService.findById(request.getSeqUserId()).get();
+            Account account = accountSearchService.findById(request.getSeqUserId())
+                    .orElseThrow(() -> {
+                        return new BusinessException(CommonErrorCode.DB_NO_DATA,
+                                "アカウント情報が存在しません.seq_user_id=" + request.getSeqUserId());
+                    });
 
             ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
                     .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
