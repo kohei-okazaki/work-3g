@@ -67,11 +67,39 @@ public class DashboardBreadcrumbViewFactory {
      * @return パンくずリスト情報View
      */
     public static BreadcrumbView getHealthInfoReference() {
+        return getHealthInfoReference(true);
+    }
+
+    /**
+     * 健康情報照会画面のパンくずリスト情報Viewを返す
+     *
+     * @param isCurrent
+     *     現在地
+     * @return パンくずリスト情報View
+     */
+    public static BreadcrumbView getHealthInfoReference(boolean isCurrent) {
         BreadcrumbView view = getTop(false);
 
         Breadcrumb healthInfoRef = new Breadcrumb();
         healthInfoRef.setViewName("健康情報照会");
         healthInfoRef.setUrl("/healthinforeference/index");
+        healthInfoRef.setCurrent(isCurrent);
+        view.addBreadcrumb(healthInfoRef);
+
+        return view;
+    }
+
+    /**
+     * 健康情報詳細画面のパンくずリスト情報Viewを返す
+     *
+     * @return パンくずリスト情報View
+     */
+    public static BreadcrumbView getHealthInfoDetail() {
+        BreadcrumbView view = getHealthInfoReference(false);
+
+        Breadcrumb healthInfoRef = new Breadcrumb();
+        healthInfoRef.setViewName("健康情報詳細");
+        healthInfoRef.setUrl("/healthinforeference/detail");
         healthInfoRef.setCurrent(true);
         view.addBreadcrumb(healthInfoRef);
 

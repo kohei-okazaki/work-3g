@@ -121,13 +121,13 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.5",
+          version: "5.3.6",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Spring Boot",
-          version: "2.4.3",
+          version: "2.4.5",
           description: "管理者APIで使用するWeb FW",
           projects: ["rootapi"],
         },
@@ -145,7 +145,7 @@ export default {
         },
         {
           name: "Jackson",
-          version: "2.12.2",
+          version: "2.12.3",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
@@ -176,21 +176,21 @@ export default {
         },
         {
           name: "mysql",
-          version: "8.0.23",
+          version: "8.0.24",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するMySQLライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "mybatis",
-          version: "3.5.6",
+          version: "3.5.7",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
         {
           name: "flyway",
-          version: "7.7.3",
+          version: "7.8.2",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
