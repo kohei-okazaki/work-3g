@@ -30,9 +30,9 @@ public enum DashboardView implements BaseView {
     /** 健康情報照会画面 */
     HEALTH_INFO_REFERNCE("healthinforeference/index", "/healthinforeference/index",
             DashboardBreadcrumbViewFactory.getHealthInfoReference()),
-    /** 健康情報照会画面 */
+    /** 健康情報詳細画面 */
     HEALTH_INFO_REF_DETAIL("healthinforeference/detail", "/healthinforeference/detail",
-            DashboardBreadcrumbViewFactory.getHealthInfoReference()),
+            DashboardBreadcrumbViewFactory.getHealthInfoDetail()),
 
     /** アカウント設定入力画面 */
     ACCOUNT_SETTING_INPUT("accountsetting/input", "/accountsetting/input",
