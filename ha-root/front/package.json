@@ -4,12 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "nuxt --port 8083",
-    "build": "nuxt build",
-    "build:stg": "cross-env NODE_ENV=\"stg\" nuxt build",
-    "build:production": "cross-env NODE_ENV=\"production\" nuxt build",
-    "start": "nuxt start",
-    "start:stg": "cross-env NODE_ENV=\"stg\" nuxt start",
-    "start:production": "cross-env NODE_ENV=\"production\" nuxt start",
+    "build:local": "cross-env NODE_ENV=\"local\" nuxt build",
+    "build:ec2": "cross-env NODE_ENV=\"ec2\" nuxt build",
+    "start:local": "cross-env NODE_ENV=\"local\" nuxt start --port 8083",
+    "start:ec2": "cross-env NODE_ENV=\"ec2\" nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {

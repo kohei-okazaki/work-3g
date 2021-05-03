@@ -25,6 +25,9 @@ $ npm uninstall パッケージ --save-dev
 # Dependenciesからの削除
 $ npm uninstall パッケージ --save
 
+# module update
+$ vue ui
+
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
