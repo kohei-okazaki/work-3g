@@ -37,18 +37,11 @@
     </v-row>
     <v-row v-if="isRefShow">
       <v-col>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="検索条件"
-          single-line
-          hide-details
-        ></v-text-field>
         <v-data-table
           :headers="headers"
           :items="apiDataList"
-          :search="search"
           class="pushable"
+          hide-default-footer=true
           @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
@@ -62,6 +55,11 @@
           </template>
         </v-data-table>
         <AppLoading :loading="loading" />
+        <v-pagination
+          v-model="paging.page"
+          :length="paging.totalPage"
+          @input="pageChange()"
+        />
       </v-col>
     </v-row>
   </div>
@@ -90,7 +88,6 @@ export default {
       loading: false,
       isRefShow: false,
       timelines: [],
-      search: "",
       apiDataList: [],
       headers: [
         {
@@ -130,6 +127,12 @@ export default {
           value: "response_date",
         },
       ],
+      paging: {
+        // 現在のページ数
+        page: 0,
+        // 総ページ数
+        totalPage: 0,
+      },
     };
   },
   created: function () {
@@ -183,16 +186,21 @@ export default {
       }
       this.isRefShow = false;
     },
-    getApiDataList: function () {
+    getApiDataList: function (page) {
       this.loading = true;
       // 保存済のAPIトークンを取得
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      axios.get(url, { headers }).then(
+      // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
+      let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
+      axios.get(reqUrl, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
             this.apiDataList = response.data.api_data_list;
+            // APIは0~、frontは1~なのでfrontに合わせAPIの戻り値に+1
+            this.paging.page = response.data.paging.current_page_num + 1;
+            this.paging.totalPage = response.data.paging.total_page;
           } else {
             this.error.hasError = true;
             this.error.message = response.data.error.message;
@@ -207,6 +215,12 @@ export default {
           return error;
         }
       );
+    },
+    /**
+     * ページ切り替え処理
+     */
+    pageChange: function () {
+      this.getApiDataList(this.paging.page);
     },
   },
   computed: {

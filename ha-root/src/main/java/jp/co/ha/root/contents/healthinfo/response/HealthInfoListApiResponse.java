@@ -10,9 +10,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.web.form.BaseApiResponse;
+import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
-import jp.co.ha.root.base.JsonEntity;;
 
 /**
  * 健康情報一覧取得APIレスポンスクラス
@@ -26,6 +27,10 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
     @JsonProperty("health_info_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<HealthInfoResponse> healthInfoResponseList;
+    /** ページング */
+    @JsonProperty("paging")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private PagingView paging;
 
     /**
      * healthInfoResponseListを返す
@@ -45,6 +50,25 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
     public void setHealthInfoResponseList(
             List<HealthInfoResponse> healthInfoResponseList) {
         this.healthInfoResponseList = healthInfoResponseList;
+    }
+
+    /**
+     * pagingを返す
+     *
+     * @return paging
+     */
+    public PagingView getPaging() {
+        return paging;
+    }
+
+    /**
+     * pagingを設定する
+     *
+     * @param paging
+     *     ページング
+     */
+    public void setPaging(PagingView paging) {
+        this.paging = paging;
     }
 
     /**

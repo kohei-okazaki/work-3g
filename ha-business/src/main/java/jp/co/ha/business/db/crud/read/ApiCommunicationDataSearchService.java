@@ -2,6 +2,7 @@ package jp.co.ha.business.db.crud.read;
 
 import java.util.List;
 
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
@@ -14,9 +15,11 @@ public interface ApiCommunicationDataSearchService {
     /**
      * API通信情報を検索する
      *
+     * @param selectOption
+     *     {@linkplain SelectOption}
      * @return API通信情報のリスト
      */
-    List<ApiCommunicationData> findAll();
+    List<ApiCommunicationData> findAll(SelectOption selectOption);
 
     /**
      * トランザクションIDの最大値を取得する
@@ -24,4 +27,13 @@ public interface ApiCommunicationDataSearchService {
      * @return トランザクションIDの最大値
      */
     Long selectLastTransactionId();
+
+    /**
+     * 指定されたAPI通信情報IDのAPI通信情報の件数を返す
+     *
+     * @param seqApiCommunicationDataId
+     *     API通信情報ID
+     * @return API通信情報の件数
+     */
+    long countBySeqApiCommunicationDataId(Long seqApiCommunicationDataId);
 }

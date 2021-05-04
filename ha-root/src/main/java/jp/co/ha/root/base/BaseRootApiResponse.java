@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.type.RootApiResult;
 import jp.co.ha.root.type.RootApiResult.RootApiResultSerializer;
 

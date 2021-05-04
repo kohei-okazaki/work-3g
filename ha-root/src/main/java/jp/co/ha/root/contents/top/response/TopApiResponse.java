@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
+import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
-import jp.co.ha.root.base.JsonEntity;
 
 /**
  * Top情報取得APIレスポンスクラス

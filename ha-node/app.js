@@ -1,6 +1,5 @@
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dotenv = require('dotenv');
@@ -18,14 +17,31 @@ var app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-    extended : false
+  extended: false
 }));
 app.use(cookieParser());
 app.use('/token', tokenRouter);
 
+// .envをprocess.envに割当て
+dotenv.config();
+const setConfig = {
+  // ローカル環境用
+  local: {
+    name: "local環境",
+    port: 8084
+  },
+  // EC2環境用
+  ec2: {
+    name: "ec2環境",
+    port: 3000
+  }
+}
+const config = setConfig[process.env.ENV];
+console.log(config.name);
+
 // Token認証用フィルタ
-app.use(function(req, res, next) {
-    tokenUtil.token_auth(req, res, next);
+app.use(function (req, res, next) {
+  tokenUtil.token_auth(req, res, next);
 });
 
 app.use('/basic', basicRouter);
@@ -33,27 +49,23 @@ app.use('/calorie', calorieRouter);
 app.use('/breathing_capacity', breathingCapacityRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    next(createError(404));
+app.use(function (req, res, next) {
+  next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    // 環境ファイルを読込
-    dotenv.config();
-    console.log("環境名=" + process.env.ENV);
-
-    // render the error page
-    // res.status(err.status || 200);
-    let err_response = {
-        "status" : 1,
-        "detail" : errorMessage.fail_healthinfo_calc
-    }
-    res.json(err_response);
+  // render the error page
+  // res.status(err.status || 200);
+  let err_response = {
+    "status": 1,
+    "detail": errorMessage.fail_healthinfo_calc
+  }
+  res.json(err_response);
 });
 
 module.exports = app;
