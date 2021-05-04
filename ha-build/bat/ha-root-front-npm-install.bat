@@ -16,3 +16,5 @@ cd ../../ha-root/front
 
 rem nodeモジュールをインストール
 npm install
+
+cd %~dp0

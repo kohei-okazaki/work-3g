@@ -16,3 +16,5 @@ cd ../../ha-node
 
 rem nodeモジュールをアップデート
 npm update
+
+cd %~dp0

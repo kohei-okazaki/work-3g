@@ -30,6 +30,9 @@ public class ApiCommunicationDataSearchServiceImpl
     @Override
     public List<ApiCommunicationData> findAll() {
         ApiCommunicationDataExample example = new ApiCommunicationDataExample();
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("SEQ_API_COMMUNICATION_DATA_ID", SortType.DESC).build();
+        example.setOrderByClause(selectOption.getOrderBy());
         return mapper.selectByExample(example);
     }
 

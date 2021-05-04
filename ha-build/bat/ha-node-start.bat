@@ -15,3 +15,5 @@ cd ../../ha-node
 
 rem npmよりサーバ起動
 npm start
+
+cd %~dp0
