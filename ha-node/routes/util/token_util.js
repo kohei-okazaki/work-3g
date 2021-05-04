@@ -18,30 +18,30 @@ exports.key = "developer";
  * @param next
  *            Next
  */
-exports.token_auth = function(req, res, next) {
+exports.token_auth = function (req, res, next) {
 
-    try {
-        let token_data = req.headers['x-node-token'];
-        if (!token_data) {
-            // tokenが未指定の場合
-            return res.json({
-                "result" : 1,
-                "detail" : errorMessage.not_found_token
-            });
-        }
-
-        // token認証
-        jwt.verify(token_data, this.key, function(err, decoded) {
-            if (err) {
-                return res.json({
-                    "result" : 1,
-                    "detail" : errorMessage.invalid_token
-                });
-            }
-            req.decoded = decoded;
-            next();
-        });
-    } catch (Error) {
-        console.log(Error);
+  try {
+    let token_data = req.headers['x-node-token'];
+    if (!token_data) {
+      // tokenが未指定の場合
+      return res.json({
+        "result": 1,
+        "detail": errorMessage.not_found_token
+      });
     }
+
+    // token認証
+    jwt.verify(token_data, this.key, function (err, decoded) {
+      if (err) {
+        return res.json({
+          "result": 1,
+          "detail": errorMessage.invalid_token
+        });
+      }
+      req.decoded = decoded;
+      next();
+    });
+  } catch (Error) {
+    console.log(Error);
+  }
 }

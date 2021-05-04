@@ -40,7 +40,8 @@
     WHERE
       AC.SEQ_USER_ID = #{seqUserId,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" parameterType="jp.co.ha.db.entity.composite.CompositeAccountKey" resultMap="BaseResultMap">
+
+  <select id="selectAll" parameterType="jp.co.ha.db.entity.AccountExample" resultMap="BaseResultMap">
     SELECT
       <!-- ACCOUNT -->
       AC.SEQ_USER_ID
@@ -61,5 +62,8 @@
       ACCOUNT AC
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
         ON AC.SEQ_USER_ID = HF.SEQ_USER_ID
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
   </select>
 </mapper>

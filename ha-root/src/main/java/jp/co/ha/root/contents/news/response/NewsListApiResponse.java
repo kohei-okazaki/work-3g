@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
+import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
-import jp.co.ha.root.base.JsonEntity;
 
 /**
  * お知らせ情報一覧取得APIレスポンスクラス

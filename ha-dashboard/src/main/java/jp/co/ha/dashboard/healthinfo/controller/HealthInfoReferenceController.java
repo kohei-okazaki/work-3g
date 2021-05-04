@@ -46,9 +46,9 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
-import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoReferenceValidator;
@@ -155,7 +155,7 @@ public class HealthInfoReferenceController implements BaseWebController {
             return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
         }
 
-        // ページング情報を取得( 1ページあたりの表示件数は設定ファイルより取得)
+        // ページング情報を取得(1ページあたりの表示件数は設定ファイルより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
                 systemConfig.getPaging());
 

@@ -1,5 +1,7 @@
 package jp.co.ha.root.base;
 
+import jp.co.ha.common.web.form.JsonEntity;
+
 /**
  * RootAPI基底リクエストクラス
  *

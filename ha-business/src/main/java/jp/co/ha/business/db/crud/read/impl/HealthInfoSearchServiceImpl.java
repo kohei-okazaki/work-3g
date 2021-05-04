@@ -111,25 +111,17 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
         HealthInfoExample example = new HealthInfoExample();
         Criteria criteria = example.createCriteria();
-        // 健康情報ID
-        criteria.andSeqHealthInfoIdEqualTo(seqHealthInfoId);
-        // ユーザID
-        criteria.andSeqUserIdEqualTo(seqUserId);
+
+        if (seqHealthInfoId != null) {
+            // 健康情報ID
+            criteria.andSeqHealthInfoIdEqualTo(seqHealthInfoId);
+        }
+        if (seqUserId != null) {
+            // ユーザID
+            criteria.andSeqUserIdEqualTo(seqUserId);
+        }
 
         return mapper.countByExample(example);
-    }
-
-    @Select
-    @Override
-    @Transactional(readOnly = true)
-    public int getSelectCountBySeqUserId(Long seqUserId) {
-
-        HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
-        // ユーザID
-        criteria.andSeqUserIdEqualTo(seqUserId);
-
-        return (int) mapper.countByExample(example);
     }
 
     @Select
@@ -166,8 +158,16 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<CompositeHealthInfo> findHealthInfoDetailList() {
-        return compositeHealthInfoMapper.selectAll();
+    public List<CompositeHealthInfo> findHealthInfoDetailList(SelectOption selectOption) {
+
+        HealthInfoExample example = new HealthInfoExample();
+        example.setOrderByClause(selectOption.getOrderBy());
+
+        RowBounds rowBounds = new RowBounds(
+                (int) selectOption.getPageable().getOffset(),
+                selectOption.getPageable().getPageSize());
+
+        return compositeHealthInfoMapper.selectAll(example, rowBounds);
     }
 
     @Select
