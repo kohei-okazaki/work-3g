@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.composite.CompositeAccount;
 import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
@@ -58,9 +59,11 @@ public interface AccountSearchService {
     /**
      * アカウント情報と健康情報ファイル設定の複合Entityのリストを検索する
      *
+     * @param selectOption
+     *     {@linkplain SelectOption}
      * @return アカウント情報と健康情報ファイル設定の複合Entityのリスト
      */
-    List<CompositeAccount> findAll();
+    List<CompositeAccount> findAll(SelectOption selectOption);
 
     /**
      * 月ごとの登録情報リストを返す
@@ -72,5 +75,14 @@ public interface AccountSearchService {
      * @return 月ごとの登録情報リスト
      */
     List<CompositeMonthlyRegData> findMonthly(LocalDateTime from, LocalDateTime to);
+
+    /**
+     * 指定されたユーザIDと一致するアカウント情報の件数を返す
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @return アカウント情報の件数
+     */
+    long countBySeqUserId(Long seqUserId);
 
 }

@@ -71,15 +71,6 @@ public interface HealthInfoSearchService {
             Long seqUserId);
 
     /**
-     * 指定されたユーザIDの件数を返す
-     *
-     * @param seqUserId
-     *     ユーザID
-     * @return 件数
-     */
-    int getSelectCountBySeqUserId(Long seqUserId);
-
-    /**
      * 指定されたユーザIDで健康情報を検索する<br>
      * 以下の検索オプションを実行する
      * <ul>
@@ -109,9 +100,11 @@ public interface HealthInfoSearchService {
     /**
      * 健康情報とBMI範囲マスタの複合Entityを検索する
      *
+     * @param selectOption
+     *     検索オプション
      * @return 健康情報とBMI範囲マスタの複合Entityリスト
      */
-    List<CompositeHealthInfo> findHealthInfoDetailList();
+    List<CompositeHealthInfo> findHealthInfoDetailList(SelectOption selectOption);
 
     /**
      * 月ごとの健康情報リストを検索する

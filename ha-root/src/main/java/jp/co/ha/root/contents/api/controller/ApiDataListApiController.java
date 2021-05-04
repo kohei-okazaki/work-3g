@@ -4,13 +4,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.PagingView;
+import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.root.base.BaseRootApiController;
+import jp.co.ha.root.config.ApplicationProperties;
 import jp.co.ha.root.contents.api.request.ApiDataListApiRequest;
 import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
 
@@ -26,6 +33,9 @@ public class ApiDataListApiController
     /** API通信情報検索サービス */
     @Autowired
     private ApiCommunicationDataSearchService searchService;
+    /** アプリケーション設定ファイル情報 */
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
     /**
      * 一覧取得
@@ -37,15 +47,29 @@ public class ApiDataListApiController
     @GetMapping(value = "apidata", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ApiDataListApiResponse list(ApiDataListApiRequest request) {
 
-        List<ApiDataListApiResponse.ApiData> apiDataList = searchService.findAll()
-                .stream().map(e -> {
+        // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
+        Pageable pageable = PagingViewFactory.getPageable(request.getPage(),
+                applicationProperties.getPage());
+
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("SEQ_API_COMMUNICATION_DATA_ID", SortType.DESC)
+                .pageable(pageable)
+                .build();
+
+        List<ApiDataListApiResponse.ApiData> apiDataList = searchService
+                .findAll(selectOption).stream()
+                .map(e -> {
                     ApiDataListApiResponse.ApiData response = new ApiDataListApiResponse.ApiData();
                     BeanUtil.copy(e, response);
                     return response;
                 }).collect(Collectors.toList());
 
+        PagingView paging = PagingViewFactory.getPageView(pageable, "apidata?page",
+                searchService.countBySeqApiCommunicationDataId(null));
+
         ApiDataListApiResponse response = getSuccessResponse();
         response.setApiDataList(apiDataList);
+        response.setPaging(paging);
 
         return response;
     }

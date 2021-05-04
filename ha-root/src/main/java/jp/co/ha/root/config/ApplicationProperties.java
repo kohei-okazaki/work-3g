@@ -19,6 +19,9 @@ public class ApplicationProperties {
     /** Front画面URL */
     @Value("${front.url}")
     private String frontUrl;
+    /** 1ページあたりのページ数 */
+    @Value("${front.page}")
+    private int page;
 
     /**
      * frontUrlを返す
@@ -37,6 +40,25 @@ public class ApplicationProperties {
      */
     public void setFrontUrl(String frontUrl) {
         this.frontUrl = frontUrl;
+    }
+
+    /**
+     * pageを返す
+     *
+     * @return page
+     */
+    public int getPage() {
+        return page;
+    }
+
+    /**
+     * pageを設定する
+     *
+     * @param page
+     *     1ページあたりのページ数
+     */
+    public void setPage(int page) {
+        this.page = page;
     }
 
 }

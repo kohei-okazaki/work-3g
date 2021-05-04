@@ -48,17 +48,10 @@
     </v-row>
     <v-row v-if="isRefShow">
       <v-col>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="検索条件"
-          single-line
-          hide-details
-        ></v-text-field>
         <v-data-table
           :headers="headers"
           :items="healthInfoList"
-          :search="search"
+          hide-default-footer=true
         >
           <template v-slot:[`item.edit_action`]="{ item }">
             <v-btn
@@ -71,6 +64,11 @@
             </v-btn>
           </template>
         </v-data-table>
+        <v-pagination
+          v-model="paging.page"
+          :length="paging.totalPage"
+          @input="pageChange()"
+        />
         <AppLoading :loading="loading" />
       </v-col>
     </v-row>
@@ -100,7 +98,6 @@ export default {
       loading: false,
       isRefShow: false,
       isEntryShow: false,
-      search: "",
       healthInfoList: [],
       headers: [
         {
@@ -144,6 +141,12 @@ export default {
           value: "health_info_reg_date",
         },
       ],
+      paging: {
+        // 現在のページ数
+        page: 0,
+        // 総ページ数
+        totalPage: 0,
+      },
       healthInfoEditModal: {
         dialog: false,
         seqHealthInfoId: null,
@@ -192,17 +195,23 @@ export default {
     },
     /**
      * 健康情報取得処理
+     * @param page ページ数
      */
-    getHealthInfoList: function () {
+    getHealthInfoList: function (page) {
       this.loading = true;
       // 保存済のAPIトークンを取得
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      axios.get(url, { headers }).then(
+      // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
+      let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
+      axios.get(reqUrl, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
             this.healthInfoList = response.data.health_info_list;
+            // APIは0~、frontは1~なのでfrontに合わせAPIの戻り値に+1
+            this.paging.page = response.data.paging.current_page_num + 1;
+            this.paging.totalPage = response.data.paging.total_page;
           } else {
             this.error.hasError = true;
             this.error.message = response.data.error.message;
@@ -236,6 +245,12 @@ export default {
       }
     },
     /**
+     * ページ切り替え処理
+     */
+    pageChange: function () {
+      this.getHealthInfoList(this.paging.page);
+    },
+    /**
      * 健康情報編集処理を行う
      */
     editHealthInfo: function () {
@@ -243,7 +258,6 @@ export default {
         // 入力値エラーの場合
         return;
       }
-      
       this.loading = true;
       let headers = {
         Authorization: this.$store.state.auth.token,
