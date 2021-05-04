@@ -1,3 +1,4 @@
 front:
   # TODO URLを変更すること
   url: http://localhost:8083
+  page: 20

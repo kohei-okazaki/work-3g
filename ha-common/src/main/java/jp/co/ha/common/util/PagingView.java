@@ -1,41 +1,61 @@
 package jp.co.ha.common.util;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jp.co.ha.common.web.form.JsonEntity;
+
 /**
  * ページングViewクラス<br>
  * 画面のページングに必要な情報を保持するクラス
  *
  * @version 1.0.0
  */
-public class PagingView {
+public class PagingView extends JsonEntity {
 
     /** 合計レコード数 */
+    @JsonProperty("total_record_num")
     private long totalRecordNum;
     /** レコード数(from) */
+    @JsonProperty("from_record_num")
     private int fromRecordNum;
     /** レコード数(to) */
+    @JsonProperty("to_record_num")
     private long toRecordNum;
+    /** 総ページ数 */
+    @JsonProperty("total_page")
+    private long totalPage;
 
     /** 現在のページ数 */
+    @JsonProperty("current_page_num")
     private int currentPageNum;
     /** 1ページあたりのレコード数 */
+    @JsonProperty("record_per_page")
     private int recordPerPage;
 
     /** 次リンク押下できるかどうか */
+    @JsonProperty("can_go_next")
     private boolean canGoNext;
     /** 次リンクのhref属性 */
+    @JsonProperty("next_href")
     private String nextHref;
     /** 前リンク押下できるかどうか */
+    @JsonProperty("can_go_previous")
     private boolean canGoPrevious;
     /** 前リンクのhref属性 */
+    @JsonProperty("previous_href")
     private String previousHref;
 
     /** 最後ページまでのリンクを押下できるかどうか */
+    @JsonProperty("can_go_last")
     private boolean canGoLast;
     /** 最後ページリンクのhref属性 */
+    @JsonProperty("last_href")
     private String lastHref;
     /** 先頭ページまでのリンクを押下できるかどうか */
+    @JsonProperty("can_go_first")
     private boolean canGoFirst;
     /** 先頭ページリンクのhref属性 */
+    @JsonProperty("first_href")
     private String firstHref;
 
     /**
@@ -90,6 +110,25 @@ public class PagingView {
      */
     public void setToRecordNum(long toRecordNum) {
         this.toRecordNum = toRecordNum;
+    }
+
+    /**
+     * totalPageを返す
+     *
+     * @return totalPage
+     */
+    public long getTotalPage() {
+        return totalPage;
+    }
+
+    /**
+     * totalPageを設定する
+     *
+     * @param totalPage
+     *     総ページ数
+     */
+    public void setTotalPage(long totalPage) {
+        this.totalPage = totalPage;
     }
 
     /**

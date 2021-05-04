@@ -16,3 +16,5 @@ cd ../../ha-node
 
 rem nodeモジュールをインストール
 npm install
+
+cd %~dp0

@@ -16,3 +16,5 @@ cd ../../ha-root/front
 
 rem nodeモジュールをアップデート
 npm update
+
+cd %~dp0

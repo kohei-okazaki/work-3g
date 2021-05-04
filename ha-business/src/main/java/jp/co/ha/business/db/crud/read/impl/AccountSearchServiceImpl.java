@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.crypt.Crypter;
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.Account;
@@ -99,8 +101,16 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    public List<CompositeAccount> findAll() {
-        return compositeAccountMapper.selectAll();
+    public List<CompositeAccount> findAll(SelectOption selectOption) {
+
+        AccountExample example = new AccountExample();
+        example.setOrderByClause(selectOption.getOrderBy());
+
+        RowBounds rowBounds = new RowBounds(
+                (int) selectOption.getPageable().getOffset(),
+                selectOption.getPageable().getPageSize());
+
+        return compositeAccountMapper.selectAll(example, rowBounds);
     }
 
     @Select
@@ -109,6 +119,20 @@ public class AccountSearchServiceImpl implements AccountSearchService {
     public List<CompositeMonthlyRegData> findMonthly(LocalDateTime from,
             LocalDateTime to) {
         return compositeMonthlyMapper.selectAccountByRegDate(from, to);
+    }
+
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public long countBySeqUserId(Long seqUserId) {
+
+        AccountExample example = new AccountExample();
+        Criteria criteria = example.createCriteria();
+        if (seqUserId != null) {
+            // ユーザID
+            criteria.andSeqUserIdEqualTo(seqUserId);
+        }
+        return mapper.countByExample(example);
     }
 
 }

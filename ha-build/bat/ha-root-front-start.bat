@@ -15,3 +15,5 @@ cd ../../ha-root/front
 
 rem npmよりサーバ起動
 npm run dev
+
+cd %~dp0

@@ -15,6 +15,10 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+
+# module update
+$ vue ui
+
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

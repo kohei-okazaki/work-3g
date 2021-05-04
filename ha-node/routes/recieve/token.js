@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var util = require('../util/util');
 var tokenUtil = require('../util/token_util');
-var env = require('../conf/env');
 var prettyjson = require('prettyjson');
 var jwt = require('jsonwebtoken');
 
@@ -15,25 +13,25 @@ var jwt = require('jsonwebtoken');
  *            レスポンス情報
  * @param next
  */
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
 
-    try {
-        console.log(prettyjson.render(req.body) + "\n");
+  try {
+    console.log(prettyjson.render(req.body) + "\n");
 
-        var token = jwt.sign(req.body, tokenUtil.key, {
-            expiresIn : '1h'
-        });
+    var token = jwt.sign(req.body, tokenUtil.key, {
+      expiresIn: '1h'
+    });
 
-        var res_body = {
-            "result" : 0,
-            "token" : token
-        };
-        console.log(prettyjson.render(res_body));
+    var res_body = {
+      "result": 0,
+      "token": token
+    };
+    console.log(prettyjson.render(res_body));
 
-        res.json(res_body);
-    } catch (Error) {
-        console.log(Error);
-    }
+    res.json(res_body);
+  } catch (Error) {
+    console.log(Error);
+  }
 
 })
 

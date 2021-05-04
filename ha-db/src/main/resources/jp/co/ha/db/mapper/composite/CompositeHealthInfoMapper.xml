@@ -41,7 +41,7 @@
       AND HI.SEQ_HEALTH_INFO_ID = #{seqHealthInfoId,jdbcType=BIGINT}
   </select>
 
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" parameterType="jp.co.ha.db.entity.HealthInfoExample" resultMap="BaseResultMap">
     SELECT
       <!-- HEALTH_INFO -->
       HI.SEQ_HEALTH_INFO_ID
@@ -61,6 +61,9 @@
       HEALTH_INFO HI
       LEFT OUTER JOIN BMI_RANGE_MT BRM
         ON HI.SEQ_BMI_RANGE_MT_ID = BRM.SEQ_BMI_RANGE_MT_ID
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
   </select>
 
 </mapper>

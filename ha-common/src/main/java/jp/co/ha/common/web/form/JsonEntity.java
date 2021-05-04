@@ -1,4 +1,4 @@
-package jp.co.ha.root.base;
+package jp.co.ha.common.web.form;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

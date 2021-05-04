@@ -64,14 +64,11 @@
 
     <v-row v-if="isRefShow">
       <v-col>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="検索条件"
-          single-line
-          hide-details
-        ></v-text-field>
-        <v-data-table :headers="headers" :items="accountList" :search="search">
+        <v-data-table
+          :headers="headers"
+          :items="accountList"
+          hide-default-footer=true
+        >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.edit_action`]="{ item }">
             <v-btn
@@ -115,6 +112,11 @@
         <ConfirmModal ref="confirm" />
         <ProcessFinishModal ref="finish" />
         <AppLoading :loading="loading" />
+        <v-pagination
+          v-model="paging.page"
+          :length="paging.totalPage"
+          @input="pageChange()"
+        />
       </v-col>
     </v-row>
   </div>
@@ -147,7 +149,6 @@ export default {
       loading: false,
       isRefShow: false,
       isEntryShow: false,
-      search: "",
       accountList: [],
       headers: [
         {
@@ -203,6 +204,12 @@ export default {
           value: "enclosure_char_flag",
         },
       ],
+      paging: {
+        // 現在のページ数
+        page: 0,
+        // 総ページ数
+        totalPage: 0,
+      },
       accountEditModal: {
         dialog: false,
         seqUserId: null,
@@ -244,17 +251,23 @@ export default {
     },
     /**
      * アカウント情報取得処理
+     * @param page ページ数
      */
-    getAccountList: function () {
+    getAccountList: function (page) {
       this.loading = true;
       // 保存済のAPIトークンを取得
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      axios.get(url, { headers }).then(
+      // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
+      let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
+      axios.get(reqUrl, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
             this.accountList = response.data.account_list;
+            // APIは0~、frontは1~なのでfrontに合わせAPIの戻り値に+1
+            this.paging.page = response.data.paging.current_page_num + 1;
+            this.paging.totalPage = response.data.paging.total_page;
           } else {
             this.error.hasError = true;
             this.error.message = response.data.error.message;
@@ -284,11 +297,20 @@ export default {
         if (account.seq_user_id == seqUserId) {
           this.accountEditModal.mailAddress = account.mail_address;
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
-          this.accountEditModal.passwordExpire = account.password_expire.replaceAll("/", "-");
+          this.accountEditModal.passwordExpire = account.password_expire.replaceAll(
+            "/",
+            "-"
+          );
           console.log(this.accountEditModal);
           break;
         }
       }
+    },
+    /**
+     * ページ切り替え処理
+     */
+    pageChange: function () {
+      this.getAccountList(this.paging.page);
     },
     /**
      * アカウント情報を更新する
