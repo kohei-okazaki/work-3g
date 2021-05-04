@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var util = require('../util/util');
-var env = require('../conf/env');
 var prettyjson = require('prettyjson');
 var PERCENTAGE = 100;
 
@@ -24,53 +23,53 @@ var PERCENTAGE = 100;
  *            レスポンス情報
  * @param next
  */
-router.get( '/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
-    console.log(prettyjson.render(req.query) + "\n");
+  console.log(prettyjson.render(req.query) + "\n");
 
-    console.log("31");
-    let gender_info;
-    if ("0" == req.query['gender']) {
-        // 男性の場合
-        gender_info = {
-            "base_breathing_capacity_def" : 3500,
-            "base_val_def" : 27.63,
-            "minus_def" : 0.122
-        };
-    } else if ("1" == req.query['gender']) {
-        gender_info = {
-            "base_breathing_capacity_def" : 2500,
-            "base_val_def" : 21.78,
-            "minus_def" : 0.101
-        };
-    } else {
-        throw new Error('gender is invalid. gender=' + req.body['gender']);
-    }
-
-    // 年齢部分の計算
-    let calc_age = gender_info["minus_def"] * req.query['age'];
-    calc_age = util.round(calc_age, 3);
-
-    // 予測肺活量の計算
-    let predict_breathing_capacity = (gender_info["base_val_def"] - calc_age) * req.query['height'];
-    predict_breathing_capacity = util.round(predict_breathing_capacity, 3);
-
-    // 肺活量％の計算
-    let breathing_capacity_percentage = gender_info["base_breathing_capacity_def"] / predict_breathing_capacity * PERCENTAGE;
-    breathing_capacity_percentage = util.round(breathing_capacity_percentage, 3);
-
-    // レスポンスデータの作成
-    let res_body = {
-        'result' : 0,
-        'breathing_capacity_calc_result' : {
-            'predict_breathing_capacity' : predict_breathing_capacity,
-            'breathing_capacity_percentage' : breathing_capacity_percentage,
-        },
-        'user_data' : req.query
+  console.log("31");
+  let gender_info;
+  if ("0" == req.query['gender']) {
+    // 男性の場合
+    gender_info = {
+      "base_breathing_capacity_def": 3500,
+      "base_val_def": 27.63,
+      "minus_def": 0.122
     };
+  } else if ("1" == req.query['gender']) {
+    gender_info = {
+      "base_breathing_capacity_def": 2500,
+      "base_val_def": 21.78,
+      "minus_def": 0.101
+    };
+  } else {
+    throw new Error('gender is invalid. gender=' + req.body['gender']);
+  }
 
-    console.log(prettyjson.render(res_body));
-    res.json(res_body);
+  // 年齢部分の計算
+  let calc_age = gender_info["minus_def"] * req.query['age'];
+  calc_age = util.round(calc_age, 3);
+
+  // 予測肺活量の計算
+  let predict_breathing_capacity = (gender_info["base_val_def"] - calc_age) * req.query['height'];
+  predict_breathing_capacity = util.round(predict_breathing_capacity, 3);
+
+  // 肺活量％の計算
+  let breathing_capacity_percentage = gender_info["base_breathing_capacity_def"] / predict_breathing_capacity * PERCENTAGE;
+  breathing_capacity_percentage = util.round(breathing_capacity_percentage, 3);
+
+  // レスポンスデータの作成
+  let res_body = {
+    'result': 0,
+    'breathing_capacity_calc_result': {
+      'predict_breathing_capacity': predict_breathing_capacity,
+      'breathing_capacity_percentage': breathing_capacity_percentage,
+    },
+    'user_data': req.query
+  };
+
+  console.log(prettyjson.render(res_body));
+  res.json(res_body);
 
 })
 

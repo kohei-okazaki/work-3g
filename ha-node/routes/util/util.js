@@ -11,8 +11,8 @@
  *            四捨五入したい少数値
  * @returns 四捨五入した値
  */
-exports.round = function(val, index) {
-    return Math.floor(val * Math.pow(10, index)) / Math.pow(10, index);
+exports.round = function (val, index) {
+  return Math.floor(val * Math.pow(10, index)) / Math.pow(10, index);
 }
 
 /**
@@ -24,8 +24,8 @@ exports.round = function(val, index) {
  *            身長(m)
  * @returns BMI
  */
-exports.calc_bmi = function(weight, height) {
-    return weight / (height * height);
+exports.calc_bmi = function (weight, height) {
+  return weight / (height * height);
 }
 
 /**
@@ -35,6 +35,6 @@ exports.calc_bmi = function(weight, height) {
  *            身長(m)
  * @returns 標準体重
  */
-exports.calc_standard_weight = function(height) {
-    return height * height * 22;
+exports.calc_standard_weight = function (height) {
+  return height * height * 22;
 }
