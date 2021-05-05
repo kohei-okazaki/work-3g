@@ -2,17 +2,15 @@
 <!DOCTYPE logback>
 <configuration>
 
-  <!-- <include resource="org/springframework/boot/logging/logback/base.xml" /> -->
-
-  <springProfile name="local">
   <!-- 設定ローカル環境用 -->
-    <property name="logpath" value="C:/app/logs/" />
+  <springProfile name="local">
+    <property name="LOG_PATH" value="C:/app/logs/" />
     <property name="LOG_LEVEL" value="DEBUG" />
   </springProfile>
 
-  <springProfile name="ec2">
   <!-- 設定EC2環境用 -->
-    <property name="logpath" value="/home/admin/logs" />
+  <springProfile name="ec2">
+    <property name="LOG_PATH" value="/home/admin/logs/" />
     <property name="LOG_LEVEL" value="INFO" />
   </springProfile>
 
@@ -26,14 +24,68 @@
   </appender>
 
   <!-- ファイル出力 -->
-  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <!--日ごとにログファイル作成 -->
-    <file>${logpath}${logname}.log</file>
+    <file>${LOG_PATH}root-api-debug.log</file>
     <!--日ごとにログファイル作成 -->
     <rollingPolicy
       class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
-      <fileNamePattern>${logpath}%d{yyyyMM,aux}/${logname}-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-debug-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!--180日後に破棄 -->
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <!--出力内容 -->
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--日ごとにログファイル作成 -->
+    <file>${LOG_PATH}root-api-info.log</file>
+    <!--日ごとにログファイル作成 -->
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-info-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!--180日後に破棄 -->
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <!--出力内容 -->
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--日ごとにログファイル作成 -->
+    <file>${LOG_PATH}root-api-warn.log</file>
+    <!--日ごとにログファイル作成 -->
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-warn-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <!--180日後に破棄 -->
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <!--出力内容 -->
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--日ごとにログファイル作成 -->
+    <file>${LOG_PATH}root-api-error.log</file>
+    <!--日ごとにログファイル作成 -->
+    <rollingPolicy
+      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-error-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       <!--180日後に破棄 -->
       <maxHistory>180</maxHistory>
     </rollingPolicy>
@@ -47,12 +99,18 @@
   <!-- アプリログレベルと使用出力ルール -->
   <logger name="jp.co.ha" level="${LOG_LEVEL}">
     <appender-ref ref="STDOUT" />
-    <appender-ref ref="FILE" />
+    <appender-ref ref="DEBUG_FILE" />
+    <appender-ref ref="INFO_FILE" />
+    <appender-ref ref="WARN_FILE" />
+    <appender-ref ref="ERROR_FILE" />
   </logger>
 
   <logger name="org.springframework" level="INFO">
     <appender-ref ref="STDOUT" />
-    <appender-ref ref="FILE" />
+    <appender-ref ref="DEBUG_FILE" />
+    <appender-ref ref="INFO_FILE" />
+    <appender-ref ref="WARN_FILE" />
+    <appender-ref ref="ERROR_FILE" />
   </logger>
 
 </configuration>
