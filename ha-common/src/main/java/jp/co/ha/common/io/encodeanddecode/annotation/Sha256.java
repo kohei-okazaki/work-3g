@@ -9,6 +9,8 @@ import java.lang.annotation.Target;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
+
 /**
  * SHA-256エンコードアノテーション<br>
  * ex)<br>
@@ -20,10 +22,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * </pre>
  *
  * @version 1.0.0
+ * @see jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder
  */
 @Inherited
 @Documented
-@Qualifier("sha256HashEncoder")
+@Qualifier(Sha256HashEncoder.ID)
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Sha256 {

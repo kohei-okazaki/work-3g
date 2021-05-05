@@ -20,7 +20,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping(value = "/api/{seqUserId}/healthinfo/{seqHealthInfoId}")
+@RequestMapping(value = "/api/{seq_user_id}/healthinfo/{seq_health_info_id}")
 public class HealthInfoReferenceApiController extends
         BaseRestController<HealthInfoReferenceApiRequest, HealthInfoReferenceApiResponse> {
 
@@ -42,8 +42,9 @@ public class HealthInfoReferenceApiController extends
      *     基底例外
      */
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoReferenceApiResponse doGet(@PathVariable("seqUserId") Long seqUserId,
-            @PathVariable("seqHealthInfoId") Long seqHealthInfoId,
+    public HealthInfoReferenceApiResponse doGet(
+            @PathVariable("seq_user_id") Long seqUserId,
+            @PathVariable("seq_health_info_id") Long seqHealthInfoId,
             @RequestHeader(value = "Api-Key") String apiKey) throws BaseException {
 
         HealthInfoReferenceApiRequest request = new HealthInfoReferenceApiRequest();

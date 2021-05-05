@@ -9,6 +9,8 @@ import java.lang.annotation.Target;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import jp.co.ha.common.io.encodeanddecode.Base64EncodeAndDecoder;
+
 /**
  * エンコードアノテーション<br>
  * ex)<br>
@@ -20,10 +22,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
  * </pre>
  *
  * @version 1.0.0
+ * @see jp.co.ha.common.io.encodeanddecode.Base64EncodeAndDecoder
  */
 @Inherited
 @Documented
-@Qualifier("base64EncodeAndDecoder")
+@Qualifier(Base64EncodeAndDecoder.ID)
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Base64 {
