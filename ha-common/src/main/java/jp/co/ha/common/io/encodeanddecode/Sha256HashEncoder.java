@@ -15,10 +15,13 @@ import jp.co.ha.common.type.Charset;
  * SHA-256ハッシュ値作成クラス
  *
  * @version 1.0.0
+ * @see jp.co.ha.common.io.encodeanddecode.annotation.Sha256
  */
-@Component("sha256HashEncoder")
+@Component(Sha256HashEncoder.ID)
 public class Sha256HashEncoder implements HashEncoder {
 
+    /** BeanID */
+    public static final String ID = "sha256HashEncoder";
     /** HASH化アルゴリズム */
     private static final Algorithm HASH_ALGORITHM = Algorithm.SHA_256;
 

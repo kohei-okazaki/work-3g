@@ -12,9 +12,13 @@ import jp.co.ha.common.type.Charset;
  * URLエンコード/デコードクラス
  *
  * @version 1.0.0
+ * @see jp.co.ha.common.io.encodeanddecode.annotation.Url
  */
-@Component("urlEncodeAndDecoder")
+@Component(UrlEncodeAndDecoder.ID)
 public class UrlEncodeAndDecoder implements BaseEncodeAndDecoder {
+
+    /** BeanID */
+    public static final String ID = "urlEncodeAndDecoder";
 
     @Override
     public String encode(String src, Charset charset)

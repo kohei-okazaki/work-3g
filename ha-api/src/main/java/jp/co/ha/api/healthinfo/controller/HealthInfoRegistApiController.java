@@ -22,7 +22,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
  * @version 1.0.0
  */
 @RestController
-@RequestMapping(value = "/api/{seqUserId}/healthinfo")
+@RequestMapping(value = "/api/{seq_user_id}/healthinfo")
 public class HealthInfoRegistApiController extends
         BaseRestController<HealthInfoRegistApiRequest, HealthInfoRegistApiResponse> {
 
@@ -44,7 +44,7 @@ public class HealthInfoRegistApiController extends
      *     基底例外
      */
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoRegistApiResponse doPost(@PathVariable("seqUserId") Long seqUserId,
+    public HealthInfoRegistApiResponse doPost(@PathVariable("seq_user_id") Long seqUserId,
             @RequestHeader(ApiConnectInfo.X_API_KEY) String apiKey,
             @RequestBody HealthInfoRegistApiRequest request) throws BaseException {
 
@@ -61,7 +61,8 @@ public class HealthInfoRegistApiController extends
     }
 
     @Override
-    public void accept(HealthInfoRegistApiRequest request, HealthInfoRegistApiResponse response)
+    public void accept(HealthInfoRegistApiRequest request,
+            HealthInfoRegistApiResponse response)
             throws BaseException {
 
         service.checkRequest(request);
