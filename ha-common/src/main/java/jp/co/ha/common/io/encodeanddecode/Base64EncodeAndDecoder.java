@@ -11,9 +11,13 @@ import jp.co.ha.common.type.Charset;
  * Base64エンコード/デコードクラス
  *
  * @version 1.0.0
+ * @see jp.co.ha.common.io.encodeanddecode.annotation.Base64
  */
-@Component("base64EncodeAndDecoder")
+@Component(Base64EncodeAndDecoder.ID)
 public class Base64EncodeAndDecoder implements BaseEncodeAndDecoder {
+
+    /** BeanID */
+    public static final String ID = "base64EncodeAndDecoder";
 
     @Override
     public String encode(String src, Charset charset)

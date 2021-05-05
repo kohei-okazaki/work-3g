@@ -670,7 +670,16 @@ export default {
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "page",
+              logicalName: "ページ数",
+              required: false,
+              type: null,
+              byte: null,
+              description: "取得対象ページ数",
+            },
+          ],
           response: [
             {
               physicalName: "result",
@@ -904,7 +913,16 @@ export default {
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "page",
+              logicalName: "ページ数",
+              required: false,
+              type: null,
+              byte: null,
+              description: "取得対象ページ数",
+            },
+          ],
           response: [
             {
               physicalName: "result",
@@ -1049,7 +1067,16 @@ export default {
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
           ],
-          request: [],
+          request: [
+            {
+              physicalName: "page",
+              logicalName: "ページ数",
+              required: false,
+              type: null,
+              byte: null,
+              description: "取得対象ページ数",
+            },
+          ],
           response: [
             {
               physicalName: "result",
