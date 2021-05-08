@@ -54,7 +54,7 @@ public class NoteEditApiController
             @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<String> seqRootUserNoteInfoId,
             @RequestBody NoteEditApiRequest request) throws BaseException {
 
-        if (seqRootUserNoteInfoId == null || !seqRootUserNoteInfoId.isPresent()) {
+        if (!seqRootUserNoteInfoId.isPresent()) {
             return getErrorResponse("seq_root_user_note_info_id is required");
         }
 

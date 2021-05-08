@@ -64,7 +64,7 @@ public class NewsDeleteApiController
             @PathVariable(name = "id", required = false) Optional<String> id,
             NewsDeleteApiRequest request) throws BaseException {
 
-        if (id == null || !id.isPresent()) {
+        if (!id.isPresent()) {
             // URLが不正場合
             throw new BusinessException(CommonErrorCode.VALIDATE_ERROR, "id=" + id);
         }

@@ -44,7 +44,7 @@ public class NoteDeleteApiController
             @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<String> seqRootUserNoteInfoId,
             NewsDeleteApiRequest request) throws BaseException {
 
-        if (seqRootUserNoteInfoId == null || !seqRootUserNoteInfoId.isPresent()) {
+        if (!seqRootUserNoteInfoId.isPresent()) {
             // 未指定の場合
             return getErrorResponse("seq_root_user_note_info_id is required");
         }

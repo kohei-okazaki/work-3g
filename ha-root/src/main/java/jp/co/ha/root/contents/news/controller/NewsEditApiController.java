@@ -13,7 +13,9 @@ import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.dto.NewsListDto;
 import jp.co.ha.business.dto.NewsListDto.NewsDto;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -52,6 +54,11 @@ public class NewsEditApiController
     public NewsEditApiResponse edit(
             @PathVariable(name = "id", required = false) Optional<String> id,
             @RequestBody NewsEditApiRequest request) throws BaseException {
+
+        if (!id.isPresent()) {
+            // URLが不正場合
+            throw new BusinessException(CommonErrorCode.VALIDATE_ERROR, "id=" + id);
+        }
 
         NewsListDto dto = new JsonReader().read(
                 awsS3Component.getS3ObjectByKey(AwsS3Key.NEWS_JSON), NewsListDto.class);

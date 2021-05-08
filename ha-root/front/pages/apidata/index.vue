@@ -41,7 +41,7 @@
           :headers="headers"
           :items="apiDataList"
           class="pushable"
-          hide-default-footer=true
+          hide-default-footer="true"
           @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
