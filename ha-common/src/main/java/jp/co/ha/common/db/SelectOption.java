@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.data.domain.Pageable;
 
 import jp.co.ha.common.function.Builder;
@@ -109,6 +110,16 @@ public class SelectOption {
         this.ORDER_BY_MAP = builder.orderByMap;
         this.LIMIT = builder.limit;
         this.PAGEABLE = builder.pageable;
+    }
+
+    /**
+     * {@linkplain RowBounds}に変換する
+     * 
+     * @return {@linkplain RowBounds}
+     */
+    public RowBounds toRowBounds() {
+        return new RowBounds((int) getPageable().getOffset(),
+                getPageable().getPageSize());
     }
 
     /**
