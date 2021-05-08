@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.type.RootApiResult;
 import jp.co.ha.root.type.RootApiResult.RootApiResultSerializer;
@@ -25,6 +26,10 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     @JsonProperty("error")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private ErrorData errorData;
+    /** ページング */
+    @JsonProperty("paging")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private PagingView paging;
 
     /**
      * エラー情報
@@ -94,6 +99,25 @@ public abstract class BaseRootApiResponse extends JsonEntity {
      */
     public void setErrorData(ErrorData errorData) {
         this.errorData = errorData;
+    }
+
+    /**
+     * pagingを返す
+     *
+     * @return paging
+     */
+    public PagingView getPaging() {
+        return paging;
+    }
+
+    /**
+     * pagingを設定する
+     *
+     * @param paging
+     *     ページング
+     */
+    public void setPaging(PagingView paging) {
+        this.paging = paging;
     }
 
 }

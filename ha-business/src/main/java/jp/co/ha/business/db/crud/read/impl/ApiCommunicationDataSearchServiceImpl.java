@@ -39,11 +39,9 @@ public class ApiCommunicationDataSearchServiceImpl
         ApiCommunicationDataExample example = new ApiCommunicationDataExample();
         example.setOrderByClause(selectOption.getOrderBy());
 
-        RowBounds rowBounds = new RowBounds(
-                (int) selectOption.getPageable().getOffset(),
-                selectOption.getPageable().getPageSize());
-
-        return mapper.selectByExampleWithRowbounds(example, rowBounds);
+        return mapper.selectByExampleWithRowbounds(example,
+                new RowBounds((int) selectOption.getPageable().getOffset(),
+                        selectOption.getPageable().getPageSize()));
     }
 
     @Select

@@ -51,7 +51,11 @@
 
     <v-row v-if="isRefShow">
       <v-col>
-        <v-data-table :headers="headers" :items="note_list">
+        <v-data-table
+          :headers="headers"
+          :items="note_list"
+          hide-default-footer="true"
+        >
           <template v-slot:[`item.edit_action`]="{ item }">
             <v-btn
               small
@@ -78,6 +82,11 @@
         <ConfirmModal ref="confirm" />
         <ProcessFinishModal ref="finish" />
         <AppLoading :loading="loading" />
+        <v-pagination
+          v-model="paging.page"
+          :length="paging.totalPage"
+          @input="pageChange()"
+        />
       </v-col>
     </v-row>
   </div>
@@ -146,6 +155,12 @@ export default {
         },
       ],
       note_list: [],
+      paging: {
+        // 現在のページ数
+        page: 0,
+        // 総ページ数
+        totalPage: 0,
+      },
       noteEditModal: {
         dialog: false,
         seq_root_user_note_info_id: null,
@@ -185,33 +200,39 @@ export default {
       this.isEntryShow = false;
     },
     /**
-     * メモ情報取得処理
+     * 指定したページ数のメモ情報取得処理
+     * @param page ページ数
      */
-    getNotes: function () {
+    getNotes: function (page) {
       this.loading = true;
+      // 保存済のAPIトークンを取得
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
       let reqUrl = url + "?seq_login_id=" + this.$store.state.auth.seq_login_id;
-      axios
-        .get(reqUrl, {
-          headers: { Authorization: this.$store.state.auth.token },
-        })
-        .then(
-          (response) => {
-            if (response.data.result === "0") {
-              this.note_list = response.data.note_list;
-            } else {
-              this.error.hasError = true;
-              this.error.message = response.data.error.message;
-            }
-            this.loading = false;
-          },
-          (error) => {
+      // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
+      reqUrl += "&page=" + (page == null ? 0 : page - 1);
+      axios.get(reqUrl, { headers }).then(
+        (response) => {
+          if (response.data.result === "0") {
+            this.note_list = response.data.note_list;
+            // APIは0~、frontは1~なのでfrontに合わせAPIの戻り値に+1
+            this.paging.page = response.data.paging.current_page_num + 1;
+            this.paging.totalPage = response.data.paging.total_page;
+          } else {
             this.error.hasError = true;
-            this.error.message = error;
-            this.loading = false;
-            console.log("[error]=" + error);
-            return error;
+            this.error.message = response.data.error.message;
           }
-        );
+          this.loading = false;
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          this.loading = false;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
     },
     /**
      * メモ内容表示制御
@@ -236,6 +257,12 @@ export default {
           break;
         }
       }
+    },
+    /**
+     * ページ切り替え処理
+     */
+    pageChange: function () {
+      this.getNotes(this.paging.page);
     },
     /**
      * メモ情報編集を行う

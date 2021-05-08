@@ -2,6 +2,7 @@ package jp.co.ha.business.db.crud.read;
 
 import java.util.List;
 
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 
 /**
@@ -16,9 +17,11 @@ public interface RootUserNoteInfoSearchService {
      *
      * @param seqLoginId
      *     ログインID
+     * @param selectOption
+     *     {@linkplain SelectOption}
      * @return 管理者サイトユーザメモ情報リスト
      */
-    List<RootUserNoteInfo> findBySeqLoginId(Long seqLoginId);
+    List<RootUserNoteInfo> findBySeqLoginId(Long seqLoginId, SelectOption selectOption);
 
     /**
      * 指定した管理者サイトユーザメモ情報IDの管理者サイトユーザメモ情報を返す
@@ -28,5 +31,14 @@ public interface RootUserNoteInfoSearchService {
      * @return 管理者サイトユーザメモ情報
      */
     RootUserNoteInfo findById(Long seqRootUserNoteInfoId);
+
+    /**
+     * 指定されたログインIDの管理者サイトユーザメモ情報の件数を返す
+     *
+     * @param seqLoginId
+     *     ログインID
+     * @return 管理者サイトユーザメモ情報の件数
+     */
+    long countBySeqLoginId(Long seqLoginId);
 
 }

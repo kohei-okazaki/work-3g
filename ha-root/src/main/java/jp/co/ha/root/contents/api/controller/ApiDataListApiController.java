@@ -17,7 +17,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.config.ApplicationProperties;
 import jp.co.ha.root.contents.api.request.ApiDataListApiRequest;
 import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
 
@@ -33,9 +32,6 @@ public class ApiDataListApiController
     /** API通信情報検索サービス */
     @Autowired
     private ApiCommunicationDataSearchService searchService;
-    /** アプリケーション設定ファイル情報 */
-    @Autowired
-    private ApplicationProperties applicationProperties;
 
     /**
      * 一覧取得
