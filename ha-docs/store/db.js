@@ -813,6 +813,51 @@ export const state = () => ({
           notNull: true,
         }
       ]
+    },
+    {
+      physicalName: "NEWS_INFO",
+      logicalName: "お知らせ情報",
+      columns: [{
+          logicalName: "お知らせ情報ID",
+          physicalName: "SEQ_NEWS_INFO_ID",
+          type: "BIGINT",
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "S3キー",
+          physicalName: "S3_KEY",
+          type: "VARCHAR",
+          size: "100",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+        }
+      ]
     }
   ]
 });
