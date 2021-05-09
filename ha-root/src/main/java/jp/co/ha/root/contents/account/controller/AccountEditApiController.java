@@ -47,7 +47,7 @@ public class AccountEditApiController
             @PathVariable(name = "seq_user_id", required = false) Optional<Long> seqUserId,
             @RequestBody AccountEditApiRequest request) throws BaseException {
 
-        if (seqUserId == null || !seqUserId.isPresent()) {
+        if (!seqUserId.isPresent()) {
             return getErrorResponse("seq_user_id is required");
         }
 

@@ -113,7 +113,7 @@ export default {
         return;
       }
       let reqBody = {
-        index: this.entryInfo.index,
+        id: this.entryInfo.id,
         title: this.entryInfo.title,
         date: this.entryInfo.date.replaceAll("-", "/"),
         detail: this.entryInfo.detail,

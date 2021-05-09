@@ -82,7 +82,7 @@ public class HealthInfoEditApiController extends
             @PathVariable(name = "seq_health_info_id", required = false) Optional<Long> seqHealthInfoId,
             @RequestBody HealthInfoEditApiRequest request) throws BaseException {
 
-        if (seqHealthInfoId == null || !seqHealthInfoId.isPresent()) {
+        if (!seqHealthInfoId.isPresent()) {
             return getErrorResponse("seq_health_info_id is required");
         }
 
