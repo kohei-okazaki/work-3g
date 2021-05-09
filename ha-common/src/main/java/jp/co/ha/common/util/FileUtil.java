@@ -334,7 +334,9 @@ public class FileUtil {
         /** sql */
         SQL(".sql"),
         /** text */
-        TEXT(".txt");
+        TEXT(".txt"),
+        /** json */
+        JSON(".json");
 
         /** 値 */
         private String value;

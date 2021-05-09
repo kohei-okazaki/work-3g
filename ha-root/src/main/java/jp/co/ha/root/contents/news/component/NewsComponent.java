@@ -12,13 +12,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
-import jp.co.ha.business.dto.NewsListDto;
-import jp.co.ha.business.dto.NewsListDto.NewsDto;
+import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.type.Charset;
 
 /**
@@ -29,29 +28,43 @@ import jp.co.ha.common.type.Charset;
 @Component
 public class NewsComponent {
 
-    /** S3コンポーネント */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
-    /** SlackComponent */
+    /** {@linkplain SlackApiComponent} */
     @Autowired
     private SlackApiComponent slackApi;
 
     /**
-     * S3へのファイルアップロード
+     * 指定されたS3キーよりお知らせ情報JSONを取得
      *
+     * @param s3Key
+     *     S3キー
+     * @return お知らせ情報
+     * @throws BaseException
+     */
+    public NewsDto getNewsDto(String s3Key) throws BaseException {
+        return new JsonReader().read(
+                awsS3Component.getS3ObjectByKey(s3Key), NewsDto.class);
+    }
+
+    /**
+     * お知らせ情報JSONをS3へファイルアップロード
+     *
+     * @param s3Key
+     *     S3キー
      * @param dto
      *     お知らせ情報
      * @throws BaseException
      *     S3へのファイルアップロードに失敗した場合
      */
-    public void uploadS3(NewsListDto dto) throws BaseException {
+    public void upload(String s3Key, NewsDto dto) throws BaseException {
 
         try {
             String json = new ObjectMapper().writeValueAsString(dto);
             byte[] jsonByte = json.getBytes(Charset.UTF_8.getValue());
             InputStream is = new ByteArrayInputStream(jsonByte);
-            awsS3Component.putFileByInputStream(AwsS3Key.NEWS_JSON,
-                    Long.valueOf(jsonByte.length), is);
+            awsS3Component.putFile(s3Key, Long.valueOf(jsonByte.length), is);
         } catch (JsonProcessingException e) {
             // JSON文字列への変換に失敗した場合
             throw new BusinessException(e);
@@ -59,6 +72,16 @@ public class NewsComponent {
             // 文字コードが不正な場合
             throw new BusinessException(e);
         }
+    }
+
+    /**
+     * 指定したS3キーを削除
+     *
+     * @param s3Key
+     *     S3キー
+     */
+    public void remove(String s3Key) {
+        awsS3Component.removeS3ObjectByKeys(s3Key);
     }
 
     /**
@@ -89,6 +112,18 @@ public class NewsComponent {
             // 文字コードが不正な場合
             throw new BusinessException(e);
         }
+    }
+
+    /**
+     * Slackへお知らせ情報削除のメッセージを投稿する
+     *
+     * @param seqNewsInfoId
+     *     お知らせ情報ID
+     * @throws BaseException
+     *     Slackへの投稿に失敗した場合
+     */
+    public void sendSlack(Long seqNewsInfoId) throws BaseException {
+        slackApi.send(ContentType.ROOT, "お知らせ情報ID=" + seqNewsInfoId + "を削除.");
     }
 
 }

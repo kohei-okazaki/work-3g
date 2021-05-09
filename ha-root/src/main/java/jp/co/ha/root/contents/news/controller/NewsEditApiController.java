@@ -9,15 +9,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Key;
-import jp.co.ha.business.dto.NewsListDto;
-import jp.co.ha.business.dto.NewsListDto.NewsDto;
-import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
+import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsEditApiRequest;
@@ -32,9 +28,9 @@ import jp.co.ha.root.contents.news.response.NewsEditApiResponse;
 public class NewsEditApiController
         extends BaseRootApiController<NewsEditApiRequest, NewsEditApiResponse> {
 
-    /** S3コンポーネント */
+    /** お知らせ情報検索サービス */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private NewsInfoSearchService searchService;
     /** お知らせ情報Component */
     @Autowired
     private NewsComponent newsComponent;
@@ -57,27 +53,29 @@ public class NewsEditApiController
 
         if (!id.isPresent()) {
             // URLが不正場合
-            throw new BusinessException(CommonErrorCode.VALIDATE_ERROR, "id=" + id);
+            return getErrorResponse("id is required");
         }
 
-        NewsListDto dto = new JsonReader().read(
-                awsS3Component.getS3ObjectByKey(AwsS3Key.NEWS_JSON), NewsListDto.class);
+        // お知らせ情報ID
+        Long seqNewsInfoId = Long.valueOf(id.get());
 
-        NewsDto editData = new NewsDto();
-        BeanUtil.copy(request, editData);
-
-        for (int i = 0; i < dto.getNewsDtoList().size(); i++) {
-            NewsDto data = dto.getNewsDtoList().get(i);
-            if (data.getIndex().equals(editData.getIndex())) {
-                dto.getNewsDtoList().set(i, editData);
-                break;
-            }
+        // お知らせ情報を検索
+        Optional<NewsInfo> optional = searchService.findById(Long.valueOf(id.get()));
+        if (!optional.isPresent()) {
+            return getErrorResponse("news_info is not found");
         }
 
-        newsComponent.uploadS3(dto);
-        newsComponent.sendSlack(editData, "編集したお知らせ情報.json",
-                "お知らせ情報JSONを編集.");
+        // S3からお知らせJSONを取得
+        NewsDto dto = newsComponent.getNewsDto(optional.get().getS3Key());
+        BeanUtil.copy(request, dto);
 
+        // お知らせ情報JSONアップロード
+        newsComponent.upload(optional.get().getS3Key(), dto);
+        // Slack通知
+        newsComponent.sendSlack(dto, "編集したお知らせ情報.json",
+                "お知らせ情報ID=" + seqNewsInfoId + "を編集.");
+
+        // レスポンス生成
         NewsEditApiResponse response = getSuccessResponse();
 
         return response;

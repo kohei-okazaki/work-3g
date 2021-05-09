@@ -76,14 +76,11 @@
     </template>
     <v-row v-if="isRefShow">
       <v-col>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="検索条件"
-          single-line
-          hide-details
-        ></v-text-field>
-        <v-data-table :headers="headers" :items="news_list" :search="search">
+        <v-data-table
+          :headers="headers"
+          :items="news_list"
+          hide-default-footer="true"
+        >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.tag.name`]="{ item }">
             <v-chip
@@ -100,14 +97,14 @@
             <v-btn
               small
               class="mx-1"
-              @click="openNewsEditModal(item.index)"
+              @click="openNewsEditModal(item.id)"
               v-if="isEntryShow"
             >
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
           <template v-slot:[`item.delete_action`]="{ item }">
-            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.index)">
+            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.id)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -115,6 +112,11 @@
         <ConfirmModal ref="confirm" />
         <ProcessFinishModal ref="finish" />
         <AppLoading :loading="loading" />
+        <v-pagination
+          v-model="paging.page"
+          :length="paging.totalPage"
+          @input="pageChange()"
+        />
       </v-col>
     </v-row>
   </div>
@@ -151,7 +153,6 @@ export default {
       isRefShow: false,
       isEntryShow: false,
       loading: false,
-      search: "",
       news_list: [],
       headers: [
         {
@@ -166,7 +167,7 @@ export default {
         },
         {
           text: "ID",
-          value: "index",
+          value: "id",
         },
         {
           text: "タイトル",
@@ -185,9 +186,15 @@ export default {
           value: "tag.name",
         },
       ],
+      paging: {
+        // 現在のページ数
+        page: 0,
+        // 総ページ数
+        totalPage: 0,
+      },
       newsEditModal: {
         dialog: false,
-        index: "",
+        id: "",
         title: "",
         date: "",
         detail: "",
@@ -209,32 +216,39 @@ export default {
   },
   methods: {
     /**
-     * お知らせ情報を取得
+     * 指定したページのお知らせ情報を取得
+     * @param page 取得対象ページ
      */
-    getNews: function () {
+    getNews: function (page) {
       this.loading = true;
-      axios
-        .get(url, {
-          headers: { Authorization: this.$store.state.auth.token },
-        })
-        .then(
-          (response) => {
-            if (response.data.result === "0") {
-              this.news_list = response.data.news_list;
-            } else {
-              this.error.hasError = true;
-              this.error.message = response.data.error.message;
-            }
-            this.loading = false;
-          },
-          (error) => {
+
+      // 保存済のAPIトークンを取得
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
+      let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
+      axios.get(reqUrl, { headers }).then(
+        (response) => {
+          if (response.data.result === "0") {
+            this.news_list = response.data.news_list;
+            // APIは0~、frontは1~なのでfrontに合わせAPIの戻り値に+1
+            this.paging.page = response.data.paging.current_page_num + 1;
+            this.paging.totalPage = response.data.paging.total_page;
+          } else {
             this.error.hasError = true;
-            this.error.message = error;
-            this.loading = false;
-            console.log("[error]=" + error);
-            return error;
+            this.error.message = response.data.error.message;
           }
-        );
+          this.loading = false;
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          this.loading = false;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
     },
     /**
      * お知らせ情報編集モーダル表示
@@ -242,10 +256,10 @@ export default {
      */
     openNewsEditModal: function (targetNewsId) {
       this.newsEditModal.dialog = true;
-      this.newsEditModal.index = targetNewsId;
+      this.newsEditModal.id = targetNewsId;
       for (var i = 0; i < this.news_list.length; i++) {
         let news = this.news_list[i];
-        if (news.index == targetNewsId) {
+        if (news.id == targetNewsId) {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
           news.date = news.date.replaceAll("/", "-");
           this.newsEditModal.title = news.title;
@@ -267,9 +281,9 @@ export default {
       }
 
       this.loading = true;
-      let reqUrl = url + "/" + this.newsEditModal.index;
+      let reqUrl = url + "/" + this.newsEditModal.id;
       let reqBody = {
-        index: this.newsEditModal.index,
+        id: this.newsEditModal.id,
         title: this.newsEditModal.title,
         date: this.newsEditModal.date.replaceAll("-", "/"),
         detail: this.newsEditModal.detail,
@@ -314,6 +328,12 @@ export default {
      */
     reset: function () {
       this.$refs.editNewsForm.reset();
+    },
+    /**
+     * ページ切り替え処理
+     */
+    pageChange: function () {
+      this.getNews(this.paging.page);
     },
     /**
      * お知らせ情報削除モーダル表示

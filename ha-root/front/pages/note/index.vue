@@ -200,8 +200,8 @@ export default {
       this.isEntryShow = false;
     },
     /**
-     * 指定したページ数のメモ情報取得処理
-     * @param page ページ数
+     * 指定したページのメモ情報取得処理
+     * @param page 取得対象ページ
      */
     getNotes: function (page) {
       this.loading = true;

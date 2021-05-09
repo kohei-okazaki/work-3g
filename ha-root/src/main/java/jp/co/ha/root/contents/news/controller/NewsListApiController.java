@@ -1,23 +1,28 @@
 package jp.co.ha.root.contents.news.controller;
 
-import java.io.InputStream;
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Key;
-import jp.co.ha.business.dto.NewsListDto;
-import jp.co.ha.business.dto.NewsListDto.NewsDto;
+import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
+import jp.co.ha.business.dto.NewsDto;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.PagingView;
+import jp.co.ha.common.util.PagingViewFactory;
+import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
+import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsListApiRequest;
 import jp.co.ha.root.contents.news.response.NewsListApiResponse;
 
@@ -30,45 +35,59 @@ import jp.co.ha.root.contents.news.response.NewsListApiResponse;
 public class NewsListApiController
         extends BaseRootApiController<NewsListApiRequest, NewsListApiResponse> {
 
-    /** S3コンポーネント */
+    /** お知らせ情報検索サービス */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private NewsInfoSearchService searchService;
+    /** お知らせ情報Component */
+    @Autowired
+    private NewsComponent newsComponent;
 
     /**
      * お知らせ情報一覧取得
      *
      * @param request
      *     お知らせ情報一覧取得APIリクエスト
+     * @param page
+     *     取得対象ページ
      * @return お知らせ情報一覧取得APIレスポンス
      * @throws BaseException
      *     S3よりお知らせ情報JSONを取得できなかった場合
      */
     @GetMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public NewsListApiResponse index(NewsListApiRequest request) throws BaseException {
+    public NewsListApiResponse index(NewsListApiRequest request,
+            @RequestParam(name = "page", required = true, defaultValue = "0") Optional<Integer> page)
+            throws BaseException {
 
-        // S3からお知らせJSONを取得
-        InputStream is = awsS3Component.getS3ObjectByKey(AwsS3Key.NEWS_JSON);
-        List<NewsDto> newsList = new JsonReader().read(is, NewsListDto.class)
-                .getNewsDtoList();
+        // おしらせ情報 取得
+        // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
+        Pageable pageable = PagingViewFactory.getPageable(page.get(),
+                applicationProperties.getPage());
 
-        // レスポンス型に変換し、Indexの降順でソート
-        List<NewsListApiResponse.NewsDataResponse> newsResponseList = newsList.stream()
-                .map(e -> {
-                    NewsListApiResponse.NewsDataResponse response = new NewsListApiResponse.NewsDataResponse();
-                    BeanUtil.copy(e, response);
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
+                .pageable(pageable)
+                .build();
 
-                    NewsListApiResponse.Tag responseTag = new NewsListApiResponse.Tag();
-                    BeanUtil.copy(e.getTag(), responseTag);
-                    response.setTag(responseTag);
-                    return response;
-                })
-                .sorted(Comparator
-                        .comparing(NewsListApiResponse.NewsDataResponse::getIndex)
-                        .reversed())
-                .collect(Collectors.toList());
+        List<NewsListApiResponse.NewsDataResponse> newsResponseList = new ArrayList<>();
+        for (NewsInfo entity : searchService.findAll(selectOption)) {
+            NewsListApiResponse.NewsDataResponse newsResponse = new NewsListApiResponse.NewsDataResponse();
+            BeanUtil.copy(entity, newsResponse);
+            // S3からお知らせJSONを取得
+            NewsDto dto = newsComponent.getNewsDto(entity.getS3Key());
+            BeanUtil.copy(dto, newsResponse);
+
+            NewsListApiResponse.Tag responseTag = new NewsListApiResponse.Tag();
+            BeanUtil.copy(dto.getTag(), responseTag);
+            newsResponse.setTag(responseTag);
+            newsResponseList.add(newsResponse);
+        }
+
+        PagingView paging = PagingViewFactory.getPageView(pageable, "news?page",
+                searchService.countBySeqNewsInfoId(null));
 
         NewsListApiResponse response = getSuccessResponse();
         response.setNewsDataResponseList(newsResponseList);
+        response.setPaging(paging);
 
         return response;
     }

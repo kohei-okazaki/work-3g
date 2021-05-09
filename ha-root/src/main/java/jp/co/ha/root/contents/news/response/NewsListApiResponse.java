@@ -2,7 +2,6 @@ package jp.co.ha.root.contents.news.response;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -46,12 +45,11 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
      *
      * @version 1.0.0
      */
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class NewsDataResponse extends JsonEntity {
 
-        /** 順序 */
-        @JsonProperty("index")
-        private Integer index;
+        /** お知らせ情報ID */
+        @JsonProperty("id")
+        private Long seqNewsInfoId;
         /** タイトル */
         @JsonProperty("title")
         private String title;
@@ -66,22 +64,22 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         private Tag tag;
 
         /**
-         * indexを返す
+         * seqNewsInfoIdを返す
          *
-         * @return index
+         * @return seqNewsInfoId
          */
-        public Integer getIndex() {
-            return index;
+        public Long getSeqNewsInfoId() {
+            return seqNewsInfoId;
         }
 
         /**
-         * indexを設定する
+         * seqNewsInfoIdを設定する
          *
-         * @param index
-         *     ID
+         * @param seqNewsInfoId
+         *     お知らせ情報ID
          */
-        public void setIndex(Integer index) {
-            this.index = index;
+        public void setSeqNewsInfoId(Long seqNewsInfoId) {
+            this.seqNewsInfoId = seqNewsInfoId;
         }
 
         /**
@@ -167,7 +165,6 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
      *
      * @version 1.0.0
      */
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Tag {
 
         /** 色 */

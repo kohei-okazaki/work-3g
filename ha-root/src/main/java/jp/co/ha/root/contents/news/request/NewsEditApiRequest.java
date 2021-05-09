@@ -2,7 +2,7 @@ package jp.co.ha.root.contents.news.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jp.co.ha.business.dto.NewsListDto.Tag;
+import jp.co.ha.business.dto.NewsDto.Tag;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
@@ -14,10 +14,6 @@ import jp.co.ha.root.base.BaseRootApiRequest;
  */
 public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
-    /** 順序 */
-    @JsonProperty("index")
-    @Required
-    private Integer index;
     /** タイトル */
     @JsonProperty("title")
     @Required
@@ -33,24 +29,6 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     /** タグ */
     @JsonProperty("tag")
     private Tag tag;
-
-    /**
-     * indexを返す
-     *
-     * @return index
-     */
-    public Integer getIndex() {
-        return index;
-    }
-
-    /**
-     * indexを設定する
-     *
-     * @param index
-     */
-    public void setIndex(Integer index) {
-        this.index = index;
-    }
 
     /**
      * titleを返す
