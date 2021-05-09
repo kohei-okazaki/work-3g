@@ -1,6 +1,5 @@
 package jp.co.ha.root.base;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -15,7 +14,6 @@ import jp.co.ha.root.type.RootApiResult.RootApiResultSerializer;
  *
  * @version 1.0.0
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class BaseRootApiResponse extends JsonEntity {
 
     /** 処理結果 */

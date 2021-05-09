@@ -19,25 +19,25 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
     /** お知らせ情報リスト */
     @JsonProperty("news_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<NewsDataResponse> newsDataResponseList;
+    private List<News> newsList;
 
     /**
-     * newsDataResponseListを返す
+     * newsListを返す
      *
-     * @return newsDataResponseList
+     * @return newsList
      */
-    public List<NewsDataResponse> getNewsDataResponseList() {
-        return newsDataResponseList;
+    public List<News> getNewsList() {
+        return newsList;
     }
 
     /**
-     * newsDataResponseListを設定する
+     * newsListを設定する
      *
-     * @param newsDataResponseList
+     * @param newsList
      *     お知らせ情報リスト
      */
-    public void setNewsDataResponseList(List<NewsDataResponse> newsDataResponseList) {
-        this.newsDataResponseList = newsDataResponseList;
+    public void setNewsList(List<News> newsList) {
+        this.newsList = newsList;
     }
 
     /**
@@ -45,7 +45,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
      *
      * @version 1.0.0
      */
-    public static class NewsDataResponse extends JsonEntity {
+    public static class News extends JsonEntity {
 
         /** お知らせ情報ID */
         @JsonProperty("id")

@@ -68,9 +68,9 @@ public class NewsListApiController
                 .pageable(pageable)
                 .build();
 
-        List<NewsListApiResponse.NewsDataResponse> newsResponseList = new ArrayList<>();
+        List<NewsListApiResponse.News> newsResponseList = new ArrayList<>();
         for (NewsInfo entity : searchService.findAll(selectOption)) {
-            NewsListApiResponse.NewsDataResponse newsResponse = new NewsListApiResponse.NewsDataResponse();
+            NewsListApiResponse.News newsResponse = new NewsListApiResponse.News();
             BeanUtil.copy(entity, newsResponse);
             // S3からお知らせJSONを取得
             NewsDto dto = newsComponent.getNewsDto(entity.getS3Key());
@@ -86,7 +86,7 @@ public class NewsListApiController
                 searchService.countBySeqNewsInfoId(null));
 
         NewsListApiResponse response = getSuccessResponse();
-        response.setNewsDataResponseList(newsResponseList);
+        response.setNewsList(newsResponseList);
         response.setPaging(paging);
 
         return response;

@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.read.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,11 +47,11 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
     @Select
     @Override
     @Transactional(readOnly = true)
-    public RootUserNoteInfo findById(Long seqRootUserNoteInfoId) {
+    public Optional<RootUserNoteInfo> findById(Long seqRootUserNoteInfoId) {
 
         RootUserNoteInfoKey key = new RootUserNoteInfoKey();
         key.setSeqRootUserNoteInfoId(seqRootUserNoteInfoId);
-        return mapper.selectByPrimaryKey(key);
+        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
     }
 
     @Select

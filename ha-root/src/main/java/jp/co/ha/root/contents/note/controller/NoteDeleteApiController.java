@@ -59,21 +59,21 @@ public class NoteDeleteApiController
             NewsDeleteApiRequest request) throws BaseException {
 
         if (!seqRootUserNoteInfoId.isPresent()) {
-            // 未指定の場合
+            // URLが不正の場合
             return getErrorResponse("seq_root_user_note_info_id is required");
         }
 
         // 管理者サイトユーザメモ情報を検索
-        RootUserNoteInfo entity = searchService
+        Optional<RootUserNoteInfo> optional = searchService
                 .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
-        if (entity == null) {
+        if (!optional.isPresent()) {
             return getErrorResponse("note_info is not found");
         }
 
         // メモ情報を削除
         deleteService.delete(Long.valueOf(seqRootUserNoteInfoId.get()));
         // メモファイルを削除
-        awsS3Component.removeS3ObjectByKeys(entity.getS3Key());
+        awsS3Component.removeS3ObjectByKeys(optional.get().getS3Key());
         // Slack通知
         slackApi.send(ContentType.ROOT,
                 "メモ情報ID=" + seqRootUserNoteInfoId.get() + "を削除しました");

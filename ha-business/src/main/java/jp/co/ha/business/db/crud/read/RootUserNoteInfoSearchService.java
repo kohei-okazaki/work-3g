@@ -1,6 +1,7 @@
 package jp.co.ha.business.db.crud.read;
 
 import java.util.List;
+import java.util.Optional;
 
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.RootUserNoteInfo;
@@ -30,7 +31,7 @@ public interface RootUserNoteInfoSearchService {
      *     管理者サイトユーザメモ情報ID
      * @return 管理者サイトユーザメモ情報
      */
-    RootUserNoteInfo findById(Long seqRootUserNoteInfoId);
+    Optional<RootUserNoteInfo> findById(Long seqRootUserNoteInfoId);
 
     /**
      * 指定されたログインIDの管理者サイトユーザメモ情報の件数を返す
