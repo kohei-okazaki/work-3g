@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.23.jar" />
+  <classPathEntry location="C:\app\git\work-3g\ha-db\lib\mysql-connector-java-8.0.24.jar" />
 
   <context id="context1" targetRuntime="MyBatis3">
     <!-- 文字コードをUTF-8 設定 -->
@@ -41,7 +41,8 @@
     <!-- <table schema="work3g" tableName="ROOT_USER_ROLE_MNG_MT" modelType="hierarchical" /> -->
     <!-- <table schema="work3g" tableName="ROOT_USER_ROLE_DETAIL_MT" modelType="hierarchical" /> -->
     <!-- <table schema="work3g" tableName="ROOT_ROLE_MT" modelType="hierarchical" /> -->
-    <table schema="work3g" tableName="ROOT_USER_NOTE_INFO" modelType="hierarchical" />
+    <!-- <table schema="work3g" tableName="ROOT_USER_NOTE_INFO" modelType="hierarchical" /> -->
+    <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" />
 
   </context>
 </generatorConfiguration>

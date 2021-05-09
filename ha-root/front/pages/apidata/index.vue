@@ -41,7 +41,7 @@
           :headers="headers"
           :items="apiDataList"
           class="pushable"
-          hide-default-footer=true
+          hide-default-footer="true"
           @click:row="openTimelineModal"
         >
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
@@ -136,11 +136,11 @@ export default {
     };
   },
   created: function () {
-    this.isRefView();
-    if (!this.isRefShow) {
-      return;
+    this.checkRefView();
+    if (this.isRefShow) {
+      // 照会権限がある場合、API通信情報取得
+      this.getApiDataList();
     }
-    this.getApiDataList();
   },
   methods: {
     getHttpStatusColor: function (httpStatus) {
@@ -175,7 +175,10 @@ export default {
         }
       }
     },
-    isRefView: function () {
+    /**
+     * 照会権限判定処理
+     */
+    checkRefView: function () {
       let roles = this.$store.state.auth.roles;
       for (var i = 0; i < roles.length; i++) {
         let role = roles[i];
@@ -186,6 +189,10 @@ export default {
       }
       this.isRefShow = false;
     },
+    /**
+     * 指定したページ数のAPI通信情報リストを取得
+     * @param page ページ数
+     */
     getApiDataList: function (page) {
       this.loading = true;
       // 保存済のAPIトークンを取得

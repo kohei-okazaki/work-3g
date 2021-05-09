@@ -54,7 +54,8 @@ public class NoteEditApiController
             @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<String> seqRootUserNoteInfoId,
             @RequestBody NoteEditApiRequest request) throws BaseException {
 
-        if (seqRootUserNoteInfoId == null || !seqRootUserNoteInfoId.isPresent()) {
+        if (!seqRootUserNoteInfoId.isPresent()) {
+            // URLが不正の場合
             return getErrorResponse("seq_root_user_note_info_id is required");
         }
 
@@ -62,10 +63,13 @@ public class NoteEditApiController
         rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId.get()),
                 request.getTitle());
 
-        RootUserNoteInfo note = rootUserNoteInfoSearchService
+        Optional<RootUserNoteInfo> optional = rootUserNoteInfoSearchService
                 .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
+        if (!optional.isPresent()) {
+            return getErrorResponse("note_info is not found");
+        }
         // メモファイルの更新
-        awsS3Component.putFile(note.getS3Key(), request.getDetail());
+        awsS3Component.putFile(optional.get().getS3Key(), request.getDetail());
 
         NoteEditApiResponse response = getSuccessResponse();
         return response;

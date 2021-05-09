@@ -2,16 +2,12 @@ package jp.co.ha.root.contents.top.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -32,9 +28,6 @@ import jp.co.ha.root.contents.top.response.TopApiResponse;
 public class TopApiController
         extends BaseRootApiController<TopApiRequest, TopApiResponse> {
 
-    /** ObjectMapper */
-    @Autowired
-    private ObjectMapper mapper;
     /** アカウント情報検索サービス */
     @Autowired
     private AccountSearchService accountSearchService;
@@ -50,11 +43,10 @@ public class TopApiController
      * @return Top情報取得APIレスポンス
      */
     @GetMapping(value = "top", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public TopApiResponse top(@RequestParam Map<String, String> request) {
+    public TopApiResponse top(TopApiRequest request) {
 
-        TopApiRequest apiRequest = mapper.convertValue(request, TopApiRequest.class);
-        LocalDateTime from = getFrom(apiRequest);
-        LocalDateTime to = getTo(apiRequest);
+        LocalDateTime from = getFrom(request);
+        LocalDateTime to = getTo(request);
 
         TopApiResponse response = getSuccessResponse();
         response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
@@ -83,11 +75,10 @@ public class TopApiController
      * @return Top情報取得APIレスポンス
      */
     @GetMapping(value = "top/healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public TopApiResponse healthinfo(@RequestParam Map<String, String> request) {
+    public TopApiResponse healthinfo(TopApiRequest request) {
 
-        TopApiRequest apiRequest = mapper.convertValue(request, TopApiRequest.class);
-        LocalDateTime from = getFrom(apiRequest);
-        LocalDateTime to = getTo(apiRequest);
+        LocalDateTime from = getFrom(request);
+        LocalDateTime to = getTo(request);
 
         TopApiResponse response = getSuccessResponse();
         response.setHealthInfoRegGraphList(healthInfoSearchService.findMonthly(from, to)
@@ -109,11 +100,10 @@ public class TopApiController
      * @return Top情報取得APIレスポンス
      */
     @GetMapping(value = "top/account", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public TopApiResponse account(@RequestParam Map<String, String> request) {
+    public TopApiResponse account(TopApiRequest request) {
 
-        TopApiRequest apiRequest = mapper.convertValue(request, TopApiRequest.class);
-        LocalDateTime from = getFrom(apiRequest);
-        LocalDateTime to = getTo(apiRequest);
+        LocalDateTime from = getFrom(request);
+        LocalDateTime to = getTo(request);
 
         TopApiResponse response = getSuccessResponse();
         response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
@@ -158,7 +148,11 @@ public class TopApiController
     }
 
     /**
-     * 対象年月を返す
+     * 対象年月を返す<br>
+     * <ul>
+     * <li>未指定の場合、システム日付</li>
+     * <li>指定されている場合、指定値+01</li>
+     * </ul>
      *
      * @param request
      *     Top情報取得APIリクエスト

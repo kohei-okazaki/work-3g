@@ -3,7 +3,6 @@ package jp.co.ha.business.db.crud.read.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,10 +61,8 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         if (selectOption.getPageable() != null) {
             // ページング
             example.setPageable(selectOption.getPageable());
-            RowBounds rowBounds = new RowBounds(
-                    (int) selectOption.getPageable().getOffset(),
-                    selectOption.getPageable().getPageSize());
-            return mapper.selectByExampleWithRowbounds(example, rowBounds);
+            return mapper.selectByExampleWithRowbounds(example,
+                    selectOption.toRowBounds());
         }
 
         return mapper.selectByExample(example);
@@ -163,11 +160,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
         HealthInfoExample example = new HealthInfoExample();
         example.setOrderByClause(selectOption.getOrderBy());
 
-        RowBounds rowBounds = new RowBounds(
-                (int) selectOption.getPageable().getOffset(),
-                selectOption.getPageable().getPageSize());
-
-        return compositeHealthInfoMapper.selectAll(example, rowBounds);
+        return compositeHealthInfoMapper.selectAll(example, selectOption.toRowBounds());
     }
 
     @Select

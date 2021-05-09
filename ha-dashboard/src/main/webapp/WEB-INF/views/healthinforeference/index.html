@@ -128,28 +128,6 @@
         }
       });
 
-      var systemConfig = /*[[ ${systemConfig} ]]*/;
-      var options;
-      if (systemConfig == null) {
-        options = {
-          valueNames: [ "height", "weight", "standardWeight", "bmi", "healthInfoRegDate"],
-        };
-      } else {
-        options = {
-          valueNames: [ "height", "weight", "standardWeight", "bmi", "healthInfoRegDate"],
-          page: systemConfig.paging,
-          pagination: {
-            pageationClass : "pagination",
-            innerWindow : 1,
-            outerWindow : 1
-          }
-        };
-      }
-      // Sort処理
-      var columnList = new List("resultList", options);
-      columnList.sort("healthInfoRegDate", {
-        order: "desc"
-      });
     }
     /*]]>*/
 

@@ -14,7 +14,7 @@
     <div class="container border col-10 shadow">
       <h2 class="menuTitle">お知らせ一覧画面</h2>
 
-      <div id="newsList">
+      <div>
         <table class="table table-hover table-striped">
           <tbody class="list">
              <tr th:each="news : ${newsList}">
@@ -27,8 +27,8 @@
                    <!-- 停止情報 -->
                    <span class="badge badge-warning" th:if="${news.tag.color == 'yellow'}" th:text="${news.tag.name}"></span>
                  </div>
-                 <a data-toggle="collapse" th:href="${'#newsId' + news.index}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.index}" th:text="${news.date + '　' + news.title}"></a>
-                 <div class="collapse" th:id="${'newsId' + news.index}">
+                 <a data-toggle="collapse" th:href="${'#newsId' + news.id}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.id}" th:text="${news.date + '　' + news.title}"></a>
+                 <div class="collapse" th:id="${'newsId' + news.id}">
                    <div class="card card-body">
                      <div th:utext="${news.detail}"></div>
                    </div><!-- /.card card-body -->
@@ -37,33 +37,17 @@
             </tr>
           </tbody><!-- /.list -->
         </table><!-- /.table -->
-        <div class="pager">
-          <ul class="pagination"></ul>
-        </div><!-- /.pager -->
-      </div><!-- /#newsList -->
+        <div>
+          <p th:text="${paging.totalRecordNum} + '件中 ' + ${paging.fromRecordNum} + '～' + ${paging.toRecordNum} + '件表示中'" />
+          <a class="link" th:classappend="!${paging.canGoFirst} ? 'disabled'" th:href="${paging.firstHref}">&lt;&lt;</a>
+          <a class="link" th:classappend="!${paging.canGoPrevious} ? 'disabled'" th:href="${paging.previousHref}">&lt;</a>
+          <a class="link" th:classappend="!${paging.canGoNext} ? 'disabled'" th:href="${paging.nextHref}">&gt;</a>
+          <a class="link" th:classappend="!${paging.canGoLast} ? 'disabled'" th:href="${paging.lastHref}">&gt;&gt;</a>
+        </div>
+      </div>
       <br>
     </div><!-- /.container border col-10 -->
   </div>
 
-  <script th:inline="javascript">
-    $(function() {
-
-      /*<![CDATA[*/
-      // ページング処理
-      var systemConfig = /*[[ ${systemConfig} ]]*/;
-      var options = {
-        valueNames: [ "date", "title" ],
-        page: systemConfig.paging,
-        pagination: {
-          pageationClass: "pagination",
-          innerWindow: 1,
-          outerWindow: 1
-        }
-      };
-      var columnList = new List("newsList", options);
-      /*]]>*/
-
-    });
-  </script>
 </body>
 </html>

@@ -266,7 +266,7 @@ public class AwsS3Component {
      * @throws BaseException
      *     S3へのファイルアップロードに失敗した場合
      */
-    private void putFile(String key, long length, InputStream is) throws BaseException {
+    public void putFile(String key, long length, InputStream is) throws BaseException {
 
         try {
             ObjectMetadata om = new ObjectMetadata();

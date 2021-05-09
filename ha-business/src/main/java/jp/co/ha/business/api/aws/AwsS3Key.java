@@ -14,7 +14,7 @@ public enum AwsS3Key implements BaseEnum {
     /** 健康情報照会CSVファイルの配置キー */
     HEALTHINFO_FILE_REFERENCE("healthinfo-file-reference/"),
     /** お知らせ一覧JSONファイルの配置キー */
-    NEWS_JSON("news/news.json"),
+    NEWS_JSON("news/"),
     /** 健康管理アプリパスワード再設定メールのテンプレートキー */
     ACCOUNT_RECOVERY_TEMPLATE("mail-template/account-recovery-template.txt"),
     /** 健康管理アプリパスワード再設定メールのテンプレートキー */

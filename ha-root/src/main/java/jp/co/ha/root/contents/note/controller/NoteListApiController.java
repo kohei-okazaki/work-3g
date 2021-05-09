@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
 import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.PagingView;
+import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.note.request.NoteListApiRequest;
@@ -37,7 +43,7 @@ public class NoteListApiController
 
     /** 管理者サイトユーザメモ情報検索サービス */
     @Autowired
-    private RootUserNoteInfoSearchService rootUserNoteInfoSearchService;
+    private RootUserNoteInfoSearchService searchService;
     /** AWS-S3 Component */
     @Autowired
     private AwsS3Component awsS3Component;
@@ -49,24 +55,34 @@ public class NoteListApiController
      *     メモ一覧取得APIリクエスト
      * @param seqLoginId
      *     ログインID
+     * @param page
+     *     ページ
      * @return メモ一覧取得APIレスポンス
      * @throws BaseException
      *     レスポンスの生成に失敗した場合
      */
     @GetMapping(value = "note", produces = { MediaType.APPLICATION_JSON_VALUE })
     public NoteListApiResponse index(NoteListApiRequest request,
-            @RequestParam(name = "seq_login_id", required = false) Optional<Long> seqLoginId)
+            @RequestParam(name = "seq_login_id", required = false) Optional<Long> seqLoginId,
+            @RequestParam(name = "page", required = true, defaultValue = "0") Optional<Integer> page)
             throws BaseException {
 
-        if (seqLoginId == null || !seqLoginId.isPresent()) {
+        if (!seqLoginId.isPresent()) {
             return getErrorResponse("seq_login_id is required");
         }
 
-        // 管理者サイトユーザメモ情報リストを取得
-        List<RootUserNoteInfo> list = rootUserNoteInfoSearchService
-                .findBySeqLoginId(seqLoginId.get());
+        // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
+        Pageable pageable = PagingViewFactory.getPageable(page.get(),
+                applicationProperties.getPage());
 
-        NoteListApiResponse response = getSuccessResponse();
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("SEQ_ROOT_USER_NOTE_INFO_ID", SortType.DESC)
+                .pageable(pageable)
+                .build();
+
+        // 管理者サイトユーザメモ情報リストを取得
+        List<RootUserNoteInfo> list = searchService
+                .findBySeqLoginId(seqLoginId.get(), selectOption);
 
         List<Note> noteList = new ArrayList<>();
         for (RootUserNoteInfo entity : list) {
@@ -75,7 +91,13 @@ public class NoteListApiController
             note.setDetail(getDetail(entity.getS3Key()));
             noteList.add(note);
         }
+
+        PagingView paging = PagingViewFactory.getPageView(pageable, "apidata?page",
+                searchService.countBySeqLoginId(null));
+
+        NoteListApiResponse response = getSuccessResponse();
         response.setNoteList(noteList);
+        response.setPaging(paging);
 
         return response;
     }
