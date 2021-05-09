@@ -1,9 +1,11 @@
 package jp.co.ha.root.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.root.base.BaseRootApiResponse.ErrorData;
+import jp.co.ha.root.config.ApplicationProperties;
 import jp.co.ha.root.type.RootApiResult;
 
 /**
@@ -20,6 +22,10 @@ import jp.co.ha.root.type.RootApiResult;
 // Vue.jsからのリクエストを受け付けるため、port=8083のリクエストを許容する
 @CrossOrigin(origins = { "http://localhost:8083" })
 public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 extends BaseRootApiResponse> {
+
+    /** アプリケーション設定ファイル情報 */
+    @Autowired
+    protected ApplicationProperties applicationProperties;
 
     /**
      * レスポンスを返す

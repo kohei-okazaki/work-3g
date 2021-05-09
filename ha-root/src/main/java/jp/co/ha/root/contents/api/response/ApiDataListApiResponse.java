@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
-import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
@@ -26,10 +25,6 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
     @JsonProperty("api_data_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ApiData> apiDataList;
-    /** ページング */
-    @JsonProperty("paging")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private PagingView paging;
 
     /**
      * apiDataListを返す
@@ -48,25 +43,6 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
      */
     public void setApiDataList(List<ApiData> apiDataList) {
         this.apiDataList = apiDataList;
-    }
-
-    /**
-     * pagingを返す
-     * 
-     * @return paging
-     */
-    public PagingView getPaging() {
-        return paging;
-    }
-
-    /**
-     * pagingを設定する
-     * 
-     * @param paging
-     *     ページング
-     */
-    public void setPaging(PagingView paging) {
-        this.paging = paging;
     }
 
     /**

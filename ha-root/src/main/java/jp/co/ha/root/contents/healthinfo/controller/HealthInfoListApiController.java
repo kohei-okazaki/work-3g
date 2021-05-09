@@ -18,7 +18,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.config.ApplicationProperties;
 import jp.co.ha.root.contents.healthinfo.request.HealthInfoListApiRequest;
 import jp.co.ha.root.contents.healthinfo.response.HealthInfoListApiResponse;
 
@@ -34,9 +33,6 @@ public class HealthInfoListApiController extends
     /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** アプリケーション設定ファイル情報 */
-    @Autowired
-    private ApplicationProperties applicationProperties;
 
     /**
      * 健康情報一覧取得

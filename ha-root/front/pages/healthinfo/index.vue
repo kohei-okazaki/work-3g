@@ -51,7 +51,7 @@
         <v-data-table
           :headers="headers"
           :items="healthInfoList"
-          hide-default-footer=true
+          hide-default-footer="true"
         >
           <template v-slot:[`item.edit_action`]="{ item }">
             <v-btn

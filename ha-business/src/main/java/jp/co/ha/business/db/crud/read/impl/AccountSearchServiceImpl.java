@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -106,11 +105,7 @@ public class AccountSearchServiceImpl implements AccountSearchService {
         AccountExample example = new AccountExample();
         example.setOrderByClause(selectOption.getOrderBy());
 
-        RowBounds rowBounds = new RowBounds(
-                (int) selectOption.getPageable().getOffset(),
-                selectOption.getPageable().getPageSize());
-
-        return compositeAccountMapper.selectAll(example, rowBounds);
+        return compositeAccountMapper.selectAll(example, selectOption.toRowBounds());
     }
 
     @Select

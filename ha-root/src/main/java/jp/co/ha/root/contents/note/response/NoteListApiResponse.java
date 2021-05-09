@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -50,7 +49,6 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
      *
      * @version 1.0.0
      */
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Note extends JsonEntity {
 
         /** 管理者サイトユーザメモ情報ID */

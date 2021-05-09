@@ -2,7 +2,6 @@ package jp.co.ha.root.contents.news.response;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,25 +19,25 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
     /** お知らせ情報リスト */
     @JsonProperty("news_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<NewsDataResponse> newsDataResponseList;
+    private List<News> newsList;
 
     /**
-     * newsDataResponseListを返す
+     * newsListを返す
      *
-     * @return newsDataResponseList
+     * @return newsList
      */
-    public List<NewsDataResponse> getNewsDataResponseList() {
-        return newsDataResponseList;
+    public List<News> getNewsList() {
+        return newsList;
     }
 
     /**
-     * newsDataResponseListを設定する
+     * newsListを設定する
      *
-     * @param newsDataResponseList
+     * @param newsList
      *     お知らせ情報リスト
      */
-    public void setNewsDataResponseList(List<NewsDataResponse> newsDataResponseList) {
-        this.newsDataResponseList = newsDataResponseList;
+    public void setNewsList(List<News> newsList) {
+        this.newsList = newsList;
     }
 
     /**
@@ -46,12 +45,11 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
      *
      * @version 1.0.0
      */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class NewsDataResponse extends JsonEntity {
+    public static class News extends JsonEntity {
 
-        /** 順序 */
-        @JsonProperty("index")
-        private Integer index;
+        /** お知らせ情報ID */
+        @JsonProperty("id")
+        private Long seqNewsInfoId;
         /** タイトル */
         @JsonProperty("title")
         private String title;
@@ -66,22 +64,22 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         private Tag tag;
 
         /**
-         * indexを返す
+         * seqNewsInfoIdを返す
          *
-         * @return index
+         * @return seqNewsInfoId
          */
-        public Integer getIndex() {
-            return index;
+        public Long getSeqNewsInfoId() {
+            return seqNewsInfoId;
         }
 
         /**
-         * indexを設定する
+         * seqNewsInfoIdを設定する
          *
-         * @param index
-         *     ID
+         * @param seqNewsInfoId
+         *     お知らせ情報ID
          */
-        public void setIndex(Integer index) {
-            this.index = index;
+        public void setSeqNewsInfoId(Long seqNewsInfoId) {
+            this.seqNewsInfoId = seqNewsInfoId;
         }
 
         /**
@@ -167,7 +165,6 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
      *
      * @version 1.0.0
      */
-    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Tag {
 
         /** 色 */
