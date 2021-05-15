@@ -118,12 +118,6 @@ public class PagingViewFactory {
         toRecordNum = count < toRecordNum ? count : toRecordNum;
         pv.setToRecordNum(toRecordNum);
         pv.setTotalRecordNum(count);
-        // if (count % pageable.getPageSize() == 0) {
-        // // 最後のページの表示件数が1ページあたり表示件数と同じの場合
-        // pv.setTotalPage(count / pageable.getPageSize());
-        // } else {
-        // pv.setTotalPage(count / pageable.getPageSize() + 1);
-        // }
 
         return pv;
     }

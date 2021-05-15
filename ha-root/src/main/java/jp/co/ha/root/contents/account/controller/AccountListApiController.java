@@ -1,12 +1,14 @@
 package jp.co.ha.root.contents.account.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
@@ -38,13 +40,16 @@ public class AccountListApiController
      *
      * @param request
      *     アカウント情報一覧取得APIリクエスト
+     * @param page
+     *     取得対象ページ
      * @return アカウント情報一覧取得APIレスポンス
      */
     @GetMapping(value = "account", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public AccountListApiResponse list(AccountListApiRequest request) {
+    public AccountListApiResponse list(AccountListApiRequest request,
+            @RequestParam(name = "page", required = true, defaultValue = "0") Optional<Integer> page) {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
-        Pageable pageable = PagingViewFactory.getPageable(request.getPage(),
+        Pageable pageable = PagingViewFactory.getPageable(page.get(),
                 applicationProperties.getPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
