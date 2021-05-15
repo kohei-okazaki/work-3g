@@ -1,18 +1,26 @@
 package jp.co.ha.dashboard.exception;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.BaseAppError;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -24,9 +32,12 @@ import jp.co.ha.dashboard.view.DashboardView;
 public class DashboardExceptionHandler extends BaseExceptionHandler
         implements HandlerExceptionResolver {
 
-    /** {@linkplain MessageSource} */
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(DashboardExceptionHandler.class);
+    /** {@linkplain SlackApiComponent} */
     @Autowired
-    private MessageSource messageSource;
+    private SlackApiComponent slackApiComponent;
 
     @Override
     public ModelAndView resolveException(HttpServletRequest request,
@@ -35,8 +46,20 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
         ModelAndView modelView = new ModelAndView();
         // error画面を設定
         modelView.setViewName(DashboardView.ERROR.getName());
+
+        String logErrorMessage = getLogErrorMessage(e);
         // log出力
-        outLog(getLogErrorMessage(e), e);
+        outLog(logErrorMessage, e);
+
+        try (StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);) {
+            e.printStackTrace(pw);
+            slackApiComponent.sendFile(ContentType.DASHBOARD,
+                    sw.toString().getBytes(Charset.UTF_8.getValue()), "エラー情報",
+                    "stack-trace", logErrorMessage);
+        } catch (BaseException | IOException be) {
+            LOG.error("slack通知に失敗しました", be);
+        }
         request.setAttribute("errorMessage", getDispErrorMessage(e));
 
         return modelView;
@@ -63,21 +86,4 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
                 .toString();
     }
 
-    /**
-     * ログエラーメッセージを返す
-     *
-     * @param e
-     *     例外
-     * @return エラーメッセージ
-     */
-    private String getLogErrorMessage(Exception e) {
-
-        BaseAppError error = getAppError(e);
-        return new StringBuilder()
-                .append("(")
-                .append(error.getErrorCode().getOuterErrorCode())
-                .append(")")
-                .append(error.getDetail())
-                .toString();
-    }
 }
