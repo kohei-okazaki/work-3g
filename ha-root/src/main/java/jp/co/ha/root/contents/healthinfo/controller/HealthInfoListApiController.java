@@ -1,12 +1,14 @@
 package jp.co.ha.root.contents.healthinfo.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -39,13 +41,16 @@ public class HealthInfoListApiController extends
      *
      * @param request
      *     健康情報一覧取得APIリクエスト
+     * @param page
+     *     取得対象ページ
      * @return 健康情報一覧取得APIレスポンス
      */
     @GetMapping(value = "healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoListApiResponse list(HealthInfoListApiRequest request) {
+    public HealthInfoListApiResponse list(HealthInfoListApiRequest request,
+            @RequestParam(name = "page", required = true, defaultValue = "0") Optional<Integer> page) {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
-        Pageable pageable = PagingViewFactory.getPageable(request.getPage(),
+        Pageable pageable = PagingViewFactory.getPageable(page.get(),
                 applicationProperties.getPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
