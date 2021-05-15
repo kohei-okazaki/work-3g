@@ -19,7 +19,7 @@ public abstract class BaseExceptionHandler {
     private static final Logger LOG = LoggerFactory.getLogger(BaseExceptionHandler.class);
     /** {@linkplain MessageSource} */
     @Autowired
-    private MessageSource messageSource;
+    protected MessageSource messageSource;
 
     /**
      * アプリ例外を返す
@@ -70,5 +70,22 @@ public abstract class BaseExceptionHandler {
             LOG.error(errorMessage, e);
         }
 
+    }
+
+    /**
+     * ログエラーメッセージを返す
+     *
+     * @param e
+     *     例外クラス
+     * @return ログエラーメッセージ
+     */
+    protected String getLogErrorMessage(Exception e) {
+        BaseAppError error = getAppError(e);
+        return new StringBuilder()
+                .append("(")
+                .append(error.getErrorCode().getOuterErrorCode())
+                .append(")")
+                .append(error.getDetail())
+                .toString();
     }
 }
