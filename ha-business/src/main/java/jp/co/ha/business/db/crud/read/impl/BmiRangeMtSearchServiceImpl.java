@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jp.co.ha.business.cache.BmiRangeMtCacheComponent;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.BmiRangeMt;
@@ -21,19 +20,21 @@ import jp.co.ha.db.mapper.BmiRangeMtMapper;
  * @version 1.0.0
  */
 @Service
-@CacheConfig(cacheNames = "bmiRangeMt")
+// @CacheConfig(cacheNames = "bmiRangeMt")
 public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 
-    /** BmiRangeMtMapper */
+    /** BMI範囲マスタMapper */
     @Autowired
     private BmiRangeMtMapper mapper;
+    /** BMI範囲マスタのキャッシュComponent */
+    @Autowired
+    private BmiRangeMtCacheComponent cacheComponent;
 
     @Select
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(key = "'bmiRangeMt/' + #seqBmiRangeMtId", value = "bmiRangeMt")
     public Optional<BmiRangeMt> findById(Long seqBmiRangeMtId) {
-        return findAll().stream()
+        return this.findAll().stream()
                 .filter(e -> e.getSeqBmiRangeMtId().equals(seqBmiRangeMtId))
                 .findFirst();
     }
@@ -41,9 +42,8 @@ public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
     @Select
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(key = "'bmiRangeMt'", value = "bmiRangeMt")
     public List<BmiRangeMt> findAll() {
-        return mapper.selectByExample(new BmiRangeMtExample());
+        return cacheComponent.get(() -> mapper.selectByExample(new BmiRangeMtExample()));
     }
 
 }

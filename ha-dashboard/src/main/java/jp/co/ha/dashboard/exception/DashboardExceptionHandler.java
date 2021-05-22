@@ -43,9 +43,7 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
     public ModelAndView resolveException(HttpServletRequest request,
             HttpServletResponse response, Object handler, Exception e) {
 
-        ModelAndView modelView = new ModelAndView();
-        // error画面を設定
-        modelView.setViewName(DashboardView.ERROR.getName());
+        ModelAndView modelView = new ModelAndView(DashboardView.ERROR.getName());
 
         String logErrorMessage = getLogErrorMessage(e);
         // log出力
