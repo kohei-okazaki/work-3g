@@ -62,6 +62,7 @@
   <context:component-scan base-package="jp.co.ha.db.aspect" />
 
   <!-- キャッシュ機能 -->
+<!--
   <cache:annotation-driven order="-1" />
   <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
     <property name="caches">
@@ -72,5 +73,5 @@
       </set>
     </property>
   </bean>
-
+ -->
 </beans>

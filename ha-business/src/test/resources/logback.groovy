@@ -32,10 +32,10 @@ appender("STDOUT", ConsoleAppender) {
 // DEBUGログの出力設定
 appender("DEBUG_FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/batch-debug.log"
+  file = "${FILE_PATH}/business-debug.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "batch-debug_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "business-debug_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 
@@ -55,10 +55,10 @@ appender("DEBUG_FILE", RollingFileAppender) {
 // INFOログの出力設定
 appender("INFO_FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/batch-info.log"
+  file = "${FILE_PATH}/business-info.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "batch-info_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "business-info_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 
@@ -78,10 +78,10 @@ appender("INFO_FILE", RollingFileAppender) {
 // WARNログの出力する設定
 appender("WARN_FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/batch-warn.log"
+  file = "${FILE_PATH}/business-warn.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "batch-warn_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "business-warn_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 
@@ -100,10 +100,10 @@ appender("WARN_FILE", RollingFileAppender) {
 // ERRORログの出力する設定
 appender("ERROR_FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/batch-error.log"
+  file = "${FILE_PATH}/business-error.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "batch-error_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "business-error_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 

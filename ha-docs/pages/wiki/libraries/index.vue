@@ -121,7 +121,7 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.6",
+          version: "5.3.7",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
@@ -176,7 +176,7 @@ export default {
         },
         {
           name: "mysql",
-          version: "8.0.24",
+          version: "8.0.25",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するMySQLライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
@@ -190,7 +190,7 @@ export default {
         },
         {
           name: "flyway",
-          version: "7.8.2",
+          version: "7.9.1",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
@@ -208,7 +208,7 @@ export default {
         },
         {
           name: "junit",
-          version: "5.7.1",
+          version: "5.7.2",
           description: "Javaのテストライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },

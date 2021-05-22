@@ -88,11 +88,30 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
 
             // URIを生成
             URI uri = getUri(apiConnectInfo, request);
-            LOG.info("====> API名=" + getApiName() + ",URL=" + uri.toString());
+            LOG.info("====> API名=" + getApiName() + ",HttpMethod=" + getHttpMethod()
+                    + ",URL=" + uri.toString());
             LOG.infoBean(request);
 
-            if (HttpMethod.POST == getHttpMethod()) {
-                // POST通信の場合
+            if (HttpMethod.GET == getHttpMethod()) {
+                // GET通信の場合
+                HeadersBuilder<?> requestBuilder = RequestEntity.get(uri)
+                        .acceptCharset(apiConnectInfo.getCharset());
+
+                // ヘッダーの設定
+                for (Entry<String, String> entry : apiConnectInfo.getHeaderMap()
+                        .entrySet()) {
+                    requestBuilder.header(entry.getKey(), entry.getValue());
+                }
+                RequestEntity<Void> reqEntity = requestBuilder.build();
+
+                ResponseEntity<Rs> responseEntity = (ResponseEntity<Rs>) restTemplate
+                        .exchange(reqEntity, response.getClass());
+
+                code = responseEntity.getStatusCode();
+                response = responseEntity.getBody();
+
+            } else {
+                // POST/PUT/DELETE通信の場合
 
                 BodyBuilder requestBuilder = RequestEntity.post(uri)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -111,31 +130,9 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
 
                 code = responseEntity.getStatusCode();
                 response = responseEntity.getBody();
-
-            } else {
-                // GET通信
-
-                HeadersBuilder<?> requestBuilder = RequestEntity.get(uri)
-                        .acceptCharset(apiConnectInfo.getCharset());
-
-                // ヘッダーの設定
-                for (Entry<String, String> entry : apiConnectInfo.getHeaderMap()
-                        .entrySet()) {
-                    requestBuilder.header(entry.getKey(), entry.getValue());
-                }
-                RequestEntity<Void> reqEntity = requestBuilder.build();
-
-                ResponseEntity<Rs> responseEntity = (ResponseEntity<Rs>) restTemplate
-                        .exchange(reqEntity, response.getClass());
-
-                code = responseEntity.getStatusCode();
-                response = responseEntity.getBody();
-
             }
-        } catch (HttpClientErrorException e) {
-            code = e.getStatusCode();
-            bindErrorInfo(response);
-        } catch (HttpServerErrorException e) {
+
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
             code = e.getStatusCode();
             bindErrorInfo(response);
         } catch (Exception e) {
@@ -186,10 +183,12 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @param apiConnectInfo
      *     API接続情報
      * @param request
+     *     リクエスト情報
      * @return リクエストURI
      * @throws URISyntaxException
      *     URLとして正しくない場合
      * @throws ApiException
+     *     APIの通信に失敗した場合
      */
     private static URI getUri(ApiConnectInfo apiConnectInfo, BaseApiRequest request)
             throws URISyntaxException, ApiException {
