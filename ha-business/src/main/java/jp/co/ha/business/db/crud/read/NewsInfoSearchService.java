@@ -17,7 +17,7 @@ public interface NewsInfoSearchService {
      * お知らせ情報を取得
      *
      * @param selectOption
-     *     {@linkplan SelectOption}
+     *     {@linkplain SelectOption}
      * @return お知らせ情報
      */
     List<NewsInfo> findAll(SelectOption selectOption);

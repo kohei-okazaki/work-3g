@@ -3,6 +3,8 @@ package jp.co.ha.business.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.validator.annotation.Required;
+
 /**
  * お知らせ情報Dto
  *
@@ -12,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class NewsDto {
 
     /** お知らせ情報ID */
-    @JsonProperty("id")
-    private Long id;
+    @JsonProperty("seq_news_info_id")
+    private Long seqNewsInfoId;
     /** タイトル */
     @JsonProperty("title")
     private String title;
@@ -28,22 +30,22 @@ public class NewsDto {
     private Tag tag;
 
     /**
-     * idを返す
+     * seqNewsInfoIdを返す
      *
-     * @return id
+     * @return seqNewsInfoId
      */
-    public Long getId() {
-        return id;
+    public Long getSeqNewsInfoId() {
+        return seqNewsInfoId;
     }
 
     /**
-     * idを設定する
+     * seqNewsInfoIdを設定する
      *
-     * @param id
+     * @param seqNewsInfoId
      *     お知らせ情報ID
      */
-    public void setId(Long id) {
-        this.id = id;
+    public void setSeqNewsInfoId(Long seqNewsInfoId) {
+        this.seqNewsInfoId = seqNewsInfoId;
     }
 
     /**
@@ -131,9 +133,11 @@ public class NewsDto {
     public static class Tag {
 
         /** 色 */
+        @Required
         @JsonProperty("color")
         private String color;
         /** 名前 */
+        @Required
         @JsonProperty("name")
         private String name;
 
