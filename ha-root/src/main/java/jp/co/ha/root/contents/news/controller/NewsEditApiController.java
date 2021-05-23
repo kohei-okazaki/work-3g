@@ -60,7 +60,7 @@ public class NewsEditApiController
         Long seqNewsInfoId = Long.valueOf(id.get());
 
         // お知らせ情報を検索
-        Optional<NewsInfo> optional = searchService.findById(Long.valueOf(id.get()));
+        Optional<NewsInfo> optional = searchService.findById(seqNewsInfoId);
         if (!optional.isPresent()) {
             return getErrorResponse("news_info is not found");
         }
