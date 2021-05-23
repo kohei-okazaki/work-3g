@@ -3,6 +3,7 @@ package jp.co.ha.root.contents.news.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.dto.NewsDto.Tag;
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
@@ -14,15 +15,19 @@ import jp.co.ha.root.base.BaseRootApiRequest;
 public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
     /** タイトル */
+    @Required
     @JsonProperty("title")
     private String title;
     /** 日付 */
+    @Required
     @JsonProperty("date")
     private String date;
     /** 詳細 */
+    @Required
     @JsonProperty("detail")
     private String detail;
     /** タグ */
+    @Required
     @JsonProperty("tag")
     private Tag tag;
 

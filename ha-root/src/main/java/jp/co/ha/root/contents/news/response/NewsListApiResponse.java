@@ -48,7 +48,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
     public static class News extends JsonEntity {
 
         /** お知らせ情報ID */
-        @JsonProperty("id")
+        @JsonProperty("seq_news_info_id")
         private Long seqNewsInfoId;
         /** タイトル */
         @JsonProperty("title")

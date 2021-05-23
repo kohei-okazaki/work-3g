@@ -15,18 +15,19 @@ import jp.co.ha.root.base.BaseRootApiRequest;
 public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
     /** タイトル */
-    @JsonProperty("title")
     @Required
+    @JsonProperty("title")
     private String title;
     /** 日付 */
-    @JsonProperty("date")
     @Required
+    @JsonProperty("date")
     private String date;
     /** 詳細 */
-    @JsonProperty("detail")
     @Required
+    @JsonProperty("detail")
     private String detail;
     /** タグ */
+    @Required
     @JsonProperty("tag")
     private Tag tag;
 

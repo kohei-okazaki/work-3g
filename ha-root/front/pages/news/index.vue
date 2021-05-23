@@ -97,14 +97,14 @@
             <v-btn
               small
               class="mx-1"
-              @click="openNewsEditModal(item.id)"
+              @click="openNewsEditModal(item.seq_news_info_id)"
               v-if="isEntryShow"
             >
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
           <template v-slot:[`item.delete_action`]="{ item }">
-            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.id)">
+            <v-btn small class="mx-1" @click="openNewsDeleteModal(item.seq_news_info_id)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -167,7 +167,7 @@ export default {
         },
         {
           text: "ID",
-          value: "id",
+          value: "seq_news_info_id",
         },
         {
           text: "タイトル",
@@ -194,7 +194,7 @@ export default {
       },
       newsEditModal: {
         dialog: false,
-        id: "",
+        seq_news_info_id: "",
         title: "",
         date: "",
         detail: "",
@@ -256,10 +256,10 @@ export default {
      */
     openNewsEditModal: function (targetNewsId) {
       this.newsEditModal.dialog = true;
-      this.newsEditModal.id = targetNewsId;
+      this.newsEditModal.seq_news_info_id = targetNewsId;
       for (var i = 0; i < this.news_list.length; i++) {
         let news = this.news_list[i];
-        if (news.id == targetNewsId) {
+        if (news.seq_news_info_id == targetNewsId) {
           // カレンダー表示に対応させるため、YYYY-MM-DD形式に変換する
           news.date = news.date.replaceAll("/", "-");
           this.newsEditModal.title = news.title;
@@ -281,9 +281,9 @@ export default {
       }
 
       this.loading = true;
-      let reqUrl = url + "/" + this.newsEditModal.id;
+      let reqUrl = url + "/" + this.newsEditModal.seq_news_info_id;
       let reqBody = {
-        id: this.newsEditModal.id,
+        seq_news_info_id: this.newsEditModal.seq_news_info_id,
         title: this.newsEditModal.title,
         date: this.newsEditModal.date.replaceAll("-", "/"),
         detail: this.newsEditModal.detail,
@@ -337,9 +337,9 @@ export default {
     },
     /**
      * お知らせ情報削除モーダル表示
-     * @param id お知らせ情報ID
+     * @param seq_news_info_id お知らせ情報ID
      */
-    async openNewsDeleteModal(id) {
+    async openNewsDeleteModal(seq_news_info_id) {
       let modalInfo = {
         color: "red",
         width: 400,
@@ -348,21 +348,21 @@ export default {
       if (
         await this.$refs.confirm.open(
           "削除確認",
-          "お知らせ情報ID=" + id + "のレコードを削除しますか？",
+          "お知らせ情報ID=" + seq_news_info_id + "のレコードを削除しますか？",
           modalInfo
         )
       ) {
         // 確認モーダルで削除に同意した場合
-        this.deleteNews(id);
+        this.deleteNews(seq_news_info_id);
       }
     },
     /**
      * お知らせ情報を削除
-     * @param id お知らせ情報ID
+     * @param seq_news_info_id お知らせ情報ID
      */
-    async deleteNews(id) {
+    async deleteNews(seq_news_info_id) {
       this.loading = true;
-      let deleteUrl = url + "/" + id;
+      let deleteUrl = url + "/" + seq_news_info_id;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };

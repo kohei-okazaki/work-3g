@@ -75,7 +75,6 @@ public class NewsController implements BaseWebController {
             NewsDto dto = new JsonReader()
                     .read(awsS3Component.getS3ObjectByKey(entity.getS3Key()),
                             NewsDto.class);
-            dto.setId(entity.getSeqNewsInfoId());
             newsList.add(dto);
         }
 
