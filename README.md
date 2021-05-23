@@ -29,23 +29,49 @@ windows, linuxでそれぞれbatとshを用意
 
 * ### ha-business  
 以下のプロジェクトで共通的に使うbusinessロジックをまとめたプロジェクト  
-* ### ha-pom  
-|  プロジェクト名  |
+| プロジェクト名 |
 | :---- |
-| api  |
-| batch  |
-| dashboard  |
-| root  |
+| api |
+| batch |
+| dashboard |
+| root |
+
+* ### ha-pom  
+以下のMavenプロジェクトで共通的に使う依存関係をまとめたプロジェクト  
+| プロジェクト名 |
+| :---- |
+| api |
+| batch |
+| business |
+| common |
+| dashboard |
+| db |
+| root |
 
 * ### ha-common  
-共通処理を定義したプロジェクト  
+以下のMavenプロジェクトで共通的に使う共通処理を定義したプロジェクト  
+| プロジェクト名 |
+| :---- |
+| api |
+| batch |
+| business |
+| dashboard |
+| db |
+| root |
 
 * ### ha-dashboard  
 健康管理のダッシュボードプロジェクト  
 
 * ### ha-db  
-Tableに対応したEntityとMapperのみを定義したプロジェクト  
+以下のMavenプロジェクトで共通的に使うTableに対応したEntityとMapperのみを定義したプロジェクト  
 環境へのDB反映は本プロジェクトよりFlywayで行う  
+| プロジェクト名 |
+| :---- |
+| api |
+| batch |
+| business |
+| dashboard |
+| root |
 
 * ### ha-docs  
 健康管理アプリのドキュメントプロジェクト  
@@ -55,16 +81,16 @@ Tableに対応したEntityとMapperのみを定義したプロジェクト
 
 * ### ha-pom  
 以下のプロジェクトで共通的に使う外部ライブラリを定義したpomプロジェクト
-|  プロジェクト名  |
+| プロジェクト名 |
 | :---- |
-| api  |
-| batch  |
-| business  |
-| common  |
-| dashboard  |
-| db  |
-| root  |
-| tool  |
+| api |
+| batch |
+| business |
+| common |
+| dashboard |
+| db |
+| root |
+| tool |
 
 * ### ha-root  
 健康管理アプリの管理者用サイト    
