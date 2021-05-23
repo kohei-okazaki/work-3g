@@ -62,9 +62,9 @@ public class NewsEntryApiController
         // お知らせ情報JSON アップロード
         NewsDto dto = new NewsDto();
         BeanUtil.copy(request, dto);
+        dto.setSeqNewsInfoId(news.getSeqNewsInfoId());
         newsComponent.upload(s3Key, dto);
 
-        //
         newsComponent.sendSlack(dto, "追加したお知らせ情報.json", "お知らせ情報JSONを追加.");
 
         // レスポンス生成

@@ -27,8 +27,8 @@
                    <!-- 停止情報 -->
                    <span class="badge badge-warning" th:if="${news.tag.color == 'yellow'}" th:text="${news.tag.name}"></span>
                  </div>
-                 <a data-toggle="collapse" th:href="${'#newsId' + news.id}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.id}" th:text="${news.date + '　' + news.title}"></a>
-                 <div class="collapse" th:id="${'newsId' + news.id}">
+                 <a data-toggle="collapse" th:href="${'#newsId' + news.seqNewsInfoId}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.seqNewsInfoId}" th:text="${news.date + '　' + news.title}"></a>
+                 <div class="collapse" th:id="${'newsId' + news.seqNewsInfoId}">
                    <div class="card card-body">
                      <div th:utext="${news.detail}"></div>
                    </div><!-- /.card card-body -->

@@ -11,7 +11,7 @@
   "dependencies": {
     "core-js": "^3.12.1",
     "is-svg": "^4.3.1",
-    "nuxt": "^2.15.4",
+    "nuxt": "^2.15.6",
     "vue-mermaid": "0.0.14",
     "vue-simple-context-menu": "^3.4.1",
     "vuex-persistedstate": "^4.0.0-beta.3"
