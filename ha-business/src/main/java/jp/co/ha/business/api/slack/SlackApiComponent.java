@@ -2,7 +2,6 @@ package jp.co.ha.business.api.slack;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,6 +23,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.system.SystemConfig;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
@@ -41,6 +41,9 @@ public class SlackApiComponent {
     /** AWS-S3Component */
     @Autowired
     private AwsS3Component s3;
+    /** {@linkplain SystemConfig} */
+    @Autowired
+    private SystemConfig systemConfig;
 
     /**
      * Slackにメッセージを送信する
@@ -60,7 +63,7 @@ public class SlackApiComponent {
                     .createWebSocketSlackSession(conn.getToken());
 
             session.connect();
-            SlackChannel channel = session.findChannelByName(conn.getChannelName());
+            SlackChannel channel = session.findChannelByName(getChannelName(conn));
 
             LOG.debug("送信開始");
             session.sendMessage(channel, message);
@@ -97,7 +100,7 @@ public class SlackApiComponent {
                     .createWebSocketSlackSession(conn.getToken());
 
             session.connect();
-            SlackChannel channel = session.findChannelByName(conn.getChannelName());
+            SlackChannel channel = session.findChannelByName(getChannelName(conn));
 
             LOG.debug("送信開始");
             session.sendFile(channel, new ByteArrayInputStream(data), fileName, title,
@@ -124,15 +127,26 @@ public class SlackApiComponent {
 
         SlackConnectionData slackConnectionData = new JsonReader()
                 .read(s3.getS3ObjectByKey(KEY), SlackConnectionData.class);
-        List<Connection> list = slackConnectionData.getConnectionList();
 
-        return list.stream()
+        return slackConnectionData.getConnectionList().stream()
                 .filter(e -> e.getContentType() == contentType)
                 .findFirst()
                 .orElseThrow(() -> new BusinessException(
                         BusinessErrorCode.AWS_S3_DOWNLOAD_ERROR,
                         "jsonに対象のコンテンツタイプが存在しません. contentType="
                                 + contentType.getValue()));
+    }
+
+    /**
+     * チャンネル名を返す<br>
+     * 環境名 + スラック接続情報.名前
+     *
+     * @param conn
+     *     {@linkplain Connection}
+     * @return チャンネル名
+     */
+    private String getChannelName(Connection conn) {
+        return systemConfig.getEnvironment().getValue() + "_" + conn.getChannelName();
     }
 
     /**
