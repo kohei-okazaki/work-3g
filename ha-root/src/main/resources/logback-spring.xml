@@ -18,80 +18,55 @@
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <target>System.out</target>
     <encoder>
-      <!--出力内容 -->
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
   </appender>
 
   <!-- ファイル出力 -->
   <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!--日ごとにログファイル作成 -->
     <file>${LOG_PATH}root-api-debug.log</file>
-    <!--日ごとにログファイル作成 -->
-    <rollingPolicy
-      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-debug-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-      <!--180日後に破棄 -->
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <!--出力内容 -->
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
   </appender>
 
   <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!--日ごとにログファイル作成 -->
     <file>${LOG_PATH}root-api-info.log</file>
-    <!--日ごとにログファイル作成 -->
-    <rollingPolicy
-      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-info-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-      <!--180日後に破棄 -->
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <!--出力内容 -->
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
   </appender>
 
   <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!--日ごとにログファイル作成 -->
     <file>${LOG_PATH}root-api-warn.log</file>
-    <!--日ごとにログファイル作成 -->
-    <rollingPolicy
-      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-warn-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-      <!--180日後に破棄 -->
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <!--出力内容 -->
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
   </appender>
 
   <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!--日ごとにログファイル作成 -->
     <file>${LOG_PATH}root-api-error.log</file>
-    <!--日ごとにログファイル作成 -->
-    <rollingPolicy
-      class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <!--日付けが変わったら年月フォルダ内にzipファイル作成 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-error-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
-      <!--180日後に破棄 -->
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <!--出力内容 -->
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
   </appender>
