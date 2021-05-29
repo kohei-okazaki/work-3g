@@ -33,6 +33,11 @@
       <charset>UTF-8</charset>
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>DEBUG</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
   </appender>
 
   <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -45,6 +50,11 @@
       <charset>UTF-8</charset>
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
   </appender>
 
   <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -57,6 +67,11 @@
       <charset>UTF-8</charset>
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>WARN</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
   </appender>
 
   <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -69,6 +84,11 @@
       <charset>UTF-8</charset>
       <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
     </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
   </appender>
 
   <!-- アプリログレベルと使用出力ルール -->
