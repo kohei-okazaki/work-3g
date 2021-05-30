@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * 月次健康情報集計バッチ妥当性チェッククラス
@@ -24,7 +25,7 @@ public class MonthlyHealthInfoSummaryValidator implements JobParametersValidator
 
         Map<String, JobParameter> params = parameters.getParameters();
         String targetValue = params.get("m").getValue().toString();
-        if (targetValue == null) {
+        if (StringUtil.isEmpty(targetValue)) {
             return;
         } else if (!DateTimeUtil.isDate(targetValue, DateFormatType.YYYYMM_NOSEP)) {
             // YYYYMM形式でない場合
