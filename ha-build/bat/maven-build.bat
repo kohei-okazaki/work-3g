@@ -37,11 +37,6 @@ cd %BASE_DIR%\ha-business
 call mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn install:install-file -Dfile=target\business-%ver%.jar -DgroupId=jp.co.ha -DartifactId=business -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
 
-rem build batch
-cd %BASE_DIR%\ha-batch
-call mvn clean package -Dmaven.test.skip=true -P%profile%
-call mvn install:install-file -Dfile=target\batch-%ver%.jar -DgroupId=jp.co.ha -DartifactId=batch -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-
 rem build api
 cd %BASE_DIR%\ha-api
 call mvn clean package -Dmaven.test.skip=true -P%profile%
