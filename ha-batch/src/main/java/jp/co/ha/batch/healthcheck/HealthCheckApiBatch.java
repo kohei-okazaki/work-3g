@@ -36,22 +36,22 @@ public class HealthCheckApiBatch implements Tasklet {
     /** ヘルスチェックAPIメールテンプレートID */
     private static final String TEMPLATE_ID = "mail-template/health-check-template.txt";
 
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** 健康情報関連プロパティ */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties prop;
-    /** ヘルスチェックAPI */
+    /** {@linkplain HealthCheckApi} */
     @Autowired
     private HealthCheckApi healthCheckApi;
-    /** AWS-SES */
+    /** {@linkplain AwsSesComponent} */
     @Autowired
     private AwsSesComponent awsSesComponent;
-    /** AWS個別設定情報 */
+    /** {@linkplain AwsConfig} */
     @Autowired
     private AwsConfig awsConfig;
-    /** SlackComponent */
+    /** {@linkplain SlackApiComponent} */
     @Autowired
     private SlackApiComponent slackApiComponent;
 

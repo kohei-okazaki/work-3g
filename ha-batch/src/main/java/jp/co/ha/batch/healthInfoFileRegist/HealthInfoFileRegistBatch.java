@@ -142,6 +142,7 @@ public class HealthInfoFileRegistBatch implements Tasklet {
      * @param seqHealthInfoIdList
      *     登録した健康情報IDリスト
      * @throws BaseException
+     *     文字コードが不正の場合
      */
     private void sendSlack(List<Long> seqHealthInfoIdList) throws BaseException {
 

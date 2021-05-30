@@ -3,6 +3,7 @@ package jp.co.ha.batch.ｍonthlyHealthInfoSummary;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,13 +37,14 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 月次健康情報集計バッチ<br>
- * 引数1 処理対象月(YYYYMM)
+ * <ul>
+ * <li>引数1=処理対象月(YYYYMM)</li>
+ * </ul>
  *
  * @version 1.0.0
  */
@@ -85,9 +87,8 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         s3.putFile(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName(), csv);
 
         // Slackのbatch_${env}チャンネルにメッセージを投稿
-        slackApiComponent.send(ContentType.BATCH,
-                "S3ファイルアップロード完了. ファイル名=" + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue()
-                        + csv.getName());
+        slackApiComponent.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
+                + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName());
 
         return RepeatStatus.FINISHED;
     }
@@ -104,17 +105,16 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         int year = Integer.parseInt(targetDate.substring(0, 4));
         int month = Integer.parseInt(targetDate.substring(4));
         LocalDateTime from = LocalDateTime.of(year, month, 1, 0, 0, 0);
-
-        int lastDay = DateTimeUtil.getLastDayOfMonth(from);
-        LocalDateTime to = LocalDateTime.of(year, month, lastDay, 23, 59, 59);
+        LocalDateTime to = LocalDateTime.of(year, month,
+                DateTimeUtil.getLastDayOfMonth(from), 23, 59, 59);
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
                 .orderBy("SEQ_USER_ID", SortType.ASC)
                 .build();
 
-        return searchService
-                .findBySeqUserIdBetweenHealthInfoRegDate(null, from, to, selectOption);
+        return searchService.findBySeqUserIdBetweenHealthInfoRegDate(null, from, to,
+                selectOption);
     }
 
     /**
@@ -155,8 +155,7 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
             List<MonthlyHealthInfoSummaryModel> modelList) throws BaseException {
 
         String fileName = targetDate + FileExtension.CSV;
-        File file = new File(prop.getMonthlySummaryBatchFilePath()
-                + FileSeparator.SYSTEM.getValue() + fileName);
+        File file = Paths.get(prop.getMonthlySummaryBatchFilePath(), fileName).toFile();
         CsvConfig conf = new CsvConfigBuilder(fileName,
                 prop.getMonthlySummaryBatchFilePath()).build();
 
