@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistBatch;
 import jp.co.ha.batch.healthcheck.HealthCheckApiBatch;
+import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.batch.ｍonthlyHealthInfoSummary.MonthlyHealthInfoSummaryBatch;
 import jp.co.ha.batch.ｍonthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator;
 

@@ -1,4 +1,4 @@
-package jp.co.ha.batch.config;
+package jp.co.ha.batch.listener;
 
 import java.util.Map.Entry;
 import java.util.StringJoiner;
@@ -13,7 +13,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * Batch処理のリスナークラス
+ * Jobのリスナークラス
  *
  * @version 1.0.0
  */
