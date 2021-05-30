@@ -31,7 +31,7 @@
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.LevelFilter">
       <level>DEBUG</level>
@@ -48,7 +48,7 @@
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.LevelFilter">
       <level>INFO</level>
@@ -65,7 +65,7 @@
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.LevelFilter">
       <level>WARN</level>
@@ -82,7 +82,7 @@
     </rollingPolicy>
     <encoder>
       <charset>UTF-8</charset>
-      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.LevelFilter">
       <level>ERROR</level>
