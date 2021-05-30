@@ -5,12 +5,18 @@ rem 健康情報一括登録バッチ
 rem 指定したディレクトリのJSONファイルから健康情報を登録する
 rem ----------------------------------------------------------------------------------------
 
+echo ------------------------------------------------------------------------
+echo START healthCheckApi.bat
+echo ------------------------------------------------------------------------
+
 rem 共通シェルの読込
 call common.bat
 
-cd %BASE_DIR%\ha-batch\target\classes
+cd %BASE_DIR%\ha-batch\target
+java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=healthInfoFileRegistBatchJob %JAR_FILE%
 
-rem システム環境変数のJava(JAVA_HOME)だとeclipseでコンパイルしたときのJavaのversionと異なるので、直接、eclipseのJavaで実行する
-%JAVA% -cp %CLASSPATH% %MAIN% HealthInfoFileRegistBatch
+echo ------------------------------------------------------------------------
+echo END healthCheckApi.bat
+echo ------------------------------------------------------------------------
 
 cd %~dp0

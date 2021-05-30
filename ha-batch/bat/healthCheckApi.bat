@@ -6,12 +6,18 @@ rem 健康管理APIの起動を確認する
 rem 実際の確認はJavaからHTTPで通信を行う
 rem ----------------------------------------------------------------------------------------
 
+echo ------------------------------------------------------------------------
+echo START healthCheckApi.bat
+echo ------------------------------------------------------------------------
+
 rem 共通シェルの読込
 call common.bat
 
-cd %BASE_DIR%\ha-batch\target\classes
+cd %BASE_DIR%\ha-batch\target
+java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=heathCheckApiBatchJob %JAR_FILE%
 
-rem システム環境変数のJava(JAVA_HOME)だとeclipseでコンパイルしたときのJavaのversionと異なるので、直接、eclipseのJavaで実行する
-%JAVA% -cp %CLASSPATH% %MAIN% HealthCheckApiBatch
+echo ------------------------------------------------------------------------
+echo END healthCheckApi.bat
+echo ------------------------------------------------------------------------
 
 cd %~dp0

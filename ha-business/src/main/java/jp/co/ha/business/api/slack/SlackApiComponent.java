@@ -64,6 +64,12 @@ public class SlackApiComponent {
 
             session.connect();
             SlackChannel channel = session.findChannelByName(getChannelName(conn));
+            if (channel == null) {
+                LOG.debug("channel is null");
+                return;
+            } else {
+                LOG.debug("channel is not null");
+            }
 
             LOG.debug("送信開始");
             session.sendMessage(channel, message);
@@ -146,6 +152,8 @@ public class SlackApiComponent {
      * @return チャンネル名
      */
     private String getChannelName(Connection conn) {
+        System.out.println(
+                systemConfig.getEnvironment().getValue() + "_" + conn.getChannelName());
         return systemConfig.getEnvironment().getValue() + "_" + conn.getChannelName();
     }
 
