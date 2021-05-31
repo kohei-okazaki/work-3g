@@ -6,7 +6,7 @@ rem à¯êî1:èàóùëŒè€îNåé(YYYYMM)
 rem ----------------------------------------------------------------------------------------
 
 echo ------------------------------------------------------------------------
-echo START monthlyHealthInfoSummary.bat
+echo START %~n0%~x0
 echo ------------------------------------------------------------------------
 
 rem ã§í ÉVÉFÉãÇÃì«çû
@@ -20,7 +20,7 @@ set DATE_OPTION_VALUE=%1
 java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=ÇçonthlyHealthInfoSummaryBatchJob %JAR_FILE% m=%DATE_OPTION_VALUE%
 
 echo ------------------------------------------------------------------------
-echo END monthlyHealthInfoSummary.bat
+echo END %~n0%~x0
 echo ------------------------------------------------------------------------
 
 cd %~dp0

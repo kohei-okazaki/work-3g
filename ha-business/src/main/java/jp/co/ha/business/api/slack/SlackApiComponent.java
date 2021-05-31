@@ -64,16 +64,10 @@ public class SlackApiComponent {
 
             session.connect();
             SlackChannel channel = session.findChannelByName(getChannelName(conn));
-            if (channel == null) {
-                LOG.debug("channel is null");
-                return;
-            } else {
-                LOG.debug("channel is not null");
-            }
 
-            LOG.debug("送信開始");
+            LOG.debug("send start. channel=" + getChannelName(conn));
             session.sendMessage(channel, message);
-            LOG.debug("送信終了");
+            LOG.debug("send end. channel=" + getChannelName(conn));
 
             session.disconnect();
         } catch (IOException e) {
@@ -152,8 +146,6 @@ public class SlackApiComponent {
      * @return チャンネル名
      */
     private String getChannelName(Connection conn) {
-        System.out.println(
-                systemConfig.getEnvironment().getValue() + "_" + conn.getChannelName());
         return systemConfig.getEnvironment().getValue() + "_" + conn.getChannelName();
     }
 

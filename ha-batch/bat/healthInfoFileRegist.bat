@@ -6,7 +6,7 @@ rem 指定したディレクトリのJSONファイルから健康情報を登録する
 rem ----------------------------------------------------------------------------------------
 
 echo ------------------------------------------------------------------------
-echo START healthCheckApi.bat
+echo START %~n0%~x0
 echo ------------------------------------------------------------------------
 
 rem 共通シェルの読込
@@ -16,7 +16,7 @@ cd %BASE_DIR%\ha-batch\target
 java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=healthInfoFileRegistBatchJob %JAR_FILE%
 
 echo ------------------------------------------------------------------------
-echo END healthCheckApi.bat
+echo END %~n0%~x0
 echo ------------------------------------------------------------------------
 
 cd %~dp0

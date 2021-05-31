@@ -31,7 +31,7 @@ public class BatchConfig {
     /** {@linkplain StepBuilderFactory} */
     @Autowired
     private StepBuilderFactory stepBuilderFactory;
-    /** {@linkplain StepBuilderFactory} */
+    /** {@linkplain BatchJobListener} */
     @Autowired
     private BatchJobListener batchJobListener;
     /** {@linkplain HealthCheckApiBatch} */

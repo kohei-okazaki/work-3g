@@ -23,7 +23,11 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
- * ヘルスチェックAPIを実行するバッチ
+ * ヘルスチェックAPIを実行するバッチ<br>
+ * 以下のサーバが起動状態かどうかを確認する<br>
+ * <ul>
+ * <li>健康管理APIサーバ</li>
+ * </ul>
  *
  * @version 1.0.0
  */
@@ -76,11 +80,11 @@ public class HealthCheckApiBatch implements Tasklet {
 
         switch (response.getResultType()) {
         case SUCCESS:
-            LOG.debug("healthinfo app server up");
+            LOG.debug("healthinfo api server up");
             slackApiComponent.send(ContentType.BATCH, "健康管理APIサーバが起動状態...");
             break;
         case FAILURE:
-            LOG.error("healthinfo app server down");
+            LOG.error("healthinfo api server down");
             awsSesComponent.sendMail(awsConfig.getMailAddress(), "ヘルスチェックAPI結果",
                     TEMPLATE_ID);
             slackApiComponent.send(ContentType.BATCH, "健康管理APIサーバの状態が異常...");
