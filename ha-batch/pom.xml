@@ -3,14 +3,18 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/maven-v4_0_0.xsd">
+                                     https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>batch</artifactId>
   <version>1.0.0</version>
   <name>ha-batch</name>
-  <packaging>jar</packaging>
+  <description>health app for batch</description>
+
+  <properties>
+    <org.springframework.boot-version>2.5.0</org.springframework.boot-version>
+  </properties>
 
   <parent>
     <groupId>jp.co.ha</groupId>
@@ -35,6 +39,69 @@
       <artifactId>business</artifactId>
       <version>1.0.0</version>
     </dependency>
+    <!-- jackson(警告ログ解消のため) -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-kotlin</artifactId>
+      <version>${org.jackson-version}</version>
+    </dependency>
+    <!-- SpringBatch -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-batch</artifactId>
+      <version>${org.springframework.boot-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <version>${org.springframework.boot-version}</version>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <version>${org.springframework.boot-version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.batch</groupId>
+      <artifactId>spring-batch-test</artifactId>
+      <version>4.3.3</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
-
+<!--
+  <dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${org.springframework.boot-version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+ -->
+  <build>
+    <finalName>batch-${project.version}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${org.springframework.boot-version}</version>
+        <configuration>
+          <mainClass>jp.co.ha.batch.BatchApplication</mainClass>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

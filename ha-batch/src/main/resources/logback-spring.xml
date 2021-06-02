@@ -24,9 +24,9 @@
 
   <!-- ファイル出力 -->
   <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_PATH}root-api-debug.log</file>
+    <file>${LOG_PATH}batch-debug.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-debug-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/batch-debug-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
@@ -41,9 +41,9 @@
   </appender>
 
   <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_PATH}root-api-info.log</file>
+    <file>${LOG_PATH}batch-info.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-info-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/batch-info-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
@@ -58,9 +58,9 @@
   </appender>
 
   <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_PATH}root-api-warn.log</file>
+    <file>${LOG_PATH}batch-warn.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-warn-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/batch-warn-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
@@ -75,9 +75,9 @@
   </appender>
 
   <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_PATH}root-api-error.log</file>
+    <file>${LOG_PATH}batch-error.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/root-api-error-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/batch-error-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
       <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
