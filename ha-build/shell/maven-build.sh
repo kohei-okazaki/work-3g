@@ -12,6 +12,7 @@ COMMON_DIR=${BASE_DIR}"/ha-common"
 DB_DIR=${BASE_DIR}"/ha-db"
 BUSINESS_DIR=${BASE_DIR}"/ha-business"
 BATCH_DIR=${BASE_DIR}"/ha-batch"
+ROOT_DIR=${BASE_DIR}"/ha-root"
 API_DIR=${BASE_DIR}"/ha-api"
 DASHBOARD_DIR=${BASE_DIR}"/ha-dashboard"
 
@@ -60,6 +61,14 @@ mvn install:install-file -Dfile=target/business-${JAR_VERSION}.jar -DgroupId=jp.
 cd ${BATCH_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
 mvn install:install-file -Dfile=target/batch-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=batch -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
+
+
+########################################
+# build root
+########################################
+cd ${ROOT_DIR}
+mvn clean package -Dmaven.test.skip=true -P${PROFILE}
+mvn install:install-file -Dfile=target/root-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=root -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################

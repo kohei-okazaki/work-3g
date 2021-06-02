@@ -65,9 +65,9 @@ public class SlackApiComponent {
             session.connect();
             SlackChannel channel = session.findChannelByName(getChannelName(conn));
 
-            LOG.debug("送信開始");
+            LOG.debug("send start. channel=" + getChannelName(conn));
             session.sendMessage(channel, message);
-            LOG.debug("送信終了");
+            LOG.debug("send end. channel=" + getChannelName(conn));
 
             session.disconnect();
         } catch (IOException e) {

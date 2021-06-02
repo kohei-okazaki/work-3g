@@ -1,0 +1,18 @@
+spring:
+  batch:
+    jdbc:
+      initialize-schema: never
+  main:
+    allow-bean-definition-overriding: true
+    # Webサーバを自動で起動させないため
+    web-application-type: none
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    # localを読み込む
+    default: local
+    active: local
+  web: 
+    resources:
+      add-mappings: false
