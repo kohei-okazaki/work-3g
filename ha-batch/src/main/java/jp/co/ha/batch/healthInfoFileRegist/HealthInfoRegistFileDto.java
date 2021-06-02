@@ -1,4 +1,4 @@
-package jp.co.ha.batch.dto;
+package jp.co.ha.batch.healthInfoFileRegist;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
