@@ -74,6 +74,11 @@ public class HealthInfoFileRegistBatch implements Tasklet {
         List<HealthInfoRegistApiRequest> requestList = new ArrayList<>();
         JsonReader reader = new JsonReader();
 
+        if (!FileUtil.isExists(prop.getRegistBatchFilePath())) {
+            throw new BusinessException(CommonErrorCode.FILE_OR_DIR_ERROR,
+                    "ディレクトリが存在しません.ディレクトリ=" + prop.getRegistBatchFilePath());
+        }
+
         for (File file : FileUtil.getFileList(prop.getRegistBatchFilePath())) {
             HealthInfoRegistFileDto dto = reader.read(file,
                     HealthInfoRegistFileDto.class);
