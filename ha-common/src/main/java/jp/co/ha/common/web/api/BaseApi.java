@@ -14,8 +14,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.RequestEntity.BodyBuilder;
 import org.springframework.http.RequestEntity.HeadersBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -132,7 +131,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
                 response = responseEntity.getBody();
             }
 
-        } catch (HttpClientErrorException | HttpServerErrorException e) {
+        } catch (HttpStatusCodeException e) {
             code = e.getStatusCode();
             bindErrorInfo(response);
         } catch (Exception e) {
