@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.aws.AwsConfig;
 import jp.co.ha.business.api.aws.AwsSesComponent;
-import jp.co.ha.business.api.healthcheck.HealthCheckApi;
-import jp.co.ha.business.api.healthcheck.request.HealthCheckApiRequest;
-import jp.co.ha.business.api.healthcheck.response.HealthCheckApiResponse;
+import jp.co.ha.business.api.healthinfoapp.HealthCheckApi;
+import jp.co.ha.business.api.healthinfoapp.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthCheckApiResponse;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
@@ -27,6 +27,7 @@ import jp.co.ha.db.entity.ApiCommunicationData;
  * 以下のサーバが起動状態かどうかを確認する<br>
  * <ul>
  * <li>健康管理APIサーバ</li>
+ * <li>管理者用APIサーバ</li>
  * </ul>
  *
  * @version 1.0.0

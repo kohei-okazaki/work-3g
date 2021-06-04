@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.healthcheck.response;
+package jp.co.ha.business.api.healthinfoapp.response;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.common.web.form.BaseRestApiResponse;

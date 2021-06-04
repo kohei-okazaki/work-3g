@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.healthinfo.type;
+package jp.co.ha.business.api.healthinfoapp.type;
 
 import java.io.IOException;
 

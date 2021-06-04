@@ -1,14 +1,14 @@
-package jp.co.ha.business.api.healthinfo.service.impl;
+package jp.co.ha.business.api.healthinfoapp.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceApiRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceApiResponse;
-import jp.co.ha.business.api.healthinfo.service.CommonService;
-import jp.co.ha.business.api.healthinfo.service.HealthInfoReferenceService;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoReferenceApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoReferenceApiResponse;
+import jp.co.ha.business.api.healthinfoapp.service.CommonService;
+import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;

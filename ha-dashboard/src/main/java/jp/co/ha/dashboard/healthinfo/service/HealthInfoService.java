@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.common.exception.BaseException;

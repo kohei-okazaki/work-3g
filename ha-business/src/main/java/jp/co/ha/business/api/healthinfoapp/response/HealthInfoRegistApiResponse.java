@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.healthinfo.response;
+package jp.co.ha.business.api.healthinfoapp.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,11 +14,11 @@ import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.common.web.form.BaseRestApiResponse;
 
 /**
- * 健康情報照会レスポンスクラス
+ * 健康情報登録レスポンスクラス
  *
  * @version 1.0.0
  */
-public class HealthInfoReferenceApiResponse extends BaseRestApiResponse
+public class HealthInfoRegistApiResponse extends BaseRestApiResponse
         implements BaseApiResponse {
 
     /** 健康情報 */
@@ -46,7 +46,7 @@ public class HealthInfoReferenceApiResponse extends BaseRestApiResponse
     }
 
     /**
-     * 健康情報照会API-healthinfo
+     * 健康情報登録API-healthinfo
      *
      * @version 1.0.0
      */

@@ -1,10 +1,10 @@
-package jp.co.ha.business.api.healthinfo;
+package jp.co.ha.business.api.healthinfoapp;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.type.ApiNameType;
 import jp.co.ha.common.web.api.BaseApi;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ErrorInfo;

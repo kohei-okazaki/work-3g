@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.healthinfo.service.impl;
+package jp.co.ha.business.api.healthinfoapp.service.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
-import jp.co.ha.business.api.healthinfo.service.CommonService;
-import jp.co.ha.business.api.healthinfo.service.HealthInfoRegistService;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.service.CommonService;
+import jp.co.ha.business.api.healthinfoapp.service.HealthInfoRegistService;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse.BasicHealthInfo;

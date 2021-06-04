@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.healthcheck.request.HealthCheckApiRequest;
-import jp.co.ha.business.api.healthcheck.response.HealthCheckApiResponse;
+import jp.co.ha.business.api.healthinfoapp.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthCheckApiResponse;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.controller.BaseRestController;
 

@@ -1,7 +1,7 @@
-package jp.co.ha.business.api.healthinfo.service;
+package jp.co.ha.business.api.healthinfoapp.service;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.common.web.service.BaseRestApiService;
 
 /**

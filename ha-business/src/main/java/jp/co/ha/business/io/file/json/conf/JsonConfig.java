@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import jp.co.ha.business.api.healthinfo.type.TestMode;
-import jp.co.ha.business.api.healthinfo.type.TestMode.TestModeDeserializer;
+import jp.co.ha.business.api.healthinfoapp.type.TestMode;
+import jp.co.ha.business.api.healthinfoapp.type.TestMode.TestModeDeserializer;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ResultTypeSerializer;
 

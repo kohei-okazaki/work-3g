@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.healthinfo.service;
+package jp.co.ha.business.api.healthinfoapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
