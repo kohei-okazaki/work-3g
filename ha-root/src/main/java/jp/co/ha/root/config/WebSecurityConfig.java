@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /** 認証不要URL */
     private static final String[] AUTH_IGNORE_URL = new String[] { "/api/root/login",
-            "/api/root/user" };
+            "/api/root/user", "/api/root/healthcheck" };
 
     /** 認証サービス */
     @Autowired
