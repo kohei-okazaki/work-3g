@@ -5,10 +5,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 
 /**
  * パスワードエンコードクラス<br>
@@ -19,8 +18,6 @@ import jp.co.ha.common.log.LoggerFactory;
 @Service("passwordEncoderImpl")
 public class PasswordEncoderImpl implements PasswordEncoder {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory.getLogger(PasswordEncoderImpl.class);
     /** SHA-256ハッシュ化 */
     @Sha256
     @Autowired
@@ -29,11 +26,9 @@ public class PasswordEncoderImpl implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {
         try {
-            String encValue = encoder.encode(rawPassword.toString(), "");
-            return encValue;
+            return encoder.encode(rawPassword.toString(), "");
         } catch (BaseException e) {
-            LOG.error("パスワードのハッシュ化に失敗");
-            return null;
+            throw new SystemRuntimeException(e);
         }
     }
 

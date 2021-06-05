@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse;
+import jp.co.ha.business.api.root.response.BaseRootApiResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
@@ -111,4 +112,27 @@ public class ApiCommunicationDataComponent {
 
         updateService.update(apiCommunicationData);
     }
+
+    /**
+     * 指定したAPI通信情報を更新する
+     * 
+     * @param apiCommunicationData
+     *     {@linkplain ApiCommunicationData}
+     * @param connectInfo
+     *     {@linkplain ApiConnectInfo}
+     * @param response
+     *     {@linkplain BaseRootApiResponse}
+     */
+    public void update(ApiCommunicationData apiCommunicationData,
+            ApiConnectInfo connectInfo, BaseRootApiResponse response) {
+
+        apiCommunicationData
+                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        apiCommunicationData.setResult(response.getResult().getValue());
+        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
+
+        updateService.update(apiCommunicationData);
+
+    }
+
 }

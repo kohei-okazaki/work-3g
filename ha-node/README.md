@@ -11,7 +11,7 @@ Node.js 14.16.0
 - トークン発行API：
     - 概要：Node健康情報計算APIのJWTを発行するAPI
     - エンドポイント：/token
-    - Post
+    - Method：Post
 
 - 基礎健康情報計算API：
     - 概要：基礎健康情報を計算するAPI
@@ -26,4 +26,9 @@ Node.js 14.16.0
 - カロリー計算API：
     - 概要：カロリーを計算するAPI
     - エンドポイント：/calorie
+    - Method：Get
+
+- ヘルスチェックAPI：
+    - 概要：Node健康情報計算APIサーバの起動状態を確認するAPI
+    - エンドポイント：/healthcheck
     - Method：Get

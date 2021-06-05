@@ -17,13 +17,15 @@ import jp.co.ha.common.type.BaseEnum;
 public enum NodeApiType implements BaseEnum {
 
     /** 基礎健康情報計算API */
-    BASIC("basic", ApiNameType.BASIC),
+    BASIC("basic", ApiNameType.NODE_API_BASIC),
     /** カロリー計算API */
-    CALORIE("calorie", ApiNameType.CALORIE),
+    CALORIE("calorie", ApiNameType.NODE_API_CALORIE),
     /** 肺活量計算API */
-    BREATHING_CAPACITY("breathing_capacity", ApiNameType.BREATHING_CAPACITY),
+    BREATHING_CAPACITY("breathing_capacity", ApiNameType.NODE_API_BREATHING_CAPACITY),
     /** トークン発行API */
-    TOKEN("token", ApiNameType.TOKEN);
+    TOKEN("token", ApiNameType.NODE_API_TOKEN),
+    /** ヘルスチェックAPI */
+    HEALTH_CHECK("healthcheck", ApiNameType.NODE_API_HEALTH_CHECK);
 
     /** 値 */
     private String value;

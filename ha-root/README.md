@@ -4,6 +4,11 @@
 健康管理アプリを管理するバックエンドサイト
 
 ## API一覧
+- ヘルスチェックAPI：
+    - 概要：管理者用APIサーバの起動状態を確認するAPI
+    - URL：/api/root/healthcheck
+    - Method：Get
+
 - ログインAPI：
     - 概要：管理サイトへのログインを行うAPI
     - URL：/api/root/login

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.DateTimeUtil;
