@@ -52,11 +52,44 @@ export default {
       ],
       ifs: [
         {
+          name: "ヘルスチェックAPI",
+          endpoint: "/healthcheck",
+          httpMethod: "GET",
+          description: "Node APIサーバの起動状態を確認するAPI",
+          url: "/node/api/healthcheck",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+          ],
+          request: [],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "detail",
+              logicalName: "エラー詳細",
+              required: false,
+              type: null,
+              byte: 256,
+              description: "result='1'の場合、必須",
+            },
+          ],
+        },
+
+        {
           name: "トークン発行API",
           endpoint: "/token",
           httpMethod: "POST",
-          description:
-            "Node APIに必要なトークン認証情報を取得するためのAPI",
+          description: "Node APIに必要なトークン認証情報を取得するためのAPI",
           url: "/node/api/token",
           headers: [
             {

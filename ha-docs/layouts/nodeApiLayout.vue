@@ -69,6 +69,11 @@ export default {
         },
         {
           icon: "mdi-api",
+          title: "ヘルスチェックAPI",
+          to: "/node/api/healthcheck",
+        },
+        {
+          icon: "mdi-api",
           title: "トークン発行API",
           to: "/node/api/token",
         },

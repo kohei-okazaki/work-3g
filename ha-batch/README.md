@@ -4,11 +4,11 @@
 健康管理アプリのバッチプロジェクト
 
 ## バッチ一覧
-- ヘルスチェックAPIバッチ：healthCheckApi.bat
+- ヘルスチェックAPIバッチ：healthCheckApi.bat/healthCheckApi.sh
     - 概要：APIサーバ起動しているかをチェックするAPIを呼び出すバッチ
-- 健康情報ファイル登録バッチ：healthInfoFileRegist.bat
-    - 概要：指定フォーマットのCSV毎に 健康情報管理API_健康情報登録APIを呼び出すバッチ
-- 月次健康情報集計バッチ：monthlyHealthInfoSummary.bat
+- 健康情報ファイル登録バッチ：healthInfoFileRegist.bat/healthInfoFileRegist.sh
+    - 概要：指定フォーマットのJSONの情報をもとに健康情報管理API_健康情報登録APIを呼び出すバッチ
+- 月次健康情報集計バッチ：monthlyHealthInfoSummary.bat/monthlyHealthInfoSummary.sh
     - 概要：特定の月の健康情報を検索し、CSVに変換し、S3へのアップロードを行うバッチ
 
 ## ログ
