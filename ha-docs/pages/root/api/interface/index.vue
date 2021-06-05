@@ -52,6 +52,43 @@ export default {
       ],
       ifs: [
         {
+          name: "ヘルスチェックAPI",
+          endpoint: "/api/root/healthcheck",
+          httpMethod: "GET",
+          description: "Root APIサーバの起動状態を確認するAPI",
+          url: "/root/api/healthcheck",
+          request: [],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "error",
+              logicalName: "エラー情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "message",
+              logicalName: "エラーメッセージ",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: 256,
+              description: "result='1'の場合、必須",
+            },
+          ],
+        },
+
+        {
           name: "ログインAPI",
           endpoint: "/api/root/login",
           httpMethod: "POST",

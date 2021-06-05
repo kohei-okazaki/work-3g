@@ -20,6 +20,8 @@ public class HealthInfoProperties {
     private String healthInfoDashboardUrl;
     /** 健康情報APIの基底URL */
     private String healthInfoApiUrl;
+    /** 管理者用APIの基底URL */
+    private String rootApiUrl;
     /** 月次健康情報集計バッチCSV格納パス */
     private String monthlySummaryBatchFilePath;
 
@@ -116,6 +118,25 @@ public class HealthInfoProperties {
      */
     public void setHealthInfoApiUrl(String healthInfoApiUrl) {
         this.healthInfoApiUrl = healthInfoApiUrl;
+    }
+
+    /**
+     * rootApiUrlを返す
+     *
+     * @return rootApiUrl
+     */
+    public String getRootApiUrl() {
+        return rootApiUrl;
+    }
+
+    /**
+     * rootApiUrlを設定する
+     *
+     * @param rootApiUrl
+     *     管理者用APIの基底URL
+     */
+    public void setRootApiUrl(String rootApiUrl) {
+        this.rootApiUrl = rootApiUrl;
     }
 
     /**

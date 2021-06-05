@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.service;
 
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.common.exception.BaseException;
 
 /**

@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
-import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.api.healthinfoapp.HealthInfoRegistApi;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.exception.BusinessException;

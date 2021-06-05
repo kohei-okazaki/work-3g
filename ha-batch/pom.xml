@@ -39,12 +39,6 @@
       <artifactId>business</artifactId>
       <version>1.0.0</version>
     </dependency>
-    <!-- jackson(警告ログ解消のため) -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
-      <artifactId>jackson-module-kotlin</artifactId>
-      <version>${org.jackson-version}</version>
-    </dependency>
     <!-- SpringBatch -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -71,19 +65,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-<!--
-  <dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>${org.springframework.boot-version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-  </dependencyManagement>
- -->
+
   <build>
     <finalName>batch-${project.version}</finalName>
     <plugins>
