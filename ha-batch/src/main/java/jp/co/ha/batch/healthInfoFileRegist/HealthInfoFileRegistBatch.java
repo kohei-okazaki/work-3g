@@ -15,10 +15,10 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.healthinfo.HealthInfoRegistApi;
-import jp.co.ha.business.api.healthinfo.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoRegistApiResponse;
-import jp.co.ha.business.api.healthinfo.type.TestMode;
+import jp.co.ha.business.api.healthinfoapp.HealthInfoRegistApi;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;

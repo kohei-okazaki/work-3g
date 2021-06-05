@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.healthinfo.request.HealthInfoReferenceApiRequest;
-import jp.co.ha.business.api.healthinfo.response.HealthInfoReferenceApiResponse;
-import jp.co.ha.business.api.healthinfo.service.HealthInfoReferenceService;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoReferenceApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.HealthInfoReferenceApiResponse;
+import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.controller.BaseRestController;
 

@@ -30,6 +30,7 @@
     <property name="healthinfoNodeApiUrl" value="${healthinfo.node.api.url}" />
     <property name="healthInfoDashboardUrl" value="${healthinfo.dashboard.url}" />
     <property name="healthInfoApiUrl" value="${healthinfo.api.url}" />
+    <property name="rootApiUrl" value="${root.api.url}" />
     <property name="monthlySummaryBatchFilePath" value="${healthinfo.monthly.summary.batch.file.path}" />
   </bean>
 

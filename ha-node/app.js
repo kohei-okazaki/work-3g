@@ -11,6 +11,7 @@ var basicRouter = require('./routes/recieve/basic');
 var calorieRouter = require('./routes/recieve/calorie');
 var breathingCapacityRouter = require('./routes/recieve/breathing_capacity');
 var tokenRouter = require('./routes/recieve/token');
+var healthcheckRouter = require('./routes/recieve/healthcheck');
 
 var app = express();
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use('/token', tokenRouter);
+app.use('/healthcheck', healthcheckRouter);
 
 // .envをprocess.envに割当て
 dotenv.config();
