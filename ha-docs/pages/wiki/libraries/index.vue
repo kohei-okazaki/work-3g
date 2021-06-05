@@ -127,7 +127,7 @@ export default {
         },
         {
           name: "Spring Boot",
-          version: "2.4.5",
+          version: "2.5.0",
           description: "管理者APIで使用するWeb FW",
           projects: ["rootapi"],
         },
@@ -139,7 +139,7 @@ export default {
         },
         {
           name: "AWS-SDK",
-          version: "1.11.939",
+          version: "1.11.1030",
           description: "AWSのサービスを使うためのライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
