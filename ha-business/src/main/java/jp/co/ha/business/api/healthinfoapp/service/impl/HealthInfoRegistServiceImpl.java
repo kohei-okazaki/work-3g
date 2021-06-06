@@ -79,8 +79,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         if (request.getTransactionId() == null) {
             // API通信情報.トランザクションIDを採番
-            Long transactionId = apiCommunicationDataComponent.getTransactionId();
-            request.setTransactionId(transactionId);
+            request.setTransactionId(apiCommunicationDataComponent.getTransactionId());
         }
 
         // トークン発行API実施
