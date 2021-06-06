@@ -62,8 +62,7 @@ public class HealthInfoRegistApiController extends
 
     @Override
     public void accept(HealthInfoRegistApiRequest request,
-            HealthInfoRegistApiResponse response)
-            throws BaseException {
+            HealthInfoRegistApiResponse response) throws BaseException {
 
         service.checkRequest(request);
 
