@@ -20,10 +20,10 @@ import jp.co.ha.common.type.BaseEnum;
  */
 public enum TestMode implements BaseEnum, JsonSerializable {
 
-    /** テストモード(DB登録を実施しない */
-    TEST("1"),
-    /** DB登録を行うモード */
-    DB_REGIST("0");
+    /** 0:DB登録を行うモード */
+    DB_REGIST("0"),
+    /** 1:テストモード(DB登録を実施しない */
+    TEST("1");
 
     /** 値 */
     private String value;

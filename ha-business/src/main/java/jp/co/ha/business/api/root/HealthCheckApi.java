@@ -3,9 +3,9 @@ package jp.co.ha.business.api.root;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.root.request.RootHealthCheckApiRequest;
+import jp.co.ha.business.api.root.request.HealthCheckApiRequest;
 import jp.co.ha.business.api.root.response.BaseRootApiResponse.Result;
-import jp.co.ha.business.api.root.response.RootHealthCheckApiResponse;
+import jp.co.ha.business.api.root.response.HealthCheckApiResponse;
 import jp.co.ha.business.api.root.type.RootApiType;
 import jp.co.ha.common.web.api.BaseApi;
 
@@ -14,16 +14,16 @@ import jp.co.ha.common.web.api.BaseApi;
  *
  * @version 1.0.0
  */
-@Component
-public class RootHealthCheckApi
-        extends BaseApi<RootHealthCheckApiRequest, RootHealthCheckApiResponse> {
+@Component("rootHealthCheckApi")
+public class HealthCheckApi
+        extends BaseApi<HealthCheckApiRequest, HealthCheckApiResponse> {
 
     /** ヘルスチェックAPI種別 */
     private static final RootApiType TYPE = RootApiType.HEALTH_CHECK;
 
     @Override
-    public RootHealthCheckApiResponse getResponse() {
-        return new RootHealthCheckApiResponse();
+    public HealthCheckApiResponse getResponse() {
+        return new HealthCheckApiResponse();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class RootHealthCheckApi
     }
 
     @Override
-    public void bindErrorInfo(RootHealthCheckApiResponse response) {
+    public void bindErrorInfo(HealthCheckApiResponse response) {
         response.setResult(Result.FAILURE);
     }
 

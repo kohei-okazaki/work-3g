@@ -7,6 +7,6 @@ import jp.co.ha.common.web.form.BaseApiRequest;
  *
  * @version 1.0.0
  */
-public class RootHealthCheckApiRequest extends BaseRootApiRequest implements BaseApiRequest {
+public class HealthCheckApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
 }
