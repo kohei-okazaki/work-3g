@@ -86,7 +86,7 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         // S3ファイルをアップロード
         s3.putFile(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName(), csv);
 
-        // Slackのbatch_${env}チャンネルにメッセージを投稿
+        // Slack通知
         slackApiComponent.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
                 + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName());
 

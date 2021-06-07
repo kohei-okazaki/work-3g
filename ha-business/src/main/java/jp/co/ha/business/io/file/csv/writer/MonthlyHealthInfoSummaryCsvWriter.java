@@ -48,7 +48,7 @@ public class MonthlyHealthInfoSummaryCsvWriter
         write(body, model.getHealthInfoStatus());
         // 健康情報作成日時
         write(body, model.getHealthInfoRegDate());
-        // BMIマスタID
+        // BMI範囲マスタID
         write(body, model.getSeqBmiRangeMtId().toString());
         // 更新日時
         write(body, model.getUpdateDate());
