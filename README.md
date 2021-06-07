@@ -2,7 +2,7 @@
 健康管理アプリ  
 
 ## 01_環境構築手順  
-[環境構築手順](https://github.com/kohei-okazaki/work-3g/wiki/00_%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E6%89%8B%E9%A0%86)を参考にローカル環境構築を行う  
+[環境構築手順](http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/wiki/localEnv)を参考にローカル環境構築を行う  
 
  
 ### **ローカル環境図**
