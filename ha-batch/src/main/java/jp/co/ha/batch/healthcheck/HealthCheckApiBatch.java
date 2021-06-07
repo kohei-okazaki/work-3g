@@ -29,7 +29,8 @@ import jp.co.ha.db.entity.ApiCommunicationData;
  * 以下のサーバが起動状態かどうかを確認する<br>
  * <ul>
  * <li>健康管理APIサーバ</li>
- * <li>管理者用APIサーバ</li>
+ * <li>NodeAPIサーバ</li>
+ * <li>RootAPIサーバ</li>
  * </ul>
  *
  * @version 1.0.0
