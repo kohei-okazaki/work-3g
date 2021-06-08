@@ -29,10 +29,10 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("healthinforeference")
 public class HeathInfoRefDetailController implements BaseWebController {
 
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** 健康情報詳細サービス */
+    /** {@linkplain HealthInfoRefDetailService} */
     @Autowired
     private HealthInfoRefDetailService healthInfoRefDetailService;
 
