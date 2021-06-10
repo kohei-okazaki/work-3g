@@ -34,13 +34,13 @@ import jp.co.ha.db.entity.NewsInfo;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-    /** お知らせ情報検索サービス */
+    /** {@linkplain NewsInfoSearchService} */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** System設定情報 */
+    /** {@linkplain SystemConfig} */
     @Autowired
     private SystemConfig systemConfig;
-    /** S3コンポーネント */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
 
@@ -79,7 +79,6 @@ public class NewsController implements BaseWebController {
         }
 
         model.addAttribute("newsList", newsList);
-        model.addAttribute("systemConfig", systemConfig);
         // ページング情報を設定
         model.addAttribute("paging", PagingViewFactory.getPageView(pageable,
                 "/news/list?page", searchService.countBySeqNewsInfoId(null)));
