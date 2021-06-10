@@ -12,7 +12,7 @@
     "core-js": "^3.14.0",
     "is-svg": "^4.3.1",
     "nuxt": "^2.15.6",
-    "postcss": "^8.3.0",
+    "postcss": "^8.3.1",
     "vue-mermaid": "0.0.14",
     "vue-simple-context-menu": "^3.4.1",
     "vuex-persistedstate": "^4.0.0-beta.3"
