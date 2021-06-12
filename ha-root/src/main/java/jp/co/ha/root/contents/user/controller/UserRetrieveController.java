@@ -41,9 +41,10 @@ public class UserRetrieveController
      *     ログインID
      * @return ユーザ情報取得APIレスポンス
      */
-    @GetMapping(value = "user/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "user/{seq_login_id}", produces = {
+            MediaType.APPLICATION_JSON_VALUE })
     public UserRetrieveApiResponse retrieve(UserRetrieveApiRequest request,
-            @PathVariable(name = "id", required = false) Optional<String> id) {
+            @PathVariable(name = "seq_login_id", required = false) Optional<String> id) {
 
         // TODO 妥当性チェック処理
         Long seqLoginId = Long.valueOf(id.get());
