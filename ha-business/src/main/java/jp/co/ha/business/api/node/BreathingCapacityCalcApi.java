@@ -20,10 +20,8 @@ import jp.co.ha.common.web.api.BaseApi;
  */
 @Component
 public class BreathingCapacityCalcApi
-        extends BaseApi<BreathingCapacityCalcApiRequest, BreathingCapacityCalcApiResponse> {
-
-    /** 肺活量計算APIの種別 */
-    private static final NodeApiType TYPE = NodeApiType.BREATHING_CAPACITY;
+        extends
+        BaseApi<BreathingCapacityCalcApiRequest, BreathingCapacityCalcApiResponse> {
 
     @Override
     public BreathingCapacityCalcApiResponse getResponse() {
@@ -37,13 +35,14 @@ public class BreathingCapacityCalcApi
 
     @Override
     public String getApiName() {
-        return TYPE.getApiNameType().getValue();
+        return NodeApiType.BREATHING_CAPACITY.getApiNameType().getValue();
     }
 
     @Override
-    public void bindErrorInfo(BreathingCapacityCalcApiResponse response) {
+    public void bindErrorInfo(BreathingCapacityCalcApiResponse response,
+            String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました");
+        response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
     }
 
 }

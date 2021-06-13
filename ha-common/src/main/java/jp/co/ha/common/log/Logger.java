@@ -16,7 +16,7 @@ public class Logger {
      * コンストラクタ
      *
      * @param logger
-     *     org.slf4j.Logger
+     *     {@linkplain org.slf4j.Logger}
      */
     Logger(org.slf4j.Logger logger) {
         this.logger = logger;
