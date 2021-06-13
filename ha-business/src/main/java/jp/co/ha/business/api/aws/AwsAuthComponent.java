@@ -21,7 +21,7 @@ import jp.co.ha.common.util.BeanUtil;
 @Component
 public class AwsAuthComponent {
 
-    /** システム情報 */
+    /** {@linkplain SystemConfig} */
     @Autowired
     private SystemConfig systemConfig;
 
