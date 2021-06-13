@@ -29,13 +29,13 @@ import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 @Service
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
-    /** HealthInfoMapper */
+    /** {@linkplain HealthInfoMapper} */
     @Autowired
     private HealthInfoMapper mapper;
-    /** CompositeHealthInfoMapper */
+    /** {@linkplain CompositeHealthInfoMapper} */
     @Autowired
     private CompositeHealthInfoMapper compositeHealthInfoMapper;
-    /** CompositeMonthlyMapper */
+    /** {@linkplain CompositeMonthlyMapper} */
     @Autowired
     private CompositeMonthlyMapper compositeMonthlyMapper;
 
