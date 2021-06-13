@@ -18,7 +18,7 @@ import jp.co.ha.db.entity.Account;
  */
 public abstract class CommonService {
 
-    /** アカウント検索サービス */
+    /** {@linkplain AccountSearchService} */
     @Autowired
     private AccountSearchService accountSearchService;
 

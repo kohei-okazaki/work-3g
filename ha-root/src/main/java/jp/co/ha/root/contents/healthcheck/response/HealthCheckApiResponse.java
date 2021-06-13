@@ -1,4 +1,4 @@
-package jp.co.ha.root.contents.healthcheck;
+package jp.co.ha.root.contents.healthcheck.response;
 
 import jp.co.ha.root.base.BaseRootApiResponse;
 

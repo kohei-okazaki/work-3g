@@ -30,10 +30,10 @@ import jp.co.ha.root.contents.note.response.NoteEntryApiResponse;
 public class NoteEntryApiController
         extends BaseRootApiController<NoteEntryApiRequest, NoteEntryApiResponse> {
 
-    /** 管理者サイトユーザメモ情報登録サービス */
+    /** {@linkplain RootUserNoteInfoCreateService} */
     @Autowired
     private RootUserNoteInfoCreateService rootUserNoteInfoCreateService;
-    /** AwsS3Component */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component s3Component;
 

@@ -64,30 +64,30 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @RequestMapping("healthinforeference")
 public class HealthInfoReferenceController implements BaseWebController {
 
-    /** 結果照会画面サービス */
+    /** {@linkplain HealthInfoReferService} */
     @Autowired
     private HealthInfoReferService service;
-    /** 結果照会Excelダウンロードサービス */
+    /** {@linkplain ExcelDownloadService} */
     @Autowired
     @ReferenceDownloadExcel
     private ExcelDownloadService<ReferenceExcelComponent> excelDownloadService;
-    /** 結果照会CSVダウンロードサービス */
+    /** {@linkplain CsvDownloadService} */
     @Autowired
     @ReferenceDownloadCsv
     private CsvDownloadService<ReferenceCsvDownloadModel> csvDownloadService;
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** 健康情報ファイル設定検索サービス */
+    /** {@linkplain HealthInfoFileSettingSearchService} */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-    /** System設定情報 */
+    /** {@linkplain SystemConfig} */
     @Autowired
     private SystemConfig systemConfig;
-    /** 健康情報グラフ作成サービス */
+    /** {@linkplain HealthInfoGraphService} */
     @Autowired
     private HealthInfoGraphService healthInfoGraphService;
-    /** S3コンポーネント */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
 
@@ -95,7 +95,7 @@ public class HealthInfoReferenceController implements BaseWebController {
      * Validateを設定
      *
      * @param binder
-     *     WebDataBinder
+     *     {@linkplain WebDataBinder}
      */
     @InitBinder("healthInfoReferenceForm")
     public void initBinder(WebDataBinder binder) {
@@ -105,7 +105,7 @@ public class HealthInfoReferenceController implements BaseWebController {
     /**
      * Formを返す
      *
-     * @return HealthInfoReferenceForm
+     * @return Form
      */
     @ModelAttribute("healthInfoReferenceForm")
     public HealthInfoReferenceForm setUpForm() {
@@ -123,7 +123,6 @@ public class HealthInfoReferenceController implements BaseWebController {
      */
     @GetMapping("/index")
     public String index(Model model) {
-        // 検索処理実行フラグを設定
         model.addAttribute("isRefered", false);
         return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
     }

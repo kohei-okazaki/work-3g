@@ -13,6 +13,7 @@ import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
@@ -30,10 +31,10 @@ import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
  */
 public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** SHA-256 ハッシュ値生成 */
+    /** {@linkplain Sha256HashEncoder} */
     @Sha256
     @Autowired
     private HashEncoder encoder;

@@ -18,9 +18,6 @@ import jp.co.ha.common.web.api.BaseApi;
 @Component
 public class TokenApi extends BaseApi<TokenApiRequest, TokenApiResponse> {
 
-    /** トークン発行APIの種別 */
-    private static final NodeApiType TYPE = NodeApiType.TOKEN;
-
     @Override
     public TokenApiResponse getResponse() {
         return new TokenApiResponse();
@@ -33,13 +30,13 @@ public class TokenApi extends BaseApi<TokenApiRequest, TokenApiResponse> {
 
     @Override
     public String getApiName() {
-        return TYPE.getApiNameType().getValue();
+        return NodeApiType.TOKEN.getApiNameType().getValue();
     }
 
     @Override
-    public void bindErrorInfo(TokenApiResponse response) {
+    public void bindErrorInfo(TokenApiResponse response, String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました");
+        response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
     }
 
 }

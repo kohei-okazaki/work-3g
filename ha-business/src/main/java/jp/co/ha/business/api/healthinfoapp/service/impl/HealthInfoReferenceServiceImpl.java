@@ -27,7 +27,7 @@ import jp.co.ha.db.entity.HealthInfo;
 public class HealthInfoReferenceServiceImpl extends CommonService
         implements HealthInfoReferenceService {
 
-    /** 健康情報検索サービス */
+    /** {@linkplain HealthInfoSearchService} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
 

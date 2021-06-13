@@ -19,9 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jp.co.ha.common.exception.ApiException;
-import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
@@ -63,7 +61,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BaseApi.class);
 
-    /** APIを通信するためのClient */
+    /** {@linkplain RestTemplate} */
     @Autowired
     private RestTemplate restTemplate;
 
@@ -75,18 +73,18 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @param apiConnectInfo
      *     API接続に必要な情報
      * @return APIレスポンス
-     * @throws BaseException
      */
     @SuppressWarnings("unchecked")
-    public Rs callApi(Rq request, ApiConnectInfo apiConnectInfo) throws BaseException {
+    public Rs callApi(Rq request, ApiConnectInfo apiConnectInfo) {
 
         Rs response = getResponse();
         HttpStatus code = null;
+        URI uri = null;
+        String errorMessage = null;
 
         try {
 
-            // URIを生成
-            URI uri = getUri(apiConnectInfo, request);
+            uri = getUri(apiConnectInfo, request);
             LOG.info("====> API名=" + getApiName() + ",HttpMethod=" + getHttpMethod()
                     + ",URL=" + uri.toString());
             LOG.infoBean(request);
@@ -131,13 +129,23 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
                 response = responseEntity.getBody();
             }
 
+        } catch (URISyntaxException e) {
+            errorMessage = "URLが不正です.";
+            bindErrorInfo(response, errorMessage);
+            LOG.error(errorMessage, e);
         } catch (HttpStatusCodeException e) {
             code = e.getStatusCode();
-            bindErrorInfo(response);
+            if (code.is4xxClientError()) {
+                errorMessage = "Clientエラーです. HttpStatusCode=" + e.getStatusCode();
+            } else if (code.is5xxServerError()) {
+                errorMessage = "対向Serverエラーです. HttpStatusCode=" + e.getStatusCode();
+            }
+            bindErrorInfo(response, errorMessage);
+            LOG.error(errorMessage, e);
         } catch (Exception e) {
-            bindErrorInfo(response);
-            throw new ApiException(CommonErrorCode.UNEXPECTED_ERROR, "対向サーバでエラーが発生しました.",
-                    e);
+            errorMessage = "URLが不正です.";
+            bindErrorInfo(response, errorMessage);
+            LOG.error(errorMessage, e);
         } finally {
             LOG.infoBean(response);
             LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code);
@@ -173,8 +181,10 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      *
      * @param response
      *     レスポンス情報
+     * @param errorMessage
+     *     エラーメッセージ
      */
-    protected abstract void bindErrorInfo(Rs response);
+    protected abstract void bindErrorInfo(Rs response, String errorMessage);
 
     /**
      * リクエストURIを返す
@@ -186,11 +196,9 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @return リクエストURI
      * @throws URISyntaxException
      *     URLとして正しくない場合
-     * @throws ApiException
-     *     APIの通信に失敗した場合
      */
     private static URI getUri(ApiConnectInfo apiConnectInfo, BaseApiRequest request)
-            throws URISyntaxException, ApiException {
+            throws URISyntaxException {
         String baseUrl = apiConnectInfo.getUrlSupplier().get();
         baseUrl += toQueryParameter(request);
         return new URI(baseUrl);
@@ -202,13 +210,10 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @param request
      *     リクエスト情報
      * @return クエリパラメータ
-     * @throws ApiException
-     *     クエリパラメータの返却に失敗した場合
      */
-    private static String toQueryParameter(BaseApiRequest request) throws ApiException {
+    private static String toQueryParameter(BaseApiRequest request) {
 
         StringJoiner sj = new StringJoiner("&");
-
         try {
             for (Field f : request.getClass().getDeclaredFields()) {
 
@@ -228,11 +233,15 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
                     sj.add(key + "=" + value.toString());
                 }
             }
-        } catch (Exception e) {
-            throw new ApiException(e);
-        }
 
-        return "?" + sj.toString();
+            if (sj.length() == 0) {
+                return sj.toString();
+            }
+            return "?" + sj.toString();
+
+        } catch (Exception e) {
+            throw new SystemRuntimeException(e);
+        }
     }
 
 }
