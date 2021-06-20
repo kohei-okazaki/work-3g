@@ -115,7 +115,7 @@ public class ApiCommunicationDataComponent {
 
     /**
      * 指定したAPI通信情報を更新する
-     * 
+     *
      * @param apiCommunicationData
      *     {@linkplain ApiCommunicationData}
      * @param connectInfo

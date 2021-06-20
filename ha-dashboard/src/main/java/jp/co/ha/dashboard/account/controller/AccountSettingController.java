@@ -40,13 +40,13 @@ import jp.co.ha.db.entity.composite.CompositeAccount;
 public class AccountSettingController
         implements BaseWizardController<AccountSettingForm> {
 
-    /** アカウント設定サービス */
+    /** {@linkplain AccountSettingService} */
     @Autowired
     private AccountSettingService accountSettingService;
-    /** アカウント検索サービス */
+    /** {@linkplain AccountSearchService} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
 

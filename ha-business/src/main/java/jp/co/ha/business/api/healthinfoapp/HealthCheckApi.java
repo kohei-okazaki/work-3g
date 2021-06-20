@@ -16,7 +16,8 @@ import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
  * @version 1.0.0
  */
 @Component
-public class HealthCheckApi extends BaseApi<HealthCheckApiRequest, HealthCheckApiResponse> {
+public class HealthCheckApi
+        extends BaseApi<HealthCheckApiRequest, HealthCheckApiResponse> {
 
     @Override
     public HealthCheckApiResponse getResponse() {
@@ -34,9 +35,10 @@ public class HealthCheckApi extends BaseApi<HealthCheckApiRequest, HealthCheckAp
     }
 
     @Override
-    public void bindErrorInfo(HealthCheckApiResponse response) {
+    public void bindErrorInfo(HealthCheckApiResponse response, String errorMessage) {
         response.setResultType(ResultType.FAILURE);
         ErrorInfo errorInfo = new ErrorInfo();
+        errorInfo.setDetail(errorMessage);
         response.setErrorInfo(errorInfo);
     }
 

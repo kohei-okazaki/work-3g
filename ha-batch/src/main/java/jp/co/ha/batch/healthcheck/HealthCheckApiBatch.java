@@ -14,9 +14,6 @@ import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthinfoapp.HealthCheckApi;
 import jp.co.ha.business.api.healthinfoapp.request.HealthCheckApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthCheckApiResponse;
-import jp.co.ha.business.api.root.RootHealthCheckApi;
-import jp.co.ha.business.api.root.request.RootHealthCheckApiRequest;
-import jp.co.ha.business.api.root.response.RootHealthCheckApiResponse;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
@@ -32,7 +29,8 @@ import jp.co.ha.db.entity.ApiCommunicationData;
  * 以下のサーバが起動状態かどうかを確認する<br>
  * <ul>
  * <li>健康管理APIサーバ</li>
- * <li>管理者用APIサーバ</li>
+ * <li>NodeAPIサーバ</li>
+ * <li>RootAPIサーバ</li>
  * </ul>
  *
  * @version 1.0.0
@@ -59,9 +57,10 @@ public class HealthCheckApiBatch implements Tasklet {
     @Autowired
     @Qualifier("nodeHealthCheckApi")
     private jp.co.ha.business.api.node.HealthCheckApi nodeHealthCheckApi;
-    /** {@linkplain RootHealthCheckApi} */
+    /** {@linkplain jp.co.ha.business.api.root.HealthCheckApi} */
     @Autowired
-    private RootHealthCheckApi rootHealthCheckApi;
+    @Qualifier("rootHealthCheckApi")
+    private jp.co.ha.business.api.root.HealthCheckApi rootHealthCheckApi;
     /** {@linkplain AwsSesComponent} */
     @Autowired
     private AwsSesComponent awsSesComponent;
@@ -104,8 +103,9 @@ public class HealthCheckApiBatch implements Tasklet {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(rootHealthCheckApi.getApiName(), null, transactionId);
 
-        RootHealthCheckApiResponse response = rootHealthCheckApi
-                .callApi(new RootHealthCheckApiRequest(), apiConnectInfo);
+        jp.co.ha.business.api.root.response.HealthCheckApiResponse response = rootHealthCheckApi
+                .callApi(new jp.co.ha.business.api.root.request.HealthCheckApiRequest(),
+                        apiConnectInfo);
 
         // API通信情報を更新
         apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,

@@ -19,10 +19,8 @@ import jp.co.ha.common.web.api.BaseApi;
  * @version 1.0.0
  */
 @Component
-public class CalorieCalcApi extends BaseApi<CalorieCalcApiRequest, CalorieCalcApiResponse> {
-
-    /** カロリー計算APIの種別 */
-    private static final NodeApiType TYPE = NodeApiType.CALORIE;
+public class CalorieCalcApi
+        extends BaseApi<CalorieCalcApiRequest, CalorieCalcApiResponse> {
 
     @Override
     public CalorieCalcApiResponse getResponse() {
@@ -36,13 +34,13 @@ public class CalorieCalcApi extends BaseApi<CalorieCalcApiRequest, CalorieCalcAp
 
     @Override
     public String getApiName() {
-        return TYPE.getApiNameType().getValue();
+        return NodeApiType.CALORIE.getApiNameType().getValue();
     }
 
     @Override
-    public void bindErrorInfo(CalorieCalcApiResponse response) {
+    public void bindErrorInfo(CalorieCalcApiResponse response, String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました");
+        response.setDetail(getApiName() + "に失敗しました." + errorMessage);
     }
 
 }

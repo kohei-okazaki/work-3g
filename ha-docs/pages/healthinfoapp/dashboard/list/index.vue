@@ -145,8 +145,20 @@ export default {
           leads: [],
         },
         {
+          name: "アカウント登録画面",
+          description: "ユーザの情報を登録する機能",
+          loginAuth: true,
+          leads: [],
+        },
+        {
           name: "アカウント設定画面",
           description: "ユーザの設定情報を変更/確認する機能",
+          loginAuth: true,
+          leads: [],
+        },
+        {
+          name: "パスワード再設定画面",
+          description: "ユーザのパスワードを変更する機能",
           loginAuth: true,
           leads: [],
         },

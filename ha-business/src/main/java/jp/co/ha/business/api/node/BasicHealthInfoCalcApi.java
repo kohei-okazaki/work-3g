@@ -22,9 +22,6 @@ import jp.co.ha.common.web.api.BaseApi;
 public class BasicHealthInfoCalcApi
         extends BaseApi<BasicHealthInfoCalcApiRequest, BasicHealthInfoCalcApiResponse> {
 
-    /** 基礎健康情報計算APIの種別 */
-    private static final NodeApiType TYPE = NodeApiType.BASIC;
-
     @Override
     public BasicHealthInfoCalcApiResponse getResponse() {
         return new BasicHealthInfoCalcApiResponse();
@@ -37,13 +34,14 @@ public class BasicHealthInfoCalcApi
 
     @Override
     public String getApiName() {
-        return TYPE.getApiNameType().getValue();
+        return NodeApiType.BASIC.getApiNameType().getValue();
     }
 
     @Override
-    public void bindErrorInfo(BasicHealthInfoCalcApiResponse response) {
+    public void bindErrorInfo(BasicHealthInfoCalcApiResponse response,
+            String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました");
+        response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
     }
 
 }

@@ -18,9 +18,6 @@ import jp.co.ha.common.web.api.BaseApi;
 public class HealthCheckApi
         extends BaseApi<HealthCheckApiRequest, HealthCheckApiResponse> {
 
-    /** ヘルスチェックAPIの種別 */
-    private static final NodeApiType TYPE = NodeApiType.HEALTH_CHECK;
-
     @Override
     public HealthCheckApiResponse getResponse() {
         return new HealthCheckApiResponse();
@@ -33,13 +30,13 @@ public class HealthCheckApi
 
     @Override
     public String getApiName() {
-        return TYPE.getApiNameType().getValue();
+        return NodeApiType.HEALTH_CHECK.getApiNameType().getValue();
     }
 
     @Override
-    public void bindErrorInfo(HealthCheckApiResponse response) {
+    public void bindErrorInfo(HealthCheckApiResponse response, String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました");
+        response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
     }
 
 }

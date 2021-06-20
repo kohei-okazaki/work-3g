@@ -44,25 +44,25 @@ import jp.co.ha.db.entity.HealthInfo;
 public class HealthInfoRegistServiceImpl extends CommonService
         implements HealthInfoRegistService {
 
-    /** 健康情報検索サービス */
+    /** {@linkplain HealthInfoSearchService} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** 健康情報計算サービス */
+    /** {@linkplain HealthInfoCalcService} */
     @Autowired
     private HealthInfoCalcService healthInfoCalcService;
-    /** 健康情報作成サービス */
+    /** {@linkplain HealthInfoCreateService} */
     @Autowired
     private HealthInfoCreateService healthInfoCreateService;
-    /** BMI範囲マスタ検索サービス */
+    /** {@linkplain BmiRangeMtSearchService} */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** トークン発行APIComponent */
+    /** {@linkplain TokenApiComponent} */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** 基礎健康情報計算APIComponent */
+    /** {@linkplain BasicHealthInfoCalcApiComponent} */
     @Autowired
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
 
@@ -79,8 +79,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         if (request.getTransactionId() == null) {
             // API通信情報.トランザクションIDを採番
-            Long transactionId = apiCommunicationDataComponent.getTransactionId();
-            request.setTransactionId(transactionId);
+            request.setTransactionId(apiCommunicationDataComponent.getTransactionId());
         }
 
         // トークン発行API実施

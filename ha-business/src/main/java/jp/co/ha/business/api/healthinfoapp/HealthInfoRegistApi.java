@@ -35,9 +35,10 @@ public class HealthInfoRegistApi
     }
 
     @Override
-    public void bindErrorInfo(HealthInfoRegistApiResponse response) {
+    public void bindErrorInfo(HealthInfoRegistApiResponse response, String errorMessage) {
         response.setResultType(ResultType.FAILURE);
         ErrorInfo errorInfo = new ErrorInfo();
+        errorInfo.setDetail(errorMessage);
         response.setErrorInfo(errorInfo);
     }
 
