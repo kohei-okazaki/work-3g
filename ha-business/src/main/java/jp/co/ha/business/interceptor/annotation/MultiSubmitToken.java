@@ -25,6 +25,9 @@ import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MultiSubmitToken {
 
+    /** トークン名 */
+    public static final String TOKEN_NAME = "multiSubmitToken";
+
     /**
      * トークンを生成する
      *
