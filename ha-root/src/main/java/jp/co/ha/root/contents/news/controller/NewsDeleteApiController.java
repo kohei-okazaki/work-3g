@@ -47,9 +47,10 @@ public class NewsDeleteApiController
      * @throws BaseException
      *     URLが不正な場合
      */
-    @DeleteMapping(value = "news/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @DeleteMapping(value = "news/{seq_news_info_id}", produces = {
+            MediaType.APPLICATION_JSON_VALUE })
     public NewsDeleteApiResponse delete(
-            @PathVariable(name = "id", required = false) Optional<String> id,
+            @PathVariable(name = "seq_news_info_id", required = false) Optional<String> id,
             NewsDeleteApiRequest request) throws BaseException {
 
         if (!id.isPresent()) {

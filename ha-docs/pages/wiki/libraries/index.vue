@@ -121,15 +121,15 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.7",
+          version: "5.3.8",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Spring Boot",
           version: "2.5.0",
-          description: "管理者APIで使用するWeb FW",
-          projects: ["rootapi"],
+          description: "管理者APIと健康管理バッチで使用するSpring FW",
+          projects: ["rootapi", "batch"],
         },
         {
           name: "express",
@@ -190,7 +190,7 @@ export default {
         },
         {
           name: "flyway",
-          version: "7.9.1",
+          version: "7.10.0",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },

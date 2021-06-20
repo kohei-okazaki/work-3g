@@ -13,6 +13,7 @@ import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
@@ -30,10 +31,10 @@ import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
  */
 public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** SHA-256 ハッシュ値生成 */
+    /** {@linkplain Sha256HashEncoder} */
     @Sha256
     @Autowired
     private HashEncoder encoder;
@@ -57,7 +58,8 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
         if (isMultiSubmitTokenCheck(handler)) {
             // 多重送信トークンチェックを行う
             String multiSubmitToken = sessionComponent
-                    .getValue(request.getSession(), "multiSubmitToken", String.class)
+                    .getValue(request.getSession(), MultiSubmitToken.TOKEN_NAME,
+                            String.class)
                     .orElseThrow(() -> new SystemException(
                             DashboardErrorCode.MULTI_SUBMIT_ERROR, "不正リクエストエラーです"));
             if (StringUtil.isEmpty(multiSubmitToken)) {
@@ -79,14 +81,15 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isMultiSubmitTokenCheck(handler)) {
             // 多重送信トークンチェック後、トークンを削除する
-            sessionComponent.removeValue(request.getSession(), "multiSubmitToken");
+            sessionComponent.removeValue(request.getSession(),
+                    MultiSubmitToken.TOKEN_NAME);
         }
 
         if (isMultiSubmitTokenFactory(handler)) {
             // 多重送信トークンを作成する
             String multiSubmitToken = encoder
                     .encode(RandomStringUtils.randomAlphabetic(10), "");
-            sessionComponent.setValue(request.getSession(), "multiSubmitToken",
+            sessionComponent.setValue(request.getSession(), MultiSubmitToken.TOKEN_NAME,
                     multiSubmitToken);
         }
     }

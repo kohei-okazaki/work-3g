@@ -54,17 +54,17 @@ public class HealthInfoFileRegistController
     /** 健康情報登録ファイルPrefix */
     private static final String FILE_NAME_PREFIX = "healthinfo-file-regist/";
 
-    /** 健康情報CSVアップロードサービス */
+    /** {@linkplain CsvUploadService} */
     @Autowired
     @HealthInfoUploadCsv
     private CsvUploadService<HealthInfoCsvUploadModel> csvUploadService;
-    /** 健康情報ファイル登録画面サービス */
+    /** {@linkplain HealthInfoFileRegistService} */
     @Autowired
     private HealthInfoFileRegistService fileService;
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** S3コンポーネント */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
 
@@ -162,9 +162,9 @@ public class HealthInfoFileRegistController
 
         ResultType result = fileService.regist(modelList, seqUserId);
 
-        sessionComponent.removeValue(request.getSession(), FILE_NAME_PREFIX + seqUserId);
-
-        if (ResultType.FAILURE == result) {
+        if (ResultType.SUCCESS == result) {
+            sessionComponent.removeValue(request.getSession(),
+                    FILE_NAME_PREFIX + seqUserId);
             awsS3Component.removeS3ObjectByKeys(FILE_NAME_PREFIX + seqUserId);
         }
 

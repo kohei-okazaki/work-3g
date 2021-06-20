@@ -24,7 +24,7 @@ import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse.Role;
 public class RoleMtListApiController
         extends BaseRootApiController<RoleMtListApiRequest, RoleMtListApiResponse> {
 
-    /** 管理者サイト権限マスタ検索サービス */
+    /** {@linkplain RootRoleMtSearchService} */
     @Autowired
     private RootRoleMtSearchService rootRoleMtSearchService;
 

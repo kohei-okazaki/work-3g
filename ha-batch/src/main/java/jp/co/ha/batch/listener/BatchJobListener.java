@@ -1,6 +1,5 @@
 package jp.co.ha.batch.listener;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.StringJoiner;
@@ -63,16 +62,14 @@ public class BatchJobListener extends JobExecutionListenerSupport {
             String message = "name=" + jobExecution.getJobInstance().getJobName()
                     + ", status=" + jobExecution.getStatus();
             if (BatchStatus.FAILED == jobExecution.getStatus()) {
-                List<Throwable> exceptions = jobExecution.getAllFailureExceptions();
-                for (Throwable t : exceptions) {
+                for (Throwable t : jobExecution.getAllFailureExceptions()) {
                     BaseAppError error = null;
                     if (t instanceof BaseAppError) {
                         error = (BaseAppError) t;
                     } else {
                         BaseErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
                         String detail = messageSource.getMessage(
-                                errorCode.getOuterErrorCode(), null,
-                                Locale.getDefault());
+                                errorCode.getOuterErrorCode(), null, Locale.getDefault());
                         error = new SystemException(errorCode, detail);
                     }
 

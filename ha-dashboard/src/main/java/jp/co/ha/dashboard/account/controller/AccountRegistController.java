@@ -19,8 +19,6 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
@@ -37,16 +35,13 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("accountregist")
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(AccountRegistController.class);
-    /** アカウント登録画面サービス */
+    /** {@linkplain AccountRegistService} */
     @Autowired
     private AccountRegistService accountRegistService;
-    /** アカウント検索サービス */
+    /** {@linkplain AccountSearchService} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
 
@@ -80,7 +75,6 @@ public class AccountRegistController implements BaseWizardController<AccountRegi
 
         if (accountSearchService.isExistByMailAddress(form.getMailAddress())) {
             model.addAttribute("errorMessage", "指定されたメールアドレスは既に登録されています");
-            LOG.warn("指定されたメールアドレスは既に登録されています. mail_address:" + form.getMailAddress());
             return getView(model, DashboardView.ACCOUNT_REGIST_INPUT);
         }
 

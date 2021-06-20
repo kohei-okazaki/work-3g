@@ -3,6 +3,7 @@ package jp.co.ha.common.web.form;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Required;
 
 /**
@@ -20,6 +21,7 @@ public abstract class BaseRestApiRequest implements BaseForm {
     /** APIキー */
     @JsonIgnore
     @Required(message = "apiKeyが未指定です")
+    @Length(message = "apiKeyが64byteではありません", length = 64)
     private String apiKey;
 
     /**

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.contents.healthcheck.HealthCheckApiResponse;
 import jp.co.ha.root.contents.healthcheck.request.HealthCheckApiRequest;
+import jp.co.ha.root.contents.healthcheck.response.HealthCheckApiResponse;
 
 /**
  * ヘルスチェックAPIコントローラ
