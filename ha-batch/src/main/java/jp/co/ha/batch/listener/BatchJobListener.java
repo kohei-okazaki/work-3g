@@ -59,8 +59,11 @@ public class BatchJobListener extends JobExecutionListenerSupport {
     public void afterJob(JobExecution jobExecution) {
 
         try {
-            String message = "name=" + jobExecution.getJobInstance().getJobName()
+            String message = "id=" + jobExecution.getJobId()
+                    + ", job_instance_id=" + jobExecution.getJobInstance().getInstanceId()
+                    + ", name=" + jobExecution.getJobInstance().getJobName()
                     + ", status=" + jobExecution.getStatus();
+
             if (BatchStatus.FAILED == jobExecution.getStatus()) {
                 for (Throwable t : jobExecution.getAllFailureExceptions()) {
                     BaseAppError error = null;
@@ -73,17 +76,15 @@ public class BatchJobListener extends JobExecutionListenerSupport {
                         error = new SystemException(errorCode, detail);
                     }
 
-                    String errorMessage = new StringBuilder()
+                    StringBuilder errorMessage = new StringBuilder()
                             .append(messageSource.getMessage(
                                     error.getErrorCode().getOuterErrorCode(), null,
                                     Locale.getDefault()))
                             .append("(")
                             .append(error.getErrorCode().getOuterErrorCode())
-                            .append(")")
-                            .toString();
-                    message += (", error_message=" + errorMessage);
-                    slackApiComponent.send(ContentType.BATCH,
-                            message + ", error_message=" + errorMessage);
+                            .append(")");
+                    message += (", error_message=" + errorMessage.toString());
+                    slackApiComponent.send(ContentType.BATCH, message);
                 }
             }
 
@@ -93,6 +94,7 @@ public class BatchJobListener extends JobExecutionListenerSupport {
             LOG.debug("end JOB. " + message);
 
         } catch (BaseException e) {
+            // Slackの通知に失敗した場合
             throw new SystemRuntimeException(e);
         }
     }

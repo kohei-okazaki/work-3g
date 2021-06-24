@@ -1,4 +1,4 @@
-package jp.co.ha.batch.ｍonthlyHealthInfoSummary;
+package jp.co.ha.batch.monthlyHealthInfoSummary;
 
 import java.util.Map;
 

@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistBatch;
 import jp.co.ha.batch.healthcheck.HealthCheckApiBatch;
 import jp.co.ha.batch.listener.BatchJobListener;
-import jp.co.ha.batch.ｍonthlyHealthInfoSummary.MonthlyHealthInfoSummaryBatch;
-import jp.co.ha.batch.ｍonthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator;
+import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryBatch;
+import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator;
 
 /**
  * Batch処理の定義クラス
@@ -114,34 +114,34 @@ public class BatchConfig {
 
     /**
      * 月次健康情報集計バッチのJOB<br>
-     * ｍonthlyHealthInfoSummaryBatchJob
+     * monthlyHealthInfoSummaryBatchJob
      *
-     * @param ｍonthlyHealthInfoSummaryBatchStep
+     * @param monthlyHealthInfoSummaryBatchStep
      *     月次健康情報集計バッチのSTEP
      * @return 月次健康情報集計バッチJOB
      */
     @Bean
-    public Job ｍonthlyHealthInfoSummaryBatchJob(Step ｍonthlyHealthInfoSummaryBatchStep) {
-        return jobBuilderFactory.get("ｍonthlyHealthInfoSummaryBatchJob")
+    public Job monthlyHealthInfoSummaryBatchJob(Step monthlyHealthInfoSummaryBatchStep) {
+        return jobBuilderFactory.get("monthlyHealthInfoSummaryBatchJob")
                 .incrementer(new RunIdIncrementer())
                 .validator(new MonthlyHealthInfoSummaryValidator())
                 .listener(batchJobListener)
                 // 実行するStepを指定
-                .flow(ｍonthlyHealthInfoSummaryBatchStep)
+                .flow(monthlyHealthInfoSummaryBatchStep)
                 .end()
                 .build();
     }
 
     /**
      * 月次健康情報集計バッチのSTEP<br>
-     * ｍonthlyHealthInfoSummaryBatchStep
+     * monthlyHealthInfoSummaryBatchStep
      *
      * @return 月次健康情報集計のSTEP
      */
     @Bean
-    public Step ｍonthlyHealthInfoSummaryBatchStep() {
+    public Step monthlyHealthInfoSummaryBatchStep() {
         // Step名を指定
-        return stepBuilderFactory.get("ｍonthlyHealthInfoSummaryBatchStep")
+        return stepBuilderFactory.get("monthlyHealthInfoSummaryBatchStep")
                 // 実行するTaskletを指定
                 .tasklet(monthlyHealthInfoSummaryBatch)
                 .build();
