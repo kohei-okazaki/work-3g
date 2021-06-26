@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.web.api.RestApiExceptionHandler;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.common.web.form.BaseApiResponse;
 
@@ -26,9 +25,7 @@ public class ApiConnectAspect {
     private static final Logger LOG = LoggerFactory.getLogger(ApiConnectAspect.class);
 
     /**
-     * APIのリクエスト/レスポンスログ(正常系)を出力する<br>
-     * レスポンスログ(異常系)は以下のクラスのメソッドで行う<br>
-     * <li>{@linkplain RestApiExceptionHandler#handleException}</li>
+     * APIのリクエスト/レスポンスログ(正常系)を出力する
      *
      * @param pjp
      *     {@linkplain ProceedingJoinPoint}
