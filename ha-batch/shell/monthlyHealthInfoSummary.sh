@@ -16,7 +16,7 @@ print "------------------------------------------------------------------------"
 DATE_OPTION_VALUE=$1
 
 cd ${BATCH_DIR}/target
-java -jar -Dspring.profiles.active=${ENV} -Dspring.batch.job.names=ÇçonthlyHealthInfoSummaryBatchJob ${BATCH_JAR} m=${DATE_OPTION_VALUE}
+java -jar -Dspring.profiles.active=${ENV} -Dspring.batch.job.names=monthlyHealthInfoSummaryBatchJob ${BATCH_JAR} m=${DATE_OPTION_VALUE}
 
 print "------------------------------------------------------------------------"
 print "END $0"

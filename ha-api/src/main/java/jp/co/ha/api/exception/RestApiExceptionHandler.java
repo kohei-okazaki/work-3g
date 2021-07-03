@@ -1,5 +1,10 @@
-package jp.co.ha.common.web.api;
+package jp.co.ha.api.exception;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -9,19 +14,23 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseAppError;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.web.form.BaseRestApiResponse;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ErrorInfo;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 
 /***
  * REST APIの例外ハンドラークラス<br>
- * ユーザの認証有無に関わらず、すべてのAPIで発生した例外については本クラスで制御を行う
+ * ユーザの認証有無に関わらず、ha-apiで発生した例外については本クラスで制御を行う
  *
  * @version 1.0.0
  */
@@ -31,6 +40,9 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(RestApiExceptionHandler.class);
+    /** {@linkplain SlackApiComponent} */
+    @Autowired
+    private SlackApiComponent slackApiComponent;
 
     /**
      * APIで発生した例外をハンドリングする<br>
@@ -43,6 +55,17 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
     @ResponseStatus(code = HttpStatus.OK)
     @ExceptionHandler(Exception.class)
     public BaseRestApiResponse handleException(Exception e) {
+
+        // Slackに通知
+        try (StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);) {
+            e.printStackTrace(pw);
+            slackApiComponent.sendFile(ContentType.DASHBOARD,
+                    sw.toString().getBytes(Charset.UTF_8.getValue()), "エラー情報",
+                    "stack-trace", getLogErrorMessage(e));
+        } catch (BaseException | IOException be) {
+            LOG.error("slack通知に失敗しました", be);
+        }
 
         BaseAppError appError = getAppError(e);
 

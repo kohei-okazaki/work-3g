@@ -9,7 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "core-js": "^3.14.0",
+    "core-js": "^3.15.2",
     "is-svg": "^4.3.1",
     "nuxt": "^2.15.7",
     "postcss": "^8.3.5",

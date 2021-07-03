@@ -1,4 +1,5 @@
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder
+import ch.qos.logback.classic.filter.LevelFilter
 import ch.qos.logback.classic.filter.ThresholdFilter
 import ch.qos.logback.core.ConsoleAppender
 import ch.qos.logback.core.rolling.RollingFileAppender
@@ -6,11 +7,13 @@ import ch.qos.logback.core.rolling.TimeBasedRollingPolicy
 import java.nio.charset.Charset
 
 import static ch.qos.logback.classic.Level.*
+import static ch.qos.logback.core.spi.FilterReply.*
 
 scan("30 seconds")
 
 def FILE_PATH = "C:/app/tool/testlogs";
 def ENCODE = "UTF-8";
+def appenderList = ["STDOUT", "DEBUG_FILE", "INFO_FILE", "WARN_FILE", "ERROR_FILE"];
 
 appender("STDOUT", ConsoleAppender) {
 
@@ -18,33 +21,102 @@ appender("STDOUT", ConsoleAppender) {
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
+    pattern = "%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n"
   }
 
   filter(ThresholdFilter) {
     level = DEBUG
   }
-
 }
 
-appender("FILE", RollingFileAppender) {
+// DEBUGログの出力設定
+appender("DEBUG_FILE", RollingFileAppender) {
 
-  file = "${FILE_PATH}/tool.log"
+  file = "${FILE_PATH}/tool-debug.log"
 
   rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "tool_%d{yyyy-MM-dd}.log"
+    fileNamePattern = "tool-debug_%d{yyyy-MM-dd}.log"
     maxHistory = 30
   }
 
   encoder(PatternLayoutEncoder) {
     charset = Charset.forName("${ENCODE}")
-    pattern = "%d [%thread] %-5level %logger{10} - %msg%n"
+    pattern = "%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n"
   }
 
-  filter(ThresholdFilter) {
+  filter(LevelFilter) {
     level = DEBUG
+    onMatch = ACCEPT
+    onMismatch = DENY
   }
 
+}
+
+// INFOログの出力設定
+appender("INFO_FILE", RollingFileAppender) {
+
+  file = "${FILE_PATH}/tool-info.log"
+
+  rollingPolicy(TimeBasedRollingPolicy) {
+    fileNamePattern = "tool-info_%d{yyyy-MM-dd}.log"
+    maxHistory = 30
+  }
+
+  encoder(PatternLayoutEncoder) {
+    charset = Charset.forName("${ENCODE}")
+    pattern = "%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n"
+  }
+
+  filter(LevelFilter) {
+    level = INFO
+    onMatch = ACCEPT
+    onMismatch = DENY
+  }
+
+}
+
+// WARNログの出力する設定
+appender("WARN_FILE", RollingFileAppender) {
+
+  file = "${FILE_PATH}/tool-warn.log"
+
+  rollingPolicy(TimeBasedRollingPolicy) {
+    fileNamePattern = "tool-warn_%d{yyyy-MM-dd}.log"
+    maxHistory = 30
+  }
+
+  encoder(PatternLayoutEncoder) {
+    charset = Charset.forName("${ENCODE}")
+    pattern = "%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n"
+  }
+
+  filter(LevelFilter) {
+    level = WARN
+    onMatch = ACCEPT
+    onMismatch = DENY
+  }
+}
+
+// ERRORログの出力する設定
+appender("ERROR_FILE", RollingFileAppender) {
+
+  file = "${FILE_PATH}/tool-error.log"
+
+  rollingPolicy(TimeBasedRollingPolicy) {
+    fileNamePattern = "tool-error_%d{yyyy-MM-dd}.log"
+    maxHistory = 30
+  }
+
+  encoder(PatternLayoutEncoder) {
+    charset = Charset.forName("${ENCODE}")
+    pattern = "%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n"
+  }
+
+  filter(LevelFilter) {
+    level = ERROR
+    onMatch = ACCEPT
+    onMismatch = DENY
+  }
 }
 
 // アプリで出力されるログのログレベルを設定
