@@ -39,13 +39,17 @@ public class BatchJobListener extends JobExecutionListenerSupport {
     private SlackApiComponent slackApiComponent;
     /** {@linkplain MessageSource} */
     @Autowired
-    protected MessageSource messageSource;
+    private MessageSource messageSource;
 
     @Override
     public void beforeJob(JobExecution jobExecution) {
 
         StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-        sj.add("start JOB. name=" + jobExecution.getJobInstance().getJobName());
+        String message = "id=" + jobExecution.getJobId()
+                + ", job_instance_id=" + jobExecution.getJobInstance().getInstanceId()
+                + ", name=" + jobExecution.getJobInstance().getJobName()
+                + ", status=" + jobExecution.getStatus();
+        sj.add("start JOB. " + message);
         for (Entry<String, JobParameter> entry : jobExecution.getJobParameters()
                 .getParameters().entrySet()) {
             sj.add("{key=" + entry.getKey() + ", val=" + entry.getValue().toString()

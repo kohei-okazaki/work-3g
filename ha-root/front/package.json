@@ -13,7 +13,7 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.15.1",
+    "core-js": "^3.15.2",
     "cross-env": "^7.0.3",
     "is-svg": "^4.3.1",
     "nuxt": "^2.15.7",
