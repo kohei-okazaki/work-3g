@@ -1,4 +1,4 @@
-package jp.co.ha.batch.ｍonthlyHealthInfoSummary;
+package jp.co.ha.batch.monthlyHealthInfoSummary;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +43,7 @@ import jp.co.ha.db.entity.HealthInfo;
 /**
  * 月次健康情報集計バッチ<br>
  * <ul>
- * <li>引数1=処理対象月(YYYYMM)</li>
+ * <li>引数1=処理対象年月(YYYYMM)</li>
  * </ul>
  *
  * @version 1.0.0
@@ -52,7 +52,7 @@ import jp.co.ha.db.entity.HealthInfo;
 @Component
 public class MonthlyHealthInfoSummaryBatch implements Tasklet {
 
-    /** 処理対象日付 */
+    /** 処理対象年月 */
     @Value("#{jobParameters[m]}")
     private String targetDate;
     /** 健康情報検索サービス */
