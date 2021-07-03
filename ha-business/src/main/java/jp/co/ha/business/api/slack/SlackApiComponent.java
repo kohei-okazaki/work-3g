@@ -153,6 +153,7 @@ public class SlackApiComponent {
      * コンテンツタイプの列挙体
      * <ul>
      * <li>DASHBOARD：健康管理ダッシュボード</li>
+     * <li>API：健康管理API</li>
      * <li>BATCH：健康管理バッチ</li>
      * <li>ROOT：管理者用サイト</li>
      * </ul>
@@ -163,6 +164,8 @@ public class SlackApiComponent {
 
         /** DASHBOARD：健康管理ダッシュボード */
         DASHBOARD("dashboard"),
+        /** API：健康管理API */
+        API("api"),
         /** BATCH：健康管理バッチ */
         BATCH("batch"),
         /** ROOT：管理者用サイト */
