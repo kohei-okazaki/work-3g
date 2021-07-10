@@ -13,7 +13,7 @@
   <description>health app for batch</description>
 
   <properties>
-    <org.springframework.boot-version>2.5.0</org.springframework.boot-version>
+    <org.springframework.boot-version>2.5.2</org.springframework.boot-version>
   </properties>
 
   <parent>
