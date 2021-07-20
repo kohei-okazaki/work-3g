@@ -15,7 +15,7 @@
     "postcss": "^8.3.5",
     "vue-mermaid": "0.0.14",
     "vue-simple-context-menu": "^3.4.1",
-    "vuex-persistedstate": "^4.0.0-beta.3"
+    "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.1"

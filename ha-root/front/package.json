@@ -19,7 +19,7 @@
     "nuxt": "^2.15.7",
     "nuxt-basic-auth-module": "^1.4.0",
     "postcss": "^8.3.5",
-    "vuex-persistedstate": "^4.0.0-beta.3"
+    "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.1"
