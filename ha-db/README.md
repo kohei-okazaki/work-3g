@@ -44,4 +44,4 @@
     - Flyway
 
 - Version
-    - 7系
+    - 8系
