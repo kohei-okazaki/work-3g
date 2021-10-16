@@ -36,18 +36,6 @@ windows, linuxでそれぞれbatとshを用意
 | dashboard |
 | root |
 
-* ### ha-pom  
-以下のMavenプロジェクトで共通的に使う依存関係をまとめたプロジェクト  
-| プロジェクト名 |
-| :---- |
-| api |
-| batch |
-| business |
-| common |
-| dashboard |
-| db |
-| root |
-
 * ### ha-common  
 以下のMavenプロジェクトで共通的に使う共通処理を定義したプロジェクト  
 | プロジェクト名 |
