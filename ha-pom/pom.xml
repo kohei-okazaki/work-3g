@@ -16,25 +16,25 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>1.8</java-version>
-    <org.springframework-version>5.3.10</org.springframework-version>
+    <org.springframework-version>5.3.11</org.springframework-version>
     <org.spring-data-commons-version>2.5.5</org.spring-data-commons-version>
     <org.spring-security-version>5.5.2</org.spring-security-version>
-    <com.amazonaws-version>1.11.1030</com.amazonaws-version>
+    <com.amazonaws-version>1.12.74</com.amazonaws-version>
     <org.aspectj-version>1.9.7</org.aspectj-version>
-    <org.slf4j-version>1.7.31</org.slf4j-version>
+    <org.slf4j-version>1.7.32</org.slf4j-version>
     <org.logback-version>1.2.6</org.logback-version>
-    <org.jackson-version>2.12.5</org.jackson-version>
+    <org.jackson-version>2.13.0</org.jackson-version>
     <org.poi-version>5.0.0</org.poi-version>
     <org.mysql-version>8.0.26</org.mysql-version>
     <org.mybatis-version>3.5.7</org.mybatis-version>
     <org.mybatis-spring-version>2.0.6</org.mybatis-spring-version>
     <org.hibernate-version>7.0.1.Final</org.hibernate-version>
     <org.thymeleaf-version>3.0.12.RELEASE</org.thymeleaf-version>
-    <org.thymeleaf-layout-version>2.5.3</org.thymeleaf-layout-version>
+    <org.thymeleaf-layout-version>3.0.0</org.thymeleaf-layout-version>
     <org.groovy-version>3.0.9</org.groovy-version>
     <org.dbcp2-version>2.9.0</org.dbcp2-version>
     <org.slack-version>1.3.0</org.slack-version>
-    <org.junit-version>5.8.0</org.junit-version>
+    <org.junit-version>5.8.1</org.junit-version>
   </properties>
 
   <profiles>
