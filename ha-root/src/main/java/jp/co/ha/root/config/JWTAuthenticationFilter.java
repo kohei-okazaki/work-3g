@@ -45,7 +45,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             .getLogger(JWTAuthenticationFilter.class);
     /** ログインAPIのパス */
     private static final String LOGIN_API_PATH = "/api/root/login";
-    /** ログインAPIのパス */
+    /** ログインAPIのHTTPメソッド */
     private static final String LOGIN_API_METHOD = HttpMethod.POST.name();
     /** 要求パラメータ:ログインID */
     private static final String REQ_PARAM_SEQ_LOGIN_ID = "seq_login_id";
