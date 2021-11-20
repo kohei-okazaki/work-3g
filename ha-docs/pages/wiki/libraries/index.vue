@@ -121,13 +121,13 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.8",
+          version: "5.3.13",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Spring Boot",
-          version: "2.5.0",
+          version: "2.5.6",
           description: "管理者APIと健康管理バッチで使用するSpring FW",
           projects: ["rootapi", "batch"],
         },
@@ -139,13 +139,13 @@ export default {
         },
         {
           name: "AWS-SDK",
-          version: "1.11.1030",
+          version: "1.12.74",
           description: "AWSのサービスを使うためのライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Jackson",
-          version: "2.12.3",
+          version: "2.13.0",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
@@ -163,20 +163,20 @@ export default {
         },
         {
           name: "apache poi",
-          version: "5.0.0",
+          version: "5.1.0",
           description: "健康管理ダッシュボードで使用する帳票用ライブラリ",
           projects: ["dashboard"],
         },
         {
           name: "logback",
-          version: "1.2.3",
+          version: "1.2.6",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "mysql",
-          version: "8.0.25",
+          version: "8.0.27",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するMySQLライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
@@ -190,7 +190,7 @@ export default {
         },
         {
           name: "flyway",
-          version: "7.10.0",
+          version: "8.0.4",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
@@ -208,7 +208,7 @@ export default {
         },
         {
           name: "junit",
-          version: "5.7.2",
+          version: "5.8.1",
           description: "Javaのテストライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
