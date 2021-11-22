@@ -21,11 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadExcel;
+import jp.co.ha.business.healthInfo.service.impl.HealthInfoCsvDownloadServiceImpl;
+import jp.co.ha.business.healthInfo.service.impl.HealthInfoExcelDownloadServiceImpl;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
@@ -48,6 +52,7 @@ import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
+import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -61,24 +66,24 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @RequestMapping("healthinfo")
 public class HealthInfoRegistController implements BaseWizardController<HealthInfoForm> {
 
-    /** 健康情報画面サービス */
+    /** {@linkplain HealthInfoServiceImpl} */
     @Autowired
     private HealthInfoService healthInfoService;
-    /** 健康情報検索サービス */
+    /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** 健康情報Excelダウンロードサービス */
+    /** {@linkplain HealthInfoExcelDownloadServiceImpl} */
     @Autowired
     @HealthInfoDownloadExcel
     private ExcelDownloadService<HealthInfoExcelComponent> excelDownloadService;
-    /** 健康情報CSVダウンロードサービス */
+    /** {@linkplain HealthInfoCsvDownloadServiceImpl} */
     @Autowired
     @HealthInfoDownloadCsv
     private CsvDownloadService<HealthInfoCsvDownloadModel> csvDownloadService;
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** 健康情報ファイル設定検索サービス */
+    /** {@linkplain HealthInfoFileSettingSearchServiceImpl} */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 

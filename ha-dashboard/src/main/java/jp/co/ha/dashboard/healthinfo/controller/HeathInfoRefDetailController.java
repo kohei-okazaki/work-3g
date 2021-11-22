@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +16,10 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.system.SessionComponent;
+import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
+import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoRefDetailServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -33,7 +34,7 @@ public class HeathInfoRefDetailController implements BaseWebController {
     /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain HealthInfoRefDetailService} */
+    /** {@linkplain HealthInfoRefDetailServiceImpl} */
     @Autowired
     private HealthInfoRefDetailService detailService;
 
@@ -59,13 +60,13 @@ public class HeathInfoRefDetailController implements BaseWebController {
         String healthInfoId = seqHealthInfoId.orElseThrow(
                 () -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                         "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
-        if (!NumberUtils.isCreatable(healthInfoId)) {
+        if (!RegexType.HALF_NUMBER.is(healthInfoId)) {
             // 数値以外の場合
             throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                     "健康情報IDが数字以外です. 健康情報ID=" + healthInfoId);
         }
 
-        // sessionよりユーザID
+        // sessionよりユーザID取得
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
 
