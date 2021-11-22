@@ -61,8 +61,7 @@ public class NewsController implements BaseWebController {
             throws BaseException {
 
         // ページング情報を取得(1ページあたりの表示件数は設定ファイルより取得)
-        Pageable pageable = PagingViewFactory.getPageable(page,
-                systemConfig.getPaging());
+        Pageable pageable = PagingViewFactory.getPageable(page, systemConfig.getPaging());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
@@ -72,9 +71,8 @@ public class NewsController implements BaseWebController {
         List<NewsDto> newsList = new ArrayList<>();
         for (NewsInfo entity : searchService.findAll(selectOption)) {
             // S3からお知らせJSONを取得
-            NewsDto dto = new JsonReader()
-                    .read(awsS3Component.getS3ObjectByKey(entity.getS3Key()),
-                            NewsDto.class);
+            NewsDto dto = new JsonReader().read(
+                    awsS3Component.getS3ObjectByKey(entity.getS3Key()), NewsDto.class);
             newsList.add(dto);
         }
 

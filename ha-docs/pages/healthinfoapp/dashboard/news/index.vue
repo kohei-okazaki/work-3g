@@ -50,7 +50,38 @@ export default {
           href: "/healthinfoapp/dashboard/news",
         },
       ],
-      flow: [],
+      flow: [
+        {
+          id: "0",
+          text: "設定ファイルより<br>ページング情報を取得",
+          edgeType: "round",
+          next: ["1"],
+        },
+        {
+          id: "1",
+          text: "お知らせ情報検索",
+          edgeType: "round",
+          next: ["2"],
+        },
+        {
+          id: "2",
+          text: "お知らせ情報検索",
+          edgeType: "round",
+          next: ["3"],
+        },
+        {
+          id: "3",
+          text: "お知らせ情報の各レコードに対し<br>AWS-S3へJSONファイルを取得",
+          edgeType: "round",
+          next: ["3", "4"],
+        },
+        {
+          id: "4",
+          text: "お知らせ情報件数取得",
+          edgeType: "round",
+          next: ["5"],
+        },
+      ],
     };
   },
 };
