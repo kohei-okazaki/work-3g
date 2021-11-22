@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +35,7 @@ public class HeathInfoRefDetailController implements BaseWebController {
     private SessionComponent sessionComponent;
     /** {@linkplain HealthInfoRefDetailService} */
     @Autowired
-    private HealthInfoRefDetailService healthInfoRefDetailService;
+    private HealthInfoRefDetailService detailService;
 
     /**
      * 詳細画面
@@ -51,24 +52,29 @@ public class HeathInfoRefDetailController implements BaseWebController {
      */
     @GetMapping("/detail")
     public String detail(Model model,
-            @RequestParam(name = "seqHealthInfoId", required = false) Optional<Long> seqHealthInfoId,
+            @RequestParam(name = "seqHealthInfoId", required = false) Optional<String> seqHealthInfoId,
             HttpServletRequest request) throws BaseException {
 
         // 健康情報ID
-        Long healthInfoId = seqHealthInfoId
-                .orElseThrow(
-                        () -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
-                                "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
+        String healthInfoId = seqHealthInfoId.orElseThrow(
+                () -> new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                        "リクエスト情報が不正です. 健康情報ID=" + seqHealthInfoId));
+        if (!NumberUtils.isCreatable(healthInfoId)) {
+            // 数値以外の場合
+            throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                    "健康情報IDが数字以外です. 健康情報ID=" + healthInfoId);
+        }
+
         // sessionよりユーザID
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         HealthInfoRefDetailDto dto = new HealthInfoRefDetailDto();
-        dto.setSeqHealthInfoId(healthInfoId);
+        dto.setSeqHealthInfoId(Long.parseLong(healthInfoId));
         dto.setSeqUserId(seqUserId);
 
         // 詳細情報
-        Optional<HealthInfoRefDetailDto> detail = healthInfoRefDetailService
+        Optional<HealthInfoRefDetailDto> detail = detailService
                 .getHealthInfoRefDetailDto(dto);
 
         if (detail.isPresent()) {

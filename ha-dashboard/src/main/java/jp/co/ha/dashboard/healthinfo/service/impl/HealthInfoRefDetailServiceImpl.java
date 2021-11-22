@@ -31,8 +31,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
 
         // 健康情報を検索
         CompositeHealthInfo healthInfo = healthInfoSearchService
-                .findHealthInfoDetail(dto.getSeqHealthInfoId(),
-                        dto.getSeqUserId());
+                .findHealthInfoDetail(dto.getSeqHealthInfoId(), dto.getSeqUserId());
         if (healthInfo == null) {
             return Optional.empty();
         }
@@ -43,9 +42,8 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
             HealthInfoRefDetailDto destDto = (HealthInfoRefDetailDto) dest;
 
             // 健康情報作成日時
-            destDto.setHealthInfoRegDate(
-                    DateTimeUtil.toString(srcEntity.getHealthInfoRegDate(),
-                            DateFormatType.YYYYMMDDHHMMSS));
+            destDto.setHealthInfoRegDate(DateTimeUtil.toString(
+                    srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
         });
         return Optional.ofNullable(detailDto);
     }
