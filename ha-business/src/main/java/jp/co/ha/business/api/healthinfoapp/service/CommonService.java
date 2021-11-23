@@ -3,6 +3,7 @@ package jp.co.ha.business.api.healthinfoapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -18,7 +19,7 @@ import jp.co.ha.db.entity.Account;
  */
 public abstract class CommonService {
 
-    /** {@linkplain AccountSearchService} */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
 

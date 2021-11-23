@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
+import jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.Account;
@@ -26,7 +27,7 @@ import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 public class AccountEditApiController
         extends BaseRootApiController<AccountEditApiRequest, AccountEditApiResponse> {
 
-    /** アカウント情報更新サービス */
+    /** {@linkplain AccountUpdateServiceImpl} */
     @Autowired
     private AccountUpdateService updateService;
 

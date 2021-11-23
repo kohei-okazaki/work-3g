@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
+import jp.co.ha.business.db.crud.read.impl.ApiCommunicationDataSearchServiceImpl;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -31,7 +32,7 @@ import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
 public class ApiDataListApiController
         extends BaseRootApiController<ApiDataListApiRequest, ApiDataListApiResponse> {
 
-    /** API通信情報検索サービス */
+    /** {@linkplain ApiCommunicationDataSearchServiceImpl} */
     @Autowired
     private ApiCommunicationDataSearchService searchService;
 

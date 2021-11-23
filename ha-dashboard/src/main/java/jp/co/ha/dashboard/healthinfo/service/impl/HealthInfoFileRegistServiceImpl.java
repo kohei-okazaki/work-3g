@@ -13,6 +13,7 @@ import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
@@ -36,19 +37,19 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {
 
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** アカウント検索サービス */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** 健康情報登録API */
+    /** {@linkplain HealthInfoRegistApi} */
     @Autowired
     private HealthInfoRegistApi registApi;
-    /** 健康情報関連プロパティ */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties prop;
-    /** 妥当性チェック */
+    /** {@linkplain BeanValidator} */
     @Autowired
     private BeanValidator<HealthInfoCsvUploadModel> validator;
 

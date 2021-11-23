@@ -18,7 +18,7 @@ import jp.co.ha.db.mapper.RootUserNoteInfoMapper;
 @Service
 public class RootUserNoteInfoDeleteServiceImpl implements RootUserNoteInfoDeleteService {
 
-    /** RootUserNoteInfoMapper */
+    /** {@linkplain RootUserNoteInfoMapper} */
     @Autowired
     private RootUserNoteInfoMapper mapper;
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 
 /**
@@ -15,7 +16,7 @@ import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 @Component
 public class AccountComponent {
 
-    /** ハッシュ値作成クラス */
+    /** {@linkplain Sha256HashEncoder} */
     @Sha256
     @Autowired
     private HashEncoder encoder;

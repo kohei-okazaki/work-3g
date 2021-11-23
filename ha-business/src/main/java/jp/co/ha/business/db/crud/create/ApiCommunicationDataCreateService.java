@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 public interface ApiCommunicationDataCreateService {
 
     /**
-     * 指定したAPI通信情報を登録する
+     * API通信情報を登録する
      *
      * @param entity
      *     API通信情報

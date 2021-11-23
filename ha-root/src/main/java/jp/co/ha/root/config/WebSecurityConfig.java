@@ -28,15 +28,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_IGNORE_URL = new String[] { "/api/root/login",
             "/api/root/user", "/api/root/healthcheck" };
 
-    /** 認証サービス */
+    /** {@linkplain AuthServiceImpl} */
     @Autowired
     @Qualifier("authService")
     private UserDetailsService userDetailsService;
-    /** パスワードEncoder */
+    /** {@linkplain PasswordEncoderImpl} */
     @Autowired
     @Qualifier("passwordEncoderImpl")
     private PasswordEncoder passwordEncoder;
-    /** アプリケーション設定ファイル情報 */
+    /** {@linkplain ApplicationProperties} */
     @Autowired
     private ApplicationProperties applicationProperties;
 

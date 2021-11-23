@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.NewsInfoSearchServiceImpl;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -34,7 +35,7 @@ import jp.co.ha.db.entity.NewsInfo;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-    /** {@linkplain NewsInfoSearchService} */
+    /** {@linkplain NewsInfoSearchServiceImpl} */
     @Autowired
     private NewsInfoSearchService searchService;
     /** {@linkplain SystemConfig} */
@@ -61,8 +62,7 @@ public class NewsController implements BaseWebController {
             throws BaseException {
 
         // ページング情報を取得(1ページあたりの表示件数は設定ファイルより取得)
-        Pageable pageable = PagingViewFactory.getPageable(page,
-                systemConfig.getPaging());
+        Pageable pageable = PagingViewFactory.getPageable(page, systemConfig.getPaging());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
@@ -72,9 +72,8 @@ public class NewsController implements BaseWebController {
         List<NewsDto> newsList = new ArrayList<>();
         for (NewsInfo entity : searchService.findAll(selectOption)) {
             // S3からお知らせJSONを取得
-            NewsDto dto = new JsonReader()
-                    .read(awsS3Component.getS3ObjectByKey(entity.getS3Key()),
-                            NewsDto.class);
+            NewsDto dto = new JsonReader().read(
+                    awsS3Component.getS3ObjectByKey(entity.getS3Key()), NewsDto.class);
             newsList.add(dto);
         }
 

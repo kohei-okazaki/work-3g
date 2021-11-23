@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoRegistService;
+import jp.co.ha.business.api.healthinfoapp.service.impl.HealthInfoRegistServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.common.web.controller.BaseRestController;
@@ -26,7 +27,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 public class HealthInfoRegistApiController extends
         BaseRestController<HealthInfoRegistApiRequest, HealthInfoRegistApiResponse> {
 
-    /** 健康情報登録サービス */
+    /** {@linkplain HealthInfoRegistServiceImpl} */
     @Autowired
     private HealthInfoRegistService service;
 

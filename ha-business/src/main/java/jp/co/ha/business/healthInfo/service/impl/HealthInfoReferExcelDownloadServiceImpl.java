@@ -4,23 +4,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
 
-import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.io.file.excel.builder.HealthInfoExcelBuilder;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
-import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
-import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
  * 健康情報照会画面Excelダウンロードサービス実装クラス
@@ -31,21 +26,10 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 public class HealthInfoReferExcelDownloadServiceImpl
         implements ExcelDownloadService<ReferenceExcelComponent> {
 
-    /** 健康情報ファイル設定検索サービス */
-    @Autowired
-    private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-
     @Override
-    public View download(ReferenceExcelComponent component) throws BaseException {
-
-        // 健康情報Entityから健康情報ファイル設定を検索
-        HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                .findById(component.getSeqUserId()).get();
-
-        List<HealthInfoExcelModel> modelList = toModelList(component.getResultList());
-
-        return new HealthInfoExcelBuilder(getExcelConfig(healthInfoFileSetting),
-                modelList);
+    public View download(ReferenceExcelComponent component, ExcelConfig config)
+            throws BaseException {
+        return new HealthInfoExcelBuilder(config, toModelList(component.getResultList()));
     }
 
     /**
@@ -65,29 +49,10 @@ public class HealthInfoReferExcelDownloadServiceImpl
             model.setWeight(result.getWeight().toString());
             model.setBmi(result.getBmi().toString());
             model.setStandardWeight(result.getStandardWeight().toString());
-            model.setHealthInfoRegDate(
-                    DateTimeUtil.toLocalDateTime(result.getHealthInfoRegDate(),
-                            DateFormatType.YYYYMMDDHHMMSS_STRICT));
+            model.setHealthInfoRegDate(DateTimeUtil.toLocalDateTime(
+                    result.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS_STRICT));
             return model;
         }).collect(Collectors.toList());
-    }
-
-    /**
-     * Excel設定情報を取得
-     *
-     * @param healthInfoFileSetting
-     *     健康情報設定情報
-     * @return Excel設定情報
-     * @throws BaseException
-     *     基底例外
-     */
-    private ExcelConfig getExcelConfig(HealthInfoFileSetting healthInfoFileSetting)
-            throws BaseException {
-        return new ExcelConfigBuilder(null)
-                .hasHeader(CommonFlag.TRUE.is(healthInfoFileSetting.getHeaderFlag()))
-                .hasFooter(CommonFlag.TRUE.is(healthInfoFileSetting.getFooterFlag()))
-                .useMask(CommonFlag.TRUE.is(healthInfoFileSetting.getMaskFlag()))
-                .build();
     }
 
 }

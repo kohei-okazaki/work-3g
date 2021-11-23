@@ -38,7 +38,7 @@ public class SlackApiComponent {
     private static final Logger LOG = LoggerFactory.getLogger(SlackApiComponent.class);
     /** 接続情報の列挙 */
     private static final AwsS3Key KEY = AwsS3Key.SLACK_CONNECTION_DATA;
-    /** AWS-S3Component */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component s3;
     /** {@linkplain SystemConfig} */

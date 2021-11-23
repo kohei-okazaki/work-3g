@@ -3,6 +3,7 @@ package jp.co.ha.common.io.file.excel.service;
 import org.springframework.web.servlet.View;
 
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
 
 /**
@@ -20,10 +21,12 @@ public interface ExcelDownloadService<T extends BaseExcelComponent> {
      *
      * @param t
      *     Excel出力情報設定情報
+     * @param config
+     *     {@linkplain ExcelConfig}
      * @return View
      * @throws BaseException
      *     基底例外
      */
-    View download(T t) throws BaseException;
+    View download(T t, ExcelConfig config) throws BaseException;
 
 }

@@ -9,7 +9,11 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * RootAPI処理結果列挙
+ * RootAPI処理結果列挙体
+ * <ul>
+ * <li>0:正常終了</li>
+ * <li>1:異常終了</li>
+ * </ul>
  *
  * @version 1.0.0
  */

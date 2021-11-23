@@ -9,9 +9,12 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import jp.co.ha.business.component.AccountComponent;
 import jp.co.ha.business.db.crud.create.AccountCreateService;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
+import jp.co.ha.business.db.crud.create.impl.AccountCreateServiceImpl;
+import jp.co.ha.business.db.crud.create.impl.HealthInfoFileSettingCreateServiceImpl;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
@@ -29,23 +32,23 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service
 public class AccountRegistServiceImpl implements AccountRegistService {
 
-    /** アカウント作成サービス */
+    /** {@linkplain AccountCreateServiceImpl} */
     @Autowired
     private AccountCreateService accountCreateService;
-    /** 健康情報ファイル設定作成サービス */
+    /** {@linkplain HealthInfoFileSettingCreateServiceImpl} */
     @Autowired
     private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
-    /** ハッシュ値作成クラス */
+    /** {@linkplain Sha256HashEncoder} */
     @Sha256
     @Autowired
     private HashEncoder encoder;
-    /** AccountComponent */
+    /** {@linkplain AccountComponent} */
     @Autowired
     private AccountComponent accountComponent;
-    /** トランザクション管理クラス */
+    /** {@linkplain PlatformTransactionManager} */
     @Autowired
     private PlatformTransactionManager transactionManager;
-    /** トランザクションクラス */
+    /** {@linkplain DefaultTransactionDefinition} */
     @Autowired
     private DefaultTransactionDefinition defaultTransactionDefinition;
 

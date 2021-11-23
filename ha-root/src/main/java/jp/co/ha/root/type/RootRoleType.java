@@ -4,6 +4,11 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * ユーザ権限の列挙体
+ * <ul>
+ * <li>00:管理者権限</li>
+ * <li>01:照会権限</li>
+ * <li>02:作成権限</li>
+ * </ul>
  *
  * @version 1.0.0
  */

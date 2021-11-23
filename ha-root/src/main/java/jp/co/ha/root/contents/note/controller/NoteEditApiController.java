@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.RootUserNoteInfoSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.RootUserNoteInfoUpdateService;
+import jp.co.ha.business.db.crud.update.impl.RootUserNoteInfoUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -27,13 +29,13 @@ import jp.co.ha.root.contents.note.response.NoteEditApiResponse;
 public class NoteEditApiController
         extends BaseRootApiController<NoteEditApiRequest, NoteEditApiResponse> {
 
-    /** 管理者サイトユーザメモ情報検索サービス */
+    /** {@linkplain RootUserNoteInfoSearchServiceImpl} */
     @Autowired
     private RootUserNoteInfoSearchService rootUserNoteInfoSearchService;
-    /** 管理者サイトユーザメモ情報更新サービス */
+    /** {@linkplain RootUserNoteInfoUpdateServiceImpl} */
     @Autowired
     private RootUserNoteInfoUpdateService rootUserNoteInfoUpdateService;
-    /** AWS-S3 Component */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
 

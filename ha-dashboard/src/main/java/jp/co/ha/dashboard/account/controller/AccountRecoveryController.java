@@ -22,9 +22,13 @@ import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.component.AccountComponent;
 import jp.co.ha.business.db.crud.create.AccountRecoveryTokenCreateService;
+import jp.co.ha.business.db.crud.create.impl.AccountRecoveryTokenCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.AccountRecoveryTokenSearchService;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountRecoveryTokenSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
+import jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
@@ -32,6 +36,7 @@ import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -58,29 +63,29 @@ public class AccountRecoveryController implements BaseWebController {
     private static final Logger LOG = LoggerFactory
             .getLogger(AccountRecoveryController.class);
 
-    /** アカウント検索サービス */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** アカウント更新サービス */
+    /** {@linkplain AccountUpdateServiceImpl} */
     @Autowired
     private AccountUpdateService accountUpdateService;
-    /** アカウント回復トークン作成サービス */
+    /** {@linkplain AccountRecoveryTokenCreateServiceImpl} */
     @Autowired
     private AccountRecoveryTokenCreateService accountRecoveryTokenCreateService;
-    /** アカウント回復トークン検索サービス */
+    /** {@linkplain AccountRecoveryTokenSearchServiceImpl} */
     @Autowired
     private AccountRecoveryTokenSearchService accountRecoveryTokenSearchService;
-    /** 健康情報設定ファイル */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties properties;
-    /** SHA-256作成Encoder */
+    /** {@linkplain Sha256HashEncoder} */
     @Sha256
     @Autowired
     private HashEncoder encoder;
-    /** AwsSesComponent */
+    /** {@linkplain AwsSesComponent} */
     @Autowired
     private AwsSesComponent sesComponent;
-    /** AccountComponent */
+    /** {@linkplain AccountComponent} */
     @Autowired
     private AccountComponent accountComponent;
 
@@ -152,9 +157,8 @@ public class AccountRecoveryController implements BaseWebController {
         // アカウント回復トークン登録
         AccountRecoveryTokenData entity = new AccountRecoveryTokenData();
         entity.setSeqUserId(account.getSeqUserId());
-        entity.setToken(encoder.encode(account.getMailAddress(), DateTimeUtil
-                .toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
+        entity.setToken(encoder.encode(account.getMailAddress(), DateTimeUtil.toString(
+                DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
         entity.setTokenCreateDate(DateTimeUtil.getSysDate());
         accountRecoveryTokenCreateService.create(entity);
 
@@ -199,12 +203,11 @@ public class AccountRecoveryController implements BaseWebController {
         // アカウント情報検索
         Account account = getAccount(seqUserId);
 
-        // 上のアカウント検索ができているのであれば、そのままOptional#getをしても問題ない
-        Long userId = Long.valueOf(seqUserId.get());
         // アカウント回復トークンを検索し、トークンが有効であるかを確認する
         @SuppressWarnings("unused")
         AccountRecoveryTokenData accountRecoveryTokenData = accountRecoveryTokenSearchService
-                .findBySeqUserIdAndTokenAndValidTokenCreateDate(userId, strToken)
+                .findBySeqUserIdAndTokenAndValidTokenCreateDate(account.getSeqUserId(),
+                        strToken)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "トークンが不正または無効です"));
 

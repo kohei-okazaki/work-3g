@@ -21,11 +21,15 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadExcel;
+import jp.co.ha.business.healthInfo.service.impl.HealthInfoCsvDownloadServiceImpl;
+import jp.co.ha.business.healthInfo.service.impl.HealthInfoExcelDownloadServiceImpl;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
@@ -37,14 +41,18 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
+import jp.co.ha.common.io.file.excel.ExcelConfig;
+import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionComponent;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
+import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -58,24 +66,24 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @RequestMapping("healthinfo")
 public class HealthInfoRegistController implements BaseWizardController<HealthInfoForm> {
 
-    /** 健康情報画面サービス */
+    /** {@linkplain HealthInfoServiceImpl} */
     @Autowired
     private HealthInfoService healthInfoService;
-    /** 健康情報検索サービス */
+    /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** 健康情報Excelダウンロードサービス */
+    /** {@linkplain HealthInfoExcelDownloadServiceImpl} */
     @Autowired
     @HealthInfoDownloadExcel
     private ExcelDownloadService<HealthInfoExcelComponent> excelDownloadService;
-    /** 健康情報CSVダウンロードサービス */
+    /** {@linkplain HealthInfoCsvDownloadServiceImpl} */
     @Autowired
     @HealthInfoDownloadCsv
     private CsvDownloadService<HealthInfoCsvDownloadModel> csvDownloadService;
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** 健康情報ファイル設定検索サービス */
+    /** {@linkplain HealthInfoFileSettingSearchServiceImpl} */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
 
@@ -194,7 +202,9 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
         HealthInfoExcelComponent component = new HealthInfoExcelComponent();
         component.setHealthInfo(entity);
-        return new ModelAndView(excelDownloadService.download(component));
+
+        return new ModelAndView(
+                excelDownloadService.download(component, getExcelConfig(seqUserId)));
     }
 
     /**
@@ -247,6 +257,28 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
                     "ファイルの出力処理に失敗しました", e);
         }
+    }
+
+    /**
+     * Excel設定情報を取得
+     *
+     * @param seqUserId
+     *     ユーザID
+     * @return Excel設定情報
+     * @throws BaseException
+     *     基底例外
+     */
+    private ExcelConfig getExcelConfig(Long seqUserId) throws BaseException {
+
+        // 健康情報ファイル設定情報 取得
+        HealthInfoFileSetting fileSetting = healthInfoFileSettingSearchService
+                .findById(seqUserId).get();
+
+        return new ExcelConfigBuilder(null)
+                .hasHeader(CommonFlag.TRUE.is(fileSetting.getHeaderFlag()))
+                .hasFooter(CommonFlag.TRUE.is(fileSetting.getFooterFlag()))
+                .useMask(CommonFlag.TRUE.is(fileSetting.getMaskFlag()))
+                .build();
     }
 
 }
