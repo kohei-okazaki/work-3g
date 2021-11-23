@@ -12,7 +12,9 @@ import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.delete.RootUserNoteInfoDeleteService;
+import jp.co.ha.business.db.crud.delete.impl.RootUserNoteInfoDeleteServiceImpl;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.RootUserNoteInfoSearchServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -29,16 +31,16 @@ import jp.co.ha.root.contents.note.response.NoteDeleteApiResponse;
 public class NoteDeleteApiController
         extends BaseRootApiController<NoteDeleteApiRequest, NoteDeleteApiResponse> {
 
-    /** 管理者サイトユーザメモ情報検索サービス */
+    /** {@linkplain RootUserNoteInfoSearchServiceImpl} */
     @Autowired
     private RootUserNoteInfoSearchService searchService;
-    /** 管理者サイトユーザメモ情報削除サービス */
+    /** {@linkplain RootUserNoteInfoDeleteServiceImpl} */
     @Autowired
     private RootUserNoteInfoDeleteService deleteService;
-    /** S3コンポーネント */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
-    /** SlackComponent */
+    /** {@linkplain SlackApiComponent} */
     @Autowired
     private SlackApiComponent slackApi;
 

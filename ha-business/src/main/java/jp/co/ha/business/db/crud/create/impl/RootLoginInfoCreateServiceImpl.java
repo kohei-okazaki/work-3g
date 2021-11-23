@@ -17,7 +17,7 @@ import jp.co.ha.db.mapper.RootLoginInfoMapper;
 @Service
 public class RootLoginInfoCreateServiceImpl implements RootLoginInfoCreateService {
 
-    /** 管理者サイトログイン情報Mapper */
+    /** {@linkplain RootLoginInfoMapper} */
     @Autowired
     private RootLoginInfoMapper mapper;
 

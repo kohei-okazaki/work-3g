@@ -19,8 +19,7 @@ import jp.co.ha.common.web.api.BaseApi;
  * @version 1.0.0
  */
 @Component
-public class BreathingCapacityCalcApi
-        extends
+public class BreathingCapacityCalcApi extends
         BaseApi<BreathingCapacityCalcApiRequest, BreathingCapacityCalcApiResponse> {
 
     @Override

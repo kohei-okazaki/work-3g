@@ -19,23 +19,24 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
- * カロリー計算Component
+ * カロリー計算APIのコンポーネントクラス<br>
+ * APIクラスを直接呼ばずに本クラスを経由して呼び出すこと
  *
  * @version 1.0.0
  */
 @Component
 public class CalorieApiComponent {
 
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** トークン発行APIComponent */
+    /** {@linkplain TokenApiComponent} */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** カロリー計算API */
+    /** {@linkplain CalorieCalcApi} */
     @Autowired
     private CalorieCalcApi calorieCalcApi;
-    /** 健康情報関連プロパティ */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties prop;
 

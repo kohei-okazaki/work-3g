@@ -19,7 +19,7 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
 @Service
 public class HealthInfoUpdateServiceImpl implements HealthInfoUpdateService {
 
-    /** 健康情報Mapper */
+    /** {@linkplain HealthInfoMapper} */
     @Autowired
     private HealthInfoMapper mapper;
 

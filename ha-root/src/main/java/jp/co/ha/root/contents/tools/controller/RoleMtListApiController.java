@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
+import jp.co.ha.business.db.crud.read.impl.RootRoleMtSearchServiceImpl;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.tools.request.RoleMtListApiRequest;
@@ -24,7 +25,7 @@ import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse.Role;
 public class RoleMtListApiController
         extends BaseRootApiController<RoleMtListApiRequest, RoleMtListApiResponse> {
 
-    /** {@linkplain RootRoleMtSearchService} */
+    /** {@linkplain RootRoleMtSearchServiceImpl} */
     @Autowired
     private RootRoleMtSearchService rootRoleMtSearchService;
 

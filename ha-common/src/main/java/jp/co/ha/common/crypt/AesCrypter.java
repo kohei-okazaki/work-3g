@@ -29,7 +29,7 @@ public class AesCrypter implements Crypter {
 
     /** LOG */
     private static Logger LOG = LoggerFactory.getLogger(AesCrypter.class);
-    /** CryptConfig */
+    /** {@linkplain CryptConfig} */
     @Autowired
     private CryptConfig cryptConfig;
 

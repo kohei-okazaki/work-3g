@@ -19,23 +19,24 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
- * 肺活量計算Component
+ * 肺活量計算APIのコンポーネントクラス<br>
+ * APIクラスを直接呼ばずに本クラスを経由して呼び出すこと
  *
  * @version 1.0.0
  */
 @Component
 public class BreathingCapacityApiComponent {
 
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** トークン発行APIComponent */
+    /** {@linkplain TokenApiComponent} */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** 肺活量計算API */
+    /** {@linkplain BreathingCapacityCalcApi} */
     @Autowired
     private BreathingCapacityCalcApi breathingCapacityCalcApi;
-    /** 健康情報関連プロパティ */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties prop;
 
@@ -82,8 +83,8 @@ public class BreathingCapacityApiComponent {
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, String token, Long seqUserId,
-            Long transactionId) throws BaseException {
+            BreathingCapacityDto dto, String token, Long seqUserId, Long transactionId)
+            throws BaseException {
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
@@ -97,8 +98,8 @@ public class BreathingCapacityApiComponent {
                         + NodeApiType.BREATHING_CAPACITY.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
-        BreathingCapacityCalcApiResponse response = breathingCapacityCalcApi.callApi(request,
-                connectInfo);
+        BreathingCapacityCalcApiResponse response = breathingCapacityCalcApi
+                .callApi(request, connectInfo);
 
         // API通信情報を更新
         apiCommunicationDataComponent.update(apiCommunicationData,

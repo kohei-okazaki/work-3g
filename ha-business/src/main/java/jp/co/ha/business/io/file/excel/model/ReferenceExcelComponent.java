@@ -12,29 +12,8 @@ import jp.co.ha.common.io.file.excel.model.BaseExcelComponent;
  */
 public class ReferenceExcelComponent implements BaseExcelComponent {
 
-    /** ユーザID */
-    private Long seqUserId;
     /** 結果リスト */
     private List<HealthInfoReferenceDto> resultList;
-
-    /**
-     * seqUserIdを返す
-     *
-     * @return seqUserId
-     */
-    public Long getSeqUserId() {
-        return seqUserId;
-    }
-
-    /**
-     * seqUserIdを設定する
-     *
-     * @param seqUserId
-     *     ユーザID
-     */
-    public void setSeqUserId(Long seqUserId) {
-        this.seqUserId = seqUserId;
-    }
 
     /**
      * resultListを返す

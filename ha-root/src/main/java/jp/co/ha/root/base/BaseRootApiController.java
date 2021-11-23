@@ -23,7 +23,7 @@ import jp.co.ha.root.type.RootApiResult;
 @CrossOrigin(origins = { "http://localhost:8083" })
 public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 extends BaseRootApiResponse> {
 
-    /** アプリケーション設定ファイル情報 */
+    /** {@linkplain ApplicationProperties} */
     @Autowired
     protected ApplicationProperties applicationProperties;
 

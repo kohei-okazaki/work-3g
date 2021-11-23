@@ -50,7 +50,46 @@ export default {
           href: "/healthinfoapp/dashboard/healthinfoi/detail",
         },
       ],
-      flow: [],
+      flow: [
+        {
+          id: "a0",
+          text: "詳細リンク押下",
+          edgeType: "round",
+          next: ["a1"],
+        },
+        {
+          id: "a1",
+          text: "入力チェック",
+          edgeType: "round",
+          next: ["a2"],
+        },
+        {
+          id: "a2",
+          text: "セッションより<br>ユーザIDを取得",
+          edgeType: "round",
+          next: ["a3"],
+        },
+        {
+          id: "a3",
+          text: "健康情報 + BMI範囲マスタ検索",
+          edgeType: "round",
+          next: ["a4"],
+        },
+
+        {
+          id: "a1.1",
+          text: "必須チェック",
+          edgeType: "round",
+          group: "入力チェック",
+          next: ["a1.2"],
+        },
+        {
+          id: "a1.2",
+          text: "数値チェック",
+          edgeType: "round",
+          group: "入力チェック",
+        },
+      ],
     };
   },
 };

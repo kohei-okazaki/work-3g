@@ -24,13 +24,13 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Component
 public class TokenApiComponent {
 
-    /** トークン発行API */
+    /** {@linkplain TokenApi} */
     @Autowired
     private TokenApi tokenApi;
-    /** 健康情報関連プロパティ */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties prop;
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
 
