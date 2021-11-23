@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoReferenceApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoReferenceApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
+import jp.co.ha.business.api.healthinfoapp.service.impl.HealthInfoReferenceServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.controller.BaseRestController;
 
@@ -24,7 +25,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 public class HealthInfoReferenceApiController extends
         BaseRestController<HealthInfoReferenceApiRequest, HealthInfoReferenceApiResponse> {
 
-    /** 健康情報照会サービス */
+    /** {@linkplain HealthInfoReferenceServiceImpl} */
     @Autowired
     private HealthInfoReferenceService service;
 

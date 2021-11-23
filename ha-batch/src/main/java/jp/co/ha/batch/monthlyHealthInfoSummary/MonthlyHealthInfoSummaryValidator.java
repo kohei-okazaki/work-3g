@@ -1,8 +1,5 @@
 package jp.co.ha.batch.monthlyHealthInfoSummary;
 
-import java.util.Map;
-
-import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.JobParametersValidator;
@@ -23,12 +20,10 @@ public class MonthlyHealthInfoSummaryValidator implements JobParametersValidator
     @Override
     public void validate(JobParameters parameters) throws JobParametersInvalidException {
 
-        Map<String, JobParameter> params = parameters.getParameters();
-        String targetValue = params.get("m").getValue().toString();
-        if (StringUtil.isEmpty(targetValue)) {
-            return;
-        } else if (!DateTimeUtil.isDate(targetValue, DateFormatType.YYYYMM_NOSEP)) {
-            // YYYYMM形式でない場合
+        String targetValue = parameters.getParameters().get("m").getValue().toString();
+        if (!StringUtil.isEmpty(targetValue)
+                && !DateTimeUtil.isDate(targetValue, DateFormatType.YYYYMM_NOSEP)) {
+            // 指定ありかつYYYYMM形式でない場合
             throw new JobParametersInvalidException(
                     "job parameter invalid m=" + targetValue);
         }
