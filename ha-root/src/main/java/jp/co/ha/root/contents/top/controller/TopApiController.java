@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -29,10 +31,10 @@ import jp.co.ha.root.contents.top.response.TopApiResponse;
 public class TopApiController
         extends BaseRootApiController<TopApiRequest, TopApiResponse> {
 
-    /** アカウント情報検索サービス */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** 健康情報検索サービス */
+    /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
 

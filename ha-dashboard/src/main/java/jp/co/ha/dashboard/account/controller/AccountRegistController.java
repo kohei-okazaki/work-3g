@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -24,6 +25,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.account.form.AccountRegistForm;
 import jp.co.ha.dashboard.account.service.AccountRegistService;
+import jp.co.ha.dashboard.account.service.impl.AccountRegistServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -35,10 +37,10 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("accountregist")
 public class AccountRegistController implements BaseWizardController<AccountRegistForm> {
 
-    /** {@linkplain AccountRegistService} */
+    /** {@linkplain AccountRegistServiceImpl} */
     @Autowired
     private AccountRegistService accountRegistService;
-    /** {@linkplain AccountSearchService} */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
     /** {@linkplain SessionComponent} */

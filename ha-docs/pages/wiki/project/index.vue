@@ -86,7 +86,7 @@
           <v-card-title class="text-subtitle-1">使用言語一覧</v-card-title>
           <v-card-subtitle class="text-subtitle-2"
             >本アプリで使用しているプログラミング言語の一覧<br />FWやライブラリのバージョンについては<nuxt-link
-              to="/wiki/libraryList"
+              to="/wiki/libraries"
               >ライブラリ一覧</nuxt-link
             >を参照</v-card-subtitle
           >

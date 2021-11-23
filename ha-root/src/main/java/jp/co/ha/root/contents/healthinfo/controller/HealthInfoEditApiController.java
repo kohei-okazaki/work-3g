@@ -18,9 +18,13 @@ import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.BmiRangeMtSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
+import jp.co.ha.business.db.crud.update.impl.HealthInfoUpdateServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -43,25 +47,25 @@ import jp.co.ha.root.contents.healthinfo.response.HealthInfoEditApiResponse;
 public class HealthInfoEditApiController extends
         BaseRootApiController<HealthInfoEditApiRequest, HealthInfoEditApiResponse> {
 
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** トークン発行APIComponent */
+    /** {@linkplain TokenApiComponent} */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** 基礎健康情報計算APIComponent */
+    /** {@linkplain BasicHealthInfoCalcApiComponent} */
     @Autowired
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
-    /** BMI範囲マスタ検索サービス */
+    /** {@linkplain BmiRangeMtSearchServiceImpl} */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
-    /** 健康情報検索サービス */
+    /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** 健康情報計算サービス */
+    /** {@linkplain HealthInfoCalcServiceImpl} */
     @Autowired
     private HealthInfoCalcService healthInfoCalcService;
-    /** 健康情報更新サービス */
+    /** {@linkplain HealthInfoUpdateServiceImpl} */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
 

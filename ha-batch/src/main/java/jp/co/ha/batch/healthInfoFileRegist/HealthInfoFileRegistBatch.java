@@ -23,6 +23,7 @@ import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -48,22 +49,22 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Component
 public class HealthInfoFileRegistBatch implements Tasklet {
 
-    /** 健康情報設定ファイル */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties prop;
-    /** 健康情報登録API */
+    /** {@linkplain HealthInfoRegistApi} */
     @Autowired
     private HealthInfoRegistApi api;
-    /** アカウント検索サービス */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** API通信情報Component */
+    /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** SlackComponent */
+    /** {@linkplain SlackApiComponent} */
     @Autowired
     private SlackApiComponent slackApiComponent;
-    /** 妥当性チェック */
+    /** {@linkplain BeanValidator} */
     @Autowired
     private BeanValidator<HealthInfoRegistApiRequest> validator;
 

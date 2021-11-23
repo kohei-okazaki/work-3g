@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.create.NewsInfoCreateService;
+import jp.co.ha.business.db.crud.create.impl.NewsInfoCreateServiceImpl;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
@@ -31,10 +32,10 @@ import jp.co.ha.root.contents.news.response.NewsEntryApiResponse;
 public class NewsEntryApiController
         extends BaseRootApiController<NewsEntryApiRequest, NewsEntryApiResponse> {
 
-    /** お知らせ情報作成サービス */
+    /** {@linkplain NewsInfoCreateServiceImpl} */
     @Autowired
     private NewsInfoCreateService createService;
-    /** お知らせ情報Component */
+    /** {@linkplain NewsComponent} */
     @Autowired
     private NewsComponent newsComponent;
 

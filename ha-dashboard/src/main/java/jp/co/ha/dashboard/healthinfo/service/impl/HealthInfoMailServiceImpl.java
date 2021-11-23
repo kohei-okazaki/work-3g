@@ -10,6 +10,7 @@ import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -23,10 +24,10 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 @Service
 public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
-    /** アカウント情報検索サービス */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** AwsSesComponent */
+    /** {@linkplain AwsSesComponent} */
     @Autowired
     private AwsSesComponent sesComponent;
 

@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.RootLoginInfoSearchServiceImpl;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.RegexType;
@@ -25,7 +26,7 @@ public class AuthServiceImpl implements UserDetailsService {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(AuthServiceImpl.class);
-    /** 管理者サイトユーザログイン情報検索サービス */
+    /** {@linkplain RootLoginInfoSearchServiceImpl} */
     @Autowired
     private RootLoginInfoSearchService searchService;
 

@@ -38,7 +38,7 @@ public abstract class BaseRestController<Rq extends BaseRestApiRequest, Rs exten
 
     /** LOG */
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
-    /** 妥当性チェック */
+    /** {@linkplain BeanValidator} */
     @Autowired
     protected BeanValidator<Rq> validator;
 

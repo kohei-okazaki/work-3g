@@ -22,6 +22,7 @@ import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
 import jp.co.ha.business.io.file.csv.writer.MonthlyHealthInfoSummaryCsvWriter;
@@ -55,16 +56,16 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
     /** 処理対象年月 */
     @Value("#{jobParameters[m]}")
     private String targetDate;
-    /** 健康情報検索サービス */
+    /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService searchService;
-    /** 健康情報設定ファイル */
+    /** {@linkplain HealthInfoProperties} */
     @Autowired
     private HealthInfoProperties prop;
-    /** S3のComponent */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component s3;
-    /** SlackComponent */
+    /** {@linkplain SlackApiComponent} */
     @Autowired
     private SlackApiComponent slackApiComponent;
 

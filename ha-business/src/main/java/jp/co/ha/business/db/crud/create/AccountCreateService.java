@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.Account;
 public interface AccountCreateService {
 
     /**
-     * 指定したアカウント情報を登録する
+     * アカウント情報を登録する
      *
      * @param entity
      *     アカウント情報

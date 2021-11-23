@@ -31,10 +31,10 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("caloriecalc")
 public class CalorieCalcController implements BaseWebController {
 
-    /** SessionComponent */
+    /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** カロリー計算Component */
+    /** {@linkplain CalorieApiComponent} */
     @Autowired
     private CalorieApiComponent calorieCalcComponent;
 

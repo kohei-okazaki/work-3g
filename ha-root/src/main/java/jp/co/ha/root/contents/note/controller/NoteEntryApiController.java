@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.create.RootUserNoteInfoCreateService;
+import jp.co.ha.business.db.crud.create.impl.RootUserNoteInfoCreateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -30,7 +31,7 @@ import jp.co.ha.root.contents.note.response.NoteEntryApiResponse;
 public class NoteEntryApiController
         extends BaseRootApiController<NoteEntryApiRequest, NoteEntryApiResponse> {
 
-    /** {@linkplain RootUserNoteInfoCreateService} */
+    /** {@linkplain RootUserNoteInfoCreateServiceImpl} */
     @Autowired
     private RootUserNoteInfoCreateService rootUserNoteInfoCreateService;
     /** {@linkplain AwsS3Component} */

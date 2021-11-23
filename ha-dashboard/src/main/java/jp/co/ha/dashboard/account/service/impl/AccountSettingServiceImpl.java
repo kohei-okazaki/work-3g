@@ -11,11 +11,16 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import jp.co.ha.business.component.AccountComponent;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
+import jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl;
+import jp.co.ha.business.db.crud.update.impl.HealthInfoFileSettingUpdateServiceImpl;
 import jp.co.ha.business.dto.AccountDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
+import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -32,29 +37,29 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service
 public class AccountSettingServiceImpl implements AccountSettingService {
 
-    /** アカウント検索サービス */
+    /** {@linkplain AccountSearchServiceImpl} */
     @Autowired
     private AccountSearchService accountSearchService;
-    /** アカウント更新サービス */
+    /** {@linkplain AccountUpdateServiceImpl} */
     @Autowired
     private AccountUpdateService accountUpdateService;
-    /** 健康情報ファイル設定検索サービス */
+    /** {@linkplain HealthInfoFileSettingSearchServiceImpl} */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-    /** 健康情報ファイル設定更新サービス */
+    /** {@linkplain HealthInfoFileSettingUpdateServiceImpl} */
     @Autowired
     private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
-    /** トランザクション管理クラス */
+    /** {@linkplain PlatformTransactionManager} */
     @Autowired
     private PlatformTransactionManager transactionManager;
-    /** トランザクションクラス */
+    /** {@linkplain DefaultTransactionDefinition} */
     @Autowired
     private DefaultTransactionDefinition defaultTransactionDefinition;
-    /** ハッシュ値作成クラス */
+    /** {@linkplain Sha256HashEncoder} */
     @Sha256
     @Autowired
     private HashEncoder encoder;
-    /** AccountComponent */
+    /** {@linkplain AccountComponent} */
     @Autowired
     private AccountComponent accountComponent;
 

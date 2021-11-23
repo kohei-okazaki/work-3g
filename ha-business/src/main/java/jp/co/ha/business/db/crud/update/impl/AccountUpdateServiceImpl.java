@@ -17,7 +17,7 @@ import jp.co.ha.db.mapper.AccountMapper;
 @Service
 public class AccountUpdateServiceImpl implements AccountUpdateService {
 
-    /** AccountMapper */
+    /** {@linkplain AccountMapper} */
     @Autowired
     private AccountMapper mapper;
 

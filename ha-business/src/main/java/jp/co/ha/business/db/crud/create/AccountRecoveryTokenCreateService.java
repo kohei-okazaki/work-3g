@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.AccountRecoveryTokenData;;
 public interface AccountRecoveryTokenCreateService {
 
     /**
-     * 指定したアカウント回復トークンを登録する
+     * アカウント回復トークンを登録する
      *
      * @param entity
      *     アカウント回復トークン
