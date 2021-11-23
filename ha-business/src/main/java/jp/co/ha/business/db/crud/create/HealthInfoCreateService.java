@@ -12,7 +12,7 @@ import jp.co.ha.db.entity.HealthInfo;
 public interface HealthInfoCreateService {
 
     /**
-     * 指定した健康情報を登録する
+     * 健康情報を登録する
      *
      * @param entity
      *     健康情報
@@ -20,7 +20,7 @@ public interface HealthInfoCreateService {
     void create(HealthInfo entity);
 
     /**
-     * 指定した健康情報リストを登録する
+     * 健康情報リストを登録する
      *
      * @param entityList
      *     健康情報リスト

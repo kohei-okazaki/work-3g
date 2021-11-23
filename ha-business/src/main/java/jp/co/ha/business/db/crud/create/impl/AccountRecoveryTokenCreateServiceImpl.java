@@ -18,7 +18,7 @@ import jp.co.ha.db.mapper.AccountRecoveryTokenDataMapper;
 public class AccountRecoveryTokenCreateServiceImpl
         implements AccountRecoveryTokenCreateService {
 
-    /** AccountRecoveryTokenDataMapper */
+    /** {@linkplain AccountRecoveryTokenDataMapper} */
     @Autowired
     private AccountRecoveryTokenDataMapper mapper;
 

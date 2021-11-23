@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 public interface HealthInfoFileSettingCreateService {
 
     /**
-     * 指定した健康情報ファイル設定を登録する
+     * 健康情報ファイル設定を登録する
      *
      * @param entity
      *     健康情報ファイル設定

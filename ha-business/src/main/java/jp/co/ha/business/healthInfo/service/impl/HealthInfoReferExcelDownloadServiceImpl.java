@@ -49,9 +49,8 @@ public class HealthInfoReferExcelDownloadServiceImpl
             model.setWeight(result.getWeight().toString());
             model.setBmi(result.getBmi().toString());
             model.setStandardWeight(result.getStandardWeight().toString());
-            model.setHealthInfoRegDate(
-                    DateTimeUtil.toLocalDateTime(result.getHealthInfoRegDate(),
-                            DateFormatType.YYYYMMDDHHMMSS_STRICT));
+            model.setHealthInfoRegDate(DateTimeUtil.toLocalDateTime(
+                    result.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS_STRICT));
             return model;
         }).collect(Collectors.toList());
     }

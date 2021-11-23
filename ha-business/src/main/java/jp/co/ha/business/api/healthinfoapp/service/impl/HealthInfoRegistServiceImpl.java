@@ -18,10 +18,14 @@ import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
+import jp.co.ha.business.db.crud.create.impl.HealthInfoCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.BmiRangeMtSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -44,16 +48,16 @@ import jp.co.ha.db.entity.HealthInfo;
 public class HealthInfoRegistServiceImpl extends CommonService
         implements HealthInfoRegistService {
 
-    /** {@linkplain HealthInfoSearchService} */
+    /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoCalcService} */
+    /** {@linkplain HealthInfoCalcServiceImpl} */
     @Autowired
     private HealthInfoCalcService healthInfoCalcService;
-    /** {@linkplain HealthInfoCreateService} */
+    /** {@linkplain HealthInfoCreateServiceImpl} */
     @Autowired
     private HealthInfoCreateService healthInfoCreateService;
-    /** {@linkplain BmiRangeMtSearchService} */
+    /** {@linkplain BmiRangeMtSearchServiceImpl} */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
     /** {@linkplain ApiCommunicationDataComponent} */

@@ -48,13 +48,13 @@ public class AwsSesComponent {
     /** 文字コード */
     private static final Charset CHARSET = Charset.UTF_8;
 
-    /** AWS個別設定情報 */
+    /** {@linkplain AwsConfig} */
     @Autowired
     private AwsConfig awsConfig;
-    /** AWS認証情報 */
+    /** {@linkplain AwsAuthComponent} */
     @Autowired
     private AwsAuthComponent awsAuthComponent;
-    /** AWSS3Component */
+    /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
 
@@ -162,9 +162,8 @@ public class AwsSesComponent {
         VerifyEmailIdentityResult result = getAmazonSES()
                 .verifyEmailIdentity(verifyEmailIdentityRequest);
 
-        VerifyResultType res = StringUtil
-                .isEmpty(result.getSdkResponseMetadata().getRequestId())
-                        ? VerifyResultType.STILL
+        VerifyResultType res = StringUtil.isEmpty(
+                result.getSdkResponseMetadata().getRequestId()) ? VerifyResultType.STILL
                         : VerifyResultType.AUTHED;
 
         LOG.debug("認証メール送信完了 認証結果=" + res);
@@ -257,20 +256,16 @@ public class AwsSesComponent {
 
             LOG.debug("Amazon SES region=" + awsConfig.getRegion().getName()
                     + ",to_mail_address=" + to);
-            Destination destination = new Destination()
-                    .withToAddresses(to)
+            Destination destination = new Destination().withToAddresses(to)
                     .withBccAddresses(awsConfig.getMailAddress());
 
             Body body = getBody(templateId, bodyMap);
-            Message message = new Message()
-                    .withSubject(getContent(titleText))
+            Message message = new Message().withSubject(getContent(titleText))
                     .withBody(body);
 
             SendEmailRequest request = new SendEmailRequest()
-                    .withSource(awsConfig.getMailAddress())
-                    .withDestination(destination)
-                    .withMessage(message)
-                    .withRequestCredentialsProvider(
+                    .withSource(awsConfig.getMailAddress()).withDestination(destination)
+                    .withMessage(message).withRequestCredentialsProvider(
                             awsAuthComponent.getAWSCredentialsProvider());
 
             getAmazonSES().sendEmail(request);
@@ -306,8 +301,7 @@ public class AwsSesComponent {
      * @return ClientConfiguration
      */
     private ClientConfiguration getClientConfiguration() {
-        return new ClientConfigurationFactory()
-                .getConfig()
+        return new ClientConfigurationFactory().getConfig()
                 .withConnectionTimeout(awsConfig.getSesTimeout());
     }
 
@@ -326,8 +320,7 @@ public class AwsSesComponent {
             throws BaseException {
 
         String bodyText = replace(getBodyTemplate(templateId), bodyMap);
-        return new Body()
-                .withHtml(getContent(bodyText));
+        return new Body().withHtml(getContent(bodyText));
     }
 
     /**
