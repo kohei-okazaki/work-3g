@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
+import jp.co.ha.business.db.crud.read.impl.NewsInfoSearchServiceImpl;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -35,10 +36,10 @@ import jp.co.ha.root.contents.news.response.NewsListApiResponse;
 public class NewsListApiController
         extends BaseRootApiController<NewsListApiRequest, NewsListApiResponse> {
 
-    /** お知らせ情報検索サービス */
+    /** {@linkplain NewsInfoSearchServiceImpl} */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** お知らせ情報Component */
+    /** {@linkplain NewsComponent} */
     @Autowired
     private NewsComponent newsComponent;
 
