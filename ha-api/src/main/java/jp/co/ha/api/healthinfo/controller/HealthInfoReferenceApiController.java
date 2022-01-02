@@ -13,6 +13,7 @@ import jp.co.ha.business.api.healthinfoapp.response.HealthInfoReferenceApiRespon
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
 import jp.co.ha.business.api.healthinfoapp.service.impl.HealthInfoReferenceServiceImpl;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.common.web.controller.BaseRestController;
 
 /**
@@ -46,7 +47,7 @@ public class HealthInfoReferenceApiController extends
     public HealthInfoReferenceApiResponse doGet(
             @PathVariable("seq_user_id") Long seqUserId,
             @PathVariable("seq_health_info_id") Long seqHealthInfoId,
-            @RequestHeader(value = "Api-Key") String apiKey) throws BaseException {
+            @RequestHeader(ApiConnectInfo.X_API_KEY) String apiKey) throws BaseException {
 
         HealthInfoReferenceApiRequest request = new HealthInfoReferenceApiRequest();
         HealthInfoReferenceApiResponse response = new HealthInfoReferenceApiResponse();

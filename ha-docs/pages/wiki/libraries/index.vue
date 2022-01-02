@@ -121,13 +121,13 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.13",
+          version: "5.3.14",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Spring Boot",
-          version: "2.5.6",
+          version: "2.6.1",
           description: "管理者APIと健康管理バッチで使用するSpring FW",
           projects: ["rootapi", "batch"],
         },
@@ -169,7 +169,7 @@ export default {
         },
         {
           name: "logback",
-          version: "1.2.6",
+          version: "1.2.9",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
@@ -183,14 +183,14 @@ export default {
         },
         {
           name: "mybatis",
-          version: "3.5.7",
+          version: "3.5.8",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
         {
           name: "flyway",
-          version: "8.0.4",
+          version: "8.2.2",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
@@ -208,7 +208,7 @@ export default {
         },
         {
           name: "junit",
-          version: "5.8.1",
+          version: "5.8.2",
           description: "Javaのテストライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },

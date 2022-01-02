@@ -45,10 +45,11 @@ public class BatchJobListener extends JobExecutionListenerSupport {
     public void beforeJob(JobExecution jobExecution) {
 
         StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-        String message = "id=" + jobExecution.getJobId()
-                + ", job_instance_id=" + jobExecution.getJobInstance().getInstanceId()
-                + ", name=" + jobExecution.getJobInstance().getJobName()
-                + ", status=" + jobExecution.getStatus();
+        String message = new StringJoiner(StringUtil.COMMA)
+                .add("id=" + jobExecution.getJobId())
+                .add("job_instance_id=" + jobExecution.getJobInstance().getInstanceId())
+                .add("name=" + jobExecution.getJobInstance().getJobName())
+                .add("status=" + jobExecution.getStatus()).toString();
         sj.add("start JOB. " + message);
         for (Entry<String, JobParameter> entry : jobExecution.getJobParameters()
                 .getParameters().entrySet()) {
@@ -63,10 +64,12 @@ public class BatchJobListener extends JobExecutionListenerSupport {
     public void afterJob(JobExecution jobExecution) {
 
         try {
-            String message = "id=" + jobExecution.getJobId()
-                    + ", job_instance_id=" + jobExecution.getJobInstance().getInstanceId()
-                    + ", name=" + jobExecution.getJobInstance().getJobName()
-                    + ", status=" + jobExecution.getStatus();
+            String message = new StringJoiner(StringUtil.COMMA)
+                    .add("id=" + jobExecution.getJobId())
+                    .add("job_instance_id="
+                            + jobExecution.getJobInstance().getInstanceId())
+                    .add("name=" + jobExecution.getJobInstance().getJobName())
+                    .add("status=" + jobExecution.getStatus()).toString();
 
             if (BatchStatus.FAILED == jobExecution.getStatus()) {
                 for (Throwable t : jobExecution.getAllFailureExceptions()) {
