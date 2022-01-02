@@ -50,7 +50,26 @@ export default {
           href: "/healthinfoapp/dashboard/calorie",
         },
       ],
-      flow: [],
+      flow: [
+        {
+          id: "a0",
+          text: "計算前画面",
+          edgeType: "circle",
+          next: ["a1", "b1"],
+        },
+        {
+          id: "a1",
+          text: "画面表示",
+          edgeType: "round",
+          next: [""],
+        },
+        {
+          id: "b1",
+          text: "画面表示",
+          edgeType: "round",
+          next: [""],
+        },
+      ],
     };
   },
 };
