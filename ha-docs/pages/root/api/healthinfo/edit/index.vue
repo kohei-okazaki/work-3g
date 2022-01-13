@@ -69,6 +69,7 @@ export default {
           text: "API通信情報.トランザクションID 採番",
           edgeType: "round",
           next: ["4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",

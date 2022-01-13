@@ -74,12 +74,14 @@ export default {
           text: "トランザクションIDを採番",
           edgeType: "round",
           next: ["b3"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "b3",
           text: "API通信情報 登録<br>Token発行API",
           edgeType: "round",
           next: ["b4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "b4",
@@ -87,6 +89,7 @@ export default {
           edgeType: "round",
           url: "/node/api/token",
           next: ["b5"],
+          style: "fill:#ffce9e",
         },
         {
           id: "b5",
@@ -94,12 +97,14 @@ export default {
           edgeType: "round",
           link: ["-- API処理結果 <> 0 -->", "-- API処理結果 == 0 -->"],
           next: ["b101", "b6"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "b6",
           text: "API通信情報 登録<br>カロリー計算API",
           edgeType: "round",
           next: ["b7"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "b7",
@@ -107,6 +112,7 @@ export default {
           edgeType: "round",
           url: "/node/api/calorie",
           next: ["b8"],
+          style: "fill:#ffce9e",
         },
         {
           id: "b8",
@@ -114,6 +120,7 @@ export default {
           edgeType: "round",
           link: ["-- API処理結果 <> 0 -->", "-- API処理結果 == 0 -->"],
           next: ["b101", "b9"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "b101",
