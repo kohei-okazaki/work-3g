@@ -138,6 +138,7 @@ export default {
           text: "ユーザの健康情報件数を取得",
           edgeType: "round",
           next: ["b5"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "b5",
@@ -162,7 +163,7 @@ export default {
         },
         {
           id: "b8",
-          text: "API通信情報を登録",
+          text: "API通信情報を登録<br>健康情報登録API",
           edgeType: "round",
           next: ["b9"],
           style: "fill:#c6ffc6",
@@ -172,11 +173,12 @@ export default {
           text: "健康情報登録API 実施",
           edgeType: "round",
           next: ["b10"],
+          url: "/healthinfoapp/api/healthinfo/regist",
           style: "fill:#ffce9e",
         },
         {
           id: "b10",
-          text: "API通信情報を更新",
+          text: "API通信情報を更新<br>健康情報登録API",
           edgeType: "round",
           next: ["b11"],
           style: "fill:#c6ffc6",

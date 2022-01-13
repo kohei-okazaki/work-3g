@@ -183,6 +183,7 @@ export default {
           group: "CSV1レコードごとに実施",
           next: ["b9"],
           style: "fill:#ffce9e",
+          url: "/healthinfoapp/api/healthinfo/regist",
         },
         {
           id: "b9",

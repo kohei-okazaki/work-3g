@@ -62,24 +62,19 @@ export default {
           text: "お知らせ情報検索",
           edgeType: "round",
           next: ["2"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "2",
-          text: "お知らせ情報検索",
+          text: "お知らせ情報の各レコードに対し<br>AWS-S3へJSONファイルを取得",
           edgeType: "round",
-          next: ["3"],
+          next: ["2", "3"],
         },
         {
           id: "3",
-          text: "お知らせ情報の各レコードに対し<br>AWS-S3へJSONファイルを取得",
-          edgeType: "round",
-          next: ["3", "4"],
-        },
-        {
-          id: "4",
           text: "お知らせ情報件数取得",
           edgeType: "round",
-          next: ["5"],
+          next: ["4"],
         },
       ],
     };
