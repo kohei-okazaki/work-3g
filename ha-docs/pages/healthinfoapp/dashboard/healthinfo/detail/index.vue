@@ -74,6 +74,7 @@ export default {
           text: "健康情報 + BMI範囲マスタ検索",
           edgeType: "round",
           next: ["a4"],
+          style: "fill:#c6ffc6",
         },
 
         {

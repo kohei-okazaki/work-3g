@@ -127,7 +127,7 @@ export default {
         },
         {
           name: "Spring Boot",
-          version: "2.6.1",
+          version: "2.6.2",
           description: "管理者APIと健康管理バッチで使用するSpring FW",
           projects: ["rootapi", "batch"],
         },
@@ -145,7 +145,7 @@ export default {
         },
         {
           name: "Jackson",
-          version: "2.13.0",
+          version: "2.13.1",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
@@ -183,14 +183,14 @@ export default {
         },
         {
           name: "mybatis",
-          version: "3.5.8",
+          version: "3.5.9",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
         {
           name: "flyway",
-          version: "8.2.2",
+          version: "8.4.0",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },

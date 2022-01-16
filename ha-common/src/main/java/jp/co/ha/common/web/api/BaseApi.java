@@ -79,12 +79,11 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
 
         Rs response = getResponse();
         HttpStatus code = null;
-        URI uri = null;
         String errorMessage = null;
 
         try {
 
-            uri = getUri(apiConnectInfo, request);
+            URI uri = getUri(apiConnectInfo, request);
             LOG.info("====> API名=" + getApiName() + ",HttpMethod=" + getHttpMethod()
                     + ",URL=" + uri.toString());
             LOG.infoBean(request);

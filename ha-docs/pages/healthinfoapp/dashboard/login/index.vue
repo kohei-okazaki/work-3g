@@ -65,9 +65,10 @@ export default {
         },
         {
           id: "a3",
-          text: "アカウント情報を検索",
+          text: "アカウント情報 検索",
           edgeType: "round",
           next: ["a4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "a4",
@@ -83,8 +84,9 @@ export default {
         },
         {
           id: "a6",
-          text: "最新健康情報検索",
+          text: "最新健康情報 検索",
           edgeType: "round",
+          style: "fill:#c6ffc6",
         },
 
         {
@@ -116,7 +118,7 @@ export default {
         },
         {
           id: "b2",
-          text: "アカウント作成画面に遷移する",
+          text: "アカウント作成画面に遷移",
           edgeType: "round",
         },
 
@@ -128,7 +130,7 @@ export default {
         },
         {
           id: "c2",
-          text: "アカウント回復用メールアドレス入力画面に遷移する",
+          text: "アカウント回復用メールアドレス入力画面に遷移",
           edgeType: "round",
         },
       ],
