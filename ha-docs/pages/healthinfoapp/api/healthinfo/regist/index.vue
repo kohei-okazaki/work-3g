@@ -74,12 +74,14 @@ export default {
             "-- それ以外場合 -->",
           ],
           next: ["101", "101", "4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "4",
           text: "API通信情報 登録<br>Token発行API",
           edgeType: "round",
           next: ["5"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "5",
@@ -87,6 +89,7 @@ export default {
           edgeType: "round",
           url: "/node/api/token",
           next: ["6"],
+          style: "fill:#ffce9e",
         },
         {
           id: "6",
@@ -94,12 +97,14 @@ export default {
           edgeType: "round",
           link: ["-- API処理結果 <> 0 -->", "-- API処理結果 == 0 -->"],
           next: ["101", "7"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "7",
           text: "API通信情報 登録<br>基礎健康情報計算API",
           edgeType: "round",
           next: ["8"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "8",
@@ -107,6 +112,7 @@ export default {
           edgeType: "round",
           url: "/node/api/basic",
           next: ["9"],
+          style: "fill:#ffce9e",
         },
         {
           id: "9",
@@ -114,6 +120,7 @@ export default {
           edgeType: "round",
           link: ["-- API処理結果 <> 0 -->", "-- API処理結果 == 0 -->"],
           next: ["101", "10"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "10",

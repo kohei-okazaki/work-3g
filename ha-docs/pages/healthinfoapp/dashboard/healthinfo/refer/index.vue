@@ -88,12 +88,14 @@ export default {
           text: "健康情報を検索",
           edgeType: "round",
           next: ["b4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "b4",
           text: "健康情報件数を検索",
           edgeType: "round",
           next: ["b5"],
+          style: "fill:#c6ffc6",
         },
 
         {
@@ -126,12 +128,14 @@ export default {
           text: "健康情報を検索",
           edgeType: "round",
           next: ["c4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "c4",
           text: "健康情報ファイル設定情報を検索",
           edgeType: "round",
           next: ["c5"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "c5",
@@ -163,12 +167,14 @@ export default {
           text: "健康情報を検索",
           edgeType: "round",
           next: ["d4"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "d4",
           text: "健康情報ファイル設定情報を検索",
           edgeType: "round",
           next: ["d5"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "d5",
