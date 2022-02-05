@@ -50,7 +50,26 @@ export default {
           href: "/healthinfoapp/dashboard/account/regist",
         },
       ],
-      flow: [],
+      flow: [
+        {
+          id: "a0",
+          text: "入力画面",
+          edgeType: "circle",
+          next: ["a1"],
+        },
+        {
+          id: "a1",
+          text: "確認ボタン押下",
+          edgeType: "round",
+          next: ["a2"],
+        },
+        {
+          id: "a2",
+          text: "入力チェック",
+          edgeType: "round",
+          next: ["a3"],
+        },
+      ],
     };
   },
 };

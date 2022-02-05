@@ -16,20 +16,20 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>1.8</java-version>
-    <org.springframework-version>5.3.14</org.springframework-version>
-    <org.spring-data-commons-version>2.6.0</org.spring-data-commons-version>
+    <org.springframework-version>5.3.15</org.springframework-version>
+    <org.spring-data-commons-version>2.6.1</org.spring-data-commons-version>
     <org.spring-security-version>5.6.1</org.spring-security-version>
     <com.amazonaws-version>1.12.74</com.amazonaws-version>
     <org.aspectj-version>1.9.7</org.aspectj-version>
-    <org.slf4j-version>1.7.32</org.slf4j-version>
-    <org.logback-version>1.2.9</org.logback-version>
+    <org.slf4j-version>1.7.35</org.slf4j-version>
+    <org.logback-version>1.2.10</org.logback-version>
     <org.jackson-version>2.13.1</org.jackson-version>
-    <org.poi-version>5.1.0</org.poi-version>
-    <org.mysql-version>8.0.27</org.mysql-version>
+    <org.poi-version>5.2.0</org.poi-version>
+    <org.mysql-version>8.0.28</org.mysql-version>
     <org.mybatis-version>3.5.9</org.mybatis-version>
-    <org.mybatis-spring-version>2.0.6</org.mybatis-spring-version>
+    <org.mybatis-spring-version>2.0.7</org.mybatis-spring-version>
     <org.hibernate-version>7.0.2.Final</org.hibernate-version>
-    <org.thymeleaf-version>3.0.12.RELEASE</org.thymeleaf-version>
+    <org.thymeleaf-version>3.0.15.RELEASE</org.thymeleaf-version>
     <org.thymeleaf-layout-version>3.0.0</org.thymeleaf-layout-version>
     <org.groovy-version>3.0.9</org.groovy-version>
     <org.dbcp2-version>2.9.0</org.dbcp2-version>
