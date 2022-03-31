@@ -23,7 +23,7 @@
     <org.aspectj-version>1.9.7</org.aspectj-version>
     <org.slf4j-version>1.7.32</org.slf4j-version>
     <org.logback-version>1.2.9</org.logback-version>
-    <org.jackson-version>2.13.1</org.jackson-version>
+    <org.jackson-version>2.13.2.1</org.jackson-version>
     <org.poi-version>5.1.0</org.poi-version>
     <org.mysql-version>8.0.27</org.mysql-version>
     <org.mybatis-version>3.5.9</org.mybatis-version>
