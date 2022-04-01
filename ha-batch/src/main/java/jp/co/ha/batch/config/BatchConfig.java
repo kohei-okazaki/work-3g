@@ -46,33 +46,33 @@ public class BatchConfig {
 
     /**
      * ヘルスチェックAPIバッチのJOB<br>
-     * heathCheckApiBatchJob
+     * healthCheckApiBatchJob
      *
-     * @param heathCheckApiBatchStep
+     * @param healthCheckApiBatchStep
      *     ヘルスチェックAPIバッチのSTEP
      * @return ヘルスチェックAPIバッチJOB
      */
     @Bean
-    public Job heathCheckApiBatchJob(Step heathCheckApiBatchStep) {
-        return jobBuilderFactory.get("heathCheckApiBatchJob")
+    public Job heathCheckApiBatchJob(Step healthCheckApiBatchStep) {
+        return jobBuilderFactory.get("healthCheckApiBatchJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(batchJobListener)
                 // 実行するStepを指定
-                .flow(heathCheckApiBatchStep)
+                .flow(healthCheckApiBatchStep)
                 .end()
                 .build();
     }
 
     /**
      * ヘルスチェックAPIバッチのSTEP<br>
-     * heathCheckApiBatchStep
+     * healthCheckApiBatchStep
      *
      * @return ヘルスチェックAPIバッチのSTEP
      */
     @Bean
     public Step heathCheckApiBatchStep() {
         // Step名を指定
-        return stepBuilderFactory.get("heathCheckApiBatchStep")
+        return stepBuilderFactory.get("healthCheckApiBatchStep")
                 // 実行するTaskletを指定
                 .tasklet(healthCheckApiBatch)
                 .build();
