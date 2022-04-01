@@ -13,11 +13,11 @@ public class ToolInvoker {
     /**
      * 実行したい自動生成の列挙を指定してください
      * <ul>
-     * <li>GenerateType.ADD_COLUMN = カラム追加SQLを作成(未実装)</li>
-     * <li>GenerateType.DDL = createテーブルSQLを作成</li>
-     * <li>GenerateType.TABLE_DEFINE =テーブルの定義SQLを作成</li>
-     * <li>GenerateType.DROP = テーブルを削除するSQLを作成</li>
-     * <li>GenerateType.ENTITY = Entityを作成</li>
+     * <li>{@linkplain GenerateType#ADD_COLUMN} = カラム追加SQLを作成(未実装)</li>
+     * <li>{@linkplain GenerateType#DDL} = createテーブルSQLを作成</li>
+     * <li>{@linkplain GenerateType#TABLE_DEFINE} =テーブルの定義SQLを作成</li>
+     * <li>{@linkplain GenerateType#DROP} = テーブルを削除するSQLを作成</li>
+     * <li>{@linkplain GenerateType#ENTITY} = Entityを作成</li>
      * </ul>
      *
      * @param args
