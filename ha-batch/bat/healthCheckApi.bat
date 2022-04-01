@@ -14,7 +14,7 @@ rem ã§í ÉVÉFÉãÇÃì«çû
 call common.bat
 
 cd %BASE_DIR%\ha-batch\target
-java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=heathCheckApiBatchJob %JAR_FILE%
+java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=healthCheckApiBatchJob %JAR_FILE%
 
 echo ------------------------------------------------------------------------
 echo END %~n0%~x0
