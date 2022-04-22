@@ -16,7 +16,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>1.8</java-version>
-    <org.springframework-version>5.3.18</org.springframework-version>
+    <org.springframework-version>5.3.19</org.springframework-version>
     <org.spring-data-commons-version>2.6.3</org.spring-data-commons-version>
     <org.spring-security-version>5.6.2</org.spring-security-version>
     <com.amazonaws-version>1.12.190</com.amazonaws-version>
