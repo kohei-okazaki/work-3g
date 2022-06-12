@@ -18,7 +18,7 @@
     <java-version>1.8</java-version>
     <org.springframework-version>5.3.20</org.springframework-version>
     <org.spring-data-commons-version>2.6.4</org.spring-data-commons-version>
-    <org.spring-security-version>5.3.13.RELEASE</org.spring-security-version>
+    <org.spring-security-version>5.5.7</org.spring-security-version>
     <com.amazonaws-version>1.12.190</com.amazonaws-version>
     <org.aspectj-version>1.9.9.1</org.aspectj-version>
     <org.slf4j-version>1.7.36</org.slf4j-version>
