@@ -53,7 +53,7 @@ public class BatchConfig {
      * @return ヘルスチェックAPIバッチJOB
      */
     @Bean
-    public Job heathCheckApiBatchJob(Step healthCheckApiBatchStep) {
+    public Job healthCheckApiBatchJob(Step healthCheckApiBatchStep) {
         return jobBuilderFactory.get("healthCheckApiBatchJob")
                 .incrementer(new RunIdIncrementer())
                 .listener(batchJobListener)
@@ -70,7 +70,7 @@ public class BatchConfig {
      * @return ヘルスチェックAPIバッチのSTEP
      */
     @Bean
-    public Step heathCheckApiBatchStep() {
+    public Step healthCheckApiBatchStep() {
         // Step名を指定
         return stepBuilderFactory.get("healthCheckApiBatchStep")
                 // 実行するTaskletを指定
