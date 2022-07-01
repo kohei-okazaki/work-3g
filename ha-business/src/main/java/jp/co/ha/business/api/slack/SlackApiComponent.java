@@ -61,13 +61,14 @@ public class SlackApiComponent {
             Connection conn = getConnectionByContentType(contentType);
             SlackSession session = SlackSessionFactory
                     .createWebSocketSlackSession(conn.getToken());
+            String channelName = getChannelName(conn);
 
             session.connect();
-            SlackChannel channel = session.findChannelByName(getChannelName(conn));
+            SlackChannel channel = session.findChannelByName(channelName);
 
-            LOG.debug("send start. channel=" + getChannelName(conn));
+            LOG.debug("send start. channel=" + channelName);
             session.sendMessage(channel, message);
-            LOG.debug("send end. channel=" + getChannelName(conn));
+            LOG.debug("send end. channel=" + channelName);
 
             session.disconnect();
         } catch (IOException e) {
@@ -139,7 +140,7 @@ public class SlackApiComponent {
 
     /**
      * チャンネル名を返す<br>
-     * 環境名 + スラック接続情報.名前
+     * 環境名 + Slack接続情報.名前
      *
      * @param conn
      *     {@linkplain Connection}
