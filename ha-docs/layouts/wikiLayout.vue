@@ -79,6 +79,11 @@ export default {
         },
         {
           icon: "mdi-apps",
+          title: "ローカル環境ビルド手順",
+          to: "/wiki/localBuild",
+        },
+        {
+          icon: "mdi-apps",
           title: "DB変更手順",
           to: "/wiki/dbMod",
         },
