@@ -9,10 +9,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "core-js": "^3.22.4",
+    "core-js": "^3.25.2",
     "is-svg": "^4.3.2",
     "nuxt": "^2.15.8",
-    "postcss": "^8.4.13",
+    "postcss": "^8.4.16",
     "vue-mermaid": "0.0.14",
     "vue-simple-context-menu": "^3.4.2",
     "vuex-persistedstate": "^4.1.0"
