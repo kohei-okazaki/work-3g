@@ -155,9 +155,9 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
     }
 
     /**
-     * APIレスポンスクラスを返す
+     * APIレスポンスを返す
      *
-     * @return Node APIレスポンス
+     * @return APIレスポンス
      */
     protected abstract Rs getResponse();
 

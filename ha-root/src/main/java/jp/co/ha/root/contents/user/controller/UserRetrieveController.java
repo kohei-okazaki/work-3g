@@ -21,7 +21,7 @@ import jp.co.ha.root.contents.user.request.UserRetrieveApiRequest;
 import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse;
 
 /**
- * ユーザ情報取得APIコントローラ
+ * ユーザ取得APIコントローラ
  *
  * @version 1.0.0
  */
