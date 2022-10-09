@@ -21,7 +21,7 @@ import jp.co.ha.root.contents.note.request.NoteEditApiRequest;
 import jp.co.ha.root.contents.note.response.NoteEditApiResponse;
 
 /**
- * メモ情報編集APIコントローラ
+ * メモ編集APIコントローラ
  *
  * @version 1.0.0
  */

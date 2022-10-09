@@ -23,7 +23,7 @@ import jp.co.ha.root.contents.note.request.NoteDeleteApiRequest;
 import jp.co.ha.root.contents.note.response.NoteDeleteApiResponse;
 
 /**
- * メモ情報削除APIコントローラ
+ * メモ削除APIコントローラ
  *
  * @version 1.0.0
  */
