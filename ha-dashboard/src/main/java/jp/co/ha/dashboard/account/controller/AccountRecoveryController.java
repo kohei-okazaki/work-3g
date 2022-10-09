@@ -331,10 +331,8 @@ public class AccountRecoveryController implements BaseWebController {
                     "ユーザIDが未指定または半角数字以外です seq_user_id=" + seqUserId);
         }
 
-        Long userId = Long.valueOf(seqUserId.get());
-
         // アカウント情報検索
-        return accountSearchService.findById(userId)
+        return accountSearchService.findById(Long.valueOf(seqUserId.get()))
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                         "ユーザIDと紐づくアカウント情報がありません seq_user_id=" + seqUserId));
