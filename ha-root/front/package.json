@@ -16,7 +16,7 @@
     "core-js": "^3.26.1",
     "cross-env": "^7.0.3",
     "is-svg": "^4.3.2",
-    "nuxt": "^2.15.8",
+    "nuxt": "^3.0.0",
     "nuxt-basic-auth-module": "^1.4.1",
     "postcss": "^8.4.20",
     "vuex-persistedstate": "^4.1.0"
