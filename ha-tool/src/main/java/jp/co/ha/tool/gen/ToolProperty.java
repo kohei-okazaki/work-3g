@@ -13,7 +13,7 @@ import jp.co.ha.common.io.file.property.annotation.Property;
 public class ToolProperty {
 
     /** 基底パス */
-    @Property(name = "tool.basedir")
+    @Property(name = "tool.base.dir")
     private String baseDir;
     /** 自動生成ツールExcelまでのパス */
     @Property(name = "tool.excel.path")
