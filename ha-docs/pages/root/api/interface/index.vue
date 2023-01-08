@@ -423,7 +423,7 @@ export default {
         },
 
         {
-          name: "管理ユーザ取得API",
+          name: "ユーザ取得API",
           endpoint: "/api/root/user/{seq_login_id}",
           httpMethod: "GET",
           description: "管理サイトユーザ情報の取得を行うAPI",
@@ -531,7 +531,7 @@ export default {
         },
 
         {
-          name: "管理ユーザ作成PI",
+          name: "ユーザ作成API",
           endpoint: "/api/root/user/",
           httpMethod: "POST",
           description: "管理サイトユーザの作成を行うAPI",
@@ -603,7 +603,7 @@ export default {
         },
 
         {
-          name: "管理ユーザ編集PI",
+          name: "ユーザ編集API",
           endpoint: "/api/root/user/{seq_login_id}",
           httpMethod: "PUT",
           description: "管理サイトユーザの編集を行うAPI",

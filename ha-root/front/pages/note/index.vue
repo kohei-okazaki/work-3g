@@ -362,7 +362,7 @@ export default {
                 width: 400,
               });
 
-              // 最新メモ情報取得
+              // 最新メモ情報取得する
               this.getNotes();
               this.loading = false;
             }

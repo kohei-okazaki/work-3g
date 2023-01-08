@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.CommonErrorCode;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.property.reader.PropertyReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -30,6 +32,8 @@ public abstract class BaseGenerator {
     protected ToolProperty prop;
     /** 自動生成ツールのExcel情報 */
     protected Excel excel;
+    /** ファイル名：tool.properties */
+    private static final String FILE_NAME_PROP = "tool.properties";
 
     /**
      * 自動生成を行う
@@ -43,7 +47,7 @@ public abstract class BaseGenerator {
 
         try {
             // 自動生成ツール設定ファイルを取得
-            this.prop = readProp();
+            this.prop = getProp();
 
             // Excelファイルを取得
             this.excel = getExcelReader().read(prop);
@@ -82,21 +86,24 @@ public abstract class BaseGenerator {
     abstract List<GenerateFile> generateImpl() throws Exception;
 
     /**
-     * 設定ファイルを読込を行う
+     * 設定ファイルを取得する
      *
-     * @return 設定ファイル
-     * @throws URISyntaxException
-     *     パスの指定が不正な場合
+     * @return ToolProperty
      * @throws BaseException
      *     設定ファイルの読み取りに失敗しました
      */
-    private ToolProperty readProp() throws URISyntaxException, BaseException {
+    private ToolProperty getProp() throws BaseException {
 
-        Path path = Paths.get(this.getClass().getClassLoader().getResource("").toURI());
-        String classDir = path.toString();
+        Path path = null;
+        try {
+            path = Paths.get(this.getClass().getClassLoader().getResource("").toURI());
+        } catch (URISyntaxException e) {
+            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
+                    FILE_NAME_PROP + "が見つかりません", e);
+        }
 
         // 設定ファイルを取得
-        ToolProperty prop = new PropertyReader().read(classDir, "tool.properties",
+        ToolProperty prop = new PropertyReader().read(path.toString(), FILE_NAME_PROP,
                 ToolProperty.class);
         Stream.of(prop.getTargetTables().split(StringUtil.COMMA))
                 .forEach(e -> prop.addTargetTable(e));

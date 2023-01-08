@@ -316,8 +316,8 @@ export default {
         (error) => {
           this.error.hasError = true;
           this.error.message = error;
-          console.log("[error]=" + error);
           this.loading = false;
+          console.log("[error]=" + error);
           return error;
         }
       );
