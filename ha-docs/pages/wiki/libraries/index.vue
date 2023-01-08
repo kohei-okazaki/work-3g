@@ -121,13 +121,13 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.15",
+          version: "5.3.0",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Spring Boot",
-          version: "2.6.3",
+          version: "2.4.2",
           description: "管理者APIと健康管理バッチで使用するSpring FW",
           projects: ["rootapi", "batch"],
         },
@@ -139,13 +139,13 @@ export default {
         },
         {
           name: "AWS-SDK",
-          version: "1.12.74",
+          version: "1.12.190",
           description: "AWSのサービスを使うためのライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Jackson",
-          version: "2.13.1",
+          version: "2.14.1",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
@@ -163,46 +163,46 @@ export default {
         },
         {
           name: "apache poi",
-          version: "5.2.0",
+          version: "5.2.3",
           description: "健康管理ダッシュボードで使用する帳票用ライブラリ",
           projects: ["dashboard"],
         },
         {
           name: "logback",
-          version: "1.2.10",
+          version: "1.2.7",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "mysql",
-          version: "8.0.28",
+          version: "8.0.31",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するMySQLライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "mybatis",
-          version: "3.5.9",
+          version: "3.5.11",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
         {
           name: "flyway",
-          version: "8.4.4",
+          version: "8.5.12",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "rootapi"],
         },
         {
           name: "thymeleaf",
-          version: "3.0.15.RELEASE",
+          version: "3.1.0.RELEASE",
           description: "健康管理ダッシュボードで使用するテンプレートエンジン",
           projects: ["dashboard"],
         },
         {
           name: "slack",
-          version: "1.3.0",
+          version: "1.4.0",
           description: "JavaからSlackAPIを呼び出すためのライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
