@@ -76,12 +76,32 @@
 
 - お知らせ情報編集API：
     - 概要：健康管理アプリのお知らせ情報を変更するAPI
-    - URL：/api/root/news/{id}
+    - URL：/api/root/news/{seq_news_info_id}
     - Method：Put
 
 - お知らせ情報削除API：
     - 概要：健康管理アプリのお知らせ情報を削除するAPI
-    - URL：/api/root/news/{id}
+    - URL：/api/root/news/{seq_news_info_id}
+    - Method：Delete
+
+- メモ情報一覧取得API：
+    - 概要：健康管理アプリのメモ情報一覧を取得するAPI
+    - URL：/api/root/note
+    - Method：Get
+
+- メモ情報登録API：
+    - 概要：健康管理アプリのメモ情報を登録するAPI
+    - URL：/api/root/note
+    - Method：Post
+
+- メモ情報編集API：
+    - 概要：健康管理アプリのメモ情報を変更するAPI
+    - URL：/api/root/note/{seq_root_user_note_info_id}
+    - Method：Put
+
+- メモ情報削除API：
+    - 概要：健康管理アプリのメモ情報を削除するAPI
+    - URL：/api/root/note/{seq_root_user_note_info_id}
     - Method：Delete
 
 - 権限マスタリスト取得API：
