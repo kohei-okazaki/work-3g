@@ -43,9 +43,9 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" th:each="breadcrumb, status : ${breadcrumbList}" th:object="${breadcrumb}">
           <!-- 現在のページでない場合 -->
-          <a th:href="@{*{url}}" th:text="*{viewName}" th:if="*{!isCurrent}"></a>
+          <a th:href="@{*{url}}" th:text="*{viewName}" th:if="*{!current}"></a>
           <!-- 現在のページである場合 -->
-          <span th:href="@{*{url}}" th:text="*{viewName}" th:if="*{isCurrent}"></span>
+          <span th:href="@{*{url}}" th:text="*{viewName}" th:if="*{current}"></span>
         </li><!-- /.breadcrumb-item active -->
       </ol><!-- /.breadcrumb -->
     </nav>

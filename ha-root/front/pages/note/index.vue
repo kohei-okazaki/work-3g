@@ -248,7 +248,8 @@ export default {
      */
     openNoteEditModal: function (seq_root_user_note_info_id) {
       this.noteEditModal.dialog = true;
-      this.noteEditModal.seq_root_user_note_info_id = seq_root_user_note_info_id;
+      this.noteEditModal.seq_root_user_note_info_id =
+        seq_root_user_note_info_id;
       for (var i = 0; i < this.note_list.length; i++) {
         let note = this.note_list[i];
         if (note.seq_root_user_note_info_id == seq_root_user_note_info_id) {
