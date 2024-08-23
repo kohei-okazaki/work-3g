@@ -73,7 +73,7 @@ export default {
         },
         {
           id: "4",
-          text: "API通信情報 登録<br>Token発行API",
+          text: "API通信情報 登録<br>'Token発行API'",
           edgeType: "round",
           next: ["5"],
           style: "fill:#c6ffc6",
@@ -88,16 +88,18 @@ export default {
         },
         {
           id: "6",
-          text: "API通信情報 更新<br>Token発行API",
+          text: "API通信情報 更新<br>'Token発行API'",
           edgeType: "round",
+          style: "fill:#c6ffc6",
           link: ["-- API処理結果 <> 0 -->", "-- API処理結果 == 0 -->"],
           next: ["101", "7"],
         },
         {
           id: "7",
-          text: "API通信情報 登録<br>基礎健康情報計算API",
+          text: "API通信情報 登録<br>'基礎健康情報計算API'",
           edgeType: "round",
           next: ["8"],
+          style: "fill:#c6ffc6",
         },
         {
           id: "8",
@@ -109,8 +111,9 @@ export default {
         },
         {
           id: "9",
-          text: "API通信情報 更新<br>基礎健康情報計算API",
+          text: "API通信情報 更新<br>'基礎健康情報計算API'",
           edgeType: "round",
+          style: "fill:#c6ffc6",
           link: ["-- API処理結果 <> 0 -->", "-- API処理結果 == 0 -->"],
           next: ["101", "10"],
         },

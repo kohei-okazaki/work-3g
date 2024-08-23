@@ -196,7 +196,7 @@ export default {
         },
         {
           name: "thymeleaf",
-          version: "3.1.0.RELEASE",
+          version: "3.1.1.RELEASE",
           description: "健康管理ダッシュボードで使用するテンプレートエンジン",
           projects: ["dashboard"],
         },
@@ -208,7 +208,7 @@ export default {
         },
         {
           name: "junit",
-          version: "5.8.2",
+          version: "5.9.3",
           description: "Javaのテストライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },

@@ -27,7 +27,6 @@ router.get('/', function (req, res, next) {
 
   console.log(prettyjson.render(req.query) + "\n");
 
-  console.log("31");
   let gender_info;
   if ("0" == req.query['gender']) {
     // 男性の場合

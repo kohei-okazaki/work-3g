@@ -54,7 +54,7 @@ public class BreadcrumbView {
         /** URL */
         private String url;
         /** 現在地 */
-        private boolean isCurrent;
+        private boolean isCurrent = false;
 
         /**
          * viewNameを返す

@@ -50,7 +50,7 @@ public class NewsEditApiController
     @PutMapping(value = "news/{seq_news_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
     public NewsEditApiResponse edit(
-            @PathVariable(name = "seq_news_info_id", required = false) Optional<String> id,
+            @PathVariable(name = "seq_news_info_id", required = false) Optional<Long> id,
             @RequestBody NewsEditApiRequest request) throws BaseException {
 
         if (!id.isPresent()) {
