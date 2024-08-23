@@ -34,7 +34,7 @@ public class BeanValidatorTest extends BaseCommonTest {
 
             ValidateErrorResult result = new BeanValidator<RequiredTestBean>()
                     .validate(bean);
-            assertEquals(true, result.hasError());
+            assertTrue(result.hasError());
         }
         {
             LOG.debug("#requiredTest");
@@ -42,7 +42,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("test");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(false, result.hasError());
+            assertFalse(result.hasError());
         }
     }
 
@@ -59,7 +59,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(false, result.hasError());
+            assertFalse(result.hasError());
         }
         {
             LOG.debug("#minTest");
@@ -67,7 +67,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("12");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(true, result.hasError());
+            assertTrue(result.hasError());
         }
 
         // =を含まないケース
@@ -77,7 +77,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("1234");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(false, result.hasError());
+            assertFalse(result.hasError());
         }
         {
             LOG.debug("#minTest");
@@ -85,7 +85,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(true, result.hasError());
+            assertTrue(result.hasError());
         }
         {
             LOG.debug("#minTest");
@@ -93,7 +93,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("12");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(true, result.hasError());
+            assertTrue(result.hasError());
         }
     }
 
@@ -110,7 +110,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(false, result.hasError());
+            assertFalse(result.hasError());
         }
         {
             LOG.debug("#maxTest");
@@ -118,7 +118,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("1234");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(true, result.hasError());
+            assertTrue(result.hasError());
         }
 
         // =を含まないケース
@@ -128,7 +128,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("1234");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(true, result.hasError());
+            assertTrue(result.hasError());
         }
         {
             LOG.debug("#maxTest");
@@ -136,7 +136,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(true, result.hasError());
+            assertTrue(result.hasError());
         }
         {
             LOG.debug("#maxTest");
@@ -144,7 +144,7 @@ public class BeanValidatorTest extends BaseCommonTest {
             bean.setName("12");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertEquals(false, result.hasError());
+            assertFalse(result.hasError());
         }
     }
 
@@ -161,7 +161,7 @@ public class BeanValidatorTest extends BaseCommonTest {
                 bean.setValue("1");
 
                 ValidateErrorResult result = new BeanValidator<>().validate(bean);
-                assertEquals(false, result.hasError());
+                assertFalse(result.hasError());
             }
             {
                 LOG.debug("#patternTest");
@@ -169,7 +169,7 @@ public class BeanValidatorTest extends BaseCommonTest {
                 bean.setValue("a");
 
                 ValidateErrorResult result = new BeanValidator<>().validate(bean);
-                assertEquals(true, result.hasError());
+                assertTrue(result.hasError());
             }
             {
                 LOG.debug("#patternTest");
@@ -177,7 +177,7 @@ public class BeanValidatorTest extends BaseCommonTest {
                 bean.setValue("1a");
 
                 ValidateErrorResult result = new BeanValidator<>().validate(bean);
-                assertEquals(true, result.hasError());
+                assertTrue(result.hasError());
             }
         }
 
@@ -189,7 +189,7 @@ public class BeanValidatorTest extends BaseCommonTest {
                 bean.setValue("1");
 
                 ValidateErrorResult result = new BeanValidator<>().validate(bean);
-                assertEquals(false, result.hasError());
+                assertFalse(result.hasError());
             }
             {
                 LOG.debug("#patternTest");
@@ -197,7 +197,7 @@ public class BeanValidatorTest extends BaseCommonTest {
                 bean.setValue("a");
 
                 ValidateErrorResult result = new BeanValidator<>().validate(bean);
-                assertEquals(false, result.hasError());
+                assertFalse(result.hasError());
             }
             {
                 LOG.debug("#patternTest");
@@ -205,7 +205,7 @@ public class BeanValidatorTest extends BaseCommonTest {
                 bean.setValue("1a");
 
                 ValidateErrorResult result = new BeanValidator<>().validate(bean);
-                assertEquals(false, result.hasError());
+                assertFalse(result.hasError());
             }
             {
                 LOG.debug("#patternTest");
@@ -213,7 +213,7 @@ public class BeanValidatorTest extends BaseCommonTest {
                 bean.setValue("あ");
 
                 ValidateErrorResult result = new BeanValidator<>().validate(bean);
-                assertEquals(true, result.hasError());
+                assertTrue(result.hasError());
             }
         }
 

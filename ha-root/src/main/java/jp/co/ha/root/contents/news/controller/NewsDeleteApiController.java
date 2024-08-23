@@ -52,7 +52,7 @@ public class NewsDeleteApiController
     @DeleteMapping(value = "news/{seq_news_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
     public NewsDeleteApiResponse delete(
-            @PathVariable(name = "seq_news_info_id", required = false) Optional<String> id,
+            @PathVariable(name = "seq_news_info_id", required = false) Optional<Long> id,
             NewsDeleteApiRequest request) throws BaseException {
 
         if (!id.isPresent()) {
