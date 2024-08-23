@@ -57,7 +57,7 @@ public class NoteDeleteApiController
     @DeleteMapping(value = "note/{seq_root_user_note_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
     public NoteDeleteApiResponse delete(
-            @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<String> seqRootUserNoteInfoId,
+            @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<Long> seqRootUserNoteInfoId,
             NewsDeleteApiRequest request) throws BaseException {
 
         if (!seqRootUserNoteInfoId.isPresent()) {
