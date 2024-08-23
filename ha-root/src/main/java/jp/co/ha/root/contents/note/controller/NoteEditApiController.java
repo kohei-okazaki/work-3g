@@ -53,7 +53,7 @@ public class NoteEditApiController
     @PutMapping(value = "note/{seq_root_user_note_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
     public NoteEditApiResponse edit(
-            @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<String> seqRootUserNoteInfoId,
+            @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<Long> seqRootUserNoteInfoId,
             @RequestBody NoteEditApiRequest request) throws BaseException {
 
         if (!seqRootUserNoteInfoId.isPresent()) {
