@@ -36,7 +36,7 @@
 </head>
 <body>
   <div class="wrap" th:classappend="${session[seqUserId] != null} ? login-wrap">
-    <div th:replace="layout/header.html"></div>
+    <div th:replace="~{layout/header.html}"></div>
     <br><br><br><br><br>
 
     <nav aria-label="パンくずリスト" th:if="${breadcrumbList != null && breadcrumbList.size() != 0}">
@@ -54,7 +54,7 @@
     <div class="push"></div>
   </div><!-- /.wrap -->
 
-  <div th:replace="layout/footer.html"></div>
+  <div th:replace="~{layout/footer.html}"></div>
 
 </body>
 </html>

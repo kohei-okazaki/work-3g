@@ -82,13 +82,13 @@
       </form>
 
       <!--/* 生活活動代謝モーダル */-->
-      <div th:replace="./caloriecalc/lifework-metabolism-model.html"></div>
+      <div th:replace="~{./caloriecalc/lifework-metabolism-model.html}"></div>
 
       <br>
 
       <!--/* 結果部ここから */-->
       <div th:if="${calcResult} != null">
-        <div th:replace="./caloriecalc/result.html"></div>
+        <div th:replace="~{./caloriecalc/result.html}"></div>
         <br><br>
       </div>
       <!--/* 結果部ここまで */-->
