@@ -2,14 +2,17 @@ package jp.co.ha.root.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -22,7 +25,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
  */
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableMethodSecurity
+public class WebSecurityConfig {
 
     /** 認証不要URL */
     private static final String[] AUTH_IGNORE_URL = new String[] { "/api/root/login",
@@ -40,35 +44,55 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ApplicationProperties applicationProperties;
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        AuthenticationManagerBuilder builder = http
+                .getSharedObject(AuthenticationManagerBuilder.class);
+        AuthenticationManager manager = builder.build();
+
         http
-                .cors().configurationSource(this.corsConfigurationSource())
-                .and().authorizeRequests()
-                .antMatchers(AUTH_IGNORE_URL).permitAll()
-                .anyRequest().authenticated()
-                .and().logout()
-                .and().csrf().disable()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager(),
-                        passwordEncoder))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .authenticationManager(manager)
+                // CORS 設定
+                .cors(cors -> cors.configurationSource(this.corsConfigurationSource()))
+                // 認証不要URL 許可
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(AUTH_IGNORE_URL).permitAll()
+                        .anyRequest().authenticated())
+                // CSRF 無効化
+                .csrf(csrf -> csrf.disable())
+                // 認証フィルター 追加
+                .addFilter(new JWTAuthenticationFilter(manager, passwordEncoder))
+                // 認可フィルター 追加
+                .addFilter(new JWTAuthorizationFilter(manager))
+                // セッション 設定
+                .sessionManagement(
+                        sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        return http.build();
+
+        // http
+        // .cors().configurationSource(this.corsConfigurationSource())
+        // .and().authorizeRequests()
+        // .requestMatchers(AUTH_IGNORE_URL).permitAll()
+        // .anyRequest().authenticated()
+        // .and().logout()
+        // .and().csrf().disable()
+        // .addFilter(new JWTAuthenticationFilter(authenticationManager(),
+        // passwordEncoder))
+        // .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+        // .sessionManagement()
+        // .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
-    @Override
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder);
     }
 
-    /**
-     * {@linkplain CorsConfigurationSource}を返す
-     *
-     * @return CorsConfigurationSource
-     */
-    private CorsConfigurationSource corsConfigurationSource() {
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);

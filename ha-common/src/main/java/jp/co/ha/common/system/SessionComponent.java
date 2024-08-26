@@ -3,8 +3,8 @@ package jp.co.ha.common.system;
 import java.util.Enumeration;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;

@@ -33,14 +33,18 @@ public class AuthServiceImpl implements UserDetailsService {
     @Override
     public AuthInfo loadUserByUsername(String username) throws UsernameNotFoundException {
 
+        LOG.debug("#valid start");
         // ログインIDの妥当性チェック実施
         validate(username);
+        LOG.debug("#valid end");
 
+        LOG.debug("#findById start");
         // 管理者サイトユーザログイン情報を検索
         RootLoginInfo rootLoginInfo = searchService
                 .findById(Long.valueOf(username))
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "指定したログインIDは登録されていません. ログインID:" + Integer.valueOf(username)));
+        LOG.debug("#findById end");
 
         AuthInfo authInfo = new AuthInfo();
         BeanUtil.copy(rootLoginInfo, authInfo);

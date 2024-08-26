@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.account.form;
 
-import javax.validation.constraints.Email;
+import jakarta.validation.constraints.Email;
 
 import jp.co.ha.common.validator.annotation.Max;
 import jp.co.ha.common.validator.annotation.Required;

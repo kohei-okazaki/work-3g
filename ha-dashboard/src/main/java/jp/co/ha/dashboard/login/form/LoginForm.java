@@ -1,6 +1,6 @@
 package jp.co.ha.dashboard.login.form;
 
-import javax.validation.constraints.Email;
+import jakarta.validation.constraints.Email;
 
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;

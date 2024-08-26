@@ -2,8 +2,8 @@ package jp.co.ha.dashboard.healthinfo.form;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.validator.annotation.Required;
