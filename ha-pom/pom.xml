@@ -28,7 +28,7 @@
     <org.logback-version>1.2.7</org.logback-version>
     <org.jackson-version>2.14.1</org.jackson-version>
     <org.poi-version>5.2.3</org.poi-version>
-    <org.mysql-version>8.0.31</org.mysql-version>
+    <org.mysql-version>8.2.0</org.mysql-version>
     <org.mybatis-version>3.5.11</org.mybatis-version>
     <org.mybatis-spring-version>3.0.0</org.mybatis-spring-version>
     <org.hibernate-version>8.0.0.Final</org.hibernate-version>
