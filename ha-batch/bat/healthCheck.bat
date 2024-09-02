@@ -1,9 +1,7 @@
 @echo off
 
 rem ----------------------------------------------------------------------------------------
-rem 健康管理API_ヘルスチェックAPIバッチ
-rem 健康管理APIの起動を確認する
-rem 実際の確認はJavaからHTTPで通信を行う
+rem 健康管理ヘルスチェックバッチ
 rem ----------------------------------------------------------------------------------------
 
 echo ------------------------------------------------------------------------
@@ -14,7 +12,7 @@ rem 共通シェルの読込
 call common.bat
 
 cd %BASE_DIR%\ha-batch\target
-java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=healthCheckApiBatchJob %JAR_FILE%
+java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.name=healthCheckBatchJob %JAR_FILE%
 
 echo ------------------------------------------------------------------------
 echo END %~n0%~x0

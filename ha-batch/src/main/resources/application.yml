@@ -16,3 +16,5 @@ spring:
   web: 
     resources:
       add-mappings: false
+  thymeleaf:
+    check-template-location: false

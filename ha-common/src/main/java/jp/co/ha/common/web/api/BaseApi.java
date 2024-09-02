@@ -149,7 +149,9 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         } finally {
             LOG.infoBean(response);
             LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code);
-            apiConnectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
+            if (code != null) {
+                apiConnectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
+            }
         }
 
         return response;
