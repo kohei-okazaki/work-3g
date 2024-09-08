@@ -1,6 +1,5 @@
 package jp.co.ha.db.entity.composite;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -21,7 +20,7 @@ import jp.co.ha.db.entity.RootLoginInfoKey;
  * @version 1.0.0
  */
 @Entity
-public class CompositeRootUserInfo extends RootLoginInfoKey implements Serializable {
+public class CompositeRootUserInfo extends RootLoginInfoKey {
 
     /** serialVersionUID */
     @Ignore

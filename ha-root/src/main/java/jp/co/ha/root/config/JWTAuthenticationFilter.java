@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -86,13 +86,17 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             HttpServletResponse response) throws AuthenticationException {
 
         try {
+            LOG.debug("read form start");
             // requestパラメータからAPIリクエストFormを読み取る
             LoginApiRequest apiRequest = new ObjectMapper().readValue(
                     request.getInputStream(), LoginApiRequest.class);
+            LOG.debug("read form end");
 
+            LOG.debug("set token start");
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     apiRequest.getSeqLoginId(), apiRequest.getPassword(),
                     new ArrayList<>());
+            LOG.debug("set token end");
 
             return authenticationManager.authenticate(token);
 

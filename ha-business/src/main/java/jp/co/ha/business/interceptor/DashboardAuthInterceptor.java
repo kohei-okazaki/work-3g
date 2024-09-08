@@ -1,9 +1,8 @@
 package jp.co.ha.business.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -87,8 +86,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isMultiSubmitTokenFactory(handler)) {
             // 多重送信トークンを作成する
-            String multiSubmitToken = encoder
-                    .encode(RandomStringUtils.randomAlphabetic(10), "");
+            String multiSubmitToken = encoder.encode(StringUtil.getRandamStr(10), "");
             sessionComponent.setValue(request.getSession(), MultiSubmitToken.TOKEN_NAME,
                     multiSubmitToken);
         }

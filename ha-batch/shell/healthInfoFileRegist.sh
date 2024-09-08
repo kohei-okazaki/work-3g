@@ -13,7 +13,7 @@ print "------------------------------------------------------------------------"
 ./common.sh
 
 cd ${BATCH_DIR}/target
-java -jar -Dspring.profiles.active=${ENV} -Dspring.batch.job.names=healthInfoFileRegistBatchJob ${BATCH_JAR}
+java -jar -Dspring.profiles.active=${ENV} -Dspring.batch.job.name=healthInfoFileRegistBatchJob ${BATCH_JAR}
 
 print "------------------------------------------------------------------------"
 print "END $0"

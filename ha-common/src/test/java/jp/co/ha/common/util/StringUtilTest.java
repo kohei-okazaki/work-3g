@@ -49,19 +49,19 @@ public class StringUtilTest extends BaseCommonTest {
     public void isEmptyTest() {
         {
             String str = null;
-            assertEquals(StringUtil.isEmpty(str), true);
+            assertTrue(StringUtil.isEmpty(str));
         }
         {
             String str = "";
-            assertEquals(StringUtil.isEmpty(str), true);
+            assertTrue(StringUtil.isEmpty(str));
         }
         {
             String str = "  ";
-            assertEquals(StringUtil.isEmpty(str), true);
+            assertTrue(StringUtil.isEmpty(str));
         }
         {
             String str = "a";
-            assertEquals(StringUtil.isEmpty(str), false);
+            assertFalse(StringUtil.isEmpty(str));
         }
     }
 
@@ -72,19 +72,19 @@ public class StringUtilTest extends BaseCommonTest {
     public void isBrankTest() {
         {
             String str = null;
-            assertEquals(StringUtil.isBrank(str), true);
+            assertTrue(StringUtil.isBrank(str));
         }
         {
             String str = "";
-            assertEquals(StringUtil.isBrank(str), true);
+            assertTrue(StringUtil.isBrank(str));
         }
         {
             String str = "  ";
-            assertEquals(StringUtil.isBrank(str), false);
+            assertFalse(StringUtil.isBrank(str));
         }
         {
             String str = "a";
-            assertEquals(StringUtil.isBrank(str), false);
+            assertFalse(StringUtil.isBrank(str));
         }
     }
 
@@ -95,15 +95,15 @@ public class StringUtilTest extends BaseCommonTest {
     public void hasValueTest() {
         {
             String str = "";
-            assertEquals(StringUtil.hasValue(str), false);
+            assertFalse(StringUtil.hasValue(str));
         }
         {
             String str = null;
-            assertEquals(StringUtil.hasValue(str), false);
+            assertFalse(StringUtil.hasValue(str));
         }
         {
             String str = "a";
-            assertEquals(StringUtil.hasValue(str), true);
+            assertTrue(StringUtil.hasValue(str));
         }
     }
 

@@ -1,6 +1,5 @@
 package jp.co.ha.db.entity.composite;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -15,7 +14,7 @@ import jp.co.ha.common.log.annotation.Mask;
  * @version 1.0.0
  */
 @Entity
-public class CompositeAccount extends CompositeAccountKey implements Serializable {
+public class CompositeAccount extends CompositeAccountKey {
 
     /** serialVersionUID */
     @Ignore
