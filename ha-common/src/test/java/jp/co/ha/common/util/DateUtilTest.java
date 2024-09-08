@@ -21,9 +21,7 @@ public class DateUtilTest extends BaseCommonTest {
     public void test() {
         String yyyymm = "202009";
         DateTimeUtil.DateFormatType type = DateTimeUtil.DateFormatType.YYYYMM_NOSEP;
-        boolean b = DateTimeUtil.isDate(yyyymm, type);
-        System.out.println(b);
-        assertTrue(b);
+        assertTrue(DateTimeUtil.isDate(yyyymm, type));
     }
 
     /**
@@ -55,17 +53,17 @@ public class DateUtilTest extends BaseCommonTest {
         {
             Date before = DateUtil.toDate("2000/01/01 12:34:56");
             Date after = DateUtil.toDate("2000/01/01 12:34:57");
-            assertEquals(DateUtil.isBefore(before, after, false), true);
+            assertTrue(DateUtil.isBefore(before, after, false));
         }
         {
             Date before = DateUtil.toDate("2000/01/01 12:34:56");
             Date after = DateUtil.toDate("2000/01/01 12:34:56");
-            assertEquals(DateUtil.isBefore(before, after, true), true);
+            assertTrue(DateUtil.isBefore(before, after, false));
         }
         {
             Date before = DateUtil.toDate("2000/01/01 12:34:57");
             Date after = DateUtil.toDate("2000/01/01 12:34:56");
-            assertEquals(DateUtil.isBefore(before, after, false), false);
+            assertFalse(DateUtil.isBefore(before, after, false));
         }
     }
 

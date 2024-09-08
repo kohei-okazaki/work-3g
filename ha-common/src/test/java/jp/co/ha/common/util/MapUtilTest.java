@@ -8,12 +8,14 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import jp.co.ha.common.BaseCommonTest;
+
 /**
  * {@linkplain MapUtil}のjUnit
  *
  * @version 1.0.0
  */
-public class MapUtilTest {
+public class MapUtilTest  extends BaseCommonTest {
 
     /**
      * {@linkplain MapUtil#isEmpty(Map)}
