@@ -1,6 +1,5 @@
 package jp.co.ha.db.entity.composite;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -12,7 +11,7 @@ import jp.co.ha.common.log.annotation.Mask;
  *
  * @version 1.0.0
  */
-public class CompositeHealthInfo extends CompositeHealthInfoKey implements Serializable {
+public class CompositeHealthInfo extends CompositeHealthInfoKey {
 
     /** serialVersionUID */
     @Ignore

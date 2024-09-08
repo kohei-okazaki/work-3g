@@ -9,6 +9,7 @@ import java.util.StringJoiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.RequestEntity.BodyBuilder;
@@ -78,7 +79,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
     public Rs callApi(Rq request, ApiConnectInfo apiConnectInfo) {
 
         Rs response = getResponse();
-        HttpStatus code = null;
+        HttpStatusCode code = null;
         String errorMessage = null;
 
         try {
@@ -148,7 +149,9 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         } finally {
             LOG.infoBean(response);
             LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code);
-            apiConnectInfo.setHttpStatus(code);
+            if (code != null) {
+                apiConnectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
+            }
         }
 
         return response;

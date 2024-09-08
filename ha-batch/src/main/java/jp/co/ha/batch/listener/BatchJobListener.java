@@ -6,8 +6,8 @@ import java.util.StringJoiner;
 
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.JobParameter;
-import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ import jp.co.ha.common.util.StringUtil;
  * @version 1.0.0
  */
 @Component
-public class BatchJobListener extends JobExecutionListenerSupport {
+public class BatchJobListener implements JobExecutionListener {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BatchJobListener.class);
@@ -51,13 +51,11 @@ public class BatchJobListener extends JobExecutionListenerSupport {
                 .add("name=" + jobExecution.getJobInstance().getJobName())
                 .add("status=" + jobExecution.getStatus()).toString();
         sj.add("start JOB. " + message);
-        for (Entry<String, JobParameter> entry : jobExecution.getJobParameters()
-                .getParameters().entrySet()) {
+        for (Entry<String, JobParameter<?>> entry : jobExecution.getJobParameters().getParameters().entrySet()) {
             sj.add("{key=" + entry.getKey() + ", val=" + entry.getValue().toString()
                     + "}");
         }
         LOG.debug(sj.toString());
-        super.beforeJob(jobExecution);
     }
 
     @Override
