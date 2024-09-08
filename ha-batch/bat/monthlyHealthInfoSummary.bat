@@ -17,7 +17,7 @@ cd %BASE_DIR%\ha-batch\target
 rem èàóùëŒè€îNåéYYYYMM
 set DATE_OPTION_VALUE=%1
 
-java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.names=monthlyHealthInfoSummaryBatchJob %JAR_FILE% m=%DATE_OPTION_VALUE%
+java -jar -Dspring.profiles.active=%ENV% -Dspring.batch.job.name=monthlyHealthInfoSummaryBatchJob %JAR_FILE% m=%DATE_OPTION_VALUE%
 
 echo ------------------------------------------------------------------------
 echo END %~n0%~x0

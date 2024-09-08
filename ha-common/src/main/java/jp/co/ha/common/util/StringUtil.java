@@ -439,7 +439,7 @@ public class StringUtil {
      * @return ランダム文字列
      */
     public static String getRandamStr(int length) {
-        return RandomStringUtils.randomAlphabetic(length);
+        return RandomStringUtils.secure().nextAlphabetic(length);
     }
 
     /**

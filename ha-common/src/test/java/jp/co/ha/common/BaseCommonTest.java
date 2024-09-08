@@ -18,7 +18,7 @@ import jp.co.ha.common.system.BeanLoader;
  */
 @ContextConfiguration(locations = { "classpath:common-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BaseCommonTest {
+public abstract class BaseCommonTest {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BaseCommonTest.class);

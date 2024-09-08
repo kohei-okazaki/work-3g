@@ -25,17 +25,17 @@ public class CollectionUtilTest extends BaseCommonTest {
         {
             List<String> list = Arrays.asList("");
             int count = 1;
-            assertEquals(CollectionUtil.existsCount(list, count), true);
+            assertTrue(CollectionUtil.existsCount(list, count));
         }
         {
             List<String> list = Arrays.asList("1", "2");
             int count = 1;
-            assertEquals(CollectionUtil.existsCount(list, count), false);
+            assertFalse(CollectionUtil.existsCount(list, count));
         }
         {
             List<String> list = null;
             int count = 1;
-            assertEquals(CollectionUtil.existsCount(list, count), false);
+            assertFalse(CollectionUtil.existsCount(list, count));
         }
     }
 
@@ -46,19 +46,19 @@ public class CollectionUtilTest extends BaseCommonTest {
     public void isEmptyTest() {
         {
             List<String> list = null;
-            assertEquals(CollectionUtil.isEmpty(list), true);
+            assertTrue(CollectionUtil.isEmpty(list));
         }
         {
             List<String> list = new ArrayList<>();
-            assertEquals(CollectionUtil.isEmpty(list), true);
+            assertTrue(CollectionUtil.isEmpty(list));
         }
         {
             List<String> list = Arrays.asList("1");
-            assertEquals(CollectionUtil.isEmpty(list), false);
+            assertFalse(CollectionUtil.isEmpty(list));
         }
         {
             List<String> list = Arrays.asList("1", "2");
-            assertEquals(CollectionUtil.isEmpty(list), false);
+            assertFalse(CollectionUtil.isEmpty(list));
         }
     }
 
@@ -69,19 +69,19 @@ public class CollectionUtilTest extends BaseCommonTest {
     public void isMultipleTest() {
         {
             List<String> list = null;
-            assertEquals(CollectionUtil.isMultiple(list), false);
+            assertFalse(CollectionUtil.isMultiple(list));
         }
         {
             List<String> list = new ArrayList<>();
-            assertEquals(CollectionUtil.isMultiple(list), false);
+            assertFalse(CollectionUtil.isMultiple(list));
         }
         {
             List<String> list = Arrays.asList("1");
-            assertEquals(CollectionUtil.isMultiple(list), false);
+            assertFalse(CollectionUtil.isMultiple(list));
         }
         {
             List<String> list = Arrays.asList("1", "2");
-            assertEquals(CollectionUtil.isMultiple(list), true);
+            assertTrue(CollectionUtil.isMultiple(list));
         }
     }
 
@@ -92,15 +92,15 @@ public class CollectionUtilTest extends BaseCommonTest {
     public void existsTest() {
         {
             List<String> list = null;
-            assertEquals(CollectionUtil.exists(list), false);
+            assertFalse(CollectionUtil.exists(list));
         }
         {
             List<String> list = new ArrayList<>();
-            assertEquals(CollectionUtil.exists(list), false);
+            assertFalse(CollectionUtil.exists(list));
         }
         {
             List<String> list = Arrays.asList("1");
-            assertEquals(CollectionUtil.exists(list), true);
+            assertTrue(CollectionUtil.exists(list));
         }
     }
 }

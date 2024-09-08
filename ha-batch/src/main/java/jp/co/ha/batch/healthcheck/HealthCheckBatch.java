@@ -37,10 +37,10 @@ import jp.co.ha.db.entity.ApiCommunicationData;
  */
 @StepScope
 @Component
-public class HealthCheckApiBatch implements Tasklet {
+public class HealthCheckBatch implements Tasklet {
 
     /** LOG */
-    private static final Logger LOG = LoggerFactory.getLogger(HealthCheckApiBatch.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HealthCheckBatch.class);
     /** ヘルスチェックAPIメールテンプレートID */
     private static final String TEMPLATE_ID = "mail-template/health-check-template.txt";
 
