@@ -26,7 +26,6 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
-@SuppressWarnings("javadoc")
 public class DateTimeUtil {
 
     /** LOG */

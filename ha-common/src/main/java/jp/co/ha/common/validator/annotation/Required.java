@@ -8,6 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
 import jp.co.ha.common.validator.RequiredValidator;
 
@@ -31,5 +32,5 @@ public @interface Required {
     Class<?>[] groups() default {};
 
     /** payload */
-    Class<? extends jakarta.validation.Payload>[] payload() default {};
+    Class<? extends Payload>[] payload() default {};
 }
