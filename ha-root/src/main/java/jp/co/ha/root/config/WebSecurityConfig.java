@@ -70,19 +70,6 @@ public class WebSecurityConfig {
                         sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
-
-        // http
-        // .cors().configurationSource(this.corsConfigurationSource())
-        // .and().authorizeRequests()
-        // .requestMatchers(AUTH_IGNORE_URL).permitAll()
-        // .anyRequest().authenticated()
-        // .and().logout()
-        // .and().csrf().disable()
-        // .addFilter(new JWTAuthenticationFilter(authenticationManager(),
-        // passwordEncoder))
-        // .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-        // .sessionManagement()
-        // .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Autowired
