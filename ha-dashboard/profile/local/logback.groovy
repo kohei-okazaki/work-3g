@@ -122,6 +122,6 @@ appender("ERROR_FILE", RollingFileAppender) {
 
 // アプリで出力されるログのログレベルを設定
 logger("jp.co.ha", DEBUG, appenderList, false)
-logger("org", INFO, appenderList, false)
+logger("org.springframework", INFO, appenderList, false)
 
 root(INFO, appenderList)
