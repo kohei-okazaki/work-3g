@@ -86,17 +86,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             HttpServletResponse response) throws AuthenticationException {
 
         try {
-            LOG.debug("read form start");
             // requestパラメータからAPIリクエストFormを読み取る
             LoginApiRequest apiRequest = new ObjectMapper().readValue(
                     request.getInputStream(), LoginApiRequest.class);
-            LOG.debug("read form end");
 
-            LOG.debug("set token start");
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                     apiRequest.getSeqLoginId(), apiRequest.getPassword(),
                     new ArrayList<>());
-            LOG.debug("set token end");
 
             return authenticationManager.authenticate(token);
 
@@ -123,7 +119,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .compact();
 
         res.addHeader(HEADER_AUTHORIZATION, TOKEN_PREFIX + token);
-        LOG.debug("Authorization: Bearer " + token);
     }
 
 }
