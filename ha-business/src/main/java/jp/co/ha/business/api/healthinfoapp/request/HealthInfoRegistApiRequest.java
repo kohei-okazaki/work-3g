@@ -39,10 +39,10 @@ public class HealthInfoRegistApiRequest extends BaseRestApiRequest
     /** テストモード種別 */
     @JsonDeserialize(using = TestModeDeserializer.class)
     @Required(message = "testModeが未設定です")
-    @JsonProperty("testMode")
+    @JsonProperty("test_mode")
     private TestMode testMode;
     /** トランザクションID */
-    @JsonProperty("transactionId")
+    @JsonProperty("transaction_id")
     private Long transactionId;
 
     /**

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=\"local\" nuxt --port 8083",
+    "dev": "cross-env NODE_ENV=\"local\" nuxt dev --port 8083",
     "build:local": "cross-env NODE_ENV=\"local\" nuxt build",
     "build:ec2": "cross-env NODE_ENV=\"ec2\" nuxt build",
     "start:local": "cross-env NODE_ENV=\"local\" nuxt start --port 8083",
@@ -19,9 +19,14 @@
     "nuxt": "^2.15.8",
     "nuxt-basic-auth-module": "^1.4.1",
     "postcss": "^8.4.20",
+    "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.3"
+    "@nuxtjs/vuetify": "^1.12.3",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~2.5.8",
+    "vuetify-loader": "^1.7.0"
   }
 }

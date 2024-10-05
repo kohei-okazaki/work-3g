@@ -22,7 +22,7 @@ public class HealthInfoRegistApiResponse extends BaseRestApiResponse
         implements BaseApiResponse {
 
     /** 健康情報 */
-    @JsonProperty("healthInfo")
+    @JsonProperty("health_info")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private HealthInfo healthInfo;
 
@@ -53,7 +53,7 @@ public class HealthInfoRegistApiResponse extends BaseRestApiResponse
     public static class HealthInfo {
 
         /** 健康情報ID */
-        @JsonProperty("seqHealthInfoId")
+        @JsonProperty("seq_health_info_id")
         private Long seqHealthInfoId;
         /** 身長 */
         @Mask
@@ -69,13 +69,13 @@ public class HealthInfoRegistApiResponse extends BaseRestApiResponse
         private BigDecimal bmi;
         /** 標準体重 */
         @Mask
-        @JsonProperty("standardWeight")
+        @JsonProperty("standard_weight")
         private BigDecimal standardWeight;
         /** 健康情報ステータス */
         @JsonProperty("status")
         private String healthInfoStatus;
         /** 健康情報作成日時 */
-        @JsonProperty("regDate")
+        @JsonProperty("reg_date")
         @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
         private LocalDateTime healthInfoRegDate;

@@ -56,6 +56,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     // API通信を可能にするライブラリ
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     // ログイン認証を可能にするライブラリ
     '@nuxtjs/auth',
     // basic認証を有効化するライブラリ

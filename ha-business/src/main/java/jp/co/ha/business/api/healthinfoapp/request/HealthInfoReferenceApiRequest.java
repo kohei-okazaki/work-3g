@@ -19,9 +19,9 @@ public class HealthInfoReferenceApiRequest extends BaseRestApiRequest
         implements BaseApiRequest {
 
     /** 健康情報ID */
-    @Required(message = "seqHealthInfoIdが未設定です")
-    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "seqHealthInfoIdが半角数字でありません")
-    @JsonProperty("seqHealthInfoId")
+    @Required(message = "seq_health_info_idが未設定です")
+    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "seq_health_info_idが半角数字でありません")
+    @JsonProperty("seq_health_info_id")
     private Long seqHealthInfoId;
 
     /**
