@@ -163,7 +163,7 @@ public class BaseRestApiResponse implements BaseForm {
     public static class Account {
 
         /** ユーザID */
-        @JsonProperty("seqUserId")
+        @JsonProperty("seq_user_id")
         private Long seqUserId;
 
         /**
