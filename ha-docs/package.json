@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt --port 8085",
+    "dev": "nuxt dev --port 8085",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -13,11 +13,18 @@
     "is-svg": "^4.3.2",
     "nuxt": "^2.15.8",
     "postcss": "^8.4.20",
+    "vue": "^2.7.16",
     "vue-mermaid": "0.0.14",
     "vue-simple-context-menu": "^3.4.2",
+    "vuetify": "^2.6.0",
+    "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.3"
+    "@nuxtjs/vuetify": "^1.12.3",
+    "sass": "~1.32.0",
+    "sass-loader": "^10.0.0",
+    "vue-cli-plugin-vuetify": "~2.5.8",
+    "vuetify-loader": "^1.7.0"
   }
 }

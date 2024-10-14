@@ -1022,6 +1022,16 @@
               <br />
 
               <details>
+                <summary>Vue cliインストール</summary>
+                <p>コマンドプロンプトより以下のコマンドを実行</p>
+                <kbd>npm install -g @vue/cli</kbd>
+                <p>以下のコマンドを実行し、任意のvue/cliのバージョンが表示されていればOK</p>
+                <kbd>vue -V</kbd>
+              </details>
+
+              <br />
+
+              <details>
                 <summary>npm インストール</summary>
                 <p>
                   ha-node上で以下のコマンドを実行（健康情報計算APIサーバのライブラリ依存関係を解消するため）
@@ -1075,6 +1085,7 @@
                 <p>以下のコマンドを実行し、更新したNodeのバージョンになっていればOK</p>
                 <kbd>node -v</kbd>
               </details>
+
             </v-expansion-panel-content>
           </v-expansion-panel>
 
