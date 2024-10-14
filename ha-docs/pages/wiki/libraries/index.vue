@@ -121,13 +121,13 @@ export default {
       libraryList: [
         {
           name: "Spring Framework",
-          version: "5.3.0",
+          version: "6.1.13",
           description: "健康管理API/ダッシュボードで使用するWeb FW",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "Spring Boot",
-          version: "2.4.2",
+          version: "3.3.3",
           description: "管理者APIと健康管理バッチで使用するSpring FW",
           projects: ["rootapi", "batch"],
         },
@@ -145,7 +145,7 @@ export default {
         },
         {
           name: "Jackson",
-          version: "2.14.1",
+          version: "2.17.2",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
@@ -163,27 +163,27 @@ export default {
         },
         {
           name: "apache poi",
-          version: "5.2.3",
+          version: "5.3.0",
           description: "健康管理ダッシュボードで使用する帳票用ライブラリ",
           projects: ["dashboard"],
         },
         {
           name: "logback",
-          version: "1.2.7",
+          version: "1.5.8",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "mysql",
-          version: "8.0.31",
+          version: "8.4.0",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するMySQLライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },
         {
           name: "mybatis",
-          version: "3.5.11",
+          version: "3.5.16",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
           projects: ["dashboard", "api", "rootapi"],
@@ -196,7 +196,7 @@ export default {
         },
         {
           name: "thymeleaf",
-          version: "3.1.1.RELEASE",
+          version: "3.1.2.RELEASE",
           description: "健康管理ダッシュボードで使用するテンプレートエンジン",
           projects: ["dashboard"],
         },
@@ -208,7 +208,7 @@ export default {
         },
         {
           name: "junit",
-          version: "5.9.3",
+          version: "5.11.0",
           description: "Javaのテストライブラリ",
           projects: ["dashboard", "api", "rootapi", "batch"],
         },

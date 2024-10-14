@@ -53,7 +53,7 @@ export default {
       ifs: [
         {
           name: "健康情報登録API",
-          endpoint: "/api/{seqUserId}/healthinfo",
+          endpoint: "/api/{seq_user_id}/healthinfo",
           httpMethod: "POST",
           description: "ユーザの健康情報を登録するAPI",
           url: "/healthinfoapp/api/healthinfo/regist",
@@ -68,7 +68,7 @@ export default {
             },
             {
               key: "Api-Key",
-              value: "{seqUserId}のアカウント情報.APIキーを指定",
+              value: "{seq_user_id}のアカウント情報.APIキーを指定",
             },
           ],
           request: [
@@ -89,7 +89,7 @@ export default {
               description: "ユーザの登録したい体重",
             },
             {
-              physicalName: "testMode",
+              physicalName: "test_mode",
               logicalName: "テストモード種別",
               required: true,
               type: "半角数字",
@@ -98,7 +98,7 @@ export default {
                 "<ul><li>0:DB登録を行うモード</li><li>1:テストモード(DB登録を行わない)</li></ul>",
             },
             {
-              physicalName: "transactionId",
+              physicalName: "transaction_id",
               logicalName: "トランザクションID",
               required: false,
               type: "半角数字",
@@ -152,7 +152,7 @@ export default {
               description: "result='0'の場合、必須",
             },
             {
-              physicalName: "seqUserId",
+              physicalName: "seq_user_id",
               logicalName: "ユーザID",
               required: false,
               type: "半角数字",
@@ -161,7 +161,7 @@ export default {
               description: "健康管理アプリでユーザを一意に識別するためのID",
             },
             {
-              physicalName: "healthInfo",
+              physicalName: "health_info",
               logicalName: "健康情報",
               required: false,
               type: "オブジェクト",
@@ -169,7 +169,7 @@ export default {
               description: "result='0'の場合、必須",
             },
             {
-              physicalName: "seqHealthInfoId",
+              physicalName: "seq_health_info_id",
               logicalName: "健康情報ID",
               required: false,
               type: "半角数字",
@@ -205,7 +205,7 @@ export default {
               description: "登録したBMI",
             },
             {
-              physicalName: "standardWeight",
+              physicalName: "standard_weight",
               logicalName: "標準体重",
               required: false,
               type: "小数値",
@@ -224,7 +224,7 @@ export default {
                 "登録した健康情報のステータス<ul><li>10:減少</li><li>20:変化なし</li><li>30:増加</li></ul>",
             },
             {
-              physicalName: "regDate",
+              physicalName: "reg_date",
               logicalName: "健康情報作成日時",
               required: false,
               type: "YYYYMMDDHHMMSS",
@@ -237,7 +237,7 @@ export default {
 
         {
           name: "健康情報照会API",
-          endpoint: "/api/{seqUserId}/healthinfo/{seqHealthInfoId}",
+          endpoint: "/api/{seq_user_id}/healthinfo/{seq_health_info_id}",
           httpMethod: "GET",
           description: "ユーザの健康情報を参照するAPI",
           url: "/healthinfoapp/api/healthinfo/refer",
@@ -292,7 +292,7 @@ export default {
               description: "result='0'の場合、必須",
             },
             {
-              physicalName: "seqHealthInfoId",
+              physicalName: "seq_health_info_id",
               logicalName: "健康情報ID",
               required: false,
               type: "半角数字",
@@ -328,7 +328,7 @@ export default {
               description: "登録したBMI",
             },
             {
-              physicalName: "standardWeight",
+              physicalName: "standard_weight",
               logicalName: "標準体重",
               required: false,
               type: "小数値",
@@ -347,7 +347,7 @@ export default {
                 "登録した健康情報のステータス<ul><li>10:減少</li><li>20:変化なし</li><li>30:増加</li></ul>",
             },
             {
-              physicalName: "regDate",
+              physicalName: "reg_date",
               logicalName: "健康情報作成日時",
               required: false,
               type: "YYYYMMDDHHMMSS",
