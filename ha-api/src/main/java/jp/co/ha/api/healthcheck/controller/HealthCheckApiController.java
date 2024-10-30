@@ -1,6 +1,8 @@
 package jp.co.ha.api.healthcheck.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +28,15 @@ public class HealthCheckApiController
      * @return レスポンス
      */
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthCheckApiResponse doGet() {
+    public ResponseEntity<HealthCheckApiResponse> doGet() {
+        throwError();
         HealthCheckApiResponse response = new HealthCheckApiResponse();
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    private void throwError() {
+        String s = null;
+        s.equals("");
     }
 
     @Override

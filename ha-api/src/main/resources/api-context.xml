@@ -16,4 +16,16 @@
   <!-- API例外 -->
   <bean id="restApiExceptionHandler" class="jp.co.ha.api.exception.RestApiExceptionHandler" />
 
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+        <value>apiErrorCode</value>
+        <value>dashboardErrorCode</value>
+        <value>businessErrorCode</value>
+        <value>commonErrorCode</value>
+        <value>validateErrorCode</value>
+      </list>
+    </property>
+  </bean>
+
 </beans>
