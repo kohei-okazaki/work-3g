@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import HealthTrackLogSerializer
 
-class HealthDataAPIView(APIView):
+
+class HealthInfoAPIView(APIView):
 
     def post(self, request):
         serializer = HealthTrackLogSerializer(data=request.data)

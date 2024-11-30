@@ -14,7 +14,7 @@ class HealthInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HealthInfo
-        fields = ["height", "weight", "bmi",
+        fields = ["seq_health_info_id", "height", "weight",
                   "bmi", "standard_weight", "created_at"]
 
 

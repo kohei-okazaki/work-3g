@@ -3,6 +3,8 @@ from django.db import models
 
 class HealthInfo(models.Model):
 
+    # 健康情報ID
+    seq_health_info_id = models.DecimalField(max_digits=15, decimal_places=0)
     # 身長
     height = models.FloatField()
     # 体重

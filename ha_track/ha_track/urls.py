@@ -17,9 +17,9 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 
-from api.views import HealthDataAPIView
+from api.views import HealthInfoAPIView
 
 urlpatterns = [
     # path("admin/", admin.site.urls),
-    path('api/healthdata/', HealthDataAPIView.as_view(), name='healthdata'),
+    path('api/healthinfo/', HealthInfoAPIView.as_view(), name='healthinfo'),
 ]
