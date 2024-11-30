@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class HealthInfo(models.Model):
 
     # 身長
@@ -11,10 +12,11 @@ class HealthInfo(models.Model):
     # 標準体重
     standard_weight = models.FloatField()
     # 健康情報登録日時
-    created_at= models.DateTimeField()
+    created_at = models.DateTimeField()
 
     def __str__(self):
         return f"HealthTrackLog height = {self.height}, weight = {self.weight}, bmi = {self.bmi}, standard_weight = {self.standard_weight}"
+
 
 class HealthTrackLog(models.Model):
 
@@ -26,7 +28,7 @@ class HealthTrackLog(models.Model):
     synced_at = models.DateTimeField()
     # 登録日時
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     # 健康情報との1対1のリレーション
     health_info = models.OneToOneField(
         HealthInfo,
@@ -36,4 +38,3 @@ class HealthTrackLog(models.Model):
 
     def __str__(self):
         return f"HealthTrackLog for {self.seq_user_id} on {self.created_at}"
-
