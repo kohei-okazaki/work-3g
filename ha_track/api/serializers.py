@@ -1,4 +1,4 @@
-from datetime import datetime
+from django.utils.timezone import now
 from rest_framework import serializers
 from .models import HealthInfo, HealthTrackLog
 
@@ -47,5 +47,5 @@ class HealthTrackLogSerializer(serializers.ModelSerializer):
         return health_track_log
 
     def validate(self, data):
-        data["synced_at"] = datetime.now()
+        data["synced_at"] = now()
         return data

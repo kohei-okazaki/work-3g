@@ -2,6 +2,7 @@ package jp.co.ha.common.web.form;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -16,11 +17,13 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseRestApiResponse implements BaseForm {
 
     /** API結果コード */
     @JsonSerialize(using = ResultTypeSerializer.class)
     @JsonProperty(value = "result")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private ResultType resultType = ResultType.SUCCESS;
     /** エラー情報 */
     @JsonProperty("error")

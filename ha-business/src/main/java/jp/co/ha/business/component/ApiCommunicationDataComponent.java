@@ -103,8 +103,10 @@ public class ApiCommunicationDataComponent {
     public void update(ApiCommunicationData apiCommunicationData,
             ApiConnectInfo connectInfo, BaseRestApiResponse response) {
 
-        apiCommunicationData
-                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        if (connectInfo.getHttpStatus() != null) {
+            apiCommunicationData
+                    .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        }
         apiCommunicationData.setResult(response.getResultType().getValue());
         String detail = null;
         if (response.getErrorInfo() != null) {

@@ -36,9 +36,6 @@
     </mvc:interceptor>
   </mvc:interceptors>
 
-  <!-- RestTemplate -->
-  <bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
-
   <bean id="properties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
     <property name="locations">
       <list>
