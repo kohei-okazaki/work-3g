@@ -1,4 +1,4 @@
-package jp.co.ha.common.web.form;
+package jp.co.ha.business.api.healthinfoapp.response;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jp.co.ha.common.type.BaseEnum;
+import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * RestAPIの基底レスポンスクラス
@@ -18,7 +19,7 @@ import jp.co.ha.common.type.BaseEnum;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BaseRestApiResponse implements BaseForm {
+public class BaseAppApiResponse implements BaseForm {
 
     /** API結果コード */
     @JsonSerialize(using = ResultTypeSerializer.class)

@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.healthinfoapp.controller.BaseAppApiController;
 import jp.co.ha.business.api.healthinfoapp.request.HealthCheckApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthCheckApiResponse;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.web.controller.BaseRestController;
 
 /**
  * ヘルスチェックAPIコントローラ
@@ -18,7 +18,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 @RestController
 @RequestMapping(value = "/api/healthcheck")
 public class HealthCheckApiController
-        extends BaseRestController<HealthCheckApiRequest, HealthCheckApiResponse> {
+        extends BaseAppApiController<HealthCheckApiRequest, HealthCheckApiResponse> {
 
     /**
      * ヘルスチェックAPIを受け付ける

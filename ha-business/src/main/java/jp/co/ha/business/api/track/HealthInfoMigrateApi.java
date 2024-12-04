@@ -7,8 +7,6 @@ import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.business.api.track.response.HealthInfoMigrateApiResponse;
 import jp.co.ha.business.api.type.ApiNameType;
 import jp.co.ha.common.web.api.BaseApi;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ErrorInfo;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報連携API
@@ -37,10 +35,6 @@ public class HealthInfoMigrateApi
     @Override
     public void bindErrorInfo(HealthInfoMigrateApiResponse response,
             String errorMessage) {
-        response.setResultType(ResultType.FAILURE);
-        ErrorInfo errorInfo = new ErrorInfo();
-        errorInfo.setDetail(errorMessage);
-        response.setErrorInfo(errorInfo);
     }
 
 }

@@ -3,6 +3,7 @@ package jp.co.ha.business.component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse;
 import jp.co.ha.business.api.root.response.BaseRootApiResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
@@ -13,7 +14,6 @@ import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.db.crud.update.impl.ApiCommunicationDataUpdateServiceImpl;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.common.web.form.BaseRestApiResponse;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
@@ -98,10 +98,10 @@ public class ApiCommunicationDataComponent {
      * @param connectInfo
      *     {@linkplain ApiConnectInfo}
      * @param response
-     *     {@linkplain BaseRestApiResponse}
+     *     {@linkplain BaseAppApiResponse}
      */
     public void update(ApiCommunicationData apiCommunicationData,
-            ApiConnectInfo connectInfo, BaseRestApiResponse response) {
+            ApiConnectInfo connectInfo, BaseAppApiResponse response) {
 
         if (connectInfo.getHttpStatus() != null) {
             apiCommunicationData
@@ -138,6 +138,26 @@ public class ApiCommunicationDataComponent {
 
         updateService.update(apiCommunicationData);
 
+    }
+
+    /**
+     * 指定したAPI通信情報を更新する
+     *
+     * @param apiCommunicationData
+     *     {@linkplain ApiCommunicationData}
+     * @param connectInfo
+     *     {@linkplain ApiConnectInfo}
+     */
+    public void update(ApiCommunicationData apiCommunicationData,
+            ApiConnectInfo connectInfo) {
+
+        // TODO Track APIの基底レスポンスクラスを追加して、更新処理を追加。
+
+        apiCommunicationData
+                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
+
+        updateService.update(apiCommunicationData);
     }
 
 }

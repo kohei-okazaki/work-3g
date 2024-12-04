@@ -4,21 +4,18 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.web.form.BaseApiRequest;
-import jp.co.ha.common.web.form.BaseRestApiRequest;
 
 /**
  * 健康情報連携APIのリクエスト情報クラス
  *
  * @version 1.0.0
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoMigrateApiRequest extends BaseRestApiRequest
+public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         implements BaseApiRequest {
 
     /** ユーザID */
@@ -27,6 +24,24 @@ public class HealthInfoMigrateApiRequest extends BaseRestApiRequest
     /** 健康情報 */
     @JsonProperty("health_info")
     private HealthInfo healthInfo;
+
+    /**
+     * seqUserIdを返す
+     * 
+     * @return seqUserId
+     */
+    public Long getSeqUserId() {
+        return seqUserId;
+    }
+
+    /**
+     * seqUserIdを設定する
+     * 
+     * @param seqUserId
+     */
+    public void setSeqUserId(Long seqUserId) {
+        this.seqUserId = seqUserId;
+    }
 
     /**
      * healthInfoを返す

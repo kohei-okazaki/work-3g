@@ -4,11 +4,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.healthinfoapp.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ErrorInfo;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthCheckApiResponse;
 import jp.co.ha.business.api.type.ApiNameType;
 import jp.co.ha.common.web.api.BaseApi;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ErrorInfo;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * ヘルスチェックAPI

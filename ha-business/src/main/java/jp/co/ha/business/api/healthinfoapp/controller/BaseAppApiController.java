@@ -1,8 +1,10 @@
-package jp.co.ha.common.web.controller;
+package jp.co.ha.business.api.healthinfoapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.api.healthinfoapp.request.BaseAppApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -12,8 +14,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
-import jp.co.ha.common.web.form.BaseRestApiRequest;
-import jp.co.ha.common.web.form.BaseRestApiResponse;
+import jp.co.ha.common.web.controller.BaseController;
 
 /**
  * ユーザ認証の必要なRest APIのGETメソッド受付の基底コントローラ<br>
@@ -33,7 +34,7 @@ import jp.co.ha.common.web.form.BaseRestApiResponse;
  *     レスポンス
  * @version 1.0.0
  */
-public abstract class BaseRestController<Rq extends BaseRestApiRequest, Rs extends BaseRestApiResponse>
+public abstract class BaseAppApiController<Rq extends BaseAppApiRequest, Rs extends BaseAppApiResponse>
         implements ThrowableBiConsumer<Rq, Rs>, BaseController {
 
     /** LOG */

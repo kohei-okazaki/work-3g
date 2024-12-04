@@ -1,8 +1,8 @@
-package jp.co.ha.common.web.service;
+package jp.co.ha.business.api.healthinfoapp.service;
 
+import jp.co.ha.business.api.healthinfoapp.request.BaseAppApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.web.form.BaseRestApiRequest;
-import jp.co.ha.common.web.form.BaseRestApiResponse;
 
 /**
  * Rest APIの基底サービスインターフェース
@@ -13,7 +13,7 @@ import jp.co.ha.common.web.form.BaseRestApiResponse;
  *     レスポンス
  * @version 1.0.0
  */
-public interface BaseRestApiService<Rq extends BaseRestApiRequest, Rs extends BaseRestApiResponse> {
+public interface BaseAppApiService<Rq extends BaseAppApiRequest, Rs extends BaseAppApiResponse> {
 
     /**
      * 継承先でそれぞれチェックを実装

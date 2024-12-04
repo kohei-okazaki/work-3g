@@ -1,10 +1,11 @@
-package jp.co.ha.common.web.form;
+package jp.co.ha.business.api.healthinfoapp.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Required;
+import jp.co.ha.common.web.form.BaseForm;
 
 /**
  * RestAPIの基底リクエストクラス
@@ -12,7 +13,7 @@ import jp.co.ha.common.validator.annotation.Required;
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class BaseRestApiRequest implements BaseForm {
+public abstract class BaseAppApiRequest implements BaseForm {
 
     /** ユーザID */
     @JsonIgnore

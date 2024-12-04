@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.healthinfoapp.controller.BaseAppApiController;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoRegistService;
 import jp.co.ha.business.api.healthinfoapp.service.impl.HealthInfoRegistServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.common.web.controller.BaseRestController;
 
 /**
  * 健康情報登録APIコントローラ
@@ -25,7 +25,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 @RestController
 @RequestMapping(value = "/api/{seq_user_id}/healthinfo")
 public class HealthInfoRegistApiController extends
-        BaseRestController<HealthInfoRegistApiRequest, HealthInfoRegistApiResponse> {
+        BaseAppApiController<HealthInfoRegistApiRequest, HealthInfoRegistApiResponse> {
 
     /** {@linkplain HealthInfoRegistServiceImpl} */
     @Autowired

@@ -20,7 +20,6 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
@@ -50,24 +49,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
             throws Exception {
 
-        // ObjectMapper objectMapper = new ObjectMapper();
-        // String jsonResponse =
-        // "{\"id\":65,\"seq_user_id\":\"100\",\"synced_at\":\"2024/12/01
-        // 21:41:51\",\"created_at\":\"2024/12/01
-        // 21:41:51\",\"health_info\":{\"seq_health_info_id\":\"99999\",\"height\":170.01,\"weight\":65.53,\"bmi\":10.05,\"standard_weight\":60.09,\"created_at\":\"2000/01/05
-        // 12:50:39\"}}";
-        //
-        // HealthInfoMigrateApiResponse response = new
-        // HealthInfoMigrateApiResponse();
-        // response = objectMapper.readValue(jsonResponse,
-        // response.getClass());
-        // System.out.println("RESPONSE=" + response);
-
-        try {
-            sendHealthInfoMirgateApi();
-        } catch (Exception e) {
-            LOG.error("error occured...", e);
-        }
+        sendHealthInfoMirgateApi();
 
         return RepeatStatus.FINISHED;
     }
@@ -102,11 +84,8 @@ public class HealthInfoMigrateBatch implements Tasklet {
 
         HealthInfoMigrateApiResponse response = api.callApi(request, apiConnectInfo);
 
-        response.setResultType(ResultType.SUCCESS);
-
         // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
-                response);
+        apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo);
     }
 
 }

@@ -16,7 +16,7 @@ import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
 
 /**
- * アカウント情報一覧レスポンスクラス
+ * アカウント情報一覧APIレスポンスクラス
  *
  * @version 1.0.0
  */

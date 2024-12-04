@@ -10,15 +10,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
-import jp.co.ha.common.web.form.BaseRestApiResponse;
 
 /**
  * 健康情報連携APIレスポンスクラス
  *
  * @version 1.0.0
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoMigrateApiResponse extends BaseRestApiResponse
+public class HealthInfoMigrateApiResponse extends BaseTrackApiResponse
         implements BaseApiResponse {
 
     /** id */
@@ -60,6 +58,24 @@ public class HealthInfoMigrateApiResponse extends BaseRestApiResponse
     }
 
     /**
+     * seqUserIdを返す
+     * 
+     * @return seqUserId
+     */
+    public String getSeqUserId() {
+        return seqUserId;
+    }
+
+    /**
+     * seqUserIdを設定する
+     * 
+     * @param seqUserId
+     */
+    public void setSeqUserId(String seqUserId) {
+        this.seqUserId = seqUserId;
+    }
+
+    /**
      * syncedAtを返す
      * 
      * @return syncedAt
@@ -93,24 +109,6 @@ public class HealthInfoMigrateApiResponse extends BaseRestApiResponse
      */
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    /**
-     * seqUserIdを返す
-     * 
-     * @return seqUserId
-     */
-    public String getSeqUserId() {
-        return seqUserId;
-    }
-
-    /**
-     * seqUserIdを設定する
-     * 
-     * @param seqUserId
-     */
-    public void setSeqUserId(String seqUserId) {
-        this.seqUserId = seqUserId;
     }
 
     /**
