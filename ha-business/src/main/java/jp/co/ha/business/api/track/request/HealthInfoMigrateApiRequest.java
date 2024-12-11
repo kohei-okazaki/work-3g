@@ -2,6 +2,7 @@ package jp.co.ha.business.api.track.request;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,8 +23,8 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     @JsonProperty("seq_user_id")
     private Long seqUserId;
     /** 健康情報 */
-    @JsonProperty("health_info")
-    private HealthInfo healthInfo;
+    @JsonProperty("health_infos")
+    private List<HealthInfo> healthInfoList;
 
     /**
      * seqUserIdを返す
@@ -44,21 +45,21 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     }
 
     /**
-     * healthInfoを返す
+     * healthInfoListを返す
      * 
-     * @return healthInfo
+     * @return healthInfoList
      */
-    public HealthInfo getHealthInfo() {
-        return healthInfo;
+    public List<HealthInfo> getHealthInfoList() {
+        return healthInfoList;
     }
 
     /**
-     * healthInfoを設定する
+     * healthInfoListを設定する
      * 
-     * @param healthInfo
+     * @param healthInfoList
      */
-    public void setHealthInfo(HealthInfo healthInfo) {
-        this.healthInfo = healthInfo;
+    public void setHealthInfoList(List<HealthInfo> healthInfoList) {
+        this.healthInfoList = healthInfoList;
     }
 
     /**
@@ -70,7 +71,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
 
         /** ユーザID */
         @JsonProperty("seq_health_info_id")
-        private BigDecimal seqHealthInfoId;
+        private Long seqHealthInfoId;
         /** ユーザID */
         @JsonProperty("height")
         private BigDecimal height;
@@ -94,7 +95,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
          * 
          * @return seqHealthInfoId
          */
-        public BigDecimal getSeqHealthInfoId() {
+        public Long getSeqHealthInfoId() {
             return seqHealthInfoId;
         }
 
@@ -103,7 +104,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
          * 
          * @param seqHealthInfoId
          */
-        public void setSeqHealthInfoId(BigDecimal seqHealthInfoId) {
+        public void setSeqHealthInfoId(Long seqHealthInfoId) {
             this.seqHealthInfoId = seqHealthInfoId;
         }
 

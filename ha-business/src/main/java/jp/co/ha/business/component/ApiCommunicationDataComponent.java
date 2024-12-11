@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse;
 import jp.co.ha.business.api.root.response.BaseRootApiResponse;
+import jp.co.ha.business.api.track.response.BaseTrackApiResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
 import jp.co.ha.business.db.crud.create.impl.ApiCommunicationDataCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
@@ -137,7 +138,6 @@ public class ApiCommunicationDataComponent {
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
 
         updateService.update(apiCommunicationData);
-
     }
 
     /**
@@ -147,14 +147,17 @@ public class ApiCommunicationDataComponent {
      *     {@linkplain ApiCommunicationData}
      * @param connectInfo
      *     {@linkplain ApiConnectInfo}
+     * @param response
+     *     {@linkplain BaseTrackApiResponse}
      */
     public void update(ApiCommunicationData apiCommunicationData,
-            ApiConnectInfo connectInfo) {
+            ApiConnectInfo connectInfo, BaseTrackApiResponse response) {
 
-        // TODO Track APIの基底レスポンスクラスを追加して、更新処理を追加。
-
-        apiCommunicationData
-                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        if (connectInfo.getHttpStatus() != null) {
+            apiCommunicationData
+                    .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        }
+        apiCommunicationData.setResult(response.getResult().getValue());
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
 
         updateService.update(apiCommunicationData);

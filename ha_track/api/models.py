@@ -24,7 +24,7 @@ class HealthTrackLog(models.Model):
 
     # シーケンスID
     id = models.BigAutoField(primary_key=True)
-    # ユーザーID
+    # ユーザID
     seq_user_id = models.DecimalField(max_digits=15, decimal_places=0)
     # 連携日時
     synced_at = models.DateTimeField()

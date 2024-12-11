@@ -39,13 +39,17 @@ class HealthTrackLogSerializer(serializers.ModelSerializer):
         read_only_fields = ["synced_at"]
 
     def create(self, validated_data):
-        # ネストされたデータを分離
-        health_info_data = validated_data.pop("health_info")
+        # HealthInfo データを作成
+        health_info_data = validated_data.pop('health_info')
         health_info = HealthInfo.objects.create(**health_info_data)
+
+        # HealthTrackLog データを作成
         health_track_log = HealthTrackLog.objects.create(
-            health_info=health_info, **validated_data)
+            health_info=health_info,
+            **validated_data
+        )
         return health_track_log
 
     def validate(self, data):
-        data["synced_at"] = now()
+        # data["synced_at"] = now()
         return data
