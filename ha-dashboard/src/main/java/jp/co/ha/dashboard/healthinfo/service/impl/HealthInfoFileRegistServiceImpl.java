@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.healthinfoapp.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
@@ -24,7 +25,6 @@ import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;

@@ -2,6 +2,7 @@ package jp.co.ha.business.api.healthinfoapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jp.co.ha.business.api.healthinfoapp.request.BaseAppApiRequest;
 import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.exception.ApiErrorCode;
@@ -9,7 +10,6 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.web.form.BaseRestApiRequest;
 import jp.co.ha.db.entity.Account;
 
 /**
@@ -32,7 +32,7 @@ public abstract class CommonService {
      * @throws BaseException
      *     基底例外
      */
-    protected void checkApiUse(BaseRestApiRequest request) throws BaseException {
+    protected void checkApiUse(BaseAppApiRequest request) throws BaseException {
 
         // アカウント情報取得
         Account account = accountSearchService.findById(request.getSeqUserId())

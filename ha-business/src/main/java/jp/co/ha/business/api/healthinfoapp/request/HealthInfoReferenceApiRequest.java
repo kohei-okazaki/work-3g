@@ -7,15 +7,14 @@ import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
-import jp.co.ha.common.web.form.BaseRestApiRequest;
 
 /**
- * 健康情報照会リクエストクラス
+ * 健康情報照会APIリクエストクラス
  *
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoReferenceApiRequest extends BaseRestApiRequest
+public class HealthInfoReferenceApiRequest extends BaseAppApiRequest
         implements BaseApiRequest {
 
     /** 健康情報ID */

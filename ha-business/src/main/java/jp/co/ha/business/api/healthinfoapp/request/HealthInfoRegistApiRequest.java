@@ -13,15 +13,14 @@ import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
-import jp.co.ha.common.web.form.BaseRestApiRequest;
 
 /**
- * 健康情報登録リクエストクラス
+ * 健康情報登録リクエストAPIクラス
  *
  * @version 1.0.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthInfoRegistApiRequest extends BaseRestApiRequest
+public class HealthInfoRegistApiRequest extends BaseAppApiRequest
         implements BaseApiRequest {
 
     /** 身長 */

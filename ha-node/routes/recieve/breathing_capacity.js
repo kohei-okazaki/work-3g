@@ -23,7 +23,7 @@ var PERCENTAGE = 100;
  *            レスポンス情報
  * @param next
  */
-router.get('/', function (req, res, next) {
+router.get('/', function(req, res, next) {
 
   console.log(prettyjson.render(req.query) + "\n");
 
@@ -42,7 +42,7 @@ router.get('/', function (req, res, next) {
       "minus_def": 0.101
     };
   } else {
-    throw new Error('gender is invalid. gender=' + req.body['gender']);
+    throw new Error('gender is invalid. gender=' + req.query['gender']);
   }
 
   // 年齢部分の計算

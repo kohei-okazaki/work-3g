@@ -3,10 +3,10 @@ package jp.co.ha.common.web.api;
 import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.Map.Entry;
 import java.util.StringJoiner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -15,10 +15,15 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.RequestEntity.BodyBuilder;
 import org.springframework.http.RequestEntity.HeadersBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
@@ -62,10 +67,6 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BaseApi.class);
 
-    /** {@linkplain RestTemplate} */
-    @Autowired
-    private RestTemplate restTemplate;
-
     /**
      * APIを呼び出す
      *
@@ -88,6 +89,8 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             LOG.info("====> API名=" + getApiName() + ",HttpMethod=" + getHttpMethod()
                     + ",URL=" + uri.toString());
             LOG.infoBean(request);
+
+            RestTemplate restTemplate = getRestTemplate();
 
             if (HttpMethod.GET == getHttpMethod()) {
                 // GET通信の場合
@@ -112,6 +115,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
 
                 BodyBuilder requestBuilder = RequestEntity.post(uri)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
                         .acceptCharset(apiConnectInfo.getCharset());
 
                 // ヘッダーの設定
@@ -143,12 +147,12 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             bindErrorInfo(response, errorMessage);
             LOG.error(errorMessage, e);
         } catch (Exception e) {
-            errorMessage = "URLが不正です.";
+            errorMessage = "通信エラーです.";
             bindErrorInfo(response, errorMessage);
             LOG.error(errorMessage, e);
         } finally {
             LOG.infoBean(response);
-            LOG.info("<==== API名=" + getApiName() + " HttpStatusCode=" + code);
+            LOG.info("<==== API名=" + getApiName() + ", HttpStatusCode=" + code);
             if (code != null) {
                 apiConnectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
             }
@@ -199,11 +203,37 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @throws URISyntaxException
      *     URLとして正しくない場合
      */
-    private static URI getUri(ApiConnectInfo apiConnectInfo, BaseApiRequest request)
+    private URI getUri(ApiConnectInfo apiConnectInfo, BaseApiRequest request)
             throws URISyntaxException {
         String baseUrl = apiConnectInfo.getUrlSupplier().get();
-        baseUrl += toQueryParameter(request);
+        if (HttpMethod.GET == getHttpMethod()) {
+            baseUrl += toQueryParameter(request);
+        }
         return new URI(baseUrl);
+    }
+
+    /**
+     * RestTemplateを返す
+     * 
+     * @return RestTemplate
+     */
+    private RestTemplate getRestTemplate() {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.setInterceptors(
+                Collections.singletonList(new LoggingInterceptor()));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
+                false);
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(
+                objectMapper);
+        restTemplate.getMessageConverters().add(0, converter);
+
+        return restTemplate;
     }
 
     /**
