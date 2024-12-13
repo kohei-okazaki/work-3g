@@ -11,14 +11,13 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.web.form.BaseApiResponse;
-import jp.co.ha.common.web.form.BaseRestApiResponse;
 
 /**
- * 健康情報登録レスポンスクラス
+ * 健康情報登録APIレスポンスクラス
  *
  * @version 1.0.0
  */
-public class HealthInfoRegistApiResponse extends BaseRestApiResponse
+public class HealthInfoRegistApiResponse extends BaseAppApiResponse
         implements BaseApiResponse {
 
     /** 健康情報 */

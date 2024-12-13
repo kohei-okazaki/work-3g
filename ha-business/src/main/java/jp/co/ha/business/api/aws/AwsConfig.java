@@ -147,4 +147,8 @@ public class AwsConfig {
         this.sesStubFlag = Boolean.valueOf(sesStubFlag);
     }
 
+    public void setSesStubFlag(boolean sesStubFlag) {
+        this.sesStubFlag = sesStubFlag;
+    }
+
 }

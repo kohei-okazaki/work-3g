@@ -15,6 +15,7 @@ public enum ApiNameType implements BaseEnum {
     HEALTH_INFO_REFERENCE("健康管理API:健康情報照会API"),
     /** ヘルスチェックAPI */
     HEALTH_CHECK("健康管理API:ヘルスチェックAPI"),
+
     /** 計算API:ヘルスチェックAPI */
     NODE_API_HEALTH_CHECK("Node API:ヘルスチェックAPI"),
     /** 計算API:トークン発行API */
@@ -25,8 +26,12 @@ public enum ApiNameType implements BaseEnum {
     NODE_API_CALORIE("Node API:カロリー計算API"),
     /** 計算API: 肺活量計算API */
     NODE_API_BREATHING_CAPACITY("Node API:肺活量計算API"),
+
     /** 管理者用API:ヘルスチェックAPI */
-    ROOT_API_HEALTH_CHECK("Root API:ヘルスチェックAPI");
+    ROOT_API_HEALTH_CHECK("Root API:ヘルスチェックAPI"),
+
+    /** TrackAPI:健康情報連携API */
+    TRACK_API_MIGRATE_HEALTH_INFO("Track API:健康情報連携API");
 
     /** 値 */
     private String value;

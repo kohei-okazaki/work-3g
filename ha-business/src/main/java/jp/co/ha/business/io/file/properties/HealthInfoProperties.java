@@ -22,6 +22,8 @@ public class HealthInfoProperties {
     private String healthInfoApiUrl;
     /** 管理者用APIの基底URL */
     private String rootApiUrl;
+    /** 健康情報蓄積APIの基底URL */
+    private String trackApiUrl;
     /** 月次健康情報集計バッチCSV格納パス */
     private String monthlySummaryBatchFilePath;
 
@@ -137,6 +139,24 @@ public class HealthInfoProperties {
      */
     public void setRootApiUrl(String rootApiUrl) {
         this.rootApiUrl = rootApiUrl;
+    }
+
+    /**
+     * trackApiUrlを返す
+     * 
+     * @return trackApiUrl
+     */
+    public String getTrackApiUrl() {
+        return trackApiUrl;
+    }
+
+    /**
+     * trackApiUrlを設定する
+     * 
+     * @param trackApiUrl
+     */
+    public void setTrackApiUrl(String trackApiUrl) {
+        this.trackApiUrl = trackApiUrl;
     }
 
     /**

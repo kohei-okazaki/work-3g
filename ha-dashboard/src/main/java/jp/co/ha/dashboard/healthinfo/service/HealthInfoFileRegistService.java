@@ -2,9 +2,9 @@ package jp.co.ha.dashboard.healthinfo.service;
 
 import java.util.List;
 
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 
 /**
  * 健康情報ファイル入力画面サービスインターフェース
