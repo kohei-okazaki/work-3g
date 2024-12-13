@@ -130,22 +130,6 @@ public class HealthInfoMigrateBatch implements Tasklet {
         for (Entry<Long, List<HealthInfo>> entry : toMap(healthInfoList).entrySet()) {
             requestList.add(toRequest(entry.getKey(), entry.getValue()));
         }
-        // HealthInfoMigrateApiRequest request = new
-        // HealthInfoMigrateApiRequest();
-        // request.setSeqUserId(100L);
-        // HealthInfoMigrateApiRequest.HealthInfo healthInfo = new
-        // HealthInfoMigrateApiRequest.HealthInfo();
-        // healthInfo.setSeqHealthInfoId(new BigDecimal("99999"));
-        // healthInfo.setHeight(new BigDecimal("170.01"));
-        // healthInfo.setWeight(new BigDecimal("65.53"));
-        // healthInfo.setBmi(new BigDecimal("10.05"));
-        // healthInfo.setStandardWeight(new BigDecimal("60.09"));
-        // healthInfo.setCreatedAt(LocalDateTime.of(2000, 1, 5, 12, 50, 39));
-        // list.add(healthInfo);
-        // list.add(healthInfo);
-        // list.add(healthInfo);
-        // list.add(healthInfo);
-        // request.setHealthInfoList(list);
 
         for (HealthInfoMigrateApiRequest request : requestList) {
             // API通信情報を登録
