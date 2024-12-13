@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.healthinfoapp.HealthInfoRegistApi;
 import jp.co.ha.business.api.track.HealthInfoMigrateApi;
 import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.business.api.track.response.HealthInfoMigrateApiResponse;
@@ -66,7 +65,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
     /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain HealthInfoRegistApi} */
+    /** {@linkplain HealthInfoMigrateApi} */
     @Autowired
     private HealthInfoMigrateApi api;
 
@@ -74,6 +73,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
             throws Exception {
 
+        LOG.debug("targetDate=" + targetDate);
         targetDate = StringUtil.isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                         DateFormatType.YYYYMMDD_NOSEP)
@@ -81,7 +81,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
         LOG.debug("targetDate=" + targetDate);
 
         // 健康情報リスト
-        List<HealthInfo> healthInfoList = getHealthInfoList(targetDate);
+        List<HealthInfo> healthInfoList = getHealthInfoList();
 
         if (CollectionUtil.exists(healthInfoList)) {
             sendHealthInfoMirgateApi(healthInfoList);
@@ -93,11 +93,9 @@ public class HealthInfoMigrateBatch implements Tasklet {
     /**
      * 処理対象日の健康情報リストを返す
      *
-     * @param targetDate
-     *     処理対象日
      * @return 健康情報リスト
      */
-    private List<HealthInfo> getHealthInfoList(String targetDate) {
+    private List<HealthInfo> getHealthInfoList() {
 
         int year = Integer.parseInt(targetDate.substring(0, 4));
         int month = Integer.parseInt(targetDate.substring(4, 6));
@@ -107,8 +105,8 @@ public class HealthInfoMigrateBatch implements Tasklet {
         LOG.debug("from=" + from + ", to=" + to);
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
                 .orderBy("SEQ_USER_ID", SortType.ASC)
+                .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
                 .build();
 
         return searchService.findBySeqUserIdBetweenHealthInfoRegDate(null, from, to,
