@@ -11,6 +11,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import jp.co.ha.business.config.BusinessConfig;
+import jp.co.ha.common.config.CommonConfig;
+import jp.co.ha.db.config.DbConfig;
+
 /**
  * APIアプリケーションの設定クラス
  * 
@@ -20,10 +24,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackages = {
         "jp.co.ha.api.*.controller"
 })
+// commonプロジェクトなどのbean定義を読込
 @Import({
-        jp.co.ha.common.config.CommonConfig.class,
-        jp.co.ha.db.config.DbConfig.class,
-        jp.co.ha.business.config.BusinessConfig.class
+        CommonConfig.class,
+        DbConfig.class,
+        BusinessConfig.class
 })
 public class ApiConfig implements WebMvcConfigurer {
 

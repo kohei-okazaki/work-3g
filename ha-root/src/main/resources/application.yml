@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: ha-root
   main:
     allow-bean-definition-overriding: true
   messages:
@@ -8,10 +10,8 @@ spring:
   output:
     ansi:
       enabled: always
-  profiles:
-    # localを読み込む
-    default: local
-    active: local
   web: 
     resources:
       add-mappings: false
+  thymeleaf:
+    check-template-location: false

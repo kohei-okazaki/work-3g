@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @version 1.0.0
  */
 @SpringBootTest
-public class RootApplicationTests {
+public class ApplicationTests {
 
     /**
      * テスト

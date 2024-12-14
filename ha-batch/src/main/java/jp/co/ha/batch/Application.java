@@ -3,7 +3,6 @@ package jp.co.ha.batch;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
 
 /**
  * Batchアプリケーション起動クラス
@@ -12,12 +11,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 @SpringBootApplication
 @ComponentScan({ "jp.co.ha.batch" })
-// commonプロジェクトなどのbean定義を読込
-@ImportResource(value = {
-        "classpath:common-context.xml",
-        "classpath:db-context.xml",
-        "classpath:business-context.xml" })
-public class BatchApplication {
+public class Application {
 
     /**
      * メイン処理
@@ -26,7 +20,7 @@ public class BatchApplication {
      *     VM引数
      */
     public static void main(String[] args) {
-        SpringApplication.run(BatchApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

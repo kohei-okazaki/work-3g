@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @version 1.0.0
  */
 @SpringBootTest
-public class BatchApplicationTests {
+public class ApplicationTests {
 
     /**
      * Contextの読み取り

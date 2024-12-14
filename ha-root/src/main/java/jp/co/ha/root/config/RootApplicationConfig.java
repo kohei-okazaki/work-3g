@@ -1,7 +1,11 @@
 package jp.co.ha.root.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Import;
+
+import jp.co.ha.business.config.BusinessConfig;
+import jp.co.ha.common.config.CommonConfig;
+import jp.co.ha.db.config.DbConfig;
 
 /**
  * RootAPIアプリケーションの設定クラス
@@ -10,10 +14,11 @@ import org.springframework.context.annotation.ImportResource;
  */
 @Configuration
 // commonプロジェクトなどのbean定義を読込
-@ImportResource(value = {
-        "classpath:common-context.xml",
-        "classpath:db-context.xml",
-        "classpath:business-context.xml" })
+@Import({
+        CommonConfig.class,
+        DbConfig.class,
+        BusinessConfig.class
+})
 public class RootApplicationConfig {
 
 }

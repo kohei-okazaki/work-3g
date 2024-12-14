@@ -7,3 +7,5 @@ spring:
     basename: messages
     fallback-to-system-locale: false
     locale: ja
+  thymeleaf:
+    check-template-location: false

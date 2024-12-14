@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
         "jp.co.ha.root.base.*",
         "jp.co.ha.root.contents.*.controller",
         "jp.co.ha.root.contents.*.component" })
-public class RootApplication {
+public class Application {
 
     /**
      * メイン処理
@@ -24,7 +24,7 @@ public class RootApplication {
      *     VM引数
      */
     public static void main(String[] args) {
-        SpringApplication.run(RootApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

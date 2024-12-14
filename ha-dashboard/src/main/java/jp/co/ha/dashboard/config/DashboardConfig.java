@@ -16,7 +16,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import jp.co.ha.business.config.BusinessConfig;
 import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
+import jp.co.ha.common.config.CommonConfig;
+import jp.co.ha.db.config.DbConfig;
 
 /**
  * ダッシュボードアプリケーションの設定クラス
@@ -29,10 +32,11 @@ import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
         "jp.co.ha.dashboard.*.service.impl",
         "jp.co.ha.dashboard.exception"
 })
+// commonプロジェクトなどのbean定義を読込
 @Import({
-        jp.co.ha.common.config.CommonConfig.class,
-        jp.co.ha.db.config.DbConfig.class,
-        jp.co.ha.business.config.BusinessConfig.class
+        CommonConfig.class,
+        DbConfig.class,
+        BusinessConfig.class
 })
 public class DashboardConfig implements WebMvcConfigurer {
 
