@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>アカウント回復用メールアドレス入力画面</title>
+<link>
+</head>
+<body>
+
+  <div class="px-4">
+    <div class="container border col-7 shadow">
+
+      <!--/* アカウント回復メール送信前ここから */-->
+      <form id="accountRecoveryMailAddressInputForm" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${accountRecoveryMailAddressInputForm}" th:if="${isInputMailAddress == true}">
+        <h2 class="menuTitle">アカウント回復用メールアドレス入力</h2>
+        <br>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
+        <div class="alert alert-info" role="alert">
+          <p>パスワードを再設定するメールを送信するため</p>
+          <p>アプリに登録済のご自身のメールアドレスを入力してください</p>
+        </div>
+
+        <!--/* メールアドレスここから */-->
+        <div class="form-group">
+          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
+          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
+          <div id="suggest"></div>
+        </div><!-- /.form-group -->
+        <!--/* メールアドレスここまで */-->
+
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success w-25" value="メール送信" />
+        <!--/* ボタン部ここまで */-->
+        <br><br>
+      </form><!-- /#accountRecoveryMailAddressInputForm -->
+      <!--/* アカウント回復メール送信前ここまで */-->
+
+      <!--/* アカウント回復メール送信後ここから */-->
+      <div th:if="${isSendMailAddress == true}">
+        <h2 class="menuTitle">アカウント回復用メール送信完了</h2>
+        <div class="alert alert-info" role="alert">
+          <p>アカウント回復用メールを以下の件名で送信しました。</p>
+          <b th:text="${'パスワード再設定' + #dates.format(#dates.createNow(), 'yyyyMMdd')}"></b>
+          <p>メール内のURLをクリックし、画面の指示に従って下さい。</p>
+        </div>
+      </div>
+      <!--/* アカウント回復メール送信後ここまで */-->
+
+    </div><!-- /.container border col-7 -->
+  </div>
+  <script th:src="@{/static/js/lib/mailcheck.min.js}"></script>
+  <script>
+    $(function() {
+        const domains = [
+            "gmail.com",
+            "yahoo.co.jp",
+            "ezweb.ne.jp",
+            "au.com",
+            "docomo.ne.jp",
+            "i.softbank.jp",
+            "softbank.ne.jp",
+            "outlook.com",
+            "outlook.jp"
+          ];
+        $("#mailAddress").on("blur", function() {
+            $(this).mailcheck({
+              domains: domains,
+              suggested: function(element, suggestion) {
+                $("#suggest").text(suggestion.full);
+                $("#suggest").on("click", function() {
+                  $("#mailAddress").val(suggestion.full);
+                  $(this).hide();
+                });
+              }
+            });
+          });
+    });
+    </script>
+</body>
+</html>

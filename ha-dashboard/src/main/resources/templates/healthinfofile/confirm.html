@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>健康情報一括登録確認画面</title>
+<link>
+</head>
+<body>
+
+  <div class="px-4">
+    <div th:if="${errorMessage} != null">
+      <br><br>
+      <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+    </div>
+
+    <div class="container border col-8 shadow">
+      <h2 class="menuTitle">健康情報一括登録確認画面</h2>
+
+      <form th:action="@{/healthinfofile/complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+        <table class="table table-hover table-striped">
+          <tr>
+            <td colspan="3" th:text="'登録件数 ' + ${count}"></td>
+          </tr>
+          <tr>
+            <th>行数</th>
+            <th th:text="#{height}"></th>
+            <th th:text="#{weight}"></th>
+          </tr>
+          <tr th:each="model, status : ${modelList}">
+            <td th:text="${status.count}">
+            <td th:text="${model.height}">
+            <td th:text="${model.weight}">
+          </tr>
+        </table><!-- /.table table-hover table-striped -->
+
+        <br>
+
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success" value="確 定" />
+        <input type="button" class="btn btn-secondary" value="戻 る" onclick="history.back()" />
+        <!--/* ボタン部ここまで */-->
+
+      </form>
+      <br>
+    </div><!-- /.container border col-8 -->
+  </div>
+
+</body>
+</html>
