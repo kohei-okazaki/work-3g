@@ -24,32 +24,30 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body,
             ClientHttpRequestExecution execution) throws IOException {
-        try {
-            // リクエストの内容をログに出力
-            LOG.debug("Request URI: " + request.getURI());
-            LOG.debug("Request Method: " + request.getMethod());
-            LOG.debug("Request Headers: " + request.getHeaders());
-            LOG.debug("Request Body: " + new String(body, StandardCharsets.UTF_8));
 
-            // レスポンスを取得
-            ClientHttpResponse response = execution.execute(request, body);
+        // リクエストの内容をログに出力
+        LOG.debug("Request URI: " + request.getURI());
+        LOG.debug("Request Method: " + request.getMethod());
+        LOG.debug("Request Headers: " + request.getHeaders());
+        LOG.debug("Request Body: " + new String(body, StandardCharsets.UTF_8));
 
-            // レスポンスの内容をログに出力
-            LOG.debug("Response Status Code: " + response.getStatusCode());
-            LOG.debug("Response Headers: " + response.getHeaders());
+        // レスポンスを取得
+        ClientHttpResponse response = execution.execute(request, body);
 
-            // ここでResponseBodyを取得するとBaseApi側でresponseが取れなくなるため、以下のレスポンスBody取得処理はコメントアウト
-            // InputStreamReader inputStreamReader = new InputStreamReader(
-            // response.getBody(), StandardCharsets.UTF_8);
-            // BufferedReader br = new BufferedReader(inputStreamReader);
-            // String responseBody =
-            // br.lines().collect(Collectors.joining("\n"));
-            // LOG.debug("Response Body: " + responseBody);
+        // レスポンスの内容をログに出力
+        LOG.debug("Response Status Code: " + response.getStatusCode());
+        LOG.debug("Response Headers: " + response.getHeaders());
 
-            return response;
-        } catch (Exception e) {
-            throw new RuntimeException("Error logging request/response", e);
-        }
+        // ここでResponseBodyを取得するとBaseApi側でresponseが取れなくなるため、以下のレスポンスBody取得処理はコメントアウト
+        // InputStreamReader inputStreamReader = new InputStreamReader(
+        // response.getBody(), StandardCharsets.UTF_8);
+        // BufferedReader br = new BufferedReader(inputStreamReader);
+        // String responseBody =
+        // br.lines().collect(Collectors.joining("\n"));
+        // LOG.debug("Response Body: " + responseBody);
+
+        return response;
+
     }
 
 }

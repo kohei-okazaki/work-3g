@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>お知らせ画面</title>
+<link>
+</head>
+<body>
+
+  <div class="px-4">
+    <div class="container border col-10 shadow">
+      <h2 class="menuTitle">お知らせ一覧画面</h2>
+
+      <div>
+        <table class="table table-hover table-striped">
+          <tbody class="list">
+             <tr th:each="news : ${newsList}">
+               <td class="card card-body bg-light">
+                 <div>
+                   <!-- リリース情報 -->
+                   <span class="badge badge-primary" th:if="${news.tag.color == 'blue'}" th:text="${news.tag.name}"></span>
+                   <!-- バグ情報 -->
+                   <span class="badge badge-danger" th:if="${news.tag.color == 'red'}" th:text="${news.tag.name}"></span>
+                   <!-- 停止情報 -->
+                   <span class="badge badge-warning" th:if="${news.tag.color == 'yellow'}" th:text="${news.tag.name}"></span>
+                 </div>
+                 <a data-toggle="collapse" th:href="${'#newsId' + news.seqNewsInfoId}" role="button" aria-expanded="false" th:aria-controls="${'newsId' + news.seqNewsInfoId}" th:text="${news.date + '　' + news.title}"></a>
+                 <div class="collapse" th:id="${'newsId' + news.seqNewsInfoId}">
+                   <div class="card card-body">
+                     <div th:utext="${news.detail}"></div>
+                   </div><!-- /.card card-body -->
+                 </div><!-- /.collapse /#newsId[i] -->
+               </td><!-- /.card card-body bg-light -->
+            </tr>
+          </tbody><!-- /.list -->
+        </table><!-- /.table -->
+        <div>
+          <p th:text="${paging.totalRecordNum} + '件中 ' + ${paging.fromRecordNum} + '～' + ${paging.toRecordNum} + '件表示中'" />
+          <a class="link" th:classappend="!${paging.canGoFirst} ? 'disabled'" th:href="${paging.firstHref}">&lt;&lt;</a>
+          <a class="link" th:classappend="!${paging.canGoPrevious} ? 'disabled'" th:href="${paging.previousHref}">&lt;</a>
+          <a class="link" th:classappend="!${paging.canGoNext} ? 'disabled'" th:href="${paging.nextHref}">&gt;</a>
+          <a class="link" th:classappend="!${paging.canGoLast} ? 'disabled'" th:href="${paging.lastHref}">&gt;&gt;</a>
+        </div>
+      </div>
+      <br>
+    </div><!-- /.container border col-10 -->
+  </div>
+
+</body>
+</html>

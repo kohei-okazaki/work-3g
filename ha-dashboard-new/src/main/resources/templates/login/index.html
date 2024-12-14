@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>ログイン画面</title>
+<link>
+</head>
+<body>
+
+  <div class="px-4">
+    <div class="container border col-7 shadow">
+      <form id="loginForm" th:action="@{top}" method="post" th:object="${loginForm}">
+        <br>
+        <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <div class="alert alert-info" role="alert" th:if="${isLogout}">ログアウトしました</div>
+        <div class="alert alert-info" role="alert" th:if="${isPasswordReset}">パスワードが更新されました<br>新しいパスワードでログインして下さい</div>
+
+        <div class="form-group">
+          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" placeholder="メールアドレス" required />
+        </div><!-- /.form-group -->
+        <br>
+        <div class="form-group">
+          <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" placeholder="パスワード" required />
+        </div><!-- /.form-group -->
+
+        <br>
+        <input id="submit" class="btn btn-success w-25" type="submit" value="ログイン" />
+        <input id="account-regist" class="btn btn-info w-25" type="button" value="アカウント作成" />
+        <br><br>
+      </form><!-- /#loginForm -->
+    </div><!-- /.container border col-7 -->
+    <br>
+    <div class="container col-7">
+      <a th:href="@{/accountrecovery/index}">パスワードを忘れた場合</a>
+    </div><!-- /.container col-7 -->
+  </div>
+
+  <script>
+    $(function() {
+      // validate処理
+      jQuery("#loginForm").validationEngine({
+        promptPosition : "topLeft:0"
+      });
+
+      // 進捗バーの処理
+      var mprogress = new Mprogress();
+      $("#mailAddress").on("change", function() {
+        var value = 0;
+        if ($("#mailAddress").val() !== "") {
+          value += 1;
+        }
+        if ($("#password").val() !== "") {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+      $("#password").on("change", function() {
+        var value = 0;
+        if ($("#mailAddress").val() !== "") {
+          value += 1;
+        }
+        if ($("#password").val() !== "") {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+
+      $("#account-regist").on("click", function() {
+        // アカウント登録処理
+        var form = $("<form></form>", {
+          method: "get",
+          action: "../accountregist/input"
+        });
+        form.appendTo(document.body);
+        form.submit();
+      });
+
+    });
+
+  </script>
+</body>
+</html>

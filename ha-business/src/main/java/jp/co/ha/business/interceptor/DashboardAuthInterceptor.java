@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +15,8 @@ import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.StringUtil;
@@ -28,8 +31,12 @@ import jp.co.ha.common.web.interceptor.BaseWebInterceptor;
  *
  * @version 1.0.0
  */
+@Component
 public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(DashboardAuthInterceptor.class);
     /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
@@ -49,6 +56,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isLoginAuthCheck(handler)) {
             // ログイン情報のチェック対象の場合
+            LOG.warn("url=" + request.getRequestURI());
             sessionComponent.getValue(request.getSession(), "seqUserId", Long.class)
                     .orElseThrow(() -> new SystemException(
                             DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));

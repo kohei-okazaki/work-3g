@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>肺活量計算画面</title>
+<link>
+</head>
+<body>
+
+  <div class="px-4">
+    <div class="container border col-8 shadow">
+      <h2 class="menuTitle">肺活量計算</h2>
+
+      <form id="breathingCapacityForm" th:action="@{/breathingcapacity/index}" method="post" th:object="${breathingCapacityForm}">
+        <br>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+
+        <div class="form-group">
+          <label class="control-label" for="age" th:text="#{age}"></label><span class="badge badge-danger">必須</span>
+          <div class="input-group">
+            <input type="text" class="validate[required,custom[number]] form-control" size="3" th:field="*{age}" placeholder="20" aria-describedby="basic-addon1" />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon1">歳</span>
+            </div><!-- /.input-group-append -->
+          </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
+
+        <div class="form-group">
+          <label class="control-label" for="gender" th:text="#{gender}"></label><span class="badge badge-danger">必須</span>
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{gender}" id="male" value="0" checked="checked">
+            <label for="male" class="custom-control-label" th:text="#{male}"></label>
+          </div><!-- /.custom-control custom-radio -->
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{gender}" id="female" value="1">
+            <label for="female" class="custom-control-label" th:text="#{female}"></label>
+          </div><!-- /.custom-control custom-radio -->
+        </div><!-- /.form-group -->
+
+        <div class="form-group">
+          <label class="control-label" for="height" th:text="#{height}"></label><span class="badge badge-danger">必須</span>
+          <div class="input-group">
+            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">cm</span>
+            </div><!-- /.input-group-append -->
+          </div><!-- /.input-group -->
+        </div><!-- /.form-group -->
+
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success w-25" value="計 算" />
+        <input type="reset" class="btn btn-secondary w-25" value="リセット" />
+        <!--/* ボタン部ここまで */-->
+      </form>
+
+      <br>
+
+      <!--/* 結果部ここから */-->
+      <div th:if="${calcResult} != null">
+        <div th:replace="~{./breathingcapacity/result.html}"></div>
+        <br><br>
+      </div>
+      <!--/* 結果部ここまで */-->
+    </div><!-- /.container border col-8 -->
+  </div>
+
+  <script>
+    $(function() {
+
+      jQuery("#breathingCapacityForm").validationEngine({
+        promptPosition : "topLeft:0"
+      });
+
+      var mprogress = new Mprogress();
+      $("#age").on("change", function() {
+        var value = 0;
+        if ($('#age').val() !== '') {
+          value += 1;
+        }
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+
+      $("#height").on("change", function() {
+        var value = 0;
+        if ($('#age').val() !== '') {
+          value += 1;
+        }
+        if ($('#height').val() !== '') {
+          value += 1;
+        }
+        var progressValue = value / 2;
+        mprogress.set(progressValue);
+      });
+
+    });
+
+  </script>
+</body>
+</html>

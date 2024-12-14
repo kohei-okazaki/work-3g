@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>パスワード再設定画面</title>
+<link>
+</head>
+<body>
+
+  <div class="px-4">
+    <form th:action="@{'~/accountrecovery/complete/' + ${account.seqUserId}}" method="post" th:object="${accountRecoveryForm}">
+      <input type="hidden" th:field="*{mailAddress}" />
+      <input type="hidden" th:field="*{password}" />
+      <div class="container border col-7 shadow">
+        <h2 class="menuTitle">パスワード再設定確認</h2>
+        <table class="table">
+          <tr>
+            <th scope="row" th:text="#{mailAddress}"></th >
+            <td th:text="*{mailAddress}"></td>
+          </tr>
+          <tr>
+            <th scope="row" th:text="#{password}"></th >
+            <td>****</td>
+          </tr>
+        </table><!-- ./table -->
+
+        <!--/* ボタン部ここから */-->
+        <input type="submit" class="btn btn-success w-25" value="確 定" />
+        <input type="button" class="btn btn-secondary w-25" value="戻 る" onclick="history.back()" />
+        <!--/* ボタン部ここまで */-->
+        <br><br>
+      </div><!-- /.container border col-7 -->
+    </form>
+    <br><br>
+  </div>
+
+</body>
+</html>
