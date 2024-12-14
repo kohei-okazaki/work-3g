@@ -1,7 +1,9 @@
 package jp.co.ha.api.healthinfo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +47,8 @@ public class HealthInfoRegistApiController extends
      *     基底例外
      */
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoRegistApiResponse doPost(@PathVariable("seq_user_id") Long seqUserId,
+    public ResponseEntity<HealthInfoRegistApiResponse> doPost(
+            @PathVariable("seq_user_id") Long seqUserId,
             @RequestHeader(ApiConnectInfo.X_API_KEY) String apiKey,
             @RequestBody HealthInfoRegistApiRequest request) throws BaseException {
 
@@ -58,7 +61,7 @@ public class HealthInfoRegistApiController extends
 
         this.accept(request, response);
 
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override

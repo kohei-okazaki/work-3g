@@ -1,0 +1,111 @@
+<!-- 健康情報照会APIレスポンスモーダルの設定 -->
+<div class="modal fade" id="apiReferenceResponseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">健康情報照会APIレスポンスについて</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button><!-- /.close -->
+      </div><!-- /.modal-header -->
+      <div class="modal-body">
+        <table class="table table-hover table-striped">
+          <tr>
+            <th colspan="3">レスポンスボディ</th>
+            <th>詳細</th>
+          </tr>
+          <tr>
+            <td colspan="2">result</td>
+            <td>結果区分</td>
+            <td>API実施時の結果
+              <li>正常終了の場合:0</li>
+              <li>異常終了の場合:1</li>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">error</td>
+            <td>エラー情報</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>code</td>
+            <td>エラーコード</td>
+            <td>エラーが発生した場合、エラーコード</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>detail</td>
+            <td>エラー詳細</td>
+            <td>エラーが発生した場合、詳細情報</td>
+          </tr>
+          <tr>
+            <td colspan="2">account</td>
+            <td>アカウント情報</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>seqUserId</td>
+            <td>ユーザID</td>
+            <td>健康情報を登録したユーザID</td>
+          </tr>
+          <tr>
+            <td colspan="2">healthinfo</td>
+            <td>健康情報</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>seqHealthInfoId</td>
+            <td>健康情報ID</td>
+            <td>健康情報を登録したときに採番される健康情報を一意に識別するID</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>height</td>
+            <td>身長</td>
+            <td>健康情報IDに紐づく健康情報に登録された身長</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>weight</td>
+            <td>体重</td>
+            <td>健康情報IDに紐づく健康情報に登録された体重</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>bmi</td>
+            <td>BMI</td>
+            <td>健康情報IDに紐づく健康情報に登録されたBMI</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>standardWeight</td>
+            <td>標準体重</td>
+            <td>健康情報IDに紐づく健康情報に登録された標準体重</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>status</td>
+            <td>健康情報ステータス</td>
+            <td>前回登録された健康情報と比較した値
+              <li>減少した場合:10</li>
+              <li>変化なしの場合:20</li>
+              <li>増加した場合:30</li>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>regDate</td>
+            <td>健康情報作成日時</td>
+            <td>健康情報が登録された日時</td>
+          </tr>
+        </table><!-- /.table table-hover table-striped -->
+      </div><!-- /.modal-body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

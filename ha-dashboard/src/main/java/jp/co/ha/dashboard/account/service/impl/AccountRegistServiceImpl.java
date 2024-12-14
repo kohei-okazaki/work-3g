@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.account.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -50,14 +51,15 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     private PlatformTransactionManager transactionManager;
     /** {@linkplain DefaultTransactionDefinition} */
     @Autowired
-    private DefaultTransactionDefinition defaultTransactionDefinition;
+    @Qualifier("transactionDefinition")
+    private DefaultTransactionDefinition transactionDefinition;
 
     @Override
     public void regist(AccountDto dto) throws BaseException {
 
         // トランザクション開始
         TransactionStatus status = transactionManager
-                .getTransaction(defaultTransactionDefinition);
+                .getTransaction(transactionDefinition);
 
         try {
 

@@ -13,7 +13,6 @@
   <description>health app for root</description>
 
   <properties>
-    <org.springframework.boot-version>3.3.3</org.springframework.boot-version>
     <org.jwt-version>0.9.1</org.jwt-version>
   </properties>
 
@@ -41,55 +40,11 @@
       <version>1.0.0</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-      <version>${org.springframework.boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <version>${org.springframework.boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-      <version>${org.springframework.boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <version>${org.springframework.boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <version>${org.springframework.boot-version}</version>
-      <scope>runtime</scope>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-      <version>${org.springframework.boot-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <version>${org.springframework.boot-version}</version>
-      <scope>test</scope>
-    </dependency>
     <!-- JWTのライブラリ -->
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt</artifactId>
       <version>${org.jwt-version}</version>
-    </dependency>
-    <!-- SpringSecurity -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>javax.xml.bind</groupId>
@@ -106,7 +61,7 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${org.springframework.boot-version}</version>
         <configuration>
-          <mainClass>jp.co.ha.root.RootApplication</mainClass>
+          <mainClass>jp.co.ha.root.Application</mainClass>
         </configuration>
         <executions>
           <execution>

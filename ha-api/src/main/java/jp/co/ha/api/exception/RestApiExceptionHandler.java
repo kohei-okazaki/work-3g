@@ -62,7 +62,7 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
             e.printStackTrace(pw);
             slackApiComponent.sendFile(ContentType.DASHBOARD,
                     sw.toString().getBytes(Charset.UTF_8.getValue()), "エラー情報",
-                    "stack-trace", getLogErrorMessage(e));
+                    "stack-trace", super.getLogErrorMessage(e));
         } catch (BaseException | IOException be) {
             LOG.error("slack通知に失敗しました", be);
         }

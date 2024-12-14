@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ha-api
+  security:
+    enabled: false
+  messages:
+    basename: messages
+    fallback-to-system-locale: false
+    locale: ja
+  thymeleaf:
+    check-template-location: false

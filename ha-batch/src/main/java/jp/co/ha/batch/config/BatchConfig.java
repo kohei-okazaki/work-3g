@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistBatch;
@@ -18,6 +19,9 @@ import jp.co.ha.batch.healthcheck.HealthCheckBatch;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryBatch;
 import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator;
+import jp.co.ha.business.config.BusinessConfig;
+import jp.co.ha.common.config.CommonConfig;
+import jp.co.ha.db.config.DbConfig;
 
 /**
  * Batch処理の定義クラス
@@ -25,6 +29,12 @@ import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator
  * @version 1.0.0
  */
 @Configuration
+// commonプロジェクトなどのbean定義を読込
+@Import({
+        CommonConfig.class,
+        DbConfig.class,
+        BusinessConfig.class
+})
 public class BatchConfig {
 
     /** {@linkplain HealthCheckBatch} */
