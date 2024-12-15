@@ -95,7 +95,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
         BeanUtil.copy(dto, account);
         account.setPassword(accountComponent.getHashPassword(dto.getPassword(),
                 dto.getMailAddress()));
-        account.setDeleteFlag(CommonFlag.FALSE.getValue());
+        account.setDeleteFlag(CommonFlag.FALSE.get());
         account.setPasswordExpire(DateTimeUtil
                 .addMonth(DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate()), 6));
         account.setApiKey(encoder.encode(dto.getPassword(), DateTimeUtil.toString(
@@ -113,10 +113,10 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     private HealthInfoFileSetting toHealthInfoFileSetting(Account account) {
         HealthInfoFileSetting entity = new HealthInfoFileSetting();
         entity.setSeqUserId(account.getSeqUserId());
-        entity.setEnclosureCharFlag(CommonFlag.FALSE.getValue());
-        entity.setHeaderFlag(CommonFlag.FALSE.getValue());
-        entity.setFooterFlag(CommonFlag.FALSE.getValue());
-        entity.setMaskFlag(CommonFlag.FALSE.getValue());
+        entity.setEnclosureCharFlag(CommonFlag.FALSE.get());
+        entity.setHeaderFlag(CommonFlag.FALSE.get());
+        entity.setFooterFlag(CommonFlag.FALSE.get());
+        entity.setMaskFlag(CommonFlag.FALSE.get());
         return entity;
     }
 

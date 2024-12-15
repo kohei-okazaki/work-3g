@@ -82,8 +82,10 @@ public class ApiCommunicationDataComponent {
     public void update(ApiCommunicationData apiCommunicationData,
             ApiConnectInfo connectInfo, BaseNodeApiResponse response) {
 
-        apiCommunicationData
-                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        if (connectInfo.getHttpStatus() != null) {
+            apiCommunicationData
+                    .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        }
         apiCommunicationData.setResult(response.getResult().getValue());
         apiCommunicationData.setDetail(response.getDetail());
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
@@ -132,8 +134,10 @@ public class ApiCommunicationDataComponent {
     public void update(ApiCommunicationData apiCommunicationData,
             ApiConnectInfo connectInfo, BaseRootApiResponse response) {
 
-        apiCommunicationData
-                .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        if (connectInfo.getHttpStatus() != null) {
+            apiCommunicationData
+                    .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
+        }
         apiCommunicationData.setResult(response.getResult().getValue());
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
 

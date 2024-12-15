@@ -23,7 +23,7 @@ public class CompositeAccount extends CompositeAccountKey {
     @Mask
     private String password;
     /** 削除フラグ */
-    private String deleteFlag;
+    private Boolean deleteFlag;
     /** 備考 */
     private String remarks;
     /** メールアドレス */
@@ -40,13 +40,13 @@ public class CompositeAccount extends CompositeAccountKey {
     /** 更新日時 */
     private LocalDateTime updateDate;
     /** ヘッダ利用有無フラグ */
-    private String headerFlag;
+    private Boolean headerFlag;
     /** フッタ利用有無フラグ */
-    private String footerFlag;
+    private Boolean footerFlag;
     /** マスク利用有無フラグ */
-    private String maskFlag;
+    private Boolean maskFlag;
     /** 囲み文字利用有無フラグ */
-    private String enclosureCharFlag;
+    private Boolean enclosureCharFlag;
 
     /**
      * passwordを返す
@@ -69,20 +69,19 @@ public class CompositeAccount extends CompositeAccountKey {
 
     /**
      * deleteFlagを返す
-     *
+     * 
      * @return deleteFlag
      */
-    public String getDeleteFlag() {
+    public Boolean isDeleteFlag() {
         return deleteFlag;
     }
 
     /**
      * deleteFlagを設定する
-     *
+     * 
      * @param deleteFlag
-     *     削除フラグ
      */
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
@@ -202,77 +201,73 @@ public class CompositeAccount extends CompositeAccountKey {
 
     /**
      * headerFlagを返す
-     *
+     * 
      * @return headerFlag
      */
-    public String getHeaderFlag() {
+    public Boolean isHeaderFlag() {
         return headerFlag;
     }
 
     /**
      * headerFlagを設定する
-     *
+     * 
      * @param headerFlag
-     *     ヘッダー利用有無
      */
-    public void setHeaderFlag(String headerFlag) {
+    public void setHeaderFlag(Boolean headerFlag) {
         this.headerFlag = headerFlag;
     }
 
     /**
      * footerFlagを返す
-     *
+     * 
      * @return footerFlag
      */
-    public String getFooterFlag() {
+    public Boolean isFooterFlag() {
         return footerFlag;
     }
 
     /**
      * footerFlagを設定する
-     *
+     * 
      * @param footerFlag
-     *     フッター利用有無
      */
-    public void setFooterFlag(String footerFlag) {
+    public void setFooterFlag(Boolean footerFlag) {
         this.footerFlag = footerFlag;
     }
 
     /**
      * maskFlagを返す
-     *
+     * 
      * @return maskFlag
      */
-    public String getMaskFlag() {
+    public Boolean isMaskFlag() {
         return maskFlag;
     }
 
     /**
      * maskFlagを設定する
-     *
+     * 
      * @param maskFlag
-     *     マスク利用有無
      */
-    public void setMaskFlag(String maskFlag) {
+    public void setMaskFlag(Boolean maskFlag) {
         this.maskFlag = maskFlag;
     }
 
     /**
      * enclosureCharFlagを返す
-     *
+     * 
      * @return enclosureCharFlag
      */
-    public String getEnclosureCharFlag() {
+    public Boolean isEnclosureCharFlag() {
         return enclosureCharFlag;
     }
 
     /**
      * enclosureCharFlagを設定する
-     *
+     * 
      * @param enclosureCharFlag
-     *     囲み文字利用有無
      */
-    public void setEnclosureCharFlag(String enclosureCharFlag) {
+    public void setEnclosureCharFlag(Boolean enclosureCharFlag) {
         this.enclosureCharFlag = enclosureCharFlag;
     }
 

@@ -56,7 +56,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
 
         if (isLoginAuthCheck(handler)) {
             // ログイン情報のチェック対象の場合
-            LOG.warn("url=" + request.getRequestURI());
+            // LOG.warn("url=" + request.getRequestURI());
             sessionComponent.getValue(request.getSession(), "seqUserId", Long.class)
                     .orElseThrow(() -> new SystemException(
                             DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));

@@ -29,7 +29,6 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -150,11 +149,11 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         String path = null;
 
         return new CsvConfigBuilder(fileName, path)
-                .hasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()))
-                .hasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()))
+                .hasHeader(entity.getHeaderFlag())
+                .hasFooter(entity.getFooterFlag())
                 .csvFileChar(CsvFileChar.DOBBLE_QUOTE)
-                .hasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()))
-                .useMask(CommonFlag.TRUE.is(entity.getMaskFlag()))
+                .hasEnclosure(entity.getEnclosureCharFlag())
+                .useMask(entity.getMaskFlag())
                 .build();
     }
 

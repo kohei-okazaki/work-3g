@@ -5,7 +5,7 @@
     <id column="SEQ_ROOT_LOGIN_INFO_ID" jdbcType="BIGINT" property="seqRootLoginInfoId" />
     <result column="SEQ_ROOT_USER_ROLE_MNG_MT_ID" jdbcType="BIGINT" property="seqRootUserRoleMngMtId" />
     <result column="SEQ_ROOT_USER_ROLE_DETAIL_MT_ID" jdbcType="BIGINT" property="seqRootUserRoleDetailMtId" />
-    <result column="DELETE_FLAG" jdbcType="VARCHAR" property="deleteFlag" />
+    <result column="DELETE_FLAG" jdbcType="BIT" property="deleteFlag" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
     <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
