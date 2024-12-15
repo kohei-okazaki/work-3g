@@ -13,7 +13,7 @@
     "is-svg": "^4.3.2",
     "nuxt": "^2.15.8",
     "postcss": "^8.4.20",
-    "vue": "^2.7.16",
+    "vue": "^3.0.0",
     "vue-mermaid": "0.0.14",
     "vue-simple-context-menu": "^3.4.2",
     "vuetify": "^2.6.0",
