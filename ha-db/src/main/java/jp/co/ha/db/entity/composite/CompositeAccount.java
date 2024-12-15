@@ -23,7 +23,7 @@ public class CompositeAccount extends CompositeAccountKey {
     @Mask
     private String password;
     /** 削除フラグ */
-    private String deleteFlag;
+    private Boolean deleteFlag;
     /** 備考 */
     private String remarks;
     /** メールアドレス */
@@ -69,20 +69,19 @@ public class CompositeAccount extends CompositeAccountKey {
 
     /**
      * deleteFlagを返す
-     *
+     * 
      * @return deleteFlag
      */
-    public String getDeleteFlag() {
+    public Boolean isDeleteFlag() {
         return deleteFlag;
     }
 
     /**
      * deleteFlagを設定する
-     *
+     * 
      * @param deleteFlag
-     *     削除フラグ
      */
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 

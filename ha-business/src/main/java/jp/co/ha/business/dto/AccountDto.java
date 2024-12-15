@@ -16,7 +16,7 @@ public class AccountDto {
     /** 備考 */
     private String remarks;
     /** 削除フラグ */
-    private String deleteFlag;
+    private Boolean deleteFlag;
     /** メールアドレス */
     private String mailAddress;
     /** メールパスワード */
@@ -112,20 +112,19 @@ public class AccountDto {
 
     /**
      * deleteFlagを返す
-     *
+     * 
      * @return deleteFlag
      */
-    public String getDeleteFlag() {
+    public Boolean isDeleteFlag() {
         return deleteFlag;
     }
 
     /**
      * deleteFlagを設定する
-     *
+     * 
      * @param deleteFlag
-     *     削除フラグ
      */
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 

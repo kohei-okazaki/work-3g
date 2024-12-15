@@ -22,6 +22,7 @@ import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -117,6 +118,7 @@ public class AccountSettingController
 
         AccountDto dto = new AccountDto();
         BeanUtil.copy(accountSettingForm, dto);
+        dto.setDeleteFlag(CommonFlag.of(accountSettingForm.getDeleteFlag()).get());
 
         // form情報から更新処理を行う
         accountSettingService.execute(dto);

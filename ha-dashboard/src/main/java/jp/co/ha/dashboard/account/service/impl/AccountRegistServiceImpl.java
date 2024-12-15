@@ -95,7 +95,7 @@ public class AccountRegistServiceImpl implements AccountRegistService {
         BeanUtil.copy(dto, account);
         account.setPassword(accountComponent.getHashPassword(dto.getPassword(),
                 dto.getMailAddress()));
-        account.setDeleteFlag(CommonFlag.FALSE.getValue());
+        account.setDeleteFlag(CommonFlag.FALSE.get());
         account.setPasswordExpire(DateTimeUtil
                 .addMonth(DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate()), 6));
         account.setApiKey(encoder.encode(dto.getPassword(), DateTimeUtil.toString(
