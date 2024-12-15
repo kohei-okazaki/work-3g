@@ -14,6 +14,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ErrorInfo;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.ApiException;
@@ -24,9 +27,6 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Charset;
-import jp.co.ha.common.web.form.BaseRestApiResponse;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ErrorInfo;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 
 /***
  * REST APIの例外ハンドラークラス<br>
@@ -54,7 +54,7 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
      */
     @ResponseStatus(code = HttpStatus.OK)
     @ExceptionHandler(Exception.class)
-    public BaseRestApiResponse handleException(Exception e) {
+    public BaseAppApiResponse handleException(Exception e) {
 
         // Slackに通知
         try (StringWriter sw = new StringWriter();
@@ -62,7 +62,7 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
             e.printStackTrace(pw);
             slackApiComponent.sendFile(ContentType.DASHBOARD,
                     sw.toString().getBytes(Charset.UTF_8.getValue()), "エラー情報",
-                    "stack-trace", getLogErrorMessage(e));
+                    "stack-trace", super.getLogErrorMessage(e));
         } catch (BaseException | IOException be) {
             LOG.error("slack通知に失敗しました", be);
         }
@@ -70,7 +70,7 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
         BaseAppError appError = getAppError(e);
 
         // 例外からレスポンスを作成
-        BaseRestApiResponse response = new BaseRestApiResponse();
+        BaseAppApiResponse response = new BaseAppApiResponse();
         response.setResultType(ResultType.FAILURE);
         ErrorInfo error = new ErrorInfo();
         error.setOuterErrorCode(appError.getErrorCode().getOuterErrorCode());

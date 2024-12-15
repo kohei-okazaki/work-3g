@@ -6,7 +6,6 @@ import java.util.Optional;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.Account;
 
@@ -107,7 +106,7 @@ public class LoginCheck {
      *     アカウント情報
      */
     private void checkDeleteAccount(LoginCheckResult result, Account account) {
-        if (CommonFlag.TRUE.is(account.getDeleteFlag())) {
+        if (account.getDeleteFlag()) {
             result.addError();
             result.setErrorCode(DashboardErrorCode.ACCOUNT_DELETE);
         }

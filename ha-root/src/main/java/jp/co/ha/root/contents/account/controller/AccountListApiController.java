@@ -16,6 +16,7 @@ import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
@@ -63,6 +64,8 @@ public class AccountListApiController
                 .map(e -> {
                     AccountListApiResponse.AccountResponse response = new AccountListApiResponse.AccountResponse();
                     BeanUtil.copy(e, response);
+                    response.setDeleteFlag(e.isDeleteFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
                     return response;
                 }).collect(Collectors.toList());
 

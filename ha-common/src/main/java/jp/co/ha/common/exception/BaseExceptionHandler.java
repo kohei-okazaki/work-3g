@@ -80,7 +80,7 @@ public abstract class BaseExceptionHandler {
      * @return ログエラーメッセージ
      */
     protected String getLogErrorMessage(Exception e) {
-        BaseAppError error = getAppError(e);
+        BaseAppError error = this.getAppError(e);
         return new StringBuilder()
                 .append("(")
                 .append(error.getErrorCode().getOuterErrorCode())

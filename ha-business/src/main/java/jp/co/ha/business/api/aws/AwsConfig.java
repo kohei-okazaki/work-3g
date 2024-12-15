@@ -147,4 +147,14 @@ public class AwsConfig {
         this.sesStubFlag = Boolean.valueOf(sesStubFlag);
     }
 
+    /**
+     * sesStubFlagを設定する
+     *
+     * @param sesStubFlag
+     *     SESスタブフラグ(true:メールを送信しない、false:送信する)
+     */
+    public void setSesStubFlag(boolean sesStubFlag) {
+        this.sesStubFlag = sesStubFlag;
+    }
+
 }

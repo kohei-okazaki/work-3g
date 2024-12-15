@@ -10,13 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistBatch;
+import jp.co.ha.batch.healthInfoMigrateBatch.HealthInfoMigrateBatch;
 import jp.co.ha.batch.healthcheck.HealthCheckBatch;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryBatch;
 import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator;
+import jp.co.ha.business.config.BusinessConfig;
+import jp.co.ha.common.config.CommonConfig;
+import jp.co.ha.db.config.DbConfig;
 
 /**
  * Batch処理の定義クラス
@@ -24,6 +29,12 @@ import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator
  * @version 1.0.0
  */
 @Configuration
+// commonプロジェクトなどのbean定義を読込
+@Import({
+        CommonConfig.class,
+        DbConfig.class,
+        BusinessConfig.class
+})
 public class BatchConfig {
 
     /** {@linkplain HealthCheckBatch} */
@@ -35,6 +46,9 @@ public class BatchConfig {
     /** {@linkplain HealthInfoFileRegistBatch} */
     @Autowired
     private MonthlyHealthInfoSummaryBatch monthlyHealthInfoSummaryBatch;
+    /** {@linkplain HealthInfoMigrateBatch} */
+    @Autowired
+    private HealthInfoMigrateBatch healthInfoMigrateBatch;
 
     /**
      * ヘルスチェックバッチのJOB<br>
@@ -161,6 +175,46 @@ public class BatchConfig {
             PlatformTransactionManager transactionManager) {
         return new StepBuilder("monthlyHealthInfoSummaryBatchStep", jobRepository)
                 .tasklet(monthlyHealthInfoSummaryBatch, transactionManager)
+                .build();
+    }
+
+    /**
+     * 健康情報連携バッチのJOB
+     * 
+     * @param jobRepository
+     *     {@linkplain JobRepository}
+     * @param healthInfoMigrateBatchStep
+     *     ヘルスチェックバッチのSTEP
+     * @param listener
+     *     {@linkplain BatchJobListener}
+     * @return 健康情報連携バッチJOB
+     */
+    @Bean("healthInfoMigrateBatchJob")
+    Job healthInfoMigrateBatchJob(JobRepository jobRepository,
+            @Qualifier("healthInfoMigrateBatchStep") Step healthInfoMigrateBatchStep,
+            BatchJobListener listener) {
+        return new JobBuilder("healthInfoMigrateBatchJob", jobRepository)
+                .incrementer(new RunIdIncrementer())
+                .listener(listener)
+                .flow(healthInfoMigrateBatchStep)
+                .end()
+                .build();
+    }
+
+    /**
+     * 健康情報連携バッチのSTEP<br>
+     * 
+     * @param jobRepository
+     *     {@linkplain JobRepository}
+     * @param transactionManager
+     *     {@linkplain PlatformTransactionManager}
+     * @return 健康情報連携バッチのSTEP
+     */
+    @Bean("healthInfoMigrateBatchStep")
+    Step healthInfoMigrateBatchStep(JobRepository jobRepository,
+            PlatformTransactionManager transactionManager) {
+        return new StepBuilder("healthInfoMigrateBatchStep", jobRepository)
+                .tasklet(healthInfoMigrateBatch, transactionManager)
                 .build();
     }
 

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -45,11 +46,9 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionComponent;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoServiceImpl;
@@ -275,9 +274,9 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                 .findById(seqUserId).get();
 
         return new ExcelConfigBuilder(null)
-                .hasHeader(CommonFlag.TRUE.is(fileSetting.getHeaderFlag()))
-                .hasFooter(CommonFlag.TRUE.is(fileSetting.getFooterFlag()))
-                .useMask(CommonFlag.TRUE.is(fileSetting.getMaskFlag()))
+                .hasHeader(fileSetting.getHeaderFlag())
+                .hasFooter(fileSetting.getHeaderFlag())
+                .useMask(fileSetting.getHeaderFlag())
                 .build();
     }
 

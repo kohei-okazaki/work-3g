@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+<configuration>
+
+  <!-- 設定ローカル環境用 -->
+  <springProfile name="local">
+    <property name="LOG_PATH" value="C:/app/logs/" />
+    <property name="LOG_LEVEL" value="DEBUG" />
+  </springProfile>
+
+  <!-- 設定EC2環境用 -->
+  <springProfile name="ec2">
+    <property name="LOG_PATH" value="/var/log/app/" />
+    <property name="LOG_LEVEL" value="INFO" />
+  </springProfile>
+
+  <!-- コンソール出力設定 -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.out</target>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %highlight(%-5level) %logger{10} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- ファイル出力 -->
+  <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}api-debug.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/api-debug-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>DEBUG</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}api-info.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/api-info-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}api-warn.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/api-warn-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>WARN</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}api-error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOG_PATH}%d{yyyyMM,aux}/api-error-%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%date{yyyy/MM/dd HH:mm:ss} [%thread] %X{id} %-5level %logger{10} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <!-- アプリログレベルと使用出力ルール -->
+  <logger name="jp.co.ha" level="${LOG_LEVEL}">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="DEBUG_FILE" />
+    <appender-ref ref="INFO_FILE" />
+    <appender-ref ref="WARN_FILE" />
+    <appender-ref ref="ERROR_FILE" />
+  </logger>
+
+  <logger name="org.springframework" level="INFO">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="DEBUG_FILE" />
+    <appender-ref ref="INFO_FILE" />
+    <appender-ref ref="WARN_FILE" />
+    <appender-ref ref="ERROR_FILE" />
+  </logger>
+
+</configuration>

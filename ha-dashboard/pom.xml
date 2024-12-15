@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>jp.co.ha</groupId>
-  <artifactId>dashboard</artifactId>
+  <artifactId>ha-dashboard</artifactId>
   <version>1.0.0</version>
   <name>ha-dashboard</name>
-  <packaging>war</packaging>
+  <description>health app for dashboard</description>
 
   <parent>
     <groupId>jp.co.ha</groupId>
@@ -38,12 +37,22 @@
   </dependencies>
 
   <build>
-    <finalName>dashboard-${project.version}</finalName>
+    <finalName>dashbaord-${project.version}</finalName>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.1</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${org.springframework.boot-version}</version>
+        <configuration>
+          <mainClass>jp.co.ha.dashboard.Application</mainClass>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

@@ -116,7 +116,7 @@ public class UserEntryApiController
                     hashEncoder.encode(request.getPassword(), ""));
             entity.setPasswordExpire(
                     DateTimeUtil.addMonth(DateTimeUtil.getSysDate().toLocalDate(), 6));
-            entity.setDeleteFlag("0");
+            entity.setDeleteFlag(false);
 
             createService.create(entity);
 

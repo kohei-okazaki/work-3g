@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import jp.co.ha.business.api.healthinfoapp.HealthInfoRegistApi;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
+import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
@@ -28,13 +29,11 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.common.web.form.BaseRestApiResponse.ResultType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
 import jp.co.ha.db.entity.Account;
@@ -150,11 +149,11 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         String path = null;
 
         return new CsvConfigBuilder(fileName, path)
-                .hasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()))
-                .hasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()))
+                .hasHeader(entity.getHeaderFlag())
+                .hasFooter(entity.getFooterFlag())
                 .csvFileChar(CsvFileChar.DOBBLE_QUOTE)
-                .hasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()))
-                .useMask(CommonFlag.TRUE.is(entity.getMaskFlag()))
+                .hasEnclosure(entity.getEnclosureCharFlag())
+                .useMask(entity.getMaskFlag())
                 .build();
     }
 

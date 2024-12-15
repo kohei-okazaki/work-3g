@@ -3,6 +3,7 @@ package jp.co.ha.dashboard.account.service.impl;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -54,6 +55,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
     private PlatformTransactionManager transactionManager;
     /** {@linkplain DefaultTransactionDefinition} */
     @Autowired
+    @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
     /** {@linkplain Sha256HashEncoder} */
     @Sha256

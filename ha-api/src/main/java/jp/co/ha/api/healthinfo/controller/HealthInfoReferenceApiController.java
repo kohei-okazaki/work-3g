@@ -1,20 +1,22 @@
 package jp.co.ha.api.healthinfo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.healthinfoapp.controller.BaseAppApiController;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoReferenceApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoReferenceApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
 import jp.co.ha.business.api.healthinfoapp.service.impl.HealthInfoReferenceServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.common.web.controller.BaseRestController;
 
 /**
  * 健康情報照会APIコントローラ
@@ -24,7 +26,7 @@ import jp.co.ha.common.web.controller.BaseRestController;
 @RestController
 @RequestMapping(value = "/api/{seq_user_id}/healthinfo/{seq_health_info_id}")
 public class HealthInfoReferenceApiController extends
-        BaseRestController<HealthInfoReferenceApiRequest, HealthInfoReferenceApiResponse> {
+        BaseAppApiController<HealthInfoReferenceApiRequest, HealthInfoReferenceApiResponse> {
 
     /** {@linkplain HealthInfoReferenceServiceImpl} */
     @Autowired
@@ -44,7 +46,7 @@ public class HealthInfoReferenceApiController extends
      *     基底例外
      */
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoReferenceApiResponse doGet(
+    public ResponseEntity<HealthInfoReferenceApiResponse> doGet(
             @PathVariable("seq_user_id") Long seqUserId,
             @PathVariable("seq_health_info_id") Long seqHealthInfoId,
             @RequestHeader(ApiConnectInfo.X_API_KEY) String apiKey) throws BaseException {
@@ -60,7 +62,7 @@ public class HealthInfoReferenceApiController extends
 
         this.accept(request, response);
 
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override

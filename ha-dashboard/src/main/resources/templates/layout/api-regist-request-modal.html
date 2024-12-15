@@ -1,0 +1,42 @@
+<!-- 健康情報登録APIリクエストモーダルの設定 -->
+<div class="modal fade" id="apiRegistRequestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">健康情報登録APIリクエストについて</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button><!-- /.close -->
+      </div><!-- /.modal-header -->
+      <div class="modal-body">
+        <table class="table table-hover table-striped">
+          <tr>
+            <th colspan="2">リクエストボディ</th>
+            <th>詳細</th>
+          </tr>
+          <tr>
+            <td>height</td>
+            <td>身長</td>
+            <td>ユーザの登録したい身長</td>
+          </tr>
+          <tr>
+            <td>weight</td>
+            <td>体重</td>
+            <td>ユーザの登録したい体重</td>
+          </tr>
+          <tr>
+            <td>testMode</td>
+            <td>テストモード</td>
+            <td>DB登録するかどうかの区分値
+              <li>0:DB登録を行う</li>
+              <li>1:DB登録を行わない</li>
+            </td>
+          </tr>
+        </table><!-- /.table table-hover table-striped -->
+      </div><!-- /.modal-body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
