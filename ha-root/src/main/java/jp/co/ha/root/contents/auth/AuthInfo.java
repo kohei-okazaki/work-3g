@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jp.co.ha.common.log.annotation.Ignore;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 
@@ -52,7 +51,7 @@ public class AuthInfo extends RootLoginInfo implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return CommonFlag.FALSE == CommonFlag.of(super.getDeleteFlag());
+        return super.getDeleteFlag();
     }
 
 }

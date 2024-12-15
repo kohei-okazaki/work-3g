@@ -95,3 +95,4 @@ sw.*
 #eclipse
 .settings
 
+/src

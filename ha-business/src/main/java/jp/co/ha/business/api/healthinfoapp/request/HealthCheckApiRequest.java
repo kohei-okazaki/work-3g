@@ -1,13 +1,12 @@
 package jp.co.ha.business.api.healthinfoapp.request;
 
 import jp.co.ha.common.web.form.BaseApiRequest;
-import jp.co.ha.common.web.form.BaseRestApiRequest;
 
 /**
- * ヘルスチェックAPIのリクエスト情報クラス
+ * ヘルスチェックAPIのリクエストクラス
  *
  * @version 1.0.0
  */
-public class HealthCheckApiRequest extends BaseRestApiRequest implements BaseApiRequest {
+public class HealthCheckApiRequest extends BaseAppApiRequest implements BaseApiRequest {
 
 }

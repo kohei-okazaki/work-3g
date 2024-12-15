@@ -1,0 +1,49 @@
+<div id="resultList">
+
+  <table class="table table-hover table-striped">
+    <tr>
+      <th></th>
+      <th class="sort" data-sort="height" th:text="#{height}"></th>
+      <th class="sort" data-sort="weight" th:text="#{weight}"></th>
+      <th class="sort" data-sort="bmi" th:text="#{bmi}"></th>
+      <th class="sort" data-sort="standardWeight" th:text="#{standardWeight}"></th>
+      <th class="sort" data-sort="healthInfoRegDate" th:text="#{healthInfoRegDate}"></th>
+    </tr>
+    <tbody class="list">
+      <tr th:each="result : ${resultList}">
+        <td><a class="link" th:href="@{'detail?seqHealthInfoId=' + ${result.seqHealthInfoId}}">詳細</a></td>
+        <td class="height" th:text="${result.height}"></td>
+        <td class="weight" th:text="${result.weight}"></td>
+        <td class="bmi" th:text="${result.bmi}"></td>
+        <td class="standardWeight" th:text="${result.standardWeight}"></td>
+        <td class="healthInfoRegDate"  th:text="${result.healthInfoRegDate}"></td>
+      </tr>
+    </tbody><!-- /.list -->
+  </table><!-- /.table table-hover table-striped -->
+  <div>
+    <p th:text="${paging.totalRecordNum} + '件中 ' + ${paging.fromRecordNum} + '～' + ${paging.toRecordNum} + '件表示中'" />
+    <a class="link" th:classappend="!${paging.canGoFirst} ? 'disabled'" th:href="${paging.firstHref}">&lt;&lt;</a>
+    <a class="link" th:classappend="!${paging.canGoPrevious} ? 'disabled'" th:href="${paging.previousHref}">&lt;</a>
+    <a class="link" th:classappend="!${paging.canGoNext} ? 'disabled'" th:href="${paging.nextHref}">&gt;</a>
+    <a class="link" th:classappend="!${paging.canGoLast} ? 'disabled'" th:href="${paging.lastHref}">&gt;&gt;</a>
+  </div>
+
+  <br>
+  <div class="container col-4">
+    <table>
+      <tr>
+        <td>
+          <input id="excel-download" class="menuicon" type="image" th:src="@{/static/image/icon_xlsx.png}" />
+        </td>
+        <td>
+          <input id="csv-download" class="menuicon" type="image" th:src="@{/static/image/icon_csv.png}" />
+        </td>
+      </tr>
+    </table>
+  </div><!-- /.container col-4 -->
+  <br>
+  <div class="border shadow">
+    <canvas id="chart" width="250" height="150"></canvas>
+  </div><!-- /.border -->
+  <br>
+</div><!-- /#resultList -->

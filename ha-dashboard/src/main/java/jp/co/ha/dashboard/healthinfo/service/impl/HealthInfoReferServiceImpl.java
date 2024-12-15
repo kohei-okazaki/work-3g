@@ -154,11 +154,11 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 + entity.getSeqUserId();
 
         return new CsvConfigBuilder(fileName, path)
-                .hasHeader(CommonFlag.TRUE.is(entity.getHeaderFlag()))
-                .hasFooter(CommonFlag.TRUE.is(entity.getFooterFlag()))
+                .hasHeader(entity.getHeaderFlag())
+                .hasFooter(entity.getFooterFlag())
                 .csvFileChar(CsvFileChar.DOBBLE_QUOTE)
-                .hasEnclosure(CommonFlag.TRUE.is(entity.getEnclosureCharFlag()))
-                .useMask(CommonFlag.TRUE.is(entity.getMaskFlag()))
+                .hasEnclosure(entity.getEnclosureCharFlag())
+                .useMask(entity.getMaskFlag())
                 .build();
     }
 

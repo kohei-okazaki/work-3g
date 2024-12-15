@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ha-dashboard
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+  security:
+    enabled: false
+  messages:
+    basename: messages
+    fallback-to-system-locale: false
+    locale: ja

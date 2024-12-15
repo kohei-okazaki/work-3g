@@ -31,7 +31,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     /** 管理者サイトユーザ権限詳細マスタID */
     private Long seqRootUserRoleDetailMtId;
     /** 削除フラグ */
-    private String deleteFlag;
+    private Boolean deleteFlag;
     /** パスワード */
     @Mask
     private String password;
@@ -88,20 +88,19 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
 
     /**
      * deleteFlagを返す
-     *
+     * 
      * @return deleteFlag
      */
-    public String getDeleteFlag() {
+    public boolean isDeleteFlag() {
         return deleteFlag;
     }
 
     /**
      * deleteFlagを設定する
-     *
+     * 
      * @param deleteFlag
-     *     削除フラグ
      */
-    public void setDeleteFlag(String deleteFlag) {
+    public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 

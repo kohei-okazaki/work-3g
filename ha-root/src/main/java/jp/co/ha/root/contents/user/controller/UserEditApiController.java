@@ -186,7 +186,7 @@ public class UserEditApiController
             entity.setPassword(hashEncoder.encode(request.getPassword(), ""));
         }
         if (request.isDeleteFlag()) {
-            entity.setDeleteFlag(CommonFlag.TRUE.getValue());
+            entity.setDeleteFlag(CommonFlag.TRUE.get());
         }
         rootLoginInfoUpdateService.update(entity);
     }

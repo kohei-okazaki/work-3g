@@ -4,17 +4,17 @@
   <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.composite.CompositeAccount">
     <id column="SEQ_USER_ID" jdbcType="BIGINT" property="seqUserId" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
-    <result column="DELETE_FLAG" jdbcType="VARCHAR" property="deleteFlag" />
+    <result column="DELETE_FLAG" jdbcType="BIT" property="deleteFlag" />
     <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
     <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
     <result column="API_KEY" jdbcType="VARCHAR" property="apiKey" />
     <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
     <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="MAIL_ADDRESS" jdbcType="VARCHAR" property="mailAddress" />
-    <result column="HEADER_FLAG" jdbcType="VARCHAR" property="headerFlag" />
-    <result column="FOOTER_FLAG" jdbcType="VARCHAR" property="footerFlag" />
-    <result column="MASK_FLAG" jdbcType="VARCHAR" property="maskFlag" />
-    <result column="ENCLOSURE_CHAR_FLAG" jdbcType="VARCHAR" property="enclosureCharFlag" />
+    <result column="HEADER_FLAG" jdbcType="BIT" property="headerFlag" />
+    <result column="FOOTER_FLAG" jdbcType="BIT" property="footerFlag" />
+    <result column="MASK_FLAG" jdbcType="BIT" property="maskFlag" />
+    <result column="ENCLOSURE_CHAR_FLAG" jdbcType="BIT" property="enclosureCharFlag" />
   </resultMap>
   <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.composite.CompositeAccountKey" resultMap="BaseResultMap">
     SELECT

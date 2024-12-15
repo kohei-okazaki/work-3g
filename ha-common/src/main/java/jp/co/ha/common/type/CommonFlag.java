@@ -8,9 +8,9 @@ package jp.co.ha.common.type;
 public enum CommonFlag implements BaseEnum {
 
     /** 真 */
-    TRUE("1"),
+    TRUE("1", true),
     /** 偽 */
-    FALSE("0");
+    FALSE("0", false);
 
     /**
      * コンストラクタ
@@ -18,16 +18,28 @@ public enum CommonFlag implements BaseEnum {
      * @param value
      *     値
      */
-    private CommonFlag(String value) {
+    private CommonFlag(String value, boolean bool) {
         this.value = value;
+        this.bool = bool;
     }
 
     /** 値 */
     private String value;
+    /** 真偽値 */
+    private boolean bool;
 
     @Override
     public String getValue() {
         return this.value;
+    }
+
+    /**
+     * boolを返す
+     * 
+     * @return bool
+     */
+    public boolean get() {
+        return bool;
     }
 
     /**

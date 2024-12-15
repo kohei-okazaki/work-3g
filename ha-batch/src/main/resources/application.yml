@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: ha-batch
   batch:
     jdbc:
       initialize-schema: never
