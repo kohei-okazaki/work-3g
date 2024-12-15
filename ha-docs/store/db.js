@@ -235,7 +235,7 @@ export const state = () => ({
         {
           logicalName: "フッターフラグ",
           physicalName: "FOOTER_FLAG",
-		  type: "BOOLEAN",
+          type: "BOOLEAN",
 		  size: "",
           primaryKey: false,
           sequence: false,
@@ -245,7 +245,7 @@ export const state = () => ({
         {
           logicalName: "マスクフラグ",
           physicalName: "MASK_FLAG",
-		  type: "BOOLEAN",
+          type: "BOOLEAN",
 		  size: "",
           primaryKey: false,
           sequence: false,
@@ -255,7 +255,7 @@ export const state = () => ({
         {
           logicalName: "囲い文字利用フラグ",
           physicalName: "ENCLOSURE_CHAR_FLAG",
-		  type: "BOOLEAN",
+          type: "BOOLEAN",
 		  size: "",
           primaryKey: false,
           sequence: false,
@@ -545,8 +545,8 @@ export const state = () => ({
         {
           logicalName: "削除フラグ",
           physicalName: "DELETE_FLAG",
-		  type: "BOOLEAN",
-		  size: "",
+          type: "BOOLEAN",
+          size: "",
           primaryKey: false,
           sequence: false,
           crypt: false,
