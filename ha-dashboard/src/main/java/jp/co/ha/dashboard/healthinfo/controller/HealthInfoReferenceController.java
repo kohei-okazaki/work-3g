@@ -319,9 +319,9 @@ public class HealthInfoReferenceController implements BaseWebController {
                 .findById(seqUserId).get();
 
         return new ExcelConfigBuilder(null)
-                .hasHeader(CommonFlag.TRUE.is(fileSetting.getHeaderFlag()))
-                .hasFooter(CommonFlag.TRUE.is(fileSetting.getFooterFlag()))
-                .useMask(CommonFlag.TRUE.is(fileSetting.getMaskFlag()))
+                .hasHeader(fileSetting.getHeaderFlag())
+                .hasFooter(fileSetting.getFooterFlag())
+                .useMask(fileSetting.getMaskFlag())
                 .build();
     }
 

@@ -113,10 +113,10 @@ public class AccountRegistServiceImpl implements AccountRegistService {
     private HealthInfoFileSetting toHealthInfoFileSetting(Account account) {
         HealthInfoFileSetting entity = new HealthInfoFileSetting();
         entity.setSeqUserId(account.getSeqUserId());
-        entity.setEnclosureCharFlag(CommonFlag.FALSE.getValue());
-        entity.setHeaderFlag(CommonFlag.FALSE.getValue());
-        entity.setFooterFlag(CommonFlag.FALSE.getValue());
-        entity.setMaskFlag(CommonFlag.FALSE.getValue());
+        entity.setEnclosureCharFlag(CommonFlag.FALSE.get());
+        entity.setHeaderFlag(CommonFlag.FALSE.get());
+        entity.setFooterFlag(CommonFlag.FALSE.get());
+        entity.setMaskFlag(CommonFlag.FALSE.get());
         return entity;
     }
 

@@ -76,6 +76,17 @@ public class AccountSettingController
             AccountSettingForm destForm = (AccountSettingForm) dest;
             destForm.setPasswordExpire(DateTimeUtil
                     .toString(srcAccount.getPasswordExpire(), DateFormatType.YYYYMMDD));
+            destForm.setDeleteFlag(srcAccount.isDeleteFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setHeaderFlag(srcAccount.isHeaderFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setFooterFlag(srcAccount.isFooterFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setMaskFlag(srcAccount.isMaskFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setEnclosureCharFlag(
+                    srcAccount.isEnclosureCharFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
         });
 
         return form;
@@ -119,6 +130,11 @@ public class AccountSettingController
         AccountDto dto = new AccountDto();
         BeanUtil.copy(accountSettingForm, dto);
         dto.setDeleteFlag(CommonFlag.of(accountSettingForm.getDeleteFlag()).get());
+        dto.setHeaderFlag(CommonFlag.of(accountSettingForm.getHeaderFlag()).get());
+        dto.setFooterFlag(CommonFlag.of(accountSettingForm.getFooterFlag()).get());
+        dto.setMaskFlag(CommonFlag.of(accountSettingForm.getMaskFlag()).get());
+        dto.setEnclosureCharFlag(
+                CommonFlag.of(accountSettingForm.getEnclosureCharFlag()).get());
 
         // form情報から更新処理を行う
         accountSettingService.execute(dto);

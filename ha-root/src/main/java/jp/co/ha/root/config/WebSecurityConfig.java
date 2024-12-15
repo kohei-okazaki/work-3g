@@ -44,6 +44,11 @@ public class WebSecurityConfig {
     @Autowired
     private ApplicationProperties applicationProperties;
 
+    /**
+     * @param http
+     * @return securityFilterChain
+     * @throws Exception
+     */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -72,12 +77,19 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    /**
+     * @param auth
+     * @throws Exception
+     */
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder);
     }
 
+    /**
+     * @return CorsConfigurationSource
+     */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
 

@@ -46,7 +46,6 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionComponent;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
@@ -275,9 +274,9 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                 .findById(seqUserId).get();
 
         return new ExcelConfigBuilder(null)
-                .hasHeader(CommonFlag.TRUE.is(fileSetting.getHeaderFlag()))
-                .hasFooter(CommonFlag.TRUE.is(fileSetting.getFooterFlag()))
-                .useMask(CommonFlag.TRUE.is(fileSetting.getMaskFlag()))
+                .hasHeader(fileSetting.getHeaderFlag())
+                .hasFooter(fileSetting.getHeaderFlag())
+                .useMask(fileSetting.getHeaderFlag())
                 .build();
     }
 
