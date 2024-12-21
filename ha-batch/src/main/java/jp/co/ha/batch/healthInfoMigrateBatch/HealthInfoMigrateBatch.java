@@ -134,7 +134,8 @@ public class HealthInfoMigrateBatch implements Tasklet {
         for (HealthInfoMigrateApiRequest request : requestList) {
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                    .create(api.getApiName(), null, transactionId);
+                    .create(api.getApiName(), transactionId, api.getHttpMethod(),
+                            api.getUri(apiConnectInfo, request));
 
             HealthInfoMigrateApiResponse response = api.callApi(request, apiConnectInfo);
 

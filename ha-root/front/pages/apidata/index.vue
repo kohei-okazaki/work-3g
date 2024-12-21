@@ -103,16 +103,20 @@ export default {
           value: "api_name",
         },
         {
-          text: "ユーザID",
-          value: "seq_user_id",
+          text: "HTTPメソッド",
+          value: "http_method",
+        },
+        {
+          text: "URL",
+          value: "url",
+        },
+        {
+          text: "Body",
+          value: "body",
         },
         {
           text: "HTTPステータス",
           value: "http_status",
-        },
-        {
-          text: "処理結果",
-          value: "result",
         },
         {
           text: "詳細",

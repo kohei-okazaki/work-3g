@@ -1,6 +1,9 @@
 package jp.co.ha.business.component;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
@@ -15,6 +18,7 @@ import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.db.crud.update.impl.ApiCommunicationDataUpdateServiceImpl;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
+import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
@@ -49,19 +53,56 @@ public class ApiCommunicationDataComponent {
      *
      * @param apiName
      *     API名
-     * @param seqUserId
-     *     ユーザID
      * @param transactionId
      *     トランザクションID
+     * @param method
+     *     HTTPメソッド
+     * @param url
+     *     リクエストURL
      * @return API通信情報
      */
-    public ApiCommunicationData create(String apiName, Long seqUserId,
-            Long transactionId) {
+    public ApiCommunicationData create(String apiName, Long transactionId,
+            HttpMethod method, URI url) {
 
         ApiCommunicationData entity = new ApiCommunicationData();
         entity.setTransactionId(transactionId);
         entity.setApiName(apiName);
-        entity.setSeqUserId(seqUserId);
+        entity.setHttpMethod(method.toString());
+        entity.setUrl(url.toString());
+        entity.setRequestDate(DateTimeUtil.getSysDate());
+
+        createService.create(entity);
+
+        return entity;
+    }
+
+    /**
+     * API通信情報を作成する
+     *
+     * @param apiName
+     *     API名
+     * @param seqUserId
+     *     ユーザID
+     * @param transactionId
+     *     トランザクションID
+     * @param method
+     *     HTTPメソッド
+     * @param url
+     *     リクエストURL
+     * @param request
+     *     リクエスト
+     * @return API通信情報
+     */
+    public ApiCommunicationData create(String apiName, Long seqUserId,
+            Long transactionId, HttpMethod method, URI url, BaseApiRequest request) {
+
+        ApiCommunicationData entity = new ApiCommunicationData();
+        entity.setTransactionId(transactionId);
+        entity.setApiName(apiName);
+        entity.setHttpMethod(method.toString());
+        entity.setUrl(url.toString());
+        // TODO JSON形式に変換
+        entity.setBody(request.toString());
         entity.setRequestDate(DateTimeUtil.getSysDate());
 
         createService.create(entity);
@@ -86,7 +127,6 @@ public class ApiCommunicationDataComponent {
             apiCommunicationData
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
-        apiCommunicationData.setResult(response.getResult().getValue());
         apiCommunicationData.setDetail(response.getDetail());
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
 
@@ -110,7 +150,6 @@ public class ApiCommunicationDataComponent {
             apiCommunicationData
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
-        apiCommunicationData.setResult(response.getResultType().getValue());
         String detail = null;
         if (response.getErrorInfo() != null) {
             detail = response.getErrorInfo().getDetail();
@@ -138,7 +177,6 @@ public class ApiCommunicationDataComponent {
             apiCommunicationData
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
-        apiCommunicationData.setResult(response.getResult().getValue());
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
 
         updateService.update(apiCommunicationData);
@@ -161,7 +199,6 @@ public class ApiCommunicationDataComponent {
             apiCommunicationData
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
-        apiCommunicationData.setResult(response.getResult().getValue());
         apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
 
         updateService.update(apiCommunicationData);
