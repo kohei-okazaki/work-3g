@@ -95,9 +95,10 @@ public class SlackApiComponent {
     public void sendFile(ContentType contentType, byte[] data, String fileName,
             String title, String initialComment) throws BaseException {
 
+        SlackSession session = null;
         try {
             Connection conn = getConnectionByContentType(contentType);
-            SlackSession session = SlackSessionFactory
+            session = SlackSessionFactory
                     .createWebSocketSlackSession(conn.getToken());
 
             session.connect();
@@ -108,9 +109,16 @@ public class SlackApiComponent {
                     initialComment);
             LOG.debug("送信終了");
 
-            session.disconnect();
         } catch (IOException e) {
             throw new BusinessException(e);
+        } finally {
+            if (session != null) {
+                try {
+                    session.disconnect();
+                } catch (IOException e) {
+                    throw new BusinessException(e);
+                }
+            }
         }
     }
 
