@@ -1,9 +1,5 @@
 package jp.co.ha.api.exception;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,7 +22,6 @@ import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.type.Charset;
 
 /***
  * REST APIの例外ハンドラークラス<br>
@@ -52,18 +47,14 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
      *     APIで発生した例外
      * @return クライアントへ返すレスポンス
      */
-    @ResponseStatus(code = HttpStatus.OK)
     @ExceptionHandler(Exception.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public BaseAppApiResponse handleException(Exception e) {
 
         // Slackに通知
-        try (StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);) {
-            e.printStackTrace(pw);
-            slackApiComponent.sendFile(ContentType.DASHBOARD,
-                    sw.toString().getBytes(Charset.UTF_8.getValue()), "エラー情報",
-                    "stack-trace", super.getLogErrorMessage(e));
-        } catch (BaseException | IOException be) {
+        try {
+            slackApiComponent.send(ContentType.API, super.getLogErrorMessage(e));
+        } catch (BaseException be) {
             LOG.error("slack通知に失敗しました", be);
         }
 
