@@ -51,7 +51,7 @@ public class AuthInfo extends RootLoginInfo implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return super.getDeleteFlag();
+        return !super.getDeleteFlag();
     }
 
 }

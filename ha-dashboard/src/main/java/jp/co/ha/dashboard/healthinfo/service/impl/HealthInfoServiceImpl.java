@@ -107,14 +107,16 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(registApi.getApiName(), seqUserId, transactionId);
 
         HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
         BeanUtil.copy(dto, request);
         request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
+
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
+                .create(registApi.getApiName(), transactionId, registApi.getHttpMethod(),
+                        registApi.getUri(apiConnectInfo, request));
 
         HealthInfoRegistApiResponse apiResponse = registApi.callApi(request,
                 apiConnectInfo);

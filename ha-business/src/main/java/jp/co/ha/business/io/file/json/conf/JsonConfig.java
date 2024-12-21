@@ -27,7 +27,7 @@ public class JsonConfig {
      * @return ObjectMapper
      */
     @Bean
-    public ObjectMapper jsonObjectMapper() {
+    ObjectMapper jsonObjectMapper() {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(getDeserializeModule());
         mapper.registerModule(getSerializeModule());
