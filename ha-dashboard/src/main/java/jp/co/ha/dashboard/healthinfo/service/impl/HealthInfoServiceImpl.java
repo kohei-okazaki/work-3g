@@ -116,7 +116,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(registApi.getApiName(), transactionId, registApi.getHttpMethod(),
-                        registApi.getUri(apiConnectInfo, request));
+                        registApi.getUri(apiConnectInfo, request), request);
 
         HealthInfoRegistApiResponse apiResponse = registApi.callApi(request,
                 apiConnectInfo);

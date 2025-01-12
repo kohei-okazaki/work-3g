@@ -60,7 +60,8 @@ public class BasicHealthInfoCalcApiComponent {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(basicHealthInfoCalcApi.getApiName(), transactionId,
                         basicHealthInfoCalcApi.getHttpMethod(),
-                        basicHealthInfoCalcApi.getUri(connectInfo, apiRequest));
+                        basicHealthInfoCalcApi.getUri(connectInfo, apiRequest),
+                        apiRequest);
 
         BasicHealthInfoCalcApiResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);

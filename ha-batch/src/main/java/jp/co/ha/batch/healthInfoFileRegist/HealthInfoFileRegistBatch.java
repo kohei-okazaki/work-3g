@@ -126,7 +126,8 @@ public class HealthInfoFileRegistBatch implements Tasklet {
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                     .create(api.getApiName(), request.getTransactionId(),
-                            api.getHttpMethod(), api.getUri(apiConnectInfo, request));
+                            api.getHttpMethod(), api.getUri(apiConnectInfo, request),
+                            request);
 
             HealthInfoRegistApiResponse response = api.callApi(request, apiConnectInfo);
             seqHealthInfoIdList.add(response.getHealthInfo().getSeqHealthInfoId());

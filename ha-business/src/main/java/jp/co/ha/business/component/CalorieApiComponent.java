@@ -95,7 +95,7 @@ public class CalorieApiComponent {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(calorieCalcApi.getApiName(), transactionId,
                         calorieCalcApi.getHttpMethod(),
-                        calorieCalcApi.getUri(connectInfo, request));
+                        calorieCalcApi.getUri(connectInfo, request), request);
 
         CalorieCalcApiResponse response = calorieCalcApi.callApi(request, connectInfo);
 
