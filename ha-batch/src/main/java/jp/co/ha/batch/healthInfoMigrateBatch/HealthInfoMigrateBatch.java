@@ -74,7 +74,6 @@ public class HealthInfoMigrateBatch implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
             throws Exception {
 
-        LOG.debug("targetDate=" + targetDate);
         targetDate = StringUtil.isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                         DateFormatType.YYYYMMDD_NOSEP)
@@ -118,6 +117,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
      * 健康情報連携APIを呼び出す
      * 
      * @param healthInfoList
+     *     健康情報リスト
      * @throws BaseException
      *     JSON変換に失敗した場合
      */
@@ -185,12 +185,12 @@ public class HealthInfoMigrateBatch implements Tasklet {
         HealthInfoMigrateApiRequest req = new HealthInfoMigrateApiRequest();
 
         req.setSeqUserId(seqUserId);
-        List<HealthInfoMigrateApiRequest.HealthInfo> list = new ArrayList<>();
-        healthInfoList.stream().map(e -> {
-            HealthInfoMigrateApiRequest.HealthInfo entity = new HealthInfoMigrateApiRequest.HealthInfo();
-            BeanUtil.copy(e, entity);
-            return entity;
-        }).collect(Collectors.toList());
+        List<HealthInfoMigrateApiRequest.HealthInfo> list = healthInfoList.stream()
+                .map(e -> {
+                    HealthInfoMigrateApiRequest.HealthInfo entity = new HealthInfoMigrateApiRequest.HealthInfo();
+                    BeanUtil.copy(e, entity);
+                    return entity;
+                }).collect(Collectors.toList());
         req.setHealthInfoList(list);
 
         return req;
