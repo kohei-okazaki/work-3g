@@ -104,7 +104,7 @@ public class HealthCheckBatch implements Tasklet {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(rootHealthCheckApi.getApiName(), transactionId,
                         rootHealthCheckApi.getHttpMethod(),
-                        rootHealthCheckApi.getUri(apiConnectInfo, req));
+                        rootHealthCheckApi.getUri(apiConnectInfo, req), req);
 
         jp.co.ha.business.api.root.response.HealthCheckApiResponse response = rootHealthCheckApi
                 .callApi(req, apiConnectInfo);
@@ -145,7 +145,7 @@ public class HealthCheckBatch implements Tasklet {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(nodeHealthCheckApi.getApiName(), transactionId,
                         nodeHealthCheckApi.getHttpMethod(),
-                        nodeHealthCheckApi.getUri(apiConnectInfo, req));
+                        nodeHealthCheckApi.getUri(apiConnectInfo, req), req);
 
         jp.co.ha.business.api.node.response.HealthCheckApiResponse response = nodeHealthCheckApi
                 .callApi(req, apiConnectInfo);
@@ -187,7 +187,7 @@ public class HealthCheckBatch implements Tasklet {
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
                 .create(healthCheckApi.getApiName(), transactionId,
                         healthCheckApi.getHttpMethod(),
-                        healthCheckApi.getUri(apiConnectInfo, req));
+                        healthCheckApi.getUri(apiConnectInfo, req), req);
 
         HealthCheckApiResponse response = healthCheckApi.callApi(req, apiConnectInfo);
 

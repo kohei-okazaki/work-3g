@@ -44,7 +44,7 @@ class HealthInfoAPIView(APIView):
                 "error_message": "Healthinfo migrate fail"
             }
             return Response(error_response, status=status.HTTP_400_BAD_REQUEST)
-        
+
         success_response = {
             "result": 0,
             "synced_at": localtime(synced_at).strftime("%Y/%m/%d %H:%M:%S")

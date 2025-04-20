@@ -36,7 +36,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Charset;
 
 /**
- * AWS-S3のComponent
+ * AWS-Simple Storage ServiceのComponent
  *
  * @version 1.0.0
  */
@@ -101,7 +101,7 @@ public class AwsS3Component {
      * @see #getS3ObjectByKey(String)
      */
     public InputStream getS3ObjectByKey(AwsS3Key key) throws BusinessException {
-        return this.getS3ObjectByKey(key.getValue());
+        return getS3ObjectByKey(key.getValue());
     }
 
     /**
@@ -163,7 +163,7 @@ public class AwsS3Component {
      * @see AwsS3Component#putFile(String, File)
      */
     public void putFile(AwsS3Key key, File file) throws BaseException {
-        this.putFile(key.getValue(), file);
+        putFile(key.getValue(), file);
     }
 
     /**
@@ -223,7 +223,7 @@ public class AwsS3Component {
      */
     public void putFileByInputStream(AwsS3Key key, long length, InputStream is)
             throws BaseException {
-        this.putFile(key.getValue(), length, is);
+        putFile(key.getValue(), length, is);
     }
 
     /**

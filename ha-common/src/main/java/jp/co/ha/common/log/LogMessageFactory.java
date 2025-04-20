@@ -105,8 +105,6 @@ public class LogMessageFactory {
             value = getter.invoke(bean);
         } catch (IllegalAccessException e) {
             LOG.error("フィールドに対して不正アクセスです フィールド：" + fieldName, e);
-        } catch (IllegalArgumentException e) {
-            LOG.error("不正な引数です" + fieldName, e);
         } catch (InvocationTargetException e) {
             LOG.error("項目が不正です" + fieldName, e);
         }

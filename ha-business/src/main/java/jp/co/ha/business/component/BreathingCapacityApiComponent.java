@@ -93,10 +93,10 @@ public class BreathingCapacityApiComponent {
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
         // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(breathingCapacityCalcApi.getApiName(), transactionId,
-                        breathingCapacityCalcApi.getHttpMethod(),
-                        breathingCapacityCalcApi.getUri(connectInfo, request));
+        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent.create(
+                breathingCapacityCalcApi.getApiName(), transactionId,
+                breathingCapacityCalcApi.getHttpMethod(),
+                breathingCapacityCalcApi.getUri(connectInfo, request), request);
 
         BreathingCapacityCalcApiResponse response = breathingCapacityCalcApi
                 .callApi(request, connectInfo);

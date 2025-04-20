@@ -17,9 +17,31 @@ import jp.co.ha.business.api.slack.SlackApiComponent.ContentTypeDeserializer;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SlackConnectionData {
 
+    /** Botのトークン */
+    @JsonProperty("token")
+    private String token;
     /** 接続情報リスト */
     @JsonProperty("connections")
     private List<Connection> connectionList;
+
+    /**
+     * tokenを返す
+     *
+     * @return token
+     */
+    public String getToken() {
+        return token;
+    }
+
+    /**
+     * tokenを設定する
+     *
+     * @param token
+     *     Botのトークン
+     */
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     /**
      * connectionListを返す
@@ -53,11 +75,11 @@ public class SlackConnectionData {
         @JsonProperty("content_type")
         private ContentType contentType;
         /** チャンネル名 */
-        @JsonProperty("name")
+        @JsonProperty("channel_name")
         private String channelName;
-        /** Botのトークン */
-        @JsonProperty("token")
-        private String token;
+        /** チャンネルID */
+        @JsonProperty("channel_id")
+        private String channelId;
 
         /**
          * contentTypeを返す
@@ -98,23 +120,23 @@ public class SlackConnectionData {
         }
 
         /**
-         * tokenを返す
-         *
-         * @return token
+         * channelIdを返す
+         * 
+         * @return channelId
          */
-        public String getToken() {
-            return token;
+        public String getChannelId() {
+            return channelId;
         }
 
         /**
-         * tokenを設定する
-         *
-         * @param token
-         *     Botのトークン
+         * channelIdを設定する
+         * 
+         * @param channelId
          */
-        public void setToken(String token) {
-            this.token = token;
+        public void setChannelId(String channelId) {
+            this.channelId = channelId;
         }
+
     }
 
 }

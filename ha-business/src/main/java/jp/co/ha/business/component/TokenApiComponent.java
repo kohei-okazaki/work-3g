@@ -57,7 +57,8 @@ public class TokenApiComponent {
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiDataComponent
                 .create(tokenApi.getApiName(), transactionId,
-                        tokenApi.getHttpMethod(), tokenApi.getUri(connectInfo, request));
+                        tokenApi.getHttpMethod(), tokenApi.getUri(connectInfo, request),
+                        request);
 
         TokenApiResponse response = tokenApi.callApi(request, connectInfo);
 

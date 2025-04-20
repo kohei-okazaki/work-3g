@@ -16,6 +16,8 @@ import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.business.db.crud.read.impl.ApiCommunicationDataSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
 import jp.co.ha.business.db.crud.update.impl.ApiCommunicationDataUpdateServiceImpl;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.common.web.form.BaseApiRequest;
@@ -59,50 +61,24 @@ public class ApiCommunicationDataComponent {
      *     HTTPメソッド
      * @param url
      *     リクエストURL
-     * @return API通信情報
-     */
-    public ApiCommunicationData create(String apiName, Long transactionId,
-            HttpMethod method, URI url) {
-
-        ApiCommunicationData entity = new ApiCommunicationData();
-        entity.setTransactionId(transactionId);
-        entity.setApiName(apiName);
-        entity.setHttpMethod(method.toString());
-        entity.setUrl(url.toString());
-        entity.setRequestDate(DateTimeUtil.getSysDate());
-
-        createService.create(entity);
-
-        return entity;
-    }
-
-    /**
-     * API通信情報を作成する
-     *
-     * @param apiName
-     *     API名
-     * @param seqUserId
-     *     ユーザID
-     * @param transactionId
-     *     トランザクションID
-     * @param method
-     *     HTTPメソッド
-     * @param url
-     *     リクエストURL
      * @param request
      *     リクエスト
      * @return API通信情報
+     * @throws BaseException
+     *     JSONの変換に失敗した場合
      */
-    public ApiCommunicationData create(String apiName, Long seqUserId,
-            Long transactionId, HttpMethod method, URI url, BaseApiRequest request) {
+    public ApiCommunicationData create(String apiName, Long transactionId,
+            HttpMethod method, URI url, BaseApiRequest request) throws BaseException {
 
         ApiCommunicationData entity = new ApiCommunicationData();
         entity.setTransactionId(transactionId);
         entity.setApiName(apiName);
         entity.setHttpMethod(method.toString());
         entity.setUrl(url.toString());
-        // TODO JSON形式に変換
-        entity.setBody(request.toString());
+        if (HttpMethod.POST == method
+                || HttpMethod.PUT == method) {
+            entity.setBody(new JsonReader().read(request));
+        }
         entity.setRequestDate(DateTimeUtil.getSysDate());
 
         createService.create(entity);

@@ -36,7 +36,7 @@ import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * AWS-SimpleEmailServiceのComponent
+ * AWS-Simple Email ServiceのComponent
  *
  * @version 1.0.0
  */
