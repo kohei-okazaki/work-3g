@@ -39,33 +39,15 @@ public class AwsAuthComponent {
         if (BeanUtil.notNull(systemConfig.getEnvironment())) {
             switch (systemConfig.getEnvironment()) {
             case LOCAL:
-                return getProfileCredentialsProvider();
+                return new ProfileCredentialsProvider();
             case EC2:
-                return getInstanceProfileCredentialsProvider();
+                return new InstanceProfileCredentialsProvider(false);
             }
         }
 
         // システムプロパティの環境がNullや実行可能環境でない場合
         throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
                 "環境情報の設定が不正です。env=" + systemConfig.getEnvironment());
-    }
-
-    /**
-     * {@linkplain ProfileCredentialsProvider}を返す
-     *
-     * @return ProfileCredentialsProvider
-     */
-    public ProfileCredentialsProvider getProfileCredentialsProvider() {
-        return new ProfileCredentialsProvider();
-    }
-
-    /**
-     * {@linkplain InstanceProfileCredentialsProvider}を返す
-     *
-     * @return InstanceProfileCredentialsProvider
-     */
-    public InstanceProfileCredentialsProvider getInstanceProfileCredentialsProvider() {
-        return new InstanceProfileCredentialsProvider(false);
     }
 
 }
