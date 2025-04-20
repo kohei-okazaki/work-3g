@@ -1,7 +1,7 @@
 package jp.co.ha.business.api.slack;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,9 +10,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.ullink.slack.simpleslackapi.SlackChannel;
-import com.ullink.slack.simpleslackapi.SlackSession;
-import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Key;
@@ -23,8 +22,13 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.system.SystemConfig;
 import jp.co.ha.common.type.BaseEnum;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * SlackAPIのラッパークラス
@@ -38,12 +42,15 @@ public class SlackApiComponent {
     private static final Logger LOG = LoggerFactory.getLogger(SlackApiComponent.class);
     /** 接続情報の列挙 */
     private static final AwsS3Key KEY = AwsS3Key.SLACK_CONNECTION_DATA;
+    /** Slack URL(共通) */
+    private static final String BASE_SLACK_URL = "https://slack.com/api";
+    /** Slack URL(メッセージ用) */
+    private static final String MESSAGE_URL = BASE_SLACK_URL + "/chat.postMessage";
+    /** Slack URL(ファイルアップロード用) */
+    private static final String FILE_UPLOAD_URL = BASE_SLACK_URL + "/files.upload";
     /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component s3;
-    /** {@linkplain SystemConfig} */
-    @Autowired
-    private SystemConfig systemConfig;
 
     /**
      * Slackにメッセージを送信する
@@ -58,22 +65,34 @@ public class SlackApiComponent {
     public void send(ContentType contentType, String message) throws BaseException {
 
         try {
-            Connection conn = getConnectionByContentType(contentType);
-            SlackSession session = SlackSessionFactory
-                    .createWebSocketSlackSession(conn.getToken());
-            String channelName = getChannelName(conn);
 
-            session.connect();
-            SlackChannel channel = session.findChannelByName(channelName);
+            SlackConnectionData data = getSlackConnectionData();
+            Connection conn = getConnectionByContentType(data, contentType);
 
-            LOG.debug("send start. channel=" + channelName);
-            session.sendMessage(channel, message);
-            LOG.debug("send end. channel=" + channelName);
+            // Slack APIに渡す JSON を作成
+            String json = new ObjectMapper().writeValueAsString(Map.of(
+                    "channel", getChannelId(conn),
+                    "text", message));
 
-            session.disconnect();
+            Request request = new Request.Builder()
+                    .url(MESSAGE_URL)
+                    .addHeader("Authorization", "Bearer " + data.getToken())
+                    .addHeader("Content-type", "application/json; charset=utf-8")
+                    .post(RequestBody.create(json, MediaType.get("application/json")))
+                    .build();
+
+            try (Response response = new OkHttpClient().newCall(request).execute()) {
+                String responseBody = response.body().string();
+                LOG.debug("Slack API response: " + responseBody);
+
+                if (!response.isSuccessful()) {
+                    LOG.warn("Slack送信に失敗しました。code=" + response.code());
+                }
+            }
         } catch (IOException e) {
             throw new BusinessException(e);
         }
+
     }
 
     /**
@@ -81,7 +100,7 @@ public class SlackApiComponent {
      *
      * @param contentType
      *     コンテンツタイプ
-     * @param data
+     * @param fileData
      *     ファイルデータ
      * @param fileName
      *     ファイル名
@@ -92,34 +111,52 @@ public class SlackApiComponent {
      * @throws BaseException
      *     Slackセッションへの接続、またはSlack接続情報JSONの読み込みに失敗した場合
      */
-    public void sendFile(ContentType contentType, byte[] data, String fileName,
+    public void sendFile(ContentType contentType, byte[] fileData, String fileName,
             String title, String initialComment) throws BaseException {
 
-        SlackSession session = null;
-        try {
-            Connection conn = getConnectionByContentType(contentType);
-            session = SlackSessionFactory
-                    .createWebSocketSlackSession(conn.getToken());
+        SlackConnectionData data = getSlackConnectionData();
+        Connection conn = getConnectionByContentType(data, contentType);
 
-            session.connect();
-            SlackChannel channel = session.findChannelByName(getChannelName(conn));
+        RequestBody fileBody = RequestBody.create(fileData,
+                MediaType.parse("application/octet-stream"));
 
-            LOG.debug("送信開始");
-            session.sendFile(channel, new ByteArrayInputStream(data), fileName, title,
-                    initialComment);
-            LOG.debug("送信終了");
+        MultipartBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("channels", getChannelId(conn))
+                .addFormDataPart("filename", fileName)
+                .addFormDataPart("title", title)
+                .addFormDataPart("initial_comment", initialComment)
+                .addFormDataPart("file", title, fileBody)
+                .build();
 
+        Request request = new Request.Builder()
+                .url(FILE_UPLOAD_URL)
+                .header("Authorization", "Bearer " + data.getToken())
+                .post(requestBody)
+                .build();
+
+        try (Response response = new OkHttpClient().newCall(request).execute()) {
+            String responseBody = response.body().string();
+            LOG.debug("Slack API response: " + responseBody);
+
+            JsonNode root = new ObjectMapper().readTree(responseBody);
+            if (!root.path("ok").asBoolean()) {
+                LOG.warn("Slack file upload failed: " + root.path("error").asText());
+            }
         } catch (IOException e) {
             throw new BusinessException(e);
-        } finally {
-            if (session != null) {
-                try {
-                    session.disconnect();
-                } catch (IOException e) {
-                    throw new BusinessException(e);
-                }
-            }
         }
+    }
+
+    /**
+     * Slack接続情報を返す
+     * 
+     * @return Slack接続情報
+     * @throws BaseException
+     */
+    private SlackConnectionData getSlackConnectionData() throws BaseException {
+        return new JsonReader()
+                .read(s3.getS3ObjectByKey(KEY), SlackConnectionData.class);
     }
 
     /**
@@ -131,13 +168,10 @@ public class SlackApiComponent {
      * @throws BaseException
      *     JSONの読み込みに失敗した場合
      */
-    private Connection getConnectionByContentType(ContentType contentType)
-            throws BaseException {
+    private Connection getConnectionByContentType(SlackConnectionData data,
+            ContentType contentType) throws BaseException {
 
-        SlackConnectionData slackConnectionData = new JsonReader()
-                .read(s3.getS3ObjectByKey(KEY), SlackConnectionData.class);
-
-        return slackConnectionData.getConnectionList().stream()
+        return data.getConnectionList().stream()
                 .filter(e -> e.getContentType() == contentType)
                 .findFirst()
                 .orElseThrow(() -> new BusinessException(
@@ -147,15 +181,14 @@ public class SlackApiComponent {
     }
 
     /**
-     * チャンネル名を返す<br>
-     * 環境名 + Slack接続情報.名前
+     * チャンネルIDを返す
      *
      * @param conn
      *     {@linkplain Connection}
      * @return チャンネル名
      */
-    private String getChannelName(Connection conn) {
-        return systemConfig.getEnvironment().getValue() + "_" + conn.getChannelName();
+    private String getChannelId(Connection conn) {
+        return conn.getChannelId();
     }
 
     /**
