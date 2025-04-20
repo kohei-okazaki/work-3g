@@ -32,7 +32,7 @@ public class TokenApiComponent {
     private HealthInfoProperties prop;
     /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiCommunicationDataComponent apiDataComponent;
 
     /**
      * Token発行APIを呼び出す
@@ -48,19 +48,22 @@ public class TokenApiComponent {
     public TokenApiResponse callTokenApi(Long seqUserId, Long transactionId)
             throws BaseException {
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(tokenApi.getApiName(), seqUserId, transactionId);
-
         TokenApiRequest request = new TokenApiRequest();
         request.setSeqUserId(seqUserId);
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());
+
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = apiDataComponent
+                .create(tokenApi.getApiName(), transactionId,
+                        tokenApi.getHttpMethod(), tokenApi.getUri(connectInfo, request),
+                        request);
+
         TokenApiResponse response = tokenApi.callApi(request, connectInfo);
 
         // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData,
+        apiDataComponent.update(apiCommunicationData,
                 connectInfo, response);
 
         if (Result.SUCCESS != response.getResult()) {

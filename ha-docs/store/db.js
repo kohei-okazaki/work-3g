@@ -2,7 +2,8 @@ export const state = () => ({
   tables: [{
       physicalName: "HEALTH_INFO",
       logicalName: "健康情報",
-      columns: [{
+      columns: [
+        {
           logicalName: "健康情報ID",
           physicalName: "SEQ_HEALTH_INFO_ID",
           type: "BIGINT",
@@ -117,7 +118,8 @@ export const state = () => ({
     {
       physicalName: "ACCOUNT",
       logicalName: "アカウント情報",
-      columns: [{
+      columns: [
+        {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
           type: "BIGINT",
@@ -212,7 +214,8 @@ export const state = () => ({
     {
       physicalName: "HEALTH_INFO_FILE_SETTING",
       logicalName: "健康情報ファイル設定",
-      columns: [{
+      columns: [
+        {
           logicalName: "ユーザID",
           physicalName: "SEQ_USER_ID",
           type: "BIGINT",
@@ -287,7 +290,8 @@ export const state = () => ({
     {
       physicalName: "BMI_RANGE_MT",
       logicalName: "BMI範囲マスタ",
-      columns: [{
+      columns: [
+        {
           logicalName: "BMI範囲マスタID",
           physicalName: "SEQ_BMI_RANGE_MT_ID",
           type: "BIGINT",
@@ -352,7 +356,8 @@ export const state = () => ({
     {
       physicalName: "ACCOUNT_RECOVERY_TOKEN_DATA",
       logicalName: "アカウント回復トークン情報",
-      columns: [{
+      columns: [
+        {
           logicalName: "アカウント回復トークン情報ID",
           physicalName: "SEQ_ACCOUNT_RECOVERY_TOKEN_ID",
           type: "BIGINT",
@@ -417,13 +422,24 @@ export const state = () => ({
     {
       physicalName: "API_COMMUNICATION_DATA",
       logicalName: "API通信情報",
-      columns: [{
+      columns: [
+        {
           logicalName: "API通信情報ID",
           physicalName: "SEQ_API_COMMUNICATION_DATA_ID",
           type: "BIGINT",
           size: "",
           primaryKey: true,
           sequence: true,
+          crypt: false,
+          notNull: true,
+        },
+        {
+          logicalName: "トランザクションID",
+          physicalName: "TRANSACTION_ID",
+          type: "BIGINT",
+          size: "",
+          primaryKey: false,
+          sequence: false,
           crypt: false,
           notNull: true,
         },
@@ -438,30 +454,40 @@ export const state = () => ({
           notNull: true,
         },
         {
-          logicalName: "ユーザID",
-          physicalName: "SEQ_USER_ID",
-          type: "BIGINT",
-          size: "",
-          primaryKey: false,
-          sequence: false,
-          crypt: false,
-          notNull: true,
-        },
-        {
-          logicalName: "HTTPステータス",
-          physicalName: "HTTP_STATUS",
+          logicalName: "HTTPメソッド",
+          physicalName: "HTTP_METHOD",
           type: "VARCHAR",
-          size: "3",
+          size: "16",
           primaryKey: false,
           sequence: false,
           crypt: false,
           notNull: false,
         },
         {
-          logicalName: "処理結果",
-          physicalName: "RESULT",
+          logicalName: "リクエストURL",
+          physicalName: "URL",
           type: "VARCHAR",
-          size: "1",
+          size: "256",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
+        },
+        {
+          logicalName: "リクエストBody",
+          physicalName: "BODY",
+          type: "VARCHAR",
+          size: "1024",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
+        },
+        {
+          logicalName: "HTTPステータス",
+          physicalName: "HTTP_STATUS",
+          type: "VARCHAR",
+          size: "3",
           primaryKey: false,
           sequence: false,
           crypt: false,
@@ -522,7 +548,8 @@ export const state = () => ({
     {
       physicalName: "ROOT_LOGIN_INFO",
       logicalName: "管理者サイトユーザログイン情報",
-      columns: [{
+      columns: [
+        {
           logicalName: "管理者サイトユーザログイン情報ID",
           physicalName: "SEQ_ROOT_LOGIN_INFO_ID",
           type: "BIGINT",
@@ -607,7 +634,8 @@ export const state = () => ({
     {
       physicalName: "ROOT_USER_ROLE_MNG_MT",
       logicalName: "管理者サイトユーザ権限管理マスタ",
-      columns: [{
+      columns: [
+        {
           logicalName: "管理者サイトユーザ権限管理マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_MNG_MT_ID",
           type: "BIGINT",
@@ -642,7 +670,8 @@ export const state = () => ({
     {
       physicalName: "ROOT_USER_ROLE_DETAIL_MT",
       logicalName: "管理者サイトユーザ権限詳細マスタ",
-      columns: [{
+      columns: [
+        {
           logicalName: "管理者サイトユーザ権限詳細マスタID",
           physicalName: "SEQ_ROOT_USER_ROLE_DETAIL_MT_ID",
           type: "BIGINT",
@@ -697,7 +726,8 @@ export const state = () => ({
     {
       physicalName: "ROOT_ROLE_MT",
       logicalName: "管理者サイト権限マスタ",
-      columns: [{
+      columns: [
+        {
           logicalName: "管理者サイト権限マスタID",
           physicalName: "SEQ_ROOT_ROLE_MT_ID",
           type: "BIGINT",
@@ -752,7 +782,8 @@ export const state = () => ({
     {
       physicalName: "ROOT_USER_NOTE_INFO",
       logicalName: "管理者サイトユーザメモ情報",
-      columns: [{
+      columns: [
+        {
           logicalName: "メモユーザ情報ID",
           physicalName: "SEQ_ROOT_USER_NOTE_INFO_ID",
           type: "BIGINT",
@@ -817,7 +848,8 @@ export const state = () => ({
     {
       physicalName: "NEWS_INFO",
       logicalName: "お知らせ情報",
-      columns: [{
+      columns: [
+        {
           logicalName: "お知らせ情報ID",
           physicalName: "SEQ_NEWS_INFO_ID",
           type: "BIGINT",

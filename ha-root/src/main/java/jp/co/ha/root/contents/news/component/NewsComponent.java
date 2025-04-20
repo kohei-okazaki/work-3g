@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.slack.SlackApiComponent;
@@ -98,20 +97,7 @@ public class NewsComponent {
      */
     public void sendSlack(NewsDto dto, String fileName, String message)
             throws BaseException {
-
-        try {
-            byte[] jsonByte = new ObjectMapper()
-                    .enable(SerializationFeature.INDENT_OUTPUT)
-                    .writeValueAsString(dto)
-                    .getBytes(Charset.UTF_8.getValue());
-            slackApi.sendFile(ContentType.ROOT, jsonByte, "news.json", fileName, message);
-        } catch (JsonProcessingException e) {
-            // JSON文字列への変換に失敗した場合
-            throw new BusinessException(e);
-        } catch (UnsupportedEncodingException e) {
-            // 文字コードが不正な場合
-            throw new BusinessException(e);
-        }
+        slackApi.send(ContentType.ROOT, message);
     }
 
     /**

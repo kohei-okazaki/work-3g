@@ -61,9 +61,15 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         /** API名 */
         @JsonProperty("api_name")
         private String apiName;
-        /** ユーザID */
-        @JsonProperty("seq_user_id")
-        private Long seqUserId;
+        /** HTTPメソッド */
+        @JsonProperty("http_method")
+        private String httpMethod;
+        /** リクエストURL */
+        @JsonProperty("url")
+        private String url;
+        /** リクエストBody */
+        @JsonProperty("body")
+        private String body;
         /** HTTPステータス */
         @JsonProperty("http_status")
         private String httpStatus;
@@ -142,22 +148,57 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * seqUserIdを返す
+         * httpMethodを返す
          *
-         * @return seqUserId
+         * @return httpMethod
          */
-        public Long getSeqUserId() {
-            return seqUserId;
+        public String getHttpMethod() {
+            return httpMethod;
         }
 
         /**
-         * seqUserIdを設定する
+         * httpMethodを設定する
          *
-         * @param seqUserId
-         *     ユーザID
+         * @param httpMethod
          */
-        public void setSeqUserId(Long seqUserId) {
-            this.seqUserId = seqUserId;
+        public void setHttpMethod(String httpMethod) {
+            this.httpMethod = httpMethod;
+        }
+
+        /**
+         * urlを返す
+         *
+         * @return url
+         */
+        public String getUrl() {
+            return url;
+        }
+
+        /**
+         * urlを設定する
+         *
+         * @param url
+         */
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        /**
+         * bodyを返す
+         *
+         * @return body
+         */
+        public String getBody() {
+            return body;
+        }
+
+        /**
+         * bodyを設定する
+         *
+         * @param body
+         */
+        public void setBody(String body) {
+            this.body = body;
         }
 
         /**

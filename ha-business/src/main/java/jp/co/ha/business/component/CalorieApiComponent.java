@@ -61,7 +61,7 @@ public class CalorieApiComponent {
                 transactionId);
 
         CalorieCalcApiResponse apiResponse = callCalorieCalcApi(dto,
-                tokenApiResponse.getToken(), seqUserId, transactionId);
+                tokenApiResponse.getToken(), transactionId);
         BeanUtil.copy(apiResponse.getCalorieCalcResult(), dto);
 
         return dto;
@@ -74,8 +74,6 @@ public class CalorieApiComponent {
      *     カロリー計算DTO
      * @param token
      *     トークン
-     * @param seqUserId
-     *     ユーザID
      * @param transactionId
      *     トランザクションID
      * @return カロリー計算APIレスポンス
@@ -83,11 +81,7 @@ public class CalorieApiComponent {
      *     API通信に失敗した場合
      */
     private CalorieCalcApiResponse callCalorieCalcApi(CalorieCalcDto dto, String token,
-            Long seqUserId, Long transactionId) throws BaseException {
-
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(calorieCalcApi.getApiName(), seqUserId, transactionId);
+            Long transactionId) throws BaseException {
 
         CalorieCalcApiRequest request = new CalorieCalcApiRequest();
         BeanUtil.copy(dto, request);
@@ -96,6 +90,12 @@ public class CalorieApiComponent {
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.CALORIE.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
+
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
+                .create(calorieCalcApi.getApiName(), transactionId,
+                        calorieCalcApi.getHttpMethod(),
+                        calorieCalcApi.getUri(connectInfo, request), request);
 
         CalorieCalcApiResponse response = calorieCalcApi.callApi(request, connectInfo);
 

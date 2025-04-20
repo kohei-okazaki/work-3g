@@ -52,7 +52,7 @@ public class DbConfig {
      * @return BasicDataSource
      */
     @Bean(destroyMethod = "close")
-    public BasicDataSource dataSource() {
+    BasicDataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(url);
@@ -65,7 +65,7 @@ public class DbConfig {
      * @return PlatformTransactionManager
      */
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    PlatformTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 
@@ -73,7 +73,7 @@ public class DbConfig {
      * @return SqlSessionFactoryBean
      */
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactory() {
+    SqlSessionFactoryBean sqlSessionFactory() {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource());
         sqlSessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
@@ -84,7 +84,7 @@ public class DbConfig {
      * @return DefaultTransactionDefinition
      */
     @Bean
-    public DefaultTransactionDefinition transactionDefinition() {
+    DefaultTransactionDefinition transactionDefinition() {
         DefaultTransactionDefinition definition = new DefaultTransactionDefinition();
         definition.setPropagationBehavior(
                 DefaultTransactionDefinition.PROPAGATION_REQUIRED);
@@ -98,7 +98,7 @@ public class DbConfig {
      * @return CacheManager
      */
     @Bean
-    public CacheManager cacheManager() {
+    CacheManager cacheManager() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         List<Cache> caches = new ArrayList<>();
         caches.add(new ConcurrentMapCache("bmiRangeMt"));

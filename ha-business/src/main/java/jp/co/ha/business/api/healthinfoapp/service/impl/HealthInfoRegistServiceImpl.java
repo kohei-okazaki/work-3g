@@ -96,8 +96,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
                 .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
-                        tokenResponse.getToken(), request.getSeqUserId(),
-                        request.getTransactionId());
+                        tokenResponse.getToken(), request.getTransactionId());
 
         // リクエストをEntityに変換
         HealthInfo entity = toEntity(request,

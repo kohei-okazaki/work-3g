@@ -14,6 +14,7 @@
     <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
     <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
     <plugin type="jp.co.ha.db.plugin.ExtendBaseExamplePlugin" />
+    <plugin type="jp.co.ha.db.plugin.UpperCaseTableNamePlugin" />
 
     <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                     connectionURL="jdbc:mysql://localhost:3306/work3g"
@@ -31,17 +32,17 @@
 
     <javaClientGenerator targetPackage="jp.co.ha.db.mapper" targetProject="ha-db/src/main/java" type="XMLMAPPER" />
 
-    <!-- <table schema="work3g" tableName="ACCOUNT" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="HEALTH_INFO" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="BMI_RANGE_MT" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="ACCOUNT_RECOVERY_TOKEN_DATA" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="API_COMMUNICATION_DATA" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="ROOT_LOGIN_INFO" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="ROOT_USER_ROLE_MNG_MT" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="ROOT_USER_ROLE_DETAIL_MT" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="ROOT_ROLE_MT" modelType="hierarchical" /> -->
-    <!-- <table schema="work3g" tableName="ROOT_USER_NOTE_INFO" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="ACCOUNT" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="HEALTH_INFO" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" modelType="hierarchical" />-->
+<!--    <table schema="work3g" tableName="BMI_RANGE_MT" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="ACCOUNT_RECOVERY_TOKEN_DATA" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="API_COMMUNICATION_DATA" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="ROOT_LOGIN_INFO" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="ROOT_USER_ROLE_MNG_MT" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="ROOT_USER_ROLE_DETAIL_MT" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="ROOT_ROLE_MT" modelType="hierarchical" /> -->
+<!--    <table schema="work3g" tableName="ROOT_USER_NOTE_INFO" modelType="hierarchical" /> -->
     <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" />
 
   </context>

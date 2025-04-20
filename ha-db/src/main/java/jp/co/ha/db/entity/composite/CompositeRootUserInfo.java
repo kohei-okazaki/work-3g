@@ -91,7 +91,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
      * 
      * @return deleteFlag
      */
-    public boolean isDeleteFlag() {
+    public Boolean getDeleteFlag() {
         return deleteFlag;
     }
 
