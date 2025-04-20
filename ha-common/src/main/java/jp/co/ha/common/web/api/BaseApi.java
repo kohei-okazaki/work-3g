@@ -133,10 +133,6 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
                 response = responseEntity.getBody();
             }
 
-        } catch (URISyntaxException e) {
-            errorMessage = "URLが不正です.";
-            bindErrorInfo(response, errorMessage);
-            LOG.error(errorMessage, e);
         } catch (HttpStatusCodeException e) {
             code = e.getStatusCode();
             if (code.is4xxClientError()) {
@@ -159,6 +155,28 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         }
 
         return response;
+    }
+
+    /**
+     * リクエストURIを返す
+     *
+     * @param apiConnectInfo
+     *     API接続情報
+     * @param request
+     *     リクエスト情報
+     * @return リクエストURI
+     */
+    public URI getUri(ApiConnectInfo apiConnectInfo, BaseApiRequest request) {
+
+        try {
+            String baseUrl = apiConnectInfo.getUrlSupplier().get();
+            if (HttpMethod.GET == getHttpMethod()) {
+                baseUrl += toQueryParameter(request);
+            }
+            return new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            throw new SystemRuntimeException(e);
+        }
     }
 
     /**
@@ -191,26 +209,6 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      *     エラーメッセージ
      */
     protected abstract void bindErrorInfo(Rs response, String errorMessage);
-
-    /**
-     * リクエストURIを返す
-     *
-     * @param apiConnectInfo
-     *     API接続情報
-     * @param request
-     *     リクエスト情報
-     * @return リクエストURI
-     * @throws URISyntaxException
-     *     URLとして正しくない場合
-     */
-    private URI getUri(ApiConnectInfo apiConnectInfo, BaseApiRequest request)
-            throws URISyntaxException {
-        String baseUrl = apiConnectInfo.getUrlSupplier().get();
-        if (HttpMethod.GET == getHttpMethod()) {
-            baseUrl += toQueryParameter(request);
-        }
-        return new URI(baseUrl);
-    }
 
     /**
      * RestTemplateを返す

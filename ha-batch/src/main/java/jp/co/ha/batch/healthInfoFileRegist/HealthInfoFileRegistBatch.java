@@ -1,7 +1,6 @@
 package jp.co.ha.batch.healthInfoFileRegist;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -28,9 +27,7 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
-import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.validator.BeanValidator;
@@ -125,8 +122,9 @@ public class HealthInfoFileRegistBatch implements Tasklet {
 
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                    .create(api.getApiName(), request.getSeqUserId(),
-                            request.getTransactionId());
+                    .create(api.getApiName(), request.getTransactionId(),
+                            api.getHttpMethod(), api.getUri(apiConnectInfo, request),
+                            request);
 
             HealthInfoRegistApiResponse response = api.callApi(request, apiConnectInfo);
             seqHealthInfoIdList.add(response.getHealthInfo().getSeqHealthInfoId());
@@ -154,15 +152,7 @@ public class HealthInfoFileRegistBatch implements Tasklet {
 
         StringJoiner sj = new StringJoiner("\r\n");
         seqHealthInfoIdList.stream().forEach(e -> sj.add(e.toString()));
-        try {
-            // Slackの${env}_batchチャンネルにメッセージを投稿
-            slackApiComponent.sendFile(ContentType.BATCH,
-                    sj.toString().getBytes(Charset.UTF_8.getValue()), "fileName",
-                    "健康情報IDリスト", "健康情報一括登録完了.");
-        } catch (UnsupportedEncodingException e) {
-            // 文字コードが異なる場合に発生。但し、UTF-8を固定しているため発生しない
-            throw new SystemRuntimeException(e);
-        }
+        slackApiComponent.send(ContentType.BATCH, sj.toString());
     }
 
 }

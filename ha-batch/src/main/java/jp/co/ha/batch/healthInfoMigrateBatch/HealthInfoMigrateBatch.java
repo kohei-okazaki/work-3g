@@ -27,6 +27,7 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -73,7 +74,6 @@ public class HealthInfoMigrateBatch implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
             throws Exception {
 
-        LOG.debug("targetDate=" + targetDate);
         targetDate = StringUtil.isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                         DateFormatType.YYYYMMDD_NOSEP)
@@ -117,14 +117,17 @@ public class HealthInfoMigrateBatch implements Tasklet {
      * 健康情報連携APIを呼び出す
      * 
      * @param healthInfoList
+     *     健康情報リスト
+     * @throws BaseException
+     *     JSON変換に失敗した場合
      */
-    private void sendHealthInfoMirgateApi(List<HealthInfo> healthInfoList) {
+    private void sendHealthInfoMirgateApi(List<HealthInfo> healthInfoList)
+            throws BaseException {
 
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getTrackApiUrl() + "healthinfo/");
-        System.out.println("URL=" + apiConnectInfo.getUrlSupplier().get());
 
         List<HealthInfoMigrateApiRequest> requestList = new ArrayList<>();
         for (Entry<Long, List<HealthInfo>> entry : toMap(healthInfoList).entrySet()) {
@@ -134,7 +137,8 @@ public class HealthInfoMigrateBatch implements Tasklet {
         for (HealthInfoMigrateApiRequest request : requestList) {
             // API通信情報を登録
             ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                    .create(api.getApiName(), null, transactionId);
+                    .create(api.getApiName(), transactionId, api.getHttpMethod(),
+                            api.getUri(apiConnectInfo, request), request);
 
             HealthInfoMigrateApiResponse response = api.callApi(request, apiConnectInfo);
 
@@ -181,12 +185,12 @@ public class HealthInfoMigrateBatch implements Tasklet {
         HealthInfoMigrateApiRequest req = new HealthInfoMigrateApiRequest();
 
         req.setSeqUserId(seqUserId);
-        List<HealthInfoMigrateApiRequest.HealthInfo> list = new ArrayList<>();
-        healthInfoList.stream().map(e -> {
-            HealthInfoMigrateApiRequest.HealthInfo entity = new HealthInfoMigrateApiRequest.HealthInfo();
-            BeanUtil.copy(e, entity);
-            return entity;
-        }).collect(Collectors.toList());
+        List<HealthInfoMigrateApiRequest.HealthInfo> list = healthInfoList.stream()
+                .map(e -> {
+                    HealthInfoMigrateApiRequest.HealthInfo entity = new HealthInfoMigrateApiRequest.HealthInfo();
+                    BeanUtil.copy(e, entity);
+                    return entity;
+                }).collect(Collectors.toList());
         req.setHealthInfoList(list);
 
         return req;

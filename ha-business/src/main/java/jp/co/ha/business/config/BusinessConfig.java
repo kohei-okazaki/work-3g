@@ -17,7 +17,7 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
  * 
  * @version 1.0.0
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @PropertySource({
         "classpath:crypt.properties",
         "classpath:jdbc.properties",
@@ -39,7 +39,7 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @return PropertySourcesPlaceholderConfigurer
      */
     @Bean
-    public static PropertySourcesPlaceholderConfigurer properties() {
+    PropertySourcesPlaceholderConfigurer properties() {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
@@ -55,7 +55,7 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @return HealthInfoProperties
      */
     @Bean
-    public HealthInfoProperties healthInfoProperties(
+    HealthInfoProperties healthInfoProperties(
             @Value("${reference.file.path}") String referenceFilePath,
             @Value("${healthinfo.regist.batch.file.path}") String registBatchFilePath,
             @Value("${healthinfo.node.api.url}") String healthinfoNodeApiUrl,
@@ -86,7 +86,7 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @return AwsConfig
      */
     @Bean
-    public AwsConfig awsConfig(
+    AwsConfig awsConfig(
             @Value("${aws.region}") String region,
             @Value("${aws.s3.backet}") String backet,
             @Value("${aws.s3.timeout}") int s3Timeout,
@@ -107,7 +107,7 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @return JsonConfig
      */
     @Bean
-    public JsonConfig jsonConfig() {
+    JsonConfig jsonConfig() {
         return new JsonConfig();
     }
 }

@@ -6,6 +6,7 @@ import com.amazonaws.regions.Regions;
 
 /**
  * AWSの設定情報保持クラス<br>
+ * 設定ファイル名:aws.properties<br>
  * <ul>
  * <li>リージョン：設定ファイルで東京を設定</li>
  * <li>バケット名：環境毎にバケットを設定</li>

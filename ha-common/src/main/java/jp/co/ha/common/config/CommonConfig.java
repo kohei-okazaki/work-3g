@@ -37,7 +37,7 @@ public class CommonConfig implements WebMvcConfigurer {
      * @return DefaultAdvisorAutoProxyCreator
      */
     @Bean
-    public static DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+    DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator proxyCreator = new DefaultAdvisorAutoProxyCreator();
         proxyCreator.setProxyTargetClass(true);
         return proxyCreator;
@@ -52,7 +52,7 @@ public class CommonConfig implements WebMvcConfigurer {
      * @return BeanValidator
      */
     @Bean
-    public BeanValidator beanValidator() {
+    BeanValidator beanValidator() {
         return new BeanValidator();
     }
 
@@ -60,7 +60,7 @@ public class CommonConfig implements WebMvcConfigurer {
      * @return PropertySourcesPlaceholderConfigurer
      */
     @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
@@ -72,7 +72,7 @@ public class CommonConfig implements WebMvcConfigurer {
      * @return JdbcConfig
      */
     @Bean
-    public JdbcConfig jdbcConfig(
+    JdbcConfig jdbcConfig(
             @Value("${jdbc.driverClassName}") String driverClassName,
             @Value("${jdbc.url}") String url,
             @Value("${jdbc.username}") String username,
@@ -92,7 +92,7 @@ public class CommonConfig implements WebMvcConfigurer {
      * @return SystemConfig
      */
     @Bean
-    public SystemConfig systemConfig(
+    SystemConfig systemConfig(
             @Value("${system.paging}") String paging,
             @Value("${system.env}") String environment) {
 
@@ -109,7 +109,7 @@ public class CommonConfig implements WebMvcConfigurer {
      * @return CryptConfig
      */
     @Bean
-    public CryptConfig cryptConfig(
+    CryptConfig cryptConfig(
             @Value("${crypt.mode}") String mode,
             @Value("${crypt.key}") String key,
             @Value("${crypt.shift}") String shift) {

@@ -61,7 +61,7 @@ public class BreathingCapacityApiComponent {
                 transactionId);
 
         BreathingCapacityCalcApiResponse apiResponse = callBreathingCapacityCalcApi(dto,
-                tokenApiResponse.getToken(), seqUserId, transactionId);
+                tokenApiResponse.getToken(), transactionId);
         BeanUtil.copy(apiResponse.getBreathingCapacityCalcResult(), dto);
 
         return dto;
@@ -74,8 +74,6 @@ public class BreathingCapacityApiComponent {
      *     肺活量計算Dto
      * @param token
      *     トークン
-     * @param seqUserId
-     *     ユーザID
      * @param transactionId
      *     トランザクションID
      * @return 肺活量計算APIレスポンス
@@ -83,12 +81,8 @@ public class BreathingCapacityApiComponent {
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, String token, Long seqUserId, Long transactionId)
+            BreathingCapacityDto dto, String token, Long transactionId)
             throws BaseException {
-
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(breathingCapacityCalcApi.getApiName(), seqUserId, transactionId);
 
         BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
         BeanUtil.copy(dto, request);
@@ -97,6 +91,12 @@ public class BreathingCapacityApiComponent {
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.BREATHING_CAPACITY.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
+
+        // API通信情報を登録
+        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent.create(
+                breathingCapacityCalcApi.getApiName(), transactionId,
+                breathingCapacityCalcApi.getHttpMethod(),
+                breathingCapacityCalcApi.getUri(connectInfo, request), request);
 
         BreathingCapacityCalcApiResponse response = breathingCapacityCalcApi
                 .callApi(request, connectInfo);

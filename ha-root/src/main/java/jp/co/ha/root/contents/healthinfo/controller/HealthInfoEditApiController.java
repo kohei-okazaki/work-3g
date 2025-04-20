@@ -101,7 +101,7 @@ public class HealthInfoEditApiController extends
         BeanUtil.copy(request, basicHealthInfoCalcRequest);
         BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
                 .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
-                        tokenResponse.getToken(), request.getSeqUserId(), transactionId);
+                        tokenResponse.getToken(), transactionId);
 
         BigDecimal bmi = basicHealthInfoCalcResponse.getBasicHealthInfo().getBmi();
         BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()
