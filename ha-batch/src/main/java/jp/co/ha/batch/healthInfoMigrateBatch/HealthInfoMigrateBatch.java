@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.api.track.HealthInfoMigrateApi;
 import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.business.api.track.response.HealthInfoMigrateApiResponse;
@@ -69,6 +71,9 @@ public class HealthInfoMigrateBatch implements Tasklet {
     /** {@linkplain HealthInfoMigrateApi} */
     @Autowired
     private HealthInfoMigrateApi api;
+    /** {@linkplain SlackApiComponent} */
+    @Autowired
+    private SlackApiComponent slackApiComponent;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -86,6 +91,9 @@ public class HealthInfoMigrateBatch implements Tasklet {
         if (CollectionUtil.exists(healthInfoList)) {
             sendHealthInfoMirgateApi(healthInfoList);
         }
+
+        // Slack通知
+        slackApiComponent.send(ContentType.BATCH, "health_info_migrate_batch success.");
 
         return RepeatStatus.FINISHED;
     }
@@ -189,6 +197,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
                 .map(e -> {
                     HealthInfoMigrateApiRequest.HealthInfo entity = new HealthInfoMigrateApiRequest.HealthInfo();
                     BeanUtil.copy(e, entity);
+                    entity.setCreatedAt(e.getHealthInfoRegDate());
                     return entity;
                 }).collect(Collectors.toList());
         req.setHealthInfoList(list);
