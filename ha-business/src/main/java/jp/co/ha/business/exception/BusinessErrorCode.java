@@ -5,7 +5,8 @@ import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * ビジネスのエラーコード列挙
+ * ビジネスのエラーコード列挙<br>
+ * businessErrorCode.propertiesと一致させること
  *
  * @version 1.0.0
  */

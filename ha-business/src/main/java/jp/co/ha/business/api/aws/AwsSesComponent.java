@@ -273,11 +273,9 @@ public class AwsSesComponent {
             return EmailSendResultType.SUCCESS;
 
         } catch (MailFromDomainNotVerifiedException e) {
-            throw new BusinessException(BusinessErrorCode.AWS_S3_UPLOAD_ERROR,
+            throw new BusinessException(
+                    BusinessErrorCode.AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR,
                     "メールアドレスがSESに認証されていません.管理画面から認証してください", e);
-        } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
-                    "SESを介してメールの送信に失敗しました", e);
         }
     }
 
