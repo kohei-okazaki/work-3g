@@ -24,19 +24,14 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"height\": 170.00,\n  \"weight\": 60.00,\n  \"testMode\": 0,\n  \"transactionId\": 123\n}"
+              "textBody": "{\n  \"height\": 170.00,\n  \"weight\": A,\n  \"test_mode\": 0,\n  \"transaction_id\": 999999999\n}"
             },
             "uri": {
               "query": {
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${APP_API_URL}",
               "path": "/api/1/healthinfo"
             },
             "id": "922d3a4a-24d5-442d-b2e0-204f5cdedc95",
@@ -55,7 +50,7 @@
               {
                 "enabled": true,
                 "name": "API-KEY",
-                "value": "test"
+                "value": "${APP_API_KEY}"
               }
             ]
           }
@@ -80,13 +75,8 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/api/1/healthinfo/1"
+              "host": "${APP_API_URL}",
+              "path": "/api/1/healthinfo/20"
             },
             "id": "93d3a683-720b-40af-8577-1f968ec2af51",
             "name": "2.健康情報照会API",
@@ -94,7 +84,7 @@
               {
                 "enabled": true,
                 "name": "API-KEY",
-                "value": "test"
+                "value": "${APP_API_KEY}"
               },
               {
                 "enabled": true,
@@ -124,22 +114,12 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${APP_API_URL}",
               "path": "/api/healthcheck"
             },
             "id": "c0e5ae8e-488e-4d10-b044-56ebd1de3556",
             "name": "3.ヘルスチェックAPI",
             "headers": [
-              {
-                "enabled": true,
-                "name": "API-KEY",
-                "value": "test"
-              },
               {
                 "enabled": true,
                 "name": "Accept-Charset",
@@ -177,12 +157,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${CALC_API_URL}",
               "path": "/healthcheck"
             },
             "id": "5a5408ce-d22c-4e4c-a837-cdf6d2f96cc1",
@@ -218,12 +193,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${CALC_API_URL}",
               "path": "/token"
             },
             "id": "c5034a66-8485-4d81-aac9-e32bd68c3db1",
@@ -268,12 +238,7 @@
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${CALC_API_URL}",
               "path": "/basic"
             },
             "id": "dfb3a187-455a-45ce-b6a4-d25bf829ec7a",
@@ -287,7 +252,7 @@
               {
                 "enabled": true,
                 "name": "X-NODE-TOKEN",
-                "value": "test"
+                "value": "${NODE_TOKEN}"
               }
             ]
           }
@@ -338,12 +303,7 @@
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${CALC_API_URL}",
               "path": "/calorie"
             },
             "id": "b3d1f6f8-aa9d-42b3-978d-3e99f4dbd60d",
@@ -357,7 +317,7 @@
               {
                 "enabled": true,
                 "name": "X-NODE-TOKEN",
-                "value": "test"
+                "value": "${NODE_TOKEN}"
               }
             ]
           }
@@ -388,23 +348,18 @@
                   },
                   {
                     "enabled": true,
-                    "name": "gender",
-                    "value": "0"
+                    "name": "height",
+                    "value": "170.00"
                   },
                   {
                     "enabled": true,
-                    "name": "height",
-                    "value": "170.0"
+                    "name": "gender",
+                    "value": "0"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/breath_capacity"
+              "host": "${CALC_API_URL}",
+              "path": "/breathing_capacity"
             },
             "id": "16842255-8219-4426-a60e-20c9db7d5025",
             "name": "5.肺活量計算API",
@@ -417,7 +372,7 @@
               {
                 "enabled": true,
                 "name": "X-NODE-TOKEN",
-                "value": "test"
+                "value": "${NODE_TOKEN}"
               }
             ]
           }
@@ -451,12 +406,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/healthcheck"
             },
             "id": "1cb8dca3-539c-424a-968b-5053c83c8db0",
@@ -485,19 +435,14 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"seq_login_id\": 1,\n  \"password\": \"test\"\n}"
+              "textBody": "{\n  \"seq_login_id\": 19,\n  \"password\": \"test\"\n}"
             },
             "uri": {
               "query": {
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/login"
             },
             "id": "349da8f2-8818-4d68-ba2c-0d5620b2495b",
@@ -533,16 +478,11 @@
                   {
                     "enabled": true,
                     "name": "date",
-                    "value": "202202"
+                    "value": "202409"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/top"
             },
             "id": "694846c9-d886-42e4-ad4b-700bddb5cfa5",
@@ -556,7 +496,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -583,16 +523,11 @@
                   {
                     "enabled": true,
                     "name": "date",
-                    "value": "202202"
+                    "value": "202409"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/top/healthinfo"
             },
             "id": "875df064-73f5-4c1d-8115-84ca0ae4a542",
@@ -606,7 +541,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -633,16 +568,11 @@
                   {
                     "enabled": true,
                     "name": "date",
-                    "value": "202202"
+                    "value": "202409"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/top/account"
             },
             "id": "514f0149-337f-4ac1-8c5e-2edb5f5ee5b4",
@@ -656,7 +586,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -681,13 +611,8 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/api/root/user/1"
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/user/19"
             },
             "id": "fb7fb6ee-62e4-41a4-87d0-93dce73d9df8",
             "name": "06.管理ユーザ取得API",
@@ -700,7 +625,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -727,12 +652,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/user"
             },
             "id": "7da2106e-672c-4352-8e01-d05a1391befd",
@@ -746,7 +666,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -766,20 +686,15 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"rules\": [\"00\", \"01\"],\n  \"delete_flag\": true,\n  \"password\": \"test\",\n  \"password_expire\": \"2022/06/01\",\n  \"remarks\": \"備考欄\",\n}"
+              "textBody": "{\n  \"roles\": [\"00\", \"01\", \"02\"],\n  \"remarks\": \"test user.\",\n  \"password_expire\": \"2026/01/31\"\n}"
             },
             "uri": {
               "query": {
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/api/root/user/1"
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/user/19"
             },
             "id": "49927ca3-0a89-4b9f-bc0f-80f04d0f097d",
             "name": "08.管理ユーザ編集API",
@@ -792,7 +707,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -820,16 +735,11 @@
                   {
                     "enabled": true,
                     "name": "page",
-                    "value": "1"
+                    "value": "0"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/account"
             },
             "id": "005bf56b-8b4f-4df3-823f-9c4d67f442fb",
@@ -838,7 +748,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -863,20 +773,15 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"mail_address\": \"test\",\n  \"password_expire\": \"2022/06/01\",\n}"
+              "textBody": "{\n  \"mail_address\": \"test\",\n  \"password_expire\": \"2022/06/01\"\n}"
             },
             "uri": {
               "query": {
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/api/root/account"
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/account/2"
             },
             "id": "9603f949-63bd-4604-9e23-a397a9e4ae6c",
             "name": "10.アカウント情報編集API",
@@ -884,7 +789,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -917,16 +822,11 @@
                   {
                     "enabled": true,
                     "name": "page",
-                    "value": "1"
+                    "value": "2"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/apidata"
             },
             "id": "4f18caa8-cae6-4591-93c8-1fc52c1ef1b3",
@@ -935,7 +835,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -972,12 +872,7 @@
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/healthinfo"
             },
             "id": "230fdbeb-cfa9-4430-a988-1ec68e5e0222",
@@ -986,7 +881,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -1011,19 +906,14 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"seq_user_id\": true,\n  \"height\": 170.0,\n  \"weight\": 50.0,\n}"
+              "textBody": "{\n  \"seq_user_id\": 2,\n  \"height\": 170.0,\n  \"weight\": 50.0\n}"
             },
             "uri": {
               "query": {
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/healthinfo/1"
             },
             "id": "80fb2dd0-4041-4e9f-9f64-9162de4ed63a",
@@ -1032,7 +922,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -1063,18 +953,12 @@
                 "delimiter": "&",
                 "items": [
                   {
-                    "enabled": true,
                     "name": "page",
-                    "value": "1"
+                    "value": "0"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/news"
             },
             "id": "efb4fb02-845d-4d31-8ec0-6d339b67bca7",
@@ -1083,7 +967,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -1110,12 +994,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/news"
             },
             "id": "6ad960ac-7ee6-409a-83ef-ab5d12642afe",
@@ -1124,7 +1003,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -1156,12 +1035,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/news/10"
             },
             "id": "a49d56d3-9c7f-478b-8ee3-8c86d8f4f3cd",
@@ -1170,7 +1044,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -1201,12 +1075,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/news/10"
             },
             "id": "e73d7e96-f4be-4c3b-99bc-f0f609c4cd49",
@@ -1215,7 +1084,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -1246,19 +1115,13 @@
                     "value": "1"
                   },
                   {
-                    "enabled": true,
                     "name": "page",
-                    "value": "10"
+                    "value": "0"
                   }
                 ]
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/api/root/note/"
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/note"
             },
             "id": "abba4193-51d0-4621-82ae-52cea876501c",
             "name": "18.メモ情報一覧API",
@@ -1266,7 +1129,12 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
               }
             ]
           }
@@ -1289,13 +1157,12 @@
               "textBody": "{\n  \"seq_login_id\": 1,\n  \"title\": \"タイトル\",\n  \"detail\": \"詳細\"\n}"
             },
             "uri": {
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
+              "query": {
+                "delimiter": "&",
+                "items": []
               },
-              "host": "${URL}",
-              "path": "/api/root/note/"
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/note"
             },
             "id": "767dd74f-2248-4dac-a6c8-c49d012cb374",
             "name": "19.メモ情報登録API",
@@ -1303,7 +1170,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -1335,12 +1202,7 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
+              "host": "${ROOT_API_URL}",
               "path": "/api/root/note/1"
             },
             "id": "813d7d5f-117a-4222-adf6-d518a54ce814",
@@ -1349,7 +1211,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               },
               {
                 "enabled": true,
@@ -1380,13 +1242,8 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/api/root/note/1"
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/note/9"
             },
             "id": "09d3988a-0ed2-42aa-91f1-673c1b087a4a",
             "name": "21.メモ情報削除API",
@@ -1394,7 +1251,7 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -1420,13 +1277,8 @@
                 "delimiter": "&",
                 "items": []
               },
-              "scheme": {
-                "secure": true,
-                "name": "https",
-                "version": "V11"
-              },
-              "host": "${URL}",
-              "path": "/api/root/roles/"
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/roles"
             },
             "id": "5b388670-d93e-4f16-a9ec-d3d31c21983b",
             "name": "22.権限マスタ一覧取得API",
@@ -1434,7 +1286,68 @@
               {
                 "enabled": true,
                 "name": "Authorization",
-                "value": "Bearer token"
+                "value": "${ROOT_API_TOKEN}"
+              },
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entity": {
+        "type": "Project",
+        "id": "ef9948f5-bdd3-4fe4-b67f-16fcc7f5d03e",
+        "name": "4.健康情報蓄積API"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text",
+              "textBodyEditorHeight": 384,
+              "textBody": "{\n  \"seq_user_id\":100,\n  \"health_infos\":[\n    {\n      \"seq_health_info_id\":99999,\n      \"height\":170.01,\n      \"weight\":65.53,\n      \"bmi\":10.05,\n      \"standard_weight\":60.09,\n      \"created_at\":\"2000/01/05 12:50:39\"\n    },\n    {\n      \"seq_health_info_id\":99999,\n      \"height\":170.01,\n      \"weight\":65.53,\n      \"bmi\":10.05,\n      \"standard_weight\":60.09,\n      \"created_at\":\"2000/01/05 12:50:39\"\n    }\n  ]\n}"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${TRACK_API_URL}",
+              "path": "/api/healthinfo/"
+            },
+            "id": "875c6cee-16d8-48d4-89b0-25060432a19b",
+            "name": "01.健康情報連携API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Accept-Charset",
+                "value": "utf-8"
+              },
+              {
+                "enabled": true,
+                "name": "Accept",
+                "value": "application/json"
               }
             ]
           }
@@ -1444,78 +1357,55 @@
   ],
   "environments": [
     {
-      "id": "131e61c3-4bf3-4f38-93e5-c07057aed518",
-      "name": "健康管理API-ec2",
+      "id": "511bfa94-4c91-4606-8cb3-b84fa9b89452",
+      "name": "local環境",
       "variables": {
-        "be847a33-48fd-48c5-b4f8-319359b280a4": {
-          "createdAt": "2022-01-02T15:07:20.777+09:00",
-          "name": "URL",
-          "value": "ec2-api.ap-northeast-1.elascticbeanstalk.com",
+        "2b511ccd-e666-4aa3-90f9-0f5ee0bf3deb": {
+          "createdAt": "2025-06-01T12:50:49.805+09:00",
+          "name": "APP_API_URL",
+          "value": "http://localhost:8081",
           "enabled": true,
           "private": false
-        }
-      }
-    },
-    {
-      "id": "21b8e9d4-f627-4008-a938-f45037ac44b5",
-      "name": "健康情報計算API-ec2",
-      "variables": {
-        "ea1dd3a6-b5c3-4229-ba3d-56f4cb27c0de": {
-          "createdAt": "2022-01-02T15:06:28.610+09:00",
-          "name": "URL",
-          "value": "ec2-node-ap-northeast-1.elasticbeanstalk.com",
+        },
+        "e2f3d910-b770-406c-838f-7d770f7558c9": {
+          "createdAt": "2025-06-01T12:51:23.201+09:00",
+          "name": "CALC_API_URL",
+          "value": "http://localhost:8084",
           "enabled": true,
           "private": false
-        }
-      }
-    },
-    {
-      "id": "754a877d-017e-4758-934f-7c7a391f4e8f",
-      "name": "管理者用API-local",
-      "variables": {
-        "e0765ee4-b6f6-4d15-897e-dd262d7609e3": {
-          "createdAt": "2022-01-02T15:06:28.610+09:00",
-          "name": "URL",
-          "value": "localhost:8083",
+        },
+        "c3edd60f-4951-43b1-bba0-0fceb6ff7c9d": {
+          "createdAt": "2025-06-01T12:51:42.906+09:00",
+          "name": "ROOT_API_URL",
+          "value": "http://localhost:8082",
           "enabled": true,
           "private": false
-        }
-      }
-    },
-    {
-      "id": "7bb04715-6e51-4c37-9c6b-5be225f847b5",
-      "name": "健康情報計算API-local",
-      "variables": {
-        "35871868-705e-4dcd-ab20-547ec6a6c8db": {
-          "createdAt": "2022-01-02T15:06:28.610+09:00",
-          "name": "URL",
-          "value": "localhost:8084",
+        },
+        "f43d8960-2f82-4ddf-9517-0c6a93913afa": {
+          "createdAt": "2025-06-01T12:53:40.643+09:00",
+          "name": "TRACK_API_URL",
+          "value": "http://localhost:8086",
           "enabled": true,
           "private": false
-        }
-      }
-    },
-    {
-      "id": "9cd421f2-f8f6-464b-8196-1e114f890510",
-      "name": "管理者用API-ec2",
-      "variables": {
-        "65afe079-406c-4698-96b3-6adc39f39363": {
-          "createdAt": "2022-01-02T15:07:20.777+09:00",
-          "name": "URL",
-          "value": "ec2-api.ap-northeast-1.elascticbeanstalk.com",
+        },
+        "bb3caad6-0886-4479-b360-14c36174efde": {
+          "createdAt": "2025-06-01T13:06:24.996+09:00",
+          "name": "ROOT_API_TOKEN",
+          "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxOSIsImV4cCI6MTc0ODc4MzMzM30.DO-HM-xRIOYhqyA6gH2JsddipPQuCTqcw9s_hJS8JOH-UCE1YyLd6G-8lnNQOtc6uEoYmYXD1uotIJg2cpWsMg",
           "enabled": true,
           "private": false
-        }
-      }
-    },
-    {
-      "id": "fb7fb7e0-3e18-461e-a609-2ad1ccebb05b",
-      "name": "健康管理API-local",
-      "variables": {
-        "7aa7a2d4-2dd6-4c55-abba-55bf3a0ef63a": {
-          "createdAt": "2022-01-02T15:06:28.610+09:00",
-          "name": "URL",
-          "value": "localhost:8081",
+        },
+        "c76553dd-71b2-4b70-a9c9-794f4e2c6b2d": {
+          "createdAt": "2025-06-01T13:08:47.389+09:00",
+          "name": "NODE_TOKEN",
+          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXFfdXNlcl9pZCI6MSwiaWF0IjoxNzQ4NzUxMzkyLCJleHAiOjE3NDg3NTQ5OTJ9.U165ldTAsSjBWYtv065xHb5QHeyEehgbvQTLn0WsHFk",
+          "enabled": true,
+          "private": false
+        },
+        "c02caaab-ee7d-454b-8900-13a0735e8565": {
+          "createdAt": "2025-06-01T13:11:06.356+09:00",
+          "name": "APP_API_KEY",
+          "value": "e8c1aa2b799869d06cec11d069729cf05215d752e9b9a5471ebd3551454604ca",
           "enabled": true,
           "private": false
         }
