@@ -17,7 +17,7 @@ import jp.co.ha.common.web.form.BaseApiResponse;
 public class HealthInfoMigrateApiResponse extends BaseTrackApiResponse
         implements BaseApiResponse {
 
-    /** id */
+    /** ID */
     @JsonProperty("id")
     private Long id;
 

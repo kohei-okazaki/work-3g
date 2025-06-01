@@ -69,7 +69,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
      */
     public static class HealthInfo {
 
-        /** ユーザID */
+        /** 健康情報ID */
         @JsonProperty("seq_health_info_id")
         private Long seqHealthInfoId;
         /** 身長 */
