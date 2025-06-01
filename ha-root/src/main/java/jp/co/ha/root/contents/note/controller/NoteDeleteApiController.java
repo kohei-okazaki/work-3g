@@ -77,7 +77,8 @@ public class NoteDeleteApiController
         // メモファイルを削除
         awsS3Component.removeS3ObjectByKeys(optional.get().getS3Key());
         // Slack通知
-        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get() + "を削除.");
+        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get()
+                + ", S3キー=" + optional.get().getS3Key() + "を削除.");
 
         NoteDeleteApiResponse response = getSuccessResponse();
         return response;

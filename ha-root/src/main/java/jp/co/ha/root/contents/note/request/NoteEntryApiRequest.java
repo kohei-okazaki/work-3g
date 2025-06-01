@@ -6,7 +6,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
 /**
- * メモ登録APIリクエスト情報
+ * メモ情報登録APIリクエスト情報
  *
  * @version 1.0.0
  */

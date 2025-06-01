@@ -66,19 +66,20 @@ public class NoteEditApiController
             return getErrorResponse("seq_root_user_note_info_id is required");
         }
 
-        // 管理者サイトユーザメモ情報更新
-        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId.get()),
-                request.getTitle());
-
         Optional<RootUserNoteInfo> optional = rootUserNoteInfoSearchService
                 .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
         if (!optional.isPresent()) {
             return getErrorResponse("note_info is not found");
         }
+
+        // 管理者サイトユーザメモ情報更新
+        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId.get()),
+                request.getTitle());
         // メモファイルの更新
         awsS3Component.putFile(optional.get().getS3Key(), request.getDetail());
         // Slack通知
-        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get() + "を編集.");
+        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get()
+                + ", S3キー=" + optional.get().getS3Key() + "を編集.");
 
         NoteEditApiResponse response = getSuccessResponse();
         return response;

@@ -14,7 +14,7 @@ import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
 
 /**
- * メモ一覧取得APIレスポンス情報
+ * メモ情報一覧取得APIレスポンス情報
  *
  * @version 1.0.0
  */
