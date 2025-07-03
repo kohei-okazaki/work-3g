@@ -278,6 +278,51 @@
                 "items": [
                   {
                     "enabled": true,
+                    "name": "height",
+                    "value": "170.5"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "weight",
+                    "value": "60"
+                  }
+                ]
+              },
+              "host": "${CALC_API_GW_URL}",
+              "path": "/basic"
+            },
+            "id": "bfd814fa-db9d-48c5-8daf-c16ff0d3d288",
+            "name": "3.基礎健康情報計算API for API Gateway",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
                     "name": "gender",
                     "value": "0"
                   },
@@ -343,6 +388,66 @@
                 "items": [
                   {
                     "enabled": true,
+                    "name": "gender",
+                    "value": "0"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "age",
+                    "value": "20"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "height",
+                    "value": "170.0"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "weight",
+                    "value": "50.0"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "life_work_metabolism",
+                    "value": "1200"
+                  }
+                ]
+              },
+              "host": "${CALC_API_GW_URL}",
+              "path": "/calorie"
+            },
+            "id": "1459e934-45f0-4e2b-a14f-8b4b4ca2107a",
+            "name": "4.カロリー計算API for API Gateway",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
                     "name": "age",
                     "value": "20"
                   },
@@ -376,12 +481,63 @@
               }
             ]
           }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": [
+                  {
+                    "enabled": true,
+                    "name": "age",
+                    "value": "20"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "height",
+                    "value": "170.00"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "gender",
+                    "value": "0"
+                  }
+                ]
+              },
+              "host": "${CALC_API_GW_URL}",
+              "path": "/breathing_capacity"
+            },
+            "id": "daeea3dd-d045-4c62-90bf-18ab8f332a3b",
+            "name": "5.肺活量計算API for API Gateway",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
         }
       ]
     },
     {
       "entity": {
         "type": "Project",
+        "description": "",
         "id": "3ef358a0-4c2d-42c9-81ca-55198d05c7ed",
         "name": "3.管理者用API"
       },
@@ -1406,6 +1562,13 @@
           "createdAt": "2025-06-01T13:11:06.356+09:00",
           "name": "APP_API_KEY",
           "value": "e8c1aa2b799869d06cec11d069729cf05215d752e9b9a5471ebd3551454604ca",
+          "enabled": true,
+          "private": false
+        },
+        "208c8505-dbd7-4555-93fe-17fd2f7d63de": {
+          "createdAt": "2025-07-03T23:56:51.655+09:00",
+          "name": "CALC_API_GW_URL",
+          "value": "https://gpjylo82oa.execute-api.ap-northeast-1.amazonaws.com/dev",
           "enabled": true,
           "private": false
         }
