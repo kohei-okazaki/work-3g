@@ -1,10 +1,11 @@
 # ha-node
 
 ## 概要
-健康管理アプリで健康情報の計算処理を行うJavaScriptのプロジェクト
+健康管理アプリで健康情報の計算処理を行うNode.jsのプロジェクト  
+AWS Gatewayとlambdaで構成  
 
 ## サーバサイド言語
-Node.js 14.16.0
+Node.js 14.16.0→22.x
 
 ## API一覧
 
