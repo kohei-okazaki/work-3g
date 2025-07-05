@@ -3,7 +3,8 @@ package jp.co.ha.business.io.file.properties;
 import org.springframework.stereotype.Component;
 
 /**
- * 健康情報設定ファイル
+ * 健康情報設定ファイルクラス<br>
+ * 設定ファイル名:healthinfo.properties<br>
  *
  * @version 1.0.0
  */
@@ -20,6 +21,8 @@ public class HealthInfoProperties {
     private String healthInfoDashboardUrl;
     /** 健康情報APIの基底URL */
     private String healthInfoApiUrl;
+    /** NodeAPI 移行フラグ */
+    private boolean healthinfoNodeApiMigrateFlg;
     /** 管理者用APIの基底URL */
     private String rootApiUrl;
     /** 健康情報蓄積APIの基底URL */
@@ -120,6 +123,33 @@ public class HealthInfoProperties {
      */
     public void setHealthInfoApiUrl(String healthInfoApiUrl) {
         this.healthInfoApiUrl = healthInfoApiUrl;
+    }
+
+    /**
+     * healthinfoNodeApiMigrateFlgを返す
+     * 
+     * @return healthinfoNodeApiMigrateFlg
+     */
+    public boolean isHealthinfoNodeApiMigrateFlg() {
+        return healthinfoNodeApiMigrateFlg;
+    }
+
+    /**
+     * healthinfoNodeApiMigrateFlgを設定する
+     * 
+     * @param healthinfoNodeApiMigrateFlg
+     */
+    public void setHealthinfoNodeApiMigrateFlg(String healthinfoNodeApiMigrateFlg) {
+        this.healthinfoNodeApiMigrateFlg = Boolean.valueOf(healthinfoNodeApiMigrateFlg);
+    }
+
+    /**
+     * healthinfoNodeApiMigrateFlgを設定する
+     * 
+     * @param healthinfoNodeApiMigrateFlg
+     */
+    public void setHealthinfoNodeApiMigrateFlg(boolean healthinfoNodeApiMigrateFlg) {
+        this.healthinfoNodeApiMigrateFlg = healthinfoNodeApiMigrateFlg;
     }
 
     /**

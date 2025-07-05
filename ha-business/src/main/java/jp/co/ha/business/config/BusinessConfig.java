@@ -59,6 +59,7 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${reference.file.path}") String referenceFilePath,
             @Value("${healthinfo.regist.batch.file.path}") String registBatchFilePath,
             @Value("${healthinfo.node.api.url}") String healthinfoNodeApiUrl,
+            @Value("${healthinfo.node.api.migrate.flg}") boolean healthinfoNodeApiMigrateFlg,
             @Value("${healthinfo.dashboard.url}") String healthInfoDashboardUrl,
             @Value("${healthinfo.api.url}") String healthInfoApiUrl,
             @Value("${root.api.url}") String rootApiUrl,
@@ -68,6 +69,7 @@ public class BusinessConfig implements WebMvcConfigurer {
         properties.setReferenceFilePath(referenceFilePath);
         properties.setRegistBatchFilePath(registBatchFilePath);
         properties.setHealthinfoNodeApiUrl(healthinfoNodeApiUrl);
+        properties.setHealthinfoNodeApiMigrateFlg(healthinfoNodeApiMigrateFlg);
         properties.setHealthInfoDashboardUrl(healthInfoDashboardUrl);
         properties.setHealthInfoApiUrl(healthInfoApiUrl);
         properties.setRootApiUrl(rootApiUrl);
