@@ -9,6 +9,114 @@ export const handler = async (event) => {
     "life_work_metabolism": parseFloat(event.queryStringParameters.life_work_metabolism)
   };
 
+  let header = {
+    // CORS対策用
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  };
+
+  if (isNaN(request_data["gender"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. gender is required.",
+      }),
+    };
+  } else if (isNaN(request_data["age"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. age is required.",
+      }),
+    };
+  } else if (isNaN(request_data["height"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. height is required.",
+      }),
+    };
+  } else if (isNaN(request_data["weight"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. weight is required.",
+      }),
+    };
+  } else if (isNaN(request_data["life_work_metabolism"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. life_work_metabolism is required.",
+      }),
+    };
+  } else if (request_data["gender"] != 0 && request_data["gender"] != 1) {
+    // 不正チェックエラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. gender is 0 or 1.",
+      }),
+    };
+  } else if (request_data["age"] < 0) {
+    // 数値チェックエラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. age is positive.",
+      }),
+    };
+  } else if (request_data["height"] <= 0) {
+    // 数値チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. height is positive.",
+      }),
+    };
+  } else if (request_data["age"] <= 0) {
+    // 数値チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. weight is positive.",
+      }),
+    };
+  } else if (request_data["life_work_metabolism"] <= 0) {
+    // 数値チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. life_work_metabolism is positive.",
+      }),
+    };
+  }
+
   let gender_info;
   if (0 == request_data["gender"]) {
     // 男性の場合
@@ -25,8 +133,6 @@ export const handler = async (event) => {
       "age_def": 4.33,
       "adjust_def": 447.593
     };
-  } else {
-    throw new Error('gender is invalid. gender=' + request_data["gender"]);
   }
 
   // 体重部分の計算

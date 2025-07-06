@@ -1,13 +1,73 @@
 export const handler = async (event) => {
 
-  const PERCENTAGE = 100;
-
   // リクエスト情報
   let request_data = {
     "gender": parseInt(event.queryStringParameters.gender),
     "age": parseInt(event.queryStringParameters.age),
     "height": parseFloat(event.queryStringParameters.height)
   };
+
+  if (isNaN(request_data["gender"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. gender is required.",
+      }),
+    };
+  } else if (isNaN(request_data["age"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. age is required.",
+      }),
+    };
+  } else if (isNaN(request_data["height"])) {
+    // 必須エラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. height is required.",
+      }),
+    };
+  } else if (request_data["gender"] != 0 && request_data["gender"] != 1) {
+    // 不正チェックエラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. gender is 0 or 1.",
+      }),
+    };
+  } else if (request_data["age"] < 0) {
+    // 数値チェックエラー
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. age is positive.",
+      }),
+    };
+  } else if (request_data["height"] <= 0) {
+    // 数値チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. height is positive.",
+      }),
+    };
+  }
 
   let gender_info;
   if ("0" == request_data["gender"]) {
@@ -23,8 +83,6 @@ export const handler = async (event) => {
       "base_val_def": 21.78,
       "minus_def": 0.101
     };
-  } else {
-    throw new Error('gender is invalid. gender=' + request_data["gender"]);
   }
 
   // 年齢部分の計算
@@ -36,6 +94,7 @@ export const handler = async (event) => {
   predict_breathing_capacity = Math.floor(predict_breathing_capacity * Math.pow(10, 3)) / Math.pow(10, 3);
 
   // 肺活量％の計算
+  const PERCENTAGE = 100;
   let breathing_capacity_percentage = gender_info["base_breathing_capacity_def"] / predict_breathing_capacity * PERCENTAGE;
   breathing_capacity_percentage = Math.floor(breathing_capacity_percentage * Math.pow(10, 3)) / Math.pow(10, 3);
 

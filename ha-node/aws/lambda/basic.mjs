@@ -4,6 +4,56 @@ export const handler = async (event) => {
   let height = parseFloat(event.queryStringParameters.height);
   // 体重(kg)
   let weight = parseFloat(event.queryStringParameters.weight);
+
+  let header = {
+    // CORS対策用
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  };
+
+  // 妥当性チェック
+  if (isNaN(height)) {
+    // 必須チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. height is required.",
+      }),
+    };
+  } else if (isNaN(weight)) {
+    // 必須チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. weight is required.",
+      }),
+    };
+  } else if (height <= 0) {
+    // 数値チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. height is positive.",
+      }),
+    };
+  } else if (weight <= 0) {
+    // 数値チェック
+    return {
+      statusCode: 400,
+      headers: header,
+      body: JSON.stringify({
+        result: 1,
+        detail: "Invalid parameters. weight is positive.",
+      }),
+    };
+  }
+
   // 身長(m)
   let meter_height = height / 100;
   // BMI
@@ -23,11 +73,7 @@ export const handler = async (event) => {
 
   return {
     statusCode: 200,
-    headers: {
-      // CORS対策用
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
+    headers: header,
     body: JSON.stringify({
       result: 0,
       basic_health_info: basic_health_info,

@@ -90,6 +90,7 @@ public class BasicHealthInfoCalcApiComponent {
      * @throws BaseException
      *     API通信に失敗した場合
      */
+    @Deprecated
     public BasicHealthInfoCalcApiResponse callBasicHealthInfoCalcApi(
             BasicHealthInfoCalcApiRequest apiRequest, String token, Long transactionId)
             throws BaseException {
