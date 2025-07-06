@@ -1,0 +1,73 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 健康情報計算APIのSAMテンプレート
+
+Globals:
+  Function:
+    Runtime: nodejs22.x
+    Architectures:
+      - x86_64
+    Timeout: 10
+
+Resources:
+
+  # 基礎健康情報計算関数
+  BasicFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: basic
+      Handler: index.handler
+      CodeUri: ./basic/
+      Events:
+        BasicApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /basic
+            Method: GET
+            ApiId: !Ref HealthCalcApi
+
+  # カロリー計算関数
+  CalorieFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: calorie
+      Handler: index.handler
+      CodeUri: ./calorie/
+      Events:
+        CalorieApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /calorie
+            Method: GET
+            ApiId: !Ref HealthCalcApi
+
+  # 肺活量計算関数
+  BreathingCapacityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: breathing_capacity
+      Handler: index.handler
+      CodeUri: ./breathing_capacity/
+      Events:
+        CalorieApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /breathing_capacity
+            Method: GET
+            ApiId: !Ref HealthCalcApi
+
+  # HTTP API
+  HealthCalcApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: dev
+      CorsConfiguration:
+        AllowOrigins:
+          - "*"
+        AllowMethods:
+          - GET
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${HealthCalcApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"

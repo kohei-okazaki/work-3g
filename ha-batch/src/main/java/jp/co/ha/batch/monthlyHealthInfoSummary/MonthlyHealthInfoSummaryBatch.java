@@ -34,6 +34,8 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -53,6 +55,9 @@ import jp.co.ha.db.entity.HealthInfo;
 @Component
 public class MonthlyHealthInfoSummaryBatch implements Tasklet {
 
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(MonthlyHealthInfoSummaryBatch.class);
     /** 処理対象年月 */
     @Value("#{jobParameters[m]}")
     private String targetDate;
@@ -77,9 +82,10 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                         DateFormatType.YYYYMM_NOSEP)
                 : targetDate;
+        LOG.debug("targetDate=" + targetDate);
 
         // 健康情報リスト
-        List<HealthInfo> healthInfoList = getHealthInfoList(targetDate);
+        List<HealthInfo> healthInfoList = getHealthInfoList();
         // 月次健康情報集計CSV Modelリスト
         List<MonthlyHealthInfoSummaryModel> modelList = toModelList(healthInfoList);
         // 月次健康情報集計CSV
@@ -91,23 +97,26 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         slackApiComponent.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
                 + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName());
 
+        // Slack通知
+        slackApiComponent.send(ContentType.BATCH,
+                "monthly_health_info_summary_batch success.");
+
         return RepeatStatus.FINISHED;
     }
 
     /**
      * 処理対象年月の健康情報リストを返す
      *
-     * @param targetDate
-     *     処理対象年月
      * @return 健康情報リスト
      */
-    private List<HealthInfo> getHealthInfoList(String targetDate) {
+    private List<HealthInfo> getHealthInfoList() {
 
         int year = Integer.parseInt(targetDate.substring(0, 4));
         int month = Integer.parseInt(targetDate.substring(4));
         LocalDateTime from = LocalDateTime.of(year, month, 1, 0, 0, 0);
         LocalDateTime to = LocalDateTime.of(year, month,
                 DateTimeUtil.getLastDayOfMonth(from), 23, 59, 59);
+        LOG.debug("from=" + from + ", to=" + to);
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)

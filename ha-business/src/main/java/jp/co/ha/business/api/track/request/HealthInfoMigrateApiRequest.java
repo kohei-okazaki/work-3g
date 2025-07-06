@@ -22,7 +22,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     /** ユーザID */
     @JsonProperty("seq_user_id")
     private Long seqUserId;
-    /** 健康情報 */
+    /** 健康情報リスト */
     @JsonProperty("health_infos")
     private List<HealthInfo> healthInfoList;
 
@@ -69,22 +69,22 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
      */
     public static class HealthInfo {
 
-        /** ユーザID */
+        /** 健康情報ID */
         @JsonProperty("seq_health_info_id")
         private Long seqHealthInfoId;
-        /** ユーザID */
+        /** 身長 */
         @JsonProperty("height")
         private BigDecimal height;
-        /** ユーザID */
+        /** 体重 */
         @JsonProperty("weight")
         private BigDecimal weight;
-        /** ユーザID */
+        /** BMI */
         @JsonProperty("bmi")
         private BigDecimal bmi;
-        /** ユーザID */
+        /** 標準体重 */
         @JsonProperty("standard_weight")
         private BigDecimal standardWeight;
-        /** ユーザID */
+        /** 作成日時 */
         @JsonProperty("created_at")
         @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")

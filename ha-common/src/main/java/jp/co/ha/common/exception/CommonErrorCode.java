@@ -4,7 +4,8 @@ import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * 共通エラーコード
+ * 共通エラーコード<br>
+ * commonErrorCode.propertiesと一致させること
  *
  * @version 1.0.0
  */
@@ -52,7 +53,7 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
     /** 妥当性チェックエラー */
     VALIDATE_ERROR("VALIDATE_ERROR", "CW0017", LogLevel.WARN),
     /** ファイルまたはディレクトリ操作エラー */
-    FILE_OR_DIR_ERROR("FILE_OR_DIR_ERROR", "CW0018", LogLevel.WARN);
+    FILE_OR_DIR_ERROR("FILE_OR_DIR_ERROR", "CW0040", LogLevel.WARN);
 
     /**
      * コンストラクタ

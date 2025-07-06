@@ -45,6 +45,7 @@ public class TokenApiComponent {
      * @throws BaseException
      *     API通信に失敗した場合
      */
+    @Deprecated
     public TokenApiResponse callTokenApi(Long seqUserId, Long transactionId)
             throws BaseException {
 

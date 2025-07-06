@@ -5,7 +5,8 @@ import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * APIのエラーコード列挙
+ * APIのエラーコード列挙<br>
+ * apiErrorCode.propertiesと一致させること
  *
  * @version 1.0.0
  */
