@@ -1,6 +1,15 @@
 package jp.co.ha.root.type;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jp.co.ha.common.type.BaseEnum;
+import jp.co.ha.root.type.RootRoleType.RootRoleTypeDeserializer;
 
 /**
  * ユーザ権限の列挙体
@@ -12,6 +21,7 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
+@JsonDeserialize(using = RootRoleTypeDeserializer.class)
 public enum RootRoleType implements BaseEnum {
 
     /** 管理者権限 */
@@ -48,6 +58,23 @@ public enum RootRoleType implements BaseEnum {
      */
     public static RootRoleType of(String value) {
         return BaseEnum.of(RootRoleType.class, value);
+    }
+
+    /**
+     * JSONのテストモード種別のデシリアライズクラス<br>
+     * 文字列型のJSONをJavaのクラスに変換する
+     *
+     * @version 1.0.0
+     */
+    public static class RootRoleTypeDeserializer extends JsonDeserializer<RootRoleType> {
+
+        @Override
+        public RootRoleType deserialize(JsonParser parser, DeserializationContext ctxt)
+                throws IOException, JsonProcessingException {
+            String value = parser.getValueAsString();
+            return RootRoleType.of(value);
+        }
+
     }
 
 }

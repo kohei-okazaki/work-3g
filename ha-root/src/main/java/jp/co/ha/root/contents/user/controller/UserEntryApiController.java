@@ -96,7 +96,7 @@ public class UserEntryApiController
         try {
 
             // 照会権限のマスタを取得
-            RootRoleMt RefRoleMt = rootRoleMtSearchService
+            RootRoleMt refRoleMt = rootRoleMtSearchService
                     .findByRoles(Arrays.asList(RootRoleType.REF.getValue())).get(0);
 
             // 管理者サイトユーザ権限管理マスタを登録
@@ -106,7 +106,7 @@ public class UserEntryApiController
             // 管理者サイトユーザ権限詳細マスタを登録
             RootUserRoleDetailMt detailMt = new RootUserRoleDetailMt();
             detailMt.setSeqRootUserRoleMngMtId(mngMt.getSeqRootUserRoleMngMtId());
-            detailMt.setSeqRootRoleMtId(RefRoleMt.getSeqRootRoleMtId());
+            detailMt.setSeqRootRoleMtId(refRoleMt.getSeqRootRoleMtId());
             rootUserRoleDetailMtCreateService.create(detailMt);
 
             // 管理者サイトユーザログイン情報を登録

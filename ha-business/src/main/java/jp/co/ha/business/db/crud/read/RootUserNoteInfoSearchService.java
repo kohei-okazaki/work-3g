@@ -34,7 +34,8 @@ public interface RootUserNoteInfoSearchService {
     Optional<RootUserNoteInfo> findById(Long seqRootUserNoteInfoId);
 
     /**
-     * 指定されたログインIDの管理者サイトユーザメモ情報の件数を返す
+     * 指定されたログインIDの管理者サイトユーザメモ情報の件数を返す<br>
+     * ※NULLを指定した場合、ログインIDを指定せず件数を取得
      *
      * @param seqLoginId
      *     ログインID

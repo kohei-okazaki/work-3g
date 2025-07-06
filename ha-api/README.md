@@ -7,17 +7,17 @@
 - 健康情報登録API：
     - 概要：ユーザの健康情報を登録するAPI
     - URL：/api/{seqUserId}/healthinfo
-    - Method：Post
+    - Method：POST
 
 - 健康情報照会API：
     - 概要：ユーザの健康情報を参照するAPI
     - URL：/api/{seqUserId}/healthinfo/{seqHealthInfoId}
-    - Method：Get
+    - Method：GET
 
 - ヘルスチェックAPI：
     - 概要：APIサーバ起動しているかをチェックするAPI
     - URL：/api/healthcheck
-    - Method：Get
+    - Method：GET
 
 ## ログ
 - 文字コード：UTF-8

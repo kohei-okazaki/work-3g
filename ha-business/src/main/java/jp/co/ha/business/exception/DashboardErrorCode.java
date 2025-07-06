@@ -5,7 +5,8 @@ import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * ダッシュボードのエラーコード列挙
+ * ダッシュボードのエラーコード列挙<br>
+ * dashboardErrorCode.propertiesと一致させること
  *
  * @version 1.0.0
  */

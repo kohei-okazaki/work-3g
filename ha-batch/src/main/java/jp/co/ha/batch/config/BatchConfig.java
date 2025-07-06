@@ -1,5 +1,7 @@
 package jp.co.ha.batch.config;
 
+import static jp.co.ha.batch.config.BatchConfigConst.*;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -15,6 +17,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistBatch;
 import jp.co.ha.batch.healthInfoMigrateBatch.HealthInfoMigrateBatch;
+import jp.co.ha.batch.healthInfoMigrateBatch.HealthInfoMigrateValidator;
 import jp.co.ha.batch.healthcheck.HealthCheckBatch;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryBatch;
@@ -62,11 +65,11 @@ public class BatchConfig {
      *     {@linkplain BatchJobListener}
      * @return ヘルスチェックバッチJOB
      */
-    @Bean("healthCheckBatchJob")
+    @Bean(HEALTH_CHECK_BACTH_JOB_NAME)
     Job healthCheckBatchJob(JobRepository jobRepository,
-            @Qualifier("healthCheckBatchStep") Step healthCheckBatchStep,
+            @Qualifier(HEALTH_CHECK_BACTH_STEP_NAME) Step healthCheckBatchStep,
             BatchJobListener listener) {
-        return new JobBuilder("healthCheckBatchJob", jobRepository)
+        return new JobBuilder(HEALTH_CHECK_BACTH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .flow(healthCheckBatchStep)
@@ -84,10 +87,10 @@ public class BatchConfig {
      *     {@linkplain PlatformTransactionManager}
      * @return ヘルスチェックバッチのSTEP
      */
-    @Bean("healthCheckBatchStep")
+    @Bean(HEALTH_CHECK_BACTH_STEP_NAME)
     Step healthCheckBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder("healthCheckBatchStep", jobRepository)
+        return new StepBuilder(HEALTH_CHECK_BACTH_STEP_NAME, jobRepository)
                 .tasklet(healthCheckBatch, transactionManager)
                 .build();
     }
@@ -104,11 +107,11 @@ public class BatchConfig {
      *     {@linkplain BatchJobListener}
      * @return 健康情報一括登録バッチJOB
      */
-    @Bean("healthInfoFileRegistBatchJob")
+    @Bean(HEALTH_INFO_FILE_REGIST_BATCH_JOB_NAME)
     Job healthInfoFileRegistBatchJob(JobRepository jobRepository,
-            @Qualifier("healthInfoFileRegistBatchStep") Step healthInfoFileRegistBatchStep,
+            @Qualifier(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME) Step healthInfoFileRegistBatchStep,
             BatchJobListener listener) {
-        return new JobBuilder("healthInfoFileRegistBatchJob", jobRepository)
+        return new JobBuilder(HEALTH_INFO_FILE_REGIST_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
                 .flow(healthInfoFileRegistBatchStep)
@@ -127,12 +130,13 @@ public class BatchConfig {
      *     {@linkplain PlatformTransactionManager}
      * @return 健康情報一括登録バッチのSTEP
      */
-    @Bean("healthInfoFileRegistBatchStep")
+    @Bean(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME)
     Step healthInfoFileRegistBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder("healthInfoFileRegistBatchStep", jobRepository)
-                .tasklet(healthInfoFileRegistBatch, transactionManager)
-                .build();
+        return new StepBuilder(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME,
+                jobRepository)
+                        .tasklet(healthInfoFileRegistBatch, transactionManager)
+                        .build();
     }
 
     /**
@@ -147,11 +151,11 @@ public class BatchConfig {
      *     {@linkplain BatchJobListener}
      * @return 月次健康情報集計バッチJOB
      */
-    @Bean("monthlyHealthInfoSummaryBatchJob")
+    @Bean(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME)
     Job monthlyHealthInfoSummaryBatchJob(JobRepository jobRepository,
-            @Qualifier("monthlyHealthInfoSummaryBatchStep") Step monthlyHealthInfoSummaryBatchStep,
+            @Qualifier(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_STEP_NAME) Step monthlyHealthInfoSummaryBatchStep,
             BatchJobListener listener) {
-        return new JobBuilder("monthlyHealthInfoSummaryBatchJob", jobRepository)
+        return new JobBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .validator(new MonthlyHealthInfoSummaryValidator())
                 .listener(listener)
@@ -170,10 +174,10 @@ public class BatchConfig {
      *     {@linkplain PlatformTransactionManager}
      * @return 月次健康情報集計のSTEP
      */
-    @Bean("monthlyHealthInfoSummaryBatchStep")
+    @Bean(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_STEP_NAME)
     Step monthlyHealthInfoSummaryBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder("monthlyHealthInfoSummaryBatchStep", jobRepository)
+        return new StepBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_STEP_NAME, jobRepository)
                 .tasklet(monthlyHealthInfoSummaryBatch, transactionManager)
                 .build();
     }
@@ -189,12 +193,13 @@ public class BatchConfig {
      *     {@linkplain BatchJobListener}
      * @return 健康情報連携バッチJOB
      */
-    @Bean("healthInfoMigrateBatchJob")
+    @Bean(HEALTH_INFO_MIGRATE_BATCH_JOB_NAME)
     Job healthInfoMigrateBatchJob(JobRepository jobRepository,
-            @Qualifier("healthInfoMigrateBatchStep") Step healthInfoMigrateBatchStep,
+            @Qualifier(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME) Step healthInfoMigrateBatchStep,
             BatchJobListener listener) {
-        return new JobBuilder("healthInfoMigrateBatchJob", jobRepository)
+        return new JobBuilder(HEALTH_INFO_MIGRATE_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
+                .validator(new HealthInfoMigrateValidator())
                 .listener(listener)
                 .flow(healthInfoMigrateBatchStep)
                 .end()
@@ -210,10 +215,10 @@ public class BatchConfig {
      *     {@linkplain PlatformTransactionManager}
      * @return 健康情報連携バッチのSTEP
      */
-    @Bean("healthInfoMigrateBatchStep")
+    @Bean(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME)
     Step healthInfoMigrateBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder("healthInfoMigrateBatchStep", jobRepository)
+        return new StepBuilder(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME, jobRepository)
                 .tasklet(healthInfoMigrateBatch, transactionManager)
                 .build();
     }
