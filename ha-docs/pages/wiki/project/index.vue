@@ -187,7 +187,7 @@ export default {
         },
         {
           name: "ha-docs",
-          description: "健康管理アプリのドキュメントプロジェクト",
+          description: "健康管理アプリの静的ドキュメントプロジェクト",
         },
         {
           name: "ha-node",
@@ -202,6 +202,10 @@ export default {
         {
           name: "ha-root",
           description: "健康管理アプリの管理サイト(管理者向けシステム)",
+        },
+        {
+          name: "ha-track",
+          description: "健康情報を蓄積するPythonプロジェクト",
         },
         {
           name: "ha-selenium",

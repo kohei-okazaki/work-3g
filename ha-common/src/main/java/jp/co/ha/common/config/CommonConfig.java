@@ -52,6 +52,7 @@ public class CommonConfig implements WebMvcConfigurer {
      * @return BeanValidator
      */
     @Bean
+    @SuppressWarnings("rawtypes")
     BeanValidator beanValidator() {
         return new BeanValidator();
     }

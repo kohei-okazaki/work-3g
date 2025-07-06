@@ -82,6 +82,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void execute(HealthInfoRegistApiRequest request,
             HealthInfoRegistApiResponse response) throws BaseException {
 
@@ -104,7 +105,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
         } else {
 
             // トークン発行API実施
-            @SuppressWarnings("deprecation")
             TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(
                     request.getSeqUserId(), request.getTransactionId());
 
