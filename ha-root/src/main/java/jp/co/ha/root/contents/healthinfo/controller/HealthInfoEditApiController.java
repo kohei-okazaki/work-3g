@@ -26,6 +26,7 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -68,6 +69,9 @@ public class HealthInfoEditApiController extends
     /** {@linkplain HealthInfoUpdateServiceImpl} */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
+    /** {@linkplain HealthInfoProperties} */
+    @Autowired
+    private HealthInfoProperties prop;
 
     /**
      * 健康情報編集
@@ -92,16 +96,31 @@ public class HealthInfoEditApiController extends
 
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
-        // トークン発行API実施
-        TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(
-                request.getSeqUserId(), transactionId);
 
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
         BeanUtil.copy(request, basicHealthInfoCalcRequest);
-        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
-                .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
-                        tokenResponse.getToken(), transactionId);
+
+        BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse;
+        if (prop.isHealthinfoNodeApiMigrateFlg()) {
+
+            // 基礎健康情報計算API実施
+            basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+                    .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
+                            transactionId);
+
+        } else {
+
+            // トークン発行API実施
+            @SuppressWarnings("deprecation")
+            TokenApiResponse tokenResponse = tokenApiComponent.callTokenApi(
+                    request.getSeqUserId(), transactionId);
+
+            // 基礎健康情報計算API実施
+            basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
+                    .callBasicHealthInfoCalcApi(basicHealthInfoCalcRequest,
+                            tokenResponse.getToken(), transactionId);
+        }
 
         BigDecimal bmi = basicHealthInfoCalcResponse.getBasicHealthInfo().getBmi();
         BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()

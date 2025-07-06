@@ -4,7 +4,8 @@ import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
 
 /**
- * 妥当性チェック時に発生するエラーコードの列挙
+ * 妥当性チェック時に発生するエラーコードの列挙<br>
+ * validateErrorCode.properties
  *
  * @version 1.0.0
  */

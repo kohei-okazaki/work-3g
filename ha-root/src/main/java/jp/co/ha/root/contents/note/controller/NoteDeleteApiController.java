@@ -33,10 +33,10 @@ public class NoteDeleteApiController
 
     /** {@linkplain RootUserNoteInfoSearchServiceImpl} */
     @Autowired
-    private RootUserNoteInfoSearchService searchService;
+    private RootUserNoteInfoSearchService rootUserNoteInfoSearchService;
     /** {@linkplain RootUserNoteInfoDeleteServiceImpl} */
     @Autowired
-    private RootUserNoteInfoDeleteService deleteService;
+    private RootUserNoteInfoDeleteService rootUserNoteInfoDeleteService;
     /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
@@ -66,18 +66,19 @@ public class NoteDeleteApiController
         }
 
         // 管理者サイトユーザメモ情報を検索
-        Optional<RootUserNoteInfo> optional = searchService
+        Optional<RootUserNoteInfo> optional = rootUserNoteInfoSearchService
                 .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
         if (!optional.isPresent()) {
             return getErrorResponse("note_info is not found");
         }
 
         // メモ情報を削除
-        deleteService.delete(Long.valueOf(seqRootUserNoteInfoId.get()));
+        rootUserNoteInfoDeleteService.delete(Long.valueOf(seqRootUserNoteInfoId.get()));
         // メモファイルを削除
         awsS3Component.removeS3ObjectByKeys(optional.get().getS3Key());
         // Slack通知
-        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get() + "を削除.");
+        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get()
+                + ", S3キー=" + optional.get().getS3Key() + "を削除.");
 
         NoteDeleteApiResponse response = getSuccessResponse();
         return response;

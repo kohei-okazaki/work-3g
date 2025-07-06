@@ -105,6 +105,10 @@ export default {
               host: "localhost:8085",
             },
             {
+              name: "健康情報蓄積API",
+              host: "localhost:8086",
+            },
+            {
               name: "データベース",
               host: "localhost:3306",
             },
@@ -115,23 +119,23 @@ export default {
           items: [
             {
               name: "健康管理ダッシュボード",
-              host: "ec2-dashboard.ap-northeast-1.elasticbeanstalk.com",
+              host: "TODO 環境構築後、記載",
             },
             {
               name: "健康管理API",
-              host: "ec2-api.ap-northeast-1.elasticbeanstalk.com",
+              host: "TODO 環境構築後、記載",
             },
             {
               name: "管理者用API",
-              host: "",
+              host: "TODO 環境構築後、記載",
             },
             {
               name: "管理者用サイト",
-              host: "",
+              host: "TODO 環境構築後、記載",
             },
             {
               name: "健康情報計算API",
-              host: "ec2-node.ap-northeast-1.elasticbeanstalk.com",
+              host: "TODO 環境構築後、記載",
             },
             {
               name: "健康管理ドキュメント",
@@ -139,8 +143,12 @@ export default {
                 "healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/",
             },
             {
+              name: "健康情報蓄積API",
+              host: "TODO 環境構築後、記載",
+            },
+            {
               name: "データベース",
-              host: "ha-db.cdbuofyzsc79.ap-northeast-1.rds.amazonaws.com:3306",
+              host: "TODO 環境構築後、記載",
             },
           ],
         },

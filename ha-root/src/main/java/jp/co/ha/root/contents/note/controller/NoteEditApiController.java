@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
 import jp.co.ha.business.db.crud.read.impl.RootUserNoteInfoSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.RootUserNoteInfoUpdateService;
@@ -38,6 +40,9 @@ public class NoteEditApiController
     /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;
+    /** {@linkplain SlackApiComponent} */
+    @Autowired
+    private SlackApiComponent slackApi;
 
     /**
      * メモ情報編集
@@ -61,17 +66,20 @@ public class NoteEditApiController
             return getErrorResponse("seq_root_user_note_info_id is required");
         }
 
-        // 管理者サイトユーザメモ情報更新
-        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId.get()),
-                request.getTitle());
-
         Optional<RootUserNoteInfo> optional = rootUserNoteInfoSearchService
                 .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
         if (!optional.isPresent()) {
             return getErrorResponse("note_info is not found");
         }
+
+        // 管理者サイトユーザメモ情報更新
+        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId.get()),
+                request.getTitle());
         // メモファイルの更新
         awsS3Component.putFile(optional.get().getS3Key(), request.getDetail());
+        // Slack通知
+        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get()
+                + ", S3キー=" + optional.get().getS3Key() + "を編集.");
 
         NoteEditApiResponse response = getSuccessResponse();
         return response;
