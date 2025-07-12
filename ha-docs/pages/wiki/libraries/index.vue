@@ -25,8 +25,8 @@
                   <th>dashboard</th>
                   <th>api</th>
                   <th>batch</th>
-                  <th>nodeapi</th>
-                  <th>rootapi</th>
+                  <th>node api</th>
+                  <th>root api</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,7 +65,7 @@
                   </td>
                   <td>
                     <v-icon
-                      v-if="lib.projects.includes('nodeapi')"
+                      v-if="lib.projects.includes('node api')"
                       color="green"
                       >mdi-check</v-icon
                     >
@@ -73,7 +73,7 @@
                   </td>
                   <td>
                     <v-icon
-                      v-if="lib.projects.includes('rootapi')"
+                      v-if="lib.projects.includes('root api')"
                       color="green"
                       >mdi-check</v-icon
                     >
@@ -120,97 +120,85 @@ export default {
       ],
       libraryList: [
         {
-          name: "Spring Framework",
-          version: "6.1.13",
-          description: "健康管理API/ダッシュボードで使用するWeb FW",
-          projects: ["dashboard", "api", "rootapi", "batch"],
-        },
-        {
           name: "Spring Boot",
           version: "3.3.3",
-          description: "管理者APIと健康管理バッチで使用するSpring FW",
-          projects: ["rootapi", "batch"],
+          description: "健康管理ダッシュボード、健康管理API、管理者API、健康管理バッチで使用するSpring FW",
+          projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "express",
           version: "4.17.1",
           description: "Node.jsで使用するWeb FW",
-          projects: ["nodeapi"],
+          projects: ["node api"],
         },
         {
           name: "AWS-SDK",
           version: "1.12.190",
           description: "AWSのサービスを使うためのライブラリ",
-          projects: ["dashboard", "api", "rootapi", "batch"],
+          projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "Jackson",
-          version: "2.17.2",
+          version: "2.18.3",
           description: "JSONパースライブラリ",
-          projects: ["dashboard", "api", "rootapi", "batch"],
+          projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "jwt",
           version: "0.9.1",
           description: "JSON Web Tokenライブラリ",
-          projects: ["rootapi"],
+          projects: ["root api"],
         },
         {
           name: "jsonwebtoken",
           version: "8.5.1",
           description: "JSON Web Tokenライブラリ",
-          projects: ["nodeapi"],
+          projects: ["node api"],
         },
         {
           name: "apache poi",
-          version: "5.3.0",
+          version: "5.4.0",
           description: "健康管理ダッシュボードで使用する帳票用ライブラリ",
           projects: ["dashboard"],
         },
         {
           name: "logback",
-          version: "1.5.8",
+          version: "1.5.17",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
-          projects: ["dashboard", "api", "rootapi", "batch"],
+          projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "mysql",
           version: "8.4.0",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するMySQLライブラリ",
-          projects: ["dashboard", "api", "rootapi", "batch"],
+          projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "mybatis",
           version: "3.5.16",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
-          projects: ["dashboard", "api", "rootapi"],
+          projects: ["dashboard", "api", "root api"],
         },
         {
           name: "flyway",
           version: "8.5.12",
           description: "DataBaseのマイグレーションライブラリ",
-          projects: ["dashboard", "api", "rootapi"],
+          projects: ["dashboard", "api", "root api"],
         },
         {
           name: "thymeleaf",
-          version: "3.1.2.RELEASE",
+          version: "3.1.3.RELEASE",
           description: "健康管理ダッシュボードで使用するテンプレートエンジン",
           projects: ["dashboard"],
         },
         {
-          name: "slack",
-          version: "1.4.0",
-          description: "JavaからSlackAPIを呼び出すためのライブラリ",
-          projects: ["dashboard", "api", "rootapi", "batch"],
-        },
-        {
           name: "junit",
-          version: "5.11.0",
+          version: "5.12.0",
           description: "Javaのテストライブラリ",
-          projects: ["dashboard", "api", "rootapi", "batch"],
+          projects: ["dashboard", "api", "root api", "batch"],
         },
       ],
     };

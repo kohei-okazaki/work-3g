@@ -133,12 +133,12 @@ public class NewsDto {
     public static class Tag {
 
         /** 色 */
-        @Required
         @JsonProperty("color")
+        @Required(message = "color is required")
         private String color;
         /** 名前 */
-        @Required
         @JsonProperty("name")
+        @Required(message = "name is required")
         private String name;
 
         /**

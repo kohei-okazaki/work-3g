@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 import jp.co.ha.root.type.RootRoleType;
@@ -17,15 +18,19 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
 
     /** 権限 */
     @JsonProperty("roles")
+    @Required(message = "roles is required")
     private List<RootRoleType> roles;
     /** 削除フラグ */
     @JsonProperty("delete_flag")
+    @Required(message = "delete_flag is required")
     private boolean deleteFlag;
     /** パスワード */
     @JsonProperty("password")
+    @Required(message = "password is required")
     private String password;
     /** パスワード有効期限 */
     @JsonProperty("password_expire")
+    @Required(message = "password_expire is required")
     private String passwordExpire;
     /** 備考 */
     @JsonProperty("remarks")

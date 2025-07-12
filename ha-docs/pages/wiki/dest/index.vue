@@ -98,7 +98,7 @@ export default {
             },
             {
               name: "健康情報計算API",
-              host: "localhost:8084",
+              host: "https://XXXX.execute-api.ap-northeast-1.amazonaws.com/dev/",
             },
             {
               name: "健康管理ドキュメント",
@@ -115,7 +115,7 @@ export default {
           ],
         },
         {
-          envName: "EC2環境",
+          envName: "dev1環境",
           items: [
             {
               name: "健康管理ダッシュボード",

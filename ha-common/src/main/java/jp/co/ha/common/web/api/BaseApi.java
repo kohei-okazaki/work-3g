@@ -16,7 +16,6 @@ import org.springframework.http.RequestEntity.BodyBuilder;
 import org.springframework.http.RequestEntity.HeadersBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -81,7 +80,6 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
 
         Rs response = getResponse();
         HttpStatusCode code = null;
-        String errorMessage = null;
 
         try {
 
@@ -133,25 +131,20 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
                 response = responseEntity.getBody();
             }
 
-        } catch (HttpStatusCodeException e) {
-            code = e.getStatusCode();
-            if (code.is4xxClientError()) {
-                errorMessage = "Clientエラーです. HttpStatusCode=" + e.getStatusCode();
-            } else if (code.is5xxServerError()) {
-                errorMessage = "対向Serverエラーです. HttpStatusCode=" + e.getStatusCode();
-            }
-            bindErrorInfo(response, errorMessage);
-            LOG.error(errorMessage, e);
         } catch (Exception e) {
-            errorMessage = "通信エラーです.";
+
+            String errorMessage = "通信エラーです.";
             bindErrorInfo(response, errorMessage);
             LOG.error(errorMessage, e);
+
         } finally {
+
             LOG.infoBean(response);
             LOG.info("<==== API名=" + getApiName() + ", HttpStatusCode=" + code);
             if (code != null) {
                 apiConnectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
             }
+
         }
 
         return response;

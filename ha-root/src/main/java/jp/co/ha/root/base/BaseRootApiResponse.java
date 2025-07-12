@@ -1,9 +1,13 @@
 package jp.co.ha.root.base;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.type.RootApiResult;
@@ -21,9 +25,9 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     @JsonSerialize(using = RootApiResultSerializer.class)
     private RootApiResult rootApiResult;
     /** エラー情報 */
-    @JsonProperty("error")
+    @JsonProperty("errors")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private ErrorData errorData;
+    private List<ErrorData> errorList;
     /** ページング */
     @JsonProperty("paging")
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -81,22 +85,35 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     }
 
     /**
-     * errorDataを返す
+     * errorListを返す
      *
-     * @return errorData
+     * @return errorList
      */
-    public ErrorData getErrorData() {
-        return errorData;
+    public List<ErrorData> getErrorList() {
+        return errorList;
     }
 
     /**
-     * errorDataを設定する
+     * errorListを設定する
      *
-     * @param errorData
+     * @param errorList
+     *     エラー情報リスト
+     */
+    public void setErrorList(List<ErrorData> errorList) {
+        this.errorList = errorList;
+    }
+
+    /**
+     * エラー情報を追加する
+     *
+     * @param error
      *     エラー情報
      */
-    public void setErrorData(ErrorData errorData) {
-        this.errorData = errorData;
+    public void addError(ErrorData error) {
+        if (CollectionUtil.isEmpty(errorList)) {
+            errorList = new ArrayList<>();
+        }
+        errorList.add(error);
     }
 
     /**

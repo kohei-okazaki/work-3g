@@ -1,10 +1,10 @@
 package jp.co.ha.common.validator;
 
+import java.util.Collection;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Required;
 
 /**
@@ -17,10 +17,20 @@ public class RequiredValidator implements ConstraintValidator<Required, Object> 
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if (BeanUtil.isNull(value)) {
+        if (value == null) {
             return false;
         }
-        return !StringUtil.isEmpty(value.toString());
+
+        if (value instanceof String str) {
+            return !str.isBlank();
+        }
+
+        if (value instanceof Collection<?> collection) {
+            return !collection.isEmpty();
+        }
+
+        // 他の型は null でなければ OK
+        return true;
     }
 
 }
