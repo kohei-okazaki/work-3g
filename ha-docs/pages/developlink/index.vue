@@ -108,9 +108,9 @@ export default {
               url: "http://localhost:8080/login",
             },
             {
-              envName: "EC2環境",
+              envName: "dev1環境",
               url:
-                "http://ec2-dashboard.ap-northeast-1.elasticbeanstalk.com/login",
+                "http://dev1-dashboard.ap-northeast-1.elasticbeanstalk.com/login",
             },
           ],
         },
@@ -122,7 +122,7 @@ export default {
               url: "http://localhost:8083/login",
             },
             {
-              envName: "EC2環境",
+              envName: "dev1環境",
               url: "",
             },
           ],

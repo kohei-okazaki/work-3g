@@ -71,8 +71,7 @@ public enum RootRoleType implements BaseEnum {
         @Override
         public RootRoleType deserialize(JsonParser parser, DeserializationContext ctxt)
                 throws IOException, JsonProcessingException {
-            String value = parser.getValueAsString();
-            return RootRoleType.of(value);
+            return RootRoleType.of(parser.getValueAsString());
         }
 
     }

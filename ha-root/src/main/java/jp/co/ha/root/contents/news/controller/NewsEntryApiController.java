@@ -2,8 +2,11 @@ package jp.co.ha.root.contents.news.controller;
 
 import java.util.StringJoiner;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,8 +52,8 @@ public class NewsEntryApiController
      *     JSONの取得/アップロードまたはSlackの通知に失敗した場合
      */
     @PostMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public NewsEntryApiResponse entry(@RequestBody NewsEntryApiRequest request)
-            throws BaseException {
+    public ResponseEntity<NewsEntryApiResponse> entry(
+            @Valid @RequestBody NewsEntryApiRequest request) throws BaseException {
 
         // S3キーを取得
         String s3Key = getS3Key();
@@ -68,10 +71,7 @@ public class NewsEntryApiController
 
         newsComponent.sendSlack(dto, "追加したお知らせ情報.json", "お知らせ情報JSONを追加.");
 
-        // レスポンス生成
-        NewsEntryApiResponse response = getSuccessResponse();
-
-        return response;
+        return ResponseEntity.ok(getSuccessResponse());
     }
 
     @Override

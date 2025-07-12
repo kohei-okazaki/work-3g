@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.validator.annotation.Decimal;
+import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
@@ -17,12 +20,20 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
 
     /** ユーザID */
     @JsonProperty("seq_user_id")
+    @Min(size = 0, message = "seq_user_id is positive")
+    @Required(message = "seq_user_id is required")
     private Long seqUserId;
+
     /** 身長 */
     @JsonProperty("height")
+    @Decimal(min = 0, message = "height is positive")
+    @Required(message = "height is required")
     private BigDecimal height;
+
     /** 体重 */
     @JsonProperty("weight")
+    @Decimal(min = 0, message = "weight is positive")
+    @Required(message = "weight is required")
     private BigDecimal weight;
 
     /**

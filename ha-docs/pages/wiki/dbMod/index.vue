@@ -89,7 +89,7 @@
                         作成されたMapper.xml内の物理テーブル名を大文字に置換すること
                       </p>
                       <div class="alert alert-danger" role="alert">
-                        EC2環境のDBは大文字と小文字を区別するため
+                        dev1環境のDBは大文字と小文字を区別するため
                       </div>
                     </li>
                   </ol>
@@ -179,7 +179,7 @@
                         作成されたMapper.xml内の物理テーブル名を大文字に置換すること
                       </p>
                       <div class="alert alert-danger" role="alert">
-                        EC2環境のDBは大文字と小文字を区別するため
+                        dev1環境のDBは大文字と小文字を区別するため
                       </div>
                     </li>
                   </ol>

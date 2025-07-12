@@ -44,11 +44,11 @@
         <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
-    <!-- EC2環境 -->
+    <!-- dev1環境 -->
     <profile>
-      <id>ec2</id>
+      <id>dev1</id>
       <properties>
-        <resources.directory>${basedir}/profile/ec2</resources.directory>
+        <resources.directory>${basedir}/profile/dev1</resources.directory>
       </properties>
     </profile>
   </profiles>

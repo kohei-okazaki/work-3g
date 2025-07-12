@@ -2,9 +2,12 @@ package jp.co.ha.root.contents.user.controller;
 
 import java.util.Arrays;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -83,16 +86,13 @@ public class UserEntryApiController
      *     ハッシュ化に失敗した場合
      */
     @PostMapping(value = "user", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public UserEntryApiResponse entry(@RequestBody UserEntryApiRequest request)
-            throws BaseException {
-
-        // TODO 妥当性チェックを追加
+    public ResponseEntity<UserEntryApiResponse> entry(
+            @Valid @RequestBody UserEntryApiRequest request) throws BaseException {
 
         // トランザクション開始
         TransactionStatus status = transactionManager
                 .getTransaction(defaultTransactionDefinition);
 
-        Long seqLoginId = null;
         try {
 
             // 照会権限のマスタを取得
@@ -123,20 +123,22 @@ public class UserEntryApiController
             // 正常にDB登録出来た場合、コミット
             transactionManager.commit(status);
 
-            seqLoginId = entity.getSeqRootLoginInfoId();
+            UserEntryApiResponse response = getSuccessResponse();
+            response.setSeqLoginId(entity.getSeqRootLoginInfoId());
+
+            return ResponseEntity.ok(response);
 
         } catch (Exception e) {
 
             LOG.error("データの登録に失敗しました", e);
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
-            throw e;
+
+            // エラーレスポンスを返却
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("data regist error"));
         }
 
-        UserEntryApiResponse response = getSuccessResponse();
-        response.setSeqLoginId(seqLoginId);
-
-        return response;
     }
 
     @Override

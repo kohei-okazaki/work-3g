@@ -21,5 +21,5 @@
 - 文字コード：UTF-8
 - 配置先：
     - local環境：C:/app/logs/
-    - EC2環境：/var/log/app/
+    - dev1環境：/var/log/app/
     - ファイル名：dashboard-${log_level}.log

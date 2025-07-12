@@ -72,7 +72,7 @@
     <v-row align="center">
       <v-col sm="12">
         <v-card>
-          <v-card-title class="text-subtitle-1">EC2環境構成図</v-card-title>
+          <v-card-title class="text-subtitle-1">dev1環境構成図</v-card-title>
           <v-card-text align="center">
             <v-img src="/wiki/project-config-ec2.png" width="70%" />
           </v-card-text>
@@ -187,7 +187,7 @@ export default {
         },
         {
           name: "ha-docs",
-          description: "健康管理アプリのドキュメントプロジェクト",
+          description: "健康管理アプリの静的ドキュメントプロジェクト",
         },
         {
           name: "ha-node",
@@ -202,6 +202,10 @@ export default {
         {
           name: "ha-root",
           description: "健康管理アプリの管理サイト(管理者向けシステム)",
+        },
+        {
+          name: "ha-track",
+          description: "健康情報を蓄積するPythonプロジェクト",
         },
         {
           name: "ha-selenium",

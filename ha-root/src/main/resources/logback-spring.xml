@@ -8,8 +8,8 @@
     <property name="LOG_LEVEL" value="DEBUG" />
   </springProfile>
 
-  <!-- 設定EC2環境用 -->
-  <springProfile name="ec2">
+  <!-- 設定dev1環境用 -->
+  <springProfile name="dev1">
     <property name="LOG_PATH" value="/var/log/app/" />
     <property name="LOG_LEVEL" value="DEBUG" />
   </springProfile>

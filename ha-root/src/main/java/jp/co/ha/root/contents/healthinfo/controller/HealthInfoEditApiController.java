@@ -1,10 +1,12 @@
 package jp.co.ha.root.contents.healthinfo.controller;
 
 import java.math.BigDecimal;
-import java.util.Optional;
+
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -86,13 +88,11 @@ public class HealthInfoEditApiController extends
      */
     @PutMapping(value = "healthinfo/{seq_health_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoEditApiResponse edit(
-            @PathVariable(name = "seq_health_info_id", required = false) Optional<Long> seqHealthInfoId,
-            @RequestBody HealthInfoEditApiRequest request) throws BaseException {
+    public ResponseEntity<HealthInfoEditApiResponse> edit(
+            @PathVariable(name = "seq_health_info_id", required = true) Long seqHealthInfoId,
+            @Valid @RequestBody HealthInfoEditApiRequest request) throws BaseException {
 
-        if (!seqHealthInfoId.isPresent()) {
-            return getErrorResponse("seq_health_info_id is required");
-        }
+        // TODO 存在チェック
 
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
@@ -134,7 +134,7 @@ public class HealthInfoEditApiController extends
                 .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
         // 直前の健康情報を検索
         HealthInfo lastHealthInfo = healthInfoSearchService
-                .findBySeqUserIdAndLowerSeqHealthInfoId(seqHealthInfoId.get(),
+                .findBySeqUserIdAndLowerSeqHealthInfoId(seqHealthInfoId,
                         request.getSeqUserId(), selectOption);
 
         HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
@@ -144,13 +144,12 @@ public class HealthInfoEditApiController extends
 
         HealthInfo healthInfo = new HealthInfo();
         BeanUtil.copy(basicHealthInfoCalcResponse.getBasicHealthInfo(), healthInfo);
-        healthInfo.setSeqHealthInfoId(seqHealthInfoId.get());
+        healthInfo.setSeqHealthInfoId(seqHealthInfoId);
         healthInfo.setHealthInfoStatus(status.getValue());
         healthInfo.setSeqBmiRangeMtId(bmiRangeMt.getSeqBmiRangeMtId());
         healthInfoUpdateService.update(healthInfo);
 
-        HealthInfoEditApiResponse response = getSuccessResponse();
-        return response;
+        return ResponseEntity.ok(getSuccessResponse());
     }
 
     @Override

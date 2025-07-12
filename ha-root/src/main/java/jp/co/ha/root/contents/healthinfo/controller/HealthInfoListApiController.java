@@ -1,12 +1,12 @@
 package jp.co.ha.root.contents.healthinfo.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +20,7 @@ import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
+import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.healthinfo.request.HealthInfoListApiRequest;
 import jp.co.ha.root.contents.healthinfo.response.HealthInfoListApiResponse;
@@ -47,11 +48,12 @@ public class HealthInfoListApiController extends
      * @return 健康情報一覧取得APIレスポンス
      */
     @GetMapping(value = "healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public HealthInfoListApiResponse list(HealthInfoListApiRequest request,
-            @RequestParam(name = "page", required = true, defaultValue = "0") Optional<Integer> page) {
+    public ResponseEntity<HealthInfoListApiResponse> list(
+            HealthInfoListApiRequest request,
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page) {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
-        Pageable pageable = PagingViewFactory.getPageable(page.get(),
+        Pageable pageable = PagingViewFactory.getPageable(page,
                 applicationProperties.getPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
@@ -76,7 +78,7 @@ public class HealthInfoListApiController extends
         response.setHealthInfoResponseList(healthInfoResponseList);
         response.setPaging(paging);
 
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @Override

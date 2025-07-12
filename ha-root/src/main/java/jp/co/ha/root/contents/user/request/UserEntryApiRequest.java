@@ -2,6 +2,7 @@ package jp.co.ha.root.contents.user.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
@@ -14,9 +15,11 @@ public class UserEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
 
     /** パスワード */
     @JsonProperty("password")
+    @Required(message = "password is required")
     private String password;
     /** 確認用パスワード */
     @JsonProperty("conf_password")
+    @Required(message = "conf_password is required")
     private String confPassword;
 
     /**

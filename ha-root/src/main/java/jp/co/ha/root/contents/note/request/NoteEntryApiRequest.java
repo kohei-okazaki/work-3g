@@ -2,6 +2,8 @@ package jp.co.ha.root.contents.note.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
@@ -14,12 +16,16 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
 
     /** 管理者サイトログイン情報ID */
     @JsonProperty("seq_login_id")
+    @Required(message = "seq_login_id is required")
+    @Min(size = 0, message = "seq_login_id is positive")
     private Long seqRootLoginInfoId;
     /** 件名 */
     @JsonProperty("title")
+    @Required(message = "title is required")
     private String title;
     /** メモ内容 */
     @JsonProperty("detail")
+    @Required(message = "detail is required")
     private String detail;
 
     /**

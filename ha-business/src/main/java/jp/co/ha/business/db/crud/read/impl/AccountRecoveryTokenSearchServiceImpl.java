@@ -6,8 +6,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.AccountRecoveryTokenSearchService;
+import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.AccountRecoveryTokenData;
@@ -28,7 +30,9 @@ public class AccountRecoveryTokenSearchServiceImpl
     @Autowired
     private AccountRecoveryTokenDataMapper mapper;
 
+    @Select
     @Override
+    @Transactional(readOnly = true)
     public Optional<AccountRecoveryTokenData> findBySeqUserIdAndTokenAndValidTokenCreateDate(
             Long seqUserId, String token) {
 
