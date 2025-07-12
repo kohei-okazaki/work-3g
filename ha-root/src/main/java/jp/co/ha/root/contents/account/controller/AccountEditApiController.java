@@ -1,9 +1,10 @@
 package jp.co.ha.root.contents.account.controller;
 
-import java.util.Optional;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,21 +45,18 @@ public class AccountEditApiController
      */
     @PutMapping(value = "account/{seq_user_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public AccountEditApiResponse edit(
-            @PathVariable(name = "seq_user_id", required = false) Optional<Long> seqUserId,
-            @RequestBody AccountEditApiRequest request) throws BaseException {
+    public ResponseEntity<AccountEditApiResponse> edit(
+            @PathVariable(name = "seq_user_id", required = true) Long seqUserId,
+            @Valid @RequestBody AccountEditApiRequest request) throws BaseException {
 
-        if (!seqUserId.isPresent()) {
-            return getErrorResponse("seq_user_id is required");
-        }
+        // TODO 存在チェック
 
         Account entity = new Account();
         BeanUtil.copy(request, entity);
-        entity.setSeqUserId(seqUserId.get());
+        entity.setSeqUserId(seqUserId);
         updateService.updateSelective(entity);
 
-        AccountEditApiResponse response = getSuccessResponse();
-        return response;
+        return ResponseEntity.ok(getSuccessResponse());
     }
 
     @Override

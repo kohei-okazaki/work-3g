@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,41 +48,38 @@ public class NoteDeleteApiController
     /**
      * メモ情報削除処理
      *
-     * @param seqRootUserNoteInfoId
-     *     管理者サイトユーザメモ情報ID
      * @param request
      *     メモ情報削除APIリクエスト
+     * @param seqRootUserNoteInfoId
+     *     管理者サイトユーザメモ情報ID
      * @return メモ情報削除APIレスポンス
      * @throws BaseException
      */
     @DeleteMapping(value = "note/{seq_root_user_note_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public NoteDeleteApiResponse delete(
-            @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<Long> seqRootUserNoteInfoId,
-            NewsDeleteApiRequest request) throws BaseException {
-
-        if (!seqRootUserNoteInfoId.isPresent()) {
-            // URLが不正の場合
-            return getErrorResponse("seq_root_user_note_info_id is required");
-        }
+    public ResponseEntity<NoteDeleteApiResponse> delete(NewsDeleteApiRequest request,
+            @PathVariable(name = "seq_root_user_note_info_id", required = true) Long seqRootUserNoteInfoId)
+            throws BaseException {
 
         // 管理者サイトユーザメモ情報を検索
         Optional<RootUserNoteInfo> optional = rootUserNoteInfoSearchService
-                .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
+                .findById(Long.valueOf(seqRootUserNoteInfoId));
         if (!optional.isPresent()) {
-            return getErrorResponse("note_info is not found");
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("news_info is not found"));
         }
 
-        // メモ情報を削除
-        rootUserNoteInfoDeleteService.delete(Long.valueOf(seqRootUserNoteInfoId.get()));
-        // メモファイルを削除
-        awsS3Component.removeS3ObjectByKeys(optional.get().getS3Key());
-        // Slack通知
-        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get()
-                + ", S3キー=" + optional.get().getS3Key() + "を削除.");
+        String s3Key = optional.get().getS3Key();
 
-        NoteDeleteApiResponse response = getSuccessResponse();
-        return response;
+        // メモ情報を削除
+        rootUserNoteInfoDeleteService.delete(Long.valueOf(seqRootUserNoteInfoId));
+        // メモファイルを削除
+        awsS3Component.removeS3ObjectByKeys(s3Key);
+        // Slack通知
+        slackApi.send(ContentType.ROOT,
+                "メモ情報ID=" + seqRootUserNoteInfoId + ", S3キー=" + s3Key + "を削除.");
+
+        return ResponseEntity.ok(getSuccessResponse());
     }
 
     @Override

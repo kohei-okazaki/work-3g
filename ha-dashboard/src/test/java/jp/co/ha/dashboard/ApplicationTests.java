@@ -1,10 +1,10 @@
-package jp.co.ha.api;
+package jp.co.ha.dashboard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * 健康管理APIテストクラス
+ * 健康管理ダッシュボードテストクラス
  * 
  * @version 1.0.0
  */

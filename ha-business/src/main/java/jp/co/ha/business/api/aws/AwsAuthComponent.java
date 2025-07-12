@@ -29,7 +29,7 @@ public class AwsAuthComponent {
      * システムプロパティ.環境より、以下の{@linkplain AWSCredentialsProvider}インスタンスを返す<br>
      * <ul>
      * <li>ローカル環境の場合、{@linkplain ProfileCredentialsProvider}</li>
-     * <li>EC2環境の場合、{@linkplain InstanceProfileCredentialsProvider}</li>
+     * <li>dev1環境の場合、{@linkplain InstanceProfileCredentialsProvider}</li>
      * </ul>
      *
      * @return AWSCredentialsProvider
@@ -40,7 +40,7 @@ public class AwsAuthComponent {
             switch (systemConfig.getEnvironment()) {
             case LOCAL:
                 return new ProfileCredentialsProvider();
-            case EC2:
+            case DEV1:
                 return new InstanceProfileCredentialsProvider(false);
             }
         }

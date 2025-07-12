@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +38,7 @@ public class RoleMtListApiController
      * @return 権限マスタリスト取得APIレスポンス
      */
     @GetMapping(value = "roles", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public RoleMtListApiResponse get(RoleMtListApiRequest request) {
+    public ResponseEntity<RoleMtListApiResponse> get(RoleMtListApiRequest request) {
 
         List<RootRoleMt> roleList = rootRoleMtSearchService.findAll();
         RoleMtListApiResponse response = getSuccessResponse();
@@ -47,7 +48,8 @@ public class RoleMtListApiController
             role.setLabel(e.getRoleName());
             return role;
         }).collect(Collectors.toList()));
-        return response;
+
+        return ResponseEntity.ok(response);
     }
 
     @Override

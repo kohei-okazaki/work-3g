@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,7 @@ public class NewsDeleteApiController
     /**
      * お知らせ情報削除
      *
-     * @param id
+     * @param seqNewsInfoId
      *     お知らせ情報ID
      * @param request
      *     おしらせ情報削除APIリクエスト
@@ -51,22 +52,15 @@ public class NewsDeleteApiController
      */
     @DeleteMapping(value = "news/{seq_news_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public NewsDeleteApiResponse delete(
-            @PathVariable(name = "seq_news_info_id", required = false) Optional<Long> id,
+    public ResponseEntity<NewsDeleteApiResponse> delete(
+            @PathVariable(name = "seq_news_info_id", required = false) Long seqNewsInfoId,
             NewsDeleteApiRequest request) throws BaseException {
-
-        if (!id.isPresent()) {
-            // URLが不正場合
-            return getErrorResponse("id is required");
-        }
-
-        // お知らせ情報ID
-        Long seqNewsInfoId = Long.valueOf(id.get());
 
         // お知らせ情報を検索
         Optional<NewsInfo> optional = searchService.findById(seqNewsInfoId);
         if (!optional.isPresent()) {
-            return getErrorResponse("news_info is not found");
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("news_info is not found"));
         }
 
         // お知らせ情報を削除
@@ -76,9 +70,7 @@ public class NewsDeleteApiController
         // Slack通知
         newsComponent.sendSlack(seqNewsInfoId);
 
-        NewsDeleteApiResponse response = getSuccessResponse();
-
-        return response;
+        return ResponseEntity.ok(getSuccessResponse());
     }
 
     @Override

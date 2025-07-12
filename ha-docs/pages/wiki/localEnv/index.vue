@@ -501,27 +501,27 @@
                 <summary>Java インストール</summary>
                 <p>
                   <a
-                    href="https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-8-ug/downloads-list.html"
+                    href="https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-21-ug/downloads-list.html"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Amazon CorrettoのJava8</a
-                  >から各PCのOSに合わせ、Java8をインストール
+                    >Amazon CorrettoのJava21</a
+                  >から各PCのOSに合わせ、Java21をインストール
                 </p>
                 <p>
                   コマンドプロンプトまたはターミナルより以下をコマンドを実行
                 </p>
                 <kbd>$java -version</kbd>
                 <p>
-                  以下の結果が出力されていればOK（メジャーバージョンである8系が出力されていればOK）
+                  以下の結果が出力されていればOK（メジャーバージョンである21系が出力されていればOK）
                 </p>
-                <kbd>openjdk version "1.8.0_252"</kbd><br />
+                <kbd>openjdk version "21.0.4" 2024-07-16 LTS</kbd><br />
                 <kbd
-                  >OpenJDK Runtime Environment Corretto-8.252.09.2 (build
-                  1.8.0_252-b09)</kbd
+                  >OpenJDK Runtime Environment Corretto-21.0.4.7.1 (build
+                  21.0.4+7-LTS)</kbd
                 ><br />
                 <kbd
-                  >OpenJDK 64-Bit Server VM Corretto-8.252.09.2 (build
-                  25.252-b09, mixed mode)</kbd
+                  >OpenJDK 64-Bit Server VM Corretto-21.0.4.7.1 (build
+                  21.0.4+7-LTS, mixed mode, sharing)</kbd
                 >
               </details>
 
@@ -688,14 +688,15 @@
                           <li>
                             <p>
                               Windowsの場合<br /><kbd
-                                >C:\Program Files\Amazon Corretto\jre8\bin</kbd
+                                >C:\Program Files\Amazon
+                                Corretto\jdk21.0.4_7</kbd
                               >
                             </p>
                           </li>
                           <li>
                             <p>
                               Macの場合<br /><kbd
-                                >/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home/bin</kbd
+                                >/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-21.jdk/Contents/Home/bin</kbd
                               >
                             </p>
                           </li>
@@ -709,158 +710,6 @@
                   </tbody>
                 </v-simple-table>
                 <br />
-                <p>次にローカルサーバの構築を行う</p>
-
-                <br />
-                <v-alert text type="info" border="left">
-                  ローカルサーバ設定
-                </v-alert>
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>パッケージエクスプローラ上で右クリック</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>新規 選択</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>その他 選択</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>
-                        「サーバー」フォルダの「サーバー」を選択して「次へ」
-                        選択
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>ランタイム環境の構成 選択</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>追加 選択</td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>Apache Tomcat v9.0 選択</td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td>次へ 選択</td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td>
-                        名前=Amazon Corretto, JRE=インストール済のJRE →
-                        上記設定したJRE「Amazon Corretto」を選択
-                      </td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
-
-                <br />
-                <v-alert text type="info" border="left">
-                  健康管理ダッシュボードサーバの構築
-                </v-alert>
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>サーバービュー上で右クリック</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>新規 選択</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Apache Tomcat v9.0 選択</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>↓の情報を入力</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>サーバーのホスト名(H) = localhost</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>サーバー名(M) = dashboard-server</td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>サーバー・ランタイム環境(R) = Amazon Corretto</td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
-
-                <br />
-                <v-alert text type="info" border="left">
-                  健康管理APIサーバの構築
-                </v-alert>
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>操作</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1 ~ 4</td>
-                      <td>ダッシュボードサーバの構築と同様</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>サーバーのホスト名(H) = localhost</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>サーバー名(M) = api-server</td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>サーバー・ランタイム環境(R) = Amazon Corretto</td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td>サーバービュー上のapi-serverをダブルクリック</td>
-                    </tr>
-                    <tr>
-                      <td>9</td>
-                      <td>ポート部分に↓の情報で更新</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>Tomcat管理ポート = 8006</td>
-                    </tr>
-                    <tr>
-                      <td>11</td>
-                      <td>HTTP/1.1 = 8081</td>
-                    </tr>
-                    <tr>
-                      <td>12</td>
-                      <td>AJP/1.3 = 8010</td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
               </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -1000,7 +849,13 @@
                 <span>Node.js構築手順</span>
               </div>
             </v-expansion-panel-header>
+
             <v-expansion-panel-content class="text-body-2">
+              <v-alert text type="error" elevation="2" border="left">
+                <div class="text-body-2">
+                  健康情報計算APIはAWS API Gateway+Lambda化したので後続処理は基本不要。
+                </div>
+              </v-alert>
               <details>
                 <summary>Node.js インストール</summary>
                 <p>
@@ -1025,7 +880,9 @@
                 <summary>Vue cliインストール</summary>
                 <p>コマンドプロンプトより以下のコマンドを実行</p>
                 <kbd>npm install -g @vue/cli</kbd>
-                <p>以下のコマンドを実行し、任意のvue/cliのバージョンが表示されていればOK</p>
+                <p>
+                  以下のコマンドを実行し、任意のvue/cliのバージョンが表示されていればOK
+                </p>
                 <kbd>vue -V</kbd>
               </details>
 
@@ -1081,11 +938,13 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     >ここ</a
-                  >を開き<b>「LTS」</b>の最新版のインストーラをダウンロードし、ウィザードの指示に従って画面を進めればOK</p>
-                <p>以下のコマンドを実行し、更新したNodeのバージョンになっていればOK</p>
+                  >を開き<b>「LTS」</b>の最新版のインストーラをダウンロードし、ウィザードの指示に従って画面を進めればOK
+                </p>
+                <p>
+                  以下のコマンドを実行し、更新したNodeのバージョンになっていればOK
+                </p>
                 <kbd>node -v</kbd>
               </details>
-
             </v-expansion-panel-content>
           </v-expansion-panel>
 
@@ -1332,22 +1191,21 @@ export default {
         {
           type: "データベース",
           name: "MySQL",
-          version: "8.0.16",
+          version: "8.4.0",
         },
         {
           type: "DBマイグレーション",
           name: "Flyway",
-          version: "7.7.0",
+          version: "8.5.12",
         },
         {
           type: "ORM",
           name: "MyBatis",
-          version: "3.5.6",
+          version: "3.5.16",
         },
       ],
     };
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

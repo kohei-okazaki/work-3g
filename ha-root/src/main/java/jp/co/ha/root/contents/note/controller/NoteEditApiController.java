@@ -2,8 +2,11 @@ package jp.co.ha.root.contents.note.controller;
 
 import java.util.Optional;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,32 +60,29 @@ public class NoteEditApiController
      */
     @PutMapping(value = "note/{seq_root_user_note_info_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public NoteEditApiResponse edit(
-            @PathVariable(name = "seq_root_user_note_info_id", required = false) Optional<Long> seqRootUserNoteInfoId,
-            @RequestBody NoteEditApiRequest request) throws BaseException {
-
-        if (!seqRootUserNoteInfoId.isPresent()) {
-            // URLが不正の場合
-            return getErrorResponse("seq_root_user_note_info_id is required");
-        }
+    public ResponseEntity<NoteEditApiResponse> edit(
+            @PathVariable(name = "seq_root_user_note_info_id", required = true) Long seqRootUserNoteInfoId,
+            @Valid @RequestBody NoteEditApiRequest request) throws BaseException {
 
         Optional<RootUserNoteInfo> optional = rootUserNoteInfoSearchService
-                .findById(Long.valueOf(seqRootUserNoteInfoId.get()));
+                .findById(Long.valueOf(seqRootUserNoteInfoId));
         if (!optional.isPresent()) {
-            return getErrorResponse("note_info is not found");
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("note_info is not found"));
         }
 
         // 管理者サイトユーザメモ情報更新
-        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId.get()),
+        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId),
                 request.getTitle());
-        // メモファイルの更新
-        awsS3Component.putFile(optional.get().getS3Key(), request.getDetail());
-        // Slack通知
-        slackApi.send(ContentType.ROOT, "メモ情報ID=" + seqRootUserNoteInfoId.get()
-                + ", S3キー=" + optional.get().getS3Key() + "を編集.");
 
-        NoteEditApiResponse response = getSuccessResponse();
-        return response;
+        String s3Key = optional.get().getS3Key();
+        // メモファイルの更新
+        awsS3Component.putFile(s3Key, request.getDetail());
+        // Slack通知
+        slackApi.send(ContentType.ROOT,
+                "メモ情報ID=" + seqRootUserNoteInfoId + ", S3キー=" + s3Key + "を編集.");
+
+        return ResponseEntity.ok(getSuccessResponse());
     }
 
     @Override

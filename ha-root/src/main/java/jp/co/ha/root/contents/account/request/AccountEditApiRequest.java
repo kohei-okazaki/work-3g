@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
@@ -19,9 +20,11 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
 
     /** メールアドレス */
     @JsonProperty("mail_address")
+    @Required(message = "mail_address is required")
     private String mailAddress;
     /** パスワード有効期限 */
     @JsonProperty("password_expire")
+    @Required(message = "password_expire is required")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
     private LocalDate passwordExpire;

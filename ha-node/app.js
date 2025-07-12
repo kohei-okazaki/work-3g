@@ -32,9 +32,9 @@ const setConfig = {
     name: "local環境",
     port: 8084
   },
-  // EC2環境用
-  ec2: {
-    name: "ec2環境",
+  // dev1環境用
+  dev1: {
+    name: "dev1環境",
     port: 3000
   }
 }

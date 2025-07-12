@@ -1,11 +1,11 @@
 package jp.co.ha.root.contents.user.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,22 +38,21 @@ public class UserRetrieveController
      *
      * @param request
      *     ユーザ情報取得APIリクエスト
-     * @param id
+     * @param seqLoginId
      *     ログインID
      * @return ユーザ情報取得APIレスポンス
      */
     @GetMapping(value = "user/{seq_login_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public UserRetrieveApiResponse retrieve(UserRetrieveApiRequest request,
-            @PathVariable(name = "seq_login_id", required = false) Optional<String> id) {
-
-        // TODO 妥当性チェック処理
-        Long seqLoginId = Long.valueOf(id.get());
+    public ResponseEntity<UserRetrieveApiResponse> retrieve(
+            UserRetrieveApiRequest request,
+            @PathVariable(name = "seq_login_id", required = true) Long seqLoginId) {
 
         List<CompositeRootUserInfo> entityList = searchService
                 .findCompositeUserById(seqLoginId);
         if (CollectionUtil.isEmpty(entityList)) {
-            return getErrorResponse("user data is not found");
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("user data is not found"));
         }
 
         // 結合しているので権限情報以外はここから取得する
@@ -69,7 +68,7 @@ public class UserRetrieveController
         }).collect(Collectors.toList()));
         BeanUtil.copy(entity, response);
 
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @Override

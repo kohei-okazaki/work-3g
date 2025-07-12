@@ -2,8 +2,11 @@ package jp.co.ha.root.contents.note.controller;
 
 import java.util.StringJoiner;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,8 +56,8 @@ public class NoteEntryApiController
      *     メモ登録に失敗した場合
      */
     @PostMapping(value = "note", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public NoteEntryApiResponse entry(@RequestBody NoteEntryApiRequest request)
-            throws BaseException {
+    public ResponseEntity<NoteEntryApiResponse> entry(
+            @Valid @RequestBody NoteEntryApiRequest request) throws BaseException {
 
         // S3キーを取得
         String s3Key = getS3Key(request.getSeqRootLoginInfoId());
@@ -70,8 +73,7 @@ public class NoteEntryApiController
         slackApi.send(ContentType.ROOT, "メモ情報ID=" + entity.getSeqRootUserNoteInfoId()
                 + ", S3キー=" + s3Key + "を登録.");
 
-        NoteEntryApiResponse response = getSuccessResponse();
-        return response;
+        return ResponseEntity.ok(getSuccessResponse());
     }
 
     @Override
