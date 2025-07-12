@@ -16,7 +16,7 @@ import jp.co.ha.common.validator.annotation.Min;
 public class MinValidator implements ConstraintValidator<Min, Object> {
 
     /** 桁数 */
-    private int size;
+    private long size;
     /** 同じ値を含むかどうか */
     private boolean isEqual;
 
@@ -28,13 +28,20 @@ public class MinValidator implements ConstraintValidator<Min, Object> {
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
             return true;
         }
+        if (!(value instanceof Number)) {
+            // 数値型以外はチェックできないのでtrueまたはfalseにする
+            return false;
+        }
+        long longValue = ((Number) value).longValue();
+
         if (isEqual) {
-            return this.size <= value.toString().length();
+            return longValue >= size;
         } else {
-            return this.size < value.toString().length();
+            return longValue > size;
         }
     }
 

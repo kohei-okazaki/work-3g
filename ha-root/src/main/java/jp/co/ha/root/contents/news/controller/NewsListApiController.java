@@ -2,11 +2,11 @@ package jp.co.ha.root.contents.news.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +21,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
+import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.news.component.NewsComponent;
@@ -55,13 +56,12 @@ public class NewsListApiController
      *     S3よりお知らせ情報JSONを取得できなかった場合
      */
     @GetMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public NewsListApiResponse index(NewsListApiRequest request,
-            @RequestParam(name = "page", required = true, defaultValue = "0") Optional<Integer> page)
+    public ResponseEntity<NewsListApiResponse> index(NewsListApiRequest request,
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page)
             throws BaseException {
 
-        // おしらせ情報 取得
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
-        Pageable pageable = PagingViewFactory.getPageable(page.get(),
+        Pageable pageable = PagingViewFactory.getPageable(page,
                 applicationProperties.getPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
@@ -69,6 +69,7 @@ public class NewsListApiController
                 .pageable(pageable)
                 .build();
 
+        // おしらせ情報 取得
         List<NewsListApiResponse.News> newsResponseList = new ArrayList<>();
         for (NewsInfo entity : searchService.findAll(selectOption)) {
             NewsListApiResponse.News newsResponse = new NewsListApiResponse.News();
@@ -90,7 +91,7 @@ public class NewsListApiController
         response.setNewsList(newsResponseList);
         response.setPaging(paging);
 
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @Override

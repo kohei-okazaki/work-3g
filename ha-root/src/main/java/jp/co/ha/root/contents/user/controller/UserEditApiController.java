@@ -1,12 +1,14 @@
 package jp.co.ha.root.contents.user.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -86,7 +88,7 @@ public class UserEditApiController
     /**
      * 編集
      *
-     * @param id
+     * @param seqLoginId
      *     ログインID
      * @param request
      *     ユーザ編集APIリクエスト
@@ -94,15 +96,9 @@ public class UserEditApiController
      */
     @PutMapping(value = "user/{seq_login_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
-    public UserEditApiResponse edit(
-            @PathVariable(name = "seq_login_id", required = false) Optional<String> id,
-            @RequestBody UserEditApiRequest request) {
-
-        if (id == null || !id.isPresent()) {
-            return getErrorResponse("seq_login_id is required");
-        }
-
-        Long seqLoginId = Long.valueOf(id.get());
+    public ResponseEntity<UserEditApiResponse> edit(
+            @PathVariable(name = "seq_login_id", required = true) Long seqLoginId,
+            @Valid @RequestBody UserEditApiRequest request) {
 
         // トランザクション開始
         TransactionStatus status = transactionManager
@@ -117,7 +113,8 @@ public class UserEditApiController
                     .getSeqRootUserRoleMngMtId();
             if (seqRootUserRoleMngMtId == null) {
                 // エラーレスポンスを返却
-                return getErrorResponse("data illegal error");
+                return ResponseEntity.badRequest()
+                        .body(getErrorResponse("data illegal error"));
             }
 
             // ユーザの詳細マスタを削除
@@ -144,6 +141,8 @@ public class UserEditApiController
             // 正常にDB登録出来た場合、コミット
             transactionManager.commit(status);
 
+            return ResponseEntity.ok(getSuccessResponse());
+
         } catch (Exception e) {
 
             LOG.error("データの更新に失敗しました", e);
@@ -152,11 +151,9 @@ public class UserEditApiController
             transactionManager.rollback(status);
 
             // エラーレスポンスを返却
-            return getErrorResponse("data update error");
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("data update error"));
         }
-
-        UserEditApiResponse response = getSuccessResponse();
-        return response;
     }
 
     @Override

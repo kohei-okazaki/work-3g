@@ -26,8 +26,8 @@ public class SystemConfig {
 
         /** ローカル環境 */
         LOCAL("local"),
-        /** EC2環境 */
-        EC2("ec2");
+        /** dev1環境 */
+        DEV1("dev1");
 
         /** 値 */
         private String value;

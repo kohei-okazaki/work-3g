@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +27,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
+import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.note.request.NoteListApiRequest;
@@ -63,17 +64,13 @@ public class NoteListApiController
      *     レスポンスの生成に失敗した場合
      */
     @GetMapping(value = "note", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public NoteListApiResponse index(NoteListApiRequest request,
-            @RequestParam(name = "seq_login_id", required = false) Optional<Long> seqLoginId,
-            @RequestParam(name = "page", required = true, defaultValue = "0") Optional<Integer> page)
+    public ResponseEntity<NoteListApiResponse> index(NoteListApiRequest request,
+            @RequestParam(name = "seq_login_id", required = true) Long seqLoginId,
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page)
             throws BaseException {
 
-        if (!seqLoginId.isPresent()) {
-            return getErrorResponse("seq_login_id is required");
-        }
-
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
-        Pageable pageable = PagingViewFactory.getPageable(page.get(),
+        Pageable pageable = PagingViewFactory.getPageable(page,
                 applicationProperties.getPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
@@ -83,7 +80,7 @@ public class NoteListApiController
 
         // 管理者サイトユーザメモ情報リストを取得
         List<RootUserNoteInfo> list = searchService
-                .findBySeqLoginId(seqLoginId.get(), selectOption);
+                .findBySeqLoginId(seqLoginId, selectOption);
 
         List<Note> noteList = new ArrayList<>();
         for (RootUserNoteInfo entity : list) {
@@ -100,7 +97,7 @@ public class NoteListApiController
         response.setNoteList(noteList);
         response.setPaging(paging);
 
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @Override

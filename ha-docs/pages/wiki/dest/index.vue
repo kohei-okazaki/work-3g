@@ -115,7 +115,7 @@ export default {
           ],
         },
         {
-          envName: "EC2環境",
+          envName: "dev1環境",
           items: [
             {
               name: "健康管理ダッシュボード",

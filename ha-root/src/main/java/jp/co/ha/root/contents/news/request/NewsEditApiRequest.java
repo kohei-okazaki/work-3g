@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.news.request;
 
+import jakarta.validation.Valid;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.business.dto.NewsDto.Tag;
@@ -15,20 +17,21 @@ import jp.co.ha.root.base.BaseRootApiRequest;
 public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
     /** タイトル */
-    @Required
     @JsonProperty("title")
+    @Required(message = "title is required")
     private String title;
     /** 日付 */
-    @Required
     @JsonProperty("date")
+    @Required(message = "date is required")
     private String date;
     /** 詳細 */
-    @Required
     @JsonProperty("detail")
+    @Required(message = "detail is required")
     private String detail;
     /** タグ */
-    @Required
+    @Valid
     @JsonProperty("tag")
+    @Required(message = "tag is required")
     private Tag tag;
 
     /**

@@ -3,12 +3,12 @@
 # API Gateway + lambdaのビルド用のシェル
 #
 # 前提：
-# (1) AWS Cloud shellで以下のファイルをアップロードすること
+# (1) AWS Cloud Shellで以下のファイルをアップロードすること
 #   - basic.mjs
 #   - breathing_capacity.mjs
 #   - calorie.mjs
-# (2) カレンドディレクトリが「/home/cloudshell-user」であること。
-# 
+# (2) カレントディレクトリが「/home/cloudshell-user」であること。
+#
 
 HOME_DIR="/home/cloudshell-user"
 BASE_DIR="${HOME_DIR}/health-api-sam"
