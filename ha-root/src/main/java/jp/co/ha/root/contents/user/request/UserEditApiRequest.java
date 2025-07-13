@@ -1,9 +1,16 @@
 package jp.co.ha.root.contents.user.request;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import jp.co.ha.common.validator.LengthMode;
+import jp.co.ha.common.validator.annotation.Future;
+import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
@@ -31,9 +38,13 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     /** パスワード有効期限 */
     @JsonProperty("password_expire")
     @Required(message = "password_expire is required")
-    private String passwordExpire;
+    @Future(message = "password_expire is must be future")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+    private LocalDate passwordExpire;
     /** 備考 */
     @JsonProperty("remarks")
+    @Length(length = 256, mode = LengthMode.LESS_EQUAL, message = "remarks is less equal 256 byte")
     private String remarks;
 
     /**
@@ -98,7 +109,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
      *
      * @return passwordExpire
      */
-    public String getPasswordExpire() {
+    public LocalDate getPasswordExpire() {
         return passwordExpire;
     }
 
@@ -108,7 +119,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
      * @param passwordExpire
      *     パスワード有効期限
      */
-    public void setPasswordExpire(String passwordExpire) {
+    public void setPasswordExpire(LocalDate passwordExpire) {
         this.passwordExpire = passwordExpire;
     }
 

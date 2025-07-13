@@ -2,6 +2,8 @@ package jp.co.ha.root.contents.note.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.validator.LengthMode;
+import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Min;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
@@ -22,6 +24,7 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     /** 件名 */
     @JsonProperty("title")
     @Required(message = "title is required")
+    @Length(length = 30, mode = LengthMode.LESS_EQUAL, message = "title is less equal 30 byte")
     private String title;
     /** メモ内容 */
     @JsonProperty("detail")

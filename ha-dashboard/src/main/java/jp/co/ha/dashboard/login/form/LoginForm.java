@@ -1,11 +1,10 @@
 package jp.co.ha.dashboard.login.form;
 
-import jakarta.validation.constraints.Email;
-
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
-import jp.co.ha.common.validator.annotation.Max;
-import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.LengthMode;
+import jp.co.ha.common.validator.annotation.Length;
+import jp.co.ha.common.validator.annotation.MailAddress;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
@@ -19,15 +18,15 @@ public class LoginForm implements BaseForm {
 
     /** メールアドレス */
     @Required(message = "メールアドレスが未入力です")
-    @Max(size = 64, message = "パスワードは64桁以下で入力してください")
-    @Email(message = "メールアドレス形式ではありません")
+    @Length(length = 16, mode = LengthMode.LESS_EQUAL, message = "メールアドレスは64桁以下で入力してください")
+    @MailAddress(message = "メールアドレス形式ではありません")
     private String mailAddress;
     /** パスワード */
     @Mask
     @Required(message = "パスワードが未入力です")
     @Pattern(regixPattern = RegexType.HALF_CHAR, message = "パスワードが半角英数でありません")
-    @Min(size = 2, message = "パスワードは2桁以上で入力してください")
-    @Max(size = 16, message = "パスワードは16桁以下で入力してください")
+    @Length(length = 2, mode = LengthMode.GREATER_EQUAL, message = "パスワードは2桁以上で入力してください")
+    @Length(length = 16, mode = LengthMode.LESS_EQUAL, message = "パスワードは16桁以下で入力してください")
     private String password;
 
     /**
