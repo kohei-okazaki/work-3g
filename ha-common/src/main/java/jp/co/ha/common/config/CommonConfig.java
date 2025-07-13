@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -22,8 +21,9 @@ import jp.co.ha.common.web.interceptor.RequestInterceptor;
  * @version 1.0.0
  */
 @Configuration
-@PropertySource({ "classpath:crypt.properties", "classpath:jdbc.properties",
-        "classpath:system.properties" })
+// application-$env.ymlで読み込んでいるため不要
+// @PropertySource({ "classpath:crypt.properties", "classpath:jdbc.properties",
+// "classpath:system.properties" })
 @ComponentScan(basePackages = {
         "jp.co.ha.common.system",
         "jp.co.ha.common.crypt",

@@ -78,8 +78,10 @@ public class HealthCheckBatch implements Tasklet {
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
         // 健康管理API.ヘルスチェックAPI 呼び出し
         sendHealthCheckApi(transactionId);
-        // NodeAPI.ヘルスチェックAPI 呼び出し
-        sendNodeHealthCheckApi(transactionId);
+        if (!prop.isHealthinfoNodeApiMigrateFlg()) {
+            // NodeAPI.ヘルスチェックAPI 呼び出し
+            sendNodeHealthCheckApi(transactionId);
+        }
         // 管理者用API.ヘルスチェックAPI 呼び出し
         sendRootHealthCheckApi(transactionId);
 

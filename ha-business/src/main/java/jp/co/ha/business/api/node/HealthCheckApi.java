@@ -4,6 +4,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.node.request.HealthCheckApiRequest;
+import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.HealthCheckApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.common.web.api.BaseApi;
@@ -35,7 +36,7 @@ public class HealthCheckApi
 
     @Override
     public void bindErrorInfo(HealthCheckApiResponse response, String errorMessage) {
-        response.setResult(response.getResult());
+        response.setResult(Result.FAILURE);
         response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
     }
 
