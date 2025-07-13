@@ -7,33 +7,35 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.ClientConfigurationFactory;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.DeleteObjectsRequest;
-import com.amazonaws.services.s3.model.DeleteObjectsResult;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.ObjectListing;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
-
-import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Charset;
+import software.amazon.awssdk.core.ResponseInputStream;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.apache.ApacheHttpClient;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.Delete;
+import software.amazon.awssdk.services.s3.model.DeleteObjectsRequest;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
+import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.ObjectIdentifier;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Object;
 
 /**
  * AWS-Simple Storage ServiceのComponent
@@ -56,38 +58,110 @@ public class AwsS3Component {
     private AwsAuthComponent awsAuthComponent;
 
     /**
-     * {@linkplain AmazonS3}を返す
+     * S3の指定したキーにInputStreamのデータをファイルとしてアップロードする
      *
-     * @return AmazonS3
+     * @param key
+     *     バケット内のキー(ファイル名込)
+     * @param is
+     *     InputStream
+     * @param length
+     *     ファイルサイズ
      */
-    public AmazonS3 getAmazonS3() {
-        return AmazonS3ClientBuilder
-                .standard()
-                // IAMユーザ認証情報を設定
-                .withCredentials(awsAuthComponent.getAWSCredentialsProvider())
-                .withClientConfiguration(getClientConfiguration())
-                .withRegion(awsConfig.getRegion())
-                .build();
+    public void putFile(String key, long length, InputStream is) {
+
+        S3Client s3 = getS3Client();
+
+        s3.putObject(
+                PutObjectRequest.builder()
+                        .bucket(awsConfig.getBacket())
+                        .key(key)
+                        .acl(ObjectCannedACL.PUBLIC_READ)
+                        .build(),
+                RequestBody.fromInputStream(is, length));
     }
 
     /**
-     * {@linkplain S3ObjectSummary}のリストを返す
+     * 指定されたキーからファイルのInputStreamを返す<br>
+     * 必要に応じて呼び出し側で#close()
+     *
+     * @param key
+     *     キー
+     * @return InputStream
+     */
+    public InputStream getS3ObjectByKey(String key) {
+
+        S3Client s3 = getS3Client();
+
+        GetObjectRequest request = GetObjectRequest.builder()
+                .bucket(awsConfig.getBacket())
+                .key(key)
+                .build();
+
+        ResponseInputStream<GetObjectResponse> s3Object = s3.getObject(request);
+
+        return s3Object;
+    }
+
+    /**
+     * {@linkplain S3Object}のリストを返す
      *
      * @return ファイルリスト
-     * @throws BaseException
-     *     AWS、SDK接続エラー
      */
-    public List<S3ObjectSummary> getS3ObjectList() throws BaseException {
-        try {
-            LOG.debug("Amazon S3 region=" + awsConfig.getRegion().getName() + ",backet="
-                    + awsConfig.getBacket());
-            ObjectListing objectListing = getAmazonS3()
-                    .listObjects(awsConfig.getBacket());
-            return objectListing.getObjectSummaries();
-        } catch (AmazonClientException e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
-                    "リクエストの処理中にAmazon S3でエラーが発生。backet=" + awsConfig.getBacket(), e);
-        }
+    public List<S3Object> getS3ObjectList() {
+
+        S3Client s3 = getS3Client();
+
+        ListObjectsV2Request request = ListObjectsV2Request.builder()
+                .bucket(awsConfig.getBacket())
+                .build();
+
+        ListObjectsV2Response result = s3.listObjectsV2(request);
+
+        return result.contents();
+    }
+
+    /**
+     * 指定されたS3キーのファイルを削除する
+     *
+     * @param keys
+     *     S3キー
+     */
+    public void removeS3ObjectByKeys(String... keys) {
+
+        S3Client s3 = getS3Client();
+
+        DeleteObjectsRequest deleteRequest = DeleteObjectsRequest.builder()
+                .bucket(awsConfig.getBacket())
+                .delete(Delete.builder()
+                        .objects(
+                                Arrays.stream(keys)
+                                        .map(key -> ObjectIdentifier.builder().key(key)
+                                                .build())
+                                        .collect(Collectors.toList()))
+                        .build())
+                .build();
+
+        s3.deleteObjects(deleteRequest);
+    }
+
+    /**
+     * {@linkplain S3Client}を返す
+     * 
+     * @return S3Client
+     */
+    private S3Client getS3Client() {
+
+        // HttpClient にタイムアウトを設定する
+        SdkHttpClient httpClient = ApacheHttpClient.builder()
+                .connectionTimeout(Duration.ofMillis(awsConfig.getS3Timeout()))
+                .socketTimeout(Duration.ofMillis(awsConfig.getS3Timeout()))
+                .build();
+
+        return S3Client.builder()
+                .region(awsConfig.getRegion())
+                .credentialsProvider(awsAuthComponent.getAWSCredentialsProvider())
+                .httpClient(httpClient)
+                .build();
     }
 
     /**
@@ -102,33 +176,6 @@ public class AwsS3Component {
      */
     public InputStream getS3ObjectByKey(AwsS3Key key) throws BusinessException {
         return getS3ObjectByKey(key.getValue());
-    }
-
-    /**
-     * 指定されたキーからファイルのInputStreamを返す
-     *
-     * @param key
-     *     キー
-     * @return InputStream
-     * @throws BusinessException
-     *     S3からファイルダウンロードに失敗した場合
-     */
-    public InputStream getS3ObjectByKey(String key) throws BusinessException {
-
-        try {
-
-            LOG.debug("Amazon S3 region=" + awsConfig.getRegion().getName() + ",backet="
-                    + awsConfig.getBacket() + ",key=" + key);
-            GetObjectRequest request = new GetObjectRequest(awsConfig.getBacket(), key);
-            S3Object s3Object = getAmazonS3().getObject(request);
-            return s3Object.getObjectContent();
-        } catch (AmazonClientException e) {
-            throw new BusinessException(BusinessErrorCode.AWS_S3_DOWNLOAD_ERROR,
-                    "リクエストの処理中にAmazon S3でエラーが発生。backet=" + awsConfig.getBacket()
-                            + ", key=" + key,
-                    e);
-        }
-
     }
 
     /**
@@ -224,65 +271,6 @@ public class AwsS3Component {
     public void putFileByInputStream(AwsS3Key key, long length, InputStream is)
             throws BaseException {
         putFile(key.getValue(), length, is);
-    }
-
-    /**
-     * 指定されたS3キーのファイルを削除する
-     *
-     * @param keys
-     *     S3キー
-     */
-    public void removeS3ObjectByKeys(String... keys) {
-
-        // List<KeyVersion> deleteList = Stream.of(keys).map(KeyVersion::new)
-        // .collect(Collectors.toList());
-        // ファイル削除
-        @SuppressWarnings("unused")
-        DeleteObjectsResult result = getAmazonS3()
-                .deleteObjects(
-                        new DeleteObjectsRequest(awsConfig.getBacket()).withKeys(keys));
-    }
-
-    /**
-     * S3の指定したキーにInputStreamのデータをファイルとしてアップロードする
-     *
-     * @param key
-     *     バケット内のキー(ファイル名込)
-     * @param length
-     *     ファイルサイズ
-     * @param is
-     *     InputStream
-     * @throws BaseException
-     *     S3へのファイルアップロードに失敗した場合
-     */
-    public void putFile(String key, long length, InputStream is) throws BaseException {
-
-        try {
-            ObjectMetadata om = new ObjectMetadata();
-            om.setContentLength(length);
-            PutObjectRequest putRequest = new PutObjectRequest(awsConfig.getBacket(), key,
-                    is, om);
-            // 権限の設定
-            putRequest.setCannedAcl(CannedAccessControlList.PublicReadWrite);
-            // アップロード
-            getAmazonS3().putObject(putRequest);
-        } catch (AmazonClientException e) {
-            throw new BusinessException(BusinessErrorCode.AWS_S3_UPLOAD_ERROR,
-                    "リクエストの処理中にAmazon S3でエラーが発生し、S3へのファイルアップロードに失敗。backet="
-                            + awsConfig.getBacket() + ", key=" + key,
-                    e);
-        }
-    }
-
-    /**
-     * {@linkplain ClientConfiguration}を返す
-     *
-     * @return ClientConfiguration
-     */
-    private ClientConfiguration getClientConfiguration() {
-        ClientConfiguration config = new ClientConfigurationFactory().getConfig();
-        config.setConnectionTimeout(awsConfig.getS3Timeout());
-        return config;
     }
 
 }

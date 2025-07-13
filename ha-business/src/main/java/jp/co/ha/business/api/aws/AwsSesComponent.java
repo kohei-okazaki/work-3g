@@ -4,25 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.ClientConfigurationFactory;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
-import com.amazonaws.services.simpleemail.model.Body;
-import com.amazonaws.services.simpleemail.model.Content;
-import com.amazonaws.services.simpleemail.model.Destination;
-import com.amazonaws.services.simpleemail.model.MailFromDomainNotVerifiedException;
-import com.amazonaws.services.simpleemail.model.Message;
-import com.amazonaws.services.simpleemail.model.SendEmailRequest;
-import com.amazonaws.services.simpleemail.model.VerifyEmailIdentityRequest;
-import com.amazonaws.services.simpleemail.model.VerifyEmailIdentityResult;
 
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
@@ -34,6 +22,18 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.apache.ApacheHttpClient;
+import software.amazon.awssdk.services.ses.SesClient;
+import software.amazon.awssdk.services.ses.model.Body;
+import software.amazon.awssdk.services.ses.model.Content;
+import software.amazon.awssdk.services.ses.model.Destination;
+import software.amazon.awssdk.services.ses.model.MailFromDomainNotVerifiedException;
+import software.amazon.awssdk.services.ses.model.Message;
+import software.amazon.awssdk.services.ses.model.SendEmailRequest;
+import software.amazon.awssdk.services.ses.model.SendEmailResponse;
+import software.amazon.awssdk.services.ses.model.VerifyEmailIdentityRequest;
+import software.amazon.awssdk.services.ses.model.VerifyEmailIdentityResponse;
 
 /**
  * AWS-Simple Email ServiceのComponent
@@ -152,23 +152,22 @@ public class AwsSesComponent {
      */
     public VerifyResultType verifyEmailAddress(String mailAddress) {
 
-        VerifyEmailIdentityRequest verifyEmailIdentityRequest = new VerifyEmailIdentityRequest();
-        // 検証用メールアドレス
-        verifyEmailIdentityRequest.setEmailAddress(mailAddress);
-        // AWS認証情報
-        verifyEmailIdentityRequest.setRequestCredentialsProvider(
-                awsAuthComponent.getAWSCredentialsProvider());
+        try (SesClient sesClient = getSesClient()) {
+            VerifyEmailIdentityRequest request = VerifyEmailIdentityRequest.builder()
+                    .emailAddress(mailAddress)
+                    .build();
 
-        VerifyEmailIdentityResult result = getAmazonSES()
-                .verifyEmailIdentity(verifyEmailIdentityRequest);
+            VerifyEmailIdentityResponse response = sesClient.verifyEmailIdentity(request);
 
-        VerifyResultType res = StringUtil.isEmpty(
-                result.getSdkResponseMetadata().getRequestId()) ? VerifyResultType.STILL
-                        : VerifyResultType.AUTHED;
+            VerifyResultType res = StringUtil
+                    .isEmpty(response.responseMetadata().requestId())
+                            ? VerifyResultType.STILL
+                            : VerifyResultType.AUTHED;
 
-        LOG.debug("認証メール送信完了 認証結果=" + res);
+            LOG.debug("認証メール送信完了 認証結果=" + res);
 
-        return res;
+            return res;
+        }
     }
 
     /**
@@ -248,27 +247,33 @@ public class AwsSesComponent {
             Map<String, String> bodyMap) throws BaseException {
 
         if (awsConfig.isSesStubFlag()) {
-            // 料金節約のため、SESを利用しない場合メールは送信しない
             return EmailSendResultType.NOT_SEND;
         }
 
-        try {
+        try (SesClient sesClient = getSesClient()) {
 
-            LOG.debug("Amazon SES region=" + awsConfig.getRegion().getName()
+            LOG.debug("Amazon SES region=" + awsConfig.getRegion().id()
                     + ",to_mail_address=" + to);
-            Destination destination = new Destination().withToAddresses(to)
-                    .withBccAddresses(awsConfig.getMailAddress());
+
+            Destination destination = Destination.builder()
+                    .toAddresses(to)
+                    .bccAddresses(awsConfig.getMailAddress())
+                    .build();
 
             Body body = getBody(templateId, bodyMap);
-            Message message = new Message().withSubject(getContent(titleText))
-                    .withBody(body);
+            Message message = Message.builder()
+                    .subject(getContent(titleText))
+                    .body(body)
+                    .build();
 
-            SendEmailRequest request = new SendEmailRequest()
-                    .withSource(awsConfig.getMailAddress()).withDestination(destination)
-                    .withMessage(message).withRequestCredentialsProvider(
-                            awsAuthComponent.getAWSCredentialsProvider());
+            SendEmailRequest request = SendEmailRequest.builder()
+                    .source(awsConfig.getMailAddress())
+                    .destination(destination)
+                    .message(message)
+                    .build();
 
-            getAmazonSES().sendEmail(request);
+            SendEmailResponse response = sesClient.sendEmail(request);
+            LOG.debug("SES response ID=" + response.messageId());
 
             return EmailSendResultType.SUCCESS;
 
@@ -280,27 +285,23 @@ public class AwsSesComponent {
     }
 
     /**
-     * {@linkplain AmazonSimpleEmailService} を返す
-     *
-     * @return AmazonSimpleEmailService
+     * {@linkplain SesClient}を返す
+     * 
+     * @return SesClient
      */
-    public AmazonSimpleEmailService getAmazonSES() {
-        return AmazonSimpleEmailServiceClientBuilder
-                .standard()
-                .withCredentials(awsAuthComponent.getAWSCredentialsProvider())
-                .withClientConfiguration(getClientConfiguration())
-                .withRegion(awsConfig.getRegion())
-                .build();
-    }
+    private SesClient getSesClient() {
 
-    /**
-     * {@linkplain ClientConfiguration}を返す
-     *
-     * @return ClientConfiguration
-     */
-    private ClientConfiguration getClientConfiguration() {
-        return new ClientConfigurationFactory().getConfig()
-                .withConnectionTimeout(awsConfig.getSesTimeout());
+        // HttpClient にタイムアウトを設定する
+        SdkHttpClient httpClient = ApacheHttpClient.builder()
+                .connectionTimeout(Duration.ofMillis(awsConfig.getSesTimeout()))
+                .socketTimeout(Duration.ofMillis(awsConfig.getSesTimeout()))
+                .build();
+
+        return SesClient.builder()
+                .region(awsConfig.getRegion())
+                .credentialsProvider(awsAuthComponent.getAWSCredentialsProvider())
+                .httpClient(httpClient)
+                .build();
     }
 
     /**
@@ -318,7 +319,10 @@ public class AwsSesComponent {
             throws BaseException {
 
         String bodyText = replace(getBodyTemplate(templateId), bodyMap);
-        return new Body().withHtml(getContent(bodyText));
+
+        return Body.builder()
+                .html(getContent(bodyText))
+                .build();
     }
 
     /**
@@ -329,7 +333,10 @@ public class AwsSesComponent {
      * @return Content
      */
     private Content getContent(String text) {
-        return new Content().withCharset(CHARSET.getValue()).withData(text);
+        return Content.builder()
+                .charset(CHARSET.getValue())
+                .data(text)
+                .build();
     }
 
     /**

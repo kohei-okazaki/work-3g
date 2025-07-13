@@ -18,7 +18,7 @@ public class LoginForm implements BaseForm {
 
     /** メールアドレス */
     @Required(message = "メールアドレスが未入力です")
-    @Length(length = 16, mode = LengthMode.LESS_EQUAL, message = "メールアドレスは64桁以下で入力してください")
+    @Length(length = 64, mode = LengthMode.LESS_EQUAL, message = "メールアドレスは64桁以下で入力してください")
     @MailAddress(message = "メールアドレス形式ではありません")
     private String mailAddress;
     /** パスワード */

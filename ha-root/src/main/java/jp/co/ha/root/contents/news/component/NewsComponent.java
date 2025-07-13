@@ -1,6 +1,7 @@
 package jp.co.ha.root.contents.news.component;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
@@ -16,6 +17,7 @@ import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.type.Charset;
 
@@ -43,8 +45,14 @@ public class NewsComponent {
      * @throws BaseException
      */
     public NewsDto getNewsDto(String s3Key) throws BaseException {
-        return new JsonReader().read(
-                awsS3Component.getS3ObjectByKey(s3Key), NewsDto.class);
+
+        // S3からお知らせJSONを取得
+        try (InputStream is = awsS3Component.getS3ObjectByKey(s3Key)) {
+            return new JsonReader().read(is, NewsDto.class);
+        } catch (IOException e) {
+            throw new SystemException(e);
+        }
+
     }
 
     /**

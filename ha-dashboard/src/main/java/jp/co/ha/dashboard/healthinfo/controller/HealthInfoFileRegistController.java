@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -150,12 +151,7 @@ public class HealthInfoFileRegistController
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "リクエスト情報が不正です セッションキー"
                                 + FILE_NAME_PREFIX + seqUserId + "が存在しない"));
 
-        // S3から健康情報CSVファイルを取得
-        InputStream is = awsS3Component
-                .getS3ObjectByKey(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId
-                        + "/" + fileName);
-        List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
-                .readInputStream(is, Charset.UTF_8);
+        List<HealthInfoCsvUploadModel> modelList = getModelList(seqUserId, fileName);
 
         if (CollectionUtil.isEmpty(modelList)) {
             throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
@@ -171,6 +167,35 @@ public class HealthInfoFileRegistController
         }
 
         return getView(model, DashboardView.HEALTH_INFO_FILE_COMPLETE);
+    }
+
+    /**
+     * 健康情報CSVモデルリストを返す
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @param fileName
+     *     ファイル名
+     * @return 健康情報CSVモデルリスト
+     * @throws BaseException
+     *     JSON読み込みに失敗した場合
+     */
+    private List<HealthInfoCsvUploadModel> getModelList(Long seqUserId,
+            String fileName) throws BaseException {
+
+        // S3から健康情報CSVファイルを取得
+        try (InputStream is = awsS3Component
+                .getS3ObjectByKey(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId
+                        + "/" + fileName)) {
+
+            List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
+                    .readInputStream(is, Charset.UTF_8);
+
+            return modelList;
+
+        } catch (IOException e) {
+            throw new SystemException(e);
+        }
     }
 
 }
