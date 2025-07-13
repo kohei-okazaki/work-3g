@@ -2,7 +2,6 @@ package jp.co.ha.business.healthInfo.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.View;
@@ -41,16 +40,15 @@ public class HealthInfoReferExcelDownloadServiceImpl
      */
     private List<HealthInfoExcelModel> toModelList(
             List<HealthInfoReferenceDto> resultList) {
-        return Stream.iterate(0, i -> ++i).limit(resultList.size()).map(i -> {
-            // Excel出力モデル
+
+        return resultList.stream().map(e -> {
             HealthInfoExcelModel model = new HealthInfoExcelModel();
-            HealthInfoReferenceDto result = resultList.get(i);
-            model.setHeight(result.getHeight().toString());
-            model.setWeight(result.getWeight().toString());
-            model.setBmi(result.getBmi().toString());
-            model.setStandardWeight(result.getStandardWeight().toString());
+            model.setHeight(e.getHeight().toString());
+            model.setWeight(e.getWeight().toString());
+            model.setBmi(e.getBmi().toString());
+            model.setStandardWeight(e.getStandardWeight().toString());
             model.setHealthInfoRegDate(DateTimeUtil.toLocalDateTime(
-                    result.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS_STRICT));
+                    e.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS_STRICT));
             return model;
         }).collect(Collectors.toList());
     }

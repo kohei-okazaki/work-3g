@@ -28,6 +28,7 @@ public class HealthCheckApi
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getApiName() {
         return NodeApiType.HEALTH_CHECK.getApiNameType().getValue();
     }
