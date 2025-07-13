@@ -1,7 +1,5 @@
 package jp.co.ha.dashboard.account.service.impl;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -110,7 +108,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
      */
     private void mergeAccount(AccountDto dto, Account account) throws BaseException {
 
-        BeanUtil.copy(dto, account, Arrays.asList("seqUserId"));
+        BeanUtil.copy(dto, account, "seqUserId");
         account.setPasswordExpire(
                 DateTimeUtil.toLocalDate(dto.getPasswordExpire(),
                         DateFormatType.YYYYMMDD_STRICT));
@@ -130,7 +128,7 @@ public class AccountSettingServiceImpl implements AccountSettingService {
     private void mergeHealthInfoFileSetting(AccountDto dto,
             HealthInfoFileSetting healthInfoFileSetting) {
 
-        BeanUtil.copy(dto, healthInfoFileSetting, Arrays.asList("seqUserId"));
+        BeanUtil.copy(dto, healthInfoFileSetting, "seqUserId");
     }
 
 }

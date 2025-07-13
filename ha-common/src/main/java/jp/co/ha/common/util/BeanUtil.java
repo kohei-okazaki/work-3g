@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -40,10 +39,10 @@ public class BeanUtil {
      *     コピー元
      * @param dest
      *     コピー先
-     * @see BeanUtil#copy(Object, Object, List, BiConsumer)
+     * @see BeanUtil#copy(Object, Object, BiConsumer, String...)
      */
     public static void copy(Object src, Object dest) {
-        copy(src, dest, Collections.emptyList());
+        copy(src, dest, new String[] {});
     }
 
     /**
@@ -57,11 +56,11 @@ public class BeanUtil {
      *     コピー先
      * @param function
      *     コールバック処理
-     * @see BeanUtil#copy(Object, Object, List, BiConsumer)
+     * @see BeanUtil#copy(Object, Object, BiConsumer, String...)
      */
     public static void copy(Object src, Object dest,
             BiConsumer<Object, Object> function) {
-        copy(src, dest, Collections.emptyList(), function);
+        copy(src, dest, function, new String[] {});
     }
 
     /**
@@ -73,12 +72,12 @@ public class BeanUtil {
      *     コピー元
      * @param dest
      *     コピー先
-     * @param ignoreList
+     * @param ignores
      *     無視リスト
-     * @see BeanUtil#copy(Object, Object, List, BiConsumer)
+     * @see BeanUtil#copy(Object, Object, BiConsumer, String...)
      */
-    public static void copy(Object src, Object dest, List<String> ignoreList) {
-        copy(src, dest, ignoreList, null);
+    public static void copy(Object src, Object dest, String... ignores) {
+        copy(src, dest, null, ignores);
     }
 
     /**
@@ -90,13 +89,13 @@ public class BeanUtil {
      *     コピー元
      * @param dest
      *     コピー先
-     * @param ignoreList
-     *     無視リスト
      * @param function
      *     コールバック処理
+     * @param ignores
+     *     無視リスト
      */
-    public static void copy(Object src, Object dest, List<String> ignoreList,
-            BiConsumer<Object, Object> function) {
+    public static void copy(Object src, Object dest,
+            BiConsumer<Object, Object> function, String... ignores) {
 
         // コピー元のクラス型
         Class<?> srcClass = src.getClass();
@@ -104,7 +103,7 @@ public class BeanUtil {
         Class<?> destClass = dest.getClass();
         try {
             for (Field targetField : BeanUtil.getFieldList(destClass)) {
-                if (ignore(ignoreList, targetField.getName())) {
+                if (ignore(targetField.getName(), ignores)) {
                     continue;
                 }
 
@@ -258,17 +257,18 @@ public class BeanUtil {
      * 以下の場合、そのfieldではコピーを行わない<br>
      * <ul>
      * <li><code>fieldName</code>が"serialVersionUID"の場合</li>
-     * <li><code>fieldName</code>がignoreListに含まれてる場合</li>
+     * <li><code>fieldName</code>がignoresに含まれている場合</li>
      * </ul>
      *
-     * @param ignoreList
-     *     無視リスト
      * @param fieldName
      *     フィールド名
+     * @param ignores
+     *     無視リスト
      * @return 判定結果
      */
-    private static boolean ignore(List<String> ignoreList, String fieldName) {
-        return "serialVersionUID".equals(fieldName) || ignoreList.contains(fieldName);
+    private static boolean ignore(String fieldName, String... ignores) {
+        return "serialVersionUID".equals(fieldName)
+                || Arrays.asList(ignores).contains(fieldName);
     }
 
     /**

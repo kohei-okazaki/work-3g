@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.db.crud.read.AccountSearchService;
+import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.AccountUpdateService;
 import jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
@@ -28,6 +30,9 @@ import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 public class AccountEditApiController
         extends BaseRootApiController<AccountEditApiRequest, AccountEditApiResponse> {
 
+    /** {@linkplain AccountSearchServiceImpl} */
+    @Autowired
+    private AccountSearchService searchService;
     /** {@linkplain AccountUpdateServiceImpl} */
     @Autowired
     private AccountUpdateService updateService;
@@ -49,7 +54,11 @@ public class AccountEditApiController
             @PathVariable(name = "seq_user_id", required = true) Long seqUserId,
             @Valid @RequestBody AccountEditApiRequest request) throws BaseException {
 
-        // TODO 存在チェック
+        if (!searchService.findById(seqUserId).isPresent()) {
+            // 指定したユーザIDのaccountが存在しない場合
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("acount is not found"));
+        }
 
         Account entity = new Account();
         BeanUtil.copy(request, entity);
