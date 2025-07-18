@@ -52,7 +52,7 @@ public class ApiDataListApiController
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
-                applicationProperties.getPage());
+                applicationProperties.getApiPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_API_COMMUNICATION_DATA_ID", SortType.DESC)

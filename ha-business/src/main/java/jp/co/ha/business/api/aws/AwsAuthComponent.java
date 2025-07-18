@@ -3,14 +3,13 @@ package jp.co.ha.business.api.aws;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.InstanceProfileCredentialsProvider;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.system.SystemConfig;
 import jp.co.ha.common.util.BeanUtil;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 
 /**
  * AWS認証情報のComponent<br>
@@ -26,22 +25,22 @@ public class AwsAuthComponent {
     private SystemConfig systemConfig;
 
     /**
-     * システムプロパティ.環境より、以下の{@linkplain AWSCredentialsProvider}インスタンスを返す<br>
+     * システムプロパティ.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
      * <ul>
      * <li>ローカル環境の場合、{@linkplain ProfileCredentialsProvider}</li>
      * <li>dev1環境の場合、{@linkplain InstanceProfileCredentialsProvider}</li>
      * </ul>
      *
-     * @return AWSCredentialsProvider
+     * @return AwsCredentialsProvider
      */
-    public AWSCredentialsProvider getAWSCredentialsProvider() {
+    public AwsCredentialsProvider getAWSCredentialsProvider() {
 
         if (BeanUtil.notNull(systemConfig.getEnvironment())) {
             switch (systemConfig.getEnvironment()) {
             case LOCAL:
-                return new ProfileCredentialsProvider();
+                return ProfileCredentialsProvider.create();
             case DEV1:
-                return new InstanceProfileCredentialsProvider(false);
+                return InstanceProfileCredentialsProvider.create();
             }
         }
 

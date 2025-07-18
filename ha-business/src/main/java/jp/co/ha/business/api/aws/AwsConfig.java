@@ -2,7 +2,7 @@ package jp.co.ha.business.api.aws;
 
 import org.springframework.stereotype.Component;
 
-import com.amazonaws.regions.Regions;
+import software.amazon.awssdk.regions.Region;
 
 /**
  * AWSの設定情報保持クラス<br>
@@ -22,7 +22,7 @@ import com.amazonaws.regions.Regions;
 public class AwsConfig {
 
     /** リージョン */
-    private Regions region;
+    private Region region;
     /** バケット名 */
     private String backet;
     /** S3タイムアウト */
@@ -35,22 +35,23 @@ public class AwsConfig {
     private boolean sesStubFlag;
 
     /**
-     * {@linkplain Regions}を返す
+     * {@linkplain Region}を返す
      *
      * @return region
      */
-    public Regions getRegion() {
+    public Region getRegion() {
         return region;
     }
 
     /**
-     * regionを設定する
+     * regionを設定する<br>
+     * (例: "ap-northeast-1")
      *
      * @param region
      *     リージョン
      */
     public void setRegion(String region) {
-        this.region = Regions.fromName(region);
+        this.region = Region.of(region);
     }
 
     /**

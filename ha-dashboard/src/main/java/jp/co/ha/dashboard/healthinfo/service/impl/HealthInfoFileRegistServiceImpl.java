@@ -56,6 +56,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     @Override
     public void formatCheck(List<HealthInfoCsvUploadModel> modelList, Long seqUserId)
             throws BaseException {
+
         for (int i = 0; i < modelList.size(); i++) {
             HealthInfoCsvUploadModel model = modelList.get(i);
             ValidateErrorResult result = validator.validate(model);

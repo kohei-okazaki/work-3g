@@ -71,7 +71,7 @@ public class NoteListApiController
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
-                applicationProperties.getPage());
+                applicationProperties.getNotePage());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_ROOT_USER_NOTE_INFO_ID", SortType.DESC)

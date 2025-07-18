@@ -35,8 +35,6 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
@@ -177,8 +175,7 @@ public class UserEditApiController
         RootLoginInfo entity = new RootLoginInfo();
         BeanUtil.copy(beforeData, entity);
         BeanUtil.copy(request, entity);
-        entity.setPasswordExpire(DateTimeUtil.toLocalDate(request.getPasswordExpire(),
-                DateFormatType.YYYYMMDD_STRICT));
+
         if (request.getPassword() != null) {
             entity.setPassword(hashEncoder.encode(request.getPassword(), ""));
         }

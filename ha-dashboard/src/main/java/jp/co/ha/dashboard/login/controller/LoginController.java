@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.login.controller;
 
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -32,6 +33,7 @@ import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.login.form.LoginForm;
@@ -152,28 +154,16 @@ public class LoginController implements BaseWebController {
             return getView(DashboardView.LOGIN);
         }
 
+        Long seqUserId = account.get().getSeqUserId();
+
         // セッションにユーザIDを登録する。
-        sessionComponent.setValue(request.getSession(), "seqUserId",
-                account.get().getSeqUserId());
+        sessionComponent.setValue(request.getSession(), "seqUserId", seqUserId);
 
-        healthInfoGraphService.putGraph(model, () -> {
+        // 健康情報グラフ作成
+        putGraph(model, seqUserId);
 
-            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
-            HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
-            healthInfoSearchService
-                    .findBySeqUserId(account.get().getSeqUserId(), SELECT_OPTION).stream()
-                    .sorted((o1, o2) -> o1.getSeqHealthInfoId()
-                            .compareTo(o2.getSeqHealthInfoId()))
-                    .forEach(e -> {
-                        graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDDHHMMSS);
-                        graphModel.addWeight(e.getWeight());
-                        graphModel.addBmi(e.getBmi());
-                        graphModel.addStandardWeight(e.getStandardWeight());
-                    });
-
-            return graphModel;
-        });
+        // 健康情報通知設定
+        setHealthInfoRegistNotice(model, seqUserId);
 
         return getView(model, DashboardView.TOP);
 
@@ -199,6 +189,25 @@ public class LoginController implements BaseWebController {
             return getView(DashboardView.LOGIN);
         }
 
+        // 健康情報グラフ作成
+        putGraph(model, seqUserId);
+
+        // 健康情報通知設定
+        setHealthInfoRegistNotice(model, seqUserId);
+
+        return getView(model, DashboardView.TOP);
+    }
+
+    /**
+     * 健康情報グラフをModelに追加
+     * 
+     * @param model
+     *     Model
+     * @param seqUserId
+     *     ユーザID
+     */
+    private void putGraph(Model model, Long seqUserId) {
+
         // 健康情報グラフを作成
         healthInfoGraphService.putGraph(model, () -> {
 
@@ -218,6 +227,29 @@ public class LoginController implements BaseWebController {
 
             return graphModel;
         });
-        return getView(model, DashboardView.TOP);
+    }
+
+    /**
+     * 健康情報が当日未登録通知設定
+     * 
+     * @param model
+     *     Model
+     * @param seqUserId
+     *     ユーザID
+     */
+    private void setHealthInfoRegistNotice(Model model, Long seqUserId) {
+
+        // システム日時
+        LocalDateTime sysdate = DateTimeUtil.getSysDate();
+        LocalDateTime from = DateTimeUtil.getStartDay(sysdate);
+        LocalDateTime to = DateTimeUtil.getEndDay(sysdate);
+
+        long count = healthInfoSearchService
+                .countBySeqUserIdBetweenHealthInfoRegDate(seqUserId, from, to);
+
+        if (count == 0) {
+            // 通知設定
+            model.addAttribute("needNotice", "Y");
+        }
     }
 }

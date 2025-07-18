@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.news.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.system.SystemConfig;
 import jp.co.ha.common.util.PagingViewFactory;
@@ -71,10 +74,17 @@ public class NewsController implements BaseWebController {
 
         List<NewsDto> newsList = new ArrayList<>();
         for (NewsInfo entity : searchService.findAll(selectOption)) {
+
             // S3からお知らせJSONを取得
-            NewsDto dto = new JsonReader().read(
-                    awsS3Component.getS3ObjectByKey(entity.getS3Key()), NewsDto.class);
-            newsList.add(dto);
+            try (InputStream is = awsS3Component.getS3ObjectByKey(entity.getS3Key())) {
+
+                NewsDto dto = new JsonReader().read(is, NewsDto.class);
+                newsList.add(dto);
+
+            } catch (IOException e) {
+                throw new SystemException(e);
+            }
+
         }
 
         model.addAttribute("newsList", newsList);

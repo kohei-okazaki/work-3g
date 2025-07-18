@@ -112,7 +112,7 @@ public class DateTimeUtil {
      * @return 指定した日時の0時0分0秒
      */
     public static LocalDateTime getStartDay(LocalDateTime localDateTime) {
-        return localDateTime.withHour(0).withMinute(0).withSecond(0);
+        return localDateTime.withHour(0).withMinute(0).withSecond(0).withNano(0);
     }
 
     /**
@@ -123,7 +123,7 @@ public class DateTimeUtil {
      * @return 指定した日の0時0分0秒
      */
     public static LocalDateTime getStartDay(LocalDate localDate) {
-        return localDate.atTime(0, 0, 0);
+        return localDate.atTime(0, 0, 0, 0);
     }
 
     /**

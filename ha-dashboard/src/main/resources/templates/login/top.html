@@ -9,6 +9,12 @@
 <link>
 </head>
 <body>
+
+  <div class="px-4"th:if="${needNotice == 'Y'}">
+    <div class="alert alert-warning" role="alert">本日の健康情報が未登録です。
+    </div><!-- ./alert alert-warning alert-dismissible fade show -->
+  </div><!-- /.px-4 -->
+
   <div class="px-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2">最近登録した10件</h1>

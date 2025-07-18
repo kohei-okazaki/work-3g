@@ -208,7 +208,7 @@ public class TopApiController
      */
     private LocalDate getDate(String date) {
         if (StringUtil.isEmpty(date)) {
-            DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
+            return DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         }
         return DateTimeUtil.toLocalDate(date + "01",
                 DateFormatType.YYYYMMDD_NOSEP_STRICT);

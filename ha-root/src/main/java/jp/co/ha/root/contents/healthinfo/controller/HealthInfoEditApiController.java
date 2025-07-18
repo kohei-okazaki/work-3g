@@ -92,7 +92,12 @@ public class HealthInfoEditApiController extends
             @PathVariable(name = "seq_health_info_id", required = true) Long seqHealthInfoId,
             @Valid @RequestBody HealthInfoEditApiRequest request) throws BaseException {
 
-        // TODO 存在チェック
+        if (healthInfoSearchService.countByHealthInfoIdAndSeqUserId(seqHealthInfoId,
+                request.getSeqUserId()) == 0L) {
+            // 健康情報IDとユーザIDの組み合わせが存在しない場合
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("health_info is not found"));
+        }
 
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
@@ -124,11 +129,11 @@ public class HealthInfoEditApiController extends
 
         BigDecimal bmi = basicHealthInfoCalcResponse.getBasicHealthInfo().getBmi();
         BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()
-                .filter(e -> e.getRangeMin().intValue() <= bmi.intValue()
-                        && bmi.intValue() < e.getRangeMax().intValue())
+                .filter(e -> bmi.compareTo(BigDecimal.valueOf(e.getRangeMin())) >= 0 &&
+                        bmi.compareTo(BigDecimal.valueOf(e.getRangeMax())) < 0)
                 .findFirst()
                 .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
-                        "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
+                        "BMI範囲マスタの取得に失敗しました。データを確認してください。"));
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();

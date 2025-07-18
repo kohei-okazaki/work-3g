@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -18,13 +17,14 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
  * @version 1.0.0
  */
 @Configuration(proxyBeanMethods = false)
-@PropertySource({
-        "classpath:crypt.properties",
-        "classpath:jdbc.properties",
-        "classpath:system.properties",
-        "classpath:aws.properties",
-        "classpath:healthInfo.properties"
-})
+// application-$env.ymlで読み込んでいるため不要
+// @PropertySource({
+// "classpath:crypt.properties",
+// "classpath:jdbc.properties",
+// "classpath:system.properties",
+// "classpath:aws.properties",
+// "classpath:healthInfo.properties"
+// })
 @ComponentScan(basePackages = {
         "jp.co.ha.business.db.crud",
         "jp.co.ha.business.api",

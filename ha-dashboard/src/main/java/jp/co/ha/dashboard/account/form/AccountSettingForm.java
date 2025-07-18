@@ -1,14 +1,13 @@
 package jp.co.ha.dashboard.account.form;
 
-import jakarta.validation.constraints.Email;
-
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.validator.LengthMode;
 import jp.co.ha.common.validator.annotation.Date;
 import jp.co.ha.common.validator.annotation.Flag;
-import jp.co.ha.common.validator.annotation.Max;
-import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.Length;
+import jp.co.ha.common.validator.annotation.MailAddress;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
@@ -27,8 +26,8 @@ public class AccountSettingForm implements BaseForm {
     @Mask
     @Required(message = "パスワードが未入力です")
     @Pattern(regixPattern = RegexType.HALF_CHAR, message = "パスワードが半角英数でありません")
-    @Min(size = 2, message = "パスワードは2桁以上で入力してください")
-    @Max(size = 16, message = "パスワードは16桁以下で入力してください")
+    @Length(length = 2, mode = LengthMode.GREATER_EQUAL, message = "パスワードは2桁以上で入力してください")
+    @Length(length = 16, mode = LengthMode.LESS_EQUAL, message = "パスワードは16桁以下で入力してください")
     private String password;
     /** 削除フラグ */
     @Required(message = "削除フラグが未入力です")
@@ -36,12 +35,12 @@ public class AccountSettingForm implements BaseForm {
     @Flag(message = "削除フラグの値が不正です")
     private String deleteFlag;
     /** 備考 */
-    @Max(size = 256, message = "備考は256桁以下で入力してください")
+    @Length(length = 256, mode = LengthMode.LESS_EQUAL, message = "備考は256桁以下で入力してください")
     private String remarks;
     /** メールアドレス */
     @Mask
     @Required(message = "メールアドレスが未入力です")
-    @Email(message = "メールアドレス形式ではありません")
+    @MailAddress(message = "メールアドレス形式ではありません")
     private String mailAddress;
     /** APIキー */
     @Mask

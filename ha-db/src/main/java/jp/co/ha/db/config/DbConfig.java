@@ -15,7 +15,6 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -30,7 +29,8 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 @Configuration
 @EnableTransactionManagement
 @EnableCaching
-@PropertySource("classpath:jdbc.properties")
+// application-$env.ymlで読み込んでいるため不要
+// @PropertySource("classpath:jdbc.properties")
 @ComponentScan(basePackages = "jp.co.ha.db.aspect")
 @MapperScan("jp.co.ha.db.mapper")
 public class DbConfig {
