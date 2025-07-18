@@ -62,7 +62,7 @@ public class NewsListApiController
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
-                applicationProperties.getPage());
+                applicationProperties.getNewsPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)

@@ -54,7 +54,7 @@ public class HealthInfoListApiController extends
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
-                applicationProperties.getPage());
+                applicationProperties.getHealthinfoPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC)

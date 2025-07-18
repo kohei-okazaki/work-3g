@@ -1,7 +1,15 @@
 front:
-  # TODO URLを変更すること
   url: http://localhost:8083
-  page: 20
+  news:
+    page: 10
+  note:
+    page: 10
+  account:
+    page: 30
+  api:
+    page: 30
+  healthinfo:
+    page: 30
 spring:
   # 設定ファイル読込
     config:

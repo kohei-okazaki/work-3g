@@ -53,7 +53,7 @@ public class AccountListApiController
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
-                applicationProperties.getPage());
+                applicationProperties.getAccountPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_USER_ID", SortType.DESC)
