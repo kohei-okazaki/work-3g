@@ -5,15 +5,15 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <head>
-<title>アカウント設定変更確認</title>
+<title>ユーザ設定変更確認</title>
 <link>
 </head>
 <body>
 
   <div class="px-4">
     <div class="container border col-8 shadow">
-      <h2 class="menuTitle">アカウント設定変更確認</h2>
-      <form th:action="@{/accountsetting/complete}" method="post" th:object="${accountSettingForm}">
+      <h2 class="menuTitle">ユーザ設定変更確認</h2>
+      <form th:action="@{/accountsetting/complete}" method="post" th:object="${userSettingForm}">
         <table class="table table-hover table-striped">
           <tr>
             <th th:text="#{delete}"></th>

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
@@ -22,20 +23,25 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
 
     /** ログインID */
     @JsonProperty("seq_login_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long seqLoginId;
     /** 権限リスト */
     @JsonProperty("roles")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Role> roles;
     /** 削除フラグ */
     @JsonProperty("delete_flag")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String deleteFlag;
     /** パスワード有効期限 */
     @JsonProperty("password_expire")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate passwordExpire;
     /** 備考 */
     @JsonProperty("remarks")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String remarks;
 
     /**

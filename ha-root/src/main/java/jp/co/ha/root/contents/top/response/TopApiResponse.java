@@ -24,7 +24,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
     @JsonProperty("health_info_reg_graph_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<RegGraph> healthInfoRegGraphList;
-    /** アカウント登録グラフ情報リスト */
+    /** ユーザ登録グラフ情報リスト */
     @JsonProperty("account_reg_graph_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<RegGraph> accountRegGraphList;
@@ -61,7 +61,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
      * accountRegGraphListを設定する
      *
      * @param accountRegGraphList
-     *     アカウント登録グラフ情報リスト
+     *     ユーザ登録グラフ情報リスト
      */
     public void setAccountRegGraphList(List<RegGraph> accountRegGraphList) {
         this.accountRegGraphList = accountRegGraphList;

@@ -26,7 +26,7 @@
     ORDER BY
       DATE_FORMAT(HI.HEALTH_INFO_REG_DATE, '%Y-%m-%d');
   </select>
-  <select id="selectAccountByRegDate" resultMap="BaseResultMap">
+  <select id="selectUserByRegDate" resultMap="BaseResultMap">
     SELECT
       DISTINCT DATE_FORMAT(AC.REG_DATE, '%Y-%m-%d') AS DATE,
       CNT.COUNT AS COUNT

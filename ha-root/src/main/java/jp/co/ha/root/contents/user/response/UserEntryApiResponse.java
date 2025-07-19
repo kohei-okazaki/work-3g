@@ -1,5 +1,6 @@
 package jp.co.ha.root.contents.user.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
@@ -14,6 +15,7 @@ public class UserEntryApiResponse extends BaseRootApiResponse implements BaseApi
 
     /** ログインID */
     @JsonProperty("seq_login_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long seqLoginId;
 
     /**

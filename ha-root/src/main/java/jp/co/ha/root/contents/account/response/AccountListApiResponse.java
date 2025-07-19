@@ -16,14 +16,14 @@ import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
 
 /**
- * アカウント情報一覧APIレスポンスクラス
+ * ユーザ情報一覧APIレスポンスクラス
  *
  * @version 1.0.0
  */
 public class AccountListApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
-    /** アカウント情報リスト */
+    /** ユーザ情報リスト */
     @JsonProperty("account_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<AccountResponse> accountResponseList;
@@ -41,14 +41,14 @@ public class AccountListApiResponse extends BaseRootApiResponse
      * accountResponseListを設定する
      *
      * @param accountResponseList
-     *     アカウント情報リスト
+     *     ユーザ情報リスト
      */
     public void setAccountResponseList(List<AccountResponse> accountResponseList) {
         this.accountResponseList = accountResponseList;
     }
 
     /**
-     * アカウント情報
+     * ユーザ情報
      *
      * @version 1.0.0
      */
