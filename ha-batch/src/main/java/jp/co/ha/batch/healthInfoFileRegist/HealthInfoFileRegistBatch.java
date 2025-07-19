@@ -21,8 +21,8 @@ import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -34,8 +34,8 @@ import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
+import jp.co.ha.db.entity.User;
 
 /**
  * 健康情報一括登録を実行するバッチ
@@ -52,9 +52,9 @@ public class HealthInfoFileRegistBatch implements Tasklet {
     /** {@linkplain HealthInfoRegistApi} */
     @Autowired
     private HealthInfoRegistApi api;
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** {@linkplain UserSearchServiceImpl} */
     @Autowired
-    private AccountSearchService accountSearchService;
+    private UserSearchService userSearchService;
     /** {@linkplain ApiCommunicationDataComponent} */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
@@ -108,15 +108,15 @@ public class HealthInfoFileRegistBatch implements Tasklet {
                 }
             }
 
-            // アカウント情報.APIキーを設定
-            Account account = accountSearchService.findById(request.getSeqUserId())
+            // ユーザ情報.APIキーを設定
+            User user = userSearchService.findById(request.getSeqUserId())
                     .orElseThrow(() -> {
                         return new BusinessException(CommonErrorCode.DB_NO_DATA,
-                                "アカウント情報が存在しません.seq_user_id=" + request.getSeqUserId());
+                                "ユーザ情報が存在しません. seq_user_id=" + request.getSeqUserId());
                     });
 
             ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                    .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
+                    .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                     .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
                             + request.getSeqUserId() + "/healthinfo");
 

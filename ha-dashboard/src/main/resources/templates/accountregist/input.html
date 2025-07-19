@@ -11,7 +11,7 @@
 <body>
 
   <div class="px-4">
-    <form id="accountRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${accountRegistForm}">
+    <form id="userRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${userRegistForm}">
       <div class="container border col-7 shadow">
         <h2 class="menuTitle">アカウント登録</h2>
 
@@ -78,7 +78,7 @@
     $(function() {
 
       // validate処理
-      jQuery("#accountRegistForm").validationEngine({
+      jQuery("#userRegistForm").validationEngine({
         promptPosition : "bottomLeft:80"
       });
 

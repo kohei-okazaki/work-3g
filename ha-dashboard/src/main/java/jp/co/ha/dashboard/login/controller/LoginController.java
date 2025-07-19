@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 import jp.co.ha.business.healthInfo.service.impl.HealthInfoGraphServiceImpl;
@@ -38,7 +38,7 @@ import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.User;
 
 /**
  * 健康管理_ログイン画面コントローラ
@@ -54,9 +54,9 @@ public class LoginController implements BaseWebController {
     /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** {@linkplain UserSearchServiceImpl} */
     @Autowired
-    private AccountSearchService accountSearchService;
+    private UserSearchService userSearchService;
     /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
@@ -141,10 +141,10 @@ public class LoginController implements BaseWebController {
             return getView(DashboardView.LOGIN);
         }
 
-        // アカウント情報を検索
-        Optional<Account> account = accountSearchService
+        // ユーザ情報を検索
+        Optional<User> user = userSearchService
                 .findByMailAddress(form.getMailAddress());
-        LoginCheckResult checkResult = new LoginCheck().check(account,
+        LoginCheckResult checkResult = new LoginCheck().check(user,
                 form.getPassword());
         if (checkResult.hasError()) {
             String errorMessage = messageSource.getMessage(
@@ -154,7 +154,7 @@ public class LoginController implements BaseWebController {
             return getView(DashboardView.LOGIN);
         }
 
-        Long seqUserId = account.get().getSeqUserId();
+        Long seqUserId = user.get().getSeqUserId();
 
         // セッションにユーザIDを登録する。
         sessionComponent.setValue(request.getSession(), "seqUserId", seqUserId);
@@ -182,7 +182,7 @@ public class LoginController implements BaseWebController {
     @GetMapping("/top")
     public String top(Model model, HttpServletRequest request) {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
-        // ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
+        // ログイン前のユーザ作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).orElse(null);
         if (BeanUtil.isNull(seqUserId)) {

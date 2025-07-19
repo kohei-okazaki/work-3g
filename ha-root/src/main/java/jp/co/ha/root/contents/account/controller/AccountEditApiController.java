@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
-import jp.co.ha.business.db.crud.update.AccountUpdateService;
-import jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
+import jp.co.ha.business.db.crud.update.UserUpdateService;
+import jp.co.ha.business.db.crud.update.impl.UserUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.User;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.account.request.AccountEditApiRequest;
 import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 
 /**
- * アカウント情報編集APIコントローラ
+ * ユーザ情報編集APIコントローラ
  *
  * @version 1.0.0
  */
@@ -30,23 +30,23 @@ import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 public class AccountEditApiController
         extends BaseRootApiController<AccountEditApiRequest, AccountEditApiResponse> {
 
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** {@linkplain UserSearchServiceImpl} */
     @Autowired
-    private AccountSearchService searchService;
-    /** {@linkplain AccountUpdateServiceImpl} */
+    private UserSearchService searchService;
+    /** {@linkplain UserUpdateServiceImpl} */
     @Autowired
-    private AccountUpdateService updateService;
+    private UserUpdateService updateService;
 
     /**
-     * アカウント情報編集処理
+     * ユーザ情報編集処理
      *
      * @param seqUserId
      *     ユーザID
      * @param request
-     *     アカウント情報編集APIリクエスト
-     * @return アカウント情報編集APIレスポンス
+     *     ユーザ情報編集APIリクエスト
+     * @return ユーザ情報編集APIレスポンス
      * @throws BaseException
-     *     アカウント情報の編集に失敗した場合
+     *     ユーザ情報の編集に失敗した場合
      */
     @PutMapping(value = "account/{seq_user_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
@@ -60,7 +60,7 @@ public class AccountEditApiController
                     .body(getErrorResponse("acount is not found"));
         }
 
-        Account entity = new Account();
+        User entity = new User();
         BeanUtil.copy(request, entity);
         entity.setSeqUserId(seqUserId);
         updateService.updateSelective(entity);

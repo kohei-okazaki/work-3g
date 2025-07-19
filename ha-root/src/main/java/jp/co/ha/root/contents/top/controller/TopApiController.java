@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -39,9 +39,9 @@ public class TopApiController
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(TopApiController.class);
 
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** {@linkplain UserSearchServiceImpl} */
     @Autowired
-    private AccountSearchService accountSearchService;
+    private UserSearchService userSearchService;
     /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
@@ -72,7 +72,7 @@ public class TopApiController
         }
 
         TopApiResponse response = getSuccessResponse();
-        response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
+        response.setAccountRegGraphList(userSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
                     RegGraph graph = new RegGraph();
@@ -128,7 +128,7 @@ public class TopApiController
     }
 
     /**
-     * Top情報(アカウント情報)取得
+     * Top情報(ユーザ情報)取得
      *
      * @param request
      *     Top情報取得APIリクエスト
@@ -153,7 +153,7 @@ public class TopApiController
         }
 
         TopApiResponse response = getSuccessResponse();
-        response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
+        response.setAccountRegGraphList(userSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
                     RegGraph graph = new RegGraph();

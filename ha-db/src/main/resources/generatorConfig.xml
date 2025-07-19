@@ -43,7 +43,9 @@
 <!--    <table schema="work3g" tableName="ROOT_USER_ROLE_DETAIL_MT" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="ROOT_ROLE_MT" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="ROOT_USER_NOTE_INFO" modelType="hierarchical" /> -->
-    <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" />
+<!--    <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" /> -->
+    <table schema="work3g" tableName="USER" modelType="hierarchical" />
+<!--    <table schema="work3g" tableName="USER_RECOVERY_TOKEN" modelType="hierarchical" />-->
 
   </context>
 </generatorConfiguration>

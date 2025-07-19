@@ -14,7 +14,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
 /**
- * アカウント情報編集APIリクエスト
+ * ユーザ情報編集APIリクエスト
  *
  * @version 1.0.0
  */

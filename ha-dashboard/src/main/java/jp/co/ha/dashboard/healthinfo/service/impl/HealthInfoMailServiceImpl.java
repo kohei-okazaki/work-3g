@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -24,9 +24,9 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 @Service
 public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** {@linkplain UserSearchServiceImpl} */
     @Autowired
-    private AccountSearchService accountSearchService;
+    private UserSearchService userSearchService;
     /** {@linkplain AwsSesComponent} */
     @Autowired
     private AwsSesComponent sesComponent;
@@ -36,7 +36,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
             throws BaseException {
 
         Long seqUserId = apiResponse.getAccount().getSeqUserId();
-        String to = accountSearchService.findById(seqUserId).get().getMailAddress();
+        String to = userSearchService.findById(seqUserId).get().getMailAddress();
         String titleText = "健康情報登録完了メール" + DateTimeUtil.toString(
                 DateTimeUtil.getSysDate(), DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
         Map<String, String> bodyMap = new HashMap<>();

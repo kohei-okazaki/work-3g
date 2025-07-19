@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -26,7 +26,7 @@ import jp.co.ha.root.contents.account.request.AccountListApiRequest;
 import jp.co.ha.root.contents.account.response.AccountListApiResponse;
 
 /**
- * アカウント情報一覧取得APIコントローラ
+ * ユーザ情報一覧取得APIコントローラ
  *
  * @version 1.0.0
  */
@@ -34,18 +34,18 @@ import jp.co.ha.root.contents.account.response.AccountListApiResponse;
 public class AccountListApiController
         extends BaseRootApiController<AccountListApiRequest, AccountListApiResponse> {
 
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** {@linkplain UserSearchServiceImpl} */
     @Autowired
-    private AccountSearchService service;
+    private UserSearchService service;
 
     /**
-     * アカウント情報一覧取得
+     * ユーザ情報一覧取得
      *
      * @param request
-     *     アカウント情報一覧取得APIリクエスト
+     *     ユーザ情報一覧取得APIリクエスト
      * @param page
      *     取得対象ページ
-     * @return アカウント情報一覧取得APIレスポンス
+     * @return ユーザ情報一覧取得APIレスポンス
      */
     @GetMapping(value = "account", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<AccountListApiResponse> list(AccountListApiRequest request,

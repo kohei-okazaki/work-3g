@@ -34,33 +34,33 @@ public enum DashboardView implements BaseView {
     HEALTH_INFO_REF_DETAIL("healthinforeference/detail", "/healthinforeference/detail",
             DashboardBreadcrumbViewFactory.getHealthInfoDetail()),
 
-    /** アカウント設定入力画面 */
+    /** ユーザ設定入力画面 */
     ACCOUNT_SETTING_INPUT("accountsetting/input", "/accountsetting/input",
             DashboardBreadcrumbViewFactory.getAccountSetting()),
-    /** アカウント設定入力確認画面 */
+    /** ユーザ設定入力確認画面 */
     ACCOUNT_SETTING_CONFIRM("accountsetting/confirm", "/accountsetting/confirm",
             DashboardBreadcrumbViewFactory.getAccountSetting()),
-    /** アカウント設定入力完了画面 */
+    /** ユーザ設定入力完了画面 */
     ACCOUNT_SETTING_COMPLETE("accountsetting/complete", "/accountsetting/complete",
             DashboardBreadcrumbViewFactory.getAccountSetting()),
 
-    /** アカウント作成入力画面 */
+    /** ユーザ作成入力画面 */
     ACCOUNT_REGIST_INPUT("accountregist/input", "/accountregist/input",
             DashboardBreadcrumbViewFactory.getAccountRegist()),
-    /** アカウント作成入力確認画面 */
+    /** ユーザ作成入力確認画面 */
     ACCOUNT_REGIST_CONFIRM("accountregist/confirm", "/accountregist/confirm",
             DashboardBreadcrumbViewFactory.getAccountRegist()),
-    /** アカウント作成入力完了画面 */
+    /** ユーザ作成入力完了画面 */
     ACCOUNT_REGIST_COMPLETE("accountregist/complete", "/accountregist/complete",
             DashboardBreadcrumbViewFactory.getAccountRegist()),
 
-    /** アカウント回復Index画面 */
+    /** ユーザ回復Index画面 */
     ACCOUNT_RECOVERY_INDEX("accountrecovery/index", "/accountrecovery/index",
             DashboardBreadcrumbViewFactory.getAccountRecovery()),
-    /** アカウント回復入力画面 */
+    /** ユーザ回復入力画面 */
     ACCOUNT_RECOVERY_EDIT("accountrecovery/edit", "/accountrecovery/edit",
             DashboardBreadcrumbViewFactory.getAccountRecovery()),
-    /** アカウント回復入力確認画面 */
+    /** ユーザ回復入力確認画面 */
     ACCOUNT_RECOVERY_CONFIRM("accountrecovery/confirm", "/accountrecovery/confirm",
             DashboardBreadcrumbViewFactory.getAccountRecovery()),
 
