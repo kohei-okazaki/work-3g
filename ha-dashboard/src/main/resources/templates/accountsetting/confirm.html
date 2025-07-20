@@ -35,8 +35,15 @@
             <td th:text="*{passwordExpire}"></td>
           </tr>
           <tr>
-            <th th:text="#{mailAddress}"></th>
-            <td th:text="*{mailAddress}"></td>
+            <th th:text="#{genderType}"></th>
+            <td>
+              <div th:if="*{genderType} == 0">男性</div>
+              <div th:if="*{genderType} == 1">女性</div>
+            </td>
+          </tr>
+          <tr>
+            <th th:text="#{birthDate}"></th>
+            <td th:text="*{birthDate}"></td>
           </tr>
           <tr>
             <th th:text="#{headerUse}"></th>

@@ -11,6 +11,8 @@
     <result column="API_KEY" jdbcType="VARCHAR" property="apiKey" />
     <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
     <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="GENDER_TYPE" jdbcType="INTEGER" property="genderType" />
+    <result column="BIRTH_DATE" jdbcType="DATE" property="birthDate" />
     <result column="MAIL_ADDRESS" jdbcType="VARCHAR" property="mailAddress" />
     <result column="HEADER_FLAG" jdbcType="BIT" property="headerFlag" />
     <result column="FOOTER_FLAG" jdbcType="BIT" property="footerFlag" />
@@ -30,6 +32,8 @@
       , U.MAIL_ADDRESS
       , U.REG_DATE
       , U.UPDATE_DATE
+      , U.GENDER_TYPE
+      , U.BIRTH_DATE
       <!-- HEALTH_INFO_FILE_SETTING -->
       , HF.HEADER_FLAG
       , HF.FOOTER_FLAG
@@ -55,6 +59,8 @@
       , U.MAIL_ADDRESS
       , U.REG_DATE
       , U.UPDATE_DATE
+      , U.GENDER_TYPE
+      , U.BIRTH_DATE
       <!-- HEALTH_INFO_FILE_SETTING -->
       , HF.HEADER_FLAG
       , HF.FOOTER_FLAG

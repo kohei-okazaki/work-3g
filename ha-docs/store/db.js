@@ -238,7 +238,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
-          default: 1,
+          default: 0,
         },
         {
           logicalName: "誕生日",

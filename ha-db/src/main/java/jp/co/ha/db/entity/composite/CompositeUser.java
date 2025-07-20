@@ -35,6 +35,10 @@ public class CompositeUser extends CompositeUserKey {
     private String apiKey;
     /** パスワード有効期限 */
     private LocalDate passwordExpire;
+    /** 性別 */
+    private int genderType;
+    /** 誕生日 */
+    private LocalDate birthDate;
     /** 登録日時 */
     private LocalDateTime regDate;
     /** 更新日時 */
@@ -159,6 +163,44 @@ public class CompositeUser extends CompositeUserKey {
      */
     public void setPasswordExpire(LocalDate passwordExpire) {
         this.passwordExpire = passwordExpire;
+    }
+
+    /**
+     * genderTypeを返す
+     * 
+     * @return genderType
+     */
+    public int getGenderType() {
+        return genderType;
+    }
+
+    /**
+     * genderTypeを設定する
+     * 
+     * @param genderType
+     *     性別
+     */
+    public void setGenderType(int genderType) {
+        this.genderType = genderType;
+    }
+
+    /**
+     * birthDateを返す
+     * 
+     * @return birthDate
+     */
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    /**
+     * birthDateを設定する
+     * 
+     * @param birthDate
+     *     誕生日
+     */
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**

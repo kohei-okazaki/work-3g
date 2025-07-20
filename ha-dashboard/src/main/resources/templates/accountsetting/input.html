@@ -22,8 +22,9 @@
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passwordExpire')}" th:errors="*{passwordExpire}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('genderType')}" th:errors="*{genderType}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqUserId')}" th:errors="*{seqUserId}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
@@ -86,6 +87,27 @@
           <div id="suggest"></div>
         </div><!-- /.form-group -->
         <!--/* メールアドレスここまで */-->
+
+        <!--/* 性別ここから */-->
+		<div class="form-group">
+		  <label class="control-label" for="genderType" th:text="#{genderType}"></label><span class="badge badge-danger">必須</span>
+		  <div class="custom-control custom-radio">
+		    <input type="radio" class="custom-control-input" th:field="*{genderType}" id="male" value="0" checked="checked">
+		    <label for="male" class="custom-control-label" th:text="#{male}"></label>
+		  </div><!-- /.custom-control custom-radio -->
+		  <div class="custom-control custom-radio">
+		    <input type="radio" class="custom-control-input" th:field="*{genderType}" id="female" value="1">
+		    <label for="female" class="custom-control-label" th:text="#{female}"></label>
+		  </div><!-- /.custom-control custom-radio -->
+		</div><!-- /.form-group -->
+        <!--/* 性別ここまで */-->
+
+        <!--/* 誕生日ここから */-->
+        <div class="form-group">
+          <label class="control-label" for="birthDate" th:text="#{birthDate}"></label><span class="badge badge-danger">必須</span>
+          <input type="text" class="validate[required] form-control" th:field="*{birthDate}" th:value="${birthDate}" required placeholder="2020/03/01" />
+        </div> <!--/.form-group -->
+        <!--/* 誕生日ここまで */-->
 
         <!--/* ヘッダ利用ここから */-->
         <div class="form-group">
@@ -172,7 +194,16 @@
         firstDay: 0,
         showButtonPanel: true,
         changeYear: true,
-        changeMonth: true
+        changeMonth: true,
+        yearRange: "2025:9999"
+      });
+
+      $('#birthDate').datepicker({
+        firstDay: 0,
+        showButtonPanel: true,
+        changeYear: true,
+        changeMonth: true,
+        yearRange: "1900:2025"
       });
 
       const domains = [

@@ -1,7 +1,5 @@
 package jp.co.ha.dashboard.user.controller;
 
-import java.util.Optional;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -24,14 +20,11 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.user.form.UserSettingForm;
 import jp.co.ha.dashboard.user.service.UserSettingService;
 import jp.co.ha.dashboard.user.service.impl.UserSettingServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.composite.CompositeUser;
 
 /**
  * 健康管理_ユーザ設定コントローラ
@@ -43,15 +36,14 @@ import jp.co.ha.db.entity.composite.CompositeUser;
 public class UserSettingController
         implements BaseWizardController<UserSettingForm> {
 
+    /** セッションキー：ユーザID */
+    private static final String SESSION_KEY_SEQ_USER_ID = "seqUserId";
     /** セッションキー：フォーム */
     private static final String SESSION_KEY_FORM = "userSettingForm";
 
     /** {@linkplain UserSettingServiceImpl} */
     @Autowired
     private UserSettingService userSettingService;
-    /** {@linkplain UserSearchServiceImpl} */
-    @Autowired
-    private UserSearchService userSearchService;
     /** {@linkplain SessionComponent} */
     @Autowired
     private SessionComponent sessionComponent;
@@ -68,31 +60,10 @@ public class UserSettingController
 
         // セッションからユーザIDを取得
         Long seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Long.class).get();
+                .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class)
+                .get();
 
-        Optional<CompositeUser> entity = userSearchService
-                .findCompositUserById(seqUserId);
-
-        UserSettingForm form = new UserSettingForm();
-        BeanUtil.copy(entity.get(), form, (src, dest) -> {
-            CompositeUser srcAccount = (CompositeUser) src;
-            UserSettingForm destForm = (UserSettingForm) dest;
-            destForm.setPasswordExpire(DateTimeUtil
-                    .toString(srcAccount.getPasswordExpire(), DateFormatType.YYYYMMDD));
-            destForm.setDeleteFlag(srcAccount.isDeleteFlag() ? CommonFlag.TRUE.getValue()
-                    : CommonFlag.FALSE.getValue());
-            destForm.setHeaderFlag(srcAccount.isHeaderFlag() ? CommonFlag.TRUE.getValue()
-                    : CommonFlag.FALSE.getValue());
-            destForm.setFooterFlag(srcAccount.isFooterFlag() ? CommonFlag.TRUE.getValue()
-                    : CommonFlag.FALSE.getValue());
-            destForm.setMaskFlag(srcAccount.isMaskFlag() ? CommonFlag.TRUE.getValue()
-                    : CommonFlag.FALSE.getValue());
-            destForm.setEnclosureCharFlag(
-                    srcAccount.isEnclosureCharFlag() ? CommonFlag.TRUE.getValue()
-                            : CommonFlag.FALSE.getValue());
-        });
-
-        return form;
+        return userSettingService.getForm(seqUserId);
     }
 
     @Override

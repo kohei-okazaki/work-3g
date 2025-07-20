@@ -42,6 +42,13 @@ public class UserSettingForm implements BaseForm {
     @Required(message = "メールアドレスが未入力です")
     @MailAddress(message = "メールアドレス形式ではありません")
     private String mailAddress;
+    /** 性別 */
+    @Required(message = "性別が未入力です")
+    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "削除フラグが半角数字でありません")
+    private String genderType;
+    /** 誕生日 */
+    @Required(message = "誕生日が未入力です")
+    private String birthDate;
     /** APIキー */
     @Mask
     @Required(message = "APIキーが未入力です")
@@ -160,6 +167,42 @@ public class UserSettingForm implements BaseForm {
      */
     public void setMailAddress(String mailAddress) {
         this.mailAddress = mailAddress;
+    }
+
+    /**
+     * genderTypeを返す
+     * 
+     * @return genderType
+     */
+    public String getGenderType() {
+        return genderType;
+    }
+
+    /**
+     * genderTypeを設定する
+     * 
+     * @param genderType
+     */
+    public void setGenderType(String genderType) {
+        this.genderType = genderType;
+    }
+
+    /**
+     * birthDateを返す
+     * 
+     * @return birthDate
+     */
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    /**
+     * birthDateを設定する
+     * 
+     * @param birthDate
+     */
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**

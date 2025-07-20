@@ -25,6 +25,10 @@ public class UserDto {
     private String apiKey;
     /** パスワード有効期限 */
     private String passwordExpire;
+    /** 性別 */
+    private String genderType;
+    /** 誕生日 */
+    private String birthDate;
     /** ヘッダ利用有無フラグ */
     private Boolean headerFlag;
     /** フッタ利用有無フラグ */
@@ -203,6 +207,44 @@ public class UserDto {
      */
     public void setPasswordExpire(String passwordExpire) {
         this.passwordExpire = passwordExpire;
+    }
+
+    /**
+     * genderTypeを返す
+     * 
+     * @return genderType
+     */
+    public String getGenderType() {
+        return genderType;
+    }
+
+    /**
+     * genderTypeを設定する
+     * 
+     * @param genderType
+     *     性別
+     */
+    public void setGenderType(String genderType) {
+        this.genderType = genderType;
+    }
+
+    /**
+     * birthDateを返す
+     * 
+     * @return birthDate
+     */
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    /**
+     * birthDateを設定する
+     * 
+     * @param birthDate
+     *     誕生日
+     */
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**
