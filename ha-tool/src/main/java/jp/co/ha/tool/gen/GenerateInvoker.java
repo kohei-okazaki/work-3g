@@ -24,11 +24,11 @@ public class GenerateInvoker {
         try {
             for (GenerateType type : types) {
 
-                LOG.debug("【TOOL】" + types.toString() + "start...");
+                LOG.debug("【TOOL】 " + type.getValue() + " start...");
 
                 type.getGenClass().getDeclaredConstructor().newInstance().generate();
 
-                LOG.debug("【TOOL】" + types.toString() + "end...");
+                LOG.debug("【TOOL】 " + type.getValue() + " end...");
             }
         } catch (Exception e) {
             LOG.error("自動生成処理に失敗", e);

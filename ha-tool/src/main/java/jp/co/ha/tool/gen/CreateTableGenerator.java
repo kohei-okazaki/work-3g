@@ -53,7 +53,8 @@ public class CreateTableGenerator extends BaseGenerator {
                 sb.append(isSequence ? " AUTO_INCREMENT" : "");
                 sb.append(isNotNull ? " NOT NULL" : "");
                 sb.append(isPrimary ? " PRIMARY KEY" : "");
-                sb.append(StringUtil.isEmpty(defaultValue) ? "" : " " + defaultValue);
+                sb.append(StringUtil.isEmpty(defaultValue) ? ""
+                        : " DEFAULT " + defaultValue);
                 sb.append(" COMMENT '");
                 sb.append(comment);
                 sb.append("'");

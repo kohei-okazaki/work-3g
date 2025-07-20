@@ -2,12 +2,6 @@
 <!DOCTYPE logback>
 <configuration>
 
-  <!-- 設定ローカル環境用 -->
-  <springProfile name="local">
-    <property name="LOG_PATH" value="C:/app/logs/" />
-    <property name="LOG_LEVEL" value="DEBUG" />
-  </springProfile>
-
   <!-- コンソール出力設定 -->
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <target>System.out</target>
@@ -18,7 +12,7 @@
   </appender>
 
   <!-- アプリログレベルと使用出力ルール -->
-  <logger name="jp.co.ha" level="${LOG_LEVEL}">
+  <logger name="jp.co.ha" level="DEBUG">
     <appender-ref ref="STDOUT" />
   </logger>
 
