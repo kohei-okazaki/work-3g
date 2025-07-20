@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -98,6 +99,13 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
         } else if (e instanceof JsonProcessingException) {
             error = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
                     "JSON生成処理が失敗しました", e);
+        } else if (e instanceof MethodArgumentTypeMismatchException) {
+            MethodArgumentTypeMismatchException matme = (MethodArgumentTypeMismatchException) e;
+
+            error = new ApiException(CommonErrorCode.VALIDATE_ERROR,
+                    "リクエストパラメータが不正です。 パラメータ名:" + matme.getName() + ", 値="
+                            + matme.getValue(),
+                    e);
         } else {
             error = super.getAppError(e);
         }

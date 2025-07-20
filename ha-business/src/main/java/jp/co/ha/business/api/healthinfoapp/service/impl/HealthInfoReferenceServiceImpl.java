@@ -48,12 +48,12 @@ public class HealthInfoReferenceServiceImpl extends CommonService
                         request.getSeqUserId());
         if (CollectionUtil.isEmpty(healthInfoList)) {
             throw new BusinessException(CommonErrorCode.DB_NO_DATA,
-                    "該当のレコードが見つかりません seqHealthInfoId:" + request.getSeqHealthInfoId()
-                            + ", seqUserId:" + request.getSeqUserId());
+                    "該当のレコードが見つかりません seq_health_info_id:" + request.getSeqHealthInfoId()
+                            + ", seq_user_id:" + request.getSeqUserId());
         } else if (CollectionUtil.isMultiple(healthInfoList)) {
             throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
-                    "該当のデータが複数存在します seqHealthInfoId:" + request.getSeqHealthInfoId()
-                            + ", seqUserId:" + request.getSeqUserId());
+                    "該当のデータが複数存在します seq_health_info_id:" + request.getSeqHealthInfoId()
+                            + ", seq_user_id:" + request.getSeqUserId());
         }
 
         HealthInfo entity = CollectionUtil.getFirst(healthInfoList);

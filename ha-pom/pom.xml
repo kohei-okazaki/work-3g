@@ -38,7 +38,7 @@
     <profile>
       <id>local</id>
       <properties>
-        <resources.directory>${basedir}/profile/local</resources.directory>
+        <resources.directory>${basedir}/local</resources.directory>
       </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -48,7 +48,7 @@
     <profile>
       <id>dev1</id>
       <properties>
-        <resources.directory>${basedir}/profile/dev1</resources.directory>
+        <resources.directory>${basedir}/dev1</resources.directory>
       </properties>
     </profile>
   </profiles>
@@ -368,12 +368,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.3.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.3.1</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.7.1</version>
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>

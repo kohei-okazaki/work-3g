@@ -12,6 +12,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "ユーザID",
@@ -22,6 +23,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "身長",
@@ -32,6 +34,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "体重",
@@ -42,6 +45,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "BMI",
@@ -52,6 +56,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "標準体重",
@@ -62,6 +67,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "健康情報ステータス",
@@ -72,6 +78,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "健康情報作成日時",
@@ -82,6 +89,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "BMI範囲マスタID",
@@ -92,6 +100,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -102,6 +111,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -112,12 +122,13 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
     {
-      physicalName: "ACCOUNT",
-      logicalName: "アカウント情報",
+      physicalName: "USER",
+      logicalName: "ユーザ情報",
       columns: [
         {
           logicalName: "ユーザID",
@@ -128,6 +139,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "メールアドレス",
@@ -138,6 +150,7 @@ export const state = () => ({
           sequence: false,
           crypt: true,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "パスワード",
@@ -148,6 +161,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "削除フラグ",
@@ -158,6 +172,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "パスワード有効期限",
@@ -168,6 +183,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "備考",
@@ -178,6 +194,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "APIキー",
@@ -188,6 +205,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -198,6 +216,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -208,7 +227,30 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
-        }
+          default: null,
+        },
+        {
+          logicalName: "性別",
+          physicalName: "GENDER_TYPE",
+          type: "INT",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: 1,
+        },
+        {
+          logicalName: "誕生日",
+          physicalName: "BIRTH_DATE",
+          type: "DATE",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: "2000/01/01",
+        },
       ]
     },
     {
@@ -224,6 +266,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "ヘッダーフラグ",
@@ -234,6 +277,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "フッターフラグ",
@@ -244,6 +288,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "マスクフラグ",
@@ -254,6 +299,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "囲い文字利用フラグ",
@@ -264,6 +310,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -274,6 +321,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -284,6 +332,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -300,6 +349,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "範囲下限",
@@ -310,6 +360,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "範囲上限",
@@ -320,6 +371,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "肥満度ステータス",
@@ -330,6 +382,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -340,6 +393,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -350,11 +404,12 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
     {
-      physicalName: "ACCOUNT_RECOVERY_TOKEN_DATA",
+      physicalName: "USER_RECOVERY_TOKEN",
       logicalName: "アカウント回復トークン情報",
       columns: [
         {
@@ -366,6 +421,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "ユーザID",
@@ -376,6 +432,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "トークン",
@@ -386,6 +443,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "トークン作成日時",
@@ -396,6 +454,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -406,6 +465,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -416,6 +476,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -432,6 +493,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "トランザクションID",
@@ -442,6 +504,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "API名",
@@ -452,6 +515,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "HTTPメソッド",
@@ -462,6 +526,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "リクエストURL",
@@ -472,6 +537,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "リクエストBody",
@@ -482,6 +548,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "HTTPステータス",
@@ -492,6 +559,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "エラー詳細",
@@ -502,6 +570,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "リクエスト送信日時",
@@ -512,6 +581,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "レスポンス受信日時",
@@ -522,6 +592,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -532,6 +603,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -542,6 +614,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -558,6 +631,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "パスワード",
@@ -568,6 +642,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "削除フラグ",
@@ -578,6 +653,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "パスワード有効期限",
@@ -588,6 +664,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "管理者サイトユーザ権限管理マスタID",
@@ -598,6 +675,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "備考",
@@ -608,6 +686,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: false,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -618,6 +697,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -628,6 +708,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -644,6 +725,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -654,6 +736,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -664,6 +747,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -680,6 +764,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "管理者サイトユーザ権限管理マスタID",
@@ -690,6 +775,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "管理者サイト権限マスタID",
@@ -700,6 +786,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -710,6 +797,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -720,6 +808,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -736,6 +825,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "ユーザ権限",
@@ -746,6 +836,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "ユーザ権限名",
@@ -756,6 +847,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -766,6 +858,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -776,6 +869,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -792,6 +886,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "管理者サイトユーザログイン情報ID",
@@ -802,6 +897,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "件名",
@@ -812,6 +908,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "S3キー",
@@ -822,6 +919,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -832,6 +930,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -842,6 +941,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     },
@@ -858,6 +958,7 @@ export const state = () => ({
           sequence: true,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "S3キー",
@@ -868,6 +969,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "更新日時",
@@ -878,6 +980,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         },
         {
           logicalName: "登録日時",
@@ -888,6 +991,7 @@ export const state = () => ({
           sequence: false,
           crypt: false,
           notNull: true,
+          default: null,
         }
       ]
     }

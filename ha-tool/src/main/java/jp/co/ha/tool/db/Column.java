@@ -21,6 +21,8 @@ public class Column {
     private boolean isCrypt;
     /** NotNull制約 */
     private boolean isNotNull;
+    /** デフォルト値 */
+    private String defaultValue;
 
     /**
      * nameを返す
@@ -153,6 +155,25 @@ public class Column {
      */
     public void setNotNull(boolean isNotNull) {
         this.isNotNull = isNotNull;
+    }
+
+    /**
+     * defaultValueを返す
+     * 
+     * @return defaultValue
+     */
+    public String getDefaultValue() {
+        return defaultValue;
+    }
+
+    /**
+     * defaultValueを設定する
+     * 
+     * @param defaultValue
+     *     デフォルト値
+     */
+    public void setDefaultValue(String defaultValue) {
+        this.defaultValue = defaultValue;
     }
 
 }

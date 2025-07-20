@@ -51,7 +51,7 @@ import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserRecoveryToken;
 
 /**
- * 健康管理_ユーz回復のコントローラ
+ * 健康管理_ユーザ回復のコントローラ
  *
  * @version 1.0.0
  */
@@ -201,11 +201,11 @@ public class UserRecoveryController implements BaseWebController {
                 DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "トークンが未指定です"));
 
         // ユーザ情報検索
-        User user = getAccount(seqUserId);
+        User user = getUser(seqUserId);
 
         // ユーザ回復トークンを検索し、トークンが有効であるかを確認する
         @SuppressWarnings("unused")
-        UserRecoveryToken accountRecoveryTokenData = userRecoveryTokenSearchService
+        UserRecoveryToken userRecoveryToken = userRecoveryTokenSearchService
                 .findBySeqUserIdAndTokenAndValidTokenCreateDate(user.getSeqUserId(),
                         strToken)
                 .orElseThrow(() -> new BusinessException(
@@ -249,7 +249,7 @@ public class UserRecoveryController implements BaseWebController {
         }
 
         // ユーザ情報検索
-        User user = getAccount(seqUserId);
+        User user = getUser(seqUserId);
 
         model.addAttribute("account", user);
 
@@ -280,7 +280,7 @@ public class UserRecoveryController implements BaseWebController {
 
         LOG.debugBean(form);
 
-        User entity = getAccount(seqUserId);
+        User entity = getUser(seqUserId);
         entity.setPassword(userComponent.getHashPassword(form.getPassword(),
                 form.getMailAddress()));
 
@@ -321,7 +321,7 @@ public class UserRecoveryController implements BaseWebController {
      * @return ユーザ情報
      * @throws BaseException
      */
-    private User getAccount(Optional<String> seqUserId) throws BaseException {
+    private User getUser(Optional<String> seqUserId) throws BaseException {
 
         if (seqUserId == null || !seqUserId.isPresent()
                 || !RegexType.HALF_NUMBER.is(seqUserId.get())) {
