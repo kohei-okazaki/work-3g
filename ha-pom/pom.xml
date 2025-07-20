@@ -314,11 +314,7 @@
   </dependencies>
 
   <build>
-    <!-- <outputDirectory>${project.build.directory}/classes</outputDirectory> -->
     <resources>
-<!--      <resource>-->
-<!--        <directory>${resources.directory}</directory>-->
-<!--      </resource>-->
       <resource>
         <directory>${basedir}/src/main/resources</directory>
       </resource>
@@ -332,12 +328,8 @@
         <directory>${basedir}/../ha-business/src/main/resources</directory>
       </resource>
     </resources>
+
     <testResources>
-<!--
-      <testResource>
-        <directory>${resources.testdirectory}</directory>
-      </testResource>
- -->
       <testResource>
         <directory>${basedir}/src/test/resources</directory>
       </testResource>
@@ -351,6 +343,7 @@
         <directory>${basedir}/../ha-business/src/test/resources</directory>
       </testResource>
     </testResources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
