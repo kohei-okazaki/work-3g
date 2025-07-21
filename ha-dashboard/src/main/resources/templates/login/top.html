@@ -10,21 +10,48 @@
 </head>
 <body>
 
-  <div class="px-4"th:if="${needNotice == 'Y'}">
+  <div class="px-4" th:if="${needNotice == 'Y'}">
     <div class="alert alert-warning" role="alert">本日の健康情報が未登録です。
     </div><!-- ./alert alert-warning alert-dismissible fade show -->
   </div><!-- /.px-4 -->
-
-  <div class="px-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">最近登録した10件</h1>
-    </div>
-
-    <div class="container border col-8 shadow">
-      <canvas id="chart" class="chart"></canvas>
-     </div><!-- /.container border col-8 -->
+ 
+  <div class="px-4" th:if="${needNotice == ''}">
     <br>
-  </div>
+  </div><!-- /.px-4 -->
+
+  <div class="px-4 pb-3">
+    <!-- TODO: 健康情報カード -->
+    <div class="row">
+      <div class="col-6 pr-3 pt-1 pb-1">
+        <div class="border shadow p-3">
+          <h1 class="h2 mb-0">TODO 最新の健康情報追加</h1>
+        </div><!-- /.border shadow p-3 -->
+      </div><!-- /.col-6 pr-3 pt-1 pb-1 -->
+      <div class="col-6 pl-3 pt-1 pb-1">
+        <div class="border shadow p-3">
+          <h1 class="h2 mb-0">TODO 目標の健康情報追加</h1>
+        </div><!-- /.border shadow p-3 -->
+      </div><!-- /.col-6 pl-3 pt-1 pb-1 -->
+    </div><!-- /.row -->
+
+    <!-- 最近登録した10件 -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="border shadow p-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2">
+            <h1 class="h2 mb-0">最近登録した10件</h1>
+          </div><!-- /.d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2 -->
+
+          <!-- Chart canvasを中央に寄せる -->
+          <div class="d-flex justify-content-center">
+            <div class="w-100" style="max-width: 800px;">
+              <canvas id="chart" class="chart" style="width: 85%; height: 400px;"></canvas>
+            </div><!-- /.w-100 -->
+          </div><!-- /.d-flex justify-content-center -->
+        </div><!-- /.border shadow p-4 -->
+      </div><!-- /.col-12 -->
+    </div><!-- /.row mt-4 -->
+  </div><!-- /.px-4 -->
 
   <script th:inline="javascript">
     $(function() {

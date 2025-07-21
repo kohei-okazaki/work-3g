@@ -60,6 +60,7 @@ public class BreathingCapacityController implements BaseWebController {
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
         Optional<User> user = userSearchService.findById(seqUserId);
         form.setGender(user.get().getGenderType().toString());
+
         return form;
     }
 
@@ -100,14 +101,17 @@ public class BreathingCapacityController implements BaseWebController {
 
         // DTOに変換
         BreathingCapacityDto dto = new BreathingCapacityDto();
-        BeanUtil.copy(form, dto, (src, dest) -> {
-            BreathingCapacityForm srcForm = (BreathingCapacityForm) src;
-            BreathingCapacityDto destDto = (BreathingCapacityDto) dest;
-            destDto.setGenderType(GenderType.of(srcForm.getGender()));
-        });
+        BeanUtil.copy(form, dto);
 
-        BreathingCapacityDto calcResult = component.calc(dto, sessionComponent
-                .getValue(request.getSession(), "seqUserId", Long.class).get());
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
+
+        Optional<User> user = userSearchService.findById(seqUserId);
+
+        dto.setGenderType(GenderType.of(user.get().getGenderType().intValue()));
+
+        BreathingCapacityDto calcResult = component.calc(dto, seqUserId);
+
         model.addAttribute("calcResult", calcResult);
 
         return getView(model, DashboardView.BREATHING_CAPACITY_CALC);

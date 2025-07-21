@@ -17,7 +17,6 @@
       <form id="breathingCapacityForm" th:action="@{/breathingcapacity/index}" method="post" th:object="${breathingCapacityForm}">
         <br>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
 
         <div class="form-group">
@@ -31,15 +30,9 @@
         </div><!-- /.form-group -->
 
         <div class="form-group">
-          <label class="control-label" for="gender" th:text="#{gender}"></label><span class="badge badge-danger">必須</span>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" th:field="*{gender}" id="male" value="0" checked="checked">
-            <label for="male" class="custom-control-label" th:text="#{male}"></label>
-          </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" th:field="*{gender}" id="female" value="1">
-            <label for="female" class="custom-control-label" th:text="#{female}"></label>
-          </div><!-- /.custom-control custom-radio -->
+          <label th:text="#{gender}"></label>
+          <div th:if="*{gender} == 0">男性</div>
+          <div th:if="*{gender} == 1">女性</div>
         </div><!-- /.form-group -->
 
         <div class="form-group">

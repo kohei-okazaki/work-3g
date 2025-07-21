@@ -92,8 +92,7 @@ public class BreathingCapacityApiComponent {
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, Long transactionId)
-            throws BaseException {
+            BreathingCapacityDto dto, Long transactionId) throws BaseException {
 
         BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
         BeanUtil.copy(dto, request);

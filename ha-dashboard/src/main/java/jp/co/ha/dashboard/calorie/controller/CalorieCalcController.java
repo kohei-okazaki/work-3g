@@ -54,12 +54,14 @@ public class CalorieCalcController implements BaseWebController {
      */
     @ModelAttribute("calorieCalcForm")
     public CalorieCalcForm setUpForm(HttpServletRequest request) {
+
         CalorieCalcForm form = new CalorieCalcForm();
 
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
         Optional<User> user = userSearchService.findById(seqUserId);
         form.setGender(user.get().getGenderType().toString());
+
         return form;
     }
 
@@ -100,14 +102,17 @@ public class CalorieCalcController implements BaseWebController {
 
         // DTOに変換
         CalorieCalcDto dto = new CalorieCalcDto();
-        BeanUtil.copy(form, dto, (src, dest) -> {
-            CalorieCalcForm srcForm = (CalorieCalcForm) src;
-            CalorieCalcDto destDto = (CalorieCalcDto) dest;
-            destDto.setGenderType(GenderType.of(srcForm.getGender()));
-        });
+        BeanUtil.copy(form, dto);
 
-        CalorieCalcDto calcResult = calorieCalcComponent.calc(dto, sessionComponent
-                .getValue(request.getSession(), "seqUserId", Long.class).get());
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
+
+        Optional<User> user = userSearchService.findById(seqUserId);
+
+        dto.setGenderType(GenderType.of(user.get().getGenderType().intValue()));
+
+        CalorieCalcDto calcResult = calorieCalcComponent.calc(dto, seqUserId);
+
         model.addAttribute("calcResult", calcResult);
 
         return getView(model, DashboardView.CALORIE_CALC);
