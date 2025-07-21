@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.login.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
@@ -32,7 +33,6 @@ import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
@@ -54,6 +54,9 @@ public class LoginController implements BaseWebController {
     /** 健康情報検索条件 */
     private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
             .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
+    /** 健康情報検索条件 */
+    private static final SelectOption SELECT_OPTION＿LATEST = new SelectOptionBuilder()
+            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(２).build();
     /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
@@ -220,46 +223,60 @@ public class LoginController implements BaseWebController {
      */
     private void setLatestHealthInfo(Model model, Long seqUserId) {
 
-        Optional<HealthInfo> healthInfo = getLatestHealthInfo(seqUserId);
-        if (healthInfo.isPresent()) {
-            // 健康情報が登録済の場合
-            HealthInfo latestHealthInfo = healthInfo.get();
-            model.addAttribute("latestHealthInfo", latestHealthInfo);
+        List<HealthInfo> healthInfoList = getLatestHealthInfoList(seqUserId);
+        if (healthInfoList.size() == 0) {
+            // 最新健康情報と最新の1つ過去の健康情報が登録されていない場合
 
-            HealthInfoStatus status = HealthInfoStatus
-                    .of(latestHealthInfo.getHealthInfoStatus());
-            if (status != null) {
-                // 最新の健康情報に前回体重が設定されている場合
-                if (HealthInfoStatus.INCREASE == status) {
-                    model.addAttribute("sign", "+");
-                } else if (HealthInfoStatus.DOWN == status) {
-                    model.addAttribute("sign", "-");
-                }
-                // TODO health_info.last_weightを登録しておき、それを指定。
-                model.addAttribute("leatestDiff", "10.5");
-            }
+            model.addAttribute("latestHealthInfoNotExistMessage", "健康情報が未登録です。");
+
+        } else if (healthInfoList.size() == 1) {
+            // 最新健康情報のみ登録されている場合
+
+            HealthInfo latest = healthInfoList.get(0);
+            model.addAttribute("latest", latest);
 
         } else {
-            // 健康情報が未登録の場合
-            model.addAttribute("latestHealthInfoNotExistMessage", "健康情報が未登録です。");
-        }
 
+            HealthInfo latest = healthInfoList.get(0);
+            HealthInfo previous = healthInfoList.get(1);
+            model.addAttribute("latest", latest);
+
+            BigDecimal latestWeight = latest.getWeight();
+            BigDecimal previousWeight = previous.getWeight();
+
+            int compare = latestWeight.compareTo(previousWeight);
+            BigDecimal diff = null;
+            switch (compare) {
+            case -1:
+                // latest < previous：減少
+                diff = previousWeight.subtract(latestWeight);
+                model.addAttribute("diff", diff.stripTrailingZeros().toPlainString());
+                model.addAttribute("status", HealthInfoStatus.DOWN.getValue());
+                break;
+            case 1:
+                // latest > previous：増加
+                diff = latestWeight.subtract(previousWeight);
+                model.addAttribute("diff", diff.stripTrailingZeros().toPlainString());
+                model.addAttribute("status", HealthInfoStatus.INCREASE.getValue());
+                break;
+            }
+        }
     }
 
     /**
-     * 最新の健康情報を取得する
+     * 最新の健康情報を取得する<br>
+     * <ul>
+     * <li>最新の健康情報</li>
+     * <li>最新の1つ前の健康情報</li>
+     * </ul>
      * 
      * @param seqUserId
      *     ユーザID
      * @return 健康情報
      */
-    private Optional<HealthInfo> getLatestHealthInfo(Long seqUserId) {
-        List<HealthInfo> list = healthInfoSearchService.findBySeqUserId(seqUserId,
-                SELECT_OPTION);
-        if (CollectionUtil.isEmpty(list)) {
-            return Optional.empty();
-        }
-        return Optional.of(list.get(0));
+    private List<HealthInfo> getLatestHealthInfoList(Long seqUserId) {
+        return healthInfoSearchService.findBySeqUserId(seqUserId,
+                SELECT_OPTION＿LATEST);
     }
 
     /**
