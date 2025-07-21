@@ -10,83 +10,89 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">カロリー計算</h2>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="border shadow p-4 bg-white rounded">
+          <h2 class="menuTitle mb-4">カロリー計算</h2>
 
-      <form id="calorieCalcForm" th:action="@{/caloriecalc/index}" method="post" th:object="${calorieCalcForm}">
-        <br>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}"></div>
+          <form id="calorieCalcForm" th:action="@{/caloriecalc/index}" method="post" th:object="${calorieCalcForm}">
+            <br>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}"></div>
 
-        <div class="form-group">
-          <label class="control-label" for="age" th:text="#{age}"></label><span class="badge badge-danger">必須</span>
-          <div class="input-group">
-            <input type="text" class="validate[required,custom[number]] form-control" size="3" th:field="*{age}" placeholder="20" aria-describedby="basic-addon1" />
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon1">歳</span>
-            </div><!-- /.input-group-append -->
-          </div><!-- /.input-group -->
-        </div><!-- /.form-group -->
 
-        <div class="form-group">
-          <label th:text="#{gender}"></label>
-          <div th:if="*{gender} == 0">男性</div>
-          <div th:if="*{gender} == 1">女性</div>
-        </div><!-- /.form-group -->
+            <div class="form-group">
+              <label class="control-label" for="age" th:text="#{age}"></label>
+              <span class="badge badge-danger">必須</span>
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="3" th:field="*{age}" placeholder="20" aria-describedby="basic-addon1" />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon1">歳</span>
+                </div> <!-- /.input-group-append -->
+              </div> <!-- /.input-group  -->
+            </div> <!-- /.form-group -->
 
-        <div class="form-group">
-          <label class="control-label" for="height" th:text="#{height}"></label><span class="badge badge-danger">必須</span>
-          <div class="input-group">
-            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon2">cm</span>
-            </div><!-- /.input-group-append -->
-          </div><!-- /.input-group -->
-        </div><!-- /.form-group -->
+            <div class="form-group">
+              <label th:text="#{gender}"></label>
+              <div th:if="*{gender} == 0">男性</div>
+              <div th:if="*{gender} == 1">女性</div>
+            </div><!-- /.form-group  -->
 
-        <div class="form-group">
-          <label class="control-label" for="weight" th:text="#{weight}"></label><span class="badge badge-danger">必須</span>
-          <div class="input-group">
-            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{weight}" required placeholder="50.00" aria-describedby="basic-addon3" />
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon3">kg</span>
-            </div><!-- /.input-group-append -->
-          </div><!-- /.input-group -->
-        </div><!-- /.form-group -->
+            <div class="form-group">
+              <label class="control-label" for="height" th:text="#{height}"></label>
+              <span class="badge badge-danger">必須</span>
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">cm</span>
+                </div><!-- /.input-group-append -->
+              </div><!-- /.input-group  -->
+            </div><!-- /.form-group  -->
 
-        <div class="form-group">
-          <label class="control-label" for="lifeWorkMetabolism" th:text="#{lifeWorkMetabolism}"></label><span class="badge badge-danger">必須</span>
-          <a data-toggle="modal" href="#lifeWorkMetabolismModal">生活活動代謝について</a>
-          <div class="input-group">
-            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{lifeWorkMetabolism}" placeholder="消費カロリー" aria-describedby="basic-addon4" />
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon3">kcal</span>
-            </div><!-- /.input-group-append -->
-          </div><!-- /.input-group -->
-        </div><!-- /.form-group -->
+            <div class="form-group">
+              <label class="control-label" for="weight" th:text="#{weight}"></label>
+              <span class="badge badge-danger">必須</span>
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{weight}" required placeholder="50.00" aria-describedby="basic-addon3" />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon3">kg</span>
+                </div><!-- /.input-group-append -->
+              </div><!-- /.input-group  -->
+            </div><!-- /.form-group  -->
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="計 算" />
-        <input type="reset" class="btn btn-secondary w-25" value="リセット" />
-        <!--/* ボタン部ここまで */-->
-      </form>
+            <div class="form-group">
+              <label class="control-label" for="lifeWorkMetabolism" th:text="#{lifeWorkMetabolism}"></label>
+              <span class="badge badge-danger">必須</span>
+              <a data-toggle="modal" href="#lifeWorkMetabolismModal">生活活動代謝について</a>
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{lifeWorkMetabolism}" placeholder="消費カロリー" aria-describedby="basic-addon4" />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon3">kcal</span>
+                </div><!-- /.input-group-append -->
+              </div><!-- /.input-group  -->
+            </div><!-- /.form-group  -->
 
-      <!--/* 生活活動代謝モーダル */-->
-      <div th:replace="~{./caloriecalc/lifework-metabolism-model.html}"></div>
+            <!-- ボタン -->
+            <div class="mt-4">
+              <input type="submit" class="btn btn-success w-25" value="計 算" />
+              <input type="reset" class="btn btn-secondary w-25 ml-2" value="リセット" />
+            </div><!-- /.mt-4 -->
+          </form>
 
-      <br>
+          <!-- モーダル -->
+          <div th:replace="~{./caloriecalc/lifework-metabolism-model.html}"></div>
 
-      <!--/* 結果部ここから */-->
-      <div th:if="${calcResult} != null">
-        <div th:replace="~{./caloriecalc/result.html}"></div>
-        <br><br>
-      </div>
-      <!--/* 結果部ここまで */-->
-    </div><!-- /.container border col-8 -->
-  </div>
+          <!-- 結果表示 -->
+          <div th:if="${calcResult} != null" class="mt-4">
+            <div th:replace="~{./caloriecalc/result.html}"></div>
+          </div><!-- /.mt-4 -->
+        </div><!-- /.border shadow -->
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 
   <script>
     $(function() {
