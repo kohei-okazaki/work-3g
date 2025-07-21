@@ -56,7 +56,7 @@ public class LoginController implements BaseWebController {
             .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
     /** 健康情報検索条件 */
     private static final SelectOption SELECT_OPTION＿LATEST = new SelectOptionBuilder()
-            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(２).build();
+            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(2).build();
     /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;

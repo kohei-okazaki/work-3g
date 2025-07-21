@@ -172,7 +172,6 @@ public class HealthInfoRegistServiceImpl extends CommonService
         entity.setSeqUserId(seqUserId);
         entity.setBmi(bmi);
         entity.setStandardWeight(basicHealthInfo.getStandardWeight());
-        entity.setHealthInfoStatus(status.getValue());
         entity.setSeqBmiRangeMtId(bmiRangeMt.getSeqBmiRangeMtId());
         entity.setHealthInfoRegDate(DateTimeUtil.getSysDate());
 

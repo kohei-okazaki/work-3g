@@ -44,8 +44,6 @@ public class MonthlyHealthInfoSummaryCsvWriter
         write(body, model.getBmi().toString());
         // 標準体重
         write(body, model.getStandardWeight().toString());
-        // 健康情報ステータス
-        write(body, model.getHealthInfoStatus());
         // 健康情報作成日時
         write(body, model.getHealthInfoRegDate());
         // BMI範囲マスタID

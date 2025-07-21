@@ -70,17 +70,6 @@ export const state = () => ({
           default: null,
         },
         {
-          logicalName: "健康情報ステータス",
-          physicalName: "HEALTH_INFO_STATUS",
-          type: "VARCHAR",
-          size: 2,
-          primaryKey: false,
-          sequence: false,
-          crypt: false,
-          notNull: false,
-          default: null,
-        },
-        {
           logicalName: "健康情報作成日時",
           physicalName: "HEALTH_INFO_REG_DATE",
           type: "DATETIME",

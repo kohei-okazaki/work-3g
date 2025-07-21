@@ -72,9 +72,6 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         /** 標準体重 */
         @JsonProperty("standard_weight")
         private BigDecimal standardWeight;
-        /** 健康情報ステータス */
-        @JsonProperty("health_info_status")
-        private HealthInfoStatus healthInfoStatus;
         /** BMIステータス */
         @JsonProperty("bmi_status")
         private BmiStatus bmiStatus;
@@ -199,25 +196,6 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * healthInfoStatusを返す
-         *
-         * @return healthInfoStatus
-         */
-        public HealthInfoStatus getHealthInfoStatus() {
-            return healthInfoStatus;
-        }
-
-        /**
-         * healthInfoStatusを設定する
-         *
-         * @param healthInfoStatus
-         *     健康情報ステータス
-         */
-        public void setHealthInfoStatus(HealthInfoStatus healthInfoStatus) {
-            this.healthInfoStatus = healthInfoStatus;
-        }
-
-        /**
          * bmiStatusを返す
          *
          * @return bmiStatus
@@ -253,60 +231,6 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
          */
         public void setHealthInfoRegDate(LocalDateTime healthInfoRegDate) {
             this.healthInfoRegDate = healthInfoRegDate;
-        }
-
-    }
-
-    /**
-     * 健康情報ステータス
-     *
-     * @version 1.0.0
-     */
-    public static class HealthInfoStatus {
-
-        /** ステータス */
-        @JsonProperty("status")
-        private String status;
-        /** メッセージ */
-        @JsonProperty("message")
-        private String message;
-
-        /**
-         * statusを返す
-         *
-         * @return status
-         */
-        public String getStatus() {
-            return status;
-        }
-
-        /**
-         * statusを設定する
-         *
-         * @param status
-         *     ステータス
-         */
-        public void setStatus(String status) {
-            this.status = status;
-        }
-
-        /**
-         * messageを返す
-         *
-         * @return message
-         */
-        public String getMessage() {
-            return message;
-        }
-
-        /**
-         * messageを設定する
-         *
-         * @param message
-         *     メッセージ
-         */
-        public void setMessage(String message) {
-            this.message = message;
         }
 
     }

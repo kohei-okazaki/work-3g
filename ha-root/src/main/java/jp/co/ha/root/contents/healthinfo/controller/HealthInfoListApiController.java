@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
-import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -65,8 +64,6 @@ public class HealthInfoListApiController extends
                 .findHealthInfoDetailList(selectOption).stream().map(e -> {
                     HealthInfoListApiResponse.HealthInfoResponse response = new HealthInfoListApiResponse.HealthInfoResponse();
                     BeanUtil.copy(e, response);
-                    response.setHealthInfoStatus(
-                            getHealthInfoStatus(e.getHealthInfoStatus()));
                     response.setBmiStatus(getBmiStatus(e.getOverWeightStatus()));
                     return response;
                 }).collect(Collectors.toList());
@@ -84,34 +81,6 @@ public class HealthInfoListApiController extends
     @Override
     protected HealthInfoListApiResponse getResponse() {
         return new HealthInfoListApiResponse();
-    }
-
-    /**
-     * 健康情報ステータス応答情報を返す
-     *
-     * @param healthInfoStatus
-     *     健康情報ステータス
-     * @return 健康情報ステータス応答情報
-     */
-    private HealthInfoListApiResponse.HealthInfoStatus getHealthInfoStatus(
-            String healthInfoStatus) {
-
-        HealthInfoListApiResponse.HealthInfoStatus status = new HealthInfoListApiResponse.HealthInfoStatus();
-        status.setStatus(healthInfoStatus);
-        switch (HealthInfoStatus.of(healthInfoStatus)) {
-        case INCREASE:
-            status.setMessage("増えました");
-            break;
-        case DOWN:
-            status.setMessage("減りました");
-            break;
-        case EVEN:
-            status.setMessage("変化ありません");
-            break;
-        default:
-            break;
-        }
-        return status;
     }
 
     /**

@@ -129,10 +129,6 @@ export default {
           value: "standard_weight",
         },
         {
-          text: "前回と比較",
-          value: "health_info_status.message",
-        },
-        {
           text: "肥満度",
           value: "bmi_status.message",
         },

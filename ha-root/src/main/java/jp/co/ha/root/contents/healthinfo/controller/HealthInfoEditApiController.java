@@ -25,13 +25,7 @@ import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
 import jp.co.ha.business.db.crud.update.impl.HealthInfoUpdateServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
-import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
-import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
@@ -65,9 +59,6 @@ public class HealthInfoEditApiController extends
     /** {@linkplain HealthInfoSearchServiceImpl} */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoCalcServiceImpl} */
-    @Autowired
-    private HealthInfoCalcService healthInfoCalcService;
     /** {@linkplain HealthInfoUpdateServiceImpl} */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
@@ -135,22 +126,9 @@ public class HealthInfoEditApiController extends
                 .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
                         "BMI範囲マスタの取得に失敗しました。データを確認してください。"));
 
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
-        // 直前の健康情報を検索
-        HealthInfo lastHealthInfo = healthInfoSearchService
-                .findBySeqUserIdAndLowerSeqHealthInfoId(seqHealthInfoId,
-                        request.getSeqUserId(), selectOption);
-
-        HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
-                ? HealthInfoStatus.EVEN
-                : healthInfoCalcService.getHealthInfoStatus(request.getWeight(),
-                        lastHealthInfo.getWeight());
-
         HealthInfo healthInfo = new HealthInfo();
         BeanUtil.copy(basicHealthInfoCalcResponse.getBasicHealthInfo(), healthInfo);
         healthInfo.setSeqHealthInfoId(seqHealthInfoId);
-        healthInfo.setHealthInfoStatus(status.getValue());
         healthInfo.setSeqBmiRangeMtId(bmiRangeMt.getSeqBmiRangeMtId());
         healthInfoUpdateService.update(healthInfo);
 
