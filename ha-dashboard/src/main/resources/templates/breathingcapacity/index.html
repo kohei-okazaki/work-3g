@@ -10,57 +10,65 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">肺活量計算</h2>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="border shadow p-4 bg-white rounded">
+          <h2 class="menuTitle mb-4">肺活量計算</h2>
 
-      <form id="breathingCapacityForm" th:action="@{/breathingcapacity/index}" method="post" th:object="${breathingCapacityForm}">
-        <br>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+          <form id="breathingCapacityForm" th:action="@{/breathingcapacity/index}" method="post" th:object="${breathingCapacityForm}">
+            <!-- エラーメッセージ -->
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
 
-        <div class="form-group">
-          <label class="control-label" for="age" th:text="#{age}"></label><span class="badge badge-danger">必須</span>
-          <div class="input-group">
-            <input type="text" class="validate[required,custom[number]] form-control" size="3" th:field="*{age}" placeholder="20" aria-describedby="basic-addon1" />
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon1">歳</span>
-            </div><!-- /.input-group-append -->
-          </div><!-- /.input-group -->
-        </div><!-- /.form-group -->
+            <!-- 年齢 -->
+            <div class="form-group">
+              <label class="control-label" for="age" th:text="#{age}"></label>
+              <span class="badge badge-danger">必須</span>
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="3"
+                  th:field="*{age}" placeholder="20" aria-describedby="basic-addon1" />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon1">歳</span>
+                </div><!-- /.input-group-append -->
+              </div><!-- /.input-group -->
+            </div><!-- /.form-group -->
 
-        <div class="form-group">
-          <label th:text="#{gender}"></label>
-          <div th:if="*{gender} == 0">男性</div>
-          <div th:if="*{gender} == 1">女性</div>
-        </div><!-- /.form-group -->
+            <!-- 性別 -->
+            <div class="form-group">
+              <label th:text="#{gender}"></label>
+              <div th:if="*{gender} == 0">男性</div>
+              <div th:if="*{gender} == 1">女性</div>
+            </div><!-- /.form-group -->
 
-        <div class="form-group">
-          <label class="control-label" for="height" th:text="#{height}"></label><span class="badge badge-danger">必須</span>
-          <div class="input-group">
-            <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon2">cm</span>
-            </div><!-- /.input-group-append -->
-          </div><!-- /.input-group -->
-        </div><!-- /.form-group -->
+            <!-- 身長 -->
+            <div class="form-group">
+              <label class="control-label" for="height" th:text="#{height}"></label>
+              <span class="badge badge-danger">必須</span>
+              <div class="input-group">
+                <input type="text" class="validate[required,custom[number]] form-control" size="12"
+                  th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2" />
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">cm</span>
+                </div><!-- /.input-group-append -->
+              </div><!-- /.input-group -->
+            </div><!-- /.form-group -->
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="計 算" />
-        <input type="reset" class="btn btn-secondary w-25" value="リセット" />
-        <!--/* ボタン部ここまで */-->
-      </form>
+            <!-- ボタン -->
+            <div class="mt-4">
+              <input type="submit" class="btn btn-success w-25" value="計 算" />
+              <input type="reset" class="btn btn-secondary w-25 ml-2" value="リセット" />
+            </div><!-- /.mt-4 -->
+          </form><!-- /#breathingCapacityForm -->
 
-      <br>
-
-      <!--/* 結果部ここから */-->
-      <div th:if="${calcResult} != null">
-        <div th:replace="~{./breathingcapacity/result.html}"></div>
-        <br><br>
-      </div>
-      <!--/* 結果部ここまで */-->
-    </div><!-- /.container border col-8 -->
-  </div>
+          <!-- 結果 -->
+          <div th:if="${calcResult} != null" class="mt-4">
+            <div th:replace="~{./breathingcapacity/result.html}"></div>
+          </div><!-- /.mt-4 -->
+        </div><!-- /.border shadow p-4 bg-white rounded -->
+      </div><!-- /.col-md-10 col-lg-8 -->
+    </div><!-- /.row justify-content-center -->
+  </div><!-- /.container my-5 -->
 
   <script>
     $(function() {

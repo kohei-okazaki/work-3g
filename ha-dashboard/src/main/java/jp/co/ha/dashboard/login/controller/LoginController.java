@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.login.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -19,11 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoGraphServiceImpl;
+import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.login.LoginCheck;
 import jp.co.ha.business.login.LoginCheckResult;
@@ -33,11 +32,13 @@ import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.dashboard.view.DashboardView;
+import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.User;
 
 /**
@@ -48,22 +49,24 @@ import jp.co.ha.db.entity.User;
 @Controller
 public class LoginController implements BaseWebController {
 
+    /** セッションキー：ユーザID */
+    private static final String SESSION_KEY_SEQ_USER_ID = "seqUserId";
     /** 健康情報検索条件 */
     private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
             .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoGraphServiceImpl} */
+    /** 健康情報グラフサービス */
     @Autowired
     private HealthInfoGraphService healthInfoGraphService;
-    /** {@linkplain MessageSource} */
+    /** メッセージプロパティ */
     @Autowired
     private MessageSource messageSource;
 
@@ -157,7 +160,11 @@ public class LoginController implements BaseWebController {
         Long seqUserId = user.get().getSeqUserId();
 
         // セッションにユーザIDを登録する。
-        sessionComponent.setValue(request.getSession(), "seqUserId", seqUserId);
+        sessionComponent.setValue(request.getSession(), SESSION_KEY_SEQ_USER_ID,
+                seqUserId);
+
+        // 最新の健康情報設定
+        setLatestHealthInfo(model, seqUserId);
 
         // 健康情報グラフ作成
         putGraph(model, seqUserId);
@@ -184,10 +191,14 @@ public class LoginController implements BaseWebController {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
         // ログイン前のユーザ作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
         Long seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Long.class).orElse(null);
+                .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class)
+                .orElse(null);
         if (BeanUtil.isNull(seqUserId)) {
             return getView(DashboardView.LOGIN);
         }
+
+        // 最新の健康情報設定
+        setLatestHealthInfo(model, seqUserId);
 
         // 健康情報グラフ作成
         putGraph(model, seqUserId);
@@ -196,6 +207,59 @@ public class LoginController implements BaseWebController {
         setHealthInfoRegistNotice(model, seqUserId);
 
         return getView(model, DashboardView.TOP);
+    }
+
+    /**
+     * 最新の健康情報をModelへ設定する<br>
+     * 健康情報が未登録の場合、未登録用のデータをModelへ設定する
+     * 
+     * @param model
+     *     Model
+     * @param seqUserId
+     *     ユーザID
+     */
+    private void setLatestHealthInfo(Model model, Long seqUserId) {
+
+        Optional<HealthInfo> healthInfo = getLatestHealthInfo(seqUserId);
+        if (healthInfo.isPresent()) {
+            // 健康情報が登録済の場合
+            HealthInfo latestHealthInfo = healthInfo.get();
+            model.addAttribute("latestHealthInfo", latestHealthInfo);
+
+            HealthInfoStatus status = HealthInfoStatus
+                    .of(latestHealthInfo.getHealthInfoStatus());
+            if (status != null) {
+                // 最新の健康情報に前回体重が設定されている場合
+                if (HealthInfoStatus.INCREASE == status) {
+                    model.addAttribute("sign", "+");
+                } else if (HealthInfoStatus.DOWN == status) {
+                    model.addAttribute("sign", "-");
+                }
+                // TODO health_info.last_weightを登録しておき、それを指定。
+                model.addAttribute("leatestDiff", "10.5");
+            }
+
+        } else {
+            // 健康情報が未登録の場合
+            model.addAttribute("latestHealthInfoNotExistMessage", "健康情報が未登録です。");
+        }
+
+    }
+
+    /**
+     * 最新の健康情報を取得する
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @return 健康情報
+     */
+    private Optional<HealthInfo> getLatestHealthInfo(Long seqUserId) {
+        List<HealthInfo> list = healthInfoSearchService.findBySeqUserId(seqUserId,
+                SELECT_OPTION);
+        if (CollectionUtil.isEmpty(list)) {
+            return Optional.empty();
+        }
+        return Optional.of(list.get(0));
     }
 
     /**

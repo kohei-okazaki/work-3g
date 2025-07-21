@@ -21,7 +21,7 @@
         <div class="alert alert-info" role="alert">
           <p>パスワードを再設定するメールを送信するため</p>
           <p>アプリに登録済のご自身のメールアドレスを入力してください</p>
-        </div>
+        </div><!-- /.alert alert-info -->
 
         <!--/* メールアドレスここから */-->
         <div class="form-group">
@@ -45,12 +45,13 @@
           <p>アカウント回復用メールを以下の件名で送信しました。</p>
           <b th:text="${'パスワード再設定' + #dates.format(#dates.createNow(), 'yyyyMMdd')}"></b>
           <p>メール内のURLをクリックし、画面の指示に従って下さい。</p>
-        </div>
+        </div><!-- /.alert alert-info -->
       </div>
       <!--/* アカウント回復メール送信後ここまで */-->
 
-    </div><!-- /.container border col-7 -->
-  </div>
+    </div><!-- /.container border col-7 shadow -->
+  </div><!-- /.px-4 -->
+
   <script th:src="@{/static/js/lib/mailcheck.min.js}"></script>
   <script>
     $(function() {

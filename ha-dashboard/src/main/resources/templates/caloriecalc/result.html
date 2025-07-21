@@ -1,4 +1,4 @@
-<div class="container">
+<div>
   <!--/* table部ここから */-->
   <table class="table table-hover table-striped">
     <tr>
@@ -13,9 +13,9 @@
       <th th:text="#{lostCaloriePerDay}" />
       <td th:text="${calcResult.lostCaloriePerDay} + '&ensp;kcal'" />
     </tr>
-  </table>
+  </table><!-- /.table table-hover table-striped -->
   <!--/* table部ここまで */-->
   <a data-toggle="modal" href="#calorieCalcMethonModal">1日のカロリーの計算方法</a>
   <!--/* 1日のカロリーの計算方法モーダル */-->
   <div th:replace="~{./caloriecalc/caloriecalcmethod-modal.html}"></div>
-</div><!-- /.container -->
+</div>

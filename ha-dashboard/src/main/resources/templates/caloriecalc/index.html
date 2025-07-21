@@ -17,13 +17,13 @@
           <h2 class="menuTitle mb-4">カロリー計算</h2>
 
           <form id="calorieCalcForm" th:action="@{/caloriecalc/index}" method="post" th:object="${calorieCalcForm}">
-            <br>
+            <!-- エラーメッセージ -->
             <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
             <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
             <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
             <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('lifeWorkMetabolism')}" th:errors="*{lifeWorkMetabolism}"></div>
 
-
+            <!-- 年齢 -->
             <div class="form-group">
               <label class="control-label" for="age" th:text="#{age}"></label>
               <span class="badge badge-danger">必須</span>
@@ -35,12 +35,14 @@
               </div> <!-- /.input-group  -->
             </div> <!-- /.form-group -->
 
+            <!-- 性別 -->
             <div class="form-group">
               <label th:text="#{gender}"></label>
               <div th:if="*{gender} == 0">男性</div>
               <div th:if="*{gender} == 1">女性</div>
             </div><!-- /.form-group  -->
 
+            <!-- 身長 -->
             <div class="form-group">
               <label class="control-label" for="height" th:text="#{height}"></label>
               <span class="badge badge-danger">必須</span>
@@ -52,6 +54,7 @@
               </div><!-- /.input-group  -->
             </div><!-- /.form-group  -->
 
+            <!-- 体重 -->
             <div class="form-group">
               <label class="control-label" for="weight" th:text="#{weight}"></label>
               <span class="badge badge-danger">必須</span>
@@ -63,6 +66,7 @@
               </div><!-- /.input-group  -->
             </div><!-- /.form-group  -->
 
+            <!-- 生活活動代謝 -->
             <div class="form-group">
               <label class="control-label" for="lifeWorkMetabolism" th:text="#{lifeWorkMetabolism}"></label>
               <span class="badge badge-danger">必須</span>
@@ -85,7 +89,7 @@
           <!-- モーダル -->
           <div th:replace="~{./caloriecalc/lifework-metabolism-model.html}"></div>
 
-          <!-- 結果表示 -->
+          <!-- 結果 -->
           <div th:if="${calcResult} != null" class="mt-4">
             <div th:replace="~{./caloriecalc/result.html}"></div>
           </div><!-- /.mt-4 -->
