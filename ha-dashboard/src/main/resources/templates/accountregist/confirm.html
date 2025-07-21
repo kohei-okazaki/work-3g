@@ -28,6 +28,17 @@
             <td>****</td>
           </tr>
           <tr>
+            <th th:text="#{genderType}"></th>
+            <td>
+              <div th:if="*{genderType} == 0">男性</div>
+              <div th:if="*{genderType} == 1">女性</div>
+            </td>
+          </tr>
+          <tr>
+            <th th:text="#{birthDate}"></th>
+            <td th:text="*{birthDate}"></td>
+          </tr>
+          <tr>
             <th scope="row" th:text="#{remarks}"></th>
             <td th:text="*{remarks}"></td>
           </tr>
@@ -38,9 +49,9 @@
         <input type="button" class="btn btn-secondary w-25" value="戻 る" onclick="history.back()" />
         <!--/* ボタン部ここまで */-->
         <br><br>
-      </div><!-- /.container border col-7 -->
+      </div><!-- /.container border col-7 shadow -->
     </form>
-  </div>
+  </div><!-- /.px-4 -->
 
 </body>
 </html>

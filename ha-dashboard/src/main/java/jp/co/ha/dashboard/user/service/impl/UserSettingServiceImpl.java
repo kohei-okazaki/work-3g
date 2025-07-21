@@ -12,18 +12,11 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
-import jp.co.ha.business.db.crud.update.impl.HealthInfoFileSettingUpdateServiceImpl;
-import jp.co.ha.business.db.crud.update.impl.UserUpdateServiceImpl;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -42,30 +35,26 @@ import jp.co.ha.db.entity.composite.CompositeUser;
 @Service
 public class UserSettingServiceImpl implements UserSettingService {
 
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
-    /** {@linkplain UserUpdateServiceImpl} */
+    /** ユーザ情報更新サービス */
     @Autowired
     private UserUpdateService userUpdateService;
-    /** {@linkplain HealthInfoFileSettingSearchServiceImpl} */
+    /** 健康情報ファイル設定検索サービス */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-    /** {@linkplain HealthInfoFileSettingUpdateServiceImpl} */
+    /** 健康情報ファイル設定更新サービス */
     @Autowired
     private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
-    /** {@linkplain PlatformTransactionManager} */
+    /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
-    /** {@linkplain DefaultTransactionDefinition} */
+    /** トランザクション定義 */
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
-    /** {@linkplain Sha256HashEncoder} */
-    @Sha256
-    @Autowired
-    private HashEncoder encoder;
-    /** {@linkplain UserComponent} */
+    /** ユーザ情報Component */
     @Autowired
     private UserComponent userComponent;
 

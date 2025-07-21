@@ -10,12 +10,10 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.crud.create.UserCreateService;
-import jp.co.ha.business.db.crud.create.impl.HealthInfoFileSettingCreateServiceImpl;
-import jp.co.ha.business.db.crud.create.impl.UserCreateServiceImpl;
 import jp.co.ha.business.dto.UserDto;
+import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
@@ -33,23 +31,23 @@ import jp.co.ha.db.entity.User;
 @Service
 public class UserRegistServiceImpl implements UserRegistService {
 
-    /** {@linkplain UserCreateServiceImpl} */
+    /** ユーザ情報作成サービス */
     @Autowired
     private UserCreateService userCreateService;
-    /** {@linkplain HealthInfoFileSettingCreateServiceImpl} */
+    /** 健康情報ファイル設定作成サービス */
     @Autowired
     private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
-    /** {@linkplain Sha256HashEncoder} */
+    /** SHA-256Hashクラス */
     @Sha256
     @Autowired
     private HashEncoder encoder;
-    /** {@linkplain UserComponent} */
+    /** ユーザ情報Component */
     @Autowired
     private UserComponent userComponent;
-    /** {@linkplain PlatformTransactionManager} */
+    /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
-    /** {@linkplain DefaultTransactionDefinition} */
+    /** トランザクション定義 */
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition transactionDefinition;
@@ -65,7 +63,9 @@ public class UserRegistServiceImpl implements UserRegistService {
 
             // ユーザ情報を作成
             User user = toUser(dto);
+            // ユーザ情報を作成
             userCreateService.create(user);
+
             // 健康情報ファイル設定情報を作成
             healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(user));
 
@@ -91,28 +91,35 @@ public class UserRegistServiceImpl implements UserRegistService {
      *     基底例外
      */
     private User toUser(UserDto dto) throws BaseException {
-        User account = new User();
-        BeanUtil.copy(dto, account);
-        account.setPassword(userComponent.getHashPassword(dto.getPassword(),
+
+        User user = new User();
+
+        BeanUtil.copy(dto, user);
+
+        user.setPassword(userComponent.getHashPassword(dto.getPassword(),
                 dto.getMailAddress()));
-        account.setDeleteFlag(CommonFlag.FALSE.get());
-        account.setPasswordExpire(DateTimeUtil
+        user.setDeleteFlag(CommonFlag.FALSE.get());
+        user.setPasswordExpire(DateTimeUtil
                 .addMonth(DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate()), 6));
-        account.setApiKey(encoder.encode(dto.getPassword(), DateTimeUtil.toString(
+        user.setApiKey(encoder.encode(dto.getPassword(), DateTimeUtil.toString(
                 DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
-        return account;
+        user.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
+        user.setBirthDate(DateTimeUtil.toLocalDate(dto.getBirthDate(),
+                DateFormatType.YYYYMMDD_STRICT));
+
+        return user;
     }
 
     /**
      * 健康情報ファイル設定Entityに変換する
      *
-     * @param account
-     *     ユーザ登録
+     * @param user
+     *     ユーザ情報
      * @return 健康情報ファイル設定
      */
-    private HealthInfoFileSetting toHealthInfoFileSetting(User account) {
+    private HealthInfoFileSetting toHealthInfoFileSetting(User user) {
         HealthInfoFileSetting entity = new HealthInfoFileSetting();
-        entity.setSeqUserId(account.getSeqUserId());
+        entity.setSeqUserId(user.getSeqUserId());
         entity.setEnclosureCharFlag(CommonFlag.FALSE.get());
         entity.setHeaderFlag(CommonFlag.FALSE.get());
         entity.setFooterFlag(CommonFlag.FALSE.get());

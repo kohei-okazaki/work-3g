@@ -23,7 +23,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.user.form.UserSettingForm;
 import jp.co.ha.dashboard.user.service.UserSettingService;
-import jp.co.ha.dashboard.user.service.impl.UserSettingServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -41,10 +40,10 @@ public class UserSettingController
     /** セッションキー：フォーム */
     private static final String SESSION_KEY_FORM = "userSettingForm";
 
-    /** {@linkplain UserSettingServiceImpl} */
+    /** ユーザ設定サービス */
     @Autowired
     private UserSettingService userSettingService;
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
 

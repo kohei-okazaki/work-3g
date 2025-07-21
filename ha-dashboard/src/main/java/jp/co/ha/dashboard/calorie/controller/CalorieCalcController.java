@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.calorie.controller;
 
+import java.util.Optional;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.CalorieApiComponent;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.dto.CalorieCalcDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
@@ -21,6 +24,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.calorie.form.CalorieCalcForm;
 import jp.co.ha.dashboard.view.DashboardView;
+import jp.co.ha.db.entity.User;
 
 /**
  * 健康管理_カロリー計算画面コントローラ
@@ -31,22 +35,31 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("caloriecalc")
 public class CalorieCalcController implements BaseWebController {
 
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain CalorieApiComponent} */
+    /** カロリー計算APIComponent */
     @Autowired
     private CalorieApiComponent calorieCalcComponent;
+    /** ユーザ情報検索サービス */
+    @Autowired
+    private UserSearchService userSearchService;
 
     /**
      * Formを返す
-     *
+     * 
+     * @param request
+     *     {@linkplain HttpServletRequest}
      * @return CalorieCalcForm
      */
     @ModelAttribute("calorieCalcForm")
-    public CalorieCalcForm setUpForm() {
+    public CalorieCalcForm setUpForm(HttpServletRequest request) {
         CalorieCalcForm form = new CalorieCalcForm();
-        form.setGender(GenderType.MALE.getValue());
+
+        Long seqUserId = sessionComponent
+                .getValue(request.getSession(), "seqUserId", Long.class).get();
+        Optional<User> user = userSearchService.findById(seqUserId);
+        form.setGender(user.get().getGenderType().toString());
         return form;
     }
 

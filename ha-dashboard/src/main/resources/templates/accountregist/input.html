@@ -20,6 +20,8 @@
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('genderType')}" th:errors="*{genderType}"></div>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
 
         <!--/* メールアドレスここから */-->
@@ -56,6 +58,27 @@
         </div><!-- /.form-group -->
         <!--/* 確認用パスワードここまで */-->
 
+        <!--/* 性別ここから */-->
+        <div class="form-group">
+          <label class="control-label" for="genderType" th:text="#{genderType}"></label><span class="badge badge-danger">必須</span>
+          <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" th:field="*{genderType}" id="male" value="0" checked="checked">
+          <label for="male" class="custom-control-label" th:text="#{male}"></label>
+          </div><!-- /.custom-control custom-radio -->
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{genderType}" id="female" value="1">
+            <label for="female" class="custom-control-label" th:text="#{female}"></label>
+          </div><!-- /.custom-control custom-radio -->
+        </div><!-- /.form-group -->
+        <!--/* 性別ここまで */-->
+
+        <!--/* 誕生日ここから */-->
+        <div class="form-group">
+          <label class="control-label" for="birthDate" th:text="#{birthDate}"></label><span class="badge badge-danger">必須</span>
+          <input type="text" class="validate[required] form-control" th:field="*{birthDate}" th:value="${birthDate}" required placeholder="2020/03/01" />
+        </div> <!--/.form-group -->
+        <!--/* 誕生日ここまで */-->
+
         <!--/* 備考ここから */-->
         <div class="form-group">
           <p th:text="#{remarks}"></p>
@@ -82,6 +105,14 @@
         promptPosition : "bottomLeft:80"
       });
 
+      $("#birthDate").datepicker({
+        firstDay: 0,
+        showButtonPanel: true,
+        changeYear: true,
+        changeMonth: true,
+        yearRange: "1960:2025"
+      });
+
       // アカウント登録画面⇒TOP画面には遷移できないようにする
       $(".appTitle").removeAttr("onclick");
 
@@ -103,7 +134,13 @@
         if ($('#confirmPassword').val() !== '') {
           value += 1;
         }
-        var progressValue = value / 3;
+        if ($('#genderType').val() !== '') {
+            value += 1;
+        }
+        if ($('#birthDate').val() !== '') {
+            value += 1;
+        }
+        var progressValue = value / 5;
         mprogress.set(progressValue);
       });
 
@@ -118,7 +155,13 @@
         if ($('#confirmPassword').val() !== '') {
           value += 1;
         }
-        var progressValue = value / 3;
+        if ($('#genderType').val() !== '') {
+            value += 1;
+        }
+        if ($('#birthDate').val() !== '') {
+            value += 1;
+        }
+        var progressValue = value / 5;
         mprogress.set(progressValue);
       });
 
@@ -133,9 +176,57 @@
         if ($('#confirmPassword').val() !== '') {
           value += 1;
         }
-        var progressValue = value / 3;
+        if ($('#genderType').val() !== '') {
+            value += 1;
+        }
+        if ($('#birthDate').val() !== '') {
+            value += 1;
+        }
+        var progressValue = value / 5;
         mprogress.set(progressValue);
       });
+      
+      $("#genderType").on("change", function() {
+          var value = 0;
+          if ($('#mailAddress').val() !== '') {
+            value += 1;
+          }
+          if ($('#password').val() !== '') {
+            value += 1;
+          }
+          if ($('#confirmPassword').val() !== '') {
+            value += 1;
+          }
+          if ($('#genderType').val() !== '') {
+              value += 1;
+          }
+          if ($('#birthDate').val() !== '') {
+              value += 1;
+          }
+          var progressValue = value / 5;
+          mprogress.set(progressValue);
+        });
+
+      $("#birthDate").on("change", function() {
+          var value = 0;
+          if ($('#mailAddress').val() !== '') {
+            value += 1;
+          }
+          if ($('#password').val() !== '') {
+            value += 1;
+          }
+          if ($('#confirmPassword').val() !== '') {
+            value += 1;
+          }
+          if ($('#genderType').val() !== '') {
+              value += 1;
+          }
+          if ($('#birthDate').val() !== '') {
+              value += 1;
+          }
+          var progressValue = value / 5;
+          mprogress.set(progressValue);
+        });
 
       const domains = [
           "gmail.com",

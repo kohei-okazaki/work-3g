@@ -35,6 +35,13 @@ public class UserRegistForm implements BaseForm {
     @Length(length = 2, mode = LengthMode.GREATER_EQUAL, message = "確認用パスワードは2桁以上で入力してください")
     @Length(length = 16, mode = LengthMode.LESS_EQUAL, message = "確認用パスワードは16桁以下で入力してください")
     private String confirmPassword;
+    /** 性別 */
+    @Required(message = "性別が未入力です")
+    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "性別が半角数字でありません")
+    private String genderType;
+    /** 誕生日 */
+    @Required(message = "誕生日が未入力です")
+    private String birthDate;
     /** 備考 */
     @Length(length = 256, mode = LengthMode.LESS_EQUAL, message = "備考は256桁以下で入力してください")
     private String remarks;
@@ -94,6 +101,44 @@ public class UserRegistForm implements BaseForm {
      */
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    /**
+     * genderTypeを返す
+     * 
+     * @return genderType
+     */
+    public String getGenderType() {
+        return genderType;
+    }
+
+    /**
+     * genderTypeを設定する
+     * 
+     * @param genderType
+     *     性別
+     */
+    public void setGenderType(String genderType) {
+        this.genderType = genderType;
+    }
+
+    /**
+     * birthDateを返す
+     * 
+     * @return birthDate
+     */
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    /**
+     * birthDateを設定する
+     * 
+     * @param birthDate
+     *     誕生日
+     */
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**

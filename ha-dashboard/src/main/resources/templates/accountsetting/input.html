@@ -89,17 +89,17 @@
         <!--/* メールアドレスここまで */-->
 
         <!--/* 性別ここから */-->
-		<div class="form-group">
-		  <label class="control-label" for="genderType" th:text="#{genderType}"></label><span class="badge badge-danger">必須</span>
-		  <div class="custom-control custom-radio">
-		    <input type="radio" class="custom-control-input" th:field="*{genderType}" id="male" value="0" checked="checked">
-		    <label for="male" class="custom-control-label" th:text="#{male}"></label>
-		  </div><!-- /.custom-control custom-radio -->
-		  <div class="custom-control custom-radio">
-		    <input type="radio" class="custom-control-input" th:field="*{genderType}" id="female" value="1">
-		    <label for="female" class="custom-control-label" th:text="#{female}"></label>
-		  </div><!-- /.custom-control custom-radio -->
-		</div><!-- /.form-group -->
+        <div class="form-group">
+          <label class="control-label" for="genderType" th:text="#{genderType}"></label><span class="badge badge-danger">必須</span>
+          <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" th:field="*{genderType}" id="male" value="0" checked="checked">
+          <label for="male" class="custom-control-label" th:text="#{male}"></label>
+          </div><!-- /.custom-control custom-radio -->
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" th:field="*{genderType}" id="female" value="1">
+            <label for="female" class="custom-control-label" th:text="#{female}"></label>
+          </div><!-- /.custom-control custom-radio -->
+        </div><!-- /.form-group -->
         <!--/* 性別ここまで */-->
 
         <!--/* 誕生日ここから */-->
@@ -195,10 +195,10 @@
         showButtonPanel: true,
         changeYear: true,
         changeMonth: true,
-        yearRange: "2025:9999"
+        yearRange: "2025:2030"
       });
 
-      $('#birthDate').datepicker({
+      $("#birthDate").datepicker({
         firstDay: 0,
         showButtonPanel: true,
         changeYear: true,

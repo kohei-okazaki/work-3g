@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -25,7 +24,6 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.user.form.UserRegistForm;
 import jp.co.ha.dashboard.user.service.UserRegistService;
-import jp.co.ha.dashboard.user.service.impl.UserRegistServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -37,13 +35,16 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("accountregist")
 public class UserRegistController implements BaseWizardController<UserRegistForm> {
 
-    /** {@linkplain UserRegistServiceImpl} */
+    /** セッションキー：フォーム */
+    private static final String SESSION_KEY_FORM = "userRegistForm";
+
+    /** ユーザ登録サービス */
     @Autowired
     private UserRegistService userRegistService;
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ検索サービス */
     @Autowired
     private UserSearchService userSearchService;
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
 
@@ -81,7 +82,7 @@ public class UserRegistController implements BaseWizardController<UserRegistForm
         }
 
         // sessionにユーザ登録Form情報を保持
-        sessionComponent.setValue(request.getSession(), "userRegistForm", form);
+        sessionComponent.setValue(request.getSession(), SESSION_KEY_FORM, form);
 
         return getView(model, DashboardView.ACCOUNT_REGIST_CONFIRM);
     }
@@ -94,19 +95,19 @@ public class UserRegistController implements BaseWizardController<UserRegistForm
             HttpServletRequest request) throws BaseException {
 
         // sessionよりユーザ登録Form情報を取得
-        UserRegistForm accountRegistForm = sessionComponent
-                .getValue(request.getSession(), "userRegistForm",
+        UserRegistForm regForm = sessionComponent
+                .getValue(request.getSession(), SESSION_KEY_FORM,
                         UserRegistForm.class)
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
 
         UserDto dto = new UserDto();
-        BeanUtil.copy(accountRegistForm, dto);
+        BeanUtil.copy(regForm, dto);
 
         // Form情報から登録処理を行う
         userRegistService.regist(dto);
 
-        sessionComponent.removeValue(request.getSession(), "userRegistForm");
+        sessionComponent.removeValue(request.getSession(), SESSION_KEY_FORM);
 
         return getView(model, DashboardView.ACCOUNT_REGIST_COMPLETE);
     }
