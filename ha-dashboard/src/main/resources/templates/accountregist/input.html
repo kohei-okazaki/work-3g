@@ -10,90 +10,82 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <form id="userRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${userRegistForm}">
-      <div class="container border col-7 shadow">
-        <h2 class="menuTitle">アカウント登録</h2>
+  <div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow w-100" style="max-width: 700px;">
+      <div class="card-body">
+        <form id="userRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${userRegistForm}">
+          <h2 class="card-title text-center mb-4">📝 アカウント登録</h2>
 
-        <br>
-        <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('genderType')}" th:errors="*{genderType}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+          <!-- エラーメッセージまとめ表示 -->
+          <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+          <div th:each="errField : ${#fields.errors()}" class="alert alert-danger" th:text="${errField}"></div>
 
-        <!--/* メールアドレスここから */-->
-        <div class="form-group">
-          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
-          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
-          <div id="suggest"></div>
-        </div><!-- /.form-group -->
-        <!--/* メールアドレスここまで */-->
+          <!-- メールアドレス -->
+          <div class="form-group">
+            <label for="mailAddress" class="font-weight-bold" th:text="#{mailAddress}">メールアドレス</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="email" class="form-control" th:field="*{mailAddress}" maxlength="64"  placeholder="test@example.com">
+            <div id="suggest" class="mt-1 text-info small cursor-pointer"></div>
+          </div>
 
-        <!--/* パスワードここから */-->
-        <div class="form-group">
-          <label class="control-label" th:text="#{password}"></label><span class="badge badge-danger">必須</span>
-          <div class="checkbox">
-            <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" required placeholder="adminpass" />
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="password-check" class="checkbox-input custom-control-input" />
-              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
-            </label><!-- /.custom-control custom-checkbox -->
-          </div><!-- /.checkbox -->
-        </div><!-- /.form-group -->
-        <!--/* パスワードここまで */-->
+          <!-- パスワード -->
+          <div class="form-group">
+            <label for="password" class="font-weight-bold" th:text="#{password}">パスワード</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="password" class="form-control" th:field="*{password}" maxlength="16"  placeholder="adminpass">
+            <div class="form-check mt-2">
+              <input type="checkbox" id="password-check" class="form-check-input">
+              <label class="form-check-label" for="password-check">パスワードを表示</label>
+            </div>
+          </div>
 
-        <!--/* 確認用パスワードここから */-->
-        <div class="form-group">
-          <label class="control-label" th:text="#{confirmPassword}"></label><span class="badge badge-danger">必須</span>
-          <div class="checkbox">
-            <input type="password" class="validate[required,equals[password]] form-control" th:field="*{confirmPassword}" maxlength="16" required placeholder="adminpass" />
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="confirmPassword-check" class="checkbox-input custom-control-input" />
-              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
-            </label><!-- /.custom-control custom-checkbox -->
-          </div><!-- /.checkbox -->
-        </div><!-- /.form-group -->
-        <!--/* 確認用パスワードここまで */-->
+          <!-- 確認パスワード -->
+          <div class="form-group">
+            <label for="confirmPassword" class="font-weight-bold" th:text="#{confirmPassword}">確認用パスワード</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="password" class="form-control" th:field="*{confirmPassword}" maxlength="16"  placeholder="adminpass">
+            <div class="form-check mt-2">
+              <input type="checkbox" id="confirmPassword-check" class="form-check-input">
+              <label class="form-check-label" for="confirmPassword-check">パスワードを表示</label>
+            </div>
+          </div>
 
-        <!--/* 性別ここから */-->
-        <div class="form-group">
-          <label class="control-label" for="genderType" th:text="#{genderType}"></label><span class="badge badge-danger">必須</span>
-          <div class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" th:field="*{genderType}" id="male" value="0" checked="checked">
-          <label for="male" class="custom-control-label" th:text="#{male}"></label>
-          </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" th:field="*{genderType}" id="female" value="1">
-            <label for="female" class="custom-control-label" th:text="#{female}"></label>
-          </div><!-- /.custom-control custom-radio -->
-        </div><!-- /.form-group -->
-        <!--/* 性別ここまで */-->
+          <!-- 性別 -->
+          <div class="form-group">
+            <label class="font-weight-bold" th:text="#{genderType}">性別</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" th:field="*{genderType}" id="male" value="0" checked>
+              <label class="custom-control-label" for="male" th:text="#{male}">男性</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" th:field="*{genderType}" id="female" value="1">
+              <label class="custom-control-label" for="female" th:text="#{female}">女性</label>
+            </div>
+          </div>
 
-        <!--/* 誕生日ここから */-->
-        <div class="form-group">
-          <label class="control-label" for="birthDate" th:text="#{birthDate}"></label><span class="badge badge-danger">必須</span>
-          <input type="text" class="validate[required] form-control" th:field="*{birthDate}" th:value="${birthDate}" required placeholder="2020/03/01" />
-        </div> <!--/.form-group -->
-        <!--/* 誕生日ここまで */-->
+          <!-- 誕生日 -->
+          <div class="form-group">
+            <label for="birthDate" class="font-weight-bold" th:text="#{birthDate}">誕生日</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="text" class="form-control" th:field="*{birthDate}" required placeholder="2020/03/01">
+          </div>
 
-        <!--/* 備考ここから */-->
-        <div class="form-group">
-          <p th:text="#{remarks}"></p>
-          <textarea class="form-control" rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
-        </div><!-- /.form-group -->
-        <!--/* 備考ここまで */-->
+          <!-- 備考 -->
+          <div class="form-group">
+            <label for="remarks" class="font-weight-bold" th:text="#{remarks}">備考</label>
+            <textarea class="form-control" rows="5" th:field="*{remarks}" placeholder="備 考"></textarea>
+          </div>
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="確 認" />
-        <input type="reset" class="btn btn-secondary w-25" value="リセット" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-      </div><!-- /.container border col-7 shadow -->
-    </form><!-- /#accountRegistForm -->
-  </div><!-- /.px-4 -->
+          <!-- ボタン -->
+          <div class="text-center mt-4">
+            <input type="submit" class="btn btn-success mr-2 w-25" value="確 認" />
+            <input type="reset" class="btn btn-secondary w-25" value="リセット" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script th:src="@{/static/js/common/password.min.js}"></script>
   <script th:src="@{/static/js/lib/mailcheck.min.js}"></script>

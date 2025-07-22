@@ -19,8 +19,7 @@
 
           <!-- エラーメッセージ -->
           <div th:if="${errorMessage != null}" class="alert alert-danger" th:text="${errorMessage}"></div>
-          <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger" th:errors="*{password}"></div>
-          <div th:if="${#fields.hasErrors('confirmPassword')}" class="alert alert-danger" th:errors="*{confirmPassword}"></div>
+          <div th:each="errField : ${#fields.errors()}" class="alert alert-danger" th:text="${errField}"></div>
 
           <input type="hidden" name="mailAddress" th:value="${account.mailAddress}" />
 
