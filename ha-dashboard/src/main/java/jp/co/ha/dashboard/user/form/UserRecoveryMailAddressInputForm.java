@@ -1,8 +1,8 @@
 package jp.co.ha.dashboard.user.form;
 
-import jakarta.validation.constraints.Email;
-
-import jp.co.ha.common.validator.annotation.Max;
+import jp.co.ha.common.validator.LengthMode;
+import jp.co.ha.common.validator.annotation.Length;
+import jp.co.ha.common.validator.annotation.MailAddress;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
 
@@ -15,8 +15,8 @@ public class UserRecoveryMailAddressInputForm implements BaseForm {
 
     /** メールアドレス */
     @Required(message = "メールアドレスが未入力です")
-    @Max(size = 64, message = "メールアドレスは64桁以下で入力してください")
-    @Email(message = "メールアドレス形式ではありません")
+    @Length(length = 64, mode = LengthMode.LESS_EQUAL, message = "メールアドレスは64桁以下で入力してください")
+    @MailAddress(message = "メールアドレス形式ではありません")
     private String mailAddress;
 
     /**

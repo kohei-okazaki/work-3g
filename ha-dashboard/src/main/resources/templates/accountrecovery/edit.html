@@ -11,7 +11,7 @@
 <body>
 
   <div class="px-4">
-    <form id="accountRecoveryForm" th:action="@{'~/accountrecovery/confirm/' + ${account.seqUserId}}" method="post" th:object="${accountRecoveryForm}">
+    <form id="userRecoveryForm" th:action="@{'~/accountrecovery/confirm/' + ${account.seqUserId}}" method="post" th:object="${userRecoveryForm}">
       <div class="container border col-7 shadow">
         <h2 class="menuTitle">パスワード再設定</h2>
 
@@ -53,7 +53,7 @@
         <!--/* ボタン部ここまで */-->
         <br><br>
       </div><!-- /.container border col-7 shadow -->
-    </form><!-- /#accountRecoveryForm -->
+    </form><!-- /#userRecoveryForm -->
   </div><!-- /.px-4 -->
 
   <script th:src="@{/static/js/common/password.min.js}"></script>

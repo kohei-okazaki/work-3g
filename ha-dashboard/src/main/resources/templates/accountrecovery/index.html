@@ -11,10 +11,10 @@
 <body>
 
   <div class="px-4">
-    <div class="container border col-7 shadow">
+    <div class="container border col-7 shadow card">
 
       <!--/* アカウント回復メール送信前ここから */-->
-      <form id="accountRecoveryMailAddressInputForm" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${accountRecoveryMailAddressInputForm}" th:if="${isInputMailAddress == true}">
+      <form id="userRecoveryMailAddressInputForm" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${userRecoveryMailAddressInputForm}" th:if="${isInputMailAddress}">
         <h2 class="menuTitle">アカウント回復用メールアドレス入力</h2>
         <br>
         <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
@@ -35,11 +35,11 @@
         <input type="submit" class="btn btn-success w-25" value="メール送信" />
         <!--/* ボタン部ここまで */-->
         <br><br>
-      </form><!-- /#accountRecoveryMailAddressInputForm -->
+      </form><!-- /#userRecoveryMailAddressInputForm -->
       <!--/* アカウント回復メール送信前ここまで */-->
 
       <!--/* アカウント回復メール送信後ここから */-->
-      <div th:if="${isSendMailAddress == true}">
+      <div th:if="${isSendMailAddress}">
         <h2 class="menuTitle">アカウント回復用メール送信完了</h2>
         <div class="alert alert-info" role="alert">
           <p>アカウント回復用メールを以下の件名で送信しました。</p>

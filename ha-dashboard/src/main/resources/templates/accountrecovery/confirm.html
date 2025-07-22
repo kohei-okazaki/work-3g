@@ -11,7 +11,7 @@
 <body>
 
   <div class="px-4">
-    <form th:action="@{'~/accountrecovery/complete/' + ${account.seqUserId}}" method="post" th:object="${accountRecoveryForm}">
+    <form th:action="@{'~/accountrecovery/complete/' + ${account.seqUserId}}" method="post" th:object="${userRecoveryForm}">
       <input type="hidden" th:field="*{mailAddress}" />
       <input type="hidden" th:field="*{password}" />
       <div class="container border col-7 shadow">

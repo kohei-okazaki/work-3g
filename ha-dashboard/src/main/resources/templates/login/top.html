@@ -11,8 +11,9 @@
 <body>
 
   <div class="px-4" th:if="${needNotice == 'Y'}">
-    <div class="alert alert-warning" role="alert">本日の健康情報が未登録です。
-    </div><!-- ./alert alert-warning alert-dismissible fade show -->
+    <div class="alert alert-warning" role="alert">
+      本日の健康情報が未登録です。登録は<a th:href="@{/healthinfo/input}" class="alert-link">こちら</a>
+    </div><!-- /.alert alert-warning -->
   </div><!-- /.px-4 -->
  
   <div class="px-4" th:if="${needNotice == ''}">
@@ -23,12 +24,12 @@
     <!-- TODO: 健康情報カード -->
     <div class="row">
       <div class="col-6 pr-3 pt-1 pb-1">
-        <div class="border shadow p-3">
+        <div class="border shadow p-3 card">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2">
             <h1 class="h4 mb-0">最新の健康情報</h1>
           </div><!-- /.d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2 -->
-
-          <div class="row text-center">
+          <!-- 健康情報が登録されている場合 -->
+          <div class="row text-center card-body" th:if="${latest != null}">
             <!-- 最新体重 -->
             <div class="col-6 d-flex flex-column align-items-center pt-4 pb-4">
               <div class="position-relative">
@@ -55,24 +56,30 @@
                 </div><!-- /.d-flex align-items-baseline -->
               </div><!-- /.position-relative -->
             </div><!-- /.ol-6 d-flex flex-column align-items-center pt-4 pb-4 -->
-          </div><!-- /.row text-center -->
-
+          </div><!-- /.row text-center card-body -->
+          <!-- 健康情報が1件も登録されていない場合 -->
+          <div class="row card-body" th:if="${latest == null}">
+            <p class="card-text text-muted">健康情報がまだ登録されていません</p>
+            <p class="card-text text-muted">最初の健康データを登録すると、体重やBMI等がグラフで表示されます。</p>
+            <a th:href="@{/healthinfo/input}" class="btn btn-primary">健康情報 登録</a>
+          </div><!-- /.row card-body -->
         </div><!-- /.border shadow p-3 -->
       </div><!-- /.col-6 pr-3 pt-1 pb-1 -->
+
       <div class="col-6 pl-3 pt-1 pb-1">
-        <div class="border shadow p-3">
+        <div class="border shadow p-3 card">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2">
             <h1 class="h4 mb-0">TODO 目標健康情報追加</h1>
           </div><!-- /.d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2 -->
           <div>XXkgまで あとXX.Xkg</div>
-        </div><!-- /.border shadow p-3 -->
+        </div><!-- /.border shadow p-3 card -->
       </div><!-- /.col-6 pl-3 pt-1 pb-1 -->
     </div><!-- /.row -->
 
     <!-- 最近登録した10件 -->
     <div class="row mt-4">
       <div class="col-12">
-        <div class="border shadow p-4">
+        <div class="border shadow p-4 card">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2">
             <h1 class="h2 mb-0">最近登録した10件</h1>
           </div><!-- /.d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2 -->
@@ -83,7 +90,7 @@
               <canvas id="chart" class="chart" style="width: 85%; height: 400px;"></canvas>
             </div><!-- /.w-100 -->
           </div><!-- /.d-flex justify-content-center -->
-        </div><!-- /.border shadow p-4 -->
+        </div><!-- /.border shadow p-4 card -->
       </div><!-- /.col-12 -->
     </div><!-- /.row mt-4 -->
   </div><!-- /.px-4 -->

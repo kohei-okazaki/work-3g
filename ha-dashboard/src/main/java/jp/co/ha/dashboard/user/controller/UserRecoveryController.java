@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.user.controller;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -22,13 +23,9 @@ import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.create.UserRecoveryTokenCreateService;
-import jp.co.ha.business.db.crud.create.impl.UserRecoveryTokenCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.UserRecoveryTokenSearchService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.UserRecoveryTokenSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
-import jp.co.ha.business.db.crud.update.impl.UserUpdateServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
@@ -36,7 +33,6 @@ import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -63,29 +59,29 @@ public class UserRecoveryController implements BaseWebController {
     private static final Logger LOG = LoggerFactory
             .getLogger(UserRecoveryController.class);
 
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
-    /** {@linkplain UserUpdateServiceImpl} */
+    /** ユーザ情報更新サービス */
     @Autowired
     private UserUpdateService userUpdateService;
-    /** {@linkplain UserRecoveryTokenCreateServiceImpl} */
+    /** ユーザ情報更新サービス */
     @Autowired
     private UserRecoveryTokenCreateService userRecoveryTokenCreateService;
-    /** {@linkplain UserRecoveryTokenSearchServiceImpl} */
+    /** ユーザ回復トークン作成サービスインターフェース */
     @Autowired
     private UserRecoveryTokenSearchService userRecoveryTokenSearchService;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties properties;
-    /** {@linkplain Sha256HashEncoder} */
+    /** SHA-256ハッシュ値作成クラス */
     @Sha256
     @Autowired
     private HashEncoder encoder;
-    /** {@linkplain AwsSesComponent} */
+    /** AWS-SES Component */
     @Autowired
     private AwsSesComponent sesComponent;
-    /** {@linkplain UserComponent} */
+    /** ユーザComponent */
     @Autowired
     private UserComponent userComponent;
 
@@ -122,6 +118,7 @@ public class UserRecoveryController implements BaseWebController {
 
         // メールアドレスを入力させるためフラグをtrueに
         model.addAttribute("isInputMailAddress", true);
+        LOG.debug("isInputMailAddress = true");
 
         return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
     }
@@ -154,12 +151,14 @@ public class UserRecoveryController implements BaseWebController {
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "メールアドレスが未登録です"));
 
+        // システム日時
+        LocalDateTime sysdate = DateTimeUtil.getSysDate();
         // ユーザ回復トークン登録
         UserRecoveryToken entity = new UserRecoveryToken();
         entity.setSeqUserId(user.getSeqUserId());
-        entity.setToken(encoder.encode(user.getMailAddress(), DateTimeUtil.toString(
-                DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
-        entity.setTokenCreateDate(DateTimeUtil.getSysDate());
+        entity.setToken(encoder.encode(user.getMailAddress(),
+                DateTimeUtil.toString(sysdate, DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
+        entity.setTokenCreateDate(sysdate);
         userRecoveryTokenCreateService.create(entity);
 
         // SESでパスワード再設定メールを送信する
@@ -172,6 +171,7 @@ public class UserRecoveryController implements BaseWebController {
 
         // メールを送信したためフラグをtrueに
         model.addAttribute("isSendMailAddress", true);
+        LOG.debug("isSendMailAddress = true");
 
         return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
     }
