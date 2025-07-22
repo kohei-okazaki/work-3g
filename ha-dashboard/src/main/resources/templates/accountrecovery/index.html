@@ -10,47 +10,46 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-7 shadow card">
+  <div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow w-100" style="max-width: 600px;">
+      <div class="card-body">
 
-      <!--/* アカウント回復メール送信前ここから */-->
-      <form id="userRecoveryMailAddressInputForm" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${userRecoveryMailAddressInputForm}" th:if="${isInputMailAddress}">
-        <h2 class="menuTitle">アカウント回復用メールアドレス入力</h2>
-        <br>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
-        <div class="alert alert-info" role="alert">
-          <p>パスワードを再設定するメールを送信するため</p>
-          <p>アプリに登録済のご自身のメールアドレスを入力してください</p>
-        </div><!-- /.alert alert-info -->
+        <!-- アカウント回復メール送信前 -->
+        <form id="userRecoveryMailAddressInputForm" th:action="@{/accountrecovery/sendMail}" method="post" th:object="${userRecoveryMailAddressInputForm}" th:if="${isInputMailAddress}">
+          <h2 class="card-title text-center mb-4">🔐 アカウント回復</h2>
+          <div th:if="${#fields.hasErrors('mailAddress')}" class="alert alert-danger" th:errors="*{mailAddress}"></div>
+          <div class="alert alert-info" role="alert">
+            パスワードを再設定するため、登録済みのメールアドレスを入力してください。
+          </div>
 
-        <!--/* メールアドレスここから */-->
-        <div class="form-group">
-          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
-          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
-          <div id="suggest"></div>
-        </div><!-- /.form-group -->
-        <!--/* メールアドレスここまで */-->
+          <!--/* メールアドレスここから */-->
+          <div class="form-group">
+            <label for="mailAddress" class="font-weight-bold" th:text="#{mailAddress}">メールアドレス</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="email" id="mailAddress"  class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@example.com" />
+            <div id="suggest" class="mt-1 text-info small cursor-pointer"></div>
+          </div>
+		  <!--/* メールアドレスここまで */-->
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="メール送信" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-      </form><!-- /#userRecoveryMailAddressInputForm -->
-      <!--/* アカウント回復メール送信前ここまで */-->
+          <!-- ボタン -->
+          <div class="text-center mt-4">
+            <input type="submit" class="btn btn-success btn-block" value="メール送信" />
+          </div>
+        </form>
 
-      <!--/* アカウント回復メール送信後ここから */-->
-      <div th:if="${isSendMailAddress}">
-        <h2 class="menuTitle">アカウント回復用メール送信完了</h2>
-        <div class="alert alert-info" role="alert">
-          <p>アカウント回復用メールを以下の件名で送信しました。</p>
-          <b th:text="${'パスワード再設定' + #dates.format(#dates.createNow(), 'yyyyMMdd')}"></b>
-          <p>メール内のURLをクリックし、画面の指示に従って下さい。</p>
-        </div><!-- /.alert alert-info -->
-      </div>
-      <!--/* アカウント回復メール送信後ここまで */-->
+        <!-- アカウント回復メール送信後 -->
+        <div th:if="${isSendMailAddress}">
+          <h2 class="card-title text-center mb-4">📧 メール送信完了</h2>
+          <div class="alert alert-info">
+            <p>アカウント回復用メールを以下の件名で送信しました。</p>
+            <b th:text="${'パスワード再設定' + #dates.format(#dates.createNow(), 'yyyyMMdd')}"></b>
+            <p class="mb-0">メール内のURLをクリックし、画面の指示に従ってください。</p>
+          </div>
+        </div>
 
-    </div><!-- /.container border col-7 shadow -->
-  </div><!-- /.px-4 -->
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+  </div><!-- /.container -->
 
   <script th:src="@{/static/js/lib/mailcheck.min.js}"></script>
   <script>
