@@ -10,12 +10,14 @@ import jp.co.ha.common.type.BaseEnum;
  * @version 1.0.0
  */
 @Component
-public class SystemConfig {
+public class SystemProperties {
 
     /** ページング数 */
     private String paging;
     /** 環境名 */
     private Environment environment;
+    /** システムメールアドレス */
+    private String systemMailAddress;
 
     /**
      * 環境名の列挙
@@ -95,6 +97,25 @@ public class SystemConfig {
      */
     public void setEnvironment(String environment) {
         this.environment = Environment.of(environment);
+    }
+
+    /**
+     * systemMailAddressを返す
+     * 
+     * @return systemMailAddress
+     */
+    public String getSystemMailAddress() {
+        return systemMailAddress;
+    }
+
+    /**
+     * systemMailAddressを設定する
+     * 
+     * @param systemMailAddress
+     *     システムメールアドレス
+     */
+    public void setSystemMailAddress(String systemMailAddress) {
+        this.systemMailAddress = systemMailAddress;
     }
 
 }

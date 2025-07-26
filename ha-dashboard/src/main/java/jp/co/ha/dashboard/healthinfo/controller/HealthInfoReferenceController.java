@@ -46,7 +46,7 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.ExcelConfig.ExcelConfigBuilder;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.system.SessionComponent;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
@@ -88,9 +88,9 @@ public class HealthInfoReferenceController implements BaseWebController {
     /** {@linkplain HealthInfoFileSettingSearchServiceImpl} */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-    /** {@linkplain SystemConfig} */
+    /** {@linkplain SystemProperties} */
     @Autowired
-    private SystemConfig systemConfig;
+    private SystemProperties systemConfig;
     /** {@linkplain HealthInfoGraphServiceImpl} */
     @Autowired
     private HealthInfoGraphService healthInfoGraphService;

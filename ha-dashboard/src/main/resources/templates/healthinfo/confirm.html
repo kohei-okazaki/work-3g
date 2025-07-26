@@ -10,39 +10,49 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">健康情報入力確認</h2>
-      <p>以下の情報で健康情報を登録します</p>
-      <form th:action="@{/healthinfo/complete}" method="post" th:object="${healthInfoForm}">
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">✅ 健康情報入力確認</h4>
+          </div>
 
-        <table class="table table-hover table-striped">
-          <tr>
-            <th colspan="2">
-              <h3>健康情報</h3>
-            </th>
-          </tr>
-          <tr>
-            <th th:text="#{height}"></th>
-            <td th:text="*{height} + '&ensp;cm'"></td>
-          </tr>
-          <tr>
-            <th th:text="#{weight}"></th>
-            <td th:text="*{weight} + '&ensp;kg'"></td>
-          </tr>
-        </table><!-- /.table table-hover table-striped -->
+          <div class="card-body bg-white">
+            <p>以下の情報で健康情報を登録します。</p>
 
-        <br><br>
+            <form th:action="@{/healthinfo/complete}" method="post" th:object="${healthInfoForm}">
+              <table class="table table-bordered mb-4">
+                <thead class="thead-light">
+                  <tr>
+                    <th colspan="2" class="text-center">
+                      <h5 class="mb-0">健康情報</h5>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="w-25 bg-light" th:text="#{height}">身長</th>
+                    <td th:text="*{height} + ' cm'"></td>
+                  </tr>
+                  <tr>
+                    <th class="w-25 bg-light" th:text="#{weight}">体重</th>
+                    <td th:text="*{weight} + ' kg'"></td>
+                  </tr>
+                </tbody>
+              </table>
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="確 定" />
-        <input type="button" class="btn btn-secondary w-25" value="戻 る" onclick="history.back()" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-
-      </form>
-    </div><!-- /.container border col-8 shadow -->
-  </div><!-- /.px-4 -->
+              <!-- ボタン -->
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success w-45">確 定</button>
+                <button type="button" class="btn btn-secondary w-45" onclick="history.back()">戻 る</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

@@ -19,8 +19,6 @@ import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.user.form.UserSettingForm;
 import jp.co.ha.dashboard.user.service.UserSettingService;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -71,11 +69,7 @@ public class UserSettingServiceImpl implements UserSettingService {
             CompositeUser srcUser = (CompositeUser) src;
             UserSettingForm destForm = (UserSettingForm) dest;
 
-            destForm.setPasswordExpire(DateTimeUtil
-                    .toString(srcUser.getPasswordExpire(), DateFormatType.YYYYMMDD));
             destForm.setGenderType(GenderType.of(srcUser.getGenderType()).getValue());
-            destForm.setBirthDate(DateTimeUtil
-                    .toString(srcUser.getBirthDate(), DateFormatType.YYYYMMDD));
             destForm.setDeleteFlag(srcUser.isDeleteFlag() ? CommonFlag.TRUE.getValue()
                     : CommonFlag.FALSE.getValue());
             destForm.setHeaderFlag(srcUser.isHeaderFlag() ? CommonFlag.TRUE.getValue()
@@ -138,12 +132,7 @@ public class UserSettingServiceImpl implements UserSettingService {
     private void mergeUser(UserDto dto, User user) throws BaseException {
 
         BeanUtil.copy(dto, user, "seqUserId");
-        user.setPasswordExpire(
-                DateTimeUtil.toLocalDate(dto.getPasswordExpire(),
-                        DateFormatType.YYYYMMDD_STRICT));
         user.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
-        user.setBirthDate(DateTimeUtil.toLocalDate(dto.getBirthDate(),
-                DateFormatType.YYYYMMDD_STRICT));
 
         user.setPassword(
                 userComponent.getHashPassword(dto.getPassword(),

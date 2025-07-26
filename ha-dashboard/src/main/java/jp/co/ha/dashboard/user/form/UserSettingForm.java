@@ -1,13 +1,17 @@
 package jp.co.ha.dashboard.user.form;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.validator.LengthMode;
-import jp.co.ha.common.validator.annotation.Date;
 import jp.co.ha.common.validator.annotation.Flag;
+import jp.co.ha.common.validator.annotation.Future;
 import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.MailAddress;
+import jp.co.ha.common.validator.annotation.Past;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
@@ -48,15 +52,18 @@ public class UserSettingForm implements BaseForm {
     private String genderType;
     /** 誕生日 */
     @Required(message = "誕生日が未入力です")
-    private String birthDate;
+    @Past(message = "誕生日は過去日を指定して下さい")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthDate;
     /** APIキー */
     @Mask
     @Required(message = "APIキーが未入力です")
     private String apiKey;
     /** パスワード有効期限 */
     @Required(message = "パスワード有効期限が未入力です")
-    @Date(formatType = DateFormatType.YYYYMMDD, message = "パスワード有効期限がyyyy/mm/dd形式でありません")
-    private String passwordExpire;
+    @Future(message = "パスワード有効期限は未来日を指定して下さい")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate passwordExpire;
     /** ヘッダ利用有無フラグ */
     @Required(message = "ヘッダ利用有無フラグが未入力です")
     @Flag(message = "ヘッダ利用有無フラグの値が不正です")
@@ -192,7 +199,7 @@ public class UserSettingForm implements BaseForm {
      * 
      * @return birthDate
      */
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -201,7 +208,7 @@ public class UserSettingForm implements BaseForm {
      * 
      * @param birthDate
      */
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -229,7 +236,7 @@ public class UserSettingForm implements BaseForm {
      *
      * @return passwordExpire
      */
-    public String getPasswordExpire() {
+    public LocalDate getPasswordExpire() {
         return passwordExpire;
     }
 
@@ -239,7 +246,7 @@ public class UserSettingForm implements BaseForm {
      * @param passwordExpire
      *     パスワード有効期限日
      */
-    public void setPasswordExpire(String passwordExpire) {
+    public void setPasswordExpire(LocalDate passwordExpire) {
         this.passwordExpire = passwordExpire;
     }
 

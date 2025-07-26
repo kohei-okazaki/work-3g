@@ -10,48 +10,57 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <form th:action="@{/accountregist/complete}" method="post" th:object="${userRegistForm}">
-      <div class="container border col-7 shadow">
-        <h2 class="menuTitle">アカウント登録確認</h2>
-        <table class="table">
-          <tr>
-            <th scope="row" th:text="#{mailAddress}"></th >
-            <td th:text="*{mailAddress}"></td>
-          </tr>
-          <tr>
-            <th scope="row" th:text="#{password}"></th >
-            <td>****</td>
-          </tr>
-          <tr>
-            <th scope="row" th:text="#{confirmPassword}"></th>
-            <td>****</td>
-          </tr>
-          <tr>
-            <th th:text="#{genderType}"></th>
-            <td>
-              <div th:if="*{genderType} == 0">男性</div>
-              <div th:if="*{genderType} == 1">女性</div>
-            </td>
-          </tr>
-          <tr>
-            <th th:text="#{birthDate}"></th>
-            <td th:text="*{birthDate}"></td>
-          </tr>
-          <tr>
-            <th scope="row" th:text="#{remarks}"></th>
-            <td th:text="*{remarks}"></td>
-          </tr>
-        </table><!-- ./table -->
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-7">
+        <!-- .card構造でヘッダーを全幅に -->
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📝 アカウント登録確認</h4>
+          </div><!-- /.card-header -->
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="確 定" />
-        <input type="button" class="btn btn-secondary w-25" value="戻 る" onclick="history.back()" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-      </div><!-- /.container border col-7 shadow -->
-    </form>
-  </div><!-- /.px-4 -->
+          <!-- フォームは card-body 内に -->
+          <div class="card-body bg-white">
+            <form th:action="@{/accountregist/complete}" method="post" th:object="${userRegistForm}">
+              <table class="table table-bordered mb-4">
+                <tbody>
+                  <tr>
+                    <th scope="row" class="w-25 bg-light" th:text="#{mailAddress}"></th>
+                    <td th:text="*{mailAddress}"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="w-25 bg-light" th:text="#{password}"></th>
+                    <td>****</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="w-25 bg-light" th:text="#{genderType}"></th>
+                    <td>
+                      <span th:if="*{genderType} == 0">男性</span>
+                      <span th:if="*{genderType} == 1">女性</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="w-25 bg-light" th:text="#{birthDate}"></th>
+                    <td th:text="${#temporals.format(userRegistForm.birthDate, 'yyyy/MM/dd')}"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="w-25 bg-light" th:text="#{remarks}"></th>
+                    <td th:text="*{remarks}"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- ボタンエリア -->
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success w-45">確 定</button>
+                <button type="button" class="btn btn-secondary w-45" onclick="history.back()">戻 る</button>
+              </div>
+            </form>
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col-md-8 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 
 </body>
 </html>

@@ -10,11 +10,13 @@
 </head>
 <body>
 
-  <div class="container d-flex justify-content-center mt-5">
+  <div class="container d-flex justify-content-center my-5">
     <div class="card shadow w-100" style="max-width: 700px;">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">📝 アカウント登録</h4>
+      </div>
       <div class="card-body">
         <form id="userRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${userRegistForm}">
-          <h2 class="card-title text-center mb-4">📝 アカウント登録</h2>
 
           <!-- エラーメッセージまとめ表示 -->
           <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
@@ -68,7 +70,7 @@
           <div class="form-group">
             <label for="birthDate" class="font-weight-bold" th:text="#{birthDate}">誕生日</label>
             <span class="badge badge-danger ml-2">必須</span>
-            <input type="text" class="form-control" th:field="*{birthDate}" required placeholder="2020/03/01">
+            <input type="date" class="form-control" th:field="*{birthDate}" required>
           </div>
 
           <!-- 備考 -->
@@ -97,13 +99,13 @@
         promptPosition : "bottomLeft:80"
       });
 
-      $("#birthDate").datepicker({
-        firstDay: 0,
-        showButtonPanel: true,
-        changeYear: true,
-        changeMonth: true,
-        yearRange: "1960:2025"
-      });
+<!--      $("#birthDate").datepicker({-->
+<!--        firstDay: 0,-->
+<!--        showButtonPanel: true,-->
+<!--        changeYear: true,-->
+<!--        changeMonth: true,-->
+<!--        yearRange: "1960:2025"-->
+<!--      });-->
 
       // アカウント登録画面⇒TOP画面には遷移できないようにする
       $(".appTitle").removeAttr("onclick");

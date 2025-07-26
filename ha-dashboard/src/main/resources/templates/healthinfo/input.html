@@ -9,54 +9,62 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📝 健康情報入力</h4>
+          </div>
 
-      <div th:if="${errorMessage} != null">
-        <br><br>
-        <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+          <div class="card-body bg-white">
+            <!-- 全体エラーメッセージ -->
+            <div th:if="${errorMessage != null}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+            <!-- 入力フォーム -->
+            <form id="healthInfoForm" th:action="@{/healthinfo/confirm}" method="post" th:object="${healthInfoForm}">
+
+              <!-- 身長入力 -->
+              <div class="form-group">
+                <label for="height" class="font-weight-bold" th:text="#{height}">身長</label>
+                <span class="badge badge-danger ml-2">必須</span>
+
+                <div class="input-group">
+                  <input type="text" class="form-control" th:field="*{height}" required placeholder="170.00" aria-describedby="height-unit">
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="height-unit">cm</span>
+                  </div>
+                </div>
+
+                <div class="text-danger mt-1" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
+              </div>
+
+              <!-- 体重入力 -->
+              <div class="form-group">
+                <label for="weight" class="font-weight-bold" th:text="#{weight}">体重</label>
+                <span class="badge badge-danger ml-2">必須</span>
+
+                <div class="input-group">
+                  <input type="text" class="form-control" th:field="*{weight}" required placeholder="50.00" aria-describedby="weight-unit">
+                  <div class="input-group-append">
+                    <span class="input-group-text" id="weight-unit">kg</span>
+                  </div>
+                </div>
+
+                <div class="text-danger mt-1" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
+              </div>
+
+              <!-- ボタンエリア -->
+              <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-success w-45">確 認</button>
+                <button type="reset" class="btn btn-secondary w-45">リセット</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-
-        <h2 class="menuTitle">健康情報入力</h2>
-
-        <form id="healthInfoForm" th:action="@{/healthinfo/confirm}" method="post" th:object="${healthInfoForm}">
-
-          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('height')}" th:errors="*{height}"></div>
-          <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"></div>
-
-          <!--/* table部ここから */-->
-          <div class="table">
-            <div class="form-group">
-              <label class="control-label"  for="height" th:text="#{height}"></label><span class="badge badge-danger">必須</span>
-              <div class="input-group">
-                <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{height}" required placeholder="170.00" aria-describedby="basic-addon2"  />
-                <div class="input-group-append">
-                  <span class="input-group-text" id="basic-addon2">cm</span>
-                </div><!-- /.input-group-append -->
-              </div><!-- /.input-group -->
-            </div><!-- /.form-group -->
-
-            <div class="form-group">
-              <label class="control-label" for="weight" th:text="#{weight}"></label><span class="badge badge-danger">必須</span>
-              <div class="input-group">
-                <input type="text" class="validate[required,custom[number]] form-control" size="12" th:field="*{weight}" required placeholder="50.00" aria-describedby="basic-addon3" />
-                <div class="input-group-append">
-                  <span class="input-group-text" id="basic-addon3">kg</span>
-                </div><!-- /.input-group-append -->
-              </div><!-- /.input-group -->
-            </div><!-- /.form-group -->
-          </div><!-- /.table -->
-          <!--/* table部ここまで */-->
-
-          <!--/* ボタン部ここから */-->
-          <input type="submit" class="btn btn-success w-25" value="確 認" />
-          <input type="reset" class="btn btn-secondary w-25" value="リセット" />
-          <!--/* ボタン部ここまで */-->
-          <br><br>
-        </form><!-- /#healthInfoForm -->
-
-    </div><!-- container border col-8 shadow -->
-  </div><!-- /.px-4 -->
+    </div>
+  </div>
 
   <script>
     $(function() {

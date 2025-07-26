@@ -166,26 +166,22 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
      * 指定した文字列型の日付をYYYYMMDD 00:00:00の{@linkplainLocalDateTime}に直す
      *
      * @param date
-     *     文字列型の日付
+     *     日付
      * @return YYYYMMDD 00:00:00
      */
-    private LocalDateTime editFromDate(String date) {
-        LocalDate localDate = DateTimeUtil.toLocalDate(date,
-                DateFormatType.YYYYMMDD_STRICT);
-        return DateTimeUtil.getStartDay(localDate);
+    private LocalDateTime editFromDate(LocalDate date) {
+        return DateTimeUtil.getStartDay(date);
     }
 
     /**
      * 指定した文字列型の日付をYYYYMMDD 23:59:59の{@linkplainLocalDateTime}に直す
      *
      * @param date
-     *     文字列型の日付
+     *     日付
      * @return YYYYMMDD 23:59:59
      */
-    private LocalDateTime editToDate(String date) {
-        LocalDate localDate = DateTimeUtil.toLocalDate(date,
-                DateFormatType.YYYYMMDD_STRICT);
-        return DateTimeUtil.getEndDay(localDate);
+    private LocalDateTime editToDate(LocalDate date) {
+        return DateTimeUtil.getEndDay(date);
     }
 
 }

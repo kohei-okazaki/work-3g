@@ -8,15 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jp.co.ha.common.BaseCommonTest;
 
 /**
- * {@linkplain JdbcConfig} のjUnit
+ * {@linkplain JdbcProperties} のjUnit
  *
  * @version 1.0.0
  */
-public class JdbcConfigTest extends BaseCommonTest {
+public class JdbcPropertiesTest extends BaseCommonTest {
 
     /** JdbcConfig */
     @Autowired
-    private JdbcConfig conf;
+    private JdbcProperties conf;
 
     /**
      * JdbcConfigのテスト

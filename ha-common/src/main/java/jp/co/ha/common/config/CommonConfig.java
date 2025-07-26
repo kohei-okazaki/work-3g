@@ -8,10 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import jp.co.ha.common.db.CryptConfig;
-import jp.co.ha.common.db.JdbcConfig;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.db.CryptProperties;
+import jp.co.ha.common.db.JdbcProperties;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.web.interceptor.RequestInterceptor;
 
@@ -31,7 +32,27 @@ import jp.co.ha.common.web.interceptor.RequestInterceptor;
         "jp.co.ha.common.io",
         "jp.co.ha.common.web.api.aspect"
 })
+// @PropertySource("classpath:mail.properties")
 public class CommonConfig implements WebMvcConfigurer {
+
+    /** Freemarkerテンプレートパス */
+    @Value("${freemarker.template-loader-path}")
+    private String templateLoaderPath;
+
+    /** Freemarkerデフォルトエンコード */
+    @Value("${freemarker.default-encoding}")
+    private String defaultEncoding;
+
+    /**
+     * @return FreeMarkerConfigurer
+     */
+    @Bean
+    FreeMarkerConfigurer freeMarkerConfigurer() {
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPath(templateLoaderPath);
+        configurer.setDefaultEncoding(defaultEncoding);
+        return configurer;
+    }
 
     /**
      * @return DefaultAdvisorAutoProxyCreator
@@ -70,16 +91,16 @@ public class CommonConfig implements WebMvcConfigurer {
      * @param url
      * @param username
      * @param password
-     * @return JdbcConfig
+     * @return JdbcProperties
      */
     @Bean
-    JdbcConfig jdbcConfig(
+    JdbcProperties jdbcProperties(
             @Value("${jdbc.driverClassName}") String driverClassName,
             @Value("${jdbc.url}") String url,
             @Value("${jdbc.username}") String username,
             @Value("${jdbc.password}") String password) {
 
-        JdbcConfig jdbcConfig = new JdbcConfig();
+        JdbcProperties jdbcConfig = new JdbcProperties();
         jdbcConfig.setDriverClassName(driverClassName);
         jdbcConfig.setUrl(url);
         jdbcConfig.setUsername(username);
@@ -90,16 +111,19 @@ public class CommonConfig implements WebMvcConfigurer {
     /**
      * @param paging
      * @param environment
-     * @return SystemConfig
+     * @param systemMailAddress
+     * @return SystemProperties
      */
     @Bean
-    SystemConfig systemConfig(
+    SystemProperties systemProperties(
             @Value("${system.paging}") String paging,
-            @Value("${system.env}") String environment) {
+            @Value("${system.env}") String environment,
+            @Value("${system.mailaddress}") String systemMailAddress) {
 
-        SystemConfig systemConfig = new SystemConfig();
+        SystemProperties systemConfig = new SystemProperties();
         systemConfig.setPaging(paging);
         systemConfig.setEnvironment(environment);
+        systemConfig.setSystemMailAddress(systemMailAddress);
         return systemConfig;
     }
 
@@ -107,15 +131,15 @@ public class CommonConfig implements WebMvcConfigurer {
      * @param mode
      * @param key
      * @param shift
-     * @return CryptConfig
+     * @return CryptProperties
      */
     @Bean
-    CryptConfig cryptConfig(
+    CryptProperties cryptProperties(
             @Value("${crypt.mode}") String mode,
             @Value("${crypt.key}") String key,
             @Value("${crypt.shift}") String shift) {
 
-        CryptConfig cryptConfig = new CryptConfig();
+        CryptProperties cryptConfig = new CryptProperties();
         cryptConfig.setMode(mode);
         cryptConfig.setKey(key);
         cryptConfig.setShift(shift);

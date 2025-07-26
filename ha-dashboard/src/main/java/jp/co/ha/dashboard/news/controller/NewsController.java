@@ -23,7 +23,7 @@ import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.view.DashboardView;
@@ -41,9 +41,9 @@ public class NewsController implements BaseWebController {
     /** {@linkplain NewsInfoSearchServiceImpl} */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** {@linkplain SystemConfig} */
+    /** {@linkplain SystemProperties} */
     @Autowired
-    private SystemConfig systemConfig;
+    private SystemProperties systemConfig;
     /** {@linkplain AwsS3Component} */
     @Autowired
     private AwsS3Component awsS3Component;

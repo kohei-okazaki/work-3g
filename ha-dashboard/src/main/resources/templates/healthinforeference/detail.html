@@ -10,55 +10,64 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">健康情報詳細</h2>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📋 健康情報詳細</h4>
+          </div><!-- /.card-header -->
 
-       <div th:if="${errorMessage} != null">
-          <br>
-          <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
-        </div>
-      <table class="table table-hover table-striped" th:if="${detail != null}">
-        <tr>
-          <th th:text="#{seqHealthInfoId}"></th>
-          <td th:text="${detail.seqHealthInfoId}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{seqUserId}"></th>
-          <td th:text="${detail.seqUserId}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{height}"></th>
-          <td th:text="${detail.height}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{weight}"></th>
-          <td th:text="${detail.weight}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{bmi}"></th>
-          <td th:text="${detail.bmi}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{standardWeight}"></th>
-          <td th:text="${detail.standardWeight}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{healthInfoRegDate}"></th>
-          <td th:text="${detail.healthInfoRegDate}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{seqBmiRangeMtId}"></th>
-          <td th:text="${detail.seqBmiRangeMtId}"></td>
-        </tr>
-        <tr>
-          <th th:text="#{overWeightStatus}"></th>
-          <td th:text="#{'overWeightStatusMessage.' + ${detail.overWeightStatus}}"></td>
-        </tr>
-      </table><!-- /.table table-striped -->
-      <br>
-    </div><!-- /.container border col-8 shadow -->
-  </div><!-- /.px-4 -->
+          <div class="card-body bg-white">
+            <!-- エラーメッセージ -->
+            <div th:if="${errorMessage} != null" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+
+            <!-- 詳細テーブル -->
+            <table class="table table-bordered" th:if="${detail != null}">
+              <tbody>
+                <tr>
+                  <th class="w-25 bg-light" th:text="#{seqHealthInfoId}"></th>
+                  <td th:text="${detail.seqHealthInfoId}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{seqUserId}"></th>
+                  <td th:text="${detail.seqUserId}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{height}"></th>
+                  <td th:text="${detail.height}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{weight}"></th>
+                  <td th:text="${detail.weight}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{bmi}"></th>
+                  <td th:text="${detail.bmi}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{standardWeight}"></th>
+                  <td th:text="${detail.standardWeight}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{healthInfoRegDate}"></th>
+                  <td th:text="${detail.healthInfoRegDate}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{seqBmiRangeMtId}"></th>
+                  <td th:text="${detail.seqBmiRangeMtId}"></td>
+                </tr>
+                <tr>
+                  <th class="bg-light" th:text="#{overWeightStatus}"></th>
+                  <td th:text="#{'overWeightStatusMessage.' + ${detail.overWeightStatus}}"></td>
+                </tr>
+              </tbody>
+            </table><!-- /.table -->
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col-md-10 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 
 </body>
 </html>

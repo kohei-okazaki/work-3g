@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.BeanUtil;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
@@ -20,9 +20,9 @@ import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 @Component
 public class AwsAuthComponent {
 
-    /** {@linkplain SystemConfig} */
+    /** {@linkplain SystemProperties} */
     @Autowired
-    private SystemConfig systemConfig;
+    private SystemProperties systemConfig;
 
     /**
      * システムプロパティ.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>

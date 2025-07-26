@@ -129,6 +129,11 @@
       <artifactId>spring-boot-starter-security</artifactId>
       <version>${org.springframework.boot-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-freemarker</artifactId>
+      <version>${org.springframework.boot-version}</version>
+    </dependency>
     <!-- SpringBatch -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -158,7 +163,6 @@
       <artifactId>apache-client</artifactId>
       <version>${com.amazonaws-version}</version>
     </dependency>
-
 
     <!-- poi -->
     <dependency>

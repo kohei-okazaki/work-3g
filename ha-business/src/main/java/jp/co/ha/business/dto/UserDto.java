@@ -1,5 +1,7 @@
 package jp.co.ha.business.dto;
 
+import java.time.LocalDate;
+
 /**
  * ユーザDTO
  *
@@ -24,11 +26,11 @@ public class UserDto {
     /** APIキー */
     private String apiKey;
     /** パスワード有効期限 */
-    private String passwordExpire;
+    private LocalDate passwordExpire;
     /** 性別 */
     private String genderType;
     /** 誕生日 */
-    private String birthDate;
+    private LocalDate birthDate;
     /** ヘッダ利用有無フラグ */
     private Boolean headerFlag;
     /** フッタ利用有無フラグ */
@@ -195,7 +197,7 @@ public class UserDto {
      *
      * @return passwordExpire
      */
-    public String getPasswordExpire() {
+    public LocalDate getPasswordExpire() {
         return passwordExpire;
     }
 
@@ -205,7 +207,7 @@ public class UserDto {
      * @param passwordExpire
      *     パスワード有効期限
      */
-    public void setPasswordExpire(String passwordExpire) {
+    public void setPasswordExpire(LocalDate passwordExpire) {
         this.passwordExpire = passwordExpire;
     }
 
@@ -233,7 +235,7 @@ public class UserDto {
      * 
      * @return birthDate
      */
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -243,7 +245,7 @@ public class UserDto {
      * @param birthDate
      *     誕生日
      */
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

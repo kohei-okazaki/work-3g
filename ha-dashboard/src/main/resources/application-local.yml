@@ -10,3 +10,4 @@ spring:
       - "classpath:/local/system.properties"
       - "classpath:/local/aws.properties"
       - "classpath:/local/healthInfo.properties"
+      - "classpath:/mail.properties"

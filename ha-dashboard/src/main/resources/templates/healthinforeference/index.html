@@ -10,57 +10,78 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">健康情報照会</h2>
-      <form id="healthInfoReferenceForm" th:action="@{/healthinforeference/refer}" method="get" th:object="${healthInfoReferenceForm}">
-        <br>
-        <div class="alert alert-danger" role="alert" th:if="${isRefered != null && isRefered && hasResult != null && !hasResult}">検索結果が存在しません</div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqHealthInfoId')}" th:errors="*{seqHealthInfoId}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('healthInfoRegDateSelectFlag')}" th:errors="*{healthInfoRegDateSelectFlag}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('fromHealthInfoRegDate')}" th:errors="*{fromHealthInfoRegDate}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('toHealthInfoRegDate')}" th:errors="*{toHealthInfoRegDate}"></div>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-9">
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">🩺 健康情報照会</h4>
+          </div>
 
-        <h3>検索条件</h3>
-        <div class="form-group">
-          <p th:text="#{seqHealthInfoId}"></p>
-          <input type="text" class="validate[custom[number]] form-control" size="6" th:field="*{seqHealthInfoId}" placeholder="1000" />
-        </div><!-- /.form-group -->
-        <div class="form-group">
-          <p th:text="#{healthInfoRegDate}"></p>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" checked="checked">
-            <label for="healthInfoRegDateSelectFlagFalse" class="custom-control-label">直接指定しない</label>
-          </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1" checked="checked">
-            <label for="healthInfoRegDateSelectFlagTrue" class="custom-control-label">直接指定する</label>
-          </div><!-- /.custom-control custom-radio -->
-          <input type="text" th:field="*{fromHealthInfoRegDate}" class="form-control" placeholder="2017/01/01" />
-          <div class="hideCalendar">
-            <label>～</label>
-            <input type="text" th:field="*{toHealthInfoRegDate}" class="hideCalendar form-control" placeholder="2017/01/02" />
-          </div><!-- /.hideCalendar -->
-        </div><!-- /.form-group -->
+          <div class="card-body bg-white">
+            <form id="healthInfoReferenceForm" th:action="@{/healthinforeference/refer}" method="get" th:object="${healthInfoReferenceForm}">
+              
+              <!-- アラート類 -->
+              <div th:if="${isRefered != null && isRefered && hasResult != null && !hasResult}" class="alert alert-danger">
+                健康情報の登録がありません
+              </div>
+              <div th:each="errField : ${#fields.errors()}" class="alert alert-danger" th:text="${errField}"></div>
 
-        <br>
+              <h5 class="mt-4 mb-3">🔍 検索条件</h5>
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success" value="検 索" />
-        <input type="reset" class="btn btn-secondary" value="リセット" />
-        <!--/* ボタン部ここまで */-->
-      </form><!-- /#healthInfoReferenceForm -->
+              <!-- 健康情報ID -->
+              <div class="form-group">
+                <label class="font-weight-bold" th:text="#{seqHealthInfoId}">健康情報ID</label>
+                <input type="text" class="form-control" th:field="*{seqHealthInfoId}" placeholder="1000">
+              </div>
 
-      <br>
+              <!-- 登録日入力部 -->
+              <div class="form-group">
+                <label class="font-weight-bold d-block mb-2" th:text="#{healthInfoRegDate}">登録日</label>
 
-      <!--/* 結果部ここから */-->
-      <div th:if="${hasResult}">
-        <div th:replace="~{./healthinforeference/result.html}"></div>
+                <!-- ラジオボタン -->
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagFalse" value="0" checked>
+                  <label for="healthInfoRegDateSelectFlagFalse" class="form-check-label" >直接指定しない</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" th:field="*{healthInfoRegDateSelectFlag}" id="healthInfoRegDateSelectFlagTrue" value="1">
+                  <label for="healthInfoRegDateSelectFlagTrue" class="form-check-label" >直接指定する</label>
+                </div>
+
+                <!-- 入力欄 -->
+                <div class="form-row mt-3">
+                  <div class="col">
+                    <input type="date" id="fromHealthInfoRegDate" class="form-control" th:field="*{fromHealthInfoRegDate}">
+                  </div>
+
+                  <!-- 横並び用のラッパーごとID指定して制御 -->
+                  <div class="col" id="toDateWrapper">
+                    <div class="d-flex align-items-center">
+                      <span class="mr-2">～</span>
+                      <input type="date" id="toHealthInfoRegDate" class="form-control" th:field="*{toHealthInfoRegDate}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ボタン -->
+              <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-success">検 索</button>
+                <button type="reset" class="btn btn-secondary">リセット</button>
+              </div>
+            </form>
+
+            <!-- 検索結果 -->
+            <div class="mt-5" th:if="${hasResult}">
+              <div th:replace="~{./healthinforeference/result.html}"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!--/* 結果部ここまで */-->
-
-    </div><!-- /.container border col-8 shadow -->
-  </div><!-- /.px-4 -->
+    </div>
+  </div>
 
   <script th:src="@{/static/js/reference.min.js}"></script>
   <script th:inline="javascript">
@@ -70,18 +91,18 @@
       jQuery("#healthInfoReferenceForm").validationEngine({
         promptPosition : "bottomLeft:80"
       });
-      $("#fromHealthInfoRegDate").datepicker({
-        firstDay: 0,
-        showButtonPanel: true,
-        changeYear: true,
-        changeMonth: true
-      });
-      $("#toHealthInfoRegDate").datepicker({
-        firstDay: 0,
-        showButtonPanel: true,
-        changeYear: true,
-        changeMonth: true
-      });
+<!--      $("#fromHealthInfoRegDate").datepicker({-->
+<!--        firstDay: 0,-->
+<!--        showButtonPanel: true,-->
+<!--        changeYear: true,-->
+<!--        changeMonth: true-->
+<!--      });-->
+<!--      $("#toHealthInfoRegDate").datepicker({-->
+<!--        firstDay: 0,-->
+<!--        showButtonPanel: true,-->
+<!--        changeYear: true,-->
+<!--        changeMonth: true-->
+<!--      });-->
 
     });
 

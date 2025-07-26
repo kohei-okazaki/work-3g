@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import jp.co.ha.business.api.aws.AwsConfig;
+import jp.co.ha.business.api.aws.AwsProperties;
 import jp.co.ha.business.io.file.json.conf.JsonConfig;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 
@@ -82,24 +82,21 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @param region
      * @param backet
      * @param s3Timeout
-     * @param mailAddress
      * @param sesTimeout
      * @param sesStubFlag
      * @return AwsConfig
      */
     @Bean
-    AwsConfig awsConfig(
+    AwsProperties awsProperties(
             @Value("${aws.region}") String region,
             @Value("${aws.s3.backet}") String backet,
             @Value("${aws.s3.timeout}") int s3Timeout,
-            @Value("${aws.ses.mailaddress}") String mailAddress,
             @Value("${aws.ses.timeout}") int sesTimeout,
             @Value("${aws.ses.stubflag}") boolean sesStubFlag) {
-        AwsConfig awsConfig = new AwsConfig();
+        AwsProperties awsConfig = new AwsProperties();
         awsConfig.setRegion(region);
         awsConfig.setBacket(backet);
         awsConfig.setS3Timeout(s3Timeout);
-        awsConfig.setMailAddress(mailAddress);
         awsConfig.setSesTimeout(sesTimeout);
         awsConfig.setSesStubFlag(sesStubFlag);
         return awsConfig;

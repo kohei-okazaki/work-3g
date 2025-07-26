@@ -50,9 +50,9 @@ public class AwsS3Component {
     /** 文字コード */
     private static final String UTF_8 = Charset.UTF_8.getValue();
 
-    /** {@linkplain AwsConfig} */
+    /** {@linkplain AwsProperties} */
     @Autowired
-    private AwsConfig awsConfig;
+    private AwsProperties awsConfig;
     /** {@linkplain AwsAuthComponent} */
     @Autowired
     private AwsAuthComponent awsAuthComponent;

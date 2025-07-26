@@ -104,8 +104,6 @@ public class UserRegistServiceImpl implements UserRegistService {
         user.setApiKey(encoder.encode(dto.getPassword(), DateTimeUtil.toString(
                 DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
         user.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
-        user.setBirthDate(DateTimeUtil.toLocalDate(dto.getBirthDate(),
-                DateFormatType.YYYYMMDD_STRICT));
 
         return user;
     }

@@ -12,7 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.db.CryptConfig;
+import jp.co.ha.common.db.CryptProperties;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Algorithm;
@@ -29,9 +29,9 @@ public class AesCrypter implements Crypter {
 
     /** LOG */
     private static Logger LOG = LoggerFactory.getLogger(AesCrypter.class);
-    /** {@linkplain CryptConfig} */
+    /** {@linkplain CryptProperties} */
     @Autowired
-    private CryptConfig cryptConfig;
+    private CryptProperties cryptConfig;
 
     @Override
     public String encrypt(String str) {

@@ -1,10 +1,15 @@
 package jp.co.ha.dashboard.user.form;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.LengthMode;
 import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.MailAddress;
+import jp.co.ha.common.validator.annotation.Past;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
@@ -41,7 +46,9 @@ public class UserRegistForm implements BaseForm {
     private String genderType;
     /** 誕生日 */
     @Required(message = "誕生日が未入力です")
-    private String birthDate;
+    @Past(message = "誕生日は過去日を指定して下さい")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate birthDate;
     /** 備考 */
     @Length(length = 256, mode = LengthMode.LESS_EQUAL, message = "備考は256桁以下で入力してください")
     private String remarks;
@@ -127,7 +134,7 @@ public class UserRegistForm implements BaseForm {
      * 
      * @return birthDate
      */
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -137,7 +144,7 @@ public class UserRegistForm implements BaseForm {
      * @param birthDate
      *     誕生日
      */
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

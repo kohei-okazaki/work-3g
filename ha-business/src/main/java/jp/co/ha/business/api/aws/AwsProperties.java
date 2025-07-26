@@ -6,12 +6,11 @@ import software.amazon.awssdk.regions.Region;
 
 /**
  * AWSの設定情報保持クラス<br>
- * 設定ファイル名:aws.properties<br>
+ * 設定ファイル名:aws.properties
  * <ul>
  * <li>リージョン：設定ファイルで東京を設定</li>
  * <li>バケット名：環境毎にバケットを設定</li>
  * <li>S3タイムアウト：設定ファイルで10秒を設定</li>
- * <li>SESメールアドレス：アプリの送信元メールアドレス</li>
  * <li>SESタイムアウト：設定ファイルで10秒を設定</li>
  * <li>SESスタブフラグ：true:メールを送信しない、false:送信する</li>
  * </ul>
@@ -19,7 +18,7 @@ import software.amazon.awssdk.regions.Region;
  * @version 1.0.0
  */
 @Component
-public class AwsConfig {
+public class AwsProperties {
 
     /** リージョン */
     private Region region;
@@ -27,8 +26,6 @@ public class AwsConfig {
     private String backet;
     /** S3タイムアウト */
     private int s3Timeout;
-    /** SESメールアドレス */
-    private String mailAddress;
     /** SESタイムアウト */
     private int sesTimeout;
     /** SESスタブフラグ(true:メールを送信しない、false:送信する) */
@@ -90,25 +87,6 @@ public class AwsConfig {
      */
     public void setS3Timeout(int s3Timeout) {
         this.s3Timeout = s3Timeout;
-    }
-
-    /**
-     * mailAddressを返す
-     *
-     * @return mailAddress
-     */
-    public String getMailAddress() {
-        return mailAddress;
-    }
-
-    /**
-     * mailAddressを設定する
-     *
-     * @param mailAddress
-     *     SESメールアドレス
-     */
-    public void setMailAddress(String mailAddress) {
-        this.mailAddress = mailAddress;
     }
 
     /**

@@ -5,15 +5,15 @@ import java.time.LocalDate;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import jp.co.ha.common.validator.annotation.Future;
+import jp.co.ha.common.validator.annotation.Past;
 
 /**
- * 未来日の妥当性チェックvalidator
+ * 過去日の妥当性チェックvalidator
  *
- * @see jp.co.ha.common.validator.annotation.Future
+ * @see jp.co.ha.common.validator.annotation.Past
  * @version 1.0.0
  */
-public class FutureValidator implements ConstraintValidator<Future, LocalDate> {
+public class PastValidator implements ConstraintValidator<Past, LocalDate> {
 
     @Override
     public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
@@ -21,7 +21,7 @@ public class FutureValidator implements ConstraintValidator<Future, LocalDate> {
             // 必須チェックは@Requiredで行う
             return true;
         }
-        return value.isAfter(LocalDate.now());
+        return value.isBefore(LocalDate.now());
     }
 
 }

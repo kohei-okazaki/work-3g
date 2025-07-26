@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsConfig;
+import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.healthinfoapp.HealthCheckApi;
 import jp.co.ha.business.api.healthinfoapp.request.HealthCheckApiRequest;
@@ -21,6 +21,7 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
@@ -42,32 +43,33 @@ public class HealthCheckBatch implements Tasklet {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(HealthCheckBatch.class);
     /** ヘルスチェックAPIメールテンプレートID */
-    private static final String TEMPLATE_ID = "mail-template/health-check-template.txt";
+    private static final String TEMPLATE_ID = AwsS3Key.HEALTHINFO_CHECK_TEMPLATE
+            .getValue();
 
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
-    private HealthInfoProperties prop;
-    /** {@linkplain HealthCheckApi} */
+    private HealthInfoProperties healthInfoProperties;
+    /** システム設定ファイル情報 */
+    @Autowired
+    private SystemProperties systemProperties;
+    /** 健康管理アプリAPIサーバヘルスチェックAPI */
     @Autowired
     private HealthCheckApi healthCheckApi;
-    /** {@linkplain jp.co.ha.business.api.node.HealthCheckApi} */
+    /** Node APIサーバヘルスチェックAPI */
     @Autowired
     @Qualifier("nodeHealthCheckApi")
     private jp.co.ha.business.api.node.HealthCheckApi nodeHealthCheckApi;
-    /** {@linkplain jp.co.ha.business.api.root.HealthCheckApi} */
+    /** Root APIサーバヘルスチェックAPI */
     @Autowired
     @Qualifier("rootHealthCheckApi")
     private jp.co.ha.business.api.root.HealthCheckApi rootHealthCheckApi;
-    /** {@linkplain AwsSesComponent} */
+    /** AWS S3 Component */
     @Autowired
     private AwsSesComponent awsSesComponent;
-    /** {@linkplain AwsConfig} */
-    @Autowired
-    private AwsConfig awsConfig;
-    /** {@linkplain SlackApiComponent} */
+    /** SlackComponent */
     @Autowired
     private SlackApiComponent slackApiComponent;
 
@@ -78,7 +80,7 @@ public class HealthCheckBatch implements Tasklet {
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
         // 健康管理API.ヘルスチェックAPI 呼び出し
         sendHealthCheckApi(transactionId);
-        if (!prop.isHealthinfoNodeApiMigrateFlg()) {
+        if (!healthInfoProperties.isHealthinfoNodeApiMigrateFlg()) {
             // NodeAPI.ヘルスチェックAPI 呼び出し
             sendNodeHealthCheckApi(transactionId);
         }
@@ -100,7 +102,8 @@ public class HealthCheckBatch implements Tasklet {
 
         jp.co.ha.business.api.root.request.HealthCheckApiRequest req = new jp.co.ha.business.api.root.request.HealthCheckApiRequest();
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getRootApiUrl() + "healthcheck");
+                .withUrlSupplier(
+                        () -> healthInfoProperties.getRootApiUrl() + "healthcheck");
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
@@ -122,8 +125,8 @@ public class HealthCheckBatch implements Tasklet {
             break;
         case FAILURE:
             LOG.error("root api server down");
-            awsSesComponent.sendMail(awsConfig.getMailAddress(), "管理者用API.ヘルスチェックAPI結果",
-                    TEMPLATE_ID);
+            awsSesComponent.sendMail(systemProperties.getSystemMailAddress(),
+                    "管理者用API.ヘルスチェックAPI結果", TEMPLATE_ID);
             slackApiComponent.send(ContentType.BATCH, "root api server down");
             break;
         }
@@ -141,7 +144,8 @@ public class HealthCheckBatch implements Tasklet {
 
         jp.co.ha.business.api.node.request.HealthCheckApiRequest req = new jp.co.ha.business.api.node.request.HealthCheckApiRequest();
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl() + "healthcheck");
+                .withUrlSupplier(() -> healthInfoProperties.getHealthinfoNodeApiUrl()
+                        + "healthcheck");
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
@@ -163,8 +167,8 @@ public class HealthCheckBatch implements Tasklet {
             break;
         case FAILURE:
             LOG.error("node api server down");
-            awsSesComponent.sendMail(awsConfig.getMailAddress(), "NodeAPI ヘルスチェックAPI結果",
-                    TEMPLATE_ID);
+            awsSesComponent.sendMail(systemProperties.getSystemMailAddress(),
+                    "NodeAPI ヘルスチェックAPI結果", TEMPLATE_ID);
             slackApiComponent.send(ContentType.BATCH, "node api server down");
             break;
         }
@@ -183,7 +187,8 @@ public class HealthCheckBatch implements Tasklet {
 
         HealthCheckApiRequest req = new HealthCheckApiRequest();
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthInfoApiUrl() + "healthcheck");
+                .withUrlSupplier(
+                        () -> healthInfoProperties.getHealthInfoApiUrl() + "healthcheck");
 
         // API通信情報を登録
         ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
@@ -204,8 +209,8 @@ public class HealthCheckBatch implements Tasklet {
             break;
         case FAILURE:
             LOG.error("healthinfo api server down");
-            awsSesComponent.sendMail(awsConfig.getMailAddress(), "健康管理API ヘルスチェックAPI結果",
-                    TEMPLATE_ID);
+            awsSesComponent.sendMail(systemProperties.getSystemMailAddress(),
+                    "健康管理API ヘルスチェックAPI結果", TEMPLATE_ID);
             slackApiComponent.send(ContentType.BATCH, "healthinfo api server down");
             break;
         }

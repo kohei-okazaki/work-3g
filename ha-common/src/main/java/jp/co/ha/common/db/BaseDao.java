@@ -42,7 +42,7 @@ public abstract class BaseDao {
     protected void connect() throws BaseException {
 
         try {
-            JdbcConfig conf = BeanLoader.getBean(JdbcConfig.class);
+            JdbcProperties conf = BeanLoader.getBean(JdbcProperties.class);
             Class.forName(conf.getDriverClassName()).getDeclaredConstructor()
                     .newInstance();
             this.con = DriverManager.getConnection(conf.getUrl(), conf.getUsername(),

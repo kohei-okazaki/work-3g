@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
@@ -12,6 +13,8 @@ import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
@@ -19,6 +22,7 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
@@ -48,15 +52,21 @@ public class AwsSesComponent {
     /** 文字コード */
     private static final Charset CHARSET = Charset.UTF_8;
 
-    /** {@linkplain AwsConfig} */
+    /** AWS設定ファイル情報 */
     @Autowired
-    private AwsConfig awsConfig;
-    /** {@linkplain AwsAuthComponent} */
+    private AwsProperties awsConfig;
+    /** システム設定ファイル情報 */
+    @Autowired
+    private SystemProperties systemConfig;
+    /** AWS認証情報Component */
     @Autowired
     private AwsAuthComponent awsAuthComponent;
-    /** {@linkplain AwsS3Component} */
+    /** S3 Component */
     @Autowired
     private AwsS3Component awsS3Component;
+    /** FreeMarker設定 */
+    @Autowired
+    private Configuration freemarkerConfig;
 
     /**
      * 認証結果区分
@@ -257,7 +267,7 @@ public class AwsSesComponent {
 
             Destination destination = Destination.builder()
                     .toAddresses(to)
-                    .bccAddresses(awsConfig.getMailAddress())
+                    .bccAddresses(systemConfig.getSystemMailAddress())
                     .build();
 
             Body body = getBody(templateId, bodyMap);
@@ -267,7 +277,7 @@ public class AwsSesComponent {
                     .build();
 
             SendEmailRequest request = SendEmailRequest.builder()
-                    .source(awsConfig.getMailAddress())
+                    .source(systemConfig.getSystemMailAddress())
                     .destination(destination)
                     .message(message)
                     .build();
@@ -305,27 +315,6 @@ public class AwsSesComponent {
     }
 
     /**
-     * {@linkplain Body}を返す
-     *
-     * @param templateId
-     *     テンプレートID
-     * @param bodyMap
-     *     メール本文の置換用Map
-     * @return Body
-     * @throws BaseException
-     *     メールテンプレートの取得に失敗した場合
-     */
-    private Body getBody(String templateId, Map<String, String> bodyMap)
-            throws BaseException {
-
-        String bodyText = replace(getBodyTemplate(templateId), bodyMap);
-
-        return Body.builder()
-                .html(getContent(bodyText))
-                .build();
-    }
-
-    /**
      * {@linkplain Content}を返す
      *
      * @param text
@@ -340,6 +329,65 @@ public class AwsSesComponent {
     }
 
     /**
+     * {@linkplain Body}を返す
+     *
+     * @param templateId
+     *     テンプレートID
+     * @param bodyMap
+     *     メール本文の置換用Map
+     * @return Body
+     * @throws BaseException
+     *     メールテンプレートの取得に失敗した場合
+     */
+    private Body getBody(String templateId, Map<String, String> bodyMap)
+            throws BaseException {
+
+        if (StringUtil.isEmpty(templateId)) {
+            // テンプレートIDが未指定の場合
+            // TODO エラーコードは別途発番
+            throw new SystemException(CommonErrorCode.RUNTIME_ERROR,
+                    "メールテンプレートIDが未指定です。");
+        }
+
+        try {
+            StringWriter stringWriter = new StringWriter();
+
+            Template template = freemarkerConfig.getTemplate(templateId);
+            template.process(bodyMap, stringWriter);
+
+            return Body.builder()
+                    .html(getContent(stringWriter.toString()))
+                    .build();
+
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+
+    }
+
+    /**
+     * {@linkplain Body}を返す
+     *
+     * @param templateId
+     *     テンプレートID
+     * @param bodyMap
+     *     メール本文の置換用Map
+     * @return Body
+     * @throws BaseException
+     *     メールテンプレートの取得に失敗した場合
+     */
+    @Deprecated
+    private Body getBodyFromS3(String templateId, Map<String, String> bodyMap)
+            throws BaseException {
+
+        String bodyText = replace(getBodyTemplateFromS3(templateId), bodyMap);
+
+        return Body.builder()
+                .html(getContent(bodyText))
+                .build();
+    }
+
+    /**
      * 指定されたtemplateファイルのメール本文を返す
      *
      * @param templateId
@@ -348,7 +396,8 @@ public class AwsSesComponent {
      * @throws BaseException
      *     メールテンプレートの取得に失敗した場合
      */
-    private String getBodyTemplate(String templateId) throws BaseException {
+    @Deprecated
+    private String getBodyTemplateFromS3(String templateId) throws BaseException {
 
         try (InputStream is = awsS3Component.getS3ObjectByKey(templateId);
                 BufferedReader br = new BufferedReader(

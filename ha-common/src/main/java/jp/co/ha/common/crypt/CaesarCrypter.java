@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.db.CryptConfig;
+import jp.co.ha.common.db.CryptProperties;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.StringUtil;
 
@@ -17,9 +17,9 @@ import jp.co.ha.common.util.StringUtil;
 @Component("caesarCrypter")
 public class CaesarCrypter implements Crypter {
 
-    /** {@linkplain CryptConfig} */
+    /** {@linkplain CryptProperties} */
     @Autowired
-    private CryptConfig cryptConfig;
+    private CryptProperties cryptConfig;
 
     @Override
     public String encrypt(String str) {
