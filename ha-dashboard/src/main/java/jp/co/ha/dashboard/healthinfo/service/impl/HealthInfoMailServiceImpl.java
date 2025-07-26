@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
+import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
@@ -40,19 +40,19 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
         String titleText = "健康情報登録完了メール" + DateTimeUtil.toString(
                 DateTimeUtil.getSysDate(), DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
         Map<String, String> bodyMap = new HashMap<>();
-        bodyMap.put("${userId}", seqUserId.toString());
-        bodyMap.put("${seqHealthInfoId}",
+        bodyMap.put("userId", seqUserId.toString());
+        bodyMap.put("seqHealthInfoId",
                 apiResponse.getHealthInfo().getSeqHealthInfoId().toString());
-        bodyMap.put("${height}", apiResponse.getHealthInfo().getHeight() + "cm");
-        bodyMap.put("${weight}", apiResponse.getHealthInfo().getWeight() + "kg");
-        bodyMap.put("${bmi}", apiResponse.getHealthInfo().getBmi().toString());
-        bodyMap.put("${standardWeight}",
+        bodyMap.put("height", apiResponse.getHealthInfo().getHeight() + "cm");
+        bodyMap.put("weight", apiResponse.getHealthInfo().getWeight() + "kg");
+        bodyMap.put("bmi", apiResponse.getHealthInfo().getBmi().toString());
+        bodyMap.put("standardWeight",
                 apiResponse.getHealthInfo().getStandardWeight() + "kg");
-        bodyMap.put("${healthInfoRegDate}",
+        bodyMap.put("healthInfoRegDate",
                 DateTimeUtil.toString(apiResponse.getHealthInfo().getHealthInfoRegDate(),
                         DateFormatType.YYYYMMDDHHMMSS));
 
-        sesComponent.sendMail(to, titleText, AwsS3Key.HEALTHINFO_REGIST_TEMPLATE,
+        sesComponent.sendMail(to, titleText, MailTemplateKey.HEALTHINFO_REGIST_TEMPLATE,
                 bodyMap);
 
     }

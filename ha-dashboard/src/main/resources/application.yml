@@ -13,3 +13,9 @@ spring:
     basename: messages
     fallback-to-system-locale: false
     locale: ja
+  freemarker:
+    template-loader-path: classpath:/templates/mail-templates/
+    default-encoding: UTF-8
+    suffix: .ftl
+    charset: UTF-8
+    cache: false

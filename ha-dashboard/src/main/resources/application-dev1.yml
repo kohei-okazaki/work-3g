@@ -7,4 +7,3 @@ spring:
       - "classpath:/dev1/system.properties"
       - "classpath:/dev1/aws.properties"
       - "classpath:/dev1/healthInfo.properties"
-      - "classpath:/mail.properties"

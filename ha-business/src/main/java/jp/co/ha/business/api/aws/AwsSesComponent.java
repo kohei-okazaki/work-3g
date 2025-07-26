@@ -154,6 +154,40 @@ public class AwsSesComponent {
     }
 
     /**
+     * メールキー
+     * 
+     * @version 1.0.0
+     */
+    public static enum MailTemplateKey implements BaseEnum {
+
+        /** 健康管理アプリパスワード再設定メールのテンプレートキー */
+        ACCOUNT_RECOVERY_TEMPLATE("account-recovery-template.ftl"),
+        /** 健康管理ヘルスチェックのテンプレートキー */
+        HEALTHINFO_CHECK_TEMPLATE("health-check-template.ftl"),
+        /** 健康情報登録完了メールのテンプレートキー */
+        HEALTHINFO_REGIST_TEMPLATE("healthinfo-regist-template.ftl");
+
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private MailTemplateKey(String value) {
+            this.value = value;
+        }
+
+        /** 値 */
+        private String value;
+
+        @Override
+        public String getValue() {
+            return this.value;
+        }
+
+    }
+
+    /**
      * Eメールアドレスの検証を行う
      *
      * @param mailAddress
@@ -233,8 +267,8 @@ public class AwsSesComponent {
      * @throws BaseException
      *     メール送信に失敗した場合
      */
-    public EmailSendResultType sendMail(String to, String titleText, AwsS3Key s3Key,
-            Map<String, String> bodyMap) throws BaseException {
+    public EmailSendResultType sendMail(String to, String titleText,
+            MailTemplateKey s3Key, Map<String, String> bodyMap) throws BaseException {
         return sendMail(to, titleText, s3Key.getValue(), bodyMap);
     }
 

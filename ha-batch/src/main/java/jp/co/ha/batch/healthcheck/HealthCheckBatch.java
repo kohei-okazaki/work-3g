@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
+import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.api.healthinfoapp.HealthCheckApi;
 import jp.co.ha.business.api.healthinfoapp.request.HealthCheckApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthCheckApiResponse;
@@ -43,7 +43,7 @@ public class HealthCheckBatch implements Tasklet {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(HealthCheckBatch.class);
     /** ヘルスチェックAPIメールテンプレートID */
-    private static final String TEMPLATE_ID = AwsS3Key.HEALTHINFO_CHECK_TEMPLATE
+    private static final String TEMPLATE_ID = MailTemplateKey.HEALTHINFO_CHECK_TEMPLATE
             .getValue();
 
     /** API通信情報Component */

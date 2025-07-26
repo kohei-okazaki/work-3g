@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.aws.AwsSesComponent;
+import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.create.UserRecoveryTokenCreateService;
 import jp.co.ha.business.db.crud.read.UserRecoveryTokenSearchService;
@@ -166,7 +166,7 @@ public class UserRecoveryController implements BaseWebController {
         String title = "パスワード再設定" + DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
 
-        sesComponent.sendMail(to, title, AwsS3Key.ACCOUNT_RECOVERY_TEMPLATE,
+        sesComponent.sendMail(to, title, MailTemplateKey.ACCOUNT_RECOVERY_TEMPLATE,
                 getMailTemplateBody(entity));
 
         // メールを送信したためフラグをtrueに
@@ -304,11 +304,11 @@ public class UserRecoveryController implements BaseWebController {
 
         Map<String, String> bodyMap = new HashMap<>();
         // URL
-        bodyMap.put("${url}", properties.getHealthInfoDashboardUrl());
+        bodyMap.put("url", properties.getHealthInfoDashboardUrl());
         // ユーザID
-        bodyMap.put("${seq_user_id}", entity.getSeqUserId().toString());
+        bodyMap.put("seq_user_id", entity.getSeqUserId().toString());
         // トークン
-        bodyMap.put("${token}", entity.getToken());
+        bodyMap.put("token", entity.getToken());
         return bodyMap;
     }
 
