@@ -26,13 +26,13 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
 
     /** 身長 */
     @JsonProperty("height")
-    @Decimal(min = 0, message = "height is positive")
+    @Decimal(min = "0", message = "height is positive")
     @Required(message = "height is required")
     private BigDecimal height;
 
     /** 体重 */
     @JsonProperty("weight")
-    @Decimal(min = 0, message = "weight is positive")
+    @Decimal(min = "0", message = "weight is positive")
     @Required(message = "weight is required")
     private BigDecimal weight;
 

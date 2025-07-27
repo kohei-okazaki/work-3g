@@ -9,7 +9,12 @@ import jp.co.ha.db.entity.composite.CompositeUser;
 import jp.co.ha.db.entity.composite.CompositeUserKey;
 
 /**
- * ユーザ情報と健康情報ファイル設定の複合Mapper
+ * 以下のユーザ関連テーブル情報の複合Mapper
+ * <ul>
+ * <li>user</li>
+ * <li>health_info_file_setting</li>
+ * <li>user_health_goal</li>
+ * </ul>
  *
  * @version 1.0.0
  */

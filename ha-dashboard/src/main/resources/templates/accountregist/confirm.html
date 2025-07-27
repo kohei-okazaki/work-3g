@@ -5,7 +5,7 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <head>
-<title>アカウント登録確認画面</title>
+<title>ユーザ登録確認画面</title>
 <link>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <!-- .card構造でヘッダーを全幅に -->
         <div class="card shadow border-0 rounded">
           <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">📝 アカウント登録確認</h4>
+            <h4 class="mb-0">📝 ユーザ登録確認</h4>
           </div><!-- /.card-header -->
 
           <!-- フォームは card-body 内に -->
@@ -42,6 +42,10 @@
                   <tr>
                     <th scope="row" class="w-25 bg-light" th:text="#{birthDate}"></th>
                     <td th:text="${#temporals.format(userRegistForm.birthDate, 'yyyy/MM/dd')}"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="w-25 bg-light" th:text="#{goalWeight}">目標体重</th>
+                    <td th:text="*{goalWeight} + ' kg'"></td>
                   </tr>
                   <tr>
                     <th scope="row" class="w-25 bg-light" th:text="#{remarks}"></th>

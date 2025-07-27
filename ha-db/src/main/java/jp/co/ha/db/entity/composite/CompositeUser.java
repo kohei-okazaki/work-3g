@@ -1,5 +1,6 @@
 package jp.co.ha.db.entity.composite;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -39,6 +40,8 @@ public class CompositeUser extends CompositeUserKey {
     private int genderType;
     /** 誕生日 */
     private LocalDate birthDate;
+    /** 目標体重 */
+    private BigDecimal goalWeight;
     /** 登録日時 */
     private LocalDateTime regDate;
     /** 更新日時 */
@@ -201,6 +204,25 @@ public class CompositeUser extends CompositeUserKey {
      */
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    /**
+     * goalWeightを返す
+     * 
+     * @return goalWeight
+     */
+    public BigDecimal getGoalWeight() {
+        return goalWeight;
+    }
+
+    /**
+     * goalWeightを設定する
+     * 
+     * @param goalWeight
+     *     目標体重
+     */
+    public void setGoalWeight(BigDecimal goalWeight) {
+        this.goalWeight = goalWeight;
     }
 
     /**

@@ -66,7 +66,7 @@ public class NoteListApiController
     @GetMapping(value = "note", produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<NoteListApiResponse> index(NoteListApiRequest request,
             @RequestParam(name = "seq_login_id", required = true) Long seqLoginId,
-            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page)
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page)
             throws BaseException {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)

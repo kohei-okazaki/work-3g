@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.user.form;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -7,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.LengthMode;
+import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.common.validator.annotation.Flag;
 import jp.co.ha.common.validator.annotation.Future;
 import jp.co.ha.common.validator.annotation.Length;
@@ -55,6 +57,10 @@ public class UserSettingForm implements BaseForm {
     @Past(message = "誕生日は過去日を指定して下さい")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+    /** 目標体重 */
+    @Required(message = "目標体重が未入力です")
+    @Decimal(min = "1", max = "999", message = "目標体重は1kg～999kgまでの範囲が指定可能です")
+    private BigDecimal goalWeight;
     /** APIキー */
     @Mask
     @Required(message = "APIキーが未入力です")
@@ -189,6 +195,7 @@ public class UserSettingForm implements BaseForm {
      * genderTypeを設定する
      * 
      * @param genderType
+     *     性別
      */
     public void setGenderType(String genderType) {
         this.genderType = genderType;
@@ -207,9 +214,29 @@ public class UserSettingForm implements BaseForm {
      * birthDateを設定する
      * 
      * @param birthDate
+     *     誕生日
      */
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    /**
+     * goalWeightを返す
+     * 
+     * @return goalWeight
+     */
+    public BigDecimal getGoalWeight() {
+        return goalWeight;
+    }
+
+    /**
+     * goalWeightを設定する
+     * 
+     * @param goalWeight
+     *     目標体重
+     */
+    public void setGoalWeight(BigDecimal goalWeight) {
+        this.goalWeight = goalWeight;
     }
 
     /**

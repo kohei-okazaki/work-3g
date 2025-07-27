@@ -1,5 +1,6 @@
 package jp.co.ha.business.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -39,6 +40,8 @@ public class UserDto {
     private Boolean maskFlag;
     /** 囲み文字利用有無フラグ */
     private Boolean enclosureCharFlag;
+    /** 目標体重 */
+    private BigDecimal goalWeight;
 
     /**
      * seqUserIdを返す
@@ -319,6 +322,25 @@ public class UserDto {
      */
     public void setEnclosureCharFlag(Boolean enclosureCharFlag) {
         this.enclosureCharFlag = enclosureCharFlag;
+    }
+
+    /**
+     * goalWeightを返す
+     * 
+     * @return goalWeight
+     */
+    public BigDecimal getGoalWeight() {
+        return goalWeight;
+    }
+
+    /**
+     * goalWeightを設定する
+     * 
+     * @param goalWeight
+     *     目標体重
+     */
+    public void setGoalWeight(BigDecimal goalWeight) {
+        this.goalWeight = goalWeight;
     }
 
 }

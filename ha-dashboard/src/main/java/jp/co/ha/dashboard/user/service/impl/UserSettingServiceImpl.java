@@ -10,9 +10,12 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import jp.co.ha.business.component.UserComponent;
+import jp.co.ha.business.db.crud.create.UserHealthGoalCreateService;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.db.crud.read.UserHealthGoalSelectService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
+import jp.co.ha.business.db.crud.update.UserHealthGoalUpdateService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
@@ -23,6 +26,7 @@ import jp.co.ha.dashboard.user.form.UserSettingForm;
 import jp.co.ha.dashboard.user.service.UserSettingService;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.User;
+import jp.co.ha.db.entity.UserHealthGoal;
 import jp.co.ha.db.entity.composite.CompositeUser;
 
 /**
@@ -45,6 +49,15 @@ public class UserSettingServiceImpl implements UserSettingService {
     /** 健康情報ファイル設定更新サービス */
     @Autowired
     private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
+    /** ユーザ健康目標情報検索サービス */
+    @Autowired
+    private UserHealthGoalSelectService userHealthGoalSelectService;
+    /** ユーザ健康目標情報作成サービス */
+    @Autowired
+    private UserHealthGoalCreateService userHealthGoalCreateService;
+    /** ユーザ健康目標情報更新サービス */
+    @Autowired
+    private UserHealthGoalUpdateService userHealthGoalUpdateService;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -95,18 +108,14 @@ public class UserSettingServiceImpl implements UserSettingService {
 
         try {
 
-            // ユーザ情報を検索し、Dtoの内容をマージする
-            User currentUser = userSearchService.findById(dto.getSeqUserId()).get();
-            mergeUser(dto, currentUser);
             // ユーザ情報を更新する
-            userUpdateService.update(currentUser);
+            updateUser(dto);
 
-            // 健康情報ファイル設定情報を検索し、Dtoの内容をマージする
-            HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
-                    .findById(dto.getSeqUserId()).get();
-            mergeHealthInfoFileSetting(dto, healthInfoFileSetting);
             // 健康情報ファイル設定情報を更新する
-            healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
+            updateHealthInfoFileSetting(dto);
+
+            // ユーザ健康目標情報を更新する
+            updateUserHealthGoal(dto);
 
             // 正常にDB更新出来た場合、コミット
             transactionManager.commit(status);
@@ -120,37 +129,72 @@ public class UserSettingServiceImpl implements UserSettingService {
     }
 
     /**
-     * ユーザDTOをユーザ情報にマージする
-     *
+     * ユーザ情報を更新する
+     * 
      * @param dto
-     *     ユーザDTO
-     * @param user
-     *     ユーザ情報
+     *     ユーザ情報DTO
      * @throws BaseException
      *     基底例外
      */
-    private void mergeUser(UserDto dto, User user) throws BaseException {
+    private void updateUser(UserDto dto) throws BaseException {
 
-        BeanUtil.copy(dto, user, "seqUserId");
-        user.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
+        // ユーザ情報を検索
+        User currentUser = userSearchService.findById(dto.getSeqUserId()).get();
 
-        user.setPassword(
+        BeanUtil.copy(dto, currentUser, "seqUserId", "reg_date");
+        currentUser.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
+        currentUser.setPassword(
                 userComponent.getHashPassword(dto.getPassword(),
                         dto.getMailAddress()));
+
+        // ユーザ情報を更新する
+        userUpdateService.update(currentUser);
     }
 
     /**
-     * ユーザDTOを健康情報ファイル設定情報にマージする
-     *
+     * 健康情報ファイル設定情報を更新する
+     * 
      * @param dto
-     *     ユーザDTO
-     * @param healthInfoFileSetting
-     *     健康情報ファイル設定情報
+     *     ユーザ情報DTO
      */
-    private void mergeHealthInfoFileSetting(UserDto dto,
-            HealthInfoFileSetting healthInfoFileSetting) {
+    private void updateHealthInfoFileSetting(UserDto dto) {
 
-        BeanUtil.copy(dto, healthInfoFileSetting, "seqUserId");
+        // 健康情報ファイル設定情報を検索
+        HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
+                .findById(dto.getSeqUserId()).get();
+
+        BeanUtil.copy(dto, healthInfoFileSetting, "seqUserId", "reg_date");
+
+        // 健康情報ファイル設定情報を更新する
+        healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
+    }
+
+    /**
+     * ユーザ健康目標情報を更新する<br>
+     * PキーがユーザIDでないため、検索しPキー取得後論理削除する<br>
+     * その後新規登録を行う
+     * 
+     * @param dto
+     *     ユーザ情報DTO
+     */
+    private void updateUserHealthGoal(UserDto dto) {
+
+        // Pキー取得のため、検索
+        UserHealthGoal currentGoal = userHealthGoalSelectService
+                .findById(dto.getSeqUserId())
+                .get();
+
+        // 論理削除
+        userHealthGoalUpdateService.updateDeleteFlag(currentGoal);
+
+        // 登録
+        UserHealthGoal goal = new UserHealthGoal();
+        goal.setSeqUserId(dto.getSeqUserId());
+        goal.setWeight(dto.getGoalWeight());
+        goal.setDeleteFlag(CommonFlag.FALSE.get());
+
+        userHealthGoalCreateService.create(goal);
+
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.crud.create.UserCreateService;
+import jp.co.ha.business.db.crud.create.UserHealthGoalCreateService;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
@@ -22,6 +23,7 @@ import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.user.service.UserRegistService;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.User;
+import jp.co.ha.db.entity.UserHealthGoal;
 
 /**
  * ユーザ作成サービス実装クラス
@@ -37,6 +39,9 @@ public class UserRegistServiceImpl implements UserRegistService {
     /** 健康情報ファイル設定作成サービス */
     @Autowired
     private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
+    /** ユーザ健康目標情報作成サービス */
+    @Autowired
+    private UserHealthGoalCreateService userHealthGoalCreateService;
     /** SHA-256Hashクラス */
     @Sha256
     @Autowired
@@ -68,6 +73,9 @@ public class UserRegistServiceImpl implements UserRegistService {
 
             // 健康情報ファイル設定情報を作成
             healthInfoFileSettingCreateService.create(toHealthInfoFileSetting(user));
+
+            // ユーザ健康目標情報を作成
+            userHealthGoalCreateService.create(toGoal(user, dto));
 
             // 正常にDB登録出来た場合、コミット
             transactionManager.commit(status);
@@ -122,6 +130,21 @@ public class UserRegistServiceImpl implements UserRegistService {
         entity.setHeaderFlag(CommonFlag.FALSE.get());
         entity.setFooterFlag(CommonFlag.FALSE.get());
         entity.setMaskFlag(CommonFlag.FALSE.get());
+        return entity;
+    }
+
+    /**
+     * ユーザ健康目標情報Entityに変換する
+     * 
+     * @param user
+     *     ユーザ情報
+     * @return ユーザ健康目標情報
+     */
+    private UserHealthGoal toGoal(User user, UserDto dto) {
+        UserHealthGoal entity = new UserHealthGoal();
+        entity.setSeqUserId(user.getSeqUserId());
+        entity.setWeight(dto.getGoalWeight());
+        entity.setDeleteFlag(CommonFlag.FALSE.get());
         return entity;
     }
 

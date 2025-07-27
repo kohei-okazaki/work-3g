@@ -14,6 +14,7 @@
     <result column="GENDER_TYPE" jdbcType="INTEGER" property="genderType" />
     <result column="BIRTH_DATE" jdbcType="DATE" property="birthDate" />
     <result column="MAIL_ADDRESS" jdbcType="VARCHAR" property="mailAddress" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="goalWeight" />
     <result column="HEADER_FLAG" jdbcType="BIT" property="headerFlag" />
     <result column="FOOTER_FLAG" jdbcType="BIT" property="footerFlag" />
     <result column="MASK_FLAG" jdbcType="BIT" property="maskFlag" />
@@ -39,10 +40,14 @@
       , HF.FOOTER_FLAG
       , HF.MASK_FLAG
       , HF.ENCLOSURE_CHAR_FLAG
+      <!-- USER_HEALTH_GOAL -->
+      , HG.WEIGHT
     FROM
       USER U
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
         ON U.SEQ_USER_ID = HF.SEQ_USER_ID
+      LEFT OUTER JOIN USER_HEALTH_GOAL HG
+        ON HG.SEQ_USER_ID = U.SEQ_USER_ID AND HG.DELETE_FLAG = FALSE
     WHERE
       U.SEQ_USER_ID = #{seqUserId,jdbcType=BIGINT}
   </select>

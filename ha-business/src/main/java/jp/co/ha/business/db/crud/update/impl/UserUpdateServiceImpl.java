@@ -17,7 +17,7 @@ import jp.co.ha.db.mapper.UserMapper;
 @Service
 public class UserUpdateServiceImpl implements UserUpdateService {
 
-    /** {@linkplain UserMapper} */
+    /** ユーザ情報Mapper */
     @Autowired
     private UserMapper mapper;
 

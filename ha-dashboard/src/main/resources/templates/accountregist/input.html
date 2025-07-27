@@ -5,7 +5,7 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <head>
-<title>アカウント登録画面</title>
+<title>ユーザ登録画面</title>
 <link>
 </head>
 <body>
@@ -13,7 +13,7 @@
   <div class="container d-flex justify-content-center my-5">
     <div class="card shadow w-100" style="max-width: 700px;">
       <div class="card-header bg-primary text-white">
-        <h4 class="mb-0">📝 アカウント登録</h4>
+        <h4 class="mb-0">📝 ユーザ登録</h4>
       </div>
       <div class="card-body">
         <form id="userRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${userRegistForm}">
@@ -71,6 +71,19 @@
             <label for="birthDate" class="font-weight-bold" th:text="#{birthDate}">誕生日</label>
             <span class="badge badge-danger ml-2">必須</span>
             <input type="date" class="form-control" th:field="*{birthDate}" required>
+          </div>
+
+          <!-- 目標体重 -->
+          <div class="form-group">
+            <label for="goalWeight" class="font-weight-bold" th:text="#{goalWeight}">目標体重</label>
+            <span class="badge badge-danger ml-2">必須</span>
+
+            <div class="input-group">
+              <input type="text" class="form-control" th:field="*{goalWeight}" required placeholder="50.00" aria-describedby="goal-weight-unit">
+              <div class="input-group-append">
+                <span class="input-group-text" id="goal-weight-unit">kg</span>
+              </div>
+            </div>
           </div>
 
           <!-- 備考 -->

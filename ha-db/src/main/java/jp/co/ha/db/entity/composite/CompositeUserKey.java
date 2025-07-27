@@ -36,41 +36,4 @@ public class CompositeUserKey implements Serializable {
         this.seqUserId = seqUserId;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", seqUserId=").append(seqUserId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        CompositeUserKey other = (CompositeUserKey) that;
-        return (this.getSeqUserId() == null ? other.getSeqUserId() == null
-                : this.getSeqUserId().equals(other.getSeqUserId()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result
-                + ((getSeqUserId() == null) ? 0 : getSeqUserId().hashCode());
-        return result;
-    }
-
 }

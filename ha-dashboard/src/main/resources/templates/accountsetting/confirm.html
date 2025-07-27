@@ -52,6 +52,10 @@
                 <td th:text="${#temporals.format(userSettingForm.birthDate, 'yyyy/MM/dd')}"></td>
               </tr>
               <tr>
+                <th scope="row" th:text="#{goalWeight}">目標体重</th>
+                <td th:text="*{goalWeight} + ' kg'"></td>
+              </tr>
+              <tr>
                 <th scope="row" th:text="#{headerUse}"></th>
                 <td th:switch="*{headerFlag}">
                   <span th:case="1">する</span>
