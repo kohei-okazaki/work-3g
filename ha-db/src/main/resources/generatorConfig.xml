@@ -32,7 +32,7 @@
 
     <javaClientGenerator targetPackage="jp.co.ha.db.mapper" targetProject="ha-db/src/main/java" type="XMLMAPPER" />
 
-    <table schema="work3g" tableName="HEALTH_INFO" modelType="hierarchical" /> 
+<!--    <table schema="work3g" tableName="HEALTH_INFO" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="HEALTH_INFO_FILE_SETTING" modelType="hierarchical" />-->
 <!--    <table schema="work3g" tableName="BMI_RANGE_MT" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="API_COMMUNICATION_DATA" modelType="hierarchical" /> -->
@@ -44,6 +44,7 @@
 <!--    <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="USER" modelType="hierarchical" />-->
 <!--    <table schema="work3g" tableName="USER_RECOVERY_TOKEN" modelType="hierarchical" />-->
+    <table schema="work3g" tableName="USER_HEALTH_GOAL" modelType="hierarchical" />
 
   </context>
 </generatorConfiguration>
