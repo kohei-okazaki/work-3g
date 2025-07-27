@@ -31,10 +31,13 @@
     </tr>
   </table>
   <br>
-  <p>登録した健康情報は「健康情報照会画面」からも確認できます。</p>
+  <p>登録した健康情報は下記の「健康情報照会画面」からも確認できます。</p>
   <br>
-  <p>-----確認方法-----</p>
-  <p>[top] -> [MENU] -> [健康情報] -> [照会]</p>
-  <p>上記画面の健康情報IDに${seqHealthInfoId}を入れ確認して下さい。</p>
+  <b>▼健康情報照会画面</b>
+  <ul>
+    <li>
+      <a href="${url}healthinforeference/index">${url}healthinforeference/index</a>
+    </li>
+  </ul>
 </body>
 </html>

@@ -27,7 +27,6 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
     /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
-    /** {@linkplain AwsSesComponent} */
     /** AWS-SES Component */
     @Autowired
     private AwsSesComponent sesComponent;
@@ -55,6 +54,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
         bodyMap.put("healthInfoRegDate",
                 DateTimeUtil.toString(apiResponse.getHealthInfo().getHealthInfoRegDate(),
                         DateFormatType.YYYYMMDDHHMMSS));
+        bodyMap.put("url", properties.getHealthInfoDashboardUrl());
 
         sesComponent.sendMail(to, titleText, MailTemplateKey.HEALTHINFO_REGIST_TEMPLATE,
                 bodyMap);
