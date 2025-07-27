@@ -14,7 +14,6 @@ import jp.co.ha.business.api.healthinfoapp.controller.BaseAppApiController;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoReferenceApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoReferenceApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
-import jp.co.ha.business.api.healthinfoapp.service.impl.HealthInfoReferenceServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 
@@ -28,7 +27,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 public class HealthInfoReferenceApiController extends
         BaseAppApiController<HealthInfoReferenceApiRequest, HealthInfoReferenceApiResponse> {
 
-    /** {@linkplain HealthInfoReferenceServiceImpl} */
+    /** 健康情報照会サービス */
     @Autowired
     private HealthInfoReferenceService service;
 

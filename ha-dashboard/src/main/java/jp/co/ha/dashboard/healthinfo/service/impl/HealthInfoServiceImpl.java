@@ -16,12 +16,9 @@ import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
@@ -49,25 +46,25 @@ import jp.co.ha.db.entity.User;
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {
 
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoMailServiceImpl} */
+    /** 健康情報メールサービス */
     @Autowired
     private HealthInfoMailService healthInfoMailService;
-    /** {@linkplain HealthInfoCalcServiceImpl} */
+    /** 健康情報計算サービス */
     @Autowired
     private HealthInfoCalcService healthInfoCalcService;
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain HealthInfoRegistApi} */
+    /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
 

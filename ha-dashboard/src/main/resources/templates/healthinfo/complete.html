@@ -10,64 +10,73 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">健康情報入力完了</h2>
-      <div class="alert alert-primary" role="alert">健康情報作成完了しました</div>
-      <div>
-        <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
-        <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
-      </div>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-success text-white">
+            <h4 class="mb-0">健康情報入力完了</h4>
+          </div>
+          <div class="card-body text-center">
+            <div class="alert alert-success mb-4" role="alert">
+              健康情報作成完了しました
+            </div>
 
-      <div th:if="${!isFirstReg}">
-        <p th:text="'前回より' + ${diffWeight} + 'kg ' + #{'healthInfoStatus.' + ${resultMessage}}" />
-        <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
-      </div>
+            <div>
+              <p th:text="'今のあなたの身長(' + ${healthInfo.height} + 'cm)の'" />
+              <p th:text="'標準体重は ' + ${healthInfo.standardWeight} + 'kg です'" />
+            </div>
+            <div th:if="${!isFirstReg}">
+              <p th:text="'前回より' + ${diffWeight} + 'kg ' + #{'healthInfoStatus.' + ${resultMessage}}" />
+              <p th:text="${beforeWeight} + 'kg → ' + ${healthInfo.weight} + 'kg'" />
+            </div>
+            <table class="table table-striped my-3">
+              <tr>
+                <th th:text="#{height}" />
+                <th th:text="#{weight}" />
+                <th th:text="#{standardWeight}" />
+                <th th:text="#{bmi}" />
+              </tr>
+              <tr>
+                <td th:text="${healthInfo.height}" />
+                <td th:text="${healthInfo.weight}" />
+                <td th:text="${healthInfo.standardWeight}" />
+                <td th:text="${healthInfo.bmi}" />
+              </tr>
+            </table><!-- /.table -->
 
-        <table class="table table-hover table-striped">
-          <tr>
-            <th th:text="#{height}" />
-            <th th:text="#{weight}" />
-            <th th:text="#{standardWeight}" />
-            <th th:text="#{bmi}" />
-          </tr>
-          <tr>
-            <td th:text="${healthInfo.height}" />
-            <td th:text="${healthInfo.weight}" />
-            <td th:text="${healthInfo.standardWeight}" />
-            <td th:text="${healthInfo.bmi}" />
-          </tr>
-        </table><!-- /.table table-hover table-striped -->
+            <div class="container col-4 my-5">
+              <table>
+                <tr>
+                  <td>
+                    <form th:action="@{/healthinfo/exceldownload}" method="get" th:object="${healthInfoForm}">
+                      <input type="hidden" th:field="*{seqHealthInfoId}" />
+                      <div>
+                        <input class="menuicon" type="image" th:src="@{/static/image/icon_xlsx.png}" />
+                      </div>
+                    </form>
+                  </td>
+                  <td></td>
+                  <td>
+                    <form th:action="@{/healthinfo/csvdownload}" method="get" th:object="${healthInfoForm}">
+                      <input type="hidden" th:field="*{seqHealthInfoId}" />
+                      <div>
+                        <input class="menuicon" type="image" th:src="@{/static/image/icon_csv.png}" />
+                      </div>
+                    </form>
+                  </td>
+                </tr>
+              </table>
+            </div><!-- /.container -->
 
-        <br>
+            <!-- 任意のナビゲーション -->
+            <a th:href="@{/top}" class="btn btn-outline-primary">トップへ戻る</a>
 
-        <!--/* table部ここから */-->
-        <div class="container col-4">
-          <table>
-            <tr>
-              <td>
-                <form th:action="@{/healthinfo/exceldownload}" method="get" th:object="${healthInfoForm}">
-                  <input type="hidden" th:field="*{seqHealthInfoId}" />
-                  <div>
-                    <input class="menuicon" type="image" th:src="@{/static/image/icon_xlsx.png}" />
-                  </div>
-                </form>
-              </td>
-              <td></td>
-              <td>
-                <form th:action="@{/healthinfo/csvdownload}" method="get" th:object="${healthInfoForm}">
-                  <input type="hidden" th:field="*{seqHealthInfoId}" />
-                  <div>
-                    <input class="menuicon" type="image" th:src="@{/static/image/icon_csv.png}" />
-                  </div>
-                </form>
-              </td>
-            </tr>
-          </table>
-        </div><!-- /.container col-4 -->
-      <br><br>
-    </div><!-- /.container border col-8 shadow -->
-  </div><!-- /.px-4 -->
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col-md-8 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 
 </body>
 </html>

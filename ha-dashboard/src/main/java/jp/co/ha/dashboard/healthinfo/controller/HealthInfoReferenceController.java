@@ -25,16 +25,12 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoFileSettingSearchServiceImpl;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 import jp.co.ha.business.healthInfo.service.annotation.ReferenceDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.ReferenceDownloadExcel;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoGraphServiceImpl;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoReferCsvDownloadServiceImpl;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoReferExcelDownloadServiceImpl;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.exception.BaseException;
@@ -57,7 +53,6 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
-import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoReferServiceImpl;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoReferenceValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
@@ -71,30 +66,30 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @RequestMapping("healthinforeference")
 public class HealthInfoReferenceController implements BaseWebController {
 
-    /** {@linkplain HealthInfoReferServiceImpl} */
+    /** 健康情報照会画面サービス */
     @Autowired
     private HealthInfoReferService service;
-    /** {@linkplain HealthInfoReferExcelDownloadServiceImpl} */
+    /** Excelダウンロードサービス */
     @Autowired
     @ReferenceDownloadExcel
     private ExcelDownloadService<ReferenceExcelComponent> excelDownloadService;
-    /** {@linkplain HealthInfoReferCsvDownloadServiceImpl} */
+    /** 健康情報CSVアップロードサービス */
     @Autowired
     @ReferenceDownloadCsv
     private CsvDownloadService<ReferenceCsvDownloadModel> csvDownloadService;
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain HealthInfoFileSettingSearchServiceImpl} */
+    /** 健康情報ファイル設定検索サービス */
     @Autowired
     private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
-    /** {@linkplain SystemProperties} */
+    /** システム情報設定 */
     @Autowired
     private SystemProperties systemConfig;
-    /** {@linkplain HealthInfoGraphServiceImpl} */
+    /** 健康情報グラフ作成サービス */
     @Autowired
     private HealthInfoGraphService healthInfoGraphService;
-    /** {@linkplain AwsS3Component} */
+    /** AWS-S3 Component */
     @Autowired
     private AwsS3Component awsS3Component;
 

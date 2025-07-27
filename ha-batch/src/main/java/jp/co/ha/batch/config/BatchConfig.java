@@ -11,6 +11,7 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -32,6 +33,7 @@ import jp.co.ha.db.config.DbConfig;
  * @version 1.0.0
  */
 @Configuration
+@ComponentScan({ "jp.co.ha.batch" })
 // commonプロジェクトなどのbean定義を読込
 @Import({
         CommonConfig.class,
@@ -40,16 +42,16 @@ import jp.co.ha.db.config.DbConfig;
 })
 public class BatchConfig {
 
-    /** {@linkplain HealthCheckBatch} */
+    /** ヘルスチェックバッチ */
     @Autowired
     private HealthCheckBatch healthCheckBatch;
-    /** {@linkplain HealthInfoFileRegistBatch} */
+    /** 健康情報一括登録バッチ */
     @Autowired
     private HealthInfoFileRegistBatch healthInfoFileRegistBatch;
-    /** {@linkplain HealthInfoFileRegistBatch} */
+    /** 月次健康情報集計バッチ */
     @Autowired
     private MonthlyHealthInfoSummaryBatch monthlyHealthInfoSummaryBatch;
-    /** {@linkplain HealthInfoMigrateBatch} */
+    /** 健康情報連携バッチ */
     @Autowired
     private HealthInfoMigrateBatch healthInfoMigrateBatch;
 

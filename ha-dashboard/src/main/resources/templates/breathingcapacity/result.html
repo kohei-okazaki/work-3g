@@ -1,13 +1,15 @@
 <div>
   <!--/* table部ここから */-->
-  <table class="table table-hover table-striped">
-    <tr>
-      <th th:text="#{predictBreathingCapacity}" />
-      <td th:text="${calcResult.predictBreathingCapacity} + '&ensp;cc'" />
-    </tr>
-    <tr>
-      <th th:text="#{breathingCapacityPercentage}" />
-      <td th:text="${calcResult.breathingCapacityPercentage} + '&ensp;%'" />
-    </tr>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th class="bg-light" th:text="#{predictBreathingCapacity}" />
+        <td th:text="${calcResult.predictBreathingCapacity} + '&ensp;cc'" />
+      </tr>
+      <tr>
+        <th class="bg-light" th:text="#{breathingCapacityPercentage}" />
+        <td th:text="${calcResult.breathingCapacityPercentage} + '&ensp;%'" />
+      </tr>
+    </tbody>
   </table><!-- /.table table-hover table-striped -->
 </div>

@@ -24,7 +24,6 @@ import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTyp
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoUploadCsv;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoCsvUploadServiceImpl;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
@@ -40,7 +39,6 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
-import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoFileRegistServiceImpl;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 
@@ -57,17 +55,17 @@ public class HealthInfoFileRegistController
     /** 健康情報登録ファイルPrefix */
     private static final String FILE_NAME_PREFIX = "healthinfo-file-regist/";
 
-    /** {@linkplain HealthInfoCsvUploadServiceImpl} */
+    /** 健康情報CSVアップロードサービス */
     @Autowired
     @HealthInfoUploadCsv
     private CsvUploadService<HealthInfoCsvUploadModel> csvUploadService;
-    /** {@linkplain HealthInfoFileRegistServiceImpl} */
+    /** 健康情報ファイル登録サービス */
     @Autowired
     private HealthInfoFileRegistService fileService;
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain AwsS3Component} */
+    /** AWS-S3 Component */
     @Autowired
     private AwsS3Component awsS3Component;
 

@@ -10,7 +10,7 @@ import jp.co.ha.business.api.aws.AwsSesComponent;
 import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
+import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -24,12 +24,16 @@ import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 @Service
 public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
     /** {@linkplain AwsSesComponent} */
+    /** AWS-SES Component */
     @Autowired
     private AwsSesComponent sesComponent;
+    /** 健康情報設定ファイル */
+    @Autowired
+    private HealthInfoProperties properties;
 
     @Override
     public void sendHealthInfoMail(HealthInfoRegistApiResponse apiResponse)

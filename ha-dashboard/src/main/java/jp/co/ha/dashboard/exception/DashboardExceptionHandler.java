@@ -31,7 +31,7 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(DashboardExceptionHandler.class);
-    /** {@linkplain SlackApiComponent} */
+    /** SlackComponent */
     @Autowired
     private SlackApiComponent slackApiComponent;
 

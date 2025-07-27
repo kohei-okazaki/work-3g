@@ -36,7 +36,7 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(RestApiExceptionHandler.class);
-    /** {@linkplain SlackApiComponent} */
+    /** SlackComponent */
     @Autowired
     private SlackApiComponent slackApiComponent;
 
