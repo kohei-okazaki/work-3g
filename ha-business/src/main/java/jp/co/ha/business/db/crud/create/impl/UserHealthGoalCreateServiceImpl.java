@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.create.UserHealthGoalCreateService;
-import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.common.db.annotation.Insert;
 import jp.co.ha.db.entity.UserHealthGoal;
 import jp.co.ha.db.mapper.UserHealthGoalMapper;
@@ -27,13 +26,6 @@ public class UserHealthGoalCreateServiceImpl implements UserHealthGoalCreateServ
     @Transactional(rollbackFor = Exception.class)
     public void create(UserHealthGoal entity) {
         mapper.insert(entity);
-    }
-
-    @Insert
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void create(UserDto dto) {
-
     }
 
 }
