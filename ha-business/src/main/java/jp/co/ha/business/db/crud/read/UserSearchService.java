@@ -44,7 +44,7 @@ public interface UserSearchService {
     Optional<User> findByMailAddress(String mailAddress);
 
     /**
-     * 指定したメールアドレスが存在するかどうか判定する<br>
+     * 指定したメールアドレスが未削除ユーザとして存在するかどうか判定する<br>
      * <ul>
      * <li>存在する場合、true</li>
      * <li>存在しない場合、false</li>

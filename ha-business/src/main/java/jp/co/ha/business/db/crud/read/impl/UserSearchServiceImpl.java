@@ -75,6 +75,8 @@ public class UserSearchServiceImpl implements UserSearchService {
 
         // メールアドレス
         criteria.andMailAddressEqualTo(crypter.encrypt(mailAddress));
+        // 削除フラグ
+        criteria.andDeleteFlagEqualTo(false);
 
         List<User> list = mapper.selectByExample(example);
 
@@ -92,6 +94,8 @@ public class UserSearchServiceImpl implements UserSearchService {
 
         // メールアドレス
         criteria.andMailAddressEqualTo(crypter.encrypt(mailAddress));
+        // 削除フラグ
+        criteria.andDeleteFlagEqualTo(false);
 
         long count = mapper.countByExample(example);
         return count > 0;

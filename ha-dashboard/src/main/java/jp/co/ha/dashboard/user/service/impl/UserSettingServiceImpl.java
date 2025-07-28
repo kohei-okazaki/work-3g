@@ -108,6 +108,9 @@ public class UserSettingServiceImpl implements UserSettingService {
 
         try {
 
+            // 削除時は関連テーブルを削除するため取得
+            boolean isDelete = dto.getDeleteFlag();
+
             // ユーザ情報を更新する
             updateUser(dto);
 
@@ -115,7 +118,7 @@ public class UserSettingServiceImpl implements UserSettingService {
             updateHealthInfoFileSetting(dto);
 
             // ユーザ健康目標情報を更新する
-            updateUserHealthGoal(dto);
+            updateUserHealthGoal(dto, isDelete);
 
             // 正常にDB更新出来た場合、コミット
             transactionManager.commit(status);
@@ -176,8 +179,10 @@ public class UserSettingServiceImpl implements UserSettingService {
      * 
      * @param dto
      *     ユーザ情報DTO
+     * @param isDelete
+     *     削除フラグ
      */
-    private void updateUserHealthGoal(UserDto dto) {
+    private void updateUserHealthGoal(UserDto dto, boolean isDelete) {
 
         // Pキー取得のため、検索
         UserHealthGoal currentGoal = userHealthGoalSelectService
@@ -186,6 +191,11 @@ public class UserSettingServiceImpl implements UserSettingService {
 
         // 論理削除
         userHealthGoalUpdateService.updateDeleteFlag(currentGoal);
+
+        if (isDelete) {
+            // 削除時は再登録はせず処理終了
+            return;
+        }
 
         // 登録
         UserHealthGoal goal = new UserHealthGoal();

@@ -51,7 +51,7 @@ public class UserSettingController
      * Formを返す
      *
      * @param request
-     *     {@linkplain HttpServletRequest}
+     *     リクエスト情報
      * @return UserSettingForm
      */
     @ModelAttribute("userSettingForm")
@@ -113,6 +113,12 @@ public class UserSettingController
         userSettingService.execute(dto);
 
         sessionComponent.removeValue(request.getSession(), SESSION_KEY_FORM);
+
+        if (CommonFlag.of(userSettingForm.getDeleteFlag()).get()) {
+            // ユーザ削除時はセッションを削除してログイン画面へ遷移
+            sessionComponent.removeValue(request.getSession(), SESSION_KEY_SEQ_USER_ID);
+            redirectView(DashboardView.LOGIN);
+        }
 
         return getView(model, DashboardView.ACCOUNT_SETTING_COMPLETE);
     }
