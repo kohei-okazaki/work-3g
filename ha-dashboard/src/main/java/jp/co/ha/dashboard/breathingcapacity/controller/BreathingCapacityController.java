@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.BreathingCapacityApiComponent;
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.dto.BreathingCapacityDto;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
@@ -44,6 +46,9 @@ public class BreathingCapacityController implements BaseWebController {
     /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
+    /** ユーザ関連Component */
+    @Autowired
+    private UserComponent userComponent;
 
     /**
      * Formを返す
@@ -51,14 +56,19 @@ public class BreathingCapacityController implements BaseWebController {
      * @param request
      *     {@linkplain HttpServletRequest}
      * @return BreathingCapacityForm
+     * @throws BusinessException
+     *     年齢の算出に失敗したとき
      */
     @ModelAttribute("breathingCapacityForm")
-    public BreathingCapacityForm setUpForm(HttpServletRequest request) {
+    public BreathingCapacityForm setUpForm(HttpServletRequest request)
+            throws BusinessException {
         BreathingCapacityForm form = new BreathingCapacityForm();
 
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
         Optional<User> user = userSearchService.findById(seqUserId);
+
+        form.setAge(userComponent.getAge(user.get().getBirthDate()));
         form.setGender(user.get().getGenderType().toString());
 
         return form;

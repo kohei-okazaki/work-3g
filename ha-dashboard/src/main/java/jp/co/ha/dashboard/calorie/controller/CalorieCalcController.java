@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.CalorieApiComponent;
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.dto.CalorieCalcDto;
+import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
@@ -44,6 +46,9 @@ public class CalorieCalcController implements BaseWebController {
     /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
+    /** ユーザ関連Component */
+    @Autowired
+    private UserComponent userComponent;
 
     /**
      * Formを返す
@@ -51,15 +56,20 @@ public class CalorieCalcController implements BaseWebController {
      * @param request
      *     {@linkplain HttpServletRequest}
      * @return CalorieCalcForm
+     * @throws BusinessException
+     *     年齢の算出に失敗したとき
      */
     @ModelAttribute("calorieCalcForm")
-    public CalorieCalcForm setUpForm(HttpServletRequest request) {
+    public CalorieCalcForm setUpForm(HttpServletRequest request)
+            throws BusinessException {
 
         CalorieCalcForm form = new CalorieCalcForm();
 
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
         Optional<User> user = userSearchService.findById(seqUserId);
+
+        form.setAge(userComponent.getAge(user.get().getBirthDate()));
         form.setGender(user.get().getGenderType().toString());
 
         return form;
