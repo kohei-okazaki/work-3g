@@ -11,7 +11,6 @@ import jp.co.ha.business.api.healthinfoapp.response.HealthInfoReferenceApiRespon
 import jp.co.ha.business.api.healthinfoapp.service.CommonService;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -28,7 +27,7 @@ import jp.co.ha.db.entity.HealthInfo;
 public class HealthInfoReferenceServiceImpl extends CommonService
         implements HealthInfoReferenceService {
 
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
 

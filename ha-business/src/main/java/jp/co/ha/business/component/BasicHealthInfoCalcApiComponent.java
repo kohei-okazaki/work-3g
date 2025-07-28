@@ -16,7 +16,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
- * 基礎健康情報計算APIコンポーネントクラス<br>
+ * 基礎健康情報計算APIComponentクラス<br>
  * APIクラスを直接呼ばずに本クラスを経由して呼び出すこと
  *
  * @version 1.0.0

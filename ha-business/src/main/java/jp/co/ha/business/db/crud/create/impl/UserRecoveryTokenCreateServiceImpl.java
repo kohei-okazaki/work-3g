@@ -18,7 +18,7 @@ import jp.co.ha.db.mapper.UserRecoveryTokenMapper;
 public class UserRecoveryTokenCreateServiceImpl
         implements UserRecoveryTokenCreateService {
 
-    /** {@linkplain UserRecoveryTokenMapper} */
+    /** ユーザ回復トークンMapper */
     @Autowired
     private UserRecoveryTokenMapper mapper;
 

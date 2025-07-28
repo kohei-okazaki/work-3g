@@ -54,10 +54,10 @@ public class AwsSesComponent {
 
     /** AWS設定ファイル情報 */
     @Autowired
-    private AwsProperties awsConfig;
+    private AwsProperties awsProps;
     /** システム設定ファイル情報 */
     @Autowired
-    private SystemProperties systemConfig;
+    private SystemProperties systemProps;
     /** AWS認証情報Component */
     @Autowired
     private AwsAuthComponent awsAuthComponent;
@@ -290,18 +290,18 @@ public class AwsSesComponent {
     public EmailSendResultType sendMail(String to, String titleText, String templateId,
             Map<String, String> bodyMap) throws BaseException {
 
-        if (awsConfig.isSesStubFlag()) {
+        if (awsProps.isSesStubFlag()) {
             return EmailSendResultType.NOT_SEND;
         }
 
         try (SesClient sesClient = getSesClient()) {
 
-            LOG.debug("Amazon SES region=" + awsConfig.getRegion().id()
+            LOG.debug("Amazon SES region=" + awsProps.getRegion().id()
                     + ",to_mail_address=" + to);
 
             Destination destination = Destination.builder()
                     .toAddresses(to)
-                    .bccAddresses(systemConfig.getSystemMailAddress())
+                    .bccAddresses(systemProps.getSystemMailAddress())
                     .build();
 
             Body body = getBody(templateId, bodyMap);
@@ -311,7 +311,7 @@ public class AwsSesComponent {
                     .build();
 
             SendEmailRequest request = SendEmailRequest.builder()
-                    .source(systemConfig.getSystemMailAddress())
+                    .source(systemProps.getSystemMailAddress())
                     .destination(destination)
                     .message(message)
                     .build();
@@ -337,12 +337,12 @@ public class AwsSesComponent {
 
         // HttpClient にタイムアウトを設定する
         SdkHttpClient httpClient = ApacheHttpClient.builder()
-                .connectionTimeout(Duration.ofMillis(awsConfig.getSesTimeout()))
-                .socketTimeout(Duration.ofMillis(awsConfig.getSesTimeout()))
+                .connectionTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
+                .socketTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
                 .build();
 
         return SesClient.builder()
-                .region(awsConfig.getRegion())
+                .region(awsProps.getRegion())
                 .credentialsProvider(awsAuthComponent.getAWSCredentialsProvider())
                 .httpClient(httpClient)
                 .build();

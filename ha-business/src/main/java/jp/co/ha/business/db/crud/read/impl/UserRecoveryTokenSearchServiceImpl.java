@@ -26,7 +26,7 @@ import jp.co.ha.db.mapper.UserRecoveryTokenMapper;
 public class UserRecoveryTokenSearchServiceImpl
         implements UserRecoveryTokenSearchService {
 
-    /** {@linkplain UserRecoveryTokenMapper} */
+    /** ユーザ回復トークン情報Mapper */
     @Autowired
     private UserRecoveryTokenMapper mapper;
 

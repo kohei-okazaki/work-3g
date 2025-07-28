@@ -17,7 +17,7 @@ import jp.co.ha.db.entity.composite.CompositeUser;
 public interface UserSearchService {
 
     /**
-     * ユーザIDからユーザ情報を取得する
+     * ユーザIDからユーザ情報を検索する
      *
      * @param seqUserId
      *     ユーザID
@@ -26,7 +26,7 @@ public interface UserSearchService {
     Optional<User> findById(Long seqUserId);
 
     /**
-     * ユーザIDからユーザ情報と健康情報ファイル設定の複合Entityを取得する
+     * ユーザIDからユーザ情報と健康情報ファイル設定の複合Entityをを検索する
      *
      * @param seqUserId
      *     ユーザID
@@ -35,7 +35,7 @@ public interface UserSearchService {
     Optional<CompositeUser> findCompositUserById(Long seqUserId);
 
     /**
-     * メールアドレスからユーザ情報を取得する
+     * メールアドレスからユーザ情報を検索する
      *
      * @param mailAddress
      *     メールアドレス
@@ -66,7 +66,7 @@ public interface UserSearchService {
     List<CompositeUser> findAll(SelectOption selectOption);
 
     /**
-     * 月ごとの登録情報リストを返す
+     * 月ごとの登録情報リストを検索する
      *
      * @param from
      *     登録日時(開始)

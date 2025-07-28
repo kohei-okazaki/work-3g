@@ -22,10 +22,10 @@ import jp.co.ha.db.mapper.RootRoleMtMapper;
 @Service
 public class RootRoleMtSearchServiceImpl implements RootRoleMtSearchService {
 
-    /** {@linkplain RootRoleMtMapper} */
+    /** 管理者サイト権限マスタMapper */
     @Autowired
     private RootRoleMtMapper mapper;
-    /** {@linkplain RootRoleMtCacheComponent} */
+    /** 管理者サイト権限マスタのキャッシュComponent */
     @Autowired
     private RootRoleMtCacheComponent cacheComponent;
 

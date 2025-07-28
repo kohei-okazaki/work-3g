@@ -12,7 +12,7 @@ import jp.co.ha.db.entity.RootRoleMt;
 public interface RootRoleMtSearchService {
 
     /**
-     * 指定した権限の管理者サイト権限マスタを返す
+     * 指定した権限の管理者サイト権限マスタを検索する
      *
      * @param roles
      *     権限
@@ -21,7 +21,7 @@ public interface RootRoleMtSearchService {
     List<RootRoleMt> findByRoles(List<String> roles);
 
     /**
-     * 管理者サイト権限マスタを全件返す
+     * 管理者サイト権限マスタを全件検索する
      *
      * @return 管理者サイト権限マスタリスト
      */

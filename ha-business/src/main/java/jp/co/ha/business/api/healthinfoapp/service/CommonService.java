@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import jp.co.ha.business.api.healthinfoapp.request.BaseAppApiRequest;
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -19,7 +18,7 @@ import jp.co.ha.db.entity.User;
  */
 public abstract class CommonService {
 
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
     private UserSearchService userSearchService;
 

@@ -20,9 +20,9 @@ import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 @Component
 public class AwsAuthComponent {
 
-    /** {@linkplain SystemProperties} */
+    /** システム設定ファイル情報 */
     @Autowired
-    private SystemProperties systemConfig;
+    private SystemProperties systemProps;
 
     /**
      * システムプロパティ.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
@@ -35,8 +35,8 @@ public class AwsAuthComponent {
      */
     public AwsCredentialsProvider getAWSCredentialsProvider() {
 
-        if (BeanUtil.notNull(systemConfig.getEnvironment())) {
-            switch (systemConfig.getEnvironment()) {
+        if (BeanUtil.notNull(systemProps.getEnvironment())) {
+            switch (systemProps.getEnvironment()) {
             case LOCAL:
                 return ProfileCredentialsProvider.create();
             case DEV1:
@@ -46,7 +46,7 @@ public class AwsAuthComponent {
 
         // システムプロパティの環境がNullや実行可能環境でない場合
         throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                "環境情報の設定が不正です。env=" + systemConfig.getEnvironment());
+                "環境情報の設定が不正です。env=" + systemProps.getEnvironment());
     }
 
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.common.crypt.AesCrypter;
 import jp.co.ha.common.crypt.Crypter;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
@@ -34,17 +33,17 @@ import jp.co.ha.db.mapper.composite.CompositeUserMapper;
 @Service
 public class UserSearchServiceImpl implements UserSearchService {
 
-    /** {@linkplain AesCrypter} */
+    /** AesCrypter */
     @Autowired
     @Qualifier("aesCrypter")
     private Crypter crypter;
-    /** {@linkplain UserMapper} */
+    /** ユーザ情報Mapper */
     @Autowired
     private UserMapper mapper;
-    /** {@linkplain CompositeUserMapper} */
+    /** ユーザ関連テーブル情報の複合Mapper */
     @Autowired
     private CompositeUserMapper compositeUserMapper;
-    /** {@linkplain CompositeMonthlyMapper} */
+    /** 月ごとの健康情報Mapper */
     @Autowired
     private CompositeMonthlyMapper compositeMonthlyMapper;
 

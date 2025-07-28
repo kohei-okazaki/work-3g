@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.RootLoginInfo;
 public interface RootLoginInfoCreateService {
 
     /**
-     * 指定した管理者サイトユーザログイン情報を作成する
+     * 指定した管理者サイトユーザログイン情報を登録する
      *
      * @param entity
      *     管理者サイトユーザログイン情報

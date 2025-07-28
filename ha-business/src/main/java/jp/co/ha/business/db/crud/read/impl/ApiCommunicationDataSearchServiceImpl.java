@@ -26,7 +26,7 @@ import jp.co.ha.db.mapper.ApiCommunicationDataMapper;
 public class ApiCommunicationDataSearchServiceImpl
         implements ApiCommunicationDataSearchService {
 
-    /** {@linkplain ApiCommunicationDataMapper} */
+    /** API通信情報Mapper */
     @Autowired
     private ApiCommunicationDataMapper mapper;
 

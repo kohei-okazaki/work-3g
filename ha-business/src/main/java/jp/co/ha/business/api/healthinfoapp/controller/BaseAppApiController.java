@@ -39,7 +39,7 @@ public abstract class BaseAppApiController<Rq extends BaseAppApiRequest, Rs exte
 
     /** LOG */
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
-    /** {@linkplain BeanValidator} */
+    /** 妥当性チェックValidator */
     @Autowired
     protected BeanValidator<Rq> validator;
 

@@ -18,7 +18,7 @@ import jp.co.ha.db.mapper.ApiCommunicationDataMapper;
 public class ApiCommunicationDataCreateServiceImpl
         implements ApiCommunicationDataCreateService {
 
-    /** {@linkplain ApiCommunicationDataMapper} */
+    /** API通信情報Mapper */
     @Autowired
     private ApiCommunicationDataMapper mapper;
 

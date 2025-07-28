@@ -50,9 +50,9 @@ public class AwsS3Component {
     /** 文字コード */
     private static final String UTF_8 = Charset.UTF_8.getValue();
 
-    /** {@linkplain AwsProperties} */
+    /** AWS設定ファイル情報 */
     @Autowired
-    private AwsProperties awsConfig;
+    private AwsProperties awsProps;
     /** {@linkplain AwsAuthComponent} */
     @Autowired
     private AwsAuthComponent awsAuthComponent;
@@ -73,7 +73,7 @@ public class AwsS3Component {
 
         s3.putObject(
                 PutObjectRequest.builder()
-                        .bucket(awsConfig.getBacket())
+                        .bucket(awsProps.getBacket())
                         .key(key)
                         .acl(ObjectCannedACL.PUBLIC_READ)
                         .build(),
@@ -93,7 +93,7 @@ public class AwsS3Component {
         S3Client s3 = getS3Client();
 
         GetObjectRequest request = GetObjectRequest.builder()
-                .bucket(awsConfig.getBacket())
+                .bucket(awsProps.getBacket())
                 .key(key)
                 .build();
 
@@ -112,7 +112,7 @@ public class AwsS3Component {
         S3Client s3 = getS3Client();
 
         ListObjectsV2Request request = ListObjectsV2Request.builder()
-                .bucket(awsConfig.getBacket())
+                .bucket(awsProps.getBacket())
                 .build();
 
         ListObjectsV2Response result = s3.listObjectsV2(request);
@@ -131,7 +131,7 @@ public class AwsS3Component {
         S3Client s3 = getS3Client();
 
         DeleteObjectsRequest deleteRequest = DeleteObjectsRequest.builder()
-                .bucket(awsConfig.getBacket())
+                .bucket(awsProps.getBacket())
                 .delete(Delete.builder()
                         .objects(
                                 Arrays.stream(keys)
@@ -153,12 +153,12 @@ public class AwsS3Component {
 
         // HttpClient にタイムアウトを設定する
         SdkHttpClient httpClient = ApacheHttpClient.builder()
-                .connectionTimeout(Duration.ofMillis(awsConfig.getS3Timeout()))
-                .socketTimeout(Duration.ofMillis(awsConfig.getS3Timeout()))
+                .connectionTimeout(Duration.ofMillis(awsProps.getS3Timeout()))
+                .socketTimeout(Duration.ofMillis(awsProps.getS3Timeout()))
                 .build();
 
         return S3Client.builder()
-                .region(awsConfig.getRegion())
+                .region(awsProps.getRegion())
                 .credentialsProvider(awsAuthComponent.getAWSCredentialsProvider())
                 .httpClient(httpClient)
                 .build();

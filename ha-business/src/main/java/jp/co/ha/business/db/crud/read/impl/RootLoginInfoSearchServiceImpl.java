@@ -23,10 +23,10 @@ import jp.co.ha.db.mapper.composite.CompositeRootUserInfoMapper;
 @Service
 public class RootLoginInfoSearchServiceImpl implements RootLoginInfoSearchService {
 
-    /** {@linkplain RootLoginInfoMapper} */
+    /** 管理者サイトユーザログイン情報Mapper */
     @Autowired
     private RootLoginInfoMapper mapper;
-    /** {@linkplain CompositeRootUserInfoMapper} */
+    /** 管理者サイトユーザテーブルの複合Mapper */
     @Autowired
     private CompositeRootUserInfoMapper compositeMapper;
 

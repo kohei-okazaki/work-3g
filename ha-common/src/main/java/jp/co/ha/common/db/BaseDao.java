@@ -26,11 +26,11 @@ public abstract class BaseDao {
 
     /** LOG */
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
-    /** {@linkplain Connection} */
+    /** Connection */
     protected Connection con;
-    /** {@linkplain Statement} */
+    /** Statement */
     protected Statement stm;
-    /** {@linkplain ResultSet} */
+    /** ResultSet */
     protected ResultSet rs;
 
     /**

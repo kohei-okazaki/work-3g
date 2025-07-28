@@ -17,7 +17,7 @@ import jp.co.ha.common.util.StringUtil;
 @Component("caesarCrypter")
 public class CaesarCrypter implements Crypter {
 
-    /** {@linkplain CryptProperties} */
+    /** 暗号化設定ファイル情報 */
     @Autowired
     private CryptProperties cryptConfig;
 

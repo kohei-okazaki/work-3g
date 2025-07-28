@@ -23,10 +23,10 @@ import jp.co.ha.db.mapper.BmiRangeMtMapper;
 // @CacheConfig(cacheNames = "bmiRangeMt")
 public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 
-    /** {@linkplain BmiRangeMtMapper} */
+    /** BMI範囲マスタMapper */
     @Autowired
     private BmiRangeMtMapper mapper;
-    /** {@linkplain BmiRangeMtCacheComponent} */
+    /** BMI範囲マスタのキャッシュComponent */
     @Autowired
     private BmiRangeMtCacheComponent cacheComponent;
 
