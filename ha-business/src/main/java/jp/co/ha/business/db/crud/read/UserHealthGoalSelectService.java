@@ -12,12 +12,16 @@ import jp.co.ha.db.entity.UserHealthGoal;
 public interface UserHealthGoalSelectService {
 
     /**
-     * ユーザ健康目標情報を検索する
+     * 有効なユーザ健康目標情報を検索する<br>
+     * <ul>
+     * <li>seq_user_id = 引数値</li>
+     * <li>delete_flag = false</li>
+     * </ul>
      *
      * @param seqUserId
      *     ユーザID
      * @return ユーザ健康目標情報
      */
-    Optional<UserHealthGoal> findById(Long seqUserId);
+    Optional<UserHealthGoal> findEnableById(Long seqUserId);
 
 }

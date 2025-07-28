@@ -181,7 +181,7 @@ public class UserSettingServiceImpl implements UserSettingService {
 
         // Pキー取得のため、検索
         UserHealthGoal currentGoal = userHealthGoalSelectService
-                .findById(dto.getSeqUserId())
+                .findEnableById(dto.getSeqUserId())
                 .get();
 
         // 論理削除

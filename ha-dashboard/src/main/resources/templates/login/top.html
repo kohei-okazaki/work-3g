@@ -21,75 +21,96 @@
   </div><!-- /.px-4 -->
 
   <div class="px-4 pb-3">
-    <!-- TODO: 健康情報カード -->
-    <div class="row">
-      <div class="col-6 pr-3 pt-1 pb-1">
-        <div class="border shadow p-3 card">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2">
-            <h1 class="h4 mb-0">最新の健康情報</h1>
-          </div><!-- /.d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2 -->
+    <!-- 健康情報カード -->
+    <div class="row align-items-stretch">
+      <div class="col-md-6 pr-md-3 pt-1 pb-1 mb-3">
+        <div class="card border shadow h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h1 class="h5 mb-0">最新の健康情報</h1>
+          </div>
           <!-- 健康情報が登録されている場合 -->
-          <div class="row text-center card-body" th:if="${latest != null}">
-            <!-- 最新体重 -->
-            <div class="col-6 d-flex flex-column align-items-center pt-4 pb-4">
-              <div class="position-relative">
-                <div class="text-muted" style="position: absolute; top: -1.5rem; left: 0;" th:text="#{weight}"></div>
-                <div class="d-flex align-items-baseline">
-                  <span class="font-weight-bold" style="font-size: 2.5rem;" th:text="*{latest.weight}"></span>
-                  <span class="ml-1" style="font-size: 1rem;">kg</span>
-                </div><!-- /.d-flex align-items-baseline -->
-                <div class="d-flex align-items-baseline" th:if="*{status} != null and *{status} != ''">
-                  <span>前回より　</span>
-                  <span class="font-weight-bold" style="font-size: 1.2rem;" th:if="*{status} == '30'">+</span>
-                  <span class="font-weight-bold" style="font-size: 1.2rem;" th:if="*{status} == '10'">-</span>
-                  <span class="font-weight-bold" style="font-size: 1.2rem;" th:text="*{diff}"></span>
-                  <span class="ml-1" style="font-size: 1rem;">kg</span>
-                </div><!-- /.d-flex align-items-baseline -->
-              </div><!-- /.position-relative -->
-            </div><!-- /.ol-6 d-flex flex-column align-items-center pt-4 pb-4 -->
-            <!-- 最新BMI -->
-            <div class="col-6 d-flex flex-column align-items-center pt-4 pb-4">
-              <div class="position-relative">
-                <div class="text-muted" style="position: absolute; top: -1.5rem; left: 0;" th:text="#{bmi}"></div>
-                <div class="d-flex align-items-baseline">
-                  <span class="font-weight-bold" style="font-size: 2.5rem;" th:text="*{latest.bmi}"></span>
-                </div><!-- /.d-flex align-items-baseline -->
-              </div><!-- /.position-relative -->
-            </div><!-- /.ol-6 d-flex flex-column align-items-center pt-4 pb-4 -->
-          </div><!-- /.row text-center card-body -->
-          <!-- 健康情報が1件も登録されていない場合 -->
-          <div class="row card-body" th:if="${latest == null}">
-            <p class="card-text text-muted">健康情報がまだ登録されていません</p>
-            <p class="card-text text-muted">最初の健康データを登録すると、体重やBMI等がグラフで表示されます。</p>
-            <a th:href="@{/healthinfo/input}" class="btn btn-primary">健康情報 登録</a>
-          </div><!-- /.row card-body -->
-        </div><!-- /.border shadow p-3 -->
-      </div><!-- /.col-6 pr-3 pt-1 pb-1 -->
+          <div class="card-body text-center" th:if="${latest != null}">
+            <div class="row">
+              <!-- 最新体重 -->
+              <div class="col-6 d-flex flex-column align-items-center pt-4 pb-4">
+                <div class="position-relative">
+                  <div class="text-muted" style="position: absolute; top: -1.5rem; left: 0;" th:text="#{weight}"></div>
+                  <div class="d-flex align-items-baseline">
+                    <span class="font-weight-bold" style="font-size: 2.5rem;" th:text="*{latest.weight}"></span>
+                    <span class="ml-1" style="font-size: 1rem;">kg</span>
+                  </div><!-- /.d-flex -->
+                  <div class="d-flex align-items-baseline" th:if="*{status} != null and *{status} != ''">
+                    <span>前回より　</span>
+                    <span class="font-weight-bold" style="font-size: 1.2rem;" th:if="*{status} == '30'">+</span>
+                    <span class="font-weight-bold" style="font-size: 1.2rem;" th:if="*{status} == '10'">-</span>
+                    <span class="font-weight-bold" style="font-size: 1.2rem;" th:text="*{diff}"></span>
+                    <span class="ml-1" style="font-size: 1rem;">kg</span>
+                  </div><!-- /.d-flex -->
+                </div><!-- /.position-relative -->
+              </div><!-- /.col-6 -->
 
-      <div class="col-6 pl-3 pt-1 pb-1">
-        <div class="border shadow p-3 card">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2">
-            <h1 class="h4 mb-0">TODO 目標健康情報追加</h1>
-          </div><!-- /.d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2 -->
-          <div>XXkgまで あとXX.Xkg</div>
-        </div><!-- /.border shadow p-3 card -->
-      </div><!-- /.col-6 pl-3 pt-1 pb-1 -->
+              <!-- 最新BMI -->
+              <div class="col-6 d-flex flex-column align-items-center pt-4 pb-4">
+                <div class="position-relative">
+                  <div class="text-muted" style="position: absolute; top: -1.5rem; left: 0;" th:text="#{bmi}"></div>
+                  <div class="d-flex align-items-baseline">
+                    <span class="font-weight-bold" style="font-size: 2.5rem;" th:text="*{latest.bmi}"></span>
+                  </div><!-- /.d-flex align-items-baseline -->
+                </div><!-- /.position-relative -->
+              </div><!-- /.col-6 -->
+            </div><!-- /.row -->
+            <!-- 健康情報が1件も登録されていない場合 -->
+            <div class="card-body text-center" th:if="${latest == null}">
+              <p class="text-muted">健康情報がまだ登録されていません</p>
+              <p class="text-muted">最初の健康データを登録すると、体重やBMI等がグラフで表示されます。</p>
+              <a th:href="@{/healthinfo/input}" class="btn btn-primary">健康情報 登録</a>
+            </div><!-- /.card-body -->
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col-md-6 -->
+
+      <div class="col-md-6 pl-md-3 pt-1 pb-1 mb-3">
+        <div class="card border shadow h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h1 class="h5 mb-0">目標 体重</h1>
+          </div><!-- /.card-header -->
+          <div class="card-body text-center" th:if="${latest != null}">
+            <!-- 目標体重 -->
+            <div class="row">
+              <div class="col-12 d-flex flex-column align-items-center pt-4 pb-4">
+                <div class="position-relative w-100 text-center">
+                  <div class="text-muted  mb-2" style="word-break: break-word;">目標</div>
+                  <div class="d-flex align-items-baseline justify-content-center flex-wrap">
+                    <span class="font-weight-bold" style="font-size: 2.5rem; word-break: break-word;" th:text="*{goalWeight}"></span>
+                    <span class="ml-1 mr-2" style="font-size: 1rem;">kgまで </span>
+                    <span class="font-weight-bold" style="font-size: 2.5rem;" th:text="*{goalDiff}"></span>
+                    <span class="ml-1" style="font-size: 1rem;">kg </span>
+                  </div><!-- /.d-flex -->
+                </div><!-- /.position-relative -->
+              </div><!-- /.col-12 -->
+              <div class="col-12 d-flex flex-column align-items-center pt-4 pb-4">
+                目標の変更は<a th:href="@{/accountsetting/input}">こちら</a>
+              </div><!-- /.col-12 -->
+            </div><!-- /.row -->
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
 
     <!-- 最近登録した10件 -->
-    <div class="row mt-4">
-      <div class="col-12">
-        <div class="border shadow p-4 card">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2">
-            <h1 class="h2 mb-0">最近登録した10件</h1>
-          </div><!-- /.d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom mb-3 pb-2 -->
+    <div class="row align-items-stretch">
+      <div class="col-md-12">
+        <div class="card border shadow h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h1 class="h5 mb-0">最近登録した10件</h1>
+          </div>
 
           <!-- Chart canvasを中央に寄せる -->
-          <div class="d-flex justify-content-center">
-            <div class="w-100" style="max-width: 800px;">
+          <div class="card-body d-flex justify-content-center">
+            <div class="w-100" >
               <canvas id="chart" class="chart" style="width: 85%; height: 400px;"></canvas>
             </div><!-- /.w-100 -->
-          </div><!-- /.d-flex justify-content-center -->
+          </div><!-- /.card-body -->
         </div><!-- /.border shadow p-4 card -->
       </div><!-- /.col-12 -->
     </div><!-- /.row mt-4 -->

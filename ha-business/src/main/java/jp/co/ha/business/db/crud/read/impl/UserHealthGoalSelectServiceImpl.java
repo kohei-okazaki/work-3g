@@ -29,7 +29,7 @@ public class UserHealthGoalSelectServiceImpl implements UserHealthGoalSelectServ
     @Select
     @Override
     @Transactional(readOnly = true)
-    public Optional<UserHealthGoal> findById(Long seqUserId) {
+    public Optional<UserHealthGoal> findEnableById(Long seqUserId) {
 
         UserHealthGoalExample example = new UserHealthGoalExample();
         UserHealthGoalExample.Criteria criteria = example.createCriteria();
