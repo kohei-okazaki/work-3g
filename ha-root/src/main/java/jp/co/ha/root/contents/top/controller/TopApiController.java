@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -39,10 +37,10 @@ public class TopApiController
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(TopApiController.class);
 
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ検索サービス */
     @Autowired
     private UserSearchService userSearchService;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
 
