@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.NewsInfoSearchServiceImpl;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -38,13 +37,13 @@ import jp.co.ha.db.entity.NewsInfo;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-    /** {@linkplain NewsInfoSearchServiceImpl} */
+    /** お知らせ情報検索サービス */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** {@linkplain SystemProperties} */
+    /** システム設定ファイル情報 */
     @Autowired
     private SystemProperties systemConfig;
-    /** {@linkplain AwsS3Component} */
+    /** AWS S3Component */
     @Autowired
     private AwsS3Component awsS3Component;
 

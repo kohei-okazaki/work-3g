@@ -139,7 +139,7 @@ export default {
         },
         {
           name: "Jackson",
-          version: "2.18.3",
+          version: "2.19.2",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
         },

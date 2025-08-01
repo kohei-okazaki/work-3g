@@ -34,12 +34,12 @@ public abstract class CommonService {
     protected void checkApiUse(BaseAppApiRequest request) throws BaseException {
 
         // ユーザ情報取得
-        User account = userSearchService.findById(request.getSeqUserId())
+        User user = userSearchService.findById(request.getSeqUserId())
                 .orElseThrow(
                         () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
                                 "ユーザ情報が存在しません seqUserId:" + request.getSeqUserId()));
 
-        if (!account.getApiKey().equals(request.getApiKey())) {
+        if (!user.getApiKey().equals(request.getApiKey())) {
             throw new ApiException(ApiErrorCode.API_EXEC_ERROR,
                     "このユーザはAPIを実行できません");
         }

@@ -29,10 +29,10 @@ import jp.co.ha.common.type.Charset;
 @Component
 public class NewsComponent {
 
-    /** {@linkplain AwsS3Component} */
+    /** AWS S3Component */
     @Autowired
     private AwsS3Component awsS3Component;
-    /** {@linkplain SlackApiComponent} */
+    /** SlackApiComponent */
     @Autowired
     private SlackApiComponent slackApi;
 

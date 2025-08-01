@@ -53,7 +53,7 @@ public class AwsS3Component {
     /** AWS設定ファイル情報 */
     @Autowired
     private AwsProperties awsProps;
-    /** {@linkplain AwsAuthComponent} */
+    /** AWS認証情報Component */
     @Autowired
     private AwsAuthComponent awsAuthComponent;
 

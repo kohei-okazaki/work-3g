@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.delete.NewsInfoDeleteService;
-import jp.co.ha.business.db.crud.delete.impl.NewsInfoDeleteServiceImpl;
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.NewsInfoSearchServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -29,13 +27,13 @@ import jp.co.ha.root.contents.news.response.NewsDeleteApiResponse;
 public class NewsDeleteApiController
         extends BaseRootApiController<NewsDeleteApiRequest, NewsDeleteApiResponse> {
 
-    /** {@linkplain NewsInfoSearchServiceImpl} */
+    /** お知らせ情報検索サービス */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** {@linkplain NewsInfoDeleteServiceImpl} */
+    /** お知らせ情報削除サービス */
     @Autowired
     private NewsInfoDeleteService deleteService;
-    /** {@linkplain NewsComponent} */
+    /** お知らせ情報Component */
     @Autowired
     private NewsComponent newsComponent;
 

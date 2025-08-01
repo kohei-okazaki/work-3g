@@ -16,9 +16,7 @@ import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootUserNoteInfoSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.RootUserNoteInfoUpdateService;
-import jp.co.ha.business.db.crud.update.impl.RootUserNoteInfoUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -34,16 +32,16 @@ import jp.co.ha.root.contents.note.response.NoteEditApiResponse;
 public class NoteEditApiController
         extends BaseRootApiController<NoteEditApiRequest, NoteEditApiResponse> {
 
-    /** {@linkplain RootUserNoteInfoSearchServiceImpl} */
+    /** 管理者サイトユーザメモ情報検索サービス */
     @Autowired
     private RootUserNoteInfoSearchService rootUserNoteInfoSearchService;
-    /** {@linkplain RootUserNoteInfoUpdateServiceImpl} */
+    /** 管理者サイトユーザメモ情報更新サービス */
     @Autowired
     private RootUserNoteInfoUpdateService rootUserNoteInfoUpdateService;
-    /** {@linkplain AwsS3Component} */
+    /** AWS S3Component */
     @Autowired
     private AwsS3Component awsS3Component;
-    /** {@linkplain SlackApiComponent} */
+    /** SlackApiComponent */
     @Autowired
     private SlackApiComponent slackApi;
 

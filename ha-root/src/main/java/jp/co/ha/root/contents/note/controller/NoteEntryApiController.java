@@ -15,7 +15,6 @@ import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.RootUserNoteInfoCreateService;
-import jp.co.ha.business.db.crud.create.impl.RootUserNoteInfoCreateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -36,13 +35,13 @@ import jp.co.ha.root.contents.note.response.NoteEntryApiResponse;
 public class NoteEntryApiController
         extends BaseRootApiController<NoteEntryApiRequest, NoteEntryApiResponse> {
 
-    /** {@linkplain RootUserNoteInfoCreateServiceImpl} */
+    /** 管理者サイトユーザメモ情報登録サービス */
     @Autowired
     private RootUserNoteInfoCreateService rootUserNoteInfoCreateService;
-    /** {@linkplain AwsS3Component} */
+    /** AWS S3Component */
     @Autowired
     private AwsS3Component s3Component;
-    /** {@linkplain SlackApiComponent} */
+    /** SlackApiComponent */
     @Autowired
     private SlackApiComponent slackApi;
 

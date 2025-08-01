@@ -23,7 +23,7 @@ import jp.co.ha.common.util.StringUtil;
  */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    /** {@linkplain AuthenticationManager} */
+    /** 認証情報管理クラス */
     @SuppressWarnings("unused")
     private AuthenticationManager authenticationManager;
 

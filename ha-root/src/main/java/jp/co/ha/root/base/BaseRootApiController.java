@@ -46,7 +46,7 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
     private static final Logger LOG = LoggerFactory
             .getLogger(BaseRootApiController.class);
 
-    /** {@linkplain ApplicationProperties} */
+    /** アプリケーション設定ファイル */
     @Autowired
     protected ApplicationProperties applicationProperties;
 

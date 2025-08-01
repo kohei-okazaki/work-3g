@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
-import jp.co.ha.business.db.crud.update.impl.UserUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.User;
@@ -30,10 +28,10 @@ import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 public class AccountEditApiController
         extends BaseRootApiController<AccountEditApiRequest, AccountEditApiResponse> {
 
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ検索サービス */
     @Autowired
     private UserSearchService searchService;
-    /** {@linkplain UserUpdateServiceImpl} */
+    /** ユーザ情報更新サービス */
     @Autowired
     private UserUpdateService updateService;
 

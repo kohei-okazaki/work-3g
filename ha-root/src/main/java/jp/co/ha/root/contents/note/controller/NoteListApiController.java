@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootUserNoteInfoSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -43,10 +42,10 @@ import jp.co.ha.root.contents.note.response.NoteListApiResponse.Note;
 public class NoteListApiController
         extends BaseRootApiController<NoteListApiRequest, NoteListApiResponse> {
 
-    /** {@linkplain RootUserNoteInfoSearchServiceImpl} */
+    /** 管理者サイトユーザメモ情報検索サービス */
     @Autowired
     private RootUserNoteInfoSearchService searchService;
-    /** {@linkplain AwsS3Component} */
+    /** AWS S3Component */
     @Autowired
     private AwsS3Component awsS3Component;
 

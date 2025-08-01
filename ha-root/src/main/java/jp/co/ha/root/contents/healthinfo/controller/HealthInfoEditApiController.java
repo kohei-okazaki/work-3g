@@ -20,10 +20,7 @@ import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.BmiRangeMtSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
-import jp.co.ha.business.db.crud.update.impl.HealthInfoUpdateServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -44,25 +41,25 @@ import jp.co.ha.root.contents.healthinfo.response.HealthInfoEditApiResponse;
 public class HealthInfoEditApiController extends
         BaseRootApiController<HealthInfoEditApiRequest, HealthInfoEditApiResponse> {
 
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain TokenApiComponent} */
+    /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** {@linkplain BasicHealthInfoCalcApiComponent} */
+    /** 基礎健康情報計算APIComponent */
     @Autowired
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
-    /** {@linkplain BmiRangeMtSearchServiceImpl} */
+    /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoUpdateServiceImpl} */
+    /** 健康情報更新サービス */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
 

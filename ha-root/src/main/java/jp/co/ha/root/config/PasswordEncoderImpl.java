@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 
 /**
@@ -19,7 +18,7 @@ import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 @Service("passwordEncoderImpl")
 public class PasswordEncoderImpl implements PasswordEncoder {
 
-    /** {@linkplain Sha256HashEncoder} */
+    /** SHA-256ハッシュ化 */
     @Sha256
     @Autowired
     private HashEncoder encoder;

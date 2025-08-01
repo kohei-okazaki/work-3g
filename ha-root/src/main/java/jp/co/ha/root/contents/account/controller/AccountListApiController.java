@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.UserSearchService;
-import jp.co.ha.business.db.crud.read.impl.UserSearchServiceImpl;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -34,7 +33,7 @@ import jp.co.ha.root.contents.account.response.AccountListApiResponse;
 public class AccountListApiController
         extends BaseRootApiController<AccountListApiRequest, AccountListApiResponse> {
 
-    /** {@linkplain UserSearchServiceImpl} */
+    /** ユーザ検索サービス */
     @Autowired
     private UserSearchService service;
 
