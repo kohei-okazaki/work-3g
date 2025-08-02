@@ -23,8 +23,8 @@
     <mybatis-generator-version>1.4.2</mybatis-generator-version>
     <flywaydb-version>8.5.12</flywaydb-version>
     <jdbc.url>jdbc:mysql://localhost:3306/work3g</jdbc.url>
-    <jdbc.user>root</jdbc.user>
-    <jdbc.password>admin</jdbc.password>
+    <jdbc.user>app_user</jdbc.user>
+    <jdbc.password>3w4tamudnxgr4</jdbc.password>
   </properties>
 
   <dependencies>

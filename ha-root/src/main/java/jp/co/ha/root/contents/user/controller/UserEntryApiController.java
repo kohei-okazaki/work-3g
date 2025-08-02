@@ -18,14 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.db.crud.create.RootLoginInfoCreateService;
 import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
 import jp.co.ha.business.db.crud.create.RootUserRoleMngMtCreateService;
-import jp.co.ha.business.db.crud.create.impl.RootLoginInfoCreateServiceImpl;
-import jp.co.ha.business.db.crud.create.impl.RootUserRoleDetailMtCreateServiceImpl;
-import jp.co.ha.business.db.crud.create.impl.RootUserRoleMngMtCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootRoleMtSearchServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -52,26 +47,26 @@ public class UserEntryApiController
     private static final Logger LOG = LoggerFactory
             .getLogger(UserEntryApiController.class);
 
-    /** {@linkplain RootRoleMtSearchServiceImpl} */
+    /** 管理者サイト権限マスタ検索サービス */
     @Autowired
     private RootRoleMtSearchService rootRoleMtSearchService;
-    /** {@linkplain RootUserRoleMngMtCreateServiceImpl} */
+    /** 管理者サイトユーザ権限管理マスタ作成サービス */
     @Autowired
     private RootUserRoleMngMtCreateService rootUserRoleMngMtCreateService;
-    /** {@linkplain RootUserRoleDetailMtCreateServiceImpl} */
+    /** 管理者サイトユーザ権限詳細マスタ作成サービス */
     @Autowired
     private RootUserRoleDetailMtCreateService rootUserRoleDetailMtCreateService;
-    /** {@linkplain RootLoginInfoCreateServiceImpl} */
+    /** 管理者サイトユーザログイン情報作成サービス */
     @Autowired
     private RootLoginInfoCreateService createService;
-    /** {@linkplain Sha256HashEncoder} */
+    /** SHA-256ハッシュ化 */
     @Sha256
     @Autowired
     private HashEncoder hashEncoder;
-    /** {@linkplain PlatformTransactionManager} */
+    /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
-    /** {@linkplain DefaultTransactionDefinition} */
+    /** トランザクション定義 */
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
