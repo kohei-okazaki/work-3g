@@ -115,6 +115,13 @@ public class UpperCaseTableNamePlugin extends PluginAdapter {
         return true;
     }
 
+    @Override
+    public boolean sqlMapCountByExampleElementGenerated(XmlElement element,
+            IntrospectedTable introspectedTable) {
+        overrideTableName(element, introspectedTable);
+        return true;
+    }
+
     /**
      * テーブル名を大文字で上書きする
      *

@@ -9,13 +9,13 @@
     <!-- 文字コードをUTF-8 設定 -->
     <property name="javaFileEncoding" value="UTF-8" />
     <!-- プラグイン -->
-    <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
     <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
     <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
     <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
     <plugin type="jp.co.ha.db.plugin.ExtendBaseExamplePlugin" />
     <plugin type="jp.co.ha.db.plugin.UpperCaseTableNamePlugin" />
     <plugin type="jp.co.ha.db.plugin.EntityAnnotationPlugin" />
+    <plugin type="jp.co.ha.db.plugin.AnnotatedSerializablePlugin" />
 
     <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                     connectionURL="jdbc:mysql://localhost:3306/work3g"
@@ -45,7 +45,9 @@
 <!--    <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="USER" modelType="hierarchical" />-->
 <!--    <table schema="work3g" tableName="USER_RECOVERY_TOKEN" modelType="hierarchical" />-->
-    <table schema="work3g" tableName="USER_HEALTH_GOAL" modelType="hierarchical" />
+<!--    <table schema="work3g" tableName="USER_HEALTH_GOAL" modelType="hierarchical" />-->
+    <table schema="work3g" tableName="INQUIRY_MANAGEMENT" modelType="hierarchical" />
+<!--    <table schema="work3g" tableName="INQUIRY_TYPE_MT" modelType="hierarchical" />-->
 
   </context>
 </generatorConfiguration>

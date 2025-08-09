@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootLoginInfoSearchServiceImpl;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
@@ -29,12 +28,12 @@ import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse;
 public class UserRetrieveController
         extends BaseRootApiController<UserRetrieveApiRequest, UserRetrieveApiResponse> {
 
-    /** {@linkplain RootLoginInfoSearchServiceImpl} */
+    /** 管理者サイトユーザログイン情報検索サービス */
     @Autowired
     private RootLoginInfoSearchService searchService;
 
     /**
-     * 取得
+     * ユーザ取得処理
      *
      * @param request
      *     ユーザ情報取得APIリクエスト

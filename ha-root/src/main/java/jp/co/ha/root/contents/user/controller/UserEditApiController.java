@@ -18,18 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
-import jp.co.ha.business.db.crud.create.impl.RootUserRoleDetailMtCreateServiceImpl;
 import jp.co.ha.business.db.crud.delete.RootUserRoleDetailMtDeleteService;
-import jp.co.ha.business.db.crud.delete.impl.RootUserRoleDetailMtDeleteServiceImpl;
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootLoginInfoSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.RootRoleMtSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.RootLoginInfoUpdateService;
-import jp.co.ha.business.db.crud.update.impl.RootLoginInfoUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -56,29 +50,29 @@ public class UserEditApiController
     private static final Logger LOG = LoggerFactory
             .getLogger(UserEditApiController.class);
 
-    /** {@linkplain RootLoginInfoSearchServiceImpl} */
+    /** 管理者サイトユーザログイン情報検索サービス */
     @Autowired
     private RootLoginInfoSearchService rootLoginInfoSearchService;
-    /** {@linkplain RootLoginInfoUpdateServiceImpl} */
+    /** 管理者サイトユーザログイン情報更新サービス */
     @Autowired
     private RootLoginInfoUpdateService rootLoginInfoUpdateService;
-    /** {@linkplain RootUserRoleDetailMtDeleteServiceImpl} */
+    /** 管理者サイトユーザ権限詳細マスタ削除サービス */
     @Autowired
     private RootUserRoleDetailMtDeleteService rootUserRoleDetailMtDeleteService;
-    /** {@linkplain RootUserRoleDetailMtCreateServiceImpl} */
+    /** 管理者サイトユーザ権限詳細マスタ作成サービス */
     @Autowired
     private RootUserRoleDetailMtCreateService rootUserRoleDetailMtCreateService;
-    /** {@linkplain RootRoleMtSearchServiceImpl} */
+    /** 管理者サイト権限マスタ検索サービス */
     @Autowired
     private RootRoleMtSearchService rootRoleMtSearchService;
-    /** {@linkplain Sha256HashEncoder} */
+    /** SHA-256ハッシュ化 */
     @Sha256
     @Autowired
     private HashEncoder hashEncoder;
-    /** {@linkplain PlatformTransactionManager} */
+    /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
-    /** {@linkplain DefaultTransactionDefinition} */
+    /** トランザクション定義 */
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
