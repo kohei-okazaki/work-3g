@@ -320,7 +320,7 @@ public class LoginController implements BaseWebController {
     }
 
     /**
-     * 健康情報目標情報ををModelへ設定する
+     * 健康情報目標情報をModelへ設定する
      * 
      * @param model
      *     Model

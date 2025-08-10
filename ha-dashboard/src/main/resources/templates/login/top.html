@@ -74,9 +74,9 @@
           <div class="card-header d-flex justify-content-between align-items-center">
             <h1 class="h5 mb-0">目標 体重</h1>
           </div><!-- /.card-header -->
-          <div class="card-body text-center" th:if="${latest != null}">
+          <div class="card-body text-center" >
             <!-- 目標体重 -->
-            <div class="row">
+            <div class="row" th:if="${latest != null}">
               <div class="col-12 d-flex flex-column align-items-center pt-4 pb-4">
                 <div class="position-relative w-100 text-center">
                   <div class="text-muted  mb-2" style="word-break: break-word;">目標</div>
@@ -85,6 +85,19 @@
                     <span class="ml-1 mr-2" style="font-size: 1rem;">kgまで </span>
                     <span class="font-weight-bold" style="font-size: 2.5rem;" th:text="*{goalDiff}"></span>
                     <span class="ml-1" style="font-size: 1rem;">kg </span>
+                  </div><!-- /.d-flex -->
+                </div><!-- /.position-relative -->
+              </div><!-- /.col-12 -->
+              <div class="col-12 d-flex flex-column align-items-center pt-4 pb-4">
+                目標の変更は<a th:href="@{/accountsetting/input}">こちら</a>
+              </div><!-- /.col-12 -->
+            </div><!-- /.row -->
+            <div class="row" th:if="${latest == null}">
+              <div class="col-12 d-flex flex-column align-items-center pt-4 pb-4">
+                <div class="position-relative w-100 text-center">
+                  <div class="text-muted  mb-2" style="word-break: break-word;">目標</div>
+                  <div class="d-flex align-items-baseline justify-content-center flex-wrap">
+                    <span class="font-weight-bold" style="font-size: 2.5rem; word-break: break-word;" th:text="*{goalWeight}"></span>
                   </div><!-- /.d-flex -->
                 </div><!-- /.position-relative -->
               </div><!-- /.col-12 -->
