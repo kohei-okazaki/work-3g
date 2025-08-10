@@ -15,7 +15,7 @@ import jp.co.ha.db.entity.BmiRangeMtExample;
 import jp.co.ha.db.mapper.BmiRangeMtMapper;
 
 /**
- * BMI範囲マスタ検索サービスインターフェース実装クラス
+ * BMI範囲マスタ検索サービス実装クラス
  *
  * @version 1.0.0
  */

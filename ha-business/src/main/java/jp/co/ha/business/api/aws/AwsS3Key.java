@@ -20,7 +20,9 @@ public enum AwsS3Key implements BaseEnum {
     /** Slack接続情報キー */
     SLACK_CONNECTION_DATA("slack/slack_connection_data.json"),
     /** メモ情報配置キー */
-    NOTE_FILE("note/");
+    NOTE_FILE("note/"),
+    /** 問い合わせキー */
+    INQUIRY("inquiry/");
 
     /**
      * コンストラクタ

@@ -225,4 +225,21 @@ public class DashboardBreadcrumbViewFactory {
         return view;
     }
 
+    /**
+     * 問い合わせ画面のパンくずリスト情報Viewを返す
+     *
+     * @return パンくずリスト情報View
+     */
+    public static BreadcrumbView getInquriy() {
+        BreadcrumbView view = getTop(false);
+
+        Breadcrumb healthInfo = new Breadcrumb();
+        healthInfo.setViewName("問い合わせ");
+        healthInfo.setUrl("/inquiry/input");
+        healthInfo.setCurrent(true);
+        view.addBreadcrumb(healthInfo);
+
+        return view;
+    }
+
 }

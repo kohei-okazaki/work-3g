@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.db.entity.composite.CompositeUser;
 
 /**
- * ユーザ検索サービスインターフェース
+ * ユーザ情報検索サービスインターフェース
  *
  * @version 1.0.0
  */

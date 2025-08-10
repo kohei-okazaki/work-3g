@@ -49,8 +49,28 @@ public class DmlExcelReader extends ExcelReader {
 
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
-                    String cellValue = cell.getStringCellValue();
-                    r.addCell(new ExcelCell(cellValue));
+                    String cellValue = null;
+                    ExcelCell excelCell = null;
+
+                    switch (cell.getCellType()) {
+                    case STRING:
+                        cellValue = cell.getStringCellValue();
+                        excelCell = new ExcelCell(cellValue, String.class);
+                        break;
+                    case NUMERIC:
+                        cellValue = String.valueOf(cell.getNumericCellValue());
+                        excelCell = new ExcelCell(cellValue, Number.class);
+                        break;
+                    case BOOLEAN:
+                        cellValue = cell.getBooleanCellValue() ? "TRUE" : "FALSE";
+                        excelCell = new ExcelCell(cellValue, Boolean.class);
+                        break;
+                    default:
+                        LOG.warn("unknown type. cell_type=" + cell.getCellType()
+                                + ", cell_address=" + cell.getAddress());
+                        break;
+                    }
+                    r.addCell(excelCell);
                 }
                 excelSheet.addRow(r);
 

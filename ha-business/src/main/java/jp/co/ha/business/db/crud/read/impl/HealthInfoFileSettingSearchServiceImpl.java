@@ -13,7 +13,7 @@ import jp.co.ha.db.entity.HealthInfoFileSettingKey;
 import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 
 /**
- * 健康情報ファイル設定検索サービスインターフェース実装クラス
+ * 健康情報ファイル設定検索サービス実装クラス
  *
  * @version 1.0.0
  */

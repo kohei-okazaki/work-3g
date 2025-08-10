@@ -159,6 +159,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         // レスポンスを設定
         model.addAttribute("healthInfo", healthInfoForm);
 
+        // CSVダウンロード時の健康情報IDの取得のため改めてsessionに設定
         sessionComponent.setValue(request.getSession(), "healthInfoForm",
                 healthInfoForm);
 

@@ -57,7 +57,8 @@ public abstract class BaseGenerator {
 
             // 自動生成ファイルを作成
             ToolUtil.createGenFileList(genFileList);
-
+        } catch (Exception e) {
+            LOG.error("エラー発生. スタックトレースを確認", e);
         } finally {
             LOG.debug("自動生成終了");
         }

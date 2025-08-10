@@ -83,7 +83,17 @@ public enum DashboardView implements BaseView {
             DashboardBreadcrumbViewFactory.getBreathingcapacity()),
 
     /** お知らせ一覧画面 */
-    NEWS_LIST("news/list", "/news/list", DashboardBreadcrumbViewFactory.getNewsList());
+    NEWS_LIST("news/list", "/news/list", DashboardBreadcrumbViewFactory.getNewsList()),
+
+    /** 問い合わせ情報入力画面 */
+    INQUIRY_INPUT("inquiry/input", "/inquiry/input",
+            DashboardBreadcrumbViewFactory.getInquriy()),
+    /** 問い合わせ情報入力確認画面 */
+    INQUIRY_CONFIRM("inquiry/confirm", "/inquiry/confirm",
+            DashboardBreadcrumbViewFactory.getInquriy()),
+    /** 問い合わせ情報入力完了画面 */
+    INQUIRY_COMPLETE("inquiry/complete", "/inquiry/complete",
+            DashboardBreadcrumbViewFactory.getInquriy());
 
     /** パス名 */
     private String name;

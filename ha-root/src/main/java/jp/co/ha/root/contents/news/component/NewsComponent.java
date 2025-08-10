@@ -86,8 +86,10 @@ public class NewsComponent {
      *
      * @param s3Key
      *     S3キー
+     * @throws BusinessException
+     *     S3ファイル削除失敗エラー
      */
-    public void remove(String s3Key) {
+    public void remove(String s3Key) throws BusinessException {
         awsS3Component.removeS3ObjectByKeys(s3Key);
     }
 

@@ -9,6 +9,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.tool.excel.type.CellPositionType;
 import jp.co.ha.tool.gen.ToolProperty;
 
@@ -19,6 +21,8 @@ import jp.co.ha.tool.gen.ToolProperty;
  */
 public class ExcelReader {
 
+    /** LOG */
+    protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
     /** 対象シート名 */
     private static final String TARGET_SHEET_NAME = "TABLE_LIST";
 

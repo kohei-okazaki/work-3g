@@ -22,7 +22,7 @@ import jp.co.ha.db.mapper.composite.CompositeHealthInfoMapper;
 import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 
 /**
- * 健康情報検索サービスインターフェース実装クラス
+ * 健康情報検索サービス実装クラス
  *
  * @version 1.0.0
  */

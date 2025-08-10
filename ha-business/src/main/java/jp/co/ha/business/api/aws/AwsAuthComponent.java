@@ -25,7 +25,7 @@ public class AwsAuthComponent {
     private SystemProperties systemProps;
 
     /**
-     * システムプロパティ.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
+     * システム設定ファイル情報.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
      * <ul>
      * <li>ローカル環境の場合、{@linkplain ProfileCredentialsProvider}</li>
      * <li>dev1環境の場合、{@linkplain InstanceProfileCredentialsProvider}</li>

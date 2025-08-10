@@ -26,7 +26,7 @@ import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 import jp.co.ha.db.mapper.composite.CompositeUserMapper;
 
 /**
- * ユーザ情報検索サービスインターフェース実装クラス
+ * ユーザ情報検索サービス実装クラス
  *
  * @version 1.0.0
  */
