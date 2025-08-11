@@ -21,7 +21,7 @@
     <result column="ENCLOSURE_CHAR_FLAG" jdbcType="BIT" property="enclosureCharFlag" />
   </resultMap>
 
-  <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.composite.CompositeUserKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.UserKey" resultMap="BaseResultMap">
     SELECT
       <!-- USER-->
         U.SEQ_USER_ID

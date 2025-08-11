@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,7 +61,7 @@ public class NoteListApiController
      * @throws BaseException
      *     レスポンスの生成に失敗した場合
      */
-    @GetMapping(value = "note", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "note")
     public ResponseEntity<NoteListApiResponse> index(NoteListApiRequest request,
             @RequestParam(name = "seq_login_id", required = true) Long seqLoginId,
             @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page)

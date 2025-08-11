@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,7 +53,7 @@ public class NewsListApiController
      * @throws BaseException
      *     S3よりお知らせ情報JSONを取得できなかった場合
      */
-    @GetMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "news")
     public ResponseEntity<NewsListApiResponse> index(NewsListApiRequest request,
             @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page)
             throws BaseException {

@@ -58,16 +58,16 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
         private String value;
 
         /**
-         * labelを返す
+         * 権限名を返す
          *
-         * @return label
+         * @return 権限名
          */
         public String getLabel() {
             return label;
         }
 
         /**
-         * labelを設定する
+         * 権限名を設定する
          *
          * @param label
          *     権限名
@@ -77,7 +77,7 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * valueを返す
+         * 値を返す
          *
          * @return value
          */
@@ -86,7 +86,7 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * valueを設定する
+         * 値を設定する
          *
          * @param value
          *     値

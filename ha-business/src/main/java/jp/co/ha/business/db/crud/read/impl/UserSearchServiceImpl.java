@@ -20,7 +20,6 @@ import jp.co.ha.db.entity.UserExample.Criteria;
 import jp.co.ha.db.entity.UserKey;
 import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.db.entity.composite.CompositeUser;
-import jp.co.ha.db.entity.composite.CompositeUserKey;
 import jp.co.ha.db.mapper.UserMapper;
 import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 import jp.co.ha.db.mapper.composite.CompositeUserMapper;
@@ -60,7 +59,7 @@ public class UserSearchServiceImpl implements UserSearchService {
     @Override
     @Transactional(readOnly = true)
     public Optional<CompositeUser> findCompositUserById(Long seqUserId) {
-        CompositeUserKey key = new CompositeUserKey();
+        UserKey key = new UserKey();
         key.setSeqUserId(seqUserId);
         return Optional.ofNullable(compositeUserMapper.selectByPrimaryKey(key));
     }

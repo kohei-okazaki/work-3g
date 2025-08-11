@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,7 +52,7 @@ public class TopApiController
      *     対象年月
      * @return Top情報取得APIレスポンス
      */
-    @GetMapping(value = "top", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "top")
     public ResponseEntity<TopApiResponse> top(TopApiRequest request,
             @RequestParam(name = "date", required = false) String date) {
 
@@ -97,7 +96,7 @@ public class TopApiController
      *     対象年月
      * @return Top情報取得APIレスポンス
      */
-    @GetMapping(value = "top/healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "top/healthinfo")
     public ResponseEntity<TopApiResponse> healthinfo(TopApiRequest request,
             @RequestParam(name = "date", required = false) String date) {
 
@@ -134,7 +133,7 @@ public class TopApiController
      *     対象年月
      * @return Top情報取得APIレスポンス
      */
-    @GetMapping(value = "top/account", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "top/account")
     public ResponseEntity<TopApiResponse> account(TopApiRequest request,
             @RequestParam(name = "date", required = false) String date) {
 

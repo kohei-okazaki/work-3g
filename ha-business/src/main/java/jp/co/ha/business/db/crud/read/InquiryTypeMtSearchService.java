@@ -15,6 +15,8 @@ public interface InquiryTypeMtSearchService {
     /**
      * 問い合わせ種別マスタの一覧を取得する
      * 
+     * @param selectOption
+     *     SelectOption
      * @return 問い合わせ種別マスタの一覧
      */
     List<InquiryTypeMt> findAll(SelectOption selectOption);

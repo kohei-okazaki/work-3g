@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +44,7 @@ public class HealthInfoListApiController extends
      *     取得対象ページ
      * @return 健康情報一覧取得APIレスポンス
      */
-    @GetMapping(value = "healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "healthinfo")
     public ResponseEntity<HealthInfoListApiResponse> list(
             HealthInfoListApiRequest request,
             @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page) {

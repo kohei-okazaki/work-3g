@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,8 +40,7 @@ public class UserRetrieveController
      *     ログインID
      * @return ユーザ情報取得APIレスポンス
      */
-    @GetMapping(value = "user/{seq_login_id}", produces = {
-            MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "user/{seq_login_id}")
     public ResponseEntity<UserRetrieveApiResponse> retrieve(
             UserRetrieveApiRequest request,
             @PathVariable(name = "seq_login_id", required = true) Long seqLoginId) {

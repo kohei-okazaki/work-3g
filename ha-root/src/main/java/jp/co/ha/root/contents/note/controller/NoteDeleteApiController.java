@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
@@ -70,8 +69,7 @@ public class NoteDeleteApiController
      * @return メモ情報削除APIレスポンス
      * @throws BaseException
      */
-    @DeleteMapping(value = "note/{seq_root_user_note_info_id}", produces = {
-            MediaType.APPLICATION_JSON_VALUE })
+    @DeleteMapping(value = "note/{seq_root_user_note_info_id}")
     public ResponseEntity<NoteDeleteApiResponse> delete(NewsDeleteApiRequest request,
             @PathVariable(name = "seq_root_user_note_info_id", required = true) Long seqRootUserNoteInfoId)
             throws BaseException {

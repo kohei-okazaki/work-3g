@@ -10,6 +10,8 @@ front:
     page: 30
   healthinfo:
     page: 30
+  inquiry:
+    page: 20
 spring:
   # 設定ファイル読込
     config:

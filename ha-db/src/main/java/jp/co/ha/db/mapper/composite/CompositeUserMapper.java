@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 
 import jp.co.ha.db.entity.UserExample;
+import jp.co.ha.db.entity.UserKey;
 import jp.co.ha.db.entity.composite.CompositeUser;
-import jp.co.ha.db.entity.composite.CompositeUserKey;
 
 /**
  * 以下のユーザ関連テーブル情報の複合Mapper
@@ -27,7 +27,7 @@ public interface CompositeUserMapper {
      *     ユーザID
      * @return ユーザ情報と健康情報ファイル設定の複合Entity
      */
-    CompositeUser selectByPrimaryKey(CompositeUserKey key);
+    CompositeUser selectByPrimaryKey(UserKey key);
 
     /**
      * ユーザ情報と健康情報ファイル設定の複合Entityのリストを返す

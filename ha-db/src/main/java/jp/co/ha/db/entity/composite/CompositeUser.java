@@ -8,6 +8,7 @@ import jp.co.ha.common.db.annotation.Crypt;
 import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.db.entity.UserKey;
 
 /**
  * ユーザ情報と健康情報ファイル設定の複合Entity
@@ -15,7 +16,7 @@ import jp.co.ha.common.log.annotation.Mask;
  * @version 1.0.0
  */
 @Entity
-public class CompositeUser extends CompositeUserKey {
+public class CompositeUser extends UserKey {
 
     /** serialVersionUID */
     @Ignore
