@@ -66,6 +66,15 @@ public class AccountListApiController
                     BeanUtil.copy(e, response);
                     response.setDeleteFlag(e.isDeleteFlag() ? CommonFlag.TRUE.getValue()
                             : CommonFlag.FALSE.getValue());
+                    response.setHeaderFlag(e.isHeaderFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
+                    response.setFooterFlag(e.isFooterFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
+                    response.setMaskFlag(e.isMaskFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
+                    response.setEnclosureCharFlag(
+                            e.isEnclosureCharFlag() ? CommonFlag.TRUE.getValue()
+                                    : CommonFlag.FALSE.getValue());
                     return response;
                 }).collect(Collectors.toList());
 
