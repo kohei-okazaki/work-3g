@@ -67,7 +67,7 @@ public class HealthInfoFileRegistController
     private SessionComponent sessionComponent;
     /** AWS-S3 Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
 
     /**
      * フォームを返す
@@ -116,7 +116,7 @@ public class HealthInfoFileRegistController
 
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV;
-        awsS3Component.putFile(
+        s3.putFile(
                 AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId + "/" + fileName,
                 form.getMultipartFile());
 
@@ -161,7 +161,7 @@ public class HealthInfoFileRegistController
         if (ResultType.SUCCESS == result) {
             sessionComponent.removeValue(request.getSession(),
                     FILE_NAME_PREFIX + seqUserId);
-            awsS3Component.removeS3ObjectByKeys(FILE_NAME_PREFIX + seqUserId);
+            s3.removeS3ObjectByKeys(FILE_NAME_PREFIX + seqUserId);
         }
 
         return getView(model, DashboardView.HEALTH_INFO_FILE_COMPLETE);
@@ -182,7 +182,7 @@ public class HealthInfoFileRegistController
             String fileName) throws BaseException {
 
         // S3から健康情報CSVファイルを取得
-        try (InputStream is = awsS3Component
+        try (InputStream is = s3
                 .getS3ObjectByKey(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId
                         + "/" + fileName)) {
 

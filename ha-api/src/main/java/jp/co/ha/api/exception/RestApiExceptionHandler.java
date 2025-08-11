@@ -38,7 +38,7 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
             .getLogger(RestApiExceptionHandler.class);
     /** SlackComponent */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
 
     /**
      * APIで発生した例外をハンドリングする<br>
@@ -54,7 +54,7 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
 
         // Slackに通知
         try {
-            slackApiComponent.send(ContentType.API, super.getLogErrorMessage(e));
+            slack.send(ContentType.API, super.getLogErrorMessage(e));
         } catch (BaseException be) {
             LOG.error("slack通知に失敗しました", be);
         }

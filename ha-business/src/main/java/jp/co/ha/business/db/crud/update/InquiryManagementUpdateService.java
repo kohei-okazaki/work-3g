@@ -17,4 +17,12 @@ public interface InquiryManagementUpdateService {
      */
     void update(InquiryManagement entity);
 
+    /**
+     * 問い合わせ管理情報のステータスを更新する
+     * 
+     * @param entity
+     *     問い合わせ管理情報
+     */
+    void updateStatusById(InquiryManagement entity);
+
 }

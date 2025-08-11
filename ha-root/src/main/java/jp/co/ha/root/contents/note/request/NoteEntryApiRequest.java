@@ -32,7 +32,7 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     private String detail;
 
     /**
-     * seqRootLoginInfoIdを返す
+     * 管理者サイトログイン情報IDを返す
      *
      * @return seqRootLoginInfoId
      */
@@ -41,7 +41,7 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * seqRootLoginInfoIdを設定する
+     * 管理者サイトログイン情報IDを設定する
      *
      * @param seqRootLoginInfoId
      *     管理者サイトログイン情報ID
@@ -51,7 +51,7 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * titleを返す
+     * 件名を返す
      *
      * @return title
      */
@@ -60,7 +60,7 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * titleを設定する
+     * 件名を設定する
      *
      * @param title
      *     件名
@@ -70,7 +70,7 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * detailを返す
+     * メモ内容を返す
      *
      * @return detail
      */
@@ -79,7 +79,7 @@ public class NoteEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * detailを設定する
+     * メモ内容を設定する
      *
      * @param detail
      *     メモ内容

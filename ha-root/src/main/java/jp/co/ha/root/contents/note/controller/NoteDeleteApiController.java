@@ -47,10 +47,10 @@ public class NoteDeleteApiController
     private RootUserNoteInfoDeleteService rootUserNoteInfoDeleteService;
     /** AWS S3Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
     /** SlackApiComponent */
     @Autowired
-    private SlackApiComponent slackApi;
+    private SlackApiComponent slack;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -93,10 +93,10 @@ public class NoteDeleteApiController
             rootUserNoteInfoDeleteService.delete(seqRootUserNoteInfoId);
 
             // メモファイルを削除
-            awsS3Component.removeS3ObjectByKeys(s3Key);
+            s3.removeS3ObjectByKeys(s3Key);
 
             // Slack通知
-            slackApi.send(ContentType.ROOT,
+            slack.send(ContentType.ROOT,
                     "メモ情報ID=" + seqRootUserNoteInfoId + ", S3キー=" + s3Key + "を削除.");
 
         } catch (Exception e) {

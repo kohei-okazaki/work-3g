@@ -1,5 +1,7 @@
 package jp.co.ha.business.db.crud.update;
 
+import jp.co.ha.db.entity.RootUserNoteInfo;
+
 /**
  * 管理者サイトユーザメモ情報更新サービスインターフェース
  *
@@ -8,12 +10,11 @@ package jp.co.ha.business.db.crud.update;
 public interface RootUserNoteInfoUpdateService {
 
     /**
-     * 管理者サイトユーザメモ情報を更新する
-     *
-     * @param seqRootUserNoteInfoId
-     *     管理者サイトユーザメモ情報ID
-     * @param title
-     *     件名
+     * 管理者サイトユーザメモ情報を更新する<br>
+     * null項目は更新しない
+     * 
+     * @param entity
+     *     管理者サイトユーザメモ情報
      */
-    void update(Long seqRootUserNoteInfoId, String title);
+    void updateById(RootUserNoteInfo entity);
 }

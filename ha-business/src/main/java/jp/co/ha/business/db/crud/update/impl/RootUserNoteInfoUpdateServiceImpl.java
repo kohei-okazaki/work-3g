@@ -24,11 +24,7 @@ public class RootUserNoteInfoUpdateServiceImpl implements RootUserNoteInfoUpdate
     @Update
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(Long seqRootUserNoteInfoId, String title) {
-
-        RootUserNoteInfo entity = new RootUserNoteInfo();
-        entity.setSeqRootUserNoteInfoId(seqRootUserNoteInfoId);
-        entity.setTitle(title);
+    public void updateById(RootUserNoteInfo entity) {
         mapper.updateByPrimaryKeySelective(entity);
     }
 

@@ -68,10 +68,10 @@ public class HealthCheckBatch implements Tasklet {
     private jp.co.ha.business.api.root.HealthCheckApi rootHealthCheckApi;
     /** AWS S3 Component */
     @Autowired
-    private AwsSesComponent awsSesComponent;
+    private AwsSesComponent ses;
     /** SlackComponent */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -121,13 +121,13 @@ public class HealthCheckBatch implements Tasklet {
         switch (response.getResult()) {
         case SUCCESS:
             LOG.debug("root api server up");
-            slackApiComponent.send(ContentType.BATCH, "root api server up");
+            slack.send(ContentType.BATCH, "root api server up");
             break;
         case FAILURE:
             LOG.error("root api server down");
-            awsSesComponent.sendMail(systemProperties.getSystemMailAddress(),
+            ses.sendMail(systemProperties.getSystemMailAddress(),
                     "管理者用API.ヘルスチェックAPI結果", TEMPLATE_ID);
-            slackApiComponent.send(ContentType.BATCH, "root api server down");
+            slack.send(ContentType.BATCH, "root api server down");
             break;
         }
     }
@@ -163,13 +163,13 @@ public class HealthCheckBatch implements Tasklet {
         switch (response.getResult()) {
         case SUCCESS:
             LOG.debug("node api server up");
-            slackApiComponent.send(ContentType.BATCH, "node api server up");
+            slack.send(ContentType.BATCH, "node api server up");
             break;
         case FAILURE:
             LOG.error("node api server down");
-            awsSesComponent.sendMail(systemProperties.getSystemMailAddress(),
+            ses.sendMail(systemProperties.getSystemMailAddress(),
                     "NodeAPI ヘルスチェックAPI結果", TEMPLATE_ID);
-            slackApiComponent.send(ContentType.BATCH, "node api server down");
+            slack.send(ContentType.BATCH, "node api server down");
             break;
         }
 
@@ -205,13 +205,13 @@ public class HealthCheckBatch implements Tasklet {
         switch (response.getResultType()) {
         case SUCCESS:
             LOG.debug("healthinfo api server up");
-            slackApiComponent.send(ContentType.BATCH, "healthinfo api server up");
+            slack.send(ContentType.BATCH, "healthinfo api server up");
             break;
         case FAILURE:
             LOG.error("healthinfo api server down");
-            awsSesComponent.sendMail(systemProperties.getSystemMailAddress(),
+            ses.sendMail(systemProperties.getSystemMailAddress(),
                     "健康管理API ヘルスチェックAPI結果", TEMPLATE_ID);
-            slackApiComponent.send(ContentType.BATCH, "healthinfo api server down");
+            slack.send(ContentType.BATCH, "healthinfo api server down");
             break;
         }
 

@@ -29,11 +29,20 @@ public interface InquiryManagementSelectService {
     long count();
 
     /**
+     * 問い合わせ管理情報の件数を返す
+     * 
+     * @param seqInquiryMngId
+     *     問い合わせ管理ID
+     * @return 件数
+     */
+    long count(Long seqInquiryMngId);
+
+    /**
      * 指定した問い合わせ管理IDが存在するか判定する
      * 
      * @param seqInquiryMngId
      *     問い合わせ管理ID
      * @return 判定結果
      */
-    boolean isExistBySeqInquiryMngId(long seqInquiryMngId);
+    boolean isExistBySeqInquiryMngId(Long seqInquiryMngId);
 }

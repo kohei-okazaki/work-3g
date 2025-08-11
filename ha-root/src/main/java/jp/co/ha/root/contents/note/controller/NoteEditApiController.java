@@ -40,10 +40,10 @@ public class NoteEditApiController
     private RootUserNoteInfoUpdateService rootUserNoteInfoUpdateService;
     /** AWS S3Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
     /** SlackApiComponent */
     @Autowired
-    private SlackApiComponent slackApi;
+    private SlackApiComponent slack;
 
     /**
      * メモ情報編集
@@ -70,14 +70,16 @@ public class NoteEditApiController
         }
 
         // 管理者サイトユーザメモ情報更新
-        rootUserNoteInfoUpdateService.update(Long.valueOf(seqRootUserNoteInfoId),
-                request.getTitle());
+        RootUserNoteInfo entity = new RootUserNoteInfo();
+        entity.setSeqRootUserNoteInfoId(seqRootUserNoteInfoId);
+        entity.setTitle(request.getTitle());
+        rootUserNoteInfoUpdateService.updateById(entity);
 
         String s3Key = optional.get().getS3Key();
         // メモファイルの更新
-        awsS3Component.putFile(s3Key, request.getDetail());
+        s3.putFile(s3Key, request.getDetail());
         // Slack通知
-        slackApi.send(ContentType.ROOT,
+        slack.send(ContentType.ROOT,
                 "メモ情報ID=" + seqRootUserNoteInfoId + ", S3キー=" + s3Key + "を編集.");
 
         return ResponseEntity.ok(getSuccessResponse());

@@ -60,10 +60,10 @@ public class AwsSesComponent {
     private SystemProperties systemProps;
     /** AWS認証情報Component */
     @Autowired
-    private AwsAuthComponent awsAuthComponent;
+    private AwsAuthComponent auth;
     /** S3 Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
     /** FreeMarker設定 */
     @Autowired
     private Configuration freemarkerConfig;
@@ -343,7 +343,7 @@ public class AwsSesComponent {
 
         return SesClient.builder()
                 .region(awsProps.getRegion())
-                .credentialsProvider(awsAuthComponent.getAWSCredentialsProvider())
+                .credentialsProvider(auth.getAWSCredentialsProvider())
                 .httpClient(httpClient)
                 .build();
     }
@@ -433,7 +433,7 @@ public class AwsSesComponent {
     @Deprecated
     private String getBodyTemplateFromS3(String templateId) throws BaseException {
 
-        try (InputStream is = awsS3Component.getS3ObjectByKey(templateId);
+        try (InputStream is = s3.getS3ObjectByKey(templateId);
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(is, CHARSET.getValue()))) {
 

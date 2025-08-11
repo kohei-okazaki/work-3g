@@ -52,7 +52,7 @@ public class AwsS3Component {
     private AwsProperties awsProps;
     /** AWS認証情報Component */
     @Autowired
-    private AwsAuthComponent awsAuthComponent;
+    private AwsAuthComponent auth;
 
     /**
      * S3の指定したキーにInputStreamのデータをファイルとしてアップロードする
@@ -290,7 +290,7 @@ public class AwsS3Component {
 
             return S3Client.builder()
                     .region(awsProps.getRegion())
-                    .credentialsProvider(awsAuthComponent.getAWSCredentialsProvider())
+                    .credentialsProvider(auth.getAWSCredentialsProvider())
                     .httpClient(httpClient)
                     .build();
 

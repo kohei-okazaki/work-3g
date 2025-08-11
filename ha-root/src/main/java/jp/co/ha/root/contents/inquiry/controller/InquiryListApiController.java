@@ -44,7 +44,7 @@ public class InquiryListApiController
     private InquiryManagementSelectService inquiryManagementSelectService;
     /** AWS-S3 Component */
     @Autowired
-    private AwsS3Component s3Component;
+    private AwsS3Component s3;
 
     /**
      * 問い合わせ情報一覧取得
@@ -58,7 +58,7 @@ public class InquiryListApiController
      *     レスポンスの生成に失敗した場合
      */
     @GetMapping(value = "inquiry")
-    public ResponseEntity<InquiryListApiResponse> index(InquiryListApiRequest request,
+    public ResponseEntity<InquiryListApiResponse> list(InquiryListApiRequest request,
             @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page)
             throws BaseException {
 
@@ -122,7 +122,7 @@ public class InquiryListApiController
      */
     private String getInquiryBody(CompositeInquiry entity) throws BaseException {
 
-        try (InputStream is = s3Component.getS3ObjectByKey(entity.getS3Key());
+        try (InputStream is = s3.getS3ObjectByKey(entity.getS3Key());
                 Reader r = new InputStreamReader(is);
                 BufferedReader br = new BufferedReader(r)) {
             StringBuilder sb = new StringBuilder();

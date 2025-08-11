@@ -91,7 +91,7 @@ public class HealthInfoReferenceController implements BaseWebController {
     private HealthInfoGraphService healthInfoGraphService;
     /** AWS-S3 Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
 
     /**
      * Validateを設定
@@ -292,7 +292,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         // 一時ダウンロードファイル
         File file = FileUtil.getFile(conf.getOutputPath()
                 + FileSeparator.SYSTEM.getValue() + conf.getFileName());
-        awsS3Component.putFile(
+        s3.putFile(
                 AwsS3Key.HEALTHINFO_FILE_REFERENCE.getValue() + seqUserId + "/"
                         + file.getName(),
                 file);

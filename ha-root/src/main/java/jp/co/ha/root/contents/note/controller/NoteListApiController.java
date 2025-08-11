@@ -46,7 +46,7 @@ public class NoteListApiController
     private RootUserNoteInfoSearchService searchService;
     /** AWS S3Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
 
     /**
      * メモ一覧取得
@@ -114,7 +114,7 @@ public class NoteListApiController
      */
     private String getDetail(String s3Key) throws BaseException {
 
-        try (InputStream is = awsS3Component.getS3ObjectByKey(s3Key);
+        try (InputStream is = s3.getS3ObjectByKey(s3Key);
                 Reader r = new InputStreamReader(is);
                 BufferedReader br = new BufferedReader(r)) {
 

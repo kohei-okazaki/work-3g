@@ -72,7 +72,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
     private HealthInfoMigrateApi api;
     /** Slack Component */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -92,7 +92,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
         }
 
         // Slack通知
-        slackApiComponent.send(ContentType.BATCH, "health_info_migrate_batch success.");
+        slack.send(ContentType.BATCH, "health_info_migrate_batch success.");
 
         return RepeatStatus.FINISHED;
     }

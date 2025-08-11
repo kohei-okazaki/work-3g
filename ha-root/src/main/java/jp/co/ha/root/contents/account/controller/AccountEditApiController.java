@@ -61,7 +61,7 @@ public class AccountEditApiController
         User entity = new User();
         BeanUtil.copy(request, entity);
         entity.setSeqUserId(seqUserId);
-        updateService.updateSelective(entity);
+        updateService.updateById(entity);
 
         return ResponseEntity.ok(getSuccessResponse());
     }

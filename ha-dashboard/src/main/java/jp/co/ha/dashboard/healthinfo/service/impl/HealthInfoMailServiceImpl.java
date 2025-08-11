@@ -29,7 +29,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
     private UserSearchService userSearchService;
     /** AWS-SES Component */
     @Autowired
-    private AwsSesComponent sesComponent;
+    private AwsSesComponent ses;
     /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties properties;
@@ -56,7 +56,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
                         DateFormatType.YYYYMMDDHHMMSS));
         bodyMap.put("url", properties.getHealthInfoDashboardUrl());
 
-        sesComponent.sendMail(to, titleText, MailTemplateKey.HEALTHINFO_REGIST_TEMPLATE,
+        ses.sendMail(to, titleText, MailTemplateKey.HEALTHINFO_REGIST_TEMPLATE,
                 bodyMap);
 
     }

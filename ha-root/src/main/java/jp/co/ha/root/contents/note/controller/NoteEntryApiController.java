@@ -40,10 +40,10 @@ public class NoteEntryApiController
     private RootUserNoteInfoCreateService rootUserNoteInfoCreateService;
     /** AWS S3Component */
     @Autowired
-    private AwsS3Component s3Component;
+    private AwsS3Component s3;
     /** SlackApiComponent */
     @Autowired
-    private SlackApiComponent slackApi;
+    private SlackApiComponent slack;
 
     /**
      * メモ登録処理
@@ -60,7 +60,7 @@ public class NoteEntryApiController
 
         // S3キーを取得
         String s3Key = getS3Key(request.getSeqRootLoginInfoId());
-        s3Component.putFile(s3Key, request.getDetail());
+        s3.putFile(s3Key, request.getDetail());
 
         RootUserNoteInfo entity = new RootUserNoteInfo();
         entity.setS3Key(s3Key);
@@ -69,7 +69,7 @@ public class NoteEntryApiController
         // 管理者サイトユーザメモ情報を登録
         rootUserNoteInfoCreateService.create(entity);
         // Slack通知
-        slackApi.send(ContentType.ROOT, "メモ情報ID=" + entity.getSeqRootUserNoteInfoId()
+        slack.send(ContentType.ROOT, "メモ情報ID=" + entity.getSeqRootUserNoteInfoId()
                 + ", S3キー=" + s3Key + "を登録.");
 
         return ResponseEntity.ok(getSuccessResponse());

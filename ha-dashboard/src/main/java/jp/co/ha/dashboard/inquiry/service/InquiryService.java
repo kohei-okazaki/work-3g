@@ -2,7 +2,7 @@ package jp.co.ha.dashboard.inquiry.service;
 
 import java.util.List;
 
-import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.dashboard.inquiry.form.InquiryForm;
 import jp.co.ha.db.entity.InquiryTypeMt;
 
@@ -27,9 +27,9 @@ public interface InquiryService {
      *     ユーザID
      * @param inquiryForm
      *     問い合わせForm
-     * @throws BusinessException
+     * @throws BaseException
      *     問い合わせ情報の登録に失敗した場合
      */
-    void regist(Long seqUserId, InquiryForm inquiryForm) throws BusinessException;
+    void regist(Long seqUserId, InquiryForm inquiryForm) throws BaseException;
 
 }

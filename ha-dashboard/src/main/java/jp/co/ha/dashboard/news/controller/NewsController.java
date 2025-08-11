@@ -45,7 +45,7 @@ public class NewsController implements BaseWebController {
     private SystemProperties systemConfig;
     /** AWS S3Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
 
     /**
      * お知らせ一覧
@@ -75,7 +75,7 @@ public class NewsController implements BaseWebController {
         for (NewsInfo entity : searchService.findAll(selectOption)) {
 
             // S3からお知らせJSONを取得
-            try (InputStream is = awsS3Component.getS3ObjectByKey(entity.getS3Key())) {
+            try (InputStream is = s3.getS3ObjectByKey(entity.getS3Key())) {
 
                 NewsDto dto = new JsonReader().read(is, NewsDto.class);
                 newsList.add(dto);

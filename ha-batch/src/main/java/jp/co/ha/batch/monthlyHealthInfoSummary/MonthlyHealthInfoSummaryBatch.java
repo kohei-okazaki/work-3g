@@ -71,7 +71,7 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
     private AwsS3Component s3;
     /** Slack Component */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -93,11 +93,11 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         s3.putFile(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName(), csv);
 
         // Slack通知
-        slackApiComponent.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
+        slack.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
                 + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName());
 
         // Slack通知
-        slackApiComponent.send(ContentType.BATCH,
+        slack.send(ContentType.BATCH,
                 "monthly_health_info_summary_batch success.");
 
         return RepeatStatus.FINISHED;

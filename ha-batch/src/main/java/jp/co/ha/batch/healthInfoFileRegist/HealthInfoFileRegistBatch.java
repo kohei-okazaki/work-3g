@@ -59,7 +59,7 @@ public class HealthInfoFileRegistBatch implements Tasklet {
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
     /** Slack Component */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
     /** 妥当性チェックValidator */
     @Autowired
     private BeanValidator<HealthInfoRegistApiRequest> validator;
@@ -151,7 +151,7 @@ public class HealthInfoFileRegistBatch implements Tasklet {
 
         StringJoiner sj = new StringJoiner("\r\n");
         seqHealthInfoIdList.stream().forEach(e -> sj.add(e.toString()));
-        slackApiComponent.send(ContentType.BATCH, sj.toString());
+        slack.send(ContentType.BATCH, sj.toString());
     }
 
 }

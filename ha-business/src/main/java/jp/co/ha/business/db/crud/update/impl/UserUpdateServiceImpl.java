@@ -31,7 +31,7 @@ public class UserUpdateServiceImpl implements UserUpdateService {
     @Update
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateSelective(User entity) {
+    public void updateById(User entity) {
         mapper.updateByPrimaryKeySelective(entity);
     }
 

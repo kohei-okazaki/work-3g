@@ -24,6 +24,6 @@ public interface UserUpdateService {
      * @param entity
      *     ユーザ情報
      */
-    void updateSelective(User entity);
+    void updateById(User entity);
 
 }

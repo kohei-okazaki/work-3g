@@ -80,7 +80,7 @@ public class UserRecoveryController implements BaseWebController {
     private HashEncoder encoder;
     /** AWS-SES Component */
     @Autowired
-    private AwsSesComponent sesComponent;
+    private AwsSesComponent ses;
     /** ユーザComponent */
     @Autowired
     private UserComponent userComponent;
@@ -166,7 +166,7 @@ public class UserRecoveryController implements BaseWebController {
         String title = "パスワード再設定" + DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
 
-        sesComponent.sendMail(to, title, MailTemplateKey.ACCOUNT_RECOVERY_TEMPLATE,
+        ses.sendMail(to, title, MailTemplateKey.ACCOUNT_RECOVERY_TEMPLATE,
                 getMailTemplateBody(entity));
 
         // メールを送信したためフラグをtrueに

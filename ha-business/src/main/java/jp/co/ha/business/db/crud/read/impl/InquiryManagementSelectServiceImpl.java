@@ -42,25 +42,27 @@ public class InquiryManagementSelectServiceImpl
         return compositeInquriyMapper.selectAll(example, selectOption.toRowBounds());
     }
 
-    @Select
     @Override
-    @Transactional(readOnly = true)
     public long count() {
-        InquiryManagementExample example = new InquiryManagementExample();
-        return mapper.countByExample(example);
+        return this.count(null);
     }
 
     @Select
     @Override
     @Transactional(readOnly = true)
-    public boolean isExistBySeqInquiryMngId(long seqInquiryMngId) {
-
+    public long count(Long seqInquiryMngId) {
         InquiryManagementExample example = new InquiryManagementExample();
         InquiryManagementExample.Criteria criteria = example.createCriteria();
-        criteria.andSeqInquiryMngIdEqualTo(seqInquiryMngId);
+        if (seqInquiryMngId != null) {
+            criteria.andSeqInquiryMngIdEqualTo(seqInquiryMngId);
+        }
         criteria.andDeleteFlagEqualTo(false);
+        return mapper.countByExample(example);
+    }
 
-        return mapper.countByExample(example) > 0;
+    @Override
+    public boolean isExistBySeqInquiryMngId(Long seqInquiryMngId) {
+        return this.count(seqInquiryMngId) > 0;
 
     }
 
