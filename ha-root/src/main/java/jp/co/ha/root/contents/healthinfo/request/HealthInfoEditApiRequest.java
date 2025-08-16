@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.validator.annotation.Decimal;
-import jp.co.ha.common.validator.annotation.Min;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
@@ -20,7 +19,6 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
 
     /** ユーザID */
     @JsonProperty("seq_user_id")
-    @Min(size = 0, message = "seq_user_id is positive")
     @Required(message = "seq_user_id is required")
     private Long seqUserId;
 
@@ -37,7 +35,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
     private BigDecimal weight;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -46,7 +44,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -56,7 +54,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -65,7 +63,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -75,7 +73,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -84,7 +82,7 @@ public class HealthInfoEditApiRequest extends BaseRootApiRequest
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重

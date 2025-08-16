@@ -53,7 +53,7 @@ public class AccountEditApiController
             @Valid @RequestBody AccountEditApiRequest request) throws BaseException {
 
         if (!searchService.findById(seqUserId).isPresent()) {
-            // 指定したユーザIDのaccountが存在しない場合
+            // 指定したユーザIDのuserが存在しない場合
             return ResponseEntity.badRequest()
                     .body(getErrorResponse("acount is not found"));
         }
