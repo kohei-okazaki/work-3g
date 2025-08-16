@@ -102,7 +102,7 @@ public class InquiryListApiController
             responseList.add(inquiryResponse);
 
         }
-        response.setInquriyList(responseList);
+        response.setInquiryList(responseList);
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "inquiry?page",
                 inquiryManagementSelectService.count());

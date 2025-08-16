@@ -22,27 +22,27 @@ public class InquiryListApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
     /** 問い合わせ情報リスト */
-    @JsonProperty("inquriy_list")
+    @JsonProperty("inquiry_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Inquiry> inquriyList;
+    private List<Inquiry> inquiryList;
 
     /**
-     * 問い合わせ情報リストを返す
+     * 問い合わせ情報リスト を返す
      *
-     * @return inquriyList
+     * @return inquiryList
      */
-    public List<Inquiry> getInquriyList() {
-        return inquriyList;
+    public List<Inquiry> getInquiryList() {
+        return inquiryList;
     }
 
     /**
-     * 問い合わせ情報リストを設定する
+     * 問い合わせ情報リスト を設定する
      *
-     * @param inquriyList
+     * @param inquiryList
      *     問い合わせ情報リスト
      */
-    public void setInquriyList(List<Inquiry> inquriyList) {
-        this.inquriyList = inquriyList;
+    public void setInquiryList(List<Inquiry> inquiryList) {
+        this.inquiryList = inquiryList;
     }
 
     /**
