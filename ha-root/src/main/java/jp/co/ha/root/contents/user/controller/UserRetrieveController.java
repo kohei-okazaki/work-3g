@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
@@ -63,6 +64,8 @@ public class UserRetrieveController
             role.setLabel(e.getRoleName());
             return role;
         }).collect(Collectors.toList()));
+        response.setDeleteFlag(entity.getDeleteFlag() ? CommonFlag.TRUE.getValue()
+                : CommonFlag.FALSE.getValue());
         BeanUtil.copy(entity, response);
 
         return ResponseEntity.ok(response);

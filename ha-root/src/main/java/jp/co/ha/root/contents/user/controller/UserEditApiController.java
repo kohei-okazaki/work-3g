@@ -29,6 +29,7 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
@@ -100,14 +101,15 @@ public class UserEditApiController
 
             List<CompositeRootUserInfo> userRoleList = rootLoginInfoSearchService
                     .findCompositeUserById(seqLoginId);
-            // 管理者サイトユーザ権限管理マスタID
-            Long seqRootUserRoleMngMtId = userRoleList.get(0)
-                    .getSeqRootUserRoleMngMtId();
-            if (seqRootUserRoleMngMtId == null) {
-                // エラーレスポンスを返却
+            if (CollectionUtil.isEmpty(userRoleList)) {
+                // 登録データが存在しない場合
                 return ResponseEntity.badRequest()
                         .body(getErrorResponse("data illegal error"));
             }
+
+            // 管理者サイトユーザ権限管理マスタID
+            Long seqRootUserRoleMngMtId = userRoleList.get(0)
+                    .getSeqRootUserRoleMngMtId();
 
             // ユーザの詳細マスタを削除
             rootUserRoleDetailMtDeleteService.deleteByUser(seqRootUserRoleMngMtId);

@@ -20,7 +20,7 @@ public class LoginApiRequest extends BaseRootApiRequest implements BaseApiReques
     private String password;
 
     /**
-     * seqLoginIdを返す
+     * ログインIDを返す
      *
      * @return seqLoginId
      */
@@ -29,7 +29,7 @@ public class LoginApiRequest extends BaseRootApiRequest implements BaseApiReques
     }
 
     /**
-     * seqLoginIdを設定する
+     * ログインIDを設定する
      *
      * @param seqLoginId
      *     ログインID
@@ -39,7 +39,7 @@ public class LoginApiRequest extends BaseRootApiRequest implements BaseApiReques
     }
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -48,7 +48,7 @@ public class LoginApiRequest extends BaseRootApiRequest implements BaseApiReques
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード

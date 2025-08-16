@@ -84,6 +84,12 @@ public class UserEntryApiController
     public ResponseEntity<UserEntryApiResponse> entry(
             @Valid @RequestBody UserEntryApiRequest request) throws BaseException {
 
+        if (!request.getPassword().equals(request.getConfPassword())) {
+            // パスワードと確認用パスワードが一致しない場合
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("password and conf_password is not match"));
+        }
+
         // トランザクション開始
         TransactionStatus status = transactionManager
                 .getTransaction(defaultTransactionDefinition);
