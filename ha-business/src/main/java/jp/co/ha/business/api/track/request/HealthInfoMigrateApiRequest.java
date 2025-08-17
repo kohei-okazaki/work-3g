@@ -27,7 +27,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     private List<HealthInfo> healthInfoList;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      * 
      * @return seqUserId
      */
@@ -36,7 +36,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      * 
      * @param seqUserId
      */
@@ -45,7 +45,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     }
 
     /**
-     * healthInfoListを返す
+     * 健康情報リストを返す
      * 
      * @return healthInfoList
      */
@@ -54,9 +54,10 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     }
 
     /**
-     * healthInfoListを設定する
+     * 健康情報リストを設定する
      * 
      * @param healthInfoList
+     *     健康情報リスト
      */
     public void setHealthInfoList(List<HealthInfo> healthInfoList) {
         this.healthInfoList = healthInfoList;
@@ -91,7 +92,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         private LocalDateTime createdAt;
 
         /**
-         * seqHealthInfoIdを返す
+         * 健康情報IDを返す
          * 
          * @return seqHealthInfoId
          */
@@ -100,16 +101,17 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         }
 
         /**
-         * seqHealthInfoIdを設定する
+         * 健康情報IDを設定する
          * 
          * @param seqHealthInfoId
+         *     健康情報ID
          */
         public void setSeqHealthInfoId(Long seqHealthInfoId) {
             this.seqHealthInfoId = seqHealthInfoId;
         }
 
         /**
-         * heightを返す
+         * 身長を返す
          * 
          * @return height
          */
@@ -118,16 +120,17 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          * 
          * @param height
+         *     身長
          */
         public void setHeight(BigDecimal height) {
             this.height = height;
         }
 
         /**
-         * weightを返す
+         * 体重を返す
          * 
          * @return weight
          */
@@ -136,16 +139,17 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         }
 
         /**
-         * weightを設定する
+         * 体重を設定する
          * 
          * @param weight
+         *     体重
          */
         public void setWeight(BigDecimal weight) {
             this.weight = weight;
         }
 
         /**
-         * bmiを返す
+         * BMIを返す
          * 
          * @return bmi
          */
@@ -154,16 +158,17 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         }
 
         /**
-         * bmiを設定する
+         * BMIを設定する
          * 
          * @param bmi
+         *     BMI
          */
         public void setBmi(BigDecimal bmi) {
             this.bmi = bmi;
         }
 
         /**
-         * standardWeightを返す
+         * 標準体重を返す
          * 
          * @return standardWeight
          */
@@ -172,16 +177,17 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         }
 
         /**
-         * standardWeightを設定する
+         * 標準体重を設定する
          * 
          * @param standardWeight
+         *     標準体重
          */
         public void setStandardWeight(BigDecimal standardWeight) {
             this.standardWeight = standardWeight;
         }
 
         /**
-         * createdAtを返す
+         * 作成日時を返す
          * 
          * @return createdAt
          */
@@ -190,9 +196,10 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
         }
 
         /**
-         * createdAtを設定する
+         * 作成日時を設定する
          * 
          * @param createdAt
+         *     作成日時
          */
         public void setCreatedAt(LocalDateTime createdAt) {
             this.createdAt = createdAt;

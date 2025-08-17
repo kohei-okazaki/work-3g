@@ -26,7 +26,7 @@ public class BreathingCapacityCalcApiRequest extends BaseNodeApiRequest
     private BigDecimal height;
 
     /**
-     * ageを返す
+     * 年齢を返す
      *
      * @return age
      */
@@ -35,7 +35,7 @@ public class BreathingCapacityCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * ageを設定する
+     * 年齢を設定する
      *
      * @param age
      *     年齢
@@ -45,7 +45,7 @@ public class BreathingCapacityCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      *
      * @return genderType
      */
@@ -54,7 +54,7 @@ public class BreathingCapacityCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      *
      * @param genderType
      *     性別
@@ -64,7 +64,7 @@ public class BreathingCapacityCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -73,7 +73,7 @@ public class BreathingCapacityCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長

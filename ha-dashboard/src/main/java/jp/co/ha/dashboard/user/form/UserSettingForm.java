@@ -88,7 +88,7 @@ public class UserSettingForm implements BaseForm {
     private String enclosureCharFlag;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -97,7 +97,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -107,7 +107,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -116,7 +116,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -126,7 +126,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * deleteFlagを返す
+     * 削除フラグを返す
      *
      * @return deleteFlag
      */
@@ -135,7 +135,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * deleteFlagを設定する
+     * 削除フラグを設定する
      *
      * @param deleteFlag
      *     削除フラグ
@@ -145,7 +145,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * remarksを返す
+     * 備考を返す
      *
      * @return remarks
      */
@@ -154,7 +154,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * remarksを設定する
+     * 備考を設定する
      *
      * @param remarks
      *     備考
@@ -164,7 +164,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -173,7 +173,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス
@@ -183,7 +183,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      * 
      * @return genderType
      */
@@ -192,7 +192,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      * 
      * @param genderType
      *     性別
@@ -202,7 +202,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * birthDateを返す
+     * 誕生日を返す
      * 
      * @return birthDate
      */
@@ -211,7 +211,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * birthDateを設定する
+     * 誕生日を設定する
      * 
      * @param birthDate
      *     誕生日
@@ -221,7 +221,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * goalWeightを返す
+     * 目標体重を返す
      * 
      * @return goalWeight
      */
@@ -230,7 +230,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * goalWeightを設定する
+     * 目標体重を設定する
      * 
      * @param goalWeight
      *     目標体重
@@ -240,7 +240,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * apiKeyを返す
+     * APIキーを返す
      *
      * @return apiKey
      */
@@ -249,7 +249,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * apiKeyを設定する
+     * APIキーを設定する
      *
      * @param apiKey
      *     APIキー
@@ -259,7 +259,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * passwordExpireを返す
+     * パスワード有効期限日を返す
      *
      * @return passwordExpire
      */
@@ -268,7 +268,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * passwordExpireを設定する
+     * パスワード有効期限日を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限日
@@ -278,7 +278,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * headerFlagを返す
+     * ヘッダー利用フラグを返す
      *
      * @return headerFlag
      */
@@ -287,7 +287,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * headerFlagを設定する
+     * ヘッダー利用フラグを設定する
      *
      * @param headerFlag
      *     ヘッダー利用フラグ
@@ -297,7 +297,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * footerFlagを返す
+     * フッター利用フラグを返す
      *
      * @return footerFlag
      */
@@ -306,7 +306,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * footerFlagを設定する
+     * フッター利用フラグを設定する
      *
      * @param footerFlag
      *     フッター利用フラグ
@@ -316,7 +316,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * maskFlagを返す
+     * マスク利用フラグを返す
      *
      * @return maskFlag
      */
@@ -325,7 +325,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * maskFlagを設定する
+     * マスク利用フラグを設定する
      *
      * @param maskFlag
      *     マスク利用フラグ
@@ -335,7 +335,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * enclosureCharFlagを返す
+     * 囲い文字利用フラグを返す
      *
      * @return enclosureCharFlag
      */
@@ -344,7 +344,7 @@ public class UserSettingForm implements BaseForm {
     }
 
     /**
-     * enclosureCharFlagを設定する
+     * 囲い文字利用フラグを設定する
      *
      * @param enclosureCharFlag
      *     囲い文字利用フラグ

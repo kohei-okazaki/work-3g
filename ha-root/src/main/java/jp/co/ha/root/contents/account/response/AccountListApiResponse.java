@@ -29,7 +29,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
     private List<AccountResponse> accountResponseList;
 
     /**
-     * accountResponseListを返す
+     * ユーザ情報リストを返す
      *
      * @return accountResponseList
      */
@@ -38,7 +38,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * accountResponseListを設定する
+     * ユーザ情報リストを設定する
      *
      * @param accountResponseList
      *     ユーザ情報リスト
@@ -98,7 +98,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         private String enclosureCharFlag;
 
         /**
-         * seqUserIdを返す
+         * ユーザIDを返す
          *
          * @return seqUserId
          */
@@ -107,7 +107,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * seqUserIdを設定する
+         * ユーザIDを設定する
          *
          * @param seqUserId
          *     ユーザID
@@ -117,7 +117,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * mailAddressを返す
+         * メールアドレスを返す
          *
          * @return mailAddress
          */
@@ -126,7 +126,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * mailAddressを設定する
+         * メールアドレスを設定する
          *
          * @param mailAddress
          *     メールアドレス
@@ -136,7 +136,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * deleteFlagを返す
+         * 削除フラグを返す
          *
          * @return deleteFlag
          */
@@ -145,7 +145,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * deleteFlagを設定する
+         * 削除フラグを設定する
          *
          * @param deleteFlag
          *     削除フラグ
@@ -155,7 +155,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * passwordExpireを返す
+         * パスワード有効期限を返す
          *
          * @return passwordExpire
          */
@@ -164,7 +164,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * passwordExpireを設定する
+         * パスワード有効期限を設定する
          *
          * @param passwordExpire
          *     パスワード有効期限
@@ -174,7 +174,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * remarksを返す
+         * 備考を返す
          *
          * @return remarks
          */
@@ -183,7 +183,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * remarksを設定する
+         * 備考を設定する
          *
          * @param remarks
          *     備考
@@ -193,7 +193,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * apiKeyを返す
+         * APIキーを返す
          *
          * @return apiKey
          */
@@ -202,7 +202,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * apiKeyを設定する
+         * APIキーを設定する
          *
          * @param apiKey
          *     APIキー
@@ -212,7 +212,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * regDateを返す
+         * 登録日時を返す
          *
          * @return regDate
          */
@@ -221,7 +221,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * regDateを設定する
+         * 登録日時を設定する
          *
          * @param regDate
          *     登録日時
@@ -231,7 +231,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * updateDateを返す
+         * 更新日時を返す
          *
          * @return updateDate
          */
@@ -240,7 +240,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * updateDateを設定する
+         * 更新日時を設定する
          *
          * @param updateDate
          *     更新日時
@@ -250,7 +250,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * headerFlagを返す
+         * ヘッダ利用有無フラグを返す
          *
          * @return headerFlag
          */
@@ -259,7 +259,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * headerFlagを設定する
+         * ヘッダ利用有無フラグを設定する
          *
          * @param headerFlag
          *     ヘッダ利用有無フラグ
@@ -269,7 +269,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * footerFlagを返す
+         * フッタ利用有無フラグを返す
          *
          * @return footerFlag
          */
@@ -278,7 +278,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * footerFlagを設定する
+         * フッタ利用有無フラグを設定する
          *
          * @param footerFlag
          *     フッタ利用有無フラグ
@@ -288,7 +288,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * maskFlagを返す
+         * マスク利用有無フラグを返す
          *
          * @return maskFlag
          */
@@ -297,7 +297,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * maskFlagを設定する
+         * マスク利用有無フラグを設定する
          *
          * @param maskFlag
          *     マスク利用有無フラグ
@@ -307,7 +307,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * enclosureCharFlagを返す
+         * 囲み文字利用有無フラグを返す
          *
          * @return enclosureCharFlag
          */
@@ -316,7 +316,7 @@ public class AccountListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * enclosureCharFlagを設定する
+         * 囲み文字利用有無フラグを設定する
          *
          * @param enclosureCharFlag
          *     囲み文字利用有無フラグ

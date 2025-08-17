@@ -2,10 +2,8 @@ package jp.co.ha.dashboard.healthinfo.form;
 
 import java.math.BigDecimal;
 
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-
 import jp.co.ha.common.log.annotation.Mask;
+import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
 
@@ -21,14 +19,12 @@ public class HealthInfoForm implements BaseForm {
     /** 身長 */
     @Mask
     @Required(message = "身長が未入力です")
-    @DecimalMin(value = "1", message = "身長が桁数不足です")
-    @DecimalMax(value = "999", message = "身長が桁数超過です")
+    @Decimal(min = "1", max = "300", message = "身長が不正な値です")
     private BigDecimal height;
     /** 体重 */
     @Mask
     @Required(message = "体重が未入力です")
-    @DecimalMin(value = "1", message = "体重が桁数不足です")
-    @DecimalMax(value = "999", message = "体重が桁数超過です")
+    @Decimal(min = "1", max = "300", message = "体重が不正な値です")
     private BigDecimal weight;
     /** BMI */
     @Mask
@@ -38,7 +34,7 @@ public class HealthInfoForm implements BaseForm {
     private BigDecimal standardWeight;
 
     /**
-     * seqHealthInfoIdを返す
+     * 健康情報IDを返す
      *
      * @return seqHealthInfoId
      */
@@ -47,7 +43,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * 健康情報IDを設定する
      *
      * @param seqHealthInfoId
      *     健康情報ID
@@ -57,7 +53,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -66,7 +62,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -76,7 +72,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -85,7 +81,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -95,7 +91,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -104,7 +100,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -114,7 +110,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -123,7 +119,7 @@ public class HealthInfoForm implements BaseForm {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重

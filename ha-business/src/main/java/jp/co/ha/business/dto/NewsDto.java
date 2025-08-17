@@ -142,7 +142,7 @@ public class NewsDto {
         private String name;
 
         /**
-         * colorを返す
+         * 色を返す
          *
          * @return color
          */
@@ -151,7 +151,7 @@ public class NewsDto {
         }
 
         /**
-         * colorを設定する
+         * 色を設定する
          *
          * @param color
          *     色
@@ -161,7 +161,7 @@ public class NewsDto {
         }
 
         /**
-         * nameを返す
+         * 名前を返す
          *
          * @return name
          */
@@ -170,7 +170,7 @@ public class NewsDto {
         }
 
         /**
-         * nameを設定する
+         * 名前を設定する
          *
          * @param name
          *     名前

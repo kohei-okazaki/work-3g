@@ -20,7 +20,7 @@ public class UserRecoveryMailAddressInputForm implements BaseForm {
     private String mailAddress;
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -29,7 +29,7 @@ public class UserRecoveryMailAddressInputForm implements BaseForm {
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス

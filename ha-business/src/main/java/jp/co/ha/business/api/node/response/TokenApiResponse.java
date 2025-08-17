@@ -18,7 +18,7 @@ public class TokenApiResponse extends BaseNodeApiResponse implements BaseApiResp
     private String token;
 
     /**
-     * tokenを返す
+     * トークンを返す
      *
      * @return token
      */
@@ -27,7 +27,7 @@ public class TokenApiResponse extends BaseNodeApiResponse implements BaseApiResp
     }
 
     /**
-     * tokenを設定する
+     * トークンを設定する
      *
      * @param token
      *     トークン

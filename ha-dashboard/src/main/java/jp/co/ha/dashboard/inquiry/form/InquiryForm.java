@@ -25,7 +25,7 @@ public class InquiryForm implements BaseForm {
     private String body;
 
     /**
-     * titleを返す
+     * 問い合わせ件名を返す
      * 
      * @return title
      */
@@ -34,7 +34,7 @@ public class InquiryForm implements BaseForm {
     }
 
     /**
-     * titleを設定する
+     * 問い合わせ件名を設定する
      * 
      * @param title
      *     問い合わせ件名
@@ -44,7 +44,7 @@ public class InquiryForm implements BaseForm {
     }
 
     /**
-     * typeを返す
+     * 問い合わせタイプを返す
      * 
      * @return type
      */
@@ -53,16 +53,17 @@ public class InquiryForm implements BaseForm {
     }
 
     /**
-     * typeを設定する
+     * 問い合わせタイプを設定する
      * 
      * @param type
+     *     問い合わせタイプ
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * bodyを返す
+     * 問い合わせ詳細内容を返す
      * 
      * @return body
      */
@@ -71,7 +72,7 @@ public class InquiryForm implements BaseForm {
     }
 
     /**
-     * bodyを設定する
+     * 問い合わせ詳細内容を設定する
      * 
      * @param body
      *     問い合わせ詳細内容
