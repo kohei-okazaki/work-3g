@@ -2,6 +2,7 @@ package jp.co.ha.root.contents.tools.response;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
@@ -18,10 +19,11 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
 
     /** 権限リスト */
     @JsonProperty("roles")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<Role> roles;
 
     /**
-     * rolesを返す
+     * 権限リストを返す
      *
      * @return roles
      */
@@ -30,7 +32,7 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * rolesを設定する
+     * 権限リストを設定する
      *
      * @param roles
      *     権限リスト
@@ -48,22 +50,24 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
 
         /** 権限名 */
         @JsonProperty("label")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         private String label;
         /** 値 */
         @JsonProperty("value")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         private String value;
 
         /**
-         * labelを返す
+         * 権限名を返す
          *
-         * @return label
+         * @return 権限名
          */
         public String getLabel() {
             return label;
         }
 
         /**
-         * labelを設定する
+         * 権限名を設定する
          *
          * @param label
          *     権限名
@@ -73,7 +77,7 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * valueを返す
+         * 値を返す
          *
          * @return value
          */
@@ -82,7 +86,7 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * valueを設定する
+         * 値を設定する
          *
          * @param value
          *     値

@@ -121,7 +121,7 @@ export default {
       libraryList: [
         {
           name: "Spring Boot",
-          version: "3.3.3",
+          version: "3.4.3",
           description: "健康管理ダッシュボード、健康管理API、管理者API、健康管理バッチで使用するSpring FW",
           projects: ["dashboard", "api", "root api", "batch"],
         },
@@ -133,13 +133,13 @@ export default {
         },
         {
           name: "AWS-SDK",
-          version: "1.12.190",
+          version: "2.31.78",
           description: "AWSのサービスを使うためのライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "Jackson",
-          version: "2.18.3",
+          version: "2.19.2",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
         },

@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,19 +13,8 @@ import java.util.Map.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.ClientConfigurationFactory;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
-import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
-import com.amazonaws.services.simpleemail.model.Body;
-import com.amazonaws.services.simpleemail.model.Content;
-import com.amazonaws.services.simpleemail.model.Destination;
-import com.amazonaws.services.simpleemail.model.MailFromDomainNotVerifiedException;
-import com.amazonaws.services.simpleemail.model.Message;
-import com.amazonaws.services.simpleemail.model.SendEmailRequest;
-import com.amazonaws.services.simpleemail.model.VerifyEmailIdentityRequest;
-import com.amazonaws.services.simpleemail.model.VerifyEmailIdentityResult;
-
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
@@ -31,9 +22,22 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
+import software.amazon.awssdk.http.SdkHttpClient;
+import software.amazon.awssdk.http.apache.ApacheHttpClient;
+import software.amazon.awssdk.services.ses.SesClient;
+import software.amazon.awssdk.services.ses.model.Body;
+import software.amazon.awssdk.services.ses.model.Content;
+import software.amazon.awssdk.services.ses.model.Destination;
+import software.amazon.awssdk.services.ses.model.MailFromDomainNotVerifiedException;
+import software.amazon.awssdk.services.ses.model.Message;
+import software.amazon.awssdk.services.ses.model.SendEmailRequest;
+import software.amazon.awssdk.services.ses.model.SendEmailResponse;
+import software.amazon.awssdk.services.ses.model.VerifyEmailIdentityRequest;
+import software.amazon.awssdk.services.ses.model.VerifyEmailIdentityResponse;
 
 /**
  * AWS-Simple Email ServiceのComponent
@@ -48,15 +52,21 @@ public class AwsSesComponent {
     /** 文字コード */
     private static final Charset CHARSET = Charset.UTF_8;
 
-    /** {@linkplain AwsConfig} */
+    /** AWS設定ファイル情報 */
     @Autowired
-    private AwsConfig awsConfig;
-    /** {@linkplain AwsAuthComponent} */
+    private AwsProperties awsProps;
+    /** システム設定ファイル情報 */
     @Autowired
-    private AwsAuthComponent awsAuthComponent;
-    /** {@linkplain AwsS3Component} */
+    private SystemProperties systemProps;
+    /** AWS認証情報Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsAuthComponent auth;
+    /** S3 Component */
+    @Autowired
+    private AwsS3Component s3;
+    /** FreeMarker設定 */
+    @Autowired
+    private Configuration freemarkerConfig;
 
     /**
      * 認証結果区分
@@ -144,6 +154,40 @@ public class AwsSesComponent {
     }
 
     /**
+     * メールキー
+     * 
+     * @version 1.0.0
+     */
+    public static enum MailTemplateKey implements BaseEnum {
+
+        /** 健康管理アプリパスワード再設定メールのテンプレートキー */
+        ACCOUNT_RECOVERY_TEMPLATE("account-recovery-template.ftl"),
+        /** 健康管理ヘルスチェックのテンプレートキー */
+        HEALTHINFO_CHECK_TEMPLATE("health-check-template.ftl"),
+        /** 健康情報登録完了メールのテンプレートキー */
+        HEALTHINFO_REGIST_TEMPLATE("healthinfo-regist-template.ftl");
+
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private MailTemplateKey(String value) {
+            this.value = value;
+        }
+
+        /** 値 */
+        private String value;
+
+        @Override
+        public String getValue() {
+            return this.value;
+        }
+
+    }
+
+    /**
      * Eメールアドレスの検証を行う
      *
      * @param mailAddress
@@ -152,23 +196,22 @@ public class AwsSesComponent {
      */
     public VerifyResultType verifyEmailAddress(String mailAddress) {
 
-        VerifyEmailIdentityRequest verifyEmailIdentityRequest = new VerifyEmailIdentityRequest();
-        // 検証用メールアドレス
-        verifyEmailIdentityRequest.setEmailAddress(mailAddress);
-        // AWS認証情報
-        verifyEmailIdentityRequest.setRequestCredentialsProvider(
-                awsAuthComponent.getAWSCredentialsProvider());
+        try (SesClient sesClient = getSesClient()) {
+            VerifyEmailIdentityRequest request = VerifyEmailIdentityRequest.builder()
+                    .emailAddress(mailAddress)
+                    .build();
 
-        VerifyEmailIdentityResult result = getAmazonSES()
-                .verifyEmailIdentity(verifyEmailIdentityRequest);
+            VerifyEmailIdentityResponse response = sesClient.verifyEmailIdentity(request);
 
-        VerifyResultType res = StringUtil.isEmpty(
-                result.getSdkResponseMetadata().getRequestId()) ? VerifyResultType.STILL
-                        : VerifyResultType.AUTHED;
+            VerifyResultType res = StringUtil
+                    .isEmpty(response.responseMetadata().requestId())
+                            ? VerifyResultType.STILL
+                            : VerifyResultType.AUTHED;
 
-        LOG.debug("認証メール送信完了 認証結果=" + res);
+            LOG.debug("認証メール送信完了 認証結果=" + res);
 
-        return res;
+            return res;
+        }
     }
 
     /**
@@ -224,8 +267,8 @@ public class AwsSesComponent {
      * @throws BaseException
      *     メール送信に失敗した場合
      */
-    public EmailSendResultType sendMail(String to, String titleText, AwsS3Key s3Key,
-            Map<String, String> bodyMap) throws BaseException {
+    public EmailSendResultType sendMail(String to, String titleText,
+            MailTemplateKey s3Key, Map<String, String> bodyMap) throws BaseException {
         return sendMail(to, titleText, s3Key.getValue(), bodyMap);
     }
 
@@ -247,28 +290,34 @@ public class AwsSesComponent {
     public EmailSendResultType sendMail(String to, String titleText, String templateId,
             Map<String, String> bodyMap) throws BaseException {
 
-        if (awsConfig.isSesStubFlag()) {
-            // 料金節約のため、SESを利用しない場合メールは送信しない
+        if (awsProps.isSesStubFlag()) {
             return EmailSendResultType.NOT_SEND;
         }
 
-        try {
+        try (SesClient sesClient = getSesClient()) {
 
-            LOG.debug("Amazon SES region=" + awsConfig.getRegion().getName()
+            LOG.debug("Amazon SES region=" + awsProps.getRegion().id()
                     + ",to_mail_address=" + to);
-            Destination destination = new Destination().withToAddresses(to)
-                    .withBccAddresses(awsConfig.getMailAddress());
+
+            Destination destination = Destination.builder()
+                    .toAddresses(to)
+                    .bccAddresses(systemProps.getSystemMailAddress())
+                    .build();
 
             Body body = getBody(templateId, bodyMap);
-            Message message = new Message().withSubject(getContent(titleText))
-                    .withBody(body);
+            Message message = Message.builder()
+                    .subject(getContent(titleText))
+                    .body(body)
+                    .build();
 
-            SendEmailRequest request = new SendEmailRequest()
-                    .withSource(awsConfig.getMailAddress()).withDestination(destination)
-                    .withMessage(message).withRequestCredentialsProvider(
-                            awsAuthComponent.getAWSCredentialsProvider());
+            SendEmailRequest request = SendEmailRequest.builder()
+                    .source(systemProps.getSystemMailAddress())
+                    .destination(destination)
+                    .message(message)
+                    .build();
 
-            getAmazonSES().sendEmail(request);
+            SendEmailResponse response = sesClient.sendEmail(request);
+            LOG.debug("SES response ID=" + response.messageId());
 
             return EmailSendResultType.SUCCESS;
 
@@ -280,27 +329,37 @@ public class AwsSesComponent {
     }
 
     /**
-     * {@linkplain AmazonSimpleEmailService} を返す
-     *
-     * @return AmazonSimpleEmailService
+     * {@linkplain SesClient}を返す
+     * 
+     * @return SesClient
      */
-    public AmazonSimpleEmailService getAmazonSES() {
-        return AmazonSimpleEmailServiceClientBuilder
-                .standard()
-                .withCredentials(awsAuthComponent.getAWSCredentialsProvider())
-                .withClientConfiguration(getClientConfiguration())
-                .withRegion(awsConfig.getRegion())
+    private SesClient getSesClient() {
+
+        // HttpClient にタイムアウトを設定する
+        SdkHttpClient httpClient = ApacheHttpClient.builder()
+                .connectionTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
+                .socketTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
+                .build();
+
+        return SesClient.builder()
+                .region(awsProps.getRegion())
+                .credentialsProvider(auth.getAWSCredentialsProvider())
+                .httpClient(httpClient)
                 .build();
     }
 
     /**
-     * {@linkplain ClientConfiguration}を返す
+     * {@linkplain Content}を返す
      *
-     * @return ClientConfiguration
+     * @param text
+     *     本文
+     * @return Content
      */
-    private ClientConfiguration getClientConfiguration() {
-        return new ClientConfigurationFactory().getConfig()
-                .withConnectionTimeout(awsConfig.getSesTimeout());
+    private Content getContent(String text) {
+        return Content.builder()
+                .charset(CHARSET.getValue())
+                .data(text)
+                .build();
     }
 
     /**
@@ -317,19 +376,49 @@ public class AwsSesComponent {
     private Body getBody(String templateId, Map<String, String> bodyMap)
             throws BaseException {
 
-        String bodyText = replace(getBodyTemplate(templateId), bodyMap);
-        return new Body().withHtml(getContent(bodyText));
+        if (StringUtil.isEmpty(templateId)) {
+            // テンプレートIDが未指定の場合
+            // TODO エラーコードは別途発番
+            throw new SystemException(CommonErrorCode.RUNTIME_ERROR,
+                    "メールテンプレートIDが未指定です。");
+        }
+
+        try {
+            StringWriter stringWriter = new StringWriter();
+
+            Template template = freemarkerConfig.getTemplate(templateId);
+            template.process(bodyMap, stringWriter);
+
+            return Body.builder()
+                    .html(getContent(stringWriter.toString()))
+                    .build();
+
+        } catch (Exception e) {
+            throw new SystemException(e);
+        }
+
     }
 
     /**
-     * {@linkplain Content}を返す
+     * {@linkplain Body}を返す
      *
-     * @param text
-     *     本文
-     * @return Content
+     * @param templateId
+     *     テンプレートID
+     * @param bodyMap
+     *     メール本文の置換用Map
+     * @return Body
+     * @throws BaseException
+     *     メールテンプレートの取得に失敗した場合
      */
-    private Content getContent(String text) {
-        return new Content().withCharset(CHARSET.getValue()).withData(text);
+    @Deprecated
+    private Body getBodyFromS3(String templateId, Map<String, String> bodyMap)
+            throws BaseException {
+
+        String bodyText = replace(getBodyTemplateFromS3(templateId), bodyMap);
+
+        return Body.builder()
+                .html(getContent(bodyText))
+                .build();
     }
 
     /**
@@ -341,9 +430,10 @@ public class AwsSesComponent {
      * @throws BaseException
      *     メールテンプレートの取得に失敗した場合
      */
-    private String getBodyTemplate(String templateId) throws BaseException {
+    @Deprecated
+    private String getBodyTemplateFromS3(String templateId) throws BaseException {
 
-        try (InputStream is = awsS3Component.getS3ObjectByKey(templateId);
+        try (InputStream is = s3.getS3ObjectByKey(templateId);
                 BufferedReader br = new BufferedReader(
                         new InputStreamReader(is, CHARSET.getValue()))) {
 

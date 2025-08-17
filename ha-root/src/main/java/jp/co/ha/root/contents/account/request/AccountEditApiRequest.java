@@ -7,12 +7,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import jp.co.ha.common.validator.annotation.Future;
+import jp.co.ha.common.validator.annotation.MailAddress;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
 /**
- * アカウント情報編集APIリクエスト
+ * ユーザ情報編集APIリクエスト
  *
  * @version 1.0.0
  */
@@ -21,16 +23,18 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     /** メールアドレス */
     @JsonProperty("mail_address")
     @Required(message = "mail_address is required")
+    @MailAddress(message = "invalid mail_address format")
     private String mailAddress;
     /** パスワード有効期限 */
     @JsonProperty("password_expire")
     @Required(message = "password_expire is required")
+    @Future(message = "password_expire is must be future")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
     private LocalDate passwordExpire;
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -39,7 +43,7 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス
@@ -49,7 +53,7 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     }
 
     /**
-     * passwordExpireを返す
+     * パスワード有効期限を返す
      *
      * @return passwordExpire
      */
@@ -58,7 +62,7 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     }
 
     /**
-     * passwordExpireを設定する
+     * パスワード有効期限を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限

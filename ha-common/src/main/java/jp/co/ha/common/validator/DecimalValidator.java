@@ -1,11 +1,13 @@
 package jp.co.ha.common.validator;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import jp.co.ha.common.type.RegexType;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.annotation.Decimal;
 
 /**
@@ -14,42 +16,47 @@ import jp.co.ha.common.validator.annotation.Decimal;
  * @see jp.co.ha.common.validator.annotation.Decimal
  * @version 1.0.0
  */
-public class DecimalValidator implements ConstraintValidator<Decimal, Object> {
+public class DecimalValidator implements ConstraintValidator<Decimal, Number> {
 
-    /** 最小桁数 */
-    private int min;
-    /** 最大桁数 */
-    private int max;
-    /** 最小桁数で同値含むか */
+    /** LOG */
+    private static final Logger LOG = LoggerFactory.getLogger(DecimalValidator.class);
+
+    /** 最小値 */
+    private BigDecimal min;
+    /** 最大値 */
+    private BigDecimal max;
+    /** 最小値で同値含むか */
     private boolean minEqual;
-    /** 最大桁数で同値含むか */
+    /** 最大値で同値含むか */
     private boolean maxEqual;
 
     @Override
     public void initialize(Decimal annotation) {
-        this.min = annotation.min();
-        this.max = annotation.max();
+        // アノテーションで設定された値をBigDecimalに変換
+        this.min = new BigDecimal(annotation.min());
+        this.max = new BigDecimal(annotation.max());
         this.minEqual = annotation.minEqual();
         this.maxEqual = annotation.maxEqual();
     }
 
     @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
+    public boolean isValid(Number value, ConstraintValidatorContext context) {
+        if (BeanUtil.isNull(value)) {
+            // nullはチェック対象外
             return true;
         }
-        if (RegexType.DECIMAL.is(value.toString())) {
-            int length = value.toString().replace(".", "").length();
-            if (minEqual && maxEqual) {
-                return (min <= length) && (length <= max);
-            } else if (minEqual) {
-                return (min <= length) && (length < max);
-            } else if (maxEqual) {
-                return (min < length) && (length <= max);
-            } else {
-                return (min < length) && (length < max);
-            }
-        } else {
+
+        try {
+            BigDecimal val = new BigDecimal(value.toString());
+
+            boolean minCheck = minEqual ? (val.compareTo(min) >= 0)
+                    : (val.compareTo(min) > 0);
+            boolean maxCheck = maxEqual ? (val.compareTo(max) <= 0)
+                    : (val.compareTo(max) < 0);
+
+            return minCheck && maxCheck;
+        } catch (NumberFormatException e) {
+            LOG.error("数値以外のフィールドに@Decimalが指定されています。", e);
             return false;
         }
     }

@@ -5,14 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -26,7 +24,7 @@ import jp.co.ha.root.contents.account.request.AccountListApiRequest;
 import jp.co.ha.root.contents.account.response.AccountListApiResponse;
 
 /**
- * アカウント情報一覧取得APIコントローラ
+ * ユーザ情報一覧取得APIコントローラ
  *
  * @version 1.0.0
  */
@@ -34,26 +32,26 @@ import jp.co.ha.root.contents.account.response.AccountListApiResponse;
 public class AccountListApiController
         extends BaseRootApiController<AccountListApiRequest, AccountListApiResponse> {
 
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** ユーザ検索サービス */
     @Autowired
-    private AccountSearchService service;
+    private UserSearchService service;
 
     /**
-     * アカウント情報一覧取得
+     * ユーザ情報一覧取得
      *
      * @param request
-     *     アカウント情報一覧取得APIリクエスト
+     *     ユーザ情報一覧取得APIリクエスト
      * @param page
      *     取得対象ページ
-     * @return アカウント情報一覧取得APIレスポンス
+     * @return ユーザ情報一覧取得APIレスポンス
      */
-    @GetMapping(value = "account", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "account")
     public ResponseEntity<AccountListApiResponse> list(AccountListApiRequest request,
-            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page) {
+            @RequestParam(name = "page", defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page) {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
-                applicationProperties.getPage());
+                applicationProperties.getAccountPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
                 .orderBy("SEQ_USER_ID", SortType.DESC)
@@ -67,6 +65,15 @@ public class AccountListApiController
                     BeanUtil.copy(e, response);
                     response.setDeleteFlag(e.isDeleteFlag() ? CommonFlag.TRUE.getValue()
                             : CommonFlag.FALSE.getValue());
+                    response.setHeaderFlag(e.isHeaderFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
+                    response.setFooterFlag(e.isFooterFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
+                    response.setMaskFlag(e.isMaskFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
+                    response.setEnclosureCharFlag(
+                            e.isEnclosureCharFlag() ? CommonFlag.TRUE.getValue()
+                                    : CommonFlag.FALSE.getValue());
                     return response;
                 }).collect(Collectors.toList());
 

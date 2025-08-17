@@ -18,7 +18,7 @@ public enum RegexType implements BaseEnum {
     /** URL */
     URL("http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?"),
     /** メールアドレス */
-    MAIL_ADDRESS("[A-Za-z0-9._+]+@[A-Za-z]+.[A-Za-z]"),
+    MAIL_ADDRESS("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$"),
     /** フラグ */
     FLAG("[01]"),
     /** 浮動小数 */

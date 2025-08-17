@@ -22,7 +22,6 @@ import jp.co.ha.business.api.aws.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
 import jp.co.ha.business.io.file.csv.writer.MonthlyHealthInfoSummaryCsvWriter;
@@ -61,18 +60,18 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
     /** 処理対象年月 */
     @Value("#{jobParameters[m]}")
     private String targetDate;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService searchService;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** {@linkplain AwsS3Component} */
+    /** AWS-S3 Component */
     @Autowired
     private AwsS3Component s3;
-    /** {@linkplain SlackApiComponent} */
+    /** Slack Component */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -94,11 +93,11 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         s3.putFile(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName(), csv);
 
         // Slack通知
-        slackApiComponent.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
+        slack.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
                 + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName());
 
         // Slack通知
-        slackApiComponent.send(ContentType.BATCH,
+        slack.send(ContentType.BATCH,
                 "monthly_health_info_summary_batch success.");
 
         return RepeatStatus.FINISHED;

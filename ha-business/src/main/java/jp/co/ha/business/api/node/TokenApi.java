@@ -29,6 +29,7 @@ public class TokenApi extends BaseApi<TokenApiRequest, TokenApiResponse> {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getApiName() {
         return NodeApiType.TOKEN.getApiNameType().getValue();
     }

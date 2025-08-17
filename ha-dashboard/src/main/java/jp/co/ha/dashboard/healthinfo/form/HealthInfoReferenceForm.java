@@ -1,11 +1,13 @@
 package jp.co.ha.dashboard.healthinfo.form;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jp.co.ha.common.type.RegexType;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
-import jp.co.ha.common.validator.annotation.Date;
+import jp.co.ha.common.validator.LengthMode;
 import jp.co.ha.common.validator.annotation.Flag;
-import jp.co.ha.common.validator.annotation.Max;
-import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
@@ -19,19 +21,20 @@ public class HealthInfoReferenceForm implements BaseForm {
 
     /** 健康情報ID */
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "健康情報IDは半角数字で入力してください")
-    @Min(size = 1, message = "健康情報IDは1桁以上で入力してください")
-    @Max(size = 8, message = "健康情報IDは8桁以下で入力してください")
+    @Length(length = 1, mode = LengthMode.GREATER_EQUAL, message = "健康情報IDは1桁以上で入力してください")
+    @Length(length = 8, mode = LengthMode.LESS_EQUAL, message = "健康情報IDは8桁以下で入力してください")
     private String seqHealthInfoId;
     /** 健康情報作成日直接指定フラグ */
     @Required(message = "健康情報作成日直接指定フラグが未入力です")
     @Flag(message = "健康情報作成日直接指定フラグの値が不正です")
     private String healthInfoRegDateSelectFlag;
     /** 健康情報作成日(開始) */
-    @Date(formatType = DateFormatType.YYYYMMDD, message = "健康情報作成日(開始)はyyyy/mm/dd形式で入力してください")
-    private String fromHealthInfoRegDate;
+    @Required(message = "健康情報作成日が未入力です")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fromHealthInfoRegDate;
     /** 健康情報作成日(終了) */
-    @Date(formatType = DateFormatType.YYYYMMDD, message = "健康情報作成日(終了)はyyyy/mm/dd形式で入力してください")
-    private String toHealthInfoRegDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate toHealthInfoRegDate;
 
     /**
      * seqHealthInfoIdを返す
@@ -76,7 +79,7 @@ public class HealthInfoReferenceForm implements BaseForm {
      *
      * @return fromHealthInfoRegDate
      */
-    public String getFromHealthInfoRegDate() {
+    public LocalDate getFromHealthInfoRegDate() {
         return fromHealthInfoRegDate;
     }
 
@@ -86,7 +89,7 @@ public class HealthInfoReferenceForm implements BaseForm {
      * @param fromHealthInfoRegDate
      *     健康情報作成日(開始)
      */
-    public void setFromHealthInfoRegDate(String fromHealthInfoRegDate) {
+    public void setFromHealthInfoRegDate(LocalDate fromHealthInfoRegDate) {
         this.fromHealthInfoRegDate = fromHealthInfoRegDate;
     }
 
@@ -95,7 +98,7 @@ public class HealthInfoReferenceForm implements BaseForm {
      *
      * @return toHealthInfoRegDate
      */
-    public String getToHealthInfoRegDate() {
+    public LocalDate getToHealthInfoRegDate() {
         return toHealthInfoRegDate;
     }
 
@@ -105,7 +108,7 @@ public class HealthInfoReferenceForm implements BaseForm {
      * @param toHealthInfoRegDate
      *     健康情報作成日(終了)
      */
-    public void setToHealthInfoRegDate(String toHealthInfoRegDate) {
+    public void setToHealthInfoRegDate(LocalDate toHealthInfoRegDate) {
         this.toHealthInfoRegDate = toHealthInfoRegDate;
     }
 

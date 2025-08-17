@@ -17,18 +17,48 @@ public class LengthValidator implements ConstraintValidator<Length, Object> {
 
     /** length */
     private int length;
+    /** mode */
+    private LengthMode mode;
 
     @Override
     public void initialize(Length annotation) {
         this.length = annotation.length();
+        this.mode = annotation.mode();
     }
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+
         if (BeanUtil.isNull(value) || StringUtil.isEmpty(value.toString())) {
             return true;
         }
-        return value.toString().length() == length;
+
+        int actualLength = value.toString().length();
+
+        switch (mode) {
+        case EQUAL:
+            // 一致
+            return actualLength == length;
+
+        case LESS_EQUAL:
+            // 以下
+            return actualLength <= length;
+
+        case GREATER_EQUAL:
+            // 以上
+            return actualLength >= length;
+
+        case LESS_THAN:
+            // 未満
+            return actualLength < length;
+
+        case GREATER_THAN:
+            // より大きい
+            return actualLength > length;
+
+        default:
+            return false;
+        }
     }
 
 }

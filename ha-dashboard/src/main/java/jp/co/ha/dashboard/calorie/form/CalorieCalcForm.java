@@ -23,8 +23,6 @@ public class CalorieCalcForm implements BaseForm {
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "年齢は半角数字で入力して下さい")
     private Integer age;
     /** 性別 */
-    @Required(message = "性別が未入力です")
-    @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "性別の値が不正です")
     private String gender;
     /** 身長 */
     @Mask

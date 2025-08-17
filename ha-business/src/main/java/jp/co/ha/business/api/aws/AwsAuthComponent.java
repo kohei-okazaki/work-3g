@@ -3,14 +3,13 @@ package jp.co.ha.business.api.aws;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.InstanceProfileCredentialsProvider;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.BeanUtil;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 
 /**
  * AWS認証情報のComponent<br>
@@ -21,33 +20,33 @@ import jp.co.ha.common.util.BeanUtil;
 @Component
 public class AwsAuthComponent {
 
-    /** {@linkplain SystemConfig} */
+    /** システム設定ファイル情報 */
     @Autowired
-    private SystemConfig systemConfig;
+    private SystemProperties systemProps;
 
     /**
-     * システムプロパティ.環境より、以下の{@linkplain AWSCredentialsProvider}インスタンスを返す<br>
+     * システム設定ファイル情報.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
      * <ul>
      * <li>ローカル環境の場合、{@linkplain ProfileCredentialsProvider}</li>
      * <li>dev1環境の場合、{@linkplain InstanceProfileCredentialsProvider}</li>
      * </ul>
      *
-     * @return AWSCredentialsProvider
+     * @return AwsCredentialsProvider
      */
-    public AWSCredentialsProvider getAWSCredentialsProvider() {
+    public AwsCredentialsProvider getAWSCredentialsProvider() {
 
-        if (BeanUtil.notNull(systemConfig.getEnvironment())) {
-            switch (systemConfig.getEnvironment()) {
+        if (BeanUtil.notNull(systemProps.getEnvironment())) {
+            switch (systemProps.getEnvironment()) {
             case LOCAL:
-                return new ProfileCredentialsProvider();
+                return ProfileCredentialsProvider.create();
             case DEV1:
-                return new InstanceProfileCredentialsProvider(false);
+                return InstanceProfileCredentialsProvider.create();
             }
         }
 
         // システムプロパティの環境がNullや実行可能環境でない場合
         throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                "環境情報の設定が不正です。env=" + systemConfig.getEnvironment());
+                "環境情報の設定が不正です。env=" + systemProps.getEnvironment());
     }
 
 }

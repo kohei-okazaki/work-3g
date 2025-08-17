@@ -17,7 +17,7 @@ import jp.co.ha.db.mapper.RootUserNoteInfoMapper;
 @Service
 public class RootUserNoteInfoCreateServiceImpl implements RootUserNoteInfoCreateService {
 
-    /** {@linkplain RootUserNoteInfoMapper} */
+    /** 管理者サイトユーザメモ情報Mapper */
     @Autowired
     private RootUserNoteInfoMapper mapper;
 

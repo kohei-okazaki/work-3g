@@ -15,3 +15,9 @@ spring:
       add-mappings: false
   thymeleaf:
     check-template-location: false
+  freemarker:
+    template-loader-path: classpath:/templates/mail-templates/
+    default-encoding: UTF-8
+    suffix: .ftl
+    charset: UTF-8
+    cache: false

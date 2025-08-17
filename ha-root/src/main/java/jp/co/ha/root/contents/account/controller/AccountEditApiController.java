@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.update.AccountUpdateService;
-import jp.co.ha.business.db.crud.update.impl.AccountUpdateServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.User;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.account.request.AccountEditApiRequest;
 import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 
 /**
- * アカウント情報編集APIコントローラ
+ * ユーザ情報編集APIコントローラ
  *
  * @version 1.0.0
  */
@@ -28,20 +28,23 @@ import jp.co.ha.root.contents.account.response.AccountEditApiResponse;
 public class AccountEditApiController
         extends BaseRootApiController<AccountEditApiRequest, AccountEditApiResponse> {
 
-    /** {@linkplain AccountUpdateServiceImpl} */
+    /** ユーザ検索サービス */
     @Autowired
-    private AccountUpdateService updateService;
+    private UserSearchService searchService;
+    /** ユーザ情報更新サービス */
+    @Autowired
+    private UserUpdateService updateService;
 
     /**
-     * アカウント情報編集処理
+     * ユーザ情報編集処理
      *
      * @param seqUserId
      *     ユーザID
      * @param request
-     *     アカウント情報編集APIリクエスト
-     * @return アカウント情報編集APIレスポンス
+     *     ユーザ情報編集APIリクエスト
+     * @return ユーザ情報編集APIレスポンス
      * @throws BaseException
-     *     アカウント情報の編集に失敗した場合
+     *     ユーザ情報の編集に失敗した場合
      */
     @PutMapping(value = "account/{seq_user_id}", produces = {
             MediaType.APPLICATION_JSON_VALUE })
@@ -49,12 +52,16 @@ public class AccountEditApiController
             @PathVariable(name = "seq_user_id", required = true) Long seqUserId,
             @Valid @RequestBody AccountEditApiRequest request) throws BaseException {
 
-        // TODO 存在チェック
+        if (!searchService.findById(seqUserId).isPresent()) {
+            // 指定したユーザIDのuserが存在しない場合
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("acount is not found"));
+        }
 
-        Account entity = new Account();
+        User entity = new User();
         BeanUtil.copy(request, entity);
         entity.setSeqUserId(seqUserId);
-        updateService.updateSelective(entity);
+        updateService.updateById(entity);
 
         return ResponseEntity.ok(getSuccessResponse());
     }

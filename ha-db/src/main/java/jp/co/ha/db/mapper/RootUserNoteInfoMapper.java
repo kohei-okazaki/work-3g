@@ -9,6 +9,11 @@ import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.db.entity.RootUserNoteInfoExample;
 import jp.co.ha.db.entity.RootUserNoteInfoKey;
 
+/**
+ * 管理者サイトユーザメモ情報Mapper
+ *
+ * @version 1.0.0
+ */
 public interface RootUserNoteInfoMapper {
 
     /**

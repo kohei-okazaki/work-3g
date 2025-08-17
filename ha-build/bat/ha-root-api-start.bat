@@ -15,8 +15,7 @@ call maven-build.bat local
 
 rem root api server start
 cd ../../ha-root
-rem TODO 「ファイル名、拡張子が長すぎる」で怒られる
-mvn spring-boot:run -Dmaven.test.skip=true -Plocal
+mvn spring-boot:run -Dmaven.test.skip=true -Plocal -Dspring-boot.run.profiles=local
 
 cd %~dp0
 

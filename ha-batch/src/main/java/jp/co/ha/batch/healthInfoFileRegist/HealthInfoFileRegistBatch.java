@@ -21,8 +21,7 @@ import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -34,8 +33,8 @@ import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
+import jp.co.ha.db.entity.User;
 
 /**
  * 健康情報一括登録を実行するバッチ
@@ -46,22 +45,22 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Component
 public class HealthInfoFileRegistBatch implements Tasklet {
 
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** {@linkplain HealthInfoRegistApi} */
+    /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi api;
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
-    private AccountSearchService accountSearchService;
-    /** {@linkplain ApiCommunicationDataComponent} */
+    private UserSearchService userSearchService;
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain SlackApiComponent} */
+    /** Slack Component */
     @Autowired
-    private SlackApiComponent slackApiComponent;
-    /** {@linkplain BeanValidator} */
+    private SlackApiComponent slack;
+    /** 妥当性チェックValidator */
     @Autowired
     private BeanValidator<HealthInfoRegistApiRequest> validator;
 
@@ -108,15 +107,15 @@ public class HealthInfoFileRegistBatch implements Tasklet {
                 }
             }
 
-            // アカウント情報.APIキーを設定
-            Account account = accountSearchService.findById(request.getSeqUserId())
+            // ユーザ情報.APIキーを設定
+            User user = userSearchService.findById(request.getSeqUserId())
                     .orElseThrow(() -> {
                         return new BusinessException(CommonErrorCode.DB_NO_DATA,
-                                "アカウント情報が存在しません.seq_user_id=" + request.getSeqUserId());
+                                "ユーザ情報が存在しません. seq_user_id=" + request.getSeqUserId());
                     });
 
             ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                    .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
+                    .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                     .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
                             + request.getSeqUserId() + "/healthinfo");
 
@@ -152,7 +151,7 @@ public class HealthInfoFileRegistBatch implements Tasklet {
 
         StringJoiner sj = new StringJoiner("\r\n");
         seqHealthInfoIdList.stream().forEach(e -> sj.add(e.toString()));
-        slackApiComponent.send(ContentType.BATCH, sj.toString());
+        slack.send(ContentType.BATCH, sj.toString());
     }
 
 }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+<title>問い合わせ画面</title>
+<link>
+</head>
+<body>
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">✅ 問い合わせ確認</h4>
+          </div>
+
+          <div class="card-body bg-white">
+            <p>以下で問い合わせ情報を登録します。</p>
+            <p>訂正があればブラウザバックし、再度入力お願いします。</p>
+
+            <form th:action="@{/inquiry/complete}" method="post" th:object="${inquiryForm}">
+              <table class="table table-bordered mb-4">
+                <thead class="thead-light">
+                  <tr>
+                    <th colspan="2" class="text-center">
+                      <h5 class="mb-0">問い合わせ情報</h5>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="w-25 bg-light" th:text="#{inquiryTitle}">件名</th>
+                    <td th:text="*{title}"></td>
+                  </tr>
+                  <tr>
+                    <th class="w-25 bg-light" th:text="#{inquiryType}">問い合わせカテゴリー</th>
+                    <td th:text="*{type}"></td>
+                  </tr>
+                  <tr>
+                    <th class="w-25 bg-light" th:text="#{inquiryBody}">問い合わせ内容</th>
+                    <td th:text="*{body}"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- ボタン -->
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success w-45">確 定</button>
+                <button type="button" class="btn btn-secondary w-45" onclick="history.back()">戻 る</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -17,7 +17,7 @@ import jp.co.ha.db.mapper.NewsInfoMapper;
 @Service
 public class NewsInfoDeleteServiceImpl implements NewsInfoDeleteService {
 
-    /** {@linkplain NewsInfoMapper} */
+    /** お知らせ情報Mapper */
     @Autowired
     private NewsInfoMapper mapper;
 

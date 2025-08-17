@@ -18,7 +18,7 @@ import jp.co.ha.db.mapper.RootUserRoleDetailMtMapper;
 public class RootUserRoleDetailMtCreateServiceImpl
         implements RootUserRoleDetailMtCreateService {
 
-    /** {@linkplain RootUserRoleDetailMtMapper} */
+    /** 管理者サイトユーザ権限詳細マスタMapper */
     @Autowired
     private RootUserRoleDetailMtMapper mapper;
 

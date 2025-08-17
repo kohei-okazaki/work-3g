@@ -32,15 +32,15 @@ public class WebSecurityConfig {
     private static final String[] AUTH_IGNORE_URL = new String[] { "/api/root/login",
             "/api/root/user", "/api/root/healthcheck" };
 
-    /** {@linkplain AuthServiceImpl} */
+    /** 認証サービス */
     @Autowired
     @Qualifier("authService")
     private UserDetailsService userDetailsService;
-    /** {@linkplain PasswordEncoderImpl} */
+    /** パスワードEncoder */
     @Autowired
     @Qualifier("passwordEncoderImpl")
     private PasswordEncoder passwordEncoder;
-    /** {@linkplain ApplicationProperties} */
+    /** アプリケーション設定ファイル */
     @Autowired
     private ApplicationProperties applicationProperties;
 

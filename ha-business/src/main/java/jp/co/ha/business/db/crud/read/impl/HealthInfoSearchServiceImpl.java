@@ -22,20 +22,20 @@ import jp.co.ha.db.mapper.composite.CompositeHealthInfoMapper;
 import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
 
 /**
- * 健康情報検索サービスインターフェース実装クラス
+ * 健康情報検索サービス実装クラス
  *
  * @version 1.0.0
  */
 @Service
 public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
 
-    /** {@linkplain HealthInfoMapper} */
+    /** 健康情報Mapper */
     @Autowired
     private HealthInfoMapper mapper;
-    /** {@linkplain CompositeHealthInfoMapper} */
+    /** 健康情報とBMI範囲マスタの複合Mapper */
     @Autowired
     private CompositeHealthInfoMapper compositeHealthInfoMapper;
-    /** {@linkplain CompositeMonthlyMapper} */
+    /** 月ごとの健康情報Mapper */
     @Autowired
     private CompositeMonthlyMapper compositeMonthlyMapper;
 

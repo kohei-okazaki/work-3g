@@ -23,7 +23,7 @@ public class UserEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     private String confPassword;
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -32,7 +32,7 @@ public class UserEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -42,7 +42,7 @@ public class UserEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * confPasswordを返す
+     * 確認用パスワードを返す
      *
      * @return confPassword
      */
@@ -51,7 +51,7 @@ public class UserEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * confPasswordを設定する
+     * 確認用パスワードを設定する
      *
      * @param confPassword
      *     確認用パスワード

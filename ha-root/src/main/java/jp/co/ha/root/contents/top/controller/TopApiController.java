@@ -6,16 +6,13 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
@@ -39,10 +36,10 @@ public class TopApiController
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(TopApiController.class);
 
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** ユーザ検索サービス */
     @Autowired
-    private AccountSearchService accountSearchService;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    private UserSearchService userSearchService;
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
 
@@ -55,7 +52,7 @@ public class TopApiController
      *     対象年月
      * @return Top情報取得APIレスポンス
      */
-    @GetMapping(value = "top", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "top")
     public ResponseEntity<TopApiResponse> top(TopApiRequest request,
             @RequestParam(name = "date", required = false) String date) {
 
@@ -72,7 +69,7 @@ public class TopApiController
         }
 
         TopApiResponse response = getSuccessResponse();
-        response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
+        response.setAccountRegGraphList(userSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
                     RegGraph graph = new RegGraph();
@@ -99,7 +96,7 @@ public class TopApiController
      *     対象年月
      * @return Top情報取得APIレスポンス
      */
-    @GetMapping(value = "top/healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "top/healthinfo")
     public ResponseEntity<TopApiResponse> healthinfo(TopApiRequest request,
             @RequestParam(name = "date", required = false) String date) {
 
@@ -128,7 +125,7 @@ public class TopApiController
     }
 
     /**
-     * Top情報(アカウント情報)取得
+     * Top情報(ユーザ情報)取得
      *
      * @param request
      *     Top情報取得APIリクエスト
@@ -136,7 +133,7 @@ public class TopApiController
      *     対象年月
      * @return Top情報取得APIレスポンス
      */
-    @GetMapping(value = "top/account", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "top/account")
     public ResponseEntity<TopApiResponse> account(TopApiRequest request,
             @RequestParam(name = "date", required = false) String date) {
 
@@ -153,7 +150,7 @@ public class TopApiController
         }
 
         TopApiResponse response = getSuccessResponse();
-        response.setAccountRegGraphList(accountSearchService.findMonthly(from, to)
+        response.setAccountRegGraphList(userSearchService.findMonthly(from, to)
                 .stream()
                 .map(e -> {
                     RegGraph graph = new RegGraph();
@@ -208,7 +205,7 @@ public class TopApiController
      */
     private LocalDate getDate(String date) {
         if (StringUtil.isEmpty(date)) {
-            DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
+            return DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         }
         return DateTimeUtil.toLocalDate(date + "01",
                 DateFormatType.YYYYMMDD_NOSEP_STRICT);

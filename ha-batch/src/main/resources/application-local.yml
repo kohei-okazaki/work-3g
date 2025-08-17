@@ -1,7 +1,9 @@
 spring:
-  # DB設定(ha-dbの設定が取れないためここで定義)
-  datasource: 
-    url: jdbc:mysql://localhost:3306/work3g
-    username: root
-    password: admin
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  # 設定ファイル読込
+  config:
+    import:
+      - "classpath:/local/crypt.properties"
+      - "classpath:/local/jdbc.properties"
+      - "classpath:/local/system.properties"
+      - "classpath:/local/aws.properties"
+      - "classpath:/local/healthInfo.properties"

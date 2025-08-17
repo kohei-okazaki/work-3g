@@ -1,0 +1,9 @@
+spring:
+  # 設定ファイル読込
+  config:
+    import:
+      - "classpath:/dev1/crypt.properties"
+      - "classpath:/dev1/jdbc.properties"
+      - "classpath:/dev1/system.properties"
+      - "classpath:/dev1/aws.properties"
+      - "classpath:/dev1/healthInfo.properties"

@@ -16,7 +16,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
- * トークン発行APIのコンポーネントクラス<br>
+ * トークン発行APIのComponentクラス<br>
  * APIクラスを直接呼ばずに本クラスを経由して呼び出すこと
  *
  * @version 1.0.0
@@ -24,13 +24,13 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Component
 public class TokenApiComponent {
 
-    /** {@linkplain TokenApi} */
+    /** トークン発行API */
     @Autowired
     private TokenApi tokenApi;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiDataComponent;
 
@@ -51,6 +51,7 @@ public class TokenApiComponent {
 
         TokenApiRequest request = new TokenApiRequest();
         request.setSeqUserId(seqUserId);
+        @SuppressWarnings("deprecation")
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());

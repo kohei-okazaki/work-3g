@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -23,7 +24,6 @@ import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTyp
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoUploadCsv;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoCsvUploadServiceImpl;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
@@ -39,7 +39,6 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
-import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoFileRegistServiceImpl;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
 import jp.co.ha.dashboard.view.DashboardView;
 
@@ -56,19 +55,19 @@ public class HealthInfoFileRegistController
     /** 健康情報登録ファイルPrefix */
     private static final String FILE_NAME_PREFIX = "healthinfo-file-regist/";
 
-    /** {@linkplain HealthInfoCsvUploadServiceImpl} */
+    /** 健康情報CSVアップロードサービス */
     @Autowired
     @HealthInfoUploadCsv
     private CsvUploadService<HealthInfoCsvUploadModel> csvUploadService;
-    /** {@linkplain HealthInfoFileRegistServiceImpl} */
+    /** 健康情報ファイル登録サービス */
     @Autowired
     private HealthInfoFileRegistService fileService;
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain AwsS3Component} */
+    /** AWS-S3 Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
 
     /**
      * フォームを返す
@@ -117,7 +116,7 @@ public class HealthInfoFileRegistController
 
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV;
-        awsS3Component.putFile(
+        s3.putFile(
                 AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId + "/" + fileName,
                 form.getMultipartFile());
 
@@ -150,12 +149,7 @@ public class HealthInfoFileRegistController
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "リクエスト情報が不正です セッションキー"
                                 + FILE_NAME_PREFIX + seqUserId + "が存在しない"));
 
-        // S3から健康情報CSVファイルを取得
-        InputStream is = awsS3Component
-                .getS3ObjectByKey(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId
-                        + "/" + fileName);
-        List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
-                .readInputStream(is, Charset.UTF_8);
+        List<HealthInfoCsvUploadModel> modelList = getModelList(seqUserId, fileName);
 
         if (CollectionUtil.isEmpty(modelList)) {
             throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
@@ -167,10 +161,39 @@ public class HealthInfoFileRegistController
         if (ResultType.SUCCESS == result) {
             sessionComponent.removeValue(request.getSession(),
                     FILE_NAME_PREFIX + seqUserId);
-            awsS3Component.removeS3ObjectByKeys(FILE_NAME_PREFIX + seqUserId);
+            s3.removeS3ObjectByKeys(FILE_NAME_PREFIX + seqUserId);
         }
 
         return getView(model, DashboardView.HEALTH_INFO_FILE_COMPLETE);
+    }
+
+    /**
+     * 健康情報CSVモデルリストを返す
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @param fileName
+     *     ファイル名
+     * @return 健康情報CSVモデルリスト
+     * @throws BaseException
+     *     JSON読み込みに失敗した場合
+     */
+    private List<HealthInfoCsvUploadModel> getModelList(Long seqUserId,
+            String fileName) throws BaseException {
+
+        // S3から健康情報CSVファイルを取得
+        try (InputStream is = s3
+                .getS3ObjectByKey(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId
+                        + "/" + fileName)) {
+
+            List<HealthInfoCsvUploadModel> modelList = new HealthInfoCsvReader()
+                    .readInputStream(is, Charset.UTF_8);
+
+            return modelList;
+
+        } catch (IOException e) {
+            throw new SystemException(e);
+        }
     }
 
 }

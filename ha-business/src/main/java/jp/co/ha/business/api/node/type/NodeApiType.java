@@ -10,6 +10,7 @@ import jp.co.ha.common.type.BaseEnum;
  * <li>{@linkplain #CALORIE}：カロリー計算API</li>
  * <li>{@linkplain #BREATHING_CAPACITY}：肺活量計算API</li>
  * <li>{@linkplain #TOKEN}：トークン発行API</li>
+ * <li>{@linkplain #HEALTH_CHECK}：ヘルスチェックAPI</li>
  * </ul>
  *
  * @version 1.0.0
@@ -23,8 +24,10 @@ public enum NodeApiType implements BaseEnum {
     /** 肺活量計算API */
     BREATHING_CAPACITY("breathing_capacity", ApiNameType.NODE_API_BREATHING_CAPACITY),
     /** トークン発行API */
+    @Deprecated
     TOKEN("token", ApiNameType.NODE_API_TOKEN),
     /** ヘルスチェックAPI */
+    @Deprecated
     HEALTH_CHECK("healthcheck", ApiNameType.NODE_API_HEALTH_CHECK);
 
     /** 値 */

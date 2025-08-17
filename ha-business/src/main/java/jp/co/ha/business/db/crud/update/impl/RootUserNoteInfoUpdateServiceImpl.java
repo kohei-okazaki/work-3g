@@ -17,18 +17,14 @@ import jp.co.ha.db.mapper.RootUserNoteInfoMapper;
 @Service
 public class RootUserNoteInfoUpdateServiceImpl implements RootUserNoteInfoUpdateService {
 
-    /** {@linkplain RootUserNoteInfoMapper} */
+    /** 管理者サイトユーザメモ情報Mapper */
     @Autowired
     private RootUserNoteInfoMapper mapper;
 
     @Update
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(Long seqRootUserNoteInfoId, String title) {
-
-        RootUserNoteInfo entity = new RootUserNoteInfo();
-        entity.setSeqRootUserNoteInfoId(seqRootUserNoteInfoId);
-        entity.setTitle(title);
+    public void updateById(RootUserNoteInfo entity) {
         mapper.updateByPrimaryKeySelective(entity);
     }
 

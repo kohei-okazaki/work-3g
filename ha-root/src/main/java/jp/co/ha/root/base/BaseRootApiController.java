@@ -1,11 +1,15 @@
 package jp.co.ha.root.base;
 
+import java.math.BigDecimal;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
+
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
@@ -41,9 +47,72 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
     private static final Logger LOG = LoggerFactory
             .getLogger(BaseRootApiController.class);
 
-    /** {@linkplain ApplicationProperties} */
+    /** アプリケーション設定ファイル */
     @Autowired
     protected ApplicationProperties applicationProperties;
+
+    /**
+     * 日付形式不正例外ハンドラー
+     *
+     * @param e
+     *     例外クラス
+     * @return 異常系レスポンス
+     */
+    @ExceptionHandler(DateTimeParseException.class)
+    public ResponseEntity<T2> handleDateTimeParseException(DateTimeParseException e) {
+
+        LOG.warn("date format error");
+
+        return ResponseEntity.badRequest().body(getErrorResponse("date format error"));
+    }
+
+    /**
+     * HttpMessageNotReadable例外ハンドラー<br>
+     * API受付時のExceptionクラスの関係で#handleDateTimeParseExceptionを直接ハンドリングできないため
+     *
+     * @param e
+     *     例外クラス
+     * @return 異常系レスポンス
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Object> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException e) {
+
+        Throwable cause = e.getCause();
+
+        if (cause instanceof InvalidFormatException) {
+            InvalidFormatException ife = (InvalidFormatException) cause;
+
+            if (ife.getCause() instanceof DateTimeParseException) {
+                // DateTimeParseExceptionの場合
+                LOG.warn("invalid date format.");
+
+                return ResponseEntity.badRequest()
+                        .body(getErrorResponse(
+                                "date format error. Please use yyyy/MM/dd."));
+            }
+
+            if (ife.getTargetType() == BigDecimal.class
+                    || ife.getTargetType() == Integer.class
+                    || ife.getTargetType() == Long.class
+                    || ife.getTargetType() == Double.class) {
+                // BigDecimalなどの数値変換エラー
+
+                LOG.warn("invalid number format.");
+
+                return ResponseEntity.badRequest()
+                        .body(getErrorResponse(
+                                "number format error. Please use numeric value."));
+            }
+
+            // 他の型でも InvalidFormatException はここで共通ハンドリング可
+        }
+
+        // それ以外はデフォルトの扱いにする
+        LOG.error("HttpMessageNotReadableException: " + e.getMessage(), e);
+        return ResponseEntity.internalServerError()
+                .body(getErrorResponse("unexpected error."));
+    }
 
     /**
      * リクエストURL不正例外ハンドラー<br>
@@ -127,6 +196,31 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
 
             ErrorData errorData = new ErrorData();
             errorData.setMessage(error.getDefaultMessage());
+            response.addError(errorData);
+        }
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    /**
+     * クエリパラメータの必須チェック処理
+     *
+     * @param e
+     *     例外クラス
+     * @return 異常系レスポンス
+     */
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<T2> handleMissingServletRequestParameterException(
+            MissingServletRequestParameterException e) {
+
+        T2 response = getErrorResponse();
+
+        for (Object o : e.getDetailMessageArguments()) {
+
+            String param = o.toString();
+
+            ErrorData errorData = new ErrorData();
+            errorData.setMessage(param + " is required");
             response.addError(errorData);
         }
 

@@ -40,6 +40,15 @@ public enum GenderType implements BaseEnum, JsonSerializable {
     }
 
     /**
+     * 数値型の性別タイプを返す
+     * 
+     * @return 数値型の性別タイプ
+     */
+    public Integer getIntValue() {
+        return Integer.valueOf(this.value);
+    }
+
+    /**
      * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
      * @param value
      *     値
@@ -47,6 +56,16 @@ public enum GenderType implements BaseEnum, JsonSerializable {
      */
     public static GenderType of(String value) {
         return BaseEnum.of(GenderType.class, value);
+    }
+
+    /**
+     * @see #of(String)
+     * @param value
+     *     値
+     * @return GenderType
+     */
+    public static GenderType of(int value) {
+        return of(String.valueOf(value));
     }
 
     @Override

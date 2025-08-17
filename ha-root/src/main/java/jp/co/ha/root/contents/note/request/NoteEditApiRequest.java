@@ -2,6 +2,8 @@ package jp.co.ha.root.contents.note.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jp.co.ha.common.validator.LengthMode;
+import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
@@ -16,6 +18,7 @@ public class NoteEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     /** 件名 */
     @JsonProperty("title")
     @Required(message = "title is required")
+    @Length(length = 30, mode = LengthMode.LESS_EQUAL, message = "title is less than 30 byte")
     private String title;
     /** メモ内容 */
     @JsonProperty("detail")
@@ -23,7 +26,7 @@ public class NoteEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     private String detail;
 
     /**
-     * titleを返す
+     * 件名を返す
      *
      * @return title
      */
@@ -32,7 +35,7 @@ public class NoteEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * titleを設定する
+     * 件名を設定する
      *
      * @param title
      *     件名
@@ -42,7 +45,7 @@ public class NoteEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * detailを返す
+     * メモ内容を返す
      *
      * @return detail
      */
@@ -51,7 +54,7 @@ public class NoteEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * detailを設定する
+     * メモ内容を設定する
      *
      * @param detail
      *     メモ内容

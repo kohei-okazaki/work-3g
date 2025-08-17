@@ -20,18 +20,9 @@ import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.BmiRangeMtSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
-import jp.co.ha.business.db.crud.update.impl.HealthInfoUpdateServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
-import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
-import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
@@ -50,28 +41,25 @@ import jp.co.ha.root.contents.healthinfo.response.HealthInfoEditApiResponse;
 public class HealthInfoEditApiController extends
         BaseRootApiController<HealthInfoEditApiRequest, HealthInfoEditApiResponse> {
 
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain TokenApiComponent} */
+    /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** {@linkplain BasicHealthInfoCalcApiComponent} */
+    /** 基礎健康情報計算APIComponent */
     @Autowired
     private BasicHealthInfoCalcApiComponent basicHealthInfoCalcApiComponent;
-    /** {@linkplain BmiRangeMtSearchServiceImpl} */
+    /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoCalcServiceImpl} */
-    @Autowired
-    private HealthInfoCalcService healthInfoCalcService;
-    /** {@linkplain HealthInfoUpdateServiceImpl} */
+    /** 健康情報更新サービス */
     @Autowired
     private HealthInfoUpdateService healthInfoUpdateService;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
 
@@ -92,7 +80,12 @@ public class HealthInfoEditApiController extends
             @PathVariable(name = "seq_health_info_id", required = true) Long seqHealthInfoId,
             @Valid @RequestBody HealthInfoEditApiRequest request) throws BaseException {
 
-        // TODO 存在チェック
+        if (healthInfoSearchService.countByHealthInfoIdAndSeqUserId(seqHealthInfoId,
+                request.getSeqUserId()) == 0L) {
+            // 健康情報IDとユーザIDの組み合わせが存在しない場合
+            return ResponseEntity.badRequest()
+                    .body(getErrorResponse("health_info is not found"));
+        }
 
         // API通信情報.トランザクションIDを採番
         Long transactionId = apiCommunicationDataComponent.getTransactionId();
@@ -124,28 +117,15 @@ public class HealthInfoEditApiController extends
 
         BigDecimal bmi = basicHealthInfoCalcResponse.getBasicHealthInfo().getBmi();
         BmiRangeMt bmiRangeMt = bmiRangeMtSearchService.findAll().stream()
-                .filter(e -> e.getRangeMin().intValue() <= bmi.intValue()
-                        && bmi.intValue() < e.getRangeMax().intValue())
+                .filter(e -> bmi.compareTo(BigDecimal.valueOf(e.getRangeMin())) >= 0 &&
+                        bmi.compareTo(BigDecimal.valueOf(e.getRangeMax())) < 0)
                 .findFirst()
                 .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
-                        "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
-
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
-        // 直前の健康情報を検索
-        HealthInfo lastHealthInfo = healthInfoSearchService
-                .findBySeqUserIdAndLowerSeqHealthInfoId(seqHealthInfoId,
-                        request.getSeqUserId(), selectOption);
-
-        HealthInfoStatus status = BeanUtil.isNull(lastHealthInfo)
-                ? HealthInfoStatus.EVEN
-                : healthInfoCalcService.getHealthInfoStatus(request.getWeight(),
-                        lastHealthInfo.getWeight());
+                        "BMI範囲マスタの取得に失敗しました。データを確認してください。"));
 
         HealthInfo healthInfo = new HealthInfo();
         BeanUtil.copy(basicHealthInfoCalcResponse.getBasicHealthInfo(), healthInfo);
         healthInfo.setSeqHealthInfoId(seqHealthInfoId);
-        healthInfo.setHealthInfoStatus(status.getValue());
         healthInfo.setSeqBmiRangeMtId(bmiRangeMt.getSeqBmiRangeMtId());
         healthInfoUpdateService.update(healthInfo);
 

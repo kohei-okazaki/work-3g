@@ -78,21 +78,6 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
     }
 
     /**
-     * 初期処理
-     *
-     * @param response
-     *     HttpServletResponse
-     * @throws UnsupportedEncodingException
-     *     Encoding例外
-     */
-    private void init(HttpServletResponse response) throws UnsupportedEncodingException {
-
-        String fileName = new String(
-                "sample.xlsx".getBytes(conf.getCharsetType().getValue()), "ISO-8859-1");
-        response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
-    }
-
-    /**
      * ヘッダを書込
      *
      * @param sheet
@@ -215,5 +200,20 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
     protected List<String> getFooterList(Class<?> clazz) {
         return CollectionUtil
                 .toList(clazz.getAnnotation(ExcelDownloadModel.class).footerNames());
+    }
+
+    /**
+     * 初期処理
+     *
+     * @param response
+     *     HttpServletResponse
+     * @throws UnsupportedEncodingException
+     *     Encoding例外
+     */
+    private void init(HttpServletResponse response) throws UnsupportedEncodingException {
+
+        String fileName = new String(
+                "sample.xlsx".getBytes(conf.getCharsetType().getValue()), "ISO-8859-1");
+        response.setHeader("Content-Desposition", "attachment; filename=" + fileName);
     }
 }

@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootLoginInfoSearchServiceImpl;
+import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
@@ -29,12 +28,12 @@ import jp.co.ha.root.contents.user.response.UserRetrieveApiResponse;
 public class UserRetrieveController
         extends BaseRootApiController<UserRetrieveApiRequest, UserRetrieveApiResponse> {
 
-    /** {@linkplain RootLoginInfoSearchServiceImpl} */
+    /** 管理者サイトユーザログイン情報検索サービス */
     @Autowired
     private RootLoginInfoSearchService searchService;
 
     /**
-     * 取得
+     * ユーザ取得処理
      *
      * @param request
      *     ユーザ情報取得APIリクエスト
@@ -42,8 +41,7 @@ public class UserRetrieveController
      *     ログインID
      * @return ユーザ情報取得APIレスポンス
      */
-    @GetMapping(value = "user/{seq_login_id}", produces = {
-            MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "user/{seq_login_id}")
     public ResponseEntity<UserRetrieveApiResponse> retrieve(
             UserRetrieveApiRequest request,
             @PathVariable(name = "seq_login_id", required = true) Long seqLoginId) {
@@ -66,6 +64,8 @@ public class UserRetrieveController
             role.setLabel(e.getRoleName());
             return role;
         }).collect(Collectors.toList()));
+        response.setDeleteFlag(entity.getDeleteFlag() ? CommonFlag.TRUE.getValue()
+                : CommonFlag.FALSE.getValue());
         BeanUtil.copy(entity, response);
 
         return ResponseEntity.ok(response);

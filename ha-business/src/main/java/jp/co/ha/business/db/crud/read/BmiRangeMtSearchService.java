@@ -13,7 +13,7 @@ import jp.co.ha.db.entity.BmiRangeMt;
 public interface BmiRangeMtSearchService {
 
     /**
-     * BMI範囲マスタIDからBMI範囲マスタを取得する
+     * BMI範囲マスタIDからBMI範囲マスタを検索する
      *
      * @param seqBmiRangeMtId
      *     BMI範囲ID
@@ -22,7 +22,7 @@ public interface BmiRangeMtSearchService {
     Optional<BmiRangeMt> findById(Long seqBmiRangeMtId);
 
     /**
-     * BMI範囲マスタを全件取得する
+     * BMI範囲マスタを全件検索する
      *
      * @return BMI範囲マスタリスト
      */

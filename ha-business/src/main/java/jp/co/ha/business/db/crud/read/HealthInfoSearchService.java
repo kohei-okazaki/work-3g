@@ -16,7 +16,7 @@ import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 public interface HealthInfoSearchService {
 
     /**
-     * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報のリストを返す
+     * 指定されたユーザIDと指定された健康情報作成日時の期間内の健康情報を検索する
      *
      * @param seqUserId
      *     ユーザID(nullを指定した場合、ユーザIDをwhere句に含めない)
@@ -47,7 +47,7 @@ public interface HealthInfoSearchService {
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate);
 
     /**
-     * 指定された健康情報IDとユーザIDと一致する健康情報を返す
+     * 指定された健康情報IDとユーザIDと一致する健康情報を検索する
      *
      * @param seqHealthInfoId
      *     健康情報ID

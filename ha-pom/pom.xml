@@ -17,11 +17,11 @@
     <java-version>21</java-version>
     <org.springframework.boot-version>3.4.3</org.springframework.boot-version>
     <org.spring-data-commons-version>3.4.4</org.spring-data-commons-version>
-    <com.amazonaws-version>1.12.190</com.amazonaws-version>
+    <com.amazonaws-version>2.31.78</com.amazonaws-version>
     <org.aspectj-version>1.9.23</org.aspectj-version>
     <org.slf4j-version>2.0.17</org.slf4j-version>
     <org.logback-version>1.5.17</org.logback-version>
-    <org.jackson-version>2.18.3</org.jackson-version>
+    <org.jackson-version>2.19.2</org.jackson-version>
     <org.poi-version>5.4.0</org.poi-version>
     <org.mysql-version>8.4.0</org.mysql-version>
     <org.mybatis-version>3.5.16</org.mybatis-version>
@@ -38,7 +38,7 @@
     <profile>
       <id>local</id>
       <properties>
-        <resources.directory>${basedir}/profile/local</resources.directory>
+        <resources.directory>${basedir}/local</resources.directory>
       </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -48,7 +48,7 @@
     <profile>
       <id>dev1</id>
       <properties>
-        <resources.directory>${basedir}/profile/dev1</resources.directory>
+        <resources.directory>${basedir}/dev1</resources.directory>
       </properties>
     </profile>
   </profiles>
@@ -61,6 +61,18 @@
     <module>../ha-api</module>
     <module>../ha-dashboard</module>
   </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>bom</artifactId>
+        <version>${com.amazonaws-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -117,6 +129,11 @@
       <artifactId>spring-boot-starter-security</artifactId>
       <version>${org.springframework.boot-version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-freemarker</artifactId>
+      <version>${org.springframework.boot-version}</version>
+    </dependency>
     <!-- SpringBatch -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -132,8 +149,18 @@
 
     <!-- AWS SDK -->
     <dependency>
-      <groupId>com.amazonaws</groupId>
-      <artifactId>aws-java-sdk</artifactId>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>s3</artifactId>
+      <version>${com.amazonaws-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>ses</artifactId>
+      <version>${com.amazonaws-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>apache-client</artifactId>
       <version>${com.amazonaws-version}</version>
     </dependency>
 
@@ -291,11 +318,7 @@
   </dependencies>
 
   <build>
-    <!-- <outputDirectory>${project.build.directory}/classes</outputDirectory> -->
     <resources>
-      <resource>
-        <directory>${resources.directory}</directory>
-      </resource>
       <resource>
         <directory>${basedir}/src/main/resources</directory>
       </resource>
@@ -309,12 +332,8 @@
         <directory>${basedir}/../ha-business/src/main/resources</directory>
       </resource>
     </resources>
+
     <testResources>
-<!--
-      <testResource>
-        <directory>${resources.testdirectory}</directory>
-      </testResource>
- -->
       <testResource>
         <directory>${basedir}/src/test/resources</directory>
       </testResource>
@@ -328,29 +347,16 @@
         <directory>${basedir}/../ha-business/src/test/resources</directory>
       </testResource>
     </testResources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.10</version>
-        <configuration>
-          <additionalProjectnatures>
-            <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-          </additionalProjectnatures>
-          <additionalBuildcommands>
-            <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-          </additionalBuildcommands>
-          <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.11.0</version>
         <configuration>
           <source>${java-version}</source>
           <target>${java-version}</target>
+          <release>${java-version}</release>
           <encoding>${project.build.sourceEncoding}</encoding>
           <showWarnings>true</showWarnings>
           <showDeprecation>true</showDeprecation>
@@ -359,12 +365,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.3.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.3.1</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.7.1</version>
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>

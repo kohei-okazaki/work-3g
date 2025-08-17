@@ -19,7 +19,7 @@ import jp.co.ha.db.mapper.RootUserRoleDetailMtMapper;
 public class RootUserRoleDetailMtDeleteServiceImpl
         implements RootUserRoleDetailMtDeleteService {
 
-    /** {@linkplain RootUserRoleDetailMtMapper} */
+    /** 管理者サイトユーザ権限詳細マスタMapper */
     @Autowired
     private RootUserRoleDetailMtMapper mapper;
 

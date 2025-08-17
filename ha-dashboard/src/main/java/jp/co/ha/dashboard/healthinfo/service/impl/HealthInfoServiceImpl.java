@@ -14,14 +14,11 @@ import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTyp
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
@@ -36,10 +33,10 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
-import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
+import jp.co.ha.db.entity.User;
 
 /**
  * 健康情報登録画面サービス実装クラス
@@ -49,25 +46,25 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service
 public class HealthInfoServiceImpl implements HealthInfoService {
 
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoMailServiceImpl} */
+    /** 健康情報メールサービス */
     @Autowired
     private HealthInfoMailService healthInfoMailService;
-    /** {@linkplain HealthInfoCalcServiceImpl} */
+    /** 健康情報計算サービス */
     @Autowired
     private HealthInfoCalcService healthInfoCalcService;
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
-    private AccountSearchService accountSearchService;
-    /** {@linkplain ApiCommunicationDataComponent} */
+    private UserSearchService userSearchService;
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain HealthInfoRegistApi} */
+    /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
 
@@ -97,11 +94,11 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     public HealthInfoRegistApiResponse regist(HealthInfoDto dto, Long seqUserId)
             throws BaseException {
 
-        // アカウント情報.APIキーを設定
-        Account account = accountSearchService.findById(seqUserId).get();
+        // ユーザ情報.APIキーを設定
+        User user = userSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
+                .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 

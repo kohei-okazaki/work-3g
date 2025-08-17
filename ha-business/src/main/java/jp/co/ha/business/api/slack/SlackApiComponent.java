@@ -48,7 +48,7 @@ public class SlackApiComponent {
     private static final String MESSAGE_URL = BASE_SLACK_URL + "/chat.postMessage";
     /** Slack URL(ファイルアップロード用) */
     private static final String FILE_UPLOAD_URL = BASE_SLACK_URL + "/files.upload";
-    /** {@linkplain AwsS3Component} */
+    /** S3 Component */
     @Autowired
     private AwsS3Component s3;
 

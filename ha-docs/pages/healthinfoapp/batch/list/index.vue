@@ -69,11 +69,25 @@ export default {
           crons: ["毎時 00:00:00"],
           args: [],
         },
+        {
+          name: "健康情報連携バッチ",
+          description:
+            "健康情報テーブルをtrack apiに連携するバッチ",
+          url: "/healthinfoapp/batch/healthinfo/migrate",
+          crons: ["毎月 1日 00:00:00"],
+          args: [
+            {
+              name: "-m",
+              value: "YYYYMM",
+              description:
+                "処理対象年月を指定<br>未指定の場合、システム日時の年月を使用",
+            },
+          ],
+        },
       ],
     };
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

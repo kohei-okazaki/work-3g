@@ -4,7 +4,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
 /**
- * アカウント情報一覧リクエストクラス
+ * ユーザ情報一覧リクエストクラス
  *
  * @version 1.0.0
  */
