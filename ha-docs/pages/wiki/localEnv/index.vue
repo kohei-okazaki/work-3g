@@ -483,6 +483,15 @@
                 </p>
                 <kbd>/ha-asset/02_db/others/CREATE_DATABASE.sql</kbd>
               </details>
+              
+              <br />
+
+              <details>
+                <summary>ユーザ作成</summary>
+                <p>MySQLクライアント上で以下のSQLを実行し、ユーザを作成する</p>
+                <kbd>/ha-asset/02_db/others/CREATE_USER.sql</kbd>
+              </details>
+
             </v-expansion-panel-content>
           </v-expansion-panel>
 
@@ -963,7 +972,7 @@
                 <summary>IDEダウンロード</summary>
                 <p>
                   <a
-                    href="https://mergedoc.osdn.jp/"
+                    href="https://willbrains.jp/"
                     target="_blank"
                     rel="noopener noreferrer"
                     >ここ</a
