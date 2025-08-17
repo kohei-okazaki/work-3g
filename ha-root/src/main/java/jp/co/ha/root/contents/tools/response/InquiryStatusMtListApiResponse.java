@@ -10,45 +10,45 @@ import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
 
 /**
- * 権限マスタリスト取得APIレスポンスクラス
+ * 問い合わせステータスマスタリスト取得APIレスポンスクラス
  *
  * @version 1.0.0
  */
-public class RoleMtListApiResponse extends BaseRootApiResponse
+public class InquiryStatusMtListApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
-    /** 権限リスト */
-    @JsonProperty("roles")
+    /** 問い合わせステータスリスト */
+    @JsonProperty("statuses")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Role> roles;
+    private List<Status> statuses;
 
     /**
-     * 権限リストを返す
+     * 問い合わせステータスリストを返す
      *
-     * @return roles
+     * @return statuses
      */
-    public List<Role> getRoles() {
-        return roles;
+    public List<Status> getStatuses() {
+        return statuses;
     }
 
     /**
-     * 権限リストを設定する
+     * 問い合わせステータスリストを設定する
      *
-     * @param roles
-     *     権限リスト
+     * @param statuses
+     *     問い合わせステータスリスト
      */
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setStatuses(List<Status> statuses) {
+        this.statuses = statuses;
     }
 
     /**
-     * ユーザ権限情報
+     * 問い合わせステータス情報
      *
      * @version 1.0.0
      */
-    public static class Role extends JsonEntity {
+    public static class Status extends JsonEntity {
 
-        /** 権限名 */
+        /** ステータス名 */
         @JsonProperty("label")
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private String label;
@@ -58,7 +58,7 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
         private String value;
 
         /**
-         * 権限名を返す
+         * ステータス名を返す
          *
          * @return 権限名
          */
@@ -67,10 +67,10 @@ public class RoleMtListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * 権限名を設定する
+         * ステータス名を設定する
          *
          * @param label
-         *     権限名
+         *     ステータス名
          */
         public void setLabel(String label) {
             this.label = label;

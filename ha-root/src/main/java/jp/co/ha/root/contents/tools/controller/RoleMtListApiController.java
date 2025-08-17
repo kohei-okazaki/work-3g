@@ -13,7 +13,6 @@ import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.tools.request.RoleMtListApiRequest;
 import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse;
-import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse.Role;
 
 /**
  * 権限マスタリスト取得APIコントローラ
@@ -41,7 +40,7 @@ public class RoleMtListApiController
         List<RootRoleMt> roleList = rootRoleMtSearchService.findAll();
         RoleMtListApiResponse response = getSuccessResponse();
         response.setRoles(roleList.stream().map(e -> {
-            Role role = new Role();
+            RoleMtListApiResponse.Role role = new RoleMtListApiResponse.Role();
             role.setValue(e.getRole());
             role.setLabel(e.getRoleName());
             return role;

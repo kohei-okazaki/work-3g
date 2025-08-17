@@ -53,8 +53,8 @@ public class InquiryListApiResponse extends BaseRootApiResponse
     public static class Inquiry extends JsonEntity {
 
         /** 問い合わせ管理情報ID */
-        @JsonProperty("seq_inquriy_mng_id")
-        private long seqInquriyMngId;
+        @JsonProperty("seq_inquiry_mng_id")
+        private long seqInquiryMngId;
         /** ユーザID */
         @JsonProperty("seq_user_id")
         private long seqUserId;
@@ -87,20 +87,20 @@ public class InquiryListApiResponse extends BaseRootApiResponse
         /**
          * 問い合わせ管理情報IDを返す
          *
-         * @return seqInquriyMngId
+         * @return seqInquiryMngId
          */
-        public long getSeqInquriyMngId() {
-            return seqInquriyMngId;
+        public long getSeqInquiryMngId() {
+            return seqInquiryMngId;
         }
 
         /**
          * 問い合わせ管理情報IDを設定する
          *
-         * @param seqInquriyMngId
+         * @param seqInquiryMngId
          *     問い合わせ管理情報ID
          */
-        public void setSeqInquriyMngId(long seqInquriyMngId) {
-            this.seqInquriyMngId = seqInquriyMngId;
+        public void setSeqInquiryMngId(long seqInquiryMngId) {
+            this.seqInquiryMngId = seqInquiryMngId;
         }
 
         /**

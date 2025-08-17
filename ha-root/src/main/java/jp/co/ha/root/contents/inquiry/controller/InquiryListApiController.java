@@ -80,7 +80,7 @@ public class InquiryListApiController
         for (CompositeInquiry entity : list) {
             InquiryListApiResponse.Inquiry inquiryResponse = new InquiryListApiResponse.Inquiry();
 
-            inquiryResponse.setSeqInquriyMngId(entity.getSeqInquiryMngId());
+            inquiryResponse.setSeqInquiryMngId(entity.getSeqInquiryMngId());
             inquiryResponse.setSeqUserId(entity.getSeqUserId());
             inquiryResponse.setSeqLoginId(entity.getResponderLoginId());
 
