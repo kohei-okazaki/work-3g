@@ -16,7 +16,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
- * 基礎健康情報計算APIコンポーネントクラス<br>
+ * 基礎健康情報計算APIComponentクラス<br>
  * APIクラスを直接呼ばずに本クラスを経由して呼び出すこと
  *
  * @version 1.0.0
@@ -24,13 +24,13 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Component
 public class BasicHealthInfoCalcApiComponent {
 
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain BasicHealthInfoCalcApi} */
+    /** 基礎健康情報計算API */
     @Autowired
     private BasicHealthInfoCalcApi basicHealthInfoCalcApi;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
 

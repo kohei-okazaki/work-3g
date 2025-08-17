@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,7 +47,7 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
     private static final Logger LOG = LoggerFactory
             .getLogger(BaseRootApiController.class);
 
-    /** {@linkplain ApplicationProperties} */
+    /** アプリケーション設定ファイル */
     @Autowired
     protected ApplicationProperties applicationProperties;
 
@@ -195,6 +196,31 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
 
             ErrorData errorData = new ErrorData();
             errorData.setMessage(error.getDefaultMessage());
+            response.addError(errorData);
+        }
+
+        return ResponseEntity.badRequest().body(response);
+    }
+
+    /**
+     * クエリパラメータの必須チェック処理
+     *
+     * @param e
+     *     例外クラス
+     * @return 異常系レスポンス
+     */
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<T2> handleMissingServletRequestParameterException(
+            MissingServletRequestParameterException e) {
+
+        T2 response = getErrorResponse();
+
+        for (Object o : e.getDetailMessageArguments()) {
+
+            String param = o.toString();
+
+            ErrorData errorData = new ErrorData();
+            errorData.setMessage(param + " is required");
             response.addError(errorData);
         }
 

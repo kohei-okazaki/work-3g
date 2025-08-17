@@ -15,15 +15,15 @@ public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
     /* ERROR */
 
     /* WARN */
-    /** アカウント存在チェックエラー */
+    /** ユーザ存在チェックエラー */
     ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "DW0021", LogLevel.WARN),
-    /** アカウント削除済エラー */
+    /** ユーザ削除済エラー */
     ACCOUNT_DELETE("ACCOUNT_DELETE", "DW0022", LogLevel.WARN),
-    /** アカウント存在エラー */
+    /** ユーザ存在エラー */
     ACCOUNT_EXIST("ACCOUNT_EXIST", "DW0023", LogLevel.WARN),
-    /** アカウント不一致エラー */
+    /** ユーザ不一致エラー */
     ACCOUNT_INVALID_PASSWORD("ACCOUNT_INVALID_PASSWORD", "DW0024", LogLevel.WARN),
-    /** アカウント有効期限エラー */
+    /** ユーザ有効期限エラー */
     ACCOUNT_EXPIRED("ACCOUNT_EXPIRED", "DW0025", LogLevel.WARN),
     /** 不正リクエストエラー */
     ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "DW0026", LogLevel.WARN),

@@ -70,9 +70,6 @@ public class HealthInfoRegistApiResponse extends BaseAppApiResponse
         @Mask
         @JsonProperty("standard_weight")
         private BigDecimal standardWeight;
-        /** 健康情報ステータス */
-        @JsonProperty("status")
-        private String healthInfoStatus;
         /** 健康情報作成日時 */
         @JsonProperty("reg_date")
         @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -172,25 +169,6 @@ public class HealthInfoRegistApiResponse extends BaseAppApiResponse
          */
         public void setStandardWeight(BigDecimal standardWeight) {
             this.standardWeight = standardWeight;
-        }
-
-        /**
-         * healthInfoStatusを返す
-         *
-         * @return healthInfoStatus
-         */
-        public String getHealthInfoStatus() {
-            return healthInfoStatus;
-        }
-
-        /**
-         * healthInfoStatusを設定する
-         *
-         * @param healthInfoStatus
-         *     健康情報ステータス
-         */
-        public void setHealthInfoStatus(String healthInfoStatus) {
-            this.healthInfoStatus = healthInfoStatus;
         }
 
         /**

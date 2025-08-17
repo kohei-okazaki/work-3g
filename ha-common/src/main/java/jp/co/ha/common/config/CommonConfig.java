@@ -9,9 +9,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import jp.co.ha.common.db.CryptConfig;
-import jp.co.ha.common.db.JdbcConfig;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.db.CryptProperties;
+import jp.co.ha.common.db.JdbcProperties;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.web.interceptor.RequestInterceptor;
 
@@ -70,55 +70,58 @@ public class CommonConfig implements WebMvcConfigurer {
      * @param url
      * @param username
      * @param password
-     * @return JdbcConfig
+     * @return JdbcProperties
      */
     @Bean
-    JdbcConfig jdbcConfig(
+    JdbcProperties jdbcProperties(
             @Value("${jdbc.driverClassName}") String driverClassName,
             @Value("${jdbc.url}") String url,
             @Value("${jdbc.username}") String username,
             @Value("${jdbc.password}") String password) {
 
-        JdbcConfig jdbcConfig = new JdbcConfig();
-        jdbcConfig.setDriverClassName(driverClassName);
-        jdbcConfig.setUrl(url);
-        jdbcConfig.setUsername(username);
-        jdbcConfig.setPassword(password);
-        return jdbcConfig;
+        JdbcProperties props = new JdbcProperties();
+        props.setDriverClassName(driverClassName);
+        props.setUrl(url);
+        props.setUsername(username);
+        props.setPassword(password);
+        return props;
     }
 
     /**
      * @param paging
      * @param environment
-     * @return SystemConfig
+     * @param systemMailAddress
+     * @return SystemProperties
      */
     @Bean
-    SystemConfig systemConfig(
+    SystemProperties systemProperties(
             @Value("${system.paging}") String paging,
-            @Value("${system.env}") String environment) {
+            @Value("${system.env}") String environment,
+            @Value("${system.mailaddress}") String systemMailAddress) {
 
-        SystemConfig systemConfig = new SystemConfig();
-        systemConfig.setPaging(paging);
-        systemConfig.setEnvironment(environment);
-        return systemConfig;
+        SystemProperties props = new SystemProperties();
+        props.setPaging(paging);
+        props.setEnvironment(environment);
+        props.setSystemMailAddress(systemMailAddress);
+        return props;
     }
 
     /**
      * @param mode
      * @param key
      * @param shift
-     * @return CryptConfig
+     * @return CryptProperties
      */
     @Bean
-    CryptConfig cryptConfig(
+    CryptProperties cryptProperties(
             @Value("${crypt.mode}") String mode,
             @Value("${crypt.key}") String key,
             @Value("${crypt.shift}") String shift) {
 
-        CryptConfig cryptConfig = new CryptConfig();
-        cryptConfig.setMode(mode);
-        cryptConfig.setKey(key);
-        cryptConfig.setShift(shift);
-        return cryptConfig;
+        CryptProperties props = new CryptProperties();
+        props.setMode(mode);
+        props.setKey(key);
+        props.setShift(shift);
+        return props;
     }
 }

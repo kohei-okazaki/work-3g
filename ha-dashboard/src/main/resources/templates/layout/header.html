@@ -2,12 +2,12 @@
   <!-- ヘッダ部 -->
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <h1 id="appTitle" class="appTitle col-sm-3 text-nowrap text-muted" th:text="#{healthInfoAppName}"></h1>
-    <div class="collapse navbar-collapse justify-content-end">
+    <a class="collapse navbar-collapse justify-content-end" th:href="@{/accountsetting/input}">
       <img th:src="@{/static/image/icon_people.png}" th:if="${session[seqUserId]} != null" alt="hitogata"  title="hitogata">
       <ul class="navbar-nav">
         <li class="nav-item link text-muted" th:if="${session[seqUserId]} != null" th:text="${'ユーザID&nbsp;:&nbsp;' + session[seqUserId]}"></li>
       </ul><!-- /.navbar-nav -->
-    </div><!-- /.collapse navbar-collapse justify-content-end -->
+    </a><!-- /.collapse navbar-collapse justify-content-end -->
   </nav><!-- /.navbar navbar-expand-sm navbar-dark bg-dark -->
 
   <!-- ナビゲーションバー部 -->
@@ -21,7 +21,7 @@
             <li><a th:href="@{/healthinforeference/index}">照会</a></li>
           </ul>
         </li>
-        <li><a href="#">アカウント</a>
+        <li><a href="#">ユーザ</a>
           <ul>
             <li><a th:href="@{/accountsetting/input}">設定変更</a></li>
           </ul>

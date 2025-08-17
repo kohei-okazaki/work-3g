@@ -24,7 +24,6 @@ import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.business.api.track.response.HealthInfoMigrateApiResponse;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -59,21 +58,21 @@ public class HealthInfoMigrateBatch implements Tasklet {
     /** 処理対象日(YYYYMMDD) */
     @Value("#{jobParameters[d]}")
     private String targetDate;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService searchService;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain HealthInfoMigrateApi} */
+    /** 健康情報連携API */
     @Autowired
     private HealthInfoMigrateApi api;
-    /** {@linkplain SlackApiComponent} */
+    /** Slack Component */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -93,7 +92,7 @@ public class HealthInfoMigrateBatch implements Tasklet {
         }
 
         // Slack通知
-        slackApiComponent.send(ContentType.BATCH, "health_info_migrate_batch success.");
+        slack.send(ContentType.BATCH, "health_info_migrate_batch success.");
 
         return RepeatStatus.FINISHED;
     }

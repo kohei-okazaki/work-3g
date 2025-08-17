@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.NewsInfoSearchServiceImpl;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -23,7 +22,7 @@ import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.view.DashboardView;
@@ -38,15 +37,15 @@ import jp.co.ha.db.entity.NewsInfo;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-    /** {@linkplain NewsInfoSearchServiceImpl} */
+    /** お知らせ情報検索サービス */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** {@linkplain SystemConfig} */
+    /** システム設定ファイル情報 */
     @Autowired
-    private SystemConfig systemConfig;
-    /** {@linkplain AwsS3Component} */
+    private SystemProperties systemConfig;
+    /** AWS S3Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
 
     /**
      * お知らせ一覧
@@ -76,7 +75,7 @@ public class NewsController implements BaseWebController {
         for (NewsInfo entity : searchService.findAll(selectOption)) {
 
             // S3からお知らせJSONを取得
-            try (InputStream is = awsS3Component.getS3ObjectByKey(entity.getS3Key())) {
+            try (InputStream is = s3.getS3ObjectByKey(entity.getS3Key())) {
 
                 NewsDto dto = new JsonReader().read(is, NewsDto.class);
                 newsList.add(dto);

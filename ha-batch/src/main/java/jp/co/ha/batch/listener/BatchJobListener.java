@@ -34,10 +34,10 @@ public class BatchJobListener implements JobExecutionListener {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BatchJobListener.class);
-    /** {@linkplain SlackApiComponent} */
+    /** Slack Component */
     @Autowired
-    private SlackApiComponent slackApiComponent;
-    /** {@linkplain MessageSource} */
+    private SlackApiComponent slack;
+    /** MessageSource */
     @Autowired
     private MessageSource messageSource;
 
@@ -51,7 +51,8 @@ public class BatchJobListener implements JobExecutionListener {
                 .add("name=" + jobExecution.getJobInstance().getJobName())
                 .add("status=" + jobExecution.getStatus()).toString();
         sj.add("start JOB. " + message);
-        for (Entry<String, JobParameter<?>> entry : jobExecution.getJobParameters().getParameters().entrySet()) {
+        for (Entry<String, JobParameter<?>> entry : jobExecution.getJobParameters()
+                .getParameters().entrySet()) {
             sj.add("{key=" + entry.getKey() + ", val=" + entry.getValue().toString()
                     + "}");
         }
@@ -89,12 +90,12 @@ public class BatchJobListener implements JobExecutionListener {
                             .append(error.getErrorCode().getOuterErrorCode())
                             .append(")");
                     message += (", error_message=" + errorMessage.toString());
-                    slackApiComponent.send(ContentType.BATCH, message);
+                    slack.send(ContentType.BATCH, message);
                 }
             }
 
             // Slackに通知
-            slackApiComponent.send(ContentType.BATCH, message);
+            slack.send(ContentType.BATCH, message);
             // ログ出力
             LOG.debug("end JOB. " + message);
 

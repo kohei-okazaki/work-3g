@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -31,7 +30,7 @@ public class RequestInterceptor extends BaseWebInterceptor {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(RequestInterceptor.class);
 
-    /** {@linkplain Sha256HashEncoder} */
+    /** SHA-256ハッシュ化 */
     @Sha256
     @Autowired
     private HashEncoder hashEncoder;

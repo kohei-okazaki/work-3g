@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootLoginInfoSearchServiceImpl;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.RegexType;
@@ -26,21 +25,21 @@ public class AuthServiceImpl implements UserDetailsService {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(AuthServiceImpl.class);
-    /** {@linkplain RootLoginInfoSearchServiceImpl} */
+    /** 管理者サイトユーザログイン情報検索サービス */
     @Autowired
     private RootLoginInfoSearchService searchService;
 
     @Override
-    public AuthInfo loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AuthInfo loadUserByUsername(String seqLoginId) throws UsernameNotFoundException {
 
         // ログインIDの妥当性チェック実施
-        validate(username);
+        validate(seqLoginId);
 
         // 管理者サイトユーザログイン情報を検索
         RootLoginInfo rootLoginInfo = searchService
-                .findById(Long.valueOf(username))
+                .findById(Long.valueOf(seqLoginId))
                 .orElseThrow(() -> new UsernameNotFoundException(
-                        "指定したログインIDは登録されていません. ログインID:" + Integer.valueOf(username)));
+                        "指定したログインIDは登録されていません. ログインID:" + Integer.valueOf(seqLoginId)));
 
         AuthInfo authInfo = new AuthInfo();
         BeanUtil.copy(rootLoginInfo, authInfo);
@@ -51,20 +50,20 @@ public class AuthServiceImpl implements UserDetailsService {
     /**
      * 指定したログインIDの妥当性チェックを行う
      *
-     * @param username
+     * @param seqLoginId
      *     ログインID
      * @throws UsernameNotFoundException
      *     ログインIDが不正の場合
      */
-    private void validate(String username) throws UsernameNotFoundException {
+    private void validate(String seqLoginId) throws UsernameNotFoundException {
 
-        if (StringUtil.isEmpty(username)) {
-            LOG.warn("ログインIDが未指定です. ログインID:" + username);
-            throw new UsernameNotFoundException("ログインIDが未指定です. ログインID:" + username);
-        } else if (!RegexType.HALF_NUMBER.is(username)) {
+        if (StringUtil.isEmpty(seqLoginId)) {
+            LOG.warn("ログインIDが未指定です. ログインID:" + seqLoginId);
+            throw new UsernameNotFoundException("ログインIDが未指定です. ログインID:" + seqLoginId);
+        } else if (!RegexType.HALF_NUMBER.is(seqLoginId)) {
             // ログインIDが半角数字でない場合
-            LOG.warn("ログインIDが半角数字ではありません. ログインID:" + username);
-            throw new UsernameNotFoundException("ログインIDが半角数字ではありません. ログインID:" + username);
+            LOG.warn("ログインIDが半角数字ではありません. ログインID:" + seqLoginId);
+            throw new UsernameNotFoundException("ログインIDが半角数字ではありません. ログインID:" + seqLoginId);
         }
 
     }

@@ -8,6 +8,7 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.tool.excel.DmlExcelReader;
+import jp.co.ha.tool.excel.ExcelCell;
 import jp.co.ha.tool.excel.ExcelReader;
 import jp.co.ha.tool.excel.ExcelRow;
 
@@ -44,13 +45,13 @@ public class DmlGenerator extends BaseGenerator {
                 StringBuilder sb = new StringBuilder();
                 sb.append("INSERT INTO " + table + " (");
                 // ヘッダ部の作成
-                String header = getOneLine(rowList.get(0), false);
+                String header = getHeader(rowList.get(0));
                 sb.append(header);
                 sb.append(") VALUES (");
                 // レコード部の場合
                 ExcelRow row = rowList.get(i);
-                String data = getOneLine(row, true);
-                sb.append(data);
+                String body = getBody(row);
+                sb.append(body);
                 sb.append(");");
 
                 sj.add(sb.toString());
@@ -69,20 +70,34 @@ public class DmlGenerator extends BaseGenerator {
     }
 
     /**
-     * Excel1行分のデータを文字列にする
-     *
+     * ヘッダを文字列形式で返す
+     * 
      * @param row
-     *     Excel行情報
-     * @param isDataRecord
-     *     データレコードかどうか
-     * @return Excel1行分のデータ
+     * @return ヘッダ行
      */
-    private String getOneLine(ExcelRow row, boolean isDataRecord) {
+    private String getHeader(ExcelRow row) {
         StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-        String enclosedChar = isDataRecord ? "'" : "";
         row.getCellList().stream().forEach(e -> {
-            sj.add(enclosedChar + e.getValue() + enclosedChar);
+            sj.add(e.getValue());
         });
+        return sj.toString();
+    }
+
+    /**
+     * ボディを文字列形式で返す
+     * 
+     * @param row
+     * @return ボディ行
+     */
+    private String getBody(ExcelRow row) {
+        StringJoiner sj = new StringJoiner(StringUtil.COMMA);
+        for (ExcelCell cell : row.getCellList()) {
+            if (String.class.equals(cell.getClazz())) {
+                sj.add("'" + cell.getValue() + "'");
+            } else {
+                sj.add(cell.getValue());
+            }
+        }
         return sj.toString();
     }
 

@@ -24,7 +24,7 @@ import jp.co.ha.db.mapper.NewsInfoMapper;
 @Service
 public class NewsInfoSearchServiceImpl implements NewsInfoSearchService {
 
-    /** {@linkplain NewsInfoMapper} */
+    /** お知らせ情報Mapper */
     @Autowired
     private NewsInfoMapper mapper;
 

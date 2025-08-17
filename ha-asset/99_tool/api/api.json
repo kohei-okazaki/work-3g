@@ -24,7 +24,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"height\": 170.00,\n  \"weight\": A,\n  \"test_mode\": 0,\n  \"transaction_id\": 999999999\n}"
+              "textBody": "{\n  \"height\": 170.00,\n  \"weight\": 60,\n  \"test_mode\": 0,\n  \"transaction_id\": 999999999\n}"
             },
             "uri": {
               "query": {
@@ -32,7 +32,7 @@
                 "items": []
               },
               "host": "${APP_API_URL}",
-              "path": "/api/1/healthinfo"
+              "path": "/api/6/healthinfo"
             },
             "id": "922d3a4a-24d5-442d-b2e0-204f5cdedc95",
             "name": "1.健康情報登録API",
@@ -76,7 +76,7 @@
                 "items": []
               },
               "host": "${APP_API_URL}",
-              "path": "/api/1/healthinfo/20"
+              "path": "/api/6/healthinfo/33"
             },
             "id": "93d3a683-720b-40af-8577-1f968ec2af51",
             "name": "2.健康情報照会API",
@@ -298,6 +298,11 @@
                 "enabled": true,
                 "name": "Content-Type",
                 "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "Bearer my-secret-token"
               }
             ]
           }
@@ -423,6 +428,11 @@
                 "enabled": true,
                 "name": "Content-Type",
                 "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "Bearer my-secret-token"
               }
             ]
           }
@@ -528,6 +538,11 @@
                 "enabled": true,
                 "name": "Content-Type",
                 "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "Bearer my-secret-token"
               }
             ]
           }
@@ -567,13 +582,7 @@
             },
             "id": "1cb8dca3-539c-424a-968b-5053c83c8db0",
             "name": "01.ヘルスチェックAPI",
-            "headers": [
-              {
-                "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
+            "headers": []
           }
         },
         {
@@ -591,7 +600,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"seq_login_id\": 19,\n  \"password\": \"test\"\n}"
+              "textBody": "{\n  \"seq_login_id\": 1,\n  \"password\": \"test\"\n}"
             },
             "uri": {
               "query": {
@@ -634,7 +643,7 @@
                   {
                     "enabled": true,
                     "name": "date",
-                    "value": "202409"
+                    "value": "202507"
                   }
                 ]
               },
@@ -646,11 +655,6 @@
             "headers": [
               {
                 "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "enabled": true,
                 "name": "Authorization",
                 "value": "${ROOT_API_TOKEN}"
               }
@@ -679,7 +683,7 @@
                   {
                     "enabled": true,
                     "name": "date",
-                    "value": "202409"
+                    "value": "202508"
                   }
                 ]
               },
@@ -691,11 +695,6 @@
             "headers": [
               {
                 "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "enabled": true,
                 "name": "Authorization",
                 "value": "${ROOT_API_TOKEN}"
               }
@@ -724,7 +723,7 @@
                   {
                     "enabled": true,
                     "name": "date",
-                    "value": "202409"
+                    "value": "202507"
                   }
                 ]
               },
@@ -734,11 +733,6 @@
             "id": "514f0149-337f-4ac1-8c5e-2edb5f5ee5b4",
             "name": "05.Top情報(アカウント情報)取得API",
             "headers": [
-              {
-                "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
-              },
               {
                 "enabled": true,
                 "name": "Authorization",
@@ -768,16 +762,11 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/user/19"
+              "path": "/api/root/user/1"
             },
             "id": "fb7fb6ee-62e4-41a4-87d0-93dce73d9df8",
             "name": "06.管理ユーザ取得API",
             "headers": [
-              {
-                "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
-              },
               {
                 "enabled": true,
                 "name": "Authorization",
@@ -801,7 +790,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"password\": \"test\",\n  \"conf_password\": \"test\"\n}"
+              "textBody": "{\n  \"password\": \"\",\n  \"conf_password\": \"test\"\n}"
             },
             "uri": {
               "query": {
@@ -842,7 +831,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"roles\": [\"00\", \"01\", \"02\"],\n  \"remarks\": \"test user.\",\n  \"password_expire\": \"2026/01/31\"\n}"
+              "textBody": "{\n  \"roles\": [\"00\", \"01\", \"02\"],\n  \"remarks\": \"test user.\",\n  \"password_expire\": \"2099/01/31\"\n}"
             },
             "uri": {
               "query": {
@@ -850,7 +839,7 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/user/19"
+              "path": "/api/root/user/1"
             },
             "id": "49927ca3-0a89-4b9f-bc0f-80f04d0f097d",
             "name": "08.管理ユーザ編集API",
@@ -905,11 +894,6 @@
                 "enabled": true,
                 "name": "Authorization",
                 "value": "${ROOT_API_TOKEN}"
-              },
-              {
-                "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
               }
             ]
           }
@@ -929,7 +913,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"mail_address\": \"test\",\n  \"password_expire\": \"2022/06/01\"\n}"
+              "textBody": "{\n  \"mail_address\": \"kou1210hei@\",\n  \"password_expire\": \"2025/01/01\"\n}"
             },
             "uri": {
               "query": {
@@ -937,7 +921,7 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/account/2"
+              "path": "/api/root/account/113"
             },
             "id": "9603f949-63bd-4604-9e23-a397a9e4ae6c",
             "name": "10.アカウント情報編集API",
@@ -978,7 +962,7 @@
                   {
                     "enabled": true,
                     "name": "page",
-                    "value": "2"
+                    "value": "0"
                   }
                 ]
               },
@@ -992,11 +976,6 @@
                 "enabled": true,
                 "name": "Authorization",
                 "value": "${ROOT_API_TOKEN}"
-              },
-              {
-                "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
               }
             ]
           }
@@ -1024,7 +1003,7 @@
                   {
                     "enabled": true,
                     "name": "page",
-                    "value": "1"
+                    "value": "0"
                   }
                 ]
               },
@@ -1038,11 +1017,6 @@
                 "enabled": true,
                 "name": "Authorization",
                 "value": "${ROOT_API_TOKEN}"
-              },
-              {
-                "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
               }
             ]
           }
@@ -1109,6 +1083,7 @@
                 "delimiter": "&",
                 "items": [
                   {
+                    "enabled": true,
                     "name": "page",
                     "value": "0"
                   }
@@ -1184,7 +1159,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"index\": \"お知らせ名\",\n  \"date\": \"2021/02/05\",\n  \"detail\": \"詳細\",\n  \"tag\": {\n    \"color\": \"blue\",\n    \"name\": \"タグ名\"\n  }\n}"
+              "textBody": "{\n\n  \"date\": \"2020/12/01\",\n  \"detail\": \"ローカル環境用<br>Version 1.0.0 リリース情報<br><li>アカウント登録/変更機能</li><li>健康情報登録/照会機能</li><li>カロリー計算機能</li><li>肺活量計算機能</li><li>パスワード再設定機能</li>\",\n  \"tag\":{\n    \"color\": \"blue\",\n    \"name\": \"リリース\"\n  }\n}"
             },
             "uri": {
               "query": {
@@ -1192,7 +1167,7 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/news/10"
+              "path": "/api/root/news/1"
             },
             "id": "a49d56d3-9c7f-478b-8ee3-8c86d8f4f3cd",
             "name": "16.お知らせ情報編集API",
@@ -1271,8 +1246,9 @@
                     "value": "1"
                   },
                   {
+                    "enabled": true,
                     "name": "page",
-                    "value": "0"
+                    "value": "あ"
                   }
                 ]
               },
@@ -1286,11 +1262,6 @@
                 "enabled": true,
                 "name": "Authorization",
                 "value": "${ROOT_API_TOKEN}"
-              },
-              {
-                "enabled": true,
-                "name": "Content-Type",
-                "value": "application/json"
               }
             ]
           }
@@ -1399,7 +1370,7 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/note/9"
+              "path": "/api/root/note/23"
             },
             "id": "09d3988a-0ed2-42aa-91f1-673c1b087a4a",
             "name": "21.メモ情報削除API",
@@ -1443,11 +1414,80 @@
                 "enabled": true,
                 "name": "Authorization",
                 "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+              "name": "GET"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
               },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/inquiry"
+            },
+            "id": "13cc92cb-0175-4354-9de5-5abaf111477f",
+            "name": "23.問い合わせ情報一覧取得API",
+            "headers": [
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
+              }
+            ]
+          }
+        },
+        {
+          "entity": {
+            "type": "Request",
+            "method": {
+              "requestBody": true,
+              "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+              "name": "POST"
+            },
+            "body": {
+              "formBody": {
+                "overrideContentType": true,
+                "encoding": "application/x-www-form-urlencoded",
+                "items": []
+              },
+              "bodyType": "Text"
+            },
+            "uri": {
+              "query": {
+                "delimiter": "&",
+                "items": []
+              },
+              "host": "${ROOT_API_URL}",
+              "path": "/api/root/inquiry"
+            },
+            "id": "465ca06b-7059-412d-a46c-3a58338a0197",
+            "name": "24.問い合わせ情報編集API",
+            "headers": [
               {
                 "enabled": true,
                 "name": "Content-Type",
                 "value": "application/json"
+              },
+              {
+                "enabled": true,
+                "name": "Authorization",
+                "value": "${ROOT_API_TOKEN}"
               }
             ]
           }
@@ -1547,7 +1587,7 @@
         "bb3caad6-0886-4479-b360-14c36174efde": {
           "createdAt": "2025-06-01T13:06:24.996+09:00",
           "name": "ROOT_API_TOKEN",
-          "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxOSIsImV4cCI6MTc0ODc4MzMzM30.DO-HM-xRIOYhqyA6gH2JsddipPQuCTqcw9s_hJS8JOH-UCE1YyLd6G-8lnNQOtc6uEoYmYXD1uotIJg2cpWsMg",
+          "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzU0OTE5OTY0fQ.XpPcYaj5JCc6X5cXefFumCMxN_-6gfUZ7cChCMxFqPDE1-ZNWM8VwDtLMVtU-WJZwpmSyi4cwl1CgPwLmu6Lsw",
           "enabled": true,
           "private": false
         },
@@ -1561,14 +1601,14 @@
         "c02caaab-ee7d-454b-8900-13a0735e8565": {
           "createdAt": "2025-06-01T13:11:06.356+09:00",
           "name": "APP_API_KEY",
-          "value": "e8c1aa2b799869d06cec11d069729cf05215d752e9b9a5471ebd3551454604ca",
+          "value": "68ce3aafcfb70ead31b43c2bb9d71ada1f4ca4af259657f91253180faa62ae14",
           "enabled": true,
           "private": false
         },
         "208c8505-dbd7-4555-93fe-17fd2f7d63de": {
           "createdAt": "2025-07-03T23:56:51.655+09:00",
           "name": "CALC_API_GW_URL",
-          "value": "https://gpjylo82oa.execute-api.ap-northeast-1.amazonaws.com/dev",
+          "value": "https://xpijh6pcoi.execute-api.ap-northeast-1.amazonaws.com/dev",
           "enabled": true,
           "private": false
         }

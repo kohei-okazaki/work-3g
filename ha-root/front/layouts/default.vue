@@ -101,6 +101,11 @@ export default {
           title: "メモ一覧",
           to: "/note",
         },
+        {
+          icon: "mdi-notebook",
+          title: "問い合わせ一覧",
+          to: "/inquiry",
+        },
       ],
       miniVariant: false,
       right: true,

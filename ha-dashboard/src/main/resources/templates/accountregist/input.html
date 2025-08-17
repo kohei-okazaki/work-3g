@@ -5,71 +5,101 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <head>
-<title>アカウント登録画面</title>
+<title>ユーザ登録画面</title>
 <link>
 </head>
 <body>
 
-  <div class="px-4">
-    <form id="accountRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${accountRegistForm}">
-      <div class="container border col-7 shadow">
-        <h2 class="menuTitle">アカウント登録</h2>
+  <div class="container d-flex justify-content-center my-5">
+    <div class="card shadow w-100" style="max-width: 700px;">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">📝 ユーザ登録</h4>
+      </div>
+      <div class="card-body">
+        <form id="userRegistForm" th:action="@{/accountregist/confirm}" method="post" th:object="${userRegistForm}">
 
-        <br>
-        <div class="alert alert-danger" role="alert" th:if="${errorMessage} != null" th:text="${errorMessage}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
+          <!-- エラーメッセージまとめ表示 -->
+          <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+          <div th:each="errField : ${#fields.errors()}" class="alert alert-danger" th:text="${errField}"></div>
 
-        <!--/* メールアドレスここから */-->
-        <div class="form-group">
-          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
-          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@test.com" />
-          <div id="suggest"></div>
-        </div><!-- /.form-group -->
-        <!--/* メールアドレスここまで */-->
+          <!-- メールアドレス -->
+          <div class="form-group">
+            <label for="mailAddress" class="font-weight-bold" th:text="#{mailAddress}">メールアドレス</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="email" class="form-control" th:field="*{mailAddress}" maxlength="64"  placeholder="test@example.com">
+            <div id="suggest" class="mt-1 text-info small cursor-pointer"></div>
+          </div>
 
-        <!--/* パスワードここから */-->
-        <div class="form-group">
-          <label class="control-label" th:text="#{password}"></label><span class="badge badge-danger">必須</span>
-          <div class="checkbox">
-            <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" required placeholder="adminpass" />
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="password-check" class="checkbox-input custom-control-input" />
-              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
-            </label><!-- /.custom-control custom-checkbox -->
-          </div><!-- /.checkbox -->
-        </div><!-- /.form-group -->
-        <!--/* パスワードここまで */-->
+          <!-- パスワード -->
+          <div class="form-group">
+            <label for="password" class="font-weight-bold" th:text="#{password}">パスワード</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="password" class="form-control" th:field="*{password}" maxlength="16"  placeholder="adminpass">
+            <div class="form-check mt-2">
+              <input type="checkbox" id="password-check" class="form-check-input">
+              <label class="form-check-label" for="password-check">パスワードを表示</label>
+            </div>
+          </div>
 
-        <!--/* 確認用パスワードここから */-->
-        <div class="form-group">
-          <label class="control-label" th:text="#{confirmPassword}"></label><span class="badge badge-danger">必須</span>
-          <div class="checkbox">
-            <input type="password" class="validate[required,equals[password]] form-control" th:field="*{confirmPassword}" maxlength="16" required placeholder="adminpass" />
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="confirmPassword-check" class="checkbox-input custom-control-input" />
-              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
-            </label><!-- /.custom-control custom-checkbox -->
-          </div><!-- /.checkbox -->
-        </div><!-- /.form-group -->
-        <!--/* 確認用パスワードここまで */-->
+          <!-- 確認パスワード -->
+          <div class="form-group">
+            <label for="confirmPassword" class="font-weight-bold" th:text="#{confirmPassword}">確認用パスワード</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="password" class="form-control" th:field="*{confirmPassword}" maxlength="16"  placeholder="adminpass">
+            <div class="form-check mt-2">
+              <input type="checkbox" id="confirmPassword-check" class="form-check-input">
+              <label class="form-check-label" for="confirmPassword-check">パスワードを表示</label>
+            </div>
+          </div>
 
-        <!--/* 備考ここから */-->
-        <div class="form-group">
-          <p th:text="#{remarks}"></p>
-          <textarea class="form-control" rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
-        </div><!-- /.form-group -->
-        <!--/* 備考ここまで */-->
+          <!-- 性別 -->
+          <div class="form-group">
+            <label class="font-weight-bold" th:text="#{genderType}">性別</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" th:field="*{genderType}" id="male" value="0" checked>
+              <label class="custom-control-label" for="male" th:text="#{male}">男性</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" th:field="*{genderType}" id="female" value="1">
+              <label class="custom-control-label" for="female" th:text="#{female}">女性</label>
+            </div>
+          </div>
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="確 認" />
-        <input type="reset" class="btn btn-secondary w-25" value="リセット" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-      </div><!-- /.container border col-7 -->
-    </form><!-- /#accountRegistForm -->
+          <!-- 誕生日 -->
+          <div class="form-group">
+            <label for="birthDate" class="font-weight-bold" th:text="#{birthDate}">誕生日</label>
+            <span class="badge badge-danger ml-2">必須</span>
+            <input type="date" class="form-control" th:field="*{birthDate}" required>
+          </div>
+
+          <!-- 目標体重 -->
+          <div class="form-group">
+            <label for="goalWeight" class="font-weight-bold" th:text="#{goalWeight}">目標体重</label>
+            <span class="badge badge-danger ml-2">必須</span>
+
+            <div class="input-group">
+              <input type="text" class="form-control" th:field="*{goalWeight}" required placeholder="50.00" aria-describedby="goal-weight-unit">
+              <div class="input-group-append">
+                <span class="input-group-text" id="goal-weight-unit">kg</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 備考 -->
+          <div class="form-group">
+            <label for="remarks" class="font-weight-bold" th:text="#{remarks}">備考</label>
+            <textarea class="form-control" rows="5" th:field="*{remarks}" placeholder="備 考"></textarea>
+          </div>
+
+          <!-- ボタン -->
+          <div class="text-center mt-4">
+            <input type="submit" class="btn btn-success mr-2 w-25" value="確 認" />
+            <input type="reset" class="btn btn-secondary w-25" value="リセット" />
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <script th:src="@{/static/js/common/password.min.js}"></script>
@@ -78,9 +108,17 @@
     $(function() {
 
       // validate処理
-      jQuery("#accountRegistForm").validationEngine({
+      jQuery("#userRegistForm").validationEngine({
         promptPosition : "bottomLeft:80"
       });
+
+<!--      $("#birthDate").datepicker({-->
+<!--        firstDay: 0,-->
+<!--        showButtonPanel: true,-->
+<!--        changeYear: true,-->
+<!--        changeMonth: true,-->
+<!--        yearRange: "1960:2025"-->
+<!--      });-->
 
       // アカウント登録画面⇒TOP画面には遷移できないようにする
       $(".appTitle").removeAttr("onclick");
@@ -103,7 +141,13 @@
         if ($('#confirmPassword').val() !== '') {
           value += 1;
         }
-        var progressValue = value / 3;
+        if ($('#genderType').val() !== '') {
+            value += 1;
+        }
+        if ($('#birthDate').val() !== '') {
+            value += 1;
+        }
+        var progressValue = value / 5;
         mprogress.set(progressValue);
       });
 
@@ -118,7 +162,13 @@
         if ($('#confirmPassword').val() !== '') {
           value += 1;
         }
-        var progressValue = value / 3;
+        if ($('#genderType').val() !== '') {
+            value += 1;
+        }
+        if ($('#birthDate').val() !== '') {
+            value += 1;
+        }
+        var progressValue = value / 5;
         mprogress.set(progressValue);
       });
 
@@ -133,9 +183,57 @@
         if ($('#confirmPassword').val() !== '') {
           value += 1;
         }
-        var progressValue = value / 3;
+        if ($('#genderType').val() !== '') {
+            value += 1;
+        }
+        if ($('#birthDate').val() !== '') {
+            value += 1;
+        }
+        var progressValue = value / 5;
         mprogress.set(progressValue);
       });
+      
+      $("#genderType").on("change", function() {
+          var value = 0;
+          if ($('#mailAddress').val() !== '') {
+            value += 1;
+          }
+          if ($('#password').val() !== '') {
+            value += 1;
+          }
+          if ($('#confirmPassword').val() !== '') {
+            value += 1;
+          }
+          if ($('#genderType').val() !== '') {
+              value += 1;
+          }
+          if ($('#birthDate').val() !== '') {
+              value += 1;
+          }
+          var progressValue = value / 5;
+          mprogress.set(progressValue);
+        });
+
+      $("#birthDate").on("change", function() {
+          var value = 0;
+          if ($('#mailAddress').val() !== '') {
+            value += 1;
+          }
+          if ($('#password').val() !== '') {
+            value += 1;
+          }
+          if ($('#confirmPassword').val() !== '') {
+            value += 1;
+          }
+          if ($('#genderType').val() !== '') {
+              value += 1;
+          }
+          if ($('#birthDate').val() !== '') {
+              value += 1;
+          }
+          var progressValue = value / 5;
+          mprogress.set(progressValue);
+        });
 
       const domains = [
           "gmail.com",

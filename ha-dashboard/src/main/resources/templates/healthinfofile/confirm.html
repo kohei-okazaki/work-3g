@@ -10,43 +10,53 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div th:if="${errorMessage} != null">
-      <br><br>
-      <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
-    </div>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow border-0 rounded">
 
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">健康情報一括登録確認画面</h2>
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📝 健康情報一括登録確認画面</h4>
+          </div>
+          <div class="card-body bg-white">
+            <form th:action="@{/healthinfofile/complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+              <!-- エラーメッセージ -->
+              <div th:if="${errorMessage} != null" class="container mt-4">
+                <div class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+              </div>
 
-      <form th:action="@{/healthinfofile/complete}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
-        <table class="table table-hover table-striped">
-          <tr>
-            <td colspan="3" th:text="'登録件数 ' + ${count}"></td>
-          </tr>
-          <tr>
-            <th>行数</th>
-            <th th:text="#{height}"></th>
-            <th th:text="#{weight}"></th>
-          </tr>
-          <tr th:each="model, status : ${modelList}">
-            <td th:text="${status.count}">
-            <td th:text="${model.height}">
-            <td th:text="${model.weight}">
-          </tr>
-        </table><!-- /.table table-hover table-striped -->
+              <!-- 登録件数表示 -->
+              <div class="mb-3 font-weight-bold" th:text="'登録件数 ' + ${count}"></div>
 
-        <br>
+              <!-- 健康情報テーブル -->
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>行数</th>
+                    <th th:text="#{height}"></th>
+                    <th th:text="#{weight}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="model, status : ${modelList}">
+                    <td th:text="${status.count}"></td>
+                    <td th:text="${model.height}"></td>
+                    <td th:text="${model.weight}"></td>
+                  </tr>
+                </tbody>
+              </table>
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success" value="確 定" />
-        <input type="button" class="btn btn-secondary" value="戻 る" onclick="history.back()" />
-        <!--/* ボタン部ここまで */-->
-
-      </form>
-      <br>
-    </div><!-- /.container border col-8 -->
-  </div>
+              <!-- ボタンエリア -->
+              <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
+                <input type="submit" class="btn btn-success w-100 w-sm-auto" value="確 定" />
+                <input type="button" class="btn btn-secondary w-100 w-sm-auto" value="戻 る" onclick="history.back()" />
+              </div>
+            </form>
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col-md-10 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 
 </body>
 </html>

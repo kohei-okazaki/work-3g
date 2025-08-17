@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.NewsInfoSearchServiceImpl;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
@@ -32,10 +31,10 @@ import jp.co.ha.root.contents.news.response.NewsEditApiResponse;
 public class NewsEditApiController
         extends BaseRootApiController<NewsEditApiRequest, NewsEditApiResponse> {
 
-    /** {@linkplain NewsInfoSearchServiceImpl} */
+    /** お知らせ情報検索サービス */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** {@linkplain NewsComponent} */
+    /** お知らせ情報Component */
     @Autowired
     private NewsComponent newsComponent;
 

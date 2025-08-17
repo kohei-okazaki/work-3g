@@ -5,83 +5,100 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <head>
-<title>アカウント設定変更確認</title>
+<title>ユーザ設定変更確認</title>
 <link>
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">アカウント設定変更確認</h2>
-      <form th:action="@{/accountsetting/complete}" method="post" th:object="${accountSettingForm}">
-        <table class="table table-hover table-striped">
-          <tr>
-            <th th:text="#{delete}"></th>
-            <td>
-              <div th:if="*{deleteFlag} == 1">する</div>
-              <div th:if="*{deleteFlag} == 0">しない</div>
-            </td>
-          </tr>
-          <tr>
-            <th th:text="#{seqUserId}"></th>
-            <td th:text="*{seqUserId}"></td>
-          </tr>
-          <tr>
-            <th th:text="#{password}"></th>
-            <td>****</td>
-          </tr>
-          <tr>
-            <th th:text="#{passwordExpire}"></th>
-            <td th:text="*{passwordExpire}"></td>
-          </tr>
-          <tr>
-            <th th:text="#{mailAddress}"></th>
-            <td th:text="*{mailAddress}"></td>
-          </tr>
-          <tr>
-            <th th:text="#{headerUse}"></th>
-            <td>
-              <div th:if="*{headerFlag} == 1">する</div>
-              <div th:if="*{headerFlag} == 0">しない</div>
-            </td>
-          </tr>
-          <tr>
-            <th th:text="#{footerUse}"></th>
-            <td>
-              <div th:if="*{footerFlag} == 1">する</div>
-              <div th:if="*{footerFlag} == 0">しない</div>
-            </td>
-          </tr>
-          <tr>
-            <th th:text="#{maskUse}"></th>
-            <td>
-              <div th:if="*{maskFlag} == 1">する</div>
-              <div th:if="*{maskFlag} == 0">しない</div>
-            </td>
-          </tr>
-          <tr>
-            <th th:text="#{enclosureCharUse}"></th>
-            <td>
-              <div th:if="*{enclosureCharFlag} == 1">する</div>
-              <div th:if="*{enclosureCharFlag} == 0">しない</div>
-            </td>
-          </tr>
-          <tr>
-            <th th:text="#{remarks}"></th>
-            <td th:text="*{remarks}"></td>
-          </tr>
-        </table><!-- /.table table-hover table-striped -->
+  <div class="container my-4">
+    <div class="card shadow">
 
-        <br><br>
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">📝 ユーザ設定変更確認</h4>
+      </div>
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="確 定" />
-        <input type="button" class="btn btn-secondary w-25" value="戻 る" onclick="history.back()" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-      </form>
-    </div><!-- /.container border col-8 -->
-  </div>
+      <div class="card-body">
+        <form th:action="@{/accountsetting/complete}" method="post" th:object="${userSettingForm}">
+          <table class="table table-bordered table-hover">
+            <tbody>
+              <tr>
+                <th scope="row" th:text="#{delete}"></th>
+                <td th:switch="*{deleteFlag}">
+                  <span th:case="1">する</span>
+                  <span th:case="0">しない</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{seqUserId}"></th>
+                <td th:text="*{seqUserId}"></td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{password}"></th>
+                <td>****</td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{passwordExpire}"></th>
+                <td th:text="${#temporals.format(userSettingForm.passwordExpire, 'yyyy/MM/dd')}"></td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{genderType}"></th>
+                <td th:switch="*{genderType}">
+                  <span th:case="0">男性</span>
+                  <span th:case="1">女性</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{birthDate}"></th>
+                <td th:text="${#temporals.format(userSettingForm.birthDate, 'yyyy/MM/dd')}"></td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{goalWeight}">目標体重</th>
+                <td th:text="*{goalWeight} + ' kg'"></td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{headerUse}"></th>
+                <td th:switch="*{headerFlag}">
+                  <span th:case="1">する</span>
+                  <span th:case="0">しない</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{footerUse}"></th>
+                <td th:switch="*{footerFlag}">
+                  <span th:case="1">する</span>
+                  <span th:case="0">しない</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{maskUse}"></th>
+                <td th:switch="*{maskFlag}">
+                  <span th:case="1">する</span>
+                  <span th:case="0">しない</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{enclosureCharUse}"></th>
+                <td th:switch="*{enclosureCharFlag}">
+                  <span th:case="1">する</span>
+                  <span th:case="0">しない</span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{remarks}"></th>
+                <td th:text="*{remarks}"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- ボタン部 -->
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success mx-2 w-25">確 定</button>
+            <button type="button" class="btn btn-secondary mx-2 w-25" onclick="history.back()">戻 る</button>
+          </div>
+        </form>
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+  </div><!-- /.container -->
 
 </body>
 </html>

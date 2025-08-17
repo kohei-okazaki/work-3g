@@ -19,7 +19,6 @@ import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
-import jp.co.ha.dashboard.healthinfo.service.impl.HealthInfoRefDetailServiceImpl;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -31,10 +30,10 @@ import jp.co.ha.dashboard.view.DashboardView;
 @RequestMapping("healthinforeference")
 public class HeathInfoRefDetailController implements BaseWebController {
 
-    /** {@linkplain SessionComponent} */
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain HealthInfoRefDetailServiceImpl} */
+    /** 健康情報詳細サービス */
     @Autowired
     private HealthInfoRefDetailService detailService;
 

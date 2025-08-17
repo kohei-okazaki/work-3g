@@ -2534,7 +2534,7 @@ export default {
           name: "メモ情報登録API",
           endpoint: "/api/root/note",
           httpMethod: "POST",
-          description: "管理者用サイトユーザのメモ情報一覧を登録するAPI",
+          description: "管理者用サイトユーザのメモ情報を登録するAPI",
           url: "/root/api/note/entry",
           headers: [
             {
@@ -2609,7 +2609,7 @@ export default {
           name: "メモ情報編集API",
           endpoint: "/api/root/note/{seq_root_user_note_info_id}",
           httpMethod: "PUT",
-          description: "管理者用サイトユーザのメモ情報一覧を編集するAPI",
+          description: "管理者用サイトユーザのメモ情報を編集するAPI",
           url: "/root/api/note/edit",
           headers: [
             {
@@ -2675,7 +2675,7 @@ export default {
           name: "メモ情報削除API",
           endpoint: "/api/root/note/{seq_root_user_note_info_id}",
           httpMethod: "DELETE",
-          description: "管理者用サイトユーザのメモ情報一覧を削除するAPI",
+          description: "管理者用サイトユーザのメモ情報を削除するAPI",
           url: "/root/api/note/delete",
           headers: [
             {

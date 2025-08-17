@@ -10,25 +10,54 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-8 shadow">
-      <h2 class="menuTitle">健康情報一括登録画面</h2>
-      <br>
-      <form id="healthInfoFileForm" th:action="@{/healthinfofile/confirm}" method="post" enctype="multipart/form-data" th:object="${healthInfoFileForm}">
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📝 健康情報入力</h4>
+          </div>
 
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('multipartFile')}" th:errors="*{multipartFile}"></div>
+          <div class="card-body bg-white">
 
-        <label class="control-label" th:text="#{healthInfoFile}"></label><span class="badge badge-danger">必須</span>
-        <div class="form-group custom-file">
-          <input type="file" class="validate[required] custom-file-input" th:field="*{multipartFile}" required />
-          <label class="custom-file-label" for="multipartFile">ファイルを選択</label>
+            <form id="healthInfoFileForm"
+                  th:action="@{/healthinfofile/confirm}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  th:object="${healthInfoFileForm}">
+
+              <!-- ファイル入力 -->
+              <div class="form-group">
+                <label for="multipartFile" class="d-block mb-1" th:text="#{healthInfoFile}"></label>
+                <span class="badge badge-danger mb-2">必須</span>
+
+                <div class="custom-file">
+                  <input type="file"
+                         class="custom-file-input validate[required]"
+                         id="multipartFile"
+                         th:field="*{multipartFile}"
+                         required />
+                  <label class="custom-file-label" for="multipartFile">ファイルを選択</label>
+                </div>
+
+                <!-- エラーメッセージ -->
+                <div class="alert alert-danger mt-2"
+                     role="alert"
+                     th:if="${#fields.hasErrors('multipartFile')}"
+                     th:errors="*{multipartFile}"></div>
+              </div>
+
+              <!-- ボタンエリア -->
+              <div class="d-flex justify-content-between mt-4">
+                <input type="submit" class="btn btn-success" value="アップロード" />
+              </div>
+
+            </form>
+          </div>
         </div>
-        <br><br>
-        <input type="submit" class="btn btn-success" value="アップロード" />
-      </form><!-- /#healthInfoFileForm -->
-      <br>
-    </div><!-- /.container border col-8 -->
-  </div>
+      </div><!-- /.col-md-8 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
 
   <script>
     $(function() {

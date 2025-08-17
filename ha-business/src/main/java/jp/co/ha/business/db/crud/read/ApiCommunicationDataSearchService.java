@@ -29,7 +29,7 @@ public interface ApiCommunicationDataSearchService {
     Long selectLastTransactionId();
 
     /**
-     * 指定されたAPI通信情報IDのAPI通信情報の件数を返す
+     * 指定されたAPI通信情報IDのAPI通信情報の件数を取得する
      *
      * @param seqApiCommunicationDataId
      *     API通信情報ID

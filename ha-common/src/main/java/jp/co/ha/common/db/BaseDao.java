@@ -26,11 +26,11 @@ public abstract class BaseDao {
 
     /** LOG */
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
-    /** {@linkplain Connection} */
+    /** Connection */
     protected Connection con;
-    /** {@linkplain Statement} */
+    /** Statement */
     protected Statement stm;
-    /** {@linkplain ResultSet} */
+    /** ResultSet */
     protected ResultSet rs;
 
     /**
@@ -42,7 +42,7 @@ public abstract class BaseDao {
     protected void connect() throws BaseException {
 
         try {
-            JdbcConfig conf = BeanLoader.getBean(JdbcConfig.class);
+            JdbcProperties conf = BeanLoader.getBean(JdbcProperties.class);
             Class.forName(conf.getDriverClassName()).getDeclaredConstructor()
                     .newInstance();
             this.con = DriverManager.getConnection(conf.getUrl(), conf.getUsername(),

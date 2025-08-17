@@ -14,7 +14,7 @@ import jp.co.ha.db.entity.NewsInfo;
 public interface NewsInfoSearchService {
 
     /**
-     * お知らせ情報を取得
+     * お知らせ情報を検索する
      *
      * @param selectOption
      *     {@linkplain SelectOption}
@@ -32,7 +32,7 @@ public interface NewsInfoSearchService {
     long countBySeqNewsInfoId(Long seqNewsInfoId);
 
     /**
-     * 指定したお知らせ情報IDのお知らせ情報を取得
+     * 指定したお知らせ情報IDのお知らせ情報を検索する
      *
      * @param seqNewsInfoId
      *     お知らせ情報ID

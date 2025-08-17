@@ -15,7 +15,7 @@ import jp.co.ha.db.entity.BmiRangeMtExample;
 import jp.co.ha.db.mapper.BmiRangeMtMapper;
 
 /**
- * BMI範囲マスタ検索サービスインターフェース実装クラス
+ * BMI範囲マスタ検索サービス実装クラス
  *
  * @version 1.0.0
  */
@@ -23,10 +23,10 @@ import jp.co.ha.db.mapper.BmiRangeMtMapper;
 // @CacheConfig(cacheNames = "bmiRangeMt")
 public class BmiRangeMtSearchServiceImpl implements BmiRangeMtSearchService {
 
-    /** {@linkplain BmiRangeMtMapper} */
+    /** BMI範囲マスタMapper */
     @Autowired
     private BmiRangeMtMapper mapper;
-    /** {@linkplain BmiRangeMtCacheComponent} */
+    /** BMI範囲マスタのキャッシュComponent */
     @Autowired
     private BmiRangeMtCacheComponent cacheComponent;
 

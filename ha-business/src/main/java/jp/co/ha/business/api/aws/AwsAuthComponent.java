@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
-import jp.co.ha.common.system.SystemConfig;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.BeanUtil;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
@@ -20,12 +20,12 @@ import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 @Component
 public class AwsAuthComponent {
 
-    /** {@linkplain SystemConfig} */
+    /** システム設定ファイル情報 */
     @Autowired
-    private SystemConfig systemConfig;
+    private SystemProperties systemProps;
 
     /**
-     * システムプロパティ.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
+     * システム設定ファイル情報.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
      * <ul>
      * <li>ローカル環境の場合、{@linkplain ProfileCredentialsProvider}</li>
      * <li>dev1環境の場合、{@linkplain InstanceProfileCredentialsProvider}</li>
@@ -35,8 +35,8 @@ public class AwsAuthComponent {
      */
     public AwsCredentialsProvider getAWSCredentialsProvider() {
 
-        if (BeanUtil.notNull(systemConfig.getEnvironment())) {
-            switch (systemConfig.getEnvironment()) {
+        if (BeanUtil.notNull(systemProps.getEnvironment())) {
+            switch (systemProps.getEnvironment()) {
             case LOCAL:
                 return ProfileCredentialsProvider.create();
             case DEV1:
@@ -46,7 +46,7 @@ public class AwsAuthComponent {
 
         // システムプロパティの環境がNullや実行可能環境でない場合
         throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                "環境情報の設定が不正です。env=" + systemConfig.getEnvironment());
+                "環境情報の設定が不正です。env=" + systemProps.getEnvironment());
     }
 
 }

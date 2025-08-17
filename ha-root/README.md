@@ -108,3 +108,13 @@
     - 概要：権限マスタの一覧を取得するAPI
     - URL：/api/root/roles
     - Method：GET
+
+- 問い合わせ情報一覧取得API：
+    - 概要：健康管理アプリのユーザの問い合わせ情報一覧を取得するAPI
+    - URL：/api/root/inquiry
+    - Method：GET
+
+- 問い合わせ情報編集API：
+    - 概要：健康管理アプリのユーザの問い合わせ情報を更新するAPI
+    - URL：/api/root/inquiry/{seq_inquiry_mng_id}
+    - Method：PUT

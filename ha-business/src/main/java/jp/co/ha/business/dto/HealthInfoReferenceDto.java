@@ -1,6 +1,7 @@
 package jp.co.ha.business.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * 健康情報照会DTO
@@ -15,9 +16,9 @@ public class HealthInfoReferenceDto {
     /** 健康情報作成日直接指定フラグ */
     private String healthInfoRegDateSelectFlag;
     /** 健康情報作成日(開始) */
-    private String fromHealthInfoRegDate;
+    private LocalDate fromHealthInfoRegDate;
     /** 健康情報作成日(終了) */
-    private String toHealthInfoRegDate;
+    private LocalDate toHealthInfoRegDate;
 
     /* response */
     /** 身長 */
@@ -74,7 +75,7 @@ public class HealthInfoReferenceDto {
      *
      * @return fromHealthInfoRegDate
      */
-    public String getFromHealthInfoRegDate() {
+    public LocalDate getFromHealthInfoRegDate() {
         return fromHealthInfoRegDate;
     }
 
@@ -84,7 +85,7 @@ public class HealthInfoReferenceDto {
      * @param fromHealthInfoRegDate
      *     健康情報作成日(開始)
      */
-    public void setFromHealthInfoRegDate(String fromHealthInfoRegDate) {
+    public void setFromHealthInfoRegDate(LocalDate fromHealthInfoRegDate) {
         this.fromHealthInfoRegDate = fromHealthInfoRegDate;
     }
 
@@ -93,7 +94,7 @@ public class HealthInfoReferenceDto {
      *
      * @return toHealthInfoRegDate
      */
-    public String getToHealthInfoRegDate() {
+    public LocalDate getToHealthInfoRegDate() {
         return toHealthInfoRegDate;
     }
 
@@ -103,7 +104,7 @@ public class HealthInfoReferenceDto {
      * @param toHealthInfoRegDate
      *     健康情報作成日(終了)
      */
-    public void setToHealthInfoRegDate(String toHealthInfoRegDate) {
+    public void setToHealthInfoRegDate(LocalDate toHealthInfoRegDate) {
         this.toHealthInfoRegDate = toHealthInfoRegDate;
     }
 

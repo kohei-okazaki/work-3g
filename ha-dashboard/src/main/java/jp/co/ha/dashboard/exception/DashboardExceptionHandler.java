@@ -31,9 +31,9 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
     /** LOG */
     private static final Logger LOG = LoggerFactory
             .getLogger(DashboardExceptionHandler.class);
-    /** {@linkplain SlackApiComponent} */
+    /** SlackComponent */
     @Autowired
-    private SlackApiComponent slackApiComponent;
+    private SlackApiComponent slack;
 
     @Override
     public ModelAndView resolveException(HttpServletRequest request,
@@ -47,7 +47,7 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
 
         // Slackに通知
         try {
-            slackApiComponent.send(ContentType.DASHBOARD, logErrorMessage);
+            slack.send(ContentType.DASHBOARD, logErrorMessage);
         } catch (BaseException be) {
             LOG.error("slack通知に失敗しました", be);
         }

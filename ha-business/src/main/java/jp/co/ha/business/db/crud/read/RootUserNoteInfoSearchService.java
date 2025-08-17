@@ -14,7 +14,7 @@ import jp.co.ha.db.entity.RootUserNoteInfo;
 public interface RootUserNoteInfoSearchService {
 
     /**
-     * 指定したログインIDの管理者サイトユーザメモ情報を全件返す
+     * 指定したログインIDの管理者サイトユーザメモ情報を検索する
      *
      * @param seqLoginId
      *     ログインID
@@ -25,7 +25,7 @@ public interface RootUserNoteInfoSearchService {
     List<RootUserNoteInfo> findBySeqLoginId(Long seqLoginId, SelectOption selectOption);
 
     /**
-     * 指定した管理者サイトユーザメモ情報IDの管理者サイトユーザメモ情報を返す
+     * 指定した管理者サイトユーザメモ情報IDの管理者サイトユーザメモ情報を検索する
      *
      * @param seqRootUserNoteInfoId
      *     管理者サイトユーザメモ情報ID

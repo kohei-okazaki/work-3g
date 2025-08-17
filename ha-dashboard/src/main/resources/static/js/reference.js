@@ -19,19 +19,29 @@ $(function() {
     form.submit();
   });
 
-  $("#healthInfoRegDateSelectFlagFalse").on("click", function() {
+  function updateDateVisibility() {
+    const isDirect = $("#healthInfoRegDateSelectFlagTrue").is(":checked");
 
-    var classList = document.getElementsByClassName('hideCalendar');
-    for (var i = 0; i < classList.length; i++) {
-      classList[i].style.display = "";
-    }
-  });
+    console.log("called updateDateVisibility");
 
-  $("#healthInfoRegDateSelectFlagTrue").on("click", function() {
-    var classList = document.getElementsByClassName('hideCalendar');
-    for (var i = 0; i < classList.length; i++) {
-      classList[i].style.display = "none";
+    if (isDirect) {
+      console.log("→ hide");
+
+      // 「直接指定する」 → to欄と〜を非表示
+      $("#toDateWrapper").hide();
+
+    } else {
+      // 「直接指定しない」 → 両方表示
+      console.log("→ show");
+      $("#toDateWrapper").show();
+	  
     }
-  });
+  }
+
+  // 初期状態の反映
+  updateDateVisibility();
+
+  // ラジオボタン変更時にイベント発火
+  $("#healthInfoRegDateSelectFlagFalse, #healthInfoRegDateSelectFlagTrue").on("change", updateDateVisibility);
 
 });

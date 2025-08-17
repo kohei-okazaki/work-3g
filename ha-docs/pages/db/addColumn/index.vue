@@ -35,9 +35,10 @@
             item-text="logicalName"
             item-value="physicalName"
             v-model="column"
+            @input="setColumnData"
           ></v-select>
         </v-col>
-        <v-col class="text-left" sm="12" md="5">
+        <!-- <v-col class="text-left" sm="12" md="5">
           <v-select
             :items="columnTypes"
             return-object
@@ -54,9 +55,10 @@
             label="サイズ"
             v-model="columnSize"
           ></v-text-field>
-        </v-col>
+        </v-col> -->
       </v-row>
-      <v-row v-if="table != null && column != null && columnType != null">
+      <!-- <v-row v-if="table != null && column != null && columnType != null"> -->
+      <v-row v-if="table != null && column != null">
         <v-col class="text-left" sm="12">
           <v-btn color="info" @click="createSql">SQL生成</v-btn>
         </v-col>
@@ -102,22 +104,48 @@ export default {
       ],
       tables: this.$store.state.db.tables,
       columns: [],
-      columnTypes: ["VARCHAR", "DECIMAL", "INT", "DATE", "DATETIME"],
+      columnTypes: [
+        "VARCHAR",
+        "INT",
+        "BIGINT",
+        "DECIMAL",
+        "DATE",
+        "DATETIME",
+        "BOOLEAN",
+      ],
       table: null,
       column: null,
       columnType: null,
       columnSize: null,
+      primaryKey: null,
+      sequence: null,
+      notNull: null,
+      default: null,
       sql: null,
     };
   },
   methods: {
     setColumns: function () {
+      console.log("現在の table:", this.table);
+      console.log("選択中の column:", this.column);
+
       if (this.table == null) {
         // 選択テーブル名がnullの場合
         this.columns = [];
         return;
       }
       this.columns = this.table.columns;
+    },
+    setColumnData: function () {
+      console.log("現在の table:", this.table);
+      console.log("選択中の column:", this.column);
+
+      this.columnType = this.column.type || null;
+      this.columnSize = this.column.size || null;
+      this.primaryKey = this.column.primaryKey || false;
+      this.sequence = this.column.sequence || false;
+      this.notNull = this.column.notNull || false;
+      this.default = this.column.default || null;
     },
     createSql: function () {
       let sql =
@@ -130,11 +158,21 @@ export default {
       if (this.columnType == "VARCHAR" || this.columnType == "DECIMAL") {
         sql += "(" + this.columnSize + ")";
       }
+      if (this.notNull) {
+        sql += " NOT NULL";
+      }
+      if (this.default != null) {
+        if (this.columnType == "INT" || this.columnType == "BIGINT") {
+          sql += " DEFAULT " + this.default;
+        } else {
+          sql += " DEFAULT '" + this.default + "'";
+        }
+      }
+      sql += " COMMENT '" + this.column.logicalName + "'";
       this.sql = sql + ";";
     },
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

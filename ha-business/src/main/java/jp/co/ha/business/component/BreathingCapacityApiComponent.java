@@ -19,7 +19,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
- * 肺活量計算APIのコンポーネントクラス<br>
+ * 肺活量計算APIのComponentクラス<br>
  * APIクラスを直接呼ばずに本クラスを経由して呼び出すこと
  *
  * @version 1.0.0
@@ -27,16 +27,16 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Component
 public class BreathingCapacityApiComponent {
 
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain TokenApiComponent} */
+    /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
-    /** {@linkplain BreathingCapacityCalcApi} */
+    /** 肺活量計算API */
     @Autowired
     private BreathingCapacityCalcApi breathingCapacityCalcApi;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
 
@@ -92,8 +92,7 @@ public class BreathingCapacityApiComponent {
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, Long transactionId)
-            throws BaseException {
+            BreathingCapacityDto dto, Long transactionId) throws BaseException {
 
         BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
         BeanUtil.copy(dto, request);

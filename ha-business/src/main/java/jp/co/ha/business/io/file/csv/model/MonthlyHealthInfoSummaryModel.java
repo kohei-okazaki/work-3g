@@ -26,8 +26,6 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     /** 標準体重 */
     @Mask
     private BigDecimal standardWeight;
-    /** 健康情報ステータス */
-    private String healthInfoStatus;
     /** 健康情報登録日時 */
     private String healthInfoRegDate;
     /** BMI範囲マスタID */
@@ -130,25 +128,6 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
      */
     public void setStandardWeight(BigDecimal standardWeight) {
         this.standardWeight = standardWeight;
-    }
-
-    /**
-     * healthInfoStatusを返す
-     *
-     * @return healthInfoStatus
-     */
-    public String getHealthInfoStatus() {
-        return healthInfoStatus;
-    }
-
-    /**
-     * healthInfoStatusを設定する
-     *
-     * @param healthInfoStatus
-     *     健康情報ステータス
-     */
-    public void setHealthInfoStatus(String healthInfoStatus) {
-        this.healthInfoStatus = healthInfoStatus;
     }
 
     /**

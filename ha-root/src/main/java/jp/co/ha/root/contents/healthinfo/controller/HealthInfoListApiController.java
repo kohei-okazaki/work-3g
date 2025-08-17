@@ -5,15 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
-import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -34,7 +31,7 @@ import jp.co.ha.root.contents.healthinfo.response.HealthInfoListApiResponse;
 public class HealthInfoListApiController extends
         BaseRootApiController<HealthInfoListApiRequest, HealthInfoListApiResponse> {
 
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
 
@@ -47,10 +44,10 @@ public class HealthInfoListApiController extends
      *     取得対象ページ
      * @return 健康情報一覧取得APIレスポンス
      */
-    @GetMapping(value = "healthinfo", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "healthinfo")
     public ResponseEntity<HealthInfoListApiResponse> list(
             HealthInfoListApiRequest request,
-            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page) {
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page) {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,
@@ -65,8 +62,6 @@ public class HealthInfoListApiController extends
                 .findHealthInfoDetailList(selectOption).stream().map(e -> {
                     HealthInfoListApiResponse.HealthInfoResponse response = new HealthInfoListApiResponse.HealthInfoResponse();
                     BeanUtil.copy(e, response);
-                    response.setHealthInfoStatus(
-                            getHealthInfoStatus(e.getHealthInfoStatus()));
                     response.setBmiStatus(getBmiStatus(e.getOverWeightStatus()));
                     return response;
                 }).collect(Collectors.toList());
@@ -84,34 +79,6 @@ public class HealthInfoListApiController extends
     @Override
     protected HealthInfoListApiResponse getResponse() {
         return new HealthInfoListApiResponse();
-    }
-
-    /**
-     * 健康情報ステータス応答情報を返す
-     *
-     * @param healthInfoStatus
-     *     健康情報ステータス
-     * @return 健康情報ステータス応答情報
-     */
-    private HealthInfoListApiResponse.HealthInfoStatus getHealthInfoStatus(
-            String healthInfoStatus) {
-
-        HealthInfoListApiResponse.HealthInfoStatus status = new HealthInfoListApiResponse.HealthInfoStatus();
-        status.setStatus(healthInfoStatus);
-        switch (HealthInfoStatus.of(healthInfoStatus)) {
-        case INCREASE:
-            status.setMessage("増えました");
-            break;
-        case DOWN:
-            status.setMessage("減りました");
-            break;
-        case EVEN:
-            status.setMessage("変化ありません");
-            break;
-        default:
-            break;
-        }
-        return status;
     }
 
     /**

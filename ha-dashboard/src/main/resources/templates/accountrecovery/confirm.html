@@ -10,32 +10,41 @@
 </head>
 <body>
 
-  <div class="px-4">
-    <form th:action="@{'~/accountrecovery/complete/' + ${account.seqUserId}}" method="post" th:object="${accountRecoveryForm}">
-      <input type="hidden" th:field="*{mailAddress}" />
-      <input type="hidden" th:field="*{password}" />
-      <div class="container border col-7 shadow">
-        <h2 class="menuTitle">パスワード再設定確認</h2>
-        <table class="table">
-          <tr>
-            <th scope="row" th:text="#{mailAddress}"></th >
-            <td th:text="*{mailAddress}"></td>
-          </tr>
-          <tr>
-            <th scope="row" th:text="#{password}"></th >
-            <td>****</td>
-          </tr>
-        </table><!-- ./table -->
+  <div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow w-100" style="max-width: 600px;">
+      <div class="card-body">
+        <form th:action="@{'~/accountrecovery/complete/' + ${account.seqUserId}}" method="post" th:object="${userRecoveryForm}">
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="確 定" />
-        <input type="button" class="btn btn-secondary w-25" value="戻 る" onclick="history.back()" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-      </div><!-- /.container border col-7 -->
-    </form>
-    <br><br>
-  </div>
+          <input type="hidden" th:field="*{mailAddress}" />
+          <input type="hidden" th:field="*{password}" />
+
+          <h2 class="card-title text-center mb-4">✅ パスワード再設定内容の確認</h2>
+
+          <table class="table table-bordered table-sm">
+            <tbody>
+              <tr>
+                <th scope="row" style="width: 40%;" th:text="#{mailAddress}">メールアドレス</th>
+                <td th:text="*{mailAddress}">test@example.com</td>
+              </tr>
+              <tr>
+                <th scope="row" th:text="#{password}">パスワード</th>
+                <td>
+                  ●●●●●●
+                  <small class="text-muted ml-2" title="入力されたパスワードを非表示にしています">(非表示)</small>
+                </td>
+              </tr>
+            </tbody>
+          </table><!-- /.table table-bordered table-sm -->
+
+          <div class="text-center mt-4">
+            <input type="submit" class="btn btn-success mr-2 w-25" value="確 定" />
+            <input type="button" class="btn btn-secondary w-25" value="戻 る" onclick="history.back()" />
+          </div>
+
+        </form>
+      </div><!-- /.card-body -->
+    </div><!-- /.card shadow w-100 -->
+  </div><!-- /.container d-flex justify-content-center mt-5 -->
 
 </body>
 </html>

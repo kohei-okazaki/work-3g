@@ -14,7 +14,7 @@ import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
 
 /**
- * アカウント情報編集APIリクエスト
+ * ユーザ情報編集APIリクエスト
  *
  * @version 1.0.0
  */
@@ -34,7 +34,7 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     private LocalDate passwordExpire;
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -43,7 +43,7 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス
@@ -53,7 +53,7 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     }
 
     /**
-     * passwordExpireを返す
+     * パスワード有効期限を返す
      *
      * @return passwordExpire
      */
@@ -62,7 +62,7 @@ public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApi
     }
 
     /**
-     * passwordExpireを設定する
+     * パスワード有効期限を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限

@@ -3,6 +3,7 @@ package jp.co.ha.db.entity.composite;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.annotation.Ignore;
 
 /**
@@ -10,6 +11,7 @@ import jp.co.ha.common.log.annotation.Ignore;
  *
  * @version 1.0.0
  */
+@Entity
 public class CompositeMonthlyRegData implements Serializable {
 
     /** serialVersionUID */
