@@ -69,7 +69,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -123,7 +123,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -158,10 +158,6 @@ export default {
           url: "/root/api/top",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -187,7 +183,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -266,10 +262,6 @@ export default {
           url: "/root/api/top/healthinfo",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -295,7 +287,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -348,10 +340,6 @@ export default {
           url: "/root/api/top/acount",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -377,7 +365,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -430,10 +418,6 @@ export default {
           url: "/root/api/user",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -450,7 +434,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -575,7 +559,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -672,7 +656,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -699,10 +683,6 @@ export default {
           url: "/root/api/account",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -728,7 +708,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -1049,7 +1029,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -1076,10 +1056,6 @@ export default {
           url: "/root/api/apidata",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -1105,7 +1081,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -1364,10 +1340,6 @@ export default {
           url: "/root/api/healthinfo",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -1393,7 +1365,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -1726,7 +1698,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -1753,10 +1725,6 @@ export default {
           url: "/root/api/news",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -1773,7 +1741,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -1948,7 +1916,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2132,7 +2100,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2251,7 +2219,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2285,10 +2253,6 @@ export default {
           description: "管理者用サイトユーザのメモ情報一覧を返却するAPI",
           url: "/root/api/note",
           headers: [
-            {
-              key: "Content-Type",
-              value: "application/json",
-            },
             {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
@@ -2324,7 +2288,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2586,7 +2550,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2652,7 +2616,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2699,7 +2663,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2726,10 +2690,6 @@ export default {
           url: "/root/api/roles",
           headers: [
             {
-              key: "Content-Type",
-              value: "application/json",
-            },
-            {
               key: "Authorization",
               value: "Bearer ログインAPI.レスポンス.tokenを設定",
             },
@@ -2746,7 +2706,7 @@ export default {
                 "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
             },
             {
-              physicalName: "error",
+              physicalName: "errors",
               logicalName: "エラー情報",
               required: false,
               type: null,
@@ -2791,11 +2751,427 @@ export default {
             },
           ],
         },
+
+        {
+          name: "問い合わせ情報一覧取得API",
+          endpoint: "/api/root/inquiry",
+          httpMethod: "GET",
+          description: "問い合わせ情報の一覧を返却するAPI",
+          url: "/root/api/inquiry",
+          headers: [
+            {
+              key: "Authorization",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
+          request: [],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "errors",
+              logicalName: "エラー情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "message",
+              logicalName: "エラーメッセージ",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: 256,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "paging",
+              logicalName: "ページング情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='0'の場合、必須",
+            },
+            {
+              physicalName: "total_record_num",
+              logicalName: "合計レコード数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "合計レコード数",
+            },
+            {
+              physicalName: "from_record_num",
+              logicalName: "レコード数(from)",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "レコード開始番号",
+            },
+            {
+              physicalName: "to_record_num",
+              logicalName: "レコード数(to)",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "レコード終了番号",
+            },
+            {
+              physicalName: "total_page",
+              logicalName: "総ページ数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "レコード終了番号",
+            },
+            {
+              physicalName: "current_page_num",
+              logicalName: "現在のページ数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "現在のページ数",
+            },
+            {
+              physicalName: "record_per_page",
+              logicalName: "1ページあたりのレコード数",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "1ページあたりのレコード数",
+            },
+            {
+              physicalName: "can_go_next",
+              logicalName: "次リンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "次リンク押下できるかどうか",
+            },
+            {
+              physicalName: "next_href",
+              logicalName: "次リンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "次リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_previous",
+              logicalName: "前リンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "前リンク押下できるかどうか",
+            },
+            {
+              physicalName: "previous_href",
+              logicalName: "前リンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "前リンクのhref属性",
+            },
+            {
+              physicalName: "can_go_last",
+              logicalName: "最後ページまでのリンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "最後ページまでのリンクを押下できるかどうか",
+            },
+            {
+              physicalName: "last_href",
+              logicalName: "最後ページリンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "最後ページリンクのhref属性",
+            },
+            {
+              physicalName: "can_go_first",
+              logicalName: "先頭ページまでのリンク押下可能フラグ",
+              required: false,
+              type: "真偽値",
+              layer: 1,
+              byte: null,
+              description: "先頭ページまでのリンクを押下できるかどうか",
+            },
+            {
+              physicalName: "first_href",
+              logicalName: "先頭ページリンク属性",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "先頭ページリンクのhref属性",
+            },
+            {
+              physicalName: "inquiry_list",
+              logicalName: "問い合わせリスト",
+              required: false,
+              type: "配列",
+              byte: null,
+              description: "問い合わせリスト",
+            },
+            {
+              physicalName: "seq_inquiry_mng_id",
+              logicalName: "問い合わせ管理ID",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "問い合わせ管理ID",
+            },
+            {
+              physicalName: "seq_user_id",
+              logicalName: "ユーザID",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "ユーザID",
+            },
+            {
+              physicalName: "responder_login_id",
+              logicalName: "対応者ログインID",
+              required: false,
+              type: "半角数字",
+              layer: 1,
+              byte: null,
+              description: "対応者ログインID",
+            },
+            {
+              physicalName: "status",
+              logicalName: "問い合わせステータス",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "問い合わせステータス",
+            },
+            {
+              physicalName: "label",
+              logicalName: "問い合わせステータス名",
+              required: false,
+              type: null,
+              layer: 2,
+              byte: null,
+              description: "問い合わせステータス名",
+            },
+            {
+              physicalName: "value",
+              logicalName: "問い合わせステータス値",
+              required: false,
+              type: null,
+              layer: 2,
+              byte: null,
+              description: "問い合わせステータス値",
+            },
+            {
+              physicalName: "type",
+              logicalName: "問い合わせ種別",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: null,
+              description: "問い合わせ種別",
+            },
+            {
+              physicalName: "label",
+              logicalName: "問い合わせ種別名",
+              required: false,
+              type: null,
+              layer: 2,
+              byte: null,
+              description: "問い合わせ種別名",
+            },
+            {
+              physicalName: "value",
+              logicalName: "問い合わせ種別値",
+              required: false,
+              type: null,
+              layer: 2,
+              byte: null,
+              description: "問い合わせ種別値",
+            },
+            {
+              physicalName: "title",
+              logicalName: "件名",
+              required: false,
+              type: "全角文字",
+              layer: 1,
+              byte: null,
+              description: "件名",
+            },
+            {
+              physicalName: "body",
+              logicalName: "本文",
+              required: false,
+              type: "全角文字",
+              layer: 1,
+              byte: null,
+              description: "本文",
+            },
+            {
+              physicalName: "reg_date",
+              logicalName: "登録日時",
+              required: false,
+              type: "YYYY/MM/DD HH:MM:SS",
+              layer: 1,
+              byte: null,
+              description: "問い合わせ情報を登録した日時",
+            },
+            {
+              physicalName: "update_date",
+              logicalName: "更新日時",
+              required: false,
+              type: "YYYY/MM/DD HH:MM:SS",
+              layer: 1,
+              byte: null,
+              description: "問い合わせ情報を更新した日時",
+            },
+          ],
+        },
+        {
+          name: "問い合わせ情報編集API",
+          endpoint: "/api/root/inquiry/{seq_inquiry_mng_id}",
+          httpMethod: "PUT",
+          description: "問い合わせ情報を更新するAPI",
+          url: "/root/api/inquiry/{seq_inquiry_mng_id}",
+          headers: [
+            {
+              key: "Content-Type",
+              value: "application/json",
+            },
+            {
+              key: "Authorization",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
+          request: [],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "errors",
+              logicalName: "エラー情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "message",
+              logicalName: "エラーメッセージ",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: 256,
+              description: "result='1'の場合、必須",
+            },
+          ],
+        },
+        {
+          name: "問い合わせステータスマスタ一覧取得API",
+          endpoint: "/api/root/inquiry/status",
+          httpMethod: "GET",
+          description: "問い合わせステータスマスタの一覧を返却するAPI",
+          url: "/root/api/inquiry/status",
+          headers: [
+            {
+              key: "Authorization",
+              value: "Bearer ログインAPI.レスポンス.tokenを設定",
+            },
+          ],
+          request: [],
+          response: [
+            {
+              physicalName: "result",
+              logicalName: "処理結果",
+              required: true,
+              type: "半角数字",
+              byte: 1,
+              description:
+                "処理結果<ul><li>0:正常終了</li><li>1:異常終了</li></ul>",
+            },
+            {
+              physicalName: "errors",
+              logicalName: "エラー情報",
+              required: false,
+              type: null,
+              byte: null,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "message",
+              logicalName: "エラーメッセージ",
+              required: false,
+              type: null,
+              layer: 1,
+              byte: 256,
+              description: "result='1'の場合、必須",
+            },
+            {
+              physicalName: "statuses",
+              logicalName: "ステータスリスト",
+              required: false,
+              type: "配列",
+              byte: null,
+              description: "result='0'の場合、必須",
+            },
+            {
+              physicalName: "label",
+              logicalName: "ステータス名",
+              required: false,
+              type: null,
+              byte: null,
+              layer: 1,
+              description:
+                "ステータス名<ul><li>00:未対応</li><li>01:対応中</li><li>02:完了</li></ul>",
+            },
+            {
+              physicalName: "value",
+              logicalName: "値",
+              required: false,
+              type: null,
+              byte: null,
+              layer: 1,
+              description: "ステータスの値",
+            },
+          ],
+        },
       ],
     };
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -1,5 +1,6 @@
 export const state = () => ({
-  tables: [{
+  tables: [
+    {
       physicalName: "HEALTH_INFO",
       logicalName: "健康情報",
       columns: [
@@ -112,8 +113,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "USER",
@@ -240,7 +241,7 @@ export const state = () => ({
           notNull: true,
           default: "2000/01/01",
         },
-      ]
+      ],
     },
     {
       physicalName: "HEALTH_INFO_FILE_SETTING",
@@ -322,8 +323,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "BMI_RANGE_MT",
@@ -394,8 +395,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "USER_RECOVERY_TOKEN",
@@ -466,8 +467,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "USER_HEALTH_GOAL",
@@ -538,8 +539,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "API_COMMUNICATION_DATA",
@@ -676,8 +677,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "ROOT_LOGIN_INFO",
@@ -770,8 +771,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "ROOT_USER_ROLE_MNG_MT",
@@ -809,8 +810,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "ROOT_USER_ROLE_DETAIL_MT",
@@ -870,8 +871,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "ROOT_ROLE_MT",
@@ -931,8 +932,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "ROOT_USER_NOTE_INFO",
@@ -1003,8 +1004,8 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
+        },
+      ],
     },
     {
       physicalName: "NEWS_INFO",
@@ -1053,8 +1054,279 @@ export const state = () => ({
           crypt: false,
           notNull: true,
           default: null,
-        }
-      ]
-    }
-  ]
+        },
+      ],
+    },
+    {
+      physicalName: "INQUIRY_MANAGEMENT",
+      logicalName: "問い合わせ管理情報",
+      columns: [
+        {
+          logicalName: "問い合わせID",
+          physicalName: "SEQ_INQUIRY_MNG_ID",
+          type: "BIGINT",
+          size: "",
+          primaryKey: true,
+          sequence: true,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "ユーザID",
+          physicalName: "SEQ_USER_ID",
+          type: "BIGINT",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "S3キー",
+          physicalName: "S3_KEY",
+          type: "VARCHAR",
+          size: "100",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "問い合わせステータス",
+          physicalName: "INQUIRY_STATUS",
+          type: "VARCHAR",
+          size: "2",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "問い合わせ種別",
+          physicalName: "INQUIRY_TYPE",
+          type: "VARCHAR",
+          size: "2",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
+          default: null,
+        },
+        {
+          logicalName: "タイトル",
+          physicalName: "TITLE",
+          type: "VARCHAR",
+          size: "100",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "削除フラグ",
+          physicalName: "DELETE_FLAG",
+          type: "BOOLEAN",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "対応者ログイン情報ID",
+          physicalName: "RESPONDER_LOGIN_ID",
+          type: "BIGINT",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+      ],
+    },
+    {
+      physicalName: "INQUIRY_TYPE_MT",
+      logicalName: "問い合わせ種別マスタ",
+      columns: [
+        {
+          logicalName: "問い合わせ種別",
+          physicalName: "INQUIRY_TYPE",
+          type: "VARCHAR",
+          size: "2",
+          primaryKey: true,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "名前",
+          physicalName: "NAME",
+          type: "VARCHAR",
+          size: "16",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "補足説明",
+          physicalName: "DESCRIPTION",
+          type: "VARCHAR",
+          size: "64",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: false,
+          default: null,
+        },
+        {
+          logicalName: "表示フラグ",
+          physicalName: "DISP_FLAG",
+          type: "BOOLEAN",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: true,
+        },
+        {
+          logicalName: "表示順",
+          physicalName: "DISP_ORDER",
+          type: "INT",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "削除フラグ",
+          physicalName: "DELETE_FLAG",
+          type: "BOOLEAN",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: false,
+        },
+        {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+      ],
+    },
+    {
+      physicalName: "INQUIRY_STATUS_MT",
+      logicalName: "問い合わせステータスマスタ",
+      columns: [
+        {
+          logicalName: "問い合わせステータス",
+          physicalName: "INQUIRY_STATUS",
+          type: "VARCHAR",
+          size: "2",
+          primaryKey: true,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "名前",
+          physicalName: "NAME",
+          type: "VARCHAR",
+          size: "16",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "削除フラグ",
+          physicalName: "DELETE_FLAG",
+          type: "BOOLEAN",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: false,
+        },
+        {
+          logicalName: "登録日時",
+          physicalName: "REG_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+        {
+          logicalName: "更新日時",
+          physicalName: "UPDATE_DATE",
+          type: "DATETIME",
+          size: "",
+          primaryKey: false,
+          sequence: false,
+          crypt: false,
+          notNull: true,
+          default: null,
+        },
+      ],
+    },
+  ],
 });
