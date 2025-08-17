@@ -132,8 +132,9 @@ export default {
           filterable: false,
         },
         {
-          text: "備考",
-          value: "description",
+          text: "デフォルト値",
+          value: "default",
+          filterable: false,
         },
       ],
       tableList: [],
@@ -161,7 +162,7 @@ export default {
           physicalColumnName: column.physicalName,
           type: column.type,
           size: column.size,
-          description: column.description,
+          default: column.default,
         };
         this.tableList.push(record);
       }
