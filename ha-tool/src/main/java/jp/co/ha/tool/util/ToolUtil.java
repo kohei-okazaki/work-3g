@@ -178,6 +178,17 @@ public class ToolUtil {
     }
 
     /**
+     * デフォルト値を取得
+     * 
+     * @param row
+     *     行情報
+     * @return デフォルト値
+     */
+    public static String getDefaultValue(ExcelRow row) {
+        return row.getCell(CellPositionType.DEFAULT).getValue();
+    }
+
+    /**
      * プライマリーキーかどうかを判定する
      *
      * @param row
@@ -575,6 +586,7 @@ public class ToolUtil {
                             column.setSequence(isSequence(e));
                             column.setCrypt(isCrypt(e));
                             column.setNotNull(isNotNull(e));
+                            column.setDefaultValue(getDefaultValue(e));
                             return column;
                         }).collect(Collectors.toList()));
 

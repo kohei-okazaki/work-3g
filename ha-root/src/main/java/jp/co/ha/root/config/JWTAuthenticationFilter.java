@@ -52,9 +52,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /** 要求パラメータ:パスワード */
     private static final String REQ_PARAM_PASSWORD = "password";
 
-    /** {@linkplain AuthenticationManager} */
+    /** 認証情報管理クラス */
     private AuthenticationManager authenticationManager;
-    /** {@linkplain PasswordEncoderImpl} */
+    /** パスワードEncoder */
     @SuppressWarnings("unused")
     private PasswordEncoder passwordEncoder;
 

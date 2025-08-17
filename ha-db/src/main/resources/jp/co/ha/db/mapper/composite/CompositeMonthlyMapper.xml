@@ -26,25 +26,25 @@
     ORDER BY
       DATE_FORMAT(HI.HEALTH_INFO_REG_DATE, '%Y-%m-%d');
   </select>
-  <select id="selectAccountByRegDate" resultMap="BaseResultMap">
+  <select id="selectUserByRegDate" resultMap="BaseResultMap">
     SELECT
-      DISTINCT DATE_FORMAT(AC.REG_DATE, '%Y-%m-%d') AS DATE,
+      DISTINCT DATE_FORMAT(U.REG_DATE, '%Y-%m-%d') AS DATE,
       CNT.COUNT AS COUNT
     FROM
-      ACCOUNT AC,
+      USER U,
       (
         SELECT
           COUNT(REG_DATE) AS COUNT,
           DATE_FORMAT(REG_DATE, '%Y%m%d') AS REG_DATE
         FROM
-          ACCOUNT
+          USER
         GROUP BY
           DATE_FORMAT(REG_DATE, '%Y%m%d')
       ) AS CNT
     WHERE
-      AC.REG_DATE BETWEEN #{from,jdbcType=TIMESTAMP} AND #{to,jdbcType=TIMESTAMP}
-      AND DATE_FORMAT(CNT.REG_DATE, '%Y%m%d') = DATE_FORMAT(AC.REG_DATE, '%Y%m%d')
+      U.REG_DATE BETWEEN #{from,jdbcType=TIMESTAMP} AND #{to,jdbcType=TIMESTAMP}
+      AND DATE_FORMAT(CNT.REG_DATE, '%Y%m%d') = DATE_FORMAT(U.REG_DATE, '%Y%m%d')
     ORDER BY
-      DATE_FORMAT(AC.REG_DATE, '%Y-%m-%d');
+      DATE_FORMAT(U.REG_DATE, '%Y-%m-%d');
   </select>
 </mapper>

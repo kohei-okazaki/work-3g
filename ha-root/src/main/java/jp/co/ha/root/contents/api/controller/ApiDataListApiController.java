@@ -5,14 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
-import jp.co.ha.business.db.crud.read.impl.ApiCommunicationDataSearchServiceImpl;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -33,7 +31,7 @@ import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
 public class ApiDataListApiController
         extends BaseRootApiController<ApiDataListApiRequest, ApiDataListApiResponse> {
 
-    /** {@linkplain ApiCommunicationDataSearchServiceImpl} */
+    /** API通信情報検索サービス */
     @Autowired
     private ApiCommunicationDataSearchService searchService;
 
@@ -46,9 +44,9 @@ public class ApiDataListApiController
      *     取得対象ページ
      * @return API通信情報一覧取得APIレスポンス
      */
-    @GetMapping(value = "apidata", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "apidata")
     public ResponseEntity<ApiDataListApiResponse> list(ApiDataListApiRequest request,
-            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page) {
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page) {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
         Pageable pageable = PagingViewFactory.getPageable(page,

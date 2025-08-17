@@ -1,6 +1,8 @@
 package jp.co.ha.dashboard.login.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -17,13 +19,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jp.co.ha.business.db.crud.read.AccountSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserHealthGoalSelectService;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
-import jp.co.ha.business.healthInfo.service.impl.HealthInfoGraphServiceImpl;
+import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.login.LoginCheck;
 import jp.co.ha.business.login.LoginCheckResult;
@@ -33,12 +34,15 @@ import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.Account;
+import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.User;
+import jp.co.ha.db.entity.UserHealthGoal;
 
 /**
  * 健康管理_ログイン画面コントローラ
@@ -48,22 +52,30 @@ import jp.co.ha.db.entity.Account;
 @Controller
 public class LoginController implements BaseWebController {
 
+    /** セッションキー：ユーザID */
+    private static final String SESSION_KEY_SEQ_USER_ID = "seqUserId";
     /** 健康情報検索条件 */
     private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
             .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
-    /** {@linkplain SessionComponent} */
+    /** 健康情報検索条件：直近2件 */
+    private static final SelectOption SELECT_OPTION＿LATEST = new SelectOptionBuilder()
+            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(2).build();
+    /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
-    private AccountSearchService accountSearchService;
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    private UserSearchService userSearchService;
+    /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoGraphServiceImpl} */
+    /** ユーザ健康目標情報検索サービス */
+    @Autowired
+    private UserHealthGoalSelectService userHealthGoalSelectService;
+    /** 健康情報グラフサービス */
     @Autowired
     private HealthInfoGraphService healthInfoGraphService;
-    /** {@linkplain MessageSource} */
+    /** メッセージプロパティ */
     @Autowired
     private MessageSource messageSource;
 
@@ -141,10 +153,10 @@ public class LoginController implements BaseWebController {
             return getView(DashboardView.LOGIN);
         }
 
-        // アカウント情報を検索
-        Optional<Account> account = accountSearchService
+        // ユーザ情報を検索
+        Optional<User> user = userSearchService
                 .findByMailAddress(form.getMailAddress());
-        LoginCheckResult checkResult = new LoginCheck().check(account,
+        LoginCheckResult checkResult = new LoginCheck().check(user,
                 form.getPassword());
         if (checkResult.hasError()) {
             String errorMessage = messageSource.getMessage(
@@ -154,10 +166,21 @@ public class LoginController implements BaseWebController {
             return getView(DashboardView.LOGIN);
         }
 
-        Long seqUserId = account.get().getSeqUserId();
+        Long seqUserId = user.get().getSeqUserId();
 
         // セッションにユーザIDを登録する。
-        sessionComponent.setValue(request.getSession(), "seqUserId", seqUserId);
+        sessionComponent.setValue(request.getSession(), SESSION_KEY_SEQ_USER_ID,
+                seqUserId);
+
+        List<HealthInfo> list = getLastestHealthInfoList(seqUserId);
+        HealthInfo latest = getLastesthealthInfo(list);
+        HealthInfo previous = getPreviousHealthInfo(list);
+
+        // 最新健康情報設定
+        setLatestHealthInfo(model, latest, previous);
+
+        // 目標健康情報設定
+        setGoalHealthInfo(model, latest, seqUserId);
 
         // 健康情報グラフ作成
         putGraph(model, seqUserId);
@@ -182,12 +205,23 @@ public class LoginController implements BaseWebController {
     @GetMapping("/top")
     public String top(Model model, HttpServletRequest request) {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
-        // ログイン前のアカウント作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
+        // ログイン前のユーザ作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
         Long seqUserId = sessionComponent
-                .getValue(request.getSession(), "seqUserId", Long.class).orElse(null);
+                .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class)
+                .orElse(null);
         if (BeanUtil.isNull(seqUserId)) {
             return getView(DashboardView.LOGIN);
         }
+
+        List<HealthInfo> list = getLastestHealthInfoList(seqUserId);
+        HealthInfo latest = getLastesthealthInfo(list);
+        HealthInfo previous = getPreviousHealthInfo(list);
+
+        // 最新健康情報設定
+        setLatestHealthInfo(model, latest, previous);
+
+        // 目標健康情報設定
+        setGoalHealthInfo(model, latest, seqUserId);
 
         // 健康情報グラフ作成
         putGraph(model, seqUserId);
@@ -196,6 +230,134 @@ public class LoginController implements BaseWebController {
         setHealthInfoRegistNotice(model, seqUserId);
 
         return getView(model, DashboardView.TOP);
+    }
+
+    /**
+     * 健康情報リストを返す
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @return 健康情報リスト
+     */
+    private List<HealthInfo> getLastestHealthInfoList(Long seqUserId) {
+        return getLatestHealthInfoList(seqUserId);
+    }
+
+    /**
+     * 最新の健康情報を取得
+     * 
+     * @param list
+     *     健康情報リスト
+     * @return 最新の健康情報
+     */
+    private HealthInfo getLastesthealthInfo(List<HealthInfo> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    /**
+     * 最新より1件過去の健康情報を取得
+     * 
+     * @param list
+     *     健康情報リスト
+     * @return 最新より1件過去の最新の健康情報
+     */
+    private HealthInfo getPreviousHealthInfo(List<HealthInfo> list) {
+        if (CollectionUtil.isEmpty(list) || list.size() < 2) {
+            return null;
+        }
+        return list.get(1);
+    }
+
+    /**
+     * 最新の健康情報をModelへ設定する<br>
+     * 健康情報が未登録の場合、未登録用のデータをModelへ設定する
+     * 
+     * @param model
+     *     Model
+     * @param latest
+     *     最新の健康情報
+     * @param previous
+     *     最新より1件過去の健康情報
+     */
+    private void setLatestHealthInfo(Model model, HealthInfo latest,
+            HealthInfo previous) {
+
+        if (latest == null) {
+            // 最新健康情報と最新の1つ過去の健康情報が登録されていない場合
+            model.addAttribute("latestHealthInfoNotExistMessage", "健康情報が未登録です。");
+
+        } else if (previous == null) {
+            // 最新健康情報のみ登録されている場合
+            model.addAttribute("latest", latest);
+
+        } else {
+
+            model.addAttribute("latest", latest);
+
+            BigDecimal latestWeight = latest.getWeight();
+            BigDecimal previousWeight = previous.getWeight();
+
+            int compare = latestWeight.compareTo(previousWeight);
+            BigDecimal diff = null;
+            switch (compare) {
+            case -1:
+                // latest < previous：減少
+                diff = previousWeight.subtract(latestWeight);
+                model.addAttribute("diff", diff.stripTrailingZeros().toPlainString());
+                model.addAttribute("status", HealthInfoStatus.DOWN.getValue());
+                break;
+            case 1:
+                // latest > previous：増加
+                diff = latestWeight.subtract(previousWeight);
+                model.addAttribute("diff", diff.stripTrailingZeros().toPlainString());
+                model.addAttribute("status", HealthInfoStatus.INCREASE.getValue());
+                break;
+            }
+        }
+    }
+
+    /**
+     * 健康情報目標情報をModelへ設定する
+     * 
+     * @param model
+     *     Model
+     * @param latest
+     *     最新の健康情報
+     * @param seqUserId
+     *     ユーザID
+     */
+    private void setGoalHealthInfo(Model model, HealthInfo latest, Long seqUserId) {
+
+        // ユーザ健康目標情報
+        UserHealthGoal goal = userHealthGoalSelectService
+                .findEnableById(seqUserId).get();
+        model.addAttribute("goalWeight", goal.getWeight());
+
+        if (latest != null) {
+            // 健康情報の登録が0件の場合
+
+            model.addAttribute("goalDiff",
+                    goal.getWeight().subtract(latest.getWeight()));
+        }
+    }
+
+    /**
+     * 最新の健康情報を取得する<br>
+     * <ul>
+     * <li>最新の健康情報</li>
+     * <li>最新の1件過去の健康情報</li>
+     * </ul>
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @return 健康情報
+     */
+    private List<HealthInfo> getLatestHealthInfoList(Long seqUserId) {
+        return healthInfoSearchService.findBySeqUserId(seqUserId,
+                SELECT_OPTION＿LATEST);
     }
 
     /**
@@ -211,7 +373,7 @@ public class LoginController implements BaseWebController {
         // 健康情報グラフを作成
         healthInfoGraphService.putGraph(model, () -> {
 
-            // 健康情報を降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
+            // 健康情報を健康情報登録日時の降順で先頭10件を検索し、健康情報IDの昇順に並べ替え
             HealthInfoGraphModel graphModel = new HealthInfoGraphModel();
             healthInfoSearchService
                     .findBySeqUserId(seqUserId, SELECT_OPTION).stream()
@@ -241,11 +403,11 @@ public class LoginController implements BaseWebController {
 
         // システム日時
         LocalDateTime sysdate = DateTimeUtil.getSysDate();
-        LocalDateTime from = DateTimeUtil.getStartDay(sysdate);
-        LocalDateTime to = DateTimeUtil.getEndDay(sysdate);
 
         long count = healthInfoSearchService
-                .countBySeqUserIdBetweenHealthInfoRegDate(seqUserId, from, to);
+                .countBySeqUserIdBetweenHealthInfoRegDate(seqUserId,
+                        DateTimeUtil.getStartDay(sysdate),
+                        DateTimeUtil.getEndDay(sysdate));
 
         if (count == 0) {
             // 通知設定

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <p>${userId}さん</p>
+  <p>以下の健康情報を登録しました。</p>
+  <br>
+  <table>
+    <tr>
+      <td>健康情報ID</td>
+      <td>${seqHealthInfoId}</td>
+    </tr>
+    <tr>
+      <td>身長</td>
+      <td>${height}</td>
+    </tr>
+    <tr>
+      <td>体重</td>
+      <td>${weight}</td>
+    </tr>
+    <tr>
+      <td>BMI</td>
+      <td>${bmi}</td>
+    </tr>
+    <tr>
+      <td>標準体重</td>
+      <td>${standardWeight}</td>
+    </tr>
+    <tr>
+      <td>健康情報登録日時</td>
+      <td>${healthInfoRegDate}</td>
+    </tr>
+  </table>
+  <br>
+  <p>登録した健康情報は下記の「健康情報照会画面」からも確認できます。</p>
+  <br>
+  <b>▼健康情報照会画面</b>
+  <ul>
+    <li>
+      <a href="${url}healthinforeference/index">${url}healthinforeference/index</a>
+    </li>
+  </ul>
+</body>
+</html>

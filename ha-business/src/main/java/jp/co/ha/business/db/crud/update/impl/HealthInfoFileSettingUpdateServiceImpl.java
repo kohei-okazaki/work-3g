@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 
 /**
- * 健康情報ファイル設定更新サービス実装クラス
+ * 健康情報ファイル設定情報更新サービス実装クラス
  *
  * @version 1.0.0
  */
@@ -18,7 +18,7 @@ import jp.co.ha.db.mapper.HealthInfoFileSettingMapper;
 public class HealthInfoFileSettingUpdateServiceImpl
         implements HealthInfoFileSettingUpdateService {
 
-    /** {@linkplain HealthInfoFileSettingMapper} */
+    /** 健康情報ファイル設定情報Mapper */
     @Autowired
     private HealthInfoFileSettingMapper mapper;
 

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.HealthInfoSearchServiceImpl;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
@@ -40,10 +39,10 @@ import jp.co.ha.db.entity.HealthInfoFileSetting;
 @Service
 public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
-    /** {@linkplain HealthInfoSearchServiceImpl} */
+    /** 健康情報情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
 
@@ -166,26 +165,22 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
      * 指定した文字列型の日付をYYYYMMDD 00:00:00の{@linkplainLocalDateTime}に直す
      *
      * @param date
-     *     文字列型の日付
+     *     日付
      * @return YYYYMMDD 00:00:00
      */
-    private LocalDateTime editFromDate(String date) {
-        LocalDate localDate = DateTimeUtil.toLocalDate(date,
-                DateFormatType.YYYYMMDD_STRICT);
-        return DateTimeUtil.getStartDay(localDate);
+    private LocalDateTime editFromDate(LocalDate date) {
+        return DateTimeUtil.getStartDay(date);
     }
 
     /**
      * 指定した文字列型の日付をYYYYMMDD 23:59:59の{@linkplainLocalDateTime}に直す
      *
      * @param date
-     *     文字列型の日付
+     *     日付
      * @return YYYYMMDD 23:59:59
      */
-    private LocalDateTime editToDate(String date) {
-        LocalDate localDate = DateTimeUtil.toLocalDate(date,
-                DateFormatType.YYYYMMDD_STRICT);
-        return DateTimeUtil.getEndDay(localDate);
+    private LocalDateTime editToDate(LocalDate date) {
+        return DateTimeUtil.getEndDay(date);
     }
 
 }

@@ -22,7 +22,8 @@ import jp.co.ha.db.config.DbConfig;
  */
 @Configuration
 @ComponentScan(basePackages = {
-        "jp.co.ha.api.*.controller"
+        "jp.co.ha.api.*.controller",
+        "jp.co.ha.api.exception"
 })
 // commonプロジェクトなどのbean定義を読込
 @Import({

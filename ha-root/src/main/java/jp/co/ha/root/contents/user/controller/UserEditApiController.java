@@ -18,23 +18,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
-import jp.co.ha.business.db.crud.create.impl.RootUserRoleDetailMtCreateServiceImpl;
 import jp.co.ha.business.db.crud.delete.RootUserRoleDetailMtDeleteService;
-import jp.co.ha.business.db.crud.delete.impl.RootUserRoleDetailMtDeleteServiceImpl;
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.business.db.crud.read.RootRoleMtSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootLoginInfoSearchServiceImpl;
-import jp.co.ha.business.db.crud.read.impl.RootRoleMtSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.RootLoginInfoUpdateService;
-import jp.co.ha.business.db.crud.update.impl.RootLoginInfoUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
-import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
@@ -56,29 +51,29 @@ public class UserEditApiController
     private static final Logger LOG = LoggerFactory
             .getLogger(UserEditApiController.class);
 
-    /** {@linkplain RootLoginInfoSearchServiceImpl} */
+    /** 管理者サイトユーザログイン情報検索サービス */
     @Autowired
     private RootLoginInfoSearchService rootLoginInfoSearchService;
-    /** {@linkplain RootLoginInfoUpdateServiceImpl} */
+    /** 管理者サイトユーザログイン情報更新サービス */
     @Autowired
     private RootLoginInfoUpdateService rootLoginInfoUpdateService;
-    /** {@linkplain RootUserRoleDetailMtDeleteServiceImpl} */
+    /** 管理者サイトユーザ権限詳細マスタ削除サービス */
     @Autowired
     private RootUserRoleDetailMtDeleteService rootUserRoleDetailMtDeleteService;
-    /** {@linkplain RootUserRoleDetailMtCreateServiceImpl} */
+    /** 管理者サイトユーザ権限詳細マスタ作成サービス */
     @Autowired
     private RootUserRoleDetailMtCreateService rootUserRoleDetailMtCreateService;
-    /** {@linkplain RootRoleMtSearchServiceImpl} */
+    /** 管理者サイト権限マスタ検索サービス */
     @Autowired
     private RootRoleMtSearchService rootRoleMtSearchService;
-    /** {@linkplain Sha256HashEncoder} */
+    /** SHA-256ハッシュ化 */
     @Sha256
     @Autowired
     private HashEncoder hashEncoder;
-    /** {@linkplain PlatformTransactionManager} */
+    /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
-    /** {@linkplain DefaultTransactionDefinition} */
+    /** トランザクション定義 */
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
@@ -106,14 +101,15 @@ public class UserEditApiController
 
             List<CompositeRootUserInfo> userRoleList = rootLoginInfoSearchService
                     .findCompositeUserById(seqLoginId);
-            // 管理者サイトユーザ権限管理マスタID
-            Long seqRootUserRoleMngMtId = userRoleList.get(0)
-                    .getSeqRootUserRoleMngMtId();
-            if (seqRootUserRoleMngMtId == null) {
-                // エラーレスポンスを返却
+            if (CollectionUtil.isEmpty(userRoleList)) {
+                // 登録データが存在しない場合
                 return ResponseEntity.badRequest()
                         .body(getErrorResponse("data illegal error"));
             }
+
+            // 管理者サイトユーザ権限管理マスタID
+            Long seqRootUserRoleMngMtId = userRoleList.get(0)
+                    .getSeqRootUserRoleMngMtId();
 
             // ユーザの詳細マスタを削除
             rootUserRoleDetailMtDeleteService.deleteByUser(seqRootUserRoleMngMtId);

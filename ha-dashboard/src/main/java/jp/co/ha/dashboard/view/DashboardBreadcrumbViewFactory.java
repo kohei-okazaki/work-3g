@@ -107,7 +107,7 @@ public class DashboardBreadcrumbViewFactory {
     }
 
     /**
-     * アカウント設定画面のパンくずリスト情報Viewを返す
+     * ユーザ設定画面のパンくずリスト情報Viewを返す
      *
      * @return パンくずリスト情報View
      */
@@ -115,7 +115,7 @@ public class DashboardBreadcrumbViewFactory {
         BreadcrumbView view = getTop(false);
 
         Breadcrumb accountSetting = new Breadcrumb();
-        accountSetting.setViewName("アカウント設定");
+        accountSetting.setViewName("ユーザ設定");
         accountSetting.setUrl("/accountsetting/input");
         accountSetting.setCurrent(true);
         view.addBreadcrumb(accountSetting);
@@ -124,7 +124,7 @@ public class DashboardBreadcrumbViewFactory {
     }
 
     /**
-     * アカウント作成画面のパンくずリスト情報Viewを返す
+     * ユーザ作成画面のパンくずリスト情報Viewを返す
      *
      * @return パンくずリスト情報View
      */
@@ -132,7 +132,7 @@ public class DashboardBreadcrumbViewFactory {
         BreadcrumbView view = new BreadcrumbView();
 
         Breadcrumb accountRegist = new Breadcrumb();
-        accountRegist.setViewName("アカウント作成");
+        accountRegist.setViewName("ユーザ作成");
         accountRegist.setUrl("/accountregist/input");
         accountRegist.setCurrent(true);
         view.addBreadcrumb(accountRegist);
@@ -141,7 +141,7 @@ public class DashboardBreadcrumbViewFactory {
     }
 
     /**
-     * アカウント回復画面のパンくずリスト情報Viewを返す
+     * ユーザ回復画面のパンくずリスト情報Viewを返す
      *
      * @return パンくずリスト情報View
      */
@@ -149,7 +149,7 @@ public class DashboardBreadcrumbViewFactory {
         BreadcrumbView view = new BreadcrumbView();
 
         Breadcrumb accountRecovery = new Breadcrumb();
-        accountRecovery.setViewName("アカウント回復");
+        accountRecovery.setViewName("ユーザ回復");
         accountRecovery.setUrl("/accountrecovery/index");
         accountRecovery.setCurrent(true);
         view.addBreadcrumb(accountRecovery);
@@ -221,6 +221,23 @@ public class DashboardBreadcrumbViewFactory {
         news.setUrl("/news/list");
         news.setCurrent(true);
         view.addBreadcrumb(news);
+
+        return view;
+    }
+
+    /**
+     * 問い合わせ画面のパンくずリスト情報Viewを返す
+     *
+     * @return パンくずリスト情報View
+     */
+    public static BreadcrumbView getInquriy() {
+        BreadcrumbView view = getTop(false);
+
+        Breadcrumb healthInfo = new Breadcrumb();
+        healthInfo.setViewName("問い合わせ");
+        healthInfo.setUrl("/inquiry/input");
+        healthInfo.setCurrent(true);
+        view.addBreadcrumb(healthInfo);
 
         return view;
     }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ha.db.mapper.composite.CompositeUserMapper">
+
+  <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.composite.CompositeUser">
+    <id column="SEQ_USER_ID" jdbcType="BIGINT" property="seqUserId" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="DELETE_FLAG" jdbcType="BIT" property="deleteFlag" />
+    <result column="PASSWORD_EXPIRE" jdbcType="DATE" property="passwordExpire" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="API_KEY" jdbcType="VARCHAR" property="apiKey" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="GENDER_TYPE" jdbcType="INTEGER" property="genderType" />
+    <result column="BIRTH_DATE" jdbcType="DATE" property="birthDate" />
+    <result column="MAIL_ADDRESS" jdbcType="VARCHAR" property="mailAddress" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="goalWeight" />
+    <result column="HEADER_FLAG" jdbcType="BIT" property="headerFlag" />
+    <result column="FOOTER_FLAG" jdbcType="BIT" property="footerFlag" />
+    <result column="MASK_FLAG" jdbcType="BIT" property="maskFlag" />
+    <result column="ENCLOSURE_CHAR_FLAG" jdbcType="BIT" property="enclosureCharFlag" />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" parameterType="jp.co.ha.db.entity.UserKey" resultMap="BaseResultMap">
+    SELECT
+      <!-- USER-->
+        U.SEQ_USER_ID
+      , U.PASSWORD
+      , U.DELETE_FLAG
+      , U.PASSWORD_EXPIRE
+      , U.REMARKS
+      , U.API_KEY
+      , U.MAIL_ADDRESS
+      , U.REG_DATE
+      , U.UPDATE_DATE
+      , U.GENDER_TYPE
+      , U.BIRTH_DATE
+      <!-- HEALTH_INFO_FILE_SETTING -->
+      , HF.HEADER_FLAG
+      , HF.FOOTER_FLAG
+      , HF.MASK_FLAG
+      , HF.ENCLOSURE_CHAR_FLAG
+      <!-- USER_HEALTH_GOAL -->
+      , HG.WEIGHT
+    FROM
+      USER U
+      LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
+        ON U.SEQ_USER_ID = HF.SEQ_USER_ID
+      LEFT OUTER JOIN USER_HEALTH_GOAL HG
+        ON HG.SEQ_USER_ID = U.SEQ_USER_ID AND HG.DELETE_FLAG = FALSE
+    WHERE
+      U.SEQ_USER_ID = #{seqUserId,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" parameterType="jp.co.ha.db.entity.UserExample" resultMap="BaseResultMap">
+    SELECT
+      <!-- USER -->
+        U.SEQ_USER_ID
+      , U.PASSWORD
+      , U.DELETE_FLAG
+      , U.PASSWORD_EXPIRE
+      , U.REMARKS
+      , U.API_KEY
+      , U.MAIL_ADDRESS
+      , U.REG_DATE
+      , U.UPDATE_DATE
+      , U.GENDER_TYPE
+      , U.BIRTH_DATE
+      <!-- HEALTH_INFO_FILE_SETTING -->
+      , HF.HEADER_FLAG
+      , HF.FOOTER_FLAG
+      , HF.MASK_FLAG
+      , HF.ENCLOSURE_CHAR_FLAG
+    FROM
+      USER U
+      LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
+        ON U.SEQ_USER_ID = HF.SEQ_USER_ID
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

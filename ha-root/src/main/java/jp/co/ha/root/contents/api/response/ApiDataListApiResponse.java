@@ -27,7 +27,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
     private List<ApiData> apiDataList;
 
     /**
-     * apiDataListを返す
+     * API通信情報リストを返す
      *
      * @return apiDataList
      */
@@ -36,7 +36,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * apiDataListを設定する
+     * API通信情報リストを設定する
      *
      * @param apiDataList
      *     API通信情報リスト
@@ -73,9 +73,6 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         /** HTTPステータス */
         @JsonProperty("http_status")
         private String httpStatus;
-        /** 処理結果 */
-        @JsonProperty("result")
-        private String result;
         /** 詳細 */
         @JsonProperty("detail")
         private String detail;
@@ -91,7 +88,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         private LocalDateTime responseDate;
 
         /**
-         * seqApiCommunicationDataIdを返す
+         * API通信情報IDを返す
          *
          * @return seqApiCommunicationDataId
          */
@@ -100,7 +97,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * seqApiCommunicationDataIdを設定する
+         * API通信情報IDを設定する
          *
          * @param seqApiCommunicationDataId
          *     API通信情報ID
@@ -110,7 +107,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * transactionIdを返す
+         * トランザクションIDを返す
          *
          * @return transactionId
          */
@@ -119,7 +116,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * transactionIdを設定する
+         * トランザクションIDを設定する
          *
          * @param transactionId
          *     トランザクションID
@@ -129,7 +126,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * apiNameを返す
+         * API名を返す
          *
          * @return apiName
          */
@@ -138,7 +135,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * apiNameを設定する
+         * API名を設定する
          *
          * @param apiName
          *     API名
@@ -148,7 +145,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * httpMethodを返す
+         * HTTPメソッドを返す
          *
          * @return httpMethod
          */
@@ -157,16 +154,17 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * httpMethodを設定する
+         * HTTPメソッドを設定する
          *
          * @param httpMethod
+         *     HTTPメソッド
          */
         public void setHttpMethod(String httpMethod) {
             this.httpMethod = httpMethod;
         }
 
         /**
-         * urlを返す
+         * リクエストURLを返す
          *
          * @return url
          */
@@ -175,16 +173,17 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * urlを設定する
+         * リクエストURLを設定する
          *
          * @param url
+         *     リクエストURL
          */
         public void setUrl(String url) {
             this.url = url;
         }
 
         /**
-         * bodyを返す
+         * リクエストBodyを返す
          *
          * @return body
          */
@@ -193,16 +192,17 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * bodyを設定する
+         * リクエストBodyを設定する
          *
          * @param body
+         *     リクエストBody
          */
         public void setBody(String body) {
             this.body = body;
         }
 
         /**
-         * httpStatusを返す
+         * HTTPステータスを返す
          *
          * @return httpStatus
          */
@@ -211,7 +211,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * httpStatusを設定する
+         * HTTPステータスを設定する
          *
          * @param httpStatus
          *     HTTPステータス
@@ -221,26 +221,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * resultを返す
-         *
-         * @return result
-         */
-        public String getResult() {
-            return result;
-        }
-
-        /**
-         * resultを設定する
-         *
-         * @param result
-         *     処理結果
-         */
-        public void setResult(String result) {
-            this.result = result;
-        }
-
-        /**
-         * detailを返す
+         * 詳細を返す
          *
          * @return detail
          */
@@ -249,7 +230,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * detailを設定する
+         * 詳細を設定する
          *
          * @param detail
          *     詳細
@@ -259,7 +240,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * requestDateを返す
+         * APIリクエスト日時を返す
          *
          * @return requestDate
          */
@@ -268,7 +249,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * requestDateを設定する
+         * APIリクエスト日時を設定する
          *
          * @param requestDate
          *     APIリクエスト日時
@@ -278,7 +259,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * responseDateを返す
+         * APIリクエスト日時を返す
          *
          * @return responseDate
          */
@@ -287,7 +268,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * responseDateを設定する
+         * APIリクエスト日時を設定する
          *
          * @param responseDate
          *     APIリクエスト日時

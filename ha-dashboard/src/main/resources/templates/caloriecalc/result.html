@@ -1,21 +1,28 @@
-<div class="container">
-  <!--/* table部ここから */-->
-  <table class="table table-hover table-striped">
-    <tr>
-      <th th:text="#{baseMetabolism}" />
-      <td th:text="${calcResult.baseMetabolism} + '&ensp;kcal'" />
-    </tr>
-    <tr>
-      <th th:text="#{lifeWorkMetabolism}" />
-      <td th:text="${calcResult.lifeWorkMetabolism} + '&ensp;kcal'" />
-    </tr>
-    <tr>
-      <th th:text="#{lostCaloriePerDay}" />
-      <td th:text="${calcResult.lostCaloriePerDay} + '&ensp;kcal'" />
-    </tr>
+<div>
+  <!-- table部ここから -->
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th class="bg-light" scope="row" th:text="#{baseMetabolism}"></th>
+        <td th:utext="${calcResult.baseMetabolism} + '&ensp;kcal'"></td>
+      </tr>
+      <tr>
+        <th class="bg-light" scope="row" th:text="#{lifeWorkMetabolism}"></th>
+        <td th:utext="${calcResult.lifeWorkMetabolism} + '&ensp;kcal'"></td>
+      </tr>
+      <tr>
+        <th class="bg-light" scope="row" th:text="#{lostCaloriePerDay}"></th>
+        <td th:utext="${calcResult.lostCaloriePerDay} + '&ensp;kcal'"></td>
+      </tr>
+    </tbody>
   </table>
-  <!--/* table部ここまで */-->
-  <a data-toggle="modal" href="#calorieCalcMethonModal">1日のカロリーの計算方法</a>
-  <!--/* 1日のカロリーの計算方法モーダル */-->
+  <!-- table部ここまで -->
+
+  <!-- モーダル起動リンク -->
+  <div class="mt-3">
+    <a href="#calorieCalcMethonModal" data-toggle="modal">1日のカロリーの計算方法</a>
+  </div>
+
+  <!-- モーダル本体 -->
   <div th:replace="~{./caloriecalc/caloriecalcmethod-modal.html}"></div>
-</div><!-- /.container -->
+</div>

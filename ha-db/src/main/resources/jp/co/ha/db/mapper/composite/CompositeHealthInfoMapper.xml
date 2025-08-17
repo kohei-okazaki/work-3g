@@ -8,7 +8,6 @@
     <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
     <result column="BMI" jdbcType="DECIMAL" property="bmi" />
     <result column="STANDARD_WEIGHT" jdbcType="DECIMAL" property="standardWeight" />
-    <result column="HEALTH_INFO_STATUS" jdbcType="VARCHAR" property="healthInfoStatus" />
     <result column="HEALTH_INFO_REG_DATE" jdbcType="TIMESTAMP" property="healthInfoRegDate" />
     <result column="SEQ_BMI_RANGE_MT_ID" jdbcType="BIGINT" property="seqBmiRangeMtId" />
     <result column="RANGE_MIN" jdbcType="INTEGER" property="rangeMin" />
@@ -25,7 +24,6 @@
       , HI.WEIGHT
       , HI.BMI
       , HI.STANDARD_WEIGHT
-      , HI.HEALTH_INFO_STATUS
       , HI.HEALTH_INFO_REG_DATE
       , HI.SEQ_BMI_RANGE_MT_ID
       <!-- BMI_RANGE_MT -->
@@ -50,7 +48,6 @@
       , HI.WEIGHT
       , HI.BMI
       , HI.STANDARD_WEIGHT
-      , HI.HEALTH_INFO_STATUS
       , HI.HEALTH_INFO_REG_DATE
       , HI.SEQ_BMI_RANGE_MT_ID
       <!-- BMI_RANGE_MT -->

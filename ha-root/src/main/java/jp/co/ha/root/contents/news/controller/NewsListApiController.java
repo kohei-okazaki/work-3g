@@ -5,14 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.NewsInfoSearchServiceImpl;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -37,10 +35,10 @@ import jp.co.ha.root.contents.news.response.NewsListApiResponse;
 public class NewsListApiController
         extends BaseRootApiController<NewsListApiRequest, NewsListApiResponse> {
 
-    /** {@linkplain NewsInfoSearchServiceImpl} */
+    /** お知らせ情報検索サービス */
     @Autowired
     private NewsInfoSearchService searchService;
-    /** {@linkplain NewsComponent} */
+    /** お知らせ情報Component */
     @Autowired
     private NewsComponent newsComponent;
 
@@ -55,9 +53,9 @@ public class NewsListApiController
      * @throws BaseException
      *     S3よりお知らせ情報JSONを取得できなかった場合
      */
-    @GetMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "news")
     public ResponseEntity<NewsListApiResponse> index(NewsListApiRequest request,
-            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page)
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page)
             throws BaseException {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)

@@ -7,12 +7,12 @@
       <li>
         <a class="link" th:href="@{/login/top}">
           <img th:src="@{/static/image/icon_home_green.png}" title="hitogata">
-        </a>
+        </a><!-- /.link -->
       </li>
       <li>
         <a class="link" th:href="@{/news/list}">
           <img th:src="@{/static/image/icon_notice_green.png}" title="hitogata">
-        </a>
+        </a><!-- /.link -->
       </li>
     </ul><!-- /.footer-submenu -->
   </div>
@@ -22,4 +22,4 @@
     <p class="zero-padding-margin" align="left" th:text="'&nbsp;&nbsp;&copy;' +${#dates.format(#dates.createNow(), 'yyyy')} + '&nbsp;HealthInfo App'"></p>
     <p class="zero-padding-margin" align="right" th:text="'version&nbsp;' + #{appVersion} + '&nbsp;&nbsp;'"></p>
   </div><!-- /.sub-footer -->
-</div><!-- /.footer fixed-bottom -->
+</div><!-- /.footer -->

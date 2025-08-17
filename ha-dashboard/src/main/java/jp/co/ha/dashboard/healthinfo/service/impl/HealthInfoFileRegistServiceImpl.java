@@ -13,8 +13,7 @@ import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTyp
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.db.crud.read.AccountSearchService;
-import jp.co.ha.business.db.crud.read.impl.AccountSearchServiceImpl;
+import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
@@ -26,8 +25,8 @@ import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
-import jp.co.ha.db.entity.Account;
 import jp.co.ha.db.entity.ApiCommunicationData;
+import jp.co.ha.db.entity.User;
 
 /**
  * 健康情報ファイル入力画面サービス実装クラス
@@ -37,19 +36,19 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {
 
-    /** {@linkplain ApiCommunicationDataComponent} */
+    /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** {@linkplain AccountSearchServiceImpl} */
+    /** ユーザ情報検索サービス */
     @Autowired
-    private AccountSearchService accountSearchService;
-    /** {@linkplain HealthInfoRegistApi} */
+    private UserSearchService userSearchService;
+    /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
-    /** {@linkplain HealthInfoProperties} */
+    /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** {@linkplain BeanValidator} */
+    /** 妥当性チェックValidator */
     @Autowired
     private BeanValidator<HealthInfoCsvUploadModel> validator;
 
@@ -78,11 +77,11 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     public ResultType regist(List<HealthInfoCsvUploadModel> modelList, Long seqUserId)
             throws BaseException {
 
-        // アカウント情報.APIキーを設定
-        Account account = accountSearchService.findById(seqUserId).get();
+        // ユーザ情報.APIキーを設定
+        User user = userSearchService.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
-                .withHeader(ApiConnectInfo.X_API_KEY, account.getApiKey())
+                .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 

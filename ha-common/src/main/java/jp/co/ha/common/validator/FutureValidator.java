@@ -8,7 +8,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import jp.co.ha.common.validator.annotation.Future;
 
 /**
- * メールアドレス形式の妥当性チェックvalidator
+ * 未来日の妥当性チェックvalidator
  *
  * @see jp.co.ha.common.validator.annotation.Future
  * @version 1.0.0

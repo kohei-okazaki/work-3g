@@ -11,11 +11,8 @@ import jp.co.ha.business.api.node.response.BaseNodeApiResponse;
 import jp.co.ha.business.api.root.response.BaseRootApiResponse;
 import jp.co.ha.business.api.track.response.BaseTrackApiResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
-import jp.co.ha.business.db.crud.create.impl.ApiCommunicationDataCreateServiceImpl;
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
-import jp.co.ha.business.db.crud.read.impl.ApiCommunicationDataSearchServiceImpl;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
-import jp.co.ha.business.db.crud.update.impl.ApiCommunicationDataUpdateServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -31,13 +28,13 @@ import jp.co.ha.db.entity.ApiCommunicationData;
 @Component
 public class ApiCommunicationDataComponent {
 
-    /** {@linkplain ApiCommunicationDataCreateServiceImpl} */
+    /** API通信情報作成サービス */
     @Autowired
     private ApiCommunicationDataCreateService createService;
-    /** {@linkplain ApiCommunicationDataUpdateServiceImpl} */
+    /** API通信情報更新サービス */
     @Autowired
     private ApiCommunicationDataUpdateService updateService;
-    /** {@linkplain ApiCommunicationDataSearchServiceImpl} */
+    /** API通信情報検索サービス */
     @Autowired
     private ApiCommunicationDataSearchService searchService;
 

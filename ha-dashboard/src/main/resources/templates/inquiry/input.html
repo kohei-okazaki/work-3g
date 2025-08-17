@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
+<link>
+<title>問い合わせ画面</title>
+</head>
+<body>
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="card shadow border-0 rounded">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">📝 問い合わせ入力</h4>
+          </div>
+
+          <div class="card-body bg-white">
+            <!-- 全体エラーメッセージ -->
+            <div th:if="${errorMessage != null}" class="alert alert-danger" th:text="${errorMessage}"></div>
+            <div th:each="errField : ${#fields.errors()}" class="alert alert-danger" th:text="${errField}"></div>
+
+            <!-- 入力フォーム -->
+            <form id="inquiryForm" th:action="@{/inquiry/confirm}" method="post" th:object="${inquiryForm}">
+
+              <!-- title入力 -->
+              <div class="form-group">
+                <label for="title" class="font-weight-bold" th:text="#{inquiryTitle}">件名</label>
+                <span class="badge badge-danger ml-2">必須</span>
+
+                <div class="input-group">
+                  <input type="text" class="form-control" th:field="*{title}" required aria-describedby="title-unit">
+                </div>
+              </div>
+
+              <!-- 種別入力 -->
+              <div class="form-group">
+                <label for="title" class="font-weight-bold" th:text="#{inquiryType}">カテゴリー</label>
+                <span class="badge badge-danger ml-2">必須</span>
+                <select id="type" th:field="*{type}" class="form-control">
+                  <option value="">-- 選択してください --</option>
+                  <option th:each="typeEntity : ${typeList}" th:value="${typeEntity.inquiryType}" th:text="${typeEntity.name}"></option>
+                </select>
+              </div>
+
+              <!-- body入力 -->
+              <div class="form-group">
+                <label for="remarks" class="font-weight-bold" th:text="#{inquiryBody}">備考</label>
+                <span class="badge badge-danger ml-2">必須</span>
+                <textarea class="form-control" rows="5" th:field="*{body}" placeholder="問い合わせ内容"></textarea>
+              </div>
+
+              <!-- ボタンエリア -->
+              <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-success w-45">確 認</button>
+                <button type="reset" class="btn btn-secondary w-45">リセット</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(function() {
+
+      jQuery("#inquiryForm").validationEngine({
+        promptPosition : "topLeft:0"
+      });
+
+    });
+
+  </script>
+</body>
+</html>

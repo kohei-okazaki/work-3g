@@ -10,7 +10,7 @@ import jp.co.ha.db.entity.RootUserRoleMngMt;
 public interface RootUserRoleMngMtCreateService {
 
     /**
-     * 管理者サイトユーザ権限管理マスタを登録
+     * 管理者サイトユーザ権限管理マスタを登録する
      *
      * @param entity
      *     管理者サイトユーザ権限管理マスタ

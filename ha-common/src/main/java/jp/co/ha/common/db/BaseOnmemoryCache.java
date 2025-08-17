@@ -47,6 +47,14 @@ public abstract class BaseOnmemoryCache<T> {
     }
 
     /**
+     * キャッシュの削除処理を行う
+     */
+    public void delete() {
+        this.cacheDate = null;
+        this.list = null;
+    }
+
+    /**
      * 新規データ取得対象判定処理
      *
      * @return 新規データ取得する場合True、それ以外の場合False
@@ -54,13 +62,16 @@ public abstract class BaseOnmemoryCache<T> {
     protected boolean isSelected() {
 
         if (this.cacheDate == null) {
-            LOG.debug(getTableName() + " is no cache");
+            // キャッシュされていない場合
+            LOG.debug(getTableName() + " is no cache.");
             return true;
         } else if (this.cacheDate.plusSeconds(getExpireSeconds() / 1000)
                 .compareTo(LocalDateTime.now()) < 0) {
-            LOG.debug(getTableName() + " is expired");
+            // キャッシュの有効期限を超過している場合
+            LOG.debug(getTableName() + " is expired.");
             return true;
         }
+        LOG.debug(getTableName() + "'s cache is enable.");
         return false;
     }
 

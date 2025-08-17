@@ -5,175 +5,200 @@
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   th:replace="~{layout/template :: layout(~{::title},~{::body/content()},~{::link})}">
 <head>
-<title>アカウント設定入力</title>
+<title>ユーザ設定変更</title>
 <link>
 </head>
 <body>
 
-  <div class="px-4">
-    <div class="container border col-10 shadow">
-      <h2 class="menuTitle">アカウント設定入力</h2>
+  <div class="container my-4">
+    <div class="card shadow">
 
-      <form id="accountSettingForm" th:action="@{/accountsetting/confirm}" method="post" th:object="${accountSettingForm}">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">📝 ユーザ設定変更</h4>
+      </div>
 
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqUserId')}" th:errors="*{seqUserId}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('apiKey')}" th:errors="*{apiKey}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('passwordExpire')}" th:errors="*{passwordExpire}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('remarks')}" th:errors="*{remarks}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('seqUserId')}" th:errors="*{seqUserId}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('enclosureCharFlag')}" th:errors="*{enclosureCharFlag}"></div>
+      <div class="card-body">
+        <form th:action="@{/accountsetting/confirm}" method="post" th:object="${userSettingForm}" id="userSettingForm">
+          <!-- 全体エラー表示 -->
+          <div th:if="${#fields.hasErrors()}" class="alert alert-danger">
+            入力に誤りがあります。各項目を確認してください。
+          </div>
 
-        <!--/* 削除フラグここから */-->
-        <div class="form-group">
-          <label class="control-label" for="delete" th:text="#{delete}"></label><span class="badge badge-danger">必須</span>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked="checked">
-            <label for="deleteFlagFalse" class="custom-control-label">しない</label>
-          </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" th:field="*{deleteFlag}" id="deleteFlagTrue" value="1">
-            <label for="deleteFlagTrue" class="custom-control-label">する</label>
-          </div><!-- /.custom-control custom-radio -->
-        </div><!-- /.form-group -->
-        <!--/* 削除フラグここから */-->
+          <!-- 削除フラグ -->
+          <div class="form-group">
+            <label class="font-weight-bold">削除
+              <span class="badge badge-danger">必須</span>
+            </label>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" th:field="*{deleteFlag}" id="deleteFlagFalse" value="0" checked />
+              <label class="form-check-label" for="deleteFlagFalse">しない</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" th:field="*{deleteFlag}" id="deleteFlagTrue" value="1" />
+              <label class="form-check-label" for="deleteFlagTrue">する</label>
+            </div>
+            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('deleteFlag')}" th:errors="*{deleteFlag}"></div>
+          </div>
 
-        <!--/* ユーザIDここから */-->
-        <div class="form-group">
-          <p th:text="#{seqUserId}"></p>
-          <p th:text="*{seqUserId}"></p>
-           <input type="hidden" th:field="*{seqUserId}" th:value="${seqUserId}" />
-        </div><!-- /.form-group -->
-        <!--/* ユーザIDここまで */-->
+          <!-- ユーザID（非表示） -->
+          <div class="form-group">
+            <label class="font-weight-bold" th:text="#{seqUserId}"></label>
+            <p class="form-control-plaintext" th:text="*{seqUserId}"></p>
+            <input type="hidden" th:field="*{seqUserId}" />
+          </div>
 
-        <!--/* パスワードここから */-->
-        <div class="form-group">
-          <label class="control-label" for="password" th:text="#{password}"></label><span class="badge badge-danger">必須</span>
-          <div class="checkbox">
-            <input type="password" class="validate[required] form-control" th:field="*{password}" maxlength="16" required placeholder="adminpass" />
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="password-check" class="checkbox-input custom-control-input" />
-              <span class="checkbox-parts custom-control-label">パスワードを表示</span>
-            </label><!-- /.custom-control custom-checkbox -->
-          </div><!-- /.checkbox -->
-        </div><!-- /.form-group -->
-        <!--/* パスワードここまで */-->
+          <!-- パスワード -->
+          <div class="form-group">
+            <label for="password" class="font-weight-bold" th:text="#{password}"></label> <span class="badge badge-danger">必須</span>
+            <input type="password" class="form-control" th:field="*{password}" maxlength="16" required placeholder="adminpass" />
+            <div class="form-check mt-2">
+              <input type="checkbox" class="form-check-input" id="password-check" onclick="togglePassword('password')" />
+              <label class="form-check-label" for="password-check">パスワードを表示</label>
+            </div>
+            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+          </div>
 
-        <!--/* パスワード有効期限日ここから */-->
-        <div class="form-group">
-          <label class="control-label" for="passwordExpire" th:text="#{passwordExpire}"></label><span class="badge badge-danger">必須</span>
-          <input type="text" class="validate[required] form-control" th:field="*{passwordExpire}" th:value="${passwordExpire}" required placeholder="2020/03/01" />
-        </div><!-- /.form-group -->
-        <!--/* パスワード有効期限日ここまで */-->
+          <!-- メールアドレス -->
+          <div class="form-group">
+            <label for="mailAddress" class="font-weight-bold" th:text="#{mailAddress}"></label> <span class="badge badge-danger">必須</span>
+            <input type="email" class="form-control" th:field="*{mailAddress}" maxlength="64" required placeholder="test@gmail.com" />
+            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"></div>
+          </div>
 
-        <!--/* APIキーここから */-->
-        <div class="form-group">
-          <label for="apiKey" th:text="#{apiKey}"></label>
-          <p th:text="*{apiKey}"></p>
-          <input type="hidden" th:field="*{apiKey}" th:value="${apiKey}" />
-        </div><!-- /.form-group -->
-        <!--/* APIキーここまで */-->
+         <!-- 性別 -->
+         <div class="form-group">
+           <label class="font-weight-bold" for="genderType" th:text="#{genderType}"></label>
+           <span class="badge badge-danger">必須</span>
+           <div class="form-check form-check-inline">
+           <input type="radio" class="form-check-input" th:field="*{genderType}" id="male" value="0" checked>
+           <label for="male" class="form-check-label" th:text="#{male}"></label>
+           </div>
+            <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{genderType}" id="female" value="1">
+             <label for="female" class="form-check-label" th:text="#{female}"></label>
+           </div>
+           <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('genderType')}" th:errors="*{genderType}"></div>
+         </div>
 
-        <!--/* メールアドレスここから */-->
-        <div class="form-group">
-          <label class="control-label" for="mailAddress" th:text="#{mailAddress}"></label><span class="badge badge-danger">必須</span>
-          <input type="email" class="validate[required,custom[email]] form-control" th:field="*{mailAddress}" th:value="${mailAddress}" required placeholder="test@gmail.com" />
-          <div id="suggest"></div>
-        </div><!-- /.form-group -->
-        <!--/* メールアドレスここまで */-->
+         <!-- 誕生日 -->
+         <div class="form-group">
+           <label class="control-label" for="birthDate" th:text="#{birthDate}"></label><span class="badge badge-danger">必須</span>
+           <input type="date" class="form-control rounded shadow-sm" th:field="*{birthDate}" th:value="${birthDate}" required />
+         </div>
 
-        <!--/* ヘッダ利用ここから */-->
-        <div class="form-group">
-          <label class="control-label" for="headerUse" th:text="#{headerUse}"></label><span class="badge badge-danger">必須</span>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked />
-            <label for="headerFlagFalse" class="custom-control-label">しない</label>
-          </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{headerFlag}" id="headerFlagTrue" value="1" />
-            <label for="headerFlagTrue" class="custom-control-label">する</label>
-          </div><!-- /.custom-control custom-radio -->
-        </div><!-- /.form-group -->
-        <!--/* ヘッダ利用ここまで */-->
+         <!-- 目標体重 -->
+         <div class="form-group">
+           <label for="goalWeight" class="font-weight-bold" th:text="#{goalWeight}">目標体重</label>
+           <span class="badge badge-danger ml-2">必須</span>
 
-        <!--/* フッタ利用ここから */-->
-        <div class="form-group">
-          <label class="control-label" for="footerUse" th:text="#{footerUse}"></label><span class="badge badge-danger">必須</span>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked />
-            <label for="footerFlagFalse" class="custom-control-label">しない</label>
-          </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{footerFlag}" id="footerFlagTrue" value="1" />
-            <label for="footerFlagTrue" class="custom-control-label">する</label>
-          </div><!-- /.custom-control custom-radio -->
-        </div><!-- /.form-group -->
-        <!--/* フッタ利用ここまで */-->
+           <div class="input-group">
+             <input type="text" class="form-control" th:field="*{goalWeight}" required placeholder="50.00" aria-describedby="goal-weight-unit">
+             <div class="input-group-append">
+               <span class="input-group-text" id="goal-weight-unit">kg</span>
+             </div>
+           </div>
+         </div>
 
-        <!--/* マスク利用ここから */-->
-        <div class="form-group">
-          <label class="control-label" for="maskUse" th:text="#{maskUse}"></label><span class="badge badge-danger">必須</span>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked />
-            <label for="maskFlagFalse" class="custom-control-label">しない</label>
-          </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{maskFlag}" id="maskFlagTrue" value="1" />
-            <label for="maskFlagTrue" class="custom-control-label">する</label>
-         </div><!-- /.custom-control custom-radio -->
-        </div><!-- /.form-group -->
-        <!--/* マスク利用ここまで */-->
+         <!-- ヘッダ利用 -->
+         <div class="form-group">
+           <label class="font-weight-bold" th:text="#{headerUse}"></label>
+           <span class="badge badge-danger">必須</span>
+           <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{headerFlag}" id="headerFlagFalse" value="0" checked />
+             <label class="form-check-label"for="headerFlagFalse">しない</label>
+           </div>
+            <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{headerFlag}" id="headerFlagTrue" value="1" />
+             <label class="form-check-label" for="headerFlagTrue">する</label>
+           </div>
+           <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('headerFlag')}" th:errors="*{headerFlag}"></div>
+         </div>
 
-        <!--/* 囲み文字ここから */-->
-        <div class="form-group">
-          <label class="control-label" for="enclosureCharUse" th:text="#{enclosureCharUse}"></label><span class="badge badge-danger">必須</span>
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked />
-            <label for="enclosureCharFlagFalse" class="custom-control-label">しない</label>
-         </div><!-- /.custom-control custom-radio -->
-          <div class="custom-control custom-radio">
-            <input type="radio" class="validate[required] custom-control-input" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1" />
-            <label for="enclosureCharFlagTrue" class="custom-control-label">する</label>
-         </div><!-- /.custom-control custom-radio -->
-        </div><!-- /.form-group -->
-        <!--/* 囲み文字ここまで */-->
+         <!-- フッタ利用 -->
+         <div class="form-group">
+           <label class="font-weight-bold" for="footerUse" th:text="#{footerUse}"></label>
+           <span class="badge badge-danger">必須</span>
+           <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{footerFlag}" id="footerFlagFalse" value="0" checked />
+             <label class="form-check-label" for="footerFlagFalse">しない</label>
+           </div>
+           <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{footerFlag}" id="footerFlagTrue" value="1" />
+             <label class="form-check-label" for="footerFlagTrue">する</label>
+           </div>
+            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('footerFlag')}" th:errors="*{footerFlag}"></div>
+         </div>
 
-        <!--/* 備考ここから */-->
-        <div class="form-group">
-          <label for="remarks" th:text="#{remarks}"></label>
-          <textarea class="form-control" rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
-        </div><!-- /.form-group -->
-        <!--/* 備考ここまで */-->
+         <!-- マスク利用 -->
+         <div class="form-group">
+           <label class="font-weight-bold" for="maskUse" th:text="#{maskUse}"></label>
+           <span class="badge badge-danger">必須</span>
+            <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{maskFlag}" id="maskFlagFalse" value="0" checked />
+             <label for="maskFlagFalse" class="form-check-label">しない</label>
+           </div>
+            <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{maskFlag}" id="maskFlagTrue" value="1" />
+             <label for="maskFlagTrue" class="form-check-label">する</label>
+          </div>
+            <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('maskFlag')}" th:errors="*{maskFlag}"></div>
+         </div>
 
-        <!--/* ボタン部ここから */-->
-        <input type="submit" class="btn btn-success w-25" value="確 認" />
-        <input type="reset" class="btn btn-secondary w-25" value="リセット" />
-        <!--/* ボタン部ここまで */-->
-        <br><br>
-      </form><!-- /#accountSettingForm -->
-    </div><!-- /.container border col-10 -->
-  </div>
+         <!-- 囲み文字 -->
+         <div class="form-group">
+           <label class="font-weight-bold" for="enclosureCharUse" th:text="#{enclosureCharUse}"></label>
+           <span class="badge badge-danger">必須</span>
+           <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{enclosureCharFlag}" id="enclosureCharFlagFalse" value="0" checked />
+             <label for="enclosureCharFlagFalse" class="form-check-label">しない</label>
+          </div>
+           <div class="form-check form-check-inline">
+             <input type="radio" class="form-check-input" th:field="*{enclosureCharFlag}" id="enclosureCharFlagTrue" value="1" />
+             <label for="enclosureCharFlagTrue" class="form-check-label">する</label>
+          </div>
+         </div>
+
+         <!-- 備考 -->
+         <div class="form-group">
+           <label class="font-weight-bold" for="remarks" th:text="#{remarks}"></label>
+           <textarea class="form-control" rows="10" cols="30" th:field="*{remarks}" placeholder="備 考"></textarea>
+         </div>
+
+          <!-- ボタン -->
+          <div class="form-group mt-4">
+            <button type="submit" class="btn btn-success mr-2 w-25">確 認</button>
+            <button type="reset" class="btn btn-secondary w-25">リセット</button>
+          </div>
+
+        </form>
+      </div><!-- /.card-body -->
+    </div><!-- /.card -->
+  </div><!-- /.container -->
 
   <script th:src="@{/static/js/common/password.min.js}"></script>
   <script th:src="@{/static/js/lib/mailcheck.min.js}"></script>
   <script>
     $(function() {
 
-      jQuery("#accountSettingForm").validationEngine({
+      jQuery("#userSettingForm").validationEngine({
         promptPosition : "topLeft:0"
       });
 
-      $("#passwordExpire").datepicker({
-        firstDay: 0,
-        showButtonPanel: true,
-        changeYear: true,
-        changeMonth: true
-      });
+<!--      $("#passwordExpire").datepicker({-->
+<!--        firstDay: 0,-->
+<!--        showButtonPanel: true,-->
+<!--        changeYear: true,-->
+<!--        changeMonth: true,-->
+<!--        yearRange: "2025:2030"-->
+<!--      });-->
+
+<!--      $("#birthDate").datepicker({-->
+<!--        firstDay: 0,-->
+<!--        showButtonPanel: true,-->
+<!--        changeYear: true,-->
+<!--        changeMonth: true,-->
+<!--        yearRange: "1900:2025"-->
+<!--      });-->
 
       const domains = [
         "gmail.com",

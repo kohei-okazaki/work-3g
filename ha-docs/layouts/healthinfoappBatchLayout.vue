@@ -82,6 +82,11 @@ export default {
           title: "ヘルスチェックバッチ",
           to: "/healthinfoapp/batch/healthcheck",
         },
+        {
+          icon: "mdi-server",
+          title: "健康情報連携バッチ",
+          to: "/healthinfoapp/batch/healthinfo/migrate",
+        },
       ],
       miniVariant: false,
       right: true,
@@ -91,5 +96,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

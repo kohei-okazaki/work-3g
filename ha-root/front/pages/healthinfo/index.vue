@@ -129,10 +129,6 @@ export default {
           value: "standard_weight",
         },
         {
-          text: "前回と比較",
-          value: "health_info_status.message",
-        },
-        {
           text: "肥満度",
           value: "bmi_status.message",
         },
@@ -234,15 +230,10 @@ export default {
     openHealthInfoEditModal: function (seqHealthInfoId) {
       this.healthInfoEditModal.dialog = true;
       this.healthInfoEditModal.seqHealthInfoId = seqHealthInfoId;
-      for (var i = 0; i < this.healthInfoList.length; i++) {
-        let healthInfo = this.healthInfoList[i];
-        if (healthInfo.seq_health_info_id == seqHealthInfoId) {
-          this.healthInfoEditModal.seqUserId = healthInfo.seq_user_id;
-          this.healthInfoEditModal.height = healthInfo.height;
-          this.healthInfoEditModal.weight = healthInfo.weight;
-          break;
-        }
-      }
+      let tempHealthInfo = this.healthInfoList.find((o) => o.seq_health_info_id === seqHealthInfoId);
+      this.healthInfoEditModal.seqUserId = tempHealthInfo?.seq_user_id;
+      this.healthInfoEditModal.height = tempHealthInfo?.height;
+      this.healthInfoEditModal.weight = tempHealthInfo?.weight;
     },
     /**
      * ページ切り替え処理

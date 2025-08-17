@@ -15,7 +15,6 @@ import jp.co.ha.business.api.healthinfoapp.controller.BaseAppApiController;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoRegistService;
-import jp.co.ha.business.api.healthinfoapp.service.impl.HealthInfoRegistServiceImpl;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 
@@ -29,7 +28,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 public class HealthInfoRegistApiController extends
         BaseAppApiController<HealthInfoRegistApiRequest, HealthInfoRegistApiResponse> {
 
-    /** {@linkplain HealthInfoRegistServiceImpl} */
+    /** 健康情報登録サービス */
     @Autowired
     private HealthInfoRegistService service;
 

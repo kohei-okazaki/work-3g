@@ -10,7 +10,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
-import jp.co.ha.business.db.crud.read.impl.RootUserNoteInfoSearchServiceImpl;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -43,12 +41,12 @@ import jp.co.ha.root.contents.note.response.NoteListApiResponse.Note;
 public class NoteListApiController
         extends BaseRootApiController<NoteListApiRequest, NoteListApiResponse> {
 
-    /** {@linkplain RootUserNoteInfoSearchServiceImpl} */
+    /** 管理者サイトユーザメモ情報検索サービス */
     @Autowired
     private RootUserNoteInfoSearchService searchService;
-    /** {@linkplain AwsS3Component} */
+    /** AWS S3Component */
     @Autowired
-    private AwsS3Component awsS3Component;
+    private AwsS3Component s3;
 
     /**
      * メモ一覧取得
@@ -63,10 +61,10 @@ public class NoteListApiController
      * @throws BaseException
      *     レスポンスの生成に失敗した場合
      */
-    @GetMapping(value = "note", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "note")
     public ResponseEntity<NoteListApiResponse> index(NoteListApiRequest request,
             @RequestParam(name = "seq_login_id", required = true) Long seqLoginId,
-            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = 0, message = "page is positive") Integer page)
+            @RequestParam(name = "page", required = true, defaultValue = "0") @Decimal(min = "0", message = "page is positive") Integer page)
             throws BaseException {
 
         // ページング情報を取得(1ページあたりの表示件数はapplication-${env}.ymlより取得)
@@ -116,7 +114,7 @@ public class NoteListApiController
      */
     private String getDetail(String s3Key) throws BaseException {
 
-        try (InputStream is = awsS3Component.getS3ObjectByKey(s3Key);
+        try (InputStream is = s3.getS3ObjectByKey(s3Key);
                 Reader r = new InputStreamReader(is);
                 BufferedReader br = new BufferedReader(r)) {
 

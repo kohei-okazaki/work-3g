@@ -27,7 +27,7 @@ public interface CompositeMonthlyMapper {
             @Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
 
     /**
-     * 指定した登録日時のアカウント情報の月ごとの登録情報リストを検索する
+     * 指定した登録日時のユーザ情報の月ごとの登録情報リストを検索する
      *
      * @param from
      *     登録日時(開始)
@@ -35,6 +35,6 @@ public interface CompositeMonthlyMapper {
      *     登録日時(終了)
      * @return 月ごとの登録情報リスト
      */
-    List<CompositeMonthlyRegData> selectAccountByRegDate(
+    List<CompositeMonthlyRegData> selectUserByRegDate(
             @Param("from") LocalDateTime from, @Param("to") LocalDateTime to);
 }

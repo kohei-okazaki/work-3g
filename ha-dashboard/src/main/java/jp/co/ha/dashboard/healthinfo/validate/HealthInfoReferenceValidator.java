@@ -6,10 +6,10 @@ import org.springframework.validation.Errors;
 
 import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.type.CommonFlag;
+import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
-import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.common.web.validator.BaseWebValidator;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 
 /**
@@ -48,22 +48,18 @@ public class HealthInfoReferenceValidator
             super.rejectIfEmpty(errors, "fromHealthInfoRegDate", "健康情報作成日");
 
         } else {
-            if (StringUtil.isEmpty(form.getFromHealthInfoRegDate())) {
+            if (BeanUtil.isNull(form.getFromHealthInfoRegDate())) {
                 // 健康情報作成日(開始)が指定されてない場合
                 super.rejectIfEmpty(errors, "fromHealthInfoRegDate", "健康情報作成日(開始)");
 
-            } else if (StringUtil.isEmpty(form.getToHealthInfoRegDate())) {
+            } else if (BeanUtil.isNull(form.getToHealthInfoRegDate())) {
                 // 健康情報作成日(終了)が指定されてない場合
                 super.rejectIfEmpty(errors, "toHealthInfoRegDate", "健康情報作成日(終了)");
 
             } else {
 
-                LocalDate fromDate = DateTimeUtil.toLocalDate(
-                        form.getFromHealthInfoRegDate(),
-                        DateFormatType.YYYYMMDD_STRICT);
-                LocalDate toDate = DateTimeUtil.toLocalDate(
-                        form.getToHealthInfoRegDate(),
-                        DateFormatType.YYYYMMDD_STRICT);
+                LocalDate fromDate = form.getFromHealthInfoRegDate();
+                LocalDate toDate = form.getToHealthInfoRegDate();
                 if (DateTimeUtil.isAfter(fromDate, toDate, false)) {
                     // 健康情報作成日(終了) < 健康情報作成日(開始) となっている場合
                     errors.rejectValue("toHealthInfoRegDate",

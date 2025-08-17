@@ -17,7 +17,7 @@ import jp.co.ha.db.mapper.HealthInfoMapper;
 @Service
 public class HealthInfoDeleteServiceImpl implements HealthInfoDeleteService {
 
-    /** {@linkplain HealthInfoMapper} */
+    /** 健康情報Mapper */
     @Autowired
     private HealthInfoMapper mapper;
 

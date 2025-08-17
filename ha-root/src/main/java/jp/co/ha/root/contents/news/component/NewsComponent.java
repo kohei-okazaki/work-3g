@@ -29,12 +29,12 @@ import jp.co.ha.common.type.Charset;
 @Component
 public class NewsComponent {
 
-    /** {@linkplain AwsS3Component} */
+    /** AWS S3Component */
     @Autowired
-    private AwsS3Component awsS3Component;
-    /** {@linkplain SlackApiComponent} */
+    private AwsS3Component s3;
+    /** SlackApiComponent */
     @Autowired
-    private SlackApiComponent slackApi;
+    private SlackApiComponent slack;
 
     /**
      * 指定されたS3キーよりお知らせ情報JSONを取得
@@ -47,7 +47,7 @@ public class NewsComponent {
     public NewsDto getNewsDto(String s3Key) throws BaseException {
 
         // S3からお知らせJSONを取得
-        try (InputStream is = awsS3Component.getS3ObjectByKey(s3Key)) {
+        try (InputStream is = s3.getS3ObjectByKey(s3Key)) {
             return new JsonReader().read(is, NewsDto.class);
         } catch (IOException e) {
             throw new SystemException(e);
@@ -71,7 +71,7 @@ public class NewsComponent {
             String json = new ObjectMapper().writeValueAsString(dto);
             byte[] jsonByte = json.getBytes(Charset.UTF_8.getValue());
             InputStream is = new ByteArrayInputStream(jsonByte);
-            awsS3Component.putFile(s3Key, Long.valueOf(jsonByte.length), is);
+            s3.putFile(s3Key, Long.valueOf(jsonByte.length), is);
         } catch (JsonProcessingException e) {
             // JSON文字列への変換に失敗した場合
             throw new BusinessException(e);
@@ -86,9 +86,11 @@ public class NewsComponent {
      *
      * @param s3Key
      *     S3キー
+     * @throws BusinessException
+     *     S3ファイル削除失敗エラー
      */
-    public void remove(String s3Key) {
-        awsS3Component.removeS3ObjectByKeys(s3Key);
+    public void remove(String s3Key) throws BusinessException {
+        s3.removeS3ObjectByKeys(s3Key);
     }
 
     /**
@@ -105,7 +107,7 @@ public class NewsComponent {
      */
     public void sendSlack(NewsDto dto, String fileName, String message)
             throws BaseException {
-        slackApi.send(ContentType.ROOT, message);
+        slack.send(ContentType.ROOT, message);
     }
 
     /**
@@ -117,7 +119,7 @@ public class NewsComponent {
      *     Slackへの投稿に失敗した場合
      */
     public void sendSlack(Long seqNewsInfoId) throws BaseException {
-        slackApi.send(ContentType.ROOT, "お知らせ情報ID=" + seqNewsInfoId + "を削除.");
+        slack.send(ContentType.ROOT, "お知らせ情報ID=" + seqNewsInfoId + "を削除.");
     }
 
 }

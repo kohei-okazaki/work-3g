@@ -40,8 +40,12 @@ public class ApplicationProperties {
     @Value("${front.healthinfo.page}")
     private int healthinfoPage;
 
+    /** 1ページあたりの件数 */
+    @Value("${front.inquiry.page}")
+    private int inquiryPage;
+
     /**
-     * frontUrlを返す
+     * Front画面URLを返す
      *
      * @return frontUrl
      */
@@ -50,7 +54,7 @@ public class ApplicationProperties {
     }
 
     /**
-     * frontUrlを設定する
+     * Front画面URLを設定する
      *
      * @param frontUrl
      *     Front画面URL
@@ -60,7 +64,7 @@ public class ApplicationProperties {
     }
 
     /**
-     * newsPageを返す
+     * 1ページあたりの件数を返す
      *
      * @return newsPage
      */
@@ -69,16 +73,17 @@ public class ApplicationProperties {
     }
 
     /**
-     * newsPageを設定する
+     * 1ページあたりの件数を設定する
      *
      * @param newsPage
+     *     1ページあたりの件数
      */
     public void setNewsPage(int newsPage) {
         this.newsPage = newsPage;
     }
 
     /**
-     * notePageを返す
+     * 1ページあたりの件数を返す
      *
      * @return notePage
      */
@@ -87,16 +92,17 @@ public class ApplicationProperties {
     }
 
     /**
-     * notePageを設定する
+     * 1ページあたりの件数を設定する
      *
      * @param notePage
+     *     1ページあたりの件数
      */
     public void setNotePage(int notePage) {
         this.notePage = notePage;
     }
 
     /**
-     * accountPageを返す
+     * 1ページあたりの件数を返す
      *
      * @return accountPage
      */
@@ -105,16 +111,17 @@ public class ApplicationProperties {
     }
 
     /**
-     * accountPageを設定する
+     * 1ページあたりの件数を設定する
      *
      * @param accountPage
+     *     1ページあたりの件数
      */
     public void setAccountPage(int accountPage) {
         this.accountPage = accountPage;
     }
 
     /**
-     * apiPageを返す
+     * 1ページあたりの件数を返す
      *
      * @return apiPage
      */
@@ -123,16 +130,17 @@ public class ApplicationProperties {
     }
 
     /**
-     * apiPageを設定する
+     * 1ページあたりの件数を設定する
      *
      * @param apiPage
+     *     1ページあたりの件数
      */
     public void setApiPage(int apiPage) {
         this.apiPage = apiPage;
     }
 
     /**
-     * healthinfoPageを返す
+     * 1ページあたりの件数を返す
      *
      * @return healthinfoPage
      */
@@ -141,12 +149,32 @@ public class ApplicationProperties {
     }
 
     /**
-     * healthinfoPageを設定する
+     * 1ページあたりの件数を設定する
      *
      * @param healthinfoPage
+     *     1ページあたりの件数
      */
     public void setHealthinfoPage(int healthinfoPage) {
         this.healthinfoPage = healthinfoPage;
+    }
+
+    /**
+     * 1ページあたりの件数を返す
+     *
+     * @return inquiryPage
+     */
+    public int getInquiryPage() {
+        return inquiryPage;
+    }
+
+    /**
+     * 1ページあたりの件数を設定する
+     *
+     * @param inquiryPage
+     *     1ページあたりの件数
+     */
+    public void setInquiryPage(int inquiryPage) {
+        this.inquiryPage = inquiryPage;
     }
 
 }

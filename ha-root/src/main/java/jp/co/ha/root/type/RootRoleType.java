@@ -12,7 +12,7 @@ import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.root.type.RootRoleType.RootRoleTypeDeserializer;
 
 /**
- * ユーザ権限の列挙体
+ * 管理者サイトユーザ権限の列挙体
  * <ul>
  * <li>00:管理者権限</li>
  * <li>01:照会権限</li>
@@ -50,18 +50,18 @@ public enum RootRoleType implements BaseEnum {
     }
 
     /**
-     * ユーザ権限の列挙体を返す
+     * 管理者サイトユーザ権限の列挙体を返す
      *
      * @param value
      *     値
-     * @return ユーザ権限の列挙体
+     * @return 管理者サイトユーザ権限の列挙体
      */
     public static RootRoleType of(String value) {
         return BaseEnum.of(RootRoleType.class, value);
     }
 
     /**
-     * JSONのテストモード種別のデシリアライズクラス<br>
+     * JSONの管理者サイトユーザ権限のデシリアライズクラス<br>
      * 文字列型のJSONをJavaのクラスに変換する
      *
      * @version 1.0.0
