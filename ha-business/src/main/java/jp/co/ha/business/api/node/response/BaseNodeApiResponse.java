@@ -63,7 +63,7 @@ public abstract class BaseNodeApiResponse {
     }
 
     /**
-     * resultを返す
+     * 処理結果を返す
      *
      * @return result
      */
@@ -72,7 +72,7 @@ public abstract class BaseNodeApiResponse {
     }
 
     /**
-     * resultを設定する
+     * 処理結果を設定する
      *
      * @param result
      *     処理結果
@@ -82,7 +82,7 @@ public abstract class BaseNodeApiResponse {
     }
 
     /**
-     * detailを返す
+     * 処理詳細を返す
      *
      * @return detail
      */
@@ -91,7 +91,7 @@ public abstract class BaseNodeApiResponse {
     }
 
     /**
-     * detailを設定する
+     * 処理詳細を設定する
      *
      * @param detail
      *     処理詳細

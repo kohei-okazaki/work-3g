@@ -23,7 +23,7 @@ public class BreathingCapacityDto {
     private BigDecimal breathingCapacityPercentage;
 
     /**
-     * ageを返す
+     * 年齢を返す
      *
      * @return age
      */
@@ -32,7 +32,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * ageを設定する
+     * 年齢を設定する
      *
      * @param age
      *     年齢
@@ -42,7 +42,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      *
      * @return genderType
      */
@@ -51,7 +51,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      *
      * @param genderType
      *     性別
@@ -61,7 +61,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -70,7 +70,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -80,7 +80,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * predictBreathingCapacityを返す
+     * 予測肺活量を返す
      *
      * @return predictBreathingCapacity
      */
@@ -89,7 +89,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * predictBreathingCapacityを設定する
+     * 予測肺活量を設定する
      *
      * @param predictBreathingCapacity
      *     予測肺活量
@@ -99,7 +99,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * breathingCapacityPercentageを返す
+     * 肺活量%を返す
      *
      * @return breathingCapacityPercentage
      */
@@ -108,7 +108,7 @@ public class BreathingCapacityDto {
     }
 
     /**
-     * breathingCapacityPercentageを設定する
+     * 肺活量%を設定する
      *
      * @param breathingCapacityPercentage
      *     肺活量%

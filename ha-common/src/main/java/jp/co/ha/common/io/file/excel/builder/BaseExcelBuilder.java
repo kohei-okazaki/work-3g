@@ -3,7 +3,6 @@ package jp.co.ha.common.io.file.excel.builder;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -87,12 +86,12 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
      */
     protected void writeHeader(Sheet sheet, Class<BaseExcelModel> clazz) {
         // ヘッダ名取得
-        List<String> header = getHeaderList(clazz);
-        Stream.iterate(0, i -> ++i).limit(header.size()).forEach(i -> {
-            String headerName = header.get(i);
+        List<String> headerList = getHeaderList(clazz);
+        for (int i = 0; i < headerList.size(); i++) {
+            String header = headerList.get(i);
             Cell cell = getCell(sheet, HEADER_POSITION, i);
-            setText(cell, headerName);
-        });
+            setText(cell, header);
+        }
     }
 
     /**
@@ -114,7 +113,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
     protected void writeFooter(Sheet sheet, Class<BaseExcelModel> clazz) {
         // フッタ名取得
         List<String> footer = getFooterList(clazz);
-        Stream.iterate(0, i -> ++i).limit(footer.size()).forEach(i -> {
+        for (int i = 0; i < footer.size(); i++) {
             String footerName = footer.get(i);
             Cell cell = null;
             if (conf.hasHeader()) {
@@ -125,7 +124,7 @@ public abstract class BaseExcelBuilder<T extends BaseExcelModel>
                 cell = getCell(sheet, modelList.size(), i);
             }
             setText(cell, footerName);
-        });
+        }
     }
 
     /**

@@ -32,7 +32,7 @@ public class AwsProperties {
     private boolean sesStubFlag;
 
     /**
-     * {@linkplain Region}を返す
+     * リージョンを返す
      *
      * @return region
      */
@@ -41,7 +41,7 @@ public class AwsProperties {
     }
 
     /**
-     * regionを設定する<br>
+     * リージョンを設定する<br>
      * (例: "ap-northeast-1")
      *
      * @param region
@@ -52,7 +52,7 @@ public class AwsProperties {
     }
 
     /**
-     * backetを返す
+     * バケット名を返す
      *
      * @return backet
      */
@@ -61,17 +61,17 @@ public class AwsProperties {
     }
 
     /**
-     * backetを設定する
+     * バケット名を設定する
      *
      * @param backet
-     *     バケット
+     *     バケット名
      */
     public void setBacket(String backet) {
         this.backet = backet;
     }
 
     /**
-     * s3Timeoutを返す
+     * S3タイムアウトを返す
      *
      * @return s3Timeout
      */
@@ -80,17 +80,17 @@ public class AwsProperties {
     }
 
     /**
-     * s3Timeoutを設定する
+     * S3タイムアウトを設定する
      *
      * @param s3Timeout
-     *     S3のタイムアウト
+     *     S3タイムアウト
      */
     public void setS3Timeout(int s3Timeout) {
         this.s3Timeout = s3Timeout;
     }
 
     /**
-     * sesTimeoutを返す
+     * SESタイムアウトを返す
      *
      * @return sesTimeout
      */
@@ -99,7 +99,7 @@ public class AwsProperties {
     }
 
     /**
-     * sesTimeoutを設定する
+     * SESタイムアウトを設定する
      *
      * @param sesTimeout
      *     SESタイムアウト
@@ -109,7 +109,7 @@ public class AwsProperties {
     }
 
     /**
-     * sesStubFlagを返す
+     * SESスタブフラグ(true:メールを送信しない、false:送信する)を返す
      *
      * @return sesStubFlag
      */
@@ -118,7 +118,7 @@ public class AwsProperties {
     }
 
     /**
-     * sesStubFlagを設定する
+     * SESスタブフラグ(true:メールを送信しない、false:送信する)を設定する
      *
      * @param sesStubFlag
      *     SESスタブフラグ(true:メールを送信しない、false:送信する)
@@ -128,7 +128,7 @@ public class AwsProperties {
     }
 
     /**
-     * sesStubFlagを設定する
+     * SESスタブフラグ(true:メールを送信しない、false:送信する)を設定する
      *
      * @param sesStubFlag
      *     SESスタブフラグ(true:メールを送信しない、false:送信する)

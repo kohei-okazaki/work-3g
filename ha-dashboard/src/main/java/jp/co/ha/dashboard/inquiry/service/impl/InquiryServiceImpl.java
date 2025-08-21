@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Key;
+import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.InquiryComponent.Status;

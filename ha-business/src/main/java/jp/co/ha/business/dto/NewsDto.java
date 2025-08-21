@@ -25,12 +25,12 @@ public class NewsDto {
     /** 詳細 */
     @JsonProperty("detail")
     private String detail;
-    /** タグ */
+    /** タグ情報 */
     @JsonProperty("tag")
     private Tag tag;
 
     /**
-     * seqNewsInfoIdを返す
+     * お知らせ情報IDを返す
      *
      * @return seqNewsInfoId
      */
@@ -39,7 +39,7 @@ public class NewsDto {
     }
 
     /**
-     * seqNewsInfoIdを設定する
+     * お知らせ情報IDを設定する
      *
      * @param seqNewsInfoId
      *     お知らせ情報ID
@@ -49,7 +49,7 @@ public class NewsDto {
     }
 
     /**
-     * titleを返す
+     * タイトルを返す
      *
      * @return title
      */
@@ -58,7 +58,7 @@ public class NewsDto {
     }
 
     /**
-     * titleを設定する
+     * タイトルを設定する
      *
      * @param title
      *     タイトル
@@ -68,7 +68,7 @@ public class NewsDto {
     }
 
     /**
-     * dateを返す
+     * 日付を返す
      *
      * @return date
      */
@@ -77,7 +77,7 @@ public class NewsDto {
     }
 
     /**
-     * dateを設定する
+     * 日付を設定する
      *
      * @param date
      *     日付
@@ -87,7 +87,7 @@ public class NewsDto {
     }
 
     /**
-     * detailを返す
+     * 詳細を返す
      *
      * @return detail
      */
@@ -96,7 +96,7 @@ public class NewsDto {
     }
 
     /**
-     * detailを設定する
+     * 詳細を設定する
      *
      * @param detail
      *     詳細
@@ -106,7 +106,7 @@ public class NewsDto {
     }
 
     /**
-     * tagを返す
+     * タグ情報を返す
      *
      * @return tag
      */
@@ -115,10 +115,10 @@ public class NewsDto {
     }
 
     /**
-     * tagを設定する
+     * タグ情報を設定する
      *
      * @param tag
-     *     タグ
+     *     タグ情報
      */
     public void setTag(Tag tag) {
         this.tag = tag;

@@ -62,7 +62,7 @@ public class SystemProperties {
     }
 
     /**
-     * pagingを返す
+     * ページング数を返す
      *
      * @return paging
      */
@@ -71,7 +71,7 @@ public class SystemProperties {
     }
 
     /**
-     * pagingを設定する
+     * ページング数を設定する
      *
      * @param paging
      *     ページング数
@@ -81,7 +81,7 @@ public class SystemProperties {
     }
 
     /**
-     * environmentを返す
+     * 環境を返す
      *
      * @return environment
      */
@@ -90,7 +90,7 @@ public class SystemProperties {
     }
 
     /**
-     * environmentを設定する
+     * 環境を設定する
      *
      * @param environment
      *     環境
@@ -100,7 +100,7 @@ public class SystemProperties {
     }
 
     /**
-     * systemMailAddressを返す
+     * システムメールアドレスを返す
      * 
      * @return systemMailAddress
      */
@@ -109,7 +109,7 @@ public class SystemProperties {
     }
 
     /**
-     * systemMailAddressを設定する
+     * システムメールアドレスを設定する
      * 
      * @param systemMailAddress
      *     システムメールアドレス

@@ -33,10 +33,10 @@ public enum CsvFileChar implements BaseEnum {
     }
 
     /**
-     * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
      * @param value
      *     値
      * @return CsvFileChar
+     * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
      */
     public static CsvFileChar of(String value) {
         return BaseEnum.of(CsvFileChar.class, value);

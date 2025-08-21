@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Key;
+import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;

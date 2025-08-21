@@ -1,20 +1,16 @@
 package jp.co.ha.business.api.aws;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
@@ -61,9 +57,6 @@ public class AwsSesComponent {
     /** AWS認証情報Component */
     @Autowired
     private AwsAuthComponent auth;
-    /** S3 Component */
-    @Autowired
-    private AwsS3Component s3;
     /** FreeMarker設定 */
     @Autowired
     private Configuration freemarkerConfig;
@@ -203,14 +196,14 @@ public class AwsSesComponent {
 
             VerifyEmailIdentityResponse response = sesClient.verifyEmailIdentity(request);
 
-            VerifyResultType res = StringUtil
+            VerifyResultType resultType = StringUtil
                     .isEmpty(response.responseMetadata().requestId())
                             ? VerifyResultType.STILL
                             : VerifyResultType.AUTHED;
 
-            LOG.debug("認証メール送信完了 認証結果=" + res);
+            LOG.debug("認証メール送信完了 認証結果=" + resultType);
 
-            return res;
+            return resultType;
         }
     }
 
@@ -399,73 +392,4 @@ public class AwsSesComponent {
 
     }
 
-    /**
-     * {@linkplain Body}を返す
-     *
-     * @param templateId
-     *     テンプレートID
-     * @param bodyMap
-     *     メール本文の置換用Map
-     * @return Body
-     * @throws BaseException
-     *     メールテンプレートの取得に失敗した場合
-     */
-    @Deprecated
-    private Body getBodyFromS3(String templateId, Map<String, String> bodyMap)
-            throws BaseException {
-
-        String bodyText = replace(getBodyTemplateFromS3(templateId), bodyMap);
-
-        return Body.builder()
-                .html(getContent(bodyText))
-                .build();
-    }
-
-    /**
-     * 指定されたtemplateファイルのメール本文を返す
-     *
-     * @param templateId
-     *     テンプレートID
-     * @return メール本文
-     * @throws BaseException
-     *     メールテンプレートの取得に失敗した場合
-     */
-    @Deprecated
-    private String getBodyTemplateFromS3(String templateId) throws BaseException {
-
-        try (InputStream is = s3.getS3ObjectByKey(templateId);
-                BufferedReader br = new BufferedReader(
-                        new InputStreamReader(is, CHARSET.getValue()))) {
-
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-            return sb.toString();
-
-        } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
-                    "メールテンプレートの取得に失敗しました.templateId=" + templateId, e);
-        }
-    }
-
-    /**
-     * メールテンプレートの置換キー(${key})とそのキーと一致するbodyMapの値で置換する
-     *
-     * @param bodyText
-     *     置換前テンプレート文字列
-     * @param bodyMap
-     *     置換Map
-     * @return 置換後のメールテンプレート
-     */
-    private String replace(String bodyText, Map<String, String> bodyMap) {
-
-        String text = bodyText;
-        for (Entry<String, String> entry : bodyMap.entrySet()) {
-            text = text.replace(entry.getKey(), entry.getValue());
-        }
-
-        return text;
-    }
 }

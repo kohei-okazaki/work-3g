@@ -29,7 +29,7 @@ public class HealthInfoRefDetailDto {
     private String overWeightStatus;
 
     /**
-     * seqHealthInfoIdを返す
+     * 健康情報IDを返す
      *
      * @return seqHealthInfoId
      */
@@ -38,7 +38,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * 健康情報IDを設定する
      *
      * @param seqHealthInfoId
      *     健康情報ID
@@ -48,7 +48,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -57,7 +57,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -67,7 +67,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -76,7 +76,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -86,7 +86,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -95,7 +95,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -105,7 +105,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -114,7 +114,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -124,7 +124,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -133,7 +133,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重
@@ -143,7 +143,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * healthInfoRegDateを返す
+     * 健康情報登録日時を返す
      *
      * @return healthInfoRegDate
      */
@@ -152,7 +152,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * healthInfoRegDateを設定する
+     * 健康情報登録日時を設定する
      *
      * @param healthInfoRegDate
      *     健康情報登録日時
@@ -162,7 +162,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * seqBmiRangeMtIdを返す
+     * BMI範囲マスタIDを返す
      *
      * @return seqBmiRangeMtId
      */
@@ -171,7 +171,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * seqBmiRangeMtIdを設定する
+     * BMI範囲マスタIDを設定する
      *
      * @param seqBmiRangeMtId
      *     BMI範囲マスタID
@@ -181,7 +181,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * overWeightStatusを返す
+     * 肥満度メッセージを返す
      *
      * @return overWeightStatus
      */
@@ -190,7 +190,7 @@ public class HealthInfoRefDetailDto {
     }
 
     /**
-     * overWeightStatusを設定する
+     * 肥満度メッセージを設定する
      *
      * @param overWeightStatus
      *     肥満度メッセージ

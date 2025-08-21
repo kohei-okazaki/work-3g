@@ -166,7 +166,7 @@ public class CsvConfig {
     }
 
     /**
-     * fileNameを返す
+     * fileNaファイル名meを返す
      *
      * @return fileName
      */
@@ -175,7 +175,7 @@ public class CsvConfig {
     }
 
     /**
-     * outputPathを返す
+     * ファイル出力パスを返す
      *
      * @return outputPath
      */
@@ -184,7 +184,7 @@ public class CsvConfig {
     }
 
     /**
-     * hasHeaderを返す
+     * ヘッダ有無を返す
      *
      * @return hasHeader
      */
@@ -193,7 +193,7 @@ public class CsvConfig {
     }
 
     /**
-     * hasEnclosureを返す
+     * 囲い文字有無を返す
      *
      * @return hasEnclosure
      */
@@ -202,7 +202,7 @@ public class CsvConfig {
     }
 
     /**
-     * csvFileCharを返す
+     * 囲い文字を返す
      *
      * @return csvFileChar
      */
@@ -211,7 +211,7 @@ public class CsvConfig {
     }
 
     /**
-     * charsetを返す
+     * 文字コードを返す
      *
      * @return charset
      */
@@ -220,7 +220,7 @@ public class CsvConfig {
     }
 
     /**
-     * hasFooterを返す
+     * フッタ有無を返す
      *
      * @return hasFooter
      */
@@ -229,7 +229,7 @@ public class CsvConfig {
     }
 
     /**
-     * useMaskを返す
+     * マスク利用有無を返す
      *
      * @return useMask
      */
