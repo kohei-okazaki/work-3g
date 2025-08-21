@@ -14,7 +14,8 @@ import jp.co.ha.common.web.form.BaseApiResponse;
  *
  * @version 1.0.0
  */
-public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseApiResponse {
+public class CalorieCalcApiResponse extends BaseNodeApiResponse
+        implements BaseApiResponse {
 
     /** カロリー計算結果情報 */
     @JsonProperty("calorie_calc_result")
@@ -40,7 +41,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         private BigDecimal lostCaloriePerDay;
 
         /**
-         * baseMetabolismを返す
+         * 基礎代謝量を返す
          *
          * @return baseMetabolism
          */
@@ -49,7 +50,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * baseMetabolismを設定する
+         * 基礎代謝量を設定する
          *
          * @param baseMetabolism
          *     基礎代謝量
@@ -59,7 +60,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * lostCaloriePerDayを返す
+         * 1日の消費カロリーを返す
          *
          * @return lostCaloriePerDay
          */
@@ -68,7 +69,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * lostCaloriePerDayを設定する
+         * 1日の消費カロリーを設定する
          *
          * @param lostCaloriePerDay
          *     1日の消費カロリー
@@ -108,7 +109,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         private BigDecimal lifeWorkMetabolism;
 
         /**
-         * genderTypeを返す
+         * 性別を返す
          *
          * @return genderType
          */
@@ -117,7 +118,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * genderTypeを設定する
+         * 性別を設定する
          *
          * @param genderType
          *     性別
@@ -127,7 +128,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * ageを返す
+         * 年齢を返す
          *
          * @return age
          */
@@ -136,7 +137,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * ageを設定する
+         * 年齢を設定する
          *
          * @param age
          *     年齢
@@ -146,7 +147,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * heightを返す
+         * 身長を返す
          *
          * @return height
          */
@@ -155,7 +156,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          *
          * @param height
          *     身長
@@ -165,7 +166,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * weightを返す
+         * 体重を返す
          *
          * @return weight
          */
@@ -174,7 +175,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * weightを設定する
+         * 体重を設定する
          *
          * @param weight
          *     体重
@@ -184,7 +185,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * lifeWorkMetabolismを返す
+         * 生活活動代謝を返す
          *
          * @return lifeWorkMetabolism
          */
@@ -193,7 +194,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
         }
 
         /**
-         * lifeWorkMetabolismを設定する
+         * 生活活動代謝を設定する
          *
          * @param lifeWorkMetabolism
          *     生活活動代謝
@@ -209,7 +210,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
     }
 
     /**
-     * calorieCalcResultを返す
+     * カロリー計算結果情報を返す
      *
      * @return calorieCalcResult
      */
@@ -218,7 +219,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
     }
 
     /**
-     * calorieCalcResultを設定する
+     * カロリー計算結果情報を設定する
      *
      * @param calorieCalcResult
      *     カロリー計算結果情報
@@ -228,7 +229,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
     }
 
     /**
-     * userDataを返す
+     * ユーザ健康情報を返す
      *
      * @return userData
      */
@@ -237,7 +238,7 @@ public class CalorieCalcApiResponse extends BaseNodeApiResponse implements BaseA
     }
 
     /**
-     * userDataを設定する
+     * ユーザ健康情報を設定する
      *
      * @param userData
      *     ユーザ健康情報

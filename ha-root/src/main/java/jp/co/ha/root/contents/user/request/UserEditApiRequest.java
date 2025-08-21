@@ -23,7 +23,7 @@ import jp.co.ha.root.type.RootRoleType;
  */
 public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
-    /** 権限 */
+    /** 権限リスト */
     @JsonProperty("roles")
     @Required(message = "roles is required")
     private List<RootRoleType> roles;
@@ -48,7 +48,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     private String remarks;
 
     /**
-     * rolesを返す
+     * 権限リストを返す
      *
      * @return roles
      */
@@ -57,17 +57,17 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * rolesを設定する
+     * 権限リストを設定する
      *
      * @param roles
-     *     権限
+     *     権限リスト
      */
     public void setRoles(List<RootRoleType> roles) {
         this.roles = roles;
     }
 
     /**
-     * deleteFlagを返す
+     * 削除フラグを返す
      *
      * @return deleteFlag
      */
@@ -76,7 +76,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * deleteFlagを設定する
+     * 削除フラグを設定する
      *
      * @param deleteFlag
      *     削除フラグ
@@ -86,7 +86,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -95,7 +95,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -105,7 +105,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * passwordExpireを返す
+     * パスワード有効期限を返す
      *
      * @return passwordExpire
      */
@@ -114,7 +114,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * passwordExpireを設定する
+     * パスワード有効期限を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限
@@ -124,7 +124,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * remarksを返す
+     * 備考を返す
      *
      * @return remarks
      */
@@ -133,7 +133,7 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * remarksを設定する
+     * 備考を設定する
      *
      * @param remarks
      *     備考

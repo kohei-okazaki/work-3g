@@ -31,7 +31,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     private BigDecimal lifeWorkMetabolism;
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      *
      * @return genderType
      */
@@ -40,7 +40,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      *
      * @param genderType
      *     性別
@@ -50,7 +50,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * ageを返す
+     * 年齢を返す
      *
      * @return age
      */
@@ -59,7 +59,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * ageを設定する
+     * 年齢を設定する
      *
      * @param age
      *     年齢
@@ -69,7 +69,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -78,7 +78,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -88,7 +88,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -97,7 +97,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -107,7 +107,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * lifeWorkMetabolismを返す
+     * 生活活動代謝を返す
      *
      * @return lifeWorkMetabolism
      */
@@ -116,7 +116,7 @@ public class CalorieCalcApiRequest extends BaseNodeApiRequest implements BaseApi
     }
 
     /**
-     * lifeWorkMetabolismを設定する
+     * 生活活動代謝を設定する
      *
      * @param lifeWorkMetabolism
      *     生活活動代謝

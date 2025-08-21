@@ -40,7 +40,7 @@ public enum RootApiType implements BaseEnum {
     }
 
     /**
-     * apiNameTypeを返す
+     * API名を返す
      *
      * @return apiNameType
      */

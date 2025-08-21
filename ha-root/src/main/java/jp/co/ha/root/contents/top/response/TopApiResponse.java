@@ -30,7 +30,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
     private List<RegGraph> accountRegGraphList;
 
     /**
-     * healthInfoRegGraphListを返す
+     * 健康情報登録グラフ情報リストを返す
      *
      * @return healthInfoRegGraphList
      */
@@ -39,17 +39,17 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
     }
 
     /**
-     * healthInfoRegGraphListを設定する
+     * 健康情報登録グラフ情報リストを設定する
      *
      * @param healthInfoRegGraphList
-     *     グラフ情報リスト
+     *     健康情報登録グラフ情報リスト
      */
     public void setHealthInfoRegGraphList(List<RegGraph> healthInfoRegGraphList) {
         this.healthInfoRegGraphList = healthInfoRegGraphList;
     }
 
     /**
-     * accountRegGraphListを返す
+     * ユーザ登録グラフ情報リストを返す
      *
      * @return accountRegGraphList
      */
@@ -58,7 +58,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
     }
 
     /**
-     * accountRegGraphListを設定する
+     * ユーザ登録グラフ情報リストを設定する
      *
      * @param accountRegGraphList
      *     ユーザ登録グラフ情報リスト
@@ -84,7 +84,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
         private LocalDate date;
 
         /**
-         * countを返す
+         * 登録件数を返す
          *
          * @return count
          */
@@ -93,7 +93,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
         }
 
         /**
-         * countを設定する
+         * 登録件数を設定する
          *
          * @param count
          *     登録件数
@@ -106,7 +106,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
         }
 
         /**
-         * dateを返す
+         * 登録日を返す
          *
          * @return date
          */
@@ -115,7 +115,7 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
         }
 
         /**
-         * dateを設定する
+         * 登録日を設定する
          *
          * @param date
          *     登録日

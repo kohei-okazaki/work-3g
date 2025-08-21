@@ -35,7 +35,7 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     private Tag tag;
 
     /**
-     * titleを返す
+     * タイトルを返す
      *
      * @return title
      */
@@ -44,7 +44,7 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * titleを設定する
+     * タイトルを設定する
      *
      * @param title
      */
@@ -53,7 +53,7 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * dateを返す
+     * 日付を返す
      *
      * @return date
      */
@@ -62,16 +62,17 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * dateを設定する
+     * 日付を設定する
      *
      * @param date
+     *     日付
      */
     public void setDate(String date) {
         this.date = date;
     }
 
     /**
-     * detailを返す
+     * 詳細を返す
      *
      * @return detail
      */
@@ -80,16 +81,17 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * detailを設定する
+     * 詳細を設定する
      *
      * @param detail
+     *     詳細
      */
     public void setDetail(String detail) {
         this.detail = detail;
     }
 
     /**
-     * tagを返す
+     * タグを返す
      *
      * @return tag
      */
@@ -98,7 +100,7 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     }
 
     /**
-     * tagを設定する
+     * タグを設定する
      *
      * @param tag
      *     タグ

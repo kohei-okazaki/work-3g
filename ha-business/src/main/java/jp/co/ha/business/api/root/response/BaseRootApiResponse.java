@@ -16,7 +16,7 @@ public abstract class BaseRootApiResponse {
     private Result result;
 
     /**
-     * resultを返す
+     * 処理結果を返す
      *
      * @return result
      */
@@ -25,7 +25,7 @@ public abstract class BaseRootApiResponse {
     }
 
     /**
-     * resultを設定する
+     * 処理結果を設定する
      *
      * @param result
      *     処理結果

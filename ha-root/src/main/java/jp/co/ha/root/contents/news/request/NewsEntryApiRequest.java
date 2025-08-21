@@ -35,7 +35,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     private Tag tag;
 
     /**
-     * titleを返す
+     * タイトルを返す
      *
      * @return title
      */
@@ -44,7 +44,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * titleを設定する
+     * タイトルを設定する
      *
      * @param title
      *     タイトル
@@ -54,7 +54,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * dateを返す
+     * 日付を返す
      *
      * @return date
      */
@@ -63,7 +63,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * dateを設定する
+     * 日付を設定する
      *
      * @param date
      *     日付
@@ -73,7 +73,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * detailを返す
+     * 詳細を返す
      *
      * @return detail
      */
@@ -82,7 +82,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * detailを設定する
+     * 詳細を設定する
      *
      * @param detail
      *     詳細
@@ -92,7 +92,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * tagを返す
+     * タグを返す
      *
      * @return tag
      */
@@ -101,7 +101,7 @@ public class NewsEntryApiRequest extends BaseRootApiRequest implements BaseApiRe
     }
 
     /**
-     * tagを設定する
+     * タグを設定する
      *
      * @param tag
      *     タグ

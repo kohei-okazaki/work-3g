@@ -26,7 +26,7 @@ public abstract class BaseAppApiRequest implements BaseForm {
     private String apiKey;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -35,7 +35,7 @@ public abstract class BaseAppApiRequest implements BaseForm {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -45,7 +45,7 @@ public abstract class BaseAppApiRequest implements BaseForm {
     }
 
     /**
-     * apiKeyを返す
+     * APIキーを返す
      *
      * @return apiKey
      */
@@ -54,7 +54,7 @@ public abstract class BaseAppApiRequest implements BaseForm {
     }
 
     /**
-     * apiKeyを設定する
+     * APIキーを設定する
      *
      * @param apiKey
      *     APIキー

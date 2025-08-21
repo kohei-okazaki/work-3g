@@ -45,7 +45,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     private String remarks;
 
     /**
-     * seqLoginIdを返す
+     * ログインIDを返す
      *
      * @return seqLoginId
      */
@@ -54,7 +54,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * seqLoginIdを設定する
+     * ログインIDを設定する
      *
      * @param seqLoginId
      *     ログインID
@@ -64,7 +64,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * rolesを返す
+     * 権限リストを返す
      *
      * @return roles
      */
@@ -73,7 +73,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * rolesを設定する
+     * 権限リストを設定する
      *
      * @param roles
      *     権限リスト
@@ -83,7 +83,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * deleteFlagを返す
+     * 削除フラグを返す
      *
      * @return deleteFlag
      */
@@ -92,7 +92,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * deleteFlagを設定する
+     * 削除フラグを設定する
      *
      * @param deleteFlag
      *     削除フラグ
@@ -102,7 +102,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * passwordExpireを返す
+     * パスワード有効期限を返す
      *
      * @return passwordExpire
      */
@@ -111,7 +111,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * passwordExpireを設定する
+     * パスワード有効期限を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限
@@ -121,7 +121,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * remarksを返す
+     * 備考を返す
      *
      * @return remarks
      */
@@ -130,7 +130,7 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * remarksを設定する
+     * 備考を設定する
      *
      * @param remarks
      *     備考

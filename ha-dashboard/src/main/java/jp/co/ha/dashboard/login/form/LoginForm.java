@@ -30,7 +30,7 @@ public class LoginForm implements BaseForm {
     private String password;
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -39,7 +39,7 @@ public class LoginForm implements BaseForm {
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス
@@ -49,7 +49,7 @@ public class LoginForm implements BaseForm {
     }
 
     /**
-     * passwordを返す
+     * パスワード を返す
      *
      * @return password
      */
@@ -58,7 +58,7 @@ public class LoginForm implements BaseForm {
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード

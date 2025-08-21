@@ -23,7 +23,7 @@ public class BasicHealthInfoCalcApiRequest extends BaseNodeApiRequest
     private BigDecimal weight;
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -32,7 +32,7 @@ public class BasicHealthInfoCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -42,7 +42,7 @@ public class BasicHealthInfoCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -51,7 +51,7 @@ public class BasicHealthInfoCalcApiRequest extends BaseNodeApiRequest
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重

@@ -19,7 +19,7 @@ public class UserEntryApiResponse extends BaseRootApiResponse implements BaseApi
     private Long seqLoginId;
 
     /**
-     * seqLoginIdを返す
+     * ログインIDを返す
      *
      * @return seqLoginId
      */
@@ -28,7 +28,7 @@ public class UserEntryApiResponse extends BaseRootApiResponse implements BaseApi
     }
 
     /**
-     * seqLoginIdを設定する
+     * ログインIDを設定する
      *
      * @param seqLoginId
      *     ログインID
