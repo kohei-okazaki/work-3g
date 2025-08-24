@@ -33,7 +33,7 @@ public class HealthInfoReferenceDto {
     private String healthInfoRegDate;
 
     /**
-     * seqHealthInfoIdを返す
+     * 健康情報IDを返す
      *
      * @return seqHealthInfoId
      */
@@ -42,7 +42,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * 健康情報IDを設定する
      *
      * @param seqHealthInfoId
      *     健康情報ID
@@ -52,7 +52,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * healthInfoRegDateSelectFlagを返す
+     * 健康情報作成日直接指定フラグを返す
      *
      * @return healthInfoRegDateSelectFlag
      */
@@ -61,7 +61,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * healthInfoRegDateSelectFlagを設定する
+     * 健康情報作成日直接指定フラグを設定する
      *
      * @param healthInfoRegDateSelectFlag
      *     健康情報作成日直接指定フラグ
@@ -71,7 +71,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * fromHealthInfoRegDateを返す
+     * 健康情報作成日(開始)を返す
      *
      * @return fromHealthInfoRegDate
      */
@@ -80,7 +80,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * fromHealthInfoRegDateを設定する
+     * 健康情報作成日(開始)を設定する
      *
      * @param fromHealthInfoRegDate
      *     健康情報作成日(開始)
@@ -90,7 +90,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * toHealthInfoRegDateを返す
+     * 健康情報作成日(終了)を返す
      *
      * @return toHealthInfoRegDate
      */
@@ -99,7 +99,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * toHealthInfoRegDateを設定する
+     * 健康情報作成日(終了)を設定する
      *
      * @param toHealthInfoRegDate
      *     健康情報作成日(終了)
@@ -109,7 +109,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -118,7 +118,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -128,7 +128,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -137,7 +137,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -147,7 +147,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -156,7 +156,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -166,7 +166,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -175,7 +175,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重
@@ -185,7 +185,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * healthInfoRegDateを返す
+     * 健康情報作成日時を返す
      *
      * @return healthInfoRegDate
      */
@@ -194,7 +194,7 @@ public class HealthInfoReferenceDto {
     }
 
     /**
-     * healthInfoRegDateを設定する
+     * 健康情報作成日時を設定する
      *
      * @param healthInfoRegDate
      *     健康情報作成日時

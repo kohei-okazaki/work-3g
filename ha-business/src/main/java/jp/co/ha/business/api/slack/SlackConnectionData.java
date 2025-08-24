@@ -25,7 +25,7 @@ public class SlackConnectionData {
     private List<Connection> connectionList;
 
     /**
-     * tokenを返す
+     * Botのトークンを返す
      *
      * @return token
      */
@@ -34,7 +34,7 @@ public class SlackConnectionData {
     }
 
     /**
-     * tokenを設定する
+     * Botのトークンを設定する
      *
      * @param token
      *     Botのトークン
@@ -44,7 +44,7 @@ public class SlackConnectionData {
     }
 
     /**
-     * connectionListを返す
+     * 接続情報リストを返す
      *
      * @return connectionList
      */
@@ -53,7 +53,7 @@ public class SlackConnectionData {
     }
 
     /**
-     * connectionListを設定する
+     * 接続情報リストを設定する
      *
      * @param connectionList
      *     接続情報リスト
@@ -82,7 +82,7 @@ public class SlackConnectionData {
         private String channelId;
 
         /**
-         * contentTypeを返す
+         * コンテンツタイプを返す
          *
          * @return contentType
          */
@@ -91,7 +91,7 @@ public class SlackConnectionData {
         }
 
         /**
-         * contentTypeを設定する
+         * コンテンツタイプを設定する
          *
          * @param contentType
          *     コンテンツタイプ
@@ -101,7 +101,7 @@ public class SlackConnectionData {
         }
 
         /**
-         * channelNameを返す
+         * チャンネル名を返す
          *
          * @return channelName
          */
@@ -110,7 +110,7 @@ public class SlackConnectionData {
         }
 
         /**
-         * channelNameを設定する
+         * チャンネル名を設定する
          *
          * @param channelName
          *     チャンネル名
@@ -120,7 +120,7 @@ public class SlackConnectionData {
         }
 
         /**
-         * channelIdを返す
+         * チャンネルIDを返す
          * 
          * @return channelId
          */
@@ -129,9 +129,10 @@ public class SlackConnectionData {
         }
 
         /**
-         * channelIdを設定する
+         * チャンネルIDを設定する
          * 
          * @param channelId
+         *     チャンネルID
          */
         public void setChannelId(String channelId) {
             this.channelId = channelId;

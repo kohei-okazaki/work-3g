@@ -28,7 +28,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
     private List<HealthInfoResponse> healthInfoResponseList;
 
     /**
-     * healthInfoResponseListを返す
+     * 健康情報リストを返す
      *
      * @return healthInfoResponseList
      */
@@ -37,7 +37,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * healthInfoResponseListを設定する
+     * 健康情報リストを設定する
      *
      * @param healthInfoResponseList
      *     健康情報リスト
@@ -82,7 +82,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         private LocalDateTime healthInfoRegDate;
 
         /**
-         * seqHealthInfoIdを返す
+         * 健康情報IDを返す
          *
          * @return seqHealthInfoId
          */
@@ -91,7 +91,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * seqHealthInfoIdを設定する
+         * 健康情報IDを設定する
          *
          * @param seqHealthInfoId
          *     健康情報ID
@@ -101,7 +101,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * seqUserIdを返す
+         * ユーザIDを返す
          *
          * @return seqUserId
          */
@@ -110,7 +110,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * seqUserIdを設定する
+         * ユーザIDを設定する
          *
          * @param seqUserId
          *     ユーザID
@@ -120,7 +120,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * heightを返す
+         * 身長を返す
          *
          * @return height
          */
@@ -129,7 +129,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          *
          * @param height
          *     身長
@@ -139,7 +139,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * weightを返す
+         * 体重を返す
          *
          * @return weight
          */
@@ -148,7 +148,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * weightを設定する
+         * 体重を設定する
          *
          * @param weight
          *     体重
@@ -158,7 +158,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * bmiを返す
+         * BMIを返す
          *
          * @return bmi
          */
@@ -167,7 +167,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * bmiを設定する
+         * BMIを設定する
          *
          * @param bmi
          *     BMI
@@ -177,7 +177,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * standardWeightを返す
+         * 標準体重を返す
          *
          * @return standardWeight
          */
@@ -186,7 +186,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * standardWeightを設定する
+         * 標準体重を設定する
          *
          * @param standardWeight
          *     標準体重
@@ -196,7 +196,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * bmiStatusを返す
+         * BMIステータスを返す
          *
          * @return bmiStatus
          */
@@ -205,7 +205,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * bmiStatusを設定する
+         * BMIステータスを設定する
          *
          * @param bmiStatus
          *     BMIステータス
@@ -215,7 +215,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * healthInfoRegDateを返す
+         * 健康情報登録日時を返す
          *
          * @return healthInfoRegDate
          */
@@ -224,7 +224,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * healthInfoRegDateを設定する
+         * 健康情報登録日時を設定する
          *
          * @param healthInfoRegDate
          *     健康情報登録日時
@@ -250,7 +250,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         private String message;
 
         /**
-         * statusを返す
+         * ステータスを返す
          *
          * @return status
          */
@@ -259,7 +259,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * statusを設定する
+         * ステータスを設定する
          *
          * @param status
          *     ステータス
@@ -269,7 +269,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * messageを返す
+         * メッセージを返す
          *
          * @return message
          */
@@ -278,7 +278,7 @@ public class HealthInfoListApiResponse extends BaseRootApiResponse
         }
 
         /**
-         * messageを設定する
+         * メッセージを設定する
          *
          * @param message
          *     メッセージ

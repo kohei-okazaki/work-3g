@@ -28,7 +28,7 @@ public class HealthInfoMigrateApiResponse extends BaseTrackApiResponse
     private LocalDateTime syncedAt;
 
     /**
-     * idを返す
+     * IDを返す
      * 
      * @return id
      */
@@ -37,16 +37,17 @@ public class HealthInfoMigrateApiResponse extends BaseTrackApiResponse
     }
 
     /**
-     * idを設定する
+     * IDを設定する
      * 
      * @param id
+     *     ID
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * syncedAtを返す
+     * 連携日時を返す
      * 
      * @return syncedAt
      */
@@ -55,9 +56,10 @@ public class HealthInfoMigrateApiResponse extends BaseTrackApiResponse
     }
 
     /**
-     * syncedAtを設定する
+     * 連携日時を設定する
      * 
      * @param syncedAt
+     *     連携日時
      */
     public void setSyncedAt(LocalDateTime syncedAt) {
         this.syncedAt = syncedAt;

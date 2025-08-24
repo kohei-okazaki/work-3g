@@ -16,7 +16,7 @@ public class TokenApiRequest extends BaseNodeApiRequest implements BaseApiReques
     private Long seqUserId;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -25,7 +25,7 @@ public class TokenApiRequest extends BaseNodeApiRequest implements BaseApiReques
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      */

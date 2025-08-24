@@ -27,7 +27,7 @@ public class CalorieCalcDto {
     private BigDecimal lostCaloriePerDay;
 
     /**
-     * ageを返す
+     * 年齢を返す
      *
      * @return age
      */
@@ -36,7 +36,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * ageを設定する
+     * 年齢を設定する
      *
      * @param age
      *     年齢
@@ -46,7 +46,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      *
      * @return genderType
      */
@@ -55,7 +55,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      *
      * @param genderType
      *     性別
@@ -65,7 +65,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -74,7 +74,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -84,7 +84,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -93,7 +93,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -103,7 +103,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * lifeWorkMetabolismを返す
+     * 生活活動代謝を返す
      *
      * @return lifeWorkMetabolism
      */
@@ -112,7 +112,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * lifeWorkMetabolismを設定する
+     * 生活活動代謝を設定する
      *
      * @param lifeWorkMetabolism
      *     生活活動代謝
@@ -122,7 +122,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * baseMetabolismを返す
+     * 基礎代謝量を返す
      *
      * @return baseMetabolism
      */
@@ -131,7 +131,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * baseMetabolismを設定する
+     * 基礎代謝量を設定する
      *
      * @param baseMetabolism
      *     基礎代謝量
@@ -141,7 +141,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * lostCaloriePerDayを返す
+     * 1日の消費カロリーを返す
      *
      * @return lostCaloriePerDay
      */
@@ -150,7 +150,7 @@ public class CalorieCalcDto {
     }
 
     /**
-     * lostCaloriePerDayを設定する
+     * 1日の消費カロリーを設定する
      *
      * @param lostCaloriePerDay
      *     1日の消費カロリー

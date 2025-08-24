@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "api",
+    # "api",
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,50 @@ TEMPLATES = [
     },
 ]
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,  # 既存のロガーも有効にする
+    "formatters": {
+        "verbose": {
+            "format": "[{asctime}] {levelname} {name} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname}: {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",  # コンソールにDEBUG以上を出力
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "debug.log"),  # debug.logに保存
+            "formatter": "verbose",
+        },
+    },
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "api": {  # ← アプリ名を指定
+            "handlers": ["console", "file"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}
+
 WSGI_APPLICATION = "ha_track.wsgi.application"
 
 # APPEND_SLASH = True
@@ -76,17 +122,31 @@ WSGI_APPLICATION = "ha_track.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# 管理画面用にSQLiteも設定
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "djongo",
+#         "NAME": "health_db",      # MongoDBのデータベース名
+#         "CLIENT": {
+#             "host": "127.0.0.1",  # ローカルホスト
+#             "port": 27017,        # デフォルトポート
+#         }
+#     }
+# }
 DATABASES = {
     "default": {
-        "ENGINE": "djongo",
-        "NAME": "health_db",      # MongoDBのデータベース名
-        "CLIENT": {
-            "host": "127.0.0.1",  # ローカルホスト
-            "port": 27017,        # デフォルトポート
-        }
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
+# アプリケーションで使用するMongoDBの設定
+MONGODB_SETTINGS = {
+    "db": "health_db",
+    "host": "mongodb://127.0.0.1:27017/health_db",  # 認証ありならユーザ/パス付きに
+    "username": "health_user",
+    "password": "hbt4stnsegebg"  # パスワードを追加
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

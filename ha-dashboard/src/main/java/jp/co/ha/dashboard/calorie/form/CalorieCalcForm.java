@@ -2,11 +2,9 @@ package jp.co.ha.dashboard.calorie.form;
 
 import java.math.BigDecimal;
 
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
+import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
@@ -21,28 +19,28 @@ public class CalorieCalcForm implements BaseForm {
     /** 年齢 */
     @Required(message = "年齢が未入力です")
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "年齢は半角数字で入力して下さい")
+    @Decimal(min = "0", max = "150", message = "年齢は0~150で入力してください")
     private Integer age;
     /** 性別 */
     private String gender;
     /** 身長 */
     @Mask
     @Required(message = "身長が未入力です")
-    @DecimalMin(value = "1", message = "身長は1以上の値を入力してください")
-    @DecimalMax(value = "999", message = "身長が桁数超過です")
+    @Decimal(min = "0", max = "300", message = "身長は0~300で入力してください")
     private BigDecimal height;
     /** 体重 */
     @Mask
     @Required(message = "体重が未入力です")
-    @DecimalMin(value = "1", message = "体重は1以上の値を入力してください")
-    @DecimalMax(value = "999", message = "体重が桁数超過です")
+    @Decimal(min = "0", max = "300", message = "体重は0~300で入力してください")
     private BigDecimal weight;
     /** 生活活動代謝 */
     @Required(message = "生活活動代謝が未入力です")
     @Pattern(regixPattern = RegexType.DECIMAL, message = "生活活動代謝は数字で入力して下さい")
+    @Decimal(min = "1", max = "10000", message = "生活活動代謝は0~10000で入力してください")
     private BigDecimal lifeWorkMetabolism;
 
     /**
-     * ageを返す
+     * 年齢を返す
      *
      * @return age
      */
@@ -51,7 +49,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * ageを設定する
+     * 年齢を設定する
      *
      * @param age
      *     年齢
@@ -61,7 +59,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * genderを返す
+     * 性別を返す
      *
      * @return gender
      */
@@ -70,7 +68,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * genderを設定する
+     * 性別を設定する
      *
      * @param gender
      *     性別
@@ -80,7 +78,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -89,7 +87,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -99,7 +97,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -108,7 +106,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -118,7 +116,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * lifeWorkMetabolismを返す
+     * 生活活動代謝を返す
      *
      * @return lifeWorkMetabolism
      */
@@ -127,7 +125,7 @@ public class CalorieCalcForm implements BaseForm {
     }
 
     /**
-     * lifeWorkMetabolismを設定する
+     * 生活活動代謝を設定する
      *
      * @param lifeWorkMetabolism
      *     生活活動代謝

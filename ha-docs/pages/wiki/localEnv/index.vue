@@ -32,7 +32,7 @@
             >
               <div>
                 <v-icon color="red">mdi-database</v-icon>
-                <span>DB構築手順</span>
+                <span>MySQL構築手順</span>
               </div>
             </v-expansion-panel-header>
             <v-expansion-panel-content class="text-body-2">
@@ -48,7 +48,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(tool, i) in dbTools" :key="i">
+                    <tr v-for="(tool, i) in mysqlDbTools" :key="i">
                       <td>{{ i + 1 }}</td>
                       <td>{{ tool.type }}</td>
                       <td>{{ tool.name }}</td>
@@ -439,35 +439,6 @@
               <br />
 
               <details>
-                <summary>ユーザとパスワードを設定</summary>
-                <p>
-                  以下のファイルのuserとpasswordにインストール時に指定したものを設定
-                </p>
-                <kbd>ha-common/profile/local/jdbc.properties</kbd>
-                <br /><br />
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>項目名</th>
-                      <th>設定値</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>jdbc.username</td>
-                      <td>MySQLインストール時に作成したユーザ名</td>
-                    </tr>
-                    <tr>
-                      <td>jdbc.password</td>
-                      <td>MySQLインストール時に作成したパスワード</td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
-              </details>
-
-              <br />
-
-              <details>
                 <summary>データベース作成</summary>
                 <p>
                   「Windowsキー」押下、「mysql」と入力し以下画像のように「MySQL
@@ -483,13 +454,166 @@
                 </p>
                 <kbd>/ha-asset/02_db/others/CREATE_DATABASE.sql</kbd>
               </details>
-              
+
               <br />
 
               <details>
                 <summary>ユーザ作成</summary>
                 <p>MySQLクライアント上で以下のSQLを実行し、ユーザを作成する</p>
                 <kbd>/ha-asset/02_db/others/CREATE_USER.sql</kbd>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>ユーザとパスワードを設定</summary>
+                <p>
+                  以下のファイルを修正し、ユーザとパスワードを設定する
+                </p>
+                <kbd>ha-common/profile/local/jdbc.properties</kbd>
+                <br /><br />
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>jdbc.username</td>
+                      <td>ユーザ作成時に指定したユーザ名</td>
+                    </tr>
+                    <tr>
+                      <td>jdbc.password</td>
+                      <td>ユーザ作成時に指定したパスワード</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+
+          <v-expansion-panel>
+            <v-expansion-panel-header
+              class="justify-self-start text-subtitle-1"
+              disable-icon-rotate
+            >
+              <div>
+                <v-icon color="red">mdi-database</v-icon>
+                <span>MongoDB構築手順</span>
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content class="text-body-2">
+              <details>
+                <summary>ツール一覧</summary>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>役割</th>
+                      <th>ライブラリ/ツール名</th>
+                      <th>Version</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(tool, i) in mongoDbTools" :key="i">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ tool.type }}</td>
+                      <td>{{ tool.name }}</td>
+                      <td>{{ tool.version }}</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
+
+              <br />
+
+              <v-alert text type="error" elevation="2" border="left">
+                <div class="text-body-2">
+                  NoSQLの為、直接DDLを流すことは無い
+                </div>
+              </v-alert>
+
+              <details>
+                <summary>ダウンロード手順</summary>
+                <p>
+                  <a
+                    href="https://www.mongodb.com/try/download/community"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >公式</a
+                  >より以下の手順でMongoDBをローカルPCにダウンロードして下さい
+                </p>
+                <p>
+                  <a
+                    href="https://www.mongodb.com/try/download/shell"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >公式</a
+                  >より以下の手順でmongoshをローカルPCにダウンロードして下さい
+                </p>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>インストール手順</summary>
+                <p>上記、ダウンロード手順を実施してあることを前提です</p>
+                <p>以下の手順でMongoDBをインストールします</p>
+                <ol>
+                  <li>ダウンロードした.msiファイルをダブルクリックして実行します</li>
+                  <li>インストーラの指示に従ってインストールを進めます(基本的にウィザードに従う)</li>
+                </ol>
+                <br />
+                <p>以下の手順でmongoshをインストールします</p>
+                <ol>
+                  <li>ダウンロードした.msiファイルをダブルクリックして実行します</li>
+                  <li>インストーラの指示に従ってインストールを進めます(基本的にウィザードに従う)</li>
+                </ol>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>ユーザとパスワードを設定</summary>
+                <p>上記、インストール手順を実施してあることを前提です</p>
+                <ol>
+                  <li>設定ファイルが以下となっているか確認<br>
+                    C:\Program Files\MongoDB\Server\{version}\bin\mongod.cfg<br>
+                    <kbd># security:</kbd><br>
+                    <kbd>#   authorization: enabled</kbd>
+                  </li>
+                  <li>以下コマンドをpowershell（管理者ユーザ）から起動<br>
+                    <kbd>net stop MongoDB</kbd><br />
+                    <kbd>net start MongoDB</kbd>
+                  </li>
+                  <li>上記後、以下コマンドをpowershellから起動<br>
+                    <kbd>mongosh</kbd>
+                  </li>
+                  <li>上記後、以下コマンドをpowershellから起動<br>
+                    <kbd>use admin</kbd><br />
+                    <kbd>db.createUser({ user: "root", pwd:  "hbt4stnsegebg", roles: [ { role: "root", db: "admin" } ]})</kbd>
+                  </li>
+                  <li>以下コマンドをpowershell（管理者ユーザ）から起動<br>
+                    <kbd>net stop MongoDB</kbd><br />
+                    <kbd>net start MongoDB</kbd>
+                  </li>
+                  <li>上記後、以下コマンドをpowershellから起動<br>
+                    <kbd>mongosh "mongodb://root@localhost:27017/admin" -p hbt4stnsegebg</kbd><br>
+                    <kbd>use health_db</kbd><br>
+                    <kbd>db.createUser({ user: "health_user", pwd:  "hbt4stnsegebg", roles: [ { role: "readWrite", db: "health_db" } ]})</kbd><br>
+                  </li>
+                  <li>以下コマンドをpowershell（管理者ユーザ）から起動<br>
+                    <kbd>net stop MongoDB</kbd><br />
+                    <kbd>net start MongoDB</kbd>
+                  </li>
+                  <li>設定ファイルを以下で更新<br>
+                    C:\Program Files\MongoDB\Server\{version}\bin\mongod.cfg<br>
+                    <kbd># security:</kbd><br>
+                    <kbd>authorization: enabled</kbd>
+                  </li>
+                </ol>
               </details>
 
             </v-expansion-panel-content>
@@ -862,7 +986,8 @@
             <v-expansion-panel-content class="text-body-2">
               <v-alert text type="error" elevation="2" border="left">
                 <div class="text-body-2">
-                  健康情報計算APIはAWS API Gateway+Lambda化したので後続処理は基本不要。
+                  健康情報計算APIはAWS API
+                  Gateway+Lambda化したので後続処理は基本不要。
                 </div>
               </v-alert>
               <details>
@@ -1196,7 +1321,7 @@ export default {
           href: "/wiki/localEnv",
         },
       ],
-      dbTools: [
+      mysqlDbTools: [
         {
           type: "データベース",
           name: "MySQL",
@@ -1211,6 +1336,18 @@ export default {
           type: "ORM",
           name: "MyBatis",
           version: "3.5.16",
+        },
+      ],
+      mongoDbTools: [
+        {
+          type: "データベース",
+          name: "MongoDB",
+          version: "8.0.13",
+        },
+        {
+          type: "コマンドラインツール",
+          name: "mongosh",
+          version: "2.5.6",
         },
       ],
     };

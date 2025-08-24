@@ -21,7 +21,7 @@ public class HealthInfoDto {
     private BigDecimal standardWeight;
 
     /**
-     * seqHealthInfoIdを返す
+     * 健康情報IDを返す
      *
      * @return seqHealthInfoId
      */
@@ -30,7 +30,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * 健康情報IDを設定する
      *
      * @param seqHealthInfoId
      *     健康情報ID
@@ -40,7 +40,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -49,7 +49,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -59,7 +59,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -68,7 +68,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -78,7 +78,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -87,7 +87,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -97,7 +97,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -106,7 +106,7 @@ public class HealthInfoDto {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重

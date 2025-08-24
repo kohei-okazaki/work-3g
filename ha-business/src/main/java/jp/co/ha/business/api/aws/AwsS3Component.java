@@ -20,6 +20,7 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.type.Charset;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.http.SdkHttpClient;
@@ -297,6 +298,48 @@ public class AwsS3Component {
         } catch (Exception e) {
             throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
         }
+    }
+
+    /**
+     * AWSのS3のキー列挙
+     *
+     * @version 1.0.0
+     */
+    public static enum AwsS3Key implements BaseEnum {
+
+        /** 健康情報一括登録CSVファイル配置キー */
+        HEALTHINFO_FILE_REGIST("healthinfo-file-regist/"),
+        /** 健康情報照会CSVファイルの配置キー */
+        HEALTHINFO_FILE_REFERENCE("healthinfo-file-reference/"),
+        /** お知らせ一覧JSONファイルの配置キー */
+        NEWS_JSON("news/"),
+        /** 月次健康情報集計CSV配置キー */
+        MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo/"),
+        /** Slack接続情報キー */
+        SLACK_CONNECTION_DATA("slack/slack_connection_data.json"),
+        /** メモ情報配置キー */
+        NOTE_FILE("note/"),
+        /** 問い合わせキー */
+        INQUIRY("inquiry/");
+
+        /**
+         * コンストラクタ
+         *
+         * @param value
+         *     値
+         */
+        private AwsS3Key(String value) {
+            this.value = value;
+        }
+
+        /** 値 */
+        private String value;
+
+        @Override
+        public String getValue() {
+            return this.value;
+        }
+
     }
 
 }

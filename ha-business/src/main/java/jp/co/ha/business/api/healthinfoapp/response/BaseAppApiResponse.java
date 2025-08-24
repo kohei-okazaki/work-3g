@@ -120,7 +120,7 @@ public class BaseAppApiResponse implements BaseForm {
         private String detail;
 
         /**
-         * outerErrorCodeを返す
+         * 外部エラーコードを返す
          *
          * @return outerErrorCode
          */
@@ -129,7 +129,7 @@ public class BaseAppApiResponse implements BaseForm {
         }
 
         /**
-         * outerErrorCodeを設定する
+         * 外部エラーコードを設定する
          *
          * @param outerErrorCode
          *     外部エラーコード
@@ -139,7 +139,7 @@ public class BaseAppApiResponse implements BaseForm {
         }
 
         /**
-         * detailを返す
+         * 詳細を返す
          *
          * @return detail
          */
@@ -148,7 +148,7 @@ public class BaseAppApiResponse implements BaseForm {
         }
 
         /**
-         * detailを設定する
+         * 詳細を設定する
          *
          * @param detail
          *     詳細
@@ -171,7 +171,7 @@ public class BaseAppApiResponse implements BaseForm {
         private Long seqUserId;
 
         /**
-         * seqUserIdを返す
+         * ユーザIDを返す
          *
          * @return seqUserId
          */
@@ -180,7 +180,7 @@ public class BaseAppApiResponse implements BaseForm {
         }
 
         /**
-         * seqUserIdを設定する
+         * ユーザIDを設定する
          *
          * @param seqUserId
          *     ユーザID
@@ -192,7 +192,7 @@ public class BaseAppApiResponse implements BaseForm {
     }
 
     /**
-     * resultTypeを返す
+     * API結果コードを返す
      *
      * @return resultType
      */
@@ -201,7 +201,7 @@ public class BaseAppApiResponse implements BaseForm {
     }
 
     /**
-     * resultTypeを設定する
+     * API結果コードを設定する
      *
      * @param resultType
      *     API結果コード
@@ -211,7 +211,7 @@ public class BaseAppApiResponse implements BaseForm {
     }
 
     /**
-     * errorInfoを返す
+     * APIレスポンスの共通情報-errorを返す
      *
      * @return errorInfo
      */
@@ -220,7 +220,7 @@ public class BaseAppApiResponse implements BaseForm {
     }
 
     /**
-     * errorInfoを設定する
+     * APIレスポンスの共通情報-errorを設定する
      *
      * @param errorInfo
      *     エラー情報
@@ -230,7 +230,7 @@ public class BaseAppApiResponse implements BaseForm {
     }
 
     /**
-     * accountを返す
+     * APIレスポンスの共通情報-accountを返す
      *
      * @return account
      */
@@ -239,7 +239,7 @@ public class BaseAppApiResponse implements BaseForm {
     }
 
     /**
-     * accountを設定する
+     * APIレスポンスの共通情報-accountを設定する
      *
      * @param account
      *     アカウント情報
