@@ -51,7 +51,6 @@ public class TokenApiComponent {
 
         TokenApiRequest request = new TokenApiRequest();
         request.setSeqUserId(seqUserId);
-        @SuppressWarnings("deprecation")
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());

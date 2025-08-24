@@ -161,7 +161,9 @@ public class SlackApiComponent {
 
     /**
      * 指定したコンテンツタイプから対応するSlack接続情報を取得する
-     *
+     * 
+     * @param data
+     *     SlackAPIの接続情報
      * @param contentType
      *     コンテンツタイプ
      * @return Slack接続情報

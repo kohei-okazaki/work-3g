@@ -81,6 +81,7 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @param referenceFilePath
      * @param registBatchFilePath
      * @param healthinfoNodeApiUrl
+     * @param healthinfoNodeApiMigrateFlg
      * @param healthInfoDashboardUrl
      * @param healthInfoApiUrl
      * @param rootApiUrl
