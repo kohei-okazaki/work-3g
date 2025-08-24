@@ -10,24 +10,6 @@
       "django": true,
       "autoStartBrowser": false,
       "console": "integratedTerminal"
-    },
-    {
-      "name": "Mirgateファイル作成",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}\\manage.py",
-      "args": ["makemigrations"],
-      "django": true,
-      "console": "integratedTerminal"
-    },
-    {
-      "name": "Mirgate実行",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}\\manage.py",
-      "args": ["migrate"],
-      "django": true,
-      "console": "integratedTerminal"
     }
   ]
 }

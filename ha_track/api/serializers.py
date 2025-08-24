@@ -1,55 +1,45 @@
-from django.utils.timezone import now
 from rest_framework import serializers
-from .models import HealthInfo, HealthTrackLog
+from django.utils import timezone
+from datetime import datetime
 
 
-class HealthInfoSerializer(serializers.ModelSerializer):
+class HealthInfoItemSerializer(serializers.Serializer):
+    """
+    健康情報シリアライザー
+    """
+    seq_health_info_id = serializers.IntegerField(
+        required=False)  # 必須なら True に
+    height = serializers.FloatField(required=False, allow_null=True)
+    weight = serializers.FloatField(required=False, allow_null=True)
+    bmi = serializers.FloatField(required=False, allow_null=True)
+    standard_weight = serializers.FloatField(required=False, allow_null=True)
+    created_at = serializers.CharField(
+        required=False, allow_blank=True, allow_null=True)
 
-    created_at = serializers.DateTimeField(
-        input_formats=[
-            "%Y/%m/%d %H:%M:%S",
-        ],
-        format="%Y/%m/%d %H:%M:%S"
-    )
+    def validate_created_at(self, value):
+        """created_at のバリデーション
 
-    class Meta:
-        model = HealthInfo
-        fields = ["seq_health_info_id", "height", "weight",
-                  "bmi", "standard_weight", "created_at"]
+        Args:
+            value (str): created_at の値
+        """
+        if not value:
+            return None
+
+        try:
+            # "YYYY/MM/DD HH:MM:SS" のみを受け付ける
+            dt = datetime.strptime(value, "%Y/%m/%d %H:%M:%S")
+            # naive datetime を現在のタイムゾーンで aware 化
+            dt = timezone.make_aware(dt, timezone.get_current_timezone())
+            return dt
+        except Exception:
+            raise serializers.ValidationError(
+                "created_at は 'YYYY/MM/DD HH:MM:SS' 形式で指定してください"
+            )
 
 
-class HealthTrackLogSerializer(serializers.ModelSerializer):
-
-    health_info = HealthInfoSerializer()
-
-    synced_at = serializers.DateTimeField(
-        required=False,
-        format="%Y/%m/%d %H:%M:%S"
-    )
-
-    created_at = serializers.DateTimeField(
-        required=False,
-        format="%Y/%m/%d %H:%M:%S"
-    )
-
-    class Meta:
-        model = HealthTrackLog
-        fields = ["id", "seq_user_id", "synced_at",
-                  "created_at", "health_info"]
-        read_only_fields = ["synced_at"]
-
-    def create(self, validated_data):
-        # HealthInfo データを作成
-        health_info_data = validated_data.pop('health_info')
-        health_info = HealthInfo.objects.create(**health_info_data)
-
-        # HealthTrackLog データを作成
-        health_track_log = HealthTrackLog.objects.create(
-            health_info=health_info,
-            **validated_data
-        )
-        return health_track_log
-
-    def validate(self, data):
-        # data["synced_at"] = now()
-        return data
+class HealthInfoPayloadSerializer(serializers.Serializer):
+    """
+    健康情報データ部シリアライザー
+    """
+    seq_user_id = serializers.IntegerField()
+    health_infos = HealthInfoItemSerializer(many=True)
