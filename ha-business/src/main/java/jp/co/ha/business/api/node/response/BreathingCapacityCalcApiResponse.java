@@ -26,7 +26,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
     private UserData userData;
 
     /**
-     * breathingCapacityCalcResultを返す
+     * 肺活量計算結果情報を返す
      *
      * @return breathingCapacityCalcResult
      */
@@ -35,7 +35,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
     }
 
     /**
-     * breathingCapacityCalcResultを設定する
+     * 肺活量計算結果情報を設定する
      *
      * @param breathingCapacityCalcResult
      *     肺活量計算結果情報
@@ -46,7 +46,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
     }
 
     /**
-     * userDataを返す
+     * ユーザ情報を返す
      *
      * @return userData
      */
@@ -55,7 +55,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
     }
 
     /**
-     * userDataを設定する
+     * ユーザ情報を設定する
      *
      * @param userData
      *     ユーザ情報
@@ -79,7 +79,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         private BigDecimal breathingCapacityPercentage;
 
         /**
-         * predictBreathingCapacityを返す
+         * 予測肺活量を返す
          *
          * @return predictBreathingCapacity
          */
@@ -88,7 +88,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * predictBreathingCapacityを設定する
+         * 予測肺活量を設定する
          *
          * @param predictBreathingCapacity
          *     予測肺活量
@@ -98,7 +98,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * breathingCapacityPercentageを返す
+         * 肺活量%を返す
          *
          * @return breathingCapacityPercentage
          */
@@ -107,7 +107,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * breathingCapacityPercentageを設定する
+         * 肺活量%を設定する
          *
          * @param breathingCapacityPercentage
          *     肺活量%
@@ -137,7 +137,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         private BigDecimal height;
 
         /**
-         * ageを返す
+         * 年齢を返す
          *
          * @return age
          */
@@ -146,7 +146,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * ageを設定する
+         * 年齢を設定する
          *
          * @param age
          *     年齢
@@ -156,7 +156,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * genderTypeを返す
+         * 性別を返す
          *
          * @return genderType
          */
@@ -165,7 +165,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * genderTypeを設定する
+         * 性別を設定する
          *
          * @param genderType
          *     性別
@@ -175,7 +175,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * heightを返す
+         * 身長を返す
          *
          * @return height
          */
@@ -184,7 +184,7 @@ public class BreathingCapacityCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          *
          * @param height
          *     身長

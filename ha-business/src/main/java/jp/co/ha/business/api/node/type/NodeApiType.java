@@ -54,7 +54,7 @@ public enum NodeApiType implements BaseEnum {
     }
 
     /**
-     * apiNameTypeを返す
+     * API名を返す
      *
      * @return apiNameType
      */

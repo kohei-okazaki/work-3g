@@ -24,7 +24,7 @@ public class HealthInfoReferenceApiRequest extends BaseAppApiRequest
     private Long seqHealthInfoId;
 
     /**
-     * seqHealthInfoIdを返す
+     * 健康情報IDを返す
      *
      * @return seqHealthInfoId
      */
@@ -33,7 +33,7 @@ public class HealthInfoReferenceApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * 健康情報IDを設定する
      *
      * @param seqHealthInfoId
      *     健康情報ID

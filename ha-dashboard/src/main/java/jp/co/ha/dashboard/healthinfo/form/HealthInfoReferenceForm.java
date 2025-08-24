@@ -37,7 +37,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     private LocalDate toHealthInfoRegDate;
 
     /**
-     * seqHealthInfoIdを返す
+     * 健康情報IDを返す
      *
      * @return seqHealthInfoId
      */
@@ -46,7 +46,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * 健康情報IDを設定する
      *
      * @param seqHealthInfoId
      *     健康情報ID
@@ -56,7 +56,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     }
 
     /**
-     * healthInfoRegDateSelectFlagを返す
+     * 健康情報作成日直接指定フラグを返す
      *
      * @return healthInfoRegDateSelectFlag
      */
@@ -65,7 +65,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     }
 
     /**
-     * healthInfoRegDateSelectFlagを設定する
+     * 健康情報作成日直接指定フラグを設定する
      *
      * @param healthInfoRegDateSelectFlag
      *     健康情報作成日直接指定フラグ
@@ -75,7 +75,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     }
 
     /**
-     * fromHealthInfoRegDateを返す
+     * 健康情報作成日(開始)を返す
      *
      * @return fromHealthInfoRegDate
      */
@@ -84,7 +84,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     }
 
     /**
-     * fromHealthInfoRegDateを設定する
+     * 健康情報作成日(開始)を設定する
      *
      * @param fromHealthInfoRegDate
      *     健康情報作成日(開始)
@@ -94,7 +94,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     }
 
     /**
-     * toHealthInfoRegDateを返す
+     * 健康情報作成日(終了)を返す
      *
      * @return toHealthInfoRegDate
      */
@@ -103,7 +103,7 @@ public class HealthInfoReferenceForm implements BaseForm {
     }
 
     /**
-     * toHealthInfoRegDateを設定する
+     * 健康情報作成日(終了)を設定する
      *
      * @param toHealthInfoRegDate
      *     健康情報作成日(終了)

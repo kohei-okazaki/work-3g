@@ -45,7 +45,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     private Long transactionId;
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -54,7 +54,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -64,7 +64,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -73,7 +73,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -83,7 +83,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * testModeを返す
+     * テストモード種別を返す
      *
      * @return testMode
      */
@@ -92,7 +92,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * testModeを設定する
+     * テストモード種別を設定する
      *
      * @param testMode
      *     テストモード種別
@@ -102,7 +102,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * transactionIdを返す
+     * トランザクションIDを返す
      *
      * @return transactionId
      */
@@ -111,7 +111,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     }
 
     /**
-     * transactionIdを設定する
+     * トランザクションIDを設定する
      *
      * @param transactionId
      *     トランザクションID

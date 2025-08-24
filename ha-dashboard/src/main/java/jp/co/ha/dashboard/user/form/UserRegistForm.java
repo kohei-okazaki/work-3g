@@ -55,13 +55,12 @@ public class UserRegistForm implements BaseForm {
     @Required(message = "目標体重が未入力です")
     @Decimal(min = "1", max = "999", message = "目標体重は1kg～999kgまでの範囲が指定可能です")
     private BigDecimal goalWeight;
-    /** BMI */
     /** 備考 */
     @Length(length = 256, mode = LengthMode.LESS_EQUAL, message = "備考は256桁以下で入力してください")
     private String remarks;
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -70,7 +69,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス
@@ -80,7 +79,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -89,7 +88,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -99,7 +98,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * confirmPasswordを返す
+     * 確認用パスワードを返す
      *
      * @return confirmPassword
      */
@@ -108,7 +107,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * confirmPasswordを設定する
+     * 確認用パスワードを設定する
      *
      * @param confirmPassword
      *     確認用パスワード
@@ -118,7 +117,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      * 
      * @return genderType
      */
@@ -127,7 +126,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      * 
      * @param genderType
      *     性別
@@ -137,7 +136,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * birthDateを返す
+     * 誕生日を返す
      * 
      * @return birthDate
      */
@@ -146,7 +145,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * birthDateを設定する
+     * 誕生日を設定する
      * 
      * @param birthDate
      *     誕生日
@@ -156,7 +155,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * goalWeightを返す
+     * 目標体重を返す
      * 
      * @return goalWeight
      */
@@ -165,7 +164,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * goalWeightを設定する
+     * 目標体重を設定する
      * 
      * @param goalWeight
      *     目標体重
@@ -175,7 +174,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * remarksを返す
+     * 備考を返す
      *
      * @return remarks
      */
@@ -184,7 +183,7 @@ public class UserRegistForm implements BaseForm {
     }
 
     /**
-     * remarksを設定する
+     * 備考を設定する
      *
      * @param remarks
      *     備考

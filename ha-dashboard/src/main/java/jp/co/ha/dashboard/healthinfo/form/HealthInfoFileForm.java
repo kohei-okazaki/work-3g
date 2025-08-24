@@ -24,7 +24,7 @@ public class HealthInfoFileForm implements BaseForm {
     private List<HealthInfoCsvUploadModel> modelList;
 
     /**
-     * multipartFileを返す
+     * アップロードファイルを返す
      *
      * @return multipartFile
      */
@@ -33,7 +33,7 @@ public class HealthInfoFileForm implements BaseForm {
     }
 
     /**
-     * multipartFileを設定する
+     * アップロードファイルを設定する
      *
      * @param multipartFile
      *     アップロードファイル
@@ -43,7 +43,7 @@ public class HealthInfoFileForm implements BaseForm {
     }
 
     /**
-     * modelListを返す
+     * 健康情報ファイルモデルリストを返す
      *
      * @return modelList
      */
@@ -52,7 +52,7 @@ public class HealthInfoFileForm implements BaseForm {
     }
 
     /**
-     * modelListを設定する
+     * 健康情報ファイルモデルリストを設定する
      *
      * @param modelList
      *     健康情報モデルリスト

@@ -26,7 +26,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
     private List<Note> noteList;
 
     /**
-     * noteListを返す
+     * メモ情報リストを返す
      *
      * @return noteList
      */
@@ -35,7 +35,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
     }
 
     /**
-     * noteListを設定する
+     * メモ情報リストを設定する
      *
      * @param noteList
      *     メモ情報リスト
@@ -72,7 +72,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         private LocalDateTime updateDate;
 
         /**
-         * seqRootUserNoteInfoIdを返す
+         * 管理者サイトユーザメモ情報IDを返す
          *
          * @return seqRootUserNoteInfoId
          */
@@ -81,7 +81,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * seqRootUserNoteInfoIdを設定する
+         * 管理者サイトユーザメモ情報IDを設定する
          *
          * @param seqRootUserNoteInfoId
          *     管理者サイトユーザメモ情報ID
@@ -91,7 +91,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * titleを返す
+         * 件名を返す
          *
          * @return title
          */
@@ -100,7 +100,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * titleを設定する
+         * 件名を設定する
          *
          * @param title
          *     件名
@@ -110,7 +110,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * detailを返す
+         * メモ内容を返す
          *
          * @return detail
          */
@@ -119,7 +119,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * detailを設定する
+         * メモ内容を設定する
          *
          * @param detail
          *     メモ内容
@@ -129,7 +129,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * regDateを返す
+         * 登録日時を返す
          *
          * @return regDate
          */
@@ -138,7 +138,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * regDateを設定する
+         * 登録日時を設定する
          *
          * @param regDate
          *     登録日時
@@ -148,7 +148,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * updateDateを返す
+         * 更新日時を返す
          *
          * @return updateDate
          */
@@ -157,7 +157,7 @@ public class NoteListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * updateDateを設定する
+         * 更新日時を設定する
          *
          * @param updateDate
          *     更新日時

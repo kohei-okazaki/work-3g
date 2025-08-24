@@ -22,7 +22,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
     private List<News> newsList;
 
     /**
-     * newsListを返す
+     * お知らせ情報リスト を返す
      *
      * @return newsList
      */
@@ -31,7 +31,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
     }
 
     /**
-     * newsListを設定する
+     * お知らせ情報リスト を設定する
      *
      * @param newsList
      *     お知らせ情報リスト
@@ -64,7 +64,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         private Tag tag;
 
         /**
-         * seqNewsInfoIdを返す
+         * お知らせ情報IDを返す
          *
          * @return seqNewsInfoId
          */
@@ -73,7 +73,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * seqNewsInfoIdを設定する
+         * お知らせ情報IDを設定する
          *
          * @param seqNewsInfoId
          *     お知らせ情報ID
@@ -83,7 +83,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * titleを返す
+         * タイトルを返す
          *
          * @return title
          */
@@ -92,7 +92,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * titleを設定する
+         * タイトルを設定する
          *
          * @param title
          *     タイトル
@@ -102,7 +102,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * dateを返す
+         * 日付を返す
          *
          * @return date
          */
@@ -111,7 +111,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * dateを設定する
+         * 日付を設定する
          *
          * @param date
          *     日付
@@ -121,7 +121,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * detailを返す
+         * 詳細を返す
          *
          * @return detail
          */
@@ -130,7 +130,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * detailを設定する
+         * 詳細を設定する
          *
          * @param detail
          *     詳細
@@ -140,7 +140,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * tagを返す
+         * タグを返す
          *
          * @return tag
          */
@@ -149,7 +149,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * tagを設定する
+         * タグを設定する
          *
          * @param tag
          *     タグ
@@ -175,7 +175,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         private String name;
 
         /**
-         * colorを返す
+         * 色を返す
          *
          * @return color
          */
@@ -184,7 +184,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * colorを設定する
+         * 色を設定する
          *
          * @param color
          *     色
@@ -194,7 +194,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * nameを返す
+         * 名前を返す
          *
          * @return name
          */
@@ -203,7 +203,7 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         }
 
         /**
-         * nameを設定する
+         * 名前を設定する
          *
          * @param name
          *     名前

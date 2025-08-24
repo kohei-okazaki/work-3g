@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.system.SystemProperties;
-import jp.co.ha.common.util.BeanUtil;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
@@ -34,19 +33,16 @@ public class AwsAuthComponent {
      * @return AwsCredentialsProvider
      */
     public AwsCredentialsProvider getAWSCredentialsProvider() {
-
-        if (BeanUtil.notNull(systemProps.getEnvironment())) {
-            switch (systemProps.getEnvironment()) {
-            case LOCAL:
-                return ProfileCredentialsProvider.create();
-            case DEV1:
-                return InstanceProfileCredentialsProvider.create();
-            }
+        switch (systemProps.getEnvironment()) {
+        case LOCAL:
+            return ProfileCredentialsProvider.create();
+        case DEV1:
+            return InstanceProfileCredentialsProvider.create();
+        default:
+            // システムプロパティの環境がNullや実行可能環境でない場合
+            throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
+                    "環境情報の設定が不正です。env=" + systemProps.getEnvironment());
         }
-
-        // システムプロパティの環境がNullや実行可能環境でない場合
-        throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                "環境情報の設定が不正です。env=" + systemProps.getEnvironment());
     }
 
 }

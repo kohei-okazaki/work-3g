@@ -30,7 +30,7 @@ public class UserRecoveryForm extends UserRecoveryMailAddressInputForm {
     private String confirmPassword;
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -39,7 +39,7 @@ public class UserRecoveryForm extends UserRecoveryMailAddressInputForm {
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -49,7 +49,7 @@ public class UserRecoveryForm extends UserRecoveryMailAddressInputForm {
     }
 
     /**
-     * confirmPasswordを返す
+     * 確認用パスワードを返す
      *
      * @return confirmPassword
      */
@@ -58,7 +58,7 @@ public class UserRecoveryForm extends UserRecoveryMailAddressInputForm {
     }
 
     /**
-     * confirmPasswordを設定する
+     * 確認用パスワードを設定する
      *
      * @param confirmPassword
      *     確認用パスワード

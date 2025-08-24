@@ -2,11 +2,9 @@ package jp.co.ha.dashboard.breathingcapacity.form;
 
 import java.math.BigDecimal;
 
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
+import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseForm;
@@ -27,12 +25,11 @@ public class BreathingCapacityForm implements BaseForm {
     /** 身長 */
     @Mask
     @Required(message = "身長が未入力です")
-    @DecimalMin(value = "1", message = "身長は1以上の値を入力してください")
-    @DecimalMax(value = "999", message = "身長が桁数超過です")
+    @Decimal(min = "1", max = "300", message = "身長が不正な値です")
     private BigDecimal height;
 
     /**
-     * ageを返す
+     * 年齢を返す
      *
      * @return age
      */
@@ -41,7 +38,7 @@ public class BreathingCapacityForm implements BaseForm {
     }
 
     /**
-     * ageを設定する
+     * 年齢を設定する
      *
      * @param age
      *     年齢
@@ -51,7 +48,7 @@ public class BreathingCapacityForm implements BaseForm {
     }
 
     /**
-     * genderを返す
+     * 性別を返す
      *
      * @return gender
      */
@@ -60,7 +57,7 @@ public class BreathingCapacityForm implements BaseForm {
     }
 
     /**
-     * genderを設定する
+     * 性別を設定する
      *
      * @param gender
      *     性別
@@ -70,7 +67,7 @@ public class BreathingCapacityForm implements BaseForm {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -79,7 +76,7 @@ public class BreathingCapacityForm implements BaseForm {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長

@@ -44,7 +44,7 @@ public class UserDto {
     private BigDecimal goalWeight;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -53,7 +53,7 @@ public class UserDto {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -63,7 +63,7 @@ public class UserDto {
     }
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -72,7 +72,7 @@ public class UserDto {
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -82,7 +82,7 @@ public class UserDto {
     }
 
     /**
-     * confirmPasswordを返す
+     * 確認用パスワードを返す
      *
      * @return confirmPassword
      */
@@ -91,7 +91,7 @@ public class UserDto {
     }
 
     /**
-     * confirmPasswordを設定する
+     * 確認用パスワードを設定する
      *
      * @param confirmPassword
      *     確認用パスワード
@@ -101,7 +101,7 @@ public class UserDto {
     }
 
     /**
-     * remarksを返す
+     * 備考を返す
      *
      * @return remarks
      */
@@ -110,7 +110,7 @@ public class UserDto {
     }
 
     /**
-     * remarksを設定する
+     * 備考を設定する
      *
      * @param remarks
      *     備考
@@ -120,7 +120,7 @@ public class UserDto {
     }
 
     /**
-     * deleteFlagを返す
+     * 削除フラグを返す
      * 
      * @return deleteFlag
      */
@@ -129,16 +129,17 @@ public class UserDto {
     }
 
     /**
-     * deleteFlagを設定する
+     * 削除フラグを設定する
      * 
      * @param deleteFlag
+     *     削除フラグ
      */
     public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -147,7 +148,7 @@ public class UserDto {
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス
@@ -157,7 +158,7 @@ public class UserDto {
     }
 
     /**
-     * mailPasswordを返す
+     * メールパスワードを返す
      *
      * @return mailPassword
      */
@@ -166,7 +167,7 @@ public class UserDto {
     }
 
     /**
-     * mailPasswordを設定する
+     * メールパスワードを設定する
      *
      * @param mailPassword
      *     メールパスワード
@@ -177,7 +178,7 @@ public class UserDto {
     }
 
     /**
-     * apiKeyを返す
+     * APIキーを返す
      *
      * @return apiKey
      */
@@ -186,7 +187,7 @@ public class UserDto {
     }
 
     /**
-     * apiKeyを設定する
+     * APIキーを設定する
      *
      * @param apiKey
      *     APIキー
@@ -196,7 +197,7 @@ public class UserDto {
     }
 
     /**
-     * passwordExpireを返す
+     * パスワード有効期限を返す
      *
      * @return passwordExpire
      */
@@ -205,7 +206,7 @@ public class UserDto {
     }
 
     /**
-     * passwordExpireを設定する
+     * パスワード有効期限を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限
@@ -215,7 +216,7 @@ public class UserDto {
     }
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      * 
      * @return genderType
      */
@@ -224,7 +225,7 @@ public class UserDto {
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      * 
      * @param genderType
      *     性別
@@ -234,7 +235,7 @@ public class UserDto {
     }
 
     /**
-     * birthDateを返す
+     * 誕生日を返す
      * 
      * @return birthDate
      */
@@ -243,7 +244,7 @@ public class UserDto {
     }
 
     /**
-     * birthDateを設定する
+     * 誕生日を設定する
      * 
      * @param birthDate
      *     誕生日
@@ -253,7 +254,7 @@ public class UserDto {
     }
 
     /**
-     * headerFlagを返す
+     * ヘッダーフラグを返す
      * 
      * @return headerFlag
      */
@@ -262,16 +263,17 @@ public class UserDto {
     }
 
     /**
-     * headerFlagを設定する
+     * ヘッダーフラグを設定する
      * 
      * @param headerFlag
+     *     ヘッダーフラグ
      */
     public void setHeaderFlag(Boolean headerFlag) {
         this.headerFlag = headerFlag;
     }
 
     /**
-     * footerFlagを返す
+     * フッターフラグを返す
      * 
      * @return footerFlag
      */
@@ -280,16 +282,17 @@ public class UserDto {
     }
 
     /**
-     * footerFlagを設定する
+     * フッターフラグを設定する
      * 
      * @param footerFlag
+     *     フッターフラグ
      */
     public void setFooterFlag(Boolean footerFlag) {
         this.footerFlag = footerFlag;
     }
 
     /**
-     * maskFlagを返す
+     * マスクフラグを返す
      * 
      * @return maskFlag
      */
@@ -298,16 +301,17 @@ public class UserDto {
     }
 
     /**
-     * maskFlagを設定する
+     * マスクフラグを設定する
      * 
      * @param maskFlag
+     *     マスクフラグ
      */
     public void setMaskFlag(Boolean maskFlag) {
         this.maskFlag = maskFlag;
     }
 
     /**
-     * enclosureCharFlagを返す
+     * 囲み文字利用フラグを返す
      * 
      * @return enclosureCharFlag
      */
@@ -316,16 +320,17 @@ public class UserDto {
     }
 
     /**
-     * enclosureCharFlagを設定する
+     * 囲み文字利用フラグを設定する
      * 
      * @param enclosureCharFlag
+     *     囲み文字利用フラグ
      */
     public void setEnclosureCharFlag(Boolean enclosureCharFlag) {
         this.enclosureCharFlag = enclosureCharFlag;
     }
 
     /**
-     * goalWeightを返す
+     * 目標体重を返す
      * 
      * @return goalWeight
      */
@@ -334,7 +339,7 @@ public class UserDto {
     }
 
     /**
-     * goalWeightを設定する
+     * 目標体重を設定する
      * 
      * @param goalWeight
      *     目標体重

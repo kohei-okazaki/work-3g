@@ -42,7 +42,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         private BigDecimal standardWeight;
 
         /**
-         * heightを返す
+         * 身長を返す
          *
          * @return height
          */
@@ -51,7 +51,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          *
          * @param height
          *     身長
@@ -61,7 +61,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * weightを返す
+         * 体重を返す
          *
          * @return weight
          */
@@ -70,7 +70,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * weightを設定する
+         * 体重を設定する
          *
          * @param weight
          *     体重
@@ -80,7 +80,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * bmiを返す
+         * BMIを返す
          *
          * @return bmi
          */
@@ -89,7 +89,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * bmiを設定する
+         * BMIを設定する
          *
          * @param bmi
          *     BMI
@@ -99,7 +99,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * standardWeightを返す
+         * 標準体重を返す
          *
          * @return standardWeight
          */
@@ -108,7 +108,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
         }
 
         /**
-         * standardWeightを設定する
+         * 標準体重を設定する
          *
          * @param standardWeight
          *     標準体重
@@ -125,7 +125,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
     }
 
     /**
-     * basicHealthInfoを返す
+     * 基礎健康情報を返す
      *
      * @return basicHealthInfo
      */
@@ -134,7 +134,7 @@ public class BasicHealthInfoCalcApiResponse extends BaseNodeApiResponse
     }
 
     /**
-     * basicHealthInfoを設定する
+     * 基礎健康情報を設定する
      *
      * @param basicHealthInfo
      *     基礎健康情報

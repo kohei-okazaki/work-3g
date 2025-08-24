@@ -26,7 +26,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
     private HealthInfo healthInfo;
 
     /**
-     * healthInfoを返す
+     * 健康情報を返す
      *
      * @return healthInfo
      */
@@ -35,7 +35,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
     }
 
     /**
-     * healthInfoを設定する
+     * 健康情報を設定する
      *
      * @param healthInfo
      *     健康情報
@@ -77,7 +77,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         private LocalDateTime healthInfoRegDate;
 
         /**
-         * seqHealthInfoIdを返す
+         * 健康情報IDを返す
          *
          * @return seqHealthInfoId
          */
@@ -86,7 +86,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * seqHealthInfoIdを設定する
+         * 健康情報IDを設定する
          *
          * @param seqHealthInfoId
          *     健康情報ID
@@ -96,7 +96,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * heightを返す
+         * 身長を返す
          *
          * @return height
          */
@@ -105,7 +105,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          *
          * @param height
          *     身長
@@ -115,7 +115,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * weightを返す
+         * 体重を返す
          *
          * @return weight
          */
@@ -124,7 +124,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * weightを設定する
+         * 体重を設定する
          *
          * @param weight
          *     体重
@@ -134,7 +134,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * bmiを返す
+         * BMIを返す
          *
          * @return bmi
          */
@@ -143,7 +143,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * bmiを設定する
+         * BMIを設定する
          *
          * @param bmi
          *     BMI
@@ -153,7 +153,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * standardWeightを返す
+         * 標準体重を返す
          *
          * @return standardWeight
          */
@@ -162,7 +162,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * standardWeightを設定する
+         * 標準体重を設定する
          *
          * @param standardWeight
          *     標準体重
@@ -172,7 +172,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * healthInfoRegDateを返す
+         * 健康情報作成日時を返す
          *
          * @return healthInfoRegDate
          */
@@ -181,7 +181,7 @@ public class HealthInfoReferenceApiResponse extends BaseAppApiResponse
         }
 
         /**
-         * healthInfoRegDateを設定する
+         * 健康情報作成日時を設定する
          *
          * @param healthInfoRegDate
          *     健康情報作成日時
