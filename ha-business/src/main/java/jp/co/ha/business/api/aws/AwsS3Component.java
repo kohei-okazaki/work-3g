@@ -285,8 +285,9 @@ public class AwsS3Component {
 
             // HttpClient にタイムアウトを設定する
             SdkHttpClient httpClient = ApacheHttpClient.builder()
-                    .connectionTimeout(Duration.ofMillis(awsProps.getS3Timeout()))
-                    .socketTimeout(Duration.ofMillis(awsProps.getS3Timeout()))
+                    .connectionTimeout(
+                            Duration.ofMillis(awsProps.getS3ConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.getS3SocketTimeout()))
                     .build();
 
             return S3Client.builder()

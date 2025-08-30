@@ -330,8 +330,8 @@ public class AwsSesComponent {
 
         // HttpClient にタイムアウトを設定する
         SdkHttpClient httpClient = ApacheHttpClient.builder()
-                .connectionTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
-                .socketTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
+                .connectionTimeout(Duration.ofMillis(awsProps.getSesConnnectionTimeout()))
+                .socketTimeout(Duration.ofMillis(awsProps.getSesSocketTimeout()))
                 .build();
 
         return SesClient.builder()

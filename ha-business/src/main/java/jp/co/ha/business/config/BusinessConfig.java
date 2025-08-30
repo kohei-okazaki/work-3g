@@ -115,27 +115,23 @@ public class BusinessConfig implements WebMvcConfigurer {
         return props;
     }
 
-    /**
-     * @param region
-     * @param backet
-     * @param s3Timeout
-     * @param sesTimeout
-     * @param sesStubFlag
-     * @return AwsConfig
-     */
     @Bean
     AwsProperties awsProperties(
             @Value("${aws.region}") String region,
             @Value("${aws.s3.backet}") String backet,
-            @Value("${aws.s3.timeout}") int s3Timeout,
-            @Value("${aws.ses.timeout}") int sesTimeout,
+            @Value("${aws.s3.connection.timeout}") int s3ConnnectionTimeout,
+            @Value("${aws.s3.socket.timeout}") int s3SocketTimeout,
+            @Value("${aws.ses.connection.timeout}") int sesConnnectionTimeout,
+            @Value("${aws.ses.socket.timeout}") int sesSocketTimeout,
             @Value("${aws.ses.stubflag}") boolean sesStubFlag) {
 
         AwsProperties props = new AwsProperties();
         props.setRegion(region);
         props.setBacket(backet);
-        props.setS3Timeout(s3Timeout);
-        props.setSesTimeout(sesTimeout);
+        props.setS3ConnnectionTimeout(s3ConnnectionTimeout);
+        props.setS3SocketTimeout(s3SocketTimeout);
+        props.setSesConnnectionTimeout(sesConnnectionTimeout);
+        props.setSesSocketTimeout(sesSocketTimeout);
         props.setSesStubFlag(sesStubFlag);
 
         return props;
