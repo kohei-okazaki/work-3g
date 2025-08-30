@@ -32,4 +32,12 @@ public interface InquiryService {
      */
     void regist(Long seqUserId, InquiryForm inquiryForm) throws BaseException;
 
+    /**
+     * 問い合わせ完了メールを送信する
+     * 
+     * @throws BaseException
+     *     メール送信に失敗した場合
+     */
+    void sendMail() throws BaseException;
+
 }

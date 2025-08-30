@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
+import jp.co.ha.business.api.aws.AwsSesComponent;
+import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.InquiryComponent.Status;
@@ -16,6 +18,7 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.inquiry.form.InquiryForm;
@@ -45,9 +48,15 @@ public class InquiryServiceImpl implements InquiryService {
     /** AWS-S3 Component */
     @Autowired
     private AwsS3Component s3;
+    /** AWS-SES Component */
+    @Autowired
+    private AwsSesComponent ses;
     /** Slack Component */
     @Autowired
     private SlackApiComponent slack;
+    /** システムプロパティ */
+    @Autowired
+    private SystemProperties systemProps;
 
     @Override
     public List<InquiryTypeMt> getInquiryTypeMtList() {
@@ -78,6 +87,12 @@ public class InquiryServiceImpl implements InquiryService {
                 "問い合わせ登録", "問い合わせユーザID=" + seqUserId + ", S3キー=" + s3Key
                         + "を登録.");
 
+    }
+
+    @Override
+    public void sendMail() throws BaseException {
+        ses.sendMail(systemProps.getSystemMailAddress(), "問い合わせ発生",
+                MailTemplateKey.INQUIRY_REGIST_TEMPLATE);
     }
 
 }

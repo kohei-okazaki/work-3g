@@ -101,6 +101,9 @@ public class InquiryController implements BaseWizardController<InquiryForm> {
         // 問い合わせ管理情報を登録する
         inquiryService.regist(seqUserId, inquiryForm);
 
+        // 問い合わせ完了メールを送信する
+        inquiryService.sendMail();
+
         sessionComponent.removeValue(request.getSession(), SESSION_KEY_FORM);
 
         return getView(model, DashboardView.INQUIRY_COMPLETE);
