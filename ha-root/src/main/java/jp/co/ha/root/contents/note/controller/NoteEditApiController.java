@@ -78,9 +78,10 @@ public class NoteEditApiController
         String s3Key = optional.get().getS3Key();
         // メモファイルの更新
         s3.putFile(s3Key, request.getDetail());
+
         // Slack通知
-        slack.send(ContentType.ROOT,
-                "メモ情報ID=" + seqRootUserNoteInfoId + ", S3キー=" + s3Key + "を編集.");
+        slack.sendFile(ContentType.ROOT, request.getDetail().getBytes(), s3Key,
+                "メモ編集", "メモ情報ID=" + seqRootUserNoteInfoId + ", S3キー=" + s3Key + "を編集.");
 
         return ResponseEntity.ok(getSuccessResponse());
     }

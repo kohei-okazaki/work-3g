@@ -95,15 +95,20 @@ public class NoteDeleteApiController
             // メモファイルを削除
             s3.removeS3ObjectByKeys(s3Key);
 
+            // メモファイルまで削除できたらコミット
+            transactionManager.commit(status);
+
             // Slack通知
             slack.send(ContentType.ROOT,
                     "メモ情報ID=" + seqRootUserNoteInfoId + ", S3キー=" + s3Key + "を削除.");
 
         } catch (Exception e) {
-            LOG.error("メモ情報の削除に失敗しました", e);
 
             // DELETE処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
+
+            LOG.error("メモ情報の削除に失敗しました", e);
+            slack.sendError(ContentType.ROOT, e);
 
             // エラーレスポンスを返却
             return ResponseEntity.badRequest()

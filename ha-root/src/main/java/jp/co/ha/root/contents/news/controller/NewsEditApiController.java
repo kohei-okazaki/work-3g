@@ -68,9 +68,6 @@ public class NewsEditApiController
 
         // お知らせ情報JSONアップロード
         newsComponent.upload(optional.get().getS3Key(), dto);
-        // Slack通知
-        newsComponent.sendSlack(dto, "編集したお知らせ情報.json",
-                "お知らせ情報ID=" + seqNewsInfoId + "を編集.");
 
         return ResponseEntity.ok(getSuccessResponse());
     }

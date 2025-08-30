@@ -17,6 +17,8 @@ public enum CommonFlag implements BaseEnum {
      *
      * @param value
      *     値
+     * @param bool
+     *     真偽値
      */
     private CommonFlag(String value, boolean bool) {
         this.value = value;

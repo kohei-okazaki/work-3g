@@ -20,7 +20,7 @@ public abstract class BaseExample {
     protected Pageable pageable;
 
     /**
-     * limitを返す
+     * 検索上限数を返す
      *
      * @return limit
      */
@@ -29,7 +29,7 @@ public abstract class BaseExample {
     }
 
     /**
-     * limitを設定する
+     * 検索上限数を設定する
      *
      * @param limit
      *     検索上限数
@@ -39,7 +39,7 @@ public abstract class BaseExample {
     }
 
     /**
-     * lockを返す
+     * ロック有無を返す
      *
      * @return lock
      */
@@ -48,7 +48,7 @@ public abstract class BaseExample {
     }
 
     /**
-     * lockを設定する
+     * ロック有無を設定する
      *
      * @param lock
      *     ロック有無
@@ -58,7 +58,7 @@ public abstract class BaseExample {
     }
 
     /**
-     * pageableを返す
+     * ページャブルを返す
      *
      * @return pageable
      */
@@ -67,7 +67,7 @@ public abstract class BaseExample {
     }
 
     /**
-     * pageableを設定する
+     * ページャブルを設定する
      *
      * @param pageable
      *     ページャブル

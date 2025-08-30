@@ -13,10 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.BaseAppError;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -28,9 +25,6 @@ import jp.co.ha.dashboard.view.DashboardView;
 public class DashboardExceptionHandler extends BaseExceptionHandler
         implements HandlerExceptionResolver {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(DashboardExceptionHandler.class);
     /** SlackComponent */
     @Autowired
     private SlackApiComponent slack;
@@ -45,12 +39,9 @@ public class DashboardExceptionHandler extends BaseExceptionHandler
         // log出力
         outLog(logErrorMessage, e);
 
-        // Slackに通知
-        try {
-            slack.send(ContentType.DASHBOARD, logErrorMessage);
-        } catch (BaseException be) {
-            LOG.error("slack通知に失敗しました", be);
-        }
+        slack.send(ContentType.DASHBOARD, logErrorMessage);
+
+        slack.sendError(ContentType.DASHBOARD, e);
 
         request.setAttribute("errorMessage", getDispErrorMessage(e));
 

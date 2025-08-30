@@ -74,8 +74,9 @@ public class InquiryServiceImpl implements InquiryService {
         inquiryManagementCreateService.create(entity);
 
         // Slack通知
-        slack.send(ContentType.DASHBOARD,
-                "問い合わせユーザID=" + seqUserId + "問い合わせ内容=" + inquiryForm.getBody());
+        slack.sendFile(ContentType.DASHBOARD, inquiryForm.getBody().getBytes(), s3Key,
+                "問い合わせ登録", "問い合わせユーザID=" + seqUserId + ", S3キー=" + s3Key
+                        + "を登録.");
 
     }
 
