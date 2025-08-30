@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.RootLoginInfoCreateService;
 import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
 import jp.co.ha.business.db.crud.create.RootUserRoleMngMtCreateService;
@@ -70,6 +72,9 @@ public class UserEntryApiController
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
+    /** SlackApiComponent */
+    @Autowired
+    private SlackApiComponent slack;
 
     /**
      * ユーザ登録処理
@@ -132,6 +137,7 @@ public class UserEntryApiController
         } catch (Exception e) {
 
             LOG.error("データの登録に失敗しました", e);
+            slack.sendError(ContentType.ROOT, e);
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
 

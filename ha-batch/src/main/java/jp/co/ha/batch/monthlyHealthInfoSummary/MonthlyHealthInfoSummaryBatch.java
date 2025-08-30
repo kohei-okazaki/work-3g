@@ -90,13 +90,11 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         // 月次健康情報集計CSV
         File csv = writeCsv(targetDate, modelList);
         // S3ファイルをアップロード
-        s3.putFile(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName(), csv);
+        String s3key = AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName();
+        s3.putFile(s3key, csv);
 
         // Slack通知
-        slack.send(ContentType.BATCH, "S3ファイルアップロード完了. key="
-                + AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName());
-
-        // Slack通知
+        slack.sendFile(ContentType.BATCH, csv, "S3ファイルアップロード完了. key=" + s3key);
         slack.send(ContentType.BATCH,
                 "monthly_health_info_summary_batch success.");
 

@@ -69,8 +69,9 @@ public class NoteEntryApiController
         // 管理者サイトユーザメモ情報を登録
         rootUserNoteInfoCreateService.create(entity);
         // Slack通知
-        slack.send(ContentType.ROOT, "メモ情報ID=" + entity.getSeqRootUserNoteInfoId()
-                + ", S3キー=" + s3Key + "を登録.");
+        slack.sendFile(ContentType.ROOT, request.getDetail().getBytes(), s3Key,
+                "メモ登録", "メモ情報ID=" + entity.getSeqRootUserNoteInfoId() + ", S3キー=" + s3Key
+                        + "を登録.");
 
         return ResponseEntity.ok(getSuccessResponse());
     }

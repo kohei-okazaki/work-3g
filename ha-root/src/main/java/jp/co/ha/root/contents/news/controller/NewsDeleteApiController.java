@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.delete.NewsInfoDeleteService;
 import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
 import jp.co.ha.common.exception.BaseException;
@@ -52,6 +54,9 @@ public class NewsDeleteApiController
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
+    /** Slack Component */
+    @Autowired
+    private SlackApiComponent slack;
 
     /**
      * お知らせ情報削除
@@ -81,20 +86,25 @@ public class NewsDeleteApiController
                 .getTransaction(defaultTransactionDefinition);
 
         try {
+            // お知らせ情報JSONを削除
+            newsComponent.remove(optional.get().getS3Key());
+
             // お知らせ情報を削除
             deleteService.delete(seqNewsInfoId);
 
-            // お知らせ情報JSONを削除
-            newsComponent.remove(optional.get().getS3Key());
+            // お知らせ情報JSONまで削除できたらコミット
+            transactionManager.commit(status);
 
             // Slack通知
             newsComponent.sendSlack(seqNewsInfoId);
 
         } catch (Exception e) {
-            LOG.error("お知らせ情報の削除に失敗しました", e);
 
             // DELETE処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
+
+            LOG.error("お知らせ情報の削除に失敗しました", e);
+            slack.sendError(ContentType.ROOT, e);
 
             // エラーレスポンスを返却
             return ResponseEntity.badRequest()

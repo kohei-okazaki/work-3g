@@ -72,6 +72,10 @@ public class NewsComponent {
             byte[] jsonByte = json.getBytes(Charset.UTF_8.getValue());
             InputStream is = new ByteArrayInputStream(jsonByte);
             s3.putFile(s3Key, Long.valueOf(jsonByte.length), is);
+
+            // Slack通知
+            slack.sendFile(ContentType.ROOT, jsonByte, s3Key, "お知らせ登録/編集");
+
         } catch (JsonProcessingException e) {
             // JSON文字列への変換に失敗した場合
             throw new BusinessException(e);
@@ -91,23 +95,6 @@ public class NewsComponent {
      */
     public void remove(String s3Key) throws BusinessException {
         s3.removeS3ObjectByKeys(s3Key);
-    }
-
-    /**
-     * Slackへお知らせ情報登録/編集のメッセージを投稿する
-     *
-     * @param dto
-     *     お知らせ情報
-     * @param fileName
-     *     ファイル名
-     * @param message
-     *     Slackメッセージ
-     * @throws BaseException
-     *     Slackへの投稿に失敗した場合
-     */
-    public void sendSlack(NewsDto dto, String fileName, String message)
-            throws BaseException {
-        slack.send(ContentType.ROOT, message);
     }
 
     /**

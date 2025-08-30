@@ -68,8 +68,6 @@ public class NewsEntryApiController
         dto.setSeqNewsInfoId(news.getSeqNewsInfoId());
         newsComponent.upload(s3Key, dto);
 
-        newsComponent.sendSlack(dto, "追加したお知らせ情報.json", "お知らせ情報JSONを追加.");
-
         return ResponseEntity.ok(getSuccessResponse());
     }
 

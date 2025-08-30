@@ -16,10 +16,8 @@ import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.BaseAppError;
 import jp.co.ha.common.exception.BaseErrorCode;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.StringUtil;
@@ -62,47 +60,56 @@ public class BatchJobListener implements JobExecutionListener {
     @Override
     public void afterJob(JobExecution jobExecution) {
 
-        try {
-            String message = new StringJoiner(StringUtil.COMMA)
-                    .add("id=" + jobExecution.getJobId())
-                    .add("job_instance_id="
-                            + jobExecution.getJobInstance().getInstanceId())
-                    .add("name=" + jobExecution.getJobInstance().getJobName())
-                    .add("status=" + jobExecution.getStatus()).toString();
+        String message = new StringJoiner(StringUtil.COMMA)
+                .add("id=" + jobExecution.getJobId())
+                .add("job_instance_id="
+                        + jobExecution.getJobInstance().getInstanceId())
+                .add("name=" + jobExecution.getJobInstance().getJobName())
+                .add("status=" + jobExecution.getStatus()).toString();
 
-            if (BatchStatus.FAILED == jobExecution.getStatus()) {
-                for (Throwable t : jobExecution.getAllFailureExceptions()) {
-                    BaseAppError error = null;
-                    if (t instanceof BaseAppError) {
-                        error = (BaseAppError) t;
-                    } else {
-                        BaseErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
-                        String detail = messageSource.getMessage(
-                                errorCode.getOuterErrorCode(), null, Locale.getDefault());
-                        error = new SystemException(errorCode, detail);
-                    }
+        if (BatchStatus.FAILED == jobExecution.getStatus()) {
+            for (Throwable t : jobExecution.getAllFailureExceptions()) {
+                BaseAppError error = getAppError(t);
 
-                    StringBuilder errorMessage = new StringBuilder()
-                            .append(messageSource.getMessage(
-                                    error.getErrorCode().getOuterErrorCode(), null,
-                                    Locale.getDefault()))
-                            .append("(")
-                            .append(error.getErrorCode().getOuterErrorCode())
-                            .append(")");
-                    message += (", error_message=" + errorMessage.toString());
-                    slack.send(ContentType.BATCH, message);
-                }
+                StringBuilder errorMessage = new StringBuilder()
+                        .append(messageSource.getMessage(
+                                error.getErrorCode().getOuterErrorCode(), null,
+                                Locale.getDefault()))
+                        .append("(")
+                        .append(error.getErrorCode().getOuterErrorCode())
+                        .append(")");
+                message += (", error_message=" + errorMessage.toString());
+                slack.send(ContentType.BATCH, message);
+
+                slack.sendError(ContentType.BATCH, t);
             }
-
-            // Slackに通知
-            slack.send(ContentType.BATCH, message);
-            // ログ出力
-            LOG.debug("end JOB. " + message);
-
-        } catch (BaseException e) {
-            // Slackの通知に失敗した場合
-            throw new SystemRuntimeException(e);
         }
+
+        // Slackに通知
+        slack.send(ContentType.BATCH, message);
+        // ログ出力
+        LOG.debug("end JOB. " + message);
+    }
+
+    /**
+     * アプリケーション例外クラスを返す
+     * 
+     * @param t
+     *     例外
+     * @return アプリケーション例外
+     */
+    private BaseAppError getAppError(Throwable t) {
+        BaseAppError error = null;
+        if (t instanceof BaseAppError) {
+            error = (BaseAppError) t;
+        } else {
+            BaseErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
+            String detail = messageSource.getMessage(
+                    errorCode.getOuterErrorCode(), null, Locale.getDefault());
+            error = new SystemException(errorCode, detail);
+        }
+
+        return error;
     }
 
 }
