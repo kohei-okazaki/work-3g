@@ -37,6 +37,8 @@ import jp.co.ha.db.entity.NewsInfo;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
+    /** JSON読取クラス */
+    private static final JsonReader JSON_READER = new JsonReader();
     /** お知らせ情報検索サービス */
     @Autowired
     private NewsInfoSearchService searchService;
@@ -76,10 +78,7 @@ public class NewsController implements BaseWebController {
 
             // S3からお知らせJSONを取得
             try (InputStream is = s3.getS3ObjectByKey(entity.getS3Key())) {
-
-                NewsDto dto = new JsonReader().read(is, NewsDto.class);
-                newsList.add(dto);
-
+                newsList.add(JSON_READER.read(is, NewsDto.class));
             } catch (IOException e) {
                 throw new SystemException(e);
             }

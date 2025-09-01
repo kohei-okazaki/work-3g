@@ -34,6 +34,8 @@ public class NewsInfoSearchServiceImpl implements NewsInfoSearchService {
     public List<NewsInfo> findAll(SelectOption selectOption) {
 
         NewsInfoExample example = new NewsInfoExample();
+        NewsInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andDeleteFlagEqualTo(false);
         example.setOrderByClause(selectOption.getOrderBy());
 
         return mapper.selectByExampleWithRowbounds(example, selectOption.toRowBounds());
@@ -50,6 +52,8 @@ public class NewsInfoSearchServiceImpl implements NewsInfoSearchService {
             // お知らせ情報ID
             criteria.andSeqNewsInfoIdEqualTo(seqNewsInfoId);
         }
+        criteria.andDeleteFlagEqualTo(false);
+
         return mapper.countByExample(example);
     }
 
