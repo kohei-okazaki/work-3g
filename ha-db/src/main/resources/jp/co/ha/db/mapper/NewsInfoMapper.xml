@@ -294,7 +294,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from news_info
+    from NEWS_INFO
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
