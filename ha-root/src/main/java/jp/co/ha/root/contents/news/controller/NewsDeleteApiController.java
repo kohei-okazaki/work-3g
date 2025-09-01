@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.component.NewsComponent;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.news.request.NewsDeleteApiRequest;
@@ -36,13 +35,11 @@ public class NewsDeleteApiController
      * @param request
      *     おしらせ情報削除APIリクエスト
      * @return おしらせ情報削除APIレスポンス
-     * @throws BaseException
-     *     URLが不正な場合
      */
     @DeleteMapping(value = "news/{seq_news_info_id}")
     public ResponseEntity<NewsDeleteApiResponse> delete(
             @PathVariable(name = "seq_news_info_id", required = true) Long seqNewsInfoId,
-            NewsDeleteApiRequest request) throws BaseException {
+            NewsDeleteApiRequest request) {
 
         // お知らせ情報を検索
         Optional<NewsInfo> optional = component.findById(seqNewsInfoId);
