@@ -99,7 +99,7 @@ public class AesCrypter implements Crypter {
     private byte[] getKey() {
         try {
             return cryptConfig.getKey().getBytes(Charset.UTF_8.getValue());
-        } catch (UnsupportedEncodingException e) {
+        } catch (@SuppressWarnings("unused") UnsupportedEncodingException e) {
             // 文字コードはUTF-8なので発生しない想定
             return null;
         }

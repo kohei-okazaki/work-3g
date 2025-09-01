@@ -41,14 +41,14 @@
 <!--    <table schema="work3g" tableName="ROOT_USER_ROLE_MNG_MT" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="ROOT_USER_ROLE_DETAIL_MT" modelType="hierarchical" /> -->
 <!--    <table schema="work3g" tableName="ROOT_ROLE_MT" modelType="hierarchical" /> -->
-<!--    <table schema="work3g" tableName="ROOT_USER_NOTE_INFO" modelType="hierarchical" /> -->
-<!--    <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" /> -->
+    <table schema="work3g" tableName="ROOT_USER_NOTE_INFO" modelType="hierarchical" /> 
+    <table schema="work3g" tableName="NEWS_INFO" modelType="hierarchical" /> 
 <!--    <table schema="work3g" tableName="USER" modelType="hierarchical" />-->
 <!--    <table schema="work3g" tableName="USER_RECOVERY_TOKEN" modelType="hierarchical" />-->
 <!--    <table schema="work3g" tableName="USER_HEALTH_GOAL" modelType="hierarchical" />-->
 <!--    <table schema="work3g" tableName="INQUIRY_MANAGEMENT" modelType="hierarchical" />-->
 <!--    <table schema="work3g" tableName="INQUIRY_TYPE_MT" modelType="hierarchical" />-->
-    <table schema="work3g" tableName="INQUIRY_STATUS_MT" modelType="hierarchical" />
+<!--    <table schema="work3g" tableName="INQUIRY_STATUS_MT" modelType="hierarchical" />-->
 
   </context>
 </generatorConfiguration>

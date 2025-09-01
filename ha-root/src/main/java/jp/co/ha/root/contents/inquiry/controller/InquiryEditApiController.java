@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.component.InquiryComponent;
-import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.inquiry.request.InquiryEditApiRequest;
@@ -26,9 +25,6 @@ import jp.co.ha.root.contents.inquiry.response.InquiryEditApiResponse;
 public class InquiryEditApiController
         extends BaseRootApiController<InquiryEditApiRequest, InquiryEditApiResponse> {
 
-    /** 問い合わせ管理情報検索サービス */
-    @Autowired
-    private InquiryManagementSelectService inquiryManagementSelectService;
     /** 問い合わせ関連Component */
     @Autowired
     private InquiryComponent inquiryComponent;
@@ -50,7 +46,7 @@ public class InquiryEditApiController
             @PathVariable(name = "seq_inquriy_mng_id", required = true) Long seqInquriyMngId,
             @Valid @RequestBody InquiryEditApiRequest request) throws BaseException {
 
-        if (!inquiryManagementSelectService.isExistBySeqInquiryMngId(seqInquriyMngId)) {
+        if (!inquiryComponent.isExistBySeqInquiryMngId(seqInquriyMngId)) {
             // 問い合わせ情報管理IDがDBに存在しない場合
             return ResponseEntity.badRequest()
                     .body(getErrorResponse(

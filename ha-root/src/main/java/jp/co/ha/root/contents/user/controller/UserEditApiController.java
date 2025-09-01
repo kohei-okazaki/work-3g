@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
 import jp.co.ha.business.db.crud.delete.RootUserRoleDetailMtDeleteService;
 import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
@@ -140,6 +141,7 @@ public class UserEditApiController
         } catch (Exception e) {
 
             LOG.error("データの更新に失敗しました", e);
+            slack.sendError(ContentType.ROOT, e);
 
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);

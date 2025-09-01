@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.common.log.Logger;
@@ -64,6 +65,7 @@ public class TopApiController
 
         } catch (DateTimeException e) {
             LOG.warn("date parse error. date=" + date, e);
+            slack.sendError(ContentType.ROOT, e);
             return ResponseEntity.badRequest().body(
                     getErrorResponse("date format error. date is yyyymm"));
         }
@@ -108,6 +110,7 @@ public class TopApiController
 
         } catch (DateTimeException e) {
             LOG.warn("date parse error. date=" + date, e);
+            slack.sendError(ContentType.ROOT, e);
             return ResponseEntity.badRequest().body(
                     getErrorResponse("date format error. date is yyyymm"));
         }
@@ -145,6 +148,7 @@ public class TopApiController
 
         } catch (DateTimeException e) {
             LOG.warn("date parse error. date=" + date, e);
+            slack.sendError(ContentType.ROOT, e);
             return ResponseEntity.badRequest().body(
                     getErrorResponse("date format error. date is yyyymm"));
         }

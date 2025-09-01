@@ -1,10 +1,5 @@
 package jp.co.ha.root.contents.inquiry.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
-import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.business.component.InquiryComponent;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -39,12 +32,9 @@ import jp.co.ha.root.contents.inquiry.response.InquiryListApiResponse;
 public class InquiryListApiController
         extends BaseRootApiController<InquiryListApiRequest, InquiryListApiResponse> {
 
-    /** 問い合わせ管理情報検索サービス */
+    /** 問い合わせ関連Component */
     @Autowired
-    private InquiryManagementSelectService inquiryManagementSelectService;
-    /** AWS-S3 Component */
-    @Autowired
-    private AwsS3Component s3;
+    private InquiryComponent component;
 
     /**
      * 問い合わせ情報一覧取得
@@ -70,8 +60,7 @@ public class InquiryListApiController
                 .orderBy("REG_DATE", SortType.ASC)
                 .pageable(pageable)
                 .build();
-        List<CompositeInquiry> list = inquiryManagementSelectService
-                .findAll(selectOption);
+        List<CompositeInquiry> list = component.getInquiryList(selectOption);
 
         InquiryListApiResponse response = getSuccessResponse();
 
@@ -80,63 +69,36 @@ public class InquiryListApiController
         for (CompositeInquiry entity : list) {
             InquiryListApiResponse.Inquiry inquiryResponse = new InquiryListApiResponse.Inquiry();
 
+            // inquiryオブジェクト設定
             inquiryResponse.setSeqInquiryMngId(entity.getSeqInquiryMngId());
             inquiryResponse.setSeqUserId(entity.getSeqUserId());
             inquiryResponse.setSeqLoginId(entity.getResponderLoginId());
+            inquiryResponse.setTitle(entity.getTitle());
+            inquiryResponse.setBody(component.getInquiryBody(entity));
+            inquiryResponse.setRegDate(entity.getRegDate());
+            inquiryResponse.setUpdateDate(entity.getUpdateDate());
 
+            // statusオブジェクト設定
             InquiryListApiResponse.Status status = new InquiryListApiResponse.Status();
             status.setLabel(entity.getInquiryStatusName());
             status.setValue(entity.getInquiryStatus());
             inquiryResponse.setStatus(status);
 
+            // typeオブジェクト設定
             InquiryListApiResponse.Type type = new InquiryListApiResponse.Type();
             type.setLabel(entity.getInquiryTypeName());
             type.setValue(entity.getInquiryType());
             inquiryResponse.setType(type);
 
-            inquiryResponse.setTitle(entity.getTitle());
-            inquiryResponse.setBody(getInquiryBody(entity));
-            inquiryResponse.setRegDate(entity.getRegDate());
-            inquiryResponse.setUpdateDate(entity.getUpdateDate());
-
             responseList.add(inquiryResponse);
-
         }
         response.setInquiryList(responseList);
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "inquiry?page",
-                inquiryManagementSelectService.count());
+                component.count());
         response.setPaging(paging);
 
         return ResponseEntity.ok(response);
-    }
-
-    /**
-     * S3の問い合わせ内容を返す
-     *
-     * @param entity
-     *     問い合わせ情報
-     * @return 問い合わせ内容
-     * @throws BaseException
-     *     S3からデータの取得に失敗した場合
-     */
-    private String getInquiryBody(CompositeInquiry entity) throws BaseException {
-
-        try (InputStream is = s3.getS3ObjectByKey(entity.getS3Key());
-                Reader r = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(r)) {
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-
-            return sb.toString();
-        } catch (IOException e) {
-            throw new BusinessException(e);
-        }
-
     }
 
     @Override

@@ -10,8 +10,10 @@ import software.amazon.awssdk.regions.Region;
  * <ul>
  * <li>リージョン：設定ファイルで東京を設定</li>
  * <li>バケット名：環境毎にバケットを設定</li>
- * <li>S3タイムアウト：設定ファイルで10秒を設定</li>
- * <li>SESタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>S3コネクションタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>S3ソケットタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>SESコネクションタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>SESソケットタイムアウト：設定ファイルで10秒を設定</li>
  * <li>SESスタブフラグ：true:メールを送信しない、false:送信する</li>
  * </ul>
  *
@@ -24,10 +26,14 @@ public class AwsProperties {
     private Region region;
     /** バケット名 */
     private String backet;
-    /** S3タイムアウト */
-    private int s3Timeout;
-    /** SESタイムアウト */
-    private int sesTimeout;
+    /** S3コネクションタイムアウト */
+    private int s3ConnnectionTimeout;
+    /** S3ソケットタイムアウト */
+    private int s3SocketTimeout;
+    /** SESコネクションタイムアウト */
+    private int sesConnnectionTimeout;
+    /** SESソケットタイムアウト */
+    private int sesSocketTimeout;
     /** SESスタブフラグ(true:メールを送信しない、false:送信する) */
     private boolean sesStubFlag;
 
@@ -71,41 +77,79 @@ public class AwsProperties {
     }
 
     /**
-     * S3タイムアウトを返す
-     *
-     * @return s3Timeout
+     * S3コネクションタイムアウトを返す
+     * 
+     * @return s3ConnnectionTimeout
      */
-    public int getS3Timeout() {
-        return s3Timeout;
+    public int getS3ConnnectionTimeout() {
+        return s3ConnnectionTimeout;
     }
 
     /**
-     * S3タイムアウトを設定する
-     *
-     * @param s3Timeout
-     *     S3タイムアウト
+     * S3コネクションタイムアウトを設定する
+     * 
+     * @param s3ConnnectionTimeout
+     *     S3コネクションタイムアウト
      */
-    public void setS3Timeout(int s3Timeout) {
-        this.s3Timeout = s3Timeout;
+    public void setS3ConnnectionTimeout(int s3ConnnectionTimeout) {
+        this.s3ConnnectionTimeout = s3ConnnectionTimeout;
     }
 
     /**
-     * SESタイムアウトを返す
-     *
-     * @return sesTimeout
+     * S3ソケットタイムアウトを返す
+     * 
+     * @return s3SocketTimeout
      */
-    public int getSesTimeout() {
-        return sesTimeout;
+    public int getS3SocketTimeout() {
+        return s3SocketTimeout;
     }
 
     /**
-     * SESタイムアウトを設定する
-     *
-     * @param sesTimeout
-     *     SESタイムアウト
+     * S3ソケットタイムアウトを設定する
+     * 
+     * @param s3SocketTimeout
+     *     S3ソケットタイムアウト
      */
-    public void setSesTimeout(int sesTimeout) {
-        this.sesTimeout = sesTimeout;
+    public void setS3SocketTimeout(int s3SocketTimeout) {
+        this.s3SocketTimeout = s3SocketTimeout;
+    }
+
+    /**
+     * SESコネクションタイムアウトを返す
+     * 
+     * @return sesConnnectionTimeout
+     */
+    public int getSesConnnectionTimeout() {
+        return sesConnnectionTimeout;
+    }
+
+    /**
+     * SESコネクションタイムアウトを設定する
+     * 
+     * @param sesConnnectionTimeout
+     *     SESコネクションタイムアウト
+     */
+    public void setSesConnnectionTimeout(int sesConnnectionTimeout) {
+        this.sesConnnectionTimeout = sesConnnectionTimeout;
+    }
+
+    /**
+     * SESソケットタイムアウトを返す
+     * 
+     * @return sesSocketTimeout
+     */
+    public int getSesSocketTimeout() {
+        return sesSocketTimeout;
+    }
+
+    /**
+     * SESソケットタイムアウトを設定する
+     * 
+     * @param sesSocketTimeout
+     *     SESソケットタイムアウト
+     */
+    public void setSesSocketTimeout(int sesSocketTimeout) {
+        this.sesSocketTimeout = sesSocketTimeout;
     }
 
     /**

@@ -1,7 +1,6 @@
 package jp.co.ha.dashboard.user.controller;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -301,15 +300,10 @@ public class UserRecoveryController implements BaseWebController {
      * @return メールテンプレートBody
      */
     private Map<String, String> getMailTemplateBody(UserRecoveryToken entity) {
-
-        Map<String, String> bodyMap = new HashMap<>();
-        // URL
-        bodyMap.put("url", properties.getHealthInfoDashboardUrl());
-        // ユーザID
-        bodyMap.put("seq_user_id", entity.getSeqUserId().toString());
-        // トークン
-        bodyMap.put("token", entity.getToken());
-        return bodyMap;
+        return Map.of(
+                "url", properties.getHealthInfoDashboardUrl(),
+                "seq_user_id", entity.getSeqUserId().toString(),
+                "token", entity.getToken());
     }
 
     /**

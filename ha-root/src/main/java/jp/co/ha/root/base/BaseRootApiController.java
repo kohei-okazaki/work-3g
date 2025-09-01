@@ -20,6 +20,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -50,6 +52,9 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
     /** アプリケーション設定ファイル */
     @Autowired
     protected ApplicationProperties applicationProperties;
+    /** Slack Component */
+    @Autowired
+    protected SlackApiComponent slack;
 
     /**
      * 日付形式不正例外ハンドラー
@@ -57,9 +62,13 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(DateTimeParseException.class)
-    public ResponseEntity<T2> handleDateTimeParseException(DateTimeParseException e) {
+    public ResponseEntity<T2> handleDateTimeParseException(DateTimeParseException e)
+            throws BaseException {
+
+        slack.sendError(ContentType.ROOT, e);
 
         LOG.warn("date format error");
 
@@ -73,12 +82,14 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Object> handleHttpMessageNotReadable(
-            HttpMessageNotReadableException e) {
+            HttpMessageNotReadableException e) throws BaseException {
 
         Throwable cause = e.getCause();
+        slack.sendError(ContentType.ROOT, e);
 
         if (cause instanceof InvalidFormatException) {
             InvalidFormatException ife = (InvalidFormatException) cause;
@@ -121,11 +132,15 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ResponseEntity<T2> handleNoHandlerFoundException(NoHandlerFoundException e) {
+    public ResponseEntity<T2> handleNoHandlerFoundException(NoHandlerFoundException e)
+            throws BaseException {
 
         LOG.warn("url is illegal", e);
+
+        slack.sendError(ContentType.ROOT, e);
 
         return ResponseEntity.badRequest().body(getErrorResponse("url is illegal"));
     }
@@ -136,12 +151,15 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<T2> handleMethodArgumentTypeMismatchException(
-            MethodArgumentTypeMismatchException e) {
+            MethodArgumentTypeMismatchException e) throws BaseException {
 
-        LOG.warn("parameter or url type error.");
+        LOG.warn("parameter or url type error.", e);
+
+        slack.sendError(ContentType.ROOT, e);
 
         return ResponseEntity.badRequest().body(
                 getErrorResponse(
@@ -154,10 +172,11 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ResponseEntity<T2> handleHandlerMethodValidationException(
-            HandlerMethodValidationException e) {
+            HandlerMethodValidationException e) throws BaseException {
 
         List<String> list = e.getParameterValidationResults().stream()
                 .flatMap(r -> r.getResolvableErrors().stream())
@@ -174,6 +193,8 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
             response.addError(errorData);
         }
 
+        slack.sendError(ContentType.ROOT, e);
+
         return ResponseEntity.badRequest().body(response);
     }
 
@@ -183,10 +204,11 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<T2> handleMethodArgumentNotValidException(
-            MethodArgumentNotValidException e) {
+            MethodArgumentNotValidException e) throws BaseException {
 
         T2 response = getErrorResponse();
         for (FieldError error : e.getBindingResult().getFieldErrors()) {
@@ -199,6 +221,8 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
             response.addError(errorData);
         }
 
+        slack.sendError(ContentType.ROOT, e);
+
         return ResponseEntity.badRequest().body(response);
     }
 
@@ -208,10 +232,11 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<T2> handleMissingServletRequestParameterException(
-            MissingServletRequestParameterException e) {
+            MissingServletRequestParameterException e) throws BaseException {
 
         T2 response = getErrorResponse();
 
@@ -223,6 +248,7 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
             errorData.setMessage(param + " is required");
             response.addError(errorData);
         }
+        slack.sendError(ContentType.ROOT, e);
 
         return ResponseEntity.badRequest().body(response);
     }
@@ -237,9 +263,12 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
      * @param e
      *     例外クラス
      * @return 異常系レスポンス
+     * @throws BaseException
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<T2> handleExceptions(Exception e) {
+    public ResponseEntity<T2> handleExceptions(Exception e) throws BaseException {
+
+        slack.sendError(ContentType.ROOT, e);
 
         if (e instanceof BaseException) {
             // アプリケーションエラーの場合

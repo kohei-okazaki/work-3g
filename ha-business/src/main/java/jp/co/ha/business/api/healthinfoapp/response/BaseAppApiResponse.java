@@ -71,7 +71,7 @@ public class BaseAppApiResponse implements BaseForm {
         }
 
         /**
-         * messageを返す
+         * メッセージを返す
          *
          * @return message
          */
