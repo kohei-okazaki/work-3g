@@ -1,4 +1,4 @@
-package jp.co.ha.business.news.service.impl;
+package jp.co.ha.business.component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -22,7 +22,6 @@ import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
 import jp.co.ha.business.db.crud.update.NewsInfoUpdateService;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
@@ -40,7 +39,7 @@ import jp.co.ha.db.entity.NewsInfo;
  * @version 1.0.0
  */
 @Service
-public class NewsServiceImpl implements NewsService {
+public class NewsComponent {
 
     /** JSON読取クラス */
     private static final JsonReader JSON_READER = new JsonReader();
@@ -61,7 +60,14 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private SlackApiComponent slack;
 
-    @Override
+    /**
+     * お知らせ情報Dtoを取得
+     * 
+     * @param s3Key
+     *     S3キー
+     * @return お知らせ情報Dto
+     * @throws BaseException
+     */
     public NewsDto getNewsDto(String s3Key) throws BaseException {
         // S3からお知らせJSONを取得
         try (InputStream is = s3.getS3ObjectByKey(s3Key)) {
@@ -71,7 +77,14 @@ public class NewsServiceImpl implements NewsService {
         }
     }
 
-    @Override
+    /**
+     * お知らせ情報を登録
+     * 
+     * @param dto
+     *     お知らせ情報Dto
+     * @throws BaseException
+     *     お知らせ情報JSONのアップロードに失敗した場合
+     */
     public void createNews(NewsDto dto) throws BaseException {
 
         // S3キーを取得
@@ -87,38 +100,80 @@ public class NewsServiceImpl implements NewsService {
         upload(s3Key, dto);
     }
 
-    @Override
+    /**
+     * お知らせ情報を更新
+     * 
+     * @param dto
+     *     お知らせ情報Dto
+     * @param s3Key
+     *     S3キー
+     * @throws BaseException
+     *     お知らせ情報JSONのアップロードに失敗した場合
+     */
     public void updateNews(NewsDto dto, String s3Key) throws BaseException {
         // お知らせ情報JSON アップロード
         upload(s3Key, dto);
     }
 
-    @Override
-    public void remove(String s3Key) throws BusinessException {
+    /**
+     * お知らせ情報を削除
+     * 
+     * @param s3Key
+     *     S3キー
+     * @throws BaseException
+     *     お知らせ情報JSONの削除に失敗した場合
+     */
+    public void remove(String s3Key) throws BaseException {
         s3.removeS3ObjectByKeys(s3Key);
     }
 
-    @Override
+    /**
+     * Slack通知
+     * 
+     * @param seqNewsInfoId
+     *     お知らせ情報ID
+     */
     public void sendSlack(Long seqNewsInfoId) {
         slack.send(ContentType.ROOT, "お知らせ情報ID=" + seqNewsInfoId + "を削除.");
     }
 
-    @Override
+    /**
+     * お知らせ情報一覧を取得
+     * 
+     * @param selectOption
+     *     SelectOption
+     * @return お知らせ情報一覧
+     */
     public List<NewsInfo> findAll(SelectOption selectOption) {
         return searchService.findAll(selectOption);
     }
 
-    @Override
+    /**
+     * お知らせ情報の総件数を取得する
+     * 
+     * @return 総件数
+     */
     public long count() {
         return searchService.countBySeqNewsInfoId(null);
     }
 
-    @Override
+    /**
+     * お知らせ情報を取得
+     * 
+     * @param seqNewsInfoId
+     *     お知らせ情報ID
+     * @return お知らせ情報
+     */
     public Optional<NewsInfo> findById(Long seqNewsInfoId) {
         return searchService.findById(seqNewsInfoId);
     }
 
-    @Override
+    /**
+     * お知らせ情報を論理削除
+     * 
+     * @param news
+     *     お知らせ情報
+     */
     public void updateLongicalDelete(NewsInfo news) {
         news.setDeleteFlag(true);
         updateService.update(news);

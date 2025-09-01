@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.business.dto.NewsDto;
-import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -26,9 +26,9 @@ import jp.co.ha.root.contents.news.response.NewsEntryApiResponse;
 public class NewsEntryApiController
         extends BaseRootApiController<NewsEntryApiRequest, NewsEntryApiResponse> {
 
-    /** お知らせ情報サービス */
+    /** お知らせ情報Component */
     @Autowired
-    private NewsService newsService;
+    private NewsComponent component;
 
     /**
      * 登録
@@ -47,7 +47,7 @@ public class NewsEntryApiController
         BeanUtil.copy(request, dto);
 
         // お知らせ情報の登録とJSONアップロード
-        newsService.createNews(dto);
+        component.createNews(dto);
 
         return ResponseEntity.ok(getSuccessResponse());
     }

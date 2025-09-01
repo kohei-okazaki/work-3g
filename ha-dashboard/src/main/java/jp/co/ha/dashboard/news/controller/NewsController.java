@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.business.dto.NewsDto;
-import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -32,9 +32,9 @@ import jp.co.ha.db.entity.NewsInfo;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-    /** お知らせ情報サービス */
+    /** お知らせ情報Component */
     @Autowired
-    private NewsService newsService;
+    private NewsComponent component;
     /** システム設定ファイル情報 */
     @Autowired
     private SystemProperties systemConfig;
@@ -64,15 +64,15 @@ public class NewsController implements BaseWebController {
                 .build();
 
         List<NewsDto> newsList = new ArrayList<>();
-        for (NewsInfo entity : newsService.findAll(selectOption)) {
+        for (NewsInfo entity : component.findAll(selectOption)) {
             // S3からお知らせJSONを取得
-            newsList.add(newsService.getNewsDto(entity.getS3Key()));
+            newsList.add(component.getNewsDto(entity.getS3Key()));
         }
 
         model.addAttribute("newsList", newsList);
         // ページング情報を設定
         model.addAttribute("paging", PagingViewFactory.getPageView(pageable,
-                "/news/list?page", newsService.count()));
+                "/news/list?page", component.count()));
 
         return getView(model, DashboardView.NEWS_LIST);
     }

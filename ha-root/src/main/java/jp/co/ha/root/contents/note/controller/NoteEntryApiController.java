@@ -64,6 +64,7 @@ public class NoteEntryApiController
 
         RootUserNoteInfo entity = new RootUserNoteInfo();
         entity.setS3Key(s3Key);
+        entity.setDeleteFlag(false);
         BeanUtil.copy(request, entity);
 
         // 管理者サイトユーザメモ情報を登録

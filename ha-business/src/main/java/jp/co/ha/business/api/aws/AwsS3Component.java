@@ -254,7 +254,6 @@ public class AwsS3Component {
         S3Client s3 = getS3Client();
 
         try {
-
             DeleteObjectsRequest deleteRequest = DeleteObjectsRequest.builder()
                     .bucket(awsProps.getBacket())
                     .delete(Delete.builder()

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.business.dto.NewsDto;
-import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.NewsInfo;
@@ -30,9 +30,9 @@ import jp.co.ha.root.contents.news.response.NewsEditApiResponse;
 public class NewsEditApiController
         extends BaseRootApiController<NewsEditApiRequest, NewsEditApiResponse> {
 
-    /** お知らせ情報サービス */
+    /** お知らせ情報Component */
     @Autowired
-    private NewsService newsService;
+    private NewsComponent component;
 
     /**
      * 編集
@@ -52,18 +52,18 @@ public class NewsEditApiController
             @Valid @RequestBody NewsEditApiRequest request) throws BaseException {
 
         // お知らせ情報を検索
-        Optional<NewsInfo> optional = newsService.findById(seqNewsInfoId);
+        Optional<NewsInfo> optional = component.findById(seqNewsInfoId);
         if (!optional.isPresent()) {
             return ResponseEntity.badRequest()
                     .body(getErrorResponse("news_info is not found"));
         }
 
         // S3からお知らせJSONを取得
-        NewsDto dto = newsService.getNewsDto(optional.get().getS3Key());
+        NewsDto dto = component.getNewsDto(optional.get().getS3Key());
         BeanUtil.copy(request, dto);
 
         // お知らせ情報更新
-        newsService.updateNews(dto, optional.get().getS3Key());
+        component.updateNews(dto, optional.get().getS3Key());
 
         return ResponseEntity.ok(getSuccessResponse());
     }

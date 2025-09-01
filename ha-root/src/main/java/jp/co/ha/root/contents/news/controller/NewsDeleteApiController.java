@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.news.service.NewsService;
+import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
@@ -24,9 +24,9 @@ import jp.co.ha.root.contents.news.response.NewsDeleteApiResponse;
 public class NewsDeleteApiController
         extends BaseRootApiController<NewsDeleteApiRequest, NewsDeleteApiResponse> {
 
-    /** お知らせ情報サービス */
+    /** お知らせ情報Component */
     @Autowired
-    private NewsService newsService;
+    private NewsComponent component;
 
     /**
      * 削除
@@ -45,17 +45,17 @@ public class NewsDeleteApiController
             NewsDeleteApiRequest request) throws BaseException {
 
         // お知らせ情報を検索
-        Optional<NewsInfo> optional = newsService.findById(seqNewsInfoId);
+        Optional<NewsInfo> optional = component.findById(seqNewsInfoId);
         if (!optional.isPresent()) {
             return ResponseEntity.badRequest()
                     .body(getErrorResponse("news_info is not found"));
         }
 
         // お知らせ情報を論理削除
-        newsService.updateLongicalDelete(optional.get());
+        component.updateLongicalDelete(optional.get());
 
         // Slack通知
-        newsService.sendSlack(seqNewsInfoId);
+        component.sendSlack(seqNewsInfoId);
 
         return ResponseEntity.ok(getSuccessResponse());
     }

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.business.dto.NewsDto;
-import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -34,9 +34,9 @@ import jp.co.ha.root.contents.news.response.NewsListApiResponse;
 public class NewsListApiController
         extends BaseRootApiController<NewsListApiRequest, NewsListApiResponse> {
 
-    /** お知らせ情報サービス */
+    /** お知らせ情報Component */
     @Autowired
-    private NewsService newsService;
+    private NewsComponent component;
 
     /**
      * 一覧取得
@@ -65,11 +65,11 @@ public class NewsListApiController
 
         // おしらせ情報 取得
         List<NewsListApiResponse.News> newsResponseList = new ArrayList<>();
-        for (NewsInfo entity : newsService.findAll(selectOption)) {
+        for (NewsInfo entity : component.findAll(selectOption)) {
             NewsListApiResponse.News newsResponse = new NewsListApiResponse.News();
             BeanUtil.copy(entity, newsResponse);
             // S3からお知らせJSONを取得
-            NewsDto dto = newsService.getNewsDto(entity.getS3Key());
+            NewsDto dto = component.getNewsDto(entity.getS3Key());
             BeanUtil.copy(dto, newsResponse);
 
             NewsListApiResponse.Tag responseTag = new NewsListApiResponse.Tag();
@@ -79,7 +79,7 @@ public class NewsListApiController
         }
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "news?page",
-                newsService.count());
+                component.count());
 
         NewsListApiResponse response = getSuccessResponse();
         response.setNewsList(newsResponseList);
