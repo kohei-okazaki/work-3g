@@ -54,7 +54,7 @@ public abstract class BaseRootApiController<T1 extends BaseRootApiRequest, T2 ex
     protected ApplicationProperties applicationProperties;
     /** Slack Component */
     @Autowired
-    private SlackApiComponent slack;
+    protected SlackApiComponent slack;
 
     /**
      * 日付形式不正例外ハンドラー

@@ -1,7 +1,5 @@
 package jp.co.ha.root.contents.news.controller;
 
-import java.util.StringJoiner;
-
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.create.NewsInfoCreateService;
+import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
-import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsEntryApiRequest;
 import jp.co.ha.root.contents.news.response.NewsEntryApiResponse;
 
@@ -34,15 +26,12 @@ import jp.co.ha.root.contents.news.response.NewsEntryApiResponse;
 public class NewsEntryApiController
         extends BaseRootApiController<NewsEntryApiRequest, NewsEntryApiResponse> {
 
-    /** お知らせ情報登録サービス */
-    @Autowired
-    private NewsInfoCreateService createService;
     /** お知らせ情報Component */
     @Autowired
-    private NewsComponent newsComponent;
+    private NewsComponent component;
 
     /**
-     * お知らせ情報登録処理
+     * 登録
      *
      * @param request
      *     お知らせ情報登録APIリクエスト
@@ -54,19 +43,15 @@ public class NewsEntryApiController
     public ResponseEntity<NewsEntryApiResponse> entry(
             @Valid @RequestBody NewsEntryApiRequest request) throws BaseException {
 
-        // S3キーを取得
-        String s3Key = getS3Key();
-        NewsInfo news = new NewsInfo();
-        news.setS3Key(s3Key);
-
-        // おしらせ情報 登録
-        createService.create(news);
-
-        // お知らせ情報JSON アップロード
         NewsDto dto = new NewsDto();
         BeanUtil.copy(request, dto);
-        dto.setSeqNewsInfoId(news.getSeqNewsInfoId());
-        newsComponent.upload(s3Key, dto);
+
+        NewsDto.Tag tag = new NewsDto.Tag();
+        BeanUtil.copy(request.getTag(), tag);
+        dto.setTag(tag);
+
+        // お知らせ情報の登録とJSONアップロード
+        component.createNews(dto);
 
         return ResponseEntity.ok(getSuccessResponse());
     }
@@ -74,19 +59,6 @@ public class NewsEntryApiController
     @Override
     protected NewsEntryApiResponse getResponse() {
         return new NewsEntryApiResponse();
-    }
-
-    /**
-     * S3キーを返す
-     *
-     * @return S3キー
-     */
-    private String getS3Key() {
-        return new StringJoiner(StringUtil.THRASH)
-                .add("news")
-                .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.JSON)
-                .toString();
     }
 
 }

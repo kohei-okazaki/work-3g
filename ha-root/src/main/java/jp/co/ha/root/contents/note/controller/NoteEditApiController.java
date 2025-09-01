@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
 import jp.co.ha.business.db.crud.update.RootUserNoteInfoUpdateService;
@@ -34,16 +33,13 @@ public class NoteEditApiController
 
     /** 管理者サイトユーザメモ情報検索サービス */
     @Autowired
-    private RootUserNoteInfoSearchService rootUserNoteInfoSearchService;
+    private RootUserNoteInfoSearchService searchService;
     /** 管理者サイトユーザメモ情報更新サービス */
     @Autowired
-    private RootUserNoteInfoUpdateService rootUserNoteInfoUpdateService;
+    private RootUserNoteInfoUpdateService updateService;
     /** AWS S3Component */
     @Autowired
     private AwsS3Component s3;
-    /** SlackApiComponent */
-    @Autowired
-    private SlackApiComponent slack;
 
     /**
      * メモ情報編集
@@ -62,7 +58,7 @@ public class NoteEditApiController
             @PathVariable(name = "seq_root_user_note_info_id", required = true) Long seqRootUserNoteInfoId,
             @Valid @RequestBody NoteEditApiRequest request) throws BaseException {
 
-        Optional<RootUserNoteInfo> optional = rootUserNoteInfoSearchService
+        Optional<RootUserNoteInfo> optional = searchService
                 .findById(Long.valueOf(seqRootUserNoteInfoId));
         if (!optional.isPresent()) {
             return ResponseEntity.badRequest()
@@ -73,7 +69,7 @@ public class NoteEditApiController
         RootUserNoteInfo entity = new RootUserNoteInfo();
         entity.setSeqRootUserNoteInfoId(seqRootUserNoteInfoId);
         entity.setTitle(request.getTitle());
-        rootUserNoteInfoUpdateService.updateById(entity);
+        updateService.updateById(entity);
 
         String s3Key = optional.get().getS3Key();
         // メモファイルの更新

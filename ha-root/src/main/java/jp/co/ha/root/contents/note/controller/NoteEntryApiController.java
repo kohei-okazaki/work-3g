@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.RootUserNoteInfoCreateService;
 import jp.co.ha.common.exception.BaseException;
@@ -41,9 +40,6 @@ public class NoteEntryApiController
     /** AWS S3Component */
     @Autowired
     private AwsS3Component s3;
-    /** SlackApiComponent */
-    @Autowired
-    private SlackApiComponent slack;
 
     /**
      * メモ登録処理
@@ -64,6 +60,7 @@ public class NoteEntryApiController
 
         RootUserNoteInfo entity = new RootUserNoteInfo();
         entity.setS3Key(s3Key);
+        entity.setDeleteFlag(false);
         BeanUtil.copy(request, entity);
 
         // 管理者サイトユーザメモ情報を登録

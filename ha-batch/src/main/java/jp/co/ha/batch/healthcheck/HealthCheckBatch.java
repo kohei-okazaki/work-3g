@@ -43,8 +43,7 @@ public class HealthCheckBatch implements Tasklet {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(HealthCheckBatch.class);
     /** ヘルスチェックAPIメールテンプレートID */
-    private static final String TEMPLATE_ID = MailTemplateKey.HEALTHINFO_CHECK_TEMPLATE
-            .getValue();
+    private static final MailTemplateKey TEMPLATE_ID = MailTemplateKey.HEALTHINFO_CHECK_TEMPLATE;
 
     /** API通信情報Component */
     @Autowired

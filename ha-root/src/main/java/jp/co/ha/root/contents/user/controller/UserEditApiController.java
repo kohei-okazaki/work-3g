@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
 import jp.co.ha.business.db.crud.delete.RootUserRoleDetailMtDeleteService;
@@ -79,9 +78,6 @@ public class UserEditApiController
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
-    /** SlackApiComponent */
-    @Autowired
-    private SlackApiComponent slack;
 
     /**
      * 編集

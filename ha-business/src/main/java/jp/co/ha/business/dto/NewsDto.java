@@ -3,8 +3,6 @@ package jp.co.ha.business.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jp.co.ha.common.validator.annotation.Required;
-
 /**
  * お知らせ情報Dto
  *
@@ -134,11 +132,9 @@ public class NewsDto {
 
         /** 色 */
         @JsonProperty("color")
-        @Required(message = "color is required")
         private String color;
         /** 名前 */
         @JsonProperty("name")
-        @Required(message = "name is required")
         private String name;
 
         /**
