@@ -16,7 +16,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.validator.annotation.Decimal;
@@ -66,16 +65,22 @@ public class NewsListApiController
         // おしらせ情報 取得
         List<NewsListApiResponse.News> newsResponseList = new ArrayList<>();
         for (NewsInfo entity : component.findAll(selectOption)) {
-            NewsListApiResponse.News newsResponse = new NewsListApiResponse.News();
-            BeanUtil.copy(entity, newsResponse);
+            NewsListApiResponse.News news = new NewsListApiResponse.News();
+            news.setSeqNewsInfoId(entity.getSeqNewsInfoId());
+            news.setRegDate(entity.getRegDate());
+            news.setUpdateDate(entity.getUpdateDate());
+
             // S3からお知らせJSONを取得
             NewsDto dto = component.getNewsDto(entity.getS3Key());
-            BeanUtil.copy(dto, newsResponse);
+            news.setTitle(dto.getTitle());
+            news.setDate(dto.getDate());
+            news.setDetail(dto.getDetail());
 
-            NewsListApiResponse.Tag responseTag = new NewsListApiResponse.Tag();
-            BeanUtil.copy(dto.getTag(), responseTag);
-            newsResponse.setTag(responseTag);
-            newsResponseList.add(newsResponse);
+            NewsListApiResponse.Tag tag = new NewsListApiResponse.Tag();
+            tag.setColor(dto.getTag().getColor());
+            tag.setName(dto.getTag().getName());
+            news.setTag(tag);
+            newsResponseList.add(news);
         }
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "news?page",

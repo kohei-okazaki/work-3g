@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.delete.RootUserNoteInfoDeleteService;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
@@ -48,9 +47,6 @@ public class NoteDeleteApiController
     /** AWS S3Component */
     @Autowired
     private AwsS3Component s3;
-    /** SlackApiComponent */
-    @Autowired
-    private SlackApiComponent slack;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;

@@ -91,6 +91,7 @@ public class NewsComponent {
         String s3Key = getS3Key();
         NewsInfo news = new NewsInfo();
         news.setS3Key(s3Key);
+        news.setDeleteFlag(false);
 
         // おしらせ情報 登録
         createService.create(news);

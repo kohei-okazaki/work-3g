@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.RootLoginInfoCreateService;
 import jp.co.ha.business.db.crud.create.RootUserRoleDetailMtCreateService;
@@ -72,9 +71,6 @@ public class UserEntryApiController
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition defaultTransactionDefinition;
-    /** SlackApiComponent */
-    @Autowired
-    private SlackApiComponent slack;
 
     /**
      * ユーザ登録処理

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
@@ -44,9 +43,6 @@ public class TopApiController
     /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
-    /** Slack Component */
-    @Autowired
-    private SlackApiComponent slack;
 
     /**
      * Top情報取得

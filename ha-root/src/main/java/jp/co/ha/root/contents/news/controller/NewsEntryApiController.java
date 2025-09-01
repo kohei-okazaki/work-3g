@@ -46,6 +46,10 @@ public class NewsEntryApiController
         NewsDto dto = new NewsDto();
         BeanUtil.copy(request, dto);
 
+        NewsDto.Tag tag = new NewsDto.Tag();
+        BeanUtil.copy(request.getTag(), tag);
+        dto.setTag(tag);
+
         // お知らせ情報の登録とJSONアップロード
         component.createNews(dto);
 
