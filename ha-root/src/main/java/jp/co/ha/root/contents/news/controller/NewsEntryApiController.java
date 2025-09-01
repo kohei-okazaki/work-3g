@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.db.crud.create.NewsInfoCreateService;
 import jp.co.ha.business.dto.NewsDto;
+import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -21,7 +22,6 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsEntryApiRequest;
 import jp.co.ha.root.contents.news.response.NewsEntryApiResponse;
 
@@ -37,9 +37,9 @@ public class NewsEntryApiController
     /** お知らせ情報登録サービス */
     @Autowired
     private NewsInfoCreateService createService;
-    /** お知らせ情報Component */
+    /** お知らせ情報サービス */
     @Autowired
-    private NewsComponent newsComponent;
+    private NewsService newsService;
 
     /**
      * お知らせ情報登録処理
@@ -66,7 +66,7 @@ public class NewsEntryApiController
         NewsDto dto = new NewsDto();
         BeanUtil.copy(request, dto);
         dto.setSeqNewsInfoId(news.getSeqNewsInfoId());
-        newsComponent.upload(s3Key, dto);
+        newsService.upload(s3Key, dto);
 
         return ResponseEntity.ok(getSuccessResponse());
     }

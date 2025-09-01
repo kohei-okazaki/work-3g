@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
@@ -268,7 +269,8 @@ public class AwsS3Component {
 
             s3.deleteObjects(deleteRequest);
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+            throw new SystemRuntimeException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
+                    e);
         }
     }
 

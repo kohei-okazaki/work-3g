@@ -1,7 +1,5 @@
 package jp.co.ha.dashboard.news.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
 import jp.co.ha.business.dto.NewsDto;
+import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SystemException;
-import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.web.controller.BaseWebController;
@@ -37,17 +32,12 @@ import jp.co.ha.db.entity.NewsInfo;
 @RequestMapping("news")
 public class NewsController implements BaseWebController {
 
-    /** JSON読取クラス */
-    private static final JsonReader JSON_READER = new JsonReader();
-    /** お知らせ情報検索サービス */
+    /** お知らせ情報サービス */
     @Autowired
-    private NewsInfoSearchService searchService;
+    private NewsService newsService;
     /** システム設定ファイル情報 */
     @Autowired
     private SystemProperties systemConfig;
-    /** AWS S3Component */
-    @Autowired
-    private AwsS3Component s3;
 
     /**
      * お知らせ一覧
@@ -74,21 +64,15 @@ public class NewsController implements BaseWebController {
                 .build();
 
         List<NewsDto> newsList = new ArrayList<>();
-        for (NewsInfo entity : searchService.findAll(selectOption)) {
-
+        for (NewsInfo entity : newsService.findAll(selectOption)) {
             // S3からお知らせJSONを取得
-            try (InputStream is = s3.getS3ObjectByKey(entity.getS3Key())) {
-                newsList.add(JSON_READER.read(is, NewsDto.class));
-            } catch (IOException e) {
-                throw new SystemException(e);
-            }
-
+            newsList.add(newsService.getNewsDto(entity.getS3Key()));
         }
 
         model.addAttribute("newsList", newsList);
         // ページング情報を設定
         model.addAttribute("paging", PagingViewFactory.getPageView(pageable,
-                "/news/list?page", searchService.countBySeqNewsInfoId(null)));
+                "/news/list?page", newsService.countBySeqNewsInfoId()));
 
         return getView(model, DashboardView.NEWS_LIST);
     }

@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.delete.NewsInfoDeleteService;
-import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
+import jp.co.ha.business.news.service.NewsService;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsDeleteApiRequest;
 import jp.co.ha.root.contents.news.response.NewsDeleteApiResponse;
 
@@ -38,15 +37,12 @@ public class NewsDeleteApiController
     private static final Logger LOG = LoggerFactory
             .getLogger(NewsDeleteApiController.class);
 
-    /** お知らせ情報検索サービス */
-    @Autowired
-    private NewsInfoSearchService searchService;
     /** お知らせ情報削除サービス */
     @Autowired
     private NewsInfoDeleteService deleteService;
-    /** お知らせ情報Component */
+    /** お知らせ情報サービス */
     @Autowired
-    private NewsComponent newsComponent;
+    private NewsService newsService;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -75,7 +71,7 @@ public class NewsDeleteApiController
             NewsDeleteApiRequest request) throws BaseException {
 
         // お知らせ情報を検索
-        Optional<NewsInfo> optional = searchService.findById(seqNewsInfoId);
+        Optional<NewsInfo> optional = newsService.findById(seqNewsInfoId);
         if (!optional.isPresent()) {
             return ResponseEntity.badRequest()
                     .body(getErrorResponse("news_info is not found"));
@@ -87,7 +83,7 @@ public class NewsDeleteApiController
 
         try {
             // お知らせ情報JSONを削除
-            newsComponent.remove(optional.get().getS3Key());
+            newsService.remove(optional.get().getS3Key());
 
             // お知らせ情報を削除
             deleteService.delete(seqNewsInfoId);
@@ -96,7 +92,7 @@ public class NewsDeleteApiController
             transactionManager.commit(status);
 
             // Slack通知
-            newsComponent.sendSlack(seqNewsInfoId);
+            newsService.sendSlack(seqNewsInfoId);
 
         } catch (Exception e) {
 

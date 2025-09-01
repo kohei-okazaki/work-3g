@@ -1,12 +1,14 @@
-package jp.co.ha.root.contents.news.component;
+package jp.co.ha.business.news.service.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,21 +16,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
+import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.business.news.service.NewsService;
+import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.db.entity.NewsInfo;
 
 /**
- * お知らせ情報に関するComponent
- *
+ * お知らせ情報に関するService実装クラス
+ * 
  * @version 1.0.0
  */
-@Component
-public class NewsComponent {
+@Service
+public class NewsServiceImpl implements NewsService {
 
+    /** JSON読取クラス */
+    private static final JsonReader JSON_READER = new JsonReader();
+
+    /** お知らせ情報検索サービス */
+    @Autowired
+    private NewsInfoSearchService searchService;
     /** AWS S3Component */
     @Autowired
     private AwsS3Component s3;
@@ -36,42 +48,30 @@ public class NewsComponent {
     @Autowired
     private SlackApiComponent slack;
 
-    /**
-     * 指定されたS3キーよりお知らせ情報JSONを取得
-     *
-     * @param s3Key
-     *     S3キー
-     * @return お知らせ情報
-     * @throws BaseException
-     */
+    @Override
     public NewsDto getNewsDto(String s3Key) throws BaseException {
 
         // S3からお知らせJSONを取得
         try (InputStream is = s3.getS3ObjectByKey(s3Key)) {
-            return new JsonReader().read(is, NewsDto.class);
+            return JSON_READER.read(is, NewsDto.class);
         } catch (IOException e) {
             throw new SystemException(e);
         }
 
     }
 
-    /**
-     * お知らせ情報JSONをS3へファイルアップロード
-     *
-     * @param s3Key
-     *     S3キー
-     * @param dto
-     *     お知らせ情報
-     * @throws BaseException
-     *     S3へのファイルアップロードに失敗した場合
-     */
+    @Override
     public void upload(String s3Key, NewsDto dto) throws BaseException {
 
         try {
             String json = new ObjectMapper().writeValueAsString(dto);
             byte[] jsonByte = json.getBytes(Charset.UTF_8.getValue());
-            InputStream is = new ByteArrayInputStream(jsonByte);
-            s3.putFile(s3Key, Long.valueOf(jsonByte.length), is);
+
+            try (InputStream is = new ByteArrayInputStream(jsonByte)) {
+                s3.putFile(s3Key, Long.valueOf(jsonByte.length), is);
+            } catch (IOException e) {
+                throw new BusinessException(e);
+            }
 
             // Slack通知
             slack.sendFile(ContentType.ROOT, jsonByte, s3Key, "お知らせ登録/編集");
@@ -85,28 +85,29 @@ public class NewsComponent {
         }
     }
 
-    /**
-     * 指定したS3キーを削除
-     *
-     * @param s3Key
-     *     S3キー
-     * @throws BusinessException
-     *     S3ファイル削除失敗エラー
-     */
+    @Override
     public void remove(String s3Key) throws BusinessException {
         s3.removeS3ObjectByKeys(s3Key);
     }
 
-    /**
-     * Slackへお知らせ情報削除のメッセージを投稿する
-     *
-     * @param seqNewsInfoId
-     *     お知らせ情報ID
-     * @throws BaseException
-     *     Slackへの投稿に失敗した場合
-     */
-    public void sendSlack(Long seqNewsInfoId) throws BaseException {
+    @Override
+    public void sendSlack(Long seqNewsInfoId) {
         slack.send(ContentType.ROOT, "お知らせ情報ID=" + seqNewsInfoId + "を削除.");
+    }
+
+    @Override
+    public List<NewsInfo> findAll(SelectOption selectOption) {
+        return searchService.findAll(selectOption);
+    }
+
+    @Override
+    public long countBySeqNewsInfoId() {
+        return searchService.countBySeqNewsInfoId(null);
+    }
+
+    @Override
+    public Optional<NewsInfo> findById(Long seqNewsInfoId) {
+        return searchService.findById(seqNewsInfoId);
     }
 
 }
