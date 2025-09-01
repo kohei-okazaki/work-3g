@@ -17,13 +17,24 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsSesComponent;
+import jp.co.ha.business.api.slack.SlackApiComponent;
+import jp.co.ha.business.db.crud.create.InquiryManagementCreateService;
 import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
+import jp.co.ha.business.db.crud.read.InquiryTypeMtSearchService;
 import jp.co.ha.business.db.crud.update.InquiryManagementUpdateService;
+import jp.co.ha.business.dto.InquiryDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.type.BaseEnum;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.InquiryManagement;
+import jp.co.ha.db.entity.InquiryTypeMt;
 import jp.co.ha.db.entity.composite.CompositeInquiry;
 
 /**
@@ -34,6 +45,21 @@ import jp.co.ha.db.entity.composite.CompositeInquiry;
 @Component
 public class InquiryComponent {
 
+    /** 問い合わせ検索用のSelectOption */
+    private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
+            .orderBy("DISP_ORDER", SortType.ASC)
+            .build();
+    /** Slack件名： */
+    private static final String SLACK_TITLE_REGIST = "問い合わせ登録";
+    /** Slack件名： */
+    private static final String SLACK_TITLE_OCCURED = "inquiry/";
+
+    /** 問い合わせ種別マスタ検索サービス */
+    @Autowired
+    private InquiryTypeMtSearchService inquiryTypeMtSearchService;
+    /** 問い合わせ管理情報作成サービス */
+    @Autowired
+    private InquiryManagementCreateService createService;
     /** 問い合わせ管理情報検索サービス */
     @Autowired
     private InquiryManagementSelectService selectService;
@@ -43,12 +69,74 @@ public class InquiryComponent {
     /** AWS-S3 Component */
     @Autowired
     private AwsS3Component s3;
+    /** AWS-SES Component */
+    @Autowired
+    private AwsSesComponent ses;
+    /** Slack Component */
+    @Autowired
+    private SlackApiComponent slack;
+    /** システムプロパティ */
+    @Autowired
+    private SystemProperties systemProps;
+
+    /**
+     * 問い合わせ種別リストを返す
+     * 
+     * @return 問い合わせ種別リスト
+     */
+    public List<InquiryTypeMt> getInquiryTypeMtList() {
+        return inquiryTypeMtSearchService.findAll(SELECT_OPTION);
+    }
+
+    /**
+     * 問い合わせ管理情報を登録する
+     * 
+     * @param dto
+     *     問い合わせDto
+     * @throws BaseException
+     *     問い合わせ情報の登録に失敗した場合
+     */
+    public void regist(InquiryDto dto) throws BaseException {
+
+        // S3登録
+        String sysdate = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
+                DateFormatType.YYYYMMDDHHMMSS_NOSEP);
+        String s3Key = AwsS3Component.AwsS3Key.INQUIRY.getValue() + dto.getSeqUserId()
+                + "/" + sysdate;
+        s3.putFile(s3Key, dto.getBody());
+
+        // DB登録
+        InquiryManagement entity = new InquiryManagement();
+        entity.setSeqUserId(dto.getSeqUserId());
+        entity.setS3Key(s3Key);
+        entity.setInquiryStatus(Status.NOT_STARTED.getValue());
+        entity.setInquiryType(dto.getType());
+        entity.setTitle(dto.getTitle());
+        entity.setDeleteFlag(false);
+        createService.create(entity);
+
+        // Slack通知
+        slack.sendFile(SlackApiComponent.ContentType.DASHBOARD, dto.getBody().getBytes(),
+                s3Key, SLACK_TITLE_REGIST,
+                "問い合わせユーザID=" + dto.getSeqUserId() + ", S3キー=" + s3Key + "を登録.");
+    }
+
+    /**
+     * 問い合わせ完了メールを送信する
+     * 
+     * @throws BaseException
+     *     メール送信に失敗した場合
+     */
+    public void sendMail() throws BaseException {
+        ses.sendMail(systemProps.getSystemMailAddress(), SLACK_TITLE_OCCURED,
+                AwsSesComponent.MailTemplateKey.INQUIRY_REGIST_TEMPLATE);
+    }
 
     /**
      * 問い合わせ情報一覧を取得する
      * 
      * @param selectOption
-     *     SelectOption
+     *     検索オプション
      * @return 問い合わせ情報一覧
      */
     public List<CompositeInquiry> getInquiryList(SelectOption selectOption) {
