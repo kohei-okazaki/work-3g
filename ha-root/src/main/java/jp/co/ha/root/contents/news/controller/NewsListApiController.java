@@ -10,19 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
+import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
-import jp.co.ha.root.contents.news.component.NewsComponent;
 import jp.co.ha.root.contents.news.request.NewsListApiRequest;
 import jp.co.ha.root.contents.news.response.NewsListApiResponse;
 
@@ -35,15 +33,12 @@ import jp.co.ha.root.contents.news.response.NewsListApiResponse;
 public class NewsListApiController
         extends BaseRootApiController<NewsListApiRequest, NewsListApiResponse> {
 
-    /** お知らせ情報検索サービス */
-    @Autowired
-    private NewsInfoSearchService searchService;
     /** お知らせ情報Component */
     @Autowired
-    private NewsComponent newsComponent;
+    private NewsComponent component;
 
     /**
-     * お知らせ情報一覧取得
+     * 一覧取得
      *
      * @param request
      *     お知らせ情報一覧取得APIリクエスト
@@ -69,21 +64,27 @@ public class NewsListApiController
 
         // おしらせ情報 取得
         List<NewsListApiResponse.News> newsResponseList = new ArrayList<>();
-        for (NewsInfo entity : searchService.findAll(selectOption)) {
-            NewsListApiResponse.News newsResponse = new NewsListApiResponse.News();
-            BeanUtil.copy(entity, newsResponse);
-            // S3からお知らせJSONを取得
-            NewsDto dto = newsComponent.getNewsDto(entity.getS3Key());
-            BeanUtil.copy(dto, newsResponse);
+        for (NewsInfo entity : component.findAll(selectOption)) {
+            NewsListApiResponse.News news = new NewsListApiResponse.News();
+            news.setSeqNewsInfoId(entity.getSeqNewsInfoId());
+            news.setRegDate(entity.getRegDate());
+            news.setUpdateDate(entity.getUpdateDate());
 
-            NewsListApiResponse.Tag responseTag = new NewsListApiResponse.Tag();
-            BeanUtil.copy(dto.getTag(), responseTag);
-            newsResponse.setTag(responseTag);
-            newsResponseList.add(newsResponse);
+            // S3からお知らせJSONを取得
+            NewsDto dto = component.getNewsDto(entity.getS3Key());
+            news.setTitle(dto.getTitle());
+            news.setDate(dto.getDate());
+            news.setDetail(dto.getDetail());
+
+            NewsListApiResponse.Tag tag = new NewsListApiResponse.Tag();
+            tag.setColor(dto.getTag().getColor());
+            tag.setName(dto.getTag().getName());
+            news.setTag(tag);
+            newsResponseList.add(news);
         }
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "news?page",
-                searchService.countBySeqNewsInfoId(null));
+                component.count());
 
         NewsListApiResponse response = getSuccessResponse();
         response.setNewsList(newsResponseList);

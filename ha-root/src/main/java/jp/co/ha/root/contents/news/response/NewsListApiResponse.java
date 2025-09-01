@@ -1,9 +1,13 @@
 package jp.co.ha.root.contents.news.response;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.common.web.form.JsonEntity;
@@ -62,6 +66,16 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
         /** タグ */
         @JsonProperty("tag")
         private Tag tag;
+        /** 登録日時 */
+        @JsonProperty("reg_date")
+        @JsonSerialize(using = LocalDateTimeSerializer.class)
+        @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
+        private LocalDateTime regDate;
+        /** 更新日時 */
+        @JsonProperty("update_date")
+        @JsonSerialize(using = LocalDateTimeSerializer.class)
+        @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
+        private LocalDateTime updateDate;
 
         /**
          * お知らせ情報IDを返す
@@ -156,6 +170,44 @@ public class NewsListApiResponse extends BaseRootApiResponse implements BaseApiR
          */
         public void setTag(Tag tag) {
             this.tag = tag;
+        }
+
+        /**
+         * 登録日時を返す
+         *
+         * @return regDate
+         */
+        public LocalDateTime getRegDate() {
+            return regDate;
+        }
+
+        /**
+         * 登録日時を設定する
+         *
+         * @param regDate
+         *     登録日時
+         */
+        public void setRegDate(LocalDateTime regDate) {
+            this.regDate = regDate;
+        }
+
+        /**
+         * 更新日時を返す
+         *
+         * @return updateDate
+         */
+        public LocalDateTime getUpdateDate() {
+            return updateDate;
+        }
+
+        /**
+         * 更新日時を設定する
+         *
+         * @param updateDate
+         *     更新日時
+         */
+        public void setUpdateDate(LocalDateTime updateDate) {
+            this.updateDate = updateDate;
         }
 
     }

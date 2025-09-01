@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
@@ -253,7 +254,6 @@ public class AwsS3Component {
         S3Client s3 = getS3Client();
 
         try {
-
             DeleteObjectsRequest deleteRequest = DeleteObjectsRequest.builder()
                     .bucket(awsProps.getBacket())
                     .delete(Delete.builder()
@@ -268,7 +268,8 @@ public class AwsS3Component {
 
             s3.deleteObjects(deleteRequest);
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+            throw new SystemRuntimeException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
+                    e);
         }
     }
 
@@ -285,8 +286,9 @@ public class AwsS3Component {
 
             // HttpClient にタイムアウトを設定する
             SdkHttpClient httpClient = ApacheHttpClient.builder()
-                    .connectionTimeout(Duration.ofMillis(awsProps.getS3Timeout()))
-                    .socketTimeout(Duration.ofMillis(awsProps.getS3Timeout()))
+                    .connectionTimeout(
+                            Duration.ofMillis(awsProps.getS3ConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.getS3SocketTimeout()))
                     .build();
 
             return S3Client.builder()

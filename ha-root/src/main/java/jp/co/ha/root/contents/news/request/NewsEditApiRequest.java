@@ -2,9 +2,9 @@ package jp.co.ha.root.contents.news.request;
 
 import jakarta.validation.Valid;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jp.co.ha.business.dto.NewsDto.Tag;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
@@ -107,6 +107,60 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
      */
     public void setTag(Tag tag) {
         this.tag = tag;
+    }
+
+    /**
+     * タグ情報
+     *
+     * @version 1.0.0
+     */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Tag {
+
+        /** 色 */
+        @JsonProperty("color")
+        private String color;
+        /** 名前 */
+        @JsonProperty("name")
+        private String name;
+
+        /**
+         * 色を返す
+         *
+         * @return color
+         */
+        public String getColor() {
+            return color;
+        }
+
+        /**
+         * 色を設定する
+         *
+         * @param color
+         *     色
+         */
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        /**
+         * 名前を返す
+         *
+         * @return name
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * 名前を設定する
+         *
+         * @param name
+         *     名前
+         */
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
 }

@@ -381,6 +381,8 @@ public class StringUtil {
                     return 'ベ';
                 case 'ﾎ':
                     return 'ボ';
+                default:
+                    break;
                 }
             }
         } else if (c2 == 'ﾟ') {
@@ -396,6 +398,8 @@ public class StringUtil {
                     return 'ペ';
                 case 'ﾎ':
                     return 'ポ';
+                default:
+                    break;
                 }
             }
         }

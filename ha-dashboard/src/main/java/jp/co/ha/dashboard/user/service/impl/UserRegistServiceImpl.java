@@ -138,6 +138,8 @@ public class UserRegistServiceImpl implements UserRegistService {
      * 
      * @param user
      *     ユーザ情報
+     * @param dto
+     *     ユーザ情報DTO
      * @return ユーザ健康目標情報
      */
     private UserHealthGoal toGoal(User user, UserDto dto) {

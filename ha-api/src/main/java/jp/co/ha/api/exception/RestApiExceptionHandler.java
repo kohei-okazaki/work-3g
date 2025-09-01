@@ -18,7 +18,6 @@ import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseAppError;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.BaseExceptionHandler;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
@@ -52,12 +51,8 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public BaseAppApiResponse handleException(Exception e) {
 
-        // Slackに通知
-        try {
-            slack.send(ContentType.API, super.getLogErrorMessage(e));
-        } catch (BaseException be) {
-            LOG.error("slack通知に失敗しました", be);
-        }
+        slack.send(ContentType.API, super.getLogErrorMessage(e));
+        slack.sendError(ContentType.API, e);
 
         BaseAppError appError = getAppError(e);
 

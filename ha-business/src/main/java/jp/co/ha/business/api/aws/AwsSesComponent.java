@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
@@ -158,7 +157,9 @@ public class AwsSesComponent {
         /** 健康管理ヘルスチェックのテンプレートキー */
         HEALTHINFO_CHECK_TEMPLATE("health-check-template.ftl"),
         /** 健康情報登録完了メールのテンプレートキー */
-        HEALTHINFO_REGIST_TEMPLATE("healthinfo-regist-template.ftl");
+        HEALTHINFO_REGIST_TEMPLATE("healthinfo-regist-template.ftl"),
+        /** 問い合わせ完了通知メールのテンプレートキー */
+        INQUIRY_REGIST_TEMPLATE("inquiry-regist-template.ftl");
 
         /**
          * コンストラクタ
@@ -214,25 +215,6 @@ public class AwsSesComponent {
      *     宛先メールアドレス
      * @param titleText
      *     メール件名
-     * @param s3Key
-     *     S3キー
-     * @return Eメール送信結果区分
-     * @throws BaseException
-     *     メール送信に失敗した場合
-     * @see #sendMail(String, String, String, Map)
-     */
-    public EmailSendResultType sendMail(String to, String titleText, AwsS3Key s3Key)
-            throws BaseException {
-        return sendMail(to, titleText, s3Key.getValue(), Collections.emptyMap());
-    }
-
-    /**
-     * Eメールを送信する
-     *
-     * @param to
-     *     宛先メールアドレス
-     * @param titleText
-     *     メール件名
      * @param templateId
      *     テンプレートID
      * @return Eメール送信結果区分
@@ -240,8 +222,8 @@ public class AwsSesComponent {
      *     メール送信に失敗した場合
      * @see #sendMail(String, String, String, Map)
      */
-    public EmailSendResultType sendMail(String to, String titleText, String templateId)
-            throws BaseException {
+    public EmailSendResultType sendMail(String to, String titleText,
+            MailTemplateKey templateId) throws BaseException {
         return sendMail(to, titleText, templateId, Collections.emptyMap());
     }
 
@@ -252,8 +234,8 @@ public class AwsSesComponent {
      *     宛先メールアドレス
      * @param titleText
      *     メール件名
-     * @param s3Key
-     *     S3キー
+     * @param templateKey
+     *     メールテンプレートキー
      * @param bodyMap
      *     メール本文を置換するmap
      * @return Eメール送信結果区分
@@ -261,8 +243,9 @@ public class AwsSesComponent {
      *     メール送信に失敗した場合
      */
     public EmailSendResultType sendMail(String to, String titleText,
-            MailTemplateKey s3Key, Map<String, String> bodyMap) throws BaseException {
-        return sendMail(to, titleText, s3Key.getValue(), bodyMap);
+            MailTemplateKey templateKey, Map<String, String> bodyMap)
+            throws BaseException {
+        return sendMail(to, titleText, templateKey.getValue(), bodyMap);
     }
 
     /**
@@ -330,8 +313,8 @@ public class AwsSesComponent {
 
         // HttpClient にタイムアウトを設定する
         SdkHttpClient httpClient = ApacheHttpClient.builder()
-                .connectionTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
-                .socketTimeout(Duration.ofMillis(awsProps.getSesTimeout()))
+                .connectionTimeout(Duration.ofMillis(awsProps.getSesConnnectionTimeout()))
+                .socketTimeout(Duration.ofMillis(awsProps.getSesSocketTimeout()))
                 .build();
 
         return SesClient.builder()
