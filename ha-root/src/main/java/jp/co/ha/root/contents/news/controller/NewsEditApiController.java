@@ -62,8 +62,8 @@ public class NewsEditApiController
         NewsDto dto = newsService.getNewsDto(optional.get().getS3Key());
         BeanUtil.copy(request, dto);
 
-        // お知らせ情報JSONアップロード
-        newsService.upload(optional.get().getS3Key(), dto);
+        // お知らせ情報更新
+        newsService.updateNews(dto, optional.get().getS3Key());
 
         return ResponseEntity.ok(getSuccessResponse());
     }

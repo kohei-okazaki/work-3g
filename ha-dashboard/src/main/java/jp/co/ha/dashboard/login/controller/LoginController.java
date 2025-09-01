@@ -315,6 +315,10 @@ public class LoginController implements BaseWebController {
                 model.addAttribute("diff", diff.stripTrailingZeros().toPlainString());
                 model.addAttribute("status", HealthInfoStatus.INCREASE.getValue());
                 break;
+            default:
+                model.addAttribute("diff", 0);
+                model.addAttribute("status", HealthInfoStatus.EVEN.getValue());
+                break;
             }
         }
     }

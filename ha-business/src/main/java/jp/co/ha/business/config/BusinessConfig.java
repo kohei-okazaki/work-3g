@@ -30,7 +30,7 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
         "jp.co.ha.business.api",
         "jp.co.ha.business.component",
         "jp.co.ha.business.cache",
-        "jp.co.ha.business.healthInfo.service",
+        "jp.co.ha.business.*.service",
         "jp.co.ha.business.interceptor"
 })
 // @PropertySource("classpath:mail.properties")

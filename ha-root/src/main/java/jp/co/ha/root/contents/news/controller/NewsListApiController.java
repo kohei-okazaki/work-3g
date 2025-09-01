@@ -39,7 +39,7 @@ public class NewsListApiController
     private NewsService newsService;
 
     /**
-     * お知らせ情報一覧取得
+     * 一覧取得
      *
      * @param request
      *     お知らせ情報一覧取得APIリクエスト
@@ -79,7 +79,7 @@ public class NewsListApiController
         }
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "news?page",
-                newsService.countBySeqNewsInfoId());
+                newsService.count());
 
         NewsListApiResponse response = getSuccessResponse();
         response.setNewsList(newsResponseList);

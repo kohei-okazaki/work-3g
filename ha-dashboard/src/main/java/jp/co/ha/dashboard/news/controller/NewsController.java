@@ -72,7 +72,7 @@ public class NewsController implements BaseWebController {
         model.addAttribute("newsList", newsList);
         // ページング情報を設定
         model.addAttribute("paging", PagingViewFactory.getPageView(pageable,
-                "/news/list?page", newsService.countBySeqNewsInfoId()));
+                "/news/list?page", newsService.count()));
 
         return getView(model, DashboardView.NEWS_LIST);
     }

@@ -27,16 +27,26 @@ public interface NewsService {
     NewsDto getNewsDto(String s3Key) throws BaseException;
 
     /**
-     * お知らせ情報JSONをS3へファイルアップロード
-     *
-     * @param s3Key
-     *     S3キー
+     * お知らせ情報を登録する
+     * 
      * @param dto
-     *     お知らせ情報
+     *     お知らせ情報DTO
      * @throws BaseException
      *     S3へのファイルアップロードに失敗した場合
      */
-    void upload(String s3Key, NewsDto dto) throws BaseException;
+    void createNews(NewsDto dto) throws BaseException;
+
+    /**
+     * お知らせ情報を更新する
+     * 
+     * @param dto
+     *     お知らせ情報DTO
+     * @param s3Key
+     *     S3キー
+     * @throws BaseException
+     *     S3へのファイルアップロードに失敗した場合
+     */
+    void updateNews(NewsDto dto, String s3Key) throws BaseException;
 
     /**
      * 指定したS3キーを削除
@@ -70,7 +80,7 @@ public interface NewsService {
      * 
      * @return 件数
      */
-    long countBySeqNewsInfoId();
+    long count();
 
     /**
      * 指定したお知らせ情報IDのお知らせ情報を検索する
@@ -80,5 +90,13 @@ public interface NewsService {
      * @return お知らせ情報
      */
     Optional<NewsInfo> findById(Long seqNewsInfoId);
+
+    /**
+     * お知らせ情報を論理削除する
+     * 
+     * @param news
+     *     お知らせ情報
+     */
+    void updateLongicalDelete(NewsInfo news);
 
 }
