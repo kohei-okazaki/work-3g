@@ -144,7 +144,7 @@ public class UserSettingServiceImpl implements UserSettingService {
         // ユーザ情報を検索
         User currentUser = userSearchService.findById(dto.getSeqUserId()).get();
 
-        BeanUtil.copy(dto, currentUser, "seqUserId", "reg_date");
+        BeanUtil.copy(dto, currentUser, "seqUserId", "regDate");
         currentUser.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
         currentUser.setPassword(
                 userComponent.getHashPassword(dto.getPassword(),
@@ -166,7 +166,7 @@ public class UserSettingServiceImpl implements UserSettingService {
         HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
                 .findById(dto.getSeqUserId()).get();
 
-        BeanUtil.copy(dto, healthInfoFileSetting, "seqUserId", "reg_date");
+        BeanUtil.copy(dto, healthInfoFileSetting, "seqUserId", "regDate");
 
         // 健康情報ファイル設定情報を更新する
         healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
