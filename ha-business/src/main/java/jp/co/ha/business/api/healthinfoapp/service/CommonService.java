@@ -3,7 +3,7 @@ package jp.co.ha.business.api.healthinfoapp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jp.co.ha.business.api.healthinfoapp.request.BaseAppApiRequest;
-import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -18,9 +18,9 @@ import jp.co.ha.db.entity.User;
  */
 public abstract class CommonService {
 
-    /** ユーザ情報検索サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserSearchService userSearchService;
+    private UserComponent userComponent;
 
     /**
      * 指定したAPI実行ユーザがAPIを実行できるか判定する<br>
@@ -34,7 +34,7 @@ public abstract class CommonService {
     protected void checkApiUse(BaseAppApiRequest request) throws BaseException {
 
         // ユーザ情報取得
-        User user = userSearchService.findById(request.getSeqUserId())
+        User user = userComponent.findById(request.getSeqUserId())
                 .orElseThrow(
                         () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
                                 "ユーザ情報が存在しません seqUserId:" + request.getSeqUserId()));

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -23,7 +23,6 @@ import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.user.form.UserRegistForm;
-import jp.co.ha.dashboard.user.service.UserRegistService;
 import jp.co.ha.dashboard.view.DashboardView;
 
 /**
@@ -38,12 +37,9 @@ public class UserRegistController implements BaseWizardController<UserRegistForm
     /** セッションキー：フォーム */
     private static final String SESSION_KEY_FORM = "userRegistForm";
 
-    /** ユーザ登録サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserRegistService userRegistService;
-    /** ユーザ検索サービス */
-    @Autowired
-    private UserSearchService userSearchService;
+    private UserComponent userComponent;
     /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
@@ -76,7 +72,7 @@ public class UserRegistController implements BaseWizardController<UserRegistForm
             return getView(model, DashboardView.ACCOUNT_REGIST_INPUT);
         }
 
-        if (userSearchService.isExistByMailAddress(form.getMailAddress())) {
+        if (userComponent.isExistByMailAddress(form.getMailAddress())) {
             model.addAttribute("errorMessage", "指定されたメールアドレスは既に登録されています");
             return getView(model, DashboardView.ACCOUNT_REGIST_INPUT);
         }
@@ -104,8 +100,8 @@ public class UserRegistController implements BaseWizardController<UserRegistForm
         UserDto dto = new UserDto();
         BeanUtil.copy(regForm, dto);
 
-        // Form情報から登録処理を行う
-        userRegistService.regist(dto);
+        // 登録処理を行う
+        userComponent.executeRegistUser(dto);
 
         sessionComponent.removeValue(request.getSession(), SESSION_KEY_FORM);
 

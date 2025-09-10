@@ -21,7 +21,7 @@ import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -51,9 +51,9 @@ public class HealthInfoFileRegistBatch implements Tasklet {
     /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi api;
-    /** ユーザ情報検索サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserSearchService userSearchService;
+    private UserComponent userComponent;
     /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
@@ -108,7 +108,7 @@ public class HealthInfoFileRegistBatch implements Tasklet {
             }
 
             // ユーザ情報.APIキーを設定
-            User user = userSearchService.findById(request.getSeqUserId())
+            User user = userComponent.findById(request.getSeqUserId())
                     .orElseThrow(() -> {
                         return new BusinessException(CommonErrorCode.DB_NO_DATA,
                                 "ユーザ情報が存在しません. seq_user_id=" + request.getSeqUserId());
