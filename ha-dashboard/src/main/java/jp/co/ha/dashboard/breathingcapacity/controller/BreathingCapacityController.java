@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.BreathingCapacityApiComponent;
 import jp.co.ha.business.component.UserComponent;
-import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.dto.BreathingCapacityDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
@@ -43,9 +42,6 @@ public class BreathingCapacityController implements BaseWebController {
     /** 肺活量計算APIComponent */
     @Autowired
     private BreathingCapacityApiComponent component;
-    /** ユーザ情報検索サービス */
-    @Autowired
-    private UserSearchService userSearchService;
     /** ユーザ関連Component */
     @Autowired
     private UserComponent userComponent;
@@ -66,7 +62,7 @@ public class BreathingCapacityController implements BaseWebController {
 
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
-        Optional<User> user = userSearchService.findById(seqUserId);
+        Optional<User> user = userComponent.findById(seqUserId);
 
         form.setAge(userComponent.getAge(user.get().getBirthDate()));
         form.setGender(user.get().getGenderType().toString());
@@ -116,7 +112,7 @@ public class BreathingCapacityController implements BaseWebController {
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
 
-        Optional<User> user = userSearchService.findById(seqUserId);
+        Optional<User> user = userComponent.findById(seqUserId);
 
         dto.setGenderType(GenderType.of(user.get().getGenderType().intValue()));
 
