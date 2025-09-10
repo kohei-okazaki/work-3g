@@ -14,8 +14,8 @@ import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTyp
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
@@ -55,9 +55,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     /** 健康情報計算サービス */
     @Autowired
     private HealthInfoCalcService healthInfoCalcService;
-    /** ユーザ情報検索サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserSearchService userSearchService;
+    private UserComponent userComponent;
     /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
@@ -95,7 +95,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
             throws BaseException {
 
         // ユーザ情報.APIキーを設定
-        User user = userSearchService.findById(seqUserId).get();
+        User user = userComponent.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
                 .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())

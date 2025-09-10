@@ -101,7 +101,7 @@ public class UserRegistController implements BaseWizardController<UserRegistForm
         BeanUtil.copy(regForm, dto);
 
         // 登録処理を行う
-        userComponent.registUser(dto);
+        userComponent.executeRegistUser(dto);
 
         sessionComponent.removeValue(request.getSession(), SESSION_KEY_FORM);
 

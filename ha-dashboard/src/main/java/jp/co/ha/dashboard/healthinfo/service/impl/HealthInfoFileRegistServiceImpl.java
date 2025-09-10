@@ -13,7 +13,7 @@ import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTyp
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
@@ -39,9 +39,9 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
     /** API通信情報Component */
     @Autowired
     private ApiCommunicationDataComponent apiCommunicationDataComponent;
-    /** ユーザ情報検索サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserSearchService userSearchService;
+    private UserComponent userComponent;
     /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
@@ -78,7 +78,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
             throws BaseException {
 
         // ユーザ情報.APIキーを設定
-        User user = userSearchService.findById(seqUserId).get();
+        User user = userComponent.findById(seqUserId).get();
 
         ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
                 .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())

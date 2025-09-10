@@ -2,6 +2,7 @@ package jp.co.ha.business.component;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +14,12 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import jp.co.ha.business.db.crud.create.HealthInfoFileSettingCreateService;
 import jp.co.ha.business.db.crud.create.UserCreateService;
 import jp.co.ha.business.db.crud.create.UserHealthGoalCreateService;
+import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
+import jp.co.ha.business.db.crud.read.UserHealthGoalSelectService;
 import jp.co.ha.business.db.crud.read.UserSearchService;
+import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
+import jp.co.ha.business.db.crud.update.UserHealthGoalUpdateService;
+import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
@@ -28,6 +34,7 @@ import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserHealthGoal;
+import jp.co.ha.db.entity.composite.CompositeUser;
 
 /**
  * ユーザ関連のComponent
@@ -41,18 +48,33 @@ public class UserComponent {
     @Sha256
     @Autowired
     private HashEncoder encoder;
-    /** ユーザ検索サービス */
-    @Autowired
-    private UserSearchService userSearchService;
     /** ユーザ情報作成サービス */
     @Autowired
     private UserCreateService userCreateService;
+    /** ユーザ情報検索サービス */
+    @Autowired
+    private UserSearchService userSearchService;
+    /** ユーザ情報更新サービス */
+    @Autowired
+    private UserUpdateService userUpdateService;
     /** 健康情報ファイル設定作成サービス */
     @Autowired
     private HealthInfoFileSettingCreateService healthInfoFileSettingCreateService;
+    /** 健康情報ファイル設定検索サービス */
+    @Autowired
+    private HealthInfoFileSettingSearchService healthInfoFileSettingSearchService;
+    /** 健康情報ファイル設定更新サービス */
+    @Autowired
+    private HealthInfoFileSettingUpdateService healthInfoFileSettingUpdateService;
     /** ユーザ健康目標情報作成サービス */
     @Autowired
     private UserHealthGoalCreateService userHealthGoalCreateService;
+    /** ユーザ健康目標情報検索サービス */
+    @Autowired
+    private UserHealthGoalSelectService userHealthGoalSelectService;
+    /** ユーザ健康目標情報更新サービス */
+    @Autowired
+    private UserHealthGoalUpdateService userHealthGoalUpdateService;
     /** トランザクション管理クラス */
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -60,6 +82,17 @@ public class UserComponent {
     @Autowired
     @Qualifier("transactionDefinition")
     private DefaultTransactionDefinition transactionDefinition;
+
+    /**
+     * 指定したユーザIDからユーザ複合Entityを返す
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @return ユーザ複合Entity
+     */
+    public Optional<CompositeUser> getUserBySeqUserId(Long seqUserId) {
+        return userSearchService.findCompositUserById(seqUserId);
+    }
 
     /**
      * 指定したパスワードとメールアドレスからハッシュ化したパスワードを返す
@@ -114,6 +147,30 @@ public class UserComponent {
     }
 
     /**
+     * メールアドレスからユーザ情報を検索する
+     *
+     * @param mailAddress
+     *     メールアドレス
+     * @return ユーザ情報
+     * @throws BaseException
+     *     指定したメールアドレスが未登録の場合
+     */
+    public Optional<User> findByMailAddress(String mailAddress) throws BaseException {
+        return userSearchService.findByMailAddress(mailAddress);
+    }
+
+    /**
+     * 指定したユーザIDからユーザ情報を検索する
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @return ユーザ情報
+     */
+    public Optional<User> findById(Long seqUserId) {
+        return userSearchService.findById(seqUserId);
+    }
+
+    /**
      * ユーザ関連情報の登録処理を行う
      *
      * @param dto
@@ -121,7 +178,7 @@ public class UserComponent {
      * @throws BaseException
      *     登録処理に失敗した場合
      */
-    public void registUser(UserDto dto) throws BaseException {
+    public void executeRegistUser(UserDto dto) throws BaseException {
 
         // トランザクション開始
         TransactionStatus status = transactionManager
@@ -150,7 +207,45 @@ public class UserComponent {
             throw new BusinessException(CommonErrorCode.RUNTIME_ERROR, "ユーザ登録に失敗しました。",
                     e);
         }
+    }
 
+    /**
+     * ユーザ関連情報の更新処理を行う
+     * 
+     * @param dto
+     * @throws BaseException
+     *     更新処理に失敗した場合
+     */
+    public void executeUpdateUser(UserDto dto) throws BaseException {
+
+        // トランザクション開始
+        TransactionStatus status = transactionManager
+                .getTransaction(transactionDefinition);
+
+        try {
+
+            // 削除時は関連テーブルを削除するため取得
+            boolean isDelete = dto.getDeleteFlag();
+
+            // ユーザ情報を更新する
+            updateUser(dto);
+
+            // 健康情報ファイル設定情報を更新する
+            updateHealthInfoFileSetting(dto);
+
+            // ユーザ健康目標情報を更新する
+            updateUserHealthGoal(dto, isDelete);
+
+            // 正常にDB更新出来た場合、コミット
+            transactionManager.commit(status);
+
+        } catch (Exception e) {
+
+            // 登録処理中にエラーが起きた場合、ロールバック
+            transactionManager.rollback(status);
+            throw new BusinessException(CommonErrorCode.RUNTIME_ERROR, "ユーザ更新に失敗しました。",
+                    e);
+        }
     }
 
     /**
@@ -212,6 +307,81 @@ public class UserComponent {
         entity.setWeight(dto.getGoalWeight());
         entity.setDeleteFlag(CommonFlag.FALSE.get());
         return entity;
+    }
+
+    /**
+     * ユーザ情報を更新する
+     * 
+     * @param dto
+     *     ユーザ情報DTO
+     * @throws BaseException
+     *     基底例外
+     */
+    private void updateUser(UserDto dto) throws BaseException {
+
+        // ユーザ情報を検索
+        User currentUser = userSearchService.findById(dto.getSeqUserId()).get();
+
+        BeanUtil.copy(dto, currentUser, "seqUserId", "regDate");
+        currentUser.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
+        currentUser.setPassword(getHashPassword(dto.getPassword(),
+                dto.getMailAddress()));
+
+        // ユーザ情報を更新する
+        userUpdateService.update(currentUser);
+    }
+
+    /**
+     * 健康情報ファイル設定情報を更新する
+     * 
+     * @param dto
+     *     ユーザ情報DTO
+     */
+    private void updateHealthInfoFileSetting(UserDto dto) {
+
+        // 健康情報ファイル設定情報を検索
+        HealthInfoFileSetting healthInfoFileSetting = healthInfoFileSettingSearchService
+                .findById(dto.getSeqUserId()).get();
+
+        BeanUtil.copy(dto, healthInfoFileSetting, "seqUserId", "regDate");
+
+        // 健康情報ファイル設定情報を更新する
+        healthInfoFileSettingUpdateService.update(healthInfoFileSetting);
+    }
+
+    /**
+     * ユーザ健康目標情報を更新する<br>
+     * PキーがユーザIDでないため、検索しPキー取得後論理削除する<br>
+     * その後新規登録を行う
+     * 
+     * @param dto
+     *     ユーザ情報DTO
+     * @param isDelete
+     *     削除フラグ
+     */
+    private void updateUserHealthGoal(UserDto dto, boolean isDelete) {
+
+        // Pキー取得のため、検索
+        UserHealthGoal currentGoal = userHealthGoalSelectService
+                .findEnableById(dto.getSeqUserId())
+                .get();
+
+        // 論理削除
+        userHealthGoalUpdateService.updateDeleteFlag(currentGoal);
+
+        if (isDelete) {
+            // 削除時は再登録はせず処理終了
+            return;
+        }
+
+        // 登録
+        UserHealthGoal goal = new UserHealthGoal();
+        goal.setSeqUserId(dto.getSeqUserId());
+        goal.setWeight(dto.getGoalWeight());
+        goal.setDeleteFlag(CommonFlag.FALSE.get());
+
+        userHealthGoalCreateService.create(goal);
+
     }
 
 }
