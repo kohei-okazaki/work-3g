@@ -23,7 +23,6 @@ import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.create.UserRecoveryTokenCreateService;
 import jp.co.ha.business.db.crud.read.UserRecoveryTokenSearchService;
-import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
@@ -33,8 +32,6 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -54,13 +51,9 @@ import jp.co.ha.db.entity.UserRecoveryToken;
 @RequestMapping("accountrecovery")
 public class UserRecoveryController implements BaseWebController {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(UserRecoveryController.class);
-
-    /** ユーザ情報検索サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserSearchService userSearchService;
+    private UserComponent userComponent;
     /** ユーザ情報更新サービス */
     @Autowired
     private UserUpdateService userUpdateService;
@@ -80,9 +73,6 @@ public class UserRecoveryController implements BaseWebController {
     /** AWS-SES Component */
     @Autowired
     private AwsSesComponent ses;
-    /** ユーザComponent */
-    @Autowired
-    private UserComponent userComponent;
 
     /**
      * Formを返す
@@ -117,7 +107,6 @@ public class UserRecoveryController implements BaseWebController {
 
         // メールアドレスを入力させるためフラグをtrueに
         model.addAttribute("isInputMailAddress", true);
-        LOG.debug("isInputMailAddress = true");
 
         return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
     }
@@ -146,7 +135,7 @@ public class UserRecoveryController implements BaseWebController {
         }
 
         // ユーザ情報検索
-        User user = userSearchService.findByMailAddress(form.getMailAddress())
+        User user = userComponent.findByMailAddress(form.getMailAddress())
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "メールアドレスが未登録です"));
 
@@ -162,15 +151,14 @@ public class UserRecoveryController implements BaseWebController {
 
         // SESでパスワード再設定メールを送信する
         String to = form.getMailAddress();
-        String title = "パスワード再設定" + DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
+        String title = "パスワード再設定"
+                + DateTimeUtil.toString(sysdate, DateFormatType.YYYYMMDD_NOSEP);
 
         ses.sendMail(to, title, MailTemplateKey.ACCOUNT_RECOVERY_TEMPLATE,
                 getMailTemplateBody(entity));
 
         // メールを送信したためフラグをtrueに
         model.addAttribute("isSendMailAddress", true);
-        LOG.debug("isSendMailAddress = true");
 
         return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
     }
@@ -240,7 +228,6 @@ public class UserRecoveryController implements BaseWebController {
 
         if (result.hasErrors()) {
             // 妥当性チェックエラー
-            LOG.warn(result.getFieldErrors().toString());
             return getView(model, DashboardView.ACCOUNT_RECOVERY_EDIT);
         } else if (!form.getPassword().equals(form.getConfirmPassword())) {
             model.addAttribute("errorMessage", "パスワードと確認用パスワードが一致しません");
@@ -276,8 +263,6 @@ public class UserRecoveryController implements BaseWebController {
     public String complete(Model model, UserRecoveryForm form,
             @PathVariable(name = "seq_user_id", required = false) Optional<String> seqUserId,
             RedirectAttributes redirect) throws BaseException {
-
-        LOG.debugBean(form);
 
         User entity = getUser(seqUserId);
         entity.setPassword(userComponent.getHashPassword(form.getPassword(),
@@ -326,7 +311,7 @@ public class UserRecoveryController implements BaseWebController {
         }
 
         // ユーザ情報検索
-        return userSearchService.findById(Long.valueOf(seqUserId.get()))
+        return userComponent.findById(Long.valueOf(seqUserId.get()))
                 .orElseThrow(() -> new BusinessException(
                         DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
                         "ユーザIDと紐づくユーザ情報がありません seq_user_id=" + seqUserId));

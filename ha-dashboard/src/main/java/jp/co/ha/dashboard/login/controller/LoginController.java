@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserHealthGoalSelectService;
-import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
@@ -60,12 +60,13 @@ public class LoginController implements BaseWebController {
     /** 健康情報検索条件：直近2件 */
     private static final SelectOption SELECT_OPTION＿LATEST = new SelectOptionBuilder()
             .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(2).build();
+
     /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
-    /** ユーザ情報検索サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserSearchService userSearchService;
+    private UserComponent userComponent;
     /** 健康情報検索サービス */
     @Autowired
     private HealthInfoSearchService healthInfoSearchService;
@@ -154,8 +155,7 @@ public class LoginController implements BaseWebController {
         }
 
         // ユーザ情報を検索
-        Optional<User> user = userSearchService
-                .findByMailAddress(form.getMailAddress());
+        Optional<User> user = userComponent.findByMailAddress(form.getMailAddress());
         LoginCheckResult checkResult = new LoginCheck().check(user,
                 form.getPassword());
         if (checkResult.hasError()) {

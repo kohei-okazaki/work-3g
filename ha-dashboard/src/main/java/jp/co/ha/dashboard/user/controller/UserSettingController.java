@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.user.controller;
 
+import java.util.Optional;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.exception.DashboardErrorCode;
+import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
@@ -22,8 +26,8 @@ import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.user.form.UserSettingForm;
-import jp.co.ha.dashboard.user.service.UserSettingService;
 import jp.co.ha.dashboard.view.DashboardView;
+import jp.co.ha.db.entity.composite.CompositeUser;
 
 /**
  * 健康管理_ユーザ設定コントローラ
@@ -40,9 +44,9 @@ public class UserSettingController
     /** セッションキー：フォーム */
     private static final String SESSION_KEY_FORM = "userSettingForm";
 
-    /** ユーザ設定サービス */
+    /** ユーザComponent */
     @Autowired
-    private UserSettingService userSettingService;
+    private UserComponent userComponent;
     /** セッションComponent */
     @Autowired
     private SessionComponent sessionComponent;
@@ -62,7 +66,7 @@ public class UserSettingController
                 .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class)
                 .get();
 
-        return userSettingService.getForm(seqUserId);
+        return getForm(seqUserId);
     }
 
     @Override
@@ -110,7 +114,7 @@ public class UserSettingController
                 CommonFlag.of(userSettingForm.getEnclosureCharFlag()).get());
 
         // form情報から更新処理を行う
-        userSettingService.execute(dto);
+        userComponent.executeUpdateUser(dto);
 
         sessionComponent.removeValue(request.getSession(), SESSION_KEY_FORM);
 
@@ -121,6 +125,41 @@ public class UserSettingController
         }
 
         return getView(model, DashboardView.ACCOUNT_SETTING_COMPLETE);
+    }
+
+    /**
+     * ユーザIDからFormを返す
+     * 
+     * @param seqUserId
+     *     ユーザID
+     * @return Form
+     */
+    private UserSettingForm getForm(Long seqUserId) {
+
+        // ユーザ情報取得
+        Optional<CompositeUser> entity = userComponent.getUserBySeqUserId(seqUserId);
+
+        UserSettingForm form = new UserSettingForm();
+        BeanUtil.copy(entity.get(), form, (src, dest) -> {
+
+            CompositeUser srcUser = (CompositeUser) src;
+            UserSettingForm destForm = (UserSettingForm) dest;
+
+            destForm.setGenderType(GenderType.of(srcUser.getGenderType()).getValue());
+            destForm.setDeleteFlag(srcUser.isDeleteFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setHeaderFlag(srcUser.isHeaderFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setFooterFlag(srcUser.isFooterFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setMaskFlag(srcUser.isMaskFlag() ? CommonFlag.TRUE.getValue()
+                    : CommonFlag.FALSE.getValue());
+            destForm.setEnclosureCharFlag(
+                    srcUser.isEnclosureCharFlag() ? CommonFlag.TRUE.getValue()
+                            : CommonFlag.FALSE.getValue());
+        });
+
+        return form;
     }
 
 }
