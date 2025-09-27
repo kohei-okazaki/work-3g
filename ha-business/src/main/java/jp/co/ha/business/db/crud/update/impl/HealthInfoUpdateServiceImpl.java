@@ -8,7 +8,6 @@ import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
 import jp.co.ha.common.db.annotation.Update;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
-import jp.co.ha.db.entity.HealthInfoExample.Criteria;
 import jp.co.ha.db.mapper.HealthInfoMapper;
 
 /**
@@ -28,7 +27,7 @@ public class HealthInfoUpdateServiceImpl implements HealthInfoUpdateService {
     @Transactional(rollbackFor = Exception.class)
     public void update(HealthInfo entity) {
         HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
+        HealthInfoExample.Criteria criteria = example.createCriteria();
 
         // 健康情報ID
         criteria.andSeqHealthInfoIdEqualTo(entity.getSeqHealthInfoId());

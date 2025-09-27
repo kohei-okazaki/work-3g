@@ -14,7 +14,6 @@ import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.ApiCommunicationDataExample;
-import jp.co.ha.db.entity.ApiCommunicationDataExample.Criteria;
 import jp.co.ha.db.mapper.ApiCommunicationDataMapper;
 
 /**
@@ -63,7 +62,7 @@ public class ApiCommunicationDataSearchServiceImpl
     public long countBySeqApiCommunicationDataId(Long seqApiCommunicationDataId) {
 
         ApiCommunicationDataExample example = new ApiCommunicationDataExample();
-        Criteria criteria = example.createCriteria();
+        ApiCommunicationDataExample.Criteria criteria = example.createCriteria();
         if (seqApiCommunicationDataId != null) {
             // API通信情報ID
             criteria.andSeqApiCommunicationDataIdEqualTo(seqApiCommunicationDataId);

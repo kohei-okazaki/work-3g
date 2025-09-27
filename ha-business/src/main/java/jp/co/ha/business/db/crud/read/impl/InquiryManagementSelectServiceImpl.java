@@ -66,4 +66,11 @@ public class InquiryManagementSelectServiceImpl
 
     }
 
+    @Override
+    public long countByStatus(String status) {
+        InquiryManagementExample example = new InquiryManagementExample();
+        InquiryManagementExample.Criteria criteria = example.createCriteria();
+        return 0;
+    }
+
 }

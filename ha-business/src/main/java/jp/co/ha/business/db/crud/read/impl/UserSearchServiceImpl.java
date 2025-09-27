@@ -16,7 +16,6 @@ import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserExample;
-import jp.co.ha.db.entity.UserExample.Criteria;
 import jp.co.ha.db.entity.UserKey;
 import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
 import jp.co.ha.db.entity.composite.CompositeUser;
@@ -70,7 +69,7 @@ public class UserSearchServiceImpl implements UserSearchService {
     public Optional<User> findByMailAddress(String mailAddress) {
 
         UserExample example = new UserExample();
-        Criteria criteria = example.createCriteria();
+        UserExample.Criteria criteria = example.createCriteria();
 
         // メールアドレス
         criteria.andMailAddressEqualTo(crypter.encrypt(mailAddress));
@@ -89,7 +88,7 @@ public class UserSearchServiceImpl implements UserSearchService {
     public boolean isExistByMailAddress(String mailAddress) {
 
         UserExample example = new UserExample();
-        Criteria criteria = example.createCriteria();
+        UserExample.Criteria criteria = example.createCriteria();
 
         // メールアドレス
         criteria.andMailAddressEqualTo(crypter.encrypt(mailAddress));
@@ -125,7 +124,7 @@ public class UserSearchServiceImpl implements UserSearchService {
     public long countBySeqUserId(Long seqUserId) {
 
         UserExample example = new UserExample();
-        Criteria criteria = example.createCriteria();
+        UserExample.Criteria criteria = example.createCriteria();
         if (seqUserId != null) {
             // ユーザID
             criteria.andSeqUserIdEqualTo(seqUserId);

@@ -12,7 +12,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.db.entity.RootUserNoteInfoExample;
-import jp.co.ha.db.entity.RootUserNoteInfoExample.Criteria;
 import jp.co.ha.db.entity.RootUserNoteInfoKey;
 import jp.co.ha.db.mapper.RootUserNoteInfoMapper;
 
@@ -36,7 +35,7 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
 
         RootUserNoteInfoExample example = new RootUserNoteInfoExample();
         example.setOrderByClause(selectOption.getOrderBy());
-        Criteria criteria = example.createCriteria();
+        RootUserNoteInfoExample.Criteria criteria = example.createCriteria();
 
         // 管理者サイトログインID
         criteria.andSeqRootLoginInfoIdEqualTo(seqLoginId);
@@ -60,7 +59,7 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
     public long countBySeqLoginId(Long seqLoginId) {
 
         RootUserNoteInfoExample example = new RootUserNoteInfoExample();
-        Criteria criteria = example.createCriteria();
+        RootUserNoteInfoExample.Criteria criteria = example.createCriteria();
         if (seqLoginId != null) {
             // 管理者サイトログインID
             criteria.andSeqRootLoginInfoIdEqualTo(seqLoginId);
