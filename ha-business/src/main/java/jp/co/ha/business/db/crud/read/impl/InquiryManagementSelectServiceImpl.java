@@ -66,11 +66,17 @@ public class InquiryManagementSelectServiceImpl
 
     }
 
+    @Select
     @Override
+    @Transactional(readOnly = true)
     public long countByStatus(String status) {
         InquiryManagementExample example = new InquiryManagementExample();
         InquiryManagementExample.Criteria criteria = example.createCriteria();
-        return 0;
+        if (status != null) {
+            criteria.andInquiryStatusEqualTo(status);
+        }
+        criteria.andDeleteFlagEqualTo(false);
+        return mapper.countByExample(example);
     }
 
 }
