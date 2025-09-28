@@ -683,7 +683,7 @@
                   {
                     "enabled": true,
                     "name": "date",
-                    "value": "202508"
+                    "value": "202507"
                   }
                 ]
               },
@@ -762,7 +762,7 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/user/"
+              "path": "/api/root/user/36"
             },
             "id": "fb7fb6ee-62e4-41a4-87d0-93dce73d9df8",
             "name": "06.管理ユーザ取得API",
@@ -790,7 +790,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"password\": \"\",\n  \"conf_password\": \"test\"\n}"
+              "textBody": "{\n  \"password\": \"test\",\n  \"conf_password\": \"test\"\n}"
             },
             "uri": {
               "query": {
@@ -839,7 +839,7 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/user/"
+              "path": "/api/root/user/36"
             },
             "id": "49927ca3-0a89-4b9f-bc0f-80f04d0f097d",
             "name": "08.管理ユーザ編集API",
@@ -880,7 +880,7 @@
                   {
                     "enabled": true,
                     "name": "page",
-                    "value": "a"
+                    "value": "0"
                   }
                 ]
               },
@@ -913,7 +913,7 @@
                 "items": []
               },
               "bodyType": "Text",
-              "textBody": "{\n  \"mail_address\": \"kou1210hei@\",\n  \"password_expire\": \"2025/01/01\"\n}"
+              "textBody": "{\n  \"mail_address\": \"hoge@gmail.com\",\n  \"password_expire\": \"9999/12/31\"\n}"
             },
             "uri": {
               "query": {
@@ -921,7 +921,7 @@
                 "items": []
               },
               "host": "${ROOT_API_URL}",
-              "path": "/api/root/account/113"
+              "path": "/api/root/account/1"
             },
             "id": "9603f949-63bd-4604-9e23-a397a9e4ae6c",
             "name": "10.アカウント情報編集API",
@@ -1550,7 +1550,7 @@
                   {
                     "enabled": true,
                     "name": "status",
-                    "value": "01"
+                    "value": "00"
                   }
                 ]
               },
@@ -1663,7 +1663,7 @@
         "bb3caad6-0886-4479-b360-14c36174efde": {
           "createdAt": "2025-06-01T13:06:24.996+09:00",
           "name": "ROOT_API_TOKEN",
-          "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzU5MDE4MTgxfQ.1ycYkESJ3zkDgJBVyypBvhyZ5UhPQVhoQJod4Q0nhufnQyugsnoQzKrwBR1swLMR0lgNIh4k87YpC41WM-iAEQ",
+          "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzU5MDcwNTgwfQ.bjEIlPeuA8x7H_lF3lSMMIlAO2I3CdcMvRzKQKq6wW3fABOCUmkg0dyaMkLfBixRQcyqh1q_Zd6KjWJVt7h8jA",
           "enabled": true,
           "private": false
         },
