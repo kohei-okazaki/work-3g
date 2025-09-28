@@ -14,7 +14,6 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.UserRecoveryToken;
 import jp.co.ha.db.entity.UserRecoveryTokenExample;
-import jp.co.ha.db.entity.UserRecoveryTokenExample.Criteria;
 import jp.co.ha.db.mapper.UserRecoveryTokenMapper;
 
 /**
@@ -37,7 +36,7 @@ public class UserRecoveryTokenSearchServiceImpl
             Long seqUserId, String token) {
 
         UserRecoveryTokenExample example = new UserRecoveryTokenExample();
-        Criteria creteria = example.createCriteria();
+        UserRecoveryTokenExample.Criteria creteria = example.createCriteria();
 
         // ユーザID
         creteria.andSeqUserIdEqualTo(seqUserId);

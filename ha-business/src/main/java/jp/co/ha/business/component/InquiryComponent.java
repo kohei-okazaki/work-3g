@@ -210,6 +210,10 @@ public class InquiryComponent {
 
     }
 
+    public long countByStatus(Status status) {
+        return selectService.countByStatus(status.getValue());
+    }
+
     /**
      * 問い合わせステータスの列挙体
      * 

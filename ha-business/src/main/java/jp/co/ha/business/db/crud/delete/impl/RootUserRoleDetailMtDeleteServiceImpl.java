@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.co.ha.business.db.crud.delete.RootUserRoleDetailMtDeleteService;
 import jp.co.ha.common.db.annotation.Delete;
 import jp.co.ha.db.entity.RootUserRoleDetailMtExample;
-import jp.co.ha.db.entity.RootUserRoleDetailMtExample.Criteria;
 import jp.co.ha.db.mapper.RootUserRoleDetailMtMapper;
 
 /**
@@ -29,7 +28,7 @@ public class RootUserRoleDetailMtDeleteServiceImpl
     public void deleteByUser(Long seqRootUserRoleMngMtId) {
 
         RootUserRoleDetailMtExample example = new RootUserRoleDetailMtExample();
-        Criteria criteria = example.createCriteria();
+        RootUserRoleDetailMtExample.Criteria criteria = example.createCriteria();
 
         // 管理者サイトユーザ権限管理マスタID
         criteria.andSeqRootUserRoleMngMtIdEqualTo(seqRootUserRoleMngMtId);

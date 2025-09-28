@@ -31,7 +31,7 @@ public class EntityGenerator extends BaseGenerator {
         // 自動生成ファイルリスト
         List<GenerateFile> list = new ArrayList<>();
 
-        for (String table : prop.getTargetTableList()) {
+        for (String table : prop.getDdlTableList()) {
 
             LOG.debug("テーブル名:" + table);
 

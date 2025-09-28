@@ -45,4 +45,13 @@ public interface InquiryManagementSelectService {
      * @return 判定結果
      */
     boolean isExistBySeqInquiryMngId(Long seqInquiryMngId);
+
+    /**
+     * 指定した問い合わせステータスの件数を返す
+     * 
+     * @param status
+     *     問い合わせステータス
+     * @return ステータスの件数
+     */
+    long countByStatus(String status);
 }

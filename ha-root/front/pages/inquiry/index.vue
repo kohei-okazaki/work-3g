@@ -204,6 +204,7 @@ export default {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // 問い合わせステータスマスタ一覧取得API
       let reqUrl = url + "/status";
       axios.get(reqUrl, { headers }).then(
         (response) => {
@@ -234,6 +235,7 @@ export default {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // 問い合わせ情報一覧取得API
       // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
       let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
       axios.get(reqUrl, { headers }).then(
@@ -306,16 +308,17 @@ export default {
     },
     /**
      * 問い合わせステータスの更新処理
-     * @param seq_inquiry_mng_id 問い合わせ管理ID
+     * @param seqInquiryMngId 問い合わせ管理ID
      * @param statusValue 新しいステータス値
      */
-    async updateInquiryStatus(seq_inquiry_mng_id, statusValue) {
+    async updateInquiryStatus(seqInquiryMngId, statusValue) {
       this.loading = true;
       // 保存済のAPIトークンを取得
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
-      let reqUrl = url + "/" + seq_inquiry_mng_id;
+      // 問い合わせ情報編集API
+      let reqUrl = url + "/" + seqInquiryMngId;
       let reqBody = {
         status: statusValue,
         seq_login_id: this.$store.state.auth.seq_login_id,
