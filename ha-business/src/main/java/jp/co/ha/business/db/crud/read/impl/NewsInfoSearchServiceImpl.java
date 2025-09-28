@@ -12,7 +12,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.db.entity.NewsInfoExample;
-import jp.co.ha.db.entity.NewsInfoExample.Criteria;
 import jp.co.ha.db.entity.NewsInfoKey;
 import jp.co.ha.db.mapper.NewsInfoMapper;
 
@@ -47,7 +46,7 @@ public class NewsInfoSearchServiceImpl implements NewsInfoSearchService {
     public long countBySeqNewsInfoId(Long seqNewsInfoId) {
 
         NewsInfoExample example = new NewsInfoExample();
-        Criteria criteria = example.createCriteria();
+        NewsInfoExample.Criteria criteria = example.createCriteria();
         if (seqNewsInfoId != null) {
             // お知らせ情報ID
             criteria.andSeqNewsInfoIdEqualTo(seqNewsInfoId);

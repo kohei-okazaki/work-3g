@@ -24,7 +24,7 @@ public class CreateTableGenerator extends BaseGenerator {
         // 自動生成ファイルリスト
         List<GenerateFile> list = new ArrayList<>();
 
-        for (String tableName : prop.getTargetTableList()) {
+        for (String tableName : prop.getDdlTableList()) {
             Table table = ToolUtil.getTable(excel.getRowList(), tableName);
 
             StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);

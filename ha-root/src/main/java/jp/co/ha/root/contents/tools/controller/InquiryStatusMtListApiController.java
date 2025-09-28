@@ -26,6 +26,9 @@ import jp.co.ha.root.contents.tools.response.InquiryStatusMtListApiResponse;
 public class InquiryStatusMtListApiController extends
         BaseRootApiController<InquiryStatusMtListApiRequest, InquiryStatusMtListApiResponse> {
 
+    /** 問い合わせステータスソート順 - SelectOption */
+    private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
+            .orderBy("INQUIRY_STATUS", SortType.ASC).build();
     /** 問い合わせステータスマスタ検索サービス */
     @Autowired
     private InquiryStatusMtSearchService service;
@@ -41,11 +44,7 @@ public class InquiryStatusMtListApiController extends
     public ResponseEntity<InquiryStatusMtListApiResponse> get(
             InquiryStatusMtListApiRequest request) {
 
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("INQUIRY_STATUS", SortType.ASC)
-                .build();
-
-        List<InquiryStatusMt> list = service.findAll(selectOption);
+        List<InquiryStatusMt> list = service.findAll(SELECT_OPTION);
         InquiryStatusMtListApiResponse response = getSuccessResponse();
 
         response.setStatuses(list.stream().map(e -> {

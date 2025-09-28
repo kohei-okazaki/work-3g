@@ -13,7 +13,6 @@ import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoExample;
-import jp.co.ha.db.entity.HealthInfoExample.Criteria;
 import jp.co.ha.db.entity.composite.CompositeHealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfoKey;
 import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
@@ -47,7 +46,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
             SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
+        HealthInfoExample.Criteria criteria = example.createCriteria();
 
         // ユーザID
         if (seqUserId != null) {
@@ -75,7 +74,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
             LocalDateTime fromHealthInfoRegDate, LocalDateTime toHealthInfoRegDate) {
 
         HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
+        HealthInfoExample.Criteria criteria = example.createCriteria();
         // ユーザID
         criteria.andSeqUserIdEqualTo(seqUserId);
         // 健康情報登録日時
@@ -91,7 +90,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
             Long seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
+        HealthInfoExample.Criteria criteria = example.createCriteria();
         // 健康情報ID
         criteria.andSeqHealthInfoIdEqualTo(seqHealthInfoId);
         // ユーザID
@@ -107,7 +106,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
             Long seqUserId) {
 
         HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
+        HealthInfoExample.Criteria criteria = example.createCriteria();
 
         if (seqHealthInfoId != null) {
             // 健康情報ID
@@ -128,7 +127,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
             SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
+        HealthInfoExample.Criteria criteria = example.createCriteria();
         // ユーザID
         criteria.andSeqUserIdEqualTo(seqUserId);
         // ソート処理
@@ -178,7 +177,7 @@ public class HealthInfoSearchServiceImpl implements HealthInfoSearchService {
             Long seqUserId, SelectOption selectOption) {
 
         HealthInfoExample example = new HealthInfoExample();
-        Criteria criteria = example.createCriteria();
+        HealthInfoExample.Criteria criteria = example.createCriteria();
 
         // 健康情報ID
         criteria.andSeqHealthInfoIdLessThan(seqHealthInfoId);
