@@ -107,7 +107,7 @@ public abstract class BaseGenerator {
         ToolProperty prop = new PropertyReader().read(path.toString(), FILE_NAME_PROP,
                 ToolProperty.class);
         Stream.of(prop.getTargetTables().split(StringUtil.COMMA))
-                .forEach(e -> prop.addTargetTable(e));
+                .forEach(e -> prop.addDdlTable(e));
         Stream.of(prop.getDmlTables().split(StringUtil.COMMA))
                 .forEach(e -> prop.addDmlTable(e));
         return prop;

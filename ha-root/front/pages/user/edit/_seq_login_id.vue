@@ -145,6 +145,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * ユーザ更新確認モーダル表示
+     */
     async openUserEditModal() {
       let validateResult = this.validate();
       if (validateResult != null) {
@@ -163,6 +166,9 @@ export default {
         this.updateUser();
       }
     },
+    /**
+     * 妥当性チェック
+     */
     validate: function () {
       if (this.userRoles == null || this.userRoles.length == 0) {
         // 権限配列がnullまたは未指定の場合、エラー
@@ -172,11 +178,15 @@ export default {
       }
       return null;
     },
+    /**
+     * ユーザ更新処理
+     */
     updateUser: function () {
       this.loading = true;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // ユーザ情報編集API
       let reqUrl = url + this.editUserForm.seqLoginId;
       let reqBody = {
         roles: this.userRoles,
@@ -206,6 +216,9 @@ export default {
         }
       );
     },
+    /**
+     * 権限リスト取得
+     */
     getRoles: function () {
       this.loading = true;
       let headers = {
@@ -230,9 +243,16 @@ export default {
         }
       );
     },
+    /**
+     * ユーザ更新後、storeのユーザ情報を更新
+     */
     saveUpdateData: function () {
       this.$refs.userDataSave.save(this.editUserForm.seqLoginId);
     },
+    /**
+     * ユーザ情報取得コンポーネントからのイベント
+     * @param retrieveApiResult 
+     */
     setRetrieveApiResult: function (retrieveApiResult) {
       this.editUserForm = retrieveApiResult;
     },

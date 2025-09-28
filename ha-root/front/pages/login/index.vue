@@ -84,6 +84,9 @@ export default {
     this.$store.commit("auth/clearToken");
   },
   methods: {
+    /**
+     * ログイン処理
+     */
     submit: function () {
       this.loading = true;
       if (!this.$refs.loginForm.validate()) {
