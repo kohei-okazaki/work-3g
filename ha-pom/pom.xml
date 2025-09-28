@@ -81,6 +81,7 @@
       <version>${org.spring-data-commons-version}</version>
     </dependency>
 
+	<!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
