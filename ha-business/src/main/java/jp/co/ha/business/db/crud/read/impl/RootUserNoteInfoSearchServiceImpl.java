@@ -39,6 +39,8 @@ public class RootUserNoteInfoSearchServiceImpl implements RootUserNoteInfoSearch
 
         // 管理者サイトログインID
         criteria.andSeqRootLoginInfoIdEqualTo(seqLoginId);
+        // 削除フラグ
+        criteria.andDeleteFlagEqualTo(false);
 
         return mapper.selectByExampleWithRowbounds(example, selectOption.toRowBounds());
     }
