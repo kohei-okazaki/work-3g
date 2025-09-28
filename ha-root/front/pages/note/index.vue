@@ -209,6 +209,7 @@ export default {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // メモ情報一覧取得API
       let reqUrl = url + "?seq_login_id=" + this.$store.state.auth.seq_login_id;
       // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
       reqUrl += "&page=" + (page == null ? 0 : page - 1);

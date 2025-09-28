@@ -199,6 +199,7 @@ export default {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // 健康情報一覧取得API
       // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
       let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
       axios.get(reqUrl, { headers }).then(
@@ -224,7 +225,7 @@ export default {
       );
     },
     /**
-     * 健康情報編集モーダル表示
+     * 健康情報編集モーダルを開く
      * @param seqHealthInfoId 健康情報ID
      */
     openHealthInfoEditModal: function (seqHealthInfoId) {
@@ -253,6 +254,7 @@ export default {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // 健康情報編集API
       let reqUrl = url + "/" + this.healthInfoEditModal.seqHealthInfoId;
       let reqBody = {
         seq_user_id: this.healthInfoEditModal.seqUserId,

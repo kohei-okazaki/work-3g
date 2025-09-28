@@ -226,6 +226,7 @@ export default {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // お知らせ情報一覧取得API
       // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
       let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
       axios.get(reqUrl, { headers }).then(
@@ -281,6 +282,7 @@ export default {
       }
 
       this.loading = true;
+      // お知らせ情報編集API
       let reqUrl = url + "/" + this.newsEditModal.seq_news_info_id;
       let reqBody = {
         seq_news_info_id: this.newsEditModal.seq_news_info_id,
@@ -362,6 +364,7 @@ export default {
      */
     async deleteNews(seq_news_info_id) {
       this.loading = true;
+      // お知らせ情報削除API
       let deleteUrl = url + "/" + seq_news_info_id;
       let headers = {
         Authorization: this.$store.state.auth.token,

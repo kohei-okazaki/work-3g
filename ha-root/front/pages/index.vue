@@ -56,20 +56,25 @@ export default {
     };
   },
   methods: {
+    /**
+     * グラフを取得する
+     * @param d 日付(YYYYMM)
+     */
     getGraph: function (d) {
       let param = d == null ? "" : "?date=" + d;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // Top情報取得API
       axios.get(url + param, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
-            this.healthInfoLabels = response.data.health_info_reg_graph_list.map(
-              (item) => item.date
-            );
-            this.healthInfoValues = response.data.health_info_reg_graph_list.map(
-              (item) => item.count
-            );
+            this.healthInfoLabels =
+              response.data.health_info_reg_graph_list.map((item) => item.date);
+            this.healthInfoValues =
+              response.data.health_info_reg_graph_list.map(
+                (item) => item.count
+              );
             this.accountLabels = response.data.account_reg_graph_list.map(
               (item) => item.date
             );
@@ -90,20 +95,25 @@ export default {
         }
       );
     },
+    /**
+     * 健康情報グラフを取得する
+     * @param d 日付(YYYYMM)
+     */
     getHealthInfoGraph: function (d) {
       let param = d == null ? "" : "?date=" + d;
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // Top情報(健康情報)取得API
       axios.get(url + "/healthinfo" + param, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
-            this.healthInfoLabels = response.data.health_info_reg_graph_list.map(
-              (item) => item.date
-            );
-            this.healthInfoValues = response.data.health_info_reg_graph_list.map(
-              (item) => item.count
-            );
+            this.healthInfoLabels =
+              response.data.health_info_reg_graph_list.map((item) => item.date);
+            this.healthInfoValues =
+              response.data.health_info_reg_graph_list.map(
+                (item) => item.count
+              );
           } else {
             console.log(response.data.error.message);
             this.error.hasError = true;
@@ -118,11 +128,16 @@ export default {
         }
       );
     },
+    /**
+     * アカウントグラフを取得する
+     * @param d 日付(YYYYMM)
+     */
     getAccountGraph: function (d) {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
       let param = d == null ? "" : "?date=" + d;
+      // Top情報(アカウント情報)取得API
       axios.get(url + "/account" + param, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
@@ -153,5 +168,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

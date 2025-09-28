@@ -8,7 +8,6 @@ import jp.co.ha.business.db.crud.update.RootLoginInfoUpdateService;
 import jp.co.ha.common.db.annotation.Update;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootLoginInfoExample;
-import jp.co.ha.db.entity.RootLoginInfoExample.Criteria;
 import jp.co.ha.db.mapper.RootLoginInfoMapper;
 
 /**
@@ -28,7 +27,7 @@ public class RootLoginInfoUpdateServiceImpl implements RootLoginInfoUpdateServic
     @Transactional(rollbackFor = Exception.class)
     public void update(RootLoginInfo entity) {
         RootLoginInfoExample example = new RootLoginInfoExample();
-        Criteria criteria = example.createCriteria();
+        RootLoginInfoExample.Criteria criteria = example.createCriteria();
 
         // 管理者サイトログインID
         criteria.andSeqRootLoginInfoIdEqualTo(entity.getSeqRootLoginInfoId());

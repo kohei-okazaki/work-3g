@@ -147,6 +147,11 @@ export default {
     }
   },
   methods: {
+    /**
+     * HTTPステータスに応じた色を取得する
+     * @param httpStatus HTTPステータス
+     * @returns 色
+     */
     getHttpStatusColor: function (httpStatus) {
       if (httpStatus == 200) {
         return "green";
@@ -159,6 +164,10 @@ export default {
         return "red";
       }
     },
+    /**
+     * タイムラインモーダルを開く
+     * @param item API通信情報
+     */
     openTimelineModal: function (item) {
       console.log(JSON.stringify(item, null, "\t"));
       // タイムラインデータをクリア

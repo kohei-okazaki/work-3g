@@ -250,7 +250,7 @@ export default {
       this.isEntryShow = false;
     },
     /**
-     * アカウント情報取得処理
+     * 指定したページ数のアカウント情報リストを取得
      * @param page ページ数
      */
     getAccountList: function (page) {
@@ -259,6 +259,7 @@ export default {
       let headers = {
         Authorization: this.$store.state.auth.token,
       };
+      // アカウント情報一覧取得API
       // APIは0~、frontは1~なのでAPIに合わせfrontのページ数に-1
       let reqUrl = url + "?page=" + (page == null ? 0 : page - 1);
       axios.get(reqUrl, { headers }).then(
@@ -322,6 +323,7 @@ export default {
       }
 
       this.loading = true;
+      // アカウント情報編集API
       let reqUrl = url + "/" + this.accountEditModal.seqUserId;
       let reqBody = {
         mail_address: this.accountEditModal.mailAddress,

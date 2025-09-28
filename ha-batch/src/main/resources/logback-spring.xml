@@ -92,21 +92,31 @@
     </filter>
   </appender>
 
+  <!-- 全体の使用出力ルール -->
+  <root level="WARN">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="WARN_FILE" />
+    <appender-ref ref="ERROR_FILE" />
+  </root>
   <!-- アプリログレベルと使用出力ルール -->
-  <logger name="jp.co.ha" level="${LOG_LEVEL}">
+  <logger name="jp.co.ha" level="${LOG_LEVEL}" additivity="false">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="DEBUG_FILE" />
     <appender-ref ref="INFO_FILE" />
     <appender-ref ref="WARN_FILE" />
     <appender-ref ref="ERROR_FILE" />
   </logger>
-
-  <logger name="org.springframework" level="INFO">
+  <!-- Springログレベルと使用出力ルール -->
+  <logger name="org.springframework.*" level="INFO" additivity="false">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="DEBUG_FILE" />
     <appender-ref ref="INFO_FILE" />
     <appender-ref ref="WARN_FILE" />
     <appender-ref ref="ERROR_FILE" />
+  </logger>
+  <!-- AWSログレベルと使用出力ルール -->
+  <logger name="com.amazonaws" level="INFO" additivity="false">
+    <appender-ref ref="STDOUT" />
   </logger>
 
 </configuration>
