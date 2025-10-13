@@ -1,4 +1,5 @@
 import logging
+from datetime import timezone as dt_timezone
 from django.utils import timezone
 from django.utils.timezone import localtime
 from rest_framework.views import APIView
@@ -15,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def to_utc_naive(dt):
     """aware -> UTC naive（MongoEngine既定）"""
-    return dt.astimezone(timezone.utc).replace(tzinfo=None)
+    return dt.astimezone(dt_timezone.utc).replace(tzinfo=None)
 
 
 class HealthInfoAPIView(APIView):
