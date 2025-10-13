@@ -11,3 +11,11 @@
 
 ## ログ
 - 文字コード：UTF-8
+
+## 必要
+- Python3系
+
+## package install
+pip install djangorestframework
+pip install mongoengine
+pip install djangorestframework
