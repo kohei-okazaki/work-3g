@@ -89,7 +89,7 @@ public class HealthInfoEditApiController extends
         }
 
         // API通信情報.トランザクションIDを採番
-        Long transactionId = apiCommunicationDataComponent.getTransactionId();
+        String transactionId = apiCommunicationDataComponent.getTransactionId();
 
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();

@@ -17,13 +17,13 @@ import jp.co.ha.business.api.healthinfoapp.response.HealthCheckApiResponse;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
  * ヘルスチェックAPIを実行するバッチ<br>
@@ -76,7 +76,7 @@ public class HealthCheckBatch implements Tasklet {
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
             throws Exception {
 
-        Long transactionId = apiCommunicationDataComponent.getTransactionId();
+        String transactionId = apiCommunicationDataComponent.getTransactionId();
         // 健康管理API.ヘルスチェックAPI 呼び出し
         sendHealthCheckApi(transactionId);
         if (!healthInfoProperties.isHealthinfoNodeApiMigrateFlg()) {
@@ -97,25 +97,26 @@ public class HealthCheckBatch implements Tasklet {
      * @throws BaseException
      *     APIの実行に失敗した場合
      */
-    private void sendRootHealthCheckApi(Long transactionId) throws BaseException {
+    private void sendRootHealthCheckApi(String transactionId) throws BaseException {
 
         jp.co.ha.business.api.root.request.HealthCheckApiRequest req = new jp.co.ha.business.api.root.request.HealthCheckApiRequest();
-        ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(
                         () -> healthInfoProperties.getRootApiUrl() + "healthcheck");
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(rootHealthCheckApi.getApiName(), transactionId,
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, rootHealthCheckApi.getApiName(),
                         rootHealthCheckApi.getHttpMethod(),
-                        rootHealthCheckApi.getUri(apiConnectInfo, req), req);
+                        rootHealthCheckApi.getUri(connectInfo, req),
+                        req);
 
         jp.co.ha.business.api.root.response.HealthCheckApiResponse response = rootHealthCheckApi
-                .callApi(req, apiConnectInfo);
+                .callApi(req, connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
-                response);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, response);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         switch (response.getResult()) {
         case SUCCESS:
@@ -139,25 +140,26 @@ public class HealthCheckBatch implements Tasklet {
      * @throws BaseException
      *     APIの実行に失敗した場合
      */
-    private void sendNodeHealthCheckApi(Long transactionId) throws BaseException {
+    private void sendNodeHealthCheckApi(String transactionId) throws BaseException {
 
         jp.co.ha.business.api.node.request.HealthCheckApiRequest req = new jp.co.ha.business.api.node.request.HealthCheckApiRequest();
-        ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> healthInfoProperties.getHealthinfoNodeApiUrl()
                         + "healthcheck");
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(nodeHealthCheckApi.getApiName(), transactionId,
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, nodeHealthCheckApi.getApiName(),
                         nodeHealthCheckApi.getHttpMethod(),
-                        nodeHealthCheckApi.getUri(apiConnectInfo, req), req);
+                        nodeHealthCheckApi.getUri(connectInfo, req),
+                        req);
 
         jp.co.ha.business.api.node.response.HealthCheckApiResponse response = nodeHealthCheckApi
-                .callApi(req, apiConnectInfo);
+                .callApi(req, connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
-                response);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, response);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         switch (response.getResult()) {
         case SUCCESS:
@@ -182,24 +184,25 @@ public class HealthCheckBatch implements Tasklet {
      * @throws BaseException
      *     APIの実行に失敗した場合
      */
-    private void sendHealthCheckApi(Long transactionId) throws BaseException {
+    private void sendHealthCheckApi(String transactionId) throws BaseException {
 
         HealthCheckApiRequest req = new HealthCheckApiRequest();
-        ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(
                         () -> healthInfoProperties.getHealthInfoApiUrl() + "healthcheck");
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(healthCheckApi.getApiName(), transactionId,
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, healthCheckApi.getApiName(),
                         healthCheckApi.getHttpMethod(),
-                        healthCheckApi.getUri(apiConnectInfo, req), req);
+                        healthCheckApi.getUri(connectInfo, req),
+                        req);
 
-        HealthCheckApiResponse response = healthCheckApi.callApi(req, apiConnectInfo);
+        HealthCheckApiResponse response = healthCheckApi.callApi(req, connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
-                response);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, response);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         switch (response.getResultType()) {
         case SUCCESS:
