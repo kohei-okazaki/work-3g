@@ -27,6 +27,7 @@
                   <th>batch</th>
                   <th>node api</th>
                   <th>root api</th>
+                  <th>track api</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,6 +80,14 @@
                     >
                     <div v-else></div>
                   </td>
+                  <td>
+                    <v-icon
+                      v-if="lib.projects.includes('track api')"
+                      color="green"
+                      >mdi-check</v-icon
+                    >
+                    <div v-else></div>
+                  </td>
                 </tr>
               </tbody>
             </v-simple-table>
@@ -121,15 +130,9 @@ export default {
       libraryList: [
         {
           name: "Spring Boot",
-          version: "3.4.3",
+          version: "3.5.5",
           description: "健康管理ダッシュボード、健康管理API、管理者API、健康管理バッチで使用するSpring FW",
           projects: ["dashboard", "api", "root api", "batch"],
-        },
-        {
-          name: "express",
-          version: "4.17.1",
-          description: "Node.jsで使用するWeb FW",
-          projects: ["node api"],
         },
         {
           name: "AWS-SDK",
@@ -144,18 +147,6 @@ export default {
           projects: ["dashboard", "api", "root api", "batch"],
         },
         {
-          name: "jwt",
-          version: "0.9.1",
-          description: "JSON Web Tokenライブラリ",
-          projects: ["root api"],
-        },
-        {
-          name: "jsonwebtoken",
-          version: "8.5.1",
-          description: "JSON Web Tokenライブラリ",
-          projects: ["node api"],
-        },
-        {
           name: "apache poi",
           version: "5.4.0",
           description: "健康管理ダッシュボードで使用する帳票用ライブラリ",
@@ -163,7 +154,7 @@ export default {
         },
         {
           name: "logback",
-          version: "1.5.17",
+          version: "1.5.18",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
@@ -177,7 +168,7 @@ export default {
         },
         {
           name: "mybatis",
-          version: "3.5.16",
+          version: "3.5.19",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するORMライブラリ",
           projects: ["dashboard", "api", "root api"],
@@ -199,6 +190,12 @@ export default {
           version: "5.12.0",
           description: "Javaのテストライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
+        },
+        {
+          name: "mongoDB",
+          version: "8.2.1",
+          description: "健康情報蓄積APIで使用するNoSQL",
+          projects: ["track api"],
         },
       ],
     };

@@ -7,3 +7,9 @@ spring:
       - "classpath:/dev1/system.properties"
       - "classpath:/dev1/aws.properties"
       - "classpath:/dev1/healthInfo.properties"
+  messages:
+    basename: 
+      - messages
+      - dev1/commonErrorCode
+      - dev1/validateErrorCode
+      - dev1/businessErrorCode

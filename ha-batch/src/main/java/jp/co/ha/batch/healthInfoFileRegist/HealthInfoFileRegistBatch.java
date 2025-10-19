@@ -22,6 +22,7 @@ import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.component.UserComponent;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -33,7 +34,6 @@ import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.User;
 
 /**
@@ -114,23 +114,24 @@ public class HealthInfoFileRegistBatch implements Tasklet {
                                 "ユーザ情報が存在しません. seq_user_id=" + request.getSeqUserId());
                     });
 
-            ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+            ApiConnectInfo connectInfo = new ApiConnectInfo()
                     .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                     .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
                             + request.getSeqUserId() + "/healthinfo");
 
-            // API通信情報を登録
-            ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                    .create(api.getApiName(), request.getTransactionId(),
-                            api.getHttpMethod(), api.getUri(apiConnectInfo, request),
+            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                    .getPayload(request.getTransactionId(), api.getApiName(),
+                            api.getHttpMethod(),
+                            api.getUri(connectInfo, request),
                             request);
 
-            HealthInfoRegistApiResponse response = api.callApi(request, apiConnectInfo);
+            HealthInfoRegistApiResponse response = api.callApi(request, connectInfo);
             seqHealthInfoIdList.add(response.getHealthInfo().getSeqHealthInfoId());
 
-            // API通信情報を更新
-            apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
-                    response);
+            apiCommunicationDataComponent
+                    .fillResponseParam(payload, connectInfo, response);
+
+            apiCommunicationDataComponent.inQueue(payload);
         }
 
         // Slackを送信する

@@ -24,6 +24,7 @@ import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.business.api.track.response.HealthInfoMigrateApiResponse;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
@@ -37,7 +38,6 @@ import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -131,9 +131,9 @@ public class HealthInfoMigrateBatch implements Tasklet {
     private void sendHealthInfoMirgateApi(List<HealthInfo> healthInfoList)
             throws BaseException {
 
-        Long transactionId = apiCommunicationDataComponent.getTransactionId();
+        String transactionId = apiCommunicationDataComponent.getTransactionId();
 
-        ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getTrackApiUrl() + "healthinfo/");
 
         List<HealthInfoMigrateApiRequest> requestList = new ArrayList<>();
@@ -142,16 +142,19 @@ public class HealthInfoMigrateBatch implements Tasklet {
         }
 
         for (HealthInfoMigrateApiRequest request : requestList) {
-            // API通信情報を登録
-            ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                    .create(api.getApiName(), transactionId, api.getHttpMethod(),
-                            api.getUri(apiConnectInfo, request), request);
 
-            HealthInfoMigrateApiResponse response = api.callApi(request, apiConnectInfo);
+            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                    .getPayload(transactionId, api.getApiName(),
+                            api.getHttpMethod(),
+                            api.getUri(connectInfo, request),
+                            request);
 
-            // API通信情報を更新
-            apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
-                    response);
+            HealthInfoMigrateApiResponse response = api.callApi(request, connectInfo);
+
+            apiCommunicationDataComponent
+                    .fillResponseParam(payload, connectInfo, response);
+
+            apiCommunicationDataComponent.inQueue(payload);
         }
 
     }

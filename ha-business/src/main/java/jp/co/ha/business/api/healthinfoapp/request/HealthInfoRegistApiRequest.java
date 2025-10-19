@@ -42,7 +42,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     private TestMode testMode;
     /** トランザクションID */
     @JsonProperty("transaction_id")
-    private Long transactionId;
+    private String transactionId;
 
     /**
      * 身長を返す
@@ -106,7 +106,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
      *
      * @return transactionId
      */
-    public Long getTransactionId() {
+    public String getTransactionId() {
         return transactionId;
     }
 
@@ -116,7 +116,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
      * @param transactionId
      *     トランザクションID
      */
-    public void setTransactionId(Long transactionId) {
+    public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
 

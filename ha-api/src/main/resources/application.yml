@@ -7,6 +7,7 @@ spring:
     basename: messages
     fallback-to-system-locale: false
     locale: ja
+    cache-duration: 1s
   thymeleaf:
     check-template-location: false
   freemarker:

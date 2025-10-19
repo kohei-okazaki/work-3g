@@ -16,6 +16,7 @@ import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
@@ -33,7 +34,6 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
-import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.User;
@@ -97,30 +97,31 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         // ユーザ情報.APIキーを設定
         User user = userComponent.findById(seqUserId).get();
 
-        ApiConnectInfo apiConnectInfo = new ApiConnectInfo()
+        ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                 .withUrlSupplier(
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
-        // API通信情報.トランザクションIDを採番
-        Long transactionId = apiCommunicationDataComponent.getTransactionId();
+        // トランザクションIDを採番
+        String transactionId = apiCommunicationDataComponent.getTransactionId();
 
         HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
         BeanUtil.copy(dto, request);
         request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(registApi.getApiName(), transactionId, registApi.getHttpMethod(),
-                        registApi.getUri(apiConnectInfo, request), request);
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, registApi.getApiName(),
+                        registApi.getHttpMethod(),
+                        registApi.getUri(connectInfo, request), request);
 
         HealthInfoRegistApiResponse apiResponse = registApi.callApi(request,
-                apiConnectInfo);
+                connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, apiConnectInfo,
-                apiResponse);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, apiResponse);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         if (ResultType.SUCCESS != apiResponse.getResultType()) {
             // 健康情報登録APIの処理が成功以外の場合
