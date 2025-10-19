@@ -1,6 +1,5 @@
 package jp.co.ha.batch.listener;
 
-import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.StringJoiner;
 
@@ -10,6 +9,7 @@ import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.JobParameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.slack.SlackApiComponent;
@@ -74,7 +74,7 @@ public class BatchJobListener implements JobExecutionListener {
                 StringBuilder errorMessage = new StringBuilder()
                         .append(messageSource.getMessage(
                                 error.getErrorCode().getOuterErrorCode(), null,
-                                Locale.getDefault()))
+                                LocaleContextHolder.getLocale()))
                         .append("(")
                         .append(error.getErrorCode().getOuterErrorCode())
                         .append(")");
@@ -105,7 +105,7 @@ public class BatchJobListener implements JobExecutionListener {
         } else {
             BaseErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
             String detail = messageSource.getMessage(
-                    errorCode.getOuterErrorCode(), null, Locale.getDefault());
+                    errorCode.getOuterErrorCode(), null, LocaleContextHolder.getLocale());
             error = new SystemException(errorCode, detail);
         }
 

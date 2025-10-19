@@ -8,12 +8,12 @@ import jp.co.ha.business.api.node.request.TokenApiRequest;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
  * トークン発行APIのComponentクラス<br>
@@ -46,7 +46,7 @@ public class TokenApiComponent {
      *     API通信に失敗した場合
      */
     @Deprecated
-    public TokenApiResponse callTokenApi(Long seqUserId, Long transactionId)
+    public TokenApiResponse callTokenApi(Long seqUserId, String transactionId)
             throws BaseException {
 
         TokenApiRequest request = new TokenApiRequest();
@@ -56,16 +56,22 @@ public class TokenApiComponent {
                         + NodeApiType.TOKEN.getValue());
 
         // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiDataComponent
-                .create(tokenApi.getApiName(), transactionId,
-                        tokenApi.getHttpMethod(), tokenApi.getUri(connectInfo, request),
+        // ApiCommunicationData apiCommunicationData = apiDataComponent
+        // .create(tokenApi.getApiName(), transactionId,
+        // tokenApi.getHttpMethod(), tokenApi.getUri(connectInfo, request),
+        // request);
+        ApiCommunicationDataQueuePayload payload = apiDataComponent
+                .getPayload(transactionId, tokenApi.getApiName(),
+                        tokenApi.getHttpMethod(),
+                        tokenApi.getUri(connectInfo, request),
                         request);
 
         TokenApiResponse response = tokenApi.callApi(request, connectInfo);
 
         // API通信情報を更新
-        apiDataComponent.update(apiCommunicationData,
-                connectInfo, response);
+        // apiDataComponent.update(apiCommunicationData,
+        // connectInfo, response);
+        apiDataComponent.fillResponseParam(payload, connectInfo, response);
 
         if (Result.SUCCESS != response.getResult()) {
             // Token発行APIの処理が成功以外の場合

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import jp.co.ha.business.config.BusinessConfig;
 import jp.co.ha.common.config.CommonConfig;
+import jp.co.ha.common.type.Charset;
 import jp.co.ha.db.config.DbConfig;
 
 /**
@@ -62,7 +63,7 @@ public class ApiConfig implements WebMvcConfigurer {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasenames("messages", "apiErrorCode", "businessErrorCode",
                 "commonErrorCode", "validateErrorCode");
-        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setDefaultEncoding(Charset.UTF_8.getValue());
         return messageSource;
     }
 

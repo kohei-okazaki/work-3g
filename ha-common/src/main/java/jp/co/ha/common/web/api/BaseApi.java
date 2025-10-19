@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringJoiner;
 
@@ -70,66 +71,93 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * APIを呼び出す
      *
      * @param request
-     *     APIリクエストクラス
-     * @param apiConnectInfo
+     *     APIリクエスト
+     * @param connectInfo
      *     API接続に必要な情報
      * @return APIレスポンス
      */
     @SuppressWarnings("unchecked")
-    public Rs callApi(Rq request, ApiConnectInfo apiConnectInfo) {
+    public Rs callApi(Rq request, ApiConnectInfo connectInfo) {
 
         Rs response = getResponse();
         HttpStatusCode code = null;
-
         try {
 
-            URI uri = getUri(apiConnectInfo, request);
+            URI uri = getUri(connectInfo, request);
             LOG.info("====> API名=" + getApiName() + ",HttpMethod=" + getHttpMethod()
                     + ",URL=" + uri.toString());
             LOG.infoBean(request);
 
             RestTemplate restTemplate = getRestTemplate();
+            HttpMethod method = getHttpMethod();
+            RequestEntity<?> reqEntity = null;
 
-            if (HttpMethod.GET == getHttpMethod()) {
-                // GET通信の場合
-                HeadersBuilder<?> requestBuilder = RequestEntity.get(uri)
-                        .acceptCharset(apiConnectInfo.getCharset());
+            switch (method.toString()) {
+            case "GET":
 
-                // ヘッダーの設定
-                for (Entry<String, String> entry : apiConnectInfo.getHeaderMap()
+                HeadersBuilder<?> getBuilder = RequestEntity.get(uri)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .acceptCharset(connectInfo.getCharset());
+                for (Entry<String, String> entry : connectInfo.getHeaderMap()
                         .entrySet()) {
-                    requestBuilder.header(entry.getKey(), entry.getValue());
+                    getBuilder.header(entry.getKey(), entry.getValue());
                 }
-                RequestEntity<Void> reqEntity = requestBuilder.build();
+                reqEntity = getBuilder.build();
+                break;
 
-                ResponseEntity<Rs> responseEntity = (ResponseEntity<Rs>) restTemplate
-                        .exchange(reqEntity, response.getClass());
+            case "POST":
 
-                code = responseEntity.getStatusCode();
-                response = responseEntity.getBody();
-
-            } else {
-                // POST/PUT/DELETE通信の場合
-
-                BodyBuilder requestBuilder = RequestEntity.post(uri)
+                BodyBuilder postBuilder = RequestEntity.post(uri)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .acceptCharset(apiConnectInfo.getCharset());
-
-                // ヘッダーの設定
-                for (Entry<String, String> entry : apiConnectInfo.getHeaderMap()
+                        .acceptCharset(connectInfo.getCharset());
+                for (Entry<String, String> entry : connectInfo.getHeaderMap()
                         .entrySet()) {
-                    requestBuilder.header(entry.getKey(), entry.getValue());
+                    postBuilder.header(entry.getKey(), entry.getValue());
                 }
-                RequestEntity<Rq> reqEntity = requestBuilder.body(request);
+                reqEntity = postBuilder.body(request);
+                break;
 
-                // API通信
-                ResponseEntity<Rs> responseEntity = (ResponseEntity<Rs>) restTemplate
-                        .exchange(reqEntity, response.getClass());
+            case "PUT":
 
-                code = responseEntity.getStatusCode();
-                response = responseEntity.getBody();
+                BodyBuilder putBuilder = RequestEntity.put(uri)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .acceptCharset(connectInfo.getCharset());
+                for (Map.Entry<String, String> e : connectInfo.getHeaderMap()
+                        .entrySet()) {
+                    putBuilder.header(e.getKey(), e.getValue());
+                }
+                reqEntity = putBuilder.body(request);
+                break;
+
+            case "DELETE":
+
+                BodyBuilder deleteBuilder = RequestEntity
+                        .method(HttpMethod.DELETE, uri)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .acceptCharset(connectInfo.getCharset());
+                for (Entry<String, String> entry : connectInfo.getHeaderMap()
+                        .entrySet()) {
+                    deleteBuilder.header(entry.getKey(), entry.getValue());
+                }
+                // ボディを送るなら contentType を付与して body(...)、不要ならbuild()
+                if (request == null) {
+                    reqEntity = deleteBuilder.build();
+                } else {
+                    deleteBuilder.contentType(MediaType.APPLICATION_JSON);
+                    reqEntity = deleteBuilder.body(request);
+                }
+                break;
+
+            default:
+                throw new IllegalStateException("Unsupported HttpMethod: " + method);
             }
+
+            ResponseEntity<Rs> responseEntity = (ResponseEntity<Rs>) restTemplate
+                    .exchange(reqEntity, (Class<Rs>) response.getClass());
+            code = responseEntity.getStatusCode();
+            response = responseEntity.getBody();
 
         } catch (Exception e) {
 
@@ -142,7 +170,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             LOG.infoBean(response);
             LOG.info("<==== API名=" + getApiName() + ", HttpStatusCode=" + code);
             if (code != null) {
-                apiConnectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
+                connectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
             }
 
         }

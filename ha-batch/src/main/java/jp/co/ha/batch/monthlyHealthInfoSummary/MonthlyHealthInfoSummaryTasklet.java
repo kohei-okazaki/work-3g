@@ -2,7 +2,9 @@ package jp.co.ha.batch.monthlyHealthInfoSummary;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,15 +14,12 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
-import jp.co.ha.business.api.slack.SlackApiComponent;
-import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
@@ -43,20 +42,17 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 月次健康情報集計バッチ<br>
- * <ul>
- * <li>引数1=処理対象年月(YYYYMM)</li>
- * </ul>
+ * 月次健康情報集計バッチ-tasklet
  *
  * @version 1.0.0
  */
 @StepScope
 @Component
-public class MonthlyHealthInfoSummaryBatch implements Tasklet {
+public class MonthlyHealthInfoSummaryTasklet implements Tasklet {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory
-            .getLogger(MonthlyHealthInfoSummaryBatch.class);
+            .getLogger(MonthlyHealthInfoSummaryTasklet.class);
     /** 処理対象年月 */
     @Value("#{jobParameters[m]}")
     private String targetDate;
@@ -66,12 +62,6 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
     /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** AWS-S3 Component */
-    @Autowired
-    private AwsS3Component s3;
-    /** Slack Component */
-    @Autowired
-    private SlackApiComponent slack;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -89,14 +79,13 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         List<MonthlyHealthInfoSummaryModel> modelList = toModelList(healthInfoList);
         // 月次健康情報集計CSV
         File csv = writeCsv(targetDate, modelList);
-        // S3ファイルをアップロード
-        String s3key = AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName();
-        s3.putFile(s3key, csv);
 
-        // Slack通知
-        slack.sendFile(ContentType.BATCH, csv, "S3ファイルアップロード完了. key=" + s3key);
-        slack.send(ContentType.BATCH,
-                "monthly_health_info_summary_batch success.");
+        ExecutionContext executionContext = chunkContext.getStepContext()
+                .getStepExecution()
+                .getJobExecution()
+                .getExecutionContext();
+
+        executionContext.put("csv", csv);
 
         return RepeatStatus.FINISHED;
     }
@@ -116,7 +105,7 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
         LOG.debug("from=" + from + ", to=" + to);
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+                .orderBy("HEALTH_INFO_REG_DATE", SortType.ASC)
                 .orderBy("SEQ_USER_ID", SortType.ASC)
                 .build();
 
@@ -161,10 +150,17 @@ public class MonthlyHealthInfoSummaryBatch implements Tasklet {
     private File writeCsv(String targetDate,
             List<MonthlyHealthInfoSummaryModel> modelList) throws BaseException {
 
+        String path = prop.getMonthlySummaryBatchFilePath();
+        try {
+            // ディレクトリがなければ作成
+            Files.createDirectories(Paths.get(path));
+        } catch (IOException e) {
+            throw new BusinessException(e);
+        }
+
         String fileName = targetDate + FileExtension.CSV;
-        File file = Paths.get(prop.getMonthlySummaryBatchFilePath(), fileName).toFile();
-        CsvConfig conf = new CsvConfigBuilder(fileName,
-                prop.getMonthlySummaryBatchFilePath()).build();
+        File file = Paths.get(path, fileName).toFile();
+        CsvConfig conf = new CsvConfigBuilder(fileName, path).build();
 
         try (PrintWriter pw = new PrintWriter(file);
                 CsvWriter<MonthlyHealthInfoSummaryModel> writer = new MonthlyHealthInfoSummaryCsvWriter(
