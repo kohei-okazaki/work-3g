@@ -15,61 +15,86 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.ha.batch.listener.BatchJobListener;
-import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryBatch;
+import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryTasklet;
 import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator;
+import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoUploadTasklet;
 
 /**
- * 月次健康情報集計バッチのConfig
+ * 月次健康情報集計バッチのConfig<br>
+ * <ul>
+ * <li>引数1=処理対象年月(YYYYMM)</li>
+ * </ul>
  * 
  * @version 1.0.0
  */
 @Configuration
 public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
 
-    /** 月次健康情報集計バッチ */
+    /** 月次健康情報集計tasklet */
     @Autowired
-    private MonthlyHealthInfoSummaryBatch monthlyHealthInfoSummaryBatch;
+    private MonthlyHealthInfoSummaryTasklet monthlyHealthInfoSummaryTasklet;
+    /** 月次健康情報アップロード-tasklet */
+    @Autowired
+    private MonthlyHealthInfoUploadTasklet monthlyHealthInfoUploadTasklet;
 
     /**
-     * 月次健康情報集計バッチのJOB<br>
-     * monthlyHealthInfoSummaryBatchJob
+     * 月次健康情報集計バッチのJOB
      * 
      * @param jobRepository
-     *     {@linkplain JobRepository}
-     * @param monthlyHealthInfoSummaryBatchStep
+     *     JobRepository
+     * @param monthlyHealthInfoSummaryStep
      *     月次健康情報集計バッチのSTEP
+     * @param monthlyHealthInfoUploadStep
+     *     月次健康情報アップロードのSTEP
      * @param listener
-     *     {@linkplain BatchJobListener}
+     *     BatchJobListener
      * @return 月次健康情報集計バッチJOB
      */
     @Bean(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME)
     Job monthlyHealthInfoSummaryBatchJob(JobRepository jobRepository,
-            @Qualifier(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_STEP_NAME) Step monthlyHealthInfoSummaryBatchStep,
+            @Qualifier(MONTHLY_HEALTH_INFO_SUMMARY_STEP_NAME) Step monthlyHealthInfoSummaryStep,
+            @Qualifier(MONTHLY_HEALTH_INFO_UPLOAD_STEP_NAME) Step monthlyHealthInfoUploadStep,
             BatchJobListener listener) {
         return new JobBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .validator(new MonthlyHealthInfoSummaryValidator())
                 .listener(listener)
-                .flow(monthlyHealthInfoSummaryBatchStep)
-                .end()
+                .start(monthlyHealthInfoSummaryStep)
+                .next(monthlyHealthInfoUploadStep)
                 .build();
     }
 
     /**
-     * 月次健康情報集計バッチのSTEP<br>
-     * monthlyHealthInfoSummaryBatchStep
+     * 月次健康情報集計STEP
      * 
      * @param jobRepository
-     *     {@linkplain JobRepository}
+     *     JobRepository
      * @param transactionManager
-     *     {@linkplain PlatformTransactionManager}
+     *     PlatformTransactionManager
      * @return 月次健康情報集計のSTEP
      */
-    @Bean(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_STEP_NAME)
-    Step monthlyHealthInfoSummaryBatchStep(JobRepository jobRepository,
+    @Bean
+    Step monthlyHealthInfoSummaryStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_STEP_NAME, jobRepository)
-                .tasklet(monthlyHealthInfoSummaryBatch, transactionManager)
+        return new StepBuilder(MONTHLY_HEALTH_INFO_SUMMARY_STEP_NAME, jobRepository)
+                .tasklet(monthlyHealthInfoSummaryTasklet, transactionManager)
+                .build();
+    }
+
+    /**
+     * 月次健康情報アップロードSTEP
+     * 
+     * @param jobRepository
+     *     JobRepository
+     * @param transactionManager
+     *     PlatformTransactionManager
+     * @return 月次健康情報アップロードSTEP
+     */
+    @Bean
+    Step monthlyHealthInfoUploadStep(JobRepository jobRepository,
+            PlatformTransactionManager transactionManager) {
+        return new StepBuilder(MONTHLY_HEALTH_INFO_UPLOAD_STEP_NAME, jobRepository)
+                .tasklet(monthlyHealthInfoUploadTasklet, transactionManager)
                 .build();
     }
 }

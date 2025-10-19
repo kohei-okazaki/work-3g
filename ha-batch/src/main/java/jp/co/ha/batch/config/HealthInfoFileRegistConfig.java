@@ -30,15 +30,14 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
     private HealthInfoFileRegistBatch healthInfoFileRegistBatch;
 
     /**
-     * 健康情報一括登録バッチのJOB<br>
-     * healthInfoFileRegistBatchJob
+     * 健康情報一括登録バッチのJOB
      *
      * @param jobRepository
-     *     {@linkplain JobRepository}
+     *     JobRepository
      * @param healthInfoFileRegistBatchStep
      *     健康情報一括登録バッチのSTEP
      * @param listener
-     *     {@linkplain BatchJobListener}
+     *     BatchJobListener
      * @return 健康情報一括登録バッチJOB
      */
     @Bean(HEALTH_INFO_FILE_REGIST_BATCH_JOB_NAME)
@@ -48,20 +47,18 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
         return new JobBuilder(HEALTH_INFO_FILE_REGIST_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-                .flow(healthInfoFileRegistBatchStep)
-                .end()
+                .start(healthInfoFileRegistBatchStep)
                 .build();
 
     }
 
     /**
-     * 健康情報一括登録バッチのSTEP<br>
-     * healthInfoFileRegistBatchStep
+     * 健康情報一括登録バッチのSTEP
      *
      * @param jobRepository
-     *     {@linkplain JobRepository}
+     *     JobRepository
      * @param transactionManager
-     *     {@linkplain PlatformTransactionManager}
+     *     PlatformTransactionManager
      * @return 健康情報一括登録バッチのSTEP
      */
     @Bean(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME)

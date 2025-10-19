@@ -34,11 +34,11 @@ public class HealthInfoMigrateConfig extends BatchConfig {
      * 健康情報連携バッチのJOB
      * 
      * @param jobRepository
-     *     {@linkplain JobRepository}
+     *     JobRepository
      * @param healthInfoMigrateBatchStep
      *     ヘルスチェックバッチのSTEP
      * @param listener
-     *     {@linkplain BatchJobListener}
+     *     BatchJobListener
      * @return 健康情報連携バッチJOB
      */
     @Bean(HEALTH_INFO_MIGRATE_BATCH_JOB_NAME)
@@ -49,18 +49,17 @@ public class HealthInfoMigrateConfig extends BatchConfig {
                 .incrementer(new RunIdIncrementer())
                 .validator(new HealthInfoMigrateValidator())
                 .listener(listener)
-                .flow(healthInfoMigrateBatchStep)
-                .end()
+                .start(healthInfoMigrateBatchStep)
                 .build();
     }
 
     /**
-     * 健康情報連携バッチのSTEP<br>
+     * 健康情報連携バッチのSTEP
      * 
      * @param jobRepository
-     *     {@linkplain JobRepository}
+     *     JobRepository
      * @param transactionManager
-     *     {@linkplain PlatformTransactionManager}
+     *     PlatformTransactionManager
      * @return 健康情報連携バッチのSTEP
      */
     @Bean(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME)
