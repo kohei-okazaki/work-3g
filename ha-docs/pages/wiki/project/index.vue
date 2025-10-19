@@ -224,11 +224,11 @@ export default {
         },
         {
           name: "Node.js",
-          version: "14.16.0",
+          version: "24.10.0",
         },
         {
           name: "Python",
-          version: "3.8.8",
+          version: "3.13.8",
         },
       ],
     };

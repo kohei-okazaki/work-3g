@@ -123,7 +123,10 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${aws.s3.socket.timeout}") int s3SocketTimeout,
             @Value("${aws.ses.connection.timeout}") int sesConnnectionTimeout,
             @Value("${aws.ses.socket.timeout}") int sesSocketTimeout,
-            @Value("${aws.ses.stubflag}") boolean sesStubFlag) {
+            @Value("${aws.ses.stubflag}") boolean sesStubFlag,
+            @Value("${aws.sqs.queue.api_communication_data}") String apiCommunicationDataQueueName,
+            @Value("${aws.sqs.connection.timeout}") int sqsConnnectionTimeout,
+            @Value("${aws.sqs.socket.timeout}") int sqsSocketTimeout) {
 
         AwsProperties props = new AwsProperties();
         props.setRegion(region);
@@ -133,6 +136,9 @@ public class BusinessConfig implements WebMvcConfigurer {
         props.setSesConnnectionTimeout(sesConnnectionTimeout);
         props.setSesSocketTimeout(sesSocketTimeout);
         props.setSesStubFlag(sesStubFlag);
+        props.setApiCommunicationDataQueueName(apiCommunicationDataQueueName);
+        props.setSqsConnnectionTimeout(sqsConnnectionTimeout);
+        props.setSqsSocketTimeout(sqsSocketTimeout);
 
         return props;
     }

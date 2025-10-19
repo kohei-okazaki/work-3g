@@ -9,6 +9,7 @@ import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcApiResponse;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.dto.BreathingCapacityDto;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
@@ -16,7 +17,6 @@ import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
  * 肺活量計算APIのComponentクラス<br>
@@ -55,7 +55,7 @@ public class BreathingCapacityApiComponent {
             throws BaseException {
 
         // API通信情報.トランザクションIDを採番
-        Long transactionId = apiCommunicationDataComponent.getTransactionId();
+        String transactionId = apiCommunicationDataComponent.getTransactionId();
 
         BreathingCapacityCalcApiResponse apiResponse;
         if (prop.isHealthinfoNodeApiMigrateFlg()) {
@@ -92,7 +92,7 @@ public class BreathingCapacityApiComponent {
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, Long transactionId) throws BaseException {
+            BreathingCapacityDto dto, String transactionId) throws BaseException {
 
         BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
         BeanUtil.copy(dto, request);
@@ -101,18 +101,19 @@ public class BreathingCapacityApiComponent {
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.BREATHING_CAPACITY.getValue());
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent.create(
-                breathingCapacityCalcApi.getApiName(), transactionId,
-                breathingCapacityCalcApi.getHttpMethod(),
-                breathingCapacityCalcApi.getUri(connectInfo, request), request);
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, breathingCapacityCalcApi.getApiName(),
+                        breathingCapacityCalcApi.getHttpMethod(),
+                        breathingCapacityCalcApi.getUri(connectInfo, request),
+                        request);
 
         BreathingCapacityCalcApiResponse response = breathingCapacityCalcApi
                 .callApi(request, connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData,
-                connectInfo, response);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, response);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // 肺活量計算APIの処理が成功以外の場合
@@ -138,7 +139,7 @@ public class BreathingCapacityApiComponent {
      */
     @Deprecated
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, String token, Long transactionId)
+            BreathingCapacityDto dto, String token, String transactionId)
             throws BaseException {
 
         BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
@@ -149,18 +150,19 @@ public class BreathingCapacityApiComponent {
                         + NodeApiType.BREATHING_CAPACITY.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent.create(
-                breathingCapacityCalcApi.getApiName(), transactionId,
-                breathingCapacityCalcApi.getHttpMethod(),
-                breathingCapacityCalcApi.getUri(connectInfo, request), request);
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, breathingCapacityCalcApi.getApiName(),
+                        breathingCapacityCalcApi.getHttpMethod(),
+                        breathingCapacityCalcApi.getUri(connectInfo, request),
+                        request);
 
         BreathingCapacityCalcApiResponse response = breathingCapacityCalcApi
                 .callApi(request, connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData,
-                connectInfo, response);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, response);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // 肺活量計算APIの処理が成功以外の場合

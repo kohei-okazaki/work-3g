@@ -164,6 +164,11 @@
       <artifactId>apache-client</artifactId>
       <version>${com.amazonaws-version}</version>
     </dependency>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>sqs</artifactId>
+      <version>${com.amazonaws-version}</version>
+    </dependency>
 
     <!-- poi -->
     <dependency>

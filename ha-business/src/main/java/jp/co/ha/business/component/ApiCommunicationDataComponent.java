@@ -1,24 +1,26 @@
 package jp.co.ha.business.component;
 
 import java.net.URI;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.business.api.aws.AwsProperties;
+import jp.co.ha.business.api.aws.AwsSqsComponent;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse;
 import jp.co.ha.business.api.root.response.BaseRootApiResponse;
 import jp.co.ha.business.api.track.response.BaseTrackApiResponse;
 import jp.co.ha.business.db.crud.create.ApiCommunicationDataCreateService;
-import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.business.db.crud.update.ApiCommunicationDataUpdateService;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.common.web.form.BaseApiRequest;
-import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
  * API通信情報の共通Componentクラス
@@ -34,147 +36,150 @@ public class ApiCommunicationDataComponent {
     /** API通信情報更新サービス */
     @Autowired
     private ApiCommunicationDataUpdateService updateService;
-    /** API通信情報検索サービス */
+    /** SQS-Component */
     @Autowired
-    private ApiCommunicationDataSearchService searchService;
+    private AwsSqsComponent sqs;
+    /** AWS設定ファイル情報 */
+    @Autowired
+    private AwsProperties awsProps;
 
     /**
      * トランザクションIDを取得
      *
      * @return トランザクションID
      */
-    public Long getTransactionId() {
-        return searchService.selectLastTransactionId();
+    public String getTransactionId() {
+        return UUID.randomUUID().toString();
     }
 
     /**
-     * API通信情報を作成する
-     *
-     * @param apiName
-     *     API名
+     * キュー情報を登録
+     * 
+     * @param payload
+     *     Queue情報
+     * @throws BaseException
+     *     Queueの登録に失敗した場合
+     */
+    public void inQueue(ApiCommunicationDataQueuePayload payload) throws BaseException {
+        sqs.send(awsProps.getApiCommunicationDataQueueName(), payload,
+                payload.getTransactionId());
+    }
+
+    /**
+     * API通信情報Payloadを返す
+     * 
      * @param transactionId
      *     トランザクションID
+     * @param apiName
+     *     API名
      * @param method
      *     HTTPメソッド
      * @param url
      *     リクエストURL
      * @param request
-     *     リクエスト
-     * @return API通信情報
+     *     APIリクエスト
+     * @return API通信情報Payload
      * @throws BaseException
      *     JSONの変換に失敗した場合
      */
-    public ApiCommunicationData create(String apiName, Long transactionId,
-            HttpMethod method, URI url, BaseApiRequest request) throws BaseException {
+    public ApiCommunicationDataQueuePayload getPayload(
+            String transactionId, String apiName, HttpMethod method, URI url,
+            BaseApiRequest request) throws BaseException {
 
-        ApiCommunicationData entity = new ApiCommunicationData();
-        entity.setTransactionId(transactionId);
-        entity.setApiName(apiName);
-        entity.setHttpMethod(method.toString());
-        entity.setUrl(url.toString());
+        ApiCommunicationDataQueuePayload payload = new ApiCommunicationDataQueuePayload();
+        payload.setTransactionId(transactionId);
+        payload.setApiName(apiName);
+        payload.setHttpMethod(method.toString());
+        payload.setUrl(url.toString());
         if (HttpMethod.POST == method
                 || HttpMethod.PUT == method) {
-            entity.setBody(new JsonReader().read(request));
+            payload.setBody(new JsonReader().read(request));
         }
-        entity.setRequestDate(DateTimeUtil.getSysDate());
+        payload.setRequestDate(DateTimeUtil.getSysDate());
 
-        createService.create(entity);
-
-        return entity;
+        return payload;
     }
 
     /**
-     * 指定したAPI通信情報を更新する
-     *
-     * @param apiCommunicationData
-     *     {@linkplain ApiCommunicationData}
+     * API通信情報Payloadに応答項目を設定する
+     * 
+     * @param payload
+     *     API通信情報Payload
      * @param connectInfo
-     *     {@linkplain ApiConnectInfo}
+     *     API通信情報
      * @param response
-     *     {@linkplain BaseNodeApiResponse}
+     *     APIレスポンス
      */
-    public void update(ApiCommunicationData apiCommunicationData,
+    public void fillResponseParam(ApiCommunicationDataQueuePayload payload,
             ApiConnectInfo connectInfo, BaseNodeApiResponse response) {
-
         if (connectInfo.getHttpStatus() != null) {
-            apiCommunicationData
+            payload
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
-        apiCommunicationData.setDetail(response.getDetail());
-        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
-
-        updateService.update(apiCommunicationData);
+        payload.setDetail(response.getDetail());
+        payload.setResponseDate(DateTimeUtil.getSysDate());
     }
 
     /**
-     * 指定したAPI通信情報を更新する
-     *
-     * @param apiCommunicationData
-     *     {@linkplain ApiCommunicationData}
+     * API通信情報Payloadに応答項目を設定する
+     * 
+     * @param payload
+     *     API通信情報Payload
      * @param connectInfo
-     *     {@linkplain ApiConnectInfo}
+     *     API通信情報
      * @param response
-     *     {@linkplain BaseAppApiResponse}
+     *     APIレスポンス
      */
-    public void update(ApiCommunicationData apiCommunicationData,
+    public void fillResponseParam(ApiCommunicationDataQueuePayload payload,
             ApiConnectInfo connectInfo, BaseAppApiResponse response) {
-
         if (connectInfo.getHttpStatus() != null) {
-            apiCommunicationData
+            payload
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
         String detail = null;
         if (response.getErrorInfo() != null) {
             detail = response.getErrorInfo().getDetail();
         }
-        apiCommunicationData.setDetail(detail);
-        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
-
-        updateService.update(apiCommunicationData);
+        payload.setDetail(detail);
+        payload.setResponseDate(DateTimeUtil.getSysDate());
     }
 
     /**
-     * 指定したAPI通信情報を更新する
-     *
-     * @param apiCommunicationData
-     *     {@linkplain ApiCommunicationData}
+     * API通信情報Payloadに応答項目を設定する
+     * 
+     * @param payload
+     *     API通信情報Payload
      * @param connectInfo
-     *     {@linkplain ApiConnectInfo}
+     *     API通信情報
      * @param response
-     *     {@linkplain BaseRootApiResponse}
+     *     APIレスポンス
      */
-    public void update(ApiCommunicationData apiCommunicationData,
+    public void fillResponseParam(ApiCommunicationDataQueuePayload payload,
             ApiConnectInfo connectInfo, BaseRootApiResponse response) {
-
         if (connectInfo.getHttpStatus() != null) {
-            apiCommunicationData
+            payload
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
-        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
-
-        updateService.update(apiCommunicationData);
+        payload.setResponseDate(DateTimeUtil.getSysDate());
     }
 
     /**
-     * 指定したAPI通信情報を更新する
-     *
-     * @param apiCommunicationData
-     *     {@linkplain ApiCommunicationData}
+     * API通信情報Payloadに応答項目を設定する
+     * 
+     * @param payload
+     *     API通信情報Payload
      * @param connectInfo
-     *     {@linkplain ApiConnectInfo}
+     *     API通信情報
      * @param response
-     *     {@linkplain BaseTrackApiResponse}
+     *     APIレスポンス
      */
-    public void update(ApiCommunicationData apiCommunicationData,
+    public void fillResponseParam(ApiCommunicationDataQueuePayload payload,
             ApiConnectInfo connectInfo, BaseTrackApiResponse response) {
-
         if (connectInfo.getHttpStatus() != null) {
-            apiCommunicationData
+            payload
                     .setHttpStatus(String.valueOf(connectInfo.getHttpStatus().value()));
         }
-        apiCommunicationData.setResponseDate(DateTimeUtil.getSysDate());
-
-        updateService.update(apiCommunicationData);
+        payload.setResponseDate(DateTimeUtil.getSysDate());
     }
 
 }

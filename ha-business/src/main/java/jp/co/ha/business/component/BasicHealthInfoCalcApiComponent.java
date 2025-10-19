@@ -8,12 +8,12 @@ import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
+import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
-import jp.co.ha.db.entity.ApiCommunicationData;
 
 /**
  * 基礎健康情報計算APIComponentクラス<br>
@@ -46,16 +46,15 @@ public class BasicHealthInfoCalcApiComponent {
      *     API通信に失敗した場合
      */
     public BasicHealthInfoCalcApiResponse callBasicHealthInfoCalcApi(
-            BasicHealthInfoCalcApiRequest apiRequest, Long transactionId)
+            BasicHealthInfoCalcApiRequest apiRequest, String transactionId)
             throws BaseException {
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.BASIC.getValue());
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(basicHealthInfoCalcApi.getApiName(), transactionId,
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, basicHealthInfoCalcApi.getApiName(),
                         basicHealthInfoCalcApi.getHttpMethod(),
                         basicHealthInfoCalcApi.getUri(connectInfo, apiRequest),
                         apiRequest);
@@ -63,9 +62,10 @@ public class BasicHealthInfoCalcApiComponent {
         BasicHealthInfoCalcApiResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, connectInfo,
-                apiResponse);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, apiResponse);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合
@@ -92,7 +92,7 @@ public class BasicHealthInfoCalcApiComponent {
      */
     @Deprecated
     public BasicHealthInfoCalcApiResponse callBasicHealthInfoCalcApi(
-            BasicHealthInfoCalcApiRequest apiRequest, String token, Long transactionId)
+            BasicHealthInfoCalcApiRequest apiRequest, String token, String transactionId)
             throws BaseException {
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
@@ -100,9 +100,8 @@ public class BasicHealthInfoCalcApiComponent {
                         + NodeApiType.BASIC.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
-        // API通信情報を登録
-        ApiCommunicationData apiCommunicationData = apiCommunicationDataComponent
-                .create(basicHealthInfoCalcApi.getApiName(), transactionId,
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload(transactionId, basicHealthInfoCalcApi.getApiName(),
                         basicHealthInfoCalcApi.getHttpMethod(),
                         basicHealthInfoCalcApi.getUri(connectInfo, apiRequest),
                         apiRequest);
@@ -110,9 +109,10 @@ public class BasicHealthInfoCalcApiComponent {
         BasicHealthInfoCalcApiResponse apiResponse = basicHealthInfoCalcApi
                 .callApi(apiRequest, connectInfo);
 
-        // API通信情報を更新
-        apiCommunicationDataComponent.update(apiCommunicationData, connectInfo,
-                apiResponse);
+        apiCommunicationDataComponent
+                .fillResponseParam(payload, connectInfo, apiResponse);
+
+        apiCommunicationDataComponent.inQueue(payload);
 
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合

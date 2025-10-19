@@ -647,15 +647,7 @@
                 <p>
                   以下の結果が出力されていればOK（メジャーバージョンである21系が出力されていればOK）
                 </p>
-                <kbd>openjdk version "21.0.4" 2024-07-16 LTS</kbd><br />
-                <kbd
-                  >OpenJDK Runtime Environment Corretto-21.0.4.7.1 (build
-                  21.0.4+7-LTS)</kbd
-                ><br />
-                <kbd
-                  >OpenJDK 64-Bit Server VM Corretto-21.0.4.7.1 (build
-                  21.0.4+7-LTS, mixed mode, sharing)</kbd
-                >
+                <kbd>openjdk version "21.0.8" 2025-07-15 LTS</kbd>
               </details>
 
               <br />
@@ -791,7 +783,7 @@
               <br />
 
               <details>
-                <summary>ローカルTomcatサーバ構築</summary>
+                <summary>Java 設定</summary>
                 <p>
                   Eclipseを開き、以下の操作で 「Java
                   インストール」で設定したJavaを参照するようにする
@@ -862,112 +854,24 @@
                 <summary>Python インストール</summary>
                 <p>
                   <a
-                    href="https://www.anaconda.com/products/individual"
+                    href="https://www.python.org/downloads/windows/"
                     target="_blank"
                     rel="noopener noreferrer"
                     >ここ</a
                   >の画面下部から各OSに合わせてインストーラをダウンロード
                 </p>
-                <v-img
-                  style="width: 700px"
-                  src="/wiki/python-install1.png"
-                  alt="Python install手順1"
-                  title="Python install手順1"
-                />
-              </details>
-
-              <br />
-
-              <details>
-                <summary>Eclipse インタープリター設定</summary>
-                <p>
-                  ヘルプ → eclipseマーケットプレイス → PyDevを検索してInstall
-                </p>
-                <p>
-                  インタープリターは「Python
-                  インストール」でインストールしたAnacondaのパスを設定する
-                </p>
-                <p>
-                  ウィンドゥ → 設定 → PyDev → インタープリター →
-                  Pythonインタープリター → 一番上のBlowse for python...
-                </p>
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>項目名</th>
-                      <th>設定値</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>インタープリター名</td>
-                      <td>app-python</td>
-                    </tr>
-                    <tr>
-                      <td>インタープリター実行可能ファイル</td>
-                      <td>
-                        <ul>
-                          <li>
-                            <p>
-                              Windowsの場合<br /><kbd
-                                >C:\Users\${user}\anaconda3\python.exe</kbd
-                              >
-                            </p>
-                          </li>
-                          <li>
-                            <p>
-                              Macの場合<br /><kbd
-                                >/Users/${user}/opt/anaconda3/bin/python3.7</kbd
-                              >
-                            </p>
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
               </details>
 
               <br />
 
               <details>
                 <summary>Python コマンド一覧</summary>
-                <p>
-                  以下のコマンドはコマンドプロンプトやターミナルではなく、「Anaconda
-                  Prompt」で行う
-                </p>
-                <p>Anaconda Promptの開き方</p>
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>やりたいこと</th>
-                      <th>コマンド</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>本体のアップデート</td>
-                      <td><kbd>conda update conda -y</kbd></td>
-                    </tr>
-                    <tr>
-                      <td>パッケージ一式のアップデート</td>
-                      <td><kbd>conda update --all -y</kbd></td>
-                    </tr>
-                    <tr>
-                      <td>Pythonのバージョンのアップデート</td>
-                      <td><kbd>conda update python -y</kbd></td>
-                    </tr>
-                    <tr>
-                      <td>Anacondaのアンインストール</td>
-                      <td>
-                        <ol>
-                          <li><kbd>conda install anaconda-clean</kbd></li>
-                          <li><kbd>anaconda-clean --yes</kbd></li>
-                        </ol>
-                      </td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
+                <p>ha-trackのため、以下のコマンドを実行</p>
+                <ul>
+                  <li>pip install --upgrade pip</li>
+                  <li>pip install "Django>=5.2,<6.0"</li>
+                  <li>pip install djangoframework</li>
+                </ul>
               </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
@@ -987,7 +891,8 @@
               <v-alert text type="error" elevation="2" border="left">
                 <div class="text-body-2">
                   健康情報計算APIはAWS API
-                  Gateway+Lambda化したので後続処理は基本不要。
+                  Gateway+Lambda化したので後続処理は基本不要。<br>
+                  ha-docsやha-rootのfrontでnodeやnpmでサーバ起動するため必要。
                 </div>
               </v-alert>
               <details>
@@ -1000,11 +905,20 @@
                     >ここ</a
                   >から各OSに合わせてインストーラをダウンロード
                 </p>
-                <p>バージョンは偶数バージョンを選択</p>
+                <p>バージョンは偶数バージョンで最新を選択</p>
                 <p>
                   インストール完了後、コマンドプロンプトまたはターミナルで実行
                 </p>
                 <kbd>node -v</kbd>
+                <p>インストールしたバージョン情報を表示されていればOK</p>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>npm設定</summary>
+                <p>次にwindowsの環境変数を開き、「C:\Program Files\nodejs」をPathへ追加(npmコマンドを使えるようにするため)</p>
+                <kbd>npm -v</kbd>
                 <p>インストールしたバージョン情報を表示されていればOK</p>
               </details>
 

@@ -15,6 +15,9 @@ import software.amazon.awssdk.regions.Region;
  * <li>SESコネクションタイムアウト：設定ファイルで10秒を設定</li>
  * <li>SESソケットタイムアウト：設定ファイルで10秒を設定</li>
  * <li>SESスタブフラグ：true:メールを送信しない、false:送信する</li>
+ * <li>キュー名：環境毎にキュー名を設定</li>
+ * <li>SQSコネクションタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>SQSソケットタイムアウト：設定ファイルで10秒を設定</li>
  * </ul>
  *
  * @version 1.0.0
@@ -36,6 +39,12 @@ public class AwsProperties {
     private int sesSocketTimeout;
     /** SESスタブフラグ(true:メールを送信しない、false:送信する) */
     private boolean sesStubFlag;
+    /** キュー名 */
+    private String apiCommunicationDataQueueName;
+    /** SQSコネクションタイムアウト */
+    private int sqsConnnectionTimeout;
+    /** SQSソケットタイムアウト */
+    private int sqsSocketTimeout;
 
     /**
      * リージョンを返す
@@ -179,6 +188,63 @@ public class AwsProperties {
      */
     public void setSesStubFlag(boolean sesStubFlag) {
         this.sesStubFlag = sesStubFlag;
+    }
+
+    /**
+     * API通信情報キュー名を返す
+     * 
+     * @return apiCommunicationDataQueueName
+     */
+    public String getApiCommunicationDataQueueName() {
+        return apiCommunicationDataQueueName;
+    }
+
+    /**
+     * API通信情報キュー名を設定する
+     * 
+     * @param apiCommunicationDataQueueName
+     *     API通信情報キュー名
+     */
+    public void setApiCommunicationDataQueueName(String apiCommunicationDataQueueName) {
+        this.apiCommunicationDataQueueName = apiCommunicationDataQueueName;
+    }
+
+    /**
+     * SQSコネクションタイムアウトを返す
+     * 
+     * @return sqsConnnectionTimeout
+     */
+    public int getSqsConnnectionTimeout() {
+        return sqsConnnectionTimeout;
+    }
+
+    /**
+     * SQSコネクションタイムアウトを設定する
+     * 
+     * @param sqsConnnectionTimeout
+     *     SQSコネクションタイムアウト
+     */
+    public void setSqsConnnectionTimeout(int sqsConnnectionTimeout) {
+        this.sqsConnnectionTimeout = sqsConnnectionTimeout;
+    }
+
+    /**
+     * SQSソケットタイムアウトを返す
+     * 
+     * @return sqsSocketTimeout
+     */
+    public int getSqsSocketTimeout() {
+        return sqsSocketTimeout;
+    }
+
+    /**
+     * SQSソケットタイムアウトを設定する
+     * 
+     * @param sqsSocketTimeout
+     *     SQSソケットタイムアウト
+     */
+    public void setSqsSocketTimeout(int sqsSocketTimeout) {
+        this.sqsSocketTimeout = sqsSocketTimeout;
     }
 
 }
