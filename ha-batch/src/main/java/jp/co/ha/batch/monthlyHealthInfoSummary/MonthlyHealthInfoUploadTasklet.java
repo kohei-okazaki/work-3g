@@ -1,6 +1,8 @@
 package jp.co.ha.batch.monthlyHealthInfoSummary;
 
 import java.io.File;
+import java.util.Objects;
+import java.util.StringJoiner;
 
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -15,6 +17,7 @@ import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
+import jp.co.ha.common.util.StringUtil;
 
 /**
  * 月次健康情報アップロード-tasklet
@@ -43,8 +46,16 @@ public class MonthlyHealthInfoUploadTasklet implements Tasklet {
 
         // 月次健康情報集計CSV
         File csv = executionContext.get("csv", File.class);
+        if (Objects.isNull(csv)) {
+            // 月次健康情報集計CSVがない場合
+            return RepeatStatus.FINISHED;
+        }
         // S3ファイルをアップロード
-        String s3key = AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue() + csv.getName();
+        StringJoiner sj = new StringJoiner(StringUtil.THRASH)
+                .add(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue())
+                .add("year=" + csv.getName().substring(0, 4))
+                .add(csv.getName());
+        String s3key = sj.toString();
         s3.putFile(s3key, csv);
 
         // Slack通知

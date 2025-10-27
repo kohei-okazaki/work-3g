@@ -1,6 +1,6 @@
-package jp.co.ha.batch.config;
+package jp.co.ha.batch.healthcheck;
 
-import static jp.co.ha.batch.config.BatchConfigConst.*;
+import static jp.co.ha.batch.base.BatchConfigConst.*;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -16,9 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import jp.co.ha.batch.healthcheck.AppApiHealthCheckTasklet;
-import jp.co.ha.batch.healthcheck.NotifyTasklet;
-import jp.co.ha.batch.healthcheck.RootApiHealthCheckTasklet;
+import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
 
 /**
@@ -37,11 +35,10 @@ public class HealthCheckConfig extends BatchConfig {
     private RootApiHealthCheckTasklet rootApiHealthCheckTasklet;
     /** 共通通知tasklet */
     @Autowired
-    private NotifyTasklet notifyTasklet;
+    private HealthCheckNotifyTasklet notifyTasklet;
 
     /**
-     * ヘルスチェックバッチのJOB<br>
-     * healthCheckBatchJob
+     * ヘルスチェックバッチのJOB
      *
      * @param jobRepository
      *     jobRepository
@@ -49,7 +46,7 @@ public class HealthCheckConfig extends BatchConfig {
      *     健康管理アプリヘルスチェックStep
      * @param rootApihealthCheckStep
      *     管理者用APIヘルスチェックStep
-     * @param notifyStep
+     * @param healthCheckNotifyStep
      *     通知用Step
      * @param listener
      *     BatchJobListener
@@ -59,20 +56,20 @@ public class HealthCheckConfig extends BatchConfig {
     Job healthCheckBatchJob(JobRepository jobRepository,
             @Qualifier(HEALTH_CHECK_APP_API_STEP_NAME) Step appApihealthCheckStep,
             @Qualifier(HEALTH_CHECK_ROOT_API_STEP_NAME) Step rootApihealthCheckStep,
-            @Qualifier(HEALTH_CHECK_NOTIFY_STEP_NAME) Step notifyStep,
+            @Qualifier(HEALTH_CHECK_NOTIFY_STEP_NAME) Step healthCheckNotifyStep,
             BatchJobListener listener) {
 
         Flow appApiHealthCheckFlow = new FlowBuilder<Flow>(HEALTH_CHECK_APP_API_FLOW_NAME)
                 .start(appApihealthCheckStep)
                 .on("*")
-                .to(notifyStep)
+                .to(healthCheckNotifyStep)
                 .end();
 
         Flow rootApiHealthCheckFlow = new FlowBuilder<Flow>(
                 HEALTH_CHECK_ROOT_API_FLOW_NAME)
                         .start(rootApihealthCheckStep)
                         .on("*")
-                        .to(notifyStep)
+                        .to(healthCheckNotifyStep)
                         .end();
 
         return new JobBuilder(HEALTH_CHECK_BACTH_JOB_NAME, jobRepository)
@@ -128,7 +125,7 @@ public class HealthCheckConfig extends BatchConfig {
      * @return 通知用Step
      */
     @Bean
-    Step notifyStep(JobRepository jobRepository,
+    Step healthCheckNotifyStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_CHECK_NOTIFY_STEP_NAME, jobRepository)
                 .tasklet(notifyTasklet, transactionManager)

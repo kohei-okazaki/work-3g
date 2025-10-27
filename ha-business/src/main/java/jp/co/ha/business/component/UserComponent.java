@@ -117,6 +117,7 @@ public class UserComponent {
      *     誕生日
      * @return 年齢
      * @throws BusinessException
+     *     誕生日 > sydateの場合
      */
     public int getAge(LocalDate birthDate) throws BusinessException {
 
@@ -213,6 +214,7 @@ public class UserComponent {
      * ユーザ関連情報の更新処理を行う
      * 
      * @param dto
+     *     ユーザDTO
      * @throws BaseException
      *     更新処理に失敗した場合
      */

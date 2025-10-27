@@ -145,7 +145,7 @@ export default {
       this.loading = true;
       let reqBody = {
         password: this.password,
-        conf_password: this.conf_password,
+        conf_password: this.confPassword,
       };
       axios.post(url, reqBody).then(
         (result) => {

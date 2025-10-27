@@ -19,7 +19,7 @@
           :error="error"
           :labels="healthInfoLabels"
           :values="healthInfoValues"
-          title="健康情報登録者数"
+          title="健康情報登録数"
           text="下記年月に登録した全ユーザの健康情報登録情報数"
           color="cyan"
           @get-graph="getHealthInfoGraph"

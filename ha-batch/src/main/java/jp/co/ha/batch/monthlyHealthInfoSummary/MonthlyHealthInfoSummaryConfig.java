@@ -1,6 +1,6 @@
-package jp.co.ha.batch.config;
+package jp.co.ha.batch.monthlyHealthInfoSummary;
 
-import static jp.co.ha.batch.config.BatchConfigConst.*;
+import static jp.co.ha.batch.base.BatchConfigConst.*;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,10 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
-import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryTasklet;
-import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoSummaryValidator;
-import jp.co.ha.batch.monthlyHealthInfoSummary.MonthlyHealthInfoUploadTasklet;
 
 /**
  * 月次健康情報集計バッチのConfig<br>

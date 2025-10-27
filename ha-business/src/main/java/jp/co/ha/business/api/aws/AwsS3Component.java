@@ -109,7 +109,9 @@ public class AwsS3Component {
      * 指定されたキーへ文字列データをファイルとして配置する
      *
      * @param key
+     *     キー
      * @param strData
+     *     文字列データ
      * @throws BusinessException
      *     S3からファイルダウンロードエラー
      * @see #putFile(String, long, InputStream)
@@ -316,7 +318,7 @@ public class AwsS3Component {
         /** お知らせ一覧JSONファイルの配置キー */
         NEWS_JSON("news/"),
         /** 月次健康情報集計CSV配置キー */
-        MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo/"),
+        MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo"),
         /** Slack接続情報キー */
         SLACK_CONNECTION_DATA("slack/slack_connection_data.json"),
         /** メモ情報配置キー */

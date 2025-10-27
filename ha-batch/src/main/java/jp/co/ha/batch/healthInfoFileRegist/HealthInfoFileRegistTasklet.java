@@ -37,13 +37,13 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.User;
 
 /**
- * 健康情報一括登録を実行するバッチ
+ * 健康情報一括登録-Tasklet
  *
  * @version 1.0.0
  */
 @StepScope
 @Component
-public class HealthInfoFileRegistBatch implements Tasklet {
+public class HealthInfoFileRegistTasklet implements Tasklet {
 
     /** 健康情報設定ファイル */
     @Autowired
@@ -119,19 +119,13 @@ public class HealthInfoFileRegistBatch implements Tasklet {
                     .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
                             + request.getSeqUserId() + "/healthinfo");
 
-            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
-                    .getPayload(request.getTransactionId(), api.getApiName(),
-                            api.getHttpMethod(),
-                            api.getUri(connectInfo, request),
-                            request);
-
             HealthInfoRegistApiResponse response = api.callApi(request, connectInfo);
             seqHealthInfoIdList.add(response.getHealthInfo().getSeqHealthInfoId());
 
-            apiCommunicationDataComponent
-                    .fillResponseParam(payload, connectInfo, response);
-
-            apiCommunicationDataComponent.inQueue(payload);
+            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                    .getPayload4AppApi(api, connectInfo, request, response,
+                            request.getTransactionId());
+            apiCommunicationDataComponent.registQueue(payload);
         }
 
         // Slackを送信する

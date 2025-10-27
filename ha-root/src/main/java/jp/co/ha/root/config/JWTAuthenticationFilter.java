@@ -16,7 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,7 +46,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /** ログインAPIのパス */
     private static final String LOGIN_API_PATH = "/api/root/login";
     /** ログインAPIのHTTPメソッド */
-    private static final String LOGIN_API_METHOD = HttpMethod.POST.name();
+    private static final HttpMethod LOGIN_API_METHOD = HttpMethod.POST;
     /** 要求パラメータ:ログインID */
     private static final String REQ_PARAM_SEQ_LOGIN_ID = "seq_login_id";
     /** 要求パラメータ:パスワード */
@@ -73,8 +73,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.passwordEncoder = passwordEncoder;
 
         // ログインAPIのpathを変更
-        setRequiresAuthenticationRequestMatcher(
-                new AntPathRequestMatcher(LOGIN_API_PATH, LOGIN_API_METHOD));
+        setRequiresAuthenticationRequestMatcher(PathPatternRequestMatcher
+                .withDefaults()
+                .matcher(LOGIN_API_METHOD, LOGIN_API_PATH));
 
         // ログイン用のID/PWのパラメータ名を変更する
         setUsernameParameter(REQ_PARAM_SEQ_LOGIN_ID);

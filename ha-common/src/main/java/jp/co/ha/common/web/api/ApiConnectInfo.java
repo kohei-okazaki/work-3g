@@ -1,6 +1,7 @@
 package jp.co.ha.common.web.api;
 
 import java.nio.charset.Charset;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -8,8 +9,8 @@ import java.util.function.Supplier;
 import org.springframework.http.HttpStatus;
 
 /**
- * API接続に必要な情報を渡す用のBeanクラス<br>
- * 設定情報は以下とする
+ * API接続情報のBeanクラス<br>
+ * API設定情報は以下とする
  * <ul>
  * <li>文字コード(デフォルトでUTF-8)</li>
  * <li>リクエストヘッダーのMap</li>
@@ -33,6 +34,10 @@ public class ApiConnectInfo {
     private Map<String, String> headerMap = new HashMap<>();
     /** HTTPステータス */
     private HttpStatus httpStatus;
+    /** API通信リクエスト日時 */
+    private LocalDateTime requestDate;
+    /** API通信レスポンス日時 */
+    private LocalDateTime responseDate;
 
     /**
      * urlSupplierを返す
@@ -66,7 +71,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * charsetを返す
+     * 文字コードを返す
      *
      * @return charset
      */
@@ -75,7 +80,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * charsetを設定する
+     * 文字コードを設定する
      *
      * @param charset
      *     文字コード
@@ -85,7 +90,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * charsetを設定する
+     * 文字コードを設定する
      *
      * @param charset
      *     文字コード
@@ -95,7 +100,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * charsetを設定する
+     * 文字コードを設定する
      *
      * @param charset
      *     文字コード
@@ -107,7 +112,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * headerMapを返す
+     * リクエストヘッダMapを返す
      *
      * @return headerMap
      */
@@ -142,7 +147,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * httpStatusを返す
+     * HTTPステータスを返す
      *
      * @return httpStatus
      */
@@ -151,13 +156,51 @@ public class ApiConnectInfo {
     }
 
     /**
-     * httpStatusを設定する
+     * HTTPステータスを設定する
      *
      * @param httpStatus
      *     HTTPステータス
      */
     public void setHttpStatus(HttpStatus httpStatus) {
         this.httpStatus = httpStatus;
+    }
+
+    /**
+     * API通信リクエスト日時を返す
+     * 
+     * @return requestDate
+     */
+    public LocalDateTime getRequestDate() {
+        return requestDate;
+    }
+
+    /**
+     * API通信リクエスト日時を設定する
+     * 
+     * @param requestDate
+     *     API通信リクエスト日時
+     */
+    public void setRequestDate(LocalDateTime requestDate) {
+        this.requestDate = requestDate;
+    }
+
+    /**
+     * API通信レスポンス日時を返す
+     * 
+     * @return responseDate
+     */
+    public LocalDateTime getResponseDate() {
+        return responseDate;
+    }
+
+    /**
+     * API通信レスポンス日時を設定する
+     * 
+     * @param responseDate
+     *     API通信レスポンス日時
+     */
+    public void setResponseDate(LocalDateTime responseDate) {
+        this.responseDate = responseDate;
     }
 
 }

@@ -32,7 +32,7 @@ public class TokenApiComponent {
     private HealthInfoProperties prop;
     /** API通信情報Component */
     @Autowired
-    private ApiCommunicationDataComponent apiDataComponent;
+    private ApiCommunicationDataComponent apiCommunicationDataComponent;
 
     /**
      * Token発行APIを呼び出す
@@ -55,23 +55,12 @@ public class TokenApiComponent {
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());
 
-        // API通信情報を登録
-        // ApiCommunicationData apiCommunicationData = apiDataComponent
-        // .create(tokenApi.getApiName(), transactionId,
-        // tokenApi.getHttpMethod(), tokenApi.getUri(connectInfo, request),
-        // request);
-        ApiCommunicationDataQueuePayload payload = apiDataComponent
-                .getPayload(transactionId, tokenApi.getApiName(),
-                        tokenApi.getHttpMethod(),
-                        tokenApi.getUri(connectInfo, request),
-                        request);
-
         TokenApiResponse response = tokenApi.callApi(request, connectInfo);
 
-        // API通信情報を更新
-        // apiDataComponent.update(apiCommunicationData,
-        // connectInfo, response);
-        apiDataComponent.fillResponseParam(payload, connectInfo, response);
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload4NodeApi(tokenApi, connectInfo, request, response,
+                        transactionId);
+        apiCommunicationDataComponent.registQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // Token発行APIの処理が成功以外の場合

@@ -1,4 +1,4 @@
-package jp.co.ha.batch.healthInfoMigrateBatch;
+package jp.co.ha.batch.healthInfoMigrate;
 
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersInvalidException;

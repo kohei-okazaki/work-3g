@@ -31,6 +31,7 @@ public class LoginCheck {
      *     入力されたパスワード
      * @return ログイン情報チェック結果
      * @throws BaseException
+     *     ハッシュ化に失敗した場合
      */
     public LoginCheckResult check(Optional<User> user, String inputPassword)
             throws BaseException {
@@ -84,6 +85,7 @@ public class LoginCheck {
      * @param user
      *     ユーザ情報
      * @throws BaseException
+     *     ハッシュ化に失敗した場合
      */
     private void checkInvalidPassword(LoginCheckResult result, String inputPassword,
             User user) throws BaseException {

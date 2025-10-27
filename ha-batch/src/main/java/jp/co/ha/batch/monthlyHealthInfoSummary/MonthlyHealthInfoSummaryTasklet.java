@@ -35,6 +35,7 @@ import jp.co.ha.common.io.file.csv.writer.CsvWriter;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
+import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
@@ -75,6 +76,10 @@ public class MonthlyHealthInfoSummaryTasklet implements Tasklet {
 
         // 健康情報リスト
         List<HealthInfo> healthInfoList = getHealthInfoList();
+        if (CollectionUtil.isEmpty(healthInfoList)) {
+            // 健康情報の登録がない場合
+            return RepeatStatus.FINISHED;
+        }
         // 月次健康情報集計CSV Modelリスト
         List<MonthlyHealthInfoSummaryModel> modelList = toModelList(healthInfoList);
         // 月次健康情報集計CSV

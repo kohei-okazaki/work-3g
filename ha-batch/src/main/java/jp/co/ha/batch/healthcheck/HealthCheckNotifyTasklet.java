@@ -25,11 +25,11 @@ import jp.co.ha.common.system.SystemProperties;
  */
 @StepScope
 @Component
-public class NotifyTasklet implements Tasklet {
+public class HealthCheckNotifyTasklet implements Tasklet {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory
-            .getLogger(NotifyTasklet.class);
+            .getLogger(HealthCheckNotifyTasklet.class);
 
     /** AWS S3 Component */
     @Autowired

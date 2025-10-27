@@ -59,7 +59,7 @@ public class PagingView extends JsonEntity {
     private String firstHref;
 
     /**
-     * totalRecordNumを返す
+     * 合計レコード数を返す
      *
      * @return totalRecordNum
      */
@@ -68,16 +68,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * totalRecordNumを設定する
+     * 合計レコード数を設定する
      *
      * @param totalRecordNum
+     *     合計レコード数
      */
     public void setTotalRecordNum(long totalRecordNum) {
         this.totalRecordNum = totalRecordNum;
     }
 
     /**
-     * fromRecordNumを返す
+     * レコード数(from)を返す
      *
      * @return fromRecordNum
      */
@@ -86,16 +87,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * fromRecordNumを設定する
+     * レコード数(from)を設定する
      *
      * @param fromRecordNum
+     *     レコード数(from)
      */
     public void setFromRecordNum(int fromRecordNum) {
         this.fromRecordNum = fromRecordNum;
     }
 
     /**
-     * toRecordNumを返す
+     * レコード数(to)を返す
      *
      * @return toRecordNum
      */
@@ -104,16 +106,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * toRecordNumを設定する
+     * レコード数(to)を設定する
      *
      * @param toRecordNum
+     *     レコード数(to)
      */
     public void setToRecordNum(long toRecordNum) {
         this.toRecordNum = toRecordNum;
     }
 
     /**
-     * totalPageを返す
+     * 総ページ数を返す
      *
      * @return totalPage
      */
@@ -122,7 +125,7 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * totalPageを設定する
+     * 総ページ数を設定する
      *
      * @param totalPage
      *     総ページ数
@@ -132,7 +135,7 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * currentPageNumを返す
+     * 現在のページ数を返す
      *
      * @return currentPageNum
      */
@@ -141,16 +144,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * currentPageNumを設定する
+     * 現在のページ数を設定する
      *
      * @param currentPageNum
+     *     現在のページ数
      */
     public void setCurrentPageNum(int currentPageNum) {
         this.currentPageNum = currentPageNum;
     }
 
     /**
-     * recordPerPageを返す
+     * 1ページあたりのレコード数を返す
      *
      * @return recordPerPage
      */
@@ -159,16 +163,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * recordPerPageを設定する
+     * 1ページあたりのレコード数を設定する
      *
      * @param recordPerPage
+     *     1ページあたりのレコード数
      */
     public void setRecordPerPage(int recordPerPage) {
         this.recordPerPage = recordPerPage;
     }
 
     /**
-     * canGoNextを返す
+     * 次リンク押下できるかどうかを返す
      *
      * @return canGoNext
      */
@@ -177,16 +182,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * canGoNextを設定する
+     * 次リンク押下できるかどうかを設定する
      *
      * @param canGoNext
+     *     次リンク押下できるかどうか
      */
     public void setCanGoNext(boolean canGoNext) {
         this.canGoNext = canGoNext;
     }
 
     /**
-     * nextHrefを返す
+     * 次リンクのhref属性を返す
      *
      * @return nextHref
      */
@@ -195,16 +201,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * nextHrefを設定する
+     * 次リンクのhref属性を設定する
      *
      * @param nextHref
+     *     次リンクのhref属性
      */
     public void setNextHref(String nextHref) {
         this.nextHref = nextHref;
     }
 
     /**
-     * canGoPreviousを返す
+     * 前リンク押下できるかどうかを返す
      *
      * @return canGoPrevious
      */
@@ -213,16 +220,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * canGoPreviousを設定する
+     * 前リンク押下できるかどうかを設定する
      *
      * @param canGoPrevious
+     *     前リンク押下できるかどうか
      */
     public void setCanGoPrevious(boolean canGoPrevious) {
         this.canGoPrevious = canGoPrevious;
     }
 
     /**
-     * previousHrefを返す
+     * 前リンクのhref属性を返す
      *
      * @return previousHref
      */
@@ -231,16 +239,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * previousHrefを設定する
+     * 前リンクのhref属性を設定する
      *
      * @param previousHref
+     *     前リンクのhref属性
      */
     public void setPreviousHref(String previousHref) {
         this.previousHref = previousHref;
     }
 
     /**
-     * canGoLastを返す
+     * 最後ページまでのリンクを押下できるかどうかを返す
      *
      * @return canGoLast
      */
@@ -249,16 +258,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * canGoLastを設定する
+     * 最後ページまでのリンクを押下できるかどうかを設定する
      *
      * @param canGoLast
+     *     最後ページまでのリンクを押下できるかどうか
      */
     public void setCanGoLast(boolean canGoLast) {
         this.canGoLast = canGoLast;
     }
 
     /**
-     * lastHrefを返す
+     * 最後ページリンクのhref属性を返す
      *
      * @return lastHref
      */
@@ -267,16 +277,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * lastHrefを設定する
+     * 最後ページリンクのhref属性を設定する
      *
      * @param lastHref
+     *     最後ページリンクのhref属性
      */
     public void setLastHref(String lastHref) {
         this.lastHref = lastHref;
     }
 
     /**
-     * canGoFirstを返す
+     * 先頭ページまでのリンクを押下できるかどうかを返す
      *
      * @return canGoFirst
      */
@@ -285,16 +296,17 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * canGoFirstを設定する
+     * 先頭ページまでのリンクを押下できるかどうかを設定する
      *
      * @param canGoFirst
+     *     先頭ページまでのリンクを押下できるかどうか
      */
     public void setCanGoFirst(boolean canGoFirst) {
         this.canGoFirst = canGoFirst;
     }
 
     /**
-     * firstHrefを返す
+     * 先頭ページリンクのhref属性を返す
      *
      * @return firstHref
      */
@@ -303,9 +315,10 @@ public class PagingView extends JsonEntity {
     }
 
     /**
-     * firstHrefを設定する
+     * 先頭ページリンクのhref属性を設定する
      *
      * @param firstHref
+     *     先頭ページリンクのhref属性
      */
     public void setFirstHref(String firstHref) {
         this.firstHref = firstHref;

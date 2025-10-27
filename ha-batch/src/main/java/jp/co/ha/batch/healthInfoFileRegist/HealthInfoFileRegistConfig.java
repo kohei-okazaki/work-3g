@@ -1,6 +1,6 @@
-package jp.co.ha.batch.config;
+package jp.co.ha.batch.healthInfoFileRegist;
 
-import static jp.co.ha.batch.config.BatchConfigConst.*;
+import static jp.co.ha.batch.base.BatchConfigConst.*;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistBatch;
+import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
 
 /**
@@ -25,17 +25,17 @@ import jp.co.ha.batch.listener.BatchJobListener;
 @Configuration
 public class HealthInfoFileRegistConfig extends BatchConfig {
 
-    /** 健康情報一括登録バッチ */
+    /** 健康情報一括登録Tasklet */
     @Autowired
-    private HealthInfoFileRegistBatch healthInfoFileRegistBatch;
+    private HealthInfoFileRegistTasklet healthInfoFileRegistTasklet;
 
     /**
-     * 健康情報一括登録バッチのJOB
+     * 健康情報一括登録バッチJOB
      *
      * @param jobRepository
      *     JobRepository
      * @param healthInfoFileRegistBatchStep
-     *     健康情報一括登録バッチのSTEP
+     *     健康情報一括登録STEP
      * @param listener
      *     BatchJobListener
      * @return 健康情報一括登録バッチJOB
@@ -53,7 +53,7 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
     }
 
     /**
-     * 健康情報一括登録バッチのSTEP
+     * 健康情報一括登録STEP
      *
      * @param jobRepository
      *     JobRepository
@@ -66,7 +66,7 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME,
                 jobRepository)
-                        .tasklet(healthInfoFileRegistBatch, transactionManager)
+                        .tasklet(healthInfoFileRegistTasklet, transactionManager)
                         .build();
     }
 }

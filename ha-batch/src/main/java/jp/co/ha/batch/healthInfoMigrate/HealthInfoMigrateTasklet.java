@@ -1,4 +1,4 @@
-package jp.co.ha.batch.healthInfoMigrateBatch;
+package jp.co.ha.batch.healthInfoMigrate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報連携バッチ
+ * 健康情報連携処理-Tasklet
  * <ul>
  * <li>引数1=処理対象日(YYYYMMDD)</li>
  * </ul>
@@ -50,11 +50,11 @@ import jp.co.ha.db.entity.HealthInfo;
  */
 @StepScope
 @Component
-public class HealthInfoMigrateBatch implements Tasklet {
+public class HealthInfoMigrateTasklet implements Tasklet {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory
-            .getLogger(HealthInfoMigrateBatch.class);
+            .getLogger(HealthInfoMigrateTasklet.class);
     /** 処理対象日(YYYYMMDD) */
     @Value("#{jobParameters[d]}")
     private String targetDate;
@@ -143,18 +143,12 @@ public class HealthInfoMigrateBatch implements Tasklet {
 
         for (HealthInfoMigrateApiRequest request : requestList) {
 
-            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
-                    .getPayload(transactionId, api.getApiName(),
-                            api.getHttpMethod(),
-                            api.getUri(connectInfo, request),
-                            request);
-
             HealthInfoMigrateApiResponse response = api.callApi(request, connectInfo);
 
-            apiCommunicationDataComponent
-                    .fillResponseParam(payload, connectInfo, response);
-
-            apiCommunicationDataComponent.inQueue(payload);
+            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                    .getPayload4TrackApi(api, connectInfo, request, response,
+                            transactionId);
+            apiCommunicationDataComponent.registQueue(payload);
         }
 
     }

@@ -1,6 +1,6 @@
-package jp.co.ha.batch.config;
+package jp.co.ha.batch.healthInfoMigrate;
 
-import static jp.co.ha.batch.config.BatchConfigConst.*;
+import static jp.co.ha.batch.base.BatchConfigConst.*;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,8 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import jp.co.ha.batch.healthInfoMigrateBatch.HealthInfoMigrateBatch;
-import jp.co.ha.batch.healthInfoMigrateBatch.HealthInfoMigrateValidator;
+import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
 
 /**
@@ -28,7 +27,7 @@ public class HealthInfoMigrateConfig extends BatchConfig {
 
     /** 健康情報連携バッチ */
     @Autowired
-    private HealthInfoMigrateBatch healthInfoMigrateBatch;
+    private HealthInfoMigrateTasklet healthInfoMigrateTasklet;
 
     /**
      * 健康情報連携バッチのJOB
@@ -66,7 +65,7 @@ public class HealthInfoMigrateConfig extends BatchConfig {
     Step healthInfoMigrateBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME, jobRepository)
-                .tasklet(healthInfoMigrateBatch, transactionManager)
+                .tasklet(healthInfoMigrateTasklet, transactionManager)
                 .build();
     }
 }

@@ -27,7 +27,7 @@ public class InquiryListApiResponse extends BaseRootApiResponse
     private List<Inquiry> inquiryList;
 
     /**
-     * 問い合わせ情報リスト を返す
+     * 問い合わせ情報リストを返す
      *
      * @return inquiryList
      */
@@ -36,7 +36,7 @@ public class InquiryListApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * 問い合わせ情報リスト を設定する
+     * 問い合わせ情報リストを設定する
      *
      * @param inquiryList
      *     問い合わせ情報リスト
