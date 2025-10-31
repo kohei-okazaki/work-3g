@@ -107,9 +107,7 @@ public class AwsSqsComponent {
             // キュー送信
             sqs.sendMessage(builder.build());
         } catch (Exception e) {
-            throw new BusinessException(
-                    BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
-                    "キュー情報の登録に失敗しました", e);
+            throw new BusinessException(BusinessErrorCode.AWS_SQS_ENQUEUE_ERROR, e);
         }
     }
 
@@ -167,8 +165,7 @@ public class AwsSqsComponent {
             return resultList;
 
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
-                    "SQSからの受信に失敗しました", e);
+            throw new BusinessException(BusinessErrorCode.AWS_SQS_POLL_ERROR, e);
         }
     }
 
@@ -225,8 +222,7 @@ public class AwsSqsComponent {
             return resultList;
 
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
-                    "SQSからの受信に失敗しました", e);
+            throw new BusinessException(BusinessErrorCode.AWS_SQS_POLL_ERROR, e);
         }
     }
 
@@ -252,9 +248,7 @@ public class AwsSqsComponent {
                     .receiptHandle(receiptHandle)
                     .build());
         } catch (Exception e) {
-            throw new BusinessException(
-                    BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
-                    "キュー情報の削除に失敗しました", e);
+            throw new BusinessException(BusinessErrorCode.AWS_SQS_ACK_ERROR, e);
         }
     }
 
@@ -262,20 +256,27 @@ public class AwsSqsComponent {
      * {@linkplain SqsClient}を返す
      * 
      * @return SqsClient
+     * @throws BusinessException
+     *     AWSクライアント接続エラー
      */
-    private SqsClient getSqsClient() {
+    private SqsClient getSqsClient() throws BusinessException {
 
-        // HttpClient にタイムアウトを設定する
-        SdkHttpClient httpClient = ApacheHttpClient.builder()
-                .connectionTimeout(Duration.ofMillis(awsProps.getSqsConnnectionTimeout()))
-                .socketTimeout(Duration.ofMillis(awsProps.getSqsSocketTimeout()))
-                .build();
+        try {
+            // HttpClient にタイムアウトを設定する
+            SdkHttpClient httpClient = ApacheHttpClient.builder()
+                    .connectionTimeout(
+                            Duration.ofMillis(awsProps.getSqsConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.getSqsSocketTimeout()))
+                    .build();
 
-        return SqsClient.builder()
-                .region(awsProps.getRegion())
-                .credentialsProvider(auth.getAWSCredentialsProvider())
-                .httpClient(httpClient)
-                .build();
+            return SqsClient.builder()
+                    .region(awsProps.getRegion())
+                    .credentialsProvider(auth.getAWSCredentialsProvider())
+                    .httpClient(httpClient)
+                    .build();
+        } catch (Exception e) {
+            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+        }
     }
 
     /**

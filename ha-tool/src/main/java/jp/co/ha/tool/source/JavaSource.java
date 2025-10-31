@@ -89,6 +89,7 @@ public class JavaSource {
      * classJavaDocを設定する
      *
      * @param classJavaDoc
+     *     クラスのJavaDoc
      */
     public void setClassJavaDoc(String classJavaDoc) {
         this.classJavaDoc = classJavaDoc;

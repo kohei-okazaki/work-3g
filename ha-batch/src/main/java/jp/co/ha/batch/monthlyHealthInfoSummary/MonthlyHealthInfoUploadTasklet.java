@@ -60,8 +60,6 @@ public class MonthlyHealthInfoUploadTasklet implements Tasklet {
 
         // Slack通知
         slack.sendFile(ContentType.BATCH, csv, "S3ファイルアップロード完了. key=" + s3key);
-        slack.send(ContentType.BATCH,
-                "monthly_health_info_summary_batch success.");
 
         return RepeatStatus.FINISHED;
     }

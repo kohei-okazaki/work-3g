@@ -81,7 +81,7 @@ public class AwsS3Component {
                             .build(),
                     RequestBody.fromInputStream(is, length));
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+            throw new BusinessException(BusinessErrorCode.AWS_S3_UPLOAD_ERROR, e);
         }
     }
 
@@ -270,7 +270,7 @@ public class AwsS3Component {
 
             s3.deleteObjects(deleteRequest);
         } catch (Exception e) {
-            throw new SystemRuntimeException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR,
+            throw new SystemRuntimeException(BusinessErrorCode.AWS_S3_DELETE_ERROR,
                     e);
         }
     }

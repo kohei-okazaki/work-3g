@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.slack.SlackApiComponent;
-import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.api.track.HealthInfoMigrateApi;
 import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.business.api.track.response.HealthInfoMigrateApiResponse;
@@ -90,9 +89,6 @@ public class HealthInfoMigrateTasklet implements Tasklet {
         if (CollectionUtil.exists(healthInfoList)) {
             sendHealthInfoMirgateApi(healthInfoList);
         }
-
-        // Slack通知
-        slack.send(ContentType.BATCH, "health_info_migrate_batch success.");
 
         return RepeatStatus.FINISHED;
     }

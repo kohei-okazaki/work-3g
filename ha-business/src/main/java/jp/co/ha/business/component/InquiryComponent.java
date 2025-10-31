@@ -213,12 +213,12 @@ public class InquiryComponent {
     /**
      * 指定した問い合わせステータスの件数を取得
      * 
-     * @param status
+     * @param statuses
      *     問い合わせステータス
      * @return 件数
      */
-    public long countByStatus(Status status) {
-        return selectService.countByStatus(status.getValue());
+    public long countByStatus(Status... statuses) {
+        return selectService.countByStatusList(statuses);
     }
 
     /**

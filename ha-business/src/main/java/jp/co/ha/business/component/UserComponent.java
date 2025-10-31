@@ -21,6 +21,7 @@ import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.crud.update.UserHealthGoalUpdateService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.dto.UserDto;
+import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
@@ -205,8 +206,7 @@ public class UserComponent {
 
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
-            throw new BusinessException(CommonErrorCode.RUNTIME_ERROR, "ユーザ登録に失敗しました。",
-                    e);
+            throw new BusinessException(BusinessErrorCode.USER_REGIST_ERROR, e);
         }
     }
 
@@ -245,8 +245,7 @@ public class UserComponent {
 
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
-            throw new BusinessException(CommonErrorCode.RUNTIME_ERROR, "ユーザ更新に失敗しました。",
-                    e);
+            throw new BusinessException(BusinessErrorCode.USER_UPDATE_ERROR, e);
         }
     }
 

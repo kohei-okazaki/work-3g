@@ -15,7 +15,6 @@ import jp.co.ha.db.entity.composite.CompositeHealthInfoKey;
  * <li>bmi_range_mt</li>
  * </ul>
  * 
- *
  * @version 1.0.0
  */
 public interface CompositeHealthInfoMapper {
