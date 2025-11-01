@@ -560,8 +560,8 @@ export const state = () => ({
         {
           logicalName: "トランザクションID",
           physicalName: "TRANSACTION_ID",
-          type: "BIGINT",
-          size: "",
+          type: "VARCHAR",
+          size: "36",
           primaryKey: false,
           sequence: false,
           crypt: false,
