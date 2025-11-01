@@ -28,4 +28,4 @@ spring:
     cache: false
 ha-batch:
   health-info-migrate:
-    exec-perpage-count: 10
+    exec-perpage-count: 100

@@ -39,7 +39,7 @@ public class ApiCommunicationDataSqsImportTasklet implements Tasklet {
     private AwsSqsComponent sqs;
     /** API通信情報Component */
     @Autowired
-    protected ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiCommunicationDataComponent component;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -49,22 +49,25 @@ public class ApiCommunicationDataSqsImportTasklet implements Tasklet {
         String queueName = awsProps.getApiCommunicationDataQueueName();
 
         // キュー取得
-        List<DequeueResult<ApiCommunicationDataQueuePayload>> queueList = sqs
-                .pollQueueBatchWithHandle(queueName, ApiCommunicationDataQueuePayload.class,
-                        3, 60, 10);
+        while (true) {
+            List<DequeueResult<ApiCommunicationDataQueuePayload>> queueList = sqs
+                    .pollQueueBatchWithHandle(queueName,
+                            ApiCommunicationDataQueuePayload.class,
+                            3, 60, 10);
 
-        if (CollectionUtil.isEmpty(queueList)) {
-            // キューが登録されていない場合
-            LOG.debug("queue not exist.");
-            return RepeatStatus.FINISHED;
-        }
+            if (CollectionUtil.isEmpty(queueList)) {
+                // キューが登録されていない場合
+                LOG.debug("queue not exist.");
+                break;
+            }
 
-        // キュー情報をDBへ登録
-        for (DequeueResult<ApiCommunicationDataQueuePayload> queueResult : queueList) {
-            // API_COMMUNICATION_DATA登録
-            apiCommunicationDataComponent.create(queueResult.getPayload());
-            // キュー削除
-            sqs.ackOne(queueName, queueResult.getReceiptHandle());
+            // キュー情報をDBへ登録
+            for (DequeueResult<ApiCommunicationDataQueuePayload> queueResult : queueList) {
+                // API_COMMUNICATION_DATA登録
+                component.create(queueResult.getPayload());
+                // キュー削除
+                sqs.ackOne(queueName, queueResult.getReceiptHandle());
+            }
         }
 
         return RepeatStatus.FINISHED;

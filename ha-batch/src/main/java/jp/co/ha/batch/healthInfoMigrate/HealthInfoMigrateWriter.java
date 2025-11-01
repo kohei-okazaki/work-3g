@@ -15,8 +15,6 @@ import jp.co.ha.business.component.ApiCommunicationDataComponent;
 import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.log.Logger;
-import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 
 /**
@@ -29,9 +27,6 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 @StepScope
 public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiRequest> {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(HealthInfoMigrateWriter.class);
     /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;

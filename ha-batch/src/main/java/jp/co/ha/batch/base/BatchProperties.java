@@ -64,6 +64,6 @@ public class BatchProperties {
         public void setExecPerpageCount(int execPerpageCount) {
             this.execPerpageCount = execPerpageCount;
         }
-
     }
+
 }
