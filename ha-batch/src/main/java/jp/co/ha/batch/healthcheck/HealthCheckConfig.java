@@ -38,7 +38,7 @@ public class HealthCheckConfig extends BatchConfig {
     private HealthCheckNotifyTasklet notifyTasklet;
 
     /**
-     * ヘルスチェックバッチのJOB
+     * ヘルスチェックバッチJOB
      *
      * @param jobRepository
      *     jobRepository

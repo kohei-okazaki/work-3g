@@ -247,6 +247,7 @@ public class AwsSqsComponent {
                     .queueUrl(queueUrl)
                     .receiptHandle(receiptHandle)
                     .build());
+            LOG.debug("delete queue, queueUrl=" + queueUrl);
         } catch (Exception e) {
             throw new BusinessException(BusinessErrorCode.AWS_SQS_ACK_ERROR, e);
         }

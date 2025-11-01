@@ -8,14 +8,18 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
 
 import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
+import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
+import jp.co.ha.db.entity.HealthInfo;
 
 /**
  * 健康情報連携バッチのConfig
@@ -23,19 +27,15 @@ import jp.co.ha.batch.listener.BatchJobListener;
  * @version 1.0.0
  */
 @Configuration
-public class HealthInfoMigrateConfig extends BatchConfig {
-
-    /** 健康情報連携バッチ */
-    @Autowired
-    private HealthInfoMigrateTasklet healthInfoMigrateTasklet;
+public class HealthInfoMigrateChunkConfig extends BatchConfig {
 
     /**
-     * 健康情報連携バッチのJOB
+     * 健康情報連携バッチJOB
      * 
      * @param jobRepository
      *     JobRepository
      * @param healthInfoMigrateBatchStep
-     *     ヘルスチェックバッチのSTEP
+     *     健康情報連携バッチSTEP
      * @param listener
      *     BatchJobListener
      * @return 健康情報連携バッチJOB
@@ -53,19 +53,39 @@ public class HealthInfoMigrateConfig extends BatchConfig {
     }
 
     /**
-     * 健康情報連携バッチのSTEP
+     * 健康情報連携バッチSTEP
      * 
+     * @param reader
+     *     健康情報連携処理-Reader
+     * @param processor
+     *     健康情報連携処理-Proccesor
+     * @param writer
+     *     健康情報連携処理-Writer
      * @param jobRepository
      *     JobRepository
      * @param transactionManager
      *     PlatformTransactionManager
-     * @return 健康情報連携バッチのSTEP
+     * @return 健康情報連携バッチSTEP
      */
     @Bean(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME)
-    Step healthInfoMigrateBatchStep(JobRepository jobRepository,
+    Step healthInfoMigrateBatchStep(
+            HealthInfoMigrateReader reader,
+            HealthInfoMigrateProccesor processor,
+            HealthInfoMigrateWriter writer,
+            JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME, jobRepository)
-                .tasklet(healthInfoMigrateTasklet, transactionManager)
+                .<HealthInfo, HealthInfoMigrateApiRequest> chunk(1, transactionManager)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .faultTolerant()
+                .retry(ResourceAccessException.class)
+                .retry(HttpServerErrorException.class)
+                .retryLimit(3)
+                .skip(HttpClientErrorException.class)
+                .skipLimit(100)
+                .transactionManager(transactionManager)
                 .build();
     }
 }

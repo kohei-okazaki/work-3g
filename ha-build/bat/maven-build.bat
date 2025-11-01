@@ -59,9 +59,6 @@ cd %BASE_DIR%\ha-root
 echo mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn clean package -Dmaven.test.skip=true -P%profile%
 
-echo mvn install:install-file -Dfile=target\root-%ver%.jar -DgroupId=jp.co.ha -DartifactId=root -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-call mvn install:install-file -Dfile=target\root-%ver%.jar -DgroupId=jp.co.ha -DartifactId=root -Dversion=%ver% -Dpackaging=jar -DgeneratePom=true -Dmaven.test.skip
-
 rem build api
 cd %BASE_DIR%\ha-api
 echo mvn clean package -Dmaven.test.skip=true -P%profile%
@@ -71,7 +68,5 @@ rem build dashboard
 cd %BASE_DIR%\ha-dashboard
 echo mvn clean package -Dmaven.test.skip=true -P%profile%
 call mvn clean package -Dmaven.test.skip=true -P%profile%
-
-rem call deploy.bat
 
 cd %~dp0
