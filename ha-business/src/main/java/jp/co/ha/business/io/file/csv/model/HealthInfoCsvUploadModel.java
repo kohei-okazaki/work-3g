@@ -28,7 +28,7 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
     private String weight;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -37,7 +37,7 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -47,7 +47,7 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -56,7 +56,7 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -66,7 +66,7 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -75,7 +75,7 @@ public class HealthInfoCsvUploadModel implements BaseCsvModel {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重

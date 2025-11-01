@@ -36,7 +36,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     private String regDate;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -45,7 +45,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -55,7 +55,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -64,7 +64,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -74,7 +74,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -83,7 +83,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -93,7 +93,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -102,7 +102,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -112,7 +112,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -121,7 +121,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重
@@ -131,7 +131,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * healthInfoRegDateを返す
+     * 健康情報登録日時を返す
      *
      * @return healthInfoRegDate
      */
@@ -140,7 +140,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * healthInfoRegDateを設定する
+     * 健康情報登録日時を設定する
      *
      * @param healthInfoRegDate
      *     健康情報登録日時
@@ -150,7 +150,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * seqBmiRangeMtIdを返す
+     * BMI範囲マスタIDを返す
      *
      * @return seqBmiRangeMtId
      */
@@ -159,7 +159,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * seqBmiRangeMtIdを設定する
+     * BMI範囲マスタIDを設定する
      *
      * @param seqBmiRangeMtId
      *     BMI範囲マスタID
@@ -169,7 +169,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * updateDateを返す
+     * 更新日時を返す
      *
      * @return updateDate
      */
@@ -178,7 +178,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * updateDateを設定する
+     * 更新日時を設定する
      *
      * @param updateDate
      *     更新日時
@@ -188,7 +188,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * regDateを返す
+     * 登録日時を返す
      *
      * @return regDate
      */
@@ -197,7 +197,7 @@ public class MonthlyHealthInfoSummaryModel implements BaseCsvModel {
     }
 
     /**
-     * regDateを設定する
+     * 登録日時を設定する
      *
      * @param regDate
      *     登録日時

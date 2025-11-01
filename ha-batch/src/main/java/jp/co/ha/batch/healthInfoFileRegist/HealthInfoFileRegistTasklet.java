@@ -30,6 +30,7 @@ import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.FileUtil;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.validator.ValidateErrorResult;
 import jp.co.ha.common.validator.ValidateErrorResult.ValidateError;
@@ -144,7 +145,7 @@ public class HealthInfoFileRegistTasklet implements Tasklet {
      */
     private void sendSlack(List<Long> seqHealthInfoIdList) throws BaseException {
 
-        StringJoiner sj = new StringJoiner("\r\n");
+        StringJoiner sj = new StringJoiner(StringUtil.NEW_LINE);
         seqHealthInfoIdList.stream().forEach(e -> sj.add(e.toString()));
         slack.send(ContentType.BATCH, sj.toString());
     }

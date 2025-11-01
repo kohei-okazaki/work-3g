@@ -27,7 +27,7 @@ import jp.co.ha.db.entity.HealthInfo;
  * @version 1.0.0
  */
 @Configuration
-public class HealthInfoMigrateChunkConfig extends BatchConfig {
+public class HealthInfoMigrateConfig extends BatchConfig {
 
     /**
      * 健康情報連携バッチJOB
