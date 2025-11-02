@@ -35,7 +35,7 @@ public class CalorieApiComponent {
     private TokenApiComponent tokenApiComponent;
     /** カロリー計算API */
     @Autowired
-    private CalorieCalcApi calorieCalcApi;
+    private CalorieCalcApi api;
     /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
@@ -100,18 +100,11 @@ public class CalorieApiComponent {
                 .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
                         + NodeApiType.CALORIE.getValue());
 
+        CalorieCalcApiResponse response = api.callApi(request, connectInfo);
+
         ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
-                .getPayload(transactionId, calorieCalcApi.getApiName(),
-                        calorieCalcApi.getHttpMethod(),
-                        calorieCalcApi.getUri(connectInfo, request),
-                        request);
-
-        CalorieCalcApiResponse response = calorieCalcApi.callApi(request, connectInfo);
-
-        apiCommunicationDataComponent
-                .fillResponseParam(payload, connectInfo, response);
-
-        apiCommunicationDataComponent.inQueue(payload);
+                .getPayload4NodeApi(api, connectInfo, request, response, transactionId);
+        apiCommunicationDataComponent.registQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // カロリー計算APIの処理が成功以外の場合
@@ -147,18 +140,11 @@ public class CalorieApiComponent {
                         + NodeApiType.CALORIE.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
+        CalorieCalcApiResponse response = api.callApi(request, connectInfo);
+
         ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
-                .getPayload(transactionId, calorieCalcApi.getApiName(),
-                        calorieCalcApi.getHttpMethod(),
-                        calorieCalcApi.getUri(connectInfo, request),
-                        request);
-
-        CalorieCalcApiResponse response = calorieCalcApi.callApi(request, connectInfo);
-
-        apiCommunicationDataComponent
-                .fillResponseParam(payload, connectInfo, response);
-
-        apiCommunicationDataComponent.inQueue(payload);
+                .getPayload4NodeApi(api, connectInfo, request, response, transactionId);
+        apiCommunicationDataComponent.registQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // カロリー計算APIの処理が成功以外の場合

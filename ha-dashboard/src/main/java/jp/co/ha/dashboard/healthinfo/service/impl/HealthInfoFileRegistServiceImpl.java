@@ -91,28 +91,15 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
             // トランザクションIDを採番
             String transactionId = apiCommunicationDataComponent.getTransactionId();
 
-            // API通信情報を登録
-            // ApiCommunicationData apiCommunicationData =
-            // apiCommunicationDataComponent
-            // .create(registApi.getApiName(), transactionId,
-            // registApi.getHttpMethod(),
-            // registApi.getUri(connectInfo, request), request);
-            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
-                    .getPayload(transactionId, registApi.getApiName(),
-                            registApi.getHttpMethod(),
-                            registApi.getUri(connectInfo, request),
-                            request);
             request.setTransactionId(transactionId);
 
             HealthInfoRegistApiResponse response = registApi.callApi(request,
                     connectInfo);
 
-            // API通信情報を更新
-            // apiCommunicationDataComponent.update(apiCommunicationData,
-            // connectInfo,
-            // response);
-            apiCommunicationDataComponent
-                    .fillResponseParam(payload, connectInfo, response);
+            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                    .getPayload4AppApi(registApi, connectInfo, request, response,
+                            transactionId);
+            apiCommunicationDataComponent.registQueue(payload);
 
             if (ResultType.FAILURE == response.getResultType()) {
                 result = response.getResultType();

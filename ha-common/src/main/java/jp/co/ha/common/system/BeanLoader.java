@@ -21,7 +21,7 @@ public class BeanLoader {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BeanLoader.class);
 
-    /** {@linkplain ApplicationContext} */
+    /** ApplicationContext */
     private static ApplicationContext context;
 
     /**

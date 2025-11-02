@@ -61,6 +61,7 @@ public class SessionComponent {
      * 取得後の型は<code>clazz</code>の型で型変換された{@linkplain Optional}を返す
      *
      * @param <T>
+     *     変換したい型のオブジェクト
      * @param session
      *     {@linkplain HttpSession}
      * @param key

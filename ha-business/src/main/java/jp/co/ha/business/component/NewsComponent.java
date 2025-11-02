@@ -67,6 +67,7 @@ public class NewsComponent {
      *     S3キー
      * @return お知らせ情報Dto
      * @throws BaseException
+     *     JSON関連の処理に失敗した場合
      */
     public NewsDto getNewsDto(String s3Key) throws BaseException {
         // S3からお知らせJSONを取得

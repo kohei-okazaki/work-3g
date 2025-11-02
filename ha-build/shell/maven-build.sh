@@ -60,7 +60,6 @@ mvn install:install-file -Dfile=target/business-${JAR_VERSION}.jar -DgroupId=jp.
 ########################################
 cd ${BATCH_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/batch-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=batch -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################
@@ -68,7 +67,6 @@ mvn install:install-file -Dfile=target/batch-${JAR_VERSION}.jar -DgroupId=jp.co.
 ########################################
 cd ${ROOT_DIR}
 mvn clean package -Dmaven.test.skip=true -P${PROFILE}
-mvn install:install-file -Dfile=target/root-${JAR_VERSION}.jar -DgroupId=jp.co.ha -DartifactId=root -Dversion=${JAR_VERSION} -Dpackaging=jar -DgeneratePom=true
 
 
 ########################################

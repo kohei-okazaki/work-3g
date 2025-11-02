@@ -13,7 +13,6 @@ import freemarker.template.Template;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -187,25 +186,28 @@ public class AwsSesComponent {
      * @param mailAddress
      *     検証用Eメールアドレス
      * @return 認証結果
+     * @throws BusinessException
+     *     AWSクライアント接続に失敗した場合
      */
-    public VerifyResultType verifyEmailAddress(String mailAddress) {
+    public VerifyResultType verifyEmailAddress(String mailAddress)
+            throws BusinessException {
 
-        try (SesClient sesClient = getSesClient()) {
-            VerifyEmailIdentityRequest request = VerifyEmailIdentityRequest.builder()
-                    .emailAddress(mailAddress)
-                    .build();
+        VerifyEmailIdentityRequest request = VerifyEmailIdentityRequest.builder()
+                .emailAddress(mailAddress)
+                .build();
 
-            VerifyEmailIdentityResponse response = sesClient.verifyEmailIdentity(request);
+        VerifyEmailIdentityResponse response = getSesClient()
+                .verifyEmailIdentity(request);
 
-            VerifyResultType resultType = StringUtil
-                    .isEmpty(response.responseMetadata().requestId())
-                            ? VerifyResultType.STILL
-                            : VerifyResultType.AUTHED;
+        VerifyResultType resultType = StringUtil
+                .isEmpty(response.responseMetadata().requestId())
+                        ? VerifyResultType.STILL
+                        : VerifyResultType.AUTHED;
 
-            LOG.debug("認証メール送信完了 認証結果=" + resultType);
+        LOG.debug("認証メール送信完了 認証結果=" + resultType);
 
-            return resultType;
-        }
+        return resultType;
+
     }
 
     /**
@@ -308,20 +310,27 @@ public class AwsSesComponent {
      * {@linkplain SesClient}を返す
      * 
      * @return SesClient
+     * @throws BusinessException
+     *     AWSクライアント接続エラー
      */
-    private SesClient getSesClient() {
+    private SesClient getSesClient() throws BusinessException {
 
-        // HttpClient にタイムアウトを設定する
-        SdkHttpClient httpClient = ApacheHttpClient.builder()
-                .connectionTimeout(Duration.ofMillis(awsProps.getSesConnnectionTimeout()))
-                .socketTimeout(Duration.ofMillis(awsProps.getSesSocketTimeout()))
-                .build();
+        try {
+            // HttpClient にタイムアウトを設定する
+            SdkHttpClient httpClient = ApacheHttpClient.builder()
+                    .connectionTimeout(
+                            Duration.ofMillis(awsProps.getSesConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.getSesSocketTimeout()))
+                    .build();
 
-        return SesClient.builder()
-                .region(awsProps.getRegion())
-                .credentialsProvider(auth.getAWSCredentialsProvider())
-                .httpClient(httpClient)
-                .build();
+            return SesClient.builder()
+                    .region(awsProps.getRegion())
+                    .credentialsProvider(auth.getAWSCredentialsProvider())
+                    .httpClient(httpClient)
+                    .build();
+        } catch (Exception e) {
+            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+        }
     }
 
     /**
@@ -354,9 +363,8 @@ public class AwsSesComponent {
 
         if (StringUtil.isEmpty(templateId)) {
             // テンプレートIDが未指定の場合
-            // TODO エラーコードは別途発番
-            throw new SystemException(CommonErrorCode.RUNTIME_ERROR,
-                    "メールテンプレートIDが未指定です。");
+            throw new SystemException(BusinessErrorCode.MAIL_TEMPLATE_REQUIED_ERROR,
+                    "メールテンプレートIDが未指定です。templateId=" + templateId);
         }
 
         try {

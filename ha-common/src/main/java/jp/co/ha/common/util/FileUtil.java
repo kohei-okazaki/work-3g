@@ -146,6 +146,7 @@ public class FileUtil {
      * @param destFile
      *     コピー先ファイル
      * @throws BaseException
+     *     ファイル操作失敗
      */
     public static void copyFile(File srcFile, File destFile) throws BaseException {
         try (FileInputStream fis = new FileInputStream(srcFile);

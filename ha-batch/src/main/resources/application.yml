@@ -26,3 +26,11 @@ spring:
     suffix: .ftl
     charset: UTF-8
     cache: false
+ha-batch:
+  health-info-migrate:
+    exec-perpage-count: 100
+  monthly-health-info-summary:
+    exec-perpage-count: 1000
+  data-purge-list:
+    - table-name: user
+      expired: 10

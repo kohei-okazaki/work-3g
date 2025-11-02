@@ -40,23 +40,17 @@ public class RootApiHealthCheckTasklet extends BaseHealthCheckApiTasklet {
 
         executionContext.putString(KEY_TRANSACTION_ID, transactionId);
 
-        HealthCheckApiRequest req = new HealthCheckApiRequest();
+        HealthCheckApiRequest request = new HealthCheckApiRequest();
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(
                         () -> healthInfoProperties.getRootApiUrl() + "healthcheck");
 
+        HealthCheckApiResponse response = healthCheckApi.callApi(request, connectInfo);
+
         ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
-                .getPayload(transactionId, healthCheckApi.getApiName(),
-                        healthCheckApi.getHttpMethod(),
-                        healthCheckApi.getUri(connectInfo, req),
-                        req);
-
-        HealthCheckApiResponse response = healthCheckApi.callApi(req, connectInfo);
-
-        apiCommunicationDataComponent
-                .fillResponseParam(payload, connectInfo, response);
-
-        apiCommunicationDataComponent.inQueue(payload);
+                .getPayload4RootApi(healthCheckApi, connectInfo, request, response,
+                        transactionId);
+        apiCommunicationDataComponent.registQueue(payload);
 
         executionContext.put(KEY_RESPONSE_TYPE, response.getResult().toString());
         executionContext.put(KEY_API_NAME, "root api");

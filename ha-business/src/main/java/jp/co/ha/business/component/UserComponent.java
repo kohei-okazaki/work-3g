@@ -21,6 +21,7 @@ import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.crud.update.UserHealthGoalUpdateService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.dto.UserDto;
+import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
@@ -117,6 +118,7 @@ public class UserComponent {
      *     誕生日
      * @return 年齢
      * @throws BusinessException
+     *     誕生日 > sydateの場合
      */
     public int getAge(LocalDate birthDate) throws BusinessException {
 
@@ -204,8 +206,7 @@ public class UserComponent {
 
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
-            throw new BusinessException(CommonErrorCode.RUNTIME_ERROR, "ユーザ登録に失敗しました。",
-                    e);
+            throw new BusinessException(BusinessErrorCode.USER_REGIST_ERROR, e);
         }
     }
 
@@ -213,6 +214,7 @@ public class UserComponent {
      * ユーザ関連情報の更新処理を行う
      * 
      * @param dto
+     *     ユーザDTO
      * @throws BaseException
      *     更新処理に失敗した場合
      */
@@ -243,8 +245,7 @@ public class UserComponent {
 
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
-            throw new BusinessException(CommonErrorCode.RUNTIME_ERROR, "ユーザ更新に失敗しました。",
-                    e);
+            throw new BusinessException(BusinessErrorCode.USER_UPDATE_ERROR, e);
         }
     }
 

@@ -2,6 +2,7 @@ package jp.co.ha.business.db.crud.read;
 
 import java.util.List;
 
+import jp.co.ha.business.component.InquiryComponent.Status;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.composite.CompositeInquiry;
 
@@ -49,9 +50,9 @@ public interface InquiryManagementSelectService {
     /**
      * 指定した問い合わせステータスの件数を返す
      * 
-     * @param status
-     *     問い合わせステータス
+     * @param statuses
+     *     問い合わせステータスリスト
      * @return ステータスの件数
      */
-    long countByStatus(String status);
+    long countByStatusList(Status... statuses);
 }

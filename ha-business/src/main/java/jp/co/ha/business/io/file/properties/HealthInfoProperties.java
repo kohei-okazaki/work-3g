@@ -31,7 +31,7 @@ public class HealthInfoProperties {
     private String monthlySummaryBatchFilePath;
 
     /**
-     * referenceFilePathを返す
+     * 照会ファイル格納パスを返す
      *
      * @return referenceFilePath
      */
@@ -40,7 +40,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * referenceFilePathを設定する
+     * 照会ファイル格納パスを設定する
      *
      * @param referenceFilePath
      *     照会ファイル格納パス
@@ -50,7 +50,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * registBatchFilePathを返す
+     * 健康情報登録バッチファイルパスを返す
      *
      * @return registBatchFilePath
      */
@@ -59,7 +59,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * registBatchFilePathを設定する
+     * 健康情報登録バッチファイルパスを設定する
      *
      * @param registBatchFilePath
      *     健康情報登録バッチファイルパス
@@ -69,7 +69,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthinfoNodeApiUrlを返す
+     * NodeAPIの基底URLを返す
      *
      * @return healthinfoNodeApiUrl
      */
@@ -78,7 +78,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthinfoNodeApiUrlを設定する
+     * NodeAPIの基底URLを設定する
      *
      * @param healthinfoNodeApiUrl
      *     NodeAPIの基底URL
@@ -88,7 +88,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthInfoDashboardUrlを返す
+     * 健康情報ダッシュボードの基底URLを返す
      *
      * @return healthInfoDashboardUrl
      */
@@ -97,7 +97,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthInfoDashboardUrlを設定する
+     * 健康情報ダッシュボードの基底URLを設定する
      *
      * @param healthInfoDashboardUrl
      *     健康情報ダッシュボードの基底URL
@@ -107,7 +107,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthInfoApiUrlを返す
+     * 健康情報APIの基底URLを返す
      *
      * @return healthInfoApiUrl
      */
@@ -116,7 +116,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthInfoApiUrlを設定する
+     * 健康情報APIの基底URLを設定する
      *
      * @param healthInfoApiUrl
      *     健康情報APIの基底URL
@@ -126,7 +126,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthinfoNodeApiMigrateFlgを返す
+     * NodeAPI 移行フラグを返す
      * 
      * @return healthinfoNodeApiMigrateFlg
      */
@@ -135,25 +135,27 @@ public class HealthInfoProperties {
     }
 
     /**
-     * healthinfoNodeApiMigrateFlgを設定する
+     * NodeAPI 移行フラグを設定する
      * 
      * @param healthinfoNodeApiMigrateFlg
+     *     NodeAPI 移行フラグ
      */
     public void setHealthinfoNodeApiMigrateFlg(String healthinfoNodeApiMigrateFlg) {
         this.healthinfoNodeApiMigrateFlg = Boolean.valueOf(healthinfoNodeApiMigrateFlg);
     }
 
     /**
-     * healthinfoNodeApiMigrateFlgを設定する
+     * NodeAPI 移行フラグを設定する
      * 
      * @param healthinfoNodeApiMigrateFlg
+     *     NodeAPI 移行フラグ
      */
     public void setHealthinfoNodeApiMigrateFlg(boolean healthinfoNodeApiMigrateFlg) {
         this.healthinfoNodeApiMigrateFlg = healthinfoNodeApiMigrateFlg;
     }
 
     /**
-     * rootApiUrlを返す
+     * 管理者用APIの基底URLを返す
      *
      * @return rootApiUrl
      */
@@ -162,7 +164,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * rootApiUrlを設定する
+     * 管理者用APIの基底URLを設定する
      *
      * @param rootApiUrl
      *     管理者用APIの基底URL
@@ -172,7 +174,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * trackApiUrlを返す
+     * 健康情報蓄積APIの基底URLを返す
      * 
      * @return trackApiUrl
      */
@@ -181,16 +183,17 @@ public class HealthInfoProperties {
     }
 
     /**
-     * trackApiUrlを設定する
+     * 健康情報蓄積APIの基底URLを設定する
      * 
      * @param trackApiUrl
+     *     健康情報蓄積APIの基底URL
      */
     public void setTrackApiUrl(String trackApiUrl) {
         this.trackApiUrl = trackApiUrl;
     }
 
     /**
-     * monthlySummaryBatchFilePathを返す
+     * 月次健康情報集計バッチCSV格納パスを返す
      *
      * @return monthlySummaryBatchFilePath
      */
@@ -199,7 +202,7 @@ public class HealthInfoProperties {
     }
 
     /**
-     * monthlySummaryBatchFilePathを設定する
+     * 月次健康情報集計バッチCSV格納パスを設定する
      *
      * @param monthlySummaryBatchFilePath
      *     月次健康情報集計バッチCSV格納パス

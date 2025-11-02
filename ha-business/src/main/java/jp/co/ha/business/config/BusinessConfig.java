@@ -78,15 +78,26 @@ public class BusinessConfig implements WebMvcConfigurer {
     }
 
     /**
+     * HealthInfoPropertiesの設定
+     * 
      * @param referenceFilePath
+     *     照会ファイル格納パス
      * @param registBatchFilePath
+     *     健康情報登録バッチファイルパス
      * @param healthinfoNodeApiUrl
+     *     NodeAPIの基底URL
      * @param healthinfoNodeApiMigrateFlg
+     *     NodeAPI 移行フラグ
      * @param healthInfoDashboardUrl
+     *     健康情報ダッシュボードの基底URL
      * @param healthInfoApiUrl
+     *     健康情報APIの基底URL
      * @param rootApiUrl
+     *     管理者用APIの基底URL
      * @param trackApiUrl
+     *     健康情報蓄積APIの基底URL
      * @param monthlySummaryBatchFilePath
+     *     月次健康情報集計バッチCSV格納パス
      * @return HealthInfoProperties
      */
     @Bean
@@ -115,6 +126,31 @@ public class BusinessConfig implements WebMvcConfigurer {
         return props;
     }
 
+    /**
+     * AwsPropertiesの設定
+     * 
+     * @param region
+     *     リージョン
+     * @param backet
+     *     バケット名
+     * @param s3ConnnectionTimeout
+     *     S3コネクションタイムアウト
+     * @param s3SocketTimeout
+     *     S3ソケットタイムアウト
+     * @param sesConnnectionTimeout
+     *     SESコネクションタイムアウト
+     * @param sesSocketTimeout
+     *     SESソケットタイムアウト
+     * @param sesStubFlag
+     *     SESスタブフラグ(true:メールを送信しない、false:送信する)
+     * @param apiCommunicationDataQueueName
+     *     API通信情報キュー名
+     * @param sqsConnnectionTimeout
+     *     SQSコネクションタイムアウト
+     * @param sqsSocketTimeout
+     *     SQSソケットタイムアウト
+     * @return AwsProperties
+     */
     @Bean
     AwsProperties awsProperties(
             @Value("${aws.region}") String region,

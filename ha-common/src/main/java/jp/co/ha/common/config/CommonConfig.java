@@ -66,10 +66,16 @@ public class CommonConfig implements WebMvcConfigurer {
     }
 
     /**
+     * JdbcPropertiesを設定する
+     * 
      * @param driverClassName
+     *     driverClassName
      * @param url
+     *     url
      * @param username
+     *     username
      * @param password
+     *     password
      * @return JdbcProperties
      */
     @Bean
@@ -88,9 +94,14 @@ public class CommonConfig implements WebMvcConfigurer {
     }
 
     /**
+     * SystemPropertiesを設定する
+     * 
      * @param paging
+     *     ページング数
      * @param environment
+     *     環境
      * @param systemMailAddress
+     *     システムメールアドレス
      * @return SystemProperties
      */
     @Bean
@@ -107,9 +118,14 @@ public class CommonConfig implements WebMvcConfigurer {
     }
 
     /**
+     * CryptPropertiesを設定する
+     * 
      * @param mode
+     *     mode
      * @param key
+     *     key
      * @param shift
+     *     shift
      * @return CryptProperties
      */
     @Bean

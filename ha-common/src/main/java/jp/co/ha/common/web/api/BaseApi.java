@@ -31,6 +31,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.common.web.form.BaseApiResponse;
 
@@ -154,7 +155,8 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
                 throw new IllegalStateException("Unsupported HttpMethod: " + method);
             }
 
-            ResponseEntity<Rs> responseEntity = (ResponseEntity<Rs>) restTemplate
+            connectInfo.setRequestDate(DateTimeUtil.getSysDate());
+            ResponseEntity<Rs> responseEntity = restTemplate
                     .exchange(reqEntity, (Class<Rs>) response.getClass());
             code = responseEntity.getStatusCode();
             response = responseEntity.getBody();
@@ -171,6 +173,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
             LOG.info("<==== API名=" + getApiName() + ", HttpStatusCode=" + code);
             if (code != null) {
                 connectInfo.setHttpStatus(HttpStatus.valueOf(code.value()));
+                connectInfo.setResponseDate(DateTimeUtil.getSysDate());
             }
 
         }
@@ -205,21 +208,21 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      *
      * @return APIレスポンス
      */
-    protected abstract Rs getResponse();
+    public abstract Rs getResponse();
 
     /**
      * HTTPメソッドを返す
      *
      * @return HTTPメソッド
      */
-    protected abstract HttpMethod getHttpMethod();
+    public abstract HttpMethod getHttpMethod();
 
     /**
      * API名を返す
      *
      * @return API名
      */
-    protected abstract String getApiName();
+    public abstract String getApiName();
 
     /**
      * レスポンス情報にエラー情報を割り当てる
@@ -229,7 +232,7 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
      * @param errorMessage
      *     エラーメッセージ
      */
-    protected abstract void bindErrorInfo(Rs response, String errorMessage);
+    public abstract void bindErrorInfo(Rs response, String errorMessage);
 
     /**
      * RestTemplateを返す

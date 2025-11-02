@@ -15,12 +15,12 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>21</java-version>
-    <org.springframework.boot-version>3.5.5</org.springframework.boot-version>
-    <org.spring-data-commons-version>3.5.3</org.spring-data-commons-version>
+    <org.springframework.boot-version>3.5.7</org.springframework.boot-version>
+    <org.spring-data-commons-version>3.5.5</org.spring-data-commons-version>
     <com.amazonaws-version>2.31.78</com.amazonaws-version>
     <org.aspectj-version>1.9.24</org.aspectj-version>
     <org.slf4j-version>2.0.17</org.slf4j-version>
-    <org.logback-version>1.5.18</org.logback-version>
+    <org.logback-version>1.5.20</org.logback-version>
     <org.jackson-version>2.19.2</org.jackson-version>
     <org.poi-version>5.4.1</org.poi-version>
     <org.mysql-version>8.4.0</org.mysql-version>

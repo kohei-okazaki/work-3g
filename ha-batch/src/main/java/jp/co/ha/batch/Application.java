@@ -2,6 +2,7 @@ package jp.co.ha.batch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 /**
  * Batchアプリケーション起動クラス
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0.0
  */
 @SpringBootApplication
+@ConfigurationPropertiesScan(basePackages = "jp.co.ha.batch.base")
 public class Application {
 
     /**

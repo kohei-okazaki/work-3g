@@ -8,10 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
 import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.db.annotation.Select;
-import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.ApiCommunicationData;
 import jp.co.ha.db.entity.ApiCommunicationDataExample;
 import jp.co.ha.db.mapper.ApiCommunicationDataMapper;
@@ -38,22 +35,6 @@ public class ApiCommunicationDataSearchServiceImpl
         example.setOrderByClause(selectOption.getOrderBy());
 
         return mapper.selectByExampleWithRowbounds(example, selectOption.toRowBounds());
-    }
-
-    @Select
-    @Override
-    @Transactional(readOnly = true)
-    public Long selectLastTransactionId() {
-
-        ApiCommunicationDataExample example = new ApiCommunicationDataExample();
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_API_COMMUNICATION_DATA_ID", SortType.DESC).limit(1).build();
-        example.setOrderByClause(selectOption.getOrderBy());
-        example.setLimit(selectOption.getLimit());
-
-        List<ApiCommunicationData> list = mapper.selectByExample(example);
-        return CollectionUtil.isEmpty(list) ? Long.valueOf(1)
-                : list.get(0).getTransactionId() + 1;
     }
 
     @Select

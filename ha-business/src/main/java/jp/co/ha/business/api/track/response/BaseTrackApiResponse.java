@@ -16,7 +16,7 @@ public abstract class BaseTrackApiResponse {
     private TrackApiResult result;
 
     /**
-     * resultを返す
+     * 処理結果を返す
      * 
      * @return result
      */
@@ -25,9 +25,10 @@ public abstract class BaseTrackApiResponse {
     }
 
     /**
-     * resultを設定する
+     * 処理結果を設定する
      * 
      * @param result
+     *     処理結果
      */
     public void setResult(TrackApiResult result) {
         this.result = result;

@@ -98,9 +98,6 @@ public class TopApiResponse extends BaseRootApiResponse implements BaseApiRespon
          * @param count
          *     登録件数
          */
-        /**
-         * @param count
-         */
         public void setCount(Integer count) {
             this.count = count;
         }

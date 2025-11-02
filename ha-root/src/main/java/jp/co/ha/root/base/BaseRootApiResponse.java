@@ -45,7 +45,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
         private String message;
 
         /**
-         * messageを返す
+         * メッセージを返す
          *
          * @return message
          */
@@ -54,7 +54,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
         }
 
         /**
-         * messageを設定する
+         * メッセージを設定する
          *
          * @param message
          *     メッセージ
@@ -66,7 +66,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     }
 
     /**
-     * rootApiResultを返す
+     * 処理結果を返す
      *
      * @return rootApiResult
      */
@@ -75,7 +75,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     }
 
     /**
-     * rootApiResultを設定する
+     * 処理結果を設定する
      *
      * @param rootApiResult
      *     処理結果
@@ -85,7 +85,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     }
 
     /**
-     * errorListを返す
+     * エラー情報リストを返す
      *
      * @return errorList
      */
@@ -94,7 +94,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     }
 
     /**
-     * errorListを設定する
+     * エラー情報リストを設定する
      *
      * @param errorList
      *     エラー情報リスト
@@ -117,7 +117,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     }
 
     /**
-     * pagingを返す
+     * ページングを返す
      *
      * @return paging
      */
@@ -126,7 +126,7 @@ public abstract class BaseRootApiResponse extends JsonEntity {
     }
 
     /**
-     * pagingを設定する
+     * ページングを設定する
      *
      * @param paging
      *     ページング

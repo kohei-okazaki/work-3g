@@ -47,6 +47,7 @@ public class NewsEditApiRequest extends BaseRootApiRequest implements BaseApiReq
      * タイトルを設定する
      *
      * @param title
+     *     タイトル
      */
     public void setTitle(String title) {
         this.title = title;

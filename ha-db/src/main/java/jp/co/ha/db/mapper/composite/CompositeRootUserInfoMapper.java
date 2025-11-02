@@ -7,10 +7,10 @@ import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
 /**
  * 以下のテーブルの複合EntityのMapper
  * <ul>
- * <li>管理者サイトユーザログイン情報</li>
- * <li>管理者サイトユーザ権限管理マスタ</li>
- * <li>管理者サイトユーザ権限詳細マスタ</li>
- * <li>管理者サイトユーザ権限マスタ</li>
+ * <li>root_login_info</li>
+ * <li>root_user_role_mng_mt</li>
+ * <li>root_user_role_detail_mt</li>
+ * <li>root_role_mt</li>
  * </ul>
  *
  * @version 1.0.0
