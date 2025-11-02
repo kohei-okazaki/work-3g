@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,14 +71,16 @@ public class DbConfig {
     }
 
     /**
-     * @return SqlSessionFactoryBean
+     * @return SqlSessionFactory
+     * @throws Exception
+     *     SqlSessionFactoryの生成に失敗した場合
      */
     @Bean
-    SqlSessionFactoryBean sqlSessionFactory() {
+    SqlSessionFactory sqlSessionFactory() throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource());
         sqlSessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
-        return sqlSessionFactory;
+        return sqlSessionFactory.getObject();
     }
 
     /**

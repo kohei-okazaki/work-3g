@@ -299,6 +299,7 @@ public class UserRecoveryController implements BaseWebController {
      *     ユーザID
      * @return ユーザ情報
      * @throws BaseException
+     *     ユーザ情報取得失敗
      */
     private User getUser(Optional<String> seqUserId) throws BaseException {
 

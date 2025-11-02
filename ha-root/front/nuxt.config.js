@@ -8,25 +8,23 @@ export default {
   // 環境毎の設定ファイルを読込
   env: envSet,
 
-  // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
 
-  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     titleTemplate: '%s | front',
     title: '管理サイト',
     meta: [{
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: ''
-      }
+      charset: 'utf-8'
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: ''
+    }
     ],
     link: [{
       rel: 'icon',
@@ -35,25 +33,18 @@ export default {
     }]
   },
 
-  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ['~/assets/baseLayout.css'],
 
-  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [],
 
-  // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/vuetify
     // UIフレームワーク
     '@nuxtjs/vuetify',
   ],
 
-  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
-    // https://go.nuxtjs.dev/axios
     // API通信を可能にするライブラリ
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
@@ -63,7 +54,6 @@ export default {
     'nuxt-basic-auth-module'
   ],
 
-  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     // TODO URLの環境ごとの切り替えできない
     // baseURL: process.env["api_base_url"]
@@ -102,7 +92,6 @@ export default {
     middleware: ['auth']
   },
 
-  // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -130,7 +119,6 @@ export default {
     }
   },
 
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
 
 }

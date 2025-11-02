@@ -57,14 +57,12 @@ export default {
           edgeType: "circle",
           next: ["a0", "b0"],
         },
-
         {
           id: "a0",
           text: "画面表示",
           edgeType: "round",
           next: [""],
         },
-
         {
           id: "b0",
           text: "検索ボタン押下",

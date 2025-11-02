@@ -73,6 +73,7 @@ public class DmlGenerator extends BaseGenerator {
      * ヘッダを文字列形式で返す
      * 
      * @param row
+     *     行情報
      * @return ヘッダ行
      */
     private String getHeader(ExcelRow row) {
@@ -87,6 +88,7 @@ public class DmlGenerator extends BaseGenerator {
      * ボディを文字列形式で返す
      * 
      * @param row
+     *     行情報
      * @return ボディ行
      */
     private String getBody(ExcelRow row) {

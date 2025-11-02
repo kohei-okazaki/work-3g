@@ -36,8 +36,10 @@ public class ApiConfig implements WebMvcConfigurer {
 
     /**
      * @param http
+     *     HttpSecurity
      * @return SecurityFilterChain
      * @throws Exception
+     *     処理失敗した場合
      */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

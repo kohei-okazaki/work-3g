@@ -3,8 +3,8 @@
     <v-card>
       <v-card-text class="text-subtitle-1">処理フロー</v-card-text>
       <v-card-text>
-        <vue-mermaid :nodes="flow" type="graph TB"></vue-mermaid
-      ></v-card-text>
+        <Mermaid :nodes="flow" type="graph TB" />
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -17,5 +17,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

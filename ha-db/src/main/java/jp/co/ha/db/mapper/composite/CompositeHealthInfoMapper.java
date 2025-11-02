@@ -9,8 +9,12 @@ import jp.co.ha.db.entity.composite.CompositeHealthInfo;
 import jp.co.ha.db.entity.composite.CompositeHealthInfoKey;
 
 /**
- * 健康情報とBMI範囲マスタの複合Mapper
- *
+ * 以下のテーブルの複合EntityのMapper
+ * <ul>
+ * <li>health_info</li>
+ * <li>bmi_range_mt</li>
+ * </ul>
+ * 
  * @version 1.0.0
  */
 public interface CompositeHealthInfoMapper {

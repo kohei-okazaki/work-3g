@@ -28,6 +28,7 @@ public class TokenApiRequest extends BaseNodeApiRequest implements BaseApiReques
      * ユーザIDを設定する
      *
      * @param seqUserId
+     *     ユーザID
      */
     public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;

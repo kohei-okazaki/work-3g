@@ -22,13 +22,6 @@ public interface ApiCommunicationDataSearchService {
     List<ApiCommunicationData> findAll(SelectOption selectOption);
 
     /**
-     * トランザクションIDの最大値を取得する
-     *
-     * @return トランザクションIDの最大値
-     */
-    Long selectLastTransactionId();
-
-    /**
      * 指定されたAPI通信情報IDのAPI通信情報の件数を取得する
      *
      * @param seqApiCommunicationDataId

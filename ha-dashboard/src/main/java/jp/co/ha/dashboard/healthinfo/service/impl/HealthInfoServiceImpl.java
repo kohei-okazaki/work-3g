@@ -110,26 +110,21 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
-                .getPayload(transactionId, registApi.getApiName(),
-                        registApi.getHttpMethod(),
-                        registApi.getUri(connectInfo, request), request);
-
-        HealthInfoRegistApiResponse apiResponse = registApi.callApi(request,
+        HealthInfoRegistApiResponse response = registApi.callApi(request,
                 connectInfo);
 
-        apiCommunicationDataComponent
-                .fillResponseParam(payload, connectInfo, apiResponse);
+        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+                .getPayload4AppApi(registApi, connectInfo, request, response,
+                        transactionId);
+        apiCommunicationDataComponent.registQueue(payload);
 
-        apiCommunicationDataComponent.inQueue(payload);
-
-        if (ResultType.SUCCESS != apiResponse.getResultType()) {
+        if (ResultType.SUCCESS != response.getResultType()) {
             // 健康情報登録APIの処理が成功以外の場合
             throw new ApiException(BusinessErrorCode.HEALTH_INFO_REGIST_API_CONNECT_ERROR,
-                    apiResponse.getErrorInfo().getDetail());
+                    response.getErrorInfo().getDetail());
         }
 
-        return apiResponse;
+        return response;
     }
 
     @Override

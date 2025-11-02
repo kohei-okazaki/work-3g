@@ -5,13 +5,9 @@
 [環境構築手順](http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/wiki/localEnv)を参考にローカル環境構築を行う  
 
  
-### **ローカル環境図**
-![image](https://user-images.githubusercontent.com/24481212/104831982-f7470280-58d0-11eb-8277-96886b961222.PNG)  
+### **環境図**
+![image](https://github.com/kohei-okazaki/work-3g/issues/423#issuecomment-3419791708)  
 
------
-
-### **EC2環境図**  
-![image](https://user-images.githubusercontent.com/24481212/104832424-4cd0de80-58d4-11eb-9117-86cf24c6191d.png)  
 
 ## 02_Project構成  
 * ### ha-api  

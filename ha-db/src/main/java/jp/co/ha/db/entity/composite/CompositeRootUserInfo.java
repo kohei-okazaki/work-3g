@@ -49,7 +49,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     private LocalDateTime updateDate;
 
     /**
-     * seqRootUserRoleMngMtIdを返す
+     * 管理者サイトユーザ権限管理マスタIDを返す
      *
      * @return seqRootUserRoleMngMtId
      */
@@ -58,7 +58,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * seqRootUserRoleMngMtIdを設定する
+     * 管理者サイトユーザ権限管理マスタIDを設定する
      *
      * @param seqRootUserRoleMngMtId
      *     管理者サイトユーザ権限管理マスタID
@@ -68,7 +68,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * seqRootUserRoleDetailMtIdを返す
+     * 管理者サイトユーザ権限詳細マスタIDを返す
      *
      * @return seqRootUserRoleDetailMtId
      */
@@ -77,7 +77,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * seqRootUserRoleDetailMtIdを設定する
+     * 管理者サイトユーザ権限詳細マスタIDを設定する
      *
      * @param seqRootUserRoleDetailMtId
      *     管理者サイトユーザ権限詳細マスタID
@@ -87,7 +87,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * deleteFlagを返す
+     * 削除フラグを返す
      * 
      * @return deleteFlag
      */
@@ -96,16 +96,17 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * deleteFlagを設定する
+     * 削除フラグを設定する
      * 
      * @param deleteFlag
+     *     削除フラグ
      */
     public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -114,7 +115,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -124,7 +125,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * passwordExpireを返す
+     * 登録日時を返す
      *
      * @return passwordExpire
      */
@@ -133,7 +134,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * passwordExpireを設定する
+     * 登録日時を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限
@@ -143,7 +144,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * remarksを返す
+     * 備考を返す
      *
      * @return remarks
      */
@@ -152,7 +153,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * remarksを設定する
+     * 備考を設定する
      *
      * @param remarks
      *     備考
@@ -162,7 +163,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * roleを返す
+     * ユーザ権限を返す
      *
      * @return role
      */
@@ -171,17 +172,17 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * roleを設定する
+     * ユーザ権限を設定する
      *
      * @param role
-     *     権限
+     *     ユーザ権限
      */
     public void setRole(String role) {
         this.role = role;
     }
 
     /**
-     * roleNameを返す
+     * ユーザ権限名を返す
      *
      * @return roleName
      */
@@ -190,17 +191,17 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * roleNameを設定する
+     * ユーザ権限名を設定する
      *
      * @param roleName
-     *     権限名
+     *     ユーザ権限名
      */
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
 
     /**
-     * regDateを返す
+     * 登録日時を返す
      *
      * @return regDate
      */
@@ -209,7 +210,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * regDateを設定する
+     * 登録日時を設定する
      *
      * @param regDate
      *     登録日時
@@ -219,7 +220,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * updateDateを返す
+     * 更新日時を返す
      *
      * @return updateDate
      */
@@ -228,7 +229,7 @@ public class CompositeRootUserInfo extends RootLoginInfoKey {
     }
 
     /**
-     * updateDateを設定する
+     * 更新日時を設定する
      *
      * @param updateDate
      *     更新日時
