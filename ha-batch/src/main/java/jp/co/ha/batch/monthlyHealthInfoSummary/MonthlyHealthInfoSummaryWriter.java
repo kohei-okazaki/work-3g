@@ -63,7 +63,7 @@ public class MonthlyHealthInfoSummaryWriter
     private AwsS3Component s3;
     /** Slack Component */
     private SlackApiComponent slack;
-    /** 処理対象年 */
+    /** 処理対象年月 */
     private String targetDate;
     /** 出力対象パス */
     private Path targetPath;
@@ -78,7 +78,7 @@ public class MonthlyHealthInfoSummaryWriter
      * @param slack
      *     Slack Component
      * @param targetDate
-     *     処理対象年
+     *     処理対象年月
      */
     public MonthlyHealthInfoSummaryWriter(
             HealthInfoProperties prop,

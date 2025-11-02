@@ -72,7 +72,7 @@ public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
     @Bean(MONTHLY_HEALTH_INFO_SUMMARY_STEP_NAME)
     Step monthlyHealthInfoSummaryStep(
             MonthlyHealthInfoSummaryReader reader,
-            MonthlyHealthInfoSummaryProccesor processor,
+            MonthlyHealthInfoSummaryProcessor processor,
             MonthlyHealthInfoSummaryWriter writer,
             JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {

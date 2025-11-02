@@ -13,8 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 
 import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
@@ -70,7 +69,7 @@ public class HealthInfoMigrateConfig extends BatchConfig {
     @Bean(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME)
     Step healthInfoMigrateBatchStep(
             HealthInfoMigrateReader reader,
-            HealthInfoMigrateProccesor processor,
+            HealthInfoMigrateProcessor processor,
             HealthInfoMigrateWriter writer,
             JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
@@ -80,11 +79,10 @@ public class HealthInfoMigrateConfig extends BatchConfig {
                 .processor(processor)
                 .writer(writer)
                 .faultTolerant()
-                .retry(ResourceAccessException.class)
-                .retry(HttpServerErrorException.class)
+                .retry(RestClientException.class)
                 .retryLimit(3)
                 .skip(HttpClientErrorException.class)
-                .skipLimit(100)
+                .skipLimit(10)
                 .transactionManager(transactionManager)
                 .build();
     }

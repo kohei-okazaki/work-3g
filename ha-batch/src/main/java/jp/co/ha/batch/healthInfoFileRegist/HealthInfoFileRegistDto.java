@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @version 1.0.0
  */
-public class HealthInfoRegistFileDto {
+public class HealthInfoFileRegistDto {
 
     /** ユーザID */
     @JsonProperty("seq_user_id")

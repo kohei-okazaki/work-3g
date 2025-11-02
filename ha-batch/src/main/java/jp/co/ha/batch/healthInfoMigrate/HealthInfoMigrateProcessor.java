@@ -16,7 +16,7 @@ import jp.co.ha.db.entity.HealthInfo;
  */
 @Component
 @StepScope
-public class HealthInfoMigrateProccesor
+public class HealthInfoMigrateProcessor
         implements ItemProcessor<HealthInfo, HealthInfoMigrateApiRequest> {
 
     @Override

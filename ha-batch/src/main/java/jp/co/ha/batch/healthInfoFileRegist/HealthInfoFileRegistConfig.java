@@ -8,14 +8,16 @@ import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
 
 import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
+import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 
 /**
  * 健康情報一括登録バッチのConfig
@@ -24,10 +26,6 @@ import jp.co.ha.batch.listener.BatchJobListener;
  */
 @Configuration
 public class HealthInfoFileRegistConfig extends BatchConfig {
-
-    /** 健康情報一括登録Tasklet */
-    @Autowired
-    private HealthInfoFileRegistTasklet healthInfoFileRegistTasklet;
 
     /**
      * 健康情報一括登録バッチJOB
@@ -49,24 +47,42 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
                 .listener(listener)
                 .start(healthInfoFileRegistBatchStep)
                 .build();
-
     }
 
     /**
-     * 健康情報一括登録STEP
-     *
+     * 健康情報一括登録バッチSTEP
+     * 
+     * @param reader
+     *     健康情報一括登録-Reader
+     * @param processor
+     *     健康情報一括登録-Proccesor
+     * @param writer
+     *     健康情報一括登録-Writer
      * @param jobRepository
      *     JobRepository
      * @param transactionManager
      *     PlatformTransactionManager
-     * @return 健康情報一括登録バッチのSTEP
+     * @return 健康情報一括登録バッチSTEP
      */
     @Bean(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME)
-    Step healthInfoFileRegistBatchStep(JobRepository jobRepository,
+    Step monthlyHealthInfoSummaryStep(
+            HealthInfoFileRegistReader reader,
+            HealthInfoFileRegistProcessor processor,
+            HealthInfoFileRegistWriter writer,
+            JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME,
-                jobRepository)
-                        .tasklet(healthInfoFileRegistTasklet, transactionManager)
-                        .build();
+        return new StepBuilder(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME, jobRepository)
+                .<HealthInfoRegistApiRequest, HealthInfoRegistApiRequest> chunk(1,
+                        transactionManager)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .faultTolerant()
+                .retry(RestClientException.class)
+                .retryLimit(3)
+                .skip(HttpClientErrorException.class)
+                .skipLimit(10)
+                .build();
     }
+
 }

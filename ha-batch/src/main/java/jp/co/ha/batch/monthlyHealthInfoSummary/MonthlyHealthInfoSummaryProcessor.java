@@ -16,7 +16,7 @@ import jp.co.ha.db.entity.HealthInfo;
  */
 @Component
 @StepScope
-public class MonthlyHealthInfoSummaryProccesor
+public class MonthlyHealthInfoSummaryProcessor
         implements ItemProcessor<HealthInfo, MonthlyHealthInfoSummaryModel> {
 
     /** 日付フォーマット(yyyy/MM/dd HH:mm:ss) */
