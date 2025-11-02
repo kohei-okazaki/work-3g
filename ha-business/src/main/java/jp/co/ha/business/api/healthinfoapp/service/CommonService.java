@@ -41,7 +41,7 @@ public abstract class CommonService {
 
         if (!user.getApiKey().equals(request.getApiKey())) {
             throw new ApiException(ApiErrorCode.API_EXEC_ERROR,
-                    "このユーザはAPIを実行できません");
+                    "このユーザはAPIを実行できません。seq_user_id=" + request.getSeqUserId());
         }
     }
 }

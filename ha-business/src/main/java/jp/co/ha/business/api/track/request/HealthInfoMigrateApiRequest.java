@@ -39,6 +39,7 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
      * ユーザIDを設定する
      * 
      * @param seqUserId
+     *     ユーザID
      */
     public void setSeqUserId(Long seqUserId) {
         this.seqUserId = seqUserId;

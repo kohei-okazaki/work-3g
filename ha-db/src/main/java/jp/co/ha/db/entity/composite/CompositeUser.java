@@ -57,7 +57,7 @@ public class CompositeUser extends UserKey {
     private Boolean enclosureCharFlag;
 
     /**
-     * passwordを返す
+     * パスワードを返す
      *
      * @return password
      */
@@ -66,7 +66,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * passwordを設定する
+     * パスワードを設定する
      *
      * @param password
      *     パスワード
@@ -76,7 +76,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * deleteFlagを返す
+     * 削除フラグを返す
      * 
      * @return deleteFlag
      */
@@ -85,16 +85,17 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * deleteFlagを設定する
+     * 削除フラグを設定する
      * 
      * @param deleteFlag
+     *     削除フラグ
      */
     public void setDeleteFlag(Boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
     /**
-     * remarksを返す
+     * 備考を返す
      *
      * @return remarks
      */
@@ -103,7 +104,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * remarksを設定する
+     * 備考を設定する
      *
      * @param remarks
      *     備考
@@ -113,7 +114,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * mailAddressを返す
+     * メールアドレスを返す
      *
      * @return mailAddress
      */
@@ -122,7 +123,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * mailAddressを設定する
+     * メールアドレスを設定する
      *
      * @param mailAddress
      *     メールアドレス
@@ -132,7 +133,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * apiKeyを返す
+     * APIキーを返す
      *
      * @return apiKey
      */
@@ -141,7 +142,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * apiKeyを設定する
+     * APIキーを設定する
      *
      * @param apiKey
      *     APIキー
@@ -151,7 +152,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * passwordExpireを返す
+     * パスワード有効期限を返す
      *
      * @return passwordExpire
      */
@@ -160,7 +161,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * passwordExpireを設定する
+     * パスワード有効期限を設定する
      *
      * @param passwordExpire
      *     パスワード有効期限
@@ -170,7 +171,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * genderTypeを返す
+     * 性別を返す
      * 
      * @return genderType
      */
@@ -179,7 +180,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * genderTypeを設定する
+     * 性別を設定する
      * 
      * @param genderType
      *     性別
@@ -189,7 +190,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * birthDateを返す
+     * 誕生日を返す
      * 
      * @return birthDate
      */
@@ -198,7 +199,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * birthDateを設定する
+     * 誕生日を設定する
      * 
      * @param birthDate
      *     誕生日
@@ -208,7 +209,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * goalWeightを返す
+     * 目標体重を返す
      * 
      * @return goalWeight
      */
@@ -217,7 +218,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * goalWeightを設定する
+     * 目標体重を設定する
      * 
      * @param goalWeight
      *     目標体重
@@ -227,7 +228,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * regDateを返す
+     * 登録日時を返す
      *
      * @return regDate
      */
@@ -236,7 +237,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * regDateを設定する
+     * 登録日時を設定する
      *
      * @param regDate
      *     登録日時
@@ -246,7 +247,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * updateDateを返す
+     * 更新日時を返す
      *
      * @return updateDate
      */
@@ -255,7 +256,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * updateDateを設定する
+     * 更新日時を設定する
      *
      * @param updateDate
      *     更新日時
@@ -265,7 +266,7 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * headerFlagを返す
+     * ヘッダ利用有無フラグを返す
      * 
      * @return headerFlag
      */
@@ -274,16 +275,17 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * headerFlagを設定する
+     * ヘッダ利用有無フラグを設定する
      * 
      * @param headerFlag
+     *     ヘッダ利用有無フラグ
      */
     public void setHeaderFlag(Boolean headerFlag) {
         this.headerFlag = headerFlag;
     }
 
     /**
-     * footerFlagを返す
+     * フッタ利用有無フラグを返す
      * 
      * @return footerFlag
      */
@@ -292,16 +294,17 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * footerFlagを設定する
+     * フッタ利用有無フラグを設定する
      * 
      * @param footerFlag
+     *     フッタ利用有無フラグ
      */
     public void setFooterFlag(Boolean footerFlag) {
         this.footerFlag = footerFlag;
     }
 
     /**
-     * maskFlagを返す
+     * マスク利用有無フラグを返す
      * 
      * @return maskFlag
      */
@@ -310,16 +313,17 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * maskFlagを設定する
+     * マスク利用有無フラグを設定する
      * 
      * @param maskFlag
+     *     マスク利用有無フラグ
      */
     public void setMaskFlag(Boolean maskFlag) {
         this.maskFlag = maskFlag;
     }
 
     /**
-     * enclosureCharFlagを返す
+     * 囲み文字利用有無フラグを返す
      * 
      * @return enclosureCharFlag
      */
@@ -328,9 +332,10 @@ public class CompositeUser extends UserKey {
     }
 
     /**
-     * enclosureCharFlagを設定する
+     * 囲み文字利用有無フラグを設定する
      * 
      * @param enclosureCharFlag
+     *     囲み文字利用有無フラグ
      */
     public void setEnclosureCharFlag(Boolean enclosureCharFlag) {
         this.enclosureCharFlag = enclosureCharFlag;

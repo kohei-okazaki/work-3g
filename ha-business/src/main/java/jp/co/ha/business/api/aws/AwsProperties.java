@@ -39,7 +39,7 @@ public class AwsProperties {
     private int sesSocketTimeout;
     /** SESスタブフラグ(true:メールを送信しない、false:送信する) */
     private boolean sesStubFlag;
-    /** キュー名 */
+    /** キュー名:api_communication_data */
     private String apiCommunicationDataQueueName;
     /** SQSコネクションタイムアウト */
     private int sqsConnnectionTimeout;

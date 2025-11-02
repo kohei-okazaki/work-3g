@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @version 1.0.0
  */
-public class HealthInfoRegistFileDto {
+public class HealthInfoFileRegistDto {
 
     /** ユーザID */
     @JsonProperty("seq_user_id")
@@ -21,7 +21,7 @@ public class HealthInfoRegistFileDto {
     private List<HealthInfoRequestData> healthInfoRequestDataList = new ArrayList<>();
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -30,7 +30,7 @@ public class HealthInfoRegistFileDto {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -40,7 +40,7 @@ public class HealthInfoRegistFileDto {
     }
 
     /**
-     * healthInfoRequestDataListを返す
+     * 健康情報要求情報リストを返す
      *
      * @return healthInfoRequestDataList
      */
@@ -49,7 +49,7 @@ public class HealthInfoRegistFileDto {
     }
 
     /**
-     * healthInfoRequestDataListを設定する
+     * 健康情報要求情報リストを設定する
      *
      * @param healthInfoRequestDataList
      *     健康情報要求情報リスト
@@ -74,7 +74,7 @@ public class HealthInfoRegistFileDto {
         private BigDecimal weight;
 
         /**
-         * heightを返す
+         * 身長を返す
          *
          * @return height
          */
@@ -83,7 +83,7 @@ public class HealthInfoRegistFileDto {
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          *
          * @param height
          *     身長
@@ -93,7 +93,7 @@ public class HealthInfoRegistFileDto {
         }
 
         /**
-         * weightを返す
+         * 体重を返す
          *
          * @return weight
          */
@@ -102,7 +102,7 @@ public class HealthInfoRegistFileDto {
         }
 
         /**
-         * weightを設定する
+         * 体重を設定する
          *
          * @param weight
          *     体重

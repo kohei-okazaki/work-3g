@@ -46,9 +46,13 @@ public class DashboardConfig implements WebMvcConfigurer {
     private DashboardAuthInterceptor authInterceptor;
 
     /**
+     * securityFilterChain
+     * 
      * @param http
+     *     HttpSecurity
      * @return SecurityFilterChain
      * @throws Exception
+     *     認証処理失敗
      */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

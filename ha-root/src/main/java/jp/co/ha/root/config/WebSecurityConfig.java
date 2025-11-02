@@ -45,9 +45,13 @@ public class WebSecurityConfig {
     private ApplicationProperties applicationProperties;
 
     /**
+     * securityFilterChain
+     * 
      * @param http
+     *     HttpSecurity
      * @return securityFilterChain
      * @throws Exception
+     *     セキュリティ設定処理失敗
      */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -78,8 +82,12 @@ public class WebSecurityConfig {
     }
 
     /**
+     * configure
+     * 
      * @param auth
+     *     AuthenticationManagerBuilder
      * @throws Exception
+     *     認証処理失敗
      */
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

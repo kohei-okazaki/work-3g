@@ -118,3 +118,8 @@
     - 概要：健康管理アプリのユーザの問い合わせ情報を更新するAPI
     - URL：/api/root/inquiry/{seq_inquiry_mng_id}
     - Method：PUT
+
+- 問い合わせ情報通知API：
+    - 概要：健康管理アプリのユーザの問い合わせ情報を更新するAPI
+    - URL：/api/root/inquiry/notice
+    - Method：GET

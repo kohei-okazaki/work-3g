@@ -1,11 +1,14 @@
 package jp.co.ha.business.db.crud.read.impl;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jp.co.ha.business.component.InquiryComponent.Status;
 import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
@@ -69,11 +72,12 @@ public class InquiryManagementSelectServiceImpl
     @Select
     @Override
     @Transactional(readOnly = true)
-    public long countByStatus(String status) {
+    public long countByStatusList(Status... statuses) {
         InquiryManagementExample example = new InquiryManagementExample();
         InquiryManagementExample.Criteria criteria = example.createCriteria();
-        if (status != null) {
-            criteria.andInquiryStatusEqualTo(status);
+        if (statuses != null) {
+            criteria.andInquiryStatusIn(Arrays.asList(statuses).stream()
+                    .map(e -> e.getValue()).collect(Collectors.toList()));
         }
         criteria.andDeleteFlagEqualTo(false);
         return mapper.countByExample(example);

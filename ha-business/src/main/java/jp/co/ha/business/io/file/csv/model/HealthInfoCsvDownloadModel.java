@@ -35,7 +35,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     private LocalDateTime healthInfoRegDate;
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -44,7 +44,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -54,7 +54,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -63,7 +63,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -73,7 +73,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -82,7 +82,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -92,7 +92,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -101,7 +101,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -111,7 +111,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -120,7 +120,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重
@@ -130,7 +130,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * healthInfoRegDateを返す
+     * 健康情報作成日時を返す
      *
      * @return healthInfoRegDate
      */
@@ -139,7 +139,7 @@ public class HealthInfoCsvDownloadModel implements BaseCsvModel {
     }
 
     /**
-     * healthInfoRegDateを設定する
+     * 健康情報作成日時を設定する
      *
      * @param healthInfoRegDate
      *     健康情報作成日時

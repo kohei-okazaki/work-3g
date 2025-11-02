@@ -25,7 +25,7 @@ public class BatchChunkListener implements ChunkListener {
 
     @Override
     public void afterChunk(ChunkContext context) {
-        LOG.info("after  chunk. [context:{" + context + "}]");
+        LOG.info("after chunk. [context:{" + context + "}]");
     }
 
     @Override

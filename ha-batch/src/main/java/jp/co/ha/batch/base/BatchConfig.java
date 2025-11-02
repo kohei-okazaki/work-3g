@@ -1,4 +1,4 @@
-package jp.co.ha.batch.config;
+package jp.co.ha.batch.base;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

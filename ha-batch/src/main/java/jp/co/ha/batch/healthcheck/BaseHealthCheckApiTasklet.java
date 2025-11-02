@@ -17,10 +17,6 @@ import jp.co.ha.common.log.LoggerFactory;
  */
 public abstract class BaseHealthCheckApiTasklet implements Tasklet {
 
-    /** LOG */
-    protected final Logger LOG = LoggerFactory
-            .getLogger(BaseHealthCheckApiTasklet.class);
-
     /** キー名:トランザクションID */
     public static final String KEY_TRANSACTION_ID = "transactionId";
     /** キー名:レスポンスタイプ */
@@ -32,6 +28,8 @@ public abstract class BaseHealthCheckApiTasklet implements Tasklet {
     /** ヘルスチェックAPIメールテンプレートID */
     protected static final MailTemplateKey TEMPLATE_ID = MailTemplateKey.HEALTHINFO_CHECK_TEMPLATE;
 
+    /** LOG */
+    protected final Logger LOG = LoggerFactory.getLogger(BaseHealthCheckApiTasklet.class);
     /** API通信情報Component */
     @Autowired
     protected ApiCommunicationDataComponent apiCommunicationDataComponent;

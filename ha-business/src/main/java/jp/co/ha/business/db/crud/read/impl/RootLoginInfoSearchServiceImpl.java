@@ -37,9 +37,8 @@ public class RootLoginInfoSearchServiceImpl implements RootLoginInfoSearchServic
 
         RootLoginInfoKey key = new RootLoginInfoKey();
         key.setSeqRootLoginInfoId(seqLoginId);
-        RootLoginInfo entity = mapper.selectByPrimaryKey(key);
 
-        return Optional.ofNullable(entity);
+        return Optional.ofNullable(mapper.selectByPrimaryKey(key));
     }
 
     @Select

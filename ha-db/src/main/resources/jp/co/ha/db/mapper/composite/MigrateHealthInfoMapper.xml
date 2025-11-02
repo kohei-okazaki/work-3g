@@ -1,0 +1,38 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ha.db.mapper.composite.MigrateHealthInfoMapper">
+  <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.HealthInfo">
+    <id column="SEQ_HEALTH_INFO_ID" jdbcType="BIGINT" property="seqHealthInfoId" />
+    <result column="SEQ_USER_ID" jdbcType="BIGINT" property="seqUserId" />
+    <result column="HEIGHT" jdbcType="DECIMAL" property="height" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="BMI" jdbcType="DECIMAL" property="bmi" />
+    <result column="STANDARD_WEIGHT" jdbcType="DECIMAL" property="standardWeight" />
+    <result column="HEALTH_INFO_REG_DATE" jdbcType="TIMESTAMP" property="healthInfoRegDate" />
+    <result column="SEQ_BMI_RANGE_MT_ID" jdbcType="BIGINT" property="seqBmiRangeMtId" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+  </resultMap>
+
+  <select id="selectByHealthInfoRegDate" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+      SEQ_HEALTH_INFO_ID
+      , SEQ_USER_ID
+      , HEIGHT
+      , WEIGHT
+      , BMI
+      , STANDARD_WEIGHT
+      , HEALTH_INFO_REG_DATE
+      , SEQ_BMI_RANGE_MT_ID
+      , UPDATE_DATE
+      , REG_DATE
+    FROM
+      HEALTH_INFO
+    WHERE
+      HEALTH_INFO_REG_DATE BETWEEN #{from} AND #{to}
+    ORDER BY 
+      SEQ_HEALTH_INFO_ID ASC
+    LIMIT 
+      #{_skiprows},
+      #{_pagesize}
+  </select>
+</mapper>

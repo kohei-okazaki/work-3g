@@ -1,4 +1,4 @@
-package jp.co.ha.batch.config;
+package jp.co.ha.batch.base;
 
 /**
  * 健康管理バッチのジョブ設定定数
@@ -14,7 +14,7 @@ public class BatchConfigConst {
     /** STEP名 - 管理者用APIヘルスチェックStep */
     public static final String HEALTH_CHECK_ROOT_API_STEP_NAME = "rootApihealthCheckStep";
     /** STEP名 - ヘルスチェック通知用Step */
-    public static final String HEALTH_CHECK_NOTIFY_STEP_NAME = "notifyStep";
+    public static final String HEALTH_CHECK_NOTIFY_STEP_NAME = "healthCheckNotifyStep";
     /** FLOW名 - 健康管理APIヘルスチェックFlow */
     public static final String HEALTH_CHECK_APP_API_FLOW_NAME = "appApiHealthCheckFlow";
     /** FLOW名 - 管理者用APIヘルスチェックFlow */
@@ -36,5 +36,15 @@ public class BatchConfigConst {
     public static final String HEALTH_INFO_MIGRATE_BATCH_JOB_NAME = "healthInfoMigrateBatchJob";
     /** STEP名 - 健康情報連携バッチ */
     public static final String HEALTH_INFO_MIGRATE_BATCH_STEP_NAME = "healthInfoMigrateBatchStep";
+
+    /** JOB名 - AWS SQS取込バッチ */
+    public static final String AWS_SQS_IMPORT_BATCH_JOB_NAME = "awsSqsImportBatchJob";
+    /** STEP名 - AWS SQS取込バッチ */
+    public static final String AWS_SQS_IMPORT_BATCH_STEP_NAME = "awsSqsImportBatchStep";
+
+    /** JOB名 - データパージバッチ */
+    public static final String DATA_PURGE_BACTH_JOB_NAME = "dataPurgeBatchJob";
+    /** STEP名 - データパージバッチ */
+    public static final String DATA_PURGE_BACTH_STEP_NAME = "dataPurgeBatchStep";
 
 }
