@@ -1,5 +1,7 @@
 package jp.co.ha.batch.base;
 
+import java.util.List;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -19,6 +21,9 @@ public class BatchProperties {
 
     /** 月次健康情報集計バッチプロパティクラス */
     private MonthlyHealthInfoSummary monthlyHealthInfoSummary;
+
+    /** データパージプロパティクラスリスト */
+    private List<DataPurge> dataPurgeList;
 
     /**
      * 健康情報連携バッチプロパティクラスを返す
@@ -57,6 +62,25 @@ public class BatchProperties {
     public void setMonthlyHealthInfoSummary(
             MonthlyHealthInfoSummary monthlyHealthInfoSummary) {
         this.monthlyHealthInfoSummary = monthlyHealthInfoSummary;
+    }
+
+    /**
+     * データパージプロパティクラスリストを返す
+     * 
+     * @return dataPurgeList
+     */
+    public List<DataPurge> getDataPurgeList() {
+        return dataPurgeList;
+    }
+
+    /**
+     * データパージプロパティクラスリストを設定する
+     * 
+     * @param dataPurgeList
+     *     データパージプロパティクラスリスト
+     */
+    public void setDataPurgeList(List<DataPurge> dataPurgeList) {
+        this.dataPurgeList = dataPurgeList;
     }
 
     /**
@@ -117,6 +141,58 @@ public class BatchProperties {
         public void setExecPerpageCount(int execPerpageCount) {
             this.execPerpageCount = execPerpageCount;
         }
+    }
+
+    /**
+     * データパージバッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class DataPurge {
+
+        /** テーブル名 */
+        private String tableName;
+        /** 有効期限(年) */
+        private int expired;
+
+        /**
+         * テーブル名を返す
+         * 
+         * @return tableName
+         */
+        public String getTableName() {
+            return tableName;
+        }
+
+        /**
+         * テーブル名を設定する
+         * 
+         * @param tableName
+         *     テーブル名
+         */
+        public void setTableName(String tableName) {
+            this.tableName = tableName;
+        }
+
+        /**
+         * 有効期限(年)を返す
+         * 
+         * @return userExpired
+         */
+        public int getExpired() {
+            return expired;
+        }
+
+        /**
+         * 有効期限(年)を設定する
+         * 
+         * @param expired
+         *     有効期限(年)
+         */
+        public void setExpired(int expired) {
+            this.expired = expired;
+        }
+
     }
 
 }

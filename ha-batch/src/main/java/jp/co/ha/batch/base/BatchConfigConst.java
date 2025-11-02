@@ -42,4 +42,9 @@ public class BatchConfigConst {
     /** STEP名 - AWS SQS取込バッチ */
     public static final String AWS_SQS_IMPORT_BATCH_STEP_NAME = "awsSqsImportBatchStep";
 
+    /** JOB名 - データパージバッチ */
+    public static final String DATA_PURGE_BACTH_JOB_NAME = "dataPurgeBatchJob";
+    /** STEP名 - データパージバッチ */
+    public static final String DATA_PURGE_BACTH_STEP_NAME = "dataPurgeBatchStep";
+
 }

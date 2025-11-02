@@ -31,3 +31,6 @@ ha-batch:
     exec-perpage-count: 100
   monthly-health-info-summary:
     exec-perpage-count: 1000
+  data-purge-list:
+    - table-name: user
+      expired: 10

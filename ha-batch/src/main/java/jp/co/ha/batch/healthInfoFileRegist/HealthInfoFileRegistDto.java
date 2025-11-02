@@ -21,7 +21,7 @@ public class HealthInfoFileRegistDto {
     private List<HealthInfoRequestData> healthInfoRequestDataList = new ArrayList<>();
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -30,7 +30,7 @@ public class HealthInfoFileRegistDto {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID
@@ -40,7 +40,7 @@ public class HealthInfoFileRegistDto {
     }
 
     /**
-     * healthInfoRequestDataListを返す
+     * 健康情報要求情報リストを返す
      *
      * @return healthInfoRequestDataList
      */
@@ -49,7 +49,7 @@ public class HealthInfoFileRegistDto {
     }
 
     /**
-     * healthInfoRequestDataListを設定する
+     * 健康情報要求情報リストを設定する
      *
      * @param healthInfoRequestDataList
      *     健康情報要求情報リスト
@@ -74,7 +74,7 @@ public class HealthInfoFileRegistDto {
         private BigDecimal weight;
 
         /**
-         * heightを返す
+         * 身長を返す
          *
          * @return height
          */
@@ -83,7 +83,7 @@ public class HealthInfoFileRegistDto {
         }
 
         /**
-         * heightを設定する
+         * 身長を設定する
          *
          * @param height
          *     身長
@@ -93,7 +93,7 @@ public class HealthInfoFileRegistDto {
         }
 
         /**
-         * weightを返す
+         * 体重を返す
          *
          * @return weight
          */
@@ -102,7 +102,7 @@ public class HealthInfoFileRegistDto {
         }
 
         /**
-         * weightを設定する
+         * 体重を設定する
          *
          * @param weight
          *     体重
