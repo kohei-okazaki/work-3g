@@ -26,10 +26,7 @@
       <v-col sm="12">
         <v-expansion-panels multiple>
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>
                 <v-icon color="red">mdi-database</v-icon>
                 <span>MySQL構築手順</span>
@@ -69,12 +66,8 @@
               <details>
                 <summary>ダウンロード手順</summary>
                 <p>
-                  <a
-                    href="https://www.mysql.com/jp/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >公式</a
-                  >より以下の手順でMySQLをローカルPCにダウンロードして下さい
+                  <a href="https://www.mysql.com/jp/" target="_blank"
+                    rel="noopener noreferrer">公式</a>より以下の手順でMySQLをローカルPCにダウンロードして下さい
                 </p>
                 <p>
                   以下ダウンロード手順は2016年頃の為、画面が更新されている可能性があります
@@ -93,11 +86,7 @@
                       と書かれたブロックがあります。そこに表示されている「Community
                       (GPL) Downloads」と書かれたリンク押下
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install1.png"
-                      alt="mysqlインストール作業画像1"
-                      title="mysqlインストール作業画像1"
-                    />
+                    <v-img src="/wiki/mysql-install1.png" alt="mysqlインストール作業画像1" title="mysqlインストール作業画像1" />
                   </li>
                   <li>
                     <p>
@@ -105,11 +94,7 @@
                       Community Server (GPL)
                       ブロックの中にある「DOWNLOAD」と書かれたリンク押下
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install2.png"
-                      alt="mysqlインストール作業画像2"
-                      title="mysqlインストール作業画像2"
-                    />
+                    <v-img src="/wiki/mysql-install2.png" alt="mysqlインストール作業画像2" title="mysqlインストール作業画像2" />
                   </li>
                   <li>
                     <p>
@@ -118,21 +103,13 @@
                       をインストールするプラットフォームを Select Platform
                       の下に表示されているドロップダウンメニューで選択します
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install3.png"
-                      alt="mysqlインストール作業画像3"
-                      title="mysqlインストール作業画像3"
-                    />
+                    <v-img src="/wiki/mysql-install3.png" alt="mysqlインストール作業画像3" title="mysqlインストール作業画像3" />
                     <p>
                       今回は Windows 環境にインストールしますので Microsoft
                       Windows
                       を選択して下さい（デフォルトで選択されている場合は何もしなくて結構です）
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install4.png"
-                      alt="mysqlインストール作業画像4"
-                      title="mysqlインストール作業画像4"
-                    />
+                    <v-img src="/wiki/mysql-install4.png" alt="mysqlインストール作業画像4" title="mysqlインストール作業画像4" />
                   </li>
                   <li>
                     <p>
@@ -151,11 +128,7 @@
                     <p>
                       今回はダウンロードしてからインストールするタイプのものを使用します。次の「DownLoad」と書かれたリンクをクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install5.png"
-                      alt="mysqlインストール作業画像5"
-                      title="mysqlインストール作業画像5"
-                    />
+                    <v-img src="/wiki/mysql-install5.png" alt="mysqlインストール作業画像5" title="mysqlインストール作業画像5" />
                   </li>
                   <li>
                     <p>
@@ -166,16 +139,8 @@
                       画面下部にある「No thanks, just start my
                       download.」と書かれたリンクをクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install6.png"
-                      alt="mysqlインストール作業画像6"
-                      title="mysqlインストール作業画像6"
-                    />
-                    <v-img
-                      src="/wiki/mysql-install7.png"
-                      alt="mysqlインストール作業画像7"
-                      title="mysqlインストール作業画像7"
-                    />
+                    <v-img src="/wiki/mysql-install6.png" alt="mysqlインストール作業画像6" title="mysqlインストール作業画像6" />
+                    <v-img src="/wiki/mysql-install7.png" alt="mysqlインストール作業画像7" title="mysqlインストール作業画像7" />
                   </li>
                 </ol>
               </details>
@@ -202,11 +167,7 @@
                       accept the license
                       terms」の左側にあるチェックボックスをチェックして下さい。その後で「Next」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install8.png"
-                      alt="mysqlインストール作業画像8"
-                      title="mysqlインストール作業画像8"
-                    />
+                    <v-img src="/wiki/mysql-install8.png" alt="mysqlインストール作業画像8" title="mysqlインストール作業画像8" />
                   </li>
                   <li>
                     <p>
@@ -217,22 +178,14 @@
                       今回は「Developer
                       Default」を選択しました。選択が終わりましたら「Next」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install9.png"
-                      alt="mysqlインストール作業画像9"
-                      title="mysqlインストール作業画像9"
-                    />
+                    <v-img src="/wiki/mysql-install9.png" alt="mysqlインストール作業画像9" title="mysqlインストール作業画像9" />
                   </li>
                   <li>
                     <p>
                       次の 2
                       つについては必要なファイルなどがないためインストールされませんと表示されています。今回は問題ないので「Next」押下
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install10.png"
-                      alt="mysqlインストール作業画像10"
-                      title="mysqlインストール作業画像10"
-                    />
+                    <v-img src="/wiki/mysql-install10.png" alt="mysqlインストール作業画像10" title="mysqlインストール作業画像10" />
                   </li>
                   <li>
                     <p>
@@ -246,11 +199,7 @@
                     <p>
                       最終的に次のような画面が表示されればインストールは完了です。続いて初期設定を行いますので「Next」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install11.png"
-                      alt="mysqlインストール作業画像11"
-                      title="mysqlインストール作業画像11"
-                    />
+                    <v-img src="/wiki/mysql-install11.png" alt="mysqlインストール作業画像11" title="mysqlインストール作業画像11" />
                   </li>
                 </ol>
               </details>
@@ -264,11 +213,7 @@
                       インストールした MySQL
                       の初期設定を行います。「Next」ボタンをクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install12.png"
-                      alt="mysqlインストール作業画像12"
-                      title="mysqlインストール作業画像12"
-                    />
+                    <v-img src="/wiki/mysql-install12.png" alt="mysqlインストール作業画像12" title="mysqlインストール作業画像12" />
                   </li>
                   <li>
                     <p>
@@ -277,11 +222,7 @@
                       を利用するので Standalone MySQL Server/Classic MySQL
                       Replication を選択し、「Next」ボタンを押下して下さい
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install13.png"
-                      alt="mysqlインストール作業画像13"
-                      title="mysqlインストール作業画像13"
-                    />
+                    <v-img src="/wiki/mysql-install13.png" alt="mysqlインストール作業画像13" title="mysqlインストール作業画像13" />
                   </li>
                   <li>
                     <p>
@@ -302,11 +243,7 @@
                       MySQL X Protocol
                       で使用するポート番号も変更できますがこちらもデフォルトのままとしました。設定が終わりましたら「Next」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install14.png"
-                      alt="mysqlインストール作業画像14"
-                      title="mysqlインストール作業画像14"
-                    />
+                    <v-img src="/wiki/mysql-install14.png" alt="mysqlインストール作業画像14" title="mysqlインストール作業画像14" />
                   </li>
                   <li>
                     <p>
@@ -318,11 +255,7 @@
                       Strong Password Encryption for
                       Authentication」を選択しました。選択が終わりましたら「Next」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install15.png"
-                      alt="mysqlインストール作業画像15"
-                      title="mysqlインストール作業画像15"
-                    />
+                    <v-img src="/wiki/mysql-install15.png" alt="mysqlインストール作業画像15" title="mysqlインストール作業画像15" />
                   </li>
                   <li>
                     <p>
@@ -336,11 +269,7 @@
                     <p>
                       確認のために2か所に同じパスワードを入力して下さい。管理者以外のユーザーアカウントはここでは作成しません(後から追加できます)。設定が終わりましたら「Next」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install16.png"
-                      alt="mysqlインストール作業画像16"
-                      title="mysqlインストール作業画像16"
-                    />
+                    <v-img src="/wiki/mysql-install16.png" alt="mysqlインストール作業画像16" title="mysqlインストール作業画像16" />
                   </li>
                   <li>
                     <p>
@@ -349,27 +278,15 @@
                       MySQL Server as a Windows
                       Service」のチェックを付けます。その後で「Next」をクリックしてください。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install17.png"
-                      alt="mysqlインストール作業画像17"
-                      title="mysqlインストール作業画像17"
-                    />
+                    <v-img src="/wiki/mysql-install17.png" alt="mysqlインストール作業画像17" title="mysqlインストール作業画像17" />
                   </li>
                   <li>
                     <p>最終確認画面です。「Execute」をクリックして下さい。</p>
-                    <v-img
-                      src="/wiki/mysql-install18.png"
-                      alt="mysqlインストール作業画像18"
-                      title="mysqlインストール作業画像18"
-                    />
+                    <v-img src="/wiki/mysql-install18.png" alt="mysqlインストール作業画像18" title="mysqlインストール作業画像18" />
                     <p>
                       下記の画面が表示されれば初期設定は完了です。「Finish」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install19.png"
-                      alt="mysqlインストール作業画像19"
-                      title="mysqlインストール作業画像19"
-                    />
+                    <v-img src="/wiki/mysql-install19.png" alt="mysqlインストール作業画像19" title="mysqlインストール作業画像19" />
                   </li>
                   <li>
                     <p>
@@ -389,49 +306,25 @@
                       をインストールした時に設定した root
                       ユーザーのパスワードを入力し「Check」をクリックしてください。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install20.png"
-                      alt="mysqlインストール作業画像20"
-                      title="mysqlインストール作業画像20"
-                    />
+                    <v-img src="/wiki/mysql-install20.png" alt="mysqlインストール作業画像20" title="mysqlインストール作業画像20" />
                   </li>
                   <li>
                     <p>
                       ログインに成功すると次のように表示されます。そのあとで「Next」をクリックしてください。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install21.png"
-                      alt="mysqlインストール作業画像21"
-                      title="mysqlインストール作業画像21"
-                    />
+                    <v-img src="/wiki/mysql-install21.png" alt="mysqlインストール作業画像21" title="mysqlインストール作業画像21" />
                     <p>「Execute」をクリックして下さい。</p>
-                    <v-img
-                      src="/wiki/mysql-install22.png"
-                      alt="mysqlインストール作業画像22"
-                      title="mysqlインストール作業画像22"
-                    />
+                    <v-img src="/wiki/mysql-install22.png" alt="mysqlインストール作業画像22" title="mysqlインストール作業画像22" />
                     <p>
                       下記の画面が表示されれば初期設定は完了です。「Finish」をクリックして下さい。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install23.png"
-                      alt="mysqlインストール作業画像23"
-                      title="mysqlインストール作業画像23"
-                    />
+                    <v-img src="/wiki/mysql-install23.png" alt="mysqlインストール作業画像23" title="mysqlインストール作業画像23" />
                     <p>
                       すべてのインストールが完了しました。「Next」をクリックしてください。
                     </p>
-                    <v-img
-                      src="/wiki/mysql-install24.png"
-                      alt="mysqlインストール作業画像24"
-                      title="mysqlインストール作業画像24"
-                    />
+                    <v-img src="/wiki/mysql-install24.png" alt="mysqlインストール作業画像24" title="mysqlインストール作業画像24" />
                     <p>次のように表示されれば初期設定も完了です。</p>
-                    <v-img
-                      src="/wiki/mysql-install25.png"
-                      alt="mysqlインストール作業画像25"
-                      title="mysqlインストール作業画像25"
-                    />
+                    <v-img src="/wiki/mysql-install25.png" alt="mysqlインストール作業画像25" title="mysqlインストール作業画像25" />
                   </li>
                 </ol>
               </details>
@@ -444,11 +337,7 @@
                   「Windowsキー」押下、「mysql」と入力し以下画像のように「MySQL
                   8.0 Command Line Clinet」ツールを選択
                 </p>
-                <v-img
-                  src="/wiki/mysql-command-line-client1.png"
-                  alt="mysqlツール作業画像1"
-                  title="mysqlツール作業画像1"
-                />
+                <v-img src="/wiki/mysql-command-line-client1.png" alt="mysqlツール作業画像1" title="mysqlツール作業画像1" />
                 <p>
                   以下のファイルMySQLクライアントから実行し、データベース「work3g」を作成する
                 </p>
@@ -465,40 +354,11 @@
 
               <br />
 
-              <details>
-                <summary>ユーザとパスワードを設定</summary>
-                <p>
-                  以下のファイルを修正し、ユーザとパスワードを設定する
-                </p>
-                <kbd>ha-common/profile/local/jdbc.properties</kbd>
-                <br /><br />
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>項目名</th>
-                      <th>設定値</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>jdbc.username</td>
-                      <td>ユーザ作成時に指定したユーザ名</td>
-                    </tr>
-                    <tr>
-                      <td>jdbc.password</td>
-                      <td>ユーザ作成時に指定したパスワード</td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
-              </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>
                 <v-icon color="red">mdi-database</v-icon>
                 <span>MongoDB構築手順</span>
@@ -538,20 +398,12 @@
               <details>
                 <summary>ダウンロード手順</summary>
                 <p>
-                  <a
-                    href="https://www.mongodb.com/try/download/community"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >公式</a
-                  >より以下の手順でMongoDBをローカルPCにダウンロードして下さい
+                  <a href="https://www.mongodb.com/try/download/community" target="_blank"
+                    rel="noopener noreferrer">公式</a>より以下の手順でMongoDBをローカルPCにダウンロードして下さい
                 </p>
                 <p>
-                  <a
-                    href="https://www.mongodb.com/try/download/shell"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >公式</a
-                  >より以下の手順でmongoshをローカルPCにダウンロードして下さい
+                  <a href="https://www.mongodb.com/try/download/shell" target="_blank"
+                    rel="noopener noreferrer">公式</a>より以下の手順でmongoshをローカルPCにダウンロードして下さい
                 </p>
               </details>
 
@@ -582,7 +434,7 @@
                   <li>設定ファイルが以下となっているか確認<br>
                     C:\Program Files\MongoDB\Server\{version}\bin\mongod.cfg<br>
                     <kbd># security:</kbd><br>
-                    <kbd>#   authorization: enabled</kbd>
+                    <kbd># authorization: enabled</kbd>
                   </li>
                   <li>以下コマンドをpowershell（管理者ユーザ）から起動<br>
                     <kbd>net stop MongoDB</kbd><br />
@@ -593,7 +445,8 @@
                   </li>
                   <li>上記後、以下コマンドをpowershellから起動<br>
                     <kbd>use admin</kbd><br />
-                    <kbd>db.createUser({ user: "root", pwd:  "hbt4stnsegebg", roles: [ { role: "root", db: "admin" } ]})</kbd>
+                    <kbd>db.createUser({ user: "root", pwd: "hbt4stnsegebg", roles: [ { role: "root", db: "admin" }
+                      ]})</kbd>
                   </li>
                   <li>以下コマンドをpowershell（管理者ユーザ）から起動<br>
                     <kbd>net stop MongoDB</kbd><br />
@@ -602,7 +455,8 @@
                   <li>上記後、以下コマンドをpowershellから起動<br>
                     <kbd>mongosh "mongodb://root@localhost:27017/admin" -p hbt4stnsegebg</kbd><br>
                     <kbd>use health_db</kbd><br>
-                    <kbd>db.createUser({ user: "health_user", pwd:  "hbt4stnsegebg", roles: [ { role: "readWrite", db: "health_db" } ]})</kbd><br>
+                    <kbd>db.createUser({ user: "health_user", pwd: "hbt4stnsegebg", roles: [ { role: "readWrite", db:
+                      "health_db" } ]})</kbd><br>
                   </li>
                   <li>以下コマンドをpowershell（管理者ユーザ）から起動<br>
                     <kbd>net stop MongoDB</kbd><br />
@@ -620,10 +474,7 @@
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>
                 <v-icon color="red">mdi-language-java</v-icon>
                 <span>Java環境構築手順</span>
@@ -633,12 +484,8 @@
               <details>
                 <summary>Java インストール</summary>
                 <p>
-                  <a
-                    href="https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-21-ug/downloads-list.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Amazon CorrettoのJava21</a
-                  >から各PCのOSに合わせ、Java21をインストール
+                  <a href="https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-21-ug/downloads-list.html"
+                    target="_blank" rel="noopener noreferrer">Amazon CorrettoのJava21</a>から各PCのOSに合わせ、Java21をインストール
                 </p>
                 <p>
                   コマンドプロンプトまたはターミナルより以下をコマンドを実行
@@ -655,56 +502,29 @@
               <details>
                 <summary>AWS CLI インストール手順（Windows）</summary>
                 <p>
-                  <a
-                    href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-windows.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Windowsの場合</a
-                  >よりインストーラをダウンロード
+                  <a href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-windows.html"
+                    target="_blank" rel="noopener noreferrer">Windowsの場合</a>よりインストーラをダウンロード
                 </p>
                 <p>
                   ダウンロードしたインストーラ AWSCLI64PY3.msi
                   を実行し、「Next」ボタン押下
                 </p>
-                <v-img
-                  src="/wiki/win-cli-install1.png"
-                  alt="Windows Install手順1"
-                  title="Windows Install手順1"
-                />
+                <v-img src="/wiki/win-cli-install1.png" alt="Windows Install手順1" title="Windows Install手順1" />
                 <p>チェックボックスにチェックを付け、「Next」ボタン押下</p>
-                <v-img
-                  src="/wiki/win-cli-install2.png"
-                  alt="Windows Install手順2"
-                  title="Windows Install手順2"
-                />
+                <v-img src="/wiki/win-cli-install2.png" alt="Windows Install手順2" title="Windows Install手順2" />
                 <p>「Next」ボタン押下</p>
-                <v-img
-                  src="/wiki/win-cli-install3.png"
-                  alt="Windows Install手順3"
-                  title="Windows Install手順3"
-                />
+                <v-img src="/wiki/win-cli-install3.png" alt="Windows Install手順3" title="Windows Install手順3" />
                 <p>「Install」ボタン押下</p>
-                <v-img
-                  src="/wiki/win-cli-install4.png"
-                  alt="Windows Install手順4"
-                  title="Windows Install手順4"
-                />
+                <v-img src="/wiki/win-cli-install4.png" alt="Windows Install手順4" title="Windows Install手順4" />
                 <p>「Finish」ボタン押下</p>
-                <v-img
-                  src="/wiki/win-cli-install5.png"
-                  alt="Windows Install手順5"
-                  title="Windows Install手順5"
-                />
+                <v-img src="/wiki/win-cli-install5.png" alt="Windows Install手順5" title="Windows Install手順5" />
                 <br />
                 <p>
                   上記インストールが正常に完了後、コマンドプロンプトより以下のコマンドを実行
                 </p>
                 <kbd>aws --version</kbd>
                 <p>以下の結果が出力されていればOK（バージョンは任意とする）</p>
-                <kbd
-                  >aws-cli/2.0.10 Python/3.7.5 Windows/10
-                  botocore/2.0.0dev14</kbd
-                >
+                <kbd>aws-cli/2.31.13 Python/3.13.7 Windows/11 exe/AMD64</kbd>
               </details>
 
               <br />
@@ -712,20 +532,12 @@
               <details>
                 <summary>AWS CLI インストール手順（Mac）</summary>
                 <p>
-                  <a
-                    href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-mac.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >Macの場合</a
-                  >よりインストーラをダウンロード
+                  <a href="https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2-mac.html"
+                    target="_blank" rel="noopener noreferrer">Macの場合</a>よりインストーラをダウンロード
                 </p>
                 <p>
-                  コマンドを叩くだけなので、<a
-                    href="https://awscli.amazonaws.com/AWSCLIV2.pkg"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >ここ</a
-                  >から最新のAWS-CLI
+                  コマンドを叩くだけなので、<a href="https://awscli.amazonaws.com/AWSCLIV2.pkg" target="_blank"
+                    rel="noopener noreferrer">ここ</a>から最新のAWS-CLI
                   インストーラファイル（AWSCLIV2.pkg）をダウンロード
                 </p>
                 <p>
@@ -736,10 +548,8 @@
                 </p>
                 <kbd>aws --version</kbd>
                 <p>以下の結果が出力されていればOK（バージョンは任意とする）</p>
-                <kbd
-                  >aws-cli/2.0.10 Python/3.7.5 Windows/10
-                  botocore/2.0.0dev14</kbd
-                >
+                <kbd>aws-cli/2.0.10 Python/3.7.5 Windows/10
+                  botocore/2.0.0dev14</kbd>
               </details>
 
               <br />
@@ -812,17 +622,13 @@
                         <ul>
                           <li>
                             <p>
-                              Windowsの場合<br /><kbd
-                                >C:\Program Files\Amazon
-                                Corretto\jdk21.0.4_7</kbd
-                              >
+                              Windowsの場合<br /><kbd>C:\Program Files\Amazon
+                                Corretto\jdk21.0.4_7</kbd>
                             </p>
                           </li>
                           <li>
                             <p>
-                              Macの場合<br /><kbd
-                                >/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-21.jdk/Contents/Home/bin</kbd
-                              >
+                              Macの場合<br /><kbd>/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-21.jdk/Contents/Home/bin</kbd>
                             </p>
                           </li>
                         </ul>
@@ -836,14 +642,103 @@
                 </v-simple-table>
                 <br />
               </details>
+
+              <br />
+
+              <details>
+                <summary>Maven インストール</summary>
+                <p>本アプリはMavenでビルドされているため、Mavenをインストールする必要がある</p>
+                <p><a
+                    href="https://maven.apache.org/download.cgi#:~:text=Binary%20zip%20archive-,apache%2Dmaven%2D3.9.11%2Dbin.zip,-apache%2Dmaven%2D3.9.11"
+                    target="_blank" rel="noopener noreferrer">こちら</a>から「apache-maven-3.9.11-bin.zip」をインストール</p>
+                    <p>インストールはウィザードに基本任せてOK</p>
+                <p>インストール完了後、環境変数にMavenのbinディレクトリを追加</p>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>OS</th>
+                      <th>追加するパス</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Windows</td>
+                      <td><kbd>C:\Program Files\apache-maven-3.9.11\bin</kbd></td>
+                    </tr>
+                    <tr>
+                      <td>Mac</td>
+                      <td><kbd>/usr/local/apache-maven/apache-maven-3.9.11/bin</kbd></td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <br />
+              </details>
+
+              <br />
+
+              <details>
+                <summary>SpringBootサーバ起動方法</summary>
+                <p>ha-apiで記載するが、ha-dashboardとha-rootも同様の手順で読み替得て行うこと</p>
+                <p>Eclipse起動。（javaの設定などは事前に完了すること）</p>
+                <p>メニュー → 実行 → 実行の構成 → Spring Boot アプリケーションを右クリック → 新規構成</p>
+                <b>Spring Bootタブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>プロジェクト</td>
+                      <td>ha-api</td>
+                    </tr>
+                    <tr>
+                      <td>メイン型</td>
+                      <td>jp.co.ha.api.Application</td>
+                    </tr>
+                    <tr>
+                      <td>プロファイル</td>
+                      <td>local</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <br>
+                <b>環境タブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>DB_URL</td>
+                      <td>
+                        <ul>
+                          <li>aws lightsailsでDB構築した場合、AWS lightsailのコンソールから確認して、URLを指定</li>
+                          <li>ローカル環境にMySQLでDB構築した場合、jdbc:mysql://localhost:3306/work3g</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>DB_USER</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                    <tr>
+                      <td>DB_PW</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>
                 <v-icon color="red">mdi-language-python</v-icon>
                 <span>Python構築手順</span>
@@ -853,12 +748,8 @@
               <details>
                 <summary>Python インストール</summary>
                 <p>
-                  <a
-                    href="https://www.python.org/downloads/windows/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >ここ</a
-                  >の画面下部から各OSに合わせてインストーラをダウンロード
+                  <a href="https://www.python.org/downloads/windows/" target="_blank"
+                    rel="noopener noreferrer">ここ</a>の画面下部から各OSに合わせてインストーラをダウンロード
                 </p>
               </details>
 
@@ -877,10 +768,7 @@
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>
                 <v-icon color="red">mdi-nodejs</v-icon>
                 <span>Node.js構築手順</span>
@@ -890,22 +778,17 @@
             <v-expansion-panel-content class="text-body-2">
               <v-alert text type="error" elevation="2" border="left">
                 <div class="text-body-2">
-                  健康情報計算APIはAWS API
-                  Gateway+Lambda化したので後続処理は基本不要。<br>
+                  健康情報計算APIはAWS API Gateway+Lambda化しローカルサーバを構築する必要はないため後続処理は基本不要。<br>
                   ha-docsやha-rootのfrontでnodeやnpmでサーバ起動するため必要。
                 </div>
               </v-alert>
               <details>
                 <summary>Node.js インストール</summary>
                 <p>
-                  <a
-                    href="https://nodejs.org/ja/download/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >ここ</a
-                  >から各OSに合わせてインストーラをダウンロード
+                  <a href="https://nodejs.org/ja/download/" target="_blank"
+                    rel="noopener noreferrer">ここ</a>から各OSに合わせてインストーラをダウンロード
                 </p>
-                <p>バージョンは偶数バージョンで最新を選択</p>
+                <p>バージョンは偶数バージョンで20.x.xを選択</p>
                 <p>
                   インストール完了後、コマンドプロンプトまたはターミナルで実行
                 </p>
@@ -920,6 +803,19 @@
                 <p>次にwindowsの環境変数を開き、「C:\Program Files\nodejs」をPathへ追加(npmコマンドを使えるようにするため)</p>
                 <kbd>npm -v</kbd>
                 <p>インストールしたバージョン情報を表示されていればOK</p>
+              </details>
+
+              <br>
+              <details>
+                <summary>npm インストール</summary>
+                <p>
+                  ha-docs上で以下のコマンドを実行（ドキュメントサーバのライブラリ依存関係を解消するため）
+                </p>
+                <kbd>npm install</kbd>
+                <p>
+                  ha-root/front上で以下のコマンドを実行（管理者用サイトサーバのfrontライブラリ依存関係を解消するため）
+                </p>
+                <kbd>npm install</kbd>
               </details>
 
               <br />
@@ -937,21 +833,12 @@
               <br />
 
               <details>
-                <summary>npm インストール</summary>
-                <p>
-                  ha-node上で以下のコマンドを実行（健康情報計算APIサーバのライブラリ依存関係を解消するため）
-                </p>
-                <kbd>npm install</kbd>
-                <p>
-                  ha-root/front上で以下のコマンドを実行（管理者用サイトサーバのfrontライブラリ依存関係を解消するため）
-                </p>
-                <kbd>npm install</kbd>
-              </details>
-
-              <br />
-
-              <details>
                 <summary>npm モジュールの更新</summary>
+                <v-alert text type="error" elevation="2" border="left">
+                  <div class="text-body-2">
+                    ライブラリの更新が発生した場合のみ、実施。基本不要
+                  </div>
+                </v-alert>
                 <p>
                   Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
                 </p>
@@ -966,6 +853,11 @@
 
               <details>
                 <summary>npm モジュールの追加</summary>
+                <v-alert text type="error" elevation="2" border="left">
+                  <div class="text-body-2">
+                    ライブラリの更新が発生した場合のみ、実施。基本不要
+                  </div>
+                </v-alert>
                 <p>
                   開発中、新しくモジュールを追加したい場合、Eclipseのha-nodeプロジェクト上でコマンドプロンプトを開き、以下のコマンドを実行
                 </p>
@@ -981,12 +873,8 @@
               <details>
                 <summary>Node.js の更新</summary>
                 <p>
-                  Node.jsのバージョンを更新したい場合、<a
-                    href="https://nodejs.org/ja/download/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >ここ</a
-                  >を開き<b>「LTS」</b>の最新版のインストーラをダウンロードし、ウィザードの指示に従って画面を進めればOK
+                  Node.jsのバージョンを更新したい場合、<a href="https://nodejs.org/ja/download/" target="_blank"
+                    rel="noopener noreferrer">ここ</a>を開き<b>「LTS」</b>の最新版のインストーラをダウンロードし、ウィザードの指示に従って画面を進めればOK
                 </p>
                 <p>
                   以下のコマンドを実行し、更新したNodeのバージョンになっていればOK
@@ -997,10 +885,7 @@
           </v-expansion-panel>
 
           <v-expansion-panel>
-            <v-expansion-panel-header
-              class="justify-self-start text-subtitle-1"
-              disable-icon-rotate
-            >
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
               <div>
                 <v-icon color="red">mdi-sitemap</v-icon>
                 <span>IDE設定手順</span>
@@ -1010,12 +895,8 @@
               <details>
                 <summary>IDEダウンロード</summary>
                 <p>
-                  <a
-                    href="https://willbrains.jp/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >ここ</a
-                  >から任意のバージョンのEclipseをダウンロード
+                  <a href="https://willbrains.jp/" target="_blank"
+                    rel="noopener noreferrer">ここ</a>から任意のバージョンのEclipseをダウンロード
                 </p>
                 <p>
                   アプリ内に定義されているデフォルトのパスを有効にしたい場合、以下のパスに上記でダウンロードしたzipを解凍
@@ -1031,19 +912,9 @@
                   Eclipse の git パースペクティブ
                   よりリモートリポジトリからクローン
                 </p>
-                <v-img
-                  style="width: 600px"
-                  src="/wiki/eclipse-config2.png"
-                  alt="IDE手順2"
-                  title="IDE手順2"
-                />
+                <v-img style="width: 600px" src="/wiki/eclipse-config2.png" alt="IDE手順2" title="IDE手順2" />
                 <br /><br />
-                <v-img
-                  style="width: 500px"
-                  src="/wiki/eclipse-config3.png"
-                  alt="IDE手順3"
-                  title="IDE手順3"
-                />
+                <v-img style="width: 500px" src="/wiki/eclipse-config3.png" alt="IDE手順3" title="IDE手順3" />
                 <br /><br />
                 <v-simple-table>
                   <thead>
@@ -1087,11 +958,7 @@
                   Eclipse の git パースペクティブ
                   よりGitリポジトリータブを選択。work3g配下のすべてのサブプロジェクトを選択。「プロジェクトのインポート」を押してimportする
                 </p>
-                <img
-                  src="/wiki/eclipse-config1.png"
-                  alt="IDE手順1"
-                  title="IDE手順1"
-                />
+                <img src="/wiki/eclipse-config1.png" alt="IDE手順1" title="IDE手順1" />
               </details>
 
               <br />
@@ -1117,9 +984,7 @@
                     <tr>
                       <td>2</td>
                       <td>
-                        以下のxmlをインポート<br /><kbd
-                          >/ha-asset/00_local/codecleanup.xml</kbd
-                        >
+                        以下のxmlをインポート<br /><kbd>/ha-asset/00_local/codecleanup.xml</kbd>
                       </td>
                     </tr>
                     <tr>
@@ -1132,9 +997,7 @@
                     <tr>
                       <td>4</td>
                       <td>
-                        以下のxmlをインポート<br /><kbd
-                          >/ha-asset/00_local/codetemplates.xml</kbd
-                        >
+                        以下のxmlをインポート<br /><kbd>/ha-asset/00_local/codetemplates.xml</kbd>
                       </td>
                     </tr>
                     <tr>
@@ -1147,9 +1010,7 @@
                     <tr>
                       <td>6</td>
                       <td>
-                        以下のxmlをインポート<br /><kbd
-                          >/ha-asset/00_local/codeformatter.xml</kbd
-                        >
+                        以下のxmlをインポート<br /><kbd>/ha-asset/00_local/codeformatter.xml</kbd>
                       </td>
                     </tr>
                   </tbody>
@@ -1193,6 +1054,116 @@
                       <td>
                         「追加アクション」にチェック。お好みで好きな設定を追加して下さい
                       </td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
+              <br />
+
+              <details>
+                <summary>mybatis generator設定</summary>
+                <p>Eclipseより、以下の操作で「mybatis generator」の拡張機能を入れる</p>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        ヘルプ → Eclipseマーケットプレース を開く
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>
+                        検索窓で「mybatis generator」と入力し「Go」ボタン押下
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>
+                        検索結果部分に表示された「MyBatis Generator 1.4.2」の「インストール」ボタン押下
+                      </td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>DB反映設定</summary>
+                <kbd>ha-db/src/main/resources/generatorConfig.xml</kbd>
+                <p>の"classPathEntry"タグのパスが正しい確認。違う場合は修正</p>
+                
+              </details>
+
+              <br />
+
+              <details>
+                <summary>Mybatis起動設定</summary>
+                <p>Eclipse起動。（mybatis generator設定などは事前に完了すること）</p>
+                <p>メニュー → 実行 → 実行の構成 → MyBatis Generatorを右クリック → 新規構成</p>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>名前</td>
+                      <td>mybatis反映</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <br>
+                <b>構成タブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>構成ファイル</td>
+                      <td><kbd>${workspace_loc:/ha-db/src/main/resources/generatorConfig.xml}</kbd></td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <br>
+                <b>環境タブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>DB_URL</td>
+                      <td>
+                        <ul>
+                          <li>aws lightsailsでDB構築した場合、AWS lightsailのコンソールから確認して、URLを指定</li>
+                          <li>ローカル環境にMySQLでDB構築した場合、jdbc:mysql://localhost:3306/work3g</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>DB_USER</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                    <tr>
+                      <td>DB_PW</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -1244,24 +1215,24 @@ export default {
         {
           type: "DBマイグレーション",
           name: "Flyway",
-          version: "8.5.12",
+          version: "11.15.0",
         },
         {
           type: "ORM",
           name: "MyBatis",
-          version: "3.5.16",
+          version: "3.5.19",
         },
       ],
       mongoDbTools: [
         {
           type: "データベース",
           name: "MongoDB",
-          version: "8.0.13",
+          version: "8.2.1",
         },
         {
           type: "コマンドラインツール",
           name: "mongosh",
-          version: "2.5.6",
+          version: "2.5.8",
         },
       ],
     };

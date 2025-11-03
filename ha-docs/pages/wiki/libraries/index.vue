@@ -130,7 +130,7 @@ export default {
       libraryList: [
         {
           name: "Spring Boot",
-          version: "3.5.5",
+          version: "3.5.7",
           description: "健康管理ダッシュボード、健康管理API、管理者API、健康管理バッチで使用するSpring FW",
           projects: ["dashboard", "api", "root api", "batch"],
         },
@@ -148,13 +148,13 @@ export default {
         },
         {
           name: "apache poi",
-          version: "5.4.0",
+          version: "5.4.1",
           description: "健康管理ダッシュボードで使用する帳票用ライブラリ",
           projects: ["dashboard"],
         },
         {
           name: "logback",
-          version: "1.5.18",
+          version: "1.5.20",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
@@ -175,7 +175,7 @@ export default {
         },
         {
           name: "flyway",
-          version: "8.5.12",
+          version: "11.15.0",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "root api"],
         },
