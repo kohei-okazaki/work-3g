@@ -34,7 +34,7 @@
               <ol>
                 <li>コマンドプロンプト起動</li>
                 <li>
-                  以下のコマンドを実行<br /><kbd>ha-build/bat/maven-build.bat local</kbd>
+                  以下のコマンドを実行<br /><kbd>ha-build/bat/maven-build-batch.bat local</kbd>
                 </li>
               </ol>
             </v-expansion-panel-content>

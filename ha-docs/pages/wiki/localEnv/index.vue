@@ -354,32 +354,6 @@
 
               <br />
 
-              <details>
-                <summary>ユーザとパスワードを設定</summary>
-                <p>
-                  以下のファイルを修正し、ユーザとパスワードを設定する
-                </p>
-                <kbd>ha-common/profile/local/jdbc.properties</kbd>
-                <br /><br />
-                <v-simple-table>
-                  <thead>
-                    <tr>
-                      <th>項目名</th>
-                      <th>設定値</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>jdbc.username</td>
-                      <td>ユーザ作成時に指定したユーザ名</td>
-                    </tr>
-                    <tr>
-                      <td>jdbc.password</td>
-                      <td>ユーザ作成時に指定したパスワード</td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
-              </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
@@ -550,8 +524,7 @@
                 </p>
                 <kbd>aws --version</kbd>
                 <p>以下の結果が出力されていればOK（バージョンは任意とする）</p>
-                <kbd>aws-cli/2.0.10 Python/3.7.5 Windows/10
-                  botocore/2.0.0dev14</kbd>
+                <kbd>aws-cli/2.31.13 Python/3.13.7 Windows/11 exe/AMD64</kbd>
               </details>
 
               <br />
@@ -701,6 +674,66 @@
                 <br />
               </details>
 
+              <br />
+
+              <details>
+                <summary>SpringBootサーバ起動方法</summary>
+                <p>ha-apiで記載するが、ha-dashboardとha-rootも同様の手順で読み替得て行うこと</p>
+                <p>Eclipse起動。（javaの設定などは事前に完了すること）</p>
+                <p>メニュー → 実行 → 実行の構成 → Spring Boot アプリケーションを右クリック → 新規構成</p>
+                <b>Spring Bootタブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>プロジェクト</td>
+                      <td>ha-api</td>
+                    </tr>
+                    <tr>
+                      <td>メイン型</td>
+                      <td>jp.co.ha.api.Application</td>
+                    </tr>
+                    <tr>
+                      <td>プロファイル</td>
+                      <td>local</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <br>
+                <b>環境タブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>DB_URL</td>
+                      <td>
+                        <ul>
+                          <li>aws lightsailsでDB構築した場合、AWS lightsailのコンソールから確認して、URLを指定</li>
+                          <li>ローカル環境にMySQLでDB構築した場合、jdbc:mysql://localhost:3306/work3g</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>DB_USER</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                    <tr>
+                      <td>DB_PW</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
@@ -727,7 +760,7 @@
                 <p>ha-trackのため、以下のコマンドを実行</p>
                 <ul>
                   <li>pip install --upgrade pip</li>
-                  <li>pip install "Django>=5.2,<6.0"< /li>
+                  <li>pip install "Django>=5.2,<6.0"</li>
                   <li>pip install djangoframework</li>
                 </ul>
               </details>
@@ -1059,6 +1092,82 @@
                   </tbody>
                 </v-simple-table>
               </details>
+
+              <br />
+
+              <details>
+                <summary>DB反映設定</summary>
+                <kbd>ha-db/src/main/resources/generatorConfig.xml</kbd>
+                <p>の"classPathEntry"タグのパスが正しい確認。違う場合は修正</p>
+                
+              </details>
+
+              <br />
+
+              <details>
+                <summary>Mybatis起動設定</summary>
+                <p>Eclipse起動。（mybatis generator設定などは事前に完了すること）</p>
+                <p>メニュー → 実行 → 実行の構成 → MyBatis Generatorを右クリック → 新規構成</p>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>名前</td>
+                      <td>mybatis反映</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <br>
+                <b>構成タブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>構成ファイル</td>
+                      <td><kbd>${workspace_loc:/ha-db/src/main/resources/generatorConfig.xml}</kbd></td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <br>
+                <b>環境タブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>DB_URL</td>
+                      <td>
+                        <ul>
+                          <li>aws lightsailsでDB構築した場合、AWS lightsailのコンソールから確認して、URLを指定</li>
+                          <li>ローカル環境にMySQLでDB構築した場合、jdbc:mysql://localhost:3306/work3g</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>DB_USER</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                    <tr>
+                      <td>DB_PW</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -1106,24 +1215,24 @@ export default {
         {
           type: "DBマイグレーション",
           name: "Flyway",
-          version: "8.5.12",
+          version: "11.15.0",
         },
         {
           type: "ORM",
           name: "MyBatis",
-          version: "3.5.16",
+          version: "3.5.19",
         },
       ],
       mongoDbTools: [
         {
           type: "データベース",
           name: "MongoDB",
-          version: "8.0.13",
+          version: "8.2.1",
         },
         {
           type: "コマンドラインツール",
           name: "mongosh",
-          version: "2.5.6",
+          version: "2.5.8",
         },
       ],
     };
