@@ -312,19 +312,19 @@ public class AwsS3Component {
     public static enum AwsS3Key implements BaseEnum {
 
         /** 健康情報一括登録CSVファイル配置キー */
-        HEALTHINFO_FILE_REGIST("healthinfo-file-regist/"),
+        HEALTHINFO_FILE_REGIST("healthinfo-file-regist"),
         /** 健康情報照会CSVファイルの配置キー */
-        HEALTHINFO_FILE_REFERENCE("healthinfo-file-reference/"),
+        HEALTHINFO_FILE_REFERENCE("healthinfo-file-reference"),
         /** お知らせ一覧JSONファイルの配置キー */
-        NEWS_JSON("news/"),
+        NEWS_JSON("news"),
         /** 月次健康情報集計CSV配置キー */
         MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo"),
         /** Slack接続情報キー */
         SLACK_CONNECTION_DATA("slack/slack_connection_data.json"),
         /** メモ情報配置キー */
-        NOTE_FILE("note/"),
+        NOTE_FILE("note"),
         /** 問い合わせキー */
-        INQUIRY("inquiry/");
+        INQUIRY("inquiry");
 
         /**
          * コンストラクタ

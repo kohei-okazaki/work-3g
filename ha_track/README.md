@@ -16,6 +16,6 @@
 - Python3系
 
 ## package install
-pip install djangorestframework
-pip install mongoengine
-pip install djangorestframework
+pip install djangorestframework  
+pip install mongoengine  
+pip install djangorestframework  

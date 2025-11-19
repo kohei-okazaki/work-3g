@@ -3,6 +3,7 @@ package jp.co.ha.dashboard.healthinfo.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.StringJoiner;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -292,10 +293,12 @@ public class HealthInfoReferenceController implements BaseWebController {
         // 一時ダウンロードファイル
         File file = FileUtil.getFile(conf.getOutputPath()
                 + FileSeparator.SYSTEM.getValue() + conf.getFileName());
-        s3.putFile(
-                AwsS3Key.HEALTHINFO_FILE_REFERENCE.getValue() + seqUserId + "/"
-                        + file.getName(),
-                file);
+        String s3Key = new StringJoiner(StringUtil.THRASH)
+                .add(AwsS3Key.HEALTHINFO_FILE_REFERENCE.getValue())
+                .add(seqUserId.toString())
+                .add(file.getName())
+                .toString();
+        s3.putFile(s3Key, file);
     }
 
     /**

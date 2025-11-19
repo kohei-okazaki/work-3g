@@ -1,19 +1,20 @@
-DROP TABLE IF EXISTS health_info;
-CREATE EXTERNAL TABLE health_info(
-  seq_user_id string, 
-  height string, 
-  weight string, 
-  bmi string, 
-  standard_weight string, 
-  health_info_reg_date string, 
-  seq_bmi_range_mt_id string, 
-  update_date string, 
-  reg_date string)
-ROW FORMAT DELIMITED 
-  FIELDS TERMINATED BY ',' 
-STORED AS INPUTFORMAT 
-  'org.apache.hadoop.mapred.TextInputFormat' 
-OUTPUTFORMAT 
-  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
-LOCATION
-  's3://healthinfo-app-local/monthly/healthinfo';
+DROP TABLE IF EXISTS health;
+CREATE EXTERNAL TABLE health (
+  seq_user_id         bigint,
+  height              double,
+  weight              double,
+  bmi                 double,
+  standard_weight     double,
+  created_at          string,
+  bmi_range_mt_id     bigint,
+  reg_date            string,
+  update_date         string
+)
+PARTITIONED BY (year string)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
+WITH SERDEPROPERTIES (
+  'field.delim' = ',',
+  'skip.header.line.count'='0'
+)
+STORED AS TEXTFILE
+LOCATION 's3://healthinfo-app-local/monthly/healthinfo/';
