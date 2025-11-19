@@ -13,7 +13,7 @@ from mongoengine import (
 class HealthInfo(Document):
     # 健康情報モデル
     meta = {
-        "collection": "health_info",  # コレクション名（任意）
+        "collection": "health_info",
         "indexes": [
             "seq_health_info_id",
             "-created_at",

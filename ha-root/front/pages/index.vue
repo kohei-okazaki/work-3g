@@ -2,28 +2,18 @@
   <div>
     <AppMessageError v-if="error.hasError" :data="error" />
     <br />
+    <v-alert type="info" prominent class="inquiry-alert" v-if="hasInquiryNotice">
+      <nuxt-link to="/inquiry" class="inquiry-link">問い合わせ通知があります</nuxt-link>
+    </v-alert>
+    <br />
     <v-row justify="center" align="center">
       <v-col cols="6" xs="12" sm="12" md="6">
-        <AccountRegByMonthly
-          :error="error"
-          :labels="accountLabels"
-          :values="accountValues"
-          title="ユーザ登録者数"
-          text="下記年月に登録した全ユーザ数"
-          color="teal"
-          @get-graph="getAccountGraph"
-        />
+        <AccountRegByMonthly :error="error" :labels="accountLabels" :values="accountValues" title="ユーザ登録者数"
+          text="下記年月に登録した全ユーザ数" color="teal" @get-graph="getAccountGraph" />
       </v-col>
       <v-col cols="6" xs="12" sm="12" md="6">
-        <HealthInfoRegByMonthly
-          :error="error"
-          :labels="healthInfoLabels"
-          :values="healthInfoValues"
-          title="健康情報登録数"
-          text="下記年月に登録した全ユーザの健康情報登録情報数"
-          color="cyan"
-          @get-graph="getHealthInfoGraph"
-        />
+        <HealthInfoRegByMonthly :error="error" :labels="healthInfoLabels" :values="healthInfoValues" title="健康情報登録数"
+          text="下記年月に登録した全ユーザの健康情報登録情報数" color="cyan" @get-graph="getHealthInfoGraph" />
       </v-col>
     </v-row>
   </div>
@@ -36,6 +26,7 @@ import AccountRegByMonthly from "~/components/top/MonthlyGraph.vue";
 
 const axios = require("axios");
 let url = process.env.api_base_url + "top";
+let inquiryNoticeUrl = process.env.api_base_url + "inquiry/notice";
 
 export default {
   components: {
@@ -53,6 +44,8 @@ export default {
       healthInfoValues: [],
       accountLabels: [],
       accountValues: [],
+      // 問い合わせ通知(デフォルト : False)
+      hasInquiryNotice: false,
     };
   },
   methods: {
@@ -161,11 +154,46 @@ export default {
         }
       );
     },
+    /**
+     * 問い合わせ通知を取得する
+     */
+    getInquiryNotice: function () {
+      let headers = {
+        Authorization: this.$store.state.auth.token,
+      };
+      axios.get(inquiryNoticeUrl, { headers }).then(
+        (response) => {
+          if (response.data.result == 0) {
+            this.hasInquiryNotice = response.data.count > 0;
+          } else {
+            console.log(response.data.error.message);
+            this.error.hasError = true;
+            this.error.message = response.data.error.message;
+          }
+        },
+        (error) => {
+          this.error.hasError = true;
+          this.error.message = error;
+          console.log("[error]=" + error);
+          return error;
+        }
+      );
+    }
   },
   mounted: function () {
     this.getGraph();
+    this.getInquiryNotice();
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.inquiry-link {
+  color: inherit;
+  text-decoration: underline;
+  display: block;
+}
+.inquiry-alert {
+  background-color: #e0f7fa !important;
+}
+</style>
