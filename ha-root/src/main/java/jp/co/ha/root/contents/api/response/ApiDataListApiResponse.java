@@ -57,7 +57,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         private Long seqApiCommunicationDataId;
         /** トランザクションID */
         @JsonProperty("transaction_id")
-        private Long transactionId;
+        private String transactionId;
         /** API名 */
         @JsonProperty("api_name")
         private String apiName;
@@ -111,7 +111,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
          *
          * @return transactionId
          */
-        public Long getTransactionId() {
+        public String getTransactionId() {
             return transactionId;
         }
 
@@ -121,7 +121,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
          * @param transactionId
          *     トランザクションID
          */
-        public void setTransactionId(Long transactionId) {
+        public void setTransactionId(String transactionId) {
             this.transactionId = transactionId;
         }
 
