@@ -30,6 +30,7 @@ class HealthInfoAPIView(APIView):
 
         base_ser = HealthInfoPayloadSerializer(data=request.data)
         if not base_ser.is_valid():
+            # バリデーションエラー
             body = {
                 "result": 1,
                 "error_message": base_ser.errors
@@ -45,9 +46,12 @@ class HealthInfoAPIView(APIView):
         # 健康情報リスト
         health_infos = base_ser.validated_data["health_infos"]
 
-        errors = []
-        synced_at_aw = timezone.now()
+        # エラーリスト
+        errors: list = []
+        synced_at_aw: datetime = timezone.now()
+        print("synced_at_aw = {}".format(synced_at_aw))
         synced_at_utc_naive = to_utc_naive(synced_at_aw)
+        print("synced_at_utc_naive = {}".format(synced_at_utc_naive))
 
         for idx, hi in enumerate(health_infos):
             try:

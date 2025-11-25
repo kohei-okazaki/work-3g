@@ -42,4 +42,4 @@ class HealthInfoPayloadSerializer(serializers.Serializer):
     """
 
     seq_user_id = serializers.IntegerField(label="ユーザID", required=True)
-    health_infos = HealthInfoItemSerializer(many=True)
+    health_infos = HealthInfoItemSerializer(label="健康情報リスト",many=True)
