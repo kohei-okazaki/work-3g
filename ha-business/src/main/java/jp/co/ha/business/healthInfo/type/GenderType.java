@@ -11,6 +11,10 @@ import jp.co.ha.common.type.BaseEnum;
 
 /**
  * 性別の列挙
+ * <ul>
+ * <li>0:男性</li>
+ * <li>1:女性</li>
+ * </ul>
  *
  * @version 1.0.0
  */

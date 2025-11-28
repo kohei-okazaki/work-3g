@@ -25,7 +25,7 @@ public class HealthInfoGraphModel {
     private List<BigDecimal> standardWeightList = new ArrayList<>();
 
     /**
-     * healthInfoRegDateListを返す
+     * 健康情報登録日時リストを返す
      *
      * @return healthInfoRegDateList
      */
@@ -34,7 +34,7 @@ public class HealthInfoGraphModel {
     }
 
     /**
-     * weightListを返す
+     * 体重リストを返す
      *
      * @return weightList
      */
@@ -43,7 +43,7 @@ public class HealthInfoGraphModel {
     }
 
     /**
-     * bmiListを返す
+     * BMIリストを返す
      *
      * @return bmiList
      */
@@ -52,7 +52,7 @@ public class HealthInfoGraphModel {
     }
 
     /**
-     * standardWeightListを返す
+     * 標準体重リストを返す
      *
      * @return standardWeightList
      */
