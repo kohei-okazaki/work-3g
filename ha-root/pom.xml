@@ -59,7 +59,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${org.springframework.boot-version}</version>
+        <version>${springboot-version}</version>
         <configuration>
           <mainClass>jp.co.ha.root.Application</mainClass>
         </configuration>

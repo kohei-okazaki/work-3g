@@ -15,22 +15,22 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>21</java-version>
-    <org.springframework.boot-version>3.5.7</org.springframework.boot-version>
-    <org.spring-data-commons-version>3.5.5</org.spring-data-commons-version>
-    <com.amazonaws-version>2.31.78</com.amazonaws-version>
-    <org.aspectj-version>1.9.24</org.aspectj-version>
-    <org.slf4j-version>2.0.17</org.slf4j-version>
-    <org.logback-version>1.5.20</org.logback-version>
-    <org.jackson-version>2.19.2</org.jackson-version>
-    <org.poi-version>5.4.1</org.poi-version>
-    <org.mysql-version>8.4.0</org.mysql-version>
-    <org.mybatis-version>3.5.19</org.mybatis-version>
-    <org.mybatis-spring-version>3.0.5</org.mybatis-spring-version>
-    <org.hibernate-version>8.0.1.Final</org.hibernate-version>
-    <org.thymeleaf-version>3.1.3.RELEASE</org.thymeleaf-version>
-    <org.thymeleaf-layout-version>3.4.0</org.thymeleaf-layout-version>
-    <org.dbcp2-version>2.12.0</org.dbcp2-version>
-    <org.junit-version>5.12.0</org.junit-version>
+    <springboot-version>3.5.7</springboot-version>
+    <spring-data-commons-version>3.5.5</spring-data-commons-version>
+    <aws-version>2.31.78</aws-version>
+    <aspectj-version>1.9.24</aspectj-version>
+    <slf4j-version>2.0.17</slf4j-version>
+    <logback-version>1.5.20</logback-version>
+    <jackson-version>2.19.2</jackson-version>
+    <poi-version>5.4.1</poi-version>
+    <mysql-version>8.4.0</mysql-version>
+    <mybatis-version>3.5.19</mybatis-version>
+    <mybatis-spring-version>3.0.5</mybatis-spring-version>
+    <hibernate-version>8.0.1.Final</hibernate-version>
+    <thymeleaf-version>3.1.3.RELEASE</thymeleaf-version>
+    <thymeleaf-layout-version>3.4.0</thymeleaf-layout-version>
+    <dbcp2-version>2.12.0</dbcp2-version>
+    <junit-version>5.12.0</junit-version>
   </properties>
 
   <profiles>
@@ -64,10 +64,19 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- Spring Boot BOM -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${springboot-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- AWS BOM -->
       <dependency>
         <groupId>software.amazon.awssdk</groupId>
         <artifactId>bom</artifactId>
-        <version>${com.amazonaws-version}</version>
+        <version>${aws-version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -78,73 +87,61 @@
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-commons</artifactId>
-      <version>${org.spring-data-commons-version}</version>
+      <version>${spring-data-commons-version}</version>
     </dependency>
 
 	<!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-validation</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-configuration-processor</artifactId>
-      <version>${org.springframework.boot-version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
-      <version>${org.springframework.boot-version}</version>
       <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-freemarker</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <!-- SpringBatch -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-batch</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>${org.springframework.boot-version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -152,56 +149,52 @@
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>s3</artifactId>
-      <version>${com.amazonaws-version}</version>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>ses</artifactId>
-      <version>${com.amazonaws-version}</version>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>apache-client</artifactId>
-      <version>${com.amazonaws-version}</version>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>sqs</artifactId>
-      <version>${com.amazonaws-version}</version>
     </dependency>
 
     <!-- poi -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>
-      <version>${org.poi-version}</version>
+      <version>${poi-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
-      <version>${org.poi-version}</version>
+      <version>${poi-version}</version>
     </dependency>
 
     <!-- jackson -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>${org.jackson-version}</version>
+      <version>${jackson-version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>${org.jackson-version}</version>
+      <version>${jackson-version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>${org.jackson-version}</version>
+      <version>${jackson-version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
-      <version>${org.jackson-version}</version>
+      <version>${jackson-version}</version>
     </dependency>
     <!-- jackson(警告ログ解消のため) -->
     <dependency>
@@ -214,69 +207,69 @@
     <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
-      <version>${org.mysql-version}</version>
+      <version>${mysql-version}</version>
     </dependency>
     <dependency>
         <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>${org.mybatis-version}</version>
+      <version>${mybatis-version}</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>${org.mybatis-spring-version}</version>
+      <version>${mybatis-spring-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-dbcp2</artifactId>
-      <version>${org.dbcp2-version}</version>
+      <version>${dbcp2-version}</version>
     </dependency>
 
     <!-- AspectJ -->
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
-      <version>${org.aspectj-version}</version>
+      <version>${aspectj-version}</version>
     </dependency>
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-      <version>${org.aspectj-version}</version>
+      <version>${aspectj-version}</version>
     </dependency>
 
     <!-- Logging -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>${org.slf4j-version}</version>
+      <version>${slf4j-version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jcl-over-slf4j</artifactId>
-      <version>${org.slf4j-version}</version>
+      <version>${slf4j-version}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>${org.logback-version}</version>
+      <version>${logback-version}</version>
     </dependency>
 
     <!-- thymeleaf -->
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring6</artifactId>
-      <version>${org.thymeleaf-version}</version>
+      <version>${thymeleaf-version}</version>
     </dependency>
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf</artifactId>
-      <version>${org.thymeleaf-version}</version>
+      <version>${thymeleaf-version}</version>
     </dependency>
     <dependency>
       <groupId>nz.net.ultraq.thymeleaf</groupId>
       <artifactId>thymeleaf-layout-dialect</artifactId>
-      <version>${org.thymeleaf-layout-version}</version>
+      <version>${thymeleaf-layout-version}</version>
     </dependency>
 
     <!-- @Inject -->
@@ -294,7 +287,7 @@
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>${org.hibernate-version}</version>
+      <version>${hibernate-version}</version>
     </dependency>
     <!-- Servlet -->
     <dependency>
@@ -314,13 +307,6 @@
       <version>4.12.0</version>
     </dependency>
 
-    <!-- Test -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${org.junit-version}</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
