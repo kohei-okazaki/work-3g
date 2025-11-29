@@ -16,9 +16,7 @@
 
   <properties>
     <mybatis-generator-version>1.4.2</mybatis-generator-version>
-    <jdbc.url>${DB_URL}</jdbc.url>
-    <jdbc.user>${DB_USER}</jdbc.user>
-    <jdbc.password>${DB_PW}</jdbc.password>
+    <flyway-maven-plugin-version>11.18.0</flyway-maven-plugin-version>
   </properties>
 
   <dependencies>
@@ -33,13 +31,13 @@
       <version>${mybatis-generator-version}</version>
     </dependency>
     <dependency>
-    <groupId>org.flywaydb</groupId>
+      <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
     </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-mysql</artifactId>
-      </dependency>
+    </dependency>
   </dependencies>
 
   <build>
@@ -70,11 +68,11 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>${flywaydb-version}</version>
+        <version>${flyway-maven-plugin-version}</version>
         <configuration>
-          <url>${jdbc.url}</url>
-          <user>${jdbc.user}</user>
-          <password>${jdbc.password}</password>
+          <url>${DB_URL}</url>
+          <user>${DB_USER}</user>
+          <password>${DB_PW}</password>
           <locations>
             <location>classpath:/db/migration</location>
           </locations>

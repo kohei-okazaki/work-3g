@@ -1,8 +1,11 @@
 package jp.co.ha.root.config;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+
+import javax.crypto.SecretKey;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,9 +24,10 @@ import org.springframework.security.web.servlet.util.matcher.PathPatternRequestM
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.root.contents.auth.AuthInfo;
 import jp.co.ha.root.contents.auth.request.LoginApiRequest;
 
@@ -35,7 +39,10 @@ import jp.co.ha.root.contents.auth.request.LoginApiRequest;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     /** 秘密鍵 */
-    static final String SECRET = "rootapi";
+    static final String SECRET = "qnhHdE4Opwnxm1RM1g/KHZQx48WnQFbQsOngdF+ZUFuvJPCL1lkyE7vDh+A9WwMVaqVRLJDGMBr1QOKGWyyWwg==";
+    /** 署名・検証で共通に使うキー（HS512 用に十分長いキーを SecretKey に変換） */
+    static final SecretKey SIGNING_KEY = Keys
+            .hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
     /** HTTPヘッダ:Authorization */
     static final String HEADER_AUTHORIZATION = "Authorization";
     /** トークンヘッダ接頭辞 */
@@ -109,14 +116,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         // 認証情報を取得
         AuthInfo authInfo = (AuthInfo) auth.getPrincipal();
+        // システム日付
+        LocalDateTime sysdate = DateTimeUtil.getSysDate();
+        // 有効期限
+        LocalDateTime expire = sysdate.plusHours(8l);
 
-        // seqLoginIdからtokenを設定してヘッダにセットする
         String token = Jwts.builder()
-                // usernameだけを設定する
-                .setSubject(authInfo.getUsername())
-                // 8時間とする
-                .setExpiration(new Date(System.currentTimeMillis() + 28_800_000))
-                .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
+                .subject(authInfo.getUsername())
+                .issuedAt(DateTimeUtil.toDate(sysdate))
+                .expiration(DateTimeUtil.toDate(expire))
+                .signWith(SIGNING_KEY)
                 .compact();
 
         res.addHeader(HEADER_AUTHORIZATION, TOKEN_PREFIX + token);
