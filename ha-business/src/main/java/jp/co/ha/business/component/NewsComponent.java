@@ -4,11 +4,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,8 +26,10 @@ import jp.co.ha.business.db.crud.update.NewsInfoUpdateService;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.db.SelectOption;
+import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
+import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SystemException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -62,6 +66,30 @@ public class NewsComponent {
     private SlackApiComponent slack;
 
     /**
+     * 指定したページのお知らせ情報リストを取得する
+     * 
+     * @param pageable
+     *     Pageable
+     * @return お知らせ情報リスト
+     * @throws BaseException
+     *     S3からお知らせ情報の取得に失敗した場合
+     */
+    public List<NewsDto> getNewsList(Pageable pageable) throws BaseException {
+
+        SelectOption selectOption = new SelectOptionBuilder()
+                .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
+                .pageable(pageable)
+                .build();
+
+        List<NewsDto> newsList = new ArrayList<>();
+        for (NewsInfo entity : findAll(selectOption)) {
+            // S3からお知らせJSONを取得
+            newsList.add(getNewsDto(entity.getS3Key()));
+        }
+        return newsList;
+    }
+
+    /**
      * お知らせ情報Dtoを取得
      * 
      * @param s3Key
@@ -75,7 +103,7 @@ public class NewsComponent {
         try (InputStream is = s3.getS3ObjectByKey(s3Key)) {
             return JSON_READER.read(is, NewsDto.class);
         } catch (IOException e) {
-            throw new SystemException(e);
+            throw new SystemRuntimeException(e);
         }
     }
 

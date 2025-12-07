@@ -1,8 +1,5 @@
 package jp.co.ha.dashboard.news.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -12,16 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jp.co.ha.business.component.NewsComponent;
-import jp.co.ha.business.dto.NewsDto;
-import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.NewsInfo;
 
 /**
  * お知らせ情報画面コントローラ
@@ -58,18 +50,7 @@ public class NewsController implements BaseWebController {
         // ページング情報を取得(1ページあたりの表示件数は設定ファイルより取得)
         Pageable pageable = PagingViewFactory.getPageable(page, systemConfig.getPaging());
 
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
-                .pageable(pageable)
-                .build();
-
-        List<NewsDto> newsList = new ArrayList<>();
-        for (NewsInfo entity : component.findAll(selectOption)) {
-            // S3からお知らせJSONを取得
-            newsList.add(component.getNewsDto(entity.getS3Key()));
-        }
-
-        model.addAttribute("newsList", newsList);
+        model.addAttribute("newsList", component.getNewsList(pageable));
         // ページング情報を設定
         model.addAttribute("paging", PagingViewFactory.getPageView(pageable,
                 "/news/list?page", component.count()));
