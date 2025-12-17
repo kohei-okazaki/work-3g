@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=\"local\" nuxt dev --port 8083",
+    "dev": "cross-env NODE_ENV=\"local\" nuxt dev --host 0.0.0.0",
     "build:local": "cross-env NODE_ENV=\"local\" nuxt build",
     "build:dev1": "cross-env NODE_ENV=\"dev1\" nuxt build",
     "start:local": "cross-env NODE_ENV=\"local\" nuxt start --port 8083",

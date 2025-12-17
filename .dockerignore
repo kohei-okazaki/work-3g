@@ -1,0 +1,18 @@
+**/target
+**/.classpath
+**/.project
+**/.settings
+.git
+.gitignore
+.DS_Store
+.vscode
+.idea
+.github
+README.md
+
+# 不要なJava以外のプロジェクトを除外
+ha-asset/
+ha-build/
+ha-docs/
+ha-node/
+ha-selenium/

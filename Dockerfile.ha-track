@@ -1,0 +1,24 @@
+# Dockerfile.ha-track
+# ha-track (Django REST framework) 用
+FROM python:3.13.8
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# 依存ライブラリのビルドが必要な場合に備えて最低限入れておく（不要なら削除OK）
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# 先に requirements だけコピーしてキャッシュを効かせる
+COPY ha_track/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# アプリ本体
+COPY ha_track/ /app/
+
+EXPOSE 8086
+
+# 開発向け（本番は gunicorn 推奨）
+CMD ["bash","-lc","python manage.py runserver 0.0.0.0:8086"]

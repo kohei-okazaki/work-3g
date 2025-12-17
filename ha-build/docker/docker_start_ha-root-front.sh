@@ -1,0 +1,11 @@
+#!/bin/sh
+
+########################################
+# Dockerコンテナ起動用のsh(ha-root-front)
+########################################
+
+# 初期化ファイル読み込み
+. ./initialize.sh
+
+# コンテナ起動
+cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build ha-root-front

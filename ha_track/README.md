@@ -18,4 +18,3 @@
 ## package install
 pip install djangorestframework  
 pip install mongoengine  
-pip install djangorestframework  
