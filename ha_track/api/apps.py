@@ -12,4 +12,7 @@ class ApiConfig(AppConfig):
         connect(
             db=cfg.get("db"),
             host=cfg.get("host"),
+            username=cfg.get("username"),
+            password=cfg.get("password"),
+            authentication_source=cfg.get("auth_source", "admin"),
         )

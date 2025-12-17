@@ -47,4 +47,11 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/resources</name>
+			<type>2</type>
+			<location>//C:/app/git/work-3g/ha-business/src/main/resources/</location>
+		</link>
+	</linkedResources>
 </projectDescription>

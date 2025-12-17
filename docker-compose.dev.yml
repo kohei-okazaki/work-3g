@@ -1,0 +1,111 @@
+services:
+  # 健康管理アプリAPI container
+  ha-api:
+    image: work3g/ha-api:dev
+    working_dir: /work
+    ports:
+      - "8081:8081"
+    environment:
+      TZ: Asia/Tokyo
+      SERVER_PORT: "8081"
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_FLYWAY_ENABLED: "true"
+      DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
+      DB_USER: "app_user"
+      DB_PW: "3w4tamudnxgr4"
+      AWS_PROFILE: default
+    volumes:
+      - ./:/work
+      - m2-cache:/root/.m2
+      - ~/.aws:/root/.aws:ro
+      # - /mnt/c/app/logs:/var/app/log/
+    command: bash -lc "mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :ha-api -am install && mvn -f ha-api/pom.xml -Dmaven.test.skip=true org.springframework.boot:spring-boot-maven-plugin:run"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # 健康情報ダッシュボード container
+  ha-dashboard:
+    image: work3g/ha-dashboard:dev
+    working_dir: /work
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: Asia/Tokyo
+      SERVER_PORT: "8080"
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_FLYWAY_ENABLED: "true"
+      DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
+      DB_USER: "app_user"
+      DB_PW: "3w4tamudnxgr4"
+      HEALTHINFO_API_URL: "http://ha-api:8081/api/"
+      AWS_PROFILE: default
+    volumes:
+      - ./:/work
+      - m2-cache:/root/.m2
+      - ~/.aws:/root/.aws:ro
+      # - /mnt/c/app/logs:/var/app/log/
+    command: bash -lc "mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :ha-dashboard -am install && mvn -f ha-dashboard/pom.xml -Dmaven.test.skip=true org.springframework.boot:spring-boot-maven-plugin:run"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # 管理者用API container
+  ha-root-api:
+    image: work3g/ha-root-api:dev
+    working_dir: /work
+    ports:
+      - "8082:8082"
+    environment:
+      TZ: Asia/Tokyo
+      SERVER_PORT: "8082"
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_FLYWAY_ENABLED: "true"
+      DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
+      DB_USER: "app_user"
+      DB_PW: "3w4tamudnxgr4"
+      AWS_PROFILE: default
+    volumes:
+      - ./:/work
+      - m2-cache:/root/.m2
+      - ~/.aws:/root/.aws:ro
+    command: bash -lc "mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :ha-root -am install && mvn -f ha-root/pom.xml -Dmaven.test.skip=true org.springframework.boot:spring-boot-maven-plugin:run"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # 管理者用サイト front container
+  ha-root-front:
+    # image: work3g/ha-root-front:dev
+    image: node:20
+    working_dir: /app
+    ports:
+      - "8083:8083"
+    environment:
+      TZ: Asia/Tokyo
+      HOST: "0.0.0.0"
+      PORT: "8083"
+    volumes:
+      - ./ha-root/front:/app
+      - ha_root_front_node_modules:/app/node_modules
+    command: sh -c "npm ci && npm run dev --"
+
+  # 健康情報蓄積API container
+  ha-track:
+    image: python:3.13.8
+    working_dir: /app
+    ports:
+      - "8086:8086"
+    environment:
+      TZ: Asia/Tokyo
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUNBUFFERED: "1"
+      MONGO_URI: "mongodb://health_user:hbt4stnsegebg@mongo:27017/health_db?authSource=admin"
+      # DJANGO_SETTINGS_MODULE: "ha_track.settings"
+    volumes:
+      - ./ha_track:/app
+    command: bash -lc "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8086"
+
+volumes:
+  m2-cache:
+  ha_root_front_node_modules:

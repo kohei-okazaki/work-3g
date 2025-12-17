@@ -5,7 +5,7 @@ export const handler = async (event) => {
   // 体重(kg)
   let weight = parseFloat(event.queryStringParameters.weight);
 
-  let header = {
+  const HEADERS = {
     // CORS対策用
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const handler = async (event) => {
     // 必須チェック
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. height is required.",
@@ -26,7 +26,7 @@ export const handler = async (event) => {
     // 必須チェック
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. weight is required.",
@@ -36,7 +36,7 @@ export const handler = async (event) => {
     // 数値チェック
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. height is positive.",
@@ -46,7 +46,7 @@ export const handler = async (event) => {
     // 数値チェック
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. weight is positive.",
@@ -73,7 +73,7 @@ export const handler = async (event) => {
 
   return {
     statusCode: 200,
-    headers: header,
+    headers: HEADERS,
     body: JSON.stringify({
       result: 0,
       basic_health_info: basic_health_info,

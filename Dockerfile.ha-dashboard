@@ -1,0 +1,20 @@
+# ---- build stage ----
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /work
+
+# copy build source
+COPY . .
+
+# ha-dashboard build
+RUN cd ha-pom && mvn -Dmaven.test.skip=true -pl ../ha-dashboard -am package
+
+# ---- run stage ----
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+ENV TZ=Asia/Tokyo
+
+# copy jar
+COPY --from=build /work/ha-dashboard/target/*.jar /app/dashboard-1.0.0.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app/dashboard-1.0.0.jar"]

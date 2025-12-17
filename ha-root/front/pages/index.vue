@@ -2,7 +2,7 @@
   <div>
     <AppMessageError v-if="error.hasError" :data="error" />
     <br />
-    <v-alert type="info" prominent class="inquiry-alert" v-if="hasInquiryNotice">
+    <v-alert type="info" border="left" elevation="2" v-if="hasInquiryNotice">
       <nuxt-link to="/inquiry" class="inquiry-link">問い合わせ通知があります</nuxt-link>
     </v-alert>
     <br />

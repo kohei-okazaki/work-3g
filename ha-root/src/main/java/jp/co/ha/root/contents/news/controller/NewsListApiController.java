@@ -16,7 +16,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.db.entity.NewsInfo;
@@ -83,12 +82,10 @@ public class NewsListApiController
             newsResponseList.add(news);
         }
 
-        PagingView paging = PagingViewFactory.getPageView(pageable, "news?page",
-                component.count());
-
         NewsListApiResponse response = getSuccessResponse();
         response.setNewsList(newsResponseList);
-        response.setPaging(paging);
+        response.setPaging(
+                PagingViewFactory.getPageView(pageable, "news?page", component.count()));
 
         return ResponseEntity.ok(response);
     }

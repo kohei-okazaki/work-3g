@@ -33,7 +33,6 @@ import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -206,12 +205,12 @@ public class LoginController implements BaseWebController {
     public String top(Model model, HttpServletRequest request) {
         // jp.co.ha.business.interceptor.DashboardAuthInterceptorで認証チェックを行うと、
         // ログイン前のユーザ作成画面でヘッダーを踏んだときにログイン情報がなくてコケるのでここでsession情報をチェックする
-        Long seqUserId = sessionComponent
-                .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class)
-                .orElse(null);
-        if (BeanUtil.isNull(seqUserId)) {
+        Optional<Long> nullableSeqUserId = sessionComponent
+                .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class);
+        if (!nullableSeqUserId.isPresent()) {
             return getView(DashboardView.LOGIN);
         }
+        Long seqUserId = nullableSeqUserId.get();
 
         List<HealthInfo> list = getLastestHealthInfoList(seqUserId);
         HealthInfo latest = getLastesthealthInfo(list);

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>business</artifactId>
-  <version>1.0.0</version>
   <name>ha-business</name>
   <packaging>jar</packaging>
 
@@ -23,12 +18,12 @@
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>db</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
   
@@ -38,6 +33,21 @@
        <directory>src/main/resources</directory>
       </resource>
     </resources>
+    
+    <testResources>
+      <testResource>
+        <directory>${basedir}/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-common/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-db/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-business/src/test/resources</directory>
+      </testResource>
+    </testResources>
   </build>
   
 </project>

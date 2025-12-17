@@ -1,11 +1,16 @@
 package jp.co.ha.batch.monthlyHealthInfoSummary;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.StringJoiner;
+import java.util.zip.GZIPOutputStream;
 
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
@@ -26,7 +31,6 @@ import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.FileUtil.FileExtension;
@@ -67,6 +71,8 @@ public class MonthlyHealthInfoSummaryWriter
     private String targetDate;
     /** 出力対象パス */
     private Path targetPath;
+    /** StepExecution */
+    private StepExecution stepExecution;
 
     /**
      * コンストラクタ
@@ -95,6 +101,11 @@ public class MonthlyHealthInfoSummaryWriter
     }
 
     @Override
+    public void beforeStep(StepExecution stepExecution) {
+        this.stepExecution = stepExecution;
+    }
+
+    @Override
     public void open(ExecutionContext executionContext) throws ItemStreamException {
 
         try {
@@ -112,32 +123,49 @@ public class MonthlyHealthInfoSummaryWriter
     }
 
     @Override
-    public ExitStatus afterStep(StepExecution stepExecution) {
+    public void close() {
+        // CSV作成
+        super.close();
 
         try {
-            if (stepExecution.getStatus().isUnsuccessful()) {
+            if (Objects.isNull(stepExecution)
+                    || stepExecution.getStatus().isUnsuccessful()) {
                 // 異常終了時
-                return ExitStatus.FAILED;
+                return;
+            } else if (stepExecution.getWriteCount() == 0) {
+                // 対象データ0件ならアップロードしない
+                Files.deleteIfExists(targetPath);
+                return;
             }
 
             // 正常終了時
-            File csv = targetPath.toFile();
+            Path gzPath = Paths.get(targetPath.toString() + ".gz");
+            gzipFile(targetPath, gzPath);
+
+            File gzFile = gzPath.toFile();
             StringJoiner s3Path = new StringJoiner(StringUtil.THRASH)
                     .add(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue())
-                    .add("year=" + csv.getName().substring(0, 4))
-                    .add(csv.getName());
+                    .add("year=" + gzFile.getName().substring(0, 4))
+                    .add(gzFile.getName());
             String s3key = s3Path.toString();
 
-            // TODO 対象データがない場合、[ExitStatus.COMPLETED]する
-
-            s3.putFile(s3key, csv);
+            s3.putFile(s3key, gzFile);
 
             // Slack通知
-            slack.sendFile(ContentType.BATCH, csv, "S3ファイルアップロード完了. key=" + s3key);
+            slack.sendFile(ContentType.BATCH, gzFile, "S3ファイルアップロード完了. key=" + s3key);
 
-        } catch (BaseException e) {
-            LOG.error("S3アップロードに失敗しました", e);
-            return ExitStatus.FAILED.addExitDescription(e.getMessage());
+            // ファイル送信が正常終了した場合、ローカルファイルを削除
+            Files.deleteIfExists(targetPath);
+
+        } catch (Exception e) {
+            LOG.error("gzip圧縮/S3アップロードに失敗しました", e);
+        }
+    }
+
+    @Override
+    public ExitStatus afterStep(StepExecution stepExecution) {
+        if (stepExecution.getStatus().isUnsuccessful()) {
+            return ExitStatus.FAILED;
         }
         return ExitStatus.COMPLETED;
     }
@@ -160,6 +188,31 @@ public class MonthlyHealthInfoSummaryWriter
         aggregator.setFieldExtractor(extractor);
 
         setLineAggregator(aggregator);
+    }
+
+    /**
+     * gzip形式に圧縮する
+     * 
+     * @param inputFile
+     *     入力ファイル
+     * @param outputFile
+     *     出力ファイル
+     * @throws IOException
+     *     gzipへの圧縮に失敗した場合
+     */
+    private void gzipFile(Path inputFile, Path outputFile) throws IOException {
+        try (InputStream is = Files.newInputStream(inputFile);
+                OutputStream os = Files.newOutputStream(outputFile);
+                BufferedOutputStream bos = new BufferedOutputStream(os);
+                GZIPOutputStream gzipos = new GZIPOutputStream(bos)) {
+
+            byte[] buf = new byte[1024 * 1024];
+            int len;
+            while ((len = is.read(buf)) != -1) {
+                gzipos.write(buf, 0, len);
+            }
+            gzipos.finish();
+        }
     }
 
 }
