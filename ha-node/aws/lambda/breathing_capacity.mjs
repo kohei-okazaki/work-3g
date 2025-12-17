@@ -7,11 +7,17 @@ export const handler = async (event) => {
     "height": parseFloat(event.queryStringParameters.height)
   };
 
+  const HEADERS = {
+    // CORS対策用
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  };
+
   if (isNaN(request_data["gender"])) {
     // 必須エラー
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. gender is required.",
@@ -21,7 +27,7 @@ export const handler = async (event) => {
     // 必須エラー
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. age is required.",
@@ -31,7 +37,7 @@ export const handler = async (event) => {
     // 必須エラー
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. height is required.",
@@ -41,7 +47,7 @@ export const handler = async (event) => {
     // 不正チェックエラー
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. gender is 0 or 1.",
@@ -51,7 +57,7 @@ export const handler = async (event) => {
     // 数値チェックエラー
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. age is positive.",
@@ -61,7 +67,7 @@ export const handler = async (event) => {
     // 数値チェック
     return {
       statusCode: 400,
-      headers: header,
+      headers: HEADERS,
       body: JSON.stringify({
         result: 1,
         detail: "Invalid parameters. height is positive.",
@@ -100,11 +106,7 @@ export const handler = async (event) => {
 
   return {
     statusCode: 200,
-    headers: {
-      // CORS対策用
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
+    headers: HEADERS,
     body: JSON.stringify({
       result: 0,
       breathing_capacity_calc_result: {

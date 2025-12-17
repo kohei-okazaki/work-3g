@@ -143,9 +143,12 @@ DATABASES = {
 # アプリケーションで使用するMongoDBの設定
 MONGODB_SETTINGS = {
     "db": "health_db",
-    "host": "mongodb://127.0.0.1:27017/health_db",  # 認証ありならユーザ/パス付きに
+    # ローカルインストール用
+    # "host": "mongodb://127.0.0.1:27017/health_db",
+    "host": "mongodb://mongo:27017/health_db",
     "username": "health_user",
-    "password": "hbt4stnsegebg"  # パスワードを追加
+    "password": "hbt4stnsegebg",
+    "auth_source": "admin",
 }
 
 # Password validation

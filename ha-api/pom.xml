@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>jp.co.ha</groupId>
   <artifactId>ha-api</artifactId>
-  <version>1.0.0</version>
   <name>ha-api</name>
   <description>health app for api</description>
 
@@ -22,17 +19,17 @@
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>db</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>business</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 
@@ -42,7 +39,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${org.springframework.boot-version}</version>
+        <version>${springboot-version}</version>
         <configuration>
           <mainClass>jp.co.ha.api.Application</mainClass>
         </configuration>

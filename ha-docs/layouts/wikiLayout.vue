@@ -74,6 +74,11 @@ export default {
         },
         {
           icon: "mdi-apps",
+          title: "エラーコード一覧",
+          to: "/wiki/errorCode",
+        },
+        {
+          icon: "mdi-apps",
           title: "ローカル環境構築手順",
           to: "/wiki/localEnv",
         },

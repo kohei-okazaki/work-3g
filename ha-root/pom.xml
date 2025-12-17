@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                                     https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>root</artifactId>
-  <version>1.0.0</version>
   <name>ha-root</name>
   <description>health app for root</description>
 
   <properties>
-    <org.jwt-version>0.9.1</org.jwt-version>
+    <jwt-version>0.13.0</jwt-version>
+    <jakarta.xml.bind-api-version>4.0.4</jakarta.xml.bind-api-version>
   </properties>
 
   <parent>
@@ -27,29 +23,40 @@
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>db</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>business</artifactId>
-      <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
 
     <!-- JWTのライブラリ -->
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
-      <artifactId>jjwt</artifactId>
-      <version>${org.jwt-version}</version>
+      <artifactId>jjwt-api</artifactId>
+      <version>${jwt-version}</version>
     </dependency>
     <dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-      <version>2.3.1</version>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>${jwt-version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <version>${jwt-version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
   </dependencies>
 
@@ -59,7 +66,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${org.springframework.boot-version}</version>
+        <version>${springboot-version}</version>
         <configuration>
           <mainClass>jp.co.ha.root.Application</mainClass>
         </configuration>

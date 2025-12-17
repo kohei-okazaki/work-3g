@@ -3,6 +3,7 @@ package jp.co.ha.dashboard.healthinfo.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.StringJoiner;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -36,6 +37,7 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
@@ -116,9 +118,11 @@ public class HealthInfoFileRegistController
 
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV;
-        s3.putFile(
-                AwsS3Key.HEALTHINFO_FILE_REGIST.getValue() + seqUserId + "/" + fileName,
-                form.getMultipartFile());
+        String s3Key = new StringJoiner(StringUtil.THRASH)
+                .add(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue())
+                .add(seqUserId.toString())
+                .add(fileName).toString();
+        s3.putFile(s3Key, form.getMultipartFile());
 
         // フォーマットチェックを行う
         fileService.formatCheck(modelList, seqUserId);

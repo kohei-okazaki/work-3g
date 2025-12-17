@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                      http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
   <artifactId>db</artifactId>
-  <version>1.0.0</version>
   <name>ha-db</name>
   <packaging>jar</packaging>
 
@@ -21,17 +16,14 @@
 
   <properties>
     <mybatis-generator-version>1.4.2</mybatis-generator-version>
-    <flywaydb-version>11.15.0</flywaydb-version>
-    <jdbc.url>${DB_URL}</jdbc.url>
-    <jdbc.user>${DB_USER}</jdbc.user>
-    <jdbc.password>${DB_PW}</jdbc.password>
+    <flyway-maven-plugin-version>11.18.0</flyway-maven-plugin-version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>jp.co.ha</groupId>
       <artifactId>common</artifactId>
-    <version>1.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis.generator</groupId>
@@ -39,15 +31,13 @@
       <version>${mybatis-generator-version}</version>
     </dependency>
     <dependency>
-    <groupId>org.flywaydb</groupId>
+      <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
-      <version>${flywaydb-version}</version>
     </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-mysql</artifactId>
-      <version>${flywaydb-version}</version>
-      </dependency>
+    </dependency>
   </dependencies>
 
   <build>
@@ -56,6 +46,18 @@
        <directory>src/main/resources</directory>
       </resource>
     </resources>
+
+    <testResources>
+      <testResource>
+        <directory>${basedir}/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-common/src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/../ha-db/src/test/resources</directory>
+      </testResource>
+    </testResources>
 
     <plugins>
       <plugin>
@@ -66,11 +68,11 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>${flywaydb-version}</version>
+        <version>${flyway-maven-plugin-version}</version>
         <configuration>
-          <url>${jdbc.url}</url>
-          <user>${jdbc.user}</user>
-          <password>${jdbc.password}</password>
+          <url>${DB_URL}</url>
+          <user>${DB_USER}</user>
+          <password>${DB_PW}</password>
           <locations>
             <location>classpath:/db/migration</location>
           </locations>

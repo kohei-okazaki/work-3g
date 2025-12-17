@@ -1,0 +1,20 @@
+# ---- build stage ----
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /work
+
+# copy build source
+COPY . .
+
+# ha-root build
+RUN cd ha-pom && mvn -Dmaven.test.skip=true -pl ../ha-root -am package
+
+# ---- run stage ----
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+ENV TZ=Asia/Tokyo
+
+# copy jar
+COPY --from=build /work/ha-root/target/*.jar /app/root-1.0.0.jar
+
+EXPOSE 8082
+ENTRYPOINT ["java","-jar","/app/root-1.0.0.jar"]

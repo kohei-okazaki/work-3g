@@ -1,5 +1,7 @@
 package jp.co.ha.root.config;
 
+import static jp.co.ha.root.config.JWTAuthenticationFilter.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -66,19 +68,23 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             HttpServletRequest request) {
 
         // tokenを取得
-        String token = request.getHeader(JWTAuthenticationFilter.HEADER_AUTHORIZATION);
+        String token = request.getHeader(HEADER_AUTHORIZATION);
 
         if (StringUtil.isEmpty(token)) {
             // トークンが未指定の場合
             return null;
         }
 
+        String rawToken = token.replace(TOKEN_PREFIX, "");
+
         // parse the token.
         String user = Jwts.parser()
-                .setSigningKey(JWTAuthenticationFilter.SECRET.getBytes())
-                .parseClaimsJws(token.replace(JWTAuthenticationFilter.TOKEN_PREFIX, ""))
-                .getBody()
+                .verifyWith(SIGNING_KEY)
+                .build()
+                .parseSignedClaims(rawToken)
+                .getPayload()
                 .getSubject();
+
         if (user == null) {
             // tokenをparseした結果nullの場合
             return null;

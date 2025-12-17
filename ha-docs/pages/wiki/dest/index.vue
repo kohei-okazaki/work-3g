@@ -10,11 +10,7 @@
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
       </v-col>
     </v-row>
-    <v-row
-      align="center"
-      v-for="(dest, i) in destList"
-      :key="i"
-    >
+    <v-row align="center" v-for="(dest, i) in destList" :key="i">
       <v-col sm="12">
         <v-card>
           <v-card-title>{{ dest.envName }}</v-card-title>
@@ -27,14 +23,8 @@
                     <div class="text-left">{{ item.name }}</div>
                   </th>
                   <td>
-                    <v-btn
-                      text
-                      color="link"
-                      min-height="20"
-                      class="x-small post-link align-center py-1 px-2"
-                      rel="noopener noreferrer"
-                      >{{ item.host }}</v-btn
-                    >
+                    <v-btn text color="link" min-height="20" class="x-small post-link align-center py-1 px-2"
+                      rel="noopener noreferrer">{{ item.host }}</v-btn>
                   </td>
                 </tr>
               </template>
@@ -98,7 +88,7 @@ export default {
             },
             {
               name: "健康情報計算API",
-              host: "https://XXXX.execute-api.ap-northeast-1.amazonaws.com/dev/",
+              host: "https://xosu86xbhe.execute-api.ap-northeast-1.amazonaws.com/dev/",
             },
             {
               name: "健康管理ドキュメント",
@@ -109,8 +99,12 @@ export default {
               host: "localhost:8086",
             },
             {
-              name: "データベース",
-              host: "localhost:3306",
+              name: "データベース(MySQL)",
+              host: "ls-XXXXX.ap-northeast-1.rds.amazonaws.com/work3g",
+            },
+            {
+              name: "データベース(MongoDB)",
+              host: "localhost:27017",
             },
           ],
         },
@@ -135,19 +129,22 @@ export default {
             },
             {
               name: "健康情報計算API",
-              host: "TODO 環境構築後、記載",
+              host: "https://xosu86xbhe.execute-api.ap-northeast-1.amazonaws.com/dev/",
             },
             {
               name: "健康管理ドキュメント",
-              host:
-                "healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/",
+              host: "http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/",
             },
             {
               name: "健康情報蓄積API",
               host: "TODO 環境構築後、記載",
             },
             {
-              name: "データベース",
+              name: "データベース(MySQL)",
+              host: "ls-XXXXX.ap-northeast-1.rds.amazonaws.com/work3g",
+            },
+            {
+              name: "データベース(MongoDB)",
               host: "TODO 環境構築後、記載",
             },
           ],
@@ -157,5 +154,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>
