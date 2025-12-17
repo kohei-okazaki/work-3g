@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
+import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,7 @@ import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
+import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.InquiryManagement;
 import jp.co.ha.db.entity.InquiryTypeMt;
 import jp.co.ha.db.entity.composite.CompositeInquiry;
@@ -99,10 +101,12 @@ public class InquiryComponent {
     public void regist(InquiryDto dto) throws BaseException {
 
         // S3登録
-        String sysdate = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                DateFormatType.YYYYMMDDHHMMSS_NOSEP);
-        String s3Key = AwsS3Component.AwsS3Key.INQUIRY.getValue() + dto.getSeqUserId()
-                + "/" + sysdate;
+        String s3Key = new StringJoiner(StringUtil.THRASH)
+                .add(AwsS3Component.AwsS3Key.INQUIRY.getValue())
+                .add(String.valueOf(dto.getSeqUserId()))
+                .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
+                        DateFormatType.YYYYMMDDHHMMSS_NOSEP))
+                .toString();
         s3.putFile(s3Key, dto.getBody());
 
         // DB登録

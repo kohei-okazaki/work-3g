@@ -7,16 +7,15 @@ class HealthInfoItemSerializer(serializers.Serializer):
     """
     健康情報シリアライザー
     """
-    seq_health_info_id = serializers.IntegerField(
-        required=False)  # 必須なら True に
-    height = serializers.FloatField(required=False, allow_null=True)
-    weight = serializers.FloatField(required=False, allow_null=True)
-    bmi = serializers.FloatField(required=False, allow_null=True)
-    standard_weight = serializers.FloatField(required=False, allow_null=True)
-    created_at = serializers.CharField(
-        required=False, allow_blank=True, allow_null=True)
 
-    def validate_created_at(self, value):
+    seq_health_info_id = serializers.IntegerField(label="健康情報ID", required=True)
+    height = serializers.FloatField(label="身長", required=True)
+    weight = serializers.FloatField(label="体重", required=True)
+    bmi = serializers.FloatField(label="BMI", required=True)
+    standard_weight = serializers.FloatField(label="標準体重", required=True)
+    created_at = serializers.CharField(label="健康情報作成日時", required=True)
+
+    def validate_created_at(self, value: str):
         """created_at のバリデーション
 
         Args:
@@ -41,5 +40,6 @@ class HealthInfoPayloadSerializer(serializers.Serializer):
     """
     健康情報データ部シリアライザー
     """
-    seq_user_id = serializers.IntegerField()
-    health_infos = HealthInfoItemSerializer(many=True)
+
+    seq_user_id = serializers.IntegerField(label="ユーザID", required=True)
+    health_infos = HealthInfoItemSerializer(label="健康情報リスト",many=True)

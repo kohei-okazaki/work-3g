@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
+import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.RootUserNoteInfoCreateService;
 import jp.co.ha.common.exception.BaseException;
@@ -87,7 +88,7 @@ public class NoteEntryApiController
      */
     private String getS3Key(Long seqRootLoginInfoId) {
         return new StringJoiner(StringUtil.THRASH)
-                .add("note")
+                .add(AwsS3Key.NOTE_FILE.getValue())
                 .add(seqRootLoginInfoId.toString())
                 .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                         DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.TEXT)

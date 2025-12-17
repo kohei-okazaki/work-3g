@@ -8,29 +8,16 @@
     <v-row justify="center">
       <v-col sm="12">
         <AppContentsTitle :title="breadcrumbs[breadcrumbs.length - 1].text" />
-      </v-col> </v-row
-    ><v-row justify="center">
+      </v-col> </v-row><v-row justify="center">
       <v-col sm="12">
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="検索条件"
-          single-line
-        ></v-text-field>
-        <v-data-table
-          dense
-          :headers="headers"
-          :items="tableList"
-          :search="search"
-          :items-per-page="1000"
-          :footer-props="{
-            showFirstLastPage: true,
-            firstIcon: 'mdi-arrow-collapse-left',
-            lastIcon: 'mdi-arrow-collapse-right',
-            prevIcon: 'mdi-minus',
-            nextIcon: 'mdi-plus',
-          }"
-        >
+        <v-text-field v-model="search" append-icon="mdi-magnify" label="検索条件" single-line></v-text-field>
+        <v-data-table dense :headers="headers" :items="tableList" :search="search" :items-per-page="1000" :footer-props="{
+          showFirstLastPage: true,
+          firstIcon: 'mdi-arrow-collapse-left',
+          lastIcon: 'mdi-arrow-collapse-right',
+          prevIcon: 'mdi-minus',
+          nextIcon: 'mdi-plus',
+        }">
           <!-- v-slotの書き方は以下でないとESLintでエラーになる -->
           <template v-slot:[`item.primaryKey`]="{ item }">
             <v-icon v-if="item.primaryKey" color="green">mdi-check</v-icon>
@@ -171,5 +158,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

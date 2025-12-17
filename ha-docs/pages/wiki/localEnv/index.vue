@@ -651,7 +651,7 @@
                 <p><a
                     href="https://maven.apache.org/download.cgi#:~:text=Binary%20zip%20archive-,apache%2Dmaven%2D3.9.11%2Dbin.zip,-apache%2Dmaven%2D3.9.11"
                     target="_blank" rel="noopener noreferrer">こちら</a>から「apache-maven-3.9.11-bin.zip」をインストール</p>
-                    <p>インストールはウィザードに基本任せてOK</p>
+                <p>インストールはウィザードに基本任せてOK</p>
                 <p>インストール完了後、環境変数にMavenのbinディレクトリを追加</p>
                 <v-simple-table>
                   <thead>
@@ -1098,8 +1098,7 @@
               <details>
                 <summary>DB反映設定</summary>
                 <kbd>ha-db/src/main/resources/generatorConfig.xml</kbd>
-                <p>の"classPathEntry"タグのパスが正しい確認。違う場合は修正</p>
-                
+                <p>の"classPathEntry"タグのjarパスが正しい確認。違う場合は修正</p>
               </details>
 
               <br />
@@ -1118,7 +1117,7 @@
                   <tbody>
                     <tr>
                       <td>名前</td>
-                      <td>mybatis反映</td>
+                      <td>MyBatis反映</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -1140,6 +1139,81 @@
                 </v-simple-table>
                 <br>
                 <b>環境タブで以下を設定</b>
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>DB_URL</td>
+                      <td>
+                        <ul>
+                          <li>aws lightsailsでDB構築した場合、AWS lightsailのコンソールから確認して、URLを指定</li>
+                          <li>ローカル環境にMySQLでDB構築した場合、jdbc:mysql://localhost:3306/work3g</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>DB_USER</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                    <tr>
+                      <td>DB_PW</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+          <v-expansion-panel>
+            <v-expansion-panel-header class="justify-self-start text-subtitle-1" disable-icon-rotate>
+              <div>
+                <v-icon color="red">mdi-file</v-icon>
+                <span>シェル関連設定手順</span>
+              </div>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content class="text-body-2">
+              <details>
+                <summary>共通バッチファイルの修正</summary>
+                <kbd>ha-batch/bat/common.bat</kbd> を開き、以下を修正
+                <v-simple-table>
+                  <thead>
+                    <tr>
+                      <th>項目名</th>
+                      <th>設定値</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>DB_URL</td>
+                      <td>
+                        <ul>
+                          <li>aws lightsailsでDB構築した場合、AWS lightsailのコンソールから確認して、URLを指定</li>
+                          <li>ローカル環境にMySQLでDB構築した場合、jdbc:mysql://localhost:3306/work3g</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>DB_USER</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                    <tr>
+                      <td>DB_PW</td>
+                      <td>「MySQL環境構築」のユーザ作成のセクションで登録した値</td>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+              </details>
+
+              <br />
+
+              <details>
+                <summary>共通buildファイルの修正</summary>
+                <kbd>ha-build/bat/build.ini</kbd> を開き、以下を修正
                 <v-simple-table>
                   <thead>
                     <tr>

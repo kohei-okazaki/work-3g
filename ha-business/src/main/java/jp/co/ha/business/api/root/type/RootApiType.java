@@ -6,7 +6,7 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * 管理者用API種別
  * <ul>
- * <li>{@linkplain #HEALTH_CHECK}：基礎健康情報計算API</li>
+ * <li>{@linkplain #HEALTH_CHECK}：ヘルスチェックAPI</li>
  * </ul>
  *
  * @version 1.0.0
@@ -52,7 +52,7 @@ public enum RootApiType implements BaseEnum {
      * @see jp.co.ha.common.type.BaseEnum#of(Class, String)
      * @param value
      *     値
-     * @return NodeApiType
+     * @return RootApiType
      */
     public static RootApiType of(String value) {
         return BaseEnum.of(RootApiType.class, value);

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.co.ha</groupId>
@@ -15,22 +12,21 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>21</java-version>
-    <org.springframework.boot-version>3.5.7</org.springframework.boot-version>
-    <org.spring-data-commons-version>3.5.5</org.spring-data-commons-version>
-    <com.amazonaws-version>2.31.78</com.amazonaws-version>
-    <org.aspectj-version>1.9.24</org.aspectj-version>
-    <org.slf4j-version>2.0.17</org.slf4j-version>
-    <org.logback-version>1.5.20</org.logback-version>
-    <org.jackson-version>2.19.2</org.jackson-version>
-    <org.poi-version>5.4.1</org.poi-version>
-    <org.mysql-version>8.4.0</org.mysql-version>
-    <org.mybatis-version>3.5.19</org.mybatis-version>
-    <org.mybatis-spring-version>3.0.5</org.mybatis-spring-version>
-    <org.hibernate-version>8.0.1.Final</org.hibernate-version>
-    <org.thymeleaf-version>3.1.3.RELEASE</org.thymeleaf-version>
-    <org.thymeleaf-layout-version>3.4.0</org.thymeleaf-layout-version>
-    <org.dbcp2-version>2.12.0</org.dbcp2-version>
-    <org.junit-version>5.12.0</org.junit-version>
+
+    <springboot-version>3.5.8</springboot-version>
+    <aws-version>2.31.78</aws-version>
+    <poi-version>5.4.1</poi-version>
+    <mysql-version>8.4.0</mysql-version>
+    <mybatis-version>3.5.19</mybatis-version>
+    <mybatis-spring-version>3.0.5</mybatis-spring-version>
+    <dbcp2-version>2.13.0</dbcp2-version>
+    <okhttp-version>5.3.2</okhttp-version>
+    <commons-lang3-version>3.20.0</commons-lang3-version>
+
+    <maven-compiler-version>3.11.0</maven-compiler-version>
+    <maven-resources-version>3.3.1</maven-resources-version>
+    <maven-clean-version>3.3.1</maven-clean-version>
+    <maven-assembly-version>3.7.1</maven-assembly-version>
   </properties>
 
   <profiles>
@@ -58,16 +54,26 @@
     <module>../ha-tool</module>
     <module>../ha-db</module>
     <module>../ha-business</module>
+    <module>../ha-root</module>
     <module>../ha-api</module>
     <module>../ha-dashboard</module>
   </modules>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Spring Boot BOM -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${springboot-version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- AWS BOM -->
       <dependency>
         <groupId>software.amazon.awssdk</groupId>
         <artifactId>bom</artifactId>
-        <version>${com.amazonaws-version}</version>
+        <version>${aws-version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -75,76 +81,62 @@
   </dependencyManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-commons</artifactId>
-      <version>${org.spring-data-commons-version}</version>
-    </dependency>
-
-	<!-- Spring Boot -->
+	  <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-validation</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
-      <version>${org.springframework.boot-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-thymeleaf</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-configuration-processor</artifactId>
-      <version>${org.springframework.boot-version}</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
-      <version>${org.springframework.boot-version}</version>
       <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-freemarker</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <!-- SpringBatch -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-batch</artifactId>
-      <version>${org.springframework.boot-version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
-      <version>${org.springframework.boot-version}</version>
       <scope>test</scope>
     </dependency>
 
@@ -152,174 +144,63 @@
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>s3</artifactId>
-      <version>${com.amazonaws-version}</version>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>ses</artifactId>
-      <version>${com.amazonaws-version}</version>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>apache-client</artifactId>
-      <version>${com.amazonaws-version}</version>
     </dependency>
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>sqs</artifactId>
-      <version>${com.amazonaws-version}</version>
-    </dependency>
-
-    <!-- poi -->
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>${org.poi-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml</artifactId>
-      <version>${org.poi-version}</version>
-    </dependency>
-
-    <!-- jackson -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>${org.jackson-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>${org.jackson-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>${org.jackson-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <version>${org.jackson-version}</version>
-    </dependency>
-    <!-- jackson(警告ログ解消のため) -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
-      <artifactId>jackson-module-kotlin</artifactId>
-      <version>2.13.1</version>
     </dependency>
 
     <!-- DB -->
     <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
-      <version>${org.mysql-version}</version>
+      <version>${mysql-version}</version>
     </dependency>
     <dependency>
         <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>${org.mybatis-version}</version>
+      <version>${mybatis-version}</version>
     </dependency>
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>${org.mybatis-spring-version}</version>
+      <version>${mybatis-spring-version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-dbcp2</artifactId>
-      <version>${org.dbcp2-version}</version>
+      <version>${dbcp2-version}</version>
     </dependency>
 
-    <!-- AspectJ -->
+    <!-- poi -->
     <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjrt</artifactId>
-      <version>${org.aspectj-version}</version>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${poi-version}</version>
     </dependency>
     <dependency>
-      <groupId>org.aspectj</groupId>
-      <artifactId>aspectjweaver</artifactId>
-      <version>${org.aspectj-version}</version>
-    </dependency>
-
-    <!-- Logging -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${org.slf4j-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>${org.slf4j-version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>${org.logback-version}</version>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>${poi-version}</version>
     </dependency>
 
-    <!-- thymeleaf -->
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring6</artifactId>
-      <version>${org.thymeleaf-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>${org.thymeleaf-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>nz.net.ultraq.thymeleaf</groupId>
-      <artifactId>thymeleaf-layout-dialect</artifactId>
-      <version>${org.thymeleaf-layout-version}</version>
-    </dependency>
-
-    <!-- @Inject -->
-    <dependency>
-      <groupId>javax.inject</groupId>
-      <artifactId>javax.inject</artifactId>
-      <version>1</version>
-    </dependency>
-    <!-- validation -->
-    <dependency>
-      <groupId>jakarta.validation</groupId>
-      <artifactId>jakarta.validation-api</artifactId>
-      <version>3.1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate.validator</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <version>${org.hibernate-version}</version>
-    </dependency>
-    <!-- Servlet -->
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.1.0</version>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.18.0</version>
+      <version>${commons-lang3-version}</version>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
-      <artifactId>okhttp</artifactId>
-      <version>4.12.0</version>
-    </dependency>
-
-    <!-- Test -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${org.junit-version}</version>
-      <scope>test</scope>
+      <artifactId>okhttp-jvm</artifactId>
+      <version>${okhttp-version}</version>
     </dependency>
   </dependencies>
 
@@ -339,26 +220,11 @@
       </resource>
     </resources>
 
-    <testResources>
-      <testResource>
-        <directory>${basedir}/src/test/resources</directory>
-      </testResource>
-      <testResource>
-        <directory>${basedir}/../ha-common/src/test/resources</directory>
-      </testResource>
-      <testResource>
-        <directory>${basedir}/../ha-db/src/test/resources</directory>
-      </testResource>
-      <testResource>
-        <directory>${basedir}/../ha-business/src/test/resources</directory>
-      </testResource>
-    </testResources>
-
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
+        <version>${maven-compiler-version}</version>
         <configuration>
           <source>${java-version}</source>
           <target>${java-version}</target>
@@ -371,17 +237,17 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.3.1</version>
+        <version>${maven-resources-version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
-        <version>3.3.1</version>
+        <version>${maven-clean-version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.7.1</version>
+        <version>${maven-assembly-version}</version>
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>

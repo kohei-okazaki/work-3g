@@ -10,6 +10,11 @@ export default {
 
   ssr: false,
 
+  server: {
+    host: process.env.HOST || '0.0.0.0',
+    port: process.env.PORT ? Number(process.env.PORT) : 8083
+  },
+
   head: {
     titleTemplate: '%s | front',
     title: '管理サイト',

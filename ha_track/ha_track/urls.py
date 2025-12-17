@@ -21,5 +21,6 @@ from api.views import HealthInfoAPIView
 
 urlpatterns = [
     # path("admin/", admin.site.urls),
+    # 健康情報連携API
     path('api/healthinfo/', HealthInfoAPIView.as_view(), name='healthinfo'),
 ]

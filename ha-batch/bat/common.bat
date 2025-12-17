@@ -11,6 +11,9 @@ rem 環境
 set ENV=local
 rem jar
 set JAR_FILE=batch-1.0.0.jar
+set DB_URL=DB_URL=jdbc:mysql://localhost:3306/work3g
+set DB_USER=app_user
+set DB_PW=3w4tamudnxgr4
 
 rem 文字コードをUTF-8に変更する
 chcp 65001
