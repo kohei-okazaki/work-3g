@@ -1,24 +1,29 @@
 services:
   # 健康管理アプリAPI container
   ha-api:
-    image: work3g/ha-api:dev
+    image: work3g/ha-api:local
     working_dir: /work
     ports:
       - "8081:8081"
     environment:
-      TZ: Asia/Tokyo
       SERVER_PORT: "8081"
       SPRING_PROFILES_ACTIVE: local
       SPRING_FLYWAY_ENABLED: "true"
+      # DB接続情報
       DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
       DB_USER: "app_user"
       DB_PW: "3w4tamudnxgr4"
+      # AWSプロファイル
       AWS_PROFILE: default
     volumes:
-      - ./:/work
+      - ./ha-pom:/work/ha-pom
+      - ./ha-common:/work/ha-common
+      - ./ha-db:/work/ha-db
+      - ./ha-business:/work/ha-business
+      - ./ha-tool:/work/ha-tool
+      - ./ha-api:/work/ha-api
       - m2-cache:/root/.m2
       - ~/.aws:/root/.aws:ro
-      # - /mnt/c/app/logs:/var/app/log/
     command: bash -lc "mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :ha-api -am install && mvn -f ha-api/pom.xml -Dmaven.test.skip=true org.springframework.boot:spring-boot-maven-plugin:run"
     depends_on:
       mysql:
@@ -26,12 +31,11 @@ services:
 
   # 健康情報ダッシュボード container
   ha-dashboard:
-    image: work3g/ha-dashboard:dev
+    image: work3g/ha-dashboard:local
     working_dir: /work
     ports:
       - "8080:8080"
     environment:
-      TZ: Asia/Tokyo
       SERVER_PORT: "8080"
       SPRING_PROFILES_ACTIVE: local
       SPRING_FLYWAY_ENABLED: "true"
@@ -39,12 +43,17 @@ services:
       DB_USER: "app_user"
       DB_PW: "3w4tamudnxgr4"
       HEALTHINFO_API_URL: "http://ha-api:8081/api/"
+      # AWSプロファイル
       AWS_PROFILE: default
     volumes:
-      - ./:/work
+      - ./ha-pom:/work/ha-pom
+      - ./ha-common:/work/ha-common
+      - ./ha-db:/work/ha-db
+      - ./ha-business:/work/ha-business
+      - ./ha-tool:/work/ha-tool
+      - ./ha-dashboard:/work/ha-dashboard
       - m2-cache:/root/.m2
       - ~/.aws:/root/.aws:ro
-      # - /mnt/c/app/logs:/var/app/log/
     command: bash -lc "mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :ha-dashboard -am install && mvn -f ha-dashboard/pom.xml -Dmaven.test.skip=true org.springframework.boot:spring-boot-maven-plugin:run"
     depends_on:
       mysql:
@@ -52,21 +61,26 @@ services:
 
   # 管理者用API container
   ha-root-api:
-    image: work3g/ha-root-api:dev
+    image: work3g/ha-root-api:local
     working_dir: /work
     ports:
       - "8082:8082"
     environment:
-      TZ: Asia/Tokyo
       SERVER_PORT: "8082"
       SPRING_PROFILES_ACTIVE: local
       SPRING_FLYWAY_ENABLED: "true"
+      # DB接続情報
       DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
       DB_USER: "app_user"
       DB_PW: "3w4tamudnxgr4"
       AWS_PROFILE: default
     volumes:
-      - ./:/work
+      - ./ha-pom:/work/ha-pom
+      - ./ha-common:/work/ha-common
+      - ./ha-db:/work/ha-db
+      - ./ha-business:/work/ha-business
+      - ./ha-tool:/work/ha-tool
+      - ./ha-root:/work/ha-root
       - m2-cache:/root/.m2
       - ~/.aws:/root/.aws:ro
     command: bash -lc "mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :ha-root -am install && mvn -f ha-root/pom.xml -Dmaven.test.skip=true org.springframework.boot:spring-boot-maven-plugin:run"
@@ -82,7 +96,6 @@ services:
     ports:
       - "8083:8083"
     environment:
-      TZ: Asia/Tokyo
       HOST: "0.0.0.0"
       PORT: "8083"
     volumes:
@@ -97,15 +110,54 @@ services:
     ports:
       - "8086:8086"
     environment:
-      TZ: Asia/Tokyo
       PYTHONDONTWRITEBYTECODE: "1"
       PYTHONUNBUFFERED: "1"
+      # MongoDB 接続
       MONGO_URI: "mongodb://health_user:hbt4stnsegebg@mongo:27017/health_db?authSource=admin"
+      # Django 側の設定に合わせて必要なら有効化
       # DJANGO_SETTINGS_MODULE: "ha_track.settings"
     volumes:
       - ./ha_track:/app
     command: bash -lc "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8086"
 
+  # MySQL container
+  mysql:
+    image: mysql:8.4
+    container_name: work3g-mysql
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: work3g
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: 3w4tamudnxgr4
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-prootpass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - work-3g-network
+  
+  # MongoDB container
+  mongo:
+    image: mongo:7.0
+    container_name: work3g-mongo
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Tokyo
+      MONGO_INITDB_ROOT_USERNAME: health_user
+      MONGO_INITDB_ROOT_PASSWORD: hbt4stnsegebg
+      MONGO_INITDB_DATABASE: health_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - work-3g-network
 volumes:
   m2-cache:
   ha_root_front_node_modules:

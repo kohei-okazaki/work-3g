@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsSesComponent;
+import jp.co.ha.business.api.aws.AwsSystemsManagerComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.db.crud.create.InquiryManagementCreateService;
 import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
@@ -30,7 +31,6 @@ import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
@@ -68,6 +68,9 @@ public class InquiryComponent {
     /** 問い合わせ管理情報更新サービス */
     @Autowired
     private InquiryManagementUpdateService updateService;
+    /** AWS Systems Manager Component */
+    @Autowired
+    private AwsSystemsManagerComponent ssm;
     /** AWS-S3 Component */
     @Autowired
     private AwsS3Component s3;
@@ -77,9 +80,6 @@ public class InquiryComponent {
     /** Slack Component */
     @Autowired
     private SlackApiComponent slack;
-    /** システムプロパティ */
-    @Autowired
-    private SystemProperties systemProps;
 
     /**
      * 問い合わせ種別リストを返す
@@ -132,7 +132,8 @@ public class InquiryComponent {
      *     メール送信に失敗した場合
      */
     public void sendMail() throws BaseException {
-        ses.sendMail(systemProps.getSystemMailAddress(), SLACK_TITLE_OCCURED,
+        ses.sendMail(ssm.getValue(AwsSystemsManagerComponent.KEY_SYSTEM_MAILADDRESS),
+                SLACK_TITLE_OCCURED,
                 AwsSesComponent.MailTemplateKey.INQUIRY_REGIST_TEMPLATE);
     }
 

@@ -1,67 +1,19 @@
 services:
-  # MySQL container
-  mysql:
-    image: mysql:8.4
-    container_name: work3g-mysql
-    environment:
-      TZ: Asia/Tokyo
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: work3g
-      MYSQL_USER: app_user
-      MYSQL_PASSWORD: 3w4tamudnxgr4
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-prootpass"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - work-3g-network
-  
-  # MongoDB container
-  mongo:
-    image: mongo:7.0
-    container_name: work3g-mongo
-    restart: unless-stopped
-    environment:
-      TZ: Asia/Tokyo
-      MONGO_INITDB_ROOT_USERNAME: health_user
-      MONGO_INITDB_ROOT_PASSWORD: hbt4stnsegebg
-      MONGO_INITDB_DATABASE: health_db
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-    networks:
-      - work-3g-network
 
   # 健康管理アプリAPI container
   ha-api:
     build:
       context: .
       dockerfile: Dockerfile.ha-api
-    ports:
-      - "8081:8081"
     environment:
       TZ: Asia/Tokyo
-      SPRING_PROFILES_ACTIVE: local
-      SERVER_PORT: "8081"
-      SPRING_FLYWAY_ENABLED: "true"
-      # ~/.aws をマウントして aws configure の設定を利用する
+      # AWSプロファイル
       AWS_PROFILE: default
-      # DB接続情報
-      DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
-      DB_USER: "app_user"
-      DB_PW: "3w4tamudnxgr4"
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PW: ${DB_PW}
     volumes:
-      # - /mnt/c/app/logs:/var/app/log/
       - ~/.aws:/root/.aws:ro
-    depends_on:
-      mysql:
-        condition: service_healthy
     networks:
       - work-3g-network
 
@@ -70,26 +22,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ha-dashboard
-    ports:
-      - "8080:8080"
     environment:
       TZ: Asia/Tokyo
-      SPRING_PROFILES_ACTIVE: local
-      SERVER_PORT: "8080"
-      SPRING_FLYWAY_ENABLED: "true"
-      # ~/.aws をマウントして aws configure の設定を利用する
+      # AWSプロファイル
       AWS_PROFILE: default
-      # DB接続情報
-      DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
-      DB_USER: "app_user"
-      DB_PW: "3w4tamudnxgr4"
-      HEALTHINFO_API_URL: "http://ha-api:8081/api/"
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PW: ${DB_PW}
     volumes:
-      # - /mnt/c/app/logs:/var/app/log/
       - ~/.aws:/root/.aws:ro
-    depends_on:
-      mysql:
-        condition: service_healthy
     networks:
       - work-3g-network
 
@@ -98,19 +39,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ha-root-api
-    ports:
-      - "8082:8082"
     environment:
       TZ: Asia/Tokyo
-      SPRING_PROFILES_ACTIVE: local
-      SERVER_PORT: "8082"
-      SPRING_FLYWAY_ENABLED: "true"
-      # ~/.aws をマウントして aws configure の設定を利用する
+      # AWSプロファイル
       AWS_PROFILE: default
-      # DB接続情報
-      DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
-      DB_USER: "app_user"
-      DB_PW: "3w4tamudnxgr4"
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PW: ${DB_PW}
     depends_on:
       mysql:
         condition: service_healthy
@@ -122,8 +57,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ha-root-front
-    ports:
-      - "8083:8083"
+    environment:
+      TZ: Asia/Tokyo
     depends_on:
       - ha-root-api
     networks:
@@ -134,14 +69,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ha-track
-    ports:
-      - "8086:8086"
     environment:
       TZ: Asia/Tokyo
-      # MongoDB 接続
-      MONGO_URI: "mongodb://health_user:hbt4stnsegebg@mongo:27017/health_db?authSource=admin"
-      # Django 側の設定に合わせて必要なら有効化
-      # DJANGO_SETTINGS_MODULE: "ha_track.settings"
+      MONGO_URI: ${MONGO_URI}
     depends_on:
       - mongo
     networks:

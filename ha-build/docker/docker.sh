@@ -13,7 +13,7 @@
 
 args_count=$#
 if [ ${args_count} -ne 1 ]; then
-  echo "引数は必ずbuild/start/stop/check/restartのいずれかを1つ指定してください。"
+  echo "引数は必ずbuild/start/stop/clear/check/restartのいずれかを1つ指定してください。"
   exit 1
 fi
 
@@ -24,32 +24,32 @@ if [ ${val} = "" ]; then
 fi
 
 # 初期化ファイル読み込み
-. ./initialize.sh
+. ./common.sh
 
 case ${val} in
   build)
     # コンテナビルド起動
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
     ;;
   start)
     # コンテナ起動
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
     ;;
   stop)
     # コンテナ停止
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml stop
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml stop
     ;;
   clear)
     # コンテナ削除
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml down
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml down
     ;;
   check)
     # コンテナ状態確認
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml ps
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml ps
     ;;
   restart)
     # コンテナ再起動
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml restart
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml restart
     ;;
   *)
     echo "不正な引数です。build/start/stop/clear/check/restartのいずれかを指定してください。"
