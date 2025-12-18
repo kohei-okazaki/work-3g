@@ -29,11 +29,14 @@ fi
 case ${val} in
   build)
     # コンテナビルド起動
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
+    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml build ha-batch
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track --build
     ;;
   start)
     # コンテナ起動
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   stop)
     # コンテナ停止
@@ -49,7 +52,9 @@ case ${val} in
     ;;
   restart)
     # コンテナ再起動
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml restart
+    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml restart
+    
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml restart mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   *)
     echo "不正な引数です。build/start/stop/clear/check/restartのいずれかを指定してください。"

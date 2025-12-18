@@ -1,5 +1,4 @@
 services:
-
   # 健康管理アプリAPI container
   ha-api:
     build:
@@ -9,9 +8,6 @@ services:
       TZ: Asia/Tokyo
       # AWSプロファイル
       AWS_PROFILE: default
-      DB_URL: ${DB_URL}
-      DB_USER: ${DB_USER}
-      DB_PW: ${DB_PW}
     volumes:
       - ~/.aws:/root/.aws:ro
     networks:
@@ -26,9 +22,6 @@ services:
       TZ: Asia/Tokyo
       # AWSプロファイル
       AWS_PROFILE: default
-      DB_URL: ${DB_URL}
-      DB_USER: ${DB_USER}
-      DB_PW: ${DB_PW}
     volumes:
       - ~/.aws:/root/.aws:ro
     networks:
@@ -43,12 +36,8 @@ services:
       TZ: Asia/Tokyo
       # AWSプロファイル
       AWS_PROFILE: default
-      DB_URL: ${DB_URL}
-      DB_USER: ${DB_USER}
-      DB_PW: ${DB_PW}
-    depends_on:
-      mysql:
-        condition: service_healthy
+    volumes:
+      - ~/.aws:/root/.aws:ro
     networks:
       - work-3g-network
   
@@ -71,9 +60,22 @@ services:
       dockerfile: Dockerfile.ha-track
     environment:
       TZ: Asia/Tokyo
-      MONGO_URI: ${MONGO_URI}
     depends_on:
       - mongo
+    networks:
+      - work-3g-network
+
+  # 健康管理バッチ container
+  ha-batch:
+    build:
+      context: .
+      dockerfile: Dockerfile.ha-batch
+    environment:
+      TZ: Asia/Tokyo
+      # AWSプロファイル
+      AWS_PROFILE: default
+    volumes:
+      - ~/.aws:/root/.aws:ro
     networks:
       - work-3g-network
 

@@ -12,6 +12,15 @@ RUN cd ha-pom && mvn -Dmaven.test.skip=true -pl ../ha-api -am package
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 
+# create log dir
+RUN mkdir -p /var/app/log
+# reference.file.path
+RUN mkdir -p /home/admin/data/healthInfoReference
+# healthinfo.regist.batch.file.path
+RUN mkdir -p /home/admin/data/healthInfoRegist
+# healthinfo.monthly.summary.batch.file.path
+RUN mkdir -p /home/admin/data/monthly
+
 # copy jar
 COPY --from=build /work/ha-api/target/*.jar /app/api-1.0.0.jar
 

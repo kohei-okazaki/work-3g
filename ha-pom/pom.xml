@@ -57,6 +57,7 @@
     <module>../ha-root</module>
     <module>../ha-api</module>
     <module>../ha-dashboard</module>
+    <module>../ha-batch</module>
   </modules>
 
   <dependencyManagement>

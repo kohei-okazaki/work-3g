@@ -7,6 +7,7 @@ services:
       - "8081:8081"
     environment:
       SERVER_PORT: "8081"
+      # Spring Boot設定
       SPRING_PROFILES_ACTIVE: local
       SPRING_FLYWAY_ENABLED: "true"
       # DB接続情報
@@ -15,6 +16,11 @@ services:
       DB_PW: "3w4tamudnxgr4"
       # AWSプロファイル
       AWS_PROFILE: default
+      # DockerコンテナURL
+      HEALTHINFO_DASHBOARD_URL: "http://ha-dashboard:8080/"
+      HEALTHINFO_API_URL: "http://ha-api:8081/api/"
+      ROOT_API_URL: "http://ha-root-api:8082/api/root/"
+      HEALTHINFO_TRACK_API_URL: "http://ha-track:8086/api/"
     volumes:
       - ./ha-pom:/work/ha-pom
       - ./ha-common:/work/ha-common
@@ -37,14 +43,20 @@ services:
       - "8080:8080"
     environment:
       SERVER_PORT: "8080"
+      # Spring Boot設定
       SPRING_PROFILES_ACTIVE: local
       SPRING_FLYWAY_ENABLED: "true"
+      # DB接続情報
       DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
       DB_USER: "app_user"
       DB_PW: "3w4tamudnxgr4"
-      HEALTHINFO_API_URL: "http://ha-api:8081/api/"
       # AWSプロファイル
       AWS_PROFILE: default
+      # DockerコンテナURL
+      HEALTHINFO_DASHBOARD_URL: "http://ha-dashboard:8080/"
+      HEALTHINFO_API_URL: "http://ha-api:8081/api/"
+      ROOT_API_URL: "http://ha-root-api:8082/api/root/"
+      HEALTHINFO_TRACK_API_URL: "http://ha-track:8086/api/"
     volumes:
       - ./ha-pom:/work/ha-pom
       - ./ha-common:/work/ha-common
@@ -67,13 +79,20 @@ services:
       - "8082:8082"
     environment:
       SERVER_PORT: "8082"
+      # Spring Boot設定
       SPRING_PROFILES_ACTIVE: local
       SPRING_FLYWAY_ENABLED: "true"
       # DB接続情報
       DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
       DB_USER: "app_user"
       DB_PW: "3w4tamudnxgr4"
+      # AWSプロファイル
       AWS_PROFILE: default
+      # DockerコンテナURL
+      HEALTHINFO_DASHBOARD_URL: "http://ha-dashboard:8080/"
+      HEALTHINFO_API_URL: "http://ha-api:8081/api/"
+      ROOT_API_URL: "http://ha-root-api:8082/api/root/"
+      HEALTHINFO_TRACK_API_URL: "http://ha-track:8086/api/"
     volumes:
       - ./ha-pom:/work/ha-pom
       - ./ha-common:/work/ha-common
@@ -90,7 +109,7 @@ services:
 
   # 管理者用サイト front container
   ha-root-front:
-    # image: work3g/ha-root-front:dev
+    # image: work3g/ha-root-front:local
     image: node:20
     working_dir: /app
     ports:
@@ -102,6 +121,38 @@ services:
       - ./ha-root/front:/app
       - ha_root_front_node_modules:/app/node_modules
     command: sh -c "npm ci && npm run dev --"
+  
+  # 健康管理バッチ
+  ha-batch:
+    image: work3g/ha-batch:local
+    working_dir: /work
+    environment:
+      # Spring Boot設定
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_FLYWAY_ENABLED: "true"
+      # DB接続情報
+      DB_URL: "jdbc:mysql://mysql:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo"
+      DB_USER: "app_user"
+      DB_PW: "3w4tamudnxgr4"
+      # AWSプロファイル
+      AWS_PROFILE: default
+      # DockerコンテナURL
+      HEALTHINFO_DASHBOARD_URL: "http://ha-dashboard:8080/"
+      HEALTHINFO_API_URL: "http://ha-api:8081/api/"
+      ROOT_API_URL: "http://ha-root-api:8082/api/root/"
+      HEALTHINFO_TRACK_API_URL: "http://ha-track:8086/api/"
+    volumes:
+      - ./ha-pom:/work/ha-pom
+      - ./ha-common:/work/ha-common
+      - ./ha-db:/work/ha-db
+      - ./ha-business:/work/ha-business
+      - ./ha-tool:/work/ha-tool
+      - ./ha-batch:/work/ha-batch
+      - m2-cache:/root/.m2
+      - ~/.aws:/root/.aws:ro
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   # 健康情報蓄積API container
   ha-track:
