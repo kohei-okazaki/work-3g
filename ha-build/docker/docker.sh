@@ -2,7 +2,7 @@
 
 ########################################
 # Dockerコンテナ用のsh
-# $1: build/start/stop/check/restart
+# $1: build/start/stop/clear/check/restart
 #   build: コンテナビルド起動
 #   start: コンテナ起動
 #   stop: コンテナ停止
