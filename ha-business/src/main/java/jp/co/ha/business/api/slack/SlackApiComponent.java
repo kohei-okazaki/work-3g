@@ -19,14 +19,11 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
+import jp.co.ha.business.api.aws.AwsSystemsManagerComponent;
 import jp.co.ha.business.api.slack.SlackConnectionData.Connection;
 import jp.co.ha.business.exception.BusinessErrorCode;
-import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
-import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.BaseEnum;
@@ -46,8 +43,6 @@ public class SlackApiComponent {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(SlackApiComponent.class);
-    /** 接続情報の列挙 */
-    private static final AwsS3Key KEY = AwsS3Key.SLACK_CONNECTION_DATA;
     /** Slack URL(共通) */
     private static final String BASE_SLACK_URL = "https://slack.com/api";
     /** Slack URL(メッセージ用) */
@@ -61,7 +56,7 @@ public class SlackApiComponent {
 
     /** S3 Component */
     @Autowired
-    private AwsS3Component s3;
+    private AwsSystemsManagerComponent ssm;
 
     /**
      * Slackにメッセージを送信する
@@ -295,10 +290,11 @@ public class SlackApiComponent {
      * @return Slack接続情報
      */
     private SlackConnectionData getSlackConnectionData() {
+
         try {
-            return new JsonReader()
-                    .read(s3.getS3ObjectByKey(KEY), SlackConnectionData.class);
-        } catch (BaseException e) {
+            return new ObjectMapper().readValue(ssm.getValue("SLACK_TOKEN"),
+                    SlackConnectionData.class);
+        } catch (Exception e) {
             throw new SystemRuntimeException(e);
         }
     }

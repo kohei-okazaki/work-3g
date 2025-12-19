@@ -16,8 +16,6 @@ public class SystemProperties {
     private String paging;
     /** 環境名 */
     private Environment environment;
-    /** システムメールアドレス */
-    private String systemMailAddress;
 
     /**
      * 環境名の列挙
@@ -97,25 +95,6 @@ public class SystemProperties {
      */
     public void setEnvironment(String environment) {
         this.environment = Environment.of(environment);
-    }
-
-    /**
-     * システムメールアドレスを返す
-     * 
-     * @return systemMailAddress
-     */
-    public String getSystemMailAddress() {
-        return systemMailAddress;
-    }
-
-    /**
-     * システムメールアドレスを設定する
-     * 
-     * @param systemMailAddress
-     *     システムメールアドレス
-     */
-    public void setSystemMailAddress(String systemMailAddress) {
-        this.systemMailAddress = systemMailAddress;
     }
 
 }
