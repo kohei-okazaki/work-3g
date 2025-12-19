@@ -18,6 +18,8 @@ import software.amazon.awssdk.regions.Region;
  * <li>キュー名：環境毎にキュー名を設定</li>
  * <li>SQSコネクションタイムアウト：設定ファイルで10秒を設定</li>
  * <li>SQSソケットタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>SSMコネクションタイムアウト：設定ファイルで10秒を設定</li>
+ * <li>SSMソケットタイムアウト：設定ファイルで10秒を設定</li>
  * </ul>
  *
  * @version 1.0.0
@@ -45,6 +47,10 @@ public class AwsProperties {
     private int sqsConnnectionTimeout;
     /** SQSソケットタイムアウト */
     private int sqsSocketTimeout;
+    /** SSMソケットタイムアウト */
+    private int ssmConnnectionTimeout;
+    /** SSMソケットタイムアウト */
+    private int ssmSocketTimeout;
 
     /**
      * リージョンを返す
@@ -245,6 +251,44 @@ public class AwsProperties {
      */
     public void setSqsSocketTimeout(int sqsSocketTimeout) {
         this.sqsSocketTimeout = sqsSocketTimeout;
+    }
+
+    /**
+     * SSMコネクションタイムアウトを返す
+     * 
+     * @return ssmConnnectionTimeout
+     */
+    public int getSsmConnnectionTimeout() {
+        return ssmConnnectionTimeout;
+    }
+
+    /**
+     * SSMコネクションタイムアウトを設定する
+     * 
+     * @param ssmConnnectionTimeout
+     *     SSMコネクションタイムアウト
+     */
+    public void setSsmConnnectionTimeout(int ssmConnnectionTimeout) {
+        this.ssmConnnectionTimeout = ssmConnnectionTimeout;
+    }
+
+    /**
+     * SSMソケットタイムアウトを返す
+     * 
+     * @return ssmSocketTimeout
+     */
+    public int getSsmSocketTimeout() {
+        return ssmSocketTimeout;
+    }
+
+    /**
+     * SSMソケットタイムアウトを設定する
+     * 
+     * @param ssmSocketTimeout
+     *     SSMソケットタイムアウト
+     */
+    public void setSsmSocketTimeout(int ssmSocketTimeout) {
+        this.ssmSocketTimeout = ssmSocketTimeout;
     }
 
 }

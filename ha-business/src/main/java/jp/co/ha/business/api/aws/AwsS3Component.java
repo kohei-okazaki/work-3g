@@ -65,14 +65,14 @@ public class AwsS3Component {
      *     InputStream
      * @param length
      *     ファイルサイズ
-     * @throws BusinessException
+     * @throws BaseException
      *     S3からファイルダウンロードエラー
      */
     public void putFile(String key, long length, InputStream is)
-            throws BusinessException {
+            throws BaseException {
 
-        S3Client s3 = getS3Client();
         try {
+            S3Client s3 = getS3Client();
             s3.putObject(
                     PutObjectRequest.builder()
                             .bucket(awsProps.getBacket())
@@ -112,11 +112,11 @@ public class AwsS3Component {
      *     キー
      * @param strData
      *     文字列データ
-     * @throws BusinessException
+     * @throws BaseException
      *     S3からファイルダウンロードエラー
      * @see #putFile(String, long, InputStream)
      */
-    public void putFile(String key, String strData) throws BusinessException {
+    public void putFile(String key, String strData) throws BaseException {
         try {
             byte[] b = strData.getBytes(UTF_8);
             InputStream is = new ByteArrayInputStream(b);
@@ -187,13 +187,12 @@ public class AwsS3Component {
      * @param key
      *     キー
      * @return InputStream
-     * @throws BusinessException
+     * @throws BaseException
      *     S3からファイルダウンロードエラー
      */
-    public InputStream getS3ObjectByKey(String key) throws BusinessException {
+    public InputStream getS3ObjectByKey(String key) throws BaseException {
 
         S3Client s3 = getS3Client();
-
         try {
             GetObjectRequest request = GetObjectRequest.builder()
                     .bucket(awsProps.getBacket())
@@ -213,11 +212,11 @@ public class AwsS3Component {
      * @param key
      *     キー
      * @return InputStream
-     * @throws BusinessException
+     * @throws BaseException
      *     S3からファイルダウンロードエラー
      * @see #getS3ObjectByKey(String)
      */
-    public InputStream getS3ObjectByKey(AwsS3Key key) throws BusinessException {
+    public InputStream getS3ObjectByKey(AwsS3Key key) throws BaseException {
         return getS3ObjectByKey(key.getValue());
     }
 
@@ -225,10 +224,10 @@ public class AwsS3Component {
      * {@linkplain S3Object}のリストを返す
      *
      * @return ファイルリスト
-     * @throws BusinessException
+     * @throws BaseException
      *     S3からファイルダウンロードエラー
      */
-    public List<S3Object> getS3ObjectList() throws BusinessException {
+    public List<S3Object> getS3ObjectList() throws BaseException {
 
         S3Client s3 = getS3Client();
         try {
@@ -248,10 +247,10 @@ public class AwsS3Component {
      *
      * @param keys
      *     S3キー
-     * @throws BusinessException
+     * @throws BaseException
      *     S3ファイル削除失敗エラー
      */
-    public void removeS3ObjectByKeys(String... keys) throws BusinessException {
+    public void removeS3ObjectByKeys(String... keys) throws BaseException {
 
         S3Client s3 = getS3Client();
 
@@ -279,10 +278,10 @@ public class AwsS3Component {
      * {@linkplain S3Client}を返す
      * 
      * @return S3Client
-     * @throws BusinessException
+     * @throws BaseException
      *     AWSクライアント接続エラー
      */
-    private S3Client getS3Client() throws BusinessException {
+    private S3Client getS3Client() throws BaseException {
 
         try {
 
@@ -319,8 +318,6 @@ public class AwsS3Component {
         NEWS_JSON("news"),
         /** 月次健康情報集計CSV配置キー */
         MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo"),
-        /** Slack接続情報キー */
-        SLACK_CONNECTION_DATA("slack/slack_connection_data.json"),
         /** メモ情報配置キー */
         NOTE_FILE("note"),
         /** 問い合わせキー */

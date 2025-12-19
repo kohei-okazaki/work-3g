@@ -57,6 +57,7 @@
     <module>../ha-root</module>
     <module>../ha-api</module>
     <module>../ha-dashboard</module>
+    <module>../ha-batch</module>
   </modules>
 
   <dependencyManagement>
@@ -156,6 +157,10 @@
     <dependency>
       <groupId>software.amazon.awssdk</groupId>
       <artifactId>sqs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>ssm</artifactId>
     </dependency>
 
     <!-- DB -->
