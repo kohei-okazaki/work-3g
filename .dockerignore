@@ -10,7 +10,7 @@
 .github
 README.md
 
-# 不要なJava以外のプロジェクトを除外
+# 不要なプロジェクトを除外
 ha-asset/
 ha-build/
 ha-docs/

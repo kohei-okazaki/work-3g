@@ -1,7 +1,10 @@
 # Dockerfile.ha-track
-# ha-track (Django REST framework) 用
+# ha-track (Django REST framework) 
 FROM python:3.13.8
 WORKDIR /app
+
+# create log dir
+RUN mkdir -p /var/app/log
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1

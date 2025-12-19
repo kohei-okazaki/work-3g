@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-$xe5g@$zhg=fa8mv3waqymq07%d9i&uiry+434wchbx$f8*ju2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",") if os.getenv("DJANGO_ALLOWED_HOSTS") else []
 
 
 # Application definition
@@ -86,14 +86,15 @@ LOGGING = {
     },
     "handlers": {
         "console": {
-            "level": "DEBUG",  # コンソールにDEBUG以上を出力
+            "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_DIR, "debug.log"),  # debug.logに保存
+            # debug.logに保存
+            "filename": os.path.join("/var/app/log", "debug.log"),
             "formatter": "verbose",
         },
     },
@@ -107,7 +108,7 @@ LOGGING = {
             "level": "INFO",
             "propagate": False,
         },
-        "api": {  # ← アプリ名を指定
+        "api": {
             "handlers": ["console", "file"],
             "level": "DEBUG",
             "propagate": False,
@@ -143,8 +144,9 @@ DATABASES = {
 # アプリケーションで使用するMongoDBの設定
 MONGODB_SETTINGS = {
     "db": "health_db",
-    # ローカルインストール用
+    # ローカル用
     # "host": "mongodb://127.0.0.1:27017/health_db",
+    # Dockerコンテナ用
     "host": "mongodb://mongo:27017/health_db",
     "username": "health_user",
     "password": "hbt4stnsegebg",
@@ -175,7 +177,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'Asia/Tokyo'
+TIME_ZONE = "Asia/Tokyo"
 
 USE_I18N = True
 

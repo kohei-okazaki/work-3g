@@ -13,10 +13,19 @@
 
     <v-row align="center">
       <v-col sm="12">
+        <v-alert text type="error" elevation="2" border="left">
+            MySQLの設定等が必要のため、最新版のDockerローカル環境構築手順書を参照してください。
+        </v-alert>
+      </v-col>
+    </v-row>
+
+    <v-row align="center">
+      <v-col sm="12">
         <v-alert text type="info" elevation="2" border="left">
           <div class="text-subtitle-1">概要</div>
           <div class="text-body-2">
-            ローカル環境の開発構築手順書になります<br />以下の手順に従って環境構築を行って下さい
+            ローカル環境の開発構築手順書になります<br />
+            以下の手順に従って環境構築を行って下さい<br />
           </div>
         </v-alert>
       </v-col>
@@ -760,7 +769,7 @@
                 <p>ha-trackのため、以下のコマンドを実行</p>
                 <ul>
                   <li>pip install --upgrade pip</li>
-                  <li>pip install "Django>=5.2,<6.0"</li>
+                  <li>pip install "Django>=5.2,<6.0"< /li>
                   <li>pip install djangoframework</li>
                 </ul>
               </details>

@@ -16,7 +16,6 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.StringUtil;
@@ -49,12 +48,12 @@ public class AwsSesComponent {
     /** AWS設定ファイル情報 */
     @Autowired
     private AwsProperties awsProps;
-    /** システム設定ファイル情報 */
-    @Autowired
-    private SystemProperties systemProps;
     /** AWS認証情報Component */
     @Autowired
     private AwsAuthComponent auth;
+    /** AWS Systems Manager Component */
+    @Autowired
+    private AwsSystemsManagerComponent ssm;
     /** FreeMarker設定 */
     @Autowired
     private Configuration freemarkerConfig;
@@ -279,7 +278,8 @@ public class AwsSesComponent {
 
             Destination destination = Destination.builder()
                     .toAddresses(to)
-                    .bccAddresses(systemProps.getSystemMailAddress())
+                    .bccAddresses(ssm
+                            .getValue(AwsSystemsManagerComponent.KEY_SYSTEM_MAILADDRESS))
                     .build();
 
             Body body = getBody(templateId, bodyMap);
@@ -289,7 +289,8 @@ public class AwsSesComponent {
                     .build();
 
             SendEmailRequest request = SendEmailRequest.builder()
-                    .source(systemProps.getSystemMailAddress())
+                    .source(ssm
+                            .getValue(AwsSystemsManagerComponent.KEY_SYSTEM_MAILADDRESS))
                     .destination(destination)
                     .message(message)
                     .build();

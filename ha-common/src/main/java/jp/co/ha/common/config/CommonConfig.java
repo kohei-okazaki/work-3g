@@ -100,20 +100,16 @@ public class CommonConfig implements WebMvcConfigurer {
      *     ページング数
      * @param environment
      *     環境
-     * @param systemMailAddress
-     *     システムメールアドレス
      * @return SystemProperties
      */
     @Bean
     SystemProperties systemProperties(
             @Value("${system.paging}") String paging,
-            @Value("${system.env}") String environment,
-            @Value("${system.mailaddress}") String systemMailAddress) {
+            @Value("${system.env}") String environment) {
 
         SystemProperties props = new SystemProperties();
         props.setPaging(paging);
         props.setEnvironment(environment);
-        props.setSystemMailAddress(systemMailAddress);
         return props;
     }
 

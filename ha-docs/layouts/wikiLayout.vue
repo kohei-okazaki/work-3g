@@ -79,6 +79,11 @@ export default {
         },
         {
           icon: "mdi-apps",
+          title: "Docker環境構築手順",
+          to: "/wiki/dockerEnv",
+        },
+        {
+          icon: "mdi-apps",
           title: "ローカル環境構築手順",
           to: "/wiki/localEnv",
         },

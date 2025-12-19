@@ -148,7 +148,11 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @param sqsConnnectionTimeout
      *     SQSコネクションタイムアウト
      * @param sqsSocketTimeout
-     *     SQSソケットタイムアウト
+     *     API通信情報キュー名
+     * @param ssmConnnectionTimeout
+     *     SSMコネクションタイムアウト
+     * @param ssmSocketTimeout
+     *     SSMソケットタイムアウト
      * @return AwsProperties
      */
     @Bean
@@ -162,7 +166,9 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${aws.ses.stubflag}") boolean sesStubFlag,
             @Value("${aws.sqs.queue.api_communication_data}") String apiCommunicationDataQueueName,
             @Value("${aws.sqs.connection.timeout}") int sqsConnnectionTimeout,
-            @Value("${aws.sqs.socket.timeout}") int sqsSocketTimeout) {
+            @Value("${aws.sqs.socket.timeout}") int sqsSocketTimeout,
+            @Value("${aws.ssm.connection.timeout}") int ssmConnnectionTimeout,
+            @Value("${aws.ssm.socket.timeout}") int ssmSocketTimeout) {
 
         AwsProperties props = new AwsProperties();
         props.setRegion(region);
@@ -175,6 +181,8 @@ public class BusinessConfig implements WebMvcConfigurer {
         props.setApiCommunicationDataQueueName(apiCommunicationDataQueueName);
         props.setSqsConnnectionTimeout(sqsConnnectionTimeout);
         props.setSqsSocketTimeout(sqsSocketTimeout);
+        props.setSsmConnnectionTimeout(ssmConnnectionTimeout);
+        props.setSsmSocketTimeout(ssmSocketTimeout);
 
         return props;
     }

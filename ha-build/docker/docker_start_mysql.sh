@@ -5,7 +5,7 @@
 ########################################
 
 # 初期化ファイル読み込み
-. ./initialize.sh
+. ./common.sh
 
 # コンテナ起動
-cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build mysql
+cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up --build mysql
