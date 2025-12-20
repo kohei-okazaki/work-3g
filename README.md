@@ -6,7 +6,7 @@
 
  
 ### **環境図**
-![image](https://github.com/kohei-okazaki/work-3g/issues/423#issuecomment-3419791708)  
+![healthinfo_flow](ha-asset/99_tool/png/healthinfo_flow.png)
 
 
 ## 02_Project構成  
