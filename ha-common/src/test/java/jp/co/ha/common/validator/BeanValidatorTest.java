@@ -1,5 +1,6 @@
 package jp.co.ha.common.validator;
 
+import static jp.co.ha.common.validator.LengthMode.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -8,8 +9,7 @@ import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.RegexType;
-import jp.co.ha.common.validator.annotation.Max;
-import jp.co.ha.common.validator.annotation.Min;
+import jp.co.ha.common.validator.annotation.Length;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 
@@ -50,50 +50,58 @@ public class BeanValidatorTest extends BaseCommonTest {
      * {@linkplain BeanValidator#validate}
      */
     @Test
-    public void minTest() {
+    public void minLengthTest() {
 
         // =を含むケース
         {
-            LOG.debug("#minTest");
-            MinEqualsTestBean bean = new MinEqualsTestBean();
+            LOG.debug("#minLengthTest");
+            MinEqualsLengthTestBean bean = new MinEqualsLengthTestBean();
+            bean.setName("1234");
+
+            ValidateErrorResult result = new BeanValidator<>().validate(bean);
+            assertTrue(result.hasError());
+        }
+        {
+            LOG.debug("#minLengthTest");
+            MinEqualsLengthTestBean bean = new MinEqualsLengthTestBean();
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
             assertFalse(result.hasError());
         }
         {
-            LOG.debug("#minTest");
-            MinEqualsTestBean bean = new MinEqualsTestBean();
+            LOG.debug("#minLengthTest");
+            MinEqualsLengthTestBean bean = new MinEqualsLengthTestBean();
             bean.setName("12");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertTrue(result.hasError());
+            assertFalse(result.hasError());
         }
 
         // =を含まないケース
         {
-            LOG.debug("#minTest");
-            MinTestBean bean = new MinTestBean();
+            LOG.debug("#minLengthTest");
+            MinLengthTestBean bean = new MinLengthTestBean();
             bean.setName("1234");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertFalse(result.hasError());
+            assertTrue(result.hasError());
         }
         {
-            LOG.debug("#minTest");
-            MinTestBean bean = new MinTestBean();
+            LOG.debug("#minLengthTest");
+            MinLengthTestBean bean = new MinLengthTestBean();
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
             assertTrue(result.hasError());
         }
         {
-            LOG.debug("#minTest");
-            MinTestBean bean = new MinTestBean();
+            LOG.debug("#minLengthTest");
+            MinLengthTestBean bean = new MinLengthTestBean();
             bean.setName("12");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertTrue(result.hasError());
+            assertFalse(result.hasError());
         }
     }
 
@@ -101,21 +109,29 @@ public class BeanValidatorTest extends BaseCommonTest {
      * {@linkplain BeanValidator#validate}
      */
     @Test
-    public void maxTest() {
+    public void maxLengthTest() {
 
         // =を含むケース
         {
-            LOG.debug("#maxTest");
-            MaxEqualsTestBean bean = new MaxEqualsTestBean();
+            LOG.debug("#maxLengthTest");
+            MaxEqualsLengthTestBean bean = new MaxEqualsLengthTestBean();
+            bean.setName("1234");
+
+            ValidateErrorResult result = new BeanValidator<>().validate(bean);
+            assertFalse(result.hasError());
+        }
+        {
+            LOG.debug("#maxLengthTest");
+            MaxEqualsLengthTestBean bean = new MaxEqualsLengthTestBean();
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
             assertFalse(result.hasError());
         }
         {
-            LOG.debug("#maxTest");
-            MaxEqualsTestBean bean = new MaxEqualsTestBean();
-            bean.setName("1234");
+            LOG.debug("#maxLengthTest");
+            MaxEqualsLengthTestBean bean = new MaxEqualsLengthTestBean();
+            bean.setName("12");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
             assertTrue(result.hasError());
@@ -123,28 +139,28 @@ public class BeanValidatorTest extends BaseCommonTest {
 
         // =を含まないケース
         {
-            LOG.debug("#maxTest");
-            MaxTestBean bean = new MaxTestBean();
+            LOG.debug("#maxLengthTest");
+            MaxLengthTestBean bean = new MaxLengthTestBean();
             bean.setName("1234");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertTrue(result.hasError());
+            assertFalse(result.hasError());
         }
         {
-            LOG.debug("#maxTest");
-            MaxTestBean bean = new MaxTestBean();
+            LOG.debug("#maxLengthTest");
+            MaxLengthTestBean bean = new MaxLengthTestBean();
             bean.setName("123");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
             assertTrue(result.hasError());
         }
         {
-            LOG.debug("#maxTest");
-            MaxTestBean bean = new MaxTestBean();
+            LOG.debug("#maxLengthTest");
+            MaxLengthTestBean bean = new MaxLengthTestBean();
             bean.setName("12");
 
             ValidateErrorResult result = new BeanValidator<>().validate(bean);
-            assertFalse(result.hasError());
+            assertTrue(result.hasError());
         }
     }
 
@@ -251,14 +267,15 @@ public class BeanValidatorTest extends BaseCommonTest {
     }
 
     /**
-     * MinEqualsTestBean
+     * MinEqualsLengthTestBean<br>
+     * XX以下のテストで使用
      *
      * @version 1.0.0
      */
-    static class MinEqualsTestBean {
+    static class MinEqualsLengthTestBean {
 
         /** name */
-        @Min(size = 3)
+        @Length(length = 3, mode = LESS_EQUAL)
         private String name;
 
         /**
@@ -282,14 +299,15 @@ public class BeanValidatorTest extends BaseCommonTest {
     }
 
     /**
-     * MinTestBean
+     * MinLengthTestBean<br>
+     * XX未満のテストで使用
      *
      * @version 1.0.0
      */
-    static class MinTestBean {
+    static class MinLengthTestBean {
 
         /** name */
-        @Min(size = 3, isEqual = false)
+        @Length(length = 3, mode = LESS_THAN)
         private String name;
 
         /**
@@ -314,14 +332,15 @@ public class BeanValidatorTest extends BaseCommonTest {
     }
 
     /**
-     * MaxEqualsTestBean
+     * MaxEqualsLengthTestBean<br>
+     * XX以上のテストで使用
      *
      * @version 1.0.0
      */
-    static class MaxEqualsTestBean {
+    static class MaxEqualsLengthTestBean {
 
         /** name */
-        @Max(size = 3)
+        @Length(length = 3, mode = GREATER_EQUAL)
         private String name;
 
         /**
@@ -345,14 +364,15 @@ public class BeanValidatorTest extends BaseCommonTest {
     }
 
     /**
-     * MaxTestBean
+     * MaxLengthTestBean<br>
+     * XXより大きいのテストで使用
      *
      * @version 1.0.0
      */
-    static class MaxTestBean {
+    static class MaxLengthTestBean {
 
         /** name */
-        @Max(size = 3, isEqual = false)
+        @Length(length = 3, mode = GREATER_THAN)
         private String name;
 
         /**
