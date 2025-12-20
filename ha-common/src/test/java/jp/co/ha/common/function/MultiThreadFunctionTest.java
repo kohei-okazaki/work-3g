@@ -1,10 +1,10 @@
 package jp.co.ha.common.function;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.function.Consumer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.function.MultiThreadFunction.ResultType;

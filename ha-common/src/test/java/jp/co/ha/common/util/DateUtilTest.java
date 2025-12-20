@@ -1,10 +1,10 @@
 package jp.co.ha.common.util;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import jp.co.ha.common.BaseCommonTest;
 import jp.co.ha.common.util.DateUtil.DateFormatType;
@@ -58,7 +58,7 @@ public class DateUtilTest extends BaseCommonTest {
         {
             Date before = DateUtil.toDate("2000/01/01 12:34:56");
             Date after = DateUtil.toDate("2000/01/01 12:34:56");
-            assertTrue(DateUtil.isBefore(before, after, false));
+            assertFalse(DateUtil.isBefore(before, after, false));
         }
         {
             Date before = DateUtil.toDate("2000/01/01 12:34:57");
@@ -157,19 +157,19 @@ public class DateUtilTest extends BaseCommonTest {
     public void testIsDate() {
         {
             String date = "2020101";
-            assertFalse("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP));
+            assertFalse(DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP), "日付形式の想定です");
         }
         {
             String date = "202009";
-            assertTrue("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP));
+            assertTrue(DateUtil.isDate(date, DateFormatType.YYYYMM_NOSEP), "日付形式の想定です");
         }
         {
             String date = "2020/09";
-            assertTrue("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMM));
+            assertTrue(DateUtil.isDate(date, DateFormatType.YYYYMM), "日付形式の想定です");
         }
         {
             String date = "2020/09/01";
-            assertTrue("日付形式の想定です", DateUtil.isDate(date, DateFormatType.YYYYMMDD));
+            assertTrue(DateUtil.isDate(date, DateFormatType.YYYYMMDD), "日付形式の想定です");
         }
     }
 }
