@@ -14,7 +14,7 @@ import jakarta.validation.Payload;
 import jp.co.ha.common.validator.MaxValidator;
 
 /**
- * 最大桁数の妥当性チェックアノテーション
+ * 最大値の妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MaxValidator
  * @version 1.0.0

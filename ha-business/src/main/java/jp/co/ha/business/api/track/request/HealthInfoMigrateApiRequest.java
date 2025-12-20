@@ -25,6 +25,9 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
     /** 健康情報リスト */
     @JsonProperty("health_infos")
     private List<HealthInfo> healthInfoList;
+    /** 健康情報蓄積APIDB移行フラグ */
+    @JsonProperty("migrate_flg")
+    private boolean migrateFlg;
 
     /**
      * ユーザIDを返す
@@ -62,6 +65,25 @@ public class HealthInfoMigrateApiRequest extends BaseTrackApiRequest
      */
     public void setHealthInfoList(List<HealthInfo> healthInfoList) {
         this.healthInfoList = healthInfoList;
+    }
+
+    /**
+     * 健康情報蓄積APIDB移行フラグを返す
+     * 
+     * @return migrateFlg
+     */
+    public boolean getMigrateFlg() {
+        return migrateFlg;
+    }
+
+    /**
+     * 健康情報蓄積APIDB移行フラグを設定する
+     * 
+     * @param migrateFlg
+     *     健康情報蓄積APIDB移行フラグ
+     */
+    public void setMigrateFlg(boolean migrateFlg) {
+        this.migrateFlg = migrateFlg;
     }
 
     /**
