@@ -21,11 +21,12 @@ import jp.co.ha.common.log.LoggerFactory;
 @TestPropertySource(locations = {
         "classpath:local/crypt.properties",
         "classpath:local/jdbc.properties",
-        "classpath:local/system.properties" }, properties = {
-                "jdbc.url=jdbc:mysql://localhost:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo",
-                "jdbc.username=app_user",
-                "jdbc.password=app_password"
-        })
+        "classpath:local/system.properties"
+}, properties = {
+        "jdbc.url=jdbc:mysql://localhost:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo",
+        "jdbc.username=app_user",
+        "jdbc.password=app_password"
+})
 public abstract class BaseCommonTest {
 
     /** LOG */

@@ -14,7 +14,22 @@ import jp.co.ha.common.log.LoggerFactory;
  * @version 1.0.0
  */
 @ExtendWith(SpringExtension.class)
-public class BaseBusinessTest {
+// @SpringJUnitConfig(classes = {
+// CommonConfig.class,
+// DbConfig.class,
+// BusinessConfig.class })
+// @TestPropertySource(locations = {
+// "classpath:local/crypt.properties",
+// "classpath:local/jdbc.properties",
+// "classpath:local/system.properties",
+// "classpath:local/healthinfo.properties",
+// "classpath:local/aws.properties"
+// }, properties = {
+// "jdbc.url=jdbc:mysql://localhost:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo",
+// "jdbc.username=app_user",
+// "jdbc.password=app_password"
+// })
+public abstract class BaseBusinessTest {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BaseBusinessTest.class);
