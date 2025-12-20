@@ -14,7 +14,7 @@ import jakarta.validation.Payload;
 import jp.co.ha.common.validator.MinValidator;
 
 /**
- * 最小桁数の妥当性チェックアノテーション
+ * 最小値の妥当性チェックアノテーション
  *
  * @see jp.co.ha.common.validator.MinValidator
  * @version 1.0.0

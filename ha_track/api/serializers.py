@@ -8,18 +8,23 @@ class HealthInfoItemSerializer(serializers.Serializer):
     健康情報シリアライザー
     """
 
+    # 健康情報ID
     seq_health_info_id = serializers.IntegerField(label="健康情報ID", required=True)
+    # 身長
     height = serializers.FloatField(label="身長", required=True)
+    # 体重
     weight = serializers.FloatField(label="体重", required=True)
+    # BMI
     bmi = serializers.FloatField(label="BMI", required=True)
+    # 標準体重
     standard_weight = serializers.FloatField(label="標準体重", required=True)
+    # 健康情報作成日時
     created_at = serializers.CharField(label="健康情報作成日時", required=True)
 
     def validate_created_at(self, value: str):
-        """created_at のバリデーション
-
-        Args:
-            value (str): created_at の値
+        """
+        created_at のバリデーション
+        @param value: 入力値
         """
         if not value:
             return None
@@ -41,5 +46,11 @@ class HealthInfoPayloadSerializer(serializers.Serializer):
     健康情報データ部シリアライザー
     """
 
+    # ユーザID
     seq_user_id = serializers.IntegerField(label="ユーザID", required=True)
-    health_infos = HealthInfoItemSerializer(label="健康情報リスト",many=True)
+    # 健康情報リスト
+    health_infos = HealthInfoItemSerializer(label="健康情報リスト", many=True)
+    # DynamoDB移行フラグ
+    migrate_flg = serializers.BooleanField(
+        label="DynamoDB移行フラグ", required=False, default=False
+    )

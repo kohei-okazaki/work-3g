@@ -1,12 +1,12 @@
 package jp.co.ha.common.util;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import jp.co.ha.common.BaseCommonTest;
 
@@ -15,7 +15,7 @@ import jp.co.ha.common.BaseCommonTest;
  *
  * @version 1.0.0
  */
-public class MapUtilTest  extends BaseCommonTest {
+public class MapUtilTest extends BaseCommonTest {
 
     /**
      * {@linkplain MapUtil#isEmpty(Map)}

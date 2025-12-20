@@ -11,7 +11,10 @@ from mongoengine import (
 
 
 class HealthInfo(Document):
-    # 健康情報モデル
+    """
+    健康情報モデル
+    """
+
     meta = {
         "collection": "health_info",
         "indexes": [
@@ -42,7 +45,10 @@ class HealthInfo(Document):
 
 
 class HealthTrackLog(Document):
-    # 健康追跡ログモデル
+    """
+    健康追跡ログモデル
+    """
+
     meta = {
         "collection": "health_track_log",
         "indexes": [
