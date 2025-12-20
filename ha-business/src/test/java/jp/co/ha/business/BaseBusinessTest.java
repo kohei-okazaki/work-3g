@@ -1,26 +1,35 @@
 package jp.co.ha.business;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.system.BeanLoader;
 
 /**
  * 基底Businessテストクラス
  *
  * @version 1.0.0
  */
-@ContextConfiguration(locations = { "classpath:common-context.xml",
-        "classpath:db-context.xml", "classpath:web-context.xml",
-        "classpath:business-context.xml" })
-@RunWith(SpringJUnit4ClassRunner.class)
-public class BaseBusinessTest {
+@ExtendWith(SpringExtension.class)
+// @SpringJUnitConfig(classes = {
+// CommonConfig.class,
+// DbConfig.class,
+// BusinessConfig.class })
+// @TestPropertySource(locations = {
+// "classpath:local/crypt.properties",
+// "classpath:local/jdbc.properties",
+// "classpath:local/system.properties",
+// "classpath:local/healthinfo.properties",
+// "classpath:local/aws.properties"
+// }, properties = {
+// "jdbc.url=jdbc:mysql://localhost:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo",
+// "jdbc.username=app_user",
+// "jdbc.password=app_password"
+// })
+public abstract class BaseBusinessTest {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BaseBusinessTest.class);
@@ -28,18 +37,15 @@ public class BaseBusinessTest {
     /**
      * before
      */
-    @Before
+    @BeforeEach
     public void before() {
         LOG.debug("BaseBusinessTest#before");
-        BeanLoader.setContext(new ClassPathXmlApplicationContext(
-                new String[] { "classpath:common-context.xml", "classpath:db-context.xml",
-                        "classpath:web-context.xml", "classpath:business-context.xml" }));
     }
 
     /**
      * after
      */
-    @After
+    @AfterEach
     public void after() {
         LOG.debug("BaseBusinessTest#after");
     }

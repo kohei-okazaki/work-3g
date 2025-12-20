@@ -96,6 +96,8 @@ public class BusinessConfig implements WebMvcConfigurer {
      *     管理者用APIの基底URL
      * @param trackApiUrl
      *     健康情報蓄積APIの基底URL
+     * @param trackApiDbMigrateFlg
+     *     健康情報蓄積API DB移行フラグ
      * @param monthlySummaryBatchFilePath
      *     月次健康情報集計バッチCSV格納パス
      * @return HealthInfoProperties
@@ -110,6 +112,7 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${healthinfo.api.url}") String healthInfoApiUrl,
             @Value("${root.api.url}") String rootApiUrl,
             @Value("${healthinfo.track.api.url}") String trackApiUrl,
+            @Value("${healthinfo.track.api.db.migrate.flg}") boolean trackApiDbMigrateFlg,
             @Value("${healthinfo.monthly.summary.batch.file.path}") String monthlySummaryBatchFilePath) {
 
         HealthInfoProperties props = new HealthInfoProperties();
@@ -121,6 +124,7 @@ public class BusinessConfig implements WebMvcConfigurer {
         props.setHealthInfoApiUrl(healthInfoApiUrl);
         props.setRootApiUrl(rootApiUrl);
         props.setTrackApiUrl(trackApiUrl);
+        props.setTrackApiDbMigrateFlg(trackApiDbMigrateFlg);
         props.setMonthlySummaryBatchFilePath(monthlySummaryBatchFilePath);
 
         return props;

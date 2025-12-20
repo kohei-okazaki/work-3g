@@ -1,3 +1,4 @@
 Django==4.2.27
 djangorestframework
 mongoengine
+boto3

@@ -170,6 +170,7 @@ services:
       DJANGO_ALLOWED_HOSTS: "ha-track,localhost,127.0.0.1"
     volumes:
       - ./ha_track:/app
+      - ~/.aws:/root/.aws:ro
     command: bash -lc "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8086"
     depends_on:
       mysql:

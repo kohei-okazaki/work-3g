@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import jp.co.ha.business.BaseBusinessTest;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
+import jp.co.ha.business.healthInfo.service.impl.HealthInfoCalcServiceImpl;
 import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
 
 /**
@@ -16,11 +19,12 @@ import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
  *
  * @version 1.0.0
  */
+@ExtendWith(MockitoExtension.class)
 public class HealthInfoCalcServiceTest extends BaseBusinessTest {
 
     /** 健康情報計算サービス */
-    @Autowired
-    private HealthInfoCalcService service;
+    @InjectMocks
+    private HealthInfoCalcServiceImpl service;
 
     /**
      * {@linkplain HealthInfoCalcService#getHealthInfoStatus}
