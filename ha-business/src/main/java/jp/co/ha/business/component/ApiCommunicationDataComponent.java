@@ -224,6 +224,7 @@ public class ApiCommunicationDataComponent {
         entity.setHttpStatus(payload.getHttpStatus());
         entity.setDetail(payload.getDetail());
         entity.setResponseDate(payload.getResponseDate());
+        entity.setDeleteFlag(false);
 
         // DB登録
         createService.create(entity);

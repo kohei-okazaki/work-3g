@@ -27,6 +27,8 @@ public class HealthInfoProperties {
     private String rootApiUrl;
     /** 健康情報蓄積APIの基底URL */
     private String trackApiUrl;
+    /** 健康情報蓄積API DB移行フラグ */
+    private boolean trackApiDbMigrateFlg;
     /** 月次健康情報集計バッチCSV格納パス */
     private String monthlySummaryBatchFilePath;
 
@@ -190,6 +192,35 @@ public class HealthInfoProperties {
      */
     public void setTrackApiUrl(String trackApiUrl) {
         this.trackApiUrl = trackApiUrl;
+    }
+
+    /**
+     * 健康情報蓄積APIDB移行フラグを返す
+     * 
+     * @return trackApiDbMigrateFlg
+     */
+    public boolean isTrackApiDbMigrateFlg() {
+        return trackApiDbMigrateFlg;
+    }
+
+    /**
+     * 健康情報蓄積APIDB移行フラグを設定する
+     * 
+     * @param trackApiDbMigrateFlg
+     *     健康情報蓄積APIDB移行フラグ
+     */
+    public void setTrackApiDbMigrateFlg(boolean trackApiDbMigrateFlg) {
+        this.trackApiDbMigrateFlg = trackApiDbMigrateFlg;
+    }
+
+    /**
+     * 健康情報蓄積APIDB移行フラグを設定する
+     * 
+     * @param trackApiDbMigrateFlg
+     *     健康情報蓄積APIDB移行フラグ
+     */
+    public void setTrackApiDbMigrateFlg(String trackApiDbMigrateFlg) {
+        this.trackApiDbMigrateFlg = Boolean.valueOf(trackApiDbMigrateFlg);
     }
 
     /**
