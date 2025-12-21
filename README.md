@@ -4,9 +4,8 @@
 ## 01_環境構築手順  
 [環境構築手順](http://healthinfo-app-docs.s3-website-ap-northeast-1.amazonaws.com/wiki/localEnv)を参考にローカル環境構築を行う  
 
- 
 ### 健康情報登録フロー
-![image](https://github.com/kohei-okazaki/work-3g/issues/423#issuecomment-3419791708)  
+![healthinfo_flow](ha-asset/99_tool/png/healthinfo_flow.png)
 
 ## 02_Project構成  
 * ### ha-api  
