@@ -7,7 +7,6 @@
 ### 健康情報登録フロー
 ![healthinfo_flow](ha-asset/99_tool/png/healthinfo_flow.png)
 
-
 ## 02_Project構成  
 * ### ha-api  
 健康管理のAPI。  
