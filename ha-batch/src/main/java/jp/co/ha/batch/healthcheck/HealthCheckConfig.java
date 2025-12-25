@@ -20,7 +20,7 @@ import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
 
 /**
- * ヘルスチェックバッチのConfig
+ * ヘルスチェックバッチConfig
  * 
  * @version 1.0.0
  */

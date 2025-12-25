@@ -21,7 +21,7 @@ import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報連携バッチのConfig
+ * 健康情報連携バッチConfig
  * 
  * @version 1.0.0
  */
@@ -55,11 +55,11 @@ public class HealthInfoMigrateConfig extends BatchConfig {
      * 健康情報連携バッチSTEP
      * 
      * @param reader
-     *     健康情報連携処理-Reader
+     *     Reader
      * @param processor
-     *     健康情報連携処理-Proccesor
+     *     Proccesor
      * @param writer
-     *     健康情報連携処理-Writer
+     *     Writer
      * @param jobRepository
      *     JobRepository
      * @param transactionManager

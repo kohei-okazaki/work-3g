@@ -20,7 +20,7 @@ import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 
 /**
- * 健康情報一括登録バッチのConfig
+ * 健康情報一括登録バッチConfig
  * 
  * @version 1.0.0
  */
@@ -53,11 +53,11 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
      * 健康情報一括登録バッチSTEP
      * 
      * @param reader
-     *     健康情報一括登録-Reader
+     *     Reader
      * @param processor
-     *     健康情報一括登録-Proccesor
+     *     Proccesor
      * @param writer
-     *     健康情報一括登録-Writer
+     *     Writer
      * @param jobRepository
      *     JobRepository
      * @param transactionManager

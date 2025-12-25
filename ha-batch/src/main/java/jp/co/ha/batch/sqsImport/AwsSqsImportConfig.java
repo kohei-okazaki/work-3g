@@ -18,7 +18,7 @@ import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
 
 /**
- * AWS SQS取込バッチのConfig
+ * AWS SQS取込バッチConfig
  * 
  * @version 1.0.0
  */
@@ -52,13 +52,13 @@ public class AwsSqsImportConfig extends BatchConfig {
     }
 
     /**
-     * AWS SQS取込STEP
+     * AWS SQS取込バッチSTEP
      * 
      * @param jobRepository
      *     jobRepository
      * @param transactionManager
      *     transactionManager
-     * @return AWS SQS取込STEP
+     * @return AWS SQS取込バッチSTEP
      */
     @Bean(AWS_SQS_IMPORT_BATCH_STEP_NAME)
     Step awsSqsImportBatchStep(JobRepository jobRepository,
