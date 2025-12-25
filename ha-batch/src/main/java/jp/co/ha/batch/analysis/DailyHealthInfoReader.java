@@ -1,4 +1,4 @@
-package jp.co.ha.batch.monthlyHealthInfoSummary;
+package jp.co.ha.batch.analysis;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -19,17 +19,17 @@ import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.mapper.composite.CommonHealthInfoMapper;
 
 /**
- * 月次健康情報集計処理-Reader
+ * 日次健康情報データ分析連携バッチ-Reader
  * 
  * @version 1.0.0
  */
 @Component
 @StepScope
-public class MonthlyHealthInfoSummaryReader extends MyBatisPagingItemReader<HealthInfo> {
+public class DailyHealthInfoReader extends MyBatisPagingItemReader<HealthInfo> {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory
-            .getLogger(MonthlyHealthInfoSummaryReader.class);
+            .getLogger(DailyHealthInfoReader.class);
 
     /**
      * コンストラクタ
@@ -37,26 +37,26 @@ public class MonthlyHealthInfoSummaryReader extends MyBatisPagingItemReader<Heal
      * @param sqlSessionFactory
      *     SqlSessionFactory
      * @param targetDate
-     *     処理対象年月
+     *     処理対象年月日
      * @param batchProperties
      *     バッチプロパティファイル
      */
-    public MonthlyHealthInfoSummaryReader(SqlSessionFactory sqlSessionFactory,
-            @Value("#{jobParameters[m]}") String targetDate,
+    public DailyHealthInfoReader(SqlSessionFactory sqlSessionFactory,
+            @Value("#{jobParameters[d]}") String targetDate,
             BatchProperties batchProperties) {
 
-        // 検索対象年月(YYYYMM)
+        // 検索対象年月(YYYYMMDD)
         String date = StringUtil.isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMM_NOSEP)
+                        DateFormatType.YYYYMMDD_NOSEP)
                 : targetDate;
         LOG.debug("targetDate=" + date);
 
         int year = Integer.parseInt(date.substring(0, 4));
-        int month = Integer.parseInt(date.substring(4));
-        LocalDateTime from = LocalDateTime.of(year, month, 1, 0, 0, 0);
-        LocalDateTime to = LocalDateTime.of(year, month,
-                DateTimeUtil.getLastDayOfMonth(from), 23, 59, 59);
+        int month = Integer.parseInt(date.substring(4, 6));
+        int day = Integer.parseInt(date.substring(6));
+        LocalDateTime from = LocalDateTime.of(year, month, day, 0, 0, 0);
+        LocalDateTime to = LocalDateTime.of(year, month, day, 23, 59, 59);
         LOG.debug("from=" + from + ", to=" + to);
 
         setSqlSessionFactory(sqlSessionFactory);

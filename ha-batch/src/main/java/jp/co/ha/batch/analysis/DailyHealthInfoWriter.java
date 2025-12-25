@@ -1,4 +1,4 @@
-package jp.co.ha.batch.monthlyHealthInfoSummary;
+package jp.co.ha.batch.analysis;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
-import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
+import jp.co.ha.business.io.file.csv.model.DailyHealthInfoCsvModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -34,9 +34,9 @@ import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * 月次健康情報集計処理-Writer<br>
+ * 日次健康情報データ分析連携バッチ-Writer<br>
  * <ul>
- * <li>月次健康情報集計CSV作成</li>
+ * <li>日次健康情報CSV作成</li>
  * <li>S3アップロード</li>
  * <li>Slack通知</li>
  * </ul>
@@ -45,19 +45,16 @@ import jp.co.ha.common.util.StringUtil;
  */
 @Component
 @StepScope
-public class MonthlyHealthInfoSummaryWriter
-        extends FlatFileItemWriter<MonthlyHealthInfoSummaryModel>
+public class DailyHealthInfoWriter extends FlatFileItemWriter<DailyHealthInfoCsvModel>
         implements StepExecutionListener {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory
-            .getLogger(MonthlyHealthInfoSummaryWriter.class);
+            .getLogger(DailyHealthInfoWriter.class);
     /** CSV項目名配列 */
-    private static final String[] COLUMN_NAME_ARRAY = new String[] {
+    private static final String[] COLUMN_NAME_ARRAY = new String[] { "seqHealthInfoId",
             "seqUserId", "height", "weight", "bmi", "standardWeight",
-            "healthInfoRegDate", "seqBmiRangeMtId", "updateDate",
-            "regDate"
-    };
+            "healthInfoRegDate" };
     /** 健康情報設定ファイル */
     private HealthInfoProperties prop;
     /** AWS-S3 Component */
@@ -81,13 +78,13 @@ public class MonthlyHealthInfoSummaryWriter
      * @param slack
      *     Slack Component
      * @param targetDate
-     *     処理対象年月
+     *     処理対象年月日
      */
-    public MonthlyHealthInfoSummaryWriter(
+    public DailyHealthInfoWriter(
             HealthInfoProperties prop,
             AwsS3Component s3,
             SlackApiComponent slack,
-            @Value("#{jobParameters[m]}") String targetDate) {
+            @Value("#{jobParameters[d]}") String targetDate) {
 
         this.prop = prop;
         this.s3 = s3;
@@ -172,15 +169,15 @@ public class MonthlyHealthInfoSummaryWriter
      */
     private void init() {
 
-        setName("monthlyHealthInfoSummaryWriter");
+        setName("dailyHealthInfoWriter");
         setAppendAllowed(false);
         setShouldDeleteIfExists(true);
         setSaveState(true);
 
-        BeanWrapperFieldExtractor<MonthlyHealthInfoSummaryModel> extractor = new BeanWrapperFieldExtractor<>();
+        BeanWrapperFieldExtractor<DailyHealthInfoCsvModel> extractor = new BeanWrapperFieldExtractor<>();
         extractor.setNames(COLUMN_NAME_ARRAY);
 
-        DelimitedLineAggregator<MonthlyHealthInfoSummaryModel> aggregator = new DelimitedLineAggregator<>();
+        DelimitedLineAggregator<DailyHealthInfoCsvModel> aggregator = new DelimitedLineAggregator<>();
         aggregator.setDelimiter(StringUtil.COMMA);
         aggregator.setFieldExtractor(extractor);
 

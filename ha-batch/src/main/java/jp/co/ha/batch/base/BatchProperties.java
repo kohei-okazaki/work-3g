@@ -25,6 +25,12 @@ public class BatchProperties {
     /** データパージプロパティクラスリスト */
     private List<DataPurge> dataPurgeList;
 
+    /** 日次健康情報データ分析連携バッチプロパティクラス */
+    private DailyHealthInfoAnalysis dailyHealthInfoAnalysis;
+
+    /** 日次ユーザ情報データ分析連携バッチプロパティクラス */
+    private DailyUserAnalysis dailyUserAnalysis;
+
     /**
      * 健康情報連携バッチプロパティクラスを返す
      * 
@@ -84,6 +90,45 @@ public class BatchProperties {
     }
 
     /**
+     * 日次健康情報データ分析連携バッチプロパティクラスを返す
+     * 
+     * @return dailyHealthInfoAnalysis
+     */
+    public DailyHealthInfoAnalysis getDailyHealthInfoAnalysis() {
+        return dailyHealthInfoAnalysis;
+    }
+
+    /**
+     * 日次健康情報データ分析連携バッチプロパティクラスを設定する
+     * 
+     * @param dailyHealthInfoAnalysis
+     *     日次健康情報データ分析連携バッチプロパティクラス
+     */
+    public void setDailyHealthInfoAnalysis(
+            DailyHealthInfoAnalysis dailyHealthInfoAnalysis) {
+        this.dailyHealthInfoAnalysis = dailyHealthInfoAnalysis;
+    }
+
+    /**
+     * 日次ユーザ情報データ分析連携バッチプロパティクラスを返す
+     * 
+     * @return dailyUserAnalysis
+     */
+    public DailyUserAnalysis getDailyUserAnalysis() {
+        return dailyUserAnalysis;
+    }
+
+    /**
+     * 日次ユーザ情報データ分析連携バッチプロパティクラスを設定する
+     * 
+     * @param dailyUserAnalysis
+     *     日次ユーザ情報データ分析連携バッチプロパティクラス
+     */
+    public void setDailyUserAnalysis(DailyUserAnalysis dailyUserAnalysis) {
+        this.dailyUserAnalysis = dailyUserAnalysis;
+    }
+
+    /**
      * 健康情報連携バッチプロパティクラス
      * 
      * @version 1.0.0
@@ -119,6 +164,66 @@ public class BatchProperties {
      * @version 1.0.0
      */
     public static class MonthlyHealthInfoSummary {
+
+        /** 実行カウント */
+        private int execPerpageCount;
+
+        /**
+         * 実行カウントを返す
+         * 
+         * @return execPerpageCount
+         */
+        public int getExecPerpageCount() {
+            return execPerpageCount;
+        }
+
+        /**
+         * 実行カウントを設定する
+         * 
+         * @param execPerpageCount
+         *     実行カウント
+         */
+        public void setExecPerpageCount(int execPerpageCount) {
+            this.execPerpageCount = execPerpageCount;
+        }
+    }
+
+    /**
+     * 日次健康情報データ分析連携バッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class DailyHealthInfoAnalysis {
+
+        /** 実行カウント */
+        private int execPerpageCount;
+
+        /**
+         * 実行カウントを返す
+         * 
+         * @return execPerpageCount
+         */
+        public int getExecPerpageCount() {
+            return execPerpageCount;
+        }
+
+        /**
+         * 実行カウントを設定する
+         * 
+         * @param execPerpageCount
+         *     実行カウント
+         */
+        public void setExecPerpageCount(int execPerpageCount) {
+            this.execPerpageCount = execPerpageCount;
+        }
+    }
+
+    /**
+     * 日次ユーザ情報データ分析連携バッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class DailyUserAnalysis {
 
         /** 実行カウント */
         private int execPerpageCount;

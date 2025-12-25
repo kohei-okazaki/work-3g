@@ -6,11 +6,17 @@ import java.util.List;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 連携用健康情報Mapper
+ * 健康情報取得共通Mapper<br>
+ * 以下の機能で呼び出しを想定<br>
+ * <ul>
+ * <li>健康情報連携バッチ</li>
+ * <li>月次健康情報集計バッチ</li>
+ * <li>日次健康情報データ分析連携バッチ</li>
+ * </ul>
  * 
  * @version 1.0.0
  */
-public interface MigrateHealthInfoMapper {
+public interface CommonHealthInfoMapper {
 
     /**
      * 連携用健康情報リストを検索する

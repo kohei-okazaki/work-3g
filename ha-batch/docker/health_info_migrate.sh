@@ -9,7 +9,7 @@
 # 
 # input: MySQL-HEALTH_INFO
 # 
-# output: mongoDB-health_info,health_track_log
+# output: DynamoDB-health_info
 # ----------------------------------------------------------------------------------------
 
 echo "------------------------------------------------------------------------"

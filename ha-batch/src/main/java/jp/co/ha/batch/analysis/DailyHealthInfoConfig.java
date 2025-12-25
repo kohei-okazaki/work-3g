@@ -1,4 +1,4 @@
-package jp.co.ha.batch.monthlyHealthInfoSummary;
+package jp.co.ha.batch.analysis;
 
 import static jp.co.ha.batch.base.BatchConfigConst.*;
 
@@ -15,45 +15,44 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
-import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
+import jp.co.ha.business.io.file.csv.model.DailyHealthInfoCsvModel;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 月次健康情報集計バッチConfig<br>
+ * 日次健康情報データ分析連携バッチConfig<br>
  * <ul>
- * <li>引数1=処理対象年月(YYYYMM)</li>
+ * <li>引数1=処理対象年月日(YYYYMMDD)</li>
  * </ul>
  * 
  * @version 1.0.0
  */
 @Configuration
-public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
+public class DailyHealthInfoConfig extends BatchConfig {
 
     /**
-     * 月次健康情報集計バッチJOB
-     *
+     * 日次健康情報データ分析連携バッチJOB
+     * 
      * @param jobRepository
      *     JobRepository
-     * @param monthlyHealthInfoSummaryBatchStep
-     *     月次健康情報集計バッチSTEP
+     * @param dailyHealthInfoMigrateStep
+     *     日次健康情報データ分析連携バッチSTEP
      * @param listener
      *     BatchJobListener
-     * @return 月次健康情報集計バッチJOB
+     * @return 日次健康情報データ分析連携バッチJOB
      */
-    @Bean(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME)
-    Job monthlyHealthInfoSummaryBatchJob(JobRepository jobRepository,
-            @Qualifier(MONTHLY_HEALTH_INFO_SUMMARY_BACTH_STEP_NAME) Step monthlyHealthInfoSummaryBatchStep,
+    Job dailyHealthInfoMigrateJob(JobRepository jobRepository,
+            @Qualifier(DAILY_HEALTH_INFO_STEP_NAME) Step dailyHealthInfoMigrateStep,
             BatchJobListener listener) {
-        return new JobBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME, jobRepository)
+        return new JobBuilder(DAILY_HEALTH_INFO_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new MonthlyHealthInfoSummaryValidator())
+                .validator(new DailyHealthInfoValidator())
                 .listener(listener)
-                .start(monthlyHealthInfoSummaryBatchStep)
+                .start(dailyHealthInfoMigrateStep)
                 .build();
     }
 
     /**
-     * 月次健康情報集計バッチSTEP
+     * 日次健康情報データ分析連携バッチSTEP
      * 
      * @param reader
      *     Reader
@@ -65,17 +64,17 @@ public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
      *     JobRepository
      * @param transactionManager
      *     PlatformTransactionManager
-     * @return 月次健康情報集計バッチSTEP
+     * @return 日次健康情報データ分析連携バッチSTEP
      */
-    @Bean(MONTHLY_HEALTH_INFO_SUMMARY_BACTH_STEP_NAME)
-    Step monthlyHealthInfoSummaryBatchStep(
-            MonthlyHealthInfoSummaryReader reader,
-            MonthlyHealthInfoSummaryProcessor processor,
-            MonthlyHealthInfoSummaryWriter writer,
+    @Bean(DAILY_HEALTH_INFO_STEP_NAME)
+    Step dailyHealthInfoMigrateStep(
+            DailyHealthInfoReader reader,
+            DailyHealthInfoProcessor processor,
+            DailyHealthInfoWriter writer,
             JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BACTH_STEP_NAME, jobRepository)
-                .<HealthInfo, MonthlyHealthInfoSummaryModel> chunk(1, transactionManager)
+        return new StepBuilder(DAILY_HEALTH_INFO_STEP_NAME, jobRepository)
+                .<HealthInfo, DailyHealthInfoCsvModel> chunk(1, transactionManager)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)

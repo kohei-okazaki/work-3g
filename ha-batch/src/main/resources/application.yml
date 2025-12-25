@@ -34,3 +34,7 @@ ha-batch:
   data-purge-list:
     - table-name: user
       expired: 10
+  daily-health-info-analysis:
+    exec-perpage-count: 1000
+  daily-user-analysis:
+    exec-perpage-count: 1000

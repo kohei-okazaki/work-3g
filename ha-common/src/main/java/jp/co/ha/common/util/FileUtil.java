@@ -1,11 +1,13 @@
 package jp.co.ha.common.util;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
@@ -14,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -122,6 +125,31 @@ public class FileUtil {
             LOG.error("Zipへの圧縮に失敗しました destFile:" + destFilePath, e);
         }
         return new File(destFilePath);
+    }
+
+    /**
+     * gzip形式に圧縮する
+     * 
+     * @param inputFile
+     *     入力ファイル
+     * @param outputFile
+     *     出力ファイル
+     * @throws IOException
+     *     圧縮処理に失敗した場合
+     */
+    public static void compressGZip(Path inputFile, Path outputFile) throws IOException {
+        try (InputStream is = Files.newInputStream(inputFile);
+                OutputStream os = Files.newOutputStream(outputFile);
+                BufferedOutputStream bos = new BufferedOutputStream(os);
+                GZIPOutputStream gzipos = new GZIPOutputStream(bos)) {
+
+            byte[] buf = new byte[1024 * 1024];
+            int len;
+            while ((len = is.read(buf)) != -1) {
+                gzipos.write(buf, 0, len);
+            }
+            gzipos.finish();
+        }
     }
 
     /**
