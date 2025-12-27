@@ -14,8 +14,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.ha.batch.base.BatchConfig;
+import jp.co.ha.batch.base.DateFormatParameterValidator;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.business.io.file.csv.model.DailyHealthInfoCsvModel;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -45,7 +47,8 @@ public class DailyHealthInfoConfig extends BatchConfig {
             BatchJobListener listener) {
         return new JobBuilder(DAILY_HEALTH_INFO_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new DailyHealthInfoValidator())
+                .validator(new DateFormatParameterValidator("d",
+                        DateFormatType.YYYYMMDD_NOSEP, false))
                 .listener(listener)
                 .start(dailyHealthInfoMigrateStep)
                 .build();

@@ -14,8 +14,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.ha.batch.base.BatchConfig;
+import jp.co.ha.batch.base.DateFormatParameterValidator;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -46,7 +48,8 @@ public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
             BatchJobListener listener) {
         return new JobBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new MonthlyHealthInfoSummaryValidator())
+                .validator(new DateFormatParameterValidator("m",
+                        DateFormatType.YYYYMM_NOSEP, false))
                 .listener(listener)
                 .start(monthlyHealthInfoSummaryBatchStep)
                 .build();
