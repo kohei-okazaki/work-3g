@@ -37,6 +37,8 @@ ha-batch:
   daily-health-info-analysis:
     exec-perpage-count: 1000
     temp-dir-path: /home/admin/daily/healthinfo/
+    file-name: healthinfo
   daily-user-analysis:
     exec-perpage-count: 1000
     temp-dir-path: /home/admin/daily/user/
+    file-name: user

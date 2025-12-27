@@ -34,9 +34,9 @@ check_result() {
   fi
 }
 
-cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.${ENV}.yml run --rm ha-batch --spring.batch.job.name=dailyUserInfoJob d=${DATE_OPTION_VALUE}
+cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.${ENV}.yml run --rm ha-batch --spring.batch.job.name=dailyUserJob d=${DATE_OPTION_VALUE}
 result=$?
-check_result "dailyUserInfoJob" ${result}
+check_result "dailyUserJob" ${result}
 
 
 echo "------------------------------------------------------------------------"

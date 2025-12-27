@@ -1,4 +1,4 @@
-package jp.co.ha.batch.healthInfoMigrate;
+package jp.co.ha.batch.analysis;
 
 import static jp.co.ha.batch.base.BatchConfigConst.*;
 
@@ -12,18 +12,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestClientException;
 
 import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.base.DateFormatParameterValidator;
 import jp.co.ha.batch.listener.BatchJobListener;
-import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
+import jp.co.ha.business.io.file.csv.model.DailyUserCsvModel;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
-import jp.co.ha.db.entity.HealthInfo;
+import jp.co.ha.db.entity.composite.CompositeUser;
 
 /**
- * 健康情報連携バッチConfig<br>
+ * 日次ユーザ情報データ分析連携バッチConfig<br>
  * <ul>
  * <li>引数1=処理対象年月日(YYYYMMDD)</li>
  * </ul>
@@ -31,37 +29,37 @@ import jp.co.ha.db.entity.HealthInfo;
  * @version 1.0.0
  */
 @Configuration
-public class HealthInfoMigrateConfig extends BatchConfig {
+public class DailyUserConfig extends BatchConfig {
 
     /** オプション-d */
     private static final String OPTION_D = "d";
 
     /**
-     * 健康情報連携バッチJOB
+     * 日次ユーザ情報データ分析連携バッチJOB
      * 
      * @param jobRepository
      *     JobRepository
-     * @param healthInfoMigrateBatchStep
-     *     健康情報連携バッチSTEP
+     * @param dailyUserStep
+     *     日次ユーザ情報データ分析連携バッチSTEP
      * @param listener
      *     BatchJobListener
-     * @return 健康情報連携バッチJOB
+     * @return 日次ユーザ情報データ分析連携バッチJOB
      */
-    @Bean(HEALTH_INFO_MIGRATE_BATCH_JOB_NAME)
-    Job healthInfoMigrateBatchJob(JobRepository jobRepository,
-            @Qualifier(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME) Step healthInfoMigrateBatchStep,
+    @Bean(DAILY_USER_JOB_NAME)
+    Job dailyUserJob(JobRepository jobRepository,
+            @Qualifier(DAILY_USER_STEP_NAME) Step dailyUserStep,
             BatchJobListener listener) {
-        return new JobBuilder(HEALTH_INFO_MIGRATE_BATCH_JOB_NAME, jobRepository)
+        return new JobBuilder(DAILY_USER_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .validator(new DateFormatParameterValidator(OPTION_D,
                         DateFormatType.YYYYMMDD_NOSEP, false))
                 .listener(listener)
-                .start(healthInfoMigrateBatchStep)
+                .start(dailyUserStep)
                 .build();
     }
 
     /**
-     * 健康情報連携バッチSTEP
+     * 日次ユーザ情報データ分析連携バッチSTEP
      * 
      * @param reader
      *     Reader
@@ -73,26 +71,20 @@ public class HealthInfoMigrateConfig extends BatchConfig {
      *     JobRepository
      * @param transactionManager
      *     PlatformTransactionManager
-     * @return 健康情報連携バッチSTEP
+     * @return 日次ユーザ情報データ分析連携バッチSTEP
      */
-    @Bean(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME)
-    Step healthInfoMigrateBatchStep(
-            HealthInfoMigrateReader reader,
-            HealthInfoMigrateProcessor processor,
-            HealthInfoMigrateWriter writer,
+    @Bean(DAILY_USER_STEP_NAME)
+    Step dailyUserStep(
+            DailyUserReader reader,
+            DailyUserProcessor processor,
+            DailyUserWriter writer,
             JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
-        return new StepBuilder(HEALTH_INFO_MIGRATE_BATCH_STEP_NAME, jobRepository)
-                .<HealthInfo, HealthInfoMigrateApiRequest> chunk(1, transactionManager)
+        return new StepBuilder(DAILY_USER_STEP_NAME, jobRepository)
+                .<CompositeUser, DailyUserCsvModel> chunk(1, transactionManager)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
-                .faultTolerant()
-                .retry(RestClientException.class)
-                .retryLimit(3)
-                .skip(HttpClientErrorException.class)
-                .skipLimit(10)
-                .transactionManager(transactionManager)
                 .build();
     }
 }

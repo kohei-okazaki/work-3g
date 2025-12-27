@@ -52,10 +52,9 @@ check_result "dailyHealthInfoJob" ${result}
 # 日次ユーザ情報データ分析連携バッチ
 daily_analysis_user.sh ${DATE_OPTION_VALUE}
 result=$?
-check_result "dailyUserInfoJob" ${result}
+check_result "dailyUserJob" ${result}
 
 # 日次API通信ログデータ分析連携バッチ
-# cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.${ENV}.yml run --rm ha-batch --spring.batch.job.name=dailyApiLogJob d=${DATE_OPTION_VALUE}
 daily_analysis_api_log.sh ${DATE_OPTION_VALUE}
 result=$?
 check_result "dailyApiLogJob" ${result}

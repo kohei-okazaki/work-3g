@@ -50,9 +50,9 @@ public class BatchConfigConst {
     /** STEP名 - 日次健康情報データ分析連携バッチ */
     public static final String DAILY_HEALTH_INFO_STEP_NAME = "dailyHealthInfoStep";
     /** JOB名 - 日次ユーザ情報データ分析連携バッチ */
-    public static final String DAILY_USER_INFO_JOB_NAME = "dailyUserInfoJob";
+    public static final String DAILY_USER_JOB_NAME = "dailyUserJob";
     /** STEP名 - 日次ユーザ情報データ分析連携バッチ */
-    public static final String DAILY_USER_INFO_STEP_NAME = "dailyUserInfoStep";
+    public static final String DAILY_USER_STEP_NAME = "dailyUserStep";
     /** JOB名 - 日次API通信ログデータ分析連携バッチ */
     public static final String DAILY_API_LOG_JOB_NAME = "dailyApiLogJob";
     /** STEP名 - 日次API通信ログデータ分析連携バッチ */

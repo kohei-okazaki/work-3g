@@ -358,6 +358,8 @@ public class FileUtil {
         CSV(".csv"),
         /** zip */
         ZIP(".zip"),
+        /** gz */
+        GZ(".gz"),
         /** java */
         JAVA(".java"),
         /** sql */

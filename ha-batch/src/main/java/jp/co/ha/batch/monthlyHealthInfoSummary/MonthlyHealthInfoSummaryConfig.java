@@ -31,6 +31,9 @@ import jp.co.ha.db.entity.HealthInfo;
 @Configuration
 public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
 
+    /** オプション-m */
+    private static final String OPTION_M = "m";
+
     /**
      * 月次健康情報集計バッチJOB
      *
@@ -48,7 +51,7 @@ public class MonthlyHealthInfoSummaryConfig extends BatchConfig {
             BatchJobListener listener) {
         return new JobBuilder(MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new DateFormatParameterValidator("m",
+                .validator(new DateFormatParameterValidator(OPTION_M,
                         DateFormatType.YYYYMM_NOSEP, false))
                 .listener(listener)
                 .start(monthlyHealthInfoSummaryBatchStep)

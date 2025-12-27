@@ -79,4 +79,36 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="selectUserRegDate" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+      <!-- USER -->
+        U.SEQ_USER_ID
+      , U.PASSWORD
+      , U.DELETE_FLAG
+      , U.PASSWORD_EXPIRE
+      , U.REMARKS
+      , U.API_KEY
+      , U.MAIL_ADDRESS
+      , U.REG_DATE
+      , U.UPDATE_DATE
+      , U.GENDER_TYPE
+      , U.BIRTH_DATE
+      <!-- HEALTH_INFO_FILE_SETTING -->
+      , HF.HEADER_FLAG
+      , HF.FOOTER_FLAG
+      , HF.MASK_FLAG
+      , HF.ENCLOSURE_CHAR_FLAG
+    FROM
+      USER U
+      LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
+        ON U.SEQ_USER_ID = HF.SEQ_USER_ID
+    WHERE
+      U.REG_DATE BETWEEN #{from} AND #{to}
+    ORDER BY 
+      SEQ_USER_ID ASC
+    LIMIT 
+      #{_skiprows},
+      #{_pagesize}
+  </select>
 </mapper>

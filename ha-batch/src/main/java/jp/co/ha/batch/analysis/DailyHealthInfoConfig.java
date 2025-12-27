@@ -31,12 +31,15 @@ import jp.co.ha.db.entity.HealthInfo;
 @Configuration
 public class DailyHealthInfoConfig extends BatchConfig {
 
+    /** オプション-d */
+    private static final String OPTION_D = "d";
+
     /**
      * 日次健康情報データ分析連携バッチJOB
      * 
      * @param jobRepository
      *     JobRepository
-     * @param dailyHealthInfoMigrateStep
+     * @param dailyHealthInfoStep
      *     日次健康情報データ分析連携バッチSTEP
      * @param listener
      *     BatchJobListener
@@ -44,14 +47,14 @@ public class DailyHealthInfoConfig extends BatchConfig {
      */
     @Bean(DAILY_HEALTH_INFO_JOB_NAME)
     Job dailyHealthInfoJob(JobRepository jobRepository,
-            @Qualifier(DAILY_HEALTH_INFO_STEP_NAME) Step dailyHealthInfoMigrateStep,
+            @Qualifier(DAILY_HEALTH_INFO_STEP_NAME) Step dailyHealthInfoStep,
             BatchJobListener listener) {
         return new JobBuilder(DAILY_HEALTH_INFO_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new DateFormatParameterValidator("d",
+                .validator(new DateFormatParameterValidator(OPTION_D,
                         DateFormatType.YYYYMMDD_NOSEP, false))
                 .listener(listener)
-                .start(dailyHealthInfoMigrateStep)
+                .start(dailyHealthInfoStep)
                 .build();
     }
 

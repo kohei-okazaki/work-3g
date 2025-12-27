@@ -14,7 +14,7 @@ PARTITIONED BY (year string)
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe'
 WITH SERDEPROPERTIES (
   'field.delim' = ',',
-  'skip.header.line.count'='0'
+  'skip.header.line.count'='1'
 )
 STORED AS TEXTFILE
 LOCATION 's3://healthinfo-app-local/monthly/healthinfo/';

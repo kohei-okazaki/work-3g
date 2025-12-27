@@ -16,7 +16,7 @@ import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.mapper.composite.CommonHealthInfoMapper;
+import jp.co.ha.db.mapper.composite.PagingHealthInfoMapper;
 
 /**
  * 健康情報連携処理-Reader
@@ -61,7 +61,7 @@ public class HealthInfoMigrateReader extends MyBatisPagingItemReader<HealthInfo>
         setSqlSessionFactory(sqlSessionFactory);
 
         setQueryId(
-                CommonHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate");
+                PagingHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate");
 
         Map<String, Object> params = Map.of(
                 "from", from, "to", to);

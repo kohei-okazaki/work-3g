@@ -1,5 +1,6 @@
 package jp.co.ha.db.mapper.composite;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -39,5 +40,16 @@ public interface CompositeUserMapper {
      * @return ユーザ情報と健康情報ファイル設定の複合Entityのリスト
      */
     List<CompositeUser> selectAll(UserExample example, RowBounds rowBounds);
+
+    /**
+     * ページングされたユーザ情報リストを検索する
+     * 
+     * @param from
+     *     登録日時(開始)
+     * @param to
+     *     登録日時(終了)
+     * @return ユーザ情報リスト
+     */
+    List<CompositeUser> selectUserRegDate(LocalDateTime from, LocalDateTime to);
 
 }

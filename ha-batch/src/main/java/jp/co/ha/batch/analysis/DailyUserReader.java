@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;
-import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.mapper.composite.PagingHealthInfoMapper;
+import jp.co.ha.db.entity.composite.CompositeUser;
+import jp.co.ha.db.mapper.composite.CompositeUserMapper;
 
 /**
- * 日次健康情報データ分析連携バッチ-Reader
+ * 日次ユーザ情報データ分析連携バッチ-Reader
  * 
  * @version 1.0.0
  */
 @Component
 @StepScope
-public class DailyHealthInfoReader extends BaseDailyAnalysisReader<HealthInfo> {
+public class DailyUserReader extends BaseDailyAnalysisReader<CompositeUser> {
 
     /**
      * コンストラクタ
@@ -28,7 +28,7 @@ public class DailyHealthInfoReader extends BaseDailyAnalysisReader<HealthInfo> {
      * @param batchProperties
      *     バッチプロパティファイル
      */
-    public DailyHealthInfoReader(SqlSessionFactory sqlSessionFactory,
+    public DailyUserReader(SqlSessionFactory sqlSessionFactory,
             @Value("#{jobParameters[d]}") String targetDate,
             BatchProperties batchProperties) {
         super(sqlSessionFactory, targetDate, batchProperties);
@@ -36,11 +36,11 @@ public class DailyHealthInfoReader extends BaseDailyAnalysisReader<HealthInfo> {
 
     @Override
     public String getQueryId() {
-        return PagingHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate";
+        return CompositeUserMapper.class.getName() + ".selectUserRegDate";
     }
 
     @Override
     public int getPageSize(BatchProperties batchProperties) {
-        return batchProperties.getDailyHealthInfoAnalysis().getExecPerpageCount();
+        return batchProperties.getDailyUserAnalysis().getExecPerpageCount();
     }
 }

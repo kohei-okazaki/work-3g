@@ -8,9 +8,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from mongoengine import NotUniqueError, ValidationError as MEValidationError
 
-from ha_track.api.models import HealthInfo, HealthTrackLog
-from ha_track.api.serializers import HealthInfoPayloadSerializer
-from ha_track.api.util.dynamo_util import put_dynamo_db
+from .models import HealthInfo, HealthTrackLog
+from .serializers import HealthInfoPayloadSerializer
+from .util.dynamo_util import put_dynamo_db
 
 # Logger
 logger = logging.getLogger(__name__)

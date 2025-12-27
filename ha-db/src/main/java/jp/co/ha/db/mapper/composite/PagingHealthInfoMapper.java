@@ -16,16 +16,16 @@ import jp.co.ha.db.entity.HealthInfo;
  * 
  * @version 1.0.0
  */
-public interface CommonHealthInfoMapper {
+public interface PagingHealthInfoMapper {
 
     /**
-     * 連携用健康情報リストを検索する
+     * ページングされた健康情報リストを検索する
      * 
      * @param from
      *     健康情報登録日時(開始)
      * @param to
      *     健康情報登録日時(終了)
-     * @return 連携用健康情報リスト
+     * @return 健康情報リスト
      */
     List<HealthInfo> selectByHealthInfoRegDate(LocalDateTime from, LocalDateTime to);
 }

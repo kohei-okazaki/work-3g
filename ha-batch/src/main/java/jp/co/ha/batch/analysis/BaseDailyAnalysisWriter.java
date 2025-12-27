@@ -1,4 +1,4 @@
-package jp.co.ha.batch.monthlyHealthInfoSummary;
+package jp.co.ha.batch.analysis;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,45 +21,37 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
-import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
-import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 
 /**
- * 月次健康情報集計処理-Writer<br>
- * <ul>
- * <li>月次健康情報集計CSV作成</li>
- * <li>S3アップロード</li>
- * <li>Slack通知</li>
- * </ul>
+ * 日次共通データ分析連携バッチ-Writer<br>
  * 
  * @version 1.0.0
+ * @param <T>
+ *     CSVモデル型
  */
 @Component
 @StepScope
-public class MonthlyHealthInfoSummaryWriter
-        extends FlatFileItemWriter<MonthlyHealthInfoSummaryModel>
-        implements StepExecutionListener {
+public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
+        extends FlatFileItemWriter<T> implements StepExecutionListener {
 
     /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(MonthlyHealthInfoSummaryWriter.class);
-    /** CSV項目名配列 */
-    private static final String[] COLUMN_NAME_ARRAY = new String[] {
-            "seqUserId", "height", "weight", "bmi", "standardWeight",
-            "healthInfoRegDate", "seqBmiRangeMtId", "updateDate",
-            "regDate"
-    };
-    /** 健康情報設定ファイル */
-    private HealthInfoProperties prop;
+    protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
+
+    /** バッチプロパティファイル */
+    private BatchProperties batchProps;
     /** AWS-S3 Component */
     private AwsS3Component s3;
     /** Slack Component */
@@ -74,22 +66,21 @@ public class MonthlyHealthInfoSummaryWriter
     /**
      * コンストラクタ
      * 
-     * @param prop
-     *     健康情報設定ファイル
+     * @param batchProps
+     *     バッチプロパティファイル
      * @param s3
      *     AWS-S3 Component
      * @param slack
      *     Slack Component
      * @param targetDate
-     *     処理対象年月
+     *     処理対象年月日
+     * @param batchProperties
+     *     バッチプロパティファイル
      */
-    public MonthlyHealthInfoSummaryWriter(
-            HealthInfoProperties prop,
-            AwsS3Component s3,
-            SlackApiComponent slack,
-            @Value("#{jobParameters[m]}") String targetDate) {
+    public BaseDailyAnalysisWriter(BatchProperties batchProps, AwsS3Component s3,
+            SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate) {
 
-        this.prop = prop;
+        this.batchProps = batchProps;
         this.s3 = s3;
         this.slack = slack;
         this.targetDate = targetDate;
@@ -106,11 +97,11 @@ public class MonthlyHealthInfoSummaryWriter
     public void open(ExecutionContext executionContext) throws ItemStreamException {
 
         try {
-            String baseDir = prop.getMonthlySummaryBatchFilePath();
+            String baseDir = getTempDirPath(batchProps);
             Files.createDirectories(Paths.get(baseDir));
 
-            String baseName = targetDate + FileExtension.CSV;
-            targetPath = Paths.get(baseDir, baseName);
+            targetPath = Paths.get(baseDir, getFileName(batchProps));
+            LOG.debug("targetPath=" + targetPath);
 
             setResource(new FileSystemResource(targetPath));
         } catch (IOException e) {
@@ -128,22 +119,28 @@ public class MonthlyHealthInfoSummaryWriter
             if (Objects.isNull(stepExecution)
                     || stepExecution.getStatus().isUnsuccessful()) {
                 // 異常終了時
-                return;
-            } else if (stepExecution.getWriteCount() == 0) {
-                // 対象データ0件ならアップロードしない
-                Files.deleteIfExists(targetPath);
+                LOG.error("stepExecutionが失敗しました。");
                 return;
             }
 
             // 正常終了時
+
+            // 圧縮形式のファイルパスを取得
             Path gzPath = Paths.get(targetPath.toString() + FileExtension.GZ.getValue());
             FileUtil.compressGZip(targetPath, gzPath);
 
+            // 検索対象年月(YYYYMMDD)
+            String date = StringUtil.isEmpty(targetDate)
+                    ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
+                            DateFormatType.YYYYMMDD_NOSEP)
+                    : targetDate;
+
             File gzFile = gzPath.toFile();
             StringJoiner s3Path = new StringJoiner(StringUtil.THRASH)
-                    .add(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue())
-                    .add("year=" + gzFile.getName().substring(0, 4))
+                    .add(AwsS3Key.DAILY_ANALYSIS.getValue())
+                    .add(date)
                     .add(gzFile.getName());
+            // analysis/YYYYMMDD/${table_name}.csv.gz
             String s3key = s3Path.toString();
 
             s3.putFile(s3key, gzFile);
@@ -167,26 +164,50 @@ public class MonthlyHealthInfoSummaryWriter
     }
 
     /**
+     * 一時ディレクトリパスを返す
+     * 
+     * @param batchProps
+     *     バッチプロパティファイル
+     * @return 一時ディレクトリパス
+     */
+    protected abstract String getTempDirPath(BatchProperties batchProps);
+
+    /**
+     * ファイル名を返す
+     * 
+     * @param batchProps
+     *     バッチプロパティファイル
+     * @return ファイル名
+     */
+    protected abstract String getFileName(BatchProperties batchProps);
+
+    /**
+     * 配列形式のカラム名を返す
+     * 
+     * @return 配列形式のカラム名
+     */
+    protected abstract String[] getColumnArray();
+
+    /**
      * 初期化処理
      */
     private void init() {
 
-        setName("monthlyHealthInfoSummaryWriter");
+        setName(this.getClass().getSimpleName());
         setAppendAllowed(false);
         setShouldDeleteIfExists(true);
         setSaveState(true);
 
-        BeanWrapperFieldExtractor<MonthlyHealthInfoSummaryModel> extractor = new BeanWrapperFieldExtractor<>();
-        extractor.setNames(COLUMN_NAME_ARRAY);
+        BeanWrapperFieldExtractor<T> extractor = new BeanWrapperFieldExtractor<>();
+        extractor.setNames(getColumnArray());
 
-        DelimitedLineAggregator<MonthlyHealthInfoSummaryModel> aggregator = new DelimitedLineAggregator<>();
+        DelimitedLineAggregator<T> aggregator = new DelimitedLineAggregator<>();
         aggregator.setDelimiter(StringUtil.COMMA);
         aggregator.setFieldExtractor(extractor);
 
         setLineAggregator(aggregator);
 
         setHeaderCallback(
-                writer -> writer.write(String.join(StringUtil.COMMA, COLUMN_NAME_ARRAY)));
+                writer -> writer.write(String.join(StringUtil.COMMA, getColumnArray())));
     }
-
 }

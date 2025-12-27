@@ -1,4 +1,4 @@
-package jp.co.ha.batch.monthlyHealthInfoSummary;
+package jp.co.ha.batch.analysis;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -15,21 +15,21 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
-import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.mapper.composite.PagingHealthInfoMapper;
 
 /**
- * 月次健康情報集計処理-Reader
+ * 日次共通データ分析連携バッチ-Reader<br>
+ * ※データ連携対象のデータ取得元がMySQLの場合、こちらのクラスを継承して実装すること。<br>
  * 
  * @version 1.0.0
+ * @param <T>
+ *     データ連携対象型
  */
 @Component
 @StepScope
-public class MonthlyHealthInfoSummaryReader extends MyBatisPagingItemReader<HealthInfo> {
+public abstract class BaseDailyAnalysisReader<T> extends MyBatisPagingItemReader<T> {
 
     /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(MonthlyHealthInfoSummaryReader.class);
+    protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     /**
      * コンストラクタ
@@ -37,40 +37,57 @@ public class MonthlyHealthInfoSummaryReader extends MyBatisPagingItemReader<Heal
      * @param sqlSessionFactory
      *     SqlSessionFactory
      * @param targetDate
-     *     処理対象年月
+     *     処理対象年月日
      * @param batchProperties
      *     バッチプロパティファイル
      */
-    public MonthlyHealthInfoSummaryReader(SqlSessionFactory sqlSessionFactory,
-            @Value("#{jobParameters[m]}") String targetDate,
+    public BaseDailyAnalysisReader(SqlSessionFactory sqlSessionFactory,
+            @Value("#{jobParameters[d]}") String targetDate,
             BatchProperties batchProperties) {
 
-        // 検索対象年月(YYYYMM)
+        // 検索対象年月(YYYYMMDD)
         String date = StringUtil.isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMM_NOSEP)
+                        DateFormatType.YYYYMMDD_NOSEP)
                 : targetDate;
         LOG.debug("targetDate=" + date);
 
         int year = Integer.parseInt(date.substring(0, 4));
-        int month = Integer.parseInt(date.substring(4));
-        LocalDateTime from = LocalDateTime.of(year, month, 1, 0, 0, 0);
-        LocalDateTime to = LocalDateTime.of(year, month,
-                DateTimeUtil.getLastDayOfMonth(from), 23, 59, 59);
+        int month = Integer.parseInt(date.substring(4, 6));
+        int day = Integer.parseInt(date.substring(6));
+        LocalDateTime from = LocalDateTime.of(year, month, day, 0, 0, 0);
+        LocalDateTime to = LocalDateTime.of(year, month, day, 23, 59, 59);
         LOG.debug("from=" + from + ", to=" + to);
 
         setSqlSessionFactory(sqlSessionFactory);
 
-        setQueryId(
-                PagingHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate");
+        setQueryId(getQueryId());
 
         Map<String, Object> params = Map.of(
                 "from", from, "to", to);
 
         setParameterValues(params);
         // 1ページの取得件数
-        setPageSize(batchProperties.getMonthlyHealthInfoSummary().getExecPerpageCount());
+        setPageSize(getPageSize(batchProperties));
         // // 再実行用に状態保存（デフォルト true）
         setSaveState(true);
+
     }
+
+    /**
+     * クエリIDを返す
+     * 
+     * @return クエリID
+     */
+    protected abstract String getQueryId();
+
+    /**
+     * 1ページあたりの件数を返す
+     * 
+     * @param batchProperties
+     *     バッチプロパティファイル
+     * @return 件数
+     */
+    protected abstract int getPageSize(BatchProperties batchProperties);
+
 }
