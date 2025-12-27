@@ -33,10 +33,13 @@ echo "------------------------------------------------------------------------"
 DATE_OPTION_VALUE=$1
 
 # 結果チェック関数
-# 引数：ジョブ名、終了コード
-function check_result(name, result_code) {
+# 引数1：ジョブ名
+# 引数2：終了コード
+check_result() {
+  job_name=$1
+  result_code=$2
   if [ ${result_code} -ne 0 ]; then
-    echo "$name failed with exit code $result_code"
+    echo "$job_name failed with exit code $result_code"
     exit $result_code
   fi
 }

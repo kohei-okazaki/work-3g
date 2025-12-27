@@ -21,14 +21,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.io.file.csv.model.DailyHealthInfoCsvModel;
-import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
@@ -55,8 +57,8 @@ public class DailyHealthInfoWriter extends FlatFileItemWriter<DailyHealthInfoCsv
     private static final String[] COLUMN_NAME_ARRAY = new String[] { "seqHealthInfoId",
             "seqUserId", "height", "weight", "bmi", "standardWeight",
             "healthInfoRegDate" };
-    /** 健康情報設定ファイル */
-    private HealthInfoProperties prop;
+    /** バッチプロパティファイル */
+    private BatchProperties batchProps;
     /** AWS-S3 Component */
     private AwsS3Component s3;
     /** Slack Component */
@@ -71,22 +73,24 @@ public class DailyHealthInfoWriter extends FlatFileItemWriter<DailyHealthInfoCsv
     /**
      * コンストラクタ
      * 
-     * @param prop
-     *     健康情報設定ファイル
+     * @param batchProps
+     *     バッチプロパティファイル
      * @param s3
      *     AWS-S3 Component
      * @param slack
      *     Slack Component
      * @param targetDate
      *     処理対象年月日
+     * @param batchProperties
+     *     バッチプロパティファイル
      */
     public DailyHealthInfoWriter(
-            HealthInfoProperties prop,
+            BatchProperties batchProps,
             AwsS3Component s3,
             SlackApiComponent slack,
             @Value("#{jobParameters[d]}") String targetDate) {
 
-        this.prop = prop;
+        this.batchProps = batchProps;
         this.s3 = s3;
         this.slack = slack;
         this.targetDate = targetDate;
@@ -103,11 +107,11 @@ public class DailyHealthInfoWriter extends FlatFileItemWriter<DailyHealthInfoCsv
     public void open(ExecutionContext executionContext) throws ItemStreamException {
 
         try {
-            String baseDir = prop.getMonthlySummaryBatchFilePath();
+            String baseDir = batchProps.getDailyHealthInfoAnalysis()
+                    .getTempDirPath();
             Files.createDirectories(Paths.get(baseDir));
 
-            String baseName = targetDate + FileExtension.CSV;
-            targetPath = Paths.get(baseDir, baseName);
+            targetPath = Paths.get(baseDir, "healthinfo" + FileExtension.CSV);
 
             setResource(new FileSystemResource(targetPath));
         } catch (IOException e) {
@@ -128,6 +132,7 @@ public class DailyHealthInfoWriter extends FlatFileItemWriter<DailyHealthInfoCsv
                 return;
             } else if (stepExecution.getWriteCount() == 0) {
                 // 対象データ0件ならアップロードしない
+                // TODO 空ファイルを作成して配置
                 Files.deleteIfExists(targetPath);
                 return;
             }
@@ -136,11 +141,18 @@ public class DailyHealthInfoWriter extends FlatFileItemWriter<DailyHealthInfoCsv
             Path gzPath = Paths.get(targetPath.toString() + ".gz");
             FileUtil.compressGZip(targetPath, gzPath);
 
+            // 検索対象年月(YYYYMMDD)
+            String date = StringUtil.isEmpty(targetDate)
+                    ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
+                            DateFormatType.YYYYMMDD_NOSEP)
+                    : targetDate;
+
             File gzFile = gzPath.toFile();
             StringJoiner s3Path = new StringJoiner(StringUtil.THRASH)
-                    .add(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue())
-                    .add("year=" + gzFile.getName().substring(0, 4))
+                    .add(AwsS3Key.DAILY_ANALYSIS.getValue())
+                    .add(date)
                     .add(gzFile.getName());
+            // analysis/YYYYMMDD/healthinfo.csv.gz
             String s3key = s3Path.toString();
 
             s3.putFile(s3key, gzFile);
@@ -182,6 +194,9 @@ public class DailyHealthInfoWriter extends FlatFileItemWriter<DailyHealthInfoCsv
         aggregator.setFieldExtractor(extractor);
 
         setLineAggregator(aggregator);
+
+        setHeaderCallback(
+                writer -> writer.write(String.join(StringUtil.COMMA, COLUMN_NAME_ARRAY)));
     }
 
 }

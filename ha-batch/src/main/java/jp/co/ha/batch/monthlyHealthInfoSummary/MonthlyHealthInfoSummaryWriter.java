@@ -185,6 +185,9 @@ public class MonthlyHealthInfoSummaryWriter
         aggregator.setFieldExtractor(extractor);
 
         setLineAggregator(aggregator);
+
+        setHeaderCallback(
+                writer -> writer.write(String.join(StringUtil.COMMA, COLUMN_NAME_ARRAY)));
     }
 
 }

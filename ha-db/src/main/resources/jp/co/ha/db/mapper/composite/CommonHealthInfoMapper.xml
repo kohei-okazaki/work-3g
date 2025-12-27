@@ -1,5 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="jp.co.ha.db.mapper.composite.MigrateHealthInfoMapper">
+<mapper namespace="jp.co.ha.db.mapper.composite.CommonHealthInfoMapper">
   <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.HealthInfo">
     <id column="SEQ_HEALTH_INFO_ID" jdbcType="BIGINT" property="seqHealthInfoId" />
     <result column="SEQ_USER_ID" jdbcType="BIGINT" property="seqUserId" />

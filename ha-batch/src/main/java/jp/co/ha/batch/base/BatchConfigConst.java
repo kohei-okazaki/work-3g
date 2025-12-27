@@ -53,5 +53,13 @@ public class BatchConfigConst {
     public static final String DAILY_USER_INFO_JOB_NAME = "dailyUserInfoJob";
     /** STEP名 - 日次ユーザ情報データ分析連携バッチ */
     public static final String DAILY_USER_INFO_STEP_NAME = "dailyUserInfoStep";
+    /** JOB名 - 日次API通信ログデータ分析連携バッチ */
+    public static final String DAILY_API_LOG_JOB_NAME = "dailyApiLogJob";
+    /** STEP名 - 日次API通信ログデータ分析連携バッチ */
+    public static final String DAILY_API_LOG_STEP_NAME = "dailyApiLogStep";
+    /** JOB名 - 日次バッチ実行ログデータ分析連携バッチ */
+    public static final String DAILY_BACTH_LOG_JOB_NAME = "dailyBatchLogJob";
+    /** STEP名 - 日次バッチ実行ログデータ分析連携バッチ */
+    public static final String DAILY_BACTH_LOG_STEP_NAME = "dailyBatchLogStep";
 
 }

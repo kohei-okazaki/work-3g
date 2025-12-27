@@ -18,11 +18,11 @@ import jp.co.ha.common.util.StringUtil;
 public class DateFormatParameterValidator implements JobParametersValidator {
 
     /** バッチ引数キー */
-    private final String key;
+    private String key;
     /** 日付フォーマット */
-    private final DateFormatType formatType;
+    private DateFormatType formatType;
     /** 必須有無 */
-    private final boolean required;
+    private boolean required;
 
     /**
      * コンストラクタ

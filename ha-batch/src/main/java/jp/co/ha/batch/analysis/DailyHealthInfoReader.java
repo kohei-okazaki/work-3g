@@ -69,7 +69,7 @@ public class DailyHealthInfoReader extends MyBatisPagingItemReader<HealthInfo> {
 
         setParameterValues(params);
         // 1ページの取得件数
-        setPageSize(batchProperties.getMonthlyHealthInfoSummary().getExecPerpageCount());
+        setPageSize(batchProperties.getDailyHealthInfoAnalysis().getExecPerpageCount());
         // // 再実行用に状態保存（デフォルト true）
         setSaveState(true);
     }

@@ -197,6 +197,8 @@ public class BatchProperties {
 
         /** 実行カウント */
         private int execPerpageCount;
+        /** 一時ディレクトリパス */
+        private String tempDirPath;
 
         /**
          * 実行カウントを返す
@@ -216,6 +218,26 @@ public class BatchProperties {
         public void setExecPerpageCount(int execPerpageCount) {
             this.execPerpageCount = execPerpageCount;
         }
+
+        /**
+         * 一時ディレクトリパスを返す
+         * 
+         * @return tempDirPath
+         */
+        public String getTempDirPath() {
+            return tempDirPath;
+        }
+
+        /**
+         * 一時ディレクトリパスを設定する
+         * 
+         * @param tempDirPath
+         *     一時ディレクトリパス
+         */
+        public void setTempDirPath(String tempDirPath) {
+            this.tempDirPath = tempDirPath;
+        }
+
     }
 
     /**
@@ -227,6 +249,8 @@ public class BatchProperties {
 
         /** 実行カウント */
         private int execPerpageCount;
+        /** 一時ディレクトリパス */
+        private String tempDirPath;
 
         /**
          * 実行カウントを返す
@@ -246,6 +270,26 @@ public class BatchProperties {
         public void setExecPerpageCount(int execPerpageCount) {
             this.execPerpageCount = execPerpageCount;
         }
+
+        /**
+         * 一時ディレクトリパスを返す
+         * 
+         * @return tempDirPath
+         */
+        public String getTempDirPath() {
+            return tempDirPath;
+        }
+
+        /**
+         * 一時ディレクトリパスを設定する
+         * 
+         * @param tempDirPath
+         *     一時ディレクトリパス
+         */
+        public void setTempDirPath(String tempDirPath) {
+            this.tempDirPath = tempDirPath;
+        }
+
     }
 
     /**

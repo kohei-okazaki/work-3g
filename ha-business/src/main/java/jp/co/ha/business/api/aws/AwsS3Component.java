@@ -318,6 +318,8 @@ public class AwsS3Component {
         NEWS_JSON("news"),
         /** 月次健康情報集計CSV配置キー */
         MONTHLY_HEALTHINFO_SUMMARY("monthly/healthinfo"),
+        /** 日次データ分析連携CSV配置キー */
+        DAILY_ANALYSIS("analysis"),
         /** メモ情報配置キー */
         NOTE_FILE("note"),
         /** 問い合わせキー */

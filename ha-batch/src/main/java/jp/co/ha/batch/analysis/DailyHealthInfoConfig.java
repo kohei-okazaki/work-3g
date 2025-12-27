@@ -42,7 +42,8 @@ public class DailyHealthInfoConfig extends BatchConfig {
      *     BatchJobListener
      * @return 日次健康情報データ分析連携バッチJOB
      */
-    Job dailyHealthInfoMigrateJob(JobRepository jobRepository,
+    @Bean(DAILY_HEALTH_INFO_JOB_NAME)
+    Job dailyHealthInfoJob(JobRepository jobRepository,
             @Qualifier(DAILY_HEALTH_INFO_STEP_NAME) Step dailyHealthInfoMigrateStep,
             BatchJobListener listener) {
         return new JobBuilder(DAILY_HEALTH_INFO_JOB_NAME, jobRepository)
@@ -70,7 +71,7 @@ public class DailyHealthInfoConfig extends BatchConfig {
      * @return 日次健康情報データ分析連携バッチSTEP
      */
     @Bean(DAILY_HEALTH_INFO_STEP_NAME)
-    Step dailyHealthInfoMigrateStep(
+    Step dailyHealthInfoStep(
             DailyHealthInfoReader reader,
             DailyHealthInfoProcessor processor,
             DailyHealthInfoWriter writer,
