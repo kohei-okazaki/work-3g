@@ -73,8 +73,6 @@ class HealthInfoAPIView(APIView):
                         "standard_weight": Decimal(str(hi["standard_weight"])),
                         "created_at": created_at_utc.isoformat(),
                     }
-
-                    # 同じ (seq_user_id, created_at_epoch) が既にあれば上書きしない
                     put_dynamo_db(table_name="health_info", item=item)
 
                 except table.meta.client.exceptions.ConditionalCheckFailedException:
