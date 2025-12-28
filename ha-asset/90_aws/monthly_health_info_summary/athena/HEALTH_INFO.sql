@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS health;
-CREATE EXTERNAL TABLE health (
+DROP TABLE IF EXISTS health_info;
+CREATE EXTERNAL TABLE health_info (
   seq_user_id         bigint,
   height              double,
   weight              double,
