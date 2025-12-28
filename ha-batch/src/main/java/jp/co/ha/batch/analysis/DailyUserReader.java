@@ -36,11 +36,17 @@ public class DailyUserReader extends BaseDailyAnalysisReader<CompositeUser> {
 
     @Override
     public String getQueryId() {
-        return CompositeUserMapper.class.getName() + ".selectUserRegDate";
+        return CompositeUserMapper.class.getName() + ".selectAnalysisTarget";
     }
 
     @Override
     public int getPageSize(BatchProperties batchProperties) {
         return batchProperties.getDailyUserAnalysis().getExecPerpageCount();
+    }
+
+    @Override
+    public boolean useRange() {
+        // userはdelete_flag = falseとなる全レコードが対象のため。
+        return false;
     }
 }

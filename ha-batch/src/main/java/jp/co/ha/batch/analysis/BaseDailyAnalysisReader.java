@@ -45,28 +45,31 @@ public abstract class BaseDailyAnalysisReader<T> extends MyBatisPagingItemReader
             @Value("#{jobParameters[d]}") String targetDate,
             BatchProperties batchProperties) {
 
-        // 検索対象年月(YYYYMMDD)
-        String date = StringUtil.isEmpty(targetDate)
-                ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDD_NOSEP)
-                : targetDate;
-        LOG.debug("targetDate=" + date);
+        if (useRange()) {
+            // 検索対象年月(YYYYMMDD)
+            String date = StringUtil.isEmpty(targetDate)
+                    ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
+                            DateFormatType.YYYYMMDD_NOSEP)
+                    : targetDate;
+            LOG.debug("targetDate=" + date);
 
-        int year = Integer.parseInt(date.substring(0, 4));
-        int month = Integer.parseInt(date.substring(4, 6));
-        int day = Integer.parseInt(date.substring(6));
-        LocalDateTime from = LocalDateTime.of(year, month, day, 0, 0, 0);
-        LocalDateTime to = LocalDateTime.of(year, month, day, 23, 59, 59);
-        LOG.debug("from=" + from + ", to=" + to);
+            int year = Integer.parseInt(date.substring(0, 4));
+            int month = Integer.parseInt(date.substring(4, 6));
+            int day = Integer.parseInt(date.substring(6));
+            LocalDateTime from = LocalDateTime.of(year, month, day, 0, 0, 0);
+            LocalDateTime to = LocalDateTime.of(year, month, day, 23, 59, 59);
+            LOG.debug("from=" + from + ", to=" + to);
 
+            Map<String, Object> params = Map.of(
+                    "from", from, "to", to);
+
+            setParameterValues(params);
+        }
+
+        // SqlSessionFactory設定
         setSqlSessionFactory(sqlSessionFactory);
-
+        // 検索SQL指定
         setQueryId(getQueryId());
-
-        Map<String, Object> params = Map.of(
-                "from", from, "to", to);
-
-        setParameterValues(params);
         // 1ページの取得件数
         setPageSize(getPageSize(batchProperties));
         // // 再実行用に状態保存（デフォルト true）
@@ -89,5 +92,14 @@ public abstract class BaseDailyAnalysisReader<T> extends MyBatisPagingItemReader
      * @return 件数
      */
     protected abstract int getPageSize(BatchProperties batchProperties);
+
+    /**
+     * 区間指定の検索を行うかどうか
+     * 
+     * @return 区間指定の検索を行う場合、true。それ以外の場合、false
+     */
+    protected boolean useRange() {
+        return true;
+    }
 
 }

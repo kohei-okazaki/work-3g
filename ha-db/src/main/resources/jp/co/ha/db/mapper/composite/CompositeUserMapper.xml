@@ -47,9 +47,10 @@
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
         ON U.SEQ_USER_ID = HF.SEQ_USER_ID
       LEFT OUTER JOIN USER_HEALTH_GOAL HG
-        ON HG.SEQ_USER_ID = U.SEQ_USER_ID AND HG.DELETE_FLAG = FALSE
+        ON (HG.SEQ_USER_ID = U.SEQ_USER_ID AND HG.DELETE_FLAG = FALSE)
     WHERE
       U.SEQ_USER_ID = #{seqUserId,jdbcType=BIGINT}
+      AND U.DELETE_FLAG = FALSE
   </select>
 
   <select id="selectAll" parameterType="jp.co.ha.db.entity.UserExample" resultMap="BaseResultMap">
@@ -75,12 +76,14 @@
       USER U
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
         ON U.SEQ_USER_ID = HF.SEQ_USER_ID
+    WHERE
+      U.DELETE_FLAG = FALSE
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
 
-  <select id="selectUserRegDate" parameterType="map" resultMap="BaseResultMap">
+  <select id="selectAnalysisTarget" parameterType="map" resultMap="BaseResultMap">
     SELECT
       <!-- USER -->
         U.SEQ_USER_ID
@@ -99,12 +102,16 @@
       , HF.FOOTER_FLAG
       , HF.MASK_FLAG
       , HF.ENCLOSURE_CHAR_FLAG
+      <!-- USER_HEALTH_GOAL -->
+      , HG.WEIGHT
     FROM
       USER U
       LEFT OUTER JOIN HEALTH_INFO_FILE_SETTING HF
         ON U.SEQ_USER_ID = HF.SEQ_USER_ID
+      LEFT OUTER JOIN USER_HEALTH_GOAL HG
+        ON (HG.SEQ_USER_ID = U.SEQ_USER_ID AND HG.DELETE_FLAG = FALSE)
     WHERE
-      U.REG_DATE BETWEEN #{from} AND #{to}
+      U.DELETE_FLAG = FALSE
     ORDER BY 
       SEQ_USER_ID ASC
     LIMIT 
