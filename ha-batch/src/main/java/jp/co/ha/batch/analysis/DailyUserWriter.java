@@ -1,6 +1,7 @@
 package jp.co.ha.batch.analysis;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;
@@ -43,7 +44,7 @@ public class DailyUserWriter extends BaseDailyAnalysisWriter<DailyUserCsvModel> 
      *     バッチプロパティファイル
      */
     public DailyUserWriter(BatchProperties batchProps, AwsS3Component s3,
-            SlackApiComponent slack, String targetDate) {
+            SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate) {
         super(batchProps, s3, slack, targetDate);
     }
 
