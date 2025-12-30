@@ -20,7 +20,7 @@ import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.CollectionUtil;
 
 /**
- * API_COMMUNICATION_DATA用AWS SQS取込-tasklet
+ * API_LOG用AWS SQS取込-tasklet
  *
  * @version 1.0.0
  */
@@ -37,7 +37,7 @@ public class ApiCommunicationDataSqsImportTasklet implements Tasklet {
     /** AWS SQS */
     @Autowired
     private AwsSqsComponent sqs;
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
     private ApiLogComponent component;
 
@@ -60,9 +60,8 @@ public class ApiCommunicationDataSqsImportTasklet implements Tasklet {
                 break;
             }
 
-            // キュー情報をDBへ登録
             for (DequeueResult<ApiLogQueuePayload> queueResult : queueList) {
-                // API_COMMUNICATION_DATA登録
+                // API_LOG登録
                 component.create(queueResult.getPayload());
                 // キュー削除
                 sqs.ackOne(queueName, queueResult.getReceiptHandle());

@@ -543,12 +543,12 @@ export const state = () => ({
       ],
     },
     {
-      physicalName: "API_COMMUNICATION_DATA",
-      logicalName: "API通信情報",
+      physicalName: "API_LOG",
+      logicalName: "API通信ログ",
       columns: [
         {
-          logicalName: "API通信情報ID",
-          physicalName: "SEQ_API_COMMUNICATION_DATA_ID",
+          logicalName: "API通信ログID",
+          physicalName: "SEQ_API_LOG_ID",
           type: "BIGINT",
           size: "",
           primaryKey: true,
@@ -615,8 +615,8 @@ export const state = () => ({
         {
           logicalName: "HTTPステータス",
           physicalName: "HTTP_STATUS",
-          type: "VARCHAR",
-          size: "3",
+          type: "INT",
+          size: null,
           primaryKey: false,
           sequence: false,
           crypt: false,
