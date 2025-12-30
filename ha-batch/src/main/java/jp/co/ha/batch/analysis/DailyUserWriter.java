@@ -39,9 +39,7 @@ public class DailyUserWriter extends BaseDailyAnalysisWriter<DailyUserCsvModel> 
      * @param slack
      *     Slack Component
      * @param targetDate
-     *     処理対象年月日
-     * @param batchProperties
-     *     バッチプロパティファイル
+     *     処理対象日
      */
     public DailyUserWriter(BatchProperties batchProps, AwsS3Component s3,
             SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate) {
@@ -49,17 +47,17 @@ public class DailyUserWriter extends BaseDailyAnalysisWriter<DailyUserCsvModel> 
     }
 
     @Override
-    protected String getTempDirPath(BatchProperties batchProps) {
+    public String getTempDirPath(BatchProperties batchProps) {
         return batchProps.getDailyUserAnalysis().getTempDirPath();
     }
 
     @Override
-    protected String getFileName(BatchProperties batchProps) {
+    public String getFileName(BatchProperties batchProps) {
         return batchProps.getDailyUserAnalysis().getFileName();
     }
 
     @Override
-    protected String[] getColumnArray() {
+    public String[] getColumnArray() {
         return COLUMN_NAME_ARRAY;
     }
 

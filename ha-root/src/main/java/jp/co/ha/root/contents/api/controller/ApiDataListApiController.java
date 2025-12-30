@@ -5,12 +5,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.ApiCommunicationDataSearchService;
+import jp.co.ha.business.db.crud.read.ApiLogSearchService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
@@ -23,7 +24,7 @@ import jp.co.ha.root.contents.api.request.ApiDataListApiRequest;
 import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
 
 /**
- * API通信情報一覧取得APIコントローラ
+ * API通信ログ一覧取得APIコントローラ
  *
  * @version 1.0.0
  */
@@ -31,18 +32,18 @@ import jp.co.ha.root.contents.api.response.ApiDataListApiResponse;
 public class ApiDataListApiController
         extends BaseRootApiController<ApiDataListApiRequest, ApiDataListApiResponse> {
 
-    /** API通信情報検索サービス */
+    /** API通信ログ検索サービス */
     @Autowired
-    private ApiCommunicationDataSearchService searchService;
+    private ApiLogSearchService searchService;
 
     /**
      * 一覧取得
      *
      * @param request
-     *     API通信情報一覧取得APIリクエスト
+     *     API通信ログ一覧取得APIリクエスト
      * @param page
      *     取得対象ページ
-     * @return API通信情報一覧取得APIレスポンス
+     * @return API通信ログ一覧取得APIレスポンス
      */
     @GetMapping(value = "apidata")
     public ResponseEntity<ApiDataListApiResponse> list(ApiDataListApiRequest request,
@@ -53,7 +54,7 @@ public class ApiDataListApiController
                 applicationProperties.getApiPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_API_COMMUNICATION_DATA_ID", SortType.DESC)
+                .orderBy("SEQ_API_LOG_ID", SortType.DESC)
                 .pageable(pageable)
                 .build();
 
@@ -62,11 +63,12 @@ public class ApiDataListApiController
                 .map(e -> {
                     ApiDataListApiResponse.ApiData response = new ApiDataListApiResponse.ApiData();
                     BeanUtil.copy(e, response);
+                    response.setHttpStatus(HttpStatus.valueOf(e.getHttpStatus()));
                     return response;
                 }).collect(Collectors.toList());
 
         PagingView paging = PagingViewFactory.getPageView(pageable, "apidata?page",
-                searchService.countBySeqApiCommunicationDataId(null));
+                searchService.countBySeqApiLogId(null));
 
         ApiDataListApiResponse response = getSuccessResponse();
         response.setApiDataList(apiDataList);

@@ -40,9 +40,7 @@ public class DailyHealthInfoWriter
      * @param slack
      *     Slack Component
      * @param targetDate
-     *     処理対象年月日
-     * @param batchProperties
-     *     バッチプロパティファイル
+     *     処理対象日
      */
     public DailyHealthInfoWriter(BatchProperties batchProps, AwsS3Component s3,
             SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate) {

@@ -24,13 +24,13 @@ import software.amazon.awssdk.services.ssm.model.GetParameterResponse;
 @Component
 public class AwsSystemsManagerComponent {
 
-    /** LOG */
-    private static final Logger LOG = LoggerFactory
-            .getLogger(AwsSystemsManagerComponent.class);
     /** キー：Slack Token */
     public static final String KEY_SLACK_TOKEN = "SLACK_TOKEN";
     /** キー：システムメールアドレス */
     public static final String KEY_SYSTEM_MAILADDRESS = "SYSTEM_MAILADDRESS";
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(AwsSystemsManagerComponent.class);
 
     /** AWS設定ファイル情報 */
     @Autowired

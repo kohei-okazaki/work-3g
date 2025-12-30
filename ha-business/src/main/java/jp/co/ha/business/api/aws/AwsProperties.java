@@ -41,8 +41,8 @@ public class AwsProperties {
     private int sesSocketTimeout;
     /** SESスタブフラグ(true:メールを送信しない、false:送信する) */
     private boolean sesStubFlag;
-    /** キュー名:api_communication_data */
-    private String apiCommunicationDataQueueName;
+    /** キュー名:api_log */
+    private String apiLogQueueName;
     /** SQSコネクションタイムアウト */
     private int sqsConnnectionTimeout;
     /** SQSソケットタイムアウト */
@@ -197,22 +197,22 @@ public class AwsProperties {
     }
 
     /**
-     * API通信情報キュー名を返す
+     * キュー名:API通信ログを返す
      * 
-     * @return apiCommunicationDataQueueName
+     * @return apiLogQueueName
      */
-    public String getApiCommunicationDataQueueName() {
-        return apiCommunicationDataQueueName;
+    public String getApiLogQueueName() {
+        return apiLogQueueName;
     }
 
     /**
-     * API通信情報キュー名を設定する
+     * キュー名:API通信ログを設定する
      * 
-     * @param apiCommunicationDataQueueName
-     *     API通信情報キュー名
+     * @param apiLogQueueName
+     *     キュー名:API通信ログ
      */
-    public void setApiCommunicationDataQueueName(String apiCommunicationDataQueueName) {
-        this.apiCommunicationDataQueueName = apiCommunicationDataQueueName;
+    public void setApiLogQueueName(String apiLogQueueName) {
+        this.apiLogQueueName = apiLogQueueName;
     }
 
     /**

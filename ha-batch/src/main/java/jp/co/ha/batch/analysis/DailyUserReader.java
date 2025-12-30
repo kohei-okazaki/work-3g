@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;
-import jp.co.ha.db.entity.composite.CompositeUser;
-import jp.co.ha.db.mapper.composite.CompositeUserMapper;
+import jp.co.ha.db.entity.custom.CompositeUser;
+import jp.co.ha.db.mapper.custom.CompositeUserMapper;
 
 /**
  * 日次ユーザ情報データ分析連携バッチ-Reader
@@ -16,7 +16,7 @@ import jp.co.ha.db.mapper.composite.CompositeUserMapper;
  */
 @Component
 @StepScope
-public class DailyUserReader extends BaseDailyAnalysisReader<CompositeUser> {
+public class DailyUserReader extends BaseDailyAnalysisMySQLReader<CompositeUser> {
 
     /**
      * コンストラクタ
@@ -24,7 +24,7 @@ public class DailyUserReader extends BaseDailyAnalysisReader<CompositeUser> {
      * @param sqlSessionFactory
      *     SqlSessionFactory
      * @param targetDate
-     *     処理対象年月日
+     *     処理対象日
      * @param batchProperties
      *     バッチプロパティファイル
      */

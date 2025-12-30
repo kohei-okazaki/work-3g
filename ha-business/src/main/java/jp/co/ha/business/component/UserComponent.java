@@ -35,7 +35,7 @@ import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserHealthGoal;
-import jp.co.ha.db.entity.composite.CompositeUser;
+import jp.co.ha.db.entity.custom.CompositeUser;
 
 /**
  * ユーザ関連のComponent

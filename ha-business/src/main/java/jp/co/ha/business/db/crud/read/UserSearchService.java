@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.User;
-import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
-import jp.co.ha.db.entity.composite.CompositeUser;
+import jp.co.ha.db.entity.custom.CompositeMonthlyRegData;
+import jp.co.ha.db.entity.custom.CompositeUser;
 
 /**
  * ユーザ情報検索サービスインターフェース

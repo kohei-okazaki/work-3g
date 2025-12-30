@@ -37,7 +37,7 @@ import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.InquiryManagement;
 import jp.co.ha.db.entity.InquiryTypeMt;
-import jp.co.ha.db.entity.composite.CompositeInquiry;
+import jp.co.ha.db.entity.custom.CompositeInquiry;
 
 /**
  * 問い合わせ関連のComponent

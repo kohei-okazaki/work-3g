@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.mapper.composite.PagingHealthInfoMapper;
+import jp.co.ha.db.mapper.custom.PagingHealthInfoMapper;
 
 /**
  * 日次健康情報データ分析連携バッチ-Reader
@@ -16,7 +16,7 @@ import jp.co.ha.db.mapper.composite.PagingHealthInfoMapper;
  */
 @Component
 @StepScope
-public class DailyHealthInfoReader extends BaseDailyAnalysisReader<HealthInfo> {
+public class DailyHealthInfoReader extends BaseDailyAnalysisMySQLReader<HealthInfo> {
 
     /**
      * コンストラクタ
@@ -24,7 +24,7 @@ public class DailyHealthInfoReader extends BaseDailyAnalysisReader<HealthInfo> {
      * @param sqlSessionFactory
      *     SqlSessionFactory
      * @param targetDate
-     *     処理対象年月日
+     *     処理対象日
      * @param batchProperties
      *     バッチプロパティファイル
      */

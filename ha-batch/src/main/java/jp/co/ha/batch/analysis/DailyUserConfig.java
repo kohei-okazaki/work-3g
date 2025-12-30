@@ -18,7 +18,7 @@ import jp.co.ha.batch.base.DateFormatParameterValidator;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.business.io.file.csv.model.DailyUserCsvModel;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
-import jp.co.ha.db.entity.composite.CompositeUser;
+import jp.co.ha.db.entity.custom.CompositeUser;
 
 /**
  * 日次ユーザ情報データ分析連携バッチConfig<br>

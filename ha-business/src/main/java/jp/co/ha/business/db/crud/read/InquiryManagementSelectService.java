@@ -4,7 +4,7 @@ import java.util.List;
 
 import jp.co.ha.business.component.InquiryComponent.Status;
 import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.db.entity.composite.CompositeInquiry;
+import jp.co.ha.db.entity.custom.CompositeInquiry;
 
 /**
  * 問い合わせ管理情報検索サービスインターフェース

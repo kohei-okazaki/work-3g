@@ -34,7 +34,7 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootRoleMt;
 import jp.co.ha.db.entity.RootUserRoleDetailMt;
-import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
+import jp.co.ha.db.entity.custom.CompositeRootUserInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.user.request.UserEditApiRequest;
 import jp.co.ha.root.contents.user.response.UserEditApiResponse;

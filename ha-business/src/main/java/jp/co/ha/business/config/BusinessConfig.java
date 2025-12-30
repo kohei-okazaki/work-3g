@@ -147,8 +147,8 @@ public class BusinessConfig implements WebMvcConfigurer {
      *     SESソケットタイムアウト
      * @param sesStubFlag
      *     SESスタブフラグ(true:メールを送信しない、false:送信する)
-     * @param apiCommunicationDataQueueName
-     *     API通信情報キュー名
+     * @param apiLogQueueName
+     *     キュー名:API通信ログ
      * @param sqsConnnectionTimeout
      *     SQSコネクションタイムアウト
      * @param sqsSocketTimeout
@@ -168,7 +168,7 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${aws.ses.connection.timeout}") int sesConnnectionTimeout,
             @Value("${aws.ses.socket.timeout}") int sesSocketTimeout,
             @Value("${aws.ses.stubflag}") boolean sesStubFlag,
-            @Value("${aws.sqs.queue.api_communication_data}") String apiCommunicationDataQueueName,
+            @Value("${aws.sqs.queue.api_log}") String apiLogQueueName,
             @Value("${aws.sqs.connection.timeout}") int sqsConnnectionTimeout,
             @Value("${aws.sqs.socket.timeout}") int sqsSocketTimeout,
             @Value("${aws.ssm.connection.timeout}") int ssmConnnectionTimeout,
@@ -182,7 +182,7 @@ public class BusinessConfig implements WebMvcConfigurer {
         props.setSesConnnectionTimeout(sesConnnectionTimeout);
         props.setSesSocketTimeout(sesSocketTimeout);
         props.setSesStubFlag(sesStubFlag);
-        props.setApiCommunicationDataQueueName(apiCommunicationDataQueueName);
+        props.setApiLogQueueName(apiLogQueueName);
         props.setSqsConnnectionTimeout(sqsConnnectionTimeout);
         props.setSqsSocketTimeout(sqsSocketTimeout);
         props.setSsmConnnectionTimeout(ssmConnnectionTimeout);

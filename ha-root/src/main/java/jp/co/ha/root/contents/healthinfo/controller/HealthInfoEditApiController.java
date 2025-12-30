@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
@@ -41,9 +41,9 @@ import jp.co.ha.root.contents.healthinfo.response.HealthInfoEditApiResponse;
 public class HealthInfoEditApiController extends
         BaseRootApiController<HealthInfoEditApiRequest, HealthInfoEditApiResponse> {
 
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
@@ -88,8 +88,8 @@ public class HealthInfoEditApiController extends
                     .body(getErrorResponse("health_info is not found"));
         }
 
-        // API通信情報.トランザクションIDを採番
-        String transactionId = apiCommunicationDataComponent.getTransactionId();
+        // API通信ログ.トランザクションIDを採番
+        String transactionId = apiLogComponent.getTransactionId();
 
         // 基礎健康情報計算API実施
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();

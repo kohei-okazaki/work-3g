@@ -8,7 +8,7 @@ import jp.co.ha.business.api.node.request.TokenApiRequest;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
@@ -30,9 +30,9 @@ public class TokenApiComponent {
     /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
 
     /**
      * Token発行APIを呼び出す
@@ -57,10 +57,10 @@ public class TokenApiComponent {
 
         TokenApiResponse response = tokenApi.callApi(request, connectInfo);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+        ApiLogQueuePayload payload = apiLogComponent
                 .getPayload4NodeApi(tokenApi, connectInfo, request, response,
                         transactionId);
-        apiCommunicationDataComponent.registQueue(payload);
+        apiLogComponent.registQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // Token発行APIの処理が成功以外の場合

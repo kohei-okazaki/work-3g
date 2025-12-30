@@ -16,7 +16,7 @@ import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.mapper.composite.PagingHealthInfoMapper;
+import jp.co.ha.db.mapper.custom.PagingHealthInfoMapper;
 
 /**
  * 健康情報連携処理-Reader

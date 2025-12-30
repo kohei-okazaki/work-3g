@@ -27,7 +27,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.user.form.UserSettingForm;
 import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.composite.CompositeUser;
+import jp.co.ha.db.entity.custom.CompositeUser;
 
 /**
  * 健康管理_ユーザ設定コントローラ

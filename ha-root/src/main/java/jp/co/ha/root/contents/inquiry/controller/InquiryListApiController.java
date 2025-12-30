@@ -18,7 +18,7 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.validator.annotation.Decimal;
-import jp.co.ha.db.entity.composite.CompositeInquiry;
+import jp.co.ha.db.entity.custom.CompositeInquiry;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.inquiry.request.InquiryListApiRequest;
 import jp.co.ha.root.contents.inquiry.response.InquiryListApiResponse;

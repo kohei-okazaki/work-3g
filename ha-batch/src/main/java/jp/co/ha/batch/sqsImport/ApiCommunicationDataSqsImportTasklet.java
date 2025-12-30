@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.business.api.aws.AwsProperties;
 import jp.co.ha.business.api.aws.AwsSqsComponent;
 import jp.co.ha.business.api.aws.AwsSqsComponent.DequeueResult;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.component.ApiLogComponent;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.CollectionUtil;
@@ -39,21 +39,20 @@ public class ApiCommunicationDataSqsImportTasklet implements Tasklet {
     private AwsSqsComponent sqs;
     /** API通信情報Component */
     @Autowired
-    private ApiCommunicationDataComponent component;
+    private ApiLogComponent component;
 
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
             throws Exception {
 
         // キュー名
-        String queueName = awsProps.getApiCommunicationDataQueueName();
+        String queueName = awsProps.getApiLogQueueName();
 
         // キュー取得
         while (true) {
-            List<DequeueResult<ApiCommunicationDataQueuePayload>> queueList = sqs
-                    .pollQueueBatchWithHandle(queueName,
-                            ApiCommunicationDataQueuePayload.class,
-                            3, 60, 10);
+            List<DequeueResult<ApiLogQueuePayload>> queueList = sqs
+                    .pollQueueBatchWithHandle(queueName, ApiLogQueuePayload.class, 3, 60,
+                            10);
 
             if (CollectionUtil.isEmpty(queueList)) {
                 // キューが登録されていない場合
@@ -62,7 +61,7 @@ public class ApiCommunicationDataSqsImportTasklet implements Tasklet {
             }
 
             // キュー情報をDBへ登録
-            for (DequeueResult<ApiCommunicationDataQueuePayload> queueResult : queueList) {
+            for (DequeueResult<ApiLogQueuePayload> queueResult : queueList) {
                 // API_COMMUNICATION_DATA登録
                 component.create(queueResult.getPayload());
                 // キュー削除

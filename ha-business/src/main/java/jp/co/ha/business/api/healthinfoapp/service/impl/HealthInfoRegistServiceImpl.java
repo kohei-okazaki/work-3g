@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.CommonService;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoRegistService;
@@ -14,7 +13,7 @@ import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse.BasicHealthInfo;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
@@ -43,9 +42,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** トークン発行API */
     @Autowired
     private TokenApiComponent tokenApiComponent;
@@ -69,8 +68,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
             HealthInfoRegistApiResponse response) throws BaseException {
 
         if (request.getTransactionId() == null) {
-            // API通信情報.トランザクションIDを採番
-            request.setTransactionId(apiCommunicationDataComponent.getTransactionId());
+            // API通信ログ.トランザクションIDを採番
+            request.setTransactionId(apiLogComponent.getTransactionId());
         }
 
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
@@ -103,7 +102,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         // Entityの登録処理を行う
         healthInfoCreateService.create(entity);
 
-        BaseAppApiResponse.Account account = new BaseAppApiResponse.Account();
+        HealthInfoRegistApiResponse.Account account = new HealthInfoRegistApiResponse.Account();
         account.setSeqUserId(request.getSeqUserId());
         response.setAccount(account);
 

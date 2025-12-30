@@ -11,7 +11,7 @@ import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
-import jp.co.ha.db.entity.composite.CompositeHealthInfo;
+import jp.co.ha.db.entity.custom.CompositeHealthInfo;
 
 /**
  * 健康情報詳細サービス実装クラス

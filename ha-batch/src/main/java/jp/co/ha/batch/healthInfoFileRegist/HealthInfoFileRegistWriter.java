@@ -17,9 +17,9 @@ import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.UserComponent;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.CommonErrorCode;
@@ -44,8 +44,8 @@ public class HealthInfoFileRegistWriter
     private UserComponent userComponent;
     /** 健康情報設定ファイル */
     private HealthInfoProperties prop;
-    /** API通信情報Component */
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    /** API通信ログComponent */
+    private ApiLogComponent apiLogComponent;
     /** Slack Component */
     private SlackApiComponent slack;
     /** 健康情報IDリスト */
@@ -67,12 +67,12 @@ public class HealthInfoFileRegistWriter
      */
     public HealthInfoFileRegistWriter(HealthInfoRegistApi api,
             UserComponent userComponent, HealthInfoProperties prop,
-            ApiCommunicationDataComponent apiCommunicationDataComponent,
+            ApiLogComponent apiCommunicationDataComponent,
             SlackApiComponent slack) {
         this.api = api;
         this.userComponent = userComponent;
         this.prop = prop;
-        this.apiCommunicationDataComponent = apiCommunicationDataComponent;
+        this.apiLogComponent = apiCommunicationDataComponent;
         this.slack = slack;
     }
 
@@ -98,10 +98,10 @@ public class HealthInfoFileRegistWriter
                 seqHealthInfoIdList.add(response.getHealthInfo().getSeqHealthInfoId());
             }
 
-            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+            ApiLogQueuePayload payload = apiLogComponent
                     .getPayload4AppApi(api, connectInfo, request, response,
                             request.getTransactionId());
-            apiCommunicationDataComponent.registQueue(payload);
+            apiLogComponent.registQueue(payload);
         }
     }
 

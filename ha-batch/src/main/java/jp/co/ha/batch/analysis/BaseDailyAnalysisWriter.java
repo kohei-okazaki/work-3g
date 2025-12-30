@@ -73,9 +73,7 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
      * @param slack
      *     Slack Component
      * @param targetDate
-     *     処理対象年月日
-     * @param batchProperties
-     *     バッチプロパティファイル
+     *     処理対象日
      */
     public BaseDailyAnalysisWriter(BatchProperties batchProps, AwsS3Component s3,
             SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate) {
@@ -112,6 +110,7 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
 
     @Override
     public void close() {
+
         // CSV作成
         super.close();
 

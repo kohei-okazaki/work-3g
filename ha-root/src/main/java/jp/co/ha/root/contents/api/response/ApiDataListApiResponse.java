@@ -3,31 +3,34 @@ package jp.co.ha.root.contents.api.response;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import jp.co.ha.common.util.HttpStatusSerializer;
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
 
 /**
- * API通信情報一覧取得APIレスポンスクラス
+ * API通信ログ一覧取得APIレスポンスクラス
  *
  * @version 1.0.0
  */
 public class ApiDataListApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
-    /** API通信情報リスト */
+    /** API通信ログリスト */
     @JsonProperty("api_data_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ApiData> apiDataList;
 
     /**
-     * API通信情報リストを返す
+     * API通信ログリストを返す
      *
      * @return apiDataList
      */
@@ -36,25 +39,25 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
     }
 
     /**
-     * API通信情報リストを設定する
+     * API通信ログリストを設定する
      *
      * @param apiDataList
-     *     API通信情報リスト
+     *     API通信ログリスト
      */
     public void setApiDataList(List<ApiData> apiDataList) {
         this.apiDataList = apiDataList;
     }
 
     /**
-     * API通信情報
+     * API通信ログ
      *
      * @version 1.0.0
      */
     public static class ApiData extends JsonEntity {
 
-        /** API通信情報ID */
-        @JsonProperty("seq_api_communication_data_id")
-        private Long seqApiCommunicationDataId;
+        /** API通信ログID */
+        @JsonProperty("seq_api_log_id")
+        private Long seqApiLogId;
         /** トランザクションID */
         @JsonProperty("transaction_id")
         private String transactionId;
@@ -72,7 +75,8 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         private String body;
         /** HTTPステータス */
         @JsonProperty("http_status")
-        private String httpStatus;
+        @JsonSerialize(using = HttpStatusSerializer.class)
+        private HttpStatus httpStatus;
         /** 詳細 */
         @JsonProperty("detail")
         private String detail;
@@ -88,22 +92,22 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         private LocalDateTime responseDate;
 
         /**
-         * API通信情報IDを返す
-         *
-         * @return seqApiCommunicationDataId
+         * API通信ログIDを返す
+         * 
+         * @return seqApiLogId
          */
-        public Long getSeqApiCommunicationDataId() {
-            return seqApiCommunicationDataId;
+        public Long getSeqApiLogId() {
+            return seqApiLogId;
         }
 
         /**
-         * API通信情報IDを設定する
-         *
-         * @param seqApiCommunicationDataId
-         *     API通信情報ID
+         * API通信ログIDを設定する
+         * 
+         * @param seqApiLogId
+         *     API通信ログID
          */
-        public void setSeqApiCommunicationDataId(Long seqApiCommunicationDataId) {
-            this.seqApiCommunicationDataId = seqApiCommunicationDataId;
+        public void setSeqApiLogId(Long seqApiLogId) {
+            this.seqApiLogId = seqApiLogId;
         }
 
         /**
@@ -206,7 +210,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
          *
          * @return httpStatus
          */
-        public String getHttpStatus() {
+        public HttpStatus getHttpStatus() {
             return httpStatus;
         }
 
@@ -216,7 +220,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
          * @param httpStatus
          *     HTTPステータス
          */
-        public void setHttpStatus(String httpStatus) {
+        public void setHttpStatus(HttpStatus httpStatus) {
             this.httpStatus = httpStatus;
         }
 
