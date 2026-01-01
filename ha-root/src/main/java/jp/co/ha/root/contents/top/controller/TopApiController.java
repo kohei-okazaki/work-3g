@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.top.controller;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,7 +20,6 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.top.request.TopApiRequest;
@@ -211,8 +212,7 @@ public class TopApiController
         if (StringUtil.isEmpty(date)) {
             return DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate());
         }
-        return DateTimeUtil.toLocalDate(date + "01",
-                DateFormatType.YYYYMMDD_NOSEP_STRICT);
+        return DateTimeUtil.toLocalDate(date + "01", YYYYMMDD_NOSEP_STRICT);
     }
 
 }

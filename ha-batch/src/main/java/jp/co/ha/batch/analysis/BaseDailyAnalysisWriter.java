@@ -1,5 +1,7 @@
 package jp.co.ha.batch.analysis;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,15 +24,14 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
@@ -130,8 +131,7 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
 
             // 検索対象年月(YYYYMMDD)
             String date = StringUtil.isEmpty(targetDate)
-                    ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                            DateFormatType.YYYYMMDD_NOSEP)
+                    ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMMDD_NOSEP)
                     : targetDate;
 
             File gzFile = gzPath.toFile();

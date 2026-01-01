@@ -25,10 +25,11 @@ import jp.co.ha.common.web.interceptor.RequestInterceptor;
 // @PropertySource({ "classpath:crypt.properties", "classpath:jdbc.properties",
 // "classpath:system.properties" })
 @ComponentScan(basePackages = {
-        "jp.co.ha.common.system",
+        "jp.co.ha.common.aws",
         "jp.co.ha.common.crypt",
         "jp.co.ha.common.db",
         "jp.co.ha.common.io",
+        "jp.co.ha.common.system",
         "jp.co.ha.common.web.api.aspect"
 })
 public class CommonConfig implements WebMvcConfigurer {

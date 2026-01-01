@@ -1,7 +1,5 @@
 package jp.co.ha.common.db;
 
-import jp.co.ha.common.exception.BaseException;
-
 /**
  * Entityの暗号/復号インターフェース
  *
@@ -14,18 +12,14 @@ public interface EntityCrypter {
      *
      * @param entity
      *     Entityクラス
-     * @throws BaseException
-     *     基底例外
      */
-    void encrypt(Object entity) throws BaseException;
+    void encrypt(Object entity);
 
     /**
      * 指定されたEntityクラスの復号を行う
      *
      * @param entity
      *     Entityクラス
-     * @throws BaseException
-     *     基底例外
      */
-    void decrypt(Object entity) throws BaseException;
+    void decrypt(Object entity);
 }

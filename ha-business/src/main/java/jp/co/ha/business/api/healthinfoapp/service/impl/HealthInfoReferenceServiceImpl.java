@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.healthinfoapp.service.impl;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,6 @@ import jp.co.ha.business.api.healthinfoapp.service.HealthInfoReferenceService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.HealthInfo;
@@ -46,11 +47,11 @@ public class HealthInfoReferenceServiceImpl extends CommonService
                 .findByHealthInfoIdAndSeqUserId(request.getSeqHealthInfoId(),
                         request.getSeqUserId());
         if (CollectionUtil.isEmpty(healthInfoList)) {
-            throw new BusinessException(CommonErrorCode.DB_NO_DATA,
+            throw new BusinessException(DB_NO_DATA,
                     "該当のレコードが見つかりません seq_health_info_id:" + request.getSeqHealthInfoId()
                             + ", seq_user_id:" + request.getSeqUserId());
         } else if (CollectionUtil.isMultiple(healthInfoList)) {
-            throw new BusinessException(CommonErrorCode.MULTIPLE_DATA,
+            throw new BusinessException(MULTIPLE_DATA,
                     "該当のデータが複数存在します seq_health_info_id:" + request.getSeqHealthInfoId()
                             + ", seq_user_id:" + request.getSeqUserId());
         }

@@ -7,7 +7,7 @@
 #
 # 引数：YYYYMMDD
 # 
-# input: MySQL-HEALTH_INFO
+# input: MySQL.HEALTH_INFO
 # 
 # output: S3.analysis/YYYYMMDD/healthinfo.csv.gz
 # ----------------------------------------------------------------------------------------

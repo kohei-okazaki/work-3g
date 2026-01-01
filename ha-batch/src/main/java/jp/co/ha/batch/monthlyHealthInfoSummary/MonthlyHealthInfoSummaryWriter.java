@@ -21,12 +21,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.FileUtil;

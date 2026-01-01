@@ -1,4 +1,6 @@
-package jp.co.ha.business.api.aws;
+package jp.co.ha.common.aws;
+
+import static jp.co.ha.common.exception.CommonErrorCode.*;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -12,9 +14,8 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jp.co.ha.business.exception.BusinessErrorCode;
-import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.CollectionUtil;
@@ -107,7 +108,7 @@ public class AwsSqsComponent {
             // キュー送信
             sqs.sendMessage(builder.build());
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_SQS_ENQUEUE_ERROR, e);
+            throw new SystemException(AWS_SQS_ENQUEUE_ERROR, e);
         }
     }
 
@@ -165,7 +166,7 @@ public class AwsSqsComponent {
             return resultList;
 
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_SQS_POLL_ERROR, e);
+            throw new SystemException(AWS_SQS_POLL_ERROR, e);
         }
     }
 
@@ -222,7 +223,7 @@ public class AwsSqsComponent {
             return resultList;
 
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_SQS_POLL_ERROR, e);
+            throw new SystemException(AWS_SQS_POLL_ERROR, e);
         }
     }
 
@@ -249,7 +250,7 @@ public class AwsSqsComponent {
                     .build());
             LOG.debug("delete queue, queueUrl=" + queueUrl);
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_SQS_ACK_ERROR, e);
+            throw new SystemException(AWS_SQS_ACK_ERROR, e);
         }
     }
 
@@ -257,10 +258,10 @@ public class AwsSqsComponent {
      * {@linkplain SqsClient}を返す
      * 
      * @return SqsClient
-     * @throws BusinessException
+     * @throws BaseException
      *     AWSクライアント接続エラー
      */
-    private SqsClient getSqsClient() throws BusinessException {
+    private SqsClient getSqsClient() throws BaseException {
 
         try {
             // HttpClient にタイムアウトを設定する
@@ -272,11 +273,11 @@ public class AwsSqsComponent {
 
             return SqsClient.builder()
                     .region(awsProps.getRegion())
-                    .credentialsProvider(auth.getAWSCredentialsProvider())
+                    .credentialsProvider(auth.getProvider())
                     .httpClient(httpClient)
                     .build();
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+            throw new SystemException(AWS_CLIENT_CONNECT_ERROR, e);
         }
     }
 

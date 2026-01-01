@@ -1,5 +1,7 @@
 package jp.co.ha.common.crypt;
 
+import static jp.co.ha.common.aws.AwsSystemsManagerComponent.*;
+
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -12,7 +14,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.db.CryptProperties;
+import jp.co.ha.common.aws.AwsSystemsManagerComponent;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.type.Algorithm;
@@ -29,9 +32,9 @@ public class AesCrypter implements Crypter {
 
     /** LOG */
     private static Logger LOG = LoggerFactory.getLogger(AesCrypter.class);
-    /** 暗号化設定ファイル情報 */
+    /** Systems Manager */
     @Autowired
-    private CryptProperties cryptConfig;
+    private AwsSystemsManagerComponent ssm;
 
     @Override
     public String encrypt(String str) {
@@ -41,7 +44,6 @@ public class AesCrypter implements Crypter {
         }
 
         try {
-
             byte[] input = str.getBytes(Charset.UTF_8.getValue());
             byte[] encrypted = getCipher(Cipher.ENCRYPT_MODE).doFinal(input);
             return Base64.getEncoder().encodeToString(encrypted);
@@ -78,14 +80,19 @@ public class AesCrypter implements Crypter {
      *     モード
      * @return Cipher
      * @throws NoSuchAlgorithmException
+     *     Algorithmが不正な場合
      * @throws NoSuchPaddingException
+     *     Paddingが不正な場合
      * @throws InvalidKeyException
+     *     KEY情報が不正な場合
+     * @throws BaseException
+     *     SSMからのキー取得に失敗した場合
      */
-    private Cipher getCipher(int mode)
-            throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+    private Cipher getCipher(int mode) throws NoSuchAlgorithmException,
+            NoSuchPaddingException, InvalidKeyException, BaseException {
 
         SecretKeySpec sks = new SecretKeySpec(getKey(), Algorithm.AES.getValue());
-        Cipher c = Cipher.getInstance(cryptConfig.getMode());
+        Cipher c = Cipher.getInstance(ssm.getValue(KEY_CRYPT_MODE));
         c.init(mode, sks);
 
         return c;
@@ -95,10 +102,12 @@ public class AesCrypter implements Crypter {
      * 秘密鍵を返す
      *
      * @return 秘密鍵
+     * @throws BaseException
+     *     SSMからのキー取得に失敗した場合
      */
-    private byte[] getKey() {
+    private byte[] getKey() throws BaseException {
         try {
-            return cryptConfig.getKey().getBytes(Charset.UTF_8.getValue());
+            return ssm.getValue(KEY_CRYPT_KEY).getBytes(Charset.UTF_8.getValue());
         } catch (@SuppressWarnings("unused") UnsupportedEncodingException e) {
             // 文字コードはUTF-8なので発生しない想定
             return null;

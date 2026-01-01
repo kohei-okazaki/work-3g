@@ -21,7 +21,7 @@ public class CompositeHealthInfoKey implements Serializable {
     private Long seqUserId;
 
     /**
-     * seqHealthInfoIdを返す
+     * 健康情報IDを返す
      *
      * @return seqHealthInfoId
      */
@@ -30,7 +30,7 @@ public class CompositeHealthInfoKey implements Serializable {
     }
 
     /**
-     * seqHealthInfoIdを設定する
+     * 健康情報IDを設定する
      *
      * @param seqHealthInfoId
      *     健康情報ID
@@ -40,7 +40,7 @@ public class CompositeHealthInfoKey implements Serializable {
     }
 
     /**
-     * seqUserIdを返す
+     * ユーザIDを返す
      *
      * @return seqUserId
      */
@@ -49,7 +49,7 @@ public class CompositeHealthInfoKey implements Serializable {
     }
 
     /**
-     * seqUserIdを設定する
+     * ユーザIDを設定する
      *
      * @param seqUserId
      *     ユーザID

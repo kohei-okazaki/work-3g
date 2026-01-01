@@ -1,5 +1,7 @@
 package jp.co.ha.business.component;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,9 +19,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsSesComponent;
-import jp.co.ha.business.api.aws.AwsSystemsManagerComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.db.crud.create.InquiryManagementCreateService;
 import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
@@ -27,13 +26,15 @@ import jp.co.ha.business.db.crud.read.InquiryTypeMtSearchService;
 import jp.co.ha.business.db.crud.update.InquiryManagementUpdateService;
 import jp.co.ha.business.dto.InquiryDto;
 import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsSesComponent;
+import jp.co.ha.common.aws.AwsSystemsManagerComponent;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
 import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.InquiryManagement;
 import jp.co.ha.db.entity.InquiryTypeMt;
@@ -105,7 +106,7 @@ public class InquiryComponent {
                 .add(AwsS3Component.AwsS3Key.INQUIRY.getValue())
                 .add(String.valueOf(dto.getSeqUserId()))
                 .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP))
+                        YYYYMMDDHHMMSS_NOSEP))
                 .toString();
         s3.putFile(s3Key, dto.getBody());
 

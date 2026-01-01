@@ -1,4 +1,4 @@
-package jp.co.ha.common.function;
+package jp.co.ha.common.util;
 
 import java.util.List;
 

@@ -10,11 +10,11 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsProperties;
-import jp.co.ha.business.api.aws.AwsSqsComponent;
-import jp.co.ha.business.api.aws.AwsSqsComponent.DequeueResult;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
+import jp.co.ha.common.aws.AwsProperties;
+import jp.co.ha.common.aws.AwsSqsComponent;
+import jp.co.ha.common.aws.AwsSqsComponent.DequeueResult;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.CollectionUtil;

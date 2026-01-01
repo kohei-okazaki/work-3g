@@ -7,7 +7,7 @@
 #
 # 引数：YYYYMMDD
 # 
-# input: DynamoDB-batch_log
+# input: MySQL.batch_log
 # 
 # output: S3.analysis/YYYYMMDD/batch_log.csv.gz
 # ----------------------------------------------------------------------------------------

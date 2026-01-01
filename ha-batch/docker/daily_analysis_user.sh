@@ -7,7 +7,7 @@
 #
 # 引数：YYYYMMDD
 # 
-# input: MySQL-USER
+# input: MySQL.USER
 # 
 # output: S3.analysis/YYYYMMDD/user.csv.gz
 # ----------------------------------------------------------------------------------------

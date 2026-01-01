@@ -1,6 +1,7 @@
 package jp.co.ha.batch.analysis;
 
 import static jp.co.ha.batch.base.BatchConfigConst.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -17,7 +18,6 @@ import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.base.DateFormatParameterValidator;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.business.io.file.csv.model.DailyHealthInfoCsvModel;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -51,8 +51,8 @@ public class DailyHealthInfoConfig extends BatchConfig {
             BatchJobListener listener) {
         return new JobBuilder(DAILY_HEALTH_INFO_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new DateFormatParameterValidator(OPTION_D,
-                        DateFormatType.YYYYMMDD_NOSEP, false))
+                .validator(
+                        new DateFormatParameterValidator(OPTION_D, YYYYMMDD_NOSEP, false))
                 .listener(listener)
                 .start(dailyHealthInfoStep)
                 .build();

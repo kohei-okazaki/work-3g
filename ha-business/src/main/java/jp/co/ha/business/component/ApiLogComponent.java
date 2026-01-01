@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsProperties;
-import jp.co.ha.business.api.aws.AwsSqsComponent;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse;
 import jp.co.ha.business.api.root.response.BaseRootApiResponse;
 import jp.co.ha.business.api.track.response.BaseTrackApiResponse;
 import jp.co.ha.business.db.crud.create.ApiLogCreateService;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
+import jp.co.ha.common.aws.AwsProperties;
+import jp.co.ha.common.aws.AwsSqsComponent;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.web.api.ApiConnectInfo;

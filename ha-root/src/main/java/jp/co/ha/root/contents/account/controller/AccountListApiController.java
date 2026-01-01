@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.account.controller;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
@@ -54,7 +55,7 @@ public class AccountListApiController
                 applicationProperties.getAccountPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_USER_ID", SortType.DESC)
+                .orderBy("SEQ_USER_ID", DESC)
                 .pageable(pageable)
                 .build();
 

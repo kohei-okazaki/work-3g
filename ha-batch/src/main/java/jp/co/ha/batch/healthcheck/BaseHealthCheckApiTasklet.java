@@ -4,9 +4,9 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 

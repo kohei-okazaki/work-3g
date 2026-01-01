@@ -1,4 +1,6 @@
-package jp.co.ha.business.api.aws;
+package jp.co.ha.common.aws;
+
+import static jp.co.ha.common.exception.CommonErrorCode.*;
 
 import java.io.StringWriter;
 import java.time.Duration;
@@ -10,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import jp.co.ha.business.exception.BusinessErrorCode;
-import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
@@ -185,11 +185,11 @@ public class AwsSesComponent {
      * @param mailAddress
      *     検証用Eメールアドレス
      * @return 認証結果
-     * @throws BusinessException
+     * @throws BaseException
      *     AWSクライアント接続に失敗した場合
      */
     public VerifyResultType verifyEmailAddress(String mailAddress)
-            throws BusinessException {
+            throws BaseException {
 
         VerifyEmailIdentityRequest request = VerifyEmailIdentityRequest.builder()
                 .emailAddress(mailAddress)
@@ -301,8 +301,8 @@ public class AwsSesComponent {
             return EmailSendResultType.SUCCESS;
 
         } catch (MailFromDomainNotVerifiedException e) {
-            throw new BusinessException(
-                    BusinessErrorCode.AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR,
+            throw new SystemException(
+                    AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR,
                     "メールアドレスがSESに認証されていません.管理画面から認証してください", e);
         }
     }
@@ -311,10 +311,10 @@ public class AwsSesComponent {
      * {@linkplain SesClient}を返す
      * 
      * @return SesClient
-     * @throws BusinessException
+     * @throws BaseException
      *     AWSクライアント接続エラー
      */
-    private SesClient getSesClient() throws BusinessException {
+    private SesClient getSesClient() throws BaseException {
 
         try {
             // HttpClient にタイムアウトを設定する
@@ -326,11 +326,11 @@ public class AwsSesComponent {
 
             return SesClient.builder()
                     .region(awsProps.getRegion())
-                    .credentialsProvider(auth.getAWSCredentialsProvider())
+                    .credentialsProvider(auth.getProvider())
                     .httpClient(httpClient)
                     .build();
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+            throw new SystemException(AWS_CLIENT_CONNECT_ERROR, e);
         }
     }
 
@@ -364,7 +364,7 @@ public class AwsSesComponent {
 
         if (StringUtil.isEmpty(templateId)) {
             // テンプレートIDが未指定の場合
-            throw new SystemException(BusinessErrorCode.MAIL_TEMPLATE_REQUIED_ERROR,
+            throw new SystemException(MAIL_TEMPLATE_REQUIED_ERROR,
                     "メールテンプレートIDが未指定です。templateId=" + templateId);
         }
 

@@ -44,7 +44,7 @@ public class ApiLogSearchServiceImpl implements ApiLogSearchService {
         ApiLogExample example = new ApiLogExample();
         ApiLogExample.Criteria criteria = example.createCriteria();
         if (seqApiLogId != null) {
-            // API通信情報ID
+            // API通信ログID
             criteria.andSeqApiLogIdEqualTo(seqApiLogId);
         }
         return mapper.countByExample(example);

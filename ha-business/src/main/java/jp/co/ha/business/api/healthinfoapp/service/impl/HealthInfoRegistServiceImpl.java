@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.healthinfoapp.service.impl;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,6 @@ import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
@@ -133,7 +134,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
                 .filter(e -> e.getRangeMin().intValue() <= bmi.intValue()
                         && bmi.intValue() < e.getRangeMax().intValue())
                 .findFirst()
-                .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
+                .orElseThrow(() -> new BusinessException(DB_NO_DATA,
                         "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
 
         HealthInfo entity = new HealthInfo();

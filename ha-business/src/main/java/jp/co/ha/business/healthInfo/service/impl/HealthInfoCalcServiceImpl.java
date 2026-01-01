@@ -1,5 +1,7 @@
 package jp.co.ha.business.healthInfo.service.impl;
 
+import static jp.co.ha.business.healthInfo.type.HealthInfoStatus.*;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -22,11 +24,11 @@ public class HealthInfoCalcServiceImpl implements HealthInfoCalcService {
 
         HealthInfoStatus status;
         if (beforeWeight.compareTo(inputWeight) == 0) {
-            status = HealthInfoStatus.EVEN;
+            status = EVEN;
         } else if (beforeWeight.compareTo(inputWeight) == -1) {
-            status = HealthInfoStatus.INCREASE;
+            status = INCREASE;
         } else {
-            status = HealthInfoStatus.DOWN;
+            status = DOWN;
         }
         return status;
     }

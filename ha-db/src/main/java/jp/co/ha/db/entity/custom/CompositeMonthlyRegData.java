@@ -24,7 +24,7 @@ public class CompositeMonthlyRegData implements Serializable {
     private LocalDate date;
 
     /**
-     * countを返す
+     * 登録件数を返す
      *
      * @return count
      */
@@ -33,7 +33,7 @@ public class CompositeMonthlyRegData implements Serializable {
     }
 
     /**
-     * countを設定する
+     * 登録件数を設定する
      *
      * @param count
      *     登録件数
@@ -43,7 +43,7 @@ public class CompositeMonthlyRegData implements Serializable {
     }
 
     /**
-     * dateを返す
+     * 登録日を返す
      *
      * @return date
      */
@@ -52,7 +52,7 @@ public class CompositeMonthlyRegData implements Serializable {
     }
 
     /**
-     * dateを設定する
+     * 登録日を設定する
      *
      * @param date
      *     登録日

@@ -1,5 +1,7 @@
 package jp.co.ha.business.component;
 
+import static jp.co.ha.business.exception.BusinessErrorCode.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +13,6 @@ import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.dto.BreathingCapacityDto;
-import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
@@ -109,8 +110,7 @@ public class BreathingCapacityApiComponent {
 
         if (Result.SUCCESS != response.getResult()) {
             // 肺活量計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BREATHING_API_CONNECT_ERROR,
-                    response.getDetail());
+            throw new ApiException(BREATHING_API_CONNECT_ERROR, response.getDetail());
         }
 
         return response;
@@ -150,8 +150,7 @@ public class BreathingCapacityApiComponent {
 
         if (Result.SUCCESS != response.getResult()) {
             // 肺活量計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BREATHING_API_CONNECT_ERROR,
-                    response.getDetail());
+            throw new ApiException(BREATHING_API_CONNECT_ERROR, response.getDetail());
         }
 
         return response;

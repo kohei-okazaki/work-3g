@@ -1,5 +1,7 @@
 package jp.co.ha.business.component;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +18,6 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.NewsInfoCreateService;
@@ -25,9 +25,10 @@ import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
 import jp.co.ha.business.db.crud.update.NewsInfoUpdateService;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
@@ -77,7 +78,7 @@ public class NewsComponent {
     public List<NewsDto> getNewsList(Pageable pageable) throws BaseException {
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
+                .orderBy("SEQ_NEWS_INFO_ID", DESC)
                 .pageable(pageable)
                 .build();
 

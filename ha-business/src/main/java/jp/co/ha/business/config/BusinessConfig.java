@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import jp.co.ha.business.api.aws.AwsProperties;
 import jp.co.ha.business.io.file.json.conf.JsonConfig;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.aws.AwsProperties;
 
 /**
  * businessプロジェクトのConfigクラス

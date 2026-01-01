@@ -1,9 +1,10 @@
-package jp.co.ha.business.api.aws;
+package jp.co.ha.common.aws;
+
+import static jp.co.ha.common.exception.CommonErrorCode.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.system.SystemProperties;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
@@ -12,7 +13,7 @@ import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 
 /**
  * AWS認証情報のComponent<br>
- * ※事前にAWS-CLIでローカルPCに対し、CLI用のIAMユーザを設定しておくこと
+ * ※ローカルPCの場合、事前にCLI用のIAMユーザを設定しておくこと
  *
  * @version 1.0.0
  */
@@ -32,7 +33,7 @@ public class AwsAuthComponent {
      *
      * @return AwsCredentialsProvider
      */
-    public AwsCredentialsProvider getAWSCredentialsProvider() {
+    public AwsCredentialsProvider getProvider() {
         switch (systemProps.getEnvironment()) {
         case LOCAL:
             return ProfileCredentialsProvider.create();
@@ -40,7 +41,7 @@ public class AwsAuthComponent {
             return InstanceProfileCredentialsProvider.create();
         default:
             // システムプロパティの環境がNullや実行可能環境でない場合
-            throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
+            throw new SystemRuntimeException(UNEXPECTED_ERROR,
                     "環境情報の設定が不正です。env=" + systemProps.getEnvironment());
         }
     }

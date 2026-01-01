@@ -58,10 +58,11 @@ public class ApiDataListApiController
                 .pageable(pageable)
                 .build();
 
-        List<ApiDataListApiResponse.ApiData> apiDataList = searchService
-                .findAll(selectOption).stream()
+        List<ApiDataListApiResponse.ApiLog> apiLogList = searchService
+                .findAll(selectOption)
+                .stream()
                 .map(e -> {
-                    ApiDataListApiResponse.ApiData response = new ApiDataListApiResponse.ApiData();
+                    ApiDataListApiResponse.ApiLog response = new ApiDataListApiResponse.ApiLog();
                     BeanUtil.copy(e, response);
                     response.setHttpStatus(HttpStatus.valueOf(e.getHttpStatus()));
                     return response;
@@ -71,7 +72,7 @@ public class ApiDataListApiController
                 searchService.countBySeqApiLogId(null));
 
         ApiDataListApiResponse response = getSuccessResponse();
-        response.setApiDataList(apiDataList);
+        response.setApiLogList(apiLogList);
         response.setPaging(paging);
 
         return ResponseEntity.ok(response);

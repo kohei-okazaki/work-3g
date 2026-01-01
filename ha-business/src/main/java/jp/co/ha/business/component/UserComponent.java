@@ -1,5 +1,9 @@
 package jp.co.ha.business.component;
 
+import static jp.co.ha.business.exception.BusinessErrorCode.*;
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Optional;
@@ -21,17 +25,14 @@ import jp.co.ha.business.db.crud.update.HealthInfoFileSettingUpdateService;
 import jp.co.ha.business.db.crud.update.UserHealthGoalUpdateService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.dto.UserDto;
-import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserHealthGoal;
@@ -126,7 +127,7 @@ public class UserComponent {
 
         if (birthDate.isAfter(sysDate)) {
             // 誕生日 > sydateの場合
-            throw new BusinessException(CommonErrorCode.RUNTIME_ERROR,
+            throw new BusinessException(RUNTIME_ERROR,
                     "birthDate > システム日付のため、データ不正. birthDate=" + birthDate + ", sysDate="
                             + sysDate);
         }
@@ -206,7 +207,7 @@ public class UserComponent {
 
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
-            throw new BusinessException(BusinessErrorCode.USER_REGIST_ERROR, e);
+            throw new BusinessException(USER_REGIST_ERROR, e);
         }
     }
 
@@ -245,7 +246,7 @@ public class UserComponent {
 
             // 登録処理中にエラーが起きた場合、ロールバック
             transactionManager.rollback(status);
-            throw new BusinessException(BusinessErrorCode.USER_UPDATE_ERROR, e);
+            throw new BusinessException(USER_UPDATE_ERROR, e);
         }
     }
 
@@ -269,8 +270,8 @@ public class UserComponent {
         user.setDeleteFlag(CommonFlag.FALSE.get());
         user.setPasswordExpire(DateTimeUtil
                 .addMonth(DateTimeUtil.toLocalDate(DateTimeUtil.getSysDate()), 6));
-        user.setApiKey(encoder.encode(dto.getPassword(), DateTimeUtil.toString(
-                DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
+        user.setApiKey(encoder.encode(dto.getPassword(),
+                DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMMDDHHMMSS_NOSEP)));
         user.setGenderType(GenderType.of(dto.getGenderType()).getIntValue());
 
         return user;

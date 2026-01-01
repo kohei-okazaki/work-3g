@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.inquiry.controller;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.component.InquiryComponent;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
@@ -57,7 +58,7 @@ public class InquiryListApiController
                 applicationProperties.getInquiryPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("REG_DATE", SortType.ASC)
+                .orderBy("REG_DATE", ASC)
                 .pageable(pageable)
                 .build();
         List<CompositeInquiry> list = component.getInquiryList(selectOption);

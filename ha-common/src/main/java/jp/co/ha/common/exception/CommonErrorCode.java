@@ -28,10 +28,32 @@ public enum CommonErrorCode implements BaseErrorCode, BaseEnum {
     DB_SQL_SELECT_ERROR("DB_SQL_SELECT_ERROR", "CE0007", LogLevel.ERROR),
     /** DB切断エラー */
     DB_CLOSE_ERROR("DB_CLOSE_ERROR", "CE0008", LogLevel.ERROR),
+    /** AWS-S3 ダウンロードエラー */
+    AWS_S3_DOWNLOAD_ERROR("AWS_S3_DOWNLOAD_ERROR", "CE0027", LogLevel.ERROR),
+    /** AWS-S3 アップロードエラー */
+    AWS_S3_UPLOAD_ERROR("AWS_S3_UPLOAD_ERROR", "CE0028", LogLevel.ERROR),
+    /** AWS接続エラー */
+    AWS_CLIENT_CONNECT_ERROR("AWS_CLIENT_CONNECT_ERROR", "CE0029", LogLevel.ERROR),
+    /** SESメールアドレス認証エラー */
+    AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR("AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR", "CE0034",
+            LogLevel.ERROR),
     /** API通信エラー(400系) */
     API_400_CONNECT_ERROR("API_400_CONNECT_ERROR", "CE0035", LogLevel.ERROR),
     /** API通信エラー(500系) */
     API_500_CONNECT_ERROR("API_500_CONNECT_ERROR", "CE0036", LogLevel.ERROR),
+    /** AWS-SQS キュー登録エラー */
+    AWS_SQS_ENQUEUE_ERROR("AWS_SQS_ENQUEUE_ERROR", "CE0041", LogLevel.ERROR),
+    /** AWS-SQS キュー取得エラー */
+    AWS_SQS_POLL_ERROR("AWS_SQS_POLL_ERROR", "CE0042", LogLevel.ERROR),
+    /** AWS-SQS キュー削除エラー */
+    AWS_SQS_ACK_ERROR("AWS_SQS_ACK_ERROR", "CE0043", LogLevel.ERROR),
+    /** AWS-S3 ファイル削除エラー */
+    AWS_S3_DELETE_ERROR("AWS_S3_DELETE_ERROR", "CE0044", LogLevel.ERROR),
+    /** メールテンプレート未指定エラー */
+    MAIL_TEMPLATE_REQUIED_ERROR("MAIL_TEMPLATE_REQUIED_ERROR", "CE0046",
+            LogLevel.ERROR),
+    /** AWS-SSM 値取得エラー */
+    AWS_SSM_GET_ERROR("AWS_SSM_GET_ERROR", "CE0047", LogLevel.ERROR),
 
     /* WARN */
     /** 該当データ存在しないエラー */

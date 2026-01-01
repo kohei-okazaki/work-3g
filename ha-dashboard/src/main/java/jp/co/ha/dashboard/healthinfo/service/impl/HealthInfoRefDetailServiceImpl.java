@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoRefDetailDto;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoRefDetailService;
 import jp.co.ha.db.entity.custom.CompositeHealthInfo;
 
@@ -43,7 +44,7 @@ public class HealthInfoRefDetailServiceImpl implements HealthInfoRefDetailServic
 
             // 健康情報作成日時
             destDto.setHealthInfoRegDate(DateTimeUtil.toString(
-                    srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
+                    srcEntity.getHealthInfoRegDate(), YYYYMMDDHHMMSS));
         });
         return Optional.ofNullable(detailDto);
     }

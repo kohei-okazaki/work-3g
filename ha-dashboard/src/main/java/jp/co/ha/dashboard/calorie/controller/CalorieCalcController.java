@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.calorie.controller;
 
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +26,6 @@ import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.calorie.form.CalorieCalcForm;
-import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.User;
 
 /**
@@ -80,7 +81,7 @@ public class CalorieCalcController implements BaseWebController {
      */
     @GetMapping("/index")
     public String index(Model model) {
-        return getView(model, DashboardView.CALORIE_CALC);
+        return getView(model, CALORIE_CALC);
     }
 
     /**
@@ -103,7 +104,7 @@ public class CalorieCalcController implements BaseWebController {
             HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(model, DashboardView.CALORIE_CALC);
+            return getView(model, CALORIE_CALC);
         }
 
         // DTOに変換
@@ -121,6 +122,6 @@ public class CalorieCalcController implements BaseWebController {
 
         model.addAttribute("calcResult", calcResult);
 
-        return getView(model, DashboardView.CALORIE_CALC);
+        return getView(model, CALORIE_CALC);
     }
 }

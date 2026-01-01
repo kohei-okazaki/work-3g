@@ -25,27 +25,27 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
     /** API通信ログリスト */
-    @JsonProperty("api_data_list")
+    @JsonProperty("api_log_list")
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<ApiData> apiDataList;
+    private List<ApiLog> apiLogList;
 
     /**
      * API通信ログリストを返す
-     *
-     * @return apiDataList
+     * 
+     * @return apiLogList
      */
-    public List<ApiData> getApiDataList() {
-        return apiDataList;
+    public List<ApiLog> getApiLogList() {
+        return apiLogList;
     }
 
     /**
      * API通信ログリストを設定する
-     *
-     * @param apiDataList
+     * 
+     * @param apiLogList
      *     API通信ログリスト
      */
-    public void setApiDataList(List<ApiData> apiDataList) {
-        this.apiDataList = apiDataList;
+    public void setApiLogList(List<ApiLog> apiLogList) {
+        this.apiLogList = apiLogList;
     }
 
     /**
@@ -53,7 +53,7 @@ public class ApiDataListApiResponse extends BaseRootApiResponse
      *
      * @version 1.0.0
      */
-    public static class ApiData extends JsonEntity {
+    public static class ApiLog extends JsonEntity {
 
         /** API通信ログID */
         @JsonProperty("seq_api_log_id")

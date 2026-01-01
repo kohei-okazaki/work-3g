@@ -1,4 +1,4 @@
-package jp.co.ha.business.api.aws;
+package jp.co.ha.common.aws;
 
 import org.springframework.stereotype.Component;
 

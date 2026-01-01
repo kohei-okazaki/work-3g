@@ -64,9 +64,9 @@ class HealthInfoAPIView(APIView):
                     created_at_epoch = int(created_at_utc.timestamp())
 
                     item = {
-                        "seq_user_id": seq_user_id,
-                        "created_at_epoch": created_at_epoch,
                         "seq_health_info_id": hi["seq_health_info_id"],
+                        "created_at_epoch": created_at_epoch,
+                        "seq_user_id": seq_user_id,
                         "height": Decimal(str(hi["height"])),
                         "weight": Decimal(str(hi["weight"])),
                         "bmi": Decimal(str(hi["bmi"])),

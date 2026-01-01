@@ -1,5 +1,7 @@
 package jp.co.ha.business.interceptor;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -8,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
@@ -52,8 +53,8 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
             // ログイン情報のチェック対象の場合
             // LOG.warn("url=" + request.getRequestURI());
             sessionComponent.getValue(request.getSession(), "seqUserId", Long.class)
-                    .orElseThrow(() -> new SystemException(
-                            DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+                    .orElseThrow(() -> new SystemException(ILLEGAL_ACCESS_ERROR,
+                            "不正リクエストエラーです"));
         }
 
         if (isMultiSubmitTokenCheck(handler)) {
@@ -61,11 +62,10 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
             String multiSubmitToken = sessionComponent
                     .getValue(request.getSession(), MultiSubmitToken.TOKEN_NAME,
                             String.class)
-                    .orElseThrow(() -> new SystemException(
-                            DashboardErrorCode.MULTI_SUBMIT_ERROR, "不正リクエストエラーです"));
+                    .orElseThrow(() -> new SystemException(MULTI_SUBMIT_ERROR,
+                            "不正リクエストエラーです"));
             if (StringUtil.isEmpty(multiSubmitToken)) {
-                throw new SystemException(DashboardErrorCode.MULTI_SUBMIT_ERROR,
-                        "不正リクエストエラーです");
+                throw new SystemException(MULTI_SUBMIT_ERROR, "不正リクエストエラーです");
             }
         }
         return true;

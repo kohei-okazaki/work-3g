@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.healthinfo.controller;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.math.BigDecimal;
 
 import jakarta.validation.Valid;
@@ -24,7 +26,6 @@ import jp.co.ha.business.db.crud.update.HealthInfoUpdateService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
 import jp.co.ha.db.entity.HealthInfo;
@@ -120,7 +121,7 @@ public class HealthInfoEditApiController extends
                 .filter(e -> bmi.compareTo(BigDecimal.valueOf(e.getRangeMin())) >= 0 &&
                         bmi.compareTo(BigDecimal.valueOf(e.getRangeMax())) < 0)
                 .findFirst()
-                .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
+                .orElseThrow(() -> new BusinessException(DB_NO_DATA,
                         "BMI範囲マスタの取得に失敗しました。データを確認してください。"));
 
         HealthInfo healthInfo = new HealthInfo();

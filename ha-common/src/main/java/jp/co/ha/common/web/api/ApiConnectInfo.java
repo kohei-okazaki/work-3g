@@ -40,7 +40,7 @@ public class ApiConnectInfo {
     private LocalDateTime responseDate;
 
     /**
-     * urlSupplierを返す
+     * URLSupplierを返す
      *
      * @return urlSupplier
      */
@@ -49,7 +49,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * urlSupplierを設定する
+     * URLSupplierを設定する
      *
      * @param urlSupplier
      *     URLSupplier
@@ -59,7 +59,7 @@ public class ApiConnectInfo {
     }
 
     /**
-     * urlSupplierを設定する
+     * URLSupplierを設定する
      *
      * @param urlSupplier
      *     URLSupplier

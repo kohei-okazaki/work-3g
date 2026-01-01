@@ -32,8 +32,8 @@ public class DmlExcelReader extends ExcelReader {
             ExcelSheet excelSheet = new ExcelSheet();
             Sheet sheet = sheetIte.next();
 
-            if ("TABLE_LIST".equals(sheet.getSheetName())) {
-                // TABLE_LISTは読み込み対象外
+            if (TARGET_SHEET_NAME.equals(sheet.getSheetName())) {
+                // TABLE_LISTは読込対象外
                 continue;
             }
 

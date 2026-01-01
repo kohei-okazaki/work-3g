@@ -1,4 +1,6 @@
-package jp.co.ha.business.api.aws;
+package jp.co.ha.common.aws;
+
+import static jp.co.ha.common.exception.CommonErrorCode.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -15,9 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import jp.co.ha.business.exception.BusinessErrorCode;
-import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -81,7 +82,7 @@ public class AwsS3Component {
                             .build(),
                     RequestBody.fromInputStream(is, length));
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_S3_UPLOAD_ERROR, e);
+            throw new SystemException(AWS_S3_UPLOAD_ERROR, e);
         }
     }
 
@@ -101,7 +102,7 @@ public class AwsS3Component {
         try (InputStream is = multipartFile.getInputStream()) {
             putFile(key, multipartFile.getSize(), is);
         } catch (IOException e) {
-            throw new BusinessException(e);
+            throw new SystemException(e);
         }
     }
 
@@ -143,7 +144,7 @@ public class AwsS3Component {
         try (InputStream is = new FileInputStream(file)) {
             putFile(key, file.length(), is);
         } catch (IOException e) {
-            throw new BusinessException(e);
+            throw new SystemException(e);
         }
     }
 
@@ -202,7 +203,7 @@ public class AwsS3Component {
             return s3.getObject(request);
 
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_S3_DOWNLOAD_ERROR, e);
+            throw new SystemException(AWS_S3_DOWNLOAD_ERROR, e);
         }
     }
 
@@ -238,7 +239,7 @@ public class AwsS3Component {
             return s3.listObjectsV2(request).contents();
 
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_S3_DOWNLOAD_ERROR, e);
+            throw new SystemException(AWS_S3_DOWNLOAD_ERROR, e);
         }
     }
 
@@ -269,8 +270,7 @@ public class AwsS3Component {
 
             s3.deleteObjects(deleteRequest);
         } catch (Exception e) {
-            throw new SystemRuntimeException(BusinessErrorCode.AWS_S3_DELETE_ERROR,
-                    e);
+            throw new SystemRuntimeException(AWS_S3_DELETE_ERROR, e);
         }
     }
 
@@ -294,12 +294,12 @@ public class AwsS3Component {
 
             return S3Client.builder()
                     .region(awsProps.getRegion())
-                    .credentialsProvider(auth.getAWSCredentialsProvider())
+                    .credentialsProvider(auth.getProvider())
                     .httpClient(httpClient)
                     .build();
 
         } catch (Exception e) {
-            throw new BusinessException(BusinessErrorCode.AWS_CLIENT_CONNECT_ERROR, e);
+            throw new SystemException(AWS_CLIENT_CONNECT_ERROR, e);
         }
     }
 

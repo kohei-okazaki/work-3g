@@ -1,5 +1,8 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -23,17 +26,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.dto.HealthInfoReferenceDto;
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
 import jp.co.ha.business.healthInfo.service.annotation.ReferenceDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.ReferenceDownloadExcel;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
@@ -55,7 +57,6 @@ import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoReferenceForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoReferService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoReferenceValidator;
-import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
 /**
@@ -127,7 +128,7 @@ public class HealthInfoReferenceController implements BaseWebController {
     @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("isRefered", false);
-        return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
+        return getView(model, HEALTH_INFO_REFERNCE);
     }
 
     /**
@@ -154,7 +155,7 @@ public class HealthInfoReferenceController implements BaseWebController {
             throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
+            return getView(model, HEALTH_INFO_REFERNCE);
         }
 
         // ページング情報を取得(1ページあたりの表示件数は設定ファイルより取得)
@@ -209,7 +210,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         // sessionに検索条件を設定
         sessionComponent.setValue(request.getSession(), "healthInfoReferenceDto", dto);
 
-        return getView(model, DashboardView.HEALTH_INFO_REFERNCE);
+        return getView(model, HEALTH_INFO_REFERNCE);
     }
 
     /**
@@ -232,7 +233,7 @@ public class HealthInfoReferenceController implements BaseWebController {
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
                 .orElseThrow(() -> new SystemException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+                        ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
                 .getHealthInfoResponseList(referDto, seqUserId, null);
 
@@ -264,7 +265,7 @@ public class HealthInfoReferenceController implements BaseWebController {
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
                 .orElseThrow(() -> new SystemException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+                        ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
                 .getHealthInfoResponseList(referDto, seqUserId, null);
 

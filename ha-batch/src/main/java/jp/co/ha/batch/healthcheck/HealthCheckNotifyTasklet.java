@@ -11,10 +11,10 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsSesComponent;
-import jp.co.ha.business.api.aws.AwsSystemsManagerComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
+import jp.co.ha.common.aws.AwsSesComponent;
+import jp.co.ha.common.aws.AwsSystemsManagerComponent;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 

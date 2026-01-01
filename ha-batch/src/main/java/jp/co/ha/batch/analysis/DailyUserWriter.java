@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;
-import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.io.file.csv.model.DailyUserCsvModel;
+import jp.co.ha.common.aws.AwsS3Component;
 
 /**
  * 日次ユーザ情報データ分析連携バッチ-Writer<br>

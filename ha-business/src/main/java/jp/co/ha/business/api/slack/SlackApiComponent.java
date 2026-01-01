@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.slack;
 
+import static jp.co.ha.common.aws.AwsSystemsManagerComponent.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,16 +14,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jp.co.ha.business.api.aws.AwsSystemsManagerComponent;
 import jp.co.ha.business.api.slack.SlackConnectionData.Connection;
-import jp.co.ha.business.exception.BusinessErrorCode;
+import jp.co.ha.common.aws.AwsSystemsManagerComponent;
 import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
@@ -292,7 +289,7 @@ public class SlackApiComponent {
     private SlackConnectionData getSlackConnectionData() {
 
         try {
-            return new ObjectMapper().readValue(ssm.getValue("SLACK_TOKEN"),
+            return new ObjectMapper().readValue(ssm.getValue(KEY_SLACK_TOKEN),
                     SlackConnectionData.class);
         } catch (Exception e) {
             throw new SystemRuntimeException(e);
@@ -315,7 +312,7 @@ public class SlackApiComponent {
                 .filter(e -> e.getContentType() == contentType)
                 .findFirst()
                 .orElseThrow(() -> new SystemRuntimeException(
-                        BusinessErrorCode.AWS_S3_DOWNLOAD_ERROR,
+                        CommonErrorCode.AWS_S3_DOWNLOAD_ERROR,
                         "jsonに対象のコンテンツタイプが存在しません. contentType="
                                 + contentType.getValue()));
     }
@@ -369,20 +366,5 @@ public class SlackApiComponent {
         public static ContentType of(String value) {
             return BaseEnum.of(ContentType.class, value);
         }
-    }
-
-    /**
-     * {@linkplain ContentType}のJSONデシリアライズクラス
-     *
-     * @version 1.0.0
-     */
-    public static class ContentTypeDeserializer extends JsonDeserializer<ContentType> {
-
-        @Override
-        public ContentType deserialize(JsonParser parser, DeserializationContext ctxt)
-                throws IOException, JsonProcessingException {
-            return ContentType.of(parser.getValueAsString("content_type"));
-        }
-
     }
 }

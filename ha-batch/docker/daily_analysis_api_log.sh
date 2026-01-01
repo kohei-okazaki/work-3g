@@ -7,7 +7,7 @@
 #
 # 引数：YYYYMMDD
 # 
-# input: DynamoDB-api_log
+# input: MySQL.api_log
 # 
 # output: S3.analysis/YYYYMMDD/api_log.csv.gz
 # ----------------------------------------------------------------------------------------

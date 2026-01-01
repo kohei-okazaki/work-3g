@@ -3,6 +3,7 @@ package jp.co.ha.db.entity.custom;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.Mask;
 
@@ -11,6 +12,7 @@ import jp.co.ha.common.log.annotation.Mask;
  *
  * @version 1.0.0
  */
+@Entity
 public class CompositeHealthInfo extends CompositeHealthInfoKey {
 
     /** serialVersionUID */
@@ -41,7 +43,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     private String overWeightStatus;
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -50,7 +52,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -60,7 +62,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -69,7 +71,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -79,7 +81,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -88,7 +90,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -98,7 +100,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -107,7 +109,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重
@@ -117,7 +119,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * healthInfoRegDateを返す
+     * 健康情報登録日時を返す
      *
      * @return healthInfoRegDate
      */
@@ -126,7 +128,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * healthInfoRegDateを設定する
+     * 健康情報登録日時を設定する
      *
      * @param healthInfoRegDate
      *     健康情報登録日時
@@ -136,7 +138,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * seqBmiRangeMtIdを返す
+     * BMI範囲マスタIDを返す
      *
      * @return seqBmiRangeMtId
      */
@@ -145,7 +147,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * seqBmiRangeMtIdを設定する
+     * BMI範囲マスタIDを設定する
      *
      * @param seqBmiRangeMtId
      *     BMI範囲マスタID
@@ -155,7 +157,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * rangeMinを返す
+     * 範囲下限を返す
      *
      * @return rangeMin
      */
@@ -164,7 +166,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * rangeMinを設定する
+     * 範囲下限を設定する
      *
      * @param rangeMin
      *     範囲下限
@@ -174,7 +176,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * rangeMaxを返す
+     * 範囲上限を返す
      *
      * @return rangeMax
      */
@@ -183,7 +185,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * rangeMaxを設定する
+     * 範囲上限を設定する
      *
      * @param rangeMax
      *     範囲上限
@@ -193,7 +195,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * overWeightStatusを返す
+     * 肥満度ステータスを返す
      *
      * @return overWeightStatus
      */
@@ -202,7 +204,7 @@ public class CompositeHealthInfo extends CompositeHealthInfoKey {
     }
 
     /**
-     * overWeightStatusを設定する
+     * 肥満度ステータスを設定する
      *
      * @param overWeightStatus
      *     肥満度ステータス

@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.news.controller;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,6 @@ import jp.co.ha.business.component.NewsComponent;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.validator.annotation.Decimal;
@@ -57,7 +58,7 @@ public class NewsListApiController
                 applicationProperties.getNewsPage());
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
+                .orderBy("SEQ_NEWS_INFO_ID", DESC)
                 .pageable(pageable)
                 .build();
 

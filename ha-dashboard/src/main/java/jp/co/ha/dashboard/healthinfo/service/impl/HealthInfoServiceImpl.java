@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +31,6 @@ import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
@@ -138,7 +139,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 
         // ファイル名
         String fileName = "healthInfoRegist_" + DateTimeUtil
-                .toString(DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)
+                .toString(DateTimeUtil.getSysDate(), YYYYMMDDHHMMSS_NOSEP)
                 + FileExtension.CSV;
         // ファイル出力先
         String path = null;
