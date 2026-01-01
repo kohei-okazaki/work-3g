@@ -127,8 +127,9 @@ public class NewsComponent {
         // おしらせ情報 登録
         createService.create(news);
 
-        // お知らせ情報JSON アップロード
+        // お知らせ情報JSON S3アップロード
         dto.setSeqNewsInfoId(news.getSeqNewsInfoId());
+
         upload(s3Key, dto);
     }
 
@@ -157,16 +158,6 @@ public class NewsComponent {
      */
     public void remove(String s3Key) throws BaseException {
         s3.removeS3ObjectByKeys(s3Key);
-    }
-
-    /**
-     * Slack通知
-     * 
-     * @param seqNewsInfoId
-     *     お知らせ情報ID
-     */
-    public void sendSlack(Long seqNewsInfoId) {
-        slack.send(ContentType.ROOT, "お知らせ情報ID=" + seqNewsInfoId + "を削除.");
     }
 
     /**
