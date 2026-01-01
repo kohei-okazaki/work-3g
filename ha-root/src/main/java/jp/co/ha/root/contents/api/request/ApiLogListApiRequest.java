@@ -8,6 +8,6 @@ import jp.co.ha.root.base.BaseRootApiRequest;
  *
  * @version 1.0.0
  */
-public class ApiDataListApiRequest extends BaseRootApiRequest implements BaseApiRequest {
+public class ApiLogListApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
 }

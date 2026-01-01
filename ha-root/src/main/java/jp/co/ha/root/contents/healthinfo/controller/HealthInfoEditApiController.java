@@ -76,8 +76,7 @@ public class HealthInfoEditApiController extends
      *     API呼び出しに失敗した場合
      */
     @SuppressWarnings("deprecation")
-    @PutMapping(value = "healthinfo/{seq_health_info_id}", produces = {
-            MediaType.APPLICATION_JSON_VALUE })
+    @PutMapping(value = "healthinfo/{seq_health_info_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HealthInfoEditApiResponse> edit(
             @PathVariable(name = "seq_health_info_id", required = true) Long seqHealthInfoId,
             @Valid @RequestBody HealthInfoEditApiRequest request) throws BaseException {

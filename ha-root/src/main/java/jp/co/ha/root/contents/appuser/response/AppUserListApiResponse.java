@@ -1,4 +1,4 @@
-package jp.co.ha.root.contents.account.response;
+package jp.co.ha.root.contents.appuser.response;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,8 +20,7 @@ import jp.co.ha.root.base.BaseRootApiResponse;
  *
  * @version 1.0.0
  */
-public class AccountListApiResponse extends BaseRootApiResponse
-        implements BaseApiResponse {
+public class AppUserListApiResponse extends BaseRootApiResponse implements BaseApiResponse {
 
     /** ユーザ情報リスト */
     @JsonProperty("account_list")

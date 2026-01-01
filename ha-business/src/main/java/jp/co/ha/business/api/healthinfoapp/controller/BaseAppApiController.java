@@ -1,5 +1,7 @@
 package jp.co.ha.business.api.healthinfoapp.controller;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -7,7 +9,6 @@ import jp.co.ha.business.api.healthinfoapp.request.BaseAppApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.ThrowableBiConsumer;
@@ -56,7 +57,7 @@ public abstract class BaseAppApiController<Rq extends BaseAppApiRequest, Rs exte
         if (result.hasError()) {
             ValidateError error = result.getFirst();
             // 妥当性チェックエラー
-            throw new ApiException(CommonErrorCode.VALIDATE_ERROR,
+            throw new ApiException(VALIDATE_ERROR,
                     error.getMessage() + " " + error.getName() + "=" + error.getValue());
         }
     }

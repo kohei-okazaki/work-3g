@@ -1,4 +1,4 @@
-package jp.co.ha.root.contents.account.response;
+package jp.co.ha.root.contents.appuser.response;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
@@ -8,7 +8,6 @@ import jp.co.ha.root.base.BaseRootApiResponse;
  *
  * @version 1.0.0
  */
-public class AccountEditApiResponse extends BaseRootApiResponse
-        implements BaseApiResponse {
+public class AppUserEditApiResponse extends BaseRootApiResponse implements BaseApiResponse {
 
 }

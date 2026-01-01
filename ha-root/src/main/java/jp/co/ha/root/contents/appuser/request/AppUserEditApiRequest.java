@@ -1,4 +1,4 @@
-package jp.co.ha.root.contents.account.request;
+package jp.co.ha.root.contents.appuser.request;
 
 import java.time.LocalDate;
 
@@ -18,7 +18,7 @@ import jp.co.ha.root.base.BaseRootApiRequest;
  *
  * @version 1.0.0
  */
-public class AccountEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
+public class AppUserEditApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
     /** メールアドレス */
     @JsonProperty("mail_address")

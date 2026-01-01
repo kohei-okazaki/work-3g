@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.component.InquiryComponent;
-import jp.co.ha.business.component.InquiryComponent.Status;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.inquiry.request.InquiryNoticeApiRequest;
 import jp.co.ha.root.contents.inquiry.response.InquiryListNoticeResponse;
+import jp.co.ha.root.contents.inquiry.service.InquiryService;
 
 /**
  * 問い合わせ情報通知APIコントローラ
@@ -21,9 +20,9 @@ import jp.co.ha.root.contents.inquiry.response.InquiryListNoticeResponse;
 public class InquiryNoticeApiController extends
         BaseRootApiController<InquiryNoticeApiRequest, InquiryListNoticeResponse> {
 
-    /** 問い合わせ関連Component */
+    /** 問い合わせサービス */
     @Autowired
-    private InquiryComponent component;
+    private InquiryService service;
 
     /**
      * 問い合わせ情報通知
@@ -39,32 +38,14 @@ public class InquiryNoticeApiController extends
             InquiryNoticeApiRequest request,
             @RequestParam(name = "status", required = true, defaultValue = "00") String status) {
 
-        Status statusEnum = getStatus(status);
-
         InquiryListNoticeResponse response = getSuccessResponse();
-        response.setCount(component.countByStatus(statusEnum));
+        response.setCount(service.countByStatus(status));
         return ResponseEntity.ok(response);
     }
 
     @Override
     protected InquiryListNoticeResponse getResponse() {
         return new InquiryListNoticeResponse();
-    }
-
-    /**
-     * 文字列形式をステータスの列挙型に変換
-     *
-     * @param status
-     *     ステータス
-     * @return ステータスの列挙型
-     */
-    private Status getStatus(String status) {
-        Status statusEnum = Status.of(status);
-        if (statusEnum == null) {
-            // ステータスが不正な場合、00：未対応を設定
-            statusEnum = Status.NOT_STARTED;
-        }
-        return statusEnum;
     }
 
 }

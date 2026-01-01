@@ -45,8 +45,7 @@ public class NewsEditApiController
      * @throws BaseException
      *     JSONの取得/アップロードまたはSlackの通知に失敗した場合
      */
-    @PutMapping(value = "news/{seq_news_info_id}", produces = {
-            MediaType.APPLICATION_JSON_VALUE })
+    @PutMapping(value = "news/{seq_news_info_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<NewsEditApiResponse> edit(
             @PathVariable(name = "seq_news_info_id", required = true) Long seqNewsInfoId,
             @Valid @RequestBody NewsEditApiRequest request) throws BaseException {

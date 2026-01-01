@@ -1,4 +1,4 @@
-package jp.co.ha.root.contents.account.request;
+package jp.co.ha.root.contents.appuser.request;
 
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.root.base.BaseRootApiRequest;
@@ -8,6 +8,6 @@ import jp.co.ha.root.base.BaseRootApiRequest;
  *
  * @version 1.0.0
  */
-public class AccountListApiRequest extends BaseRootApiRequest implements BaseApiRequest {
+public class AppUserListApiRequest extends BaseRootApiRequest implements BaseApiRequest {
 
 }

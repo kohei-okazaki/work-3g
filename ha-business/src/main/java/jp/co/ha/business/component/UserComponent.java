@@ -251,6 +251,16 @@ public class UserComponent {
     }
 
     /**
+     * 指定したユーザ情報をseq_user_id指定で更新する
+     * 
+     * @param entity
+     *     ユーザ情報
+     */
+    public void updateUserById(User entity) {
+        userUpdateService.updateById(entity);
+    }
+
+    /**
      * ユーザ情報Entityに変換する
      *
      * @param dto

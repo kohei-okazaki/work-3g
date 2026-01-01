@@ -21,7 +21,7 @@ import jp.co.ha.root.base.BaseRootApiResponse;
  *
  * @version 1.0.0
  */
-public class ApiDataListApiResponse extends BaseRootApiResponse
+public class ApiLogListApiResponse extends BaseRootApiResponse
         implements BaseApiResponse {
 
     /** API通信ログリスト */

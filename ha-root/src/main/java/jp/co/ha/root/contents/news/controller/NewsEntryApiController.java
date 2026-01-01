@@ -39,7 +39,7 @@ public class NewsEntryApiController
      * @throws BaseException
      *     JSONの取得/アップロードまたはSlackの通知に失敗した場合
      */
-    @PostMapping(value = "news", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(value = "news", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<NewsEntryApiResponse> entry(
             @Valid @RequestBody NewsEntryApiRequest request) throws BaseException {
 
