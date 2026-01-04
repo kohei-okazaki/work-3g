@@ -1,6 +1,7 @@
 package jp.co.ha.batch.healthInfoMigrate;
 
 import static jp.co.ha.batch.base.BatchConfigConst.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -19,7 +20,6 @@ import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.base.DateFormatParameterValidator;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
@@ -53,8 +53,8 @@ public class HealthInfoMigrateConfig extends BatchConfig {
             BatchJobListener listener) {
         return new JobBuilder(HEALTH_INFO_MIGRATE_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new DateFormatParameterValidator(OPTION_D,
-                        DateFormatType.YYYYMMDD_NOSEP, false))
+                .validator(
+                        new DateFormatParameterValidator(OPTION_D, YYYYMMDD_NOSEP, false))
                 .listener(listener)
                 .start(healthInfoMigrateBatchStep)
                 .build();

@@ -19,7 +19,6 @@ import jp.co.ha.common.log.LoggerFactory;
 @ExtendWith(SpringExtension.class)
 @SpringJUnitConfig(classes = CommonConfig.class)
 @TestPropertySource(locations = {
-        "classpath:local/crypt.properties",
         "classpath:local/jdbc.properties",
         "classpath:local/system.properties"
 }, properties = {

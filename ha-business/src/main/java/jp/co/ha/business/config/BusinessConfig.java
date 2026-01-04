@@ -19,7 +19,6 @@ import jp.co.ha.common.aws.AwsProperties;
 @Configuration(proxyBeanMethods = false)
 // application-$env.ymlで読み込んでいるため不要
 // @PropertySource({
-// "classpath:crypt.properties",
 // "classpath:jdbc.properties",
 // "classpath:system.properties",
 // "classpath:aws.properties",
