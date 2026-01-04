@@ -1,5 +1,7 @@
 package jp.co.ha.db.aspect;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.db.EntityCrypter;
 import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
@@ -70,8 +71,7 @@ public class DataBaseCommonAspect {
             }
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "setterの実行に失敗しました", e);
+            throw new SystemRuntimeException(UNEXPECTED_ERROR, "setterの実行に失敗しました", e);
         }
     }
 
@@ -106,8 +106,7 @@ public class DataBaseCommonAspect {
             }
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "setterの実行に失敗しました", e);
+            throw new SystemException(UNEXPECTED_ERROR, "setterの実行に失敗しました", e);
         }
     }
 

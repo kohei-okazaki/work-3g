@@ -1,5 +1,7 @@
 package jp.co.ha.common.util;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,7 +23,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -183,13 +184,10 @@ public class FileUtil {
                 FileChannel destChannel = fos.getChannel()) {
             srcChannel.transferTo(0, srcChannel.size(), destChannel);
         } catch (FileNotFoundException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
-                    "ファイルが見つかりません srcFile:" + srcFile.getPath() + " destFile:"
-                            + destFile.getPath(),
-                    e);
+            throw new SystemException(FILE_OR_DIR_ERROR, "ファイルが見つかりません srcFile:"
+                    + srcFile.getPath() + " destFile:" + destFile.getPath(), e);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
-                    "ファイルの書き込みや読み込みに失敗しました", e);
+            throw new SystemException(FILE_OR_DIR_ERROR, "ファイルの書き込みや読み込みに失敗しました", e);
         }
     }
 
@@ -210,7 +208,7 @@ public class FileUtil {
             Files.deleteIfExists(dest);
             Files.copy(src, dest);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+            throw new SystemException(FILE_OR_DIR_ERROR,
                     "ファイルのコピーに失敗しました srcFilePath:" + srcPath + " destFilePath:"
                             + destPath,
                     e);
@@ -320,7 +318,7 @@ public class FileUtil {
             LOG.info("path=" + path + "を作成");
             Files.createDirectories(getPath(path));
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+            throw new SystemException(FILE_OR_DIR_ERROR,
                     "ディレクトリの作成に失敗しました. path=" + path, e);
         }
     }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.crypt.Crypter;
 import jp.co.ha.common.db.annotation.Crypt;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
@@ -59,8 +58,7 @@ public class EntityCrypterImpl implements EntityCrypter {
             }
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "entityから値を取得できません", e);
+            throw new SystemRuntimeException(UNEXPECTED_ERROR, "entityから値を取得できません", e);
         }
     }
 

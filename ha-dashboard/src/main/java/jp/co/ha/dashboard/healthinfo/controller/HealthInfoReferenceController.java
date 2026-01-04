@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
 import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.common.exception.CommonErrorCode.*;
 import static jp.co.ha.dashboard.view.DashboardView.*;
 
 import java.io.File;
@@ -37,7 +38,6 @@ import jp.co.ha.business.io.file.excel.model.ReferenceExcelComponent;
 import jp.co.ha.common.aws.AwsS3Component;
 import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
@@ -232,8 +232,8 @@ public class HealthInfoReferenceController implements BaseWebController {
         HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
-                .orElseThrow(() -> new SystemException(
-                        ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+                .orElseThrow(() -> new SystemException(ILLEGAL_ACCESS_ERROR,
+                        "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
                 .getHealthInfoResponseList(referDto, seqUserId, null);
 
@@ -264,8 +264,8 @@ public class HealthInfoReferenceController implements BaseWebController {
         HealthInfoReferenceDto referDto = sessionComponent
                 .getValue(request.getSession(), "healthInfoReferenceDto",
                         HealthInfoReferenceDto.class)
-                .orElseThrow(() -> new SystemException(
-                        ILLEGAL_ACCESS_ERROR, "session情報が不正です"));
+                .orElseThrow(() -> new SystemException(ILLEGAL_ACCESS_ERROR,
+                        "session情報が不正です"));
         List<HealthInfoReferenceDto> resultList = service
                 .getHealthInfoResponseList(referDto, seqUserId, null);
 
@@ -275,9 +275,8 @@ public class HealthInfoReferenceController implements BaseWebController {
         // CSV設定情報取得
         CsvConfig conf = service.getCsvConfig(fileSetting);
 
-        response.setContentType(
-                MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset="
-                        + conf.getCharset().getValue());
+        response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset="
+                + conf.getCharset().getValue());
         response.setHeader("Content-Disposition",
                 "attachment; filename=" + conf.getFileName());
 
@@ -286,8 +285,7 @@ public class HealthInfoReferenceController implements BaseWebController {
             csvDownloadService.download(response.getWriter(), conf,
                     service.toModelList(seqUserId, resultList));
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
-                    "ファイルの出力処理に失敗しました", e);
+            throw new SystemException(FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
         }
 
         // S3にCSVファイルをアップロードする

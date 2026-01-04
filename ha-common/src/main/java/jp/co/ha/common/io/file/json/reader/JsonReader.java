@@ -1,5 +1,7 @@
 package jp.co.ha.common.io.file.json.reader;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +12,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -63,7 +64,7 @@ public class JsonReader {
         } catch (JsonMappingException e) {
             LOG.error(json.getName() + "をjavaクラスへのMappingに失敗しました", e);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.RUNTIME_ERROR,
+            throw new SystemException(RUNTIME_ERROR,
                     json.getName() + "をjavaクラスへの変換に失敗しました", e);
         }
         return null;
@@ -90,8 +91,7 @@ public class JsonReader {
         } catch (JsonMappingException e) {
             LOG.error("javaクラスへのMappingに失敗しました", e);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.RUNTIME_ERROR, "javaクラスへの変換に失敗しました",
-                    e);
+            throw new SystemException(RUNTIME_ERROR, "javaクラスへの変換に失敗しました", e);
         }
         return null;
     }
@@ -109,8 +109,8 @@ public class JsonReader {
         try {
             return new ObjectMapper().writeValueAsString(bean);
         } catch (JsonProcessingException e) {
-            throw new SystemException(CommonErrorCode.JSON_MAPPING_ERROR,
-                    bean + "をJSON文字列への変換に失敗しました", e);
+            throw new SystemException(JSON_MAPPING_ERROR, bean + "をJSON文字列への変換に失敗しました",
+                    e);
         }
     }
 }

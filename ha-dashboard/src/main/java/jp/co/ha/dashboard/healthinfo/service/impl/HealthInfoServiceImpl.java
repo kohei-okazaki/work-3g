@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.business.exception.BusinessErrorCode.*;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import java.math.BigDecimal;
@@ -20,7 +21,6 @@ import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.dto.HealthInfoDto;
-import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
@@ -121,7 +121,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 
         if (ResultType.SUCCESS != response.getResultType()) {
             // 健康情報登録APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.HEALTH_INFO_REGIST_API_CONNECT_ERROR,
+            throw new ApiException(HEALTH_INFO_REGIST_API_CONNECT_ERROR,
                     response.getErrorInfo().getDetail());
         }
 

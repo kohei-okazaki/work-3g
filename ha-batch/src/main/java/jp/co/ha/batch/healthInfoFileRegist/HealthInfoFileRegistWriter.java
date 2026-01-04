@@ -1,5 +1,7 @@
 package jp.co.ha.batch.healthInfoFileRegist;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -22,7 +24,6 @@ import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
@@ -84,8 +85,7 @@ public class HealthInfoFileRegistWriter
 
             // ユーザ情報.APIキーを取得
             User user = userComponent.findById(request.getSeqUserId())
-                    .orElseThrow(() -> new BusinessException(
-                            CommonErrorCode.DB_NO_DATA,
+                    .orElseThrow(() -> new BusinessException(DB_NO_DATA,
                             "ユーザ情報が存在しません. seq_user_id=" + request.getSeqUserId()));
 
             ApiConnectInfo connectInfo = new ApiConnectInfo()

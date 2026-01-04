@@ -1,6 +1,7 @@
 package jp.co.ha.business.api.slack;
 
 import static jp.co.ha.common.aws.AwsSystemsManagerComponent.*;
+import static jp.co.ha.common.exception.CommonErrorCode.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.co.ha.business.api.slack.SlackConnectionData.Connection;
 import jp.co.ha.common.aws.AwsSystemsManagerComponent;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -225,7 +225,7 @@ public class SlackApiComponent {
                 LOG.debug("getUploadURLExternal: " + body);
                 JsonNode json = mapper.readTree(body);
                 if (!json.path("ok").asBoolean()) {
-                    throw new SystemRuntimeException(CommonErrorCode.FILE_UPLOAD_ERROR,
+                    throw new SystemRuntimeException(FILE_UPLOAD_ERROR,
                             "getUploadURLExternal failed: "
                                     + json.path("error").asText());
                 }
@@ -244,7 +244,7 @@ public class SlackApiComponent {
 
             try (Response res = client.newCall(putFile).execute()) {
                 if (!res.isSuccessful()) {
-                    throw new SystemRuntimeException(CommonErrorCode.FILE_UPLOAD_ERROR,
+                    throw new SystemRuntimeException(FILE_UPLOAD_ERROR,
                             "upload to external URL failed: HTTP " + res.code());
                 }
             }
@@ -270,7 +270,7 @@ public class SlackApiComponent {
                 LOG.debug("completeUploadExternal: " + body);
                 JsonNode json = mapper.readTree(body);
                 if (!json.path("ok").asBoolean()) {
-                    throw new SystemRuntimeException(CommonErrorCode.FILE_UPLOAD_ERROR,
+                    throw new SystemRuntimeException(FILE_UPLOAD_ERROR,
                             "completeUploadExternal failed: "
                                     + json.path("error").asText());
                 }
@@ -311,8 +311,7 @@ public class SlackApiComponent {
         return data.getConnectionList().stream()
                 .filter(e -> e.getContentType() == contentType)
                 .findFirst()
-                .orElseThrow(() -> new SystemRuntimeException(
-                        CommonErrorCode.AWS_S3_DOWNLOAD_ERROR,
+                .orElseThrow(() -> new SystemRuntimeException(AWS_S3_DOWNLOAD_ERROR,
                         "jsonに対象のコンテンツタイプが存在しません. contentType="
                                 + contentType.getValue()));
     }
