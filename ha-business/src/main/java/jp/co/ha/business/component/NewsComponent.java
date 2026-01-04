@@ -1,6 +1,7 @@
 package jp.co.ha.business.component;
 
 import static jp.co.ha.common.db.SelectOption.SortType.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -34,7 +35,6 @@ import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.NewsInfo;
@@ -211,7 +211,7 @@ public class NewsComponent {
         return new StringJoiner(StringUtil.THRASH)
                 .add(AwsS3Key.NEWS_JSON.getValue())
                 .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.JSON)
+                        YYYYMMDDHHMMSS_NOSEP) + FileExtension.JSON)
                 .toString();
     }
 

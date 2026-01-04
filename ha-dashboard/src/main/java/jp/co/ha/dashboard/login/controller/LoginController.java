@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.login.controller;
 
 import static jp.co.ha.business.healthInfo.type.HealthInfoStatus.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 import static jp.co.ha.dashboard.view.DashboardView.*;
 
 import java.math.BigDecimal;
@@ -37,7 +38,6 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.login.form.LoginForm;
 import jp.co.ha.db.entity.HealthInfo;
@@ -385,7 +385,7 @@ public class LoginController implements BaseWebController {
                             .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDDHHMMSS);
+                                YYYYMMDDHHMMSS);
                         graphModel.addWeight(e.getWeight());
                         graphModel.addBmi(e.getBmi());
                         graphModel.addStandardWeight(e.getStandardWeight());

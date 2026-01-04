@@ -1,5 +1,7 @@
 package jp.co.ha.business.io.file.csv.writer;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.io.PrintWriter;
 import java.util.StringJoiner;
 
@@ -10,7 +12,6 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.log.MaskExecutor;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -54,8 +55,7 @@ public class HealthInfoCsvWriter extends CsvWriter<HealthInfoCsvDownloadModel> {
         write(body, conf.useMask() ? MaskExecutor.MASK
                 : model.getStandardWeight().toString());
         // 健康情報作成日時
-        write(body, DateTimeUtil.toString(model.getHealthInfoRegDate(),
-                DateFormatType.YYYYMMDDHHMMSS));
+        write(body, DateTimeUtil.toString(model.getHealthInfoRegDate(), YYYYMMDDHHMMSS));
 
         // 1行書き込む
         record.add(body.toString());
