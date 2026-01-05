@@ -25,9 +25,9 @@ import jp.co.ha.batch.listener.BatchJobListener;
 @Configuration
 public class AwsSqsImportConfig extends BatchConfig {
 
-    /** API_COMMUNICATION_DATA用AWS SQS取込-tasklet */
+    /** API_LOG用AWS SQS取込-tasklet */
     @Autowired
-    private ApiCommunicationDataSqsImportTasklet apiCommunicationDataSqsImportTasklet;
+    private ApiLogSqsImportTasklet apiLogSqsImportTasklet;
 
     /**
      * AWS SQS取込バッチJOB
@@ -64,7 +64,7 @@ public class AwsSqsImportConfig extends BatchConfig {
     Step awsSqsImportBatchStep(JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(AWS_SQS_IMPORT_BATCH_STEP_NAME, jobRepository)
-                .tasklet(apiCommunicationDataSqsImportTasklet, transactionManager)
+                .tasklet(apiLogSqsImportTasklet, transactionManager)
                 .build();
     }
 }

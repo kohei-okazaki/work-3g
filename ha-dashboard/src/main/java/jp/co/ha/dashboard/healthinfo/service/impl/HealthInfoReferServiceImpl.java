@@ -1,5 +1,6 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import java.time.LocalDate;
@@ -17,7 +18,6 @@ import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
@@ -54,7 +54,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
         List<HealthInfo> resultList;
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+                .orderBy("HEALTH_INFO_REG_DATE", DESC)
                 .pageable(pageable)
                 .build();
         if (BeanUtil.isNull(dto.getSeqHealthInfoId())

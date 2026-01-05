@@ -30,7 +30,7 @@ public interface DataPurgeMapper {
 
     /**
      * SQL-provider<br>
-     * 呼び出し元でテーブル名と更新日時の指定をすること
+     * 呼び出し元でテーブル名と削除対象日時の指定をすること
      * 
      * @version 1.0.0
      */
@@ -49,7 +49,7 @@ public interface DataPurgeMapper {
 
             String table = switch (key) {
             case "user" -> "USER";
-            case "api_communication_data" -> "API_COMMUNICATION_DATA";
+            case "api_log" -> "API_LOG";
             default -> throw new IllegalArgumentException("invalid tableKey: " + key);
             };
 

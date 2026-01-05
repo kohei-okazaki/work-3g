@@ -26,11 +26,11 @@ import jp.co.ha.common.util.CollectionUtil;
  */
 @StepScope
 @Component
-public class ApiCommunicationDataSqsImportTasklet implements Tasklet {
+public class ApiLogSqsImportTasklet implements Tasklet {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory
-            .getLogger(ApiCommunicationDataSqsImportTasklet.class);
+            .getLogger(ApiLogSqsImportTasklet.class);
     /** AWS設定ファイル情報 */
     @Autowired
     private AwsProperties awsProps;

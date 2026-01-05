@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.login.controller;
 
 import static jp.co.ha.business.healthInfo.type.HealthInfoStatus.*;
+import static jp.co.ha.common.db.SelectOption.SortType.*;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 import static jp.co.ha.dashboard.view.DashboardView.*;
 
@@ -33,7 +34,6 @@ import jp.co.ha.business.login.LoginCheck;
 import jp.co.ha.business.login.LoginCheckResult;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.CollectionUtil;
@@ -56,10 +56,10 @@ public class LoginController implements BaseWebController {
     private static final String SESSION_KEY_SEQ_USER_ID = "seqUserId";
     /** 健康情報検索条件 */
     private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
-            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
+            .orderBy("HEALTH_INFO_REG_DATE", DESC).limit(10).build();
     /** 健康情報検索条件：直近2件 */
     private static final SelectOption SELECT_OPTION＿LATEST = new SelectOptionBuilder()
-            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(2).build();
+            .orderBy("HEALTH_INFO_REG_DATE", DESC).limit(2).build();
 
     /** セッションComponent */
     @Autowired

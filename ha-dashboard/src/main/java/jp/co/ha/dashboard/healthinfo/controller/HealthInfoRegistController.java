@@ -1,6 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
 import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.common.db.SelectOption.SortType.*;
 import static jp.co.ha.common.exception.CommonErrorCode.*;
 import static jp.co.ha.dashboard.view.DashboardView.*;
 
@@ -35,7 +36,6 @@ import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
@@ -140,7 +140,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         if (!isFirstReg) {
             // 初回登録でない場合
             SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
+                    .orderBy("SEQ_HEALTH_INFO_ID", DESC).limit(1).build();
             HealthInfo lastHealthInfo = healthInfoSearchService
                     .findBySeqUserId(seqUserId, selectOption).get(0);
             healthInfoService.addModel(model, dto, lastHealthInfo);

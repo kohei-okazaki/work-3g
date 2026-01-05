@@ -39,7 +39,7 @@ public class ApiLogServiceImpl implements ApiLogService {
                 .pageable(pageable)
                 .build();
 
-        List<ApiLogListApiResponse.ApiLog> apiLogList = searchService
+        return searchService
                 .findAll(selectOption)
                 .stream()
                 .map(e -> {
@@ -48,8 +48,6 @@ public class ApiLogServiceImpl implements ApiLogService {
                     response.setHttpStatus(HttpStatus.valueOf(e.getHttpStatus()));
                     return response;
                 }).collect(Collectors.toList());
-
-        return apiLogList;
     }
 
     @Override

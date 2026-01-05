@@ -1,6 +1,7 @@
 package jp.co.ha.root.contents.appuser.service;
 
 import static jp.co.ha.common.db.SelectOption.SortType.*;
+import static jp.co.ha.common.type.CommonFlag.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import jp.co.ha.business.db.crud.read.UserSearchService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
@@ -44,17 +44,16 @@ public class AppUserServiceImpl implements AppUserService {
                 .map(e -> {
                     AppUserListApiResponse.AccountResponse response = new AppUserListApiResponse.AccountResponse();
                     BeanUtil.copy(e, response);
-                    response.setDeleteFlag(e.isDeleteFlag() ? CommonFlag.TRUE.getValue()
-                            : CommonFlag.FALSE.getValue());
-                    response.setHeaderFlag(e.isHeaderFlag() ? CommonFlag.TRUE.getValue()
-                            : CommonFlag.FALSE.getValue());
-                    response.setFooterFlag(e.isFooterFlag() ? CommonFlag.TRUE.getValue()
-                            : CommonFlag.FALSE.getValue());
-                    response.setMaskFlag(e.isMaskFlag() ? CommonFlag.TRUE.getValue()
-                            : CommonFlag.FALSE.getValue());
+                    response.setDeleteFlag(
+                            e.isDeleteFlag() ? TRUE.getValue() : FALSE.getValue());
+                    response.setHeaderFlag(
+                            e.isHeaderFlag() ? TRUE.getValue() : FALSE.getValue());
+                    response.setFooterFlag(
+                            e.isFooterFlag() ? TRUE.getValue() : FALSE.getValue());
+                    response.setMaskFlag(
+                            e.isMaskFlag() ? TRUE.getValue() : FALSE.getValue());
                     response.setEnclosureCharFlag(
-                            e.isEnclosureCharFlag() ? CommonFlag.TRUE.getValue()
-                                    : CommonFlag.FALSE.getValue());
+                            e.isEnclosureCharFlag() ? TRUE.getValue() : FALSE.getValue());
                     return response;
                 }).collect(Collectors.toList());
 

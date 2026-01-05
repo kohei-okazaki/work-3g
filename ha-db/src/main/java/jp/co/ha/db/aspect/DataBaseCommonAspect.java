@@ -66,7 +66,7 @@ public class DataBaseCommonAspect {
                         }
                     }
                     entityCrypter.encrypt(entity);
-                    LOG.infoBean(entity);
+                    LOG.debugBean(entity);
                 }
             }
         } catch (IllegalAccessException | IllegalArgumentException
@@ -101,7 +101,7 @@ public class DataBaseCommonAspect {
                         }
                     }
                     entityCrypter.encrypt(entity);
-                    LOG.infoBean(entity);
+                    LOG.debugBean(entity);
                 }
             }
         } catch (IllegalAccessException | IllegalArgumentException
@@ -136,19 +136,19 @@ public class DataBaseCommonAspect {
             for (Object entity : list) {
                 if (isEntity(entity)) {
                     entityCrypter.decrypt(entity);
-                    LOG.infoBean(entity);
+                    LOG.debugBean(entity);
                 }
             }
         } else {
             if (isEntity(o)) {
                 entityCrypter.decrypt(o);
-                LOG.infoBean(o);
+                LOG.debugBean(o);
             } else if (o instanceof Optional<?>) {
                 if (((Optional<Object>) o).isPresent()
                         && isEntity(((Optional<Object>) o).get())) {
                     Object object = ((Optional<Object>) o).get();
                     entityCrypter.decrypt(object);
-                    LOG.infoBean(object);
+                    LOG.debugBean(object);
                 }
             }
         }
@@ -163,7 +163,7 @@ public class DataBaseCommonAspect {
      */
     @Before("@annotation(jp.co.ha.common.db.annotation.Delete)")
     public void delete(JoinPoint jp) {
-        Stream.of(jp.getArgs()).filter(e -> isEntity(e)).forEach(e -> LOG.infoBean(e));
+        Stream.of(jp.getArgs()).filter(e -> isEntity(e)).forEach(e -> LOG.debugBean(e));
     }
 
     /**

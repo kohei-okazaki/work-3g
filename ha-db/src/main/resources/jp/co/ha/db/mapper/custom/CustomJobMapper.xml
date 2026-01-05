@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ha.db.mapper.custom.CustomJobMapper">
+  <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.custom.CustomJobData">
+    <result property="jobInstanceId" jdbcType="BIGINT" column="JOB_INSTANCE_ID"/>
+    <result property="startTime" jdbcType="TIMESTAMP" column="START_TIME"/>
+    <result property="endTime" jdbcType="TIMESTAMP" column="END_TIME"/>
+    <result property="status" jdbcType="VARCHAR" column="STATUS"/>
+    <result property="jobName" jdbcType="VARCHAR" column="JOB_NAME"/>
+    <result property="parameterName" jdbcType="VARCHAR" column="PARAMETER_NAME"/>
+    <result property="parameterValue" jdbcType="VARCHAR" column="PARAMETER_VALUE"/>
+  </resultMap>
+
+  <select id="selectPageable" resultMap="BaseResultMap">
+    SELECT
+      <!-- BATCH_JOB_EXECUTION -->
+      BJE.JOB_INSTANCE_ID
+      , BJE.START_TIME
+      , BJE.END_TIME
+      , BJE.STATUS
+      <!-- BATCH_JOB_INSTANCE -->
+      , BJI.JOB_NAME
+      <!-- BATCH_JOB_EXECUTION_PARAMS-->
+      , BJEP.PARAMETER_NAME
+      , BJEP.PARAMETER_VALUE 
+    FROM
+      BATCH_JOB_EXECUTION BJE 
+      LEFT OUTER JOIN BATCH_JOB_INSTANCE BJI 
+        ON BJE.JOB_INSTANCE_ID = BJI.JOB_INSTANCE_ID 
+      LEFT OUTER JOIN BATCH_JOB_EXECUTION_PARAMS BJEP 
+        ON ( 
+          BJE.JOB_EXECUTION_ID = BJEP.JOB_EXECUTION_ID 
+          AND BJEP.PARAMETER_NAME <![CDATA[<>]]> 'run.id'
+        ) 
+    ORDER BY
+      BJE.START_TIME
+      , BJE.JOB_INSTANCE_ID
+  </select>
+</mapper>

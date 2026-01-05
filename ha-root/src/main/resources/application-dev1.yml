@@ -12,6 +12,8 @@ front:
     page: 30
   inquiry:
     page: 20
+  job:
+    page: 30
 spring:
   # 設定ファイル読込
     config:

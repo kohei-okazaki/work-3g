@@ -1,27 +1,27 @@
-package jp.co.ha.root.contents.api.service;
+package jp.co.ha.root.contents.job.service;
 
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
 import jp.co.ha.common.util.PagingView;
-import jp.co.ha.root.contents.api.response.ApiLogListApiResponse.ApiLog;
+import jp.co.ha.root.contents.job.response.JobListApiResponse.Job;
 
 /**
- * API通信ログサービスインターフェース
+ * Job履歴情報一覧取得APIサービスインターフェース
  * 
  * @version 1.0.0
  */
-public interface ApiLogService {
+public interface JobListService {
 
     /**
-     * API通信ログリストを返す
+     * Job履歴情報リストを返す
      * 
      * @param pageable
      *     Pageable
-     * @return API通信ログリスト
+     * @return Job履歴情報リスト
      */
-    List<ApiLog> getApiLogList(Pageable pageable);
+    List<Job> getJobList(Pageable pageable);
 
     /**
      * PagingViewを返す
@@ -31,4 +31,5 @@ public interface ApiLogService {
      * @return PagingView
      */
     PagingView getPagingView(Pageable pageable);
+
 }
