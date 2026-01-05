@@ -27,4 +27,11 @@ public interface CustomJobMapper {
      * @return Batch起動履歴リスト
      */
     List<CustomJobData> selectPageable(RowBounds rowBounds);
+
+    /**
+     * 件数を取得
+     * 
+     * @return 件数
+     */
+    long count();
 }

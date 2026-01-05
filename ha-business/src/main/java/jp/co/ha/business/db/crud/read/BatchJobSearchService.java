@@ -21,4 +21,10 @@ public interface BatchJobSearchService {
      */
     List<CustomJobData> findAll(SelectOption selectOption);
 
+    /**
+     * Batch起動履歴の合計件数を取得
+     * 
+     * @return 件数
+     */
+    long count();
 }

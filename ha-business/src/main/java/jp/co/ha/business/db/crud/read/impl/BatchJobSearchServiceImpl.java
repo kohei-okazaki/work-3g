@@ -31,4 +31,11 @@ public class BatchJobSearchServiceImpl implements BatchJobSearchService {
         return mapper.selectPageable(selectOption.toRowBounds());
     }
 
+    @Select
+    @Override
+    @Transactional(readOnly = true)
+    public long count() {
+        return mapper.count();
+    }
+
 }
