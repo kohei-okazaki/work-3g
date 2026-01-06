@@ -33,6 +33,7 @@ check_result() {
     exit $result_code
   fi
 }
+# DATE_OPTION_VALUE="${DATE_OPTION_VALUE:-$(date +%Y%m%d)}"
 
 cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.${ENV}.yml run --rm ha-batch --spring.batch.job.name=dailyApiLogJob d=${DATE_OPTION_VALUE}
 result=$?

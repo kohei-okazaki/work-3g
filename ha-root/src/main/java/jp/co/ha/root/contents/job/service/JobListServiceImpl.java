@@ -63,9 +63,10 @@ public class JobListServiceImpl implements JobListService {
             job.setStartTime(jobEntity.getStartTime());
             job.setEndTime(jobEntity.getEndTime());
             job.setStatus(jobEntity.getStatus());
+            job.setJobName(jobEntity.getJobName());
 
             if (hasParam(jobEntity)) {
-                // 引数が指定されている場合
+                // バッチ引数が指定されている場合
                 List<JobParameter> jobParamList = new ArrayList<>();
                 JobParameter jobParam = new JobParameter();
                 jobParam.setName(jobEntity.getParameterName());
@@ -76,7 +77,7 @@ public class JobListServiceImpl implements JobListService {
 
             jobMap.put(Long.valueOf(jobEntity.getJobInstanceId()), job);
         }
-        return new ArrayList<>(jobMap.values());
+        return jobMap.values().stream().toList();
     }
 
     @Override

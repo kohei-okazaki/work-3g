@@ -25,12 +25,11 @@ import jp.co.ha.common.aws.AwsProperties;
 // "classpath:healthInfo.properties"
 // })
 @ComponentScan(basePackages = {
-        "jp.co.ha.business.db.crud",
         "jp.co.ha.business.api",
-        "jp.co.ha.business.component",
         "jp.co.ha.business.cache",
-        "jp.co.ha.business.*.service",
-        "jp.co.ha.business.interceptor"
+        "jp.co.ha.business.component",
+        "jp.co.ha.business.db.crud",
+        "jp.co.ha.business.*.service"
 })
 // @PropertySource("classpath:mail.properties")
 public class BusinessConfig implements WebMvcConfigurer {

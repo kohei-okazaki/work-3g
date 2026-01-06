@@ -1,4 +1,4 @@
-package jp.co.ha.business.interceptor;
+package jp.co.ha.business.component;
 
 import static jp.co.ha.business.exception.DashboardErrorCode.*;
 
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
-import jp.co.ha.business.interceptor.annotation.NonAuth;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
+import jp.co.ha.business.component.annotation.NonAuth;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
@@ -44,7 +44,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler) throws Exception {
 
-        if (isStaticResource().test(handler)) {
+        if (isStaticResource(handler)) {
             // 静的リソースの場合は認証不要
             return true;
         }
@@ -75,7 +75,7 @@ public class DashboardAuthInterceptor extends BaseWebInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
             Object handler, ModelAndView modelAndView) throws Exception {
 
-        if (isStaticResource().test(handler)) {
+        if (isStaticResource(handler)) {
             // 静的リソースの場合は認証不要
             return;
         }

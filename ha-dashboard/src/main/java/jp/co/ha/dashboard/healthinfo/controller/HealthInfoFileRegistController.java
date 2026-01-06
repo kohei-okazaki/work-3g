@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoUploadCsv;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
 import jp.co.ha.common.aws.AwsS3Component;

@@ -16,8 +16,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import jp.co.ha.business.component.DashboardAuthInterceptor;
 import jp.co.ha.business.config.BusinessConfig;
-import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
 import jp.co.ha.common.config.CommonConfig;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.db.config.DbConfig;

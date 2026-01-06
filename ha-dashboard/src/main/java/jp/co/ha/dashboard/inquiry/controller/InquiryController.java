@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.InquiryComponent;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.dto.InquiryDto;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;

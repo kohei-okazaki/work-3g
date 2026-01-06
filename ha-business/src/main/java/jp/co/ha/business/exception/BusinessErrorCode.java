@@ -1,5 +1,7 @@
 package jp.co.ha.business.exception;
 
+import static jp.co.ha.common.log.Logger.LogLevel.*;
+
 import jp.co.ha.common.exception.BaseErrorCode;
 import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
@@ -14,20 +16,20 @@ public enum BusinessErrorCode implements BaseErrorCode, BaseEnum {
 
     /* ERROR */
     /** ユーザ作成エラー */
-    USER_REGIST_ERROR("USER_REGIST_ERROR", "BE0030", LogLevel.ERROR),
+    USER_REGIST_ERROR("USER_REGIST_ERROR", "BE0030", ERROR),
     /** 基礎健康情報計算API接続エラー */
-    BASIC_API_CONNECT_ERROR("BASIC_API_CONNECT_ERROR", "BE0032", LogLevel.ERROR),
+    BASIC_API_CONNECT_ERROR("BASIC_API_CONNECT_ERROR", "BE0032", ERROR),
     /** カロリー計算API接続エラー */
-    CALORIE_API_CONNECT_ERROR("CALORIE_API_CONNECT_ERROR", "BE0033", LogLevel.ERROR),
+    CALORIE_API_CONNECT_ERROR("CALORIE_API_CONNECT_ERROR", "BE0033", ERROR),
     /** 肺活量計算API接続エラー */
-    BREATHING_API_CONNECT_ERROR("BREATHING_API_CONNECT_ERROR", "BE0037", LogLevel.ERROR),
+    BREATHING_API_CONNECT_ERROR("BREATHING_API_CONNECT_ERROR", "BE0037", ERROR),
     /** Token発行API接続エラー */
-    TOKEN_API_CONNECT_ERROR("TOKEN_API_CONNECT_ERROR", "BE0038", LogLevel.ERROR),
+    TOKEN_API_CONNECT_ERROR("TOKEN_API_CONNECT_ERROR", "BE0038", ERROR),
     /** 健康情報登録API接続エラー */
     HEALTH_INFO_REGIST_API_CONNECT_ERROR("HEALTH_INFO_REGIST_API_CONNECT_ERROR", "BE0039",
-            LogLevel.ERROR),
+            ERROR),
     /** ユーザ更新エラー */
-    USER_UPDATE_ERROR("USER_UPDATE_ERROR", "BE0045", LogLevel.ERROR);
+    USER_UPDATE_ERROR("USER_UPDATE_ERROR", "BE0045", ERROR);
 
     /**
      * コンストラクタ

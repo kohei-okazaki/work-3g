@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.ha.business.component.UserComponent;
+import jp.co.ha.business.component.annotation.NonAuth;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserHealthGoalSelectService;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
-import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.login.LoginCheck;
 import jp.co.ha.business.login.LoginCheckResult;
 import jp.co.ha.common.db.SelectOption;

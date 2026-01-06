@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
@@ -31,7 +32,6 @@ import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadExcel;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
 import jp.co.ha.common.db.SelectOption;

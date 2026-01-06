@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.ha.business.component.UserComponent;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
+import jp.co.ha.business.component.annotation.NonAuth;
 import jp.co.ha.business.db.crud.create.UserRecoveryTokenCreateService;
 import jp.co.ha.business.db.crud.read.UserRecoveryTokenSearchService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
-import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.aws.AwsSesComponent;
 import jp.co.ha.common.aws.AwsSesComponent.MailTemplateKey;

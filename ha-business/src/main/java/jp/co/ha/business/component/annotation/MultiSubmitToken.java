@@ -1,4 +1,4 @@
-package jp.co.ha.business.interceptor.annotation;
+package jp.co.ha.business.component.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import jp.co.ha.business.interceptor.DashboardAuthInterceptor;
+import jp.co.ha.business.component.DashboardAuthInterceptor;
 
 /**
  * 多重送信トークンをチェックすることを示すアノテーション
