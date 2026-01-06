@@ -28,16 +28,22 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     /** 認証情報管理クラス */
     @SuppressWarnings("unused")
     private AuthenticationManager authenticationManager;
+    /** Provider */
+    JwtSigningKeyProvider provider;
 
     /**
      * コンストラクタ
      *
      * @param authenticationManager
      *     認証情報管理クラス
+     * @param provider
+     *     Provider
      */
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager,
+            JwtSigningKeyProvider provider) {
         super(authenticationManager);
         this.authenticationManager = authenticationManager;
+        this.provider = provider;
     }
 
     @Override
@@ -79,7 +85,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         // parse the token.
         String user = Jwts.parser()
-                .verifyWith(SIGNING_KEY)
+                .verifyWith(provider.get())
                 .build()
                 .parseSignedClaims(rawToken)
                 .getPayload()
