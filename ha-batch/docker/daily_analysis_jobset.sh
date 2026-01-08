@@ -4,17 +4,17 @@
 # 日次データ分析連携JobSet
 # 
 # 概要：指定した年月日の健康情報/ユーザ情報/API通信ログ/バッチ実行ログをCSVファイルに出力し圧縮してS3へ転送するための各子シェルでジョブを実行する。
-#       dailyAnalysisHealthInfo.sh
-#       dailyAnalysisUser.sh
-#       dailyAnalysisApiLog.sh
-#       dailyAnalysisBatchLog.sh
+#       daily_analysis_health_info.sh
+#       daily_analysis_user.sh
+#       daily_analysis_api_log.sh
+#       daily_analysis_batch_log.sh
 #
 # 引数：YYYYMMDD
 # 
 # input: MySQL-HEALTH_INFO
 #        MySQL-USER
-#        DynamoDB-API_LOG
-#        DynamoDB-BATCH_LOG
+#        MySQL-API_LOG
+#        MySQL-BATCH_JOB_INSTANCE, BATCH_JOB_EXECUTION, BATCH_JOB_EXECUTION_PARAMS
 #
 # output: S3.analysis/YYYYMMDD/healthinfo.csv.gz
 #         S3.analysis/YYYYMMDD/user.csv.gz

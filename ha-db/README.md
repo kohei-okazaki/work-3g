@@ -4,10 +4,9 @@
 健康管理アプリのDBアクセスやEntityを管理するプロジェクト
 
 ## テーブル一覧
-
 詳細はha-asset内のDB.xlsxを参照
 
-- API_COMMUNICATION_DATA
+- API_LOG
 - BMI_RANGE_MT
 - HEALTH_INFO
 - HEALTH_INFO_FILE_SETTING
@@ -42,10 +41,10 @@
 
 ## マイグレーション
 - 概要
-    - 開発で変更になったDB定義について手でSQLを叩き、DDLを反映させず、「ツール」を使ってDBのバージョン管理を行う。実際はmavenコマンドで実行する
+    - 開発で変更になったDB定義について手でSQLを叩き、DDLを反映させずDocker上で　docker compose コマンドで反映。
 
 - ツール
     - Flyway
 
 - Version
-    - 8.5.12
+    - 11.18.0

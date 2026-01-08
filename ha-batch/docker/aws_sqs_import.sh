@@ -4,7 +4,7 @@
 # AWS SQS取込バッチ
 # 
 # 概要：SQSからメッセージを取得し、以下のテーブルに登録する。
-#      ・API_COMMUNICATION_DATA
+#      ・API_LOG
 # 
 # 引数：なし
 # 
