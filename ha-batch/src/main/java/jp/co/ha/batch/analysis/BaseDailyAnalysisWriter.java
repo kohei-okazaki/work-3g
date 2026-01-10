@@ -1,6 +1,8 @@
 package jp.co.ha.batch.analysis;
 
+import static jp.co.ha.business.api.slack.SlackApiComponent.ContentType.*;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+import static jp.co.ha.common.util.FileUtil.FileExtension.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +27,6 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.business.api.slack.SlackApiComponent;
-import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.aws.AwsS3Component;
 import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
@@ -33,7 +34,6 @@ import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.FileUtil;
-import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -99,7 +99,8 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
             String baseDir = getTempDirPath(batchProps);
             Files.createDirectories(Paths.get(baseDir));
 
-            targetPath = Paths.get(baseDir, getFileName(batchProps));
+            // 「テーブル名.csv」 を取得
+            targetPath = Paths.get(baseDir, getFileName(batchProps) + CSV);
             LOG.debug("targetPath=" + targetPath);
 
             setResource(new FileSystemResource(targetPath));
@@ -126,26 +127,18 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
             // 正常終了時
 
             // 圧縮形式のファイルパスを取得
-            Path gzPath = Paths.get(targetPath.toString() + FileExtension.GZ.getValue());
+            Path gzPath = Paths.get(targetPath.toString() + GZ);
             FileUtil.compressGZip(targetPath, gzPath);
 
-            // 検索対象年月(YYYYMMDD)
-            String date = StringUtil.isEmpty(targetDate)
-                    ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMMDD_NOSEP)
-                    : targetDate;
-
             File gzFile = gzPath.toFile();
-            StringJoiner s3Path = new StringJoiner(StringUtil.THRASH)
-                    .add(AwsS3Key.DAILY_ANALYSIS.getValue())
-                    .add(date)
-                    .add(gzFile.getName());
+
             // analysis/YYYYMMDD/${table_name}.csv.gz
-            String s3key = s3Path.toString();
+            String s3key = getS3Key(gzFile);
 
             s3.putFile(s3key, gzFile);
 
             // Slack通知
-            slack.sendFile(ContentType.BATCH, gzFile, "S3ファイルアップロード完了. key=" + s3key);
+            slack.sendFile(BATCH, gzFile, "S3ファイルアップロード完了. key=" + s3key);
 
             // ファイル送信が正常終了した場合、ローカルファイルを削除
             Files.deleteIfExists(targetPath);
@@ -192,6 +185,11 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
      */
     private void init() {
 
+        // 検索対象年月(YYYYMMDD)
+        targetDate = StringUtil.isEmpty(targetDate)
+                ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMMDD_NOSEP)
+                : targetDate;
+
         setName(this.getClass().getSimpleName());
         setAppendAllowed(false);
         setShouldDeleteIfExists(true);
@@ -208,5 +206,22 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
 
         setHeaderCallback(
                 writer -> writer.write(String.join(StringUtil.COMMA, getColumnArray())));
+    }
+
+    /**
+     * 指定されたgzファイルからS3キーを返す<br>
+     * S3キー: analysis/YYYYMMDD/${table_name}.csv.gz
+     * 
+     * @param gzFile
+     *     gzファイル
+     * @return S3キー
+     */
+    private String getS3Key(File gzFile) {
+
+        return new StringJoiner(StringUtil.THRASH)
+                .add(AwsS3Key.DAILY_ANALYSIS.getValue())
+                .add(targetDate)
+                .add(gzFile.getName())
+                .toString();
     }
 }

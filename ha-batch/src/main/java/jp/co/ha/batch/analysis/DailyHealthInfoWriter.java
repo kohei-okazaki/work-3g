@@ -8,7 +8,6 @@ import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.io.file.csv.model.DailyHealthInfoCsvModel;
 import jp.co.ha.common.aws.AwsS3Component;
-import jp.co.ha.common.util.FileUtil.FileExtension;
 
 /**
  * 日次健康情報データ分析連携バッチ-Writer<br>
@@ -55,7 +54,7 @@ public class DailyHealthInfoWriter
 
     @Override
     public String getFileName(BatchProperties batchProps) {
-        return batchProps.getDailyHealthInfoAnalysis().getFileName() + FileExtension.CSV;
+        return batchProps.getDailyHealthInfoAnalysis().getFileName();
     }
 
     @Override

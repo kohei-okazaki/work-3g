@@ -1,5 +1,10 @@
 package jp.co.ha.batch.monthlyHealthInfoSummary;
 
+import static jp.co.ha.business.api.slack.SlackApiComponent.ContentType.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+import static jp.co.ha.common.util.FileUtil.FileExtension.*;
+import static jp.co.ha.common.util.StringUtil.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,16 +27,14 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.slack.SlackApiComponent;
-import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.aws.AwsS3Component;
 import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.util.FileUtil;
-import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.common.util.StringUtil;
 
 /**
  * 月次健康情報集計処理-Writer<br>
@@ -109,8 +112,7 @@ public class MonthlyHealthInfoSummaryWriter
             String baseDir = prop.getMonthlySummaryBatchFilePath();
             Files.createDirectories(Paths.get(baseDir));
 
-            String baseName = targetDate + FileExtension.CSV;
-            targetPath = Paths.get(baseDir, baseName);
+            targetPath = Paths.get(baseDir, targetDate + CSV);
 
             setResource(new FileSystemResource(targetPath));
         } catch (IOException e) {
@@ -136,11 +138,11 @@ public class MonthlyHealthInfoSummaryWriter
             }
 
             // 正常終了時
-            Path gzPath = Paths.get(targetPath.toString() + FileExtension.GZ.getValue());
+            Path gzPath = Paths.get(targetPath.toString() + GZ);
             FileUtil.compressGZip(targetPath, gzPath);
 
             File gzFile = gzPath.toFile();
-            StringJoiner s3Path = new StringJoiner(StringUtil.THRASH)
+            StringJoiner s3Path = new StringJoiner(THRASH)
                     .add(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue())
                     .add("year=" + gzFile.getName().substring(0, 4))
                     .add(gzFile.getName());
@@ -149,7 +151,7 @@ public class MonthlyHealthInfoSummaryWriter
             s3.putFile(s3key, gzFile);
 
             // Slack通知
-            slack.sendFile(ContentType.BATCH, gzFile, "S3ファイルアップロード完了. key=" + s3key);
+            slack.sendFile(BATCH, gzFile, "S3ファイルアップロード完了. key=" + s3key);
 
             // ファイル送信が正常終了した場合、ローカルファイルを削除
             Files.deleteIfExists(targetPath);
@@ -171,6 +173,10 @@ public class MonthlyHealthInfoSummaryWriter
      */
     private void init() {
 
+        targetDate = isEmpty(targetDate)
+                ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMM_NOSEP)
+                : targetDate;
+
         setName("monthlyHealthInfoSummaryWriter");
         setAppendAllowed(false);
         setShouldDeleteIfExists(true);
@@ -180,13 +186,13 @@ public class MonthlyHealthInfoSummaryWriter
         extractor.setNames(COLUMN_NAME_ARRAY);
 
         DelimitedLineAggregator<MonthlyHealthInfoSummaryModel> aggregator = new DelimitedLineAggregator<>();
-        aggregator.setDelimiter(StringUtil.COMMA);
+        aggregator.setDelimiter(COMMA);
         aggregator.setFieldExtractor(extractor);
 
         setLineAggregator(aggregator);
 
         setHeaderCallback(
-                writer -> writer.write(String.join(StringUtil.COMMA, COLUMN_NAME_ARRAY)));
+                writer -> writer.write(String.join(COMMA, COLUMN_NAME_ARRAY)));
     }
 
 }
