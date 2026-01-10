@@ -43,6 +43,9 @@ public class WebSecurityConfig {
     /** アプリケーション設定ファイル */
     @Autowired
     private ApplicationProperties applicationProperties;
+    /** Provider */
+    @Autowired
+    private JwtSigningKeyProvider provider;
 
     /**
      * securityFilterChain
@@ -71,9 +74,10 @@ public class WebSecurityConfig {
                 // CSRF 無効化
                 .csrf(csrf -> csrf.disable())
                 // 認証フィルター 追加
-                .addFilter(new JWTAuthenticationFilter(manager, passwordEncoder))
+                .addFilter(
+                        new JWTAuthenticationFilter(manager, passwordEncoder, provider))
                 // 認可フィルター 追加
-                .addFilter(new JWTAuthorizationFilter(manager))
+                .addFilter(new JWTAuthorizationFilter(manager, provider))
                 // セッション 設定
                 .sessionManagement(
                         sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

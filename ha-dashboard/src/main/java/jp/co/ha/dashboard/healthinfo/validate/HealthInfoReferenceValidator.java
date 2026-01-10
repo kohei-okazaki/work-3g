@@ -1,10 +1,11 @@
 package jp.co.ha.dashboard.healthinfo.validate;
 
+import static jp.co.ha.common.exception.ValidateErrorCode.*;
+
 import java.time.LocalDate;
 
 import org.springframework.validation.Errors;
 
-import jp.co.ha.common.exception.ValidateErrorCode;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -63,9 +64,8 @@ public class HealthInfoReferenceValidator
                 if (DateTimeUtil.isAfter(fromDate, toDate, false)) {
                     // 健康情報作成日(終了) < 健康情報作成日(開始) となっている場合
                     errors.rejectValue("toHealthInfoRegDate",
-                            ValidateErrorCode.DATE_OVER.getOuterErrorCode(),
-                            new String[] { "健康情報作成日(終了)" },
-                            ValidateErrorCode.DATE_OVER.getOuterErrorCode());
+                            DATE_OVER.getOuterErrorCode(), new String[] { "健康情報作成日(終了)" },
+                            DATE_OVER.getOuterErrorCode());
                 }
             }
         }

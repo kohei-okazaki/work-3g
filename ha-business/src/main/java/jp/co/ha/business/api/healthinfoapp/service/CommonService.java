@@ -1,12 +1,13 @@
 package jp.co.ha.business.api.healthinfoapp.service;
 
+import static jp.co.ha.business.exception.ApiErrorCode.*;
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jp.co.ha.business.api.healthinfoapp.request.BaseAppApiRequest;
 import jp.co.ha.business.component.UserComponent;
-import jp.co.ha.business.exception.ApiErrorCode;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.User;
@@ -35,12 +36,11 @@ public abstract class CommonService {
 
         // ユーザ情報取得
         User user = userComponent.findById(request.getSeqUserId())
-                .orElseThrow(
-                        () -> new BusinessException(DashboardErrorCode.ACCOUNT_ILLEGAL,
-                                "ユーザ情報が存在しません seqUserId:" + request.getSeqUserId()));
+                .orElseThrow(() -> new BusinessException(ACCOUNT_ILLEGAL,
+                        "ユーザ情報が存在しません seqUserId:" + request.getSeqUserId()));
 
         if (!user.getApiKey().equals(request.getApiKey())) {
-            throw new ApiException(ApiErrorCode.API_EXEC_ERROR,
+            throw new ApiException(API_EXEC_ERROR,
                     "このユーザはAPIを実行できません。seq_user_id=" + request.getSeqUserId());
         }
     }

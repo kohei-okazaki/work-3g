@@ -14,7 +14,7 @@ public class HealthInfoExcelComponent implements BaseExcelComponent {
     private HealthInfo healthInfo;
 
     /**
-     * healthInfoを返す
+     * 健康情報を返す
      *
      * @return healthInfo
      */
@@ -23,7 +23,7 @@ public class HealthInfoExcelComponent implements BaseExcelComponent {
     }
 
     /**
-     * healthInfoを設定する
+     * 健康情報を設定する
      *
      * @param healthInfo
      *     健康情報

@@ -19,7 +19,6 @@ import jp.co.ha.common.log.LoggerFactory;
 // DbConfig.class,
 // BusinessConfig.class })
 // @TestPropertySource(locations = {
-// "classpath:local/crypt.properties",
 // "classpath:local/jdbc.properties",
 // "classpath:local/system.properties",
 // "classpath:local/healthinfo.properties",

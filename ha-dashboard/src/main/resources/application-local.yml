@@ -5,7 +5,6 @@ spring:
   # 設定ファイル読込
   config:
     import:
-      - "classpath:/local/crypt.properties"
       - "classpath:/local/jdbc.properties"
       - "classpath:/local/system.properties"
       - "classpath:/local/aws.properties"

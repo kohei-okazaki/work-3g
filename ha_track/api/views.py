@@ -8,9 +8,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from mongoengine import NotUniqueError, ValidationError as MEValidationError
 
-from ha_track.api.models import HealthInfo, HealthTrackLog
-from ha_track.api.serializers import HealthInfoPayloadSerializer
-from ha_track.api.util.dynamo_util import put_dynamo_db
+from .models import HealthInfo, HealthTrackLog
+from .serializers import HealthInfoPayloadSerializer
+from .util.dynamo_util import put_dynamo_db
 
 # Logger
 logger = logging.getLogger(__name__)
@@ -64,17 +64,15 @@ class HealthInfoAPIView(APIView):
                     created_at_epoch = int(created_at_utc.timestamp())
 
                     item = {
-                        "seq_user_id": seq_user_id,
-                        "created_at_epoch": created_at_epoch,
                         "seq_health_info_id": hi["seq_health_info_id"],
+                        "created_at_epoch": created_at_epoch,
+                        "seq_user_id": seq_user_id,
                         "height": Decimal(str(hi["height"])),
                         "weight": Decimal(str(hi["weight"])),
                         "bmi": Decimal(str(hi["bmi"])),
                         "standard_weight": Decimal(str(hi["standard_weight"])),
                         "created_at": created_at_utc.isoformat(),
                     }
-
-                    # 同じ (seq_user_id, created_at_epoch) が既にあれば上書きしない
                     put_dynamo_db(table_name="health_info", item=item)
 
                 except table.meta.client.exceptions.ConditionalCheckFailedException:

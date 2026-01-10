@@ -11,9 +11,9 @@ import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.RootLoginInfo;
 import jp.co.ha.db.entity.RootLoginInfoKey;
-import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
+import jp.co.ha.db.entity.custom.CompositeRootUserInfo;
 import jp.co.ha.db.mapper.RootLoginInfoMapper;
-import jp.co.ha.db.mapper.composite.CompositeRootUserInfoMapper;
+import jp.co.ha.db.mapper.custom.CompositeRootUserInfoMapper;
 
 /**
  * 管理者サイトユーザログイン情報検索サービス実装クラス

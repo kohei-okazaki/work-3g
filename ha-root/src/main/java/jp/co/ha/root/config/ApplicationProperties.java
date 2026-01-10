@@ -44,6 +44,10 @@ public class ApplicationProperties {
     @Value("${front.inquiry.page}")
     private int inquiryPage;
 
+    /** 1ページあたりの件数 */
+    @Value("${front.job.page}")
+    private int jobPage;
+
     /**
      * Front画面URLを返す
      *
@@ -175,6 +179,25 @@ public class ApplicationProperties {
      */
     public void setInquiryPage(int inquiryPage) {
         this.inquiryPage = inquiryPage;
+    }
+
+    /**
+     * 1ページあたりの件数を返す
+     * 
+     * @return jobPage
+     */
+    public int getJobPage() {
+        return jobPage;
+    }
+
+    /**
+     * 1ページあたりの件数を設定する
+     * 
+     * @param jobPage
+     *     1ページあたりの件数
+     */
+    public void setJobPage(int jobPage) {
+        this.jobPage = jobPage;
     }
 
 }

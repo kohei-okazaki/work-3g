@@ -1,5 +1,7 @@
 package jp.co.ha.business.io.file.excel.builder;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -10,7 +12,6 @@ import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.builder.BaseExcelBuilder;
 import jp.co.ha.common.log.MaskExecutor;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 
 /**
  * 健康情報Excel生成クラス
@@ -47,8 +48,8 @@ public class HealthInfoExcelBuilder extends BaseExcelBuilder<HealthInfoExcelMode
             setText(cell,
                     this.conf.useMask() ? MaskExecutor.MASK : model.getStandardWeight());
             cell = getCell(sheet, rowPosition + i, 4);
-            setText(cell, DateTimeUtil.toString(model.getHealthInfoRegDate(),
-                    DateFormatType.YYYYMMDDHHMMSS));
+            setText(cell,
+                    DateTimeUtil.toString(model.getHealthInfoRegDate(), YYYYMMDDHHMMSS));
         }
     }
 

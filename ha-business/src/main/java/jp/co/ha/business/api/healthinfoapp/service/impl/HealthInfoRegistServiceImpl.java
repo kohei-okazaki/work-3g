@@ -1,12 +1,13 @@
 package jp.co.ha.business.api.healthinfoapp.service.impl;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
-import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.service.CommonService;
 import jp.co.ha.business.api.healthinfoapp.service.HealthInfoRegistService;
@@ -14,7 +15,7 @@ import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse.BasicHealthInfo;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.BasicHealthInfoCalcApiComponent;
 import jp.co.ha.business.component.TokenApiComponent;
 import jp.co.ha.business.db.crud.create.HealthInfoCreateService;
@@ -22,7 +23,6 @@ import jp.co.ha.business.db.crud.read.BmiRangeMtSearchService;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.db.entity.BmiRangeMt;
@@ -43,9 +43,9 @@ public class HealthInfoRegistServiceImpl extends CommonService
     /** BMI範囲マスタ検索サービス */
     @Autowired
     private BmiRangeMtSearchService bmiRangeMtSearchService;
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** トークン発行API */
     @Autowired
     private TokenApiComponent tokenApiComponent;
@@ -69,8 +69,8 @@ public class HealthInfoRegistServiceImpl extends CommonService
             HealthInfoRegistApiResponse response) throws BaseException {
 
         if (request.getTransactionId() == null) {
-            // API通信情報.トランザクションIDを採番
-            request.setTransactionId(apiCommunicationDataComponent.getTransactionId());
+            // API通信ログ.トランザクションIDを採番
+            request.setTransactionId(apiLogComponent.getTransactionId());
         }
 
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
@@ -103,7 +103,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         // Entityの登録処理を行う
         healthInfoCreateService.create(entity);
 
-        BaseAppApiResponse.Account account = new BaseAppApiResponse.Account();
+        HealthInfoRegistApiResponse.Account account = new HealthInfoRegistApiResponse.Account();
         account.setSeqUserId(request.getSeqUserId());
         response.setAccount(account);
 
@@ -134,7 +134,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
                 .filter(e -> e.getRangeMin().intValue() <= bmi.intValue()
                         && bmi.intValue() < e.getRangeMax().intValue())
                 .findFirst()
-                .orElseThrow(() -> new BusinessException(CommonErrorCode.DB_NO_DATA,
+                .orElseThrow(() -> new BusinessException(DB_NO_DATA,
                         "BMI範囲マスタが取得失敗しました。BMI範囲マスタを確認してください"));
 
         HealthInfo entity = new HealthInfo();

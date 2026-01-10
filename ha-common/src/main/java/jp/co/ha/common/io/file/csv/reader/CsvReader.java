@@ -1,5 +1,7 @@
 package jp.co.ha.common.io.file.csv.reader;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +16,6 @@ import java.util.stream.Collectors;
 import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
@@ -57,11 +58,10 @@ public abstract class CsvReader<T extends BaseCsvModel> {
                 modelList.add(this.read(record));
             }
         } catch (UnsupportedEncodingException e) {
-            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
+            throw new SystemException(FILE_READING_ERROR,
                     "指定した文字コードが無効です:" + charset.getValue(), e);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
-                    "ファイルの読込に失敗しました。", e);
+            throw new SystemException(FILE_READING_ERROR, "ファイルの読込に失敗しました。", e);
         }
 
         return modelList;
@@ -85,8 +85,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
         try (InputStream is = uploadFile.getInputStream()) {
             return readInputStream(is, charset);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
-                    "ファイルの読込に失敗しました。", e);
+            throw new SystemException(FILE_READING_ERROR, "ファイルの読込に失敗しました。", e);
         }
 
     }
@@ -126,8 +125,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
                 }
             }
         } catch (Exception e) {
-            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "Beanの生成に失敗しました",
-                    e);
+            throw new SystemException(UNEXPECTED_ERROR, "Beanの生成に失敗しました", e);
         }
 
         LOG.debugBean(model);
@@ -147,8 +145,7 @@ public abstract class CsvReader<T extends BaseCsvModel> {
     private void checkFileLength(List<String> colList, List<String> dataList)
             throws BaseException {
         if (dataList.size() != colList.size()) {
-            throw new SystemException(CommonErrorCode.FILE_UPLOAD_ERROR,
-                    "CSV1行あたりのレコードが一致しません。");
+            throw new SystemException(FILE_UPLOAD_ERROR, "CSV1行あたりのレコードが一致しません。");
         }
     }
 

@@ -1,5 +1,7 @@
 package jp.co.ha.tool.gen;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -7,7 +9,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.property.reader.PropertyReader;
 import jp.co.ha.common.log.Logger;
@@ -99,8 +100,7 @@ public abstract class BaseGenerator {
         try {
             path = Paths.get(this.getClass().getClassLoader().getResource("").toURI());
         } catch (URISyntaxException e) {
-            throw new SystemException(CommonErrorCode.FILE_READING_ERROR,
-                    FILE_NAME_PROP + "が見つかりません", e);
+            throw new SystemException(FILE_READING_ERROR, FILE_NAME_PROP + "が見つかりません", e);
         }
 
         // 設定ファイルを取得

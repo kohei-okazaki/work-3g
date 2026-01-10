@@ -1,5 +1,7 @@
 package jp.co.ha.business.exception;
 
+import static jp.co.ha.common.log.Logger.LogLevel.*;
+
 import jp.co.ha.common.exception.BaseErrorCode;
 import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
@@ -14,13 +16,13 @@ public enum ApiErrorCode implements BaseErrorCode, BaseEnum {
 
     /* ERROR */
     /** API実行時エラー */
-    API_EXEC_ERROR("API_EXEC_ERROR", "AE0018", LogLevel.WARN),
+    API_EXEC_ERROR("API_EXEC_ERROR", "AE0018", WARN),
 
     /* WARN */
     /** API必須エラー */
-    API_REQUIRE("API_REQUIRE", "AW0019", LogLevel.WARN),
+    API_REQUIRE("API_REQUIRE", "AW0019", WARN),
     /** リクエスト種別エラー */
-    REQUEST_TYPE_INVALID("REQUEST_TYPE_INVALID", "AW0020", LogLevel.WARN),
+    REQUEST_TYPE_INVALID("REQUEST_TYPE_INVALID", "AW0020", WARN),
 
     ;
 

@@ -34,3 +34,19 @@ ha-batch:
   data-purge-list:
     - table-name: user
       expired: 10
+  daily-health-info-analysis:
+    exec-perpage-count: 1000
+    temp-dir-path: /home/admin/daily/healthinfo/
+    file-name: healthinfo
+  daily-user-analysis:
+    exec-perpage-count: 1000
+    temp-dir-path: /home/admin/daily/user/
+    file-name: user
+  daily-api-log-analysis:
+    exec-perpage-count: 1000
+    temp-dir-path: /home/admin/daily/api_log/
+    file-name: api_log
+  daily-batch-log-analysis:
+    exec-perpage-count: 1000
+    temp-dir-path: /home/admin/daily/batch_log/
+    file-name: batch_log

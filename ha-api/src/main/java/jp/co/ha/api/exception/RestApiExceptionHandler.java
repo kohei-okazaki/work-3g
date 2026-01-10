@@ -1,5 +1,7 @@
 package jp.co.ha.api.exception;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,7 +21,6 @@ import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseAppError;
 import jp.co.ha.common.exception.BaseExceptionHandler;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 
@@ -86,18 +87,16 @@ public class RestApiExceptionHandler extends BaseExceptionHandler {
         BaseAppError error = null;
         if (e instanceof InvalidFormatException) {
             InvalidFormatException ife = (InvalidFormatException) e;
-            error = new ApiException(CommonErrorCode.JSON_FORMAT_ERROR,
-                    ife.getValue() + "はリクエスト形式エラーです", e);
+            error = new ApiException(JSON_FORMAT_ERROR, ife.getValue() + "はリクエスト形式エラーです",
+                    e);
         } else if (e instanceof JsonParseException) {
-            error = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
-                    "JSON形式ではありません", e);
+            error = new ApiException(JSON_PARSE_ERROR, "JSON形式ではありません", e);
         } else if (e instanceof JsonProcessingException) {
-            error = new ApiException(CommonErrorCode.JSON_PARSE_ERROR,
-                    "JSON生成処理が失敗しました", e);
+            error = new ApiException(JSON_PARSE_ERROR, "JSON生成処理が失敗しました", e);
         } else if (e instanceof MethodArgumentTypeMismatchException) {
             MethodArgumentTypeMismatchException matme = (MethodArgumentTypeMismatchException) e;
 
-            error = new ApiException(CommonErrorCode.VALIDATE_ERROR,
+            error = new ApiException(VALIDATE_ERROR,
                     "リクエストパラメータが不正です。 パラメータ名:" + matme.getName() + ", 値="
                             + matme.getValue(),
                     e);

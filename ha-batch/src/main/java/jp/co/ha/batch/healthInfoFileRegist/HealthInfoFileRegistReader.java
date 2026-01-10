@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistDto.HealthInfoRequestData;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
@@ -41,8 +41,8 @@ public class HealthInfoFileRegistReader
 
     /** 健康情報設定ファイル */
     private HealthInfoProperties prop;
-    /** API通信情報Component */
-    private ApiCommunicationDataComponent component;
+    /** API通信ログComponent */
+    private ApiLogComponent component;
     /** 健康情報登録APIリクエストキュー */
     private Deque<HealthInfoRegistApiRequest> buffer = new ArrayDeque<>();
     /** ファイルリスト */
@@ -61,7 +61,7 @@ public class HealthInfoFileRegistReader
      *     JSON読み取りクラス
      */
     public HealthInfoFileRegistReader(HealthInfoProperties prop,
-            ApiCommunicationDataComponent component) {
+            ApiLogComponent component) {
 
         setName("healthInfoFileRegistReader");
 

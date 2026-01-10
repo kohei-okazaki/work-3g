@@ -13,9 +13,9 @@ import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.annotation.Select;
 import jp.co.ha.db.entity.InquiryManagementExample;
-import jp.co.ha.db.entity.composite.CompositeInquiry;
+import jp.co.ha.db.entity.custom.CompositeInquiry;
 import jp.co.ha.db.mapper.InquiryManagementMapper;
-import jp.co.ha.db.mapper.composite.CompositeInquriyMapper;
+import jp.co.ha.db.mapper.custom.CompositeInquriyMapper;
 
 /**
  * 問い合わせ管理情報検索サービス実装クラス

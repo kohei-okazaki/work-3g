@@ -18,7 +18,7 @@ import jp.co.ha.batch.base.BatchConfig;
 import jp.co.ha.batch.listener.BatchJobListener;
 
 /**
- * データパージバッチのConfig
+ * データパージバッチConfig
  * 
  * @version 1.0.0
  */

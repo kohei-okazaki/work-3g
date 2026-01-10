@@ -1,11 +1,16 @@
 package jp.co.ha.common.crypt;
 
+import static jp.co.ha.common.aws.AwsSystemsManagerComponent.*;
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.common.db.CryptProperties;
+import jp.co.ha.common.aws.AwsSystemsManagerComponent;
+import jp.co.ha.common.exception.BaseException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.StringUtil;
 
@@ -17,9 +22,9 @@ import jp.co.ha.common.util.StringUtil;
 @Component("caesarCrypter")
 public class CaesarCrypter implements Crypter {
 
-    /** 暗号化設定ファイル情報 */
+    /** Systems Manager */
     @Autowired
-    private CryptProperties cryptConfig;
+    private AwsSystemsManagerComponent ssm;
 
     @Override
     public String encrypt(String str) {
@@ -31,15 +36,20 @@ public class CaesarCrypter implements Crypter {
         }
 
         String result = "";
-        for (int i = 0; i < str.length(); i++) {
-            int shifted = str.charAt(i);
-            char c = (char) (shifted + cryptConfig.getShift());
-            if (c > 'z') {
-                // zより後ろの文字列の場合、aに戻す為26引く
-                result += (char) (c - 26);
-            } else {
-                result += c;
+        try {
+            for (int i = 0; i < str.length(); i++) {
+                int shifted = str.charAt(i);
+                char c = (char) (shifted
+                        + Integer.valueOf(ssm.getValue(KEY_CRYPT_SHIFT)));
+                if (c > 'z') {
+                    // zより後ろの文字列の場合、aに戻す為26引く
+                    result += (char) (c - 26);
+                } else {
+                    result += c;
+                }
             }
+        } catch (BaseException e) {
+            throw new SystemRuntimeException(AWS_SSM_GET_ERROR, e);
         }
         return result;
     }
@@ -54,15 +64,20 @@ public class CaesarCrypter implements Crypter {
         }
 
         String result = "";
-        for (int i = 0; i < str.length(); i++) {
-            int shifted = str.charAt(i);
-            char c = (char) (shifted - cryptConfig.getShift());
-            if (c < 'a') {
-                // zより後ろの文字列の場合、aに戻す為26引く
-                result += (char) (c + 26);
-            } else {
-                result += c;
+        try {
+            for (int i = 0; i < str.length(); i++) {
+                int shifted = str.charAt(i);
+                char c = (char) (shifted
+                        - Integer.valueOf(ssm.getValue(KEY_CRYPT_SHIFT)));
+                if (c < 'a') {
+                    // zより後ろの文字列の場合、aに戻す為26引く
+                    result += (char) (c + 26);
+                } else {
+                    result += c;
+                }
             }
+        } catch (BaseException e) {
+            throw new SystemRuntimeException(AWS_SSM_GET_ERROR, e);
         }
         return result;
     }

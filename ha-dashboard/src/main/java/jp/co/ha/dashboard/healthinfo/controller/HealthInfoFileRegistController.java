@@ -1,5 +1,9 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -19,15 +23,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoUploadCsv;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.csv.reader.HealthInfoCsvReader;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.service.CsvUploadService;
@@ -35,14 +38,12 @@ import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoFileForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoFileRegistService;
 import jp.co.ha.dashboard.healthinfo.validate.HealthInfoFileInputValidator;
-import jp.co.ha.dashboard.view.DashboardView;
 
 /**
  * 健康情報一括登録画面コントローラ
@@ -95,7 +96,7 @@ public class HealthInfoFileRegistController
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
-        return getView(model, DashboardView.HEALTH_INFO_FILE_INPUT);
+        return getView(model, HEALTH_INFO_FILE_INPUT);
     }
 
     @Override
@@ -106,7 +107,7 @@ public class HealthInfoFileRegistController
 
         if (result.hasErrors()) {
             // validationエラーの場合
-            return getView(model, DashboardView.HEALTH_INFO_FILE_INPUT);
+            return getView(model, HEALTH_INFO_FILE_INPUT);
         }
 
         Long seqUserId = sessionComponent
@@ -117,7 +118,7 @@ public class HealthInfoFileRegistController
                 .readMultipartFile(form.getMultipartFile(), Charset.UTF_8);
 
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV;
+                YYYYMMDDHHMMSS_NOSEP) + FileExtension.CSV;
         String s3Key = new StringJoiner(StringUtil.THRASH)
                 .add(AwsS3Key.HEALTHINFO_FILE_REGIST.getValue())
                 .add(seqUserId.toString())
@@ -134,7 +135,7 @@ public class HealthInfoFileRegistController
         model.addAttribute("modelList", modelList);
         model.addAttribute("count", modelList.size());
 
-        return getView(model, DashboardView.HEALTH_INFO_FILE_CONFIRM);
+        return getView(model, HEALTH_INFO_FILE_CONFIRM);
     }
 
     @Override
@@ -150,13 +151,13 @@ public class HealthInfoFileRegistController
                 .getValue(request.getSession(), FILE_NAME_PREFIX + seqUserId,
                         String.class)
                 .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "リクエスト情報が不正です セッションキー"
+                        ILLEGAL_ACCESS_ERROR, "リクエスト情報が不正です セッションキー"
                                 + FILE_NAME_PREFIX + seqUserId + "が存在しない"));
 
         List<HealthInfoCsvUploadModel> modelList = getModelList(seqUserId, fileName);
 
         if (CollectionUtil.isEmpty(modelList)) {
-            throw new SystemException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+            throw new SystemException(ILLEGAL_ACCESS_ERROR,
                     "session情報が不正です");
         }
 
@@ -168,7 +169,7 @@ public class HealthInfoFileRegistController
             s3.removeS3ObjectByKeys(FILE_NAME_PREFIX + seqUserId);
         }
 
-        return getView(model, DashboardView.HEALTH_INFO_FILE_COMPLETE);
+        return getView(model, HEALTH_INFO_FILE_COMPLETE);
     }
 
     /**

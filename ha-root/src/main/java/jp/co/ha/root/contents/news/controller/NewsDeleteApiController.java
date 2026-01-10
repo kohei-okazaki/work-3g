@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.component.NewsComponent;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.NewsInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.news.request.NewsDeleteApiRequest;
 import jp.co.ha.root.contents.news.response.NewsDeleteApiResponse;
+import jp.co.ha.root.contents.news.service.NewsService;
 
 /**
  * お知らせ情報削除APIコントローラ
@@ -23,9 +24,9 @@ import jp.co.ha.root.contents.news.response.NewsDeleteApiResponse;
 public class NewsDeleteApiController
         extends BaseRootApiController<NewsDeleteApiRequest, NewsDeleteApiResponse> {
 
-    /** お知らせ情報Component */
+    /** お知らせ情報サービス */
     @Autowired
-    private NewsComponent component;
+    private NewsService service;
 
     /**
      * 削除
@@ -35,24 +36,26 @@ public class NewsDeleteApiController
      * @param request
      *     おしらせ情報削除APIリクエスト
      * @return おしらせ情報削除APIレスポンス
+     * @throws BaseException
+     *     S3処理に失敗した場合
      */
     @DeleteMapping(value = "news/{seq_news_info_id}")
     public ResponseEntity<NewsDeleteApiResponse> delete(
             @PathVariable(name = "seq_news_info_id", required = true) Long seqNewsInfoId,
-            NewsDeleteApiRequest request) {
+            NewsDeleteApiRequest request) throws BaseException {
 
         // お知らせ情報を検索
-        Optional<NewsInfo> optional = component.findById(seqNewsInfoId);
+        Optional<NewsInfo> optional = service.getNews(seqNewsInfoId);
         if (!optional.isPresent()) {
             return ResponseEntity.badRequest()
                     .body(getErrorResponse("news_info is not found"));
         }
 
         // お知らせ情報を論理削除
-        component.updateLongicalDelete(optional.get());
+        service.deleteNews(optional);
 
         // Slack通知
-        component.sendSlack(seqNewsInfoId);
+        service.noticeSlack(seqNewsInfoId);
 
         return ResponseEntity.ok(getSuccessResponse());
     }

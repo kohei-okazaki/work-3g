@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.business.api.track.HealthInfoMigrateApi;
 import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.business.api.track.response.HealthInfoMigrateApiResponse;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.component.ApiLogComponent;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.web.api.ApiConnectInfo;
@@ -32,7 +32,7 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
     private HealthInfoProperties prop;
     /** API通信情報Component */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** 健康情報連携API */
     @Autowired
     private HealthInfoMigrateApi api;
@@ -52,10 +52,9 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
      *     JSON変換に失敗した場合
      */
     private void sendHealthInfoMirgateApi(
-            List<? extends HealthInfoMigrateApiRequest> list)
-            throws BaseException {
+            List<? extends HealthInfoMigrateApiRequest> list) throws BaseException {
 
-        String transactionId = apiCommunicationDataComponent.getTransactionId();
+        String transactionId = apiLogComponent.getTransactionId();
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.getTrackApiUrl() + "healthinfo/");
@@ -64,10 +63,10 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
 
             HealthInfoMigrateApiResponse response = api.callApi(request, connectInfo);
 
-            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+            ApiLogQueuePayload payload = apiLogComponent
                     .getPayload4TrackApi(api, connectInfo, request, response,
                             transactionId);
-            apiCommunicationDataComponent.registQueue(payload);
+            apiLogComponent.registQueue(payload);
         }
 
     }

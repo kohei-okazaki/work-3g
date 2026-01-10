@@ -1,7 +1,7 @@
 package jp.co.ha.common.io.file.csv;
 
-import jp.co.ha.common.function.Builder;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.util.Builder;
 
 /**
  * CSV設定情報保持クラス<br>

@@ -1,5 +1,7 @@
 package jp.co.ha.batch.healthInfoMigrate;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -13,10 +15,9 @@ import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.mapper.composite.MigrateHealthInfoMapper;
+import jp.co.ha.db.mapper.custom.PagingHealthInfoMapper;
 
 /**
  * 健康情報連携処理-Reader
@@ -46,8 +47,7 @@ public class HealthInfoMigrateReader extends MyBatisPagingItemReader<HealthInfo>
             BatchProperties batchProperties) {
 
         String date = StringUtil.isEmpty(targetDate)
-                ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDD_NOSEP)
+                ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMMDD_NOSEP)
                 : targetDate;
         LOG.debug("targetDate=" + date);
 
@@ -61,7 +61,7 @@ public class HealthInfoMigrateReader extends MyBatisPagingItemReader<HealthInfo>
         setSqlSessionFactory(sqlSessionFactory);
 
         setQueryId(
-                MigrateHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate");
+                PagingHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate");
 
         Map<String, Object> params = Map.of(
                 "from", from, "to", to);

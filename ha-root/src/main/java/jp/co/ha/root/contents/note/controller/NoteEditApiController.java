@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
 import jp.co.ha.business.db.crud.update.RootUserNoteInfoUpdateService;
+import jp.co.ha.common.aws.AwsS3Component;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.db.entity.RootUserNoteInfo;
 import jp.co.ha.root.base.BaseRootApiController;

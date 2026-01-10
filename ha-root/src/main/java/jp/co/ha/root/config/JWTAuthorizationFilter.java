@@ -28,24 +28,30 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     /** 認証情報管理クラス */
     @SuppressWarnings("unused")
     private AuthenticationManager authenticationManager;
+    /** Provider */
+    JwtSigningKeyProvider provider;
 
     /**
      * コンストラクタ
      *
      * @param authenticationManager
      *     認証情報管理クラス
+     * @param provider
+     *     Provider
      */
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthorizationFilter(AuthenticationManager authenticationManager,
+            JwtSigningKeyProvider provider) {
         super(authenticationManager);
         this.authenticationManager = authenticationManager;
+        this.provider = provider;
     }
 
     @Override
     public void doFilterInternal(HttpServletRequest req, HttpServletResponse res,
             FilterChain chain) throws IOException, ServletException {
 
-        String header = req.getHeader(JWTAuthenticationFilter.HEADER_AUTHORIZATION);
-        if (header == null || !header.startsWith(JWTAuthenticationFilter.TOKEN_PREFIX)) {
+        String header = req.getHeader(HEADER_AUTHORIZATION);
+        if (header == null || !header.startsWith(TOKEN_PREFIX)) {
             chain.doFilter(req, res);
             return;
         }
@@ -79,7 +85,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         // parse the token.
         String user = Jwts.parser()
-                .verifyWith(SIGNING_KEY)
+                .verifyWith(provider.get())
                 .build()
                 .parseSignedClaims(rawToken)
                 .getPayload()

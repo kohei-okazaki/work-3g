@@ -1,8 +1,5 @@
 package jp.co.ha.root.contents.healthinfo.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -10,17 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
-import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.healthinfo.request.HealthInfoListApiRequest;
 import jp.co.ha.root.contents.healthinfo.response.HealthInfoListApiResponse;
+import jp.co.ha.root.contents.healthinfo.service.HealthInfoService;
 
 /**
  * 健康情報一覧取得APIコントローラ
@@ -31,9 +23,9 @@ import jp.co.ha.root.contents.healthinfo.response.HealthInfoListApiResponse;
 public class HealthInfoListApiController extends
         BaseRootApiController<HealthInfoListApiRequest, HealthInfoListApiResponse> {
 
-    /** 健康情報検索サービス */
+    /** 健康情報サービス */
     @Autowired
-    private HealthInfoSearchService healthInfoSearchService;
+    private HealthInfoService service;
 
     /**
      * 健康情報一覧取得
@@ -53,25 +45,9 @@ public class HealthInfoListApiController extends
         Pageable pageable = PagingViewFactory.getPageable(page,
                 applicationProperties.getHealthinfoPage());
 
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC)
-                .pageable(pageable)
-                .build();
-
-        List<HealthInfoListApiResponse.HealthInfoResponse> healthInfoResponseList = healthInfoSearchService
-                .findHealthInfoDetailList(selectOption).stream().map(e -> {
-                    HealthInfoListApiResponse.HealthInfoResponse response = new HealthInfoListApiResponse.HealthInfoResponse();
-                    BeanUtil.copy(e, response);
-                    response.setBmiStatus(getBmiStatus(e.getOverWeightStatus()));
-                    return response;
-                }).collect(Collectors.toList());
-
-        PagingView paging = PagingViewFactory.getPageView(pageable, "healthinfo?page",
-                healthInfoSearchService.countByHealthInfoIdAndSeqUserId(null, null));
-
         HealthInfoListApiResponse response = getSuccessResponse();
-        response.setHealthInfoResponseList(healthInfoResponseList);
-        response.setPaging(paging);
+        response.setHealthInfoResponseList(service.getHealthInfoList(pageable));
+        response.setPaging(service.getPagingView(pageable));
 
         return ResponseEntity.ok(response);
     }
@@ -79,33 +55,6 @@ public class HealthInfoListApiController extends
     @Override
     protected HealthInfoListApiResponse getResponse() {
         return new HealthInfoListApiResponse();
-    }
-
-    /**
-     * 肥満度ステータス応答情報を返す
-     *
-     * @param overWeightStatus
-     *     肥満度ステータス
-     * @return 肥満度ステータス応答情報
-     */
-    private HealthInfoListApiResponse.BmiStatus getBmiStatus(String overWeightStatus) {
-
-        HealthInfoListApiResponse.BmiStatus status = new HealthInfoListApiResponse.BmiStatus();
-        status.setStatus(overWeightStatus);
-        if ("10".equals(overWeightStatus)) {
-            status.setMessage("低体重");
-        } else if ("11".equals(overWeightStatus)) {
-            status.setMessage("普通体重");
-        } else if ("12".equals(overWeightStatus)) {
-            status.setMessage("肥満(1)");
-        } else if ("13".equals(overWeightStatus)) {
-            status.setMessage("肥満(2)");
-        } else if ("14".equals(overWeightStatus)) {
-            status.setMessage("肥満(3)");
-        } else if ("15".equals(overWeightStatus)) {
-            status.setMessage("肥満(4)");
-        }
-        return status;
     }
 
 }

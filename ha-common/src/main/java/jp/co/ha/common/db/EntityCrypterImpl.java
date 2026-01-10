@@ -1,5 +1,7 @@
 package jp.co.ha.common.db;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,9 +12,7 @@ import org.springframework.stereotype.Component;
 
 import jp.co.ha.common.crypt.Crypter;
 import jp.co.ha.common.db.annotation.Crypt;
-import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
-import jp.co.ha.common.exception.SystemException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
 
@@ -30,7 +30,7 @@ public class EntityCrypterImpl implements EntityCrypter {
     private Crypter crypter;
 
     @Override
-    public void encrypt(Object entity) throws BaseException {
+    public void encrypt(Object entity) {
 
         try {
             for (Field f : entity.getClass().getDeclaredFields()) {
@@ -58,13 +58,12 @@ public class EntityCrypterImpl implements EntityCrypter {
             }
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "entityから値を取得できません", e);
+            throw new SystemRuntimeException(UNEXPECTED_ERROR, "entityから値を取得できません", e);
         }
     }
 
     @Override
-    public void decrypt(Object entity) throws BaseException {
+    public void decrypt(Object entity) {
 
         try {
             for (Field f : entity.getClass().getDeclaredFields()) {
@@ -92,8 +91,7 @@ public class EntityCrypterImpl implements EntityCrypter {
             }
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "entityから値を取得できません", e);
+            throw new SystemRuntimeException(UNEXPECTED_ERROR, "entityから値を取得できません", e);
         }
     }
 

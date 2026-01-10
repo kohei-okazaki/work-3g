@@ -28,9 +28,7 @@ public class BatchConfigConst {
     /** JOB名 - 月次健康情報集計バッチ */
     public static final String MONTHLY_HEALTH_INFO_SUMMARY_BATCH_JOB_NAME = "monthlyHealthInfoSummaryBatchJob";
     /** STEP名 - 月次健康情報集計Step */
-    public static final String MONTHLY_HEALTH_INFO_SUMMARY_STEP_NAME = "monthlyHealthInfoSummaryStep";
-    /** STEP名 - 月次健康情報アップロードStep */
-    public static final String MONTHLY_HEALTH_INFO_UPLOAD_STEP_NAME = "monthlyHealthInfoUploadStep";
+    public static final String MONTHLY_HEALTH_INFO_SUMMARY_BACTH_STEP_NAME = "monthlyHealthInfoSummaryBatchStep";
 
     /** JOB名 - 健康情報連携バッチ */
     public static final String HEALTH_INFO_MIGRATE_BATCH_JOB_NAME = "healthInfoMigrateBatchJob";
@@ -46,5 +44,22 @@ public class BatchConfigConst {
     public static final String DATA_PURGE_BACTH_JOB_NAME = "dataPurgeBatchJob";
     /** STEP名 - データパージバッチ */
     public static final String DATA_PURGE_BACTH_STEP_NAME = "dataPurgeBatchStep";
+
+    /** JOB名 - 日次健康情報データ分析連携バッチ */
+    public static final String DAILY_HEALTH_INFO_JOB_NAME = "dailyHealthInfoJob";
+    /** STEP名 - 日次健康情報データ分析連携バッチ */
+    public static final String DAILY_HEALTH_INFO_STEP_NAME = "dailyHealthInfoStep";
+    /** JOB名 - 日次ユーザ情報データ分析連携バッチ */
+    public static final String DAILY_USER_JOB_NAME = "dailyUserJob";
+    /** STEP名 - 日次ユーザ情報データ分析連携バッチ */
+    public static final String DAILY_USER_STEP_NAME = "dailyUserStep";
+    /** JOB名 - 日次API通信ログデータ分析連携バッチ */
+    public static final String DAILY_API_LOG_JOB_NAME = "dailyApiLogJob";
+    /** STEP名 - 日次API通信ログデータ分析連携バッチ */
+    public static final String DAILY_API_LOG_STEP_NAME = "dailyApiLogStep";
+    /** JOB名 - 日次バッチ実行ログデータ分析連携バッチ */
+    public static final String DAILY_BACTH_LOG_JOB_NAME = "dailyBatchLogJob";
+    /** STEP名 - 日次バッチ実行ログデータ分析連携バッチ */
+    public static final String DAILY_BACTH_LOG_STEP_NAME = "dailyBatchLogStep";
 
 }

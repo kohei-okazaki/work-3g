@@ -5,8 +5,8 @@ import java.util.List;
 
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.db.entity.HealthInfo;
-import jp.co.ha.db.entity.composite.CompositeHealthInfo;
-import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
+import jp.co.ha.db.entity.custom.CompositeHealthInfo;
+import jp.co.ha.db.entity.custom.CompositeMonthlyRegData;
 
 /**
  * 健康情報検索サービスインターフェース

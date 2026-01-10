@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
-import jp.co.ha.business.api.slack.SlackApiComponent.ContentTypeDeserializer;
 
 /**
  * SlackAPIの接続情報のJSONクラス

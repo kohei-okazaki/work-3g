@@ -1,7 +1,5 @@
 package jp.co.ha.common.web.interceptor;
 
-import java.util.function.Predicate;
-
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 /**
@@ -14,11 +12,13 @@ public abstract class BaseWebInterceptor implements BaseInterceptor {
     /**
      * インターセプターで検査対象のリソースかどうか判定する<br>
      * javascriptなどの静的リソースはtrueを返す
-     *
+     * 
+     * @param handler
+     *     リソース
      * @return 判定結果
      */
-    protected Predicate<Object> isStaticResource() {
-        return e -> e instanceof ResourceHttpRequestHandler;
+    protected boolean isStaticResource(Object handler) {
+        return handler instanceof ResourceHttpRequestHandler;
     }
 
 }

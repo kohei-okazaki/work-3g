@@ -176,7 +176,7 @@
                     </li>
                     <li>
                       <p>
-                        作成されたMapper.xml内の物理テーブル名を大文字に置換すること
+                        作成されたMapper.xml内の物理テーブル名を大文字になっていることを確認すること。
                       </p>
                       <div class="alert alert-danger" role="alert">
                         dev1環境のDBは大文字と小文字を区別するため
@@ -217,10 +217,9 @@
                       <p>ファイル内容はJavaで作成したDMLを追記</p>
                     </li>
                     <li>
-                      <p>コマンドプロンプトから以下のファイルを実行</p>
+                      <p>以下のコマンドをwsl上で実行</p>
                       <ol>
-                        <li><kbd>ha-build/bat/maven-build.bat local</kbd></li>
-                        <li><kbd>ha-build/bat/maven-flyway.bat</kbd></li>
+                        <li><kbd>/ha-build/docker/docker.sh build</kbd></li>
                       </ol>
                     </li>
                   </ol>

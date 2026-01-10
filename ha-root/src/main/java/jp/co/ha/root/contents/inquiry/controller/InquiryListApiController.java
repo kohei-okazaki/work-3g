@@ -1,8 +1,5 @@
 package jp.co.ha.root.contents.inquiry.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -10,18 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.component.InquiryComponent;
-import jp.co.ha.common.db.SelectOption;
-import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.validator.annotation.Decimal;
-import jp.co.ha.db.entity.composite.CompositeInquiry;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.inquiry.request.InquiryListApiRequest;
 import jp.co.ha.root.contents.inquiry.response.InquiryListApiResponse;
+import jp.co.ha.root.contents.inquiry.service.InquiryService;
 
 /**
  * 問い合わせ情報一覧取得APIコントローラ
@@ -32,9 +24,9 @@ import jp.co.ha.root.contents.inquiry.response.InquiryListApiResponse;
 public class InquiryListApiController
         extends BaseRootApiController<InquiryListApiRequest, InquiryListApiResponse> {
 
-    /** 問い合わせ関連Component */
+    /** 問い合わせサービス */
     @Autowired
-    private InquiryComponent component;
+    private InquiryService service;
 
     /**
      * 問い合わせ情報一覧取得
@@ -56,47 +48,9 @@ public class InquiryListApiController
         Pageable pageable = PagingViewFactory.getPageable(page,
                 applicationProperties.getInquiryPage());
 
-        SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("REG_DATE", SortType.ASC)
-                .pageable(pageable)
-                .build();
-        List<CompositeInquiry> list = component.getInquiryList(selectOption);
-
         InquiryListApiResponse response = getSuccessResponse();
-
-        List<InquiryListApiResponse.Inquiry> responseList = new ArrayList<>();
-
-        for (CompositeInquiry entity : list) {
-            InquiryListApiResponse.Inquiry inquiryResponse = new InquiryListApiResponse.Inquiry();
-
-            // inquiryオブジェクト設定
-            inquiryResponse.setSeqInquiryMngId(entity.getSeqInquiryMngId());
-            inquiryResponse.setSeqUserId(entity.getSeqUserId());
-            inquiryResponse.setSeqLoginId(entity.getResponderLoginId());
-            inquiryResponse.setTitle(entity.getTitle());
-            inquiryResponse.setBody(component.getInquiryBody(entity));
-            inquiryResponse.setRegDate(entity.getRegDate());
-            inquiryResponse.setUpdateDate(entity.getUpdateDate());
-
-            // statusオブジェクト設定
-            InquiryListApiResponse.Status status = new InquiryListApiResponse.Status();
-            status.setLabel(entity.getInquiryStatusName());
-            status.setValue(entity.getInquiryStatus());
-            inquiryResponse.setStatus(status);
-
-            // typeオブジェクト設定
-            InquiryListApiResponse.Type type = new InquiryListApiResponse.Type();
-            type.setLabel(entity.getInquiryTypeName());
-            type.setValue(entity.getInquiryType());
-            inquiryResponse.setType(type);
-
-            responseList.add(inquiryResponse);
-        }
-        response.setInquiryList(responseList);
-
-        PagingView paging = PagingViewFactory.getPageView(pageable, "inquiry?page",
-                component.count());
-        response.setPaging(paging);
+        response.setInquiryList(service.getInquiryList(pageable));
+        response.setPaging(service.getPagingView(pageable));
 
         return ResponseEntity.ok(response);
     }

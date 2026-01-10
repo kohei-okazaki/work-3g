@@ -24,7 +24,7 @@ public class ExcelReader {
     /** LOG */
     protected final Logger LOG = LoggerFactory.getLogger(this.getClass());
     /** 対象シート名 */
-    private static final String TARGET_SHEET_NAME = "TABLE_LIST";
+    protected static final String TARGET_SHEET_NAME = "TABLE_LIST";
 
     /**
      * 指定された自動生成ツール設定ファイルからExcelの読込を行う

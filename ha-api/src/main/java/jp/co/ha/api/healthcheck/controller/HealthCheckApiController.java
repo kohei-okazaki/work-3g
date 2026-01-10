@@ -27,7 +27,7 @@ public class HealthCheckApiController
      *
      * @return レスポンス
      */
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HealthCheckApiResponse> doGet() {
         HealthCheckApiResponse response = new HealthCheckApiResponse();
         return new ResponseEntity<>(response, HttpStatus.OK);
