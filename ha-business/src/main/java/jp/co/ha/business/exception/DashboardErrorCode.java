@@ -1,5 +1,7 @@
 package jp.co.ha.business.exception;
 
+import static jp.co.ha.common.log.Logger.LogLevel.*;
+
 import jp.co.ha.common.exception.BaseErrorCode;
 import jp.co.ha.common.log.Logger.LogLevel;
 import jp.co.ha.common.type.BaseEnum;
@@ -16,19 +18,19 @@ public enum DashboardErrorCode implements BaseErrorCode, BaseEnum {
 
     /* WARN */
     /** ユーザ存在チェックエラー */
-    ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "DW0021", LogLevel.WARN),
+    ACCOUNT_ILLEGAL("ACCOUNT_ILLEGAL", "DW0021", WARN),
     /** ユーザ削除済エラー */
-    ACCOUNT_DELETE("ACCOUNT_DELETE", "DW0022", LogLevel.WARN),
+    ACCOUNT_DELETE("ACCOUNT_DELETE", "DW0022", WARN),
     /** ユーザ存在エラー */
-    ACCOUNT_EXIST("ACCOUNT_EXIST", "DW0023", LogLevel.WARN),
+    ACCOUNT_EXIST("ACCOUNT_EXIST", "DW0023", WARN),
     /** ユーザ不一致エラー */
-    ACCOUNT_INVALID_PASSWORD("ACCOUNT_INVALID_PASSWORD", "DW0024", LogLevel.WARN),
+    ACCOUNT_INVALID_PASSWORD("ACCOUNT_INVALID_PASSWORD", "DW0024", WARN),
     /** ユーザ有効期限エラー */
-    ACCOUNT_EXPIRED("ACCOUNT_EXPIRED", "DW0025", LogLevel.WARN),
+    ACCOUNT_EXPIRED("ACCOUNT_EXPIRED", "DW0025", WARN),
     /** 不正リクエストエラー */
-    ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "DW0026", LogLevel.WARN),
+    ILLEGAL_ACCESS_ERROR("ILLEGAL_ACCESS_ERROR", "DW0026", WARN),
     /** 多重送信エラー */
-    MULTI_SUBMIT_ERROR("MULTI_SUBMIT_ERROR", "DW0031", LogLevel.WARN),
+    MULTI_SUBMIT_ERROR("MULTI_SUBMIT_ERROR", "DW0031", WARN),
 
     ;
 

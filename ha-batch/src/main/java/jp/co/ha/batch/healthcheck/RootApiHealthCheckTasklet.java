@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.business.api.root.HealthCheckApi;
 import jp.co.ha.business.api.root.request.HealthCheckApiRequest;
 import jp.co.ha.business.api.root.response.HealthCheckApiResponse;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 
 /**
@@ -47,7 +47,7 @@ public class RootApiHealthCheckTasklet extends BaseHealthCheckApiTasklet {
 
         HealthCheckApiResponse response = healthCheckApi.callApi(request, connectInfo);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+        ApiLogQueuePayload payload = apiCommunicationDataComponent
                 .getPayload4RootApi(healthCheckApi, connectInfo, request, response,
                         transactionId);
         apiCommunicationDataComponent.registQueue(payload);

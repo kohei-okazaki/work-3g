@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import jp.co.ha.business.api.aws.AwsProperties;
 import jp.co.ha.business.io.file.json.conf.JsonConfig;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.aws.AwsProperties;
 
 /**
  * businessプロジェクトのConfigクラス
@@ -19,19 +19,17 @@ import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 @Configuration(proxyBeanMethods = false)
 // application-$env.ymlで読み込んでいるため不要
 // @PropertySource({
-// "classpath:crypt.properties",
 // "classpath:jdbc.properties",
 // "classpath:system.properties",
 // "classpath:aws.properties",
 // "classpath:healthInfo.properties"
 // })
 @ComponentScan(basePackages = {
-        "jp.co.ha.business.db.crud",
         "jp.co.ha.business.api",
-        "jp.co.ha.business.component",
         "jp.co.ha.business.cache",
-        "jp.co.ha.business.*.service",
-        "jp.co.ha.business.interceptor"
+        "jp.co.ha.business.component",
+        "jp.co.ha.business.db.crud",
+        "jp.co.ha.business.*.service"
 })
 // @PropertySource("classpath:mail.properties")
 public class BusinessConfig implements WebMvcConfigurer {
@@ -147,8 +145,8 @@ public class BusinessConfig implements WebMvcConfigurer {
      *     SESソケットタイムアウト
      * @param sesStubFlag
      *     SESスタブフラグ(true:メールを送信しない、false:送信する)
-     * @param apiCommunicationDataQueueName
-     *     API通信情報キュー名
+     * @param apiLogQueueName
+     *     キュー名:API通信ログ
      * @param sqsConnnectionTimeout
      *     SQSコネクションタイムアウト
      * @param sqsSocketTimeout
@@ -168,7 +166,7 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${aws.ses.connection.timeout}") int sesConnnectionTimeout,
             @Value("${aws.ses.socket.timeout}") int sesSocketTimeout,
             @Value("${aws.ses.stubflag}") boolean sesStubFlag,
-            @Value("${aws.sqs.queue.api_communication_data}") String apiCommunicationDataQueueName,
+            @Value("${aws.sqs.queue.api_log}") String apiLogQueueName,
             @Value("${aws.sqs.connection.timeout}") int sqsConnnectionTimeout,
             @Value("${aws.sqs.socket.timeout}") int sqsSocketTimeout,
             @Value("${aws.ssm.connection.timeout}") int ssmConnnectionTimeout,
@@ -182,7 +180,7 @@ public class BusinessConfig implements WebMvcConfigurer {
         props.setSesConnnectionTimeout(sesConnnectionTimeout);
         props.setSesSocketTimeout(sesSocketTimeout);
         props.setSesStubFlag(sesStubFlag);
-        props.setApiCommunicationDataQueueName(apiCommunicationDataQueueName);
+        props.setApiLogQueueName(apiLogQueueName);
         props.setSqsConnnectionTimeout(sqsConnnectionTimeout);
         props.setSqsSocketTimeout(sqsSocketTimeout);
         props.setSsmConnnectionTimeout(ssmConnnectionTimeout);

@@ -1,19 +1,20 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.co.ha.business.api.aws.AwsSesComponent;
-import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.aws.AwsSesComponent;
+import jp.co.ha.common.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
 
 /**
@@ -40,8 +41,8 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
 
         Long seqUserId = apiResponse.getAccount().getSeqUserId();
         String to = userComponent.findById(seqUserId).get().getMailAddress();
-        String titleText = "健康情報登録完了メール" + DateTimeUtil.toString(
-                DateTimeUtil.getSysDate(), DateTimeUtil.DateFormatType.YYYYMMDD_NOSEP);
+        String titleText = "健康情報登録完了メール"
+                + DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMMDD_NOSEP);
         Map<String, String> bodyMap = new HashMap<>();
         bodyMap.put("userId", seqUserId.toString());
         bodyMap.put("seqHealthInfoId",
@@ -53,7 +54,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
                 apiResponse.getHealthInfo().getStandardWeight() + "kg");
         bodyMap.put("healthInfoRegDate",
                 DateTimeUtil.toString(apiResponse.getHealthInfo().getHealthInfoRegDate(),
-                        DateFormatType.YYYYMMDDHHMMSS));
+                        YYYYMMDDHHMMSS));
         bodyMap.put("url", properties.getHealthInfoDashboardUrl());
 
         ses.sendMail(to, titleText, MailTemplateKey.HEALTHINFO_REGIST_TEMPLATE,

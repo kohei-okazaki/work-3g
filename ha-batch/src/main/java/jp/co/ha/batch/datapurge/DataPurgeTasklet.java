@@ -13,7 +13,7 @@ import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.batch.base.BatchProperties.DataPurge;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.db.mapper.composite.DataPurgeMapper;
+import jp.co.ha.db.mapper.custom.DataPurgeMapper;
 
 /**
  * データパージ処理 - Tasklet

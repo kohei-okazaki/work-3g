@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,11 +14,10 @@ import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.UserComponent;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvUploadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.BaseException;
@@ -36,9 +37,9 @@ import jp.co.ha.db.entity.User;
 @Service
 public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistService {
 
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** ユーザComponent */
     @Autowired
     private UserComponent userComponent;
@@ -62,12 +63,11 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
 
             // 相関チェック
             if (!model.getSeqUserId().equals(String.valueOf(seqUserId))) {
-                throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
-                        ++i + "行目のユーザIDが不正です");
+                throw new BusinessException(ILLEGAL_ACCESS_ERROR, ++i + "行目のユーザIDが不正です");
             }
             if (result.hasError()) {
                 ValidateError error = result.getFirst();
-                throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                throw new BusinessException(ILLEGAL_ACCESS_ERROR,
                         ++i + "行目のファイルフォーマットが不正です " + error.getMessage());
             }
         }
@@ -89,17 +89,17 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         for (HealthInfoRegistApiRequest request : toRequestList(modelList)) {
 
             // トランザクションIDを採番
-            String transactionId = apiCommunicationDataComponent.getTransactionId();
+            String transactionId = apiLogComponent.getTransactionId();
 
             request.setTransactionId(transactionId);
 
             HealthInfoRegistApiResponse response = registApi.callApi(request,
                     connectInfo);
 
-            ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+            ApiLogQueuePayload payload = apiLogComponent
                     .getPayload4AppApi(registApi, connectInfo, request, response,
                             transactionId);
-            apiCommunicationDataComponent.registQueue(payload);
+            apiLogComponent.registQueue(payload);
 
             if (ResultType.FAILURE == response.getResultType()) {
                 result = response.getResultType();

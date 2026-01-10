@@ -1,5 +1,7 @@
 package jp.co.ha.batch.listener;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.util.Map.Entry;
 import java.util.StringJoiner;
 
@@ -16,7 +18,6 @@ import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.common.exception.BaseAppError;
 import jp.co.ha.common.exception.BaseErrorCode;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -103,7 +104,7 @@ public class BatchJobListener implements JobExecutionListener {
         if (t instanceof BaseAppError) {
             error = (BaseAppError) t;
         } else {
-            BaseErrorCode errorCode = CommonErrorCode.UNEXPECTED_ERROR;
+            BaseErrorCode errorCode = UNEXPECTED_ERROR;
             String detail = messageSource.getMessage(
                     errorCode.getOuterErrorCode(), null, LocaleContextHolder.getLocale());
             error = new SystemException(errorCode, detail);

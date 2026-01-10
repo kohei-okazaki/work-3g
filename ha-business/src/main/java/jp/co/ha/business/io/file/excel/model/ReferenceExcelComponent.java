@@ -16,7 +16,7 @@ public class ReferenceExcelComponent implements BaseExcelComponent {
     private List<HealthInfoReferenceDto> resultList;
 
     /**
-     * resultListを返す
+     * 結果リストを返す
      *
      * @return resultList
      */
@@ -25,7 +25,7 @@ public class ReferenceExcelComponent implements BaseExcelComponent {
     }
 
     /**
-     * resultListを設定する
+     * 結果リストを設定する
      *
      * @param resultList
      *     結果リスト

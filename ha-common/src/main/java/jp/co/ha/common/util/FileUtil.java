@@ -1,11 +1,15 @@
 package jp.co.ha.common.util;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
@@ -14,11 +18,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -125,6 +129,31 @@ public class FileUtil {
     }
 
     /**
+     * gzip形式に圧縮する
+     * 
+     * @param inputFile
+     *     入力ファイル
+     * @param outputFile
+     *     出力ファイル
+     * @throws IOException
+     *     圧縮処理に失敗した場合
+     */
+    public static void compressGZip(Path inputFile, Path outputFile) throws IOException {
+        try (InputStream is = Files.newInputStream(inputFile);
+                OutputStream os = Files.newOutputStream(outputFile);
+                BufferedOutputStream bos = new BufferedOutputStream(os);
+                GZIPOutputStream gzipos = new GZIPOutputStream(bos)) {
+
+            byte[] buf = new byte[1024 * 1024];
+            int len;
+            while ((len = is.read(buf)) != -1) {
+                gzipos.write(buf, 0, len);
+            }
+            gzipos.finish();
+        }
+    }
+
+    /**
      * 指定されたZipを解凍し、中のファイルを返す
      *
      * @param srcFile
@@ -155,13 +184,10 @@ public class FileUtil {
                 FileChannel destChannel = fos.getChannel()) {
             srcChannel.transferTo(0, srcChannel.size(), destChannel);
         } catch (FileNotFoundException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
-                    "ファイルが見つかりません srcFile:" + srcFile.getPath() + " destFile:"
-                            + destFile.getPath(),
-                    e);
+            throw new SystemException(FILE_OR_DIR_ERROR, "ファイルが見つかりません srcFile:"
+                    + srcFile.getPath() + " destFile:" + destFile.getPath(), e);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
-                    "ファイルの書き込みや読み込みに失敗しました", e);
+            throw new SystemException(FILE_OR_DIR_ERROR, "ファイルの書き込みや読み込みに失敗しました", e);
         }
     }
 
@@ -182,7 +208,7 @@ public class FileUtil {
             Files.deleteIfExists(dest);
             Files.copy(src, dest);
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+            throw new SystemException(FILE_OR_DIR_ERROR,
                     "ファイルのコピーに失敗しました srcFilePath:" + srcPath + " destFilePath:"
                             + destPath,
                     e);
@@ -292,7 +318,7 @@ public class FileUtil {
             LOG.info("path=" + path + "を作成");
             Files.createDirectories(getPath(path));
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_OR_DIR_ERROR,
+            throw new SystemException(FILE_OR_DIR_ERROR,
                     "ディレクトリの作成に失敗しました. path=" + path, e);
         }
     }
@@ -330,6 +356,8 @@ public class FileUtil {
         CSV(".csv"),
         /** zip */
         ZIP(".zip"),
+        /** gz */
+        GZ(".gz"),
         /** java */
         JAVA(".java"),
         /** sql */

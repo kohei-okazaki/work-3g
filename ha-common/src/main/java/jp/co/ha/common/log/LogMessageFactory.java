@@ -1,5 +1,7 @@
 package jp.co.ha.common.log;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -12,7 +14,6 @@ import jp.co.ha.common.log.annotation.LogParam;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.StringUtil;
 
 /**
@@ -123,11 +124,9 @@ public class LogMessageFactory {
         if (BeanUtil.isNull(value)) {
             strValue = "<NULL>";
         } else if (value instanceof LocalDateTime) {
-            strValue = DateTimeUtil.toString((LocalDateTime) value,
-                    DateFormatType.YYYYMMDDHHMMSS);
+            strValue = DateTimeUtil.toString((LocalDateTime) value, YYYYMMDDHHMMSS);
         } else if (value instanceof LocalDate) {
-            strValue = DateTimeUtil.toString((LocalDate) value,
-                    DateFormatType.YYYYMMDD);
+            strValue = DateTimeUtil.toString((LocalDate) value, YYYYMMDD);
         } else {
             strValue = value.toString();
         }

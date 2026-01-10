@@ -1,0 +1,38 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ha.db.mapper.custom.PagingApiLogMapper">
+  <resultMap id="BaseResultMap" type="jp.co.ha.db.entity.ApiLog">
+    <id column="SEQ_API_LOG_ID" jdbcType="BIGINT" property="seqApiLogId" />
+    <result column="TRANSACTION_ID" jdbcType="VARCHAR" property="transactionId" />
+    <result column="HTTP_METHOD" jdbcType="VARCHAR" property="httpMethod" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="BODY" jdbcType="VARCHAR" property="body" />
+    <result column="HTTP_STATUS" jdbcType="INTEGER" property="httpStatus" />
+    <result column="REQUEST_DATE" jdbcType="TIMESTAMP" property="requestDate" />
+    <result column="RESPONSE_DATE" jdbcType="TIMESTAMP" property="responseDate" />
+    <result column="DELETE_FLAG" jdbcType="BIT" property="deleteFlag" />
+    <result column="REG_DATE" jdbcType="TIMESTAMP" property="regDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+  </resultMap>
+  
+  <select id="selectByRegDate" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+      SEQ_API_LOG_ID
+      , TRANSACTION_ID
+      , HTTP_METHOD
+      , URL
+      , BODY
+      , REQUEST_DATE
+      , HTTP_STATUS
+      , RESPONSE_DATE
+    FROM
+      API_LOG
+    WHERE
+      REG_DATE BETWEEN #{from} AND #{to}
+    ORDER BY
+      REG_DATE ASC
+    LIMIT 
+      #{_skiprows},
+      #{_pagesize}
+  </select>
+
+</mapper>

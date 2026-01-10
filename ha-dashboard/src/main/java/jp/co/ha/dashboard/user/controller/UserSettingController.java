@@ -1,5 +1,8 @@
 package jp.co.ha.dashboard.user.controller;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,19 +18,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.UserComponent;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.dto.UserDto;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.type.GenderType;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.user.form.UserSettingForm;
-import jp.co.ha.dashboard.view.DashboardView;
-import jp.co.ha.db.entity.composite.CompositeUser;
+import jp.co.ha.db.entity.custom.CompositeUser;
 
 /**
  * 健康管理_ユーザ設定コントローラ
@@ -72,7 +73,7 @@ public class UserSettingController
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
-        return getView(model, DashboardView.ACCOUNT_SETTING_INPUT);
+        return getView(model, ACCOUNT_SETTING_INPUT);
     }
 
     @Override
@@ -82,13 +83,13 @@ public class UserSettingController
             BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(model, DashboardView.ACCOUNT_SETTING_INPUT);
+            return getView(model, ACCOUNT_SETTING_INPUT);
         }
 
         // sessionにユーザ設定form情報を保持
         sessionComponent.setValue(request.getSession(), SESSION_KEY_FORM, form);
 
-        return getView(model, DashboardView.ACCOUNT_SETTING_CONFIRM);
+        return getView(model, ACCOUNT_SETTING_CONFIRM);
     }
 
     @Override
@@ -99,10 +100,9 @@ public class UserSettingController
 
         // sessionよりユーザ設定form情報を取得
         UserSettingForm userSettingForm = sessionComponent
-                .getValue(request.getSession(), SESSION_KEY_FORM,
-                        UserSettingForm.class)
-                .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+                .getValue(request.getSession(), SESSION_KEY_FORM, UserSettingForm.class)
+                .orElseThrow(() -> new BusinessException(ILLEGAL_ACCESS_ERROR,
+                        "不正リクエストエラーです"));
 
         UserDto dto = new UserDto();
         BeanUtil.copy(userSettingForm, dto);
@@ -121,10 +121,10 @@ public class UserSettingController
         if (CommonFlag.of(userSettingForm.getDeleteFlag()).get()) {
             // ユーザ削除時はセッションを削除してログイン画面へ遷移
             sessionComponent.removeValue(request.getSession(), SESSION_KEY_SEQ_USER_ID);
-            redirectView(DashboardView.LOGIN);
+            redirectView(LOGIN);
         }
 
-        return getView(model, DashboardView.ACCOUNT_SETTING_COMPLETE);
+        return getView(model, ACCOUNT_SETTING_COMPLETE);
     }
 
     /**

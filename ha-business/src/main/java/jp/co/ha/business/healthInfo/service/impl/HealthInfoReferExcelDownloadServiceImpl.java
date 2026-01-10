@@ -1,5 +1,7 @@
 package jp.co.ha.business.healthInfo.service.impl;
 
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +16,6 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.excel.ExcelConfig;
 import jp.co.ha.common.io.file.excel.service.ExcelDownloadService;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 
 /**
  * 健康情報照会画面Excelダウンロードサービス実装クラス
@@ -47,8 +48,8 @@ public class HealthInfoReferExcelDownloadServiceImpl
             model.setWeight(e.getWeight().toString());
             model.setBmi(e.getBmi().toString());
             model.setStandardWeight(e.getStandardWeight().toString());
-            model.setHealthInfoRegDate(DateTimeUtil.toLocalDateTime(
-                    e.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS_STRICT));
+            model.setHealthInfoRegDate(DateTimeUtil
+                    .toLocalDateTime(e.getHealthInfoRegDate(), YYYYMMDDHHMMSS_STRICT));
             return model;
         }).collect(Collectors.toList());
     }

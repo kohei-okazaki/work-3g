@@ -1,5 +1,8 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +18,6 @@ import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
@@ -23,7 +25,6 @@ import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.FileUtil.FileSeparator;
 import jp.co.ha.common.util.StringUtil;
@@ -53,7 +54,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
         List<HealthInfo> resultList;
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC)
+                .orderBy("HEALTH_INFO_REG_DATE", DESC)
                 .pageable(pageable)
                 .build();
         if (BeanUtil.isNull(dto.getSeqHealthInfoId())
@@ -86,8 +87,8 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 HealthInfo srcEntity = (HealthInfo) src;
                 HealthInfoReferenceDto destDto = (HealthInfoReferenceDto) dest;
 
-                destDto.setHealthInfoRegDate(DateTimeUtil.toString(
-                        srcEntity.getHealthInfoRegDate(), DateFormatType.YYYYMMDDHHMMSS));
+                destDto.setHealthInfoRegDate(DateTimeUtil
+                        .toString(srcEntity.getHealthInfoRegDate(), YYYYMMDDHHMMSS));
             });
 
             return result;
@@ -132,8 +133,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
                 ReferenceCsvDownloadModel destModel = (ReferenceCsvDownloadModel) dest;
 
                 destModel.setHealthInfoRegDate(DateTimeUtil.toLocalDateTime(
-                        srcDto.getHealthInfoRegDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_STRICT));
+                        srcDto.getHealthInfoRegDate(), YYYYMMDDHHMMSS_STRICT));
 
             });
             model.setSeqUserId(seqUserId);
@@ -147,7 +147,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
 
         // ファイル名
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                DateFormatType.YYYYMMDDHHMMSS_NOSEP_STRICT) + FileExtension.CSV;
+                YYYYMMDDHHMMSS_NOSEP_STRICT) + FileExtension.CSV;
         // ファイル出力先
         String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()
                 + entity.getSeqUserId();

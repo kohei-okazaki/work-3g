@@ -1,5 +1,10 @@
 package jp.co.ha.dashboard.healthinfo.controller;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -19,22 +24,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadCsv;
 import jp.co.ha.business.healthInfo.service.annotation.HealthInfoDownloadExcel;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.excel.model.HealthInfoExcelComponent;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
@@ -47,7 +49,6 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.healthinfo.form.HealthInfoForm;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoService;
-import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.HealthInfoFileSetting;
 
@@ -94,7 +95,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
     @Override
     @GetMapping("/input")
     public String input(Model model, HttpServletRequest request) throws BaseException {
-        return getView(model, DashboardView.HEALTH_INFO_INPUT);
+        return getView(model, HEALTH_INFO_INPUT);
     }
 
     @Override
@@ -105,13 +106,13 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
 
         if (result.hasErrors()) {
             // バリエーションエラーの場合
-            return getView(model, DashboardView.HEALTH_INFO_INPUT);
+            return getView(model, HEALTH_INFO_INPUT);
         }
 
         // sessionに健康情報Form情報を保持
         sessionComponent.setValue(request.getSession(), "healthInfoForm", form);
 
-        return getView(model, DashboardView.HEALTH_INFO_CONFIRM);
+        return getView(model, HEALTH_INFO_CONFIRM);
     }
 
     @Override
@@ -123,8 +124,8 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         // sessionより健康情報Form情報を取得
         HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
-                .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+                .orElseThrow(() -> new BusinessException(ILLEGAL_ACCESS_ERROR,
+                        "不正リクエストエラーです"));
 
         HealthInfoDto dto = new HealthInfoDto();
         BeanUtil.copy(healthInfoForm, dto);
@@ -139,7 +140,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         if (!isFirstReg) {
             // 初回登録でない場合
             SelectOption selectOption = new SelectOptionBuilder()
-                    .orderBy("SEQ_HEALTH_INFO_ID", SortType.DESC).limit(1).build();
+                    .orderBy("SEQ_HEALTH_INFO_ID", DESC).limit(1).build();
             HealthInfo lastHealthInfo = healthInfoSearchService
                     .findBySeqUserId(seqUserId, selectOption).get(0);
             healthInfoService.addModel(model, dto, lastHealthInfo);
@@ -163,7 +164,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
         sessionComponent.setValue(request.getSession(), "healthInfoForm",
                 healthInfoForm);
 
-        return getView(model, DashboardView.HEALTH_INFO_COMPLETE);
+        return getView(model, HEALTH_INFO_COMPLETE);
     }
 
     /**
@@ -183,16 +184,15 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
         HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
-                .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+                .orElseThrow(() -> new BusinessException(ILLEGAL_ACCESS_ERROR,
+                        "不正リクエストエラーです"));
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
                 .findByHealthInfoIdAndSeqUserId(healthInfoForm.getSeqHealthInfoId(),
                         seqUserId);
         if (CollectionUtil.isEmpty(healthInfoList)) {
             // レコードが見つからなかった場合
-            throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
-                    "session情報が不正です");
+            throw new BusinessException(ILLEGAL_ACCESS_ERROR, "session情報が不正です");
         }
         HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
         HealthInfoExcelComponent component = new HealthInfoExcelComponent();
@@ -221,16 +221,15 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
         HealthInfoForm healthInfoForm = sessionComponent
                 .getValue(request.getSession(), "healthInfoForm", HealthInfoForm.class)
-                .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+                .orElseThrow(() -> new BusinessException(ILLEGAL_ACCESS_ERROR,
+                        "不正リクエストエラーです"));
 
         List<HealthInfo> healthInfoList = healthInfoSearchService
                 .findByHealthInfoIdAndSeqUserId(healthInfoForm.getSeqHealthInfoId(),
                         seqUserId);
         if (CollectionUtil.isEmpty(healthInfoList)) {
             // レコードが見つからなかった場合
-            throw new BusinessException(DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
-                    "session情報が不正です");
+            throw new BusinessException(ILLEGAL_ACCESS_ERROR, "session情報が不正です");
         }
 
         // 健康情報ファイル設定情報 取得
@@ -249,8 +248,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             csvDownloadService.download(response.getWriter(), conf,
                     healthInfoService.toModelList(healthInfoList));
         } catch (IOException e) {
-            throw new SystemException(CommonErrorCode.FILE_WRITE_ERROR,
-                    "ファイルの出力処理に失敗しました", e);
+            throw new SystemException(FILE_WRITE_ERROR, "ファイルの出力処理に失敗しました", e);
         }
     }
 

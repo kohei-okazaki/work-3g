@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.tools.controller;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import jp.co.ha.business.db.crud.read.InquiryStatusMtSearchService;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.db.entity.InquiryStatusMt;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.tools.request.InquiryStatusMtListApiRequest;
@@ -28,7 +29,7 @@ public class InquiryStatusMtListApiController extends
 
     /** 問い合わせステータスソート順 - SelectOption */
     private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
-            .orderBy("INQUIRY_STATUS", SortType.ASC).build();
+            .orderBy("INQUIRY_STATUS", ASC).build();
     /** 問い合わせステータスマスタ検索サービス */
     @Autowired
     private InquiryStatusMtSearchService service;

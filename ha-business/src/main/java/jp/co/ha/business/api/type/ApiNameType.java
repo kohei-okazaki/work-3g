@@ -31,7 +31,9 @@ public enum ApiNameType implements BaseEnum {
     ROOT_API_HEALTH_CHECK("Root API:ヘルスチェックAPI"),
 
     /** TrackAPI:健康情報連携API */
-    TRACK_API_MIGRATE_HEALTH_INFO("Track API:健康情報連携API");
+    TRACK_API_MIGRATE_HEALTH_INFO("Track API:健康情報連携API"),
+    /** TrackAPI:API通信ログ取得API */
+    TRACK_API_API_LOG_GET("TrackAPI:API通信ログ取得API");
 
     /** 値 */
     private String value;

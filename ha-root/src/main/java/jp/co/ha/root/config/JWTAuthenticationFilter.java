@@ -1,11 +1,8 @@
 package jp.co.ha.root.config;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import javax.crypto.SecretKey;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,7 +21,6 @@ import org.springframework.security.web.servlet.util.matcher.PathPatternRequestM
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -38,11 +34,6 @@ import jp.co.ha.root.contents.auth.request.LoginApiRequest;
  */
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    /** 秘密鍵 */
-    static final String SECRET = "qnhHdE4Opwnxm1RM1g/KHZQx48WnQFbQsOngdF+ZUFuvJPCL1lkyE7vDh+A9WwMVaqVRLJDGMBr1QOKGWyyWwg==";
-    /** 署名・検証で共通に使うキー（HS512 用に十分長いキーを SecretKey に変換） */
-    static final SecretKey SIGNING_KEY = Keys
-            .hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
     /** HTTPヘッダ:Authorization */
     static final String HEADER_AUTHORIZATION = "Authorization";
     /** トークンヘッダ接頭辞 */
@@ -64,6 +55,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /** パスワードEncoder */
     @SuppressWarnings("unused")
     private PasswordEncoder passwordEncoder;
+    /** Provider */
+    private JwtSigningKeyProvider provider;
 
     /**
      * コンストラクタ
@@ -72,12 +65,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
      *     認証情報管理クラス
      * @param passwordEncoder
      *     パスワードEncoder
+     * @param provider
+     *     Provider
      */
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder, JwtSigningKeyProvider provider) {
 
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
+        this.provider = provider;
 
         // ログインAPIのpathを変更
         setRequiresAuthenticationRequestMatcher(PathPatternRequestMatcher
@@ -125,7 +121,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .subject(authInfo.getUsername())
                 .issuedAt(DateTimeUtil.toDate(sysdate))
                 .expiration(DateTimeUtil.toDate(expire))
-                .signWith(SIGNING_KEY)
+                .signWith(provider.get())
                 .compact();
 
         res.addHeader(HEADER_AUTHORIZATION, TOKEN_PREFIX + token);

@@ -119,7 +119,7 @@ export default {
         },
         {
           icon: "mdi-api",
-          title: "API通信情報一覧API",
+          title: "API通信ログ一覧取得API",
           to: "/root/api/apidata",
         },
         {
@@ -176,6 +176,31 @@ export default {
           icon: "mdi-api",
           title: "権限マスタ一覧取得API",
           to: "/root/api/roles",
+        },
+        {
+          icon: "mdi-api",
+          title: "問い合わせ情報一覧取得API",
+          to: "/root/api/inquiry",
+        },
+        {
+          icon: "mdi-api",
+          title: "問い合わせ情報編集API",
+          to: "/root/api/inquiry/edit",
+        },
+        {
+          icon: "mdi-api",
+          title: "問い合わせステータスマスタ一覧取得API",
+          to: "/root/api/inquiry/status",
+        },
+        {
+          icon: "mdi-api",
+          title: "問い合わせ情報通知API",
+          to: "/root/api/inquiry/notice",
+        },
+        {
+          icon: "mdi-api",
+          title: "Job履歴情報一覧取得API",
+          to: "/root/api/job",
         },
       ],
       miniVariant: false,

@@ -25,6 +25,18 @@ public class BatchProperties {
     /** データパージプロパティクラスリスト */
     private List<DataPurge> dataPurgeList;
 
+    /** 日次健康情報データ分析連携バッチプロパティクラス */
+    private DailyHealthInfoAnalysis dailyHealthInfoAnalysis;
+
+    /** 日次ユーザ情報データ分析連携バッチプロパティクラス */
+    private DailyUserAnalysis dailyUserAnalysis;
+
+    /** 日次API通信ログデータ分析連携バッチプロパティクラス */
+    private DailyApiLogAnalysis dailyApiLogAnalysis;
+
+    /** 日次バッチ実行ログデータ分析連携バッチプロパティクラス */
+    private DailyBatchLogAnalysis dailyBatchLogAnalysis;
+
     /**
      * 健康情報連携バッチプロパティクラスを返す
      * 
@@ -84,6 +96,83 @@ public class BatchProperties {
     }
 
     /**
+     * 日次健康情報データ分析連携バッチプロパティクラスを返す
+     * 
+     * @return dailyHealthInfoAnalysis
+     */
+    public DailyHealthInfoAnalysis getDailyHealthInfoAnalysis() {
+        return dailyHealthInfoAnalysis;
+    }
+
+    /**
+     * 日次健康情報データ分析連携バッチプロパティクラスを設定する
+     * 
+     * @param dailyHealthInfoAnalysis
+     *     日次健康情報データ分析連携バッチプロパティクラス
+     */
+    public void setDailyHealthInfoAnalysis(
+            DailyHealthInfoAnalysis dailyHealthInfoAnalysis) {
+        this.dailyHealthInfoAnalysis = dailyHealthInfoAnalysis;
+    }
+
+    /**
+     * 日次ユーザ情報データ分析連携バッチプロパティクラスを返す
+     * 
+     * @return dailyUserAnalysis
+     */
+    public DailyUserAnalysis getDailyUserAnalysis() {
+        return dailyUserAnalysis;
+    }
+
+    /**
+     * 日次ユーザ情報データ分析連携バッチプロパティクラスを設定する
+     * 
+     * @param dailyUserAnalysis
+     *     日次ユーザ情報データ分析連携バッチプロパティクラス
+     */
+    public void setDailyUserAnalysis(DailyUserAnalysis dailyUserAnalysis) {
+        this.dailyUserAnalysis = dailyUserAnalysis;
+    }
+
+    /**
+     * 日次API通信ログデータ分析連携バッチプロパティクラスを返す
+     * 
+     * @return dailyApiLogAnalysis
+     */
+    public DailyApiLogAnalysis getDailyApiLogAnalysis() {
+        return dailyApiLogAnalysis;
+    }
+
+    /**
+     * 日次API通信ログデータ分析連携バッチプロパティクラスを設定する
+     * 
+     * @param dailyApiLogAnalysis
+     *     日次API通信ログデータ分析連携バッチプロパティクラス
+     */
+    public void setDailyApiLogAnalysis(DailyApiLogAnalysis dailyApiLogAnalysis) {
+        this.dailyApiLogAnalysis = dailyApiLogAnalysis;
+    }
+
+    /**
+     * 日次バッチ実行ログデータ分析連携バッチプロパティクラスを返す
+     * 
+     * @return dailyBatchLogAnalysis
+     */
+    public DailyBatchLogAnalysis getDailyBatchLogAnalysis() {
+        return dailyBatchLogAnalysis;
+    }
+
+    /**
+     * 日次バッチ実行ログデータ分析連携バッチプロパティクラスを設定する
+     * 
+     * @param dailyBatchLogAnalysis
+     *     日次バッチ実行ログデータ分析連携バッチプロパティクラス
+     */
+    public void setDailyBatchLogAnalysis(DailyBatchLogAnalysis dailyBatchLogAnalysis) {
+        this.dailyBatchLogAnalysis = dailyBatchLogAnalysis;
+    }
+
+    /**
      * 健康情報連携バッチプロパティクラス
      * 
      * @version 1.0.0
@@ -140,6 +229,294 @@ public class BatchProperties {
          */
         public void setExecPerpageCount(int execPerpageCount) {
             this.execPerpageCount = execPerpageCount;
+        }
+    }
+
+    /**
+     * 日次健康情報データ分析連携バッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class DailyHealthInfoAnalysis {
+
+        /** 実行カウント */
+        private int execPerpageCount;
+        /** 一時ディレクトリパス */
+        private String tempDirPath;
+        /** ファイル名 */
+        private String fileName;
+
+        /**
+         * 実行カウントを返す
+         * 
+         * @return execPerpageCount
+         */
+        public int getExecPerpageCount() {
+            return execPerpageCount;
+        }
+
+        /**
+         * 実行カウントを設定する
+         * 
+         * @param execPerpageCount
+         *     実行カウント
+         */
+        public void setExecPerpageCount(int execPerpageCount) {
+            this.execPerpageCount = execPerpageCount;
+        }
+
+        /**
+         * 一時ディレクトリパスを返す
+         * 
+         * @return tempDirPath
+         */
+        public String getTempDirPath() {
+            return tempDirPath;
+        }
+
+        /**
+         * 一時ディレクトリパスを設定する
+         * 
+         * @param tempDirPath
+         *     一時ディレクトリパス
+         */
+        public void setTempDirPath(String tempDirPath) {
+            this.tempDirPath = tempDirPath;
+        }
+
+        /**
+         * ファイル名を返す
+         * 
+         * @return fileName
+         */
+        public String getFileName() {
+            return fileName;
+        }
+
+        /**
+         * ファイル名を設定する
+         * 
+         * @param fileName
+         *     ファイル名
+         */
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+    }
+
+    /**
+     * 日次ユーザ情報データ分析連携バッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class DailyUserAnalysis {
+
+        /** 実行カウント */
+        private int execPerpageCount;
+        /** 一時ディレクトリパス */
+        private String tempDirPath;
+        /** ファイル名 */
+        private String fileName;
+
+        /**
+         * 実行カウントを返す
+         * 
+         * @return execPerpageCount
+         */
+        public int getExecPerpageCount() {
+            return execPerpageCount;
+        }
+
+        /**
+         * 実行カウントを設定する
+         * 
+         * @param execPerpageCount
+         *     実行カウント
+         */
+        public void setExecPerpageCount(int execPerpageCount) {
+            this.execPerpageCount = execPerpageCount;
+        }
+
+        /**
+         * 一時ディレクトリパスを返す
+         * 
+         * @return tempDirPath
+         */
+        public String getTempDirPath() {
+            return tempDirPath;
+        }
+
+        /**
+         * 一時ディレクトリパスを設定する
+         * 
+         * @param tempDirPath
+         *     一時ディレクトリパス
+         */
+        public void setTempDirPath(String tempDirPath) {
+            this.tempDirPath = tempDirPath;
+        }
+
+        /**
+         * ファイル名を返す
+         * 
+         * @return fileName
+         */
+        public String getFileName() {
+            return fileName;
+        }
+
+        /**
+         * ファイル名を設定する
+         * 
+         * @param fileName
+         *     ファイル名
+         */
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+    }
+
+    /**
+     * 日次API通信ログデータ分析連携バッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class DailyApiLogAnalysis {
+
+        /** 実行カウント */
+        private int execPerpageCount;
+        /** 一時ディレクトリパス */
+        private String tempDirPath;
+        /** ファイル名 */
+        private String fileName;
+
+        /**
+         * 実行カウントを返す
+         * 
+         * @return execPerpageCount
+         */
+        public int getExecPerpageCount() {
+            return execPerpageCount;
+        }
+
+        /**
+         * 実行カウントを設定する
+         * 
+         * @param execPerpageCount
+         *     実行カウント
+         */
+        public void setExecPerpageCount(int execPerpageCount) {
+            this.execPerpageCount = execPerpageCount;
+        }
+
+        /**
+         * 一時ディレクトリパスを返す
+         * 
+         * @return tempDirPath
+         */
+        public String getTempDirPath() {
+            return tempDirPath;
+        }
+
+        /**
+         * 一時ディレクトリパスを設定する
+         * 
+         * @param tempDirPath
+         *     一時ディレクトリパス
+         */
+        public void setTempDirPath(String tempDirPath) {
+            this.tempDirPath = tempDirPath;
+        }
+
+        /**
+         * ファイル名を返す
+         * 
+         * @return fileName
+         */
+        public String getFileName() {
+            return fileName;
+        }
+
+        /**
+         * ファイル名を設定する
+         * 
+         * @param fileName
+         *     ファイル名
+         */
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
+    }
+
+    /**
+     * 日次バッチ実行ログデータ分析連携バッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class DailyBatchLogAnalysis {
+
+        /** 実行カウント */
+        private int execPerpageCount;
+        /** 一時ディレクトリパス */
+        private String tempDirPath;
+        /** ファイル名 */
+        private String fileName;
+
+        /**
+         * 実行カウントを返す
+         * 
+         * @return execPerpageCount
+         */
+        public int getExecPerpageCount() {
+            return execPerpageCount;
+        }
+
+        /**
+         * 実行カウントを設定する
+         * 
+         * @param execPerpageCount
+         *     実行カウント
+         */
+        public void setExecPerpageCount(int execPerpageCount) {
+            this.execPerpageCount = execPerpageCount;
+        }
+
+        /**
+         * 一時ディレクトリパスを返す
+         * 
+         * @return tempDirPath
+         */
+        public String getTempDirPath() {
+            return tempDirPath;
+        }
+
+        /**
+         * 一時ディレクトリパスを設定する
+         * 
+         * @param tempDirPath
+         *     一時ディレクトリパス
+         */
+        public void setTempDirPath(String tempDirPath) {
+            this.tempDirPath = tempDirPath;
+        }
+
+        /**
+         * ファイル名を返す
+         * 
+         * @return fileName
+         */
+        public String getFileName() {
+            return fileName;
+        }
+
+        /**
+         * ファイル名を設定する
+         * 
+         * @param fileName
+         *     ファイル名
+         */
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
         }
     }
 

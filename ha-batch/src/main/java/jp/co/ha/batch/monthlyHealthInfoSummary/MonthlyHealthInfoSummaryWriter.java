@@ -1,16 +1,17 @@
 package jp.co.ha.batch.monthlyHealthInfoSummary;
 
-import java.io.BufferedOutputStream;
+import static jp.co.ha.business.api.slack.SlackApiComponent.ContentType.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+import static jp.co.ha.common.util.FileUtil.FileExtension.*;
+import static jp.co.ha.common.util.StringUtil.*;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.StringJoiner;
-import java.util.zip.GZIPOutputStream;
 
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
@@ -25,16 +26,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
-import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
-import jp.co.ha.common.util.FileUtil.FileExtension;
-import jp.co.ha.common.util.StringUtil;
+import jp.co.ha.common.util.DateTimeUtil;
+import jp.co.ha.common.util.FileUtil;
 
 /**
  * 月次健康情報集計処理-Writer<br>
@@ -112,8 +112,7 @@ public class MonthlyHealthInfoSummaryWriter
             String baseDir = prop.getMonthlySummaryBatchFilePath();
             Files.createDirectories(Paths.get(baseDir));
 
-            String baseName = targetDate + FileExtension.CSV;
-            targetPath = Paths.get(baseDir, baseName);
+            targetPath = Paths.get(baseDir, targetDate + CSV);
 
             setResource(new FileSystemResource(targetPath));
         } catch (IOException e) {
@@ -139,11 +138,11 @@ public class MonthlyHealthInfoSummaryWriter
             }
 
             // 正常終了時
-            Path gzPath = Paths.get(targetPath.toString() + ".gz");
-            gzipFile(targetPath, gzPath);
+            Path gzPath = Paths.get(targetPath.toString() + GZ);
+            FileUtil.compressGZip(targetPath, gzPath);
 
             File gzFile = gzPath.toFile();
-            StringJoiner s3Path = new StringJoiner(StringUtil.THRASH)
+            StringJoiner s3Path = new StringJoiner(THRASH)
                     .add(AwsS3Key.MONTHLY_HEALTHINFO_SUMMARY.getValue())
                     .add("year=" + gzFile.getName().substring(0, 4))
                     .add(gzFile.getName());
@@ -152,10 +151,11 @@ public class MonthlyHealthInfoSummaryWriter
             s3.putFile(s3key, gzFile);
 
             // Slack通知
-            slack.sendFile(ContentType.BATCH, gzFile, "S3ファイルアップロード完了. key=" + s3key);
+            slack.sendFile(BATCH, gzFile, "S3ファイルアップロード完了. key=" + s3key);
 
             // ファイル送信が正常終了した場合、ローカルファイルを削除
             Files.deleteIfExists(targetPath);
+            Files.deleteIfExists(gzPath);
 
         } catch (Exception e) {
             LOG.error("gzip圧縮/S3アップロードに失敗しました", e);
@@ -164,16 +164,18 @@ public class MonthlyHealthInfoSummaryWriter
 
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
-        if (stepExecution.getStatus().isUnsuccessful()) {
-            return ExitStatus.FAILED;
-        }
-        return ExitStatus.COMPLETED;
+        return stepExecution.getStatus().isUnsuccessful() ? ExitStatus.FAILED
+                : ExitStatus.COMPLETED;
     }
 
     /**
      * 初期化処理
      */
     private void init() {
+
+        targetDate = isEmpty(targetDate)
+                ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMM_NOSEP)
+                : targetDate;
 
         setName("monthlyHealthInfoSummaryWriter");
         setAppendAllowed(false);
@@ -184,35 +186,13 @@ public class MonthlyHealthInfoSummaryWriter
         extractor.setNames(COLUMN_NAME_ARRAY);
 
         DelimitedLineAggregator<MonthlyHealthInfoSummaryModel> aggregator = new DelimitedLineAggregator<>();
-        aggregator.setDelimiter(StringUtil.COMMA);
+        aggregator.setDelimiter(COMMA);
         aggregator.setFieldExtractor(extractor);
 
         setLineAggregator(aggregator);
-    }
 
-    /**
-     * gzip形式に圧縮する
-     * 
-     * @param inputFile
-     *     入力ファイル
-     * @param outputFile
-     *     出力ファイル
-     * @throws IOException
-     *     gzipへの圧縮に失敗した場合
-     */
-    private void gzipFile(Path inputFile, Path outputFile) throws IOException {
-        try (InputStream is = Files.newInputStream(inputFile);
-                OutputStream os = Files.newOutputStream(outputFile);
-                BufferedOutputStream bos = new BufferedOutputStream(os);
-                GZIPOutputStream gzipos = new GZIPOutputStream(bos)) {
-
-            byte[] buf = new byte[1024 * 1024];
-            int len;
-            while ((len = is.read(buf)) != -1) {
-                gzipos.write(buf, 0, len);
-            }
-            gzipos.finish();
-        }
+        setHeaderCallback(
+                writer -> writer.write(String.join(COMMA, COLUMN_NAME_ARRAY)));
     }
 
 }

@@ -1,5 +1,7 @@
 package jp.co.ha.common.io.file.property.reader;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,7 +10,6 @@ import java.lang.reflect.Field;
 import java.util.Properties;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.io.file.property.annotation.Property;
 import jp.co.ha.common.log.Logger;
@@ -85,7 +86,7 @@ public class PropertyReader {
             }
             return t;
         } catch (Exception e) {
-            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, "", e);
+            throw new SystemException(UNEXPECTED_ERROR, "", e);
         }
     }
 

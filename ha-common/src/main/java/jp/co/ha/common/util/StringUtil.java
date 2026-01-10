@@ -1,5 +1,7 @@
 package jp.co.ha.common.util;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +12,6 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.type.Charset;
 
@@ -165,8 +166,7 @@ public class StringUtil {
                 body = str + body;
                 break;
             default:
-                throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                        "paddingTypeの指定が不正です");
+                throw new SystemRuntimeException(UNEXPECTED_ERROR, "paddingTypeの指定が不正です");
             }
         }
         return body;

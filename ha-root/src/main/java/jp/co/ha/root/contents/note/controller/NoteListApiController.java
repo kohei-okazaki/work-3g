@@ -1,5 +1,7 @@
 package jp.co.ha.root.contents.note.controller;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,12 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
 import jp.co.ha.business.db.crud.read.RootUserNoteInfoSearchService;
 import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.common.aws.AwsS3Component;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.PagingView;
@@ -72,7 +73,7 @@ public class NoteListApiController
                 applicationProperties.getNotePage());
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_ROOT_USER_NOTE_INFO_ID", SortType.DESC)
+                .orderBy("SEQ_ROOT_USER_NOTE_INFO_ID", DESC)
                 .pageable(pageable)
                 .build();
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppTitle icon="mdi-api" title="API通信情報一覧" />
+    <AppTitle icon="mdi-api" title="API通信ログ一覧" />
     <AppMessageError v-if="error.hasError" :data="error" />
     <v-row>
       <v-col>
@@ -20,8 +20,8 @@
                 <v-card-text :class="timelineCardTextBgColor">
                   <br />
                   <div>
-                    <b>API通信情報ID</b>={{
-                      timeline.seq_api_communication_data_id
+                    <b>API通信ログID</b>={{
+                      timeline.seq_api_log_id
                     }}
                   </div>
                   <div><b>API名</b>={{ timeline.api_name }}</div>
@@ -39,7 +39,7 @@
       <v-col>
         <v-data-table
           :headers="headers"
-          :items="apiDataList"
+          :items="apiLogList"
           class="pushable"
           hide-default-footer="true"
           @click:row="openTimelineModal"
@@ -88,11 +88,11 @@ export default {
       loading: false,
       isRefShow: false,
       timelines: [],
-      apiDataList: [],
+      apiLogList: [],
       headers: [
         {
-          text: "API通信情報ID",
-          value: "seq_api_communication_data_id",
+          text: "API通信ログID",
+          value: "seq_api_log_id",
         },
         {
           text: "トランザクションID",
@@ -142,8 +142,8 @@ export default {
   created: function () {
     this.checkRefView();
     if (this.isRefShow) {
-      // 照会権限がある場合、API通信情報取得
-      this.getApiDataList();
+      // 照会権限がある場合、API通信ログ取得
+      this.getApiLogList();
     }
   },
   methods: {
@@ -172,12 +172,12 @@ export default {
       console.log(JSON.stringify(item, null, "\t"));
       // タイムラインデータをクリア
       this.timelines = [];
-      for (var i = 0; i < this.apiDataList.length; i++) {
-        let apiData = this.apiDataList[i];
+      for (var i = 0; i < this.apiLogList.length; i++) {
+        let apiData = this.apiLogList[i];
         if (item.transaction_id == apiData.transaction_id) {
           let timeline = {
-            seq_api_communication_data_id:
-              apiData.seq_api_communication_data_id,
+            seq_api_log_id:
+              apiData.seq_api_log_id,
             api_name: apiData.api_name,
             http_status: apiData.http_status,
             request_date: apiData.request_date,
@@ -206,7 +206,7 @@ export default {
      * 指定したページ数のAPI通信情報リストを取得
      * @param page ページ数
      */
-    getApiDataList: function (page) {
+    getApiLogList: function (page) {
       this.loading = true;
       // 保存済のAPIトークンを取得
       let headers = {
@@ -217,7 +217,7 @@ export default {
       axios.get(reqUrl, { headers }).then(
         (response) => {
           if (response.data.result == 0) {
-            this.apiDataList = response.data.api_data_list;
+            this.apiLogList = response.data.api_log_list;
             // APIは0~、frontは1~なのでfrontに合わせAPIの戻り値に+1
             this.paging.page = response.data.paging.current_page_num + 1;
             this.paging.totalPage = response.data.paging.total_page;
@@ -240,7 +240,7 @@ export default {
      * ページ切り替え処理
      */
     pageChange: function () {
-      this.getApiDataList(this.paging.page);
+      this.getApiLogList(this.paging.page);
     },
   },
   computed: {

@@ -211,17 +211,17 @@ export default {
                 },
                 {
                     innerErrorCode: "AWS_S3_DOWNLOAD_ERROR",
-                    outerErrorCode: "BE0027",
+                    outerErrorCode: "CE0027",
                     message: "S3からのダウンロード処理が失敗しました",
                 },
                 {
                     innerErrorCode: "AWS_S3_UPLOAD_ERROR",
-                    outerErrorCode: "BE0028",
+                    outerErrorCode: "CE0028",
                     message: "S3からのアップロード処理が失敗しました",
                 },
                 {
                     innerErrorCode: "AWS_CLIENT_CONNECT_ERROR",
-                    outerErrorCode: "BE0029",
+                    outerErrorCode: "CE0029",
                     message: "AWSへの接続に失敗しました",
                 },
                 {
@@ -246,7 +246,7 @@ export default {
                 },
                 {
                     innerErrorCode: "AWS_SES_MAIL_ADDRESS_VERRIFIED_ERROR",
-                    outerErrorCode: "BE0034",
+                    outerErrorCode: "CE0034",
                     message: "送信先メールアドレスがSESに認証されていません<br>メールアドレスを確認するように連絡してください",
                 },
                 {
@@ -281,22 +281,22 @@ export default {
                 },
                 {
                     innerErrorCode: "AWS_SQS_ENQUEUE_ERROR",
-                    outerErrorCode: "BE0041",
+                    outerErrorCode: "CE0041",
                     message: "SQSへキューの登録に失敗しました",
                 },
                 {
                     innerErrorCode: "AWS_SQS_POLL_ERROR",
-                    outerErrorCode: "BE0042",
+                    outerErrorCode: "CE0042",
                     message: "SQSへキューの取得に失敗しました",
                 },
                 {
                     innerErrorCode: "AWS_SQS_ACK_ERROR",
-                    outerErrorCode: "BE0043",
+                    outerErrorCode: "CE0043",
                     message: "SQSへキューの削除に失敗しました",
                 },
                 {
                     innerErrorCode: "AWS_S3_DELETE_ERROR",
-                    outerErrorCode: "BE0044",
+                    outerErrorCode: "CE0044",
                     message: "S3ファイルの削除に失敗しました",
                 },
                 {
@@ -306,8 +306,13 @@ export default {
                 },
                 {
                     innerErrorCode: "MAIL_TEMPLATE_REQUIED_ERROR",
-                    outerErrorCode: "BE0046",
+                    outerErrorCode: "CE0046",
                     message: "メール送信に失敗しました",
+                },
+                {
+                    innerErrorCode: "AWS_SSM_GET_ERROR",
+                    outerErrorCode: "CE0047",
+                    message: "Systems Managerから値の取得に失敗しました",
                 },
             ],
         }

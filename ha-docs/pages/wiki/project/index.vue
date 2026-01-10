@@ -46,9 +46,7 @@
     <v-row align="center">
       <v-col sm="12">
         <v-card>
-          <v-card-title class="text-subtitle-1"
-            >プロジェクト依存関係図</v-card-title
-          >
+          <v-card-title class="text-subtitle-1">プロジェクト依存関係図</v-card-title>
           <v-card-text align="center">
             <v-img src="/wiki/project.png" width="75%" />
           </v-card-text>
@@ -59,9 +57,7 @@
     <v-row align="center">
       <v-col sm="12">
         <v-card>
-          <v-card-title class="text-subtitle-1"
-            >ローカル環境構成図</v-card-title
-          >
+          <v-card-title class="text-subtitle-1">ローカル環境構成図</v-card-title>
           <v-card-text align="center">
             <v-img src="/wiki/project-config-local.png" width="70%" />
           </v-card-text>
@@ -83,13 +79,20 @@
     <v-row align="center">
       <v-col sm="12">
         <v-card>
+          <v-card-title class="text-subtitle-1">健康情報登録フロー</v-card-title>
+          <v-card-text align="center">
+            <v-img src="/wiki/health-info-regist-flow.png" width="70%" />
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row align="center">
+      <v-col sm="12">
+        <v-card>
           <v-card-title class="text-subtitle-1">使用言語一覧</v-card-title>
-          <v-card-subtitle class="text-subtitle-2"
-            >本アプリで使用しているプログラミング言語の一覧<br />FWやライブラリのバージョンについては<nuxt-link
-              to="/wiki/libraries"
-              >ライブラリ一覧</nuxt-link
-            >を参照</v-card-subtitle
-          >
+          <v-card-subtitle class="text-subtitle-2">本アプリで使用しているプログラミング言語の一覧<br />FWやライブラリのバージョンについては<nuxt-link
+              to="/wiki/libraries">ライブラリ一覧</nuxt-link>を参照</v-card-subtitle>
           <v-card-text>
             <v-simple-table>
               <thead>
@@ -178,8 +181,7 @@ export default {
         },
         {
           name: "ha-dashboard",
-          description:
-            "アプリが提供するダッシュボード画面機能をまとめたmavenプロジェクト(ユーザ向けシステム)",
+          description: "アプリが提供するダッシュボード画面機能をまとめたmavenプロジェクト(ユーザ向けシステム)",
         },
         {
           name: "ha-db",
@@ -192,12 +194,11 @@ export default {
         {
           name: "ha-node",
           description:
-            "健康情報計算API(別名 NodeAPI)を管理するJavaScriptプロジェクト",
+            "lambdaで動作する健康情報計算APIを管理するJavaScriptプロジェクト",
         },
         {
           name: "ha-pom",
-          description:
-            "アプリのmavenプロジェクトで共通で読み込む親pomプロジェクト",
+          description: "アプリのmavenプロジェクトで共通で読み込む親pomプロジェクト",
         },
         {
           name: "ha-root",
@@ -214,17 +215,17 @@ export default {
         },
         {
           name: "ha-tool",
-          description: "アプリのDDLなどを自動生成するmavenプロジェクト",
+          description: "健康情報アプリのDDLなどを自動生成するmavenプロジェクト",
         },
       ],
       languages: [
         {
           name: "Java",
-          version: "21",
+          version: "21.0.8",
         },
         {
           name: "Node.js",
-          version: "24.10.0",
+          version: "20.19.5",
         },
         {
           name: "Python",
@@ -235,5 +236,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

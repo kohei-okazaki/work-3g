@@ -8,7 +8,9 @@ rem ------------------------------------------------------------------------
 
 cls
 
+echo ------------------------------------------------------------------------
 echo start root api server
+echo ------------------------------------------------------------------------
 
 rem build
 call maven-build.bat local
@@ -18,5 +20,3 @@ cd ../../ha-root
 mvn spring-boot:run -Dmaven.test.skip=true -Plocal -Dspring-boot.run.profiles=local
 
 cd %~dp0
-
-echo end root api server

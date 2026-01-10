@@ -1,9 +1,10 @@
 package jp.co.ha.business.login;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import jp.co.ha.business.exception.DashboardErrorCode;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.Sha256HashEncoder;
 import jp.co.ha.common.util.DateTimeUtil;
@@ -71,7 +72,7 @@ public class LoginCheck {
     private void checkExistUser(LoginCheckResult result, Optional<User> user) {
         if (!user.isPresent()) {
             result.addError();
-            result.setErrorCode(DashboardErrorCode.ACCOUNT_EXIST);
+            result.setErrorCode(ACCOUNT_EXIST);
         }
     }
 
@@ -94,7 +95,7 @@ public class LoginCheck {
                 user.getMailAddress());
         if (!hashPassword.equals(user.getPassword())) {
             result.addError();
-            result.setErrorCode(DashboardErrorCode.ACCOUNT_INVALID_PASSWORD);
+            result.setErrorCode(ACCOUNT_INVALID_PASSWORD);
         }
     }
 
@@ -110,7 +111,7 @@ public class LoginCheck {
     private void checkDeleteUser(LoginCheckResult result, User user) {
         if (user.getDeleteFlag()) {
             result.addError();
-            result.setErrorCode(DashboardErrorCode.ACCOUNT_DELETE);
+            result.setErrorCode(ACCOUNT_DELETE);
         }
     }
 
@@ -128,7 +129,7 @@ public class LoginCheck {
         if (DateTimeUtil.isBefore(user.getPasswordExpire(),
                 DateTimeUtil.toLocalDate(sysdate), false)) {
             result.addError();
-            result.setErrorCode(DashboardErrorCode.ACCOUNT_EXPIRED);
+            result.setErrorCode(ACCOUNT_EXPIRED);
         }
     }
 

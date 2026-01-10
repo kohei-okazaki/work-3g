@@ -130,19 +130,19 @@ export default {
       libraryList: [
         {
           name: "Spring Boot",
-          version: "3.5.8",
+          version: "3.5.9",
           description: "健康管理ダッシュボード、健康管理API、管理者API、健康管理バッチで使用するSpring FW",
           projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "AWS-SDK",
-          version: "2.31.78",
+          version: "2.41.4",
           description: "AWSのサービスを使うためのライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
         },
         {
           name: "Jackson",
-          version: "2.19.2",
+          version: "2.19.4",
           description: "JSONパースライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
         },
@@ -154,7 +154,7 @@ export default {
         },
         {
           name: "logback",
-          version: "1.5.20",
+          version: "1.5.21",
           description:
             "健康管理API/ダッシュボード/管理者APIで使用するロギングライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
@@ -175,7 +175,7 @@ export default {
         },
         {
           name: "flyway",
-          version: "11.18.0",
+          version: "11.7.2",
           description: "DataBaseのマイグレーションライブラリ",
           projects: ["dashboard", "api", "root api"],
         },
@@ -187,7 +187,7 @@ export default {
         },
         {
           name: "junit",
-          version: "5.12.0",
+          version: "5.12.2",
           description: "Javaのテストライブラリ",
           projects: ["dashboard", "api", "root api", "batch"],
         },

@@ -1,5 +1,8 @@
 package jp.co.ha.dashboard.healthinfo.service.impl;
 
+import static jp.co.ha.business.exception.BusinessErrorCode.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,12 +16,11 @@ import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
-import jp.co.ha.business.component.ApiCommunicationDataComponent;
+import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.component.UserComponent;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.dto.HealthInfoDto;
-import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.healthInfo.service.HealthInfoCalcService;
 import jp.co.ha.business.io.file.csv.model.HealthInfoCsvDownloadModel;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
@@ -29,7 +31,6 @@ import jp.co.ha.common.io.file.csv.CsvConfig.CsvConfigBuilder;
 import jp.co.ha.common.io.file.csv.CsvFileChar;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 import jp.co.ha.dashboard.healthinfo.service.HealthInfoMailService;
@@ -58,9 +59,9 @@ public class HealthInfoServiceImpl implements HealthInfoService {
     /** ユーザComponent */
     @Autowired
     private UserComponent userComponent;
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** 健康情報登録API */
     @Autowired
     private HealthInfoRegistApi registApi;
@@ -103,7 +104,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
                         () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
 
         // トランザクションIDを採番
-        String transactionId = apiCommunicationDataComponent.getTransactionId();
+        String transactionId = apiLogComponent.getTransactionId();
 
         HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
         BeanUtil.copy(dto, request);
@@ -113,14 +114,14 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         HealthInfoRegistApiResponse response = registApi.callApi(request,
                 connectInfo);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+        ApiLogQueuePayload payload = apiLogComponent
                 .getPayload4AppApi(registApi, connectInfo, request, response,
                         transactionId);
-        apiCommunicationDataComponent.registQueue(payload);
+        apiLogComponent.registQueue(payload);
 
         if (ResultType.SUCCESS != response.getResultType()) {
             // 健康情報登録APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.HEALTH_INFO_REGIST_API_CONNECT_ERROR,
+            throw new ApiException(HEALTH_INFO_REGIST_API_CONNECT_ERROR,
                     response.getErrorInfo().getDetail());
         }
 
@@ -138,7 +139,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
 
         // ファイル名
         String fileName = "healthInfoRegist_" + DateTimeUtil
-                .toString(DateTimeUtil.getSysDate(), DateFormatType.YYYYMMDDHHMMSS_NOSEP)
+                .toString(DateTimeUtil.getSysDate(), YYYYMMDDHHMMSS_NOSEP)
                 + FileExtension.CSV;
         // ファイル出力先
         String path = null;

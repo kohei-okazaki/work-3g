@@ -1,5 +1,8 @@
 package jp.co.ha.business.component;
 
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +19,6 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jp.co.ha.business.api.aws.AwsS3Component;
-import jp.co.ha.business.api.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.NewsInfoCreateService;
@@ -25,15 +26,15 @@ import jp.co.ha.business.db.crud.read.NewsInfoSearchService;
 import jp.co.ha.business.db.crud.update.NewsInfoUpdateService;
 import jp.co.ha.business.dto.NewsDto;
 import jp.co.ha.business.exception.BusinessException;
+import jp.co.ha.common.aws.AwsS3Component;
+import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.type.Charset;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.util.FileUtil.FileExtension;
 import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.NewsInfo;
@@ -77,7 +78,7 @@ public class NewsComponent {
     public List<NewsDto> getNewsList(Pageable pageable) throws BaseException {
 
         SelectOption selectOption = new SelectOptionBuilder()
-                .orderBy("SEQ_NEWS_INFO_ID", SortType.DESC)
+                .orderBy("SEQ_NEWS_INFO_ID", DESC)
                 .pageable(pageable)
                 .build();
 
@@ -126,8 +127,9 @@ public class NewsComponent {
         // おしらせ情報 登録
         createService.create(news);
 
-        // お知らせ情報JSON アップロード
+        // お知らせ情報JSON S3アップロード
         dto.setSeqNewsInfoId(news.getSeqNewsInfoId());
+
         upload(s3Key, dto);
     }
 
@@ -156,16 +158,6 @@ public class NewsComponent {
      */
     public void remove(String s3Key) throws BaseException {
         s3.removeS3ObjectByKeys(s3Key);
-    }
-
-    /**
-     * Slack通知
-     * 
-     * @param seqNewsInfoId
-     *     お知らせ情報ID
-     */
-    public void sendSlack(Long seqNewsInfoId) {
-        slack.send(ContentType.ROOT, "お知らせ情報ID=" + seqNewsInfoId + "を削除.");
     }
 
     /**
@@ -219,7 +211,7 @@ public class NewsComponent {
         return new StringJoiner(StringUtil.THRASH)
                 .add(AwsS3Key.NEWS_JSON.getValue())
                 .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
-                        DateFormatType.YYYYMMDDHHMMSS_NOSEP) + FileExtension.JSON)
+                        YYYYMMDDHHMMSS_NOSEP) + FileExtension.JSON)
                 .toString();
     }
 

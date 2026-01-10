@@ -13,7 +13,7 @@ import jp.co.ha.business.db.crud.read.RootLoginInfoSearchService;
 import jp.co.ha.common.type.CommonFlag;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.util.CollectionUtil;
-import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
+import jp.co.ha.db.entity.custom.CompositeRootUserInfo;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.tools.response.RoleMtListApiResponse.Role;
 import jp.co.ha.root.contents.user.request.UserRetrieveApiRequest;

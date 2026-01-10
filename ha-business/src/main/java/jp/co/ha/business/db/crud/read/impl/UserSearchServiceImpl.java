@@ -17,11 +17,11 @@ import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserExample;
 import jp.co.ha.db.entity.UserKey;
-import jp.co.ha.db.entity.composite.CompositeMonthlyRegData;
-import jp.co.ha.db.entity.composite.CompositeUser;
+import jp.co.ha.db.entity.custom.CompositeMonthlyRegData;
+import jp.co.ha.db.entity.custom.CompositeUser;
 import jp.co.ha.db.mapper.UserMapper;
-import jp.co.ha.db.mapper.composite.CompositeMonthlyMapper;
-import jp.co.ha.db.mapper.composite.CompositeUserMapper;
+import jp.co.ha.db.mapper.custom.CompositeMonthlyMapper;
+import jp.co.ha.db.mapper.custom.CompositeUserMapper;
 
 /**
  * ユーザ情報検索サービス実装クラス

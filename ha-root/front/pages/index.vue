@@ -13,7 +13,7 @@
       </v-col>
       <v-col cols="6" xs="12" sm="12" md="6">
         <HealthInfoRegByMonthly :error="error" :labels="healthInfoLabels" :values="healthInfoValues" title="健康情報登録数"
-          text="下記年月に登録した全ユーザの健康情報登録情報数" color="cyan" @get-graph="getHealthInfoGraph" />
+          text="下記年月に登録した全ユーザの健康情報登録数" color="cyan" @get-graph="getHealthInfoGraph" />
       </v-col>
     </v-row>
   </div>
