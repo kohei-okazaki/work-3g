@@ -119,7 +119,7 @@ export default {
         },
         {
           icon: "mdi-api",
-          title: "API通信情報一覧API",
+          title: "API通信ログ一覧取得API",
           to: "/root/api/apidata",
         },
         {

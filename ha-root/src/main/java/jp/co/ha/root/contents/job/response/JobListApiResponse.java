@@ -67,10 +67,10 @@ public class JobListApiResponse extends BaseRootApiResponse implements BaseApiRe
         /** ステータス */
         @JsonProperty("status")
         private String status;
-        /** job名 */
+        /** Job名 */
         @JsonProperty("job_name")
         private String jobName;
-        /** jobパラメータリスト */
+        /** Jobパラメータリスト */
         @JsonProperty("parameter_list")
         @JsonInclude(JsonInclude.Include.NON_NULL)
         private List<JobParameter> parameterList;

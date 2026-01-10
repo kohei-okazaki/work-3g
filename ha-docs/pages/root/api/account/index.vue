@@ -62,23 +62,29 @@ export default {
           text: "トークン認証",
           edgeType: "round",
           link: ["-- 認証エラー -->", "-- それ以外の場合 -->"],
-          next: ["404", "3"],
+          next: ["3", "404"],
         },
         {
           id: "3",
-          text: "アカウント情報 検索",
+          text: "USER 検索",
           edgeType: "round",
-          next: ["4"],
+          next: ["100", "101"],
           style: "fill:#c6ffc6",
         },
         {
-          id: "4",
-          text: "レスポンスJSON 生成",
+          id: "100",
+          text: "正常系レスポンスJSON 生成",
           edgeType: "round",
-          next: ["5"],
+          next: ["110"],
         },
         {
-          id: "5",
+          id: "101",
+          text: "異常系レスポンスJSON 生成",
+          edgeType: "round",
+          next: ["110"],
+        },
+        {
+          id: "110",
           text: "レスポンス返却",
           edgeType: "round",
         },
@@ -93,5 +99,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -88,7 +88,7 @@ export default {
             },
             {
               name: "健康情報計算API",
-              host: "https://xosu86xbhe.execute-api.ap-northeast-1.amazonaws.com/dev/",
+              host: "https://uktlejp7a7.execute-api.ap-northeast-1.amazonaws.com/dev/",
             },
             {
               name: "健康管理ドキュメント",
@@ -129,7 +129,7 @@ export default {
             },
             {
               name: "健康情報計算API",
-              host: "https://xosu86xbhe.execute-api.ap-northeast-1.amazonaws.com/dev/",
+              host: "https://uktlejp7a7.execute-api.ap-northeast-1.amazonaws.com/dev/",
             },
             {
               name: "健康管理ドキュメント",
