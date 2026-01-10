@@ -23,7 +23,7 @@ import jp.co.ha.db.entity.ApiLog;
 /**
  * 日次API通信ログデータ分析連携バッチConfig<br>
  * <ul>
- * <li>引数1=処理対象年月日(YYYYMMDD)</li>
+ * <li>引数1=処理対象日(YYYYMMDD)</li>
  * </ul>
  * 
  * @version 1.0.0
@@ -39,7 +39,7 @@ public class DailyApiLogConfig extends BatchConfig {
      * 
      * @param jobRepository
      *     JobRepository
-     * @param dailyUserStep
+     * @param dailyApiLogStep
      *     日次API通信ログデータ分析連携バッチSTEP
      * @param listener
      *     BatchJobListener
@@ -47,14 +47,14 @@ public class DailyApiLogConfig extends BatchConfig {
      */
     @Bean(DAILY_API_LOG_JOB_NAME)
     Job dailyApiLogJob(JobRepository jobRepository,
-            @Qualifier(DAILY_API_LOG_STEP_NAME) Step dailyUserStep,
+            @Qualifier(DAILY_API_LOG_STEP_NAME) Step dailyApiLogStep,
             BatchJobListener listener) {
         return new JobBuilder(DAILY_API_LOG_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .validator(
                         new DateFormatParameterValidator(OPTION_D, YYYYMMDD_NOSEP, false))
                 .listener(listener)
-                .start(dailyUserStep)
+                .start(dailyApiLogStep)
                 .build();
     }
 

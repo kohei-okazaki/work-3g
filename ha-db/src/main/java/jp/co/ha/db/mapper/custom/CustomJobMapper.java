@@ -1,5 +1,6 @@
 package jp.co.ha.db.mapper.custom;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -34,4 +35,15 @@ public interface CustomJobMapper {
      * @return 件数
      */
     long count();
+
+    /**
+     * ページングされたBatch起動履歴リストを検索する
+     * 
+     * @param from
+     *     登録日時(開始)
+     * @param to
+     *     登録日時(終了)
+     * @return Batch起動履歴リスト
+     */
+    List<CustomJobData> selectByCreateTime(LocalDateTime from, LocalDateTime to);
 }

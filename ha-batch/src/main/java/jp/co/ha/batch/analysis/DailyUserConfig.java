@@ -23,7 +23,7 @@ import jp.co.ha.db.entity.custom.CompositeUser;
 /**
  * 日次ユーザ情報データ分析連携バッチConfig<br>
  * <ul>
- * <li>引数1=処理対象年月日(YYYYMMDD)</li>
+ * <li>引数1=処理対象日(YYYYMMDD)</li>
  * </ul>
  * 
  * @version 1.0.0

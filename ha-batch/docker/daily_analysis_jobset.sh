@@ -45,22 +45,22 @@ check_result() {
 }
 
 # 日次健康情報データ分析連携バッチ
-daily_analysis_healthInfo.sh ${DATE_OPTION_VALUE}
+./daily_analysis_health_info.sh ${DATE_OPTION_VALUE}
 result=$?
 check_result "dailyHealthInfoJob" ${result}
 
 # 日次ユーザ情報データ分析連携バッチ
-daily_analysis_user.sh ${DATE_OPTION_VALUE}
+./daily_analysis_user.sh ${DATE_OPTION_VALUE}
 result=$?
 check_result "dailyUserJob" ${result}
 
 # 日次API通信ログデータ分析連携バッチ
-daily_analysis_api_log.sh ${DATE_OPTION_VALUE}
+./daily_analysis_api_log.sh ${DATE_OPTION_VALUE}
 result=$?
 check_result "dailyApiLogJob" ${result}
 
 # 日次バッチ実行ログデータ分析連携バッチ
-daily_analysis_batch_log.sh ${DATE_OPTION_VALUE}
+./daily_analysis_batch_log.sh ${DATE_OPTION_VALUE}
 result=$?
 check_result "dailyBatchLogJob" ${result}
 

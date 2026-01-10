@@ -83,7 +83,7 @@ export default {
         },
         {
           icon: "mdi-api",
-          title: "API通信情報一覧",
+          title: "API通信ログ一覧",
           to: "/apidata",
         },
         {
