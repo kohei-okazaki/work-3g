@@ -772,7 +772,7 @@
                   <tbody>
                     <tr>
                       <td>BASE_DIR</td>
-                      <td>"/mnt/c/app/git/work-3g"が指定されているが、Cドライブ移行のパスをローカルリポジトリのルートディレクトリと合わせること。</td>
+                      <td>"/mnt/c/app/git/work-3g"が指定されているが、C:\ ドライブ以降のパスをローカルリポジトリのルートディレクトリと合わせること。</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -793,7 +793,7 @@
                   <tbody>
                     <tr>
                       <td>BASE_DIR</td>
-                      <td>"/mnt/c/app/git/work-3g"が指定されているが、Cドライブ移行のパスをローカルリポジトリのルートディレクトリと合わせること。</td>
+                      <td>"/mnt/c/app/git/work-3g"が指定されているが、C:\ ドライブ以降のパスをローカルリポジトリのルートディレクトリと合わせること。</td>
                     </tr>
                   </tbody>
                 </v-simple-table>

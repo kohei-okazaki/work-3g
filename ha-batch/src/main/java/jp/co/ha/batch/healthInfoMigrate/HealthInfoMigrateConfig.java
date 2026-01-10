@@ -1,6 +1,7 @@
 package jp.co.ha.batch.healthInfoMigrate;
 
 import static jp.co.ha.batch.base.BatchConfigConst.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -16,17 +17,24 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import jp.co.ha.batch.base.BatchConfig;
+import jp.co.ha.batch.base.DateFormatParameterValidator;
 import jp.co.ha.batch.listener.BatchJobListener;
 import jp.co.ha.business.api.track.request.HealthInfoMigrateApiRequest;
 import jp.co.ha.db.entity.HealthInfo;
 
 /**
- * 健康情報連携バッチのConfig
+ * 健康情報連携バッチConfig<br>
+ * <ul>
+ * <li>引数1=処理対象年月日(YYYYMMDD)</li>
+ * </ul>
  * 
  * @version 1.0.0
  */
 @Configuration
 public class HealthInfoMigrateConfig extends BatchConfig {
+
+    /** オプション-d */
+    private static final String OPTION_D = "d";
 
     /**
      * 健康情報連携バッチJOB
@@ -45,7 +53,8 @@ public class HealthInfoMigrateConfig extends BatchConfig {
             BatchJobListener listener) {
         return new JobBuilder(HEALTH_INFO_MIGRATE_BATCH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
-                .validator(new HealthInfoMigrateValidator())
+                .validator(
+                        new DateFormatParameterValidator(OPTION_D, YYYYMMDD_NOSEP, false))
                 .listener(listener)
                 .start(healthInfoMigrateBatchStep)
                 .build();
@@ -55,11 +64,11 @@ public class HealthInfoMigrateConfig extends BatchConfig {
      * 健康情報連携バッチSTEP
      * 
      * @param reader
-     *     健康情報連携処理-Reader
+     *     Reader
      * @param processor
-     *     健康情報連携処理-Proccesor
+     *     Proccesor
      * @param writer
-     *     健康情報連携処理-Writer
+     *     Writer
      * @param jobRepository
      *     JobRepository
      * @param transactionManager

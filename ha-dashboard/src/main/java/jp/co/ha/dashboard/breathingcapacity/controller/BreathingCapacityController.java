@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.breathingcapacity.controller;
 
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +26,6 @@ import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.breathingcapacity.form.BreathingCapacityForm;
-import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.User;
 
 /**
@@ -79,7 +80,7 @@ public class BreathingCapacityController implements BaseWebController {
      */
     @GetMapping("/index")
     public String index(Model model) {
-        return getView(model, DashboardView.BREATHING_CAPACITY_CALC);
+        return getView(model, BREATHING_CAPACITY_CALC);
     }
 
     /**
@@ -102,7 +103,7 @@ public class BreathingCapacityController implements BaseWebController {
             BindingResult result, HttpServletRequest request) throws BaseException {
 
         if (result.hasErrors()) {
-            return getView(model, DashboardView.BREATHING_CAPACITY_CALC);
+            return getView(model, BREATHING_CAPACITY_CALC);
         }
 
         // DTOに変換
@@ -120,7 +121,7 @@ public class BreathingCapacityController implements BaseWebController {
 
         model.addAttribute("calcResult", calcResult);
 
-        return getView(model, DashboardView.BREATHING_CAPACITY_CALC);
+        return getView(model, BREATHING_CAPACITY_CALC);
     }
 
 }

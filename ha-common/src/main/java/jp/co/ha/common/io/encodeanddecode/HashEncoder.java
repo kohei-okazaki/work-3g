@@ -1,11 +1,12 @@
 package jp.co.ha.common.io.encodeanddecode;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.type.Algorithm;
 import jp.co.ha.common.type.Charset;
@@ -43,9 +44,9 @@ public abstract class HashEncoder {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new SystemException(CommonErrorCode.ALGORITH_ERROR, e);
+            throw new SystemException(ALGORITH_ERROR, e);
         } catch (UnsupportedEncodingException e) {
-            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR, e);
+            throw new SystemException(UNEXPECTED_ERROR, e);
         }
 
     }

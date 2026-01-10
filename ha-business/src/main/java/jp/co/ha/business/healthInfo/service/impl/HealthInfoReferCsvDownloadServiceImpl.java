@@ -1,5 +1,7 @@
 package jp.co.ha.business.healthInfo.service.impl;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +15,6 @@ import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.io.file.csv.model.ReferenceCsvDownloadModel;
 import jp.co.ha.business.io.file.csv.writer.ReferenceCsvWriter;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.io.file.csv.CsvConfig;
 import jp.co.ha.common.io.file.csv.service.CsvDownloadService;
 import jp.co.ha.common.io.file.csv.writer.CsvWriter;
@@ -70,8 +71,7 @@ public class HealthInfoReferCsvDownloadServiceImpl
                 PrintWriter pw = new PrintWriter(new BufferedWriter(fw), true)) {
             pw.println(writer.getData());
         } catch (IOException e) {
-            throw new BusinessException(CommonErrorCode.FILE_WRITE_ERROR,
-                    "ファイルの書き込みに失敗しました", e);
+            throw new BusinessException(FILE_WRITE_ERROR, "ファイルの書き込みに失敗しました", e);
         }
     }
 

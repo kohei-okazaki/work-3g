@@ -1,11 +1,12 @@
 package jp.co.ha.common.exception;
 
 /**
- * システム情報の例外クラス<br>
+ * アプリケーションで発生したシステムの例外クラス<br>
  * <ul>
  * <li>DB関連で発生した例外</li>
  * <li>IO関連で発生した例外</li>
  * <li>Session関連で発生した例外</li>
+ * <li>AWS関連で発生した例外</li>
  * </ul>
  *
  * @version 1.0.0

@@ -9,7 +9,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import jp.co.ha.common.db.CryptProperties;
 import jp.co.ha.common.db.JdbcProperties;
 import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.validator.BeanValidator;
@@ -22,13 +21,14 @@ import jp.co.ha.common.web.interceptor.RequestInterceptor;
  */
 @Configuration
 // application-$env.ymlで読み込んでいるため不要
-// @PropertySource({ "classpath:crypt.properties", "classpath:jdbc.properties",
-// "classpath:system.properties" })
+// @PropertySource({ "classpath:jdbc.properties", "classpath:system.properties"
+// })
 @ComponentScan(basePackages = {
-        "jp.co.ha.common.system",
+        "jp.co.ha.common.aws",
         "jp.co.ha.common.crypt",
         "jp.co.ha.common.db",
         "jp.co.ha.common.io",
+        "jp.co.ha.common.system",
         "jp.co.ha.common.web.api.aspect"
 })
 public class CommonConfig implements WebMvcConfigurer {
@@ -113,27 +113,4 @@ public class CommonConfig implements WebMvcConfigurer {
         return props;
     }
 
-    /**
-     * CryptPropertiesを設定する
-     * 
-     * @param mode
-     *     mode
-     * @param key
-     *     key
-     * @param shift
-     *     shift
-     * @return CryptProperties
-     */
-    @Bean
-    CryptProperties cryptProperties(
-            @Value("${crypt.mode}") String mode,
-            @Value("${crypt.key}") String key,
-            @Value("${crypt.shift}") String shift) {
-
-        CryptProperties props = new CryptProperties();
-        props.setMode(mode);
-        props.setKey(key);
-        props.setShift(shift);
-        return props;
-    }
 }

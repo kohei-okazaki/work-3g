@@ -7,9 +7,10 @@ import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 import jp.co.ha.common.BaseCommonTest;
-import jp.co.ha.common.function.MultiThreadFunction.ResultType;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import jp.co.ha.common.util.MultiThreadFunction;
+import jp.co.ha.common.util.MultiThreadFunction.ResultType;
 
 /**
  * {@linkplain MultiThreadFunction} のjUnit

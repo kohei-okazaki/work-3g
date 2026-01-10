@@ -1,5 +1,9 @@
 package jp.co.ha.dashboard.user.controller;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
@@ -18,27 +22,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jp.co.ha.business.api.aws.AwsSesComponent;
-import jp.co.ha.business.api.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.business.component.UserComponent;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
+import jp.co.ha.business.component.annotation.NonAuth;
 import jp.co.ha.business.db.crud.create.UserRecoveryTokenCreateService;
 import jp.co.ha.business.db.crud.read.UserRecoveryTokenSearchService;
 import jp.co.ha.business.db.crud.update.UserUpdateService;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
-import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
+import jp.co.ha.common.aws.AwsSesComponent;
+import jp.co.ha.common.aws.AwsSesComponent.MailTemplateKey;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.encodeanddecode.HashEncoder;
 import jp.co.ha.common.io.encodeanddecode.annotation.Sha256;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.user.form.UserRecoveryForm;
 import jp.co.ha.dashboard.user.form.UserRecoveryMailAddressInputForm;
-import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserRecoveryToken;
 
@@ -108,7 +109,7 @@ public class UserRecoveryController implements BaseWebController {
         // メールアドレスを入力させるためフラグをtrueに
         model.addAttribute("isInputMailAddress", true);
 
-        return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
+        return getView(model, ACCOUNT_RECOVERY_INDEX);
     }
 
     /**
@@ -131,13 +132,13 @@ public class UserRecoveryController implements BaseWebController {
 
         if (result.hasErrors()) {
             // 妥当性チェックエラーの場合
-            return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
+            return getView(model, ACCOUNT_RECOVERY_INDEX);
         }
 
         // ユーザ情報検索
         User user = userComponent.findByMailAddress(form.getMailAddress())
                 .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "メールアドレスが未登録です"));
+                        ILLEGAL_ACCESS_ERROR, "メールアドレスが未登録です"));
 
         // システム日時
         LocalDateTime sysdate = DateTimeUtil.getSysDate();
@@ -145,14 +146,14 @@ public class UserRecoveryController implements BaseWebController {
         UserRecoveryToken entity = new UserRecoveryToken();
         entity.setSeqUserId(user.getSeqUserId());
         entity.setToken(encoder.encode(user.getMailAddress(),
-                DateTimeUtil.toString(sysdate, DateFormatType.YYYYMMDDHHMMSS_NOSEP)));
+                DateTimeUtil.toString(sysdate, YYYYMMDDHHMMSS_NOSEP)));
         entity.setTokenCreateDate(sysdate);
         userRecoveryTokenCreateService.create(entity);
 
         // SESでパスワード再設定メールを送信する
         String to = form.getMailAddress();
         String title = "パスワード再設定"
-                + DateTimeUtil.toString(sysdate, DateFormatType.YYYYMMDD_NOSEP);
+                + DateTimeUtil.toString(sysdate, YYYYMMDD_NOSEP);
 
         ses.sendMail(to, title, MailTemplateKey.ACCOUNT_RECOVERY_TEMPLATE,
                 getMailTemplateBody(entity));
@@ -160,7 +161,7 @@ public class UserRecoveryController implements BaseWebController {
         // メールを送信したためフラグをtrueに
         model.addAttribute("isSendMailAddress", true);
 
-        return getView(model, DashboardView.ACCOUNT_RECOVERY_INDEX);
+        return getView(model, ACCOUNT_RECOVERY_INDEX);
     }
 
     /**
@@ -185,7 +186,7 @@ public class UserRecoveryController implements BaseWebController {
 
         // 不正リクエストエラーのチェック処理を追加
         String strToken = token.orElseThrow(() -> new BusinessException(
-                DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "トークンが未指定です"));
+                ILLEGAL_ACCESS_ERROR, "トークンが未指定です"));
 
         // ユーザ情報検索
         User user = getUser(seqUserId);
@@ -196,11 +197,11 @@ public class UserRecoveryController implements BaseWebController {
                 .findBySeqUserIdAndTokenAndValidTokenCreateDate(user.getSeqUserId(),
                         strToken)
                 .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "トークンが不正または無効です"));
+                        ILLEGAL_ACCESS_ERROR, "トークンが不正または無効です"));
 
         model.addAttribute("account", user);
 
-        return getView(model, DashboardView.ACCOUNT_RECOVERY_EDIT);
+        return getView(model, ACCOUNT_RECOVERY_EDIT);
     }
 
     /**
@@ -221,17 +222,16 @@ public class UserRecoveryController implements BaseWebController {
     @NonAuth
     @MultiSubmitToken(factory = true)
     @PostMapping("/confirm/{seq_user_id}")
-    public String confirm(Model model, @Valid UserRecoveryForm form,
-            BindingResult result,
+    public String confirm(Model model, @Valid UserRecoveryForm form, BindingResult result,
             @PathVariable(name = "seq_user_id", required = false) Optional<String> seqUserId)
             throws BaseException {
 
         if (result.hasErrors()) {
             // 妥当性チェックエラー
-            return getView(model, DashboardView.ACCOUNT_RECOVERY_EDIT);
+            return getView(model, ACCOUNT_RECOVERY_EDIT);
         } else if (!form.getPassword().equals(form.getConfirmPassword())) {
             model.addAttribute("errorMessage", "パスワードと確認用パスワードが一致しません");
-            return getView(model, DashboardView.ACCOUNT_RECOVERY_EDIT);
+            return getView(model, ACCOUNT_RECOVERY_EDIT);
         }
 
         // ユーザ情報検索
@@ -239,7 +239,7 @@ public class UserRecoveryController implements BaseWebController {
 
         model.addAttribute("account", user);
 
-        return getView(model, DashboardView.ACCOUNT_RECOVERY_CONFIRM);
+        return getView(model, ACCOUNT_RECOVERY_CONFIRM);
     }
 
     /**
@@ -274,7 +274,7 @@ public class UserRecoveryController implements BaseWebController {
         // ログイン画面にリダイレクト
         redirect.addFlashAttribute("isPasswordReset", true);
 
-        return redirectView(DashboardView.LOGIN);
+        return redirectView(LOGIN);
     }
 
     /**
@@ -306,15 +306,13 @@ public class UserRecoveryController implements BaseWebController {
         if (seqUserId == null || !seqUserId.isPresent()
                 || !RegexType.HALF_NUMBER.is(seqUserId.get())) {
             // ユーザIDが未指定または半角数字以外の場合
-            throw new BusinessException(
-                    DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+            throw new BusinessException(ILLEGAL_ACCESS_ERROR,
                     "ユーザIDが未指定または半角数字以外です seq_user_id=" + seqUserId);
         }
 
         // ユーザ情報検索
         return userComponent.findById(Long.valueOf(seqUserId.get()))
-                .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR,
+                .orElseThrow(() -> new BusinessException(ILLEGAL_ACCESS_ERROR,
                         "ユーザIDと紐づくユーザ情報がありません seq_user_id=" + seqUserId));
     }
 

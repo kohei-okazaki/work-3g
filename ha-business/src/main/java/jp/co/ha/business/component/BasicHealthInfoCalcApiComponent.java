@@ -1,5 +1,7 @@
 package jp.co.ha.business.component;
 
+import static jp.co.ha.business.exception.BusinessErrorCode.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,8 +10,7 @@ import jp.co.ha.business.api.node.request.BasicHealthInfoCalcApiRequest;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.BasicHealthInfoCalcApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
-import jp.co.ha.business.exception.BusinessErrorCode;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
@@ -24,9 +25,9 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 @Component
 public class BasicHealthInfoCalcApiComponent {
 
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** 基礎健康情報計算API */
     @Autowired
     private BasicHealthInfoCalcApi api;
@@ -56,15 +57,14 @@ public class BasicHealthInfoCalcApiComponent {
         BasicHealthInfoCalcApiResponse apiResponse = api
                 .callApi(apiRequest, connectInfo);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+        ApiLogQueuePayload payload = apiLogComponent
                 .getPayload4NodeApi(api, connectInfo, apiRequest,
                         apiResponse, transactionId);
-        apiCommunicationDataComponent.registQueue(payload);
+        apiLogComponent.registQueue(payload);
 
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BASIC_API_CONNECT_ERROR,
-                    apiResponse.getDetail());
+            throw new ApiException(BASIC_API_CONNECT_ERROR, apiResponse.getDetail());
         }
 
         return apiResponse;
@@ -97,15 +97,14 @@ public class BasicHealthInfoCalcApiComponent {
         BasicHealthInfoCalcApiResponse apiResponse = api
                 .callApi(apiRequest, connectInfo);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+        ApiLogQueuePayload payload = apiLogComponent
                 .getPayload4NodeApi(api, connectInfo, apiRequest,
                         apiResponse, transactionId);
-        apiCommunicationDataComponent.registQueue(payload);
+        apiLogComponent.registQueue(payload);
 
         if (Result.SUCCESS != apiResponse.getResult()) {
             // 基礎健康情報計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BASIC_API_CONNECT_ERROR,
-                    apiResponse.getDetail());
+            throw new ApiException(BASIC_API_CONNECT_ERROR, apiResponse.getDetail());
         }
 
         return apiResponse;

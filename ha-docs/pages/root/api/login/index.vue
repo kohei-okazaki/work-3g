@@ -69,7 +69,7 @@ export default {
         },
         {
           id: "3",
-          text: "管理者サイトユーザログイン情報 検索",
+          text: "ROOT_LOGIN_INFO 検索",
           edgeType: "round",
           link: ["-- 検索結果 == 0 -->", "-- それ以外の場合 -->"],
           next: ["404", "4"],

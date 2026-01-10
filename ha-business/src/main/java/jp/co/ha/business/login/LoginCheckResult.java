@@ -31,7 +31,7 @@ public class LoginCheckResult {
     }
 
     /**
-     * errorCodeを返す
+     * エラーコードを返す
      *
      * @return errorCode
      */
@@ -40,7 +40,7 @@ public class LoginCheckResult {
     }
 
     /**
-     * errorCodeを設定する
+     * エラーコードを設定する
      *
      * @param errorCode
      *     エラーコード

@@ -13,15 +13,13 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>21</java-version>
 
-    <springboot-version>3.5.8</springboot-version>
-    <aws-version>2.31.78</aws-version>
+    <springboot-version>3.5.9</springboot-version>
+    <aws-version>2.41.4</aws-version>
     <poi-version>5.4.1</poi-version>
     <mysql-version>8.4.0</mysql-version>
     <mybatis-version>3.5.19</mybatis-version>
     <mybatis-spring-version>3.0.5</mybatis-spring-version>
-    <dbcp2-version>2.13.0</dbcp2-version>
     <okhttp-version>5.3.2</okhttp-version>
-    <commons-lang3-version>3.20.0</commons-lang3-version>
 
     <maven-compiler-version>3.11.0</maven-compiler-version>
     <maven-resources-version>3.3.1</maven-resources-version>
@@ -82,7 +80,7 @@
   </dependencyManagement>
 
   <dependencies>
-	  <!-- Spring Boot -->
+	<!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
@@ -182,7 +180,6 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-dbcp2</artifactId>
-      <version>${dbcp2-version}</version>
     </dependency>
 
     <!-- poi -->
@@ -200,7 +197,6 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>${commons-lang3-version}</version>
     </dependency>
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>

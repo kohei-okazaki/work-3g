@@ -1,5 +1,8 @@
 package jp.co.ha.dashboard.inquiry.controller;
 
+import static jp.co.ha.business.exception.DashboardErrorCode.*;
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
@@ -13,16 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.InquiryComponent;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.dto.InquiryDto;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.exception.DashboardErrorCode;
-import jp.co.ha.business.interceptor.annotation.MultiSubmitToken;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.inquiry.form.InquiryForm;
-import jp.co.ha.dashboard.view.DashboardView;
 
 /**
  * 健康管理_問い合わせ画面コントローラ
@@ -64,7 +65,7 @@ public class InquiryController implements BaseWizardController<InquiryForm> {
         // TODO キャッシュ化すること
         model.addAttribute("typeList", inquiryComponent.getInquiryTypeMtList());
 
-        return getView(model, DashboardView.INQUIRY_INPUT);
+        return getView(model, INQUIRY_INPUT);
     }
 
     @Override
@@ -75,13 +76,13 @@ public class InquiryController implements BaseWizardController<InquiryForm> {
 
         if (result.hasErrors()) {
             // バリエーションエラーの場合
-            return getView(model, DashboardView.INQUIRY_INPUT);
+            return getView(model, INQUIRY_INPUT);
         }
 
         // sessionに問い合わせForm情報を保持
         sessionComponent.setValue(request.getSession(), SESSION_KEY_FORM, form);
 
-        return getView(model, DashboardView.INQUIRY_CONFIRM);
+        return getView(model, INQUIRY_CONFIRM);
     }
 
     @Override
@@ -97,8 +98,8 @@ public class InquiryController implements BaseWizardController<InquiryForm> {
         // セッションから問い合わせForm情報を取得
         InquiryForm inquiryForm = sessionComponent
                 .getValue(request.getSession(), SESSION_KEY_FORM, InquiryForm.class)
-                .orElseThrow(() -> new BusinessException(
-                        DashboardErrorCode.ILLEGAL_ACCESS_ERROR, "不正リクエストエラーです"));
+                .orElseThrow(() -> new BusinessException(ILLEGAL_ACCESS_ERROR,
+                        "不正リクエストエラーです"));
 
         // 問い合わせ管理情報を登録する
         InquiryDto dto = new InquiryDto();
@@ -111,6 +112,6 @@ public class InquiryController implements BaseWizardController<InquiryForm> {
 
         sessionComponent.removeValue(request.getSession(), SESSION_KEY_FORM);
 
-        return getView(model, DashboardView.INQUIRY_COMPLETE);
+        return getView(model, INQUIRY_COMPLETE);
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import jp.co.ha.db.entity.RootLoginInfo;
-import jp.co.ha.db.entity.composite.CompositeRootUserInfo;
+import jp.co.ha.db.entity.custom.CompositeRootUserInfo;
 
 /**
  * 管理者サイトユーザログイン情報検索サービスインターフェース

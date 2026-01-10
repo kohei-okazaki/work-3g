@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.data.domain.Pageable;
 
-import jp.co.ha.common.function.Builder;
+import jp.co.ha.common.util.Builder;
 import jp.co.ha.common.util.StringUtil;
 
 /**

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import jp.co.ha.business.component.InquiryComponent;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.inquiry.request.InquiryEditApiRequest;
 import jp.co.ha.root.contents.inquiry.response.InquiryEditApiResponse;
+import jp.co.ha.root.contents.inquiry.service.InquiryService;
 
 /**
  * 問い合わせ情報編集APIコントローラ
@@ -25,9 +25,9 @@ import jp.co.ha.root.contents.inquiry.response.InquiryEditApiResponse;
 public class InquiryEditApiController
         extends BaseRootApiController<InquiryEditApiRequest, InquiryEditApiResponse> {
 
-    /** 問い合わせ関連Component */
+    /** 問い合わせサービス */
     @Autowired
-    private InquiryComponent inquiryComponent;
+    private InquiryService service;
 
     /**
      * 問い合わせ情報編集
@@ -40,13 +40,12 @@ public class InquiryEditApiController
      * @throws BaseException
      *     API呼び出しに失敗した場合
      */
-    @PutMapping(value = "inquiry/{seq_inquriy_mng_id}", produces = {
-            MediaType.APPLICATION_JSON_VALUE })
+    @PutMapping(value = "inquiry/{seq_inquriy_mng_id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<InquiryEditApiResponse> edit(
             @PathVariable(name = "seq_inquriy_mng_id", required = true) Long seqInquriyMngId,
             @Valid @RequestBody InquiryEditApiRequest request) throws BaseException {
 
-        if (!inquiryComponent.isExistBySeqInquiryMngId(seqInquriyMngId)) {
+        if (!service.existInquiryManagement(seqInquriyMngId)) {
             // 問い合わせ情報管理IDがDBに存在しない場合
             return ResponseEntity.badRequest()
                     .body(getErrorResponse(
@@ -55,8 +54,7 @@ public class InquiryEditApiController
         }
 
         // 問い合わせ管理情報更新
-        inquiryComponent.updateStatusById(seqInquriyMngId,
-                request.getStatus(), request.getSeqRootLoginInfoId());
+        service.updateStatusById(seqInquriyMngId, request);
 
         return ResponseEntity.ok(getSuccessResponse());
     }

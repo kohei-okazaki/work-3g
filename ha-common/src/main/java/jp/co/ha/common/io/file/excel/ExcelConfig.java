@@ -1,7 +1,7 @@
 package jp.co.ha.common.io.file.excel;
 
-import jp.co.ha.common.function.Builder;
 import jp.co.ha.common.type.Charset;
+import jp.co.ha.common.util.Builder;
 
 /**
  * Excel設定情報保持クラス<br>

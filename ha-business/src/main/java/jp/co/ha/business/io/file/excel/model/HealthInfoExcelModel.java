@@ -27,7 +27,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     private LocalDateTime healthInfoRegDate;
 
     /**
-     * heightを返す
+     * 身長を返す
      *
      * @return height
      */
@@ -36,7 +36,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * heightを設定する
+     * 身長を設定する
      *
      * @param height
      *     身長
@@ -46,7 +46,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * weightを返す
+     * 体重を返す
      *
      * @return weight
      */
@@ -55,7 +55,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * weightを設定する
+     * 体重を設定する
      *
      * @param weight
      *     体重
@@ -65,7 +65,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * bmiを返す
+     * BMIを返す
      *
      * @return bmi
      */
@@ -74,7 +74,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * bmiを設定する
+     * BMIを設定する
      *
      * @param bmi
      *     BMI
@@ -84,7 +84,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * standardWeightを返す
+     * 標準体重を返す
      *
      * @return standardWeight
      */
@@ -93,7 +93,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * standardWeightを設定する
+     * 標準体重を設定する
      *
      * @param standardWeight
      *     標準体重
@@ -103,7 +103,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * healthInfoRegDateを返す
+     * 健康情報作成日時を返す
      *
      * @return healthInfoRegDate
      */
@@ -112,7 +112,7 @@ public class HealthInfoExcelModel implements BaseExcelModel {
     }
 
     /**
-     * healthInfoRegDateを設定する
+     * 健康情報作成日時を設定する
      *
      * @param healthInfoRegDate
      *     健康情報作成日時

@@ -44,7 +44,7 @@ public class HealthInfoReferenceApiController extends
      * @throws BaseException
      *     基底例外
      */
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HealthInfoReferenceApiResponse> doGet(
             @PathVariable("seq_user_id") Long seqUserId,
             @PathVariable("seq_health_info_id") Long seqHealthInfoId,

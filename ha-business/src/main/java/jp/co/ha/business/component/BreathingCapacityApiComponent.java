@@ -1,5 +1,7 @@
 package jp.co.ha.business.component;
 
+import static jp.co.ha.business.exception.BusinessErrorCode.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +11,8 @@ import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcApiResponse;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
-import jp.co.ha.business.dto.ApiCommunicationDataQueuePayload;
+import jp.co.ha.business.dto.ApiLogQueuePayload;
 import jp.co.ha.business.dto.BreathingCapacityDto;
-import jp.co.ha.business.exception.BusinessErrorCode;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
@@ -27,9 +28,9 @@ import jp.co.ha.common.web.api.ApiConnectInfo;
 @Component
 public class BreathingCapacityApiComponent {
 
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    private ApiCommunicationDataComponent apiCommunicationDataComponent;
+    private ApiLogComponent apiLogComponent;
     /** トークン発行APIComponent */
     @Autowired
     private TokenApiComponent tokenApiComponent;
@@ -55,7 +56,7 @@ public class BreathingCapacityApiComponent {
             throws BaseException {
 
         // API通信情報.トランザクションIDを採番
-        String transactionId = apiCommunicationDataComponent.getTransactionId();
+        String transactionId = apiLogComponent.getTransactionId();
 
         BreathingCapacityCalcApiResponse apiResponse;
         if (prop.isHealthinfoNodeApiMigrateFlg()) {
@@ -103,14 +104,13 @@ public class BreathingCapacityApiComponent {
 
         BreathingCapacityCalcApiResponse response = api.callApi(request, connectInfo);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+        ApiLogQueuePayload payload = apiLogComponent
                 .getPayload4NodeApi(api, connectInfo, request, response, transactionId);
-        apiCommunicationDataComponent.registQueue(payload);
+        apiLogComponent.registQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // 肺活量計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BREATHING_API_CONNECT_ERROR,
-                    response.getDetail());
+            throw new ApiException(BREATHING_API_CONNECT_ERROR, response.getDetail());
         }
 
         return response;
@@ -144,14 +144,13 @@ public class BreathingCapacityApiComponent {
 
         BreathingCapacityCalcApiResponse response = api.callApi(request, connectInfo);
 
-        ApiCommunicationDataQueuePayload payload = apiCommunicationDataComponent
+        ApiLogQueuePayload payload = apiLogComponent
                 .getPayload4NodeApi(api, connectInfo, request, response, transactionId);
-        apiCommunicationDataComponent.registQueue(payload);
+        apiLogComponent.registQueue(payload);
 
         if (Result.SUCCESS != response.getResult()) {
             // 肺活量計算APIの処理が成功以外の場合
-            throw new ApiException(BusinessErrorCode.BREATHING_API_CONNECT_ERROR,
-                    response.getDetail());
+            throw new ApiException(BREATHING_API_CONNECT_ERROR, response.getDetail());
         }
 
         return response;

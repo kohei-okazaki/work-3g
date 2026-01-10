@@ -14,13 +14,9 @@ def put_dynamo_db(table_name, item):
 
     @param table_name: テーブル名
     @param item: 登録情報 (辞書形式)
-    @raise Exception: データの登録に失敗した場合
     """
     table = dynamodb.Table(table_name)
 
-    try:
-        table.put_item(
-            Item=item, ConditionExpression="attribute_not_exists(created_at_epoch)"
-        )
-    except Exception:
-        raise
+    # 同一Keyが存在する場合、上書き更新する
+    table.put_item(Item=item)
+

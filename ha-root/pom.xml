@@ -9,7 +9,6 @@
 
   <properties>
     <jwt-version>0.13.0</jwt-version>
-    <jakarta.xml.bind-api-version>4.0.4</jakarta.xml.bind-api-version>
   </properties>
 
   <parent>

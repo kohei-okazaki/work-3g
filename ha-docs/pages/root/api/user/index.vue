@@ -73,7 +73,7 @@ export default {
         {
           id: "4",
           text:
-            "管理者サイトユーザログイン情報<br>+ 管理者サイトユーザ権限管理マスタ<br>+ 管理者サイトユーザ権限詳細マスタ<br>+ 管理者サイトユーザ権限マスタ 検索",
+            "ROOT_LOGIN_INFO<br>+ ROOT_USER_ROLE_MNG_MT<br>+ ROOT_USER_ROLE_DETAIL_MT<br>+ ROOT_ROLE_MT 検索",
           edgeType: "round",
           link: ["-- 検索結果 == 0 -->", "-- それ以外場合 -->"],
           next: ["101", "100"],

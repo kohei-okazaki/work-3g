@@ -1,5 +1,7 @@
 package jp.co.ha.dashboard.news.controller;
 
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,6 @@ import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SystemProperties;
 import jp.co.ha.common.util.PagingViewFactory;
 import jp.co.ha.common.web.controller.BaseWebController;
-import jp.co.ha.dashboard.view.DashboardView;
 
 /**
  * お知らせ情報画面コントローラ
@@ -55,7 +56,7 @@ public class NewsController implements BaseWebController {
         model.addAttribute("paging", PagingViewFactory.getPageView(pageable,
                 "/news/list?page", component.count()));
 
-        return getView(model, DashboardView.NEWS_LIST);
+        return getView(model, NEWS_LIST);
     }
 
 }

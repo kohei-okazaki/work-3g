@@ -1,7 +1,7 @@
 package jp.co.ha.common.type;
 
 /**
- * フラグ値列挙
+ * 共通フラグ値列挙
  *
  * @version 1.0.0
  */

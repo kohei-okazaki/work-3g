@@ -1,5 +1,7 @@
 package jp.co.ha.db.aspect;
 
+import static jp.co.ha.common.exception.CommonErrorCode.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.db.EntityCrypter;
 import jp.co.ha.common.db.annotation.Entity;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.CommonErrorCode;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
@@ -65,13 +66,12 @@ public class DataBaseCommonAspect {
                         }
                     }
                     entityCrypter.encrypt(entity);
-                    LOG.infoBean(entity);
+                    LOG.debugBean(entity);
                 }
             }
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            throw new SystemRuntimeException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "setterの実行に失敗しました", e);
+            throw new SystemRuntimeException(UNEXPECTED_ERROR, "setterの実行に失敗しました", e);
         }
     }
 
@@ -101,13 +101,12 @@ public class DataBaseCommonAspect {
                         }
                     }
                     entityCrypter.encrypt(entity);
-                    LOG.infoBean(entity);
+                    LOG.debugBean(entity);
                 }
             }
         } catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException e) {
-            throw new SystemException(CommonErrorCode.UNEXPECTED_ERROR,
-                    "setterの実行に失敗しました", e);
+            throw new SystemException(UNEXPECTED_ERROR, "setterの実行に失敗しました", e);
         }
     }
 
@@ -137,19 +136,19 @@ public class DataBaseCommonAspect {
             for (Object entity : list) {
                 if (isEntity(entity)) {
                     entityCrypter.decrypt(entity);
-                    LOG.infoBean(entity);
+                    LOG.debugBean(entity);
                 }
             }
         } else {
             if (isEntity(o)) {
                 entityCrypter.decrypt(o);
-                LOG.infoBean(o);
+                LOG.debugBean(o);
             } else if (o instanceof Optional<?>) {
                 if (((Optional<Object>) o).isPresent()
                         && isEntity(((Optional<Object>) o).get())) {
                     Object object = ((Optional<Object>) o).get();
                     entityCrypter.decrypt(object);
-                    LOG.infoBean(object);
+                    LOG.debugBean(object);
                 }
             }
         }
@@ -164,7 +163,7 @@ public class DataBaseCommonAspect {
      */
     @Before("@annotation(jp.co.ha.common.db.annotation.Delete)")
     public void delete(JoinPoint jp) {
-        Stream.of(jp.getArgs()).filter(e -> isEntity(e)).forEach(e -> LOG.infoBean(e));
+        Stream.of(jp.getArgs()).filter(e -> isEntity(e)).forEach(e -> LOG.debugBean(e));
     }
 
     /**

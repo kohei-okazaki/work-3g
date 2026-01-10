@@ -1,5 +1,10 @@
 package jp.co.ha.dashboard.login.controller;
 
+import static jp.co.ha.business.healthInfo.type.HealthInfoStatus.*;
+import static jp.co.ha.common.db.SelectOption.SortType.*;
+import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+import static jp.co.ha.dashboard.view.DashboardView.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,25 +25,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.ha.business.component.UserComponent;
+import jp.co.ha.business.component.annotation.NonAuth;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.db.crud.read.UserHealthGoalSelectService;
 import jp.co.ha.business.healthInfo.HealthInfoGraphModel;
 import jp.co.ha.business.healthInfo.service.HealthInfoGraphService;
-import jp.co.ha.business.healthInfo.type.HealthInfoStatus;
-import jp.co.ha.business.interceptor.annotation.NonAuth;
 import jp.co.ha.business.login.LoginCheck;
 import jp.co.ha.business.login.LoginCheckResult;
 import jp.co.ha.common.db.SelectOption;
 import jp.co.ha.common.db.SelectOption.SelectOptionBuilder;
-import jp.co.ha.common.db.SelectOption.SortType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.DateTimeUtil.DateFormatType;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.login.form.LoginForm;
-import jp.co.ha.dashboard.view.DashboardView;
 import jp.co.ha.db.entity.HealthInfo;
 import jp.co.ha.db.entity.User;
 import jp.co.ha.db.entity.UserHealthGoal;
@@ -55,10 +56,10 @@ public class LoginController implements BaseWebController {
     private static final String SESSION_KEY_SEQ_USER_ID = "seqUserId";
     /** 健康情報検索条件 */
     private static final SelectOption SELECT_OPTION = new SelectOptionBuilder()
-            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(10).build();
+            .orderBy("HEALTH_INFO_REG_DATE", DESC).limit(10).build();
     /** 健康情報検索条件：直近2件 */
     private static final SelectOption SELECT_OPTION＿LATEST = new SelectOptionBuilder()
-            .orderBy("HEALTH_INFO_REG_DATE", SortType.DESC).limit(2).build();
+            .orderBy("HEALTH_INFO_REG_DATE", DESC).limit(2).build();
 
     /** セッションComponent */
     @Autowired
@@ -104,7 +105,7 @@ public class LoginController implements BaseWebController {
 
         model.addAttribute("isLogout", request.getParameter("isLogout"));
 
-        return getView(DashboardView.LOGIN);
+        return getView(LOGIN);
     }
 
     /**
@@ -125,7 +126,7 @@ public class LoginController implements BaseWebController {
 
         redirectAttr.addAttribute("isLogout", true);
 
-        return redirectView(DashboardView.LOGIN);
+        return redirectView(LOGIN);
     }
 
     /**
@@ -150,7 +151,7 @@ public class LoginController implements BaseWebController {
 
         if (result.hasErrors()) {
             // validationエラーの場合
-            return getView(DashboardView.LOGIN);
+            return getView(LOGIN);
         }
 
         // ユーザ情報を検索
@@ -162,7 +163,7 @@ public class LoginController implements BaseWebController {
                     checkResult.getErrorCode().getOuterErrorCode(), null,
                     Locale.getDefault());
             model.addAttribute("errorMessage", errorMessage);
-            return getView(DashboardView.LOGIN);
+            return getView(LOGIN);
         }
 
         Long seqUserId = user.get().getSeqUserId();
@@ -187,7 +188,7 @@ public class LoginController implements BaseWebController {
         // 健康情報通知設定
         setHealthInfoRegistNotice(model, seqUserId);
 
-        return getView(model, DashboardView.TOP);
+        return getView(model, TOP);
 
     }
 
@@ -208,7 +209,7 @@ public class LoginController implements BaseWebController {
         Optional<Long> nullableSeqUserId = sessionComponent
                 .getValue(request.getSession(), SESSION_KEY_SEQ_USER_ID, Long.class);
         if (!nullableSeqUserId.isPresent()) {
-            return getView(DashboardView.LOGIN);
+            return getView(LOGIN);
         }
         Long seqUserId = nullableSeqUserId.get();
 
@@ -228,7 +229,7 @@ public class LoginController implements BaseWebController {
         // 健康情報通知設定
         setHealthInfoRegistNotice(model, seqUserId);
 
-        return getView(model, DashboardView.TOP);
+        return getView(model, TOP);
     }
 
     /**
@@ -306,17 +307,17 @@ public class LoginController implements BaseWebController {
                 // latest < previous：減少
                 diff = previousWeight.subtract(latestWeight);
                 model.addAttribute("diff", diff.stripTrailingZeros().toPlainString());
-                model.addAttribute("status", HealthInfoStatus.DOWN.getValue());
+                model.addAttribute("status", DOWN.getValue());
                 break;
             case 1:
                 // latest > previous：増加
                 diff = latestWeight.subtract(previousWeight);
                 model.addAttribute("diff", diff.stripTrailingZeros().toPlainString());
-                model.addAttribute("status", HealthInfoStatus.INCREASE.getValue());
+                model.addAttribute("status", INCREASE.getValue());
                 break;
             default:
                 model.addAttribute("diff", 0);
-                model.addAttribute("status", HealthInfoStatus.EVEN.getValue());
+                model.addAttribute("status", EVEN.getValue());
                 break;
             }
         }
@@ -384,7 +385,7 @@ public class LoginController implements BaseWebController {
                             .compareTo(o2.getSeqHealthInfoId()))
                     .forEach(e -> {
                         graphModel.addHealthInfoRegDate(e.getHealthInfoRegDate(),
-                                DateFormatType.YYYYMMDDHHMMSS);
+                                YYYYMMDDHHMMSS);
                         graphModel.addWeight(e.getWeight());
                         graphModel.addBmi(e.getBmi());
                         graphModel.addStandardWeight(e.getStandardWeight());

@@ -1,5 +1,9 @@
 package jp.co.ha.common.util;
 
+import static java.time.temporal.ChronoUnit.*;
+import static java.util.Locale.*;
+import static jp.co.ha.common.util.DateTimeUtil.ZoneIdType.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -14,7 +18,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -43,7 +46,7 @@ public class DateTimeUtil {
      * @return システム日付
      */
     public static LocalDateTime getSysDate() {
-        return getSysDateByZoneId(ZoneIdType.TOKYO);
+        return getSysDateByZoneId(TOKYO);
     }
 
     /**
@@ -268,7 +271,7 @@ public class DateTimeUtil {
      * @see #diffLocalTimeByChronoUnit(LocalTime, LocalTime, ChronoUnit)
      */
     public static long diffLocalTimeByMinute(LocalTime begin, LocalTime end) {
-        return diffLocalTimeByChronoUnit(begin, end, ChronoUnit.MINUTES);
+        return diffLocalTimeByChronoUnit(begin, end, MINUTES);
     }
 
     /**
@@ -482,11 +485,9 @@ public class DateTimeUtil {
      *     フォーマット
      * @return 整形後文字列
      */
-    public static String toString(LocalDate localDate,
-            DateFormatType formatType) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-                .ofPattern(formatType.getValue(), Locale.JAPANESE);
-        return localDate.format(dateTimeFormatter);
+    public static String toString(LocalDate localDate, DateFormatType formatType) {
+        return localDate.format(DateTimeFormatter
+                .ofPattern(formatType.getValue(), JAPANESE));
     }
 
     /**
@@ -500,9 +501,8 @@ public class DateTimeUtil {
      */
     public static String toString(LocalDateTime localDateTime,
             DateFormatType formatType) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(
-                formatType.getValue(), Locale.JAPANESE);
-        return localDateTime.format(dateTimeFormatter);
+        return localDateTime
+                .format(DateTimeFormatter.ofPattern(formatType.getValue(), JAPANESE));
     }
 
     /**
@@ -516,7 +516,7 @@ public class DateTimeUtil {
      */
     public static String toString(LocalTime localTime, DateFormatType formatType) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-                .ofPattern(formatType.getValue(), Locale.JAPANESE);
+                .ofPattern(formatType.getValue(), JAPANESE);
         return localTime.format(dateTimeFormatter);
     }
 
@@ -591,7 +591,7 @@ public class DateTimeUtil {
         }
         DateTimeFormatter dtf = DateTimeFormatter
                 .ofPattern(formatType.getValue())
-                .withLocale(Locale.JAPANESE)
+                .withLocale(JAPANESE)
                 .withResolverStyle(ResolverStyle.STRICT);
         return LocalDateTime.parse(strDate, dtf);
     }
@@ -611,7 +611,7 @@ public class DateTimeUtil {
         }
         DateTimeFormatter dtf = DateTimeFormatter
                 .ofPattern(formatType.getValue())
-                .withLocale(Locale.JAPANESE)
+                .withLocale(JAPANESE)
                 .withResolverStyle(ResolverStyle.STRICT);
         return LocalDate.parse(strDate, dtf);
     }
@@ -739,7 +739,9 @@ public class DateTimeUtil {
         /** uuuu/MM/DD HH:mm:ss */
         YYYYMMDDHHMMSS_STRICT("uuuu/MM/dd HH:mm:ss"),
         /** uuuuMMDDHHmmss */
-        YYYYMMDDHHMMSS_NOSEP_STRICT("uuuuMMddHHmmss"),;
+        YYYYMMDDHHMMSS_NOSEP_STRICT("uuuuMMddHHmmss"),
+        /** YYYY/MM/DD HH:MI:SS.sss */
+        YYYYMMDDHHMISSsss("yyyy/MM/dd HH:mm:ss.SSS");
 
         /** 名前 */
         private String value;

@@ -7,18 +7,19 @@ front:
   note:
     page: 10
   account:
-    page: 30
+    page: 10
   api:
-    page: 30
+    page: 10
   healthinfo:
-    page: 30
+    page: 10
   inquiry:
-    page: 20
+    page: 10
+  job:
+    page: 10
 spring:
   # 設定ファイル読込
   config:
     import:
-      - "classpath:/local/crypt.properties"
       - "classpath:/local/jdbc.properties"
       - "classpath:/local/system.properties"
       - "classpath:/local/aws.properties"
