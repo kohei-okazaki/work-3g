@@ -46,4 +46,5 @@ public interface CustomJobMapper {
      * @return Batch起動履歴リスト
      */
     List<CustomJobData> selectByCreateTime(LocalDateTime from, LocalDateTime to);
+
 }

@@ -26,9 +26,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
-import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.aws.AwsS3Component;
 import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
 import jp.co.ha.common.log.Logger;
@@ -61,8 +61,9 @@ public class MonthlyHealthInfoSummaryWriter
             "healthInfoRegDate", "seqBmiRangeMtId", "updateDate",
             "regDate"
     };
-    /** 健康情報設定ファイル */
-    private HealthInfoProperties prop;
+
+    /** バッチプロパティファイル */
+    private BatchProperties prop;
     /** AWS-S3 Component */
     private AwsS3Component s3;
     /** Slack Component */
@@ -87,7 +88,7 @@ public class MonthlyHealthInfoSummaryWriter
      *     処理対象年月
      */
     public MonthlyHealthInfoSummaryWriter(
-            HealthInfoProperties prop,
+            BatchProperties prop,
             AwsS3Component s3,
             SlackApiComponent slack,
             @Value("#{jobParameters[m]}") String targetDate) {
@@ -109,7 +110,7 @@ public class MonthlyHealthInfoSummaryWriter
     public void open(ExecutionContext executionContext) throws ItemStreamException {
 
         try {
-            String baseDir = prop.getMonthlySummaryBatchFilePath();
+            String baseDir = prop.getMonthlyHealthInfoSummary().getTempDirPath();
             Files.createDirectories(Paths.get(baseDir));
 
             targetPath = Paths.get(baseDir, targetDate + CSV);
@@ -173,11 +174,12 @@ public class MonthlyHealthInfoSummaryWriter
      */
     private void init() {
 
+        // 対象年月(YYYYMM)
         targetDate = isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMM_NOSEP)
                 : targetDate;
 
-        setName("monthlyHealthInfoSummaryWriter");
+        setName(this.getClass().getSimpleName());
         setAppendAllowed(false);
         setShouldDeleteIfExists(true);
         setSaveState(true);
@@ -191,8 +193,7 @@ public class MonthlyHealthInfoSummaryWriter
 
         setLineAggregator(aggregator);
 
-        setHeaderCallback(
-                writer -> writer.write(String.join(COMMA, COLUMN_NAME_ARRAY)));
+        setHeaderCallback(writer -> writer.write(String.join(COMMA, COLUMN_NAME_ARRAY)));
     }
 
 }

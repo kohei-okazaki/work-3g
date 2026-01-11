@@ -13,8 +13,6 @@ public class HealthInfoProperties {
 
     /** 照会ファイル格納パス */
     private String referenceFilePath;
-    /** 健康情報登録バッチファイルパス */
-    private String registBatchFilePath;
     /** NodeAPIの基底URL */
     private String healthinfoNodeApiUrl;
     /** 健康情報ダッシュボードの基底URL */
@@ -29,8 +27,6 @@ public class HealthInfoProperties {
     private String trackApiUrl;
     /** 健康情報蓄積API DB移行フラグ */
     private boolean trackApiDbMigrateFlg;
-    /** 月次健康情報集計バッチCSV格納パス */
-    private String monthlySummaryBatchFilePath;
 
     /**
      * 照会ファイル格納パスを返す
@@ -49,25 +45,6 @@ public class HealthInfoProperties {
      */
     public void setReferenceFilePath(String referenceFilePath) {
         this.referenceFilePath = referenceFilePath;
-    }
-
-    /**
-     * 健康情報登録バッチファイルパスを返す
-     *
-     * @return registBatchFilePath
-     */
-    public String getRegistBatchFilePath() {
-        return registBatchFilePath;
-    }
-
-    /**
-     * 健康情報登録バッチファイルパスを設定する
-     *
-     * @param registBatchFilePath
-     *     健康情報登録バッチファイルパス
-     */
-    public void setRegistBatchFilePath(String registBatchFilePath) {
-        this.registBatchFilePath = registBatchFilePath;
     }
 
     /**
@@ -221,25 +198,6 @@ public class HealthInfoProperties {
      */
     public void setTrackApiDbMigrateFlg(String trackApiDbMigrateFlg) {
         this.trackApiDbMigrateFlg = Boolean.valueOf(trackApiDbMigrateFlg);
-    }
-
-    /**
-     * 月次健康情報集計バッチCSV格納パスを返す
-     *
-     * @return monthlySummaryBatchFilePath
-     */
-    public String getMonthlySummaryBatchFilePath() {
-        return monthlySummaryBatchFilePath;
-    }
-
-    /**
-     * 月次健康情報集計バッチCSV格納パスを設定する
-     *
-     * @param monthlySummaryBatchFilePath
-     *     月次健康情報集計バッチCSV格納パス
-     */
-    public void setMonthlySummaryBatchFilePath(String monthlySummaryBatchFilePath) {
-        this.monthlySummaryBatchFilePath = monthlySummaryBatchFilePath;
     }
 
 }

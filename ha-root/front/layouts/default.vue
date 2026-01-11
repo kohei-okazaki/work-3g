@@ -87,6 +87,11 @@ export default {
           to: "/apidata",
         },
         {
+          icon: "mdi-bash",
+          title: "バッチ実行ログ一覧",
+          to: "/job",
+        },
+        {
           icon: "mdi-pill",
           title: "健康情報一覧",
           to: "/healthinfo",
