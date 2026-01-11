@@ -25,13 +25,6 @@ public class InquiryManagementUpdateServiceImpl
     @Update
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(InquiryManagement entity) {
-        mapper.updateByPrimaryKey(entity);
-    }
-
-    @Update
-    @Override
-    @Transactional(rollbackFor = Exception.class)
     public void updateStatusById(InquiryManagement entity) {
         mapper.updateByPrimaryKeySelective(entity);
     }

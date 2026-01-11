@@ -27,6 +27,7 @@ public class HealthCheckApiControllerTest {
      * test
      * 
      * @throws Exception
+     *     Mockの失敗時に発生
      */
     @Test
     public void testHealthCheckApi() throws Exception {
