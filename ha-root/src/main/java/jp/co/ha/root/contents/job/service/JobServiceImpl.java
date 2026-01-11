@@ -20,12 +20,12 @@ import jp.co.ha.root.contents.job.response.JobListApiResponse.Job;
 import jp.co.ha.root.contents.job.response.JobListApiResponse.JobParameter;
 
 /**
- * Job履歴情報一覧取得APIサービス実装クラス
+ * Jobサービス実装クラス
  * 
  * @version 1.0.0
  */
 @Service
-public class JobListServiceImpl implements JobListService {
+public class JobServiceImpl implements JobService {
 
     /** Batch起動履歴検索サービス */
     @Autowired

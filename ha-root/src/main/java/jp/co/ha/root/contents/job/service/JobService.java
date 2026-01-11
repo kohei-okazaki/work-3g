@@ -8,11 +8,11 @@ import jp.co.ha.common.util.PagingView;
 import jp.co.ha.root.contents.job.response.JobListApiResponse.Job;
 
 /**
- * Job履歴情報一覧取得APIサービスインターフェース
+ * JobAPIサービスインターフェース
  * 
  * @version 1.0.0
  */
-public interface JobListService {
+public interface JobService {
 
     /**
      * Job履歴情報リストを返す

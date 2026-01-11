@@ -147,7 +147,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         return new CsvConfigBuilder(fileName, path)
                 .hasHeader(entity.getHeaderFlag())
                 .hasFooter(entity.getFooterFlag())
-                .csvFileChar(CsvFileChar.DOBBLE_QUOTE)
+                .csvFileChar(CsvFileChar.DOUBLE_QUOTE)
                 .hasEnclosure(entity.getEnclosureCharFlag())
                 .useMask(entity.getMaskFlag())
                 .build();

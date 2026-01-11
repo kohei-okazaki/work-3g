@@ -10,14 +10,6 @@ import jp.co.ha.db.entity.InquiryManagement;
 public interface InquiryManagementUpdateService {
 
     /**
-     * 問い合わせ管理情報を更新する
-     *
-     * @param entity
-     *     問い合わせ管理情報
-     */
-    void update(InquiryManagement entity);
-
-    /**
      * 問い合わせ管理情報のステータスを更新する
      * 
      * @param entity
