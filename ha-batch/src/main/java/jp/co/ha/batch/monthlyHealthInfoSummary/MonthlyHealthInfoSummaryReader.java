@@ -59,15 +59,12 @@ public class MonthlyHealthInfoSummaryReader extends MyBatisPagingItemReader<Heal
                 DateTimeUtil.getLastDayOfMonth(from), 23, 59, 59);
         LOG.debug("from=" + from + ", to=" + to);
 
+        // SqlSessionFactory設定
         setSqlSessionFactory(sqlSessionFactory);
-
-        setQueryId(
-                PagingHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate");
-
-        Map<String, Object> params = Map.of(
-                "from", from, "to", to);
-
-        setParameterValues(params);
+        // 検索SQL指定
+        setQueryId(PagingHealthInfoMapper.class.getName() + ".selectByHealthInfoRegDate");
+        // 検索パラメータ指定
+        setParameterValues(Map.of("from", from, "to", to));
         // 1ページの取得件数
         setPageSize(batchProperties.getMonthlyHealthInfoSummary().getExecPerpageCount());
         // // 再実行用に状態保存（デフォルト true）

@@ -3,6 +3,7 @@ package jp.co.ha.batch.analysis;
 import static jp.co.ha.business.api.slack.SlackApiComponent.ContentType.*;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 import static jp.co.ha.common.util.FileUtil.FileExtension.*;
+import static jp.co.ha.common.util.StringUtil.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -185,7 +186,7 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
      */
     private void init() {
 
-        // 検索対象年月(YYYYMMDD)
+        // 対象年月(YYYYMMDD)
         targetDate = StringUtil.isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMMDD_NOSEP)
                 : targetDate;
@@ -199,13 +200,12 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
         extractor.setNames(getColumnArray());
 
         DelimitedLineAggregator<T> aggregator = new DelimitedLineAggregator<>();
-        aggregator.setDelimiter(StringUtil.COMMA);
+        aggregator.setDelimiter(COMMA);
         aggregator.setFieldExtractor(extractor);
 
         setLineAggregator(aggregator);
 
-        setHeaderCallback(
-                writer -> writer.write(String.join(StringUtil.COMMA, getColumnArray())));
+        setHeaderCallback(writer -> writer.write(String.join(COMMA, getColumnArray())));
     }
 
     /**
@@ -218,7 +218,7 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
      */
     private String getS3Key(File gzFile) {
 
-        return new StringJoiner(StringUtil.THRASH)
+        return new StringJoiner(THRASH)
                 .add(AwsS3Key.DAILY_ANALYSIS.getValue())
                 .add(targetDate)
                 .add(gzFile.getName())

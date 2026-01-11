@@ -47,7 +47,7 @@ public class CsvConfig {
         /** 囲い文字有無 */
         private boolean hasEnclosure = false;
         /** 囲い文字 */
-        private CsvFileChar csvFileChar = CsvFileChar.DOBBLE_QUOTE;
+        private CsvFileChar csvFileChar = CsvFileChar.DOUBLE_QUOTE;
         /** 文字コード */
         private Charset charset = Charset.UTF_8;
         /** フッタ有無 */

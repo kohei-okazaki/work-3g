@@ -80,8 +80,6 @@ public class BusinessConfig implements WebMvcConfigurer {
      * 
      * @param referenceFilePath
      *     照会ファイル格納パス
-     * @param registBatchFilePath
-     *     健康情報登録バッチファイルパス
      * @param healthinfoNodeApiUrl
      *     NodeAPIの基底URL
      * @param healthinfoNodeApiMigrateFlg
@@ -96,26 +94,21 @@ public class BusinessConfig implements WebMvcConfigurer {
      *     健康情報蓄積APIの基底URL
      * @param trackApiDbMigrateFlg
      *     健康情報蓄積API DB移行フラグ
-     * @param monthlySummaryBatchFilePath
-     *     月次健康情報集計バッチCSV格納パス
      * @return HealthInfoProperties
      */
     @Bean
     HealthInfoProperties healthInfoProperties(
             @Value("${reference.file.path}") String referenceFilePath,
-            @Value("${healthinfo.regist.batch.file.path}") String registBatchFilePath,
             @Value("${healthinfo.node.api.url}") String healthinfoNodeApiUrl,
             @Value("${healthinfo.node.api.migrate.flg}") boolean healthinfoNodeApiMigrateFlg,
             @Value("${healthinfo.dashboard.url}") String healthInfoDashboardUrl,
             @Value("${healthinfo.api.url}") String healthInfoApiUrl,
             @Value("${root.api.url}") String rootApiUrl,
             @Value("${healthinfo.track.api.url}") String trackApiUrl,
-            @Value("${healthinfo.track.api.db.migrate.flg}") boolean trackApiDbMigrateFlg,
-            @Value("${healthinfo.monthly.summary.batch.file.path}") String monthlySummaryBatchFilePath) {
+            @Value("${healthinfo.track.api.db.migrate.flg}") boolean trackApiDbMigrateFlg) {
 
         HealthInfoProperties props = new HealthInfoProperties();
         props.setReferenceFilePath(referenceFilePath);
-        props.setRegistBatchFilePath(registBatchFilePath);
         props.setHealthinfoNodeApiUrl(healthinfoNodeApiUrl);
         props.setHealthinfoNodeApiMigrateFlg(healthinfoNodeApiMigrateFlg);
         props.setHealthInfoDashboardUrl(healthInfoDashboardUrl);
@@ -123,7 +116,6 @@ public class BusinessConfig implements WebMvcConfigurer {
         props.setRootApiUrl(rootApiUrl);
         props.setTrackApiUrl(trackApiUrl);
         props.setTrackApiDbMigrateFlg(trackApiDbMigrateFlg);
-        props.setMonthlySummaryBatchFilePath(monthlySummaryBatchFilePath);
 
         return props;
     }

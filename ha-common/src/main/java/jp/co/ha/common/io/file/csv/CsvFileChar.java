@@ -12,7 +12,7 @@ public enum CsvFileChar implements BaseEnum {
     /** シングルクォート */
     SINGLE_QUOTE("\'"),
     /** ダブルクォート */
-    DOBBLE_QUOTE("\"");
+    DOUBLE_QUOTE("\"");
 
     /** 値 */
     private String value;

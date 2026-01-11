@@ -61,10 +61,8 @@ public abstract class BaseDailyAnalysisMySQLReader<T> extends MyBatisPagingItemR
             LocalDateTime to = LocalDateTime.of(year, month, day, 23, 59, 59);
             LOG.debug("from=" + from + ", to=" + to);
 
-            Map<String, Object> params = Map.of(
-                    "from", from, "to", to);
-
-            setParameterValues(params);
+            // 検索パラメータ指定
+            setParameterValues(Map.of("from", from, "to", to));
         }
 
         // SqlSessionFactory設定
@@ -75,7 +73,6 @@ public abstract class BaseDailyAnalysisMySQLReader<T> extends MyBatisPagingItemR
         setPageSize(getPageSize(batchProperties));
         // // 再実行用に状態保存（デフォルト true）
         setSaveState(true);
-
     }
 
     /**

@@ -11,12 +11,6 @@ RUN cd ha-pom && mvn -Dmaven.test.skip=true -pl ../ha-batch -am package
 
 # create log dir
 RUN mkdir -p /var/app/log
-# reference.file.path
-RUN mkdir -p /home/admin/data/healthInfoReference
-# healthinfo.regist.batch.file.path
-RUN mkdir -p /home/admin/data/healthInfoRegist
-# healthinfo.monthly.summary.batch.file.path
-RUN mkdir -p /home/admin/data/monthly
 
 # jar を作って固定名へ（compose run で java -jar もできるように）
 RUN mvn -f ha-pom/pom.xml -Dmaven.test.skip=true -pl :batch -am package && cp /work/ha-batch/target/batch-*.jar /work/ha-batch-1.0.0.jar

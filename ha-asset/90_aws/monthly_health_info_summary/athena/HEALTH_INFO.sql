@@ -18,3 +18,7 @@ WITH SERDEPROPERTIES (
 )
 STORED AS TEXTFILE
 LOCATION 's3://healthinfo-app-local/monthly/healthinfo/';
+
+-- Athenaで検索がうまくできない場合、パーティションが聞いていない可能性があるため以下コマンドを実施
+MSCK REPAIR TABLE health_info;
+SHOW PARTITIONS health_info;
