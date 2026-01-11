@@ -41,7 +41,7 @@
     SELECT COUNT(*) FROM BATCH_JOB_EXECUTION
   </select>
 
-  <select id="selectByCreateTime" resultMap="BaseResultMap">
+  <select id="selectByCreateTime" parameterType="map" resultMap="BaseResultMap">
     SELECT
       <!-- BATCH_JOB_EXECUTION -->
         BJE.JOB_INSTANCE_ID

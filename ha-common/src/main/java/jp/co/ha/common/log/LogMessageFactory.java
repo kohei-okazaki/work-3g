@@ -1,6 +1,8 @@
 package jp.co.ha.common.log;
 
+import static jp.co.ha.common.util.BeanUtil.AccessorType.*;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
+import static jp.co.ha.common.util.StringUtil.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -12,9 +14,7 @@ import java.util.StringJoiner;
 import jp.co.ha.common.log.annotation.Ignore;
 import jp.co.ha.common.log.annotation.LogParam;
 import jp.co.ha.common.util.BeanUtil;
-import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.DateTimeUtil;
-import jp.co.ha.common.util.StringUtil;
 
 /**
  * ログメッセージ作成クラス
@@ -45,7 +45,7 @@ public class LogMessageFactory {
             return "<NULL>";
         }
 
-        StringJoiner body = new StringJoiner(StringUtil.COMMA);
+        StringJoiner body = new StringJoiner(COMMA);
         Class<?> clazz = bean.getClass();
 
         for (Field f : BeanUtil.getFieldList(clazz)) {
@@ -55,9 +55,9 @@ public class LogMessageFactory {
             }
             String name = getLogParamName(f);
             if (MaskExecutor.isMask(f)) {
-                body.add(name + StringUtil.EQUAL + MaskExecutor.getMask(f));
+                body.add(name + EQUAL + MaskExecutor.getMask(f));
             } else {
-                body.add(name + StringUtil.EQUAL + editValue(getValue(bean, name)));
+                body.add(name + EQUAL + editValue(getValue(bean, name)));
             }
         }
         return body.toString();
@@ -101,8 +101,7 @@ public class LogMessageFactory {
     private static Object getValue(Object bean, String fieldName) {
         Object value = null;
         try {
-            Method getter = BeanUtil.getAccessor(fieldName, bean.getClass(),
-                    AccessorType.GETTER);
+            Method getter = BeanUtil.getAccessor(fieldName, bean.getClass(), GETTER);
             value = getter.invoke(bean);
         } catch (IllegalAccessException e) {
             LOG.error("フィールドに対して不正アクセスです フィールド：" + fieldName, e);

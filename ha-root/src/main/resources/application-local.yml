@@ -9,13 +9,13 @@ front:
   account:
     page: 10
   api:
-    page: 10
+    page: 30
   healthinfo:
-    page: 10
+    page: 30
   inquiry:
     page: 10
   job:
-    page: 10
+    page: 30
 spring:
   # 設定ファイル読込
   config:

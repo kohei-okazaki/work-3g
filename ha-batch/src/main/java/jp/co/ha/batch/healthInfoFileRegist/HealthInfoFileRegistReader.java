@@ -12,12 +12,12 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader;
 import org.springframework.stereotype.Component;
 
+import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.batch.healthInfoFileRegist.HealthInfoFileRegistDto.HealthInfoRequestData;
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.component.ApiLogComponent;
 import jp.co.ha.business.exception.BusinessException;
-import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.io.file.json.reader.JsonReader;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -39,8 +39,8 @@ public class HealthInfoFileRegistReader
     /** JSON読み取りクラス */
     private static final JsonReader JSON_READER = new JsonReader();
 
-    /** 健康情報設定ファイル */
-    private HealthInfoProperties prop;
+    /** バッチのプロパティファイル */
+    private BatchProperties prop;
     /** API通信ログComponent */
     private ApiLogComponent component;
     /** 健康情報登録APIリクエストキュー */
@@ -60,10 +60,10 @@ public class HealthInfoFileRegistReader
      * @param jsonReader
      *     JSON読み取りクラス
      */
-    public HealthInfoFileRegistReader(HealthInfoProperties prop,
+    public HealthInfoFileRegistReader(BatchProperties prop,
             ApiLogComponent component) {
 
-        setName("healthInfoFileRegistReader");
+        setName(this.getClass().getName());
 
         this.prop = prop;
         this.component = component;
@@ -74,11 +74,11 @@ public class HealthInfoFileRegistReader
 
         LOG.debug("called doOpen");
 
-        if (!FileUtil.isExists(prop.getRegistBatchFilePath())) {
-            throw new BusinessException(RUNTIME_ERROR,
-                    "ディレクトリが存在しません: " + prop.getRegistBatchFilePath());
+        String path = prop.getHealthInfoFileRegist().getFilePath();
+        if (!FileUtil.isExists(path)) {
+            throw new BusinessException(RUNTIME_ERROR, "ディレクトリが存在しません: " + path);
         }
-        this.fileList = FileUtil.getFileList(prop.getRegistBatchFilePath());
+        this.fileList = FileUtil.getFileList(path);
         this.fileIndex = 0;
         this.buffer.clear();
     }

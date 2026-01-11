@@ -16,6 +16,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "ha-batch")
 public class BatchProperties {
 
+    /** 健康情報一括登録バッチ */
+    private HealthInfoFileRegist healthInfoFileRegist;
+
     /** 健康情報連携バッチプロパティクラス */
     private HealthInfoMigrate healthInfoMigrate;
 
@@ -36,6 +39,25 @@ public class BatchProperties {
 
     /** 日次バッチ実行ログデータ分析連携バッチプロパティクラス */
     private DailyBatchLogAnalysis dailyBatchLogAnalysis;
+
+    /**
+     * 健康情報一括登録バッチを返す
+     * 
+     * @return healthInfoFileRegist
+     */
+    public HealthInfoFileRegist getHealthInfoFileRegist() {
+        return healthInfoFileRegist;
+    }
+
+    /**
+     * 健康情報一括登録バッチを設定する
+     * 
+     * @param healthInfoFileRegist
+     *     健康情報一括登録バッチ
+     */
+    public void setHealthInfoFileRegist(HealthInfoFileRegist healthInfoFileRegist) {
+        this.healthInfoFileRegist = healthInfoFileRegist;
+    }
 
     /**
      * 健康情報連携バッチプロパティクラスを返す
@@ -173,6 +195,37 @@ public class BatchProperties {
     }
 
     /**
+     * 健康情報一括登録バッチプロパティクラス
+     * 
+     * @version 1.0.0
+     */
+    public static class HealthInfoFileRegist {
+
+        /** 登録ファイルパス */
+        private String filePath;
+
+        /**
+         * 登録ファイルパスを返す
+         * 
+         * @return filePath
+         */
+        public String getFilePath() {
+            return filePath;
+        }
+
+        /**
+         * 登録ファイルパスを設定する
+         * 
+         * @param filePath
+         *     登録ファイルパス
+         */
+        public void setFilePath(String filePath) {
+            this.filePath = filePath;
+        }
+
+    }
+
+    /**
      * 健康情報連携バッチプロパティクラス
      * 
      * @version 1.0.0
@@ -212,6 +265,9 @@ public class BatchProperties {
         /** 実行カウント */
         private int execPerpageCount;
 
+        /** 一時ディレクトリパス */
+        private String tempDirPath;
+
         /**
          * 実行カウントを返す
          * 
@@ -230,6 +286,26 @@ public class BatchProperties {
         public void setExecPerpageCount(int execPerpageCount) {
             this.execPerpageCount = execPerpageCount;
         }
+
+        /**
+         * 一時ディレクトリパスを返す
+         * 
+         * @return tempDirPath
+         */
+        public String getTempDirPath() {
+            return tempDirPath;
+        }
+
+        /**
+         * 一時ディレクトリパスを設定する
+         * 
+         * @param tempDirPath
+         *     一時ディレクトリパス
+         */
+        public void setTempDirPath(String tempDirPath) {
+            this.tempDirPath = tempDirPath;
+        }
+
     }
 
     /**

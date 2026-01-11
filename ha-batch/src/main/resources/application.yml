@@ -27,26 +27,29 @@ spring:
     charset: UTF-8
     cache: false
 ha-batch:
+  health-info-file-regist:
+    file-path: /home/admin/data/health_info_file_regist/
   health-info-migrate:
     exec-perpage-count: 100
   monthly-health-info-summary:
     exec-perpage-count: 1000
+    temp-dir-path: /home/admin/data/monthly/health_info/
   data-purge-list:
     - table-name: user
       expired: 10
   daily-health-info-analysis:
     exec-perpage-count: 1000
-    temp-dir-path: /home/admin/daily/healthinfo/
-    file-name: healthinfo
+    temp-dir-path: /home/admin/data/daily/health_info/
+    file-name: health_info
   daily-user-analysis:
     exec-perpage-count: 1000
-    temp-dir-path: /home/admin/daily/user/
+    temp-dir-path: /home/admin/data/daily/user/
     file-name: user
   daily-api-log-analysis:
     exec-perpage-count: 1000
-    temp-dir-path: /home/admin/daily/api_log/
+    temp-dir-path: /home/admin/data/daily/api_log/
     file-name: api_log
   daily-batch-log-analysis:
     exec-perpage-count: 1000
-    temp-dir-path: /home/admin/daily/batch_log/
+    temp-dir-path: /home/admin/data/daily/batch_log/
     file-name: batch_log

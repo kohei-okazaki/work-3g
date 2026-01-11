@@ -12,7 +12,7 @@ import jp.co.ha.common.validator.annotation.Decimal;
 import jp.co.ha.root.base.BaseRootApiController;
 import jp.co.ha.root.contents.job.request.JobListApiRequest;
 import jp.co.ha.root.contents.job.response.JobListApiResponse;
-import jp.co.ha.root.contents.job.service.JobListService;
+import jp.co.ha.root.contents.job.service.JobService;
 
 /**
  * Job履歴情報一覧取得APIコントローラ
@@ -23,9 +23,9 @@ import jp.co.ha.root.contents.job.service.JobListService;
 public class JobListApiController
         extends BaseRootApiController<JobListApiRequest, JobListApiResponse> {
 
-    /** Job履歴情報一覧取得サービス */
+    /** Jobサービス */
     @Autowired
-    private JobListService jobListService;
+    private JobService jobService;
 
     /**
      * 一覧取得
@@ -45,8 +45,8 @@ public class JobListApiController
                 applicationProperties.getJobPage());
 
         JobListApiResponse response = getSuccessResponse();
-        response.setJobList(jobListService.getJobList(pageable));
-        response.setPaging(jobListService.getPagingView(pageable));
+        response.setJobList(jobService.getJobList(pageable));
+        response.setPaging(jobService.getPagingView(pageable));
 
         return ResponseEntity.ok(response);
     }
