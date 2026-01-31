@@ -34,9 +34,8 @@ Python3系
 
 ## ツール利用方法
 
-### DDL自動生成
+### 自動生成
 | # | 手順 |
 | --- | --- |
 | 1 | コマンドプロンプト → ''' cd C:\app\git\work-3g\ha-tools\db && .venv\Scripts\activate.bat ''' |
-| 2 | コマンドプロンプト → ''' python ddl_gen.py ''' |
-
+| 2 | コマンドプロンプト → ''' python main.py ''' |
