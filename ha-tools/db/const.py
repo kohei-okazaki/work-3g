@@ -6,17 +6,25 @@ DB定義関連の定数定義モジュール
 EXCEL_PATH = r"C:\app\git\work-3g\ha-asset\02_db\DB.xlsx"
 
 # DDL出力パス
-DDL_OUTPUT_PATH = r"C:\app\git\work-3g\ha-asset\02_db\ddl\test"
+DDL_OUTPUT_PATH = r"C:\app\git\work-3g\ha-asset\02_db\ddl"
 # DDLテンプレートファイル名
 DDL_TEMPLATE_FILE = "ddl_template.sql.j2"
 # DDLシート名
 DDL_SHEET_NAME = "TABLE_LIST"
 
 # Define SQL出力パス
-DEF_OUTPUT_PATH = r"C:\app\git\work-3g\ha-asset\02_db\others\test"
+DEF_OUTPUT_PATH = r"C:\app\git\work-3g\ha-asset\02_db\others"
+# Define SQLファイル名
+DEF_FILE_NAME = "TABLE_DEFINE.sql"
 # Define SQLテンプレートファイル名
 DEF_TEMPLATE_FILE = "define_template.sql.j2"
 
+# Drop SQL出力パス
+DROP_OUTPUT_PATH = r"C:\app\git\work-3g\ha-asset\02_db\others"
+# Drop SQLファイル名
+DROP_FILE_NAME = "DROP.sql"
+# Drop SQLテンプレートファイル名
+DROP_TEMPLATE_FILE = "drop_template.sql.j2"
 
 # テーブル名（論理）定義位置
 LOGICAL_TABLE_NAME_POS = 0

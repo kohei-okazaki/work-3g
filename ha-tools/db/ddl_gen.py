@@ -23,11 +23,10 @@ def read_tables() -> dict[str, list[dict]]:
 
     # Excelファイルから行データリストを取得
     rows: list = util.read_rows(
-        excel_path=const.EXCEL_PATH, sheet_name=const.DDL_SHEET_NAME
+        excel_path=const.EXCEL_PATH,
+        sheet_name=const.DDL_SHEET_NAME,
+        ignore_header=True,
     )
-
-    # ヘッダ行を削除
-    rows.remove(rows[0])
 
     # テーブル名->カラム情報リストのdict
     tables: dict[str, list[dict]] = {}

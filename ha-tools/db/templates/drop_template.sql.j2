@@ -1,0 +1,3 @@
+{% for table_key, table_value in tables.items() %}-- {{ table_value }}
+DROP TABLE IF EXISTS {{ table_key }};
+{% endfor %}

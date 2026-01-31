@@ -11,23 +11,20 @@ def execute():
     """
     Define SQL自動生成のメイン関数
     """
-    tables: dict[str, list[dict]] = read_tables()
+    tables: dict[str, str] = read_tables()
     generate(tables)
 
 
-def read_tables() -> dict[str, list[dict]]:
+def read_tables() -> dict[str, str]:
     """
-    ExcelファイルからDefine SQLリストを読み込む関数
-    @return: Define SQLリスト
+    Excelファイルからテーブル一覧を読み込む関数
+    @return: (テーブル名（物理）, テーブル名（論理）)の辞書
     """
 
     # Excelファイルから行データリストを取得(テーブル定義のみ取得するのでDDLとシート名は同じ)
     rows: list = util.read_rows(
-        excel_path=const.EXCEL_PATH, sheet_name=const.DDL_SHEET_NAME
+        excel_path=const.EXCEL_PATH, sheet_name=const.DDL_SHEET_NAME, ignore_header=True
     )
-
-    # ヘッダ行を削除
-    rows.remove(rows[0])
 
     # テーブル名（物理）->テーブル名（論理）のdict
     tables: dict[str, str] = {}
@@ -61,10 +58,7 @@ def generate(tables: dict[str, str]):
     output_path = Path(const.DEF_OUTPUT_PATH)
     output_path.mkdir(exist_ok=True)
 
-    print(tables)
-    
     # Define SQL生成
     def_sql = template.render(tables=tables)
 
-    def_file_name = "TABLE_DEFINE.sql"
-    (output_path / def_file_name).write_text(def_sql, encoding="utf-8")
+    (output_path / const.DEF_FILE_NAME).write_text(def_sql, encoding="utf-8")

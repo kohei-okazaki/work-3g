@@ -9,11 +9,13 @@ from openpyxl import load_workbook
 def read_rows(
     excel_path: str,
     sheet_name: str,
+    ignore_header: bool = False,
 ) -> list[str]:
     """
     Excelファイルから行情報を読み込む関数
     @param excel_path: Excelファイルパス
     @param sheet_name: Excelシート名
+    @param ignore_header: ヘッダ行を無視するかどうか。無視する場合、2行目から読み込む。
     @return: 行情報のリスト
     """
 
@@ -26,8 +28,11 @@ def read_rows(
     # 対象シートを取得
     worksheet = workbook[sheet_name]
 
+    # 最小行番号設定
+    min_row: int = 2 if ignore_header else 1
+
     rows: list = []
-    for row in worksheet.iter_rows(min_row=1, values_only=True):
+    for row in worksheet.iter_rows(min_row=min_row, values_only=True):
         if row is None or all(cell is None for cell in row):
             # 空行はスキップ
             continue
