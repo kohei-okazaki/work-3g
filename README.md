@@ -63,6 +63,10 @@
 
 * ### ha-tool  
 指定のフォーマットのExcelからDDL/DMLを自動生成するツールプロジェクト  
+ツール関連はha-toolsへ移行。  
+
+* ### ha-tools  
+指定のフォーマットのExcelからDDL/DMLを自動生成するツールプロジェクト  
 
 * ### ha-pom  
 以下のプロジェクトで共通的に使う外部ライブラリを定義したpomプロジェクト。
@@ -87,9 +91,6 @@
  - Java Script
  - Node.js
  -> API Gateway + Lambda化したためNode.jsのサーバ自体は廃止。  
-
-* ### ha-selenium  
-seleniumを利用した画面の自動テスト処理を定義したプロジェクト  
 
 * ### ha-build  
 Docker環境でのBuild用のスクリプトを定義。   
