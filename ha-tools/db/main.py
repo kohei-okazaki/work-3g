@@ -1,5 +1,14 @@
 import ddl_gen, dml_gen, define_gen, drop_gen
 
+"""
+自動生成処理のメインモジュール
+ - DDL生成
+ - DML生成
+ - Define SQL生成
+ - Drop SQL生成
+"""
+
+
 def execute():
     """
     メイン処理
@@ -16,6 +25,7 @@ def execute():
 
     # Drop SQL生成
     drop_gen.execute()
+
 
 if __name__ == "__main__":
     execute()

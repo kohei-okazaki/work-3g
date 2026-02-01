@@ -1,9 +1,43 @@
 from pathlib import Path
+from jinja2 import Environment, FileSystemLoader
 from openpyxl import load_workbook
 
 """
 自動生成共通モジュール
 """
+
+
+def get_template(template_file_name: str):
+    """
+    テンプレート環境を取得する関数
+    @param template_file_name: テンプレートファイル名
+    @return: Jinja2テンプレート環境
+    """
+
+    # Jinja2環境設定
+    env = Environment(loader=FileSystemLoader("templates"), autoescape=False)
+
+    # テンプレートファイルを取得
+    return env.get_template(template_file_name)
+
+
+def get_sheet_names(excel_path: str) -> list[str]:
+    """
+    Excelファイルからシート名リストを取得する関数
+    @param excel_path: Excelファイルパス
+    @return: シート名のリスト
+    """
+
+    # Excelファイル取得
+    workbook = load_workbook(filename=Path(excel_path), data_only=True, read_only=True)
+
+    # シート名リスト取得
+    sheet_names: list[str] = workbook.sheetnames
+
+    # Excelファイルを閉じる
+    workbook.close()
+
+    return sheet_names
 
 
 def read_rows(

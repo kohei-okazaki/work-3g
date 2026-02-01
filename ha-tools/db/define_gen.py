@@ -1,6 +1,5 @@
 from pathlib import Path
-from jinja2 import Environment, FileSystemLoader
-import const, util
+import const, utils
 
 """
 Define SQLを自動生成するモジュール
@@ -22,7 +21,7 @@ def read_tables() -> dict[str, str]:
     """
 
     # Excelファイルから行データリストを取得(テーブル定義のみ取得するのでDDLとシート名は同じ)
-    rows: list = util.read_rows(
+    rows: list = utils.read_rows(
         excel_path=const.EXCEL_PATH, sheet_name=const.DDL_SHEET_NAME, ignore_header=True
     )
 
@@ -48,11 +47,8 @@ def generate(tables: dict[str, str]):
     @param tables: (テーブル名（物理）, テーブル名（論理）)の辞書
     """
 
-    # Jinja2環境設定
-    env = Environment(loader=FileSystemLoader("templates"), autoescape=False)
-
     # テンプレートファイルを取得
-    template = env.get_template(const.DEF_TEMPLATE_FILE)
+    template = utils.get_template(const.DEF_TEMPLATE_FILE)
 
     # 出力先ディレクトリ作成
     output_path = Path(const.DEF_OUTPUT_PATH)

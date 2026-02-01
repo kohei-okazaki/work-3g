@@ -26,6 +26,11 @@ DROP_FILE_NAME = "DROP.sql"
 # Drop SQLテンプレートファイル名
 DROP_TEMPLATE_FILE = "drop_template.sql.j2"
 
+# DML出力パス
+DML_OUTPUT_PATH = r"C:\app\git\work-3g\ha-asset\02_db\dml"
+# DMLテンプレートファイル名
+DML_TEMPLATE_FILE = "dml_template.sql.j2"
+
 # テーブル名（論理）定義位置
 LOGICAL_TABLE_NAME_POS = 0
 # テーブル名（物理）定義位置

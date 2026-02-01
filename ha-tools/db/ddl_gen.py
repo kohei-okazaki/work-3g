@@ -1,6 +1,5 @@
 from pathlib import Path
-from jinja2 import Environment, FileSystemLoader
-import const, util
+import const, utils
 
 """
 DDLを自動生成するモジュール
@@ -22,7 +21,7 @@ def read_tables() -> dict[str, list[dict]]:
     """
 
     # Excelファイルから行データリストを取得
-    rows: list = util.read_rows(
+    rows: list = utils.read_rows(
         excel_path=const.EXCEL_PATH,
         sheet_name=const.DDL_SHEET_NAME,
         ignore_header=True,
@@ -107,9 +106,8 @@ def generate(tables: dict[str, list[dict]]):
     @param tables: (テーブル名, カラム情報リスト)の辞書
     """
 
-    env = Environment(loader=FileSystemLoader("templates"), autoescape=False)
-
-    ddl_template = env.get_template(const.DDL_TEMPLATE_FILE)
+    # テンプレートファイルを取得
+    ddl_template = utils.get_template(const.DDL_TEMPLATE_FILE)
 
     # 出力ファイルパスを作成
     output_file_path = Path(const.DDL_OUTPUT_PATH)
