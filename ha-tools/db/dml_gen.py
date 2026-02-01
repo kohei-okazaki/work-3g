@@ -13,7 +13,7 @@ def execute():
 
     for sheet_name in utils.get_sheet_names(excel_path=const.EXCEL_PATH):
         if sheet_name == const.DDL_SHEET_NAME or sheet_name == "TEMPLATE":
-            # テーブル定義シートはスキップ
+            # テーブル定義、テンプレートシートはスキップ
             continue
         row_list: list[list[str]] = read_data(sheet_name=sheet_name)
         generate(sheet_name, row_list)
