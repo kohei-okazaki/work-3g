@@ -1,0 +1,5 @@
+-- {{ logical_table_name }}
+CREATE TABLE IF NOT EXISTS {{ physical_table_name }} ({% for column in columns %}
+  -- {{ column.logical_column_name }}
+  {{ column.physical_column_name }} {{ column.type }}{% if column.is_sequence %} AUTO_INCREMENT{% endif %}{% if column.is_not_null %} NOT NULL{% endif %}{% if column.is_primary_key %} PRIMARY KEY{% endif %}{% if column.has_default %} DEFAULT {{ column.default_value }}{% endif %} COMMENT '{{ column.logical_column_name }}'{% if not loop.last %},{% endif %}{% endfor %}
+);

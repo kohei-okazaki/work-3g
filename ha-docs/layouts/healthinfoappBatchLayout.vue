@@ -114,7 +114,7 @@ export default {
         },
         {
           icon: "mdi-server",
-          title: "日次API通信ログデータ分析連携バッチ",
+          title: "日次バッチ実行ログデータ分析連携バッチ",
           to: "/healthinfoapp/batch/daily/batch_log",
         },
       ],
