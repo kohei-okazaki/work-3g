@@ -267,13 +267,13 @@ public class AwsSesComponent {
     public EmailSendResultType sendMail(String to, String titleText, String templateId,
             Map<String, String> bodyMap) throws BaseException {
 
-        if (awsProps.isSesStubFlag()) {
+        if (awsProps.sesStubFlag()) {
             return EmailSendResultType.NOT_SEND;
         }
 
         try (SesClient sesClient = getSesClient()) {
 
-            LOG.debug("Amazon SES region=" + awsProps.getRegion().id()
+            LOG.debug("Amazon SES region=" + awsProps.region().id()
                     + ",to_mail_address=" + to);
 
             Destination destination = Destination.builder()
@@ -320,12 +320,12 @@ public class AwsSesComponent {
             // HttpClient にタイムアウトを設定する
             SdkHttpClient httpClient = ApacheHttpClient.builder()
                     .connectionTimeout(
-                            Duration.ofMillis(awsProps.getSesConnnectionTimeout()))
-                    .socketTimeout(Duration.ofMillis(awsProps.getSesSocketTimeout()))
+                            Duration.ofMillis(awsProps.sesConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.sesSocketTimeout()))
                     .build();
 
             return SesClient.builder()
-                    .region(awsProps.getRegion())
+                    .region(awsProps.region())
                     .credentialsProvider(auth.getProvider())
                     .httpClient(httpClient)
                     .build();

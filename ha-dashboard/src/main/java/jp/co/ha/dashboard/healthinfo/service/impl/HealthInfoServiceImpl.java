@@ -101,7 +101,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                 .withUrlSupplier(
-                        () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
+                        () -> prop.healthInfoApiUrl() + seqUserId + "/healthinfo");
 
         // トランザクションIDを採番
         String transactionId = apiLogComponent.getTransactionId();

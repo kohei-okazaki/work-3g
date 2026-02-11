@@ -159,7 +159,7 @@ public class HealthInfoReferenceController implements BaseWebController {
         }
 
         // ページング情報を取得(1ページあたりの表示件数は設定ファイルより取得)
-        Pageable pageable = PagingViewFactory.getPageable(page, systemConfig.getPaging());
+        Pageable pageable = PagingViewFactory.getPageable(page, systemConfig.paging());
 
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();

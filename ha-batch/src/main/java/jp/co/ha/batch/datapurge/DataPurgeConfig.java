@@ -34,7 +34,7 @@ public class DataPurgeConfig extends BatchConfig {
      * 
      * @param jobRepository
      *     JobRepository
-     * @param queueImportStep
+     * @param dataPurgeBatchStep
      *     AWS SQS取込STEP
      * @param listener
      *     BatchJobListener
@@ -42,12 +42,12 @@ public class DataPurgeConfig extends BatchConfig {
      */
     @Bean(DATA_PURGE_BACTH_JOB_NAME)
     Job awsSqsImportBatchJob(JobRepository jobRepository,
-            @Qualifier(DATA_PURGE_BACTH_STEP_NAME) Step queueImportStep,
+            @Qualifier(DATA_PURGE_BACTH_STEP_NAME) Step dataPurgeBatchStep,
             BatchJobListener listener) {
         return new JobBuilder(DATA_PURGE_BACTH_JOB_NAME, jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
-                .start(queueImportStep)
+                .start(dataPurgeBatchStep)
                 .build();
     }
 

@@ -43,7 +43,7 @@ public class AppApiHealthCheckTasklet extends BaseHealthCheckApiTasklet {
         HealthCheckApiRequest req = new HealthCheckApiRequest();
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(
-                        () -> healthInfoProperties.getHealthInfoApiUrl() + "healthcheck");
+                        () -> healthInfoProperties.healthInfoApiUrl() + "healthcheck");
 
         HealthCheckApiResponse response = healthCheckApi.callApi(req, connectInfo);
 

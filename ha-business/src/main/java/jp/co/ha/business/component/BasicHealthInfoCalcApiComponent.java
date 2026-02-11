@@ -51,7 +51,7 @@ public class BasicHealthInfoCalcApiComponent {
             throws BaseException {
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
                         + NodeApiType.BASIC.getValue());
 
         BasicHealthInfoCalcApiResponse apiResponse = api
@@ -90,7 +90,7 @@ public class BasicHealthInfoCalcApiComponent {
             throws BaseException {
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
                         + NodeApiType.BASIC.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 

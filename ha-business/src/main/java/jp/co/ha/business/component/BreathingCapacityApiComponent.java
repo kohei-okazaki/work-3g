@@ -59,7 +59,7 @@ public class BreathingCapacityApiComponent {
         String transactionId = apiLogComponent.getTransactionId();
 
         BreathingCapacityCalcApiResponse apiResponse;
-        if (prop.isHealthinfoNodeApiMigrateFlg()) {
+        if (prop.healthinfoNodeApiMigrateFlg()) {
 
             // 肺活量計算API実施
             apiResponse = callBreathingCapacityCalcApi(dto, transactionId);
@@ -99,7 +99,7 @@ public class BreathingCapacityApiComponent {
         BeanUtil.copy(dto, request);
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
                         + NodeApiType.BREATHING_CAPACITY.getValue());
 
         BreathingCapacityCalcApiResponse response = api.callApi(request, connectInfo);
@@ -138,7 +138,7 @@ public class BreathingCapacityApiComponent {
         BeanUtil.copy(dto, request);
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
                         + NodeApiType.BREATHING_CAPACITY.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 
