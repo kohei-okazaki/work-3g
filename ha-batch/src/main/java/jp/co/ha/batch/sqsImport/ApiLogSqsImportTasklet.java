@@ -46,7 +46,7 @@ public class ApiLogSqsImportTasklet implements Tasklet {
             throws Exception {
 
         // キュー名
-        String queueName = awsProps.getApiLogQueueName();
+        String queueName = awsProps.apiLogQueueName();
 
         // キュー取得
         while (true) {

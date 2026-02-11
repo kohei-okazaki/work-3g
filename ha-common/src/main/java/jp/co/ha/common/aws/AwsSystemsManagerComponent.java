@@ -78,7 +78,7 @@ public class AwsSystemsManagerComponent {
     public String getValue(String key, boolean decrypt) throws BaseException {
 
         String envKey = StringUtil.THRASH
-                + systemProps.getEnvironment().getValue().toUpperCase()
+                + systemProps.environment().getValue().toUpperCase()
                 + StringUtil.THRASH + key;
         LOG.debug("key=" + envKey + ", decrypt=" + decrypt);
 
@@ -103,12 +103,12 @@ public class AwsSystemsManagerComponent {
             // HttpClient にタイムアウトを設定する
             SdkHttpClient httpClient = ApacheHttpClient.builder()
                     .connectionTimeout(
-                            Duration.ofMillis(awsProps.getSsmConnnectionTimeout()))
-                    .socketTimeout(Duration.ofMillis(awsProps.getSsmSocketTimeout()))
+                            Duration.ofMillis(awsProps.ssmConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.ssmSocketTimeout()))
                     .build();
 
             return SsmClient.builder()
-                    .region(awsProps.getRegion())
+                    .region(awsProps.region())
                     .credentialsProvider(auth.getProvider())
                     .httpClient(httpClient)
                     .build();

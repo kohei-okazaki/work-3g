@@ -49,7 +49,7 @@ public class NewsController implements BaseWebController {
             throws BaseException {
 
         // ページング情報を取得(1ページあたりの表示件数は設定ファイルより取得)
-        Pageable pageable = PagingViewFactory.getPageable(page, systemConfig.getPaging());
+        Pageable pageable = PagingViewFactory.getPageable(page, systemConfig.paging());
 
         model.addAttribute("newsList", component.getNewsList(pageable));
         // ページング情報を設定

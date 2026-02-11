@@ -7,15 +7,16 @@ import jp.co.ha.common.type.BaseEnum;
 /**
  * system.propertiesのBean
  *
+ * @param paging
+ *     ページング数
+ * @param environment
+ *     環境名
  * @version 1.0.0
  */
 @Component
-public class SystemProperties {
-
-    /** ページング数 */
-    private String paging;
-    /** 環境名 */
-    private Environment environment;
+public record SystemProperties(
+        String paging,
+        Environment environment) {
 
     /**
      * 環境名の列挙
@@ -57,44 +58,6 @@ public class SystemProperties {
             return BaseEnum.of(Environment.class, value);
         }
 
-    }
-
-    /**
-     * ページング数を返す
-     *
-     * @return paging
-     */
-    public String getPaging() {
-        return paging;
-    }
-
-    /**
-     * ページング数を設定する
-     *
-     * @param paging
-     *     ページング数
-     */
-    public void setPaging(String paging) {
-        this.paging = paging;
-    }
-
-    /**
-     * 環境を返す
-     *
-     * @return environment
-     */
-    public Environment getEnvironment() {
-        return environment;
-    }
-
-    /**
-     * 環境を設定する
-     *
-     * @param environment
-     *     環境
-     */
-    public void setEnvironment(String environment) {
-        this.environment = Environment.of(environment);
     }
 
 }

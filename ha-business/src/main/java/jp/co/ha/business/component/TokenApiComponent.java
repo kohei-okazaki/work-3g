@@ -53,7 +53,7 @@ public class TokenApiComponent {
         TokenApiRequest request = new TokenApiRequest();
         request.setSeqUserId(seqUserId);
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
                         + NodeApiType.TOKEN.getValue());
 
         TokenApiResponse response = tokenApi.callApi(request, connectInfo);

@@ -23,12 +23,12 @@ public class JdbcPropertiesTest extends BaseCommonTest {
      */
     @Test
     public void test() {
-        assertEquals("com.mysql.cj.jdbc.Driver", conf.getDriverClassName());
+        assertEquals("com.mysql.cj.jdbc.Driver", conf.driverClassName());
         assertEquals(
                 "jdbc:mysql://localhost:3306/work3g?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo",
-                conf.getUrl());
-        assertEquals("app_user", conf.getUsername());
-        assertEquals("app_password", conf.getPassword());
+                conf.url());
+        assertEquals("app_user", conf.username());
+        assertEquals("app_password", conf.password());
     }
 
 }

@@ -58,7 +58,7 @@ public class CalorieApiComponent {
         String transactionId = apiLogComponent.getTransactionId();
 
         CalorieCalcApiResponse apiResponse;
-        if (prop.isHealthinfoNodeApiMigrateFlg()) {
+        if (prop.healthinfoNodeApiMigrateFlg()) {
 
             // カロリー計算API実施
             apiResponse = callCalorieCalcApi(dto, transactionId);
@@ -98,7 +98,7 @@ public class CalorieApiComponent {
         BeanUtil.copy(dto, request);
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
                         + NodeApiType.CALORIE.getValue());
 
         CalorieCalcApiResponse response = api.callApi(request, connectInfo);
@@ -136,7 +136,7 @@ public class CalorieApiComponent {
         BeanUtil.copy(dto, request);
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getHealthinfoNodeApiUrl()
+                .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
                         + NodeApiType.CALORIE.getValue())
                 .withHeader(ApiConnectInfo.X_NODE_TOKEN, token);
 

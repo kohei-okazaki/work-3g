@@ -90,7 +90,7 @@ public class HealthInfoFileRegistWriter
 
             ApiConnectInfo connectInfo = new ApiConnectInfo()
                     .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
-                    .withUrlSupplier(() -> prop.getHealthInfoApiUrl()
+                    .withUrlSupplier(() -> prop.healthInfoApiUrl()
                             + request.getSeqUserId() + "/healthinfo");
 
             HealthInfoRegistApiResponse response = api.callApi(request, connectInfo);

@@ -77,7 +77,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
         BeanUtil.copy(request, basicHealthInfoCalcRequest);
 
         BasicHealthInfoCalcApiResponse basicHealthInfoCalcResponse;
-        if (prop.isHealthinfoNodeApiMigrateFlg()) {
+        if (prop.healthinfoNodeApiMigrateFlg()) {
 
             // 基礎健康情報計算API実施
             basicHealthInfoCalcResponse = basicHealthInfoCalcApiComponent
