@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import jp.co.ha.business.io.file.json.conf.JsonConfig;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.aws.AwsProperties;
+import software.amazon.awssdk.regions.Region;
 
 /**
  * businessプロジェクトのConfigクラス
@@ -106,18 +107,9 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${root.api.url}") String rootApiUrl,
             @Value("${healthinfo.track.api.url}") String trackApiUrl,
             @Value("${healthinfo.track.api.db.migrate.flg}") boolean trackApiDbMigrateFlg) {
-
-        HealthInfoProperties props = new HealthInfoProperties();
-        props.setReferenceFilePath(referenceFilePath);
-        props.setHealthinfoNodeApiUrl(healthinfoNodeApiUrl);
-        props.setHealthinfoNodeApiMigrateFlg(healthinfoNodeApiMigrateFlg);
-        props.setHealthInfoDashboardUrl(healthInfoDashboardUrl);
-        props.setHealthInfoApiUrl(healthInfoApiUrl);
-        props.setRootApiUrl(rootApiUrl);
-        props.setTrackApiUrl(trackApiUrl);
-        props.setTrackApiDbMigrateFlg(trackApiDbMigrateFlg);
-
-        return props;
+        return new HealthInfoProperties(referenceFilePath, healthinfoNodeApiUrl,
+                healthinfoNodeApiMigrateFlg, healthInfoDashboardUrl, healthInfoApiUrl,
+                rootApiUrl, trackApiUrl, trackApiDbMigrateFlg);
     }
 
     /**
@@ -163,22 +155,19 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${aws.sqs.socket.timeout}") int sqsSocketTimeout,
             @Value("${aws.ssm.connection.timeout}") int ssmConnnectionTimeout,
             @Value("${aws.ssm.socket.timeout}") int ssmSocketTimeout) {
-
-        AwsProperties props = new AwsProperties();
-        props.setRegion(region);
-        props.setBacket(backet);
-        props.setS3ConnnectionTimeout(s3ConnnectionTimeout);
-        props.setS3SocketTimeout(s3SocketTimeout);
-        props.setSesConnnectionTimeout(sesConnnectionTimeout);
-        props.setSesSocketTimeout(sesSocketTimeout);
-        props.setSesStubFlag(sesStubFlag);
-        props.setApiLogQueueName(apiLogQueueName);
-        props.setSqsConnnectionTimeout(sqsConnnectionTimeout);
-        props.setSqsSocketTimeout(sqsSocketTimeout);
-        props.setSsmConnnectionTimeout(ssmConnnectionTimeout);
-        props.setSsmSocketTimeout(ssmSocketTimeout);
-
-        return props;
+        return new AwsProperties(
+                Region.of(region),
+                backet,
+                s3ConnnectionTimeout,
+                s3SocketTimeout,
+                sesConnnectionTimeout,
+                sesSocketTimeout,
+                sesStubFlag,
+                apiLogQueueName,
+                sqsConnnectionTimeout,
+                sqsSocketTimeout,
+                ssmConnnectionTimeout,
+                ssmSocketTimeout);
     }
 
     /**

@@ -76,7 +76,7 @@ public class AwsS3Component {
             S3Client s3 = getS3Client();
             s3.putObject(
                     PutObjectRequest.builder()
-                            .bucket(awsProps.getBacket())
+                            .bucket(awsProps.backet())
                             .key(key)
                             .acl(ObjectCannedACL.PUBLIC_READ)
                             .build(),
@@ -196,7 +196,7 @@ public class AwsS3Component {
         S3Client s3 = getS3Client();
         try {
             GetObjectRequest request = GetObjectRequest.builder()
-                    .bucket(awsProps.getBacket())
+                    .bucket(awsProps.backet())
                     .key(key)
                     .build();
 
@@ -233,7 +233,7 @@ public class AwsS3Component {
         S3Client s3 = getS3Client();
         try {
             ListObjectsV2Request request = ListObjectsV2Request.builder()
-                    .bucket(awsProps.getBacket())
+                    .bucket(awsProps.backet())
                     .build();
 
             return s3.listObjectsV2(request).contents();
@@ -257,7 +257,7 @@ public class AwsS3Component {
 
         try {
             DeleteObjectsRequest deleteRequest = DeleteObjectsRequest.builder()
-                    .bucket(awsProps.getBacket())
+                    .bucket(awsProps.backet())
                     .delete(Delete.builder()
                             .objects(
                                     Arrays.stream(keys)
@@ -288,12 +288,12 @@ public class AwsS3Component {
             // HttpClient にタイムアウトを設定する
             SdkHttpClient httpClient = ApacheHttpClient.builder()
                     .connectionTimeout(
-                            Duration.ofMillis(awsProps.getS3ConnnectionTimeout()))
-                    .socketTimeout(Duration.ofMillis(awsProps.getS3SocketTimeout()))
+                            Duration.ofMillis(awsProps.s3ConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.s3SocketTimeout()))
                     .build();
 
             return S3Client.builder()
-                    .region(awsProps.getRegion())
+                    .region(awsProps.region())
                     .credentialsProvider(auth.getProvider())
                     .httpClient(httpClient)
                     .build();

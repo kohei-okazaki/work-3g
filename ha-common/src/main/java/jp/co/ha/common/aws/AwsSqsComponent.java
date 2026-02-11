@@ -267,12 +267,12 @@ public class AwsSqsComponent {
             // HttpClient にタイムアウトを設定する
             SdkHttpClient httpClient = ApacheHttpClient.builder()
                     .connectionTimeout(
-                            Duration.ofMillis(awsProps.getSqsConnnectionTimeout()))
-                    .socketTimeout(Duration.ofMillis(awsProps.getSqsSocketTimeout()))
+                            Duration.ofMillis(awsProps.sqsConnnectionTimeout()))
+                    .socketTimeout(Duration.ofMillis(awsProps.sqsSocketTimeout()))
                     .build();
 
             return SqsClient.builder()
-                    .region(awsProps.getRegion())
+                    .region(awsProps.region())
                     .credentialsProvider(auth.getProvider())
                     .httpClient(httpClient)
                     .build();

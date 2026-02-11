@@ -55,7 +55,7 @@ public class HealthInfoMailServiceImpl implements HealthInfoMailService {
         bodyMap.put("healthInfoRegDate",
                 DateTimeUtil.toString(apiResponse.getHealthInfo().getHealthInfoRegDate(),
                         YYYYMMDDHHMMSS));
-        bodyMap.put("url", properties.getHealthInfoDashboardUrl());
+        bodyMap.put("url", properties.healthInfoDashboardUrl());
 
         ses.sendMail(to, titleText, MailTemplateKey.HEALTHINFO_REGIST_TEMPLATE,
                 bodyMap);

@@ -286,7 +286,7 @@ public class UserRecoveryController implements BaseWebController {
      */
     private Map<String, String> getMailTemplateBody(UserRecoveryToken entity) {
         return Map.of(
-                "url", properties.getHealthInfoDashboardUrl(),
+                "url", properties.healthInfoDashboardUrl(),
                 "seq_user_id", entity.getSeqUserId().toString(),
                 "token", entity.getToken());
     }
