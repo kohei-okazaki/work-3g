@@ -209,13 +209,12 @@ export default {
           description: "健康情報を蓄積するPythonプロジェクト",
         },
         {
-          name: "ha-selenium",
-          description:
-            "ダッシュボード画面をPython-seleniumでテストするPythonプロジェクト",
-        },
-        {
           name: "ha-tool",
           description: "健康情報アプリのDDLなどを自動生成するmavenプロジェクト",
+        },
+        {
+          name: "ha-tools",
+          description: "健康情報アプリのDDLなどを自動生成するツールプロジェクト",
         },
       ],
       languages: [
