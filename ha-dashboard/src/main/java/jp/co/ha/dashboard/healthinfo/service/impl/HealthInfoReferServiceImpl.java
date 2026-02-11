@@ -149,7 +149,7 @@ public class HealthInfoReferServiceImpl implements HealthInfoReferService {
         String fileName = DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                 YYYYMMDDHHMMSS_NOSEP_STRICT) + FileExtension.CSV;
         // ファイル出力先
-        String path = prop.getReferenceFilePath() + FileSeparator.SYSTEM.getValue()
+        String path = prop.referenceFilePath() + FileSeparator.SYSTEM.getValue()
                 + entity.getSeqUserId();
 
         return new CsvConfigBuilder(fileName, path)

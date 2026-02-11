@@ -34,7 +34,7 @@ public class AwsAuthComponent {
      * @return AwsCredentialsProvider
      */
     public AwsCredentialsProvider getProvider() {
-        switch (systemProps.getEnvironment()) {
+        switch (systemProps.environment()) {
         case LOCAL:
             return ProfileCredentialsProvider.create();
         case DEV1:
@@ -42,7 +42,7 @@ public class AwsAuthComponent {
         default:
             // システムプロパティの環境がNullや実行可能環境でない場合
             throw new SystemRuntimeException(UNEXPECTED_ERROR,
-                    "環境情報の設定が不正です。env=" + systemProps.getEnvironment());
+                    "環境情報の設定が不正です。env=" + systemProps.environment());
         }
     }
 

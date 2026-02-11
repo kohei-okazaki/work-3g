@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import jp.co.ha.common.db.JdbcProperties;
 import jp.co.ha.common.system.SystemProperties;
+import jp.co.ha.common.system.SystemProperties.Environment;
 import jp.co.ha.common.validator.BeanValidator;
 import jp.co.ha.common.web.interceptor.RequestInterceptor;
 
@@ -84,13 +85,7 @@ public class CommonConfig implements WebMvcConfigurer {
             @Value("${jdbc.url}") String url,
             @Value("${jdbc.username}") String username,
             @Value("${jdbc.password}") String password) {
-
-        JdbcProperties props = new JdbcProperties();
-        props.setDriverClassName(driverClassName);
-        props.setUrl(url);
-        props.setUsername(username);
-        props.setPassword(password);
-        return props;
+        return new JdbcProperties(driverClassName, url, username, password);
     }
 
     /**
@@ -106,11 +101,7 @@ public class CommonConfig implements WebMvcConfigurer {
     SystemProperties systemProperties(
             @Value("${system.paging}") String paging,
             @Value("${system.env}") String environment) {
-
-        SystemProperties props = new SystemProperties();
-        props.setPaging(paging);
-        props.setEnvironment(environment);
-        return props;
+        return new SystemProperties(paging, Environment.of(environment));
     }
 
 }

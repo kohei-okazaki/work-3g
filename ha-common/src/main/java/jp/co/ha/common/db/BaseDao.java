@@ -44,10 +44,10 @@ public abstract class BaseDao {
 
         try {
             JdbcProperties conf = BeanLoader.getBean(JdbcProperties.class);
-            Class.forName(conf.getDriverClassName()).getDeclaredConstructor()
+            Class.forName(conf.driverClassName()).getDeclaredConstructor()
                     .newInstance();
-            this.con = DriverManager.getConnection(conf.getUrl(), conf.getUsername(),
-                    conf.getPassword());
+            this.con = DriverManager.getConnection(conf.url(), conf.username(),
+                    conf.password());
             LOG.debug("DBに接続");
             if (BeanUtil.notNull(this.con)) {
                 this.stm = this.con.createStatement();

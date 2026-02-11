@@ -194,7 +194,7 @@ public class ApiLogComponent {
      */
     public void registQueue(ApiLogQueuePayload payload)
             throws BaseException {
-        sqs.enqueue(awsProps.getApiLogQueueName(), payload,
+        sqs.enqueue(awsProps.apiLogQueueName(), payload,
                 payload.getTransactionId());
     }
 

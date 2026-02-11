@@ -30,7 +30,7 @@ public class HealthInfoMigrateProcessor
 
         HealthInfoMigrateApiRequest req = new HealthInfoMigrateApiRequest();
         req.setSeqUserId(item.getSeqUserId());
-        req.setMigrateFlg(healthInfoProperties.isTrackApiDbMigrateFlg());
+        req.setMigrateFlg(healthInfoProperties.trackApiDbMigrateFlg());
 
         HealthInfoMigrateApiRequest.HealthInfo bean = new HealthInfoMigrateApiRequest.HealthInfo();
         bean.setSeqHealthInfoId(item.getSeqHealthInfoId());

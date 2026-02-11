@@ -83,7 +83,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withHeader(ApiConnectInfo.X_API_KEY, user.getApiKey())
                 .withUrlSupplier(
-                        () -> prop.getHealthInfoApiUrl() + seqUserId + "/healthinfo");
+                        () -> prop.healthInfoApiUrl() + seqUserId + "/healthinfo");
 
         ResultType result = ResultType.SUCCESS;
         for (HealthInfoRegistApiRequest request : toRequestList(modelList)) {

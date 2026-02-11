@@ -57,7 +57,7 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
         String transactionId = apiLogComponent.getTransactionId();
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
-                .withUrlSupplier(() -> prop.getTrackApiUrl() + "healthinfo/");
+                .withUrlSupplier(() -> prop.trackApiUrl() + "healthinfo/");
 
         for (HealthInfoMigrateApiRequest request : list) {
 
