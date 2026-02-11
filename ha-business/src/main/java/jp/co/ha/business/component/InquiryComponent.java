@@ -104,26 +104,26 @@ public class InquiryComponent {
         // S3登録
         String s3Key = new StringJoiner(StringUtil.THRASH)
                 .add(AwsS3Component.AwsS3Key.INQUIRY.getValue())
-                .add(String.valueOf(dto.getSeqUserId()))
+                .add(String.valueOf(dto.seqUserId()))
                 .add(DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                         YYYYMMDDHHMMSS_NOSEP))
                 .toString();
-        s3.putFile(s3Key, dto.getBody());
+        s3.putFile(s3Key, dto.body());
 
         // DB登録
         InquiryManagement entity = new InquiryManagement();
-        entity.setSeqUserId(dto.getSeqUserId());
+        entity.setSeqUserId(dto.seqUserId());
         entity.setS3Key(s3Key);
         entity.setInquiryStatus(Status.NOT_STARTED.getValue());
-        entity.setInquiryType(dto.getType());
-        entity.setTitle(dto.getTitle());
+        entity.setInquiryType(dto.type());
+        entity.setTitle(dto.title());
         entity.setDeleteFlag(false);
         createService.create(entity);
 
         // Slack通知
-        slack.sendFile(SlackApiComponent.ContentType.DASHBOARD, dto.getBody().getBytes(),
+        slack.sendFile(SlackApiComponent.ContentType.DASHBOARD, dto.body().getBytes(),
                 s3Key, SLACK_TITLE_REGIST,
-                "問い合わせユーザID=" + dto.getSeqUserId() + ", S3キー=" + s3Key + "を登録.");
+                "問い合わせユーザID=" + dto.seqUserId() + ", S3キー=" + s3Key + "を登録.");
     }
 
     /**

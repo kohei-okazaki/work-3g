@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
@@ -45,7 +46,7 @@ public class ApiLogComponent {
      *
      * @return トランザクションID
      */
-    public String getTransactionId() {
+    public String transactionId() {
         return UUID.randomUUID().toString();
     }
 
@@ -194,8 +195,7 @@ public class ApiLogComponent {
      */
     public void registQueue(ApiLogQueuePayload payload)
             throws BaseException {
-        sqs.enqueue(awsProps.apiLogQueueName(), payload,
-                payload.getTransactionId());
+        sqs.enqueue(awsProps.apiLogQueueName(), payload, payload.transactionId());
     }
 
     /**
@@ -208,19 +208,19 @@ public class ApiLogComponent {
 
         ApiLog entity = new ApiLog();
 
-        entity.setTransactionId(payload.getTransactionId());
-        entity.setApiName(payload.getApiName());
-        entity.setHttpMethod(payload.getHttpMethod());
-        entity.setUrl(payload.getUrl());
-        if (HttpMethod.POST == HttpMethod.valueOf(payload.getHttpMethod())
-                || HttpMethod.PUT == HttpMethod.valueOf(payload.getHttpMethod())) {
-            entity.setBody(payload.getBody());
+        entity.setTransactionId(payload.transactionId());
+        entity.setApiName(payload.apiName());
+        entity.setHttpMethod(payload.httpMethod());
+        entity.setUrl(payload.url());
+        if (HttpMethod.POST == HttpMethod.valueOf(payload.httpMethod())
+                || HttpMethod.PUT == HttpMethod.valueOf(payload.httpMethod())) {
+            entity.setBody(payload.body());
         }
-        entity.setRequestDate(payload.getRequestDate());
+        entity.setRequestDate(payload.requestDate());
 
-        entity.setHttpStatus(payload.getHttpStatus().value());
-        entity.setDetail(payload.getDetail());
-        entity.setResponseDate(payload.getResponseDate());
+        entity.setHttpStatus(payload.httpStatus().value());
+        entity.setDetail(payload.detail());
+        entity.setResponseDate(payload.responseDate());
         entity.setDeleteFlag(false);
 
         // DB登録
@@ -252,25 +252,26 @@ public class ApiLogComponent {
             BaseApiRequest request, String transactionId, String apiName,
             HttpMethod method, URI url, String detail) throws BaseException {
 
-        ApiLogQueuePayload payload = new ApiLogQueuePayload();
-
-        payload.setTransactionId(transactionId);
-        payload.setApiName(apiName);
-        payload.setHttpMethod(method.toString());
-        payload.setUrl(url.toString());
+        String body = null;
         if (HttpMethod.POST == method
                 || HttpMethod.PUT == method) {
-            payload.setBody(new JsonReader().read(request));
+            body = new JsonReader().read(request);
         }
-        payload.setRequestDate(connectInfo.getRequestDate());
 
+        HttpStatus httpStatus = null;
         if (connectInfo.getHttpStatus() != null) {
-            payload.setHttpStatus(connectInfo.getHttpStatus());
+            httpStatus = connectInfo.getHttpStatus();
         }
-        payload.setDetail(detail);
-        payload.setResponseDate(connectInfo.getResponseDate());
 
-        return payload;
+        return new ApiLogQueuePayload(transactionId,
+                apiName,
+                method.toString(),
+                url.toString(),
+                body,
+                connectInfo.getRequestDate(),
+                httpStatus,
+                detail,
+                connectInfo.getResponseDate());
     }
 
 }

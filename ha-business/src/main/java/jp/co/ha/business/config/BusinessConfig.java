@@ -107,9 +107,15 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${root.api.url}") String rootApiUrl,
             @Value("${healthinfo.track.api.url}") String trackApiUrl,
             @Value("${healthinfo.track.api.db.migrate.flg}") boolean trackApiDbMigrateFlg) {
-        return new HealthInfoProperties(referenceFilePath, healthinfoNodeApiUrl,
-                healthinfoNodeApiMigrateFlg, healthInfoDashboardUrl, healthInfoApiUrl,
-                rootApiUrl, trackApiUrl, trackApiDbMigrateFlg);
+        return new HealthInfoProperties(
+                referenceFilePath,
+                healthinfoNodeApiUrl,
+                healthinfoNodeApiMigrateFlg,
+                healthInfoDashboardUrl,
+                healthInfoApiUrl,
+                rootApiUrl,
+                trackApiUrl,
+                trackApiDbMigrateFlg);
     }
 
     /**

@@ -44,14 +44,14 @@ public class HealthInfoFileRegistProcessor
 
         for (ValidateError error : result.getErrorList()) {
 
-            if ("apiKey".equals(error.getName())) {
+            if ("apiKey".equals(error.name())) {
                 // APIキーの設定はAPI通信時に行うため、ここでスルーして次ループへ
                 continue;
             }
 
             // 妥当性チェックエラーの場合
             throw new BusinessException(VALIDATE_ERROR,
-                    error.getMessage() + ", " + error.getName() + "=" + error.getValue());
+                    error.message() + ", " + error.name() + "=" + error.value());
         }
 
         return item;

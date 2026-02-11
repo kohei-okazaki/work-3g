@@ -141,7 +141,7 @@ public class HealthInfoFileRegistReader
         // モード設定
         request.setTestMode(TestMode.DB_REGIST);
         // トランザクションID
-        request.setTransactionId(component.getTransactionId());
+        request.setTransactionId(component.transactionId());
 
         return request;
     }

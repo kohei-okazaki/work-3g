@@ -58,7 +58,7 @@ public abstract class BaseAppApiController<Rq extends BaseAppApiRequest, Rs exte
             ValidateError error = result.getFirst();
             // 妥当性チェックエラー
             throw new ApiException(VALIDATE_ERROR,
-                    error.getMessage() + " " + error.getName() + "=" + error.getValue());
+                    error.message() + " " + error.name() + "=" + error.value());
         }
     }
 

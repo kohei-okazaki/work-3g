@@ -54,7 +54,7 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
     private void sendHealthInfoMirgateApi(
             List<? extends HealthInfoMigrateApiRequest> list) throws BaseException {
 
-        String transactionId = apiLogComponent.getTransactionId();
+        String transactionId = apiLogComponent.transactionId();
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.trackApiUrl() + "healthinfo/");

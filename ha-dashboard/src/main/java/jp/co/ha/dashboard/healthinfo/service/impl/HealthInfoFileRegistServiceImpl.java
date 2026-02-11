@@ -68,7 +68,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
             if (result.hasError()) {
                 ValidateError error = result.getFirst();
                 throw new BusinessException(ILLEGAL_ACCESS_ERROR,
-                        ++i + "行目のファイルフォーマットが不正です " + error.getMessage());
+                        ++i + "行目のファイルフォーマットが不正です " + error.message());
             }
         }
     }
@@ -89,7 +89,7 @@ public class HealthInfoFileRegistServiceImpl implements HealthInfoFileRegistServ
         for (HealthInfoRegistApiRequest request : toRequestList(modelList)) {
 
             // トランザクションIDを採番
-            String transactionId = apiLogComponent.getTransactionId();
+            String transactionId = apiLogComponent.transactionId();
 
             request.setTransactionId(transactionId);
 

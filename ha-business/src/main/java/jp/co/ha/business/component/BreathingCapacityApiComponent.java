@@ -55,8 +55,8 @@ public class BreathingCapacityApiComponent {
     public BreathingCapacityDto calc(BreathingCapacityDto dto, Long seqUserId)
             throws BaseException {
 
-        // API通信情報.トランザクションIDを採番
-        String transactionId = apiLogComponent.getTransactionId();
+        // API通信ログ.トランザクションIDを採番
+        String transactionId = apiLogComponent.transactionId();
 
         BreathingCapacityCalcApiResponse apiResponse;
         if (prop.healthinfoNodeApiMigrateFlg()) {
