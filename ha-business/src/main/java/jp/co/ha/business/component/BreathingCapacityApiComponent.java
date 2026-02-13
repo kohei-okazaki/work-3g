@@ -9,14 +9,15 @@ import jp.co.ha.business.api.node.BreathingCapacityCalcApi;
 import jp.co.ha.business.api.node.request.BreathingCapacityCalcApiRequest;
 import jp.co.ha.business.api.node.response.BaseNodeApiResponse.Result;
 import jp.co.ha.business.api.node.response.BreathingCapacityCalcApiResponse;
+import jp.co.ha.business.api.node.response.BreathingCapacityCalcApiResponse.BreathingCapacityCalcResult;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
-import jp.co.ha.business.dto.BreathingCapacityDto;
+import jp.co.ha.business.dto.BreathingCapacityParam;
+import jp.co.ha.business.dto.BreathingCapacityResult;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 
 /**
@@ -44,15 +45,15 @@ public class BreathingCapacityApiComponent {
     /**
      * 肺活量計算処理を行う
      *
-     * @param dto
-     *     {@linkplain BreathingCapacityDto}
+     * @param param
+     *     {@linkplain BreathingCapacityParam}
      * @param seqUserId
      *     ユーザID
-     * @return {@linkplain BreathingCapacityDto}
+     * @return {@linkplain BreathingCapacityResult}
      * @throws BaseException
      *     肺活量計算APIの処理が成功以外
      */
-    public BreathingCapacityDto calc(BreathingCapacityDto dto, Long seqUserId)
+    public BreathingCapacityResult calc(BreathingCapacityParam param, Long seqUserId)
             throws BaseException {
 
         // API通信ログ.トランザクションIDを採番
@@ -62,7 +63,7 @@ public class BreathingCapacityApiComponent {
         if (prop.healthinfoNodeApiMigrateFlg()) {
 
             // 肺活量計算API実施
-            apiResponse = callBreathingCapacityCalcApi(dto, transactionId);
+            apiResponse = callBreathingCapacityCalcApi(param, transactionId);
 
         } else {
 
@@ -72,20 +73,25 @@ public class BreathingCapacityApiComponent {
                     transactionId);
 
             // 肺活量計算API実施
-            apiResponse = callBreathingCapacityCalcApi(dto,
+            apiResponse = callBreathingCapacityCalcApi(param,
                     tokenApiResponse.getToken(), transactionId);
         }
 
-        BeanUtil.copy(apiResponse.getBreathingCapacityCalcResult(), dto);
+        BreathingCapacityCalcResult result = apiResponse.getBreathingCapacityCalcResult();
 
-        return dto;
+        return new BreathingCapacityResult(
+                param.age(),
+                param.gender(),
+                param.height(),
+                result.getPredictBreathingCapacity(),
+                result.getBreathingCapacityPercentage());
     }
 
     /**
      * 肺活量計算APIを呼び出す
      *
-     * @param dto
-     *     肺活量計算Dto
+     * @param param
+     *     肺活量計算画面入力パラメータ
      * @param transactionId
      *     トランザクションID
      * @return 肺活量計算APIレスポンス
@@ -93,10 +99,12 @@ public class BreathingCapacityApiComponent {
      *     API通信に失敗した場合
      */
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, String transactionId) throws BaseException {
+            BreathingCapacityParam param, String transactionId) throws BaseException {
 
         BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
-        BeanUtil.copy(dto, request);
+        request.setAge(param.age());
+        request.setGenderType(param.gender());
+        request.setHeight(param.height());
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
@@ -119,8 +127,8 @@ public class BreathingCapacityApiComponent {
     /**
      * 肺活量計算APIを呼び出す
      *
-     * @param dto
-     *     肺活量計算Dto
+     * @param param
+     *     肺活量計算画面入力パラメータ
      * @param token
      *     トークン
      * @param transactionId
@@ -131,11 +139,13 @@ public class BreathingCapacityApiComponent {
      */
     @Deprecated
     private BreathingCapacityCalcApiResponse callBreathingCapacityCalcApi(
-            BreathingCapacityDto dto, String token, String transactionId)
+            BreathingCapacityParam param, String token, String transactionId)
             throws BaseException {
 
         BreathingCapacityCalcApiRequest request = new BreathingCapacityCalcApiRequest();
-        BeanUtil.copy(dto, request);
+        request.setAge(param.age());
+        request.setGenderType(param.gender());
+        request.setHeight(param.height());
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()

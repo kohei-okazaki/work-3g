@@ -22,8 +22,8 @@ public class TableDefineGenerator extends BaseGenerator {
         List<Table> tableList = ToolUtil.getTableList(excel.getRowList());
         StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
         tableList.stream().forEach(e -> {
-            body.add("-- " + e.getLogicalName());
-            body.add("SHOW COLUMNS FROM " + e.getPhysicalName() + ";");
+            body.add("-- " + e.logicalName());
+            body.add("SHOW COLUMNS FROM " + e.physicalName() + ";");
         });
 
         // 自動生成ファイル

@@ -285,59 +285,16 @@ public class AwsSqsComponent {
      * deQueue結果クラス
      * 
      * @version 1.0.0
+     * @param payload
+     *     Payload
+     * @param receiptHandle
+     *     receiptHandle
+     * @param messageId
+     *     messageId
      * @param <T>
      *     キュー型
      */
-    public static final class DequeueResult<T> {
-        /** payload */
-        private final T payload;
-        /** receiptHandle */
-        private final String receiptHandle;
-        /** messageId */
-        private final String messageId;
-
-        /**
-         * コンストラクタ
-         * 
-         * @param payload
-         *     payload
-         * @param receiptHandle
-         *     receiptHandle
-         * @param messageId
-         *     messageId
-         */
-        public DequeueResult(T payload, String receiptHandle, String messageId) {
-            this.payload = payload;
-            this.receiptHandle = receiptHandle;
-            this.messageId = messageId;
-        }
-
-        /**
-         * payloadを返す
-         * 
-         * @return payload
-         */
-        public T getPayload() {
-            return payload;
-        }
-
-        /**
-         * receiptHandleを返す
-         * 
-         * @return receiptHandle
-         */
-        public String getReceiptHandle() {
-            return receiptHandle;
-        }
-
-        /**
-         * messageIdを返す
-         * 
-         * @return messageId
-         */
-        public String getMessageId() {
-            return messageId;
-        }
-
+    public static record DequeueResult<T>(T payload, String receiptHandle,
+            String messageId) {
     }
 }

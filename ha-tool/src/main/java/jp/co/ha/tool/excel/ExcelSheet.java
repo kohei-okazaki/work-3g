@@ -16,7 +16,7 @@ public class ExcelSheet {
     private List<ExcelRow> rowList = new ArrayList<>();
 
     /**
-     * nameを返す
+     * 名前を返す
      *
      * @return name
      */
@@ -25,7 +25,7 @@ public class ExcelSheet {
     }
 
     /**
-     * nameを設定する
+     * 名前を設定する
      *
      * @param name
      *     名前
