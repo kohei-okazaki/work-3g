@@ -140,7 +140,7 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @param sqsConnnectionTimeout
      *     SQSコネクションタイムアウト
      * @param sqsSocketTimeout
-     *     API通信情報キュー名
+     *     SQSソケットタイムアウト
      * @param ssmConnnectionTimeout
      *     SSMコネクションタイムアウト
      * @param ssmSocketTimeout

@@ -24,14 +24,14 @@ import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.db.entity.ApiLog;
 
 /**
- * API通信情報の共通Componentクラス
+ * API通信ログの共通Componentクラス
  *
  * @version 1.0.0
  */
 @Component
 public class ApiLogComponent {
 
-    /** API通信情報作成サービス */
+    /** API通信ログ作成サービス */
     @Autowired
     private ApiLogCreateService createService;
     /** SQS-Component */
