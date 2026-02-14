@@ -53,7 +53,7 @@ export default {
       flow: [
         {
           id: "1",
-          text: "日次API通信ログデータ分析連携バッチJavaを呼び出す",
+          text: "日次バッチ実行ログデータ分析連携バッチJavaを呼び出す",
           edgeType: "round",
           next: ["2"],
         },
