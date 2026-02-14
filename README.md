@@ -10,25 +10,25 @@
 ## 02_Project構成  
 * ### ha-api  
 健康管理のAPI。  
- - Java21
- - SpringBoot
+   - Java21
+   - SpringBoot
 
 * ### ha-dashboard  
 健康管理のダッシュボード。   
- - Java21
- - SpringBoot
- - thymeleaf
+   - Java21
+   - SpringBoot
+   - thymeleaf
 
 * ### ha-batch  
 健康管理のBatch処理。   
- - Java21
- - SpringBatch
+   - Java21
+   - SpringBatch
 
 * ### ha-root  
 健康管理アプリの管理者用サイト。   
- - Java21
- - SpringBoot API
- - Vue.js
+   - Java21
+   - SpringBoot
+   - Vue.js
 
 * ### ha-business  
 以下のプロジェクトで共通的に使うbusinessロジックを定義。  
@@ -83,14 +83,14 @@
 
 * ### ha-track  
 健康情報蓄積用プロジェクト。  
- - Python
- - Django rest framework
+   - Python
+   - Django rest framework
 
 * ### ha-node  
 健康情報計算を行うAPIプロジェクト。  
- - Java Script
- - Node.js
- -> API Gateway + Lambda化したためNode.jsのサーバ自体は廃止。  
+   - Java Script
+   - Node.js
+   -> API Gateway + Lambda化したためNode.jsのサーバ自体は廃止。  
 
 * ### ha-build  
 Docker環境でのBuild用のスクリプトを定義。   
