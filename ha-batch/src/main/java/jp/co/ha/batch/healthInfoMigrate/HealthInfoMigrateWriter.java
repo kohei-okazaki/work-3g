@@ -30,7 +30,7 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
     /** 健康情報設定ファイル */
     @Autowired
     private HealthInfoProperties prop;
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
     private ApiLogComponent apiLogComponent;
     /** 健康情報連携API */
@@ -54,7 +54,7 @@ public class HealthInfoMigrateWriter implements ItemWriter<HealthInfoMigrateApiR
     private void sendHealthInfoMirgateApi(
             List<? extends HealthInfoMigrateApiRequest> list) throws BaseException {
 
-        String transactionId = apiLogComponent.getTransactionId();
+        String transactionId = apiLogComponent.transactionId();
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.trackApiUrl() + "healthinfo/");

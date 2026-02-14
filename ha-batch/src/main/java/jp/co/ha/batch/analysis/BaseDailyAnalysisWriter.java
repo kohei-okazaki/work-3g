@@ -6,7 +6,6 @@ import static jp.co.ha.common.util.FileUtil.FileExtension.*;
 import static jp.co.ha.common.util.StringUtil.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,6 +29,7 @@ import jp.co.ha.batch.base.BatchProperties;
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.common.aws.AwsS3Component;
 import jp.co.ha.common.aws.AwsS3Component.AwsS3Key;
+import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.io.file.csv.model.BaseCsvModel;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -98,14 +98,14 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
 
         try {
             String baseDir = getTempDirPath(batchProps);
-            Files.createDirectories(Paths.get(baseDir));
+            FileUtil.mkdir(baseDir);
 
             // 「テーブル名.csv」 を取得
             targetPath = Paths.get(baseDir, getFileName(batchProps) + CSV);
-            LOG.debug("targetPath=" + targetPath);
+            LOG.debug("targetPath=%s".formatted(targetPath));
 
             setResource(new FileSystemResource(targetPath));
-        } catch (IOException e) {
+        } catch (BaseException e) {
             throw new ItemStreamException(e);
         }
         super.open(executionContext);

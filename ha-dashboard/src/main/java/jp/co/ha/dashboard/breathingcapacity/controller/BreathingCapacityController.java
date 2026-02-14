@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.BreathingCapacityApiComponent;
 import jp.co.ha.business.component.UserComponent;
-import jp.co.ha.business.dto.BreathingCapacityDto;
+import jp.co.ha.business.dto.BreathingCapacityParam;
+import jp.co.ha.business.dto.BreathingCapacityResult;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.breathingcapacity.form.BreathingCapacityForm;
 import jp.co.ha.db.entity.User;
@@ -106,18 +106,15 @@ public class BreathingCapacityController implements BaseWebController {
             return getView(model, BREATHING_CAPACITY_CALC);
         }
 
-        // DTOに変換
-        BreathingCapacityDto dto = new BreathingCapacityDto();
-        BeanUtil.copy(form, dto);
-
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         Optional<User> user = userComponent.findById(seqUserId);
 
-        dto.setGenderType(GenderType.of(user.get().getGenderType().intValue()));
+        BreathingCapacityParam param = new BreathingCapacityParam(form.getAge(),
+                GenderType.of(user.get().getGenderType().intValue()), form.getHeight());
 
-        BreathingCapacityDto calcResult = component.calc(dto, seqUserId);
+        BreathingCapacityResult calcResult = component.calc(param, seqUserId);
 
         model.addAttribute("calcResult", calcResult);
 

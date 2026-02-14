@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
-import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.api.healthinfoapp.response.HealthInfoRegistApiResponse;
+import jp.co.ha.business.component.annotation.MultiSubmitToken;
 import jp.co.ha.business.db.crud.read.HealthInfoFileSettingSearchService;
 import jp.co.ha.business.db.crud.read.HealthInfoSearchService;
 import jp.co.ha.business.dto.HealthInfoDto;
@@ -127,8 +127,8 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
                 .orElseThrow(() -> new BusinessException(ILLEGAL_ACCESS_ERROR,
                         "不正リクエストエラーです"));
 
-        HealthInfoDto dto = new HealthInfoDto();
-        BeanUtil.copy(healthInfoForm, dto);
+        HealthInfoDto dto = new HealthInfoDto(healthInfoForm.getHeight(),
+                healthInfoForm.getWeight());
 
         // セッションからユーザIDを取得
         Long seqUserId = sessionComponent

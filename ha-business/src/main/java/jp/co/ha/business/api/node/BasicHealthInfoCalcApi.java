@@ -41,7 +41,7 @@ public class BasicHealthInfoCalcApi
     public void bindErrorInfo(BasicHealthInfoCalcApiResponse response,
             String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
+        response.setDetail("%sに失敗しました. %s".formatted(getApiName(), errorMessage));
     }
 
 }

@@ -30,9 +30,9 @@ public abstract class BaseHealthCheckApiTasklet implements Tasklet {
 
     /** LOG */
     protected final Logger LOG = LoggerFactory.getLogger(BaseHealthCheckApiTasklet.class);
-    /** API通信情報Component */
+    /** API通信ログComponent */
     @Autowired
-    protected ApiLogComponent apiCommunicationDataComponent;
+    protected ApiLogComponent apiLogComponent;
     /** 健康情報設定ファイル */
     @Autowired
     protected HealthInfoProperties healthInfoProperties;
@@ -48,9 +48,9 @@ public abstract class BaseHealthCheckApiTasklet implements Tasklet {
 
         String transactionId = executionContext.containsKey(KEY_TRANSACTION_ID)
                 ? executionContext.getString(KEY_TRANSACTION_ID)
-                : apiCommunicationDataComponent.getTransactionId();
+                : apiLogComponent.transactionId();
 
-        LOG.debug("transactionId=" + transactionId);
+        LOG.debug("transactionId=%s".formatted(transactionId));
 
         return transactionId;
     }

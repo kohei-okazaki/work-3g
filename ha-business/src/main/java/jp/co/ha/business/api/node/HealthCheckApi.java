@@ -37,7 +37,7 @@ public class HealthCheckApi
     @Override
     public void bindErrorInfo(HealthCheckApiResponse response, String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
+        response.setDetail("%sに失敗しました. %s".formatted(getApiName(), errorMessage));
     }
 
 }

@@ -107,9 +107,15 @@ public class BusinessConfig implements WebMvcConfigurer {
             @Value("${root.api.url}") String rootApiUrl,
             @Value("${healthinfo.track.api.url}") String trackApiUrl,
             @Value("${healthinfo.track.api.db.migrate.flg}") boolean trackApiDbMigrateFlg) {
-        return new HealthInfoProperties(referenceFilePath, healthinfoNodeApiUrl,
-                healthinfoNodeApiMigrateFlg, healthInfoDashboardUrl, healthInfoApiUrl,
-                rootApiUrl, trackApiUrl, trackApiDbMigrateFlg);
+        return new HealthInfoProperties(
+                referenceFilePath,
+                healthinfoNodeApiUrl,
+                healthinfoNodeApiMigrateFlg,
+                healthInfoDashboardUrl,
+                healthInfoApiUrl,
+                rootApiUrl,
+                trackApiUrl,
+                trackApiDbMigrateFlg);
     }
 
     /**
@@ -134,7 +140,7 @@ public class BusinessConfig implements WebMvcConfigurer {
      * @param sqsConnnectionTimeout
      *     SQSコネクションタイムアウト
      * @param sqsSocketTimeout
-     *     API通信情報キュー名
+     *     SQSソケットタイムアウト
      * @param ssmConnnectionTimeout
      *     SSMコネクションタイムアウト
      * @param ssmSocketTimeout

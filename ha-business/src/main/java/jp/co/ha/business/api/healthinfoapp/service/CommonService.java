@@ -37,11 +37,11 @@ public abstract class CommonService {
         // ユーザ情報取得
         User user = userComponent.findById(request.getSeqUserId())
                 .orElseThrow(() -> new BusinessException(ACCOUNT_ILLEGAL,
-                        "ユーザ情報が存在しません seqUserId:" + request.getSeqUserId()));
+                        "ユーザ情報が存在しません seqUserId:%s".formatted(request.getSeqUserId())));
 
         if (!user.getApiKey().equals(request.getApiKey())) {
             throw new ApiException(API_EXEC_ERROR,
-                    "このユーザはAPIを実行できません。seq_user_id=" + request.getSeqUserId());
+                    "このユーザはAPIを実行できません。seq_user_id=%s".formatted(request.getSeqUserId()));
         }
     }
 }

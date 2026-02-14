@@ -56,73 +56,14 @@ public class ValidateErrorResult {
      * 妥当性チェックエラー
      *
      * @version 1.0.0
+     * @param name
+     *     フィールド名
+     * @param message
+     *     エラーメッセージ
+     * @param value
+     *     値
      */
-    public static class ValidateError {
-
-        /** フィールド名 */
-        private String name;
-        /** エラーメッセージ */
-        private String message;
-        /** 値 */
-        private String value;
-
-        /**
-         * nameを返す
-         *
-         * @return name
-         */
-        public String getName() {
-            return name;
-        }
-
-        /**
-         * nameを設定する
-         *
-         * @param name
-         *     フィールド名
-         */
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        /**
-         * messageを返す
-         *
-         * @return message
-         */
-        public String getMessage() {
-            return message;
-        }
-
-        /**
-         * messageを設定する
-         *
-         * @param message
-         *     エラーメッセージ
-         */
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        /**
-         * valueを返す
-         *
-         * @return value
-         */
-        public String getValue() {
-            return value;
-        }
-
-        /**
-         * valueを設定する
-         *
-         * @param value
-         *     値
-         */
-        public void setValue(String value) {
-            this.value = value;
-        }
-
+    public static record ValidateError(String name, String message, String value) {
     }
 
 }

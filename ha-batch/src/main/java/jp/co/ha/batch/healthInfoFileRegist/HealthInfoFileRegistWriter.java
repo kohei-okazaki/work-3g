@@ -62,7 +62,7 @@ public class HealthInfoFileRegistWriter
      * @param prop
      *     健康情報設定ファイル
      * @param apiCommunicationDataComponent
-     *     API通信情報Component
+     *     API通信ログComponent
      * @param slack
      *     Slack Component
      */
