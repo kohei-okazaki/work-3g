@@ -104,10 +104,11 @@ public class HealthInfoServiceImpl implements HealthInfoService {
                         () -> prop.healthInfoApiUrl() + seqUserId + "/healthinfo");
 
         // トランザクションIDを採番
-        String transactionId = apiLogComponent.getTransactionId();
+        String transactionId = apiLogComponent.transactionId();
 
         HealthInfoRegistApiRequest request = new HealthInfoRegistApiRequest();
-        BeanUtil.copy(dto, request);
+        request.setHeight(dto.height());
+        request.setWeight(dto.weight());
         request.setTestMode(TestMode.DB_REGIST);
         request.setTransactionId(transactionId);
 
@@ -164,7 +165,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
      */
     private String getDiffStatus(HealthInfoDto dto, HealthInfo healthInfo) {
         return healthInfoCalcService
-                .getHealthInfoStatus(dto.getWeight(), healthInfo.getWeight()).getValue();
+                .getHealthInfoStatus(dto.weight(), healthInfo.getWeight()).getValue();
     }
 
     /**
@@ -178,7 +179,7 @@ public class HealthInfoServiceImpl implements HealthInfoService {
      */
     private BigDecimal getDiffWeight(HealthInfoDto dto, HealthInfo healthInfo) {
         return healthInfoCalcService.calcDiffWeight(healthInfo.getWeight(),
-                dto.getWeight());
+                dto.weight());
     }
 
 }

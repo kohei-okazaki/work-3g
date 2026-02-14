@@ -52,7 +52,7 @@ public abstract class BaseDailyAnalysisMySQLReader<T> extends MyBatisPagingItemR
                     ? DateTimeUtil.toString(DateTimeUtil.getSysDate(),
                             YYYYMMDD_NOSEP)
                     : targetDate;
-            LOG.debug("targetDate=" + date);
+            LOG.debug("targetDate=%s".formatted(date));
 
             int year = Integer.parseInt(date.substring(0, 4));
             int month = Integer.parseInt(date.substring(4, 6));

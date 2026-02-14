@@ -53,17 +53,18 @@ public class HealthCheckNotifyTasklet implements Tasklet {
         switch (executionContext.getString(KEY_RESPONSE_TYPE)) {
         case "SUCCESS":
             // 成功の場合
-            LOG.debug(executionContext.getString(KEY_API_NAME) + " server up");
+            LOG.debug("%s server up".formatted(executionContext.getString(KEY_API_NAME)));
             slack.send(ContentType.BATCH,
-                    executionContext.getString(KEY_API_NAME) + " server up");
+                    "%s server up".formatted(executionContext.getString(KEY_API_NAME)));
             break;
         default:
             // 成功以外の場合
-            LOG.error(executionContext.getString(KEY_API_NAME) + " server down");
+            LOG.error("%s  server down"
+                    .formatted(executionContext.getString(KEY_API_NAME)));
             ses.sendMail(ssm.getValue(AwsSystemsManagerComponent.KEY_SYSTEM_MAILADDRESS),
                     executionContext.getString(KEY_TITLE_TEXT), TEMPLATE_ID);
             slack.send(ContentType.BATCH,
-                    executionContext.getString(KEY_API_NAME) + " server down");
+                    "%s server down".formatted(executionContext.getString(KEY_API_NAME)));
             break;
         }
 

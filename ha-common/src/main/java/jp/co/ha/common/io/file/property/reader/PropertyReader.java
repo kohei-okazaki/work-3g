@@ -39,7 +39,7 @@ public class PropertyReader {
      */
     public Properties read(String path, String fileName) {
 
-        LOG.debug(fileName + "の読込 開始");
+        LOG.debug("%sの読込 開始".formatted(fileName));
 
         Properties prop = new Properties();
         try (InputStream is = new FileInputStream(
@@ -50,7 +50,7 @@ public class PropertyReader {
         } catch (IOException e) {
             LOG.error("読込エラー", e);
         } finally {
-            LOG.debug(fileName + "の読込 終了");
+            LOG.debug("%sの読込 終了".formatted(fileName));
         }
         return prop;
     }

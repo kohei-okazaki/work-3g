@@ -123,11 +123,8 @@ public class BeanValidator<T> {
         validator.initialize(f.getAnnotation(Required.class));
         boolean notError = validator.isValid(value, null);
         if (!notError) {
-            ValidateError error = new ValidateError();
-            error.setName(f.getName());
-            error.setMessage(f.getAnnotation(Required.class).message());
-            error.setValue(value);
-            result.add(error);
+            result.add(new ValidateError(f.getName(),
+                    f.getAnnotation(Required.class).message(), value));
         }
     }
 
@@ -146,11 +143,8 @@ public class BeanValidator<T> {
         validator.initialize(f.getAnnotation(Min.class));
         boolean notError = validator.isValid(value, null);
         if (!notError) {
-            ValidateError error = new ValidateError();
-            error.setName(f.getName());
-            error.setMessage(f.getAnnotation(Min.class).message());
-            error.setValue(value);
-            result.add(error);
+            result.add(new ValidateError(f.getName(),
+                    f.getAnnotation(Min.class).message(), value));
         }
     }
 
@@ -169,11 +163,8 @@ public class BeanValidator<T> {
         validator.initialize(f.getAnnotation(Max.class));
         boolean notError = validator.isValid(value, null);
         if (!notError) {
-            ValidateError error = new ValidateError();
-            error.setName(f.getName());
-            error.setMessage(f.getAnnotation(Max.class).message());
-            error.setValue(value);
-            result.add(error);
+            result.add(new ValidateError(f.getName(),
+                    f.getAnnotation(Max.class).message(), value));
         }
     }
 
@@ -192,11 +183,8 @@ public class BeanValidator<T> {
         validator.initialize(f.getAnnotation(Length.class));
         boolean notError = validator.isValid(value, null);
         if (!notError) {
-            ValidateError error = new ValidateError();
-            error.setName(f.getName());
-            error.setMessage(f.getAnnotation(Length.class).message());
-            error.setValue(value);
-            result.add(error);
+            result.add(new ValidateError(f.getName(),
+                    f.getAnnotation(Length.class).message(), value));
         }
     }
 
@@ -215,11 +203,8 @@ public class BeanValidator<T> {
         validator.initialize(f.getAnnotation(Pattern.class));
         boolean notError = validator.isValid(value, null);
         if (!notError) {
-            ValidateError error = new ValidateError();
-            error.setName(f.getName());
-            error.setMessage(f.getAnnotation(Pattern.class).message());
-            error.setValue(value);
-            result.add(error);
+            result.add(new ValidateError(f.getName(),
+                    f.getAnnotation(Pattern.class).message(), value));
         }
     }
 
@@ -238,11 +223,8 @@ public class BeanValidator<T> {
         validator.initialize(f.getAnnotation(Flag.class));
         boolean notError = validator.isValid(value, null);
         if (!notError) {
-            ValidateError error = new ValidateError();
-            error.setName(f.getName());
-            error.setMessage(f.getAnnotation(Flag.class).message());
-            error.setValue(value);
-            result.add(error);
+            result.add(new ValidateError(f.getName(),
+                    f.getAnnotation(Flag.class).message(), value));
         }
     }
 

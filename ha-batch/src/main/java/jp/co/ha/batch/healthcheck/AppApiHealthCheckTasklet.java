@@ -40,17 +40,16 @@ public class AppApiHealthCheckTasklet extends BaseHealthCheckApiTasklet {
 
         executionContext.putString(KEY_TRANSACTION_ID, transactionId);
 
-        HealthCheckApiRequest req = new HealthCheckApiRequest();
+        HealthCheckApiRequest request = new HealthCheckApiRequest();
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(
                         () -> healthInfoProperties.healthInfoApiUrl() + "healthcheck");
 
-        HealthCheckApiResponse response = healthCheckApi.callApi(req, connectInfo);
+        HealthCheckApiResponse response = healthCheckApi.callApi(request, connectInfo);
 
-        ApiLogQueuePayload payload = apiCommunicationDataComponent
-                .getPayload4AppApi(healthCheckApi, connectInfo, req, response,
-                        transactionId);
-        apiCommunicationDataComponent.registQueue(payload);
+        ApiLogQueuePayload payload = apiLogComponent.getPayload4AppApi(healthCheckApi,
+                connectInfo, request, response, transactionId);
+        apiLogComponent.registQueue(payload);
 
         executionContext.put(KEY_RESPONSE_TYPE, response.getResultType().toString());
         executionContext.put(KEY_API_NAME, "healthinfo api");

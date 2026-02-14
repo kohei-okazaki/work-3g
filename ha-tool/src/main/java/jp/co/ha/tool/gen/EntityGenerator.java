@@ -33,7 +33,7 @@ public class EntityGenerator extends BaseGenerator {
 
         for (String table : prop.getDdlTableList()) {
 
-            LOG.debug("テーブル名:" + table);
+            LOG.debug("テーブル名:%s".formatted(table));
 
             JavaSource source = new JavaSource();
             setCommonInfo(source);

@@ -21,7 +21,6 @@ import jp.co.ha.business.dto.InquiryDto;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWizardController;
 import jp.co.ha.dashboard.inquiry.form.InquiryForm;
 
@@ -102,9 +101,9 @@ public class InquiryController implements BaseWizardController<InquiryForm> {
                         "不正リクエストエラーです"));
 
         // 問い合わせ管理情報を登録する
-        InquiryDto dto = new InquiryDto();
-        BeanUtil.copy(inquiryForm, dto);
-        dto.setSeqUserId(seqUserId);
+        InquiryDto dto = new InquiryDto(seqUserId, inquiryForm.getTitle(),
+                inquiryForm.getType(), inquiryForm.getBody());
+
         inquiryComponent.regist(dto);
 
         // 問い合わせ完了メールを送信する

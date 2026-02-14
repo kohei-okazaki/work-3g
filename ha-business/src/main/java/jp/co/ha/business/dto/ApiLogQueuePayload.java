@@ -16,216 +16,34 @@ import jp.co.ha.common.util.HttpStatusSerializer;
 /**
  * API通信ログのSQS-Payload
  * 
+ * @param transactionId
+ *     トランザクションID
+ * @param apiName
+ *     API名
+ * @param httpMethod
+ *     HTTPメソッド
+ * @param url
+ *     URL
+ * @param body
+ *     リクエストボディ
+ * @param requestDate
+ *     要求日時
+ * @param httpStatus
+ *     HTTPステータス
+ * @param detail
+ *     詳細
+ * @param responseDate
+ *     応答日時
  * @version 1.0.0
  */
-public class ApiLogQueuePayload {
-
-    /* リクエスト項目 */
-    /** トランザクションID */
-    @JsonProperty("transaction_id")
-    private String transactionId;
-    /** API名 */
-    @JsonProperty("api_name")
-    private String apiName;
-    /** HTTPメソッド */
-    @JsonProperty("http_method")
-    private String httpMethod;
-    /** URL */
-    @JsonProperty("url")
-    private String url;
-    /** リクエストボディ */
-    @JsonProperty("body")
-    private String body;
-    /** 要求日時 */
-    @JsonProperty("request_date")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
-    private LocalDateTime requestDate;
-
-    /* レスポンス項目 */
-    /** HTTPステータス */
-    @JsonProperty("http_status")
-    @JsonSerialize(using = HttpStatusSerializer.class)
-    @JsonDeserialize(using = HttpStatusDeserializer.class)
-    private HttpStatus httpStatus;
-    /** 詳細 */
-    @JsonProperty("detail")
-    private String detail;
-    /** 応答日時 */
-    @JsonProperty("response_date")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
-    private LocalDateTime responseDate;
-
-    /**
-     * トランザクションIDを返す
-     * 
-     * @return transactionId
-     */
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    /**
-     * トランザクションIDを設定する
-     * 
-     * @param transactionId
-     *     トランザクションID
-     */
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    /**
-     * API名を返す
-     * 
-     * @return apiName
-     */
-    public String getApiName() {
-        return apiName;
-    }
-
-    /**
-     * API名を設定する
-     * 
-     * @param apiName
-     *     API名
-     */
-    public void setApiName(String apiName) {
-        this.apiName = apiName;
-    }
-
-    /**
-     * HTTPメソッドを返す
-     * 
-     * @return httpMethod
-     */
-    public String getHttpMethod() {
-        return httpMethod;
-    }
-
-    /**
-     * HTTPメソッドを設定する
-     * 
-     * @param httpMethod
-     *     HTTPメソッド
-     */
-    public void setHttpMethod(String httpMethod) {
-        this.httpMethod = httpMethod;
-    }
-
-    /**
-     * URLを返す
-     * 
-     * @return url
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * URLを設定する
-     * 
-     * @param url
-     *     URL
-     */
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    /**
-     * リクエストボディを返す
-     * 
-     * @return body
-     */
-    public String getBody() {
-        return body;
-    }
-
-    /**
-     * リクエストボディを設定する
-     * 
-     * @param body
-     *     リクエストボディ
-     */
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    /**
-     * 要求日時を返す
-     * 
-     * @return requestDate
-     */
-    public LocalDateTime getRequestDate() {
-        return requestDate;
-    }
-
-    /**
-     * 要求日時を設定する
-     * 
-     * @param requestDate
-     *     要求日時
-     */
-    public void setRequestDate(LocalDateTime requestDate) {
-        this.requestDate = requestDate;
-    }
-
-    /**
-     * HTTPステータスを返す
-     * 
-     * @return httpStatus
-     */
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
-    }
-
-    /**
-     * HTTPステータスを設定する
-     * 
-     * @param httpStatus
-     *     HTTPステータス
-     */
-    public void setHttpStatus(HttpStatus httpStatus) {
-        this.httpStatus = httpStatus;
-    }
-
-    /**
-     * 詳細を返す
-     * 
-     * @return detail
-     */
-    public String getDetail() {
-        return detail;
-    }
-
-    /**
-     * 詳細を設定する
-     * 
-     * @param detail
-     *     詳細
-     */
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    /**
-     * 応答日時を返す
-     * 
-     * @return responseDate
-     */
-    public LocalDateTime getResponseDate() {
-        return responseDate;
-    }
-
-    /**
-     * 応答日時を設定する
-     * 
-     * @param responseDate
-     *     応答日時
-     */
-    public void setResponseDate(LocalDateTime responseDate) {
-        this.responseDate = responseDate;
-    }
-
+public record ApiLogQueuePayload(
+        @JsonProperty("transaction_id") String transactionId,
+        @JsonProperty("api_name") String apiName,
+        @JsonProperty("http_method") String httpMethod,
+        @JsonProperty("url") String url,
+        @JsonProperty("body") String body,
+        @JsonProperty("request_date") @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo") LocalDateTime requestDate,
+        @JsonProperty("http_status") @JsonSerialize(using = HttpStatusSerializer.class) @JsonDeserialize(using = HttpStatusDeserializer.class) HttpStatus httpStatus,
+        @JsonProperty("detail") String detail,
+        @JsonProperty("response_date") @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo") LocalDateTime responseDate) {
 }

@@ -64,7 +64,7 @@ public class ToolUtil {
                     + FileUtil.FileSeparator.SYSTEM.getValue() + genFile.getFileName());
             Files.write(path,
                     genFile.getData().getBytes(genFile.getCharset().getValue()));
-            LOG.debug("自動生成:" + path.toFile().getName());
+            LOG.debug("自動生成:%s".formatted(path.toFile().getName()));
         }
 
     }
@@ -533,10 +533,7 @@ public class ToolUtil {
             if (!containsTable(existTableList, physicalName)
                     && !StringUtil.isEmpty(physicalName)) {
                 existTableList.add(physicalName);
-                Table table = new Table();
-                table.setLogicalName(logicalName);
-                table.setPhysicalName(physicalName);
-                tableList.add(table);
+                tableList.add(new Table(logicalName, physicalName, null));
             }
         }
         return tableList;
@@ -566,30 +563,27 @@ public class ToolUtil {
      */
     public static Table getTable(List<ExcelRow> rowList, String tableName) {
 
-        Table table = new Table();
-        table.setPhysicalName(tableName);
         String logicalName = rowList.stream()
                 .filter(e -> isTargetTable(e, tableName))
                 .map(e -> e.getCell(CellPositionType.LOGICAL_NAME))
                 .collect(Collectors.toList())
                 .get(0)
                 .getValue();
-        table.setLogicalName(logicalName);
-        table.setColumnList(
-                rowList.stream().filter(e -> isTargetTable(e, tableName))
-                        .map(e -> {
-                            Column column = new Column();
-                            column.setName(getColumnName(e));
-                            column.setComment(getColumnComment(e));
-                            column.setType(getColumnType(e));
-                            column.setPrimary(isPrimaryKey(e));
-                            column.setSequence(isSequence(e));
-                            column.setCrypt(isCrypt(e));
-                            column.setNotNull(isNotNull(e));
-                            column.setDefaultValue(getDefaultValue(e));
-                            return column;
-                        }).collect(Collectors.toList()));
 
-        return table;
+        List<Column> columnList = rowList.stream()
+                .filter(e -> isTargetTable(e, tableName))
+                .map(e -> {
+                    return new Column(
+                            getColumnName(e),
+                            getColumnComment(e),
+                            getColumnType(e),
+                            isPrimaryKey(e),
+                            isSequence(e),
+                            isCrypt(e),
+                            isNotNull(e),
+                            getDefaultValue(e));
+                }).collect(Collectors.toList());
+
+        return new Table(tableName, logicalName, columnList);
     }
 }

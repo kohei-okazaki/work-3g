@@ -4,11 +4,11 @@
     <tbody>
       <tr>
         <th class="bg-light" th:text="#{predictBreathingCapacity}" />
-        <td th:text="${calcResult.predictBreathingCapacity} + '&ensp;cc'" />
+        <td th:text="${calcResult.predictBreathingCapacity()} + '&ensp;cc'" />
       </tr>
       <tr>
         <th class="bg-light" th:text="#{breathingCapacityPercentage}" />
-        <td th:text="${calcResult.breathingCapacityPercentage} + '&ensp;%'" />
+        <td th:text="${calcResult.breathingCapacityPercentage()} + '&ensp;%'" />
       </tr>
     </tbody>
   </table><!-- /.table table-hover table-striped -->

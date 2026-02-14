@@ -203,7 +203,7 @@ public class AwsSesComponent {
                         ? VerifyResultType.STILL
                         : VerifyResultType.AUTHED;
 
-        LOG.debug("認証メール送信完了 認証結果=" + resultType);
+        LOG.debug("認証メール送信完了 認証結果=%s".formatted(resultType));
 
         return resultType;
 
@@ -273,8 +273,8 @@ public class AwsSesComponent {
 
         try (SesClient sesClient = getSesClient()) {
 
-            LOG.debug("Amazon SES region=" + awsProps.region().id()
-                    + ",to_mail_address=" + to);
+            LOG.debug("Amazon SES region=%s, to_mail_address=%s"
+                    .formatted(awsProps.region().id(), to));
 
             Destination destination = Destination.builder()
                     .toAddresses(to)
@@ -296,7 +296,7 @@ public class AwsSesComponent {
                     .build();
 
             SendEmailResponse response = sesClient.sendEmail(request);
-            LOG.debug("SES response ID=" + response.messageId());
+            LOG.debug("SES response ID=%s".formatted(response.messageId()));
 
             return EmailSendResultType.SUCCESS;
 
@@ -365,7 +365,7 @@ public class AwsSesComponent {
         if (StringUtil.isEmpty(templateId)) {
             // テンプレートIDが未指定の場合
             throw new SystemException(MAIL_TEMPLATE_REQUIED_ERROR,
-                    "メールテンプレートIDが未指定です。templateId=" + templateId);
+                    "メールテンプレートIDが未指定です。templateId=%s".formatted(templateId));
         }
 
         try {

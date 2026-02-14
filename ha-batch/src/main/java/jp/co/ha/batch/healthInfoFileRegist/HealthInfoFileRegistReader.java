@@ -56,7 +56,7 @@ public class HealthInfoFileRegistReader
      * @param prop
      *     健康情報設定ファイル
      * @param component
-     *     API通信情報Component
+     *     API通信ログComponent
      * @param jsonReader
      *     JSON読み取りクラス
      */
@@ -141,7 +141,7 @@ public class HealthInfoFileRegistReader
         // モード設定
         request.setTestMode(TestMode.DB_REGIST);
         // トランザクションID
-        request.setTransactionId(component.getTransactionId());
+        request.setTransactionId(component.transactionId());
 
         return request;
     }

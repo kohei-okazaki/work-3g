@@ -70,7 +70,7 @@ public class HealthInfoRegistServiceImpl extends CommonService
 
         if (request.getTransactionId() == null) {
             // API通信ログ.トランザクションIDを採番
-            request.setTransactionId(apiLogComponent.getTransactionId());
+            request.setTransactionId(apiLogComponent.transactionId());
         }
 
         BasicHealthInfoCalcApiRequest basicHealthInfoCalcRequest = new BasicHealthInfoCalcApiRequest();
