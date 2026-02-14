@@ -63,15 +63,15 @@ public abstract class BaseOnmemoryCache<T> {
 
         if (this.cacheDate == null) {
             // キャッシュされていない場合
-            LOG.debug(getTableName() + " is no cache.");
+            LOG.debug("%s is no cache.".formatted(getTableName()));
             return true;
         } else if (this.cacheDate.plusSeconds(getExpireSeconds() / 1000)
                 .compareTo(LocalDateTime.now()) < 0) {
             // キャッシュの有効期限を超過している場合
-            LOG.debug(getTableName() + " is expired.");
+            LOG.debug("%s is expired.".formatted(getTableName()));
             return true;
         }
-        LOG.debug(getTableName() + "'s cache is enable.");
+        LOG.debug("%s's cache is enable.".formatted(getTableName()));
         return false;
     }
 

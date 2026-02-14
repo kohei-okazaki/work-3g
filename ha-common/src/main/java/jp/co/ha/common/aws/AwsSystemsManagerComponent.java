@@ -80,7 +80,7 @@ public class AwsSystemsManagerComponent {
         String envKey = StringUtil.THRASH
                 + systemProps.environment().getValue().toUpperCase()
                 + StringUtil.THRASH + key;
-        LOG.debug("key=" + envKey + ", decrypt=" + decrypt);
+        LOG.debug("key=%s, decrypt=%s".formatted(envKey, decrypt));
 
         GetParameterResponse res = getSsmClient()
                 .getParameter(GetParameterRequest.builder()

@@ -89,7 +89,7 @@ public class BatchJobListener implements JobExecutionListener {
         // Slackに通知
         slack.send(ContentType.BATCH, message);
         // ログ出力
-        LOG.debug("end JOB. " + message);
+        LOG.debug("end JOB. message=%s".formatted(message));
     }
 
     /**

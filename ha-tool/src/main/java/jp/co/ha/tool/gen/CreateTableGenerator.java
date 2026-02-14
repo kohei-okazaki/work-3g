@@ -28,19 +28,19 @@ public class CreateTableGenerator extends BaseGenerator {
             Table table = ToolUtil.getTable(excel.getRowList(), tableName);
 
             StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
-            body.add("-- " + table.getLogicalName());
+            body.add("-- " + table.logicalName());
             body.add("CREATE TABLE IF NOT EXISTS " + tableName + " (");
             StringJoiner columnData = new StringJoiner(
                     StringUtil.COMMA + LineFeedType.CRLF.getValue());
-            table.getColumnList().stream().forEach(e -> {
+            table.columnList().stream().forEach(e -> {
 
-                String comment = e.getComment();
-                String name = e.getName();
-                String type = e.getType();
+                String comment = e.comment();
+                String name = e.name();
+                String type = e.type();
                 boolean isSequence = e.isSequence();
                 boolean isNotNull = e.isNotNull();
                 boolean isPrimary = e.isPrimary();
-                String defaultValue = e.getDefaultValue();
+                String defaultValue = e.defaultValue();
 
                 StringBuilder sb = new StringBuilder();
                 sb.append("-- ");

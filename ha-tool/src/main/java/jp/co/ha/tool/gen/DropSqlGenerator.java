@@ -20,8 +20,8 @@ public class DropSqlGenerator extends BaseGenerator {
 
         StringJoiner body = new StringJoiner(StringUtil.NEW_LINE);
         ToolUtil.getTableList(excel.getRowList()).stream().forEach(e -> {
-            body.add("-- " + e.getLogicalName());
-            body.add("DROP TABLE IF EXISTS " + e.getPhysicalName() + ";");
+            body.add("-- " + e.logicalName());
+            body.add("DROP TABLE IF EXISTS " + e.physicalName() + ";");
         });
 
         // 自動生成ファイル

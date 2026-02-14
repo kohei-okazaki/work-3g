@@ -14,7 +14,7 @@ public class LoginApiRequest extends BaseRootApiRequest implements BaseApiReques
 
     /** ログインID */
     @JsonProperty("seq_login_id")
-    private Integer seqLoginId;
+    private Long seqLoginId;
     /** パスワード */
     @JsonProperty("password")
     private String password;
@@ -24,7 +24,7 @@ public class LoginApiRequest extends BaseRootApiRequest implements BaseApiReques
      *
      * @return seqLoginId
      */
-    public Integer getSeqLoginId() {
+    public Long getSeqLoginId() {
         return seqLoginId;
     }
 
@@ -34,7 +34,7 @@ public class LoginApiRequest extends BaseRootApiRequest implements BaseApiReques
      * @param seqLoginId
      *     ログインID
      */
-    public void setSeqLoginId(Integer seqLoginId) {
+    public void setSeqLoginId(Long seqLoginId) {
         this.seqLoginId = seqLoginId;
     }
 

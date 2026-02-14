@@ -26,17 +26,22 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
             ClientHttpRequestExecution execution) throws IOException {
 
         // リクエストの内容をログに出力
-        LOG.debug("Request URI: " + request.getURI());
-        LOG.debug("Request Method: " + request.getMethod());
-        LOG.debug("Request Headers: " + request.getHeaders());
-        LOG.debug("Request Body: " + new String(body, StandardCharsets.UTF_8));
+        LOG.debug(
+                "Request URI: %s, Request Method: %s, Request Headers:%s, Request Body: %s"
+                        .formatted(
+                                request.getURI(),
+                                request.getMethod(),
+                                request.getHeaders(),
+                                new String(body, StandardCharsets.UTF_8)));
 
         // レスポンスを取得
         ClientHttpResponse response = execution.execute(request, body);
 
         // レスポンスの内容をログに出力
-        LOG.debug("Response Status Code: " + response.getStatusCode());
-        LOG.debug("Response Headers: " + response.getHeaders());
+        LOG.debug("Response Status Code: %s, Response Headers: %s"
+                .formatted(
+                        response.getStatusCode(),
+                        response.getHeaders()));
 
         // ここでResponseBodyを取得するとBaseApi側でresponseが取れなくなるため、以下のレスポンスBody取得処理はコメントアウト
         // InputStreamReader inputStreamReader = new InputStreamReader(

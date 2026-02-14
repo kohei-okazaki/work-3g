@@ -62,9 +62,9 @@ public class ApiLogSqsImportTasklet implements Tasklet {
 
             for (DequeueResult<ApiLogQueuePayload> queueResult : queueList) {
                 // API_LOG登録
-                component.create(queueResult.getPayload());
+                component.create(queueResult.payload());
                 // キュー削除
-                sqs.ackOne(queueName, queueResult.getReceiptHandle());
+                sqs.ackOne(queueName, queueResult.receiptHandle());
             }
         }
 

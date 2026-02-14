@@ -60,8 +60,8 @@ public class DataPurgeTasklet implements Tasklet {
             throws Exception {
 
         for (DataPurge data : batchProperties.getDataPurgeList()) {
-            LOG.debug("table_name=" + data.getTableName() + ", expired="
-                    + data.getExpired());
+            LOG.debug("table_name=%s, expired=%s".formatted(data.getTableName(),
+                    data.getExpired()));
 
             String tableKey = data.getTableName();
             LocalDateTime threshold = LocalDateTime.now()

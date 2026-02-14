@@ -34,7 +34,7 @@ public abstract class MultiThreadFunction<T> {
      */
     public final ResultType execute(T t) throws InterruptedException {
 
-        LOG.debug("並列処理開始, スレッド数=" + getThreadCount());
+        LOG.debug("並列処理開始, スレッド数=%s".formatted(getThreadCount()));
 
         // 処理結果
         ResultType result = ResultType.FAILURE;
