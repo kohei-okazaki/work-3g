@@ -84,10 +84,10 @@ public class SlackApiComponent {
 
             try (Response response = new OkHttpClient().newCall(request).execute()) {
                 String responseBody = response.body().string();
-                LOG.debug("Slack API response: " + responseBody);
+                LOG.debug("Slack API response: %s".formatted(responseBody));
 
                 if (!response.isSuccessful()) {
-                    LOG.warn("Slack送信に失敗しました。code=" + response.code());
+                    LOG.warn("Slack送信に失敗しました。code=%s".formatted(response.code()));
                 }
             }
         } catch (IOException e) {
@@ -222,12 +222,12 @@ public class SlackApiComponent {
             String fileId;
             try (Response res = client.newCall(getUrl).execute()) {
                 String body = res.body().string();
-                LOG.debug("getUploadURLExternal: " + body);
+                LOG.debug("getUploadURLExternal: %s".formatted(body));
                 JsonNode json = mapper.readTree(body);
                 if (!json.path("ok").asBoolean()) {
                     throw new SystemRuntimeException(FILE_UPLOAD_ERROR,
-                            "getUploadURLExternal failed: "
-                                    + json.path("error").asText());
+                            "getUploadURLExternal failed: %s"
+                                    .formatted(json.path("error").asText()));
                 }
                 uploadUrl = json.path("upload_url").asText();
                 fileId = json.path("file_id").asText();
@@ -267,12 +267,12 @@ public class SlackApiComponent {
 
             try (Response res = client.newCall(completeReq).execute()) {
                 String body = res.body().string();
-                LOG.debug("completeUploadExternal: " + body);
+                LOG.debug("completeUploadExternal: %s".formatted(body));
                 JsonNode json = mapper.readTree(body);
                 if (!json.path("ok").asBoolean()) {
                     throw new SystemRuntimeException(FILE_UPLOAD_ERROR,
-                            "completeUploadExternal failed: "
-                                    + json.path("error").asText());
+                            "completeUploadExternal failed: %s"
+                                    .formatted(json.path("error").asText()));
                 }
             }
 
@@ -313,7 +313,7 @@ public class SlackApiComponent {
                 .findFirst()
                 .orElseThrow(() -> new SystemRuntimeException(AWS_S3_DOWNLOAD_ERROR,
                         "jsonに対象のコンテンツタイプが存在しません. contentType="
-                                + contentType.getValue()));
+                                .formatted(contentType.getValue())));
     }
 
     /**

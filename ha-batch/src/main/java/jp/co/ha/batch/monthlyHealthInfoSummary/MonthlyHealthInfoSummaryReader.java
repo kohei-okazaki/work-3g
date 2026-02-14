@@ -50,14 +50,14 @@ public class MonthlyHealthInfoSummaryReader extends MyBatisPagingItemReader<Heal
         String date = StringUtil.isEmpty(targetDate)
                 ? DateTimeUtil.toString(DateTimeUtil.getSysDate(), YYYYMM_NOSEP)
                 : targetDate;
-        LOG.debug("targetDate=" + date);
+        LOG.debug("targetDate=%s".formatted(date));
 
         int year = Integer.parseInt(date.substring(0, 4));
         int month = Integer.parseInt(date.substring(4));
         LocalDateTime from = LocalDateTime.of(year, month, 1, 0, 0, 0);
         LocalDateTime to = LocalDateTime.of(year, month,
                 DateTimeUtil.getLastDayOfMonth(from), 23, 59, 59);
-        LOG.debug("from=" + from + ", to=" + to);
+        LOG.debug("from=%s, to=%s".formatted(from, to));
 
         // SqlSessionFactory設定
         setSqlSessionFactory(sqlSessionFactory);

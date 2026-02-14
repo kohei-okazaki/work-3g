@@ -64,7 +64,7 @@ public class ToolUtil {
                     + FileUtil.FileSeparator.SYSTEM.getValue() + genFile.getFileName());
             Files.write(path,
                     genFile.getData().getBytes(genFile.getCharset().getValue()));
-            LOG.debug("自動生成:" + path.toFile().getName());
+            LOG.debug("自動生成:%s".formatted(path.toFile().getName()));
         }
 
     }

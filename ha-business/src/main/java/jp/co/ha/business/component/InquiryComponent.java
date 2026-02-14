@@ -123,7 +123,7 @@ public class InquiryComponent {
         // Slack通知
         slack.sendFile(SlackApiComponent.ContentType.DASHBOARD, dto.body().getBytes(),
                 s3Key, SLACK_TITLE_REGIST,
-                "問い合わせユーザID=" + dto.seqUserId() + ", S3キー=" + s3Key + "を登録.");
+                "問い合わせユーザID=%s, S3キー=%sを登録".formatted(dto.seqUserId(), s3Key));
     }
 
     /**

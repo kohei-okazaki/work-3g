@@ -50,7 +50,7 @@ public abstract class BaseHealthCheckApiTasklet implements Tasklet {
                 ? executionContext.getString(KEY_TRANSACTION_ID)
                 : apiLogComponent.transactionId();
 
-        LOG.debug("transactionId=" + transactionId);
+        LOG.debug("transactionId=%s".formatted(transactionId));
 
         return transactionId;
     }

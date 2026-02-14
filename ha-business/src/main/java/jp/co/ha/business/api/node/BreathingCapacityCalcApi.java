@@ -41,7 +41,7 @@ public class BreathingCapacityCalcApi extends
     public void bindErrorInfo(BreathingCapacityCalcApiResponse response,
             String errorMessage) {
         response.setResult(Result.FAILURE);
-        response.setDetail(getApiName() + "に失敗しました. " + errorMessage);
+        response.setDetail("%sに失敗しました. %s".formatted(getApiName(), errorMessage));
     }
 
 }

@@ -102,7 +102,7 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
 
             // 「テーブル名.csv」 を取得
             targetPath = Paths.get(baseDir, getFileName(batchProps) + CSV);
-            LOG.debug("targetPath=" + targetPath);
+            LOG.debug("targetPath=%s".formatted(targetPath));
 
             setResource(new FileSystemResource(targetPath));
         } catch (BaseException e) {

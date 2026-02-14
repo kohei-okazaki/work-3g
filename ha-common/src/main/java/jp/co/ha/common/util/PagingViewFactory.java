@@ -65,12 +65,11 @@ public class PagingViewFactory {
     public static PagingView getPageView(Pageable pageable, String path, long count) {
 
         LOG.debug(
-                // 要求しているページ番号
-                "pageable.getPageNumber()=" + pageable.getPageNumber()
-                // 表示件数
-                        + ", pageable.getPageSize()=" + pageable.getPageSize()
-                        // ↑2つの積
-                        + ", pageable.getOffset()=" + pageable.getOffset());
+                // 要求しているページ番号, 表示件数, 2つの積
+                "page_number=%s, page_size=%s, offset=%s".formatted(
+                        pageable.getPageNumber(),
+                        pageable.getPageSize(),
+                        pageable.getOffset()));
 
         PagingView pv = new PagingView();
 

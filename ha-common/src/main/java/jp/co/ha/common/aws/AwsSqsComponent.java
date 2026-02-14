@@ -94,7 +94,7 @@ public class AwsSqsComponent {
                             GetQueueUrlRequest.builder()
                                     .queueName(queueName).build())
                     .queueUrl();
-            LOG.debug("queueUrl=" + queueUrl + ", queuename=" + queueName);
+            LOG.debug("queueUrl=%s, queuename=%s".formatted(queueUrl, queueName));
 
             SendMessageRequest.Builder builder = SendMessageRequest.builder()
                     .queueUrl(queueUrl)
@@ -248,7 +248,7 @@ public class AwsSqsComponent {
                     .queueUrl(queueUrl)
                     .receiptHandle(receiptHandle)
                     .build());
-            LOG.debug("delete queue, queueUrl=" + queueUrl);
+            LOG.debug("delete queue, queueUrl=%s".formatted(queueUrl));
         } catch (Exception e) {
             throw new SystemException(AWS_SQS_ACK_ERROR, e);
         }
