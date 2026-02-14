@@ -36,15 +36,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ha-common"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ha-db"/>
-	<classpathentry excluding="**" kind="src" output="target/test-classes" path="app/git/work-3g/ha-db/src/test/resources">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="test" value="true"/>
-			<attribute name="optional" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
