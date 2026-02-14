@@ -37,13 +37,16 @@ public class AnnotatedSerializablePlugin extends PluginAdapter {
      *     TopLevelClass
      */
     private void addSerializableWithAnnotatedUID(TopLevelClass topLevelClass) {
-        // import
-        topLevelClass.addImportedType("java.io.Serializable");
-        topLevelClass.addImportedType("jp.co.ha.common.log.annotation.Ignore");
+
+        // 既にserialVersionUID があるなら、スキップ
+        for (Field field : topLevelClass.getFields()) {
+            if ("serialVersionUID".equals(field.getName())) {
+                return;
+            }
+        }
 
         // implements Serializable
-        topLevelClass
-                .addSuperInterface(new FullyQualifiedJavaType("java.io.Serializable"));
+        topLevelClass.addImportedType("java.io.Serializable");
 
         // フィールドの作成
         Field field = new Field("serialVersionUID", new FullyQualifiedJavaType("long"));
@@ -53,6 +56,7 @@ public class AnnotatedSerializablePlugin extends PluginAdapter {
         field.setInitializationString("1L");
 
         // アノテーション付与
+        topLevelClass.addImportedType("jp.co.ha.common.log.annotation.Ignore");
         field.addAnnotation("@Ignore");
 
         // 追加
