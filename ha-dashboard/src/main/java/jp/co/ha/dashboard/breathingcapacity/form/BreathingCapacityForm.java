@@ -19,13 +19,14 @@ public class BreathingCapacityForm implements BaseForm {
     /** 年齢 */
     @Required(message = "年齢が未入力です")
     @Pattern(regixPattern = RegexType.HALF_NUMBER, message = "年齢は半角数字で入力して下さい")
+    @Decimal(min = "0", max = "150", message = "年齢は0~150で入力してください")
     private Integer age;
     /** 性別 */
     private String gender;
     /** 身長 */
     @Mask
     @Required(message = "身長が未入力です")
-    @Decimal(min = "1", max = "300", message = "身長が不正な値です")
+    @Decimal(min = "0", max = "300", message = "身長は0~300で入力してください")
     private BigDecimal height;
 
     /**
