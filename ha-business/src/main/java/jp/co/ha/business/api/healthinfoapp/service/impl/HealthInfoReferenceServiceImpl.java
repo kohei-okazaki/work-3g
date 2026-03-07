@@ -56,7 +56,7 @@ public class HealthInfoReferenceServiceImpl extends CommonService
                             request.getSeqHealthInfoId(), request.getSeqUserId()));
         }
 
-        HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
+        HealthInfo entity = healthInfoList.getFirst();
         {
             BaseAppApiResponse.Account account = new BaseAppApiResponse.Account();
             account.setSeqUserId(request.getSeqUserId());

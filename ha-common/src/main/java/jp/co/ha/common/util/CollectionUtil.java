@@ -52,23 +52,7 @@ public class CollectionUtil {
         if (isEmpty(list)) {
             return null;
         }
-        ListOperatorFunction<T> lastOperator = l -> l.get(0);
-        return lastOperator.get(list);
-    }
-
-    /**
-     * 指定したリストの最後の要素を返す
-     *
-     * @param list
-     *     対象のリスト
-     * @return リストの最後の要素
-     */
-    public static <T> T getLast(List<T> list) {
-        if (isEmpty(list)) {
-            return null;
-        }
-        ListOperatorFunction<T> lastOperator = l -> l.get(l.size() - 1);
-        return lastOperator.get(list);
+        return list.getFirst();
     }
 
     /**

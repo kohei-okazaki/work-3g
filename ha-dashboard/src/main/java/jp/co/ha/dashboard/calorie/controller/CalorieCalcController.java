@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.ha.business.component.CalorieApiComponent;
 import jp.co.ha.business.component.UserComponent;
-import jp.co.ha.business.dto.CalorieCalcDto;
+import jp.co.ha.business.dto.CalorieCalcParam;
+import jp.co.ha.business.dto.CalorieCalcResult;
 import jp.co.ha.business.exception.BusinessException;
 import jp.co.ha.business.healthInfo.type.GenderType;
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.system.SessionComponent;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.controller.BaseWebController;
 import jp.co.ha.dashboard.calorie.form.CalorieCalcForm;
 import jp.co.ha.db.entity.User;
@@ -107,18 +107,16 @@ public class CalorieCalcController implements BaseWebController {
             return getView(model, CALORIE_CALC);
         }
 
-        // DTOに変換
-        CalorieCalcDto dto = new CalorieCalcDto();
-        BeanUtil.copy(form, dto);
-
         Long seqUserId = sessionComponent
                 .getValue(request.getSession(), "seqUserId", Long.class).get();
 
         Optional<User> user = userComponent.findById(seqUserId);
 
-        dto.setGenderType(GenderType.of(user.get().getGenderType().intValue()));
+        CalorieCalcParam param = new CalorieCalcParam(form.getAge(),
+                GenderType.of(user.get().getGenderType().intValue()), form.getHeight(),
+                form.getWeight(), form.getLifeWorkMetabolism());
 
-        CalorieCalcDto calcResult = calorieCalcComponent.calc(dto, seqUserId);
+        CalorieCalcResult calcResult = calorieCalcComponent.calc(param, seqUserId);
 
         model.addAttribute("calcResult", calcResult);
 

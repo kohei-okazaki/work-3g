@@ -141,17 +141,17 @@
               <details>
                 <summary>Java インストール</summary>
                 <p>
-                  <a href="https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-21-ug/downloads-list.html"
-                    target="_blank" rel="noopener noreferrer">Amazon CorrettoのJava21</a>から各PCのOSに合わせ、Java21をインストール
+                  <a href="https://docs.aws.amazon.com/ja_jp/corretto/latest/corretto-25-ug/downloads-list.html"
+                    target="_blank" rel="noopener noreferrer">Amazon CorrettoのJava25</a>から各PCのOSに合わせ、Java25をインストール
                 </p>
                 <p>
                   コマンドプロンプトまたはターミナルより以下をコマンドを実行する。
                 </p>
                 <kbd>$java -version</kbd>
                 <p>
-                  以下の結果が出力されていればOK。（メジャーバージョンである21系が出力されていればOK）
+                  以下の結果が出力されていればOK。（メジャーバージョンである25系が出力されていればOK）
                 </p>
-                <kbd>openjdk version "21.0.8" 2025-07-15 LTS</kbd>
+                <kbd>openjdk version "25.0.2" 2026-01-20 LTS</kbd>
               </details>
 
               <br />
@@ -252,12 +252,10 @@
               <details>
                 <summary>Java 設定</summary>
                 <p>
-                  Eclipseを開き、以下の操作で 「Java
-                  インストール」で設定したJavaを参照するようにする
+                  Eclipseを開き、以下の操作で 「Java インストール」で設定したJavaを参照するようにする
                 </p>
                 <p>
-                  ウィンドゥ -> 設定 -> Java -> インストール済のJRE ->
-                  インストール済のJRE -> 標準VM
+                  ウィンドゥ -> 設定 -> Java -> インストール済のJRE -> インストール済のJRE -> 標準VM
                 </p>
                 <v-simple-table>
                   <thead>
@@ -279,13 +277,12 @@
                         <ul>
                           <li>
                             <p>
-                              Windowsの場合<br /><kbd>C:\Program Files\Amazon
-                                Corretto\jdk21.0.4_7</kbd>
+                              Windowsの場合<br /><kbd>C:\Program Files\Amazon Corretto\jdk25.0.2_10</kbd>
                             </p>
                           </li>
                           <li>
                             <p>
-                              Macの場合<br /><kbd>/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-21.jdk/Contents/Home/bin</kbd>
+                              Macの場合<br /><kbd>/Library/Java/Extensions/JavaVirtualMachines/amazon-corretto-25.jdk/Contents/Home/bin</kbd>
                             </p>
                           </li>
                         </ul>
