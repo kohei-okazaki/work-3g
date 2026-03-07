@@ -148,6 +148,7 @@ public class UserRecoveryController implements BaseWebController {
         entity.setToken(encoder.encode(user.getMailAddress(),
                 DateTimeUtil.toString(sysdate, YYYYMMDDHHMMSS_NOSEP)));
         entity.setTokenCreateDate(sysdate);
+        entity.setDeleteFlag(false);
         userRecoveryTokenCreateService.create(entity);
 
         // SESでパスワード再設定メールを送信する

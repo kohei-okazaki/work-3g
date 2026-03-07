@@ -194,7 +194,7 @@ public class HealthInfoRegistController implements BaseWizardController<HealthIn
             // レコードが見つからなかった場合
             throw new BusinessException(ILLEGAL_ACCESS_ERROR, "session情報が不正です");
         }
-        HealthInfo entity = CollectionUtil.getFirst(healthInfoList);
+        HealthInfo entity = healthInfoList.getFirst();
         HealthInfoExcelComponent component = new HealthInfoExcelComponent();
         component.setHealthInfo(entity);
 
