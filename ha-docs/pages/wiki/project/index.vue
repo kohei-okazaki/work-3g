@@ -220,7 +220,7 @@ export default {
       languages: [
         {
           name: "Java",
-          version: "21.0.8",
+          version: "25",
         },
         {
           name: "Node.js",

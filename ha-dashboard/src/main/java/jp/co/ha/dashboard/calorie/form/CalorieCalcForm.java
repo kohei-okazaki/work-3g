@@ -36,7 +36,7 @@ public class CalorieCalcForm implements BaseForm {
     /** 生活活動代謝 */
     @Required(message = "生活活動代謝が未入力です")
     @Pattern(regixPattern = RegexType.DECIMAL, message = "生活活動代謝は数字で入力して下さい")
-    @Decimal(min = "1", max = "10000", message = "生活活動代謝は0~10000で入力してください")
+    @Decimal(min = "1", max = "10000", message = "生活活動代謝は1~10000で入力してください")
     private BigDecimal lifeWorkMetabolism;
 
     /**
