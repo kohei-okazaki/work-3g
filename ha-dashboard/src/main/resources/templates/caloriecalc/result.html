@@ -4,24 +4,24 @@
     <tbody>
       <tr>
         <th class="bg-light" scope="row" th:text="#{baseMetabolism}"></th>
-        <td th:utext="${calcResult.baseMetabolism} + '&ensp;kcal'"></td>
+        <td th:utext="${calcResult.baseMetabolism()} + '&ensp;kcal'"></td>
       </tr>
       <tr>
         <th class="bg-light" scope="row" th:text="#{lifeWorkMetabolism}"></th>
-        <td th:utext="${calcResult.lifeWorkMetabolism} + '&ensp;kcal'"></td>
+        <td th:utext="${calcResult.lifeWorkMetabolism()} + '&ensp;kcal'"></td>
       </tr>
       <tr>
         <th class="bg-light" scope="row" th:text="#{lostCaloriePerDay}"></th>
-        <td th:utext="${calcResult.lostCaloriePerDay} + '&ensp;kcal'"></td>
+        <td th:utext="${calcResult.lostCaloriePerDay()} + '&ensp;kcal'"></td>
       </tr>
     </tbody>
-  </table>
+  </table><!-- /.table table-striped -->
   <!-- table部ここまで -->
 
   <!-- モーダル起動リンク -->
   <div class="mt-3">
     <a href="#calorieCalcMethonModal" data-toggle="modal">1日のカロリーの計算方法</a>
-  </div>
+  </div><!-- .mt-3 -->
 
   <!-- モーダル本体 -->
   <div th:replace="~{./caloriecalc/caloriecalcmethod-modal.html}"></div>

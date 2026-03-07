@@ -12,11 +12,11 @@ import jp.co.ha.business.api.node.response.CalorieCalcApiResponse;
 import jp.co.ha.business.api.node.response.TokenApiResponse;
 import jp.co.ha.business.api.node.type.NodeApiType;
 import jp.co.ha.business.dto.ApiLogQueuePayload;
-import jp.co.ha.business.dto.CalorieCalcDto;
+import jp.co.ha.business.dto.CalorieCalcParam;
+import jp.co.ha.business.dto.CalorieCalcResult;
 import jp.co.ha.business.io.file.properties.HealthInfoProperties;
 import jp.co.ha.common.exception.ApiException;
 import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.util.BeanUtil;
 import jp.co.ha.common.web.api.ApiConnectInfo;
 
 /**
@@ -44,15 +44,16 @@ public class CalorieApiComponent {
     /**
      * カロリー計算処理を行う
      *
-     * @param dto
-     *     {@linkplain CalorieCalcDto}
+     * @param param
+     *     {@linkplain CalorieCalcParam}
      * @param seqUserId
      *     ユーザID
      * @return {@linkplain CalorieCalcDto}
      * @throws BaseException
      *     カロリー計算APIの処理が成功以外
      */
-    public CalorieCalcDto calc(CalorieCalcDto dto, Long seqUserId) throws BaseException {
+    public CalorieCalcResult calc(CalorieCalcParam param, Long seqUserId)
+            throws BaseException {
 
         // API通信ログ.トランザクションIDを採番
         String transactionId = apiLogComponent.transactionId();
@@ -61,7 +62,7 @@ public class CalorieApiComponent {
         if (prop.healthinfoNodeApiMigrateFlg()) {
 
             // カロリー計算API実施
-            apiResponse = callCalorieCalcApi(dto, transactionId);
+            apiResponse = callCalorieCalcApi(param, transactionId);
 
         } else {
 
@@ -71,31 +72,41 @@ public class CalorieApiComponent {
                     transactionId);
 
             // カロリー計算API実施
-            apiResponse = callCalorieCalcApi(dto,
+            apiResponse = callCalorieCalcApi(param,
                     tokenApiResponse.getToken(), transactionId);
 
         }
-        BeanUtil.copy(apiResponse.getCalorieCalcResult(), dto);
 
-        return dto;
+        return new CalorieCalcResult(
+                param.age(),
+                param.gender(),
+                param.height(),
+                param.weight(),
+                param.lifeWorkMetabolism(),
+                apiResponse.getCalorieCalcResult().getBaseMetabolism(),
+                apiResponse.getCalorieCalcResult().getLostCaloriePerDay());
     }
 
     /**
      * カロリー計算APIを呼び出す
      *
-     * @param dto
-     *     カロリー計算DTO
+     * @param param
+     *     {@linkplain CalorieCalcParam}
      * @param transactionId
      *     トランザクションID
      * @return カロリー計算APIレスポンス
      * @throws BaseException
      *     API通信に失敗した場合
      */
-    private CalorieCalcApiResponse callCalorieCalcApi(CalorieCalcDto dto,
+    private CalorieCalcApiResponse callCalorieCalcApi(CalorieCalcParam param,
             String transactionId) throws BaseException {
 
         CalorieCalcApiRequest request = new CalorieCalcApiRequest();
-        BeanUtil.copy(dto, request);
+        request.setAge(param.age());
+        request.setGenderType(param.gender());
+        request.setHeight(param.height());
+        request.setWeight(param.height());
+        request.setLifeWorkMetabolism(param.lifeWorkMetabolism());
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
@@ -117,9 +128,9 @@ public class CalorieApiComponent {
 
     /**
      * カロリー計算APIを呼び出す
-     *
-     * @param dto
-     *     カロリー計算DTO
+     * 
+     * @param param
+     *     {@linkplain CalorieCalcParam}
      * @param token
      *     トークン
      * @param transactionId
@@ -129,11 +140,15 @@ public class CalorieApiComponent {
      *     API通信に失敗した場合
      */
     @Deprecated
-    private CalorieCalcApiResponse callCalorieCalcApi(CalorieCalcDto dto, String token,
-            String transactionId) throws BaseException {
+    private CalorieCalcApiResponse callCalorieCalcApi(CalorieCalcParam param,
+            String token, String transactionId) throws BaseException {
 
         CalorieCalcApiRequest request = new CalorieCalcApiRequest();
-        BeanUtil.copy(dto, request);
+        request.setAge(param.age());
+        request.setGenderType(param.gender());
+        request.setHeight(param.height());
+        request.setWeight(param.height());
+        request.setLifeWorkMetabolism(param.lifeWorkMetabolism());
 
         ApiConnectInfo connectInfo = new ApiConnectInfo()
                 .withUrlSupplier(() -> prop.healthinfoNodeApiUrl()
