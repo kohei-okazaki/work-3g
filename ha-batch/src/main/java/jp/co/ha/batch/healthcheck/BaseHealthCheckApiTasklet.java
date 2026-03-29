@@ -1,7 +1,7 @@
 package jp.co.ha.batch.healthcheck;
 
 import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.infrastructure.item.ExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jp.co.ha.business.component.ApiLogComponent;

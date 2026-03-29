@@ -16,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
 import jp.co.ha.business.db.crud.create.NewsInfoCreateService;
@@ -228,8 +225,7 @@ public class NewsComponent {
     private void upload(String s3Key, NewsDto dto) throws BaseException {
 
         try {
-            String json = new ObjectMapper().writeValueAsString(dto);
-            byte[] jsonByte = json.getBytes(Charset.UTF_8.getValue());
+            byte[] jsonByte = JSON_READER.read(dto).getBytes(Charset.UTF_8.getValue());
 
             try (InputStream is = new ByteArrayInputStream(jsonByte)) {
                 s3.putFile(s3Key, Long.valueOf(jsonByte.length), is);
@@ -240,9 +236,6 @@ public class NewsComponent {
             // Slack通知
             slack.sendFile(ContentType.ROOT, jsonByte, s3Key, "お知らせ登録/編集");
 
-        } catch (JsonProcessingException e) {
-            // JSON文字列への変換に失敗した場合
-            throw new BusinessException(e);
         } catch (UnsupportedEncodingException e) {
             // 文字コードが不正な場合
             throw new BusinessException(e);

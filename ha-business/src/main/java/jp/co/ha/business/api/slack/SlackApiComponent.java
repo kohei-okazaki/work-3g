@@ -15,9 +15,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jp.co.ha.business.api.slack.SlackConnectionData.Connection;
 import jp.co.ha.common.aws.AwsSystemsManagerComponent;
 import jp.co.ha.common.exception.SystemRuntimeException;
@@ -29,6 +26,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * SlackAPIのラッパークラス
@@ -51,6 +50,9 @@ public class SlackApiComponent {
     private static final String FILES_COMPLETE_UPLOAD_EXTERNAL = BASE_SLACK_URL
             + "/files.completeUploadExternal";
 
+    /** JSON Mapper */
+    private static final JsonMapper MAPPER = JsonMapper.builder().build();
+
     /** S3 Component */
     @Autowired
     private AwsSystemsManagerComponent ssm;
@@ -71,7 +73,7 @@ public class SlackApiComponent {
             Connection conn = getConnectionByContentType(data, contentType);
 
             // Slack APIに渡す JSON を作成
-            String json = new ObjectMapper().writeValueAsString(Map.of(
+            String json = MAPPER.writeValueAsString(Map.of(
                     "channel", conn.getChannelId(),
                     "text", message));
 
@@ -204,7 +206,6 @@ public class SlackApiComponent {
             SlackConnectionData data = getSlackConnectionData();
             Connection conn = getConnectionByContentType(data, contentType);
             OkHttpClient client = new OkHttpClient();
-            ObjectMapper mapper = new ObjectMapper();
 
             // 1) 一時アップロードURLを取得
             RequestBody urlReq = new okhttp3.FormBody.Builder()
@@ -223,14 +224,14 @@ public class SlackApiComponent {
             try (Response res = client.newCall(getUrl).execute()) {
                 String body = res.body().string();
                 LOG.debug("getUploadURLExternal: %s".formatted(body));
-                JsonNode json = mapper.readTree(body);
+                JsonNode json = MAPPER.readTree(body);
                 if (!json.path("ok").asBoolean()) {
                     throw new SystemRuntimeException(FILE_UPLOAD_ERROR,
                             "getUploadURLExternal failed: %s"
-                                    .formatted(json.path("error").asText()));
+                                    .formatted(json.path("error").asString()));
                 }
-                uploadUrl = json.path("upload_url").asText();
-                fileId = json.path("file_id").asText();
+                uploadUrl = json.path("upload_url").asString();
+                fileId = json.path("file_id").asString();
             }
 
             // 2) 取得したURLにファイル本体をPOST（トークン不要）
@@ -250,7 +251,7 @@ public class SlackApiComponent {
             }
 
             // 3) アップロード完了をSlackに通知（ここで共有先を指定）
-            String completeJson = mapper.writeValueAsString(Map.of(
+            String completeJson = MAPPER.writeValueAsString(Map.of(
                     "channel_id", conn.getChannelId(),
                     "initial_comment", initialComment, // 任意
                     "files", List.of(Map.of(
@@ -268,11 +269,11 @@ public class SlackApiComponent {
             try (Response res = client.newCall(completeReq).execute()) {
                 String body = res.body().string();
                 LOG.debug("completeUploadExternal: %s".formatted(body));
-                JsonNode json = mapper.readTree(body);
+                JsonNode json = MAPPER.readTree(body);
                 if (!json.path("ok").asBoolean()) {
                     throw new SystemRuntimeException(FILE_UPLOAD_ERROR,
                             "completeUploadExternal failed: %s"
-                                    .formatted(json.path("error").asText()));
+                                    .formatted(json.path("error").asString()));
                 }
             }
 
@@ -289,7 +290,7 @@ public class SlackApiComponent {
     private SlackConnectionData getSlackConnectionData() {
 
         try {
-            return new ObjectMapper().readValue(ssm.getValue(KEY_SLACK_TOKEN),
+            return MAPPER.readValue(ssm.getValue(KEY_SLACK_TOKEN),
                     SlackConnectionData.class);
         } catch (Exception e) {
             throw new SystemRuntimeException(e);

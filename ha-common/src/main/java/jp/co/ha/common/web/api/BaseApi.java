@@ -16,14 +16,10 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.RequestEntity.BodyBuilder;
 import org.springframework.http.RequestEntity.HeadersBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
@@ -34,6 +30,9 @@ import jp.co.ha.common.util.BeanUtil.AccessorType;
 import jp.co.ha.common.util.DateTimeUtil;
 import jp.co.ha.common.web.form.BaseApiRequest;
 import jp.co.ha.common.web.form.BaseApiResponse;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.cfg.DateTimeFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * 基底API通信クラス<br>
@@ -246,13 +245,13 @@ public abstract class BaseApi<Rq extends BaseApiRequest, Rs extends BaseApiRespo
         restTemplate.setInterceptors(
                 Collections.singletonList(new LoggingInterceptor()));
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,
-                false);
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(
-                objectMapper);
+        JsonMapper jsonMapper = JsonMapper.builder()
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .build();
+
+        JacksonJsonHttpMessageConverter converter = new JacksonJsonHttpMessageConverter(
+                jsonMapper);
         restTemplate.getMessageConverters().add(0, converter);
 
         return restTemplate;

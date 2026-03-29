@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse;
@@ -218,7 +217,7 @@ public class ApiLogComponent {
         }
         entity.setRequestDate(payload.requestDate());
 
-        entity.setHttpStatus(payload.httpStatus().value());
+        entity.setHttpStatus(payload.httpStatus());
         entity.setDetail(payload.detail());
         entity.setResponseDate(payload.responseDate());
         entity.setDeleteFlag(false);
@@ -258,9 +257,9 @@ public class ApiLogComponent {
             body = new JsonReader().read(request);
         }
 
-        HttpStatus httpStatus = null;
+        Integer httpStatus = null;
         if (connectInfo.getHttpStatus() != null) {
-            httpStatus = connectInfo.getHttpStatus();
+            httpStatus = connectInfo.getHttpStatus().value();
         }
 
         return new ApiLogQueuePayload(transactionId,

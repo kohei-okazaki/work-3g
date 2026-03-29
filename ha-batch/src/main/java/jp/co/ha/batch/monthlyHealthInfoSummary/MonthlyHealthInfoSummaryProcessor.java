@@ -3,7 +3,7 @@ package jp.co.ha.batch.monthlyHealthInfoSummary;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.infrastructure.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.io.file.csv.model.MonthlyHealthInfoSummaryModel;
