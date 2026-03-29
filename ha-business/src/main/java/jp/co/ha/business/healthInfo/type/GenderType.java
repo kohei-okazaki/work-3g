@@ -1,13 +1,10 @@
 package jp.co.ha.business.healthInfo.type;
 
-import java.io.IOException;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializable;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
-
 import jp.co.ha.common.type.BaseEnum;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ValueSerializer;
 
 /**
  * 性別の列挙
@@ -18,7 +15,7 @@ import jp.co.ha.common.type.BaseEnum;
  *
  * @version 1.0.0
  */
-public enum GenderType implements BaseEnum, JsonSerializable {
+public enum GenderType implements BaseEnum {
 
     /** 男性 */
     MALE("0"),
@@ -72,16 +69,19 @@ public enum GenderType implements BaseEnum, JsonSerializable {
         return of(String.valueOf(value));
     }
 
-    @Override
-    public void serialize(JsonGenerator gen, SerializerProvider serializers)
-            throws IOException {
-        gen.writeString(getValue());
-    }
+    /**
+     * 性別の列挙のシリアライズクラス<br>
+     * Javaのクラスを文字列型のJSONに変換する
+     * 
+     * @version 1.0.0
+     */
+    public static class GenderTypeSerializer extends ValueSerializer<GenderType> {
 
-    @Override
-    public void serializeWithType(JsonGenerator gen, SerializerProvider serializers,
-            TypeSerializer typeSer) throws IOException {
-        gen.writeString(getValue());
+        @Override
+        public void serialize(GenderType genderType, JsonGenerator gen,
+                SerializationContext ctxt) throws JacksonException {
+            gen.writeString(genderType.getValue());
+        }
     }
 
 }

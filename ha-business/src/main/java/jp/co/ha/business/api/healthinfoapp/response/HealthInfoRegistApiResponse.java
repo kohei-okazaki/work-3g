@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.web.form.BaseApiResponse;
@@ -72,7 +70,6 @@ public class HealthInfoRegistApiResponse extends BaseAppApiResponse
         private BigDecimal standardWeight;
         /** 健康情報作成日時 */
         @JsonProperty("reg_date")
-        @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "Asia/Tokyo")
         private LocalDateTime healthInfoRegDate;
 

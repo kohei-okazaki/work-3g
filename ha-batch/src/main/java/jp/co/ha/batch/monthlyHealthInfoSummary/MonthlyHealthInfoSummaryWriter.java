@@ -13,14 +13,14 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 import org.springframework.batch.core.ExitStatus;
-import org.springframework.batch.core.StepExecution;
-import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.ItemStreamException;
-import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
-import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
+import org.springframework.batch.core.listener.StepExecutionListener;
+import org.springframework.batch.core.step.StepExecution;
+import org.springframework.batch.infrastructure.item.ExecutionContext;
+import org.springframework.batch.infrastructure.item.ItemStreamException;
+import org.springframework.batch.infrastructure.item.file.FlatFileItemWriter;
+import org.springframework.batch.infrastructure.item.file.transform.BeanWrapperFieldExtractor;
+import org.springframework.batch.infrastructure.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
@@ -92,6 +92,8 @@ public class MonthlyHealthInfoSummaryWriter
             AwsS3Component s3,
             SlackApiComponent slack,
             @Value("#{jobParameters[m]}") String targetDate) {
+
+        super(createLineAggregator());
 
         this.prop = prop;
         this.s3 = s3;
@@ -184,6 +186,27 @@ public class MonthlyHealthInfoSummaryWriter
         setShouldDeleteIfExists(true);
         setSaveState(true);
 
+        // BeanWrapperFieldExtractor<MonthlyHealthInfoSummaryModel> extractor =
+        // new BeanWrapperFieldExtractor<>();
+        // extractor.setNames(COLUMN_NAME_ARRAY);
+        //
+        // DelimitedLineAggregator<MonthlyHealthInfoSummaryModel> aggregator =
+        // new DelimitedLineAggregator<>();
+        // aggregator.setDelimiter(COMMA);
+        // aggregator.setFieldExtractor(extractor);
+        //
+        // setLineAggregator(aggregator);
+
+        setHeaderCallback(writer -> writer.write(String.join(COMMA, COLUMN_NAME_ARRAY)));
+    }
+
+    /**
+     * 初期化処理
+     * 
+     * @return DelimitedLineAggregator
+     */
+    private static DelimitedLineAggregator<MonthlyHealthInfoSummaryModel> createLineAggregator() {
+
         BeanWrapperFieldExtractor<MonthlyHealthInfoSummaryModel> extractor = new BeanWrapperFieldExtractor<>();
         extractor.setNames(COLUMN_NAME_ARRAY);
 
@@ -191,9 +214,7 @@ public class MonthlyHealthInfoSummaryWriter
         aggregator.setDelimiter(COMMA);
         aggregator.setFieldExtractor(extractor);
 
-        setLineAggregator(aggregator);
-
-        setHeaderCallback(writer -> writer.write(String.join(COMMA, COLUMN_NAME_ARRAY)));
+        return aggregator;
     }
 
 }

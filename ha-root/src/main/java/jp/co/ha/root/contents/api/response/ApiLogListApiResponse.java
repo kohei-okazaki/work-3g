@@ -8,13 +8,12 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.util.HttpStatusSerializer;
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.base.BaseRootApiResponse;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 /**
  * API通信ログ一覧取得APIレスポンスクラス
@@ -82,12 +81,10 @@ public class ApiLogListApiResponse extends BaseRootApiResponse
         private String detail;
         /** APIリクエスト日時 */
         @JsonProperty("request_date")
-        @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
         private LocalDateTime requestDate;
         /** APIレスポンス日時 */
         @JsonProperty("response_date")
-        @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
         private LocalDateTime responseDate;
 

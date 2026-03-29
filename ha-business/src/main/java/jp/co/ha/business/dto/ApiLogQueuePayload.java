@@ -2,16 +2,8 @@ package jp.co.ha.business.dto;
 
 import java.time.LocalDateTime;
 
-import org.springframework.http.HttpStatus;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-
-import jp.co.ha.common.util.HttpStatusDeserializer;
-import jp.co.ha.common.util.HttpStatusSerializer;
 
 /**
  * API通信ログのSQS-Payload
@@ -42,8 +34,12 @@ public record ApiLogQueuePayload(
         @JsonProperty("http_method") String httpMethod,
         @JsonProperty("url") String url,
         @JsonProperty("body") String body,
-        @JsonProperty("request_date") @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo") LocalDateTime requestDate,
-        @JsonProperty("http_status") @JsonSerialize(using = HttpStatusSerializer.class) @JsonDeserialize(using = HttpStatusDeserializer.class) HttpStatus httpStatus,
+        @JsonProperty("request_date") @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo") LocalDateTime requestDate,
+        // JsonDeserialize自体は成功するが、recordへのバインドがうまくいかないためInteger型でNPE回避。
+        // @JsonProperty("http_status") @JsonSerialize(using =
+        // HttpStatusSerializer.class) @JsonDeserialize(using =
+        // HttpStatusDeserializer.class) HttpStatus httpStatus,
+        @JsonProperty("http_status") Integer httpStatus,
         @JsonProperty("detail") String detail,
-        @JsonProperty("response_date") @JsonSerialize(using = LocalDateTimeSerializer.class) @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo") LocalDateTime responseDate) {
+        @JsonProperty("response_date") @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo") LocalDateTime responseDate) {
 }

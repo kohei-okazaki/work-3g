@@ -9,8 +9,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.Properties;
 
-import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SystemException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.io.file.property.annotation.Property;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
@@ -65,10 +64,8 @@ public class PropertyReader {
      * @param clazz
      *     bean
      * @return T
-     * @throws BaseException
-     *     基底例外
      */
-    public <T> T read(String path, String fileName, Class<T> clazz) throws BaseException {
+    public <T> T read(String path, String fileName, Class<T> clazz) {
         Properties prop = read(path, fileName);
         try {
             T t = clazz.getDeclaredConstructor().newInstance();
@@ -86,7 +83,7 @@ public class PropertyReader {
             }
             return t;
         } catch (Exception e) {
-            throw new SystemException(UNEXPECTED_ERROR, "", e);
+            throw new SystemRuntimeException(UNEXPECTED_ERROR, e);
         }
     }
 

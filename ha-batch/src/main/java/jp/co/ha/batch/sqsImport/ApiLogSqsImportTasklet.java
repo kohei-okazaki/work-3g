@@ -2,11 +2,11 @@ package jp.co.ha.batch.sqsImport;
 
 import java.util.List;
 
-import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.scope.context.ChunkContext;
+import org.springframework.batch.core.step.StepContribution;
 import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.batch.infrastructure.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -56,7 +56,7 @@ public class ApiLogSqsImportTasklet implements Tasklet {
 
             if (CollectionUtil.isEmpty(queueList)) {
                 // キューが登録されていない場合
-                LOG.debug("queue not exist.");
+                LOG.debug("queue record not exist.");
                 break;
             }
 

@@ -12,8 +12,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import jp.co.ha.common.exception.BaseException;
 import jp.co.ha.common.exception.SystemException;
 import jp.co.ha.common.log.Logger;
@@ -27,6 +25,7 @@ import software.amazon.awssdk.services.sqs.model.GetQueueUrlRequest;
 import software.amazon.awssdk.services.sqs.model.Message;
 import software.amazon.awssdk.services.sqs.model.ReceiveMessageResponse;
 import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * AWS-Simple Queue ServiceのComponent
@@ -39,7 +38,7 @@ public class AwsSqsComponent {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(AwsSqsComponent.class);
     /** ObjectMapper */
-    private final ObjectMapper MAPPER;
+    private final JsonMapper MAPPER;
     /** AWS設定ファイル情報 */
     @Autowired
     private AwsProperties awsProps;
@@ -53,7 +52,7 @@ public class AwsSqsComponent {
      * @param mapper
      *     ObjectMapper
      */
-    public AwsSqsComponent(ObjectMapper mapper) {
+    public AwsSqsComponent(JsonMapper mapper) {
         this.MAPPER = mapper;
     }
 
@@ -158,6 +157,7 @@ public class AwsSqsComponent {
 
             List<DequeueResult<T>> resultList = new ArrayList<>();
             for (Message message : response.messages()) {
+                LOG.debug("body = " + message.body());
                 T payload = MAPPER.readValue(message.body(), clazz);
                 resultList.add(new DequeueResult<>(payload, message.receiptHandle(),
                         message.messageId()));

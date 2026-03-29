@@ -3,7 +3,7 @@ package jp.co.ha.batch.healthInfoFileRegist;
 import static jp.co.ha.common.exception.CommonErrorCode.*;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.infrastructure.item.ItemProcessor;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.business.api.healthinfoapp.request.HealthInfoRegistApiRequest;

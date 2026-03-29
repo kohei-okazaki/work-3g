@@ -30,8 +30,14 @@ case ${val} in
   build)
     # コンテナビルド起動
     # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
+    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml build ha-batch
+    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track --build
+
+    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml build ha-batch ha-api ha-dashboard ha-root-api
+    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
+
     cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml build ha-batch
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track --build
+    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   start)
     # コンテナ起動

@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: 健康情報計算APIのSAMテンプレート
+Description: 健康情報計算APIのSAMテンプレート(Python版)
 
 Globals:
   Function:
-    Runtime: nodejs22.x
+    Runtime: python3.14
     Architectures:
       - x86_64
     Timeout: 10
@@ -16,7 +16,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: basic
-      Handler: index.handler
+      Handler: app.lambda_handler
       CodeUri: ./basic/
       Events:
         BasicApiEvent:
@@ -31,7 +31,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: calorie
-      Handler: index.handler
+      Handler: app.lambda_handler
       CodeUri: ./calorie/
       Events:
         CalorieApiEvent:
@@ -46,10 +46,10 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: breathing_capacity
-      Handler: index.handler
+      Handler: app.lambda_handler
       CodeUri: ./breathing_capacity/
       Events:
-        CalorieApiEvent:
+        BreathingCapacityApiEvent:
           Type: HttpApi
           Properties:
             Path: /breathing_capacity
