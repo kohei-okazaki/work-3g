@@ -43,7 +43,7 @@ public class DailyHealthInfoWriter
      */
     public DailyHealthInfoWriter(BatchProperties batchProps, AwsS3Component s3,
             SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate) {
-        super(batchProps, s3, slack, targetDate);
+        super(batchProps, s3, slack, targetDate, COLUMN_NAME_ARRAY);
     }
 
     @Override

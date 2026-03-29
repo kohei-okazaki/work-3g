@@ -4,9 +4,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.slack.SlackApiComponent.ContentType;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.ValueDeserializer;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * SlackAPIの接続情報のJSONクラス
@@ -135,6 +139,21 @@ public class SlackConnectionData {
          */
         public void setChannelId(String channelId) {
             this.channelId = channelId;
+        }
+
+    }
+
+    /**
+     * {@linkplain ContentType}のDeserializer
+     *
+     * @version 1.0.0
+     */
+    public static class ContentTypeDeserializer extends ValueDeserializer<ContentType> {
+
+        @Override
+        public ContentType deserialize(JsonParser parser, DeserializationContext ctxt)
+                throws JacksonException {
+            return ContentType.of(parser.getValueAsString());
         }
 
     }

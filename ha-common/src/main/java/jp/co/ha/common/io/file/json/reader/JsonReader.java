@@ -3,18 +3,15 @@ package jp.co.ha.common.io.file.json.reader;
 import static jp.co.ha.common.exception.CommonErrorCode.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jp.co.ha.common.exception.BaseException;
-import jp.co.ha.common.exception.SystemException;
+import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.log.Logger;
 import jp.co.ha.common.log.LoggerFactory;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.exc.StreamReadException;
+import tools.jackson.databind.DatabindException;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * JSONの読み取りクラス
@@ -26,6 +23,9 @@ public class JsonReader {
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(JsonReader.class);
 
+    /** JSON Mapper */
+    private static final JsonMapper JSON_MAPPER = JsonMapper.builder().build();
+
     /**
      * 指定されたファイルパスからJavaオブジェクトに変換する
      *
@@ -36,10 +36,8 @@ public class JsonReader {
      * @param clazz
      *     Beanクラス型
      * @return Javaインスタンス
-     * @throws BaseException
-     *     基底例外
      */
-    public <T> T read(String path, String fileName, Class<T> clazz) throws BaseException {
+    public <T> T read(String path, String fileName, Class<T> clazz) {
         return read(new File(path, fileName), clazz);
     }
 
@@ -53,19 +51,14 @@ public class JsonReader {
      * @param clazz
      *     Beanクラス型
      * @return Javaインスタンス
-     * @throws BaseException
-     *     基底例外
      */
-    public <T> T read(File json, Class<T> clazz) throws BaseException {
+    public <T> T read(File json, Class<T> clazz) {
         try {
-            return new ObjectMapper().readValue(json, clazz);
-        } catch (JsonParseException e) {
+            return JSON_MAPPER.readValue(json, clazz);
+        } catch (StreamReadException e) {
             LOG.error(json.getName() + "をjavaクラスへのParseに失敗しました", e);
-        } catch (JsonMappingException e) {
+        } catch (DatabindException e) {
             LOG.error(json.getName() + "をjavaクラスへのMappingに失敗しました", e);
-        } catch (IOException e) {
-            throw new SystemException(RUNTIME_ERROR,
-                    json.getName() + "をjavaクラスへの変換に失敗しました", e);
         }
         return null;
     }
@@ -80,18 +73,14 @@ public class JsonReader {
      * @param clazz
      *     Beanクラス型
      * @return Javaインスタンス
-     * @throws BaseException
-     *     基底例外
      */
-    public <T> T read(InputStream is, Class<T> clazz) throws BaseException {
+    public <T> T read(InputStream is, Class<T> clazz) {
         try {
-            return new ObjectMapper().readValue(is, clazz);
-        } catch (JsonParseException e) {
+            return JSON_MAPPER.readValue(is, clazz);
+        } catch (StreamReadException e) {
             LOG.error("javaクラスへのParseに失敗しました", e);
-        } catch (JsonMappingException e) {
+        } catch (DatabindException e) {
             LOG.error("javaクラスへのMappingに失敗しました", e);
-        } catch (IOException e) {
-            throw new SystemException(RUNTIME_ERROR, "javaクラスへの変換に失敗しました", e);
         }
         return null;
     }
@@ -102,14 +91,14 @@ public class JsonReader {
      * @param bean
      *     Bean
      * @return JSON文字列
-     * @throws BaseException
-     *     基底例外
      */
-    public String read(Object bean) throws BaseException {
+    public String read(Object bean) {
         try {
-            return new ObjectMapper().writeValueAsString(bean);
-        } catch (JsonProcessingException e) {
-            throw new SystemException(JSON_MAPPING_ERROR, bean + "をJSON文字列への変換に失敗しました",
+            return JSON_MAPPER.writeValueAsString(bean);
+        } catch (JacksonException e) {
+            throw new SystemRuntimeException(
+                    JSON_MAPPING_ERROR,
+                    bean + "をJSON文字列への変換に失敗しました",
                     e);
         }
     }

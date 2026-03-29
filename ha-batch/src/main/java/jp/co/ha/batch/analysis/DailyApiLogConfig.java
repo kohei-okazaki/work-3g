@@ -3,11 +3,11 @@ package jp.co.ha.batch.analysis;
 import static jp.co.ha.batch.base.BatchConfigConst.*;
 import static jp.co.ha.common.util.DateTimeUtil.DateFormatType.*;
 
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.job.parameters.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -81,10 +81,11 @@ public class DailyApiLogConfig extends BatchConfig {
             JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(DAILY_API_LOG_STEP_NAME, jobRepository)
-                .<ApiLog, DailyApiLogCsvModel> chunk(1, transactionManager)
+                .<ApiLog, DailyApiLogCsvModel> chunk(1)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
+                .transactionManager(transactionManager)
                 .build();
     }
 

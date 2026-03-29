@@ -5,13 +5,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jp.co.ha.common.util.CollectionUtil;
 import jp.co.ha.common.util.PagingView;
 import jp.co.ha.common.web.form.JsonEntity;
 import jp.co.ha.root.type.RootApiResult;
 import jp.co.ha.root.type.RootApiResult.RootApiResultSerializer;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 /**
  * RootAPI基底レスポンスクラス

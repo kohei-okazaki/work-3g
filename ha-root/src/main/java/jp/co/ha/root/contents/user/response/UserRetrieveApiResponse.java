@@ -6,8 +6,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.root.base.BaseRootApiResponse;
@@ -35,7 +33,6 @@ public class UserRetrieveApiResponse extends BaseRootApiResponse
     private String deleteFlag;
     /** パスワード有効期限 */
     @JsonProperty("password_expire")
-    @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate passwordExpire;

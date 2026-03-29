@@ -1,25 +1,28 @@
 package jp.co.ha.common.util;
 
-import java.io.IOException;
-
 import org.springframework.http.HttpStatus;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
+import jp.co.ha.common.log.Logger;
+import jp.co.ha.common.log.LoggerFactory;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.ValueDeserializer;
 
 /**
  * {@linkplain HttpStatus}のDeserializerクラス
- * 
+ *
  * @version 1.0.0
  */
-public class HttpStatusDeserializer extends JsonDeserializer<HttpStatus> {
+public class HttpStatusDeserializer extends ValueDeserializer<HttpStatus> {
+    /** LOG */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(HttpStatusDeserializer.class);
 
     @Override
-    public HttpStatus deserialize(JsonParser p, DeserializationContext ctxt)
-            throws IOException, JacksonException {
-        return HttpStatus.valueOf(p.getValueAsInt());
+    public HttpStatus deserialize(JsonParser parser, DeserializationContext ctxt) {
+        LOG.debug("HttpStatusDeserializer called1. raw=" + parser.getValueAsInt());
+        HttpStatus st = HttpStatus.valueOf(parser.getValueAsInt());
+        LOG.debug("HttpStatusDeserializer called2. st=" + st);
+        return st;
     }
-
 }

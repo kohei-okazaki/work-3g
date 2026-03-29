@@ -13,14 +13,14 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 import org.springframework.batch.core.ExitStatus;
-import org.springframework.batch.core.StepExecution;
-import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.ExecutionContext;
-import org.springframework.batch.item.ItemStreamException;
-import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.transform.BeanWrapperFieldExtractor;
-import org.springframework.batch.item.file.transform.DelimitedLineAggregator;
+import org.springframework.batch.core.listener.StepExecutionListener;
+import org.springframework.batch.core.step.StepExecution;
+import org.springframework.batch.infrastructure.item.ExecutionContext;
+import org.springframework.batch.infrastructure.item.ItemStreamException;
+import org.springframework.batch.infrastructure.item.file.FlatFileItemWriter;
+import org.springframework.batch.infrastructure.item.file.transform.BeanWrapperFieldExtractor;
+import org.springframework.batch.infrastructure.item.file.transform.DelimitedLineAggregator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
@@ -76,9 +76,14 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
      *     Slack Component
      * @param targetDate
      *     処理対象日
+     * @param columnArray
+     *     CSV項目名配列
      */
     public BaseDailyAnalysisWriter(BatchProperties batchProps, AwsS3Component s3,
-            SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate) {
+            SlackApiComponent slack, @Value("#{jobParameters[d]}") String targetDate,
+            String[] columnArray) {
+
+        super(createLineAggregator(columnArray));
 
         this.batchProps = batchProps;
         this.s3 = s3;
@@ -180,6 +185,28 @@ public abstract class BaseDailyAnalysisWriter<T extends BaseCsvModel>
      * @return 配列形式のカラム名
      */
     protected abstract String[] getColumnArray();
+
+    /**
+     * 1行当たりのデータ定義を生成
+     * 
+     * @param <T>
+     *     CSVモデル型
+     * @param columnArray
+     *     CSV項目名配列
+     * @return CSVモデル型のDelimitedLineAggregator
+     */
+    private static <T extends BaseCsvModel> DelimitedLineAggregator<T> createLineAggregator(
+            String[] columnArray) {
+
+        BeanWrapperFieldExtractor<T> extractor = new BeanWrapperFieldExtractor<>();
+        extractor.setNames(columnArray);
+
+        DelimitedLineAggregator<T> aggregator = new DelimitedLineAggregator<>();
+        aggregator.setDelimiter(COMMA);
+        aggregator.setFieldExtractor(extractor);
+
+        return aggregator;
+    }
 
     /**
      * 初期化処理

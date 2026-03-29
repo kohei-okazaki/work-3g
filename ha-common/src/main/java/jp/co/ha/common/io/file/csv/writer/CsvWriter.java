@@ -80,6 +80,15 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
     }
 
     /**
+     * dataを返す
+     *
+     * @return data
+     */
+    public StringJoiner getData() {
+        return this.data;
+    }
+
+    /**
      * 指定されたデータの書き込み処理を行う
      *
      * @param joiner
@@ -150,15 +159,6 @@ public abstract class CsvWriter<T extends BaseCsvModel> implements Closeable {
     protected List<String> getFooterList(Class<?> clazz) {
         return CollectionUtil
                 .toList(clazz.getAnnotation(CsvDownloadModel.class).footerNames());
-    }
-
-    /**
-     * dataを返す
-     *
-     * @return data
-     */
-    public StringJoiner getData() {
-        return this.data;
     }
 
 }

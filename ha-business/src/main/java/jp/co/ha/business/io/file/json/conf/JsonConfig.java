@@ -3,15 +3,13 @@ package jp.co.ha.business.io.file.json.conf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.fasterxml.jackson.databind.Module;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultType;
 import jp.co.ha.business.api.healthinfoapp.response.BaseAppApiResponse.ResultTypeSerializer;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode.TestModeDeserializer;
+import tools.jackson.databind.JacksonModule;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 /**
  * JSONの設定クラス
@@ -22,25 +20,24 @@ import jp.co.ha.business.api.healthinfoapp.type.TestMode.TestModeDeserializer;
 public class JsonConfig {
 
     /**
-     * ObjectMapperをBeanに登録
+     * JsonMapperをBeanに登録
      *
-     * @return ObjectMapper
+     * @return JsonMapper
      */
     @Bean
-    ObjectMapper jsonObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(getDeserializeModule());
-        mapper.registerModule(getSerializeModule());
-        mapper.registerModule(new JavaTimeModule());
-        return mapper;
+    JsonMapper jsonObjectMapper() {
+        return JsonMapper.builder()
+                .addModule(getDeserializeModule())
+                .addModule(getSerializeModule())
+                .build();
     }
 
     /**
      * JSONデシリアライズするModuleを返す
      *
-     * @return Module
+     * @return JacksonModule
      */
-    private Module getDeserializeModule() {
+    private JacksonModule getDeserializeModule() {
         SimpleModule module = new SimpleModule();
         module.addDeserializer(TestMode.class, new TestModeDeserializer());
         return module;
@@ -49,12 +46,11 @@ public class JsonConfig {
     /**
      * JSONシリアライズするModuleを返す
      *
-     * @return Module
+     * @return JacksonModule
      */
-    private Module getSerializeModule() {
+    private JacksonModule getSerializeModule() {
         SimpleModule module = new SimpleModule();
         module.addSerializer(ResultType.class, new ResultTypeSerializer());
         return module;
     }
-
 }
