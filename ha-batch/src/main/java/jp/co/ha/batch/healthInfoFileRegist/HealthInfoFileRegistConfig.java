@@ -2,11 +2,11 @@ package jp.co.ha.batch.healthInfoFileRegist;
 
 import static jp.co.ha.batch.base.BatchConfigConst.*;
 
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.job.parameters.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.step.Step;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -72,8 +72,7 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
             JobRepository jobRepository,
             PlatformTransactionManager transactionManager) {
         return new StepBuilder(HEALTH_INFO_FILE_REGIST_BATCH_STEP_NAME, jobRepository)
-                .<HealthInfoRegistApiRequest, HealthInfoRegistApiRequest> chunk(1,
-                        transactionManager)
+                .<HealthInfoRegistApiRequest, HealthInfoRegistApiRequest> chunk(1)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
@@ -82,6 +81,7 @@ public class HealthInfoFileRegistConfig extends BatchConfig {
                 .retryLimit(3)
                 .skip(HttpClientErrorException.class)
                 .skipLimit(10)
+                .transactionManager(transactionManager)
                 .build();
     }
 

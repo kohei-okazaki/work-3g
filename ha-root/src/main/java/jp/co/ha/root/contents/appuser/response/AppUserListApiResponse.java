@@ -7,9 +7,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import jp.co.ha.common.web.form.BaseApiResponse;
 import jp.co.ha.common.web.form.JsonEntity;
@@ -20,7 +17,8 @@ import jp.co.ha.root.base.BaseRootApiResponse;
  *
  * @version 1.0.0
  */
-public class AppUserListApiResponse extends BaseRootApiResponse implements BaseApiResponse {
+public class AppUserListApiResponse extends BaseRootApiResponse
+        implements BaseApiResponse {
 
     /** ユーザ情報リスト */
     @JsonProperty("account_list")
@@ -64,7 +62,6 @@ public class AppUserListApiResponse extends BaseRootApiResponse implements BaseA
         private String deleteFlag;
         /** パスワード有効期限 */
         @JsonProperty("password_expire")
-        @JsonSerialize(using = LocalDateSerializer.class)
         @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
         private LocalDate passwordExpire;
         /** 備考 */
@@ -75,12 +72,10 @@ public class AppUserListApiResponse extends BaseRootApiResponse implements BaseA
         private String apiKey;
         /** 登録日時 */
         @JsonProperty("reg_date")
-        @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
         private LocalDateTime regDate;
         /** 更新日時 */
         @JsonProperty("update_date")
-        @JsonSerialize(using = LocalDateTimeSerializer.class)
         @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "Asia/Tokyo")
         private LocalDateTime updateDate;
         /** ヘッダ利用有無フラグ */

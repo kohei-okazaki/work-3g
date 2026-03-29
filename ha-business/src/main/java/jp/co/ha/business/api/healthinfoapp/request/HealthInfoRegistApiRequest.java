@@ -4,15 +4,17 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jp.co.ha.business.api.healthinfoapp.type.TestMode;
 import jp.co.ha.business.api.healthinfoapp.type.TestMode.TestModeDeserializer;
+import jp.co.ha.business.api.healthinfoapp.type.TestMode.TestModeSerializer;
 import jp.co.ha.common.log.annotation.Mask;
 import jp.co.ha.common.type.RegexType;
 import jp.co.ha.common.validator.annotation.Pattern;
 import jp.co.ha.common.validator.annotation.Required;
 import jp.co.ha.common.web.form.BaseApiRequest;
+import tools.jackson.databind.annotation.JsonDeserialize;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 /**
  * 健康情報登録リクエストAPIクラス
@@ -37,6 +39,7 @@ public class HealthInfoRegistApiRequest extends BaseAppApiRequest
     private BigDecimal weight;
     /** テストモード種別 */
     @JsonDeserialize(using = TestModeDeserializer.class)
+    @JsonSerialize(using = TestModeSerializer.class)
     @Required(message = "testModeが未設定です")
     @JsonProperty("test_mode")
     private TestMode testMode;

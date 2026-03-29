@@ -2,13 +2,12 @@ package jp.co.ha.batch.listener;
 
 import static jp.co.ha.common.exception.CommonErrorCode.*;
 
-import java.util.Map.Entry;
 import java.util.StringJoiner;
 
 import org.springframework.batch.core.BatchStatus;
-import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobExecutionListener;
-import org.springframework.batch.core.JobParameter;
+import org.springframework.batch.core.job.JobExecution;
+import org.springframework.batch.core.job.parameters.JobParameter;
+import org.springframework.batch.core.listener.JobExecutionListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -33,6 +32,8 @@ public class BatchJobListener implements JobExecutionListener {
 
     /** LOG */
     private static final Logger LOG = LoggerFactory.getLogger(BatchJobListener.class);
+    /** 開始メッセージフォーマット */
+    private static final String MESSAGE_FORMAT = "id=%s, name=%s, status=%s";
     /** Slack Component */
     @Autowired
     private SlackApiComponent slack;
@@ -44,16 +45,10 @@ public class BatchJobListener implements JobExecutionListener {
     public void beforeJob(JobExecution jobExecution) {
 
         StringJoiner sj = new StringJoiner(StringUtil.COMMA);
-        String message = new StringJoiner(StringUtil.COMMA)
-                .add("id=" + jobExecution.getJobId())
-                .add("job_instance_id=" + jobExecution.getJobInstance().getInstanceId())
-                .add("name=" + jobExecution.getJobInstance().getJobName())
-                .add("status=" + jobExecution.getStatus()).toString();
-        sj.add("start JOB. " + message);
-        for (Entry<String, JobParameter<?>> entry : jobExecution.getJobParameters()
-                .getParameters().entrySet()) {
-            sj.add("{key=" + entry.getKey() + ", val=" + entry.getValue().toString()
-                    + "}");
+        sj.add("start JOB. " + MESSAGE_FORMAT.formatted(jobExecution.getId(),
+                jobExecution.getJobInstance().getJobName(), jobExecution.getStatus()));
+        for (JobParameter<?> parameter : jobExecution.getJobParameters().parameters()) {
+            sj.add("{key=" + parameter.name() + ", val=" + parameter.value() + "}");
         }
         LOG.debug(sj.toString());
     }
@@ -61,13 +56,8 @@ public class BatchJobListener implements JobExecutionListener {
     @Override
     public void afterJob(JobExecution jobExecution) {
 
-        String message = new StringJoiner(StringUtil.COMMA)
-                .add("id=" + jobExecution.getJobId())
-                .add("job_instance_id="
-                        + jobExecution.getJobInstance().getInstanceId())
-                .add("name=" + jobExecution.getJobInstance().getJobName())
-                .add("status=" + jobExecution.getStatus()).toString();
-
+        String message = MESSAGE_FORMAT.formatted(jobExecution.getId(),
+                jobExecution.getJobInstance().getJobName(), jobExecution.getStatus());
         if (BatchStatus.FAILED == jobExecution.getStatus()) {
             for (Throwable t : jobExecution.getAllFailureExceptions()) {
                 BaseAppError error = getAppError(t);

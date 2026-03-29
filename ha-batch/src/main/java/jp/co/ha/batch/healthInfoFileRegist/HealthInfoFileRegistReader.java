@@ -9,7 +9,7 @@ import java.util.Deque;
 import java.util.List;
 
 import org.springframework.batch.core.configuration.annotation.StepScope;
-import org.springframework.batch.item.support.AbstractItemCountingItemStreamItemReader;
+import org.springframework.batch.infrastructure.item.support.AbstractItemCountingItemStreamItemReader;
 import org.springframework.stereotype.Component;
 
 import jp.co.ha.batch.base.BatchProperties;

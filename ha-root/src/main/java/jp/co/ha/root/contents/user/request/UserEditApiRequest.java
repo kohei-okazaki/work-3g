@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import jp.co.ha.common.validator.LengthMode;
 import jp.co.ha.common.validator.annotation.Future;
@@ -39,7 +37,6 @@ public class UserEditApiRequest extends BaseRootApiRequest implements BaseApiReq
     @JsonProperty("password_expire")
     @Required(message = "password_expire is required")
     @Future(message = "password_expire is must be future")
-    @JsonSerialize(using = LocalDateSerializer.class)
     @JsonFormat(pattern = "yyyy/MM/dd", timezone = "Asia/Tokyo")
     private LocalDate passwordExpire;
     /** 備考 */

@@ -1,10 +1,8 @@
 package jp.co.ha.common.web.form;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
 import jp.co.ha.common.exception.SystemRuntimeException;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * JSON基底データクラス
@@ -17,10 +15,10 @@ public abstract class JsonEntity {
     public String toString() {
 
         try {
-            ObjectMapper om = new ObjectMapper();
-            om.enable(SerializationFeature.INDENT_OUTPUT);
-            return om.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
+            return JsonMapper.builder()
+                    .enable(SerializationFeature.INDENT_OUTPUT)
+                    .build().writeValueAsString(this);
+        } catch (Exception e) {
             throw new SystemRuntimeException(e);
         }
     }

@@ -1,13 +1,16 @@
 #!/bin/bash
 #
-# API Gateway + lambdaのビルド用のシェル
+# API Gateway + Lambda(Python 3.14) のビルド用シェル
 #
-# 前提：
-# (1) AWS Cloud Shellで以下のファイルをアップロードすること
-#   - basic.mjs
-#   - breathing_capacity.mjs
-#   - calorie.mjs
-# (2) カレントディレクトリが「/home/cloudshell-user」であること。
+# 前提:
+# (1) AWS CloudShell に以下をアップロードすること
+#   - basic.py
+#   - breathing_capacity.py
+#   - calorie.py
+#   - template.yaml
+#   - samconfig.toml
+# (2) カレントディレクトリが /home/cloudshell-user であること
+# (3) health-api-sam 配下に basic / breathing_capacity / calorie ディレクトリがあること
 #
 
 HOME_DIR="/home/cloudshell-user"
@@ -20,14 +23,15 @@ mv ${HOME_DIR}/samconfig.toml ${BASE_DIR}/samconfig.toml
 mv ${HOME_DIR}/template.yaml ${BASE_DIR}/template.yaml
 
 # module
-mv ${HOME_DIR}/basic.mjs ${BASE_DIR}/basic/index.mjs
-mv ${HOME_DIR}/breathing_capacity.mjs ${BASE_DIR}/breathing_capacity/index.mjs
-mv ${HOME_DIR}/calorie.mjs ${BASE_DIR}/calorie/index.mjs
+mv ${HOME_DIR}/basic.py ${BASE_DIR}/basic/app.py
+mv ${HOME_DIR}/breathing_capacity.py ${BASE_DIR}/breathing_capacity/app.py
+mv ${HOME_DIR}/calorie.py ${BASE_DIR}/calorie/app.py
 
 cd ${BASE_DIR}
 
 # build
-sam build
+# sam build だとPython3.14がcloud shellで見つからずにエラーとなる
+sam build --use-container
 build_result=$?
 if [ ${build_result} -eq 0 ]; then
   echo "build success."

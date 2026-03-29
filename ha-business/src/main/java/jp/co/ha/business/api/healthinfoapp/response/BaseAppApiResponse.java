@@ -1,17 +1,15 @@
 package jp.co.ha.business.api.healthinfoapp.response;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import jp.co.ha.common.type.BaseEnum;
 import jp.co.ha.common.web.form.BaseForm;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ValueSerializer;
+import tools.jackson.databind.annotation.JsonSerialize;
 
 /**
  * RestAPIの基底レスポンスクラス
@@ -96,12 +94,16 @@ public class BaseAppApiResponse implements BaseForm {
      *
      * @version 1.0.0
      */
-    public static class ResultTypeSerializer extends JsonSerializer<ResultType> {
+    public static class ResultTypeSerializer extends ValueSerializer<ResultType> {
 
         @Override
         public void serialize(ResultType resultType, JsonGenerator gen,
-                SerializerProvider serializers) throws IOException {
-            gen.writeString(resultType.getValue());
+                SerializationContext serializers) {
+            if (resultType == null) {
+                gen.writeNull();
+            } else {
+                gen.writeString(resultType.getValue());
+            }
         }
     }
 

@@ -13,12 +13,6 @@ import java.util.StringJoiner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 import jp.co.ha.business.api.slack.SlackApiComponent;
 import jp.co.ha.business.db.crud.create.InquiryManagementCreateService;
 import jp.co.ha.business.db.crud.read.InquiryManagementSelectService;
@@ -39,6 +33,11 @@ import jp.co.ha.common.util.StringUtil;
 import jp.co.ha.db.entity.InquiryManagement;
 import jp.co.ha.db.entity.InquiryTypeMt;
 import jp.co.ha.db.entity.custom.CompositeInquiry;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.ValueDeserializer;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * 問い合わせ関連のComponent
@@ -277,11 +276,11 @@ public class InquiryComponent {
      *
      * @version 1.0.0
      */
-    public static class InquiryStatusDeserializer extends JsonDeserializer<Status> {
+    public static class InquiryStatusDeserializer extends ValueDeserializer<Status> {
 
         @Override
         public Status deserialize(JsonParser parser, DeserializationContext ctxt)
-                throws IOException, JacksonException {
+                throws JacksonException {
             return Status.of(parser.getValueAsString());
         }
 

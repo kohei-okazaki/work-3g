@@ -1,12 +1,9 @@
 package jp.co.ha.root.type;
 
-import java.io.IOException;
-
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
-
 import jp.co.ha.common.type.BaseEnum;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ValueSerializer;
 
 /**
  * RootAPI処理結果列挙体
@@ -58,11 +55,12 @@ public enum RootApiResult implements BaseEnum {
      *
      * @version 1.0.0
      */
-    public static class RootApiResultSerializer extends JsonSerializer<RootApiResult> {
+    public static class RootApiResultSerializer extends ValueSerializer<RootApiResult> {
 
         @Override
-        public void serialize(RootApiResult rootApiResult, JsonGenerator gen,
-                SerializerProvider serializers) throws IOException {
+        public void serialize(RootApiResult rootApiResult,
+                tools.jackson.core.JsonGenerator gen,
+                SerializationContext ctxt) throws JacksonException {
             gen.writeString(rootApiResult.getValue());
         }
 
