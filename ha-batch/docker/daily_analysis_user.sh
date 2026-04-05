@@ -11,6 +11,7 @@
 # 
 # output: S3.analysis/YYYYMMDD/user.csv.gz
 # ----------------------------------------------------------------------------------------
+set -eu
 
 echo "------------------------------------------------------------------------"
 echo "START $0"
@@ -18,6 +19,19 @@ echo "------------------------------------------------------------------------"
 
 # call common.sh
 . ./common.sh
+
+# ロック処理
+SCRIPT_NAME=$(basename "$0")
+LOCK_FILE_NAME="${SCRIPT_NAME}.lock"
+LOCK_FILE="${LOCK_DIR}/${LOCK_FILE_NAME}"
+mkdir -p "$(dirname "$LOCK_FILE")"
+
+exec 9>"${LOCK_FILE}"
+
+if ! flock -n 9; then
+  echo "[ERROR] dailyApiLogJob is already running."
+  exit 50
+fi
 
 # 処理対象年月YYYYMMDD
 DATE_OPTION_VALUE=$1
