@@ -1,6 +1,10 @@
 ######################################################
-# 基底定義ファイル(const.txt)
+# 基底定義ファイル(const_local.txt)
 ######################################################
 
 # 基底ディレクトリ
 BASE_DIR="/mnt/c/app/git/work-3g"
+
+# Dockerファイル
+COMMON_DOCKER_FILE="docker-compose.yml"
+ENV_DOCKER_FILE="docker-compose.local.yml"
