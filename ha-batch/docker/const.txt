@@ -5,5 +5,8 @@
 # 基底ディレクトリ
 BASE_DIR="/mnt/c/app/git/work-3g"
 
+# ロックディレクトリ
+LOCK_DIR="/var/lock"
+
 # 環境
 ENV="local"
