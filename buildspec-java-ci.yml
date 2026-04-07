@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto25
+    commands:
+      - java -version
+      - chmod +x mvnw || true
+
+  build:
+    commands:
+      - |
+        echo "sample build is success..."
+
+reports:
+  junit_reports:
+    files:
+      - '**/target/surefire-reports/*.xml'
+      - '**/target/failsafe-reports/*.xml'
+    file-format: JUNITXML
+
+cache:
+  paths:
+    - '/root/.m2/**/*'
