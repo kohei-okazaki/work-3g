@@ -12,6 +12,7 @@ phases:
     commands:
       - |
         echo "sample build is success..."
+        ls -ltr
 
 reports:
   junit_reports:
