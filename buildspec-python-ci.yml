@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.13
+    commands:
+      - python --version
+      - pip --version
+      - cd ha_track
+      - python -m pip install --upgrade pip
+      - pip install -r requirements.txt
+
+  build:
+    commands:
+      - cd ha_track
+      - python manage.py check
+      - python manage.py test -v 2
+
+cache:
+  paths:
+    - '/root/.cache/pip/**/*'
