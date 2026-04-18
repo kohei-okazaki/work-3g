@@ -2,7 +2,10 @@ package jp.co.ha.common.crypt;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import jp.co.ha.common.BaseCommonTest;
 
@@ -11,12 +14,12 @@ import jp.co.ha.common.BaseCommonTest;
  *
  * @version 1.0.0
  */
-
+@Tag("integration")
 public class CaesarCrypterTest extends BaseCommonTest {
 
     /** Crypter */
-    // @Autowired
-    // @Qualifier("caesarCrypter")
+    @Autowired
+    @Qualifier("caesarCrypter")
     private Crypter crypter = new CaesarCrypter();
 
     /**
