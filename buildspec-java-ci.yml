@@ -6,14 +6,14 @@ phases:
       java: corretto25
     commands:
       - java -version
+        mvn -v
       - chmod +x mvnw || true
 
   build:
     commands:
       - |
-        java -version
-        mvn -v
         ls -ltr
+        mvn -B -ntp -f ha-pom/pom.xml -pl :ha-api -am clean test
 
 reports:
   junit_reports:
