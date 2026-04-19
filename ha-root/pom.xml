@@ -5,7 +5,7 @@
   <groupId>jp.co.ha</groupId>
   <artifactId>root</artifactId>
   <name>ha-root</name>
-  <description>health app for root</description>
+  <description>health app for root api</description>
 
   <properties>
     <jwt-version>0.13.0</jwt-version>
