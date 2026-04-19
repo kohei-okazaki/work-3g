@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>jp.co.ha</groupId>
-  <artifactId>ha-dashboard</artifactId>
+  <artifactId>dashboard</artifactId>
   <name>ha-dashboard</name>
   <description>health app for dashboard</description>
 
