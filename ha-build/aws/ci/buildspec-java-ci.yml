@@ -5,14 +5,15 @@ phases:
     runtime-versions:
       java: corretto25
     commands:
-      - java -version
-      - mvn -v
+      - |
+        java -version
+        mvn -v
 
   build:
     commands:
       - |
         ls -ltr
-        mvn -B -ntp -f ha-pom/pom.xml -pl :ha-api -am clean test -Dgroups=!integration
+        mvn -B -ntp -f ha-pom/pom.xml -pl :${TARGET_MODULE} -am clean test -Dgroups=!integration
 
 reports:
   junit_reports:

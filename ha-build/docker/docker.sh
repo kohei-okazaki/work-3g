@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ######################################################################################################################
 # Dockerコンテナ用のsh
@@ -10,7 +10,7 @@
 #   check: コンテナ状態確認
 #   restart: コンテナ再起動
 ######################################################################################################################
-set -eu
+set -euo pipefail
 
 args_count=$#
 if [ ${args_count} -ne 1 ]; then
@@ -18,50 +18,44 @@ if [ ${args_count} -ne 1 ]; then
   exit 1
 fi
 
-val=$1
-if [ ${val} = "" ]; then
-  # 引数が無い場合はstartをデフォルトとする
-  ${val}="start"
-fi
-
 # 初期化ファイル読み込み
-. ./common.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "${SCRIPT_DIR}/common.sh"
 
-case ${val} in
+# ------------------------------------------------------------------------------------------------------------
+# 定数定義
+# ------------------------------------------------------------------------------------------------------------
+# 基底compose.ymlファイルパス
+BASE_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/ha-build/docker/docker-compose.yml"
+# ローカル用compose.yml
+LOCAL_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/ha-build/docker/docker-compose.local.yml"
+
+args="$1"
+case ${args} in
   build)
     # コンテナビルド起動
-    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
-    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml build ha-batch
-    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track --build
-
-    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml build ha-batch ha-api ha-dashboard ha-root-api
-    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
-
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml build ha-batch
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" build ha-batch
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   start)
     # コンテナ起動
-    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   stop)
     # コンテナ停止
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml stop
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" stop
     ;;
   clear)
     # コンテナ削除
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml down
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" down
     ;;
   check)
     # コンテナ状態確認
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml ps
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" ps
     ;;
   restart)
     # コンテナ再起動
-    # cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml restart
-    
-    cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml restart mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" restart mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   *)
     echo "不正な引数です。build/start/stop/clear/check/restartのいずれかを指定してください。"
