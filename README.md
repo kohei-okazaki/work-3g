@@ -94,6 +94,7 @@
 
 * ### ha-build  
 Docker環境でのBuild用のスクリプトを定義。   
+また、AWS CodeBuildによるCI/CD、CDKによるIaC化時のファイルを定義。  
 
 * ### ha-docs  
 健康管理アプリのドキュメントプロジェクト。  
