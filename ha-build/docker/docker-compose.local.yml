@@ -26,7 +26,6 @@ services:
       - ./ha-common:/work/ha-common
       - ./ha-db:/work/ha-db
       - ./ha-business:/work/ha-business
-      - ./ha-tool:/work/ha-tool
       - ./ha-api:/work/ha-api
       - m2-cache:/root/.m2
       - ~/.aws:/root/.aws:ro
@@ -62,7 +61,6 @@ services:
       - ./ha-common:/work/ha-common
       - ./ha-db:/work/ha-db
       - ./ha-business:/work/ha-business
-      - ./ha-tool:/work/ha-tool
       - ./ha-dashboard:/work/ha-dashboard
       - m2-cache:/root/.m2
       - ~/.aws:/root/.aws:ro
@@ -98,7 +96,6 @@ services:
       - ./ha-common:/work/ha-common
       - ./ha-db:/work/ha-db
       - ./ha-business:/work/ha-business
-      - ./ha-tool:/work/ha-tool
       - ./ha-root:/work/ha-root
       - m2-cache:/root/.m2
       - ~/.aws:/root/.aws:ro
@@ -146,7 +143,6 @@ services:
       - ./ha-common:/work/ha-common
       - ./ha-db:/work/ha-db
       - ./ha-business:/work/ha-business
-      - ./ha-tool:/work/ha-tool
       - ./ha-batch:/work/ha-batch
       - m2-cache:/root/.m2
       - ~/.aws:/root/.aws:ro

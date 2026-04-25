@@ -26,9 +26,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # 定数定義
 # ------------------------------------------------------------------------------------------------------------
 # 基底compose.ymlファイルパス
-BASE_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/ha-build/docker/docker-compose.yml"
+BASE_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/$DOCKER_COMPOSE_FILE_PATH"
 # ローカル用compose.yml
-LOCAL_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/ha-build/docker/docker-compose.local.yml"
+LOCAL_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/$DOCKER_COMPOSE_LOCAL_FILE_PATH"
 
 args="$1"
 case ${args} in

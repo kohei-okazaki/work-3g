@@ -61,10 +61,6 @@
 | ha-db |
 | ha-root |
 
-* ### ha-tool  
-指定のフォーマットのExcelからDDL/DMLを自動生成するツールプロジェクト  
-ツール関連はha-toolsへ移行。  
-
 * ### ha-tools  
 指定のフォーマットのExcelからDDL/DMLを自動生成するツールプロジェクト  
 
@@ -85,12 +81,6 @@
 健康情報蓄積用プロジェクト。  
   - Python
   - Django rest framework
-
-* ### ha-node  
-健康情報計算を行うAPIプロジェクト。  
-   - Java Script
-   - Node.js
-     -> API Gateway + Lambda化したためNode.jsのサーバ自体は廃止。  
 
 * ### ha-build  
 Docker環境でのBuild用のスクリプトを定義。   

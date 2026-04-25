@@ -6,7 +6,17 @@
 set -eu
 
 # 初期化ファイル読み込み
-. ./common.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+. "${SCRIPT_DIR}/common.sh"
+
+# ------------------------------------------------------------------------------------------------------------
+# 定数定義
+# ------------------------------------------------------------------------------------------------------------
+# 基底compose.ymlファイルパス
+BASE_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/$DOCKER_COMPOSE_FILE_PATH"
+# ローカル用compose.yml
+LOCAL_DOCKER_COMPOSE_FILE_PATH="$BASE_DIR/$DOCKER_COMPOSE_LOCAL_FILE_PATH"
+
 
 # コンテナ起動
-cd ${BASE_DIR} && docker compose -f docker-compose.yml -f docker-compose.local.yml up --build ha-dashboard
+docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d ha-dashboard

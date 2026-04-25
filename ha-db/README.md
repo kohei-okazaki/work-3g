@@ -36,7 +36,6 @@
 - ha-batch
 - ha-business
 - ha-dashboard
-- ha-tool
 - ha-root
 
 ## マイグレーション

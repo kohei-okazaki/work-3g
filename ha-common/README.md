@@ -10,5 +10,4 @@
 - ha-business
 - ha-dashboard
 - ha-db
-- ha-tool
 - ha-root
