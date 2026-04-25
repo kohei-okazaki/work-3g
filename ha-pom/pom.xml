@@ -49,7 +49,6 @@
 
   <modules>
     <module>../ha-common</module>
-    <module>../ha-tool</module>
     <module>../ha-db</module>
     <module>../ha-business</module>
     <module>../ha-root</module>
