@@ -1,56 +1,32 @@
-from rest_framework import serializers
-from django.utils import timezone
 from datetime import datetime
+
+from django.utils import timezone
+from rest_framework import serializers
 
 
 class HealthInfoItemSerializer(serializers.Serializer):
-    """
-    健康情報シリアライザー
-    """
-
-    # 健康情報ID
-    seq_health_info_id = serializers.IntegerField(label="健康情報ID", required=True)
-    # 身長
-    height = serializers.FloatField(label="身長", required=True)
-    # 体重
-    weight = serializers.FloatField(label="体重", required=True)
-    # BMI
+    seq_health_info_id = serializers.IntegerField(
+        label="health info ID", required=True
+    )
+    height = serializers.FloatField(label="height", required=True)
+    weight = serializers.FloatField(label="weight", required=True)
     bmi = serializers.FloatField(label="BMI", required=True)
-    # 標準体重
-    standard_weight = serializers.FloatField(label="標準体重", required=True)
-    # 健康情報作成日時
-    created_at = serializers.CharField(label="健康情報作成日時", required=True)
+    standard_weight = serializers.FloatField(label="standard weight", required=True)
+    created_at = serializers.CharField(label="created at", required=True)
 
     def validate_created_at(self, value: str):
-        """
-        created_at のバリデーション
-        @param value: 入力値
-        """
         if not value:
             return None
 
         try:
-            # "YYYY/MM/DD HH:MM:SS" のみを受け付ける
             dt = datetime.strptime(value, "%Y/%m/%d %H:%M:%S")
-            # naive datetime を現在のタイムゾーンで aware 化
-            dt = timezone.make_aware(dt, timezone.get_current_timezone())
-            return dt
+            return timezone.make_aware(dt, timezone.get_current_timezone())
         except Exception:
             raise serializers.ValidationError(
-                "created_at は 'YYYY/MM/DD HH:MM:SS' 形式で指定してください"
+                "created_at must be specified in 'YYYY/MM/DD HH:MM:SS' format"
             )
 
 
 class HealthInfoPayloadSerializer(serializers.Serializer):
-    """
-    健康情報データ部シリアライザー
-    """
-
-    # ユーザID
-    seq_user_id = serializers.IntegerField(label="ユーザID", required=True)
-    # 健康情報リスト
-    health_infos = HealthInfoItemSerializer(label="健康情報リスト", many=True)
-    # DynamoDB移行フラグ
-    migrate_flg = serializers.BooleanField(
-        label="DynamoDB移行フラグ", required=False, default=False
-    )
+    seq_user_id = serializers.IntegerField(label="user ID", required=True)
+    health_infos = HealthInfoItemSerializer(label="health info list", many=True)
