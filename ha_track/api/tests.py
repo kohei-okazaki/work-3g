@@ -1,16 +1,16 @@
-from datetime import datetime, timezone as dt_timezone
+from datetime import datetime
+from datetime import timezone as dt_timezone
 from decimal import Decimal
 from unittest.mock import Mock, patch
 
+from api.serializers import HealthInfoPayloadSerializer
+from api.util.dynamo_util import get_dynamodb_resource, put_dynamo_db
+from api.views import HealthInfoAPIView
 from django.test import SimpleTestCase, override_settings
 from django.urls import resolve, reverse
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APIRequestFactory
-
-from api.serializers import HealthInfoPayloadSerializer
-from api.util.dynamo_util import get_dynamodb_resource, put_dynamo_db
-from api.views import HealthInfoAPIView
 
 
 @override_settings(TIME_ZONE="Asia/Tokyo", USE_TZ=True)
@@ -106,8 +106,12 @@ class HealthInfoAPIViewTest(SimpleTestCase):
         self.assertIn("created_at", response.data["error_message"]["health_infos"][0])
         mock_put_dynamo_db.assert_not_called()
 
-    @patch("api.views.put_dynamo_db", side_effect=RuntimeError("DynamoDB is unavailable"))
-    def test_post_returns_bad_request_when_dynamodb_write_fails(self, mock_put_dynamo_db):
+    @patch(
+        "api.views.put_dynamo_db", side_effect=RuntimeError("DynamoDB is unavailable")
+    )
+    def test_post_returns_bad_request_when_dynamodb_write_fails(
+        self, mock_put_dynamo_db
+    ):
         response = self._post(self._payload())
 
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
