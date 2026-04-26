@@ -8,6 +8,12 @@ from pathlib import Path
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+LOG_DIR = Path(os.getenv("DJANGO_LOG_DIR", "/var/app/log"))
+try:
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+except OSError:
+    LOG_DIR = BASE_DIR / "log"
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 SECRET_KEY = "django-insecure-$xe5g@$zhg=fa8mv3waqymq07%d9i&uiry+434wchbx$f8*ju2"
 
@@ -80,7 +86,7 @@ LOGGING = {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": os.path.join("/var/app/log", "debug.log"),
+            "filename": str(LOG_DIR / "debug.log"),
             "formatter": "verbose",
         },
     },
