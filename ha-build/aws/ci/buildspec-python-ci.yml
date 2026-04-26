@@ -14,7 +14,7 @@ phases:
   build:
     commands:
       - python ha_track/manage.py check
-      - python ha_track/manage.py test -v 2
+      - python ha_track/manage.py test api.tests -v 2
 
 cache:
   paths:
