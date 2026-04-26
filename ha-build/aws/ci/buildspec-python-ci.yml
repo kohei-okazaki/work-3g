@@ -7,15 +7,13 @@ phases:
     commands:
       - python --version
       - pip --version
-      - cd ha_track
       - python -m pip install --upgrade pip
-      - pip install -r requirements.txt
+      - pip install -r ha_track/requirements.txt
 
   build:
     commands:
-      - cd ha_track
-      - python manage.py check
-      - python manage.py test -v 2
+      - python ha_track/manage.py check
+      - python ha_track/manage.py test -v 2
 
 cache:
   paths:
