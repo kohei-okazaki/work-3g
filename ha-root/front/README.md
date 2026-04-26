@@ -16,6 +16,14 @@ $ npm run start
 # generate static project
 $ npm run generate
 
+# generate static project for local/dev1
+$ npm run generate:local
+$ npm run generate:dev1
+
+# generate static project for S3
+# API_BASE_URL must point to ha-root api.
+$ npx cross-env API_BASE_URL="https://example.com/api/root/" npm run generate:production
+
 # vuex-persistedstateのinstall
 $ npm install --save vuex-persistedstate
 

@@ -123,7 +123,7 @@ export default {
             },
             {
               envName: "dev1環境",
-              url: "",
+              url: "http://healthinfo-app-root-front-dev1.s3-website-ap-northeast-1.amazonaws.com/login",
             },
           ],
         },

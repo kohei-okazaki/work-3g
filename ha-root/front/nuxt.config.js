@@ -1,7 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 
-const environment = process.env.NODE_ENV || 'local';
+const nodeEnvironment = process.env.NODE_ENV;
+const environment = process.env.HA_ENV || process.env.APP_ENV ||
+  (['local', 'dev1', 'production'].includes(nodeEnvironment) ? nodeEnvironment : 'local');
 const envSet = require(`./env.${environment}.js`);
+const apiBaseURL = envSet.api_base_url || 'http://localhost:8082/api/root/';
 
 export default {
 
@@ -9,6 +12,8 @@ export default {
   env: envSet,
 
   ssr: false,
+
+  target: 'static',
 
   server: {
     host: process.env.HOST || '0.0.0.0',
@@ -63,7 +68,8 @@ export default {
     // TODO URLの環境ごとの切り替えできない
     // baseURL: process.env["api_base_url"]
     // baseURL: process.env.api_base_url
-    baseURL: process.env.api_base_url || 'http://localhost:8082/api/root/'
+    baseURL: apiBaseURL,
+    browserBaseURL: apiBaseURL
   },
 
   basic: {
@@ -124,6 +130,14 @@ export default {
     }
   },
 
-  build: {},
+  generate: {
+    fallback: '200.html'
+  },
+
+  build: {
+    terser: {
+      parallel: false
+    }
+  },
 
 }

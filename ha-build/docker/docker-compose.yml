@@ -60,8 +60,6 @@ services:
       dockerfile: Dockerfile.ha-track
     environment:
       TZ: Asia/Tokyo
-    depends_on:
-      - mongo
     networks:
       - work-3g-network
 
@@ -82,7 +80,6 @@ services:
 # volume設定
 volumes:
   mysql-data:
-  mongo-data:
 
 # ネットワーク設定
 networks:

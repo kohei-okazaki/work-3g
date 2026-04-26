@@ -102,10 +102,6 @@ export default {
               name: "データベース(MySQL)",
               host: "ls-XXXXX.ap-northeast-1.rds.amazonaws.com/work3g",
             },
-            {
-              name: "データベース(MongoDB)",
-              host: "localhost:27017",
-            },
           ],
         },
         {
@@ -125,7 +121,7 @@ export default {
             },
             {
               name: "管理者用サイト",
-              host: "TODO 環境構築後、記載",
+              host: "http://healthinfo-app-root-front-dev1.s3-website-ap-northeast-1.amazonaws.com/login",
             },
             {
               name: "健康情報計算API",
@@ -142,10 +138,6 @@ export default {
             {
               name: "データベース(MySQL)",
               host: "ls-XXXXX.ap-northeast-1.rds.amazonaws.com/work3g",
-            },
-            {
-              name: "データベース(MongoDB)",
-              host: "TODO 環境構築後、記載",
             },
           ],
         },

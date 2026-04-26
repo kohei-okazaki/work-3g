@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=\"local\" nuxt dev --host 0.0.0.0",
-    "build:local": "cross-env NODE_ENV=\"local\" nuxt build",
-    "build:dev1": "cross-env NODE_ENV=\"dev1\" nuxt build",
-    "start:local": "cross-env NODE_ENV=\"local\" nuxt start --port 8083",
-    "start:dev1": "cross-env NODE_ENV=\"dev1\" nuxt start",
-    "generate": "nuxt generate"
+    "dev": "cross-env APP_ENV=\"local\" NODE_ENV=\"development\" nuxt dev --host 0.0.0.0",
+    "build": "npm run build:local",
+    "build:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt build --no-lock",
+    "build:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt build --no-lock",
+    "build:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt build --no-lock",
+    "start": "npm run start:local",
+    "start:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt start --port 8083",
+    "start:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt start",
+    "generate": "npm run generate:production",
+    "generate:local": "cross-env APP_ENV=\"local\" NODE_ENV=\"production\" nuxt generate --no-lock",
+    "generate:dev1": "cross-env APP_ENV=\"dev1\" NODE_ENV=\"production\" nuxt generate --no-lock",
+    "generate:production": "cross-env APP_ENV=\"production\" NODE_ENV=\"production\" nuxt generate --no-lock"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
