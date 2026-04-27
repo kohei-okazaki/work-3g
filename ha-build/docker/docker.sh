@@ -35,11 +35,11 @@ case ${args} in
   build)
     # コンテナビルド起動
     docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" build ha-batch
-    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d mysql ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   start)
     # コンテナ起動
-    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" up -d mysql ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   stop)
     # コンテナ停止
@@ -55,7 +55,7 @@ case ${args} in
     ;;
   restart)
     # コンテナ再起動
-    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" restart mysql mongo ha-api ha-dashboard ha-root-api ha-root-front ha-track
+    docker compose --project-directory "$BASE_DIR" -f "$BASE_DOCKER_COMPOSE_FILE_PATH" -f "$LOCAL_DOCKER_COMPOSE_FILE_PATH" restart mysql ha-api ha-dashboard ha-root-api ha-root-front ha-track
     ;;
   *)
     echo "不正な引数です。build/start/stop/clear/check/restartのいずれかを指定してください。"

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import jp.co.ha.common.exception.SystemRuntimeException;
 import jp.co.ha.common.system.SystemProperties;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 
 /**
@@ -28,7 +28,7 @@ public class AwsAuthComponent {
      * システム設定ファイル情報.環境より、以下の{@linkplain AwsCredentialsProvider}インスタンスを返す<br>
      * <ul>
      * <li>ローカル環境の場合、{@linkplain ProfileCredentialsProvider}</li>
-     * <li>dev1環境の場合、{@linkplain InstanceProfileCredentialsProvider}</li>
+     * <li>dev1環境の場合、{@linkplain DefaultCredentialsProvider}</li>
      * </ul>
      *
      * @return AwsCredentialsProvider
@@ -38,7 +38,7 @@ public class AwsAuthComponent {
         case LOCAL:
             return ProfileCredentialsProvider.create();
         case DEV1:
-            return InstanceProfileCredentialsProvider.create();
+            return DefaultCredentialsProvider.builder().build();
         default:
             // システムプロパティの環境がNullや実行可能環境でない場合
             throw new SystemRuntimeException(UNEXPECTED_ERROR,
